@@ -21,7 +21,6 @@
       {% endif %}
       </div>
     </div>
-
     <div class="form-inline d-none">
       <div class="input-group" data-widget="sidebar-search">
         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -32,7 +31,6 @@
         </div>
       </div>
     </div>
-
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-flat" data-widget="treeview" role="menu" data-accordion="true">
         <li class="nav-item has-treeview">
@@ -95,7 +93,7 @@
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="#" class="nav-link" title="{{ _('Add new sensor') }}" data-toggle="modal" data-target="#modal-sensor-setup">
                 <i class="fas fa-plus nav-icon"></i>
-                <p>{{ _('Add new') }}</p>
+                <p>{{ _('New sensor') }}</p>
               </a>
             </li>
           </ul>
@@ -118,7 +116,7 @@
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="#" class="nav-link" title="{{ _('Add new relay') }}" data-toggle="modal" data-target="#modal-relay-setup">
                 <i class="fas fa-plus nav-icon"></i>
-                <p>{{ _('Add new') }}</p>
+                <p>{{ _('New relay') }}</p>
               </a>
             </li>
           </ul>
@@ -141,7 +139,7 @@
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="#" class="nav-link" title="{{ _('Add new button') }}" data-toggle="modal" data-target="#modal-button-setup">
                 <i class="fas fa-plus nav-icon"></i>
-                <p>{{ _('Add new') }}</p>
+                <p>{{ _('New button') }}</p>
               </a>
             </li>
           </ul>
@@ -164,7 +162,7 @@
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="{{ url_for('webcam_list') }}" class="nav-link" title="{{ _('Add new webcam') }}" data-toggle="modal" data-target="#modal-webcam-setup">
                 <i class="fas fa-plus nav-icon"></i>
-                <p>{{ _('Add new') }}</p>
+                <p>{{ _('New webcam') }}</p>
               </a>
             </li>
           </ul>
@@ -179,15 +177,15 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ url_for('page', page='players')}}" class="nav-link">
+              <a href="{{ url_for('page', page='playlists')}}" class="nav-link">
                 <i class="fas fa-play nav-icon"></i>
-                <p>{{ _('Players') }}</p>
+                <p>{{ _('Playlists') }}</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{ url_for('page', page='audio_files')}}" class="nav-link">
                 <i class="fas fa-file-audio nav-icon"></i>
-                <p>{{ _('Files / Playlists') }}</p>
+                <p>{{ _('Files') }}</p>
               </a>
             </li>
           </ul>
@@ -210,13 +208,13 @@
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="#" class="nav-link" title="{{ _('Add new enclosure') }}" data-toggle="modal" data-target="#modal-enclosure-setup">
                 <i class="fas fa-plus nav-icon"></i>
-                <p>{{ _('Add new enclosure') }}</p>
+                <p>{{ _('New enclosure') }}</p>
               </a>
             </li>
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="#" class="nav-link" title="{{ _('Add new area') }}" data-toggle="modal" data-target="#modal-area-setup">
                 <i class="fas fa-plus nav-icon"></i>
-                <p>{{ _('Add new area') }}</p>
+                <p>{{ _('New area') }}</p>
               </a>
             </li>
           </ul>
@@ -301,23 +299,3 @@
     </nav>
   </div>
 </aside>
-<script>
-  jQuery(function () {
-
-    /*
-
-    {% if authenticated %}
-    let post_actions = ['logout','reboot','shutdown'];
-
-    jQuery.each(post_actions,function(counter, value) {
-      jQuery('a#' + value + '_url').off('click').on('click', function(event) {
-        event.preventDefault();
-        // Needs a post command.
-        jQuery('form#' + value + '_form').submit();
-      });
-    });
-    {% endif %}
-
-    */
-  });
-</script>

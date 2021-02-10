@@ -16,7 +16,12 @@
     <div class="form-group">
       <label for="area_enclosure">{{ _('Enclosure') }}</label>
       <div class="select2-primary">
-        <select class="select2" id="area_enclosure" name="enclosure" required="required" data-placeholder="{{ _('Select from available enclosure') }}" style="width: 100%;"> </select>
+        <select class="select2" id="area_enclosure" name="enclosure" required="required" data-placeholder="{{ _('Select an enclosure') }}" style="width: 100%;"> </select>
+      </div>
+      <small class="text-muted">
+        {{ _('Select the enclosure where this area belongs to.') }}
+      </small>
+      <div class="invalid-feedback">
       </div>
     </div>
   </div>
@@ -24,14 +29,26 @@
     <div class="form-group">
       <label for="area_type">{{ _('Type') }}</label>
       <div class="select2-primary">
-        <select class="select2" id="area_type" name="type" required="required" data-placeholder="{{ _('Select area type') }}" style="width: 100%;"> </select>
+        <select class="select2" id="area_type" name="type" required="required" data-placeholder="{{ _('Select an area type') }}" style="width: 100%;"> </select>
+      </div>
+      <small class="text-muted">
+        {{ _('Select the type of area. Each type has its own extra options and logic.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('ERROR') }}
       </div>
     </div>
   </div>
   <div class="col-12 col-sm-4 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="area_name">{{ _('Name') }}</label>
-      <input type="text" class="form-control" id="area_name" name="name" required="required" placeholder="{{ _('Enter name') }}">
+      <input type="text" class="form-control" id="area_name" name="name" required="required" placeholder="{{ _('Enter a name for this area.') }}">
+      <small class="text-muted">
+        {{ _('Enter a name for this area.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Give at least a name of minimal 1 character.') }}
+      </div>
     </div>
   </div>
 </div>
@@ -78,7 +95,7 @@
       </div>
     </div>
   </script>
-  <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+  <div class="col-12 col-sm-6 col-md-3 col-lg-4">
     <div class="form-group">
       <label for="area_lights_mode">{{ _('Mode') }}</label>
       <select class="select2" id="area_lights_mode" name="mode" required="required" data-placeholder="{{ _('Select a mode') }}" style="width: 100%;">
@@ -87,36 +104,67 @@
         <option value="weather">{{ _('Weather day/night') }}</option>
         <option value="weather_inverse">{{ _('Weather night/day') }}</option>
       </select>
+      <small class="text-muted">
+        {{ _('Select the mode of this area. This will change the timing and durations of the relays.') }}
+      </small>
+      <div class="invalid-feedback">
+      </div>
     </div>
   </div>
-  <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+  <div class="col-12 col-sm-6 col-md-3 col-lg-2">
     <div class="form-group">
       <label for="area_lights_day_max_hours">{{ _('Maximum hours') }}</label>
       <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_day_max_hours" name="day_max_hours" placeholder="{{ _('Enter the maximum amount of hours') }}">
+      <small class="text-muted">
+        {{ _('The maximum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is longer then this maximum value, the day will be shortend to this maximum value.') }}
+      </small>
+      <div class="invalid-feedback">
+
+      </div>
     </div>
   </div>
-  <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+  <div class="col-12 col-sm-6 col-md-3 col-lg-2">
     <div class="form-group">
       <label for="area_lights_day_min_hours">{{ _('Minimum hours') }}</label>
       <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_day_min_hours" name="day_min_hours" placeholder="{{ _('Enter the minimum amount of hours') }}">
+      <small class="text-muted">
+        {{ _('The minimum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is shorter then this minimum value, the day will be extended to this minimum value.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('ERROR') }}
+      </div>
     </div>
   </div>
   <div class="col-12 col-sm-6 col-md-3 col-lg-2">
     <div class="form-group">
       <label for="area_lights_day_shift_hours">{{ _('Hours shift') }}</label>
       <input type="number" step="0.01" min="-12.0" max="12.0" class="form-control" id="area_lights_day_shift_hours" name="day_shift_hours" placeholder="{{ _('Enter the amount of hours to shift') }}">
+      <small class="text-muted">
+        {{ _('The amount of time to shift in hours based on the sun rise time. Negative values will make the day start earlier.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Enter a value between -12 and 12.') }}
+      </div>
     </div>
   </div>
-  <div class="col-12 col-sm-6 col-md-3 col-lg-1">
-    <div class="form-group"> <span class="switch">
+  <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="form-group">
+      <div class="switch">
         <label for="area_lights_main_lights">{{ _('Main lights') }}</label>
         <input type="checkbox" class="switch" id="area_lights_main_lights" name="main_lights">
         <label for="area_lights_main_lights" class="mt-1"></label>
-      </span> </div>
+      </div>
+      <small class="text-muted">
+        {{ _('Toggle this if this is the main lights for this enclosure. This is used for the light checks in other areas.') }}
+      </small>
+    </div>
   </div>
 </div>
 <div class="row area_type area_lights">
   <div class="col">
+    <small class="text-muted">
+      {{ _('Below you can per select the relays and timer settings per period daytime and nighttime.') }}
+    </small>
     <nav class="mb-2">
       <div class="nav nav-tabs" role="tablist"> <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#area_lights_day" role="tab" aria-controls="day" aria-selected="true"><i class="fas fa-sun" ></i> {{ _('Day settings') }}</a> <a class="nav-item nav-link" id="profile-tab" data-toggle="tab" href="#area_lights_night" role="tab" aria-controls="night" aria-selected="false"><i class="fas fa-moon" ></i> {{ _('Night settings') }}</a> </div>
     </nav>
@@ -127,18 +175,36 @@
             <div class="form-group">
               <label for="area_lights_day_begin">{{ _('Begin time') }}</label>
               <input type="time" class="form-control" id="area_lights_day_begin" name="day_begin" placeholder="{{ _('Enter begin time') }}">
+              <small class="text-muted">
+                {{ _('The time of the day when the relays are toggled on each day.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time of the day.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
             <div class="form-group">
               <label for="lights_day_end">{{ _('End time') }}</label>
               <input type="time" class="form-control" id="area_lights_day_end" name="day_end" placeholder="{{ _('Enter end time') }}">
+              <small class="text-muted">
+                {{ _('The time of the day when the relays are toggled off each day.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time of the day.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
             <div class="form-group">
               <label for="area_lights_day_on_duration">{{ _('On duration') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_lights_day_on_duration" name="day_on_duration" placeholder="{{ _('On duration') }}">
+              <small class="text-muted">
+                {{ _('The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full day.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time of the day.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">

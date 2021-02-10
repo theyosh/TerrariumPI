@@ -1,13 +1,15 @@
 {% extends "layouts/base-content.html" %}
 {% block title %}{{ _('Settings') }}{% endblock %}
+{% block options %}
+<ol class="breadcrumb float-sm-right ">
+  <li class="breadcrumb-item "><a href="#" class="helpbutton"><i class="far fa-question-circle pt-1 mr-1"></i> {{ _('Show/hide help information') }}</a></li>
+</ol>
+{% endblock options %}
 {% block page_content %}
-<!-- Main content -->
 <section class="content">
   <form class="form-horizontal needs-validation" action="{{ url_for('api:sensor_add') }}" method="put" id="settings_form" novalidate>
     <div class="container-fluid">
-      <!-- Main row -->
       <div class="row">
-        <!-- Left col -->
         <div class="col">
           <div class="card">
             <div class="card-header">
@@ -21,13 +23,12 @@
                 </button>
               </div>
             </div>
-            <!-- /.card-header -->
             <div class="card-body">
               <div class="form-group row">
                 <label for="pi_wattage" class="col-sm-4 col-form-label">{{ _('Pi power usage') }}</label>
                 <div class="col-sm-8">
                   <input type="number" min="0.00" step="0.01" class="form-control" id="pi_wattage" name="pi_wattage" required="required" placeholder="{{ _('Pi power usage') }}" >
-                  <small class="text-muted">
+                  <small class="text-muted fuckbs-d-none">
                     {{ _('Enter the total power usage of the Pi with all its USB devices connected.') }}
                   </small>
                   <div class="invalid-feedback">
@@ -51,12 +52,15 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="always_authenticate" class="col-sm-4 col-form-label">{{ _('Authentication type') }}</label>
+                <label for="always_authenticate" class="col-sm-4 col-form-label">{{ _('Authentication mode') }}</label>
                 <div class="col-sm-8">
-                  <select class="custom-select select2" id="always_authenticate" name="always_authenticate" required="required" data-placeholder="{{ _('Authentication type') }}">
+                  <select class="custom-select select2" id="always_authenticate" name="always_authenticate" required="required" data-placeholder="{{ _('Authentication mode') }}">
                     <option value="true">{{ _('Full authentication') }}</option>
-                    <option value="false">{{ _('Only changes') }}</option>
+                    <option value="false">{{ _('Only for changes') }}</option>
                   </select>
+                  <small class="text-muted fuckbs-d-none">
+                    {{ _('Always authenticate or only when changes are being made.') }}
+                  </small>
                 </div>
               </div>
               <div class="form-group row">
@@ -85,9 +89,7 @@
                 </div>
               </div>
             </div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
         </div>
         <div class="col">
           <div class="card">
@@ -102,7 +104,6 @@
                 </button>
               </div>
             </div>
-            <!-- /.card-header -->
             <div class="card-body">
               <div class="form-group row">
                 <label for="language" class="col-sm-4 col-form-label">{{ _('Language') }}</label>
@@ -166,15 +167,10 @@
                 </div>
               </div>
             </div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
       <div class="row">
-        <!-- Left col -->
         <div class="col">
           <div class="card">
             <div class="card-header">
@@ -188,7 +184,6 @@
                 </button>
               </div>
             </div>
-            <!-- /.card-header -->
             <div class="card-body">
               <div class="form-group row">
                 <label for="title" class="col-sm-4 col-form-label">{{ _('Title') }}</label>
@@ -199,7 +194,6 @@
               <div class="form-group row">
                 <label for="profile_image" class="col-sm-4 col-form-label">{{ _('Profile image') }}</label>
                 <div class="col-sm-8">
-
                   <div class="custom-file">
                     <input type="hidden" name="profile_image" id="profile_image" value="">
                     <input type="file" class="custom-file-input" id="profile_image_upload">
@@ -210,47 +204,32 @@
               <div class="form-group row">
                 <label for="show_min_max_gauge" class="col-sm-8 col-form-label">{{ _('Show min and max values in gauge graphs') }}</label>
                 <div class="col-sm-4">
-
                   <span class="switch">
                     <input type="checkbox" class="switch" id="show_min_max_gauge" name="show_min_max_gauge">
                     <label for="show_min_max_gauge" class="mt-1"></label>
                   </span>
-
-
-                  <!-- <input type="checkbox" name="show_min_max_gauge" id="show_min_max_gauge" data-bootstrap-switch data-off-color="danger" data-on-color="success"> -->
                 </div>
               </div>
               <div class="form-group row">
-                <label for="hide_environment_dashboard" class="col-sm-8 col-form-label">{{ _('Hide environment on dashboard') }}</label>
+                <label for="hide_environment_dashboard" class="col-sm-8 col-form-label">{{ _('Hide enclosures on dashboard') }}</label>
                 <div class="col-sm-4">
-
                   <span class="switch">
                     <input type="checkbox" class="switch" id="hide_environment_dashboard" name="hide_environment_dashboard">
                     <label for="hide_environment_dashboard" class="mt-1"></label>
                   </span>
-
-
-                  <!-- <input type="checkbox" name="hide_environment_dashboard" id="hide_environment_dashboard" data-bootstrap-switch data-off-color="danger" data-on-color="success"> -->
                 </div>
               </div>
               <div class="form-group row">
                 <label for="all_gauges_on_single_page" class="col-sm-8 col-form-label">{{ _('All gauges on a single page') }}</label>
                 <div class="col-sm-4">
-
                   <span class="switch">
                     <input type="checkbox" class="switch" id="all_gauges_on_single_page" name="all_gauges_on_single_page">
                     <label for="all_gauges_on_single_page" class="mt-1"></label>
                   </span>
-
-
-
-                  <!-- <input type="checkbox" name="all_gauges_on_single_page" id="all_gauges_on_single_page" data-bootstrap-switch data-off-color="danger" data-on-color="success"> -->
                 </div>
               </div>
             </div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
         </div>
         <div class="col">
           <div class="card">
@@ -265,7 +244,6 @@
                 </button>
               </div>
             </div>
-            <!-- /.card-header -->
             <div class="card-body">
               <div class="form-group row">
                 <label for="meross_cloud_username" class="col-sm-4 col-form-label">{{ _('Meross username') }}</label>
@@ -280,9 +258,7 @@
                 </div>
               </div>
             </div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
         </div>
       </div>
       <div class="row pb-2">
@@ -296,14 +272,17 @@
         </div>
       </div>
     </div>
-  <!--/. container-fluid -->
   </form>
 </section>
-
-<!-- /.content -->
 <script>
-
   jQuery(function () {
+    jQuery('form#settings_form').find('small.text-muted').hide();
+    jQuery('.helpbutton').off('click').on('click',function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      jQuery('form#settings_form').find('small.text-muted').toggle();
+    });
+
     jQuery('form#settings_form').on('submit', function(event) {
       event.preventDefault();
       event.stopPropagation();
@@ -362,12 +341,12 @@
           cache: false,
           processData: false,
           success: function (result) {
-            toastr['success']('{{ _('Settings are updated.') }}', '{{ _('Update ok') }}');
+            toastr.success('{{ _('Settings are updated.') }}', '{{ _('Update ok') }}');
             load_page();
           },
           error: function (error) {
             error = error.responseJSON;
-            toastr['error'](error.message , '{{ _('Update error') }}');
+            toastr.error(error.message , '{{ _('Update error') }}');
           }
         });
       }
