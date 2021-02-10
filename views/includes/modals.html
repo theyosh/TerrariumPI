@@ -12,7 +12,10 @@
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _('Close') }}</button>
-        <button type="button" class="btn btn-danger">{{ _('Confirm') }}</button>
+        <button type="button" class="btn btn-danger">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          {{ _('Confirm') }}
+        </button>
       </div>
     </div>
   </div>
@@ -60,6 +63,7 @@
 <script type="text/javascript">
   jQuery(function(){
     jQuery('#modal-confirm').on('show.bs.modal',function(event) {
+
       let modal   = jQuery(event.currentTarget);
       let trigger = jQuery(event.relatedTarget);
       let action  = trigger.data('action');
@@ -67,12 +71,16 @@
       let title   = trigger.attr('title');
       let reload  = trigger.data('reload') || true;
       let payload = {}
+
+      modal.find('span.spinner-border').hide();
+
       if (trigger.data('field')) {
         payload[trigger.data('field')] = trigger.attr('id');
       }
 
       modal.find('div.modal-body p').html(title);
       modal.find('button.btn-danger').off('click').on('click',function() {
+        modal.find('span.spinner-border').show();
         jQuery.ajax({
           type: action,
           url: url,
