@@ -10,7 +10,8 @@ from pony import orm
 from bottle import request, response, static_file, HTTPError
 from json import dumps
 from pathlib import Path
-from tinytag import TinyTag
+from ffprobe import FFProbe
+#from tinytag import TinyTag
 from hashlib import md5
 
 from apispec import APISpec
@@ -226,10 +227,7 @@ class terrariumAPI(object):
   def area_list(self):
     data = []
     for area in Area.select(lambda r: not r.id in self.webserver.engine.settings['exclude_ids']):
-      area_data = area.to_dict(exclude='enclosure')
-      #area_data['value']  = area.value
-      area_data['id']  = str(area.id)
-      data.append(area_data)
+      data.append(self.area_detail(str(area.id)))
 
     return { 'data' : data }
 
@@ -267,16 +265,8 @@ class terrariumAPI(object):
   def area_update(self, area):
     try:
       area = Area[area]
-
       area.set(**request.json)
-      #self.webserver.engine.update(terrariumArea,**request.json)
-
-      #area_data = area.to_dict(exclude='enclosure')
-      #area_data['id']  = str(area.id)
-      #area_data['value']  = area.value
       return self.area_detail(str(area.id))
-
-      #return self._return_data(f'Update for \'{area}\' succeeded.',self.area_detail(str(area.pk))))
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')
     except Exception as ex:
@@ -347,14 +337,15 @@ class terrariumAPI(object):
     try:
       for upload in request.files.getlist('audiofiles'):
         upload.save(__UPLOAD_PATH, overwrite=True)
-        meta_data = TinyTag.get(f'{__UPLOAD_PATH}{upload.filename}')
+        audio_file = Path(f'{__UPLOAD_PATH}{upload.filename}')
+        meta_data = FFProbe(str(audio_file.resolve()))
 
         item = {
           'id'       : md5(f'{upload.filename}'.encode()).hexdigest(),
-          'name'     : f'{meta_data.title} - {meta_data.artist}',
-          'filename' : f'{upload.filename}',
-          'duration' : meta_data.duration,
-          'filesize' : meta_data.filesize
+          'name'     : f'{meta_data.metadata.get("title",None)} - {meta_data.metadata.get("artist",None)}',
+          'filename' : f'{audio_file.resolve()}',
+          'duration' : meta_data.streams[0].duration,
+          'filesize' : audio_file.stat().st_size
         }
 
         try:
