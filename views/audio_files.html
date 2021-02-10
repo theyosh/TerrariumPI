@@ -40,15 +40,22 @@
                 </tr>
                 </tfoot>
             </table>
-            <div class="input-group mt-3 {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="upload_new_file_label">{{ _('Upload new audio file') }}</span>
+            <div class="{% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+              <div class="input-group mt-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="upload_new_file_label">{{ _('Upload new audio file') }}</span>
+                </div>
+                <div class="custom-file">
+                  <form id="audio_upload" method="post" action="{{ url_for('api:audiofile_add') }}" enctype="multipart/form-data" >
+                    <input type="file" name="audiofiles" multiple="true" class="custom-file-input" id="upload_new_file" aria-describedby="upload_new_file_label" {% if not authenticated %}disabled="disabled"{% endif %}>
+                    <label class="custom-file-label" for="upload_new_file">{{ _('Choose file') }}</label>
+                  </form>
+                </div>
               </div>
-              <div class="custom-file">
-                <form id="audio_upload" method="post" action="{{ url_for('api:audiofile_add') }}" enctype="multipart/form-data" >
-                  <input type="file" name="audiofiles" multiple="true" class="custom-file-input" id="upload_new_file" aria-describedby="upload_new_file_label" {% if not authenticated %}disabled="disabled"{% endif %}>
-                  <label class="custom-file-label" for="upload_new_file">{{ _('Choose file') }}</label>
-                </form>
+              <div class="progress progress-xs active mt-2 upload_progress" style="display:none">
+                <div class="progress-bar bg-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                  <span class="sr-only">0% Complete</span>
+                </div>
               </div>
             </div>
           </div>
@@ -81,7 +88,7 @@
             {% endif %}
 
             return_data.push({
-              filename : data[i].filename,
+              filename : data[i].filename.split('/').pop(),
               filesize : formatBytes(data[i].filesize),
               duration : moment.duration(data[i].duration,'seconds').humanize(),
               name     : data[i].name,
@@ -123,14 +130,29 @@
         formData.append('audiofiles', file);
       });
 
+      jQuery('.upload_progress').toggle().find('div.progress-bar').css('width', '0%');
       jQuery.ajax({
         url: '{{ url_for('api:audiofile_add') }}',
         type: "POST",
         data: formData,
         processData: false,
         contentType: false,
+        xhr: function() {
+          let xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener("progress", function(evt) {
+            if (evt.lengthComputable) {
+              let percentComplete = evt.loaded / evt.total;
+              console.log(percentComplete);
+              jQuery('.upload_progress div.progress-bar').css('width',Math.round(percentComplete * 100)+ '%');
+              if (percentComplete == 1) {
+                toastr.success('{{ _('Audio file is being processed. Please wait...') }}', '{{ _('OK') }}');
+              }
+            }
+          }, false);
+          return xhr;
+        },
         success: function (result) {
-          toastr['success']('{{ _('Audio files are uploaded.') }}', '{{ _('OK') }}');
+          toastr.success('{{ _('Audio files are uploaded.') }}', '{{ _('OK') }}');
           load_page();
         },
         error: function (error) {
