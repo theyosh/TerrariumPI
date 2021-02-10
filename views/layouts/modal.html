@@ -7,7 +7,8 @@
       <form class="form-horizontal needs-validation" action="#" method="post" novalidate>
         <div class="modal-header">
           <h4 class="modal-title">{% block modal_title %} <i class="fas fa-heading" ></i> {% endblock %}</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="{{ _('Close') }}">
+          <button type="button" class="btn btn-rounded helpbutton text-secondary" title="{{ _('Show/hide help information') }}"><i class="far fa-question-circle" aria-hidden="true"></i></button>
+          <button type="button" class="close" data-dismiss="modal" title="{{ _('Close') }}" aria-label="{{ _('Close') }}">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -38,6 +39,11 @@
   jQuery(function() {
     let {{modal_type}}_modal = jQuery('#modal-{{modal_type}}-setup');
     let {{modal_type}}_form  = {{modal_type}}_modal.find('form');
+
+    {{modal_type}}_form.find('small.text-muted').hide();
+    {{modal_type}}_form.find('button.helpbutton').off('click').on('click',function(){
+      {{modal_type}}_form.find('small.text-muted').toggle();
+    })
 
     {% block modal_form_javascript_pre %}
     {% endblock %}

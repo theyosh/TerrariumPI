@@ -22,11 +22,13 @@
             <td data-content="type"></td>
             <td data-content="mode"></td>
             <td> .. </td>
+            {% if authenticated %}
             <td class="actions"> <i class="fas fa-wrench mr-1 edit_area" data-template-bind='[
                 {"attribute": "id", "value": "id" },
                 {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit area') }} "} ]'></i> <i class="fas fa-trash-alt mr-1 text-danger delete_area" data-template-bind='[
                 {"attribute": "id", "value": "id" },
                 {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Delete area') }} "} ]'></i> </td>
+            {% endif %}
           </tr>
         </script>
         <script type="text/html" id="enclosure_template">
@@ -75,7 +77,9 @@
                             <th>{{ _('Type') }}</th>
                             <th>{{ _('Mode') }}</th>
                             <th>{{ _('Status') }}</th>
+                            {% if authenticated %}
                             <th style="width: 40px" class="actions">{{ _('Actions') }}</th>
+                            {% endif %}
                           </tr>
                         </thead>
                         <tbody data-template-bind='[

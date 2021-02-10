@@ -7,10 +7,8 @@
 {% endif %}
 {% block title %}{{page_title}}{% endblock %}
 {% block page_content %}
-<!-- Main content -->
 <section class="content">
   <div class="container-fluid">
-    <!-- Main row -->
     <div class="row" id="sensor_list">
       <div style="width: 80%; text-align: center; margin: 5% 30%" class="zero_message fuckbs-d-none">
         <div class="callout callout-info">
@@ -24,7 +22,6 @@
           </p>
         </div>
       </div>
-      <!-- Left col -->
       <script type="text/html" id="sensor_template">
          <div class="col-{% if sensor_type %}12{%else%}3{%endif%}" >
           <div class="card" {% if not sensor_type %}style="min-height: 270px"{%endif%}>
@@ -49,6 +46,10 @@
                     <i class="fas fa-calendar-alt"></i>
                   </button>
                   <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    <a href="#" class="dropdown-item active" title="{{ _('Day') }}">{{ _('Day') }}</a>
+                    <a href="#" class="dropdown-item" title="{{ _('Week') }}">{{ _('Week') }}</a>
+                    <a href="#" class="dropdown-item" title="{{ _('Month') }}">{{ _('Month') }}</a>
+                    <a href="#" class="dropdown-item" title="{{ _('Year') }}">{{ _('Year') }}</a>
                   </div>
                 </div>
                 {% endif %}
@@ -90,12 +91,11 @@
                 </button>
               </div>
             </div>
-            <!-- /.card-header -->
             <div class="card-body p-0">
               <div class="d-md-flex">
                 <div class="col text-center">
                   <canvas data-id="gauge" class="gauge"></canvas>
-                </div><!-- /.card-pane-right -->
+                </div>
                 {% if sensor_type %}
                 <div class="col-12 col-sm-12 col-md-8 col-lg-9">
                   <div class="overlay">
@@ -104,19 +104,13 @@
                   <canvas data-id="graph" class="graph"></canvas>
                 </div>
                 {% endif %}
-              </div> <!-- /.d-md-flex -->
+              </div>
             </div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
       </script>
-      <!-- /.col -->
     </div>
-    <!-- /.row -->
   </div>
-  <!--/. container-fluid -->
 </section>
-<!-- /.content -->
 <script>
   jQuery(function () {
     let sensor_url = '{% if sensor_type %}{{ url_for("api:sensor_list_filtered", filter=sensor_type) }}{% else %}{{ url_for("api:sensor_list") }}{% endif %}';
@@ -124,13 +118,7 @@
       data = data.data;
       // Sort the sensors based on the given sensor name
       data.sort((a, b) => a.name.localeCompare(b.name));
-
-      if (data.length > 0) {
-        jQuery('.zero_message').remove();
-      } else {
-        jQuery('.zero_message').show();
-      }
-
+      (data.length > 0 ? jQuery('.zero_message').remove() : jQuery('.zero_message').show());
       jQuery.each(data,function(counter, sensor) {
 
         sensor.icon = template_sensor_type_icon(sensor.type);

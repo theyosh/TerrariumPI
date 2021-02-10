@@ -1,10 +1,8 @@
 {% extends "layouts/base-content.html" %}
 {% block title %}{{ _('Relays') }}{% endblock %}
 {% block page_content %}
-<!-- Main content -->
 <section class="content">
   <div class="container-fluid">
-    <!-- Main row -->
     <div class="row">
       <div style="width: 80%; text-align: center; margin: 5% 30%" class="zero_message fuckbs-d-none">
         <div class="callout callout-info">
@@ -18,7 +16,6 @@
           </p>
         </div>
       </div>
-      <!-- Left col -->
       <div class="col" id="relay_list">
         <script type="text/html" id="relay_template">
           <div class="card">
@@ -42,6 +39,10 @@
                     <i class="fas fa-calendar-alt"></i>
                   </button>
                   <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    <a href="#" class="dropdown-item active" title="{{ _('Day') }}">{{ _('Day') }}</a>
+                    <a href="#" class="dropdown-item" title="{{ _('Week') }}">{{ _('Week') }}</a>
+                    <a href="#" class="dropdown-item" title="{{ _('Month') }}">{{ _('Month') }}</a>
+                    <a href="#" class="dropdown-item" title="{{ _('Year') }}">{{ _('Year') }}</a>
                   </div>
                 </div>
                 <div class="btn-group">
@@ -87,7 +88,6 @@
                 </button>
               </div>
             </div>
-            <!-- /.card-header -->
             <div class="card-body p-0">
               <div class="d-md-flex">
                 <div class="col-12 col-sm-12 col-md-3 col-lg-2 text-center">
@@ -102,33 +102,21 @@
                   </div>
                   <canvas data-id="graph" class="graph"></canvas>
                 </div>
-              </div> <!-- /.d-md-flex -->
+              </div>
             </div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
         </script>
       </div>
-      <!-- /.col -->
     </div>
-    <!-- /.row -->
   </div>
-  <!--/. container-fluid -->
 </section>
-<!-- /.content -->
 <script>
   jQuery(function () {
     jQuery.get('{{ url_for("api:relay_list") }}',function(data) {
       data = data.data;
       // Sort the relays based on the given relay name
       data.sort((a, b) => a.name.localeCompare(b.name));
-
-      if (data.length > 0) {
-        jQuery('.zero_message').remove();
-      } else {
-        jQuery('.zero_message').show();
-      }
-
+      (data.length > 0 ? jQuery('.zero_message').remove() : jQuery('.zero_message').show());
       jQuery.each(data,function(counter, relay) {
         relay.export_link      = '{{ url_for('api:relay_history',  relay='_id_', action="export") }}'.replace('_id_',relay.id);
         relay.edit_link        = '{{ url_for('api:relay_detail',   relay='_id_') }}'.replace('_id_',relay.id);
@@ -148,43 +136,6 @@
         relay.graph  = 'graph_' + relay.id;
 
         $('#relay_list').loadTemplate($('#relay_template'), relay, {append: true, bindingOptions: {ignoreNull : true}});
-
-
-
-
-
-
-        // $('#relay_list').loadTemplate($('#relay_template'),{
-
-        //   icon: 'fa-bolt',
-        //   title: relay.name,
-        //   last_update: moment().format('LLL'),
-
-        //   //error_message : (relay.error ? 'error' : ''),
-        //   badge_message: (relay.exclude_avg ? 'Excl. avg' : (relay.manual_mode ? 'Manual mode' : '')),
-        //   power: (relay.value > 0 ? 'text-success' : ''),
-        //   current: relay.value,
-
-        //   relay_edit_link:        '{{ url_for('api:relay_detail', relay='_id_') }}'.replace('_id_',relay.id),
-        //   relay_ignore_link:      '{{ url_for('api:setting_update', setting='exclude_ids') }}',
-        //   relay_delete_link:      '{{ url_for('api:relay_delete', relay='_id_') }}'.replace('_id_',relay.id),
-        //   relay_manual_mode_link: '{{ url_for('api:relay_manual', relay='_id_') }}'.replace('_id_',relay.id),
-        //   relay_replace_hardware_link : '#replace_hardware',
-
-        //   settings_title: 'Edit relay: ' + relay.name,
-        //   ignore_title: 'Ignore relay: ' + relay.name,
-        //   delete_title: 'Delete relay: ' + relay.name,
-        //   toggle_title: {% if authenticated %}'Toggle relay ' + relay.name{% else %}'Login to make changes'{% endif %},
-        //   manual_title: 'Toggle manual mode',
-        //   replace_title: 'Replace hardware',
-
-        //   relay_id: relay.id,
-        //   relay:  (!relay.dimmer ? 'relay_' + relay.id : null),
-        //   dimmer: (relay.dimmer  ? 'relay_' + relay.id : null),
-
-        //   graph: 'graph_' + relay.id
-        // },{ append: true, bindingOptions: {ignoreNull : true}});
-
         new graph('graph_' + relay.id, '{{ url_for("api:relay_history", action="history", relay="_id_") }}'.replace('_id_',relay.id), relay.hardware);
       });
 

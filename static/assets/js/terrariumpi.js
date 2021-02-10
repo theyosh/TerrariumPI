@@ -693,31 +693,23 @@ function movingAvg(array, count, qualifier){
         this._export.attr('href', value.replace('/history/','/export/'));
       }
 
-      if (this._periods.find('a').length == 0) {
-        let self = this;
-
-        jQuery.each(['day','week','month','year'],function(counter,period) {
-          let period_action = jQuery('<a>').addClass('dropdown-item').attr({'href' : self.source +  period + '/', 'title':period}).text(period);
-          if ('day' == period) {
-            period_action.addClass('active');
-          }
-
-          period_action.off('click').on('click',function (event){
+      let self = this;
+      let periods = this._periods.find('a');
+      jQuery.each(['day','week','month','year'],function(counter,period) {
+        let link = jQuery(periods[counter]);
+        if ('#' == link.attr('href')) {
+          link.attr('href', value + period + '/').off('click').on('click',function (event){
             event.preventDefault();
             self._periods.find('a.dropdown-item').removeClass('active');
             self.source  = this.href;
             jQuery(this).addClass('active')
           });
-
-          self._periods.append(period_action);
-        });
-      }
-
+        }
+      });
       //Enable animation when source has changed (day/week/mont/year)
       this._graph.options.animation.duration = 1000;
       this._load_data();
     },
-
 
     _load_data: function() {
       if (!this._canvas.is(':visible')) {
