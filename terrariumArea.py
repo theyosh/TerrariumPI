@@ -26,7 +26,7 @@ class terrariumArea(object):
 
   __TYPES = {
     'lights' : {
-      'name'    : _('Lights'),
+      'name'    : _('Lighting'),
       'sensors' : [],
       'class' : lambda: terrariumAreaLights
     },
@@ -43,6 +43,18 @@ class terrariumArea(object):
       'class' : lambda: terrariumAreaHumidity
     },
 
+    'watertank' : {
+      'name'    : _('Water tank'),
+      'sensors' : ['distance'],
+      'class' : lambda: terrariumAreaWatertank
+    },
+
+    'audio' : {
+      'name'    : _('Audio'),
+      'sensors' : [],
+      'class' : lambda: terrariumAreaAudio
+    },
+
     'co2' : {
       'name'    : _('CO2'),
       'sensors' : ['co2']
@@ -53,11 +65,7 @@ class terrariumArea(object):
       'sensors' : ['conductivity']
     },
 
-    'watertank' : {
-      'name'    : _('Watertank'),
-      'sensors' : ['distance'],
-      'class' : lambda: terrariumAreaWatertank
-    },
+
 
     'moisture' : {
       'name'    : _('Moisture'),
@@ -69,6 +77,8 @@ class terrariumArea(object):
       'sensors' : ['ph']
     },
   }
+
+  PERIODS = ['low','high']
 
   @classproperty
   def available_areas(__cls__):
@@ -203,21 +213,21 @@ class terrariumArea(object):
 
     self.state = {
       'last_update' : int(datetime.datetime(1970,1,1).timestamp()),
-      'powered' : None
+      'powered'     : None
     }
 
     # Clean up parts that do not have relays configured)
-    for period in ['day','night','low','high']:
+    for period in self.PERIODS:
 
       if period in self.setup and len(self.setup[period]['relays']) == 0:
         del(self.setup[period])
 
-    for period in ['day','night','low','high']:
+    for period in self.PERIODS:
       if period not in self.setup:
         continue
 
-#      self.state['powered'] = False
-      self.state['powered'] = self.relays_state(period)
+      self.state['powered'] = False
+#      self.state['powered'] = self.relays_state(period)
 
       if period not in self.state:
         self.state[period] = {}
@@ -233,13 +243,6 @@ class terrariumArea(object):
 
         self._time_table()
 
-
-      ## Add the dimmer / relay extra tweaks...
-
-      # print('TWEAKS')
-      # print(self)
-      # print(self.setup[period])
-
       self.setup[period]['tweaks'] = {}
 
       dimmer_found = False
@@ -252,21 +255,13 @@ class terrariumArea(object):
         field = ('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'on_' + relay.id
         extra_tweaks = self.setup[period].get(field, False)
 
- #       print(f'Looking for field {field} -> {extra_tweaks}')
-
-#        extra_tweaks = self.setup[period].get(field, False)
-
-
         if extra_tweaks != False:
 
-          # Durations are in minutes for dimmers, in percentage for relays
+          # Durations are in minutes for dimmers, and in percentage for relays
           self.setup[period]['tweaks'][relay.id] = {
             'on'  : float(self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'on_' + relay.id]),
             'off' : float(self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'off_' + relay.id]),
           }
-
-          # print('tweaks added')
-          # print(self.setup[period]['tweaks'])
 
           if relay.is_dimmer:
             average_dimmer_durations['on'].append(self.setup[period]['tweaks'][relay.id]['on'])
@@ -280,10 +275,6 @@ class terrariumArea(object):
         self.setup[period]['tweaks']['on']  = {'dimmer_duration' : statistics.mean(average_dimmer_durations['on'])}
         self.setup[period]['tweaks']['off'] = {'dimmer_duration' : statistics.mean(average_dimmer_durations['off'])}
 
-      # print('Extra tweaks')
-      # print(self.setup[period]['tweaks'])
-
-
   def _is_timer_time(self, period):
     now = int(datetime.datetime.now().timestamp())
     for time_schedule in self.setup[period]['timetable']:
@@ -295,8 +286,18 @@ class terrariumArea(object):
 
     return None
 
+  @property
+  def lights_on(self):
+    if 'weather' == self.setup.get('day_night_source', None) and self.enclosure.weather is not None:
+      return self.enclosure.weather.is_day
+
+    return self.enclosure.lights_on
+
   def update(self):
-    light_state = ('on'     if self.enclosure.lights_on   else 'off')
+    if 'disabled' == self.mode:
+      return self.state
+
+    light_state = ('on'     if self.lights_on   else 'off')
     door_state  = ('closed' if self.enclosure.door_closed else 'open')
 
     if 'sensors' in self.setup:
@@ -306,7 +307,7 @@ class terrariumArea(object):
       self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_min']
       self.state['sensors']['alarm_high'] = self.state['sensors']['current'] > self.state['sensors']['alarm_max']
 
-    for period in ['day','night','low','high']:
+    for period in self.PERIODS:
       if period not in self.setup:
         continue
 
@@ -447,6 +448,8 @@ class terrariumArea(object):
 
 class terrariumAreaLights(terrariumArea):
 
+  PERIODS = ['day','night']
+
   def relays_toggle(self, part, on):
     logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
 
@@ -498,30 +501,29 @@ class terrariumAreaTemperature(terrariumArea):
   def update(self):
     super().update()
 #    print(f'Update terrariumAreaTemperature {self.__pid}')
-    if self.__pid is not None:
+    if self.__pid is not None and 'disabled' != self.mode:
       # Update the heater/cooler dimmer values
 
       current_values = self.current_value(self.setup['sensors'])
-
       self.__pid.setpoint = (current_values['alarm_min'] + current_values['alarm_max']) / 2.0
-      self.__pid.sample_time = max(1,self.setup[period]["settle_time"])
 
-      dimmer_value = round(self.__pid(current_values['current']))
-
-      for period in ['day','night','low','high']:
+      for period in self.PERIODS:
         if period not in self.setup:
           continue
+
+        self.__pid.sample_time = max(1,self.setup[period]["settle_time"])
+        dimmer_value = self.__pid(current_values['current'])
 
         for relay in self.setup[period]['relays']:
           relay = self.enclosure.relays[relay]
           if relay.is_dimmer:
-            print(f'Put dimmer {self} to state: {dimmer_value}% based on temp: {current_values["current"]} -> goal: {self.__pid.setpoint}')
+            #print(f'Put dimmer {self} to state: {dimmer_value}% based on temp: {current_values["current"]} -> goal: {self.__pid.setpoint}')
             self.enclosure.relays[relay.id].on(dimmer_value)
 
     return self.state
 
   def relays_toggle(self, part, on):
-    print(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
+    #print(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
     logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
 
     for relay in self.setup[part]['relays']:
@@ -530,42 +532,42 @@ class terrariumAreaTemperature(terrariumArea):
       # print(relay)
 
       if on:
-        print('Set to on....')
-        print(f'Is dimmer: {relay.is_dimmer}')
-        print(f'Has sensors: {"sensors" in self.setup}')
+        # print('Set to on....')
+        # print(f'Is dimmer: {relay.is_dimmer}')
+        # print(f'Has sensors: {"sensors" in self.setup}')
 
         if relay.is_dimmer and 'sensors' in self.setup:
           current_values = self.current_value(self.setup['sensors'])
           pid_target = (current_values['alarm_min'] + current_values['alarm_max']) / 2.0
 
           logger.info(f'Start the dimmer {relay.name} in PID modus to go to average value {pid_target}')
-          print(f'Start the dimmer {relay.name} in PID modus to go to average value {pid_target}')
-          print(f'Min max values: (0,{relay.ON}), sample_time {self.setup[period]["settle_time"]}')
+          # print(f'Start the dimmer {relay.name} in PID modus to go to average value {pid_target}')
+          # print(f'Min max values: (0,{relay.ON}), sample_time {self.setup[part]["settle_time"]}')
           if self.__pid is None:
             self.__pid = PID(1, 0.1, 0.05,
                               setpoint=pid_target,
-                              sample_time=max(1,self.setup[period]["settle_time"]),
+                              sample_time=max(1,self.setup[part]["settle_time"]),
                               output_limits=(0,100))
 
-            print(f'Starting dimmer {self} with PID setup. Target temp {self.__pid}')
+            #print(f'Starting dimmer {self} with PID setup. Target temp {self.__pid}')
             dimmer_value = round(self.__pid(current_values['current']))
-            print(f'Put dimmer {self} to state: {dimmer_value}%')
+            #print(f'Put dimmer {self} to state: {dimmer_value}%')
             self.enclosure.relays[relay.id].on(dimmer_value)
 
         else:
-          print(f'Set the relay {relay.name} to ON with 0 seconds delay')
+          #print(f'Set the relay {relay.name} to ON with 0 seconds delay')
           logger.info(f'Set the relay {relay.name} to ON with 0 seconds delay')
           self.enclosure.relays[relay.id].on(relay.ON)
 
         self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
 
       else:
-        print(f'Set the relay {relay.name} to OFF with 0 seconds delay')
+        #print(f'Set the relay {relay.name} to OFF with 0 seconds delay')
         logger.info(f'Set the relay {relay.name} to OFF with 0 seconds delay')
         self.enclosure.relays[relay.id].on(relay.OFF)
         self.state[part]['timer_on'] = False
         if self.__pid is not None:
-          print('CLEAR PID')
+          #print('CLEAR PID')
           self.__pid = None
 
     self.state['powered'] = on
@@ -602,3 +604,6 @@ class terrariumAreaWatertank(terrariumArea):
     sensor_values['alarm'] = not sensor_values['alarm_min'] <= sensor_values['current'] <= sensor_values['alarm_max']
 
     return sensor_values
+
+class terrariumAreaAudio(terrariumArea):
+  pass

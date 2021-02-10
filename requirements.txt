@@ -60,5 +60,5 @@ luma.oled
 
 # API
 pony
-tinytag
+git+https://github.com/gbstack/ffprobe-python
 apispec-webframeworks

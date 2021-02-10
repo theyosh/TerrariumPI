@@ -27,6 +27,18 @@ class terrariumEnclosure(object):
 
   @property
   def relays(self):
+    # Only return relays that are part of this enclosure...
+    # So filter it based on all relays on all areas
+    # print('enclusre reyals engine')
+    # print(self.engine.relays)
+    # used_relays = {}
+    # for area_id in self.areas:
+    #   for period in self.areas[area_id].PERIODS:
+    #     for relay_id in self.areas[area_id][period]['relays']:
+    #       if relay_id not in used_relays:
+    #         used_relays[relay_id] = self.engine.relays[relay_id]
+
+    # return used_relays
     return self.engine.relays
 
   def __repr__(self):
@@ -72,6 +84,9 @@ class terrariumEnclosure(object):
     # First we update the main lights area, as they can change the power state for heaters and other areas
     light_areas = []
     for area_id in self.areas:
+      if 'disabled' == self.areas[area_id].mode:
+        continue
+
       if 'lights' == self.areas[area_id].type and self.areas[area_id].setup.get('main_lights', False):
         area_states[area_id] = self.areas[area_id].update()
         light_areas.append(area_id)
