@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-02-10 23:24+CET\n"
-"PO-Revision-Date: 2021-02-09 21:02+0000\n"
+"PO-Revision-Date: 2021-02-14 07:04+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -15,10 +15,8 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:29
-#, fuzzy
-#| msgid "Light"
 msgid "Lighting"
-msgstr "Luz"
+msgstr "Iluminação"
 
 #: terrariumArea.py:35
 msgid "Heating / cooling"
@@ -29,8 +27,6 @@ msgid "Humidity"
 msgstr "Umidade relativa"
 
 #: terrariumArea.py:47
-#, fuzzy
-#| msgid "Watertank"
 msgid "Water tank"
 msgstr "Tanque de água"
 
@@ -306,10 +302,8 @@ msgstr "Semana"
 
 #: views/buttons.html:41 views/dashboard.html:127 views/relays.html:44
 #: views/sensors.html:51
-#, fuzzy
-#| msgid "Months"
 msgid "Month"
-msgstr "Meses"
+msgstr "Mês"
 
 #: views/buttons.html:42 views/dashboard.html:128 views/relays.html:45
 #: views/sensors.html:52
@@ -403,30 +397,24 @@ msgid "Power usage in Watt"
 msgstr "Uso de energia em Watt"
 
 #: views/dashboard.html:59
-#, fuzzy
-#| msgid "Water flow in L/m"
 msgid "Water flow in %s"
-msgstr "Fluxo de água em L/m"
+msgstr "Fluxo de água em %s"
 
 #: views/dashboard.html:73
-#, fuzzy
-#| msgid "Total power"
 msgid "Total power usage"
-msgstr "Total de energia"
+msgstr "Uso de energia total"
 
 #: views/dashboard.html:74
 msgid "kWh"
-msgstr ""
+msgstr "kWh"
 
 #: views/dashboard.html:78 views/dashboard.html:96 views/weather.html:33
 msgid "in"
 msgstr "em"
 
 #: views/dashboard.html:91
-#, fuzzy
-#| msgid "Total water"
 msgid "Total water usage"
-msgstr "Total de água"
+msgstr "Uso de água total"
 
 #: views/dashboard.html:189 views/enclosures.html:2
 #: views/includes/sidebar.html:197
@@ -550,10 +538,8 @@ msgid "Sensors"
 msgstr "Sensores"
 
 #: views/includes/sidebar.html:96
-#, fuzzy
-#| msgid "No sensors"
 msgid "New sensor"
-msgstr "Sem sensores"
+msgstr "Novo Sensor"
 
 #: views/includes/sidebar.html:105 views/modals/area.html:218
 #: views/modals/area.html:259 views/modals/area.html:394
@@ -562,16 +548,12 @@ msgid "Relays"
 msgstr "Relés"
 
 #: views/includes/sidebar.html:119
-#, fuzzy
-#| msgid "No relays"
 msgid "New relay"
-msgstr "Sem relés"
+msgstr "Novo relé"
 
 #: views/includes/sidebar.html:142
-#, fuzzy
-#| msgid "No buttons"
 msgid "New button"
-msgstr "Sem botões"
+msgstr "Novo botão"
 
 #: views/includes/sidebar.html:151 views/modals/enclosure.html:50
 #: views/webcams.html:2
@@ -583,16 +565,12 @@ msgid "Show"
 msgstr "Exibir"
 
 #: views/includes/sidebar.html:165
-#, fuzzy
-#| msgid "No webcams"
 msgid "New webcam"
-msgstr "Sem webcams"
+msgstr "Nova webcam"
 
 #: views/includes/sidebar.html:182
-#, fuzzy
-#| msgid "Files / Playlists"
 msgid "Playlists"
-msgstr "Arquivos / Listas de reprodução"
+msgstr "Listas de reprodução"
 
 #: views/includes/sidebar.html:188
 msgid "Files"
@@ -603,16 +581,12 @@ msgid "List"
 msgstr "Lista"
 
 #: views/includes/sidebar.html:211
-#, fuzzy
-#| msgid "No enclosures"
 msgid "New enclosure"
-msgstr "Sem anexos"
+msgstr "Novo anexo"
 
 #: views/includes/sidebar.html:217
-#, fuzzy
-#| msgid "Add new area"
 msgid "New area"
-msgstr "Adicionar nova área"
+msgstr "Nova área"
 
 #: views/includes/sidebar.html:226 views/settings.html:16
 msgid "System"
@@ -686,11 +660,11 @@ msgstr "Anexo"
 
 #: views/modals/area.html:22
 msgid "Select the enclosure where this area belongs to."
-msgstr ""
+msgstr "Selecione o anexo a que essa área pertence."
 
 #: views/modals/area.html:35
 msgid "Select the type of area. Each type has its own extra options and logic."
-msgstr ""
+msgstr "Selecione o tipo de área. Cada tipo tem opções e lógicas diferentes."
 
 #: views/modals/area.html:38 views/modals/area.html:134
 msgid "ERROR"
@@ -698,11 +672,11 @@ msgstr "ERRO"
 
 #: views/modals/area.html:47
 msgid "Enter a name for this area."
-msgstr ""
+msgstr "Digite um nome para esta área."
 
 #: views/modals/area.html:50
 msgid "Give at least a name of minimal 1 character."
-msgstr ""
+msgstr "Digite pelo menos 1 caractere."
 
 #: views/modals/area.html:60
 msgid "Relay"
@@ -746,6 +720,7 @@ msgid ""
 "Select the mode of this area. This will change the timing and durations of "
 "the relays."
 msgstr ""
+"Selecione o modo desta área. Esta opção altera o tempo e a duração dos relés."
 
 #: views/modals/area.html:116
 msgid "Maximum hours"
@@ -757,6 +732,9 @@ msgid ""
 "valid in weather mode. When the day is longer then this maximum value, the "
 "day will be shortend to this maximum value."
 msgstr ""
+"A quantidade máxima de horas que as luzes são ligadas. Esta opção só está "
+"disponível no modo Clima. Caso o dia seja mais longo que o valor digitado "
+"neste campo, o dia será encurtado até atingir o valor configurado."
 
 #: views/modals/area.html:128
 msgid "Minimum hours"
@@ -768,6 +746,9 @@ msgid ""
 "valid in weather mode. When the day is shorter then this minimum value, the "
 "day will be extended to this minimum value."
 msgstr ""
+"A quantidade mínima de horas que as luzes são ligadas. Esta opção só está "
+"disponível no modo Clima. Caso o dia seja mais curto que o valor digitado "
+"neste campo, o dia será estendido até atingir o valor configurado."
 
 #: views/modals/area.html:140
 msgid "Hours shift"
@@ -778,12 +759,13 @@ msgid ""
 "The amount of time to shift in hours based on the sun rise time. Negative "
 "values will make the day start earlier."
 msgstr ""
+"A quantidade de horas para compensar em relação ao nascer do sol. Valores "
+"negativos adiantam o início do dia (faz as luzes ligarem antes do nascer do "
+"sol)."
 
 #: views/modals/area.html:146
-#, fuzzy
-#| msgid "Please enter a number value between 1 and 100"
 msgid "Enter a value between -12 and 12."
-msgstr "Insira um número entre 0 e 100"
+msgstr "Insira um número entre -12 e 12."
 
 #: views/modals/area.html:153
 msgid "Main lights"
@@ -794,12 +776,16 @@ msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
 msgstr ""
+"Alterne esta opção se esta é a principal luz para este gabinete. Utilizado "
+"para checar as luzes das outras áreas."
 
 #: views/modals/area.html:166
 msgid ""
 "Below you can per select the relays and timer settings per period daytime "
 "and nighttime."
 msgstr ""
+"Abaixo você pode selecionar os relés e as configurações do temporizador por "
+"período diurno e noturno."
 
 #: views/modals/area.html:169
 msgid "Day settings"
@@ -816,12 +802,12 @@ msgstr "Hora de início"
 
 #: views/modals/area.html:179
 msgid "The time of the day when the relays are toggled on each day."
-msgstr ""
+msgstr "A hora do dia em que os relés são ligados a cada dia."
 
 #: views/modals/area.html:182 views/modals/area.html:194
 #: views/modals/area.html:206
 msgid "Enter a valid time of the day."
-msgstr ""
+msgstr "Digite uma hora válida do dia."
 
 #: views/modals/area.html:188 views/modals/area.html:241
 #: views/modals/area.html:344 views/modals/area.html:416
@@ -830,7 +816,7 @@ msgstr "Hora de término"
 
 #: views/modals/area.html:191
 msgid "The time of the day when the relays are toggled off each day."
-msgstr ""
+msgstr "A hora do dia em que os relés são desligados a cada dia."
 
 #: views/modals/area.html:200 views/modals/area.html:247
 #: views/modals/area.html:350 views/modals/area.html:422
@@ -842,6 +828,8 @@ msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full day."
 msgstr ""
+"A duração de tempo em que os relés devem estar ligados. Caso seja menor que "
+"a duração do dia, funciona como um timer. Digite 0 para acionar o dia todo."
 
 #: views/modals/area.html:212 views/modals/area.html:253
 #: views/modals/area.html:356 views/modals/area.html:428
@@ -1241,10 +1229,8 @@ msgid "Add new sensor"
 msgstr "Adicionar novo sensor"
 
 #: views/settings.html:5
-#, fuzzy
-#| msgid "General information"
 msgid "Show/hide help information"
-msgstr "Informação geral"
+msgstr "Mostrar/ocultar informações de ajuda"
 
 #: views/settings.html:28
 msgid "Pi power usage"
@@ -1274,24 +1260,20 @@ msgid "Port number"
 msgstr "Número da porta"
 
 #: views/settings.html:55
-#, fuzzy
-#| msgid "Authentication"
 msgid "Authentication mode"
-msgstr "Autenticação"
+msgstr "Tipo de autenticação"
 
 #: views/settings.html:58
 msgid "Full authentication"
 msgstr "Autenticação completa"
 
 #: views/settings.html:59
-#, fuzzy
-#| msgid "Only changes"
 msgid "Only for changes"
 msgstr "Apenas alterações"
 
 #: views/settings.html:62
 msgid "Always authenticate or only when changes are being made."
-msgstr ""
+msgstr "Sempre autenticar ou somente quando alterações são feitas."
 
 #: views/settings.html:67
 msgid "User name"
@@ -1398,10 +1380,8 @@ msgid "Show min and max values in gauge graphs"
 msgstr "Mostrar valores mínimo e máximo em gráficos de medidor"
 
 #: views/settings.html:214
-#, fuzzy
-#| msgid "Hide environment on dashboard"
 msgid "Hide enclosures on dashboard"
-msgstr "Ocultar resumo do ambiente no painel de controle"
+msgstr "Ocultar anexos no painel de controle"
 
 #: views/settings.html:223
 msgid "All gauges on a single page"
@@ -1412,10 +1392,8 @@ msgid "Cloud"
 msgstr "Nuvem"
 
 #: views/settings.html:249
-#, fuzzy
-#| msgid "Meross Cloud username"
 msgid "Meross username"
-msgstr "Nome de usuário do Meross Cloud"
+msgstr "Nome de usuário do Meross"
 
 #: views/settings.html:255
 msgid "Meross password"
@@ -1427,7 +1405,7 @@ msgstr "Salvar"
 
 #: views/status.html:22
 msgid "CPU Load"
-msgstr "Carga da CPU"
+msgstr "Atividade da CPU"
 
 #: views/status.html:66
 msgid "Memory usage"
@@ -1507,7 +1485,7 @@ msgstr "Adicionar nova área"
 
 #: Missing text string
 msgid "Audio file is being processed. Please wait..."
-msgstr ""
+msgstr "Arquivo de áudio está sendo processado. Aguarde..."
 
 #: Missing text string
 msgid "Audio files are uploaded."
@@ -1566,34 +1544,24 @@ msgid "Delete button"
 msgstr "Botão Excluir"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete enclosure"
-msgstr "Excluir arquivo"
+msgstr "Excluir anexo"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete relay"
-msgstr "Excluir arquivo"
+msgstr "Excluir relé"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Delete sensor"
-msgstr "Selecionar sensores"
+msgstr "Excluir sensor"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete webcam"
-msgstr "Excluir arquivo"
+msgstr "Excluir webcam"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Edit"
 msgid "Edit area"
-msgstr "Editar"
+msgstr "Editar área"
 
 #: Missing text string
 msgid "Edit button"
@@ -1608,76 +1576,52 @@ msgid "Edit relay"
 msgstr "Editar relé"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Light sensor"
 msgid "Edit sensor"
-msgstr "Sensor de luz"
+msgstr "Editar Sensor"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Edit webcam"
-msgstr "Adicionar nova webcam"
+msgstr "Editar webcam"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Address"
 msgid "Enter address"
-msgstr "Endereço"
+msgstr "Insira seu endereço"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter begin time"
-msgstr "Data e hora"
+msgstr "Digite o horário de início"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter end time"
-msgstr "Data e hora"
+msgstr "Digite o horário de término"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter the period type."
 msgid "Enter height"
-msgstr "Coloque o tipo de período."
+msgstr "Digite altura"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Username"
 msgid "Enter name"
-msgstr "Nome de usuário"
+msgstr "Digite o nome"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Username"
 msgid "Enter number"
-msgstr "Nome de usuário"
+msgstr "Inserir o número"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Address"
 msgid "Enter search terms"
-msgstr "Endereço"
+msgstr "Insira os termos de pesquisa"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter the period type."
 msgid "Enter the amount"
-msgstr "Coloque o tipo de período."
+msgstr "Insira a quantidade"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter the amount of days/weeks/months/years to reminder."
 msgid "Enter the amount of hours to shift"
-msgstr "Digite a quantidade de dias/semanas/meses/anos para o lembrete."
+msgstr "Digite a quantidade de horas para alterar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter the period type."
 msgid "Enter the height"
-msgstr "Coloque o tipo de período."
+msgstr "Digite altura"
 
 #: Missing text string
 msgid "Enter the maximum amount of hours"
@@ -1688,50 +1632,36 @@ msgid "Enter the minimum amount of hours"
 msgstr "Digite a quantidade mínima de horas"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Temperature offset"
 msgid "Enter the offset"
-msgstr "Compensação de temperatura"
+msgstr "Digite a compensação"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter width"
-msgstr "Data e hora"
+msgstr "Digite largura"
 
 #: Missing text string
 msgid "Error"
 msgstr "Erro"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Export data"
 msgid "Export button"
-msgstr "Exportar dados"
+msgstr "Botão exportar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Export data"
 msgid "Export relay"
-msgstr "Exportar dados"
+msgstr "Exportar relé"
 
 #: Missing text string
-#, fuzzy
-#| msgid "pH sensor"
 msgid "Export sensor"
-msgstr "Sensor de pH"
+msgstr "Exportar sensor"
 
 #: Missing text string
-#, fuzzy
-#| msgid "error"
 msgid "Form error"
-msgstr "erro"
+msgstr "Erro no Formulário"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Ignore webcam"
-msgstr "Adicionar nova webcam"
+msgstr "Ignorar webcam"
 
 #: Missing text string
 msgid "Ingore button"
@@ -1742,253 +1672,180 @@ msgid "Ingore relay"
 msgstr "Ignorar relé"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Moisture sensor"
 msgid "Ingore sensor"
-msgstr "Sensor de umidade (Moisture)"
+msgstr "Ignorar sensor"
 
 #: Missing text string
 msgid "Load"
 msgstr "Atividade atual"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Manual mode"
 msgid "Manual mode relay"
-msgstr "Modo manual"
+msgstr "Modo de relé manual"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Max diff"
 msgid "Max difference"
 msgstr "Diferença máxima"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Required fields are marked with '%s'."
 msgid "Not all required fields are entered correctly."
-msgstr "Os campos obrigatórios estão marcados com ' %s '."
+msgstr "Os campos obrigatórios não foram preenchidos."
 
 #: Missing text string
-#, fuzzy
-#| msgid "OK!"
 msgid "OK"
-msgstr "OK!"
+msgstr "OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "New calendar item"
 msgid "Open calender page"
-msgstr "Novo item de calendário"
+msgstr "Abrir página de calendário"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP password"
 msgid "Password"
-msgstr "Senha SMTP"
+msgstr "Senha"
 
 #: Missing text string
 msgid "Place some text here"
 msgstr "Adicione algum texto aqui"
 
 #: Missing text string
-#, fuzzy
-#| msgid "File '%s' is uploaded"
 msgid "Profile image is uploaded."
-msgstr "O arquivo ' %s ' foi carregado"
+msgstr "A imagem do perfil foi carregada."
 
 #: Missing text string
-#, fuzzy
-#| msgid "TerrariumPI"
 msgid "Reboot TerrariumPI"
-msgstr "TerrariumPI"
+msgstr "Reinicializar o TerrariumPI"
 
 #: Missing text string
-#, fuzzy
-#| msgid "TerrariumPI"
 msgid "Restart TerrariumPI"
-msgstr "TerrariumPI"
+msgstr "Reiniciar o TerrariumPI"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Error"
 msgid "Save Error"
-msgstr "Erro"
+msgstr "Erro ao salvar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Save"
 msgid "Save ok"
-msgstr "Salvar"
+msgstr "Salvar OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Save"
 msgid "Save OK"
-msgstr "Salvar"
+msgstr "Salvar OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select a mode"
-msgstr "Selecione uma opção"
+msgstr "Selecione um modo"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select an area type"
-msgstr "Selecione uma opção"
+msgstr "Selecione um tipo de área"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Select an enclosure"
-msgstr "Excluir arquivo"
+msgstr "Selecione um anexo"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Archive door state"
 msgid "Select archive door state"
-msgstr "Salvar estado da porta"
+msgstr "Selecione o estado da porta de arquivo"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Archive light state"
 msgid "Select archive light state"
-msgstr "Arquivar estado da luz"
+msgstr "Selecione o estado da luz de arquivo"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Language"
 msgid "Select archiving"
-msgstr "Idioma"
+msgstr "Selecione arquivamento"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select a state"
-msgstr "Selecione uma opção"
+msgstr "Selecionar um estado"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select available doors"
-msgstr "Selecionar sensores"
+msgstr "Selecione as portas disponíveis"
 
 #: Missing text string
 msgid "Select available webcams"
 msgstr "Selecione as webcams disponíveis"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Replace hardware"
 msgid "Select hardware"
-msgstr "Substituir hardware"
+msgstr "Selecionar hardware"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Language"
 msgid "Select language"
-msgstr "Idioma"
+msgstr "Selecionar Idioma"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select relays"
-msgstr "Selecionar sensores"
+msgstr "Selecionar relés"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Picture rotation"
 msgid "Select rotation"
-msgstr "Rotação da imagem"
+msgstr "Selecionar rotação"
 
 #: Missing text string
 msgid "Select sensors"
 msgstr "Selecionar sensores"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select type"
-msgstr "Selecionar sensores"
+msgstr "Selecionar tipo"
 
 #: Missing text string
 msgid "Select which frame to comparison"
 msgstr "Selecione quadro para comparação"
 
 #: Missing text string
-#, fuzzy
-#| msgid "White balance"
 msgid "Select white balance"
-msgstr "Balanço de branco"
+msgstr "Selecionar balanço de branco"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Your changes are saved"
 msgid "Settings are saved"
-msgstr "Suas alterações são salvas"
+msgstr "Configurações salvas"
 
 #: Missing text string
 msgid "Settings are updated."
 msgstr "Configurações atualizadas."
 
 #: Missing text string
-#, fuzzy
-#| msgid "Data could not be saved"
 msgid "Settings could not be saved"
-msgstr "Não foi possível salvar os dados"
+msgstr "Não foi possível salvar as configurações"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Show motion boxes"
 msgid "Show the motion boxes"
 msgstr "Mostrar caixas de movimento"
 
 #: Missing text string
-#, fuzzy
-#| msgid "TerrariumPI"
 msgid "Shutdown TerrariumPI"
-msgstr "TerrariumPI"
+msgstr "Desligar TerrariumPI"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Toggle audio"
 msgid "Toggle relay"
-msgstr "Alternar áudio"
+msgstr "Alternar relé"
 
 #: Missing text string
-#, fuzzy
 msgid "{type} {name} is {action}"
 msgstr "{tipo} {nome} está {ação}"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Last update"
 msgid "updated"
-msgstr "Última atualização"
+msgstr "atualizado"
 
 #: Missing text string
 msgid "Update error"
 msgstr "Erro ao atualizar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Upload date"
 msgid "Update ok"
-msgstr "Data de compilação"
+msgstr "Atualização OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Upload date"
 msgid "Upload error"
-msgstr "Data de compilação"
+msgstr "Erro no Envio"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Upload date"
 msgid "Upload ok"
-msgstr "Data de compilação"
+msgstr "Envio OK"
 
 #: Missing text string
 msgid "Weather data source url"
