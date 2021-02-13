@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-02-08 14:46+CET\n"
-"PO-Revision-Date: 2021-02-10 07:04+0000\n"
+"PO-Revision-Date: 2021-02-14 07:04+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/pt_BR/>\n"
@@ -81,7 +81,7 @@ msgstr "Alarme de temperatura alta no Ambiente foi desarmado"
 
 #: terrariumNotification.py:220
 msgid "Environment humidity alarm low on"
-msgstr "Alarme de umidade baixa no Ambiente foi armado"
+msgstr "Alarme de umidade relativa baixa no Ambiente foi armado"
 
 #: terrariumNotification.py:221
 msgid "Environment humidity alarm low off"
@@ -2673,7 +2673,7 @@ msgstr ""
 "O pulverizador está funcionando apenas no modo sensor. Isso significa que "
 "ele precisa ter pelo menos um sensor de umidade relativa e um interruptor "
 "para ativar um sistema de pulverização. Quando vários sensores de umidade "
-"são usados, as médias dos valores mínimo, máximo e atual são usadas."
+"relativa são usados, são usadas as médias dos valores mínimo, máximo e atual."
 
 #: views/inc/usage_environment.tpl:112
 msgid "The sprayer will not operate when a door is open."
@@ -2798,7 +2798,7 @@ msgid ""
 msgstr ""
 "Na página de sensores, você pode encontrar todas as páginas de sensores "
 "disponíveis, agrupadas por tipo. Selecione temperatura no menu para obter "
-"todos os sensores de temperatura. Selecione a umidade para todos os sensores "
+"todos os sensores de temperatura. Selecione umidade para todos os sensores "
 "de umidade relativa."
 
 #: views/inc/usage_sensors.tpl:14
