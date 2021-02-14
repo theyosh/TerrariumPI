@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2021-02-10 23:24+CET\n"
+"POT-Creation-Date: 2021-02-14 21:41+CET\n"
 "PO-Revision-Date: 2020-05-21 19:44+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
@@ -18,33 +18,33 @@ msgstr ""
 "X-Generator: Weblate 4.0.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:29
+#: terrariumArea.py:31
 #, fuzzy
 #| msgid "Lights"
 msgid "Lighting"
 msgstr "Eclairage"
 
-#: terrariumArea.py:35
+#: terrariumArea.py:37
 msgid "Heating / cooling"
 msgstr ""
 
-#: terrariumArea.py:41
+#: terrariumArea.py:43
 msgid "Humidity"
 msgstr "Humidité"
 
-#: terrariumArea.py:47
+#: terrariumArea.py:49
 msgid "Water tank"
 msgstr "Réservoir d'eau"
 
-#: terrariumArea.py:53 views/includes/sidebar.html:174
+#: terrariumArea.py:55 views/includes/sidebar.html:174
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:59
+#: terrariumArea.py:61
 msgid "CO2"
 msgstr ""
 
-#: terrariumArea.py:64
+#: terrariumArea.py:66
 msgid "Conductivity"
 msgstr ""
 
@@ -152,123 +152,69 @@ msgstr ""
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1201 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1202 views/dashboard.html:18 views/status.html:112
 msgid "Uptime"
 msgstr "En ligne depuis"
 
-#: terrariumEngine.py:1207
+#: terrariumEngine.py:1208
 #, fuzzy
 #| msgid "System log"
 msgid "System load"
 msgstr "Journaux du système"
 
-#: terrariumEngine.py:1213 views/status.html:44
+#: terrariumEngine.py:1214 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Température du CPU"
 
-#: terrariumEngine.py:1219
+#: terrariumEngine.py:1220
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1225
+#: terrariumEngine.py:1226
 #, fuzzy
 #| msgid "Memory usage"
 msgid "Memory"
 msgstr "Utilisation de la mémoire"
 
-#: terrariumEngine.py:1235
+#: terrariumEngine.py:1236
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "Le type de capteur"
 
-#: terrariumEngine.py:1388 views/dashboard.html:110
+#: terrariumEngine.py:1389 views/dashboard.html:110
 #, fuzzy
 #| msgid "Last update"
 msgid "last update"
 msgstr "Dernière Mise à jour"
 
-#: terrariumWebserver.py:228 terrariumWebserver.py:331
+#: terrariumWebserver.py:156 terrariumWebserver.py:230
 msgid "Authenticate to make any changes"
 msgstr "Authentifiez-vous pour apporter des modifications"
 
-#: terrariumWebserver.py:228 terrariumWebserver.py:331
+#: terrariumWebserver.py:156 terrariumWebserver.py:230
 msgid "Authentication"
 msgstr "Authentication"
 
-#: terrariumWebserver.py:228 terrariumWebserver.py:331 views/index.html:2
+#: terrariumWebserver.py:156 terrariumWebserver.py:230 views/index.html:2
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:334
-msgid "Player command could ot be executed!"
-msgstr "La commande du lecteur n'a pas pu être exécutée!"
-
-#: terrariumWebserver.py:334 terrariumWebserver.py:354
-#: terrariumWebserver.py:366
-msgid "Error!"
-msgstr "Erreur!"
-
-#: terrariumWebserver.py:342 terrariumWebserver.py:345
-msgid "OK!"
-msgstr "OK!"
-
-#: terrariumWebserver.py:342 terrariumWebserver.py:345
-msgid "Player command executed!"
-msgstr "Commande du lecteur exécutée!"
-
-#: terrariumWebserver.py:354
-msgid "File is not uploaded!"
-msgstr "Le fichier n'a pas été téléchargé !"
-
-#: terrariumWebserver.py:359
-#, fuzzy
-#| msgid "File is not uploaded!"
-msgid "File '%s' is uploaded"
-msgstr "Le fichier n'a pas été téléchargé !"
-
-#: terrariumWebserver.py:359 terrariumWebserver.py:369
-msgid "Success!"
-msgstr "Réussite!"
-
-#: terrariumWebserver.py:361
-#, fuzzy
-#| msgid "Delete file"
-msgid "Duplicate file '%s'"
-msgstr "Supprimer le fichier"
-
-#: terrariumWebserver.py:366
-msgid "Action could not be satisfied"
-msgstr "L'action n'a pas pu être satisfaite"
-
-#: terrariumWebserver.py:369
-msgid "Audio file is deleted"
-msgstr "Le fichier audio est supprimé"
-
-#: terrariumWebserver.py:402
-msgid "Hardware is replaced"
-msgstr ""
-
-#: terrariumWebserver.py:403
-msgid "Hardware replacement is logged in the calendar"
-msgstr ""
-
-#: terrariumWebserver.py:406
-msgid "A new replacement reminder is created"
-msgstr ""
-
 #: views/audio_files.html:2 views/audio_files.html:10
+#: views/modals/playlist.html:53
 msgid "Audio files"
 msgstr "Fichiers audio"
 
 #: views/audio_files.html:24 views/audio_files.html:35 views/enclosures.html:76
 #: views/modals/area.html:44 views/modals/button.html:32
-#: views/modals/enclosure.html:17 views/modals/sensor.html:41
-#: views/modals/webcam.html:35 views/modals/webcam.html:198
+#: views/modals/enclosure.html:17 views/modals/playlist.html:17
+#: views/modals/sensor.html:41 views/modals/webcam.html:35
+#: views/modals/webcam.html:198 views/playlists.html:24 views/playlists.html:37
 msgid "Name"
 msgstr "Nom"
 
-#: views/audio_files.html:25 views/audio_files.html:36
+#: views/audio_files.html:25 views/audio_files.html:36 views/playlists.html:25
+#: views/playlists.html:38
 msgid "Duration"
 msgstr "Durée"
 
@@ -280,7 +226,8 @@ msgstr "Nom de fichier"
 msgid "Size"
 msgstr "Taille"
 
-#: views/audio_files.html:28 views/audio_files.html:39
+#: views/audio_files.html:28 views/audio_files.html:39 views/playlists.html:30
+#: views/playlists.html:43
 msgid "Action"
 msgstr "Action"
 
@@ -364,7 +311,7 @@ msgid "Export"
 msgstr "Export des données"
 
 #: views/buttons.html:58 views/calendar.html:7 views/dashboard.html:144
-#: views/dashboard.html:198 views/includes/sidebar.html:240
+#: views/dashboard.html:198 views/includes/sidebar.html:250
 #: views/relays.html:60 views/sensors.html:69 views/settings.html:2
 #: views/weather.html:7 views/webcams.html:32
 msgid "Settings"
@@ -375,9 +322,8 @@ msgstr "Paramètres"
 msgid "Ignore"
 msgstr ""
 
-#: views/buttons.html:68 views/calendar.html:76 views/dashboard.html:154
-#: views/modals/webcam.html:374 views/relays.html:76 views/sensors.html:79
-#: views/webcams.html:38
+#: views/buttons.html:68 views/dashboard.html:154 views/modals/webcam.html:374
+#: views/relays.html:76 views/sensors.html:79 views/webcams.html:38
 #, fuzzy
 #| msgid "Delete file"
 msgid "Delete"
@@ -392,63 +338,6 @@ msgstr "Calendrier"
 #| msgid "Download"
 msgid "Download iCal"
 msgstr "Téléchargement"
-
-#: views/calendar.html:32 views/calendar.html:46
-msgid "Event"
-msgstr ""
-
-#: views/calendar.html:41 views/settings.html:189
-msgid "Title"
-msgstr "Titre"
-
-#: views/calendar.html:53
-msgid "Date"
-msgstr ""
-
-#: views/calendar.html:58
-#, fuzzy
-#| msgid "Repeat"
-msgid "Repeat every"
-msgstr "Répéter"
-
-#: views/calendar.html:62
-#, fuzzy
-#| msgid "Repeat"
-msgid "No repeat"
-msgstr "Répéter"
-
-#: views/calendar.html:63
-msgid "Days"
-msgstr ""
-
-#: views/calendar.html:64
-#, fuzzy
-#| msgid "Week"
-msgid "Weeks"
-msgstr "Semaine"
-
-#: views/calendar.html:65
-#, fuzzy
-#| msgid "Month"
-msgid "Months"
-msgstr "Mois"
-
-#: views/calendar.html:66
-#, fuzzy
-#| msgid "Year"
-msgid "Years"
-msgstr "Année"
-
-#: views/calendar.html:74 views/includes/modals.html:14
-#: views/layouts/modal.html:20 views/modals/webcam.html:372
-#: views/weather.html:111
-msgid "Close"
-msgstr "Fermer"
-
-#: views/calendar.html:77 views/includes/modals.html:5
-#: views/includes/modals.html:17 views/modals/webcam.html:373
-msgid "Confirm"
-msgstr ""
 
 #: views/dashboard.html:2 views/includes/sidebar.html:48
 msgid "Dashboard"
@@ -485,7 +374,7 @@ msgid "Total water usage"
 msgstr "Total d'eau en L"
 
 #: views/dashboard.html:189 views/enclosures.html:2
-#: views/includes/sidebar.html:197
+#: views/includes/sidebar.html:207
 msgid "Enclosures"
 msgstr ""
 
@@ -532,13 +421,13 @@ msgstr ""
 msgid "Type"
 msgstr "Type"
 
-#: views/enclosures.html:78 views/modals/area.html:100
-#: views/modals/area.html:278
+#: views/enclosures.html:78 views/modals/area.html:59
+#: views/modals/area.html:283 views/modals/area.html:488
 msgid "Mode"
 msgstr ""
 
 #: views/enclosures.html:79 views/includes/sidebar.html:113
-#: views/includes/sidebar.html:136 views/includes/sidebar.html:234
+#: views/includes/sidebar.html:136 views/includes/sidebar.html:244
 #: views/status.html:2 views/status.html:9
 msgid "Status"
 msgstr "Statut"
@@ -560,6 +449,16 @@ msgstr ""
 #: views/includes/footer.html:15
 msgid "Terrarium home automation"
 msgstr ""
+
+#: views/includes/modals.html:5 views/includes/modals.html:17
+#: views/modals/webcam.html:373
+msgid "Confirm"
+msgstr ""
+
+#: views/includes/modals.html:14 views/layouts/modal.html:20
+#: views/modals/webcam.html:372 views/weather.html:111
+msgid "Close"
+msgstr "Fermer"
 
 #: views/includes/navigation.html:17
 msgid "Upcoming events"
@@ -607,13 +506,13 @@ msgstr "Accueil"
 msgid "All sensors"
 msgstr "Capteurs de température"
 
-#: views/includes/sidebar.html:62 views/modals/area.html:323
+#: views/includes/sidebar.html:62 views/modals/area.html:534
 #: views/weather.html:2
 msgid "Weather"
 msgstr "Météo"
 
-#: views/includes/sidebar.html:77 views/modals/area.html:282
-#: views/modals/area.html:290 views/modals/webcam.html:358
+#: views/includes/sidebar.html:77 views/modals/area.html:493
+#: views/modals/area.html:501 views/modals/webcam.html:358
 msgid "Sensors"
 msgstr "Capteurs"
 
@@ -623,9 +522,9 @@ msgstr "Capteurs"
 msgid "New sensor"
 msgstr "capteur de pH"
 
-#: views/includes/sidebar.html:105 views/modals/area.html:218
-#: views/modals/area.html:259 views/modals/area.html:394
-#: views/modals/area.html:466 views/relays.html:2
+#: views/includes/sidebar.html:105 views/modals/area.html:177
+#: views/modals/area.html:218 views/modals/area.html:605
+#: views/modals/area.html:677 views/relays.html:2
 msgid "Relays"
 msgstr ""
 
@@ -656,67 +555,74 @@ msgstr "Afficher"
 msgid "New webcam"
 msgstr "Webcams"
 
-#: views/includes/sidebar.html:182
+#: views/includes/sidebar.html:183
+msgid "Files"
+msgstr "Fichiers"
+
+#: views/includes/sidebar.html:189 views/modals/area.html:428
+#: views/modals/area.html:469 views/playlists.html:2 views/playlists.html:10
 #, fuzzy
 #| msgid "Playlist"
 msgid "Playlists"
 msgstr "Playlist"
 
-#: views/includes/sidebar.html:188
-msgid "Files"
-msgstr "Fichiers"
+#: views/includes/sidebar.html:196
+#, fuzzy
+#| msgid "Audio playlist"
+msgid "New playlist"
+msgstr "Playlist audio"
 
-#: views/includes/sidebar.html:205
+#: views/includes/sidebar.html:215
 msgid "List"
 msgstr ""
 
-#: views/includes/sidebar.html:211
+#: views/includes/sidebar.html:221
 #, fuzzy
 #| msgid "Add new sensor"
 msgid "New enclosure"
 msgstr "Ajouter un nouveau capteur"
 
-#: views/includes/sidebar.html:217
+#: views/includes/sidebar.html:227
 #, fuzzy
 #| msgid "Add new webcam"
 msgid "New area"
 msgstr "Ajouter une nouvelle webcam"
 
-#: views/includes/sidebar.html:226 views/settings.html:16
+#: views/includes/sidebar.html:236 views/settings.html:16
 msgid "System"
 msgstr "Système"
 
-#: views/includes/sidebar.html:246 views/log.html:2
+#: views/includes/sidebar.html:256 views/log.html:2
 msgid "Log"
 msgstr "Log"
 
-#: views/includes/sidebar.html:252
+#: views/includes/sidebar.html:262
 #, fuzzy
 #| msgid "Start"
 msgid "Restart"
 msgstr "Début"
 
-#: views/includes/sidebar.html:258
+#: views/includes/sidebar.html:268
 msgid "Reboot"
 msgstr ""
 
-#: views/includes/sidebar.html:264
+#: views/includes/sidebar.html:274
 msgid "Shutdown"
 msgstr ""
 
-#: views/includes/sidebar.html:268 views/includes/sidebar.html:281
+#: views/includes/sidebar.html:278 views/includes/sidebar.html:291
 msgid "About"
 msgstr "A propos"
 
-#: views/includes/sidebar.html:273
+#: views/includes/sidebar.html:283
 msgid "Help"
 msgstr "Aide"
 
-#: views/includes/sidebar.html:287
+#: views/includes/sidebar.html:297
 msgid "Usage"
 msgstr "Utilisation"
 
-#: views/includes/sidebar.html:293 views/modals/button.html:17
+#: views/includes/sidebar.html:303 views/modals/button.html:17
 #: views/modals/sensor.html:17 views/modals/webcam.html:20
 #: views/modals/webcam.html:183
 msgid "Hardware"
@@ -772,7 +678,8 @@ msgstr ""
 msgid "Select the type of area. Each type has its own extra options and logic."
 msgstr ""
 
-#: views/modals/area.html:38 views/modals/area.html:134
+#: views/modals/area.html:38 views/modals/area.html:93
+#: views/modals/area.html:336
 msgid "ERROR"
 msgstr ""
 
@@ -784,285 +691,312 @@ msgstr ""
 msgid "Give at least a name of minimal 1 character."
 msgstr ""
 
-#: views/modals/area.html:60
-msgid "Relay"
-msgstr ""
-
-#: views/modals/area.html:66
-#, fuzzy
-#| msgid "Duration"
-msgid "Duration on"
-msgstr "Durée"
-
-#: views/modals/area.html:74
-#, fuzzy
-#| msgid "Cooler on"
-msgid "Power on"
-msgstr "Cooler on"
-
-#: views/modals/area.html:82
-#, fuzzy
-#| msgid "Duration"
-msgid "Duration off"
-msgstr "Durée"
-
-#: views/modals/area.html:90
-#, fuzzy
-#| msgid "Cooler on"
-msgid "Power off"
-msgstr "Cooler on"
-
-#: views/modals/area.html:102 views/modals/area.html:280
-#: views/modals/webcam.html:89
+#: views/modals/area.html:61 views/modals/area.html:285
+#: views/modals/area.html:490 views/modals/webcam.html:89
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: views/modals/area.html:103 views/modals/area.html:281
+#: views/modals/area.html:62 views/modals/area.html:287
+#: views/modals/area.html:492
 msgid "Timer"
 msgstr "Minuterie"
 
-#: views/modals/area.html:104 views/modals/area.html:283
+#: views/modals/area.html:63 views/modals/area.html:288
+#: views/modals/area.html:494
 #, fuzzy
 #| msgid "Water tank height"
 msgid "Weather day/night"
 msgstr "Hauteur du réservoir d'eau"
 
-#: views/modals/area.html:105 views/modals/area.html:284
+#: views/modals/area.html:64 views/modals/area.html:289
+#: views/modals/area.html:495
 #, fuzzy
 #| msgid "Water tank height"
 msgid "Weather night/day"
 msgstr "Hauteur du réservoir d'eau"
 
-#: views/modals/area.html:108
+#: views/modals/area.html:67
 msgid ""
 "Select the mode of this area. This will change the timing and durations of "
 "the relays."
 msgstr ""
 
-#: views/modals/area.html:116
+#: views/modals/area.html:75 views/modals/area.html:318
 #, fuzzy
 #| msgid "Maximum lights hours"
 msgid "Maximum hours"
 msgstr "Heures maximales de lumières"
 
-#: views/modals/area.html:119
+#: views/modals/area.html:78 views/modals/area.html:321
 msgid ""
 "The maximum amount of hours that the lights are turned on. This is only "
 "valid in weather mode. When the day is longer then this maximum value, the "
 "day will be shortend to this maximum value."
 msgstr ""
 
-#: views/modals/area.html:128
+#: views/modals/area.html:87 views/modals/area.html:330
 #, fuzzy
 #| msgid "Minimum light hours"
 msgid "Minimum hours"
 msgstr "Heures de lumière minimales"
 
-#: views/modals/area.html:131
+#: views/modals/area.html:90 views/modals/area.html:333
 msgid ""
 "The minimum amount of hours that the lights are turned on. This is only "
 "valid in weather mode. When the day is shorter then this minimum value, the "
 "day will be extended to this minimum value."
 msgstr ""
 
-#: views/modals/area.html:140
+#: views/modals/area.html:99 views/modals/area.html:342
 msgid "Hours shift"
 msgstr "Décalage horaire"
 
-#: views/modals/area.html:143
+#: views/modals/area.html:102 views/modals/area.html:345
 msgid ""
 "The amount of time to shift in hours based on the sun rise time. Negative "
 "values will make the day start earlier."
 msgstr ""
 
-#: views/modals/area.html:146
+#: views/modals/area.html:105 views/modals/area.html:348
 msgid "Enter a value between -12 and 12."
 msgstr ""
 
-#: views/modals/area.html:153
+#: views/modals/area.html:112 views/modals/area.html:286
+#: views/modals/area.html:355 views/modals/area.html:491
 #, fuzzy
 #| msgid "Minimum light hours"
 msgid "Main lights"
 msgstr "Heures de lumière minimales"
 
-#: views/modals/area.html:158
+#: views/modals/area.html:117 views/modals/area.html:360
+#: views/modals/playlist.html:35 views/modals/playlist.html:47
 msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
 msgstr ""
 
-#: views/modals/area.html:166
+#: views/modals/area.html:125 views/modals/area.html:376
 msgid ""
 "Below you can per select the relays and timer settings per period daytime "
 "and nighttime."
 msgstr ""
 
-#: views/modals/area.html:169
+#: views/modals/area.html:128 views/modals/area.html:379
 #, fuzzy
 #| msgid "Door settings"
 msgid "Day settings"
 msgstr "Paramètres de porte"
 
-#: views/modals/area.html:169
+#: views/modals/area.html:128 views/modals/area.html:379
 #, fuzzy
 #| msgid "Switch settings"
 msgid "Night settings"
 msgstr "Paramètres des commutateurs"
 
-#: views/modals/area.html:176 views/modals/area.html:235
-#: views/modals/area.html:338 views/modals/area.html:410
+#: views/modals/area.html:135 views/modals/area.html:194
+#: views/modals/area.html:386 views/modals/area.html:445
+#: views/modals/area.html:549 views/modals/area.html:621
 #, fuzzy
 #| msgid "Date and time"
 msgid "Begin time"
 msgstr "Date et heure"
 
-#: views/modals/area.html:179
+#: views/modals/area.html:138 views/modals/area.html:389
 msgid "The time of the day when the relays are toggled on each day."
 msgstr ""
 
-#: views/modals/area.html:182 views/modals/area.html:194
-#: views/modals/area.html:206
+#: views/modals/area.html:141 views/modals/area.html:153
+#: views/modals/area.html:165 views/modals/area.html:392
+#: views/modals/area.html:404 views/modals/area.html:416
 msgid "Enter a valid time of the day."
 msgstr ""
 
-#: views/modals/area.html:188 views/modals/area.html:241
-#: views/modals/area.html:344 views/modals/area.html:416
+#: views/modals/area.html:147 views/modals/area.html:200
+#: views/modals/area.html:398 views/modals/area.html:451
+#: views/modals/area.html:555 views/modals/area.html:627
 #, fuzzy
 #| msgid "Date and time"
 msgid "End time"
 msgstr "Date et heure"
 
-#: views/modals/area.html:191
+#: views/modals/area.html:150 views/modals/area.html:401
 msgid "The time of the day when the relays are toggled off each day."
 msgstr ""
 
-#: views/modals/area.html:200 views/modals/area.html:247
-#: views/modals/area.html:350 views/modals/area.html:422
+#: views/modals/area.html:159 views/modals/area.html:206
+#: views/modals/area.html:410 views/modals/area.html:457
+#: views/modals/area.html:561 views/modals/area.html:633
 #, fuzzy
 #| msgid "Duration"
 msgid "On duration"
 msgstr "Durée"
 
-#: views/modals/area.html:203
+#: views/modals/area.html:162 views/modals/area.html:413
 msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full day."
 msgstr ""
 
-#: views/modals/area.html:212 views/modals/area.html:253
-#: views/modals/area.html:356 views/modals/area.html:428
+#: views/modals/area.html:171 views/modals/area.html:212
+#: views/modals/area.html:422 views/modals/area.html:463
+#: views/modals/area.html:567 views/modals/area.html:639
 #, fuzzy
 #| msgid "Timer off duration"
 msgid "Off duration"
 msgstr "Durée de la minuterie éteinte"
 
-#: views/modals/area.html:296
+#: views/modals/area.html:241
+msgid "Relay"
+msgstr ""
+
+#: views/modals/area.html:247
+#, fuzzy
+#| msgid "Duration"
+msgid "Duration on"
+msgstr "Durée"
+
+#: views/modals/area.html:255
+#, fuzzy
+#| msgid "Cooler on"
+msgid "Power on"
+msgstr "Cooler on"
+
+#: views/modals/area.html:263
+#, fuzzy
+#| msgid "Duration"
+msgid "Duration off"
+msgstr "Durée"
+
+#: views/modals/area.html:271
+#, fuzzy
+#| msgid "Cooler on"
+msgid "Power off"
+msgstr "Cooler on"
+
+#: views/modals/area.html:292
+msgid ""
+"Select the mode of this area. This will change the timing and durations of "
+"the players."
+msgstr ""
+
+#: views/modals/area.html:301
+msgid "Soundcard"
+msgstr "Carte son"
+
+#: views/modals/area.html:306
+#, fuzzy
+#| msgid "Holds the soundcard that is used for playing audio."
+msgid "Select the soundcard that is used for this enclosure."
+msgstr "Contient la carte son utilisée pour la lecture audio."
+
+#: views/modals/area.html:507 views/modals/playlist.html:23
+#: views/playlists.html:27 views/playlists.html:40
 msgid "Volume"
 msgstr "Volume"
 
-#: views/modals/area.html:302
+#: views/modals/area.html:513
 msgid "Height"
 msgstr "Hauteur"
 
-#: views/modals/area.html:308 views/modals/sensor.html:99
+#: views/modals/area.html:519 views/modals/sensor.html:99
 msgid "Offset"
 msgstr ""
 
-#: views/modals/area.html:314
+#: views/modals/area.html:525
 msgid "Day/night difference"
 msgstr "Différence jour/nuit"
 
-#: views/modals/area.html:320
+#: views/modals/area.html:531
 #, fuzzy
 #| msgid "Day/night difference"
 msgid "Day/night source"
 msgstr "Différence jour/nuit"
 
-#: views/modals/area.html:322
+#: views/modals/area.html:533
 msgid "Lights"
 msgstr "Eclairage"
 
-#: views/modals/area.html:331
+#: views/modals/area.html:542
 msgid "High alarm"
 msgstr ""
 
-#: views/modals/area.html:331
+#: views/modals/area.html:542
 msgid "Low alarm"
 msgstr ""
 
-#: views/modals/area.html:362 views/modals/area.html:434
+#: views/modals/area.html:573 views/modals/area.html:645
 #, fuzzy
 #| msgid "Cooler on"
 msgid "Power on time"
 msgstr "Cooler on"
 
-#: views/modals/area.html:368 views/modals/area.html:440
+#: views/modals/area.html:579 views/modals/area.html:651
 #, fuzzy
 #| msgid "date/time"
 msgid "Settle time"
 msgstr "date/heure"
 
-#: views/modals/area.html:374 views/modals/area.html:446
+#: views/modals/area.html:585 views/modals/area.html:657
 #, fuzzy
 #| msgid "Lights"
 msgid "Light status"
 msgstr "Eclairage"
 
-#: views/modals/area.html:376 views/modals/area.html:386
-#: views/modals/area.html:448 views/modals/area.html:458
+#: views/modals/area.html:587 views/modals/area.html:597
+#: views/modals/area.html:659 views/modals/area.html:669
 #: views/modals/webcam.html:109 views/modals/webcam.html:121
 msgid "Ignored"
 msgstr ""
 
-#: views/modals/area.html:377 views/modals/area.html:449
+#: views/modals/area.html:588 views/modals/area.html:660
 msgid "On"
 msgstr "On"
 
-#: views/modals/area.html:378 views/modals/area.html:450
+#: views/modals/area.html:589 views/modals/area.html:661
 msgid "Off"
 msgstr "Non Actif"
 
-#: views/modals/area.html:384 views/modals/area.html:456
+#: views/modals/area.html:595 views/modals/area.html:667
 msgid "Door status"
 msgstr "Statut de la porte"
 
-#: views/modals/area.html:387 views/modals/area.html:459
+#: views/modals/area.html:598 views/modals/area.html:670
 msgid "Open"
 msgstr "Ouvert"
 
-#: views/modals/area.html:388 views/modals/area.html:460
+#: views/modals/area.html:599 views/modals/area.html:671
 msgid "Closed"
 msgstr "Fermé"
 
-#: views/modals/area.html:481
+#: views/modals/area.html:692
 msgid "Dimmer on duration"
 msgstr "Dimmer ouvert durée"
 
-#: views/modals/area.html:485
+#: views/modals/area.html:696
 #, fuzzy
 #| msgid "Dimmer off duration"
 msgid "Dimmer of duration"
 msgstr "Dimmer éteint durée"
 
-#: views/modals/area.html:495
+#: views/modals/area.html:706
 msgid "Set the dimmer times for going on and off. Max duration is 100 mimutes."
 msgstr ""
 
-#: views/modals/area.html:502
+#: views/modals/area.html:713
 msgid "Relay delay on"
 msgstr ""
 
-#: views/modals/area.html:506
+#: views/modals/area.html:717
 msgid "Relay delay off"
 msgstr ""
 
-#: views/modals/area.html:514
+#: views/modals/area.html:725
 msgid ""
 "Select the percentage when the light should go on/off based on the dimmer "
 "timer."
 msgstr ""
 
-#: views/modals/area.html:521
+#: views/modals/area.html:733
 msgid "Step change"
 msgstr ""
 
@@ -1102,6 +1036,70 @@ msgstr "Description"
 #: views/modals/enclosure.html:42
 msgid "Doors"
 msgstr "Portes"
+
+#: views/modals/event.html:10 views/modals/event.html:20
+msgid "Event"
+msgstr ""
+
+#: views/modals/event.html:16 views/settings.html:189
+msgid "Title"
+msgstr "Titre"
+
+#: views/modals/event.html:26
+msgid "Date"
+msgstr ""
+
+#: views/modals/event.html:32
+#, fuzzy
+#| msgid "Repeat"
+msgid "Repeat every"
+msgstr "Répéter"
+
+#: views/modals/event.html:35
+#, fuzzy
+#| msgid "Repeat"
+msgid "No repeat"
+msgstr "Répéter"
+
+#: views/modals/event.html:36
+msgid "Days"
+msgstr ""
+
+#: views/modals/event.html:37
+#, fuzzy
+#| msgid "Week"
+msgid "Weeks"
+msgstr "Semaine"
+
+#: views/modals/event.html:38
+#, fuzzy
+#| msgid "Month"
+msgid "Months"
+msgstr "Mois"
+
+#: views/modals/event.html:39
+#, fuzzy
+#| msgid "Year"
+msgid "Years"
+msgstr "Année"
+
+#: views/modals/playlist.html:11
+#, fuzzy
+#| msgid "Webcam settings"
+msgid "Playlist settings"
+msgstr "Paramètres de la webcam"
+
+#: views/modals/playlist.html:30 views/playlists.html:28
+#: views/playlists.html:41
+msgid "Shuffle"
+msgstr "Mélanger"
+
+#: views/modals/playlist.html:42 views/playlists.html:29
+#: views/playlists.html:42
+#, fuzzy
+#| msgid "Repeat"
+msgid "Repeat"
+msgstr "Répéter"
 
 #: views/modals/relay.html:11
 #, fuzzy
@@ -1372,6 +1370,12 @@ msgstr "Dernière Mise à jour"
 #: views/modals/webcam.html:170
 msgid "Preview"
 msgstr "Aperçu"
+
+#: views/playlists.html:26 views/playlists.html:39
+#, fuzzy
+#| msgid "Files"
+msgid "# Files"
+msgstr "Fichiers"
 
 #: views/relays.html:9
 msgid "No relays"
@@ -1697,6 +1701,10 @@ msgid "Add new webcam"
 msgstr "Ajouter une nouvelle webcam"
 
 #: Missing text string
+msgid "Action could not be satisfied"
+msgstr "L'action n'a pas pu être satisfaite"
+
+#: Missing text string
 #, fuzzy
 #| msgid "Action"
 msgid "Action succeeded"
@@ -1713,8 +1721,22 @@ msgid "Add new area"
 msgstr "Ajouter une nouvelle webcam"
 
 #: Missing text string
+#, fuzzy
+#| msgid "Add new webcam"
+msgid "Add new playlist"
+msgstr "Ajouter une nouvelle webcam"
+
+#: Missing text string
+msgid "A new replacement reminder is created"
+msgstr ""
+
+#: Missing text string
 msgid "Audio file is being processed. Please wait..."
 msgstr ""
+
+#: Missing text string
+msgid "Audio file is deleted"
+msgstr "Le fichier audio est supprimé"
 
 #: Missing text string
 #, fuzzy
@@ -1729,10 +1751,8 @@ msgid "calibration"
 msgstr "Durée"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Channels"
-msgid "Changed state of relay"
-msgstr "Canaux"
+msgid "Changed relay {name} to {state}"
+msgstr ""
 
 #: Missing text string
 #, fuzzy
@@ -1755,22 +1775,8 @@ msgid "CPU Temp."
 msgstr "Température du CPU"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Heater"
-msgid "created"
-msgstr "Chauffage"
-
-#: Missing text string
 msgid "Current value"
 msgstr "Valeur actuelle"
-
-#: Missing text string
-msgid "Data could not be saved"
-msgstr "Les données n'ont pas pu être sauvegardées"
-
-#: Missing text string
-msgid "Data saved"
-msgstr "Données enregistrées"
 
 #: Missing text string
 #, fuzzy
@@ -1792,6 +1798,12 @@ msgstr ""
 #, fuzzy
 #| msgid "Delete file"
 msgid "Delete enclosure"
+msgstr "Supprimer le fichier"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Delete file"
+msgid "Delete playlist"
 msgstr "Supprimer le fichier"
 
 #: Missing text string
@@ -1825,6 +1837,12 @@ msgstr ""
 #: Missing text string
 msgid "Edit enclosure"
 msgstr ""
+
+#: Missing text string
+#, fuzzy
+#| msgid "Audio playlist"
+msgid "Edit playlist"
+msgstr "Playlist audio"
 
 #: Missing text string
 msgid "Edit relay"
@@ -1885,6 +1903,10 @@ msgid "Enter search terms"
 msgstr "Adresse"
 
 #: Missing text string
+msgid "Enter some information about this event"
+msgstr ""
+
+#: Missing text string
 msgid "Enter the amount"
 msgstr ""
 
@@ -1917,10 +1939,14 @@ msgid "Enter width"
 msgstr "Date et heure"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Error!"
-msgid "Error"
+msgid "Error!"
 msgstr "Erreur!"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Calendar"
+msgid "Event title"
+msgstr "Calendrier"
 
 #: Missing text string
 #, fuzzy
@@ -1945,6 +1971,14 @@ msgstr "capteur de pH"
 #| msgid "error"
 msgid "Form error"
 msgstr "erreur"
+
+#: Missing text string
+msgid "Hardware is replaced"
+msgstr ""
+
+#: Missing text string
+msgid "Hardware replacement is logged in the calendar"
+msgstr ""
 
 #: Missing text string
 #, fuzzy
@@ -1987,6 +2021,10 @@ msgid "Not all required fields are entered correctly."
 msgstr "Les champs obligatoires sont marqués avec '%s'."
 
 #: Missing text string
+msgid "OK!"
+msgstr "OK!"
+
+#: Missing text string
 #, fuzzy
 #| msgid "OK!"
 msgid "OK"
@@ -2005,6 +2043,14 @@ msgstr ""
 #: Missing text string
 msgid "Place some text here"
 msgstr ""
+
+#: Missing text string
+msgid "Player command could ot be executed!"
+msgstr "La commande du lecteur n'a pas pu être exécutée!"
+
+#: Missing text string
+msgid "Player command executed!"
+msgstr "Commande du lecteur exécutée!"
 
 #: Missing text string
 #, fuzzy
@@ -2047,6 +2093,12 @@ msgstr "Choisir une option"
 #: Missing text string
 #, fuzzy
 #| msgid "Select an option"
+msgid "Select amount"
+msgstr "Choisir une option"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Select an option"
 msgid "Select an area type"
 msgstr "Choisir une option"
 
@@ -2077,8 +2129,20 @@ msgstr "Langue"
 #: Missing text string
 #, fuzzy
 #| msgid "Select an option"
+msgid "Select a soundcard"
+msgstr "Choisir une option"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Select an option"
 msgid "Select a state"
 msgstr "Choisir une option"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Delete file"
+msgid "Select audio files"
+msgstr "Supprimer le fichier"
 
 #: Missing text string
 #, fuzzy
@@ -2101,6 +2165,18 @@ msgstr "Matériel"
 #| msgid "Language"
 msgid "Select language"
 msgstr "Langue"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Temperature sensors"
+msgid "Select period"
+msgstr "Capteurs de température"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Temperature sensors"
+msgid "Select playlists"
+msgstr "Capteurs de température"
 
 #: Missing text string
 #, fuzzy
@@ -2163,6 +2239,10 @@ msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI"
 
 #: Missing text string
+msgid "Success!"
+msgstr "Réussite!"
+
+#: Missing text string
 #, fuzzy
 #| msgid "More information"
 msgid "Toggle relay"
@@ -2204,9 +2284,42 @@ msgstr "Date de dépôt"
 msgid "Weather data source url"
 msgstr ""
 
-#: Missing text string
-msgid "Your changes are saved"
-msgstr "Vos modifications sont enregistrées"
+#~ msgid "File is not uploaded!"
+#~ msgstr "Le fichier n'a pas été téléchargé !"
+
+#, fuzzy
+#~| msgid "File is not uploaded!"
+#~ msgid "File '%s' is uploaded"
+#~ msgstr "Le fichier n'a pas été téléchargé !"
+
+#, fuzzy
+#~| msgid "Delete file"
+#~ msgid "Duplicate file '%s'"
+#~ msgstr "Supprimer le fichier"
+
+#, fuzzy
+#~| msgid "Channels"
+#~ msgid "Changed state of relay"
+#~ msgstr "Canaux"
+
+#, fuzzy
+#~| msgid "Heater"
+#~ msgid "created"
+#~ msgstr "Chauffage"
+
+#~ msgid "Data could not be saved"
+#~ msgstr "Les données n'ont pas pu être sauvegardées"
+
+#~ msgid "Data saved"
+#~ msgstr "Données enregistrées"
+
+#, fuzzy
+#~| msgid "Error!"
+#~ msgid "Error"
+#~ msgstr "Erreur!"
+
+#~ msgid "Your changes are saved"
+#~ msgstr "Vos modifications sont enregistrées"
 
 #~ msgid "Watertank"
 #~ msgstr "Réservoir d'eau"
@@ -2714,9 +2827,6 @@ msgstr "Vos modifications sont enregistrées"
 #~ msgid "Holds the external calendar url."
 #~ msgstr "Indiquer le chemin (URL) vers le calendrier externe"
 
-#~ msgid "Holds the soundcard that is used for playing audio."
-#~ msgstr "Contient la carte son utilisée pour la lecture audio."
-
 #~ msgid ""
 #~ "Holds the amount of power in Wattage that the Raspberry PI uses including "
 #~ "all USB equipment."
@@ -2862,14 +2972,8 @@ msgstr "Vos modifications sont enregistrées"
 #~ msgid "Stop"
 #~ msgstr "Stop"
 
-#~ msgid "Shuffle"
-#~ msgstr "Mélanger"
-
 #~ msgid "Submit"
 #~ msgstr "Envoyer"
-
-#~ msgid "Audio playlist"
-#~ msgstr "Playlist audio"
 
 #~ msgid "new"
 #~ msgstr "nouveau"
@@ -4212,9 +4316,6 @@ msgstr "Vos modifications sont enregistrées"
 #~ msgid "Admin name"
 #~ msgstr "Nom de l'administrateur"
 
-#~ msgid "Soundcard"
-#~ msgstr "Carte son"
-
 #~ msgid "External calendar"
 #~ msgstr "Calendrier externe"
 
@@ -4278,11 +4379,6 @@ msgstr "Vos modifications sont enregistrées"
 
 #~ msgid "Avatar"
 #~ msgstr "Avatar"
-
-#, fuzzy
-#~| msgid "Calendar"
-#~ msgid "Calendar title"
-#~ msgstr "Calendrier"
 
 #~ msgid "Click to change image"
 #~ msgstr "Cliquez pour changer d'image"
