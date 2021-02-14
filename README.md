@@ -74,8 +74,6 @@ And all this is controlled with a nice webinterface based on AdminLTE 3 with Boo
   - Variable day and night difference for min and max temperature
 - Watertank level control based on ultrasonic sound range sensors or volume sensors
 - Weather forecast from external source for lighting schema
-  - Supports https://yr.no
-  - Supports https://wunderground.com
   - Supports https://openweathermap.org
 - Temperatures in Celsius or Fahrenheit
 - Distances in centimetres or inches
@@ -115,7 +113,7 @@ The software has support for the following languages:
 Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations) <a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
 
 ## Installation
-The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/). For now the Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
+The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/). For now the Desktop/Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
 It is possible to use USB or SSD drives to speed things up: https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb
 1. Get a working Raspberry Pi and login as user 'pi'
   `ssh pi@[raspberry_ip]`
@@ -126,7 +124,7 @@ It is possible to use USB or SSD drives to speed things up: https://www.tomshard
 4. Enter the new TerrariumPI folder
   `cd TerrariumPI`
 5. Run the installer script and wait
-  `sudo ./install.sh 3`
+  `sudo ./install.sh`
 6. Reboot Raspberry PI to get all the needed modules loaded
   `sudo reboot`
 7. Go to the webinterface at http://[raspberry_ip]:8090
@@ -144,14 +142,14 @@ This updating is based on that the software is installed with the steps in the I
 3. Update the new code with git
   `git pull`
 4. Re-run the installation script in order to update software dependencies
-  `sudo ./install.sh 3`
+  `sudo ./install.sh`
 4. Restart TerrariumPI according to: https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-restart-terrariumpi
 
 Now **clear your browser cache** and reload the webinterface. A brand new version should be running.
 
 ## Hardware
 This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimun and tested hardware is
-- Raspberry PI with at least **4GB SD card**
+- Raspberry PI with at least **4GB SD card** running [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/).
   - Pi 2 (At own risk/no support)
   - Pi 3 (At own risk/no support)
   - Zero (At own risk/no support)
