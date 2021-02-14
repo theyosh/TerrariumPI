@@ -12,6 +12,9 @@ import copy
 class terrariumEnclosure(object):
 
   def __init__(self, id, name, engine, doors = [], areas = []):
+    self.__main_lights = None
+
+
     self.id          = id
     self.name        = name
     self.engine      = engine
@@ -53,17 +56,20 @@ class terrariumEnclosure(object):
     return True
 
   def __light_status(self):
-    for area_id in self.areas:
-      if 'lights' == self.areas[area_id].type and self.areas[area_id].setup.get('main_lights', False):
-        return self.areas[area_id].state['powered']
+    if self.__main_lights is None:
+      return True
 
-    return False
+    return self.main_lights.state['day']['powered']
 
   def load_areas(self, data):
     for area in data:
-      area_setup = copy.deepcopy(area.setup)
+      if area.type != 'lights':
+        continue
 
-      self.add(terrariumArea(
+      area_setup = copy.deepcopy(area.setup)
+      area_setup['is_day'] = area.state.get('is_day',None)
+
+      new_areay = self.add(terrariumArea(
         str(area.id),
         self,
         area.type,
@@ -71,6 +77,29 @@ class terrariumEnclosure(object):
         area.mode,
         area_setup
       ))
+
+      if new_areay.setup.get('main_lights', False):
+        self.__main_lights = str(area.id)
+
+    for area in data:
+      if area.type == 'lights':
+        continue
+
+      area_setup = copy.deepcopy(area.setup)
+      area_setup['is_day'] = area.state.get('is_day',None)
+
+      new_areay = self.add(terrariumArea(
+        str(area.id),
+        self,
+        area.type,
+        area.name,
+        area.mode,
+        area_setup
+      ))
+
+  @property
+  def main_lights(self):
+    return self.areas[self.__main_lights]
 
   def add(self, area):
     if area.id not in self.areas:

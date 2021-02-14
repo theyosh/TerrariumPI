@@ -176,18 +176,28 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{ url_for('page', page='playlists')}}" class="nav-link">
-                <i class="fas fa-play nav-icon"></i>
-                <p>{{ _('Playlists') }}</p>
-              </a>
-            </li>
+
             <li class="nav-item">
               <a href="{{ url_for('page', page='audio_files')}}" class="nav-link">
                 <i class="fas fa-file-audio nav-icon"></i>
                 <p>{{ _('Files') }}</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ url_for('page', page='playlists')}}" class="nav-link">
+                <i class="fas fa-play nav-icon"></i>
+                <p>{{ _('Playlists') }}</p>
+              </a>
+            </li>
+
+            <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+              <a href="#" class="nav-link" title="{{ _('Add new playlist') }}" data-toggle="modal" data-target="#modal-playlist-setup">
+                <i class="fas fa-plus nav-icon"></i>
+                <p>{{ _('New playlist') }}</p>
+              </a>
+            </li>
+
+
           </ul>
         </li>
         <li class="nav-item has-treeview">

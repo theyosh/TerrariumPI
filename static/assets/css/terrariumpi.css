@@ -225,13 +225,15 @@ select[readonly].select2-hidden-accessible + .select2-container .select2-selecti
 select[readonly].select2-hidden-accessible + .select2-container .select2-selection__clear {
   display: none;
 }
-
+/*
 canvas.relay {
   background-color: #f8f9fa;
 }
 canvas.relay:hover {
   background-color: #e9ecef;
 }
+*/
+
 .disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -424,3 +426,11 @@ video.leaflet-image-layer {
 .slider-selection {
   background: #BABABA;
 }
+
+input.dial {
+  z-index: 30;
+  left: 35%;
+  top: 35%;
+  margin: 0px !important
+}
+

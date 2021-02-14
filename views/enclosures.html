@@ -18,8 +18,8 @@
       <div class="col" id="enclosure_list">
         <script type="text/html" id="area_table_row">
           <tr>
-            <td data-content="name"></td>
-            <td data-content="type"></td>
+            <td data-content="name" ></td>
+            <td data-content="type" ></td>
             <td data-content="mode"></td>
             <td> .. </td>
             {% if authenticated %}
@@ -101,17 +101,12 @@
     jQuery.get('{{ url_for("api:enclosure_list") }}',function(data){
       data = data.data;
 
-      if (data.length > 0) {
-        jQuery('.zero_message').remove();
-      } else {
-        jQuery('.zero_message').show();
-      }
+      (data.length > 0 ? jQuery('.zero_message').remove() : jQuery('.zero_message').show());
 
       jQuery.each(data,function(counter,enclosure) {
 
         enclosure.edit_link   = '{{ url_for('api:enclosure_update', enclosure='_id_') }}'.replace('_id_',enclosure.id);
         enclosure.delete_link = '{{ url_for('api:enclosure_delete', enclosure='_id_') }}'.replace('_id_',enclosure.id);
-
         jQuery('#enclosure_list').loadTemplate(jQuery('#enclosure_template'), enclosure, {
           append: true,
         });

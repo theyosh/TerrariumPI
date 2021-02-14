@@ -48,6 +48,10 @@ icalevents
 psutil
 packaging
 
+# Audio
+pyalsaaudio
+git+https://github.com/gbstack/ffprobe-python
+
 # MOTD packages
 pyfancy
 pyfiglet
@@ -60,5 +64,4 @@ luma.oled
 
 # API
 pony
-git+https://github.com/gbstack/ffprobe-python
 apispec-webframeworks

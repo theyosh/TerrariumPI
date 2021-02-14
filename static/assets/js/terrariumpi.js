@@ -327,6 +327,7 @@ function template_sensor_type_color(type) {
       break;
     case 'light':
     case 'lights':
+    case 'main lights':
     case 'uvi':
     case 'uva':
     case 'uvb':
@@ -353,6 +354,9 @@ function template_sensor_type_color(type) {
     case 'motion':
       return 'fa-walking'
       break;
+    case 'audio':
+      return 'text-success'
+      break;
   }
 }
 
@@ -373,6 +377,9 @@ function template_sensor_type_icon(type) {
     case 'light':
     case 'lights':
       return 'fa-lightbulb'
+      break;
+    case 'main lights':
+      return 'fa-sun'
       break;
     case 'ph':
       return 'fa-flask'
@@ -410,6 +417,9 @@ function template_sensor_type_icon(type) {
       break;
     case 'watertank':
       return 'fa-faucet'
+      break;
+    case 'audio':
+      return 'fa-headphones'
       break;
   }
 }
@@ -1801,9 +1811,19 @@ function websocket_init(reconnect) {
         break;
 
       case 'relay':
-        jQuery('button#relay_' + message.data.id + ' i').toggleClass('text-success', message.data.value == 100);
+        let relay = jQuery('#relay_' + message.data.id);
+        if (relay.length == 1) {
+          if (relay.hasClass('dial')) {
+            //console.log('Update dimmer to value: ', message.data.value);
+            relay.data('update',0);
+            relay.val(message.data.value).trigger('change');
+            relay.data('update',1);
+          } else {
+//            console.log('Update normal relay');
+            relay.find('i').toggleClass('text-success', message.data.value == 100);
+          }
+        }
         break;
-
 
       case 'gauge_update':
         if (window.terrariumPI.gauges['gauge_' + message.data.id]) {
@@ -2005,6 +2025,8 @@ jQuery(function () {
 
   // Fix the menu links so they will load through jQuery AJAX
   fix_menu_links();
+
+
 
   jQuery.addTemplateFormatter('prefixer',
     function(value, prefix) {

@@ -59,7 +59,7 @@
                     {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit relay') }} "} ]'>
                       <i class="fas fa-wrench mr-1"></i> {{ _('Settings') }}
                     </a>
-                    <a href="#replace_hardware" data-id="id" class="dropdown-item" data-template-bind='[
+                    <a href="#replace_hardware" data-id="id" class="dropdown-item" data-toggle="modal" data-target="#modal-calendar-event" data-template-bind='[
                     {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Replace hardware') }} "} ]'>
                       <i class="fas fa-tools mr-1"></i> {{ _('Replace hardware') }}
                     </a>
@@ -94,7 +94,7 @@
                   <button type="button" data-title="toggle_title" class="btn btn-default mt-2 mb-2 text-secondary" data-id="relay" disabled="disabled">
                     <i class="fas fa-power-off" data-class="powered" style="font-size: 9rem;"></i>
                   </button>
-                  <input type="text" class="dial" value="0" data-width="170" data-height="170" data-value="value" data-id="dimmer" data-min="0" data-max="100" data-angleArc="290" data-angleOffset="35">
+                  <input type="text" class="dial" value="0" data-width="165" data-height="165" data-value="value" data-id="dimmer" data-min="0" data-max="100" data-angleArc="290" data-angleOffset="35">
                 </div>
                 <div class="col-12 col-sm-12 col-md-9 col-lg-10">
                   <div class="overlay">
@@ -111,6 +111,15 @@
   </div>
 </section>
 <script>
+  {% if authenticated %}
+  function toggle_relay(toggle_url) {
+    jQuery.post(toggle_url,function(data){
+      toastr.success('{{ _('Changed relay {name} to {state}') }}'.replace('{name}',data.name).replace('{state}',(data.dimmer ? data.value + '%' : (data.value == 0 ? 'off' : 'on'))), '{{ _('OK') }}');
+    }).fail(function(response) {
+      toastr.error('{{ _('Could not change the relay state of') }}: ' + response.message, '{{ _('Change error') }}');
+    });
+  }
+  {% endif %}
   jQuery(function () {
     jQuery.get('{{ url_for("api:relay_list") }}',function(data) {
       data = data.data;
@@ -145,32 +154,25 @@
         bgColor  : get_template_color('text-secondary',false,true),
         readOnly : {% if authenticated %}false{%else%}true{%endif%},
         {% if authenticated %}
-        'release' : function (value) {
-          let old_value = this.val();
-          let id = jQuery(this.i[0]).attr('id').replace('relay_','');
-          let toggle_url = '{{ url_for("api:relay_action", relay="_id_", action="toggle") }}'.replace('_id_',id).replace('toggle',value);
-
-          if (old_value != value) {
-            jQuery.post(toggle_url,function(data){
-              toastr.success('{{ _('Changed state of relay') }}: ' + data.name, '{{ _('OK') }}')
-            }).fail(function(response) {
-              toastr.error('{{ _('Could not change the relay state of') }}: ' + response.message, '{{ _('Change error') }}')
-            });
+        release : function(event){
+          let knob = jQuery(this.i[0]);
+          // Bug in knob. When trigger a change, the release is fired.
+          // So we check if the data value 'update' is 1 if the change should be fired to the backend
+          if (1 == knob.data('update')) {
+            let old_value = this.val();
+            let value = Math.round(event);
+            if (old_value != value) {
+              toggle_relay('{{ url_for("api:relay_action", relay="_id_", action="toggle") }}'.replace('_id_',knob.attr('id').replace('relay_','')).replace('toggle',value));
+            }
           }
         },
         {% endif %}
       });
 
-      jQuery('input.dial').siblings('canvas').addClass('border rounded p-2 relay{% if not authenticated %} disabled{% endif %}');
-
+      jQuery('input.dial').data('update',1).prop('readonly',true).siblings('canvas').addClass('btn btn-default m-2 p-2 relay{% if not authenticated %} disabled{% endif %}');
       {% if authenticated %}
       jQuery('button[id^="relay_"]').off('click').on('click',function() {
-        let toggle_url = '{{ url_for("api:relay_action", relay="_id_", action="toggle") }}'.replace('_id_',this.id.replace('relay_',''));
-        jQuery.post(toggle_url,function(data){
-          toastr.success('{{ _('Changed state of relay') }}: ' + data.name, '{{ _('OK') }}')
-        }).fail(function(response) {
-          toastr.error('{{ _('Could not change the relay state of') }}: ' + response.message, '{{ _('Change error') }}')
-        });
+        toggle_relay('{{ url_for("api:relay_action", relay="_id_", action="toggle") }}'.replace('_id_',this.id.replace('relay_','')));
       }).prop('disabled','');
       {% endif %}
     });

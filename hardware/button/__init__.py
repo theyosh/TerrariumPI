@@ -2,7 +2,6 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from abc import abstractmethod
 from pathlib import Path
 import inspect
 import pkgutil
@@ -10,6 +9,10 @@ from importlib import import_module
 import sys
 from hashlib import md5
 import pigpio
+import RPi.GPIO as GPIO
+import threading
+
+from gevent import sleep
 
 # pip install retry
 from retry import retry
@@ -76,23 +79,48 @@ class terrariumButton(object):
 
   def __init__(self, id, _, address, name = '', callback = None):
     self._device = {'device'   : None,
-                    'button'   : None,
+#                    'button'   : None,
                     'id'       : None,
                     'address'  : None,
                     'name'     : None,
-                    'callback' : None,
+                    'callback' : callback,
                     'state'    : None}
 
-    self.id = id
-    self.address = address
-    self.name = name
+    self._checker = {
+      'running' : False,
+      'thread'  : None
+    }
 
-    self._device['callback'] = callback
+    self.id      = id
+    self.address = address
+    self.name    = name
 
     self.load_hardware()
 
-#    if self._device['callback'] is not None:
-#      self._device['callback'](self,int(self._device['state']))
+  def _run(self):
+    self._checker['running'] = True
+    while self._checker['running']:
+      new_state = self._get_state()
+      if new_state != self._device['state']:
+        self._device['state'] = new_state
+        if self._device['callback'] is not None:
+          self._device['callback'](self.id, self._device['state'])
+
+      sleep(.1)
+
+  def _get_state(self):
+    return self.PRESSED if GPIO.input(self._device['device']) else self.RELEASED
+
+  def load_hardware(self):
+    address = self._address
+    self._device['device'] = terrariumUtils.to_BCM_port_number(address[0])
+    GPIO.setup(self._device['device'], GPIO.IN)  # Data in
+    self._load_hardware()
+    self._checker['thread'] = threading.Thread(target=self._run)
+    self._checker['thread'].start()
+
+
+
 
   def _pressed(self):
     self._device['state'] = self.PRESSED
@@ -103,6 +131,8 @@ class terrariumButton(object):
     self._device['state'] = self.RELEASED
     if self._device['callback'] is not None:
       self._device['callback'](self.id, self.RELEASED)
+
+
 
   @property
   def id(self):
@@ -147,15 +177,14 @@ class terrariumButton(object):
   def pressed(self):
     return self._device['state'] == self.PRESSED
 
-  def calibrate(self):
-    pass
-
-  @abstractmethod
-  def load_hardware(self):
+  def calibrate(self,calibration_data):
     pass
 
   def update(self):
     return self.state
 
   def stop(self):
-    self._device['device'].close()
+    self._checker['running'] = False
+    self._checker['thread'].join()
+
+    GPIO.cleanup(self._device['device'])

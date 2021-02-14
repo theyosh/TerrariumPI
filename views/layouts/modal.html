@@ -84,7 +84,7 @@
           cache: false,
           success: function (data) {
             // TODO: Make a better message system from the API backend
-            let message = '{{ _('{type} {name} is {action}') }}'.replace('{type}','{{ modal_type }}').replace('{name}',data.name).replace('{action}',(form_data['id'] != '' ? '{{ _('updated') }}' : '{{ _('added') }}')).capitalize()
+            let message = '{{ _('{type} {name} is {action}') }}'.replace('{type}','{{ modal_type }}').replace('{name}',data.name || data.summary).replace('{action}',(form_data['id'] != '' ? '{{ _('updated') }}' : '{{ _('added') }}')).capitalize()
             toastr.success(message, '{{ _('Save OK') }}');
             {{modal_type}}_modal.reload = true
             {{modal_type}}_modal.modal('hide');
@@ -103,6 +103,8 @@
       if ({{modal_type}}_modal.reload) {
         load_page('{{modal_reload_url}}');
       }
+      // Clear old cached form data, and set action to POST (new)
+      {{modal_type}}_form[0].reset();
     });
 
     // Load form data when modal is opened
@@ -110,10 +112,9 @@
       {{modal_type}}_form.find('button span.spinner-border').hide();
       {{modal_type}}_modal.find('div.loading').addClass('d-flex').show();
 
-      // Clear old cached form data, and set action to POST (new)
-      {{modal_type}}_form[0].reset();
       // Form reset does not clear the readonly id which should be disabled when the form loads
       {{modal_type}}_form.find('input[name="id"]').val('').prop('disabled',true);
+      {{modal_type}}_form.find('input[name="uid"]').val('').prop('disabled',true);
       // Clear error indicators
       {{modal_type}}_form.removeClass('was-validated');
       // Set the post method
