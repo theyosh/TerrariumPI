@@ -69,7 +69,7 @@ class terrariumWebserver(object):
             err = HTTPError(401, text)
             err.add_header('WWW-Authenticate', f'Basic realm="{realm}"')
             if user is not None or password is not None:
-              self.engine.notification.message('authentication_warning',{'ip' : ip, 'username' : user, 'password' : password},[])
+              #self.engine.notification.message('authentication_warning',{'ip' : ip, 'username' : user, 'password' : password},[])
               logger.warning(f'Incorrect login detected using username \'{user}\' and password \'{password}\' from ip {ip}')
             return err
 
@@ -128,7 +128,6 @@ class terrariumWebserver(object):
       'lang'          : self.engine.settings['language'],
       'title'         : self.engine.settings['title'],
       'version'       : self.engine.settings['version'],
-#                  'page_title'    : _(template.replace('_',' ').replace('.html','').capitalize()),
       'template'      : template,
       'device'        : self.engine.settings['device'],
       'username'      : self.engine.settings['username'],
@@ -152,6 +151,9 @@ class terrariumWebserver(object):
     variables['_']  = _
 
     return variables
+
+  def authenticate(self, required = False):
+    return self.__auth_basic(self.engine.authenticate,required,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
 
   def render_page(self, page = 'index'):
     page_name = None
@@ -243,54 +245,6 @@ class terrariumWebserver(object):
 
 
 
-
-    # self.bottle.route('/api/<path:re:config.*>',
-    #                  method=['GET'],
-    #                  callback=self.__get_api_call,
-    #                  apply=self.authenticate(True)
-    #                 )
-
-    # self.bottle.route('/api/<path:path>',
-    #                  method=['GET'],
-    #                  callback=self.__get_api_call,
-    #                  apply=self.authenticate())
-
-    # self.bottle.route('/api/reboot',
-    #                  method=['POST'],
-    #                  callback=self.__reboot,
-    #                  apply=self.authenticate(True)
-    #                 )
-
-    # self.bottle.route('/api/shutdown',
-    #                  method=['POST'],
-    #                  callback=self.__shutdown,
-    #                  apply=self.authenticate(True)
-    #                 )
-
-    # self.bottle.route('/api/switch/toggle/<switchid:path>',
-    #                  method=['POST'],
-    #                  callback=self.__toggle_switch,
-    #                  apply=self.authenticate(True)
-    #                 )
-
-    # self.bottle.route('/api/switch/manual_mode/<switchid:path>',
-    #                  method=['POST'],
-    #                  callback=self.__manual_mode_switch,
-    #                  apply=self.authenticate(True)
-    #                 )
-
-    # self.bottle.route('/api/switch/state/<switchid:path>/<value:int>',
-    #                  method=['POST'],
-    #                  callback=self.__state_switch,
-    #                  apply=self.authenticate(True)
-    #                 )
-
-    # self.bottle.route('/api/config/switches/hardware',
-    #                  method=['PUT'],
-    #                  callback=self.__replace_switch_hardware,
-    #                  apply=self.authenticate(True)
-    #                 )
-
     # self.bottle.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile|notifications)>',
     #                  method=['PUT','POST','DELETE'],
     #                  callback=self.__update_api_call,
@@ -303,19 +257,6 @@ class terrariumWebserver(object):
     #                  apply=self.authenticate(True)
     #                 )
 
-    # self.bottle.route('/api/audio/file',
-    #                  method=['POST'],
-    #                  callback=self.__upload_audio_file,
-    #                  apply=self.authenticate(True)
-    #                 )
-
-    # self.bottle.route('/api/audio/file/<audiofileid:path>',
-    #                  method=['DELETE'],
-    #                  callback=self.__delete_audio_file,
-    #                  apply=self.authenticate(True)
-    #                 )
-
-
 
   def url_for(self, name, **kargs):
     # First check the webserver for named routes
@@ -323,222 +264,57 @@ class terrariumWebserver(object):
       url = self.bottle.get_url(name, **kargs)
     except RouteBuildError:
       url = '#'
-    # Then check if there is a view with the n
-    #print(f'Url for {name} with {kargs} -> {url}')
+
     return url
 
-  def authenticate(self, required = False):
-    return self.__auth_basic(self.engine.authenticate,required,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
 
-  def __player_commands(self,action):
-    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Player command could ot be executed!')}
 
-    if 'start' == action:
-      self.engine.audio_player_start()
-    elif 'stop' == action:
-      self.engine.audio_player_stop()
-    elif 'volumeup' == action:
-      self.engine.audio_player_volume_up()
-      result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
-    elif 'volumedown' == action:
-      self.engine.audio_player_volume_down()
-      result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
-    elif 'mute' == action:
-      pass
-    elif 'unmute' == action:
-      pass
+  # def __player_commands(self,action):
+  #   result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Player command could ot be executed!')}
 
-    return result
+  #   if 'start' == action:
+  #     self.engine.audio_player_start()
+  #   elif 'stop' == action:
+  #     self.engine.audio_player_stop()
+  #   elif 'volumeup' == action:
+  #     self.engine.audio_player_volume_up()
+  #     result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
+  #   elif 'volumedown' == action:
+  #     self.engine.audio_player_volume_down()
+  #     result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
+  #   elif 'mute' == action:
+  #     pass
+  #   elif 'unmute' == action:
+  #     pass
 
-  def __upload_audio_file(self):
-    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('File is not uploaded!')}
-    upload = request.files.get('file')
-    try:
-      upload.save(terrariumAudioPlayer.AUDIO_FOLDER)
-      self.engine.reload_audio_files()
-      result = {'ok' : True, 'title' : _('Success!'), 'message' : _('File \'%s\' is uploaded') % (upload.filename,)}
-    except IOError as message:
-      result['message'] = _('Duplicate file \'%s\'') % (upload.filename,)
+  #   return result
 
-    return result
+  # def __delete_audio_file(self,audiofileid):
+  #   result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Action could not be satisfied')}
 
-  def __delete_audio_file(self,audiofileid):
-    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Action could not be satisfied')}
+  #   if self.engine.delete_audio_file(audiofileid):
+  #     result = {'ok' : True, 'title' : _('Success!'), 'message' : _('Audio file is deleted')}
 
-    if self.engine.delete_audio_file(audiofileid):
-      result = {'ok' : True, 'title' : _('Success!'), 'message' : _('Audio file is deleted')}
+  #   return result
 
-    return result
 
-  # def __update_api_call(self,path):
-  #   result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Data could not be saved')}
-  #   postdata = {}
-
+  # def __replace_switch_hardware(self):
+  #   postdata = None
   #   if request.json is not None:
   #     postdata = request.json
 
-  #   result['ok'] = self.engine.set_config(path,postdata,request.files)
-  #   if result['ok']:
-  #     result['title'] = _('Data saved')
-  #     result['message'] = _('Your changes are saved')
+  #   self.engine.replace_hardware_calender_event(postdata['switch']['id'],
+  #                                                          postdata['switch']['device'],
+  #                                                          postdata['switch']['reminder_amount'],
+  #                                                          postdata['switch']['reminder_period'])
+  #   result = {'ok' : True,
+  #             'title' : _('Hardware is replaced'),
+  #             'message' : _('Hardware replacement is logged in the calendar')}
 
-  #     # Reload language if needed
-  #     if 'language' in postdata:
-  #       gettext.translation('terrariumpi', 'locales/', languages=[self.engine.config.get_language()]).install(True)
-  #       self.__translations.reload()
-
-  #   return result
-
-  def __replace_switch_hardware(self):
-    postdata = None
-    if request.json is not None:
-      postdata = request.json
-
-    self.engine.replace_hardware_calender_event(postdata['switch']['id'],
-                                                           postdata['switch']['device'],
-                                                           postdata['switch']['reminder_amount'],
-                                                           postdata['switch']['reminder_period'])
-    result = {'ok' : True,
-              'title' : _('Hardware is replaced'),
-              'message' : _('Hardware replacement is logged in the calendar')}
-
-    if '' != postdata['switch']['reminder_amount']:
-      result['message'] += '<br />' + _('A new replacement reminder is created')
-
-    return result
-
-  # def __get_api_call(self,path):
-  #   response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(seconds=10)).strftime('%a, %d %b %Y %H:%M:%S GMT')
-  #   response.headers['Access-Control-Allow-Origin'] = '*'
-
-  #   result = {}
-  #   parameters = path.strip('/').split('/')
-
-  #   action = parameters[0]
-  #   del(parameters[0])
-
-  #   if 'switches' == action:
-  #     result = self.engine.get_switches(parameters)
-
-  #   elif 'doors' == action:
-  #     if len(parameters) > 0 and parameters[0] == 'status':
-  #        result = {'status' : self.engine.get_doors_status()}
-  #     else:
-  #       result = self.engine.get_doors()
-
-  #   elif 'profile' == action:
-  #     result = self.engine.get_profile()
-
-  #   elif 'calendar' == action:
-  #     if 'ical' in parameters:
-  #       response.headers['Content-Type'] = 'text/calendar'
-  #       response.headers['Content-Disposition'] = 'attachment; filename=terrariumpi.ical.ics'
-
-  #     response.headers['Content-Type'] = 'application/json'
-  #     result = json.dumps(self.engine.get_calendar(parameters,**{'start':request.query.get('start'),'end':request.query.get('end')}))
-
-  #   elif 'sensors' == action:
-  #     result = self.engine.get_sensors(parameters)
-
-  #   elif 'webcams' == action:
-  #     result = self.engine.get_webcams(parameters)
-
-  #   elif 'audio' == action:
-  #     if len(parameters) > 0 and parameters[0] == 'files':
-  #       del(parameters[0])
-  #       result = self.engine.get_audio_files(parameters)
-  #     elif len(parameters) > 0 and parameters[0] == 'playing':
-  #       del(parameters[0])
-  #       result = self.engine.get_audio_playing()
-  #     elif len(parameters) > 0 and parameters[0] == 'hardware':
-  #       del(parameters[0])
-  #       result = {'audiohardware' : terrariumAudioPlayer.get_sound_cards()}
-  #     else:
-  #       result = self.engine.get_audio_playlists(parameters)
-
-  #   elif 'environment' == action:
-  #     result = self.engine.get_environment(parameters)
-
-  #   elif 'weather' == action:
-  #     result = self.engine.get_weather(parameters)
-
-  #   elif 'uptime' == action:
-  #     result = self.engine.get_uptime()
-
-  #   elif 'power_usage' == action:
-  #     result = self.engine.get_power_usage_water_flow()['power']
-
-  #   elif 'water_usage' == action:
-  #     result = self.engine.get_power_usage_water_flow()['water']
-
-  #   elif 'system' == action:
-  #     result = self.engine.get_system_stats()
-
-  #   elif 'config' == action:
-  #     # TODO: New way of data processing.... fix other config options
-  #     result = self.engine.get_config(parameters[0] if len(parameters) == 1 else None)
-
-  #   elif 'history' == action or 'export' == action:
-  #     response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(minutes=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
-  #     if 'export' == action:
-  #       parameters.append('all')
-  #     result = self.engine.get_history(parameters)
-
-  #     if 'export' == action:
-  #       csv = ''
-  #       export_name = 'error'
-  #       for datatype in result:
-  #         for dataid in result[datatype]:
-  #           export_name = datatype + '_' + dataid + '.csv'
-  #           # Header
-  #           fields = list(result[datatype][dataid].keys())
-  #           if 'totals' in fields:
-  #             fields.remove('totals')
-  #           csv = '"' + '","'.join(['timestamp'] + fields) + "\"\n"
-
-  #           for counter in range(0,len(result[datatype][dataid][fields[0]])):
-  #             # Timestamp
-  #             row = [datetime.datetime.fromtimestamp(int(str(int(result[datatype][dataid][fields[0]][counter][0]/1000)))).strftime('%Y-%m-%d %H:%M:%S')]
-  #             for field in fields:
-  #               # Row values
-  #               row.append(str(result[datatype][dataid][field][counter][1]))
-
-  #             csv += '"' + '","'.join(row) + "\"\n"
-
-  #       response.headers['Content-Type'] = 'application/csv'
-  #       response.headers['Content-Disposition'] = 'attachment; filename=' + export_name
-  #       return csv
+  #   if '' != postdata['switch']['reminder_amount']:
+  #     result['message'] += '<br />' + _('A new replacement reminder is created')
 
   #   return result
-
-  # def __toggle_switch(self,switchid):
-  #   if switchid in self.engine.power_switches:
-  #     self.engine.power_switches[switchid].toggle()
-  #     return {'ok' : True}
-
-  #   return {'ok' : False}
-
-  # def __manual_mode_switch(self,switchid):
-  #   if switchid in self.engine.power_switches:
-  #     self.engine.power_switches[switchid].set_manual_mode(not self.engine.power_switches[switchid].in_manual_mode())
-  #     self.engine.config.save_power_switch(self.engine.power_switches[switchid].get_data())
-  #     return {'ok' : True}
-
-  #   return {'ok' : False}
-
-  # def __state_switch(self,switchid,value):
-  #   if switchid in self.engine.power_switches:
-  #     if value == 1:
-  #       self.engine.power_switches[switchid].set_state(True)
-  #       return {'ok' : True}
-  #     elif value == 0:
-  #       self.engine.power_switches[switchid].set_state(False)
-  #       return {'ok' : True}
-  #     else:
-  #       self.engine.power_switches[switchid].set_state(value)
-  #       return {'ok' : True}
-
-  #   return {'ok' : False}
 
   # -= NEW =-
   def __login(self):
@@ -591,7 +367,7 @@ class terrariumWebsocket(object):
             messages.task_done()
           except Exception as ex:
             # Socket connection is lost/closed, stop looping....
-            logger.warning(f'Disconnected {socket}. Stop listening and remove queue... {ex}')
+            logger.debug(f'Disconnected {socket}. Stop listening and remove queue... {ex}')
             try:
               self.clients.remove(messages)
             except Exception as ex:
@@ -604,7 +380,7 @@ class terrariumWebsocket(object):
           message = socket.receive()
         except Exception as ex:
           # Closed websocket connection.
-          logger.warning(f'Websocket error receiving messages: {ex}')
+          logger.debug(f'Websocket error receiving messages: {ex}')
           try:
             self.clients.remove(messages)
           except Exception as ex:
@@ -645,7 +421,7 @@ class terrariumWebsocket(object):
         client.put(message)
       # If more then 50 messages in queue, looks like connection is gone and remove the queue from the list
       if client.qsize() > 50:
-        logger.warning(f'Lost connection.... should not happen anymore. {len(self.clients)} - {client.qsize()} - {client}')
+        logger.debug(f'Lost connection.... should not happen anymore. {len(self.clients)} - {client.qsize()} - {client}')
         try:
           self.clients.remove(client)
         except Exception as ex:

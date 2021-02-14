@@ -745,7 +745,8 @@ class terrariumEngine(object):
 
         # Get a list of all the used doors and their status
         door_status = []
-        for door in Button.select(lambda d: d.enclosure):
+#        for door in Button.select(lambda d: d.enclosure):
+        for door in button.enclosure.doors:
           status = 'closed' if door.value else 'open'
           door_status.append({
             'id' : door.id,
@@ -1419,23 +1420,23 @@ class terrariumEngine(object):
     self.running = False
 
     # Stop engine processing first....
-    print('Trigger exit event')
-    print(self.__engine['exit'])
-    print(dir(self.__engine['exit']))
+    # print('Trigger exit event')
+    # print(self.__engine['exit'])
+    # print(dir(self.__engine['exit']))
 
     self.__engine['exit'].set()
-    print('Exit event done')
+    # print('Exit event done')
 
-    # Wait till the engine is done, when it was updating the sensors
-    print('Stop logtail process')
+    # # Wait till the engine is done, when it was updating the sensors
+    # print('Stop logtail process')
     self.__logtail_process.terminate()
-    print('Logtail process is done')
+    # print('Logtail process is done')
 
-    print('Wait on the engine to stop...')
-    print(self.__engine['thread'])
-    print(f' Thread alive: {self.__engine["thread"].is_alive()}')
-    print(f' Thread daemon: {self.__engine["thread"].isDaemon()}')
-    print(dir(self.__engine['thread']))
+    # print('Wait on the engine to stop...')
+    # print(self.__engine['thread'])
+    # print(f' Thread alive: {self.__engine["thread"].is_alive()}')
+    # print(f' Thread daemon: {self.__engine["thread"].isDaemon()}')
+    # print(dir(self.__engine['thread']))
 
     self.__engine['thread'].join()
     print('Engine stopped...')

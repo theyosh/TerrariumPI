@@ -407,7 +407,8 @@ class terrariumRelayDimmer(terrariumRelay):
  #   print('Stop dimmer running event and wait for thread...')
     self.running = False
     self.__running.set()
-    self.__thread.join()
+    if self.__thread is not None:
+      self.__thread.join()
 
  #   print('Should be done...')
  #   print('Call super stop')

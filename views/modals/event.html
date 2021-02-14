@@ -1,0 +1,139 @@
+{# Include the modal base html template #}
+{% extends "layouts/modal.html" %}
+
+{# Set some variables #}
+{% set modal_size = 'modal-xl' %}
+{% set modal_type = 'event' %}
+{% set modal_form_add_action  = url_for('api:calendar_add') %}
+{% set modal_form_edit_action = url_for('api:calendar_detail',calendar='_id_') %}
+{% set modal_reload_url = url_for('page', page='calendar') %}
+{% block modal_title %}<i class="fas fa-calendar-alt mr-2" ></i>{{ _('Event') }}{% endblock %}
+{% block modal_body %}<input type="hidden" name="uid" id="uid" value="" disabled="disabled">
+<div class="modal-body">
+  <div class="form-group row">
+    <div class="col-12 col-sm-9 col-md-9 col-lg-9">
+      <div class="form-group">
+        <label for="title">{{ _('Title') }}</label>
+        <input type="text" class="form-control" id="summary" name="summary" placeholder="{{ _('Event title') }}">
+      </div>
+      <div class="form-group">
+        <label for="description">{{ _('Event') }}</label>
+        <textarea class="form-control" id="description" name="description" placeholder="{{ _('Enter some information about this event') }}"></textarea>
+      </div>
+    </div>
+    <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+      <div class="form-group">
+        <label for="title">{{ _('Date') }}</label>
+        <p class="p-2 event_date"></p>
+        <input type="hidden" class="form-control" id="dtstart" name="dtstart">
+        <input type="hidden" class="form-control" id="dtend" name="dtend">
+      </div>
+      <div class="form-group">
+        <label for="interval">{{ _('Repeat every') }}</label>
+        <div class="select2-primary">
+          <select class="select2 " id="freq" name="freq" data-placeholder="{{ _('Select period') }}" style="width: 100%;">
+            <option value="_">{{ _('No repeat') }}</option>
+            <option value="daily">{{ _('Days') }}</option>
+            <option value="weekly">{{ _('Weeks') }}</option>
+            <option value="monthly">{{ _('Months') }}</option>
+            <option value="yearly">{{ _('Years') }}</option>
+          </select>
+        </div>
+        <input type="number" class="form-control mt-2" id="interval" name="interval" placeholder="{{ _('Select amount') }}">
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block modal_form_javascript_functions %}
+{% endblock %}
+
+{% block modal_form_javascript_pre %}
+// On modal close
+{{modal_type}}_modal.on('hidden.bs.modal', function(){
+  {{modal_type}}_modal.find('textarea#description').val('');
+  {{modal_type}}_modal.find('textarea#description').summernote('reset');
+  {{modal_type}}_modal.find('textarea#description').summernote('destroy');
+});
+
+{{modal_type}}_form.find('select#freq').on('change',function() {
+  {{modal_type}}_form.find('#interval').prop('disabled','_' == this.value);
+});
+{% endblock %}
+
+{% block modal_form_javascript_load %}
+
+{{modal_type}}_form.find('input#uid').prop('disabled',true);
+if ({{modal_type}}_modal.find('input#dtstart').val() == {{modal_type}}_modal.find('input#dtend').val()) {
+  {{modal_type}}_modal.find('input#dtend').val('').attr('readonly',true);
+}
+
+// Check if we are in edit mode.... and need to load more data....
+if ('#' != jQuery(event.relatedTarget).attr('href')) {
+  // Load the button data
+  let url = jQuery(event.relatedTarget).attr('href');
+
+  jQuery.get(url, function(data){
+    // Enable the hidden id field
+    {{modal_type}}_form.find('input#uid').prop('disabled',false)
+    // Change the form url to an PUT (update)
+    {{modal_type}}_form.attr({'method' : 'PUT', 'action' : url});
+
+    {{modal_type}}_modal.find('input#dtend').prop('disabled',false);
+
+    // Load the button values in the form
+    jQuery.each(data,function(key,value) {
+      let field = {{modal_type}}_form.find('[name="' + key + '"]');
+      if (field.attr('type') == 'checkbox') {
+        field.prop('checked',(1 != value)).trigger('change');
+        field.prop('checked',(1 == value)).trigger('change');
+      } else {
+        field.val(value).trigger('change');
+      }
+    });
+
+    if ({{modal_type}}_modal.find('input#dtstart').val() == {{modal_type}}_modal.find('input#dtend').val()) {
+      {{modal_type}}_modal.find('input#dtend').val('').attr('readonly',true);
+    }
+
+    let event_dates = [moment({{modal_type}}_modal.find('input#dtstart').val() * 1000).format('L')]
+    if ('' != {{modal_type}}_modal.find('input#dtend').val()) {
+      event_dates.push(moment({{modal_type}}_modal.find('input#dtend').val() * 1000).format('L'))
+    } else {
+      //{{modal_type}}_modal.find('#interval').prop('disabled','_' == this.value);
+    }
+    {{modal_type}}_modal.find('p.event_date').text(event_dates.join(' - '));
+
+    {{modal_type}}_modal.find('textarea#description').summernote({
+      dialogsInBody: true,
+      height: 200
+    });
+
+    {{modal_type}}_form.find('select#freq').trigger('change');
+    {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
+  });
+} else {
+  let event_dates = [moment({{modal_type}}_modal.find('input#dtstart').val() * 1000).format('L')]
+  if ('' != {{modal_type}}_modal.find('input#dtend').val()) {
+    event_dates.push(moment({{modal_type}}_modal.find('input#dtend').val() * 1000).format('L'))
+  } else {
+    //{modal_type}}_modal.find('#interval').prop('disabled','_' == this.value);
+  }
+  {{modal_type}}_modal.find('p.event_date').text(event_dates.join(' - '));
+
+  {{modal_type}}_modal.find('textarea#description').summernote({
+    dialogsInBody: true,
+    height: 200
+  });
+
+  {{modal_type}}_form.find('select#freq').trigger('change');
+  {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
+}
+{% endblock %}
+
+{% block modal_form_javascript_pre_submit_formdata %}
+form_data['uid']   = (''  != form_data['uid']   ? form_data['uid']   : null);
+form_data['dtend'] = (''  != form_data['dtend'] ? form_data['dtend'] : null);
+form_data['freq']  = ('_' != form_data['freq']  ? form_data['freq']  : null);
+{% endblock %}

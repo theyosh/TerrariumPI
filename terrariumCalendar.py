@@ -35,6 +35,7 @@ class terrariumCalendar(object):
              'summary'     : str(item.get('summary')),
              'description' : str(item.get('description'))}
 
+
     event['dtstart'] = item.get('dtstart').dt.timestamp()
     event['dtend']   = item.get('dtend').dt.timestamp()
     event['all_day'] = event['dtstart'] == event['dtend']
@@ -108,9 +109,8 @@ class terrariumCalendar(object):
           subcomponent.update(event)
 
     self.__ICS_FILE.write_bytes(self.__ical.to_ical())
-    if not create:
-      # Need to reload the ical, so the repeating rules are working....?
-      self.__ical = Calendar.from_ical(self.__ICS_FILE.read_bytes())
+    # Need to reload the ical, so the repeating rules are working....?
+    self.__ical = Calendar.from_ical(self.__ICS_FILE.read_bytes())
 
     return self.get_event(uid)
 

@@ -12,7 +12,7 @@ class terrariumMotionSensor(terrariumButton):
   HARDWARE = 'motion'
   NAME     = 'Motion sensor'
 
-  def load_hardware(self):
+  def _load_hardware(self):
     address = self._address
     self._device['device'] = MotionSensor(terrariumUtils.to_BCM_port_number(address[0]))
     self._device['device'].when_motion = self._pressed

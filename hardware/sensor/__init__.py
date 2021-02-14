@@ -12,10 +12,11 @@ from hashlib import md5
 from time import time, sleep
 from operator import itemgetter
 
+import RPi.GPIO as GPIO
 # pip install retry
 from retry import retry
 # For analog sensors
-from gpiozero import MCP3008, LED
+from gpiozero import MCP3008#, LED
 # For I2C sensors
 import smbus2
 # Bluetooth sensors
@@ -140,11 +141,11 @@ class terrariumSensor(object):
       logger.debug(f'Sensor {self} has power management enabled')
       if on:
         logger.debug('Enable power to the sensor {self} now.')
-        self._device['power_mngt'].on()
-        sleep(0.25)
+        GPIO.output(self._device['power_mngt'], GPIO.HIGH)
+        sleep(1)
       else:
         logger.debug('Close power to the sensor {self} now.')
-        self._device['power_mngt'].off()
+        GPIO.output(self._device['power_mngt'], GPIO.LOW)
 
   @property
   def __sensor_cache_key(self):
@@ -260,7 +261,7 @@ class terrariumSensor(object):
     self._device['device'] = hardware
     # Check for power management features and enable it if set
     if self._device['power_mngt'] is not None:
-      self._device['power_mngt'] = LED(self._device['power_mngt'])
+      GPIO.setup(self._device['power_mngt'], GPIO.OUT)
 
   # When we get Runtime errors retry up to 3 times
   @retry(terrariumSensorUpdateException, tries=3, delay=0.5, max_delay=2, logger=logger)
@@ -362,7 +363,7 @@ class terrariumSensor(object):
 
   def stop(self):
     if self._device['power_mngt'] is not None:
-      self._device['power_mngt'].close()
+      GPIO.cleanup(self._device['power_mngt'])
 
   def __repr__(self):
     return f'{self.NAME} {self.type} named \'{self.name}\' at address \'{self.address}\''

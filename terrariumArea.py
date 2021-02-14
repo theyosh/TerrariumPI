@@ -11,11 +11,13 @@ import threading
 import uuid
 
 # http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/
+# https://onion.io/2bt-pid-control-python/
 # https://github.com/m-lundberg/simple-pid
 from simple_pid import PID
 
 from pony import orm
-from terrariumDatabase import Sensor
+from terrariumAudio import terrariumAudioPlayer
+from terrariumDatabase import Sensor, Playlist, Relay
 from terrariumUtils import terrariumUtils, classproperty
 
 class terrariumAreaException(TypeError):
@@ -65,8 +67,6 @@ class terrariumArea(object):
       'sensors' : ['conductivity']
     },
 
-
-
     'moisture' : {
       'name'    : _('Moisture'),
       'sensors' : ['moisture','humidity']
@@ -108,11 +108,23 @@ class terrariumArea(object):
 
     self.enclosure = enclosure
 
+    self.state = {}
     self.load_setup(setup)
-
 
   def __repr__(self):
     return f'{terrariumArea.__TYPES[self.type]["name"]} area {self.name}'
+
+
+  @property
+  def _powered(self):
+    powered = None
+    for period in self.PERIODS:
+      if period not in self.state or len(self.setup[period]['relays']) == 0:
+        continue
+
+      powered = powered or self.state[period]['powered']
+
+    return powered
 
   def _time_table(self):
 
@@ -125,6 +137,9 @@ class terrariumArea(object):
       end   = now.replace(hour=end.hour,   minute=end.minute,   second=end.second)
 
       if begin == end:
+        end += datetime.timedelta(hours=24)
+
+      if begin > end:
         end += datetime.timedelta(hours=24)
 
       if now > end:
@@ -148,7 +163,6 @@ class terrariumArea(object):
           # Increate the start time with the on and off duration for the next round
           begin += datetime.timedelta(seconds=on_period + off_period)
 
-
       data = {
         'periods'  : periods,
         'duration' : duration
@@ -162,42 +176,51 @@ class terrariumArea(object):
       sunrise = copy.copy(self.enclosure.weather.sunrise if 'weather' == self.mode else self.enclosure.weather.sunset - datetime.timedelta(hours=24))
       sunset  = copy.copy(self.enclosure.weather.sunset  if 'weather' == self.mode else self.enclosure.weather.sunrise)
 
-      if datetime.datetime.now() > sunset:
-        sunrise += datetime.timedelta(hours=24)
-        sunset  += datetime.timedelta(hours=24)
+      # if datetime.datetime.now() > sunset:
+      #   sunrise += datetime.timedelta(hours=24)
+      #   sunset  += datetime.timedelta(hours=24)
 
-      if self.setup['day']['max_hours'] != 0 and (sunset - sunrise) > datetime.timedelta(hours=self.setup['day']['max_hours']):
+      max_hours = self.setup.get('max_day_hours',0.0)
+      if max_hours != 0 and (sunset - sunrise) > datetime.timedelta(hours=max_hours):
         # On period to long, so reduce the on period by shifting the sunrise and sunset times closer to each other
-        seconds_difference = ((sunset - sunrise) - datetime.timedelta(hours=self.setup['day']['max_hours'])) / 2
+        seconds_difference = ((sunset - sunrise) - datetime.timedelta(hours=max_hours)) / 2
         sunrise += seconds_difference
         sunset  -= seconds_difference
 
-      if self.setup['day']['min_hours'] != 0 and (sunset - sunrise) < datetime.timedelta(hours=self.setup['day']['min_hours']):
+      min_hours = self.setup.get('min_day_hours',0.0)
+      if min_hours != 0 and (sunset - sunrise) < datetime.timedelta(hours=min_hours):
         # On period to short, so extend the on period by shifting the sunrise and sunset times away from to each other
-        seconds_difference = (datetime.timedelta(hours=self.setup['day']['min_hours']) - (sunset - sunrise)) / 2
+        seconds_difference = (datetime.timedelta(hours=min_hours) - (sunset - sunrise)) / 2
         sunrise -= seconds_difference
         sunset  += seconds_difference
 
-      if self.setup['day']['shift_hours'] != 0:
+      shift_hours = self.setup.get('shift_day_hours',0.0)
+      if shift_hours != 0:
         # Shift the times back or forth...
-        sunrise += datetime.timedelta(hours=self.setup['day']['shift_hours'])
-        sunset  += datetime.timedelta(hours=self.setup['day']['shift_hours'])
+        sunrise += datetime.timedelta(hours=shift_hours)
+        sunset  += datetime.timedelta(hours=shift_hours)
 
-      timetable['day'] = make_time_table(sunrise, sunset)
+      timetable['day']   = make_time_table(sunrise, sunset)
+      timetable['night'] = make_time_table(sunset, sunrise)
 
     elif 'timer' == self.mode:
-      for period in ['day','night','low','high']:
-        if period in self.setup:
+      for period in self.PERIODS:
+        if period not in self.setup:
+          continue
 
-          begin = datetime.time.fromisoformat(self.setup[period]['begin'])
-          end   = datetime.time.fromisoformat(self.setup[period]['end'])
-          on_period  = max(0.0,float(self.setup[period]['on_duration']))  * 60.0
-          off_period = max(0.0,float(self.setup[period]['off_duration'])) * 60.0
+        begin      = datetime.time.fromisoformat(self.setup[period]['begin'])
+        end        = datetime.time.fromisoformat(self.setup[period]['end'])
+        on_period  = max(0.0,float(self.setup[period]['on_duration']))  * 60.0
+        off_period = max(0.0,float(self.setup[period]['off_duration'])) * 60.0
 
-          timetable[period] = make_time_table(begin, end, on_period, off_period)
+        timetable[period] = make_time_table(begin, end, on_period, off_period)
 
-    for period in ['day','night','low','high']:
-      if period not in timetable:
+
+#    print('Make time tables')
+#    print(self.setup)
+    for period in timetable:
+#      print(f'Timetable period: {period}')
+      if period not in self.setup:
         continue
 
       self.setup[period]['timetable'] = copy.deepcopy(timetable[period]['periods'])
@@ -210,70 +233,34 @@ class terrariumArea(object):
 
   def load_setup(self, data):
     self.setup = copy.deepcopy(data)
-
-    self.state = {
-      'last_update' : int(datetime.datetime(1970,1,1).timestamp()),
-      'powered'     : None
-    }
+    if self.state.get('last_update', None) is None:
+      self.state = {
+        'is_day'      : self.setup.get('is_day', None),
+        'last_update' : int(datetime.datetime(1970,1,1).timestamp()),
+        'powered'     : None
+      }
 
     # Clean up parts that do not have relays configured)
     for period in self.PERIODS:
 
       if period in self.setup and len(self.setup[period]['relays']) == 0:
         del(self.setup[period])
-
-    for period in self.PERIODS:
-      if period not in self.setup:
         continue
 
-      self.state['powered'] = False
-#      self.state['powered'] = self.relays_state(period)
+      self.setup[period]['settle_time']   = self.setup[period].get('settle_time',0)
+      self.setup[period]['power_on_time'] = self.setup[period].get('power_on_time',0)
+      self.setup[period]['tweaks']        = {}
 
       if period not in self.state:
         self.state[period] = {}
+        self.state[period]['last_powered_on'] = datetime.datetime(1970,1,1).timestamp()
 
-      self.state[period]['last_powered_on'] = datetime.datetime(1970,1,1).timestamp()
-      self.setup[period]['settle_time']   = self.setup[period].get('settle_time',0)
-      self.setup[period]['power_on_time'] = self.setup[period].get('power_on_time',0)
+      self.state[period]['powered'] = self.relays_state(period)
 
-      if 'sensors' != self.mode:
+    if 'sensors' != self.mode:
+      self._time_table()
 
-        if period not in self.state:
-          self.state[period] = {}
-
-        self._time_table()
-
-      self.setup[period]['tweaks'] = {}
-
-      dimmer_found = False
-      average_dimmer_durations = {'on' : [], 'off' : []}
-      for relay_id in self.setup[period]['relays']:
-        relay = self.enclosure.relays[relay_id]
-        if not dimmer_found:
-          dimmer_found = relay.is_dimmer
-
-        field = ('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'on_' + relay.id
-        extra_tweaks = self.setup[period].get(field, False)
-
-        if extra_tweaks != False:
-
-          # Durations are in minutes for dimmers, and in percentage for relays
-          self.setup[period]['tweaks'][relay.id] = {
-            'on'  : float(self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'on_' + relay.id]),
-            'off' : float(self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'off_' + relay.id]),
-          }
-
-          if relay.is_dimmer:
-            average_dimmer_durations['on'].append(self.setup[period]['tweaks'][relay.id]['on'])
-            average_dimmer_durations['off'].append(self.setup[period]['tweaks'][relay.id]['off'])
-
-      if not dimmer_found:
-        # There was no dimmer in the relay list. So all normal on/off.
-        self.setup[period]['tweaks'] = {}
-      elif len(average_dimmer_durations['on']) > 0:
-        # Add the average dimmer duration, so that the normal relays can use for their percentage delay toggle
-        self.setup[period]['tweaks']['on']  = {'dimmer_duration' : statistics.mean(average_dimmer_durations['on'])}
-        self.setup[period]['tweaks']['off'] = {'dimmer_duration' : statistics.mean(average_dimmer_durations['off'])}
+    self.state['powered'] = self._powered
 
   def _is_timer_time(self, period):
     now = int(datetime.datetime.now().timestamp())
@@ -287,7 +274,7 @@ class terrariumArea(object):
     return None
 
   @property
-  def lights_on(self):
+  def is_day(self):
     if 'weather' == self.setup.get('day_night_source', None) and self.enclosure.weather is not None:
       return self.enclosure.weather.is_day
 
@@ -297,10 +284,23 @@ class terrariumArea(object):
     if 'disabled' == self.mode:
       return self.state
 
-    light_state = ('on'     if self.lights_on   else 'off')
+    light_state = ('on'     if self.enclosure.lights_on   else 'off')
     door_state  = ('closed' if self.enclosure.door_closed else 'open')
 
+    old_is_day = self.state['is_day']
+    self.state['is_day'] = self.is_day
+
     if 'sensors' in self.setup:
+      # Change the sensor limits when changing from day to night and vs.
+      if old_is_day != self.state['is_day'] and self.setup.get('day_night_difference', 0) != 0:
+        difference = float(self.setup['day_night_difference']) * (-1.0 if self.state['is_day'] else 1.0)
+        logger.info(f'Adjusting the sensors based on day/night difference. Changing by {difference} going from {("day" if old_is_day else "night")} to {("day" if self.state["is_day"] else "night")}')
+
+        with orm.db_session():
+          for sensor in Sensor.select(lambda s: s.id in self.setup['sensors']):
+            sensor.alarm_min += difference
+            sensor.alarm_max += difference
+
       # If there are sensors in use, calculate the current values
       self.state['sensors'] = self.current_value(self.setup['sensors'])
       # And set the alarm values
@@ -324,7 +324,7 @@ class terrariumArea(object):
         door_state_ok = self.setup[period]['door_status'] == door_state
 
       # First check: Shutdown power when power is on and either the lights or doors are in wrong state. Despide 'mode'
-      if self.state['powered'] and not (light_state_ok and door_state_ok):
+      if self.state[period]['powered'] and not (light_state_ok and door_state_ok):
         # Power is on, but either the lights or doors are in wrong state. Power down now.
         logger.info(f'Forcing down the {period} power for area {self} because either the lights({"OK" if light_state_ok else "ERROR"}) or doors({"OK" if door_state_ok else "ERROR"}) are in an invalid state.')
         self.relays_toggle(period,False)
@@ -345,18 +345,18 @@ class terrariumArea(object):
       else:
         # Sensor mode only toggle ON when alarms are triggered (True).
         toggle_relay = self.state['sensors'][f'alarm_{period}']
-        print(f'Toggle on/off {period} based on sensors -> {toggle_relay}')
+        #print(f'Toggle on/off {period} based on sensors -> {toggle_relay}')
         if toggle_relay is False:
           other_alarm = self.state['sensors'][f'alarm_{("low" if period == "high" else "high")}']
-          print(f'Inverse alarm: {other_alarm}')
+          #print(f'Inverse alarm: {other_alarm}')
           toggle_relay = False if other_alarm else None
-          print(f'Final toggle state for relay based on sensors: {toggle_relay}')
+          #print(f'Final toggle state for relay based on sensors: {toggle_relay}')
 
-      if toggle_relay is True and not self.state['powered']:
+      if toggle_relay is True and not self.state[period]['powered']:
 
         if not light_state_ok:
           logger.debug(f'Relays for {self} are not switched because the ligts are {light_state} while {self.setup[period]["light_status"]} is requested.')
-          print(f'Relays for {self} are not switched because the ligts are {light_state} while {self.setup[period]["light_status"]} is requested.')
+          #print(f'Relays for {self} are not switched because the ligts are {light_state} while {self.setup[period]["light_status"]} is requested.')
           continue
 
         if not door_state_ok:
@@ -375,7 +375,7 @@ class terrariumArea(object):
           threading.Timer(self.setup[period]['power_on_time'], self.relays_toggle, [period, False]).start()
 
 
-      elif False == toggle_relay and self.state['powered'] and not self.state[period].get('timer_on',False):
+      elif False == toggle_relay and self.state[period]['powered'] and not self.state[period].get('timer_on',False):
         logger.info(f'Toggle off the relays for area {self}.')
         self.relays_toggle(period,False)
 
@@ -383,6 +383,7 @@ class terrariumArea(object):
         print(f'Recalc time table for {self}')
         self._time_table()
 
+    self.state['powered'] = self._powered
     self.state['last_update'] = int(datetime.datetime.now().timestamp())
     return self.state
 
@@ -393,6 +394,7 @@ class terrariumArea(object):
       'alarm_min' : [],
       'unit' : ''
     }
+
     with orm.db_session():
       for sensor in Sensor.select(lambda s: s.id in sensors):
         if sensor.value is None:
@@ -424,20 +426,24 @@ class terrariumArea(object):
   def relays_toggle(self, part, on):
     logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
 
-    for relay in self.setup[part]['relays']:
-      relay = self.enclosure.relays[relay]
+    with orm.db_session():
+      for db_relay in Relay.select(lambda r: r.id in self.setup[part]['relays']):
+        if db_relay.manual_mode:
+          continue
 
-      if on:
-        logger.info(f'Set the relay {relay.name} to ON')
-        self.enclosure.relays[relay.id].on(relay.ON)
+        relay = self.enclosure.relays[db_relay.id]
 
-      else:
-        logger.info(f'Set the relay {relay.name} to OFF')
-        self.enclosure.relays[relay.id].on(relay.OFF)
-        self.state[part]['timer_on'] = False
+        if on:
+          logger.info(f'Set the relay {relay.name} to ON')
+          self.enclosure.relays[relay.id].on(relay.ON)
 
-    self.state['powered'] = on
+        else:
+          logger.info(f'Set the relay {relay.name} to OFF')
+          self.enclosure.relays[relay.id].on(relay.OFF)
+          self.state[part]['timer_on'] = False
 
+    self.state[part]['powered'] = on
+    self.state['powered'] = self._powered
 
   def _time_schema(self):
     return {
@@ -450,127 +456,202 @@ class terrariumAreaLights(terrariumArea):
 
   PERIODS = ['day','night']
 
+  def load_setup(self, data):
+    super().load_setup(data)
+
+    # Load extra tweaks
+    dimmer_found = False
+    average_dimmer_durations = {'on' : [], 'off' : []}
+    for period in self.PERIODS:
+      if period not in self.setup:
+        continue
+
+      for relay_id in self.setup[period]['relays']:
+        relay = self.enclosure.relays[relay_id]
+        dimmer_found = dimmer_found or relay.is_dimmer
+
+        extra_tweaks = self.setup[period].get(('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'on_' + relay.id, None)
+        if extra_tweaks is None:
+          continue
+
+        # Durations are in minutes for dimmers, and in percentage for relays
+        self.setup[period]['tweaks'][relay.id] = {
+          'on'  : float(self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'on_' + relay.id]),
+          'off' : float(self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'off_' + relay.id]),
+        }
+
+        if relay.is_dimmer:
+          average_dimmer_durations['on'].append(self.setup[period]['tweaks'][relay.id]['on'])
+          average_dimmer_durations['off'].append(self.setup[period]['tweaks'][relay.id]['off'])
+
+      if not dimmer_found:
+        # There was no dimmers in the relay list. So all normal on/off.
+        self.setup[period]['tweaks'] = {}
+      elif len(average_dimmer_durations['on']) > 0:
+        # Add the average dimmer duration, so that the normal relays can use it for their percentage delay toggle
+        self.setup[period]['tweaks']['on']  = {'dimmer_duration' : statistics.mean(average_dimmer_durations['on'])}
+        self.setup[period]['tweaks']['off'] = {'dimmer_duration' : statistics.mean(average_dimmer_durations['off'])}
+
+    # Reset the powerd on state if the dimmers are not at max value. So the dimmer will continue where it left off
+    for period in self.PERIODS:
+      if period not in self.setup:
+        continue
+
+      if self.state[period]['powered']:
+        max_states = []
+        if self._is_timer_time(period):
+          for relay in self.setup[period]['relays']:
+            relay = self.enclosure.relays[relay]
+            if relay.is_dimmer:
+              max_states.append(relay.state == relay.ON)
+
+        self.state[period]['powered'] = all(max_states)
+
+    self.state['powered'] = self._powered
+
   def relays_toggle(self, part, on):
     logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
 
-    for relay in self.setup[part]['relays']:
-      relay = self.enclosure.relays[relay]
-      tweaks = self.setup[part]['tweaks']
+    with orm.db_session():
+      for db_relay in Relay.select(lambda r: r.id in self.setup[part]['relays']):
+        if db_relay.manual_mode:
+          continue
 
-      duration_or_delay_value = tweaks.get(str(relay.id), None)
-      duration_or_delay_value = 0 if duration_or_delay_value is None else float(duration_or_delay_value['on' if on else 'off'])
+        relay = self.enclosure.relays[db_relay.id]
 
-      if relay.is_dimmer:
-        duration_or_delay_value *= 60.0
-      else:
-        duration_or_delay_value = (float(duration_or_delay_value)/100) * (tweaks['on' if on else 'off']['dimmer_duration'] * 60.0)
+      #for relay in self.setup[part]['relays']:
+      #  relay = self.enclosure.relays[relay]
+        tweaks = self.setup[part]['tweaks']
 
-      if on:
-
-        if relay.is_dimmer:
-          logger.info(f'Start the dimmer {relay.name} from 0 to {relay.ON}% in {duration_or_delay_value} seconds')
-          # TODO: In the future we will also be able to set the ON value...
-        else:
-          logger.info(f'Set the relay {relay.name} to on with {duration_or_delay_value} seconds delay')
-
-        self.enclosure.relays[relay.id].on(relay.ON,duration_or_delay_value)
-        self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
-
-      else:
+        duration_or_delay_value = tweaks.get(str(relay.id), None)
+        duration_or_delay_value = 0 if duration_or_delay_value is None else float(duration_or_delay_value['on' if on else 'off'])
 
         if relay.is_dimmer:
-          logger.info(f'Stopping the dimmer {relay.name} from {relay.OFF}% to 0 in {duration_or_delay_value} seconds')
-          # TODO: In the future we will also be able to set the ON value...
+          duration_or_delay_value *= 60.0
         else:
-          logger.info(f'Set the relay {relay.name} to off with {duration_or_delay_value} seconds delay')
+          duration_or_delay_value = (float(duration_or_delay_value)/100) * (tweaks['on' if on else 'off']['dimmer_duration'] * 60.0)
 
-        self.enclosure.relays[relay.id].on(relay.OFF,duration_or_delay_value)
+        if on:
+          if relay.is_dimmer:
+            logger.info(f'Start the dimmer {relay.name} from 0 to {relay.ON}% in {duration_or_delay_value} seconds')
+          else:
+            logger.info(f'Set the relay {relay.name} to on with {duration_or_delay_value} seconds delay')
 
-        self.state[part]['timer_on'] = False
+          self.enclosure.relays[relay.id].on(relay.ON,duration_or_delay_value)
+          self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
 
-    self.state['powered'] = on
+        else:
+          if relay.is_dimmer:
+            logger.info(f'Stopping the dimmer {relay.name} from {relay.OFF}% to 0 in {duration_or_delay_value} seconds')
+            # TODO: In the future we will also be able to set the ON value...
+          else:
+            logger.info(f'Set the relay {relay.name} to off with {duration_or_delay_value} seconds delay')
+
+          self.enclosure.relays[relay.id].on(relay.OFF,duration_or_delay_value)
+
+          self.state[part]['timer_on'] = False
+
+    self.state[part]['powered'] = on
+    self.state['powered'] = self._powered
 
 class terrariumAreaTemperature(terrariumArea):
 
-
   def __init__(self, id, enclosure, type, name, mode, setup):
-    # https://onion.io/2bt-pid-control-python/
-    self.__pid = None
+    self.__dimmers = {}
     super().__init__(id, enclosure, type, name, mode, setup)
 
-  def update(self):
-    super().update()
-#    print(f'Update terrariumAreaTemperature {self.__pid}')
-    if self.__pid is not None and 'disabled' != self.mode:
-      # Update the heater/cooler dimmer values
+  def load_setup(self, data):
+    super().load_setup(data)
 
-      current_values = self.current_value(self.setup['sensors'])
-      self.__pid.setpoint = (current_values['alarm_min'] + current_values['alarm_max']) / 2.0
+    # Restore running dimmers with PID if running in sensor mode
+    if 'disabled' != self.mode and 'sensors' == self.mode:
+      sensor_values  = self.current_value(self.setup['sensors'])
+      sensor_average = float(sensor_values['alarm_min'] + sensor_values['alarm_max']) / 2.0
 
       for period in self.PERIODS:
         if period not in self.setup:
           continue
 
-        self.__pid.sample_time = max(1,self.setup[period]["settle_time"])
-        dimmer_value = self.__pid(current_values['current'])
+        if self.state[period]['powered']:
+          for relay in self.setup[period]['relays']:
+            relay = self.enclosure.relays[relay]
+            if relay.is_dimmer:
+              self.__dimmers[relay.id] = PID(1, 0.1, 0.05,
+                                            setpoint=sensor_average,
+                                            sample_time=max(1,self.setup[period]['settle_time']),
+                                            output_limits=(relay.OFF,relay.ON))
+
+              self.__dimmers[relay.id].set_auto_mode(True, last_output=relay.state)
+              dimmer_value = round(self.__dimmers[relay.id](sensor_values['current']))
+              self.enclosure.relays[relay.id].on(dimmer_value)
+              print(f'Loaded running dimmer {relay}')
+
+    self.state['powered'] = self._powered
+
+  def update(self):
+    super().update()
+    if 'disabled' != self.mode and len(self.__dimmers) > 0:
+      sensor_values  = self.current_value(self.setup['sensors'])
+      sensor_average = float(sensor_values['alarm_min'] + sensor_values['alarm_max']) / 2.0
+
+      for period in self.PERIODS:
+        if period not in self.setup:
+          continue
 
         for relay in self.setup[period]['relays']:
           relay = self.enclosure.relays[relay]
-          if relay.is_dimmer:
-            #print(f'Put dimmer {self} to state: {dimmer_value}% based on temp: {current_values["current"]} -> goal: {self.__pid.setpoint}')
-            self.enclosure.relays[relay.id].on(dimmer_value)
+          self.__dimmers[relay.id].setpoint = sensor_average
+          self.__dimmers[relay.id].output_limits = (relay.OFF,relay.ON)
 
+          dimmer_value = round(self.__dimmers[relay.id](sensor_values['current']))
+          self.enclosure.relays[relay.id].on(dimmer_value)
+
+    self.state['powered'] = self._powered
     return self.state
 
   def relays_toggle(self, part, on):
-    #print(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
     logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
 
-    for relay in self.setup[part]['relays']:
-      relay = self.enclosure.relays[relay]
-      # print('Relay')
-      # print(relay)
+    with orm.db_session():
+      for db_relay in Relay.select(lambda r: r.id in self.setup[part]['relays']):
+        if db_relay.manual_mode:
+          continue
 
-      if on:
-        # print('Set to on....')
-        # print(f'Is dimmer: {relay.is_dimmer}')
-        # print(f'Has sensors: {"sensors" in self.setup}')
+        relay = self.enclosure.relays[db_relay.id]
 
-        if relay.is_dimmer and 'sensors' in self.setup:
-          current_values = self.current_value(self.setup['sensors'])
-          pid_target = (current_values['alarm_min'] + current_values['alarm_max']) / 2.0
 
-          logger.info(f'Start the dimmer {relay.name} in PID modus to go to average value {pid_target}')
-          # print(f'Start the dimmer {relay.name} in PID modus to go to average value {pid_target}')
-          # print(f'Min max values: (0,{relay.ON}), sample_time {self.setup[part]["settle_time"]}')
-          if self.__pid is None:
-            self.__pid = PID(1, 0.1, 0.05,
-                              setpoint=pid_target,
-                              sample_time=max(1,self.setup[part]["settle_time"]),
-                              output_limits=(0,100))
+      # for relay in self.setup[part]['relays']:
+      #   relay = self.enclosure.relays[relay]
 
-            #print(f'Starting dimmer {self} with PID setup. Target temp {self.__pid}')
-            dimmer_value = round(self.__pid(current_values['current']))
-            #print(f'Put dimmer {self} to state: {dimmer_value}%')
+        if on:
+          if relay.is_dimmer and 'sensors' == self.mode:
+            sensor_values  = self.current_value(self.setup['sensors'])
+            sensor_average = float(sensor_values['alarm_min'] + sensor_values['alarm_max']) / 2.0
+
+            logger.info(f'Start the dimmer {relay} in PID modus to go to average value {sensor_average}')
+            self.__dimmers[relay.id] = PID(1, 0.1, 0.05,
+                                          setpoint=sensor_average,
+                                          sample_time=max(1,self.setup[part]['settle_time']),
+                                          output_limits=(relay.OFF,relay.ON))
+
+            dimmer_value = round(self.__dimmers[relay.id](sensor_values['current']))
             self.enclosure.relays[relay.id].on(dimmer_value)
 
+          else:
+            logger.info(f'Set the relay {relay.name} to ON with 0 seconds delay')
+            self.enclosure.relays[relay.id].on(relay.ON)
+
+          self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
+
         else:
-          #print(f'Set the relay {relay.name} to ON with 0 seconds delay')
-          logger.info(f'Set the relay {relay.name} to ON with 0 seconds delay')
-          self.enclosure.relays[relay.id].on(relay.ON)
+          logger.info(f'Set the relay {relay.name} to OFF with 0 seconds delay')
+          self.enclosure.relays[relay.id].on(relay.OFF)
+          self.state[part]['timer_on'] = False
+          if relay.id in self.__dimmers:
+            del(self.__dimmers[relay.id])
 
-        self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
-
-      else:
-        #print(f'Set the relay {relay.name} to OFF with 0 seconds delay')
-        logger.info(f'Set the relay {relay.name} to OFF with 0 seconds delay')
-        self.enclosure.relays[relay.id].on(relay.OFF)
-        self.state[part]['timer_on'] = False
-        if self.__pid is not None:
-          #print('CLEAR PID')
-          self.__pid = None
-
-    self.state['powered'] = on
+    self.state[part]['powered'] = on
+    self.state['powered'] = self._powered
 
 class terrariumAreaHumidity(terrariumArea):
   pass
@@ -606,4 +687,62 @@ class terrariumAreaWatertank(terrariumArea):
     return sensor_values
 
 class terrariumAreaAudio(terrariumArea):
-  pass
+  PERIODS = ['day','night']
+
+  def load_setup(self, data):
+    data = copy.deepcopy(data)
+
+    # Rename the playlists variables back to relays so the rest of the code will work...
+    data['day']['relays']   = data['day']['playlists']
+    data['night']['relays'] = data['night']['playlists']
+
+    del(data['day']['playlists'])
+    del(data['night']['playlists'])
+
+    super().load_setup(data)
+
+    for period in self.PERIODS:
+      if period not in self.setup:
+        continue
+
+      playlist_files = []
+      playlists = [uuid.UUID(playlist) for playlist in self.setup[period]['relays']]
+      with orm.db_session():
+#        print('Search for playlists')
+#        print(self.setup[period]['relays'])
+#        print(playlists)
+
+        with orm.sql_debugging(show_values=True):
+          test = Playlist.select(lambda pl: pl.id in playlists)
+#          print(test.get_sql())
+
+
+        for playlist in Playlist.select().filter(lambda pl: pl.id in playlists):
+#          print('Playlist')
+#          print(playlist)
+          for audiofile in playlist.files:
+            playlist_files.append(audiofile.filename)
+
+#          print(f'Make player with files: {playlist_files}')
+          self.setup[period]['player'] = terrariumAudioPlayer(self.setup['soundcard'], playlist_files, playlist.shuffle, playlist.repeat)
+
+#    print('Final setup')
+#    print(self.setup)
+
+  def relays_state(self, period):
+    return period in self.setup and 'player' in self.setup[period] and self.setup[period]['player'].running
+
+  def relays_toggle(self, period, on):
+    if period not in self.setup:
+      return False
+
+    print(f'Toggle relays {self} for period {period} to {on}')
+
+    if on:
+      self.setup[period]['player'].play()
+
+    else:
+      self.setup[period]['player'].stop()
+
+    self.state[period]['powered'] = on
+    self.state['powered'] = self._powered

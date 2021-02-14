@@ -3,10 +3,12 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 from . import terrariumButton, terrariumButtonException
-from terrariumUtils import terrariumUtils
+#from terrariumUtils import terrariumUtils
 
-# pip install gpiozero
-from gpiozero import LightSensor
+import RPi.GPIO as GPIO
+from gevent import sleep
+import threading
+
 
 class terrariumLDRSensor(terrariumButton):
   HARDWARE = 'ldr'
@@ -14,19 +16,46 @@ class terrariumLDRSensor(terrariumButton):
 
   __CAPACITOR = 1 # in uF
 
-  def calibrate(self,calibration_data):
-    # Only (re)calibrate when the values are different
-    if self.__CAPACITOR != int(calibration_data['ldr_capacitor']):
-      self.stop()
-      self.__CAPACITOR = int(calibration_data['ldr_capacitor'])
-      self.load_hardware()
+  def __run(self):
+    self._checker['running'] = True
+    while self._checker['running']:
+      count = 0
 
-  def load_hardware(self):
-    address = self._address
-    self._device['device'] = LightSensor(terrariumUtils.to_BCM_port_number(address[0]), charge_time_limit=(self.__CAPACITOR * 0.001), partial=True)
-    self._device['device'].when_light = self._pressed
-    self._device['device'].when_dark  = self._released
-    self._device['state'] = self.PRESSED if self._device['device'].wait_for_light(1) else self.RELEASED
+      #Output on the pin for
+      GPIO.setup(self._device['device'], GPIO.OUT)
+      GPIO.output(self._device['device'], False)
+      sleep(.1)
+
+      #Change the pin back to input
+      GPIO.setup(self._device['device'], GPIO.IN)
+
+      #Count until the pin goes high
+      # We found out that a value of capacitor value * 10000 is pretty correct for detecting if there is light
+      while self._checker['running'] and count < int( 1.1 * (self.__CAPACITOR * 10000)) and GPIO.input(self._device['device']) == 0:
+        count += 1
+
+      self._device['internal_state'] = self.PRESSED if count <= (self.__CAPACITOR * 10000) else self.RELEASED
+
+      sleep(.01)
+
+  def _get_state(self):
+    return self._device['internal_state']
+
+  def _load_hardware(self):
+    self._device['internal_state'] = self.RELEASED
+    self.__thread = threading.Thread(target=self.__run)
+    self.__thread.start()
+
+    # For the first reading, wait a bit....
+    sleep(.25)
+
+  def calibrate(self,calibration_data):
+    self.__CAPACITOR = int(calibration_data['ldr_capacitor'])
+
+  def stop(self):
+    self._checker['running'] = False
+    self.__thread.join()
+    super().stop()
 
   @property
   def is_light(self):

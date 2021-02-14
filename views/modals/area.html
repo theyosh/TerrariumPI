@@ -52,49 +52,8 @@
     </div>
   </div>
 </div>
+
 <div class="row area_type area_lights">
-  <script type="text/html" id="dimmer_schema_template">
-    <div class="row">
-      <div class="col-4">
-        <div class="form-group">
-          <label for="area_name">{{ _('Relay') }}</label>
-          <input type="text" class="form-control" id="area_lights_day_relay" name="day_relay" required="required" readonly="readonly" placeholder="{{ _('Select relays') }}" data-value="relay_name">
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <label for="area_name">{{ _('Duration on') }}</label>
-          <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_duration" id="area_lights_day_duration_on" value="0">
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <label for="area_name">{{ _('Power on') }}</label>
-          <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_power" id="area_lights_day_power_on" value="0">
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <label for="area_name">{{ _('Duration off') }}</label>
-          <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_duration" id="area_lights_day_duration_off" value="0">
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <label for="area_name">{{ _('Power off') }}</label>
-          <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_power" id="area_lights_day_power_off" value="0">
-          </div>
-        </div>
-      </div>
-    </div>
-  </script>
   <div class="col-12 col-sm-6 col-md-3 col-lg-4">
     <div class="form-group">
       <label for="area_lights_mode">{{ _('Mode') }}</label>
@@ -113,8 +72,8 @@
   </div>
   <div class="col-12 col-sm-6 col-md-3 col-lg-2">
     <div class="form-group">
-      <label for="area_lights_day_max_hours">{{ _('Maximum hours') }}</label>
-      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_day_max_hours" name="day_max_hours" placeholder="{{ _('Enter the maximum amount of hours') }}">
+      <label for="area_lights_max_day_hours">{{ _('Maximum hours') }}</label>
+      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_max_day_hours" name="max_day_hours" placeholder="{{ _('Enter the maximum amount of hours') }}">
       <small class="text-muted">
         {{ _('The maximum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is longer then this maximum value, the day will be shortend to this maximum value.') }}
       </small>
@@ -125,8 +84,8 @@
   </div>
   <div class="col-12 col-sm-6 col-md-3 col-lg-2">
     <div class="form-group">
-      <label for="area_lights_day_min_hours">{{ _('Minimum hours') }}</label>
-      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_day_min_hours" name="day_min_hours" placeholder="{{ _('Enter the minimum amount of hours') }}">
+      <label for="area_lights_min_day_hours">{{ _('Minimum hours') }}</label>
+      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_min_day_hours" name="min_day_hours" placeholder="{{ _('Enter the minimum amount of hours') }}">
       <small class="text-muted">
         {{ _('The minimum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is shorter then this minimum value, the day will be extended to this minimum value.') }}
       </small>
@@ -137,8 +96,8 @@
   </div>
   <div class="col-12 col-sm-6 col-md-3 col-lg-2">
     <div class="form-group">
-      <label for="area_lights_day_shift_hours">{{ _('Hours shift') }}</label>
-      <input type="number" step="0.01" min="-12.0" max="12.0" class="form-control" id="area_lights_day_shift_hours" name="day_shift_hours" placeholder="{{ _('Enter the amount of hours to shift') }}">
+      <label for="area_lights_shift_day_hours">{{ _('Hours shift') }}</label>
+      <input type="number" step="0.01" min="-12.0" max="12.0" class="form-control" id="area_lights_shift_day_hours" name="shift_day_hours" placeholder="{{ _('Enter the amount of hours to shift') }}">
       <small class="text-muted">
         {{ _('The amount of time to shift in hours based on the sun rise time. Negative values will make the day start earlier.') }}
       </small>
@@ -272,12 +231,264 @@
     </div>
   </div>
 </div>
+
+<div class="row area_type area_audio">
+
+  <script type="text/html" id="audio_schema_template">
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <label for="area_name">{{ _('Relay') }}</label>
+          <input type="text" class="form-control" id="area_lights_day_relay" name="day_relay" required="required" readonly="readonly" placeholder="{{ _('Select relays') }}" data-value="relay_name">
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label for="area_name">{{ _('Duration on') }}</label>
+          <div class="pl-2 pr-2 pt-1">
+            <input type="text" class="slider_duration" id="area_lights_day_duration_on" value="0">
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label for="area_name">{{ _('Power on') }}</label>
+          <div class="pl-2 pr-2 pt-1">
+            <input type="text" class="slider_power" id="area_lights_day_power_on" value="0">
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label for="area_name">{{ _('Duration off') }}</label>
+          <div class="pl-2 pr-2 pt-1">
+            <input type="text" class="slider_duration" id="area_lights_day_duration_off" value="0">
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label for="area_name">{{ _('Power off') }}</label>
+          <div class="pl-2 pr-2 pt-1">
+            <input type="text" class="slider_power" id="area_lights_day_power_off" value="0">
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+
+  <div class="col-12 col-sm-3 col-md-4 col-lg-4">
+    <div class="form-group">
+      <label for="area_audio_mode">{{ _('Mode') }}</label>
+      <select class="select2" id="area_audio_mode" name="mode" required="required" data-placeholder="{{ _('Select a mode') }}" style="width: 100%;">
+        <option value="disabled">{{ _('Disabled') }}</option>
+        <option value="main_lights">{{ _('Main lights') }}</option>
+        <option value="timer">{{ _('Timer') }}</option>
+        <option value="weather">{{ _('Weather day/night') }}</option>
+        <option value="weather_inverse">{{ _('Weather night/day') }}</option>
+      </select>
+      <small class="text-muted">
+        {{ _('Select the mode of this area. This will change the timing and durations of the players.') }}
+      </small>
+      <div class="invalid-feedback">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-9 col-md-8 col-lg-8">
+    <div class="form-group">
+      <label for="area_audio_soundcard">{{ _('Soundcard') }}</label>
+      <select class="select2" id="area_audio_soundcard" name="soundcard" required="required" data-placeholder="{{ _('Select a soundcard') }}" style="width: 100%;">
+
+      </select>
+      <small class="text-muted">
+        {{ _('Select the soundcard that is used for this enclosure.') }}
+      </small>
+      <div class="invalid-feedback">
+      </div>
+    </div>
+  </div>
+
+
+<!--
+
+  <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="form-group">
+      <label for="area_lights_day_max_hours">{{ _('Maximum hours') }}</label>
+      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_day_max_hours" name="day_max_hours" placeholder="{{ _('Enter the maximum amount of hours') }}">
+      <small class="text-muted">
+        {{ _('The maximum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is longer then this maximum value, the day will be shortend to this maximum value.') }}
+      </small>
+      <div class="invalid-feedback">
+
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="form-group">
+      <label for="area_lights_day_min_hours">{{ _('Minimum hours') }}</label>
+      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_day_min_hours" name="day_min_hours" placeholder="{{ _('Enter the minimum amount of hours') }}">
+      <small class="text-muted">
+        {{ _('The minimum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is shorter then this minimum value, the day will be extended to this minimum value.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('ERROR') }}
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="form-group">
+      <label for="area_lights_day_shift_hours">{{ _('Hours shift') }}</label>
+      <input type="number" step="0.01" min="-12.0" max="12.0" class="form-control" id="area_lights_day_shift_hours" name="day_shift_hours" placeholder="{{ _('Enter the amount of hours to shift') }}">
+      <small class="text-muted">
+        {{ _('The amount of time to shift in hours based on the sun rise time. Negative values will make the day start earlier.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Enter a value between -12 and 12.') }}
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="form-group">
+      <div class="switch">
+        <label for="area_lights_main_lights">{{ _('Main lights') }}</label>
+        <input type="checkbox" class="switch" id="area_lights_main_lights" name="main_lights">
+        <label for="area_lights_main_lights" class="mt-1"></label>
+      </div>
+      <small class="text-muted">
+        {{ _('Toggle this if this is the main lights for this enclosure. This is used for the light checks in other areas.') }}
+      </small>
+    </div>
+  </div>
+ -->
+
+
+
+
+
+</div>
+
+
+<div class="row area_type area_audio">
+  <div class="col">
+    <small class="text-muted">
+      {{ _('Below you can per select the relays and timer settings per period daytime and nighttime.') }}
+    </small>
+    <nav class="mb-2">
+      <div class="nav nav-tabs" role="tablist"> <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#area_audio_day" role="tab" aria-controls="day" aria-selected="true"><i class="fas fa-sun" ></i> {{ _('Day settings') }}</a> <a class="nav-item nav-link" id="profile-tab" data-toggle="tab" href="#area_audio_night" role="tab" aria-controls="night" aria-selected="false"><i class="fas fa-moon" ></i> {{ _('Night settings') }}</a> </div>
+    </nav>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="area_audio_day" role="tabpanel" aria-labelledby="day-tab">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_audio_day_begin">{{ _('Begin time') }}</label>
+              <input type="time" class="form-control" id="area_audio_day_begin" name="day_begin" placeholder="{{ _('Enter begin time') }}">
+              <small class="text-muted">
+                {{ _('The time of the day when the relays are toggled on each day.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time of the day.') }}
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="audio_day_end">{{ _('End time') }}</label>
+              <input type="time" class="form-control" id="area_audio_day_end" name="day_end" placeholder="{{ _('Enter end time') }}">
+              <small class="text-muted">
+                {{ _('The time of the day when the relays are toggled off each day.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time of the day.') }}
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_audio_day_on_duration">{{ _('On duration') }}</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_audio_day_on_duration" name="day_on_duration" placeholder="{{ _('On duration') }}">
+              <small class="text-muted">
+                {{ _('The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full day.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time of the day.') }}
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_audio_day_off_duration">{{ _('Off duration') }}</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_audio_day_off_duration" name="day_off_duration" placeholder="{{ _('Off duration') }}">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+              <label for="area_audio_day_playlists">{{ _('Playlists') }}</label>
+              <select class="select2" id="area_audio_day_playlists" name="day_playlists" multiple="multiple" data-placeholder="{{ _('Select playlists') }}" style="width: 100%;"> </select>
+            </div>
+          </div>
+        </div>
+        <!-- TODO: Fix nice schema's for timing and dimming values -->
+        <div class="row area_alarm_day_dimmer_settings fuckbs-d-none">
+          <div class="col">
+            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_day_relays" role="tablist"> </ul>
+          </div>
+          <div class="tab-content" id="area_dimmer_settings_day_relays_content"></div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="area_audio_night" role="tabpanel" aria-labelledby="night-tab">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_audio_night_begin">{{ _('Begin time') }}</label>
+              <input type="time" class="form-control" id="area_audio_night_begin" name="night_begin" placeholder="{{ _('Enter begin time') }}">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="audio_night_end">{{ _('End time') }}</label>
+              <input type="time" class="form-control" id="area_audio_night_end" name="night_end" placeholder="{{ _('Enter end time') }}">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_audio_night_on_duration">{{ _('On duration') }}</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_audio_night_on_duration" name="night_on_duration" placeholder="{{ _('On duration') }}">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_audio_night_off_duration">{{ _('Off duration') }}</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_audio_night_off_duration" name="night_off_duration" placeholder="{{ _('Off duration') }}">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+              <label for="area_audio_night_playlists">{{ _('Playlists') }}</label>
+              <select class="select2" id="area_audio_night_playlists" name="night_playlists" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;"> </select>
+            </div>
+          </div>
+        </div>
+        <!-- TODO: Fix nice schema's for timing and dimming values -->
+        <div class="row area_alarm_night_dimmer_settings fuckbs-d-none">
+          <div class="col">
+            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_night_relays" role="tablist"> </ul>
+          </div>
+          <div class="tab-content" id="area_dimmer_settings_night_relays_content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row area_type area_watertank area_temperature area_humidity area_co2 area_conductivity area_moisture area_ph">
   <div class="col-12 col-sm-6 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="area_watertank_mode">{{ _('Mode') }}</label>
       <select class="select2" id="area_watertank_mode" name="mode" required="required" data-placeholder="{{ _('Select a mode') }}" style="width: 100%;">
         <option value="disabled">{{ _('Disabled') }}</option>
+        <option value="main_lights">{{ _('Main lights') }}</option>
         <option value="timer">{{ _('Timer') }}</option>
         <option value="sensors">{{ _('Sensors') }}</option>
         <option value="weather">{{ _('Weather day/night') }}</option>
@@ -516,6 +727,7 @@
     </div>
   </div>
 </script>
+
 <script type="text/html" id="area_dimmer_setting_step">
   <div class="row">
     <label class="col-sm-2 col-form-label">{{ _('Step change') }}</label>
@@ -524,14 +736,29 @@
     </div>
   </div>
 </script>
+
 {% endblock %}
 
 {% block modal_form_javascript_functions %}
-function show_relay_tab(form, part, relay_id, relay_name, dimmer) {
-  form.find('div.row.area_alarm_' + part + '_dimmer_settings').show();
+
+function remove_relay_tab(form, part, relay_id) {
+  let tabbs  = form.find('#area_dimmer_settings_' + part + '_relays');
+  let panels = form.find('#area_dimmer_settings_' + part + '_relays_content');
+
+  panels.find('#dimmer_' + part + '_setting_' + relay_id).remove();
+  tabbs.find('#dimmer_' + part + '_setting_' + relay_id + '-tab').parent().remove();
+
+}
+
+function add_relay_tab(form, part, relay_id, relay_name, dimmer) {
+  if (['day','night'].indexOf(part) == -1) {
+    return;
+  }
 
   let tabbs  = form.find('#area_dimmer_settings_' + part + '_relays');
   let panels = form.find('#area_dimmer_settings_' + part + '_relays_content');
+
+  form.find('div.row.area_alarm_' + part + '_dimmer_settings').show();
 
   let tab = jQuery('<li>').addClass('nav-item').prop('role','presentation').append(
     jQuery('<a>').addClass('nav-link').attr({'id' : 'dimmer_' + part + '_setting_' + relay_id + '-tab','href':'#dimmer_' + part + '_setting_' + relay_id, 'data-toggle':'tab','role':'tab','aria-controls':'dimmer_' + part + '_setting_' + relay_id, 'aria-selected' : 'true'}).append(
@@ -564,16 +791,13 @@ function show_relay_tab(form, part, relay_id, relay_name, dimmer) {
     element.name = element.id;
   });
 
-
-  //dimmer_field.find('label').attr('for',  dimmer_field.attr('id'));
-  //dimmer_field.find('input').attr('name', dimmer_field.attr('id'));
-
   panel.append(dimmer_field);
   tabbs.append(tab);
   panels.append(panel);
-  tab.find('a').tab('show');
   panel.find('.range_slider').bootstrapSlider();
 }
+
+
 {% endblock %}
 
 {% block modal_form_javascript_pre %}
@@ -668,7 +892,7 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
     // Enable hours fields
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id*="_hours"]').prop('readonly',false);
 
-    if ('lights' == area_type) {
+    if (['lights','audio'].indexOf(area_type) != -1) {
       // Day part
       // Set the day begin time
       {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_day_begin"]').val(sunrise).prop('readonly',true);
@@ -709,51 +933,47 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
 });
 
 // Dimmer step settings for heating, humidity, etc
-// {{modal_type}}_form.find('.row.area_type:not(.area_lights) select[id$="relays"]').on('change',function(event) {
 {{modal_type}}_form.find('.row.area_type select[id$="relays"]').on('change',function(event) {
-  let target = jQuery(event.target);
-  //console.log('Relay change', target);
-  let relays = target.val();
-  let part =  target.attr('name').split('_')[0];
 
-  let light_modus = ['day','night'].indexOf(part) != -1;
+  let target = jQuery(event.target);
+  let active = [];
+  if (target.data('active') !== undefined && target.data('active') != '') {
+    active = target.data('active').split(',');
+  }
+  let selected      = target.val();
+  let part          = target.attr('name').split('_')[0];
+  let light_modus   = ['day','night'].indexOf(part) != -1;
   let dimmer_active = false;
 
   if (light_modus) {
     // Check if there is at least one dimmer already selected...
-    jQuery.each(relays, function(counter, relay_id) {
+    jQuery.each(selected, function(counter, relay_id) {
       if (relay_data[relay_id] !== undefined && relay_data[relay_id].dimmer) {
         dimmer_active = true;
       }
     });
   }
 
-  jQuery.each(relays,function(counter,relay_id) {
-    if (relay_data[relay_id] !== undefined && (relay_data[relay_id].dimmer || (light_modus && dimmer_active))) {
-//      console.log('dimmer actie');
-      show_relay_tab({{modal_type}}_form, part, relay_id, relay_data[relay_id].name, relay_data[relay_id].dimmer);
-    }
-  });
-});
-
-{{modal_type}}_form.find('.row.area_type:not(.area_lights) select[id$="relays"]').on('select2:select',function(event) {
-  let data = event.params.data;
-  if (relay_data[data.id] !== undefined && relay_data[data.id].dimmer) {
-    let part = (event.target.name.indexOf('low') != -1 ? 'low' : 'high');
-    show_relay_tab({{modal_type}}_form, part, data.id, relay_data[data.id].name, relay_data[relay_id].dimmer);
+  if ( light_modus && !dimmer_active ) {
+    // Clear all calibration settings
+    jQuery.each(active, function(counter,relay_id) {
+      // Remove tab....
+      remove_relay_tab({{modal_type}}_form, part, relay_id);
+    });
+    selected = [];
+  } else if (light_modus && dimmer_active) {
+    jQuery.each(Array.from(new Set(active.concat(selected))), function(counter,relay_id) {
+      if (active.indexOf(relay_id) == -1) {
+        // Add tab
+        add_relay_tab({{modal_type}}_form, part, relay_id, relay_data[relay_id].name, relay_data[relay_id].dimmer);
+      } else if (selected.indexOf(relay_id) == -1) {
+        // Remove tab
+        remove_relay_tab({{modal_type}}_form, part, relay_id);
+      }
+    });
+    {{modal_type}}_form.find('#area_dimmer_settings_' + part + '_relays a:last').tab('show');
   }
-});
-
-
-{{modal_type}}_form.find('.row.area_type:not(.area_lights) select[id$="relays"]').on('select2:unselect',function(event) {
-  let data = event.params.data;
-  let part = (event.target.name.indexOf('low') != -1 ? 'low' : 'high');
-
-  let tabbs  = {{modal_type}}_form.find('#area_dimmer_settings_' + part + '_relays');
-  let panels = {{modal_type}}_form.find('#area_dimmer_settings_' + part + '_relays_content');
-
-  tabbs.find('#dimmer_' + part + '_setting_' + data.id + '-tab').parent().remove();
-  panels.find('#dimmer_' + part + '_setting_' + data.id).remove();
+  target.data('active', selected.join(','));
 });
 {% endblock %}
 
@@ -767,8 +987,10 @@ jQuery.when(
   jQuery.get('{{ url_for("api:relay_list") }}'),
   jQuery.get('{{ url_for("api:sensor_list") }}'),
   jQuery.get('{{ url_for("api:weather") }}'),
+  jQuery.get('{{ url_for("api:audio_hardware") }}'),
+  jQuery.get('{{ url_for("api:playlist_list") }}'),
 
-).done(function(areas, enclosures, relays, sensors, weather) {
+).done(function(areas, enclosures, relays, sensors, weather, soundcards, playlists) {
   jQuery.each(areas[0].data,function(counter,item){
     area_types[item.type] = item;
   });
@@ -779,7 +1001,6 @@ jQuery.when(
   jQuery.each(area_types,function(counter,item){
     {{modal_type}}_area_select.append(jQuery('<option>').attr('value',item.type).text(item.name));
   });
-  {{modal_type}}_area_select.trigger('change');
 
   let {{modal_type}}_enclosure_select = {{modal_type}}_form.find('select#area_enclosure');
   {{modal_type}}_enclosure_select.prop('disabled', false).attr('readonly', false).find('option').remove();
@@ -788,8 +1009,24 @@ jQuery.when(
     {{modal_type}}_enclosure_select.append(jQuery('<option>').attr('value',item.id).text(item.name));
   });
 
+  let {{modal_type}}_soundcard_select = {{modal_type}}_form.find('select#area_audio_soundcard');
+  {{modal_type}}_soundcard_select.prop('disabled', false).attr('readonly', false).find('option').remove();
+  jQuery.each(soundcards[0].data,function(counter,item){
+    {{modal_type}}_soundcard_select.append(jQuery('<option>').attr('value',item.index).text(item.name));
+  });
+  {{modal_type}}_soundcard_select.trigger('change');
+
+
+  let {{modal_type}}_playlist_select = {{modal_type}}_form.find('select[id$="playlists"]');
+  {{modal_type}}_playlist_select.prop('disabled', false).attr('readonly', false).find('option').remove();
+  jQuery.each(playlists[0].data,function(counter,item){
+    {{modal_type}}_playlist_select.append(jQuery('<option>').attr('value',item.id).text(item.name));
+  });
+  {{modal_type}}_playlist_select.trigger('change');
+
+
   let {{modal_type}}_relay_select = {{modal_type}}_form.find('select[id$="relays"]');
-  {{modal_type}}_relay_select.prop('disabled', false).find('option').remove();
+  {{modal_type}}_relay_select.prop('disabled', false).data('active','').find('option').remove();
 
   // Store which relays are dimmers
   relay_data = [];
@@ -816,6 +1053,7 @@ jQuery.when(
   {{modal_type}}_form.find('.area_alarm_high_dimmer_settings ul.nav').html('');
   {{modal_type}}_form.find('.area_alarm_high_dimmer_settings div.tab-content').html('');
 
+  {{modal_type}}_area_select.trigger('change');
 
   // Check if we are in edit mode.... and need to load more data....
   if ('#' != jQuery(event.relatedTarget).attr('href')) {
@@ -853,64 +1091,34 @@ jQuery.when(
           field.prop('checked',(1 != value)).trigger('change');
           field.prop('checked',(1 == value)).trigger('change');
         } else {
+          /*
           if ('doors' == key) {
             // Create a new array from the doors array with only the door ids
             value = Array.from(value, door => door.id);
           }
+          */
           field.val(value).trigger('change');
-
-          //console.log(key);
-
           if (key.indexOf('_relays') != -1 && value != '') {
             // The relays are set/changed, so fill the extra tweaks fields
-            //console.log(key);
-
             jQuery.each(parsed_data, function(key2,value2) {
               if (key2.indexOf('dimmer_duration') != -1 || key2.indexOf('relay_step') != -1) {
-                //let field2 = {{modal_type}}_form.find('[name="' + key2 + '"]');
-                //field2.val(value2).trigger('change');
-
-                //console.log(field2, value2);
-
                 dimmer_steps.push({
                   id : key2,
                   value: value2
                 });
-
               }
-
-            });
-
-
-          }
-/*
-
-          if (key.indexOf('dimmer_step') != -1) {
-            dimmer_steps.push({
-              id : key,
-              value: value
             });
           }
-*/
-
         }
       });
 
       setTimeout(function(){
         jQuery.each(dimmer_steps,function(counter,data) {
           let field = {{modal_type}}_form.find('[name="' + data['id'] + '"]').slider()
-
-//          console.log(field, data['value']);
-
           field.bootstrapSlider('setValue', data['value'])
-
-
-          //{'value': data['value']}
-
-          //field.val(data['value']).trigger('change');
         });
       },100);
-
+      {{modal_type}}_form.find('select[id$="_mode"]').trigger('change');
       {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
     });
   } else {
@@ -924,7 +1132,7 @@ jQuery.when(
 
 {% block modal_form_javascript_pre_submit_formdata %}
 let exclude_field_names = ['id','mode','name','type','enclosure','setup'];
-if ('lights' == form_data['type']) {
+if (['lights','audio'].indexOf(form_data['type']) != -1) {
   form_data['setup'] = {'day': {}, 'night': {}}
 } else {
   form_data['setup'] = {'low': {}, 'high': {}}

@@ -360,15 +360,17 @@
 
           jQuery.each(data.data,function(counter,enclosure) {
             // Accordion toggle + link
-            enclosure.collapse_link = '#enclosure_' + enclosure.id;
-            enclosure.collapse_id   = 'enclosure_'  + enclosure.id;
-
+            enclosure.collapse_link   = '#enclosure_' + enclosure.id;
+            enclosure.collapse_id     = 'enclosure_'  + enclosure.id;
             enclosure.enclosure_image = { 'background' : 'url(' + enclosure.image + ') no-repeat 100% 0%', 'background-size' : 'auto 100%' };
 
             // Sort areas based on name
             enclosure.areas.sort((a, b) => a.name.localeCompare(b.name));
             jQuery.each(enclosure.areas,function(counter, area){
-              area.icon    = 'mr-1 fas ' + template_sensor_type_icon(area.type) + ' ' + template_sensor_type_color(area.type);
+              icontype = (area.setup.main_lights ? 'main ' : '') + area.type
+
+              area.icon    = 'mr-1 fas ' + template_sensor_type_icon(icontype) + ' ' + template_sensor_type_color(icontype);
+              // TODO: Translate the area type names...
               area.status  = (area.state.powered === true ? 'badge-success' : (area.state.powered === false ? 'badge-secondary' : ''));
               if (area.state.sensors != undefined) {
                 area.warning = (area.state.sensors.alarm ? 'fas fa-exclamation-triangle text-danger' : 'd-none');

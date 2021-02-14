@@ -1,7 +1,7 @@
 from . import terrariumSensor
 from terrariumUtils import terrariumUtils
 
-from gpiozero import DigitalInputDevice
+import RPi.GPIO as GPIO
 
 class terrariumYTXXSensorDigital(terrariumSensor):
   HARDWARE = 'ytxx-digital'
@@ -14,14 +14,14 @@ class terrariumYTXXSensorDigital(terrariumSensor):
       # Set / enable power management
       self._device['power_mngt'] = terrariumUtils.to_BCM_port_number(address[1])
 
-    device = DigitalInputDevice(terrariumUtils.to_BCM_port_number(address[0]))
-    return device
+    GPIO.setup(terrariumUtils.to_BCM_port_number(address[0]), GPIO.IN)  # Data in
+    return terrariumUtils.to_BCM_port_number(address[0])
 
   def _get_data(self):
     data = {}
-    data['moisture'] = 0 if self.device.is_active else 100
+    data['moisture'] = 0 if GPIO.input(self.device) else 100
     return data
 
   def stop(self):
-    self.device.close()
+    GPIO.cleanup(self.device)
     super().stop()

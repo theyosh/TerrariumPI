@@ -69,9 +69,6 @@
     jQuery('#audio_files').DataTable({
       responsive: true,
       autoWidth: false,
-      columnDefs: [
-        { className: 'text-center', 'targets': [-1] }
-      ],
       ajax: {
         url: '{{ url_for("api:audiofile_list") }}',
         dataSrc: function (json) {
@@ -80,11 +77,11 @@
 
           for(let i = 0; i < data.length; i++){
 
-            let audio_player_icon = jQuery('<i>').addClass('fas fa-play-circle audio_player mr-2');
+            let audio_player_icon = jQuery('<i>').addClass('fas fa-play-circle audio_player mr-2 mt-1 text-primary');
             let audio_player = jQuery('<audio>').prop({'controls':true, 'preload' : 'none'}).addClass('d-none').append(jQuery('<source>').attr('src','/media/' + data[i].filename));
 
             {% if authenticated %}
-            let delete_icon = jQuery('<a>').attr({'href':'{{ url_for("api:audiofile_delete", audiofile="_id_") }}'.replace('_id_',data[i].id) , 'title' : '{{ _('Delete audio file') }} ' + data[i].name, 'data-action':'DELETE','data-toggle':'modal','data-target':'#modal-confirm'}).append(jQuery('<i>').addClass('fas fa-trash-alt'));
+            let delete_icon = jQuery('<a>').addClass('text-danger').attr({'href':'{{ url_for("api:audiofile_delete", audiofile="_id_") }}'.replace('_id_',data[i].id) , 'title' : '{{ _('Delete audio file') }} ' + data[i].name, 'data-action':'DELETE','data-toggle':'modal','data-target':'#modal-confirm'}).append(jQuery('<i>').addClass('fas fa-trash-alt'));
             {% endif %}
 
             return_data.push({
@@ -104,7 +101,7 @@
         { data: 'duration' },
         { data: 'filename' },
         { data: 'filesize' },
-        { data: 'action' },
+        { data: 'action', class: 'd-flex justify-content-around' },
       ]
     }).on('draw', function(event, settings){
       jQuery('i.audio_player').off('click').on('click',function(element) {
@@ -142,7 +139,6 @@
           xhr.upload.addEventListener("progress", function(evt) {
             if (evt.lengthComputable) {
               let percentComplete = evt.loaded / evt.total;
-              console.log(percentComplete);
               jQuery('.upload_progress div.progress-bar').css('width',Math.round(percentComplete * 100)+ '%');
               if (percentComplete == 1) {
                 toastr.success('{{ _('Audio file is being processed. Please wait...') }}', '{{ _('OK') }}');

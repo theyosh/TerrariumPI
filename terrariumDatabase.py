@@ -80,6 +80,14 @@ class Audiofile(db.Entity):
   duration   = orm.Required(float)
   filesize   = orm.Required(float)
 
+  playlists  = orm.Set(lambda: Playlist)
+
+  def before_delete(self):
+    filename = Path(self.filename)
+    if filename.exists():
+      filename.unlink()
+      print(f'Deleted file {filename}')
+
   def __repr__(self):
     return f'Audio file {self.name}'
 
@@ -92,9 +100,9 @@ class Button(db.Entity):
   hardware    = orm.Required(str)
   name        = orm.Required(str)
   address     = orm.Required(str)
-  
+
   calibration = orm.Optional(orm.Json)
-  
+
   history     = orm.Set('ButtonHistory')
 
   enclosure   = orm.Optional(lambda: Enclosure)
@@ -174,6 +182,29 @@ class Enclosure(db.Entity):
   def __repr__(self):
     return f'Enclosure {self.name} with {len(self.areas)} areas'
 
+
+class Playlist(db.Entity):
+
+  id      = orm.PrimaryKey(uuid.UUID, default=uuid.uuid4)
+  name    = orm.Required(str)
+
+  volume  = orm.Optional(float, default=80)
+
+  shuffle = orm.Optional(bool, default=False)
+  repeat  = orm.Optional(bool, default=False)
+
+  files   = orm.Set(lambda: Audiofile)
+
+  @property
+  def length(self):
+    return self.files.count()
+
+  @property
+  def duration(self):
+    return orm.sum(audiofile.duration for audiofile in self.files)
+
+  def __repr__(self):
+    return f'Playlist {self.name} with {len(self.files)} files'
 
 class Relay(db.Entity):
   __MAX_VALUE_AGE = 65 * 60  # Max age of the last measurement in minutes
