@@ -111,23 +111,25 @@ class terrariumEnclosure(object):
     area_states = {}
 
     # First we update the main lights area, as they can change the power state for heaters and other areas
-    light_areas = []
     for area_id in self.areas:
-      if 'disabled' == self.areas[area_id].mode:
+      if 'disabled' == self.areas[area_id].mode or 'lights' != self.areas[area_id].type:
         continue
 
-      if 'lights' == self.areas[area_id].type and self.areas[area_id].setup.get('main_lights', False):
+      if self.areas[area_id].setup.get('main_lights', False):
         area_states[area_id] = self.areas[area_id].update()
-        light_areas.append(area_id)
 
     # Update the remaining areas
     for area_id in self.areas:
-      if area_id in light_areas:
+      if 'disabled' == self.areas[area_id].mode or area_id in area_states:
         continue
 
       area_states[area_id] = self.areas[area_id].update()
 
     return area_states
+
+  def stop(self):
+    for area_id in self.areas:
+      self.areas[area_id].stop()
 
   @property
   def door_closed(self):

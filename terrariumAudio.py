@@ -28,48 +28,64 @@ class terrariumAudio(object):
         # Just ignore error, and skip it
         pass
 
-    # print('Sound cards')
-    # print(soundcards)
     return soundcards
 
+  @classmethod
+  def volume(__cls__, hw, value = None):
+    mixer = alsaaudio.Mixer(control='PCM',cardindex=hw)
+
+    if value is None:
+      # We get stereo volume but asume that left and right channel are at the same volume.
+      return mixer.getvolume()[0]
+
+    else:
+      value = max(0,min(100,value))
+      mixer.setvolume(value)
 
 class terrariumAudioPlayer(object):
 
   CMD = '/usr/bin/ffmpeg'
 
-  def __init__(self, hw, playlist = [], shuffle = False, repeat = False):
+  def __init__(self, hw, playlists = [], shuffle = False, repeat = False):
     self.__hw = hw
-
+    self.__stop = False
     self.__player = {
       'ffmpeg' : None,
       'thread' : None,
       'exit_status' : None
     }
 
-    self.playlist = playlist
-    self.shuffle  = shuffle
-    self.repeat   = repeat
+    self.playlists = playlists
+    self.shuffle   = shuffle
+    self.repeat    = repeat
 
   def __run(self):
-    first_start = True
-    while self.repeat or first_start:
-      first_start = False
+    for playlist in self.playlists:
+      if self.__stop:
+        break
 
-      if self.shuffle:
-        random.shuffle(self.__files)
+      files = copy.copy(playlist['files'])
 
-      playlist = [ f'file \'{audiofile}\'' for audiofile in self.__files]
+      if playlist.get('shuffle'):
+        random.shuffle(files)
 
-      with tempfile.NamedTemporaryFile() as fp:
-        fp.write('\n'.join(playlist).encode())
-        fp.flush()
+      repeat = playlist.get('repeat',False)
+      first_start = True
+      while not self.__stop and (repeat or first_start):
+        first_start = False
 
-        cmd = f'{self.CMD} -hide_banner -v 0 -f concat -safe 0 -i {fp.name} -f alsa hw:{self.__hw}'.split(' ')
-        self.__player['ffmpeg'] = psutil.Popen(cmd, stdout=PIPE)
-        self.__player['exit_status'] = self.__player['ffmpeg'].poll()
-        while self.__player['exit_status'] is None:
+        playlist = [ f'file \'{audiofile}\'' for audiofile in files]
+
+        with tempfile.NamedTemporaryFile() as fp:
+          fp.write('\n'.join(playlist).encode())
+          fp.flush()
+
+          cmd = f'{self.CMD} -hide_banner -v 0 -f concat -safe 0 -i {fp.name} -f alsa hw:{self.__hw}'.split(' ')
+          self.__player['ffmpeg'] = psutil.Popen(cmd, stdout=PIPE)
           self.__player['exit_status'] = self.__player['ffmpeg'].poll()
-          sleep(1)
+          while self.__player['exit_status'] is None:
+            self.__player['exit_status'] = self.__player['ffmpeg'].poll()
+            sleep(1)
 
     self.__player['ffmpeg'] = None
 
@@ -77,22 +93,24 @@ class terrariumAudioPlayer(object):
     if self.running:
       self.stop()
 
-    if len(self.__files) > 0:
+    if len(self.playlists) > 0:
+      self.__stop = False
       self.__player['thread'] = threading.Thread(target=self.__run)
       self.__player['thread'].start()
 
   def stop(self):
+    self.__stop = True
     if self.running:
       self.__player['ffmpeg'].terminate()
       self.__player['thread'].join()
 
   @property
-  def playlist(self):
-    return self.__files
+  def playlists(self):
+    return self.__playlists
 
-  @playlist.setter
-  def playlist(self, playlist):
-    self.__files = copy.copy(playlist)
+  @playlists.setter
+  def playlists(self, playlists):
+    self.__playlists = copy.copy(playlists)
 
   @property
   def running(self):
@@ -314,249 +332,3 @@ class terrariumAudioPlayer(object):
 
 #   def get_active_playlist(self):
 #     return self.__active_playlist
-
-# class terrariumAudioPlaylist(object):
-
-#   def __init__(self, id, name = None, start = None, stop = None, volume = None, repeat = False, shuffle = False, files = None):
-#     self.__id = id
-#     self.__name = None
-#     self.__start = None
-#     self.__stop = None
-#     self.__volume = None
-#     self.__repeat = False
-#     self.__shuffle = False
-#     self.__files = []
-#     self.__is_started_at = None
-#     self.__timer_time_table = []
-
-#     self.set_name(name)
-#     self.set_start(start)
-#     self.set_stop(stop)
-#     self.set_volume(volume)
-#     self.set_repeat(repeat)
-#     self.set_shuffle(shuffle)
-#     self.set_files(files)
-
-#   def __calculate_time_table(self):
-#     self.__timer_time_table = []
-#     if self.get_start() is None or self.get_stop() is None:
-#       return
-
-#     logger.info('Calculating autioplaylist \'%s\' with timer data: start = %s, stop = %s',
-#       self.get_name(),
-#       self.get_start(),
-#       self.get_stop())
-
-#     duration_on = None
-#     if not self.get_repeat():
-#       duration_on = int(self.get_songs_duration()/60)
-
-#     self.__timer_time_table = terrariumUtils.calculate_time_table(self.get_start(),
-#                                                                   self.get_stop(),
-#                                                                   duration_on)
-#     logger.info('Timer time table loaded for autioplaylist \'%s\' with %s entries.', self.get_name(),len(self.__timer_time_table))
-
-#   def get_id(self):
-#     return self.__id
-
-#   def set_name(self,value):
-#     self.__name = value
-
-#   def get_name(self):
-#     return self.__name
-
-#   def set_start(self,value):
-#     self.__start = terrariumUtils.parse_time(value)
-#     self.__calculate_time_table()
-
-#   def get_start(self):
-#     return self.__start
-
-#   def set_stop(self,value):
-#     self.__stop = terrariumUtils.parse_time(value)
-#     self.__calculate_time_table()
-
-#   def get_stop(self):
-#     return self.__stop
-
-#   def set_volume(self,value):
-#     self.__volume = value
-
-#   def get_volume(self):
-#     return self.__volume
-
-#   def set_files(self,value):
-#     self.__files = value
-
-#   def get_files(self):
-#     return self.__files
-
-#   def set_repeat(self,repeat = True):
-#     self.__repeat = terrariumUtils.is_true(repeat)
-
-#   def get_repeat(self):
-#     return self.__repeat == True
-
-#   def set_shuffle(self,shuffle = True):
-#     self.__shuffle = terrariumUtils.is_true(shuffle)
-
-#   def get_shuffle(self):
-#     return self.__shuffle == True
-
-#   def set_started(self):
-#     self.__is_started_at = int(time.time())
-
-#   def is_time(self):
-#     logger.debug('Checking timer time table for switch %s with %s entries.', self.get_name(),len(self.__timer_time_table))
-#     is_time = terrariumUtils.is_time(self.__timer_time_table)
-
-#     if is_time is None:
-#       self.__calculate_time_table()
-#       is_time = False
-
-#     logger.debug('Timer action is done for switch %s. Is it time to play?: %s.', self.get_name(),('Yes' if is_time else 'Nope'))
-#     return is_time
-
-#   def get_duration(self):
-#     return terrariumUtils.duration(self.__timer_time_table)
-
-#   def get_songs_duration(self):
-#     return 0.0 + sum(self.__files[fileid].get_track_duration() for fileid in self.__files)
-
-#   def has_files(self):
-#     return len(self.__files) > 0
-
-#   def get_data(self):
-#     data = {'id'      : self.get_id(),
-#             'name'    : self.get_name(),
-#             'start'   : self.get_start(),
-#             'stop'    : self.get_stop(),
-#             'volume'  : self.get_volume(),
-#             'files'   : list(self.get_files().keys()),
-#             'repeat'  : self.get_repeat(),
-#             'shuffle' : self.get_shuffle(),
-#             'is_time' : self.is_time(),
-#             'duration': self.get_duration(),
-#             'songs_duration': self.get_songs_duration()
-#             }
-
-#     return data
-
-# class terrariumAudioFile(object):
-
-#   META_FIELDS = ['Format','Duration','Overall bit rate mode','Overall bit rate','Album','Track name','Format profile','Channel(s)','Sampling rate']
-#   VALID_EXTENSION = terrariumAudioPlayer.VALID_EXTENSION
-
-#   def __init__(self,filename):
-#     self.id = None
-#     self.full_filename = None
-#     self.name = None
-#     self.extension = None
-#     self.file_size = 0
-#     self.upload_date = None
-#     self.meta_data = {}
-
-#     if os.path.isfile(filename):
-#       self.full_filename = filename
-#       self.name = os.path.basename(self.get_full_path())
-#       self.extension = os.path.splitext(self.get_full_path())[1][1:].lower()
-#       self.file_size = os.path.getsize(self.get_full_path())
-#       self.upload_date = os.path.getmtime(self.get_full_path())
-
-#       self.id = md5(b'' + self.get_full_path()).hexdigest()
-#       self.__load_meta_data()
-
-#   def __load_meta_data(self):
-#     meta_data_cache_file = self.full_filename + '.meta'
-
-#     if not os.path.isfile(meta_data_cache_file):
-#       media_info = MediaInfo()
-#       media_info.Open(self.get_full_path())
-#       data = media_info.Inform().split("\n")
-
-#       for line in data:
-#         line = line.strip().split(':')
-#         if line[0].strip() in terrariumAudioFile.META_FIELDS:
-#           field = line[0].strip().replace(' ','').replace('(s)','s').lower()
-#           value = line[1].strip()
-#           if 'duration' == field:
-#             value = media_info.Get(Stream.Audio, 0, "Duration")
-
-#           self.meta_data[field] = value
-
-#       media_info.Close()
-
-#       if len(self.meta_data) > 0:
-#         with open(meta_data_cache_file, 'wb') as datafile:
-#           json.dump(self.meta_data, datafile)
-
-#     else:
-#       with open(meta_data_cache_file) as datafile:
-#         self.meta_data = json.load(datafile)
-
-#   def delete(self):
-#     if os.path.isfile(self.get_full_path() + '.meta'):
-#       os.unlink(self.get_full_path() + '.meta')
-
-#     if os.path.isfile(self.get_full_path()):
-#       os.unlink(self.get_full_path())
-#       return True
-
-#     return False
-
-#   def get_id(self):
-#     return self.id
-
-#   def get_full_path(self):
-#     return self.full_filename
-
-#   def get_name(self):
-#     return self.name
-
-#   def get_extension(self):
-#     return self.extension
-
-#   def get_file_size(self):
-#     return self.file_size
-
-#   def get_upload_date(self):
-#     return self.upload_date
-
-#   def get_track_name(self):
-#     return self.meta_data['trackname'] if 'trackname' in self.meta_data else None
-
-#   def get_track_album(self):
-#     return self.meta_data['album'] if 'album' in self.meta_data else None
-
-#   def get_track_duration(self):
-#     return int(self.meta_data['duration'])/1000 if 'duration' in self.meta_data else 0
-
-#   def get_track_bitrate(self):
-#     return self.meta_data['overallbitrate'] if 'overallbitrate' in self.meta_data else None
-
-#   def get_track_bitrate_type(self):
-#     return self.meta_data['overallbitratemode'] if 'overallbitratemode' in self.meta_data else None
-
-#   def get_track_channels(self):
-#     return self.meta_data['channels'] if 'channels' in self.meta_data else None
-
-#   def get_track_frequency(self):
-#     return self.meta_data['samplingrate'] if 'samplingrate' in self.meta_data else None
-
-#   def get_data(self):
-#     data = {'id' : self.get_id(),
-#             'name' : self.get_name(),
-#             'extension' : self.get_extension(),
-#             'path' : self.get_full_path(),
-#             'size' : self.get_file_size(),
-#             'uploaddate' : self.get_upload_date(),
-#             'trackname' : self.get_track_name(),
-#             'trackalbum' : self.get_track_album(),
-#             'trackduration' : self.get_track_duration(),
-#             'trackbitrate' : self.get_track_bitrate(),
-#             'trackbitratetype' : self.get_track_bitrate_type(),
-#             'trackchannels' : self.get_track_channels(),
-#             'trackfrequency' : self.get_track_frequency(),
-#           }
-
-#     return data
