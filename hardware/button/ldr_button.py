@@ -2,13 +2,15 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from . import terrariumButton, terrariumButtonException
-#from terrariumUtils import terrariumUtils
-
 import RPi.GPIO as GPIO
 from gevent import sleep
 import threading
 
+from . import terrariumButton, terrariumButtonException
+
+
+import os
+import signal
 
 class terrariumLDRSensor(terrariumButton):
   HARDWARE = 'ldr'
@@ -31,18 +33,23 @@ class terrariumLDRSensor(terrariumButton):
 
       #Count until the pin goes high
       # We found out that a value of capacitor value * 10000 is pretty correct for detecting if there is light
-      while self._checker['running'] and count < int( 1.1 * (self.__CAPACITOR * 10000)) and GPIO.input(self._device['device']) == 0:
-        count += 1
+      try:
+        while self._checker['running'] and count <= (self.__CAPACITOR * 10000)+1 and GPIO.input(self._device['device']) == 0:
+          count += 1
 
-      self._device['internal_state'] = self.PRESSED if count <= (self.__CAPACITOR * 10000) else self.RELEASED
+        self._device['internal_state'] = self.PRESSED if count <= (self.__CAPACITOR * 10000) else self.RELEASED
+        sleep(.1)
 
-      sleep(.01)
+      except KeyboardInterrupt as ex:
+        print(f'Fetch CTRL-c... and now what..? For now.. press again Ctrl-C ..')
+        self._checker['running'] = False
 
   def _get_state(self):
     return self._device['internal_state']
 
   def _load_hardware(self):
     self._device['internal_state'] = self.RELEASED
+
     self.__thread = threading.Thread(target=self.__run)
     self.__thread.start()
 
