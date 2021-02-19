@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2021-01-18 22:35+CET\n"
-"PO-Revision-Date: 2020-08-08 11:03+0000\n"
+"POT-Creation-Date: 2021-02-08 14:46+CET\n"
+"PO-Revision-Date: 2021-02-08 13:53+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1.1\n"
+"X-Generator: Weblate 4.4.2\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -53,60 +53,56 @@ msgid "CPU Temperature"
 msgstr "Processor temperatuur"
 
 #: terrariumNotification.py:210
-#, fuzzy
-#| msgid "Environment"
 msgid "Environment light day on"
-msgstr "Omgeving"
+msgstr "Omgeving licht dag aan"
 
 #: terrariumNotification.py:211
-#, fuzzy
-#| msgid "Enabled when lights are off"
 msgid "Environment light day off"
-msgstr "Geactiveerd wanneer de lampen uit zijn"
+msgstr "Omgeving licht dag uit"
 
 #: terrariumNotification.py:212
 msgid "Environment light night on"
-msgstr ""
+msgstr "Omgeving licht 's nachts aan"
 
 #: terrariumNotification.py:213
 msgid "Environment light night off"
-msgstr ""
+msgstr "Omgeving licht 's nachts uit"
 
 #: terrariumNotification.py:215
 msgid "Environment temperature alarm low on"
-msgstr ""
+msgstr "Omgevingstemperatuuralarm laag aan"
 
 #: terrariumNotification.py:216
 msgid "Environment temperature alarm low off"
-msgstr ""
+msgstr "Omgevingstemperatuuralarm laag uit"
 
 #: terrariumNotification.py:217
 msgid "Environment temperature alarm high on"
-msgstr ""
+msgstr "Omgevingstemperatuur alarm hoog aan"
 
 #: terrariumNotification.py:218
 msgid "Environment temperature alarm high off"
-msgstr ""
+msgstr "Omgevingstemperatuuralarm hoog uit"
 
 #: terrariumNotification.py:220
 msgid "Environment humidity alarm low on"
-msgstr ""
+msgstr "Alarm omgevingsvochtigheid laag aan"
 
 #: terrariumNotification.py:221
 msgid "Environment humidity alarm low off"
-msgstr ""
+msgstr "Alarm omgevingsvochtigheid laag uit"
 
 #: terrariumNotification.py:222
 msgid "Environment humidity alarm high on"
-msgstr ""
+msgstr "Alarm omgevingsvochtigheid hoog aan"
 
 #: terrariumNotification.py:223
 msgid "Environment humidity alarm high off"
-msgstr ""
+msgstr "Alarm omgevingsvochtigheid hoog uit"
 
 #: terrariumNotification.py:225
 msgid "Environment moisture alarm low on"
-msgstr ""
+msgstr "Alarm voor omgevingsvochtigheid laag"
 
 #: terrariumNotification.py:226
 msgid "Environment moisture alarm low off"
@@ -169,38 +165,28 @@ msgid "Environment watertank alarm high off"
 msgstr ""
 
 #: terrariumNotification.py:245
-#, fuzzy
-#| msgid "Authentication"
 msgid "Authentication warning"
-msgstr "Authenticatie"
+msgstr "Authenticatie waarschuwing"
 
 #: terrariumNotification.py:247
-#, fuzzy
-#| msgid "No warning messages"
 msgid "System warning message"
-msgstr "Geen waarschuwing berichten"
+msgstr "Systeemwaarschuwingsbericht"
 
 #: terrariumNotification.py:248
-#, fuzzy
-#| msgid "No error messages"
 msgid "System error message"
-msgstr "Geen fout berichten"
+msgstr "Systeemfoutbericht"
 
 #: terrariumNotification.py:250 terrariumNotification.py:251
 msgid "Sensor low alarm"
-msgstr ""
+msgstr "Sensor laag alarm"
 
 #: terrariumNotification.py:253
-#, fuzzy
-#| msgid "Power switches"
 msgid "Powerswitch on"
-msgstr "Stroomschakelaars"
+msgstr "Stroomschakelaars aan"
 
 #: terrariumNotification.py:254
-#, fuzzy
-#| msgid "Power switches"
 msgid "Powerswitch off"
-msgstr "Stroomschakelaars"
+msgstr "Stroomschakelaars uit"
 
 #: terrariumNotification.py:256
 #, fuzzy
@@ -215,10 +201,8 @@ msgid "Door closed"
 msgstr "Deur is gesloten"
 
 #: terrariumNotification.py:259
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Webcam motion"
-msgstr "Webcam instellingen"
+msgstr "Webcam beweging"
 
 #: terrariumTranslations.py:22
 msgid "Holds the external source URL. Supported sources are: %s."
@@ -442,7 +426,7 @@ msgid ""
 "Holds the door address. When using GPIO use <strong>physical</strong> GPIO "
 "pin numbering as address."
 msgstr ""
-"Bevat het deuradres. Wanneer u GPIO gebruikt, gebruikt u <strong>fysieke</"
+"Bevat het deur adres. Wanneer u GPIO gebruikt, gebruikt u <strong>fysieke</"
 "strong> GPIO pin nummering als adres."
 
 #: terrariumTranslations.py:78
@@ -3556,7 +3540,7 @@ msgstr "AMG8833"
 
 #: views/sensor_settings.tpl:130
 msgid "CSS811"
-msgstr ""
+msgstr "CSS811"
 
 #: views/sensor_settings.tpl:146
 msgid "UVA"
