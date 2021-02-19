@@ -235,12 +235,14 @@ class terrariumEngine(object):
       settings['device'] = 'Unknown'
 
     # Set unit values
-    self.units['temperature']= ('C' if 'celsius' == settings['temperature_indicator'] else ( 'F' if 'fahrenheit' == settings['temperature_indicator'] else 'K' ))
-    self.units['distance']   = ('cm' if 'cm' == settings['distance_indicator'] else 'inch')
-    self.units['altitude']   = self.units['distance']
-    self.units['volume']     = ('L' if 'l' == settings['water_volume_indicator'] else ( 'UKGall' if 'ukgall' == settings['water_volume_indicator'] else 'USGall' ))
-    self.units['water_flow'] = self.units['volume'] + '/m'
-    self.units['watertank']  = self.units['volume']
+    self.units['temperature'] = ('C' if 'celsius' == settings['temperature_indicator'] else ( 'F' if 'fahrenheit' == settings['temperature_indicator'] else 'K' ))
+    self.units['heating']     = self.units['temperature']
+    self.units['cooling']     = self.units['temperature']
+    self.units['distance']    = ('cm' if 'cm' == settings['distance_indicator'] else 'inch')
+    self.units['altitude']    = self.units['distance']
+    self.units['volume']      = ('L' if 'l' == settings['water_volume_indicator'] else ( 'UKGall' if 'ukgall' == settings['water_volume_indicator'] else 'USGall' ))
+    self.units['water_flow']  = self.units['volume'] + '/m'
+    self.units['watertank']   = self.units['volume']
 
     if 'km/h' == settings['wind_speed_indicator']:
       if 'cm' == settings['distance_indicator']:
@@ -1446,22 +1448,42 @@ class terrariumEngine(object):
 
     #self.environment.stop()
 
-    with orm.db_session():
-      for sensor in Sensor.select(lambda s: s.id in self.sensors.keys()):
-        self.sensors[sensor.id].stop()
-        logger.info(f'Stopped {sensor}')
+    # with orm.db_session():
+    #   for sensor in Sensor.select(lambda s: s.id in self.sensors.keys()):
+    #     self.sensors[sensor.id].stop()
+    #     logger.info(f'Stopped {sensor}')
 
-      for relay in Relay.select(lambda s: s.id in self.relays.keys()):
-        self.relays[relay.id].stop()
-        logger.info(f'Stopped {relay}')
+      # for relay in Relay.select(lambda s: s.id in self.relays.keys()):
+      #   self.relays[relay.id].stop()
+      #   logger.info(f'Stopped {relay}')
 
-      for button in Button.select(lambda s: s.id in self.buttons.keys()):
-        self.buttons[button.id].stop()
-        logger.info(f'Stopped {button}')
+      # for button in Button.select(lambda s: s.id in self.buttons.keys()):
+      #   self.buttons[button.id].stop()
+      #   logger.info(f'Stopped {button}')
 
-      for webcam in Webcam.select(lambda s: s.id in self.webcams.keys()):
-        self.webcams[webcam.id].stop()
-        logger.info(f'Stopped {webcam}')
+      # for webcam in Webcam.select(lambda s: s.id in self.webcams.keys()):
+      #   self.webcams[webcam.id].stop()
+      #   logger.info(f'Stopped {webcam}')
+
+    for enclosure in self.enclosures:
+      self.enclosures[enclosure].stop()
+      logger.info(f'Stopped {self.enclosures[enclosure]}')
+
+    for button in self.buttons:
+      self.buttons[button].stop()
+      logger.info(f'Stopped {self.buttons[button]}')
+
+    for sensor in self.sensors:
+      self.sensors[sensor].stop()
+      logger.info(f'Stopped {self.sensors[sensor]}')
+
+    for relay in self.relays:
+      self.relays[relay].stop()
+      logger.info(f'Stopped {self.relays[relay]}')
+
+    for webcam in self.webcams:
+      self.webcams[webcam].stop()
+      logger.info(f'Stopped {self.webcams[webcam]}')
 
     self.notification.stop()
     print('Totally stopped TerrariumPI')
