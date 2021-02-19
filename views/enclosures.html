@@ -15,6 +15,7 @@
             {% endif %} </p>
         </div>
       </div>
+
       <div class="col" id="enclosure_list">
         <script type="text/html" id="area_table_row">
           <tr>
@@ -57,19 +58,18 @@
               </div>
             </div>
             <div class="row g-0">
-              <div class="col-2">
+              <div class="col-4 col-lg-2">
                 <a data-fancybox data-title="name" data-href="image"> <img data-src="image" data-alt="name" class="img-thumbnail"> </a>
               </div>
-              <div class="col">
+              <div class="col-8 col-lg-2 card-body">
+                <p class="card-text" data-content="description" data-format="html"></p>
+                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+              </div>
+              <div class="col-12 col-lg-8">
                 <div class="card-body">
                   <div class="row g-0">
-                    <!-- <h5 class="card-title">Card title</h5> -->
-                    <div class="col-3">
-                      <p class="card-text" data-content="description" data-format="html"></p>
-                      <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-                    </div>
-                    <div class="col-9">
-                      <h4>{{ _('Areas') }}</h4>
+                    <div class="col">
+                      <h5>{{ _('Areas') }}</h5>
                       <table class="table table-sm">
                         <thead>
                           <tr>

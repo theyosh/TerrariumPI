@@ -434,3 +434,24 @@ input.dial {
   margin: 0px !important
 }
 
+@media (min-width: 992px) {
+  .sidebar-mini.sidebar-collapse .sidebar .user-panel > .info {
+    display:none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1440px) {
+  span.info-box-icon.float {
+    position: absolute;
+    z-index: 1;
+    padding: 1rem 0px;
+    opacity: 0.4;
+  }
+}
+
+
+canvas.gauge {
+  max-width: 300px;
+  height: auto !important;
+  width: 95% !important;
+}

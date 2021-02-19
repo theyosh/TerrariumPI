@@ -1,7 +1,7 @@
 {% extends "layouts/base-content.html" %}
 {% block title %}{{ _('Calendar') }}{% endblock %}
 {% block options %}
-<ol class="breadcrumb float-sm-right ">
+<ol class="breadcrumb float-right ">
   {% if authenticated %}
   <li class="breadcrumb-item"><a href="{{ url_for('api:calendar_download') }}" target="_blank"><i class="fas fa-download pt-1 mr-1"></i> {{ _('Download iCal') }}</a></li>
   <li class="breadcrumb-item "><i class="fas fa-wrench pt-1 mr-1"></i> {{ _('Settings') }}</li>

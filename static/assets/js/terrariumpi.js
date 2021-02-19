@@ -313,8 +313,11 @@ function formatBytes(bytes,decimals) {
 function template_sensor_type_color(type) {
   switch(type) {
     case 'temperature':
+    case 'heating':
       return 'text-danger';
       break;
+
+    case 'cooling':
     case 'humidity':
     case 'watertank':
       return 'text-primary';
@@ -364,6 +367,12 @@ function template_sensor_type_icon(type) {
   switch(type) {
     case 'temperature':
       return 'fa-thermometer-half'
+      break;
+    case 'heating':
+      return 'fa-fire'
+      break;
+    case 'cooling':
+      return 'fa-fan'
       break;
     case 'humidity':
       return 'fa-tint'
@@ -473,11 +482,10 @@ function get_template_color(classname, transparantcy, hexformat) {
 }
 
 function sensor_type_indicator(sensor_type) {
-  try {
+  if (undefined !== window.terrariumPI.units[sensor_type]) {
     return window.terrariumPI.units[sensor_type]['value'];
-  } catch {
-    return '';
   }
+  return '';
 }
 
 function sensor_gauge(canvas, type, current, limit_min, limit_max, alarm_min, alarm_max) {
@@ -1870,7 +1878,10 @@ function websocket_init(reconnect) {
         jQuery('.info-box:first div.progress').each(function(counter,progressbar){
           jQuery(progressbar).attr({'title' : 'Load ' + message.data.load.percentage[counter] + '%'}).find('.progress-bar').css('height', message.data.load.percentage[counter] + '%');
         });
-        jQuery('#is_day_indicator span').text(moment().format('LLLL'));
+        jQuery('#is_day_indicator span:nth(0)').text(moment().format('LLLL'));
+
+        jQuery('#is_day_indicator span:nth(1)').text(moment().format('lll'));
+
         jQuery('#is_day_indicator i').removeClass('fa-moon fa-sun').addClass(( message.data.is_day ? 'fa-sun' : 'fa-moon'));
 
         christmas();
@@ -2011,7 +2022,11 @@ function bootstrap_custom_fileuploads(){
 }
 
 jQuery(function () {
-
+  /*
+  if (jQuery( window ).width() < 1400 && jQuery('.os-content-glue').width() > 100) {
+    jQuery('[data-widget="pushmenu"]').click();
+  }
+*/
   christmas();
   fireworks_menu();
   bootstrap_custom_fileuploads();
