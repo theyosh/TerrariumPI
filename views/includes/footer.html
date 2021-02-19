@@ -1,18 +1,20 @@
-<footer class="main-footer p-2">
+<footer class="main-footer p-2 text-sm">
   &copy; 2016 - 2021 <a target="_blank" rel="noopener noreferrer" href="https://theyosh.nl">TheYOSH</a>
   <!-- Credits to the original builders. The least I can do -->
   <small>
-    {{ _('using') }} <a target="_blank" rel="noopener noreferrer" href="https://adminlte.io">AdminLTE</a>
-    - {{ _('build with') }} <a target="_blank" rel="noopener noreferrer" href="https://appseed.us">AppSeed</a>
-    / <a target="_blank" rel="noopener noreferrer" href="https://appseed.us/admin-dashboards/flask-dashboard-adminlte">Flask AdminLTE</a>
+    using <a target="_blank" rel="noopener noreferrer" href="https://adminlte.io">AdminLTE</a>
+    <span class="d-none d-sm-inline">
+      - build with <a target="_blank" rel="noopener noreferrer" href="https://appseed.us">AppSeed</a>
+      / <a target="_blank" rel="noopener noreferrer" href="https://appseed.us/admin-dashboards/flask-dashboard-adminlte">Flask AdminLTE</a>
+    </span>
   </small>
 
   <div class="float-right d-sm-inline-block">
-    <small class="badge badge-success opacity-1" title="Current activity">&nbsp;&nbsp;</small>
-    <small class="badge badge-warning opacity-1" title="Warning messages">&nbsp;&nbsp;</small>
-    <small class="badge badge-danger opacity-1" title="Error messages">&nbsp;&nbsp;</small>
-      &nbsp;&nbsp; {{title}} {{version}} - <small>{{device}} -
-      <a href="https://github.com/theyosh/TerrariumPI" target="_blank" title="Download TerrariumPI on Github">{{ _('Terrarium home automation') }}</a>
+    <small class="badge badge-success opacity-1" title="{{ _('Current activity') }}">&nbsp;&nbsp;</small>
+    <small class="badge badge-warning opacity-1" title="{{ _('Warning messages') }}">&nbsp;&nbsp;</small>
+    <small class="badge badge-danger  opacity-1" title="{{ _('Error messages') }}">&nbsp;&nbsp;</small>
+    <span class="d-none d-sm-inline">&nbsp;&nbsp; {{title}} {{version}} - <small>{{device}} -</span>
+      <a href="https://github.com/theyosh/TerrariumPI" target="_blank" title="Download TerrariumPI on Github">Terrarium home automation</a>
     </small>
   </div>
 </footer>
