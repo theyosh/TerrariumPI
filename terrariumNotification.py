@@ -753,6 +753,7 @@ class terrariumNotification(terrariumSingleton):
       message_id = message_id[:-8]
       if message_id in self.messages:
         self.messages[message_id] = terrariumNotificationMessage(message_id,
+                                                                 self.__default_notifications[message_id].name,
                                                                  data[message_id + '_title'],
                                                                  data[message_id + '_message'],
                                                                  data[message_id + '_services'])
