@@ -358,7 +358,9 @@ class terrariumNotification(terrariumSingleton):
     self.messages = {}
     for message_id in self.__default_notifications:
       if self.__data.has_section('message' + message_id):
+
         self.messages[message_id] = terrariumNotificationMessage(message_id,
+                                                                 self.__default_notifications[message_id].name,
                                                                  self.__data.get('message' + message_id,'title').replace('%%','%'),
                                                                  self.__data.get('message' + message_id,'message').replace('%%','%'),
                                                                  self.__data.get('message' + message_id,'services').replace('%%','%'))
