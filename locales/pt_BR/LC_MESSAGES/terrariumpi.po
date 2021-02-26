@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2021-02-14 21:41+CET\n"
+"POT-Creation-Date: 2021-02-22 00:05+CET\n"
 "PO-Revision-Date: 2021-02-14 07:04+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
@@ -14,39 +14,49 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:31
+#: terrariumArea.py:33
 msgid "Lighting"
 msgstr "Iluminação"
 
-#: terrariumArea.py:37
+#: terrariumArea.py:39
 msgid "Heating / cooling"
 msgstr "Aquecimento / Resfriamento"
 
-#: terrariumArea.py:43
+#: terrariumArea.py:45
+#, fuzzy
+#| msgid "Settings"
+msgid "Heating"
+msgstr "Configurações"
+
+#: terrariumArea.py:51
+msgid "Cooling"
+msgstr "Resfriamento"
+
+#: terrariumArea.py:57
 msgid "Humidity"
 msgstr "Umidade relativa"
 
-#: terrariumArea.py:49
+#: terrariumArea.py:63
 msgid "Water tank"
 msgstr "Tanque de água"
 
-#: terrariumArea.py:55 views/includes/sidebar.html:174
+#: terrariumArea.py:69 views/includes/sidebar.html:174
 msgid "Audio"
 msgstr "Áudio"
 
-#: terrariumArea.py:61
+#: terrariumArea.py:75
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:66
+#: terrariumArea.py:80
 msgid "Conductivity"
 msgstr "Condutividade"
 
-#: terrariumArea.py:71
+#: terrariumArea.py:85
 msgid "Moisture"
 msgstr "Umidade absoluta"
 
-#: terrariumArea.py:76
+#: terrariumArea.py:90
 msgid "PH"
 msgstr "PH"
 
@@ -126,31 +136,31 @@ msgstr "fluxo_de_agua"
 msgid "wattage"
 msgstr "Potência"
 
-#: terrariumEngine.py:1202 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1204 views/dashboard.html:18 views/status.html:112
 msgid "Uptime"
 msgstr "Tempo em atividade"
 
-#: terrariumEngine.py:1208
+#: terrariumEngine.py:1210
 msgid "System load"
 msgstr "Carga do sistema"
 
-#: terrariumEngine.py:1214 views/status.html:44
+#: terrariumEngine.py:1216 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Temperatura da CPU"
 
-#: terrariumEngine.py:1220
+#: terrariumEngine.py:1222
 msgid "Storage"
 msgstr "Armazenamento"
 
-#: terrariumEngine.py:1226
+#: terrariumEngine.py:1228
 msgid "Memory"
 msgstr "Memória"
 
-#: terrariumEngine.py:1236
+#: terrariumEngine.py:1238
 msgid "average {sensor_type}"
 msgstr "média {tipo_de_sensor}"
 
-#: terrariumEngine.py:1389 views/dashboard.html:110
+#: terrariumEngine.py:1391
 msgid "last update"
 msgstr "Última atualização"
 
@@ -219,67 +229,67 @@ msgid "Add new button"
 msgstr "Adicionar novo botão"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
-#: views/dashboard.html:157 views/dashboard.html:201 views/enclosures.html:14
-#: views/enclosures.html:51 views/log.html:8 views/relays.html:14
-#: views/relays.html:79 views/sensors.html:20 views/sensors.html:82
+#: views/dashboard.html:120 views/dashboard.html:321 views/enclosures.html:14
+#: views/enclosures.html:52 views/log.html:8 views/relays.html:14
+#: views/relays.html:82 views/sensors.html:20 views/sensors.html:82
 #: views/weather.html:9 views/webcams.html:14 views/webcams.html:41
 msgid "Login to make changes"
 msgstr "Autenticar para fazer alterações"
 
-#: views/buttons.html:25 views/relays.html:25 views/sensors.html:31
-#: views/webcams.html:23
+#: views/buttons.html:25 views/dashboard.html:274 views/relays.html:27
+#: views/sensors.html:31 views/webcams.html:23
 msgid "Last update"
 msgstr "Última atualização"
 
-#: views/buttons.html:31 views/dashboard.html:116 views/relays.html:31
+#: views/buttons.html:31 views/dashboard.html:280 views/relays.html:34
 #: views/sensors.html:37
 msgid "error"
 msgstr "erro"
 
-#: views/buttons.html:32 views/dashboard.html:117 views/relays.html:32
+#: views/buttons.html:32 views/dashboard.html:281 views/relays.html:35
 #: views/sensors.html:38
 msgid "warning"
 msgstr "aviso"
 
-#: views/buttons.html:39 views/dashboard.html:125 views/dashboard.html:232
-#: views/relays.html:42 views/sensors.html:49
+#: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:289
+#: views/relays.html:45 views/sensors.html:49
 msgid "Day"
 msgstr "Dia"
 
-#: views/buttons.html:40 views/dashboard.html:126 views/relays.html:43
+#: views/buttons.html:40 views/dashboard.html:290 views/relays.html:46
 #: views/sensors.html:50
 msgid "Week"
 msgstr "Semana"
 
-#: views/buttons.html:41 views/dashboard.html:127 views/relays.html:44
+#: views/buttons.html:41 views/dashboard.html:291 views/relays.html:47
 #: views/sensors.html:51
 msgid "Month"
 msgstr "Mês"
 
-#: views/buttons.html:42 views/dashboard.html:128 views/relays.html:45
+#: views/buttons.html:42 views/dashboard.html:292 views/relays.html:48
 #: views/sensors.html:52
 msgid "Year"
 msgstr "Ano"
 
-#: views/buttons.html:53 views/dashboard.html:139 views/relays.html:56
+#: views/buttons.html:53 views/dashboard.html:303 views/relays.html:59
 #: views/sensors.html:64
 msgid "Export"
 msgstr "Exportar"
 
-#: views/buttons.html:58 views/calendar.html:7 views/dashboard.html:144
-#: views/dashboard.html:198 views/includes/sidebar.html:250
-#: views/relays.html:60 views/sensors.html:69 views/settings.html:2
+#: views/buttons.html:58 views/calendar.html:7 views/dashboard.html:117
+#: views/dashboard.html:308 views/includes/sidebar.html:250
+#: views/relays.html:63 views/sensors.html:69 views/settings.html:2
 #: views/weather.html:7 views/webcams.html:32
 msgid "Settings"
 msgstr "Configurações"
 
-#: views/buttons.html:63 views/dashboard.html:149 views/relays.html:72
+#: views/buttons.html:63 views/dashboard.html:313 views/relays.html:75
 #: views/sensors.html:74 views/webcams.html:35
 msgid "Ignore"
 msgstr "Ignorar"
 
-#: views/buttons.html:68 views/dashboard.html:154 views/modals/webcam.html:374
-#: views/relays.html:76 views/sensors.html:79 views/webcams.html:38
+#: views/buttons.html:68 views/dashboard.html:318 views/modals/webcam.html:374
+#: views/relays.html:79 views/sensors.html:79 views/webcams.html:38
 msgid "Delete"
 msgstr "Excluir"
 
@@ -307,7 +317,7 @@ msgstr "Fluxo de água em %s"
 msgid "Total power usage"
 msgstr "Uso de energia total"
 
-#: views/dashboard.html:74
+#: views/dashboard.html:74 views/relays.html:26
 msgid "kWh"
 msgstr "kWh"
 
@@ -319,24 +329,24 @@ msgstr "em"
 msgid "Total water usage"
 msgstr "Uso de água total"
 
-#: views/dashboard.html:189 views/enclosures.html:2
+#: views/dashboard.html:108 views/enclosures.html:2
 #: views/includes/sidebar.html:207
 msgid "Enclosures"
 msgstr "Anexos"
 
-#: views/dashboard.html:249
+#: views/dashboard.html:167
 msgid "Night"
 msgstr "Noite"
 
-#: views/dashboard.html:266
+#: views/dashboard.html:183
 msgid "Low"
 msgstr "Baixo"
 
-#: views/dashboard.html:283
+#: views/dashboard.html:200
 msgid "High"
 msgstr "Alto"
 
-#: views/dashboard.html:300 views/modals/button.html:38
+#: views/dashboard.html:217 views/modals/button.html:38
 #: views/modals/sensor.html:47 views/modals/webcam.html:204
 #: views/weather.html:20
 msgid "Current"
@@ -350,7 +360,7 @@ msgstr "Sem anexos"
 msgid "Add new enclosure"
 msgstr "Adicionar novo anexo"
 
-#: views/enclosures.html:43
+#: views/enclosures.html:44
 msgid "Add area"
 msgstr "Adicionar área"
 
@@ -377,18 +387,6 @@ msgstr "Estado"
 #: views/enclosures.html:81
 msgid "Actions"
 msgstr "Ações"
-
-#: views/includes/footer.html:5
-msgid "using"
-msgstr "usando"
-
-#: views/includes/footer.html:6
-msgid "build with"
-msgstr "criado com"
-
-#: views/includes/footer.html:15
-msgid "Terrarium home automation"
-msgstr "Terrarium sistema de automação"
 
 #: views/includes/modals.html:5 views/includes/modals.html:17
 #: views/modals/webcam.html:373
@@ -1221,11 +1219,21 @@ msgstr "Sem relés"
 msgid "Add new relay"
 msgstr "Adicionar novo relé"
 
-#: views/relays.html:35 views/relays.html:68
+#: views/relays.html:26
+msgid "L"
+msgstr ""
+
+#: views/relays.html:26
+#, fuzzy
+#| msgid "Total space"
+msgid "Total"
+msgstr "Espaço total"
+
+#: views/relays.html:38 views/relays.html:71
 msgid "Manual mode"
 msgstr "Modo manual"
 
-#: views/relays.html:64
+#: views/relays.html:67
 msgid "Replace hardware"
 msgstr "Substituir hardware"
 
@@ -1547,6 +1555,12 @@ msgid "CPU Temp."
 msgstr "Temp CPU."
 
 #: Missing text string
+#, fuzzy
+#| msgid "Conductivity"
+msgid "Current activity"
+msgstr "Condutividade"
+
+#: Missing text string
 msgid "Current value"
 msgstr "Valor atual"
 
@@ -1680,6 +1694,12 @@ msgstr "Erro!"
 
 #: Missing text string
 #, fuzzy
+#| msgid "No error messages"
+msgid "Error messages"
+msgstr "Nenhuma mensagem de erro"
+
+#: Missing text string
+#, fuzzy
 #| msgid "Calendar title"
 msgid "Event title"
 msgstr "Título do Calendário"
@@ -1709,16 +1729,26 @@ msgid "Hardware replacement is logged in the calendar"
 msgstr "A substituição do hardware está registrada no calendário"
 
 #: Missing text string
-msgid "Ignore webcam"
-msgstr "Ignorar webcam"
-
-#: Missing text string
-msgid "Ingore button"
+#, fuzzy
+#| msgid "Ingore button"
+msgid "Ignore button"
 msgstr "Botão Ignorar"
 
 #: Missing text string
-msgid "Ingore relay"
+#, fuzzy
+#| msgid "Ingore relay"
+msgid "Ignore relay"
 msgstr "Ignorar relé"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Ingore sensor"
+msgid "Ignore sensor"
+msgstr "Ignorar sensor"
+
+#: Missing text string
+msgid "Ignore webcam"
+msgstr "Ignorar webcam"
 
 #: Missing text string
 msgid "Ingore sensor"
@@ -1943,8 +1973,23 @@ msgid "Upload ok"
 msgstr "Envio OK"
 
 #: Missing text string
+#, fuzzy
+#| msgid "No warning messages"
+msgid "Warning messages"
+msgstr "Nenhuma mensagem de aviso"
+
+#: Missing text string
 msgid "Weather data source url"
 msgstr "Url da fonte de dados meteorológicos"
+
+#~ msgid "using"
+#~ msgstr "usando"
+
+#~ msgid "build with"
+#~ msgstr "criado com"
+
+#~ msgid "Terrarium home automation"
+#~ msgstr "Terrarium sistema de automação"
 
 #~ msgid "File is not uploaded!"
 #~ msgstr "O arquivo não foi carregado!"
@@ -3504,9 +3549,6 @@ msgstr "Url da fonte de dados meteorológicos"
 #~ msgid "Heater off"
 #~ msgstr "Aquecedor desligado"
 
-#~ msgid "Cooling"
-#~ msgstr "Resfriamento"
-
 #~ msgid ""
 #~ "When the cooler is used in sensor mode the system will toggle the "
 #~ "switches based on the alarms of the sensors. When the temperature is to "
@@ -4410,14 +4452,8 @@ msgstr "Url da fonte de dados meteorológicos"
 #~ msgid "Minimum area"
 #~ msgstr "Área mínima"
 
-#~ msgid "No error messages"
-#~ msgstr "Nenhuma mensagem de erro"
-
 #~ msgid "Not playing"
 #~ msgstr "Não está reproduzindo"
-
-#~ msgid "No warning messages"
-#~ msgstr "Nenhuma mensagem de aviso"
 
 #~ msgid "Offset in cm"
 #~ msgstr "Compensação em cm"
@@ -4491,9 +4527,6 @@ msgstr "Url da fonte de dados meteorológicos"
 
 #~ msgid "Total open for"
 #~ msgstr "Aberto por um total de"
-
-#~ msgid "Total space"
-#~ msgstr "Espaço total"
 
 #~ msgid "Universal AC MAINS Dimmer - MPDMv4.1"
 #~ msgstr "Regulador de corrente CA universal - MAINS Dimmer - MPDMv4.1"
