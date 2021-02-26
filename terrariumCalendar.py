@@ -65,8 +65,7 @@ class terrariumCalendar(object):
 
     return return_data
 
-  def create_event(self, uid, summary, description, location = None, dtstart = None, dtend = None, freq = None, interval = None):
-    #ical = Calendar.from_ical(self.__ical_data)
+  def create_event(self, uid, summary, description, location = None, dtstart = None, dtend = None, freq = None, interval = None, repeat_end = None):
     create = uid is None or '' == uid
 
     if dtstart is None:
@@ -91,7 +90,10 @@ class terrariumCalendar(object):
     event.add('dtstamp', datetime.now(timezone.utc))
 
     if freq and interval and '_' != freq:
-      event.add('rrule', {'freq' : freq, 'interval': interval})
+      rrule = {'freq' : freq, 'interval': interval}
+      if repeat_end is not None:
+        rrule['count'] = repeat_end
+      event.add('rrule', rrule)
 
     if create:
       self.__ical.add_component(event)

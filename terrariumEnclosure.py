@@ -8,7 +8,6 @@ from terrariumDatabase import Button, Relay, Sensor
 
 import copy
 
-
 class terrariumEnclosure(object):
 
   def __init__(self, id, name, engine, doors = [], areas = []):
@@ -30,18 +29,6 @@ class terrariumEnclosure(object):
 
   @property
   def relays(self):
-    # Only return relays that are part of this enclosure...
-    # So filter it based on all relays on all areas
-    # print('enclusre reyals engine')
-    # print(self.engine.relays)
-    # used_relays = {}
-    # for area_id in self.areas:
-    #   for period in self.areas[area_id].PERIODS:
-    #     for relay_id in self.areas[area_id][period]['relays']:
-    #       if relay_id not in used_relays:
-    #         used_relays[relay_id] = self.engine.relays[relay_id]
-
-    # return used_relays
     return self.engine.relays
 
   def __repr__(self):
@@ -56,7 +43,7 @@ class terrariumEnclosure(object):
     return True
 
   def __light_status(self):
-    if self.__main_lights is None:
+    if self.main_lights is None:
       return True
 
     return self.main_lights.state['day']['powered']
@@ -78,9 +65,6 @@ class terrariumEnclosure(object):
         area_setup
       ))
 
-      if new_areay.setup.get('main_lights', False):
-        self.__main_lights = str(area.id)
-
     for area in data:
       if area.type == 'lights':
         continue
@@ -99,7 +83,12 @@ class terrariumEnclosure(object):
 
   @property
   def main_lights(self):
-    return self.areas[self.__main_lights]
+    for area in self.areas:
+      area = self.areas[area]
+      if area.setup.get('main_lights', False):
+        return self.areas[str(area.id)]
+
+    return None
 
   def add(self, area):
     if area.id not in self.areas:

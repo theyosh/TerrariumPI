@@ -57,11 +57,11 @@ class terrariumAPI(object):
 
 
     # Audio API
-    bottle_app.route('/api/audio/files/<audiofile:path>/', 'GET',    self.audiofile_detail,   apply=self.authentication(False), name='api:audiofile_detail')
-    bottle_app.route('/api/audio/files/<audiofile:path>/', 'DELETE', self.audiofile_delete,   apply=self.authentication(),      name='api:audiofile_delete')
-    bottle_app.route('/api/audio/files/',                  'GET',    self.audiofile_list,     apply=self.authentication(False), name='api:audiofile_list')
-    bottle_app.route('/api/audio/files/',                  'POST',   self.audiofile_add,      apply=self.authentication(),      name='api:audiofile_add')
-    bottle_app.route('/api/audio/hardware/',               'GET',    self.audio_hardware,     apply=self.authentication(False), name='api:audio_hardware')
+    bottle_app.route('/api/audio/files/<audiofile:path>/', 'GET',    self.audiofile_detail, apply=self.authentication(False), name='api:audiofile_detail')
+    bottle_app.route('/api/audio/files/<audiofile:path>/', 'DELETE', self.audiofile_delete, apply=self.authentication(),      name='api:audiofile_delete')
+    bottle_app.route('/api/audio/files/',                  'GET',    self.audiofile_list,   apply=self.authentication(False), name='api:audiofile_list')
+    bottle_app.route('/api/audio/files/',                  'POST',   self.audiofile_add,    apply=self.authentication(),      name='api:audiofile_add')
+    bottle_app.route('/api/audio/hardware/',               'GET',    self.audio_hardware,   apply=self.authentication(False), name='api:audio_hardware')
 
 
     # Buttons API
@@ -109,21 +109,22 @@ class terrariumAPI(object):
 
 
     # Relays API
-    bottle_app.route('/api/relays/<relay:path>/<action:re:(history)>/<period:re:(day|week|month|year)>/', 'GET', self.relay_history, apply=self.authentication(False), name='api:relay_history_period')
+    bottle_app.route('/api/relays/<relay:path>/<action:re:(history)>/<period:re:(day|week|month|year|replaced)>/', 'GET', self.relay_history, apply=self.authentication(False), name='api:relay_history_period')
     bottle_app.route('/api/relays/<relay:path>/<action:re:(history)>/', 'GET',    self.relay_history,  apply=self.authentication(False), name='api:relay_history')
 
-    bottle_app.route('/api/relays/<relay:path>/<action:re:(export)>/<period:re:(day|week|month|year)>/',  'GET', self.relay_history, apply=self.authentication(),      name='api:relay_export_period')
+    bottle_app.route('/api/relays/<relay:path>/<action:re:(export)>/<period:re:(day|week|month|year|replaced)>/',  'GET', self.relay_history, apply=self.authentication(),      name='api:relay_export_period')
     bottle_app.route('/api/relays/<relay:path>/<action:re:(export)>/',  'GET',    self.relay_history,  apply=self.authentication(),      name='api:relay_export')
 
     bottle_app.route('/api/relays/<relay:path>/<action:re:(toggle|on|off|\d+)>/', 'POST',    self.relay_action,  apply=self.authentication(), name='api:relay_action')
+    bottle_app.route('/api/relays/<relay:path>/manual/',   'POST',   self.relay_manual,           apply=self.authentication(), name='api:relay_manual')
+    bottle_app.route('/api/relays/<relay:path>/replaced/', 'POST',   self.relay_replace_hardware, apply=self.authentication(), name='api:relay_replace_hardware')
 
-    bottle_app.route('/api/relays/<relay:path>/manual/', 'POST',    self.relay_manual,  apply=self.authentication(), name='api:relay_manual')
-    bottle_app.route('/api/relays/hardware/',             'GET',    self.relay_hardware, apply=self.authentication(),      name='api:relay_hardware')
-    bottle_app.route('/api/relays/<relay:path>/',         'GET',    self.relay_detail,   apply=self.authentication(False), name='api:relay_detail')
-    bottle_app.route('/api/relays/<relay:path>/',         'PUT',    self.relay_update,   apply=self.authentication(),      name='api:relay_update')
-    bottle_app.route('/api/relays/<relay:path>/',         'DELETE', self.relay_delete,   apply=self.authentication(),      name='api:relay_delete')
-    bottle_app.route('/api/relays/',                      'GET',    self.relay_list,     apply=self.authentication(False), name='api:relay_list')
-    bottle_app.route('/api/relays/',                      'POST',   self.relay_add,      apply=self.authentication(),      name='api:relay_add')
+    bottle_app.route('/api/relays/hardware/',              'GET',    self.relay_hardware, apply=self.authentication(),      name='api:relay_hardware')
+    bottle_app.route('/api/relays/<relay:path>/',          'GET',    self.relay_detail,   apply=self.authentication(False), name='api:relay_detail')
+    bottle_app.route('/api/relays/<relay:path>/',          'PUT',    self.relay_update,   apply=self.authentication(),      name='api:relay_update')
+    bottle_app.route('/api/relays/<relay:path>/',          'DELETE', self.relay_delete,   apply=self.authentication(),      name='api:relay_delete')
+    bottle_app.route('/api/relays/',                       'GET',    self.relay_list,     apply=self.authentication(False), name='api:relay_list')
+    bottle_app.route('/api/relays/',                       'POST',   self.relay_add,      apply=self.authentication(),      name='api:relay_add')
 
 
     # Sensors API
@@ -146,17 +147,17 @@ class terrariumAPI(object):
 
 
     # Settings API
-    bottle_app.route('/api/settings/<setting:path>/', 'GET',    self.setting_detail, apply=self.authentication(), name='api:setting_detail')
-    bottle_app.route('/api/settings/<setting:path>/', 'PUT',    self.setting_update, apply=self.authentication(), name='api:setting_update')
-    bottle_app.route('/api/settings/<setting:path>/', 'DELETE', self.setting_delete, apply=self.authentication(), name='api:setting_delete')
-    bottle_app.route('/api/settings/profile_image/upload/', 'POST',   self.setting_upload_profile_image,   apply=self.authentication(), name='api:setting_upload_profile_image')
-    bottle_app.route('/api/settings/',                      'PUT',    self.setting_update_multi,   apply=self.authentication(), name='api:setting_update_multi')
-    bottle_app.route('/api/settings/',                      'GET',    self.setting_list,   apply=self.authentication(), name='api:setting_list')
-    bottle_app.route('/api/settings/',                      'POST',   self.setting_add,    apply=self.authentication(), name='api:setting_add')
+    bottle_app.route('/api/settings/<setting:path>/',       'GET',    self.setting_detail,                apply=self.authentication(), name='api:setting_detail')
+    bottle_app.route('/api/settings/<setting:path>/',       'PUT',    self.setting_update,                apply=self.authentication(), name='api:setting_update')
+    bottle_app.route('/api/settings/<setting:path>/',       'DELETE', self.setting_delete,                apply=self.authentication(), name='api:setting_delete')
+    bottle_app.route('/api/settings/profile_image/upload/', 'POST',   self.setting_upload_profile_image,  apply=self.authentication(), name='api:setting_upload_profile_image')
+    bottle_app.route('/api/settings/',                      'PUT',    self.setting_update_multi,          apply=self.authentication(), name='api:setting_update_multi')
+    bottle_app.route('/api/settings/',                      'GET',    self.setting_list,                  apply=self.authentication(), name='api:setting_list')
+    bottle_app.route('/api/settings/',                      'POST',   self.setting_add,                   apply=self.authentication(), name='api:setting_add')
 
 
     # Status API
-    bottle_app.route('/api/system_status/',                      'GET',    self.system_status,   apply=self.authentication(False), name='api:system_status')
+    bottle_app.route('/api/system_status/', 'GET', self.system_status, apply=self.authentication(False), name='api:system_status')
 
 
     # Weather API
@@ -175,8 +176,8 @@ class terrariumAPI(object):
 
 
     # API DOC
-    bottle_app.route('/<page:re:(api/doc)>/',               'GET',   self.webserver.render_page,      apply=self.authentication(False),      name='api:documentation')
-    bottle_app.route('/api/doc/swagger.json',   'GET',   self.api_spec,      apply=self.authentication(False),      name='api:swagger.json')
+    bottle_app.route('/<page:re:(api/doc)>/', 'GET', self.webserver.render_page, apply=self.authentication(False), name='api:documentation')
+    bottle_app.route('/api/doc/swagger.json', 'GET', self.api_spec,              apply=self.authentication(False), name='api:swagger.json')
 
 
     #self.apispec.components.schema("AudioFile", schema=Audiofile)
@@ -266,6 +267,9 @@ class terrariumAPI(object):
     try:
       area = Area[area]
       area.set(**request.json)
+
+      self.webserver.engine.update(terrariumArea,**request.json)
+
       return self.area_detail(str(area.id))
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')
@@ -549,7 +553,8 @@ class terrariumAPI(object):
       datetime.fromtimestamp(int(request.json['dtstart'])).replace(tzinfo=timezone.utc),
       None if request.json['dtend'] is None else datetime.fromtimestamp(int(request.json['dtend'])).replace(tzinfo=timezone.utc),
       request.json.get('freq'),
-      request.json.get('interval')
+      request.json.get('interval'),
+      request.json.get('repeatend')
     )
 
     return event
@@ -759,9 +764,6 @@ class terrariumAPI(object):
       # Force to store the change, before sending the results back (which are cached due to orm.db_session)
       orm.commit()
 
-      # relay_data = relay.to_dict()
-      # relay_data['value']  = relay.value
-      # relay_data['dimmer'] = relay.is_dimmer
       return self.relay_detail(relay.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
@@ -775,17 +777,26 @@ class terrariumAPI(object):
       relay.manual_mode = not relay.manual_mode
       orm.commit()
 
-      # relay_data = relay.to_dict()
-      # relay_data['value']  = relay.value
-      # relay_data['dimmer'] = relay.is_dimmer
-      # return relay_data
       return self.relay_detail(relay.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating manual mode on relay {relay} detail. {ex}')
 
-    pass
+
+  @orm.db_session
+  def relay_replace_hardware(self, relay):
+    try:
+      relay = Relay[relay]
+      relay.replacement = datetime.now()
+      orm.commit()
+
+      return self.relay_detail(relay.id)
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error updating manual mode on relay {relay} detail. {ex}')
+
 
   @orm.db_session
   def relay_history(self, relay, action = 'history', period = 'day'):
@@ -802,6 +813,9 @@ class terrariumAPI(object):
         period = 31
       elif 'year' == period:
         period = 365
+      elif 'replaced' == period:
+        # We need to calculate back to days...
+        period = (datetime.now() - relay.replacement).total_seconds() / (24.0 * 3600.0)
       else:
         period = 1
 
@@ -840,9 +854,6 @@ class terrariumAPI(object):
   def relay_list(self):
     data = []
     for relay in Relay.select(lambda r: not r.id in self.webserver.engine.settings['exclude_ids']):
-      # relay_data = relay.to_dict()
-      # relay_data['value']  = relay.value
-      # relay_data['dimmer'] = relay.is_dimmer
       data.append(self.relay_detail(relay.id))
 
     return { 'data' : data }
@@ -852,8 +863,12 @@ class terrariumAPI(object):
     try:
       relay = Relay[relay]
       relay_data = relay.to_dict()
-      relay_data['value']  = relay.value
-      relay_data['dimmer'] = relay.is_dimmer
+      relay_data['value']       = relay.value
+      relay_data['dimmer']      = relay.is_dimmer
+      relay_data['replacement'] = 0
+      if relay.replacement:
+        relay_data['replacement'] = relay.replacement.timestamp()
+
       return relay_data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
@@ -874,9 +889,6 @@ class terrariumAPI(object):
       new_value = new_relay.update()
       relay.update(new_value)
 
-      # relay_data = relay.to_dict()
-      # relay_data['value']  = relay.value
-      # relay_data['dimmer'] = relay.is_dimmer
       return self.relay_detail(relay.id)
     except Exception as ex:
       raise HTTPError(status=500, body=f'Relay could not be added. {ex}')
@@ -886,12 +898,10 @@ class terrariumAPI(object):
     try:
       relay = Relay[relay]
       relay.set(**request.json)
+      orm.commit()
+
       self.webserver.engine.update(terrariumRelay,**request.json)
 
-      # relay_data = relay.to_dict()
-      # relay_data['value']  = relay.value
-      # relay_data['dimmer'] = relay.is_dimmer
-      # return relay_data
       return self.relay_detail(relay.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
@@ -903,7 +913,9 @@ class terrariumAPI(object):
     try:
       message = f'Relay {Relay[relay]} is deleted.'
       Relay[relay].delete()
+
       self.webserver.engine.delete(terrariumRelay,relay)
+
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
@@ -1271,15 +1283,20 @@ class terrariumAPI(object):
                                                              request.json['height'],
                                                              request.json['rotation'],
                                                              request.json['awb']))
-      request.json['id']      = new_webcam.id
-      request.json['address'] = new_webcam.address
-      # After loading some remote webcams, we could have a different resolution then entered
-      request.json['width']   = new_webcam.width
-      request.json['height']  = new_webcam.height
 
-      request.json['markers'] = json.loads(request.json['markers'])
+      request.json['id']       = new_webcam.id
+      request.json['hardware'] = new_webcam.HARDWARE
+      request.json['address']  = new_webcam.address
+      # After loading some remote webcams, we could have a different resolution then entered
+      request.json['width']    = new_webcam.width
+      request.json['height']   = new_webcam.height
+
+      request.json['markers']  = json.loads(request.json['markers'])
 
       webcam = Webcam(**request.json)
+
+      print('Added webcam to db:')
+      print(webcam)
       # TODO: Fix updating or not. For now, disabled, as it can take up to 12 sec for RPICam
       #new_value = new_webcam.update()
 

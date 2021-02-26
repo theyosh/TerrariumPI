@@ -28,7 +28,7 @@
             <div class="card-header">
               <h3 class="card-title mr-1">
                 <i class="fas fa-fw mr-2" data-class="icon"></i><span data-content="name">...</span>
-                <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
+                <small class="ml-2 text-muted"><br />{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
                   {"attribute": "content", "value": "last_update", "formatter": "datetimeformatter", "formatOptions": "LLLL"} ]'
                 ></span></small>
               </h3>
@@ -70,7 +70,7 @@
                     </a>
                     <a data-href="ignore_link" class="dropdown-item" data-action="PUT" data-field="value" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
                     {"attribute": "id", "value": "id" },
-                    {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Ingore sensor') }} "} ]'>
+                    {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Ignore sensor') }} "} ]'>
                       <i class="fas fa-ban mr-1"></i> {{ _('Ignore') }}
                     </a>
                     <a data-href="delete_link" class="dropdown-item" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
@@ -92,8 +92,8 @@
               </div>
             </div>
             <div class="card-body p-0">
-              <div class="d-md-flex">
-                <div class="col text-center">
+              <div class="row">
+                <div class="col text-center pt-1">
                   <canvas data-id="gauge" class="gauge"></canvas>
                 </div>
                 {% if sensor_type %}

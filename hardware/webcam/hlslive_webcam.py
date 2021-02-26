@@ -15,7 +15,7 @@ from terrariumUtils import terrariumUtils
 class terrariumHLSLiveWebcam(terrariumWebcam):
   HARDWARE     = 'hls-live'
   NAME         = 'Live HLS Stream'
-  VALID_SOURCE = '^https?://.*\.m3u8$'
+  VALID_SOURCE = r'^https?://.*\.m3u8$'
   INFO_SOURCE  = 'https://server.com/stream/playlist.m3u8'
 
   def _load_hardware(self):

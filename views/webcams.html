@@ -17,10 +17,10 @@
         </div>
       </div>
       <script type="text/html" id="webcam_template">
-        <div class="col-12 col-md-6 col-sm-6 col-lg-4" >
-          <div class="card" data-id="player_id">
+        <div class="col-12 col-md-12 col-lg-6 col-xl-4" >
+          <div class="card">
             <div class="card-header">
-              <h3 class="card-title mr-1"><i class="fas fa-fw mr-2" data-class="icon"></i><span data-content="title">...</span> <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update" data-content="last_update"></span></small></h3>
+              <h3 class="card-title mr-1"><i class="fas fa-fw mr-2" data-class="icon"></i><span data-content="title">...</span><br /><small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update" data-content="last_update"></span></small></h3>
               <div class="card-tools">
                 <div class="btn-group">
                   <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -51,7 +51,7 @@
               </div>
             </div>
             <div class="card-body" style="height: 450px">
-              <div class="webcam_player" style="height:100%"></div>
+              <div data-id="player_id" class="webcam_player" style="height:100%"></div>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@
           delete_title: '{{ _('Delete webcam') }} ' + webcam.name,
 
           webcam_id: webcam.id,
-          player_id: 'webcam_' +  webcam.id,
+          player_id: 'webcam_player_' +  webcam.id,
         },{ append: true, bindingOptions: {ignoreNull : true}});
         load_webcam(webcam);
       });

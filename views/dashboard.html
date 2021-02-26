@@ -100,10 +100,9 @@
           </div>
         </div>
       </div>
-
       <div class="row flex-row-reverse">
         {% if show_environment %}
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 hide_environment">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title mr-1"><i class="fas fa-globe mr-2"></i>{{ _('Enclosures') }}</h3>
@@ -125,7 +124,7 @@
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
                 </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" onclick="jQuery(this).parents('div.col-md-4').remove();">
+                <button type="button" class="btn btn-tool" data-card-widget="remove" onclick="jQuery(this).parents('div.hide_environment').remove();">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
@@ -267,13 +266,12 @@
         </div>
         {% endif %}
         <div class="col" id="sensor_list">
-
           <script type="text/html" id="sensor_template">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title mr-1">
                   <i class="fas fa-fw mr-2" data-class="icon"></i><span data-content="name">...</span>
-                  <small class="ml-2 text-muted">{{ _('last update') }}: <span class="last_update"  data-template-bind='[
+                  <small class="ml-2 text-muted"><br />{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
                     {"attribute": "content", "value": "last_update", "formatter": "datetimeformatter", "formatOptions": "LLLL"} ]'
                   ></span></small>
                 </h3>
@@ -304,21 +302,6 @@
                       {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Export sensor') }} "} ]'>
                       <i class="fas fa-file-export mr-1"></i> {{ _('Export') }}
                       </a>
-                      <a data-href="edit_link" class="dropdown-item" data-toggle="modal" data-target="#modal-sensor-setup" data-template-bind='[
-                      {"attribute": "id", "value": "id" },
-                      {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit sensor') }} "} ]'>
-                        <i class="fas fa-wrench mr-1"></i> {{ _('Settings') }}
-                      </a>
-                      <a data-href="ignore_link" class="dropdown-item" data-action="PUT" data-field="value" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
-                      {"attribute": "id", "value": "id" },
-                      {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Ingore sensor') }} "} ]'>
-                        <i class="fas fa-ban mr-1"></i> {{ _('Ignore') }}
-                      </a>
-                      <a data-href="delete_link" class="dropdown-item" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
-                      {"attribute": "id", "value": "id" },
-                      {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Delete sensor') }} "} ]'>
-                        <i class="fas fa-trash-alt mr-1"></i> {{ _('Delete') }}
-                      </a>
                       {% else %}
                         <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Login to make changes') }}</a>
                       {% endif %}
@@ -334,10 +317,10 @@
               </div>
               <div class="card-body p-0">
                 <div class="row">
-                  <div class="col text-center d-inline align-middle">
+                  <div class="col text-center pt-1">
                     <canvas data-id="gauge" class="gauge"></canvas>
                   </div>
-                  <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                  <div class="col-12 col-sm-12 col-md-8 col-lg-9">
                     <div class="overlay">
                       <i class="fas fa-3x fa-sync-alt fa-spin"></i>
                     </div>
@@ -348,7 +331,6 @@
             </div>
           </script>
         </div>
-
       </div>
     </div>
   </section>

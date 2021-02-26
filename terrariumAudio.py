@@ -32,15 +32,18 @@ class terrariumAudio(object):
 
   @classmethod
   def volume(__cls__, hw, value = None):
-    mixer = alsaaudio.Mixer(control='PCM',cardindex=hw)
+    try:
+      mixer = alsaaudio.Mixer(control='PCM',cardindex=hw)
+    except alsaaudio.ALSAAudioError as ex:
+      mixer = alsaaudio.Mixer(control='Headphone',cardindex=hw)
 
     if value is None:
       # We get stereo volume but asume that left and right channel are at the same volume.
       return mixer.getvolume()[0]
 
     else:
-      value = max(0,min(100,value))
-      mixer.setvolume(value)
+      value = max(0,min(120,120 * (value/100)))
+      mixer.setvolume(int(value),alsaaudio.MIXER_CHANNEL_ALL)
 
 class terrariumAudioPlayer(object):
 
@@ -60,6 +63,7 @@ class terrariumAudioPlayer(object):
     self.repeat    = repeat
 
   def __run(self):
+    self.__stop = False
     for playlist in self.playlists:
       if self.__stop:
         break
@@ -68,6 +72,8 @@ class terrariumAudioPlayer(object):
 
       if playlist.get('shuffle'):
         random.shuffle(files)
+
+      self.volume(playlist.get('volume',80))
 
       repeat = playlist.get('repeat',False)
       first_start = True
@@ -80,7 +86,7 @@ class terrariumAudioPlayer(object):
           fp.write('\n'.join(playlist).encode())
           fp.flush()
 
-          cmd = f'{self.CMD} -hide_banner -v 0 -f concat -safe 0 -i {fp.name} -f alsa hw:{self.__hw}'.split(' ')
+          cmd = f'{self.CMD} -hide_banner -nostdin -v 0 -f concat -safe 0 -i {fp.name} -f alsa hw:{self.__hw}'.split(' ')
           self.__player['ffmpeg'] = psutil.Popen(cmd, stdout=PIPE)
           self.__player['exit_status'] = self.__player['ffmpeg'].poll()
           while self.__player['exit_status'] is None:
@@ -94,7 +100,6 @@ class terrariumAudioPlayer(object):
       self.stop()
 
     if len(self.playlists) > 0:
-      self.__stop = False
       self.__player['thread'] = threading.Thread(target=self.__run)
       self.__player['thread'].start()
 
@@ -116,16 +121,8 @@ class terrariumAudioPlayer(object):
   def running(self):
     return self.__player['ffmpeg'] is not None and self.__player['ffmpeg'].poll() is None
 
-
-# if __name__  == "__main__":
-#   t = terrariumAudioPlayer(1,['/home/pi/TerrariumPI/media/01-Eric-Prydz-vs.-Floyd-Proper-education.mp3','/home/pi/TerrariumPI/media/03-Jekyll-Hyde-Frozen-flame.mp3'])
-#   t.play()
-
-#   time.sleep(30)
-
-#   t.stop()
-
-
+  def volume(self, value):
+    terrariumAudio.volume(int(self.__hw), int(value))
 
 
 # class terrariumAudioPlayer(object):

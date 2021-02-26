@@ -87,8 +87,11 @@
 
 {% block modal_form_javascript_pre %}
 {{modal_type}}_form.find('select#relay_hardware').on('change',function() {
-    jQuery('.dimmer_callibration').toggle(this.value.indexOf('-dimmer') != -1);
-    jQuery('div#dimmer_callibration div:first').toggle(this.value != 'brightpi-dimmer');
+  {{modal_type}}_form.find('.dimmer_callibration').toggle(this.value.indexOf('-dimmer') != -1);
+  {{modal_type}}_form.find('div#dimmer_callibration div:first').toggle(this.value != 'brightpi-dimmer');
+
+ // {{modal_type}}_form.find('input[name="dimmer_frequency"]').prop('disabled',this.value.indexOf('-dimmer') != -1);
+ // {{modal_type}}_form.find('input[name="dimmer_max_power"]').prop('disabled',this.value.indexOf('-dimmer') != -1);
 });
 {% endblock %}
 
@@ -143,9 +146,9 @@ jQuery.get('{{ url_for("api:relay_hardware") }}', function(data) {
 {% endblock %}
 
 {% block modal_form_javascript_pre_submit_formdata %}
+form_data['calibration'] = {}
 if (form_data['hardware'].indexOf('-dimmer') != -1) {
   // Set the calibration JSON
-  form_data['calibration'] = {}
   try {
     form_data['calibration']['dimmer_frequency'] = form_data['dimmer_frequency'];
     delete(form_data['dimmer_frequency']);

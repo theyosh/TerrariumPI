@@ -29,7 +29,8 @@
         <input type="hidden" class="form-control" id="dtend" name="dtend">
       </div>
       <div class="form-group">
-        <label for="interval">{{ _('Repeat every') }}</label>
+        <label for="interval" class="repeat">{{ _('Repeat every') }}</label>
+        <label for="interval" class="remind">{{ _('Remind in') }}</label>
         <div class="select2-primary">
           <select class="select2 " id="freq" name="freq" data-placeholder="{{ _('Select period') }}" style="width: 100%;">
             <option value="_">{{ _('No repeat') }}</option>
@@ -41,6 +42,7 @@
         </div>
         <input type="number" class="form-control mt-2" id="interval" name="interval" placeholder="{{ _('Select amount') }}">
       </div>
+      <input type="hidden" id="repeatend" name="repeatend" value="2" disabled="disabled">
     </div>
   </div>
 </div>
@@ -55,19 +57,29 @@
   {{modal_type}}_modal.find('textarea#description').val('');
   {{modal_type}}_modal.find('textarea#description').summernote('reset');
   {{modal_type}}_modal.find('textarea#description').summernote('destroy');
+
+  {{modal_type}}_modal.find('input#repeatend').prop('disabled',true);
 });
 
 {{modal_type}}_form.find('select#freq').on('change',function() {
   {{modal_type}}_form.find('#interval').prop('disabled','_' == this.value);
+  {{modal_type}}_form.find('input#repeatend').prop('disabled','_' == this.value);
 });
 {% endblock %}
 
 {% block modal_form_javascript_load %}
 
 {{modal_type}}_form.find('input#uid').prop('disabled',true);
-if ({{modal_type}}_modal.find('input#dtstart').val() == {{modal_type}}_modal.find('input#dtend').val()) {
-  {{modal_type}}_modal.find('input#dtend').val('').attr('readonly',true);
+if ({{modal_type}}_form.find('input#dtstart').val() == {{modal_type}}_form.find('input#dtend').val()) {
+  {{modal_type}}_form.find('input#dtend').val('').attr('readonly',true);
 }
+
+let replace_hardware = !{{modal_type}}_form.find('input#end').prop('disabled');
+{{modal_type}}_form.find('label.repeat').toggle(!replace_hardware);
+{{modal_type}}_form.find('label.remind').toggle(replace_hardware);
+{{modal_type}}_form.find('select#freq option:first').text(replace_hardware ? '{{ _('No reminder') }}' : '{{ _('No repeat') }}');
+// Reset the select2 pull down due to changing content...
+{{modal_type}}_form.find('select#freq').select2();
 
 // Check if we are in edit mode.... and need to load more data....
 if ('#' != jQuery(event.relatedTarget).attr('href')) {

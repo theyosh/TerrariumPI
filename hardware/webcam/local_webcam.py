@@ -8,7 +8,7 @@ import re
 class terrariumLocalWebcam(terrariumWebcam):
   HARDWARE     = 'local'
   NAME         = 'Local file webcam'
-  VALID_SOURCE = '^local://(.*)$'
+  VALID_SOURCE = r'^local://(.*)$'
   INFO_SOURCE  = 'local:///path/to/folder/with/image/file'
 
   def _load_hardware(self):

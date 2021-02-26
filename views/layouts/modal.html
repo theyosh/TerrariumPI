@@ -91,7 +91,7 @@
           },
           error: function (error) {
             error = error.responseJSON;
-            console.log(error);
+      //      console.log(error);
             toastr.error(error.message , '{{ _('Save Error') }}');
           }
         });

@@ -72,18 +72,6 @@
   </div>
   <div class="col-12 col-sm-6 col-md-3 col-lg-2">
     <div class="form-group">
-      <label for="area_lights_max_day_hours">{{ _('Maximum hours') }}</label>
-      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_max_day_hours" name="max_day_hours" placeholder="{{ _('Enter the maximum amount of hours') }}">
-      <small class="text-muted">
-        {{ _('The maximum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is longer then this maximum value, the day will be shortend to this maximum value.') }}
-      </small>
-      <div class="invalid-feedback">
-
-      </div>
-    </div>
-  </div>
-  <div class="col-12 col-sm-6 col-md-3 col-lg-2">
-    <div class="form-group">
       <label for="area_lights_min_day_hours">{{ _('Minimum hours') }}</label>
       <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_min_day_hours" name="min_day_hours" placeholder="{{ _('Enter the minimum amount of hours') }}">
       <small class="text-muted">
@@ -91,6 +79,18 @@
       </small>
       <div class="invalid-feedback">
         {{ _('ERROR') }}
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="form-group">
+      <label for="area_lights_max_day_hours">{{ _('Maximum hours') }}</label>
+      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_max_day_hours" name="max_day_hours" placeholder="{{ _('Enter the maximum amount of hours') }}">
+      <small class="text-muted">
+        {{ _('The maximum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is longer then this maximum value, the day will be shortend to this maximum value.') }}
+      </small>
+      <div class="invalid-feedback">
+
       </div>
     </div>
   </div>
@@ -689,45 +689,45 @@
 </div>
 <script type="text/html" id="area_dimmer_setting_duration">
   <div class="row">
-    <label class="col-sm-2 col-form-label">{{ _('Dimmer on duration') }}</label>
+    <label class="col-sm-3 col-form-label">{{ _('Dimmer on duration') }}</label>
     <div class="col pt-2">
-      <input class="range_slider" data-id="dimmer_field_on" data-slider-min="0" data-slider-max="100" data-slider-step="1" type="text">
+      <input class="range_slider" data-id="dimmer_field_on" data-slider-value="[0,30]" data-slider-min="0" data-slider-max="180" data-slider-step="1" type="text">
     </div>
-    <label class="col-sm-2 col-form-label">{{ _('Dimmer of duration') }}</label>
+    <label class="col-sm-3 col-form-label">{{ _('Dimmer of duration') }}</label>
     <div class="col">
       <div class="col pt-2">
-        <input class="range_slider" data-id="dimmer_field_off" data-slider-min="0" data-slider-max="100" data-slider-step="1" type="text">
+        <input class="range_slider" data-id="dimmer_field_off" data-slider-value="[0,30]" data-slider-min="0" data-slider-max="180" data-slider-step="1" type="text">
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col">
       <small class="text-muted">
-        {{ _('Set the dimmer times for going on and off. Max duration is 100 mimutes.') }}
+        {{ _('Select the duration for the dimmer to go to on or off in minutes. Max duration is 180 minutes.') }}
       </small>
     </div>
   </div>
 </script>
 <script type="text/html" id="area_relay_setting_duration">
   <div class="row">
-    <label class="col-sm-2 col-form-label">{{ _('Relay delay on') }}</label>
+    <label class="col-sm-3 col-form-label">{{ _('Relay delay on') }}</label>
     <div class="col pt-2">
-      <input class="range_slider" data-id="dimmer_field_on" data-slider-min="0" data-slider-max="100" data-slider-step="1" type="text">
+      <input class="range_slider" data-id="dimmer_field_on" data-slider-value="0" data-slider-min="0" data-slider-max="180" data-slider-step="1" type="text">
     </div>
-    <label class="col-sm-2 col-form-label">{{ _('Relay delay off') }}</label>
+    <label class="col-sm-3 col-form-label">{{ _('Relay delay off') }}</label>
     <div class="col pt-2">
-      <input class="range_slider" data-id="dimmer_field_off" data-slider-min="0" data-slider-max="100" data-slider-step="1" type="text">
+      <input class="range_slider" data-id="dimmer_field_off" data-slider-value="0" data-slider-min="0" data-slider-max="180" data-slider-step="1" type="text">
     </div>
   </div>
   <div class="row">
     <div class="col">
       <small class="text-muted">
-        {{ _('Select the percentage when the light should go on/off based on the dimmer timer.') }}
+        {{ _('Select the delay in mintues that a relay waits before it turns on. Max delay is 180 minutes.') }}
       </small>
     </div>
   </div>
 </script>
-
+<!--
 <script type="text/html" id="area_dimmer_setting_step">
   <div class="row">
     <label class="col-sm-2 col-form-label">{{ _('Step change') }}</label>
@@ -735,7 +735,7 @@
       <input class="range_slider" data-id="dimmer_field" data-slider-min="0" data-slider-max="100" data-slider-step="1" type="text">
     </div>
   </div>
-</script>
+</script> -->
 
 {% endblock %}
 
@@ -776,7 +776,7 @@ function add_relay_tab(form, part, relay_id, relay_name, dimmer) {
       dimmer_field_id = part + '_dimmer_duration_' + relay_id;
       template = '#area_dimmer_setting_duration'
     } else {
-      dimmer_field_id = part + '_relay_step_' + relay_id;
+      dimmer_field_id = part + '_relay_delay_' + relay_id;
       template = '#area_relay_setting_duration'
     }
   }
@@ -794,7 +794,14 @@ function add_relay_tab(form, part, relay_id, relay_name, dimmer) {
   panel.append(dimmer_field);
   tabbs.append(tab);
   panels.append(panel);
-  panel.find('.range_slider').bootstrapSlider();
+  panel.find('.range_slider').bootstrapSlider({'formatter' :
+    function(value) {
+      if (undefined !== value.length && 2 == value.length) {
+        return '{{ _('Delay') }}: ' + value[0] + ' {{ _('minutes')}}, Duration: ' + (value[1]-value[0]) + ' {{ _('minutes')}}';
+      }
+      return '{{ _('Delay') }}: ' + value + ' {{ _('minutes')}}'
+    }
+  });
 }
 
 
@@ -945,6 +952,11 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
   let light_modus   = ['day','night'].indexOf(part) != -1;
   let dimmer_active = false;
 
+  if (!light_modus) {
+    return;
+  }
+
+  /*
   if (light_modus) {
     // Check if there is at least one dimmer already selected...
     jQuery.each(selected, function(counter, relay_id) {
@@ -953,7 +965,9 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
       }
     });
   }
+  */
 
+  /*
   if ( light_modus && !dimmer_active ) {
     // Clear all calibration settings
     jQuery.each(active, function(counter,relay_id) {
@@ -962,6 +976,7 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
     });
     selected = [];
   } else if (light_modus && dimmer_active) {
+    */
     jQuery.each(Array.from(new Set(active.concat(selected))), function(counter,relay_id) {
       if (active.indexOf(relay_id) == -1) {
         // Add tab
@@ -972,7 +987,8 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
       }
     });
     {{modal_type}}_form.find('#area_dimmer_settings_' + part + '_relays a:last').tab('show');
-  }
+  //}
+
   target.data('active', selected.join(','));
 });
 {% endblock %}
@@ -1091,17 +1107,18 @@ jQuery.when(
           field.prop('checked',(1 != value)).trigger('change');
           field.prop('checked',(1 == value)).trigger('change');
         } else {
-          /*
-          if ('doors' == key) {
-            // Create a new array from the doors array with only the door ids
-            value = Array.from(value, door => door.id);
-          }
-          */
           field.val(value).trigger('change');
           if (key.indexOf('_relays') != -1 && value != '') {
             // The relays are set/changed, so fill the extra tweaks fields
             jQuery.each(parsed_data, function(key2,value2) {
-              if (key2.indexOf('dimmer_duration') != -1 || key2.indexOf('relay_step') != -1) {
+
+              if (key2.indexOf('dimmer_duration') != -1 || key2.indexOf('relay_delay') != -1) {
+                if (key2.indexOf('dimmer_duration') != -1) {
+                  value2 = value2.split(',')
+                  value2 = [value2[0] * 1, value2[1] * 1];
+                } else {
+                  value2 *= 1;
+                }
                 dimmer_steps.push({
                   id : key2,
                   value: value2
@@ -1114,8 +1131,8 @@ jQuery.when(
 
       setTimeout(function(){
         jQuery.each(dimmer_steps,function(counter,data) {
-          let field = {{modal_type}}_form.find('[name="' + data['id'] + '"]').slider()
-          field.bootstrapSlider('setValue', data['value'])
+          let field = {{modal_type}}_form.find('[name="' + data['id'] + '"]').bootstrapSlider();
+          field.bootstrapSlider('setValue', data['value']);
         });
       },100);
       {{modal_type}}_form.find('select[id$="_mode"]').trigger('change');

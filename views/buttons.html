@@ -22,7 +22,7 @@
             <div class="card-header">
               <h3 class="card-title mr-1">
                 <i class="fas fa-fw fa-thumbtack mr-2" ></i><span data-content="name">...</span>
-                <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
+                <small class="ml-2 text-muted"><br />{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
                   {"attribute": "content", "value": "last_update", "formatter": "datetimeformatter", "formatOptions": "LLLL"} ]'
                 ></span></small>
               </h3>
@@ -59,7 +59,7 @@
                     </a>
                     <a data-href="ignore_link" class="dropdown-item" data-action="PUT" data-field="value" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
                     {"attribute": "id", "value": "id" },
-                    {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Ingore button') }} "} ]'>
+                    {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Ignore button') }} "} ]'>
                       <i class="fas fa-ban mr-1"></i> {{ _('Ignore') }}
                     </a>
                     <a data-href="delete_link" class="dropdown-item" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
