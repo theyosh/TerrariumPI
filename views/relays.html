@@ -22,9 +22,12 @@
             <div class="card-header">
               <h3 class="card-title mr-1">
                 <i class="fas fa-fw fa-bolt mr-2"></i><span data-content="name">...</span>
-                <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
+                <small class="ml-1 text-muted">
+                  {{ _('Total') }}: <span class="total_power"><span></span> {{ _('kWh') }}</span><span class="total_flow"><span></span> {{ _('L') }}</span>&nbsp;
+                  <br />{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
                   {"attribute": "content", "value": "last_update", "formatter": "datetimeformatter", "formatOptions": "LLLL"} ]'
-                ></span></small>
+                ></span>
+                </small>
               </h3>
               <small data-template-bind='[
                   {"attribute": "class", "value": "error", "formatter": "prefixer", "formatOptions": "badge badge-danger "} ]'
@@ -43,6 +46,7 @@
                     <a href="#" class="dropdown-item" title="{{ _('Week') }}">{{ _('Week') }}</a>
                     <a href="#" class="dropdown-item" title="{{ _('Month') }}">{{ _('Month') }}</a>
                     <a href="#" class="dropdown-item" title="{{ _('Year') }}">{{ _('Year') }}</a>
+                    <a href="#" class="dropdown-item" title="{{ _('Replaced') }}">{{ _('Replaced') }}</a>
                   </div>
                 </div>
                 <div class="btn-group">
@@ -59,7 +63,7 @@
                     {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit relay') }} "} ]'>
                       <i class="fas fa-wrench mr-1"></i> {{ _('Settings') }}
                     </a>
-                    <a href="#replace_hardware" data-id="id" class="dropdown-item" data-toggle="modal" data-target="#modal-calendar-event" data-template-bind='[
+                    <a href="#" data-id="id" class="dropdown-item" onclick="replace_hardware(this)" data-template-bind='[
                     {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Replace hardware') }} "} ]'>
                       <i class="fas fa-tools mr-1"></i> {{ _('Replace hardware') }}
                     </a>
@@ -68,7 +72,7 @@
                       <i class="fas fa-hand-paper mr-1"></i> {{ _('Manual mode') }}
                     </a>
                     <a data-href="ignore_link" data-id="id" class="dropdown-item" data-action="PUT" data-field="value" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
-                    {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Ingore relay') }} "} ]'>
+                    {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Ignore relay') }} "} ]'>
                       <i class="fas fa-ban mr-1"></i> {{ _('Ignore') }}
                     </a>
                     <a data-href="delete_link" data-id="id" class="dropdown-item" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
@@ -118,6 +122,28 @@
     }).fail(function(response) {
       toastr.error('{{ _('Could not change the relay state of') }}: ' + response.message, '{{ _('Change error') }}');
     });
+  }
+
+  function replace_hardware(link) {
+    let relay = jQuery(link);
+
+    let event_form = jQuery('div#modal-event-setup form');
+
+    event_form.one('submit', function() {
+      jQuery.post('{{ url_for('api:relay_replace_hardware', relay='_id_') }}'.replace('_id_',relay.attr('id')));
+    });
+
+    event_form.find('input[name="summary"]').val(relay.attr('title'));
+    event_form.find('input[name="end"]').prop('disabled',false);
+
+    event_form.find('input[name="dtstart"]').val(moment().unix());
+    event_form.find('input[name="dtend"]').val('');
+
+    let fakehref = jQuery('<a>').attr({'data-toggle':'modal','data-target':'#modal-event-setup'}).attr({'id': 'cl_none', 'href':'#'});
+    // Need to add to the body in order make the modal work
+    jQuery('body').append(fakehref);
+    fakehref.click();
+    fakehref.remove();
   }
   {% endif %}
   jQuery(function () {

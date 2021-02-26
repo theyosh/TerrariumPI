@@ -17,7 +17,7 @@ from gevent import sleep
 class terrariumUSBWebcam(terrariumWebcam):
   HARDWARE     = 'usbcam'
   NAME         = 'USB camera'
-  VALID_SOURCE = '^/dev/video\d+'
+  VALID_SOURCE = r'^/dev/video\d+'
   INFO_SOURCE  = '/dev/video[NR]'
 
   def _load_hardware(self):

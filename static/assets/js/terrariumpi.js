@@ -283,9 +283,29 @@ function formatCurrency(amount,minfrac,maxfrac) {
   minfrac = minfrac || 2;
   maxfrac = maxfrac || 2;
 
+  let display = 'EUR';
+  switch (window.terrariumPI.language) {
+    case 'ca':
+      display = 'CAD';
+      break;
+
+    case 'en_GB':
+      display = 'GBP';
+      break;
+
+   case 'en_US':
+     display = 'USD';
+     break
+
+   case 'nb_NO':
+    display = 'NOK'
+    break;
+
+  }
+
   return (1 * amount).toLocaleString(window.terrariumPI.language.replace('_','-'), {
     style: 'currency',
-    currency: 'EUR',
+    currency: display,
     minimumFractionDigits: minfrac,
     maximumFractionDigits: maxfrac
   });
@@ -635,7 +655,6 @@ function sensor_gauge(canvas, type, current, limit_min, limit_max, alarm_min, al
 
 function graph(canvas, source, type) {
 
-
   /**
 * returns an array with moving average of the input array
 * @param array - the input array
@@ -691,6 +710,10 @@ function movingAvg(array, count, qualifier){
     _export: null,
     __timer : null,
     __type : type,
+    _totals : {
+      'power' : null,
+      'flow' : null
+    },
     _graph_data : {},
     __animate : 1000,
     __colors : {'min' : get_template_color('text-info',0.7),
@@ -713,20 +736,41 @@ function movingAvg(array, count, qualifier){
 
       let self = this;
       let periods = this._periods.find('a');
-      jQuery.each(['day','week','month','year'],function(counter,period) {
-        let link = jQuery(periods[counter]);
-        if ('#' == link.attr('href')) {
-          link.attr('href', value + period + '/').off('click').on('click',function (event){
-            event.preventDefault();
-            self._periods.find('a.dropdown-item').removeClass('active');
-            self.source  = this.href;
-            jQuery(this).addClass('active')
-          });
+      jQuery.each(['day','week','month','year','replaced'],function(counter,period) {
+        if (counter < periods.length) {
+          let link = jQuery(periods[counter]);
+          if ('#' == link.attr('href')) {
+            link.attr('href', value + period + '/').off('click').on('click',function (event){
+              event.preventDefault();
+              self._periods.find('a.dropdown-item').removeClass('active');
+              self.source  = this.href;
+              jQuery(this).addClass('active')
+            });
+          }
         }
       });
       //Enable animation when source has changed (day/week/mont/year)
       this._graph.options.animation.duration = 1000;
       this._load_data();
+    },
+
+    _color: function(context) {
+      if (!context.chart.chartArea) {
+        // This case happens on initial chart load
+        return null;
+      }
+
+      if (context.chart.data.datasets.length == 1) {
+        return this.__colors['current'];
+      }
+
+      let index = context.dataIndex;
+      let current = context.dataset.data[index] * 1;
+
+      let alarm_max = context.chart.data.datasets[0].data[index] * 1;
+      let alarm_min = context.chart.data.datasets[1].data[index] * 1;
+
+      return (current >= alarm_max ? this.__colors['max'] : current <= alarm_min ? this.__colors['min'] : this.__colors['current']);
     },
 
     _load_data: function() {
@@ -792,40 +836,11 @@ function movingAvg(array, count, qualifier){
             pointRadius : 1,
 
             borderColor : function(context) {
-              if (!context.chart.chartArea) {
-                // This case happens on initial chart load
-                return null;
-              }
-
-              if (context.chart.data.datasets.length == 1) {
-                return self.__colors['current'];
-              }
-
-              let index = context.dataIndex;
-              let current = context.dataset.data[index] * 1;
-
-              let alarm_max = context.chart.data.datasets[0].data[index] * 1;
-              let alarm_min = context.chart.data.datasets[1].data[index] * 1;
-
-              return (current >= alarm_max ? self.__colors['max'] : current <= alarm_min ? self.__colors['min'] : self.__colors['current']);
+              return self._color(context);
             },
 
             backgroundColor : function(context) {
-              if (!context.chart.chartArea) {
-                // This case happens on initial chart load
-                return null;
-              }
-
-              if (context.chart.data.datasets.length == 1) {
-                return self.__colors['current'];
-              }
-              let index = context.dataIndex;
-              let current = context.dataset.data[index] * 1;
-
-              let alarm_max = context.chart.data.datasets[0].data[index] * 1;
-              let alarm_min = context.chart.data.datasets[1].data[index] * 1;
-
-              return (current >= alarm_max ? self.__colors['max'] : current <= alarm_min ? self.__colors['min'] : self.__colors['current']);
+              return self._color(context);
             },
 
           });
@@ -877,7 +892,7 @@ function movingAvg(array, count, qualifier){
         }
 
         // Period ticks update
-        let period_duration = (moment(data.timestamp[data.timestamp.length-1]) - moment(data.timestamp[0])) / 86340000; // in days
+        let period_duration = (moment(data.timestamp[data.timestamp.length-1]) - moment(data.timestamp[0])) / 86400000; // in days
 
         if (period_duration <= 1) {
           self._graph.options.scales.xAxes[0].time.unit = 'minute';
@@ -905,26 +920,55 @@ function movingAvg(array, count, qualifier){
 
       let parsed_data = {};
 
+      let totals = {
+        'power' : 0,
+        'water' : 0
+      };
       for (counter = 0; counter < data.length; counter++) {
-        if (data[counter]['timestamp'] != undefined) {
+
+        if (data[counter].timestamp != undefined) {
           // Multiplay the timestamp value with 1000 to get javascript miliseconds values
-          data[counter]['timestamp'] = data[counter]['timestamp'] * 1000;
+          data[counter].timestamp = data[counter].timestamp * 1000;
         }
         if ('magnetic' == this.__type) {
           // reverse door graphs for now
-          data[counter]['value'] = (data[counter]['value'] ? 0 : 1);
+          data[counter].value = (data[counter].value ? 0 : 1);
         }
 
         if (['wattage','magnetic','motion','ldr'].indexOf(this.__type) != -1  && counter > 0) {
           // Here we add an extra item. This is the previous item, but with the timestamp of the new/current item
           // This will make the graph nicely showing filled areas when the power is on
+          if (counter == 1) {
+            if (data[0].timestamp > +moment() - 86400000) {
+              //console.log('Shift first data element', data[0], ((moment().unix() * 1000) - 86400000))
+              data[0].timestamp = +moment() - 86400000;
+
+              //console.log('Shift first data element 2', data[0])
+            }
+          }
+
+          if ('wattage' == this.__type) {
+
+            let duration = (data[counter].timestamp - data[counter-1].timestamp) / 1000;
+
+            //console.log(data[counter])
+          //  if (duration < 0) {
+        //      console.log('Counter: ', counter,'Duration: ', duration, 'Power: ', data[counter].wattage, data[counter].timestamp, data[counter-1].timestamp)
+          //  }
+
+            totals.power += duration * data[counter].wattage;
+            totals.water += ((data[counter].timestamp - data[counter-1].timestamp) / 1000 / 60) * data[counter].flow;
+          }
+
           prev_item = data[counter-1]
-          prev_item.timestamp = data[counter]['timestamp']
+          prev_item.timestamp = data[counter].timestamp
           if (data[counter].value === undefined || prev_item.value != data[counter].value) {
             for (key in prev_item) {
               parsed_data[key].push(prev_item[key])
             }
           }
+
+
         }
 
         for (key in data[counter]) {
@@ -938,10 +982,36 @@ function movingAvg(array, count, qualifier){
       if (['wattage','magnetic','motion','ldr'].indexOf(this.__type) != -1) {
         // Add a duplicate record on the 'end' with the current time stamp. This will keep the graph updating at every refresh
         last_item = data[data.length-1]
-        last_item.timestamp = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSSSS');
+        last_item.timestamp = +moment();
         for (key in last_item) {
           parsed_data[key].push(last_item[key])
         }
+
+      //  if (parsed_data.timestamp[parsed_data.timestamp.length-1] - parsed_data.timestamp[0] < 86400000) {
+      //    parsed_data.timestamp[0] = parsed_data.timestamp[parsed_data.timestamp.length-1] - 86400000;
+      //  }
+      }
+
+//      totals = [];
+      if ('wattage' == this.__type) {
+  /*
+        totals['power'] = 0;
+        totals['water'] = 0;
+
+        for (counter = 1; counter < data.length; counter++) {
+
+        }
+*/
+
+  //      console.log(parsed_data);
+       // console.log('First', parsed_data.timestamp[0], 'Last', parsed_data.timestamp[parsed_data.timestamp.length-1]);
+       // console.log('Duration', parsed_data.timestamp[parsed_data.timestamp.length-1] - parsed_data.timestamp[0])
+       // console.log(totals)
+
+        this._totals['power'].find('span').text(formatNumber(totals['power'] / 1000 / 3600));
+        this._totals['flow'].find('span').text(', ' + formatNumber(totals['water'] / 1000 / 60));
+        this._totals['flow'].toggle(totals['water'] != 0)
+
       }
 
       if (window.terrariumPI.graph_smooth_value > 0) {
@@ -962,7 +1032,7 @@ function movingAvg(array, count, qualifier){
       if (window.terrariumPI.graph_show_min_max_gauge && window.terrariumPI.gauges[name]) {
         // set the min/max values in the guage
         window.terrariumPI.gauges[name]._gauge.options.staticLabels = {
-          labels: [parsed_data.value.reduce(getMin), parsed_data.value.reduce(getMax)],
+          labels: [formatNumber(parsed_data.value.reduce(getMin)), formatNumber(parsed_data.value.reduce(getMax))],
           font: '10px Helvetica Neue,sans-serif',
           color: '#73879C',
           fractionDigits: 3
@@ -1116,6 +1186,10 @@ function movingAvg(array, count, qualifier){
   if (sensor_graph_obj._canvas.length == 1) {
     sensor_graph_obj._periods = sensor_graph_obj._canvas.parents('.card').find('.btn-group:first div.dropdown-menu');
     sensor_graph_obj._export = sensor_graph_obj._canvas.parents('.card').find('a.export_link');
+
+    sensor_graph_obj._totals['power'] = sensor_graph_obj._canvas.parents('.card').find('span.total_power');
+    sensor_graph_obj._totals['flow'] = sensor_graph_obj._canvas.parents('.card').find('span.total_flow');
+
     //console.log(sensor_graph_obj._export);
     sensor_graph_obj.draw();
     sensor_graph_obj.source  = source;
@@ -1221,7 +1295,11 @@ function editWebcamMarker(marker) {
     updateWebcamMarkers(marker.options.layer);
     marker.remove();
   });
-  $('.realtime-data-form').modal('show');
+
+
+  $('#webcam-realtime-data-form').modal('show');
+
+
 }
 
 function load_webcam(data) {
@@ -1229,10 +1307,14 @@ function load_webcam(data) {
   max_zoom = Math.pow(2,Math.ceil(Math.log2(max_zoom)));
   max_zoom = Math.log2(max_zoom/256)
 
-  var webcam = L.map(jQuery('div#webcam_' + data.id + ' div.webcam_player' + (data.edit === true ? '_preview' : ''))[0],{
+ // var webcam = L.map(jQuery('div#webcam_' + data.id + ' div.webcam_player' + (data.edit === true ? '_preview' : ''))[0],{
+
+  let webcam = L.map(jQuery('div#webcam_player_' + (data.edit === true ? 'preview_' : '') + data.id)[0],{
+
+
     id: 'map_' + data.id,
     fullscreenControl: true,
-    last_update : jQuery('div#webcam_' + data.id + ' div.webcam_player' + (data.edit === true ? '_preview' : '')).parents('.card').find('.last_update'),
+    last_update : jQuery('div#webcam_player_' + (data.edit === true ? 'preview_' : '') + data.id).parents('.card').find('.last_update'),
   }).on('load',function(event){
     //console.log('Webcam load',event)
     //this.options.
@@ -1297,7 +1379,7 @@ function load_webcam(data) {
       interactive: false,
       autoplay: true,
       player: null,
-      className: 'webcam_live_' + data.id
+      className: 'webcam_live_' + data.id + (data.edit === true ? '_preview' : '')
     }).on('remove',function(event){
       // Stop playback
       this.options.player[0].pause();
@@ -1317,7 +1399,7 @@ function load_webcam(data) {
           webcam_tiler_layer.remove()
         }
       },10 * 1000);
-      this.options.player = $('.webcam_live_' + data.id);
+      this.options.player = $('.webcam_live_' + data.id + (data.edit === true ? '_preview' : ''));
       this.options.player[0].muted = true;
       if (this.options.player[0].canPlayType('application/vnd.apple.mpegurl')) {
         this.options.player[0].src = hls_url;
@@ -1444,6 +1526,8 @@ function load_webcam(data) {
   });
   webcam.addControl(new L.Control.ExtraWebcamControls());
   webcam.addControl(L.Control.loading({separate: true}));
+
+  return webcam;
 }
 
 
@@ -1690,7 +1774,7 @@ function calendar_indicator() {
     calender_bar.find('div.events').html('');
 
     jQuery.each(data, function(counter, event){
-      let event_item = jQuery('<a>').attr('href','#').addClass('dropdown-item text-nowrap');
+      let event_item = jQuery('<a>').attr('href','#').addClass('dropdown-item').css('white-space','normal');
       let duration = moment.duration(moment(event.start).diff(moment())).humanize(true);
 
       event_item.append(jQuery('<i>').addClass('fas fa-calendar-alt mr-2'));
@@ -2040,8 +2124,6 @@ jQuery(function () {
 
   // Fix the menu links so they will load through jQuery AJAX
   fix_menu_links();
-
-
 
   jQuery.addTemplateFormatter('prefixer',
     function(value, prefix) {

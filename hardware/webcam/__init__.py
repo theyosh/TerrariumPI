@@ -17,7 +17,14 @@ import re
 import math
 import glob
 import cv2
-import numpy
+import numpy as np
+
+
+#import cv2
+#import math
+#import numpy as np
+#import sys
+
 
 # pip install retry
 from retry import retry
@@ -145,6 +152,9 @@ class terrariumWebcam(object):
 
     if not self.live:
       store_location.joinpath(self._TILE_LOCATION).mkdir(parents=True,exist_ok=True)
+
+  def __repr__(self):
+    return f'{self.NAME} named \'{self.name}\' at address \'{self.address}\''
 
   @retry(tries=3, delay=0.5, max_delay=2)
   def load_hardware(self):
@@ -320,7 +330,10 @@ class terrariumWebcam(object):
     }
 
     exif_dict = {'0th': zeroth_ifd, 'Exif': exif_ifd}
-    exif_bytes = piexif.dump(exif_dict)
+    try:
+      exif_bytes = piexif.dump(exif_dict)
+    except Exception as ex:
+      return None
 
     return exif_bytes
 

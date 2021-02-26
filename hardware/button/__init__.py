@@ -11,11 +11,7 @@ from hashlib import md5
 import pigpio
 import RPi.GPIO as GPIO
 import threading
-
 from gevent import sleep
-
-# pip install retry
-from retry import retry
 
 from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
@@ -79,7 +75,6 @@ class terrariumButton(object):
 
   def __init__(self, id, _, address, name = '', callback = None):
     self._device = {'device'   : None,
-#                    'button'   : None,
                     'id'       : None,
                     'address'  : None,
                     'name'     : None,
@@ -92,10 +87,13 @@ class terrariumButton(object):
     }
 
     self.id      = id
-    self.address = address
     self.name    = name
 
-    self.load_hardware()
+    # By setting the address, we will load the hardware.
+    self.address = address
+
+  def __repr__(self):
+    return f'{self.NAME} named \'{self.name}\' at address \'{self.address}\''
 
   def _run(self):
     self._checker['running'] = True
@@ -119,21 +117,6 @@ class terrariumButton(object):
     self._checker['thread'] = threading.Thread(target=self._run)
     self._checker['thread'].start()
 
-
-
-
-  def _pressed(self):
-    self._device['state'] = self.PRESSED
-    if self._device['callback'] is not None:
-      self._device['callback'](self.id, self.PRESSED)
-
-  def _released(self):
-    self._device['state'] = self.RELEASED
-    if self._device['callback'] is not None:
-      self._device['callback'](self.id, self.RELEASED)
-
-
-
   @property
   def id(self):
     if self._device['id'] is None:
@@ -143,8 +126,9 @@ class terrariumButton(object):
 
   @id.setter
   def id(self, value):
-    if value is not None and '' != str(value).strip():
-      self._device['id'] = str(value).strip()
+    value = terrariumUtils.clean_address(value)
+    if value not in [None, '', self.id]:
+      self._device['id'] = value
 
   @property
   def address(self):
@@ -157,8 +141,13 @@ class terrariumButton(object):
   @address.setter
   def address(self, value):
     value = terrariumUtils.clean_address(value)
-    if value is not None and '' != value:
+    if value not in [None, '', self.address]:
+
+      if self.address is not None:
+        self.stop()
+
       self._device['address'] = value
+      self.load_hardware()
 
   @property
   def name(self):
@@ -166,8 +155,9 @@ class terrariumButton(object):
 
   @name.setter
   def name(self, value):
-    if value is not None and '' != str(value).strip():
-      self._device['name'] = str(value).strip()
+    value = terrariumUtils.clean_address(value)
+    if value not in [None, '', self.name]:
+      self._device['name'] = value
 
   @property
   def state(self):

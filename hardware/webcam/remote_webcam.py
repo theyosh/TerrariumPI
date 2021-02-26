@@ -9,7 +9,7 @@ import re
 class terrariumRemoteWebcam(terrariumWebcam):
   HARDWARE     = 'remote'
   NAME         = 'Remote file webcam'
-  VALID_SOURCE = '^https?://(?!.*\.(?:m3u8))'
+  VALID_SOURCE = r'^https?://.*(?<!\.m3u8)$'
   INFO_SOURCE  = 'https://server.com/location/path/stream.jpg'
 
   def _load_hardware(self):

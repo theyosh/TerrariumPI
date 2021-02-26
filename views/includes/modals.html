@@ -37,6 +37,8 @@
 
 {% include 'modals/webcam.html' %}
 
+{% include 'modals/weather.html' %}
+
 <!--
 <div class="modal fade" id="modal-webcam-setup">
   <div class="modal-dialog modal-xl">
@@ -110,7 +112,7 @@
             }
           },
           error: function (error) {
-            console.log(error);
+           // console.log(error);
             toastr.error('Error:<br />' + error.responseJSON.message , 'ERROR');
           }
         });

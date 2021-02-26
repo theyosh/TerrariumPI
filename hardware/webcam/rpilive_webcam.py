@@ -15,7 +15,7 @@ from terrariumUtils import terrariumUtils
 class terrariumRPILiveWebcam(terrariumWebcam):
   HARDWARE     = 'rpicam-live'
   NAME         = 'Live Raspberry PI camera'
-  VALID_SOURCE = '^rpicam_live$'
+  VALID_SOURCE = r'^rpicam_live$'
   INFO_SOURCE  = 'rpicam_live'
 
   __RASPIVID = '/usr/bin/raspivid'

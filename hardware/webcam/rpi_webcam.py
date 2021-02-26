@@ -36,7 +36,7 @@ class PiCameraUpstream(PiCamera):
 class terrariumRPIWebcam(terrariumWebcam):
   HARDWARE     = 'rpicam'
   NAME         = 'Raspberry PI camera'
-  VALID_SOURCE = '^rpicam$'
+  VALID_SOURCE = r'^rpicam$'
   INFO_SOURCE  = 'rpicam'
 
   def _load_hardware(self):

@@ -218,6 +218,7 @@ class Relay(db.Entity):
   flow        = orm.Optional(float, default=0)
 
   manual_mode = orm.Optional(bool, default=False)
+  replacement = orm.Optional(datetime, default=datetime.fromtimestamp(0))
 
   calibration = orm.Optional(orm.Json)
 

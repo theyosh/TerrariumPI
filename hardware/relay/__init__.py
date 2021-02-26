@@ -374,26 +374,32 @@ class terrariumRelayDimmer(terrariumRelay):
         # Current power is higher then the new limit. So lower down the power now!
         self.on(self.ON,0)
 
-  def on(self, value = 100, duration = 0):
- #   print(f'Is dimmer currently running: {self.running}')
-    if self.running:
-      # For now, we cannot change the value when a dim action is going on... (Maybe we change this later)
-      return False
+  def on(self, value = 100, duration = 0.0, delay = 0.0):
+    if delay > 0.0:
+      self.__timer = threading.Timer(delay, lambda: self.on(value,duration,0)).start()
+    else:
 
-    value = round(value)
-  #  print(f'Putting {self} on to {value} in {duration} seconds')
-    value = max(self.OFF,min(self.ON,value))
-  #  print(f'Putting {self} on to corrected {value} in {duration} seconds')
+  #  def on(self, value = 100, duration = 0):
+  #   print(f'Is dimmer currently running: {self.running}')
+      if self.running:
+        # For now, we cannot change the value when a dim action is going on... (Maybe we change this later)
+        return False
 
-    if value == self.state:
-      return True
+      value = round(value)
+    #  print(f'Putting {self} on to {value} in {duration} seconds')
+      value = max(self.OFF,min(self.ON,value))
+    #  print(f'Putting {self} on to corrected {value} in {duration} seconds')
 
-    if 0 == duration:
-      self.set_state(value)
-      return True
+      if value == self.state:
+        return True
 
-    self.__thread = threading.Thread(target=self.__run,args=(value, duration))
-    self.__thread.start()
+      if 0 == duration:
+        self.set_state(value)
+        return True
+
+      self.__thread = threading.Thread(target=self.__run,args=(value, duration))
+      self.__thread.start()
+
     return True
 
   def off(self, value = 0, duration = 0):
