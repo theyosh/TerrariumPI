@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-02-22 00:05+CET\n"
-"PO-Revision-Date: 2021-02-14 07:04+0000\n"
+"PO-Revision-Date: 2021-03-01 17:43+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -23,10 +23,8 @@ msgid "Heating / cooling"
 msgstr "Aquecimento / Resfriamento"
 
 #: terrariumArea.py:45
-#, fuzzy
-#| msgid "Settings"
 msgid "Heating"
-msgstr "Configurações"
+msgstr "Aquecimento"
 
 #: terrariumArea.py:51
 msgid "Cooling"
@@ -489,10 +487,8 @@ msgid "Playlists"
 msgstr "Listas de reprodução"
 
 #: views/includes/sidebar.html:196
-#, fuzzy
-#| msgid "Audio playlist"
 msgid "New playlist"
-msgstr "Lista de reprodução de áudio"
+msgstr "Nova Lista de Reprodução"
 
 #: views/includes/sidebar.html:215
 msgid "List"
@@ -766,25 +762,20 @@ msgid "Power off"
 msgstr "Desligar"
 
 #: views/modals/area.html:292
-#, fuzzy
-#| msgid ""
-#| "Select the mode of this area. This will change the timing and durations "
-#| "of the relays."
 msgid ""
 "Select the mode of this area. This will change the timing and durations of "
 "the players."
 msgstr ""
-"Selecione o modo desta área. Esta opção altera o tempo e a duração dos relés."
+"Selecione o modo desta área. Esta opção altera o tempo e a duração da "
+"reprodução."
 
 #: views/modals/area.html:301
 msgid "Soundcard"
 msgstr "Placa de som"
 
 #: views/modals/area.html:306
-#, fuzzy
-#| msgid "Holds the soundcard that is used for playing audio."
 msgid "Select the soundcard that is used for this enclosure."
-msgstr "Contém a placa de som usada para reproduzir áudio."
+msgstr "Selecione a placa de som usada para este anexo."
 
 #: views/modals/area.html:507 views/modals/playlist.html:23
 #: views/playlists.html:27 views/playlists.html:40
@@ -960,10 +951,8 @@ msgid "Years"
 msgstr "Anos"
 
 #: views/modals/playlist.html:11
-#, fuzzy
-#| msgid "Relay settings"
 msgid "Playlist settings"
-msgstr "Configurações de relé"
+msgstr "Configurações de lista de reprodução"
 
 #: views/modals/playlist.html:30 views/playlists.html:28
 #: views/playlists.html:41
@@ -972,10 +961,8 @@ msgstr "Embaralhar"
 
 #: views/modals/playlist.html:42 views/playlists.html:29
 #: views/playlists.html:42
-#, fuzzy
-#| msgid "Repeat every"
 msgid "Repeat"
-msgstr "Repetir a cada"
+msgstr "Repetir"
 
 #: views/modals/relay.html:11
 msgid "Relay settings"
@@ -1206,10 +1193,8 @@ msgid "Preview"
 msgstr "Pré-visualização"
 
 #: views/playlists.html:26 views/playlists.html:39
-#, fuzzy
-#| msgid "Files"
 msgid "# Files"
-msgstr "Arquivos"
+msgstr "Num. Arquivos"
 
 #: views/relays.html:9
 msgid "No relays"
@@ -1221,13 +1206,11 @@ msgstr "Adicionar novo relé"
 
 #: views/relays.html:26
 msgid "L"
-msgstr ""
+msgstr "E"
 
 #: views/relays.html:26
-#, fuzzy
-#| msgid "Total space"
 msgid "Total"
-msgstr "Espaço total"
+msgstr "Total"
 
 #: views/relays.html:38 views/relays.html:71
 msgid "Manual mode"
@@ -1509,10 +1492,8 @@ msgid "Add new area"
 msgstr "Adicionar nova área"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new relay"
 msgid "Add new playlist"
-msgstr "Adicionar novo relé"
+msgstr "Adicionar nova lista de reprodução"
 
 #: Missing text string
 msgid "A new replacement reminder is created"
@@ -1536,7 +1517,7 @@ msgstr "Calibragem"
 
 #: Missing text string
 msgid "Changed relay {name} to {state}"
-msgstr ""
+msgstr "Relé alterado {nome} para {estado}"
 
 #: Missing text string
 msgid "Change error"
@@ -1555,10 +1536,8 @@ msgid "CPU Temp."
 msgstr "Temp CPU."
 
 #: Missing text string
-#, fuzzy
-#| msgid "Conductivity"
 msgid "Current activity"
-msgstr "Condutividade"
+msgstr "Atividade Atual"
 
 #: Missing text string
 msgid "Current value"
@@ -1581,10 +1560,8 @@ msgid "Delete enclosure"
 msgstr "Excluir anexo"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete relay"
 msgid "Delete playlist"
-msgstr "Excluir relé"
+msgstr "Excluir lista de reprodução"
 
 #: Missing text string
 msgid "Delete relay"
@@ -1611,10 +1588,8 @@ msgid "Edit enclosure"
 msgstr "Editar Anexos"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Audio playlist"
 msgid "Edit playlist"
-msgstr "Lista de reprodução de áudio"
+msgstr "Editar lista de reprodução"
 
 #: Missing text string
 msgid "Edit relay"
@@ -1658,7 +1633,7 @@ msgstr "Insira os termos de pesquisa"
 
 #: Missing text string
 msgid "Enter some information about this event"
-msgstr ""
+msgstr "Insira informações sobre o evento"
 
 #: Missing text string
 msgid "Enter the amount"
@@ -1693,16 +1668,12 @@ msgid "Error!"
 msgstr "Erro!"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No error messages"
 msgid "Error messages"
-msgstr "Nenhuma mensagem de erro"
+msgstr "Mensagens de erro"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Calendar title"
 msgid "Event title"
-msgstr "Título do Calendário"
+msgstr "Título do evento"
 
 #: Missing text string
 msgid "Export button"
@@ -1729,20 +1700,14 @@ msgid "Hardware replacement is logged in the calendar"
 msgstr "A substituição do hardware está registrada no calendário"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Ingore button"
 msgid "Ignore button"
 msgstr "Botão Ignorar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Ingore relay"
 msgid "Ignore relay"
 msgstr "Ignorar relé"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Ingore sensor"
 msgid "Ignore sensor"
 msgstr "Ignorar sensor"
 
@@ -1827,10 +1792,8 @@ msgid "Select a mode"
 msgstr "Selecione um modo"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select a mode"
 msgid "Select amount"
-msgstr "Selecione um modo"
+msgstr "Selecione a quantidade"
 
 #: Missing text string
 msgid "Select an area type"
@@ -1853,20 +1816,16 @@ msgid "Select archiving"
 msgstr "Selecione arquivamento"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select a mode"
 msgid "Select a soundcard"
-msgstr "Selecione um modo"
+msgstr "Selecione uma placa de som"
 
 #: Missing text string
 msgid "Select a state"
 msgstr "Selecionar um estado"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete audio file"
 msgid "Select audio files"
-msgstr "Excluir arquivo de Áudio"
+msgstr "Selecione os arquivos de áudio"
 
 #: Missing text string
 msgid "Select available doors"
@@ -1885,16 +1844,12 @@ msgid "Select language"
 msgstr "Selecionar Idioma"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select type"
 msgid "Select period"
-msgstr "Selecionar tipo"
+msgstr "Selecionar período"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select relays"
 msgid "Select playlists"
-msgstr "Selecionar relés"
+msgstr "Selecione listas de reprodução"
 
 #: Missing text string
 msgid "Select relays"
@@ -1973,10 +1928,8 @@ msgid "Upload ok"
 msgstr "Envio OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No warning messages"
 msgid "Warning messages"
-msgstr "Nenhuma mensagem de aviso"
+msgstr "Mensagens de aviso"
 
 #: Missing text string
 msgid "Weather data source url"
