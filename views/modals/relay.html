@@ -90,8 +90,9 @@
   {{modal_type}}_form.find('.dimmer_callibration').toggle(this.value.indexOf('-dimmer') != -1);
   {{modal_type}}_form.find('div#dimmer_callibration div:first').toggle(this.value != 'brightpi-dimmer');
 
- // {{modal_type}}_form.find('input[name="dimmer_frequency"]').prop('disabled',this.value.indexOf('-dimmer') != -1);
- // {{modal_type}}_form.find('input[name="dimmer_max_power"]').prop('disabled',this.value.indexOf('-dimmer') != -1);
+  // Disable the dimmer calibration fields...
+  {{modal_type}}_form.find('input[name="dimmer_frequency"]').prop('disabled',this.value.indexOf('-dimmer') == -1);
+  {{modal_type}}_form.find('input[name="dimmer_max_power"]').prop('disabled',this.value.indexOf('-dimmer') == -1);
 });
 {% endblock %}
 

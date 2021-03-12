@@ -10,6 +10,7 @@ bottle_websocket
 jinja2
 retry
 bcrypt
+cryptography
 
 # Hardware / sensors packages
 gpiozero

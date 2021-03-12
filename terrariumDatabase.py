@@ -3,8 +3,11 @@ from pony import orm
 import uuid
 import re
 from pathlib import Path
+from cryptography.fernet import Fernet
 
 from terrariumUtils import terrariumUtils
+
+import copy
 
 db = orm.Database()
 
@@ -15,20 +18,21 @@ def sqlite_speedups(db, connection):
     cursor.execute('PRAGMA journal_mode = MEMORY')
     cursor.execute('PRAGMA temp_store   = MEMORY')
 
-def init():
+def init(version):
   db.bind(provider='sqlite', filename='terrariumpi.db', create_db=True)
   db.generate_mapping(create_tables=True)
-  create_defaults()
+  create_defaults(version)
 
 @orm.db_session
-def create_defaults():
+def create_defaults(version):
   setting_defaults = [
+    {'id' : 'version',                    'value' : f'{version}'},
     {'id' : 'host',                       'value' : '0.0.0.0'},
     {'id' : 'port',                       'value' : '8090'},
     {'id' : 'pi_wattage',                 'value' : '5'},
     {'id' : 'username',                   'value' : 'admin'},
     {'id' : 'password',                   'value' : terrariumUtils.generate_password('password')},
-    {'id' : 'profile_image',              'value' : '/static/assets/img/profile_image.jpg'},
+    {'id' : 'profile_image',              'value' : 'static/assets/img/profile_image.jpg'},
     {'id' : 'always_authenticate',        'value' : 'false'},
     {'id' : 'language',                   'value' : 'EN'},
     {'id' : 'title',                      'value' : 'TerrariumPI'},
@@ -45,6 +49,7 @@ def create_defaults():
     {'id' : 'hide_environment_dashboard', 'value' : 'false'},
     {'id' : 'all_gauges_on_single_page',  'value' : 'false'},
     {'id' : 'graph_smooth_value',         'value' : '0'},
+    {'id' : 'encryption_salt',            'value' : Fernet.generate_key().decode()},
   ]
 
   for setting in setting_defaults:
@@ -181,6 +186,56 @@ class Enclosure(db.Entity):
 
   def __repr__(self):
     return f'Enclosure {self.name} with {len(self.areas)} areas'
+
+
+class NotificationMessage(db.Entity):
+  id         = orm.PrimaryKey(str)
+  title      = orm.Required(str)
+  message    = orm.Required(str)
+  rate_limit = orm.Optional(int, default=0)
+  enabled    = orm.Required(bool, default=True)
+  services   = orm.Set(lambda: NotificationService)
+
+class NotificationService(db.Entity):
+
+  id         = orm.PrimaryKey(uuid.UUID, default=uuid.uuid4)
+  type       = orm.Required(str)
+  name       = orm.Required(str)
+  rate_limit = orm.Optional(int, default=0)
+  enabled    = orm.Required(bool, default=True)
+  setup      = orm.Required(orm.Json)
+  messages   = orm.Set(lambda: NotificationMessage)
+
+  def __encrypt_sensitive_fields(self):
+    # encryption_salt = Setting['encryption_salt'].value.encode()
+    # encryption = Fernet(encryption_salt)
+
+    # Encrypt sensitive fields
+    for field in ['username','password','user_key','access_secret']:
+      if field in self.setup:
+        self.setup[field] = encryptterrariumUtilsion.encrypt(self.setup[field])
+
+  def before_insert(self):
+    self.__encrypt_sensitive_fields()
+
+  def before_update(self):
+    self.__encrypt_sensitive_fields()
+
+  def to_dict(self,only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+    # encryption_salt = Setting['encryption_salt'].value.encode()
+    # encryption = Fernet(encryption_salt)
+    # Encrypt sensitive fields
+    for field in ['username','password','user_key','access_secret']:
+      if field in data['setup']:
+        data['setup'][field] = terrariumUtils.decrypt(data['setup'][field])
+
+       # encryption.decrypt(data['setup'][field].encode()).decode()
+
+    return data
+
+  def __repr__(self):
+    return f'Notification service {self.type} {self.name}'
 
 
 class Playlist(db.Entity):
@@ -411,6 +466,26 @@ class SensorHistory(db.Entity):
 class Setting(db.Entity):
   id    = orm.PrimaryKey(str)
   value = orm.Optional(str)
+
+  def __encrypt_sensitive_fields(self):
+    if self.id in ['meross_cloud_username','meross_cloud_password'] and '' != self.value:
+#      print(f'Encrypt field {self.id} with value: {self.value}')
+      self.value = terrariumUtils.encrypt(self.value)
+#      print(f'Encrypted data is: {self.value}')
+
+    # # encryption_salt = Setting['encryption_salt'].value.encode()
+    # # encryption = Fernet(encryption_salt)
+
+    # # Encrypt sensitive fields
+    # for field in ['username','password','user_key','access_secret']:
+    #   if field in self.setup:
+    #     self.setup[field] = terrariumUtilsion.encrypt(self.setup[field])
+
+  def before_insert(self):
+    self.__encrypt_sensitive_fields()
+
+  def before_update(self):
+    self.__encrypt_sensitive_fields()
 
 
 class Webcam(db.Entity):

@@ -84,7 +84,7 @@
           cache: false,
           success: function (data) {
             // TODO: Make a better message system from the API backend
-            let message = '{{ _('{type} {name} is {action}') }}'.replace('{type}','{{ modal_type }}').replace('{name}',data.name || data.summary).replace('{action}',(form_data['id'] != '' ? '{{ _('updated') }}' : '{{ _('added') }}')).capitalize()
+            let message = '{{ _('{type} {name} is {action}') }}'.replace('{type}','{{ modal_type }}').replace('{name}',data.name || data.summary || data.title).replace('{action}',(form_data['id'] != '' ? '{{ _('updated') }}' : '{{ _('added') }}')).capitalize()
             toastr.success(message, '{{ _('Save OK') }}');
             {{modal_type}}_modal.reload = true
             {{modal_type}}_modal.modal('hide');

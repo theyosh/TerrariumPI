@@ -120,7 +120,7 @@ class terrariumArea(object):
     self.load_setup(setup)
 
   def __repr__(self):
-    return f'{terrariumArea.__TYPES[self.type]["name"]} area {self.name}'
+    return f'{terrariumArea.__TYPES[self.type]["name"]} named {self.name}'
 
 
   @property
@@ -291,10 +291,10 @@ class terrariumArea(object):
       elif time_schedule[0] <= now < time_schedule[1]:
         return True
 
-    print('Timers are done')
-    print(self)
-    print(self.setup[period]['timetable'])
-    print(f'Day last timer: {datetime.datetime.fromtimestamp(self.setup[period]["timetable"][-1][1]).day} vs {datetime.datetime.now().day}')
+   # print('Timers are done')
+   # print(self)
+   # print(self.setup[period]['timetable'])
+   # print(f'Day last timer: {datetime.datetime.fromtimestamp(self.setup[period]["timetable"][-1][1]).day} vs {datetime.datetime.now().day}')
     if 'weather' == self.mode and datetime.datetime.fromtimestamp(self.setup[period]['timetable'][-1][1]).day == datetime.datetime.now().day:
       # The day is not over yet, so return False. Else a new timetable for tomorrow will be calculated, and give wrong effect... This will delay it
       return False
@@ -461,7 +461,7 @@ class terrariumArea(object):
     with orm.db_session():
       relays = orm.select(r.id for r in Relay if r.id in self.setup[part]['relays'] and not r.manual_mode)
 
-    print(relays)
+#    print(relays)
 #      relays = [relay.to_dict(only='id') for relay in Relay.select(lambda r: r.id in self.setup[part]['relays'] and not r.manual_mode)]
 
       # for db_relay in Relay.select(lambda r: r.id in self.setup[part]['relays'] and not r.manual_mode):
@@ -496,7 +496,7 @@ class terrariumArea(object):
 
 
   def stop(self):
-    pass
+    logger.info(f'Stopped Area {self}')
 
 
 class terrariumAreaLights(terrariumArea):
@@ -506,19 +506,19 @@ class terrariumAreaLights(terrariumArea):
   def load_setup(self, data):
     super().load_setup(data)
 
-    print('Load terrariumAreaLights setup')
+    #print('Load terrariumAreaLights setup')
 
     # Load extra tweaks
     for period in self.PERIODS:
-      print(f'Test period: {period}')
+     # print(f'Test period: {period}')
       if period not in self.setup:
-        print(f'Period not found {period}')
+      #  print(f'Period not found {period}')
         continue
 
-      print('Going over the relays')
+      #print('Going over the relays')
       for relay_id in self.setup[period]['relays']:
         relay = self.enclosure.relays[relay_id]
-        print(f'Load relay {relay}')
+       # print(f'Load relay {relay}')
 
         extra_tweaks = self.setup[period].get(('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'on_' + relay.id, None)
         if extra_tweaks is None:
@@ -537,7 +537,7 @@ class terrariumAreaLights(terrariumArea):
 
         if relay.is_dimmer:
           values = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'on_' + relay.id].split(',')
-          print(f'Value data from period = {period}, : {values}')
+        #  print(f'Value data from period = {period}, : {values}')
           if len(values) == 1:
             values = [0,values[0]]
 
@@ -588,13 +588,13 @@ class terrariumAreaLights(terrariumArea):
       print(ex)
 
     # If the relay is a dimmer, recalc the on/off duration based on current state
-    print('Tweaks in relay action')
-    print(tweaks)
+    #print('Tweaks in relay action')
+    #print(tweaks)
 
     if relay.is_dimmer:
-      print(f'Duration: {tweaks["duration"]}, on = {relay.ON}, off = {relay.OFF}, on-off = {relay.ON - relay.OFF}')
+      #print(f'Duration: {tweaks["duration"]}, on = {relay.ON}, off = {relay.OFF}, on-off = {relay.ON - relay.OFF}')
       step_size = tweaks['duration'] / (relay.ON - relay.OFF)
-      print(f'Duration step size: {step_size}')
+      #print(f'Duration step size: {step_size}')
       tweaks['duration'] = step_size * abs((relay.ON if action else relay.OFF) - relay.state)
 
       # If the relay is already powered and should be power up, ignore the delay time. Force to zero delay
@@ -769,15 +769,18 @@ class terrariumAreaAudio(terrariumArea):
     if period not in self.setup:
       return False
 
-    logger.info(f'Toggle the player for area {self} to state {("on" if on else "off")}.')
+    logger.info(f'Toggle the player for area {self} period {period} to state {("on" if on else "off")}.')
 
     if on:
-      other_period = list(self.setup.keys())
+      other_period = copy.copy(self.PERIODS)
+      logger.info(f'Other periods: {other_period}')
       other_period.remove(period)
+      other_period = other_period[0]
+      logger.info(f'Other periods clean: {other_period}')
 
-      if len(other_period) == 1:
-        logger.info(f'Stopping other ({other_period[0]}) running player')
-        self.setup[other_period[0]]['player'].stop()
+      if other_period in self.setup:
+        logger.info(f'Stopping other ({other_period}) running player')
+        self.setup[other_period]['player'].stop()
 
       logger.info(f'Starting audio player for {period}')
       self.setup[period]['player'].play()

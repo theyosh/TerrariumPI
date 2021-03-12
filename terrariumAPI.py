@@ -5,6 +5,8 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import copy
 import json
 
+import uuid
+
 from datetime import datetime, timezone, timedelta
 from pony import orm
 from bottle import request, response, static_file, HTTPError
@@ -16,11 +18,12 @@ from hashlib import md5
 from apispec import APISpec
 from apispec_webframeworks.bottle import BottlePlugin
 
-from terrariumArea      import terrariumArea
-from terrariumAudio     import terrariumAudio
-from terrariumCalendar  import terrariumCalendar
-from terrariumDatabase  import Area, Audiofile, Button, ButtonHistory, Enclosure, Playlist, Relay, RelayHistory, Sensor, SensorHistory, Setting, Webcam
-from terrariumEnclosure import terrariumEnclosure
+from terrariumArea         import terrariumArea
+from terrariumAudio        import terrariumAudio
+from terrariumCalendar     import terrariumCalendar
+from terrariumDatabase     import Area, Audiofile, Button, ButtonHistory, Enclosure, Playlist, NotificationMessage, NotificationService, Relay, RelayHistory, Sensor, SensorHistory, Setting, Webcam
+from terrariumEnclosure    import terrariumEnclosure
+from terrariumNotification import terrariumNotification, terrariumNotificationService
 
 from hardware.sensor    import terrariumSensor
 from hardware.relay     import terrariumRelay
@@ -96,6 +99,22 @@ class terrariumAPI(object):
     bottle_app.route('/api/logfile/download/', 'GET', self.logfile_download, apply=self.authentication(), name='api:logfile_download')
 
 
+    # Notification API
+    bottle_app.route('/api/notification/messages/types/',          'GET',    self.notification_message_types,  apply=self.authentication(), name='api:notification_message_types')
+    bottle_app.route('/api/notification/messages/<message:path>/', 'GET',    self.notification_message_detail, apply=self.authentication(), name='api:notification_message_detail')
+    bottle_app.route('/api/notification/messages/<message:path>/', 'PUT',    self.notification_message_update, apply=self.authentication(), name='api:notification_message_update')
+    bottle_app.route('/api/notification/messages/<message:path>/', 'DELETE', self.notification_message_delete, apply=self.authentication(), name='api:notification_message_delete')
+    bottle_app.route('/api/notification/messages/',                'GET',    self.notification_message_list,   apply=self.authentication(), name='api:notification_message_list')
+    bottle_app.route('/api/notification/messages/',                'POST',   self.notification_message_add,    apply=self.authentication(), name='api:notification_message_add')
+
+    bottle_app.route('/api/notification/services/types/',          'GET',    self.notification_service_types,  apply=self.authentication(), name='api:notification_service_types')
+    bottle_app.route('/api/notification/services/<service:path>/', 'GET',    self.notification_service_detail, apply=self.authentication(), name='api:notification_service_detail')
+    bottle_app.route('/api/notification/services/<service:path>/', 'PUT',    self.notification_service_update, apply=self.authentication(), name='api:notification_service_update')
+    bottle_app.route('/api/notification/services/<service:path>/', 'DELETE', self.notification_service_delete, apply=self.authentication(), name='api:notification_service_delete')
+    bottle_app.route('/api/notification/services/',                'GET',    self.notification_service_list,   apply=self.authentication(), name='api:notification_service_list')
+    bottle_app.route('/api/notification/services/',                'POST',   self.notification_service_add,    apply=self.authentication(), name='api:notification_service_add')
+
+
     # Playlist API
     bottle_app.route('/api/playlists/<playlist:path>/', 'GET',    self.playlist_detail, apply=self.authentication(False), name='api:playlist_detail')
     bottle_app.route('/api/playlists/<playlist:path>/', 'PUT',    self.playlist_update, apply=self.authentication(),      name='api:playlist_update')
@@ -120,6 +139,9 @@ class terrariumAPI(object):
     bottle_app.route('/api/relays/<relay:path>/replaced/', 'POST',   self.relay_replace_hardware, apply=self.authentication(), name='api:relay_replace_hardware')
 
     bottle_app.route('/api/relays/hardware/',              'GET',    self.relay_hardware, apply=self.authentication(),      name='api:relay_hardware')
+
+    bottle_app.route('/api/relays/scan/',              'POST',    self.relay_scan, apply=self.authentication(),      name='api:relay_scan')
+
     bottle_app.route('/api/relays/<relay:path>/',          'GET',    self.relay_detail,   apply=self.authentication(False), name='api:relay_detail')
     bottle_app.route('/api/relays/<relay:path>/',          'PUT',    self.relay_update,   apply=self.authentication(),      name='api:relay_update')
     bottle_app.route('/api/relays/<relay:path>/',          'DELETE', self.relay_delete,   apply=self.authentication(),      name='api:relay_delete')
@@ -670,8 +692,6 @@ class terrariumAPI(object):
       raise HTTPError(status=500, body=f'Error deleting enclosure {enclosure}. {ex}')
 
 
-
-
   # Logfile
   def logfile_download(self):
     # https://stackoverflow.com/a/26017181
@@ -679,9 +699,150 @@ class terrariumAPI(object):
     return static_file(logfile.name, root='log', mimetype='text/text', download=logfile.name)
 
 
+  # Notifications
+  def notification_message_types(self):
+    return { 'data' : terrariumNotification.available_messages }
+
+  @orm.db_session
+  def notification_message_detail(self, message):
+    try:
+      message = NotificationMessage[message]
+      message_data = message.to_dict(with_collections=True)
+      message_data['id']  = str(message.id)
+      message_data['services'] = [self.notification_service_detail(str(service)) for service in message_data['services']]
+      return message_data
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Notification message with id {message} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error getting notification message with id {message} detail. {ex}')
+
+  @orm.db_session
+  def notification_message_update(self, message):
+    try:
+      message = NotificationMessage[message]
+
+      services = [uuid.UUID(id) for id in request.json['services'].split(',')]
+      request.json['services'] = NotificationService.select(lambda ns: ns.id in services)
+
+      message.set(**request.json)
+      orm.commit()
+
+      return self.notification_message_detail(message.id)
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Notification message with id {message} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error updating notification message with id {message}. {ex}')
+
+  @orm.db_session
+  def notification_message_delete(self, message):
+    try:
+      message = f'Notification message {NotificationMessage[message]} is deleted.'
+      NotificationMessage[message].delete()
+      return {'message' : message}
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Notification message with id {enclosure} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error deleting notification message with id {enclosure}. {ex}')
+
+  @orm.db_session
+  def notification_message_list(self):
+    data = []
+    for message in NotificationMessage.select(lambda ns: not ns.id in self.webserver.engine.settings['exclude_ids']):
+      data.append(self.notification_message_detail(message.id))
+
+    return { 'data' : data }
+
+  @orm.db_session
+  def notification_message_add(self):
+    try:
+      request.json['services'] = NotificationService.select(lambda ns: ns.id in request.json['services'].split(','))
+      message = NotificationMessage(**request.json)
+
+      return self.notification_message_detail(message.id)
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Notification message could not be added. {ex}')
+
+  def notification_service_types(self):
+    return { 'data' : terrariumNotificationService.available_services }
+
+  @orm.db_session
+  def notification_service_detail(self, service):
+    try:
+      service = NotificationService[service]
+      service_data = service.to_dict()
+      service_data['id']  = str(service.id)
+
+      return service_data
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error getting notification service with id {service} detail. {ex}')
+
+  @orm.db_session
+  def notification_service_update(self, service):
+    try:
+      service = NotificationService[service]
+
+      # TODO: Will this work... not sure....
+      #self.webserver.engine.update(terrariumEnclosure,**request.json)
+
+      # doors_set = Button.select(lambda b: b.id in request.json['doors'])
+      # request.json['doors'] = doors_set
+
+      # webcams_set = Webcam.select(lambda w: w.id in request.json['webcams'])
+      # request.json['webcams'] = webcams_set
+
+      service.set(**request.json)
+
+      # print('Update enclosure data to the engine')
+      # # TODO: Will this work... not sure....
+      # self.webserver.engine.update(terrariumEnclosure,**request.json)
+
+   #   enclosure_data = enclosure.to_dict(with_collections=True)
+    #  enclosure_data['id']  = str(enclosure.id)
+ #     enclosure_data['value']  = enclosure.value
+      return self.notification_service_detail(service.id)
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error updating notification service with id {service}. {ex}')
+
+  @orm.db_session
+  def notification_service_delete(self, service):
+    try:
+      message = f'Notification service {NotificationService[service]} is deleted.'
+      NotificationService[service].delete()
+ #     self.webserver.engine.delete(terrariumEnclosure,enclosure)
+      return {'message' : message}
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Notification service with id {enclosure} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error deleting notification service with id {enclosure}. {ex}')
+
+  @orm.db_session
+  def notification_service_list(self):
+    data = []
+    for service in NotificationService.select(lambda ns: not ns.id in self.webserver.engine.settings['exclude_ids']):
+      data.append(self.notification_service_detail(service.id))
+
+    return { 'data' : data }
+
+  @orm.db_session
+  def notification_service_add(self):
+    try:
+      service = NotificationService(**request.json)
+
+#    print(f'API: Service saved => {service.id}')
+
+    # TODO: Fix this? Add the new service to the exiting Notification system??
+    #self.webserver.engine.add(terrariumEnclosure)
+
+      return self.notification_service_detail(service.id)
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Notification service could not be added. {ex}')
+
 
   # Playlist
-
   @orm.db_session
   def playlist_list(self):
     data = []
@@ -849,6 +1010,15 @@ class terrariumAPI(object):
 
   def relay_hardware(self):
     return { 'data' : terrariumRelay.available_relays }
+
+  def relay_scan(self):
+    current_amount = len(self.webserver.engine.relays)
+    print('Terrarium Engine')
+    print(self.webserver.engine)
+    print(dir(self.webserver.engine))
+    self.webserver.engine.scan_new_relays()
+    new = len(self.webserver.engine.relays) - current_amount
+    return { 'message' : f'Found {new} new relays' }
 
   @orm.db_session
   def relay_list(self):
@@ -1104,16 +1274,21 @@ class terrariumAPI(object):
     settings = []
     for setting in Setting.select():
       # Never give out this value in a list
-      if setting.id in ['password', 'meross_cloud_password']:
+      if setting.id in ['password']:
         continue
-      settings.append(setting.to_dict())
+      settings.append(self.setting_detail(setting.id))
+      #setting.to_dict())
 
     return { 'data' : settings }
 
   @orm.db_session
   def setting_detail(self, setting):
     try:
-      return Setting[setting].to_dict()
+      data = Setting[setting].to_dict()
+      if data['id'] in ['meross_cloud_username','meross_cloud_password']:
+        data = copy.copy(data)
+        data['value'] = terrariumUtils.decrypt(data['value'])
+      return data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Setting with id {setting} does not exists.')
 
@@ -1170,6 +1345,7 @@ class terrariumAPI(object):
       try:
         setting = Setting[key]
         if 'password' == key:
+
           setting.value = terrariumUtils.generate_password(request.json[key])
         else:
           setting.value = request.json[key]
