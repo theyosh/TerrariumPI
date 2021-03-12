@@ -36,4 +36,5 @@ jQuery.get('{{ url_for('api:setting_detail', setting='weather_source') }}', func
 {% endblock %}
 
 {% block modal_form_javascript_pre_submit_formdata %}
+form_data['value'] = {{modal_type}}_form.find('#weahter_source_url').val();
 {% endblock %}
