@@ -34,6 +34,7 @@ def create_defaults(version):
     {'id' : 'password',                   'value' : terrariumUtils.generate_password('password')},
     {'id' : 'profile_image',              'value' : 'static/assets/img/profile_image.jpg'},
     {'id' : 'always_authenticate',        'value' : 'false'},
+    {'id' : 'weather_source',             'value' : ''},
     {'id' : 'language',                   'value' : 'EN'},
     {'id' : 'title',                      'value' : 'TerrariumPI'},
     {'id' : 'exclude_ids',                'value' : ''},
