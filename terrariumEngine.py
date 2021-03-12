@@ -281,7 +281,7 @@ class terrariumEngine(object):
       if '' != self.settings['weather_source']:
         logger.info(f'Loading weather data from source {self.settings["weather_source"]}')
         self.weather = terrariumWeather(self.settings['weather_source'])
-      else:
+      elif self.weather is not None:
         logger.info(f'Updating weather source data to {self.settings["weather_source"]}')
         self.weather.address = self.settings['weather_source']
 
