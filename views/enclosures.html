@@ -24,11 +24,14 @@
             <td data-content="mode"></td>
             <td> .. </td>
             {% if authenticated %}
-            <td class="actions"> <i class="fas fa-wrench mr-1 edit_area" data-template-bind='[
+            <td class="actions text-center">
+              <i class="fas fa-wrench edit_area" data-template-bind='[
                 {"attribute": "id", "value": "id" },
-                {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit area') }} "} ]'></i> <i class="fas fa-trash-alt mr-1 text-danger delete_area" data-template-bind='[
+                {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit area') }} "} ]'></i>
+              <i class="fas fa-trash-alt delete_area" data-template-bind='[
                 {"attribute": "id", "value": "id" },
-                {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Delete area') }} "} ]'></i> </td>
+                {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Delete area') }} "} ]'></i>
+            </td>
             {% endif %}
           </tr>
         </script>
@@ -78,7 +81,7 @@
                             <th>{{ _('Mode') }}</th>
                             <th>{{ _('Status') }}</th>
                             {% if authenticated %}
-                            <th style="width: 40px" class="actions">{{ _('Actions') }}</th>
+                            <th class="actions text-center">{{ _('Actions') }}</th>
                             {% endif %}
                           </tr>
                         </thead>
@@ -121,14 +124,14 @@
       jQuery('i.edit_area').each(function(counter, element){
         element = jQuery(element);
         let link = '{{ url_for('api:area_update', area='_id_') }}'.replace('_id_',element.attr('id'));
-        link = jQuery('<a>').attr({'data-toggle':'modal', 'data-target' : '#modal-area-setup','href': link})
+        link = jQuery('<a>').addClass('btn btn-light btn-sm text-primary').attr({'role':'button','data-toggle':'modal', 'data-target' : '#modal-area-setup','href': link})
         element.wrap(link);
       });
 
       jQuery('i.delete_area').each(function(counter, element){
         element = jQuery(element);
         let link = '{{ url_for('api:area_delete', area='_id_') }}'.replace('_id_',element.attr('id'));
-        link = jQuery('<a>').attr({'data-action' : 'DELETE', 'data-toggle':'modal', 'data-target' : '#modal-confirm','title' : jQuery(this).attr('title'), 'href': link})
+        link = jQuery('<a>').addClass('btn btn-light btn-sm text-danger').attr({'role':'button','data-action' : 'DELETE', 'data-toggle':'modal', 'data-target' : '#modal-confirm','title' : jQuery(this).attr('title'), 'href': link})
         element.wrap(link);
       });
     });

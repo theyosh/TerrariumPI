@@ -165,7 +165,7 @@ echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /sbin/shutdown" >> /etc/sudoers.d/terra
 # http://denkovi.com/denkovi-relay-command-line-tool
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/java -jar 3rdparty/DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar *" >> /etc/sudoers.d/terrariumpi
 
-systemctl enable pigpiod
+systemctl enable pigpiod 2>/dev/null
 
 PROGRESS=0
 # Update submodules if downloaded through tar or zip
@@ -186,7 +186,7 @@ $PROGRESS
 Install required software\n\nInstalling base software ...
 XXX
 EOF
-git submodule init > /dev/null
+git submodule init 2> /dev/null
 
 
 PROGRESS=$((PROGRESS + 1))
@@ -196,7 +196,7 @@ $PROGRESS
 Install required software\n\nInstalling base software ...
 XXX
 EOF
-git submodule update > /dev/null
+git submodule update 2> /dev/null
 
 PROGRESS=$((PROGRESS + 1))
 cat <<EOF
@@ -288,8 +288,8 @@ if [ ! -h /etc/update-motd.d/05-terrariumpi ]; then
 fi
 
 # Setup logging symlinks
-su -c 'ln -s /dev/shm/terrariumpi.log "${BASEDIR}/log/terrariumpi.log"' -s /bin/bash ${SCRIPT_USER}
-su -c 'ln -s /dev/shm/terrariumpi.access.log "${BASEDIR}/log/terrariumpi.access.log"' -s /bin/bash ${SCRIPT_USER}
+su -c 'ln -s /dev/shm/terrariumpi.log "log/terrariumpi.log"' -s /bin/bash ${SCRIPT_USER}
+su -c 'ln -s /dev/shm/terrariumpi.access.log "log/terrariumpi.access.log"' -s /bin/bash ${SCRIPT_USER}
 
 # We are done!
 sync

@@ -13,6 +13,9 @@ import time
 import glob
 import shutil
 
+from pony import orm
+
+from terrariumDatabase import Setting
 from terrariumNotification import terrariumNotification
 from terrariumUtils import terrariumUtils
 
@@ -73,15 +76,12 @@ class NotificationLogger(logging.StreamHandler):
 
   def __init__(self,trafficlights,*args, **kwargs):
     super(NotificationLogger,self).__init__(*args, **kwargs)
-
-#    terrariumpi_config = terrariumConfig()
-#    self.notification = terrariumNotification(trafficlights,terrariumpi_config.get_profile_image(),terrariumpi_config.get_system()['version'])
+    # The notification will later on get a reference to the terrariumEngine for version and profile information
+    self.notification = terrariumNotification()
 
   def emit(self,data):
-    if data.name not in ['terrariumTranslations']:
-      pass
-
-    #  self.notification.message('system_' + str(data.levelname).lower() , {'message':data.getMessage()} )
+    if str(data.levelname.lower()) not in ['info']:
+      self.notification.message(f'system_{data.levelname.lower()}' , {'message' : data.getMessage()} )
 
 if os.path.isfile('logging.custom.cfg'):
   logging.config.fileConfig('logging.custom.cfg')

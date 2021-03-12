@@ -82,7 +82,7 @@
             <script type="text/html" id="sensor_type_menu">
               <li data-class="tree" class="nav-item">
                 <a data-href="link" class="nav-link">
-                  <i data-class="icon" class="fas nav-icon"></i>
+                  <i data-class="icon" class="nav-icon"></i>
                   <p >
                     <span data-content-text="title"></span>
                     <i data-class="submenu" class="fas right"></i>
@@ -117,6 +117,12 @@
               <a href="#" class="nav-link" title="{{ _('Add new relay') }}" data-toggle="modal" data-target="#modal-relay-setup">
                 <i class="fas fa-plus nav-icon"></i>
                 <p>{{ _('New relay') }}</p>
+              </a>
+            </li>
+            <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+              <a href="{{ url_for('api:relay_scan')}}" class="nav-link" title="{{ _('Scan for new relays') }}" data-action="POST" data-field="value" data-toggle="modal" data-target="#modal-confirm">
+                <i class="fas fa-sync-alt nav-icon"></i>
+                <p>{{ _('Scan relays') }}</p>
               </a>
             </li>
           </ul>
@@ -176,7 +182,6 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-
             <li class="nav-item">
               <a href="{{ url_for('page', page='audio_files')}}" class="nav-link">
                 <i class="fas fa-file-audio nav-icon"></i>
@@ -196,8 +201,6 @@
                 <p>{{ _('New playlist') }}</p>
               </a>
             </li>
-
-
           </ul>
         </li>
         <li class="nav-item has-treeview">
@@ -242,6 +245,12 @@
               <a href="{{ url_for('page', page='status')}}" class="nav-link">
                 <i class="fas fa-exclamation-triangle nav-icon"></i>
                 <p>{{ _('Status') }}</p>
+              </a>
+            </li>
+            <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+              <a href="{{ url_for('page', page='notifications')}}" class="nav-link">
+                <i class="fas fa-bell nav-icon"></i>
+                <p>{{ _('Notifications') }}</p>
               </a>
             </li>
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>

@@ -24,7 +24,7 @@ from packaging.version import Version
 from pyfancy.pyfancy import pyfancy
 
 from pony import orm
-from terrariumDatabase import init as init_db, Setting, Sensor, Relay, RelayHistory, Button, Webcam, Enclosure
+from terrariumDatabase import init as init_db, db, Setting, Sensor, Relay, RelayHistory, Button, Webcam, Enclosure
 from terrariumWebserver import terrariumWebserver
 from terrariumCalendar import terrariumCalendar
 from terrariumUtils import terrariumUtils
@@ -79,7 +79,11 @@ class terrariumEngine(object):
 
     self.version = version
     self.latest_version = None
-    init_db()
+    init_db(self.version)
+
+    # Notification engine
+    # TODO: NEEDS REWRITE... OLD CODE
+
 
     self.running = True
 
@@ -93,6 +97,13 @@ class terrariumEngine(object):
 
     # Load settings. This will also load the weather data if available
     self.load_settings()
+
+    # Notification system
+    self.notification = terrariumNotification()
+    self.notification.engine = self
+    self.notification.load_services()
+
+#    self.notification.set_profile_image(self.get_profile_image())
 
     # Load Webserver, as we need it for websocket communication (even when the webserver is not yet started)
     self.webserver = terrariumWebserver(self)
@@ -117,7 +128,7 @@ class terrariumEngine(object):
     self.__load_existing_relays()
 
     logger.info('Scanning for new relays ...')
-    self.__scan_new_relays()
+    self.scan_new_relays()
     logger.info(f'Loaded {len(self.relays)} relays in {time.time()-start:.2f} seconds.')
 
     # Loading buttons....
@@ -140,10 +151,7 @@ class terrariumEngine(object):
 
     self.environment = None
 
-    # Notification engine
-    # TODO: NEEDS REWRITE... OLD CODE
-    self.notification = terrariumNotification()
-#    self.notification.set_profile_image(self.get_profile_image())
+
 
     logger.info(f'TerrariumPI is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-starttime:.2f} seconds.')
     # Return console logging back to 'normal'
@@ -218,6 +226,7 @@ class terrariumEngine(object):
     settings['port']        = int(settings['port'])
 
     # Set meross login into the current bash environment
+    os.environ['SALT']            = settings['encryption_salt']
     os.environ['MEROSS_EMAIL']    = settings['meross_cloud_username']
     os.environ['MEROSS_PASSWORD'] = settings['meross_cloud_password']
 
@@ -574,6 +583,7 @@ class terrariumEngine(object):
     self.relays = {}
 
     with orm.db_session():
+      # TODO: Fix Meross better!!  and r.hardware != 'meross'
       for relay in Relay.select(lambda r: r.id not in self.settings['exclude_ids']):
         start = time.time()
         if relay.id not in self.relays:
@@ -612,7 +622,7 @@ class terrariumEngine(object):
 
 
   # -= NEW =-
-  def __scan_new_relays(self):
+  def scan_new_relays(self):
     for relay in terrariumRelay.scan_relays(callback=self.callback_relay):
       if relay.id not in self.settings['exclude_ids'] and relay.id not in self.relays:
         logger.debug(f'Found new relay {relay}')
@@ -1109,7 +1119,7 @@ class terrariumEngine(object):
     # print(f'Exit state:')
     # print(self.__engine['exit'])
     # print(dir(self.__engine['exit']))
-    logger.info('Engine stopped')
+    logger.info('Stopped main engine thread')
 
 
 
@@ -1346,6 +1356,11 @@ class terrariumEngine(object):
     # Relays
     relay_lines = [[],[],[]]
 
+    relay_title_length = 0
+    relay_power_length = 0
+    relay_flow_length  = 0
+    relay_title_padding = 1
+
     relay_averages = {'power': {'current' : 0, 'max' : 0}, 'flow': {'current' : 0, 'max' : 0}}
     with orm.db_session():
       for relay in Relay.select(lambda r: r.id in self.relays.keys() and not r.id in self.settings['exclude_ids']):
@@ -1366,32 +1381,34 @@ class terrariumEngine(object):
         relay_lines[1].append(f'{relay.current_wattage:.2f} Watt')
         relay_lines[2].append(f'{relay.current_flow:.2f} L/m')
 
-    relay_title_length = max([len(title) for title in relay_lines[0]])
-    relay_power_length = max([len(title) for title in relay_lines[1]])
-    relay_flow_length  = max([len(title) for title in relay_lines[2]])
-
-    relays_active = len(relay_lines[0])
     current_watt = relay_averages['power']['current']
     max_watt     = relay_averages['power']['max']
 
     current_flow = relay_averages['flow']['current']
     max_flow     = relay_averages['flow']['max']
 
+    relays_active = len(relay_lines[0])
     motd_relays = ''
-    for counter in range(len(relay_lines[0])):
-      motd_relays += relay_lines[0][counter].ljust(relay_title_length,' ') + ' ' + relay_lines[1][counter].rjust(relay_power_length,' ') + ' ' + relay_lines[2][counter].ljust(relay_flow_length,' ') + '\n'
 
-    motd_relays = padding + ((relay_title_length + relay_power_length + relay_flow_length) * '-') + '\n' + motd_relays
+    if len(relay_lines[0]) > 0:
+      relay_title_length = max([len(title) for title in relay_lines[0]])
+      relay_power_length = max([len(title) for title in relay_lines[1]])
+      relay_flow_length  = max([len(title) for title in relay_lines[2]])
 
-    relay_title_left = len(f'Current active relays {relays_active}/{len(self.relays)}')
-    relay_title_right = len(f'{current_watt:.2f}/{max_watt:.2f} Watt, {current_flow:.2f}/{max_flow:.2f} L/m')
-    relay_title_padding = (relay_title_length + relay_power_length + relay_flow_length) - (relay_title_left + relay_title_right) - 2
+      for counter in range(len(relay_lines[0])):
+        motd_relays += relay_lines[0][counter].ljust(relay_title_length,' ') + ' ' + relay_lines[1][counter].rjust(relay_power_length,' ') + ' ' + relay_lines[2][counter].ljust(relay_flow_length,' ') + '\n'
 
-    # Add colors to the values
-    if relays_active > 0:
-      relays_active = pyfancy().green(f'{relays_active}').get()
-      current_watt = pyfancy().green(f'{current_watt:.2f}').get()
-      current_flow = pyfancy().blue(f'{current_flow:.2f}').get()
+      motd_relays = padding + ((relay_title_length + relay_power_length + relay_flow_length) * '-') + '\n' + motd_relays
+
+      relay_title_left = len(f'Current active relays {relays_active}/{len(self.relays)}')
+      relay_title_right = len(f'{current_watt:.2f}/{max_watt:.2f} Watt, {current_flow:.2f}/{max_flow:.2f} L/m')
+      relay_title_padding = (relay_title_length + relay_power_length + relay_flow_length) - (relay_title_left + relay_title_right) - 2
+
+      # Add colors to the values
+      if relays_active > 0:
+        relays_active = pyfancy().green(f'{relays_active}').get()
+        current_watt = pyfancy().green(f'{current_watt:.2f}').get()
+        current_flow = pyfancy().blue(f'{current_flow:.2f}').get()
 
     motd_relays = f'{padding}Current active relays ({relays_active}/{len(self.relays)})' + (relay_title_padding * ' ') + f'{current_watt}/{max_watt:.2f} Watt, {current_flow}/{max_flow:.2f} L/m' + '\n' + motd_relays
 
@@ -1452,10 +1469,10 @@ class terrariumEngine(object):
     # print(dir(self.__engine['thread']))
 
     self.__engine['thread'].join()
-    print('Engine stopped...')
-    print('Wait on logtail to stop....')
+#    print('Engine stopped...')
+#    print('Wait on logtail to stop....')
     self.__engine['logtail'].join()
-    print('Logtail thread is stopped')
+#    print('Logtail thread is stopped')
 
     #self.environment.stop()
 
@@ -1497,7 +1514,7 @@ class terrariumEngine(object):
       logger.info(f'Stopped {self.webcams[webcam]}')
 
     self.notification.stop()
-    print('Totally stopped TerrariumPI')
+#    print('Totally stopped TerrariumPI')
 
 
 
@@ -1720,7 +1737,7 @@ class terrariumEngine(object):
   def total_power_and_water_usage(self):
     # We are using total() vs sum() as total() will always return a number. https://sqlite.org/lang_aggfunc.html#sumunc
     with orm.db_session():
-      data = RelayHistory.get_by_sql(
+      data = db.select(
         """SELECT
              DISTINCT relay,
              TOTAL(total_wattage) AS wattage,
@@ -1742,9 +1759,9 @@ class terrariumEngine(object):
       )
 
       return {
-        'total_watt' : data.wattage,
-        'total_flow' : data.flow,
-        'duration'   : data.timestamp
+        'total_watt' : data[0][1],
+        'total_flow' : data[0][2],
+        'duration'   : data[0][3]
       }
 
 

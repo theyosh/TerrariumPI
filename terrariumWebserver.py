@@ -233,7 +233,8 @@ class terrariumWebserver(object):
     self.bottle.route('/', method='GET', callback=self.render_page, apply=self.authenticate(), name='home')
 
     # Template pages
-    self.bottle.route('/<page:re:[^/]+>.html', method='GET', callback=self.render_page, apply=self.authenticate(), name='page')
+    self.bottle.route('/<page:re:[^/]+>.html',        method='GET', callback=self.render_page, apply=self.authenticate(), name='page')
+    self.bottle.route('/<page:re:modals/[^/]+>.html', method='GET', callback=self.render_page, apply=self.authenticate(), name='modal')
 
     # Special case: robots.txt
     self.bottle.route('/<filename:re:robots\.txt>', method='GET', callback=self.__static_file)

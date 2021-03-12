@@ -76,12 +76,11 @@
           let return_data = new Array();
 
           for(let i = 0; i < data.length; i++){
-
-            let audio_player_icon = jQuery('<i>').addClass('fas fa-play-circle audio_player mr-2 mt-1 text-primary');
-            let audio_player = jQuery('<audio>').prop({'controls':true, 'preload' : 'none'}).addClass('d-none').append(jQuery('<source>').attr('src','/media/' + data[i].filename));
+            let audio_player_icon = jQuery('<button>').addClass('btn btn-light btn-sm text-primary audio_player').append(jQuery('<i>').addClass('fas fa-play-circle'));
+            let audio_player = jQuery('<audio>').prop({'controls':true, 'preload' : 'none'}).addClass('d-none').append(jQuery('<source>').attr('src','/media/' + data[i].filename.split(/[\\/]/).pop()));
 
             {% if authenticated %}
-            let delete_icon = jQuery('<a>').addClass('text-danger').attr({'href':'{{ url_for("api:audiofile_delete", audiofile="_id_") }}'.replace('_id_',data[i].id) , 'title' : '{{ _('Delete audio file') }} ' + data[i].name, 'data-action':'DELETE','data-toggle':'modal','data-target':'#modal-confirm'}).append(jQuery('<i>').addClass('fas fa-trash-alt'));
+            let delete_icon = jQuery('<a>').addClass('btn btn-light btn-sm text-danger').attr({'href':'{{ url_for("api:audiofile_delete", audiofile="_id_") }}'.replace('_id_',data[i].id) , 'title' : '{{ _('Delete audio file') }} ' + data[i].name, 'data-action':'DELETE','data-toggle':'modal','data-target':'#modal-confirm'}).append(jQuery('<i>').addClass('fas fa-trash-alt'));
             {% endif %}
 
             return_data.push({
@@ -104,18 +103,18 @@
         { data: 'action', class: 'd-flex justify-content-around' },
       ]
     }).on('draw', function(event, settings){
-      jQuery('i.audio_player').off('click').on('click',function(element) {
+      jQuery('button.audio_player').off('click').on('click',function(element) {
         let player_icon = jQuery(element.currentTarget);
         let player = player_icon.siblings('audio');
 
-        if (player_icon.hasClass('fa-play-circle')) {
+        if (player_icon.find('i').hasClass('fa-play-circle')) {
           // Start the player
           player[0].play();
-          player_icon.removeClass('fa-play-circle').addClass('fa-pause-circle');
+          player_icon.find('i').removeClass('fa-play-circle').addClass('fa-pause-circle');
         } else {
           // Stop the player
           player[0].pause();
-          player_icon.removeClass('fa-pause-circle').addClass('fa-play-circle');
+          player_icon.find('i').removeClass('fa-pause-circle').addClass('fa-play-circle');
         }
       });
     });

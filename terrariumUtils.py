@@ -9,6 +9,9 @@ import requests
 import subprocess
 import threading
 import bcrypt
+import os
+
+from cryptography.fernet import Fernet
 
 from math import log
 
@@ -161,6 +164,8 @@ class terrariumCache(terrariumSingleton):
     if hash_key in self.__cache and self.__cache[hash_key]['expire'] > int(time.time()):
       return self.__cache[hash_key]['data']
 
+    return None
+
   def clear_data(self,hash_key):
     if hash_key in self.__cache:
       del(self.__cache[hash_key])
@@ -189,6 +194,24 @@ class terrariumUtils():
       return False
 
     return bcrypt.checkpw(password.encode(), passwordhash.encode())
+
+  @staticmethod
+  def encrypt(string):
+    try:
+      encryption = Fernet(os.environ['SALT'].encode())
+      return encryption.encrypt(string.encode()).decode()
+    except Exception:
+      return string
+
+  @staticmethod
+  def decrypt(string):
+    try:
+      encryption = Fernet(os.environ['SALT'].encode())
+      return encryption.decrypt(string.encode()).decode()
+    except Exception as ex:
+      print('Decrypt exception')
+      print(ex)
+      return string
 
   @staticmethod
   def to_fahrenheit(value):
@@ -439,7 +462,6 @@ class terrariumUtils():
       data = subprocess.check_output(script, shell=True)
       logger.info('Output was: %s.' % (data))
     except Exception as ex:
-      print(ex)
       logger.exception('Error parsing script data for script %s. Exception %s' % (script, ex))
 
     return data

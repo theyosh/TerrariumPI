@@ -386,69 +386,99 @@ function template_sensor_type_color(type) {
 function template_sensor_type_icon(type) {
   switch(type) {
     case 'temperature':
-      return 'fa-thermometer-half'
+      return 'fas fa-thermometer-half'
       break;
     case 'heating':
-      return 'fa-fire'
+      return 'fas fa-fire'
       break;
     case 'cooling':
-      return 'fa-fan'
+      return 'fas fa-fan'
       break;
     case 'humidity':
-      return 'fa-tint'
+      return 'fas fa-tint'
       break;
     case 'moisture':
-      return 'fa-water'
+      return 'fas fa-water'
       break;
     case 'distance':
-      return 'fa-signal'
+      return 'fas fa-signal'
       break;
     case 'light':
     case 'lights':
-      return 'fa-lightbulb'
+      return 'fas fa-lightbulb'
       break;
     case 'main lights':
-      return 'fa-sun'
+      return 'fas fa-sun'
       break;
     case 'ph':
-      return 'fa-flask'
+      return 'fas fa-flask'
       break;
     case 'uvi':
-      return 'fa-sun'
+      return 'fas fa-sun'
       break;
     case 'uva':
-      return 'fa-adjust'
+      return 'fas fa-adjust'
       break;
     case 'uvb':
-      return 'fa-adjust fa-rotate-180'
+      return 'fas fa-adjust fa-rotate-180'
       break;
     case 'fertility':
     case 'conductivity':
-      return 'fa-seedling'
+      return 'fas fa-seedling'
       break;
     case 'co2':
-      return 'fa-wind'
+      return 'fas fa-wind'
       break;
     case 'altitude':
-      return 'fa-level-up-alt'
+      return 'fas fa-level-up-alt'
       break;
     case 'pressure':
-      return 'fa-cloud-upload-alt'
+      return 'fas fa-cloud-upload-alt'
       break;
     case 'magnetic':
-      return 'fa-lock'
+      return 'fas fa-lock'
       break;
     case 'ldr':
-      return 'fa-lightbulb'
+      return 'fas fa-lightbulb'
       break;
     case 'motion':
-      return 'fa-walking'
+      return 'fas fa-walking'
       break;
     case 'watertank':
-      return 'fa-faucet'
+      return 'fas fa-faucet'
       break;
     case 'audio':
-      return 'fa-headphones'
+      return 'fas fa-headphones'
+      break;
+
+
+
+    case 'display':
+      return 'fas fa-newspaper'
+      break;
+
+    case 'email':
+      return 'fas fa-at'
+      break;
+
+    case 'pushover':
+      return 'fab fa-pinterest'
+      break;
+
+    case 'telegram':
+      return 'fab fa-telegram-plane'
+      break;
+
+    case 'traffic':
+      return 'fas fa-traffic-light'
+      break;
+
+    case 'twitter':
+      return 'fab fa-twitter'
+      break;
+
+    case 'webhook':
+      return 'fas fa-cloud-upload-alt'
       break;
   }
 }
@@ -471,7 +501,7 @@ function formatState (state) {
   }
 
   if (icon = template_sensor_type_icon(state.element.value)) {
-    return jQuery('<span><i class="mr-1 fa-fw fas ' + template_sensor_type_icon(state.element.value) + '"></i> ' + state.text + '</span>');
+    return jQuery('<span><i class="mr-1 fa-fw ' + template_sensor_type_icon(state.element.value) + '"></i> ' + state.text + '</span>');
   }
   if (icon = country_icon(state.element.value)) {
     return jQuery('<span><i class="mr-1 flag-icon-background flag-icon ' + country_icon(state.element.value) + '"></i>' + state.text + '</span>');
@@ -1882,14 +1912,12 @@ function websocket_init(reconnect) {
         if (sensor_menu_list.length + light_sensors_list.length + 1 != jQuery('#available_sensor_types li.nav-item').length) {
           sensor_menu_list.sort((a, b) => a.title.localeCompare(b.title));
 
-          //console.log('sensortypes Update menu....',jQuery('#available_sensor_types li.nav-item').length,sensor_menu_list.length,light_sensors_list.length);
-
           jQuery('#available_sensor_types li.nav-item:not(:last)').remove();
           jQuery('#available_sensor_types').loadTemplate(jQuery('#sensor_type_menu'),sensor_menu_list,{prepend: true});
 
           if (light_sensors_list.length > 0) {
             light_sensors_list.sort((a, b) => a.title.localeCompare(b.title));
-            let light_submenu = jQuery('#available_sensor_types li i.' + template_sensor_type_icon('light')).parentsUntil('li').parent();
+            let light_submenu = jQuery('#available_sensor_types li i.' + template_sensor_type_icon('light').replace(' ','.')).parentsUntil('li').parent();
             light_submenu.append(jQuery('<ul>').addClass('nav nav-treeview').attr('id','available_light_sensor_types'));
             jQuery('#available_light_sensor_types').loadTemplate(jQuery('#sensor_type_menu'),light_sensors_list,{prepend: true});
           }
@@ -1948,18 +1976,19 @@ function websocket_init(reconnect) {
 
       case 'systemstats':
         clearTimeout(window.terrariumPI.update_timer);
-        jQuery('.info-box:first i.fas').removeClass('fa-hourglass-half fa-hourglass-start animate').addClass('fa-hourglass-end animate');
+
+        jQuery('div.row.dashboard .info-box:first i.fas').removeClass('fa-hourglass-half fa-hourglass-start animate').addClass('fa-hourglass-end animate');
         window.terrariumPI.update_timer = setTimeout(function(){
-          jQuery('.info-box:first i.fas').removeClass('fa-hourglass-end fa-hourglass-half fa-hourglass-start animate').addClass('fa-hourglass-half');
+          jQuery('div.row.dashboard .info-box:first i.fas').removeClass('fa-hourglass-end fa-hourglass-half fa-hourglass-start animate').addClass('fa-hourglass-half');
 
           window.terrariumPI.update_timer = setTimeout(function(){
-            jQuery('.info-box:first i.fas').removeClass('fa-hourglass-end fa-hourglass-half fa-hourglass-start animate').addClass('fa-hourglass-end');
+            jQuery('div.row.dashboard .info-box:first i.fas').removeClass('fa-hourglass-end fa-hourglass-half fa-hourglass-start animate').addClass('fa-hourglass-end');
           }, 14 * 1000);
         }, 15 * 1000);
 
-        jQuery('.info-box:first .info-box-number').text(uptime_format(message.data.uptime));
+        jQuery('div.row.dashboard .info-box:first .info-box-number').text(uptime_format(message.data.uptime));
 
-        jQuery('.info-box:first div.progress').each(function(counter,progressbar){
+        jQuery('div.row.dashboard .info-box:first div.progress').each(function(counter,progressbar){
           jQuery(progressbar).attr({'title' : 'Load ' + message.data.load.percentage[counter] + '%'}).find('.progress-bar').css('height', message.data.load.percentage[counter] + '%');
         });
         jQuery('#is_day_indicator span:nth(0)').text(moment().format('LLLL'));
@@ -2114,6 +2143,10 @@ jQuery(function () {
   christmas();
   fireworks_menu();
   bootstrap_custom_fileuploads();
+
+  jQuery('[required="required"]').each(function(counter,item){
+    jQuery(item).parents('.form-group').addClass('required');
+  });
 
   // Initialize Select2 Elements
   // Hide search boxes when less then 10 items
