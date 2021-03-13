@@ -5,14 +5,16 @@ logger = terrariumLogging.logging.getLogger(__name__)
 from pony import orm
 from terrariumArea import terrariumArea
 from terrariumDatabase import Button, Relay, Sensor
+from terrariumUtils import terrariumUtils
 
 import copy
-
 class terrariumEnclosure(object):
 
   def __init__(self, id, name, engine, doors = [], areas = []):
     self.__main_lights = None
 
+    if id is None:
+      id = terrariumUtils.generate_uuid()
 
     self.id          = id
     self.name        = name
@@ -57,7 +59,7 @@ class terrariumEnclosure(object):
       area_setup['is_day'] = area.state.get('is_day',None)
 
       new_areay = self.add(terrariumArea(
-        str(area.id),
+        area.id,
         self,
         area.type,
         area.name,
@@ -73,7 +75,7 @@ class terrariumEnclosure(object):
       area_setup['is_day'] = area.state.get('is_day',None)
 
       new_areay = self.add(terrariumArea(
-        str(area.id),
+        area.id,
         self,
         area.type,
         area.name,
@@ -86,7 +88,7 @@ class terrariumEnclosure(object):
     for area in self.areas:
       area = self.areas[area]
       if area.setup.get('main_lights', False):
-        return self.areas[str(area.id)]
+        return self.areas[area.id]
 
     return None
 

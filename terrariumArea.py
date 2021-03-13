@@ -8,7 +8,6 @@ import datetime
 
 import statistics
 import threading
-import uuid
 import random
 
 # http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/
@@ -77,7 +76,8 @@ class terrariumArea(object):
 
     'moisture' : {
       'name'    : _('Moisture'),
-      'sensors' : ['moisture','humidity']
+      'sensors' : ['moisture','humidity'],
+      'class' : lambda: terrariumAreaMoisture
     },
 
     'ph' : {
@@ -107,7 +107,7 @@ class terrariumArea(object):
 
   def __init__(self, id, enclosure, type, name, mode, setup):
     if id is None:
-      id = str(uuid.uuid4())
+      id = terrariumUtils.generate_uuid()
 
     self.id   = id
     self.type = type
@@ -704,6 +704,9 @@ class terrariumAreaCooler(terrariumAreaHeater):
 class terrariumAreaHumidity(terrariumArea):
   pass
 
+class terrariumAreaMoisture(terrariumAreaHumidity):
+  pass
+
 class terrariumAreaWatertank(terrariumArea):
   def current_value(self, sensors):
     # TODO: Check if use of gall and inch does influence this...
@@ -753,7 +756,7 @@ class terrariumAreaAudio(terrariumArea):
       if period not in self.setup:
         continue
 
-      playlists = [uuid.UUID(playlist) for playlist in self.setup[period]['relays']]
+      playlists = [playlist for playlist in self.setup[period]['relays']]
       with orm.db_session():
         playlists = [playlist.to_dict(with_collections=True,related_objects=True) for playlist in Playlist.select(lambda pl: pl.id in playlists)]
         for playlist in playlists:
