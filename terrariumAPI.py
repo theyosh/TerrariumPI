@@ -161,6 +161,11 @@ class terrariumAPI(object):
     bottle_app.route('/api/sensors/<filter:path>/<action:re:(history)>/', 'GET',    self.sensor_history,  apply=self.authentication(False), name='api:sensor_history')
     bottle_app.route('/api/sensors/<filter:path>/<action:re:(export)>/',  'GET',    self.sensor_history,  apply=self.authentication(),      name='api:sensor_export')
     bottle_app.route('/api/sensors/hardware/',      'GET',    self.sensor_hardware, apply=self.authentication(),      name='api:sensor_hardware')
+
+
+    bottle_app.route('/api/sensors/scan/',              'POST',    self.sensor_scan, apply=self.authentication(),      name='api:sensor_scan')
+
+
     bottle_app.route('/api/sensors/<sensor:path>/', 'GET',    self.sensor_detail,   apply=self.authentication(False), name='api:sensor_detail')
     bottle_app.route('/api/sensors/<sensor:path>/', 'PUT',    self.sensor_update,   apply=self.authentication(),      name='api:sensor_update')
     bottle_app.route('/api/sensors/<sensor:path>/', 'DELETE', self.sensor_delete,   apply=self.authentication(),      name='api:sensor_delete')
@@ -250,7 +255,7 @@ class terrariumAPI(object):
   def area_list(self):
     data = []
     for area in Area.select(lambda r: not r.id in self.webserver.engine.settings['exclude_ids']):
-      data.append(self.area_detail(str(area.id)))
+      data.append(self.area_detail(area.id))
 
     return { 'data' : data }
 
@@ -259,7 +264,6 @@ class terrariumAPI(object):
     try:
       area = Area[area]
       area_data = area.to_dict(exclude='enclosure')
-      area_data['id']  = str(area.id)
       return area_data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')
@@ -277,8 +281,7 @@ class terrariumAPI(object):
 
       area = Area(**request.json)
 
-      return self.area_detail(str(area.id))
-
+      return self.area_detail(area.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Enclosure with id {request.json["enclosure"]} does not exists.')
     except Exception as ex:
@@ -292,7 +295,7 @@ class terrariumAPI(object):
 
       self.webserver.engine.update(terrariumArea,**request.json)
 
-      return self.area_detail(str(area.id))
+      return self.area_detail(area.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')
     except Exception as ex:
@@ -600,15 +603,10 @@ class terrariumAPI(object):
     try:
       enclosure = Enclosure[enclosure]
       enclosure_data = enclosure.to_dict(with_collections=True, related_objects=True)
-      enclosure_data['id']  = str(enclosure.id)
 
       for area in list(enclosure_data['areas']):
         enclosure_data['areas'].remove(area)
-
-        area = area.to_dict(exclude='enclosure')
-        area['id'] = str(area['id'])
-
-        enclosure_data['areas'].append(area)
+        enclosure_data['areas'].append(area.to_dict(exclude='enclosure'))
 
       for door in list(enclosure_data['doors']):
         enclosure_data['doors'].remove(door)
@@ -621,10 +619,7 @@ class terrariumAPI(object):
 
       for webcam in list(enclosure_data['webcams']):
         enclosure_data['webcams'].remove(webcam)
-
-        webcam_data = webcam.to_dict(exclude='enclosure')
-
-        enclosure_data['webcams'].append(webcam_data)
+        enclosure_data['webcams'].append(webcam.to_dict(exclude='enclosure'))
 
       return enclosure_data
     except orm.core.ObjectNotFound as ex:
@@ -671,7 +666,7 @@ class terrariumAPI(object):
       # self.webserver.engine.update(terrariumEnclosure,**request.json)
 
    #   enclosure_data = enclosure.to_dict(with_collections=True)
-    #  enclosure_data['id']  = str(enclosure.id)
+    #  enclosure_data['id']  = enclosure.id
  #     enclosure_data['value']  = enclosure.value
       return self.enclosure_detail(enclosure.id)
     except orm.core.ObjectNotFound as ex:
@@ -708,8 +703,7 @@ class terrariumAPI(object):
     try:
       message = NotificationMessage[message]
       message_data = message.to_dict(with_collections=True)
-      message_data['id']  = str(message.id)
-      message_data['services'] = [self.notification_service_detail(str(service)) for service in message_data['services']]
+      message_data['services'] = [self.notification_service_detail(service) for service in message_data['services']]
       return message_data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Notification message with id {message} does not exists.')
@@ -770,7 +764,6 @@ class terrariumAPI(object):
     try:
       service = NotificationService[service]
       service_data = service.to_dict()
-      service_data['id']  = str(service.id)
 
       return service_data
     except orm.core.ObjectNotFound as ex:
@@ -799,7 +792,7 @@ class terrariumAPI(object):
       # self.webserver.engine.update(terrariumEnclosure,**request.json)
 
    #   enclosure_data = enclosure.to_dict(with_collections=True)
-    #  enclosure_data['id']  = str(enclosure.id)
+    #  enclosure_data['id']  = enclosure.id
  #     enclosure_data['value']  = enclosure.value
       return self.notification_service_detail(service.id)
     except orm.core.ObjectNotFound as ex:
@@ -847,7 +840,7 @@ class terrariumAPI(object):
   def playlist_list(self):
     data = []
     for playlist in Playlist.select(lambda p: not p.id in self.webserver.engine.settings['exclude_ids']):
-      data.append(self.playlist_detail(str(playlist.id)))
+      data.append(self.playlist_detail(playlist.id))
 
     return { 'data' : data }
 
@@ -856,7 +849,6 @@ class terrariumAPI(object):
     try:
       playlist = Playlist[playlist]
       playlist_data = playlist.to_dict(with_collections=True)
-      playlist_data['id']       = str(playlist.id)
       playlist_data['length']   = playlist.length
       playlist_data['duration'] = playlist.duration
 
@@ -872,7 +864,7 @@ class terrariumAPI(object):
       request.json['files'] = Audiofile.select(lambda af: af.id in request.json['files'])
       playlist = Playlist(**request.json)
 
-      return self.playlist_detail(str(playlist.id))
+      return self.playlist_detail(playlist.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Enclosure with id {request.json["enclosure"]} does not exists.')
     except Exception as ex:
@@ -884,7 +876,7 @@ class terrariumAPI(object):
       playlist = Playlist[playlist]
       request.json['files'] = Audiofile.select(lambda af: af.id in request.json['files'])
       playlist.set(**request.json)
-      return self.playlist_detail(str(playlist.id))
+      return self.playlist_detail(playlist.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Playlist with id {playlist} does not exists.')
     except Exception as ex:
@@ -1013,9 +1005,6 @@ class terrariumAPI(object):
 
   def relay_scan(self):
     current_amount = len(self.webserver.engine.relays)
-    print('Terrarium Engine')
-    print(self.webserver.engine)
-    print(dir(self.webserver.engine))
     self.webserver.engine.scan_new_relays()
     new = len(self.webserver.engine.relays) - current_amount
     return { 'message' : f'Found {new} new relays' }
@@ -1156,6 +1145,12 @@ class terrariumAPI(object):
 
   def sensor_hardware(self):
     return { 'data' : terrariumSensor.available_sensors }
+
+  def sensor_scan(self):
+    current_amount = len(self.webserver.engine.sensors)
+    self.webserver.engine.scan_new_sensors()
+    new = len(self.webserver.engine.sensors) - current_amount
+    return { 'message' : f'Found {new} new sensors' }
 
   @orm.db_session
   def sensor_list(self, filter = None):

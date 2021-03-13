@@ -16,6 +16,7 @@ from cryptography.fernet import Fernet
 from math import log
 
 import time
+import uuid
 
 # works in Python 2 & 3
 class _Singleton(type):
@@ -184,6 +185,11 @@ class terrariumCache(terrariumSingleton):
 
 class terrariumUtils():
 
+
+  @staticmethod
+  def generate_uuid():
+    return str(uuid.uuid4())
+
   @staticmethod
   def generate_password(password):
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode('utf8')
@@ -209,8 +215,6 @@ class terrariumUtils():
       encryption = Fernet(os.environ['SALT'].encode())
       return encryption.decrypt(string.encode()).decode()
     except Exception as ex:
-      print('Decrypt exception')
-      print(ex)
       return string
 
   @staticmethod

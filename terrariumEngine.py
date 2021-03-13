@@ -119,7 +119,7 @@ class terrariumEngine(object):
     self.__load_existing_sensors()
 
     logger.info('Scanning for new sensors ...')
-    self.__scan_new_sensors()
+    self.scan_new_sensors()
     logger.info(f'Loaded {len(self.sensors)} sensors in {time.time()-start:.2f} seconds.')
 
     # Loading relays
@@ -455,7 +455,7 @@ class terrariumEngine(object):
           logger.info(f'Loaded sensor {sensor} with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds.')
 
   # -=NEW=-
-  def __scan_new_sensors(self):
+  def scan_new_sensors(self):
     for sensor in terrariumSensor.scan_sensors():
       if sensor.id not in self.settings['exclude_ids'] and sensor.id not in self.sensors:
         start = time.time()

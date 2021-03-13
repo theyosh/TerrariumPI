@@ -66,7 +66,7 @@ class Area(db.Entity):
 
   __VALID_TYPES = ['lights','watertank'] # + All sensor types....
 
-  id        = orm.PrimaryKey(uuid.UUID, default=uuid.uuid4)
+  id        = orm.PrimaryKey(str, default=terrariumUtils.generate_uuid)
   enclosure = orm.Required(lambda: Enclosure)
   name      = orm.Required(str)
   type      = orm.Required(str)
@@ -154,7 +154,7 @@ class ButtonHistory(db.Entity):
 
 class Enclosure(db.Entity):
 
-  id          = orm.PrimaryKey(uuid.UUID, default=uuid.uuid4)
+  id          = orm.PrimaryKey(str, default=terrariumUtils.generate_uuid)
   name        = orm.Required(str)
 
   image       = orm.Optional(str)
@@ -199,7 +199,7 @@ class NotificationMessage(db.Entity):
 
 class NotificationService(db.Entity):
 
-  id         = orm.PrimaryKey(uuid.UUID, default=uuid.uuid4)
+  id         = orm.PrimaryKey(str, default=terrariumUtils.generate_uuid)
   type       = orm.Required(str)
   name       = orm.Required(str)
   rate_limit = orm.Optional(int, default=0)
@@ -241,7 +241,7 @@ class NotificationService(db.Entity):
 
 class Playlist(db.Entity):
 
-  id      = orm.PrimaryKey(uuid.UUID, default=uuid.uuid4)
+  id      = orm.PrimaryKey(str, default=terrariumUtils.generate_uuid)
   name    = orm.Required(str)
 
   volume  = orm.Optional(float, default=80)
