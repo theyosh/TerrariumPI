@@ -776,20 +776,20 @@ class terrariumAreaAudio(terrariumArea):
 
     if on:
       other_period = copy.copy(self.PERIODS)
-      logger.info(f'Other periods: {other_period}')
+      #logger.info(f'Other periods: {other_period}')
       other_period.remove(period)
       other_period = other_period[0]
-      logger.info(f'Other periods clean: {other_period}')
+      #logger.info(f'Other periods clean: {other_period}')
 
       if other_period in self.setup:
-        logger.info(f'Stopping other ({other_period}) running player')
+        #logger.info(f'Stopping other ({other_period}) running player')
         self.setup[other_period]['player'].stop()
 
-      logger.info(f'Starting audio player for {period}')
+      #logger.info(f'Starting audio player for {period}')
       self.setup[period]['player'].play()
 
     else:
-      logger.info(f'Stopping audio player for {period}')
+      #logger.info(f'Stopping audio player for {period}')
       self.setup[period]['player'].stop()
 
     self.state[period]['powered'] = on

@@ -5,8 +5,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import copy
 import json
 
-import uuid
-
 from datetime import datetime, timezone, timedelta
 from pony import orm
 from bottle import request, response, static_file, HTTPError
@@ -239,12 +237,10 @@ class terrariumAPI(object):
 
 
   def api_spec(self):
-#    return jinja2_template(f'views/{page.name}',**self.__template_variables(page_name))
     return self.apispec.to_dict()
 
-
-  def _return_data(self, message, data):
-    return {'message':message, 'data':data}
+  # def _return_data(self, message, data):
+  #   return {'message':message, 'data':data}
 
 
   # Areas
@@ -277,7 +273,7 @@ class terrariumAPI(object):
       enclosure = Enclosure[request.json['enclosure']]
 
       new_area = self.webserver.engine.add(terrariumArea(None, self.webserver.engine.enclosures[request.json['enclosure']], request.json['type'], request.json['name'], request.json['mode'], request.json['setup']))
-      request.json['id']      = new_area.id
+      request.json['id'] = new_area.id
 
       area = Area(**request.json)
 
@@ -292,6 +288,7 @@ class terrariumAPI(object):
     try:
       area = Area[area]
       area.set(**request.json)
+      orm.commit()
 
       self.webserver.engine.update(terrariumArea,**request.json)
 
@@ -441,9 +438,9 @@ class terrariumAPI(object):
   def button_list(self):
     data = []
     for button in Button.select(lambda r: not r.id in self.webserver.engine.settings['exclude_ids']):
-      button_data = button.to_dict(exclude='enclosure')
-      button_data['value']  = button.value
-      data.append(button_data)
+      # button_data = button.to_dict(exclude='enclosure')
+      # button_data['value']  = button.value
+      data.append(self.button_detail(button.id))
 
     return { 'data' : data }
 
@@ -481,11 +478,15 @@ class terrariumAPI(object):
     try:
       button = Button[button]
       button.set(**request.json)
+      orm.commit()
+
       self.webserver.engine.update(terrariumButton,**request.json)
 
-      button_data = button.to_dict(exclude='enclosure')
-      button_data['value']  = button.value
-      return button_data
+      return self.button_detail(button.id)
+
+      # button_data = button.to_dict(exclude='enclosure')
+      # button_data['value']  = button.value
+      # return button_data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
     except Exception as ex:
@@ -630,15 +631,14 @@ class terrariumAPI(object):
   @orm.db_session
   def enclosure_add(self):
     try:
+      new_enclosure = self.webserver.engine.add(terrariumEnclosure(None, request.json['name'], self.webserver.engine, request.json['doors']))
+
+      request.json['id']      = new_enclosure.id
       request.json['doors']   = Button.select(lambda b: b.id in request.json['doors'])
       request.json['webcams'] = Webcam.select(lambda w: w.id in request.json['webcams'])
       enclosure = Enclosure(**request.json)
 
-      # TODO: Fix this? We can't new enclosures without a restart .... :(
-      #self.webserver.engine.add(terrariumEnclosure)
-
       return self.enclosure_detail(enclosure.id)
-
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Door with id {request.json["doors"]} does not exists.')
     except Exception as ex:
@@ -660,6 +660,7 @@ class terrariumAPI(object):
       request.json['webcams'] = webcams_set
 
       enclosure.set(**request.json)
+      orm.commit()
 
       # print('Update enclosure data to the engine')
       # # TODO: Will this work... not sure....
@@ -715,7 +716,7 @@ class terrariumAPI(object):
     try:
       message = NotificationMessage[message]
 
-      services = [uuid.UUID(id) for id in request.json['services'].split(',')]
+      services = request.json['services'].split(',')
       request.json['services'] = NotificationService.select(lambda ns: ns.id in services)
 
       message.set(**request.json)
@@ -775,25 +776,9 @@ class terrariumAPI(object):
   def notification_service_update(self, service):
     try:
       service = NotificationService[service]
-
-      # TODO: Will this work... not sure....
-      #self.webserver.engine.update(terrariumEnclosure,**request.json)
-
-      # doors_set = Button.select(lambda b: b.id in request.json['doors'])
-      # request.json['doors'] = doors_set
-
-      # webcams_set = Webcam.select(lambda w: w.id in request.json['webcams'])
-      # request.json['webcams'] = webcams_set
-
       service.set(**request.json)
+      orm.commit()
 
-      # print('Update enclosure data to the engine')
-      # # TODO: Will this work... not sure....
-      # self.webserver.engine.update(terrariumEnclosure,**request.json)
-
-   #   enclosure_data = enclosure.to_dict(with_collections=True)
-    #  enclosure_data['id']  = enclosure.id
- #     enclosure_data['value']  = enclosure.value
       return self.notification_service_detail(service.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
@@ -824,12 +809,6 @@ class terrariumAPI(object):
   def notification_service_add(self):
     try:
       service = NotificationService(**request.json)
-
-#    print(f'API: Service saved => {service.id}')
-
-    # TODO: Fix this? Add the new service to the exiting Notification system??
-    #self.webserver.engine.add(terrariumEnclosure)
-
       return self.notification_service_detail(service.id)
     except Exception as ex:
       raise HTTPError(status=500, body=f'Notification service could not be added. {ex}')
@@ -876,6 +855,7 @@ class terrariumAPI(object):
       playlist = Playlist[playlist]
       request.json['files'] = Audiofile.select(lambda af: af.id in request.json['files'])
       playlist.set(**request.json)
+      orm.commit()
       return self.playlist_detail(playlist.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Playlist with id {playlist} does not exists.')
@@ -1157,13 +1137,13 @@ class terrariumAPI(object):
     data = []
     for sensor in Sensor.select(lambda s: not s.id in self.webserver.engine.settings['exclude_ids']):
       if filter is None or filter == sensor.type:
-        # TODO: Fix this that this can be done in a single query
-        sensor_data = sensor.to_dict()
-        sensor_data['value']  = sensor.value
-        sensor_data['alarm']  = sensor.alarm
-        sensor_data['error']  = sensor.error
+        # # TODO: Fix this that this can be done in a single query
+        # sensor_data = sensor.to_dict()
+        # sensor_data['value']  = sensor.value
+        # sensor_data['alarm']  = sensor.alarm
+        # sensor_data['error']  = sensor.error
 
-        data.append(sensor_data)
+        data.append(self.sensor_detail(sensor.id))
 
     return { 'data' : data }
 
@@ -1199,12 +1179,13 @@ class terrariumAPI(object):
       sensor.update(new_value)
 
       self.webserver.websocket_message('sensortypes', self.webserver.engine.sensor_types_loaded)
+      return self.sensor_detail(sensor.id)
 
-      sensor_data = sensor.to_dict()
-      sensor_data['value'] = sensor.value
-      sensor_data['alarm'] = sensor.alarm
-      sensor_data['error'] = sensor.error
-      return sensor_data
+      # sensor_data = sensor.to_dict()
+      # sensor_data['value'] = sensor.value
+      # sensor_data['alarm'] = sensor.alarm
+      # sensor_data['error'] = sensor.error
+      # return sensor_data
     except Exception as ex:
       raise HTTPError(status=500, body=f'Sensor could not be added. {ex}')
 
@@ -1213,18 +1194,20 @@ class terrariumAPI(object):
     try:
       sensor = Sensor[sensor]
       sensor.set(**request.json)
+      orm.commit()
+
       self.webserver.engine.update(terrariumSensor,**request.json)
       if 'chirp' == sensor.hardware.lower():
         # We need some moisture calibration for a Chirp sensor
         # TODO: This is a bad hack.....
         self.webserver.engine.sensors[sensor.id].calibrate(request.json['calibration'])
 
-      sensor_data = sensor.to_dict()
-      sensor_data['value'] = sensor.value
-      sensor_data['alarm'] = sensor.alarm
-      sensor_data['error'] = sensor.error
+      # sensor_data = sensor.to_dict()
+      # sensor_data['value'] = sensor.value
+      # sensor_data['alarm'] = sensor.alarm
+      # sensor_data['error'] = sensor.error
 
-      return sensor_data
+      return self.sensor_detail(sensor.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Sensor with id {sensor} does not exists.')
     except Exception as ex:
@@ -1250,7 +1233,6 @@ class terrariumAPI(object):
     try:
       profile_image = request.files.get('file',None)
       if profile_image is not None:
-        print(f'current filename: {profile_image.filename}')
         # Rename
         profile_image.filename = 'profile_image.jpg'
         profile_image.save(__UPLOAD_PATH, overwrite=True)
@@ -1260,10 +1242,6 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error uploading profile image. {ex}')
 
-
-    pass
-
-
   @orm.db_session
   def setting_list(self):
     settings = []
@@ -1271,8 +1249,8 @@ class terrariumAPI(object):
       # Never give out this value in a list
       if setting.id in ['password']:
         continue
+
       settings.append(self.setting_detail(setting.id))
-      #setting.to_dict())
 
     return { 'data' : settings }
 
@@ -1317,6 +1295,8 @@ class terrariumAPI(object):
         request.json['value'] = terrariumUtils.generate_password(request.json['value'])
 
       data.set(**request.json)
+      orm.commit()
+
       self.webserver.engine.load_settings()
       return data.to_dict()
     except orm.core.ObjectNotFound as ex:
@@ -1332,7 +1312,7 @@ class terrariumAPI(object):
 
     # Delete the confirmation password
     del(request.json['password2'])
-    # Delete normal password when empty so we keep the old one
+    # Delete normal password when empty so we keep the old one. Do not allow empty passwords
     if '' == request.json['password']:
       del(request.json['password'])
 
@@ -1407,8 +1387,7 @@ class terrariumAPI(object):
   def webcam_archive(self, webcam, period = None):
     try:
       webcam = Webcam[webcam]
-      webcam_data = webcam.to_dict(exclude='enclosure')
-      webcam_data['is_live'] = webcam.is_live
+      webcam_data = self.webcam_detail(webcam.id)
 
       if period is None:
         period = datetime.now().strftime('%Y/%m/%d')
@@ -1426,9 +1405,7 @@ class terrariumAPI(object):
   def webcam_list(self):
     data = []
     for webcam in Webcam.select(lambda w: not w.id in self.webserver.engine.settings['exclude_ids']):
-      webcam_data = webcam.to_dict(exclude='enclosure')
-      webcam_data['is_live'] = webcam.is_live
-      data.append(webcam_data)
+      data.append(self.webcam_detail(webcam.id))
 
     return { 'data' : data }
 
@@ -1466,14 +1443,12 @@ class terrariumAPI(object):
 
       webcam = Webcam(**request.json)
 
-      print('Added webcam to db:')
-      print(webcam)
+      #print('Added webcam to db:')
+      #print(webcam)
       # TODO: Fix updating or not. For now, disabled, as it can take up to 12 sec for RPICam
       #new_value = new_webcam.update()
 
-      webcam_data = webcam.to_dict(exclude='enclosure')
-      webcam_data['is_live'] = webcam.is_live
-      return webcam_data
+      return self.webcam_detail(webcam.id)
     except Exception as ex:
       raise HTTPError(status=500, body=f'Webcam could not be added. {ex}')
 
@@ -1485,12 +1460,11 @@ class terrariumAPI(object):
       request.json['markers'] = json.loads(request.json['markers'])
 
       webcam.set(**request.json)
+      orm.commit()
 
       self.webserver.engine.update(terrariumWebcam,**request.json)
 
-      webcam_data = webcam.to_dict(exclude='enclosure')
-      webcam_data['is_live'] = webcam.is_live
-      return webcam_data
+      return self.webcam_detail(webcam.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Webcam with id {webcam} does not exists.')
     except Exception as ex:
