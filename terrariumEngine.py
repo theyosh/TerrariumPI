@@ -370,16 +370,16 @@ class terrariumEngine(object):
       update_ok = True
 
     elif issubclass(item, terrariumEnclosure):
-      print('Update enclosure with data')
-      print(data)
+#      print('Update enclosure with data')
+#      print(data)
 
       #self.enclosures[data['id']].setup = data['setup']
 
       update_ok = True
 
     elif issubclass(item, terrariumArea):
-      print('Update AREA with data')
-      print(data)
+#      print('Update AREA with data')
+#      print(data)
 
       self.enclosures[data['enclosure']].areas[data['id']].name = data['name']
       self.enclosures[data['enclosure']].areas[data['id']].mode = data['mode']
