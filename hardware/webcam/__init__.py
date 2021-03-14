@@ -13,18 +13,13 @@ from hashlib import md5
 from operator import itemgetter
 from datetime import date, datetime, timedelta
 from time import time
+from gevent import sleep
+
 import re
 import math
 import glob
 import cv2
 import numpy as np
-
-
-#import cv2
-#import math
-#import numpy as np
-#import sys
-
 
 # pip install retry
 from retry import retry
@@ -434,9 +429,20 @@ class terrariumWebcam(object):
     return self.__ARCHIVE_LOCATION.joinpath(self.id, datetime.now().strftime('%Y/%m/%d'), f'{self.id}_archive_{int(time())}.jpg')
 
   @retry(tries=3, delay=0.5, max_delay=2)
-  def update(self):
+  def update(self, relays = []):
     if self._device['last_update'] is None or (datetime.now() - self._device['last_update']).total_seconds() > self.__UPDATE_TIMEOUT:
+      if len(relays) > 0:
+        for relay in relays:
+          relay.on()
+
+        sleep(0.5)
+
       image = self._get_raw_data()
+
+      if len(relays) > 0:
+        for relay in relays:
+          relay.off()
+
       if image is False:
         # Camera is offline!!
         logger.warning('Webcam {} has errors!'.format(self.name))

@@ -81,11 +81,11 @@
           </div>
         </div>
       </div>
-      <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
         <div class="form-group">
           <label for="webcam_archive">{{ _('Archiving') }}</label>
           <div class="select2-primary">
-            <select class="select2" id="webcam_archive" name="archive" data-placeholder="{{ _('Select archiving') }}" style="width: 100%;">
+            <select class="select2" id="webcam_archive" name="archive_state" data-placeholder="{{ _('Select archiving') }}" style="width: 100%;">
               <option value="disabled">{{ _('Disabled') }}</option>
               <option value="motion">{{ _('Motion') }}</option>
               <option value="60">{{ _('1 minute') }}</option>
@@ -101,7 +101,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
         <div class="form-group">
           <label for="webcam_rotation">{{ _('Archive light state') }}</label>
           <div class="select2-primary">
@@ -113,18 +113,32 @@
           </div>
         </div>
       </div>
-      <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
         <div class="form-group">
           <label for="webcam_archivedoor">{{ _('Archive door state') }}</label>
           <div class="select2-primary">
             <select class="select2" id="webcam_archivedoor" name="archive_door" data-placeholder="{{ _('Select archive door state') }}" style="width: 100%;">
               <option value="ignore">{{ _('Ignored') }}</option>
-              <option value="on">{{ _('When on') }}</option>
-              <option value="off">{{ _('When off') }}</option>
+              <option value="close">{{ _('Close') }}</option>
+              <option value="open">{{ _('Open') }}</option>
             </select>
           </div>
         </div>
       </div>
+
+
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+        <div class="form-group">
+          <label for="webcam_flash">{{ _('Flash') }}</label>
+          <div class="select2-primary">
+            <select class="select2" id="webcam_flash" name="flash" data-placeholder="{{ _('Select optional relay for flash') }}" style="width: 100%;">
+
+            </select>
+          </div>
+        </div>
+      </div>
+
+
     </div>
     <div class="form-group row motion d-none">
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
@@ -217,7 +231,17 @@ let preview_webcam = null;
 jQuery.when(
   jQuery.get('{{ url_for("api:webcam_hardware") }}'),
   jQuery.get('{{ url_for("api:sensor_list") }}'),
-).done(function(hardware, sensors) {
+  jQuery.get('{{ url_for("api:relay_list") }}'),
+).done(function(hardware, sensors, relays) {
+  let webcam_flash = {{modal_type}}_form.find('select#webcam_flash');
+
+  webcam_flash.find('option').remove();
+  webcam_flash.append(jQuery('<option>').attr({'value':'None'}).text('None'));
+  jQuery.each(relays[0].data,function(counter,item){
+    webcam_flash.append(jQuery('<option>').attr({'value':item.id}).text(item.name));
+  });
+
+
   let marker_sensors = jQuery('select[name="webcam_realtime_sensors_list"]');
   marker_sensors.find('option').remove()
   jQuery.each(sensors[0].data,function(counter,item){
@@ -249,16 +273,24 @@ jQuery.when(
       // Load the webcam values in the form
       jQuery.each(data,function(key,value) {
         let field = {{modal_type}}_form.find('[name="' + key + '"]');
-        if (field.attr('type') == 'checkbox') {
-          field.prop('checked',(1 != value)).trigger('change');
-          field.prop('checked',(1 == value)).trigger('change');
+        if (['archive','motion'].indexOf(key) != -1 ) {
+          jQuery.each(value,function(key2,value2) {
+            field = {{modal_type}}_form.find('[name="' + key + '_' + key2  + '"]');
+            console.log('Field', field, value2);
+            field.val(value2).trigger('change');
+          });
         } else {
-          if ('markers' == key) {
-            // Create a new array from the doors array with only the door ids
-            value = JSON.stringify(value);
-            // Array.from(value, door => door.id);
+          if (field.attr('type') == 'checkbox') {
+            field.prop('checked',(1 != value)).trigger('change');
+            field.prop('checked',(1 == value)).trigger('change');
+          } else {
+            if ('markers' == key) {
+              // Create a new array from the doors array with only the door ids
+              value = JSON.stringify(value);
+              // Array.from(value, door => door.id);
+            }
+            field.val(value).trigger('change');
           }
-          field.val(value).trigger('change');
         }
       });
       {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
@@ -274,6 +306,25 @@ jQuery.when(
 {% endblock %}
 
 {% block modal_form_javascript_pre_submit_formdata %}
+let exclude_field_names = ['id','hardware','address','name','width','height','rotation','awb','markers','flash'];
+form_data['markers'] = JSON.parse(form_data['markers']);
+form_data['flash'] = form_data['flash'].split(',');
+
+jQuery.each(form_data,function(field_name, value) {
+  // Exclude fields in array below from parsing
+  if (exclude_field_names.indexOf(field_name) == -1) {
+    let field_parts = field_name.split('_');
+    if (field_parts.length > 1) {
+      if (form_data[field_parts[0]] === undefined) {
+        form_data[field_parts[0]] = {}
+      }
+      form_data[field_parts[0]][field_parts.slice(1).join('_')] = value;
+    } else {
+      form_data[field_name] = value;
+    }
+    delete(form_data[field_name])
+  }
+});
 {% endblock %}
 
 {% block modal_extra_html %}
