@@ -28,7 +28,6 @@ class terrariumUSBWebcam(terrariumWebcam):
 
   def _get_raw_data(self):
     stream = BytesIO()
-
     camera = cv2.VideoCapture(self.device)
     camera.set(3, float(self.width))
     camera.set(4, float(self.height))

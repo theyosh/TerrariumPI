@@ -226,7 +226,11 @@ class terrariumEngine(object):
     settings['port']        = int(settings['port'])
 
     # Set meross login into the current bash environment
-    os.environ['SALT']            = settings['encryption_salt']
+    cmd = 'grep -i serial /proc/cpuinfo'
+    salt = terrariumUtils.get_script_data(cmd).decode().strip()
+    salt = salt.split(':')[1].strip()
+
+    os.environ['SALT']            = salt
     os.environ['MEROSS_EMAIL']    = settings['meross_cloud_username']
     os.environ['MEROSS_PASSWORD'] = settings['meross_cloud_password']
 
@@ -811,11 +815,16 @@ class terrariumEngine(object):
           self.webcams[webcam.id].address = webcam.address
 
         # Take a measurement from the webcam
-        value = self.webcams[webcam.id].update()
-        if 'motion' == webcam.archive:
-          self.webcams[webcam.id].motion_capture(webcam.motion_frame, webcam.motion_threshold, webcam.motion_area, webcam.motion_boxes)
-        elif 'disabled' != webcam.archive:
-          self.webcams[webcam.id].archive(int(webcam.archive))
+        relays = []
+        if webcam.flash is not None:
+          relays = [self.relays[relay.id] for relay in webcam.flash]
+
+        value = self.webcams[webcam.id].update(relays)
+
+        if 'motion' == webcam.archive['state']:
+          self.webcams[webcam.id].motion_capture(webcam.motion['frame'], webcam.motion['threshold'], webcam.motion['area'], webcam.motion['boxes'])
+        elif 'disabled' != webcam.archive['state']:
+          self.webcams[webcam.id].archive(int(webcam.archive['state']))
 
         logger.info(f'Loaded {webcam} value {value} in {time.time()-start:.2f} seconds.')
 
@@ -824,17 +833,19 @@ class terrariumEngine(object):
     with orm.db_session():
       for webcam in Webcam.select(lambda w: w.id in self.webcams.keys() and not w.id in self.settings['exclude_ids']):
         start = time.time()
-        self.webcams[webcam.id].update()
 
-        if 'motion' == webcam.archive:
-          self.webcams[webcam.id].motion_capture(webcam.motion_frame, webcam.motion_threshold, webcam.motion_area, webcam.motion_boxes)
-        elif 'disabled' != webcam.archive:
-          self.webcams[webcam.id].archive(int(webcam.archive))
+        relays = []
+        if webcam.flash is not None:
+          relays = [self.relays[relay.id] for relay in webcam.flash]
 
-        measurement_time = time.time() - start
+        self.webcams[webcam.id].update(relays)
 
-        logger.info(f'Updated {webcam} in {measurement_time:.2f} seconds.')
-        logger.debug(f'Updated {webcam}. M: {measurement_time:.2f} sec.')
+        if 'motion' == webcam.archive['state']:
+          self.webcams[webcam.id].motion_capture(webcam.motion['frame'], webcam.motion['threshold'], webcam.motion['area'], webcam.motion['boxes'])
+        elif 'disabled' != webcam.archive['state']:
+          self.webcams[webcam.id].archive(int(webcam.archive['state']))
+
+        logger.info(f'Updated {webcam} in {time.time()-start:.2f} seconds.')
 
   # -= NEW =-
   def __load_existing_enclosures(self):

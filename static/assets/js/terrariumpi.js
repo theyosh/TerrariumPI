@@ -451,8 +451,6 @@ function template_sensor_type_icon(type) {
       return 'fas fa-headphones'
       break;
 
-
-
     case 'display':
       return 'fas fa-newspaper'
       break;

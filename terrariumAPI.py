@@ -467,9 +467,11 @@ class terrariumAPI(object):
       new_value = new_button.update()
       button.update(new_value)
 
-      button_data = button.to_dict(exclude='enclosure')
-      button_data['value']  = button.value
-      return button_data
+      return self.button_detail(button.id)
+
+      # button_data = button.to_dict(exclude='enclosure')
+      # button_data['value']  = button.value
+      # return button_data
     except Exception as ex:
       raise HTTPError(status=500, body=f'Button could not be added. {ex}')
 
@@ -1001,7 +1003,7 @@ class terrariumAPI(object):
   def relay_detail(self, relay):
     try:
       relay = Relay[relay]
-      relay_data = relay.to_dict()
+      relay_data = relay.to_dict(exclude='webcam')
       relay_data['value']       = relay.value
       relay_data['dimmer']      = relay.is_dimmer
       relay_data['replacement'] = 0
@@ -1413,7 +1415,7 @@ class terrariumAPI(object):
   def webcam_detail(self, webcam):
     try:
       webcam = Webcam[webcam]
-      webcam_data = webcam.to_dict(exclude='enclosure')
+      webcam_data = webcam.to_dict(exclude='enclosure',with_collections=True)
       webcam_data['is_live'] = webcam.is_live
       return webcam_data
     except orm.core.ObjectNotFound as ex:
@@ -1439,12 +1441,10 @@ class terrariumAPI(object):
       request.json['width']    = new_webcam.width
       request.json['height']   = new_webcam.height
 
-      request.json['markers']  = json.loads(request.json['markers'])
+      request.json['flash']    = Relay.select(lambda r: r.id in request.json['flash'])
 
       webcam = Webcam(**request.json)
 
-      #print('Added webcam to db:')
-      #print(webcam)
       # TODO: Fix updating or not. For now, disabled, as it can take up to 12 sec for RPICam
       #new_value = new_webcam.update()
 
@@ -1456,9 +1456,7 @@ class terrariumAPI(object):
   def webcam_update(self, webcam):
     try:
       webcam = Webcam[webcam]
-
-      request.json['markers'] = json.loads(request.json['markers'])
-
+      request.json['flash'] = Relay.select(lambda r: r.id in request.json['flash'])
       webcam.set(**request.json)
       orm.commit()
 
@@ -1468,6 +1466,7 @@ class terrariumAPI(object):
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Webcam with id {webcam} does not exists.')
     except Exception as ex:
+      print(ex)
       raise HTTPError(status=500, body=f'Error updating webcam {webcam}. {ex}')
 
   @orm.db_session

@@ -280,6 +280,8 @@ class Relay(db.Entity):
 
   history     = orm.Set('RelayHistory')
 
+  webcam      = orm.Optional(lambda: Webcam)
+
   @property
   def value(self):
     timestamp_limit = datetime.now() - timedelta(seconds=Relay.__MAX_VALUE_AGE)
@@ -470,17 +472,7 @@ class Setting(db.Entity):
 
   def __encrypt_sensitive_fields(self):
     if self.id in ['meross_cloud_username','meross_cloud_password'] and '' != self.value:
-#      print(f'Encrypt field {self.id} with value: {self.value}')
       self.value = terrariumUtils.encrypt(self.value)
-#      print(f'Encrypted data is: {self.value}')
-
-    # # encryption_salt = Setting['encryption_salt'].value.encode()
-    # # encryption = Fernet(encryption_salt)
-
-    # # Encrypt sensitive fields
-    # for field in ['username','password','user_key','access_secret']:
-    #   if field in self.setup:
-    #     self.setup[field] = terrariumUtilsion.encrypt(self.setup[field])
 
   def before_insert(self):
     self.__encrypt_sensitive_fields()
@@ -491,29 +483,25 @@ class Setting(db.Entity):
 
 class Webcam(db.Entity):
 
-  id               = orm.PrimaryKey(str)
-  hardware         = orm.Required(str)
-  name             = orm.Required(str)
-  address          = orm.Required(str)
+  id        = orm.PrimaryKey(str)
+  hardware  = orm.Required(str)
+  name      = orm.Required(str)
+  address   = orm.Required(str)
 
-  width            = orm.Required(int)
-  height           = orm.Required(int)
+  width     = orm.Required(int)
+  height    = orm.Required(int)
 
-  rotation         = orm.Required(str)
-  awb              = orm.Required(str)
+  rotation  = orm.Required(str)
+  awb       = orm.Required(str)
 
-  archive          = orm.Optional(str)
-  archive_door     = orm.Optional(str)
-  archive_light    = orm.Optional(str)
+  flash     = orm.Set(lambda: Relay)
 
-  motion_boxes     = orm.Optional(str)
-  motion_threshold = orm.Optional(int)
-  motion_area      = orm.Optional(int)
-  motion_frame     = orm.Optional(str)
+  archive   = orm.Optional(orm.Json)
+  motion    = orm.Optional(orm.Json)
 
-  markers          = orm.Optional(orm.Json, default=[])
+  markers   = orm.Optional(orm.Json, default=[])
 
-  enclosure        = orm.Optional(lambda: Enclosure)
+  enclosure = orm.Optional(lambda: Enclosure)
 
   @property
   def is_live(self):
@@ -521,13 +509,8 @@ class Webcam(db.Entity):
 
   @property
   def archive_path(self):
+    #TODO: Property/setting ??
     return f'webcam/archive/{self.id}'
 
   def __repr__(self):
     return f'{self.hardware} webcam \'{self.name}\' at address \'{self.address}\''
-
-
-# This will allow us to convert the data to JSON....
-# not needed, as this will also give out schema... so to_dict is enough
-# with db.set_perms_for(Setting, Sensor, SensorHistory):
-#  orm.perm('view', group='anybody')
