@@ -412,7 +412,7 @@ class terrariumAPI(object):
     return { 'data' : terrariumButton.available_buttons }
 
   @orm.db_session
-  def button_history(self, button, period = 'day'):
+  def button_history(self, button, action = 'history', period = 'day'):
     try:
       button = Button[button]
 
