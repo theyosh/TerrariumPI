@@ -1910,8 +1910,9 @@ function websocket_init(reconnect) {
         if (sensor_menu_list.length + light_sensors_list.length + 1 != jQuery('#available_sensor_types li.nav-item').length) {
           sensor_menu_list.sort((a, b) => a.title.localeCompare(b.title));
 
-          jQuery('#available_sensor_types li.nav-item:not(:last)').remove();
+          jQuery('#available_sensor_types li.nav-item:not(.action)').remove();
           jQuery('#available_sensor_types').loadTemplate(jQuery('#sensor_type_menu'),sensor_menu_list,{prepend: true});
+
 
           if (light_sensors_list.length > 0) {
             light_sensors_list.sort((a, b) => a.title.localeCompare(b.title));
