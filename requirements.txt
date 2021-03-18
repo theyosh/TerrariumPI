@@ -62,6 +62,7 @@ emails
 twitter
 pushover
 luma.oled
+i2c_lcd
 
 # API
 pony

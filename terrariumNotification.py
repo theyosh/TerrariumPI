@@ -1,27 +1,22 @@
 # -*- coding: utf-8 -*-
 import re
 
-import time
-import os
-import os.path
-
-try:
-  import thread as _thread
-except ImportError as ex:
-  import _thread
+# import time
+# import os
+# import os.path
 
 # try:
-#   import configparser
+#   import thread as _thread
 # except ImportError as ex:
-#   import ConfigParser as configparser
+#   import _thread
 
 
-
-### NEW IMPORTS ####
 from string import Template
 from gevent import sleep
 import datetime
 from operator import itemgetter
+
+from threading import Timer
 
 from terrariumDatabase import NotificationMessage, NotificationService
 from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
@@ -50,14 +45,8 @@ from base64 import b64encode
 import copy
 from pony import orm
 
-# class terrariumAreaException(TypeError):
-#   '''There is a problem with loading a hardware sensor.'''
-#   pass
-
 class terrariumNotification(terrariumSingleton):
-
   __MAX_MESSAGES_TOTAL_PER_MINUTE = 60
-#  __MAX_MESSAGES_PER_MINUTE = 6
 
   __MESSAGES = {
     'authentication_error' : _('Authentication login error'),
@@ -111,17 +100,13 @@ class terrariumNotification(terrariumSingleton):
       return False
 
   def load_services(self):
-#    self.services = {}
     with orm.db_session():
-      for service in NotificationService.select(lambda ns: ns.enabled is True and 'telegram' == ns.type):
-        if str(service.id) not in self.services:
+      for service in NotificationService.select():
+        if service.id not in self.services:
           setup = copy.copy(service.setup)
           setup['version']       = self.version
           setup['profile_image'] = self.profile_image
-          #print(setup)
-          self.services[str(service.id)] = terrariumNotificationService(str(service.id),service.type, service.name, service.enabled, setup)
-
-#    print(self.services)
+          self.services[service.id] = terrariumNotificationService(service.id,service.type, service.name, service.enabled, setup)
 
   @property
   def version(self):
@@ -138,11 +123,8 @@ class terrariumNotification(terrariumSingleton):
     with orm.db_session():
       try:
         message = NotificationMessage[message_id]
-        # print('Message...')
-        # print(message)
       except orm.core.ObjectNotFound as ex:
         return
-
 
       if not message.enabled:
         logger.debug(f'Notification message {message} is (temporary) disabled.')
@@ -152,49 +134,34 @@ class terrariumNotification(terrariumSingleton):
         logger.warning(f'Hitting the total max rate limit of {self.__rate_limiter_counter["total"]["rate"]} messages per minute. Message will be ignored.')
         return
 
-
-      # print('Notification message from database:')
-      # print(message.title)
-      # print(message.message)
-      # print('Variable data')
-      # print(data)
-      # print('Optional files')
-      # print(files)
-
       # Translate message variables
       title = Template(message.title).safe_substitute(**data)
       text  = Template(message.message).safe_substitute(**data)
-
-      #print(f'Translated message: {text}')
 
       if message.rate_limit > 0 and self.__rate_limit(title, message.rate_limit):
         logger.warning(f'Hitting the max rate limit of {self.__rate_limiter_counter[title]["rate"]} messages per minute for message {message.title}. Message will be ignored.')
         return
 
       for service in message.services:
-        # print('service')
-        # print(f'Name: {service.name} rate limit: {service.rate_limit}')
+        if not service.enabled:
+          logger.info(f'Service {self} is (temporary) disabled.')
+          continue
+
         if service.rate_limit > 0 and self.__rate_limit(service.type, service.rate_limit):
           logger.warning(f'Hitting the max rate limit of {self.__rate_limiter_counter[service.type]["rate"]} messages per minute for service {service.type}. Message will be ignored.')
           continue
 
-        # print('Service:')
-        # print(f'Service id : {service.id}')
-        setup = copy.copy(service.setup)
-        setup['version']       = self.version
-        setup['profile_image'] = self.profile_image
-        #print(setup)
-        # This does not work for Telegram bot...
-        service = terrariumNotificationService(str(service.id),service.type, service.name, service.enabled, setup)
-        service.send_message(title,text)
+        if service.id not in self.services:
+          setup = copy.copy(service.setup)
+          setup['version']       = self.version
+          setup['profile_image'] = self.profile_image
+          self.services[service.id] = terrariumNotificationService(service.id, service.type, service.name, service.enabled, setup)
 
-
-
-
+        self.services[service.id].send_message(message_id, title, text)
 
   def stop(self):
-    pass
-
+    for serviceid in self.services:
+      self.services[serviceid].stop()
 
 class terrariumNotificationService(object):
 
@@ -222,7 +189,7 @@ class terrariumNotificationService(object):
 
     'traffic' : {
       'name'    : _('Traffic light'),
-#      'class' : lambda: terrariumAreaHumidity
+      'class' : lambda: terrariumNotificationServiceTrafficLight
     },
 
     'twitter' : {
@@ -270,9 +237,23 @@ class terrariumNotificationService(object):
     self.setup['version']       = setup_data.get('version')
     self.setup['profile_image'] = setup_data.get('profile_image')
 
+  def stop(self):
+    pass
+
 
 class terrariumNotificationServiceDisplay(terrariumNotificationService):
-  pass
+  def load_setup(self, setup_data):
+    self.setup = {
+      'address'  : setup_data.get('address'),
+      'port'     : int(setup_data.get('port',25)),
+      'receiver' : setup_data.get('receiver','').split(','),
+      'username' : setup_data.get('username'),
+      'password' : setup_data.get('password'),
+    }
+    super().load_setup(setup_data)
+
+  def send_message(self, type, subject, message, attachments = []):
+    pass
 
 class terrariumNotificationServiceEmail(terrariumNotificationService):
   def load_setup(self, setup_data):
@@ -285,7 +266,7 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
     }
     super().load_setup(setup_data)
 
-  def send_message(self, subject, message, attachments = []):
+  def send_message(self, type, subject, message, attachments = []):
     if self.setup is None or len(self.setup.get('receiver',[])) == 0:
       # Configuration is not loaded, or no receivers, ignore sending emails
       return
@@ -340,7 +321,7 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
     }
     super().load_setup(setup_data)
 
-  def send_message(self, subject, message, attachments = []):
+  def send_message(self, type, subject, message, attachments = []):
     data = {}
     try:
       data = json.loads(message.replace('False','false').replace('True','true').replace('None','null').replace('\'','"'))
@@ -364,38 +345,66 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
       print('Error sending webhook to url \'{}\' with status code: {}'.format(url,r.status_code))
 
 
+class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
+  __YELLOW_TIMEOUT = 15 * 60
+  __RED_TIMEOUT = 60 * 60
 
-#def set_webhook(self,address):
-#       self.webhook = {'address' : address}
+  def load_setup(self, setup_data):
+    self.setup = {
+      'red'    : None if setup_data.get('red')    is None else terrariumUtils.to_BCM_port_number(setup_data.get('red')),
+      'yellow' : None if setup_data.get('yellow') is None else terrariumUtils.to_BCM_port_number(setup_data.get('yellow')),
+      'green'  : None if setup_data.get('green')  is None else terrariumUtils.to_BCM_port_number(setup_data.get('green')),
 
-#   def send_webhook(self,subject,message,files = []):
-#     url = subject.decode()
-#     webhook = terrariumUtils.parse_url(url)
+      'red_timer'    : None,
+      'yellow_timer' : None
+    }
 
-#     if not webhook:
-#       return
+    for led in ['red','yellow','green']:
+      if self.setup[led]:
+        GPIO.setup(self.setup[led], GPIO.OUT)
+        GPIO.output(self.setup[led],True)
+        if led != 'green':
+          sleep(1)
+          GPIO.output(self.setup[led],False)
 
-#     try:
-#       message = ','.join(message.decode().split('\n'))
-#       message = '{' + message.replace(':False',':false').replace(':True',':true').replace('None','null').replace('\'','"') + '}'
-#       message = json.loads(message)
+    super().load_setup(setup_data)
 
-#       if len(files) > 0:
-#         message['files'] = []
+  def send_message(self, type, subject, message, attachments = []):
+    led   = None
+    if 'system_warning' == type:
+      led     = 'yellow'
+      timeout = self.__YELLOW_TIMEOUT
 
-#         for attachment in files:
-#           with open(attachment,'rb') as fp:
-#             attachment_data = fp.read()
-#             message['files'].append({'name' : os.path.basename(attachment), 'data' : b64encode(attachment_data).decode('utf-8')})
+    elif 'system_error' == type:
+      led     = 'yellow'
+      timeout = self.__RED_TIMEOUT
 
-#       headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-#       r = requests.post(url, data=json.dumps(message), headers=headers)
-#       if r.status_code != 200:
-#         print('Error sending webhook to url \'{}\' with status code: {}'.format(url,r.status_code))
+    else:
+      return
 
-#     except Exception as ex:
-#       print('send_webhook exception:')
-#       print(ex)
+    if led is not None:
+      GPIO.output(self.setup[led],True)
+      if self.setup[f'{led}_timer'] is not None:
+        try:
+          self.setup[f'{led}_timer'].cancel()
+        except Exception as ex:
+          print(f'Traffic {led} exception')
+          print(ex)
+
+      self.setup[f'{led}_timer'] = Timer(timeout, lambda: GPIO.output(self.setup[f'{led}'],False))
+
+  def stop(self):
+    for led in ['red','yellow','green']:
+      if self.setup[led]:
+        GPIO.output(self.setup[led],False)
+        GPIO.cleanup(self.setup[led])
+        if self.setup.get(f'{led}_timer'):
+          try:
+            self.setup[f'{led}_timer'].cancel()
+          except Exception as ex:
+            print(f'Traffic STOP {led} exception')
+            print(ex)
+
 
 
 
@@ -498,7 +507,7 @@ class terrariumNotificationTelegramBot(object):
             'userid': ','.join(self.__valid_users) if self.__valid_users is not None else '',
             'proxy' : self.__proxy if self.__proxy is not None else ''}
 
-  def send_message(self,text, chat_id = None):
+  def send_message(self, type, text, chat_id = None):
     if self.__running:
       chat_ids = self.__chat_ids if chat_id is None else [int(chat_id)]
       for chat_id in chat_ids:
@@ -851,51 +860,6 @@ class terrariumNotificationTelegramBot(object):
 #                     'username'   : username,
 #                     'password'   : password}
 
-#   def send_email(self,subject,message,files = []):
-#     if self.email is None:
-#       return
-
-#     htmlbody = '<html><head><title>{}</title></head><body><img src="cid:{}" alt="Profile image" title="Profile image" align="right" style="max-width:300px;border-radius:25%;">{}</body></html>'
-
-#     for receiver in self.email['receiver']:
-#       mail_tls_ssl = ['tls','ssl',None]
-#       while not len(mail_tls_ssl) == 0:
-#         email_message = emails.Message(
-#                         headers   = {'X-Mailer' : 'TerrariumPI version {}'.format(self.__version)},
-#                         html      = htmlbody.format(subject,os.path.basename(self.__profile_image),message.decode().replace('\n','<br />')),
-#                         text      = message,
-#                         subject   = subject,
-#                         mail_from = ('TerrariumPI', receiver))
-#         with open(self.__profile_image,'rb') as fp:
-#           profile_image = fp.read()
-#           email_message.attach(filename=os.path.basename(self.__profile_image), content_disposition="inline", data=profile_image)
-
-#         for attachment in files:
-#           with open(attachment,'rb') as fp:
-#             attachment_data = fp.read()
-#             email_message.attach(filename=os.path.basename(attachment), data=attachment_data)
-
-#         smtp_settings = {'host':self.email['server'],
-#                          'port': 25}
-
-#         if '' != self.email['serverport']:
-#           smtp_settings['port'] = self.email['serverport']
-
-#         smtp_security = mail_tls_ssl.pop(0)
-#         if smtp_security is not None:
-#           smtp_settings[smtp_security] = True
-
-#         if '' != self.email['username']:
-#           smtp_settings['user'] = self.email['username']
-#           smtp_settings['password'] = self.email['password']
-
-#         response = email_message.send(to=re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE),
-#                                       smtp=smtp_settings)
-
-#         if response.status_code == 250:
-#           # Mail sent, clear remaining connection types
-#           mail_tls_ssl = []
-
 #   def set_twitter(self,consumer_key,consumer_secret,access_token,access_token_secret):
 #     if '' != consumer_key and '' != consumer_secret and '' != access_token and '' != access_token_secret:
 #       self.twitter = {'consumer_key'        : consumer_key,
@@ -991,37 +955,6 @@ class terrariumNotificationTelegramBot(object):
 #     if self.display is not None:
 #       self.display.message(message)
 
-#   def set_webhook(self,address):
-#       self.webhook = {'address' : address}
-
-#   def send_webhook(self,subject,message,files = []):
-#     url = subject.decode()
-#     webhook = terrariumUtils.parse_url(url)
-
-#     if not webhook:
-#       return
-
-#     try:
-#       message = ','.join(message.decode().split('\n'))
-#       message = '{' + message.replace(':False',':false').replace(':True',':true').replace('None','null').replace('\'','"') + '}'
-#       message = json.loads(message)
-
-#       if len(files) > 0:
-#         message['files'] = []
-
-#         for attachment in files:
-#           with open(attachment,'rb') as fp:
-#             attachment_data = fp.read()
-#             message['files'].append({'name' : os.path.basename(attachment), 'data' : b64encode(attachment_data).decode('utf-8')})
-
-#       headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-#       r = requests.post(url, data=json.dumps(message), headers=headers)
-#       if r.status_code != 200:
-#         print('Error sending webhook to url \'{}\' with status code: {}'.format(url,r.status_code))
-
-#     except Exception as ex:
-#       print('send_webhook exception:')
-#       print(ex)
 
 #   def message(self,message_id,data = None,files = []):
 #     self.send_notication_led(message_id)
@@ -1082,71 +1015,5 @@ class terrariumNotificationTelegramBot(object):
 #     data = []
 #     for message_id in sorted(self.messages.keys()):
 #       data.append(self.messages[message_id].get_data())
-
-#     return data
-
-#   def set_config(self,data):
-#     try:
-#       self.__update_config('email',{'receiver'   : data['email_receiver'],
-#                                     'server'     : data['email_server'],
-#                                     'serverport' : data['email_serverport'],
-#                                     'username'   : data['email_username'],
-#                                     'password'   : data['email_password']})
-
-#       self.__update_config('twitter',{'consumer_key'        : data['twitter_consumer_key'],
-#                                       'consumer_secret'     : data['twitter_consumer_secret'],
-#                                       'access_token'        : data['twitter_access_token'],
-#                                       'access_token_secret' : data['twitter_access_token_secret']})
-
-#       self.__update_config('pushover',{'api_token' : data['pushover_api_token'],
-#                                        'user_key'  : data['pushover_user_key']})
-
-#       self.__update_config('telegram',{'bot_token' : data['telegram_bot_token'],
-#                                        'userid'    : data['telegram_userid'],
-#                                        'proxy'     : data['telegram_proxy']})
-
-#       self.__update_config('display',{'address'    : data['display_address'],
-#                                       'hardwaretype' : data['display_hardwaretype'],
-#                                       'title'      : data['display_title']},
-#                            ['resolution'])
-
-#       self.__update_config('webhook',{'address'    : data['webhook_address']})
-
-#     except Exception as ex:
-#       print(ex)
-
-#     for message_id in data:
-#       message_id = message_id[:-8]
-#       if message_id in self.messages:
-#         self.messages[message_id] = terrariumNotificationMessage(message_id,
-#                                                                  data[message_id + '_title'],
-#                                                                  data[message_id + '_message'],
-#                                                                  data[message_id + '_services'])
-
-#         self.__data.remove_section('message' + message_id)
-#         self.__update_config('message' + message_id,{'id'       : message_id,
-#                                                      'title'    : data[message_id + '_title'],
-#                                                      'message'  : data[message_id + '_message'],
-#                                                      'services' : data[message_id + '_services']})
-
-#     with open('notifications.cfg', 'w') as configfile:
-#       self.__data.write(configfile)
-
-#     self.__load_config()
-#     self.__load_messages()
-#     return True
-
-#   def get_config(self):
-#     data = {
-#       'email'    : dict(self.email) if self.email is not None else {},
-#       'display'  : self.display.get_config() if self.display is not None else {'supported'   : terrariumDisplay.valid_hardware_types()},
-#       'twitter'  : dict(self.twitter) if self.twitter is not None else {},
-#       'pushover' : dict(self.pushover) if self.pushover is not None else {},
-#       'telegram' : self.telegram.get_config() if self.telegram is not None else {},
-#       'webhook'  : dict(self.webhook) if self.webhook is not None else {},
-#       'messages' : self.get_messages() }
-
-#     if self.email is not None:
-#       data['email']['receiver'] = ','.join(data['email']['receiver'])
 
 #     return data

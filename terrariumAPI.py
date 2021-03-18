@@ -23,9 +23,10 @@ from terrariumDatabase     import Area, Audiofile, Button, ButtonHistory, Enclos
 from terrariumEnclosure    import terrariumEnclosure
 from terrariumNotification import terrariumNotification, terrariumNotificationService
 
-from hardware.sensor    import terrariumSensor
-from hardware.relay     import terrariumRelay
 from hardware.button    import terrariumButton
+from hardware.display    import terrariumDisplay
+from hardware.relay     import terrariumRelay
+from hardware.sensor    import terrariumSensor
 from hardware.webcam    import terrariumWebcam
 
 from terrariumUtils import terrariumUtils
@@ -83,6 +84,9 @@ class terrariumAPI(object):
     bottle_app.route('/api/calendar/download/',        'GET',    self.calendar_download, apply=self.authentication(),      name='api:calendar_download')
     bottle_app.route('/api/calendar/',                 'GET',    self.calendar_list,     apply=self.authentication(False), name='api:calendar_list')
     bottle_app.route('/api/calendar/',                 'POST',   self.calendar_add,      apply=self.authentication(),      name='api:calendar_add')
+
+
+    bottle_app.route('/api/displays/hardware/',        'GET',    self.display_hardware, apply=self.authentication(),      name='api:display_hardware')
 
 
     # Enclosure API
@@ -590,6 +594,10 @@ class terrariumAPI(object):
   def calendar_download(self):
     icalfile = Path(self.webserver.engine.calendar.get_file())
     return static_file(icalfile.name, root='', download=icalfile.name)
+
+
+  def display_hardware(self):
+    return {'data' : terrariumDisplay.available_displays}
 
 
   # Enclosure

@@ -474,6 +474,7 @@ class terrariumWebcam(object):
       self.__last_archive_image = self.raw_archive_path
       self.__last_archive_image.parent.mkdir(parents=True,exist_ok=True)
       self.__raw_image.save(self.__last_archive_image,'jpeg', quality=self.__JPEG_QUALITY, exif=self.__exit_data)
+      #self.__environment.notification.message('webcam_archive',self.get_data(),[archive_image])
 
 
   def motion_capture(self, motion_frame = 'last', motion_threshold = 25, motion_area = 500, motion_boxes = 'green'):
@@ -497,13 +498,14 @@ class terrariumWebcam(object):
     (cnts ,_) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     # don't draw if motion boxes is disabled
+    # Color Red and Blue are swapped... very strange...
     box_color = None
     if 'red' == motion_boxes:
-      box_color = (255, 0, 0)
+      box_color = (0, 0, 255)
     elif 'green' == motion_boxes:
       box_color = (0, 255, 0)
     elif 'blue' == motion_boxes:
-      box_color = (0, 0, 255)
+      box_color = (255, 0, 0)
 
     # Reread the current image, as in the first part, we have changed the image with filters to motion detection
     raw_image = cv2.imread(str(self.raw_image_path))
@@ -527,11 +529,12 @@ class terrariumWebcam(object):
       # Store the current image for next comparison round.
       self.__compare_image = current_image
       logger.info(f'Saved webcam {self} image for archive due to motion detection')
+      #self.__environment.notification.message('webcam_motion',self.get_data(),[archive_image])
 
     elif 'last' == motion_frame:
       # Only store the current frame when we use the 'last' frame option
       self.__compare_image = current_image
-      #self.__environment.notification.message('webcam_motion',self.get_data(),[archive_image])
+
 
     #except Exception as ex:
     #  logger.exception('Error in motion detection for webcam \'%s\' with error message: %s' % (self.get_name(),ex))

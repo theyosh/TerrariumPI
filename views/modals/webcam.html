@@ -40,9 +40,9 @@
         <div class="form-group">
           <label for="webcam_width" class="d-block">{{ _('Resolution (width x height)') }}</label>
           <div class="d-flex justify-content-between">
-            <input type="text" class="form-control col-5 d-inline" id="webcam_width" required="required" name="width" placeholder="{{ _('Enter width') }}">
+            <input type="number" class="form-control col-5 d-inline" id="webcam_width" required="required" name="width" placeholder="{{ _('Enter width') }}">
             <i class="fas fa-times mt-3" ></i>
-            <input type="text" class="form-control col-5 d-inline" id="webcam_height" required="required" name="height" placeholder="{{ _('Enter height') }}">
+            <input type="number" class="form-control col-5 d-inline" id="webcam_height" required="required" name="height" placeholder="{{ _('Enter height') }}">
           </div>
         </div>
       </div>
@@ -157,13 +157,13 @@
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
         <div class="form-group">
           <label for="webcam_motion_threshold" class="text-truncate">{{ _('Motion delta thresshold') }}</label>
-          <input type="text" value="0" class="form-control" id="webcam_motion_threshold" name="motion_threshold" placeholder="{{ _('Enter number') }}">
+          <input type="number" value="25" class="form-control" id="webcam_motion_threshold" name="motion_threshold" placeholder="{{ _('Enter number') }}">
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
         <div class="form-group">
           <label for="webcam_motion_area" class="text-truncate">{{ _('Motion minimum area') }}</label>
-          <input type="text" value="0" class="form-control" id="webcam_motion_area" name="motion_area" placeholder="{{ _('Enter number') }}">
+          <input type="number" value="500" class="form-control" id="webcam_motion_area" name="motion_area" placeholder="{{ _('Enter number') }}">
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
@@ -276,7 +276,6 @@ jQuery.when(
         if (['archive','motion'].indexOf(key) != -1 ) {
           jQuery.each(value,function(key2,value2) {
             field = {{modal_type}}_form.find('[name="' + key + '_' + key2  + '"]');
-            console.log('Field', field, value2);
             field.val(value2).trigger('change');
           });
         } else {
