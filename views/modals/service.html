@@ -174,6 +174,31 @@
 
 </div>
 
+<div class="row traffic">
+
+  <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+      <label for="red">{{ _('Red') }}</label>
+      <input type="number" class="form-control" id="red" name="red" placeholder="{{ _('Enter red GPIO pin') }}">
+    </div>
+  </div>
+
+  <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+      <label for="yellow">{{ _('Yellow') }}</label>
+      <input type="number" class="form-control" id="yellow" name="yellow" placeholder="{{ _('Enter yellow GPIO pin') }}">
+    </div>
+  </div>
+
+  <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+      <label for="green">{{ _('Green') }}</label>
+      <input type="number" class="form-control" id="green" name="green" placeholder="{{ _('Enter green GPIO pin') }}">
+    </div>
+  </div>
+
+</div>
+
 <div class="row twitter">
 
 
@@ -238,17 +263,36 @@
 //{{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
 
 
+jQuery.when(
 
-jQuery.get('{{ url_for("api:notification_service_types") }}', function(data) {
+  jQuery.get('{{ url_for("api:notification_service_types") }}'),
+  jQuery.get('{{ url_for("api:display_hardware") }}'),
+
+
+).done(function(services, displays) {
+
+
+
+//jQuery.get('{{ url_for("api:notification_service_types") }}', function(data) {
     let service_type = {{modal_type}}_form.find('select#service_type');
     service_type.attr('readonly', false);
     service_type.find('option').remove();
 
-    jQuery.each(data.data,function(counter,item){
+    jQuery.each(services[0].data,function(counter,item){
       service_type.append(jQuery('<option>').attr('value',item.type).text(item.name));
     });
 
     service_type.trigger('change');
+
+
+    let display_hardware = {{modal_type}}_form.find('select#hardware');
+    display_hardware.attr('readonly', false);
+    display_hardware.find('option').remove();
+
+    jQuery.each(displays[0].data,function(counter,item){
+      display_hardware.append(jQuery('<option>').attr('value',item.hardware).text(item.name));
+    });
+
 
 
     // Check if we are in edit mode.... and need to load more data....

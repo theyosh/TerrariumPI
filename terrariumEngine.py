@@ -815,14 +815,11 @@ class terrariumEngine(object):
           self.webcams[webcam.id].address = webcam.address
 
         # Take a measurement from the webcam
-        relays = []
-        if webcam.flash is not None:
-          relays = [self.relays[relay.id] for relay in webcam.flash]
-
+        relays = [] if webcam.flash is None else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
         value = self.webcams[webcam.id].update(relays)
 
         if 'motion' == webcam.archive['state']:
-          self.webcams[webcam.id].motion_capture(webcam.motion['frame'], webcam.motion['threshold'], webcam.motion['area'], webcam.motion['boxes'])
+          self.webcams[webcam.id].motion_capture(webcam.motion['frame'], int(webcam.motion['threshold']), int(webcam.motion['area']), webcam.motion['boxes'])
         elif 'disabled' != webcam.archive['state']:
           self.webcams[webcam.id].archive(int(webcam.archive['state']))
 
@@ -834,14 +831,11 @@ class terrariumEngine(object):
       for webcam in Webcam.select(lambda w: w.id in self.webcams.keys() and not w.id in self.settings['exclude_ids']):
         start = time.time()
 
-        relays = []
-        if webcam.flash is not None:
-          relays = [self.relays[relay.id] for relay in webcam.flash]
-
+        relays = [] if webcam.flash is None else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
         self.webcams[webcam.id].update(relays)
 
         if 'motion' == webcam.archive['state']:
-          self.webcams[webcam.id].motion_capture(webcam.motion['frame'], webcam.motion['threshold'], webcam.motion['area'], webcam.motion['boxes'])
+          self.webcams[webcam.id].motion_capture(webcam.motion['frame'], int(webcam.motion['threshold']), int(webcam.motion['area']), webcam.motion['boxes'])
         elif 'disabled' != webcam.archive['state']:
           self.webcams[webcam.id].archive(int(webcam.archive['state']))
 

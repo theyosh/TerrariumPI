@@ -1,4 +1,4 @@
-from display import terrariumDisplayAbstract
+from . import terrariumDisplay
 from terrariumUtils import terrariumUtils
 
 from pathlib import Path
@@ -12,9 +12,9 @@ from luma.oled.device import ssd1306, ssd1309, ssd1322, ssd1325, ssd1327, ssd133
 from PIL import Image, ImageFont
 from time import sleep
 
-class terrariumOLEDAbstract(terrariumDisplayAbstract):
+class terrariumOLEDMixin():
 
-  def load_hardware(self, oled):
+  def _load_hardware(self, oled):
     address = self._address
     self._device['device']    = oled(i2c(port=1 if len(address) == 1 else int(address[1]), address=address[0]))
     self._device['fontsize']  = 10
@@ -24,44 +24,52 @@ class terrariumOLEDAbstract(terrariumDisplayAbstract):
     # Update the resolutions based on device
     self.width  = self._device['device'].width
     self.height = self._device['device'].height
-    self.clear()
+
+
+    self._device['lines_buffer'] = []
+
+    #print(f'Cleared: {self._device["clear"]}')
+    #self.clear()
 
   def unload_hardware(self):
     self._device['device'].lcd_device.bus.close()
     del(self._device['device'])
 
   def _write_line(self, text, line_nr):
+    print(f'OLED: nr {line_nr}, {text}')
     xpos = 1
-    self.__text_lines[line_nr-1] = text
+#    self.__text_lines[line_nr-1] = text
     with canvas(self._device['device']) as draw:
+      #if len(self._device['lines_buffer']) == 0:
       draw.rectangle(self._device['device'].bounding_box, outline='white', fill='black')
 
       if self.title is not None:
         draw.rectangle((0,0,self.width,self.fontsize), fill='white')
         draw.text((1,0), self.title, font=self.font, fill='black')
 
-      for nr, line in enumerate(self.__text_lines):
+      self._device['lines_buffer'].append(text)
+      #for x in range(line_nr):
+
+
+      for nr, line in enumerate(self._device['lines_buffer']):
         if line is None:
           continue
 
         ypos = (nr + 0) * self.fontsize
         draw.text((xpos, ypos), line, font=self.font, fill='white')
 
-  def _write_image(self, image):
-    image = Image.open(image)
-    scale = max(float(self.width) / float(image.size[0]),float(self.height) / float(image.size[1]))
-    image = image.resize((int(scale * float(image.size[0])),int(scale * float(image.size[1]))),Image.ANTIALIAS)
-
-    top_x = int((image.size[0] - int(self.width)) / 2)
-    top_y = int((image.size[1] - int(self.height)) / 2)
-    image = image.crop((top_x,top_y,top_x + int(self.width),top_y + int(self.height)))
-
-    self._device['device'].display(image.convert(self._device['device'].mode))
-    sleep(1)
-
-  def add_image(self, image):
+  def write_image(self, image):
     if Path(image).exists():
-      self._write_image(image)
+      image = Image.open(image)
+      scale = max(float(self.width) / float(image.size[0]),float(self.height) / float(image.size[1]))
+      image = image.resize((int(scale * float(image.size[0])),int(scale * float(image.size[1]))),Image.ANTIALIAS)
+
+      top_x = int((image.size[0] - int(self.width)) / 2)
+      top_y = int((image.size[1] - int(self.height)) / 2)
+      image = image.crop((top_x,top_y,top_x + int(self.width),top_y + int(self.height)))
+
+      self._device['device'].display(image.convert(self._device['device'].mode))
+      sleep(1)
     else:
       print('Image {} does not exists'.format(image))
 
@@ -70,85 +78,66 @@ class terrariumOLEDAbstract(terrariumDisplayAbstract):
     with canvas(self._device['device']) as draw:
       draw.rectangle(self._device['device'].bounding_box, outline='white', fill='black')
 
-    self.__text_lines = [None] * int(self.height / self.fontsize)
+    self._device['clear'] = True
+    self._device['lines_buffer'] = []
+    print(f'Oled clear: True')
+
+    #self.__text_lines = [None] * int(self.height / self.fontsize)
     super().clear()
 
-class terrariumOLEDSSD1306(terrariumOLEDAbstract):
+class terrariumOLEDSSD1306(terrariumDisplay, terrariumOLEDMixin):
   HARDWARE = 'SSD1306'
   NAME = 'OLED SSD1306 (I2C)'
 
-  def __init__(self, id, address, title = None):
-    super().__init__(id, address, title)
-
   def load_hardware(self):
-    super().load_hardware(ssd1306)
+    print(f'Load hardware {ssd1306}')
+    self._load_hardware(ssd1306)
 
-class terrariumOLEDSSD1309(terrariumOLEDAbstract):
+class terrariumOLEDSSD1309(terrariumDisplay, terrariumOLEDMixin):
   HARDWARE = 'SSD1309'
   NAME = 'OLED SSD1309 (I2C)'
 
-  def __init__(self, id, address, title = None):
-    super().__init__(id, address, title)
-
   def load_hardware(self):
-    super().load_hardware(ssd1309)
+    self._load_hardware(ssd1309)
 
-class terrariumOLEDSSD1322(terrariumOLEDAbstract):
+class terrariumOLEDSSD1322(terrariumDisplay, terrariumOLEDMixin):
   HARDWARE = 'SSD1322'
   NAME = 'OLED SSD1322 (I2C)'
 
-  def __init__(self, id, address, title = None):
-    super().__init__(id, address, title)
-
   def load_hardware(self):
-    super().load_hardware(ssd1322)
+    self._load_hardware(ssd1322)
 
-class terrariumOLEDSSD1325(terrariumOLEDAbstract):
+class terrariumOLEDSSD1325(terrariumDisplay, terrariumOLEDMixin):
   HARDWARE = 'SSD1325'
   NAME = 'OLED SSD1325 (I2C)'
 
-  def __init__(self, id, address, title = None):
-    super().__init__(id, address, title)
-
   def load_hardware(self):
-    super().load_hardware(ssd1325)
+    self._load_hardware(ssd1325)
 
-class terrariumOLEDSSD1327(terrariumOLEDAbstract):
+class terrariumOLEDSSD1327(terrariumDisplay, terrariumOLEDMixin):
   HARDWARE = 'SSD1327'
   NAME = 'OLED SSD1327 (I2C)'
 
-  def __init__(self, id, address, title = None):
-    super().__init__(id, address, title)
-
   def load_hardware(self):
-    super().load_hardware(ssd1327)
+    self._load_hardware(ssd1327)
 
-class terrariumOLEDSSD1331(terrariumOLEDAbstract):
+class terrariumOLEDSSD1331(terrariumDisplay, terrariumOLEDMixin):
   HARDWARE = 'SSD1331'
   NAME = 'OLED SSD1331 (I2C)'
 
-  def __init__(self, id, address, title = None):
-    super().__init__(id, address, title)
-
   def load_hardware(self):
-    super().load_hardware(ssd1331)
+    self._load_hardware(ssd1331)
 
-class terrariumOLEDSSD1351(terrariumOLEDAbstract):
+class terrariumOLEDSSD1351(terrariumDisplay, terrariumOLEDMixin):
   HARDWARE = 'SSD1351'
   NAME = 'OLED SSD1351 (I2C)'
 
-  def __init__(self, id, address, title = None):
-    super().__init__(id, address, title)
-
   def load_hardware(self):
-    super().load_hardware(ssd1351)
+    self._load_hardware(ssd1351)
 
-class terrariumOLEDSH1106(terrariumOLEDAbstract):
+class terrariumOLEDSH1106(terrariumDisplay, terrariumOLEDMixin):
   HARDWARE = 'SH1106'
   NAME = 'OLED SH1106 (I2C)'
 
-  def __init__(self, id, address, title = None):
-    super().__init__(id, address, title)
-
   def load_hardware(self):
-    super().load_hardware(sh1106)
+    self._load_hardware(sh1106)

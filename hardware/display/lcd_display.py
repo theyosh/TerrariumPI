@@ -1,4 +1,4 @@
-from display import terrariumDisplayAbstract
+from . import terrariumDisplay
 from terrariumUtils import terrariumUtils
 
 # pip install i2c_lcd
@@ -8,7 +8,7 @@ import i2c_lcd
 import smbus2
 import serial
 
-class terrariumDisplayLCDI2CAbstract(terrariumDisplayAbstract):
+class terrariumDisplayLCDI2CMixin():
 
   def load_hardware(self):
     address = self._address
@@ -29,7 +29,7 @@ class terrariumDisplayLCDI2CAbstract(terrariumDisplayAbstract):
     self._device['device'].lcd_clear()
     super().clear()
 
-class terrariumDisplayLCDSerialAbstract(terrariumDisplayAbstract):
+class terrariumDisplayLCDSerialMixin():
 
   def load_hardware(self):
     address = self._address
@@ -42,7 +42,7 @@ class terrariumDisplayLCDSerialAbstract(terrariumDisplayAbstract):
 
   def _write_line(self, text, line_nr):
     with self._device['device'] as device:
-      device.write('0{}{}'.format(line_nr-1,text))
+      device.write(f'0{line_nr-1}{text}')
 
   def clear(self):
     for i in range(1,self.height+1):
@@ -50,28 +50,28 @@ class terrariumDisplayLCDSerialAbstract(terrariumDisplayAbstract):
 
     super().clear()
 
-class terrariumLCD16x2(terrariumDisplayLCDI2CAbstract):
+class terrariumLCD16x2(terrariumDisplay, terrariumDisplayLCDI2CMixin):
   HARDWARE = 'LCD16x2I2C'
   NAME = 'LCD 16 x 2 display (I2C)'
 
   def __init__(self, id, address, title = None):
     super().__init__(id, address, title, 16, 2)
 
-class terrariumLCD20x4(terrariumDisplayLCDI2CAbstract):
+class terrariumLCD20x4(terrariumDisplay, terrariumDisplayLCDI2CMixin):
   HARDWARE = 'LCD20x4I2C'
   NAME = 'LCD 20 x 4 display (I2C)'
 
   def __init__(self, id, address, title = None):
     super().__init__(id, address, title, 20, 4)
 
-class terrariumLCDSerial16x2(terrariumDisplayLCDI2CAbstract):
+class terrariumLCDSerial16x2(terrariumDisplay, terrariumDisplayLCDSerialMixin):
   HARDWARE = 'LCD16x2Serial'
   NAME = 'LCD 16 x 2 display (serial)'
 
   def __init__(self, id, address, title = None):
     super().__init__(id, address, title, 16, 2)
 
-class terrariumLCDSerial20x4(terrariumDisplayLCDI2CAbstract):
+class terrariumLCDSerial20x4(terrariumDisplay, terrariumDisplayLCDSerialMixin):
   HARDWARE = 'LCD20x4Serial'
   NAME = 'LCD 20 x 4 display (serial)'
 
