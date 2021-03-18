@@ -90,13 +90,13 @@
                 </a>
               </li>
             </script>
-            <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+            <li class="nav-item {% if not authenticated %}disabled{% endif %} action" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="#" class="nav-link" title="{{ _('Add new sensor') }}" data-toggle="modal" data-target="#modal-sensor-setup">
                 <i class="fas fa-plus nav-icon"></i>
                 <p>{{ _('New sensor') }}</p>
               </a>
             </li>
-            <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+            <li class="nav-item {% if not authenticated %}disabled{% endif %} action" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="{{ url_for('api:sensor_scan')}}" class="nav-link" title="{{ _('Scan for new sensors') }}" data-action="POST" data-field="value" data-toggle="modal" data-target="#modal-confirm">
                 <i class="fas fa-sync-alt nav-icon"></i>
                 <p>{{ _('Scan sensors') }}</p>
@@ -104,6 +104,7 @@
             </li>
           </ul>
         </li>
+
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-bolt"></i>
