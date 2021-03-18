@@ -74,6 +74,7 @@ class terrariumButton(object):
     return super(terrariumButton, cls).__new__(known_buttons[hardware_type])
 
   def __init__(self, id, _, address, name = '', callback = None):
+
     self._device = {'device'   : None,
                     'id'       : None,
                     'address'  : None,
@@ -119,15 +120,15 @@ class terrariumButton(object):
 
   @property
   def id(self):
-    if self._device['id'] is None:
-      self._device['id'] = md5('{}{}'.format(self.HARDWARE, self.address).encode()).hexdigest()
+    if self._device['id'] is None and self.address is not None:
+      self._device['id'] = md5(f'{self.HARDWARE}{self.address}'.encode()).hexdigest()
 
     return self._device['id']
 
   @id.setter
   def id(self, value):
     value = terrariumUtils.clean_address(value)
-    if value not in [None, '', self.id]:
+    if value is not None and '' != value:
       self._device['id'] = value
 
   @property
