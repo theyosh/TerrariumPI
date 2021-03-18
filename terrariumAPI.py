@@ -396,13 +396,9 @@ class terrariumAPI(object):
 
   @orm.db_session
   def audiofile_delete(self, audiofile):
-    # __UPLOAD_PATH = 'media/'
     try:
       audiofile = Audiofile[audiofile]
       message = f'Audio file {audiofile.filename} is deleted.'
-      # audio_file = Path(f'{audiofile.filename}')
-      # if audio_file.exists():
-      #   audio_file.unlink()
       audiofile.delete()
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
@@ -412,38 +408,60 @@ class terrariumAPI(object):
 
 
   # Buttons
-  @orm.db_session
-  def button_history(self, button, period = 'day'):
-    data = []
-
-    if 'day' == period:
-      period = 1
-    elif 'week' == period:
-      period = 7
-    elif 'month' == period:
-      period = 31
-    elif 'year' == period:
-      period = 365
-    else:
-      period = 1
-
-    for item in Button[button].history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(days=period)):
-      data.append({
-        'timestamp' : item.timestamp.timestamp(),
-        'value'     : item.value,
-      })
-
-    return { 'data' : data }
-
   def button_hardware(self):
     return { 'data' : terrariumButton.available_buttons }
+
+  @orm.db_session
+  def button_history(self, button, period = 'day'):
+    try:
+      button = Button[button]
+
+      data = []
+
+      if 'day' == period:
+        period = 1
+      elif 'week' == period:
+        period = 7
+      elif 'month' == period:
+        period = 31
+      elif 'year' == period:
+        period = 365
+      elif 'replaced' == period:
+        # We need to calculate back to days...
+        period = (datetime.now() - relay.replacement).total_seconds() / (24.0 * 3600.0)
+      else:
+        period = 1
+
+      for item in button.history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(days=period)):
+        data.append({
+          'timestamp' : item.timestamp.timestamp(),
+          'value'     : item.value,
+        })
+
+      if 'export' == action:
+        response.headers['Content-Type'] = 'application/csv'
+        response.headers['Content-Disposition'] = f'attachment; filename={button.name}_{period}.csv'
+
+        # CSV Headers
+        csv_data = ';'.join(data[0].keys()) + '\n'
+        # Data
+        for data_point in data:
+          data_point['timestamp'] = datetime.fromtimestamp(data_point['timestamp'])
+          csv_data += ';'.join([str(value) for value in data_point.values()]) + '\n'
+
+        return csv_data
+
+      return { 'data' : data }
+
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error getting history for button {button}: {ex}')
 
   @orm.db_session
   def button_list(self):
     data = []
     for button in Button.select(lambda r: not r.id in self.webserver.engine.settings['exclude_ids']):
-      # button_data = button.to_dict(exclude='enclosure')
-      # button_data['value']  = button.value
       data.append(self.button_detail(button.id))
 
     return { 'data' : data }
@@ -458,7 +476,7 @@ class terrariumAPI(object):
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
     except Exception as ex:
-      raise HTTPError(status=500, body=f'Error getting button {button} detail. {ex}')
+      raise HTTPError(status=500, body=f'Error getting button {button}: {ex}')
 
   @orm.db_session
   def button_add(self):
@@ -472,12 +490,8 @@ class terrariumAPI(object):
       button.update(new_value)
 
       return self.button_detail(button.id)
-
-      # button_data = button.to_dict(exclude='enclosure')
-      # button_data['value']  = button.value
-      # return button_data
     except Exception as ex:
-      raise HTTPError(status=500, body=f'Button could not be added. {ex}')
+      raise HTTPError(status=500, body=f'Button could not be added: {ex}')
 
   @orm.db_session
   def button_update(self, button):
@@ -489,14 +503,10 @@ class terrariumAPI(object):
       self.webserver.engine.update(terrariumButton,**request.json)
 
       return self.button_detail(button.id)
-
-      # button_data = button.to_dict(exclude='enclosure')
-      # button_data['value']  = button.value
-      # return button_data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
     except Exception as ex:
-      raise HTTPError(status=500, body=f'Error updating button {button}. {ex}')
+      raise HTTPError(status=500, body=f'Error updating button {button}: {ex}')
 
   @orm.db_session
   def button_delete(self, button):
@@ -508,7 +518,7 @@ class terrariumAPI(object):
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
     except Exception as ex:
-      raise HTTPError(status=500, body=f'Error deleting button {button}. {ex}')
+      raise HTTPError(status=500, body=f'Error deleting button {button}: {ex}')
 
 
   # Calendar
