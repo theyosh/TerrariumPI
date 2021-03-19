@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-03-12 17:44+CET\n"
-"PO-Revision-Date: 2021-03-01 17:43+0000\n"
+"PO-Revision-Date: 2021-03-19 00:43+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -159,22 +159,16 @@ msgid "last update"
 msgstr "Última atualização"
 
 #: terrariumNotification.py:63
-#, fuzzy
-#| msgid "Authentication mode"
 msgid "Authentication login error"
-msgstr "Tipo de autenticação"
+msgstr "Erro de autenticação no login"
 
 #: terrariumNotification.py:64
-#, fuzzy
-#| msgid "System logging"
 msgid "System warning"
-msgstr "Registro do sistema"
+msgstr "Aviso do sistema"
 
 #: terrariumNotification.py:65
-#, fuzzy
-#| msgid "System load"
 msgid "System error"
-msgstr "Carga do sistema"
+msgstr "Erro do sistema"
 
 #: terrariumNotification.py:204
 msgid "Display"
@@ -193,10 +187,8 @@ msgid "Telegram"
 msgstr "Telegram"
 
 #: terrariumNotification.py:224
-#, fuzzy
-#| msgid "Main lights"
 msgid "Traffic light"
-msgstr "Luzes principais"
+msgstr "Luz de semáforo"
 
 #: terrariumNotification.py:229
 msgid "Twitter"
@@ -505,10 +497,8 @@ msgid "New relay"
 msgstr "Novo relé"
 
 #: views/includes/sidebar.html:125
-#, fuzzy
-#| msgid "Select relays"
 msgid "Scan relays"
-msgstr "Selecionar relés"
+msgstr "Localizar relés"
 
 #: views/includes/sidebar.html:148
 msgid "New button"
@@ -912,14 +902,12 @@ msgid "Dimmer of duration"
 msgstr "Duração do Dimmer"
 
 #: views/modals/area.html:706
-#, fuzzy
-#| msgid ""
-#| "Set the dimmer times for going on and off. Max duration is 100 mimutes."
 msgid ""
 "Select the duration for the dimmer to go to on or off in minutes. Max "
 "duration is 180 minutes."
 msgstr ""
-"Ajustar horário de ligar e desligar do dimmer. Duração máxima de 100 minutos."
+"Selecione a quantidade de minutos para ligar e desligar o dimmer. Duração "
+"máxima de 180 minutos."
 
 #: views/modals/area.html:713
 msgid "Relay delay on"
@@ -934,6 +922,8 @@ msgid ""
 "Select the delay in mintues that a relay waits before it turns on. Max delay "
 "is 180 minutes."
 msgstr ""
+"Selecione o atraso em minutos que um relé deve esperar antes de ligar. "
+"Atraso máximo de 180 minutos."
 
 #: views/modals/area.html:733
 msgid "Step change"
@@ -1013,24 +1003,20 @@ msgid "Years"
 msgstr "Anos"
 
 #: views/modals/message.html:11
-#, fuzzy
-#| msgid "Area settings"
 msgid "Message settings"
-msgstr "﻿Configurações de Área"
+msgstr "Configurações de mensagem"
 
 #: views/modals/message.html:18
-#, fuzzy
-#| msgid "Message"
 msgid "Message type"
-msgstr "Mensagem"
+msgstr "Tipo de mensagem"
 
 #: views/modals/message.html:27
 msgid "Subject"
-msgstr ""
+msgstr "Assunto"
 
 #: views/modals/message.html:39 views/modals/service.html:34
 msgid "Rate limit"
-msgstr ""
+msgstr "Limite de taxa"
 
 #: views/modals/message.html:47 views/modals/service.html:42
 msgid "Enabled"
@@ -1042,13 +1028,11 @@ msgstr "Mensagem"
 
 #: views/modals/message.html:71
 msgid "Place holders"
-msgstr ""
+msgstr "Espaços reservados"
 
 #: views/modals/message.html:84
-#, fuzzy
-#| msgid "Service"
 msgid "Services"
-msgstr "Serviço"
+msgstr "Serviços"
 
 #: views/modals/playlist.html:11
 msgid "Playlist settings"
@@ -1105,50 +1089,40 @@ msgid "Maximum moist value"
 msgstr "Valor máximo umidade"
 
 #: views/modals/service.html:11
-#, fuzzy
-#| msgid "Notifications"
 msgid "Notification service settings"
-msgstr "Notificações"
+msgstr "Configurações do serviço de notificação"
 
 #: views/modals/service.html:76
 msgid "Show title"
-msgstr ""
+msgstr "Exibir título"
 
 #: views/modals/service.html:81
 msgid "Show a title on the display."
-msgstr ""
+msgstr "Mostrar título no visor."
 
 #: views/modals/service.html:93
 msgid "Receiver email"
 msgstr "Email do destinatário"
 
 #: views/modals/service.html:100
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "SMTP Server address"
-msgstr "Porta do servidor SMTP"
+msgstr "Endereço do servidor SMTP"
 
 #: views/modals/service.html:107
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "SMTP Server port"
 msgstr "Porta do servidor SMTP"
 
 #: views/modals/service.html:111
 msgid "The email notification service will autodetect SSL/TLS connections."
-msgstr ""
+msgstr "O serviço de notificação por e-mail irá autodetectar conexões SSL/TLS."
 
 #: views/modals/service.html:117
-#, fuzzy
-#| msgid "SMTP username"
 msgid "SMTP Server username"
-msgstr "Nome de usuário SMTP"
+msgstr "Nome de usuário no Servidor SMTP"
 
 #: views/modals/service.html:124
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "SMTP Server password"
-msgstr "Porta do servidor SMTP"
+msgstr "Senha no Servidor SMTP"
 
 #: views/modals/service.html:136
 msgid "API Token"
@@ -1163,28 +1137,20 @@ msgid "Bot Token"
 msgstr "Bot Token"
 
 #: views/modals/service.html:163
-#, fuzzy
-#| msgid "User name"
 msgid "Username"
 msgstr "Nome de usuário"
 
 #: views/modals/service.html:170
-#, fuzzy
-#| msgid "Proxy"
 msgid "HTTP Proxy"
-msgstr "Proxy"
+msgstr "Proxy HTTP"
 
 #: views/modals/service.html:182
-#, fuzzy
-#| msgid "Consumer key"
 msgid "Customer key"
-msgstr "Chave do consumidor"
+msgstr "Chave do consumidor (Customer key)"
 
 #: views/modals/service.html:189
-#, fuzzy
-#| msgid "Consumer secret"
 msgid "Customer secret"
-msgstr "Segredo do Consumidor"
+msgstr "Segredo do Consumidor (Customer secret)"
 
 #: views/modals/service.html:196
 msgid "Access token"
@@ -1403,28 +1369,20 @@ msgid "Preview"
 msgstr "Pré-visualização"
 
 #: views/notifications.html:10
-#, fuzzy
-#| msgid "Notifications"
 msgid "Notification services"
-msgstr "Notificações"
+msgstr "Serviços de notificação"
 
 #: views/notifications.html:18
-#, fuzzy
-#| msgid "Service"
 msgid "Add service"
-msgstr "Serviço"
+msgstr "Adicionar serviço"
 
 #: views/notifications.html:52
-#, fuzzy
-#| msgid "Notifications"
 msgid "Notification messages"
-msgstr "Notificações"
+msgstr "Mensagens de notificação"
 
 #: views/notifications.html:60
-#, fuzzy
-#| msgid "No messages"
 msgid "Add message"
-msgstr "Sem mensagens"
+msgstr "Adicionar mensagem"
 
 #: views/playlists.html:26 views/playlists.html:39
 msgid "# Files"
@@ -1451,10 +1409,8 @@ msgid "Manual mode"
 msgstr "Modo manual"
 
 #: views/relays.html:49
-#, fuzzy
-#| msgid "Replace"
 msgid "Replaced"
-msgstr "Substituir"
+msgstr "Substituído"
 
 #: views/relays.html:68
 msgid "Replace hardware"
@@ -1716,20 +1672,16 @@ msgid "Add new area"
 msgstr "Adicionar nova área"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new area"
 msgid "Add new message"
-msgstr "Adicionar nova área"
+msgstr "Adicionar nova mensagem"
 
 #: Missing text string
 msgid "Add new playlist"
 msgstr "Adicionar nova lista de reprodução"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new sensor"
 msgid "Add new service"
-msgstr "Adicionar novo sensor"
+msgstr "Adicionar novo serviço"
 
 #: Missing text string
 msgid "A new replacement reminder is created"
@@ -1780,10 +1732,8 @@ msgid "Current value"
 msgstr "Valor atual"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Relay"
 msgid "Delay"
-msgstr "Relé"
+msgstr "Atraso"
 
 #: Missing text string
 msgid "Delete area"
@@ -1802,10 +1752,8 @@ msgid "Delete enclosure"
 msgstr "Excluir anexo"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete area"
 msgid "Delete message"
-msgstr "Excluir área"
+msgstr "Excluir mensagem"
 
 #: Missing text string
 msgid "Delete playlist"
@@ -1836,10 +1784,8 @@ msgid "Edit enclosure"
 msgstr "Editar Anexos"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No messages"
 msgid "Edit message"
-msgstr "Sem mensagens"
+msgstr "Editar Mensagem"
 
 #: Missing text string
 msgid "Edit playlist"
@@ -1862,28 +1808,20 @@ msgid "Enter address"
 msgstr "Insira seu endereço"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter name"
 msgid "Enter a message"
-msgstr "Digite o nome"
+msgstr "Insira a mensagem"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter name"
 msgid "Enter a name"
-msgstr "Digite o nome"
+msgstr "Insira o nome"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter address"
 msgid "Enter an email address"
-msgstr "Insira seu endereço"
+msgstr "Insira o email"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter number"
 msgid "Enter a subject"
-msgstr "Inserir o número"
+msgstr "Insira o assunto"
 
 #: Missing text string
 msgid "Enter begin time"
@@ -1914,10 +1852,8 @@ msgid "Enter some information about this event"
 msgstr "Insira informações sobre o evento"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter address"
 msgid "Enter the address"
-msgstr "Insira seu endereço"
+msgstr "Insira o endereço"
 
 #: Missing text string
 msgid "Enter the amount"
@@ -1945,25 +1881,19 @@ msgstr "Digite a compensação"
 
 #: Missing text string
 msgid "Enter the SMTP server address name or ip"
-msgstr ""
+msgstr "Insira o endereço do servidor SMTP ou IP"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "Enter the SMTP server password"
-msgstr "Porta do servidor SMTP"
+msgstr "Insira a senha do servidor SMTP"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "Enter the SMTP server port number"
-msgstr "Porta do servidor SMTP"
+msgstr "Insira a porta do servidor SMTP"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP username"
 msgid "Enter the SMTP server username"
-msgstr "Nome de usuário SMTP"
+msgstr "Insira o nome de usuário no servidor SMTP"
 
 #: Missing text string
 msgid "Enter width"
@@ -2035,19 +1965,15 @@ msgstr "Diferença máxima"
 
 #: Missing text string
 msgid "Messages per minute"
-msgstr ""
+msgstr "Mensagens por minuto"
 
 #: Missing text string
-#, fuzzy
-#| msgid "5 minutes"
 msgid "minutes"
-msgstr "5 minutos"
+msgstr "minutos"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No repeat"
 msgid "No reminder"
-msgstr "Não repetir"
+msgstr "Não há lembrete"
 
 #: Missing text string
 msgid "Not all required fields are entered correctly."
@@ -2102,10 +2028,8 @@ msgid "Save OK"
 msgstr "Salvar OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Ignore relay"
 msgid "Scan for new relays"
-msgstr "Ignorar relé"
+msgstr "Procurar novos relés"
 
 #: Missing text string
 msgid "Select a mode"
