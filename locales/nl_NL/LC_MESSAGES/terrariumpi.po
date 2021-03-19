@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-02-08 14:46+CET\n"
-"PO-Revision-Date: 2021-02-08 13:53+0000\n"
+"PO-Revision-Date: 2021-03-20 14:43+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
@@ -3364,11 +3364,11 @@ msgstr "Consumer secret"
 
 #: views/notifications.tpl:119
 msgid "Access token"
-msgstr "Access token"
+msgstr "Toegangstoken"
 
 #: views/notifications.tpl:123
 msgid "Access token secret"
-msgstr "Access token secret"
+msgstr "Toegang sleutel geheim"
 
 #: views/notifications.tpl:134
 msgid "Pushover"
@@ -3380,7 +3380,7 @@ msgstr "API Token"
 
 #: views/notifications.tpl:148
 msgid "User key"
-msgstr "User key"
+msgstr "Gebruikerssleutel"
 
 #: views/notifications.tpl:159
 msgid "Telegram"
@@ -3388,7 +3388,7 @@ msgstr "Telegram"
 
 #: views/notifications.tpl:169
 msgid "Bot Token"
-msgstr "Bot Token"
+msgstr "Bot-token"
 
 #: views/notifications.tpl:173
 msgid "Username"
