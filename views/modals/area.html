@@ -72,7 +72,7 @@
   <div class="col-12 col-sm-6 col-md-3 col-lg-2">
     <div class="form-group">
       <label for="area_lights_min_day_hours">{{ _('Minimum hours') }}</label>
-      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_min_day_hours" name="min_day_hours" placeholder="{{ _('Enter the minimum amount of hours') }}">
+      <input type="number" step="0.001" min="0" max="24" class="form-control" id="area_lights_min_day_hours" name="min_day_hours" placeholder="{{ _('Enter the minimum amount of hours') }}">
       <small class="text-muted">
         {{ _('The minimum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is shorter then this minimum value, the day will be extended to this minimum value.') }}
       </small>
@@ -84,7 +84,7 @@
   <div class="col-12 col-sm-6 col-md-3 col-lg-2">
     <div class="form-group">
       <label for="area_lights_max_day_hours">{{ _('Maximum hours') }}</label>
-      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_max_day_hours" name="max_day_hours" placeholder="{{ _('Enter the maximum amount of hours') }}">
+      <input type="number" step="0.001" min="0" max="24" class="form-control" id="area_lights_max_day_hours" name="max_day_hours" placeholder="{{ _('Enter the maximum amount of hours') }}">
       <small class="text-muted">
         {{ _('The maximum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is longer then this maximum value, the day will be shortend to this maximum value.') }}
       </small>
@@ -96,7 +96,7 @@
   <div class="col-12 col-sm-6 col-md-3 col-lg-2">
     <div class="form-group">
       <label for="area_lights_shift_day_hours">{{ _('Hours shift') }}</label>
-      <input type="number" step="0.01" min="-12.0" max="12.0" class="form-control" id="area_lights_shift_day_hours" name="shift_day_hours" placeholder="{{ _('Enter the amount of hours to shift') }}">
+      <input type="number" step="0.001" min="-12.0" max="12.0" class="form-control" id="area_lights_shift_day_hours" name="shift_day_hours" placeholder="{{ _('Enter the amount of hours to shift') }}">
       <small class="text-muted">
         {{ _('The amount of time to shift in hours based on the sun rise time. Negative values will make the day start earlier.') }}
       </small>
@@ -434,25 +434,25 @@
   <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
     <div class="form-group">
       <label for="area_watertank_volume">{{ _('Volume') }}</label>
-      <input type="number" step="0.01" min="0" class="form-control" id="area_watertank_volume" name="watertank_volume" required="required" placeholder="{{ _('Enter the amount') }}">
+      <input type="number" step="0.001" min="0" class="form-control" id="area_watertank_volume" name="watertank_volume" required="required" placeholder="{{ _('Enter the amount') }}">
     </div>
   </div>
   <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
     <div class="form-group">
       <label for="area_watertank_height">{{ _('Height') }}</label>
-      <input type="number" step="0.01" min="0" class="form-control" id="area_watertank_height" name="watertank_height" required="required" placeholder="{{ _('Enter the height') }}">
+      <input type="number" step="0.001" min="0" class="form-control" id="area_watertank_height" name="watertank_height" required="required" placeholder="{{ _('Enter the height') }}">
     </div>
   </div>
   <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
     <div class="form-group">
       <label for="area_watertank_offset">{{ _('Offset') }}</label>
-      <input type="number" step="0.01" min="0" class="form-control" id="area_watertank_offset" name="watertank_offset" required="required" placeholder="{{ _('Enter the offset') }}">
+      <input type="number" step="0.001" min="0" class="form-control" id="area_watertank_offset" name="watertank_offset" required="required" placeholder="{{ _('Enter the offset') }}">
     </div>
   </div>
   <div class="col col-12 col-sm-6 col-md-3 col-lg-3 area_all">
     <div class="form-group">
       <label for="area_day_night_difference">{{ _('Day/night difference') }}</label>
-      <input type="number" step="0.01" class="form-control" id="area_day_night_difference" name="day_night_difference" placeholder="{{ _('Day/night difference') }}">
+      <input type="number" step="0.001" class="form-control" id="area_day_night_difference" name="day_night_difference" placeholder="{{ _('Day/night difference') }}">
     </div>
   </div>
   <div class="col col-12 col-sm-6 col-md-3 col-lg-3 area_all">

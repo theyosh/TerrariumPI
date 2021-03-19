@@ -185,7 +185,6 @@ class terrariumCache(terrariumSingleton):
 
 class terrariumUtils():
 
-
   @staticmethod
   def generate_uuid():
     return str(uuid.uuid4())
