@@ -814,16 +814,11 @@ class terrariumEngine(object):
           # Update existing webcam with new address
           self.webcams[webcam.id].address = webcam.address
 
-        # Take a measurement from the webcam
+        # # Take a shot from the webcam
         relays = [] if webcam.flash is None else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
         value = self.webcams[webcam.id].update(relays)
 
-        if 'motion' == webcam.archive['state']:
-          self.webcams[webcam.id].motion_capture(webcam.motion['frame'], int(webcam.motion['threshold']), int(webcam.motion['area']), webcam.motion['boxes'])
-        elif 'disabled' != webcam.archive['state']:
-          self.webcams[webcam.id].archive(int(webcam.archive['state']))
-
-        logger.info(f'Loaded {webcam} value {value} in {time.time()-start:.2f} seconds.')
+        logger.info(f'Loaded {webcam} in {time.time()-start:.2f} seconds.')
 
   # -= NEW =-
   def _update_webcams(self):
@@ -834,10 +829,31 @@ class terrariumEngine(object):
         relays = [] if webcam.flash is None else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
         self.webcams[webcam.id].update(relays)
 
-        if 'motion' == webcam.archive['state']:
-          self.webcams[webcam.id].motion_capture(webcam.motion['frame'], int(webcam.motion['threshold']), int(webcam.motion['area']), webcam.motion['boxes'])
-        elif 'disabled' != webcam.archive['state']:
-          self.webcams[webcam.id].archive(int(webcam.archive['state']))
+        if 'disabled' != webcam.archive['state']:
+          # Check archiving/motion settings
+
+          # Check light status
+          if 'ignore' != webcam.archive['light']:
+            # Default state is that the lights are on....
+            current_state = 'on' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on else 'off'
+
+            if webcam.archive['light'] != current_state:
+              print(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
+              continue
+
+          # Check door status
+          if 'ignore' != webcam.archive['door']:
+            # Default state is that the doors are closed....
+            current_state = 'close' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].door_closed else 'open'
+
+            if webcam.archive['door'] != current_state:
+              print(f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}')
+              continue
+
+          if 'motion' == webcam.archive['state']:
+            self.webcams[webcam.id].motion_capture(webcam.motion['frame'], int(webcam.motion['threshold']), int(webcam.motion['area']), webcam.motion['boxes'])
+          else:
+            self.webcams[webcam.id].archive(int(webcam.archive['state']))
 
         logger.info(f'Updated {webcam} in {time.time()-start:.2f} seconds.')
 
