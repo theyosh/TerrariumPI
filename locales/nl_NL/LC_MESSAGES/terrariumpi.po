@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-03-12 17:44+CET\n"
-"PO-Revision-Date: 2021-02-08 23:12+0000\n"
+"PO-Revision-Date: 2021-03-19 13:59+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,16 +20,12 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: terrariumArea.py:33
-#, fuzzy
-#| msgid "Light"
 msgid "Lighting"
-msgstr "Licht"
+msgstr "Verlichting"
 
 #: terrariumArea.py:39
-#, fuzzy
-#| msgid "Settings"
 msgid "Heating"
-msgstr "Instellingen"
+msgstr "Verwarming"
 
 #: terrariumArea.py:45
 msgid "Cooling"
@@ -40,8 +36,6 @@ msgid "Humidity"
 msgstr "Luchtvochtigheid"
 
 #: terrariumArea.py:57
-#, fuzzy
-#| msgid "Watertank"
 msgid "Water tank"
 msgstr "Watertank"
 
@@ -170,22 +164,16 @@ msgid "last update"
 msgstr "laatste wijziging"
 
 #: terrariumNotification.py:63
-#, fuzzy
-#| msgid "Authentication"
 msgid "Authentication login error"
-msgstr "Authenticatie"
+msgstr "Authenticatie inlogfout"
 
 #: terrariumNotification.py:64
-#, fuzzy
-#| msgid "System logging"
 msgid "System warning"
-msgstr "Systeemregistratie"
+msgstr "Systeemwaarschuwing"
 
 #: terrariumNotification.py:65
-#, fuzzy
-#| msgid "System load"
 msgid "System error"
-msgstr "Systeembelasting"
+msgstr "Systeemfout"
 
 #: terrariumNotification.py:204
 msgid "Display"
@@ -204,10 +192,8 @@ msgid "Telegram"
 msgstr "Telegram"
 
 #: terrariumNotification.py:224
-#, fuzzy
-#| msgid "Main lights"
 msgid "Traffic light"
-msgstr "Hoofd verlichting"
+msgstr "Verkeerslicht"
 
 #: terrariumNotification.py:229
 msgid "Twitter"
@@ -318,10 +304,8 @@ msgstr "Week"
 
 #: views/buttons.html:41 views/dashboard.html:291 views/relays.html:47
 #: views/sensors.html:51
-#, fuzzy
-#| msgid "Months"
 msgid "Month"
-msgstr "Maanden"
+msgstr "Maand"
 
 #: views/buttons.html:42 views/dashboard.html:292 views/relays.html:48
 #: views/sensors.html:52
@@ -366,30 +350,24 @@ msgid "Power usage in Watt"
 msgstr "Stroomverbruik in Watt"
 
 #: views/dashboard.html:59
-#, fuzzy
-#| msgid "Water flow in L/m"
 msgid "Water flow in %s"
-msgstr "Waterverbruik in L/m"
+msgstr "Waterverbruik in %s"
 
 #: views/dashboard.html:73
-#, fuzzy
-#| msgid "Total power"
 msgid "Total power usage"
-msgstr "Totaal vermogen"
+msgstr "Totaal stroomverbruik"
 
 #: views/dashboard.html:74 views/relays.html:26
 msgid "kWh"
-msgstr ""
+msgstr "kWh"
 
 #: views/dashboard.html:78 views/dashboard.html:96 views/weather.html:33
 msgid "in"
 msgstr "in"
 
 #: views/dashboard.html:91
-#, fuzzy
-#| msgid "Total water"
 msgid "Total water usage"
-msgstr "Totaal water"
+msgstr "Totaal waterverbruik"
 
 #: views/dashboard.html:108 views/enclosures.html:2
 #: views/includes/sidebar.html:210
@@ -510,10 +488,8 @@ msgid "Sensors"
 msgstr "Sensoren"
 
 #: views/includes/sidebar.html:96
-#, fuzzy
-#| msgid "No sensors"
 msgid "New sensor"
-msgstr "Geen sensoren"
+msgstr "Nieuwe sensor"
 
 #: views/includes/sidebar.html:105 views/modals/area.html:177
 #: views/modals/area.html:218 views/modals/area.html:605
@@ -522,22 +498,16 @@ msgid "Relays"
 msgstr "Schakelaars"
 
 #: views/includes/sidebar.html:119
-#, fuzzy
-#| msgid "No relays"
 msgid "New relay"
-msgstr "Geen schakelaars"
+msgstr "Nieuwe schakelaar"
 
 #: views/includes/sidebar.html:125
-#, fuzzy
-#| msgid "Select relays"
 msgid "Scan relays"
-msgstr "Selecteer schakelaars"
+msgstr "Scan schakelaars"
 
 #: views/includes/sidebar.html:148
-#, fuzzy
-#| msgid "No buttons"
 msgid "New button"
-msgstr "Geen knoppen"
+msgstr "Nieuwe knop"
 
 #: views/includes/sidebar.html:157 views/modals/enclosure.html:50
 #: views/webcams.html:2
@@ -549,10 +519,8 @@ msgid "Show"
 msgstr "Toon"
 
 #: views/includes/sidebar.html:171
-#, fuzzy
-#| msgid "No webcams"
 msgid "New webcam"
-msgstr "Geen webcams"
+msgstr "Nieuwe webcam"
 
 #: views/includes/sidebar.html:188
 msgid "Files"
@@ -560,32 +528,24 @@ msgstr "Bestanden"
 
 #: views/includes/sidebar.html:194 views/modals/area.html:428
 #: views/modals/area.html:469 views/playlists.html:2 views/playlists.html:10
-#, fuzzy
-#| msgid "Files / Playlists"
 msgid "Playlists"
-msgstr "Bestanden / afspeellijsten"
+msgstr "Afspeellijsten"
 
 #: views/includes/sidebar.html:201
-#, fuzzy
-#| msgid "Audio playlist"
 msgid "New playlist"
-msgstr "Audio afspeellijst"
+msgstr "Nieuwe afspeellijst"
 
 #: views/includes/sidebar.html:218
 msgid "List"
 msgstr "Lijst"
 
 #: views/includes/sidebar.html:224
-#, fuzzy
-#| msgid "No enclosures"
 msgid "New enclosure"
-msgstr "Geen verblijven"
+msgstr "Nieuwe verblijf"
 
 #: views/includes/sidebar.html:230
-#, fuzzy
-#| msgid "Add new area"
 msgid "New area"
-msgstr "Voeg een nieuw gebied toe"
+msgstr "Nieuw gebied"
 
 #: views/includes/sidebar.html:239 views/settings.html:16
 msgid "System"
@@ -663,11 +623,11 @@ msgstr "Verblijf"
 
 #: views/modals/area.html:22
 msgid "Select the enclosure where this area belongs to."
-msgstr ""
+msgstr "Selecteer het verblijf waartoe dit gebied behoort."
 
 #: views/modals/area.html:35
 msgid "Select the type of area. Each type has its own extra options and logic."
-msgstr ""
+msgstr "Selecteer het type gebied. Elk gebied heeft zijn eigen logica."
 
 #: views/modals/area.html:38 views/modals/area.html:81
 #: views/modals/area.html:336
@@ -676,11 +636,11 @@ msgstr "Fout"
 
 #: views/modals/area.html:47
 msgid "Enter a name for this area."
-msgstr ""
+msgstr "Voer een naam in voor dit gebied."
 
 #: views/modals/area.html:50
 msgid "Give at least a name of minimal 1 character."
-msgstr ""
+msgstr "Geef minimaal een naam van minimaal 1 karakter."
 
 #: views/modals/area.html:61 views/modals/area.html:285
 #: views/modals/area.html:490 views/modals/webcam.html:89
@@ -707,6 +667,8 @@ msgid ""
 "Select the mode of this area. This will change the timing and durations of "
 "the relays."
 msgstr ""
+"Selecteer de modus van dit gebied. Dit bepaald de timing en duur van de "
+"schakelaars."
 
 #: views/modals/area.html:75 views/modals/area.html:330
 msgid "Minimum hours"
@@ -741,10 +703,8 @@ msgid ""
 msgstr ""
 
 #: views/modals/area.html:105 views/modals/area.html:348
-#, fuzzy
-#| msgid "Please enter a number value between 1 and 100"
 msgid "Enter a value between -12 and 12."
-msgstr "Voer een getal in tussen 0 en 100"
+msgstr "Voer een waarde in tussen -12 en 12."
 
 #: views/modals/area.html:112 views/modals/area.html:286
 #: views/modals/area.html:355 views/modals/area.html:491
@@ -764,6 +724,8 @@ msgid ""
 "Below you can per select the relays and timer settings per period daytime "
 "and nighttime."
 msgstr ""
+"Hieronder kunt u de relais- en timerinstellingen per periode dag en nacht "
+"selecteren."
 
 #: views/modals/area.html:128 views/modals/area.html:379
 msgid "Day settings"
@@ -781,13 +743,13 @@ msgstr "Begintijd"
 
 #: views/modals/area.html:138 views/modals/area.html:389
 msgid "The time of the day when the relays are toggled on each day."
-msgstr ""
+msgstr "Het tijdstip van de dag waarop de relais elke dag worden ingeschakeld."
 
 #: views/modals/area.html:141 views/modals/area.html:153
 #: views/modals/area.html:165 views/modals/area.html:392
 #: views/modals/area.html:404 views/modals/area.html:416
 msgid "Enter a valid time of the day."
-msgstr ""
+msgstr "Voer een geldige tijd in."
 
 #: views/modals/area.html:147 views/modals/area.html:200
 #: views/modals/area.html:398 views/modals/area.html:451
@@ -797,7 +759,7 @@ msgstr "Eindtijd"
 
 #: views/modals/area.html:150 views/modals/area.html:401
 msgid "The time of the day when the relays are toggled off each day."
-msgstr ""
+msgstr "Het tijdstip van de dag waarop de relais elke dag worden uitgeschakeld."
 
 #: views/modals/area.html:159 views/modals/area.html:206
 #: views/modals/area.html:410 views/modals/area.html:457
@@ -848,10 +810,8 @@ msgid "Soundcard"
 msgstr "Geluidskaart"
 
 #: views/modals/area.html:306
-#, fuzzy
-#| msgid "Holds the soundcard that is used for playing audio."
 msgid "Select the soundcard that is used for this enclosure."
-msgstr "Bevat de geluidskaart dat wordt gebruikt voor het afspelen van audio."
+msgstr "Selecteer de geluidskaart die voor dit verblijf wordt gebruikt."
 
 #: views/modals/area.html:507 views/modals/playlist.html:23
 #: views/playlists.html:27 views/playlists.html:40
@@ -933,14 +893,11 @@ msgid "Dimmer of duration"
 msgstr "Dimmer uit tijdsduur"
 
 #: views/modals/area.html:706
-#, fuzzy
-#| msgid ""
-#| "Set the dimmer times for going on and off. Max duration is 100 mimutes."
 msgid ""
 "Select the duration for the dimmer to go to on or off in minutes. Max "
 "duration is 180 minutes."
 msgstr ""
-"Stel de dimmertijden in voor in- en uitschakelen. Maximale duur is 100 "
+"Stel de dimmer tijden in voor in- en uitschakelen. Maximale duur is 180 "
 "minuten."
 
 #: views/modals/area.html:713
@@ -956,6 +913,8 @@ msgid ""
 "Select the delay in mintues that a relay waits before it turns on. Max delay "
 "is 180 minutes."
 msgstr ""
+"Selecteer de vertraging in minuten die een relais wacht voordat het wordt "
+"ingeschakeld. Max vertraging is 180 minuten."
 
 #: views/modals/area.html:733
 msgid "Step change"
@@ -1035,24 +994,20 @@ msgid "Years"
 msgstr "Jaren"
 
 #: views/modals/message.html:11
-#, fuzzy
-#| msgid "Area settings"
 msgid "Message settings"
-msgstr "Gebiedsinstellingen"
+msgstr "Berichtinstellingen"
 
 #: views/modals/message.html:18
-#, fuzzy
-#| msgid "Message"
 msgid "Message type"
-msgstr "Bericht"
+msgstr "Berichttype"
 
 #: views/modals/message.html:27
 msgid "Subject"
-msgstr ""
+msgstr "Onderwerp"
 
 #: views/modals/message.html:39 views/modals/service.html:34
 msgid "Rate limit"
-msgstr ""
+msgstr "Limit"
 
 #: views/modals/message.html:47 views/modals/service.html:42
 msgid "Enabled"
@@ -1064,19 +1019,15 @@ msgstr "Bericht"
 
 #: views/modals/message.html:71
 msgid "Place holders"
-msgstr ""
+msgstr "Plaatshouders"
 
 #: views/modals/message.html:84
-#, fuzzy
-#| msgid "Service"
 msgid "Services"
-msgstr "Dienst"
+msgstr "Diensten"
 
 #: views/modals/playlist.html:11
-#, fuzzy
-#| msgid "Relay settings"
 msgid "Playlist settings"
-msgstr "Schakelaar instellingen"
+msgstr "Afspeellijst instellingen"
 
 #: views/modals/playlist.html:30 views/playlists.html:28
 #: views/playlists.html:41
@@ -1085,10 +1036,8 @@ msgstr "Random"
 
 #: views/modals/playlist.html:42 views/playlists.html:29
 #: views/playlists.html:42
-#, fuzzy
-#| msgid "Repeat every"
 msgid "Repeat"
-msgstr "Herhaal elke"
+msgstr "Herhaal"
 
 #: views/modals/relay.html:11
 msgid "Relay settings"
@@ -1131,48 +1080,38 @@ msgid "Maximum moist value"
 msgstr "Minimale vochtwaarde"
 
 #: views/modals/service.html:11
-#, fuzzy
-#| msgid "Notifications"
 msgid "Notification service settings"
-msgstr "Meldingen"
+msgstr "Instellingen voor meldingsservices"
 
 #: views/modals/service.html:76
 msgid "Show title"
-msgstr ""
+msgstr "Titel weergeven"
 
 #: views/modals/service.html:81
 msgid "Show a title on the display."
-msgstr ""
+msgstr "Toon een titel op het scherm."
 
 #: views/modals/service.html:93
 msgid "Receiver email"
 msgstr "E-mail van de ontvager"
 
 #: views/modals/service.html:100
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "SMTP Server address"
-msgstr "SMTP-serverpoort"
+msgstr "SMTP-server adres"
 
 #: views/modals/service.html:107
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "SMTP Server port"
 msgstr "SMTP-serverpoort"
 
 #: views/modals/service.html:111
 msgid "The email notification service will autodetect SSL/TLS connections."
-msgstr ""
+msgstr "De e-mailmeldingsservice detecteert automatisch SSL / TLS-verbindingen."
 
 #: views/modals/service.html:117
-#, fuzzy
-#| msgid "SMTP username"
 msgid "SMTP Server username"
-msgstr "SMTP-gebruikersnaam"
+msgstr "SMTP-server gebruikersnaam"
 
 #: views/modals/service.html:124
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "SMTP Server password"
 msgstr "SMTP-serverpoort"
 
@@ -1182,43 +1121,35 @@ msgstr "API Token"
 
 #: views/modals/service.html:143
 msgid "User key"
-msgstr "User key"
+msgstr "Gebruikerssleutel"
 
 #: views/modals/service.html:156
 msgid "Bot Token"
-msgstr "Bot Token"
+msgstr "Bot-token"
 
 #: views/modals/service.html:163
-#, fuzzy
-#| msgid "User name"
 msgid "Username"
 msgstr "Gebruikersnaam"
 
 #: views/modals/service.html:170
-#, fuzzy
-#| msgid "Proxy"
 msgid "HTTP Proxy"
-msgstr "PRoxy"
+msgstr "HTTP-proxy"
 
 #: views/modals/service.html:182
-#, fuzzy
-#| msgid "Consumer key"
 msgid "Customer key"
-msgstr "Consumer key"
+msgstr "Klantsleutel"
 
 #: views/modals/service.html:189
-#, fuzzy
-#| msgid "Consumer secret"
 msgid "Customer secret"
-msgstr "Consumer secret"
+msgstr "Klant geheim"
 
 #: views/modals/service.html:196
 msgid "Access token"
-msgstr "Access token"
+msgstr "Toegangstoken"
 
 #: views/modals/service.html:203
 msgid "Access token secret"
-msgstr "Access token secret"
+msgstr "Toegang sleutel geheim"
 
 #: views/modals/service.html:214
 msgid "Full post url"
@@ -1427,34 +1358,24 @@ msgid "Preview"
 msgstr "Voorbeeld"
 
 #: views/notifications.html:10
-#, fuzzy
-#| msgid "Notifications"
 msgid "Notification services"
-msgstr "Meldingen"
+msgstr "Meldingsdiensten"
 
 #: views/notifications.html:18
-#, fuzzy
-#| msgid "Service"
 msgid "Add service"
-msgstr "Dienst"
+msgstr "Voeg een dienst toe"
 
 #: views/notifications.html:52
-#, fuzzy
-#| msgid "Notifications"
 msgid "Notification messages"
-msgstr "Meldingen"
+msgstr "Meldingsberichten"
 
 #: views/notifications.html:60
-#, fuzzy
-#| msgid "No messages"
 msgid "Add message"
-msgstr "Geen berichten"
+msgstr "Bericht toevoegen"
 
 #: views/playlists.html:26 views/playlists.html:39
-#, fuzzy
-#| msgid "Files"
 msgid "# Files"
-msgstr "Bestanden"
+msgstr "# Bestanden"
 
 #: views/relays.html:9
 msgid "No relays"
@@ -1466,21 +1387,17 @@ msgstr "Voeg een nieuwe schakelaar toe"
 
 #: views/relays.html:26
 msgid "L"
-msgstr ""
+msgstr "L"
 
 #: views/relays.html:26
-#, fuzzy
-#| msgid "Total space"
 msgid "Total"
-msgstr "Totale ruimte"
+msgstr "Totaal"
 
 #: views/relays.html:38 views/relays.html:72
 msgid "Manual mode"
 msgstr "Handmatige bediening"
 
 #: views/relays.html:49
-#, fuzzy
-#| msgid "Replace"
 msgid "Replaced"
 msgstr "Vervangen"
 
@@ -1501,10 +1418,8 @@ msgid "Add new sensor"
 msgstr "Voeg nieuwe sensor toe"
 
 #: views/settings.html:5
-#, fuzzy
-#| msgid "General information"
 msgid "Show/hide help information"
-msgstr "Algemene informatie"
+msgstr "Help-informatie weergeven / verbergen"
 
 #: views/settings.html:28
 msgid "Pi power usage"
@@ -1534,24 +1449,20 @@ msgid "Port number"
 msgstr "Poort nummer"
 
 #: views/settings.html:55
-#, fuzzy
-#| msgid "Authentication"
 msgid "Authentication mode"
-msgstr "Authenticatie"
+msgstr "Authenticatiemodus"
 
 #: views/settings.html:58
 msgid "Full authentication"
 msgstr "Volledige authenticatie"
 
 #: views/settings.html:59
-#, fuzzy
-#| msgid "Only changes"
 msgid "Only for changes"
-msgstr "Alleen veranderingen"
+msgstr "Alleen voor wijzigingen"
 
 #: views/settings.html:62
 msgid "Always authenticate or only when changes are being made."
-msgstr ""
+msgstr "Verifieer altijd of alleen wanneer er wijzigingen worden aangebracht."
 
 #: views/settings.html:67
 msgid "User name"
@@ -1658,10 +1569,8 @@ msgid "Show min and max values in gauge graphs"
 msgstr "Toon min- en max- waarden in meter grafieken"
 
 #: views/settings.html:214
-#, fuzzy
-#| msgid "Hide environment on dashboard"
 msgid "Hide enclosures on dashboard"
-msgstr "Verberg omgeving op dashboard"
+msgstr "Verberg verblijven op het dashboard"
 
 #: views/settings.html:223
 msgid "All gauges on a single page"
@@ -1752,22 +1661,16 @@ msgid "Add new area"
 msgstr "Voeg een nieuw gebied toe"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new area"
 msgid "Add new message"
-msgstr "Voeg een nieuw gebied toe"
+msgstr "Voeg een nieuw bericht toe"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new relay"
 msgid "Add new playlist"
-msgstr "Voeg een nieuwe schakelaar toe"
+msgstr "Nieuwe afspeellijst toevoegen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new sensor"
 msgid "Add new service"
-msgstr "Voeg nieuwe sensor toe"
+msgstr "Nieuwe dienst toevoegen"
 
 #: Missing text string
 msgid "A new replacement reminder is created"
@@ -1775,7 +1678,7 @@ msgstr "Er wordt een nieuwe vervangingsherinnering gemaakt"
 
 #: Missing text string
 msgid "Audio file is being processed. Please wait..."
-msgstr ""
+msgstr "Audiobestand wordt verwerkt. Even geduld aub..."
 
 #: Missing text string
 msgid "Audio file is deleted"
@@ -1791,7 +1694,7 @@ msgstr "kalibratie"
 
 #: Missing text string
 msgid "Changed relay {name} to {state}"
-msgstr ""
+msgstr "Relay {name} gewijzigd in {state}"
 
 #: Missing text string
 msgid "Change error"
@@ -1810,20 +1713,16 @@ msgid "CPU Temp."
 msgstr "CPU Temp."
 
 #: Missing text string
-#, fuzzy
-#| msgid "Conductivity"
 msgid "Current activity"
-msgstr "Geleidingsvermogen"
+msgstr "Huidige activiteit"
 
 #: Missing text string
 msgid "Current value"
 msgstr "Huidige waarde"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Relay"
 msgid "Delay"
-msgstr "Schakelaar"
+msgstr "Vertraging"
 
 #: Missing text string
 msgid "Delete area"
@@ -1842,16 +1741,12 @@ msgid "Delete enclosure"
 msgstr "Verwijder verblijf"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete area"
 msgid "Delete message"
-msgstr "Gebied verwijderen"
+msgstr "Bericht verwijderen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete relay"
 msgid "Delete playlist"
-msgstr "Verwijder schakelaar"
+msgstr "Afspeellijst verwijderen"
 
 #: Missing text string
 msgid "Delete relay"
@@ -1878,16 +1773,12 @@ msgid "Edit enclosure"
 msgstr "Bewerk verblijf"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No messages"
 msgid "Edit message"
-msgstr "Geen berichten"
+msgstr "Bericht bewerken"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Audio playlist"
 msgid "Edit playlist"
-msgstr "Audio afspeellijst"
+msgstr "Afspeellijst bewerken"
 
 #: Missing text string
 msgid "Edit relay"
@@ -1906,28 +1797,20 @@ msgid "Enter address"
 msgstr "Vul het adres in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter name"
 msgid "Enter a message"
-msgstr "Naam invoeren"
+msgstr "Voer een bericht in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter name"
 msgid "Enter a name"
-msgstr "Naam invoeren"
+msgstr "Vul een naam in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter address"
 msgid "Enter an email address"
-msgstr "Vul het adres in"
+msgstr "Vul een e-mailadres in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter number"
 msgid "Enter a subject"
-msgstr "Voer nummer in"
+msgstr "Vul een onderwerp in"
 
 #: Missing text string
 msgid "Enter begin time"
@@ -1950,18 +1833,14 @@ msgid "Enter number"
 msgstr "Voer nummer in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter address"
 msgid "Enter search terms"
-msgstr "Vul het adres in"
+msgstr "Voer zoektermen in"
 
 #: Missing text string
 msgid "Enter some information about this event"
-msgstr ""
+msgstr "Voer wat informatie over dit evenement in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter address"
 msgid "Enter the address"
 msgstr "Vul het adres in"
 
@@ -1991,25 +1870,19 @@ msgstr "Voer de offset in"
 
 #: Missing text string
 msgid "Enter the SMTP server address name or ip"
-msgstr ""
+msgstr "Voer de adresnaam of ip van de SMTP-server in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "Enter the SMTP server password"
-msgstr "SMTP-serverpoort"
+msgstr "Voer het SMTP-serverwachtwoord in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "Enter the SMTP server port number"
-msgstr "SMTP-serverpoort"
+msgstr "Voer het SMTP-serverpoortnummer in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP username"
 msgid "Enter the SMTP server username"
-msgstr "SMTP-gebruikersnaam"
+msgstr "Voer de gebruikersnaam van de SMTP-server in"
 
 #: Missing text string
 msgid "Enter width"
@@ -2020,16 +1893,12 @@ msgid "Error!"
 msgstr "Fout!"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No error messages"
 msgid "Error messages"
-msgstr "Geen fout berichten"
+msgstr "Fout berichten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Calendar title"
 msgid "Event title"
-msgstr "Kalender titel"
+msgstr "Evenement titel"
 
 #: Missing text string
 msgid "Export button"
@@ -2056,20 +1925,14 @@ msgid "Hardware replacement is logged in the calendar"
 msgstr "Vervanging van hardware wordt vastgelegd in de kalender"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Ingore button"
 msgid "Ignore button"
 msgstr "Negeer knop"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Ingore relay"
 msgid "Ignore relay"
 msgstr "Negeer schakelaar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Ingore sensor"
 msgid "Ignore sensor"
 msgstr "Negeer sensor"
 
@@ -2091,19 +1954,15 @@ msgstr "Max verschil"
 
 #: Missing text string
 msgid "Messages per minute"
-msgstr ""
+msgstr "Berichten per minuut"
 
 #: Missing text string
-#, fuzzy
-#| msgid "5 minutes"
 msgid "minutes"
-msgstr "5 minuten"
+msgstr "minuten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No repeat"
 msgid "No reminder"
-msgstr "Niet herhalen"
+msgstr "Geen herinnering"
 
 #: Missing text string
 msgid "Not all required fields are entered correctly."
@@ -2158,32 +2017,24 @@ msgid "Save OK"
 msgstr "Opslaan OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Ingore relay"
 msgid "Scan for new relays"
-msgstr "Negeer schakelaar"
+msgstr "Scan voor nieuwe schakelaars"
 
 #: Missing text string
 msgid "Select a mode"
 msgstr "Selecteer een modus"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select a mode"
 msgid "Select amount"
-msgstr "Selecteer een modus"
+msgstr "Selecteer aantal"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select area type"
 msgid "Select an area type"
 msgstr "Selecteer gebiedstype"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete enclosure"
 msgid "Select an enclosure"
-msgstr "Verwijder verblijf"
+msgstr "Selecteer een verblijf"
 
 #: Missing text string
 msgid "Select archive door state"
@@ -2198,20 +2049,16 @@ msgid "Select archiving"
 msgstr "Archiveren selecteren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select a mode"
 msgid "Select a soundcard"
-msgstr "Selecteer een modus"
+msgstr "Selecteer een geluidskaart"
 
 #: Missing text string
 msgid "Select a state"
 msgstr "Kies een status"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete audio file"
 msgid "Select audio files"
-msgstr "Audio-bestand verwijderen"
+msgstr "Selecteer audio-bestanden"
 
 #: Missing text string
 msgid "Select available doors"
@@ -2230,16 +2077,12 @@ msgid "Select language"
 msgstr "Selecteer taal"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select type"
 msgid "Select period"
-msgstr "Selecteer type"
+msgstr "Selecteer periode"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select relays"
 msgid "Select playlists"
-msgstr "Selecteer schakelaars"
+msgstr "Selecteer afspeellijsten"
 
 #: Missing text string
 msgid "Select relays"
@@ -2310,10 +2153,8 @@ msgid "Upload ok"
 msgstr "Upload ok"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No warning messages"
 msgid "Warning messages"
-msgstr "Geen waarschuwing berichten"
+msgstr "Waarschuwingsberichten"
 
 #: Missing text string
 msgid "Weather data source url"
