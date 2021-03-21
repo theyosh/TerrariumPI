@@ -397,6 +397,7 @@ class terrariumWebcam(object):
 
   @rotation.setter
   def rotation(self, value):
+    value = value.lower()
     if value is not None and str(value).strip() in self.__VALID_ROTATIONS:
       self._device['rotation'] = str(value).strip()
 
