@@ -754,9 +754,6 @@ class terrariumEngine(object):
 
   # -= NEW =-
   def button_action(self, button, state):
-    # if '3043a0de64fb36a944326b3c9cf379b0' == button:
-    #   print(f'Button action: {button} == {state}')
-
     with orm.db_session():
       button = Button[button]
       button.update(state,True)
@@ -772,7 +769,6 @@ class terrariumEngine(object):
 
         # Get a list of all the used doors and their status
         door_status = []
-#        for door in Button.select(lambda d: d.enclosure):
         for door in button.enclosure.doors:
           status = 'closed' if door.value else 'open'
           door_status.append({
@@ -1277,7 +1273,7 @@ class terrariumEngine(object):
     averages = []
     for avg_type in sorted(tmp.keys()):
       averages.append({
-        'title' : _('average {sensor_type}').format(sensor_type=avg_type).capitalize() + ':',
+        'title' : _('average {sensor_type}').format(sensor_type=_(avg_type)).capitalize() + ':',
         'value' : f'{tmp[avg_type]["value"]:.2f}',
         'unit'  : self.units[avg_type],
         'alarm' : not tmp[avg_type]['alarm_min'] <= tmp[avg_type]['value'] <= tmp[avg_type]['alarm_max']
