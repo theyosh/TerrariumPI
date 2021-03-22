@@ -41,24 +41,26 @@ class terrariumOWFSSensor(terrariumSensor):
         address = proxy.read(sensor + '/address').decode()
         try:
           temp = float(proxy.read(sensor + '/temperature'))
-          yield terrariumOWFSSensor(None,
-                                    'temperature',
-                                     address,
-                                    '{} measuring {}'.format(terrariumOWFSSensor.NAME, 'temperature'),
-                                    unit_value_callback = unit_value_callback,
-                                    trigger_callback    = trigger_callback)
+          yield terrariumSensor(None,
+                                terrariumOWFSSensor.HARDWARE,
+                                'temperature',
+                                address,
+                                f'{terrariumOWFSSensor.NAME} measuring temperature',
+                                unit_value_callback = unit_value_callback,
+                                trigger_callback    = trigger_callback)
 
-        except protocol.OwnetError:
+        except protocol.OwnetError as ex:
           pass
 
         try:
           humidity = float(proxy.read(sensor + '/humidity'))
-          yield terrariumOWFSSensor(None,
-                                    'humidity',
-                                    address,
-                                    '{} measuring {}'.format(terrariumOWFSSensor.NAME, 'humidity'),
-                                    unit_value_callback = unit_value_callback,
-                                    trigger_callback    = trigger_callback)
+          yield terrariumSensor(None,
+                                terrariumOWFSSensor.HARDWARE,
+                                'humidity',
+                                address,
+                                f'{terrariumOWFSSensor.NAME} measuring humidity',
+                                unit_value_callback = unit_value_callback,
+                                trigger_callback    = trigger_callback)
 
         except protocol.OwnetError:
           pass
