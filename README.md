@@ -120,7 +120,7 @@ It is possible to use USB or SSD drives to speed things up: https://www.tomshard
 2. Install git
   `sudo apt -y install git`
 3. Clone this repository and submodules!
-  `git clone --recursive --depth 1 https://github.com/theyosh/TerrariumPI.git`
+  `git clone --depth 1 https://github.com/theyosh/TerrariumPI.git`
 4. Enter the new TerrariumPI folder
   `cd TerrariumPI`
 5. Run the installer script and wait
