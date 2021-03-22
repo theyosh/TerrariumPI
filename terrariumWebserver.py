@@ -38,7 +38,6 @@ class terrariumWebserver(object):
       {'path' : re.compile(r'^/webcam/.*\.jpg$',re.I),  'timeout':                30}, # 30 Seconds
       {'path' : re.compile(r'^/static/assets/',re.I),   'timeout': 30 * 24 * 60 * 60}, # 1 Month
       {'path' : re.compile(r'^/api/',re.I),             'timeout':                60}, # 1 Minute
-#      {'path' : re.compile(r'^.html$',re.I),            'timeout':           60 * 60}, # 1 Hour
     ]
 
     # This secret will change every reboot. So cookies will not work anymore after a reboot.
@@ -138,10 +137,6 @@ class terrariumWebserver(object):
       'languages'     : self.engine.settings['languages'],
       'units'         : unit_variables(),
 
-#                  'translations': self.__translations,
-#                  'notifications' : self.engine.notification,
-#                  'horizontal_graph_legend' : 1 if self.engine.get_horizontal_graph_legend() else 0,
-
       'show_gauge_overview'      : self.engine.settings['all_gauges_on_single_page'],
       'show_environment'         : not self.engine.settings['hide_environment_dashboard'],
       'graph_smooth_value'       : self.engine.settings['graph_smooth_value'],
@@ -197,13 +192,8 @@ class terrariumWebserver(object):
       upload_file = request.files.get('file',None)
       if upload_file is not None:
         upload_file.save(root, overwrite=True)
-        print('Upload file')
-        print(upload_file.filename)
-        print(dir(upload_file))
         if 'profile_image.' in upload_file.filename:
           img = Image.open(f'{root.strip("/")}/{upload_file.filename}')
-          print((img))
-          print(dir(img))
           img.save(f'{root.strip("/")}/favicon.ico')
 
         return {'file' : f'{root.strip("/")}/{upload_file.filename}'}
@@ -254,22 +244,6 @@ class terrariumWebserver(object):
     self.bottle.route('/<root:re:(static|webcam|media|log)>/<filename:path>', method='GET', callback=self.__static_file, apply=self.authenticate())
     self.bottle.route('/<root:re:(media)>/upload/', method='POST', callback=self.__file_upload, apply=self.authenticate(), name='file_upload')
 
-
-
-
-    # self.bottle.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile|notifications)>',
-    #                  method=['PUT','POST','DELETE'],
-    #                  callback=self.__update_api_call,
-    #                  apply=self.authenticate(True)
-    #                 )
-
-    # self.bottle.route('/api/audio/player/<action:re:(start|stop|volumeup|volumedown|mute|unmute)>',
-    #                  method=['POST'],
-    #                  callback=self.__player_commands,
-    #                  apply=self.authenticate(True)
-    #                 )
-
-
   def url_for(self, name, **kargs):
     # First check the webserver for named routes
     try:
@@ -278,55 +252,6 @@ class terrariumWebserver(object):
       url = '#'
 
     return url
-
-
-
-  # def __player_commands(self,action):
-  #   result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Player command could ot be executed!')}
-
-  #   if 'start' == action:
-  #     self.engine.audio_player_start()
-  #   elif 'stop' == action:
-  #     self.engine.audio_player_stop()
-  #   elif 'volumeup' == action:
-  #     self.engine.audio_player_volume_up()
-  #     result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
-  #   elif 'volumedown' == action:
-  #     self.engine.audio_player_volume_down()
-  #     result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
-  #   elif 'mute' == action:
-  #     pass
-  #   elif 'unmute' == action:
-  #     pass
-
-  #   return result
-
-  # def __delete_audio_file(self,audiofileid):
-  #   result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Action could not be satisfied')}
-
-  #   if self.engine.delete_audio_file(audiofileid):
-  #     result = {'ok' : True, 'title' : _('Success!'), 'message' : _('Audio file is deleted')}
-
-  #   return result
-
-
-  # def __replace_switch_hardware(self):
-  #   postdata = None
-  #   if request.json is not None:
-  #     postdata = request.json
-
-  #   self.engine.replace_hardware_calender_event(postdata['switch']['id'],
-  #                                                          postdata['switch']['device'],
-  #                                                          postdata['switch']['reminder_amount'],
-  #                                                          postdata['switch']['reminder_period'])
-  #   result = {'ok' : True,
-  #             'title' : _('Hardware is replaced'),
-  #             'message' : _('Hardware replacement is logged in the calendar')}
-
-  #   if '' != postdata['switch']['reminder_amount']:
-  #     result['message'] += '<br />' + _('A new replacement reminder is created')
-
-  #   return result
 
   # -= NEW =-
   def __login(self):
@@ -419,10 +344,6 @@ class terrariumWebsocket(object):
 
           else:
             pass
-            #self.send_message({'type':'echo_replay', 'data':message})
-
-          # terrariumWebserver.app.terrarium.get_doors_status(socket=True)
-          # terrariumWebserver.app.terrarium.get_environment(socket=True)
 
   def send_message(self, message, queue = None):
     # Get all the connected websockets (get a copy of the list, as we could delete entries and change the list length during the loop)
