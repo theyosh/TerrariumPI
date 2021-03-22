@@ -486,15 +486,6 @@ class terrariumArea(object):
       logger.info(f'Set the relay {relay.name} to {relay.ON if on else relay.OFF}')
       self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF)
 
-
-  # def _time_schema(self):
-  #   return {
-  #     'low'   : None,
-  #     'hight' : None,
-  #   }
-
-
-
   def stop(self):
     logger.info(f'Stopped Area {self}')
 
