@@ -198,7 +198,7 @@ class terrariumNotificationService(object):
     },
 
     'webhook' : {
-      'name'    : _('Webhook'),
+      'name'    : _('Web-hook'),
       'class' : lambda: terrariumNotificationServiceWebhook
     },
   }

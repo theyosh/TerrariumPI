@@ -81,7 +81,7 @@ class terrariumArea(object):
     },
 
     'ph' : {
-      'name'    : _('PH'),
+      'name'    : _('pH'),
       'sensors' : ['ph']
     },
   }

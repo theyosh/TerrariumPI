@@ -3,7 +3,7 @@
 {% block options %}
 <ol class="breadcrumb float-sm-right ">
   {% if authenticated %}
-  <li class="breadcrumb-item"><a href="{{ url_for('api:logfile_download') }}"><i class="fas fa-download pt-1 mr-1"></i> {{ _('Download logfile') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ url_for('api:logfile_download') }}"><i class="fas fa-download pt-1 mr-1"></i> {{ _('Download log file') }}</a></li>
   {% else %}
     <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Login to make changes') }}</a>
   {% endif %}

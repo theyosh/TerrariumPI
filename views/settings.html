@@ -37,11 +37,11 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="host" class="col-sm-4 col-form-label">{{ _('IP or hostname') }}</label>
+                <label for="host" class="col-sm-4 col-form-label">{{ _('IP or host name') }}</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="host" name="host" required="required" placeholder="{{ _('IP or hostname') }}" >
+                  <input type="text" class="form-control" id="host" name="host" required="required" placeholder="{{ _('IP or host name') }}" >
                   <div class="invalid-feedback">
-                    {{ _('Please enter a valid hostname or IP') }}
+                    {{ _('Please enter a valid host name or IP') }}
                   </div>
                 </div>
               </div>
@@ -129,7 +129,7 @@
                 <label for="distance_indicator" class="col-sm-4 col-form-label">{{ _('Distance type') }}</label>
                 <div class="col-sm-8">
                   <select class="custom-select select2" id="distance_indicator" name="distance_indicator" required="required" data-placeholder="{{ _('Distance type') }}" >
-                    <option value="cm">{{ _('Centimeter') }}</option>
+                    <option value="cm">{{ _('Centimetre') }}</option>
                     <option value="inch">{{ _('Inches') }}</option>
                   </select>
                 </div>
@@ -145,11 +145,11 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="wind_speed_indicator" class="col-sm-4 col-form-label">{{ _('Windspeed type') }}</label>
+                <label for="wind_speed_indicator" class="col-sm-4 col-form-label">{{ _('Wind speed type') }}</label>
                 <div class="col-sm-8">
-                  <select class="custom-select select2" id="wind_speed_indicator" name="wind_speed_indicator" required="required" data-placeholder="{{ _('Windspeed type') }}" >
+                  <select class="custom-select select2" id="wind_speed_indicator" name="wind_speed_indicator" required="required" data-placeholder="{{ _('Wind speed type') }}" >
                     <option value="m/s">{{ _('Meter per second') }}</option>
-                    <option value="km/h">{{ _('Kilometer per hour') }}</option>
+                    <option value="km/h">{{ _('Kilometre per hour') }}</option>
                     <option value="beaufort">{{ _('Beaufort') }}</option>
                   </select>
                 </div>

@@ -75,15 +75,9 @@ class terrariumEngine(object):
 
     self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None}
 
-    #self.__engine = {'thread' : None, 'logtail' : None}
-
     self.version = version
     self.latest_version = None
     init_db(self.version)
-
-    # Notification engine
-    # TODO: NEEDS REWRITE... OLD CODE
-
 
     self.running = True
 
@@ -867,11 +861,6 @@ class terrariumEngine(object):
         if enclosure.id not in self.enclosures:
           logger.debug(f'Loading {enclosure}.')
 
-          #try:
-          # setup = {
-          #   'doors' : [door.id for door in enclosure.doors],
-          #   'areas' : list(enclosure.areas)
-          # }
           # TODO: Sensors should be database entities... so query them when needed in the area itselfs
           new_enclosure = self.add(terrariumEnclosure(
                                       str(enclosure.id),
@@ -880,11 +869,6 @@ class terrariumEngine(object):
                                       [door.id for door in enclosure.doors],
                                       list(enclosure.areas)))
 
-                                      # sensors = self.sensors,
-                                      # relays  = self.relays,
-                                      # doors   = self.buttons,
-                                      # weather = self.weather,
-                                      # setup   = setup))
 
         else:
           logger.debug(f'Updated already loaded {enclosure}.')
@@ -934,148 +918,10 @@ class terrariumEngine(object):
           enclosure_data['webcams'].append(webcam_data)
 
         self.webserver.websocket_message('enclosure' , enclosure_data)
-
-        # if 'motion' == enclosure.archive:
-        #   self.enclosures[enclosure.id].motion_capture(enclosure.motion_frame, enclosure.motion_threshold, enclosure.motion_area, enclosure.motion_boxes)
-        # elif 'disabled' != enclosure.archive:
-        #   self.enclosures[enclosure.id].archive(int(enclosure.archive))
-
         measurement_time = time.time() - start
 
         logger.info(f'Updated {enclosure} in {measurement_time:.2f} seconds.')
         logger.debug(f'Updated {enclosure}. M: {measurement_time:.2f} sec.')
-
-
-
-
-  # def __load_webcams(self, data = None):
-  #   # Load Webcams, with ID as index
-  #   starttime = time.time()
-  #   reloading = data is not None
-
-  #   logger.info('%s terrariumPI webcams' % ('Reloading' if reloading else 'Loading',))
-
-  #   webcam_config = (self.config.get_webcams() if not reloading else data)
-  #   if not reloading:
-  #     self.webcams = {}
-
-  #   seen_webcams = []
-  #   for webcamdata in webcam_config:
-  #     if webcamdata['id'] is None or webcamdata['id'] == 'None' or webcamdata['id'] not in self.webcams:
-  #       # New webcam (add)
-  #       width = 640
-  #       height = 480
-  #       awb = 'auto'
-  #       archive = False
-  #       archive_light = 'ignore'
-  #       archive_door = 'ignore'
-  #       motion_boxes = True
-  #       motion_delta_threshold = 25
-  #       motion_min_area = 500
-  #       motion_compare_frame = 'last'
-
-  #       if 'resolution_width' in webcamdata and 'resolution_height' in webcamdata:
-  #         width = webcamdata['resolution_width']
-  #         height = webcamdata['resolution_height']
-
-  #       if 'archive' in webcamdata:
-  #         archive = webcamdata['archive']
-
-  #       if 'archivelight' in webcamdata:
-  #         archive_light = webcamdata['archivelight']
-
-  #       if 'archivedoor' in webcamdata:
-  #         archive_door = webcamdata['archivedoor']
-
-  #       if 'motionboxes' in webcamdata:
-  #         motion_boxes = webcamdata['motionboxes']
-
-  #         if motion_boxes == "true":
-  #           if 'motion_delta_threshold' in webcamdata:
-  #             motion_delta_threshold = webcamdata['motiondeltathreshold']
-
-  #           if 'motion_min_area' in webcamdata:
-  #             motion_min_area = webcamdata['motionminarea']
-
-  #           if 'motion_compare_frame' in webcamdata:
-  #             motion_compare_frame = webcamdata['motioncompareframe']
-
-  #       # don't let bad location data kill the system
-  #       try:
-  #         webcam = terrariumWebcam(None,
-  #                                  webcamdata['location'],
-  #                                  webcamdata['name'],
-  #                                  webcamdata['rotation'],
-  #                                  width,
-  #                                  height,
-  #                                  awb,
-  #                                  archive,
-  #                                  archive_light,
-  #                                  archive_door,
-  #                                  self.environment)
-  #         webcam.set_motion_boxes(motion_boxes)
-  #         webcam.set_motion_delta_threshold(motion_delta_threshold)
-  #         webcam.set_motion_min_area(motion_min_area)
-  #         webcam.set_motion_compare_frame(motion_compare_frame)
-
-  #         self.webcams[webcam.get_id()] = webcam
-  #       except Exception as err:
-  #         print(err)
-  #         continue
-  #     else:
-  #       # Existing webcam
-  #       webcam = self.webcams[webcamdata['id']]
-  #       # Should not be able to change setings
-  #       #webcam.set_hardware_type(doordata['hardwaretype'])
-  #       webcam.set_location(webcamdata['location'])
-  #       webcam.set_name(webcamdata['name'])
-
-  #     webcam.set_rotation(webcamdata['rotation'])
-
-  #     if 'resolution_width' in webcamdata and 'resolution_height' in webcamdata:
-  #       webcam.set_resolution(webcamdata['resolution_width'],webcamdata['resolution_height'])
-
-  #     if 'archive' in webcamdata:
-  #       webcam.set_archive(webcamdata['archive'])
-
-  #     if 'archivelight' in webcamdata:
-  #       webcam.set_archive_light(webcamdata['archivelight'])
-
-  #     if 'archivedoor' in webcamdata:
-  #       webcam.set_archive_door(webcamdata['archivedoor'])
-
-  #     if 'motionboxes' in webcamdata:
-  #       webcam.set_motion_boxes(webcamdata['motionboxes'])
-
-  #     if webcamdata['motionboxes'] == "true":
-  #         if 'motiondeltathreshold' in webcamdata:
-  #           webcam.set_motion_delta_threshold(webcamdata['motiondeltathreshold'])
-
-  #         if 'motionminarea' in webcamdata:
-  #           webcam.set_motion_min_area(webcamdata['motionminarea'])
-
-  #         if 'motioncompareframe' in webcamdata:
-  #           webcam.set_motion_compare_frame(webcamdata['motioncompareframe'])
-
-  #     if 'awb' in webcamdata:
-  #       webcam.set_awb(webcamdata['awb'])
-
-  #     if 'realtimedata' in webcamdata:
-  #       webcam.set_realtimedata(webcamdata['realtimedata'])
-
-  #     seen_webcams.append(webcam.get_id())
-
-  #     if reloading and webcam.is_live():
-  #       webcam.start()
-
-  #   if reloading:
-  #     for webcam_id in set(self.webcams) - set(seen_webcams):
-  #       # clean up old deleted switches
-  #       del(self.webcams[webcam_id])
-
-  #   logger.info('Done %s terrariumPI webcams. Found %d webcams in %.3f seconds' % ('reloading' if reloading else 'loading',
-  #                                                                             len(self.webcams),
-  #                                                                             time.time()-starttime))
 
   # -= NEW =-
   def __engine_loop(self):
@@ -1137,101 +983,7 @@ class terrariumEngine(object):
         prev_delay = abs(time_left)
         logger.warning(f'Engine update took {duration:.2f} seconds. That is {prev_delay:.2f} seconds short.')
 
-    # print(f'Exit state:')
-    # print(self.__engine['exit'])
-    # print(dir(self.__engine['exit']))
     logger.info('Stopped main engine thread')
-
-
-
-    # time_short = 0
-    # error_counter = 0
-    # logger.info('Start terrariumPI engine')
-    # while self.__running:
-    #   starttime = time.time()
-
-    #   # Version update check
-    #   self.__update_checker()
-
-    #   motddata = {'average' : [],
-    #               'system' : 0,
-    #               'duration' : 0,
-    #               'error' : ''}
-
-    #   # Update (remote) power switches
-    #   motddata['power_switches'] = []
-    #   for power_switch_id in self.power_switches:
-    #     try:
-    #       # Update timer trigger if activated
-    #       #self.power_switches[power_switch_id].timer()
-    #       # Update the current sensor.
-    #       self.power_switches[power_switch_id].update()
-    #       if self.power_switches[power_switch_id].get_state() > 0:
-    #         power_state = '{}%'.format(self.power_switches[power_switch_id].get_state())
-    #         if not self.power_switches[power_switch_id].is_dimmer():
-    #           power_state = 'on' if self.power_switches[power_switch_id].is_on() else 'off'
-
-    #         motddata['power_switches'].append({'name' : self.power_switches[power_switch_id].get_name(),
-    #                                            'state' : power_state})
-
-    #     except Exception as err:
-    #       logger.exception('Engine loop: Power switch has problems: {}'.format(err))
-
-    #     # Make time for other web request
-    #     sleep(0.1)
-
-    #   # Get the current average temperatures
-    #   average_data = self.get_sensors(['average'])['sensors']
-    #   motddata['average'] = average_data
-
-    #   # Websocket callback
-    #   self.__send_message({'type':'sensor_gauge','data':average_data})
-
-    #   # Websocket messages back
-    #   self.get_uptime(socket=True)
-    #   self.get_power_usage_water_flow(socket=True)
-    #   self.get_environment(socket=True)
-    #   self.get_audio_playing(socket=True)
-
-    #   # Log system stats
-    #   system_data = self.get_system_stats()
-    #   motddata['system'] = system_data
-    #   self.collector.log_system_data(system_data)
-    #   self.get_system_stats(socket=True)
-
-    #   display_message = ['%s %s' % (_('Uptime'),terrariumUtils.format_uptime(system_data['uptime']),),
-    #                      '%s %s %s %s' % (_('Load'),system_data['load']['load1'],system_data['load']['load5'],system_data['load']['load15']),
-    #                      '%s %.2f%s' % (_('CPU Temp.'),system_data['temperature'],self.get_temperature_indicator())]
-
-    #   for env_part in average_data:
-    #     alarm_icon = '!' if average_data[env_part]['alarm'] else ''
-    #     display_message.append('%s%s %.2f%s%s' % (alarm_icon,_(env_part.replace('average_','').title()), average_data[env_part]['current'],average_data[env_part]['indicator'],alarm_icon))
-
-    #   self.notification.send_display("\n".join(display_message))
-
-    #   duration = (time.time() - starttime) + time_short
-    #   motddata['duration'] = duration
-    #   if duration < terrariumEngine.LOOP_TIMEOUT:
-    #     if error_counter > 0:
-    #       error_counter -= 1
-    #     logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next update' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
-    #     time_short = 0
-    #     sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
-    #   else:
-    #     error_counter += 1
-    #     if error_counter > 9:
-    #       error_message = 'Updating is having problems keeping up. Could not update in {} seconds for {} times!'.format(terrariumEngine.LOOP_TIMEOUT,error_counter)
-    #       motddata['error'] = error_message
-    #       logger.error(error_message)
-
-    #     logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
-    #     time_short = duration - terrariumEngine.LOOP_TIMEOUT
-    #     if time_short > 12:
-    #       # More then 12 seconds to late.... probably never fast enough...
-    #       time_short = 0
-
-    #   self.__update_motd(motddata)
-
 
   def motd(self):
     # Enable translations
@@ -1243,7 +995,7 @@ class terrariumEngine(object):
     tmp = self.system_stats()
     system_stats = []
     system_stats.append({
-      'title' : _('Uptime') + ':',
+      'title' : _('Up time') + ':',
       'value' : terrariumUtils.format_uptime(tmp['uptime']),
       'alarm' : False
     })
@@ -1495,25 +1247,6 @@ class terrariumEngine(object):
     self.__engine['logtail'].join()
 #    print('Logtail thread is stopped')
 
-    #self.environment.stop()
-
-    # with orm.db_session():
-    #   for sensor in Sensor.select(lambda s: s.id in self.sensors.keys()):
-    #     self.sensors[sensor.id].stop()
-    #     logger.info(f'Stopped {sensor}')
-
-      # for relay in Relay.select(lambda s: s.id in self.relays.keys()):
-      #   self.relays[relay.id].stop()
-      #   logger.info(f'Stopped {relay}')
-
-      # for button in Button.select(lambda s: s.id in self.buttons.keys()):
-      #   self.buttons[button.id].stop()
-      #   logger.info(f'Stopped {button}')
-
-      # for webcam in Webcam.select(lambda s: s.id in self.webcams.keys()):
-      #   self.webcams[webcam.id].stop()
-      #   logger.info(f'Stopped {webcam}')
-
     for enclosure in self.enclosures:
       self.enclosures[enclosure].stop()
       logger.info(f'Stopped {self.enclosures[enclosure]}')
@@ -1536,31 +1269,6 @@ class terrariumEngine(object):
 
     self.notification.stop()
 #    print('Totally stopped TerrariumPI')
-
-
-
-
-
-  # # End private/internal functions
-
-  # def get_doors_status(self, socket = False):
-  #   data = 'disabled'
-  #   if len(self.doors) > 0:
-  #     data = 'closed' if all(self.doors[doorid].get_status() == terrariumDoor.CLOSED for doorid in self.doors) else 'open'
-
-  #   if socket:
-  #     self.__send_message({'type':'door_status','data': data})
-  #   else:
-  #     return data
-
-  # def is_door_open(self):
-  #   return 'open' == self.get_doors_status()
-
-  # # def is_door_closed(self):
-  # #   return not self.is_door_open()
-  # # # End doors part
-
-
 
   def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
     # Two events:
@@ -1658,36 +1366,6 @@ class terrariumEngine(object):
 
     return data
 
-  # def get_profile(self):
-  #   return self.get_profile_config()
-
-  # def get_profile_name(self):
-  #   return self.get_profile_config()['name']
-
-  # def get_profile_image(self):
-  #   return self.get_profile_config()['image']
-
-  # def set_profile(self,data,files):
-  #   if 'profile_image' in files:
-  #     profile_image = files.get('profile_image')
-  #     name, ext = os.path.splitext(profile_image.filename)
-  #     if ext not in ('.png','.jpg','.jpeg'):
-  #       return 'File extension not allowed.'
-
-  #     profile_image.save('static/images/')
-  #     data['image'] = 'static/images/' + profile_image.filename
-
-  #   if 'description' in data:
-  #     with open('description.txt', 'wb') as description_file:
-  #       description_file.write(data['description'].encode())
-  #       del(data['description'])
-
-  #   update_ok = self.config.save_profile(data)
-  #   if update_ok:
-  #     self.notification.set_profile_image(self.get_profile_image())
-  #   return update_ok
-  # # End profile part
-
 
   # Notifications part
   def get_notifications_config(self):
@@ -1784,201 +1462,3 @@ class terrariumEngine(object):
         'total_flow' : data[0][2],
         'duration'   : data[0][3]
       }
-
-
-
-
-
-
-
-
-
-
-  # def __get_current_power_usage_water_flow(self, socket = False):
-  #   data = {'power' : {'current' : self.settings['pi_wattage'] , 'max' : self.settings['pi_wattage']},
-  #           'water' : {'current' : 0.0 , 'max' : 0.0}}
-
-  #   for switchid in self.power_switches:
-  #     data['power']['current'] += self.power_switches[switchid].get_current_power_wattage()
-  #     data['power']['max'] += self.power_switches[switchid].get_power_wattage()
-
-  #     data['water']['current'] += self.power_switches[switchid].get_current_water_flow()
-  #     data['water']['max'] += self.power_switches[switchid].get_water_flow()
-
-  #   return data
-
-  # def __get_total_power_usage_water_flow(self):
-  #   pass
-
-
-
-
-  # def get_temperature_indicator(self):
-  #   return self.__unit_type('temperature')
-
-  # def set_temperature_indicator(self,value):
-  #   self.units['temperature'] = value
-
-  # def get_windspeed_indicator(self):
-  #   return self.__unit_type('windspeed')
-
-  # def set_windspeed_indicator(self,value):
-  #   self.units['windspeed'] = value
-
-  # def get_volume_indicator(self):
-  #   return self.__unit_type('volume')
-
-  # def set_volume_indicator(self,value):
-  #   self.units['volume'] = value
-
-  # def get_humidity_indicator(self):
-  #   return self.__unit_type('humidity')
-
-  # def get_moisture_indicator(self):
-  #   return self.__unit_type('moisture')
-
-  # def get_distance_indicator(self):
-  #   return self.__unit_type('distance')
-
-  # def set_distance_indicator(self,value):
-  #   self.units['distance'] = value
-
-  # def get_horizontal_graph_legend(self):
-  #   config_data = self.config.get_system()
-  #   if 'horizontal_graph_legend' not in config_data:
-  #     config_data['horizontal_graph_legend'] = False;
-
-  #   return terrariumUtils.is_true(config_data['horizontal_graph_legend'])
-
-  # def get_hide_environment_on_dashboard(self):
-  #   config_data = self.config.get_system()
-  #   if 'hide_environment_on_dashboard' not in config_data:
-  #     config_data['hide_environment_on_dashboard'] = False;
-
-  #   return terrariumUtils.is_true(config_data['hide_environment_on_dashboard'])
-
-  # def get_show_gauge_overview(self):
-  #   config_data = self.config.get_system()
-  #   if 'sensor_gauge_overview' not in config_data:
-  #     config_data['sensor_gauge_overview'] = False;
-
-  #   return terrariumUtils.is_true(config_data['sensor_gauge_overview'])
-
-  # def get_graph_smooth_value(self):
-  #   config_data = self.config.get_system()
-  #   if 'graph_smooth_value' not in config_data:
-  #     # Default 'no' smoothing
-  #     config_data['graph_smooth_value'] = 0;
-
-  #   return config_data['graph_smooth_value'] * 1
-
-  # def get_graph_show_min_max_gauge(self):
-  #   config_data = self.config.get_system()
-  #   if 'graph_show_min_max_gauge' not in config_data:
-  #     config_data['graph_show_min_max_gauge'] = False;
-
-  #   return terrariumUtils.is_true(config_data['graph_show_min_max_gauge'])
-  # # End system functions part
-
-  # # API Config calls
-  # def get_config(self, part = None):
-  #   data = {}
-  #   if 'system' == part or part is None:
-  #     data.update(self.get_system_config())
-
-  #   if 'weather' == part or part is None:
-  #     data.update(self.get_weather_config())
-
-  #   if 'switches' == part or part is None:
-  #     data.update(self.get_switches_config())
-
-  #   if 'sensors' == part or part is None:
-  #     data.update(self.get_sensors_config())
-  #     data.update({'hardware' : terrariumSensor.valid_hardware_types2()})
-
-  #   if 'webcams' == part or part is None:
-  #     data.update(self.get_webcams_config())
-
-  #   if 'doors' == part or part is None:
-  #     data.update(self.get_doors_config())
-
-  #   if 'audio' == part or part is None:
-  #     data.update(self.get_audio_playlists_config())
-
-  #   if 'profile' == part or part is None:
-  #     data.update(self.get_profile_config())
-
-  #   if 'environment' == part or part is None:
-  #     data.update(self.get_environment_config())
-
-  #   if 'notifications' == part or part is None:
-  #     data.update({'notifications' : self.get_notifications_config()})
-
-  #   return data
-
-  # def set_config(self,part,data,files = None):
-  #   update_ok = False
-  #   if 'weather' == part:
-  #     update_ok = self.set_weather_config(data)
-
-  #   elif 'switches' == part:
-  #     update_ok = self.set_switches_config(data)
-
-  #   elif 'sensors' == part:
-  #     update_ok = self.set_sensors_config(data)
-
-  #   elif 'webcams' == part:
-  #     update_ok = self.set_webcams_config(data)
-
-  #   elif 'doors' == part:
-  #     update_ok = self.set_doors_config(data)
-
-  #   elif 'audio' == part:
-  #     update_ok = self.set_audio_playlists_config(data)
-
-  #   elif 'environment' == part:
-  #     update_ok = self.set_environment_config(data)
-
-  #   elif 'profile' == part:
-  #     update_ok = self.set_profile(data,files)
-
-  #   elif 'notifications' == part:
-  #     update_ok = self.set_notifications(data)
-
-  #   elif 'system' == part:
-  #     if 'new_password' in data and data['new_password'] != '' and 'cur_password' in data and data['cur_password'] != '' and data['new_password'] != data['cur_password']:
-  #       # check if existing password is correct
-  #       existing_password =  self.config.get_system()['password']
-  #       if existing_password == data['cur_password']:
-  #         data['password'] = data['new_password']
-  #         del(data['new_password'])
-  #         del(data['cur_password'])
-  #       else:
-  #         return False
-
-  #     update_ok = self.set_system_config(data)
-  #     if update_ok:
-  #       # Update config settings
-  #       self.set_weather_config({'location' : data['location']})
-  #       self.settings['pi_wattage'] = float(self.config.get_pi_power_wattage())
-  #       self.set_authentication(self.config.get_admin(),self.config.get_password())
-
-  #       self.set_temperature_indicator(self.config.get_temperature_indicator())
-  #       self.set_distance_indicator(self.config.get_distance_indicator())
-  #       self.set_windspeed_indicator(self.config.get_windspeed_indicator())
-  #       self.set_volume_indicator(self.config.get_volume_indicator())
-
-  #   return update_ok
-
-  # def get_system_config(self):
-  #   data = self.config.get_system()
-  #   data['windspeed_indicator'] = self.get_windspeed_indicator()
-  #   data.update(self.config.get_meross_cloud())
-
-  #   del(data['password'])
-  #   return data
-
-  # def set_system_config(self,data):
-  #   return self.config.set_system(data) and self.config.set_meross_cloud(data)
-
-  # End system functions part
