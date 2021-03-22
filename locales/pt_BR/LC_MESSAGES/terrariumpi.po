@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-03-22 18:15+CET\n"
-"PO-Revision-Date: 2021-03-19 00:43+0000\n"
-"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
+"PO-Revision-Date: 2021-03-22 17:28+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.5.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -131,8 +131,6 @@ msgid "wattage"
 msgstr "Potência"
 
 #: terrariumEngine.py:998 views/dashboard.html:18 views/status.html:112
-#, fuzzy
-#| msgid "Uptime"
 msgid "Up time"
 msgstr "Tempo em atividade"
 
@@ -197,8 +195,6 @@ msgid "Twitter"
 msgstr "Twitter"
 
 #: terrariumNotification.py:201
-#, fuzzy
-#| msgid "Webhook"
 msgid "Web-hook"
 msgstr "Webhook"
 
@@ -599,8 +595,6 @@ msgid "Save changes"
 msgstr "Salvar alterações"
 
 #: views/log.html:6
-#, fuzzy
-#| msgid "Download logfile"
 msgid "Download log file"
 msgstr "Baixar logfile"
 
@@ -669,10 +663,6 @@ msgid "Weather night/day"
 msgstr "Clima noite/dia"
 
 #: views/modals/area.html:66
-#, fuzzy
-#| msgid ""
-#| "Select the mode of this area. This will change the timing and durations "
-#| "of the relays."
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the relays."
@@ -698,11 +688,6 @@ msgid "Maximum hours"
 msgstr "Máximo de horas"
 
 #: views/modals/area.html:89
-#, fuzzy
-#| msgid ""
-#| "The maximum amount of hours that the lights are turned on. This is only "
-#| "valid in weather mode. When the day is longer then this maximum value, "
-#| "the day will be shortend to this maximum value."
 msgid ""
 "The maximum amount of hours that the lights are turned on. This is only "
 "valid in weather mode. When the day is longer then this maximum value, the "
@@ -827,10 +812,6 @@ msgid "Power off"
 msgstr "Desligar"
 
 #: views/modals/area.html:285
-#, fuzzy
-#| msgid ""
-#| "Select the mode of this area. This will change the timing and durations "
-#| "of the players."
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the players."
@@ -839,14 +820,10 @@ msgstr ""
 "reprodução."
 
 #: views/modals/area.html:293
-#, fuzzy
-#| msgid "Soundcard"
 msgid "Sound card"
 msgstr "Placa de som"
 
 #: views/modals/area.html:297
-#, fuzzy
-#| msgid "Select the soundcard that is used for this enclosure."
 msgid "Select the sound card that is used for this enclosure."
 msgstr "Selecione a placa de som usada para este anexo."
 
@@ -947,10 +924,6 @@ msgid "Relay delay off"
 msgstr "Atraso sobre o relé desligado"
 
 #: views/modals/area.html:654
-#, fuzzy
-#| msgid ""
-#| "Select the delay in mintues that a relay waits before it turns on. Max "
-#| "delay is 180 minutes."
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
@@ -1142,8 +1115,6 @@ msgid "SMTP Server port"
 msgstr "Porta do servidor SMTP"
 
 #: views/modals/service.html:111
-#, fuzzy
-#| msgid "The email notification service will autodetect SSL/TLS connections."
 msgid "The email notification service will auto detect SSL/TLS connections."
 msgstr "O serviço de notificação por e-mail irá autodetectar conexões SSL/TLS."
 
@@ -1388,8 +1359,6 @@ msgid "Blue"
 msgstr "Azul"
 
 #: views/modals/webcam.html:159
-#, fuzzy
-#| msgid "Motion delta thresshold"
 msgid "Motion delta threshold"
 msgstr "Delta do limiar de movimento"
 
@@ -1493,14 +1462,10 @@ msgid "Please enter a number value of 0.00 or higher"
 msgstr "Por favor digite um número de 0.00 ou maior"
 
 #: views/settings.html:40
-#, fuzzy
-#| msgid "IP or hostname"
 msgid "IP or host name"
 msgstr "IP ou nome do host"
 
 #: views/settings.html:44
-#, fuzzy
-#| msgid "Please enter a valid hostname or IP"
 msgid "Please enter a valid host name or IP"
 msgstr "Por favor, digite um nome de host ou IP válido"
 
@@ -1569,8 +1534,6 @@ msgid "Distance type"
 msgstr "Tipo de distância"
 
 #: views/settings.html:132
-#, fuzzy
-#| msgid "Centimeter"
 msgid "Centimetre"
 msgstr "Centímetro"
 
@@ -1595,8 +1558,6 @@ msgid "US Gallons"
 msgstr "Galões US"
 
 #: views/settings.html:148
-#, fuzzy
-#| msgid "Windspeed type"
 msgid "Wind speed type"
 msgstr "Tipo de velocidade do vento"
 
@@ -1605,8 +1566,6 @@ msgid "Meter per second"
 msgstr "Metros por segundo"
 
 #: views/settings.html:152
-#, fuzzy
-#| msgid "Kilometer per hour"
 msgid "Kilometre per hour"
 msgstr "Quilômetros por hora"
 
@@ -2091,8 +2050,6 @@ msgid "Select archiving"
 msgstr "Selecione arquivamento"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select a soundcard"
 msgid "Select a sound card"
 msgstr "Selecione uma placa de som"
 
