@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-03-22 18:15+CET\n"
-"PO-Revision-Date: 2021-03-19 13:59+0000\n"
+"PO-Revision-Date: 2021-03-22 17:28+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.5.1\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -136,8 +136,6 @@ msgid "wattage"
 msgstr "wattage"
 
 #: terrariumEngine.py:998 views/dashboard.html:18 views/status.html:112
-#, fuzzy
-#| msgid "Uptime"
 msgid "Up time"
 msgstr "Actief"
 
@@ -202,8 +200,6 @@ msgid "Twitter"
 msgstr "Twitter"
 
 #: terrariumNotification.py:201
-#, fuzzy
-#| msgid "Webhook"
 msgid "Web-hook"
 msgstr "Webhook"
 
@@ -496,8 +492,6 @@ msgid "New sensor"
 msgstr "Nieuwe sensor"
 
 #: views/includes/sidebar.html:102
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Scan sensors"
 msgstr "Selecteer sensoren"
 
@@ -604,8 +598,6 @@ msgid "Save changes"
 msgstr "Wijzigingen opslaan"
 
 #: views/log.html:6
-#, fuzzy
-#| msgid "Download logfile"
 msgid "Download log file"
 msgstr "Download logfile"
 
@@ -674,10 +666,6 @@ msgid "Weather night/day"
 msgstr "Weer nacht / dag"
 
 #: views/modals/area.html:66
-#, fuzzy
-#| msgid ""
-#| "Select the mode of this area. This will change the timing and durations "
-#| "of the relays."
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the relays."
@@ -816,10 +804,6 @@ msgid "Power off"
 msgstr "Uitschakelen"
 
 #: views/modals/area.html:285
-#, fuzzy
-#| msgid ""
-#| "Select the mode of this area. This will change the timing and durations "
-#| "of the relays."
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the players."
@@ -828,14 +812,10 @@ msgstr ""
 "schakelaars."
 
 #: views/modals/area.html:293
-#, fuzzy
-#| msgid "Soundcard"
 msgid "Sound card"
 msgstr "Geluidskaart"
 
 #: views/modals/area.html:297
-#, fuzzy
-#| msgid "Select the soundcard that is used for this enclosure."
 msgid "Select the sound card that is used for this enclosure."
 msgstr "Selecteer de geluidskaart die voor dit verblijf wordt gebruikt."
 
@@ -936,10 +916,6 @@ msgid "Relay delay off"
 msgstr "Schakelaar vertraging uit"
 
 #: views/modals/area.html:654
-#, fuzzy
-#| msgid ""
-#| "Select the delay in mintues that a relay waits before it turns on. Max "
-#| "delay is 180 minutes."
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
@@ -1131,11 +1107,8 @@ msgid "SMTP Server port"
 msgstr "SMTP-serverpoort"
 
 #: views/modals/service.html:111
-#, fuzzy
-#| msgid "The email notification service will autodetect SSL/TLS connections."
 msgid "The email notification service will auto detect SSL/TLS connections."
-msgstr ""
-"De e-mailmeldingsservice detecteert automatisch SSL / TLS-verbindingen."
+msgstr "De e-mailmeldingsservice detecteert automatisch SSL / TLS-verbindingen."
 
 #: views/modals/service.html:117
 msgid "SMTP Server username"
@@ -1170,10 +1143,8 @@ msgid "Red"
 msgstr "Rood"
 
 #: views/modals/service.html:188
-#, fuzzy
-#| msgid "Hello"
 msgid "Yellow"
-msgstr "Hallo"
+msgstr "Geel"
 
 #: views/modals/service.html:195 views/modals/webcam.html:151
 msgid "Green"
@@ -1358,10 +1329,8 @@ msgid "Archive door state"
 msgstr "Archief deur status"
 
 #: views/modals/webcam.html:132
-#, fuzzy
-#| msgid "flash"
 msgid "Flash"
-msgstr "flits"
+msgstr "Flits"
 
 #: views/modals/webcam.html:146
 msgid "Show motion boxes"
@@ -1376,8 +1345,6 @@ msgid "Blue"
 msgstr "Blauw"
 
 #: views/modals/webcam.html:159
-#, fuzzy
-#| msgid "Motion delta thresshold"
 msgid "Motion delta threshold"
 msgstr "Drempel bewegingsdelta"
 
@@ -1481,16 +1448,12 @@ msgid "Please enter a number value of 0.00 or higher"
 msgstr "Voer een getalwaarde van 0,00 of hoger in"
 
 #: views/settings.html:40
-#, fuzzy
-#| msgid "IP or hostname"
 msgid "IP or host name"
-msgstr "IP of hostnaam"
+msgstr "IP of host naam"
 
 #: views/settings.html:44
-#, fuzzy
-#| msgid "Please enter a valid hostname or IP"
 msgid "Please enter a valid host name or IP"
-msgstr "Voer een geldige hostnaam of IP in"
+msgstr "Voer een geldige host naam of IP in"
 
 #: views/settings.html:49
 msgid "Port number"
@@ -1557,8 +1520,6 @@ msgid "Distance type"
 msgstr "Afstandstype"
 
 #: views/settings.html:132
-#, fuzzy
-#| msgid "Centimeter"
 msgid "Centimetre"
 msgstr "Centimeter"
 
@@ -1583,8 +1544,6 @@ msgid "US Gallons"
 msgstr "Amerikaanse gallons"
 
 #: views/settings.html:148
-#, fuzzy
-#| msgid "Windspeed type"
 msgid "Wind speed type"
 msgstr "Type windsnelheid"
 
@@ -1593,8 +1552,6 @@ msgid "Meter per second"
 msgstr "Meter per seconde"
 
 #: views/settings.html:152
-#, fuzzy
-#| msgid "Kilometer per hour"
 msgid "Kilometre per hour"
 msgstr "Kilometer per uur"
 
@@ -1860,7 +1817,7 @@ msgstr "Voer de eindtijd in"
 
 #: Missing text string
 msgid "Enter green GPIO pin"
-msgstr ""
+msgstr "Voer de groene GPIO-pin in"
 
 #: Missing text string
 msgid "Enter height"
@@ -1875,10 +1832,8 @@ msgid "Enter number"
 msgstr "Voer nummer in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter end time"
 msgid "Enter red GPIO pin"
-msgstr "Voer de eindtijd in"
+msgstr "Voer de rode GPIO-pin in"
 
 #: Missing text string
 msgid "Enter search terms"
@@ -1938,7 +1893,7 @@ msgstr "Breedte invoeren"
 
 #: Missing text string
 msgid "Enter yellow GPIO pin"
-msgstr ""
+msgstr "Voer de gele GPIO-pin in"
 
 #: Missing text string
 msgid "Error messages"
@@ -2045,10 +2000,8 @@ msgid "Scan for new relays"
 msgstr "Scan voor nieuwe schakelaars"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Scan for new relays"
 msgid "Scan for new sensors"
-msgstr "Scan voor nieuwe schakelaars"
+msgstr "Scan voor nieuwe sensoren"
 
 #: Missing text string
 msgid "Select a mode"
@@ -2079,8 +2032,6 @@ msgid "Select archiving"
 msgstr "Archiveren selecteren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select a soundcard"
 msgid "Select a sound card"
 msgstr "Selecteer een geluidskaart"
 
@@ -2110,7 +2061,7 @@ msgstr "Selecteer taal"
 
 #: Missing text string
 msgid "Select optional relay for flash"
-msgstr ""
+msgstr "Selecteer optionele schakelaar voor flits"
 
 #: Missing text string
 msgid "Select period"
