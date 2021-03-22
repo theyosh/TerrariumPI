@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-03-22 18:15+CET\n"
-"PO-Revision-Date: 2021-03-22 16:48+0000\n"
+"PO-Revision-Date: 2021-03-22 17:28+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_GB/>\n"
@@ -135,10 +135,8 @@ msgid "wattage"
 msgstr "wattage"
 
 #: terrariumEngine.py:998 views/dashboard.html:18 views/status.html:112
-#, fuzzy
-#| msgid "Uptime"
 msgid "Up time"
-msgstr "Uptime"
+msgstr "Up time"
 
 #: terrariumEngine.py:1004
 msgid "System load"
@@ -201,10 +199,8 @@ msgid "Twitter"
 msgstr "Twitter"
 
 #: terrariumNotification.py:201
-#, fuzzy
-#| msgid "Webhook"
 msgid "Web-hook"
-msgstr "Webhook"
+msgstr "Web-hook"
 
 #: terrariumWebserver.py:153 terrariumWebserver.py:231
 msgid "Authenticate to make any changes"
@@ -495,10 +491,8 @@ msgid "New sensor"
 msgstr "New sensor"
 
 #: views/includes/sidebar.html:102
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Scan sensors"
-msgstr "Select sensors"
+msgstr "Scan sensors"
 
 #: views/includes/sidebar.html:112 views/modals/area.html:176
 #: views/modals/area.html:216 views/modals/area.html:534
@@ -603,10 +597,8 @@ msgid "Save changes"
 msgstr "Save changes"
 
 #: views/log.html:6
-#, fuzzy
-#| msgid "Download logfile"
 msgid "Download log file"
-msgstr "Download logfile"
+msgstr "Download log file"
 
 #: views/log.html:19
 msgid "System logging"
@@ -674,15 +666,11 @@ msgid "Weather night/day"
 msgstr "Weather night/day"
 
 #: views/modals/area.html:66
-#, fuzzy
-#| msgid ""
-#| "Select the mode of this area. This will change the timing and durations "
-#| "of the relays."
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the relays."
 msgstr ""
-"Select the mode of this area. This will change the timing and durations of "
+"Select the mode of this area. This will change the timing and duration of "
 "the relays."
 
 #: views/modals/area.html:74
@@ -704,11 +692,6 @@ msgid "Maximum hours"
 msgstr "Maximum hours"
 
 #: views/modals/area.html:89
-#, fuzzy
-#| msgid ""
-#| "The maximum amount of hours that the lights are turned on. This is only "
-#| "valid in weather mode. When the day is longer then this maximum value, "
-#| "the day will be shortend to this maximum value."
 msgid ""
 "The maximum amount of hours that the lights are turned on. This is only "
 "valid in weather mode. When the day is longer then this maximum value, the "
@@ -716,7 +699,7 @@ msgid ""
 msgstr ""
 "The maximum amount of hours that the lights are turned on. This is only "
 "valid in weather mode. When the day is longer then this maximum value, the "
-"day will be shortend to this maximum value."
+"day will be shortened to this maximum value."
 
 #: views/modals/area.html:98
 msgid "Hours shift"
@@ -832,28 +815,20 @@ msgid "Power off"
 msgstr "Power off"
 
 #: views/modals/area.html:285
-#, fuzzy
-#| msgid ""
-#| "Select the mode of this area. This will change the timing and durations "
-#| "of the players."
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the players."
 msgstr ""
-"Select the mode of this area. This will change the timing and durations of "
+"Select the mode of this area. This will change the timing and duration of "
 "the players."
 
 #: views/modals/area.html:293
-#, fuzzy
-#| msgid "Soundcard"
 msgid "Sound card"
-msgstr "Soundcard"
+msgstr "Sound card"
 
 #: views/modals/area.html:297
-#, fuzzy
-#| msgid "Select the soundcard that is used for this enclosure."
 msgid "Select the sound card that is used for this enclosure."
-msgstr "Select the soundcard that is used for this enclosure."
+msgstr "Select the sound card that is used for this enclosure."
 
 #: views/modals/area.html:436 views/modals/playlist.html:23
 #: views/playlists.html:27 views/playlists.html:40
@@ -952,15 +927,11 @@ msgid "Relay delay off"
 msgstr "Relay delay off"
 
 #: views/modals/area.html:654
-#, fuzzy
-#| msgid ""
-#| "Select the delay in mintues that a relay waits before it turns on. Max "
-#| "delay is 180 minutes."
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
 msgstr ""
-"Select the delay in mintues that a relay waits before it turns on. Max delay "
+"Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
 
 #: views/modals/button.html:11
@@ -1147,10 +1118,8 @@ msgid "SMTP Server port"
 msgstr "SMTP Server port"
 
 #: views/modals/service.html:111
-#, fuzzy
-#| msgid "The email notification service will autodetect SSL/TLS connections."
 msgid "The email notification service will auto detect SSL/TLS connections."
-msgstr "The email notification service will autodetect SSL/TLS connections."
+msgstr "The email notification service will auto detect SSL/TLS connections."
 
 #: views/modals/service.html:117
 msgid "SMTP Server username"
@@ -1185,10 +1154,8 @@ msgid "Red"
 msgstr "Red"
 
 #: views/modals/service.html:188
-#, fuzzy
-#| msgid "Hello"
 msgid "Yellow"
-msgstr "Hello"
+msgstr "Yellow"
 
 #: views/modals/service.html:195 views/modals/webcam.html:151
 msgid "Green"
@@ -1375,10 +1342,8 @@ msgid "Archive door state"
 msgstr "Archive door state"
 
 #: views/modals/webcam.html:132
-#, fuzzy
-#| msgid "flash"
 msgid "Flash"
-msgstr "flash"
+msgstr "Flash"
 
 #: views/modals/webcam.html:146
 msgid "Show motion boxes"
@@ -1393,10 +1358,8 @@ msgid "Blue"
 msgstr "Blue"
 
 #: views/modals/webcam.html:159
-#, fuzzy
-#| msgid "Motion delta thresshold"
 msgid "Motion delta threshold"
-msgstr "Motion delta thresshold"
+msgstr "Motion delta threshold"
 
 #: views/modals/webcam.html:165
 msgid "Motion minimum area"
@@ -1497,16 +1460,12 @@ msgid "Please enter a number value of 0.00 or higher"
 msgstr "Please enter a number value of 0.00 or higher"
 
 #: views/settings.html:40
-#, fuzzy
-#| msgid "IP or hostname"
 msgid "IP or host name"
-msgstr "IP or hostname"
+msgstr "IP or host name"
 
 #: views/settings.html:44
-#, fuzzy
-#| msgid "Please enter a valid hostname or IP"
 msgid "Please enter a valid host name or IP"
-msgstr "Please enter a valid hostname or IP"
+msgstr "Please enter a valid host name or IP"
 
 #: views/settings.html:49
 msgid "Port number"
@@ -1573,10 +1532,8 @@ msgid "Distance type"
 msgstr "Distance type"
 
 #: views/settings.html:132
-#, fuzzy
-#| msgid "Centimeter"
 msgid "Centimetre"
-msgstr "Centimeter"
+msgstr "Centimetre"
 
 #: views/settings.html:133
 msgid "Inches"
@@ -1599,20 +1556,16 @@ msgid "US Gallons"
 msgstr "US Gallons"
 
 #: views/settings.html:148
-#, fuzzy
-#| msgid "Windspeed type"
 msgid "Wind speed type"
-msgstr "Windspeed type"
+msgstr "Wind speed type"
 
 #: views/settings.html:151
 msgid "Meter per second"
 msgstr "Meter per second"
 
 #: views/settings.html:152
-#, fuzzy
-#| msgid "Kilometer per hour"
 msgid "Kilometre per hour"
-msgstr "Kilometer per hour"
+msgstr "Kilometre per hour"
 
 #: views/settings.html:153
 msgid "Beaufort"
@@ -1876,7 +1829,7 @@ msgstr "Enter end time"
 
 #: Missing text string
 msgid "Enter green GPIO pin"
-msgstr ""
+msgstr "Enter green GPIO pin"
 
 #: Missing text string
 msgid "Enter height"
@@ -1891,10 +1844,8 @@ msgid "Enter number"
 msgstr "Enter number"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter end time"
 msgid "Enter red GPIO pin"
-msgstr "Enter end time"
+msgstr "Enter red GPIO pin"
 
 #: Missing text string
 msgid "Enter search terms"
@@ -1954,7 +1905,7 @@ msgstr "Enter width"
 
 #: Missing text string
 msgid "Enter yellow GPIO pin"
-msgstr ""
+msgstr "Enter yellow GPIO pin"
 
 #: Missing text string
 msgid "Error messages"
@@ -2061,10 +2012,8 @@ msgid "Scan for new relays"
 msgstr "Scan for new relays"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Scan for new relays"
 msgid "Scan for new sensors"
-msgstr "Scan for new relays"
+msgstr "Scan for new sensors"
 
 #: Missing text string
 msgid "Select a mode"
@@ -2095,10 +2044,8 @@ msgid "Select archiving"
 msgstr "Select archiving"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select a soundcard"
 msgid "Select a sound card"
-msgstr "Select a soundcard"
+msgstr "Select a sound card"
 
 #: Missing text string
 msgid "Select a state"
@@ -2126,7 +2073,7 @@ msgstr "Select language"
 
 #: Missing text string
 msgid "Select optional relay for flash"
-msgstr ""
+msgstr "Select optional relay for flash"
 
 #: Missing text string
 msgid "Select period"
