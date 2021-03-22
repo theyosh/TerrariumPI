@@ -73,7 +73,7 @@ class terrariumEngine(object):
                   N_('wattage')     : 'W',
                  }
 
-    self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None}
+    self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None, 'too_late': 0}
 
     self.version = version
     self.latest_version = None
@@ -978,10 +978,14 @@ class terrariumEngine(object):
 #        sleep(max(0,time_left-prev_delay))
         self.__engine['exit'].wait(max(0,time_left-prev_delay))
         prev_delay = 0
+        self.__engine['too_late'] = 0
         print(f'[{datetime.datetime.now()}] Done waiting....')
       else:
+        self.__engine['too_late'] += 1
         prev_delay = abs(time_left)
         logger.warning(f'Engine update took {duration:.2f} seconds. That is {prev_delay:.2f} seconds short.')
+        if self.__engine['too_late'] > 30:
+          logger.error(f'Engine can\'t keep up. For {self.__engine["too_late"]} times it could not finish in {terrariumEngine.__ENGINE_LOOP_TIMEOUT} seconds.')
 
     logger.info('Stopped main engine thread')
 
@@ -1185,17 +1189,19 @@ class terrariumEngine(object):
 
     motd_relays = f'{padding}Current active relays ({relays_active}/{len(self.relays)})' + (relay_title_padding * ' ') + f'{current_watt}/{max_watt:.2f} Watt, {current_flow}/{max_flow:.2f} L/m' + '\n' + motd_relays
 
-    # TODO: Add a warning line when updating is taking to much time....
+    #if self.__engine['too_late'] > 30:
+    motd_relays += '\n'
+    motd_relays += (2 * padding) + pyfancy().red(f'Engine can\'t keep up. For {self.__engine["too_late"]} times it could not finish in {terrariumEngine.__ENGINE_LOOP_TIMEOUT} seconds.').get()
+    motd_relays += '\n'
 
     # Last update line
-    #print(_('last update'))
     last_update = _('last update').capitalize()
     motd_last_update = (3 * padding) + pyfancy().blue(f'{last_update}: {datetime.datetime.now():%A, %d-%m-%Y %H:%M:%S}').get()
 
     motd_file = Path('motd.sh')
     with motd_file.open('w') as motdfile:
       motdfile.write('#!/bin/bash\n')
-      #motdfile.write('tput reset\n')
+      motdfile.write('tput reset\n')
       motdfile.write('echo "')
       motdfile.write(motd_title.replace('`','\`') + '\n')
       motdfile.write(motd_version + '\n')
@@ -1315,22 +1321,7 @@ class terrariumEngine(object):
       self.__send_message({'type':'player_indicator','data': data})
     else:
       return data
-
-  # def start_audio_player(self):
-  #   pass
-
-  # def stop_audio_player(self):
-  #   pass
-
-  # def audio_player_volume_up(self):
-  #   self.__audio_player.volume_up()
-  #   self.get_audio_playing(True)
-
-  # def audio_player_volume_down(self):
-  #   self.__audio_player.volume_down()
-  #   self.get_audio_playing(True)
-
-  # # End audio part
+  # End audio part
 
   # Environment part
   def get_environment(self, parameters = [], socket = False):
