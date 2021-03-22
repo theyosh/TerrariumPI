@@ -10,7 +10,10 @@ import datetime
 import hashlib
 import functools
 import re
+<<<<<<< HEAD
 from PIL import Image
+=======
+>>>>>>> 28f21604a0e0453f01a85bb4342f9bf397963b9d
 
 from uuid import uuid4
 from pathlib import Path
@@ -197,6 +200,7 @@ class terrariumWebserver(object):
       upload_file = request.files.get('file',None)
       if upload_file is not None:
         upload_file.save(root, overwrite=True)
+<<<<<<< HEAD
         print('Upload file')
         print(upload_file.filename)
         print(dir(upload_file))
@@ -315,6 +319,117 @@ class terrariumWebserver(object):
   #   if request.json is not None:
   #     postdata = request.json
 
+=======
+        return {'file' : f'{root.strip("/")}/{upload_file.filename}'}
+
+      raise Exception('No valid file upload')
+
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error uploading file. {ex}')
+
+  def __routes(self):
+    # Add a 404 page...
+    @self.bottle.error(400)
+    @self.bottle.error(404)
+    @self.bottle.error(500)
+    def handle_error(error):
+      if request.is_ajax:
+        response.status = error.status
+        response.content_type = 'application/json'
+        return json.dumps({'message' : error.body})
+
+      variables = self.__template_variables(f'{error.status}')
+      variables['page_title'] = f'{error.status} Error'
+      return jinja2_template('views/error.html',variables)
+
+    # Add API including all the CRUD urls
+    self.api.routes(self.bottle)
+
+    # Websocket connection
+    self.bottle.route('/live/', callback=self.websocket.connect, apply=websocket, name='websocket_connect')
+
+    # Login url
+    self.bottle.route('/login/', method='GET', callback=self.__login, apply=self.authenticate(True), name='login')
+
+    # Logout url
+    self.bottle.route('/logout/', method='POST', callback=self.__logout, apply=auth_basic(self.__clear_authentication,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes')), name='logout')
+
+    # Index page
+    self.bottle.route('/', method='GET', callback=self.render_page, apply=self.authenticate(), name='home')
+
+    # Template pages
+    self.bottle.route('/<page:re:[^/]+>.html',        method='GET', callback=self.render_page, apply=self.authenticate(), name='page')
+    self.bottle.route('/<page:re:modals/[^/]+>.html', method='GET', callback=self.render_page, apply=self.authenticate(), name='modal')
+
+    # Special case: robots.txt
+    self.bottle.route('/<filename:re:robots\.txt>', method='GET', callback=self.__static_file)
+
+    # Static files
+    self.bottle.route('/<root:re:(static|webcam|media|log)>/<filename:path>', method='GET', callback=self.__static_file, apply=self.authenticate())
+    self.bottle.route('/<root:re:(media)>/upload/', method='POST', callback=self.__file_upload, apply=self.authenticate(), name='file_upload')
+
+
+
+
+    # self.bottle.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile|notifications)>',
+    #                  method=['PUT','POST','DELETE'],
+    #                  callback=self.__update_api_call,
+    #                  apply=self.authenticate(True)
+    #                 )
+
+    # self.bottle.route('/api/audio/player/<action:re:(start|stop|volumeup|volumedown|mute|unmute)>',
+    #                  method=['POST'],
+    #                  callback=self.__player_commands,
+    #                  apply=self.authenticate(True)
+    #                 )
+
+
+  def url_for(self, name, **kargs):
+    # First check the webserver for named routes
+    try:
+      url = self.bottle.get_url(name, **kargs)
+    except RouteBuildError:
+      url = '#'
+
+    return url
+
+
+
+  # def __player_commands(self,action):
+  #   result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Player command could ot be executed!')}
+
+  #   if 'start' == action:
+  #     self.engine.audio_player_start()
+  #   elif 'stop' == action:
+  #     self.engine.audio_player_stop()
+  #   elif 'volumeup' == action:
+  #     self.engine.audio_player_volume_up()
+  #     result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
+  #   elif 'volumedown' == action:
+  #     self.engine.audio_player_volume_down()
+  #     result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
+  #   elif 'mute' == action:
+  #     pass
+  #   elif 'unmute' == action:
+  #     pass
+
+  #   return result
+
+  # def __delete_audio_file(self,audiofileid):
+  #   result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Action could not be satisfied')}
+
+  #   if self.engine.delete_audio_file(audiofileid):
+  #     result = {'ok' : True, 'title' : _('Success!'), 'message' : _('Audio file is deleted')}
+
+  #   return result
+
+
+  # def __replace_switch_hardware(self):
+  #   postdata = None
+  #   if request.json is not None:
+  #     postdata = request.json
+
+>>>>>>> 28f21604a0e0453f01a85bb4342f9bf397963b9d
   #   self.engine.replace_hardware_calender_event(postdata['switch']['id'],
   #                                                          postdata['switch']['device'],
   #                                                          postdata['switch']['reminder_amount'],
