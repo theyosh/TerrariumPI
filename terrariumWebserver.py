@@ -10,6 +10,7 @@ import datetime
 import hashlib
 import functools
 import re
+from PIL import Image
 
 from uuid import uuid4
 from pathlib import Path
@@ -132,6 +133,7 @@ class terrariumWebserver(object):
       'device'        : self.engine.settings['device'],
       'username'      : self.engine.settings['username'],
       'profile_image' : self.engine.settings['profile_image'],
+      'favicon'       : self.engine.settings['favicon'],
 
       'languages'     : self.engine.settings['languages'],
       'units'         : unit_variables(),
@@ -195,6 +197,15 @@ class terrariumWebserver(object):
       upload_file = request.files.get('file',None)
       if upload_file is not None:
         upload_file.save(root, overwrite=True)
+        print('Upload file')
+        print(upload_file.filename)
+        print(dir(upload_file))
+        if 'profile_image.' in upload_file.filename:
+          img = Image.open(f'{root.strip("/")}/{upload_file.filename}')
+          print((img))
+          print(dir(img))
+          img.save(f'{root.strip("/")}/favicon.ico')
+
         return {'file' : f'{root.strip("/")}/{upload_file.filename}'}
 
       raise Exception('No valid file upload')
@@ -236,8 +247,8 @@ class terrariumWebserver(object):
     self.bottle.route('/<page:re:[^/]+>.html',        method='GET', callback=self.render_page, apply=self.authenticate(), name='page')
     self.bottle.route('/<page:re:modals/[^/]+>.html', method='GET', callback=self.render_page, apply=self.authenticate(), name='modal')
 
-    # Special case: robots.txt
-    self.bottle.route('/<filename:re:robots\.txt>', method='GET', callback=self.__static_file)
+    # Special case: robots.txt and favicon.ico
+    self.bottle.route('/<filename:re:(robots\.txt|favicon\.ico)>', method='GET', callback=self.__static_file)
 
     # Static files
     self.bottle.route('/<root:re:(static|webcam|media|log)>/<filename:path>', method='GET', callback=self.__static_file, apply=self.authenticate())

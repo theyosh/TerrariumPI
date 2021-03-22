@@ -247,6 +247,11 @@ class terrariumEngine(object):
       logger.debug(f'Error getting Pi info: {ex}')
       settings['device'] = 'Unknown'
 
+    # Custom favicon
+    favicon = Path('media/favicon.ico')
+    settings['favicon'] = '/media/favicon.ico' if favicon.exists() else '/favicon.ico'
+
+
     # Set unit values
     self.units['temperature'] = ('C' if 'celsius' == settings['temperature_indicator'] else ( 'F' if 'fahrenheit' == settings['temperature_indicator'] else 'K' ))
     self.units['heating']     = self.units['temperature']

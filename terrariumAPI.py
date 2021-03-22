@@ -179,7 +179,7 @@ class terrariumAPI(object):
     bottle_app.route('/api/settings/<setting:path>/',       'GET',    self.setting_detail,                apply=self.authentication(), name='api:setting_detail')
     bottle_app.route('/api/settings/<setting:path>/',       'PUT',    self.setting_update,                apply=self.authentication(), name='api:setting_update')
     bottle_app.route('/api/settings/<setting:path>/',       'DELETE', self.setting_delete,                apply=self.authentication(), name='api:setting_delete')
-    bottle_app.route('/api/settings/profile_image/upload/', 'POST',   self.setting_upload_profile_image,  apply=self.authentication(), name='api:setting_upload_profile_image')
+#    bottle_app.route('/api/settings/profile_image/upload/', 'POST',   self.setting_upload_profile_image,  apply=self.authentication(), name='api:setting_upload_profile_image')
     bottle_app.route('/api/settings/',                      'PUT',    self.setting_update_multi,          apply=self.authentication(), name='api:setting_update_multi')
     bottle_app.route('/api/settings/',                      'GET',    self.setting_list,                  apply=self.authentication(), name='api:setting_list')
     bottle_app.route('/api/settings/',                      'POST',   self.setting_add,                   apply=self.authentication(), name='api:setting_add')
@@ -1247,20 +1247,29 @@ class terrariumAPI(object):
 
 
   # Settings
-  def setting_upload_profile_image(self):
-    __UPLOAD_PATH = 'media/'
-    data = []
-    try:
-      profile_image = request.files.get('file',None)
-      if profile_image is not None:
-        # Rename
-        profile_image.filename = 'profile_image.jpg'
-        profile_image.save(__UPLOAD_PATH, overwrite=True)
+  # def setting_upload_profile_image(self):
+  #   __UPLOAD_PATH = 'media/'
+  #   data = []
+  #   try:
+  #     profile_image = request.files.get('file',None)
+  #     print(f'Profile image: {profile_image}')
+  #     if profile_image is not None:
+  #       # Rename
+  #       profile_image.filename = 'profile_image.jpg'
+  #       profile_image.save(__UPLOAD_PATH, overwrite=True)
 
-        return {'profile_image' : f'{__UPLOAD_PATH}{profile_image.filename}'}
+  #       img = Image.open(f'{__UPLOAD_PATH}{profile_image.filename}')
+  #       print(img)
+  #       print(dir(img))
+  #       img.save('logo.ico')
+  #       print(img)
+  #       print(dir(img))
 
-    except Exception as ex:
-      raise HTTPError(status=500, body=f'Error uploading profile image. {ex}')
+  #       return {'profile_image' : f'{__UPLOAD_PATH}{profile_image.filename}'}
+
+  #   except Exception as ex:
+  #     print(ex)
+  #     raise HTTPError(status=500, body=f'Error uploading profile image. {ex}')
 
   @orm.db_session
   def setting_list(self):
