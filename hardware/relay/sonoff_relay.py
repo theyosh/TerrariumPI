@@ -87,7 +87,12 @@ class terrariumRelaySonoff(terrariumRelay):
     if data is None:
       return None
 
-    return self.ON if terrariumUtils.is_true(data['POWER']) else self.OFF
+    if 'POWER' in data:
+      data = data['POWER']
+    elif f'POWER{self._address["nr"]}' in data:
+      data = data[f'POWER{self._address["nr"]}']
+
+    return self.ON if terrariumUtils.is_true(data) else self.OFF
 
   @staticmethod
   def _scan_relays(callback=None, **kwargs):
