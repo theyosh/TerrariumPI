@@ -27,7 +27,9 @@
                 <th>{{ _('Volume') }}</th>
                 <th>{{ _('Shuffle') }}</th>
                 <th>{{ _('Repeat') }}</th>
+                {% if authenticated %}
                 <th>{{ _('Action') }}</th>
+                {% endif %}
               </tr>
               </thead>
               <tbody>
@@ -40,7 +42,9 @@
                   <th>{{ _('Volume') }}</th>
                   <th>{{ _('Shuffle') }}</th>
                   <th>{{ _('Repeat') }}</th>
+                  {% if authenticated %}
                   <th>{{ _('Action') }}</th>
+                  {% endif %}
                 </tr>
               </tfoot>
             </table>
@@ -55,7 +59,9 @@
     jQuery('#audio_files').DataTable({
       responsive: true,
       autoWidth: false,
-
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/{{ lang[3:].lower() }}_{{ lang[:2].lower() }}.json'
+      },
       ajax: {
         url: '{{ url_for("api:playlist_list") }}',
         dataSrc: function (json) {
@@ -89,7 +95,9 @@
         { data: 'volume' },
         { data: 'shuffle' },
         { data: 'repeat' },
+        {% if authenticated %}
         { data: 'action', class: 'd-flex justify-content-around' },
+        {% endif %}
       ]
     });
   });
