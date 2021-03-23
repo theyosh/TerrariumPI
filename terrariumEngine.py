@@ -1102,7 +1102,7 @@ class terrariumEngine(object):
       title_part2 = [''] * len(title_part1)
       title_part3 = [''] * len(title_part1)
 
-    # Get the lengths of all the texts for the text alignment (befor adding colors, as they are counted for the length also)
+    # Get the lengths of all the texts for the text alignment (before adding colors, as they are counted for the length also)
     max_title_length = max([len(line) for line in title_part1]) + max([len(line) for line in title_part2]) + max([len(line) for line in title_part3]) + 1
     max_line_length = avg_title_length + avg_value_length + avg_unit_length + system_title_length + system_value_length + 4
     title_padding = int((max_line_length - max_title_length) / 3) * ' '
@@ -1133,13 +1133,7 @@ class terrariumEngine(object):
       motd_version += padding + 'New version available: https://github.com/theyosh/TerrariumPI/releases' + '\n'
 
     # Relays
-    relay_lines = [[],[],[]]
-
-    relay_title_length = 0
-    relay_power_length = 0
-    relay_flow_length  = 0
-    relay_title_padding = 1
-
+    relays = []
     relay_averages = {'power': {'current' : 0, 'max' : 0}, 'flow': {'current' : 0, 'max' : 0}}
     with orm.db_session():
       for relay in Relay.select(lambda r: r.id in self.relays.keys() and not r.id in self.settings['exclude_ids']):
@@ -1156,9 +1150,14 @@ class terrariumEngine(object):
         if relay.is_dimmer:
           relay_title += f' ({relay.value:.0f}%)'
 
-        relay_lines[0].append(f'{relay_title}  ')
-        relay_lines[1].append(f'{relay.current_wattage:.2f} Watt')
-        relay_lines[2].append(f'{relay.current_flow:.2f} L/m')
+        relays.append({
+          'title' : f'{relay_title}  ',
+          'power' : f'{relay.current_wattage:.2f} Watt,',
+          # TODO: Fix waterflow volume indicator (L/m)
+          'flow'  : f'{relay.current_flow:.2f} L/m'
+        })
+
+    relays = sorted(relays, key=lambda k: k['title'])
 
     current_watt = relay_averages['power']['current']
     max_watt     = relay_averages['power']['max']
@@ -1166,26 +1165,25 @@ class terrariumEngine(object):
     current_flow = relay_averages['flow']['current']
     max_flow     = relay_averages['flow']['max']
 
-    relays_active     = len(relay_lines[0])
-    relay_title_left  = len(f'Current active relays {relays_active}/{len(self.relays)}   ')
+    relays_active     = len(relays)
+    relay_title_left  = len(f'Current active relays {relays_active}/{len(self.relays)}  ')
     # TODO: Fix waterflow volume indicator (L/m)
     relay_title_right = len(f'{current_watt:.2f}/{max_watt:.2f} Watt, {current_flow:.2f}/{max_flow:.2f} L/m')
 
     motd_relays = ''
-
-    if len(relay_lines[0]) > 0:
+    if relays_active > 0:
       # Get the max column width values based on the text length
-      relay_title_length = max([len(title) for title in relay_lines[0]])
-      relay_power_length = max([len(title) for title in relay_lines[1]])
-      relay_flow_length  = max([len(title) for title in relay_lines[2]])
+      relay_title_length = max([len(line['title']) for line in relays])
+      relay_power_length = max([len(line['power']) for line in relays])
+      relay_flow_length  = max([len(line['flow'])  for line in relays])
 
       # If the length of the title is longer then the max relay line, increase the relay title length for more padding
       if relay_title_left + relay_title_right > relay_title_length + relay_power_length + relay_flow_length:
         relay_title_length += (relay_title_left + relay_title_right) - (relay_title_length + relay_power_length + relay_flow_length)
 
       # Add the active relays to the list
-      for counter in range(len(relay_lines[0])):
-        motd_relays += relay_lines[0][counter].ljust(relay_title_length,' ') + ' ' + relay_lines[1][counter].rjust(relay_power_length,' ') + ' ' + relay_lines[2][counter].ljust(relay_flow_length,' ') + '\n'
+      for relay in relays:
+        motd_relays += relay['title'].ljust(relay_title_length,' ') + ' ' + relay['power'].rjust(relay_power_length,' ') + ' ' + relay['flow'].rjust(relay_flow_length,' ') + '\n'
 
       motd_relays = padding + ((relay_title_length + relay_power_length + relay_flow_length) * '-') + '\n' + motd_relays
 
@@ -1198,7 +1196,7 @@ class terrariumEngine(object):
         current_watt  = pyfancy().green(f'{current_watt:.2f}').get()
         current_flow  = pyfancy().blue(f'{current_flow:.2f}').get()
 
-    motd_relays = f'{padding}Current active relays ({relays_active}/{len(self.relays)})   ' + (relay_title_padding * ' ') + f'{current_watt}/{max_watt:.2f} Watt, {current_flow}/{max_flow:.2f} L/m' + '\n' + motd_relays
+    motd_relays = f'{padding}Current active relays ({relays_active}/{len(self.relays)})  ' + (relay_title_padding * ' ') + f'{current_watt}/{max_watt:.2f} Watt, {current_flow}/{max_flow:.2f} L/m' + '\n' + motd_relays
 
     if self.__engine['too_late'] > 30:
       motd_relays += '\n'
