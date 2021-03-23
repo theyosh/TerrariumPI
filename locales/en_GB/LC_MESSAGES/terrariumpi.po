@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2021-03-22 18:15+CET\n"
+"POT-Creation-Date: 2021-03-23 16:36+CET\n"
 "PO-Revision-Date: 2021-03-22 17:28+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
@@ -38,7 +38,7 @@ msgstr "Humidity"
 msgid "Water tank"
 msgstr "Water tank"
 
-#: terrariumArea.py:62 views/includes/sidebar.html:187
+#: terrariumArea.py:62 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
@@ -134,31 +134,31 @@ msgstr "water_flow"
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:998 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1002 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Up time"
 
-#: terrariumEngine.py:1004
+#: terrariumEngine.py:1008
 msgid "System load"
 msgstr "System load"
 
-#: terrariumEngine.py:1010 views/status.html:44
+#: terrariumEngine.py:1014 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU Temperature"
 
-#: terrariumEngine.py:1016
+#: terrariumEngine.py:1020
 msgid "Storage"
 msgstr "Storage"
 
-#: terrariumEngine.py:1022
+#: terrariumEngine.py:1026
 msgid "Memory"
 msgstr "Memory"
 
-#: terrariumEngine.py:1032
+#: terrariumEngine.py:1036
 msgid "average {sensor_type}"
 msgstr "average {sensor_type}"
 
-#: terrariumEngine.py:1192
+#: terrariumEngine.py:1208
 msgid "last update"
 msgstr "last update"
 
@@ -219,12 +219,12 @@ msgstr "TerrariumPI"
 msgid "Audio files"
 msgstr "Audio files"
 
-#: views/audio_files.html:24 views/audio_files.html:35 views/enclosures.html:79
-#: views/modals/area.html:44 views/modals/button.html:32
-#: views/modals/enclosure.html:17 views/modals/message.html:33
-#: views/modals/playlist.html:17 views/modals/sensor.html:41
-#: views/modals/service.html:27 views/modals/webcam.html:35
-#: views/playlists.html:24 views/playlists.html:37
+#: views/audio_files.html:24 views/audio_files.html:35
+#: views/enclosures.html:164 views/modals/area.html:44
+#: views/modals/button.html:32 views/modals/enclosure.html:17
+#: views/modals/message.html:33 views/modals/playlist.html:17
+#: views/modals/sensor.html:41 views/modals/service.html:27
+#: views/modals/webcam.html:35 views/playlists.html:24 views/playlists.html:37
 msgid "Name"
 msgstr "Name"
 
@@ -255,7 +255,7 @@ msgstr "Upload new audio file"
 msgid "Choose file"
 msgstr "Choose file"
 
-#: views/buttons.html:2 views/includes/sidebar.html:141
+#: views/buttons.html:2 views/includes/sidebar.html:140
 msgid "Buttons"
 msgstr "Buttons"
 
@@ -269,7 +269,7 @@ msgstr "Add new button"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
 #: views/dashboard.html:120 views/dashboard.html:311 views/enclosures.html:14
-#: views/enclosures.html:55 views/log.html:8 views/notifications.html:20
+#: views/enclosures.html:141 views/log.html:8 views/notifications.html:20
 #: views/notifications.html:62 views/relays.html:14 views/relays.html:83
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
 #: views/webcams.html:14 views/webcams.html:41
@@ -292,7 +292,7 @@ msgid "warning"
 msgstr "warning"
 
 #: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:294
-#: views/relays.html:45 views/sensors.html:49
+#: views/enclosures.html:32 views/relays.html:45 views/sensors.html:49
 msgid "Day"
 msgstr "Day"
 
@@ -317,7 +317,7 @@ msgid "Export"
 msgstr "Export"
 
 #: views/buttons.html:58 views/calendar.html:7 views/dashboard.html:117
-#: views/includes/sidebar.html:266 views/relays.html:64 views/sensors.html:69
+#: views/includes/sidebar.html:264 views/relays.html:64 views/sensors.html:69
 #: views/settings.html:2 views/weather.html:7 views/webcams.html:32
 msgid "Settings"
 msgstr "Settings"
@@ -369,24 +369,25 @@ msgid "Total water usage"
 msgstr "Total water usage"
 
 #: views/dashboard.html:108 views/enclosures.html:2
-#: views/includes/sidebar.html:217
+#: views/includes/sidebar.html:215
 msgid "Enclosures"
 msgstr "Enclosures"
 
-#: views/dashboard.html:167
+#: views/dashboard.html:167 views/enclosures.html:46
 msgid "Night"
 msgstr "Night"
 
-#: views/dashboard.html:183
+#: views/dashboard.html:183 views/enclosures.html:60
 msgid "Low"
 msgstr "Low"
 
-#: views/dashboard.html:200
+#: views/dashboard.html:200 views/enclosures.html:74
 msgid "High"
 msgstr "High"
 
-#: views/dashboard.html:217 views/modals/button.html:38
-#: views/modals/sensor.html:47 views/weather.html:20
+#: views/dashboard.html:217 views/enclosures.html:88
+#: views/modals/button.html:38 views/modals/sensor.html:47
+#: views/weather.html:20
 msgid "Current"
 msgstr "Current"
 
@@ -398,31 +399,31 @@ msgstr "No enclosures"
 msgid "Add new enclosure"
 msgstr "Add new enclosure"
 
-#: views/enclosures.html:47
+#: views/enclosures.html:133
 msgid "Add area"
 msgstr "Add area"
 
-#: views/enclosures.html:75
+#: views/enclosures.html:160
 msgid "Areas"
 msgstr "Areas"
 
-#: views/enclosures.html:80 views/modals/area.html:30
+#: views/enclosures.html:165 views/modals/area.html:30
 #: views/modals/sensor.html:26 views/modals/service.html:18
 msgid "Type"
 msgstr "Type"
 
-#: views/enclosures.html:81 views/modals/area.html:58
+#: views/enclosures.html:166 views/modals/area.html:58
 #: views/modals/area.html:276 views/modals/area.html:417
 msgid "Mode"
 msgstr "Mode"
 
-#: views/enclosures.html:82 views/includes/sidebar.html:120
-#: views/includes/sidebar.html:149 views/includes/sidebar.html:254
+#: views/enclosures.html:167 views/includes/sidebar.html:119
+#: views/includes/sidebar.html:148 views/includes/sidebar.html:252
 #: views/status.html:2 views/status.html:9
 msgid "Status"
 msgstr "Status"
 
-#: views/enclosures.html:84
+#: views/enclosures.html:169
 msgid "Actions"
 msgstr "Actions"
 
@@ -494,99 +495,99 @@ msgstr "New sensor"
 msgid "Scan sensors"
 msgstr "Scan sensors"
 
-#: views/includes/sidebar.html:112 views/modals/area.html:176
+#: views/includes/sidebar.html:111 views/modals/area.html:176
 #: views/modals/area.html:216 views/modals/area.html:534
 #: views/modals/area.html:606 views/relays.html:2
 msgid "Relays"
 msgstr "Relays"
 
-#: views/includes/sidebar.html:126
+#: views/includes/sidebar.html:125
 msgid "New relay"
 msgstr "New relay"
 
-#: views/includes/sidebar.html:132
+#: views/includes/sidebar.html:131
 msgid "Scan relays"
 msgstr "Scan relays"
 
-#: views/includes/sidebar.html:155
+#: views/includes/sidebar.html:154
 msgid "New button"
 msgstr "New button"
 
-#: views/includes/sidebar.html:164 views/modals/enclosure.html:50
+#: views/includes/sidebar.html:163 views/modals/enclosure.html:50
 #: views/webcams.html:2
 msgid "Webcams"
 msgstr "Webcams"
 
-#: views/includes/sidebar.html:172
+#: views/includes/sidebar.html:171
 msgid "Show"
 msgstr "Show"
 
-#: views/includes/sidebar.html:178
+#: views/includes/sidebar.html:177
 msgid "New webcam"
 msgstr "New webcam"
 
-#: views/includes/sidebar.html:195
+#: views/includes/sidebar.html:194
 msgid "Files"
 msgstr "Files"
 
-#: views/includes/sidebar.html:201 views/modals/area.html:359
+#: views/includes/sidebar.html:200 views/modals/area.html:359
 #: views/modals/area.html:399 views/playlists.html:2 views/playlists.html:10
 msgid "Playlists"
 msgstr "Playlists"
 
-#: views/includes/sidebar.html:208
+#: views/includes/sidebar.html:206
 msgid "New playlist"
 msgstr "New playlist"
 
-#: views/includes/sidebar.html:225
+#: views/includes/sidebar.html:223
 msgid "List"
 msgstr "List"
 
-#: views/includes/sidebar.html:231
+#: views/includes/sidebar.html:229
 msgid "New enclosure"
 msgstr "New enclosure"
 
-#: views/includes/sidebar.html:237
+#: views/includes/sidebar.html:235
 msgid "New area"
 msgstr "New area"
 
-#: views/includes/sidebar.html:246 views/settings.html:16
+#: views/includes/sidebar.html:244 views/settings.html:16
 msgid "System"
 msgstr "System"
 
-#: views/includes/sidebar.html:260 views/notifications.html:2
+#: views/includes/sidebar.html:258 views/notifications.html:2
 msgid "Notifications"
 msgstr "Notifications"
 
-#: views/includes/sidebar.html:272 views/log.html:2
+#: views/includes/sidebar.html:270 views/log.html:2
 msgid "Log"
 msgstr "Log"
 
-#: views/includes/sidebar.html:278
+#: views/includes/sidebar.html:276
 msgid "Restart"
 msgstr "Restart"
 
-#: views/includes/sidebar.html:284
+#: views/includes/sidebar.html:282
 msgid "Reboot"
 msgstr "Reboot"
 
-#: views/includes/sidebar.html:290
+#: views/includes/sidebar.html:288
 msgid "Shutdown"
 msgstr "Shutdown"
 
-#: views/includes/sidebar.html:294 views/includes/sidebar.html:307
+#: views/includes/sidebar.html:292 views/includes/sidebar.html:305
 msgid "About"
 msgstr "About"
 
-#: views/includes/sidebar.html:299
+#: views/includes/sidebar.html:297
 msgid "Help"
 msgstr "Help"
 
-#: views/includes/sidebar.html:313
+#: views/includes/sidebar.html:311
 msgid "Usage"
 msgstr "Usage"
 
-#: views/includes/sidebar.html:319 views/modals/button.html:17
+#: views/includes/sidebar.html:317 views/modals/button.html:17
 #: views/modals/sensor.html:17 views/modals/service.html:58
 #: views/modals/webcam.html:20
 msgid "Hardware"
@@ -1748,6 +1749,12 @@ msgid "Delete enclosure"
 msgstr "Delete enclosure"
 
 #: Missing text string
+#, fuzzy
+#| msgid "Event title"
+msgid "Delete event {title}"
+msgstr "Event title"
+
+#: Missing text string
 msgid "Delete message"
 msgstr "Delete message"
 
@@ -1850,6 +1857,12 @@ msgstr "Enter red GPIO pin"
 #: Missing text string
 msgid "Enter search terms"
 msgstr "Enter search terms"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Enter some information about this event"
+msgid "Enter some information about this enclosure"
+msgstr "Enter some information about this event"
 
 #: Missing text string
 msgid "Enter some information about this event"
@@ -1984,10 +1997,6 @@ msgid "Password"
 msgstr "Password"
 
 #: Missing text string
-msgid "Place some text here"
-msgstr "Place some text here"
-
-#: Missing text string
 msgid "Profile image is uploaded."
 msgstr "Profile image is uploaded."
 
@@ -2120,6 +2129,12 @@ msgid "Shutdown TerrariumPI"
 msgstr "Shutdown TerrariumPI"
 
 #: Missing text string
+#, fuzzy
+#| msgid "Toggle relay"
+msgid "Toggle menu"
+msgstr "Toggle relay"
+
+#: Missing text string
 msgid "Toggle relay"
 msgstr "Toggle relay"
 
@@ -2154,6 +2169,9 @@ msgstr "Warning messages"
 #: Missing text string
 msgid "Weather data source url"
 msgstr "Weather data source url"
+
+#~ msgid "Place some text here"
+#~ msgstr "Place some text here"
 
 #~ msgid "PH"
 #~ msgstr "PH"
