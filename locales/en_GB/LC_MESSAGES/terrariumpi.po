@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-03-23 16:36+CET\n"
-"PO-Revision-Date: 2021-03-22 17:28+0000\n"
+"PO-Revision-Date: 2021-03-23 15:43+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_GB/>\n"
@@ -1749,10 +1749,8 @@ msgid "Delete enclosure"
 msgstr "Delete enclosure"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Event title"
 msgid "Delete event {title}"
-msgstr "Event title"
+msgstr "Delete event {title}"
 
 #: Missing text string
 msgid "Delete message"
@@ -1859,10 +1857,8 @@ msgid "Enter search terms"
 msgstr "Enter search terms"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter some information about this event"
 msgid "Enter some information about this enclosure"
-msgstr "Enter some information about this event"
+msgstr "Enter some information about this enclosure"
 
 #: Missing text string
 msgid "Enter some information about this event"
@@ -2129,10 +2125,8 @@ msgid "Shutdown TerrariumPI"
 msgstr "Shutdown TerrariumPI"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Toggle relay"
 msgid "Toggle menu"
-msgstr "Toggle relay"
+msgstr "Toggle menu"
 
 #: Missing text string
 msgid "Toggle relay"
