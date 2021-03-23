@@ -1,7 +1,7 @@
 #!/bin/bash
 # Cronjob to run every minute
 # add using command 'crontab -e' as running TerrariumPI user
-# * * * * * ~/TerrariumPI/watchdog.sh
+# * * * * * ~/TerrariumPI/contrib/watchdog.sh
 
 BASEDIR=$(dirname $(readlink -nf $0))
 RUN_AS_USER=`stat -c "%U" "${BASEDIR}"`
