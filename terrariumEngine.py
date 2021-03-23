@@ -1169,6 +1169,7 @@ class terrariumEngine(object):
     relay_title_left  = len(f'Current active relays {relays_active}/{len(self.relays)}  ')
     # TODO: Fix waterflow volume indicator (L/m)
     relay_title_right = len(f'{current_watt:.2f}/{max_watt:.2f} Watt, {current_flow:.2f}/{max_flow:.2f} L/m')
+    relay_title_padding = 0
 
     motd_relays = ''
     if relays_active > 0:
