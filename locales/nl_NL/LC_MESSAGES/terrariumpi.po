@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-03-23 16:36+CET\n"
-"PO-Revision-Date: 2021-03-22 17:28+0000\n"
+"PO-Revision-Date: 2021-03-23 15:43+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -705,6 +705,8 @@ msgid ""
 "The amount of time to shift in hours based on the sun rise time. Negative "
 "values will make the day start earlier."
 msgstr ""
+"De hoeveelheid tijd die moet worden verschoven in uren op basis van de "
+"opkomsttijd van de zon. Negatieve waarden zal de dag eerder doen starten."
 
 #: views/modals/area.html:104
 msgid "Enter a value between -12 and 12."
@@ -1738,10 +1740,8 @@ msgid "Delete enclosure"
 msgstr "Verwijder verblijf"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Event title"
 msgid "Delete event {title}"
-msgstr "Evenement titel"
+msgstr "Afspraak {title} verwijderen"
 
 #: Missing text string
 msgid "Delete message"
@@ -1848,10 +1848,8 @@ msgid "Enter search terms"
 msgstr "Voer zoektermen in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter some information about this event"
 msgid "Enter some information about this enclosure"
-msgstr "Voer wat informatie over dit evenement in"
+msgstr "Voer wat informatie over dit verblijf in"
 
 #: Missing text string
 msgid "Enter some information about this event"
@@ -2118,10 +2116,8 @@ msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI uitschakelen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Toggle relay"
 msgid "Toggle menu"
-msgstr "Schakel"
+msgstr "Navigatiemenu"
 
 #: Missing text string
 msgid "Toggle relay"
