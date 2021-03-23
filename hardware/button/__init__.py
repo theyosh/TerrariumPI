@@ -113,7 +113,7 @@ class terrariumButton(object):
   def load_hardware(self):
     address = self._address
     self._device['device'] = terrariumUtils.to_BCM_port_number(address[0])
-    GPIO.setup(self._device['device'], GPIO.IN)  # Data in
+    GPIO.setup(self._device['device'], GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Data in
     self._load_hardware()
     self._checker['thread'] = threading.Thread(target=self._run)
     self._checker['thread'].start()
