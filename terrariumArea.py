@@ -547,7 +547,7 @@ class terrariumAreaLights(terrariumArea):
           value = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'off_' + relay.id]
           self.setup[period]['tweaks'][relay.id]['off']['delay'] = float(value) * 60.0
 
-    # Reset the powerd on state if the dimmers are not at max value. So the dimmer will continue where it left off
+    # Reset the powered on state if the dimmers are not at max value. So the dimmer will continue where it left off
     for period in self.PERIODS:
       if period not in self.setup:
         continue
@@ -692,10 +692,10 @@ class terrariumAreaHeater(terrariumArea):
 class terrariumAreaCooler(terrariumAreaHeater):
   pass
 
-class terrariumAreaHumidity(terrariumArea):
+class terrariumAreaHumidity(terrariumAreaHeater):
   pass
 
-class terrariumAreaMoisture(terrariumAreaHumidity):
+class terrariumAreaMoisture(terrariumAreaHeater):
   pass
 
 class terrariumAreaWatertank(terrariumArea):
