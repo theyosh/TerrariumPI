@@ -1031,13 +1031,15 @@ class terrariumEngine(object):
     # Get the sensors averages sorted on type name
     tmp = self.sensor_averages
     averages = []
-    for avg_type in sorted(tmp.keys()):
+    for avg_type in self.sensor_averages.keys():
       averages.append({
         'title' : _('average {sensor_type}').format(sensor_type=_(avg_type)).capitalize() + ':',
         'value' : f'{tmp[avg_type]["value"]:.2f}',
         'unit'  : self.units[avg_type],
         'alarm' : not tmp[avg_type]['alarm_min'] <= tmp[avg_type]['value'] <= tmp[avg_type]['alarm_max']
       })
+
+    averages = sorted(averages, key=lambda k: k['title'])
 
     # Get the lengths of all the texts for the text alignment
     avg_title_length    = max([len(line['title']) for line in averages])
@@ -1202,7 +1204,7 @@ class terrariumEngine(object):
     motd_file = Path('motd.sh')
     with motd_file.open('w') as motdfile:
       motdfile.write('#!/bin/bash\n')
-      motdfile.write('tput reset\n')
+#      motdfile.write('tput reset\n')
       motdfile.write('echo "')
       motdfile.write(motd_title.replace('`','\`') + '\n')
       motdfile.write(motd_version + '\n')
