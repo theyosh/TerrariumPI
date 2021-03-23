@@ -15,14 +15,100 @@
             {% endif %} </p>
         </div>
       </div>
-
       <div class="col" id="enclosure_list">
         <script type="text/html" id="area_table_row">
           <tr>
-            <td data-content="name" ></td>
-            <td data-content="type" ></td>
-            <td data-content="mode"></td>
-            <td> .. </td>
+            <td data-content="name" class="align-middle"></td>
+            <td data-content="type" class="align-middle"></td>
+            <td data-content="mode" class="align-middle"></td>
+            <td>
+              <table class="table table-sm text-nowrap mb-0">
+                <tr >
+                  <td style="width: 10px" class="border-top-0"><small class="badge" title="Current status" data-template-bind='[
+                    {"attribute": "class", "value": "status", "formatter": "prefixer", "formatOptions": "badge "},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_relay_state_"}
+                      ]'>&nbsp;&nbsp;</small></td>
+                  <td data-class="state.day" class="border-top-0" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                    {{ _('Day') }}:
+                    <span data-template-bind='[
+                    {"attribute": "content", "value": "state.day.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_day_start_"} ]'></span>
+                    -
+                    <span data-template-bind='[
+                    {"attribute": "content", "value": "state.day.end", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_day_end__"} ]'></span>
+
+                    (<span data-template-bind='[
+                    {"attribute": "content", "value": "state.day.duration", "formatter": "durationformatter", "formatOptions": "LTS"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_day_duration_"} ]'></span>)
+                  </td>
+                  <td data-class="state.night" class="border-top-0" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                    {{ _('Night') }}:
+                    <span data-template-bind='[
+                    {"attribute": "content", "value": "state.night.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_night_start_"} ]'></span>
+                    -
+                    <span data-template-bind='[
+                    {"attribute": "content", "value": "state.night.end", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_night_end_"} ]'></span>
+
+                    (<span data-template-bind='[
+                    {"attribute": "content", "value": "state.night.duration", "formatter": "durationformatter"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_night_duration_"} ]'></span>)
+                  </td>
+                  <td data-class="state.low.begin" class="border-top-0" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                    {{ _('Low') }}:
+                    <span data-template-bind='[
+                    {"attribute": "content", "value": "state.low.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_low_start_"} ]'></span>
+                    -
+                    <span data-template-bind='[
+                    {"attribute": "content", "value": "state.low.end", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_low_end_"} ]'></span>
+
+                    (<span data-template-bind='[
+                    {"attribute": "content", "value": "state.low.duration", "formatter": "durationformatter", "formatOptions": "LTS"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_low_duration_"} ]'></span>)
+                  </td>
+                  <td data-class="state.high.begin" class="border-top-0" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                    {{ _('High') }}:
+                    <span data-template-bind='[
+                    {"attribute": "content", "value": "state.high.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_high_start_"} ]'></span>
+                    -
+                    <span data-template-bind='[
+                    {"attribute": "content", "value": "state.high.end", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_high_end_"} ]'></span>
+
+                    (<span data-template-bind='[
+                    {"attribute": "content", "value": "state.high.duration", "formatter": "durationformatter"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_high_duration_"} ]'></span>)
+                  </td>
+                  <td data-class="state.sensors" class="border-top-0" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                    {{ _('Current') }}:
+                    <span data-template-bind='[
+                    {"attribute": "content", "value": "state.sensors.current", "formatter" : "numberformatter", "formatOptions" : "2"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_current_"} ]'></span><span data-template-bind='[
+                    {"attribute": "content", "value": "type", "formatter" : "unitformatter" }]'></span>
+
+                    (<span data-template-bind='[
+                    {"attribute": "content", "value": "state.sensors.alarm_min", "formatter" : "numberformatter", "formatOptions" : "2" },
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_alarm_min_"}  ]'></span><span data-template-bind='[
+                    {"attribute": "content", "value": "type", "formatter" : "unitformatter" } ]'></span>
+                      -
+                    <span data-template-bind='[
+                    {"attribute": "content", "value": "state.sensors.alarm_max", "formatter" : "numberformatter", "formatOptions" : "2"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_alarm_max_"}  ]'></span><span data-template-bind='[
+                    {"attribute": "content", "value": "type", "formatter" : "unitformatter" } ]'></span>)
+                  </td>
+                  <td class="text-right border-top-0" style="width:10px">
+                    <i data-template-bind='[
+                    {"attribute": "class", "value": "warning"},
+                    {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_warning_"} ]'> </i>
+                  </td>
+                </tr>
+              </table>
+            </td>
             {% if authenticated %}
             <td class="actions text-center">
               <i class="fas fa-wrench edit_area" data-template-bind='[
@@ -64,11 +150,10 @@
               <div class="col-4 col-lg-2">
                 <a data-fancybox data-title="name" data-href="image"> <img data-src="image" data-alt="name" class="img-thumbnail"> </a>
               </div>
-              <div class="col-8 col-lg-2 card-body">
+              <div class="col-8 col-lg-3 card-body">
                 <p class="card-text" data-content="description" data-format="html"></p>
-                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
               </div>
-              <div class="col-12 col-lg-8">
+              <div class="col-12 col-lg-7">
                 <div class="card-body">
                   <div class="row g-0">
                     <div class="col">
@@ -79,7 +164,7 @@
                             <th>{{ _('Name') }}</th>
                             <th>{{ _('Type') }}</th>
                             <th>{{ _('Mode') }}</th>
-                            <th>{{ _('Status') }}</th>
+                            <th style="width:10%">{{ _('Status') }}</th>
                             {% if authenticated %}
                             <th class="actions text-center">{{ _('Actions') }}</th>
                             {% endif %}
@@ -110,6 +195,11 @@
 
         enclosure.edit_link   = '{{ url_for('api:enclosure_update', enclosure='_id_') }}'.replace('_id_',enclosure.id);
         enclosure.delete_link = '{{ url_for('api:enclosure_delete', enclosure='_id_') }}'.replace('_id_',enclosure.id);
+
+        jQuery.each(enclosure.areas,function(counter, area){
+          area.status  = (area.state.powered === true ? 'badge-success' : (area.state.powered === false ? 'badge-secondary' : ''));
+        });
+
         jQuery('#enclosure_list').loadTemplate(jQuery('#enclosure_template'), enclosure, {
           append: true,
         });

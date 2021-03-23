@@ -33,7 +33,7 @@
   <div class="col-12 col-sm-12 col-md-10 col-lg-10">
     <div class="form-group">
       <label for="enclosure_description">{{ _('Description') }}</label>
-      <textarea class="textarea" id="enclosure_description" name="description" placeholder="{{ _('Place some text here') }}" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+      <textarea class="form-control" id="enclosure_description" name="description" placeholder="{{ _('Enter some information about this enclosure') }}"></textarea>
     </div>
   </div>
   <div class="col-12 col-sm-2 col-md-2 col-lg-2">
@@ -60,14 +60,19 @@
 {% block modal_form_javascript_functions %}
 {% endblock %}
 
+{% block modal_form_javascript_pre %}
+// On modal close
+{{modal_type}}_modal.on('hidden.bs.modal', function(){
+  {{modal_type}}_modal.find('textarea#enclosure_description').val('');
+  {{modal_type}}_modal.find('textarea#enclosure_description').summernote('reset');
+  {{modal_type}}_modal.find('textarea#enclosure_description').summernote('destroy');
+});
+{% endblock %}
 
 {% block modal_form_javascript_load %}
-
 jQuery.when(
-
   jQuery.get('{{ url_for("api:button_list") }}'),
   jQuery.get('{{ url_for("api:webcam_list") }}'),
-
 ).done(function(buttons, webcams) {
   let {{modal_type}}_door_select = {{modal_type}}_form.find('select#enclosure_doors');
   {{modal_type}}_door_select.prop('disabled', false).find('option').remove();
@@ -111,9 +116,17 @@ jQuery.when(
           field.val(value).trigger('change');
         }
       });
+      {{modal_type}}_modal.find('textarea#enclosure_description').summernote({
+        dialogsInBody: true,
+        height: 200
+      });
       {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
     });
   } else {
+    {{modal_type}}_modal.find('textarea#enclosure_description').summernote({
+      dialogsInBody: true,
+      height: 200
+    });
     {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
   }
 });
