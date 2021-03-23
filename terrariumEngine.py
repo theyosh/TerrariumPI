@@ -1189,10 +1189,11 @@ class terrariumEngine(object):
 
     motd_relays = f'{padding}Current active relays ({relays_active}/{len(self.relays)})' + (relay_title_padding * ' ') + f'{current_watt}/{max_watt:.2f} Watt, {current_flow}/{max_flow:.2f} L/m' + '\n' + motd_relays
 
-    #if self.__engine['too_late'] > 30:
-    motd_relays += '\n'
-    motd_relays += (2 * padding) + pyfancy().red(f'Engine can\'t keep up. For {self.__engine["too_late"]} times it could not finish in {terrariumEngine.__ENGINE_LOOP_TIMEOUT} seconds.').get()
-    motd_relays += '\n'
+    if self.__engine['too_late'] > 30:
+      motd_relays += '\n'
+      motd_relays += (2 * padding) + pyfancy().red(f'Engine can\'t keep up! For {self.__engine["too_late"]} times it could not finish in {terrariumEngine.__ENGINE_LOOP_TIMEOUT} seconds.').get()
+      motd_relays += (3 * padding) + pyfancy().red(f'Please check your setup and hardware!').get()
+      motd_relays += '\n'
 
     # Last update line
     last_update = _('last update').capitalize()
