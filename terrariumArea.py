@@ -483,7 +483,7 @@ class terrariumArea(object):
 
   def _relay_action(self, part, relay, action):
     if relay.id in self.enclosure.relays:
-      logger.info(f'Set the relay {relay.name} to {relay.ON if on else relay.OFF}')
+      logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF}')
       self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF)
 
   def stop(self):
