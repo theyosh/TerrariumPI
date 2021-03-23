@@ -1166,30 +1166,39 @@ class terrariumEngine(object):
     current_flow = relay_averages['flow']['current']
     max_flow     = relay_averages['flow']['max']
 
-    relays_active = len(relay_lines[0])
+    relays_active     = len(relay_lines[0])
+    relay_title_left  = len(f'Current active relays {relays_active}/{len(self.relays)}   ')
+    # TODO: Fix waterflow volume indicator (L/m)
+    relay_title_right = len(f'{current_watt:.2f}/{max_watt:.2f} Watt, {current_flow:.2f}/{max_flow:.2f} L/m')
+
     motd_relays = ''
 
     if len(relay_lines[0]) > 0:
+      # Get the max column width values based on the text length
       relay_title_length = max([len(title) for title in relay_lines[0]])
       relay_power_length = max([len(title) for title in relay_lines[1]])
       relay_flow_length  = max([len(title) for title in relay_lines[2]])
 
+      # If the length of the title is longer then the max relay line, increase the relay title length for more padding
+      if relay_title_left + relay_title_right > relay_title_length + relay_power_length + relay_flow_length:
+        relay_title_length += (relay_title_left + relay_title_right) - (relay_title_length + relay_power_length + relay_flow_length)
+
+      # Add the active relays to the list
       for counter in range(len(relay_lines[0])):
         motd_relays += relay_lines[0][counter].ljust(relay_title_length,' ') + ' ' + relay_lines[1][counter].rjust(relay_power_length,' ') + ' ' + relay_lines[2][counter].ljust(relay_flow_length,' ') + '\n'
 
       motd_relays = padding + ((relay_title_length + relay_power_length + relay_flow_length) * '-') + '\n' + motd_relays
 
-      relay_title_left = len(f'Current active relays {relays_active}/{len(self.relays)}')
-      relay_title_right = len(f'{current_watt:.2f}/{max_watt:.2f} Watt, {current_flow:.2f}/{max_flow:.2f} L/m')
+      # Adjust the padding/spacing based on the length of the relay text lines
       relay_title_padding = (relay_title_length + relay_power_length + relay_flow_length) - (relay_title_left + relay_title_right) - 2
 
       # Add colors to the values
       if relays_active > 0:
         relays_active = pyfancy().green(f'{relays_active}').get()
-        current_watt = pyfancy().green(f'{current_watt:.2f}').get()
-        current_flow = pyfancy().blue(f'{current_flow:.2f}').get()
+        current_watt  = pyfancy().green(f'{current_watt:.2f}').get()
+        current_flow  = pyfancy().blue(f'{current_flow:.2f}').get()
 
-    motd_relays = f'{padding}Current active relays ({relays_active}/{len(self.relays)})' + (relay_title_padding * ' ') + f'{current_watt}/{max_watt:.2f} Watt, {current_flow}/{max_flow:.2f} L/m' + '\n' + motd_relays
+    motd_relays = f'{padding}Current active relays ({relays_active}/{len(self.relays)})   ' + (relay_title_padding * ' ') + f'{current_watt}/{max_watt:.2f} Watt, {current_flow}/{max_flow:.2f} L/m' + '\n' + motd_relays
 
     if self.__engine['too_late'] > 30:
       motd_relays += '\n'
