@@ -1179,7 +1179,7 @@ class terrariumEngine(object):
 
       # If the length of the title is longer then the max relay line, increase the relay title length for more padding
       if relay_title_left + relay_title_right > relay_title_length + relay_power_length + relay_flow_length:
-        relay_title_length += (relay_title_left + relay_title_right) - (relay_title_length + relay_power_length + relay_flow_length)
+        relay_title_length += (relay_title_left + relay_title_right) - (relay_title_length + relay_power_length + relay_flow_length) + 2
 
       # Add the active relays to the list
       for relay in relays:
