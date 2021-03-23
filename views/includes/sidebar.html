@@ -11,11 +11,11 @@
       </div>
       <div class="info">
       {% if authenticated %}
-        <a href="{{ url_for('page', page='settings')}}" >{{ _('Hello') }} {{ username }}.</a>
+        <a href="{{ url_for('page', page='settings')}}" title="{{ _('Settings') }}">{{ _('Hello') }} {{ username }}.</a>
         <br />
-        <a href="{{ url_for('logout') }}" title="Logout" data-action="POST" data-toggle="modal" data-target="#modal-confirm">{{ _('Logout') }}</a>
+        <a href="{{ url_for('logout') }}" title="{{ _('Logout') }}" data-action="POST" data-toggle="modal" data-target="#modal-confirm">{{ _('Logout') }}</a>
       {% else %}
-        <a href="{{ url_for('login') }}">
+        <a href="{{ url_for('login') }}" title="{{ _('Login') }}">
           {{ _('Read only mode') }} <br />{{ _('Login') }}
         </a>
       {% endif %}
@@ -34,7 +34,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-flat" data-widget="treeview" role="menu" data-accordion="true">
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" title="{{ _('Home') }}">
             <i class="nav-icon fas fa-home"></i>
             <p>
               {{ _('Home') }}
@@ -43,27 +43,27 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ url_for('page', page='dashboard')}}" class="nav-link">
+              <a href="{{ url_for('page', page='dashboard')}}" class="nav-link" title="{{ _('Dashboard') }}">
                 <i class="fas fa-th-list nav-icon"></i>
                 <p>{{ _('Dashboard') }}</p>
               </a>
             </li>
             {% if show_gauge_overview %}
             <li class="nav-item">
-              <a href="{{ url_for('page', page='sensors')}}" class="nav-link">
+              <a href="{{ url_for('page', page='sensors')}}" class="nav-link" title="{{ _('All sensors') }}">
                 <i class="fas fa-tint nav-icon"></i>
                 <p>{{ _('All sensors') }}</p>
               </a>
             </li>
             {% endif %}
             <li class="nav-item">
-              <a href="{{ url_for('page',page='weather')}}" class="nav-link">
+              <a href="{{ url_for('page',page='weather')}}" class="nav-link" title="{{ _('Weather') }}">
                 <i class="fas fa-cloud-sun nav-icon"></i>
                 <p>{{ _('Weather') }}</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ url_for('page',page='calendar')}}" class="nav-link">
+              <a href="{{ url_for('page',page='calendar')}}" class="nav-link" title="{{ _('Calendar') }}">
                 <i class="fas fa-calendar-alt nav-icon"></i>
                 <p>{{ _('Calendar') }}</p>
               </a>
@@ -71,7 +71,7 @@
           </ul>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" title="{{ _('Sensors') }}">
             <i class="fas fa-tint nav-icon"></i>
             <p>
               {{ _('Sensors') }}
@@ -81,7 +81,7 @@
           <ul class="nav nav-treeview" id="available_sensor_types">
             <script type="text/html" id="sensor_type_menu">
               <li data-class="tree" class="nav-item">
-                <a data-href="link" class="nav-link">
+                <a data-href="link" class="nav-link" data-title="title">
                   <i data-class="icon" class="nav-icon"></i>
                   <p >
                     <span data-content-text="title"></span>
@@ -104,9 +104,8 @@
             </li>
           </ul>
         </li>
-
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" title="{{ _('Relays') }}">
             <i class="nav-icon fas fa-bolt"></i>
             <p>
               {{ _('Relays') }}
@@ -115,7 +114,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ url_for('page', page='relays')}}" class="nav-link">
+              <a href="{{ url_for('page', page='relays')}}" class="nav-link" title="{{ _('Status') }}">
                 <i class="fas fa-power-off nav-icon"></i>
                 <p>{{ _('Status') }}</p>
               </a>
@@ -135,7 +134,7 @@
           </ul>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" title="{{ _('Buttons') }}">
             <i class="nav-icon fas fa-thumbtack"></i>
             <p>
               {{ _('Buttons') }}
@@ -144,7 +143,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ url_for('page', page='buttons')}}" class="nav-link">
+              <a href="{{ url_for('page', page='buttons')}}" class="nav-link" title="{{ _('Status') }}">
                 <i class="fas fa-list nav-icon"></i>
                 <p>{{ _('Status') }}</p>
               </a>
@@ -158,7 +157,7 @@
           </ul>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" title="{{ _('Webcams') }}">
             <i class="nav-icon fas fa-video"></i>
             <p>
               {{ _('Webcams') }}
@@ -167,7 +166,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ url_for('page', page='webcams')}}" class="nav-link">
+              <a href="{{ url_for('page', page='webcams')}}" class="nav-link" title="{{ _('Show') }}">
                 <i class="fas fa-tv nav-icon"></i>
                 <p>{{ _('Show') }}</p>
               </a>
@@ -181,7 +180,7 @@
           </ul>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" title="{{ _('Audio') }}">
             <i class="nav-icon fas fa-music"></i>
             <p>
               {{ _('Audio') }}
@@ -190,18 +189,17 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ url_for('page', page='audio_files')}}" class="nav-link">
+              <a href="{{ url_for('page', page='audio_files')}}" class="nav-link" title="{{ _('Files') }}">
                 <i class="fas fa-file-audio nav-icon"></i>
                 <p>{{ _('Files') }}</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ url_for('page', page='playlists')}}" class="nav-link">
+              <a href="{{ url_for('page', page='playlists')}}" class="nav-link" title="{{ _('Playlists') }}">
                 <i class="fas fa-play nav-icon"></i>
                 <p>{{ _('Playlists') }}</p>
               </a>
             </li>
-
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="#" class="nav-link" title="{{ _('Add new playlist') }}" data-toggle="modal" data-target="#modal-playlist-setup">
                 <i class="fas fa-plus nav-icon"></i>
@@ -211,7 +209,7 @@
           </ul>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" title="{{ _('Enclosures') }}">
             <i class="nav-icon fas fa-globe"></i>
             <p>
               {{ _('Enclosures') }}
@@ -220,7 +218,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ url_for('page', page='enclosures')}}" class="nav-link">
+              <a href="{{ url_for('page', page='enclosures')}}" class="nav-link" title="{{ _('List') }}">
                 <i class="fas fa-building nav-icon"></i>
                 <p>{{ _('List') }}</p>
               </a>
@@ -240,7 +238,7 @@
           </ul>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" title="{{ _('System') }}">
             <i class="nav-icon fas fa-cog"></i>
             <p>
               {{ _('System') }}
@@ -249,25 +247,25 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ url_for('page', page='status')}}" class="nav-link">
+              <a href="{{ url_for('page', page='status')}}" class="nav-link" title="{{ _('Status') }}">
                 <i class="fas fa-exclamation-triangle nav-icon"></i>
                 <p>{{ _('Status') }}</p>
               </a>
             </li>
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
-              <a href="{{ url_for('page', page='notifications')}}" class="nav-link">
+              <a href="{{ url_for('page', page='notifications')}}" class="nav-link" title="{{ _('Notifications') }}">
                 <i class="fas fa-bell nav-icon"></i>
                 <p>{{ _('Notifications') }}</p>
               </a>
             </li>
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
-              <a href="{{ url_for('page', page='settings')}}" class="nav-link">
+              <a href="{{ url_for('page', page='settings')}}" class="nav-link" title="{{ _('Settings') }}">
                 <i class="fas fa-cogs nav-icon"></i>
                 <p>{{ _('Settings') }}</p>
               </a>
             </li>
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
-              <a href="{{ url_for('page', page='log')}}" class="nav-link" >
+              <a href="{{ url_for('page', page='log')}}" class="nav-link" title="{{ _('Log') }}">
                 <i class="fas fa-file-alt nav-icon"></i>
                 <p>{{ _('Log') }}</p>
               </a>
@@ -293,7 +291,7 @@
         </li>
         <li class="nav-header">{{ _('About') }}</li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" title="{{ _('Help') }}">
             <i class="nav-icon fas fa-info"></i>
             <p>
               {{ _('Help') }}

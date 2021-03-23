@@ -5,7 +5,7 @@
   {% if authenticated %}
   <li class="breadcrumb-item"><a href="{{ url_for('api:logfile_download') }}"><i class="fas fa-download pt-1 mr-1"></i> {{ _('Download log file') }}</a></li>
   {% else %}
-    <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Login to make changes') }}</a>
+    <a href="{{ url_for('login') }}" class="dropdown-item" title="{{ _('Login to make changes') }}">{{ _('Login to make changes') }}</a>
   {% endif %}
 </ol>
 {% endblock options %}

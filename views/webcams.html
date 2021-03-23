@@ -11,7 +11,7 @@
             {% if authenticated %}
             <a href="#" class="btn btn-primary active" style="text-decoration: none;" role="button" aria-pressed="true" data-toggle="modal" data-target="#modal-webcam-setup" >{{ _('Add new webcam') }}</a>
             {% else %}
-            <a href="{{ url_for('login') }}" class="text-primary">{{ _('Login to make changes') }}</a>
+            <a href="{{ url_for('login') }}" class="text-primary" title="{{ _('Login to make changes') }}">{{ _('Login to make changes') }}</a>
             {% endif %}
           </p>
         </div>
