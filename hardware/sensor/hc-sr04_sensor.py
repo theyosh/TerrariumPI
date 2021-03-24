@@ -7,11 +7,8 @@ from terrariumUtils import terrariumUtils
 
 from gevent import sleep
 from time import time
-
-# pip install gpiozero
-#from gpiozero import OutputDevice, InputDevice # DistanceSensor is broken in Gevent...... :(
-# pip install RPi.GPIO
-import RPi.GPIO as GPIO
+import pigpio
+# http://abyz.me.uk/rpi/pigpio/code/sonar_trigger_echo_py.zip
 
 class terrariumHCSR04Sensor(terrariumSensor):
   HARDWARE = 'hc-sr04'
@@ -21,45 +18,77 @@ class terrariumHCSR04Sensor(terrariumSensor):
   def _load_hardware(self):
     address = self._address
 
-    device = {'trigger' : terrariumUtils.to_BCM_port_number(address[0]),
-              'echo'    : terrariumUtils.to_BCM_port_number(address[1])}
+    pi         = pigpio.pi()
+    self._trig = terrariumUtils.to_BCM_port_number(address[0])
+    self._echo = terrariumUtils.to_BCM_port_number(address[1])
 
-    GPIO.setup(device['trigger'], GPIO.OUT) # Trigger out
-    GPIO.setup(device['echo']   , GPIO.IN)  # Data in
+    self._ping = False
+    self._high = None
+    self._time = None
 
-    return device
+    self._triggered = False
+
+    self._trig_mode = pi.get_mode(self._trig)
+    self._echo_mode = pi.get_mode(self._echo)
+
+    pi.set_mode(self._trig, pigpio.OUTPUT)
+    pi.set_mode(self._echo, pigpio.INPUT)
+
+    self._cb = pi.callback(self._trig, pigpio.EITHER_EDGE, self._cbf)
+    self._cb = pi.callback(self._echo, pigpio.EITHER_EDGE, self._cbf)
+
+    return pi
+
+  def _cbf(self, gpio, level, tick):
+    if gpio == self._trig:
+      if level == 0: # trigger sent
+        self._triggered = True
+        self._high = None
+    else:
+      if self._triggered:
+        if level == 1:
+          self._high = tick
+        else:
+          if self._high is not None:
+            self._time = tick - self._high
+            self._high = None
+            self._ping = True
 
   def _get_data(self):
-    GPIO.output(self.device['trigger'], False)
-    sleep(0.1)
-    GPIO.output(self.device['trigger'], True)
-    sleep(0.00001)
-    GPIO.output(self.device['trigger'], False)
+    """
+    Triggers a reading.  The returned reading is the number
+    of microseconds for the sonar round-trip.
 
-    pulse_start = time()
-    starttime = pulse_start
-    while GPIO.input(self.device['echo']) == 0:
-      pulse_start = time()
-      # Somehow, sometimes this will end in an endless loop. The value will never go to '0' (zero). So wrong measurement and return none...
-      if pulse_start - starttime > 2:
-        logger.warning(f'Sensor {self} is failing to get in the right state. Abort!')
-        return None
-
-    pulse_end = time()
-    while GPIO.input(self.device['echo']) == 1:
-      pulse_end = time()
-
-    pulse_duration = pulse_end - pulse_start
-    # Distance in cm
-    data = { 'distance' : round(pulse_duration * 17150,5)}
-
-    return data
+    round trip cms = round trip time / 1000000.0 * 34030
+    """
+    if self.device is not None:
+      self._ping = False
+      self.device.gpio_trigger(self._trig)
+      start = time()
+      while not self._ping:
+        if time()-start > 5.0:
+          return None
+        sleep(.001)
+      # Return in cm
+      return { 'distance' : round(self._time * 17150.5 / 1000000.0 ,3)}
+    else:
+      return None
 
   def stop(self):
-    GPIO.cleanup(self.device['trigger'])
-    GPIO.cleanup(self.device['echo'])
-
+    """
+    Cancels the ranger and returns the gpios to their
+    original mode.
+    """
+    if self.device is not None:
+      self._cb.cancel()
+      self.device.set_mode(self._trig, self._trig_mode)
+      self.device.set_mode(self._echo, self._echo_mode)
+      self.device.stop()
 
 class terrariumHCSR04PSensor(terrariumHCSR04Sensor):
   HARDWARE = 'hc-sr04p'
   NAME     = 'HC-SR04P ultrasonic ranging sensor'
+
+class terrariumJSNSR04TSensor(terrariumHCSR04Sensor):
+  HARDWARE = 'jsn-sr04t'
+  NAME     = 'JSN-SR04T ultrasonic ranging sensor'
