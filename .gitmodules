@@ -1,9 +1,6 @@
 [submodule "static/assets/plugins/fancybox"]
 	path = static/assets/plugins/fancybox
 	url = https://github.com/fancyapps/fancybox.git
-[submodule "static/assets/plugins/leaflet.fullscreen"]
-	path = static/assets/plugins/leaflet.fullscreen
-	url = https://github.com/Leaflet/Leaflet.fullscreen.git
 [submodule "static/assets/plugins/leaflet.loading"]
 	path = static/assets/plugins/leaflet.loading
 	url = https://github.com/ebrelsford/Leaflet.loading.git
