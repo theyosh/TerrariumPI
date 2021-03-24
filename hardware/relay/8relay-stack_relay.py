@@ -8,12 +8,16 @@ from pathlib import Path
 import sys
 # For the old version (V1). New version (V3) will be installed as package
 sys.path.insert(0, str((Path(__file__).parent / Path('../../3rdparty/relay8-rpi/python')).resolve()))
+sys.path.insert(0, str((Path(__file__).parent / Path('../../3rdparty/4relay-rpi/python/4relay')).resolve()))
 
 from relay8 import set as relay8SetV1
 from relay8 import get as relay8GetV1
 
 from lib8relay import set as relay8SetV3
 from lib8relay import get as relay8GetV3
+
+from lib4relay import set as relay4Set
+from lib4relay import get as relay4Get
 
 class terrariumRelay8Stack(terrariumRelay):
   HARDWARE = '8relay-stack_v1'
@@ -55,6 +59,22 @@ class terrariumRelay8StackV3(terrariumRelay8Stack):
   def _get_hardware_value(self):
     (device, nr) = self.device
     data = relay8GetV3(device, nr)
+    if data is None:
+      return None
+
+    return self.ON if terrariumUtils.is_true(data) else self.OFF
+
+class terrariumRelay4Stack(terrariumRelay8Stack):
+  HARDWARE = '4relay-stack'
+  NAME = 'Sequent Microsystems 4 Relay Card'
+
+  def _set_hardware_value(self, state):
+    (device, nr) = self.device
+    relay4Set(device, nr, 1 if state == self.ON else 0)
+
+  def _get_hardware_value(self):
+    (device, nr) = self.device
+    data = relay4Get(device, nr)
     if data is None:
       return None
 
