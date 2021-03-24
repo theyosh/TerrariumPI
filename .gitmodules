@@ -22,3 +22,6 @@
 [submodule "3rdparty/energenie-connect0r"]
 	path = 3rdparty/energenie-connect0r
 	url = https://github.com/perryflynn/energenie-connect0r.git
+[submodule "3rdparty/4relay-rpi"]
+	path = 3rdparty/4relay-rpi
+	url = https://github.com/SequentMicrosystems/4relay-rpi
