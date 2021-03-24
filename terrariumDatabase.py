@@ -50,7 +50,6 @@ def create_defaults(version):
     {'id' : 'hide_environment_dashboard', 'value' : 'false'},
     {'id' : 'all_gauges_on_single_page',  'value' : 'false'},
     {'id' : 'graph_smooth_value',         'value' : '0'},
-    {'id' : 'encryption_salt',            'value' : Fernet.generate_key().decode()},
   ]
 
   for setting in setting_defaults:

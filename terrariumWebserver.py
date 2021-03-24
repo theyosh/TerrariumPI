@@ -79,7 +79,7 @@ class terrariumWebserver(object):
             # Update the cookie timeout so that we are staying logged in as long as we are working on the interface
             response.set_cookie('auth', request.get_cookie('auth', secret=self.cookie_secret), secret=self.cookie_secret, **{ 'max_age' : 3600, 'path' : '/'})
 
-          self.__add_caching_heders(response,request.fullpath)
+          self.__add_caching_headers(response,request.fullpath)
 
         return func(*a, **ka)
 
@@ -90,7 +90,7 @@ class terrariumWebserver(object):
   def __clear_authentication(self, user, password):
     return True
 
-  def __add_caching_heders(self, response, fullpath):
+  def __add_caching_headers(self, response, fullpath):
     if 200 == response.status_code:
       # Add the caching headers
       for caching in self.__caching_timeouts:
@@ -183,7 +183,7 @@ class terrariumWebserver(object):
       # File does not exists, so just return the error
       return staticfile
 
-    self.__add_caching_heders(staticfile,f'{root}/{filename}')
+    self.__add_caching_headers(staticfile,f'{root}/{filename}')
 
     return staticfile
 
@@ -244,10 +244,10 @@ class terrariumWebserver(object):
     self.bottle.route('/<root:re:(static|webcam|media|log)>/<filename:path>', method='GET', callback=self.__static_file, apply=self.authenticate())
     self.bottle.route('/<root:re:(media)>/upload/', method='POST', callback=self.__file_upload, apply=self.authenticate(), name='file_upload')
 
-  def url_for(self, name, **kargs):
+  def url_for(self, name, **kwargs):
     # First check the webserver for named routes
     try:
-      url = self.bottle.get_url(name, **kargs)
+      url = self.bottle.get_url(name, **kwargs)
     except RouteBuildError:
       url = '#'
 
@@ -295,7 +295,7 @@ class terrariumWebsocket(object):
 
       def listen_for_messages(messages,socket):
         self.clients.append(messages)
-        logger.debug(f'Got a new websocket connecton from {socket}')
+        logger.debug(f'Got a new websocket connection from {socket}')
 
         while True:
           message = messages.get()

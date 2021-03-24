@@ -22,7 +22,7 @@ from terrariumDatabase import NotificationMessage, NotificationService
 from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
 
 # Display support
-from terrariumDisplay import terrariumDisplay, terrariumDisplaySourceException
+#from terrariumDisplay import terrariumDisplay, terrariumDisplaySourceException
 
 # Traffic light Support
 import RPi.GPIO as GPIO

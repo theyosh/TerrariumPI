@@ -33,114 +33,6 @@ class classproperty(property):
     def __get__(self, cls, owner):
         return classmethod(self.fget).__get__(None, owner)()
 
-
-# class terrariumTimer(object):
-#   def __init__(self, start, stop, on_duration = 0, off_duration = 0):
-#     self.__start = datetime.time.fromisoformat(start)
-#     self.__stop  = datetime.time.fromisoformat(stop)
-#     self.__on_duration  = max(0.0,float(on_duration))  * 60
-#     self.__off_duration = max(0.0,float(off_duration)) * 60
-
-# #    self.__enabled = terrariumUtils.is_true(enabled)
-
-#     self.__timer_table = []
-
-#     # print('Start time')
-#     # print(self.__start)
-#     # print(dir(self.__start))
-#     # print('Current time')
-#     # print(time.localtime())
-
-#     self.__calculate_time_table()
-
-#   def __calculate_time_table(self):
-#     # Clean timer table
-#     self.__timer_table = []
-#     # Create a datetime object
-#     now = datetime.datetime.now()
-#     # Set the begin time based on today date
-#     starttime = now.replace(hour=self.__start.hour, minute=self.__start.minute, second=self.__start.second)
-#     # Set the end time based on today date
-#     stoptime  = now.replace(hour=self.__stop.hour,  minute=self.__stop.minute,  second=self.__stop.second)
-#     # Set the prefered on time period
-#     on_duration  = self.__on_duration
-#     # Set the prefered off time period
-#     off_duration = self.__off_duration
-
-#     # If the start tiem and end time are the same, add a day to the end time (24 hours)
-#     if starttime == stoptime:
-#       stoptime += datetime.timedelta(hours=24)
-
-#     # If the start time is greater (after) the stop time, we have to reduce/add 1 day
-#     elif starttime > stoptime:
-#       # If the stop time is pased, then we add 1 day
-#       if now > stoptime:
-#         stoptime  += datetime.timedelta(hours=24)
-#       else:
-#         # Else we are in the future, so reduce start time by 1 day
-#         starttime -= datetime.timedelta(hours=24)
-
-#     # Calculate next day when current day is done...
-#     if now > stoptime:
-#       starttime += datetime.timedelta(hours=24)
-#       stoptime  += datetime.timedelta(hours=24)
-
-#     if 0 == on_duration and 0 == off_duration:
-#       # Only start and stop time. No periods
-#       self.__timer_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
-
-#     # elif on_duration is not None and off_duration is None:
-
-#     #   if (starttime + datetime.timedelta(seconds=on_duration)) > stoptime:
-#     #     on_duration = (stoptime - starttime).total_seconds()
-#     #   self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(seconds=on_duration)).strftime('%s'))))
-#     else:
-#       # Create time periods based on both duration between start and stop time
-
-#       while starttime < stoptime:
-#         # The 'on' period is to big for the rest of the total timer time. So reduce it to the max left time
-#         if (starttime + datetime.timedelta(seconds=on_duration)) > stoptime:
-#           on_duration = (stoptime - starttime).total_seconds()
-
-#         # Add new entry int he time table
-#         self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(seconds=on_duration)).strftime('%s'))))
-#         # Increate the start time with the on and off duration for the next round
-#         starttime += datetime.timedelta(seconds=on_duration + off_duration)
-
-#   # def is_enabled(self):
-#   #   return terrariumUtils.is_true(self.__enabled)
-
-#   def is_time(self):
-#     now = int(datetime.datetime.now().strftime('%s'))
-#     for time_schedule in self.__timer_table:
-#       if time_schedule[0] <= now < time_schedule[1]:
-#         return True
-
-#       elif now < time_schedule[0]:
-#         return False
-
-#     #End of time_table. No data to decide for today
-#     # TODO: We can create a new timetable for the next day, but that does not work with the weather sunrise/set.
-#     # self.__calculate_time_table()
-#     return None
-
-#   def duration(self):
-#     # Return the total duration in seconds
-#     duration = 0
-#     for time_schedule in self.__timer_table:
-#       duration += time_schedule[1] - time_schedule[0]
-
-#     return duration
-
-#   def begin(self):
-#     # Return the on time stamp of the first time table row
-#     return self.__timer_table[0][0]
-
-#   def end(self):
-#     # Return the off timestamp of the last time table row
-#     return self.__timer_table[-1][1]
-
-
 class terrariumCache(terrariumSingleton):
   def __init__(self):
     self.__cache = {}
@@ -469,70 +361,70 @@ class terrariumUtils():
 
     return data
 
-  @staticmethod
-  def calculate_time_table(start, stop, on_duration = None, off_duration = None):
-    timer_time_table = []
+  # @staticmethod
+  # def calculate_time_table(start, stop, on_duration = None, off_duration = None):
+  #   timer_time_table = []
 
-    now = datetime.datetime.now()
-    starttime = start.split(':')
-    starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]), second=0)
+  #   now = datetime.datetime.now()
+  #   starttime = start.split(':')
+  #   starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]), second=0)
 
-    stoptime = stop.split(':')
-    stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]),second=0)
+  #   stoptime = stop.split(':')
+  #   stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]),second=0)
 
-    if starttime == stoptime:
-      stoptime += datetime.timedelta(hours=24)
+  #   if starttime == stoptime:
+  #     stoptime += datetime.timedelta(hours=24)
 
-    elif starttime > stoptime:
-      if now > stoptime:
-        stoptime += datetime.timedelta(hours=24)
-      else:
-        starttime -= datetime.timedelta(hours=24)
+  #   elif starttime > stoptime:
+  #     if now > stoptime:
+  #       stoptime += datetime.timedelta(hours=24)
+  #     else:
+  #       starttime -= datetime.timedelta(hours=24)
 
-    # Calculate next day when current day is done...
-    if now > stoptime:
-      starttime += datetime.timedelta(hours=24)
-      stoptime += datetime.timedelta(hours=24)
+  #   # Calculate next day when current day is done...
+  #   if now > stoptime:
+  #     starttime += datetime.timedelta(hours=24)
+  #     stoptime += datetime.timedelta(hours=24)
 
-    if (on_duration is None and off_duration is None) or (0 == on_duration and 0 == off_duration):
-      # Only start and stop time. No periods
-      timer_time_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
-    elif on_duration is not None and off_duration is None:
+  #   if (on_duration is None and off_duration is None) or (0 == on_duration and 0 == off_duration):
+  #     # Only start and stop time. No periods
+  #     timer_time_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
+  #   elif on_duration is not None and off_duration is None:
 
-      if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
-        on_duration = (stoptime - starttime).total_seconds() / 60
-      timer_time_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
-    else:
-      # Create time periods based on both duration between start and stop time
-      while starttime < stoptime:
-        if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
-          on_duration = (stoptime - starttime).total_seconds() / 60
+  #     if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
+  #       on_duration = (stoptime - starttime).total_seconds() / 60
+  #     timer_time_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
+  #   else:
+  #     # Create time periods based on both duration between start and stop time
+  #     while starttime < stoptime:
+  #       if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
+  #         on_duration = (stoptime - starttime).total_seconds() / 60
 
-        timer_time_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
-        starttime += datetime.timedelta(minutes=on_duration + off_duration)
+  #       timer_time_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
+  #       starttime += datetime.timedelta(minutes=on_duration + off_duration)
 
-    return timer_time_table
+  #   return timer_time_table
 
-  @staticmethod
-  def is_time(time_table):
-    now = int(datetime.datetime.now().strftime('%s'))
-    for time_schedule in time_table:
-      if time_schedule[0] <= now < time_schedule[1]:
-        return True
+  # @staticmethod
+  # def is_time(time_table):
+  #   now = int(datetime.datetime.now().strftime('%s'))
+  #   for time_schedule in time_table:
+  #     if time_schedule[0] <= now < time_schedule[1]:
+  #       return True
 
-      elif now < time_schedule[0]:
-        return False
+  #     elif now < time_schedule[0]:
+  #       return False
 
-    #End of time_table. No data to decide for today
-    return None
+  #   #End of time_table. No data to decide for today
+  #   return None
 
-  @staticmethod
-  def duration(time_table):
-    duration = 0
-    for time_schedule in time_table:
-      duration += time_schedule[1] - time_schedule[0]
+  # @staticmethod
+  # def duration(time_table):
+  #   duration = 0
+  #   for time_schedule in time_table:
+  #     duration += time_schedule[1] - time_schedule[0]
 
-    return duration
+  #   return duration
 
   @staticmethod
   # https://stackoverflow.com/a/19647596

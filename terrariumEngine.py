@@ -37,9 +37,6 @@ from hardware.relay import terrariumRelay, terrariumRelayLoadingException
 from hardware.button import terrariumButton, terrariumButtonLoadingException
 from hardware.webcam import terrariumWebcam, terrariummWebcamLoadingException
 
-# REMOVE????
-from terrariumEnvironment import terrariumEnvironment
-# REMOVE????
 from terrariumNotification import terrariumNotification
 
 def N_(message):
@@ -219,12 +216,13 @@ class terrariumEngine(object):
     # Force portnumer to an int.....
     settings['port']        = int(settings['port'])
 
-    # Set meross login into the current bash environment
+    # Create a salt for encryption. And set it as environment variable
     cmd = 'grep -i serial /proc/cpuinfo'
     salt = terrariumUtils.get_script_data(cmd).decode().strip()
     salt = salt.split(':')[1].strip()
+    os.environ['SALT'] = salt
 
-    os.environ['SALT']            = salt
+    # Set meross login into the current bash environment
     os.environ['MEROSS_EMAIL']    = settings['meross_cloud_username']
     os.environ['MEROSS_PASSWORD'] = settings['meross_cloud_password']
 
@@ -832,7 +830,7 @@ class terrariumEngine(object):
             current_state = 'on' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on else 'off'
 
             if webcam.archive['light'] != current_state:
-              print(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
+              #print(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
               continue
 
           # Check door status
@@ -841,7 +839,7 @@ class terrariumEngine(object):
             current_state = 'close' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].door_closed else 'open'
 
             if webcam.archive['door'] != current_state:
-              print(f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}')
+              #print(f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}')
               continue
 
           if 'motion' == webcam.archive['state']:
