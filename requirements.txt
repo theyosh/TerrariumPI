@@ -23,6 +23,7 @@ RPi.bme280
 RPi.GPIO
 pyserial
 pigpio_dht
+pigpio
 mitemp_bt
 PyMLX90614
 pyownet
