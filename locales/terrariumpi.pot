@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.9\n"
-"POT-Creation-Date: 2021-03-25 12:30+CET\n"
+"POT-Creation-Date: 2021-03-25 12:31+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -859,15 +859,15 @@ msgid "Here you can upload and manage your audio files."
 msgstr ""
 
 #: views/audio_files.tpl:16
-msgid "In the existing audio files list you can see which files are uploaded. By clicking on the trashbin (%s) icon you can delete the file."
+msgid "In the existing audio files list you can see which files are uploaded. By clicking on the trash bin (%s) icon you can delete the file."
 msgstr ""
 
 #: views/audio_files.tpl:16
-msgid "Open the dropzone multiple file uploader to upload new audio files."
+msgid "Open the drop zone multiple file uploader to upload new audio files."
 msgstr ""
 
 #: views/audio_files.tpl:23
-msgid "Dropzone multiple file uploader"
+msgid "Drop zone multiple file uploader"
 msgstr ""
 
 #: views/audio_files.tpl:35
