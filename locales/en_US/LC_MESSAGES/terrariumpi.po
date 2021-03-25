@@ -6,13 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2020-08-08 11:48+0200\n"
-"Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2021-03-25 11:52+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"Language-Team: English (United States) <https://weblate.theyosh.nl/projects/"
+"terrariumpi/3-x-y-z/en_US/>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
@@ -49,172 +52,152 @@ msgid "CPU Temperature"
 msgstr "CPU Temperature"
 
 #: terrariumNotification.py:210
-#, fuzzy
-#| msgid "Environment"
 msgid "Environment light day on"
-msgstr "Environment"
+msgstr "Environment light day on"
 
 #: terrariumNotification.py:211
-#, fuzzy
-#| msgid "Enabled when lights are off"
 msgid "Environment light day off"
-msgstr "Enabled when lights are off"
+msgstr "Environment light day off"
 
 #: terrariumNotification.py:212
 msgid "Environment light night on"
-msgstr ""
+msgstr "Environment light night on"
 
 #: terrariumNotification.py:213
 msgid "Environment light night off"
-msgstr ""
+msgstr "Environment light night off"
 
 #: terrariumNotification.py:215
 msgid "Environment temperature alarm low on"
-msgstr ""
+msgstr "Environment temperature alarm low on"
 
 #: terrariumNotification.py:216
 msgid "Environment temperature alarm low off"
-msgstr ""
+msgstr "Environment temperature alarm low off"
 
 #: terrariumNotification.py:217
 msgid "Environment temperature alarm high on"
-msgstr ""
+msgstr "Environment temperature alarm high on"
 
 #: terrariumNotification.py:218
 msgid "Environment temperature alarm high off"
-msgstr ""
+msgstr "Environment temperature alarm high off"
 
 #: terrariumNotification.py:220
 msgid "Environment humidity alarm low on"
-msgstr ""
+msgstr "Environment humidity alarm low on"
 
 #: terrariumNotification.py:221
 msgid "Environment humidity alarm low off"
-msgstr ""
+msgstr "Environment humidity alarm low off"
 
 #: terrariumNotification.py:222
 msgid "Environment humidity alarm high on"
-msgstr ""
+msgstr "Environment humidity alarm high on"
 
 #: terrariumNotification.py:223
 msgid "Environment humidity alarm high off"
-msgstr ""
+msgstr "Environment humidity alarm high off"
 
 #: terrariumNotification.py:225
 msgid "Environment moisture alarm low on"
-msgstr ""
+msgstr "Environment moisture alarm low on"
 
 #: terrariumNotification.py:226
 msgid "Environment moisture alarm low off"
-msgstr ""
+msgstr "Environment moisture alarm low off"
 
 #: terrariumNotification.py:227
 msgid "Environment moisture alarm high on"
-msgstr ""
+msgstr "Environment moisture alarm high on"
 
 #: terrariumNotification.py:228
 msgid "Environment moisture alarm high off"
-msgstr ""
+msgstr "Environment moisture alarm high off"
 
 #: terrariumNotification.py:230
 msgid "Environment conductivity alarm low on"
-msgstr ""
+msgstr "Environment conductivity alarm low on"
 
 #: terrariumNotification.py:231
 msgid "Environment conductivity alarm low off"
-msgstr ""
+msgstr "Environment conductivity alarm low off"
 
 #: terrariumNotification.py:232
 msgid "Environment conductivity alarm high on"
-msgstr ""
+msgstr "Environment conductivity alarm high on"
 
 #: terrariumNotification.py:233
 msgid "Environment conductivity alarm high off"
-msgstr ""
+msgstr "Environment conductivity alarm high off"
 
 #: terrariumNotification.py:235
 msgid "Environment pH alarm low on"
-msgstr ""
+msgstr "Environment pH alarm low on"
 
 #: terrariumNotification.py:236
 msgid "Environment pH alarm low off"
-msgstr ""
+msgstr "Environment pH alarm low off"
 
 #: terrariumNotification.py:237
 msgid "Environment pH alarm high on"
-msgstr ""
+msgstr "Environment pH alarm high on"
 
 #: terrariumNotification.py:238
 msgid "Environment pH alarm high off"
-msgstr ""
+msgstr "Environment pH alarm high off"
 
 #: terrariumNotification.py:240
 msgid "Environment watertank alarm low on"
-msgstr ""
+msgstr "Environment watertank alarm low on"
 
 #: terrariumNotification.py:241
 msgid "Environment watertank alarm low off"
-msgstr ""
+msgstr "Environment watertank alarm low off"
 
 #: terrariumNotification.py:242
 msgid "Environment watertank alarm high on"
-msgstr ""
+msgstr "Environment watertank alarm high on"
 
 #: terrariumNotification.py:243
 msgid "Environment watertank alarm high off"
-msgstr ""
+msgstr "Environment watertank alarm high off"
 
 #: terrariumNotification.py:245
-#, fuzzy
-#| msgid "Authentication"
 msgid "Authentication warning"
-msgstr "Authentication"
+msgstr "Authentication warning"
 
 #: terrariumNotification.py:247
-#, fuzzy
-#| msgid "No warning messages"
 msgid "System warning message"
-msgstr "No warning messages"
+msgstr "System warning message"
 
 #: terrariumNotification.py:248
-#, fuzzy
-#| msgid "No error messages"
 msgid "System error message"
-msgstr "No error messages"
+msgstr "System error message"
 
 #: terrariumNotification.py:250 terrariumNotification.py:251
 msgid "Sensor low alarm"
-msgstr ""
+msgstr "Sensor low alarm"
 
 #: terrariumNotification.py:253
-#, fuzzy
-#| msgid "Power switches"
 msgid "Powerswitch on"
-msgstr "Power switches"
+msgstr "Powerswitch on"
 
 #: terrariumNotification.py:254
-#, fuzzy
-#| msgid "Power switches"
 msgid "Powerswitch off"
-msgstr "Power switches"
+msgstr "Powerswitch off"
 
 #: terrariumNotification.py:256
-#, fuzzy
-#| msgid "Door is open"
 msgid "Door opened"
-msgstr "Door is open"
+msgstr "Door opened"
 
 #: terrariumNotification.py:257
-#, fuzzy
-#| msgid "Door is closed"
 msgid "Door closed"
-msgstr "Door is closed"
+msgstr "Door closed"
 
 #: terrariumNotification.py:259
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Webcam motion"
-msgstr "Webcam settings"
+msgstr "Webcam motion"
 
 #: terrariumTranslations.py:22
 msgid "Holds the external source URL. Supported sources are: %s."
@@ -355,27 +338,19 @@ msgid "Holds the timer stop time. The timer will stop after this start time."
 msgstr "Holds the timer stop time. The timer will stop after this start time."
 
 #: terrariumTranslations.py:62
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that the power switch is on withing the total "
-#| "timer window."
 msgid ""
 "Holds the period in minutes that the power switch is on within the total "
 "timer window."
 msgstr ""
-"Holds the period in minutes that the power switch is on withing the total "
+"Holds the period in minutes that the power switch is on within the total "
 "timer window."
 
 #: terrariumTranslations.py:63
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that the power switch is off withing the "
-#| "total timer window."
 msgid ""
 "Holds the period in minutes that the power switch is off within the total "
 "timer window."
 msgstr ""
-"Holds the period in minutes that the power switch is off withing the total "
+"Holds the period in minutes that the power switch is off within the total "
 "timer window."
 
 #: terrariumTranslations.py:64
@@ -405,14 +380,10 @@ msgid "Holds the amount in percentage to go to when switched on."
 msgstr "Holds the amount in percentage to go to when switched on."
 
 #: terrariumTranslations.py:68
-#, fuzzy
-#| msgid ""
-#| "Holds the amount of seconds for the duration in which it decresses the "
-#| "power."
 msgid ""
 "Holds the amount of seconds for the duration in which it decreases the power."
 msgstr ""
-"Holds the amount of seconds for the duration in which it decresses the power."
+"Holds the amount of seconds for the duration in which it decreases the power."
 
 #: terrariumTranslations.py:69
 msgid "Holds the amount in percentage to go to when switched off."
@@ -551,10 +522,8 @@ msgid "Toggle on to enable repeating of the audio files."
 msgstr "Toggle on to enable repeating of the audio files."
 
 #: terrariumTranslations.py:106
-#, fuzzy
-#| msgid "Toggle on to enable shuffeling of the audio files."
 msgid "Toggle on to enable shuffling of the audio files."
-msgstr "Toggle on to enable shuffeling of the audio files."
+msgstr "Toggle on to enable shuffling of the audio files."
 
 #: terrariumTranslations.py:107
 msgid ""
@@ -624,10 +593,8 @@ msgstr ""
 "lower the values."
 
 #: terrariumTranslations.py:114
-#, fuzzy
-#| msgid "Holds the source that is used to determing when it is day or night."
 msgid "Holds the source that is used to determine when it is day or night."
-msgstr "Holds the source that is used to determing when it is day or night."
+msgstr "Holds the source that is used to determine when it is day or night."
 
 #: terrariumTranslations.py:115
 msgid ""
@@ -646,28 +613,20 @@ msgstr ""
 "when running in '%s' mode."
 
 #: terrariumTranslations.py:117
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that this environment part is powered on "
-#| "withing the total timer window."
 msgid ""
 "Holds the period in minutes that this environment part is powered on within "
 "the total timer window."
 msgstr ""
-"Holds the period in minutes that this environment part is powered on withing "
+"Holds the period in minutes that this environment part is powered on within "
 "the total timer window."
 
 #: terrariumTranslations.py:118
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that this environment part is powered off "
-#| "withing the total timer window."
 msgid ""
 "Holds the period in minutes that this environment part is powered off within "
 "the total timer window."
 msgstr ""
-"Holds the period in minutes that this environment part is powered off "
-"withing the total timer window."
+"Holds the period in minutes that this environment part is powered off within "
+"the total timer window."
 
 #: terrariumTranslations.py:119
 msgid ""
@@ -726,8 +685,6 @@ msgstr ""
 "hit. Select all needed switches below."
 
 #: terrariumTranslations.py:125
-#, fuzzy
-#| msgid "Holds the water volume in liters."
 msgid "Holds the water volume in litres."
 msgstr "Holds the water volume in liters."
 
@@ -752,15 +709,11 @@ msgstr ""
 "always"
 
 #: terrariumTranslations.py:129
-#, fuzzy
-#| msgid ""
-#| "Select when the power switches can toggle. When the door is open, cosed "
-#| "or just always"
 msgid ""
 "Select when the power switches can toggle. When the door is open, closed or "
 "just always"
 msgstr ""
-"Select when the power switches can toggle. When the door is open, cosed or "
+"Select when the power switches can toggle. When the door is open, closed or "
 "just always"
 
 #: terrariumTranslations.py:133
@@ -772,22 +725,16 @@ msgid "Holds the mail server hostname or IP."
 msgstr "Holds the mail server hostname or IP."
 
 #: terrariumTranslations.py:135
-#, fuzzy
-#| msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
 msgid "Holds the mail server port number. SSL and TLS will be autodetected."
-msgstr "Holds the mail server portnumber. SSL and TLS will be autodetected."
+msgstr "Holds the mail server port number. SSL and TLS will be autodetected."
 
 #: terrariumTranslations.py:136
-#, fuzzy
-#| msgid "Holds the username for authentication with the mailserver if needed."
 msgid "Holds the username for authentication with the mail server if needed."
-msgstr "Holds the username for authentication with the mailserver if needed."
+msgstr "Holds the username for authentication with the mail server if needed."
 
 #: terrariumTranslations.py:137
-#, fuzzy
-#| msgid "Holds the password for authentication with the mailserver if needed."
 msgid "Holds the password for authentication with the mail server if needed."
-msgstr "Holds the password for authentication with the mailserver if needed."
+msgstr "Holds the password for authentication with the mail server if needed."
 
 #: terrariumTranslations.py:139
 msgid "Holds the display chip that is used."
@@ -834,16 +781,12 @@ msgid "Holds the Telegram Bot token. More information %shere%s"
 msgstr "Holds the Telegram Bot token. More information %shere%s"
 
 #: terrariumTranslations.py:152
-#, fuzzy
-#| msgid ""
-#| "Holds the Telegram username that is allowed for receiving messages. Can "
-#| "be multiple usernames seperated by a comma. More information %shere%s"
 msgid ""
 "Holds the Telegram username that is allowed for receiving messages. Can be "
 "multiple usernames separated by a comma. More information %shere%s"
 msgstr ""
 "Holds the Telegram username that is allowed for receiving messages. Can be "
-"multiple usernames seperated by a comma. More information %shere%s"
+"multiple usernames separated by a comma. More information %shere%s"
 
 #: terrariumTranslations.py:153
 msgid ""
@@ -914,10 +857,8 @@ msgstr ""
 "interface after changing the setting."
 
 #: terrariumTranslations.py:170
-#, fuzzy
-#| msgid "Holds the soundcard that is used for playing audio."
 msgid "Holds the sound card that is used for playing audio."
-msgstr "Holds the soundcard that is used for playing audio."
+msgstr "Holds the sound card that is used for playing audio."
 
 #: terrariumTranslations.py:171
 msgid ""
@@ -932,8 +873,6 @@ msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 
 #: terrariumTranslations.py:173
-#, fuzzy
-#| msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgid "Holds the amount of euro/dollar per 1000 litres water."
 msgstr "Holds the amount of euro/dollar per 1000 liters water."
 
@@ -1024,10 +963,8 @@ msgid "Holds the species name of the animal."
 msgstr "Holds the species name of the animal."
 
 #: terrariumTranslations.py:192
-#, fuzzy
-#| msgid "Holds the latin name of the animal."
 msgid "Holds the Latin name of the animal."
-msgstr "Holds the latin name of the animal."
+msgstr "Holds the Latin name of the animal."
 
 #: terrariumTranslations.py:193
 msgid "Holds a small description about the animal."
@@ -1056,10 +993,8 @@ msgid "Authentication"
 msgstr "Authentication"
 
 #: terrariumWebserver.py:265
-#, fuzzy
-#| msgid "Player command could ot be executed!"
 msgid "Player command could to be executed!"
-msgstr "Player command could ot be executed!"
+msgstr "Player command could to be executed!"
 
 #: terrariumWebserver.py:265 terrariumWebserver.py:285
 #: terrariumWebserver.py:297 terrariumWebserver.py:305
@@ -1146,34 +1081,24 @@ msgid "Help"
 msgstr "Help"
 
 #: views/audio_files.tpl:16
-#, fuzzy
-#| msgid "Here you can upload and manange your audio files."
 msgid "Here you can upload and manage your audio files."
-msgstr "Here you can upload and manange your audio files."
+msgstr "Here you can upload and manage your audio files."
 
 #: views/audio_files.tpl:16
-#, fuzzy
-#| msgid ""
-#| "In the existing audio files list you can see which files are uploaded. By "
-#| "clicking on the trashbin (%s) icon you can delete the file."
 msgid ""
 "In the existing audio files list you can see which files are uploaded. By "
 "clicking on the trash bin (%s) icon you can delete the file."
 msgstr ""
 "In the existing audio files list you can see which files are uploaded. By "
-"clicking on the trashbin (%s) icon you can delete the file."
+"clicking on the trash bin (%s) icon you can delete the file."
 
 #: views/audio_files.tpl:16
-#, fuzzy
-#| msgid "Open the dropzone multiple file uploader to upload new audio files."
 msgid "Open the drop zone multiple file uploader to upload new audio files."
-msgstr "Open the dropzone multiple file uploader to upload new audio files."
+msgstr "Open the drop zone multiple file uploader to upload new audio files."
 
 #: views/audio_files.tpl:23
-#, fuzzy
-#| msgid "Dropzone multiple file uploader"
 msgid "Drop zone multiple file uploader"
-msgstr "Dropzone multiple file uploader"
+msgstr "Drop zone multiple file uploader"
 
 #: views/audio_files.tpl:35
 msgid ""
@@ -2353,11 +2278,6 @@ msgstr ""
 "switches. The bar shows a percentage of the max usage."
 
 #: views/inc/usage_dashboard.tpl:101
-#, fuzzy
-#| msgid ""
-#| "The third tile shows the current water flow in liters per minute. The "
-#| "amount is calculated based on the power switch settings and what the "
-#| "state is of the switches. The bar shows a percentage of the max usage."
 msgid ""
 "The third tile shows the current water flow in litres per minute. The amount "
 "is calculated based on the power switch settings and what the state is of "
@@ -2382,13 +2302,6 @@ msgstr ""
 "it is calculated on."
 
 #: views/inc/usage_dashboard.tpl:113
-#, fuzzy
-#| msgid ""
-#| "The fifth tile shows the total water usage from the start of using this "
-#| "software. It will calculate the total water usage every 10 minutes based "
-#| "on all historical data. It is shown in liters. When the water price is "
-#| "entered, it will show the costs of the water bill and the amount of days "
-#| "it is calculated on."
 msgid ""
 "The fifth tile shows the total water usage from the start of using this "
 "software. It will calculate the total water usage every 10 minutes based on "
@@ -2413,15 +2326,11 @@ msgstr ""
 "system and a heating system."
 
 #: views/inc/usage_dashboard.tpl:121
-#, fuzzy
-#| msgid ""
-#| "When a part is active the title is in color. If the title is gray that "
-#| "part is than not running or configured."
 msgid ""
 "When a part is active the title is in colour. If the title is grey that part "
 "is than not running or configured."
 msgstr ""
-"When a part is active the title is in color. If the title is gray that part "
+"When a part is active the title is in color. If the title is grey that part "
 "is than not running or configured."
 
 #: views/inc/usage_dashboard.tpl:124
@@ -2878,12 +2787,6 @@ msgid "Show or hide the sensor"
 msgstr "Show or hide the sensor"
 
 #: views/inc/usage_sensors.tpl:92
-#, fuzzy
-#| msgid ""
-#| "The gauge graph shows the current temperature or humidity value. The "
-#| "color of the graph depends on the current value and the alarm values. "
-#| "When the value gets more to the minimum or maximum value, it will gets "
-#| "more red/orange."
 msgid ""
 "The gauge graph shows the current temperature or humidity value. The colour "
 "of the graph depends on the current value and the alarm values. When the "
@@ -3573,7 +3476,7 @@ msgstr "AMG8833"
 
 #: views/sensor_settings.tpl:130
 msgid "CSS811"
-msgstr ""
+msgstr "CSS811"
 
 #: views/sensor_settings.tpl:146
 msgid "UVA"
@@ -4039,10 +3942,8 @@ msgid "Changes only"
 msgstr "Changes only"
 
 #: views/system_settings.tpl:157
-#, fuzzy
-#| msgid "Soundcard"
 msgid "Sound card"
-msgstr "Soundcard"
+msgstr "Sound card"
 
 #: views/system_settings.tpl:166
 msgid "External calendar"
@@ -4671,8 +4572,6 @@ msgid "Value difference during the night"
 msgstr "Value difference during the night"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Volume in liters"
 msgid "Volume in litres"
 msgstr "Volume in liters"
 
