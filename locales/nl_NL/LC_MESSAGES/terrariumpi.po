@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-03-20 14:43+0000\n"
+"PO-Revision-Date: 2021-03-25 11:52+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
-"webinterface/nl/>\n"
+"3-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.5.1\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -106,11 +106,11 @@ msgstr "Alarm voor omgevingsvochtigheid laag"
 
 #: terrariumNotification.py:226
 msgid "Environment moisture alarm low off"
-msgstr ""
+msgstr "Omgevingsvochtalarm laag uit"
 
 #: terrariumNotification.py:227
 msgid "Environment moisture alarm high on"
-msgstr ""
+msgstr "Alarm omgevingsvochtigheid hoog"
 
 #: terrariumNotification.py:228
 msgid "Environment moisture alarm high off"
@@ -189,14 +189,10 @@ msgid "Powerswitch off"
 msgstr "Stroomschakelaars uit"
 
 #: terrariumNotification.py:256
-#, fuzzy
-#| msgid "Door is open"
 msgid "Door opened"
 msgstr "Deur is geopend"
 
 #: terrariumNotification.py:257
-#, fuzzy
-#| msgid "Door is closed"
 msgid "Door closed"
 msgstr "Deur is gesloten"
 
@@ -352,27 +348,19 @@ msgid "Holds the timer stop time. The timer will stop after this start time."
 msgstr "Bevat de timer stop tijd. De timer stop op dit tijdstip."
 
 #: terrariumTranslations.py:62
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that the power switch is on withing the total "
-#| "timer window."
 msgid ""
 "Holds the period in minutes that the power switch is on within the total "
 "timer window."
 msgstr ""
-"Bevat de tijdsuur in minuten dat de schakelaar aan is in de totale timer "
+"Bevat de tijdsduur in minuten dat de schakelaar aan is in de totale timer "
 "tijdsduur."
 
 #: terrariumTranslations.py:63
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that the power switch is off withing the "
-#| "total timer window."
 msgid ""
 "Holds the period in minutes that the power switch is off within the total "
 "timer window."
 msgstr ""
-"Bevat de tijdsuur in minuten dat de schakelaar uit is in de totale timer "
+"Bevat de tijdsduur in minuten dat de schakelaar uit is in de totale timer "
 "tijdsduur."
 
 #: terrariumTranslations.py:64
@@ -401,10 +389,6 @@ msgid "Holds the amount in percentage to go to when switched on."
 msgstr "Bevat de percentage wanneer de schakelaar aan wordt gezet."
 
 #: terrariumTranslations.py:68
-#, fuzzy
-#| msgid ""
-#| "Holds the amount of seconds for the duration in which it decresses the "
-#| "power."
 msgid ""
 "Holds the amount of seconds for the duration in which it decreases the power."
 msgstr "Bevat het aantal seconden dat gebruikt wordt om de stroom te verhogen."
@@ -552,8 +536,6 @@ msgid "Toggle on to enable repeating of the audio files."
 msgstr "Zet aan om de afspeellijst te laten herladen als deze is afgelopen."
 
 #: terrariumTranslations.py:106
-#, fuzzy
-#| msgid "Toggle on to enable shuffeling of the audio files."
 msgid "Toggle on to enable shuffling of the audio files."
 msgstr "Zet aan om de afspeellijst te laten shufflen."
 
@@ -626,8 +608,6 @@ msgstr ""
 "getallen om de waarden te verlagen."
 
 #: terrariumTranslations.py:114
-#, fuzzy
-#| msgid "Holds the source that is used to determing when it is day or night."
 msgid "Holds the source that is used to determine when it is day or night."
 msgstr ""
 "Bevat de bron die wordt gebruikt om te bepalen wanneer het dag of nacht is."
@@ -649,10 +629,6 @@ msgstr ""
 "Alleen beschikbaar in '%s' mode."
 
 #: terrariumTranslations.py:117
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that this environment part is powered on "
-#| "withing the total timer window."
 msgid ""
 "Holds the period in minutes that this environment part is powered on within "
 "the total timer window."
@@ -661,10 +637,6 @@ msgstr ""
 "totale tijdvenster."
 
 #: terrariumTranslations.py:118
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that this environment part is powered off "
-#| "withing the total timer window."
 msgid ""
 "Holds the period in minutes that this environment part is powered off within "
 "the total timer window."
@@ -729,8 +701,6 @@ msgstr ""
 "of timers worden geactiveerd. Kies alle schakelaars hieronder."
 
 #: terrariumTranslations.py:125
-#, fuzzy
-#| msgid "Holds the water volume in liters."
 msgid "Holds the water volume in litres."
 msgstr "Bevat de watertank volume in liters."
 
@@ -755,10 +725,6 @@ msgstr ""
 "aan zijn, uit zijn of altijd"
 
 #: terrariumTranslations.py:129
-#, fuzzy
-#| msgid ""
-#| "Select when the power switches can toggle. When the door is open, cosed "
-#| "or just always"
 msgid ""
 "Select when the power switches can toggle. When the door is open, closed or "
 "just always"
@@ -775,26 +741,19 @@ msgid "Holds the mail server hostname or IP."
 msgstr "Bevat de hostnaam of IP van de mailserver."
 
 #: terrariumTranslations.py:135
-#, fuzzy
-#| msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
 msgid "Holds the mail server port number. SSL and TLS will be autodetected."
 msgstr ""
 "Bevat het poortnummer van de mailserver. SSL en/of TLS wordt automatisch "
 "gedetecteerd."
 
 #: terrariumTranslations.py:136
-#, fuzzy
-#| msgid "Holds the username for authentication with the mailserver if needed."
 msgid "Holds the username for authentication with the mail server if needed."
 msgstr ""
 "Bevat indien nodig de gebruikersnaam voor authenticatie met de mailserver."
 
 #: terrariumTranslations.py:137
-#, fuzzy
-#| msgid "Holds the password for authentication with the mailserver if needed."
 msgid "Holds the password for authentication with the mail server if needed."
-msgstr ""
-"Bevat indien nodig het wachtwoord voor authenticatie bij de mailserver."
+msgstr "Bevat indien nodig het wachtwoord voor authenticatie bij de mailserver."
 
 #: terrariumTranslations.py:139
 msgid "Holds the display chip that is used."
@@ -841,10 +800,6 @@ msgid "Holds the Telegram Bot token. More information %shere%s"
 msgstr "Bevat het Telegram Bot token. Meer informatie %shier%s"
 
 #: terrariumTranslations.py:152
-#, fuzzy
-#| msgid ""
-#| "Holds the Telegram username that is allowed for receiving messages. Can "
-#| "be multiple usernames seperated by a comma. More information %shere%s"
 msgid ""
 "Holds the Telegram username that is allowed for receiving messages. Can be "
 "multiple usernames separated by a comma. More information %shere%s"
@@ -922,8 +877,6 @@ msgstr ""
 "interface na het wijzigen van de instelling."
 
 #: terrariumTranslations.py:170
-#, fuzzy
-#| msgid "Holds the soundcard that is used for playing audio."
 msgid "Holds the sound card that is used for playing audio."
 msgstr "Bevat de geluidskaart dat wordt gebruikt voor het afspelen van audio."
 
@@ -940,8 +893,6 @@ msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr "Bevat de hoeveelheid euro/dollar per 1 kW/h (1 Kilowatt per uur)."
 
 #: terrariumTranslations.py:173
-#, fuzzy
-#| msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgid "Holds the amount of euro/dollar per 1000 litres water."
 msgstr "Bevat de hoeveelheid euro/dollar per 1000 liter water."
 
@@ -1034,8 +985,6 @@ msgid "Holds the species name of the animal."
 msgstr "Bevat de soortnaam van het dier."
 
 #: terrariumTranslations.py:192
-#, fuzzy
-#| msgid "Holds the latin name of the animal."
 msgid "Holds the Latin name of the animal."
 msgstr "Bevat de Latijnse naam van het dier."
 
@@ -1066,8 +1015,6 @@ msgid "Authentication"
 msgstr "Authenticatie"
 
 #: terrariumWebserver.py:265
-#, fuzzy
-#| msgid "Player command could ot be executed!"
 msgid "Player command could to be executed!"
 msgstr "De audio speler commando kon niet worden uitgevoerd!"
 
@@ -1156,16 +1103,10 @@ msgid "Help"
 msgstr "Hulp"
 
 #: views/audio_files.tpl:16
-#, fuzzy
-#| msgid "Here you can upload and manange your audio files."
 msgid "Here you can upload and manage your audio files."
 msgstr "Hier kunt u uw audio bestanden uploaden en beheren."
 
 #: views/audio_files.tpl:16
-#, fuzzy
-#| msgid ""
-#| "In the existing audio files list you can see which files are uploaded. By "
-#| "clicking on the trashbin (%s) icon you can delete the file."
 msgid ""
 "In the existing audio files list you can see which files are uploaded. By "
 "clicking on the trash bin (%s) icon you can delete the file."
@@ -1175,16 +1116,12 @@ msgstr ""
 "bestand verwijderen."
 
 #: views/audio_files.tpl:16
-#, fuzzy
-#| msgid "Open the dropzone multiple file uploader to upload new audio files."
 msgid "Open the drop zone multiple file uploader to upload new audio files."
 msgstr ""
 "Open de dropzone meerdere bestanden uploader om nieuwe audio bestanden te "
 "uploaden."
 
 #: views/audio_files.tpl:23
-#, fuzzy
-#| msgid "Dropzone multiple file uploader"
 msgid "Drop zone multiple file uploader"
 msgstr "Dropzone meerdere bestanden uploader"
 
@@ -2376,11 +2313,6 @@ msgstr ""
 "schakelaars is. De balk toont een percentage van het maximale gebruik."
 
 #: views/inc/usage_dashboard.tpl:101
-#, fuzzy
-#| msgid ""
-#| "The third tile shows the current water flow in liters per minute. The "
-#| "amount is calculated based on the power switch settings and what the "
-#| "state is of the switches. The bar shows a percentage of the max usage."
 msgid ""
 "The third tile shows the current water flow in litres per minute. The amount "
 "is calculated based on the power switch settings and what the state is of "
@@ -2407,13 +2339,6 @@ msgstr ""
 "berekend, weergegeven."
 
 #: views/inc/usage_dashboard.tpl:113
-#, fuzzy
-#| msgid ""
-#| "The fifth tile shows the total water usage from the start of using this "
-#| "software. It will calculate the total water usage every 10 minutes based "
-#| "on all historical data. It is shown in liters. When the water price is "
-#| "entered, it will show the costs of the water bill and the amount of days "
-#| "it is calculated on."
 msgid ""
 "The fifth tile shows the total water usage from the start of using this "
 "software. It will calculate the total water usage every 10 minutes based on "
@@ -2438,10 +2363,6 @@ msgstr ""
 "en een verwarmingssysteem."
 
 #: views/inc/usage_dashboard.tpl:121
-#, fuzzy
-#| msgid ""
-#| "When a part is active the title is in color. If the title is gray that "
-#| "part is than not running or configured."
 msgid ""
 "When a part is active the title is in colour. If the title is grey that part "
 "is than not running or configured."
@@ -2908,12 +2829,6 @@ msgid "Show or hide the sensor"
 msgstr "Toon of verberg de sensor"
 
 #: views/inc/usage_sensors.tpl:92
-#, fuzzy
-#| msgid ""
-#| "The gauge graph shows the current temperature or humidity value. The "
-#| "color of the graph depends on the current value and the alarm values. "
-#| "When the value gets more to the minimum or maximum value, it will gets "
-#| "more red/orange."
 msgid ""
 "The gauge graph shows the current temperature or humidity value. The colour "
 "of the graph depends on the current value and the alarm values. When the "
@@ -4076,8 +3991,6 @@ msgid "Changes only"
 msgstr "Alleen wijzigingen"
 
 #: views/system_settings.tpl:157
-#, fuzzy
-#| msgid "Soundcard"
 msgid "Sound card"
 msgstr "Geluidskaart"
 
@@ -4710,10 +4623,8 @@ msgid "Value difference during the night"
 msgstr "Waardeverschil tijdens de nacht"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Volume in liters"
 msgid "Volume in litres"
-msgstr "Volume in liter"
+msgstr "Volume in liters"
 
 #: Missing text string
 msgid "Weather day forecast screenshot"
