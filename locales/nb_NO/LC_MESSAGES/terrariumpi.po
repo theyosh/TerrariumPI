@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
-"POT-Creation-Date: 2021-02-08 14:46+CET\n"
+"POT-Creation-Date: 2021-03-25 12:30+CET\n"
 "PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
@@ -223,7 +223,7 @@ msgstr "Innstillinger for webkamera"
 msgid "Holds the external source URL. Supported sources are: %s."
 msgstr "Vis den eksterne kilde-URLen. Støttede kilder er: %s."
 
-#: terrariumTranslations.py:29
+#: terrariumTranslations.py:29 terrariumTranslations.py:175
 msgid ""
 "Choose the wind speed indicator. The software will recalculate to the chosen "
 "indicator."
@@ -364,16 +364,24 @@ msgstr ""
 "Viser tidtaker stopp tid. Tidtakeren vil stoppe etter dette starttidspunktet."
 
 #: terrariumTranslations.py:62
+#, fuzzy
+#| msgid ""
+#| "Holds the period in minutes that the power switch is on withing the total "
+#| "timer window."
 msgid ""
-"Holds the period in minutes that the power switch is on withing the total "
+"Holds the period in minutes that the power switch is on within the total "
 "timer window."
 msgstr ""
 "Viser perioden i minutter som strømbryteren er på med det totale tidtaker "
 "vinduet."
 
 #: terrariumTranslations.py:63
+#, fuzzy
+#| msgid ""
+#| "Holds the period in minutes that the power switch is off withing the "
+#| "total timer window."
 msgid ""
-"Holds the period in minutes that the power switch is off withing the total "
+"Holds the period in minutes that the power switch is off within the total "
 "timer window."
 msgstr ""
 "Viser perioden i minutter når strømbryteren er slått av med det totale "
@@ -402,8 +410,12 @@ msgid "Holds the amount in percentage to go to when switched on."
 msgstr "Viser verdien i prosent den går til når slått på."
 
 #: terrariumTranslations.py:68
+#, fuzzy
+#| msgid ""
+#| "Holds the amount of seconds for the duration in which it decresses the "
+#| "power."
 msgid ""
-"Holds the amount of seconds for the duration in which it decresses the power."
+"Holds the amount of seconds for the duration in which it decreases the power."
 msgstr "Viser antall sekunder for varigheten som strømmen skal reduseres."
 
 #: terrariumTranslations.py:69
@@ -543,7 +555,9 @@ msgid "Toggle on to enable repeating of the audio files."
 msgstr "Aktiver/deaktiver for å aktivere gjentagelse av lydfilene."
 
 #: terrariumTranslations.py:106
-msgid "Toggle on to enable shuffeling of the audio files."
+#, fuzzy
+#| msgid "Toggle on to enable shuffeling of the audio files."
+msgid "Toggle on to enable shuffling of the audio files."
 msgstr "Aktiver/deaktiver tilfeldig rekkefølge av lydfilene."
 
 #: terrariumTranslations.py:107
@@ -612,7 +626,9 @@ msgstr ""
 "tall til å øke verdiene og negative tall for å redusere verdiene."
 
 #: terrariumTranslations.py:114
-msgid "Holds the source that is used to determing when it is day or night."
+#, fuzzy
+#| msgid "Holds the source that is used to determing when it is day or night."
+msgid "Holds the source that is used to determine when it is day or night."
 msgstr "Viser kilden som brukes til å avgjøre når det er dag eller natt."
 
 #: terrariumTranslations.py:115
@@ -632,17 +648,25 @@ msgstr ""
 "når du kjører i ‘%s’ modus."
 
 #: terrariumTranslations.py:117
+#, fuzzy
+#| msgid ""
+#| "Holds the period in minutes that this environment part is powered on "
+#| "withing the total timer window."
 msgid ""
-"Holds the period in minutes that this environment part is powered on withing "
+"Holds the period in minutes that this environment part is powered on within "
 "the total timer window."
 msgstr ""
 "Viser perioden i minutter som denne miljø delen er slått på med det totale "
 "tidtaker vinduet."
 
 #: terrariumTranslations.py:118
+#, fuzzy
+#| msgid ""
+#| "Holds the period in minutes that this environment part is powered off "
+#| "withing the total timer window."
 msgid ""
-"Holds the period in minutes that this environment part is powered off "
-"withing the total timer window."
+"Holds the period in minutes that this environment part is powered off within "
+"the total timer window."
 msgstr ""
 "Viser perioden i minutter som denne miljø delen er slått av med det totale "
 "tidtaker vinduet."
@@ -702,7 +726,9 @@ msgstr ""
 "Velg alle nødvendige brytere nedenfor."
 
 #: terrariumTranslations.py:125
-msgid "Holds the water volume in liters."
+#, fuzzy
+#| msgid "Holds the water volume in liters."
+msgid "Holds the water volume in litres."
 msgstr "Viser vann volumet i liter."
 
 #: terrariumTranslations.py:126
@@ -725,8 +751,12 @@ msgstr ""
 "Velg når strøm brytere kan veksle. Når lysene er på, av eller bare alltid"
 
 #: terrariumTranslations.py:129
+#, fuzzy
+#| msgid ""
+#| "Select when the power switches can toggle. When the door is open, cosed "
+#| "or just always"
 msgid ""
-"Select when the power switches can toggle. When the door is open, cosed or "
+"Select when the power switches can toggle. When the door is open, closed or "
 "just always"
 msgstr ""
 "Velg når strøm brytere kan veksle. Når døren er åpen, lukket eller bare "
@@ -741,16 +771,22 @@ msgid "Holds the mail server hostname or IP."
 msgstr "Viser epost serverens hostname eller IP."
 
 #: terrariumTranslations.py:135
-msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
+#, fuzzy
+#| msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
+msgid "Holds the mail server port number. SSL and TLS will be autodetected."
 msgstr "Viser e-postserveren portnummer. SSL og TLS vil bli oppdaget."
 
 #: terrariumTranslations.py:136
-msgid "Holds the username for authentication with the mailserver if needed."
+#, fuzzy
+#| msgid "Holds the username for authentication with the mailserver if needed."
+msgid "Holds the username for authentication with the mail server if needed."
 msgstr ""
 "Viser brukernavnet for godkjenning med mailserveren hvis det er nødvendig."
 
 #: terrariumTranslations.py:137
-msgid "Holds the password for authentication with the mailserver if needed."
+#, fuzzy
+#| msgid "Holds the password for authentication with the mailserver if needed."
+msgid "Holds the password for authentication with the mail server if needed."
 msgstr ""
 "Viser passordet for godkjenning med mailserveren hvis det er nødvendig."
 
@@ -799,9 +835,13 @@ msgid "Holds the Telegram Bot token. More information %shere%s"
 msgstr "Viser Telegram Bot token. Mer informasjon %shere%s"
 
 #: terrariumTranslations.py:152
+#, fuzzy
+#| msgid ""
+#| "Holds the Telegram username that is allowed for receiving messages. Can "
+#| "be multiple usernames seperated by a comma. More information %shere%s"
 msgid ""
 "Holds the Telegram username that is allowed for receiving messages. Can be "
-"multiple usernames seperated by a comma. More information %shere%s"
+"multiple usernames separated by a comma. More information %shere%s"
 msgstr ""
 "Viser Telegram-brukernavnet som er tillatt for mottak av meldinger. Kan være "
 "flere brukernavn adskilt med et komma. Mer informasjon %shere%s"
@@ -875,7 +915,9 @@ msgstr ""
 "på nytt etter at du har endret innstillingen."
 
 #: terrariumTranslations.py:170
-msgid "Holds the soundcard that is used for playing audio."
+#, fuzzy
+#| msgid "Holds the soundcard that is used for playing audio."
+msgid "Holds the sound card that is used for playing audio."
 msgstr "Viser lydkortet som brukes til å spille av lyd."
 
 #: terrariumTranslations.py:171
@@ -890,7 +932,9 @@ msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr "Viser mengden euro/dollar per 1 kW/t (1 kilowatt per time)."
 
 #: terrariumTranslations.py:173
-msgid "Holds the amount of euro/dollar per 1000 liters water."
+#, fuzzy
+#| msgid "Holds the amount of euro/dollar per 1000 liters water."
+msgid "Holds the amount of euro/dollar per 1000 litres water."
 msgstr "Viser mengden av euro/dollar per 1000 liter vann."
 
 #: terrariumTranslations.py:174
@@ -899,14 +943,6 @@ msgid ""
 "chosen indicator."
 msgstr ""
 "Velg temperatur indikatoren. Programvaren vil omberegne til den valgte "
-"indikatoren."
-
-#: terrariumTranslations.py:175
-msgid ""
-"Choose the windspeed indicator. The software will recalculate to the chosen "
-"indicator."
-msgstr ""
-"Velg indikator for vindhastighet. Programvaren vil omberegne til den valgte "
 "indikatoren."
 
 #: terrariumTranslations.py:176
@@ -987,7 +1023,9 @@ msgid "Holds the species name of the animal."
 msgstr "Viser dyrearten på dyret."
 
 #: terrariumTranslations.py:192
-msgid "Holds the latin name of the animal."
+#, fuzzy
+#| msgid "Holds the latin name of the animal."
+msgid "Holds the Latin name of the animal."
 msgstr "Viser det latinske navnet på dyret."
 
 #: terrariumTranslations.py:193
@@ -1017,7 +1055,9 @@ msgid "Authentication"
 msgstr "Autentisering"
 
 #: terrariumWebserver.py:265
-msgid "Player command could ot be executed!"
+#, fuzzy
+#| msgid "Player command could ot be executed!"
+msgid "Player command could to be executed!"
 msgstr "Spiller kommandoen kan ikke utføres!"
 
 #: terrariumWebserver.py:265 terrariumWebserver.py:285
@@ -1105,7 +1145,9 @@ msgid "Help"
 msgstr "Hjelp"
 
 #: views/audio_files.tpl:16
-msgid "Here you can upload and manange your audio files."
+#, fuzzy
+#| msgid "Here you can upload and manange your audio files."
+msgid "Here you can upload and manage your audio files."
 msgstr "Her kan du laste opp og organisere dine lydfiler."
 
 #: views/audio_files.tpl:16
@@ -2302,8 +2344,13 @@ msgstr ""
 "Linjen viser en prosentandel av maksimal bruk."
 
 #: views/inc/usage_dashboard.tpl:101
+#, fuzzy
+#| msgid ""
+#| "The third tile shows the current water flow in liters per minute. The "
+#| "amount is calculated based on the power switch settings and what the "
+#| "state is of the switches. The bar shows a percentage of the max usage."
 msgid ""
-"The third tile shows the current water flow in liters per minute. The amount "
+"The third tile shows the current water flow in litres per minute. The amount "
 "is calculated based on the power switch settings and what the state is of "
 "the switches. The bar shows a percentage of the max usage."
 msgstr ""
@@ -2326,10 +2373,17 @@ msgstr ""
 "beregnet på."
 
 #: views/inc/usage_dashboard.tpl:113
+#, fuzzy
+#| msgid ""
+#| "The fifth tile shows the total water usage from the start of using this "
+#| "software. It will calculate the total water usage every 10 minutes based "
+#| "on all historical data. It is shown in liters. When the water price is "
+#| "entered, it will show the costs of the water bill and the amount of days "
+#| "it is calculated on."
 msgid ""
 "The fifth tile shows the total water usage from the start of using this "
 "software. It will calculate the total water usage every 10 minutes based on "
-"all historical data. It is shown in liters. When the water price is entered, "
+"all historical data. It is shown in litres. When the water price is entered, "
 "it will show the costs of the water bill and the amount of days it is "
 "calculated on."
 msgstr ""
@@ -2348,8 +2402,12 @@ msgstr ""
 "er et belysnings system, et spray system og et varmesystem."
 
 #: views/inc/usage_dashboard.tpl:121
+#, fuzzy
+#| msgid ""
+#| "When a part is active the title is in color. If the title is gray that "
+#| "part is than not running or configured."
 msgid ""
-"When a part is active the title is in color. If the title is gray that part "
+"When a part is active the title is in colour. If the title is grey that part "
 "is than not running or configured."
 msgstr ""
 "Når en del er aktiv, er tittelen i farger. Hvis tittelen er grå er den delen "
@@ -2805,8 +2863,14 @@ msgid "Show or hide the sensor"
 msgstr "Vis eller skjul sensoren"
 
 #: views/inc/usage_sensors.tpl:92
+#, fuzzy
+#| msgid ""
+#| "The gauge graph shows the current temperature or humidity value. The "
+#| "color of the graph depends on the current value and the alarm values. "
+#| "When the value gets more to the minimum or maximum value, it will gets "
+#| "more red/orange."
 msgid ""
-"The gauge graph shows the current temperature or humidity value. The color "
+"The gauge graph shows the current temperature or humidity value. The colour "
 "of the graph depends on the current value and the alarm values. When the "
 "value gets more to the minimum or maximum value, it will gets more red/"
 "orange."
@@ -3963,7 +4027,9 @@ msgid "Changes only"
 msgstr "Kun endring"
 
 #: views/system_settings.tpl:157
-msgid "Soundcard"
+#, fuzzy
+#| msgid "Soundcard"
+msgid "Sound card"
 msgstr "Lydkort"
 
 #: views/system_settings.tpl:166
@@ -4610,7 +4676,9 @@ msgid "Value difference during the night"
 msgstr "Verdi forskjell gjennom natt"
 
 #: Missing text string
-msgid "Volume in liters"
+#, fuzzy
+#| msgid "Volume in liters"
+msgid "Volume in litres"
 msgstr "Volum i liter"
 
 #: Missing text string
@@ -4688,6 +4756,13 @@ msgstr "System miljø"
 #: Missing text string
 msgid "System settings"
 msgstr "Systeminnsillinger"
+
+#~ msgid ""
+#~ "Choose the windspeed indicator. The software will recalculate to the "
+#~ "chosen indicator."
+#~ msgstr ""
+#~ "Velg indikator for vindhastighet. Programvaren vil omberegne til den "
+#~ "valgte indikatoren."
 
 #~ msgid "PCA9685"
 #~ msgstr "PCA9685"
