@@ -98,7 +98,7 @@
                         <div class="row">
                           <h4><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Water flow in L/m')}}</h4>
                           <p>
-                            {{_('The third tile shows the current water flow in liters per minute. The amount is calculated based on the power switch settings and what the state is of the switches. The bar shows a percentage of the max usage.')}}
+                            {{_('The third tile shows the current water flow in litres per minute. The amount is calculated based on the power switch settings and what the state is of the switches. The bar shows a percentage of the max usage.')}}
                           </p>
                         </div>
                         <div class="row">
@@ -110,7 +110,7 @@
                         <div class="row">
                           <h4><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Total water in L')}}</h4>
                           <p>
-                            {{_('The fifth tile shows the total water usage from the start of using this software. It will calculate the total water usage every 10 minutes based on all historical data. It is shown in liters. When the water price is entered, it will show the costs of the water bill and the amount of days it is calculated on.')}}
+                            {{_('The fifth tile shows the total water usage from the start of using this software. It will calculate the total water usage every 10 minutes based on all historical data. It is shown in litres. When the water price is entered, it will show the costs of the water bill and the amount of days it is calculated on.')}}
                           </p>
                         </div>
                       </div>
@@ -118,7 +118,7 @@
                         <h3 class="lead">{{_('Environment')}}</h3>
                         <img src="static/images/documentation/dashboard_environment.gif" alt="Dashboard top indicators online screenshot" style="width: 35%" class="img-thumbnail alignright" />
                         <p>{{_('The environment section shows the current state of the environment. The environment is divided in three parts. There is a lighting system, a spray system and a heating system.')}}</p>
-                        <p>{{_('When a part is active the title is in color. If the title is gray that part is than not running or configured.')}}</p>
+                        <p>{{_('When a part is active the title is in colour. If the title is grey that part is than not running or configured.')}}</p>
                         <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}}</h4>
                         <p>
                           {{_('The lights part give the basic information about how the light system is configured. It shows the chosen mode out of \'clock\' or \'weather\'. There are no triggers or warnings used by the light system.')}}</p>

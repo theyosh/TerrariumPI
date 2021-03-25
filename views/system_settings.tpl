@@ -154,7 +154,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="soundcard">{{_('Soundcard')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="soundcard">{{_('Sound card')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_soundcard')}}">
                         <select class="form-control" required="required" name="soundcard" tabindex="-1" placeholder="{{_('Select an option')}}">

@@ -13,14 +13,14 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <p>{{_('Here you can upload and manange your audio files.')}} {{_('Open the dropzone multiple file uploader to upload new audio files.')}} {{!_('In the existing audio files list you can see which files are uploaded. By clicking on the trashbin (%s) icon you can delete the file.') % ('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>',)}}</p>
+            <p>{{_('Here you can upload and manage your audio files.')}} {{_('Open the drop zone multiple file uploader to upload new audio files.')}} {{!_('In the existing audio files list you can see which files are uploaded. By clicking on the trash bin (%s) icon you can delete the file.') % ('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>',)}}</p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2>{{_('Dropzone multiple file uploader')}}</h2>
+                <h2>{{_('Drop zone multiple file uploader')}}</h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-down"></i></a>

@@ -5,17 +5,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-02-08 14:46+CET\n"
-"PO-Revision-Date: 2020-04-29 16:03+0000\n"
+"POT-Creation-Date: 2021-03-25 12:31+CET\n"
+"PO-Revision-Date: 2021-03-25 11:52+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
-"webinterface/it/>\n"
+"3-x-y-z/it/>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.0.2\n"
+"X-Generator: Weblate 4.5.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
@@ -225,7 +225,7 @@ msgstr ""
 "Contiene l'URL di della sorgente esterna. Le sorgenti esterne supportate "
 "sono: %s."
 
-#: terrariumTranslations.py:29
+#: terrariumTranslations.py:29 terrariumTranslations.py:175
 msgid ""
 "Choose the wind speed indicator. The software will recalculate to the chosen "
 "indicator."
@@ -382,16 +382,24 @@ msgstr ""
 "Contiene l'ora di arresto del timer. Il timer si fermerà dopo questo orario."
 
 #: terrariumTranslations.py:62
+#, fuzzy
+#| msgid ""
+#| "Holds the period in minutes that the power switch is on withing the total "
+#| "timer window."
 msgid ""
-"Holds the period in minutes that the power switch is on withing the total "
+"Holds the period in minutes that the power switch is on within the total "
 "timer window."
 msgstr ""
 "Contiene il periodo in minuti in cui l'interruttore è acceso all'interno "
 "della finestra temporale del timer."
 
 #: terrariumTranslations.py:63
+#, fuzzy
+#| msgid ""
+#| "Holds the period in minutes that the power switch is off withing the "
+#| "total timer window."
 msgid ""
-"Holds the period in minutes that the power switch is off withing the total "
+"Holds the period in minutes that the power switch is off within the total "
 "timer window."
 msgstr ""
 "Contiene il periodo in minuti in cui l'interruttore è spento all'interno "
@@ -423,8 +431,12 @@ msgid "Holds the amount in percentage to go to when switched on."
 msgstr "Contiene la percentuale alla quale arrivare quando acceso."
 
 #: terrariumTranslations.py:68
+#, fuzzy
+#| msgid ""
+#| "Holds the amount of seconds for the duration in which it decresses the "
+#| "power."
 msgid ""
-"Holds the amount of seconds for the duration in which it decresses the power."
+"Holds the amount of seconds for the duration in which it decreases the power."
 msgstr ""
 "Contiene la durata in secondi secondi durante la quale cala la potenza."
 
@@ -578,7 +590,9 @@ msgid "Toggle on to enable repeating of the audio files."
 msgstr "Attiva per abilitare la ripetizione dei file audio."
 
 #: terrariumTranslations.py:106
-msgid "Toggle on to enable shuffeling of the audio files."
+#, fuzzy
+#| msgid "Toggle on to enable shuffeling of the audio files."
+msgid "Toggle on to enable shuffling of the audio files."
 msgstr "Attiva per abilitare la riproduzione casuale dei file audio."
 
 #: terrariumTranslations.py:107
@@ -659,7 +673,9 @@ msgstr ""
 "i valori."
 
 #: terrariumTranslations.py:114
-msgid "Holds the source that is used to determing when it is day or night."
+#, fuzzy
+#| msgid "Holds the source that is used to determing when it is day or night."
+msgid "Holds the source that is used to determine when it is day or night."
 msgstr ""
 "Contiene la fonte che viene utilizzata per determinare quando è giorno o "
 "notte."
@@ -694,7 +710,7 @@ msgstr ""
 #| "Holds the period in minutes that the ph is on withing the total timer "
 #| "window."
 msgid ""
-"Holds the period in minutes that this environment part is powered on withing "
+"Holds the period in minutes that this environment part is powered on within "
 "the total timer window."
 msgstr ""
 "Contiene il periodo in minuti in cui il pH si trova acceso all'interno della "
@@ -706,8 +722,8 @@ msgstr ""
 #| "Holds the period in minutes that the ph is off withing the total timer "
 #| "window"
 msgid ""
-"Holds the period in minutes that this environment part is powered off "
-"withing the total timer window."
+"Holds the period in minutes that this environment part is powered off within "
+"the total timer window."
 msgstr ""
 "Contiene il periodo in minuti in cui il pH si trova spento all'interno della "
 "finestra del timer totale"
@@ -799,7 +815,7 @@ msgstr ""
 "Seleziona qui sotto tutti gli interruttori necessari."
 
 #: terrariumTranslations.py:125
-msgid "Holds the water volume in liters."
+msgid "Holds the water volume in litres."
 msgstr "Contiene il volume dell'acqua in litri."
 
 #: terrariumTranslations.py:126
@@ -823,8 +839,12 @@ msgstr ""
 "commutati. Quando le luci sono accese, spente o semplicemente sempre"
 
 #: terrariumTranslations.py:129
+#, fuzzy
+#| msgid ""
+#| "Select when the power switches can toggle. When the door is open, cosed "
+#| "or just always"
 msgid ""
-"Select when the power switches can toggle. When the door is open, cosed or "
+"Select when the power switches can toggle. When the door is open, closed or "
 "just always"
 msgstr ""
 "Selezionare quando gli interruttori di alimentazione possono essere "
@@ -841,19 +861,25 @@ msgid "Holds the mail server hostname or IP."
 msgstr "Contiene il nome del sensore."
 
 #: terrariumTranslations.py:135
-msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
+#, fuzzy
+#| msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
+msgid "Holds the mail server port number. SSL and TLS will be autodetected."
 msgstr ""
 "Contiene il numero di porta del server di posta. SSL e TLS saranno rilevati "
 "automaticamente."
 
 #: terrariumTranslations.py:136
-msgid "Holds the username for authentication with the mailserver if needed."
+#, fuzzy
+#| msgid "Holds the username for authentication with the mailserver if needed."
+msgid "Holds the username for authentication with the mail server if needed."
 msgstr ""
 "Conserva il nome utente per l'autenticazione con il mailserver, se "
 "necessario."
 
 #: terrariumTranslations.py:137
-msgid "Holds the password for authentication with the mailserver if needed."
+#, fuzzy
+#| msgid "Holds the password for authentication with the mailserver if needed."
+msgid "Holds the password for authentication with the mail server if needed."
 msgstr ""
 "Conserva la password per l'autenticazione con il mailserver, se necessario."
 
@@ -912,9 +938,13 @@ msgid "Holds the Telegram Bot token. More information %shere%s"
 msgstr "Contiene il collegamento a maggiori informazioni."
 
 #: terrariumTranslations.py:152
+#, fuzzy
+#| msgid ""
+#| "Holds the Telegram username that is allowed for receiving messages. Can "
+#| "be multiple usernames seperated by a comma. More information %shere%s"
 msgid ""
 "Holds the Telegram username that is allowed for receiving messages. Can be "
-"multiple usernames seperated by a comma. More information %shere%s"
+"multiple usernames separated by a comma. More information %shere%s"
 msgstr ""
 "Contiene il nome utente Telegram che è consentito per la ricezione di "
 "messaggi. Può essere composto da più nomi utente separati da una virgola. "
@@ -997,7 +1027,9 @@ msgstr ""
 "web dopo aver cambiato le impostazioni."
 
 #: terrariumTranslations.py:170
-msgid "Holds the soundcard that is used for playing audio."
+#, fuzzy
+#| msgid "Holds the soundcard that is used for playing audio."
+msgid "Holds the sound card that is used for playing audio."
 msgstr "Contiene la scheda audio utilizzata per la riproduzione audio."
 
 #: terrariumTranslations.py:171
@@ -1013,7 +1045,7 @@ msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr "Contiene il prezzo in euro/dollari per 1 kW/h (1 Kilowatt per ora)."
 
 #: terrariumTranslations.py:173
-msgid "Holds the amount of euro/dollar per 1000 liters water."
+msgid "Holds the amount of euro/dollar per 1000 litres water."
 msgstr "Contiene il prezzo in euro/dollari per 1000 litri d'acqua."
 
 #: terrariumTranslations.py:174
@@ -1023,18 +1055,6 @@ msgid ""
 msgstr ""
 "Scegli l'unità di misura per la temperatura. Il software ricalcolerà il "
 "valore sul indicatore scelto."
-
-#: terrariumTranslations.py:175
-#, fuzzy
-#| msgid ""
-#| "Choose the wind speed indicator. The software will recalculate to the "
-#| "chosen indicator."
-msgid ""
-"Choose the windspeed indicator. The software will recalculate to the chosen "
-"indicator."
-msgstr ""
-"Scegli l'unità di misura per la velocità del vento. Il software ricalcolerà "
-"il valore sul indicatore scelto."
 
 #: terrariumTranslations.py:176
 #, fuzzy
@@ -1128,7 +1148,9 @@ msgid "Holds the species name of the animal."
 msgstr "Contiene il nome della specie dell'animale."
 
 #: terrariumTranslations.py:192
-msgid "Holds the latin name of the animal."
+#, fuzzy
+#| msgid "Holds the latin name of the animal."
+msgid "Holds the Latin name of the animal."
 msgstr "Contiene il nome scientifico dell'animale."
 
 #: terrariumTranslations.py:193
@@ -1158,7 +1180,9 @@ msgid "Authentication"
 msgstr "Autenticazione"
 
 #: terrariumWebserver.py:265
-msgid "Player command could ot be executed!"
+#, fuzzy
+#| msgid "Player command could ot be executed!"
+msgid "Player command could to be executed!"
 msgstr "Il comando del player non può essere eseguito!"
 
 #: terrariumWebserver.py:265 terrariumWebserver.py:285
@@ -1250,24 +1274,34 @@ msgid "Help"
 msgstr "Aiuto"
 
 #: views/audio_files.tpl:16
-msgid "Here you can upload and manange your audio files."
+#, fuzzy
+#| msgid "Here you can upload and manange your audio files."
+msgid "Here you can upload and manage your audio files."
 msgstr "Qui puoi caricare e gestire i tuoi file audio."
 
 #: views/audio_files.tpl:16
+#, fuzzy
+#| msgid ""
+#| "In the existing audio files list you can see which files are uploaded. By "
+#| "clicking on the trashbin (%s) icon you can delete the file."
 msgid ""
 "In the existing audio files list you can see which files are uploaded. By "
-"clicking on the trashbin (%s) icon you can delete the file."
+"clicking on the trash bin (%s) icon you can delete the file."
 msgstr ""
 "Nell'elenco dei file audio esistenti puoi vedere quali file sono stati "
 "caricati. Facendo clic sull'icona di trashbin (% s) è possibile eliminare il "
 "file."
 
 #: views/audio_files.tpl:16
-msgid "Open the dropzone multiple file uploader to upload new audio files."
+#, fuzzy
+#| msgid "Open the dropzone multiple file uploader to upload new audio files."
+msgid "Open the drop zone multiple file uploader to upload new audio files."
 msgstr "Apri il l'area di rilascio multiplo per caricare nuovi file audio."
 
 #: views/audio_files.tpl:23
-msgid "Dropzone multiple file uploader"
+#, fuzzy
+#| msgid "Dropzone multiple file uploader"
+msgid "Drop zone multiple file uploader"
 msgstr "Area di rilascio multiplo per upload di file"
 
 #: views/audio_files.tpl:35
@@ -2485,7 +2519,7 @@ msgstr ""
 
 #: views/inc/usage_dashboard.tpl:101
 msgid ""
-"The third tile shows the current water flow in liters per minute. The amount "
+"The third tile shows the current water flow in litres per minute. The amount "
 "is calculated based on the power switch settings and what the state is of "
 "the switches. The bar shows a percentage of the max usage."
 msgstr ""
@@ -2512,7 +2546,7 @@ msgstr ""
 msgid ""
 "The fifth tile shows the total water usage from the start of using this "
 "software. It will calculate the total water usage every 10 minutes based on "
-"all historical data. It is shown in liters. When the water price is entered, "
+"all historical data. It is shown in litres. When the water price is entered, "
 "it will show the costs of the water bill and the amount of days it is "
 "calculated on."
 msgstr ""
@@ -2534,7 +2568,7 @@ msgstr ""
 
 #: views/inc/usage_dashboard.tpl:121
 msgid ""
-"When a part is active the title is in color. If the title is gray that part "
+"When a part is active the title is in colour. If the title is grey that part "
 "is than not running or configured."
 msgstr ""
 "Quando una sezione è attiva l'indicatore è colorato. Se l'indicatore è "
@@ -3002,7 +3036,7 @@ msgstr "Mostra o nascondi il sensore"
 
 #: views/inc/usage_sensors.tpl:92
 msgid ""
-"The gauge graph shows the current temperature or humidity value. The color "
+"The gauge graph shows the current temperature or humidity value. The colour "
 "of the graph depends on the current value and the alarm values. When the "
 "value gets more to the minimum or maximum value, it will gets more red/"
 "orange."
@@ -4181,7 +4215,6 @@ msgid "Volume indicator"
 msgstr "Indicatori maggiori"
 
 #: views/system_settings.tpl:120
-#, fuzzy
 msgid "Litres"
 msgstr "Litri"
 
@@ -4218,7 +4251,9 @@ msgid "Changes only"
 msgstr "Canali"
 
 #: views/system_settings.tpl:157
-msgid "Soundcard"
+#, fuzzy
+#| msgid "Soundcard"
+msgid "Sound card"
 msgstr "Scheda audio"
 
 #: views/system_settings.tpl:166
@@ -4926,10 +4961,8 @@ msgid "Value difference during the night"
 msgstr "Differenza di temperatura durante la notte"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Water tank volume in liters"
-msgid "Volume in liters"
-msgstr "Volume in litri della riserva d'acqua"
+msgid "Volume in litres"
+msgstr "Volume in litri"
 
 #: Missing text string
 msgid "Weather day forecast screenshot"
@@ -5006,6 +5039,17 @@ msgstr "Ambiente di sistema"
 #: Missing text string
 msgid "System settings"
 msgstr "Impostazioni di sistema"
+
+#, fuzzy
+#~| msgid ""
+#~| "Choose the wind speed indicator. The software will recalculate to the "
+#~| "chosen indicator."
+#~ msgid ""
+#~ "Choose the windspeed indicator. The software will recalculate to the "
+#~ "chosen indicator."
+#~ msgstr ""
+#~ "Scegli l'unità di misura per la velocità del vento. Il software "
+#~ "ricalcolerà il valore sul indicatore scelto."
 
 #~ msgid ""
 #~ "Holds the port number on which the OWFS software is running. Leave empty "
