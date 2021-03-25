@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2020-04-29 16:03+0000\n"
+"PO-Revision-Date: 2021-03-25 11:52+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
-"webinterface/it/>\n"
+"3-x-y-z/it/>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.0.2\n"
+"X-Generator: Weblate 4.5.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
@@ -815,8 +815,6 @@ msgstr ""
 "Seleziona qui sotto tutti gli interruttori necessari."
 
 #: terrariumTranslations.py:125
-#, fuzzy
-#| msgid "Holds the water volume in liters."
 msgid "Holds the water volume in litres."
 msgstr "Contiene il volume dell'acqua in litri."
 
@@ -1047,8 +1045,6 @@ msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr "Contiene il prezzo in euro/dollari per 1 kW/h (1 Kilowatt per ora)."
 
 #: terrariumTranslations.py:173
-#, fuzzy
-#| msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgid "Holds the amount of euro/dollar per 1000 litres water."
 msgstr "Contiene il prezzo in euro/dollari per 1000 litri d'acqua."
 
@@ -2522,11 +2518,6 @@ msgstr ""
 "interruttori. La barra mostra la percentuale rispetto al carico massimo."
 
 #: views/inc/usage_dashboard.tpl:101
-#, fuzzy
-#| msgid ""
-#| "The third tile shows the current water flow in liters per minute. The "
-#| "amount is calculated based on the power switch settings and what the "
-#| "state is of the switches. The bar shows a percentage of the max usage."
 msgid ""
 "The third tile shows the current water flow in litres per minute. The amount "
 "is calculated based on the power switch settings and what the state is of "
@@ -2552,13 +2543,6 @@ msgstr ""
 "della bolletta e il numero dei giorni sul quale è calcolato."
 
 #: views/inc/usage_dashboard.tpl:113
-#, fuzzy
-#| msgid ""
-#| "The fifth tile shows the total water usage from the start of using this "
-#| "software. It will calculate the total water usage every 10 minutes based "
-#| "on all historical data. It is shown in liters. When the water price is "
-#| "entered, it will show the costs of the water bill and the amount of days "
-#| "it is calculated on."
 msgid ""
 "The fifth tile shows the total water usage from the start of using this "
 "software. It will calculate the total water usage every 10 minutes based on "
@@ -2583,10 +2567,6 @@ msgstr ""
 "e di riscaldamento."
 
 #: views/inc/usage_dashboard.tpl:121
-#, fuzzy
-#| msgid ""
-#| "When a part is active the title is in color. If the title is gray that "
-#| "part is than not running or configured."
 msgid ""
 "When a part is active the title is in colour. If the title is grey that part "
 "is than not running or configured."
@@ -3055,12 +3035,6 @@ msgid "Show or hide the sensor"
 msgstr "Mostra o nascondi il sensore"
 
 #: views/inc/usage_sensors.tpl:92
-#, fuzzy
-#| msgid ""
-#| "The gauge graph shows the current temperature or humidity value. The "
-#| "color of the graph depends on the current value and the alarm values. "
-#| "When the value gets more to the minimum or maximum value, it will gets "
-#| "more red/orange."
 msgid ""
 "The gauge graph shows the current temperature or humidity value. The colour "
 "of the graph depends on the current value and the alarm values. When the "
@@ -4241,7 +4215,6 @@ msgid "Volume indicator"
 msgstr "Indicatori maggiori"
 
 #: views/system_settings.tpl:120
-#, fuzzy
 msgid "Litres"
 msgstr "Litri"
 
@@ -4988,10 +4961,8 @@ msgid "Value difference during the night"
 msgstr "Differenza di temperatura durante la notte"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Water tank volume in liters"
 msgid "Volume in litres"
-msgstr "Volume in litri della riserva d'acqua"
+msgstr "Volume in litri"
 
 #: Missing text string
 msgid "Weather day forecast screenshot"
