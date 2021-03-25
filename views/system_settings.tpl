@@ -321,6 +321,8 @@
             });
 
             $.get('/api/audio/hardware',function(data) {
+
+              soundcard_selector.append($('<option>').attr({'value':'None'}).text('{{_("None")}}'));
               $(Object.keys(data.audiohardware)).each(function(index,hardware_device){
                 soundcard_selector.append($('<option>').attr({'value':hardware_device}).text(data.audiohardware[hardware_device].name));
               });
