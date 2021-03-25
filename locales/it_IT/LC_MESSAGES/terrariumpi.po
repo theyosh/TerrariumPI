@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-03-25 12:30+CET\n"
+"POT-Creation-Date: 2021-03-25 12:31+CET\n"
 "PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
@@ -1284,20 +1284,28 @@ msgid "Here you can upload and manage your audio files."
 msgstr "Qui puoi caricare e gestire i tuoi file audio."
 
 #: views/audio_files.tpl:16
+#, fuzzy
+#| msgid ""
+#| "In the existing audio files list you can see which files are uploaded. By "
+#| "clicking on the trashbin (%s) icon you can delete the file."
 msgid ""
 "In the existing audio files list you can see which files are uploaded. By "
-"clicking on the trashbin (%s) icon you can delete the file."
+"clicking on the trash bin (%s) icon you can delete the file."
 msgstr ""
 "Nell'elenco dei file audio esistenti puoi vedere quali file sono stati "
 "caricati. Facendo clic sull'icona di trashbin (% s) è possibile eliminare il "
 "file."
 
 #: views/audio_files.tpl:16
-msgid "Open the dropzone multiple file uploader to upload new audio files."
+#, fuzzy
+#| msgid "Open the dropzone multiple file uploader to upload new audio files."
+msgid "Open the drop zone multiple file uploader to upload new audio files."
 msgstr "Apri il l'area di rilascio multiplo per caricare nuovi file audio."
 
 #: views/audio_files.tpl:23
-msgid "Dropzone multiple file uploader"
+#, fuzzy
+#| msgid "Dropzone multiple file uploader"
+msgid "Drop zone multiple file uploader"
 msgstr "Area di rilascio multiplo per upload di file"
 
 #: views/audio_files.tpl:35

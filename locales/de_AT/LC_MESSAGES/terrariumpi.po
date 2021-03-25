@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-03-25 12:30+CET\n"
+"POT-Creation-Date: 2021-03-25 12:31+CET\n"
 "PO-Revision-Date: 2020-07-30 21:15+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
@@ -1187,22 +1187,30 @@ msgid "Here you can upload and manage your audio files."
 msgstr "Hier können Sie Ihre Audiodateien hochladen und verwalten."
 
 #: views/audio_files.tpl:16
+#, fuzzy
+#| msgid ""
+#| "In the existing audio files list you can see which files are uploaded. By "
+#| "clicking on the trashbin (%s) icon you can delete the file."
 msgid ""
 "In the existing audio files list you can see which files are uploaded. By "
-"clicking on the trashbin (%s) icon you can delete the file."
+"clicking on the trash bin (%s) icon you can delete the file."
 msgstr ""
 "In der vorhandenen Audiodateiliste können Sie sehen, welche Dateien "
 "hochgeladen wurden. Durch Klicken auf das Papierkorb-Symbol (%s) können Sie "
 "die Datei löschen."
 
 #: views/audio_files.tpl:16
-msgid "Open the dropzone multiple file uploader to upload new audio files."
+#, fuzzy
+#| msgid "Open the dropzone multiple file uploader to upload new audio files."
+msgid "Open the drop zone multiple file uploader to upload new audio files."
 msgstr ""
 "Öffnen Sie den Drag-and-Drop Uploader, um mehrere neue Ausiodateien "
 "hochzuladen."
 
 #: views/audio_files.tpl:23
-msgid "Dropzone multiple file uploader"
+#, fuzzy
+#| msgid "Dropzone multiple file uploader"
+msgid "Drop zone multiple file uploader"
 msgstr "Dropzone Mehrfachdatei-Uploader"
 
 #: views/audio_files.tpl:35

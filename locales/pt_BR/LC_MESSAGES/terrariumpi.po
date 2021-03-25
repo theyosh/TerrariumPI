@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2021-03-25 12:30+CET\n"
+"POT-Creation-Date: 2021-03-25 12:31+CET\n"
 "PO-Revision-Date: 2021-02-14 07:04+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
@@ -1159,21 +1159,29 @@ msgid "Here you can upload and manage your audio files."
 msgstr "Aqui você pode enviar e gerenciar seus arquivos de áudio."
 
 #: views/audio_files.tpl:16
+#, fuzzy
+#| msgid ""
+#| "In the existing audio files list you can see which files are uploaded. By "
+#| "clicking on the trashbin (%s) icon you can delete the file."
 msgid ""
 "In the existing audio files list you can see which files are uploaded. By "
-"clicking on the trashbin (%s) icon you can delete the file."
+"clicking on the trash bin (%s) icon you can delete the file."
 msgstr ""
 "Na lista de arquivos de áudio existentes, você pode ver quais arquivos foram "
 "enviados. Ao clicar no ícone da lixeira ( %s ), você pode excluir o arquivo."
 
 #: views/audio_files.tpl:16
-msgid "Open the dropzone multiple file uploader to upload new audio files."
+#, fuzzy
+#| msgid "Open the dropzone multiple file uploader to upload new audio files."
+msgid "Open the drop zone multiple file uploader to upload new audio files."
 msgstr ""
 "Abra o carregador de arquivos múltiplos dropzone para fazer upload de novos "
 "arquivos de áudio."
 
 #: views/audio_files.tpl:23
-msgid "Dropzone multiple file uploader"
+#, fuzzy
+#| msgid "Dropzone multiple file uploader"
+msgid "Drop zone multiple file uploader"
 msgstr "Carregador de arquivos múltiplos do Dropzone"
 
 #: views/audio_files.tpl:35
