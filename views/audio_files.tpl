@@ -13,7 +13,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <p>{{_('Here you can upload and manange your audio files.')}} {{_('Open the dropzone multiple file uploader to upload new audio files.')}} {{!_('In the existing audio files list you can see which files are uploaded. By clicking on the trashbin (%s) icon you can delete the file.') % ('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>',)}}</p>
+            <p>{{_('Here you can upload and manage your audio files.')}} {{_('Open the dropzone multiple file uploader to upload new audio files.')}} {{!_('In the existing audio files list you can see which files are uploaded. By clicking on the trashbin (%s) icon you can delete the file.') % ('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>',)}}</p>
           </div>
         </div>
         <div class="row">

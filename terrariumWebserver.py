@@ -262,7 +262,7 @@ class terrariumWebserver(object):
     return staticfile
 
   def __player_commands(self,action):
-    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Player command could ot be executed!')}
+    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Player command could to be executed!')}
 
     if 'start' == action:
       self.__terrariumEngine.audio_player_start()

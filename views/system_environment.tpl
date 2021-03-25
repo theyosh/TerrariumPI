@@ -1246,7 +1246,7 @@
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_volume">{{_('Volume')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="watertank_volume" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Volume in liters')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_volume')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_volume" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Volume in litres')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_volume')}}">
                     </div>
                   </div>
                   <div class="form-group">
