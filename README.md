@@ -1,8 +1,8 @@
 # TerrariumPI 4.0.0
-<a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
+[![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/4-x-y-z/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
 
-**WARNING: This softwar is still in Alpha/Beta state!! Use only for testing and previewing**
+**WARNING: This software is still in Alpha/Beta state!! Use only for testing and previewing**
 
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
@@ -107,8 +107,7 @@ It is currently controling my reptile terrarium for more then five years! And my
 
 ## Translations
 The software has support for the following languages:
-
-[![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/multi-auto.svg)](https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget)
+[![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/4-x-y-z/multi-auto.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 
 Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations) <a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
 
