@@ -116,7 +116,7 @@ class terrariumRelayMeross(terrariumRelay):
       if data is None:
         data = []
         asyncio.run(__get_hardware_state())
-        self.__state_cache.set_data(self._device['device'],data,cache_timeout=15)
+        self.__state_cache.set_data(self._device['device'],data,cache_timeout=20)
 
       return self.ON if len(data) >= self._device['switch'] and terrariumUtils.is_true(data[self._device['switch']]) else self.OFF
     except BadLoginException:
