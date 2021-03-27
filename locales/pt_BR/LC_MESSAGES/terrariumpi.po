@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-03-23 16:36+CET\n"
-"PO-Revision-Date: 2021-03-22 17:28+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2021-03-28 11:44+0000\n"
+"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -488,10 +488,8 @@ msgid "New sensor"
 msgstr "Novo Sensor"
 
 #: views/includes/sidebar.html:102
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Scan sensors"
-msgstr "Selecionar sensores"
+msgstr "Buscar sensores"
 
 #: views/includes/sidebar.html:111 views/modals/area.html:176
 #: views/modals/area.html:216 views/modals/area.html:534
@@ -1152,10 +1150,8 @@ msgid "Red"
 msgstr "Vermelho"
 
 #: views/modals/service.html:188
-#, fuzzy
-#| msgid "Hello"
 msgid "Yellow"
-msgstr "Olá"
+msgstr "Amarelo"
 
 #: views/modals/service.html:195 views/modals/webcam.html:151
 msgid "Green"
@@ -1342,8 +1338,6 @@ msgid "Archive door state"
 msgstr "Salvar estado da porta"
 
 #: views/modals/webcam.html:132
-#, fuzzy
-#| msgid "flash"
 msgid "Flash"
 msgstr "Flash"
 
@@ -1751,10 +1745,8 @@ msgid "Delete enclosure"
 msgstr "Excluir anexo"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Event title"
 msgid "Delete event {title}"
-msgstr "Título do evento"
+msgstr "Apagar evento {title}"
 
 #: Missing text string
 msgid "Delete message"
@@ -1838,7 +1830,7 @@ msgstr "Digite o horário de término"
 
 #: Missing text string
 msgid "Enter green GPIO pin"
-msgstr ""
+msgstr "Insira o pino GPIO para o verde"
 
 #: Missing text string
 msgid "Enter height"
@@ -1853,20 +1845,16 @@ msgid "Enter number"
 msgstr "Inserir o número"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter end time"
 msgid "Enter red GPIO pin"
-msgstr "Digite o horário de término"
+msgstr "Insira o pino GPIO para o vermelho"
 
 #: Missing text string
 msgid "Enter search terms"
 msgstr "Insira os termos de pesquisa"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter some information about this event"
 msgid "Enter some information about this enclosure"
-msgstr "Insira informações sobre o evento"
+msgstr "Insira informações sobre o anexo"
 
 #: Missing text string
 msgid "Enter some information about this event"
@@ -1922,7 +1910,7 @@ msgstr "Digite largura"
 
 #: Missing text string
 msgid "Enter yellow GPIO pin"
-msgstr ""
+msgstr "Insira o pino GPIO para o amarelo"
 
 #: Missing text string
 msgid "Error messages"
@@ -2025,10 +2013,8 @@ msgid "Scan for new relays"
 msgstr "Procurar novos relés"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Scan for new relays"
 msgid "Scan for new sensors"
-msgstr "Procurar novos relés"
+msgstr "Procurar novos sensores"
 
 #: Missing text string
 msgid "Select a mode"
@@ -2088,7 +2074,7 @@ msgstr "Selecionar Idioma"
 
 #: Missing text string
 msgid "Select optional relay for flash"
-msgstr ""
+msgstr "Selecione o relé opcional para o flash"
 
 #: Missing text string
 msgid "Select period"
@@ -2135,10 +2121,8 @@ msgid "Shutdown TerrariumPI"
 msgstr "Desligar TerrariumPI"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Toggle relay"
 msgid "Toggle menu"
-msgstr "Alternar relé"
+msgstr "Alternar menu"
 
 #: Missing text string
 msgid "Toggle relay"
