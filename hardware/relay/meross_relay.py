@@ -3,7 +3,7 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import os
-import asyncio
+from unsync import unsync
 from hashlib import md5
 
 from . import terrariumRelay, terrariumRelayException
@@ -21,6 +21,7 @@ class terrariumRelayMeross(terrariumRelay):
   NAME = 'Meross power switches'
 
   def _load_hardware(self):
+    # Use an internal caching for speeding things up.
     self.__state_cache = terrariumCache()
 
     address = self._address
@@ -41,6 +42,7 @@ class terrariumRelayMeross(terrariumRelay):
       logger.error('Meross cloud is not enabled.')
       return
 
+    @unsync
     async def __set_hardware_state(state):
       # Setup the HTTP client API from user-password
       http_api_client = await MerossHttpClient.async_from_user_password(email=EMAIL, password=PASSWORD)
@@ -66,9 +68,17 @@ class terrariumRelayMeross(terrariumRelay):
       manager.close()
       await http_api_client.async_logout()
 
-    try:
-      asyncio.run(__set_hardware_state(state))
+      return state
+
+
+    data = self.__state_cache.get_data(self._device['device'])
+    if data is not None and terrariumUtils.is_true(data[self._device['switch']]) == (state != 0.0):
       return True
+
+    try:
+      work = __set_hardware_state(state)
+      data = work.result()
+      return data == state
     except BadLoginException:
       logger.error(f'Wrong login credentials for Meross. Please check your settings')
     except RuntimeError as err:
@@ -84,9 +94,11 @@ class terrariumRelayMeross(terrariumRelay):
 
     if '' == EMAIL or '' == PASSWORD:
       logger.error('Meross cloud is not enabled.')
-      return
+      return None
 
+    @unsync
     async def __get_hardware_state():
+      data = []
       # Setup the HTTP client API from user-password
       http_api_client = await MerossHttpClient.async_from_user_password(email=EMAIL, password=PASSWORD)
 
@@ -110,12 +122,15 @@ class terrariumRelayMeross(terrariumRelay):
       manager.close()
       await http_api_client.async_logout()
 
+      return data
+
     try:
       data = self.__state_cache.get_data(self._device['device'])
 
       if data is None:
-        data = []
-        asyncio.run(__get_hardware_state())
+        work = __get_hardware_state()
+        data = work.result()
+
         self.__state_cache.set_data(self._device['device'],data,cache_timeout=20)
 
       return self.ON if len(data) >= self._device['switch'] and terrariumUtils.is_true(data[self._device['switch']]) else self.OFF
@@ -130,16 +145,10 @@ class terrariumRelayMeross(terrariumRelay):
 
   @staticmethod
   def _scan_relays(callback=None):
-    EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL'))
-    PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD'))
 
-    if '' == EMAIL or '' == PASSWORD:
-      logger.info('Meross cloud is not enabled.')
-      return
-
-    found_devices = []
-
+    @unsync
     async def __scan():
+      found_devices = []
       # Setup the HTTP client API from user-password
       http_api_client = await MerossHttpClient.async_from_user_password(email=EMAIL, password=PASSWORD)
 
@@ -168,14 +177,26 @@ class terrariumRelayMeross(terrariumRelay):
       manager.close()
       await http_api_client.async_logout()
 
-    try:
-      asyncio.run(__scan())
-    except BadLoginException:
-      logger.error(f'Wrong login credentials for Meross. Please check your settings')
-    except RuntimeError as err:
-      logger.exception(err)
-    except Exception as ex:
-      logger.exception(ex)
+      return found_devices
+
+
+    EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL'))
+    PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD'))
+
+    found_devices = []
+
+    if '' == EMAIL or '' == PASSWORD:
+      logger.info('Meross cloud is not enabled.')
+    else:
+      try:
+        work = __scan()
+        found_devices = work.result()
+      except BadLoginException:
+        logger.error(f'Wrong login credentials for Meross. Please check your settings')
+      except RuntimeError as err:
+        logger.exception(err)
+      except Exception as ex:
+        logger.exception(ex)
 
     for device in found_devices:
        yield device

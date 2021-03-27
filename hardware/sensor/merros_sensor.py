@@ -3,7 +3,7 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import os
-import asyncio
+from unsync import unsync
 from datetime import datetime
 
 from . import terrariumSensor, terrariumSensorLoadingException
@@ -38,7 +38,9 @@ class terrariumMS100Sensor(terrariumSensor):
       logger.error('Meross cloud is not enabled.')
       return
 
+    @unsync
     async def __get_hardware_state():
+      data = {}
       # Setup the HTTP client API from user-password
       http_api_client = await MerossHttpClient.async_from_user_password(email=EMAIL, password=PASSWORD)
 
@@ -64,11 +66,12 @@ class terrariumMS100Sensor(terrariumSensor):
       manager.close()
       await http_api_client.async_logout()
 
-    try:
-      data = {}
-      asyncio.run(__get_hardware_state())
       return data
 
+    try:
+      work = __get_hardware_state()
+      data = work.result()
+      return data
     except BadLoginException:
       logger.error(f'Wrong login credentials for Meross. Please check your settings')
     except RuntimeError as err:
@@ -78,16 +81,10 @@ class terrariumMS100Sensor(terrariumSensor):
 
   @staticmethod
   def _scan_sensors(unit_value_callback = None, trigger_callback = None):
-    EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL',''))
-    PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD',''))
 
-    if '' == EMAIL or '' == PASSWORD:
-      logger.info('Meross cloud is not enabled.')
-      return
-
-    found_devices = []
-
+    @unsync
     async def __scan():
+      found_devices = []
       # Setup the HTTP client API from user-password
       http_api_client = await MerossHttpClient.async_from_user_password(email=EMAIL, password=PASSWORD)
 
@@ -118,13 +115,24 @@ class terrariumMS100Sensor(terrariumSensor):
       manager.close()
       await http_api_client.async_logout()
 
-    try:
-      asyncio.run(__scan())
-    except BadLoginException:
-      logger.error(f'Wrong login credentials for Meross. Please check your settings')
-    except RuntimeError as err:
-      #logger.exception(err)
-      pass
+      return found_devices
+
+    EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL',''))
+    PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD',''))
+
+    found_devices = []
+
+    if '' == EMAIL or '' == PASSWORD:
+      logger.info('Meross cloud is not enabled.')
+    else:
+      try:
+        work = __scan()
+        found_devices = work.result()
+      except BadLoginException:
+        logger.error(f'Wrong login credentials for Meross. Please check your settings')
+      except RuntimeError as err:
+        #logger.exception(err)
+        pass
 
     for device in found_devices:
        yield device
