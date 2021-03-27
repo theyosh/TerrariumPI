@@ -96,10 +96,11 @@
     <div class="collapse row pt-3" id="sensor_callibration">
       <div class="col-6 col-sm-6 col-md-6 col-lg-2">
         <div class="form-group">
-          <label for="sensor_chirp_min_moist">{{ _('Offset') }}</label>
+          <label for="sensor_offset">{{ _('Offset') }}</label>
           <input type="number" step="0.001" class="form-control" id="sensor_offset" name="offset" placeholder="{{ _('Offset') }}" value="0.0">
         </div>
       </div>
+
       <div class="col-6 col-sm-6 col-md-6 col-lg-2 chirp">
         <div class="form-group">
           <label for="chirp_min_moist">{{ _('Minimal moist value') }}</label>
@@ -110,6 +111,16 @@
         <div class="form-group">
           <label for="sensor_chirp_max_moist">{{ _('Maximum moist value') }}</label>
           <input type="number" step="1" class="form-control" id="sensor_chirp_max_moist" name="chirp_max_moist" placeholder="{{ _('Maximum moist value') }}" value="720">
+        </div>
+      </div>
+
+      <div class="col-6 col-sm-6 col-md-6 col-lg-4 ccs811">
+        <div class="form-group">
+          <label for="ccs811_compensation_sensors">{{ _('Compensation sensors') }}</label>
+          <div class="select2-primary">
+            <select class="select2" id="ccs811_compensation_sensors" name="ccs811_compensation_sensors" multiple="multiple" data-placeholder="{{ _('Select compensation sensors') }}" style="width: 100%;">
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -139,26 +150,54 @@ let sensor_types = {}
     sensor_type_select.trigger('change');
   }
 
-  if (data !== undefined && 'chirp' == data) {
-    sensor_form.find('.chirp').show();
-    sensor_form.find('[name^="chirp_"]').prop('disabled',false);
-  } else {
-    sensor_form.find('.chirp').hide();
-    sensor_form.find('[name^="chirp_"]').prop('disabled',true);
+  sensor_form.find('.chirp').hide();
+  sensor_form.find('[name^="chirp_"]').prop('disabled',true);
+
+  sensor_form.find('.ccs811').hide();
+  sensor_form.find('[name^="ccs811_"]').prop('disabled',true);
+
+  if (data !== undefined) {
+    if ('chirp' == data) {
+      sensor_form.find('.chirp').show();
+      sensor_form.find('[name^="chirp_"]').prop('disabled',false);
+
+    } else if ('css811' == data) {
+      sensor_form.find('.ccs811').show();
+      sensor_form.find('[name^="ccs811_"]').prop('disabled',false);
+    }
   }
 });
 {% endblock %}
 
 {% block modal_form_javascript_load %}
-jQuery.get('{{ url_for("api:sensor_hardware") }}', function(data) {
+
+jQuery.when(
+
+  jQuery.get('{{ url_for("api:sensor_hardware") }}'),
+  jQuery.get('{{ url_for("api:sensor_list") }}'),
+
+).done(function(hardware_types, sensors) {
+
   {{modal_type}}_form.find('.chirp').hide();
+  {{modal_type}}_form.find('.ccs811').hide();
+
   let sensor_type_select     = {{modal_type}}_form.find('select#sensor_type');
   let sensor_hardware_select = {{modal_type}}_form.find('select#sensor_hardware');
+
+  let compensation_sensors_select = {{modal_type}}_form.find('select#ccs811_compensation_sensors');
+  compensation_sensors_select.prop('disabled', false).attr('readonly', false);
+  compensation_sensors_select.find('option').remove();
+
+  jQuery.each(sensors[0].data,function(counter,item){
+    if (['temperature','humidity'].indexOf(item.type) != -1) {
+      compensation_sensors_select.append(jQuery('<option>').attr('value',item.id).text(item.name + ' ' + item.value));
+    }
+  });
 
   sensor_hardware_select.prop('disabled', false).attr('readonly', false);
   sensor_hardware_select.find('option').remove();
 
-  jQuery.each(data.data,function(counter,item){
+  jQuery.each(hardware_types[0].data,function(counter,item){
     sensor_types[item.hardware] = item.types;
     sensor_hardware_select.append(jQuery('<option>').attr('value',item.hardware).text(item.name));
   });
@@ -221,5 +260,10 @@ try {
 try {
   form_data['calibration']['chirp_max_moist'] = form_data['chirp_max_moist'];
   delete(form_data['chirp_max_moist']);
+} catch (error) { }
+
+try {
+  form_data['calibration']['ccs811_compensation_sensors'] = form_data['ccs811_compensation_sensors'];
+  delete(form_data['ccs811_compensation_sensors']);
 } catch (error) { }
 {% endblock %}

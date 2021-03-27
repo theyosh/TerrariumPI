@@ -13,6 +13,7 @@ import re
 import json
 import pyfiglet
 import copy
+import statistics
 
 import gettext
 # Loading translations
@@ -488,6 +489,19 @@ class terrariumEngine(object):
       for sensor in Sensor.select(lambda s: s.id in self.sensors.keys() and not s.id in self.settings['exclude_ids']):
         current_value = sensor.value
         start = time.time()
+
+        if 'ccs811' == sensor.hardware.lower():
+          calibration = {'temperature' : [], 'humidity' : []}
+          for calibration_sensor in sensor.calibration['ccs811_compensation_sensors']:
+            calibration_sensor = self.sensors[calibration_sensor]
+            if calibration_sensor.type in calibration:
+              calibration[calibration_sensor.type].append(calibration_sensor.value)
+
+          calibration['temperature'] = None if len(calibration['temperature']) == 0 else statistics.mean(calibration['temperature'])
+          calibration['humidity']    = None if len(calibration['humidity']) == 0    else statistics.mean(calibration['humidity'])
+
+          self.sensors[sensor.id].calibrate(calibration['temperature'],calibration['humidity'])
+
         new_value = self.sensors[sensor.id].update(self.sensors[sensor.id].erratic > 0)
         measurement_time = time.time() - start
         if new_value is None:
