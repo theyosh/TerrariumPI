@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-03-25 11:52+0000\n"
+"PO-Revision-Date: 2021-03-28 13:44+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United States) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/3-x-y-z/en_US/>\n"
@@ -3899,7 +3899,7 @@ msgstr "Distance indicator"
 
 #: views/system_settings.tpl:109
 msgid "Centimetre"
-msgstr "Centimetre"
+msgstr "Centimeter"
 
 #: views/system_settings.tpl:110
 msgid "Inches"
