@@ -2,12 +2,12 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from abc import abstractmethod
 from pathlib import Path
 import inspect
 import pkgutil
 from importlib import import_module
 import sys
+import statistics
 from hashlib import md5
 from time import time, sleep
 from operator import itemgetter
@@ -209,13 +209,6 @@ class terrariumSensor(object):
   def type(self):
     return self._device['type']
 
-  # @sensor_type.setter
-  # def sensor_type(self, value):
-  #   if value in self.TYPES or len(self.TYPES) == 0:
-  #     self._device['sensor'] = value
-  #   else:
-  #     raise terrariumSensorInvalidTypeException('Invalid sensor type / Unknown sensor type: \'{}\''.format(value))
-
   @property
   def value(self):
     return self._device['value']
@@ -232,11 +225,8 @@ class terrariumSensor(object):
   def erratic(self, value):
     self._device['erratic_errors'] = value
 
-
-  @abstractmethod
   def get_hardware_state(self):
     pass
-
 
   @retry(terrariumSensorLoadingException, tries=3, delay=0.5, max_delay=2, logger=logger)
   def load_hardware(self, reload = False):
@@ -305,59 +295,9 @@ class terrariumSensor(object):
 
     if current is None:
       self.__sensor_cache.clear_data(self.__sensor_cache_key)
-      # logger.warning('Measured %s value %s%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (self.get_sensor_type(),
-      #                                                                                                                          terrariumUtils.conver_to_value(current,self.get_indicator()),
-      #                                                                                                                          self.get_indicator(),
-      #                                                                                                                          self.get_type(),
-      #                                                                                                                          self.get_name(),
-      #                                                                                                                          self.get_limit_min(),
-      #                                                                                                                          self.get_indicator(),
-      #                                                                                                                          self.get_limit_max(),
-      #                                                                                                                          self.get_indicator(),
-      #                                                                                                                          time()-starttime))
-
-    # elif not self.__within_limits(terrariumUtils.conver_to_value(current,self.get_indicator())):
-    #   self.__erratic_errors += 1
-    #   # logger.warning('Measured %s value %s%s from %s sensor \'%s\' is erratic compared to previous value %s%s in %.5f seconds.' % (self.get_sensor_type(),
-    #   #                                                                                                                              terrariumUtils.conver_to_value(current,self.get_indicator()),
-    #   #                                                                                                                              self.get_indicator(),
-    #   #                                                                                                                              self.get_type(),
-    #   #                                                                                                                              self.get_name(),
-    #   #                                                                                                                              self.__current_value,
-    #   #                                                                                                                              self.get_indicator(),
-    #   #                                                                                                                              time()-starttime))
-    #   if self.__erratic_errors >= 5:
-    #     # After 5 times, use the current value as the new truth
-    #     self.__current_value = current
-    #     self.__last_update = int(starttime)
-    #     # logger.warning('After %s erratic %s measurements is the current value %s%s is promoted to a valid value for %s sensor \'%s\' in %.5f seconds.' %
-    #     #                                                                                                                            (self.__erratic_errors,
-    #     #                                                                                                                             self.get_sensor_type(),
-    #     #                                                                                                                             self.get_current(),
-    #     #                                                                                                                             self.get_indicator(),
-    #     #                                                                                                                             self.get_type(),
-    #     #                                                                                                                             self.get_name(),
-    #     #                                                                                                                             time()-starttime))
-    #     self.__erratic_errors = 0
-
-
-      # else:
-      #   self.__sensor_cache.clear_sensor_data(self.get_sensor_cache_key())
 
     else:
-      #self._device['erratic_errors'] = 0
       self._device['last_update'] = int(starttime)
-
-
-      #self.__last_update = int(starttime)
-      # logger.info('Updated %s sensor \'%s\' %s from %.2f%s to %.2f%s in %.5f seconds' % (self.get_type(),
-      #                                                                                    self.get_name(),
-      #                                                                                    self.get_sensor_type(),
-      #                                                                                    0 if self.get_current() is None else self.get_current(),
-      #                                                                                    self.get_indicator(),
-      #                                                                                    terrariumUtils.conver_to_value(current,self.get_indicator()),
-      #                                                                                    self.get_indicator(),
-      #                                                                                    time()-starttime))
       self._device['value'] = current
       return current
 
@@ -369,83 +309,15 @@ class terrariumSensor(object):
     return f'{self.NAME} {self.type} named \'{self.name}\' at address \'{self.address}\''
 
 
-
-
-
-
-
-
-
-
-
-  # @property
-  # def alarm_min(self):
-  #   return 0
-
-  # # @alarm_min.setter
-  # # def alarm_min(self, value):
-  # #   if terrariumUtils.is_float(value):
-  # #     self._device['alarm_min'] = float(value)
-
-  # @property
-  # def alarm_max(self):
-  #   return 100
-
-  # # @alarm_max.setter
-  # # def alarm_max(self, value):
-  # #   if terrariumUtils.is_float(value):
-  # #     self._device['alarm_max'] = float(value)
-
-  # @property
-  # def limit_min(self):
-  #   return 0
-
-  # # @limit_min.setter
-  # # def limit_min(self, value):
-  # #   if terrariumUtils.is_float(value):
-  # #     self._device['limit_min'] = float(value)
-
-  # @property
-  # def limit_max(self):
-  #   return 100
-
-  # # @limit_max.setter
-  # # def limit_max(self, value):
-  # #   if terrariumUtils.is_float(value):
-  # #     self._device['limit_max'] = float(value)
-
-  # @property
-  # def max_diff(self):
-  #   return 10
-
-  # @max_diff.setter
-  # def max_diff(self, value):
-  #   if terrariumUtils.is_float(value):
-  #     self._device['max_diff'] = float(value)
-
-  # @property
-  # def offset(self):
-  #   return self._device['offset']
-
-  # @offset.setter
-  # def offset(self, value):
-  #   if terrariumUtils.is_float(value):
-  #     self._device['offset'] = float(value)
-
-
-
   # Auto discovery of known and connected sensors
   @staticmethod
   def scan_sensors(unit_value_callback = None, trigger_callback = None, **kwargs):
     for (hardware_type,sensor_device) in terrariumSensor.available_hardware.items():
-      #print(f'Scanning: {hardware_type} - {sensor_device}')
       try:
         for sensor in sensor_device._scan_sensors(unit_value_callback, trigger_callback, **kwargs):
-#          print('Find sensor:')
-#          print(sensor)
           yield sensor
       except AttributeError as ex:
-#         print(ex)
+        # Scanning not supported, just ignore
         pass
 
 class terrariumAnalogSensor(terrariumSensor):
@@ -523,15 +395,13 @@ class terrariumI2CSensorMixin():
       data2 = i2c_bus.read_byte(self.device[0])
     except Exception as ex:
       data2 = data1
-      #logger.warning('Error getting second part of data in bytes from sensor \'{}\' with address {} with error: {}'.format(self.get_name(),self.get_address(),ex))
 
     return (data1,data2)
 
   def _get_data(self):
     data = {}
-    #with self._device['device'][1] as i2c_bus:
     with self._open_hardware() as i2c_bus:
-      # Datasheet recommend do Soft Reset before measurment:
+      # Datasheet recommend do Soft Reset before measurement:
       self.__soft_reset(i2c_bus)
       if 'temperature' in self.TYPES:
         bytedata = self.__get_data(i2c_bus, self.TEMPERATURE_TRIGGER_NO_HOLD,self.TEMPERATURE_WAIT_TIME)
@@ -566,26 +436,22 @@ class terrariumBluetoothSensor(terrariumSensor):
         devices = Scanner(counter).scan(terrariumBluetoothSensor.__SCAN_TIME)
         for device in devices:
           if device.rssi > terrariumBluetoothSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ids:
-            #logger.info('Found {} bluetooth device at address {}'.format(sensorclass.NAME, address))
             for sensor_type in sensorclass.TYPES:
               yield terrariumSensor(None,
-                                sensorclass.HARDWARE,
-                                sensor_type,
-                                device.addr + ('' if counter == 0 else f',{counter}'),
-                                f'{sensorclass.NAME} measuring {sensor_type}',
-                                unit_value_callback = unit_value_callback,
-                                trigger_callback    = trigger_callback)
+                                    sensorclass.HARDWARE,
+                                    sensor_type,
+                                    device.addr + ('' if counter == 0 else f',{counter}'),
+                                    f'{sensorclass.NAME} measuring {sensor_type}',
+                                    unit_value_callback = unit_value_callback,
+                                    trigger_callback    = trigger_callback)
 
         # we found devices, so this device is ok! Stop trying more bluetooth devices
         break
 
       except Exception as ex:
-        print('Some bluetooth rights errors')
-        print(ex)
         ok = False
 
     if not ok:
-      #print('Bluetooth scanning is not enabled for normal users (needs root rights) or there are no Bluetooth devices available')
       logger.warning('Bluetooth scanning is not enabled for normal users or there are zero Bluetooth LE devices available.... bluetooth is disabled!')
 
     return []

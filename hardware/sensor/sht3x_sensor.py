@@ -1,7 +1,6 @@
 from . import terrariumI2CSensor
-from terrariumUtils import terrariumUtils
 
-import time
+from gevent import sleep
 # https://github.com/OlivierdenOuden/Sensirion_SHT35/blob/master/simple_SHT31.py
 
 class terrariumSHT3XSensor(terrariumI2CSensor):
@@ -17,7 +16,7 @@ class terrariumSHT3XSensor(terrariumI2CSensor):
     with self._open_hardware() as i2c_bus:
       # MS to SL
       i2c_bus.write_i2c_block_data(self.device[0],self.__SHT3x_SS,[0x06])
-      time.sleep(0.2)
+      sleep(0.2)
       # Read out data
       data = i2c_bus.read_i2c_block_data(self.device[0],self.__SHT3x_READ,6)
       # Devide data into counts Temperature

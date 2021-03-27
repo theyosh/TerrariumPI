@@ -13,7 +13,7 @@ class terrariumRelayWeMo(terrariumRelay):
   # This will update the device based in mac address
   def load_hardware(self):
     super().load_hardware()
-    # Always overule the ID generating, as we want to use the MAC as that is unique if the IP address is changing
+    # Always overrule the ID generating, as we want to use the MAC as that is unique if the IP address is changing
     self.id = md5(f'{self.HARDWARE}{self.device.mac.lower()}'.encode()).hexdigest()
 
   def _load_hardware(self):

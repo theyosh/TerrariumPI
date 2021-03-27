@@ -1,7 +1,4 @@
 from . import terrariumAnalogSensor
-from terrariumUtils import terrariumUtils
-
-import statistics
 
 class terrariumSEN0161Sensor(terrariumAnalogSensor):
   HARDWARE = 'sen0161'

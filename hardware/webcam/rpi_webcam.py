@@ -3,7 +3,6 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 from . import terrariumWebcam
-from terrariumUtils import terrariumUtils
 
 # export READTHEDOCS=True; pip install picamera
 from picamera import PiCamera, PiCameraError

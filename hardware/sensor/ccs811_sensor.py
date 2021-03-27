@@ -1,10 +1,6 @@
 from . import terrariumI2CSensor
-from terrariumUtils import terrariumUtils
 
-# pip install RPi.bme280
-import bme280
-import smbus2
-
+# https://gist.github.com/xxlukas42/60ae08f75e68a0cfcdb7c9dd60145d34
 #
 # CCS811_RPi
 #
@@ -14,7 +10,6 @@ import smbus2
 # Version 1.0
 
 from gevent import sleep
-
 import struct, array, io, fcntl
 
 # I2C Address
@@ -142,15 +137,15 @@ class CCS811_RPi:
     data = CCS811_fr.read(8)
     buf = array.array('B', data)
     result = {}
+
     # Read eCO2 value and check if it is valid
     result['eCO2'] = buf[0]*256 + buf[1]
     if result['eCO2'] > 8192:
-      print('Invalid eCO2 value')
       return False
+
     # Read TVOC value and check if it is valid
     result['TVOC'] = buf[2]*256 + buf[3]
     if result['TVOC'] > 1187:
-      print('Invalid TVOC value')
       return False
 
     result['status'] = buf[4]
@@ -158,7 +153,6 @@ class CCS811_RPi:
     # Read the last error ID and check if it is valid
     result['errorid'] = buf[5]
     if result['errorid'] > 5:
-      print('Invalid Error ID')
       return False
 
     result['raw'] = buf[6]*256 + buf[7]
@@ -185,7 +179,6 @@ class CCS811_RPi:
   def setCompensation(self, temperature, humidity):
     temperature = round(temperature,2)
     humidity = round(humidity,2)
-    print('Setting compensation to {} C and {} %'.format(temperature, humidity))
     hum1 = int(humidity//0.5)
     hum2 = int(humidity*512-hum1*256)
 
@@ -200,12 +193,9 @@ class CCS811_RPi:
     return
 
   def setBaseline(self, baseline):
-    print('Setting baseline to {}'.format(baseline))
     buf = [0,0]
     s = struct.pack('>H', baseline)
     buf[0], buf[1] = struct.unpack('>BB', s)
-    print(buf[0])
-    print(buf[1])
 
     s = [CSS811_BASELINE,buf[0],buf[1],0x00]
     s2 = bytearray( s )
@@ -233,40 +223,38 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
     address = self._address
     device = CCS811_RPi(addr=address[0], twi=address[1])
     device.configureSensor(terrariumCCS811Sensor.MODE)
+
+    self.calibrate()
     return device
-
-    # Raise a loading error
-    #raise terrariumSensorLoadingException(f'Unable to load sensor {self.HARDWARE} {self.name} at address {self.address}: Invalid path.')
-
 
   def _get_data(self):
     data = None
     try:
+
+      self.device.setCompensation(self.__calibration['temperature'],self.__calibration['humidity'])
+
       statusbyte = self.device.readStatus()
       error = self.device.checkError(statusbyte)
 
-      if(error):
-        pass
-#        print('ERROR:{}'.format(self.__device.checkError(statusbyte)))
+      if error:
+        return None
 
       if not self.device.checkDataReady(statusbyte):
-#        print('No new samples are ready')
-#        print('---------------------------------')
-#        sleep(pause)
-#        continue
         return None
 
       result = self.device.readAlg()
       if not result:
-#        print ('Invalid result received')
-#        sleep(pause)
-#        continue
         return None
 
       sensor_data['co2'] = result['eCO2']
 
     except Exception as ex:
-      print('terrariumCCS811Sensor Ex:')
-      print(ex)
+      pass
 
     return data
+
+  def calibrate(self,temperature = 20,humidity = 50):
+    self.__calibration = {
+      'temperature' : temperature,
+      'humidity'    : humidity,
+    }

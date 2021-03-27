@@ -3,7 +3,6 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 from . import terrariumBluetoothSensor
-from terrariumUtils import terrariumUtils
 
 # apt install libglib2.0-dev
 # pip install bluepy
@@ -61,13 +60,6 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
       # Lost connection.... retry getting a 'new' device. The data will be red the next round
       logger.debug(f'Lost connection with sensor {self}. Reconnecting... (BrokenPipeError)')
       self.load_hardware(True)
-
-
-
-    #except Exception as ex:
-    #  raise terrariumSensorUpdateException(f'Error getting new data from {self.HARDWARE}{self.name} sensor at address {self.address}: {ex}')
-#      print(ex)
-      #logger.warning('Error getting new data from {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
 
     return None
 

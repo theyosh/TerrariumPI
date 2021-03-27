@@ -8,10 +8,6 @@ import threading
 
 from . import terrariumButton, terrariumButtonException
 
-
-import os
-import signal
-
 class terrariumLDRSensor(terrariumButton):
   HARDWARE = 'ldr'
   NAME     = 'Light sensor'

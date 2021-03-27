@@ -1,9 +1,7 @@
 from . import terrariumSensor
-from terrariumUtils import terrariumUtils
 
 # pip install pyownet
 from pyownet import protocol
-
 class terrariumOWFSSensor(terrariumSensor):
   HARDWARE = 'owfs'
   TYPES    = ['temperature','humidity']
@@ -67,4 +65,3 @@ class terrariumOWFSSensor(terrariumSensor):
 
     except Exception as ex:
       pass
-      #logger.warning('OWFS file system is not actve / installed on this device! If this is not correct, try \'i2cdetect -y 1\' to see if device is connected.')

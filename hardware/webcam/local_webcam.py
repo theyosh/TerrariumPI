@@ -1,5 +1,4 @@
 from . import terrariumWebcam, terrariumWebcamException
-from terrariumUtils import terrariumUtils
 
 from pathlib import Path
 from io import BytesIO

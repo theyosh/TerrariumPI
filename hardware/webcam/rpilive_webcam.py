@@ -10,7 +10,6 @@ import threading
 import shlex
 
 from . import terrariumWebcam, terrariummWebcamLoadingException
-from terrariumUtils import terrariumUtils
 
 class terrariumRPILiveWebcam(terrariumWebcam):
   HARDWARE     = 'rpicam-live'

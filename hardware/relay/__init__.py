@@ -90,14 +90,8 @@ class terrariumRelay(object):
                     'switch'      : None,
                     'type'        : None,
                     'id'          : None,
-                    'cache_key'   : None,
-                    'callback'    : None,
-
                     'wattage'     : 0.0,
                     'flow'        : 0.0,
-#                    'replacement' : '2019-01-01',
-                    'manual_mode' : False,
-
                     'last_update' : 0,
                     'value'       : self.OFF}
 
@@ -110,15 +104,7 @@ class terrariumRelay(object):
     self.address = address
     self.callback = callback
 
-    #self.timer = terrariumTimer('00:00','00:00',0,0,False)
-
     self.load_hardware()
-
-#    self.update()
-
-    # if self._device['value'] is None:
-    #   logger.warning(f'Forcing power off for switch {self.name} as there no old state available')
-    #   self.set_state(self.OFF, True)
 
   def __repr__(self):
     return f'{self.NAME} {self.type} named \'{self.name}\' at address \'{self.address}\''
@@ -166,7 +152,7 @@ class terrariumRelay(object):
 
   @property
   def id(self):
-    if self._device['id'] is None:
+    if self._device['id'] is None and self.address is not None:
       self._device['id'] = md5(f'{self.HARDWARE}{self.address}'.encode()).hexdigest()
 
     return self._device['id']
@@ -209,38 +195,19 @@ class terrariumRelay(object):
 
   def set_state(self, new_state, force = False):
     if new_state is None or not (self.OFF <= new_state <= self.ON):
-      print('Illegal value')
+      logger.error(f'Illegal value for relay {self}: {new_state}')
       return False
 
     changed = False
-    # logger.debug('Changing power switch \'{}\' of type \'{}\' at address \'{}\' from state \'{}\' to state \'{}\' (Forced:{})'.format(self.get_name(),
-    #                                                                                                                           self.get_type(),
-    #                                                                                                                           self.get_address(),
-    #                                                                                                                           self.get_state(),
-    #                                                                                                                           state,force))
-
     if self.state != new_state or terrariumUtils.is_true(force):
       old_state = self.state
 
       try:
         self.__set_hardware_value(new_state)
-
-        #self.state = state
-        # logger.info('Changed power switch \'{}\' of type \'{}\' at address \'{}\' from state \'{}\' to state \'{}\' (Forced:{})'.format(self.get_name(),
-        #                                                                                                                         self.get_type(),
-        #                                                                                                                         self.get_address(),
-        #                                                                                                                         old_state,
-        #                                                                                                                         state,
-        #                                                                                                                         force))
-
+        logger.info(f'Changed relay {self} from state \'{old_state}\' to state \'{new_state}\'')
 
       except Exception as ex:
-        print(ex)
-        # logger.error('Failed changing power switch \'{}\' of type \'{}\' at address \'{}\' from state \'{}\' to state \'{}\' (Forced:{})'.format(self.get_name(),
-        #                                                                                                                                  self.get_type(),
-        #                                                                                                                                  self.get_address(),
-        #                                                                                                                                  self.get_state(),
-        #                                                                                                                                  state,force))
+        logger.exception(ex)
 
       if (old_state is not None) or (old_state is None and new_state == 0):
         # This is due to a bug that will graph 0 watt usage in the graph after rebooting.
@@ -255,18 +222,15 @@ class terrariumRelay(object):
   def update(self, force = False):
     starttime = time()
 
+    new_data = None
     try:
       new_data = self.__get_hardware_value()
     except Exception as ex:
-      print('Update relay state error')
-      print(ex)
-      new_data = None
+      logger.exception(ex)
 
     self._device['value'] = new_data
+    return self._device['value']
 
-    return new_data
-
-#  def on(self, force = False):
   def on(self, value = 100, delay = 0.0):
     if delay > 0.0:
       self.__timer = threading.Timer(delay, lambda: self.set_state(value)).start()
@@ -276,8 +240,6 @@ class terrariumRelay(object):
     # Not great, but the set_state has a callback for updates
     return True
 
-    #return self.set_state(self.ON, force)
-
   def off(self, value = 0, delay = 0.0):
     if delay > 0.0:
       self.__timer = threading.Timer(delay, lambda: self.set_state(value)).start()
@@ -286,9 +248,6 @@ class terrariumRelay(object):
 
     # Not great, but the set_state has a callback for updates
     return True
-
-  # def off(self, force = False):
-  #   return self.set_state(self.OFF, force)
 
   def is_on(self):
     return self.state == self.ON
@@ -312,13 +271,12 @@ class terrariumRelay(object):
   @staticmethod
   def scan_relays(callback = None, **kwargs):
     for (hardware_type,relay_device) in terrariumRelay.available_hardware.items():
-      #print(f'Scanning for {hardware_type} at {relay_device}')
+      logger.debug(f'Scanning for {hardware_type} at {relay_device}')
       try:
-        #logger.info(f'Scanning for {relay_device.NAME} relays.')
         for relay in relay_device._scan_relays(callback, **kwargs):
           yield relay
       except AttributeError as ex:
-#        print(ex)
+        # The relay does not support scanning. Just ignore
         pass
 
 class terrariumRelayDimmer(terrariumRelay):
@@ -331,34 +289,24 @@ class terrariumRelayDimmer(terrariumRelay):
     self.__thread = None
 
   def __run(self, to, duration):
-#    print('Start running the dimmer clear ')
     self.running = True
     self.__running.clear()
-#    print('Start again....')
 
     current_state = self.state
     steps = abs(to - current_state)
     direction = 1 if current_state < to else -1
     pause_time = duration / steps
 
-#    print(f'Starting from {current_state} to {to} in {steps} steps. Per step we wait {pause_time} seconds for total {duration} seconds')
-
     for counter in range(int(steps)):
       if not self.running:
         break
 
       current_state += direction
-#      print(f'Set to state: {current_state}')
       self.set_state(current_state)
       self.__running.wait(timeout=pause_time)
-#      sleep(pause_time)
 
-
-#    print('Dimmer is done, resettin the event')
     self.__running.set()
     self.running = False
-#    print('Complete done with dimmer')
-#    self.__dimmer_active = False
 
   def calibrate(self, data):
     frequency = data.get('dimmer_frequency', self._DIMMER_FREQ)
@@ -379,16 +327,12 @@ class terrariumRelayDimmer(terrariumRelay):
       self.__timer = threading.Timer(delay, lambda: self.on(value,duration,0)).start()
     else:
 
-  #  def on(self, value = 100, duration = 0):
-  #   print(f'Is dimmer currently running: {self.running}')
       if self.running:
         # For now, we cannot change the value when a dim action is going on... (Maybe we change this later)
         return False
 
       value = round(value)
-    #  print(f'Putting {self} on to {value} in {duration} seconds')
       value = max(self.OFF,min(self.ON,value))
-    #  print(f'Putting {self} on to corrected {value} in {duration} seconds')
 
       if value == self.state:
         return True
@@ -409,14 +353,9 @@ class terrariumRelayDimmer(terrariumRelay):
     return self.state > self.OFF
 
   def stop(self):
-    # Stop the dimmer event (if running..)
- #   print('Stop dimmer running event and wait for thread...')
     self.running = False
     self.__running.set()
     if self.__thread is not None:
       self.__thread.join()
 
- #   print('Should be done...')
- #   print('Call super stop')
     super().stop()
- #   print('Done calling super... and totally done... no threads/timers left')

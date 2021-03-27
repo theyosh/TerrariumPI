@@ -1,5 +1,4 @@
 from . import terrariumI2CSensor
-from terrariumUtils import terrariumUtils
 
 # pip install PyMLX90614
 import mlx90614

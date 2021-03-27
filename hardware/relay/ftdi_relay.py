@@ -52,8 +52,6 @@ class terrariumRelayFTDI(terrariumRelay):
 
       self.address = f'{address[0]},{device}'
 
-      #break # Done loading....
-
       return (serial,device_type)
 
   def _set_hardware_value(self, state):

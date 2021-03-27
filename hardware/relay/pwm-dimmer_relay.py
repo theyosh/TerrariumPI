@@ -28,9 +28,6 @@ class terrariumRelayDimmerNextEVO(terrariumRelayDimmerPWM):
   NAME = 'NextEVO Universal AC MAINS Dimmer (MPDMv4.1)'
 
   # PWM dimmer settings
-  # According to http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
-  # is 860 DIM value equal to 95% dimming -> 905 is 100% dimming -> But at after 860 you can't see it working... so 860 is fine!
-  # DIMMER_MAXDIM = 860
   _DIMMER_FREQ   = 5000
 
   def _load_hardware(self):
@@ -41,7 +38,6 @@ class terrariumRelayDimmerDC(terrariumRelayDimmerPWM):
   NAME = 'DC Dimmer'
 
   # DC dimmer settings
-  #DIMMER_MAXDIM = 1000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-412667010
   _DIMMER_FREQ   = 15000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-413697246
 
 class terrariumRelayDimmerIRF520(terrariumRelayDimmerPWM):
@@ -51,5 +47,4 @@ class terrariumRelayDimmerIRF520(terrariumRelayDimmerPWM):
   NAME = 'IRF520 Dimmer'
 
   # # Dimmer settings
-  #DIMMER_MAXDIM = 100
   _DIMMER_FREQ   = 10000 # Tested with a 12V PC fan. Low freq. caused some high pitching noise

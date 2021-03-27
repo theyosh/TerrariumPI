@@ -1,8 +1,6 @@
 from . import terrariumBluetoothSensor
-from terrariumUtils import terrariumUtils
 
 # pip install mitemp-bt
-
 from mitemp_bt.mitemp_bt_poller import MiTempBtPoller, MI_TEMPERATURE, MI_HUMIDITY, MI_BATTERY
 from btlewrap.bluepy import BluepyBackend
 

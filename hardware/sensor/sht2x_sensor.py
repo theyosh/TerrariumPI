@@ -1,5 +1,4 @@
 from . import terrariumI2CSensor, terrariumI2CSensorMixin
-from terrariumUtils import terrariumUtils
 
 class terrariumSHT2XSensor(terrariumI2CSensor, terrariumI2CSensorMixin):
   HARDWARE = 'sht2x'

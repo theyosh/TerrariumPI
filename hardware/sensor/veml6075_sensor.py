@@ -1,5 +1,4 @@
 from . import terrariumI2CSensor, terrariumSensorException
-from terrariumUtils import terrariumUtils
 
 # pip install veml6075
 import veml6075
