@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2021-03-23 16:36+CET\n"
+"POT-Creation-Date: 2021-04-01 17:14+CEST\n"
 "PO-Revision-Date: 2021-03-23 15:43+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
@@ -58,107 +58,107 @@ msgstr "Moisture"
 msgid "pH"
 msgstr "pH"
 
-#: terrariumEngine.py:55
+#: terrariumEngine.py:53
 msgid "temperature"
 msgstr "temperature"
 
-#: terrariumEngine.py:56
+#: terrariumEngine.py:54
 msgid "distance"
 msgstr "distance"
 
-#: terrariumEngine.py:57
+#: terrariumEngine.py:55
 msgid "altitude"
 msgstr "altitude"
 
-#: terrariumEngine.py:58
+#: terrariumEngine.py:56
 msgid "pressure"
 msgstr "pressure"
 
-#: terrariumEngine.py:59
+#: terrariumEngine.py:57
 msgid "humidity"
 msgstr "humidity"
 
-#: terrariumEngine.py:60
+#: terrariumEngine.py:58
 msgid "moisture"
 msgstr "moisture"
 
-#: terrariumEngine.py:61
+#: terrariumEngine.py:59
 msgid "conductivity"
 msgstr "conductivity"
 
-#: terrariumEngine.py:62
+#: terrariumEngine.py:60
 msgid "ph"
 msgstr "ph"
 
-#: terrariumEngine.py:63
+#: terrariumEngine.py:61
 msgid "light"
 msgstr "light"
 
-#: terrariumEngine.py:64
+#: terrariumEngine.py:62
 msgid "uva"
 msgstr "uva"
 
-#: terrariumEngine.py:65
+#: terrariumEngine.py:63
 msgid "uvb"
 msgstr "uvb"
 
-#: terrariumEngine.py:66
+#: terrariumEngine.py:64
 msgid "uvi"
 msgstr "uvi"
 
-#: terrariumEngine.py:67
+#: terrariumEngine.py:65
 msgid "fertility"
 msgstr "fertility"
 
-#: terrariumEngine.py:68
+#: terrariumEngine.py:66
 msgid "co2"
 msgstr "co2"
 
-#: terrariumEngine.py:69
+#: terrariumEngine.py:67
 msgid "volume"
 msgstr "volume"
 
-#: terrariumEngine.py:70
+#: terrariumEngine.py:68
 msgid "watertank"
 msgstr "watertank"
 
-#: terrariumEngine.py:71
+#: terrariumEngine.py:69
 msgid "windspeed"
 msgstr "windspeed"
 
-#: terrariumEngine.py:72
+#: terrariumEngine.py:70
 msgid "water_flow"
 msgstr "water_flow"
 
-#: terrariumEngine.py:73
+#: terrariumEngine.py:71
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:1002 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1014 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Up time"
 
-#: terrariumEngine.py:1008
+#: terrariumEngine.py:1020
 msgid "System load"
 msgstr "System load"
 
-#: terrariumEngine.py:1014 views/status.html:44
+#: terrariumEngine.py:1026 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU Temperature"
 
-#: terrariumEngine.py:1020
+#: terrariumEngine.py:1032
 msgid "Storage"
 msgstr "Storage"
 
-#: terrariumEngine.py:1026
+#: terrariumEngine.py:1038
 msgid "Memory"
 msgstr "Memory"
 
-#: terrariumEngine.py:1036
+#: terrariumEngine.py:1048
 msgid "average {sensor_type}"
 msgstr "average {sensor_type}"
 
-#: terrariumEngine.py:1208
+#: terrariumEngine.py:1221
 msgid "last update"
 msgstr "last update"
 
@@ -202,15 +202,15 @@ msgstr "Twitter"
 msgid "Web-hook"
 msgstr "Web-hook"
 
-#: terrariumWebserver.py:153 terrariumWebserver.py:231
+#: terrariumWebserver.py:157 terrariumWebserver.py:235
 msgid "Authenticate to make any changes"
 msgstr "Authenticate to make any changes"
 
-#: terrariumWebserver.py:153 terrariumWebserver.py:231
+#: terrariumWebserver.py:157 terrariumWebserver.py:235
 msgid "Authentication"
 msgstr "Authentication"
 
-#: terrariumWebserver.py:153 terrariumWebserver.py:231 views/index.html:2
+#: terrariumWebserver.py:157 terrariumWebserver.py:235 views/index.html:2
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
@@ -224,12 +224,12 @@ msgstr "Audio files"
 #: views/modals/button.html:32 views/modals/enclosure.html:17
 #: views/modals/message.html:33 views/modals/playlist.html:17
 #: views/modals/sensor.html:41 views/modals/service.html:27
-#: views/modals/webcam.html:35 views/playlists.html:24 views/playlists.html:37
+#: views/modals/webcam.html:35 views/playlists.html:24 views/playlists.html:39
 msgid "Name"
 msgstr "Name"
 
 #: views/audio_files.html:25 views/audio_files.html:36 views/playlists.html:25
-#: views/playlists.html:38
+#: views/playlists.html:40
 msgid "Duration"
 msgstr "Duration"
 
@@ -241,8 +241,8 @@ msgstr "Filename"
 msgid "Size"
 msgstr "Size"
 
-#: views/audio_files.html:28 views/audio_files.html:39 views/playlists.html:30
-#: views/playlists.html:43
+#: views/audio_files.html:28 views/audio_files.html:39 views/playlists.html:31
+#: views/playlists.html:46
 msgid "Action"
 msgstr "Action"
 
@@ -832,7 +832,7 @@ msgid "Select the sound card that is used for this enclosure."
 msgstr "Select the sound card that is used for this enclosure."
 
 #: views/modals/area.html:436 views/modals/playlist.html:23
-#: views/playlists.html:27 views/playlists.html:40
+#: views/playlists.html:27 views/playlists.html:42
 msgid "Volume"
 msgstr "Volume"
 
@@ -1045,12 +1045,12 @@ msgid "Playlist settings"
 msgstr "Playlist settings"
 
 #: views/modals/playlist.html:30 views/playlists.html:28
-#: views/playlists.html:41
+#: views/playlists.html:43
 msgid "Shuffle"
 msgstr "Shuffle"
 
 #: views/modals/playlist.html:42 views/playlists.html:29
-#: views/playlists.html:42
+#: views/playlists.html:44
 msgid "Repeat"
 msgstr "Repeat"
 
@@ -1086,13 +1086,19 @@ msgstr "Max diff"
 msgid "Excl. avg"
 msgstr "Excl. avg"
 
-#: views/modals/sensor.html:105
+#: views/modals/sensor.html:106
 msgid "Minimal moist value"
 msgstr "Minimal moist value"
 
-#: views/modals/sensor.html:111
+#: views/modals/sensor.html:112
 msgid "Maximum moist value"
 msgstr "Maximum moist value"
+
+#: views/modals/sensor.html:119
+#, fuzzy
+#| msgid "Temperature sensor"
+msgid "Compensation sensors"
+msgstr "Temperature sensor"
 
 #: views/modals/service.html:11
 msgid "Notification service settings"
@@ -1398,7 +1404,7 @@ msgstr "Notification messages"
 msgid "Add message"
 msgstr "Add message"
 
-#: views/playlists.html:26 views/playlists.html:39
+#: views/playlists.html:26 views/playlists.html:41
 msgid "# Files"
 msgstr "# Files"
 
@@ -2067,6 +2073,12 @@ msgstr "Select available doors"
 #: Missing text string
 msgid "Select available webcams"
 msgstr "Select available webcams"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Select sensors"
+msgid "Select compensation sensors"
+msgstr "Select sensors"
 
 #: Missing text string
 msgid "Select hardware"
@@ -3298,9 +3310,6 @@ msgstr "Weather data source url"
 
 #~ msgid "No sensors available"
 #~ msgstr "No sensors available"
-
-#~ msgid "Temperature sensor"
-#~ msgstr "Temperature sensor"
 
 #~ msgid "Humidity sensor"
 #~ msgstr "Humidity sensor"
