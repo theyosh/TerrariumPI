@@ -22,7 +22,7 @@ INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python 3)"
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered java openjdk chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
 OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
-APT_PACKAGES="screen git watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
+APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
 
 PIP_MODULES=""
 while IFS= read -r line; do
@@ -139,19 +139,6 @@ echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", ATTR{idProduct}=="fd15", GROUP="
 # Reload udev controll
 udevadm control --reload-rules
 
-# Install 1 Wire I2C stuff
-# if [ -f /etc/owfs.conf ]; then
-#   sed -i.bak 's/^server: FAKE = DS18S20,DS2405/#server: FAKE = DS18S20,DS2405/' /etc/owfs.conf
-
-#   if [ `grep -ic "server: device=/dev/i2c-1" /etc/owfs.conf` -eq 0 ]; then
-#     echo "server: device=/dev/i2c-1" >> /etc/owfs.conf
-#   fi
-# fi
-
-# if [ -f /etc/modprobe.d/raspi-blacklist.conf ]; then
-#   sed -i.bak 's/^blacklist i2c-bcm2708/#blacklist i2c-bcm2708/' /etc/modprobe.d/raspi-blacklist.conf
-# fi
-
 # Increase swap file size
 if [ -f /etc/dphys-swapfile ]; then
   sed -i 's/^CONF_SWAPSIZE=100/CONF_SWAPSIZE=512/' /etc/dphys-swapfile
@@ -178,22 +165,20 @@ Install required software\n\nInstalling base software ...
 XXX
 EOF
 
-
 PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
-Install required software\n\nInstalling base software ...
+Install required software\n\nInstalling sub modules ...
 XXX
 EOF
 git submodule init 2> /dev/null
 
-
 PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
-Install required software\n\nInstalling base software ...
+Install required software\n\nUpdating sub modules ...
 XXX
 EOF
 git submodule update 2> /dev/null
@@ -202,7 +187,7 @@ PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
-Install required software\n\nInstalling base software ...
+Install required software\n\nSetting up Python 3 environment ...
 XXX
 EOF
 
@@ -215,9 +200,11 @@ source venv/bin/activate
 NUMBER_OF_MODULES=($PIP_MODULES)
 NUMBER_OF_MODULES=${#NUMBER_OF_MODULES[@]}
 MODULE_COUNTER=1
+MODULE_OFFSET=${PROGRESS}
+MODULE_MAX=95
 for PIP_MODULE in ${PIP_MODULES}
 do
-  PROGRESS=$((PROGRESS + 2))
+  PROGRESS=$(printf '%.*f\n' 0 $(echo "scale=2; ( ${MODULE_COUNTER} * ((${MODULE_MAX} - ${MODULE_OFFSET}) / ${NUMBER_OF_MODULES}) ) + ${MODULE_OFFSET}" | bc -l))
   ATTEMPT=1
   MAX_ATTEMPTS=5
   while [ $ATTEMPT -le $MAX_ATTEMPTS ]
@@ -248,11 +235,29 @@ EOF
 
 done
 
-PROGRESS=99
+PROGRESS=${MODULE_MAX}
 cat <<EOF
 XXX
 $PROGRESS
+Finishing installation
+
 Setting file rights ...
+XXX
+EOF
+
+# Change the rights to the Pi user
+cd "${BASEDIR}/"
+chown ${SCRIPT_USER}. .
+chown ${SCRIPT_USER}. * -Rf
+
+
+PROGRESS=$((PROGRESS + 1))
+cat <<EOF
+XXX
+$PROGRESS
+Finishing installation
+
+Enable system startup services ...
 XXX
 EOF
 
@@ -260,10 +265,55 @@ sed -e "s@^User=.*@User=${SCRIPT_USER}@" -e "s@^Group=.*@Group=${SCRIPT_GROUP}@"
 systemctl daemon-reload
 systemctl enable terrariumpi
 
-# Change the rights to the Pi user
-cd "${BASEDIR}/"
-chown ${SCRIPT_USER}. .
-chown ${SCRIPT_USER}. * -Rf
+
+PROGRESS=$((PROGRESS + 1))
+cat <<EOF
+XXX
+$PROGRESS
+Finishing installation
+
+Enable bluetooth for ${SCRIPT_USER} user ...
+XXX
+EOF
+
+# To run this as non-root run the following, https://github.com/marcelrv/miflora, https://github.com/IanHarvey/bluepy/issues/218
+for BLUETOOTH_HELPER in `ls venv/lib/python*/*-packages/bluepy/bluepy-helper`; do
+  setcap 'cap_net_raw,cap_net_admin+eip' "${BLUETOOTH_HELPER}"
+done
+
+
+PROGRESS=$((PROGRESS + 1))
+cat <<EOF
+XXX
+$PROGRESS
+Finishing installation
+
+Enable Message Of The Day ...
+XXX
+EOF
+
+# Enable MOTD
+if [ ! -h /etc/update-motd.d/05-terrariumpi ]; then
+  ln -s "${BASEDIR}/motd.sh" /etc/update-motd.d/05-terrariumpi
+fi
+
+PROGRESS=$((PROGRESS + 1))
+cat <<EOF
+XXX
+$PROGRESS
+Finishing installation
+
+Setup logging ...
+XXX
+EOF
+
+# Setup logging symlinks
+if [ ! -h log/terrariumpi.log ]; then
+  su -c 'ln -s /dev/shm/terrariumpi.log log/terrariumpi.log' -s /bin/bash ${SCRIPT_USER}
+fi
+if [ ! -h log/terrariumpi.access.log ]; then
+  su -c 'ln -s /dev/shm/terrariumpi.access.log log/terrariumpi.access.log' -s /bin/bash ${SCRIPT_USER}
+fi
 
 PROGRESS=100
 cat <<EOF
@@ -273,26 +323,11 @@ Install required software\n\nDone! ...
 XXX
 EOF
 
-sleep 1
-) | whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --gauge "Install required software\n\nInstalling python module ${PIP_MODULE} ..." 0 78 0
-
-
-# To run this as non-root run the following, https://github.com/marcelrv/miflora, https://github.com/IanHarvey/bluepy/issues/218
-for BLUETOOTH_HELPER in `ls venv/lib/python*/*-packages/bluepy/bluepy-helper`; do
-  setcap 'cap_net_raw,cap_net_admin+eip' "${BLUETOOTH_HELPER}"
-done
-
-# Enable MOTD
-if [ ! -h /etc/update-motd.d/05-terrariumpi ]; then
-  ln -s "${BASEDIR}/motd.sh" /etc/update-motd.d/05-terrariumpi
-fi
-
-# Setup logging symlinks
-su -c 'ln -s /dev/shm/terrariumpi.log "log/terrariumpi.log"' -s /bin/bash ${SCRIPT_USER}
-su -c 'ln -s /dev/shm/terrariumpi.access.log "log/terrariumpi.access.log"' -s /bin/bash ${SCRIPT_USER}
-
 # We are done!
 sync
+sleep 1
+) | whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --gauge "Install required software\n\nInstalling python modules ..." 0 78 0
+
 
 whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is installed/upgraded. To make sure that all is working please reboot.\n\nDo you want to reboot now?" 0 60
 

@@ -1,6 +1,10 @@
 setuptools
 wheel
 
+# Audio
+git+https://github.com/gbstack/ffprobe-python
+pyalsaaudio
+
 # Webserver packages
 # Gevent has strange issues with higher versions
 # gevent==20.9.0
@@ -51,10 +55,6 @@ icalevents
 psutil
 packaging
 func_timeout
-
-# Audio
-pyalsaaudio
-git+https://github.com/gbstack/ffprobe-python
 
 # MOTD packages
 pyfancy
