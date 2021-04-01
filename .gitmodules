@@ -10,9 +10,6 @@
 [submodule "3rdparty/Bright-Pi"]
 	path = 3rdparty/Bright-Pi
 	url = https://github.com/PiSupply/Bright-Pi
-[submodule "3rdparty/chirp-rpi"]
-	path = 3rdparty/chirp-rpi
-	url = https://github.com/ageir/chirp-rpi.git
 [submodule "3rdparty/relay8-rpi"]
 	path = 3rdparty/relay8-rpi
 	url = https://github.com/SequentMicrosystems/relay8-rpi
@@ -22,3 +19,6 @@
 [submodule "3rdparty/4relay-rpi"]
 	path = 3rdparty/4relay-rpi
 	url = https://github.com/SequentMicrosystems/4relay-rpi
+[submodule "3rdparty/chirp-rpi"]
+	path = 3rdparty/chirp-rpi
+	url = https://github.com/ageir/chirp-rpi.git
