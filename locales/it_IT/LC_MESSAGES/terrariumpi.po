@@ -5,11 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-<<<<<<< HEAD
 "POT-Creation-Date: 2021-03-23 16:36+CET\n"
-=======
-"POT-Creation-Date: 2021-01-18 22:35+CET\n"
->>>>>>> master
 "PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
@@ -22,7 +18,6 @@ msgstr ""
 "X-Generator: Weblate 4.0.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
-<<<<<<< HEAD
 #: terrariumArea.py:32
 #, fuzzy
 #| msgid "Lights"
@@ -56,214 +51,6 @@ msgstr "Audio"
 #: terrariumArea.py:68
 msgid "CO2"
 msgstr "CO2"
-=======
-#: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
-#: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
-msgid "Uptime"
-msgstr "Tempo di funzionamento"
-
-#: terrariumEngine.py:680
-msgid "Load"
-msgstr "Carico"
-
-#: terrariumEngine.py:681
-msgid "CPU Temp."
-msgstr "Temperatura CPU"
-
-#: terrariumEngine.py:769
-msgid "Version"
-msgstr "Versione"
-
-#: terrariumEngine.py:795 views/system_status.tpl:174
-msgid "Disk usage"
-msgstr "Utilizzo disco"
-
-#: terrariumEngine.py:800 views/system_status.tpl:118
-msgid "Memory usage"
-msgstr "Utilizzo di memoria"
-
-#: terrariumEngine.py:805 views/system_status.tpl:6
-msgid "CPU Load"
-msgstr "Carico CPU"
-
-#: terrariumEngine.py:811 views/system_status.tpl:62
-msgid "CPU Temperature"
-msgstr "Temperatura CPU"
-
-#: terrariumNotification.py:210
-#, fuzzy
-#| msgid "Environment"
-msgid "Environment light day on"
-msgstr "Ambiente"
-
-#: terrariumNotification.py:211
-#, fuzzy
-#| msgid "Enabled when lights are off"
-msgid "Environment light day off"
-msgstr "Abilitato quando le luci sono spente"
-
-#: terrariumNotification.py:212
-msgid "Environment light night on"
-msgstr ""
-
-#: terrariumNotification.py:213
-msgid "Environment light night off"
-msgstr ""
-
-#: terrariumNotification.py:215
-msgid "Environment temperature alarm low on"
-msgstr ""
-
-#: terrariumNotification.py:216
-msgid "Environment temperature alarm low off"
-msgstr ""
-
-#: terrariumNotification.py:217
-msgid "Environment temperature alarm high on"
-msgstr ""
-
-#: terrariumNotification.py:218
-msgid "Environment temperature alarm high off"
-msgstr ""
-
-#: terrariumNotification.py:220
-msgid "Environment humidity alarm low on"
-msgstr ""
-
-#: terrariumNotification.py:221
-msgid "Environment humidity alarm low off"
-msgstr ""
-
-#: terrariumNotification.py:222
-msgid "Environment humidity alarm high on"
-msgstr ""
-
-#: terrariumNotification.py:223
-msgid "Environment humidity alarm high off"
-msgstr ""
-
-#: terrariumNotification.py:225
-msgid "Environment moisture alarm low on"
-msgstr ""
-
-#: terrariumNotification.py:226
-msgid "Environment moisture alarm low off"
-msgstr ""
-
-#: terrariumNotification.py:227
-msgid "Environment moisture alarm high on"
-msgstr ""
-
-#: terrariumNotification.py:228
-msgid "Environment moisture alarm high off"
-msgstr ""
-
-#: terrariumNotification.py:230
-msgid "Environment conductivity alarm low on"
-msgstr ""
-
-#: terrariumNotification.py:231
-msgid "Environment conductivity alarm low off"
-msgstr ""
-
-#: terrariumNotification.py:232
-msgid "Environment conductivity alarm high on"
-msgstr ""
-
-#: terrariumNotification.py:233
-msgid "Environment conductivity alarm high off"
-msgstr ""
-
-#: terrariumNotification.py:235
-msgid "Environment pH alarm low on"
-msgstr ""
-
-#: terrariumNotification.py:236
-msgid "Environment pH alarm low off"
-msgstr ""
-
-#: terrariumNotification.py:237
-msgid "Environment pH alarm high on"
-msgstr ""
-
-#: terrariumNotification.py:238
-msgid "Environment pH alarm high off"
-msgstr ""
-
-#: terrariumNotification.py:240
-msgid "Environment watertank alarm low on"
-msgstr ""
-
-#: terrariumNotification.py:241
-msgid "Environment watertank alarm low off"
-msgstr ""
-
-#: terrariumNotification.py:242
-msgid "Environment watertank alarm high on"
-msgstr ""
-
-#: terrariumNotification.py:243
-msgid "Environment watertank alarm high off"
-msgstr ""
-
-#: terrariumNotification.py:245
-#, fuzzy
-#| msgid "Authentication"
-msgid "Authentication warning"
-msgstr "Autenticazione"
-
-#: terrariumNotification.py:247
-#, fuzzy
-#| msgid "No warning messages"
-msgid "System warning message"
-msgstr "Nessun messaggio di warning"
-
-#: terrariumNotification.py:248
-#, fuzzy
-#| msgid "No error messages"
-msgid "System error message"
-msgstr "Nessun messaggio di errore"
-
-#: terrariumNotification.py:250 terrariumNotification.py:251
-msgid "Sensor low alarm"
-msgstr ""
-
-#: terrariumNotification.py:253
-#, fuzzy
-#| msgid "Power switches"
-msgid "Powerswitch on"
-msgstr "Interruttori di corrente"
-
-#: terrariumNotification.py:254
-#, fuzzy
-#| msgid "Power switches"
-msgid "Powerswitch off"
-msgstr "Interruttori di corrente"
-
-#: terrariumNotification.py:256
-#, fuzzy
-#| msgid "Door is open"
-msgid "Door opened"
-msgstr "La porta è aperta"
-
-#: terrariumNotification.py:257
-#, fuzzy
-#| msgid "Door is closed"
-msgid "Door closed"
-msgstr "La porta è chiusa"
-
-#: terrariumNotification.py:259
-#, fuzzy
-#| msgid "Webcam settings"
-msgid "Webcam motion"
-msgstr "Impostazioni webcam"
-
-#: terrariumTranslations.py:22
-msgid "Holds the external source URL. Supported sources are: %s."
-msgstr ""
-"Contiene l'URL di della sorgente esterna. Le sorgenti esterne supportate "
-"sono: %s."
->>>>>>> master
 
 #: terrariumArea.py:73
 msgid "Conductivity"
@@ -874,7 +661,6 @@ msgstr "Località"
 msgid "Log"
 msgstr "Log"
 
-<<<<<<< HEAD
 #: views/includes/sidebar.html:276
 #, fuzzy
 #| msgid "Start"
@@ -918,60 +704,11 @@ msgid "Download log file"
 msgstr "Download"
 
 #: views/log.html:19
-=======
-#: terrariumWebserver.py:92 terrariumWebserver.py:201
-msgid "Authenticate to make any changes"
-msgstr "Autenticarsi per applicare le modifiche"
-
-#: terrariumWebserver.py:92 terrariumWebserver.py:201
-#: views/system_settings.tpl:57
-msgid "TerrariumPI"
-msgstr "TerrariumPi"
-
-#: terrariumWebserver.py:92 terrariumWebserver.py:201
-#: views/system_settings.tpl:146
-msgid "Authentication"
-msgstr "Autenticazione"
-
-#: terrariumWebserver.py:265
-msgid "Player command could ot be executed!"
-msgstr "Il comando del player non può essere eseguito!"
-
-#: terrariumWebserver.py:265 terrariumWebserver.py:285
-#: terrariumWebserver.py:297 terrariumWebserver.py:305
-msgid "Error!"
-msgstr "Errore!"
-
-#: terrariumWebserver.py:273 terrariumWebserver.py:276
-msgid "OK!"
-msgstr "OK!"
-
-#: terrariumWebserver.py:273 terrariumWebserver.py:276
-msgid "Player command executed!"
-msgstr "Comando player eseguito!"
-
-#: terrariumWebserver.py:285
-msgid "File is not uploaded!"
-msgstr "Il file non è stato caricato!"
-
-#: terrariumWebserver.py:290
-#, fuzzy
-#| msgid "File is not uploaded!"
-msgid "File '%s' is uploaded"
-msgstr "Il file non è stato caricato!"
-
-#: terrariumWebserver.py:290 terrariumWebserver.py:300
-msgid "Success!"
-msgstr "Successo!"
-
-#: terrariumWebserver.py:292
->>>>>>> master
 #, fuzzy
 #| msgid "System log"
 msgid "System logging"
 msgstr "Log di Sistema"
 
-<<<<<<< HEAD
 #: views/log.html:25
 msgid "Filters"
 msgstr ""
@@ -1028,55 +765,6 @@ msgstr "Disabilitato"
 #: views/modals/area.html:421
 msgid "Timer"
 msgstr "Timer"
-=======
-#: terrariumWebserver.py:297
-msgid "Action could not be satisfied"
-msgstr "L'azione non può essere soddisfatta"
-
-#: terrariumWebserver.py:300
-msgid "Audio file is deleted"
-msgstr "Il file audio è stato cancellato"
-
-#: terrariumWebserver.py:305
-msgid "Data could not be saved"
-msgstr "I dati non possono essere salvati"
-
-#: terrariumWebserver.py:313
-msgid "Data saved"
-msgstr "Dati salvati"
-
-#: terrariumWebserver.py:314
-msgid "Your changes are saved"
-msgstr "Le tue modifiche sono state salvate"
-
-#: terrariumWebserver.py:333
-msgid "Hardware is replaced"
-msgstr "Hardware è cambiato"
-
-#: terrariumWebserver.py:334
-msgid "Hardware replacement is logged in the calendar"
-msgstr "La sostituzione dell'hardware è memorizzata nel calendario"
-
-#: terrariumWebserver.py:337
-msgid "A new replacement reminder is created"
-msgstr "Viene creato un nuovo promemoria sostitutivo"
-
-#: terrariumWebserver.py:359
-msgid "Calender event created"
-msgstr ""
-
-#: terrariumWebserver.py:360
-msgid "The calender event is created"
-msgstr ""
-
-#: terrariumWebserver.py:499 views/inc/menu.tpl:177
-msgid "Log out"
-msgstr "Disconnessione"
-
-#: terrariumWebserver.py:500
-msgid "You are now logged out"
-msgstr "Sei ora disconnesso"
->>>>>>> master
 
 #: views/modals/area.html:62 views/modals/area.html:281
 #: views/modals/area.html:423
@@ -1145,7 +833,6 @@ msgstr ""
 msgid "Main lights"
 msgstr "Minimo numero di ore di luce"
 
-<<<<<<< HEAD
 #: views/modals/area.html:116 views/modals/message.html:52
 #: views/modals/playlist.html:35 views/modals/playlist.html:47
 #: views/modals/service.html:47
@@ -1153,20 +840,6 @@ msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
 msgstr ""
-=======
-#: views/audio_files.tpl:66 views/audio_playlist.tpl:19
-#: views/audio_playlist.tpl:82 views/door_settings.tpl:25
-#: views/door_settings.tpl:84 views/inc/usage_doors.tpl:111
-#: views/inc/usage_doors.tpl:125 views/inc/usage_sensors.tpl:137
-#: views/inc/usage_sensors.tpl:174 views/inc/usage_switches.tpl:117
-#: views/inc/usage_switches.tpl:140 views/inc/usage_webcams.tpl:104
-#: views/inc/usage_webcams.tpl:134 views/profile.tpl:56
-#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:161
-#: views/switch_settings.tpl:25 views/switch_settings.tpl:142
-#: views/webcam_settings.tpl:29 views/webcam_settings.tpl:92
-msgid "Name"
-msgstr "Nome"
->>>>>>> master
 
 #: views/modals/area.html:124 views/modals/area.html:307
 msgid ""
@@ -1174,20 +847,11 @@ msgid ""
 "and nighttime."
 msgstr ""
 
-<<<<<<< HEAD
 #: views/modals/area.html:127 views/modals/area.html:310
 #, fuzzy
 #| msgid "Door settings"
 msgid "Day settings"
 msgstr "Impostazioni della porta"
-=======
-#: views/audio_files.tpl:68 views/inc/usage_dashboard.tpl:153
-#: views/inc/usage_sensors.tpl:128 views/inc/usage_sensors.tpl:171
-#: views/profile.tpl:63 views/sensor_settings.tpl:25
-#: views/sensor_settings.tpl:135
-msgid "Type"
-msgstr "Tipo"
->>>>>>> master
 
 #: views/modals/area.html:127 views/modals/area.html:310
 #, fuzzy
@@ -1239,7 +903,6 @@ msgid ""
 "you will get a timer functionality. Enter '0' to have a full day."
 msgstr ""
 
-<<<<<<< HEAD
 #: views/modals/area.html:170 views/modals/area.html:210
 #: views/modals/area.html:353 views/modals/area.html:393
 #: views/modals/area.html:496 views/modals/area.html:568
@@ -1247,26 +910,6 @@ msgstr ""
 #| msgid "Timer off duration"
 msgid "Off duration"
 msgstr "Durata del timer spento"
-=======
-#: views/audio_playlist.tpl:25 views/audio_playlist.tpl:91
-#: views/system_environment.tpl:80 views/system_environment.tpl:120
-#: views/system_environment.tpl:220 views/system_environment.tpl:296
-#: views/system_environment.tpl:431 views/system_environment.tpl:507
-#: views/system_environment.tpl:642 views/system_environment.tpl:718
-#: views/system_environment.tpl:853 views/system_environment.tpl:929
-#: views/system_environment.tpl:1064 views/system_environment.tpl:1140
-#: views/system_environment.tpl:1276 views/system_environment.tpl:1328
-#: views/system_environment.tpl:1439 views/system_environment.tpl:1515
-#: views/system_environment.tpl:1650 views/system_environment.tpl:1726
-msgid "Stop"
-msgstr "Ferma"
-
-#: views/audio_playlist.tpl:28 views/audio_playlist.tpl:95
-#: views/dashboard.tpl:542 views/inc/menu.tpl:74 views/sensor_settings.tpl:151
-#: views/system_environment.tpl:1247
-msgid "Volume"
-msgstr "Volume"
->>>>>>> master
 
 #: views/modals/area.html:236
 msgid "Relay"
@@ -1298,7 +941,6 @@ msgid ""
 "the players."
 msgstr ""
 
-<<<<<<< HEAD
 #: views/modals/area.html:293
 #, fuzzy
 #| msgid "Soundcard"
@@ -1315,47 +957,6 @@ msgstr "Contiene la scheda audio utilizzata per la riproduzione audio."
 #: views/playlists.html:27 views/playlists.html:40
 msgid "Volume"
 msgstr "Volume"
-=======
-#: views/audio_playlist.tpl:68 views/inc/sensor_list.tpl:11
-#: views/inc/sensor_list.tpl:12 views/inc/sensor_list.tpl:13
-#: views/inc/sensor_list.tpl:14 views/inc/sensor_list.tpl:15
-#: views/inc/sensor_list.tpl:16 views/inc/sensor_list.tpl:17
-#: views/inc/sensor_list.tpl:18 views/inc/sensor_list.tpl:19
-#: views/inc/sensor_list.tpl:20 views/sensor_settings.tpl:77
-#: views/sensor_settings.tpl:78 views/sensor_settings.tpl:79
-#: views/sensor_settings.tpl:80 views/sensor_settings.tpl:81
-#: views/sensor_settings.tpl:82 views/sensor_settings.tpl:83
-#: views/sensor_settings.tpl:84 views/sensor_settings.tpl:85
-#: views/sensor_settings.tpl:86 views/switch_settings.tpl:92
-#: views/webcam_settings.tpl:69
-msgid "new"
-msgstr "nuovo"
-
-#: views/audio_playlist.tpl:112 views/sensor_settings.tpl:103
-#: views/sensor_settings.tpl:138 views/switch_settings.tpl:109
-#: views/switch_settings.tpl:157 views/switch_status.tpl:116
-#: views/webcam_settings.tpl:111 views/webcam_settings.tpl:125
-#: views/webcam_settings.tpl:144 views/webcam_settings.tpl:163
-#: views/webcam_settings.tpl:174 views/webcam_settings.tpl:186
-#: views/webcam_settings.tpl:208
-msgid "Select an option"
-msgstr "Seleziona un'opzione"
-
-#: views/audio_playlist.tpl:123 views/calendar.tpl:140
-#: views/door_settings.tpl:94 views/inc/usage_doors.tpl:70
-#: views/inc/usage_sensors.tpl:81 views/inc/usage_switches.tpl:70
-#: views/inc/usage_webcams.tpl:66 views/sensor_settings.tpl:209
-#: views/switch_settings.tpl:214 views/switch_status.tpl:132
-#: views/webcam_settings.tpl:221 views/webcam_settings.tpl:265
-msgid "Close"
-msgstr "Chiudi"
-
-#: views/audio_playlist.tpl:124 views/door_settings.tpl:95
-#: views/sensor_settings.tpl:210 views/switch_settings.tpl:215
-#: views/webcam_settings.tpl:222
-msgid "Add"
-msgstr "Aggiungi"
->>>>>>> master
 
 #: views/modals/area.html:442
 msgid "Height"
@@ -1415,22 +1016,9 @@ msgstr ""
 msgid "On"
 msgstr "Acceso"
 
-<<<<<<< HEAD
 #: views/modals/area.html:518 views/modals/area.html:590
 msgid "Off"
 msgstr "Spento"
-=======
-#: views/dashboard.tpl:62 views/dashboard.tpl:152 views/dashboard.tpl:205
-#: views/dashboard.tpl:258 views/dashboard.tpl:311 views/dashboard.tpl:364
-#: views/dashboard.tpl:417 views/dashboard.tpl:470 views/dashboard.tpl:523
-#: views/dashboard.tpl:576 views/inc/usage_sensors.tpl:85
-#: views/inc/usage_sensors.tpl:157 views/inc/usage_sensors.tpl:189
-#: views/inc/usage_sensors.tpl:206 views/inc/usage_weather.tpl:13
-#: views/inc/usage_weather.tpl:85 views/sensor_settings.tpl:46
-#: views/sensor_settings.tpl:185 views/weather.tpl:7
-msgid "Current"
-msgstr "Attuale"
->>>>>>> master
 
 #: views/modals/area.html:524 views/modals/area.html:596
 msgid "Door status"
@@ -1500,23 +1088,14 @@ msgstr ""
 msgid "Enclosure settings"
 msgstr "Impostazione sensore"
 
-<<<<<<< HEAD
 #: views/modals/enclosure.html:23
 msgid "Image"
 msgstr ""
-=======
-#: views/dashboard.tpl:118 views/inc/menu.tpl:47
-#: views/inc/usage_dashboard.tpl:159 views/inc/usage_sensors.tpl:131
-#: views/sensor_settings.tpl:139 views/system_environment.tpl:158
-msgid "Temperature"
-msgstr "Temperatura"
->>>>>>> master
 
 #: views/modals/enclosure.html:35
 msgid "Description"
 msgstr "Descrizione"
 
-<<<<<<< HEAD
 #: views/modals/enclosure.html:42
 msgid "Doors"
 msgstr "Porte"
@@ -1532,28 +1111,6 @@ msgstr "Titolo"
 #: views/modals/event.html:26
 msgid "Date"
 msgstr ""
-=======
-#: views/dashboard.tpl:171 views/inc/menu.tpl:50
-#: views/inc/usage_dashboard.tpl:158 views/inc/usage_sensors.tpl:132
-#: views/sensor_settings.tpl:140 views/system_environment.tpl:370
-msgid "Humidity"
-msgstr "Umidità"
-
-#: views/dashboard.tpl:224 views/inc/menu.tpl:53 views/sensor_settings.tpl:141
-#: views/system_environment.tpl:581
-msgid "Moisture"
-msgstr "Umidità"
-
-#: views/dashboard.tpl:277 views/inc/menu.tpl:62 views/sensor_settings.tpl:144
-#: views/system_environment.tpl:1003
-msgid "pH"
-msgstr "pH"
-
-#: views/dashboard.tpl:330 views/inc/menu.tpl:56 views/sensor_settings.tpl:142
-#: views/system_environment.tpl:792
-msgid "Conductivity"
-msgstr "Conductività"
->>>>>>> master
 
 #: views/modals/event.html:32
 #, fuzzy
@@ -1561,7 +1118,6 @@ msgstr "Conductività"
 msgid "Repeat every"
 msgstr "Ripeti"
 
-<<<<<<< HEAD
 #: views/modals/event.html:33
 msgid "Remind in"
 msgstr ""
@@ -1571,17 +1127,6 @@ msgstr ""
 #| msgid "Repeat"
 msgid "No repeat"
 msgstr "Ripeti"
-=======
-#: views/dashboard.tpl:436 views/inc/menu.tpl:68 views/sensor_settings.tpl:149
-#: views/system_environment.tpl:1378
-msgid "Fertility"
-msgstr "Fertilizzante"
-
-#: views/dashboard.tpl:489 views/inc/menu.tpl:71 views/sensor_settings.tpl:150
-#: views/system_environment.tpl:1589
-msgid "CO2"
-msgstr "CO2"
->>>>>>> master
 
 #: views/modals/event.html:37
 msgid "Days"
@@ -1663,23 +1208,11 @@ msgstr "Riproduzione casuale"
 msgid "Repeat"
 msgstr "Ripeti"
 
-<<<<<<< HEAD
 #: views/modals/relay.html:11
 #, fuzzy
 #| msgid "Webcam settings"
 msgid "Relay settings"
 msgstr "Impostazioni webcam"
-=======
-#: views/door_settings.tpl:22 views/door_settings.tpl:79
-#: views/inc/usage_doors.tpl:106 views/inc/usage_doors.tpl:122
-#: views/inc/usage_sensors.tpl:123 views/inc/usage_sensors.tpl:168
-#: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
-#: views/notifications.tpl:81 views/sensor_settings.tpl:22
-#: views/sensor_settings.tpl:156 views/switch_settings.tpl:22
-#: views/switch_settings.tpl:137
-msgid "Address"
-msgstr "Indirizzo"
->>>>>>> master
 
 #: views/modals/sensor.html:11
 msgid "Sensor settings"
@@ -1884,19 +1417,11 @@ msgstr "gradi"
 msgid "Flip Horizontal"
 msgstr "Inverti Orizzontalmente"
 
-<<<<<<< HEAD
 #: views/modals/webcam.html:59
 msgid "Flip Vertical"
 msgstr "Inverti Verticalmente"
 
 #: views/modals/webcam.html:66
-=======
-#: views/inc/menu.tpl:59 views/sensor_settings.tpl:143
-msgid "Distance"
-msgstr "Distanza"
-
-#: views/inc/menu.tpl:65 views/sensor_settings.tpl:145
->>>>>>> master
 #, fuzzy
 msgid "White balance"
 msgstr "bilanciamento di bianco"
@@ -4002,7 +3527,6 @@ msgstr ""
 #~ msgid "Open the dropzone multiple file uploader to upload new audio files."
 #~ msgstr "Apri il l'area di rilascio multiplo per caricare nuovi file audio."
 
-<<<<<<< HEAD
 #~ msgid "Dropzone multiple file uploader"
 #~ msgstr "Area di rilascio multiplo per upload di file"
 
@@ -4018,43 +3542,6 @@ msgstr ""
 
 #~ msgid "Album"
 #~ msgstr "Album"
-=======
-#: views/inc/usage_sensors.tpl:99
-msgid ""
-"The history graph will shows the measured value. The flat lines are the "
-"minimum and maximum values that are configured. When the measured value is "
-"outside this range an alarm will be given. Hover above the graph lines to "
-"get detailed information."
-msgstr ""
-"Il grafico storico mostra il valore misurato. Le linee rette rappresentano i "
-"valori configurati come minimo e massimo. Quando viene misurato un valore al "
-"di fuori dell'intervallo viene inviato un allarme. Passa sopra le linee del "
-"grafico per informazioni più dettagliate."
-
-#: views/inc/usage_sensors.tpl:118 views/sensor_settings.tpl:119
-msgid "HC-SR04"
-msgstr "HC-SR04"
-
-#: views/inc/usage_sensors.tpl:141 views/inc/usage_sensors.tpl:177
-#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:165
-msgid "Alarm min"
-msgstr "Allarme minimo"
-
-#: views/inc/usage_sensors.tpl:145 views/inc/usage_sensors.tpl:180
-#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:169
-msgid "Alarm max"
-msgstr "Allarme massimo"
-
-#: views/inc/usage_sensors.tpl:149 views/inc/usage_sensors.tpl:183
-#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:173
-msgid "Limit min"
-msgstr "Limite minimo"
-
-#: views/inc/usage_sensors.tpl:153 views/inc/usage_sensors.tpl:186
-#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:177
-msgid "Limit max"
-msgstr "Limite massimo"
->>>>>>> master
 
 #~ msgid "Bitrate"
 #~ msgstr "Bitrate"
@@ -4474,14 +3961,8 @@ msgstr "Limite massimo"
 #~ "Clicca sull'indicatore online/offline per visualizzare lo storico. Lo "
 #~ "storico è cancellato quando l'interfaccia web è ricaricata."
 
-<<<<<<< HEAD
 #~ msgid "Door indicator"
 #~ msgstr "Indicatore della porta"
-=======
-#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:181
-msgid "Max diff"
-msgstr ""
->>>>>>> master
 
 #~ msgid ""
 #~ "The second indicator is a lock that shows the status of the door(s). It "
@@ -4631,7 +4112,6 @@ msgstr ""
 #~ msgid "Sprayer"
 #~ msgstr "Nebulizzatore"
 
-<<<<<<< HEAD
 #~ msgid "Graphs"
 #~ msgstr "Grafici"
 
@@ -4675,43 +4155,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Quando il valore attuale è oltre il valore minimo o massimo viene "
 #~ "visualizzata una etichetta di warning rossa."
-=======
-#: views/sensor_settings.tpl:130
-msgid "CSS811"
-msgstr ""
-
-#: views/sensor_settings.tpl:146
-msgid "UVA"
-msgstr ""
-
-#: views/sensor_settings.tpl:147
-#, fuzzy
-#| msgid "USB"
-msgid "UVB"
-msgstr "USB"
-
-#: views/sensor_settings.tpl:148
-msgid "UV Index"
-msgstr ""
-
-#: views/sensor_settings.tpl:191
-#, fuzzy
-#| msgid "Moisture"
-msgid "Min moist value"
-msgstr "Umidità"
-
-#: views/sensor_settings.tpl:195
-#, fuzzy
-#| msgid "Moisture"
-msgid "Max moist value"
-msgstr "Umidità"
-
-#: views/sensor_settings.tpl:199
-#, fuzzy
-#| msgid "Temperature sensor"
-msgid "Temperature offset"
-msgstr "Sensore di temperatura"
->>>>>>> master
 
 #~ msgid ""
 #~ "With the calendar icon you can select multiple periods for the historical "
