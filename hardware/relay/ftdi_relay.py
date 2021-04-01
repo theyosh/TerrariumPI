@@ -107,12 +107,12 @@ class terrariumRelayFTDI(terrariumRelay):
     elif device_type == terrariumRelayFTDI.BITBANG:
       with BitBangDevice(device) as device:
         device.baudrate = 9600
-        data = get_relay_state(device.port, str(self._address[0]))
+        data = int(get_relay_state(device.port, str(self._address[0])))
 
     if data is None:
       return None
 
-    return self.ON if terrariumUtils.is_true(data) else self.OFF
+    return self.ON if data > 0 else self.OFF
 
   @staticmethod
   def _scan_relays(callback = None, **kwargs):
