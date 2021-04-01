@@ -73,13 +73,17 @@ class terrariumWebserver(object):
               logger.warning(f'Incorrect login detected using username \'{user}\' and password \'{password}\' from ip {ip}')
             return err
 
-        if 'get' == request.method.lower() and request.url.lower().endswith('.html'):
-          user, password = request.get_cookie('auth', secret=self.cookie_secret) or (None, None)
-          if check(user, password):
-            # Update the cookie timeout so that we are staying logged in as long as we are working on the interface
-            response.set_cookie('auth', request.get_cookie('auth', secret=self.cookie_secret), secret=self.cookie_secret, **{ 'max_age' : 3600, 'path' : '/'})
-
+        if request.method.lower() in ['get','head']:
           self.__add_caching_headers(response,request.fullpath)
+
+          if request.url.lower().endswith('.html') or '/' == request.fullpath:
+            user, password = request.get_cookie('auth', secret=self.cookie_secret) or (None, None)
+            if check(user, password):
+              # Update the cookie timeout so that we are staying logged in as long as we are working on the interface
+              response.set_cookie('auth', request.get_cookie('auth', secret=self.cookie_secret), secret=self.cookie_secret, **{ 'max_age' : 3600, 'path' : '/'})
+
+        elif request.method.lower() in ['post','put','delete']:
+          response.set_header('Cache-Control', 'no-cache')
 
         return func(*a, **ka)
 
@@ -98,7 +102,7 @@ class terrariumWebserver(object):
           response.expires = datetime.datetime.utcnow().timestamp() + caching['timeout']
           response.set_header('Cache-Control', f'public, max-age={caching["timeout"]}')
 
-        elif re.search(r'\.html$',request.fullpath,re.I):
+        elif '/' == request.fullpath or re.search(r'\.html$',request.fullpath,re.I):
           response.set_header('Cache-Control', 'no-cache')
           response.set_header('Etag', md5(response.body.encode()).hexdigest())
 
