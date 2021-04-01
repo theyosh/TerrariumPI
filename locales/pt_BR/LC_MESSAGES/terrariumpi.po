@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-03-25 11:52+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2021-03-28 13:44+0000\n"
+"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/3-x-y-z/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -349,10 +349,6 @@ msgstr ""
 "hora de início."
 
 #: terrariumTranslations.py:62
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that the power switch is on withing the total "
-#| "timer window."
 msgid ""
 "Holds the period in minutes that the power switch is on within the total "
 "timer window."
@@ -361,10 +357,6 @@ msgstr ""
 "período do timer."
 
 #: terrariumTranslations.py:63
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that the power switch is off withing the "
-#| "total timer window."
 msgid ""
 "Holds the period in minutes that the power switch is off within the total "
 "timer window."
@@ -396,10 +388,6 @@ msgid "Holds the amount in percentage to go to when switched on."
 msgstr "Contém o valor em porcentagem a ser atingido quando ligado."
 
 #: terrariumTranslations.py:68
-#, fuzzy
-#| msgid ""
-#| "Holds the amount of seconds for the duration in which it decresses the "
-#| "power."
 msgid ""
 "Holds the amount of seconds for the duration in which it decreases the power."
 msgstr "Contém a quantidade de segundos pela duração em que diminui a energia."
@@ -548,8 +536,6 @@ msgid "Toggle on to enable repeating of the audio files."
 msgstr "Ative para habilitar a repetição dos arquivos de áudio."
 
 #: terrariumTranslations.py:106
-#, fuzzy
-#| msgid "Toggle on to enable shuffeling of the audio files."
 msgid "Toggle on to enable shuffling of the audio files."
 msgstr "Ative para habilitar a reprodução aleatória dos arquivos de áudio."
 
@@ -621,8 +607,6 @@ msgstr ""
 "os valores."
 
 #: terrariumTranslations.py:114
-#, fuzzy
-#| msgid "Holds the source that is used to determing when it is day or night."
 msgid "Holds the source that is used to determine when it is day or night."
 msgstr "Contém a fonte que é usada para determinar quando é dia ou noite."
 
@@ -643,10 +627,6 @@ msgstr ""
 "Disponível apenas quando executado no modo ' %s '."
 
 #: terrariumTranslations.py:117
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that this environment part is powered on "
-#| "withing the total timer window."
 msgid ""
 "Holds the period in minutes that this environment part is powered on within "
 "the total timer window."
@@ -655,10 +635,6 @@ msgstr ""
 "do período do timer."
 
 #: terrariumTranslations.py:118
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that this environment part is powered off "
-#| "withing the total timer window."
 msgid ""
 "Holds the period in minutes that this environment part is powered off within "
 "the total timer window."
@@ -747,10 +723,6 @@ msgstr ""
 "estão acesas, apagadas ou sempre"
 
 #: terrariumTranslations.py:129
-#, fuzzy
-#| msgid ""
-#| "Select when the power switches can toggle. When the door is open, cosed "
-#| "or just always"
 msgid ""
 "Select when the power switches can toggle. When the door is open, closed or "
 "just always"
@@ -768,24 +740,18 @@ msgid "Holds the mail server hostname or IP."
 msgstr "Contém o nome do host ou o IP do servidor de correio."
 
 #: terrariumTranslations.py:135
-#, fuzzy
-#| msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
 msgid "Holds the mail server port number. SSL and TLS will be autodetected."
 msgstr ""
 "Contém o número da porta do servidor de correio. SSL e TLS serão detectados "
 "automaticamente."
 
 #: terrariumTranslations.py:136
-#, fuzzy
-#| msgid "Holds the username for authentication with the mailserver if needed."
 msgid "Holds the username for authentication with the mail server if needed."
 msgstr ""
 "Contém o nome de usuário para autenticação com o servidor de correio, se "
 "necessário."
 
 #: terrariumTranslations.py:137
-#, fuzzy
-#| msgid "Holds the password for authentication with the mailserver if needed."
 msgid "Holds the password for authentication with the mail server if needed."
 msgstr ""
 "Contém a senha para autenticação com o servidor de correio, se necessário."
@@ -838,10 +804,6 @@ msgid "Holds the Telegram Bot token. More information %shere%s"
 msgstr "Contém o token do Telegram Bot. Mais informações %s aqui %s"
 
 #: terrariumTranslations.py:152
-#, fuzzy
-#| msgid ""
-#| "Holds the Telegram username that is allowed for receiving messages. Can "
-#| "be multiple usernames seperated by a comma. More information %shere%s"
 msgid ""
 "Holds the Telegram username that is allowed for receiving messages. Can be "
 "multiple usernames separated by a comma. More information %shere%s"
@@ -919,8 +881,6 @@ msgstr ""
 "web depois de alterar a configuração."
 
 #: terrariumTranslations.py:170
-#, fuzzy
-#| msgid "Holds the soundcard that is used for playing audio."
 msgid "Holds the sound card that is used for playing audio."
 msgstr "Contém a placa de som usada para reproduzir áudio."
 
@@ -1027,10 +987,8 @@ msgid "Holds the species name of the animal."
 msgstr "Contém o nome da espécie do animal."
 
 #: terrariumTranslations.py:192
-#, fuzzy
-#| msgid "Holds the latin name of the animal."
 msgid "Holds the Latin name of the animal."
-msgstr "Contém o nome latino do animal."
+msgstr "Contém o nome do animal em latim."
 
 #: terrariumTranslations.py:193
 msgid "Holds a small description about the animal."
@@ -1059,8 +1017,6 @@ msgid "Authentication"
 msgstr "Autenticação"
 
 #: terrariumWebserver.py:265
-#, fuzzy
-#| msgid "Player command could ot be executed!"
 msgid "Player command could to be executed!"
 msgstr "O comando do player não pode ser executado!"
 
@@ -1149,16 +1105,10 @@ msgid "Help"
 msgstr "Ajuda"
 
 #: views/audio_files.tpl:16
-#, fuzzy
-#| msgid "Here you can upload and manange your audio files."
 msgid "Here you can upload and manage your audio files."
 msgstr "Aqui você pode enviar e gerenciar seus arquivos de áudio."
 
 #: views/audio_files.tpl:16
-#, fuzzy
-#| msgid ""
-#| "In the existing audio files list you can see which files are uploaded. By "
-#| "clicking on the trashbin (%s) icon you can delete the file."
 msgid ""
 "In the existing audio files list you can see which files are uploaded. By "
 "clicking on the trash bin (%s) icon you can delete the file."
@@ -1167,16 +1117,12 @@ msgstr ""
 "enviados. Ao clicar no ícone da lixeira ( %s ), você pode excluir o arquivo."
 
 #: views/audio_files.tpl:16
-#, fuzzy
-#| msgid "Open the dropzone multiple file uploader to upload new audio files."
 msgid "Open the drop zone multiple file uploader to upload new audio files."
 msgstr ""
 "Abra o carregador de arquivos múltiplos dropzone para fazer upload de novos "
 "arquivos de áudio."
 
 #: views/audio_files.tpl:23
-#, fuzzy
-#| msgid "Dropzone multiple file uploader"
 msgid "Drop zone multiple file uploader"
 msgstr "Carregador de arquivos múltiplos do Dropzone"
 
@@ -3993,7 +3939,7 @@ msgstr "Indicador de distância"
 
 #: views/system_settings.tpl:109
 msgid "Centimetre"
-msgstr "Centímetros"
+msgstr "Centímetro"
 
 #: views/system_settings.tpl:110
 msgid "Inches"
@@ -4036,8 +3982,6 @@ msgid "Changes only"
 msgstr "Apenas alterações"
 
 #: views/system_settings.tpl:157
-#, fuzzy
-#| msgid "Soundcard"
 msgid "Sound card"
 msgstr "Placa de som"
 
