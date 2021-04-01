@@ -50,6 +50,7 @@ icalendar
 icalevents
 psutil
 packaging
+func_timeout
 
 # Audio
 pyalsaaudio

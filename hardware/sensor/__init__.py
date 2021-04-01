@@ -11,6 +11,7 @@ import statistics
 from hashlib import md5
 from time import time, sleep
 from operator import itemgetter
+from func_timeout import func_set_timeout
 
 import RPi.GPIO as GPIO
 # pip install retry
@@ -229,6 +230,7 @@ class terrariumSensor(object):
     pass
 
   @retry(terrariumSensorLoadingException, tries=3, delay=0.5, max_delay=2, logger=logger)
+  @func_set_timeout(15)
   def load_hardware(self, reload = False):
     # Get hardware cache key based on the combination of hardware and address
     hardware_cache_key = md5(f'HW-{self.HARDWARE}-{self.address}'.encode()).hexdigest()
@@ -255,6 +257,7 @@ class terrariumSensor(object):
 
   # When we get Runtime errors retry up to 3 times
   @retry(terrariumSensorUpdateException, tries=3, delay=0.5, max_delay=2, logger=logger)
+  @func_set_timeout(15)
   def get_data(self):
     data = None
     self.__power_management(True)

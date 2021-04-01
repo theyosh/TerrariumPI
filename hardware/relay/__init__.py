@@ -12,6 +12,7 @@ from pathlib import Path
 from hashlib import md5
 from time import time, sleep
 from operator import itemgetter
+from func_timeout import func_set_timeout
 
 # pip install retry
 from retry import retry
@@ -110,6 +111,7 @@ class terrariumRelay(object):
     return f'{self.NAME} {self.type} named \'{self.name}\' at address \'{self.address}\''
 
   @retry(terrariumRelayLoadingException, tries=3, delay=0.5, max_delay=2, logger=logger)
+  @func_set_timeout(15)
   def load_hardware(self):
     hardware_cache_key = md5(f'HW-{self.HARDWARE}-{self.address}'.encode()).hexdigest()
     hardware = self.__relay_cache.get_data(hardware_cache_key)
@@ -127,6 +129,7 @@ class terrariumRelay(object):
     self._device['device'] = hardware
 
   @retry(terrariumRelayActionException, tries=3, delay=0.5, max_delay=2, logger=logger)
+  @func_set_timeout(15)
   def __set_hardware_value(self, state):
     try:
       if self._set_hardware_value(state):
@@ -138,6 +141,7 @@ class terrariumRelay(object):
       raise terrariumRelayActionException(f'Error changing relay {self}. Error: {ex}')
 
   @retry(terrariumRelayUpdateException, tries=3, delay=0.5, max_delay=2, logger=logger)
+  @func_set_timeout(15)
   def __get_hardware_value(self):
     data = None
     try:
