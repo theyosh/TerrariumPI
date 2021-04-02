@@ -468,15 +468,15 @@ class terrariumArea(object):
       #   if db_relay.manual_mode:
       #     continue
 
-    for relay in relays:
-      print(f'Toggle relay: {relay}')
-      relay = self.enclosure.relays[relay]
-      self._relay_action(part, relay, on)
+      for relay in relays:
+        print(f'Toggle relay: {relay}')
+        relay = self.enclosure.relays[relay]
+        self._relay_action(part, relay, on)
 
-      if on:
-        self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
-      else:
-        self.state[part]['timer_on'] = False
+    if on:
+      self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
+    else:
+      self.state[part]['timer_on'] = False
 
     self.state[part]['powered'] = on
     self.state['powered'] = self._powered
