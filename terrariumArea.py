@@ -291,10 +291,6 @@ class terrariumArea(object):
       elif time_schedule[0] <= now < time_schedule[1]:
         return True
 
-   # print('Timers are done')
-   # print(self)
-   # print(self.setup[period]['timetable'])
-   # print(f'Day last timer: {datetime.datetime.fromtimestamp(self.setup[period]["timetable"][-1][1]).day} vs {datetime.datetime.now().day}')
     if 'weather' == self.mode and datetime.datetime.fromtimestamp(self.setup[period]['timetable'][-1][1]).day == datetime.datetime.now().day:
       # The day is not over yet, so return False. Else a new timetable for tomorrow will be calculated, and give wrong effect... This will delay it
       return False
@@ -426,6 +422,7 @@ class terrariumArea(object):
 
     with orm.db_session():
       for sensor in Sensor.select(lambda s: s.id in sensors):
+        sensor_values['unit'] = sensor.type
         if sensor.value is None:
           # Broken sensor, so ignore it
           continue
@@ -433,7 +430,6 @@ class terrariumArea(object):
         sensor_values['current'].append(sensor.value)
         sensor_values['alarm_max'].append(sensor.alarm_max)
         sensor_values['alarm_min'].append(sensor.alarm_min)
-        sensor_values['unit'] = sensor.type
 
     for key in sensor_values:
       if 'unit' == key:
@@ -460,14 +456,6 @@ class terrariumArea(object):
 
     with orm.db_session():
       relays = orm.select(r.id for r in Relay if r.id in self.setup[part]['relays'] and not r.manual_mode)
-
-#    print(relays)
-#      relays = [relay.to_dict(only='id') for relay in Relay.select(lambda r: r.id in self.setup[part]['relays'] and not r.manual_mode)]
-
-      # for db_relay in Relay.select(lambda r: r.id in self.setup[part]['relays'] and not r.manual_mode):
-      #   if db_relay.manual_mode:
-      #     continue
-
       for relay in relays:
         print(f'Toggle relay: {relay}')
         relay = self.enclosure.relays[relay]
@@ -662,8 +650,9 @@ class terrariumAreaHeater(terrariumArea):
           sensor_average     = float(sensor_values['alarm_min'] + sensor_values['alarm_max']) / 2.0
           settle_time        = max(1,self.setup[part]['settle_time'])
           heating_or_cooling = 1.0 if 'low' == part else -1.0
+          unit               = self.enclosure.engine.units[sensor_values['unit']]
 
-          logger.info(f'Start the dimmer {relay} in PID modus to go to average value {sensor_average}{self.enclosure.engine.units[sensor_values["unit"]]} with a settile timeout of {settle_time} seconds.')
+          logger.info(f'Start the dimmer {relay} in PID modus to go to average value {sensor_average}{unit} with a settile timeout of {settle_time} seconds.')
           self.__dimmers[relay.id] = PID(heating_or_cooling * 1, heating_or_cooling * 0.1, heating_or_cooling * 0.05,
                                         setpoint=sensor_average,
                                         sample_time=settle_time,
