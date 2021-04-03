@@ -77,6 +77,12 @@
           <input type="number" step="1" min="1" max="100" class="form-control" id="dimmer_max_power" name="dimmer_max_power" placeholder="Max power in percentage" value="100">
         </div>
       </div>
+      <div class="col-6 col-sm-6 col-md-6 col-lg-2">
+        <div class="form-group">
+          <label for="dimmer_offset">Dimmer offset in %</label>
+          <input type="number" step="1" min="1" max="100" class="form-control" id="dimmer_offset" name="dimmer_offset" placeholder="Dimmer offset in percentage" value="0">
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -158,6 +164,11 @@ if (form_data['hardware'].indexOf('-dimmer') != -1) {
   try {
     form_data['calibration']['dimmer_max_power'] = form_data['dimmer_max_power'];
     delete(form_data['dimmer_max_power']);
+  } catch (error) { }
+
+  try {
+    form_data['calibration']['dimmer_offset'] = form_data['dimmer_offset'];
+    delete(form_data['dimmer_offset']);
   } catch (error) { }
 }
 {% endblock %}
