@@ -368,7 +368,7 @@ class terrariumArea(object):
           self._time_table()
           toggle_relay = False
 
-        if toggle_relay is True and 'sensors' in self.setup:
+        if toggle_relay is True and 'sensors' in self.setup and len(self.setup['sensors']) > 0:
           # We are in timer mode. But when there are sensors configured, they act as a second check
           # If there is NOT an alarm with the period name, then skip the toggle action.
           if self.state['sensors'][f'alarm_{period}'] is not True:
