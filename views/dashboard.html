@@ -354,10 +354,14 @@
 
             // Sort areas based on name
             enclosure.areas.sort((a, b) => a.name.localeCompare(b.name));
-            jQuery.each(enclosure.areas,function(counter, area){
-              icontype = (area.setup.main_lights ? 'main ' : '') + area.type
+            jQuery.each(enclosure.areas,function(counter, area) {
+              if (area.setup.sensors !== undefined && area.setup.sensors.length == 0) {
+                delete(area.state.sensors);
+              }
 
+              icontype = (area.setup.main_lights ? 'main ' : '') + area.type
               area.icon    = 'mr-1 fas ' + template_sensor_type_icon(icontype) + ' ' + template_sensor_type_color(icontype);
+
               // TODO: Translate the area type names...
               area.status  = (area.state.powered === true ? 'badge-success' : (area.state.powered === false ? 'badge-secondary' : ''));
               if (area.state.sensors != undefined) {
