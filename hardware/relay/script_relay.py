@@ -8,10 +8,14 @@ class terrariumRelayScript(terrariumRelay):
   NAME = 'External script switch'
 
   def _load_hardware(self):
-    if Path(self.address).exists():
-      return self.address
+    script = Path(self.address)
+    if not script.exists():
+      raise terrariumRelayLoadingException(f'Invalid script location for relay {self}: {self.address}')
 
-    raise terrariumRelayLoadingException(f'Invalid script location for relay {self}')
+    if oct(script.stat().st_mode)[-3:] not in ['777','775','755']:
+      raise terrariumRelayLoadingException(f'Script {self.address} for relay {self} is not executable.')
+
+    return self.address
 
   def _set_hardware_value(self, state):
     cmd = f'{self.address} {state}'
