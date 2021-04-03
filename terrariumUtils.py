@@ -457,7 +457,10 @@ class terrariumUtils():
     ]
 
     for index in range(len(search)):
-      logline = re.sub(search[index], replace[index], logline)
+      try:
+        logline = re.sub(search[index], replace[index], logline)
+      except Exception:
+        pass
 
     return logline
 
