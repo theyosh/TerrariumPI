@@ -66,12 +66,14 @@ class terrariumArea(object):
 
     'co2' : {
       'name'    : _('CO2'),
-      'sensors' : ['co2']
+      'sensors' : ['co2'],
+      'class' : lambda: terrariumAreaCO2
     },
 
     'conductivity' : {
       'name'    : _('Conductivity'),
-      'sensors' : ['conductivity']
+      'sensors' : ['conductivity'],
+      'class' : lambda: terrariumAreaConductivity
     },
 
     'moisture' : {
@@ -82,7 +84,8 @@ class terrariumArea(object):
 
     'ph' : {
       'name'    : _('pH'),
-      'sensors' : ['ph']
+      'sensors' : ['ph'],
+      'class' : lambda: terrariumAreaPH
     },
   }
 
@@ -485,19 +488,13 @@ class terrariumAreaLights(terrariumArea):
   def load_setup(self, data):
     super().load_setup(data)
 
-    #print('Load terrariumAreaLights setup')
-
     # Load extra tweaks
     for period in self.PERIODS:
-     # print(f'Test period: {period}')
       if period not in self.setup:
-      #  print(f'Period not found {period}')
         continue
 
-      #print('Going over the relays')
       for relay_id in self.setup[period]['relays']:
         relay = self.enclosure.relays[relay_id]
-       # print(f'Load relay {relay}')
 
         extra_tweaks = self.setup[period].get(('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'on_' + relay.id, None)
         if extra_tweaks is None:
@@ -516,7 +513,6 @@ class terrariumAreaLights(terrariumArea):
 
         if relay.is_dimmer:
           values = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'on_' + relay.id].split(',')
-        #  print(f'Value data from period = {period}, : {values}')
           if len(values) == 1:
             values = [0,values[0]]
 
@@ -687,6 +683,15 @@ class terrariumAreaHumidity(terrariumAreaHeater):
 class terrariumAreaMoisture(terrariumAreaHeater):
   pass
 
+class terrariumAreaCO2(terrariumAreaHeater):
+  pass
+
+class terrariumAreaConductivity(terrariumAreaHeater):
+  pass
+
+class terrariumAreaPH(terrariumAreaHeater):
+  pass
+
 class terrariumAreaWatertank(terrariumArea):
   def current_value(self, sensors):
     # TODO: Check if use of gall and inch does influence this...
@@ -755,21 +760,17 @@ class terrariumAreaAudio(terrariumArea):
     logger.info(f'Toggle the player for area {self} period {period} to state {("on" if on else "off")}.')
 
     if on:
+      # As we can only have one player running, we have to make sure that there is not a player still running from the other period
       other_period = copy.copy(self.PERIODS)
-      #logger.info(f'Other periods: {other_period}')
       other_period.remove(period)
       other_period = other_period[0]
-      #logger.info(f'Other periods clean: {other_period}')
 
       if other_period in self.setup:
-        #logger.info(f'Stopping other ({other_period}) running player')
         self.setup[other_period]['player'].stop()
 
-      #logger.info(f'Starting audio player for {period}')
       self.setup[period]['player'].play()
 
     else:
-      #logger.info(f'Stopping audio player for {period}')
       self.setup[period]['player'].stop()
 
     self.state[period]['powered'] = on
