@@ -20,7 +20,10 @@ cryptography
 gpiozero
 smbus2
 smbus
-bluepy
+
+#bluepy
+git+https://github.com/IanHarvey/bluepy.git
+
 requests
 melopero_amg8833
 RPi.bme280

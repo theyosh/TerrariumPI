@@ -17,11 +17,12 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
   __MIFLORA_FIRMWARE_AND_BATTERY = 56
   __MIFLORA_REALTIME_DATA_TRIGGER = 51
   __MIFLORA_GET_DATA = 53
+  __MIFLORA_TIMEOUT = 10
 
   def _load_hardware(self):
     address = self._address
     # Load Bluetooth device and try to load battery and firmware version to check if the connection does work
-    with Peripheral(address[0], iface=address[1]) as device:
+    with Peripheral(address[0], iface=address[1], timeout=terrariumMiFloraSensor.__MIFLORA_TIMEOUT) as device:
       data   = device.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY)
       data = {'battery': data[0], 'firmware' : data[2:].decode('utf8')}
       print('(re)loaded device')
