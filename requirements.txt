@@ -22,7 +22,7 @@ smbus2
 smbus
 
 #bluepy
-git+https://github.com/IanHarvey/bluepy.git
+git+https://github.com/IanHarvey/bluepy
 
 requests
 melopero_amg8833
