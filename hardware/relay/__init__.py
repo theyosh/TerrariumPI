@@ -351,7 +351,7 @@ class terrariumRelayDimmer(terrariumRelay):
         return True
 
       if 0 == duration:
-        self.set_state(value + self.__dimmer_offset)
+        self.set_state(value)
         return True
 
       self.__thread = threading.Thread(target=self.__run,args=(value, duration))
