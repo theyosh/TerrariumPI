@@ -207,6 +207,9 @@ do
   PROGRESS=$(printf '%.*f\n' 0 $(echo "scale=2; ( ${MODULE_COUNTER} * ((${MODULE_MAX} - ${MODULE_OFFSET}) / ${NUMBER_OF_MODULES}) ) + ${MODULE_OFFSET}" | bc -l))
   ATTEMPT=1
   MAX_ATTEMPTS=5
+  IFS='/' read -ra MODULE_NAME <<< "${PIP_MODULE}"
+  MODULE_NAME=${MODULE_NAME[-1]}
+
   while [ $ATTEMPT -le $MAX_ATTEMPTS ]
   do
 
@@ -215,7 +218,7 @@ XXX
 $PROGRESS
 Install required software
 
-Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${PIP_MODULE} (attempt ${ATTEMPT}) ...
+Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${MODULE_NAME} (attempt ${ATTEMPT}) ...
 XXX
 EOF
     pip install --upgrade ${PIP_MODULE}
