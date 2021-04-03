@@ -287,7 +287,7 @@ class terrariumRelayDimmer(terrariumRelay):
   TYPE = None
 
   def __init__(self, id, _, address, name = '', prev_state = None, callback = None):
-    self.__dimmer_offset = 0
+    self._dimmer_offset = 0
 
     self.running = False
     self.__running = threading.Event()
@@ -309,18 +309,18 @@ class terrariumRelayDimmer(terrariumRelay):
         break
 
       current_state += direction
-      self.set_state(current_state + self.__dimmer_offset)
+      self.set_state(current_state + self._dimmer_offset)
       self.__running.wait(timeout=pause_time)
 
     self.__running.set()
     self.running = False
 
   def calibrate(self, data):
-    dimmer_offset = data.get('dimmer_offset',self.__dimmer_offset)
+    dimmer_offset = data.get('dimmer_offset',self._dimmer_offset)
     if '' == dimmer_offset:
       dimmer_offset = 0
 
-    self.__dimmer_offset = dimmer_offset
+    self._dimmer_offset = dimmer_offset
 
     frequency = data.get('dimmer_frequency', self._DIMMER_FREQ)
     if '' == frequency:
