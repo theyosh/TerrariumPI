@@ -14,11 +14,11 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
     return PWMOutputDevice(terrariumUtils.to_BCM_port_number(self.address),frequency=self._DIMMER_FREQ)
 
   def _set_hardware_value(self, state):
-    self.device.value = float(state + self.__dimmer_offset) / 100.0
+    self.device.value = float(state + self._dimmer_offset) / 100.0
     return True
 
   def _get_hardware_value(self):
-    return round(self.device.value * 100.0) - float(self.__dimmer_offset)
+    return round(self.device.value * 100.0) - float(self._dimmer_offset)
 
   def stop(self):
     self.device.close()
