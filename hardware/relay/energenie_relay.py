@@ -156,7 +156,7 @@ class terrariumRelayEnergenieLAN(terrariumRelay):
     # TEMP data. Will be overwritten by the return value later on
     self._device['device'] = energenieconnector.EnergenieConnector(f'{address["protocol"]}://{address["host"]}',address['passwd'])
     if not self.__connect():
-      raise terrariumRelayLoadingException('Failed loading relay {self}. Unable to login')
+      raise terrariumRelayLoadingException(f'Failed loading relay {self}. Unable to login')
 
     self.__logout()
 
