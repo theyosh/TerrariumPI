@@ -208,7 +208,7 @@ class terrariumRelay(object):
 
       try:
         self.__set_hardware_value(new_state)
-        logger.info(f'Changed relay {self} from state \'{old_state}\' to state \'{new_state}\'')
+        #logger.info(f'Changed relay {self} from state \'{old_state}\' to state \'{new_state}\'')
 
       except Exception as ex:
         logger.exception(ex)

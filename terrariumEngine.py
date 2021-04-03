@@ -943,7 +943,8 @@ class terrariumEngine(object):
     prev_delay = 0
 
     while not self.__engine['exit'].is_set():
-#    while self.running:
+      print(f'[{datetime.datetime.now()}] Start updating ....')
+
       logger.info(f'Starting a new update round with {len(self.sensors)} sensors, {len(self.relays)} relays, {len(self.buttons)} buttons and {len(self.webcams)} webcams.')
       start = time.time()
       update_threads = []
@@ -981,17 +982,17 @@ class terrariumEngine(object):
       duration = time.time() - start
       time_left = terrariumEngine.__ENGINE_LOOP_TIMEOUT - duration
 
-      print(f'[{datetime.datetime.now()}] Wait {time_left} seconds for next round')
-      print(f'[{datetime.datetime.now()}] Time left form last round: {prev_delay}')
-      print(f'[{datetime.datetime.now()}] Finale timeout: {max(0,time_left-prev_delay)}')
+      print(f'[{datetime.datetime.now()}] Done in {duration:.2f} seconds. Waiting for {time_left:.2f} seconds for new round +/- {prev_delay:.2f} seconds.')
 
       if time_left > 0.0:
         logger.info(f'Engine update done in {duration:.2f} seconds. Waiting for {time_left:.2f} seconds for the next round.')
-#        sleep(max(0,time_left-prev_delay))
-        self.__engine['exit'].wait(max(0,time_left-prev_delay))
+        # Here we wait....
+        self.__engine['exit'].wait(max(0, time_left - prev_delay))
+        # Reset the delay from last round to zero.
         prev_delay = 0
+        # Clear the 'too late counter'
         self.__engine['too_late'] = 0
-        print(f'[{datetime.datetime.now()}] Done waiting....')
+
       else:
         self.__engine['too_late'] += 1
         prev_delay = abs(time_left)

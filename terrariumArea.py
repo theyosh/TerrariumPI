@@ -460,7 +460,6 @@ class terrariumArea(object):
     with orm.db_session():
       relays = orm.select(r.id for r in Relay if r.id in self.setup[part]['relays'] and not r.manual_mode)
       for relay in relays:
-        print(f'Toggle relay: {relay}')
         relay = self.enclosure.relays[relay]
         self._relay_action(part, relay, on)
 

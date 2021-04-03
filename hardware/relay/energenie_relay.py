@@ -50,7 +50,11 @@ class terrariumRelayEnergenieUSB(terrariumRelay):
   def _set_hardware_value(self, state):
     action = ('-o' if state == self.ON else '-f')
     cmd = f'{self.device} -n {action} {self._address[0]}'
-    data = terrariumUtils.get_script_data(cmd).decode('utf-8').strip()
+    data = terrariumUtils.get_script_data(cmd)
+    if data is None:
+      return False
+
+    data = data.decode('utf-8').strip()
     relay_data = self.__STATUS_REGEX.search(data)
     if relay_data is not None and int(relay_data.group('relay_nr')) == int(self._address[0]):
       return state == (self.ON if terrariumUtils.is_true(relay_data.group('status')) else self.OFF)
@@ -60,7 +64,11 @@ class terrariumRelayEnergenieUSB(terrariumRelay):
 
   def _get_hardware_value(self):
     cmd = f'{self.device} -n -g {self._address[0]}'
-    data = terrariumUtils.get_script_data(cmd).decode('utf-8').strip()
+    data = terrariumUtils.get_script_data(cmd)
+    if data is None:
+      return None
+
+    data = data.decode('utf-8').strip()
     relay_data = self.__STATUS_REGEX.search(data)
     if relay_data is not None and int(relay_data.group('relay_nr')) == int(self._address[0]):
       return self.ON if terrariumUtils.is_true(relay_data.group('status')) else self.OFF
