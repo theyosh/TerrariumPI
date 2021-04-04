@@ -11,7 +11,7 @@ import statistics
 from hashlib import md5
 from time import time, sleep
 from operator import itemgetter
-from func_timeout import func_set_timeout, FunctionTimedOut
+from func_timeout import func_timeout, FunctionTimedOut
 
 import RPi.GPIO as GPIO
 # pip install retry
@@ -229,8 +229,7 @@ class terrariumSensor(object):
   def get_hardware_state(self):
     pass
 
-  @retry((terrariumSensorLoadingException,FunctionTimedOut), tries=3, delay=0.5, max_delay=2, logger=logger)
-  @func_set_timeout(15)
+  @retry(terrariumSensorLoadingException, tries=3, delay=0.5, max_delay=2, logger=logger)
   def load_hardware(self, reload = False):
     # Get hardware cache key based on the combination of hardware and address
     hardware_cache_key = md5(f'HW-{self.HARDWARE}-{self.address}'.encode()).hexdigest()
@@ -239,13 +238,17 @@ class terrariumSensor(object):
     if reload or hardware is None:
       # Could not find valid hardware cache. So create a new hardware device
       try:
-        hardware = self._load_hardware()
+        hardware = func_timeout(15, self._load_hardware)
         if hardware is not None:
           # Store the hardware in the cache for unlimited of time
           self.__sensor_cache.set_data(hardware_cache_key,hardware,-1)
         else:
           # Raise error that hard is not loaded with an unknown message :(
           raise terrariumSensorLoadingException(f'Unable to load sensor {self}: Did not return a device.')
+
+      except FunctionTimedOut:
+      # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
+        raise terrariumSensorLoadingException(f'Unable to load sensor {self}: timed out (15 seconds) during loading.')
 
       except Exception as ex:
         raise terrariumSensorLoadingException(f'Unable to load sensor {self}: {ex}')
@@ -256,17 +259,18 @@ class terrariumSensor(object):
       GPIO.setup(self._device['power_mngt'], GPIO.OUT)
 
   # When we get Runtime errors retry up to 3 times
-  @retry((terrariumSensorUpdateException,FunctionTimedOut), tries=3, delay=0.5, max_delay=2, logger=logger)
-  @func_set_timeout(15)
+  @retry(terrariumSensorUpdateException, tries=3, delay=0.5, max_delay=2, logger=logger)
   def get_data(self):
     data = None
     self.__power_management(True)
 
     try:
-      data = self._get_data()
+      data = func_timeout(15, self._get_data)
+    except FunctionTimedOut:
+      # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
+      logger.error(f'Sensor {self} timed out after 15 seconds during updating...')
     except Exception as ex:
       logger.error(f'Sensor {self} has exception: {ex}')
-      # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
 
     self.__power_management(False)
 

@@ -12,7 +12,7 @@ from pathlib import Path
 from hashlib import md5
 from time import time, sleep
 from operator import itemgetter
-from func_timeout import func_set_timeout, FunctionTimedOut
+from func_timeout import func_timeout, FunctionTimedOut
 
 # pip install retry
 from retry import retry
@@ -110,47 +110,53 @@ class terrariumRelay(object):
   def __repr__(self):
     return f'{self.NAME} {self.type} named \'{self.name}\' at address \'{self.address}\''
 
-  @retry((terrariumRelayLoadingException,FunctionTimedOut), tries=3, delay=0.5, max_delay=2, logger=logger)
-  @func_set_timeout(15)
+  @retry(terrariumRelayLoadingException, tries=3, delay=0.5, max_delay=2, logger=logger)
   def load_hardware(self):
     hardware_cache_key = md5(f'HW-{self.HARDWARE}-{self.address}'.encode()).hexdigest()
     hardware = self.__relay_cache.get_data(hardware_cache_key)
     if hardware is None:
       try:
-        hardware = self._load_hardware()
+        hardware = func_timeout(15, self._load_hardware)
 
         if hardware is None:
           raise terrariumRelayLoadingException(f'Could not load hardware for relay {self}: Unknown error')
 
         self.__relay_cache.set_data(hardware_cache_key,hardware,-1)
+      except FunctionTimedOut:
+        raise terrariumRelayLoadingException(f'Could not load hardware for relay {self}: Timed out after 15 seconds.')
       except Exception as ex:
         raise terrariumRelayLoadingException(f'Could not load hardware for relay {self}: {ex}')
 
     self._device['device'] = hardware
 
-  @retry((terrariumRelayActionException,FunctionTimedOut), tries=3, delay=0.5, max_delay=2, logger=logger)
-  @func_set_timeout(15)
+  @retry(terrariumRelayActionException, tries=3, delay=0.5, max_delay=2, logger=logger)
   def __set_hardware_value(self, state):
     try:
-      if self._set_hardware_value(state):
+      action_ok = func_timeout(15, self._set_hardware_value,(state,))
+      if action_ok:
         # Update ok, store the new state
         self._device['value'] = state
       else:
         raise terrariumRelayActionException(f'Error changing relay {self}. Error: unknown')
+
+    except FunctionTimedOut:
+      raise terrariumRelayLoadingException(f'Error changing relay {self}: Timed out after 15 seconds.')
     except Exception as ex:
       raise terrariumRelayActionException(f'Error changing relay {self}. Error: {ex}')
 
   @retry(terrariumRelayUpdateException, tries=3, delay=0.5, max_delay=2, logger=logger)
-  @func_set_timeout(15)
   def __get_hardware_value(self):
     data = None
     try:
-      data = self._get_hardware_value()
+      data = func_timeout(15, self._get_hardware_value)
+
+    except FunctionTimedOut:
+      logger.error(f'Error getting new data from relay {self}: Timed out after 15 seconds.')
     except Exception as ex:
-      raise terrariumRelayUpdateException(f'Error getting new data from relay {self}. Error: {ex}')
+      logger.error(f'Error getting new data from relay {self}. Error: {ex}')
 
     if data is None:
-      raise terrariumRelayUpdateException(f'Error getting new data from relay {self}. Error: unkown')
+      raise terrariumRelayUpdateException(f'Error getting new data from relay {self}. Error: unknown')
 
     return data
 
