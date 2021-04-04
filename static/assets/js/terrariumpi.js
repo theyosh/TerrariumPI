@@ -1706,6 +1706,7 @@ function online_status(online) {
   if (online) {
     clearTimeout(window.terrariumPI.online_counter);
     indicator.removeClass('text-danger text-secondary text-success').addClass('text-success');
+    Tinycon.reset();
 
     window.terrariumPI.online_counter = setTimeout(function(){
       online_status(false);
@@ -1713,6 +1714,7 @@ function online_status(online) {
 
   } else {
     indicator.removeClass('text-danger text-secondary text-success').addClass('text-danger');
+    Tinycon.setBubble('!');
   }
 
   if (old_status !== online) {
@@ -2134,6 +2136,7 @@ function bootstrap_custom_fileuploads(){
 }
 
 jQuery(function () {
+
   /*
   if (jQuery( window ).width() < 1400 && jQuery('.os-content-glue').width() > 100) {
     jQuery('[data-widget="pushmenu"]').click();
