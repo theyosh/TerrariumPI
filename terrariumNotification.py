@@ -110,11 +110,11 @@ class terrariumNotification(terrariumSingleton):
 
   @property
   def version(self):
-    return self.engine.version
+    return None if self.engine is None else self.engine.version
 
   @property
   def profile_image(self):
-    return self.engine.settings['profile_image']
+    return None if self.engine is None else self.engine.settings['profile_image']
 
   def message(self, message_id, data = None, files = []):
     if message_id not in self.__MESSAGES:
