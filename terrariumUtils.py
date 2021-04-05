@@ -63,17 +63,22 @@ class terrariumCache(terrariumSingleton):
     if hash_key in self.__cache:
       del(self.__cache[hash_key])
 
-  def is_running(self,hash_key):
-    if hash_key in self.__running:
+  def set_running(self,hash_key):
+    hash_key = f'running-{hash_key}'
+    if not self.is_running(hash_key):
+      self.set_data(f'running-{hash_key}', True)
       return True
 
     return False
 
-  def set_running(self,hash_key):
-    self.__running[hash_key] = True
+  def is_running(self,hash_key):
+    hash_key = f'running-{hash_key}'
+    return self.get_data(hash_key) is not None
 
   def clear_running(self,hash_key):
-    del(self.__running[hash_key])
+    hash_key = f'running-{hash_key}'
+    if hash_key in self.__cache:
+      del(self.__cache[hash_key])
 
 class terrariumUtils():
 

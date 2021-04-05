@@ -287,8 +287,7 @@ class terrariumSensor(object):
     starttime = time()
     data = self.__sensor_cache.get_data(self.__sensor_cache_key)
 
-    if (data is None or force) and not self.__sensor_cache.is_running(self.__sensor_cache_key):
-      self.__sensor_cache.set_running(self.__sensor_cache_key)
+    if (data is None or force) and self.__sensor_cache.set_running(self.__sensor_cache_key):
       logger.debug(f'Start getting new data from  sensor {self}')
       try:
         data = self.get_data()
