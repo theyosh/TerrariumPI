@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-04-05 12:21+CEST\n"
-"PO-Revision-Date: 2021-04-05 10:23+0000\n"
+"PO-Revision-Date: 2021-04-06 17:46+0000\n"
 "Last-Translator: fabi2803 <l.fabian@me.com>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/de_AT/>\n"
@@ -258,15 +258,15 @@ msgstr "Wähle Datei"
 
 #: views/buttons.html:2 views/includes/sidebar.html:140
 msgid "Buttons"
-msgstr "Schaltfläche"
+msgstr "Schalter"
 
 #: views/buttons.html:9
 msgid "No buttons"
-msgstr "Keine Schaltfläche"
+msgstr "Keine Schalter"
 
 #: views/buttons.html:12
 msgid "Add new button"
-msgstr "Neue Schaltfläche hinzufügen"
+msgstr "Neuen Schalter hinzufügen"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
 #: views/dashboard.html:120 views/dashboard.html:311 views/enclosures.html:14
@@ -372,7 +372,7 @@ msgstr "Gesamtwasserverbrauch"
 #: views/dashboard.html:108 views/enclosures.html:2
 #: views/includes/sidebar.html:215
 msgid "Enclosures"
-msgstr "Gehäuse"
+msgstr "Anlagen"
 
 #: views/dashboard.html:167 views/enclosures.html:46
 msgid "Night"
@@ -394,11 +394,11 @@ msgstr "Aktuell"
 
 #: views/enclosures.html:9
 msgid "No enclosures"
-msgstr "Kein Gehäuse"
+msgstr "Keine Anlagen"
 
 #: views/enclosures.html:12
 msgid "Add new enclosure"
-msgstr "Neues Gehäuse hinzufügen"
+msgstr "Neue Anlage hinzufügen"
 
 #: views/enclosures.html:133
 msgid "Add area"
@@ -512,7 +512,7 @@ msgstr "Scanne Relais"
 
 #: views/includes/sidebar.html:154
 msgid "New button"
-msgstr "Neue Schaltfläche"
+msgstr "Neuen Schalter"
 
 #: views/includes/sidebar.html:163 views/modals/enclosure.html:50
 #: views/webcams.html:2
@@ -546,7 +546,7 @@ msgstr "Liste"
 
 #: views/includes/sidebar.html:229
 msgid "New enclosure"
-msgstr "Neues Gehäuse"
+msgstr "Neue Anlage"
 
 #: views/includes/sidebar.html:235
 msgid "New area"
@@ -624,11 +624,11 @@ msgstr "Bereich Einstellungen"
 
 #: views/modals/area.html:17
 msgid "Enclosure"
-msgstr "Gehäuse"
+msgstr "Anlage"
 
 #: views/modals/area.html:22
 msgid "Select the enclosure where this area belongs to."
-msgstr "Wähle Gehäuse zu dem dieser Bereich gehört."
+msgstr "Wähle die Anlage zu dem dieser Bereich gehört."
 
 #: views/modals/area.html:35
 msgid "Select the type of area. Each type has its own extra options and logic."
@@ -779,68 +779,59 @@ msgstr "Zeitpunkt an dem die Relais täglich ausgeschaltet werden."
 #: views/modals/area.html:158 views/modals/area.html:204
 #: views/modals/area.html:341 views/modals/area.html:387
 #: views/modals/area.html:490 views/modals/area.html:562
-#, fuzzy
-#| msgid "Duration"
 msgid "On duration"
-msgstr "Dauer"
+msgstr "Dauer Ein"
 
 #: views/modals/area.html:161 views/modals/area.html:344
 msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full day."
 msgstr ""
+"Die Dauer, in der die Relais eingeschaltet sein sollen. Wenn dies kürzer als "
+"der ganze Tag ist, erhalten Sie eine Timer-Funktionalität. '0' Eingeben, um "
+"einen ganzen Tag zu haben."
 
 #: views/modals/area.html:170 views/modals/area.html:210
 #: views/modals/area.html:353 views/modals/area.html:393
 #: views/modals/area.html:496 views/modals/area.html:568
-#, fuzzy
-#| msgid "Timer off duration"
 msgid "Off duration"
-msgstr "Ausschaltzeit des Timers"
+msgstr "Dauer Aus"
 
 #: views/modals/area.html:236
 msgid "Relay"
-msgstr ""
+msgstr "Relais"
 
 #: views/modals/area.html:242
-#, fuzzy
-#| msgid "Duration"
 msgid "Duration on"
-msgstr "Dauer"
+msgstr "Dauer Ein"
 
 #: views/modals/area.html:250
 msgid "Power on"
 msgstr "Ein"
 
 #: views/modals/area.html:258
-#, fuzzy
-#| msgid "Duration"
 msgid "Duration off"
-msgstr "Dauer"
+msgstr "Dauer Aus"
 
 #: views/modals/area.html:266
-#, fuzzy
-#| msgid "Power on"
 msgid "Power off"
-msgstr "Ein"
+msgstr "Aus"
 
 #: views/modals/area.html:285
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the players."
 msgstr ""
+"Wähle den Modus dieses Bereichs. Dadurch werden das Timing und die Dauer der "
+"Akteure geändert."
 
 #: views/modals/area.html:293
-#, fuzzy
-#| msgid "Soundcard"
 msgid "Sound card"
 msgstr "Soundkarte"
 
 #: views/modals/area.html:297
-#, fuzzy
-#| msgid "Holds the soundcard that is used for playing audio."
 msgid "Select the sound card that is used for this enclosure."
-msgstr "Die Soundkarte, die zum Abspielen für Audio verwendet wird."
+msgstr "Wähle die Soundkarte aus, die für diese Anlage verwendet wird."
 
 #: views/modals/area.html:436 views/modals/playlist.html:23
 #: views/playlists.html:27 views/playlists.html:42
@@ -869,35 +860,27 @@ msgstr "Licht"
 
 #: views/modals/area.html:471
 msgid "High alarm"
-msgstr ""
+msgstr "Alarm hoch"
 
 #: views/modals/area.html:471
 msgid "Low alarm"
-msgstr ""
+msgstr "Alarm tief"
 
 #: views/modals/area.html:502 views/modals/area.html:574
-#, fuzzy
-#| msgid "Power on"
 msgid "Power on time"
-msgstr "Ein"
+msgstr "Power Ein Zeit"
 
 #: views/modals/area.html:508 views/modals/area.html:580
-#, fuzzy
-#| msgid "Settle timeout"
 msgid "Settle time"
-msgstr "Timeout einrichten"
+msgstr "Timeout"
 
 #: views/modals/area.html:514 views/modals/area.html:586
-#, fuzzy
-#| msgid "Light state"
 msgid "Light status"
 msgstr "Licht Zustand"
 
 #: views/modals/area.html:516 views/modals/area.html:526
 #: views/modals/area.html:588 views/modals/area.html:598
 #: views/modals/webcam.html:109 views/modals/webcam.html:121
-#, fuzzy
-#| msgid "Ignore"
 msgid "Ignored"
 msgstr "Ignorieren"
 
@@ -927,36 +910,36 @@ msgid "Dimmer on duration"
 msgstr "Dimmer dauer"
 
 #: views/modals/area.html:625
-#, fuzzy
-#| msgid "Dimmer off duration"
 msgid "Dimmer of duration"
-msgstr "Dimmen in Sekunden"
+msgstr "Dauer Dimmer Aus"
 
 #: views/modals/area.html:635
 msgid ""
 "Select the duration for the dimmer to go to on or off in minutes. Max "
 "duration is 180 minutes."
 msgstr ""
+"Wähle die Dauer in Minuten, nach der der Dimmer ein- oder ausgeschaltet "
+"werden soll. Die maximale Dauer beträgt 180 Minuten."
 
 #: views/modals/area.html:642
 msgid "Relay delay on"
-msgstr ""
+msgstr "Relais verzögerung Ein"
 
 #: views/modals/area.html:646
 msgid "Relay delay off"
-msgstr ""
+msgstr "Relais Verzögerung Aus"
 
 #: views/modals/area.html:654
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
 msgstr ""
+"Wähle die Verzögerung in Minuten, die ein Relais wartet, bevor es aktiviert "
+"wird. Die Maximale Verzögerung ist 180 Minuten."
 
 #: views/modals/button.html:11
-#, fuzzy
-#| msgid "Door settings"
 msgid "Button settings"
-msgstr "Türeinstellungen"
+msgstr "Schalter Einstellungen"
 
 #: views/modals/button.html:26 views/modals/relay.html:26
 #: views/modals/sensor.html:35 views/modals/service.html:68
@@ -966,21 +949,19 @@ msgstr "Adresse"
 
 #: views/modals/button.html:49
 msgid "Capacitor value in &micro;F"
-msgstr ""
+msgstr "Kondensatorwert in &micro;F"
 
 #: views/modals/button.html:52
 msgid "Please enter a number value between 1 and 100"
-msgstr ""
+msgstr "Bitte eine Nummer zwischen 1 und 100 eingeben"
 
 #: views/modals/enclosure.html:11
-#, fuzzy
-#| msgid "Sensor settings"
 msgid "Enclosure settings"
-msgstr "Sensoreinstellungen"
+msgstr "Anlage Einstellungen"
 
 #: views/modals/enclosure.html:23
 msgid "Image"
-msgstr ""
+msgstr "Bild"
 
 #: views/modals/enclosure.html:35
 msgid "Description"
@@ -992,7 +973,7 @@ msgstr "Türen"
 
 #: views/modals/event.html:10 views/modals/event.html:20
 msgid "Event"
-msgstr ""
+msgstr "Ereignis"
 
 #: views/modals/event.html:16 views/settings.html:189
 msgid "Title"
@@ -1003,20 +984,16 @@ msgid "Date"
 msgstr "Datum"
 
 #: views/modals/event.html:32
-#, fuzzy
-#| msgid "Repeat"
 msgid "Repeat every"
-msgstr "Wiederholen"
+msgstr "Wiederholen alle"
 
 #: views/modals/event.html:33
 msgid "Remind in"
 msgstr "Erinnern in"
 
 #: views/modals/event.html:36
-#, fuzzy
-#| msgid "Repeat"
 msgid "No repeat"
-msgstr "Wiederholen"
+msgstr "Nicht Wiederholen"
 
 #: views/modals/event.html:37
 msgid "Days"
@@ -1035,24 +1012,20 @@ msgid "Years"
 msgstr "Jahre"
 
 #: views/modals/message.html:11
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Message settings"
-msgstr "Webcam Einstellungen"
+msgstr "Benachrichtigungen Einstellungen"
 
 #: views/modals/message.html:18
-#, fuzzy
-#| msgid "Message"
 msgid "Message type"
-msgstr "Nachricht"
+msgstr "Benachrichtigungsart"
 
 #: views/modals/message.html:27
 msgid "Subject"
-msgstr ""
+msgstr "Betreff"
 
 #: views/modals/message.html:39 views/modals/service.html:34
 msgid "Rate limit"
-msgstr ""
+msgstr "Grenzwert"
 
 #: views/modals/message.html:47 views/modals/service.html:42
 msgid "Enabled"
@@ -1064,19 +1037,15 @@ msgstr "Nachricht"
 
 #: views/modals/message.html:71
 msgid "Place holders"
-msgstr ""
+msgstr "Platzhalter"
 
 #: views/modals/message.html:84
-#, fuzzy
-#| msgid "Service"
 msgid "Services"
-msgstr "Service"
+msgstr "Dienste"
 
 #: views/modals/playlist.html:11
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Playlist settings"
-msgstr "Webcam Einstellungen"
+msgstr "Playlist Einstellungen"
 
 #: views/modals/playlist.html:30 views/playlists.html:28
 #: views/playlists.html:43
@@ -1085,50 +1054,36 @@ msgstr "Mischen"
 
 #: views/modals/playlist.html:42 views/playlists.html:29
 #: views/playlists.html:44
-#, fuzzy
-#| msgid "Repeat"
 msgid "Repeat"
 msgstr "Wiederholen"
 
 #: views/modals/relay.html:11
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Relay settings"
-msgstr "Webcam Einstellungen"
+msgstr "Relais Einstellungen"
 
 #: views/modals/relay.html:38
-#, fuzzy
-#| msgid "wattage"
 msgid "Wattage"
 msgstr "Leistung"
 
 #: views/modals/relay.html:44
-#, fuzzy
-#| msgid "water_flow"
 msgid "Water flow"
 msgstr "Wasserfluss"
 
 #: views/modals/relay.html:51
-#, fuzzy
-#| msgid "Manual mode"
 msgid "Manual m."
-msgstr "Manueller Modus"
+msgstr "Manueller M."
 
 #: views/modals/relay.html:70
 msgid "Dimmer frequency in Hz"
-msgstr ""
+msgstr "Dimmer Frequenz in Hz"
 
 #: views/modals/relay.html:76
-#, fuzzy
-#| msgid "Water flow in %s"
 msgid "Max power in %"
-msgstr "Wasserverbrauch in %s"
+msgstr "Maximale Leistung in %"
 
 #: views/modals/relay.html:82
-#, fuzzy
-#| msgid "Dimmer off duration"
 msgid "Dimmer offset in %"
-msgstr "Dimmen in Sekunden"
+msgstr "Dimmer offset in %"
 
 #: views/modals/sensor.html:11
 msgid "Sensor settings"
@@ -1155,74 +1110,57 @@ msgid "Max diff"
 msgstr "Maximale Differents"
 
 #: views/modals/sensor.html:86 views/sensors.html:41
-#, fuzzy
-#| msgid "excl. avg"
 msgid "Excl. avg"
-msgstr "excl. avg"
+msgstr "Excl. ∅"
 
 #: views/modals/sensor.html:106
-#, fuzzy
-#| msgid "Min moist value"
 msgid "Minimal moist value"
 msgstr "Mindestfeuchte"
 
 #: views/modals/sensor.html:112
-#, fuzzy
-#| msgid "Max moist value"
 msgid "Maximum moist value"
-msgstr "Max Feuchtwert"
+msgstr "Höchstfeuchte"
 
 #: views/modals/sensor.html:119
-#, fuzzy
-#| msgid "Temperature sensor"
 msgid "Compensation sensors"
-msgstr "Temperatursensor"
+msgstr "Kompensation Sensoren"
 
 #: views/modals/service.html:11
-#, fuzzy
-#| msgid "Notifications"
 msgid "Notification service settings"
-msgstr "Benachrichtigungen"
+msgstr "Benachrichtigungen Einstellungen"
 
 #: views/modals/service.html:76
 msgid "Show title"
-msgstr ""
+msgstr "Zeige Titel"
 
 #: views/modals/service.html:81
 msgid "Show a title on the display."
-msgstr ""
+msgstr "Zeige Titel auf dem Display."
 
 #: views/modals/service.html:93
 msgid "Receiver email"
 msgstr "Empfänger-E-Mail"
 
 #: views/modals/service.html:100
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "SMTP Server address"
-msgstr "SMTP-Serveranschluss"
+msgstr "SMTP-Server Adresse"
 
 #: views/modals/service.html:107
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "SMTP Server port"
-msgstr "SMTP-Serveranschluss"
+msgstr "SMTP-Server Port"
 
 #: views/modals/service.html:111
 msgid "The email notification service will auto detect SSL/TLS connections."
 msgstr ""
+"Der E-Mail-Benachrichtigungsdienst erkennt SSL/TLS-Verbindungen automatisch."
 
 #: views/modals/service.html:117
-#, fuzzy
-#| msgid "SMTP username"
 msgid "SMTP Server username"
 msgstr "SMTP-Benutzername"
 
 #: views/modals/service.html:124
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "SMTP Server password"
-msgstr "SMTP-Serveranschluss"
+msgstr "SMTP-Server Passwort"
 
 #: views/modals/service.html:136
 msgid "API Token"
@@ -1237,40 +1175,30 @@ msgid "Bot Token"
 msgstr "Bot-Token"
 
 #: views/modals/service.html:163
-#, fuzzy
-#| msgid "Username"
 msgid "Username"
 msgstr "Nutzername"
 
 #: views/modals/service.html:170
-#, fuzzy
-#| msgid "Proxy"
 msgid "HTTP Proxy"
-msgstr "Proxy"
+msgstr "HTTP Proxy"
 
 #: views/modals/service.html:181 views/modals/webcam.html:145
-#, fuzzy
-#| msgid "Wed"
 msgid "Red"
-msgstr "Mi"
+msgstr "Rot"
 
 #: views/modals/service.html:188
 msgid "Yellow"
-msgstr ""
+msgstr "Gelb"
 
 #: views/modals/service.html:195 views/modals/webcam.html:146
 msgid "Green"
-msgstr ""
+msgstr "Grün"
 
 #: views/modals/service.html:207
-#, fuzzy
-#| msgid "Consumer key"
 msgid "Customer key"
 msgstr "Verbraucherschlüssel"
 
 #: views/modals/service.html:214
-#, fuzzy
-#| msgid "Consumer secret"
 msgid "Customer secret"
 msgstr "Verbrauchergeheimnis"
 
@@ -1295,52 +1223,40 @@ msgid ""
 "Enter the online source url for your weather information. Valid urls are "
 "shown below."
 msgstr ""
+"Gebe die URL für Wetterinformationen ein. Gültige URLs werden unten "
+"angezeigt."
 
 #: views/modals/weather.html:17
-#, fuzzy
-#| msgid "Source"
 msgid "Source url"
-msgstr "Quelle"
+msgstr "Quelle URL"
 
 #: views/modals/webcam.html:11
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Webcam settings"
 msgstr "Webcam Einstellungen"
 
 #: views/modals/webcam.html:41
 msgid "Resolution (width x height)"
-msgstr ""
+msgstr "Auflösung (Breite x Höhe)"
 
 #: views/modals/webcam.html:51
-#, fuzzy
-#| msgid "Location"
 msgid "Rotation"
-msgstr "Ort"
+msgstr "Drehung"
 
 #: views/modals/webcam.html:54
-#, fuzzy
-#| msgid "degrees"
 msgid "0 degrees"
-msgstr "Grad"
+msgstr "0 Grad"
 
 #: views/modals/webcam.html:55
-#, fuzzy
-#| msgid "degrees"
 msgid "90 degrees"
-msgstr "Grad"
+msgstr "90 Grad"
 
 #: views/modals/webcam.html:56
-#, fuzzy
-#| msgid "degrees"
 msgid "180 degrees"
-msgstr "Grad"
+msgstr "180 Grad"
 
 #: views/modals/webcam.html:57
-#, fuzzy
-#| msgid "degrees"
 msgid "270 degrees"
-msgstr "Grad"
+msgstr "270 Grad"
 
 #: views/modals/webcam.html:58
 msgid "Flip Horizontal"
@@ -1367,8 +1283,6 @@ msgid "sunlight"
 msgstr "Sonnenlicht"
 
 #: views/modals/webcam.html:72
-#, fuzzy
-#| msgid "cloudy"
 msgid "cloudy"
 msgstr "bewölkt"
 
@@ -1401,10 +1315,8 @@ msgid "greyworld"
 msgstr "graue Welt"
 
 #: views/modals/webcam.html:86
-#, fuzzy
-#| msgid "Archive"
 msgid "Archiving"
-msgstr "Archiv"
+msgstr "Archivierung"
 
 #: views/modals/webcam.html:90
 msgid "Motion"
@@ -1463,10 +1375,8 @@ msgid "Archive door state"
 msgstr "Archiviere Tür Status"
 
 #: views/modals/webcam.html:130
-#, fuzzy
-#| msgid "flash"
 msgid "Flash"
-msgstr "Flash"
+msgstr "Blitz"
 
 #: views/modals/webcam.html:141
 msgid "Show motion boxes"
@@ -1474,15 +1384,13 @@ msgstr "Bewegungsfelder anzeigen"
 
 #: views/modals/webcam.html:144
 msgid "None"
-msgstr ""
+msgstr "Keine"
 
 #: views/modals/webcam.html:147
 msgid "Blue"
-msgstr ""
+msgstr "Blau"
 
 #: views/modals/webcam.html:154
-#, fuzzy
-#| msgid "Motion delta threshold"
 msgid "Motion delta threshold"
 msgstr "Bewegungs-Delta-Schwelle"
 
@@ -1507,109 +1415,83 @@ msgid "Preview"
 msgstr "Vorschau"
 
 #: views/notifications.html:10
-#, fuzzy
-#| msgid "Notifications"
 msgid "Notification services"
-msgstr "Benachrichtigungen"
+msgstr "Benachrichtigungsservice"
 
 #: views/notifications.html:18
-#, fuzzy
-#| msgid "Service"
 msgid "Add service"
-msgstr "Service"
+msgstr "Service hinzufügen"
 
 #: views/notifications.html:52
-#, fuzzy
-#| msgid "Notifications"
 msgid "Notification messages"
-msgstr "Benachrichtigungen"
+msgstr "Mitteilungen"
 
 #: views/notifications.html:60
-#, fuzzy
-#| msgid "No messages"
 msgid "Add message"
-msgstr "Keine Nachrichten"
+msgstr "Nachricht hinzufügen"
 
 #: views/playlists.html:26 views/playlists.html:41
-#, fuzzy
-#| msgid "Files"
 msgid "# Files"
-msgstr "Dateien"
+msgstr "# Dateien"
 
 #: views/relays.html:9
 msgid "No relays"
-msgstr ""
+msgstr "Kein Relais"
 
 #: views/relays.html:12
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Add new relay"
-msgstr "Neue Webcam hinzufügen"
+msgstr "Neues Relais hinzufügen"
 
 #: views/relays.html:26
 msgid "L"
-msgstr ""
+msgstr "L"
 
 #: views/relays.html:26
-#, fuzzy
-#| msgid "Total space"
 msgid "Total"
-msgstr "Gesamtfestplattenspeicher"
+msgstr "Gesamt"
 
 #: views/relays.html:38 views/relays.html:72
 msgid "Manual mode"
 msgstr "Manueller Modus"
 
 #: views/relays.html:49
-#, fuzzy
-#| msgid "Replace"
 msgid "Replaced"
-msgstr "Ersetzen"
+msgstr "Ersetzt"
 
 #: views/relays.html:68
 msgid "Replace hardware"
 msgstr "Ersetzte Hardware"
 
 #: views/sensors.html:4
-#, fuzzy
-#| msgid "Temperature sensors"
 msgid "{sensor_type} sensors"
-msgstr "Temperatursensoren"
+msgstr "{sensor_type} Sensoren"
 
 #: views/sensors.html:15
-#, fuzzy
-#| msgid "Door sensor"
 msgid "No sensors"
-msgstr "Türsensor"
+msgstr "Kein Sensor"
 
 #: views/sensors.html:18
 msgid "Add new sensor"
 msgstr "Neuen Sensor hinzufügen"
 
 #: views/settings.html:5
-#, fuzzy
-#| msgid "General information"
 msgid "Show/hide help information"
-msgstr "Allgemeine Information"
+msgstr "Hilfeinformationen ein-/ausblenden"
 
 #: views/settings.html:28
-#, fuzzy
-#| msgid "Pi power usage in W"
 msgid "Pi power usage"
-msgstr "Pi Stromverbrauch in Watt"
+msgstr "Pi Stromverbrauch"
 
 #: views/settings.html:32
 msgid ""
 "Enter the total power usage of the Pi with all its USB devices connected."
-msgstr ""
+msgstr "Gebe die Gesamtleistung des Pi's mit allen verbundenen USB Geräten ein."
 
 #: views/settings.html:35
 msgid "Please enter a number value of 0.00 or higher"
-msgstr ""
+msgstr "Bitte eine Zahl von 0.00 oder höher eingeben"
 
 #: views/settings.html:40
-#, fuzzy
-#| msgid "IP or hostname"
 msgid "IP or host name"
 msgstr "IP oder Hostname"
 
@@ -1622,10 +1504,8 @@ msgid "Port number"
 msgstr "Port Nummer"
 
 #: views/settings.html:55
-#, fuzzy
-#| msgid "Authentication"
 msgid "Authentication mode"
-msgstr "Authentifizierung"
+msgstr "Authentifizierungsmodus"
 
 #: views/settings.html:58
 msgid "Full authentication"
@@ -1633,47 +1513,37 @@ msgstr "Authentifizierung"
 
 #: views/settings.html:59
 msgid "Only for changes"
-msgstr ""
+msgstr "Nur bei Änderungen"
 
 #: views/settings.html:62
 msgid "Always authenticate or only when changes are being made."
-msgstr ""
+msgstr "Immer Authentifizieren oder nur wenn Änderungen gemacht wurden."
 
 #: views/settings.html:67
-#, fuzzy
-#| msgid "Username"
 msgid "User name"
 msgstr "Nutzername"
 
 #: views/settings.html:73
-#, fuzzy
-#| msgid "New admin password"
 msgid "New password"
 msgstr "Neues Passwort"
 
 #: views/settings.html:79
-#, fuzzy
-#| msgid "Current admin password"
 msgid "Confirm new password"
-msgstr "Aktuelles Administratorkennwort"
+msgstr "Passwort bestätigen"
 
 #: views/settings.html:85
 msgid "Excluded ids"
-msgstr ""
+msgstr "Ausgeschlossene IDs"
 
 #: views/settings.html:97
-#, fuzzy
-#| msgid "Local source"
 msgid "Locale"
-msgstr "Lokale Quelle"
+msgstr "Lokal"
 
 #: views/settings.html:109
 msgid "Language"
 msgstr "Sprache"
 
 #: views/settings.html:119
-#, fuzzy
-#| msgid "Temperature"
 msgid "Temperature type"
 msgstr "Temperatur"
 
@@ -1690,14 +1560,10 @@ msgid "Kelvin"
 msgstr "Kelvin"
 
 #: views/settings.html:129
-#, fuzzy
-#| msgid "Distance"
 msgid "Distance type"
 msgstr "Entfernung"
 
 #: views/settings.html:132
-#, fuzzy
-#| msgid "Centimetre"
 msgid "Centimetre"
 msgstr "Zentimeter"
 
@@ -1707,11 +1573,9 @@ msgstr "Zoll"
 
 #: views/settings.html:138
 msgid "Liquid volume type"
-msgstr ""
+msgstr "Volumen Flüssigkeiten"
 
 #: views/settings.html:141
-#, fuzzy
-#| msgid "Litres"
 msgid "Litre"
 msgstr "Liter"
 
@@ -1724,22 +1588,20 @@ msgid "US Gallons"
 msgstr "US Gallonen"
 
 #: views/settings.html:148
-#, fuzzy
-#| msgid "Wind speed"
 msgid "Wind speed type"
 msgstr "Windgeschwindigkeit"
 
 #: views/settings.html:151
 msgid "Meter per second"
-msgstr ""
+msgstr "m/s"
 
 #: views/settings.html:152
 msgid "Kilometre per hour"
-msgstr ""
+msgstr "km/h"
 
 #: views/settings.html:153
 msgid "Beaufort"
-msgstr ""
+msgstr "Beaufort"
 
 #: views/settings.html:158
 msgid "Power price"
@@ -1751,7 +1613,7 @@ msgstr "Wasserpreis"
 
 #: views/settings.html:177
 msgid "GUI"
-msgstr ""
+msgstr "Benutzeroberfläche"
 
 #: views/settings.html:195
 msgid "Profile image"
@@ -1762,34 +1624,24 @@ msgid "Show min and max values in gauge graphs"
 msgstr "Min- und Max-Werte in Messkurven anzeigen"
 
 #: views/settings.html:214
-#, fuzzy
-#| msgid "Hide environment summary on the dashboard"
 msgid "Hide enclosures on dashboard"
-msgstr "Ausblenden der Umgebungszusammenfassung im Dashboard"
+msgstr "Anlagen im Dashboard ausblenden"
 
 #: views/settings.html:223
-#, fuzzy
-#| msgid "Show all sensors gauges on 1 page"
 msgid "All gauges on a single page"
-msgstr "Alle Sensoren auf 1 Seite anzeigen"
+msgstr "Alle Sensoren auf einer Seite anzeigen"
 
 #: views/settings.html:237
-#, fuzzy
-#| msgid "cloudy"
 msgid "Cloud"
-msgstr "bewölkt"
+msgstr "Wolken"
 
 #: views/settings.html:249
-#, fuzzy
-#| msgid "Meross Cloud username"
 msgid "Meross username"
-msgstr "Meross Cloud Benutzername"
+msgstr "Meross Benutzername"
 
 #: views/settings.html:255
-#, fuzzy
-#| msgid "Meross Cloud password"
 msgid "Meross password"
-msgstr "Meross Cloud Passwort"
+msgstr "Meross Passwort"
 
 #: views/settings.html:269
 msgid "Save"
@@ -1808,128 +1660,100 @@ msgid "Disk usage"
 msgstr "Festplattennutzung"
 
 #: views/weather.html:5
-#, fuzzy
-#| msgid "Weather forecast"
 msgid "Weather source credits"
-msgstr "Wettervorhersage"
+msgstr "Wetterquelle"
 
 #: views/weather.html:33
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 #: views/weather.html:40
 msgid "Location"
 msgstr "Ort"
 
 #: views/weather.html:41
-#, fuzzy
-#| msgid "Weather"
 msgid "Weather type"
-msgstr "Wetter"
+msgstr "Wetter Art"
 
 #: views/weather.html:44
 msgid "Rise"
-msgstr ""
+msgstr "Steigen"
 
 #: views/weather.html:45
-#, fuzzy
-#| msgid "Sat"
 msgid "Set"
-msgstr "Sa"
+msgstr "Festlegen"
 
 #: views/weather.html:46
-#, fuzzy
-#| msgid "CPU Temp."
 msgid "Temp."
-msgstr "CPU-Temp."
+msgstr "Temp."
 
 #: views/weather.html:68
 msgid "Forecast"
 msgstr "Prognose"
 
 #: views/webcams.html:9
-#, fuzzy
-#| msgid "Webcams"
 msgid "No webcams"
-msgstr "Webcams"
+msgstr "Keine Webcams"
 
 #: views/webcams.html:12
 msgid "Add new webcam"
 msgstr "Neue Webcam hinzufügen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Action"
 msgid "Action succeeded"
-msgstr "Aktion"
+msgstr "Aktion erfolgreich"
 
 #: Missing text string
 msgid "added"
-msgstr ""
+msgstr "hinzugefügt"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Add new area"
-msgstr "Neue Webcam hinzufügen"
+msgstr "Neuen Bereich hinzufügen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Add new message"
-msgstr "Neue Webcam hinzufügen"
+msgstr "Neue Nachricht hinzufügen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Add new playlist"
-msgstr "Neue Webcam hinzufügen"
+msgstr "Neue Playlist hinzufügen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new sensor"
 msgid "Add new service"
-msgstr "Neuen Sensor hinzufügen"
+msgstr "Neuen Dienst hinzufügen"
 
 #: Missing text string
 msgid "Audio file is being processed. Please wait..."
-msgstr ""
+msgstr "Die Audiodatei wird gerade verarbeitet. Bitte warten..."
 
 #: Missing text string
 msgid "Audio files are uploaded."
 msgstr "Audiodateien sind hochgeladen."
 
 #: Missing text string
-#, fuzzy
-#| msgid "Duration"
 msgid "calibration"
-msgstr "Dauer"
+msgstr "Kalibrierung"
 
 #: Missing text string
 msgid "Changed relay {name} to {state}"
-msgstr ""
+msgstr "Relais {name} zu {state} geändert"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Changes only"
 msgid "Change error"
-msgstr "Änderungen nur"
+msgstr "Änderungsfehler"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Current admin password"
 msgid "Confirm password"
-msgstr "Aktuelles Administratorkennwort"
+msgstr "Passwort bestätigen"
 
 #: Missing text string
 msgid "Could not change the relay state of"
-msgstr ""
+msgstr "Konnte Relais Status nicht ändern auf"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Conductivity"
 msgid "Current activity"
-msgstr "Leitfähigkeit"
+msgstr "Aktuelle Tätigkeit"
 
 #: Missing text string
 msgid "Current value"
@@ -1937,201 +1761,147 @@ msgstr "Aktueller Wert"
 
 #: Missing text string
 msgid "Delay"
-msgstr ""
+msgstr "Verzögerung"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete area"
-msgstr "Datei löschen"
+msgstr "Bereich löschen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete audio file"
-msgstr "Datei löschen"
+msgstr "Audiodatei löschen"
 
 #: Missing text string
 msgid "Delete button"
-msgstr ""
+msgstr "Schalter löschen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete enclosure"
-msgstr "Datei löschen"
+msgstr "Anlage löschen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Calendar title"
 msgid "Delete event {title}"
-msgstr "Kalender Titel"
+msgstr "Ereignis {title} Löschen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete message"
-msgstr "Datei löschen"
+msgstr "Nachricht löschen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete playlist"
-msgstr "Datei löschen"
+msgstr "Playlist löschen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete relay"
-msgstr "Datei löschen"
+msgstr "Relais löschen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Delete sensor"
-msgstr "Sensoren auswählen"
+msgstr "Sensor löschen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete webcam"
-msgstr "Datei löschen"
+msgstr "Webcam löschen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Dimmer off percentage"
 msgid "Dimmer offset in percentage"
-msgstr "Prozent dimmung"
+msgstr "Prozent offset in %"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Edit"
 msgid "Edit area"
-msgstr "Bearbeiten"
+msgstr "Bereich bearbeiten"
 
 #: Missing text string
 msgid "Edit button"
-msgstr ""
+msgstr "Schalter bearbeiten"
 
 #: Missing text string
 msgid "Edit enclosure"
-msgstr ""
+msgstr "Anlage bearbeiten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No messages"
 msgid "Edit message"
-msgstr "Keine Nachrichten"
+msgstr "Nachricht bearbeiten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Audio playlist"
 msgid "Edit playlist"
-msgstr "Audio-Wiedergabeliste"
+msgstr "Playlist bearbeiten"
 
 #: Missing text string
 msgid "Edit relay"
-msgstr ""
+msgstr "Relais bearbeiten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Light sensor"
 msgid "Edit sensor"
-msgstr "Lichtsensor"
+msgstr "Sensor bearbeiten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Edit webcam"
-msgstr "Neue Webcam hinzufügen"
+msgstr "Webcam bearbeiten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "I2C address"
 msgid "Enter address"
-msgstr "I2C-Adresse"
+msgstr "Adresse eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Username"
 msgid "Enter a message"
-msgstr "Nutzername"
+msgstr "Nachricht eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Username"
 msgid "Enter a name"
-msgstr "Nutzername"
+msgstr "Nutzername eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "I2C address"
 msgid "Enter an email address"
-msgstr "I2C-Adresse"
+msgstr "E-mail Adresse eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Username"
 msgid "Enter a subject"
-msgstr "Nutzername"
+msgstr "Betreff eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter begin time"
-msgstr "Datum und Uhrzeit"
+msgstr "Startzeit eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter end time"
-msgstr "Datum und Uhrzeit"
+msgstr "Endzeit eingeben"
 
 #: Missing text string
 msgid "Enter green GPIO pin"
-msgstr ""
+msgstr "Grünen GPIO Pin eingeben"
 
 #: Missing text string
 msgid "Enter height"
 msgstr "Hohe eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Username"
 msgid "Enter name"
-msgstr "Nutzername"
+msgstr "Name eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Username"
 msgid "Enter number"
-msgstr "Nutzername"
+msgstr "Nummer eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter red GPIO pin"
-msgstr "Datum und Uhrzeit"
+msgstr "Roten GPIO Pin eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "I2C address"
 msgid "Enter search terms"
-msgstr "I2C-Adresse"
+msgstr "Suchbegriff eingeben"
 
 #: Missing text string
 msgid "Enter some information about this enclosure"
-msgstr ""
+msgstr "Einige Informationen über diese Anlage eingeben"
 
 #: Missing text string
 msgid "Enter some information about this event"
-msgstr ""
+msgstr "Einige Informationen über dieses Ereignis eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "I2C address"
 msgid "Enter the address"
-msgstr "I2C-Adresse"
+msgstr "Adresse eingeben"
 
 #: Missing text string
 msgid "Enter the amount"
@@ -2147,421 +1917,303 @@ msgstr "Höhe eingeben"
 
 #: Missing text string
 msgid "Enter the maximum amount of hours"
-msgstr ""
+msgstr "Maximale Stundenanzahl eingeben"
 
 #: Missing text string
 msgid "Enter the minimum amount of hours"
-msgstr ""
+msgstr "Minimale Stundenanzahl eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Temperature offset"
 msgid "Enter the offset"
-msgstr "Temperatur-Offset"
+msgstr "Offset eingeben"
 
 #: Missing text string
 msgid "Enter the SMTP server address name or ip"
-msgstr ""
+msgstr "SMTP Server Adresse oder IP eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "Enter the SMTP server password"
-msgstr "SMTP-Serveranschluss"
+msgstr "SMTP Server Passwort eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP server port"
 msgid "Enter the SMTP server port number"
-msgstr "SMTP-Serveranschluss"
+msgstr "SMTP Server Port Nummer eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP username"
 msgid "Enter the SMTP server username"
-msgstr "SMTP-Benutzername"
+msgstr "SMTP Server Benutzername eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter width"
-msgstr "Datum und Uhrzeit"
+msgstr "Breite eingeben"
 
 #: Missing text string
 msgid "Enter yellow GPIO pin"
-msgstr ""
+msgstr "Gelben GPIO Pin eingeben"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No error messages"
 msgid "Error messages"
-msgstr "Keine Fehlermeldungen"
+msgstr "Fehlermeldungen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Calendar title"
 msgid "Event title"
-msgstr "Kalender Titel"
+msgstr "Ereignistitel"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Export data"
 msgid "Export button"
-msgstr "Daten exportieren"
+msgstr "Schalter exportieren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Export data"
 msgid "Export relay"
-msgstr "Daten exportieren"
+msgstr "Relais exportieren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Door sensor"
 msgid "Export sensor"
-msgstr "Türsensor"
+msgstr "Sensor exportieren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "error"
 msgid "Form error"
-msgstr "Error"
+msgstr "Form Error"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new sensor"
 msgid "Ignore button"
-msgstr "Neuen Sensor hinzufügen"
+msgstr "Schalter ignorieren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Ignore relay"
-msgstr "Neue Webcam hinzufügen"
+msgstr "Relais ignorieren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Door sensor"
 msgid "Ignore sensor"
-msgstr "Türsensor"
+msgstr "Sensor ignorieren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Ignore webcam"
-msgstr "Neue Webcam hinzufügen"
+msgstr "Webcam ignorieren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Manual mode"
 msgid "Manual mode relay"
-msgstr "Manueller Modus"
+msgstr "Manueller Modus Relais"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Max diff"
 msgid "Max difference"
-msgstr "Maximale Differents"
+msgstr "Maximale Differenz"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Dimmer on percentage"
 msgid "Max power in percentage"
-msgstr "Prozentsatz pro Dimmung"
+msgstr "Maximale Leistung in %"
 
 #: Missing text string
 msgid "Messages per minute"
-msgstr ""
+msgstr "Nachrichten pro Minute"
 
 #: Missing text string
-#, fuzzy
-#| msgid "5 minutes"
 msgid "minutes"
-msgstr "5 Minuten"
+msgstr "Minuten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Repeat"
 msgid "No reminder"
-msgstr "Wiederholen"
+msgstr "Keine Erinnerung"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Required fields are marked with '%s'."
 msgid "Not all required fields are entered correctly."
-msgstr "Pflichtfelder sind markiert mit '%s'."
+msgstr "Nicht alle Pflichtfelder sind korrekt eingegeben."
 
 #: Missing text string
 msgid "OK"
 msgstr "OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "New calendar item"
 msgid "Open calender page"
-msgstr "Neuer Kalender Eintrag"
+msgstr "Kalenderseite öffnen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP password"
 msgid "Password"
-msgstr "SMTP-Passwort"
+msgstr "Passwort"
 
 #: Missing text string
 msgid "Profile image is uploaded."
 msgstr "Profilbild hochgeladen."
 
 #: Missing text string
-#, fuzzy
-#| msgid "TerrariumPI"
 msgid "Reboot TerrariumPI"
-msgstr "TerrariumPI"
+msgstr "TerrariumPI neustarten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "TerrariumPI"
 msgid "Restart TerrariumPI"
-msgstr "TerrariumPI"
+msgstr "TerrariumPI neustarten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Error"
 msgid "Save Error"
-msgstr "Error"
+msgstr "Error Speichern"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Save"
 msgid "Save OK"
-msgstr "Sichern"
+msgstr "Sichern OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Scan for new relays"
-msgstr "Neue Webcam hinzufügen"
+msgstr "Suche nach neuen Relais"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Scan for new sensors"
-msgstr "Neue Webcam hinzufügen"
+msgstr "Suche nach neuen Sensoren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select a mode"
-msgstr "Wählen einer Option"
+msgstr "Modus auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select amount"
-msgstr "Wählen einer Option"
+msgstr "Anzahl auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select an area type"
-msgstr "Wählen einer Option"
+msgstr "Bereich Typ auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Select an enclosure"
-msgstr "Datei löschen"
+msgstr "Anlage auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Archive door state"
 msgid "Select archive door state"
-msgstr "Archiviere Tür Status"
+msgstr "Zustand der archivierten Tür auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Archive light state"
 msgid "Select archive light state"
-msgstr "Lichtzustand archivieren"
+msgstr "Zustand des archivierten Lichts auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Language"
 msgid "Select archiving"
-msgstr "Sprache"
+msgstr "Archivierung auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select a sound card"
-msgstr "Wählen einer Option"
+msgstr "Soundkarte auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select a state"
-msgstr "Wählen einer Option"
+msgstr "Status auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Select audio files"
-msgstr "Datei löschen"
+msgstr "Audiodatei auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select available doors"
-msgstr "Sensoren auswählen"
+msgstr "Verfügbare Türen auswählen"
 
 #: Missing text string
 msgid "Select available webcams"
-msgstr ""
+msgstr "Verfügbare Webcams auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select compensation sensors"
-msgstr "Sensoren auswählen"
+msgstr "Sensorausgleich auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Replace hardware"
 msgid "Select hardware"
-msgstr "Ersetzte Hardware"
+msgstr "Hardware auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Language"
 msgid "Select language"
-msgstr "Sprache"
+msgstr "Sprache auswählen"
 
 #: Missing text string
 msgid "Select optional relay for flash"
-msgstr ""
+msgstr "Optionales Relais für Blitz auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select period"
-msgstr "Sensoren auswählen"
+msgstr "Zeitraum wählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select playlists"
-msgstr "Sensoren auswählen"
+msgstr "Playlist auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select relays"
-msgstr "Sensoren auswählen"
+msgstr "Relais auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Picture rotation"
 msgid "Select rotation"
-msgstr "Bilddrehung"
+msgstr "Bilddrehung auswählen"
 
 #: Missing text string
 msgid "Select sensors"
 msgstr "Sensoren auswählen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select type"
-msgstr "Sensoren auswählen"
+msgstr "Typ auswählen"
 
 #: Missing text string
 msgid "Select which frame to comparison"
-msgstr ""
+msgstr "Wähle den zu vergleichenden Frame"
 
 #: Missing text string
-#, fuzzy
-#| msgid "White balance"
 msgid "Select white balance"
-msgstr "Weißabgleich"
+msgstr "Weißabgleich auswählen"
 
 #: Missing text string
 msgid "Settings are updated."
-msgstr ""
+msgstr "Einstellungen sind aktualisiert."
 
 #: Missing text string
-#, fuzzy
-#| msgid "Show motion boxes"
 msgid "Show the motion boxes"
 msgstr "Bewegungsfelder anzeigen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "TerrariumPI"
 msgid "Shutdown TerrariumPI"
-msgstr "TerrariumPI"
+msgstr "TerrariumPI herunterfahren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Toggle audio"
 msgid "Toggle menu"
-msgstr "Ton umschalten"
+msgstr "Menü umschalten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Toggle audio"
 msgid "Toggle relay"
-msgstr "Ton umschalten"
+msgstr "Relais umschalten"
 
 #: Missing text string
 msgid "{type} {name} is {action}"
-msgstr ""
+msgstr "{type} {name} ist {action}"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Last update"
 msgid "updated"
-msgstr "Letztes Update"
+msgstr "Upgedated"
 
 #: Missing text string
 msgid "Update error"
-msgstr ""
+msgstr "Update Fehler"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Upload date"
 msgid "Update ok"
-msgstr "Datum des Hochladens"
+msgstr "Update OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Upload date"
 msgid "Upload error"
-msgstr "Datum des Hochladens"
+msgstr "Uploadfehler"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Upload date"
 msgid "Upload ok"
-msgstr "Datum des Hochladens"
+msgstr "Upload OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "No warning messages"
 msgid "Warning messages"
-msgstr "Keine Warnmeldungen"
+msgstr "Warnmeldungen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Holds the switch water flow in liters per minute when switched on"
 msgid "Water flow in liters per minute when powered on"
-msgstr "Schalter Wasserfluss in Liter/min., wenn eingeschaltet"
+msgstr "Wasserfluss in Liter/min., wenn eingeschaltet"
 
 #: Missing text string
 msgid "Wattage when powered on"
-msgstr ""
+msgstr "Leistung wenn eingeschaltet"
 
 #: Missing text string
 msgid "Weather data source url"
-msgstr ""
+msgstr "Wetterdaten Quell-URL"
 
 #~ msgid "Action could not be satisfied"
 #~ msgstr "Aktion konnte nicht durchgeführt werden"
