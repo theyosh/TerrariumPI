@@ -34,7 +34,7 @@ from terrariumArea import terrariumArea
 
 from weather import terrariumWeather, terrariumWeatherException
 from hardware.sensor import terrariumSensor, terrariumSensorLoadingException
-from hardware.relay import terrariumRelay, terrariumRelayLoadingException
+from hardware.relay import terrariumRelay, terrariumRelayLoadingException, terrariumRelayUpdateException
 from hardware.button import terrariumButton, terrariumButtonLoadingException
 from hardware.webcam import terrariumWebcam, terrariummWebcamLoadingException
 
@@ -667,7 +667,11 @@ class terrariumEngine(object):
     with orm.db_session():
       for relay in Relay.select(lambda r: r.id in self.relays.keys() and not r.id in self.settings['exclude_ids']):
         start = time.time()
-        new_value = self.relays[relay.id].update()
+        try:
+          new_value = self.relays[relay.id].update()
+        except terrariumRelayUpdateException as ex:
+          logger.exception(ex)
+
         measurement_time = time.time() - start
 
         if new_value is None:
