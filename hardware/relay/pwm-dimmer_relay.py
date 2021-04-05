@@ -14,7 +14,7 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
     return PWMOutputDevice(terrariumUtils.to_BCM_port_number(self.address),frequency=self._DIMMER_FREQ)
 
   def _set_hardware_value(self, state):
-    self.device.value = float(state + self._dimmer_offset) / 100.0
+    self.device.value = max(0,min(1,float(state + self._dimmer_offset) / 100.0))
     return True
 
   def _get_hardware_value(self):
@@ -31,6 +31,7 @@ class terrariumRelayDimmerNextEVO(terrariumRelayDimmerPWM):
   _DIMMER_FREQ   = 5000
 
   def _load_hardware(self):
+    # Working inverse of the other dimmers. So when there is no input, output is full. And high input, is no output
     return PWMOutputDevice(terrariumUtils.to_BCM_port_number(self.address),active_high=False,frequency=self._DIMMER_FREQ)
 
 class terrariumRelayDimmerDC(terrariumRelayDimmerPWM):
