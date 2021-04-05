@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-03-25 11:52+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2021-04-06 15:46+0000\n"
+"Last-Translator: fabi2803 <l.fabian@me.com>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/3-x-y-z/de_AT/>\n"
 "Language: de_AT\n"
@@ -3975,7 +3975,7 @@ msgstr "Höhe"
 
 #: views/system_environment.tpl:1259
 msgid "Offset"
-msgstr "Offset"
+msgstr "Versatz"
 
 #: views/system_log.tpl:18
 msgid "Download"
@@ -4082,8 +4082,6 @@ msgid "Changes only"
 msgstr "Änderungen nur"
 
 #: views/system_settings.tpl:157
-#, fuzzy
-#| msgid "Soundcard"
 msgid "Sound card"
 msgstr "Soundkarte"
 
