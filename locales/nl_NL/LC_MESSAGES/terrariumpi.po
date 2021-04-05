@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-04-05 12:21+CEST\n"
-"PO-Revision-Date: 2021-03-23 15:43+0000\n"
+"PO-Revision-Date: 2021-04-05 10:33+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1052,38 +1052,28 @@ msgid "Relay settings"
 msgstr "Schakelaar instellingen"
 
 #: views/modals/relay.html:38
-#, fuzzy
-#| msgid "wattage"
 msgid "Wattage"
-msgstr "wattage"
+msgstr "Wattage"
 
 #: views/modals/relay.html:44
-#, fuzzy
-#| msgid "water_flow"
 msgid "Water flow"
-msgstr "waterstroom"
+msgstr "Waterstroom"
 
 #: views/modals/relay.html:51
-#, fuzzy
-#| msgid "Manual mode"
 msgid "Manual m."
-msgstr "Handmatige bediening"
+msgstr "Handmatige b."
 
 #: views/modals/relay.html:70
 msgid "Dimmer frequency in Hz"
-msgstr ""
+msgstr "Dimmerfrequentie in Hz"
 
 #: views/modals/relay.html:76
-#, fuzzy
-#| msgid "Water flow in %s"
 msgid "Max power in %"
-msgstr "Waterverbruik in %s"
+msgstr "Maximaal vermogen in %"
 
 #: views/modals/relay.html:82
-#, fuzzy
-#| msgid "Dimmer of duration"
 msgid "Dimmer offset in %"
-msgstr "Dimmer uit tijdsduur"
+msgstr "Dimmer-offset in%"
 
 #: views/modals/sensor.html:11
 msgid "Sensor settings"
@@ -1122,10 +1112,8 @@ msgid "Maximum moist value"
 msgstr "Minimale vochtwaarde"
 
 #: views/modals/sensor.html:119
-#, fuzzy
-#| msgid "Temperature sensor"
 msgid "Compensation sensors"
-msgstr "Temperatuur sensor"
+msgstr "Compensatiesensoren"
 
 #: views/modals/service.html:11
 msgid "Notification service settings"
@@ -1806,10 +1794,8 @@ msgid "Delete webcam"
 msgstr "Verwijder webcam"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Dimmer off percentage"
 msgid "Dimmer offset in percentage"
-msgstr "Dimmer uit percentage"
+msgstr "Dimmer-offset in procenten"
 
 #: Missing text string
 msgid "Edit area"
@@ -2004,10 +1990,8 @@ msgid "Max difference"
 msgstr "Max verschil"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Dimmer on percentage"
 msgid "Max power in percentage"
-msgstr "Dimmer aan percentage"
+msgstr "Max. Vermogen in procenten"
 
 #: Missing text string
 msgid "Messages per minute"
@@ -2114,10 +2098,8 @@ msgid "Select available webcams"
 msgstr "Selecteer beschikbare webcams"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select compensation sensors"
-msgstr "Selecteer sensoren"
+msgstr "Selecteer compensatiesensoren"
 
 #: Missing text string
 msgid "Select hardware"
@@ -2212,15 +2194,12 @@ msgid "Warning messages"
 msgstr "Waarschuwingsberichten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Holds the switch water flow in liters per minute when switched on"
 msgid "Water flow in liters per minute when powered on"
-msgstr ""
-"Houd de schakelaar waterstroom in liter per minuut wanneer ingeschakeld"
+msgstr "Waterstroom in liters per minuut wanneer ingeschakeld"
 
 #: Missing text string
 msgid "Wattage when powered on"
-msgstr ""
+msgstr "Wattage wanneer ingeschakeld"
 
 #: Missing text string
 msgid "Weather data source url"
