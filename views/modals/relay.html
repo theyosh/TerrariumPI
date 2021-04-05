@@ -14,41 +14,41 @@
 <div class="row">
   <div class="col-12 col-sm-6 col-md-4 col-lg-2">
     <div class="form-group">
-      <label for="relay_hardware">Hardware</label>
+      <label for="relay_hardware">{{ _('Hardware') }}</label>
       <div class="select2-primary">
-        <select class="select2" id="relay_hardware" name="hardware" required="required" data-placeholder="Select hardware" style="width: 100%;">
+        <select class="select2" id="relay_hardware" name="hardware" required="required" data-placeholder="{{ _('Select hardware') }}" style="width: 100%;">
         </select>
       </div>
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-4 col-lg-3">
     <div class="form-group">
-      <label for="relay_address">Address</label>
-      <input type="text" class="form-control" id="relay_address" name="address" required="required" placeholder="Enter address">
+      <label for="relay_address">{{ _('Address') }}</label>
+      <input type="text" class="form-control" id="relay_address" name="address" required="required" placeholder="{{ _('Enter address') }}">
     </div>
   </div>
   <div class="col-10 col-sm-10 col-md-8 col-lg-3">
     <div class="form-group">
-      <label for="relay_name">Naam</label>
-      <input type="text" class="form-control" id="relay_name" name="name" required="required" placeholder="Enter name">
+      <label for="relay_name">{{ _('Name') }}</label>
+      <input type="text" class="form-control" id="relay_name" name="name" required="required" placeholder="{{ _('Enter name') }}">
     </div>
   </div>
   <div class="col-6 col-sm-6 col-md-6 col-lg-1">
     <div class="form-group">
-      <label for="wattage">Wattage</label>
-      <input type="number" step="0.001" min=0 class="form-control" id="wattage" name="wattage" required="required" placeholder="Wattage when powered on">
+      <label for="wattage">{{ _('Wattage') }}</label>
+      <input type="number" step="0.001" min=0 class="form-control" id="wattage" name="wattage" required="required" placeholder="{{ _('Wattage when powered on') }}">
     </div>
   </div>
   <div class="col-6 col-sm-6 col-md-6 col-lg-1">
     <div class="form-group">
-      <label for="flow" class="text-nowrap">Water flow</label>
-      <input type="number" step="0.001" min=0 class="form-control" id="flow" name="flow" required="required" placeholder="Water flow in liters per minute when powered on">
+      <label for="flow" class="text-nowrap">{{ _('Water flow') }}</label>
+      <input type="number" step="0.001" min=0 class="form-control" id="flow" name="flow" required="required" placeholder="{{ _('Water flow in liters per minute when powered on') }}">
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-12 col-lg-1">
     <div class="form-group">
       <span class="switch">
-        <label for="manual_mode">Manual m.</label>
+        <label for="manual_mode">{{ _('Manual m.') }}</label>
         <input type="checkbox" class="switch" id="manual_mode" name="manual_mode">
         <label for="manual_mode" class="mt-1"></label>
       </span>
@@ -56,8 +56,8 @@
   </div>
   <div class="col-2 col-sm-2 col-md-4 col-lg-1">
     <div class="form-group">
-      <label for="relay_current">Current</label>
-      <input type="text" readonly="readonly" class="form-control" name="value" id="relay_current" placeholder="Current value">
+      <label for="relay_current">{{ _('Current') }}</label>
+      <input type="text" readonly="readonly" class="form-control" name="value" id="relay_current" placeholder="{{ _('Current value') }}">
     </div>
   </div>
 </div>
@@ -67,20 +67,20 @@
     <div class="collapse row pt-3" id="dimmer_callibration">
       <div class="col-6 col-sm-6 col-md-6 col-lg-2">
         <div class="form-group">
-          <label for="dimmer_frequency">Dimmer frequency in Hz</label>
-          <input type="number" step="1" min="100" max="10000" class="form-control" id="dimmer_frequency" name="dimmer_frequency" placeholder="Dimmer frequency in Hz" value="10000">
+          <label for="dimmer_frequency">{{ _('Dimmer frequency in Hz') }}</label>
+          <input type="number" step="1" min="100" max="10000" class="form-control" id="dimmer_frequency" name="dimmer_frequency" placeholder="{{ _('Dimmer frequency in Hz') }}" value="10000">
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-6 col-lg-2">
         <div class="form-group">
-          <label for="dimmer_max_power">Max power in %</label>
-          <input type="number" step="1" min="1" max="100" class="form-control" id="dimmer_max_power" name="dimmer_max_power" placeholder="Max power in percentage" value="100">
+          <label for="dimmer_max_power">{{ _('Max power in %') }}</label>
+          <input type="number" step="1" min="1" max="100" class="form-control" id="dimmer_max_power" name="dimmer_max_power" placeholder="{{ _('Max power in percentage') }}" value="100">
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-6 col-lg-2">
         <div class="form-group">
-          <label for="dimmer_offset">Dimmer offset in %</label>
-          <input type="number" step="1" min="0" max="100" class="form-control" id="dimmer_offset" name="dimmer_offset" placeholder="Dimmer offset in percentage" value="0">
+          <label for="dimmer_offset">{{ _('Dimmer offset in %') }}</label>
+          <input type="number" step=".1" min="0" max="100" class="form-control" id="dimmer_offset" name="dimmer_offset" placeholder="{{ _('Dimmer offset in percentage') }}" value="0">
         </div>
       </div>
     </div>

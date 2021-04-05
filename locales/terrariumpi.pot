@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2021-04-01 17:14+CEST\n"
+"POT-Creation-Date: 2021-04-05 12:21+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,15 +43,15 @@ msgstr ""
 msgid "CO2"
 msgstr ""
 
-#: terrariumArea.py:73
+#: terrariumArea.py:74
 msgid "Conductivity"
 msgstr ""
 
-#: terrariumArea.py:78
+#: terrariumArea.py:80
 msgid "Moisture"
 msgstr ""
 
-#: terrariumArea.py:84
+#: terrariumArea.py:86
 msgid "pH"
 msgstr ""
 
@@ -131,31 +131,31 @@ msgstr ""
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1014 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1019 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr ""
 
-#: terrariumEngine.py:1020
+#: terrariumEngine.py:1025
 msgid "System load"
 msgstr ""
 
-#: terrariumEngine.py:1026 views/status.html:44
+#: terrariumEngine.py:1031 views/status.html:44
 msgid "CPU Temperature"
 msgstr ""
 
-#: terrariumEngine.py:1032
+#: terrariumEngine.py:1037
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1038
+#: terrariumEngine.py:1043
 msgid "Memory"
 msgstr ""
 
-#: terrariumEngine.py:1048
+#: terrariumEngine.py:1053
 msgid "average {sensor_type}"
 msgstr ""
 
-#: terrariumEngine.py:1221
+#: terrariumEngine.py:1226
 msgid "last update"
 msgstr ""
 
@@ -220,8 +220,9 @@ msgstr ""
 #: views/enclosures.html:164 views/modals/area.html:44
 #: views/modals/button.html:32 views/modals/enclosure.html:17
 #: views/modals/message.html:33 views/modals/playlist.html:17
-#: views/modals/sensor.html:41 views/modals/service.html:27
-#: views/modals/webcam.html:35 views/playlists.html:24 views/playlists.html:39
+#: views/modals/relay.html:32 views/modals/sensor.html:41
+#: views/modals/service.html:27 views/modals/webcam.html:35
+#: views/playlists.html:24 views/playlists.html:39
 msgid "Name"
 msgstr ""
 
@@ -324,7 +325,7 @@ msgstr ""
 msgid "Ignore"
 msgstr ""
 
-#: views/buttons.html:68 views/modals/webcam.html:350 views/relays.html:80
+#: views/buttons.html:68 views/modals/webcam.html:345 views/relays.html:80
 #: views/sensors.html:79 views/webcams.html:38
 msgid "Delete"
 msgstr ""
@@ -383,8 +384,8 @@ msgid "High"
 msgstr ""
 
 #: views/dashboard.html:217 views/enclosures.html:88
-#: views/modals/button.html:38 views/modals/sensor.html:47
-#: views/weather.html:20
+#: views/modals/button.html:38 views/modals/relay.html:59
+#: views/modals/sensor.html:47 views/weather.html:20
 msgid "Current"
 msgstr ""
 
@@ -425,12 +426,12 @@ msgid "Actions"
 msgstr ""
 
 #: views/includes/modals.html:5 views/includes/modals.html:17
-#: views/modals/webcam.html:349
+#: views/modals/webcam.html:344
 msgid "Confirm"
 msgstr ""
 
 #: views/includes/modals.html:14 views/layouts/modal.html:20
-#: views/modals/webcam.html:122 views/modals/webcam.html:348
+#: views/modals/webcam.html:122 views/modals/webcam.html:343
 msgid "Close"
 msgstr ""
 
@@ -480,7 +481,7 @@ msgid "Weather"
 msgstr ""
 
 #: views/includes/sidebar.html:77 views/modals/area.html:422
-#: views/modals/area.html:430 views/modals/webcam.html:334
+#: views/modals/area.html:430 views/modals/webcam.html:329
 msgid "Sensors"
 msgstr ""
 
@@ -585,8 +586,8 @@ msgid "Usage"
 msgstr ""
 
 #: views/includes/sidebar.html:317 views/modals/button.html:17
-#: views/modals/sensor.html:17 views/modals/service.html:58
-#: views/modals/webcam.html:20
+#: views/modals/relay.html:17 views/modals/sensor.html:17
+#: views/modals/service.html:58 views/modals/webcam.html:20
 msgid "Hardware"
 msgstr ""
 
@@ -891,8 +892,9 @@ msgstr ""
 msgid "Button settings"
 msgstr ""
 
-#: views/modals/button.html:26 views/modals/sensor.html:35
-#: views/modals/service.html:68 views/modals/webcam.html:29
+#: views/modals/button.html:26 views/modals/relay.html:26
+#: views/modals/sensor.html:35 views/modals/service.html:68
+#: views/modals/webcam.html:29
 msgid "Address"
 msgstr ""
 
@@ -1010,6 +1012,30 @@ msgstr ""
 msgid "Relay settings"
 msgstr ""
 
+#: views/modals/relay.html:38
+msgid "Wattage"
+msgstr ""
+
+#: views/modals/relay.html:44
+msgid "Water flow"
+msgstr ""
+
+#: views/modals/relay.html:51
+msgid "Manual m."
+msgstr ""
+
+#: views/modals/relay.html:70
+msgid "Dimmer frequency in Hz"
+msgstr ""
+
+#: views/modals/relay.html:76
+msgid "Max power in %"
+msgstr ""
+
+#: views/modals/relay.html:82
+msgid "Dimmer offset in %"
+msgstr ""
+
 #: views/modals/sensor.html:11
 msgid "Sensor settings"
 msgstr ""
@@ -1106,7 +1132,7 @@ msgstr ""
 msgid "HTTP Proxy"
 msgstr ""
 
-#: views/modals/service.html:181 views/modals/webcam.html:150
+#: views/modals/service.html:181 views/modals/webcam.html:145
 msgid "Red"
 msgstr ""
 
@@ -1114,7 +1140,7 @@ msgstr ""
 msgid "Yellow"
 msgstr ""
 
-#: views/modals/service.html:195 views/modals/webcam.html:151
+#: views/modals/service.html:195 views/modals/webcam.html:146
 msgid "Green"
 msgstr ""
 
@@ -1294,43 +1320,43 @@ msgstr ""
 msgid "Archive door state"
 msgstr ""
 
-#: views/modals/webcam.html:132
+#: views/modals/webcam.html:130
 msgid "Flash"
 msgstr ""
 
-#: views/modals/webcam.html:146
+#: views/modals/webcam.html:141
 msgid "Show motion boxes"
 msgstr ""
 
-#: views/modals/webcam.html:149
+#: views/modals/webcam.html:144
 msgid "None"
 msgstr ""
 
-#: views/modals/webcam.html:152
+#: views/modals/webcam.html:147
 msgid "Blue"
 msgstr ""
 
-#: views/modals/webcam.html:159
+#: views/modals/webcam.html:154
 msgid "Motion delta threshold"
 msgstr ""
 
-#: views/modals/webcam.html:165
+#: views/modals/webcam.html:160
 msgid "Motion minimum area"
 msgstr ""
 
-#: views/modals/webcam.html:171
+#: views/modals/webcam.html:166
 msgid "Motion comparison frame"
 msgstr ""
 
-#: views/modals/webcam.html:174
+#: views/modals/webcam.html:169
 msgid "Last frame"
 msgstr ""
 
-#: views/modals/webcam.html:175
+#: views/modals/webcam.html:170
 msgid "Last archived frame"
 msgstr ""
 
-#: views/modals/webcam.html:184
+#: views/modals/webcam.html:179
 msgid "Preview"
 msgstr ""
 
@@ -1723,6 +1749,10 @@ msgid "Delete webcam"
 msgstr ""
 
 #: Missing text string
+msgid "Dimmer offset in percentage"
+msgstr ""
+
+#: Missing text string
 msgid "Edit area"
 msgstr ""
 
@@ -1912,6 +1942,10 @@ msgstr ""
 
 #: Missing text string
 msgid "Max difference"
+msgstr ""
+
+#: Missing text string
+msgid "Max power in percentage"
 msgstr ""
 
 #: Missing text string
@@ -2112,6 +2146,14 @@ msgstr ""
 
 #: Missing text string
 msgid "Warning messages"
+msgstr ""
+
+#: Missing text string
+msgid "Water flow in liters per minute when powered on"
+msgstr ""
+
+#: Missing text string
+msgid "Wattage when powered on"
 msgstr ""
 
 #: Missing text string
