@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-04-01 17:14+CEST\n"
-"PO-Revision-Date: 2021-03-28 11:44+0000\n"
+"PO-Revision-Date: 2021-04-05 10:23+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -1090,10 +1090,8 @@ msgid "Maximum moist value"
 msgstr "Valor máximo umidade"
 
 #: views/modals/sensor.html:119
-#, fuzzy
-#| msgid "Temperature sensor"
 msgid "Compensation sensors"
-msgstr "Sensor de temperatura"
+msgstr "Sensores de compensação"
 
 #: views/modals/service.html:11
 msgid "Notification service settings"
@@ -2071,10 +2069,8 @@ msgid "Select available webcams"
 msgstr "Selecione as webcams disponíveis"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select compensation sensors"
-msgstr "Selecionar sensores"
+msgstr "Selecione sensores de compensação"
 
 #: Missing text string
 msgid "Select hardware"
