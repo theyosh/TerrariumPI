@@ -37,7 +37,7 @@ class terrariumEnclosure(object):
     return f'Enclosure {self.name} with {len(self.areas)} areas'
 
   def __door_status(self):
-    # By default, when zero doors are configured, we have to asume the doors are CLOSED
+    # By default, when zero doors are configured, we have to assume the doors are CLOSED
     for door in self.doors:
       if self.engine.buttons[door].is_open:
         return False

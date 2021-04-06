@@ -16,7 +16,8 @@
     <div class="form-group">
       <label for="area_enclosure">{{ _('Enclosure') }}</label>
       <div class="select2-primary">
-        <select class="select2" id="area_enclosure" name="enclosure" required="required" data-placeholder="{{ _('Select an enclosure') }}" style="width: 100%;"> </select>
+        <select class="select2" id="area_enclosure" name="enclosure" required="required" data-placeholder="{{ _('Select an enclosure') }}" style="width: 100%;">
+        </select>
       </div>
       <small class="text-muted">
         {{ _('Select the enclosure where this area belongs to.') }}
@@ -29,7 +30,8 @@
     <div class="form-group">
       <label for="area_type">{{ _('Type') }}</label>
       <div class="select2-primary">
-        <select class="select2" id="area_type" name="type" required="required" data-placeholder="{{ _('Select an area type') }}" style="width: 100%;"> </select>
+        <select class="select2" id="area_type" name="type" required="required" data-placeholder="{{ _('Select an area type') }}" style="width: 100%;">
+        </select>
       </div>
       <small class="text-muted">
         {{ _('Select the type of area. Each type has its own extra options and logic.') }}
@@ -47,7 +49,7 @@
         {{ _('Enter a name for this area.') }}
       </small>
       <div class="invalid-feedback">
-        {{ _('Give at least a name of minimal 1 character.') }}
+        {{ _('Please enter a name of at least 1 character.') }}
       </div>
     </div>
   </div>

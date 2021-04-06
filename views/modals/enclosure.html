@@ -15,7 +15,13 @@
   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
     <div class="form-group">
       <label for="enclosure_name">{{ _('Name') }}</label>
-      <input type="text" class="form-control" id="enclosure_name" name="name" required="required" placeholder="{{ _('Enter name') }}">
+      <input type="text" class="form-control" id="enclosure_name" name="name" required="required" placeholder="{{ _('Enter a name') }}">
+      <small class="text-muted">
+        {{ _('Enter a name for this enclosure.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please enter a name of at least 1 character.') }}
+      </div>
     </div>
   </div>
   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
@@ -24,33 +30,51 @@
       <div class="custom-file">
         <input type="hidden" name="image" id="image" value="">
         <input type="file" id="image_upload">
-        <label class="custom-file-label" for="image_upload">{{ _('Choose file') }}</label>
+        <label class="custom-file-label" for="image_upload">{{ _('Choose a file') }}</label>
+      </div>
+      <small class="text-muted">
+        {{ _('Select an image file to use on the dashboard page.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please select a filename with the extension of .jpg, .png, .gif.') }}
       </div>
     </div>
   </div>
 </div>
 <div class="row">
-  <div class="col-12 col-sm-12 col-md-10 col-lg-10">
+  <div class="col-12 col-sm-12 col-md-10 col-lg-9">
     <div class="form-group">
       <label for="enclosure_description">{{ _('Description') }}</label>
-      <textarea class="form-control" id="enclosure_description" name="description" placeholder="{{ _('Enter some information about this enclosure') }}"></textarea>
+      <textarea class="form-control" id="enclosure_description" name="description" placeholder="{{ _('Enter a description') }}">
+      </textarea>
+      <small class="text-muted">
+        {{ _('Enter some information about this enclosure.') }}
+      </small>
     </div>
   </div>
-  <div class="col-12 col-sm-2 col-md-2 col-lg-2">
+  <div class="col-12 col-sm-2 col-md-2 col-lg-3">
     <div class="row">
       <div class="form-group col">
         <label for="enclosure_doors">{{ _('Doors') }}</label>
         <div class="select2-primary">
-          <select class="select2" id="enclosure_doors" name="doors" size="5" multiple="multiple" data-placeholder="{{ _('Select available doors') }}" style="width: 100%; height: 100%"> </select>
+          <select class="select2" id="enclosure_doors" name="doors" size="5" multiple="multiple" data-placeholder="{{ _('Select available doors') }}" style="width: 100%; height: 100%">
+          </select>
         </div>
+        <small class="text-muted">
+          {{ _('Select the doors that are used with this enclosure.') }}
+        </small>
       </div>
     </div>
     <div class="row">
       <div class="form-group col">
         <label for="enclosure_doors">{{ _('Webcams') }}</label>
         <div class="select2-primary">
-          <select class="select2" id="enclosure_webcams" name="webcams" size="5" multiple="multiple" data-placeholder="{{ _('Select available webcams') }}" style="width: 100%; height: 100%"> </select>
+          <select class="select2" id="enclosure_webcams" name="webcams" size="5" multiple="multiple" data-placeholder="{{ _('Select available webcams') }}" style="width: 100%; height: 100%">
+          </select>
         </div>
+        <small class="text-muted">
+          {{ _('Select the webcams that are used with this enclosure. You can use html colors and fonts and images.') }}
+        </small>
       </div>
     </div>
   </div>

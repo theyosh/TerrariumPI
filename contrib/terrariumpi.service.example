@@ -10,6 +10,8 @@ ExecStart=/usr/bin/python3 /home/pi/TerrariumPI/terrariumPI.py
 Restart=always
 RestartSec=5
 KillSignal=SIGINT
+WatchdogSec=120
+Type=notify
 
 [Install]
 WantedBy=multi-user.target

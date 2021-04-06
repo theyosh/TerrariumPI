@@ -14,6 +14,7 @@ import json
 import pyfiglet
 import copy
 import statistics
+import sdnotify
 
 import gettext
 # Loading translations
@@ -50,32 +51,36 @@ class terrariumEngine(object):
   def __init__(self, version):
     starttime = time.time()
     # Default system units
-    self.units = {N_('temperature') : 'C',
-                  N_('distance')    : 'cm',
-                  N_('altitude')    : 'cm',
-                  N_('pressure')    : 'hPa',
-                  N_('humidity')    : '%',
-                  N_('moisture')    : '%',
-                  N_('conductivity'): 'mS',
-                  N_('ph')          : 'pH',
-                  N_('light')       : 'lux',
-                  N_('uva')         : 'µW/cm²',
-                  N_('uvb')         : 'µW/cm²',
-                  N_('uvi')         : '',
-                  N_('fertility')   : 'µS/cm',
-                  N_('co2')         : 'ppm',
-                  N_('volume')      : 'L',
-                  N_('watertank')   : 'L',
-                  N_('windspeed')   : 'kmh',
-                  N_('water_flow')  : 'L/m',
-                  N_('wattage')     : 'W',
-                 }
+    self.units = {
+      N_('temperature') : 'C',
+      N_('distance')    : 'cm',
+      N_('altitude')    : 'cm',
+      N_('pressure')    : 'hPa',
+      N_('humidity')    : '%',
+      N_('moisture')    : '%',
+      N_('conductivity'): 'mS',
+      N_('ph')          : 'pH',
+      N_('light')       : 'lux',
+      N_('uva')         : 'µW/cm²',
+      N_('uvb')         : 'µW/cm²',
+      N_('uvi')         : '',
+      N_('fertility')   : 'µS/cm',
+      N_('co2')         : 'ppm',
+      N_('volume')      : 'L',
+      N_('watertank')   : 'L',
+      N_('windspeed')   : 'kmh',
+      N_('water_flow')  : 'L/m',
+      N_('wattage')     : 'W',
+    }
 
     self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None, 'too_late': 0}
 
     self.version = version
     self.latest_version = None
     init_db(self.version)
+
+    n = sdnotify.SystemdNotifier()
+    n.notify('READY=1')
 
     self.running = True
 
@@ -142,8 +147,6 @@ class terrariumEngine(object):
     logger.info(f'Loaded {len(self.enclosures)} enclosures in {time.time()-start:.2f} seconds.')
 
     self.environment = None
-
-
 
     logger.info(f'TerrariumPI is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-starttime:.2f} seconds.')
     # Return console logging back to 'normal'
@@ -371,17 +374,11 @@ class terrariumEngine(object):
       update_ok = True
 
     elif issubclass(item, terrariumEnclosure):
-#      print('Update enclosure with data')
-#      print(data)
-
       #self.enclosures[data['id']].setup = data['setup']
 
       update_ok = True
 
     elif issubclass(item, terrariumArea):
-#      print('Update AREA with data')
-#      print(data)
-
       self.enclosures[data['enclosure']].areas[data['id']].name = data['name']
       self.enclosures[data['enclosure']].areas[data['id']].mode = data['mode']
       self.enclosures[data['enclosure']].areas[data['id']].load_setup(data['setup'])
@@ -947,6 +944,8 @@ class terrariumEngine(object):
     prev_delay = 0
 
     while not self.__engine['exit'].is_set():
+      n = sdnotify.SystemdNotifier()
+      n.notify('WATCHDOG=1')
       print(f'[{datetime.datetime.now()}] Start updating ....')
 
       logger.info(f'Starting a new update round with {len(self.sensors)} sensors, {len(self.relays)} relays, {len(self.buttons)} buttons and {len(self.webcams)} webcams.')

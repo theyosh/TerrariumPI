@@ -91,7 +91,6 @@ class Audiofile(db.Entity):
     filename = Path(self.filename)
     if filename.exists():
       filename.unlink()
-      print(f'Deleted file {filename}')
 
   def __repr__(self):
     return f'Audio file {self.name}'

@@ -47,8 +47,8 @@
                 </div>
                 <div class="custom-file">
                   <form id="audio_upload" method="post" action="{{ url_for('api:audiofile_add') }}" enctype="multipart/form-data" >
-                    <input type="file" name="audiofiles" multiple="true" class="custom-file-input" id="upload_new_file" aria-describedby="upload_new_file_label" {% if not authenticated %}disabled="disabled"{% endif %}>
-                    <label class="custom-file-label" for="upload_new_file">{{ _('Choose file') }}</label>
+                    <input type="file" name="audiofiles" accept=".aac,.mp3,.ogg,.wav,.m4a,.flac" multiple="true" class="custom-file-input" id="upload_new_file" aria-describedby="upload_new_file_label" {% if not authenticated %}disabled="disabled"{% endif %}>
+                    <label class="custom-file-label" for="upload_new_file">{{ _('Choose a file') }}</label>
                   </form>
                 </div>
               </div>
@@ -123,11 +123,26 @@
     });
 
     {% if authenticated %}
+    function isAudioFile(file) {
+      const ext = ['.aac', '.mp3', '.ogg', '.wav', '.m4a', '.flac'];
+      return ext.some(el => file.endsWith(el));
+    }
+
     jQuery('form#audio_upload input').on('change',function(event){
       let formData = new FormData();
+
       jQuery.each(this.files,function(index,file){
-        formData.append('audiofiles', file);
+        if (isAudioFile(file.name)) {
+          formData.append('audiofiles', file);
+        } else {
+          toastr.warning('{{ _('Audio file {file} is not valid.') }}'.replace('{file}',file.name), '{{ _('Warning') }}');
+        }
       });
+
+      if (Array.from(formData.entries()).length == 0) {
+        toastr.error('{{ _('Uploaded files are not valid.') }}', '{{ _('Error') }}');
+        return;
+      }
 
       jQuery('.upload_progress').toggle().find('div.progress-bar').css('width', '0%');
       jQuery.ajax({

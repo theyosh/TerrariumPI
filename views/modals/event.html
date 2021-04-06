@@ -9,41 +9,58 @@
 {% set modal_reload_url = url_for('page', page='calendar') %}
 {% block modal_title %}<i class="fas fa-calendar-alt mr-2" ></i>{{ _('Event') }}{% endblock %}
 {% block modal_body %}<input type="hidden" name="uid" id="uid" value="" disabled="disabled">
-<div class="modal-body">
-  <div class="form-group row">
-    <div class="col-12 col-sm-9 col-md-9 col-lg-9">
-      <div class="form-group">
-        <label for="title">{{ _('Title') }}</label>
-        <input type="text" class="form-control" id="summary" name="summary" placeholder="{{ _('Event title') }}">
-      </div>
-      <div class="form-group">
-        <label for="description">{{ _('Event') }}</label>
-        <textarea class="form-control" id="description" name="description" placeholder="{{ _('Enter some information about this event') }}"></textarea>
+<div class="row">
+  <div class="col-12 col-sm-9 col-md-9 col-lg-9">
+    <div class="form-group">
+      <label for="title">{{ _('Name') }}</label>
+      <input type="text" class="form-control" id="summary" name="summary" placeholder="{{ _('Enter a name') }}" required="required">
+      <small class="text-muted">
+        {{ _('Enter a name for this event.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please enter a name of at least 1 character.') }}
       </div>
     </div>
-    <div class="col-12 col-sm-3 col-md-3 col-lg-3">
-      <div class="form-group">
-        <label for="title">{{ _('Date') }}</label>
-        <p class="p-2 event_date"></p>
-        <input type="hidden" class="form-control" id="dtstart" name="dtstart">
-        <input type="hidden" class="form-control" id="dtend" name="dtend">
-      </div>
-      <div class="form-group">
-        <label for="interval" class="repeat">{{ _('Repeat every') }}</label>
-        <label for="interval" class="remind">{{ _('Remind in') }}</label>
-        <div class="select2-primary">
-          <select class="select2 " id="freq" name="freq" data-placeholder="{{ _('Select period') }}" style="width: 100%;">
-            <option value="_">{{ _('No repeat') }}</option>
-            <option value="daily">{{ _('Days') }}</option>
-            <option value="weekly">{{ _('Weeks') }}</option>
-            <option value="monthly">{{ _('Months') }}</option>
-            <option value="yearly">{{ _('Years') }}</option>
-          </select>
-        </div>
-        <input type="number" class="form-control mt-2" id="interval" name="interval" placeholder="{{ _('Select amount') }}">
-      </div>
-      <input type="hidden" id="repeatend" name="repeatend" value="2" disabled="disabled">
+    <div class="form-group">
+      <label for="description">{{ _('Event') }}</label>
+      <textarea class="form-control" id="description" name="description" placeholder="{{ _('Enter a description') }}">
+      </textarea>
+      <small class="text-muted">
+        {{ _('Enter some information about this event.') }}
+      </small>
     </div>
+  </div>
+  <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+    <div class="form-group">
+      <label for="title">{{ _('Date') }}</label>
+      <p class="p-1 pt-2 mb-0 event_date"></p>
+      <small class="text-muted">
+        {{ _('The date or period for this event.') }}
+      </small>
+      <input type="hidden" class="form-control" id="dtstart" name="dtstart">
+      <input type="hidden" class="form-control" id="dtend" name="dtend">
+    </div>
+    <div class="form-group">
+      <label for="interval" class="repeat">{{ _('Repeat every') }}</label>
+      <label for="interval" class="remind">{{ _('Remind in') }}</label>
+      <div class="select2-primary">
+        <select class="select2 " id="freq" name="freq" data-placeholder="{{ _('Select period') }}" style="width: 100%;">
+          <option value="_">{{ _('No repeat') }}</option>
+          <option value="daily">{{ _('Days') }}</option>
+          <option value="weekly">{{ _('Weeks') }}</option>
+          <option value="monthly">{{ _('Months') }}</option>
+          <option value="yearly">{{ _('Years') }}</option>
+        </select>
+      </div>
+      <input type="number" class="form-control mt-2" id="interval" name="interval" placeholder="{{ _('Select amount') }}" required="required">
+      <small class="text-muted">
+        {{ _('Select a repeat period and an amount.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please enter a valid repeat period amount.') }}
+      </div>
+    </div>
+    <input type="hidden" id="repeatend" name="repeatend" value="2" disabled="disabled">
   </div>
 </div>
 {% endblock %}

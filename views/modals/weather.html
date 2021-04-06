@@ -11,12 +11,17 @@
 {% block modal_title %}<i class="fas fa-cloud-sun mr-2" ></i>{{ _('Weather settings') }}{% endblock %}
 {% block modal_body %}
 <input type="hidden" name="id" id="setting_name" value="weather_source">
-<p>{{ _('Enter the online source url for your weather information. Valid urls are shown below.') }}</p>
-<p id="weather_setup_info"></p>
+<p>{{ _('In order to use the weather system, you need to create a free account at %s.' ) % ('<a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a>',) }}</p>
 <div class="form-group row">
   <label for="weahter_source_url" class="col-sm-2 col-form-label">{{ _('Source url') }}</label>
   <div class="col-sm-10">
     <input type="url" class="form-control" id="weahter_source_url" name="value" placeholder="{{ _('Weather data source url') }}">
+    <small class="text-muted">
+      {{ _('Enter the full OpenWeatherMap api url like: %s') % ('<a href="https://openweathermap.org/current" target="_blank">https://api.openweathermap.org/data/2.5/weather?q=[City],[Country]&appid=[API_KEY]</a>',) }}
+    </small>
+    <div class="invalid-feedback">
+      {{ _('The entered url is not valid.') }}
+    </div>
   </div>
 </div>
 {% endblock %}

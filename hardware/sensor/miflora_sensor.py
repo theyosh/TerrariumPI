@@ -25,9 +25,6 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
     with Peripheral(address[0], iface=address[1], timeout=terrariumMiFloraSensor.__MIFLORA_TIMEOUT) as device:
       data   = device.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY)
       data = {'battery': data[0], 'firmware' : data[2:].decode('utf8')}
-      print('(re)loaded device')
-      print(self.name)
-      print(device)
       # Return the device
       return device
 
@@ -58,7 +55,7 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
 
     except BTLEDisconnectError as ex:
       # Lost connection.... retry getting a 'new' device. The data will be red the next round
-      logger.debug(f'Lost connection with  sensor {self}. Reconnecting... (BTLEDisconnectError)')
+      logger.debug(f'Lost connection with sensor {self}. Reconnecting... (BTLEDisconnectError)')
       self.load_hardware(True)
 
     except BrokenPipeError as ex:
@@ -66,8 +63,7 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
       logger.debug(f'Lost connection with sensor {self}. Reconnecting... (BrokenPipeError)')
       self.load_hardware(True)
 
-    print('Could not load MiFlora data:')
-    print(data)
+    logger.warning(f'Reconnecting sensor {self} hardware. (No data)')
     self.load_hardware(True)
 
     return None

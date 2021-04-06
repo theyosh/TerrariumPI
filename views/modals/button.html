@@ -19,24 +19,45 @@
         <select class="select2" id="button_hardware" name="hardware" required="required" data-placeholder="{{ _('Select hardware') }}" style="width: 100%">
         </select>
       </div>
+      <small class="text-muted">
+        {{ _('Select the hardware type for this button.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please select a hardware type.') }}
+      </div>
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="button_address">{{ _('Address') }}</label>
-      <input type="text" class="form-control" id="button_address" name="address" required="required" placeholder="{{ _('Enter address') }}">
+      <input type="text" class="form-control" id="button_address" name="address" required="required" placeholder="{{ _('Enter an address') }}">
+      <small class="text-muted">
+        {{ _('Enter a valid physical GPIO port number.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please enter a valid physical GPIO port number between %s and %s.') % ('1','40') }}
+      </div>
     </div>
   </div>
   <div class="col-10 col-sm-10 col-md-8 col-lg-3">
     <div class="form-group">
       <label for="button_name">{{ _('Name') }}</label>
-      <input type="text" class="form-control" id="button_name" name="name" required="required" placeholder="{{ _('Enter name') }}">
+      <input type="text" class="form-control" id="button_name" name="name" required="required" placeholder="{{ _('Enter a name') }}">
+      <small class="text-muted">
+        {{ _('Enter a name for this button.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please enter a name of at least 1 character.') }}
+      </div>
     </div>
   </div>
   <div class="col-2 col-sm-2 col-md-4 col-lg-2">
     <div class="form-group">
       <label for="button_current">{{ _('Current') }}</label>
       <input type="text" readonly="readonly" class="form-control" id="button_current" name="value" placeholder="{{ _('Current value') }}">
+      <small class="text-muted">
+        {{ _('The current state of the button.') }}
+      </small>
     </div>
   </div>
 </div>
@@ -44,12 +65,15 @@
   <a data-toggle="collapse" href="#button_callibration" role="button" aria-expanded="false" aria-controls="button_callibration"><hr class="hr-text" data-content="{{ _('calibration') }}"></a>
   <div class="col">
     <div class="collapse row pt-3" id="button_callibration">
-      <div class="col-6 col-sm-6 col-md-6 col-lg-2">
+      <div class="col-6 col-sm-6 col-md-6 col-lg-3">
         <div class="form-group">
           <label for="ldr_capacitor">{{ _('Capacitor value in &micro;F') }}</label>
-          <input type="number" step="1" min="1" max="100" class="form-control" id="ldr_capacitor" name="ldr_capacitor" placeholder="{{ _('Capacitor value in &micro;F') }}" value="1" disabled=""disabled>
+          <input type="number" step="1" min="1" max="100" class="form-control" id="ldr_capacitor" name="ldr_capacitor" placeholder="{{ _('Enter the capacitor value in &micro;F') }}" value="1" disabled=""disabled>
+          <small class="text-muted">
+            {{ _('Enter the capacitor value in &micro;F as this will influence the light calculation.') }}
+          </small>
           <div class="invalid-feedback">
-            {{ _('Please enter a number value between 1 and 100') }}
+            {{ _('Please enter value between %s and %s.') % ('1','100') }}
           </div>
         </div>
       </div>

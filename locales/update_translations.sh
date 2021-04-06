@@ -5,12 +5,25 @@ FILES="views/*.html views/api/*.html views/includes/*.html views/layouts/*.html 
 cd ..
 pygettext -k N_ -v -a -n -o locales/terrariumpi.pot ${FILES}
 
-for translation in `grep -r -h -o -e "_('[^)]\+')" ${FILES} | sort | uniq | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" `; do
+for translation in `grep -r -h -o -e "N\?_('[^)]\+')" ${FILES} | sort | uniq | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" `; do
   translation=${translation:3:-2}
   translation=${translation//\%20/ }
+  if [ ${translation:0:1} = "'" ]; then
+    translation=${translation:1}
+  fi
+
   if [ `grep -c -F "\"${translation}\"" locales/terrariumpi.pot` -eq 0 ]; then
-    echo "Adding missing ${translation}"
-    echo "#: Missing text string" >> locales/terrariumpi.pot
+    echo "Adding missing text '${translation}'"
+
+    locations="#: "
+    IFS=$'\n'
+    for filename in `grep -r -n -o "_('${translation}')" views/*.html views/api/*.html views/includes/*.html views/layouts/*.html views/modals/*.html *.py | sort` ; do
+      filename=${filename/:_(\'${translation}\')/}
+      locations="${locations} ${filename}"
+    done
+    IFS=' '
+
+    echo ${locations} >> locales/terrariumpi.pot
     echo "msgid \"${translation}\"" >> locales/terrariumpi.pot
     echo "msgstr \"\"" >> locales/terrariumpi.pot
     echo "" >> locales/terrariumpi.pot

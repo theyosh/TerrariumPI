@@ -18,7 +18,7 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
     return True
 
   def _get_hardware_value(self):
-    return round(self.device.value * 100.0) - float(self._dimmer_offset)
+    return max(0,min(1,round(self.device.value * 100.0) - float(self._dimmer_offset)))
 
   def stop(self):
     self.device.close()
