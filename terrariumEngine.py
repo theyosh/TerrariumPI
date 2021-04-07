@@ -73,14 +73,14 @@ class terrariumEngine(object):
       N_('wattage')     : 'W',
     }
 
-    self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None, 'too_late': 0}
+    self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None, 'too_late': 0, 'systemd' : sdnotify.SystemdNotifier()}
 
     self.version = version
     self.latest_version = None
     init_db(self.version)
 
-    n = sdnotify.SystemdNotifier()
-    n.notify('READY=1')
+    # Send message that startup is ready..... else the startup will wait until done.... can take more then 1 minute
+    self.__engine['systemd'].notify('READY=1')
 
     self.running = True
 
@@ -944,8 +944,7 @@ class terrariumEngine(object):
     prev_delay = 0
 
     while not self.__engine['exit'].is_set():
-      n = sdnotify.SystemdNotifier()
-      n.notify('WATCHDOG=1')
+      self.__engine['systemd'].notify('WATCHDOG=1')
       print(f'[{datetime.datetime.now()}] Start updating ....')
 
       logger.info(f'Starting a new update round with {len(self.sensors)} sensors, {len(self.relays)} relays, {len(self.buttons)} buttons and {len(self.webcams)} webcams.')
@@ -1254,31 +1253,12 @@ class terrariumEngine(object):
     logger.info(f'Stopping TerrariumPI {self.version} ...')
 
     self.running = False
-
-    # Stop engine processing first....
-    # print('Trigger exit event')
-    # print(self.__engine['exit'])
-    # print(dir(self.__engine['exit']))
-
     self.__engine['exit'].set()
-    # print('Exit event done')
 
-    # # Wait till the engine is done, when it was updating the sensors
-    # print('Stop logtail process')
+    # Wait till the engine is done, when it was updating the sensors
     self.__logtail_process.terminate()
-    # print('Logtail process is done')
-
-    # print('Wait on the engine to stop...')
-    # print(self.__engine['thread'])
-    # print(f' Thread alive: {self.__engine["thread"].is_alive()}')
-    # print(f' Thread daemon: {self.__engine["thread"].isDaemon()}')
-    # print(dir(self.__engine['thread']))
-
     self.__engine['thread'].join()
-#    print('Engine stopped...')
-#    print('Wait on logtail to stop....')
     self.__engine['logtail'].join()
-#    print('Logtail thread is stopped')
 
     for enclosure in self.enclosures:
       self.enclosures[enclosure].stop()
@@ -1301,7 +1281,6 @@ class terrariumEngine(object):
       logger.info(f'Stopped {self.webcams[webcam]}')
 
     self.notification.stop()
-#    print('Totally stopped TerrariumPI')
 
   def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
     # Two events:
