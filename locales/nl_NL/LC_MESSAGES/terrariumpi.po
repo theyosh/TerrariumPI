@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-04-07 10:58+CEST\n"
-"PO-Revision-Date: 2021-04-05 10:33+0000\n"
+"PO-Revision-Date: 2021-04-07 10:57+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -254,10 +254,8 @@ msgstr "Upload een nieuw audiobestand"
 
 #: views/audio_files.html:51 views/modals/enclosure.html:33
 #: views/settings.html:200
-#, fuzzy
-#| msgid "Choose file"
 msgid "Choose a file"
-msgstr "Kies bestand"
+msgstr "Kies een bestand"
 
 #: views/buttons.html:2 views/includes/sidebar.html:140
 msgid "Buttons"
@@ -648,10 +646,8 @@ msgstr "Voer een naam in voor dit gebied."
 #: views/modals/area.html:52 views/modals/button.html:50
 #: views/modals/enclosure.html:23 views/modals/event.html:21
 #: views/modals/playlist.html:23 views/modals/relay.html:50
-#, fuzzy
-#| msgid "Give at least a name of minimal 1 character."
 msgid "Please enter a name of at least 1 character."
-msgstr "Geef minimaal een naam van minimaal 1 karakter."
+msgstr "Voer een naam in van minimaal 1 teken."
 
 #: views/modals/area.html:62 views/modals/area.html:280
 #: views/modals/area.html:421 views/modals/webcam.html:89
@@ -937,16 +933,12 @@ msgid "Button settings"
 msgstr "Knop instellingen"
 
 #: views/modals/button.html:23
-#, fuzzy
-#| msgid "Select the sound card that is used for this enclosure."
 msgid "Select the hardware type for this button."
-msgstr "Selecteer de geluidskaart die voor dit verblijf wordt gebruikt."
+msgstr "Selecteer het hardwaretype voor deze knop."
 
 #: views/modals/button.html:26 views/modals/relay.html:26
-#, fuzzy
-#| msgid "Select an area type"
 msgid "Please select a hardware type."
-msgstr "Selecteer gebiedstype"
+msgstr "Selecteer een hardwaretype."
 
 #: views/modals/button.html:32 views/modals/relay.html:32
 #: views/modals/sensor.html:35 views/modals/service.html:68
@@ -956,23 +948,19 @@ msgstr "Adres"
 
 #: views/modals/button.html:35
 msgid "Enter a valid physical GPIO port number."
-msgstr ""
+msgstr "Voer een geldig fysiek GPIO-poortnummer in."
 
 #: views/modals/button.html:38
-#, fuzzy
-#| msgid "Please enter a number value between 1 and 100"
 msgid "Please enter a valid physical GPIO port number between %s and %s."
-msgstr "Voer een getal in tussen 0 en 100"
+msgstr "Voer een geldig fysiek GPIO-poortnummer in tussen% s en% s."
 
 #: views/modals/button.html:47 views/modals/relay.html:47
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a name for this button."
-msgstr "Voer een naam in voor dit gebied."
+msgstr "Voer een naam in voor deze knop."
 
 #: views/modals/button.html:59
 msgid "The current state of the button."
-msgstr ""
+msgstr "De huidige status van de knop."
 
 #: views/modals/button.html:70
 msgid "Capacitor value in &micro;F"
@@ -983,23 +971,21 @@ msgid ""
 "Enter the capacitor value in &micro;F as this will influence the light "
 "calculation."
 msgstr ""
+"Voer de condensatorwaarde in µF in, aangezien dit de lichtberekening zal "
+"beïnvloeden."
 
 #: views/modals/button.html:76 views/modals/relay.html:112
 #: views/modals/relay.html:124 views/modals/relay.html:136
-#, fuzzy
-#| msgid "Please enter a number value between 1 and 100"
 msgid "Please enter value between %s and %s."
-msgstr "Voer een getal in tussen 0 en 100"
+msgstr "Voer een waarde in tussen %s en %s."
 
 #: views/modals/enclosure.html:11
 msgid "Enclosure settings"
 msgstr "Verblijf instellingen"
 
 #: views/modals/enclosure.html:20
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a name for this enclosure."
-msgstr "Voer een naam in voor dit gebied."
+msgstr "Voer een naam in voor dit verblijf."
 
 #: views/modals/enclosure.html:29
 msgid "Image"
@@ -1007,31 +993,27 @@ msgstr "Afbeelding"
 
 #: views/modals/enclosure.html:36
 msgid "Select an image file to use on the dashboard page."
-msgstr ""
+msgstr "Selecteer een afbeelding om op de dashboardpagina te gebruiken."
 
 #: views/modals/enclosure.html:39
 msgid "Please select a filename with the extension of .jpg, .png, .gif."
-msgstr ""
+msgstr "Selecteer een bestandsnaam met de extensie .jpg, .png, .gif."
 
 #: views/modals/enclosure.html:47
 msgid "Description"
 msgstr "Beschrijving"
 
 #: views/modals/enclosure.html:51
-#, fuzzy
-#| msgid "Enter some information about this enclosure"
 msgid "Enter some information about this enclosure."
-msgstr "Voer wat informatie over dit verblijf in"
+msgstr "Voer wat informatie over dit verblijf in."
 
 #: views/modals/enclosure.html:58
 msgid "Doors"
 msgstr "Deuren"
 
 #: views/modals/enclosure.html:64
-#, fuzzy
-#| msgid "Select the sound card that is used for this enclosure."
 msgid "Select the doors that are used with this enclosure."
-msgstr "Selecteer de geluidskaart die voor dit verblijf wordt gebruikt."
+msgstr "Selecteer de deuren die bij dit verblijf worden gebruikt."
 
 #: views/modals/enclosure.html:76
 msgid ""
@@ -1044,16 +1026,12 @@ msgid "Event"
 msgstr "Evenement"
 
 #: views/modals/event.html:18
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a name for this event."
-msgstr "Voer een naam in voor dit gebied."
+msgstr "Voer een naam in voor deze afspraak."
 
 #: views/modals/event.html:29
-#, fuzzy
-#| msgid "Enter some information about this event"
 msgid "Enter some information about this event."
-msgstr "Voer wat informatie over dit evenement in"
+msgstr "Voer wat informatie over dit evenement in."
 
 #: views/modals/event.html:35
 msgid "Date"
@@ -1061,7 +1039,7 @@ msgstr "Datum"
 
 #: views/modals/event.html:38
 msgid "The date or period for this event."
-msgstr ""
+msgstr "De datum of periode voor dit evenement."
 
 #: views/modals/event.html:44
 msgid "Repeat every"
@@ -1093,13 +1071,11 @@ msgstr "Jaren"
 
 #: views/modals/event.html:57
 msgid "Select a repeat period and an amount."
-msgstr ""
+msgstr "Selecteer een herhalingsperiode en een aantal."
 
 #: views/modals/event.html:60
-#, fuzzy
-#| msgid "Please enter a valid host name or IP"
 msgid "Please enter a valid repeat period amount."
-msgstr "Voer een geldige host naam of IP in"
+msgstr "Voer een geldige herhaal hoeveelheid in."
 
 #: views/modals/message.html:11
 msgid "Message settings"
@@ -1138,16 +1114,12 @@ msgid "Playlist settings"
 msgstr "Afspeellijst instellingen"
 
 #: views/modals/playlist.html:20
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a name for this playlist."
-msgstr "Voer een naam in voor dit gebied."
+msgstr "Voer een naam in voor deze afspeellijst."
 
 #: views/modals/playlist.html:32
-#, fuzzy
-#| msgid "Holds the volume for this playlist."
 msgid "Select the volume for this playlist."
-msgstr "Bevat de volume van dit afspeellijst."
+msgstr "Selecteer het volume voor deze afspeellijst."
 
 #: views/modals/playlist.html:39 views/playlists.html:28
 #: views/playlists.html:43
@@ -1156,7 +1128,7 @@ msgstr "Random"
 
 #: views/modals/playlist.html:44
 msgid "Shuffle this playlist every time it is played."
-msgstr ""
+msgstr "Schud deze afspeellijst elke keer dat deze wordt afgespeeld."
 
 #: views/modals/playlist.html:51 views/playlists.html:29
 #: views/playlists.html:44
@@ -1164,70 +1136,52 @@ msgid "Repeat"
 msgstr "Herhaal"
 
 #: views/modals/playlist.html:56
-#, fuzzy
-#| msgid "Holds the audio playlist name."
 msgid "Play this playlist in repeat mode."
-msgstr "Bevat de naam van de audio afspeellijst."
+msgstr "Speel deze afspeellijst in herhaalmodus."
 
 #: views/modals/playlist.html:66
-#, fuzzy
-#| msgid "Holds the volume for this playlist."
 msgid "Select all audio files for this playlist."
-msgstr "Bevat de volume van dit afspeellijst."
+msgstr "Selecteer alle audiobestanden voor deze afspeellijst."
 
 #: views/modals/playlist.html:69
-#, fuzzy
-#| msgid "Select audio files"
 msgid "Select at least 1 audio file."
-msgstr "Selecteer audio-bestanden"
+msgstr "Selecteer minimaal 1 audiobestand."
 
 #: views/modals/relay.html:11
 msgid "Relay settings"
 msgstr "Schakelaar instellingen"
 
 #: views/modals/relay.html:23
-#, fuzzy
-#| msgid "Select the sound card that is used for this enclosure."
 msgid "Select the hardware type for this relay."
-msgstr "Selecteer de geluidskaart die voor dit verblijf wordt gebruikt."
+msgstr "Selecteer het hardwaretype voor deze schakelaar."
 
 #: views/modals/relay.html:35
-#, fuzzy
-#| msgid "Enter the address"
 msgid "Enter the relay address."
-msgstr "Vul het adres in"
+msgstr "Voer het adres van de schakelaar in."
 
 #: views/modals/relay.html:38
-#, fuzzy
-#| msgid "Please enter a number value between 1 and 100"
 msgid "Please enter a valid physical GPIO port number between 1 and 40."
-msgstr "Voer een getal in tussen 0 en 100"
+msgstr "Voer een geldig fysiek GPIO-poortnummer in tussen 1 en 40."
 
 #: views/modals/relay.html:56
 msgid "Wattage"
 msgstr "Wattage"
 
 #: views/modals/relay.html:59
-#, fuzzy
-#| msgid "Holds the switch power usage in Watt when switched on."
 msgid "Enter the max wattage when switched on."
-msgstr "Bevat het schakelvermogensverbruik in Watt wanneer ingeschakeld."
+msgstr "Voer het maximale wattage in wanneer ingeschakeld."
 
 #: views/modals/relay.html:62 views/modals/relay.html:74
-#, fuzzy
-#| msgid "Please enter a number value of 0.00 or higher"
 msgid "Please enter a minimal value of %s."
-msgstr "Voer een getalwaarde van 0,00 of hoger in"
+msgstr "Voer een minimale waarde in van %s."
 
 #: views/modals/relay.html:68
 msgid "Water flow"
 msgstr "Waterstroom"
 
 #: views/modals/relay.html:71
-#, fuzzy
-#| msgid "The power usage and/or water flow per minute when switched on"
 msgid "Enter the max water flow when switched on."
-msgstr "Het stroomverbruik en / of waterstroom per minuut bij inschakelen"
+msgstr "Voer het maximale water gebruik in wanneer ingeschakeld."
 
 #: views/modals/relay.html:81
 msgid "Manual m."
@@ -1236,12 +1190,12 @@ msgstr "Handmatige b."
 #: views/modals/relay.html:86
 msgid "When a relay is in manual mode, it will not change states."
 msgstr ""
+"Als een schakelaar zich in de handmatige modus bevindt, verandert het niet "
+"van status."
 
 #: views/modals/relay.html:95
-#, fuzzy
-#| msgid "Changed state of relay"
 msgid "The current state of the relay."
-msgstr "Veranderde status van schakelaar"
+msgstr "De huidige status van de schakelaar."
 
 #: views/modals/relay.html:106
 msgid "Dimmer frequency in Hz"
@@ -1249,7 +1203,7 @@ msgstr "Dimmerfrequentie in Hz"
 
 #: views/modals/relay.html:109
 msgid "The frequency on which the dimmer operates."
-msgstr ""
+msgstr "De frequentie waarop de dimmer werkt."
 
 #: views/modals/relay.html:118
 msgid "Max power in %"
@@ -1257,17 +1211,15 @@ msgstr "Maximaal vermogen in %"
 
 #: views/modals/relay.html:121
 msgid "The maximum power for this dimmer."
-msgstr ""
+msgstr "Het maximale vermogen voor deze dimmer."
 
 #: views/modals/relay.html:130
 msgid "Dimmer offset in %"
 msgstr "Dimmer-offset in%"
 
 #: views/modals/relay.html:133
-#, fuzzy
-#| msgid "Dimmer offset in %"
 msgid "The dimmer offset."
-msgstr "Dimmer-offset in%"
+msgstr "De dimmer-offset."
 
 #: views/modals/sensor.html:11
 msgid "Sensor settings"
@@ -1406,6 +1358,7 @@ msgstr "Weer instellingen"
 msgid ""
 "In order to use the weather system, you need to create a free account at %s."
 msgstr ""
+"Om het weer systeem te gebruiken, moet u een gratis account aanmaken op %s."
 
 #: views/modals/weather.html:16
 msgid "Source url"
@@ -1413,11 +1366,11 @@ msgstr "Bron url"
 
 #: views/modals/weather.html:20
 msgid "Enter the full OpenWeatherMap api url like: %s"
-msgstr ""
+msgstr "Voer de volledige OpenWeatherMap api-URL in, zoals: %s"
 
 #: views/modals/weather.html:23
 msgid "The entered url is not valid."
-msgstr ""
+msgstr "De ingevoerde url is niet geldig."
 
 #: views/modals/webcam.html:11
 msgid "Webcam settings"
@@ -1919,10 +1872,8 @@ msgid "Add new service"
 msgstr "Nieuwe dienst toevoegen"
 
 #: views/audio_files.html:138
-#, fuzzy
-#| msgid "Audio file is deleted"
 msgid "Audio file {file} is not valid."
-msgstr "Audio bestand is verwijderd"
+msgstr "Audiobestand {file} is niet geldig."
 
 #: views/audio_files.html:161
 msgid "Audio file is being processed. Please wait..."
@@ -2043,10 +1994,8 @@ msgid "Edit webcam"
 msgstr "Bewerk webcam"
 
 #: views/modals/enclosure.html:48 views/modals/event.html:26
-#, fuzzy
-#| msgid "Description"
 msgid "Enter a description"
-msgstr "Beschrijving"
+msgstr "Voer een beschrijving in"
 
 #: views/modals/message.html:64
 msgid "Enter a message"
@@ -2054,10 +2003,8 @@ msgstr "Voer een bericht in"
 
 #: views/modals/button.html:33 views/modals/relay.html:33
 #: views/modals/sensor.html:36 views/modals/webcam.html:30
-#, fuzzy
-#| msgid "Enter address"
 msgid "Enter an address"
-msgstr "Vul het adres in"
+msgstr "Vul een adres in"
 
 #: views/modals/button.html:45 views/modals/enclosure.html:18
 #: views/modals/event.html:16 views/modals/message.html:34
@@ -2120,10 +2067,8 @@ msgid "Enter the amount of hours to shift"
 msgstr "Voer het aantal te verschuiven uren in"
 
 #: views/modals/button.html:71
-#, fuzzy
-#| msgid "Capacitor value in &micro;F"
 msgid "Enter the capacitor value in &micro;F"
-msgstr "Condensatorwaarde in µF"
+msgstr "Voer de condensatorwaarde in µF in"
 
 #: views/modals/area.html:445
 msgid "Enter the height"
@@ -2417,7 +2362,7 @@ msgstr "Update ok"
 
 #: views/audio_files.html:143
 msgid "Uploaded files are not valid."
-msgstr ""
+msgstr "Geüploade bestanden zijn niet geldig."
 
 #: views/modals/enclosure.html:180 views/settings.html:322
 msgid "Upload error"
@@ -2428,10 +2373,8 @@ msgid "Upload ok"
 msgstr "Upload ok"
 
 #: views/audio_files.html:138
-#, fuzzy
-#| msgid "warning"
 msgid "Warning"
-msgstr "waarschuwing"
+msgstr "Waarschuwing"
 
 #: views/includes/footer.html:14
 msgid "Warning messages"
