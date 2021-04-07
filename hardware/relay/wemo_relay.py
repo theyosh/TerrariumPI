@@ -33,8 +33,8 @@ class terrariumRelayWeMo(terrariumRelay):
     return True
 
   def _get_hardware_value(self):
-    self.device.reconnect_with_device()
-    data = self.device.get_state()
+#    self.device.reconnect_with_device()
+    data = self.device.get_state(True)
     if data is None:
       return None
 
