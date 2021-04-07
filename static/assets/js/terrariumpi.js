@@ -1939,7 +1939,7 @@ function websocket_init(reconnect) {
               jQuery('#area_current_'   + area.id).text(formatNumber(area.state.sensors.current,0,2));
               jQuery('#area_alarm_min_' + area.id).text(formatNumber(area.state.sensors.alarm_min,0,2));
               jQuery('#area_alarm_max_' + area.id).text(formatNumber(area.state.sensors.alarm_max,0,2));
-              jQuery('#area_warning_'   + area.id).toggle(area.state.sensors.alarm);
+              jQuery('#area_warning_'   + area.id).toggleClass('d-none',!area.state.sensors.alarm);
             }
             jQuery.each(['day','night','low','high'],function(counter,type){
               if (area.state[type] !== undefined) {
