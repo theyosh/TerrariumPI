@@ -33,7 +33,6 @@ class terrariumRelaySonoff(terrariumRelay):
 
     return address
 
-  # TODO: Figure out if the retry wrapper still works...
   # This will update the device based in mac address
   def load_hardware(self):
     super().load_hardware()

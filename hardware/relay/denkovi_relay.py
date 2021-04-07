@@ -85,20 +85,10 @@ class terrariumRelayDenkoviV2(terrariumRelay):
     cache_key = self._relay_cache_key
     cmd = self.__CMD + [self._device['serial'], self.__get_board_type(), str(self._device['switch']), str(1 if state is self.ON else 0)]
 
-#    logger.debug('Running set hardware state command {}'.format(cmd))
-
-#    try:
     data = subprocess.check_output(cmd).strip().decode('utf-8').strip()
-    # Data should contain the current switch status for all swiches...
+    # Data should contain the current relay status for all relais...
     self.__cache.set_data(cache_key,data)
     return True
-
- #   except Exception as err:
-      # Ignore for now
- #     pass
-      #logger.error('Error setting hardware state for switch type {}, with error: {}'.format(self.get_type(),err))
-      #print(err)
-
 class terrariumRelayDenkoviV2_4(terrariumRelayDenkoviV2):
   HARDWARE = 'denkovi_v2_4'
   NAME = 'Denkovi Relay v2 (4 sockets)'

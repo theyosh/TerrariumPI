@@ -83,18 +83,9 @@ class terrariumRelayMeross(terrariumRelay):
       # If we have recent cached data and the new state is the cached current state, just return True....
       return True
 
-#    try:
     work = __set_hardware_state(state)
     data = work.result()
     return data == state
-  # except BadLoginException:
-    #   logger.error(f'Wrong login credentials for Meross. Please check your settings')
-    # except RuntimeError as err:
-    #   logger.exception(err)
-    # except Exception as ex:
-    #   logger.exception(ex)
-
-    # return False
 
   def _get_hardware_value(self):
     EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL'))

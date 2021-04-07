@@ -76,15 +76,9 @@ class terrariumMS100Sensor(terrariumSensor):
 
       return data
 
-#    try:
     work = __get_hardware_state()
     data = work.result()
     return data
-
-    # except RuntimeError as err:
-    #   pass
-
-#    return None
 
   @staticmethod
   def _scan_sensors(unit_value_callback = None, trigger_callback = None):

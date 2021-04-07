@@ -682,13 +682,6 @@ class terrariumAPI(object):
       enclosure.set(**request.json)
       orm.commit()
 
-      # print('Update enclosure data to the engine')
-      # # TODO: Will this work... not sure....
-      # self.webserver.engine.update(terrariumEnclosure,**request.json)
-
-   #   enclosure_data = enclosure.to_dict(with_collections=True)
-    #  enclosure_data['id']  = enclosure.id
- #     enclosure_data['value']  = enclosure.value
       return self.enclosure_detail(enclosure.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Enclosure with id {enclosure} does not exists.')
@@ -1157,12 +1150,6 @@ class terrariumAPI(object):
     data = []
     for sensor in Sensor.select(lambda s: not s.id in self.webserver.engine.settings['exclude_ids']):
       if filter is None or filter == sensor.type:
-        # # TODO: Fix this that this can be done in a single query
-        # sensor_data = sensor.to_dict()
-        # sensor_data['value']  = sensor.value
-        # sensor_data['alarm']  = sensor.alarm
-        # sensor_data['error']  = sensor.error
-
         data.append(self.sensor_detail(sensor.id))
 
     return { 'data' : data }
@@ -1200,12 +1187,6 @@ class terrariumAPI(object):
 
       self.webserver.websocket_message('sensortypes', self.webserver.engine.sensor_types_loaded)
       return self.sensor_detail(sensor.id)
-
-      # sensor_data = sensor.to_dict()
-      # sensor_data['value'] = sensor.value
-      # sensor_data['alarm'] = sensor.alarm
-      # sensor_data['error'] = sensor.error
-      # return sensor_data
     except Exception as ex:
       raise HTTPError(status=500, body=f'Sensor could not be added. {ex}')
 
@@ -1221,11 +1202,6 @@ class terrariumAPI(object):
         # We need some moisture calibration for a Chirp sensor
         # TODO: This is a bad hack.....
         self.webserver.engine.sensors[sensor.id].calibrate(request.json['calibration'])
-
-      # sensor_data = sensor.to_dict()
-      # sensor_data['value'] = sensor.value
-      # sensor_data['alarm'] = sensor.alarm
-      # sensor_data['error'] = sensor.error
 
       return self.sensor_detail(sensor.id)
     except orm.core.ObjectNotFound as ex:
@@ -1244,32 +1220,6 @@ class terrariumAPI(object):
       raise HTTPError(status=404, body=f'Sensor with id {sensor} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting sensor {sensor}. {ex}')
-
-
-  # Settings
-  # def setting_upload_profile_image(self):
-  #   __UPLOAD_PATH = 'media/'
-  #   data = []
-  #   try:
-  #     profile_image = request.files.get('file',None)
-  #     print(f'Profile image: {profile_image}')
-  #     if profile_image is not None:
-  #       # Rename
-  #       profile_image.filename = 'profile_image.jpg'
-  #       profile_image.save(__UPLOAD_PATH, overwrite=True)
-
-  #       img = Image.open(f'{__UPLOAD_PATH}{profile_image.filename}')
-  #       print(img)
-  #       print(dir(img))
-  #       img.save('logo.ico')
-  #       print(img)
-  #       print(dir(img))
-
-  #       return {'profile_image' : f'{__UPLOAD_PATH}{profile_image.filename}'}
-
-  #   except Exception as ex:
-  #     print(ex)
-  #     raise HTTPError(status=500, body=f'Error uploading profile image. {ex}')
 
   @orm.db_session
   def setting_list(self):
@@ -1473,8 +1423,6 @@ class terrariumAPI(object):
       webcam = Webcam(**request.json)
 
       # TODO: Fix updating or not. For now, disabled, as it can take up to 12 sec for RPICam
-      #new_value = new_webcam.update()
-
       return self.webcam_detail(webcam.id)
     except Exception as ex:
       raise HTTPError(status=500, body=f'Webcam could not be added. {ex}')

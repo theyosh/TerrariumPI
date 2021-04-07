@@ -206,9 +206,6 @@ class NotificationService(db.Entity):
   messages   = orm.Set(lambda: NotificationMessage)
 
   def __encrypt_sensitive_fields(self):
-    # encryption_salt = Setting['encryption_salt'].value.encode()
-    # encryption = Fernet(encryption_salt)
-
     # Encrypt sensitive fields
     for field in ['username','password','user_key','access_secret']:
       if field in self.setup:
@@ -222,14 +219,10 @@ class NotificationService(db.Entity):
 
   def to_dict(self,only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
     data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
-    # encryption_salt = Setting['encryption_salt'].value.encode()
-    # encryption = Fernet(encryption_salt)
     # Encrypt sensitive fields
     for field in ['username','password','user_key','access_secret']:
       if field in data['setup']:
         data['setup'][field] = terrariumUtils.decrypt(data['setup'][field])
-
-       # encryption.decrypt(data['setup'][field].encode()).decode()
 
     return data
 
@@ -370,9 +363,6 @@ class Sensor(db.Entity):
   alarm_min = orm.Optional(float, default = 0)
   alarm_max = orm.Optional(float, default = 100)
   max_diff  = orm.Optional(float, default = 0)
-
-
-  #offset    = orm.Optional(float, default = 0)
 
   exclude_avg = orm.Required(bool, default = False)
 

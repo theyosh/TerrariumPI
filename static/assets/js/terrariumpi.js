@@ -694,20 +694,14 @@ function movingAvg(array, count, qualifier){
 
   // calculate average for subarray
   var avg = function(array, qualifier){
-
-      //console.log(array);
-
       var sum = 0, count = 0, val = 0;
       for (var i in array){
           val = array[i];
-          //console.log(i,array[i],array);
           if (!qualifier || qualifier(val)){
               sum += val;
               count++;
           }
       }
-
-      //console.log('avg:', sum)
       return (sum / count);
   };
   var result = [], val;
@@ -968,22 +962,12 @@ function movingAvg(array, count, qualifier){
           // This will make the graph nicely showing filled areas when the power is on
           if (counter == 1) {
             if (data[0].timestamp > +moment() - 86400000) {
-              //console.log('Shift first data element', data[0], ((moment().unix() * 1000) - 86400000))
               data[0].timestamp = +moment() - 86400000;
-
-              //console.log('Shift first data element 2', data[0])
             }
           }
 
           if ('wattage' == this.__type) {
-
             let duration = (data[counter].timestamp - data[counter-1].timestamp) / 1000;
-
-            //console.log(data[counter])
-          //  if (duration < 0) {
-        //      console.log('Counter: ', counter,'Duration: ', duration, 'Power: ', data[counter].wattage, data[counter].timestamp, data[counter-1].timestamp)
-          //  }
-
             totals.power += duration * data[counter].wattage;
             totals.water += ((data[counter].timestamp - data[counter-1].timestamp) / 1000 / 60) * data[counter].flow;
           }
@@ -995,8 +979,6 @@ function movingAvg(array, count, qualifier){
               parsed_data[key].push(prev_item[key])
             }
           }
-
-
         }
 
         for (key in data[counter]) {
@@ -1014,45 +996,16 @@ function movingAvg(array, count, qualifier){
         for (key in last_item) {
           parsed_data[key].push(last_item[key])
         }
-
-      //  if (parsed_data.timestamp[parsed_data.timestamp.length-1] - parsed_data.timestamp[0] < 86400000) {
-      //    parsed_data.timestamp[0] = parsed_data.timestamp[parsed_data.timestamp.length-1] - 86400000;
-      //  }
       }
 
-//      totals = [];
       if ('wattage' == this.__type) {
-  /*
-        totals['power'] = 0;
-        totals['water'] = 0;
-
-        for (counter = 1; counter < data.length; counter++) {
-
-        }
-*/
-
-  //      console.log(parsed_data);
-       // console.log('First', parsed_data.timestamp[0], 'Last', parsed_data.timestamp[parsed_data.timestamp.length-1]);
-       // console.log('Duration', parsed_data.timestamp[parsed_data.timestamp.length-1] - parsed_data.timestamp[0])
-       // console.log(totals)
-
         this._totals['power'].find('span').text(formatNumber(totals['power'] / 1000 / 3600));
         this._totals['flow'].find('span').text(', ' + formatNumber(totals['water'] / 1000 / 60));
         this._totals['flow'].toggle(totals['water'] != 0)
-
       }
 
       if (window.terrariumPI.graph_smooth_value > 0) {
-//        console.log(parsed_data.value, movingAvg(parsed_data['value'],window.terrariumPI.graph_smooth_value, false));
-//        parsed_data.value = movingAvg(parsed_data.value.reverse(),window.terrariumPI.graph_smooth_value);
-
-        // try {
-        //   graph_data[1].data = graph_data[1].data.splice(window.terrariumPI.graph_smooth_value);
-        // } catch (e) {}
-        // try {
-        //   graph_data[2].data = graph_data[2].data.splice(window.terrariumPI.graph_smooth_value);
-        // } catch (e) {}
-
+        // Temporary disabled
       }
 
 
@@ -1096,11 +1049,6 @@ function movingAvg(array, count, qualifier){
         legend: {
             display: true,
             align: 'center',
-            /*
-            labels: {
-                fontColor: 'rgb(255, 99, 132)'
-            }
-            */
         },
 
         tooltips: {
@@ -1218,7 +1166,6 @@ function movingAvg(array, count, qualifier){
     sensor_graph_obj._totals['power'] = sensor_graph_obj._canvas.parents('.card').find('span.total_power');
     sensor_graph_obj._totals['flow'] = sensor_graph_obj._canvas.parents('.card').find('span.total_flow');
 
-    //console.log(sensor_graph_obj._export);
     sensor_graph_obj.draw();
     sensor_graph_obj.source  = source;
     sensor_graph_obj.run()
@@ -1287,18 +1234,14 @@ function createWebcamLabel(layer,x,y,sensors,edit) {
 
 function updateWebcamMarkers(layer) {
   let markers = [];
-//  var all_markers = '';
   layer.eachLayer(function(datamarker) {
     let pos = datamarker.getLatLng();
-//    var pos = datamarker.getLatLng();
     markers.push({
       'lat' : pos.lat,
       'long' : pos.lng,
       'sensors' : datamarker.options.sensors
-    })
-    //all_markers += pos.lat + ',' + pos.lng + ',' + datamarker.options.sensors.join(',') + ';';
+    });
   });
-//  console.log('Final markers', markers, JSON.stringify(markers));
   $('#modal-webcam-setup').find('input[name="markers"]').val(JSON.stringify(markers));
 }
 
@@ -1313,7 +1256,6 @@ function editWebcamMarker(marker) {
 
   $('#add_sensors').off('click').on('click',function(event){
     marker.options.sensors = pull_down.val();
-//    console.log('New marker data', marker.options.sensors);
     updateWebcamMarkers(marker.options.layer);
     updateWebcamLabel(marker);
   });
@@ -1323,11 +1265,7 @@ function editWebcamMarker(marker) {
     updateWebcamMarkers(marker.options.layer);
     marker.remove();
   });
-
-
   $('#webcam-realtime-data-form').modal('show');
-
-
 }
 
 function load_webcam(data) {
@@ -1335,17 +1273,12 @@ function load_webcam(data) {
   max_zoom = Math.pow(2,Math.ceil(Math.log2(max_zoom)));
   max_zoom = Math.log2(max_zoom/256)
 
- // var webcam = L.map(jQuery('div#webcam_' + data.id + ' div.webcam_player' + (data.edit === true ? '_preview' : ''))[0],{
-
   let webcam = L.map(jQuery('div#webcam_player_' + (data.edit === true ? 'preview_' : '') + data.id)[0],{
-
-
     id: 'map_' + data.id,
     fullscreenControl: true,
     last_update : jQuery('div#webcam_player_' + (data.edit === true ? 'preview_' : '') + data.id).parents('.card').find('.last_update'),
   }).on('load',function(event){
-    //console.log('Webcam load',event)
-    //this.options.
+
   }).setView([0, 0], 1);
 
   let realtime_data_layer = L.layerGroup([], {
@@ -1368,17 +1301,6 @@ function load_webcam(data) {
       }
       event.target._map.options.last_update.text(moment().format('LLL'));
     },30 * 1000);
-
-    // $.get('/api/sensors/',function(data) {
-    //   realtime_sensor_data = {};
-    //   $.each(data.data,function(counter,value){
-    //     realtime_sensor_data[value.id + ''] = value;
-    //   });
-    //   realtime_data_layer.eachLayer(function(marker) {
-    //     updateWebcamLabel(marker);
-    //   });
-    // });
-
   });
   realtime_data_layer.addTo(webcam);
 
@@ -1389,8 +1311,6 @@ function load_webcam(data) {
         realtime_sensor_data[value.id + ''] = value;
       });
       $.each(data.markers,function(counter,value) {
-//        var tmpdata = value.split(',');
-
         createWebcamLabel(realtime_data_layer,value.lat,value.long,value.sensors, data.edit === true);
       });
     });
@@ -1569,7 +1489,6 @@ function webcamArchive(webcamid) {
   function getImages(date) {
 
     $.getJSON('api/webcams/' + webcamid + '/archive/'+ date.getFullYear() + '/' + (date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1) + '/' + (date.getDate() < 10 ? '0' : '') + date.getDate() + '/', function(data) {
-//      var photos = [];
       let date_match = /archive_(\d+)\.jpg$/g;
 
       no_data_counter += (data.archive_images.length > 0 ? 0 : 1);
@@ -1762,7 +1681,6 @@ function uptime_format(duration) {
 function formToJSON( form ) {
   let output = {};
   jQuery.each(form.find('input,select,textarea'),function(counter,item) {
-  //  console.log(item);
     if (!item.disabled && '' != item.name) {
       let key   = item.name;
       let value = item.value;
@@ -1862,7 +1780,6 @@ function websocket_init(reconnect) {
     if ('logfile_update' != message.type) {
       animate_socketio_messages();
     }
-    //console.log('Websocket received message:', message);
     switch (message.type) {
       case 'sensortypes':
         light_sensors_list = []
@@ -1935,12 +1852,10 @@ function websocket_init(reconnect) {
         let relay = jQuery('#relay_' + message.data.id);
         if (relay.length == 1) {
           if (relay.hasClass('dial')) {
-            //console.log('Update dimmer to value: ', message.data.value);
             relay.data('update',0);
             relay.val(message.data.value).trigger('change');
             relay.data('update',1);
           } else {
-//            console.log('Update normal relay');
             relay.find('i').toggleClass('text-success', message.data.value == 100);
           }
         }
@@ -2054,7 +1969,6 @@ function websocket_init(reconnect) {
           if ('open' == door_data.status) {
             error_counter += 1;
             error_content += '<div class="dropdown-item text-warning"> <i class="fas fa-lock mr-2"></i> ' + door_data.message + '</div>';
-            //<!-- <span class="float-right text-muted text-sm">3 mins</span> -->
           }
         });
 
@@ -2068,15 +1982,9 @@ function websocket_init(reconnect) {
         indicator.find('.badge').text(0 == error_counter ? '' : error_counter);
 
         break;
-        /*
-      case 'player_indicator':
-        update_player_indicator(data.data);
-        break;
-        */
     }
   };
   window.terrariumPI.websocket.onclose = function(evt) {
-    //update_online_indicator(false);
     clearInterval(window.terrariumPI.websocket_timer);
     window.terrariumPI.websocket_timer = setInterval(function() {
       websocket_init(true);
@@ -2137,11 +2045,6 @@ function bootstrap_custom_fileuploads(){
 
 jQuery(function () {
 
-  /*
-  if (jQuery( window ).width() < 1400 && jQuery('.os-content-glue').width() > 100) {
-    jQuery('[data-widget="pushmenu"]').click();
-  }
-*/
   christmas();
   fireworks_menu();
   bootstrap_custom_fileuploads();

@@ -536,10 +536,6 @@ class terrariumWebcam(object):
       self.__compare_image = current_image
 
 
-    #except Exception as ex:
-    #  logger.exception('Error in motion detection for webcam \'%s\' with error message: %s' % (self.get_name(),ex))
-
-
   # TODO: What to stop....?
   def stop(self):
     pass

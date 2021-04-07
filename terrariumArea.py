@@ -561,14 +561,8 @@ class terrariumAreaLights(terrariumArea):
       print(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}')
       print(ex)
 
-    # If the relay is a dimmer, recalc the on/off duration based on current state
-    #print('Tweaks in relay action')
-    #print(tweaks)
-
     if relay.is_dimmer:
-      #print(f'Duration: {tweaks["duration"]}, on = {relay.ON}, off = {relay.OFF}, on-off = {relay.ON - relay.OFF}')
       step_size = tweaks['duration'] / (relay.ON - relay.OFF)
-      #print(f'Duration step size: {step_size}')
       tweaks['duration'] = step_size * abs((relay.ON if action else relay.OFF) - relay.state)
 
       # If the relay is already powered and should be power up, ignore the delay time. Force to zero delay

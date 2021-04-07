@@ -1,12 +1,10 @@
 from . import terrariumRelay, terrariumRelayException
 from terrariumUtils import terrariumUtils
 
-from unsync import unsync
-from kasa import Discover, SmartStrip, SmartPlug
-
 # pip install unsync
 # pip install python-kasa
-
+from unsync import unsync
+from kasa import Discover, SmartStrip, SmartPlug
 class terrariumRelayTPLinkKasa(terrariumRelay):
   HARDWARE = 'tplinkkasa'
   NAME = 'Kasa Smart'
