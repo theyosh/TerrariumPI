@@ -55,14 +55,17 @@ class terrariumMS100Sensor(terrariumSensor):
         meross_devices = manager.find_devices(device_type='ms100')
 
         for device in meross_devices:
+          # TODO: Cache this data also....
           if self.device != device.subdevice_id:
-            #print('Wrong device... skip')
             continue
 
           await device.async_update()
-          if (datetime.utcnow() - device.last_sampled_time).total_seconds() < 5 * 60:
+
+          if device.last_sampled_time is not None and (datetime.utcnow() - device.last_sampled_time).total_seconds() < 5 * 60:
             data['temperature'] = device.last_sampled_temperature
             data['humidity']    = device.last_sampled_humidity
+          else:
+            logger.warning(f'Sensor {self} is not reporting new data. Last update time is more then 5 minutes ago: {device.last_sampled_time}')
 
       except CommandTimeoutError:
         logger.error(f'Meross communication timed out connecting with the server.')
