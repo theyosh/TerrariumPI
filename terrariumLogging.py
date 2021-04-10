@@ -74,13 +74,13 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
 
 class NotificationLogger(logging.StreamHandler):
 
-  def __init__(self,trafficlights,*args, **kwargs):
+  def __init__(self,*args, **kwargs):
     super(NotificationLogger,self).__init__(*args, **kwargs)
     # The notification will later on get a reference to the terrariumEngine for version and profile information
     self.notification = terrariumNotification()
 
   def emit(self,data):
-    if str(data.levelname.lower()) not in ['info','debug']:
+    if str(data.levelname.lower()) in ['warning','error']:
       self.notification.message(f'system_{data.levelname.lower()}' , {'message' : data.getMessage()} )
 
 if os.path.isfile('logging.custom.cfg'):
