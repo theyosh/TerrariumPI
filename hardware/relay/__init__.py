@@ -137,12 +137,12 @@ class terrariumRelay(object):
         # Update ok, store the new state
         self._device['value'] = state
       else:
-        raise terrariumRelayActionException(f'Error changing relay {self}. Error: unknown')
+        raise terrariumRelayActionException(f'Error changing relay {self} to state {state}. Error: unknown')
 
     except FunctionTimedOut:
-      raise terrariumRelayLoadingException(f'Error changing relay {self}: Timed out after 15 seconds.')
+      raise terrariumRelayLoadingException(f'Error changing relay {self} to state {state}: Timed out after 15 seconds.')
     except Exception as ex:
-      raise terrariumRelayActionException(f'Error changing relay {self}. Error: {ex}')
+      raise terrariumRelayActionException(f'Error changing relay {self} to state {state}. Error: {ex}')
 
   @retry(terrariumRelayUpdateException, tries=3, delay=0.5, max_delay=2, logger=logger)
   def __get_hardware_value(self):
@@ -217,7 +217,7 @@ class terrariumRelay(object):
         #logger.info(f'Changed relay {self} from state \'{old_state}\' to state \'{new_state}\'')
 
       except Exception as ex:
-        logger.exception(ex)
+        logger.error(f'Error changing state for relay {self} to {new_state} :{ex}')
 
       if (old_state is not None) or (old_state is None and new_state == 0):
         # This is due to a bug that will graph 0 watt usage in the graph after rebooting.
