@@ -667,7 +667,8 @@ class terrariumEngine(object):
         try:
           new_value = self.relays[relay.id].update()
         except terrariumRelayUpdateException as ex:
-          logger.exception(ex)
+#          logger.error(f'Error updating relay {relay}:{ex}')
+          pass
 
         measurement_time = time.time() - start
 
@@ -980,6 +981,13 @@ class terrariumEngine(object):
       self._update_enclosures()
 
       self.motd()
+
+      # Cleanup hanging bluetooth helper scripts....
+      current_process = psutil.Process()
+      for process in current_process.children(recursive=True):
+        if 'bluepy-helper' in ' '.join(process.cmdline()):
+          logger.warning(f'Killing hanging bluetooth helper process')
+          process.kill()
 
       duration = time.time() - start
       time_left = terrariumEngine.__ENGINE_LOOP_TIMEOUT - duration
