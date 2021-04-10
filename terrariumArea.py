@@ -709,7 +709,7 @@ class terrariumAreaWatertank(terrariumArea):
       if 'unit' == key:
         continue
 
-      sensor_values[key] = statistics.mean(sensor_values[key])
+      sensor_values[key] = 0 if len(sensor_values[key]) == 0 else statistics.mean(sensor_values[key])
 
     sensor_values['alarm'] = not sensor_values['alarm_min'] <= sensor_values['current'] <= sensor_values['alarm_max']
 
