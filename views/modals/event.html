@@ -96,7 +96,7 @@ let replace_hardware = !{{modal_type}}_form.find('input#end').prop('disabled');
 {{modal_type}}_form.find('label.remind').toggle(replace_hardware);
 {{modal_type}}_form.find('select#freq option:first').text(replace_hardware ? '{{ _('No reminder') }}' : '{{ _('No repeat') }}');
 // Reset the select2 pull down due to changing content...
-{{modal_type}}_form.find('select#freq').select2();
+{{modal_type}}_form.find('select#freq').prop('disabled',false).select2();
 
 // Check if we are in edit mode.... and need to load more data....
 if ('#' != jQuery(event.relatedTarget).attr('href')) {
