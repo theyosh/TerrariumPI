@@ -127,7 +127,7 @@ It is possible to use USB or SSD drives to speed things up: https://www.tomshard
   `sudo ./install.sh`
 6. Reboot Raspberry PI to get all the needed modules loaded
   `sudo reboot` (if done manual)
-7. Go to the webinterface at http://[raspberry_ip]:8090
+7. Go to the webinterface at http://[raspberry_ip]:8090 (login: admin/password)
 
 All needed options and modules are setup by the installer script. This means that I2C and 1Wire overlay are enabled by default.
 
@@ -143,7 +143,7 @@ This updating is based on that the software is installed with the steps in the I
   `git pull`
 4. Re-run the installation script in order to update software dependencies
   `sudo ./install.sh`
-4. Restart TerrariumPI according to: https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-restart-terrariumpi
+4. Restart TerrariumPI: `sudo service terrariumpi restart`
 
 Now **clear your browser cache** and reload the webinterface. A brand new version should be running.
 
