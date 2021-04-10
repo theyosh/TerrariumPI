@@ -12,6 +12,9 @@ RestartSec=5
 KillSignal=SIGINT
 WatchdogSec=120
 Type=notify
+StartLimitIntervalSec=10m
+StartLimitBurst=1
+StartLimitAction=reboot-force
 
 [Install]
 WantedBy=multi-user.target
