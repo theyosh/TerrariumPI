@@ -1,16 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
 
-# import time
-# import os
-# import os.path
-
-# try:
-#   import thread as _thread
-# except ImportError as ex:
-#   import _thread
-
-
 from string import Template
 from gevent import sleep
 import datetime
@@ -126,6 +116,9 @@ class terrariumNotification(terrariumSingleton):
       except orm.core.ObjectNotFound as ex:
         return
 
+      print('Notification message')
+      print(message)
+
       if not message.enabled:
         logger.debug(f'Notification message {message} is (temporary) disabled.')
         return
@@ -214,7 +207,7 @@ class terrariumNotificationService(object):
   # Return polymorph area....
   def __new__(cls, id, type, name = '', enabled = True, setup = None):
     if type not in [service['type'] for service in terrariumNotificationService.available_services]:
-      raise terrariumAreaException(f'Area of type {type} is unknown.')
+      raise terrariumAreaException(f'Service of type {type} is unknown.')
 
     return super(terrariumNotificationService, cls).__new__(terrariumNotificationService.__TYPES[type]['class']())
 
@@ -234,6 +227,9 @@ class terrariumNotificationService(object):
     return f'{terrariumNotificationService.__TYPES[self.type]["name"]} service {self.name}'
 
   def load_setup(self, setup_data):
+    print(f'Notification service: {self}')
+    print(setup_data)
+
     self.setup['version']       = setup_data.get('version')
     self.setup['profile_image'] = setup_data.get('profile_image')
 
