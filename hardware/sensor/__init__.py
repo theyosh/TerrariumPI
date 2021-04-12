@@ -55,6 +55,7 @@ class terrariumSensor(object):
     known_sensors = cache.get_data(__CACHE_KEY)
     if known_sensors is None:
       known_sensors = {}
+      all_types = []
       # Start dynamically loading sensors (based on: https://www.bnmetrics.com/blog/dynamic-import-in-python3)
       for file in sorted(Path(__file__).parent.glob('*_sensor.py')):
         imported_module = import_module( '.' + file.stem, package='{}'.format(__name__))
@@ -66,6 +67,13 @@ class terrariumSensor(object):
             setattr(sys.modules[__name__], file.stem, attribute)
             if attribute.HARDWARE is not None:
               known_sensors[attribute.HARDWARE] = attribute
+              all_types += attribute.TYPES
+
+      # Update sensors that do not have a known type. Those are remote and scripts sensors
+      all_types = list(set(all_types))
+      for hardware in known_sensors:
+        if len(known_sensors[hardware].TYPES) == 0:
+          known_sensors[hardware].TYPES = all_types
 
       cache.set_data(__CACHE_KEY,known_sensors,-1)
 
