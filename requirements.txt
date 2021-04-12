@@ -71,4 +71,5 @@ i2c_lcd
 
 # API
 pony
+apispec
 apispec-webframeworks
