@@ -10,6 +10,14 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
 
   _DIMMER_FREQ = 1000 # In Hz
 
+  def calibrate(self, data):
+    super().calibrate(data)
+    frequency = data.get('dimmer_frequency', self._DIMMER_FREQ)
+    if '' == frequency:
+      frequency = self._DIMMER_FREQ
+
+    self.device.frequency = int(frequency)
+
   def _load_hardware(self):
     return PWMOutputDevice(terrariumUtils.to_BCM_port_number(self.address),frequency=self._DIMMER_FREQ)
 

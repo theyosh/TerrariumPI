@@ -328,12 +328,6 @@ class terrariumRelayDimmer(terrariumRelay):
 
     self._dimmer_offset = dimmer_offset
 
-    frequency = data.get('dimmer_frequency', self._DIMMER_FREQ)
-    if '' == frequency:
-      frequency = self._DIMMER_FREQ
-
-    self.device.frequency = int(frequency)
-
     max_power = int(data.get('dimmer_max_power', -1))
     if 0 <= max_power <= 100:
       self.ON = max_power

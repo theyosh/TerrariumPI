@@ -153,6 +153,7 @@
   // Disable the dimmer calibration fields...
   {{modal_type}}_form.find('input[name="dimmer_frequency"]').prop('disabled',this.value.indexOf('-dimmer') == -1);
   {{modal_type}}_form.find('input[name="dimmer_max_power"]').prop('disabled',this.value.indexOf('-dimmer') == -1);
+  {{modal_type}}_form.find('input[name="dimmer_offset"]').prop('disabled',this.value.indexOf('-dimmer') == -1);
 });
 {% endblock %}
 
