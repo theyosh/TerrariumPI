@@ -25,15 +25,18 @@ class terrariumRelay8Stack(terrariumRelay):
 
   def _load_hardware(self):
     address = self._address
+    # Relay number from 1 - 4/8
     address[0] = int(address[0])
     if len(address) == 1:
+      # Add board number explicit
       address.append(0)
 
     elif len(address) == 2:
       # Board numbers starts at '0' where the user will enter 1 as first
       address[1] = int(address[1]) - 1
 
-    return (address[0],address[1])
+    # Return tuple with (stack, relay)
+    return (address[1],address[0])
 
   def _set_hardware_value(self, state):
     (device, nr) = self.device
