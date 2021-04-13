@@ -31,9 +31,9 @@ class terrariumRelay8Stack(terrariumRelay):
       # Add board number explicit
       address.append(0)
 
-    elif len(address) == 2:
-      # Board numbers starts at '0' where the user will enter 1 as first
-      address[1] = int(address[1]) - 1
+    # elif len(address) == 2:
+    #   # Board numbers starts at '0' where the user will enter 1 as first
+    #   address[1] = int(address[1]) - 1
 
     # Return tuple with (stack, relay)
     return (address[1],address[0])
