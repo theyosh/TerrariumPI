@@ -834,6 +834,10 @@ class terrariumEngine(object):
       for webcam in Webcam.select(lambda w: w.id in self.webcams.keys() and not w.id in self.settings['exclude_ids']):
         start = time.time()
 
+        # Get the current light state first, as processing new image could take 10 sec. In that period the lights could have been turned on,
+        # where the picture is taken when the lights are off.
+        current_state = 'on' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on else 'off'
+        # Set the flash relays if selected
         relays = [] if webcam.flash is None else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
         self.webcams[webcam.id].update(relays)
 
@@ -843,7 +847,7 @@ class terrariumEngine(object):
           # Check light status
           if 'ignore' != webcam.archive['light']:
             # Default state is that the lights are on....
-            current_state = 'on' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on else 'off'
+            pass
 
             if webcam.archive['light'] != current_state:
               #print(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
