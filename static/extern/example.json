@@ -1,5 +1,9 @@
 {
-  "volume": 22.6,
-  "co2": 5,
-  "con": 5.5657
+  "example": {
+    "volume": 22.6,
+    "co2": 5,
+    "con": 5.5657,
+    "temperature": 24,
+    "humid": 45
+  }
 }
