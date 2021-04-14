@@ -315,14 +315,14 @@ class terrariumRelayDimmer(terrariumRelay):
         break
 
       current_state += direction
-      self.set_state(current_state + self._dimmer_offset)
+      self.set_state(current_state)
       self.__running.wait(timeout=pause_time)
 
     self.__running.set()
     self.running = False
 
   def calibrate(self, data):
-    dimmer_offset = data.get('dimmer_offset',self._dimmer_offset)
+    dimmer_offset = data.get('dimmer_offset', self._dimmer_offset)
     if '' == dimmer_offset:
       dimmer_offset = 0
 
