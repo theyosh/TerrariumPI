@@ -365,7 +365,7 @@
               // TODO: Translate the area type names...
               area.status  = (area.state.powered === true ? 'badge-success' : (area.state.powered === false ? 'badge-secondary' : ''));
               if (area.state.sensors != undefined) {
-                area.warning = (area.state.sensors.alarm ? 'fas fa-exclamation-triangle text-danger' : 'd-none');
+                area.warning = 'fas fa-exclamation-triangle text-danger' + (area.state.sensors.alarm ? '' : ' d-none');
               }
             });
             jQuery('#accordion').loadTemplate(jQuery('#enclosure_template'),enclosure,{ append: true, });
