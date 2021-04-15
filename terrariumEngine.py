@@ -230,6 +230,9 @@ class terrariumEngine(object):
     os.environ['MEROSS_EMAIL']    = settings['meross_cloud_username']
     os.environ['MEROSS_PASSWORD'] = settings['meross_cloud_password']
 
+    # Make sure we use PiGPIO daemon for PWM
+    os.environ['GPIOZERO_PIN_FACTORY'] = 'pigpio'
+
     # Add some extra non DB settings
     settings['version'] = self.version
 
