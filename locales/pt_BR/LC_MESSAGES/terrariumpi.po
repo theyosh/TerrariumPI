@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-04-07 10:58+CEST\n"
-"PO-Revision-Date: 2021-04-05 10:23+0000\n"
+"PO-Revision-Date: 2021-04-17 03:46+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -249,8 +249,6 @@ msgstr "Enviar novo arquivo de áudio"
 
 #: views/audio_files.html:51 views/modals/enclosure.html:33
 #: views/settings.html:200
-#, fuzzy
-#| msgid "Choose file"
 msgid "Choose a file"
 msgstr "Escolha um arquivo"
 
@@ -370,7 +368,7 @@ msgstr "Uso de água total"
 #: views/dashboard.html:108 views/enclosures.html:2
 #: views/includes/sidebar.html:215
 msgid "Enclosures"
-msgstr "Anexos"
+msgstr "Puxadinhos"
 
 #: views/dashboard.html:167 views/enclosures.html:46
 msgid "Night"
@@ -392,11 +390,11 @@ msgstr "Atual"
 
 #: views/enclosures.html:9
 msgid "No enclosures"
-msgstr "Sem anexos"
+msgstr "Sem puxadinhos"
 
 #: views/enclosures.html:12
 msgid "Add new enclosure"
-msgstr "Adicionar novo anexo"
+msgstr "Adicionar novo puxadinho"
 
 #: views/enclosures.html:133
 msgid "Add area"
@@ -544,7 +542,7 @@ msgstr "Lista"
 
 #: views/includes/sidebar.html:229
 msgid "New enclosure"
-msgstr "Novo anexo"
+msgstr "Novo puxadinho"
 
 #: views/includes/sidebar.html:235
 msgid "New area"
@@ -622,11 +620,11 @@ msgstr "﻿Configurações de Área"
 
 #: views/modals/area.html:17
 msgid "Enclosure"
-msgstr "Anexo"
+msgstr "Puxadinho"
 
 #: views/modals/area.html:23
 msgid "Select the enclosure where this area belongs to."
-msgstr "Selecione o anexo a que essa área pertence."
+msgstr "Selecione o puxadinho ao qual esta área pertence."
 
 #: views/modals/area.html:37
 msgid "Select the type of area. Each type has its own extra options and logic."
@@ -643,10 +641,8 @@ msgstr "Digite um nome para esta área."
 #: views/modals/area.html:52 views/modals/button.html:50
 #: views/modals/enclosure.html:23 views/modals/event.html:21
 #: views/modals/playlist.html:23 views/modals/relay.html:50
-#, fuzzy
-#| msgid "Give at least a name of minimal 1 character."
 msgid "Please enter a name of at least 1 character."
-msgstr "Digite pelo menos 1 caractere."
+msgstr "Insira pelo menos 1 caractere."
 
 #: views/modals/area.html:62 views/modals/area.html:280
 #: views/modals/area.html:421 views/modals/webcam.html:89
@@ -731,8 +727,8 @@ msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
 msgstr ""
-"Alterne esta opção se esta é a principal luz para este gabinete. Utilizado "
-"para checar as luzes das outras áreas."
+"Habilite para indicar que esta é a luz principal deste puxadinho. Este "
+"ajuste é usado para verificar as luzes das outras áreas."
 
 #: views/modals/area.html:126 views/modals/area.html:309
 msgid ""
@@ -830,7 +826,7 @@ msgstr "Placa de som"
 
 #: views/modals/area.html:299
 msgid "Select the sound card that is used for this enclosure."
-msgstr "Selecione a placa de som usada para este anexo."
+msgstr "Selecione a placa de som usada neste puxadinho."
 
 #: views/modals/area.html:438 views/modals/playlist.html:29
 #: views/playlists.html:27 views/playlists.html:42
@@ -941,16 +937,12 @@ msgid "Button settings"
 msgstr "Configurações dos botões"
 
 #: views/modals/button.html:23
-#, fuzzy
-#| msgid "Select the sound card that is used for this enclosure."
 msgid "Select the hardware type for this button."
-msgstr "Selecione a placa de som usada para este anexo."
+msgstr "Selecione o hardware usado para este botão."
 
 #: views/modals/button.html:26 views/modals/relay.html:26
-#, fuzzy
-#| msgid "Select an area type"
 msgid "Please select a hardware type."
-msgstr "Selecione um tipo de área"
+msgstr "Selecione um tipo de hardware."
 
 #: views/modals/button.html:32 views/modals/relay.html:32
 #: views/modals/sensor.html:35 views/modals/service.html:68
@@ -960,23 +952,19 @@ msgstr "Endereço"
 
 #: views/modals/button.html:35
 msgid "Enter a valid physical GPIO port number."
-msgstr ""
+msgstr "Insira um número válido de porta GPIO."
 
 #: views/modals/button.html:38
-#, fuzzy
-#| msgid "Please enter a number value between 1 and 100"
 msgid "Please enter a valid physical GPIO port number between %s and %s."
-msgstr "Insira um número entre 0 e 100"
+msgstr "Insira um número de porta GPIO entre %s e %s."
 
 #: views/modals/button.html:47 views/modals/relay.html:47
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a name for this button."
-msgstr "Digite um nome para esta área."
+msgstr "Insira um nome para este botão."
 
 #: views/modals/button.html:59
 msgid "The current state of the button."
-msgstr ""
+msgstr "Estado atual do botão."
 
 #: views/modals/button.html:70
 msgid "Capacitor value in &micro;F"
@@ -987,23 +975,21 @@ msgid ""
 "Enter the capacitor value in &micro;F as this will influence the light "
 "calculation."
 msgstr ""
+"Insira o valor do capacitor em &micro;F para influenciar o cálculo da "
+"iluminação."
 
 #: views/modals/button.html:76 views/modals/relay.html:112
 #: views/modals/relay.html:124 views/modals/relay.html:136
-#, fuzzy
-#| msgid "Please enter a number value between 1 and 100"
 msgid "Please enter value between %s and %s."
-msgstr "Insira um número entre 0 e 100"
+msgstr "Insira um número entre %s e %s."
 
 #: views/modals/enclosure.html:11
 msgid "Enclosure settings"
-msgstr "Configurações do anexo"
+msgstr "Configurações do puxadinho"
 
 #: views/modals/enclosure.html:20
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a name for this enclosure."
-msgstr "Digite um nome para esta área."
+msgstr "Insira o nome para este puxadinho."
 
 #: views/modals/enclosure.html:29
 msgid "Image"
@@ -1011,53 +997,47 @@ msgstr "Imagem"
 
 #: views/modals/enclosure.html:36
 msgid "Select an image file to use on the dashboard page."
-msgstr ""
+msgstr "Selecione uma imagem para o painel de controle."
 
 #: views/modals/enclosure.html:39
 msgid "Please select a filename with the extension of .jpg, .png, .gif."
-msgstr ""
+msgstr "Selecione um arquivo com a extensão .jpg, .png ou .gif."
 
 #: views/modals/enclosure.html:47
 msgid "Description"
 msgstr "Descrição"
 
 #: views/modals/enclosure.html:51
-#, fuzzy
-#| msgid "Enter some information about this enclosure"
 msgid "Enter some information about this enclosure."
-msgstr "Insira informações sobre o anexo"
+msgstr "Insira informações sobre este puxadinho."
 
 #: views/modals/enclosure.html:58
 msgid "Doors"
 msgstr "Portas"
 
 #: views/modals/enclosure.html:64
-#, fuzzy
-#| msgid "Select the sound card that is used for this enclosure."
 msgid "Select the doors that are used with this enclosure."
-msgstr "Selecione a placa de som usada para este anexo."
+msgstr "Selecione as portas deste puxadinho."
 
 #: views/modals/enclosure.html:76
 msgid ""
 "Select the webcams that are used with this enclosure. You can use html "
 "colors and fonts and images."
 msgstr ""
+"Selecione as webcams para usar com este puxadinho. Você pode utilizar cores "
+"html, fontes e imagens."
 
 #: views/modals/event.html:10 views/modals/event.html:25
 msgid "Event"
 msgstr "Evento"
 
 #: views/modals/event.html:18
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a name for this event."
-msgstr "Digite um nome para esta área."
+msgstr "Insira o nome para este evento."
 
 #: views/modals/event.html:29
-#, fuzzy
-#| msgid "Enter some information about this event"
 msgid "Enter some information about this event."
-msgstr "Insira informações sobre o evento"
+msgstr "Insira informações sobre o evento."
 
 #: views/modals/event.html:35
 msgid "Date"
@@ -1065,7 +1045,7 @@ msgstr "Data"
 
 #: views/modals/event.html:38
 msgid "The date or period for this event."
-msgstr ""
+msgstr "Data ou período para o evento."
 
 #: views/modals/event.html:44
 msgid "Repeat every"
@@ -1097,13 +1077,11 @@ msgstr "Anos"
 
 #: views/modals/event.html:57
 msgid "Select a repeat period and an amount."
-msgstr ""
+msgstr "Selecione o número de vezes para repetir."
 
 #: views/modals/event.html:60
-#, fuzzy
-#| msgid "Please enter a valid host name or IP"
 msgid "Please enter a valid repeat period amount."
-msgstr "Por favor, digite um nome de host ou IP válido"
+msgstr "Insira a quantidade de repetições do período."
 
 #: views/modals/message.html:11
 msgid "Message settings"
@@ -1142,16 +1120,12 @@ msgid "Playlist settings"
 msgstr "Configurações de lista de reprodução"
 
 #: views/modals/playlist.html:20
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a name for this playlist."
-msgstr "Digite um nome para esta área."
+msgstr "Insira o nome para esta playlist."
 
 #: views/modals/playlist.html:32
-#, fuzzy
-#| msgid "Holds the volume for this playlist."
 msgid "Select the volume for this playlist."
-msgstr "Contém o volume desta lista de reprodução."
+msgstr "Selecione o volume desta playlist."
 
 #: views/modals/playlist.html:39 views/playlists.html:28
 #: views/playlists.html:43
@@ -1160,7 +1134,7 @@ msgstr "Embaralhar"
 
 #: views/modals/playlist.html:44
 msgid "Shuffle this playlist every time it is played."
-msgstr ""
+msgstr "Usar ordem aleatória a cada reprodução."
 
 #: views/modals/playlist.html:51 views/playlists.html:29
 #: views/playlists.html:44
@@ -1168,120 +1142,89 @@ msgid "Repeat"
 msgstr "Repetir"
 
 #: views/modals/playlist.html:56
-#, fuzzy
-#| msgid "Holds the audio playlist name."
 msgid "Play this playlist in repeat mode."
-msgstr "Contém o nome da lista de reprodução de áudio."
+msgstr "Reproduzir playlist em modo repetir."
 
 #: views/modals/playlist.html:66
-#, fuzzy
-#| msgid "Holds the volume for this playlist."
 msgid "Select all audio files for this playlist."
-msgstr "Contém o volume desta lista de reprodução."
+msgstr "Selecione os arquivos de áudio para esta playlist."
 
 #: views/modals/playlist.html:69
-#, fuzzy
-#| msgid "Select audio files"
 msgid "Select at least 1 audio file."
-msgstr "Selecione os arquivos de áudio"
+msgstr "Selecione no mínimo um arquivo de áudio."
 
 #: views/modals/relay.html:11
 msgid "Relay settings"
 msgstr "Configurações de relé"
 
 #: views/modals/relay.html:23
-#, fuzzy
-#| msgid "Select the sound card that is used for this enclosure."
 msgid "Select the hardware type for this relay."
-msgstr "Selecione a placa de som usada para este anexo."
+msgstr "Selecione o hardware usado para este botão."
 
 #: views/modals/relay.html:35
-#, fuzzy
-#| msgid "Enter the address"
 msgid "Enter the relay address."
-msgstr "Insira o endereço"
+msgstr "Insira o endereço do relé."
 
 #: views/modals/relay.html:38
-#, fuzzy
-#| msgid "Please enter a number value between 1 and 100"
 msgid "Please enter a valid physical GPIO port number between 1 and 40."
-msgstr "Insira um número entre 0 e 100"
+msgstr "Insira uma GPIO válida com o número da porta entre 1 e 40."
 
 #: views/modals/relay.html:56
-#, fuzzy
-#| msgid "wattage"
 msgid "Wattage"
-msgstr "Potência"
+msgstr "Potência em W"
 
 #: views/modals/relay.html:59
-#, fuzzy
-#| msgid "Holds the switch power usage in Watt when switched on."
 msgid "Enter the max wattage when switched on."
-msgstr "Contém o consumo de energia do interruptor em Watt quando ligado."
+msgstr ""
+"Insira o consumo máximo de energia do interruptor em Watt quando ligado."
 
 #: views/modals/relay.html:62 views/modals/relay.html:74
-#, fuzzy
-#| msgid "Please enter a number value of 0.00 or higher"
 msgid "Please enter a minimal value of %s."
-msgstr "Por favor digite um número de 0.00 ou maior"
+msgstr "Insira um número mínimo de %s."
 
 #: views/modals/relay.html:68
-#, fuzzy
-#| msgid "water_flow"
 msgid "Water flow"
-msgstr "fluxo_de_agua"
+msgstr "Fluxo d'água"
 
 #: views/modals/relay.html:71
-#, fuzzy
-#| msgid "The power usage and/or water flow per minute when switched on"
 msgid "Enter the max water flow when switched on."
-msgstr "O uso de energia e / ou o fluxo de água por minuto quando ligado"
+msgstr "Insira o fluxo de água máximo por minuto quando ligado."
 
 #: views/modals/relay.html:81
-#, fuzzy
-#| msgid "Manual mode"
 msgid "Manual m."
-msgstr "Modo manual"
+msgstr "Modo manual."
 
 #: views/modals/relay.html:86
 msgid "When a relay is in manual mode, it will not change states."
-msgstr ""
+msgstr "Quando o relé está em modo manual, não haverá mudança de estado."
 
 #: views/modals/relay.html:95
-#, fuzzy
-#| msgid "Changed state of relay"
 msgid "The current state of the relay."
-msgstr "Estado do relé alterado"
+msgstr "Estado do relé atual."
 
 #: views/modals/relay.html:106
 msgid "Dimmer frequency in Hz"
-msgstr ""
+msgstr "Frequência do dimmer em Hz"
 
 #: views/modals/relay.html:109
 msgid "The frequency on which the dimmer operates."
-msgstr ""
+msgstr "Frequência de operação do dimmer."
 
 #: views/modals/relay.html:118
-#, fuzzy
-#| msgid "Water flow in %s"
 msgid "Max power in %"
-msgstr "Fluxo de água em %s"
+msgstr "Consumo máximo em %s"
 
 #: views/modals/relay.html:121
 msgid "The maximum power for this dimmer."
-msgstr ""
+msgstr "Consumo máximo de energia do dimmer."
 
 #: views/modals/relay.html:130
-#, fuzzy
-#| msgid "Dimmer of duration"
 msgid "Dimmer offset in %"
-msgstr "Duração do Dimmer"
+msgstr "Compensação do Dimmer em %"
 
 #: views/modals/relay.html:133
-#, fuzzy
-#| msgid "Dimmer of duration"
 msgid "The dimmer offset."
-msgstr "Duração do Dimmer"
+msgstr "Compensação do dimmer."
 
 #: views/modals/sensor.html:11
 msgid "Sensor settings"
@@ -1419,6 +1362,8 @@ msgstr "Configurações do clima"
 msgid ""
 "In order to use the weather system, you need to create a free account at %s."
 msgstr ""
+"Para poder utilizar o Clima, você precisa criar primeiro uma conta gratuita "
+"no %s."
 
 #: views/modals/weather.html:16
 msgid "Source url"
@@ -1426,11 +1371,11 @@ msgstr "URL de origem"
 
 #: views/modals/weather.html:20
 msgid "Enter the full OpenWeatherMap api url like: %s"
-msgstr ""
+msgstr "Insira a API URL completa do OpenWeatherMap, no modelo: %s"
 
 #: views/modals/weather.html:23
 msgid "The entered url is not valid."
-msgstr ""
+msgstr "A url não é válida."
 
 #: views/modals/webcam.html:11
 msgid "Webcam settings"
@@ -1833,7 +1778,7 @@ msgstr "Mostrar valores mínimo e máximo em gráficos de medidor"
 
 #: views/settings.html:214
 msgid "Hide enclosures on dashboard"
-msgstr "Ocultar anexos no painel de controle"
+msgstr "Ocultar Puxadinhos no painel de controle"
 
 #: views/settings.html:223
 msgid "All gauges on a single page"
@@ -1932,10 +1877,8 @@ msgid "Add new service"
 msgstr "Adicionar novo serviço"
 
 #: views/audio_files.html:138
-#, fuzzy
-#| msgid "Audio file is deleted"
 msgid "Audio file {file} is not valid."
-msgstr "Arquivo de áudio excluído"
+msgstr "Arquivo de áudio {file} inválido."
 
 #: views/audio_files.html:161
 msgid "Audio file is being processed. Please wait..."
@@ -1993,7 +1936,7 @@ msgstr "Botão Excluir"
 
 #: views/enclosures.html:139
 msgid "Delete enclosure"
-msgstr "Excluir anexo"
+msgstr "Excluir puxadinho"
 
 #: views/calendar.html:54
 msgid "Delete event {title}"
@@ -2020,10 +1963,8 @@ msgid "Delete webcam"
 msgstr "Excluir webcam"
 
 #: views/modals/relay.html:131
-#, fuzzy
-#| msgid "Dimmer off percentage"
 msgid "Dimmer offset in percentage"
-msgstr "Porcentagem do Dimmer desligado"
+msgstr "Porcentagem de compensação do dimmer"
 
 #: views/enclosures.html:116
 msgid "Edit area"
@@ -2035,7 +1976,7 @@ msgstr "Botão Editar"
 
 #: views/enclosures.html:136
 msgid "Edit enclosure"
-msgstr "Editar Anexos"
+msgstr "Editar puxadinho"
 
 #: views/notifications.html:137
 msgid "Edit message"
@@ -2058,10 +1999,8 @@ msgid "Edit webcam"
 msgstr "Editar webcam"
 
 #: views/modals/enclosure.html:48 views/modals/event.html:26
-#, fuzzy
-#| msgid "Description"
 msgid "Enter a description"
-msgstr "Descrição"
+msgstr "Insira a descrição"
 
 #: views/modals/message.html:64
 msgid "Enter a message"
@@ -2069,10 +2008,8 @@ msgstr "Insira a mensagem"
 
 #: views/modals/button.html:33 views/modals/relay.html:33
 #: views/modals/sensor.html:36 views/modals/webcam.html:30
-#, fuzzy
-#| msgid "Enter address"
 msgid "Enter an address"
-msgstr "Insira seu endereço"
+msgstr "Insira o endereço"
 
 #: views/modals/button.html:45 views/modals/enclosure.html:18
 #: views/modals/event.html:16 views/modals/message.html:34
@@ -2135,10 +2072,8 @@ msgid "Enter the amount of hours to shift"
 msgstr "Digite a quantidade de horas para alterar"
 
 #: views/modals/button.html:71
-#, fuzzy
-#| msgid "Capacitor value in &micro;F"
 msgid "Enter the capacitor value in &micro;F"
-msgstr "Valor de capacitância em &micro;F"
+msgstr "Insira o valor de capacitância em &micro;F"
 
 #: views/modals/area.html:445
 msgid "Enter the height"
@@ -2233,10 +2168,8 @@ msgid "Max difference"
 msgstr "Diferença máxima"
 
 #: views/modals/relay.html:119
-#, fuzzy
-#| msgid "Dimmer on percentage"
 msgid "Max power in percentage"
-msgstr "Porcentagem do Dimmer"
+msgstr "Consumo máximo em porcentagem"
 
 #: views/modals/message.html:40 views/modals/service.html:35
 msgid "Messages per minute"
@@ -2309,7 +2242,7 @@ msgstr "Selecione um tipo de área"
 
 #: views/modals/area.html:19
 msgid "Select an enclosure"
-msgstr "Selecione um anexo"
+msgstr "Selecione um puxadinho"
 
 #: views/modals/webcam.html:120
 msgid "Select archive door state"
@@ -2434,7 +2367,7 @@ msgstr "Atualização OK"
 
 #: views/audio_files.html:143
 msgid "Uploaded files are not valid."
-msgstr ""
+msgstr "Arquivos enviados não são válidos."
 
 #: views/modals/enclosure.html:180 views/settings.html:322
 msgid "Upload error"
@@ -2445,25 +2378,20 @@ msgid "Upload ok"
 msgstr "Envio OK"
 
 #: views/audio_files.html:138
-#, fuzzy
-#| msgid "warning"
 msgid "Warning"
-msgstr "aviso"
+msgstr "Aviso"
 
 #: views/includes/footer.html:14
 msgid "Warning messages"
 msgstr "Mensagens de aviso"
 
 #: views/modals/relay.html:69
-#, fuzzy
-#| msgid "Holds the switch water flow in liters per minute when switched on"
 msgid "Water flow in liters per minute when powered on"
-msgstr ""
-"Contém o fluxo de água do interruptor em litros por minuto quando ligado"
+msgstr "Fluxo de água em litros por minuto quando ligado"
 
 #: views/modals/relay.html:57
 msgid "Wattage when powered on"
-msgstr ""
+msgstr "Gasto em watts quando ligado"
 
 #: views/modals/weather.html:18
 msgid "Weather data source url"
