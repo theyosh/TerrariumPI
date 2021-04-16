@@ -27,7 +27,7 @@ class terrariumBH1750Sensor(terrariumI2CSensor):
   def _get_data(self):
     data = None
     with self._open_hardware() as i2c_bus:
-      value = i2c_bus.read_i2c_block_data(self.device[0], terrariumBH1750Sensor.ONE_TIME_HIGH_RES_MODE_1, 2)
+      value = i2c_bus.read_i2c_block_data(self.device[0], self.ONE_TIME_HIGH_RES_MODE_1, 2)
 
       data = {}
       data['light'] = (value[1] + (256 * value[0])) / 1.2
