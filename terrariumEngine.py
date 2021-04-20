@@ -662,8 +662,8 @@ class terrariumEngine(object):
 
   # -= NEW =-
   def _update_relays(self):
-    # Force an update every hour. This will make the graphs work better...
-    force_update = int(time.time()) % (60 * 60) <= terrariumEngine.__ENGINE_LOOP_TIMEOUT
+    # Force an update every 15 minutes. This will make the graphs work better...
+    force_update = int(time.time()) % (15 * 60) <= terrariumEngine.__ENGINE_LOOP_TIMEOUT
     with orm.db_session():
       for relay in Relay.select(lambda r: r.id in self.relays.keys() and not r.id in self.settings['exclude_ids']):
         start = time.time()
