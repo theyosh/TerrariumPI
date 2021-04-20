@@ -1,8 +1,8 @@
 [Unit]
 Description=TerrariumPI
 After=network.target local-fs.target
-StartLimitInterval=370
-StartLimitBurst=2
+# StartLimitInterval=370
+# StartLimitBurst=2
 
 [Service]
 User=pi
@@ -15,9 +15,9 @@ KillSignal=SIGINT
 WatchdogSec=120
 Type=notify
 
-StartLimitInterval=370
-StartLimitBurst=2
-StartLimitAction=reboot-force
+# StartLimitInterval=370
+# StartLimitBurst=2
+# StartLimitAction=reboot-force
 
 [Install]
 WantedBy=multi-user.target
