@@ -62,7 +62,7 @@ class terrariumWebserver(object):
 
       @functools.wraps(func)
       def wrapper(*a, **ka):
-        if required or terrariumUtils.is_true(self.engine.settings['always_authenticate']):
+        if int(self.engine.settings['always_authenticate']) != -1 and (required or terrariumUtils.is_true(self.engine.settings['always_authenticate'])):
           user, password = request.auth or (None, None)
           ip = request.remote_addr if request.get_header('X-Real-Ip') is None else request.get_header('X-Real-Ip')
           if user is None or not check(user, password):
@@ -128,7 +128,7 @@ class terrariumWebserver(object):
 
     # Variables
     variables = {
-      'authenticated' : authenticated_cookie(request.get_cookie('auth', secret=self.cookie_secret)),
+      'authenticated' : int(self.engine.settings['always_authenticate']) == -1 or authenticated_cookie(request.get_cookie('auth', secret=self.cookie_secret)),
       'lang'          : self.engine.settings['language'],
       'title'         : self.engine.settings['title'],
       'version'       : self.engine.settings['version'],

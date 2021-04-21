@@ -55,8 +55,9 @@
                 <label for="always_authenticate" class="col-sm-4 col-form-label">{{ _('Authentication mode') }}</label>
                 <div class="col-sm-8">
                   <select class="custom-select select2" id="always_authenticate" name="always_authenticate" required="required" data-placeholder="{{ _('Authentication mode') }}">
-                    <option value="true">{{ _('Full authentication') }}</option>
-                    <option value="false">{{ _('Only for changes') }}</option>
+                    <option value="1">{{ _('Full authentication') }}</option>
+                    <option value="0">{{ _('Only for changes') }}</option>
+                    <option value="-1">{{ _('No authentication') }}</option>
                   </select>
                   <small class="text-muted fuckbs-d-none">
                     {{ _('Always authenticate or only when changes are being made.') }}
