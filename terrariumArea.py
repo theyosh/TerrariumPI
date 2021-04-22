@@ -263,15 +263,17 @@ class terrariumArea(object):
         del(self.setup[period])
         continue
 
-      self.setup[period]['settle_time']   = self.setup[period].get('settle_time',0)
-      self.setup[period]['power_on_time'] = self.setup[period].get('power_on_time',0)
-      self.setup[period]['tweaks']        = {}
+      self.setup[period]['settle_time']     = self.setup[period].get('settle_time',0)
+      self.setup[period]['power_on_time']   = self.setup[period].get('power_on_time',0)
+      self.setup[period]['alarm_threshold'] = self.setup[period].get('trigger_threshold',0)
+      self.setup[period]['tweaks']          = {}
 
       if period not in self.state:
         self.state[period] = {}
         self.state[period]['last_powered_on'] = datetime.datetime(1970,1,1).timestamp()
 
       self.state[period]['powered'] = self.relays_state(period)
+      self.state[period]['alarm_count'] = 0
 
     if 'sensors' != self.mode:
       self._time_table()
@@ -387,12 +389,11 @@ class terrariumArea(object):
       if toggle_relay is True and not self.state[period]['powered']:
 
         if not light_state_ok:
-          logger.debug(f'Relays for {self} are not switched because the ligts are {light_state} while {self.setup[period]["light_status"]} is requested.')
-          #print(f'Relays for {self} are not switched because the ligts are {light_state} while {self.setup[period]["light_status"]} is requested.')
+          logger.info(f'Relays for {self} are not switched because the lights are {light_state} while {self.setup[period]["light_status"]} is requested.')
           continue
 
         if not door_state_ok:
-          logger.debug(f'Relays for {self} are not switched because the door is {door_state} while {self.setup[period]["door_status"]} is requested.')
+          logger.info(f'Relays for {self} are not switched because the door is {door_state} while {self.setup[period]["door_status"]} is requested.')
           continue
 
         time_elapsed = int(datetime.datetime.now().timestamp()) - self.state[period]['last_powered_on']
@@ -400,12 +401,18 @@ class terrariumArea(object):
           logger.info(f'Relays for {self} are not switched because we have to wait for {self.setup[period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[period]["settle_time"]} seconds.')
           continue
 
+        if self.state[period]['alarm_count'] < self.setup[period]['alarm_threshold']:
+          logger.info(f'The alarm counter ({self.state[period]["alarm_count"]}) for area {self} for alarm {period} is lower than the threshold ({self.setup[period]["alarm_threshold"]}). Skip this round.')
+          self.state[period]['alarm_count'] += 1
+          continue
+
         self.relays_toggle(period,True)
+        self.state[period]['alarm_count'] = 0
         self.state[period]['last_powered_on'] = int(datetime.datetime.now().timestamp())
+
         if self.setup[period]['power_on_time'] > 0.0:
           self.state[period]['timer_on'] = True
           threading.Timer(self.setup[period]['power_on_time'], self.relays_toggle, [period, False]).start()
-
 
       elif toggle_relay is False and self.state[period]['powered'] and not self.state[period].get('timer_on',False):
         logger.info(f'Toggle off the relays for area {self}.')

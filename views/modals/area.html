@@ -531,6 +531,12 @@
               </select>
             </div>
           </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_low_trigger_threshold">{{ _('Alarm threshold') }}</label>
+              <input type="number" step="1" min="0" class="form-control" id="area_alarm_low_trigger_threshold" value="0" name="low_trigger_threshold" placeholder="{{ _('Threshold') }}">
+            </div>
+          </div>
           <div class="col">
             <div class="form-group">
               <label for="area_alarm_low_relays">{{ _('Relays') }}</label>
@@ -601,6 +607,12 @@
                 <option value="open">{{ _('Open') }}</option>
                 <option value="closed">{{ _('Closed') }}</option>
               </select>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_high_trigger_threshold">{{ _('Alarm threshold') }}</label>
+              <input type="number" step="1" min="0" class="form-control" id="area_alarm_high_trigger_threshold" value="0 name="high_trigger_threshold" placeholder="{{ _('Threshold') }}">
             </div>
           </div>
           <div class="col">
