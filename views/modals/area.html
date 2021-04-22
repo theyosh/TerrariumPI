@@ -927,17 +927,26 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
 {% block modal_form_javascript_load %}
 jQuery('.area_type').hide();
 
+// We load the weather data in a own call, as this can give a 404 error when no data information is available
+jQuery.get('{{ url_for("api:weather") }}',function(data){
+  weather_data = data;
+  {{modal_type}}_form.find('select[name="mode"] option[value^="weather"]').prop('disabled',false);
+}).fail(function(data){
+  // 404 error means that there is no weather data, so disable the weather timer options
+  {{modal_type}}_form.find('select[name="mode"] option[value^="weather"]').prop('disabled',true);
+}),
+
 jQuery.when(
 
   jQuery.get('{{ url_for("api:area_types") }}'),
   jQuery.get('{{ url_for("api:enclosure_list") }}'),
   jQuery.get('{{ url_for("api:relay_list") }}'),
   jQuery.get('{{ url_for("api:sensor_list") }}'),
-  jQuery.get('{{ url_for("api:weather") }}'),
   jQuery.get('{{ url_for("api:audio_hardware") }}'),
   jQuery.get('{{ url_for("api:playlist_list") }}'),
 
-).done(function(areas, enclosures, relays, sensors, weather, soundcards, playlists) {
+).done(function(areas, enclosures, relays, sensors, soundcards, playlists) {
+
   jQuery.each(areas[0].data,function(counter,item){
     area_types[item.type] = item;
   });
@@ -984,7 +993,7 @@ jQuery.when(
 
   sensor_data = sensors[0].data;
 
-  weather_data = weather[0];
+
 
   // Clear dimmer step settings
   {{modal_type}}_form.find('.area_alarm_day_dimmer_settings ul.nav').html('');
