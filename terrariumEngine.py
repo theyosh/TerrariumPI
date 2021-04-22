@@ -844,17 +844,13 @@ class terrariumEngine(object):
         relays = [] if webcam.flash is None else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
         self.webcams[webcam.id].update(relays)
 
+        # Check archiving/motion settings
         if 'disabled' != webcam.archive['state']:
-          # Check archiving/motion settings
 
           # Check light status
-          if 'ignore' != webcam.archive['light']:
-            # Default state is that the lights are on....
-            pass
-
-            if webcam.archive['light'] != current_state:
-              #print(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
-              continue
+          if 'ignore' != webcam.archive['light'] and current_state != webcam.archive['light']:
+            #print(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
+            continue
 
           # Check door status
           if 'ignore' != webcam.archive['door']:

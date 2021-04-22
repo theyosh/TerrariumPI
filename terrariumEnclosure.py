@@ -45,10 +45,11 @@ class terrariumEnclosure(object):
     return True
 
   def __light_status(self):
-    if self.main_lights is None:
+    main_lights = self.main_lights
+    if main_lights is None:
       return True
 
-    return self.main_lights.state['day']['powered']
+    return main_lights.state['day']['powered']
 
   def load_areas(self, data):
     for area in data:
