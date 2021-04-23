@@ -184,19 +184,27 @@ more information is here: [Remote data wiki](https://github.com/theyosh/Terrariu
 ## Screenshots
 (made on a very big screen :P )
 ### Dashboard
-![TerrariumPI 2.5 Dashboard screenshot](screenshots/Dashboard.png)
+![TerrariumPI 4.0 Dashboard screenshot](screenshots/Dashboard.png)
 ### Sensors
-![TerrariumPI 2.5 Sensors settings screenshot](screenshots/Temperature_sensors_list.png)
-### Adding sensors
-![TerrariumPI 2.5 Sensors settings screenshot adding a new sensor](screenshots/Sensor_settings_add_sensor.png)
-### Power switches
-![TerrariumPI 2.5 Power switches settings screenshot](screenshots/Switch_settings.png)
-### Environment setup
-![TerrariumPI 2.5 Environment setup screenshot](screenshots/Environment_setup.png)
+![TerrariumPI 4.0 Sensors temperature list screenshot](screenshots/Temperature_sensors_list.png)
+![TerrariumPI 4.0 Sensors humidity list screenshot](screenshots/Humidity_sensors_list.png)
+![TerrariumPI 4.0 Sensors settings screenshot](screenshots/Sensor_setup.png)
+
+### Relays
+![TerrariumPI 4.0 Relays list screenshot](screenshots/Relay_list.png)
+![TerrariumPI 4.0 Relays settings screenshot](screenshots/Relay_setup.png)
+### Enclosure setup
+![TerrariumPI 4.0 Enclosure list screenshot](screenshots/Enclosure_list.png)
+![TerrariumPI 4.0 Enclosure setup screenshot](screenshots/Enclosure_setup.png)
+
+### Area setup
+![TerrariumPI 4.0 Area Lighting setup screenshot](screenshots/Area_Light_setup.gif)
+![TerrariumPI 4.0 Area Humidity setup screenshot](screenshots/Area_Humidity_setup.png)
+
 ### System settings
-![TerrariumPI 2.5 System setup screenshot](screenshots/System_setup.png)
+![TerrariumPI 4.0 System setup screenshot](screenshots/System_setup.png)
 ### MOTD (Message Of The Day)
-![TerrariumPI 2.5 MOTD screenshot](screenshots/terrariumpi-motd.png)
+![TerrariumPI 4.0 MOTD screenshot](screenshots/terrariumpi-motd.png)
 
 More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/master/screenshots)
 
