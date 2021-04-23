@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-04-07 10:58+CEST\n"
-"PO-Revision-Date: 2021-04-07 10:57+0000\n"
+"PO-Revision-Date: 2021-04-23 18:59+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/nl/>\n"
@@ -687,6 +687,9 @@ msgid ""
 "valid in weather mode. When the day is shorter then this minimum value, the "
 "day will be extended to this minimum value."
 msgstr ""
+"Het minimum aantal uren dat de lichten zijn ingeschakeld. Dit is alleen "
+"geldig in de weer modus. Als de dag korter is dan deze minimumwaarde, wordt "
+"de dag verlengd tot deze minimumwaarde."
 
 #: views/modals/area.html:88
 msgid "Maximum hours"
@@ -698,6 +701,9 @@ msgid ""
 "valid in weather mode. When the day is longer then this maximum value, the "
 "day will be shortened to this maximum value."
 msgstr ""
+"Het maximale aantal uren dat de lichten zijn ingeschakeld. Dit is alleen "
+"geldig in de weer modus. Als de dag langer is dan deze maximale waarde, "
+"wordt de dag ingekort tot deze maximale waarde."
 
 #: views/modals/area.html:100
 msgid "Hours shift"
@@ -726,6 +732,8 @@ msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
 msgstr ""
+"Schakel dit in als dit de hoofdlichten zijn voor dit verblijf. Dit wordt "
+"gebruikt voor de lichtcontroles in andere gebieden."
 
 #: views/modals/area.html:126 views/modals/area.html:309
 msgid ""
@@ -781,6 +789,9 @@ msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full day."
 msgstr ""
+"De duur waarin de schakelaars moeten zijn ingeschakeld. Als dit korter is "
+"dan de hele dag, krijgt u een timer functie. Voer '0' in om een volledige "
+"dag te hebben."
 
 #: views/modals/area.html:172 views/modals/area.html:212
 #: views/modals/area.html:355 views/modals/area.html:395
@@ -1020,6 +1031,8 @@ msgid ""
 "Select the webcams that are used with this enclosure. You can use html "
 "colors and fonts and images."
 msgstr ""
+"Selecteer de webcams die bij deze behuizing worden gebruikt. U kunt html-"
+"kleuren en lettertypen en afbeeldingen gebruiken."
 
 #: views/modals/event.html:10 views/modals/event.html:25
 msgid "Event"
