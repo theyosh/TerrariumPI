@@ -1,6 +1,5 @@
 ---
 layout: compress
-permalink: '/app.js'
 ---
 
 /* Registering Service Worker */
