@@ -1,6 +1,6 @@
 ---
-permalink: /hardware/
 title: "Hardware"
+order: 4
 ---
 
 # Hardware
