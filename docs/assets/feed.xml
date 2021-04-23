@@ -1,5 +1,6 @@
 ---
 layout: compress
+permalink: /feed.xml
 # Atom Feed, reference: https://validator.w3.org/feed/docs/atom.html
 ---
 
@@ -35,7 +36,7 @@ layout: compress
     <id>{{ post_absolute_url }}</id>
     <content src="{{ post_absolute_url }}" />
     <author>
-      <name>{{ site.social.name }}</name>
+      <name>{{ post.author | default: site.social.name }}</name>
     </author>
 
   {% if post.categories %}
