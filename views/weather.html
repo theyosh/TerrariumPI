@@ -119,6 +119,8 @@
   }
 
   jQuery(function(){
+    jQuery('#weather_temperature_indicator').text(sensor_type_indicator('temperature'));
+
     new graph('forecast_graph', '{{ url_for("api:weather_forecast") }}', 'temperature');
 
     jQuery.get('{{ url_for("api:weather") }}',function(data) {
@@ -149,7 +151,7 @@
               'temperature' : formatNumber(day.temp) + ' ' + sensor_type_indicator('temperature'),
               'icon' : get_weather_icon(day.weather,data.is_day),
               'weather' : day.weather,
-              'wind' : formatNumber(day.wind.speed) + ' km/h',
+              'wind' : formatNumber(day.wind.speed) + ' ' + sensor_type_indicator('windspeed'),
               'direction' : {'transform': 'rotate(' + (day.wind.direction + 135) + 'deg)'}
             });
         }

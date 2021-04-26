@@ -10,6 +10,7 @@ import subprocess
 import threading
 import bcrypt
 import os
+import math
 
 from cryptography.fernet import Fernet
 
@@ -140,6 +141,14 @@ class terrariumUtils():
   def to_uk_gallons(value):
     # https://www.asknumbers.com/gallons-to-liters.aspx
     return float(value) / 4.54609
+
+  @staticmethod
+  def to_ms(value):
+    return float(value) * 0.27777777777778
+
+  @staticmethod
+  def to_beaufort(value):
+    return math.ceil(math.pow(math.pow(terrariumUtils.to_ms(value),2), float(1)/3))
 
   # @staticmethod
   # def conver_to_value(current,indicator):
