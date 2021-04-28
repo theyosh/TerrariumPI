@@ -165,6 +165,10 @@ div#weather_image {
   opacity: 1 !important;
 }
 
+.info-box .info-box-content {
+  line-height: 120% !important;
+}
+
 .card .overlay {
   position: absolute;
   width: 98%;
