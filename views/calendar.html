@@ -29,12 +29,11 @@
   jQuery(function () {
     // Event editing modal window
     let event_modal = jQuery('#modal-event-setup');
+
     let calendar = new FullCalendar.Calendar(jQuery('#calendar')[0], {
       locale: window.terrariumPI.language.substring(0,2),
-
-      plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid' ],
-      header    : {
-        left  : 'prev,next,today',
+      headerToolbar: {
+        left  : 'prev,next today',
         center: 'title',
         right : 'dayGridMonth,timeGridWeek,timeGridDay'
       },
@@ -132,7 +131,7 @@
       selectable: false,
       {% endif %}
 
-      eventRender: function(info) {
+      eventDidMount: function(info) {
         let end = info.event.end || moment(info.event.start).add(1,'days');
         tippy(info.el, {
           allowHTML: true,
@@ -143,6 +142,7 @@
         });
       },
     });
+
     calendar.render();
   });
 </script>
