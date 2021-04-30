@@ -64,7 +64,7 @@ class terrariumWebcam(object):
   __FONT_SIZE = 10
   __OFFLINE = 'offline'
   __ONLINE = 'online'
-  __UPDATE_TIMEOUT = 60
+  __UPDATE_TIMEOUT = 30
   __VALID_ROTATIONS = ['0','90','180','270','h','v']
 
   _WARM_UP = 2
