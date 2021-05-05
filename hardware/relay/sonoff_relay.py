@@ -115,9 +115,13 @@ class terrariumRelaySonoff(terrariumRelay):
                                                 callback=callback) )
 
     zeroconf = Zeroconf()
-    browser = ServiceBrowser(zeroconf, "_http._tcp.local.", Listener())
-    sleep(terrariumRelaySonoff.__SCAN_TIME)
-    zeroconf.close()
+    try:
+      browser = ServiceBrowser(zeroconf, "_http._tcp.local.", Listener())
+      sleep(terrariumRelaySonoff.__SCAN_TIME)
+    except OSError:
+      pass
+    finally:
+      zeroconf.close()
 
     for device in found_devices:
        yield device
