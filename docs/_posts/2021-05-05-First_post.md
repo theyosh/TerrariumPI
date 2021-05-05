@@ -1,5 +1,5 @@
 ---
-title: First post
+title: "First post"
 date: 2021-05-05 12:00:00 +0200
 categories: News, Website
 #tags: post,news,website
