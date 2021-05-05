@@ -87,6 +87,9 @@ disqus:
 
 paginate: 10
 
+plugins:
+  - jekyll-feed
+
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
