@@ -5,9 +5,6 @@ avatar: /assets/images/profile_image.jpg
 tagline: Reptile enclosure automation
 baseurl: 'TerrariumPI/'
 
-github:
-  username: theyosh             # change to your github username
-
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
