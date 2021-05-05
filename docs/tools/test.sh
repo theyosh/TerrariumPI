@@ -56,7 +56,7 @@ while (($#)); do
 done
 
 if $_build; then
-  JEKYLL_ENV=production bundle exec jekyll b
+  JEKYLL_ENV=production bundle exec jekyll b -s docs
 fi
 
 bundle exec htmlproofer "$DEST" \
