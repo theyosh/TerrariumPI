@@ -6,11 +6,11 @@ group :jekyll_plugins do
   # If you have any plugins, put them here!
   # gem "jekyll-xxx", "~> x.y"
   gem "jekyll-feed"
-  gem "jekyll-paginate", "~> 1.1"
-  gem "jekyll-redirect-from", "~> 0.16"
-  gem "jekyll-seo-tag", "~> 2.7"
-  gem "jekyll-archives", "~> 2.2"
-  gem "jekyll-sitemap", "~> 1.4"
+  gem "jekyll-paginate"
+  gem "jekyll-redirect-from"
+  gem "jekyll-seo-tag"
+  gem "jekyll-archives"
+  gem "jekyll-sitemap"
 end
 
 group :test do
