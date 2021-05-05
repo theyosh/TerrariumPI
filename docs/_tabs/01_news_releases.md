@@ -5,5 +5,4 @@ permalink: /updates/
 icon: fas fa-burn
 order: 1
 ---
-
-<h1>News / releases</h1>
+Here we have the latest news/updates and releases
