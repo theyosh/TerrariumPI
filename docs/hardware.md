@@ -1,1 +1,5 @@
-<h1>Hardware</h1>
+layout: page
+title: "Hardware"
+permalink: /hardware/
+
+# Hardware
