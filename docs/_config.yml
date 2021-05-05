@@ -18,3 +18,8 @@ social:
     - https://www.linkedin.com/in/theyosh
 
 toc: true
+
+collections:
+  tabs:
+    output: true
+    sort_by: order
