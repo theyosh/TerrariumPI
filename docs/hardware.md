@@ -1,5 +1,6 @@
+---
 layout: page
 title: "Hardware"
 permalink: /hardware/
-
-# Hardware
+---
+<h1>Hardware</h1>
