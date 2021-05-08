@@ -23,7 +23,7 @@ if [ $PYTHON -eq 2 ]; then
   PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21 gevent==1.4.0 luma.core==1.12.0 luma.oled"
 fi
 if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} gevent opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt asyncio luma.oled poetry"
+  PIP_MODULES="${PIP_MODULES} gevent==20.9.0 opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt asyncio luma.oled poetry"
 fi
 
 if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then

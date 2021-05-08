@@ -89,7 +89,7 @@
                             <span class="gauge-value">...</span> <span>C/F / % / cm/inch</span>
                           </div>
                         </div>
-                        <p>{{_('The gauge graph shows the current temperature or humidity value. The color of the graph depends on the current value and the alarm values. When the value gets more to the minimum or maximum value, it will gets more red/orange.')}}</p>
+                        <p>{{_('The gauge graph shows the current temperature or humidity value. The colour of the graph depends on the current value and the alarm values. When the value gets more to the minimum or maximum value, it will gets more red/orange.')}}</p>
                         <p>{{_('The values are updated every 30 seconds and updated in real time on the page.')}}</p>
                         <p>{{_('The current value is also written below the graph in degrees, percentage or distance.')}}</p>
                       </div>

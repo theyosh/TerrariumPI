@@ -5,58 +5,206 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2020-08-08 13:02+CEST\n"
-"PO-Revision-Date: 2020-08-08 11:03+0000\n"
+"POT-Creation-Date: 2021-03-25 12:31+CET\n"
+"PO-Revision-Date: 2021-04-06 15:46+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
-"webinterface/nl/>\n"
+"3-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1.1\n"
+"X-Generator: Weblate 4.5.1\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: terrariumEngine.py:677 terrariumEngine.py:789 views/dashboard.tpl:7
+#: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr "Actief"
 
-#: terrariumEngine.py:678
+#: terrariumEngine.py:680
 msgid "Load"
 msgstr "Belasting"
 
-#: terrariumEngine.py:679
+#: terrariumEngine.py:681
 msgid "CPU Temp."
 msgstr "CPU Temp."
 
-#: terrariumEngine.py:767
+#: terrariumEngine.py:769
 msgid "Version"
 msgstr "Versie"
 
-#: terrariumEngine.py:793 views/system_status.tpl:174
+#: terrariumEngine.py:795 views/system_status.tpl:174
 msgid "Disk usage"
 msgstr "Harde schijf gebruik"
 
-#: terrariumEngine.py:798 views/system_status.tpl:118
+#: terrariumEngine.py:800 views/system_status.tpl:118
 msgid "Memory usage"
 msgstr "Geheugen verbruik"
 
-#: terrariumEngine.py:803 views/system_status.tpl:6
+#: terrariumEngine.py:805 views/system_status.tpl:6
 msgid "CPU Load"
 msgstr "Processor belasting"
 
-#: terrariumEngine.py:809 views/system_status.tpl:62
+#: terrariumEngine.py:811 views/system_status.tpl:62
 msgid "CPU Temperature"
 msgstr "Processor temperatuur"
+
+#: terrariumNotification.py:210
+msgid "Environment light day on"
+msgstr "Omgeving licht dag aan"
+
+#: terrariumNotification.py:211
+msgid "Environment light day off"
+msgstr "Omgeving licht dag uit"
+
+#: terrariumNotification.py:212
+msgid "Environment light night on"
+msgstr "Omgeving licht 's nachts aan"
+
+#: terrariumNotification.py:213
+msgid "Environment light night off"
+msgstr "Omgeving licht 's nachts uit"
+
+#: terrariumNotification.py:215
+msgid "Environment temperature alarm low on"
+msgstr "Omgevingstemperatuuralarm laag aan"
+
+#: terrariumNotification.py:216
+msgid "Environment temperature alarm low off"
+msgstr "Omgevingstemperatuuralarm laag uit"
+
+#: terrariumNotification.py:217
+msgid "Environment temperature alarm high on"
+msgstr "Omgevingstemperatuur alarm hoog aan"
+
+#: terrariumNotification.py:218
+msgid "Environment temperature alarm high off"
+msgstr "Omgevingstemperatuuralarm hoog uit"
+
+#: terrariumNotification.py:220
+msgid "Environment humidity alarm low on"
+msgstr "Alarm omgevingsvochtigheid laag aan"
+
+#: terrariumNotification.py:221
+msgid "Environment humidity alarm low off"
+msgstr "Alarm omgevingsvochtigheid laag uit"
+
+#: terrariumNotification.py:222
+msgid "Environment humidity alarm high on"
+msgstr "Alarm omgevingsvochtigheid hoog aan"
+
+#: terrariumNotification.py:223
+msgid "Environment humidity alarm high off"
+msgstr "Alarm omgevingsvochtigheid hoog uit"
+
+#: terrariumNotification.py:225
+msgid "Environment moisture alarm low on"
+msgstr "Alarm voor omgevingsvochtigheid laag"
+
+#: terrariumNotification.py:226
+msgid "Environment moisture alarm low off"
+msgstr "Omgevingsvochtalarm laag uit"
+
+#: terrariumNotification.py:227
+msgid "Environment moisture alarm high on"
+msgstr "Alarm omgevingsvochtigheid hoog"
+
+#: terrariumNotification.py:228
+msgid "Environment moisture alarm high off"
+msgstr ""
+
+#: terrariumNotification.py:230
+msgid "Environment conductivity alarm low on"
+msgstr ""
+
+#: terrariumNotification.py:231
+msgid "Environment conductivity alarm low off"
+msgstr ""
+
+#: terrariumNotification.py:232
+msgid "Environment conductivity alarm high on"
+msgstr ""
+
+#: terrariumNotification.py:233
+msgid "Environment conductivity alarm high off"
+msgstr ""
+
+#: terrariumNotification.py:235
+msgid "Environment pH alarm low on"
+msgstr ""
+
+#: terrariumNotification.py:236
+msgid "Environment pH alarm low off"
+msgstr ""
+
+#: terrariumNotification.py:237
+msgid "Environment pH alarm high on"
+msgstr ""
+
+#: terrariumNotification.py:238
+msgid "Environment pH alarm high off"
+msgstr ""
+
+#: terrariumNotification.py:240
+msgid "Environment watertank alarm low on"
+msgstr ""
+
+#: terrariumNotification.py:241
+msgid "Environment watertank alarm low off"
+msgstr ""
+
+#: terrariumNotification.py:242
+msgid "Environment watertank alarm high on"
+msgstr ""
+
+#: terrariumNotification.py:243
+msgid "Environment watertank alarm high off"
+msgstr ""
+
+#: terrariumNotification.py:245
+msgid "Authentication warning"
+msgstr "Authenticatie waarschuwing"
+
+#: terrariumNotification.py:247
+msgid "System warning message"
+msgstr "Systeemwaarschuwingsbericht"
+
+#: terrariumNotification.py:248
+msgid "System error message"
+msgstr "Systeemfoutbericht"
+
+#: terrariumNotification.py:250 terrariumNotification.py:251
+msgid "Sensor low alarm"
+msgstr "Sensor laag alarm"
+
+#: terrariumNotification.py:253
+msgid "Powerswitch on"
+msgstr "Stroomschakelaars aan"
+
+#: terrariumNotification.py:254
+msgid "Powerswitch off"
+msgstr "Stroomschakelaars uit"
+
+#: terrariumNotification.py:256
+msgid "Door opened"
+msgstr "Deur is geopend"
+
+#: terrariumNotification.py:257
+msgid "Door closed"
+msgstr "Deur is gesloten"
+
+#: terrariumNotification.py:259
+msgid "Webcam motion"
+msgstr "Webcam beweging"
 
 #: terrariumTranslations.py:22
 msgid "Holds the external source URL. Supported sources are: %s."
 msgstr "Bevat de externe bron URL. Ondersteunde bronnen zijn: %s."
 
-#: terrariumTranslations.py:29
+#: terrariumTranslations.py:29 terrariumTranslations.py:175
 msgid ""
 "Choose the wind speed indicator. The software will recalculate to the chosen "
 "indicator."
@@ -201,18 +349,18 @@ msgstr "Bevat de timer stop tijd. De timer stop op dit tijdstip."
 
 #: terrariumTranslations.py:62
 msgid ""
-"Holds the period in minutes that the power switch is on withing the total "
+"Holds the period in minutes that the power switch is on within the total "
 "timer window."
 msgstr ""
-"Bevat de tijdsuur in minuten dat de schakelaar aan is in de totale timer "
+"Bevat de tijdsduur in minuten dat de schakelaar aan is in de totale timer "
 "tijdsduur."
 
 #: terrariumTranslations.py:63
 msgid ""
-"Holds the period in minutes that the power switch is off withing the total "
+"Holds the period in minutes that the power switch is off within the total "
 "timer window."
 msgstr ""
-"Bevat de tijdsuur in minuten dat de schakelaar uit is in de totale timer "
+"Bevat de tijdsduur in minuten dat de schakelaar uit is in de totale timer "
 "tijdsduur."
 
 #: terrariumTranslations.py:64
@@ -242,7 +390,7 @@ msgstr "Bevat de percentage wanneer de schakelaar aan wordt gezet."
 
 #: terrariumTranslations.py:68
 msgid ""
-"Holds the amount of seconds for the duration in which it decresses the power."
+"Holds the amount of seconds for the duration in which it decreases the power."
 msgstr "Bevat het aantal seconden dat gebruikt wordt om de stroom te verhogen."
 
 #: terrariumTranslations.py:69
@@ -274,7 +422,7 @@ msgid ""
 "Holds the door address. When using GPIO use <strong>physical</strong> GPIO "
 "pin numbering as address."
 msgstr ""
-"Bevat het deuradres. Wanneer u GPIO gebruikt, gebruikt u <strong>fysieke</"
+"Bevat het deur adres. Wanneer u GPIO gebruikt, gebruik <strong>fysieke</"
 "strong> GPIO pin nummering als adres."
 
 #: terrariumTranslations.py:78
@@ -388,7 +536,7 @@ msgid "Toggle on to enable repeating of the audio files."
 msgstr "Zet aan om de afspeellijst te laten herladen als deze is afgelopen."
 
 #: terrariumTranslations.py:106
-msgid "Toggle on to enable shuffeling of the audio files."
+msgid "Toggle on to enable shuffling of the audio files."
 msgstr "Zet aan om de afspeellijst te laten shufflen."
 
 #: terrariumTranslations.py:107
@@ -460,7 +608,7 @@ msgstr ""
 "getallen om de waarden te verlagen."
 
 #: terrariumTranslations.py:114
-msgid "Holds the source that is used to determing when it is day or night."
+msgid "Holds the source that is used to determine when it is day or night."
 msgstr ""
 "Bevat de bron die wordt gebruikt om te bepalen wanneer het dag of nacht is."
 
@@ -482,7 +630,7 @@ msgstr ""
 
 #: terrariumTranslations.py:117
 msgid ""
-"Holds the period in minutes that this environment part is powered on withing "
+"Holds the period in minutes that this environment part is powered on within "
 "the total timer window."
 msgstr ""
 "Bevat de periode in minuten dat dit omgevingsdeel is ingeschakeld binnen het "
@@ -490,8 +638,8 @@ msgstr ""
 
 #: terrariumTranslations.py:118
 msgid ""
-"Holds the period in minutes that this environment part is powered off "
-"withing the total timer window."
+"Holds the period in minutes that this environment part is powered off within "
+"the total timer window."
 msgstr ""
 "Bevat de periode in minuten dat dit omgevingsdeel is uitgeschakeld binnen "
 "het totale tijdvenster."
@@ -553,7 +701,7 @@ msgstr ""
 "of timers worden geactiveerd. Kies alle schakelaars hieronder."
 
 #: terrariumTranslations.py:125
-msgid "Holds the water volume in liters."
+msgid "Holds the water volume in litres."
 msgstr "Bevat de watertank volume in liters."
 
 #: terrariumTranslations.py:126
@@ -578,7 +726,7 @@ msgstr ""
 
 #: terrariumTranslations.py:129
 msgid ""
-"Select when the power switches can toggle. When the door is open, cosed or "
+"Select when the power switches can toggle. When the door is open, closed or "
 "just always"
 msgstr ""
 "Selecteer wanneer de stroomschakelaars kunnen schakelen. Wanneer de deur is "
@@ -593,20 +741,19 @@ msgid "Holds the mail server hostname or IP."
 msgstr "Bevat de hostnaam of IP van de mailserver."
 
 #: terrariumTranslations.py:135
-msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
+msgid "Holds the mail server port number. SSL and TLS will be autodetected."
 msgstr ""
 "Bevat het poortnummer van de mailserver. SSL en/of TLS wordt automatisch "
 "gedetecteerd."
 
 #: terrariumTranslations.py:136
-msgid "Holds the username for authentication with the mailserver if needed."
+msgid "Holds the username for authentication with the mail server if needed."
 msgstr ""
 "Bevat indien nodig de gebruikersnaam voor authenticatie met de mailserver."
 
 #: terrariumTranslations.py:137
-msgid "Holds the password for authentication with the mailserver if needed."
-msgstr ""
-"Bevat indien nodig het wachtwoord voor authenticatie bij de mailserver."
+msgid "Holds the password for authentication with the mail server if needed."
+msgstr "Bevat indien nodig het wachtwoord voor authenticatie bij de mailserver."
 
 #: terrariumTranslations.py:139
 msgid "Holds the display chip that is used."
@@ -655,7 +802,7 @@ msgstr "Bevat het Telegram Bot token. Meer informatie %shier%s"
 #: terrariumTranslations.py:152
 msgid ""
 "Holds the Telegram username that is allowed for receiving messages. Can be "
-"multiple usernames seperated by a comma. More information %shere%s"
+"multiple usernames separated by a comma. More information %shere%s"
 msgstr ""
 "Bevat de Telegram-gebruikersnaam die is toegestaan voor het ontvangen van "
 "berichten. Kan meerdere gebruikersnamen zijn gescheiden door een komma. Meer "
@@ -730,7 +877,7 @@ msgstr ""
 "interface na het wijzigen van de instelling."
 
 #: terrariumTranslations.py:170
-msgid "Holds the soundcard that is used for playing audio."
+msgid "Holds the sound card that is used for playing audio."
 msgstr "Bevat de geluidskaart dat wordt gebruikt voor het afspelen van audio."
 
 #: terrariumTranslations.py:171
@@ -746,7 +893,7 @@ msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr "Bevat de hoeveelheid euro/dollar per 1 kW/h (1 Kilowatt per uur)."
 
 #: terrariumTranslations.py:173
-msgid "Holds the amount of euro/dollar per 1000 liters water."
+msgid "Holds the amount of euro/dollar per 1000 litres water."
 msgstr "Bevat de hoeveelheid euro/dollar per 1000 liter water."
 
 #: terrariumTranslations.py:174
@@ -756,14 +903,6 @@ msgid ""
 msgstr ""
 "Kies de temperatuurindicator. De software zal opnieuw worden berekend op de "
 "gekozen indicator."
-
-#: terrariumTranslations.py:175
-msgid ""
-"Choose the windspeed indicator. The software will recalculate to the chosen "
-"indicator."
-msgstr ""
-"Kies de windsnelheid indicator. De software zal opnieuw worden berekend op "
-"de gekozen indicator."
 
 #: terrariumTranslations.py:176
 msgid ""
@@ -846,7 +985,7 @@ msgid "Holds the species name of the animal."
 msgstr "Bevat de soortnaam van het dier."
 
 #: terrariumTranslations.py:192
-msgid "Holds the latin name of the animal."
+msgid "Holds the Latin name of the animal."
 msgstr "Bevat de Latijnse naam van het dier."
 
 #: terrariumTranslations.py:193
@@ -861,98 +1000,98 @@ msgstr "Bevat een link naar meer informatie."
 msgid "Offline since"
 msgstr "Offline sinds"
 
-#: terrariumWebserver.py:93 terrariumWebserver.py:202
+#: terrariumWebserver.py:92 terrariumWebserver.py:201
 msgid "Authenticate to make any changes"
 msgstr "Login om wijzigingen te kunnen maken"
 
-#: terrariumWebserver.py:93 terrariumWebserver.py:202
+#: terrariumWebserver.py:92 terrariumWebserver.py:201
 #: views/system_settings.tpl:57
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:93 terrariumWebserver.py:202
+#: terrariumWebserver.py:92 terrariumWebserver.py:201
 #: views/system_settings.tpl:146
 msgid "Authentication"
 msgstr "Authenticatie"
 
-#: terrariumWebserver.py:266
-msgid "Player command could ot be executed!"
+#: terrariumWebserver.py:265
+msgid "Player command could to be executed!"
 msgstr "De audio speler commando kon niet worden uitgevoerd!"
 
-#: terrariumWebserver.py:266 terrariumWebserver.py:286
-#: terrariumWebserver.py:298 terrariumWebserver.py:306
+#: terrariumWebserver.py:265 terrariumWebserver.py:285
+#: terrariumWebserver.py:297 terrariumWebserver.py:305
 msgid "Error!"
 msgstr "Fout!"
 
-#: terrariumWebserver.py:274 terrariumWebserver.py:277
+#: terrariumWebserver.py:273 terrariumWebserver.py:276
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:274 terrariumWebserver.py:277
+#: terrariumWebserver.py:273 terrariumWebserver.py:276
 msgid "Player command executed!"
 msgstr "De audio speler commando is uitgevoerd!"
 
-#: terrariumWebserver.py:286
+#: terrariumWebserver.py:285
 msgid "File is not uploaded!"
 msgstr "Bestand is niet geüpload!"
 
-#: terrariumWebserver.py:291
+#: terrariumWebserver.py:290
 msgid "File '%s' is uploaded"
 msgstr "Bestand '%s' is geüpload"
 
-#: terrariumWebserver.py:291 terrariumWebserver.py:301
+#: terrariumWebserver.py:290 terrariumWebserver.py:300
 msgid "Success!"
 msgstr "Gelukt!"
 
-#: terrariumWebserver.py:293
+#: terrariumWebserver.py:292
 msgid "Duplicate file '%s'"
 msgstr "Duplicaat bestand '%s'"
 
-#: terrariumWebserver.py:298
+#: terrariumWebserver.py:297
 msgid "Action could not be satisfied"
 msgstr "Actie kon niet worden uitgevoerd"
 
-#: terrariumWebserver.py:301
+#: terrariumWebserver.py:300
 msgid "Audio file is deleted"
 msgstr "Audio bestand is verwijderd"
 
-#: terrariumWebserver.py:306
+#: terrariumWebserver.py:305
 msgid "Data could not be saved"
 msgstr "Data kon niet worden opgeslagen"
 
-#: terrariumWebserver.py:314
+#: terrariumWebserver.py:313
 msgid "Data saved"
 msgstr "Data is opgeslagen"
 
-#: terrariumWebserver.py:315
+#: terrariumWebserver.py:314
 msgid "Your changes are saved"
 msgstr "Je wijzigingen zijn opgeslagen"
 
-#: terrariumWebserver.py:334
+#: terrariumWebserver.py:333
 msgid "Hardware is replaced"
 msgstr "Hardware is vervangen"
 
-#: terrariumWebserver.py:335
+#: terrariumWebserver.py:334
 msgid "Hardware replacement is logged in the calendar"
 msgstr "Vervanging van hardware wordt vastgelegd in de kalender"
 
-#: terrariumWebserver.py:338
+#: terrariumWebserver.py:337
 msgid "A new replacement reminder is created"
 msgstr "Er wordt een nieuwe vervangingsherinnering gemaakt"
 
-#: terrariumWebserver.py:360
+#: terrariumWebserver.py:359
 msgid "Calender event created"
 msgstr "Kalender item is aangemaakt"
 
-#: terrariumWebserver.py:361
+#: terrariumWebserver.py:360
 msgid "The calender event is created"
 msgstr "De kalender item is aangemaakt"
 
-#: terrariumWebserver.py:500 views/inc/menu.tpl:177
+#: terrariumWebserver.py:499 views/inc/menu.tpl:177
 msgid "Log out"
 msgstr "Log uit"
 
-#: terrariumWebserver.py:501
+#: terrariumWebserver.py:500
 msgid "You are now logged out"
 msgstr "Je bent nu uitgelogd"
 
@@ -964,26 +1103,26 @@ msgid "Help"
 msgstr "Hulp"
 
 #: views/audio_files.tpl:16
-msgid "Here you can upload and manange your audio files."
+msgid "Here you can upload and manage your audio files."
 msgstr "Hier kunt u uw audio bestanden uploaden en beheren."
 
 #: views/audio_files.tpl:16
 msgid ""
 "In the existing audio files list you can see which files are uploaded. By "
-"clicking on the trashbin (%s) icon you can delete the file."
+"clicking on the trash bin (%s) icon you can delete the file."
 msgstr ""
 "In het overzicht van bestaande audio bestanden kun je zien welke bestanden "
 "er geüpload zijn. Door op de prullenbak (%s) icoon te klikken kun je het "
 "bestand verwijderen."
 
 #: views/audio_files.tpl:16
-msgid "Open the dropzone multiple file uploader to upload new audio files."
+msgid "Open the drop zone multiple file uploader to upload new audio files."
 msgstr ""
 "Open de dropzone meerdere bestanden uploader om nieuwe audio bestanden te "
 "uploaden."
 
 #: views/audio_files.tpl:23
-msgid "Dropzone multiple file uploader"
+msgid "Drop zone multiple file uploader"
 msgstr "Dropzone meerdere bestanden uploader"
 
 #: views/audio_files.tpl:35
@@ -1031,7 +1170,7 @@ msgstr "Tijdsduur"
 #: views/inc/usage_sensors.tpl:174 views/inc/usage_switches.tpl:117
 #: views/inc/usage_switches.tpl:140 views/inc/usage_webcams.tpl:104
 #: views/inc/usage_webcams.tpl:134 views/profile.tpl:56
-#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:160
+#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:161
 #: views/switch_settings.tpl:25 views/switch_settings.tpl:142
 #: views/webcam_settings.tpl:29 views/webcam_settings.tpl:92
 msgid "Name"
@@ -1044,7 +1183,7 @@ msgstr "Album"
 #: views/audio_files.tpl:68 views/inc/usage_dashboard.tpl:153
 #: views/inc/usage_sensors.tpl:128 views/inc/usage_sensors.tpl:171
 #: views/profile.tpl:63 views/sensor_settings.tpl:25
-#: views/sensor_settings.tpl:134
+#: views/sensor_settings.tpl:135
 msgid "Type"
 msgstr "Type"
 
@@ -1114,7 +1253,7 @@ msgid "Stop"
 msgstr "Stop"
 
 #: views/audio_playlist.tpl:28 views/audio_playlist.tpl:95
-#: views/dashboard.tpl:542 views/inc/menu.tpl:74 views/sensor_settings.tpl:150
+#: views/dashboard.tpl:542 views/inc/menu.tpl:74 views/sensor_settings.tpl:151
 #: views/system_environment.tpl:1247
 msgid "Volume"
 msgstr "Volume"
@@ -1164,7 +1303,7 @@ msgid "new"
 msgstr "nieuw"
 
 #: views/audio_playlist.tpl:112 views/sensor_settings.tpl:103
-#: views/sensor_settings.tpl:137 views/switch_settings.tpl:109
+#: views/sensor_settings.tpl:138 views/switch_settings.tpl:109
 #: views/switch_settings.tpl:157 views/switch_status.tpl:116
 #: views/webcam_settings.tpl:111 views/webcam_settings.tpl:125
 #: views/webcam_settings.tpl:144 views/webcam_settings.tpl:163
@@ -1176,14 +1315,14 @@ msgstr "Maak een keuze"
 #: views/audio_playlist.tpl:123 views/calendar.tpl:140
 #: views/door_settings.tpl:94 views/inc/usage_doors.tpl:70
 #: views/inc/usage_sensors.tpl:81 views/inc/usage_switches.tpl:70
-#: views/inc/usage_webcams.tpl:66 views/sensor_settings.tpl:208
+#: views/inc/usage_webcams.tpl:66 views/sensor_settings.tpl:209
 #: views/switch_settings.tpl:214 views/switch_status.tpl:132
 #: views/webcam_settings.tpl:221 views/webcam_settings.tpl:265
 msgid "Close"
 msgstr "Sluiten"
 
 #: views/audio_playlist.tpl:124 views/door_settings.tpl:95
-#: views/sensor_settings.tpl:209 views/switch_settings.tpl:215
+#: views/sensor_settings.tpl:210 views/switch_settings.tpl:215
 #: views/webcam_settings.tpl:222
 msgid "Add"
 msgstr "Voeg toe"
@@ -1287,7 +1426,7 @@ msgstr "Totaal waterverbruik in L"
 #: views/inc/usage_sensors.tpl:157 views/inc/usage_sensors.tpl:189
 #: views/inc/usage_sensors.tpl:206 views/inc/usage_weather.tpl:13
 #: views/inc/usage_weather.tpl:85 views/sensor_settings.tpl:46
-#: views/sensor_settings.tpl:184 views/weather.tpl:7
+#: views/sensor_settings.tpl:185 views/weather.tpl:7
 msgid "Current"
 msgstr "Huidig"
 
@@ -1400,7 +1539,7 @@ msgstr "Nacht"
 
 #: views/dashboard.tpl:118 views/inc/menu.tpl:47
 #: views/inc/usage_dashboard.tpl:159 views/inc/usage_sensors.tpl:131
-#: views/sensor_settings.tpl:138 views/system_environment.tpl:158
+#: views/sensor_settings.tpl:139 views/system_environment.tpl:158
 msgid "Temperature"
 msgstr "Temperatuur"
 
@@ -1432,21 +1571,21 @@ msgstr "Dag/nacht verschil"
 
 #: views/dashboard.tpl:171 views/inc/menu.tpl:50
 #: views/inc/usage_dashboard.tpl:158 views/inc/usage_sensors.tpl:132
-#: views/sensor_settings.tpl:139 views/system_environment.tpl:370
+#: views/sensor_settings.tpl:140 views/system_environment.tpl:370
 msgid "Humidity"
 msgstr "Luchtvochtigheid"
 
-#: views/dashboard.tpl:224 views/inc/menu.tpl:53 views/sensor_settings.tpl:140
+#: views/dashboard.tpl:224 views/inc/menu.tpl:53 views/sensor_settings.tpl:141
 #: views/system_environment.tpl:581
 msgid "Moisture"
 msgstr "Vochtigheid"
 
-#: views/dashboard.tpl:277 views/inc/menu.tpl:62 views/sensor_settings.tpl:143
+#: views/dashboard.tpl:277 views/inc/menu.tpl:62 views/sensor_settings.tpl:144
 #: views/system_environment.tpl:1003
 msgid "pH"
 msgstr "pH"
 
-#: views/dashboard.tpl:330 views/inc/menu.tpl:56 views/sensor_settings.tpl:141
+#: views/dashboard.tpl:330 views/inc/menu.tpl:56 views/sensor_settings.tpl:142
 #: views/system_environment.tpl:792
 msgid "Conductivity"
 msgstr "Geleidingsvermogen"
@@ -1455,12 +1594,12 @@ msgstr "Geleidingsvermogen"
 msgid "Water tank"
 msgstr "Watertank"
 
-#: views/dashboard.tpl:436 views/inc/menu.tpl:68 views/sensor_settings.tpl:148
+#: views/dashboard.tpl:436 views/inc/menu.tpl:68 views/sensor_settings.tpl:149
 #: views/system_environment.tpl:1378
 msgid "Fertility"
 msgstr "Vruchtbaarheid"
 
-#: views/dashboard.tpl:489 views/inc/menu.tpl:71 views/sensor_settings.tpl:149
+#: views/dashboard.tpl:489 views/inc/menu.tpl:71 views/sensor_settings.tpl:150
 #: views/system_environment.tpl:1589
 msgid "CO2"
 msgstr "CO2"
@@ -1586,7 +1725,7 @@ msgstr "Hardware"
 #: views/inc/usage_sensors.tpl:123 views/inc/usage_sensors.tpl:168
 #: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
 #: views/notifications.tpl:81 views/sensor_settings.tpl:22
-#: views/sensor_settings.tpl:155 views/switch_settings.tpl:22
+#: views/sensor_settings.tpl:156 views/switch_settings.tpl:22
 #: views/switch_settings.tpl:137
 msgid "Address"
 msgstr "Adres"
@@ -1903,11 +2042,11 @@ msgstr "Profiel"
 msgid "All"
 msgstr "Alle"
 
-#: views/inc/menu.tpl:59 views/sensor_settings.tpl:142
+#: views/inc/menu.tpl:59 views/sensor_settings.tpl:143
 msgid "Distance"
 msgstr "Afstand"
 
-#: views/inc/menu.tpl:65 views/sensor_settings.tpl:144
+#: views/inc/menu.tpl:65 views/sensor_settings.tpl:145
 msgid "Light"
 msgstr "Licht"
 
@@ -2180,7 +2319,7 @@ msgstr ""
 
 #: views/inc/usage_dashboard.tpl:101
 msgid ""
-"The third tile shows the current water flow in liters per minute. The amount "
+"The third tile shows the current water flow in litres per minute. The amount "
 "is calculated based on the power switch settings and what the state is of "
 "the switches. The bar shows a percentage of the max usage."
 msgstr ""
@@ -2208,7 +2347,7 @@ msgstr ""
 msgid ""
 "The fifth tile shows the total water usage from the start of using this "
 "software. It will calculate the total water usage every 10 minutes based on "
-"all historical data. It is shown in liters. When the water price is entered, "
+"all historical data. It is shown in litres. When the water price is entered, "
 "it will show the costs of the water bill and the amount of days it is "
 "calculated on."
 msgstr ""
@@ -2230,7 +2369,7 @@ msgstr ""
 
 #: views/inc/usage_dashboard.tpl:121
 msgid ""
-"When a part is active the title is in color. If the title is gray that part "
+"When a part is active the title is in colour. If the title is grey that part "
 "is than not running or configured."
 msgstr ""
 "Wanneer een deel actief is, is de titel in kleur. Als de titel grijs is, dan "
@@ -2696,7 +2835,7 @@ msgstr "Toon of verberg de sensor"
 
 #: views/inc/usage_sensors.tpl:92
 msgid ""
-"The gauge graph shows the current temperature or humidity value. The color "
+"The gauge graph shows the current temperature or humidity value. The colour "
 "of the graph depends on the current value and the alarm values. When the "
 "value gets more to the minimum or maximum value, it will gets more red/"
 "orange."
@@ -2738,22 +2877,22 @@ msgid "HC-SR04"
 msgstr "HC-SR04"
 
 #: views/inc/usage_sensors.tpl:141 views/inc/usage_sensors.tpl:177
-#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:164
+#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:165
 msgid "Alarm min"
 msgstr "Alarm min"
 
 #: views/inc/usage_sensors.tpl:145 views/inc/usage_sensors.tpl:180
-#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:168
+#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:169
 msgid "Alarm max"
 msgstr "Alarm max"
 
 #: views/inc/usage_sensors.tpl:149 views/inc/usage_sensors.tpl:183
-#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:172
+#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:173
 msgid "Limit min"
 msgstr "Limiet min"
 
 #: views/inc/usage_sensors.tpl:153 views/inc/usage_sensors.tpl:186
-#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:176
+#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:177
 msgid "Limit max"
 msgstr "Limiet max"
 
@@ -3217,11 +3356,11 @@ msgstr "Consumer secret"
 
 #: views/notifications.tpl:119
 msgid "Access token"
-msgstr "Access token"
+msgstr "Toegangstoken"
 
 #: views/notifications.tpl:123
 msgid "Access token secret"
-msgstr "Access token secret"
+msgstr "Toegang sleutel geheim"
 
 #: views/notifications.tpl:134
 msgid "Pushover"
@@ -3233,7 +3372,7 @@ msgstr "API Token"
 
 #: views/notifications.tpl:148
 msgid "User key"
-msgstr "User key"
+msgstr "Gebruikerssleutel"
 
 #: views/notifications.tpl:159
 msgid "Telegram"
@@ -3241,7 +3380,7 @@ msgstr "Telegram"
 
 #: views/notifications.tpl:169
 msgid "Bot Token"
-msgstr "Bot Token"
+msgstr "Bot-token"
 
 #: views/notifications.tpl:173
 msgid "Username"
@@ -3307,7 +3446,7 @@ msgstr "Meer informatie"
 msgid "Here you can configure your sensors."
 msgstr "Hier kunt u uw sensoren configureren."
 
-#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:180
+#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:181
 msgid "Max diff"
 msgstr "Max verschil"
 
@@ -3391,27 +3530,31 @@ msgstr "AM2302"
 msgid "AMG8833"
 msgstr "AMG8833"
 
-#: views/sensor_settings.tpl:145
+#: views/sensor_settings.tpl:130
+msgid "CSS811"
+msgstr "CSS811"
+
+#: views/sensor_settings.tpl:146
 msgid "UVA"
 msgstr "UVA"
 
-#: views/sensor_settings.tpl:146
+#: views/sensor_settings.tpl:147
 msgid "UVB"
 msgstr "UVB"
 
-#: views/sensor_settings.tpl:147
+#: views/sensor_settings.tpl:148
 msgid "UV Index"
 msgstr "UV-index"
 
-#: views/sensor_settings.tpl:190
+#: views/sensor_settings.tpl:191
 msgid "Min moist value"
 msgstr "Minimale vochtwaarde"
 
-#: views/sensor_settings.tpl:194
+#: views/sensor_settings.tpl:195
 msgid "Max moist value"
 msgstr "Maximale vochtwaarde"
 
-#: views/sensor_settings.tpl:198
+#: views/sensor_settings.tpl:199
 msgid "Temperature offset"
 msgstr "Temperatuur compensatie"
 
@@ -3853,7 +3996,7 @@ msgid "Changes only"
 msgstr "Alleen wijzigingen"
 
 #: views/system_settings.tpl:157
-msgid "Soundcard"
+msgid "Sound card"
 msgstr "Geluidskaart"
 
 #: views/system_settings.tpl:166
@@ -4485,8 +4628,8 @@ msgid "Value difference during the night"
 msgstr "Waardeverschil tijdens de nacht"
 
 #: Missing text string
-msgid "Volume in liters"
-msgstr "Volume in liter"
+msgid "Volume in litres"
+msgstr "Volume in liters"
 
 #: Missing text string
 msgid "Weather day forecast screenshot"
@@ -4563,6 +4706,13 @@ msgstr "Systeem omgeving"
 #: Missing text string
 msgid "System settings"
 msgstr "Systeem instellingen"
+
+#~ msgid ""
+#~ "Choose the windspeed indicator. The software will recalculate to the "
+#~ "chosen indicator."
+#~ msgstr ""
+#~ "Kies de windsnelheid indicator. De software zal opnieuw worden berekend "
+#~ "op de gekozen indicator."
 
 #~ msgid "PCA9685"
 #~ msgstr "PCA9685"

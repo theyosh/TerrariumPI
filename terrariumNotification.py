@@ -15,6 +15,8 @@ try:
 except ImportError as ex:
   import ConfigParser as configparser
 
+import gettext
+
 # Email support
 import emails
 
@@ -36,8 +38,9 @@ from terrariumDisplay import terrariumDisplay, terrariumDisplaySourceException
 
 class terrariumNotificationMessage(object):
 
-  def __init__(self,message_id, title, message, services = ''):
+  def __init__(self,message_id, name, title, message, services = ''):
     self.id = message_id
+    self.name = name
     self.title = title.strip()
     self.message = message.strip()
     self.services = services.split(',') if '' != services else []
@@ -75,6 +78,7 @@ class terrariumNotificationMessage(object):
 
   def get_data(self):
     return {'id':self.get_id(),
+            'name' : self.name,
             'title':self.get_title(),
             'message':self.get_message(),
             'enabled':self.is_enabled(),
@@ -203,57 +207,56 @@ class terrariumNotification(terrariumSingleton):
   __regex_parse = re.compile(r'%(?P<index>[^% ]+)%')
 
   __default_notifications = {
-    'environment_light_alarm_low_on' : terrariumNotificationMessage('environment_light_alarm_low_on','Environment light day on','%raw_data%'),
-    'environment_light_alarm_low_off' : terrariumNotificationMessage('environment_light_alarm_low_off','Environment light day off','%raw_data%'),
-    'environment_light_alarm_high_on' : terrariumNotificationMessage('environment_light_alarm_high_on','Environment light night on','%raw_data%'),
-    'environment_light_alarm_high_off' : terrariumNotificationMessage('environment_light_alarm_high_off','Environment light night off','%raw_data%'),
+    'environment_light_alarm_low_on' : terrariumNotificationMessage('environment_light_alarm_low_on',_('Environment light day on'),'Environment light day on','%raw_data%'),
+    'environment_light_alarm_low_off' : terrariumNotificationMessage('environment_light_alarm_low_off',_('Environment light day off'),'Environment light day off','%raw_data%'),
+    'environment_light_alarm_high_on' : terrariumNotificationMessage('environment_light_alarm_high_on',_('Environment light night on'),'Environment light night on','%raw_data%'),
+    'environment_light_alarm_high_off' : terrariumNotificationMessage('environment_light_alarm_high_off',_('Environment light night off'),'Environment light night off','%raw_data%'),
 
-    'environment_temperature_alarm_low_on' : terrariumNotificationMessage('environment_temperature_alarm_low_on','Environment temperature alarm low on','%raw_data%'),
-    'environment_temperature_alarm_low_off' : terrariumNotificationMessage('environment_temperature_alarm_low_off','Environment temperature alarm low off','%raw_data%'),
-    'environment_temperature_alarm_high_on' : terrariumNotificationMessage('environment_temperature_alarm_high_on','Environment temperature alarm high on','%raw_data%'),
-    'environment_temperature_alarm_high_off' : terrariumNotificationMessage('environment_temperature_alarm_high_off','Environment temperature alarm high off','%raw_data%'),
+    'environment_temperature_alarm_low_on' : terrariumNotificationMessage('environment_temperature_alarm_low_on',_('Environment temperature alarm low on'),'Environment temperature alarm low on','%raw_data%'),
+    'environment_temperature_alarm_low_off' : terrariumNotificationMessage('environment_temperature_alarm_low_off',_('Environment temperature alarm low off'),'Environment temperature alarm low off','%raw_data%'),
+    'environment_temperature_alarm_high_on' : terrariumNotificationMessage('environment_temperature_alarm_high_on',_('Environment temperature alarm high on'),'Environment temperature alarm high on','%raw_data%'),
+    'environment_temperature_alarm_high_off' : terrariumNotificationMessage('environment_temperature_alarm_high_off',_('Environment temperature alarm high off'),'Environment temperature alarm high off','%raw_data%'),
 
-    'environment_humidity_alarm_low_on' : terrariumNotificationMessage('environment_humidity_alarm_low_on','Environment humidity alarm low on','%raw_data%'),
-    'environment_humidity_alarm_low_off' : terrariumNotificationMessage('environment_humidity_alarm_low_off','Environment humidity alarm low off','%raw_data%'),
-    'environment_humidity_alarm_high_on' : terrariumNotificationMessage('environment_humidity_alarm_high_on','Environment humidity alarm high on','%raw_data%'),
-    'environment_humidity_alarm_high_off' : terrariumNotificationMessage('environment_humidity_alarm_high_off','Environment humidity alarm high off','%raw_data%'),
+    'environment_humidity_alarm_low_on' : terrariumNotificationMessage('environment_humidity_alarm_low_on',_('Environment humidity alarm low on'),'Environment humidity alarm low on','%raw_data%'),
+    'environment_humidity_alarm_low_off' : terrariumNotificationMessage('environment_humidity_alarm_low_off',_('Environment humidity alarm low off'),'Environment humidity alarm low off','%raw_data%'),
+    'environment_humidity_alarm_high_on' : terrariumNotificationMessage('environment_humidity_alarm_high_on',_('Environment humidity alarm high on'),'Environment humidity alarm high on','%raw_data%'),
+    'environment_humidity_alarm_high_off' : terrariumNotificationMessage('environment_humidity_alarm_high_off',_('Environment humidity alarm high off'),'Environment humidity alarm high off','%raw_data%'),
 
-    'environment_moisture_alarm_low_on' : terrariumNotificationMessage('environment_moisture_alarm_low_on','Environment moisture alarm low on','%raw_data%'),
-    'environment_moisture_alarm_low_off' : terrariumNotificationMessage('environment_moisture_alarm_low_off','Environment moisture alarm low off','%raw_data%'),
-    'environment_moisture_alarm_high_on' : terrariumNotificationMessage('environment_moisture_alarm_high_on','Environment moisture alarm high on','%raw_data%'),
-    'environment_moisture_alarm_high_off' : terrariumNotificationMessage('environment_moisture_alarm_high_off','Environment moisture alarm high off','%raw_data%'),
+    'environment_moisture_alarm_low_on' : terrariumNotificationMessage('environment_moisture_alarm_low_on',_('Environment moisture alarm low on'),'Environment moisture alarm low on','%raw_data%'),
+    'environment_moisture_alarm_low_off' : terrariumNotificationMessage('environment_moisture_alarm_low_off',_('Environment moisture alarm low off'),'Environment moisture alarm low off','%raw_data%'),
+    'environment_moisture_alarm_high_on' : terrariumNotificationMessage('environment_moisture_alarm_high_on',_('Environment moisture alarm high on'),'Environment moisture alarm high on','%raw_data%'),
+    'environment_moisture_alarm_high_off' : terrariumNotificationMessage('environment_moisture_alarm_high_off',_('Environment moisture alarm high off'),'Environment moisture alarm high off','%raw_data%'),
 
-    'environment_conductivity_alarm_low_on' : terrariumNotificationMessage('environment_conductivity_alarm_low_on','Environment conductivity alarm low on','%raw_data%'),
-    'environment_conductivity_alarm_low_off' : terrariumNotificationMessage('environment_conductivity_alarm_low_off','Environment conductivity alarm low off','%raw_data%'),
-    'environment_conductivity_alarm_high_on' : terrariumNotificationMessage('environment_conductivity_alarm_high_on','Environment conductivity alarm high on','%raw_data%'),
-    'environment_conductivity_alarm_high_off' : terrariumNotificationMessage('environment_conductivity_alarm_high_off','Environment conductivity alarm high off','%raw_data%'),
+    'environment_conductivity_alarm_low_on' : terrariumNotificationMessage('environment_conductivity_alarm_low_on',_('Environment conductivity alarm low on'),'Environment conductivity alarm low on','%raw_data%'),
+    'environment_conductivity_alarm_low_off' : terrariumNotificationMessage('environment_conductivity_alarm_low_off',_('Environment conductivity alarm low off'),'Environment conductivity alarm low off','%raw_data%'),
+    'environment_conductivity_alarm_high_on' : terrariumNotificationMessage('environment_conductivity_alarm_high_on',_('Environment conductivity alarm high on'),'Environment conductivity alarm high on','%raw_data%'),
+    'environment_conductivity_alarm_high_off' : terrariumNotificationMessage('environment_conductivity_alarm_high_off',_('Environment conductivity alarm high off'),'Environment conductivity alarm high off','%raw_data%'),
 
-    'environment_ph_alarm_low_on' : terrariumNotificationMessage('environment_ph_alarm_low_on','Environment pH alarm low on','%raw_data%'),
-    'environment_ph_alarm_low_off' : terrariumNotificationMessage('environment_ph_alarm_low_off','Environment pH alarm low off','%raw_data%'),
-    'environment_ph_alarm_high_on' : terrariumNotificationMessage('environment_ph_alarm_high_on','Environment pH alarm high on','%raw_data%'),
-    'environment_ph_alarm_high_off' : terrariumNotificationMessage('environment_ph_alarm_high_off','Environment pH alarm high off','%raw_data%'),
+    'environment_ph_alarm_low_on' : terrariumNotificationMessage('environment_ph_alarm_low_on',_('Environment pH alarm low on'),'Environment pH alarm low on','%raw_data%'),
+    'environment_ph_alarm_low_off' : terrariumNotificationMessage('environment_ph_alarm_low_off',_('Environment pH alarm low off'),'Environment pH alarm low off','%raw_data%'),
+    'environment_ph_alarm_high_on' : terrariumNotificationMessage('environment_ph_alarm_high_on',_('Environment pH alarm high on'),'Environment pH alarm high on','%raw_data%'),
+    'environment_ph_alarm_high_off' : terrariumNotificationMessage('environment_ph_alarm_high_off',_('Environment pH alarm high off'),'Environment pH alarm high off','%raw_data%'),
 
-    'environment_watertank_alarm_low_on' : terrariumNotificationMessage('environment_watertank_alarm_low_on','Environment watertank alarm low on','%raw_data%'),
-    'environment_watertank_alarm_low_off' : terrariumNotificationMessage('environment_watertank_alarm_low_off','Environment watertank alarm low off','%raw_data%'),
-    'environment_watertank_alarm_high_on' : terrariumNotificationMessage('environment_watertank_alarm_high_on','Environment watertank alarm high on','%raw_data%'),
-    'environment_watertank_alarm_high_off' : terrariumNotificationMessage('environment_watertank_alarm_high_off','Environment watertank alarm high off','%raw_data%'),
+    'environment_watertank_alarm_low_on' : terrariumNotificationMessage('environment_watertank_alarm_low_on',_('Environment watertank alarm low on'),'Environment watertank alarm low on','%raw_data%'),
+    'environment_watertank_alarm_low_off' : terrariumNotificationMessage('environment_watertank_alarm_low_off',_('Environment watertank alarm low off'),'Environment watertank alarm low off','%raw_data%'),
+    'environment_watertank_alarm_high_on' : terrariumNotificationMessage('environment_watertank_alarm_high_on',_('Environment watertank alarm high on'),'Environment watertank alarm high on','%raw_data%'),
+    'environment_watertank_alarm_high_off' : terrariumNotificationMessage('environment_watertank_alarm_high_off',_('Environment watertank alarm high off'),'Environment watertank alarm high off','%raw_data%'),
 
-    'authentication_warning' : terrariumNotificationMessage('authentication_warning','Authentication warning message','%raw_data%'),
+    'authentication_warning' : terrariumNotificationMessage('authentication_warning',_('Authentication warning'),'Authentication warning message','%raw_data%'),
 
-    'system_warning' : terrariumNotificationMessage('system_warning','System warning message','%message%'),
-    'system_error' : terrariumNotificationMessage('system_error','System error message','%message%'),
+    'system_warning' : terrariumNotificationMessage('system_warning',_('System warning message'),'System warning message','%message%'),
+    'system_error' : terrariumNotificationMessage('system_error',_('System error message'),'System error message','%message%'),
 
-    'sensor_alarm_low' : terrariumNotificationMessage('sensor_alarm_low','Sensor %name% alarm low','%raw_data%'),
-    'sensor_alarm_high' : terrariumNotificationMessage('sensor_alarm_high','Sensor %name% alarm high','%raw_data%'),
+    'sensor_alarm_low' : terrariumNotificationMessage('sensor_alarm_low',_('Sensor low alarm'),'Sensor %name% alarm low','%raw_data%'),
+    'sensor_alarm_high' : terrariumNotificationMessage('sensor_alarm_high',_('Sensor low alarm'),'Sensor %name% alarm high','%raw_data%'),
 
-    'switch_toggle_on' : terrariumNotificationMessage('switch_toggle_on','Powerswitch %name% toggled on','%raw_data%'),
-    'switch_toggle_off' : terrariumNotificationMessage('switch_toggle_off','Powerswitch %name% toggled off','%raw_data%'),
+    'switch_toggle_on' : terrariumNotificationMessage('switch_toggle_on',_('Powerswitch on'),'Powerswitch %name% toggled on','%raw_data%'),
+    'switch_toggle_off' : terrariumNotificationMessage('switch_toggle_off',_('Powerswitch off'),'Powerswitch %name% toggled off','%raw_data%'),
 
-    'door_toggle_open' : terrariumNotificationMessage('door_toggle_open','Door %name% is open','%raw_data%'),
-    'door_toggle_closed' : terrariumNotificationMessage('door_toggle_closed','Door %name% is closed','%raw_data%'),
+    'door_toggle_open' : terrariumNotificationMessage('door_toggle_open',_('Door opened'),'Door %name% is open','%raw_data%'),
+    'door_toggle_closed' : terrariumNotificationMessage('door_toggle_closed',_('Door closed'),'Door %name% is closed','%raw_data%'),
 
-
-    'webcam_motion' : terrariumNotificationMessage('webcam_motion','Movement at webcam %name%','%raw_data%'),
+    'webcam_motion' : terrariumNotificationMessage('webcam_motion',_('Webcam motion'),'Movement at webcam %name%','%raw_data%'),
   }
 
   def __init__(self,trafficlights = [], profile_image = None, version = None):
@@ -355,7 +358,9 @@ class terrariumNotification(terrariumSingleton):
     self.messages = {}
     for message_id in self.__default_notifications:
       if self.__data.has_section('message' + message_id):
+
         self.messages[message_id] = terrariumNotificationMessage(message_id,
+                                                                 self.__default_notifications[message_id].name,
                                                                  self.__data.get('message' + message_id,'title').replace('%%','%'),
                                                                  self.__data.get('message' + message_id,'message').replace('%%','%'),
                                                                  self.__data.get('message' + message_id,'services').replace('%%','%'))
@@ -748,6 +753,7 @@ class terrariumNotification(terrariumSingleton):
       message_id = message_id[:-8]
       if message_id in self.messages:
         self.messages[message_id] = terrariumNotificationMessage(message_id,
+                                                                 self.__default_notifications[message_id].name,
                                                                  data[message_id + '_title'],
                                                                  data[message_id + '_message'],
                                                                  data[message_id + '_services'])

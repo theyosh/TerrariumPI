@@ -14,6 +14,7 @@ import alsaaudio
 
 from hashlib import md5
 from gevent import sleep
+import re
 try:
   from MediaInfoDLL import MediaInfo, Stream
 except ImportError as ex:
@@ -23,7 +24,7 @@ from terrariumUtils import terrariumUtils
 
 class terrariumAudioPlayer(object):
 
-  AUDIO_FOLDER = 'audio'
+  AUDIO_FOLDER = os.path.dirname(os.path.abspath(__file__)) + '/audio'
   VALID_EXTENSION = ['mp3','m4a','ogg']
   LOOP_TIMEOUT = 30
   VOLUME_STEP = 5
@@ -357,6 +358,7 @@ class terrariumAudioFile(object):
 
   META_FIELDS = ['Format','Duration','Overall bit rate mode','Overall bit rate','Album','Track name','Format profile','Channel(s)','Sampling rate']
   VALID_EXTENSION = terrariumAudioPlayer.VALID_EXTENSION
+  DURATION_REGEX = re.compile(r'((?P<minutes>\d+) min )?((?P<seconds>\d+) s)')
 
   def __init__(self,filename):
     self.id = None
@@ -374,7 +376,7 @@ class terrariumAudioFile(object):
       self.file_size = os.path.getsize(self.get_full_path())
       self.upload_date = os.path.getmtime(self.get_full_path())
 
-      self.id = md5(b'' + self.get_full_path()).hexdigest()
+      self.id = md5(self.get_full_path().encode()).hexdigest()
       self.__load_meta_data()
 
   def __load_meta_data(self):
@@ -382,7 +384,7 @@ class terrariumAudioFile(object):
 
     if not os.path.isfile(meta_data_cache_file):
       media_info = MediaInfo()
-      media_info.Open(self.get_full_path())
+      media_info.Open(str(self.get_full_path()))
       data = media_info.Inform().split("\n")
 
       for line in data:
@@ -391,14 +393,22 @@ class terrariumAudioFile(object):
           field = line[0].strip().replace(' ','').replace('(s)','s').lower()
           value = line[1].strip()
           if 'duration' == field:
-            value = media_info.Get(Stream.Audio, 0, "Duration")
+            duration = terrariumAudioFile.DURATION_REGEX.match(value)
+            value = 0
+            if duration.group('seconds'):
+              value = int(duration.group('seconds'))
+
+            if duration.group('minutes'):
+              value += int(duration.group('minutes')) * 60
+
+            value *= 1000
 
           self.meta_data[field] = value
 
       media_info.Close()
 
       if len(self.meta_data) > 0:
-        with open(meta_data_cache_file, 'wb') as datafile:
+        with open(meta_data_cache_file, 'w') as datafile:
           json.dump(self.meta_data, datafile)
 
     else:
