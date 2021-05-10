@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
 "PO-Revision-Date: 2021-04-06 15:46+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
-"3-x-y-z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/3-x-y-"
+"z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -753,7 +753,8 @@ msgstr ""
 
 #: terrariumTranslations.py:137
 msgid "Holds the password for authentication with the mail server if needed."
-msgstr "Bevat indien nodig het wachtwoord voor authenticatie bij de mailserver."
+msgstr ""
+"Bevat indien nodig het wachtwoord voor authenticatie bij de mailserver."
 
 #: terrariumTranslations.py:139
 msgid "Holds the display chip that is used."
