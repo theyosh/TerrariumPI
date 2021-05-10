@@ -128,6 +128,7 @@
                                 <option value="am2320">{{_('AM2320')}}</option>
                                 <option value="amg8833">{{_('AMG8833')}}</option>
                                 <option value="css811">{{_('CSS811')}}</option>
+                                <option value="humidicon">{{_('HumidIcon')}}</option>
                               </select>
                             </div>
                           </div>

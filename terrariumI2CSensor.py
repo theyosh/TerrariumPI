@@ -639,3 +639,25 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
       print(ex)
 
     return sensor_data
+
+class terrariumHumidIconSensor(terrariumI2CSensor):
+  TYPE = 'humidicon'
+  VALID_SENSOR_TYPES = ['temperature','humidity']
+
+
+  def load_raw_data(self):
+    data = None
+    try:
+      data = {}
+      gpio_pins = self.get_address().split(',')
+      self.i2c_bus.write_quick(int('0x' + gpio_pins[0],16))
+      sleep(0.04)
+      raw_data = self.i2c_bus.read_i2c_block_data(int('0x' + gpio_pins[0],16), 0, 4)
+
+      data['humidity'] = ((raw_data[0] & 0x3f) * 256 + raw_data[1]) / float(0x3ffe) * 100
+      data['temperature'] = ((raw_data[2] * 256 + raw_data[3]) >> 2) / float(0x3ffe) * 165 - 40
+
+    except Exception as ex:
+      print(ex)
+
+    return data

@@ -2082,6 +2082,11 @@ msgstr "AM2302"
 msgid "OWFS"
 msgstr "OWFS"
 
+#: views/hardware.tpl:77 views/inc/usage_sensors.tpl:112
+#: views/sensor_settings.tpl:104
+msgid "HumidIcon"
+msgstr "HumidIcon"
+
 #: views/hardware.tpl:78
 msgid ""
 "The OWFS server will be scanned automatically during start up to load the "
