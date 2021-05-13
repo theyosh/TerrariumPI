@@ -32,6 +32,7 @@ from terrariumCalendar import terrariumCalendar
 from terrariumUtils import terrariumUtils
 from terrariumEnclosure import terrariumEnclosure
 from terrariumArea import terrariumArea
+from terrariumCloud import TerrariumMerossCloud
 
 from weather import terrariumWeather, terrariumWeatherException
 from hardware.sensor import terrariumSensor, terrariumSensorLoadingException
@@ -74,6 +75,8 @@ class terrariumEngine(object):
     }
 
     self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None, 'too_late': 0, 'systemd' : sdnotify.SystemdNotifier()}
+
+    self.meross_cloud = None
 
     self.version = version
     self.latest_version = None
@@ -229,6 +232,11 @@ class terrariumEngine(object):
     # Set meross login into the current bash environment
     os.environ['MEROSS_EMAIL']    = settings['meross_cloud_username']
     os.environ['MEROSS_PASSWORD'] = settings['meross_cloud_password']
+
+    if '' != settings['meross_cloud_username'] and '' != settings['meross_cloud_password']:
+      logger.info('Loading Meross cloud connection.')
+      self.meross_cloud = TerrariumMerossCloud(terrariumUtils.decrypt(settings['meross_cloud_username']),
+                                               terrariumUtils.decrypt(settings['meross_cloud_password']))
 
     # Make sure we use PiGPIO daemon for PWM
     os.environ['GPIOZERO_PIN_FACTORY'] = 'pigpio'
@@ -1293,6 +1301,10 @@ class terrariumEngine(object):
     for webcam in self.webcams:
       self.webcams[webcam].stop()
       logger.info(f'Stopped {self.webcams[webcam]}')
+
+    if self.meross_cloud is not None:
+      print('Stopping Meross cloud')
+      self.meross_cloud.stop()
 
     self.notification.stop()
 

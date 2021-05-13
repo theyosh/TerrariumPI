@@ -11,6 +11,7 @@ import threading
 import bcrypt
 import os
 import math
+import asyncio
 
 from cryptography.fernet import Fernet
 
@@ -21,18 +22,22 @@ import uuid
 
 # works in Python 2 & 3
 class _Singleton(type):
-    """ A metaclass that creates a Singleton base class when called. """
-    _instances = {}
-    def __call__(cls, *args, **kwargs):
-      if cls not in cls._instances:
-        cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
-      return cls._instances[cls]
+  """ A metaclass that creates a Singleton base class when called. """
+  _instances = {}
+  def __call__(cls, *args, **kwargs):
+    if cls not in cls._instances:
+      cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
+    return cls._instances[cls]
 
 class terrariumSingleton(_Singleton('terrariumSingletonMeta', (object,), {})): pass
 
 class classproperty(property):
-    def __get__(self, cls, owner):
-        return classmethod(self.fget).__get__(None, owner)()
+  def __get__(self, cls, owner):
+    return classmethod(self.fget).__get__(None, owner)()
+
+class terrariumAsync(terrariumSingleton):
+  def __init__(self):
+    self.async_loop = asyncio.get_event_loop()
 
 class terrariumCache(terrariumSingleton):
   def __init__(self):

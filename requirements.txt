@@ -35,7 +35,6 @@ pyownet
 veml6075
 lib8relay
 pylibftdi
-unsync
 asyncio
 python-kasa
 meross-iot
