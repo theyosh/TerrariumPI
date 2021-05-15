@@ -104,6 +104,7 @@ class TerrariumMerossCloud(terrariumSingleton):
       return evt.is_set()
 
     async def _notification(push_notification, target_devices):
+      logger.info('Got an update from the Meross Cloud.')
       for device in target_devices:
         if hasattr(device,'is_on'):
           self._data[f'{device.uuid}'] = []
