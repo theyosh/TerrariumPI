@@ -1,3 +1,6 @@
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
+
 import asyncio
 
 from . import terrariumRelay, terrariumRelayException

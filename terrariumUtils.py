@@ -37,7 +37,22 @@ class classproperty(property):
 
 class terrariumAsync(terrariumSingleton):
   def __init__(self):
+    def __run():
+#      asyncio.set_event_loop(self.async_loop)
+      self.async_loop.run_until_complete(self._keep_running())
+      self.async_loop.close()
+
     self.async_loop = asyncio.get_event_loop()
+    process = threading.Thread(target=__run)
+    process.start()
+
+  def stop(self):
+    self.__running = False
+
+  async def _keep_running(self):
+    self.__running = True
+    while self.__running:
+      await asyncio.sleep(1)
 
 class terrariumCache(terrariumSingleton):
   def __init__(self):

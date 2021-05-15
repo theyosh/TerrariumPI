@@ -23,8 +23,7 @@ class TerrariumMerossCloud(terrariumSingleton):
 
   def __init__(self, username, password):
     start = time()
-    self.__engine = { 'cache' : terrariumCache(), 'running': False, 'event': asyncio.Event() }
-    self._async = terrariumAsync()
+    self.__engine = { 'cache' : terrariumCache(), 'running': False, 'event': asyncio.Event() , 'asyncio' : terrariumAsync()}
 
     self._data = {}
     self._username = username
@@ -40,9 +39,8 @@ class TerrariumMerossCloud(terrariumSingleton):
   def _start(self):
 
     def _run():
-#      asyncio.set_event_loop(loop)
-      self._async.async_loop.run_until_complete(self._main_process())
-      self._async.async_loop.close()
+      data = asyncio.run_coroutine_threadsafe(self._main_process(), self.__engine['asyncio'].async_loop)
+      data.result()
 
     self.__engine['thread'] = threading.Thread(target=_run)
     self.__engine['thread'].start()
@@ -63,7 +61,7 @@ class TerrariumMerossCloud(terrariumSingleton):
 
       return meross_devices
 
-    data = asyncio.run_coroutine_threadsafe(_scan_hardware(type), self._async.async_loop)
+    data = asyncio.run_coroutine_threadsafe(_scan_hardware(type), self.__engine['asyncio'].async_loop)
     devices = data.result()
     return devices
 
@@ -84,7 +82,7 @@ class TerrariumMerossCloud(terrariumSingleton):
 
       return None
 
-    data = asyncio.run_coroutine_threadsafe(_toggle_relay(device, switch, state), self._async.async_loop)
+    data = asyncio.run_coroutine_threadsafe(_toggle_relay(device, switch, state), self.__engine['asyncio'].async_loop)
     result = data.result()
     return result
 

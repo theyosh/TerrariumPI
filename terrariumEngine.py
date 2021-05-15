@@ -29,7 +29,7 @@ from pony import orm
 from terrariumDatabase import init as init_db, db, Setting, Sensor, Relay, RelayHistory, Button, Webcam, Enclosure
 from terrariumWebserver import terrariumWebserver
 from terrariumCalendar import terrariumCalendar
-from terrariumUtils import terrariumUtils
+from terrariumUtils import terrariumUtils, terrariumAsync
 from terrariumEnclosure import terrariumEnclosure
 from terrariumArea import terrariumArea
 from terrariumCloud import TerrariumMerossCloud
@@ -74,7 +74,12 @@ class terrariumEngine(object):
       N_('wattage')     : 'W',
     }
 
-    self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None, 'too_late': 0, 'systemd' : sdnotify.SystemdNotifier()}
+    self.__engine = {'exit' : threading.Event(),
+                     'thread' : None,
+                     'logtail' : None,
+                     'too_late': 0,
+                     'systemd' : sdnotify.SystemdNotifier(),
+                     'asyncio' : terrariumAsync()}
 
     self.meross_cloud = None
 
@@ -1303,10 +1308,11 @@ class terrariumEngine(object):
       logger.info(f'Stopped {self.webcams[webcam]}')
 
     if self.meross_cloud is not None:
-      print('Stopping Meross cloud')
       self.meross_cloud.stop()
 
     self.notification.stop()
+
+    self.__engine['asyncio'].stop()
 
   def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
     # Two events:
