@@ -164,7 +164,7 @@ class Enclosure(db.Entity):
 
   def __rename_image(self):
     regex = re.compile(f'{self.id}\.(jpg|jpeg|gif|png)$',re.IGNORECASE)
-    if not regex.search(self.image):
+    if '' != self.image and not regex.search(self.image):
       image = Path(self.image)
       image_name = f'{image.parent}/{self.id}{image.suffix}'
       image.rename(image_name)
