@@ -1069,26 +1069,31 @@ class terrariumEngine(object):
       'value' : f'{terrariumUtils.format_filesize(tmp["memory"]["used"])}({ tmp["memory"]["used"] / tmp["memory"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["memory"]["total"])}',
       'alarm' : False
     })
+    system_title_length = max([len(line['title']) for line in system_stats])
+    system_value_length = max([len(line['value']) for line in system_stats])
+
+    avg_title_length = 0
+    avg_value_length = 0
+    avg_unit_length  = 0
 
     # Get the sensors averages sorted on type name
     tmp = self.sensor_averages
     averages = []
-    for avg_type in self.sensor_averages.keys():
-      averages.append({
-        'title' : _('average {sensor_type}').format(sensor_type=_(avg_type)).capitalize() + ':',
-        'value' : f'{tmp[avg_type]["value"]:.2f}',
-        'unit'  : self.units[avg_type],
-        'alarm' : not tmp[avg_type]['alarm_min'] <= tmp[avg_type]['value'] <= tmp[avg_type]['alarm_max']
-      })
+    if len(tmp) > 0:
+      for avg_type in self.sensor_averages.keys():
+        averages.append({
+          'title' : _('average {sensor_type}').format(sensor_type=_(avg_type)).capitalize() + ':',
+          'value' : f'{tmp[avg_type]["value"]:.2f}',
+          'unit'  : self.units[avg_type],
+          'alarm' : not tmp[avg_type]['alarm_min'] <= tmp[avg_type]['value'] <= tmp[avg_type]['alarm_max']
+        })
 
-    averages = sorted(averages, key=lambda k: k['title'])
+      averages = sorted(averages, key=lambda k: k['title'])
 
-    # Get the lengths of all the texts for the text alignment
-    avg_title_length    = max([len(line['title']) for line in averages])
-    avg_value_length    = max([len(line['value']) for line in averages])
-    avg_unit_length     = max([len(line['unit'])  for line in averages])
-    system_title_length = max([len(line['title']) for line in system_stats])
-    system_value_length = max([len(line['value']) for line in system_stats])
+      # Get the lengths of all the texts for the text alignment
+      avg_title_length = max([len(line['title']) for line in averages])
+      avg_value_length = max([len(line['value']) for line in averages])
+      avg_unit_length  = max([len(line['unit'])  for line in averages])
 
     # Start creating the average MOTD lines
     motd_averages = ''
