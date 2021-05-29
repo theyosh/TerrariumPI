@@ -6,194 +6,198 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2021-04-07 10:58+CEST\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-05-30 12:38+0000\n"
+"Last-Translator: killwater <mk@mklimek.info>\n"
+"Language-Team: Polish <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.5.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
 msgid "Lighting"
-msgstr ""
+msgstr "Oświetlenie"
 
 #: terrariumArea.py:38
 msgid "Heating"
-msgstr ""
+msgstr "Ogrzewanie"
 
 #: terrariumArea.py:44
 msgid "Cooling"
-msgstr ""
+msgstr "Chłodzenie"
 
 #: terrariumArea.py:50
 msgid "Humidity"
-msgstr ""
+msgstr "Wilgotność"
 
 #: terrariumArea.py:56
 msgid "Water tank"
-msgstr ""
+msgstr "Zbiornik wody"
 
 #: terrariumArea.py:62 views/includes/sidebar.html:186
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: terrariumArea.py:68
 msgid "CO2"
-msgstr ""
+msgstr "CO2"
 
 #: terrariumArea.py:74
 msgid "Conductivity"
-msgstr ""
+msgstr "Przewodność"
 
 #: terrariumArea.py:80
 msgid "Moisture"
-msgstr ""
+msgstr "Wilgoć"
 
 #: terrariumArea.py:86
 msgid "pH"
-msgstr ""
+msgstr "pH"
 
 #: terrariumEngine.py:55
 msgid "temperature"
-msgstr ""
+msgstr "temperatura"
 
 #: terrariumEngine.py:56
 msgid "distance"
-msgstr ""
+msgstr "odległość"
 
 #: terrariumEngine.py:57
 msgid "altitude"
-msgstr ""
+msgstr "Wysokość"
 
 #: terrariumEngine.py:58
 msgid "pressure"
-msgstr ""
+msgstr "Ciśnienie"
 
 #: terrariumEngine.py:59
 msgid "humidity"
-msgstr ""
+msgstr "wilgotność"
 
 #: terrariumEngine.py:60
 msgid "moisture"
-msgstr ""
+msgstr "wilgoć"
 
 #: terrariumEngine.py:61
 msgid "conductivity"
-msgstr ""
+msgstr "przewodność"
 
 #: terrariumEngine.py:62
 msgid "ph"
-msgstr ""
+msgstr "ph"
 
 #: terrariumEngine.py:63
 msgid "light"
-msgstr ""
+msgstr "światło"
 
 #: terrariumEngine.py:64
 msgid "uva"
-msgstr ""
+msgstr "UVA"
 
 #: terrariumEngine.py:65
 msgid "uvb"
-msgstr ""
+msgstr "UVB"
 
 #: terrariumEngine.py:66
 msgid "uvi"
-msgstr ""
+msgstr "UVI"
 
 #: terrariumEngine.py:67
 msgid "fertility"
-msgstr ""
+msgstr "Żyzność"
 
 #: terrariumEngine.py:68
 msgid "co2"
-msgstr ""
+msgstr "CO2"
 
 #: terrariumEngine.py:69
 msgid "volume"
-msgstr ""
+msgstr "objętość"
 
 #: terrariumEngine.py:70
 msgid "watertank"
-msgstr ""
+msgstr "zbiornik wody"
 
 #: terrariumEngine.py:71
 msgid "windspeed"
-msgstr ""
+msgstr "prędkość wiatru"
 
 #: terrariumEngine.py:72
 msgid "water_flow"
-msgstr ""
+msgstr "przepływ_wody"
 
 #: terrariumEngine.py:73
 msgid "wattage"
-msgstr ""
+msgstr "Moc"
 
 #: terrariumEngine.py:1018 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
-msgstr ""
+msgstr "czas działania"
 
 #: terrariumEngine.py:1024
 msgid "System load"
-msgstr ""
+msgstr "Obciążenie systemu"
 
 #: terrariumEngine.py:1030 views/status.html:44
 msgid "CPU Temperature"
-msgstr ""
+msgstr "Temperatura Procesora"
 
 #: terrariumEngine.py:1036
 msgid "Storage"
-msgstr ""
+msgstr "Pojemność dysku"
 
 #: terrariumEngine.py:1042
 msgid "Memory"
-msgstr ""
+msgstr "Pamięć RAM"
 
 #: terrariumEngine.py:1052
 msgid "average {sensor_type}"
-msgstr ""
+msgstr "Średnia {sensor_type}"
 
 #: terrariumEngine.py:1225
 msgid "last update"
-msgstr ""
+msgstr "ostatnia aktualizacja"
 
 #: terrariumNotification.py:52
 msgid "Authentication login error"
-msgstr ""
+msgstr "Błąd logowania"
 
 #: terrariumNotification.py:53
 msgid "System warning"
-msgstr ""
+msgstr "Ostrzeżenie systemowe"
 
 #: terrariumNotification.py:54
 msgid "System error"
-msgstr ""
+msgstr "Błąd systemu"
 
 #: terrariumNotification.py:171
 msgid "Display"
-msgstr ""
+msgstr "Ekran"
 
 #: terrariumNotification.py:176
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: terrariumNotification.py:181
 msgid "Pushover"
-msgstr ""
+msgstr "Pushover"
 
 #: terrariumNotification.py:186
 msgid "Telegram"
-msgstr ""
+msgstr "Telegram"
 
 #: terrariumNotification.py:191
 msgid "Traffic light"
-msgstr ""
+msgstr "Sygnalizator"
 
 #: terrariumNotification.py:196
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: terrariumNotification.py:201
 msgid "Web-hook"
@@ -201,20 +205,20 @@ msgstr ""
 
 #: terrariumWebserver.py:157 terrariumWebserver.py:235
 msgid "Authenticate to make any changes"
-msgstr ""
+msgstr "Zaloguj się by wprowadzić zmiany"
 
 #: terrariumWebserver.py:157 terrariumWebserver.py:235
 msgid "Authentication"
-msgstr ""
+msgstr "Logowanie"
 
 #: terrariumWebserver.py:157 terrariumWebserver.py:235 views/index.html:2
 msgid "TerrariumPI"
-msgstr ""
+msgstr "TerrariumPI"
 
 #: views/audio_files.html:2 views/audio_files.html:10
 #: views/modals/playlist.html:62
 msgid "Audio files"
-msgstr ""
+msgstr "Pliki audio"
 
 #: views/audio_files.html:24 views/audio_files.html:35
 #: views/enclosures.html:164 views/modals/area.html:46
@@ -224,46 +228,46 @@ msgstr ""
 #: views/modals/sensor.html:41 views/modals/service.html:27
 #: views/modals/webcam.html:35 views/playlists.html:24 views/playlists.html:39
 msgid "Name"
-msgstr ""
+msgstr "Imię"
 
 #: views/audio_files.html:25 views/audio_files.html:36 views/playlists.html:25
 #: views/playlists.html:40
 msgid "Duration"
-msgstr ""
+msgstr "Czas trwania"
 
 #: views/audio_files.html:26 views/audio_files.html:37
 msgid "Filename"
-msgstr ""
+msgstr "Nazwa pliku"
 
 #: views/audio_files.html:27 views/audio_files.html:38
 msgid "Size"
-msgstr ""
+msgstr "Wielkość"
 
 #: views/audio_files.html:28 views/audio_files.html:39 views/playlists.html:31
 #: views/playlists.html:46
 msgid "Action"
-msgstr ""
+msgstr "Akcja"
 
 #: views/audio_files.html:46
 msgid "Upload new audio file"
-msgstr ""
+msgstr "Prześlij nowy plik audio"
 
 #: views/audio_files.html:51 views/modals/enclosure.html:33
 #: views/settings.html:200
 msgid "Choose a file"
-msgstr ""
+msgstr "Wybierz plik"
 
 #: views/buttons.html:2 views/includes/sidebar.html:140
 msgid "Buttons"
-msgstr ""
+msgstr "Przyciski"
 
 #: views/buttons.html:9
 msgid "No buttons"
-msgstr ""
+msgstr "Brak przycisków"
 
 #: views/buttons.html:12
 msgid "Add new button"
-msgstr ""
+msgstr "Dodaj przycisk"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
 #: views/dashboard.html:120 views/dashboard.html:311 views/enclosures.html:14
@@ -272,398 +276,398 @@ msgstr ""
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
 #: views/webcams.html:14 views/webcams.html:41
 msgid "Login to make changes"
-msgstr ""
+msgstr "Zaloguj się by wprowadzać zmiany"
 
 #: views/buttons.html:25 views/dashboard.html:279 views/relays.html:27
 #: views/sensors.html:31 views/webcams.html:23
 msgid "Last update"
-msgstr ""
+msgstr "Ostatnia aktualizacja"
 
 #: views/buttons.html:31 views/dashboard.html:285 views/relays.html:34
 #: views/sensors.html:37
 msgid "error"
-msgstr ""
+msgstr "błąd"
 
 #: views/buttons.html:32 views/dashboard.html:286 views/relays.html:35
 #: views/sensors.html:38
 msgid "warning"
-msgstr ""
+msgstr "ostrzeżenie"
 
 #: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:294
 #: views/enclosures.html:32 views/relays.html:45 views/sensors.html:49
 msgid "Day"
-msgstr ""
+msgstr "Dzień"
 
 #: views/buttons.html:40 views/dashboard.html:295 views/relays.html:46
 #: views/sensors.html:50
 msgid "Week"
-msgstr ""
+msgstr "Tydzień"
 
 #: views/buttons.html:41 views/dashboard.html:296 views/relays.html:47
 #: views/sensors.html:51
 msgid "Month"
-msgstr ""
+msgstr "Miesiąc"
 
 #: views/buttons.html:42 views/dashboard.html:297 views/relays.html:48
 #: views/sensors.html:52
 msgid "Year"
-msgstr ""
+msgstr "Rok"
 
 #: views/buttons.html:53 views/dashboard.html:308 views/relays.html:60
 #: views/sensors.html:64
 msgid "Export"
-msgstr ""
+msgstr "Export"
 
 #: views/buttons.html:58 views/calendar.html:7 views/dashboard.html:117
 #: views/includes/sidebar.html:264 views/relays.html:64 views/sensors.html:69
 #: views/settings.html:2 views/weather.html:7 views/webcams.html:32
 msgid "Settings"
-msgstr ""
+msgstr "Ustawienia"
 
 #: views/buttons.html:63 views/relays.html:76 views/sensors.html:74
 #: views/webcams.html:35
 msgid "Ignore"
-msgstr ""
+msgstr "Ignoruj"
 
 #: views/buttons.html:68 views/modals/webcam.html:345 views/relays.html:80
 #: views/sensors.html:79 views/webcams.html:38
 msgid "Delete"
-msgstr ""
+msgstr "Usuń"
 
 #: views/calendar.html:2 views/includes/sidebar.html:68
 msgid "Calendar"
-msgstr ""
+msgstr "Kalendarz"
 
 #: views/calendar.html:6
 msgid "Download iCal"
-msgstr ""
+msgstr "Pobierz iCal"
 
 #: views/dashboard.html:2 views/includes/sidebar.html:48
 msgid "Dashboard"
-msgstr ""
+msgstr "Panel Główny"
 
 #: views/dashboard.html:44
 msgid "Power usage in Watt"
-msgstr ""
+msgstr "Zużycie energii w Watach"
 
 #: views/dashboard.html:59
 msgid "Water flow in %s"
-msgstr ""
+msgstr "Przepływ wody na s"
 
 #: views/dashboard.html:73
 msgid "Total power usage"
-msgstr ""
+msgstr "Całkowite zużycie energi"
 
 #: views/dashboard.html:74 views/relays.html:26
 msgid "kWh"
-msgstr ""
+msgstr "kWh"
 
 #: views/dashboard.html:78 views/dashboard.html:96 views/weather.html:33
 msgid "in"
-msgstr ""
+msgstr "w"
 
 #: views/dashboard.html:91
 msgid "Total water usage"
-msgstr ""
+msgstr "Całkowite zużycie wody"
 
 #: views/dashboard.html:108 views/enclosures.html:2
 #: views/includes/sidebar.html:215
 msgid "Enclosures"
-msgstr ""
+msgstr "Klatka"
 
 #: views/dashboard.html:167 views/enclosures.html:46
 msgid "Night"
-msgstr ""
+msgstr "Noc"
 
 #: views/dashboard.html:183 views/enclosures.html:60
 msgid "Low"
-msgstr ""
+msgstr "Niski"
 
 #: views/dashboard.html:200 views/enclosures.html:74
 msgid "High"
-msgstr ""
+msgstr "Wysoki"
 
 #: views/dashboard.html:217 views/enclosures.html:88
 #: views/modals/button.html:56 views/modals/relay.html:92
 #: views/modals/sensor.html:47 views/weather.html:20
 msgid "Current"
-msgstr ""
+msgstr "Aktualny"
 
 #: views/enclosures.html:9
 msgid "No enclosures"
-msgstr ""
+msgstr "Brak klatek"
 
 #: views/enclosures.html:12
 msgid "Add new enclosure"
-msgstr ""
+msgstr "Dodaj nową klatkę"
 
 #: views/enclosures.html:133
 msgid "Add area"
-msgstr ""
+msgstr "Dodaj obszar"
 
 #: views/enclosures.html:160
 msgid "Areas"
-msgstr ""
+msgstr "Obszary"
 
 #: views/enclosures.html:165 views/modals/area.html:31
 #: views/modals/sensor.html:26 views/modals/service.html:18
 msgid "Type"
-msgstr ""
+msgstr "Rodzaj"
 
 #: views/enclosures.html:166 views/modals/area.html:60
 #: views/modals/area.html:278 views/modals/area.html:419
 msgid "Mode"
-msgstr ""
+msgstr "Tryb"
 
 #: views/enclosures.html:167 views/includes/sidebar.html:119
 #: views/includes/sidebar.html:148 views/includes/sidebar.html:252
 #: views/status.html:2 views/status.html:9
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: views/enclosures.html:169
 msgid "Actions"
-msgstr ""
+msgstr "Akcje"
 
 #: views/includes/modals.html:5 views/includes/modals.html:17
 #: views/modals/webcam.html:344
 msgid "Confirm"
-msgstr ""
+msgstr "Potwierdź"
 
 #: views/includes/modals.html:14 views/layouts/modal.html:20
 #: views/modals/webcam.html:122 views/modals/webcam.html:343
 msgid "Close"
-msgstr ""
+msgstr "Zamknij"
 
 #: views/includes/navigation.html:17
 msgid "Upcoming events"
-msgstr ""
+msgstr "Nadchodzące wydarzenia"
 
 #: views/includes/navigation.html:22
 msgid "See All Events"
-msgstr ""
+msgstr "Zobacz wszystkie wydarzenia"
 
 #: views/includes/navigation.html:31
 msgid "All doors status"
-msgstr ""
+msgstr "Status wszystkich drzwi"
 
 #: views/includes/navigation.html:34
 msgid "All doors are closed"
-msgstr ""
+msgstr "Wszystkie drzwi zamknięte"
 
 #: views/includes/sidebar.html:14
 msgid "Hello"
-msgstr ""
+msgstr "Cześć"
 
 #: views/includes/sidebar.html:16
 msgid "Logout"
-msgstr ""
+msgstr "Wyloguj"
 
 #: views/includes/sidebar.html:19
 msgid "Login"
-msgstr ""
+msgstr "Zaloguj"
 
 #: views/includes/sidebar.html:19
 msgid "Read only mode"
-msgstr ""
+msgstr "Tryb tylko do odczytu"
 
 #: views/includes/sidebar.html:40
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: views/includes/sidebar.html:55 views/sensors.html:6
 msgid "All sensors"
-msgstr ""
+msgstr "Wszystkie czujniki"
 
 #: views/includes/sidebar.html:62 views/modals/area.html:465
 #: views/weather.html:2
 msgid "Weather"
-msgstr ""
+msgstr "Pogoda"
 
 #: views/includes/sidebar.html:77 views/modals/area.html:424
 #: views/modals/area.html:432 views/modals/webcam.html:329
 msgid "Sensors"
-msgstr ""
+msgstr "Czujniki"
 
 #: views/includes/sidebar.html:96
 msgid "New sensor"
-msgstr ""
+msgstr "Nowy czujnik"
 
 #: views/includes/sidebar.html:102
 msgid "Scan sensors"
-msgstr ""
+msgstr "Wyszukaj czujniki"
 
 #: views/includes/sidebar.html:111 views/modals/area.html:178
 #: views/modals/area.html:218 views/modals/area.html:536
 #: views/modals/area.html:608 views/relays.html:2
 msgid "Relays"
-msgstr ""
+msgstr "Przełączniki"
 
 #: views/includes/sidebar.html:125
 msgid "New relay"
-msgstr ""
+msgstr "Nowy przełącznik"
 
 #: views/includes/sidebar.html:131
 msgid "Scan relays"
-msgstr ""
+msgstr "Wyszukaj przełączniki"
 
 #: views/includes/sidebar.html:154
 msgid "New button"
-msgstr ""
+msgstr "Nowy przycisk"
 
 #: views/includes/sidebar.html:163 views/modals/enclosure.html:70
 #: views/webcams.html:2
 msgid "Webcams"
-msgstr ""
+msgstr "Kamera internetowa"
 
 #: views/includes/sidebar.html:171
 msgid "Show"
-msgstr ""
+msgstr "Pokaż"
 
 #: views/includes/sidebar.html:177
 msgid "New webcam"
-msgstr ""
+msgstr "Nowa kamera internetowa"
 
 #: views/includes/sidebar.html:194
 msgid "Files"
-msgstr ""
+msgstr "Pliki"
 
 #: views/includes/sidebar.html:200 views/modals/area.html:361
 #: views/modals/area.html:401 views/playlists.html:2 views/playlists.html:10
 msgid "Playlists"
-msgstr ""
+msgstr "Lista odtwarzania"
 
 #: views/includes/sidebar.html:206
 msgid "New playlist"
-msgstr ""
+msgstr "Nowa lista odtwarzania"
 
 #: views/includes/sidebar.html:223
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 #: views/includes/sidebar.html:229
 msgid "New enclosure"
-msgstr ""
+msgstr "Nowa klatka"
 
 #: views/includes/sidebar.html:235
 msgid "New area"
-msgstr ""
+msgstr "Nowy obszar"
 
 #: views/includes/sidebar.html:244 views/settings.html:16
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: views/includes/sidebar.html:258 views/notifications.html:2
 msgid "Notifications"
-msgstr ""
+msgstr "Pwoiadomienia"
 
 #: views/includes/sidebar.html:270 views/log.html:2
 msgid "Log"
-msgstr ""
+msgstr "Log"
 
 #: views/includes/sidebar.html:276
 msgid "Restart"
-msgstr ""
+msgstr "Uruchom ponownie"
 
 #: views/includes/sidebar.html:282
 msgid "Reboot"
-msgstr ""
+msgstr "Uruchom ponownie"
 
 #: views/includes/sidebar.html:288
 msgid "Shutdown"
-msgstr ""
+msgstr "Wyłącz"
 
 #: views/includes/sidebar.html:292 views/includes/sidebar.html:305
 msgid "About"
-msgstr ""
+msgstr "O programie"
 
 #: views/includes/sidebar.html:297
 msgid "Help"
-msgstr ""
+msgstr "Pomoc"
 
 #: views/includes/sidebar.html:311
 msgid "Usage"
-msgstr ""
+msgstr "Użycie"
 
 #: views/includes/sidebar.html:317 views/modals/button.html:17
 #: views/modals/relay.html:17 views/modals/sensor.html:17
 #: views/modals/service.html:58 views/modals/webcam.html:20
 msgid "Hardware"
-msgstr ""
+msgstr "Sprzęt"
 
 #: views/layouts/modal.html:23
 msgid "Save changes"
-msgstr ""
+msgstr "Zapisz zmiany"
 
 #: views/log.html:6
 msgid "Download log file"
-msgstr ""
+msgstr "Pobierz log"
 
 #: views/log.html:19
 msgid "System logging"
-msgstr ""
+msgstr "Logowanie systemu"
 
 #: views/log.html:25
 msgid "Filters"
-msgstr ""
+msgstr "Filtry"
 
 #: views/log.html:35
 msgid "errors"
-msgstr ""
+msgstr "błędy"
 
 #: views/log.html:39
 msgid "warnings"
-msgstr ""
+msgstr "ostrzeżnia"
 
 #: views/modals/area.html:11
 msgid "Area settings"
-msgstr ""
+msgstr "Ustawienia obszaru"
 
 #: views/modals/area.html:17
 msgid "Enclosure"
-msgstr ""
+msgstr "Klatka"
 
 #: views/modals/area.html:23
 msgid "Select the enclosure where this area belongs to."
-msgstr ""
+msgstr "Wybierz klatkę należącą do tego obszaru."
 
 #: views/modals/area.html:37
 msgid "Select the type of area. Each type has its own extra options and logic."
-msgstr ""
+msgstr "Wybierz typ obszaru. Każdy typ ma własne opcje i logikę."
 
 #: views/modals/area.html:40 views/modals/area.html:82
 msgid "ERROR"
-msgstr ""
+msgstr "BŁĄD"
 
 #: views/modals/area.html:49
 msgid "Enter a name for this area."
-msgstr ""
+msgstr "Podaj nazwę tego obszaru."
 
 #: views/modals/area.html:52 views/modals/button.html:50
 #: views/modals/enclosure.html:23 views/modals/event.html:21
 #: views/modals/playlist.html:23 views/modals/relay.html:50
 msgid "Please enter a name of at least 1 character."
-msgstr ""
+msgstr "Podaj nazwę z conajmniej 1 znakiem."
 
 #: views/modals/area.html:62 views/modals/area.html:280
 #: views/modals/area.html:421 views/modals/webcam.html:89
 msgid "Disabled"
-msgstr ""
+msgstr "Wyłączony"
 
 #: views/modals/area.html:63 views/modals/area.html:282
 #: views/modals/area.html:423
 msgid "Timer"
-msgstr ""
+msgstr "Timer"
 
 #: views/modals/area.html:64 views/modals/area.html:283
 #: views/modals/area.html:425
 msgid "Weather day/night"
-msgstr ""
+msgstr "Pogoda dzień/noc"
 
 #: views/modals/area.html:65 views/modals/area.html:284
 #: views/modals/area.html:426
 msgid "Weather night/day"
-msgstr ""
+msgstr "Pogoda noc/dzień"
 
 #: views/modals/area.html:68
 msgid "Select the mode of this area. This will change the timing and duration of the relays."
