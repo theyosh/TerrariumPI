@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2021-04-07 10:58+CEST\n"
-"PO-Revision-Date: 2021-05-30 12:38+0000\n"
+"PO-Revision-Date: 2021-05-31 23:38+0000\n"
 "Last-Translator: killwater <mk@mklimek.info>\n"
 "Language-Team: Polish <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/pl/>\n"
@@ -672,88 +672,102 @@ msgstr "Pogoda noc/dzień"
 #: views/modals/area.html:68
 msgid "Select the mode of this area. This will change the timing and duration of the relays."
 msgstr ""
+"Wybierz tryb dla tego obszaru. To zmieni czas i długość załączenia "
+"przekaźników."
 
 #: views/modals/area.html:76
 msgid "Minimum hours"
-msgstr ""
+msgstr "Minimalna ilość godzin"
 
 #: views/modals/area.html:79
 msgid "The minimum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is shorter then this minimum value, the day will be extended to this minimum value."
 msgstr ""
+"Minimalna ilość godzin przez którą światła będą włączone. Odnośni się "
+"wyłącznie do trybu pogodowego. Jeśli dzień z serwera jest krótszy niż ta "
+"wrtość minimalna zostanie wydłużony do wartości minimalnej."
 
 #: views/modals/area.html:88
 msgid "Maximum hours"
-msgstr ""
+msgstr "Maksymalna ilość godzin"
 
 #: views/modals/area.html:91
 msgid "The maximum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is longer then this maximum value, the day will be shortened to this maximum value."
 msgstr ""
+"Maksymalna ilość godzin przez którą światła będą włączone. Odnośni się "
+"wyłącznie do trybu pogodowego. Jeśli dzień z serwera jest dłuższy niż ta "
+"wartość maksymalna zostanie skrócony do wartości maksymalnej."
 
 #: views/modals/area.html:100
 msgid "Hours shift"
-msgstr ""
+msgstr "Przesunięcie godzin"
 
 #: views/modals/area.html:103
 msgid "The amount of time to shift in hours based on the sun rise time. Negative values will make the day start earlier."
 msgstr ""
+"Ilość godzin o którą czas powinien zostać przesunięty oparta na czasie "
+"wschodu słońca. Wartości ujemne spowodują wcześniejsze rozpoczęcie dnia."
 
 #: views/modals/area.html:106
 msgid "Enter a value between -12 and 12."
-msgstr ""
+msgstr "Wprowadź wartość pomiędzy -12 i 12."
 
 #: views/modals/area.html:113 views/modals/area.html:281
 #: views/modals/area.html:422
 msgid "Main lights"
-msgstr ""
+msgstr "Główne światła"
 
 #: views/modals/area.html:118 views/modals/message.html:52
 #: views/modals/service.html:47
 msgid "Toggle this if this is the main lights for this enclosure. This is used for the light checks in other areas."
 msgstr ""
+"Przełącz jeśli to są główne światła w tej klatce. Ta wartość jest używana do "
+"sprawdzenia świateł w innych obszarach."
 
 #: views/modals/area.html:126 views/modals/area.html:309
 msgid "Below you can per select the relays and timer settings per period daytime and nighttime."
 msgstr ""
+"Poniżej możesz wybrać ustawienia przełączników i sterownika czasowego dla "
+"okresu dziennego i nocnego."
 
 #: views/modals/area.html:129 views/modals/area.html:312
 msgid "Day settings"
-msgstr ""
+msgstr "Ustawienia dzienne"
 
 #: views/modals/area.html:129 views/modals/area.html:312
 msgid "Night settings"
-msgstr ""
+msgstr "Ustawienia nocne"
 
 #: views/modals/area.html:136 views/modals/area.html:194
 #: views/modals/area.html:319 views/modals/area.html:377
 #: views/modals/area.html:480 views/modals/area.html:552
 msgid "Begin time"
-msgstr ""
+msgstr "Czas rozpoczęcia"
 
 #: views/modals/area.html:139 views/modals/area.html:322
 msgid "The time of the day when the relays are toggled on each day."
-msgstr ""
+msgstr "Czas dnia gdy przekaźniki powinny zostać włączone. Dla każdego dnia."
 
 #: views/modals/area.html:142 views/modals/area.html:154
 #: views/modals/area.html:166 views/modals/area.html:325
 #: views/modals/area.html:337 views/modals/area.html:349
 msgid "Enter a valid time of the day."
-msgstr ""
+msgstr "Wprowadź poprawny czas dnia."
 
 #: views/modals/area.html:148 views/modals/area.html:200
 #: views/modals/area.html:331 views/modals/area.html:383
 #: views/modals/area.html:486 views/modals/area.html:558
 msgid "End time"
-msgstr ""
+msgstr "Czas zakończenia"
 
 #: views/modals/area.html:151 views/modals/area.html:334
 msgid "The time of the day when the relays are toggled off each day."
-msgstr ""
+msgstr "Czas dnia gdy przekaźniki powinny zostać wyłączone. Dla każdego dnia."
 
 #: views/modals/area.html:160 views/modals/area.html:206
 #: views/modals/area.html:343 views/modals/area.html:389
 #: views/modals/area.html:492 views/modals/area.html:564
 msgid "On duration"
-msgstr ""
+msgstr "Długość czasu włączenia"
 
 #: views/modals/area.html:163 views/modals/area.html:346
 msgid "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full day."
