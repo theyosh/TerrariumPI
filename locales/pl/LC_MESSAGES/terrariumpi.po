@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2021-04-07 10:58+CEST\n"
-"PO-Revision-Date: 2021-05-31 23:38+0000\n"
+"PO-Revision-Date: 2021-06-02 19:38+0000\n"
 "Last-Translator: killwater <mk@mklimek.info>\n"
 "Language-Team: Polish <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/pl/>\n"
@@ -772,132 +772,138 @@ msgstr "Długość czasu włączenia"
 #: views/modals/area.html:163 views/modals/area.html:346
 msgid "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full day."
 msgstr ""
+"Czas przez który przełączniki powinny być włączone. Jeśli jest krótszy niż "
+"dzień działa jako timer. Wpisz zero aby uzyskać cały dzień."
 
 #: views/modals/area.html:172 views/modals/area.html:212
 #: views/modals/area.html:355 views/modals/area.html:395
 #: views/modals/area.html:498 views/modals/area.html:570
 msgid "Off duration"
-msgstr ""
+msgstr "Czas jako wyłączony"
 
 #: views/modals/area.html:238
 msgid "Relay"
-msgstr ""
+msgstr "Przełącznik"
 
 #: views/modals/area.html:244
 msgid "Duration on"
-msgstr ""
+msgstr "Czas jako włączony"
 
 #: views/modals/area.html:252
 msgid "Power on"
-msgstr ""
+msgstr "Zasilanie włączone"
 
 #: views/modals/area.html:260
 msgid "Duration off"
-msgstr ""
+msgstr "Czas jako wyłączony"
 
 #: views/modals/area.html:268
 msgid "Power off"
-msgstr ""
+msgstr "Zasilanie wyłączone"
 
 #: views/modals/area.html:287
 msgid "Select the mode of this area. This will change the timing and duration of the players."
 msgstr ""
+"Wybierz tryb dla tego obszaru. To zmieni czas i okres działania "
+"przełączników."
 
 #: views/modals/area.html:295
 msgid "Sound card"
-msgstr ""
+msgstr "Karta dźwiękowa"
 
 #: views/modals/area.html:299
 msgid "Select the sound card that is used for this enclosure."
-msgstr ""
+msgstr "Wybierz kartę dźwiękową która ma być użyta dla tej klatki."
 
 #: views/modals/area.html:438 views/modals/playlist.html:29
 #: views/playlists.html:27 views/playlists.html:42
 msgid "Volume"
-msgstr ""
+msgstr "Objętość"
 
 #: views/modals/area.html:444
 msgid "Height"
-msgstr ""
+msgstr "Wysokość"
 
 #: views/modals/area.html:450 views/modals/sensor.html:99
 msgid "Offset"
-msgstr ""
+msgstr "Prezesunięcie"
 
 #: views/modals/area.html:456
 msgid "Day/night difference"
-msgstr ""
+msgstr "Różnica dzień/noc"
 
 #: views/modals/area.html:462
 msgid "Day/night source"
-msgstr ""
+msgstr "Żródło dnia/nocy"
 
 #: views/modals/area.html:464
 msgid "Lights"
-msgstr ""
+msgstr "Światła"
 
 #: views/modals/area.html:473
 msgid "High alarm"
-msgstr ""
+msgstr "Alarm wysoki"
 
 #: views/modals/area.html:473
 msgid "Low alarm"
-msgstr ""
+msgstr "Alarm niski"
 
 #: views/modals/area.html:504 views/modals/area.html:576
 msgid "Power on time"
-msgstr ""
+msgstr "Czas włączenia"
 
 #: views/modals/area.html:510 views/modals/area.html:582
 msgid "Settle time"
-msgstr ""
+msgstr "Czas uregulawania"
 
 #: views/modals/area.html:516 views/modals/area.html:588
 msgid "Light status"
-msgstr ""
+msgstr "Status światła"
 
 #: views/modals/area.html:518 views/modals/area.html:528
 #: views/modals/area.html:590 views/modals/area.html:600
 #: views/modals/webcam.html:109 views/modals/webcam.html:121
 msgid "Ignored"
-msgstr ""
+msgstr "Zignorowany"
 
 #: views/modals/area.html:519 views/modals/area.html:591
 msgid "On"
-msgstr ""
+msgstr "Włączony"
 
 #: views/modals/area.html:520 views/modals/area.html:592
 msgid "Off"
-msgstr ""
+msgstr "Wyłączony"
 
 #: views/modals/area.html:526 views/modals/area.html:598
 msgid "Door status"
-msgstr ""
+msgstr "Statrus drzwi"
 
 #: views/modals/area.html:529 views/modals/area.html:601
 #: views/modals/webcam.html:123
 msgid "Open"
-msgstr ""
+msgstr "Otwarty"
 
 #: views/modals/area.html:530 views/modals/area.html:602
 msgid "Closed"
-msgstr ""
+msgstr "Zamknięty"
 
 #: views/modals/area.html:623
 msgid "Dimmer on duration"
-msgstr ""
+msgstr "Czas włączenia ściemniacza"
 
 #: views/modals/area.html:627
 msgid "Dimmer of duration"
-msgstr ""
+msgstr "Czas wyłączenia ściemniacza"
 
 #: views/modals/area.html:637
 msgid "Select the duration for the dimmer to go to on or off in minutes. Max duration is 180 minutes."
 msgstr ""
+"Wybierz czas w którym ścmiemniacz ma się włączać lub wyłączać w minutach. "
+"Max czas 180min."
 
 #: views/modals/area.html:644
 msgid "Relay delay on"
-msgstr ""
+msgstr "Opóżnienie włączenia przełącznika"
 
 #: views/modals/area.html:648
 msgid "Relay delay off"
