@@ -6,16 +6,12 @@ import logging.config
 
 import zipfile
 import codecs
-import sys
 import os
 import os.path
 import time
 import glob
 import shutil
 
-from pony import orm
-
-from terrariumDatabase import Setting
 from terrariumNotification import terrariumNotification
 from terrariumUtils import terrariumUtils
 
