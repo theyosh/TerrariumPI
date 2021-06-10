@@ -236,7 +236,7 @@ class terrariumEngine(object):
 
     # Set meross login into the current bash environment
     # But first check if the credentials have changed.
-    meross_login = os.environ['MEROSS_EMAIL'] != settings['meross_cloud_username'] or os.environ['MEROSS_PASSWORD'] != settings['meross_cloud_password']
+    meross_login = os.environ.get('MEROSS_EMAIL',None) != settings['meross_cloud_username'] or os.environ.get('MEROSS_PASSWORD',None) != settings['meross_cloud_password']
     os.environ['MEROSS_EMAIL']    = settings['meross_cloud_username']
     os.environ['MEROSS_PASSWORD'] = settings['meross_cloud_password']
 
