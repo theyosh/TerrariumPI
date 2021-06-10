@@ -235,13 +235,10 @@ class terrariumEngine(object):
     os.environ['SALT'] = salt
 
     # Set meross login into the current bash environment
+    # But first check if the credentials have changed.
+    meross_login = os.environ['MEROSS_EMAIL'] != settings['meross_cloud_username'] or os.environ['MEROSS_PASSWORD'] != settings['meross_cloud_password']
     os.environ['MEROSS_EMAIL']    = settings['meross_cloud_username']
     os.environ['MEROSS_PASSWORD'] = settings['meross_cloud_password']
-
-    if '' != settings['meross_cloud_username'] and '' != settings['meross_cloud_password']:
-      logger.info('Loading Meross cloud connection.')
-      self.meross_cloud = TerrariumMerossCloud(terrariumUtils.decrypt(settings['meross_cloud_username']),
-                                               terrariumUtils.decrypt(settings['meross_cloud_password']))
 
     # Make sure we use PiGPIO daemon for PWM
     os.environ['GPIOZERO_PIN_FACTORY'] = 'pigpio'
@@ -307,6 +304,16 @@ class terrariumEngine(object):
       elif self.weather is not None:
         logger.info(f'Updating weather source data to {self.settings["weather_source"]}')
         self.weather.address = self.settings['weather_source']
+
+    # Loading Meross cloud
+    if '' != settings['meross_cloud_username'] and '' != settings['meross_cloud_password'] and meross_login:
+      logger.info('Loading Meross cloud connection.')
+      if self.meross_cloud is not None:
+        logger.info('Stopping existing Meross cloud connection.')
+        self.meross_cloud.stop()
+
+      self.meross_cloud = TerrariumMerossCloud(terrariumUtils.decrypt(settings['meross_cloud_username']),
+                                               terrariumUtils.decrypt(settings['meross_cloud_password']))
 
   # -=NEW=-
   def __update_checker(self):
