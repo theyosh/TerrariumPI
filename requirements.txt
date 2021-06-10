@@ -72,3 +72,4 @@ i2c_lcd
 pony
 apispec
 apispec-webframeworks
+yoyo-migrations

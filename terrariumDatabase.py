@@ -1,13 +1,14 @@
 from datetime import datetime, timedelta
 from pony import orm
-import uuid
-import re
+from yoyo import read_migrations
+from yoyo import get_backend
 from pathlib import Path
-from cryptography.fernet import Fernet
-
 from terrariumUtils import terrariumUtils
-
 import copy
+import re
+
+
+DATABASE = 'terrariumpi.db'
 
 db = orm.Database()
 
@@ -19,8 +20,15 @@ def sqlite_speedups(db, connection):
     cursor.execute('PRAGMA temp_store   = MEMORY')
 
 def init(version):
-  db.bind(provider='sqlite', filename='terrariumpi.db', create_db=True)
-  db.generate_mapping(create_tables=True)
+  backend = get_backend(f'sqlite:///{DATABASE}')
+  migrations = read_migrations('migrations')
+
+  with backend.lock():
+    # Apply any outstanding migrations
+    backend.apply_migrations(backend.to_apply(migrations))
+
+  db.bind(provider='sqlite', filename=DATABASE)
+  db.generate_mapping()
   create_defaults(version)
 
 @orm.db_session
@@ -415,17 +423,20 @@ class Sensor(db.Entity):
       sensor_data.limit_max = self.limit_max if self.__VALUE_MODE == 3 else (sensor_data.limit_max + self.limit_max) / 2
       sensor_data.alarm_min = self.alarm_min if self.__VALUE_MODE == 3 else (sensor_data.alarm_min + self.alarm_min) / 2
       sensor_data.alarm_max = self.alarm_max if self.__VALUE_MODE == 3 else (sensor_data.alarm_max + self.alarm_max) / 2
+
+      sensor_data.exclude_avg = self.exclude_avg
     else:
       # New data
       sensor_data = SensorHistory(
-        sensor    = self,
-        timestamp = timestamp,
+        sensor      = self,
+        timestamp   = timestamp,
 
-        value     = value,
-        limit_min = self.limit_min,
-        limit_max = self.limit_max,
-        alarm_min = self.alarm_min,
-        alarm_max = self.alarm_max
+        value       = value,
+        limit_min   = self.limit_min,
+        limit_max   = self.limit_max,
+        alarm_min   = self.alarm_min,
+        alarm_max   = self.alarm_max,
+        exclude_avg = self.exclude_avg
       )
 
     return sensor_data
@@ -443,6 +454,8 @@ class SensorHistory(db.Entity):
   limit_max = orm.Required(float)
   alarm_min = orm.Required(float)
   alarm_max = orm.Required(float)
+
+  exclude_avg = orm.Required(bool, default = False)
 
   orm.PrimaryKey(sensor, timestamp)
 

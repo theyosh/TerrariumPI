@@ -1095,7 +1095,9 @@ class terrariumAPI(object):
       query = orm.select((sh.timestamp,
                           orm.avg(sh.value),
                           orm.avg(sh.alarm_min),
-                          orm.avg(sh.alarm_max)) for sh in SensorHistory if sh.sensor.type == filter and sh.timestamp >= datetime.now() - timedelta(days=period))
+                          orm.avg(sh.alarm_max)) for sh in SensorHistory if  sh.sensor.type == filter
+                                                                         and sh.exclude_avg == False
+                                                                         and sh.timestamp >= datetime.now() - timedelta(days=period))
 
     else:
       query = orm.select((sh.timestamp,
@@ -1103,7 +1105,8 @@ class terrariumAPI(object):
                           sh.alarm_min,
                           sh.alarm_max,
                           sh.limit_min,
-                          sh.limit_max)          for sh in SensorHistory if sh.sensor.id == filter   and sh.timestamp >= datetime.now() - timedelta(days=period))
+                          sh.limit_max) for sh in SensorHistory if  sh.sensor.id == filter
+                                                                and sh.timestamp >= datetime.now() - timedelta(days=period))
 
     for item in query:
       data_point = {
