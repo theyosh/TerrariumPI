@@ -5,7 +5,7 @@ from gevent import sleep
 
 class terrariumSHT3XSensor(terrariumI2CSensor):
   HARDWARE = 'sht3x'
-  TYPES    = ['temperature']
+  TYPES    = ['temperature','humidity']
   NAME     = 'Sensirion SHT3X sensor'
 
   __SHT3x_SS   = 0x2C
@@ -19,12 +19,12 @@ class terrariumSHT3XSensor(terrariumI2CSensor):
       sleep(0.2)
       # Read out data
       data = i2c_bus.read_i2c_block_data(self.device[0],self.__SHT3x_READ,6)
-      # Devide data into counts Temperature
+      # Divide data into counts Temperature
       data = {}
       data['temperature'] = data[0] << 8 | data[1]
       data['temperature'] = -45.0 + 175.0 * float(data['temperature']) / 65535.0
 
-      # Devide data into counts Humidity
+      # Divide data into counts Humidity
       data['humidity'] = data[3] << 8 | data[4]
       data['humidity'] = 100.0 * float(data['humidity']) / 65535.0
 
