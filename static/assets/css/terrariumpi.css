@@ -483,3 +483,11 @@ canvas.gauge {
   height: auto !important;
   width: 95% !important;
 }
+
+.dot-bg {
+  background-image: url('../img/dot.png' )
+}
+
+body.dark-mode .dot-bg {
+  background-image: url('../img/dot-dark.png' )
+}
