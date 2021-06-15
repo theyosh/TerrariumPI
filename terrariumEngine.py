@@ -976,21 +976,21 @@ class terrariumEngine(object):
 
       logger.info(f'Starting a new update round with {len(self.sensors)} sensors, {len(self.relays)} relays, {len(self.buttons)} buttons and {len(self.webcams)} webcams.')
       start = time.time()
-      update_threads = []
+
+      update_threads = {}
       # Sensors
-      update_threads.append(threading.Thread(target=self._update_sensors))
+      update_threads['sensors'] = threading.Thread(target=self._update_sensors)
       # Relays
-      update_threads.append(threading.Thread(target=self._update_relays))
+      update_threads['relays'] = threading.Thread(target=self._update_relays)
       # Buttons
-      update_threads.append(threading.Thread(target=self._update_buttons))
+      update_threads['buttons'] = threading.Thread(target=self._update_buttons)
       # Webcams
-      update_threads.append(threading.Thread(target=self._update_webcams))
+      update_threads['webcams'] = threading.Thread(target=self._update_webcams)
+      # Version check
+      update_threads['version'] = threading.Thread(target=self.__update_checker)
 
       for updater in update_threads:
-        updater.start()
-
-      # Version update check
-      self.__update_checker()
+        update_threads[updater].start()
 
       # Weather data
       if self.weather is not None:
@@ -999,12 +999,16 @@ class terrariumEngine(object):
       # Systemstats (needs weather update)
       self.webserver.websocket_message('systemstats', self.system_stats())
 
-      # Wait till all updates are done before continue
-      for updater in update_threads:
-        updater.join()
+      # Wait till sensors and buttons all updates are done before continue
+      for updater in ['sensors','buttons']:
+        update_threads[updater].join()
 
       # Run encouter/environment updates
       self._update_enclosures()
+
+      # Wait for all threads to end
+      for updater in update_threads:
+        update_threads[updater].join()
 
       self.motd()
 
