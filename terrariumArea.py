@@ -386,7 +386,7 @@ class terrariumArea(object):
           toggle_relay = False if other_alarm else None
           #print(f'Final toggle state for relay based on sensors: {toggle_relay}')
 
-      if toggle_relay is True and not self.state[period]['powered']:
+      if toggle_relay is True and not self.relays_state(period): #self.state[period]['powered']:
 
         if not light_state_ok:
           logger.info(f'Relays for {self} are not switched because the lights are {light_state} while {self.setup[period]["light_status"]} is requested.')
@@ -414,7 +414,8 @@ class terrariumArea(object):
           self.state[period]['timer_on'] = True
           threading.Timer(self.setup[period]['power_on_time'], self.relays_toggle, [period, False]).start()
 
-      elif toggle_relay is False and self.state[period]['powered'] and not self.state[period].get('timer_on',False):
+      elif toggle_relay is False and not self.relays_state(period, False) and not self.state[period].get('timer_on',False):
+        #self.state[period]['powered']
         logger.info(f'Toggle off the relays for area {self}.')
         self.relays_toggle(period,False)
 
@@ -454,12 +455,15 @@ class terrariumArea(object):
 
     return sensor_values
 
-  def relays_state(self, part):
+  def relays_state(self, part, state = True):
+    relay_states = []
     for relay in self.setup[part]['relays']:
-      if self.enclosure.relays[relay].is_off():
-        return False
+      if state:
+        relay_states.append(self.enclosure.relays[relay].is_on())
+      else:
+        relay_states.append(self.enclosure.relays[relay].is_off())
 
-    return True
+    return all(relay_states)
 
   def relays_toggle(self, part, on):
     logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
@@ -749,7 +753,7 @@ class terrariumAreaAudio(terrariumArea):
 
       self.setup[period]['player'] = terrariumAudioPlayer(self.setup['soundcard'], playlists)
 
-  def relays_state(self, period):
+  def relays_state(self, period, state = True):
     # We do not check if the player is actual running. This will cause an unwanted repeat functionality
     return period in self.state and self.state[period].get('powered',False)
 
