@@ -13,6 +13,7 @@ from operator import itemgetter
 from datetime import date, datetime, timedelta
 from time import time
 from gevent import sleep
+from func_timeout import func_timeout, FunctionTimedOut
 
 import re
 import math
@@ -64,7 +65,7 @@ class terrariumWebcam(object):
   __FONT_SIZE = 10
   __OFFLINE = 'offline'
   __ONLINE = 'online'
-  __UPDATE_TIMEOUT = 30
+  __UPDATE_TIMEOUT = 1
   __VALID_ROTATIONS = ['0','90','180','270','h','v']
 
   _WARM_UP = 2
@@ -437,7 +438,13 @@ class terrariumWebcam(object):
 
         sleep(0.5)
 
-      image = self._get_raw_data()
+      try:
+        image = func_timeout(15, self._get_raw_data)
+      except FunctionTimedOut:
+        # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
+        logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
+      except Exception as ex:
+        logger.error(f'Webcam {self} has exception: {ex}')
 
       if len(relays) > 0:
         for relay in relays:
