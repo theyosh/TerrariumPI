@@ -32,7 +32,7 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
     try:
       data = {}
       with self.device as sensor:
-        sensor.connect(sensor.addr, iface=sensor.iface)
+        sensor.connect(sensor.addr, iface=sensor.iface, timeout=terrariumMiFloraSensor.__MIFLORA_TIMEOUT)
         # Read battery and firmware version attribute
         data = sensor.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY)
         data = {'battery': data[0], 'firmware' : data[2:].decode('utf8')}
