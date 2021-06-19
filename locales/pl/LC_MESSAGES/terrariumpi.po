@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2021-04-07 10:58+CEST\n"
-"PO-Revision-Date: 2021-06-02 19:38+0000\n"
+"PO-Revision-Date: 2021-06-20 23:38+0000\n"
 "Last-Translator: killwater <mk@mklimek.info>\n"
 "Language-Team: Polish <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/pl/>\n"
@@ -907,166 +907,172 @@ msgstr "Opóżnienie włączenia przełącznika"
 
 #: views/modals/area.html:648
 msgid "Relay delay off"
-msgstr ""
+msgstr "Opóźnienie przełącznika wyłączone"
 
 #: views/modals/area.html:656
 msgid "Select the delay in minutes that a relay waits before it turns on. Max delay is 180 minutes."
 msgstr ""
+"Wybierz opoźnienie załączenia przełącznika w minutach. Maksymalne "
+"opóźnienienie 180 minut."
 
 #: views/modals/button.html:11
 msgid "Button settings"
-msgstr ""
+msgstr "Ustawienia przycisków"
 
 #: views/modals/button.html:23
 msgid "Select the hardware type for this button."
-msgstr ""
+msgstr "Wybierz urządzenie dla tego rodzaju przycisku."
 
 #: views/modals/button.html:26 views/modals/relay.html:26
 msgid "Please select a hardware type."
-msgstr ""
+msgstr "Wybierz rodzaj urządzenia."
 
 #: views/modals/button.html:32 views/modals/relay.html:32
 #: views/modals/sensor.html:35 views/modals/service.html:68
 #: views/modals/webcam.html:29
 msgid "Address"
-msgstr ""
+msgstr "Adres"
 
 #: views/modals/button.html:35
 msgid "Enter a valid physical GPIO port number."
-msgstr ""
+msgstr "Wpisz prawidłowy fizyczny numer portu GPIO."
 
 #: views/modals/button.html:38
 msgid "Please enter a valid physical GPIO port number between %s and %s."
-msgstr ""
+msgstr "Wpisz prawidłowy fizyczny numer portu GPIO w zakresie %s i %s."
 
 #: views/modals/button.html:47 views/modals/relay.html:47
 msgid "Enter a name for this button."
-msgstr ""
+msgstr "Wpisz nazwę tego przycisku."
 
 #: views/modals/button.html:59
 msgid "The current state of the button."
-msgstr ""
+msgstr "Obecny stan przycisku."
 
 #: views/modals/button.html:70
 msgid "Capacitor value in &micro;F"
-msgstr ""
+msgstr "Pojemność kondensatora w &micro;F"
 
 #: views/modals/button.html:73
 msgid "Enter the capacitor value in &micro;F as this will influence the light calculation."
 msgstr ""
+"Wpisz pojemność kondensatora w &micro;F gdyż to ma wpływ na wyliczenia "
+"światła."
 
 #: views/modals/button.html:76 views/modals/relay.html:112
 #: views/modals/relay.html:124 views/modals/relay.html:136
 msgid "Please enter value between %s and %s."
-msgstr ""
+msgstr "Podaj wartość w zakresie pomiędzy %s i %s."
 
 #: views/modals/enclosure.html:11
 msgid "Enclosure settings"
-msgstr ""
+msgstr "Ustawienia klatki"
 
 #: views/modals/enclosure.html:20
 msgid "Enter a name for this enclosure."
-msgstr ""
+msgstr "Wpisz nazwę tej klatki."
 
 #: views/modals/enclosure.html:29
 msgid "Image"
-msgstr ""
+msgstr "Obrazek"
 
 #: views/modals/enclosure.html:36
 msgid "Select an image file to use on the dashboard page."
-msgstr ""
+msgstr "Wybierz obrazek który zostanie pokazany na stronie głownej."
 
 #: views/modals/enclosure.html:39
 msgid "Please select a filename with the extension of .jpg, .png, .gif."
-msgstr ""
+msgstr "Proszę podać nazwę pliku z rozszerzeniem .jpg, .png, .gif."
 
 #: views/modals/enclosure.html:47
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 #: views/modals/enclosure.html:51
 msgid "Enter some information about this enclosure."
-msgstr ""
+msgstr "Wpisz opis tej klatki."
 
 #: views/modals/enclosure.html:58
 msgid "Doors"
-msgstr ""
+msgstr "Drzwi"
 
 #: views/modals/enclosure.html:64
 msgid "Select the doors that are used with this enclosure."
-msgstr ""
+msgstr "Wybierz drzwi które należą do tej klatki."
 
 #: views/modals/enclosure.html:76
 msgid "Select the webcams that are used with this enclosure. You can use html colors and fonts and images."
 msgstr ""
+"Wybierz kamery internetowe który są umieszczone w tej klatce. Możesz użyć "
+"kolorów html, czcionek i obrazków."
 
 #: views/modals/event.html:10 views/modals/event.html:25
 msgid "Event"
-msgstr ""
+msgstr "Wydarzenie"
 
 #: views/modals/event.html:18
 msgid "Enter a name for this event."
-msgstr ""
+msgstr "Wpisz nazwę wydarzenia."
 
 #: views/modals/event.html:29
 msgid "Enter some information about this event."
-msgstr ""
+msgstr "Wpisz opis wydarzenia."
 
 #: views/modals/event.html:35
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: views/modals/event.html:38
 msgid "The date or period for this event."
-msgstr ""
+msgstr "Data lub okres trwania tego wydarzenia."
 
 #: views/modals/event.html:44
 msgid "Repeat every"
-msgstr ""
+msgstr "Powtarzaj co"
 
 #: views/modals/event.html:45
 msgid "Remind in"
-msgstr ""
+msgstr "Przypomnij mi"
 
 #: views/modals/event.html:48
 msgid "No repeat"
-msgstr ""
+msgstr "Nie powtarzaj"
 
 #: views/modals/event.html:49
 msgid "Days"
-msgstr ""
+msgstr "Dni"
 
 #: views/modals/event.html:50
 msgid "Weeks"
-msgstr ""
+msgstr "Tygodnie"
 
 #: views/modals/event.html:51
 msgid "Months"
-msgstr ""
+msgstr "Miesiące"
 
 #: views/modals/event.html:52
 msgid "Years"
-msgstr ""
+msgstr "Lata"
 
 #: views/modals/event.html:57
 msgid "Select a repeat period and an amount."
-msgstr ""
+msgstr "Wybierz okres i ilość powtórzeń."
 
 #: views/modals/event.html:60
 msgid "Please enter a valid repeat period amount."
-msgstr ""
+msgstr "Wybierz poprawny okres i ilość powtórzeń."
 
 #: views/modals/message.html:11
 msgid "Message settings"
-msgstr ""
+msgstr "Ustawienia wiadomości"
 
 #: views/modals/message.html:18
 msgid "Message type"
-msgstr ""
+msgstr "Rodzaj wiadomości"
 
 #: views/modals/message.html:27
 msgid "Subject"
-msgstr ""
+msgstr "Temat"
 
 #: views/modals/message.html:39 views/modals/service.html:34
 msgid "Rate limit"
