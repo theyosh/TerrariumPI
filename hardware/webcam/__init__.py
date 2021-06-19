@@ -443,8 +443,10 @@ class terrariumWebcam(object):
       except FunctionTimedOut:
         # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
         logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
+        image = False
       except Exception as ex:
         logger.error(f'Webcam {self} has exception: {ex}')
+        image = False
 
       if len(relays) > 0:
         for relay in relays:
