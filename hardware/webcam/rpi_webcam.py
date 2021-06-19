@@ -31,7 +31,7 @@ class terrariumRPIWebcam(terrariumWebcam):
 
     with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
       out, err = proc.communicate()
-      if err != "b''":
+      if err != b'':
         return False
 
       return BytesIO(out)
