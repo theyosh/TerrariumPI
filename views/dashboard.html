@@ -149,7 +149,7 @@
                 </tr>
                 <tr data-class="state.day" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
                   <td >{{ _('Day') }}:</td>
-                  <td colspan="2">
+                  <td>
                     <span data-template-bind='[
                     {"attribute": "content", "value": "state.day.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_day_start_"} ]'></span>
@@ -162,6 +162,7 @@
                     {"attribute": "content", "value": "state.day.duration", "formatter": "durationformatter", "formatOptions": "LTS"},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_day_duration_"} ]'></span>)
                   </td>
+                  <td></td>
                 </tr>
                 <tr data-class="state.night" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
                   <td >{{ _('Night') }}:</td>
