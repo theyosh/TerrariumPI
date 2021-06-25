@@ -926,6 +926,10 @@ function movingAvg(array, count, qualifier){
           self._graph.options.scales.xAxes[0].time.unit = 'hour';
           self._graph.options.scales.xAxes[0].time.displayFormats.hour = 'D/M LT';
           self._graph.options.scales.xAxes[0].time.stepSize = 12;
+        } else {
+          self._graph.options.scales.xAxes[0].time.unit = 'day';
+          self._graph.options.scales.xAxes[0].time.displayFormats.day = 'D MMM';
+          self._graph.options.scales.xAxes[0].time.stepSize = 1;
         }
 
         self._graph.data = graph_data;
