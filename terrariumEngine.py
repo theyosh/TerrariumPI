@@ -737,6 +737,8 @@ class terrariumEngine(object):
       # And send a websocket update
       self.webserver.websocket_message('relay' , {'id' : relay.id, 'value' : state})
       self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
+      if hasattr(self,'enclosures'):
+        self._update_enclosures()
 
   # -= NEW =-
   def __load_existing_buttons(self):
