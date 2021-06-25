@@ -147,10 +147,7 @@ class terrariumArea(object):
       begin = now.replace(hour=begin.hour, minute=begin.minute, second=begin.second)
       end   = now.replace(hour=end.hour,   minute=end.minute,   second=end.second)
 
-      if begin == end:
-        end += datetime.timedelta(hours=24)
-
-      if begin > end:
+      if begin >= end:
         end += datetime.timedelta(hours=24)
 
       if now < begin:
@@ -576,21 +573,14 @@ class terrariumAreaLights(terrariumArea):
       print(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}')
       print(ex)
 
-    # if (action and relay.state != relay.OFF) or (not action and relay.state != relay.ON):
-    #     print('-----============= Restore relay states because somebody changed it..... ==========----------')
-    #     tweaks['duration'] = 0
-    #     tweaks['delay']    = 0
+    # If the relay is already powered and should be power up, ignore the delay time. Force to zero delay
+    # Same for going out. When the lights should be off, and they are not at full power, no delay.
+    if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
+      tweaks['delay'] = 0
 
     if relay.is_dimmer:
       step_size = tweaks['duration'] / (relay.ON - relay.OFF)
       tweaks['duration'] = step_size * abs((relay.ON if action else relay.OFF) - relay.state)
-
-      # If the relay is already powered and should be power up, ignore the delay time. Force to zero delay
-      # Same for going out. When the lights should be off, and they are not at full power, no delay.
-      if (action and relay.state != relay.OFF) or (not action and relay.state != relay.ON):
-        #print('-----============= Restore relay states because somebody changed it..... ==========----------')
-        tweaks['duration'] = 0
-        tweaks['delay']    = 0
 
       if action:
         logger.info(f'Start the dimmer {relay.name} from {relay.state}% to {relay.ON}% in {tweaks["duration"]} seconds with a delay of {tweaks["delay"]/60} minutes')
