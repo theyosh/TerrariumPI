@@ -1000,7 +1000,7 @@ class terrariumEngine(object):
       self.webserver.websocket_message('systemstats', self.system_stats())
 
       # Wait till sensors and buttons all updates are done before continue
-      for updater in ['sensors','buttons']:
+      for updater in ['sensors','buttons','relays']:
         update_threads[updater].join()
 
       # Run encouter/environment updates
