@@ -2,6 +2,155 @@ Changelog
 =========
 
 
+3.10.0 (2021-06-26)
+-------------------
+
+**New**
+------
+- Add more translateable content. [#509](https://github.com/theyosh/TerrariumPI/issues/509). [theyosh]
+- Add missing version number update. [theyosh]
+
+**Fixes**
+------
+- Update translation fixes (2) [theyosh]
+- Update translation fixes. [theyosh]
+- PyWemo is fixed. [theyosh]
+- Fixed version pywemo due to bug
+  https://github.com/pavoni/pywemo/issues/248. [theyosh]
+- Fix broken notification setup. [#518](https://github.com/theyosh/TerrariumPI/issues/518). [theyosh]
+- Fix broken notification setup. [#518](https://github.com/theyosh/TerrariumPI/issues/518). [theyosh]
+- Fix audiofiles. [#499](https://github.com/theyosh/TerrariumPI/issues/499). [theyosh]
+
+**Updates**
+------
+- Update version. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update README.md. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translations. [theyosh]
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update FUNDING.yml. [TheYOSH]
+- Update FUNDING.yml. [TheYOSH]
+- Update hls.js. [Marvv90]
+- Update install.sh. [TheYOSH]
+- Update translations. [theyosh]
+- Update. [Mike Norgate]
+
+**Other**
+------
+- Merge pull request [#549](https://github.com/theyosh/TerrariumPI/issues/549) from mikenorgate/master. [TheYOSH]
+
+  Support for Honeywell HumidIcon sensors
+- Remove logging. [Mike Norgate]
+- Merge remote-tracking branch 'upstream/master' [Mike Norgate]
+- Create pages-deploy.yml. [TheYOSH]
+- Merge pull request [#540](https://github.com/theyosh/TerrariumPI/issues/540) from theyosh/3.x.y.z. [TheYOSH]
+
+  3.x.y.z
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 98.5% (860 of 873 strings)
+- Translated using Weblate (German (Austria)) [fabi2803]
+
+  Currently translated at 93.2% (814 of 873 strings)
+- Merge pull request [#537](https://github.com/theyosh/TerrariumPI/issues/537) from theyosh/3.x.y.z. [TheYOSH]
+
+  3.x.y.z
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (873 of 873 strings)
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 98.5% (860 of 873 strings)
+- Translated using Weblate (English (United States)) [theyosh]
+
+  Currently translated at 100.0% (873 of 873 strings)
+- Merge pull request [#534](https://github.com/theyosh/TerrariumPI/issues/534) from theyosh/3.x.y.z. [TheYOSH]
+
+  3.x.y.z
+- Merge branch 'master' into 3.x.y.z. [theyosh]
+- Merge pull request [#532](https://github.com/theyosh/TerrariumPI/issues/532) from theyosh/3.x.y.z. [TheYOSH]
+
+  Allow no soundcard as an option. [#531](https://github.com/theyosh/TerrariumPI/issues/531)
+- Translated using Weblate (Portuguese (Brazil)) [theyosh]
+
+  Currently translated at 97.7% (853 of 873 strings)
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 98.5% (860 of 873 strings)
+- Translated using Weblate (Norwegian Bokmål) [theyosh]
+
+  Currently translated at 89.2% (779 of 873 strings)
+- Translated using Weblate (Italian) [theyosh]
+
+  Currently translated at 70.2% (613 of 873 strings)
+- Translated using Weblate (French (Belgium)) [theyosh]
+
+  Currently translated at 64.7% (565 of 873 strings)
+- Translated using Weblate (Spanish (Argentina)) [theyosh]
+
+  Currently translated at 93.3% (815 of 873 strings)
+- Translated using Weblate (English (United States)) [theyosh]
+
+  Currently translated at 100.0% (873 of 873 strings)
+- Translated using Weblate (English (United Kingdom)) [theyosh]
+
+  Currently translated at 100.0% (873 of 873 strings)
+- Translated using Weblate (German (Austria)) [theyosh]
+
+  Currently translated at 93.1% (813 of 873 strings)
+- Allow no soundcard as an option. [#531](https://github.com/theyosh/TerrariumPI/issues/531). [theyosh]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 98.0% (857 of 874 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (874 of 874 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (874 of 874 strings)
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 98.0% (857 of 874 strings)
+- Translated using Weblate (Dutch) [Weblate Admin]
+
+  Currently translated at 95.6% (836 of 874 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (874 of 874 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (837 of 837 strings)
+- Create FUNDING.yml. [TheYOSH]
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Merge pull request [#504](https://github.com/theyosh/TerrariumPI/issues/504) from Marvv90/patch-1. [TheYOSH]
+
+  Update hls.js
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Merge remote-tracking branch 'upstream/master' [Mike Norgate]
+- Merge remote-tracking branch 'upstream/master' [Mike Norgate]
+- Support for Honeywell HumidIcon sensors. [Mike Norgate]
+
+
 3.9.9 (2020-12-26)
 ------------------
 
@@ -110,6 +259,7 @@ Changelog
 
 **Other**
 ------
+- New release version 3.9.9. [theyosh]
 - Merge branch 'CCS811' [theyosh]
 - Working CCS811 sensor. [#462](https://github.com/theyosh/TerrariumPI/issues/462). [theyosh]
 - Merge branch 'master' into CCS811. [theyosh]
@@ -2811,4 +2961,5 @@ Changelog
 - Living on the edge.... use latest beta of Leaflet. [TheYOSH]
 - Initial release. [TheYOSH]
 - Initial commit. [TheYOSH]
+
 
