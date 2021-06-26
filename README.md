@@ -115,17 +115,17 @@ Your language not in the list or not up to date? [Create your own language trans
 ## Installation
 The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/). For now the Desktop/Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
 It is possible to use USB or SSD drives to speed things up: https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb
-1. Get a working Raspberry Pi and login as user 'pi'
+1. Get a working Raspberry Pi and login as user 'pi'<br>
   `ssh pi@[raspberry_ip]`
-2. Install git
+2. Install git<br>
   `sudo apt -y install git`
-3. Clone this repository and submodules!
+3. Clone this repository and submodules!<br>
   `git clone --branch 4.x.y.z --depth 1 https://github.com/theyosh/TerrariumPI.git`
-4. Enter the new TerrariumPI folder
+4. Enter the new TerrariumPI folder<br>
   `cd TerrariumPI`
-5. Run the installer script and wait
+5. Run the installer script and wait<br>
   `sudo ./install.sh`
-6. Reboot Raspberry PI to get all the needed modules loaded
+6. Reboot Raspberry PI to get all the needed modules loaded<br>
   `sudo reboot` (if done manual)
 7. Go to the webinterface at http://[raspberry_ip]:8090 (login: admin/password)
 
@@ -135,13 +135,13 @@ Make sure that your Pi is secured when you put it to the Internet. Would be a sh
 
 ## Updating
 This updating is based on that the software is installed with the steps in the Installation above. When updating between release versions it will take more time due to database updates and cleanups. This can be seen in the logfile.
-1. Get a working Raspberry Pi and login as user 'pi'
+1. Get a working Raspberry Pi and login as user 'pi'<br>
   `ssh pi@[raspberry_ip]`
-2. Enter the TerrariumPI folder
+2. Enter the TerrariumPI folder<br>
   `cd TerrariumPI`
-3. Update the new code with git
+3. Update the new code with git<br>
   `git pull`
-4. Re-run the installation script in order to update software dependencies
+4. Re-run the installation script in order to update software dependencies<br>
   `sudo ./install.sh`
 4. Restart TerrariumPI: `sudo service terrariumpi restart`
 
@@ -151,7 +151,7 @@ Now **clear your browser cache** and reload the webinterface. A brand new versio
 This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimun and tested hardware is
 - Raspberry PI with at least **4GB SD card** running [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/).
   - Pi 2 (At own risk/no support)
-  - Pi 3 (At own risk/no support)
+  - Pi 3 (At own risk/limited support)
   - Zero (At own risk/no support)
   - Pi 4
 - Power relay board
