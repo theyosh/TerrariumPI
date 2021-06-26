@@ -1,6 +1,8 @@
-# TerrariumPI 3.9.9
+# TerrariumPI 3.10.0
 [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/3-x-y-z/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
+
+**This version is not maintained anymore. Version 3.10 is the latest 3.X version. Use version 4**
 
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
@@ -111,21 +113,21 @@ The software has support for the following languages:
 
 [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/3-x-y-z/multi-auto.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 
-Your language not in the list or not up to date? Click the button [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/3-x-y-z/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
+Your language not in the list or not up to date? Click on the badge [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/3-x-y-z/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 
 ## Installation
 The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
-1. Get a working Raspberry Pi and login as user 'pi'  
+1. Get a working Raspberry Pi and login as user 'pi'<br>
   `ssh pi@[raspberry_ip]`
-2. Install git  
+2. Install git<br>
   `sudo apt -y install git`
-3. Clone this repository and submodules!  
-  `git clone --recursive --depth 1 https://github.com/theyosh/TerrariumPI.git`
-4. Enter the new TerrariumPI folder  
+3. Clone this repository and submodules!<br>
+  `git clone --recursive --branch 3.x.y.z --depth 1 https://github.com/theyosh/TerrariumPI.git`
+4. Enter the new TerrariumPI folder<br>
   `cd TerrariumPI`
-5. Run the installer script and wait  
+5. Run the installer script and wait<br>
   `sudo ./install.sh 3`
-6. Reboot Raspberry PI to get all the needed modules loaded  
+6. Reboot Raspberry PI to get all the needed modules loaded<br>
   `sudo reboot`
 7. Go to the webinterface at http://[raspberry_ip]:8090
 
@@ -135,13 +137,13 @@ Make sure that your Pi is secured when you put it to the Internet. Would be a sh
 
 ## Updating
 This updating is based on that the software is installed with the steps in the Installation above. When updating between release versions it will take more time due to database updates and cleanups. This can be seen in the logfile.
-1. Get a working Raspberry Pi and login as user 'pi'  
+1. Get a working Raspberry Pi and login as user 'pi'<br>
   `ssh pi@[raspberry_ip]`
-2. Enter the TerrariumPI folder  
+2. Enter the TerrariumPI folder<br>
   `cd TerrariumPI`
-3. Update the new code with git  
+3. Update the new code with git<br>
   `git pull`
-4. Re-run the installation script in order to update software dependencies  
+4. Re-run the installation script in order to update software dependencies<br>
   `sudo ./install.sh 3`
 4. Restart TerrariumPI according to: https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-restart-terrariumpi
 
@@ -162,9 +164,9 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
   - GPIO
   - 1 Wire interface
   - MCP3008 ([RasPiO Analog Zero](https://github.com/raspitv/analogzero))
-  
+
 [Full list of supported hardware](https://github.com/theyosh/TerrariumPI/wiki/Hardware)
-  
+
 ### GPIO numbering
 All hardware that connects to the GPIO pins use **Physical GPIO numbering** (1 - 40). The software will translate it to BCM if needed for a supported device or sensor. [More information about GPIO pin numbering](https://pinout.xyz/)
 
