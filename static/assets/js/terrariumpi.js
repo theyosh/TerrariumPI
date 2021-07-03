@@ -683,38 +683,6 @@ function sensor_gauge(canvas, type, current, limit_min, limit_max, alarm_min, al
 
 function graph(canvas, source, type) {
 
-  /**
-* returns an array with moving average of the input array
-* @param array - the input array
-* @param count - the number of elements to include in the moving average calculation
-* @param qualifier - an optional function that will be called on each
-*  value to determine whether it should be used
-*/
-function movingAvg(array, count, qualifier){
-
-  // calculate average for subarray
-  var avg = function(array, qualifier){
-      var sum = 0, count = 0, val = 0;
-      for (var i in array){
-          val = array[i];
-          if (!qualifier || qualifier(val)){
-              sum += val;
-              count++;
-          }
-      }
-      return (sum / count);
-  };
-  var result = [], val;
-
-  // calculate average for each subarray and add to result
-  for (var i=0, len=array.length - count; i <= len; i++){
-      val = avg(array.slice(i, i + count), qualifier);
-      result.push(val);
-  }
-
-  return result;
-}
-
   function getMin(ret, thisVal) {
     thisVal = thisVal || ret;
     return ret < thisVal ? ret : thisVal;
@@ -942,6 +910,23 @@ function movingAvg(array, count, qualifier){
     },
 
     _parse_data: function(data) {
+
+      // https://stackoverflow.com/a/63348486
+      function smoothing(array, countBefore, countAfter) {
+        if (countAfter == undefined) countAfter = 0;
+        const result = [];
+        for (let i = 0; i < array.length; i++) {
+          const subArr = array.slice(Math.max(i - countBefore, 0), Math.min(i + countAfter + 1, array.length));
+          const avg = subArr.reduce((a, b) => a + (isNaN(b) ? 0 : b), 0) / subArr.length;
+          result.push(avg);
+        }
+        return result;
+      }
+
+
+
+
+
       this.__type = (data[0].wattage !== undefined ? 'wattage' : this.__type)
 
       let parsed_data = {};
@@ -1000,22 +985,22 @@ function movingAvg(array, count, qualifier){
         for (key in last_item) {
           parsed_data[key].push(last_item[key])
         }
-      }
 
-      if ('wattage' == this.__type) {
-        this._totals['power'].find('span').text(formatNumber(totals['power'] / 1000 / 3600));
-        this._totals['flow'].find('span').text(', ' + formatNumber(totals['water'] / 1000 / 60));
-        this._totals['flow'].toggle(totals['water'] != 0)
-      }
+        if ('wattage' == this.__type) {
+          this._totals['power'].find('span').text(formatNumber(totals['power'] / 1000 / 3600));
+          this._totals['flow'].find('span').text(', ' + formatNumber(totals['water'] / 1000 / 60));
+          this._totals['flow'].toggle(totals['water'] != 0)
+        }
 
-      if (window.terrariumPI.graph_smooth_value > 0) {
-        // Temporary disabled
+      } else {
+        if (window.terrariumPI.graph_smooth_value > 0) {
+          parsed_data['value'] = smoothing(parsed_data['value'],window.terrariumPI.graph_smooth_value);
+        }
       }
-
 
       let name = this._canvas.attr('id').replace('graph_','gauge_');
       if (window.terrariumPI.graph_show_min_max_gauge && window.terrariumPI.gauges[name]) {
-        // set the min/max values in the guage
+        // set the min/max values in the gauge
         window.terrariumPI.gauges[name]._gauge.options.staticLabels = {
           labels: [formatNumber(parsed_data.value.reduce(getMin)), formatNumber(parsed_data.value.reduce(getMax))],
           font: '10px Helvetica Neue,sans-serif',
