@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-06-26 18:56+CEST\n"
+"POT-Creation-Date: 2021-07-03 16:48+CEST\n"
 "PO-Revision-Date: 2021-04-09 19:46+0000\n"
 "Last-Translator: fabi2803 <l.fabian@me.com>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
@@ -1799,30 +1799,36 @@ msgid "Profile image"
 msgstr "Profilbild"
 
 #: views/settings.html:206
+#, fuzzy
+#| msgid "Graph smoothing value"
+msgid "Graph smoothing"
+msgstr "Graph Glättungswert"
+
+#: views/settings.html:212
 msgid "Show min and max values in gauge graphs"
 msgstr "Min- und Max-Werte in Messkurven anzeigen"
 
-#: views/settings.html:215
+#: views/settings.html:221
 msgid "Hide enclosures on dashboard"
 msgstr "Anlagen im Dashboard ausblenden"
 
-#: views/settings.html:224
+#: views/settings.html:230
 msgid "All gauges on a single page"
 msgstr "Alle Sensoren auf einer Seite anzeigen"
 
-#: views/settings.html:238
+#: views/settings.html:244
 msgid "Cloud"
 msgstr "Wolken"
 
-#: views/settings.html:250
+#: views/settings.html:256
 msgid "Meross username"
 msgstr "Meross Benutzername"
 
-#: views/settings.html:256
+#: views/settings.html:262
 msgid "Meross password"
 msgstr "Meross Passwort"
 
-#: views/settings.html:270
+#: views/settings.html:276
 msgid "Save"
 msgstr "Sichern"
 
@@ -2165,7 +2171,7 @@ msgstr "Relais exportieren"
 msgid "Export sensor"
 msgstr "Sensor exportieren"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 msgid "Form error"
 msgstr "Form Error"
 
@@ -2209,7 +2215,7 @@ msgstr "Minuten"
 msgid "No reminder"
 msgstr "Keine Erinnerung"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 msgid "Not all required fields are entered correctly."
 msgstr "Nicht alle Pflichtfelder sind korrekt eingegeben."
 
@@ -2225,7 +2231,7 @@ msgstr "Kalenderseite öffnen"
 msgid "Password"
 msgstr "Passwort"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 msgid "Profile image is uploaded."
 msgstr "Profilbild hochgeladen."
 
@@ -2355,7 +2361,7 @@ msgstr "Wähle den zu vergleichenden Frame"
 msgid "Select white balance"
 msgstr "Weißabgleich auswählen"
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Settings are updated."
 msgstr "Einstellungen sind aktualisiert."
 
@@ -2383,11 +2389,11 @@ msgstr "{type} {name} ist {action}"
 msgid "updated"
 msgstr "Upgedated"
 
-#: views/settings.html:350
+#: views/settings.html:356
 msgid "Update error"
 msgstr "Update Fehler"
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Update ok"
 msgstr "Update OK"
 
@@ -2395,11 +2401,11 @@ msgstr "Update OK"
 msgid "Uploaded files are not valid."
 msgstr "Hochgeladene Dateien sind nicht gültig."
 
-#: views/modals/enclosure.html:180 views/settings.html:323
+#: views/modals/enclosure.html:180 views/settings.html:329
 msgid "Upload error"
 msgstr "Uploadfehler"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 msgid "Upload ok"
 msgstr "Upload OK"
 
@@ -4697,9 +4703,6 @@ msgstr "Wetterdaten Quell-URL"
 
 #~ msgid "Vertical"
 #~ msgstr "Vertikal"
-
-#~ msgid "Graph smoothing value"
-#~ msgstr "Graph Glättungswert"
 
 #~ msgid "True"
 #~ msgstr "Wahr"

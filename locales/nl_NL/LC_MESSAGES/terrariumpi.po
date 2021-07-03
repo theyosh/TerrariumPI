@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2021-06-26 18:56+CEST\n"
+"POT-Creation-Date: 2021-07-03 16:48+CEST\n"
 "PO-Revision-Date: 2021-04-23 18:59+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
@@ -1797,30 +1797,36 @@ msgid "Profile image"
 msgstr "Profielafbeelding"
 
 #: views/settings.html:206
+#, fuzzy
+#| msgid "Graph smoothing value"
+msgid "Graph smoothing"
+msgstr "Waarde voor het vloeiend maken van grafieken"
+
+#: views/settings.html:212
 msgid "Show min and max values in gauge graphs"
 msgstr "Toon min- en max- waarden in meter grafieken"
 
-#: views/settings.html:215
+#: views/settings.html:221
 msgid "Hide enclosures on dashboard"
 msgstr "Verberg verblijven op het dashboard"
 
-#: views/settings.html:224
+#: views/settings.html:230
 msgid "All gauges on a single page"
 msgstr "Alle meters op één pagina"
 
-#: views/settings.html:238
+#: views/settings.html:244
 msgid "Cloud"
 msgstr "Cloud"
 
-#: views/settings.html:250
+#: views/settings.html:256
 msgid "Meross username"
 msgstr "Meross gebruikersnaam"
 
-#: views/settings.html:256
+#: views/settings.html:262
 msgid "Meross password"
 msgstr "Meross wachtwoord"
 
-#: views/settings.html:270
+#: views/settings.html:276
 msgid "Save"
 msgstr "Bewaar"
 
@@ -2163,7 +2169,7 @@ msgstr "Exporteer schakelaar"
 msgid "Export sensor"
 msgstr "Exporteer sensor"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 msgid "Form error"
 msgstr "Formulierfout"
 
@@ -2207,7 +2213,7 @@ msgstr "minuten"
 msgid "No reminder"
 msgstr "Geen herinnering"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 msgid "Not all required fields are entered correctly."
 msgstr "Niet alle verplichte velden zijn correct ingevuld."
 
@@ -2223,7 +2229,7 @@ msgstr "Open de kalenderpagina"
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 msgid "Profile image is uploaded."
 msgstr "Profiel afbeelding succesvol geüpload."
 
@@ -2353,7 +2359,7 @@ msgstr "Selecteer welke frame voor vergelijking"
 msgid "Select white balance"
 msgstr "Witbalans"
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Settings are updated."
 msgstr "De instellingen zijn bijgewerkt."
 
@@ -2381,11 +2387,11 @@ msgstr "{type} {name} is {action}"
 msgid "updated"
 msgstr "bijgewerkt"
 
-#: views/settings.html:350
+#: views/settings.html:356
 msgid "Update error"
 msgstr "Update Fout"
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Update ok"
 msgstr "Update ok"
 
@@ -2393,11 +2399,11 @@ msgstr "Update ok"
 msgid "Uploaded files are not valid."
 msgstr "Geüploade bestanden zijn niet geldig."
 
-#: views/modals/enclosure.html:180 views/settings.html:323
+#: views/modals/enclosure.html:180 views/settings.html:329
 msgid "Upload error"
 msgstr "Uploadfout"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 msgid "Upload ok"
 msgstr "Upload ok"
 
@@ -4680,9 +4686,6 @@ msgstr "URL van bron voor weergegevens"
 
 #~ msgid "Vertical"
 #~ msgstr "Verticaal"
-
-#~ msgid "Graph smoothing value"
-#~ msgstr "Waarde voor het vloeiend maken van grafieken"
 
 #~ msgid "True"
 #~ msgstr "Juist"

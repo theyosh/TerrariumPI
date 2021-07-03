@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
-"POT-Creation-Date: 2021-06-26 18:56+CEST\n"
+"POT-Creation-Date: 2021-07-03 16:48+CEST\n"
 "PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
@@ -2084,38 +2084,44 @@ msgid "Profile image"
 msgstr "Profil"
 
 #: views/settings.html:206
+#, fuzzy
+#| msgid "Graph smoothing value"
+msgid "Graph smoothing"
+msgstr "Grafe utjevning verdi"
+
+#: views/settings.html:212
 msgid "Show min and max values in gauge graphs"
 msgstr "Vis min og maks verdier i måler grafene"
 
-#: views/settings.html:215
+#: views/settings.html:221
 #, fuzzy
 #| msgid "Hide environment summary on the dashboard"
 msgid "Hide enclosures on dashboard"
 msgstr "Skjul miljø oppsummeringen på dashbordet"
 
-#: views/settings.html:224
+#: views/settings.html:230
 #, fuzzy
 #| msgid "Show all sensors gauges on 1 page"
 msgid "All gauges on a single page"
 msgstr "Vis alle sensor målere på 1 side"
 
-#: views/settings.html:238
+#: views/settings.html:244
 msgid "Cloud"
 msgstr ""
 
-#: views/settings.html:250
+#: views/settings.html:256
 #, fuzzy
 #| msgid "Meross Cloud username"
 msgid "Meross username"
 msgstr "Meross Cloud brukernavn"
 
-#: views/settings.html:256
+#: views/settings.html:262
 #, fuzzy
 #| msgid "Meross Cloud password"
 msgid "Meross password"
 msgstr "Meross Cloud passord"
 
-#: views/settings.html:270
+#: views/settings.html:276
 msgid "Save"
 msgstr ""
 
@@ -2566,7 +2572,7 @@ msgstr "Eksportere data"
 msgid "Export sensor"
 msgstr "pH sensor"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 #, fuzzy
 #| msgid "error"
 msgid "Form error"
@@ -2630,7 +2636,7 @@ msgstr "5 minutter"
 msgid "No reminder"
 msgstr "Gjenta"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 #, fuzzy
 #| msgid "Required fields are marked with '%s'."
 msgid "Not all required fields are entered correctly."
@@ -2654,7 +2660,7 @@ msgstr "Ingen kalender tilgjengelig"
 msgid "Password"
 msgstr "SMTP passord"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 #, fuzzy
 #| msgid "File '%s' is uploaded"
 msgid "Profile image is uploaded."
@@ -2838,7 +2844,7 @@ msgstr ""
 msgid "Select white balance"
 msgstr "Skift maskinvare"
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Settings are updated."
 msgstr ""
 
@@ -2876,11 +2882,11 @@ msgstr ""
 msgid "updated"
 msgstr "Siste oppdatering"
 
-#: views/settings.html:350
+#: views/settings.html:356
 msgid "Update error"
 msgstr ""
 
-#: views/settings.html:345
+#: views/settings.html:351
 #, fuzzy
 #| msgid "Upload date"
 msgid "Update ok"
@@ -2890,13 +2896,13 @@ msgstr "Dato opplastet"
 msgid "Uploaded files are not valid."
 msgstr ""
 
-#: views/modals/enclosure.html:180 views/settings.html:323
+#: views/modals/enclosure.html:180 views/settings.html:329
 #, fuzzy
 #| msgid "Upload date"
 msgid "Upload error"
 msgstr "Dato opplastet"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 #, fuzzy
 #| msgid "Upload date"
 msgid "Upload ok"
@@ -5080,9 +5086,6 @@ msgstr ""
 
 #~ msgid "Vertical"
 #~ msgstr "Vertikal"
-
-#~ msgid "Graph smoothing value"
-#~ msgstr "Grafe utjevning verdi"
 
 #~ msgid "True"
 #~ msgstr "Sannt"

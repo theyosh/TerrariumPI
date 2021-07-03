@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2021-06-26 18:56+CEST\n"
+"POT-Creation-Date: 2021-07-03 16:48+CEST\n"
 "PO-Revision-Date: 2021-04-17 03:46+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
@@ -1789,30 +1789,36 @@ msgid "Profile image"
 msgstr "Imagem de perfil"
 
 #: views/settings.html:206
+#, fuzzy
+#| msgid "Graph smoothing value"
+msgid "Graph smoothing"
+msgstr "Valor de suavização do gráfico"
+
+#: views/settings.html:212
 msgid "Show min and max values in gauge graphs"
 msgstr "Mostrar valores mínimo e máximo em gráficos de medidor"
 
-#: views/settings.html:215
+#: views/settings.html:221
 msgid "Hide enclosures on dashboard"
 msgstr "Ocultar Puxadinhos no painel de controle"
 
-#: views/settings.html:224
+#: views/settings.html:230
 msgid "All gauges on a single page"
 msgstr "Todos os medidores em uma página"
 
-#: views/settings.html:238
+#: views/settings.html:244
 msgid "Cloud"
 msgstr "Nuvem"
 
-#: views/settings.html:250
+#: views/settings.html:256
 msgid "Meross username"
 msgstr "Nome de usuário do Meross"
 
-#: views/settings.html:256
+#: views/settings.html:262
 msgid "Meross password"
 msgstr "Senha da Meross Cloud"
 
-#: views/settings.html:270
+#: views/settings.html:276
 msgid "Save"
 msgstr "Salvar"
 
@@ -2155,7 +2161,7 @@ msgstr "Exportar relé"
 msgid "Export sensor"
 msgstr "Exportar sensor"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 msgid "Form error"
 msgstr "Erro no Formulário"
 
@@ -2199,7 +2205,7 @@ msgstr "minutos"
 msgid "No reminder"
 msgstr "Não há lembrete"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 msgid "Not all required fields are entered correctly."
 msgstr "Os campos obrigatórios não foram preenchidos."
 
@@ -2215,7 +2221,7 @@ msgstr "Abrir página de calendário"
 msgid "Password"
 msgstr "Senha"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 msgid "Profile image is uploaded."
 msgstr "A imagem do perfil foi carregada."
 
@@ -2345,7 +2351,7 @@ msgstr "Selecione quadro para comparação"
 msgid "Select white balance"
 msgstr "Selecionar balanço de branco"
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Settings are updated."
 msgstr "Configurações atualizadas."
 
@@ -2373,11 +2379,11 @@ msgstr "{tipo} {nome} está {ação}"
 msgid "updated"
 msgstr "atualizado"
 
-#: views/settings.html:350
+#: views/settings.html:356
 msgid "Update error"
 msgstr "Erro ao atualizar"
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Update ok"
 msgstr "Atualização OK"
 
@@ -2385,11 +2391,11 @@ msgstr "Atualização OK"
 msgid "Uploaded files are not valid."
 msgstr "Arquivos enviados não são válidos."
 
-#: views/modals/enclosure.html:180 views/settings.html:323
+#: views/modals/enclosure.html:180 views/settings.html:329
 msgid "Upload error"
 msgstr "Erro no Envio"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 msgid "Upload ok"
 msgstr "Envio OK"
 
@@ -4672,9 +4678,6 @@ msgstr "Url da fonte de dados meteorológicos"
 
 #~ msgid "Vertical"
 #~ msgstr "Vertical"
-
-#~ msgid "Graph smoothing value"
-#~ msgstr "Valor de suavização do gráfico"
 
 #~ msgid "True"
 #~ msgstr "Verdadeiro"

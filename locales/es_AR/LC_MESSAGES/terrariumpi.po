@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2021-06-26 18:56+CEST\n"
+"POT-Creation-Date: 2021-07-03 16:48+CEST\n"
 "PO-Revision-Date: 2020-09-14 14:14+0000\n"
 "Last-Translator: Marcnr1984 <marcnruiz@gmail.com>\n"
 "Language-Team: Spanish (Argentina) <https://weblate.theyosh.nl/projects/"
@@ -2085,40 +2085,46 @@ msgid "Profile image"
 msgstr "Perfil"
 
 #: views/settings.html:206
+#, fuzzy
+#| msgid "Graph smoothing value"
+msgid "Graph smoothing"
+msgstr "Valor de suavizado del gráfico"
+
+#: views/settings.html:212
 msgid "Show min and max values in gauge graphs"
 msgstr "Mostrar valores mínimos y máximos en gráficos de medidor"
 
-#: views/settings.html:215
+#: views/settings.html:221
 #, fuzzy
 #| msgid "Hide environment summary on the dashboard"
 msgid "Hide enclosures on dashboard"
 msgstr "Ocultar el resumen del entorno en el panel"
 
-#: views/settings.html:224
+#: views/settings.html:230
 #, fuzzy
 #| msgid "Show all sensors gauges on 1 page"
 msgid "All gauges on a single page"
 msgstr "Mostrar todos los medidores de sensores en 1 página"
 
-#: views/settings.html:238
+#: views/settings.html:244
 #, fuzzy
 #| msgid "cloudy"
 msgid "Cloud"
 msgstr "nublado"
 
-#: views/settings.html:250
+#: views/settings.html:256
 #, fuzzy
 #| msgid "Meross Cloud username"
 msgid "Meross username"
 msgstr "Nombre de usuario de Meross Cloud"
 
-#: views/settings.html:256
+#: views/settings.html:262
 #, fuzzy
 #| msgid "Meross Cloud password"
 msgid "Meross password"
 msgstr "Contraseña de Meross Cloud"
 
-#: views/settings.html:270
+#: views/settings.html:276
 msgid "Save"
 msgstr "Guardar"
 
@@ -2575,7 +2581,7 @@ msgstr "Exportar datos"
 msgid "Export sensor"
 msgstr "Sensor de pH"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 #, fuzzy
 #| msgid "error"
 msgid "Form error"
@@ -2639,7 +2645,7 @@ msgstr "5 minutos"
 msgid "No reminder"
 msgstr "Repetir"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 #, fuzzy
 #| msgid "Required fields are marked with '%s'."
 msgid "Not all required fields are entered correctly."
@@ -2663,7 +2669,7 @@ msgstr "Nuevo ítem de calendario"
 msgid "Password"
 msgstr "Contraseña SMTP"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 #, fuzzy
 #| msgid "File '%s' is uploaded"
 msgid "Profile image is uploaded."
@@ -2847,7 +2853,7 @@ msgstr ""
 msgid "Select white balance"
 msgstr "Balance de blancos"
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Settings are updated."
 msgstr ""
 
@@ -2885,11 +2891,11 @@ msgstr ""
 msgid "updated"
 msgstr "Ultima actualización"
 
-#: views/settings.html:350
+#: views/settings.html:356
 msgid "Update error"
 msgstr ""
 
-#: views/settings.html:345
+#: views/settings.html:351
 #, fuzzy
 #| msgid "Upload date"
 msgid "Update ok"
@@ -2899,13 +2905,13 @@ msgstr "Fecha de compilación"
 msgid "Uploaded files are not valid."
 msgstr ""
 
-#: views/modals/enclosure.html:180 views/settings.html:323
+#: views/modals/enclosure.html:180 views/settings.html:329
 #, fuzzy
 #| msgid "Upload date"
 msgid "Upload error"
 msgstr "Fecha de compilación"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 #, fuzzy
 #| msgid "Upload date"
 msgid "Upload ok"
@@ -5212,9 +5218,6 @@ msgstr ""
 
 #~ msgid "Vertical"
 #~ msgstr "Vertical"
-
-#~ msgid "Graph smoothing value"
-#~ msgstr "Valor de suavizado del gráfico"
 
 #~ msgid "True"
 #~ msgstr "Verdadero"

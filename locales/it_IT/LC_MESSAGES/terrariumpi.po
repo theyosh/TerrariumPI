@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-06-26 18:56+CEST\n"
+"POT-Creation-Date: 2021-07-03 16:48+CEST\n"
 "PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
@@ -2111,37 +2111,41 @@ msgid "Profile image"
 msgstr "Immagine del profilo"
 
 #: views/settings.html:206
+msgid "Graph smoothing"
+msgstr ""
+
+#: views/settings.html:212
 #, fuzzy
 msgid "Show min and max values in gauge graphs"
 msgstr "Mostra il minimo e il massimo valore di misura graficamente"
 
-#: views/settings.html:215
+#: views/settings.html:221
 #, fuzzy
 msgid "Hide enclosures on dashboard"
 msgstr "Nascondi sommario ambientale dalla dashboard"
 
-#: views/settings.html:224
+#: views/settings.html:230
 #, fuzzy
 msgid "All gauges on a single page"
 msgstr "Mostra tutti i sensori di misura attivi in pagina 1"
 
-#: views/settings.html:238
+#: views/settings.html:244
 #, fuzzy
 msgid "Cloud"
 msgstr "nuvoloso"
 
-#: views/settings.html:250
+#: views/settings.html:256
 #, fuzzy
 msgid "Meross username"
 msgstr "username Meross Cloud"
 
-#: views/settings.html:256
+#: views/settings.html:262
 #, fuzzy
 #| msgid "New admin password"
 msgid "Meross password"
 msgstr "Nuova password Amministratore"
 
-#: views/settings.html:270
+#: views/settings.html:276
 msgid "Save"
 msgstr ""
 
@@ -2588,7 +2592,7 @@ msgstr "Esporta dati"
 msgid "Export sensor"
 msgstr "sensore pH"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 #, fuzzy
 #| msgid "error"
 msgid "Form error"
@@ -2649,7 +2653,7 @@ msgstr "5 minuti"
 msgid "No reminder"
 msgstr "Ripeti"
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 #, fuzzy
 #| msgid "Required fields are marked with '%s'."
 msgid "Not all required fields are entered correctly."
@@ -2671,7 +2675,7 @@ msgstr "Nessun calendario disponibile"
 msgid "Password"
 msgstr ""
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 #, fuzzy
 #| msgid "File is not uploaded!"
 msgid "Profile image is uploaded."
@@ -2854,7 +2858,7 @@ msgstr ""
 msgid "Select white balance"
 msgstr "bilanciamento di bianco"
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Settings are updated."
 msgstr ""
 
@@ -2890,11 +2894,11 @@ msgstr ""
 msgid "updated"
 msgstr "Ultimo aggiornamento"
 
-#: views/settings.html:350
+#: views/settings.html:356
 msgid "Update error"
 msgstr ""
 
-#: views/settings.html:345
+#: views/settings.html:351
 #, fuzzy
 #| msgid "Upload date"
 msgid "Update ok"
@@ -2904,13 +2908,13 @@ msgstr "Data upload"
 msgid "Uploaded files are not valid."
 msgstr ""
 
-#: views/modals/enclosure.html:180 views/settings.html:323
+#: views/modals/enclosure.html:180 views/settings.html:329
 #, fuzzy
 #| msgid "Upload date"
 msgid "Upload error"
 msgstr "Data upload"
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 #, fuzzy
 #| msgid "Upload date"
 msgid "Upload ok"
