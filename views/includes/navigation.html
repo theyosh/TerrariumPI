@@ -36,11 +36,15 @@
       </div>
     </li>
     <li class="nav-item dropdown" id="online_status">
-      <a class="nav-link" data-toggle="dropdown" href="#">
+      <a class="nav-link" data-toggle="dropdown" href="#" title="{{ _('Current status') }}">
         <i class="fas fa-check-circle"></i>
         <span class="badge badge-primary navbar-badge"></span>
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <span class="dropdown-item dropdown-header">{{ _('Current status') }}</span>
+        <div class="dropdown-divider"></div>
+        <ul class="online_status_list p-0">
+        </ul>
       </div>
     </li>
     <li class="nav-item dropdown">

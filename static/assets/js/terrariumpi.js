@@ -1626,6 +1626,12 @@ function online_status(online) {
   }
 
   if (old_status !== online) {
+
+    let status_list = jQuery('ul.online_status_list');
+    let new_status = jQuery('<li>').addClass('dropdown-item').append(jQuery('<i>').addClass('fas fa-check-circle mr-2')).append(moment().format('LLL'));
+
+    status_list.prepend(new_status);
+
     if (online) {
       toastr["success"]("We are connected", "Online");
     } else {
@@ -1901,6 +1907,16 @@ function websocket_init(reconnect) {
         jQuery('#is_day_indicator span:nth(1)').text(moment().format('lll'));
 
         jQuery('#is_day_indicator i').removeClass('fa-moon fa-sun').addClass(( message.data.is_day ? 'fa-sun' : 'fa-moon'));
+
+        if (window.terrariumPI.auto_dark_mode) {
+          if (message.data.is_day) {
+            // Normal mode
+            $('body').removeClass('dark-mode')
+          } else {
+            // dark mode
+            $('body').addClass('dark-mode')
+          }
+        }
 
         christmas();
         fireworks_menu();

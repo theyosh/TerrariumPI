@@ -58,6 +58,8 @@ def create_defaults(version):
     {'id' : 'hide_environment_dashboard', 'value' : 'false'},
     {'id' : 'all_gauges_on_single_page',  'value' : 'false'},
     {'id' : 'graph_smooth_value',         'value' : '0'},
+    {'id' : 'auto_dark_mode',             'value' : '0'},
+
   ]
 
   for setting in setting_defaults:

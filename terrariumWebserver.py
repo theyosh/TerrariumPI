@@ -144,7 +144,8 @@ class terrariumWebserver(object):
       'show_gauge_overview'      : self.engine.settings['all_gauges_on_single_page'],
       'show_environment'         : not self.engine.settings['hide_environment_dashboard'],
       'graph_smooth_value'       : self.engine.settings['graph_smooth_value'],
-      'graph_show_min_max_gauge' : 1 if self.engine.settings['show_min_max_gauge'] else 0
+      'graph_show_min_max_gauge' : 1 if self.engine.settings['show_min_max_gauge'] else 0,
+      'auto_dark_mode'           : 1 if self.engine.settings['auto_dark_mode'] else 0
     }
 
     # Template functions
