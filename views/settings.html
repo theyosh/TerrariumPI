@@ -307,7 +307,7 @@
         jQuery('form#settings_form').addClass('was-validated');
         let error_fields = [];
         jQuery.each(jQuery('form#settings_form').find(':invalid'),function(counter,field){
-          error_fields.push(jQuery(field).prev().text());
+          error_fields.push(jQuery(field).parent().prev().text());
         });
         toastr.error('{{ _('Not all required fields are entered correctly.') }}:<br/>' + error_fields.join('<br/>'), '{{ _('Form error') }}');
       } else {
