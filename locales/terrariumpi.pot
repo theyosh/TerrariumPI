@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2021-06-26 18:56+CEST\n"
+"POT-Creation-Date: 2021-07-03 16:48+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1727,30 +1727,34 @@ msgid "Profile image"
 msgstr ""
 
 #: views/settings.html:206
+msgid "Graph smoothing"
+msgstr ""
+
+#: views/settings.html:212
 msgid "Show min and max values in gauge graphs"
 msgstr ""
 
-#: views/settings.html:215
+#: views/settings.html:221
 msgid "Hide enclosures on dashboard"
 msgstr ""
 
-#: views/settings.html:224
+#: views/settings.html:230
 msgid "All gauges on a single page"
 msgstr ""
 
-#: views/settings.html:238
+#: views/settings.html:244
 msgid "Cloud"
 msgstr ""
 
-#: views/settings.html:250
+#: views/settings.html:256
 msgid "Meross username"
 msgstr ""
 
-#: views/settings.html:256
+#: views/settings.html:262
 msgid "Meross password"
 msgstr ""
 
-#: views/settings.html:270
+#: views/settings.html:276
 msgid "Save"
 msgstr ""
 
@@ -2078,7 +2082,7 @@ msgstr ""
 msgid "Export sensor"
 msgstr ""
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 msgid "Form error"
 msgstr ""
 
@@ -2122,7 +2126,7 @@ msgstr ""
 msgid "No reminder"
 msgstr ""
 
-#: views/layouts/modal.html:63 views/settings.html:297
+#: views/layouts/modal.html:63 views/settings.html:303
 msgid "Not all required fields are entered correctly."
 msgstr ""
 
@@ -2138,7 +2142,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 msgid "Profile image is uploaded."
 msgstr ""
 
@@ -2262,7 +2266,7 @@ msgstr ""
 msgid "Select white balance"
 msgstr ""
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Settings are updated."
 msgstr ""
 
@@ -2290,11 +2294,11 @@ msgstr ""
 msgid "updated"
 msgstr ""
 
-#: views/settings.html:350
+#: views/settings.html:356
 msgid "Update error"
 msgstr ""
 
-#: views/settings.html:345
+#: views/settings.html:351
 msgid "Update ok"
 msgstr ""
 
@@ -2302,11 +2306,11 @@ msgstr ""
 msgid "Uploaded files are not valid."
 msgstr ""
 
-#: views/modals/enclosure.html:180 views/settings.html:323
+#: views/modals/enclosure.html:180 views/settings.html:329
 msgid "Upload error"
 msgstr ""
 
-#: views/modals/enclosure.html:176 views/settings.html:319
+#: views/modals/enclosure.html:176 views/settings.html:325
 msgid "Upload ok"
 msgstr ""
 
