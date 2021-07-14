@@ -8,7 +8,7 @@
 {% set modal_form_edit_action = url_for('api:relay_update',relay='_id_') %}
 {% set modal_reload_url = url_for('page', page='relays') %}
 
-{% block modal_title %}<i class="fas fa-thumbtack mr-2" ></i>{{ _('Relay settings') }}{% endblock %}
+{% block modal_title %}<i class="fas fa-bolt mr-2" ></i>{{ _('Relay settings') }}{% endblock %}
 {% block modal_body %}
 <input type="hidden" name="id" id="relay_id" value="" disabled="disabled">
 <div class="row">

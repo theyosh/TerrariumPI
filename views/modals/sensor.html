@@ -8,7 +8,7 @@
 {% set modal_form_edit_action = url_for('api:sensor_update',sensor='_id_') %}
 {% set modal_reload_url = url_for('page', page='sensors') %}
 
-{% block modal_title %}<i class="fas fa-thumbtack mr-2" ></i>{{ _('Sensor settings') }}{% endblock %}
+{% block modal_title %}<i class="fas fa-tint mr-2" ></i>{{ _('Sensor settings') }}{% endblock %}
 {% block modal_body %}
 <input type="hidden" name="id" id="sensor_id" value="" disabled="disabled">
 <div class="row">
