@@ -39,7 +39,7 @@ asyncio
 python-kasa
 meross-iot
 PCA9685-driver
-zeroconf
+zeroconf==0.31.0
 pywemo
 simple-pid
 
