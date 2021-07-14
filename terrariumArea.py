@@ -420,9 +420,10 @@ class terrariumArea(object):
         logger.info(f'Toggle off the relays for area {self}.')
         self.relays_toggle(period,False)
 
-      else:
-        # Just update the current relay state
-        self.state[period]['powered'] = self.relays_state(period)
+      # else:
+      #   # Just update the current relay state
+      #   print('No area action.. so NO update....')
+      #   #self.state[period]['powered'] = self.relays_state(period)
 
     self.state['powered'] = self._powered
     self.state['last_update'] = int(datetime.datetime.now().timestamp())
@@ -579,6 +580,11 @@ class terrariumAreaLights(terrariumArea):
 
     # If the relay is already powered and should be power up, ignore the delay time. Force to zero delay
     # Same for going out. When the lights should be off, and they are not at full power, no delay.
+
+    if self.name == 'Day light':
+      print(f'Action: {action}, relay state: {relay.state}, part: {part}, powered: {self.state[part]["powered"]}, actually powered: {self.relays_state(part)}')
+      print(f'Change delay to ZERO: {(relay.ON if action else relay.OFF) != relay.state and self.state[part]["powered"] == action}')
+
     if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
       tweaks['delay'] = 0
 
