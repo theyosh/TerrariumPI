@@ -740,8 +740,8 @@ class terrariumEngine(object):
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
     if hasattr(self,'enclosures'):
-      print('Update enclosures due to changing relays...')
-      self._update_enclosures(True)
+#      print('Update enclosures due to changing relays...')
+      self._update_enclosures()
 
   # -= NEW =-
   def __load_existing_buttons(self):

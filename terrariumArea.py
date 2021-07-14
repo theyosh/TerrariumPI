@@ -353,7 +353,7 @@ class terrariumArea(object):
         # Change the doors state based on the current state and requested state. False when not equal
         door_state_ok = self.setup[period]['door_status'] == door_state
 
-      # First check: Shutdown power when power is on and either the lights or doors are in wrong state. Despide 'mode'
+      # First check: Shutdown power when power is on and either the lights or doors are in wrong state. Despite 'mode'
       if self.state[period]['powered'] and not (light_state_ok and door_state_ok):
         # Power is on, but either the lights or doors are in wrong state. Power down now.
         logger.info(f'Forcing down the {period} power for area {self} because either the lights({"OK" if light_state_ok else "ERROR"}) or doors({"OK" if door_state_ok else "ERROR"}) are in an invalid state.')
@@ -367,7 +367,7 @@ class terrariumArea(object):
         toggle_relay = self._is_timer_time(period)
 
         if toggle_relay is None:
-          print(f'Recalc time table for {self}')
+#          print(f'Recalc time table for {self}')
           self._time_table()
           toggle_relay = False
 
@@ -419,6 +419,10 @@ class terrariumArea(object):
         #self.state[period]['powered']
         logger.info(f'Toggle off the relays for area {self}.')
         self.relays_toggle(period,False)
+
+      else:
+        # Just update the current relay state
+        self.state[period]['powered'] = self.relays_state(period)
 
     self.state['powered'] = self._powered
     self.state['last_update'] = int(datetime.datetime.now().timestamp())
