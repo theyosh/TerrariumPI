@@ -1,7 +1,8 @@
+#!/usr/bin/env python
 """
  Run this script in the contrib folder with the same python version as TerrariumPI
 
- python3 db_cleanup.py
+ ./db_cleanup.py
 """
 
 import sqlite3
@@ -24,7 +25,7 @@ def humansize(nbytes):
 
 class HistoryCleanup():
 
-  def __init__(self, database = '../history.db', period = timedelta(weeks = 60), batch = 1000):
+  def __init__(self, database = '../terrariumpi.db', period = timedelta(weeks = 60), batch = 1000):
     self.database = database
     self.new_database = self.database.replace('.db','.new.db')
     self.period = period
@@ -122,8 +123,8 @@ class HistoryCleanup():
     print('Total rows:', end='', flush=True)
     total_sensor_data = self.get_total_records(table)
     print(' {} from {} till {}. Took ({})'.format(total_sensor_data[0],
-                                                  datetime.utcfromtimestamp(total_sensor_data[1]),
-                                                  datetime.utcfromtimestamp(total_sensor_data[2]),
+                                                  datetime.fromisoformat(total_sensor_data[1]),
+                                                  datetime.fromisoformat(total_sensor_data[2]),
                                                   time.time()-start))
     start = time.time()
     print('Clean up rows:',end='', flush=True)
@@ -134,8 +135,8 @@ class HistoryCleanup():
       return
 
     print(' {} from {} till {}. Took ({})'.format(total_cleanup_data[0],
-                                                  datetime.utcfromtimestamp(total_cleanup_data[1]),
-                                                  datetime.utcfromtimestamp(total_cleanup_data[2]),
+                                                  datetime.fromisoformat(total_cleanup_data[1]),
+                                                  datetime.fromisoformat(total_cleanup_data[2]),
                                                   time.time()-start))
 
     start = time.time()
@@ -166,17 +167,10 @@ class HistoryCleanup():
     shutil.move(self.new_database, self.database)
 
   def clean_up_sensors(self):
-    self.__clean_up('sensor_data')
+    self.__clean_up('SensorHistory')
 
   def clean_up_doors(self):
-    self.__clean_up('door_data')
-
-  def clean_up_weather(self):
-    self.__clean_up('weather_data')
-
-  def clean_up_status(self):
-    self.__clean_up('system_data')
-
+    self.__clean_up('ButtonHistory')
 
 print('This script will cleanup your history.db file. We will keep 60 weeks of data from now. If you want to make a backup first, please enter no and make your backup.')
 
@@ -190,8 +184,6 @@ if go.lower() != 'yes':
 
 cleanup.clean_up_sensors()
 cleanup.clean_up_doors()
-cleanup.clean_up_weather()
-cleanup.clean_up_status()
 
 cleanup.get_space_back()
 cleanup.move_db()
