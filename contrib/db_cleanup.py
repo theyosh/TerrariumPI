@@ -64,7 +64,7 @@ class HistoryCleanup():
 
   def check_offline(self):
     try:
-      data = requests.get('http://localhost:8090/api/system')
+      data = requests.get('http://localhost:8090/api/system_status/')
       if data.status_code == 200:
         print('TerrariumPI is still running. Please shutdown first, else you will get data corruption.')
         exit(1)
