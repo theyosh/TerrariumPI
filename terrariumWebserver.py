@@ -258,25 +258,20 @@ class terrariumWebserver(object):
 
     return url
 
-  # -= NEW =-
   def __login(self):
-    # TODO: Better cookie support
     response.set_cookie('auth', request.auth, secret=self.cookie_secret, **{ 'max_age' : 3600, 'path' : '/'})
     redirect(self.url_for('home'))
 
-  # -= NEW =-
   def __logout(self):
-    response.set_cookie('auth', '', secret=self.cookie_secret, **{ 'max_age' : 3600, 'path' : '/'})
+    response.set_cookie('auth', None, secret=self.cookie_secret, **{ 'max_age' : 3600, 'path' : '/'})
     if request.is_ajax:
       return {'location' : self.url_for('home'), 'message' : 'User logged out.'}
 
     redirect(self.url_for('home'))
 
-  # -= NEW =-
   def websocket_message(self, message_type, message_data):
     self.websocket.send_message({ 'type' : message_type, 'data' : message_data})
 
-  # -= NEW =-
   def start(self):
     # Start the webserver
     logger.info(f'Running webserver at {self.engine.settings["host"]}:{self.engine.settings["port"]}')
@@ -289,7 +284,6 @@ class terrariumWebserver(object):
                     reloader=False,
                     quiet=True)
 
-# -= NEW =-
 class terrariumWebsocket(object):
   def __init__(self, terrariumWebserver):
     self.webserver = terrariumWebserver
@@ -298,7 +292,7 @@ class terrariumWebsocket(object):
   def connect(self,socket):
       messages = Queue()
 
-      def listen_for_messages(messages,socket):
+      def listen_for_messages(messages, socket):
         self.clients.append(messages)
         logger.debug(f'Got a new websocket connection from {socket}')
 
@@ -334,7 +328,17 @@ class terrariumWebsocket(object):
           message = json.loads(message)
 
           if 'client_init' == message['type']:
-            threading.Thread(target=listen_for_messages, args=(messages,socket)).start()
+            messages.authenticated = False
+            try:
+              cookie_data = request.get_cookie('auth', secret=self.webserver.cookie_secret)
+              if cookie_data is not None:
+                messages.authenticated = self.webserver.engine.authenticate(cookie_data[0],cookie_data[1])
+            except Exception:
+              # Some strange cookie error when cleared... we can ignore that
+              pass
+
+            logger.debug(f'Starting authenticated socket? {messages.authenticated}')
+            threading.Thread(target=listen_for_messages, args=(messages, socket)).start()
             # Load the running sensor types for adding new menu items below sensors
             self.send_message({'type' : 'sensortypes', 'data' : self.webserver.engine.sensor_types_loaded}, messages)
             self.send_message({'type' : 'systemstats', 'data' : self.webserver.engine.system_stats()}, messages)
@@ -356,6 +360,11 @@ class terrariumWebsocket(object):
     # Loop over all the clients
     for client in clients:
       if queue is None or queue == client:
+
+        if 'logfile_update' == message['type'] and not client.authenticated:
+          # Clean the logline message. Keep date and type for web indicators
+          message['data'] = message['data'][0:36]
+
         client.put(message)
       # If more then 50 messages in queue, looks like connection is gone and remove the queue from the list
       if client.qsize() > 50:
