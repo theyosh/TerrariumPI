@@ -5,11 +5,11 @@ order: 4
 toc: true
 layout: post
 
-image:
-  src: ../assets/img/RaspberryPI_Logo.png
-  width: 400   # in pixels
-  height: 400   # in pixels
-  alt: Raspberry PI Logo
+# image:
+#   src: ../assets/img/RaspberryPI_Logo.png
+#   width: 400   # in pixels
+#   height: 400   # in pixels
+#  alt: Raspberry PI Logo
 ---
 
 Here we will install Raspberry PI and TerrariumPI software.
@@ -29,13 +29,35 @@ Put your SD card in the Pi and power it up.
 
 TerrariumPI
 ===========
-When the Raspberry PI is up and running, you can now install the TerrariumPI software. We assume that you are installing it in the default user (pi) home directory. Run the commands below as normal pi user. This will guide you trough the installation process.
+When the Raspberry PI is up and running, you should be able to SSH to it. On Linux and Mac you can use the terminal. For Windows, you can use Putty.
+
+```console
+ssh pi@[raspberrypi]
+```
+
+Prerequisites
+-------------
+First we need to install Git. This is used to download the software from Github.com
+
+```console
+sudo apt -y install git
+```
+
+Download
+--------
+After Git is installed, we can download the Terrariumpi source code. We will only download the latest version.
+
+```console
+git clone --branch 4.x.y.z --depth 1 https://github.com/theyosh/TerrariumPI.git
+```
+
+Installation
+------------
+And the final step is to start the installer. This will guide you through the installation process.
 
 The first time you run the installer, it will also update the Raspberry PI OS to the latest version. This can take some more time.
 
 ```console
-sudo apt -y install git
-git clone --branch 4.x.y.z --depth 1 https://github.com/theyosh/TerrariumPI.git
 cd TerrariumPI
 sudo ./install.sh
 ```
