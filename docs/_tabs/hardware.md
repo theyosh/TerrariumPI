@@ -11,10 +11,10 @@ Relays
 Sensors
 =======
 All supported sensors 2
-{% for sensor in site.hardware %}
+{% for sensor in site.hardware.sensor %}
   <h2>
     <a href="/TerrariumPI/{{ sensor.url }}">
-      {{ sensor.name }} - {{ sensor.position }}
+      {{ sensor.title }}
     </a>
   </h2>
   <p>{{ sensor.content | markdownify }}</p>
