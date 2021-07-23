@@ -2,6 +2,7 @@
 title: Install
 icon: fas fa-tools
 order: 4
+toc: true
 
 image:
   src: RaspberryPI_Logo.png
@@ -12,7 +13,7 @@ image:
 
 Raspberry PI
 ============
-![Raspberry PI Logo](../assets/img/RaspberryPI_Logo.png){: .right }
+![Raspberry PI Logo](../assets/img/RaspberryPI_Logo.png){: .right width="200" }
 In order to run TerrariumPI you first need a working Raspberry PI with the '[Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)' image. This is very important, as the Desktop version will not work well with the GPIO pins.
 
 Creating SD Card
