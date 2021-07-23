@@ -14,6 +14,7 @@ Sensors
 All supported sensors 3
 {% for sensor in site.hardware %}
 {% if sensor.relative_path contains "sensor" %}
+{% unless sensor.relative_path contains "index" %}
 
   <h2>
     <a href="{{ site.baseurl }}{{ sensor.url }}">
@@ -22,5 +23,6 @@ All supported sensors 3
   </h2>
   <!-- <p>{{ sensor.content | markdownify }}</p> -->
 
+{% endif %}
 {% endif %}
 {% endfor %}
