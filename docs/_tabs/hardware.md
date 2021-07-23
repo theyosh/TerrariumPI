@@ -11,7 +11,7 @@ Relays
 Sensors
 =======
 All supported sensors
-{% for sensor in site.hardware.sensor %}
+{% for sensor in site.hardware %}
   <h2>
     <a href="{{ sensor.url }}">
       {{ sensor.name }} - {{ sensor.position }}
