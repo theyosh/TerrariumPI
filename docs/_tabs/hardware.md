@@ -16,7 +16,7 @@ All supported sensors 3
 {% if sensor.relative_path contains "sensor" %}
 
   <h2>
-    <a href="{{ sensor.url }}">
+    <a href="{{ site.baseurl }}{{ sensor.url }}">
       {{ sensor.title }} - {{ sensor.measures }}
     </a>
   </h2>
