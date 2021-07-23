@@ -117,18 +117,18 @@ class terrariumWebserver(object):
 
       return units
 
-    def authenticated_cookie(cookie_data):
-      if cookie_data is None:
-        return False
-
-      if len(cookie_data) != 2:
-        return False
-
-      return self.engine.authenticate(cookie_data[0],cookie_data[1])
+    authenticated = False
+    try:
+      cookie_data = request.get_cookie('auth', secret=self.cookie_secret)
+      if cookie_data is not None:
+        authenticated = self.engine.authenticate(cookie_data[0],cookie_data[1])
+    except Exception:
+      # Some strange cookie error when cleared... we can ignore that
+      pass
 
     # Variables
     variables = {
-      'authenticated' : int(self.engine.settings['always_authenticate']) == -1 or authenticated_cookie(request.get_cookie('auth', secret=self.cookie_secret)),
+      'authenticated' : int(self.engine.settings['always_authenticate']) == -1 or authenticated,
       'lang'          : self.engine.settings['language'],
       'title'         : self.engine.settings['title'],
       'version'       : self.engine.settings['version'],
