@@ -3,7 +3,7 @@ title: 1-Wire sensor
 #icon: fas fa-tools
 #order: 4
 toc: true
-layout: post
+#layout: post
 
 measures: ['temperature','humidity']
 
