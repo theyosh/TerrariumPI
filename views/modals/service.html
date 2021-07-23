@@ -26,6 +26,12 @@
     <div class="form-group">
       <label for="service_name">{{ _('Name') }}</label>
       <input type="text" class="form-control" id="service_name" name="name" required="required" placeholder="{{ _('Enter a name') }}">
+      <small class="text-muted">
+        {{ _('Enter a name.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('The name cannot be empty.') }}
+      </div>
     </div>
   </div>
 

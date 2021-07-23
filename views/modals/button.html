@@ -32,10 +32,10 @@
       <label for="button_address">{{ _('Address') }}</label>
       <input type="text" class="form-control" id="button_address" name="address" required="required" placeholder="{{ _('Enter an address') }}">
       <small class="text-muted">
-        {{ _('Enter a valid physical GPIO port number.') }}
+        {{ _('Enter an address.') }}
       </small>
       <div class="invalid-feedback">
-        {{ _('Please enter a valid physical GPIO port number between %s and %s.') % ('1','40') }}
+        {{ _('The address cannot be empty.') }}
       </div>
     </div>
   </div>
@@ -44,10 +44,10 @@
       <label for="button_name">{{ _('Name') }}</label>
       <input type="text" class="form-control" id="button_name" name="name" required="required" placeholder="{{ _('Enter a name') }}">
       <small class="text-muted">
-        {{ _('Enter a name for this button.') }}
+        {{ _('Enter a name.') }}
       </small>
       <div class="invalid-feedback">
-        {{ _('Please enter a name of at least 1 character.') }}
+        {{ _('The name cannot be empty.') }}
       </div>
     </div>
   </div>

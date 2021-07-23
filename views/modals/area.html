@@ -46,10 +46,10 @@
       <label for="area_name">{{ _('Name') }}</label>
       <input type="text" class="form-control" id="area_name" name="name" required="required" placeholder="{{ _('Enter a name for this area.') }}">
       <small class="text-muted">
-        {{ _('Enter a name for this area.') }}
+        {{ _('Enter a name.') }}
       </small>
       <div class="invalid-feedback">
-        {{ _('Please enter a name of at least 1 character.') }}
+        {{ _('The name cannot be empty.') }}
       </div>
     </div>
   </div>
@@ -139,7 +139,7 @@
                 {{ _('The time of the day when the relays are toggled on each day.') }}
               </small>
               <div class="invalid-feedback">
-                {{ _('Enter a valid time of the day.') }}
+                {{ _('Enter a valid time.') }}
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@
                 {{ _('The time of the day when the relays are toggled off each day.') }}
               </small>
               <div class="invalid-feedback">
-                {{ _('Enter a valid time of the day.') }}
+                {{ _('Enter a valid time.') }}
               </div>
             </div>
           </div>
@@ -163,7 +163,7 @@
                 {{ _('The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full day.') }}
               </small>
               <div class="invalid-feedback">
-                {{ _('Enter a valid time of the day.') }}
+                {{ _('Enter a valid time.') }}
               </div>
             </div>
           </div>
@@ -177,6 +177,9 @@
             <div class="form-group">
               <label for="area_lights_day_relays">{{ _('Relays') }}</label>
               <select class="select2" id="area_lights_day_relays" name="day_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;"> </select>
+              <small class="text-muted">
+                {{ _('Select the relays to toggle.') }}
+              </small>
             </div>
           </div>
         </div>
@@ -230,49 +233,8 @@
     </div>
   </div>
 </div>
+
 <div class="row area_type area_audio">
-  <script type="text/html" id="audio_schema_template">
-    <div class="row">
-      <div class="col-4">
-        <div class="form-group">
-          <label for="area_name">{{ _('Relay') }}</label>
-          <input type="text" class="form-control" id="area_lights_day_relay" name="day_relay" required="required" readonly="readonly" placeholder="{{ _('Select relays') }}" data-value="relay_name">
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <label for="area_name">{{ _('Duration on') }}</label>
-          <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_duration" id="area_lights_day_duration_on" value="0">
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <label for="area_name">{{ _('Power on') }}</label>
-          <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_power" id="area_lights_day_power_on" value="0">
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <label for="area_name">{{ _('Duration off') }}</label>
-          <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_duration" id="area_lights_day_duration_off" value="0">
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <label for="area_name">{{ _('Power off') }}</label>
-          <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_power" id="area_lights_day_power_off" value="0">
-          </div>
-        </div>
-      </div>
-    </div>
-  </script>
   <div class="col-12 col-sm-3 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="area_audio_mode">{{ _('Mode') }}</label>
@@ -303,6 +265,8 @@
     </div>
   </div>
 </div>
+
+
 <div class="row area_type area_audio">
   <div class="col">
     <small class="text-muted">
@@ -322,7 +286,7 @@
                 {{ _('The time of the day when the relays are toggled on each day.') }}
               </small>
               <div class="invalid-feedback">
-                {{ _('Enter a valid time of the day.') }}
+                {{ _('Enter a valid time.') }}
               </div>
             </div>
           </div>
@@ -334,7 +298,7 @@
                 {{ _('The time of the day when the relays are toggled off each day.') }}
               </small>
               <div class="invalid-feedback">
-                {{ _('Enter a valid time of the day.') }}
+                {{ _('Enter a valid time.') }}
               </div>
             </div>
           </div>
@@ -346,7 +310,7 @@
                 {{ _('The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full day.') }}
               </small>
               <div class="invalid-feedback">
-                {{ _('Enter a valid time of the day.') }}
+                {{ _('Enter a valid duration in minutes.') }}
               </div>
             </div>
           </div>
@@ -354,12 +318,24 @@
             <div class="form-group">
               <label for="area_audio_day_off_duration">{{ _('Off duration') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_audio_day_off_duration" name="day_off_duration" placeholder="{{ _('Off duration') }}">
+              <small class="text-muted">
+                {{ _('The duration when the relays should be stay off when switched off. Enter \'0\' to disable.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in minutes.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <div class="form-group">
               <label for="area_audio_day_playlists">{{ _('Playlists') }}</label>
               <select class="select2" id="area_audio_day_playlists" name="day_playlists" multiple="multiple" data-placeholder="{{ _('Select playlists') }}" style="width: 100%;"> </select>
+              <small class="text-muted">
+                {{ _('Select the playlist(s) to be played.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Select at least 1 playlist.') }}
+              </div>
             </div>
           </div>
         </div>
@@ -376,30 +352,60 @@
             <div class="form-group">
               <label for="area_audio_night_begin">{{ _('Begin time') }}</label>
               <input type="time" class="form-control" id="area_audio_night_begin" name="night_begin" placeholder="{{ _('Enter begin time') }}">
+              <small class="text-muted">
+                {{ _('The time of the day when the relays are toggled on each night.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
             <div class="form-group">
               <label for="audio_night_end">{{ _('End time') }}</label>
               <input type="time" class="form-control" id="area_audio_night_end" name="night_end" placeholder="{{ _('Enter end time') }}">
+              <small class="text-muted">
+                {{ _('The time of the day when the relays are toggled off each night.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
             <div class="form-group">
               <label for="area_audio_night_on_duration">{{ _('On duration') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_audio_night_on_duration" name="night_on_duration" placeholder="{{ _('On duration') }}">
+              <small class="text-muted">
+                {{ _('The duration when the players should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full night.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in minutes.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
             <div class="form-group">
               <label for="area_audio_night_off_duration">{{ _('Off duration') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_audio_night_off_duration" name="night_off_duration" placeholder="{{ _('Off duration') }}">
+              <small class="text-muted">
+                {{ _('The duration when the players should be stay off when switched off. Enter \'0\' to disable.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in minutes.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <div class="form-group">
               <label for="area_audio_night_playlists">{{ _('Playlists') }}</label>
               <select class="select2" id="area_audio_night_playlists" name="night_playlists" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;"> </select>
+              <small class="text-muted">
+                {{ _('Select the playlist(s) to be played.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Select at least 1 playlist.') }}
+              </div>
             </div>
           </div>
         </div>
@@ -425,45 +431,78 @@
         <option value="weather">{{ _('Weather day/night') }}</option>
         <option value="weather_inverse">{{ _('Weather night/day') }}</option>
       </select>
+      <small class="text-muted">
+        {{ _('Select the mode of this area. This will change the timing and duration of the actions.') }}
+      </small>
     </div>
   </div>
   <div class="col-12 col-sm-6 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="area_watertank_sensors">{{ _('Sensors') }}</label>
       <select class="select2" id="area_watertank_sensors" name="sensors" required="required" multiple="multiple" data-placeholder="{{ _('Select sensors') }}" style="width: 100%;"> </select>
+      <small class="text-muted">
+        {{ _('Select sensors to use for sensor based mode.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Select at least 1 sensor.') }}
+      </div>
     </div>
   </div>
   <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
     <div class="form-group">
       <label for="area_watertank_volume">{{ _('Volume') }}</label>
       <input type="number" step="0.001" min="0" class="form-control" id="area_watertank_volume" name="watertank_volume" required="required" placeholder="{{ _('Enter the amount') }}">
+      <small class="text-muted">
+        {{ _('Enter the volume of the water tank.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please enter a minimal value of %s.') % ('0',) }}
+      </div>
     </div>
   </div>
   <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
     <div class="form-group">
       <label for="area_watertank_height">{{ _('Height') }}</label>
       <input type="number" step="0.001" min="0" class="form-control" id="area_watertank_height" name="watertank_height" required="required" placeholder="{{ _('Enter the height') }}">
+      <small class="text-muted">
+        {{ _('Enter the height of the water tank.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please enter a minimal value of %s.') % ('0',) }}
+      </div>
     </div>
   </div>
   <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
     <div class="form-group">
       <label for="area_watertank_offset">{{ _('Offset') }}</label>
       <input type="number" step="0.001" min="0" class="form-control" id="area_watertank_offset" name="watertank_offset" required="required" placeholder="{{ _('Enter the offset') }}">
+      <small class="text-muted">
+        {{ _('Enter the offset between sensor and water height.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please enter a minimal value of %s.') % ('0',) }}
+      </div>
     </div>
   </div>
   <div class="col col-12 col-sm-6 col-md-3 col-lg-3 area_all">
     <div class="form-group">
       <label for="area_day_night_difference">{{ _('Day/night difference') }}</label>
-      <input type="number" step="0.001" class="form-control" id="area_day_night_difference" name="day_night_difference" placeholder="{{ _('Day/night difference') }}">
+      <input type="number" step="0.001" class="form-control" id="area_day_night_difference" name="day_night_difference" value="0" placeholder="{{ _('Day/night difference') }}">
+      <small class="text-muted">
+        {{ _('Amount to change between day and night.') }}
+      </small>
     </div>
   </div>
   <div class="col col-12 col-sm-6 col-md-3 col-lg-3 area_all">
     <div class="form-group">
       <label for="area_day_night_source">{{ _('Day/night source') }}</label>
-      <select class="select2" id="area_day_night_source" name="day_night_source" data-placeholder="{{ _('Select a mode') }}" style="width: 100%;">
+      <select class="select2" id="area_day_night_source" name="day_night_source" data-placeholder="{{ _('Select a day/night source') }}" style="width: 100%;">
         <option value="lights">{{ _('Lights') }}</option>
         <option value="weather">{{ _('Weather') }}</option>
       </select>
+      <small class="text-muted">
+        {{ _('Select source when it is \'day\'.') }}
+      </small>
     </div>
   </div>
 </div>
@@ -479,36 +518,72 @@
             <div class="form-group">
               <label for="area_alarm_low_begin">{{ _('Begin time') }}</label>
               <input type="time" class="form-control" id="area_alarm_low_begin" name="low_begin" placeholder="{{ _('Enter begin time') }}">
+              <small class="text-muted">
+                {{ _('The time of the day when the relays are toggled on each day.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="alarm_low_end">{{ _('End time') }}</label>
               <input type="time" class="form-control" id="area_alarm_low_end" name="low_end" placeholder="{{ _('Enter end time') }}">
+              <small class="text-muted">
+                {{ _('The time of the day when the relays are toggled off each day.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_low_on_duration">{{ _('On duration') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_low_on_duration" name="low_on_duration" placeholder="{{ _('On duration') }}">
+              <small class="text-muted">
+                {{ _('The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full night.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in minutes.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_low_off_duration">{{ _('Off duration') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_low_off_duration" name="low_off_duration" placeholder="{{ _('Off duration') }}">
+              <small class="text-muted">
+                {{ _('The duration when the relays should be stay off when switched off. Enter \'0\' to disable.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in minutes.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_low_power_on_time">{{ _('Power on time') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_low_power_on_time" name="low_power_on_time" placeholder="{{ _('Power on time') }}">
+              <small class="text-muted">
+                {{ _('The duration in seconds to toggle on the relay.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in seconds.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_low_settle_time">{{ _('Settle time') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_low_settle_time" name="low_settle_time" placeholder="{{ _('Settle time') }}">
+              <small class="text-muted">
+                {{ _('The duration in seconds between two actions.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in seconds.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
@@ -519,6 +594,9 @@
                 <option value="on">{{ _('On') }}</option>
                 <option value="off">{{ _('Off') }}</option>
               </select>
+              <small class="text-muted">
+                {{ _('Select the lights status.') }}
+              </small>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
@@ -529,18 +607,30 @@
                 <option value="open">{{ _('Open') }}</option>
                 <option value="closed">{{ _('Closed') }}</option>
               </select>
+              <small class="text-muted">
+                {{ _('Select the door status.') }}
+              </small>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_low_trigger_threshold">{{ _('Alarm threshold') }}</label>
               <input type="number" step="1" min="0" class="form-control" id="area_alarm_low_trigger_threshold" value="0" name="low_trigger_threshold" placeholder="{{ _('Threshold') }}">
+              <small class="text-muted">
+                {{ _('Enter the amount of alarms before action take place.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Please enter a minimal value of %s.') % ('0',) }}
+              </div>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label for="area_alarm_low_relays">{{ _('Relays') }}</label>
               <select class="select2" id="area_alarm_low_relays" name="low_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;"> </select>
+              <small class="text-muted">
+                {{ _('Select the relays to toggle.') }}
+              </small>
             </div>
           </div>
         </div>
@@ -557,36 +647,72 @@
             <div class="form-group">
               <label for="area_alarm_high_begin">{{ _('Begin time') }}</label>
               <input type="time" class="form-control" id="area_alarm_high_begin" name="high_begin" placeholder="{{ _('Enter begin time') }}">
+              <small class="text-muted">
+                {{ _('The time of the day when the relays are toggled on each night.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="alarm_high_end">{{ _('End time') }}</label>
               <input type="time" class="form-control" id="area_alarm_high_end" name="high_end" placeholder="{{ _('Enter end time') }}">
+              <small class="text-muted">
+                {{ _('The time of the day when the relays are toggled off each night.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid time.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_high_on_duration">{{ _('On duration') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_high_on_duration" name="high_on_duration" placeholder="{{ _('On duration') }}">
+              <small class="text-muted">
+                {{ _('The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full night.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in minutes.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_high_off_duration">{{ _('Off duration') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_high_off_duration" name="high_off_duration" placeholder="{{ _('Off duration') }}">
+              <small class="text-muted">
+                {{ _('The duration when the relays should be stay off when switched off. Enter \'0\' to disable.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in minutes.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_high_power_on_time">{{ _('Power on time') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_high_power_on_time" name="high_power_on_time" placeholder="{{ _('Power on time') }}">
+              <small class="text-muted">
+                {{ _('The duration in seconds to toggle on the relay.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in seconds.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_high_settle_time">{{ _('Settle time') }}</label>
               <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_high_settle_time" name="high_settle_time" placeholder="{{ _('Settle time') }}">
+              <small class="text-muted">
+                {{ _('The duration in seconds between two actions.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Enter a valid duration in seconds.') }}
+              </div>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
@@ -597,6 +723,9 @@
                 <option value="on">{{ _('On') }}</option>
                 <option value="off">{{ _('Off') }}</option>
               </select>
+              <small class="text-muted">
+                {{ _('Select the light status.') }}
+              </small>
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
@@ -607,18 +736,31 @@
                 <option value="open">{{ _('Open') }}</option>
                 <option value="closed">{{ _('Closed') }}</option>
               </select>
+              <small class="text-muted">
+                {{ _('Select the door status.') }}
+              </small>
+
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_high_trigger_threshold">{{ _('Alarm threshold') }}</label>
-              <input type="number" step="1" min="0" class="form-control" id="area_alarm_high_trigger_threshold" value="0 name="high_trigger_threshold" placeholder="{{ _('Threshold') }}">
+              <input type="number" step="1" min="0" class="form-control" id="area_alarm_high_trigger_threshold" value="0" name="high_trigger_threshold" placeholder="{{ _('Threshold') }}">
+              <small class="text-muted">
+                {{ _('Enter the amount of alarms before action take place.') }}
+              </small>
+              <div class="invalid-feedback">
+                {{ _('Please enter a minimal value of %s.') % ('0',) }}
+              </div>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label for="area_alarm_high_relays">{{ _('Relays') }}</label>
               <select class="select2" id="area_alarm_high_relays" name="high_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;"> </select>
+              <small class="text-muted">
+                {{ _('Select the relays to toggle.') }}
+              </small>
             </div>
           </div>
         </div>
@@ -645,8 +787,8 @@
   </div>
   <div class="row">
     <div class="col">
-      <small class="text-muted">
-        {{ _('Select the duration for the dimmer to go to on or off in minutes. Max duration is 180 minutes.') }}
+      <small class="text-muted fuckbs-d-none">
+        {{ _('Select the delay and duration for the dimmer to go to on or off in minutes. Max duration is 180 minutes.') }}
       </small>
     </div>
   </div>
@@ -664,7 +806,7 @@
   </div>
   <div class="row">
     <div class="col">
-      <small class="text-muted">
+      <small class="text-muted fuckbs-d-none">
         {{ _('Select the delay in minutes that a relay waits before it turns on. Max delay is 180 minutes.') }}
       </small>
     </div>
@@ -675,11 +817,11 @@
 {% block modal_form_javascript_functions %}
 
 function remove_relay_tab(form, part, relay_id) {
-  let tabbs  = form.find('#area_dimmer_settings_' + part + '_relays');
+  let tabs  = form.find('#area_dimmer_settings_' + part + '_relays');
   let panels = form.find('#area_dimmer_settings_' + part + '_relays_content');
 
   panels.find('#dimmer_' + part + '_setting_' + relay_id).remove();
-  tabbs.find('#dimmer_' + part + '_setting_' + relay_id + '-tab').parent().remove();
+  tabs.find('#dimmer_' + part + '_setting_' + relay_id + '-tab').parent().remove();
 
 }
 
@@ -688,7 +830,7 @@ function add_relay_tab(form, part, relay_id, relay_name, dimmer) {
     return;
   }
 
-  let tabbs  = form.find('#area_dimmer_settings_' + part + '_relays');
+  let tabs  = form.find('#area_dimmer_settings_' + part + '_relays');
   let panels = form.find('#area_dimmer_settings_' + part + '_relays_content');
 
   form.find('div.row.area_alarm_' + part + '_dimmer_settings').show();
@@ -725,7 +867,7 @@ function add_relay_tab(form, part, relay_id, relay_name, dimmer) {
   });
 
   panel.append(dimmer_field);
-  tabbs.append(tab);
+  tabs.append(tab);
   panels.append(panel);
   panel.find('.range_slider').bootstrapSlider({'formatter' :
     function(value) {
@@ -789,22 +931,33 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
 {{modal_type}}_form.find('select[id$="_mode"]').on('change',function() {
   let area_type = {{modal_type}}_form.find('select#area_type').val();
 
+  // Make the sensors required
+  {{modal_type}}_form.find('select[name="sensors"]').prop('required','sensors' == this.value);
+
   if ('disabled' == this.value) {
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input').prop('readonly',true);
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' select:not(#' + this.id + ')').prop('readonly',true);
 
   } else if ('timer' == this.value) {
+
+    // Enable timer fields
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input').prop('readonly',false);
+
+    // Make the timers required
+    {{modal_type}}_form.find('div.tab-pane input').prop('required',true);
 
     // Disable hours fields
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id*="_hours"]').prop('readonly',true);
 
   } else if ('sensors' == this.value) {
-    // Disable hours fields
-
+    // Enable fields
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input').prop('readonly',false);
 
     //{{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id*="_hours"]').prop('readonly',true);
+
+
+
+
 
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_begin"]').prop('readonly',true);
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_end"]').prop('readonly',true);

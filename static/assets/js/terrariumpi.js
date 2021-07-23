@@ -478,6 +478,10 @@ function template_sensor_type_icon(type) {
     case 'webhook':
       return 'fas fa-cloud-upload-alt'
       break;
+
+    case 'weather':
+      return 'fas fa-cloud-sun'
+      break;
   }
 }
 

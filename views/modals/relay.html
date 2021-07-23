@@ -12,7 +12,7 @@
 {% block modal_body %}
 <input type="hidden" name="id" id="relay_id" value="" disabled="disabled">
 <div class="row">
-  <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-2">
     <div class="form-group">
       <label for="relay_hardware">{{ _('Hardware') }}</label>
       <div class="select2-primary">
@@ -27,32 +27,32 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-3">
     <div class="form-group">
       <label for="relay_address">{{ _('Address') }}</label>
       <input type="text" class="form-control" id="relay_address" name="address" required="required" placeholder="{{ _('Enter an address') }}">
       <small class="text-muted">
-        {{ _('Enter the relay address.') }}
+        {{ _('Enter an address.') }}
       </small>
-      <!-- <div class="invalid-feedback">
-        {{ _('Please enter a valid physical GPIO port number between 1 and 40.') }}
-      </div> -->
+      <div class="invalid-feedback">
+        {{ _('The address cannot be empty.') }}
+      </div>
     </div>
   </div>
-  <div class="col-10 col-sm-10 col-md-8 col-lg-3">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-3">
     <div class="form-group">
       <label for="relay_name">{{ _('Name') }}</label>
       <input type="text" class="form-control" id="relay_name" name="name" required="required" placeholder="{{ _('Enter a name') }}">
       <small class="text-muted">
-        {{ _('Enter a name for this button.') }}
+        {{ _('Enter a name.') }}
       </small>
       <div class="invalid-feedback">
-        {{ _('Please enter a name of at least 1 character.') }}
+        {{ _('The name cannot be empty.') }}
       </div>
     </div>
   </div>
-  <div class="col-6 col-sm-6 col-md-6 col-lg-1">
-    <div class="form-group">
+  <div class="col-10 col-sm-10 col-md-10 col-lg-3 row">
+    <div class="form-group col-6">
       <label for="wattage">{{ _('Wattage') }}</label>
       <input type="number" step="0.001" min="0" class="form-control" id="wattage" name="wattage" required="required" placeholder="{{ _('Wattage when powered on') }}">
       <small class="text-muted">
@@ -62,9 +62,7 @@
         {{ _('Please enter a minimal value of %s.') % ('0',) }}
       </div>
     </div>
-  </div>
-  <div class="col-6 col-sm-6 col-md-6 col-lg-1">
-    <div class="form-group">
+    <div class="form-group col-6">
       <label for="flow" class="text-nowrap">{{ _('Water flow') }}</label>
       <input type="number" step="0.001" min="0" class="form-control" id="flow" name="flow" required="required" placeholder="{{ _('Water flow in liters per minute when powered on') }}">
       <small class="text-muted">
@@ -75,19 +73,7 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-sm-12 col-md-12 col-lg-1">
-    <div class="form-group">
-      <span class="switch">
-        <label for="manual_mode">{{ _('Manual m.') }}</label>
-        <input type="checkbox" class="switch" id="manual_mode" name="manual_mode">
-        <label for="manual_mode" class="mt-1"></label>
-      </span>
-      <small class="text-muted">
-        {{ _('When a relay is in manual mode, it will not change states.') }}
-      </small>
-    </div>
-  </div>
-  <div class="col-2 col-sm-2 col-md-4 col-lg-1">
+  <div class="col-2 col-sm-2 col-md-2 col-lg-1">
     <div class="form-group">
       <label for="relay_current">{{ _('Current') }}</label>
       <input type="text" readonly="readonly" class="form-control" name="value" id="relay_current" placeholder="{{ _('Current value') }}">

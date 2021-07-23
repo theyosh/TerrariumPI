@@ -10,6 +10,7 @@
 
 {% block modal_title %}<i class="fas fa-video mr-2" ></i>{{ _('Webcam settings') }}{% endblock %}
 {% block modal_body %}
+
 <input type="hidden" name="id" id="webcam_id" value="" disabled="disabled">
 <input type="hidden" name="markers" id="markers" readonly="readonly" value="{}" >
 <div class="row">
@@ -21,6 +22,12 @@
           <div class="select2-primary">
             <select class="select2" id="webcam_hardware" name="hardware" required="required" data-placeholder="{{ _('Select hardware') }}" style="width: 100%;">
             </select>
+            <small class="text-muted">
+              {{ _('Select the hardware type for this webcam.') }}
+            </small>
+            <div class="invalid-feedback">
+              {{ _('Please select a hardware type.') }}
+            </div>
           </div>
         </div>
       </div>
@@ -28,12 +35,24 @@
         <div class="form-group">
           <label for="webcam_address">{{ _('Address') }}</label>
           <input type="text" class="form-control" id="webcam_address" required="required" name="address" placeholder="{{ _('Enter an address') }}">
+          <small class="text-muted">
+            {{ _('Enter an address.') }}
+          </small>
+          <div class="invalid-feedback">
+            {{ _('The address cannot be empty.') }}
+          </div>
         </div>
       </div>
       <div class="col-12 col-sm-12 col-md-4 col-lg-4">
         <div class="form-group">
           <label for="webcam_name">{{ _('Name') }}</label>
           <input type="text" class="form-control" id="webcam_name" required="required" name="name" placeholder="{{ _('Enter a name') }}">
+          <small class="text-muted">
+            {{ _('Enter a name.') }}
+          </small>
+          <div class="invalid-feedback">
+            {{ _('The name cannot be empty.') }}
+          </div>
         </div>
       </div>
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
@@ -43,6 +62,12 @@
             <input type="number" class="form-control col-5 d-inline" id="webcam_width" required="required" name="width" placeholder="{{ _('Enter width') }}">
             <i class="fas fa-times mt-3" ></i>
             <input type="number" class="form-control col-5 d-inline" id="webcam_height" required="required" name="height" placeholder="{{ _('Enter height') }}">
+          </div>
+          <small class="text-muted">
+            {{ _('Enter the resolution.') }}
+          </small>
+          <div class="invalid-feedback">
+            {{ _('The resolution cannot be empty.') }}
           </div>
         </div>
       </div>
@@ -59,6 +84,9 @@
               <option value="V">{{ _('Flip Vertical') }}</option>
             </select>
           </div>
+          <small class="text-muted">
+            {{ _('Select a rotation.') }}
+          </small>
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
@@ -79,6 +107,9 @@
               <option value="greyworld">{{ _('greyworld') }}</option>
             </select>
           </div>
+          <small class="text-muted">
+            {{ _('Select a white balance.') }}
+          </small>
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
@@ -99,6 +130,9 @@
               <option value="86400">{{ _('1 day') }}</option>
             </select>
           </div>
+          <small class="text-muted">
+            {{ _('Select the duration between archived images.') }}
+          </small>
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
@@ -111,6 +145,9 @@
               <option value="off">{{ _('When off') }}</option>
             </select>
           </div>
+          <small class="text-muted">
+            {{ _('Light status for taking an archive image.') }}
+          </small>
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
@@ -123,6 +160,9 @@
               <option value="open">{{ _('Open') }}</option>
             </select>
           </div>
+          <small class="text-muted">
+            {{ _('Door status for taking an archive image.') }}
+          </small>
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
@@ -132,6 +172,9 @@
             <select class="select2" id="webcam_flash" name="flash" data-placeholder="{{ _('Select optional relay for flash') }}" style="width: 100%;">
             </select>
           </div>
+          <small class="text-muted">
+            {{ _('Select a relay that will act as a flasher.') }}
+          </small>
         </div>
       </div>
     </div>
@@ -147,18 +190,27 @@
               <option value="blue">{{ _('Blue') }}</option>
             </select>
           </div>
+          <small class="text-muted">
+            {{ _('Show motion boxes on the archived images.') }}
+          </small>
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
         <div class="form-group">
           <label for="webcam_motion_threshold" class="text-truncate">{{ _('Motion delta threshold') }}</label>
           <input type="number" value="25" class="form-control" id="webcam_motion_threshold" name="motion_threshold" placeholder="{{ _('Enter number') }}">
+          <small class="text-muted">
+            {{ _('Enter the motion threshold.') }}
+          </small>
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
         <div class="form-group">
           <label for="webcam_motion_area" class="text-truncate">{{ _('Motion minimum area') }}</label>
           <input type="number" value="500" class="form-control" id="webcam_motion_area" name="motion_area" placeholder="{{ _('Enter number') }}">
+          <small class="text-muted">
+            {{ _('Enter an area size.') }}
+          </small>
         </div>
       </div>
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
@@ -170,6 +222,9 @@
               <option value="archived">{{ _('Last archived frame') }}</option>
             </select>
           </div>
+          <small class="text-muted">
+            {{ _('Which frame to use for motion detection.') }}
+          </small>
         </div>
       </div>
     </div>

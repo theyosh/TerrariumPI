@@ -253,6 +253,10 @@ select.select2.is-valid + .select2.select2-container.select2-container--default 
   left: 0;
 }
 
+.dark-mode .disabled-select {
+  background-color: #343a40;
+}
+
 select[readonly].select2-hidden-accessible + .select2-container {
   pointer-events: none;
   touch-action: none;
@@ -261,6 +265,10 @@ select[readonly].select2-hidden-accessible + .select2-container {
 select[readonly].select2-hidden-accessible + .select2-container .select2-selection {
   background: #eee;
   box-shadow: none;
+}
+
+.dark-mode select[readonly].select2-hidden-accessible + .select2-container .select2-selection {
+  background-color: #343a40;
 }
 
 select[readonly].select2-hidden-accessible + .select2-container .select2-selection__arrow,
@@ -322,6 +330,10 @@ img.christmashat {
   background-color: #fcfcfa;
 }
 
+.dark-mode .hr-text:after {
+  background-color: #343a40;
+}
+
 .leaflet-pulsing-icon.reset:after {
   animation: none !important;
 }
@@ -343,6 +355,7 @@ video.leaflet-image-layer {
 .switch {
   font-size: 1rem;
   position: relative;
+  text-align: center;
 }
 .switch input {
   position: absolute;
