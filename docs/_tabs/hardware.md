@@ -16,8 +16,8 @@ All supported sensors 3
 {% if sensor.relative_path contains "sensor" %}
 
   <h2>
-    <a href="/TerrariumPI/{{ sensor.url }}">
-      {{ sensor.title }} - {{ sensor.relative_path }} - {{ sensor.measures }}
+    <a href="{{ sensor.url }}">
+      {{ sensor.title }} - {{ sensor.measures }}
     </a>
   </h2>
   <!-- <p>{{ sensor.content | markdownify }}</p> -->
