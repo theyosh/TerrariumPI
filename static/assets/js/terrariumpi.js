@@ -395,6 +395,7 @@ function template_sensor_type_icon(type) {
       return 'fas fa-fan'
       break;
     case 'humidity':
+    case 'sensors':
       return 'fas fa-tint'
       break;
     case 'moisture':
@@ -405,6 +406,7 @@ function template_sensor_type_icon(type) {
       break;
     case 'light':
     case 'lights':
+    case 'main_lights':
       return 'fas fa-lightbulb'
       break;
     case 'main lights':
@@ -482,18 +484,24 @@ function template_sensor_type_icon(type) {
     case 'weather':
       return 'fas fa-cloud-sun'
       break;
+
+    case 'timer':
+      return 'fas fa-clock'
+      break;
+
+    case 'disabled':
+      return 'fas fa-ban'
+      break;
+
+   case 'weather_inverse':
+    return 'fas fa-cloud-moon'
+    break;
+
   }
 }
 
 function country_icon(value){
-  value = value.split('_');
-  if (value.length != 2) {
-    return false;
-  }
-  value = value.pop().toLowerCase();
-  if (value.length != 2) {
-    return false;
-  }
+  value = value.split('_').pop().toLowerCase();
   return 'flag-icon-' + value;
 }
 
@@ -502,11 +510,12 @@ function formatState (state) {
     return state.text;
   }
 
+  if (state.element.offsetParent != undefined && state.element.offsetParent.name == 'language') {
+    return jQuery('<span><i class="mr-1 flag-icon-background flag-icon ' + country_icon(state.element.value) + '"></i>' + state.text + '</span>');
+  }
+
   if (icon = template_sensor_type_icon(state.element.value)) {
     return jQuery('<span><i class="mr-1 fa-fw ' + template_sensor_type_icon(state.element.value) + '"></i> ' + state.text + '</span>');
-  }
-  if (icon = country_icon(state.element.value)) {
-    return jQuery('<span><i class="mr-1 flag-icon-background flag-icon ' + country_icon(state.element.value) + '"></i>' + state.text + '</span>');
   }
 
   return state.text;
