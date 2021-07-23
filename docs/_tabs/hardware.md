@@ -23,6 +23,6 @@ All supported sensors 3
   </h2>
   <!-- <p>{{ sensor.content | markdownify }}</p> -->
 
-{% endif %}
+{% endunless %}
 {% endif %}
 {% endfor %}
