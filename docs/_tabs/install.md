@@ -12,7 +12,7 @@ layout: post
 #  alt: Raspberry PI Logo
 ---
 
-Here we will install Raspberry PI and TerrariumPI software.
+Here we will install Raspberry PI and TerrariumPI software step by step.
 
 Raspberry PI
 ============
