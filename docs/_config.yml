@@ -140,11 +140,11 @@ defaults:
 
   -
     scope:
-      path: '_hardware'
+      path: ''
       type: hardware             # see `site.collections`
     values:
       layout: page
-      permalink: /:title/
+#      permalink: /:title/
       dynamic_title: true    # Hide title in mobile screens.
 
 sass:
