@@ -2,6 +2,7 @@
 title: Setup
 icon: fas fa-cogs
 order: 5
+layout: post
 ---
 
 Settings
