@@ -13,7 +13,7 @@ Sensors
 All supported sensors 2
 {% for sensor in site.hardware %}
   <h2>
-    <a href="{{ sensor.url }}">
+    <a href="/TerrariumPI/{{ sensor.url }}">
       {{ sensor.name }} - {{ sensor.position }}
     </a>
   </h2>
