@@ -2,7 +2,7 @@
 title: Install
 icon: fas fa-tools
 order: 4
-toc: true
+layout: post
 
 image:
   src: RaspberryPI_Logo.png
