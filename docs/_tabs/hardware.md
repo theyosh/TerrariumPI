@@ -17,10 +17,10 @@ All supported sensors 3
 
   <h2>
     <a href="/TerrariumPI/{{ sensor.url }}">
-      {{ sensor.title }} - {{ sensor.relative_path }} - {{ sensor }}
+      {{ sensor.title }} - {{ sensor.relative_path }} - {{ sensor.measures }}
     </a>
   </h2>
-  <p>{{ sensor.content | markdownify }}</p>
+  <!-- <p>{{ sensor.content | markdownify }}</p> -->
 
 {% endif %}
 {% endfor %}

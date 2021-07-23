@@ -5,6 +5,8 @@ title: 1-Wire sensor
 toc: true
 layout: post
 
+measures: ['temperature','humidity']
+
 # image:
 #   src: ../assets/img/RaspberryPI_Logo.png
 #   width: 400   # in pixels
