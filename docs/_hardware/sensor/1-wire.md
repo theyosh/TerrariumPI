@@ -1,7 +1,7 @@
 ---
 title: 1-Wire sensor
 measures: ['temperature','humidity']
-layout: post
+layout: page
 permalink: /hardware/sensor/:title/
 ---
 
