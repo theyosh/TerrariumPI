@@ -29,7 +29,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
     elif address[1] is None or '' == address[1]:
       address[1] = 1
 
-    number_mode = len(address[1]) <= 2 and terrariumUtils.is_float(address[1])
+    number_mode = len(str(address[1])) <= 2 and terrariumUtils.is_float(address[1])
     # Only reduce the boardnumber if in number mode
     if number_mode:
       address[1] = int(address[1])
