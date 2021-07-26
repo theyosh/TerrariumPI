@@ -3,6 +3,7 @@ from terrariumUtils import terrariumUtils, terrariumCache
 
 import subprocess
 import re
+from hashlib import md5
 
 class terrariumRelayDenkoviV2(terrariumRelay):
   HARDWARE = 'denkovi_v2'
@@ -16,6 +17,9 @@ class terrariumRelayDenkoviV2(terrariumRelay):
 
   def __get_board_type(self):
     return '{}{}'.format(self.__get_relay_count(), self._device['type'])
+
+  def __relay_cache_key(self):
+    return md5(f'{self._device["device"]}'.encode()).hexdigest()
 
   def _load_hardware(self):
     self.__cache = terrariumCache()
@@ -63,7 +67,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
     return self._device['device']
 
   def _get_hardware_value(self):
-    cache_key = self._relay_cache_key
+    cache_key = self.__relay_cache_key()
     data = self.__cache.get_data(cache_key)
 
     if data is None and not self.__cache.is_running(cache_key):
@@ -82,7 +86,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
     return self.ON if terrariumUtils.is_true(data[self._device['switch']]) else self.OFF
 
   def set_hardware_state(self, state, force = False):
-    cache_key = self._relay_cache_key
+    cache_key = self.__relay_cache_key()
     cmd = self.__CMD + [self._device['serial'], self.__get_board_type(), str(self._device['switch']), str(1 if state is self.ON else 0)]
 
     data = subprocess.check_output(cmd).strip().decode('utf-8').strip()
