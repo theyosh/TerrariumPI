@@ -123,7 +123,7 @@ class terrariumRelaySonoff(terrariumRelay):
         # Check for Tasmota firmware...
         address = f'{info.parsed_addresses()[0]}:{info.port}'
         data = terrariumUtils.get_remote_data(f'http://{address}/cm?cmnd=Status')
-        if data is not None:
+        if data is not None and 'Status' in data and 'FriendlyName' in data['Status']:
           for switch_nr in range(len(data['Status']['FriendlyName'])):
             found_devices.append(terrariumRelay(None,
                                                 terrariumRelaySonoff.HARDWARE,
