@@ -28,7 +28,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
     if terrariumUtils.is_float(address[1]):
       address[1] -= 1 # Reduce board number by one, human start counting at 1, computers at 0 (zero)
 
-    scan_regex = r'^(?P<serial>[^ ]+)\W(\[[^\]]+\])\W\[id=\d\]$'
+    scan_regex = r'^(?P<serial>[^ ]+)\W(\[(?P<device>[^\]]+\]))\W\[id=\d\]$'
     number_mode = terrariumUtils.is_float(address[1])
     counter = 0
 
@@ -52,7 +52,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
           continue
 
         self._device['device'] = line['serial']
-        self._device['type']   = 'v2' if line['device'].startswith('MCP') else ''
+        self._device['type']   = 'v2' if 'mcp' in line['device'].lower() else ''
         self._device['switch'] = int(address[0])
         if self._device['switch'] == 0:
           self._device['switch'] = self.__get_relay_count()
