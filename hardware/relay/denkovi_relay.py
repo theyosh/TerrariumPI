@@ -57,7 +57,6 @@ class terrariumRelayDenkoviV2(terrariumRelay):
         if self._device['switch'] == 0:
           self._device['switch'] = self.__get_relay_count()
 
-        # TODO: Do we make an address update so we have always the serial of the device instead of the number.... will fix USB replug issues and/or order changes...
         self.address = '{},{}'.format(self._device['switch'],self._device['device'])
         break
 
