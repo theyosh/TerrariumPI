@@ -4,7 +4,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import asyncio
 import contextlib
-import datetime
 import threading
 
 from time import sleep, time
@@ -64,7 +63,6 @@ class TerrariumMerossCloud(terrariumSingleton):
     data = asyncio.run_coroutine_threadsafe(_scan_hardware(type), self.__engine['asyncio'].async_loop)
     devices = data.result()
     return devices
-
 
   def toggle_relay(self, device, switch, state):
 
