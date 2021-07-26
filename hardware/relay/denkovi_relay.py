@@ -82,10 +82,11 @@ class terrariumRelayDenkoviV2(terrariumRelay):
     if data is None:
       return None
 
+    # Make string '0000' to list ['0','0','0','0']
     data = list(data)
     return self.ON if terrariumUtils.is_true(data[self._device['switch']]) else self.OFF
 
-  def _set_hardware_value(self, state, force = False):
+  def _set_hardware_value(self, state):
     cache_key = self.__relay_cache_key()
     cmd = self.__CMD + [self._device['serial'], self.__get_board_type(), str(self._device['switch']), str(1 if state is self.ON else 0)]
 
