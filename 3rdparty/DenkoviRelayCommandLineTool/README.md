@@ -3,6 +3,8 @@
 As the license of Denkovi does not allow to ship their command line tool with my software. Therefore you have to download and install it manually.
 
 ## Installation
+Make sure you have Java installed: sudo apt install openjdk-11-jre-headless
+
 Download the Denkovi Command line tool from: http://denkovi.com/denkovi-relay-command-line-tool. Download it and unpack it into this directory.
 Then either rename the jar file to DenkoviRelayCommandLineTool.jar or make a symlink to it.
 

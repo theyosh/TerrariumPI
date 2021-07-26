@@ -2,6 +2,7 @@ from . import terrariumRelay, terrariumRelayException
 from terrariumUtils import terrariumUtils, terrariumCache
 
 import subprocess
+import re
 
 class terrariumRelayDenkoviV2(terrariumRelay):
   HARDWARE = 'denkovi_v2'
@@ -89,6 +90,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
     # Data should contain the current relay status for all relais...
     self.__cache.set_data(cache_key,data)
     return True
+
 class terrariumRelayDenkoviV2_4(terrariumRelayDenkoviV2):
   HARDWARE = 'denkovi_v2_4'
   NAME = 'Denkovi Relay v2 (4 sockets)'
