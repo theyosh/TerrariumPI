@@ -29,11 +29,13 @@ class terrariumRelayDenkoviV2(terrariumRelay):
     elif address[1] is None or '' == address[1]:
       address[1] = 1
 
-    if terrariumUtils.is_float(address[1]):
+    number_mode = len(address[1]) <= 2 and terrariumUtils.is_float(address[1])
+    # Only reduce the boardnumber if in number mode
+    if number_mode:
+      address[1] = int(address[1])
       address[1] -= 1 # Reduce board number by one, human start counting at 1, computers at 0 (zero)
 
     scan_regex = r'^(?P<serial>[^ ]+)\W(\[(?P<device>[^\]]+\]))\W\[id=\d\]$'
-    number_mode = terrariumUtils.is_float(address[1])
     counter = 0
 
     cmd = self.__CMD + ['list']
@@ -43,8 +45,6 @@ class terrariumRelayDenkoviV2(terrariumRelay):
     except subprocess.CalledProcessError as ex:
       # Device does not exists....
       return False
-
-    #print(data)
 
     for line in data:
       line = re.match(scan_regex,line)
@@ -72,7 +72,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
 
     if data is None and not self.__cache.is_running(cache_key):
       self.__cache.set_running(cache_key)
-      cmd = self.__CMD + [self._device['serial'], self.__get_board_type(), 'all', 'status']
+      cmd = self.__CMD + [self._device['device'], self.__get_board_type(), 'all', 'status']
 
       data = subprocess.check_output(cmd).strip().decode('utf-8').strip()
       #print('Got data: *{}*'.format(data))
@@ -88,7 +88,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
 
   def _set_hardware_value(self, state):
     cache_key = self.__relay_cache_key()
-    cmd = self.__CMD + [self._device['serial'], self.__get_board_type(), str(self._device['switch']), str(1 if state is self.ON else 0)]
+    cmd = self.__CMD + [self._device['device'], self.__get_board_type(), str(self._device['switch']), str(1 if state is self.ON else 0)]
 
     data = subprocess.check_output(cmd).strip().decode('utf-8').strip()
     # Data should contain the current relay status for all relais...
