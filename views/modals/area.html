@@ -399,7 +399,7 @@
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <div class="form-group">
               <label for="area_audio_night_playlists">{{ _('Playlists') }}</label>
-              <select class="select2" id="area_audio_night_playlists" name="night_playlists" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;"> </select>
+              <select class="select2" id="area_audio_night_playlists" name="night_playlists" multiple="multiple" data-placeholder="{{ _('Select playlists') }}" style="width: 100%;"> </select>
               <small class="text-muted">
                 {{ _('Select the playlist(s) to be played.') }}
               </small>
@@ -944,7 +944,7 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input').prop('readonly',false);
 
     // Make the timers required
-    {{modal_type}}_form.find('div.tab-pane input').prop('required',true);
+    {{modal_type}}_form.find('div.tab-pane input[type!="search"]').prop('required',true);
 
     // Disable hours fields
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id*="_hours"]').prop('readonly',true);
@@ -954,10 +954,6 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input').prop('readonly',false);
 
     //{{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id*="_hours"]').prop('readonly',true);
-
-
-
-
 
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_begin"]').prop('readonly',true);
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_end"]').prop('readonly',true);
@@ -1039,39 +1035,16 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
   if (!light_modus) {
     return;
   }
-
-  /*
-  if (light_modus) {
-    // Check if there is at least one dimmer already selected...
-    jQuery.each(selected, function(counter, relay_id) {
-      if (relay_data[relay_id] !== undefined && relay_data[relay_id].dimmer) {
-        dimmer_active = true;
-      }
-    });
-  }
-  */
-
-  /*
-  if ( light_modus && !dimmer_active ) {
-    // Clear all calibration settings
-    jQuery.each(active, function(counter,relay_id) {
-      // Remove tab....
+  jQuery.each(Array.from(new Set(active.concat(selected))), function(counter,relay_id) {
+    if (active.indexOf(relay_id) == -1) {
+      // Add tab
+      add_relay_tab({{modal_type}}_form, part, relay_id, relay_data[relay_id].name, relay_data[relay_id].dimmer);
+    } else if (selected.indexOf(relay_id) == -1) {
+      // Remove tab
       remove_relay_tab({{modal_type}}_form, part, relay_id);
-    });
-    selected = [];
-  } else if (light_modus && dimmer_active) {
-    */
-    jQuery.each(Array.from(new Set(active.concat(selected))), function(counter,relay_id) {
-      if (active.indexOf(relay_id) == -1) {
-        // Add tab
-        add_relay_tab({{modal_type}}_form, part, relay_id, relay_data[relay_id].name, relay_data[relay_id].dimmer);
-      } else if (selected.indexOf(relay_id) == -1) {
-        // Remove tab
-        remove_relay_tab({{modal_type}}_form, part, relay_id);
-      }
-    });
-    {{modal_type}}_form.find('#area_dimmer_settings_' + part + '_relays a:last').tab('show');
-  //}
+    }
+  });
+  {{modal_type}}_form.find('#area_dimmer_settings_' + part + '_relays a:last').tab('show');
 
   target.data('active', selected.join(','));
 });

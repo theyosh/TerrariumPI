@@ -53,9 +53,10 @@
       event.preventDefault();
       event.stopPropagation();
 
-      if ({{modal_type}}_form[0].checkValidity() === false) {
-        {{modal_type}}_form.addClass('was-validated');
+      let form_error = {{modal_type}}_form[0].checkValidity();
+      {{modal_type}}_form.addClass('was-validated');
 
+      if (form_error === false) {
         let error_fields = [];
         jQuery.each({{modal_type}}_form.find(':invalid'),function(counter,field){
           error_fields.push(jQuery(field).prev().text());
