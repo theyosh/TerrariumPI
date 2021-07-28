@@ -1015,13 +1015,12 @@ function graph(canvas, source, type) {
       if (window.terrariumPI.graph_show_min_max_gauge && window.terrariumPI.gauges[name]) {
         // set the min/max values in the gauge
         window.terrariumPI.gauges[name]._gauge.options.staticLabels = {
-          labels: [formatNumber(parsed_data.value.reduce(getMin)), formatNumber(parsed_data.value.reduce(getMax))],
+          labels: [parsed_data.value.reduce(getMin), parsed_data.value.reduce(getMax)],
           font: '10px Helvetica Neue,sans-serif',
           color: '#73879C',
           fractionDigits: 3
         };
       }
-
       return parsed_data;
     },
 
