@@ -1621,7 +1621,7 @@ function animate_socketio_messages() {
 }
 
 function online_status(online) {
-  let indicator = jQuery('#online_status i');
+  let indicator = jQuery('#online_status > a > i');
   let old_status = (indicator.hasClass('text-success') ? true : (indicator.hasClass('text-danger') ? false : ''));
 
   if (online) {
@@ -1641,7 +1641,7 @@ function online_status(online) {
   if (old_status !== online) {
 
     let status_list = jQuery('ul.online_status_list');
-    let new_status = jQuery('<li>').addClass('dropdown-item').append(jQuery('<i>').addClass('fas fa-check-circle mr-2')).append(moment().format('LLL'));
+    let new_status = jQuery('<li>').addClass('dropdown-item').append(jQuery('<i>').addClass('fas fa-check-circle mr-2 ' + (online ? 'text-success' : 'text-danger' ) )).append(moment().format('LLL'));
 
     status_list.prepend(new_status);
 
