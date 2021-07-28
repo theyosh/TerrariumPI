@@ -383,23 +383,25 @@
 
           // Preprocess the data
           jQuery.each(data,function(counter,sensor) {
-            // Create new sensor type based average
-            if (!loaded_sensor_type[sensor.type]) {
-              loaded_sensor_type[sensor.type] = {
-                value : [],
-                limit_min: [],
-                limit_max : [],
-                alarm_min: [],
-                alarm_max : []
+            if (!sensor.exclude_avg) {
+              // Create new sensor type based average
+              if (!loaded_sensor_type[sensor.type]) {
+                loaded_sensor_type[sensor.type] = {
+                  value : [],
+                  limit_min: [],
+                  limit_max : [],
+                  alarm_min: [],
+                  alarm_max : []
+                }
               }
-            }
 
-            // Store the individual values per sensor type
-            loaded_sensor_type[sensor.type].value.push(sensor.value);
-            loaded_sensor_type[sensor.type].limit_min.push(sensor.limit_min);
-            loaded_sensor_type[sensor.type].limit_max.push(sensor.limit_max);
-            loaded_sensor_type[sensor.type].alarm_min.push(sensor.alarm_min);
-            loaded_sensor_type[sensor.type].alarm_max.push(sensor.alarm_max);
+              // Store the individual values per sensor type
+              loaded_sensor_type[sensor.type].value.push(sensor.value);
+              loaded_sensor_type[sensor.type].limit_min.push(sensor.limit_min);
+              loaded_sensor_type[sensor.type].limit_max.push(sensor.limit_max);
+              loaded_sensor_type[sensor.type].alarm_min.push(sensor.alarm_min);
+              loaded_sensor_type[sensor.type].alarm_max.push(sensor.alarm_max);
+          }
           });
 
           // Show the data...
