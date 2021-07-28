@@ -225,7 +225,7 @@ class terrariumEngine(object):
         logger.debug(f'Loaded setting: {setting.id} with value: {setting.value}')
 
     settings['exclude_ids'] = [] if '' == settings['exclude_ids'] else settings['exclude_ids'].split(',')
-    # Force portnumer to an int.....
+    # Force port number to an int.....
     settings['port']        = int(settings['port'])
 
     # Create a salt for encryption. And set it as environment variable
@@ -571,14 +571,13 @@ class terrariumEngine(object):
     for sensor_type, avg_data in self.sensor_averages.items():
       self.webserver.websocket_message('gauge_update', { 'id' : f'avg_{sensor_type}', 'value' : avg_data['value']})
 
-  # TODO: Use db avg functions
   @property
   def sensor_averages(self):
     start = time.time()
     data = {}
 
     with orm.db_session():
-      for sensor in Sensor.select(lambda s: s.id in self.sensors.keys() and not s.id in self.settings['exclude_ids']):
+      for sensor in Sensor.select(lambda s: s.id in self.sensors.keys() and s.exclude_avg == False and not s.id in self.settings['exclude_ids']):
         if sensor.value is None:
           continue
 
