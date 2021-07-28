@@ -8,7 +8,6 @@ import datetime
 
 import statistics
 import threading
-import random
 
 # http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/
 # https://onion.io/2bt-pid-control-python/
@@ -366,8 +365,11 @@ class terrariumArea(object):
         # Weather(inverse) and timer mode
         toggle_relay = self._is_timer_time(period)
 
+        # if self.type == 'lights':
+        #   print(f'Toggle relay or is it Relay state for period {period}: {toggle_relay} -> Current state: {self.relays_state(period)}')
+
         if toggle_relay is None:
-#          print(f'Recalc time table for {self}')
+         # print(f'Recalc time table for {self}')
           self._time_table()
           toggle_relay = False
 
@@ -462,16 +464,30 @@ class terrariumArea(object):
     return sensor_values
 
   def relays_state(self, part, state = True):
+
     relay_states = []
     for relay in self.setup[part]['relays']:
+      # if self.type == 'lights':
+        # print(f'Relay: {self.enclosure.relays[relay]}')
+        # print(f'Is on: {self.enclosure.relays[relay].is_on()}')
+        # print(f'Is off: {self.enclosure.relays[relay].is_off()}')
+
+
       if state:
         relay_states.append(self.enclosure.relays[relay].is_on())
+        # if self.type == 'lights':
+        #   print(f'Relay {self.enclosure.relays[relay]} is on?: {self.enclosure.relays[relay].is_on()}')
       else:
         relay_states.append(self.enclosure.relays[relay].is_off())
+
+    # if self.type == 'lights':
+    #   print('All states:')
+    #   print(relay_states)
 
     return all(relay_states)
 
   def relays_toggle(self, part, on):
+    threads = []
     logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
 
     with orm.db_session():
@@ -479,6 +495,18 @@ class terrariumArea(object):
       for relay in relays:
         relay = self.enclosure.relays[relay]
         self._relay_action(part, relay, on)
+
+#        threads.append(threading.Thread(target=self._relay_action, args=(part, relay, on)))
+#        threads[-1].start()
+
+#        self._relay_action(part, relay, on)
+
+    # print('All threads')
+    # print(threads)
+    # for thread in threads:
+    #   # print('Wait for thread: ')
+    #   # print(thread)
+    #   thread.join()
 
     if on:
       self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
@@ -581,9 +609,9 @@ class terrariumAreaLights(terrariumArea):
     # If the relay is already powered and should be power up, ignore the delay time. Force to zero delay
     # Same for going out. When the lights should be off, and they are not at full power, no delay.
 
-    if self.name == 'Day light':
-      print(f'Action: {action}, relay state: {relay.state}, part: {part}, powered: {self.state[part]["powered"]}, actually powered: {self.relays_state(part)}')
-      print(f'Change delay to ZERO: {(relay.ON if action else relay.OFF) != relay.state and self.state[part]["powered"] == action}')
+    # if self.name == 'Day light':
+    #   print(f'Action: {action}, relay state: {relay.state}, part: {part}, powered: {self.state[part]["powered"]}, actually powered: {self.relays_state(part)}')
+    #   print(f'Change delay to ZERO: {(relay.ON if action else relay.OFF) != relay.state and self.state[part]["powered"] == action}')
 
     if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
       tweaks['delay'] = 0
@@ -591,17 +619,18 @@ class terrariumAreaLights(terrariumArea):
     if relay.is_dimmer:
       step_size = tweaks['duration'] / (relay.ON - relay.OFF)
       tweaks['duration'] = step_size * abs((relay.ON if action else relay.OFF) - relay.state)
+      action_ok = self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, duration=tweaks["duration"], delay=tweaks["delay"])
 
-      if action:
-        logger.info(f'Start the dimmer {relay.name} from {relay.state}% to {relay.ON}% in {tweaks["duration"]} seconds with a delay of {tweaks["delay"]/60} minutes')
-      else:
-        logger.info(f'Stopping the dimmer {relay.name} from {relay.state}% to {relay.OFF}% in {tweaks["duration"]} seconds with a delay of {tweaks["delay"]/60} minutes')
-
-      self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, duration=tweaks["duration"], delay=tweaks["delay"])
+      if action_ok:
+        if action:
+          logger.info(f'Start the dimmer {relay.name} from {relay.state}% to {relay.ON}% in {tweaks["duration"]} seconds with a delay of {tweaks["delay"]/60} minutes')
+        else:
+          logger.info(f'Stopping the dimmer {relay.name} from {relay.state}% to {relay.OFF}% in {tweaks["duration"]} seconds with a delay of {tweaks["delay"]/60} minutes')
 
     else:
-      logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF} with a delay of {tweaks["delay"]/60} minutes')
-      self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, delay=tweaks["delay"])
+      action_ok = self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, delay=tweaks["delay"])
+      if action_ok:
+        logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF} with a delay of {tweaks["delay"]/60} minutes')
 
 class terrariumAreaHeater(terrariumArea):
 
