@@ -304,10 +304,22 @@ class terrariumArea(object):
 
   @property
   def is_day(self):
+    # Base day time on weather information
     if 'weather' == self.setup.get('day_night_source', None) and self.enclosure.weather is not None:
       return self.enclosure.weather.is_day
 
-    return self.enclosure.lights_on
+    # Else we have to see if we are between the begin and end time of the 'main lights' light area
+    main_lights_area = self.enclosure.main_lights
+    if main_lights_area is not None:
+      is_day_time = main_lights_area.state['day']['begin'] < int(datetime.datetime.now().timestamp()) < main_lights_area.state['day']['end']
+      return is_day_time
+
+    # Just try weather if there is no 'main lights' selected....
+    if self.enclosure.weather is not None:
+      return self.enclosure.weather.is_day
+
+    # For now, by default is it always day...
+    return True
 
   def update(self):
     if 'disabled' == self.mode:
