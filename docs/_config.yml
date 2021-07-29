@@ -138,6 +138,15 @@ defaults:
       permalink: /:title/
       dynamic_title: true    # Hide title in mobile screens.
 
+#   -
+#     scope:
+#       path: 'hardware'
+#       type: hardware             # see `site.collections`
+#     values:
+# #      layout: page
+# #      permalink: /:title/
+#       dynamic_title: true    # Hide title in mobile screens.
+
 sass:
   style: compressed
 
