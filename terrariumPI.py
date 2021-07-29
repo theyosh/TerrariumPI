@@ -8,7 +8,7 @@ import gettext
 gettext.install('terrariumpi', 'locales/')
 
 import terrariumLogging
-logger = terrariumLogging.logging.getLogger(__name__)
+logger = terrariumLogging.logging.getLogger()
 
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
