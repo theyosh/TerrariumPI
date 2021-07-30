@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-07-23 14:13+CEST\n"
-"PO-Revision-Date: 2021-04-17 03:46+0000\n"
+"PO-Revision-Date: 2021-07-31 02:40+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -368,7 +368,7 @@ msgstr "Uso de água total"
 #: views/dashboard.html:108 views/enclosures.html:2
 #: views/includes/sidebar.html:215
 msgid "Enclosures"
-msgstr "Puxadinhos"
+msgstr "Anexos"
 
 #: views/dashboard.html:168 views/enclosures.html:46
 msgid "Night"
@@ -390,11 +390,11 @@ msgstr "Atual"
 
 #: views/enclosures.html:9
 msgid "No enclosures"
-msgstr "Sem puxadinhos"
+msgstr "Sem anexos"
 
 #: views/enclosures.html:12
 msgid "Add new enclosure"
-msgstr "Adicionar novo puxadinho"
+msgstr "Adicionar novo Anexo"
 
 #: views/enclosures.html:133
 msgid "Add area"
@@ -451,10 +451,8 @@ msgid "All doors are closed"
 msgstr "Todas as portas estão fechadas"
 
 #: views/includes/navigation.html:44
-#, fuzzy
-#| msgid "Current value"
 msgid "Current status"
-msgstr "Valor atual"
+msgstr "Estado atual"
 
 #: views/includes/sidebar.html:14
 msgid "Hello"
@@ -548,7 +546,7 @@ msgstr "Lista"
 
 #: views/includes/sidebar.html:229
 msgid "New enclosure"
-msgstr "Novo puxadinho"
+msgstr "Novo Anexo"
 
 #: views/includes/sidebar.html:235
 msgid "New area"
@@ -626,11 +624,11 @@ msgstr "﻿Configurações de Área"
 
 #: views/modals/area.html:17
 msgid "Enclosure"
-msgstr "Puxadinho"
+msgstr "Anexo"
 
 #: views/modals/area.html:23
 msgid "Select the enclosure where this area belongs to."
-msgstr "Selecione o puxadinho ao qual esta área pertence."
+msgstr "Selecione o anexo ao qual esta área pertence."
 
 #: views/modals/area.html:37
 msgid "Select the type of area. Each type has its own extra options and logic."
@@ -645,10 +643,8 @@ msgstr "ERRO"
 #: views/modals/playlist.html:20 views/modals/relay.html:47
 #: views/modals/sensor.html:62 views/modals/service.html:30
 #: views/modals/webcam.html:51
-#, fuzzy
-#| msgid "Enter a name"
 msgid "Enter a name."
-msgstr "Insira o nome"
+msgstr "Insira o nome."
 
 #: views/modals/area.html:52 views/modals/button.html:50
 #: views/modals/enclosure.html:23 views/modals/event.html:21
@@ -656,7 +652,7 @@ msgstr "Insira o nome"
 #: views/modals/sensor.html:65 views/modals/service.html:33
 #: views/modals/webcam.html:54
 msgid "The name cannot be empty."
-msgstr ""
+msgstr "O nome não pode ficar em branco."
 
 #: views/modals/area.html:62 views/modals/area.html:242
 #: views/modals/area.html:427 views/modals/webcam.html:120
@@ -741,8 +737,8 @@ msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
 msgstr ""
-"Habilite para indicar que esta é a luz principal deste puxadinho. Este "
-"ajuste é usado para verificar as luzes das outras áreas."
+"Habilite para indicar que esta é a luz principal deste anexo. Este ajuste é "
+"usado para verificar as luzes das outras áreas."
 
 #: views/modals/area.html:126 views/modals/area.html:273
 msgid ""
@@ -777,10 +773,8 @@ msgstr "A hora do dia em que os relés são ligados a cada dia."
 #: views/modals/area.html:371 views/modals/area.html:525
 #: views/modals/area.html:537 views/modals/area.html:654
 #: views/modals/area.html:666
-#, fuzzy
-#| msgid "Enter a valid time of the day."
 msgid "Enter a valid time."
-msgstr "Digite uma hora válida do dia."
+msgstr "Digite uma hora válida."
 
 #: views/modals/area.html:148 views/modals/area.html:203
 #: views/modals/area.html:295 views/modals/area.html:365
@@ -815,10 +809,8 @@ msgstr "Duração desligado"
 
 #: views/modals/area.html:181 views/modals/area.html:632
 #: views/modals/area.html:762
-#, fuzzy
-#| msgid "Select relays"
 msgid "Select the relays to toggle."
-msgstr "Selecionar relés"
+msgstr "Selecionar relés para modificar."
 
 #: views/modals/area.html:249
 msgid ""
@@ -834,98 +826,71 @@ msgstr "Placa de som"
 
 #: views/modals/area.html:261
 msgid "Select the sound card that is used for this enclosure."
-msgstr "Selecione a placa de som usada neste puxadinho."
+msgstr "Selecione a placa de som usada neste anexo."
 
 #: views/modals/area.html:313 views/modals/area.html:325
 #: views/modals/area.html:383 views/modals/area.html:395
 #: views/modals/area.html:549 views/modals/area.html:561
 #: views/modals/area.html:678 views/modals/area.html:690
-#, fuzzy
-#| msgid "Timer period on duration in minutes"
 msgid "Enter a valid duration in minutes."
-msgstr "Período do temporizador ligado em minutos"
+msgstr "Insira o período em minutos."
 
 #: views/modals/area.html:322 views/modals/area.html:558
 #: views/modals/area.html:687
-#, fuzzy
-#| msgid ""
-#| "The duration when the relays should be on. If this is shorter then all "
-#| "day, you will get a timer functionality. Enter '0' to have a full day."
 msgid ""
 "The duration when the relays should be stay off when switched off. Enter '0' "
 "to disable."
 msgstr ""
-"A duração de tempo em que os relés devem estar ligados. Caso seja menor que "
-"a duração do dia, funciona como um timer. Digite 0 para acionar o dia todo."
+"O tempo mínimo que os relés, ao serem desligados, devem permanecer neste "
+"estado. Insira 0 para desativar."
 
 #: views/modals/area.html:334 views/modals/area.html:404
-#, fuzzy
-#| msgid "Shuffle this playlist every time it is played."
 msgid "Select the playlist(s) to be played."
-msgstr "Usar ordem aleatória a cada reprodução."
+msgstr "Selecione a playlist para ser reproduzida."
 
 #: views/modals/area.html:337 views/modals/area.html:407
-#, fuzzy
-#| msgid "Select at least 1 audio file."
 msgid "Select at least 1 playlist."
-msgstr "Selecione no mínimo um arquivo de áudio."
+msgstr "Selecione no mínimo uma playlist."
 
 #: views/modals/area.html:356 views/modals/area.html:651
-#, fuzzy
-#| msgid "The time of the day when the relays are toggled on each day."
 msgid "The time of the day when the relays are toggled on each night."
-msgstr "A hora do dia em que os relés são ligados a cada dia."
+msgstr "A hora do dia em que os relés serão ligados a cada noite."
 
 #: views/modals/area.html:368 views/modals/area.html:663
-#, fuzzy
-#| msgid "The time of the day when the relays are toggled off each day."
 msgid "The time of the day when the relays are toggled off each night."
-msgstr "A hora do dia em que os relés são desligados a cada dia."
+msgstr "A hora do dia em que os relés serão desligados a cada noite."
 
 #: views/modals/area.html:380
-#, fuzzy
-#| msgid ""
-#| "The duration when the relays should be on. If this is shorter then all "
-#| "day, you will get a timer functionality. Enter '0' to have a full day."
 msgid ""
 "The duration when the players should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
-"A duração de tempo em que os relés devem estar ligados. Caso seja menor que "
-"a duração do dia, funciona como um timer. Digite 0 para acionar o dia todo."
+"A duração de tempo em que os players devem estar ligados. Caso seja menor "
+"que a duração do dia, funciona como um timer. Digite 0 para acionar a noite "
+"toda."
 
 #: views/modals/area.html:392
-#, fuzzy
-#| msgid ""
-#| "The duration when the relays should be on. If this is shorter then all "
-#| "day, you will get a timer functionality. Enter '0' to have a full day."
 msgid ""
 "The duration when the players should be stay off when switched off. Enter "
 "'0' to disable."
 msgstr ""
-"A duração de tempo em que os relés devem estar ligados. Caso seja menor que "
-"a duração do dia, funciona como um timer. Digite 0 para acionar o dia todo."
+"O tempo mínimo que os players, ao serem desligados, devem permanecer neste "
+"estado. Insira 0 para desativar."
 
 #: views/modals/area.html:435
-#, fuzzy
-#| msgid ""
-#| "Select the mode of this area. This will change the timing and duration of "
-#| "the relays."
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the actions."
 msgstr ""
-"Selecione o modo desta área. Esta opção altera o tempo e a duração dos relés."
+"Selecione o modo desta área. Esta opção altera o tempo e a duração das ações."
 
 #: views/modals/area.html:444
 msgid "Select sensors to use for sensor based mode."
-msgstr ""
+msgstr "Selecione os sensores a serem utilizados no modo sensor."
 
 #: views/modals/area.html:447
-#, fuzzy
-#| msgid "Select at least 1 audio file."
 msgid "Select at least 1 sensor."
-msgstr "Selecione no mínimo um arquivo de áudio."
+msgstr "Selecione no mínimo um sensor."
 
 #: views/modals/area.html:453 views/modals/playlist.html:29
 #: views/playlists.html:27 views/playlists.html:42
@@ -933,10 +898,8 @@ msgid "Volume"
 msgstr "Volume"
 
 #: views/modals/area.html:456
-#, fuzzy
-#| msgid "Enter a valid time of the day."
 msgid "Enter the volume of the water tank."
-msgstr "Digite uma hora válida do dia."
+msgstr "Insira o volume do tanque d'água."
 
 #: views/modals/area.html:459 views/modals/area.html:471
 #: views/modals/area.html:483 views/modals/area.html:623
@@ -954,10 +917,8 @@ msgid "Height"
 msgstr "Altura"
 
 #: views/modals/area.html:468
-#, fuzzy
-#| msgid "Enter the height"
 msgid "Enter the height of the water tank."
-msgstr "Digite altura"
+msgstr "Insira altura do tanque d'água."
 
 #: views/modals/area.html:477 views/modals/sensor.html:159
 msgid "Offset"
@@ -965,7 +926,7 @@ msgstr "Compensação"
 
 #: views/modals/area.html:480
 msgid "Enter the offset between sensor and water height."
-msgstr ""
+msgstr "Insira o valor de compensação entre o sensor e a altura da água."
 
 #: views/modals/area.html:489
 msgid "Day/night difference"
@@ -973,7 +934,7 @@ msgstr "Diferença dia/noite"
 
 #: views/modals/area.html:492
 msgid "Amount to change between day and night."
-msgstr ""
+msgstr "Diferença entre dia / noite."
 
 #: views/modals/area.html:498
 msgid "Day/night source"
@@ -985,7 +946,7 @@ msgstr "Luzes"
 
 #: views/modals/area.html:504
 msgid "Select source when it is 'day'."
-msgstr ""
+msgstr "Selecione fonte de informações para determinar quando é 'dia'."
 
 #: views/modals/area.html:512
 msgid "High alarm"
@@ -996,33 +957,25 @@ msgid "Low alarm"
 msgstr "Alarme quando baixo"
 
 #: views/modals/area.html:546 views/modals/area.html:675
-#, fuzzy
-#| msgid ""
-#| "The duration when the relays should be on. If this is shorter then all "
-#| "day, you will get a timer functionality. Enter '0' to have a full day."
 msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
 "A duração de tempo em que os relés devem estar ligados. Caso seja menor que "
-"a duração do dia, funciona como um timer. Digite 0 para acionar o dia todo."
+"a duração do dia, funciona como um timer. Digite 0 para acionar a noite toda."
 
 #: views/modals/area.html:567 views/modals/area.html:696
 msgid "Power on time"
 msgstr "Hora de ligar"
 
 #: views/modals/area.html:570 views/modals/area.html:699
-#, fuzzy
-#| msgid "The current state of the relay."
 msgid "The duration in seconds to toggle on the relay."
-msgstr "Estado do relé atual."
+msgstr "Duração em segundos para ligar o relé."
 
 #: views/modals/area.html:573 views/modals/area.html:585
 #: views/modals/area.html:702 views/modals/area.html:714
-#, fuzzy
-#| msgid "Duration in seconds"
 msgid "Enter a valid duration in seconds."
-msgstr "Duração em segundos"
+msgstr "Insira a duração em segundos."
 
 #: views/modals/area.html:579 views/modals/area.html:708
 msgid "Settle time"
@@ -1030,7 +983,7 @@ msgstr "Definir tempo limite"
 
 #: views/modals/area.html:582 views/modals/area.html:711
 msgid "The duration in seconds between two actions."
-msgstr ""
+msgstr "A duração em segundos entre duas ações."
 
 #: views/modals/area.html:591 views/modals/area.html:720
 msgid "Light status"
@@ -1051,10 +1004,8 @@ msgid "Off"
 msgstr "Desl"
 
 #: views/modals/area.html:598
-#, fuzzy
-#| msgid "Select archive light state"
 msgid "Select the lights status."
-msgstr "Selecione o estado da luz de arquivo"
+msgstr "Selecione o estado da luz."
 
 #: views/modals/area.html:604 views/modals/area.html:733
 msgid "Door status"
@@ -1070,28 +1021,20 @@ msgid "Closed"
 msgstr "Fechada"
 
 #: views/modals/area.html:611 views/modals/area.html:740
-#, fuzzy
-#| msgid "Select archive door state"
 msgid "Select the door status."
-msgstr "Selecione o estado da porta de arquivo"
+msgstr "Selecione o estado da porta."
 
 #: views/modals/area.html:617 views/modals/area.html:747
-#, fuzzy
-#| msgid "Threshold"
 msgid "Alarm threshold"
-msgstr "Limiar"
+msgstr "Limiar do alarme"
 
 #: views/modals/area.html:620 views/modals/area.html:750
-#, fuzzy
-#| msgid "Enter the amount of hours to shift"
 msgid "Enter the amount of alarms before action take place."
-msgstr "Digite a quantidade de horas para alterar"
+msgstr "Insira a quantidade de alarmes necessários para iniciar a ação."
 
 #: views/modals/area.html:727
-#, fuzzy
-#| msgid "Select archive light state"
 msgid "Select the light status."
-msgstr "Selecione o estado da luz de arquivo"
+msgstr "Selecione o estado da luz."
 
 #: views/modals/area.html:777
 msgid "Dimmer on duration"
@@ -1102,16 +1045,12 @@ msgid "Dimmer of duration"
 msgstr "Duração do Dimmer"
 
 #: views/modals/area.html:791
-#, fuzzy
-#| msgid ""
-#| "Select the duration for the dimmer to go to on or off in minutes. Max "
-#| "duration is 180 minutes."
 msgid ""
 "Select the delay and duration for the dimmer to go to on or off in minutes. "
 "Max duration is 180 minutes."
 msgstr ""
-"Selecione a quantidade de minutos para ligar e desligar o dimmer. Duração "
-"máxima de 180 minutos."
+"Selecione o atraso e a quantidade de minutos para ligar e desligar o dimmer. "
+"Duração máxima de 180 minutos."
 
 #: views/modals/area.html:798
 msgid "Relay delay on"
@@ -1150,15 +1089,13 @@ msgstr "Endereço"
 
 #: views/modals/button.html:35 views/modals/relay.html:35
 #: views/modals/sensor.html:50 views/modals/webcam.html:39
-#, fuzzy
-#| msgid "Enter an address"
 msgid "Enter an address."
-msgstr "Insira o endereço"
+msgstr "Insira o endereço."
 
 #: views/modals/button.html:38 views/modals/relay.html:38
 #: views/modals/sensor.html:53 views/modals/webcam.html:42
 msgid "The address cannot be empty."
-msgstr ""
+msgstr "O endereço não pode ficar em branco."
 
 #: views/modals/button.html:59
 msgid "The current state of the button."
@@ -1183,7 +1120,7 @@ msgstr "Insira um número entre %s e %s."
 
 #: views/modals/enclosure.html:11
 msgid "Enclosure settings"
-msgstr "Configurações do puxadinho"
+msgstr "Configurações do anexo"
 
 #: views/modals/enclosure.html:29
 msgid "Image"
@@ -1203,7 +1140,7 @@ msgstr "Descrição"
 
 #: views/modals/enclosure.html:51
 msgid "Enter some information about this enclosure."
-msgstr "Insira informações sobre este puxadinho."
+msgstr "Insira informações sobre este anexo."
 
 #: views/modals/enclosure.html:58
 msgid "Doors"
@@ -1211,14 +1148,14 @@ msgstr "Portas"
 
 #: views/modals/enclosure.html:64
 msgid "Select the doors that are used with this enclosure."
-msgstr "Selecione as portas deste puxadinho."
+msgstr "Selecione as portas deste anexo."
 
 #: views/modals/enclosure.html:76
 msgid ""
 "Select the webcams that are used with this enclosure. You can use html "
 "colors and fonts and images."
 msgstr ""
-"Selecione as webcams para usar com este puxadinho. Você pode utilizar cores "
+"Selecione as webcams para usar com este anexo. Você pode utilizar cores "
 "html, fontes e imagens."
 
 #: views/modals/event.html:10 views/modals/event.html:25
@@ -1397,52 +1334,40 @@ msgid "Sensor settings"
 msgstr "Configurações do sensor"
 
 #: views/modals/sensor.html:22
-#, fuzzy
-#| msgid "Select the hardware type for this relay."
 msgid "Select the hardware type for this sensor."
-msgstr "Selecione o hardware usado para este botão."
+msgstr "Selecione o hardware usado para este sensor."
 
 #: views/modals/sensor.html:37
-#, fuzzy
-#| msgid "Select the hardware type for this relay."
 msgid "Select the measurement type for this sensor."
-msgstr "Selecione o hardware usado para este botão."
+msgstr "Selecione o tipo de medida utilizado por este sensor."
 
 #: views/modals/sensor.html:40
-#, fuzzy
-#| msgid "Please select a hardware type."
 msgid "Please select a measurement type."
-msgstr "Selecione um tipo de hardware."
+msgstr "Selecione um tipo de medida."
 
 #: views/modals/sensor.html:82
 msgid "Alarm min"
 msgstr "Alarme mín"
 
 #: views/modals/sensor.html:85
-#, fuzzy
-#| msgid "Enter the minimum amount of hours"
 msgid "Enter the minimal value for the alarm."
-msgstr "Digite a quantidade mínima de horas"
+msgstr "Insira o valor mínimo para o alarme."
 
 #: views/modals/sensor.html:94
 msgid "Alarm max"
 msgstr "Alarme máx"
 
 #: views/modals/sensor.html:97
-#, fuzzy
-#| msgid "Enter the maximum amount of hours"
 msgid "Enter the maximal value for the alarm."
-msgstr "Digite a quantidade máxima de horas"
+msgstr "Insira o valor máximo para o alarme."
 
 #: views/modals/sensor.html:106
 msgid "Limit min"
 msgstr "Limite mín"
 
 #: views/modals/sensor.html:109
-#, fuzzy
-#| msgid "Please enter a minimal value of %s."
 msgid "Enter the minimal value that is valid."
-msgstr "Insira um número mínimo de %s."
+msgstr "Insira um número mínimo válido."
 
 #: views/modals/sensor.html:118
 msgid "Limit max"
@@ -1450,7 +1375,7 @@ msgstr "Limite máx"
 
 #: views/modals/sensor.html:121
 msgid "Enter the maximal value that is valid."
-msgstr ""
+msgstr "Insira o valor máximo a ser considerado como válido."
 
 #: views/modals/sensor.html:130
 msgid "Max diff"
@@ -1459,60 +1384,48 @@ msgstr "Diferença máxima"
 #: views/modals/sensor.html:133
 msgid "Enter the max difference between two measurements that is valid."
 msgstr ""
+"Insira a diferença máxima entre duas medições a ser considerada como válida."
 
 #: views/modals/sensor.html:143 views/sensors.html:41
 msgid "Excl. avg"
 msgstr "Excl. média"
 
 #: views/modals/sensor.html:148
-#, fuzzy
-#| msgid "Excluded from average calculation"
 msgid "Exclude this sensors from average calculations."
-msgstr "Excluído do cálculo da média"
+msgstr "Excluir estes sensores do cálculo da média dos valores."
 
 #: views/modals/sensor.html:162
-#, fuzzy
-#| msgid "Enter a name for this enclosure."
 msgid "Enter offset for this sensor."
-msgstr "Insira o nome para este puxadinho."
+msgstr "Insira o valor de compensação para este sensor."
 
 #: views/modals/sensor.html:165 views/modals/sensor.html:177
 #: views/modals/sensor.html:189
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a numeric value."
-msgstr "Digite um nome para esta área."
+msgstr "Insira um valor numérico."
 
 #: views/modals/sensor.html:171
 msgid "Minimal moist value"
 msgstr "Valor mínimo umidade"
 
 #: views/modals/sensor.html:174
-#, fuzzy
-#| msgid "Minimal moist value"
 msgid "Enter this minimal moist value."
-msgstr "Valor mínimo umidade"
+msgstr "Insira o valor mínimo para a umidade."
 
 #: views/modals/sensor.html:183
 msgid "Maximum moist value"
 msgstr "Valor máximo umidade"
 
 #: views/modals/sensor.html:186
-#, fuzzy
-#| msgid "Minimal moist value"
 msgid "Enter the maximal moisture value."
-msgstr "Valor mínimo umidade"
+msgstr "Insira o valor máximo para a umidade."
 
 #: views/modals/sensor.html:195
 msgid "Compensation sensors"
 msgstr "Sensores de compensação"
 
 #: views/modals/sensor.html:201
-#, fuzzy
-#| msgid "Select the sensors to show at the marker place on the webcam."
 msgid "Select the sensors for the compensation calculation."
-msgstr ""
-"Selecione os sensores a serem mostrados no local do marcador na webcam."
+msgstr "Selecione os sensores a serem utilizados no cálculo da compensação."
 
 #: views/modals/service.html:11
 msgid "Notification service settings"
@@ -1630,24 +1543,20 @@ msgid "Webcam settings"
 msgstr "Configurações da webcam"
 
 #: views/modals/webcam.html:26
-#, fuzzy
-#| msgid "Select the hardware type for this relay."
 msgid "Select the hardware type for this webcam."
-msgstr "Selecione o hardware usado para este botão."
+msgstr "Selecione o hardware usado para esta webcam."
 
 #: views/modals/webcam.html:60
 msgid "Resolution (width x height)"
 msgstr "Resolução (Larg. x Alt.)"
 
 #: views/modals/webcam.html:67
-#, fuzzy
-#| msgid "Enter the amount"
 msgid "Enter the resolution."
-msgstr "Insira a quantidade"
+msgstr "Insira a resolução."
 
 #: views/modals/webcam.html:70
 msgid "The resolution cannot be empty."
-msgstr ""
+msgstr "A resolução não pode ficar em branco."
 
 #: views/modals/webcam.html:76
 msgid "Rotation"
@@ -1678,10 +1587,8 @@ msgid "Flip Vertical"
 msgstr "Virar na vertical"
 
 #: views/modals/webcam.html:88
-#, fuzzy
-#| msgid "Select rotation"
 msgid "Select a rotation."
-msgstr "Selecionar rotação"
+msgstr "Selecionar a rotação."
 
 #: views/modals/webcam.html:94
 msgid "White balance"
@@ -1732,10 +1639,8 @@ msgid "greyworld"
 msgstr "Opção desabilitada"
 
 #: views/modals/webcam.html:111
-#, fuzzy
-#| msgid "Select white balance"
 msgid "Select a white balance."
-msgstr "Selecionar balanço de branco"
+msgstr "Selecionar balanço de branco."
 
 #: views/modals/webcam.html:117
 msgid "Archiving"
@@ -1783,7 +1688,7 @@ msgstr "1 dia"
 
 #: views/modals/webcam.html:134
 msgid "Select the duration between archived images."
-msgstr ""
+msgstr "Selecione a duração entre as imagens arquivadas."
 
 #: views/modals/webcam.html:140
 msgid "Archive light state"
@@ -1799,7 +1704,7 @@ msgstr "Quando desligado"
 
 #: views/modals/webcam.html:149
 msgid "Light status for taking an archive image."
-msgstr ""
+msgstr "Estado das luzes para salvar uma imagem em arquivo."
 
 #: views/modals/webcam.html:155
 msgid "Archive door state"
@@ -1807,7 +1712,7 @@ msgstr "Salvar estado da porta"
 
 #: views/modals/webcam.html:164
 msgid "Door status for taking an archive image."
-msgstr ""
+msgstr "Estado das portas para salvar uma imagem em arquivo."
 
 #: views/modals/webcam.html:170
 msgid "Flash"
@@ -1815,7 +1720,7 @@ msgstr "Flash"
 
 #: views/modals/webcam.html:176
 msgid "Select a relay that will act as a flasher."
-msgstr ""
+msgstr "Selecione o relé que atuará como flash."
 
 #: views/modals/webcam.html:184
 msgid "Show motion boxes"
@@ -1830,30 +1735,24 @@ msgid "Blue"
 msgstr "Azul"
 
 #: views/modals/webcam.html:194
-#, fuzzy
-#| msgid "Enable or disable motion boxes for Motion archiving."
 msgid "Show motion boxes on the archived images."
-msgstr "Ative ou desative caixas de movimento para arquivamento de movimento."
+msgstr "Ative ou desative a exibição de caixas de movimento nas imagens salvas."
 
 #: views/modals/webcam.html:200
 msgid "Motion delta threshold"
 msgstr "Delta do limiar de movimento"
 
 #: views/modals/webcam.html:203
-#, fuzzy
-#| msgid "Enter the amount"
 msgid "Enter the motion threshold."
-msgstr "Insira a quantidade"
+msgstr "Insira o limiar de movimento."
 
 #: views/modals/webcam.html:209
 msgid "Motion minimum area"
 msgstr "Área mínima de movimento"
 
 #: views/modals/webcam.html:212
-#, fuzzy
-#| msgid "Enter an address"
 msgid "Enter an area size."
-msgstr "Insira o endereço"
+msgstr "Insira o tamanho da área."
 
 #: views/modals/webcam.html:218
 msgid "Motion comparison frame"
@@ -1869,7 +1768,7 @@ msgstr "Último quadro arquivado"
 
 #: views/modals/webcam.html:226
 msgid "Which frame to use for motion detection."
-msgstr ""
+msgstr "Qual quadro deve ser utilizado na detecção de movimento."
 
 #: views/modals/webcam.html:234
 msgid "Preview"
@@ -1951,31 +1850,26 @@ msgstr ""
 "conectados."
 
 #: views/settings.html:40
-#, fuzzy
-#| msgid "Port number"
 msgid "IP number"
-msgstr "Número da porta"
+msgstr "Número da porta IP"
 
 #: views/settings.html:44
 msgid "Enter the IP to listen for connections. Default 0.0.0.0"
-msgstr ""
+msgstr "Insira o IP no qual o software está escutando conexões. Padrão: 0.0.0.0"
 
 #: views/settings.html:47
-#, fuzzy
-#| msgid "Please enter a valid host name or IP"
 msgid "Please enter a valid IP address"
-msgstr "Por favor, digite um nome de host ou IP válido"
+msgstr "Por favor, digite um endereço IP válido"
 
 #: views/settings.html:52
 msgid "Port number"
 msgstr "Número da porta"
 
 #: views/settings.html:56
-#, fuzzy
-#| msgid ""
-#| "Holds the port number on which the software is listening for connections."
 msgid "Enter the port number to listen for connections. Default 8090"
-msgstr "Contém o número da porta na qual o software está escutando conexões."
+msgstr ""
+"Insira o número da porta na qual o software está escutando conexões. Padrão: "
+"8090"
 
 #: views/settings.html:64
 msgid "Authentication mode"
@@ -1990,10 +1884,8 @@ msgid "Only for changes"
 msgstr "Apenas alterações"
 
 #: views/settings.html:69
-#, fuzzy
-#| msgid "Authentication"
 msgid "No authentication"
-msgstr "Autenticação"
+msgstr "Sem autenticação"
 
 #: views/settings.html:72
 msgid "Always authenticate or only when changes are being made."
@@ -2004,38 +1896,32 @@ msgid "User name"
 msgstr "Nome de usuário"
 
 #: views/settings.html:81
-#, fuzzy
-#| msgid "Enter a name for this button."
 msgid "Enter the user name for authentication."
-msgstr "Insira um nome para este botão."
+msgstr "Insira o nome de usuário para autenticação."
 
 #: views/settings.html:84
 msgid "The user name cannot be empty."
-msgstr ""
+msgstr "O nome de usuário não pode estar em branco."
 
 #: views/settings.html:89
 msgid "New password"
 msgstr "Nova senha"
 
 #: views/settings.html:93
-#, fuzzy
-#| msgid "Enter a name for this button."
 msgid "Enter a password for authentication."
-msgstr "Insira um nome para este botão."
+msgstr "Insira a senha para autenticação."
 
 #: views/settings.html:96 views/settings.html:108
 msgid "The password cannot be empty."
-msgstr ""
+msgstr "A senha não pode estar em branco."
 
 #: views/settings.html:101
 msgid "Confirm new password"
 msgstr "Confirme a nova senha"
 
 #: views/settings.html:105
-#, fuzzy
-#| msgid "Enter the SMTP server password"
 msgid "Enter the new password again."
-msgstr "Insira a senha do servidor SMTP"
+msgstr "Insira a nova senha novamente."
 
 #: views/settings.html:113
 msgid "Excluded ids"
@@ -2043,7 +1929,7 @@ msgstr "IDs excluídos"
 
 #: views/settings.html:118
 msgid "IDs that are excluded."
-msgstr ""
+msgstr "IDs a serem excluídos."
 
 #: views/settings.html:128
 msgid "Locale"
@@ -2058,6 +1944,8 @@ msgid ""
 "Select the interface language. This will also change number and currency "
 "formatting."
 msgstr ""
+"Selecione o idioma da interface. Esta configuração também pode alterar a "
+"formatação dos números e a moeda utilizada."
 
 #: views/settings.html:153
 msgid "Temperature type"
@@ -2076,10 +1964,8 @@ msgid "Kelvin"
 msgstr "Kelvin"
 
 #: views/settings.html:161
-#, fuzzy
-#| msgid "Holds the temperature offset value."
 msgid "Select the temperature indicator. Only affects the current values."
-msgstr "Contém o valor de compensação de temperatura."
+msgstr "Selecione o indicador de temperatura. Afeta apenas os valores atuais."
 
 #: views/settings.html:166
 msgid "Distance type"
@@ -2095,7 +1981,7 @@ msgstr "Polegadas"
 
 #: views/settings.html:173
 msgid "Select the distance indicator. Only affects the current values."
-msgstr ""
+msgstr "Selecione o indicador de distância. Afeta apenas os valores atuais."
 
 #: views/settings.html:178
 msgid "Liquid volume type"
@@ -2115,7 +2001,7 @@ msgstr "Galões US"
 
 #: views/settings.html:186
 msgid "Select the water volume indicator. Only affects the current values."
-msgstr ""
+msgstr "Selecione o indicador de volume d'água. Afeta apenas os valores atuais."
 
 #: views/settings.html:191
 msgid "Wind speed type"
@@ -2136,16 +2022,15 @@ msgstr "Beaufort"
 #: views/settings.html:199
 msgid "Select the wind speed indicator. Only affects the current values."
 msgstr ""
+"Selecione o indicador de velocidade do vento. Afeta apenas os valores atuais."
 
 #: views/settings.html:204
 msgid "Power price"
 msgstr "Preço da energia"
 
 #: views/settings.html:208
-#, fuzzy
-#| msgid "Enter the relay address."
 msgid "Enter the price per kWh."
-msgstr "Insira o endereço do relé."
+msgstr "Insira o preço do kWh."
 
 #: views/settings.html:216
 msgid "Water price"
@@ -2153,7 +2038,7 @@ msgstr "Preço da água"
 
 #: views/settings.html:220
 msgid "Enter the price per L/Gallon."
-msgstr ""
+msgstr "Insira o preço do litro de água."
 
 #: views/settings.html:235
 msgid "GUI"
@@ -2164,14 +2049,12 @@ msgid "Title"
 msgstr "Título"
 
 #: views/settings.html:251
-#, fuzzy
-#| msgid "Enter a name"
 msgid "Enter a custom title."
-msgstr "Insira o nome"
+msgstr "Insira o nome personalizado."
 
 #: views/settings.html:254
 msgid "The title cannot be empty."
-msgstr ""
+msgstr "O título não pode estar em branco."
 
 #: views/settings.html:259
 msgid "Profile image"
@@ -2179,46 +2062,42 @@ msgstr "Imagem de perfil"
 
 #: views/settings.html:267
 msgid "Update a custom image used in the menu."
-msgstr ""
+msgstr "Atualizar imagem personalizada para ser utilizada no menu."
 
 #: views/settings.html:272
-#, fuzzy
-#| msgid "Graph smoothing value"
 msgid "Graph smoothing"
-msgstr "Valor de suavização do gráfico"
+msgstr "Suavização do gráfico"
 
 #: views/settings.html:276
 msgid ""
 "Enter the amount of data points to average. 0 will disable this feature."
 msgstr ""
+"Insira a quantidade de pontos de dados utilizados para o cálculo da média. "
+"Insira 0 para desabilitar esta função."
 
 #: views/settings.html:284
 msgid "Auto dark mode"
-msgstr ""
+msgstr "Modo noturno automático"
 
 #: views/settings.html:292
 msgid "Toggle dark mode when the night starts."
-msgstr ""
+msgstr "Acionar modo noturno automaticamente ao iniciar a noite."
 
 #: views/settings.html:298
 msgid "Show min and max values in gauge graphs"
 msgstr "Mostrar valores mínimo e máximo em gráficos de medidor"
 
 #: views/settings.html:305
-#, fuzzy
-#| msgid "Show min and max values in gauge graphs"
 msgid "Show the minimal and maximum value on the gauges."
-msgstr "Mostrar valores mínimo e máximo em gráficos de medidor"
+msgstr "Mostrar valores mínimo e máximo nos gráficos dos medidores."
 
 #: views/settings.html:310
 msgid "Hide enclosures on dashboard"
-msgstr "Ocultar Puxadinhos no painel de controle"
+msgstr "Ocultar Anexos no Painel de controle"
 
 #: views/settings.html:317
-#, fuzzy
-#| msgid "Hide enclosures on dashboard"
 msgid "Hide the enclosure data on the dashboard."
-msgstr "Ocultar Puxadinhos no painel de controle"
+msgstr "Ocultar dados dos Anexos no painel de controle."
 
 #: views/settings.html:322
 msgid "All gauges on a single page"
@@ -2227,6 +2106,7 @@ msgstr "Todos os medidores em uma página"
 #: views/settings.html:329
 msgid "Add extra menu item for all sensors on a single page."
 msgstr ""
+"Adicionar itens extras no menu para todos os sensores em uma única página."
 
 #: views/settings.html:339
 msgid "Cloud"
@@ -2238,7 +2118,7 @@ msgstr "Nome de usuário do Meross"
 
 #: views/settings.html:355
 msgid "Enter the username to login into Meross cloud."
-msgstr ""
+msgstr "Insira o nome de usuário do Meross cloud."
 
 #: views/settings.html:360
 msgid "Meross password"
@@ -2246,7 +2126,7 @@ msgstr "Senha da Meross Cloud"
 
 #: views/settings.html:364
 msgid "Enter the password to login into Meross cloud."
-msgstr ""
+msgstr "Insira a senha do Meross cloud."
 
 #: views/settings.html:377
 msgid "Save"
@@ -2388,7 +2268,7 @@ msgstr "Botão Excluir"
 
 #: views/enclosures.html:139
 msgid "Delete enclosure"
-msgstr "Excluir puxadinho"
+msgstr "Excluir anexo"
 
 #: views/calendar.html:53
 msgid "Delete event {title}"
@@ -2428,7 +2308,7 @@ msgstr "Botão Editar"
 
 #: views/enclosures.html:136
 msgid "Edit enclosure"
-msgstr "Editar puxadinho"
+msgstr "Editar anexo"
 
 #: views/notifications.html:137
 msgid "Edit message"
@@ -2684,10 +2564,8 @@ msgid "Scan for new sensors"
 msgstr "Procurar novos sensores"
 
 #: views/modals/area.html:499
-#, fuzzy
-#| msgid "Day/night source"
 msgid "Select a day/night source"
-msgstr "Fonte dia / noite"
+msgstr "Selecione a fonte de informações para determinar dia / noite"
 
 #: views/modals/area.html:241 views/modals/area.html:426
 #: views/modals/area.html:61
@@ -2704,7 +2582,7 @@ msgstr "Selecione um tipo de área"
 
 #: views/modals/area.html:19
 msgid "Select an enclosure"
-msgstr "Selecione um puxadinho"
+msgstr "Selecione um anexo"
 
 #: views/modals/webcam.html:157
 msgid "Select archive door state"
