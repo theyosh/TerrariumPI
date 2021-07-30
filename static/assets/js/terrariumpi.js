@@ -1625,16 +1625,18 @@ function online_status(online) {
 
   if (online) {
     clearTimeout(window.terrariumPI.online_counter);
-    indicator.removeClass('text-danger text-secondary text-success').addClass('text-success');
-    Tinycon.reset();
-
     window.terrariumPI.online_counter = setTimeout(function(){
       online_status(false);
     }, 60 * 1000);
-
+    if (!old_status) {
+      indicator.removeClass('text-danger text-secondary text-success').addClass('text-success');
+      Tinycon.reset();
+    }
   } else {
-    indicator.removeClass('text-danger text-secondary text-success').addClass('text-danger');
-    Tinycon.setBubble('!');
+    if (old_status) {
+      indicator.removeClass('text-danger text-secondary text-success').addClass('text-danger');
+      Tinycon.setBubble('!');
+    }
   }
 
   if (old_status !== online) {
@@ -1649,6 +1651,9 @@ function online_status(online) {
     } else {
       toastr["error"]("We are disconnected", "Offline");
     }
+
+    // Clean up
+    status_list.find('li.dropdown-item').slice(3).remove();
   }
 }
 
@@ -2003,6 +2008,7 @@ function websocket_init(reconnect) {
     }
   };
   window.terrariumPI.websocket.onclose = function(evt) {
+    online_status(false);
     clearInterval(window.terrariumPI.websocket_timer);
     window.terrariumPI.websocket_timer = setInterval(function() {
       websocket_init(true);
