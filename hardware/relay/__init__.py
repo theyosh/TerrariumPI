@@ -98,7 +98,7 @@ class terrariumRelay(object):
 
     self.__relay_cache = terrariumCache()
 
-    self.__timer = None
+    self._timer = None
 
     self.id = id
     self.name = name
@@ -241,25 +241,26 @@ class terrariumRelay(object):
     self._device['value'] = new_data
     return self._device['value']
 
+
   def on(self, value = 100, delay = 0.0):
+    if self._timer is not None and self._timer.is_alive():
+      return False
+
+    changed = self.state != value
     if delay > 0.0:
-      self.__timer = threading.Timer(delay, lambda: self.set_state(value)).start()
+      self._timer = threading.Timer(delay, lambda: self.set_state(value))
+      self._timer.start()
     else:
-      self.set_state(value)
+      changed = self.set_state(value)
 
     # Not great, but the set_state has a callback for updates
-    return True
+    return changed
 
   def off(self, value = 0, delay = 0.0):
-    if delay > 0.0:
-      self.__timer = threading.Timer(delay, lambda: self.set_state(value)).start()
-    else:
-      self.set_state(value)
-
-    # Not great, but the set_state has a callback for updates
-    return True
+    return self.on(value, delay)
 
   def is_on(self):
+    # TODO: Check if timer is set.... that should/could change the outcome!!
     return self.state == self.ON
 
   def is_off(self):
@@ -274,8 +275,9 @@ class terrariumRelay(object):
     return 'dimmer' if self.is_dimmer else 'relay'
 
   def stop(self):
-    if self.__timer is not None:
-      self.__timer.cancel()
+    if self._timer is not None:
+      self._timer.cancel()
+      self._timer.join()
 
   # Auto discovery of running/connected power switches
   @staticmethod
@@ -299,7 +301,6 @@ class terrariumRelayDimmer(terrariumRelay):
     self.__running = threading.Event()
     self.__thread = None
     super().__init__(id, _, address, name, prev_state, callback)
-
 
   def __run(self, to, duration):
     self.running = True
@@ -336,38 +337,50 @@ class terrariumRelayDimmer(terrariumRelay):
         self.on(self.ON,0)
 
   def on(self, value = 100, duration = 0.0, delay = 0.0):
+    if self._timer is not None and self._timer.is_alive():
+      return False
+
+    if self.__thread is not None and self.__thread.is_alive():
+      return False
+
+    changed = self.state != value
     if delay > 0.0:
-      self.__timer = threading.Timer(delay, lambda: self.on(value,duration,0)).start()
+      self._timer = threading.Timer(delay, lambda: self.on(value, duration, 0))
+      self._timer.start()
     else:
 
-      if self.running:
-        # For now, we cannot change the value when a dim action is going on... (Maybe we change this later)
-        return False
+      # if self.running or self._timer is not None:
+      #   # For now, we cannot change the value when a dim action is going on... (Maybe we change this later)
+      #   return False
 
       value = round(value)
       value = max(self.OFF,min(self.ON,value))
 
-      if value == self.state:
-        return True
+      # if value == self.state:
+      #   return True
 
       if 0 == duration:
-        self.set_state(value)
-        return True
+        return self.set_state(value)
+        #return True
 
       self.__thread = threading.Thread(target=self.__run,args=(value, duration))
       self.__thread.start()
 
-    return True
+    return changed
 
-  def off(self, value = 0, duration = 0):
-    return self.on(value,duration)
+  def off(self, value = 0, duration = 0.0, delay = 0.0):
+    return self.on(value, duration, delay)
 
   def is_on(self):
-    return self.state > self.OFF
+    return self.state == self.ON
+
+  def is_off(self):
+    return self.state == self.OFF
 
   def stop(self):
     self.running = False
     self.__running.set()
+
     if self.__thread is not None:
       self.__thread.join()
 

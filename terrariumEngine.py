@@ -738,9 +738,9 @@ class terrariumEngine(object):
 
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
-    if hasattr(self,'enclosures'):
-#      print('Update enclosures due to changing relays...')
-      self._update_enclosures()
+    # if hasattr(self,'enclosures'):
+    #   # print('Update enclosures due to changing relays...')
+    #   self._update_enclosures(True)
 
   # -= NEW =-
   def __load_existing_buttons(self):
@@ -922,14 +922,14 @@ class terrariumEngine(object):
         logger.info(f'Loaded {enclosure} in {time.time()-start:.2f} seconds.')
 
   # -= NEW =-
-  def _update_enclosures(self, bla = False):
+  def _update_enclosures(self, read_only = False):
     with orm.db_session():
       for enclosure in Enclosure.select():
         if str(enclosure.id) not in self.enclosures.keys() or str(enclosure.id) in self.settings['exclude_ids']:
           continue
 
         start = time.time()
-        area_states = self.enclosures[str(enclosure.id)].update()
+        area_states = self.enclosures[str(enclosure.id)].update(read_only)
         for area in enclosure.areas:
           area_state = area_states.get(str(area.id),None)
           if area_state:
@@ -961,16 +961,7 @@ class terrariumEngine(object):
 
           enclosure_data['webcams'].append(webcam_data)
 
-        if bla:
-          print('Area states')
-          print(area_states)
-
-          print('Send websocket message with data:')
-          print(enclosure_data)
-
         self.webserver.websocket_message('enclosure' , enclosure_data)
-        if bla:
-          print('Enclosure websocket message is send')
         measurement_time = time.time() - start
 
         logger.info(f'Updated {enclosure} in {measurement_time:.2f} seconds.')

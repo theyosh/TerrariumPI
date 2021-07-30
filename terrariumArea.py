@@ -321,7 +321,7 @@ class terrariumArea(object):
     # For now, by default is it always day...
     return True
 
-  def update(self):
+  def update(self, read_only = False):
     if 'disabled' == self.mode:
       return self.state
 
@@ -350,6 +350,10 @@ class terrariumArea(object):
 
     for period in self.PERIODS:
       if period not in self.setup:
+        continue
+
+      if read_only:
+        self.state[period]['powered'] = self.relays_state(period)
         continue
 
       # Set the lights state. Default True
@@ -608,41 +612,36 @@ class terrariumAreaLights(terrariumArea):
     if relay.id not in self.enclosure.relays:
       return
 
-    tweaks = {
-      'duration' : 0,
-      'delay'    : 0
-    }
+    duration = 0
+    delay = 0
+
     try:
       tweaks = self.setup[part]['tweaks'][f'{relay.id}']['on' if action else 'off']
+      duration = tweaks['duration']
+      delay = tweaks['delay']
     except Exception as ex:
       print(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}')
       print(ex)
 
-    # If the relay is already powered and should be power up, ignore the delay time. Force to zero delay
-    # Same for going out. When the lights should be off, and they are not at full power, no delay.
-
-    # if self.name == 'Day light':
-    #   print(f'Action: {action}, relay state: {relay.state}, part: {part}, powered: {self.state[part]["powered"]}, actually powered: {self.relays_state(part)}')
-    #   print(f'Change delay to ZERO: {(relay.ON if action else relay.OFF) != relay.state and self.state[part]["powered"] == action}')
-
     if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
-      tweaks['delay'] = 0
+      delay = 0
 
     if relay.is_dimmer:
-      step_size = tweaks['duration'] / (relay.ON - relay.OFF)
-      tweaks['duration'] = step_size * abs((relay.ON if action else relay.OFF) - relay.state)
-      action_ok = self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, duration=tweaks["duration"], delay=tweaks["delay"])
+      step_size = duration / (relay.ON - relay.OFF)
+      duration = step_size * abs((relay.ON if action else relay.OFF) - relay.state)
+      old_state = relay.state
+      action_ok = self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, duration=duration, delay=delay)
 
       if action_ok:
         if action:
-          logger.info(f'Start the dimmer {relay.name} from {relay.state}% to {relay.ON}% in {tweaks["duration"]} seconds with a delay of {tweaks["delay"]/60} minutes')
+          logger.info(f'Start the dimmer {relay.name} from {old_state}% to {relay.ON}% in {duration:.2f} seconds with a delay of {delay/60:.2f} minutes')
         else:
-          logger.info(f'Stopping the dimmer {relay.name} from {relay.state}% to {relay.OFF}% in {tweaks["duration"]} seconds with a delay of {tweaks["delay"]/60} minutes')
+          logger.info(f'Stopping the dimmer {relay.name} from {old_state}% to {relay.OFF}% in {duration:.2f} seconds with a delay of {delay/60:.2f} minutes')
 
     else:
-      action_ok = self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, delay=tweaks["delay"])
+      action_ok = self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, delay=delay)
       if action_ok:
-        logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF} with a delay of {tweaks["delay"]/60} minutes')
+        logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF} with a delay of {delay/60:.2f} minutes')
 
 class terrariumAreaHeater(terrariumArea):
 
@@ -666,9 +665,10 @@ class terrariumAreaHeater(terrariumArea):
 
     self.state['powered'] = self._powered
 
-  def update(self):
-    super().update()
-    if 'disabled' != self.mode and len(self.__dimmers) > 0:
+  def update(self, read_only = False):
+    super().update(read_only)
+
+    if not read_only and 'disabled' != self.mode and len(self.__dimmers) > 0:
       sensor_values  = self.current_value(self.setup['sensors'])
       sensor_average = float(sensor_values['alarm_min'] + sensor_values['alarm_max']) / 2.0
 

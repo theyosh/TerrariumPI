@@ -99,7 +99,7 @@ class terrariumEnclosure(object):
 
     return area
 
-  def update(self):
+  def update(self, read_only = False):
     area_states = {}
 
     # First we update the main lights area, as they can change the power state for heaters and other areas
@@ -108,14 +108,14 @@ class terrariumEnclosure(object):
         continue
 
       if self.areas[area_id].setup.get('main_lights', False):
-        area_states[area_id] = self.areas[area_id].update()
+        area_states[area_id] = self.areas[area_id].update(read_only)
 
     # Update the remaining areas
     for area_id in self.areas:
       if 'disabled' == self.areas[area_id].mode or area_id in area_states:
         continue
 
-      area_states[area_id] = self.areas[area_id].update()
+      area_states[area_id] = self.areas[area_id].update(read_only)
 
     return area_states
 
