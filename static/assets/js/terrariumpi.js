@@ -1880,7 +1880,7 @@ function websocket_init(reconnect) {
       case 'logfile_update':
         // length of 35 is because of the Websocket text length...
         logline = message.data.replace(/\s+-\s+$/gm, '');
-        if (logline.length >= 35 && (logline.indexOf('WARNING') != -1 || logline.indexOf('ERROR') != -1)) {
+        if (logline.length > 35 && (logline.indexOf('WARNING') != -1 || logline.indexOf('ERROR') != -1)) {
           let badge = jQuery('footer.main-footer .badge-warning');
           if (logline.indexOf('WARNING') != -1) {
             if (window.terrariumPI.logged_in) {
