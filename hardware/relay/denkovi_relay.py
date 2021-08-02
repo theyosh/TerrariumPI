@@ -88,7 +88,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
 
   def _set_hardware_value(self, state):
     cache_key = self.__relay_cache_key()
-    cmd = self.__CMD + [self._device['device'], self.__get_board_type(), str(self._device['switch']), str(1 if state is self.ON else 0)]
+    cmd = self.__CMD + [self._device['device'], self.__get_board_type(), str(self._device['switch']), str(0 if state is self.OFF else 1)]
 
     data = subprocess.check_output(cmd).strip().decode('utf-8').strip()
     # Data should contain the current relay status for all relais...
