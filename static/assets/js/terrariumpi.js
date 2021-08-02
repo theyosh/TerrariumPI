@@ -898,13 +898,13 @@ function graph(canvas, source, type) {
         // Period ticks update
         let period_duration = (moment(data.timestamp[data.timestamp.length-1]) - moment(data.timestamp[0])) / 86400000; // in days
 
-        if (period_duration <= 2) {
+        if (period_duration <= 1 + 1) {
           self._graph.options.scales.xAxes[0].time.unit = 'minute';
-        } else if (period_duration <= 7) {
+        } else if (period_duration <= 7 + 1) {
           self._graph.options.scales.xAxes[0].time.unit = 'hour';
           self._graph.options.scales.xAxes[0].time.displayFormats.hour = 'D/M LT';
           self._graph.options.scales.xAxes[0].time.stepSize = 6;
-        } else if (period_duration <= 31) {
+        } else if (period_duration <= 31 + 1) {
           self._graph.options.scales.xAxes[0].time.unit = 'hour';
           self._graph.options.scales.xAxes[0].time.displayFormats.hour = 'D/M LT';
           self._graph.options.scales.xAxes[0].time.stepSize = 12;
