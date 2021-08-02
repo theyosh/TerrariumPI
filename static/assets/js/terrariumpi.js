@@ -715,7 +715,8 @@ function graph(canvas, source, type) {
     __type : type,
     _totals : {
       'power' : null,
-      'flow' : null
+      'flow' : null,
+      'last_update' : null
     },
     _graph_data : {},
     __animate : 1000,
@@ -919,6 +920,8 @@ function graph(canvas, source, type) {
         // Set the duration to zero so it stops animating when new data is loaded every X minutes.
         self._graph.options.animation.duration = 0;
         self._canvas.parents('.card-body').find('div.overlay').remove();
+
+        self._totals['last_update'].text(moment().format('LLL'));
       });
     },
 
@@ -1001,8 +1004,7 @@ function graph(canvas, source, type) {
 
         if ('wattage' == this.__type) {
           this._totals['power'].find('span').text(formatNumber(totals['power'] / 1000 / 3600));
-          this._totals['flow'].find('span').text(', ' + formatNumber(totals['water'] / 1000 / 60));
-          this._totals['flow'].toggle(totals['water'] != 0)
+          this._totals['flow'].find('span').text(', ' + formatNumber(totals['water'])).toggle(totals['water'] != 0);
         }
 
       } else {
@@ -1166,6 +1168,7 @@ function graph(canvas, source, type) {
 
     sensor_graph_obj._totals['power'] = sensor_graph_obj._canvas.parents('.card').find('span.total_power');
     sensor_graph_obj._totals['flow'] = sensor_graph_obj._canvas.parents('.card').find('span.total_flow');
+    sensor_graph_obj._totals['last_update'] = sensor_graph_obj._canvas.parents('.card').find('span.last_update');
 
     sensor_graph_obj.draw();
     sensor_graph_obj.source  = source;
