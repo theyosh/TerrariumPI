@@ -381,11 +381,8 @@ class terrariumArea(object):
         # Weather(inverse) and timer mode
         toggle_relay = self._is_timer_time(period)
 
-        # if self.type == 'lights':
-        #   print(f'Toggle relay or is it Relay state for period {period}: {toggle_relay} -> Current state: {self.relays_state(period)}')
-
         if toggle_relay is None:
-         # print(f'Recalc time table for {self}')
+         # print(f'Re-calculate time table for {self}')
           self._time_table()
           toggle_relay = False
 
@@ -398,12 +395,9 @@ class terrariumArea(object):
       else:
         # Sensor mode only toggle ON when alarms are triggered (True).
         toggle_relay = self.state['sensors'][f'alarm_{period}']
-        #print(f'Toggle on/off {period} based on sensors -> {toggle_relay}')
         if toggle_relay is False:
           other_alarm = self.state['sensors'][f'alarm_{("low" if period == "high" else "high")}']
-          #print(f'Inverse alarm: {other_alarm}')
           toggle_relay = False if other_alarm else None
-          #print(f'Final toggle state for relay based on sensors: {toggle_relay}')
 
       if toggle_relay is True and not self.relays_state(period): #self.state[period]['powered']:
 
@@ -434,8 +428,6 @@ class terrariumArea(object):
           threading.Timer(self.setup[period]['power_on_time'], self.relays_toggle, [period, False]).start()
 
       elif toggle_relay is False and not self.relays_state(period, False) and not self.state[period].get('timer_on',False):
-        #self.state[period]['powered']
-        logger.info(f'Toggle off the relays for area {self}.')
         self.relays_toggle(period,False)
 
       # else:
@@ -483,27 +475,15 @@ class terrariumArea(object):
 
     relay_states = []
     for relay in self.setup[part]['relays']:
-      # if self.type == 'lights':
-        # print(f'Relay: {self.enclosure.relays[relay]}')
-        # print(f'Is on: {self.enclosure.relays[relay].is_on()}')
-        # print(f'Is off: {self.enclosure.relays[relay].is_off()}')
-
 
       if state:
         relay_states.append(self.enclosure.relays[relay].is_on())
-        # if self.type == 'lights':
-        #   print(f'Relay {self.enclosure.relays[relay]} is on?: {self.enclosure.relays[relay].is_on()}')
       else:
         relay_states.append(self.enclosure.relays[relay].is_off())
-
-    # if self.type == 'lights':
-    #   print('All states:')
-    #   print(relay_states)
 
     return all(relay_states)
 
   def relays_toggle(self, part, on):
-    threads = []
     logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
 
     with orm.db_session():
@@ -511,18 +491,6 @@ class terrariumArea(object):
       for relay in relays:
         relay = self.enclosure.relays[relay]
         self._relay_action(part, relay, on)
-
-#        threads.append(threading.Thread(target=self._relay_action, args=(part, relay, on)))
-#        threads[-1].start()
-
-#        self._relay_action(part, relay, on)
-
-    # print('All threads')
-    # print(threads)
-    # for thread in threads:
-    #   # print('Wait for thread: ')
-    #   # print(thread)
-    #   thread.join()
 
     if on:
       self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
@@ -813,7 +781,8 @@ class terrariumAreaAudio(terrariumArea):
     if period not in self.setup:
       return False
 
-    logger.info(f'Toggle the player for area {self} period {period} to state {("on" if on else "off")}.')
+    if self.state[period]['powered'] != on:
+      logger.info(f'Toggle the player for area {self} period {period} to state {("on" if on else "off")}.')
 
     if on:
       # As we can only have one player running, we have to make sure that there is not a player still running from the other period
@@ -822,6 +791,7 @@ class terrariumAreaAudio(terrariumArea):
       other_period = other_period[0]
 
       if other_period in self.setup:
+        logger.info(f'Forcing to stop the player for area {self} period {other_period} due to period change.')
         self.setup[other_period]['player'].stop()
 
       self.setup[period]['player'].play()
