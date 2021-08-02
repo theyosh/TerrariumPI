@@ -75,8 +75,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
       cmd = self.__CMD + [self._device['device'], self.__get_board_type(), 'all', 'status']
 
       data = subprocess.check_output(cmd).strip().decode('utf-8').strip()
-      #print('Got data: *{}*'.format(data))
-      self.__cache.set_data(cache_key,data)
+      self.__cache.set_data(cache_key, data, cache_timeout = 20)
       self.__cache.clear_running(cache_key)
 
     if data is None:
@@ -92,7 +91,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
 
     data = subprocess.check_output(cmd).strip().decode('utf-8').strip()
     # Data should contain the current relay status for all relais...
-    self.__cache.set_data(cache_key,data)
+    self.__cache.set_data(cache_key, data, cache_timeout = 20)
     return True
 
 class terrariumRelayDenkoviV2_4(terrariumRelayDenkoviV2):
