@@ -939,14 +939,8 @@ function graph(canvas, source, type) {
         return result;
       }
 
-
-
-
-
       this.__type = (data[0].wattage !== undefined ? 'wattage' : this.__type)
-
       let parsed_data = {};
-
       let totals = {
         'power' : 0,
         'water' : 0
@@ -1004,7 +998,8 @@ function graph(canvas, source, type) {
 
         if ('wattage' == this.__type) {
           this._totals['power'].find('span').text(formatNumber(totals['power'] / 1000 / 3600));
-          this._totals['flow'].find('span').text(', ' + formatNumber(totals['water'])).toggle(totals['water'] != 0);
+          this._totals['flow'].find('span').text(', ' + formatNumber(totals['water']))
+          this._totals['flow'].toggle(totals['water'] != 0);
         }
 
       } else {
