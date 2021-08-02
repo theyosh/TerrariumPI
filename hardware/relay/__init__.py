@@ -249,9 +249,11 @@ class terrariumRelay(object):
     changed = self.state != value
     if delay > 0.0:
       self._timer = threading.Timer(delay, lambda: self.set_state(value))
+      self._timer.name = f'Delay_{value}'
       self._timer.start()
     else:
       changed = self.set_state(value)
+      self._timer = None
 
     # Not great, but the set_state has a callback for updates
     return changed
@@ -260,11 +262,20 @@ class terrariumRelay(object):
     return self.on(value, delay)
 
   def is_on(self):
-    # TODO: Check if timer is set.... that should/could change the outcome!!
-    return self.state == self.ON
+    on = (self.state == self.ON)
+    if self._timer is not None and self._timer.is_alive():
+      delay_on = float(self._timer.name.split('_')[1])
+      on = (delay_on == self.ON)
+
+    return on
 
   def is_off(self):
-    return not self.is_on()
+    off = (self.state == self.OFF)
+    if self._timer is not None and self._timer.is_alive():
+      delay_off = float(self._timer.name.split('_')[1])
+      off = (delay_off == self.OFF)
+
+    return off
 
   @property
   def is_dimmer(self):
@@ -321,6 +332,7 @@ class terrariumRelayDimmer(terrariumRelay):
 
     self.__running.set()
     self.running = False
+    self.__thread = None
 
   def calibrate(self, data):
     dimmer_offset = data.get('dimmer_offset', self._dimmer_offset)
@@ -346,24 +358,20 @@ class terrariumRelayDimmer(terrariumRelay):
     changed = self.state != value
     if delay > 0.0:
       self._timer = threading.Timer(delay, lambda: self.on(value, duration, 0))
+      self._timer.name = f'Delay_{value}'
       self._timer.start()
     else:
-
-      # if self.running or self._timer is not None:
-      #   # For now, we cannot change the value when a dim action is going on... (Maybe we change this later)
-      #   return False
-
+      # Make sure we set the value within the specified limits
       value = round(value)
       value = max(self.OFF,min(self.ON,value))
 
-      # if value == self.state:
-      #   return True
-
       if 0 == duration:
+        self._timer = None
         return self.set_state(value)
-        #return True
 
+      # Start the thread for the dimmer to go to the requested value in duration time
       self.__thread = threading.Thread(target=self.__run,args=(value, duration))
+      self.__thread.name = f'End_{value}'
       self.__thread.start()
 
     return changed
@@ -372,10 +380,20 @@ class terrariumRelayDimmer(terrariumRelay):
     return self.on(value, duration, delay)
 
   def is_on(self):
-    return self.state == self.ON
+    on = super().is_on()
+    if self.__thread is not None and self.__thread.is_alive():
+      thread_on = float(self.__thread.name.split('_')[1])
+      on = (thread_on == self.ON)
+
+    return on
 
   def is_off(self):
-    return self.state == self.OFF
+    off = super().is_off()
+    if self.__thread is not None and self.__thread.is_alive():
+      thread_off = float(self.__thread.name.split('_')[1])
+      off = (thread_off == self.OFF)
+
+    return off
 
   def stop(self):
     self.running = False
