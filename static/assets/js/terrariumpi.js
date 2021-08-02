@@ -1880,26 +1880,27 @@ function websocket_init(reconnect) {
       break;
 
       case 'logfile_update':
-        // length of 36 is because of the Websocket text length...
-        if (message.data.length >= 36 && (message.data.indexOf('WARNING') != -1 || message.data.indexOf('ERROR') != -1)) {
+        // length of 35 is because of the Websocket text length...
+        logline = message.data.replace(/\s+-\s+$/gm, '');
+        if (logline >= 35 && (logline.indexOf('WARNING') != -1 || logline.indexOf('ERROR') != -1)) {
           let badge = jQuery('footer.main-footer .badge-warning');
-          if (message.data.indexOf('WARNING') != -1) {
+          if (logline.indexOf('WARNING') != -1) {
             if (window.terrariumPI.logged_in) {
-              toastr.warning(message.data, 'WARNING');
+              toastr.warning(logline, 'WARNING');
             }
           } else {
             if (window.terrariumPI.logged_in) {
-              toastr.error(message.data, 'ERROR');
+              toastr.error(logline, 'ERROR');
             }
             badge = jQuery('footer.main-footer .badge-danger');
           }
           let current_val = badge.text() * 1;
           badge.removeClass('opacity-' + (current_val+1)).text(current_val+1).addClass('opacity-' + (current_val+2));
-        }
 
-        let logging = jQuery('div.logging textarea#logdata');
-        if (logging.length == 1) {
-          logging.val(message.data + '\n' + logging.val()).trigger('change');
+          let logging = jQuery('div.logging textarea#logdata');
+          if (logging.length == 1) {
+            logging.val(logline + '\n' + logging.val()).trigger('change');
+         }
         }
       break;
 
