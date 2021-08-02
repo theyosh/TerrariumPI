@@ -1884,11 +1884,11 @@ function websocket_init(reconnect) {
           let badge = jQuery('footer.main-footer .badge-warning');
           if (logline.indexOf('WARNING') != -1) {
             if (window.terrariumPI.logged_in) {
-              toastr.warning(logline, 'WARNING');
+              toastr.warning(logline.slice(59).trim(), 'WARNING');
             }
           } else {
             if (window.terrariumPI.logged_in) {
-              toastr.error(logline, 'ERROR');
+              toastr.error(logline.slice(59).trim(), 'ERROR');
             }
             badge = jQuery('footer.main-footer .badge-danger');
           }
