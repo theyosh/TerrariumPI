@@ -617,6 +617,20 @@ class terrariumAreaHeater(terrariumArea):
     self.__dimmers = {}
     super().__init__(id, enclosure, type, name, mode, setup)
 
+  @property
+  def _powered(self):
+    powered = None
+    for period in self.PERIODS:
+      if period not in self.state or len(self.setup[period]['relays']) == 0:
+        continue
+
+#      for relay in self.setup[part]['relays']:
+      powered = powered or (not self.relays_state(period, False))
+
+#      powered = powered or self.state[period]['powered']
+
+    return powered
+
   def load_setup(self, data):
     super().load_setup(data)
 

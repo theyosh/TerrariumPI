@@ -50,7 +50,7 @@ class terrariumEngine(object):
   __VERSION_UPDATE_CHECK_TIMEOUT = 1    # in days
 
   def __init__(self, version):
-    starttime = time.time()
+    self.starttime = time.time()
     # Default system units
     self.units = {
       N_('temperature') : 'C',
@@ -156,7 +156,7 @@ class terrariumEngine(object):
 
     self.environment = None
 
-    logger.info(f'TerrariumPI is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-starttime:.2f} seconds.')
+    logger.info(f'TerrariumPI is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-self.starttime:.2f} seconds.')
     # Return console logging back to 'normal'
     terrariumLogging.logging.getLogger().handlers[0].setLevel(old_log_level)
     self.__engine['logtail'] = threading.Thread(target=self.__log_tailing)
@@ -738,9 +738,9 @@ class terrariumEngine(object):
 
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
-    # if hasattr(self,'enclosures'):
-    #   # print('Update enclosures due to changing relays...')
-    #   self._update_enclosures(True)
+    if hasattr(self,'enclosures'):
+      # print('Update enclosures due to changing relays...')
+      self._update_enclosures(True)
 
   # -= NEW =-
   def __load_existing_buttons(self):
@@ -1274,7 +1274,6 @@ class terrariumEngine(object):
     motd_file = Path('motd.sh')
     with motd_file.open('w') as motdfile:
       motdfile.write('#!/bin/bash\n')
-#      motdfile.write('tput reset\n')
       motdfile.write('echo "')
       motdfile.write(motd_title.replace('`','\`') + '\n')
       motdfile.write(motd_version + '\n')
@@ -1297,7 +1296,7 @@ class terrariumEngine(object):
   # -= NEW =-
   def stop(self):
     terrariumLogging.logging.getLogger().handlers[0].setLevel(terrariumLogging.logging.INFO)
-    logger.info(f'Stopping TerrariumPI {self.version} ...')
+    logger.info(f'Stopping TerrariumPI {self.version} after running for {terrariumUtils.format_uptime(time.time()-self.starttime)} ...')
 
     self.running = False
     self.__engine['exit'].set()
@@ -1333,6 +1332,8 @@ class terrariumEngine(object):
     self.notification.stop()
 
     self.__engine['asyncio'].stop()
+
+    logger.info(f'Shutdown TerrariumPI {self.version} done. Bye bye ...')
 
   def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
     # Two events:
