@@ -363,7 +363,7 @@ class terrariumWebsocket(object):
 
         if 'logfile_update' == message['type'] and not client.authenticated:
           # Clean the logline message. Keep date and type for web indicators
-          message['data'] = message['data'][0:36]
+          message['data'] = message['data'][0:36].strip()
 
         client.put(message)
       # If more then 50 messages in queue, looks like connection is gone and remove the queue from the list
