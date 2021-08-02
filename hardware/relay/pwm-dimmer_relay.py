@@ -30,6 +30,7 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
 
   def stop(self):
     self.device.close()
+    super().stop()
 
 class terrariumRelayDimmerNextEVO(terrariumRelayDimmerPWM):
   HARDWARE = 'nextevo-dimmer'
