@@ -898,7 +898,7 @@ function graph(canvas, source, type) {
         // Period ticks update
         let period_duration = (moment(data.timestamp[data.timestamp.length-1]) - moment(data.timestamp[0])) / 86400000; // in days
 
-        if (period_duration <= 1) {
+        if (period_duration <= 2) {
           self._graph.options.scales.xAxes[0].time.unit = 'minute';
         } else if (period_duration <= 7) {
           self._graph.options.scales.xAxes[0].time.unit = 'hour';
