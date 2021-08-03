@@ -944,7 +944,7 @@ class terrariumAPI(object):
     elif 'reboot' == action:
       ok = self.webserver.engine.reboot()
       return { 'message' : f'TerrariumPI {self.webserver.engine.settings["version"]} is being rebooted!' }
-    elif 'shutdow' == action:
+    elif 'shutdown' == action:
       ok = self.webserver.engine.shutdown()
       return { 'message' : f'TerrariumPI {self.webserver.engine.settings["version"]} is being shutdown!' }
 

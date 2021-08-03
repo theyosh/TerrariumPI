@@ -178,7 +178,7 @@ class terrariumEngine(object):
 
   def reboot(self):
     def sigint_process():
-      terrariumUtils.get_script_data(f'kill -INT {os.getpid()} && sleep 10 && sudo reboot')
+      terrariumUtils.get_script_data('sudo reboot')
 
     threading.Timer(2,sigint_process).start()
     logger.warning(f'Rebooting TerrariumPI {self.settings["version"]} now!')
@@ -186,7 +186,7 @@ class terrariumEngine(object):
 
   def shutdown(self):
     def sigint_process():
-      terrariumUtils.get_script_data(f'kill -INT {os.getpid()} && sleep 10 && sudo shutdown')
+      terrariumUtils.get_script_data('sudo shutdown')
 
     threading.Timer(2,sigint_process).start()
     logger.warning(f'Shutting down TerrariumPI {self.settings["version"]} now!')
@@ -738,8 +738,7 @@ class terrariumEngine(object):
 
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
-    if hasattr(self,'enclosures'):
-      # print('Update enclosures due to changing relays...')
+    if self.__engine['thread'] is not None and self.__engine['thread'].is_alive() and hasattr(self,'enclosures'):
       self._update_enclosures(True)
 
   # -= NEW =-

@@ -283,7 +283,7 @@
               </a>
             </li>
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
-              <a href="{{ url_for('api:server_action', action='restart')}}" class="nav-link text-danger" title="{{ _('Shutdown TerrariumPI') }}" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
+              <a href="{{ url_for('api:server_action', action='shutdown')}}" class="nav-link text-danger" title="{{ _('Shutdown TerrariumPI') }}" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
                 <i class="fas fa-power-off nav-icon"></i>
                 <p>{{ _('Shutdown') }}</p>
               </a>
