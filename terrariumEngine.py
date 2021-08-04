@@ -975,7 +975,6 @@ class terrariumEngine(object):
 
     while not self.__engine['exit'].is_set():
       self.__engine['systemd'].notify('WATCHDOG=1')
-      print(f'[{datetime.datetime.now()}] Start updating ....')
 
       logger.info(f'Starting a new update round with {len(self.sensors)} sensors, {len(self.relays)} relays, {len(self.buttons)} buttons and {len(self.webcams)} webcams.')
       start = time.time()
@@ -1024,8 +1023,6 @@ class terrariumEngine(object):
 
       duration = time.time() - start
       time_left = terrariumEngine.__ENGINE_LOOP_TIMEOUT - duration
-
-      print(f'[{datetime.datetime.now()}] Done in {duration:.2f} seconds. Waiting for {time_left:.2f} seconds for new round +/- {prev_delay:.2f} seconds.')
 
       if time_left > 0.0:
         logger.info(f'Engine update done in {duration:.2f} seconds. Waiting for {time_left:.2f} seconds for the next round.')
