@@ -312,6 +312,7 @@ class terrariumAPI(object):
     try:
       area = Area[area]
       area_data = area.to_dict(exclude='enclosure')
+      area_data['enclosure'] = area.enclosure.id
       return area_data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')
