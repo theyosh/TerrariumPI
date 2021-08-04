@@ -12,19 +12,20 @@
             <a href="#" class="btn btn-primary active" style="text-decoration: none;" role="button" aria-pressed="true" data-toggle="modal" data-target="#modal-enclosure-setup">{{ _('Add new enclosure') }}</a>
             {% else %}
             <a href="{{ url_for('login') }}" class="text-primary" title="{{ _('Login to make changes') }}">{{ _('Login to make changes') }}</a>
-            {% endif %} </p>
+            {% endif %}
+          </p>
         </div>
       </div>
       <div class="col" id="enclosure_list">
         <script type="text/html" id="area_table_row">
           <tr>
-            <td data-content="name" class="align-middle"></td>
+            <td data-content="name" class="align-middle pl-0"></td>
             <td data-content="type" class="align-middle"></td>
             <td data-content="mode" class="align-middle"></td>
             <td>
               <table class="table table-sm text-nowrap mb-0">
                 <tr >
-                  <td style="width: 10px" class="border-top-0"><small class="badge" title="Current status" data-template-bind='[
+                  <td style="width: 10px" class="border-top-0 pl-0"><small class="badge" title="Current status" data-template-bind='[
                     {"attribute": "class", "value": "status", "formatter": "prefixer", "formatOptions": "badge "},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_relay_state_"}
                       ]'>&nbsp;&nbsp;</small></td>
@@ -110,7 +111,7 @@
               </table>
             </td>
             {% if authenticated %}
-            <td class="actions text-center">
+            <td class="actions text-right text-nowrap">
               <i class="fas fa-wrench edit_area" data-template-bind='[
                 {"attribute": "id", "value": "id" },
                 {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit area') }} "} ]'></i>
@@ -124,10 +125,14 @@
         <script type="text/html" id="enclosure_template">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title mr-1"><i class="fas fa-globe mr-2"></i><span data-content="name">...</span></h3> <small class="badge badge-danger"></small> <small class="badge badge-warning"></small> <small class="badge badge-primary"></small>
+              <h3 class="card-title mr-1">
+                <i class="fas fa-fw fa-globe mr-2" ></i><span data-content="name">...</span>
+              </h3>
               <div class="card-tools">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-wrench"></i> </button>
+                  <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-wrench"></i>
+                  </button>
                   <div class="dropdown-menu dropdown-menu-right" role="menu">
                     {% if authenticated %}
                     <a href="#" class="dropdown-item" title="Add new area" data-toggle="modal" data-target="#modal-area-setup"> <i class="fas fa-map mr-1"></i> {{ _('Add area') }} </a>
@@ -142,39 +147,37 @@
                     {% endif %}
                   </div>
                 </div>
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"> <i class="fas fa-minus"></i> </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove"> <i class="fas fa-times"></i> </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
               </div>
             </div>
-            <div class="row g-0">
-              <div class="col-4 col-lg-2">
-                <a data-fancybox data-title="name" data-href="image"> <img data-src="image" data-alt="name" class="img-thumbnail"> </a>
-              </div>
-              <div class="col-8 col-lg-3 card-body">
-                <p class="card-text" data-content="description" data-format="html"></p>
-              </div>
-              <div class="col-12 col-lg-7">
-                <div class="card-body">
-                  <div class="row g-0">
-                    <div class="col">
-                      <h5>{{ _('Areas') }}</h5>
-                      <table class="table table-sm">
-                        <thead>
-                          <tr>
-                            <th>{{ _('Name') }}</th>
-                            <th>{{ _('Type') }}</th>
-                            <th>{{ _('Mode') }}</th>
-                            <th style="width:10%">{{ _('Status') }}</th>
-                            {% if authenticated %}
-                            <th class="actions text-center">{{ _('Actions') }}</th>
-                            {% endif %}
-                          </tr>
-                        </thead>
-                        <tbody data-template-bind='[
-                          {"attribute": "content", "value": "areas", "formatter": "nestedTemplateFormatter", "formatOptions": "#area_table_row "} ]'> </tbody>
-                      </table>
-                    </div>
-                  </div>
+            <div class="card-body p-0">
+              <div class="d-md-flex">
+                <a class="col-12 col-sm-12 col-md-3 col-lg-2 text-center" data-fancybox data-title="name" data-href="image"> <img data-src="image" data-alt="name" class="img-thumbnail"> </a>
+                <div class="col mt-2">
+                  <p class="card-text" data-content="description" data-format="html"></p>
+                </div>
+                <div class="col-12 col-lg-7">
+                  <h5 class="mt-2">{{ _('Areas') }}</h5>
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th class="pl-0">{{ _('Name') }}</th>
+                        <th>{{ _('Type') }}</th>
+                        <th>{{ _('Mode') }}</th>
+                        <th style="width:10%">{{ _('Status') }}</th>
+                        {% if authenticated %}
+                        <th class="actions text-right pr-4">{{ _('Actions') }}&nbsp;&nbsp;</th>
+                        {% endif %}
+                      </tr>
+                    </thead>
+                    <tbody data-template-bind='[
+                      {"attribute": "content", "value": "areas", "formatter": "nestedTemplateFormatter", "formatOptions": "#area_table_row "} ]'> </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -202,6 +205,9 @@
 
         jQuery('#enclosure_list').loadTemplate(jQuery('#enclosure_template'), enclosure, {
           append: true,
+          bindingOptions: {
+            ignoreEmptyString: true
+          }
         });
 
         {% if authenticated %}
