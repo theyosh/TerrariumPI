@@ -944,7 +944,11 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input').prop('readonly',false);
 
     // Make the timers required
-    {{modal_type}}_form.find('div.tab-pane input[type!="search"]').prop('required',true);
+    // Only make the pane timers required, if there are relays selected in the same pane
+    // Alarm low pane.
+    {{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  input[type!="search"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  select[id$="_alarm_low_relays"]  option:selected').length > 0);
+    // Alarm high pane.
+    {{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] input[type!="search"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] select[id$="_alarm_high_relays"] option:selected').length > 0);
 
     // Disable hours fields
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id*="_hours"]').prop('readonly',true);
@@ -1032,9 +1036,17 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
   let light_modus   = ['day','night'].indexOf(part) != -1;
   let dimmer_active = false;
 
+
+  // Only make the pane timers required, if there are relays selected in the same pane
+  // Alarm low pane.
+  {{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  input[type!="search"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  select[id$="_alarm_low_relays"]  option:selected').length > 0);
+  // Alarm high pane.
+  {{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] input[type!="search"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] select[id$="_alarm_high_relays"] option:selected').length > 0);
+
   if (!light_modus) {
     return;
   }
+
   jQuery.each(Array.from(new Set(active.concat(selected))), function(counter,relay_id) {
     if (active.indexOf(relay_id) == -1) {
       // Add tab
@@ -1045,8 +1057,8 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
     }
   });
   {{modal_type}}_form.find('#area_dimmer_settings_' + part + '_relays a:last').tab('show');
-
   target.data('active', selected.join(','));
+
 });
 {% endblock %}
 
