@@ -89,6 +89,7 @@ paginate: 10
 
 plugins:
   - jekyll-feed
+  - jekyll-target-blank
 
 # ------------ The following options are not recommended to be modified ------------------
 
@@ -113,6 +114,11 @@ collections:
 
 
 defaults:
+  - scope:
+      path: 'assets/img'
+    values:
+      image: true
+
   -
     scope:
       path: ''          # An empty string here means all files in the project
@@ -138,14 +144,15 @@ defaults:
       permalink: /:title/
       dynamic_title: true    # Hide title in mobile screens.
 
-#   -
-#     scope:
-#       path: 'hardware'
-#       type: hardware             # see `site.collections`
-#     values:
-# #      layout: page
-# #      permalink: /:title/
-#       dynamic_title: true    # Hide title in mobile screens.
+  -
+    scope:
+      path: _hardware
+      type: hardware             # see `site.collections`
+    values:
+      layout: post
+#      permalink: /:title/
+#      dynamic_title: false    # Hide title in mobile screens.
+      toc: true
 
 sass:
   style: compressed
