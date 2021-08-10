@@ -13,7 +13,7 @@ import brightpilib as brightpi
 
 class terrariumRelayDimmerBrightPi(terrariumRelayDimmer):
   HARDWARE = 'brightpi-dimmer'
-  NAME = 'BrightPI (dimmer)'
+  NAME = 'Bright-PI (dimmer)'
 
   def _load_hardware(self):
     device = brightpi.BrightPi()
