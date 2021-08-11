@@ -1836,7 +1836,7 @@ function websocket_init(reconnect) {
           }
         });
 
-        if (sensor_menu_list.length + light_sensors_list.length + 1 != jQuery('#available_sensor_types li.nav-item').length) {
+        if (sensor_menu_list.length + light_sensors_list.length != jQuery('#available_sensor_types li.nav-item:not(.action)').length) {
           sensor_menu_list.sort((a, b) => a.title.localeCompare(b.title));
 
           jQuery('#available_sensor_types li.nav-item:not(.action)').remove();
