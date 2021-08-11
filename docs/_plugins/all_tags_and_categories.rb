@@ -73,7 +73,8 @@ module AllCategoriesAndTags
       # This allows accessing the list in a template via `page.linked_docs`.
       @data = {
         'title' => category,
-        'posts' => posts
+        'posts' => posts,
+        'layout' => 'category',
       }
 
       # Look up front matter defaults scoped to type `categories`, if given key
@@ -109,7 +110,8 @@ module AllCategoriesAndTags
       # This allows accessing the list in a template via `page.linked_docs`.
       @data = {
         'title' => tag,
-        'posts' => posts
+        'posts' => posts,
+        'layout' => 'tag',
       }
 
       # Look up front matter defaults scoped to type `tags`, if given key
