@@ -146,13 +146,26 @@ defaults:
 
   -
     scope:
-      path: _hardware
+      path: ''
       type: hardware             # see `site.collections`
     values:
       layout: post
 #      permalink: /:title/
 #      dynamic_title: false    # Hide title in mobile screens.
       toc: true
+
+  - scope:
+      type: categories  # Used in _plugins/all_tags_and_categories.rb
+    values:
+      layout: category
+      permalink: /categories/:name/
+
+  - scope:
+      type: tags  # Used in _plugins/all_tags_and_categories.rb
+    values:
+      layout: tag
+      permalink: /tags/:name/
+
 
 sass:
   style: compressed

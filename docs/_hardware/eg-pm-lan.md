@@ -2,7 +2,7 @@
 title: Energenie LAN
 categories: [Hardware]
 tags: [relay]
-permalink: /hardware/relay/:title
+permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Energenie_Lan.png
