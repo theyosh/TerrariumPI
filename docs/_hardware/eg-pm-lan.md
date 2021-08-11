@@ -1,6 +1,6 @@
 ---
 title: Energenie LAN
-categories: [Hardware]
+categories: [Hardware, Relay]
 tags: [relay]
 permalink: /hardware/relay/:title/
 

@@ -1,6 +1,6 @@
 ---
 title: Bright-PI
-categories: [Hardware]
+categories: [Hardware, Relay]
 tags: [relay, dimmer]
 permalink: /hardware/relay/:title/
 

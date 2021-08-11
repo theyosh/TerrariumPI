@@ -1,6 +1,6 @@
 ---
 title: Denkovi V2
-categories: [Hardware]
+categories: [Hardware, Relay]
 tags: [relay]
 permalink: /hardware/relay/:title/
 
