@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-07-23 14:13+CEST\n"
-"PO-Revision-Date: 2021-04-23 18:59+0000\n"
+"PO-Revision-Date: 2021-08-11 18:44+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -456,10 +456,8 @@ msgid "All doors are closed"
 msgstr "Alle deuren zijn gesloten"
 
 #: views/includes/navigation.html:44
-#, fuzzy
-#| msgid "Current value"
 msgid "Current status"
-msgstr "Huidige waarde"
+msgstr "Huidige status"
 
 #: views/includes/sidebar.html:14
 msgid "Hello"
@@ -650,10 +648,8 @@ msgstr "Fout"
 #: views/modals/playlist.html:20 views/modals/relay.html:47
 #: views/modals/sensor.html:62 views/modals/service.html:30
 #: views/modals/webcam.html:51
-#, fuzzy
-#| msgid "Enter a name"
 msgid "Enter a name."
-msgstr "Vul een naam in"
+msgstr "Vul een naam in."
 
 #: views/modals/area.html:52 views/modals/button.html:50
 #: views/modals/enclosure.html:23 views/modals/event.html:21
@@ -661,7 +657,7 @@ msgstr "Vul een naam in"
 #: views/modals/sensor.html:65 views/modals/service.html:33
 #: views/modals/webcam.html:54
 msgid "The name cannot be empty."
-msgstr ""
+msgstr "De naam kan niet leeg zijn."
 
 #: views/modals/area.html:62 views/modals/area.html:242
 #: views/modals/area.html:427 views/modals/webcam.html:120
@@ -782,8 +778,6 @@ msgstr "Het tijdstip van de dag waarop de relais elke dag worden ingeschakeld."
 #: views/modals/area.html:371 views/modals/area.html:525
 #: views/modals/area.html:537 views/modals/area.html:654
 #: views/modals/area.html:666
-#, fuzzy
-#| msgid "Enter a valid time of the day."
 msgid "Enter a valid time."
 msgstr "Voer een geldige tijd in."
 
@@ -822,10 +816,8 @@ msgstr "Tijdsduur uit"
 
 #: views/modals/area.html:181 views/modals/area.html:632
 #: views/modals/area.html:762
-#, fuzzy
-#| msgid "Select the operating mode."
 msgid "Select the relays to toggle."
-msgstr "Selecteer de bedrijfsmodus."
+msgstr "Selecteer de schakelaars."
 
 #: views/modals/area.html:249
 msgid ""
@@ -847,10 +839,8 @@ msgstr "Selecteer de geluidskaart die voor dit verblijf wordt gebruikt."
 #: views/modals/area.html:383 views/modals/area.html:395
 #: views/modals/area.html:549 views/modals/area.html:561
 #: views/modals/area.html:678 views/modals/area.html:690
-#, fuzzy
-#| msgid "Timer period on duration in minutes"
 msgid "Enter a valid duration in minutes."
-msgstr "Timer aan tijdsduur in minuten"
+msgstr "Vul een geldige tijdsduur in minuten."
 
 #: views/modals/area.html:322 views/modals/area.html:558
 #: views/modals/area.html:687
@@ -867,42 +857,31 @@ msgstr ""
 "dag te hebben."
 
 #: views/modals/area.html:334 views/modals/area.html:404
-#, fuzzy
-#| msgid "Shuffle this playlist every time it is played."
 msgid "Select the playlist(s) to be played."
-msgstr "Schud deze afspeellijst elke keer dat deze wordt afgespeeld."
+msgstr "Selecteer de afspeellijsten."
 
 #: views/modals/area.html:337 views/modals/area.html:407
-#, fuzzy
-#| msgid "Select at least 1 audio file."
 msgid "Select at least 1 playlist."
-msgstr "Selecteer minimaal 1 audiobestand."
+msgstr "Selecteer minimaal 1 afspeellijst."
 
 #: views/modals/area.html:356 views/modals/area.html:651
-#, fuzzy
-#| msgid "The time of the day when the relays are toggled on each day."
 msgid "The time of the day when the relays are toggled on each night."
-msgstr "Het tijdstip van de dag waarop de relais elke dag worden ingeschakeld."
+msgstr ""
+"Het tijdstip van de dag waarop de relais elke nacht worden ingeschakeld."
 
 #: views/modals/area.html:368 views/modals/area.html:663
-#, fuzzy
-#| msgid "The time of the day when the relays are toggled off each day."
 msgid "The time of the day when the relays are toggled off each night."
 msgstr ""
-"Het tijdstip van de dag waarop de relais elke dag worden uitgeschakeld."
+"Het tijdstip van de dag waarop de relais elke nacht worden uitgeschakeld."
 
 #: views/modals/area.html:380
-#, fuzzy
-#| msgid ""
-#| "The duration when the relays should be on. If this is shorter then all "
-#| "day, you will get a timer functionality. Enter '0' to have a full day."
 msgid ""
 "The duration when the players should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
-"De duur waarin de schakelaars moeten zijn ingeschakeld. Als dit korter is "
-"dan de hele dag, krijgt u een timer functie. Voer '0' in om een volledige "
-"dag te hebben."
+"De duur waarin de spelers moeten zijn ingeschakeld. Als dit korter is dan de "
+"hele dag, krijgt u een timer functie. Voer '0' in om een volledige nacht te "
+"hebben."
 
 #: views/modals/area.html:392
 #, fuzzy
@@ -918,26 +897,20 @@ msgstr ""
 "dag te hebben."
 
 #: views/modals/area.html:435
-#, fuzzy
-#| msgid ""
-#| "Select the mode of this area. This will change the timing and duration of "
-#| "the relays."
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the actions."
 msgstr ""
 "Selecteer de modus van dit gebied. Dit bepaald de timing en duur van de "
-"schakelaars."
+"acties."
 
 #: views/modals/area.html:444
 msgid "Select sensors to use for sensor based mode."
 msgstr ""
 
 #: views/modals/area.html:447
-#, fuzzy
-#| msgid "Select at least 1 audio file."
 msgid "Select at least 1 sensor."
-msgstr "Selecteer minimaal 1 audiobestand."
+msgstr "Selecteer minimaal 1 sensor."
 
 #: views/modals/area.html:453 views/modals/playlist.html:29
 #: views/playlists.html:27 views/playlists.html:42
@@ -945,10 +918,8 @@ msgid "Volume"
 msgstr "Volume"
 
 #: views/modals/area.html:456
-#, fuzzy
-#| msgid "Enter a valid time of the day."
 msgid "Enter the volume of the water tank."
-msgstr "Voer een geldige tijd in."
+msgstr "Voer de volume in van de watertank."
 
 #: views/modals/area.html:459 views/modals/area.html:471
 #: views/modals/area.html:483 views/modals/area.html:623
@@ -966,10 +937,8 @@ msgid "Height"
 msgstr "Hoogte"
 
 #: views/modals/area.html:468
-#, fuzzy
-#| msgid "Enter the height"
 msgid "Enter the height of the water tank."
-msgstr "Voer de hoogte in"
+msgstr "Voer de hoogte in van de watertank."
 
 #: views/modals/area.html:477 views/modals/sensor.html:159
 msgid "Offset"
