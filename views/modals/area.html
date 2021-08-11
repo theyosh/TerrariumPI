@@ -1103,6 +1103,11 @@ jQuery.when(
     {{modal_type}}_enclosure_select.append(jQuery('<option>').attr('value',item.id).text(item.name));
   });
 
+  // Check if we are adding an area from selected enclosure.
+  if (jQuery(event.relatedTarget).data('enclosureid') !== undefined) {
+    {{modal_type}}_enclosure_select.val(jQuery(event.relatedTarget).data('enclosureid'));
+  }
+
   let {{modal_type}}_soundcard_select = {{modal_type}}_form.find('select#area_audio_soundcard');
   {{modal_type}}_soundcard_select.prop('disabled', false).attr('readonly', false).find('option').remove();
   jQuery.each(soundcards[0].data,function(counter,item){

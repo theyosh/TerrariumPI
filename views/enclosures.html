@@ -135,7 +135,10 @@
                   </button>
                   <div class="dropdown-menu dropdown-menu-right" role="menu">
                     {% if authenticated %}
-                    <a href="#" class="dropdown-item" title="Add new area" data-toggle="modal" data-target="#modal-area-setup"> <i class="fas fa-map mr-1"></i> {{ _('Add area') }} </a>
+                    <a href="#" class="dropdown-item" title="Add new area" data-toggle="modal" data-target="#modal-area-setup" data-template-bind='[
+                    {"attribute": "data-enclosureid", "value": "id"}
+                    ]'> <i class="fas fa-map mr-1"></i> {{ _('Add area') }} </a>
+
                     <a class="dropdown-item" data-toggle="modal" data-target="#modal-enclosure-setup" data-template-bind='[
                     {"attribute": "href", "value": "edit_link" },
                     {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit enclosure') }} "} ]'> <i class="fas fa-wrench mr-1"></i> {{ _('Settings') }} </a>
