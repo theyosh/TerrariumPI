@@ -6,78 +6,86 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2021-07-23 14:13+CEST\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-08-11 18:44+0000\n"
+"Last-Translator: ntfd0 <nekromant.ntfd@gmail.com>\n"
+"Language-Team: Japanese <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.5.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
 msgid "Lighting"
-msgstr ""
+msgstr "照明"
 
 #: terrariumArea.py:38
 msgid "Heating"
-msgstr ""
+msgstr "ヒーター"
 
 #: terrariumArea.py:44
+#, fuzzy
 msgid "Cooling"
-msgstr ""
+msgstr "冷却"
 
 #: terrariumArea.py:50
 msgid "Humidity"
-msgstr ""
+msgstr "湿度"
 
 #: terrariumArea.py:56
 msgid "Water tank"
-msgstr ""
+msgstr "水ランク"
 
 #: terrariumArea.py:62 views/includes/sidebar.html:186
 msgid "Audio"
-msgstr ""
+msgstr "音声"
 
 #: terrariumArea.py:68
 msgid "CO2"
-msgstr ""
+msgstr "CO2"
 
 #: terrariumArea.py:74
 msgid "Conductivity"
 msgstr ""
 
 #: terrariumArea.py:80
+#, fuzzy
 msgid "Moisture"
-msgstr ""
+msgstr "モイスチャー"
 
 #: terrariumArea.py:86
 msgid "pH"
-msgstr ""
+msgstr "pH"
 
 #: terrariumEngine.py:56
 msgid "temperature"
-msgstr ""
+msgstr "温度"
 
 #: terrariumEngine.py:57
+#, fuzzy
 msgid "distance"
-msgstr ""
+msgstr "距離"
 
 #: terrariumEngine.py:58
+#, fuzzy
 msgid "altitude"
-msgstr ""
+msgstr "高度"
 
 #: terrariumEngine.py:59
 msgid "pressure"
-msgstr ""
+msgstr "気圧"
 
 #: terrariumEngine.py:60
 msgid "humidity"
-msgstr ""
+msgstr "湿度"
 
 #: terrariumEngine.py:61
+#, fuzzy
 msgid "moisture"
-msgstr ""
+msgstr "モイスチャー"
 
 #: terrariumEngine.py:62
 msgid "conductivity"
@@ -85,63 +93,65 @@ msgstr ""
 
 #: terrariumEngine.py:63
 msgid "ph"
-msgstr ""
+msgstr "pH"
 
 #: terrariumEngine.py:64
 msgid "light"
-msgstr ""
+msgstr "照明"
 
 #: terrariumEngine.py:65
 msgid "uva"
-msgstr ""
+msgstr "紫外線A波"
 
 #: terrariumEngine.py:66
 msgid "uvb"
-msgstr ""
+msgstr "紫外線B波"
 
 #: terrariumEngine.py:67
 msgid "uvi"
-msgstr ""
+msgstr "UVインデックス"
 
 #: terrariumEngine.py:68
 msgid "fertility"
-msgstr ""
+msgstr "土壌肥沃度"
 
 #: terrariumEngine.py:69
 msgid "co2"
-msgstr ""
+msgstr "CO2"
 
 #: terrariumEngine.py:70
 msgid "volume"
-msgstr ""
+msgstr "量"
 
 #: terrariumEngine.py:71
 msgid "watertank"
-msgstr ""
+msgstr "水タンク"
 
 #: terrariumEngine.py:72
 msgid "windspeed"
-msgstr ""
+msgstr "風速"
 
 #: terrariumEngine.py:73
+#, fuzzy
 msgid "water_flow"
-msgstr ""
+msgstr "水流"
 
 #: terrariumEngine.py:74
 msgid "wattage"
-msgstr ""
+msgstr "ワット数"
 
 #: terrariumEngine.py:1069 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
-msgstr ""
+msgstr "稼働時間"
 
 #: terrariumEngine.py:1075
+#, fuzzy
 msgid "System load"
-msgstr ""
+msgstr "システム負荷"
 
 #: terrariumEngine.py:1081 views/status.html:44
 msgid "CPU Temperature"
-msgstr ""
+msgstr "CPU温度"
 
 #: terrariumEngine.py:1087
 msgid "Storage"
@@ -149,72 +159,79 @@ msgstr ""
 
 #: terrariumEngine.py:1093
 msgid "Memory"
-msgstr ""
+msgstr "メモリー"
 
 #: terrariumEngine.py:1110
 msgid "average {sensor_type}"
-msgstr ""
+msgstr "平均{sensor_type}"
 
 #: terrariumEngine.py:1281
 msgid "last update"
-msgstr ""
+msgstr "最新更新"
 
 #: terrariumNotification.py:42
+#, fuzzy
 msgid "Authentication login error"
-msgstr ""
+msgstr "ログイン認証エラー"
 
 #: terrariumNotification.py:43
+#, fuzzy
 msgid "System warning"
-msgstr ""
+msgstr "システム警告"
 
 #: terrariumNotification.py:44
 msgid "System error"
-msgstr ""
+msgstr "システムエラー"
 
 #: terrariumNotification.py:164
 msgid "Display"
-msgstr ""
+msgstr "表示器"
 
 #: terrariumNotification.py:169
 msgid "Email"
-msgstr ""
+msgstr "メール"
 
 #: terrariumNotification.py:174
 msgid "Pushover"
-msgstr ""
+msgstr "Pushover"
 
 #: terrariumNotification.py:179
 msgid "Telegram"
-msgstr ""
+msgstr "Telegram"
 
 #: terrariumNotification.py:184
+#, fuzzy
 msgid "Traffic light"
-msgstr ""
+msgstr "信号灯"
 
 #: terrariumNotification.py:189
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: terrariumNotification.py:194
+#, fuzzy
 msgid "Web-hook"
-msgstr ""
+msgstr "Webフック"
 
 #: terrariumWebserver.py:158 terrariumWebserver.py:236
+#, fuzzy
 msgid "Authenticate to make any changes"
-msgstr ""
+msgstr "変更するにはログインが必要です"
 
 #: terrariumWebserver.py:158 terrariumWebserver.py:236
+#, fuzzy
 msgid "Authentication"
-msgstr ""
+msgstr "ログイン認証"
 
 #: terrariumWebserver.py:158 terrariumWebserver.py:236 views/index.html:2
 msgid "TerrariumPI"
-msgstr ""
+msgstr "TerrariumPI"
 
 #: views/audio_files.html:2 views/audio_files.html:10
 #: views/modals/playlist.html:62
+#, fuzzy
 msgid "Audio files"
-msgstr ""
+msgstr "音声ファイル"
 
 #: views/audio_files.html:24 views/audio_files.html:35
 #: views/enclosures.html:164 views/modals/area.html:46
@@ -224,46 +241,49 @@ msgstr ""
 #: views/modals/sensor.html:59 views/modals/service.html:27
 #: views/modals/webcam.html:48 views/playlists.html:24 views/playlists.html:39
 msgid "Name"
-msgstr ""
+msgstr "名"
 
 #: views/audio_files.html:25 views/audio_files.html:36 views/playlists.html:25
 #: views/playlists.html:40
+#, fuzzy
 msgid "Duration"
-msgstr ""
+msgstr "期間"
 
 #: views/audio_files.html:26 views/audio_files.html:37
 msgid "Filename"
-msgstr ""
+msgstr "ファイル名"
 
 #: views/audio_files.html:27 views/audio_files.html:38
 msgid "Size"
-msgstr ""
+msgstr "サイズ"
 
 #: views/audio_files.html:28 views/audio_files.html:39 views/playlists.html:31
 #: views/playlists.html:46
+#, fuzzy
 msgid "Action"
-msgstr ""
+msgstr "動作"
 
 #: views/audio_files.html:46
 msgid "Upload new audio file"
-msgstr ""
+msgstr "新しい音声ファイルをアップロード"
 
 #: views/audio_files.html:51 views/modals/enclosure.html:33
 #: views/settings.html:264
 msgid "Choose a file"
-msgstr ""
+msgstr "ファイル選択"
 
 #: views/buttons.html:2 views/includes/sidebar.html:140
 msgid "Buttons"
-msgstr ""
+msgstr "ボタン類"
 
 #: views/buttons.html:9
+#, fuzzy
 msgid "No buttons"
-msgstr ""
+msgstr "ボタンが見つからなかった"
 
 #: views/buttons.html:12
 msgid "Add new button"
-msgstr ""
+msgstr "新しいボタンを追加"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
 #: views/dashboard.html:120 views/dashboard.html:312 views/enclosures.html:14
@@ -272,79 +292,80 @@ msgstr ""
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
 #: views/webcams.html:14 views/webcams.html:41
 msgid "Login to make changes"
-msgstr ""
+msgstr "変更するにはログインが必要です"
 
 #: views/buttons.html:25 views/dashboard.html:280 views/relays.html:27
 #: views/sensors.html:31 views/webcams.html:23
 msgid "Last update"
-msgstr ""
+msgstr "最新更新"
 
 #: views/buttons.html:31 views/dashboard.html:286 views/relays.html:34
 #: views/sensors.html:37
 msgid "error"
-msgstr ""
+msgstr "エラー"
 
 #: views/buttons.html:32 views/dashboard.html:287 views/relays.html:35
 #: views/sensors.html:38
 msgid "warning"
-msgstr ""
+msgstr "警告"
 
 #: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:295
 #: views/enclosures.html:32 views/relays.html:45 views/sensors.html:49
 msgid "Day"
-msgstr ""
+msgstr "日"
 
 #: views/buttons.html:40 views/dashboard.html:296 views/relays.html:46
 #: views/sensors.html:50
 msgid "Week"
-msgstr ""
+msgstr "週"
 
 #: views/buttons.html:41 views/dashboard.html:297 views/relays.html:47
 #: views/sensors.html:51
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 #: views/buttons.html:42 views/dashboard.html:298 views/relays.html:48
 #: views/sensors.html:52
 msgid "Year"
-msgstr ""
+msgstr "年"
 
 #: views/buttons.html:53 views/dashboard.html:309 views/relays.html:60
 #: views/sensors.html:64
 msgid "Export"
-msgstr ""
+msgstr "エキスポート"
 
 #: views/buttons.html:58 views/calendar.html:7 views/dashboard.html:117
 #: views/includes/sidebar.html:264 views/relays.html:64 views/sensors.html:69
 #: views/settings.html:2 views/weather.html:7 views/webcams.html:32
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: views/buttons.html:63 views/relays.html:76 views/sensors.html:74
 #: views/webcams.html:35
+#, fuzzy
 msgid "Ignore"
-msgstr ""
+msgstr "ミュート"
 
 #: views/buttons.html:68 views/modals/webcam.html:400 views/relays.html:80
 #: views/sensors.html:79 views/webcams.html:38
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 #: views/calendar.html:2 views/includes/sidebar.html:68
 msgid "Calendar"
-msgstr ""
+msgstr "カレンダー"
 
 #: views/calendar.html:6
 msgid "Download iCal"
-msgstr ""
+msgstr "iCalをダウンロード"
 
 #: views/dashboard.html:2 views/includes/sidebar.html:48
 msgid "Dashboard"
-msgstr ""
+msgstr "ダッシュボード"
 
 #: views/dashboard.html:44
 msgid "Power usage in Watt"
-msgstr ""
+msgstr "消費電力（ワット）"
 
 #: views/dashboard.html:59
 msgid "Water flow in %s"
@@ -352,11 +373,12 @@ msgstr ""
 
 #: views/dashboard.html:73
 msgid "Total power usage"
-msgstr ""
+msgstr "電力消費量合計"
 
 #: views/dashboard.html:74 views/relays.html:26
+#, fuzzy
 msgid "kWh"
-msgstr ""
+msgstr "kWh"
 
 #: views/dashboard.html:78 views/dashboard.html:96 views/weather.html:33
 msgid "in"
@@ -364,206 +386,213 @@ msgstr ""
 
 #: views/dashboard.html:91
 msgid "Total water usage"
-msgstr ""
+msgstr "水使用量"
 
 #: views/dashboard.html:108 views/enclosures.html:2
 #: views/includes/sidebar.html:215
 msgid "Enclosures"
-msgstr ""
+msgstr "ケージ"
 
 #: views/dashboard.html:168 views/enclosures.html:46
 msgid "Night"
-msgstr ""
+msgstr "夜"
 
 #: views/dashboard.html:184 views/enclosures.html:60
 msgid "Low"
-msgstr ""
+msgstr "低"
 
 #: views/dashboard.html:201 views/enclosures.html:74
 msgid "High"
-msgstr ""
+msgstr "高"
 
 #: views/dashboard.html:218 views/enclosures.html:88
 #: views/modals/button.html:56 views/modals/relay.html:78
 #: views/modals/sensor.html:71 views/weather.html:20
 msgid "Current"
-msgstr ""
+msgstr "現在"
 
 #: views/enclosures.html:9
 msgid "No enclosures"
-msgstr ""
+msgstr "ケージが登録されていません"
 
 #: views/enclosures.html:12
 msgid "Add new enclosure"
-msgstr ""
+msgstr "ケージ追加"
 
 #: views/enclosures.html:133
 msgid "Add area"
-msgstr ""
+msgstr "エリア追加"
 
 #: views/enclosures.html:160
 msgid "Areas"
-msgstr ""
+msgstr "エリア一覧"
 
 #: views/enclosures.html:165 views/modals/area.html:31
 #: views/modals/sensor.html:32 views/modals/service.html:18
+#, fuzzy
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 #: views/enclosures.html:166 views/modals/area.html:60
 #: views/modals/area.html:240 views/modals/area.html:425
 msgid "Mode"
-msgstr ""
+msgstr "モード"
 
 #: views/enclosures.html:167 views/includes/sidebar.html:119
 #: views/includes/sidebar.html:148 views/includes/sidebar.html:252
 #: views/status.html:2 views/status.html:9
 msgid "Status"
-msgstr ""
+msgstr "状態"
 
 #: views/enclosures.html:169
+#, fuzzy
 msgid "Actions"
-msgstr ""
+msgstr "動作"
 
 #: views/includes/modals.html:5 views/includes/modals.html:17
 #: views/modals/webcam.html:399
+#, fuzzy
 msgid "Confirm"
-msgstr ""
+msgstr "OK"
 
 #: views/includes/modals.html:14 views/layouts/modal.html:20
 #: views/modals/webcam.html:159 views/modals/webcam.html:398
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #: views/includes/navigation.html:17
 msgid "Upcoming events"
-msgstr ""
+msgstr "今後のイベント"
 
 #: views/includes/navigation.html:22
 msgid "See All Events"
-msgstr ""
+msgstr "イベントを全て見る"
 
 #: views/includes/navigation.html:31
+#, fuzzy
 msgid "All doors status"
-msgstr ""
+msgstr "ドアー状態一覧"
 
 #: views/includes/navigation.html:34
 msgid "All doors are closed"
-msgstr ""
+msgstr "全てのドアーが閉まっています"
 
 #: views/includes/navigation.html:44
 msgid "Current status"
-msgstr ""
+msgstr "現状"
 
 #: views/includes/sidebar.html:14
 msgid "Hello"
-msgstr ""
+msgstr "こんにちは"
 
 #: views/includes/sidebar.html:16
 msgid "Logout"
-msgstr ""
+msgstr "ログアウト"
 
 #: views/includes/sidebar.html:19
 msgid "Login"
-msgstr ""
+msgstr "ログイン"
 
 #: views/includes/sidebar.html:19
+#, fuzzy
 msgid "Read only mode"
-msgstr ""
+msgstr "変更不可"
 
 #: views/includes/sidebar.html:40
+#, fuzzy
 msgid "Home"
-msgstr ""
+msgstr "トップ"
 
 #: views/includes/sidebar.html:55 views/sensors.html:6
+#, fuzzy
 msgid "All sensors"
-msgstr ""
+msgstr "センサー一覧"
 
 #: views/includes/sidebar.html:62 views/modals/area.html:501
 #: views/weather.html:2
 msgid "Weather"
-msgstr ""
+msgstr "天気"
 
 #: views/includes/sidebar.html:77 views/modals/area.html:430
 #: views/modals/area.html:441 views/modals/webcam.html:384
 msgid "Sensors"
-msgstr ""
+msgstr "センサー"
 
 #: views/includes/sidebar.html:96
 msgid "New sensor"
-msgstr ""
+msgstr "センサーを追加"
 
 #: views/includes/sidebar.html:102
 msgid "Scan sensors"
-msgstr ""
+msgstr "センサーをスキャンする"
 
 #: views/includes/sidebar.html:111 views/modals/area.html:178
 #: views/modals/area.html:221 views/modals/area.html:629
 #: views/modals/area.html:759 views/relays.html:2
 msgid "Relays"
-msgstr ""
+msgstr "リレー"
 
 #: views/includes/sidebar.html:125
 msgid "New relay"
-msgstr ""
+msgstr "リレーを追加"
 
 #: views/includes/sidebar.html:131
 msgid "Scan relays"
-msgstr ""
+msgstr "リレーをスキャンする"
 
 #: views/includes/sidebar.html:154
 msgid "New button"
-msgstr ""
+msgstr "ボタンを追加"
 
 #: views/includes/sidebar.html:163 views/modals/enclosure.html:70
 #: views/webcams.html:2
 msgid "Webcams"
-msgstr ""
+msgstr "カメラ"
 
 #: views/includes/sidebar.html:171
 msgid "Show"
-msgstr ""
+msgstr "表示する"
 
 #: views/includes/sidebar.html:177
 msgid "New webcam"
-msgstr ""
+msgstr "カメラを追加"
 
 #: views/includes/sidebar.html:194
 msgid "Files"
-msgstr ""
+msgstr "ファイル一覧"
 
 #: views/includes/sidebar.html:200 views/modals/area.html:331
 #: views/modals/area.html:401 views/playlists.html:2 views/playlists.html:10
 msgid "Playlists"
-msgstr ""
+msgstr "プレイリスト"
 
 #: views/includes/sidebar.html:206
 msgid "New playlist"
-msgstr ""
+msgstr "プレイリストを追加"
 
 #: views/includes/sidebar.html:223
 msgid "List"
-msgstr ""
+msgstr "一覧"
 
 #: views/includes/sidebar.html:229
 msgid "New enclosure"
-msgstr ""
+msgstr "ケージを追加"
 
 #: views/includes/sidebar.html:235
 msgid "New area"
-msgstr ""
+msgstr "エリアを追加"
 
 #: views/includes/sidebar.html:244 views/settings.html:16
 msgid "System"
-msgstr ""
+msgstr "システム"
 
 #: views/includes/sidebar.html:258 views/notifications.html:2
 msgid "Notifications"
-msgstr ""
+msgstr "通知"
 
 #: views/includes/sidebar.html:270 views/log.html:2
 msgid "Log"
-msgstr ""
+msgstr "ログ"
 
 #: views/includes/sidebar.html:276
 msgid "Restart"
@@ -571,7 +600,7 @@ msgstr ""
 
 #: views/includes/sidebar.html:282
 msgid "Reboot"
-msgstr ""
+msgstr "再起動"
 
 #: views/includes/sidebar.html:288
 msgid "Shutdown"
@@ -583,11 +612,12 @@ msgstr ""
 
 #: views/includes/sidebar.html:297
 msgid "Help"
-msgstr ""
+msgstr "ヘルプ"
 
 #: views/includes/sidebar.html:311
+#, fuzzy
 msgid "Usage"
-msgstr ""
+msgstr "使用状況"
 
 #: views/includes/sidebar.html:317 views/modals/button.html:17
 #: views/modals/relay.html:17 views/modals/sensor.html:17
@@ -597,55 +627,59 @@ msgstr ""
 
 #: views/layouts/modal.html:23
 msgid "Save changes"
-msgstr ""
+msgstr "変更を保存する"
 
 #: views/log.html:6
 msgid "Download log file"
-msgstr ""
+msgstr "ログファイルをダウンロード"
 
 #: views/log.html:19
 msgid "System logging"
-msgstr ""
+msgstr "システムログ"
 
 #: views/log.html:25
 msgid "Filters"
-msgstr ""
+msgstr "フィルター"
 
 #: views/log.html:35
 msgid "errors"
-msgstr ""
+msgstr "エラー"
 
 #: views/log.html:39
 msgid "warnings"
-msgstr ""
+msgstr "警告"
 
 #: views/modals/area.html:11
 msgid "Area settings"
-msgstr ""
+msgstr "エリアー設定"
 
 #: views/modals/area.html:17
 msgid "Enclosure"
-msgstr ""
+msgstr "ケージ"
 
 #: views/modals/area.html:23
+#, fuzzy
 msgid "Select the enclosure where this area belongs to."
-msgstr ""
+msgstr "本エリアに該当するケージを選択してください"
 
 #: views/modals/area.html:37
+#, fuzzy
 msgid "Select the type of area. Each type has its own extra options and logic."
-msgstr ""
+msgstr "エリアの種類を選択してください。各種類には独特なオプションやロジックがついています。"
 
 #: views/modals/area.html:40 views/modals/area.html:82
+#, fuzzy
 msgid "ERROR"
-msgstr ""
+msgstr "【エラー】"
 
 #: views/modals/area.html:49 views/modals/button.html:47
 #: views/modals/enclosure.html:20 views/modals/event.html:18
 #: views/modals/playlist.html:20 views/modals/relay.html:47
 #: views/modals/sensor.html:62 views/modals/service.html:30
 #: views/modals/webcam.html:51
+#, fuzzy
 msgid "Enter a name."
-msgstr ""
+msgstr "名前を入力してください。"
 
 #: views/modals/area.html:52 views/modals/button.html:50
 #: views/modals/enclosure.html:23 views/modals/event.html:21
