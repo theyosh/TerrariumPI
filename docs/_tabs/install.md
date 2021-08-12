@@ -16,11 +16,12 @@ Here we will install Raspberry PI and TerrariumPI software step by step.
 
 # Raspberry PI
 
-![Raspberry PI Logo](../assets/img/RaspberryPI_Logo.png){: .right width="200" }
+![Raspberry PI Logo](/assets/img/RaspberryPI_Logo.webp){: .right width="200" }
 In order to run TerrariumPI you first need a working Raspberry PI with the '[Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)' image. This is very important, as the Desktop version will not work well with the GPIO pins.
 
 ## Creating SD Card
 
+![Raspberry PI Imager](/assets/img/RPI_Imager.webp){: .right width="200" }
 Download and instal the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to prepare your SD card. Make sure you have a SD card of at least 4GB of size. Bigger is better :)
 
 When the SD card is written, you can read/write the 'boot' partition. Add a file called 'ssh' to it. This will [enable SSH on a headless Raspberry Pi (add file to SD card on another machine)](https://www.raspberrypi.org/documentation/remote-access/ssh/).

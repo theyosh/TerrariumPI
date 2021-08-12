@@ -21,7 +21,7 @@ Sensors
 
 Relays
 ------
-![New relay form](/assets/img/Add_Relay_Form.png)
+![New relay form](/assets/img/Add_Relay_Form.webp)
 _Popup form for adding and updating relays. - Calibration is only available for dimmers_
 
 
