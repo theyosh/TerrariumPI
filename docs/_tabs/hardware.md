@@ -14,7 +14,7 @@ image:
 
 ## GPIO
 ![Raspberry PI GPIO pins layout](/assets/img/GPIO-Pinout-Diagram.webp){: style="max-width: 200px" .right}
-All the hardware that is connected through GPIO pins needs to use the physical pin number as address. This means a number from 1 - 40.
+All the hardware that is connected through GPIO pins needs to use the **physical pin number** as address. This means a number from 1 - 40.
 
 ### Power saving
 Some GPIO sensors can benefit from using power saving. A good example is the analog/digital moisture sensor YTXX - TODO: Make link to actual sensor
