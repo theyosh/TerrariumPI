@@ -19,6 +19,8 @@ Here we will install Raspberry PI and TerrariumPI software step by step.
 ![Raspberry PI Logo](/assets/img/RaspberryPI_Logo.webp){: .right width="200" }
 In order to run TerrariumPI you first need a working Raspberry PI with the '[Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)' image. This is very important, as the Desktop version will not work well with the GPIO pins.
 
+Also 64bit is not supported due to missing mmal code which is needed for the webcams.
+
 ## Creating SD Card
 
 ![Raspberry PI Imager](/assets/img/RPI_Imager.webp){: .right width="200" }
