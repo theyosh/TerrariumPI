@@ -6,9 +6,9 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Energenie_Lan.webp
-  width: 1000   # in pixels
-  height: 400   # in pixels
-  alt: image alternative text
+  width: 75%
+  height: auto
+  alt: "Energenie LAN header image"
 
 device_type : Energenie LAN
 device_address: "Enter the full http url and adding '#' and number to speicfy the relay.<br />Ex: `http://[Optional_Password]@[Energenie_IP]/#2` will toggle the 2nd relay on the device."

@@ -4,6 +4,12 @@ icon: fas fa-tools
 order: 3
 layout: post
 toc: true
+
+image:
+  src: /assets/img/Hardware.webp
+  width: 100%
+  height: auto
+  alt: Hardware header image
 ---
 
 ## GPIO
@@ -24,7 +30,7 @@ It is possible to add analog sensors to TerrariumPI. But as TerrariumPI only has
 By default there is only 1 I2C bus available. [But it is possible to add more I2C busses to your Raspberry PI](https://www.instructables.com/id/Raspberry-PI-Multiple-I2c-Devices/). To select a different I2C bus then 1, use the following address notation:<br />
 `[I2C Address],[I2C Bus numer]`
 
-For `[I2C Address]` you can use the number shown in the i2cdetect. Adding '**0x**' in front is allowed. So either **3c** or **0x3c** are valid I2C addresses.
+For `[I2C Address]` you can use the number shown in the i2cdetect. Adding '**0x**' in front is allowed. So either **3c**, **3c,1**, **0x3c** and **0x3c,1** are valid and the same I2C addresses.
 
 Run the command `i2cdetect -y 1` in order to see what is connected to your I2C bus. A correct working I2C bus should produce the following outcome:
 ```console

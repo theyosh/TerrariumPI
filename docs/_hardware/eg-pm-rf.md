@@ -6,9 +6,9 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/ENER010-PI.webp
-  width: 1000   # in pixels
-  height: 400   # in pixels
-  alt: image alternative text
+  width: 75%
+  height: auto
+  alt: "Energenie RF header image"
 
 device_type : Energenie RF
 device_address: "Enter the relay number from 1 - 4."

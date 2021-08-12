@@ -6,12 +6,12 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/FTDI.webp
-  width: 1000   # in pixels
-  height: 400   # in pixels
-  alt: image alternative text
+  width: 75%
+  height: auto
+  alt: "FTDI header image"
 
 device_type : FTDI
-device_address: "Enter the relay number from 1 - 4."
+device_address: "Enter the relay number from 1 - 4. Optional add the serial of the board seperated by a comma.<br />Ex: `1,A702JH8H`"
 device_auto_detect: true
 ---
 

@@ -1,14 +1,14 @@
 ---
-title: GPIO
+title: GPIO Relays
 categories: [Hardware, Relay]
 tags: [relay, gpio]
 permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/GPIO_Relay.webp
-  width: 1000   # in pixels
-  height: 400   # in pixels
-  alt: image alternative text
+  width: 75%
+  height: auto
+  alt: "GPIO Relays header image"
 
 device_type : GPIO
 device_address: "Enter the relay GPIO physical port number for a single relay."

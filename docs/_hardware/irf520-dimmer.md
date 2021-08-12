@@ -6,9 +6,9 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Mosfet_Dimmer.webp
-  width: 1000   # in pixels
-  height: 400   # in pixels
-  alt: image alternative text
+  width: 75%
+  height: auto
+  alt: "IRF520 dimmer header image"
 
 device_type : IRF520 Dimmer
 device_address: Physical GPIO pin number 1 - 40

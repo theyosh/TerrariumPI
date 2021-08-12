@@ -6,9 +6,9 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Meross.webp
-  width: 1000   # in pixels
-  height: 400   # in pixels
-  alt: image alternative text
+  width: 75%
+  height: auto
+  alt: "Meross header image"
 
 device_type : Meross power switches
 device_address: ""

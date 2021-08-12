@@ -5,11 +5,11 @@ order: 4
 toc: true
 layout: post
 
-# image:
-#   src: ../assets/img/RaspberryPI_Logo.png
-#   width: 400   # in pixels
-#   height: 400   # in pixels
-#  alt: Raspberry PI Logo
+image:
+  src: /assets/img/Installation.webp
+  width: 100%
+  height: auto
+  alt: Installation header image
 ---
 
 Here we will install Raspberry PI and TerrariumPI software step by step.

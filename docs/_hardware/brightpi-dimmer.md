@@ -6,9 +6,9 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Bright-PI-Header.webp
-  width: 1000   # in pixels
-  height: 400   # in pixels
-  alt: image alternative text
+  width: 75%
+  height: auto
+  alt: "Bright-PI header image"
 
 device_type : Bright-PI (dimmer)
 device_address: anything will do. This address is not used in code.
