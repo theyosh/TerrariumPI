@@ -16,10 +16,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
 
   def _load_hardware(self):
     # Input format should be either:
-    # - http://[HOST]#[POWER_SWITCH_NR]
-    # - http://[HOST]/#[POWER_SWITCH_NR]
-    # - http://[PASSWORD]@[HOST]#[POWER_SWITCH_NR]
-    # - http://[PASSWORD]@[HOST]/#[POWER_SWITCH_NR]
+    # - [IP],[POWER_SWITCH_NR]
 
     # Use an internal caching for speeding things up.
     self.__state_cache = terrariumCache()

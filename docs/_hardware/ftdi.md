@@ -1,11 +1,11 @@
 ---
 title: FTDI
 categories: [Hardware, Relay]
-tags: [relay]
+tags: [relay, ftdi]
 permalink: /hardware/relay/:title/
 
 image:
-  src: /assets/img/FTDI.png
+  src: /assets/img/FTDI.webp
   width: 1000   # in pixels
   height: 400   # in pixels
   alt: image alternative text

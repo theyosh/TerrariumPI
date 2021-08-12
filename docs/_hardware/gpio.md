@@ -1,11 +1,11 @@
 ---
 title: GPIO
 categories: [Hardware, Relay]
-tags: [relay]
+tags: [relay, gpio]
 permalink: /hardware/relay/:title/
 
 image:
-  src: /assets/img/GPIO_Relay.png
+  src: /assets/img/GPIO_Relay.webp
   width: 1000   # in pixels
   height: 400   # in pixels
   alt: image alternative text

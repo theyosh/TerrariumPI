@@ -1,11 +1,11 @@
 ---
 title: Meross power switches
 categories: [Hardware, Relay]
-tags: [relay]
+tags: [relay, meross]
 permalink: /hardware/relay/:title/
 
 image:
-  src: /assets/img/Meross.png
+  src: /assets/img/Meross.webp
   width: 1000   # in pixels
   height: 400   # in pixels
   alt: image alternative text

@@ -17,7 +17,7 @@ When you want to enable power saving, just enter an extra GPIO pin number to the
 <br />Ex: `[GPIO Readout pin],[GPIO power saving pin]`
 
 ### Analog sensors
-![RaspIO Analog Zero](/assets/img/RasPiO-Analog-Zero.png){: style="max-width: 200px" .right}
+![RaspIO Analog Zero](/assets/img/RasPiO-Analog-Zero.webp){: style="max-width: 200px" .right}
 It is possible to add analog sensors to TerrariumPI. But as TerrariumPI only has digital GPIO ports, an extra add on is needed to add analog ports. For now the [RaspIO Analog Zero](https://rasp.io/analogzero/) is known to work. But any MCP3008 based board should work.
 
 ## I2C bus

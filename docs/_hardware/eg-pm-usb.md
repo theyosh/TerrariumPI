@@ -1,11 +1,11 @@
 ---
 title: Energenie USB
 categories: [Hardware, Relay]
-tags: [relay]
+tags: [relay, energenie]
 permalink: /hardware/relay/:title/
 
 image:
-  src: /assets/img/Energenie_USB.png
+  src: /assets/img/Energenie_USB.webp
   width: 1000   # in pixels
   height: 400   # in pixels
   alt: image alternative text
