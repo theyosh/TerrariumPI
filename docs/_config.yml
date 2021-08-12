@@ -152,8 +152,6 @@ defaults:
     values:
       layout: post
       dynamic_title: true
-
-#      permalink: /:title/
       toc: true
 
   - scope:

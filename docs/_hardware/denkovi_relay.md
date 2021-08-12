@@ -11,7 +11,7 @@ image:
   alt: image alternative text
 
 device_type : Denkovi Relay v2 (X sockets)
-device_address: "Enter the relay number 1 - X. Optional you can enter the Serial address of the board if you have multiple relay boards like: 1,0035685"
+device_address: "Enter the relay number 1 - X. Optional you can enter the Serial address of the board if you have multiple relay boards like: `1,0035685`"
 ---
 
 ## Information
