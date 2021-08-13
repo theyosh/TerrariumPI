@@ -75,7 +75,7 @@ module AllCategoriesAndTags
       # Initialize data hash with a key pointing to all posts under current category.
       # This allows accessing the list in a template via `page.linked_docs`.
       @data = {
-        'title' => category,
+        'title' => category.capitalize,
         'posts' => posts,
         'layout' => 'category',
       }
@@ -113,7 +113,7 @@ module AllCategoriesAndTags
       # Initialize data hash with a key pointing to all posts under current category.
       # This allows accessing the list in a template via `page.linked_docs`.
       @data = {
-        'title' => tag,
+        'title' => tag.capitalize,
         'posts' => posts,
         'layout' => 'tag',
       }
