@@ -1,3 +1,5 @@
+include Jekyll::Filters
+
 module AllCategoriesAndTags
 
   class CategoriesAndTagsPageGenerator < Jekyll::Generator
@@ -59,10 +61,11 @@ module AllCategoriesAndTags
 
   # Subclass of `Jekyll::Page` with custom method definitions.
   class CategoryPage < Jekyll::Page
+
     def initialize(site, category, posts)
       @site = site              # the current site instance.
       @base = site.source       # path to the source directory.
-      @dir  = category.downcase # the directory the page will reside in.
+      @dir  = slugify(category) # the directory the page will reside in.
 
       # All pages have the same filename, so define attributes straight away.
       @basename = 'index'      # filename without the extension.
@@ -96,10 +99,11 @@ module AllCategoriesAndTags
 
   # Subclass of `Jekyll::Page` with custom method definitions.
   class TagPage < Jekyll::Page
+
     def initialize(site, tag, posts)
       @site = site              # the current site instance.
       @base = site.source       # path to the source directory.
-      @dir  = tag.downcase      # the directory the page will reside in.
+      @dir  = slugify(tag)      # the directory the page will reside in.
 
       # All pages have the same filename, so define attributes straight away.
       @basename = 'index'      # filename without the extension.
