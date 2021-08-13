@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-08-13 12:32+CEST\n"
-"PO-Revision-Date: 2021-08-11 18:44+0000\n"
+"PO-Revision-Date: 2021-08-13 10:53+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_GB/>\n"
@@ -910,10 +910,8 @@ msgstr "Enter the volume of the water tank."
 #: views/modals/sensor.html:124 views/modals/sensor.html:136
 #: views/settings.html:35 views/settings.html:59 views/settings.html:211
 #: views/settings.html:223 views/settings.html:279
-#, fuzzy
-#| msgid "Please enter a minimal value of %s."
 msgid "Please enter a minimum value of %s."
-msgstr "Please enter a minimal value of %s."
+msgstr "Please enter a minimum value of %s."
 
 #: views/modals/area.html:465
 msgid "Height"
@@ -1352,40 +1350,32 @@ msgid "Alarm min"
 msgstr "Alarm min"
 
 #: views/modals/sensor.html:85
-#, fuzzy
-#| msgid "Enter the minimal value for the alarm."
 msgid "Enter the minimum value for the alarm."
-msgstr "Enter the minimal value for the alarm."
+msgstr "Enter the minimum value for the alarm."
 
 #: views/modals/sensor.html:94
 msgid "Alarm max"
 msgstr "Alarm max"
 
 #: views/modals/sensor.html:97
-#, fuzzy
-#| msgid "Enter the maximal value for the alarm."
 msgid "Enter the maximum value for the alarm."
-msgstr "Enter the maximal value for the alarm."
+msgstr "Enter the maximum value for the alarm."
 
 #: views/modals/sensor.html:106
 msgid "Limit min"
 msgstr "Limit min"
 
 #: views/modals/sensor.html:109
-#, fuzzy
-#| msgid "Enter the minimal value that is valid."
 msgid "Enter the minimum value that is valid."
-msgstr "Enter the minimal value that is valid."
+msgstr "Enter the minimum value that is valid."
 
 #: views/modals/sensor.html:118
 msgid "Limit max"
 msgstr "Limit max"
 
 #: views/modals/sensor.html:121
-#, fuzzy
-#| msgid "Enter the maximal value that is valid."
 msgid "Enter the maximum value that is valid."
-msgstr "Enter the maximal value that is valid."
+msgstr "Enter the maximum value that is valid."
 
 #: views/modals/sensor.html:130
 msgid "Max diff"
@@ -1413,26 +1403,20 @@ msgid "Enter a numeric value."
 msgstr "Enter a numeric value."
 
 #: views/modals/sensor.html:171
-#, fuzzy
-#| msgid "Maximum moist value"
 msgid "minimum moist value"
-msgstr "Maximum moist value"
+msgstr "minimum moist value"
 
 #: views/modals/sensor.html:174
-#, fuzzy
-#| msgid "Enter this minimal moist value."
 msgid "Enter this minimum moist value."
-msgstr "Enter this minimal moist value."
+msgstr "Enter this minimum moist value."
 
 #: views/modals/sensor.html:183
 msgid "Maximum moist value"
 msgstr "Maximum moist value"
 
 #: views/modals/sensor.html:186
-#, fuzzy
-#| msgid "Enter the maximal moisture value."
 msgid "Enter the maximum moisture value."
-msgstr "Enter the maximal moisture value."
+msgstr "Enter the maximum moisture value."
 
 #: views/modals/sensor.html:195
 msgid "Compensation sensors"
@@ -2097,10 +2081,8 @@ msgid "Show min and max values in gauge graphs"
 msgstr "Show min and max values in gauge graphs"
 
 #: views/settings.html:305
-#, fuzzy
-#| msgid "Show the minimal and maximum value on the gauges."
 msgid "Show the minimum and maximum value on the gauges."
-msgstr "Show the minimal and maximum value on the gauges."
+msgstr "Show the minimum and maximum value on the gauges."
 
 #: views/settings.html:310
 msgid "Hide enclosures on dashboard"
