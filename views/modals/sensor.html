@@ -82,10 +82,10 @@
       <label for="sensor_alarm_min">{{ _('Alarm min') }}</label>
       <input type="number" step="0.001" class="form-control" id="sensor_alarm_min" name="alarm_min" required="required" placeholder="{{ _('Alarm min') }}">
       <small class="text-muted">
-        {{ _('Enter the minimal value for the alarm.') }}
+        {{ _('Enter the minimum value for the alarm.') }}
       </small>
       <div class="invalid-feedback">
-        {{ _('Please enter a minimal value of %s.') % ('0',) }}
+        {{ _('Please enter a minimum value of %s.') % ('0',) }}
       </div>
     </div>
   </div>
@@ -94,10 +94,10 @@
       <label for="sensor_alarm_max">{{ _('Alarm max') }}</label>
       <input type="number" step="0.001" class="form-control" id="sensor_alarm_max" name="alarm_max" required="required" placeholder="{{ _('Alarm max') }}">
       <small class="text-muted">
-        {{ _('Enter the maximal value for the alarm.') }}
+        {{ _('Enter the maximum value for the alarm.') }}
       </small>
       <div class="invalid-feedback">
-        {{ _('Please enter a minimal value of %s.') % ('0',) }}
+        {{ _('Please enter a minimum value of %s.') % ('0',) }}
       </div>
     </div>
   </div>
@@ -106,10 +106,10 @@
       <label for="sensor_limit_min">{{ _('Limit min') }}</label>
       <input type="number" step="0.001" class="form-control" id="sensor_limit_min" name="limit_min" required="required" placeholder="{{ _('Limit min') }}">
       <small class="text-muted">
-        {{ _('Enter the minimal value that is valid.') }}
+        {{ _('Enter the minimum value that is valid.') }}
       </small>
       <div class="invalid-feedback">
-        {{ _('Please enter a minimal value of %s.') % ('0',) }}
+        {{ _('Please enter a minimum value of %s.') % ('0',) }}
       </div>
     </div>
   </div>
@@ -118,10 +118,10 @@
       <label for="sensor_limit_max">{{ _('Limit max') }}</label>
       <input type="number" step="0.001" class="form-control" id="sensor_limit_max" name="limit_max" required="required" placeholder="{{ _('Limit max') }}">
       <small class="text-muted">
-        {{ _('Enter the maximal value that is valid.') }}
+        {{ _('Enter the maximum value that is valid.') }}
       </small>
       <div class="invalid-feedback">
-        {{ _('Please enter a minimal value of %s.') % ('0',) }}
+        {{ _('Please enter a minimum value of %s.') % ('0',) }}
       </div>
     </div>
   </div>
@@ -133,7 +133,7 @@
         {{ _('Enter the max difference between two measurements that is valid.') }}
       </small>
       <div class="invalid-feedback">
-        {{ _('Please enter a minimal value of %s.') % ('0',) }}
+        {{ _('Please enter a minimum value of %s.') % ('0',) }}
       </div>
     </div>
   </div>
@@ -168,10 +168,10 @@
       </div>
       <div class="col-6 col-sm-6 col-md-6 col-lg-2 chirp">
         <div class="form-group">
-          <label for="chirp_min_moist">{{ _('Minimal moist value') }}</label>
-          <input type="number" step="1" class="form-control" id="sensor_chirp_min_moist" name="chirp_min_moist" placeholder="{{ _('Minimal moist value') }}" value="160">
+          <label for="chirp_min_moist">{{ _('minimum moist value') }}</label>
+          <input type="number" step="1" class="form-control" id="sensor_chirp_min_moist" name="chirp_min_moist" placeholder="{{ _('minimum moist value') }}" value="160">
           <small class="text-muted">
-            {{ _('Enter this minimal moist value.') }}
+            {{ _('Enter this minimum moist value.') }}
           </small>
           <div class="invalid-feedback">
             {{ _('Enter a numeric value.') }}
@@ -183,7 +183,7 @@
           <label for="sensor_chirp_max_moist">{{ _('Maximum moist value') }}</label>
           <input type="number" step="1" class="form-control" id="sensor_chirp_max_moist" name="chirp_max_moist" placeholder="{{ _('Maximum moist value') }}" value="720">
           <small class="text-muted">
-            {{ _('Enter the maximal moisture value.') }}
+            {{ _('Enter the maximum moisture value.') }}
           </small>
           <div class="invalid-feedback">
             {{ _('Enter a numeric value.') }}
