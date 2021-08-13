@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2021-07-23 14:13+CEST\n"
+"POT-Creation-Date: 2021-08-13 12:32+CEST\n"
 "PO-Revision-Date: 2021-08-11 18:44+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
@@ -18,43 +18,43 @@ msgstr ""
 "X-Generator: Weblate 4.5.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:32
+#: terrariumArea.py:31
 msgid "Lighting"
 msgstr "Lighting"
 
-#: terrariumArea.py:38
+#: terrariumArea.py:37
 msgid "Heating"
 msgstr "Heating"
 
-#: terrariumArea.py:44
+#: terrariumArea.py:43
 msgid "Cooling"
 msgstr "Cooling"
 
-#: terrariumArea.py:50
+#: terrariumArea.py:49
 msgid "Humidity"
 msgstr "Humidity"
 
-#: terrariumArea.py:56
+#: terrariumArea.py:55
 msgid "Water tank"
 msgstr "Water tank"
 
-#: terrariumArea.py:62 views/includes/sidebar.html:186
+#: terrariumArea.py:61 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:68
+#: terrariumArea.py:67
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:74
+#: terrariumArea.py:73
 msgid "Conductivity"
 msgstr "Conductivity"
 
-#: terrariumArea.py:80
+#: terrariumArea.py:79
 msgid "Moisture"
 msgstr "Moisture"
 
-#: terrariumArea.py:86
+#: terrariumArea.py:85
 msgid "pH"
 msgstr "pH"
 
@@ -134,31 +134,31 @@ msgstr "water_flow"
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:1069 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1055 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Up time"
 
-#: terrariumEngine.py:1075
+#: terrariumEngine.py:1061
 msgid "System load"
 msgstr "System load"
 
-#: terrariumEngine.py:1081 views/status.html:44
+#: terrariumEngine.py:1067 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU Temperature"
 
-#: terrariumEngine.py:1087
+#: terrariumEngine.py:1073
 msgid "Storage"
 msgstr "Storage"
 
-#: terrariumEngine.py:1093
+#: terrariumEngine.py:1079
 msgid "Memory"
 msgstr "Memory"
 
-#: terrariumEngine.py:1110
+#: terrariumEngine.py:1096
 msgid "average {sensor_type}"
 msgstr "average {sensor_type}"
 
-#: terrariumEngine.py:1281
+#: terrariumEngine.py:1267
 msgid "last update"
 msgstr "last update"
 
@@ -220,7 +220,7 @@ msgid "Audio files"
 msgstr "Audio files"
 
 #: views/audio_files.html:24 views/audio_files.html:35
-#: views/enclosures.html:164 views/modals/area.html:46
+#: views/enclosures.html:172 views/modals/area.html:46
 #: views/modals/button.html:44 views/modals/enclosure.html:17
 #: views/modals/event.html:15 views/modals/message.html:33
 #: views/modals/playlist.html:17 views/modals/relay.html:44
@@ -270,7 +270,7 @@ msgstr "Add new button"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
 #: views/dashboard.html:120 views/dashboard.html:312 views/enclosures.html:14
-#: views/enclosures.html:141 views/log.html:8 views/notifications.html:20
+#: views/enclosures.html:149 views/log.html:8 views/notifications.html:20
 #: views/notifications.html:62 views/relays.html:14 views/relays.html:83
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
 #: views/webcams.html:14 views/webcams.html:41
@@ -293,7 +293,7 @@ msgid "warning"
 msgstr "warning"
 
 #: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:295
-#: views/enclosures.html:32 views/relays.html:45 views/sensors.html:49
+#: views/enclosures.html:33 views/relays.html:45 views/sensors.html:49
 msgid "Day"
 msgstr "Day"
 
@@ -374,19 +374,19 @@ msgstr "Total water usage"
 msgid "Enclosures"
 msgstr "Enclosures"
 
-#: views/dashboard.html:168 views/enclosures.html:46
+#: views/dashboard.html:168 views/enclosures.html:47
 msgid "Night"
 msgstr "Night"
 
-#: views/dashboard.html:184 views/enclosures.html:60
+#: views/dashboard.html:184 views/enclosures.html:61
 msgid "Low"
 msgstr "Low"
 
-#: views/dashboard.html:201 views/enclosures.html:74
+#: views/dashboard.html:201 views/enclosures.html:75
 msgid "High"
 msgstr "High"
 
-#: views/dashboard.html:218 views/enclosures.html:88
+#: views/dashboard.html:218 views/enclosures.html:89
 #: views/modals/button.html:56 views/modals/relay.html:78
 #: views/modals/sensor.html:71 views/weather.html:20
 msgid "Current"
@@ -400,31 +400,27 @@ msgstr "No enclosures"
 msgid "Add new enclosure"
 msgstr "Add new enclosure"
 
-#: views/enclosures.html:133
-msgid "Add area"
-msgstr "Add area"
-
-#: views/enclosures.html:160
+#: views/enclosures.html:168
 msgid "Areas"
 msgstr "Areas"
 
-#: views/enclosures.html:165 views/modals/area.html:31
+#: views/enclosures.html:173 views/modals/area.html:31
 #: views/modals/sensor.html:32 views/modals/service.html:18
 msgid "Type"
 msgstr "Type"
 
-#: views/enclosures.html:166 views/modals/area.html:60
+#: views/enclosures.html:174 views/modals/area.html:60
 #: views/modals/area.html:240 views/modals/area.html:425
 msgid "Mode"
 msgstr "Mode"
 
-#: views/enclosures.html:167 views/includes/sidebar.html:119
+#: views/enclosures.html:175 views/includes/sidebar.html:119
 #: views/includes/sidebar.html:148 views/includes/sidebar.html:252
 #: views/status.html:2 views/status.html:9
 msgid "Status"
 msgstr "Status"
 
-#: views/enclosures.html:169
+#: views/enclosures.html:177
 msgid "Actions"
 msgstr "Actions"
 
@@ -914,7 +910,9 @@ msgstr "Enter the volume of the water tank."
 #: views/modals/sensor.html:124 views/modals/sensor.html:136
 #: views/settings.html:35 views/settings.html:59 views/settings.html:211
 #: views/settings.html:223 views/settings.html:279
-msgid "Please enter a minimal value of %s."
+#, fuzzy
+#| msgid "Please enter a minimal value of %s."
+msgid "Please enter a minimum value of %s."
 msgstr "Please enter a minimal value of %s."
 
 #: views/modals/area.html:465
@@ -1354,7 +1352,9 @@ msgid "Alarm min"
 msgstr "Alarm min"
 
 #: views/modals/sensor.html:85
-msgid "Enter the minimal value for the alarm."
+#, fuzzy
+#| msgid "Enter the minimal value for the alarm."
+msgid "Enter the minimum value for the alarm."
 msgstr "Enter the minimal value for the alarm."
 
 #: views/modals/sensor.html:94
@@ -1362,7 +1362,9 @@ msgid "Alarm max"
 msgstr "Alarm max"
 
 #: views/modals/sensor.html:97
-msgid "Enter the maximal value for the alarm."
+#, fuzzy
+#| msgid "Enter the maximal value for the alarm."
+msgid "Enter the maximum value for the alarm."
 msgstr "Enter the maximal value for the alarm."
 
 #: views/modals/sensor.html:106
@@ -1370,7 +1372,9 @@ msgid "Limit min"
 msgstr "Limit min"
 
 #: views/modals/sensor.html:109
-msgid "Enter the minimal value that is valid."
+#, fuzzy
+#| msgid "Enter the minimal value that is valid."
+msgid "Enter the minimum value that is valid."
 msgstr "Enter the minimal value that is valid."
 
 #: views/modals/sensor.html:118
@@ -1378,7 +1382,9 @@ msgid "Limit max"
 msgstr "Limit max"
 
 #: views/modals/sensor.html:121
-msgid "Enter the maximal value that is valid."
+#, fuzzy
+#| msgid "Enter the maximal value that is valid."
+msgid "Enter the maximum value that is valid."
 msgstr "Enter the maximal value that is valid."
 
 #: views/modals/sensor.html:130
@@ -1407,11 +1413,15 @@ msgid "Enter a numeric value."
 msgstr "Enter a numeric value."
 
 #: views/modals/sensor.html:171
-msgid "Minimal moist value"
-msgstr "Minimal moist value"
+#, fuzzy
+#| msgid "Maximum moist value"
+msgid "minimum moist value"
+msgstr "Maximum moist value"
 
 #: views/modals/sensor.html:174
-msgid "Enter this minimal moist value."
+#, fuzzy
+#| msgid "Enter this minimal moist value."
+msgid "Enter this minimum moist value."
 msgstr "Enter this minimal moist value."
 
 #: views/modals/sensor.html:183
@@ -1419,7 +1429,9 @@ msgid "Maximum moist value"
 msgstr "Maximum moist value"
 
 #: views/modals/sensor.html:186
-msgid "Enter the maximal moisture value."
+#, fuzzy
+#| msgid "Enter the maximal moisture value."
+msgid "Enter the maximum moisture value."
 msgstr "Enter the maximal moisture value."
 
 #: views/modals/sensor.html:195
@@ -2085,7 +2097,9 @@ msgid "Show min and max values in gauge graphs"
 msgstr "Show min and max values in gauge graphs"
 
 #: views/settings.html:305
-msgid "Show the minimal and maximum value on the gauges."
+#, fuzzy
+#| msgid "Show the minimal and maximum value on the gauges."
+msgid "Show the minimum and maximum value on the gauges."
 msgstr "Show the minimal and maximum value on the gauges."
 
 #: views/settings.html:310
@@ -2184,7 +2198,11 @@ msgstr "Add new webcam"
 msgid "Action succeeded"
 msgstr "Action succeeded"
 
-#: views/layouts/modal.html:87
+#: views/enclosures.html:140
+msgid "Add area"
+msgstr "Add area"
+
+#: views/layouts/modal.html:88
 msgid "added"
 msgstr "added"
 
@@ -2250,7 +2268,7 @@ msgstr "Current value"
 msgid "Delay"
 msgstr "Delay"
 
-#: views/enclosures.html:119
+#: views/enclosures.html:120
 msgid "Delete area"
 msgstr "Delete area"
 
@@ -2262,7 +2280,7 @@ msgstr "Delete audio file"
 msgid "Delete button"
 msgstr "Delete button"
 
-#: views/enclosures.html:139
+#: views/enclosures.html:147
 msgid "Delete enclosure"
 msgstr "Delete enclosure"
 
@@ -2294,7 +2312,7 @@ msgstr "Delete webcam"
 msgid "Dimmer offset in percentage"
 msgstr "Dimmer offset in percentage"
 
-#: views/enclosures.html:116
+#: views/enclosures.html:117
 msgid "Edit area"
 msgstr "Edit area"
 
@@ -2302,7 +2320,7 @@ msgstr "Edit area"
 msgid "Edit button"
 msgstr "Edit button"
 
-#: views/enclosures.html:136
+#: views/enclosures.html:144
 msgid "Edit enclosure"
 msgstr "Edit enclosure"
 
@@ -2471,7 +2489,7 @@ msgstr "Export relay"
 msgid "Export sensor"
 msgstr "Export sensor"
 
-#: views/layouts/modal.html:63 views/settings.html:404
+#: views/layouts/modal.html:64 views/settings.html:404
 msgid "Form error"
 msgstr "Form error"
 
@@ -2515,7 +2533,7 @@ msgstr "minutes"
 msgid "No reminder"
 msgstr "No reminder"
 
-#: views/layouts/modal.html:63 views/settings.html:404
+#: views/layouts/modal.html:64 views/settings.html:404
 msgid "Not all required fields are entered correctly."
 msgstr "Not all required fields are entered correctly."
 
@@ -2543,11 +2561,11 @@ msgstr "Reboot TerrariumPI"
 msgid "Restart TerrariumPI"
 msgstr "Restart TerrariumPI"
 
-#: views/layouts/modal.html:95
+#: views/layouts/modal.html:96
 msgid "Save Error"
 msgstr "Save Error"
 
-#: views/layouts/modal.html:88
+#: views/layouts/modal.html:89
 msgid "Save OK"
 msgstr "Save OK"
 
@@ -2634,13 +2652,12 @@ msgstr "Select optional relay for flash"
 msgid "Select period"
 msgstr "Select period"
 
-#: views/modals/area.html:332
+#: views/modals/area.html:332 views/modals/area.html:402
 msgid "Select playlists"
 msgstr "Select playlists"
 
 #: views/modals/area.html:179 views/modals/area.html:222
-#: views/modals/area.html:402 views/modals/area.html:630
-#: views/modals/area.html:760
+#: views/modals/area.html:630 views/modals/area.html:760
 msgid "Select relays"
 msgstr "Select relays"
 
@@ -2689,11 +2706,11 @@ msgstr "Toggle menu"
 msgid "Toggle relay"
 msgstr "Toggle relay"
 
-#: views/layouts/modal.html:87
+#: views/layouts/modal.html:88
 msgid "{type} {name} is {action}"
 msgstr "{type} {name} is {action}"
 
-#: views/layouts/modal.html:87
+#: views/layouts/modal.html:88
 msgid "updated"
 msgstr "updated"
 
@@ -2736,6 +2753,9 @@ msgstr "Wattage when powered on"
 #: views/modals/weather.html:18
 msgid "Weather data source url"
 msgstr "Weather data source url"
+
+#~ msgid "Minimal moist value"
+#~ msgstr "Minimal moist value"
 
 #~ msgid "Please enter a name of at least 1 character."
 #~ msgstr "Please enter a name of at least 1 character."

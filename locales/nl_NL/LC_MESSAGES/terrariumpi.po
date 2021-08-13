@@ -5,11 +5,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2021-07-23 14:13+CEST\n"
+"POT-Creation-Date: 2021-08-13 12:32+CEST\n"
 "PO-Revision-Date: 2021-08-13 10:32+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
-"4-x-y-z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
+"z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,43 +19,43 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: terrariumArea.py:32
+#: terrariumArea.py:31
 msgid "Lighting"
 msgstr "Verlichting"
 
-#: terrariumArea.py:38
+#: terrariumArea.py:37
 msgid "Heating"
 msgstr "Verwarming"
 
-#: terrariumArea.py:44
+#: terrariumArea.py:43
 msgid "Cooling"
 msgstr "Koelen"
 
-#: terrariumArea.py:50
+#: terrariumArea.py:49
 msgid "Humidity"
 msgstr "Luchtvochtigheid"
 
-#: terrariumArea.py:56
+#: terrariumArea.py:55
 msgid "Water tank"
 msgstr "Watertank"
 
-#: terrariumArea.py:62 views/includes/sidebar.html:186
+#: terrariumArea.py:61 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:68
+#: terrariumArea.py:67
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:74
+#: terrariumArea.py:73
 msgid "Conductivity"
 msgstr "Geleidingsvermogen"
 
-#: terrariumArea.py:80
+#: terrariumArea.py:79
 msgid "Moisture"
 msgstr "Vochtigheid"
 
-#: terrariumArea.py:86
+#: terrariumArea.py:85
 msgid "pH"
 msgstr "pH"
 
@@ -135,31 +135,31 @@ msgstr "waterstroom"
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:1069 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1055 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Actief"
 
-#: terrariumEngine.py:1075
+#: terrariumEngine.py:1061
 msgid "System load"
 msgstr "Systeembelasting"
 
-#: terrariumEngine.py:1081 views/status.html:44
+#: terrariumEngine.py:1067 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Processor temperatuur"
 
-#: terrariumEngine.py:1087
+#: terrariumEngine.py:1073
 msgid "Storage"
 msgstr "Opslag"
 
-#: terrariumEngine.py:1093
+#: terrariumEngine.py:1079
 msgid "Memory"
 msgstr "Geheugen"
 
-#: terrariumEngine.py:1110
+#: terrariumEngine.py:1096
 msgid "average {sensor_type}"
 msgstr "gemiddelde {sensor_type}"
 
-#: terrariumEngine.py:1281
+#: terrariumEngine.py:1267
 msgid "last update"
 msgstr "laatste wijziging"
 
@@ -221,7 +221,7 @@ msgid "Audio files"
 msgstr "Audio bestanden"
 
 #: views/audio_files.html:24 views/audio_files.html:35
-#: views/enclosures.html:164 views/modals/area.html:46
+#: views/enclosures.html:172 views/modals/area.html:46
 #: views/modals/button.html:44 views/modals/enclosure.html:17
 #: views/modals/event.html:15 views/modals/message.html:33
 #: views/modals/playlist.html:17 views/modals/relay.html:44
@@ -271,7 +271,7 @@ msgstr "Voeg nieuwe knop toe"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
 #: views/dashboard.html:120 views/dashboard.html:312 views/enclosures.html:14
-#: views/enclosures.html:141 views/log.html:8 views/notifications.html:20
+#: views/enclosures.html:149 views/log.html:8 views/notifications.html:20
 #: views/notifications.html:62 views/relays.html:14 views/relays.html:83
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
 #: views/webcams.html:14 views/webcams.html:41
@@ -294,7 +294,7 @@ msgid "warning"
 msgstr "waarschuwing"
 
 #: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:295
-#: views/enclosures.html:32 views/relays.html:45 views/sensors.html:49
+#: views/enclosures.html:33 views/relays.html:45 views/sensors.html:49
 msgid "Day"
 msgstr "Dag"
 
@@ -375,19 +375,19 @@ msgstr "Totaal waterverbruik"
 msgid "Enclosures"
 msgstr "Verblijven"
 
-#: views/dashboard.html:168 views/enclosures.html:46
+#: views/dashboard.html:168 views/enclosures.html:47
 msgid "Night"
 msgstr "Nacht"
 
-#: views/dashboard.html:184 views/enclosures.html:60
+#: views/dashboard.html:184 views/enclosures.html:61
 msgid "Low"
 msgstr "Laag"
 
-#: views/dashboard.html:201 views/enclosures.html:74
+#: views/dashboard.html:201 views/enclosures.html:75
 msgid "High"
 msgstr "Hoog"
 
-#: views/dashboard.html:218 views/enclosures.html:88
+#: views/dashboard.html:218 views/enclosures.html:89
 #: views/modals/button.html:56 views/modals/relay.html:78
 #: views/modals/sensor.html:71 views/weather.html:20
 msgid "Current"
@@ -401,31 +401,27 @@ msgstr "Geen verblijven"
 msgid "Add new enclosure"
 msgstr "Voeg een nieuwe verblijf toe"
 
-#: views/enclosures.html:133
-msgid "Add area"
-msgstr "Gebied toevoegen"
-
-#: views/enclosures.html:160
+#: views/enclosures.html:168
 msgid "Areas"
 msgstr "Gebieden"
 
-#: views/enclosures.html:165 views/modals/area.html:31
+#: views/enclosures.html:173 views/modals/area.html:31
 #: views/modals/sensor.html:32 views/modals/service.html:18
 msgid "Type"
 msgstr "Type"
 
-#: views/enclosures.html:166 views/modals/area.html:60
+#: views/enclosures.html:174 views/modals/area.html:60
 #: views/modals/area.html:240 views/modals/area.html:425
 msgid "Mode"
 msgstr "Modus"
 
-#: views/enclosures.html:167 views/includes/sidebar.html:119
+#: views/enclosures.html:175 views/includes/sidebar.html:119
 #: views/includes/sidebar.html:148 views/includes/sidebar.html:252
 #: views/status.html:2 views/status.html:9
 msgid "Status"
 msgstr "Status"
 
-#: views/enclosures.html:169
+#: views/enclosures.html:177
 msgid "Actions"
 msgstr "Acties"
 
@@ -929,7 +925,9 @@ msgstr "Voer de volume in van de watertank."
 #: views/modals/sensor.html:124 views/modals/sensor.html:136
 #: views/settings.html:35 views/settings.html:59 views/settings.html:211
 #: views/settings.html:223 views/settings.html:279
-msgid "Please enter a minimal value of %s."
+#, fuzzy
+#| msgid "Please enter a minimal value of %s."
+msgid "Please enter a minimum value of %s."
 msgstr "Voer een minimale waarde in van %s."
 
 #: views/modals/area.html:465
@@ -1388,7 +1386,9 @@ msgid "Alarm min"
 msgstr "Alarm min"
 
 #: views/modals/sensor.html:85
-msgid "Enter the minimal value for the alarm."
+#, fuzzy
+#| msgid "Enter the minimal value for the alarm."
+msgid "Enter the minimum value for the alarm."
 msgstr "Voer de minimale waarde voor het alarm in."
 
 #: views/modals/sensor.html:94
@@ -1396,7 +1396,9 @@ msgid "Alarm max"
 msgstr "Alarm max"
 
 #: views/modals/sensor.html:97
-msgid "Enter the maximal value for the alarm."
+#, fuzzy
+#| msgid "Enter the maximal value for the alarm."
+msgid "Enter the maximum value for the alarm."
 msgstr "Voer de maximale waarde voor het alarm in."
 
 #: views/modals/sensor.html:106
@@ -1406,7 +1408,7 @@ msgstr "Limiet min"
 #: views/modals/sensor.html:109
 #, fuzzy
 #| msgid "Please enter a minimal value of %s."
-msgid "Enter the minimal value that is valid."
+msgid "Enter the minimum value that is valid."
 msgstr "Voer een minimale waarde in van %s."
 
 #: views/modals/sensor.html:118
@@ -1414,8 +1416,10 @@ msgid "Limit max"
 msgstr "Limiet max"
 
 #: views/modals/sensor.html:121
-msgid "Enter the maximal value that is valid."
-msgstr ""
+#, fuzzy
+#| msgid "Please enter a minimal value of %s."
+msgid "Enter the maximum value that is valid."
+msgstr "Voer een minimale waarde in van %s."
 
 #: views/modals/sensor.html:130
 msgid "Max diff"
@@ -1447,11 +1451,15 @@ msgid "Enter a numeric value."
 msgstr "Voer een naam in voor dit gebied."
 
 #: views/modals/sensor.html:171
-msgid "Minimal moist value"
+#, fuzzy
+#| msgid "Maximum moist value"
+msgid "minimum moist value"
 msgstr "Minimale vochtwaarde"
 
 #: views/modals/sensor.html:174
-msgid "Enter this minimal moist value."
+#, fuzzy
+#| msgid "Enter this minimal moist value."
+msgid "Enter this minimum moist value."
 msgstr "Vul deze minimale vochtigheidswaarde in."
 
 #: views/modals/sensor.html:183
@@ -1459,7 +1467,9 @@ msgid "Maximum moist value"
 msgstr "Minimale vochtwaarde"
 
 #: views/modals/sensor.html:186
-msgid "Enter the maximal moisture value."
+#, fuzzy
+#| msgid "Enter the maximal moisture value."
+msgid "Enter the maximum moisture value."
 msgstr "Vul de maximale vochtwaarde in."
 
 #: views/modals/sensor.html:195
@@ -2150,7 +2160,9 @@ msgid "Show min and max values in gauge graphs"
 msgstr "Toon min- en max- waarden in meter grafieken"
 
 #: views/settings.html:305
-msgid "Show the minimal and maximum value on the gauges."
+#, fuzzy
+#| msgid "Show the minimal and maximum value on the gauges."
+msgid "Show the minimum and maximum value on the gauges."
 msgstr "Toon de minimale en maximale waarde op de meters."
 
 #: views/settings.html:310
@@ -2249,7 +2261,11 @@ msgstr "Voeg nieuwe webcam toe"
 msgid "Action succeeded"
 msgstr "Actie geslaagd"
 
-#: views/layouts/modal.html:87
+#: views/enclosures.html:140
+msgid "Add area"
+msgstr "Gebied toevoegen"
+
+#: views/layouts/modal.html:88
 msgid "added"
 msgstr "toegevoegd"
 
@@ -2315,7 +2331,7 @@ msgstr "Huidige waarde"
 msgid "Delay"
 msgstr "Vertraging"
 
-#: views/enclosures.html:119
+#: views/enclosures.html:120
 msgid "Delete area"
 msgstr "Gebied verwijderen"
 
@@ -2327,7 +2343,7 @@ msgstr "Audio-bestand verwijderen"
 msgid "Delete button"
 msgstr "Knop verwijderen"
 
-#: views/enclosures.html:139
+#: views/enclosures.html:147
 msgid "Delete enclosure"
 msgstr "Verwijder verblijf"
 
@@ -2359,7 +2375,7 @@ msgstr "Verwijder webcam"
 msgid "Dimmer offset in percentage"
 msgstr "Dimmer-offset in procenten"
 
-#: views/enclosures.html:116
+#: views/enclosures.html:117
 msgid "Edit area"
 msgstr "Gebied bewerken"
 
@@ -2367,7 +2383,7 @@ msgstr "Gebied bewerken"
 msgid "Edit button"
 msgstr "Knop bewerken"
 
-#: views/enclosures.html:136
+#: views/enclosures.html:144
 msgid "Edit enclosure"
 msgstr "Bewerk verblijf"
 
@@ -2536,7 +2552,7 @@ msgstr "Exporteer schakelaar"
 msgid "Export sensor"
 msgstr "Exporteer sensor"
 
-#: views/layouts/modal.html:63 views/settings.html:404
+#: views/layouts/modal.html:64 views/settings.html:404
 msgid "Form error"
 msgstr "Formulierfout"
 
@@ -2580,7 +2596,7 @@ msgstr "minuten"
 msgid "No reminder"
 msgstr "Geen herinnering"
 
-#: views/layouts/modal.html:63 views/settings.html:404
+#: views/layouts/modal.html:64 views/settings.html:404
 msgid "Not all required fields are entered correctly."
 msgstr "Niet alle verplichte velden zijn correct ingevuld."
 
@@ -2608,11 +2624,11 @@ msgstr "Start TerrariumPI opnieuw op"
 msgid "Restart TerrariumPI"
 msgstr "Start TerrariumPI opnieuw"
 
-#: views/layouts/modal.html:95
+#: views/layouts/modal.html:96
 msgid "Save Error"
 msgstr "Fout bij opslaan"
 
-#: views/layouts/modal.html:88
+#: views/layouts/modal.html:89
 msgid "Save OK"
 msgstr "Opslaan OK"
 
@@ -2701,13 +2717,12 @@ msgstr "Selecteer optionele schakelaar voor flits"
 msgid "Select period"
 msgstr "Selecteer periode"
 
-#: views/modals/area.html:332
+#: views/modals/area.html:332 views/modals/area.html:402
 msgid "Select playlists"
 msgstr "Selecteer afspeellijsten"
 
 #: views/modals/area.html:179 views/modals/area.html:222
-#: views/modals/area.html:402 views/modals/area.html:630
-#: views/modals/area.html:760
+#: views/modals/area.html:630 views/modals/area.html:760
 msgid "Select relays"
 msgstr "Selecteer schakelaars"
 
@@ -2756,11 +2771,11 @@ msgstr "Navigatiemenu"
 msgid "Toggle relay"
 msgstr "Schakel"
 
-#: views/layouts/modal.html:87
+#: views/layouts/modal.html:88
 msgid "{type} {name} is {action}"
 msgstr "{type} {name} is {action}"
 
-#: views/layouts/modal.html:87
+#: views/layouts/modal.html:88
 msgid "updated"
 msgstr "bijgewerkt"
 
@@ -2803,6 +2818,9 @@ msgstr "Wattage wanneer ingeschakeld"
 #: views/modals/weather.html:18
 msgid "Weather data source url"
 msgstr "URL van bron voor weergegevens"
+
+#~ msgid "Minimal moist value"
+#~ msgstr "Minimale vochtwaarde"
 
 #~ msgid "Please enter a name of at least 1 character."
 #~ msgstr "Voer een naam in van minimaal 1 teken."
