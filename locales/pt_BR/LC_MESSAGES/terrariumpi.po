@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-08-13 12:32+CEST\n"
-"PO-Revision-Date: 2021-08-13 10:53+0000\n"
+"PO-Revision-Date: 2021-08-13 10:55+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -1400,10 +1400,8 @@ msgid "Enter a numeric value."
 msgstr "Insira um valor numérico."
 
 #: views/modals/sensor.html:171
-#, fuzzy
-#| msgid "Maximum moist value"
 msgid "minimum moist value"
-msgstr "Valor máximo umidade"
+msgstr "valor mínimo umidade"
 
 #: views/modals/sensor.html:174
 msgid "Enter this minimum moist value."
