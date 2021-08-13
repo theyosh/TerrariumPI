@@ -1,17 +1,17 @@
 ---
 title: Denkovi V2
 categories: [Hardware, Relay]
-tags: [relay]
+tags: [relay, denkovi]
 permalink: /hardware/relay/:title/
 
 image:
-  src: /assets/img/Denkovi_V2_X_sockets.png
-  width: 600   # in pixels
-  height: 200   # in pixels
-  alt: image alternative text
+  src: /assets/img/Denkovi_V2_X_sockets.webp
+  width: 75%
+  height: auto
+  alt: "Denkovi V2 Relay header image"
 
 device_type : Denkovi Relay v2 (X sockets)
-device_address: "Enter the relay number 1 - X. Optional you can enter the Serial address of the board if you have multiple relay boards like: 1,0035685"
+device_address: "Enter the relay number 1 - X. Optional you can enter the Serial address of the board if you have multiple relay boards like: `1,0035685`"
 ---
 
 ## Information

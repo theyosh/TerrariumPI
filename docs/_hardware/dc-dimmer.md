@@ -1,7 +1,7 @@
 ---
 title: DC Dimmer
 categories: [Hardware, Relay]
-tags: [relay, dimmer]
+tags: [relay, dimmer, dc]
 permalink: /hardware/relay/:title/
 
 # image:
@@ -11,7 +11,7 @@ permalink: /hardware/relay/:title/
 #   alt: image alternative text
 
 device_type : DC Dimmer
-device_address: Physical GPIO pin number 0 - 40
+device_address: Physical GPIO pin number 1 - 40
 dimmer_frequency: 1500
 ---
 

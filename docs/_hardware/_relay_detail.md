@@ -1,6 +1,11 @@
 ## Setup
 
-In order to use the {{ page.device_title }} use the following settings:
+{% if page.device_auto_detect %}
+### Auto detect
+This relay will be auto detected during startup
+{% endif %}
+
+In order to use the **{{ page.device_title | default: page.title }}** use the following settings:
 
 ### Mandantory
 
