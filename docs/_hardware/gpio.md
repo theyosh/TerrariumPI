@@ -12,6 +12,7 @@ image:
 
 device_type : GPIO
 device_address: "Enter the relay GPIO physical port number for a single relay."
+#device_url : https://shop.meross.com/collections/smart-power-strip
 ---
 
 ## Information

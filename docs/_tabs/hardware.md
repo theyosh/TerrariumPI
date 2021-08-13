@@ -45,9 +45,8 @@ Run the command `i2cdetect -y 1` in order to see what is connected to your I2C b
 70: 70 -- -- -- -- -- -- --
 ```
 
-## Relays
-{% assign relays = site.hardware | where_exp: "relay", "relay.tags contains 'relay'" %}
-
+{% assign relays = site.hardware | where_exp: "relay", "relay.tags contains 'relay'" | sort_natural: "title" %}
+## Relays ({{ relays | size}})
 We currently support <strong>{{ relays | size}}</strong> types of relays. Relays which has a dial icon ![Dimmer icon](/assets/img/dimmer_icon.png){: style="height: 20px" .normal} after their name are dimmers.
 
 {% for relay in relays %}
@@ -60,10 +59,8 @@ We currently support <strong>{{ relays | size}}</strong> types of relays. Relays
 {% endfor %}
 
 
-## Sensors
-
-{% assign sensors = site.hardware | where_exp: "sensor", "sensor.tags contains 'sensor'" %}
-
+{% assign sensors = site.hardware | where_exp: "sensor", "sensor.tags contains 'sensor'" | sort_natural: "title %}
+## Sensors ({{ sensors | size}})
 We currently support <strong>{{ sensors | size}}</strong> types of sensors:
 <br />
 

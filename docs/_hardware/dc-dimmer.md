@@ -13,11 +13,10 @@ permalink: /hardware/relay/:title/
 device_type : DC Dimmer
 device_address: Physical GPIO pin number 1 - 40
 dimmer_frequency: 1500
+#device_url : https://shop.meross.com/collections/smart-power-strip
 ---
 
 ## Information
-The Bright-Pi is a small little board based around the Semtech SC620 that powers 4 white LEDs and 8 infrared ones.
-
-[Please check our quick start and FAQ for more information.](https://github.com/PiSupply/Bright-Pi)
+DC Dimmer....
 
 {% include_relative _relay_detail.md %}

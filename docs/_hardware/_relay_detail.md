@@ -1,3 +1,6 @@
+{% if page.device_url %}
+[More information ...]({{ page.device_url }})
+{% endif %}
 ## Setup
 
 {% if page.device_auto_detect %}
