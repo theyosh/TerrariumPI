@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-08-13 12:32+CEST\n"
-"PO-Revision-Date: 2021-04-09 19:46+0000\n"
-"Last-Translator: fabi2803 <l.fabian@me.com>\n"
+"PO-Revision-Date: 2021-08-13 10:53+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/de_AT/>\n"
 "Language: de_AT\n"
@@ -646,10 +646,8 @@ msgstr "ERROR"
 #: views/modals/playlist.html:20 views/modals/relay.html:47
 #: views/modals/sensor.html:62 views/modals/service.html:30
 #: views/modals/webcam.html:51
-#, fuzzy
-#| msgid "Enter a name"
 msgid "Enter a name."
-msgstr "Nutzername eingeben"
+msgstr "Nutzername eingeben."
 
 #: views/modals/area.html:52 views/modals/button.html:50
 #: views/modals/enclosure.html:23 views/modals/event.html:21
