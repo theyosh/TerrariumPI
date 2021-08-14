@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-03-25 11:52+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2021-08-15 09:40+0000\n"
+"Last-Translator: PETIT Jordan <jordan33004@laposte.net>\n"
 "Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/3-x-y-z/fr_BE/>\n"
 "Language: fr_BE\n"
@@ -33,7 +33,7 @@ msgstr "Température du CPU"
 
 #: terrariumEngine.py:769
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: terrariumEngine.py:795 views/system_status.tpl:174
 msgid "Disk usage"
