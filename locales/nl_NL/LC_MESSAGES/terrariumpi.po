@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-08-13 12:32+CEST\n"
-"PO-Revision-Date: 2021-08-13 10:53+0000\n"
+"PO-Revision-Date: 2021-08-14 08:33+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/nl/>\n"
@@ -495,7 +495,7 @@ msgstr "Nieuwe sensor"
 
 #: views/includes/sidebar.html:102
 msgid "Scan sensors"
-msgstr "Selecteer sensoren"
+msgstr "Scan sensoren"
 
 #: views/includes/sidebar.html:111 views/modals/area.html:178
 #: views/modals/area.html:221 views/modals/area.html:629
