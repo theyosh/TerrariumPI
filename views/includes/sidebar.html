@@ -300,21 +300,9 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/mailbox.html" class="nav-link">
+              <a href="{{ url_for('page', page='about')}}" class="nav-link" title="{{ _('About') }}">
                 <i class="fas fa-info nav-icon"></i>
                 <p>{{ _('About') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/mailbox-compose.html" class="nav-link">
-                <i class="fas fa-book nav-icon"></i>
-                <p>{{ _('Usage') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/mailbox-read-mail.html" class="nav-link">
-                <i class="fas fa-microchip nav-icon"></i>
-                <p>{{ _('Hardware') }}</p>
               </a>
             </li>
           </ul>

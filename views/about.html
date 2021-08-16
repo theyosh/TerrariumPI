@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+{% block title %}{{ _('About') }}{% endblock %}
+{% block content %}
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{ _('About') }}</h1>
+        </div>
+        <div class="col-sm-6">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Terrarium PI V. {{ version }}</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <img src="assets/img/profile_image.jpg" style="right" />
+        <p>TerrariumPI is started back in 2015 in order to keep my Daygecko happy. This piece of software is started a home automation for reptiles, but now it can be used for indoor plants growing and paludariums.</p>
+        <p>This software is written in Python3 and uses the <a href="https://adminlte.io/" target="_blank">AdminLTE admin web interface</a>.</p>
+        <p>For documentation about how to install and set it up, see <a href="https://theyosh.github.io/TerrariumPI" target="_blank">https://theyosh.github.io/TerrariumPI</a></p>
+        <p>For bugs and feature requests please open a <a href="https://github.com/theyosh/TerrariumPI/issues" target="_blank"></a>Github issue</a>.</p>
+        <p>&copy; Copyright 2015 - 2021 TheYOSH</p>
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer">
+      </div>
+      <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+  </section>
+  <script>
+
+  </script>
+</div>
+{% endblock content %}
