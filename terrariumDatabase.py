@@ -219,7 +219,7 @@ class NotificationService(db.Entity):
     # Encrypt sensitive fields
     for field in ['username','password','user_key','access_secret']:
       if field in self.setup:
-        self.setup[field] = encryptterrariumUtilsion.encrypt(self.setup[field])
+        self.setup[field] = terrariumUtils.encrypt(self.setup[field])
 
   def before_insert(self):
     self.__encrypt_sensitive_fields()
