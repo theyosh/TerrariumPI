@@ -63,10 +63,11 @@ pyfiglet
 
 # Notification packages
 emails
-twitter
-pushover
-luma.oled
-i2c_lcd
+#twitter
+#pushover
+#luma.oled
+#i2c_lcd
+paho-mqtt
 
 # API
 pony

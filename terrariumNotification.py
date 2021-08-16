@@ -21,16 +21,17 @@ import RPi.GPIO as GPIO
 import emails
 
 # Twitter support
-import twitter
+#import twitter
 
 # Pushover support
-import pushover
+#import pushover
 
 # Telegram Bot
+import paho.mqtt.client as mqtt
 import json
-import requests
-from base64 import b64encode
 
+#import requests
+#from base64 import b64encode
 
 import copy
 from pony import orm
@@ -160,39 +161,44 @@ class terrariumNotificationService(object):
 
   __TYPES = {
 
-    'display' : {
-      'name'  : _('Display'),
-      'class' : lambda: terrariumNotificationServiceDisplay
-    },
+    # 'display' : {
+    #   'name'  : _('Display'),
+    #   'class' : lambda: terrariumNotificationServiceDisplay
+    # },
 
     'email' : {
       'name'  : _('Email'),
       'class' : lambda: terrariumNotificationServiceEmail
     },
 
-    'pushover' : {
-      'name'  : _('Pushover'),
-      'class' : lambda: terrariumNotificationServicePushover
-    },
+#     'pushover' : {
+#       'name'  : _('Pushover'),
+#       'class' : lambda: terrariumNotificationServicePushover
+#     },
 
-    'telegram' : {
-      'name'    : _('Telegram'),
-#      'class' : lambda: terrariumAreaHumidity
-    },
+#     'telegram' : {
+#       'name'    : _('Telegram'),
+# #      'class' : lambda: terrariumAreaHumidity
+#     },
 
     'traffic' : {
       'name'    : _('Traffic light'),
       'class' : lambda: terrariumNotificationServiceTrafficLight
     },
 
-    'twitter' : {
-      'name'    : _('Twitter'),
-#      'class' : lambda: terrariumAreaWatertank
-    },
+#     'twitter' : {
+#       'name'    : _('Twitter'),
+# #      'class' : lambda: terrariumAreaWatertank
+#     },
 
     'webhook' : {
       'name'    : _('Web-hook'),
       'class' : lambda: terrariumNotificationServiceWebhook
+    },
+
+    'mqtt' : {
+      'name'    : _('MQTT '),
+      'class' : lambda: terrariumNotificationServiceMQTT
     },
   }
 
@@ -678,10 +684,6 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
           mail_tls_ssl = []
 
 
-class terrariumNotificationServicePushover(terrariumNotificationService):
-  pass
-
-
 class terrariumNotificationServiceWebhook(terrariumNotificationService):
   def load_setup(self, setup_data):
     self.setup = {
@@ -707,7 +709,6 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
           attachment_data = fp.read()
           message['files'].append({'name' : os.path.basename(attachment), 'data' : b64encode(attachment_data).decode('utf-8')})
 
-#      headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     r = requests.post(self.setup['address'], json=data)
     if r.status_code != 200:
       print('Error sending webhook to url \'{}\' with status code: {}'.format(url,r.status_code))
@@ -774,6 +775,32 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
             print(ex)
 
 
+class terrariumNotificationServiceMQTT(terrariumNotificationService):
+  def load_setup(self, setup_data):
+    super().load_setup(setup_data)
+
+    self.connection = None
+
+    regex = re.compile(r"(?P<protocol>https?):\/\/(?P<host>[^\/:]+)(:(?P<port>\d+))?")
+    data = setup_data.get('url')
+    data = regex.search(data)
+    if data is not None:
+      self.setup = {
+        'host'  : data.group('host'),
+        'port'  : int(data.group('port')),
+        'ssl'  : 'https' == data.group('protocol'),
+      }
+
+      self.connection = mqtt.Client(self.setup['host'], port=self.setup['port'])
+      self.connection.loop_start()
+
+  def stop(self):
+    # TODO: Flush the queueu
+    self.connection.disconnect()
+
+  def send_message(self, type, subject, message, attachments = []):
+    if self.connection is not None:
+      self.connection.publish(subject, payload=json.loads(message), qos=1)
 
 
 
