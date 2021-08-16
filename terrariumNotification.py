@@ -161,10 +161,10 @@ class terrariumNotificationService(object):
 
   __TYPES = {
 
-    # 'display' : {
-    #   'name'  : _('Display'),
-    #   'class' : lambda: terrariumNotificationServiceDisplay
-    # },
+    'display' : {
+      'name'  : _('Display'),
+      'class' : lambda: terrariumNotificationServiceDisplay
+    },
 
     'email' : {
       'name'  : _('Email'),
