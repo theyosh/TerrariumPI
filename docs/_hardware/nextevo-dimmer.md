@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/AC_Dimmer_MPDMv4_1_3_Kit.webp
-  width: 75%
-  height: auto
   alt: "NextEVO Universal AC MAINS Dimmer (MPDMv4.1) header image"
 
 device_type : NextEVO Universal AC MAINS Dimmer (MPDMv4.1)

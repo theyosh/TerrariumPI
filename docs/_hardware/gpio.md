@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/GPIO_Relay.webp
-  width: 75%
-  height: auto
   alt: "GPIO Relays header image"
 
 device_type : GPIO

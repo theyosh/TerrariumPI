@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/PCA9685-dimmer.webp
-  width: 75%
-  height: auto
   alt: "PCA9685 header image"
 
 device_type : PCA9685-dimmer

@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/4relay-stack.webp
-  width: 75%
-  height: auto
   alt: "Sequent Microsystems 4 Relay Card header image"
 
 device_type : Sequent Microsystems 4 Relay Card

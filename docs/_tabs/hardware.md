@@ -1,14 +1,10 @@
 ---
 title: Hardware
-icon: fas fa-tools
+icon: fas fa-microchip
 order: 3
-layout: post
-toc: true
 
 image:
   src: /assets/img/Hardware.webp
-  width: 100%
-  height: auto
   alt: Hardware header image
 ---
 

@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/8relay-stack_v1v2.webp
-  width: 75%
-  height: auto
   alt: "Sequent Microsystems 8 Relay Card Ver. 1 - 2 header image"
 
 device_type : Sequent Microsystems 8 Relay Card Ver. 1 - 2

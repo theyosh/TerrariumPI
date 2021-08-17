@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/ENER010-PI.webp
-  width: 75%
-  height: auto
   alt: "Energenie RF header image"
 
 device_type : Energenie RF

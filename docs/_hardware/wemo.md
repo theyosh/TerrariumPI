@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Wemo.webp
-  width: 75%
-  height: auto
   alt: "WEMO Smart plug header image"
 
 device_type : WEMO Smart plug

@@ -153,9 +153,13 @@ defaults:
       path: ''
       type: tabs             # see `site.collections`
     values:
-      layout: page
+      layout: post
       permalink: /:title/
       dynamic_title: true    # Hide title in mobile screens.
+      toc: true
+      image:
+        width: 100%
+        height: auto
 
   -
     scope:
@@ -165,13 +169,16 @@ defaults:
       layout: post
       dynamic_title: true
       toc: true
+      image:
+        width: 75%
+        height: auto
 
   -
     scope:
       path: ''
       type: faq             # see `site.collections`
     values:
-      layout: post
+      layout: page
       dynamic_title: true
 
   - scope:

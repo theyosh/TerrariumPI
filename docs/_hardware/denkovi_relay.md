@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Denkovi_V2_X_sockets.webp
-  width: 75%
-  height: auto
   alt: "Denkovi V2 Relay header image"
 
 device_type : Denkovi Relay v2 (X sockets)

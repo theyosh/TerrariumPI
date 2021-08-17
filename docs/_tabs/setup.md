@@ -2,12 +2,9 @@
 title: Setup
 icon: fas fa-cogs
 order: 5
-layout: post
 
 image:
   src: /assets/img/Setup.webp
-  width: 100%
-  height: auto
   alt: Setup header image
 ---
 

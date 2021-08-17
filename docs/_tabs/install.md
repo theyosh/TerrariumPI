@@ -2,13 +2,9 @@
 title: Install
 icon: fas fa-tools
 order: 4
-toc: true
-layout: post
 
 image:
   src: /assets/img/Installation.webp
-  width: 100%
-  height: auto
   alt: Installation header image
 ---
 

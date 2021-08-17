@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Mosfet_Dimmer.webp
-  width: 75%
-  height: auto
   alt: "IRF520 dimmer header image"
 
 device_type : IRF520 Dimmer

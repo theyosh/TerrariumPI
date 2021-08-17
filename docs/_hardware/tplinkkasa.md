@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Kasa_Smart.webp
-  width: 75%
-  height: auto
   alt: "Kasa Smart header image"
 
 device_type : Kasa Smart

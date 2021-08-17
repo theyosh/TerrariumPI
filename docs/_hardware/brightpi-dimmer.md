@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Bright-PI-Header.webp
-  width: 75%
-  height: auto
   alt: "Bright-PI header image"
 
 device_type : Bright-PI (dimmer)

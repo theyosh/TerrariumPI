@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Sonoff-D1-Dimmer.webp
-  width: 75%
-  height: auto
   alt: "Sonoff D1 Dimmer (Tasmota) header image"
 
 device_type : Sonoff D1 Dimmer (Tasmota)

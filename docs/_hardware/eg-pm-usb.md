@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Energenie_USB.webp
-  width: 75%
-  height: auto
   alt: "Energenie USB header image"
 
 device_type : Energenie USB

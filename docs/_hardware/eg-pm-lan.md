@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Energenie_Lan.webp
-  width: 75%
-  height: auto
   alt: "Energenie LAN header image"
 
 device_type : Energenie LAN

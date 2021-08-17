@@ -6,8 +6,6 @@ permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/FTDI.webp
-  width: 75%
-  height: auto
   alt: "FTDI header image"
 
 device_type : FTDI
