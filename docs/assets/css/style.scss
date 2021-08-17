@@ -1,0 +1,19 @@
+---
+---
+
+/*
+  If the number of TAB files has changed, the following variable is required.
+  And it must be defined before `@import`.
+*/
+$tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
+
+@import "{{ site.theme }}";
+
+/* append your custom style below */
+div.post-content .external {
+  padding-right: 1.1rem;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-image: url('../img/external-link-alt-solid.svg');
+  background-size: 0.8rem;
+}

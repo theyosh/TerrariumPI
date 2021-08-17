@@ -90,7 +90,15 @@ paginate: 10
 plugins:
   - jekyll-feed
   - jekyll-target-blank
+  - jemoji
+  - jekyll-minifier
 
+jekyll-minifier:
+  uglifier_args:
+    harmony: true
+
+target-blank:
+    add_css_classes: external
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
@@ -111,6 +119,10 @@ collections:
 
   hardware:
     output: true
+
+  faq:
+    output: true
+    sort_by: order
 
 
 defaults:
@@ -153,6 +165,14 @@ defaults:
       layout: post
       dynamic_title: true
       toc: true
+
+  -
+    scope:
+      path: ''
+      type: faq             # see `site.collections`
+    values:
+      layout: post
+      dynamic_title: true
 
   - scope:
       type: categories  # Used in _plugins/all_tags_and_categories.rb

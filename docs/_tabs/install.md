@@ -28,6 +28,19 @@ Download and instal the [Raspberry Pi Imager](https://www.raspberrypi.org/softwa
 
 When the SD card is written, you can read/write the 'boot' partition. Add a file called 'ssh' to it. This will [enable SSH on a headless Raspberry Pi (add file to SD card on another machine)](https://www.raspberrypi.org/documentation/remote-access/ssh/).
 
+And if you want to use WiFi also add a small file called `wpa_supplicant.conf` in the 'boot' partition. The contents of the file should be something like this:
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=[Your 2 letter country code]
+
+network={
+        ssid="[Your WiFi Name]"
+        psk="[Your WiFi password]"
+}
+```
+And that should make your Raspberry PI connect to the WiFi network first time it boots.
+
 Put your SD card in the Pi and power it up.
 
 # TerrariumPI
@@ -67,12 +80,52 @@ sudo ./install.sh
 
 After the installation is done, reboot once and you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({{ 'setup' | relative_url}})
 
-# Migration V3 to V4
+# Migration from V3 to V4
 
-If you have an existing version 3 running, and you want to upgrade/migrate to version 4, here are the steps that are needed.
+There is no real migration from version 3 to version 4. The changes are to big. So that means you have to install TerrariumPI v4 as it was a new PI. These migrations steps will only copy the existing relay history data from V3 to V4 so that the total power and water usages is still there. And the total costs are still correct. This is all what will be migrated.
+
+If you do **not care** about your relay history, you can just skip this migration.
+
+So make sure you have the old TerrariumPI stopped. The rename the folder `TerrariumPI` to `TerrariumPI.old`. This way you have a backup of your existing working setup.
+
+Now, install TerrariumPI v4 as [described here]({{ 'install' | relative_url}}). And then you need to set it up as you want. So that means adding sensors and relays. When that is running, you can start migrating the relay history data.
+
 
 1. First make sure you have an backup of files of the old V3 version:
   - settings.cfg
   - history.db
 
-2. Then install V4 as describe above. Then setup the relays and sensors as you had on V3. The last step is to run a small script that will copy the relay history data from V3 to V4. This is the only data to migrate. As this will keep the total used power and water correct.
+2. Stop the TerrariumPI service before start migrating. `sudo service terrariumpi stop`
+
+3. Enter the new TerrariumPI V4 directory. `cd /home/pi/TerrariumPI`
+
+4. Enter the Python3 virtual environment. `souce venv/bin/activate`
+
+5. Enter the `contrib` folder where the file `copy_relay_history.py` is located.
+
+6. Run the script `copy_relay_history.py` with the following parameters in this order:
+  - full path to OLD config (`settings.cfg`)
+  - full path to OLD database (`history.db`)
+  - full path to NEW database (`terrariumpi.db`)
+
+7. Answer the questions asked by the script. This should match your old and new relays, in order to copy the historycal data.
+
+```
+Found 7 out of 8 are found. Below is a summary of the founded relays that can converted.
+
+Relay 'Waterton verwarming' of type 'ftdi' at address '4,A500WMST'. Old ID: 7506c0e9ca0288be148b9617d959e7a6 => New ID: 91e8236ba878587c218b5a9a941a1d48
+Relay 'Mister' of type 'eg-pm-lan' at address 'http://cvaVMnTiMYS35Be@192.168.5.150#2'. Old ID: 30f7595d5a055dc5b2a31127c93c9606 => New ID: 75588e78194b941b937b404db134422e
+Relay 'Verwarmingmat' of type 'ftdi' at address '1,A500WMST'. Old ID: 137488ac23a2b0b516daa315641a178c => New ID: 477dd5dad0da139f8b48225acd3901d3
+Relay 'UV Lamp' of type 'ftdi' at address '2,A500WMST'. Old ID: 4a2151d5834fe888820c831e9a6d8e8b => New ID: 97c45c98476b1807a4bfa7bb4d249b14
+Relay 'Sproeier' of type 'ftdi' at address '3,A500WMST'. Old ID: 01ec0c8f3c4fd952c1b2aef8a4e9ec0d => New ID: beb111bdacda89f8bf13cc749ecd26c0
+Relay 'Dripper plant' of type 'eg-pm-lan' at address 'http://cvaVMnTiMYS35Be@192.168.5.150#1'. Old ID: c867377cd5b6e1d4be580c1fa865ee82 => New ID: f53904eaedfac445e6cdae611612441f
+Relay 'Heat lamp' of type 'nextevo-dimmer' at address '32'. Old ID: 574e22d2b2d6e54ecd5a3db8e6bb50b9 => New ID: 0e0cf978ca6bdb8eb994c186434a628e
+
+The following relays could not be found:
+Relay 'wemotest' of type 'wemo' at address '192.168.5.55'.
+
+If you are happy with this setup, you can continue with the conversion. This will take a lot of time....
+Enter 'yes' to continue. Anything else will abort.:
+```
+
+Enter yes and wait. After the migration is done, you will see a message and you can then start the TerrariumPI service. `sudo service terrariumpi start`
