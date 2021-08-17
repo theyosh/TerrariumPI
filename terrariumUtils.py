@@ -364,6 +364,8 @@ class terrariumUtils():
 
     except Exception as ex:
       print(ex)
+      # Strip passwords from urls
+      url = re.sub(r'(:\/\/)([^@]+)(@[^ ]+)', '\\1*********\\3', url)
       logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
 
     return data
