@@ -248,6 +248,52 @@
   </div>
 
 </div>
+
+<div class="row mqtt">
+
+
+
+  <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="form-group">
+      <label for="address">{{ _('MQTT Server address') }}</label>
+      <input type="text" class="form-control" id="address" name="address" required="required" placeholder="{{ _('Enter the MQTT server address name or ip') }}">
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="form-group">
+      <label for="port">{{ _('MQTT Server port') }}</label>
+      <input type="number" class="form-control" id="port" name="port" required="required" value="25" placeholder="{{ _('Enter the MQTT server port number') }}">
+    </div>
+    <small class="text-muted">
+
+    </small>
+  </div>
+<!--
+  <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+    <div class="form-group">
+      <label for="address">{{ _('MQTT secure connection') }}</label>
+
+      <input type="text" class="form-control" id="address" name="address" required="required" placeholder="{{ _('Enter the MQTT server address name or ip') }}">
+
+    </div>
+  </div> -->
+
+  <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="form-group">
+      <label for="username">{{ _('MQTT Server username') }}</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="{{ _('Enter the SMTP server username') }}">
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="form-group">
+      <label for="password">{{ _('MQTT Server password') }}</label>
+      <input type="text" class="form-control" id="password" name="password" placeholder="{{ _('Enter the SMTP server password') }}">
+    </div>
+  </div>
+
+</div>
 {% endblock %}
 
 {% block modal_form_javascript_functions %}

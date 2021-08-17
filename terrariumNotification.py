@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
+
 import re
 
 from string import Template
@@ -7,6 +10,7 @@ import datetime
 from operator import itemgetter
 
 from threading import Timer
+from hashlib import md5
 
 from terrariumDatabase import NotificationMessage, NotificationService
 from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
@@ -20,18 +24,11 @@ import RPi.GPIO as GPIO
 # Email support
 import emails
 
-# Twitter support
-import twitter
-
-# Pushover support
-import pushover
-
-# Telegram Bot
+# MQTT Support
+import paho.mqtt.client as mqtt
 import json
+
 import requests
-from base64 import b64encode
-
-
 import copy
 from pony import orm
 
@@ -53,7 +50,6 @@ class terrariumNotification(terrariumSingleton):
     return sorted(data, key=itemgetter('name'))
 
   def __init__(self):
-
     self.__rate_limiter_counter = {
       'total' :
         {
@@ -62,7 +58,6 @@ class terrariumNotification(terrariumSingleton):
           'last_check' : datetime.datetime.now()
         }
     }
-
     self.services = {}
 
     self.engine = None
@@ -150,11 +145,19 @@ class terrariumNotification(terrariumSingleton):
           setup['profile_image'] = self.profile_image
           self.services[service.id] = terrariumNotificationService(service.id, service.type, service.name, service.enabled, setup)
 
-        self.services[service.id].send_message(message_id, title, text)
+        self.services[service.id].send_message(message_id, title, text, data)
 
   def stop(self):
     for serviceid in self.services:
       self.services[serviceid].stop()
+
+
+class terrariumNotificationServiceException(TypeError):
+  '''There is a problem with loading a hardware switch. Invalid power switch action.'''
+
+  def __init__(self, message, *args):
+    self.message = message
+    super().__init__(message, *args)
 
 class terrariumNotificationService(object):
 
@@ -170,29 +173,34 @@ class terrariumNotificationService(object):
       'class' : lambda: terrariumNotificationServiceEmail
     },
 
-    'pushover' : {
-      'name'  : _('Pushover'),
-      'class' : lambda: terrariumNotificationServicePushover
-    },
+#     'pushover' : {
+#       'name'  : _('Pushover'),
+#       'class' : lambda: terrariumNotificationServicePushover
+#     },
 
-    'telegram' : {
-      'name'    : _('Telegram'),
-#      'class' : lambda: terrariumAreaHumidity
-    },
+#     'telegram' : {
+#       'name'    : _('Telegram'),
+# #      'class' : lambda: terrariumAreaHumidity
+#     },
 
     'traffic' : {
       'name'    : _('Traffic light'),
       'class' : lambda: terrariumNotificationServiceTrafficLight
     },
 
-    'twitter' : {
-      'name'    : _('Twitter'),
-#      'class' : lambda: terrariumAreaWatertank
-    },
+#     'twitter' : {
+#       'name'    : _('Twitter'),
+# #      'class' : lambda: terrariumAreaWatertank
+#     },
 
     'webhook' : {
       'name'    : _('Web-hook'),
       'class' : lambda: terrariumNotificationServiceWebhook
+    },
+
+    'mqtt' : {
+      'name'    : _('MQTT '),
+      'class' : lambda: terrariumNotificationServiceMQTT
     },
   }
 
@@ -206,14 +214,17 @@ class terrariumNotificationService(object):
 
   # Return polymorph area....
   def __new__(cls, id, type, name = '', enabled = True, setup = None):
+#    print(f'New notification: {id}, {type}, {name}')
     if type not in [service['type'] for service in terrariumNotificationService.available_services]:
-      raise terrariumAreaException(f'Service of type {type} is unknown.')
+#      print(f'Service of type {type} is unknown.')
+      raise terrariumNotificationServiceException(f'Service of type {type} is unknown.')
 
     return super(terrariumNotificationService, cls).__new__(terrariumNotificationService.__TYPES[type]['class']())
 
   def __init__(self, id, type, name, enabled, setup):
+
     if id is None:
-      id = str(uuid.uuid4())
+      id = terrariumUtils.generate_uuid()
 
     self.id   = id
     self.type = type
@@ -227,19 +238,11 @@ class terrariumNotificationService(object):
     return f'{terrariumNotificationService.__TYPES[self.type]["name"]} service {self.name}'
 
   def load_setup(self, setup_data):
-    # print(f'Notification service: {self}')
-    # print(setup_data)
-
     self.setup['version']       = setup_data.get('version')
     self.setup['profile_image'] = setup_data.get('profile_image')
 
   def stop(self):
     pass
-
-
-
-
-######
 
 class terrariumScreen(object):
   TYPE = None
@@ -582,16 +585,6 @@ class terrariumOLEDSSD1351(terrariumOLED):
 class terrariumOLEDSH1106(terrariumOLED):
   TYPE = 'SH1106'
 
-
-
-
-
-
-
-
-
-
-
 class terrariumNotificationServiceDisplay(terrariumNotificationService):
 
 
@@ -611,7 +604,7 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
     }
     super().load_setup(setup_data)
 
-  def send_message(self, type, subject, message, attachments = []):
+  def send_message(self, type, subject, message, data = None, attachments = []):
     #print(f'Send {type} type message to display')
     # print(subject)
     # print(message)
@@ -634,7 +627,7 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
     }
     super().load_setup(setup_data)
 
-  def send_message(self, type, subject, message, attachments = []):
+  def send_message(self, type, subject, message, data = None, attachments = []):
     if self.setup is None or len(self.setup.get('receiver',[])) == 0:
       # Configuration is not loaded, or no receivers, ignore sending emails
       return
@@ -677,11 +670,6 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
           # Mail sent, clear remaining connection types
           mail_tls_ssl = []
 
-
-class terrariumNotificationServicePushover(terrariumNotificationService):
-  pass
-
-
 class terrariumNotificationServiceWebhook(terrariumNotificationService):
   def load_setup(self, setup_data):
     self.setup = {
@@ -689,7 +677,7 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
     }
     super().load_setup(setup_data)
 
-  def send_message(self, type, subject, message, attachments = []):
+  def send_message(self, type, subject, message, data = None, attachments = []):
     data = {}
     try:
       data = json.loads(message.replace('False','false').replace('True','true').replace('None','null').replace('\'','"'))
@@ -707,15 +695,13 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
           attachment_data = fp.read()
           message['files'].append({'name' : os.path.basename(attachment), 'data' : b64encode(attachment_data).decode('utf-8')})
 
-#      headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     r = requests.post(self.setup['address'], json=data)
     if r.status_code != 200:
       print('Error sending webhook to url \'{}\' with status code: {}'.format(url,r.status_code))
 
-
 class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
-  __YELLOW_TIMEOUT = 15 * 60
-  __RED_TIMEOUT = 60 * 60
+  __YELLOW_TIMEOUT = 5 * 60
+  __RED_TIMEOUT = 15 * 60
 
   def load_setup(self, setup_data):
     self.setup = {
@@ -737,7 +723,7 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
 
     super().load_setup(setup_data)
 
-  def send_message(self, type, subject, message, attachments = []):
+  def send_message(self, type, subject, message, data = None, attachments = []):
     led   = None
     if 'system_warning' == type:
       led     = 'yellow'
@@ -773,615 +759,80 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
             print(f'Traffic STOP {led} exception')
             print(ex)
 
+class terrariumNotificationServiceMQTT(terrariumNotificationService):
+  # The callback for when the client receives a CONNACK response from the server.
+  def on_connect(self, client, userdata, flags, rc):
+    if rc == 0:
+      msg = f'Logged in to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}.'
+      if not self.setup['connected']:
+        self.setup['connected'] = True
+        logger.info(msg)
+        print(msg)
 
+    else:
+      msg = f'Error! Login to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]} failed! Error code: {rc}'
+      self.connection = None
+      logger.error(msg)
+      print(msg)
 
+  def load_setup(self, setup_data):
+    self.setup = {
+      'address'   : setup_data.get('address'),
+      'port'      : int(setup_data.get('port')),
+      'username'  : setup_data.get('username'),
+      'password'  : setup_data.get('password'),
+      'connected' : False
+    }
 
+    super().load_setup(setup_data)
 
-#### OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD ######
+    self.connection = None
 
-class terrariumNotificationMessage(object):
+    try:
+      self.connection = mqtt.Client()
+      self.connection.on_connect = self.on_connect
+      self.connection.tls_set(tls_version=mqtt.ssl.PROTOCOL_TLS)
+      self.connection.username_pw_set(terrariumUtils.decrypt(self.setup['username']), terrariumUtils.decrypt(self.setup['password']))
+      self.connection.connect(self.setup['address'], self.setup['port'], 30)
+      self.connection.loop_start()
+      print(f'Connected to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
+      logger.info(f'Connected to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
 
-  def __init__(self,message_id, title, message, services = ''):
-    self.id = message_id
-    self.title = title.strip()
-    self.message = message.strip()
-    self.services = services.split(',') if '' != services else []
-    self.enabled = len(self.services) > 0
-
-  def get_id(self):
-    return self.id
-
-  def get_title(self):
-    return self.title
-
-  def get_message(self):
-    return self.message
-
-  def is_enabled(self):
-    return self.message != '' and self.enabled == True
-
-  def is_email_enabled(self):
-    return self.message != '' and 'email' in self.services
-
-  def is_twitter_enabled(self):
-    return self.message != '' and 'twitter' in self.services
-
-  def is_pushover_enabled(self):
-    return self.message != '' and 'pushover' in self.services
-
-  def is_telegram_enabled(self):
-    return self.message != '' and 'telegram' in self.services
-
-  def is_display_enabled(self):
-    return self.message != '' and 'display' in self.services
-
-  def is_webhook_enabled(self):
-    return self.message != '' and 'webhook' in self.services
-
-  def get_data(self):
-    return {'id':self.get_id(),
-            'title':self.get_title(),
-            'message':self.get_message(),
-            'enabled':self.is_enabled(),
-            'services' : ','.join(self.services)
-            }
-
-class terrariumNotificationTelegramBot(object):
-  __POLL_TIMEOUT = 120
-
-  def __init__(self,bot_token,valid_users = None, proxy = None):
-    self.__running = False
-    self.__proxy = None
-
-    self.__bot_token = bot_token
-    self.__bot_url = 'https://api.telegram.org/bot{}/'.format(self.__bot_token)
-    self.__chat_ids = []
-
-    self.__last_update_check = int(time.time())
-
-    self.set_valid_users(valid_users)
-    self.set_proxy(proxy)
-    self.start()
-
-  def __get_updates(self,offset=None):
-    self.__last_update_check = int(time.time())
-    url = self.__bot_url + 'getUpdates?timeout={}'.format(terrariumNotificationTelegramBot.__POLL_TIMEOUT)
-    if offset:
-      url += '&offset={}'.format(offset)
-
-    data = terrariumUtils.get_remote_data(url,terrariumNotificationTelegramBot.__POLL_TIMEOUT + 3,proxy=self.__proxy)
-    if data is None:
-      data = {'description' : 'Did not receive valid JSON data'}
-
-    return data
-
-  def __process_messages(self,messages):
-    for update in messages:
-      user = update['message']['from']['username']
-      text = update['message']['text']
-      chat = int(update['message']['chat']['id'])
-
-      if user not in self.__valid_users:
-        self.send_message('Sorry, you are not a valid user for this TerrariumPI.', chat)
-
-      else:
-        if chat not in self.__chat_ids:
-          self.__chat_ids.append(chat)
-
-        self.send_message(('Hi %s, you are now getting messages from TerrariumPI. I do not accept commands.' % (user,)), chat)
-
-  def get_config(self):
-    return {'bot_token' : self.__bot_token,
-            'userid': ','.join(self.__valid_users) if self.__valid_users is not None else '',
-            'proxy' : self.__proxy if self.__proxy is not None else ''}
-
-  def send_message(self, type, text, chat_id = None):
-    if self.__running:
-      chat_ids = self.__chat_ids if chat_id is None else [int(chat_id)]
-      for chat_id in chat_ids:
-        url = self.__bot_url + 'sendMessage?text={}&chat_id={}'.format(text, chat_id)
-        terrariumUtils.get_remote_data(url,proxy=self.__proxy)
-
-  def send_image(self,text,files = [], chat_id = None):
-    if self.__running:
-      chat_ids = self.__chat_ids if chat_id is None else [int(chat_id)]
-      for image in files:
-        with open(image,'rb') as fp:
-          photo = fp.read()
-          post_file = {'photo': photo}
-
-        for chat_id in chat_ids:
-          url = self.__bot_url + 'sendPhoto?caption={}&chat_id={}'.format(text, chat_id)
-          try:
-            r = requests.post(url, files=post_file)
-          except Exception as ex:
-            print(ex)
-
-  def set_valid_users(self,users = None):
-    self.__valid_users = users.split(',') if users is not None else []
-
-  def set_proxy(self,proxy):
-    self.__proxy = None
-    if proxy is not None and '' != proxy:
-      self.__proxy = proxy
-
-  def start(self):
-    if not self.__running:
-      _thread.start_new_thread(self.__run, ())
+    except Exception as ex:
+      print('Failed to load terrariumNotificationServiceMQTT setup')
+      print(ex)
 
   def stop(self):
-    self.__running = False
-    print('%s - INFO    - terrariumNotificatio - Stopping TelegramBot. This can take up to %s seconds...' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],(terrariumNotificationTelegramBot.__POLL_TIMEOUT - (int(time.time()) - self.__last_update_check))))
-
-  def __run(self):
-    self.__running = True
-    last_update_id = None
-
-    error_counter = 0
-    while self.__running and error_counter < 5:
-      try:
-        updates = self.__get_updates(last_update_id)
-        if error_counter > 0:
-          error_counter -= 1
-
-        if 'result' in updates and len(updates['result']) > 0:
-          last_update_id = max([int(update['update_id']) for update in updates['result']]) + 1
-          self.__process_messages(updates['result'])
-
-        elif 'description' in updates:
-          error_counter += 1
-          print('%s - ERROR  - terrariumNotificatio - TelegramBot has issues: %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],updates['description']))
-          sleep(5)
-
-        sleep(0.5)
-      except Exception as ex:
-        error_counter += 1
-        print(ex)
-        sleep(5)
-
-    self.__running = False
-    print('%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],))
-
-
-
-# class terrariumNotification(terrariumSingleton):
-#   __MAX_MESSAGES_TOTAL_PER_MINUTE = 12
-#   __MAX_MESSAGES_PER_MINUTE = 6
-
-#   __regex_parse = re.compile(r'%(?P<index>[^% ]+)%')
-
-#   __default_notifications = {
-#     'environment_light_alarm_low_on' : terrariumNotificationMessage('environment_light_alarm_low_on','Environment light day on','%raw_data%'),
-#     'environment_light_alarm_low_off' : terrariumNotificationMessage('environment_light_alarm_low_off','Environment light day off','%raw_data%'),
-#     'environment_light_alarm_high_on' : terrariumNotificationMessage('environment_light_alarm_high_on','Environment light night on','%raw_data%'),
-#     'environment_light_alarm_high_off' : terrariumNotificationMessage('environment_light_alarm_high_off','Environment light night off','%raw_data%'),
-
-#     'environment_temperature_alarm_low_on' : terrariumNotificationMessage('environment_temperature_alarm_low_on','Environment temperature alarm low on','%raw_data%'),
-#     'environment_temperature_alarm_low_off' : terrariumNotificationMessage('environment_temperature_alarm_low_off','Environment temperature alarm low off','%raw_data%'),
-#     'environment_temperature_alarm_high_on' : terrariumNotificationMessage('environment_temperature_alarm_high_on','Environment temperature alarm high on','%raw_data%'),
-#     'environment_temperature_alarm_high_off' : terrariumNotificationMessage('environment_temperature_alarm_high_off','Environment temperature alarm high off','%raw_data%'),
-
-#     'environment_humidity_alarm_low_on' : terrariumNotificationMessage('environment_humidity_alarm_low_on','Environment humidity alarm low on','%raw_data%'),
-#     'environment_humidity_alarm_low_off' : terrariumNotificationMessage('environment_humidity_alarm_low_off','Environment humidity alarm low off','%raw_data%'),
-#     'environment_humidity_alarm_high_on' : terrariumNotificationMessage('environment_humidity_alarm_high_on','Environment humidity alarm high on','%raw_data%'),
-#     'environment_humidity_alarm_high_off' : terrariumNotificationMessage('environment_humidity_alarm_high_off','Environment humidity alarm high off','%raw_data%'),
-
-#     'environment_moisture_alarm_low_on' : terrariumNotificationMessage('environment_moisture_alarm_low_on','Environment moisture alarm low on','%raw_data%'),
-#     'environment_moisture_alarm_low_off' : terrariumNotificationMessage('environment_moisture_alarm_low_off','Environment moisture alarm low off','%raw_data%'),
-#     'environment_moisture_alarm_high_on' : terrariumNotificationMessage('environment_moisture_alarm_high_on','Environment moisture alarm high on','%raw_data%'),
-#     'environment_moisture_alarm_high_off' : terrariumNotificationMessage('environment_moisture_alarm_high_off','Environment moisture alarm high off','%raw_data%'),
-
-#     'environment_conductivity_alarm_low_on' : terrariumNotificationMessage('environment_conductivity_alarm_low_on','Environment conductivity alarm low on','%raw_data%'),
-#     'environment_conductivity_alarm_low_off' : terrariumNotificationMessage('environment_conductivity_alarm_low_off','Environment conductivity alarm low off','%raw_data%'),
-#     'environment_conductivity_alarm_high_on' : terrariumNotificationMessage('environment_conductivity_alarm_high_on','Environment conductivity alarm high on','%raw_data%'),
-#     'environment_conductivity_alarm_high_off' : terrariumNotificationMessage('environment_conductivity_alarm_high_off','Environment conductivity alarm high off','%raw_data%'),
-
-#     'environment_ph_alarm_low_on' : terrariumNotificationMessage('environment_ph_alarm_low_on','Environment pH alarm low on','%raw_data%'),
-#     'environment_ph_alarm_low_off' : terrariumNotificationMessage('environment_ph_alarm_low_off','Environment pH alarm low off','%raw_data%'),
-#     'environment_ph_alarm_high_on' : terrariumNotificationMessage('environment_ph_alarm_high_on','Environment pH alarm high on','%raw_data%'),
-#     'environment_ph_alarm_high_off' : terrariumNotificationMessage('environment_ph_alarm_high_off','Environment pH alarm high off','%raw_data%'),
-
-#     'environment_watertank_alarm_low_on' : terrariumNotificationMessage('environment_watertank_alarm_low_on','Environment watertank alarm low on','%raw_data%'),
-#     'environment_watertank_alarm_low_off' : terrariumNotificationMessage('environment_watertank_alarm_low_off','Environment watertank alarm low off','%raw_data%'),
-#     'environment_watertank_alarm_high_on' : terrariumNotificationMessage('environment_watertank_alarm_high_on','Environment watertank alarm high on','%raw_data%'),
-#     'environment_watertank_alarm_high_off' : terrariumNotificationMessage('environment_watertank_alarm_high_off','Environment watertank alarm high off','%raw_data%'),
-
-#     'authentication_warning' : terrariumNotificationMessage('authentication_warning','Authentication warning message','%raw_data%'),
-
-#     'system_warning' : terrariumNotificationMessage('system_warning','System warning message','%message%'),
-#     'system_error' : terrariumNotificationMessage('system_error','System error message','%message%'),
-
-#     'sensor_alarm_low' : terrariumNotificationMessage('sensor_alarm_low','Sensor %name% alarm low','%raw_data%'),
-#     'sensor_alarm_high' : terrariumNotificationMessage('sensor_alarm_high','Sensor %name% alarm high','%raw_data%'),
-
-#     'switch_toggle_on' : terrariumNotificationMessage('switch_toggle_on','Powerswitch %name% toggled on','%raw_data%'),
-#     'switch_toggle_off' : terrariumNotificationMessage('switch_toggle_off','Powerswitch %name% toggled off','%raw_data%'),
-
-#     'door_toggle_open' : terrariumNotificationMessage('door_toggle_open','Door %name% is open','%raw_data%'),
-#     'door_toggle_closed' : terrariumNotificationMessage('door_toggle_closed','Door %name% is closed','%raw_data%'),
-
-
-#     'webcam_motion' : terrariumNotificationMessage('webcam_motion','Movement at webcam %name%','%raw_data%'),
-#   }
-
-#   def __init__(self,trafficlights = [], profile_image = None, version = None):
-#     self.__profile_image = None
-#     self.__version = version
-#     self.__ratelimit_messages = {}
-#     self.__notification_leds = {'info'      : {'pin' : None, 'state' : False, 'lastaction' : 0},
-#                                 'warning'   : {'pin' : None, 'state' : False, 'lastaction' : 0},
-#                                 'error'     : {'pin' : None, 'state' : False, 'lastaction' : 0},
-#                                 'exception' : {'pin' : None, 'state' : False, 'lastaction' : 0},
-#                                 }
-
-#     self.email = None
-#     self.twitter = None
-#     self.pushover = None
-#     self.telegram = None
-#     self.display = None
-#     self.webhook = None
-
-#     self.set_profile_image(profile_image)
-#     if trafficlights is not None and len(trafficlights) == 3:
-#       self.set_notification_leds(trafficlights[0],trafficlights[1],trafficlights[2])
-
-#     self.__load_config()
-#     self.__load_messages()
-
-#   def __current_minute(self):
-#     # Get timestamp of current minute with 00 seconds.
-#     now = int(datetime.datetime.now().strftime('%s'))
-#     now -= now % 60
-#     return now
-
-#   def __ratelimit(self):
-#     now = str(self.__current_minute())
-#     total = 0
-#     for messageItem in sorted(self.__ratelimit_messages):
-#       for timestamp in sorted(self.__ratelimit_messages[messageItem],reverse=True):
-#         if timestamp == now:
-#           total += self.__ratelimit_messages[messageItem][timestamp]
-#         else:
-#           del(self.__ratelimit_messages[messageItem][timestamp])
-
-#     return total
-
-#   def __load_config(self):
-#     self.__data = configparser.ConfigParser()
-#     self.__data.read('notifications.cfg')
-
-#     if self.__data.has_section('email'):
-#       self.set_email(self.__data.get('email','receiver'),
-#                      self.__data.get('email','server'),
-#                      self.__data.get('email','serverport'),
-#                      self.__data.get('email','username'),
-#                      self.__data.get('email','password'))
-
-#     if self.__data.has_section('twitter'):
-#       self.set_twitter(self.__data.get('twitter','consumer_key'),
-#                      self.__data.get('twitter','consumer_secret'),
-#                      self.__data.get('twitter','access_token'),
-#                      self.__data.get('twitter','access_token_secret'))
-
-#     if self.__data.has_section('pushover'):
-#       self.set_pushover(self.__data.get('pushover','api_token'),
-#                         self.__data.get('pushover','user_key'))
-
-#     if self.__data.has_section('telegram'):
-#       proxy = None
-#       if self.__data.has_option('telegram', 'proxy'):
-#         proxy = self.__data.get('telegram','proxy')
-
-#       self.set_telegram(self.__data.get('telegram','bot_token'),
-#                         self.__data.get('telegram','userid'),
-#                         proxy)
-
-#     if self.__data.has_section('display'):
-
-#       try:
-#         self.__data.get('display','hardwaretype')
-#       except Exception as ex:
-#         address = self.__data.get('display','address')
-#         resolution = self.__data.get('display','resolution')
-#         self.__data.remove_option('display','resolution')
-
-#         if '/dev/' in address:
-#           self.__data.set('display', 'hardwaretype', 'LCDSerial16x2')
-#         elif '128x64' in resolution:
-#           self.__data.set('display', 'hardwaretype', 'SSD1306')
-#         else:
-#           self.__data.set('display', 'hardwaretype', 'LCD16x2')
-
-#       self.set_display(self.__data.get('display','address'),
-#                        self.__data.get('display','hardwaretype'),
-#                        self.__data.get('display','title'))
-
-#     if self.__data.has_section('webhook'):
-#       self.set_webhook(self.__data.get('webhook','address').replace('%%','%'))
-
-#   def __load_messages(self,data = None):
-#     self.messages = {}
-#     for message_id in self.__default_notifications:
-#       if self.__data.has_section('message' + message_id):
-#         self.messages[message_id] = terrariumNotificationMessage(message_id,
-#                                                                  self.__data.get('message' + message_id,'title').replace('%%','%'),
-#                                                                  self.__data.get('message' + message_id,'message').replace('%%','%'),
-#                                                                  self.__data.get('message' + message_id,'services').replace('%%','%'))
-#       else:
-#         self.messages[message_id] = self.__default_notifications[message_id]
-
-#   def __parse_message(self,message,data):
-#     if data is None:
-#       return message
-
-#     # Some dirty cleanup... :(
-#     try:
-#       del(data['timer_min']['time_table'])
-#     except:
-#       pass
-
-#     try:
-#       del(data['timer_max']['time_table'])
-#     except:
-#       pass
-
-#     data = terrariumUtils.flatten_dict(data)
-#     data['now'] = datetime.datetime.now().strftime('%c')
-
-#     for dateitem in ['timer_min_lastaction','timer_max_lastaction','last_update']:
-#       if dateitem in data:
-#         data[dateitem] = datetime.datetime.fromtimestamp(int(data[dateitem])).strftime('%c')
-
-#     for item in terrariumNotification.__regex_parse.findall(message):
-#       if 'raw_data' == item:
-#         message = message.replace('%' + item + '%',str(data)
-#                                                     .replace(', ',"\n")
-#                                                     .replace('\': ','\':')
-#                                                     .replace('{','')
-#                                                     .replace('}',''))
-#       elif item in data:
-#         message = message.replace('%' + item + '%',str(data[item]))
-
-#     return message.encode('utf8')
-
-#   def __update_config(self,section,data,exclude = []):
-#     if not self.__data.has_section(section):
-#       self.__data.add_section(section)
-
-#     keys = list(data.keys())
-#     keys.sort()
-#     for setting in keys:
-#       if setting in exclude:
-#         continue
-
-#       if type(data[setting]) is list:
-#         data[setting] = ','.join(data[setting])
-
-#       if isinstance(data[setting], str):
-#         try:
-#           data[setting] = data[setting].encode('utf-8').decode()
-#         except Exception as ex:
-#           # 'Not sure what to do... but it seams already utf-8...??'
-#           pass
-
-#       self.__data.set(section, str(setting), str(data[setting].replace('%','%%')))
-
-#   def stop(self):
-#     if self.telegram is not None:
-#       self.telegram.stop()
-
-#     for messagetype in self.__notification_leds:
-#       if self.__notification_leds[messagetype]['pin'] is not None:
-#         GPIO.cleanup(self.__notification_leds[messagetype]['pin'])
-#         self.__notification_leds[messagetype]['pin'] = None
-
-#   def set_profile_image(self,imagefile):
-#     self.__profile_image = imagefile
-#     if self.__profile_image is None:
-#       return
-
-#     if imagefile[0] == '/':
-#       imagefile = imagefile[1:]
-
-#     if os.path.isfile(imagefile):
-#       self.__profile_image = imagefile
-#       self.update_twitter_profile_image()
-
-#   def set_notification_leds(self,green,orange,red):
-#     self.__notification_leds['info']['pin'] = None if green is None else terrariumUtils.to_BCM_port_number(green)
-#     self.__notification_leds['warning']['pin'] = None if orange is None else terrariumUtils.to_BCM_port_number(orange)
-#     self.__notification_leds['error']['pin'] = None if red is None else terrariumUtils.to_BCM_port_number(red)
-
-#     # Initialize leds and run them all for 1 second to test
-#     GPIO.setmode(GPIO.BCM)
-#     for messagetype in ['info','warning','error']:
-#       lednr = self.__notification_leds[messagetype]['pin']
-#       if lednr is not None:
-#         GPIO.setup(lednr, GPIO.OUT)
-#         GPIO.output(lednr,1)
-#         sleep(1)
-#         GPIO.output(lednr,0)
-
-#   def send_notication_led(self,message_id):
-#     message_type = message_id.replace('system_','')
-#     now = int(time.time())
-#     if message_type in ['info','error','warning']:
-#       if self.__notification_leds[message_type]['pin'] is not None:
-#         GPIO.output(self.__notification_leds[message_type]['pin'],1)
-#         self.__notification_leds[message_type]['state'] = True
-#         self.__notification_leds[message_type]['lastaction'] = now
-
-#     for message_type in self.__notification_leds:
-#       if self.__notification_leds[message_type]['state'] and \
-#           ( ('warning' == message_type and now - self.__notification_leds[message_type]['lastaction'] > 10 * 60) or \
-#             ('error'   == message_type and now - self.__notification_leds[message_type]['lastaction'] > 30 * 60) ):
-
-#         GPIO.output(self.__notification_leds[message_type]['pin'],0)
-#         self.__notification_leds[message_type]['state'] = False
-#         self.__notification_leds[message_type]['lastaction'] = now
-
-#   def set_email(self,receiver,server,serverport = 25,username = None,password = None):
-#     if '' != receiver and '' != server:
-#       self.email = {'receiver'   : receiver.split(','),
-#                     'server'     : server,
-#                     'serverport' : serverport,
-#                     'username'   : username,
-#                     'password'   : password}
-
-#   def set_twitter(self,consumer_key,consumer_secret,access_token,access_token_secret):
-#     if '' != consumer_key and '' != consumer_secret and '' != access_token and '' != access_token_secret:
-#       self.twitter = {'consumer_key'        : consumer_key,
-#                       'consumer_secret'     : consumer_secret,
-#                       'access_token'        : access_token,
-#                       'access_token_secret' : access_token_secret}
-
-#   def update_twitter_profile_image(self):
-#     if self.__profile_image is not None and self.twitter is not None:
-#       try:
-#         api = twitter.Api(consumer_key=self.twitter['consumer_key'],
-#                           consumer_secret=self.twitter['consumer_secret'],
-#                           access_token_key=self.twitter['access_token'],
-#                           access_token_secret=self.twitter['access_token_secret'])
-
-#         if api.VerifyCredentials() is not None:
-#           status = api.UpdateImage(self.__profile_image)
-
-#       except Exception as ex:
-#         print(ex)
-
-#   def send_tweet(self,title,message,files = []):
-#     if self.twitter is None:
-#       return
-
-#     try:
-#       api = twitter.Api(consumer_key=self.twitter['consumer_key'],
-#                         consumer_secret=self.twitter['consumer_secret'],
-#                         access_token_key=self.twitter['access_token'],
-#                         access_token_secret=self.twitter['access_token_secret'])
-
-#       if api.VerifyCredentials() is not None:
-#         if len(files) > 0:
-#           status = api.PostUpdate(title[:278 - (title.decode('utf-8').count("\n"))],media=files)
-#         else:
-#           status = api.PostUpdate(message[:278 - (message.decode('utf-8').count("\n"))])
-#     except Exception as ex:
-#       print(ex)
-
-#   def set_pushover(self,api_token,user_key):
-#     if '' != api_token and '' != user_key:
-#       self.pushover = {'api_token' : api_token,
-#                        'user_key'  : user_key}
-
-#   def send_pushover(self,subject,message,files = []):
-#     if self.pushover is None:
-#       return
-
-#     try:
-#       client = pushover.Client(self.pushover['user_key'], api_token=self.pushover['api_token'])
-#       if client.verify():
-#         if files is None or len(files) == 0:
-#           status = client.send_message(message, title=subject)
-#         elif len(files) > 0:
-#           for image in files:
-#             with open(image,'rb') as image:
-#               status = client.send_message(message, title=subject,attachment=image)
-
-#     except Exception as ex:
-#       print(ex)
-
-#   def set_telegram(self,bot_token,userid,proxy):
-#     if '' != bot_token and '' != userid:
-#       if self.telegram is None:
-#         self.telegram = terrariumNotificationTelegramBot(bot_token,userid,proxy)
-#       else:
-#         self.telegram.set_valid_users(userid)
-#         self.telegram.set_proxy(proxy)
-#         self.telegram.start()
-
-#   def send_telegram(self,subject,message,files = []):
-#     if self.telegram is None:
-#       return
-
-#     if (files is None or len(files) == 0):
-#       self.telegram.send_message(message.decode('utf-8'))
-#     else:
-#       self.telegram.send_image(subject.decode('utf-8'),files)
-
-#   def set_display(self,address,hardwaretype,title):
-#     self.display = None
-#     if address is not None and '' != address:
-#       try:
-#         self.display = terrariumDisplay(None,hardwaretype,address,'notification',title)
-#       except terrariumDisplaySourceException as ex:
-#         print(ex)
-#         self.display = None
-
-#       if self.__profile_image is not None and self.display is not None:
-#         self.display.write_image(self.__profile_image)
-
-#   def send_display(self,message):
-#     if self.display is not None:
-#       self.display.message(message)
-
-
-#   def message(self,message_id,data = None,files = []):
-#     self.send_notication_led(message_id)
-
-#     if message_id not in self.messages or not self.messages[message_id].is_enabled():
-#       return
-
-#     now = str(self.__current_minute())
-#     title = self.__parse_message(self.messages[message_id].get_title(),data)
-#     message = self.__parse_message(self.messages[message_id].get_message(),data)
-
-#     if '' == title:
-#       title = 'no_title'
-
-#     # Do not rate limit webhooks
-#     if self.messages[message_id].is_webhook_enabled():
-#       # Always use raw_data for webhooks
-#       self.send_webhook(self.__parse_message(self.webhook['address'],data),self.__parse_message('%raw_data%',data),files)
-
-#     if title not in self.__ratelimit_messages:
-#       self.__ratelimit_messages[title] = {}
-
-#     if now not in self.__ratelimit_messages[title]:
-#       self.__ratelimit_messages[title][now] = 0
-
-#     if self.__ratelimit_messages[title][now] > terrariumNotification.__MAX_MESSAGES_PER_MINUTE:
-#       print('%s - WARNING - terrariumNotificatio - Max messages per minute %s reached for \'%s\'' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],
-#                                                                                                  terrariumNotification.__MAX_MESSAGES_PER_MINUTE, title.decode()))
-#       return
-
-#     if self.__ratelimit() > terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE:
-#       print('%s - WARNING - terrariumNotificatio - Max total messages per minute %s reached' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],
-#                                                                                                 terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE))
-#       return
-
-#     try:
-#       self.__ratelimit_messages[title][now] += 1
-#     except KeyError as ex:
-#       # Somehow we get a key error while it should be there....
-#       self.__ratelimit_messages[title][now] = 1
-
-#     if self.messages[message_id].is_email_enabled():
-#       self.send_email(title,message,files)
-
-#     if self.messages[message_id].is_twitter_enabled():
-#       self.send_tweet(title,message,files)
-
-#     if self.messages[message_id].is_pushover_enabled():
-#       self.send_pushover(title,message,files)
-
-#     if self.messages[message_id].is_telegram_enabled():
-#       self.send_telegram(title,message,files)
-
-#     if self.messages[message_id].is_display_enabled():
-#       self.send_display(message)
-
-#   def get_messages(self):
-#     data = []
-#     for message_id in sorted(self.messages.keys()):
-#       data.append(self.messages[message_id].get_data())
-
-#     return data
+    # TODO: Flush the queueu
+    logger.info(f'Disconnected from the MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
+    print(f'Disconnect from the MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
+    try:
+      self.connection.loop_stop()
+      print('Loop stopped')
+    except Exception as ex:
+      print('INGORE')
+      print(ex)
+
+    self.connection.disconnect()
+    print('Disconnected!!!')
+
+  def send_message(self, type, subject, message, data = None, attachments = []):
+    if self.connection is not None:
+      topic = type.replace('_','/')
+      topic = f'terrariumpi/{topic}'
+
+      if data is None:
+        data = {}
+
+      # Add a unique ID to make clients able to filter duplicate messages
+      data['uuid']    = terrariumUtils.generate_uuid()
+      # Add the 'direct' topic to subscribe to
+      data['topic']   = topic
+      # Add the subject
+      data['subject'] = subject
+      # Add the message
+      data['message'] = message
+
+#      print(f'Send MQTT message: topic: terrariumpi/{type}')
+#      print(json.dumps(data))
+      self.connection.publish(f'terrariumpi/{type}', payload=json.dumps(data), qos=1)

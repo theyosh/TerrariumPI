@@ -356,6 +356,8 @@ class terrariumAPI(object):
     try:
       message = f'Area {Area[area]} is deleted.'
       Area[area].delete()
+      orm.commit()
+
 #      self.webserver.engine.delete(terrariumArea,area)
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
@@ -449,6 +451,7 @@ class terrariumAPI(object):
       audiofile = Audiofile[audiofile]
       message = f'Audio file {audiofile.filename} is deleted.'
       audiofile.delete()
+      orm.commit()
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Audiofile with id {audiofile} does not exists.')
@@ -562,6 +565,7 @@ class terrariumAPI(object):
     try:
       message = f'Button {Button[button]} is deleted.'
       Button[button].delete()
+      orm.commit()
       self.webserver.engine.delete(terrariumButton,button)
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
@@ -742,6 +746,7 @@ class terrariumAPI(object):
     try:
       message = f'Enclosure {Enclosure[enclosure]} is deleted.'
       Enclosure[enclosure].delete()
+      orm.commit()
  #     self.webserver.engine.delete(terrariumEnclosure,enclosure)
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
@@ -795,6 +800,7 @@ class terrariumAPI(object):
     try:
       message = f'Notification message {NotificationMessage[message]} is deleted.'
       NotificationMessage[message].delete()
+      orm.commit()
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Notification message with id {enclosure} does not exists.')
@@ -852,6 +858,7 @@ class terrariumAPI(object):
     try:
       message = f'Notification service {NotificationService[service]} is deleted.'
       NotificationService[service].delete()
+      orm.commit()
  #     self.webserver.engine.delete(terrariumEnclosure,enclosure)
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
@@ -869,10 +876,16 @@ class terrariumAPI(object):
 
   @orm.db_session
   def notification_service_add(self):
+    print('Add notification service:')
+    print(request.json)
     try:
       service = NotificationService(**request.json)
+      print('New service')
+      print(service)
       return self.notification_service_detail(service.id)
     except Exception as ex:
+      print('Exception')
+      print(ex)
       raise HTTPError(status=500, body=f'Notification service could not be added. {ex}')
 
 
@@ -929,6 +942,7 @@ class terrariumAPI(object):
     try:
       message = f'Playlist {Playlist[playlist]} is deleted.'
       Playlist[playlist].delete()
+      orm.commit()
 
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
@@ -1114,6 +1128,7 @@ class terrariumAPI(object):
     try:
       message = f'Relay {Relay[relay]} is deleted.'
       Relay[relay].delete()
+      orm.commit()
 
       self.webserver.engine.delete(terrariumRelay,relay)
 
@@ -1280,6 +1295,7 @@ class terrariumAPI(object):
     try:
       message = f'Sensor {Sensor[sensor]} is deleted.'
       Sensor[sensor].delete()
+      orm.commit()
       self.webserver.engine.delete(terrariumSensor,sensor)
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
@@ -1383,6 +1399,7 @@ class terrariumAPI(object):
   def setting_delete(self, setting):
     try:
       Setting[setting].delete()
+      orm.commit()
       return {'message' : f'Setting id {setting} is deleted.'}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Setting with id {setting} does not exists.')
@@ -1535,6 +1552,7 @@ class terrariumAPI(object):
     try:
       message = f'Webcam {Webcam[webcam]} is deleted.'
       Webcam[webcam].delete()
+      orm.commit()
       self.webserver.engine.delete(terrariumWebcam,webcam)
       return message
     except orm.core.ObjectNotFound as ex:

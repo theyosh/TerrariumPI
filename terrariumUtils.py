@@ -12,6 +12,7 @@ import bcrypt
 import os
 import math
 import asyncio
+import base64
 
 from cryptography.fernet import Fernet
 
@@ -119,17 +120,24 @@ class terrariumUtils():
     return bcrypt.checkpw(password.encode(), passwordhash.encode())
 
   @staticmethod
+  def __encryption_key():
+    salt = os.environ['SALT']
+    salt = f'{salt:0>32}'
+    salt = base64.urlsafe_b64encode(salt.encode('utf8'))
+    return Fernet(salt)
+
+  @staticmethod
   def encrypt(string):
     try:
-      encryption = Fernet(os.environ['SALT'].encode())
+      encryption = terrariumUtils.__encryption_key()
       return encryption.encrypt(string.encode()).decode()
-    except Exception:
+    except Exception as ex:
       return string
 
   @staticmethod
   def decrypt(string):
     try:
-      encryption = Fernet(os.environ['SALT'].encode())
+      encryption = terrariumUtils.__encryption_key()
       return encryption.decrypt(string.encode()).decode()
     except Exception as ex:
       return string
