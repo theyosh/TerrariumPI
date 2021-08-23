@@ -10,7 +10,7 @@ image:
 
 ## Login
 ![New relay form](/assets/img/Login.webp){: style="max-height: 100px" .right}
-After the installation, you need to setup TerrariumPI. In order to do that, login with a browser at http://[raspberry_pi]:8090 and click on the `Login` link on the left side menu. The default login should be **admin** / **password** ([FAQ]({{ 'faq/#what-is-the-default-login' | relative_url}}))
+After the installation, you need to setup TerrariumPI. In order to do that, login with a browser at http://[raspberry_pi]:8090 and click on the `Login` link on the left side menu. The default login should be **admin** / **password** ([FAQ]({{ 'faq#what-is-the-default-login' | relative_url}}))
 
 ## Help
 On every form popup you have a small question mark <i class="far fa-question-circle" aria-hidden="true"></i> next to the form title. Click on it to get more information about the form fields.
