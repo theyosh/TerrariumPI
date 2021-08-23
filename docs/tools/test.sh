@@ -64,4 +64,5 @@ bundle exec htmlproofer "$DEST" \
   --check-html \
   --empty_alt_ignore \
   --allow_hash_href \
+  --url_ignore "/#.*/" \
   --url_ignore $URL_IGNORE
