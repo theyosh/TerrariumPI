@@ -2,8 +2,6 @@
 [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/4-x-y-z/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
 
-**WARNING: This software is still in Alpha/Beta state!! Use only for testing and previewing**
-
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value. In order to lower the humidity you can add a dehumidifier.
@@ -12,6 +10,7 @@ The software is that flexible that there is no limit in amount of sensors, relay
 
 If you are using this software for your animals or plants, **[please post some pictures](https://github.com/theyosh/TerrariumPI/issues/210)**
 
+Extra documentation can be found at [https://theyosh.github.io/TerrariumPI/](https://theyosh.github.io/TerrariumPI/)
 
 Think off:
 - Terrarium (wet or dry)
@@ -91,9 +90,6 @@ And all this is controlled with a nice webinterface based on AdminLTE 3 with Boo
 - Notifications system. Custom messages for custom actions with use of variables in the messages
   - Get notifications through
     - Email
-    - Twitter (DM)
-    - Pushover
-    - Telegram bot
     - Display
     - Webhooks
   - Notifications for
@@ -103,7 +99,7 @@ And all this is controlled with a nice webinterface based on AdminLTE 3 with Boo
     - Open and close doors
     - System error and warning messages
 
-It is currently controling my reptile terrarium for more then five years! And my Madagascar Day Gecko is very happy with it!
+It is currently controling my reptile terrarium since 2015! And my Madagascar Day Gecko is very happy with it!
 
 ## Translations
 The software has support for the following languages:
@@ -127,7 +123,7 @@ It is possible to use USB or SSD drives to speed things up: https://www.tomshard
   `sudo ./install.sh`
 6. Reboot Raspberry PI to get all the needed modules loaded<br>
   `sudo reboot` (if done manual)
-7. Go to the webinterface at http://[raspberry_ip]:8090 (login: admin/password)
+7. Go to the webinterface at http://[raspberry_ip]:8090 (login: **admin/password**)
 
 All needed options and modules are setup by the installer script. This means that I2C and 1Wire overlay are enabled by default.
 
@@ -164,7 +160,7 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
   - 1 Wire interface
   - MCP3008 ([RasPiO Analog Zero](https://github.com/raspitv/analogzero))
 
-[Full list of supported hardware](https://github.com/theyosh/TerrariumPI/wiki/Hardware)
+[Full list of supported hardware](https://theyosh.github.io/TerrariumPI/hardware/)
 
 ### GPIO numbering
 All hardware that connects to the GPIO pins use **Physical GPIO numbering** (1 - 40). The software will translate it to BCM if needed for a supported device or sensor. [More information about GPIO pin numbering](https://pinout.xyz/)
