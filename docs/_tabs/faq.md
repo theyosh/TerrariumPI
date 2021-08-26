@@ -19,3 +19,15 @@ Here you can find the most frequently asked question.
   </li>
 {% endfor %}
 </ul>
+
+<script>
+jQuery(document).ready(function() {
+  setTimeout(function(){
+    let faq = $(location).attr('hash').slice(1);
+    console.log('FAQ',faq);
+    if ('' != faq) {
+      jQuery('#' + faq).parent().click();
+    }
+  },700)
+})
+</script>

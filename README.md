@@ -180,33 +180,33 @@ more information is here: [Remote data wiki](https://github.com/theyosh/Terrariu
 ## Screenshots
 (made on a very big screen :P )
 ### Dashboard
-![TerrariumPI 4.0 Dashboard screenshot](screenshots/Dashboard.png)
+![TerrariumPI 4.0 Dashboard screenshot](screenshots/Dashboard.webp)
 ### Sensors
-![TerrariumPI 4.0 Sensors temperature list screenshot](screenshots/Temperature_sensors_list.png)
-![TerrariumPI 4.0 Sensors humidity list screenshot](screenshots/Humidity_sensors_list.png)
-![TerrariumPI 4.0 Sensors settings screenshot](screenshots/Sensor_setup.png)
+![TerrariumPI 4.0 Sensors temperature list screenshot](screenshots/Temperature_sensors_list.webp)
+![TerrariumPI 4.0 Sensors humidity list screenshot](screenshots/Humidity_sensors_list.webp)
+![TerrariumPI 4.0 Sensors settings screenshot](screenshots/Sensor_setup.webp)
 
 ### Relays
-![TerrariumPI 4.0 Relays list screenshot](screenshots/Relay_list.png)
-![TerrariumPI 4.0 Relays settings screenshot](screenshots/Relay_setup.png)
+![TerrariumPI 4.0 Relays list screenshot](screenshots/Relay_list.webp)
+![TerrariumPI 4.0 Relays settings screenshot](screenshots/Relay_setup.webp)
 ### Enclosure setup
-![TerrariumPI 4.0 Enclosure list screenshot](screenshots/Enclosure_list.png)
-![TerrariumPI 4.0 Enclosure setup screenshot](screenshots/Enclosure_setup.png)
+![TerrariumPI 4.0 Enclosure list screenshot](screenshots/Enclosure_list.webp)
+![TerrariumPI 4.0 Enclosure setup screenshot](screenshots/Enclosure_setup.webp)
 
 ### Area setup
-![TerrariumPI 4.0 Area Lighting setup screenshot](screenshots/Area_Light_setup.gif)
-![TerrariumPI 4.0 Area Humidity setup screenshot](screenshots/Area_Humidity_setup.png)
+![TerrariumPI 4.0 Area Lighting setup screenshot](screenshots/Area_Light_setup.webp)
+![TerrariumPI 4.0 Area Humidity setup screenshot](screenshots/Area_Humidity_setup.webp)
 
 ### System settings
-![TerrariumPI 4.0 System setup screenshot](screenshots/System_setup.png)
+![TerrariumPI 4.0 System setup screenshot](screenshots/System_setup.webp)
 ### MOTD (Message Of The Day)
-![TerrariumPI 4.0 MOTD screenshot](screenshots/terrariumpi-motd.png)
+![TerrariumPI 4.0 MOTD screenshot](screenshots/terrariumpi-motd.webp)
 
 More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/master/screenshots)
 
 ## Testing
 [Free tested with BrowserStack for opensource](https://browserstack.com)
-[![BrowserStack](screenshots/BrowserStack.png)](https://browserstack.com)
+[![BrowserStack](screenshots/BrowserStack.webp)](https://browserstack.com)
 
 ## About
 A live version is running at: https://terrarium.theyosh.nl/index.html. Go to 'Help' menu for more information about used hardware, software and how to setup.
