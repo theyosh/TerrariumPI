@@ -2,6 +2,7 @@ from . import terrariumRelay, terrariumRelayDimmer, terrariumRelayLoadingExcepti
 from terrariumUtils import terrariumUtils
 
 from pathlib import Path
+import subprocess
 
 class terrariumRelayScript(terrariumRelay):
   HARDWARE = 'script'

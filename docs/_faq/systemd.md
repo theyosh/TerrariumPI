@@ -15,7 +15,7 @@ run `sudo service terrariumpi stop` to stop TerrariumPI
 ### Restart
 run `sudo service terrariumpi restart` to restart TerrariumPI
 
-### Eanble startup
+### Enable startup
 run `sudo systemctl enable terrariumpi` to enable TerrariumPI at startup
 
 ### Disable startup
