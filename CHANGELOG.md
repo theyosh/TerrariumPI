@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.0 (2021-08-25)
+4.0.0 (2021-08-26)
 -------------------
 
 **New**
@@ -58,6 +58,9 @@ Changelog
 
 **Fixes**
 ------
+- Fix link checker. Ignore anchor links. [J.G. Rubingh]
+- Fix link checker. Ignore anchor links. [J.G. Rubingh]
+- Fix anchor link. [J.G. Rubingh]
 - Fix security issue: Clear-text logging of sensitive information.
   [TheYOSH]
 - Fix password encryption. [TheYOSH]
@@ -201,6 +204,11 @@ Changelog
 
 **Updates**
 ------
+- Update documentation. [TheYOSH]
+- Update documentation. [J.G. Rubingh]
+- Update screenshots. [J.G. Rubingh]
+- Documentation updates. [J.G. Rubingh]
+- Update changelog. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update SECURITY.md. [TheYOSH]
 - Another big documentation update. Adding custom search. [TheYOSH]
@@ -447,6 +455,16 @@ Changelog
 
 **Other**
 ------
+- Merge branch 'master' into 4.x.y.z. [TheYOSH]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (874 of 874 strings)
+- Translated using Weblate (English (United Kingdom)) [theyosh]
+
+  Currently translated at 100.0% (874 of 874 strings)
+- Merge branch 'documentation' into 4.x.y.z. [TheYOSH]
+- Merge branch 'documentation' into 4.x.y.z. [TheYOSH]
+- Fuck Jekyll link checker... stupid thing is broken. [J.G. Rubingh]
 - Merge branch '4.x.y.z' into documentation. [TheYOSH]
 - Merge branch 'master' into 4.x.y.z. [TheYOSH]
 - Merge branch 'master' into 3.x.y.z. [TheYOSH]
