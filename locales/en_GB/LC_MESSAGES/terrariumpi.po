@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-03-25 11:52+0000\n"
+"PO-Revision-Date: 2021-08-26 11:21+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/3-x-y-z/en_GB/>\n"
@@ -1861,7 +1861,7 @@ msgstr "OWFS"
 #: views/hardware.tpl:77 views/inc/usage_sensors.tpl:112
 #: views/sensor_settings.tpl:104
 msgid "HumidIcon"
-msgstr ""
+msgstr "HumidIcon"
 
 #: views/hardware.tpl:78
 msgid ""
