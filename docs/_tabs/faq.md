@@ -15,10 +15,11 @@ Here you can find the most frequently asked question.
   <li>
     <input id="faq{{ forloop.index }}" type="checkbox" />
     <label for="faq{{ forloop.index }}"><h2>{{ faq.title }}</h2></label>
-    <div>{{ faq.content | markdownify }}</div>
+    <div class="faq_content">{{ faq.content | markdownify }}</div>
   </li>
 {% endfor %}
 </ul>
+
 
 <script>
 jQuery(document).ready(function() {
