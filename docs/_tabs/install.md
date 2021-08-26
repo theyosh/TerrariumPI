@@ -57,6 +57,8 @@ sudo apt -y install git
 
 ## Download
 
+**Disclaimer:** If you have TerrariumPI 3 running on this Raspberry PI, then you can [read here](#backup) how to stop and make a backup.
+
 After Git is installed, we can download the Terrariumpi source code. We will only download the latest version.
 
 ```console
@@ -82,10 +84,18 @@ There is no real migration from version 3 to version 4. The changes are to big. 
 
 If you do **not care** about your relay history, you can just skip this migration.
 
-So make sure you have the old TerrariumPI stopped. The rename the folder `TerrariumPI` to `TerrariumPI.old`. This way you have a backup of your existing working setup.
+## Backup
 
-Now, install TerrariumPI v4 as [described here]({{ 'install' | relative_url}}). And then you need to set it up as you want. So that means adding sensors and relays. When that is running, you can start migrating the relay history data.
+So make sure you have **stopped** the old TerrariumPI. And rename the folder `TerrariumPI` to `TerrariumPI.old`. This way you have a backup of your existing working setup.
 
+1. Stop TerrariumPI 3. [Wiki](https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-stop-terrariumpi)
+
+2. Make a backup of existing version. `mv /home/pi/TerrariumPI /home/pi/TerrariumPI.old`
+
+Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need to set it up as you want. So that means adding sensors and relays. When that is running, you can start migrating the relay history data.
+
+
+## Migrate
 
 1. First make sure you have an backup of files of the old V3 version:
   - settings.cfg
