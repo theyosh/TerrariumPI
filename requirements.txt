@@ -29,7 +29,7 @@ RPi.GPIO
 pyserial
 pigpio_dht
 pigpio
-mitemp_bt
+mitemp_bt==0.0.3
 PyMLX90614
 pyownet
 veml6075
