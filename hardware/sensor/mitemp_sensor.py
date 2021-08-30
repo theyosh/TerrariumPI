@@ -12,6 +12,9 @@ class terrariumMiTempSensor(terrariumBluetoothSensor):
   def _load_hardware(self):
     address = self._address
     device = MiTempBtPoller(address[0], BluepyBackend, 10, adapter=f'hci{address[1]}')
+
+    print(f'Loaded MiTemp device at address: {address}')
+    print(device)
     return device
 
   def _get_data(self):
@@ -21,10 +24,24 @@ class terrariumMiTempSensor(terrariumBluetoothSensor):
     #self._device['firmware'] = self._device['device'].firmware_version()
     #self._device['battery']  = self._device['device'].parameter_value(MI_BATTERY)
 
+    print('Getting new data from MiTemp')
+    print('Device:')
+    print(self.device)
+    print(dir(self.device))
+
+    print('Requesting device temperature')
+
     data['temperature'] = self.device.parameter_value(MI_TEMPERATURE)
+
+    print('Requesting device humidity')
+
     data['humidity']    = self.device.parameter_value(MI_HUMIDITY)
-    data['battery']     = float(self.device.parameter_value(MI_BATTERY))
-    data['firmware']    = self.device.firmware_version()
+
+    #data['battery']     = float(self.device.parameter_value(MI_BATTERY))
+    #data['firmware']    = self.device.firmware_version()
+
+    print('Final data')
+    print(data)
 
     return data
 
