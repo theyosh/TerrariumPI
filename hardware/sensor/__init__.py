@@ -444,11 +444,15 @@ class terrariumBluetoothSensor(terrariumSensor):
   @staticmethod
   def _scan_sensors(sensorclass, ids = [], unit_value_callback = None, trigger_callback = None):
     # Due to multiple bluetooth dongles, we are looping 10 times to see which devices can scan. Exit after first success
+    print(f'Scanning bluetooth for: {sensorclass}')
     ok = True
     for counter in range(10):
       try:
         devices = Scanner(counter).scan(terrariumBluetoothSensor.__SCAN_TIME)
         for device in devices:
+          print('Found bluetooth device:')
+          print(device.getValueText(9))
+
           if device.rssi > terrariumBluetoothSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ids:
             for sensor_type in sensorclass.TYPES:
               yield terrariumSensor(None,
