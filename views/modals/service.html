@@ -320,12 +320,7 @@ jQuery.when(
   jQuery.get('{{ url_for("api:notification_service_types") }}'),
   jQuery.get('{{ url_for("api:display_hardware") }}'),
 
-
 ).done(function(services, displays) {
-
-
-
-//jQuery.get('{{ url_for("api:notification_service_types") }}', function(data) {
     let service_type = {{modal_type}}_form.find('select#service_type');
     service_type.attr('readonly', false);
     service_type.find('option').remove();

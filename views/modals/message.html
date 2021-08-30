@@ -109,10 +109,7 @@ jQuery.when(
   jQuery.get('{{ url_for("api:notification_message_types") }}'),
   jQuery.get('{{ url_for("api:notification_service_list") }}'),
 
-
 ).done(function(message_types, services) {
-
-//jQuery.get('{{ url_for("api:notification_message_types") }}', function(data) {
     let message_type_select = {{modal_type}}_form.find('select#message_id');
     message_type_select.attr('readonly', false);
     message_type_select.find('option').remove();

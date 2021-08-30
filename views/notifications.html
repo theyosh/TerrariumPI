@@ -153,7 +153,7 @@ div#services .btn.btn-app i:not(.active) {
 </style>
 <script>
   jQuery(function () {
-    jQuery.get('{{ url_for("api:notification_service_list") }}',function(data) {
+    jQuery.get({url: '{{ url_for("api:notification_service_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
       data = data.data;
       // Sort the buttons based on the given button name
       data.sort((a, b) => a.name.localeCompare(b.name));
@@ -183,9 +183,7 @@ div#services .btn.btn-app i:not(.active) {
       jQuery('div#service_overview div.overlay').remove();
     });
 
-
-
-    jQuery.get('{{ url_for("api:notification_message_list") }}',function(data) {
+    jQuery.get({url: '{{ url_for("api:notification_message_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
       data = data.data;
       // Sort the buttons based on the given button name
       data.sort((a, b) => a.name.localeCompare(b.name));

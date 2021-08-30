@@ -83,7 +83,9 @@ class terrariumWebserver(object):
               response.set_cookie('auth', request.get_cookie('auth', secret=self.cookie_secret), secret=self.cookie_secret, **{ 'max_age' : 3600, 'path' : '/'})
 
         elif request.method.lower() in ['post','put','delete']:
+          response.set_cookie('no-cache','1', secret=None, **{ 'max_age' : 90, 'path' : '/'})
           response.set_header('Cache-Control', 'no-cache')
+
 
         return func(*a, **ka)
 

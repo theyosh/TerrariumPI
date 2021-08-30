@@ -1066,7 +1066,7 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
 jQuery('.area_type').hide();
 
 // We load the weather data in a own call, as this can give a 404 error when no data information is available
-jQuery.get('{{ url_for("api:weather") }}',function(data){
+jQuery.get({url: '{{ url_for("api:weather") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
   weather_data = data;
   {{modal_type}}_form.find('select[name="mode"] option[value^="weather"]').prop('disabled',false);
 }).fail(function(data){

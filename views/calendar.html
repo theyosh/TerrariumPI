@@ -81,7 +81,7 @@
       },
 
       eventDrop: function(changeInfo) {
-        jQuery.get('{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',changeInfo.event.id), function(event_data){
+        jQuery.get({url: '{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',changeInfo.event.id), cache: '1' != Cookies.get('no-cache')}).then(function(data) {
           event_data.dtstart = moment(changeInfo.event.start).unix();
           event_data.dtend = (changeInfo.event.end ? moment(changeInfo.event.end).unix() : null);
 
@@ -104,7 +104,7 @@
       },
 
       eventResize: function(changeInfo) {
-        jQuery.get('{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',changeInfo.event.id), function(event_data){
+        jQuery.get({url: '{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',changeInfo.event.id), cache: '1' != Cookies.get('no-cache')}).then(function(data) {
           event_data.dtstart = moment(changeInfo.event.start).unix();
           event_data.dtend = (changeInfo.event.end ? moment(changeInfo.event.end).unix() : null);
 

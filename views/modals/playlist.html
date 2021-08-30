@@ -82,7 +82,7 @@
 {% block modal_form_javascript_load %}
 {{modal_type}}_modal.find('.range_slider').bootstrapSlider();
 
-jQuery.get('{{ url_for("api:audiofile_list") }}', function(data) {
+jQuery.get({url: '{{ url_for("api:audiofile_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
     let audio_files_select = {{modal_type}}_form.find('select#files');
     audio_files_select.attr('readonly', false).find('option').remove();
 

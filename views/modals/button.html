@@ -93,7 +93,7 @@
 {% endblock %}
 
 {% block modal_form_javascript_load %}
-jQuery.get('{{ url_for("api:button_hardware") }}', function(data) {
+jQuery.get({url: '{{ url_for("api:button_hardware") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
     let button_hardware_select = {{modal_type}}_form.find('select#button_hardware');
     button_hardware_select.attr('readonly', false);
     button_hardware_select.find('option').remove();

@@ -123,7 +123,7 @@
 
     new graph('forecast_graph', '{{ url_for("api:weather_forecast") }}', 'temperature');
 
-    jQuery.get('{{ url_for("api:weather") }}',function(data) {
+    jQuery.get({url: '{{ url_for("api:weather") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
       if (Object.keys(data).length == 0) {
         return;
       }
