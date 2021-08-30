@@ -11,9 +11,10 @@ class terrariumMiTempSensor(terrariumBluetoothSensor):
 
   def _load_hardware(self):
     address = self._address
+    print(f'Loaded MiTemp device at address: {address}')
+
     device = MiTempBtPoller(address[0], BluepyBackend, 10, adapter=f'hci{address[1]}')
 
-    print(f'Loaded MiTemp device at address: {address}')
     print(device)
     return device
 
