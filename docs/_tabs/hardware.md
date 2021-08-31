@@ -63,5 +63,10 @@ We currently support <strong>{{ sensors | size}}</strong> types of sensors:
 {% for sensor in sensors %}
   <h3>
     <a href="{{ sensor.url | relative_url }}">{{ sensor.title }}</a>
+    <small class="ml-xl-3">
+    {% for type in sensor.device_types %}
+      {{ type }}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    </small>
   </h3>
 {% endfor %}
