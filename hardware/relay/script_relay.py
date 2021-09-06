@@ -27,7 +27,7 @@ class terrariumRelayScript(terrariumRelay):
       # Device does not exists....
       return None
 
-    return self.ON if data != 0.0 else self.OFF
+    return self.ON if state != 0.0 else self.OFF
 
   def _get_hardware_value(self):
 
