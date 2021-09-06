@@ -517,10 +517,11 @@ class terrariumEngine(object):
           print('CSS811 DEBUG: Start updating calibrations')
           calibration = {'temperature' : [], 'humidity' : []}
           for calibration_sensor in sensor.calibration['ccs811_compensation_sensors']:
-            calibration_sensor = self.sensors[calibration_sensor]
-            print(f'CSS811 DEBUG: Found sensor: {calibration_sensor}')
-            if calibration_sensor.type in calibration:
-              calibration[calibration_sensor.type].append(calibration_sensor.value)
+            if calibration_sensor in self.sensors:
+              calibration_sensor = self.sensors[calibration_sensor]
+              print(f'CSS811 DEBUG: Found sensor: {calibration_sensor}')
+              if calibration_sensor.type in calibration:
+                calibration[calibration_sensor.type].append(calibration_sensor.value)
 
           calibration['temperature'] = None if len(calibration['temperature']) == 0 else statistics.mean(calibration['temperature'])
           calibration['humidity']    = None if len(calibration['humidity']) == 0    else statistics.mean(calibration['humidity'])
