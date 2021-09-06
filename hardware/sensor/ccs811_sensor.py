@@ -232,43 +232,30 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
     data = None
     try:
 
-      self.device.setCompensation(self.__calibration['temperature'],self.__calibration['humidity'])
+      self.device.setCompensation(self.__calibration['temperature'], self.__calibration['humidity'])
       statusbyte = self.device.readStatus()
       error = self.device.checkError(statusbyte)
 
       if error:
-        print(f'CSS811 DEBUG: !!!error!!! {error}')
         return None
 
       if not self.device.checkDataReady(statusbyte):
-        print('CSS811 DEBUG: Data is not ready?!?!?!?')
         return None
 
       result = self.device.readAlg()
       if not result:
-        print(f'CSS811 DEBUG: ERROR result')
-        print(result)
         return None
 
       if result.get('eCO2',None):
         data = {'co2' : result['eCO2']}
 
-      print(f'CSS811 DEBUG: final data')
-      print(data)
-
       return data
 
     except Exception as ex:
-      print('CSS811 DEBUG: Exception')
-      print(ex)
+      pass
 
-#      pass
-
-  def calibrate(self,temperature = 20,humidity = 50):
+  def calibrate(self, temperature = 20, humidity = 50):
     self.__calibration = {
       'temperature' : temperature,
       'humidity'    : humidity,
     }
-
-    print(f'CSS811 DEBUG: Update callibration data')
-    print(self.__calibration)
