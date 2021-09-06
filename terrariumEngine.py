@@ -513,7 +513,7 @@ class terrariumEngine(object):
         current_value = sensor.value
         start = time.time()
 
-        if 'ccs811' == sensor.hardware.lower():
+        if 'css811' == sensor.hardware.lower():
           print('CSS811 DEBUG: Start updating calibrations')
           calibration = {'temperature' : [], 'humidity' : []}
           for calibration_sensor in sensor.calibration['ccs811_compensation_sensors']:
