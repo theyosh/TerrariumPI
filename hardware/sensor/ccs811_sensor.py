@@ -262,7 +262,7 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
       if not result:
         return None
 
-      sensor_data['co2'] = result['eCO2']
+      data = {'co2' : result['eCO2']}
 
     except Exception as ex:
       print('CSS811 DEBUG: Exception')
