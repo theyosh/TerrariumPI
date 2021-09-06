@@ -224,32 +224,55 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
     device = CCS811_RPi(addr=address[0], twi=address[1])
     device.configureSensor(terrariumCCS811Sensor.MODE)
 
+    print(f'CSS811 DEBUG: Device loaded')
+    print(device)
+
     self.calibrate()
+
+    print('CSS811 DEBUG: Loaded calibration')
+    print(self.__calibration)
+
     return device
 
   def _get_data(self):
     data = None
     try:
 
+      print('CSS811 DEBUG: load compensation')
       self.device.setCompensation(self.__calibration['temperature'],self.__calibration['humidity'])
+      print('CSS811 DEBUG: DONE!')
 
+      print('CSS811 DEBUG: Load read status')
       statusbyte = self.device.readStatus()
+      print('CSS811 DEBUG: ')
+      print(statusbyte)
       error = self.device.checkError(statusbyte)
 
+      print(f'CSS811 DEBUG: error? {error}')
       if error:
         return None
 
       if not self.device.checkDataReady(statusbyte):
+        print('CSS811 DEBUG: Data is not ready?')
         return None
 
       result = self.device.readAlg()
+      print(f'CSS811 DEBUG: result')
+      print(result)
       if not result:
         return None
 
       sensor_data['co2'] = result['eCO2']
 
     except Exception as ex:
-      pass
+      print('CSS811 DEBUG: Exception')
+      print(ex)
+
+#      pass
+
+
+    print(f'CSS811 DEBUG: final data')
+    print(data)
 
     return data
 
