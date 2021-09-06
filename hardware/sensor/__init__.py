@@ -299,6 +299,8 @@ class terrariumSensor(object):
       logger.debug(f'Start getting new data from  sensor {self}')
       try:
         data = self.get_data()
+        if self.address == '5a, 1':
+          print(f'CSS811 DEBUG: Got new data: {data} -> cache key: {self.__sensor_cache_key}')
         self.__sensor_cache.set_data(self.__sensor_cache_key,data,terrariumSensor.CACHE_TIMEOUT)
       except Exception as ex:
         logger.error(f'Error updating sensor {self}. Check your hardware! {ex}')
@@ -306,6 +308,9 @@ class terrariumSensor(object):
       self.__sensor_cache.clear_running(self.__sensor_cache_key)
 
     current = None if data is None or self.sensor_type not in data else data[self.sensor_type]
+
+    if self.address == '5a, 1':
+      print(f'CSS811 DEBUG: Sensor {self} -> {current}')
 
     if current is None:
       self.__sensor_cache.clear_data(self.__sensor_cache_key)
