@@ -13,7 +13,7 @@ class terrariumRelayScript(terrariumRelay):
     if not script.exists():
       raise terrariumRelayLoadingException(f'Invalid script location for relay {self}: {self.address}')
 
-    if oct(script.stat().st_mode)[-3:] not in ['777','775','755']:
+    if oct(script.stat().st_mode)[-3:] not in ['777','775','755','744','544','554','555','550','540','770','750','740']:
       raise terrariumRelayLoadingException(f'Script {self.address} for relay {self} is not executable.')
 
     return self.address
@@ -27,7 +27,7 @@ class terrariumRelayScript(terrariumRelay):
       # Device does not exists....
       return None
 
-    return True
+    return self.ON if data != 0.0 else self.OFF
 
   def _get_hardware_value(self):
 
@@ -67,7 +67,7 @@ class terrariumDimmerScript(terrariumRelayDimmer):
       # Device does not exists....
       return None
 
-    return True
+    return state
 
   def _get_hardware_value(self):
     try:
@@ -82,4 +82,3 @@ class terrariumDimmerScript(terrariumRelayDimmer):
       return None
 
     return data
-
