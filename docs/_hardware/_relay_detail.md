@@ -5,7 +5,7 @@
 
 {% if page.device_auto_detect %}
 ### Auto detect
-This relay will be auto detected during startup
+This relay will be auto detected during startup or added by 'Scan relays' in the menu.
 {% endif %}
 
 In order to use the **{{ page.device_title | default: page.title }}** use the following settings:

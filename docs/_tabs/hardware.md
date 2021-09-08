@@ -15,8 +15,12 @@ All the hardware that is connected through GPIO pins needs to use the **physical
 ### Power saving
 Some GPIO sensors can benefit from using power saving. A good example is the analog/digital moisture sensor YTXX - TODO: Make link to actual sensor
 
-When you want to enable power saving, just enter an extra GPIO pin number to the address seperated by a comma.
+Power management works that you connect the red (power) wire of the sensor to a GPIO pin, which will be put to high so that the sensor get powered. After 0.25 sec a measurement is taken, and afterwards the power to the sensor is shutdown.
+
+When you want to enable power saving just enter an extra GPIO pin number, where the RED power cable is connected to, to the address seperated by a comma.
 <br />Ex: `[GPIO Readout pin],[GPIO power saving pin]`
+
+**remark:** Not all sensors will work with power management.
 
 ### Analog sensors
 ![RaspIO Analog Zero](/assets/img/RasPiO-Analog-Zero.webp){: style="max-width: 200px" .right}
@@ -41,7 +45,7 @@ Run the command `i2cdetect -y 1` in order to see what is connected to your I2C b
 70: 70 -- -- -- -- -- -- --
 ```
 
-{% assign relays = site.hardware | where_exp: "relay", "relay.tags contains 'relay'" | sort_natural: "title" %}
+{% assign relays = site.hardware | where_exp: "hardware", "hardware.tags contains 'relay'" | sort_natural: "title" %}
 ## Relays ({{ relays | size}})
 We currently support <strong>{{ relays | size}}</strong> types of relays. Relays which has a dial icon ![Dimmer icon](/assets/img/dimmer_icon.png){: style="height: 20px" .normal} after their name are dimmers.
 
@@ -55,7 +59,7 @@ We currently support <strong>{{ relays | size}}</strong> types of relays. Relays
 {% endfor %}
 
 
-{% assign sensors = site.hardware | where_exp: "sensor", "sensor.tags contains 'sensor'" | sort_natural: "title %}
+{% assign sensors = site.hardware | where_exp: "hardware", "hardware.tags contains 'sensor'" | sort_natural: "title %}
 ## Sensors ({{ sensors | size}})
 We currently support <strong>{{ sensors | size}}</strong> types of sensors:
 <br />

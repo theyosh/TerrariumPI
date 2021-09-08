@@ -5,7 +5,7 @@
 
 {% if page.device_auto_detect %}
 ### Auto detect
-This relay will be auto detected during startup
+This sensor will be auto detected during startup or added by 'Scan sensors' in the menu.
 {% endif %}
 
 In order to use the **{{ page.device_title | default: page.title }}** use the following settings:
@@ -21,29 +21,30 @@ Types
 {% endfor %}
 
 Address
-: {{ page.device_address }}
+: {{ page.device_address }} {%if page.device_power_management %}This sensor does support ([power management]({{ 'hardware' | relative_url}}#power-saving))
+ {% endif %}
 
 Name
-: The name of the relay
+: The name of the sensor
 
 Alarm min
-: The ammount of power that is used when on or at full power (dimmer)
+: The lower alarm value. When the sensor gets below this value, the **low** alarm will be triggered
 
 Alarm max
-: The ammount of water that is used when on or at full power (dimmer) in Liter/Gallon per minute
+: The high alarm value. When the sensor gets higher then this value, the **hight** alarm will be triggered
 
 Limit min
-: The current state of the relay. Value 0 is off, 100 is full on, or a value between 0 - 100 (dimmer)
+: The minimun value that is valid for this sensor. Values measured below this value will be ignored.
 
 Limit max
-: The current state of the relay. Value 0 is off, 100 is full on, or a value between 0 - 100 (dimmer)
+: The maximum value that is valid for this sensor. Values measured higher then this value will be ignored.
 
 Max diff
-: The current state of the relay. Value 0 is off, 100 is full on, or a value between 0 - 100 (dimmer)
+: The maximum difference between two measurements that is valid. Enter **0** to disable.
 
 Exclude average
-: The current state of the relay. Value 0 is off, 100 is full on, or a value between 0 - 100 (dimmer)
+: Exclude this sensor from the average calculation and graphs on the dashboard.
 
 ### Optional
 Offset
-: The frequency of wicht the dimmer is working on. Default {{ page.dimmer_frequency }}
+: The the value to add or subtract from the sensor reading.
