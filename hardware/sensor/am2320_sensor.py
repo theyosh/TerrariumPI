@@ -11,7 +11,7 @@ from time import sleep
 class terrariumAM2320Sensor(terrariumI2CSensor):
 
   HARDWARE = 'am2320'
-  TYPES    = ['temperature']
+  TYPES    = ['temperature','humidity']
   NAME     = 'AM2320 sensor'
 
   __PARAM_AM2320_READ = 0x03
