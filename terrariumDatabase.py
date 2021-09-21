@@ -189,7 +189,7 @@ class Enclosure(db.Entity):
 
   def before_delete(self):
     image = Path(self.image)
-    if image.exists():
+    if image.exists() and image.is_file():
       image.unlink()
       print(f'Deleted file {image}')
 
