@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-09-21 13:41+0000\n"
+"PO-Revision-Date: 2021-09-22 14:41+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/3-x-y-z/pt_BR/>\n"
@@ -1380,7 +1380,7 @@ msgstr "Novo item de calendário"
 #: views/inc/usage_webcams.tpl:154 views/notifications.tpl:85
 #: views/notifications.tpl:223
 msgid "Title"
-msgstr "Título"
+msgstr "Nome do sistema"
 
 #: views/calendar.tpl:60 views/profile.tpl:102
 msgid "Description"
@@ -1531,7 +1531,7 @@ msgstr "Estado"
 #: views/system_status.tpl:71 views/system_status.tpl:127
 #: views/system_status.tpl:183 views/system_status.tpl:239
 msgid "Day"
-msgstr "Dia"
+msgstr "Horário"
 
 #: views/dashboard.tpl:105 views/inc/usage_dashboard.tpl:74
 #: views/system_environment.tpl:110
@@ -1568,7 +1568,7 @@ msgstr "Intervalo"
 #: views/system_environment.tpl:1036 views/system_environment.tpl:1411
 #: views/system_environment.tpl:1622
 msgid "Day/night difference"
-msgstr "Diferença dia/noite"
+msgstr "Diferença dia / noite"
 
 #: views/dashboard.tpl:171 views/inc/menu.tpl:50
 #: views/inc/usage_dashboard.tpl:158 views/inc/usage_sensors.tpl:132
@@ -3980,7 +3980,7 @@ msgstr "Senha atual do administrador"
 
 #: views/system_settings.tpl:150
 msgid "Full authentication"
-msgstr "Autenticação completa"
+msgstr "Para entrar no sistema"
 
 #: views/system_settings.tpl:151
 msgid "Changes only"
@@ -4012,7 +4012,7 @@ msgstr "Valor de suavização do gráfico"
 
 #: views/system_settings.tpl:189
 msgid "Show min and max values in gauge graphs"
-msgstr "Mostrar valores mínimo e máximo em gráficos de medidor"
+msgstr "Exibir mínimo e máximo em medidores gráficos"
 
 #: views/system_settings.tpl:193 views/system_settings.tpl:204
 #: views/system_settings.tpl:215
@@ -4038,11 +4038,11 @@ msgstr "Uso de energia Pi em W"
 
 #: views/system_settings.tpl:228
 msgid "Power price"
-msgstr "Preço da energia"
+msgstr "Valor da energia em reais"
 
 #: views/system_settings.tpl:234
 msgid "Water price"
-msgstr "Preço da água"
+msgstr "Valor da água em reais"
 
 #: views/system_settings.tpl:240
 msgid "IP or hostname"
