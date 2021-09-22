@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-08-13 12:32+CEST\n"
-"PO-Revision-Date: 2021-09-21 14:51+0000\n"
+"PO-Revision-Date: 2021-09-23 04:41+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -530,11 +530,11 @@ msgstr "Arquivos"
 #: views/includes/sidebar.html:200 views/modals/area.html:331
 #: views/modals/area.html:401 views/playlists.html:2 views/playlists.html:10
 msgid "Playlists"
-msgstr "Listas de reprodução"
+msgstr "Playlists"
 
 #: views/includes/sidebar.html:206
 msgid "New playlist"
-msgstr "Nova Lista de Reprodução"
+msgstr "Nova playlist"
 
 #: views/includes/sidebar.html:223
 msgid "List"
@@ -1240,7 +1240,7 @@ msgstr "Serviços"
 
 #: views/modals/playlist.html:11
 msgid "Playlist settings"
-msgstr "Configurações de lista de reprodução"
+msgstr "Configurações da playlist"
 
 #: views/modals/playlist.html:32
 msgid "Select the volume for this playlist."
@@ -1266,7 +1266,7 @@ msgstr "Reproduzir playlist em modo repetir."
 
 #: views/modals/playlist.html:66
 msgid "Select all audio files for this playlist."
-msgstr "Selecione os arquivos de áudio para esta playlist."
+msgstr "Selecione os arquivos para esta playlist."
 
 #: views/modals/playlist.html:69
 msgid "Select at least 1 audio file."
@@ -2205,7 +2205,7 @@ msgstr "Adicionar nova mensagem"
 
 #: views/includes/sidebar.html:204
 msgid "Add new playlist"
-msgstr "Adicionar nova lista de reprodução"
+msgstr "Adicionar nova playlist"
 
 #: views/notifications.html:18
 msgid "Add new service"
@@ -2283,7 +2283,7 @@ msgstr "Excluir mensagem"
 
 #: views/playlists.html:74
 msgid "Delete playlist"
-msgstr "Excluir lista de reprodução"
+msgstr "Excluir playlist"
 
 #: views/relays.html:79
 msgid "Delete relay"
@@ -2319,7 +2319,7 @@ msgstr "Editar Mensagem"
 
 #: views/playlists.html:73
 msgid "Edit playlist"
-msgstr "Editar lista de reprodução"
+msgstr "Editar playlist"
 
 #: views/relays.html:63
 msgid "Edit relay"
@@ -2643,7 +2643,7 @@ msgstr "Selecionar período"
 
 #: views/modals/area.html:332 views/modals/area.html:402
 msgid "Select playlists"
-msgstr "Selecione listas de reprodução"
+msgstr "Selecione playlists"
 
 #: views/modals/area.html:179 views/modals/area.html:222
 #: views/modals/area.html:630 views/modals/area.html:760
