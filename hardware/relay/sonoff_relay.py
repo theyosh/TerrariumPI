@@ -65,7 +65,7 @@ class terrariumRelaySonoff(terrariumRelay):
       return None
 
     # Always overule the ID generating, as we want to use the MAC as that is unique if the IP address is changing
-    if self.id is None:
+    if self._device['id'] is None:
       self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}{address["nr"]}'.encode()).hexdigest()
 
     return device
