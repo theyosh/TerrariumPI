@@ -78,7 +78,12 @@ class terrariumRelaySonoff(terrariumRelay):
     if data is None:
       return False
 
-    return state == (self.ON if terrariumUtils.is_true(data['POWER']) else self.OFF)
+    if 'POWER' in data:
+      data = data['POWER']
+    elif f'POWER{self._address["nr"]}' in data:
+      data = data[f'POWER{self._address["nr"]}']
+
+    return state == (self.ON if terrariumUtils.is_true(data) else self.OFF)
 
   def _get_hardware_value(self):
     url = f'{self.device}Power{self._address["nr"]}'
