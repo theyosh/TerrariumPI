@@ -12,11 +12,10 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "localhost:8090",
   "basePath": "/api",
   "tags": [
     {
-      "name": "area",
+      "name": "Area",
       "description": "Enclosure areas"
     },
     {
@@ -56,10 +55,10 @@
     "/areas/types/": {
       "get": {
         "tags": [
-          "area"
+          "Area"
         ],
-        "summary": "Get a list of existing area types",
-        "description": "Get all the existing area types with supported sensor types",
+        "summary": "Get available area types",
+        "description": "Get all the available area types with supported sensor types.",
         "operationId": "getAreaTypes",
         "consumes": [
           "application/json"
@@ -69,7 +68,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Zero or more area types with supported sensor types",
+            "description": "Zero or more area types with supported sensor types.",
             "schema": {
               "type": "array",
               "items": {
@@ -83,10 +82,10 @@
     "/areas/": {
       "get": {
         "tags": [
-          "area"
+          "Area"
         ],
-        "summary": "Get a list of existing areas",
-        "description": "Get all the existing areas",
+        "summary": "Get existing areas",
+        "description": "Get all the existing areas in a list.",
         "operationId": "getAreas",
         "consumes": [
           "application/json"
@@ -108,7 +107,7 @@
       },
       "post": {
         "tags": [
-          "area"
+          "Area"
         ],
         "summary": "Add a new area to an enclosure",
         "description": "Add a new area to an enclosure. The enclosure needs to be existing",
@@ -143,7 +142,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       }
@@ -151,7 +150,7 @@
     "/areas/{id}/": {
       "get": {
         "tags": [
-          "area"
+          "Area"
         ],
         "summary": "Get a specific area",
         "description": "Get a specific area selected by id",
@@ -189,7 +188,7 @@
       },
       "put": {
         "tags": [
-          "area"
+          "Area"
         ],
         "summary": "Update an existing area with new data",
         "description": "Update an existing area with new data. The enclosure needs to be existing",
@@ -235,13 +234,13 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       },
       "delete": {
         "tags": [
-          "area"
+          "Area"
         ],
         "summary": "Delete an existing area",
         "description": "Delete an existing area",
@@ -275,7 +274,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       }
@@ -537,7 +536,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       }
@@ -629,7 +628,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       },
@@ -669,7 +668,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       }
@@ -863,7 +862,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       }
@@ -955,7 +954,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       },
@@ -995,7 +994,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       }
@@ -1189,7 +1188,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       }
@@ -1281,7 +1280,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       },
@@ -1321,7 +1320,7 @@
         },
         "security": [
           {
-            "http_auth": []
+            "Basic": []
           }
         ]
       }
@@ -1427,8 +1426,9 @@
     }
   },
   "securityDefinitions": {
-    "http_auth": {
-      "type": "basic"
+    "Basic": {
+      "type": "basic",
+      "description": "Basic HTTP authentication. Default user is \"admin\". You can change this in the settings."
     }
   },
   "definitions": {
@@ -1584,7 +1584,6 @@
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid",
           "readOnly": true
         },
         "hardware": {
@@ -1642,7 +1641,6 @@
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid",
           "readOnly": true
         },
         "hardware": {
@@ -1725,7 +1723,6 @@
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid",
           "readOnly": true
         },
         "hardware": {
@@ -1741,19 +1738,24 @@
           "type": "string"
         },
         "limit_min": {
-          "type": "number"
+          "type": "number",
+          "default": 0
         },
         "limit_max": {
-          "type": "number"
+          "type": "number",
+          "default": 100
         },
         "alarm_min": {
-          "type": "number"
+          "type": "number",
+          "default": 0
         },
         "alarm_max": {
-          "type": "number"
+          "type": "number",
+          "default": 100
         },
         "max_diff": {
-          "type": "number"
+          "type": "number",
+          "default": 0
         },
         "exclude_avg": {
           "type": "boolean"
@@ -1817,6 +1819,62 @@
         },
         "alarm_max": {
           "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "Setting": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "Webcam": {
+      "type": "object",
+      "required": [
+        "hardware",
+        "name",
+        "address",
+        "width",
+        "height",
+        "rotation",
+        "awb"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "hardware": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "rotation": {
+          "type": "string"
+        },
+        "awb": {
+          "type": "string"
+        },
+        "is_live": {
+          "type": "boolean",
           "readOnly": true
         }
       }
