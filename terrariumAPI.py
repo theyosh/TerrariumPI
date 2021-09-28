@@ -208,7 +208,7 @@ class terrariumAPI(object):
 
     # API DOC
     bottle_app.route('/<page:re:(api/doc)>/', 'GET', self.webserver.render_page,   apply=self.authentication(False), name='api:documentation')
-    bottle_app.route('/api/doc/<filename:re:(swagger\.json)>', 'GET', self.webserver.__static_file, apply=self.authentication(False), name='api:swagger.json')
+    bottle_app.route('/api/doc/<filename:re:(swagger\.json)>', 'GET', self.webserver._static_file, apply=self.authentication(False), name='api:swagger.json')
 
     self._load_api()
 

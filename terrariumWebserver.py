@@ -177,7 +177,7 @@ class terrariumWebserver(object):
 
     return jinja2_template(f'{page}',**variables)
 
-  def __static_file(self, filename, root = 'static'):
+  def _static_file(self, filename, root = 'static'):
     # TODO: This javascript file should not be templated parsed..... not correct
     if filename == 'js/terrariumpi.js':
       response.headers['Content-Type'] = 'application/javascript; charset=UTF-8'
@@ -245,10 +245,10 @@ class terrariumWebserver(object):
     self.bottle.route('/<page:re:modals/[^/]+>.html', method='GET', callback=self.render_page, apply=self.authenticate(), name='modal')
 
     # Special case: robots.txt and favicon.ico
-    self.bottle.route('/<filename:re:(robots\.txt|favicon\.ico)>', method='GET', callback=self.__static_file)
+    self.bottle.route('/<filename:re:(robots\.txt|favicon\.ico)>', method='GET', callback=self._static_file)
 
     # Static files
-    self.bottle.route('/<root:re:(static|webcam|media|log)>/<filename:path>', method='GET', callback=self.__static_file, apply=self.authenticate())
+    self.bottle.route('/<root:re:(static|webcam|media|log)>/<filename:path>', method='GET', callback=self._static_file, apply=self.authenticate())
     self.bottle.route('/<root:re:(media)>/upload/', method='POST', callback=self.__file_upload, apply=self.authenticate(), name='file_upload')
 
   def url_for(self, name, **kwargs):
