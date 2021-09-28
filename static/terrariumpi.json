@@ -1,0 +1,1829 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Here you can find all the API calls and models that are available in TerrariumPI. More information can be found at https://theyosh.github.io/TerrariumPI/",
+    "version": "1.0.0",
+    "title": "TerrariumPI REST API",
+    "contact": {
+      "email": "terrariumpi@theyosh.nl"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8090",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "area",
+      "description": "Enclosure areas"
+    },
+    {
+      "name": "audio",
+      "description": "Audio files"
+    },
+    {
+      "name": "button",
+      "description": "Buttons, motion detectors and light sensors"
+    },
+    {
+      "name": "enclosure",
+      "description": "Enclosures"
+    },
+    {
+      "name": "playlist",
+      "description": "Playlists with audio files"
+    },
+    {
+      "name": "relay",
+      "description": "Relays"
+    },
+    {
+      "name": "sensor",
+      "description": "Sensors"
+    },
+    {
+      "name": "webcam",
+      "description": "Webcams"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/areas/types/": {
+      "get": {
+        "tags": [
+          "area"
+        ],
+        "summary": "Get a list of existing area types",
+        "description": "Get all the existing area types with supported sensor types",
+        "operationId": "getAreaTypes",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more area types with supported sensor types",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AreaType"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/areas/": {
+      "get": {
+        "tags": [
+          "area"
+        ],
+        "summary": "Get a list of existing areas",
+        "description": "Get all the existing areas",
+        "operationId": "getAreas",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more areas",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Area"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "area"
+        ],
+        "summary": "Add a new area to an enclosure",
+        "description": "Add a new area to an enclosure. The enclosure needs to be existing",
+        "operationId": "addArea",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created area object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Area"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A new created area",
+            "schema": {
+              "$ref": "#/definitions/Area"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      }
+    },
+    "/areas/{id}/": {
+      "get": {
+        "tags": [
+          "area"
+        ],
+        "summary": "Get a specific area",
+        "description": "Get a specific area selected by id",
+        "operationId": "getArea",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of area to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested area",
+            "schema": {
+              "$ref": "#/definitions/Area"
+            }
+          },
+          "404": {
+            "description": "Area does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "area"
+        ],
+        "summary": "Update an existing area with new data",
+        "description": "Update an existing area with new data. The enclosure needs to be existing",
+        "operationId": "updateArea",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of area to update",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update the values that need to be changed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Area"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated area",
+            "schema": {
+              "$ref": "#/definitions/Area"
+            }
+          },
+          "404": {
+            "description": "Area does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "area"
+        ],
+        "summary": "Delete an existing area",
+        "description": "Delete an existing area",
+        "operationId": "deleteArea",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of area to delete",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "404": {
+            "description": "Area does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      }
+    },
+    "/audio/hardware/": {
+      "get": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Get a list of supported soundcards",
+        "description": "Get all the supported soundcards",
+        "operationId": "getAudioHardware",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of supported soundcards",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudioHardware"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/audio/files/": {
+      "get": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Get a list of existing audio files",
+        "description": "Get all the existing audio files",
+        "operationId": "getAudioFiles",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more audio files",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudioFile"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Upload a new audio file",
+        "description": "Upload a new audio file",
+        "operationId": "postAudioFile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "audiofiles",
+            "description": "The uploaded audio file",
+            "required": true,
+            "type": "array",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audio file is uploaded",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudioFile"
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      }
+    },
+    "/audio/files/{file}": {
+      "get": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Get an existing audio file",
+        "description": "Get an existing audio file based on ID",
+        "operationId": "getAudioFile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "path",
+            "description": "ID of audio file",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested audio file",
+            "schema": {
+              "$ref": "#/definitions/AudioFile"
+            }
+          },
+          "404": {
+            "description": "Audio file does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Delete an existing audio file",
+        "description": "Delete an existing audio file",
+        "operationId": "delAudioFile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "path",
+            "description": "ID of audio file",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested audio file is deleted"
+          },
+          "404": {
+            "description": "Audio file does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      }
+    },
+    "/buttons/hardware/": {
+      "get": {
+        "tags": [
+          "button"
+        ],
+        "summary": "Get a list of supported buttons",
+        "description": "Get all the supported buttons",
+        "operationId": "getButtonsHardware",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of supported hardware",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ButtonHardware"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buttons/": {
+      "get": {
+        "tags": [
+          "button"
+        ],
+        "summary": "Get a list of existing buttons",
+        "description": "Get all the existing buttons",
+        "operationId": "getButtons",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more buttons",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Button"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "button"
+        ],
+        "summary": "Add a new button",
+        "description": "Add a new button",
+        "operationId": "addButton",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created button object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Button"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A new created button",
+            "schema": {
+              "$ref": "#/definitions/Button"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      }
+    },
+    "/buttons/{id}/": {
+      "get": {
+        "tags": [
+          "button"
+        ],
+        "summary": "Get a specific button",
+        "description": "Get a specific button selected by id",
+        "operationId": "getButton",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of button to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested button",
+            "schema": {
+              "$ref": "#/definitions/Button"
+            }
+          },
+          "404": {
+            "description": "Button does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "button"
+        ],
+        "summary": "Update an existing button with new data",
+        "description": "Update an existing button with new data.",
+        "operationId": "updateButton",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of button to update",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update the values that need to be changed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Button"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated button",
+            "schema": {
+              "$ref": "#/definitions/Button"
+            }
+          },
+          "404": {
+            "description": "Button does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "button"
+        ],
+        "summary": "Delete an existing button",
+        "description": "Delete an existing button",
+        "operationId": "deleteButton",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of button to delete",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "404": {
+            "description": "Button does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      }
+    },
+    "/buttons/{id}/history/": {
+      "get": {
+        "tags": [
+          "button"
+        ],
+        "summary": "Get the history for a specific button for a period of 1 day",
+        "description": "Get the history for a specific button for a period of 1 day",
+        "operationId": "getButtonHistory",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of button for which to get the history",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Button history for 1 day",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ButtonHistory"
+              }
+            }
+          },
+          "404": {
+            "description": "Button does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      }
+    },
+    "/buttons/{id}/history/{period}/": {
+      "get": {
+        "tags": [
+          "button"
+        ],
+        "summary": "Get the history for a specific button for a period",
+        "description": "Get the history for a specific button for a period",
+        "operationId": "getButtonHistoryPeriod",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of button to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "period",
+            "in": "path",
+            "description": "Period",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Button history for {period}",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ButtonHistory"
+              }
+            }
+          },
+          "404": {
+            "description": "Button does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      }
+    },
+    "/relays/hardware/": {
+      "get": {
+        "tags": [
+          "relay"
+        ],
+        "summary": "Get a list of supported relays",
+        "description": "Get all the supported relays",
+        "operationId": "getRelaysHardware",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of supported hardware",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RelayHardware"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/relays/": {
+      "get": {
+        "tags": [
+          "relay"
+        ],
+        "summary": "Get a list of existing relays",
+        "description": "Get all the existing relays",
+        "operationId": "getRelays",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more relays",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Relay"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "relay"
+        ],
+        "summary": "Add a new relay",
+        "description": "Add a new relay",
+        "operationId": "addRelay",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created relay object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Relay"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A new created relay",
+            "schema": {
+              "$ref": "#/definitions/Relay"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      }
+    },
+    "/relays/{id}/": {
+      "get": {
+        "tags": [
+          "relay"
+        ],
+        "summary": "Get a specific relay",
+        "description": "Get a specific relay selected by id",
+        "operationId": "getRelay",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of relay to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested relay",
+            "schema": {
+              "$ref": "#/definitions/Relay"
+            }
+          },
+          "404": {
+            "description": "Relay does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "relay"
+        ],
+        "summary": "Update an existing relay with new data",
+        "description": "Update an existing relay with new data.",
+        "operationId": "updateRelay",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of relay to update",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update the values that need to be changed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Relay"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated relay",
+            "schema": {
+              "$ref": "#/definitions/Relay"
+            }
+          },
+          "404": {
+            "description": "Relay does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "relay"
+        ],
+        "summary": "Delete an existing relay",
+        "description": "Delete an existing relay",
+        "operationId": "deleteRelay",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of relay to delete",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "404": {
+            "description": "Relay does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      }
+    },
+    "/relays/{id}/history/": {
+      "get": {
+        "tags": [
+          "relay"
+        ],
+        "summary": "Get the history for a specific relay for a period of 1 day",
+        "description": "Get the history for a specific relay for a period of 1 day",
+        "operationId": "getRelayHistory",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of relay for which to get the history",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Relay history for 1 day",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RelayHistory"
+              }
+            }
+          },
+          "404": {
+            "description": "Relay does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      }
+    },
+    "/relays/{id}/history/{period}/": {
+      "get": {
+        "tags": [
+          "relay"
+        ],
+        "summary": "Get the history for a specific relay for a period",
+        "description": "Get the history for a specific relay for a period",
+        "operationId": "getRelayHistoryPeriod",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of relay to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "period",
+            "in": "path",
+            "description": "Period",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Relay history for {period}",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RelayHistory"
+              }
+            }
+          },
+          "404": {
+            "description": "Relay does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      }
+    },
+    "/sensors/hardware/": {
+      "get": {
+        "tags": [
+          "sensor"
+        ],
+        "summary": "Get a list of supported sensors",
+        "description": "Get all the supported sensors",
+        "operationId": "getSensorsHardware",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of supported hardware",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SensorHardware"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sensors/": {
+      "get": {
+        "tags": [
+          "sensor"
+        ],
+        "summary": "Get a list of existing sensors",
+        "description": "Get all the existing sensors",
+        "operationId": "getSensors",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more sensors",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Sensor"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "sensor"
+        ],
+        "summary": "Add a new sensor",
+        "description": "Add a new sensor",
+        "operationId": "addSensor",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created sensor object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A new created sensor",
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      }
+    },
+    "/sensors/{id}/": {
+      "get": {
+        "tags": [
+          "sensor"
+        ],
+        "summary": "Get a specific sensor",
+        "description": "Get a specific sensor selected by id",
+        "operationId": "getSensor",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of sensor to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested sensor",
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          },
+          "404": {
+            "description": "Sensor does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "sensor"
+        ],
+        "summary": "Update an existing sensor with new data",
+        "description": "Update an existing sensor with new data.",
+        "operationId": "updateSensor",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of sensor to update",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update the values that need to be changed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated sensor",
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          },
+          "404": {
+            "description": "Sensor does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "sensor"
+        ],
+        "summary": "Delete an existing sensor",
+        "description": "Delete an existing sensor",
+        "operationId": "deleteSensor",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of sensor to delete",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "404": {
+            "description": "Sensor does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "http_auth": []
+          }
+        ]
+      }
+    },
+    "/sensors/{id}/history/": {
+      "get": {
+        "tags": [
+          "sensor"
+        ],
+        "summary": "Get the history for a specific sensor for a period of 1 day",
+        "description": "Get the history for a specific sensor for a period of 1 day",
+        "operationId": "getSensorHistory",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of sensor for which to get the history",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sensor history for 1 day",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SensorHistory"
+              }
+            }
+          },
+          "404": {
+            "description": "Sensor does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      }
+    },
+    "/sensors/{id}/history/{period}/": {
+      "get": {
+        "tags": [
+          "sensor"
+        ],
+        "summary": "Get the history for a specific sensor for a period",
+        "description": "Get the history for a specific sensor for a period",
+        "operationId": "getSensorHistoryPeriod",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of sensor to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "period",
+            "in": "path",
+            "description": "Period",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sensor history for {period}",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SensorHistory"
+              }
+            }
+          },
+          "404": {
+            "description": "Sensor does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "http_auth": {
+      "type": "basic"
+    }
+  },
+  "definitions": {
+    "AreaType": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sensors": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "allOf": [
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Area": {
+      "type": "object",
+      "required": [
+        "enclosure",
+        "name",
+        "type",
+        "mode",
+        "setup"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "enclosure": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Area type"
+        },
+        "mode": {
+          "type": "string",
+          "description": "Operating mode"
+        },
+        "setup": {
+          "type": "string",
+          "default": "{}"
+        },
+        "state": {
+          "type": "string",
+          "default": "{}",
+          "readOnly": true
+        }
+      }
+    },
+    "AudioHardware": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AudioFile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "number",
+          "readOnly": true
+        },
+        "filesize": {
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "Enclosure": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string",
+          "description": "Enclosure image"
+        },
+        "areas": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/Area"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "doors": {
+          "type": "string",
+          "default": {}
+        },
+        "webcams": {
+          "type": "string",
+          "default": {}
+        }
+      }
+    },
+    "Button": {
+      "type": "object",
+      "required": [
+        "name",
+        "hardware",
+        "address"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "hardware": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "calibration": {
+          "format": "string",
+          "default": "{}"
+        },
+        "value": {
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "ButtonHardware": {
+      "type": "object",
+      "properties": {
+        "hardware": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ButtonHistory": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "value": {
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "Relay": {
+      "type": "object",
+      "required": [
+        "name",
+        "hardware",
+        "address"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "hardware": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "wattage": {
+          "type": "number",
+          "default": 0
+        },
+        "flow": {
+          "type": "number",
+          "default": 0
+        },
+        "manual_mode": {
+          "type": "boolean",
+          "default": false,
+          "readOnly": true
+        },
+        "replacement": {
+          "type": "string",
+          "format": "date-time",
+          "default": "1970-01-01 00:00:00",
+          "readOnly": true
+        },
+        "calibration": {
+          "format": "string",
+          "default": "{}"
+        },
+        "value": {
+          "type": "number",
+          "readOnly": true
+        },
+        "dimmer": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "RelayHardware": {
+      "type": "object",
+      "properties": {
+        "hardware": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RelayHistory": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "value": {
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "Sensor": {
+      "type": "object",
+      "required": [
+        "name",
+        "hardware",
+        "type",
+        "address",
+        "exclude_avg"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "hardware": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "limit_min": {
+          "type": "number"
+        },
+        "limit_max": {
+          "type": "number"
+        },
+        "alarm_min": {
+          "type": "number"
+        },
+        "alarm_max": {
+          "type": "number"
+        },
+        "max_diff": {
+          "type": "number"
+        },
+        "exclude_avg": {
+          "type": "boolean"
+        },
+        "calibration": {
+          "format": "string",
+          "default": "{}"
+        },
+        "value": {
+          "type": "number",
+          "readOnly": true
+        },
+        "alarm": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "error": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "SensorHardware": {
+      "type": "object",
+      "properties": {
+        "hardware": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SensorHistory": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "value": {
+          "type": "number",
+          "readOnly": true
+        },
+        "alarm_min": {
+          "type": "number",
+          "readOnly": true
+        },
+        "alarm_max": {
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about TerrariumPI",
+    "url": "https://theyosh.github.io/TerrariumPI/"
+  }
+}
