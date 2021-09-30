@@ -3,12 +3,13 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 from . import terrariumRelay, terrariumRelayLoadingException, terrariumRelayUpdateException
-from terrariumUtils import terrariumUtils
+from terrariumUtils import terrariumUtils, terrariumCache
 
 import subprocess
 import re
 import sys
 from pathlib import Path
+from hashlib import md5
 
 # Dirty hack to include someone his code... to lazy to make it myself :)
 # https://github.com/perryflynn/energenie-connect0r
@@ -166,13 +167,18 @@ class terrariumRelayEnergenieLAN(terrariumRelay):
     if not self.__connect():
       raise terrariumRelayLoadingException(f'Failed loading relay {self}. Unable to login')
 
+    # Create the cache key for caching the relay states.
+    # This is usefull when there are more then 1 relay per hardware device.
+    self.__cache_key = md5(f'{self.HARDWARE}{address["host"]}'.encode()).hexdigest()
+    self.__cache = terrariumCache()
+
     self.__logout()
 
     return self._device['device']
 
   def _set_hardware_value(self, state):
     if not self.__connect():
-      return None
+      raise terrariumRelayUpdateException(f'Failed changing relay {self}. Unable to login')
 
     address = self._address
     toggle_ok = self.device.changesocket(address['nr'], ( 1 if state == self.ON else 0 ))
@@ -181,11 +187,22 @@ class terrariumRelayEnergenieLAN(terrariumRelay):
     return toggle_ok
 
   def _get_hardware_value(self):
-    if not self.__connect():
-      return None
+    data = self.__cache.get_data(self.__cache_key)
+    if data is None:
+      # Cache is expired, so we update with new data
+      # Get the overall state information
+      if not self.__connect():
+        raise terrariumRelayUpdateException(f'Failed updating relay {self}. Unable to login')
+
+      data = self.device.getstatus()
+
+      if data is None:
+        return None
+
+      self.__cache.set_data(self.__cache_key, data, 29)
 
     address = self._address
-    status = self.ON if terrariumUtils.is_true(self.device.getstatus()['sockets'][address['nr']-1]) else self.OFF
+    status = self.ON if terrariumUtils.is_true(data['sockets'][address['nr']-1]) else self.OFF
     self.__logout()
 
     return status
