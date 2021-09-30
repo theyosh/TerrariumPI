@@ -19,32 +19,40 @@
       "description": "Enclosure areas"
     },
     {
-      "name": "audio",
+      "name": "Audio",
       "description": "Audio files"
     },
     {
-      "name": "button",
+      "name": "Button",
       "description": "Buttons, motion detectors and light sensors"
     },
     {
-      "name": "enclosure",
+      "name": "Calendar",
+      "description": "Calendar calls"
+    },
+    {
+      "name": "Enclosure",
       "description": "Enclosures"
     },
     {
-      "name": "playlist",
+      "name": "Playlist",
       "description": "Playlists with audio files"
     },
     {
-      "name": "relay",
+      "name": "Relay",
       "description": "Relays"
     },
     {
-      "name": "sensor",
+      "name": "Sensor",
       "description": "Sensors"
     },
     {
-      "name": "webcam",
+      "name": "Webcam",
       "description": "Webcams"
+    },
+    {
+      "name": "System",
+      "description": "System and general calls"
     }
   ],
   "schemes": [
@@ -282,7 +290,7 @@
     "/audio/hardware/": {
       "get": {
         "tags": [
-          "audio"
+          "Audio"
         ],
         "summary": "Get a list of supported soundcards",
         "description": "Get all the supported soundcards",
@@ -309,7 +317,7 @@
     "/audio/files/": {
       "get": {
         "tags": [
-          "audio"
+          "Audio"
         ],
         "summary": "Get a list of existing audio files",
         "description": "Get all the existing audio files",
@@ -334,13 +342,13 @@
       },
       "post": {
         "tags": [
-          "audio"
+          "Audio"
         ],
         "summary": "Upload a new audio file",
         "description": "Upload a new audio file",
         "operationId": "postAudioFile",
         "consumes": [
-          "application/json"
+          "application/x-www-form-urlencoded"
         ],
         "produces": [
           "application/json"
@@ -351,9 +359,11 @@
             "name": "audiofiles",
             "description": "The uploaded audio file",
             "required": true,
-            "type": "array",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         ],
@@ -376,7 +386,7 @@
     "/audio/files/{file}": {
       "get": {
         "tags": [
-          "audio"
+          "Audio"
         ],
         "summary": "Get an existing audio file",
         "description": "Get an existing audio file based on ID",
@@ -413,7 +423,7 @@
       },
       "delete": {
         "tags": [
-          "audio"
+          "Audio"
         ],
         "summary": "Delete an existing audio file",
         "description": "Delete an existing audio file",
@@ -449,7 +459,7 @@
     "/buttons/hardware/": {
       "get": {
         "tags": [
-          "button"
+          "Button"
         ],
         "summary": "Get a list of supported buttons",
         "description": "Get all the supported buttons",
@@ -476,7 +486,7 @@
     "/buttons/": {
       "get": {
         "tags": [
-          "button"
+          "Button"
         ],
         "summary": "Get a list of existing buttons",
         "description": "Get all the existing buttons",
@@ -501,7 +511,7 @@
       },
       "post": {
         "tags": [
-          "button"
+          "Button"
         ],
         "summary": "Add a new button",
         "description": "Add a new button",
@@ -544,7 +554,7 @@
     "/buttons/{id}/": {
       "get": {
         "tags": [
-          "button"
+          "Button"
         ],
         "summary": "Get a specific button",
         "description": "Get a specific button selected by id",
@@ -582,7 +592,7 @@
       },
       "put": {
         "tags": [
-          "button"
+          "Button"
         ],
         "summary": "Update an existing button with new data",
         "description": "Update an existing button with new data.",
@@ -634,7 +644,7 @@
       },
       "delete": {
         "tags": [
-          "button"
+          "Button"
         ],
         "summary": "Delete an existing button",
         "description": "Delete an existing button",
@@ -676,7 +686,7 @@
     "/buttons/{id}/history/": {
       "get": {
         "tags": [
-          "button"
+          "Button"
         ],
         "summary": "Get the history for a specific button for a period of 1 day",
         "description": "Get the history for a specific button for a period of 1 day",
@@ -719,7 +729,7 @@
     "/buttons/{id}/history/{period}/": {
       "get": {
         "tags": [
-          "button"
+          "Button"
         ],
         "summary": "Get the history for a specific button for a period",
         "description": "Get the history for a specific button for a period",
@@ -772,10 +782,768 @@
         }
       }
     },
+    "/calendar/": {
+      "get": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Get existing calendars",
+        "description": "Get all the existing calendars in a list.",
+        "operationId": "getCalendars",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "start",
+            "description": "Start date and time for calendar items",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "end",
+            "description": "End date and time for calendar items",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more calendars",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Calendar"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Add a new calendar event",
+        "description": "Add a new calendar event",
+        "operationId": "addCalendar",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created calendar object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Calendar"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A new created calendar",
+            "schema": {
+              "$ref": "#/definitions/Calendar"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/calendar/{id}/": {
+      "get": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Get a specific calendar",
+        "description": "Get a specific calendar selected by id",
+        "operationId": "getCalendar",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of calendar to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested calendar",
+            "schema": {
+              "$ref": "#/definitions/Calendar"
+            }
+          },
+          "404": {
+            "description": "Calendar does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Update an existing calendar with new data",
+        "description": "Update an existing calendar with new data. The enclosure needs to be existing",
+        "operationId": "updateCalendar",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of calendar to update",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update the values that need to be changed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Calendar"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated calendar",
+            "schema": {
+              "$ref": "#/definitions/Calendar"
+            }
+          },
+          "404": {
+            "description": "Calendar does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Delete an existing calendar",
+        "description": "Delete an existing calendar",
+        "operationId": "deleteCalendar",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of calendar to delete",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "404": {
+            "description": "Calendar does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/calendar/download/": {
+      "get": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Download iCal",
+        "description": "Download iCal",
+        "operationId": "downloadCalendar",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The calendar in iCal format"
+          },
+          "404": {
+            "description": "Calendar does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      }
+    },
+    "/enclosures/": {
+      "get": {
+        "tags": [
+          "Enclosure"
+        ],
+        "summary": "Get a list of existing enclosures",
+        "description": "Get all the existing enclosures",
+        "operationId": "getEnclosures",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more enclosures",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Enclosure"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Enclosure"
+        ],
+        "summary": "Add a new enclosure",
+        "description": "Add a new enclosure",
+        "operationId": "addEnclosure",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created enclosure object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Enclosure"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A new created enclosure",
+            "schema": {
+              "$ref": "#/definitions/Enclosure"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/enclosures/{id}/": {
+      "get": {
+        "tags": [
+          "Enclosure"
+        ],
+        "summary": "Get a specific enclosure",
+        "description": "Get a specific enclosure selected by id",
+        "operationId": "getEnclosure",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of enclosure to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested enclosure",
+            "schema": {
+              "$ref": "#/definitions/Enclosure"
+            }
+          },
+          "404": {
+            "description": "Enclosure does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Enclosure"
+        ],
+        "summary": "Update an existing enclosure with new data",
+        "description": "Update an existing enclosure with new data.",
+        "operationId": "updateEnclosure",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of enclosure to update",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update the values that need to be changed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Enclosure"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated enclosure",
+            "schema": {
+              "$ref": "#/definitions/Enclosure"
+            }
+          },
+          "404": {
+            "description": "Enclosure does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Enclosure"
+        ],
+        "summary": "Delete an existing enclosure",
+        "description": "Delete an existing enclosure",
+        "operationId": "deleteEnclosure",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of enclosure to delete",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "404": {
+            "description": "Enclosure does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/logfile/download/": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Download the logfile",
+        "description": "Download the logfile",
+        "operationId": "downloadLogfile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the logfile in plain text"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/playlists/": {
+      "get": {
+        "tags": [
+          "Playlist"
+        ],
+        "summary": "Get a list of existing playlists",
+        "description": "Get all the existing playlists",
+        "operationId": "getPlaylists",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more playlists",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Playlist"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Playlist"
+        ],
+        "summary": "Add a new playlist",
+        "description": "Add a new playlist",
+        "operationId": "addPlaylist",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created playlist object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Playlist"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A new created playlist",
+            "schema": {
+              "$ref": "#/definitions/Playlist"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/playlists/{id}/": {
+      "get": {
+        "tags": [
+          "Playlist"
+        ],
+        "summary": "Get a specific playlist",
+        "description": "Get a specific playlist selected by id",
+        "operationId": "getPlaylist",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of playlist to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested playlist",
+            "schema": {
+              "$ref": "#/definitions/Playlist"
+            }
+          },
+          "404": {
+            "description": "Playlist does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Playlist"
+        ],
+        "summary": "Update an existing playlist with new data",
+        "description": "Update an existing playlist with new data.",
+        "operationId": "updatePlaylist",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of playlist to update",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update the values that need to be changed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Playlist"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated playlist",
+            "schema": {
+              "$ref": "#/definitions/Playlist"
+            }
+          },
+          "404": {
+            "description": "Playlist does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Playlist"
+        ],
+        "summary": "Delete an existing playlist",
+        "description": "Delete an existing playlist",
+        "operationId": "deletePlaylist",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of playlist to delete",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "404": {
+            "description": "Playlist does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/restart/": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Restart TerrariumPI",
+        "description": "Restart TerrariumPI",
+        "operationId": "restartPi",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Restarts the software",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/reboot/": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Reboot TerrariumPI",
+        "description": "Reboot TerrariumPI",
+        "operationId": "rebootPi",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Reboot TerrariumPI",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/shutdown/": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Shutdown TerrariumPI",
+        "description": "Shutdown TerrariumPI",
+        "operationId": "shutdownPi",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Shutdown TerrariumPI",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
     "/relays/hardware/": {
       "get": {
         "tags": [
-          "relay"
+          "Relay"
         ],
         "summary": "Get a list of supported relays",
         "description": "Get all the supported relays",
@@ -799,10 +1567,39 @@
         }
       }
     },
+    "/relays/scan/": {
+      "post": {
+        "tags": [
+          "Relay"
+        ],
+        "summary": "Scan for new relays",
+        "description": "Scan for new relays",
+        "operationId": "scanRelays",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Found zero or more new relays",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
     "/relays/": {
       "get": {
         "tags": [
-          "relay"
+          "Relay"
         ],
         "summary": "Get a list of existing relays",
         "description": "Get all the existing relays",
@@ -827,7 +1624,7 @@
       },
       "post": {
         "tags": [
-          "relay"
+          "Relay"
         ],
         "summary": "Add a new relay",
         "description": "Add a new relay",
@@ -870,7 +1667,7 @@
     "/relays/{id}/": {
       "get": {
         "tags": [
-          "relay"
+          "Relay"
         ],
         "summary": "Get a specific relay",
         "description": "Get a specific relay selected by id",
@@ -908,7 +1705,7 @@
       },
       "put": {
         "tags": [
-          "relay"
+          "Relay"
         ],
         "summary": "Update an existing relay with new data",
         "description": "Update an existing relay with new data.",
@@ -960,7 +1757,7 @@
       },
       "delete": {
         "tags": [
-          "relay"
+          "Relay"
         ],
         "summary": "Delete an existing relay",
         "description": "Delete an existing relay",
@@ -1002,7 +1799,7 @@
     "/relays/{id}/history/": {
       "get": {
         "tags": [
-          "relay"
+          "Relay"
         ],
         "summary": "Get the history for a specific relay for a period of 1 day",
         "description": "Get the history for a specific relay for a period of 1 day",
@@ -1045,7 +1842,7 @@
     "/relays/{id}/history/{period}/": {
       "get": {
         "tags": [
-          "relay"
+          "Relay"
         ],
         "summary": "Get the history for a specific relay for a period",
         "description": "Get the history for a specific relay for a period",
@@ -1101,7 +1898,7 @@
     "/sensors/hardware/": {
       "get": {
         "tags": [
-          "sensor"
+          "Sensor"
         ],
         "summary": "Get a list of supported sensors",
         "description": "Get all the supported sensors",
@@ -1128,7 +1925,7 @@
     "/sensors/": {
       "get": {
         "tags": [
-          "sensor"
+          "Sensor"
         ],
         "summary": "Get a list of existing sensors",
         "description": "Get all the existing sensors",
@@ -1153,7 +1950,7 @@
       },
       "post": {
         "tags": [
-          "sensor"
+          "Sensor"
         ],
         "summary": "Add a new sensor",
         "description": "Add a new sensor",
@@ -1196,7 +1993,7 @@
     "/sensors/{id}/": {
       "get": {
         "tags": [
-          "sensor"
+          "Sensor"
         ],
         "summary": "Get a specific sensor",
         "description": "Get a specific sensor selected by id",
@@ -1234,7 +2031,7 @@
       },
       "put": {
         "tags": [
-          "sensor"
+          "Sensor"
         ],
         "summary": "Update an existing sensor with new data",
         "description": "Update an existing sensor with new data.",
@@ -1286,7 +2083,7 @@
       },
       "delete": {
         "tags": [
-          "sensor"
+          "Sensor"
         ],
         "summary": "Delete an existing sensor",
         "description": "Delete an existing sensor",
@@ -1328,7 +2125,7 @@
     "/sensors/{id}/history/": {
       "get": {
         "tags": [
-          "sensor"
+          "Sensor"
         ],
         "summary": "Get the history for a specific sensor for a period of 1 day",
         "description": "Get the history for a specific sensor for a period of 1 day",
@@ -1371,7 +2168,7 @@
     "/sensors/{id}/history/{period}/": {
       "get": {
         "tags": [
-          "sensor"
+          "Sensor"
         ],
         "summary": "Get the history for a specific sensor for a period",
         "description": "Get the history for a specific sensor for a period",
@@ -1533,47 +2330,6 @@
         }
       }
     },
-    "Enclosure": {
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "image": {
-          "type": "string",
-          "description": "Enclosure image"
-        },
-        "areas": {
-          "type": "array",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/Area"
-              },
-              {
-                "type": "object"
-              }
-            ]
-          }
-        },
-        "doors": {
-          "type": "string",
-          "default": {}
-        },
-        "webcams": {
-          "type": "string",
-          "default": {}
-        }
-      }
-    },
     "Button": {
       "type": "object",
       "required": [
@@ -1628,6 +2384,161 @@
         "value": {
           "type": "number",
           "readOnly": true
+        }
+      }
+    },
+    "Calendar": {
+      "type": "object",
+      "required": [
+        "summary",
+        "dtstart"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "dtstart": {
+          "type": "string",
+          "format": "date",
+          "default": 0
+        },
+        "dtend": {
+          "type": "string",
+          "default": 0,
+          "format": "date"
+        },
+        "all_day": {
+          "type": "boolean",
+          "default": false
+        },
+        "freq": {
+          "type": "string",
+          "enum": [
+            "daily",
+            "weekly",
+            "monthly",
+            "yearly"
+          ]
+        },
+        "interval": {
+          "type": "integer"
+        },
+        "repeatend": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Enclosure": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string",
+          "description": "Enclosure image"
+        },
+        "areas": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/Area"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "doors": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/Button"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "webcams": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/Webcam"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Holds the return message from the server",
+          "default": "Action succeeded"
+        }
+      }
+    },
+    "Playlist": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "volume": {
+          "type": "string"
+        },
+        "shuffle": {
+          "type": "string"
+        },
+        "repeat": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/AudioFile"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
         }
       }
     },
