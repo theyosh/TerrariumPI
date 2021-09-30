@@ -1,8 +1,6 @@
 from . import terrariumRelay, terrariumRelayDimmer, terrariumRelayLoadingException
 from terrariumUtils import terrariumCache, terrariumUtils
 
-from zeroconf import ServiceBrowser, Zeroconf
-from gevent import sleep
 from hashlib import md5
 import re
 
@@ -16,7 +14,6 @@ class terrariumRelaySonoff(terrariumRelay):
   NAME = 'Sonoff (Tasmota)'
 
   __URL_REGEX = re.compile(r'^(?P<protocol>https?):\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$',re.IGNORECASE)
-#  __SCAN_TIME = 5
 
   @property
   def _address(self):
