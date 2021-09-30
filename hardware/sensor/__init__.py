@@ -45,7 +45,9 @@ class terrariumSensor(object):
   HARDWARE = None
   TYPES = []
   NAME = None
-  CACHE_TIMEOUT = 30
+
+  _CACHE_TIMEOUT = 30
+  _UPDATE_TIME_OUT = 10
 
   @classproperty
   def available_hardware(__cls__):
@@ -246,7 +248,7 @@ class terrariumSensor(object):
     if reload or hardware is None:
       # Could not find valid hardware cache. So create a new hardware device
       try:
-        hardware = func_timeout(15, self._load_hardware)
+        hardware = func_timeout(self._UPDATE_TIME_OUT, self._load_hardware)
         if hardware is not None:
           # Store the hardware in the cache for unlimited of time
           self._sensor_cache.set_data(hardware_cache_key,hardware,-1)
@@ -256,7 +258,7 @@ class terrariumSensor(object):
 
       except FunctionTimedOut:
       # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
-        raise terrariumSensorLoadingException(f'Unable to load sensor {self}: timed out (15 seconds) during loading.')
+        raise terrariumSensorLoadingException(f'Unable to load sensor {self}: timed out ({self._UPDATE_TIME_OUT} seconds) during loading.')
 
       except Exception as ex:
         raise terrariumSensorLoadingException(f'Unable to load sensor {self}: {ex}')
@@ -273,10 +275,10 @@ class terrariumSensor(object):
     self.__power_management(True)
 
     try:
-      data = func_timeout(15, self._get_data)
+      data = func_timeout(self._UPDATE_TIME_OUT, self._get_data)
     except FunctionTimedOut:
       # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
-      logger.error(f'Sensor {self} timed out after 15 seconds during updating...')
+      logger.error(f'Sensor {self} timed out after {self._UPDATE_TIME_OUT} seconds during updating...')
     except Exception as ex:
       logger.error(f'Sensor {self} has exception: {ex}')
 
@@ -299,7 +301,7 @@ class terrariumSensor(object):
       logger.debug(f'Start getting new data from  sensor {self}')
       try:
         data = self.get_data()
-        self._sensor_cache.set_data(self.__sensor_cache_key,data,terrariumSensor.CACHE_TIMEOUT)
+        self._sensor_cache.set_data(self.__sensor_cache_key,data, self._CACHE_TIMEOUT)
       except Exception as ex:
         logger.error(f'Error updating sensor {self}. Check your hardware! {ex}')
 

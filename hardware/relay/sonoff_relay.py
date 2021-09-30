@@ -65,7 +65,7 @@ class terrariumRelaySonoff(terrariumRelay):
     # This is usefull when there are more then 1 relay per hardware device.
     self.__cache_key = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}'.encode()).hexdigest()
     self.__cache = terrariumCache()
-    self.__cache.set_data(self.__cache_key, state['StatusSTS'], 29)
+    self.__cache.set_data(self.__cache_key, state['StatusSTS'], self._CACHE_TIMEOUT)
 
     # We need the use the address_nr value also, as there can multiple relays per sonoff device.
     if self._device['id'] is None:
@@ -99,7 +99,7 @@ class terrariumRelaySonoff(terrariumRelay):
       if data is None:
         return None
 
-      self.__cache.set_data(self.__cache_key, data, 29)
+      self.__cache.set_data(self.__cache_key, data, self._CACHE_TIMEOUT)
 
     if 'POWER' in data:
       data = data['POWER']
