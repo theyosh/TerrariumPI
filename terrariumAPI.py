@@ -13,9 +13,6 @@ from pathlib import Path
 from ffprobe import FFProbe
 from hashlib import md5
 
-# from apispec import APISpec
-# from apispec_webframeworks.bottle import BottlePlugin
-
 from terrariumArea         import terrariumArea
 from terrariumAudio        import terrariumAudio
 from terrariumCalendar     import terrariumCalendar
@@ -35,15 +32,6 @@ class terrariumAPI(object):
 
   def __init__(self, webserver):
     self.webserver = webserver
-    # self.apispec = APISpec(
-    #     title=self.webserver.engine.settings['title'],
-    #     version=self.webserver.engine.version,
-    #     openapi_version='3.0.2',
-    #     info=dict(description=f'{self.webserver.engine.settings["title"]} API'),
-    #     plugins=[BottlePlugin()],
-    # )
-
-
 
   # Always (force = True) enable authentication on the API
   def authentication(self, force = True):
@@ -207,94 +195,8 @@ class terrariumAPI(object):
 
 
     # API DOC
-    bottle_app.route('/<page:re:(api/doc)>/', 'GET', self.webserver.render_page,   apply=self.authentication(False), name='api:documentation')
+    bottle_app.route('/<page:re:(api/doc|api/swagger)>/', 'GET', self.webserver.render_page,   apply=self.authentication(False), name='api:documentation')
     bottle_app.route('/api/doc/<filename:re:(terrariumpi\.json)>', 'GET', self.webserver._static_file, apply=self.authentication(False), name='api:swagger.json')
-
-    #self._load_api()
-
-
-#   def _load_api(self):
-#     self.apispec.components.schema(
-#       "SensorFilter",
-#       {
-#           "properties": {
-#               "filter": {"type": "string"},
-#           }
-#       },
-#     )
-
-#     self.apispec.components.schema(
-#       "Sensor",
-#       {
-#           "properties": {
-#               "id": {"type": "string"},
-#               "hardware": {"type": "string"},
-#               "type": {"type": "string"},
-#               "name": {"type": "string"},
-#               "address": {"type": "string"},
-
-#               "limit_min": {"type": "integer", "format": "int64"},
-#               "limit_max": {"type": "integer", "format": "int64"},
-#               "alarm_min": {"type": "integer", "format": "int64"},
-#               "alarm_max": {"type": "integer", "format": "int64"},
-#               "max_diff": {"type": "integer", "format": "int64"},
-
-
-
-#           }
-#       },
-#     )
-
-
-
-
-
-#      # "exclude_avg": false, "calibration": {"offset": 0}, "value": 22.562, "alarm": false, "error": false},
-
-
-
-
-#     self.apispec.path(view=self.sensor_list)
-
-
-#     #self.apispec.components.schema("AudioFile", schema=Audiofile)
-
-# #    self.apispec.path(view=self.audiofile_detail)
-
-# #    self.apispec.path(view=self.audiofile_list)
-# #    self.apispec.path(view=self.audiofile_add)
-#     # print('TESTETSETESTE')
-
-#     # print(dir(orm))
-
-#     # print(orm.ormtypes)
-#     # print(dir(orm.ormtypes))
-
-#     # print(orm.show(Audiofile))
-#     # print(dir(orm))
-# #    with orm.db_session():
-# #      print(dir(Setting))
-# #      print(Setting['host'].to_dict())
-# #      print(Setting.to_json())
-
-#     # from pprint import pprint
-#     # print('APISPec test')
-#     # print(spec.path(view=self.webcam_list))
-
-#     # pprint(spec.to_dict())
-
-# #   def api_doc(self):
-# #     return jinja2_template(f'views/api.html')
-# # #    return self.apispec.to_dict()
-
-
-#   def api_spec(self):
-
-#     return self.apispec.to_dict()
-
-#   # def _return_data(self, message, data):
-#   #   return {'message':message, 'data':data}
-
 
   # Areas
   def area_types(self):
@@ -374,17 +276,6 @@ class terrariumAPI(object):
 
   @orm.db_session
   def audiofile_list(self):
-    """Audio files list view.
-    ---
-    get:
-      parameters:
-      responses:
-        200:
-          content:
-            application/json:
-              schema: GistSchema
-    """
-
     data = []
     for audiofile in Audiofile.select():
       data.append(audiofile.to_dict())
@@ -393,18 +284,6 @@ class terrariumAPI(object):
 
   @orm.db_session
   def audiofile_detail(self, audiofile):
-    """Audio file detail view.
-    ---
-    get:
-      parameters:
-      - in: audiofile
-        schema: GistParameter
-      responses:
-        200:
-          content:
-            application/json:
-              schema: GistSchema
-    """
     try:
       audiofile = Audiofile[audiofile]
       audiofile_data = audiofile.to_dict()
@@ -1212,20 +1091,6 @@ class terrariumAPI(object):
 
   @orm.db_session
   def sensor_list(self, filter = None):
-    """Gist detail view.
-    ---
-    get:
-        description: Get a list of sensors optional filtered on type
-        parameters:
-            - in:
-              name: filter
-              schema: SensorFilter
-        responses:
-              200:
-              schema:
-                  $ref: '#/definitions/Sensor'
-    """
-
     data = []
     for sensor in Sensor.select(lambda s: not s.id in self.webserver.engine.settings['exclude_ids']):
       if filter is None or filter == sensor.type:

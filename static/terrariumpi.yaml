@@ -33,11 +33,6 @@ tags:
     description: Webcams
   - name: System
     description: System and general calls
-
-
-schemes:
-  - https
-  - http
 paths:
   /areas/types/:
     get:
