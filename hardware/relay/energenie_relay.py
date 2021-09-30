@@ -199,7 +199,7 @@ class terrariumRelayEnergenieLAN(terrariumRelay):
       if data is None:
         return None
 
-      self.__cache.set_data(self.__cache_key, data, 29)
+      self.__cache.set_data(self.__cache_key, data, self._CACHE_TIMEOUT)
 
     address = self._address
     status = self.ON if terrariumUtils.is_true(data['sockets'][address['nr']-1]) else self.OFF
