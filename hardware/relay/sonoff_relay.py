@@ -1,5 +1,5 @@
 from . import terrariumRelay, terrariumRelayDimmer, terrariumRelayLoadingException
-from terrariumUtils import terrariumUtils
+from terrariumUtils import terrariumCache, terrariumUtils
 
 from zeroconf import ServiceBrowser, Zeroconf
 from gevent import sleep
@@ -64,7 +64,13 @@ class terrariumRelaySonoff(terrariumRelay):
     if state is None:
       return None
 
-    # Always overule the ID generating, as we want to use the MAC as that is unique if the IP address is changing
+    # Create the cache key for caching the relay states.
+    # This is usefull when there are more then 1 relay per hardware device.
+    self.__cache_key = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}'.encode()).hexdigest()
+    self.__cache = terrariumCache()
+    self.__cache.set_data(self.__cache_key, state['StatusSTS'], 29)
+
+    # We need the use the address_nr value also, as there can multiple relays per sonoff device.
     if self._device['id'] is None:
       self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}{address["nr"]}'.encode()).hexdigest()
 
@@ -86,11 +92,17 @@ class terrariumRelaySonoff(terrariumRelay):
     return state == (self.ON if terrariumUtils.is_true(data) else self.OFF)
 
   def _get_hardware_value(self):
-    url = f'{self.device}Power{self._address["nr"]}'
-    data = terrariumUtils.get_remote_data(url)
-
+    data = self.__cache.get_data(self.__cache_key)
     if data is None:
-      return None
+      # Cache is expired, so we update with new data
+      # Get the overall state information
+      url = f'{self.device}State'
+      data = terrariumUtils.get_remote_data(url)
+
+      if data is None:
+        return None
+
+      self.__cache.set_data(self.__cache_key, data, 29)
 
     if 'POWER' in data:
       data = data['POWER']
