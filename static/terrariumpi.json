@@ -47,12 +47,20 @@
       "description": "Sensors"
     },
     {
-      "name": "Webcam",
-      "description": "Webcams"
+      "name": "Settings",
+      "description": "Settings"
     },
     {
       "name": "System",
       "description": "System and general calls"
+    },
+    {
+      "name": "Weather",
+      "description": "Weather"
+    },
+    {
+      "name": "Webcam",
+      "description": "Webcams"
     }
   ],
   "paths": {
@@ -1223,6 +1231,49 @@
         ]
       }
     },
+    "/{action}/": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Restart/reboot/shutdown TerrariumPI",
+        "description": "Restart/reboot/shutdown TerrariumPI",
+        "operationId": "actionPi",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "action",
+            "in": "path",
+            "description": "Action to perform",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "restart",
+              "reboot",
+              "shutdown"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of the action",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
     "/logfile/download/": {
       "get": {
         "tags": [
@@ -1440,93 +1491,6 @@
           },
           "500": {
             "description": "Unexpected server error"
-          }
-        },
-        "security": [
-          {
-            "Basic": []
-          }
-        ]
-      }
-    },
-    "/restart/": {
-      "post": {
-        "tags": [
-          "System"
-        ],
-        "summary": "Restart TerrariumPI",
-        "description": "Restart TerrariumPI",
-        "operationId": "restartPi",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Restarts the software",
-            "schema": {
-              "$ref": "#/definitions/Message"
-            }
-          }
-        },
-        "security": [
-          {
-            "Basic": []
-          }
-        ]
-      }
-    },
-    "/reboot/": {
-      "post": {
-        "tags": [
-          "System"
-        ],
-        "summary": "Reboot TerrariumPI",
-        "description": "Reboot TerrariumPI",
-        "operationId": "rebootPi",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Reboot TerrariumPI",
-            "schema": {
-              "$ref": "#/definitions/Message"
-            }
-          }
-        },
-        "security": [
-          {
-            "Basic": []
-          }
-        ]
-      }
-    },
-    "/shutdown/": {
-      "post": {
-        "tags": [
-          "System"
-        ],
-        "summary": "Shutdown TerrariumPI",
-        "description": "Shutdown TerrariumPI",
-        "operationId": "shutdownPi",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Shutdown TerrariumPI",
-            "schema": {
-              "$ref": "#/definitions/Message"
-            }
           }
         },
         "security": [
@@ -1868,7 +1832,8 @@
               "day",
               "week",
               "month",
-              "year"
+              "year",
+              "replaced"
             ]
           }
         ],
@@ -1889,6 +1854,163 @@
             "description": "Unexpected server error"
           }
         }
+      }
+    },
+    "/relays/{id}/export/": {
+      "get": {
+        "tags": [
+          "Relay"
+        ],
+        "summary": "Get the export for a specific relay for a period of 1 day",
+        "description": "Get the export for a specific relay for a period of 1 day",
+        "operationId": "getRelayExport",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of relay for which to get the export",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Relay export for 1 day"
+          },
+          "404": {
+            "description": "Relay does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/relays/{id}/export/{period}/": {
+      "get": {
+        "tags": [
+          "Relay"
+        ],
+        "summary": "Get the export for a specific relay for a period",
+        "description": "Get the export for a specific relay for a period",
+        "operationId": "getRelayExportPeriod",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of relay to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "period",
+            "in": "path",
+            "description": "Period",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year",
+              "replaced"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Relay export for {period}"
+          },
+          "404": {
+            "description": "Relay does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/relays/{id}/{action}/": {
+      "post": {
+        "tags": [
+          "Relay"
+        ],
+        "summary": "Change relay",
+        "description": "Change the state of the relay. Action 0-100 means you can use a value between 0 and 100 if it is a dimmer. Manual is used for setting the relay in manual mode. Replaced is used to mark the date in the calendar for reminding for next time.",
+        "operationId": "actionRelay",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of relay",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "action",
+            "in": "path",
+            "description": "Relay action",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "manual",
+              "replaced",
+              "toggle",
+              "on",
+              "off",
+              "0-100"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return the new state",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "404": {
+            "description": "Relay does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
       }
     },
     "/sensors/hardware/": {
@@ -1913,6 +2035,30 @@
               "items": {
                 "$ref": "#/definitions/SensorHardware"
               }
+            }
+          }
+        }
+      }
+    },
+    "/sensors/scan/": {
+      "get": {
+        "tags": [
+          "Sensor"
+        ],
+        "summary": "Scan for new sensors",
+        "description": "Scan for new sensors. Not all sensors have auto discovery.",
+        "operationId": "getSensorsScan",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Found zero or more new sensors",
+            "schema": {
+              "$ref": "#/definitions/Message"
             }
           }
         }
@@ -2006,8 +2152,7 @@
             "in": "path",
             "description": "ID of sensor to return",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         ],
         "responses": {
@@ -2044,8 +2189,7 @@
             "in": "path",
             "description": "ID of sensor to update",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           },
           {
             "in": "body",
@@ -2096,8 +2240,7 @@
             "in": "path",
             "description": "ID of sensor to delete",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         ],
         "responses": {
@@ -2118,13 +2261,55 @@
         ]
       }
     },
-    "/sensors/{id}/history/": {
+    "/sensors/{type}/": {
       "get": {
         "tags": [
           "Sensor"
         ],
-        "summary": "Get the history for a specific sensor for a period of 1 day",
-        "description": "Get the history for a specific sensor for a period of 1 day",
+        "summary": "Get all sensor of {type}",
+        "description": "Get all sensor of a specified type",
+        "operationId": "getSensorType",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "description": "A valid sensor type",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested sensors",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Sensor"
+              }
+            }
+          },
+          "404": {
+            "description": "Sensor type does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      }
+    },
+    "/sensors/{filter}/history/": {
+      "get": {
+        "tags": [
+          "Sensor"
+        ],
+        "summary": "Get the history for a specific sensor or sensor type.",
+        "description": "Get the history for a specific sensor or sensor type for a period of 1 day. When using a sensor type, the values will be averages of all sensor of the selected type.",
         "operationId": "getSensorHistory",
         "consumes": [
           "application/json"
@@ -2134,12 +2319,11 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "filter",
             "in": "path",
-            "description": "ID of sensor for which to get the history",
+            "description": "Either a sensor ID or sensor type can be used as filter",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         ],
         "responses": {
@@ -2161,13 +2345,13 @@
         }
       }
     },
-    "/sensors/{id}/history/{period}/": {
+    "/sensors/{filter}/history/{period}/": {
       "get": {
         "tags": [
           "Sensor"
         ],
-        "summary": "Get the history for a specific sensor for a period",
-        "description": "Get the history for a specific sensor for a period",
+        "summary": "Get the history for a specific sensor or sensor type.",
+        "description": "Get the history for a specific sensor or sensor type for a period of {period}. When using a sensor type, the values will be averages of all sensor of the selected type.",
         "operationId": "getSensorHistoryPeriod",
         "consumes": [
           "application/json"
@@ -2177,12 +2361,11 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "filter",
             "in": "path",
-            "description": "ID of sensor to return",
+            "description": "Either a sensor ID or sensor type can be used as filter",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           },
           {
             "name": "period",
@@ -2213,6 +2396,423 @@
           },
           "500": {
             "description": "Unexpected server error"
+          }
+        }
+      }
+    },
+    "/sensors/{filter}/export/": {
+      "get": {
+        "tags": [
+          "Sensor"
+        ],
+        "summary": "Get the export for a specific sensor or sensor type.",
+        "description": "Get the export for a specific sensor or sensor type for a period of 1 day. When using a sensor type, the values will be averages of all sensor of the selected type.",
+        "operationId": "getSensorExport",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "path",
+            "description": "Either a sensor ID or sensor type can be used as filter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sensor export for 1 day"
+          },
+          "404": {
+            "description": "Sensor does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/sensors/{filter}/export/{period}/": {
+      "get": {
+        "tags": [
+          "Sensor"
+        ],
+        "summary": "Get the export for a specific sensor or sensor type.",
+        "description": "Get the export for a specific sensor or sensor type for a period of {period}. When using a sensor type, the values will be averages of all sensor of the selected type.",
+        "operationId": "getSensorExportPeriod",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "path",
+            "description": "Either a sensor ID or sensor type can be used as filter",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "period",
+            "in": "path",
+            "description": "Period",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sensor export for {period}"
+          },
+          "404": {
+            "description": "Sensor does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/system_status/": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Get the current state",
+        "description": "Get the current state of the system.",
+        "operationId": "systemStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "System status",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          }
+        }
+      }
+    },
+    "/settings/": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Get all settings",
+        "description": "Get all settings in an list. Password setting will be skipped.",
+        "operationId": "settingList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All settings",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Setting"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Update multiple settings",
+        "description": "Update multiple settings in one action. Non existing setting ids will be ignored.",
+        "operationId": "settingsUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "All settings to change in one action",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Setting"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All settings",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "description": "Password fields do not match."
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Add a new setting",
+        "description": "Add a new setting",
+        "operationId": "settingAdd",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The new setting",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All settings",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/settings/{id}/": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Get a setting",
+        "description": "Get a single setting based on ID",
+        "operationId": "settingGet",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Setting ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All settings",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Update a setting",
+        "description": "Update a single setting based on ID",
+        "operationId": "settingUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The setting to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update the values that need to be changed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All settings",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "description": "Password fields do not match."
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Delete a setting",
+        "description": "Delete a setting",
+        "operationId": "settingDelete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The setting to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All settings",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "404": {
+            "description": "Setting does not exists"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/weather/": {
+      "get": {
+        "tags": [
+          "Weather"
+        ],
+        "summary": "Get weather data",
+        "description": "Get weather data",
+        "operationId": "weatherDetail",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Weather data",
+            "schema": {
+              "$ref": "#/definitions/Weather"
+            }
+          }
+        }
+      }
+    },
+    "/weather/forecast/": {
+      "get": {
+        "tags": [
+          "Weather"
+        ],
+        "summary": "Get weather temperature forecast",
+        "description": "Get weather temperature forecast",
+        "operationId": "weatherForecast",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Weather forecast data",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number"
+                  },
+                  "timestamp": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2734,11 +3334,181 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "value": {
           "type": "string"
+        }
+      }
+    },
+    "Status": {
+      "type": "object",
+      "properties": {
+        "uptime": {
+          "type": "integer"
+        },
+        "load": {
+          "type": "object",
+          "properties": {
+            "percentage": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "type": "integer"
+                  }
+                ]
+              }
+            },
+            "absolute": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "type": "integer"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "cpu_temperature": {
+          "type": "integer",
+          "items": {
+            "allOf": [
+              {
+                "type": "integer"
+              }
+            ]
+          }
+        },
+        "memory": {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "used": {
+              "type": "integer"
+            },
+            "free": {
+              "type": "integer"
+            }
+          }
+        },
+        "storage": {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "used": {
+              "type": "integer"
+            },
+            "free": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "Weather": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "geo": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number"
+                },
+                "long": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "sun": {
+          "type": "object",
+          "properties": {
+            "rise": {
+              "type": "integer"
+            },
+            "set": {
+              "type": "integer"
+            }
+          }
+        },
+        "is_day": {
+          "type": "boolean"
+        },
+        "indicators": {
+          "type": "object",
+          "properties": {
+            "wind": {
+              "type": "string"
+            },
+            "temperature": {
+              "type": "string"
+            }
+          }
+        },
+        "credits": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          }
+        },
+        "forecast": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "dt": {
+                "type": "integer"
+              },
+              "rise": {
+                "type": "integer"
+              },
+              "set": {
+                "type": "integer"
+              },
+              "temp": {
+                "type": "number"
+              },
+              "hudiity": {
+                "type": "number"
+              },
+              "wind": {
+                "type": "object",
+                "properties": {
+                  "speed": {
+                    "type": "number"
+                  },
+                  "direction": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "weather": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },
