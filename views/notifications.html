@@ -128,7 +128,10 @@
   <td data-content="message"></td>
   <td data-content="rate_limit"></td>
   <td data-content="enabled"></td>
-  <td data-content="services"></td>
+  <td data-content="services">
+
+
+  </td>
 
   <td class="actions">
 
@@ -168,7 +171,7 @@ div#services .btn.btn-app i:not(.active) {
 
         switch (service.type) {
           case 'email':
-          service.color = 'bg-warning';
+            service.color = 'bg-warning';
           break;
         }
 
@@ -184,58 +187,35 @@ div#services .btn.btn-app i:not(.active) {
     });
 
     jQuery.get({url: '{{ url_for("api:notification_message_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
-      data = data.data;
-      // Sort the buttons based on the given button name
-      data.sort((a, b) => a.name.localeCompare(b.name));
-      (data.length > 0 ? jQuery('.zero_message').remove() : jQuery('.zero_message').show());
+      (data.data.length > 0 ? jQuery('.zero_message').remove() : jQuery('.zero_message').show());
 
-      jQuery.each(data,function(counter, message) {
+      jQuery.each(data.data, function(index, message){
+        message.services.sort((a, b) => a.name.localeCompare(b.name));
 
-        /*
-        service.icon = template_sensor_type_icon(service.type);
-        service.color = 'bg-info';
-        service.edit = '{{ url_for('api:notification_service_update',  service='_id_') }}'.replace('_id_',service.id);
-        service.delete_link = '{{ url_for('api:notification_service_delete',  service='_id_') }}'.replace('_id_',service.id);
-        service.delete_title = 'Delete service ' + service.name;
+        services = '';
+        jQuery.each(message.services, function(counter, service){
+          services += '<i class="fa-fw ' + template_sensor_type_icon(service.type) + (service.enabled ? ' text-warning' : '') +'" title="' + service.name + '" ></i>&nbsp;';
+        });
+        message.services = services;
 
-        switch (service.type) {
-          case 'email':
-          service.color = 'bg-warning';
-          break;
-        }
-
-        if (service.rate_limit > 0) {
-          service.rate_limit = 'Max {rate_limit} per minute'.replace('{rate_limit}',service.rate_limit);
-        } else {
-          service.rate_limit = 'Unlimited'
-        }
-*/
         $('#messages_overview').loadTemplate($('#notification_message_template'), message, { append: true, bindingOptions: {ignoreNull : false}});
 
+        jQuery('i.edit_message').each(function(counter, element){
+          element = jQuery(element);
+          let link = '{{ url_for('api:notification_message_update', message='_id_') }}'.replace('_id_',element.attr('id'));
+          link = jQuery('<a>').addClass('btn btn-light btn-sm text-primary').attr({'role':'button','data-toggle':'modal', 'data-target' : '#modal-message-setup','href': link})
+          element.wrap(link);
+        });
+
+        jQuery('i.delete_area').each(function(counter, element){
+          element = jQuery(element);
+          let link = '{{ url_for('api:area_delete', area='_id_') }}'.replace('_id_',element.attr('id'));
+          link = jQuery('<a>').addClass('btn btn-light btn-sm text-danger').attr({'role':'button','data-action' : 'DELETE', 'data-toggle':'modal', 'data-target' : '#modal-confirm','title' : jQuery(this).attr('title'), 'href': link})
+          element.wrap(link);
+        });
       });
-
-      jQuery('i.edit_message').each(function(counter, element){
-        element = jQuery(element);
-        let link = '{{ url_for('api:notification_message_update', message='_id_') }}'.replace('_id_',element.attr('id'));
-        link = jQuery('<a>').addClass('btn btn-light btn-sm text-primary').attr({'role':'button','data-toggle':'modal', 'data-target' : '#modal-message-setup','href': link})
-        element.wrap(link);
-      });
-
-
-      jQuery('i.delete_area').each(function(counter, element){
-        element = jQuery(element);
-        let link = '{{ url_for('api:area_delete', area='_id_') }}'.replace('_id_',element.attr('id'));
-        link = jQuery('<a>').addClass('btn btn-light btn-sm text-danger').attr({'role':'button','data-action' : 'DELETE', 'data-toggle':'modal', 'data-target' : '#modal-confirm','title' : jQuery(this).attr('title'), 'href': link})
-        element.wrap(link);
-      });
-
-
       jQuery('div.message_loading.overlay').remove();
     });
-
-
-
-
   });
 </script>
 

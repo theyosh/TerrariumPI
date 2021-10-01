@@ -566,6 +566,12 @@ class terrariumEngine(object):
           db_time = (time.time() - start) - measurement_time
           self.webserver.websocket_message('gauge_update' , {'id' : sensor.id, 'value' : new_value})
 
+          # Notification message
+          sensor_data = sensor.to_dict()
+          self.notification.message(f'sensor_update' , sensor_data)
+          if sensor_data['alarm']:
+            self.notification.message(f'sensor_alarm' , sensor_data)
+
           logger.info(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]} in {measurement_time+db_time:.2f} seconds.')
           logger.debug(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
 

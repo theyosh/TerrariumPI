@@ -71,6 +71,7 @@ def create_defaults(version):
       pass
 
 
+
 class Area(db.Entity):
 
   __VALID_TYPES = ['lights','watertank'] # + All sensor types....
@@ -393,7 +394,6 @@ class Sensor(db.Entity):
 
   @property
   def value(self):
-    timestamp_limit = datetime.now() - timedelta(seconds=Sensor.__MAX_VALUE_AGE)
     value = self.history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(seconds=Sensor.__MAX_VALUE_AGE)).order_by(orm.desc(SensorHistory.timestamp)).first()
     if value:
       return value.value
@@ -403,6 +403,15 @@ class Sensor(db.Entity):
   @property
   def error(self):
     return True if self.value is None else False
+
+  def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+    # Add extra fields
+    data['alarm']  = self.alarm
+    data['value']  = self.value
+    data['error']  = self.error
+
+    return data
 
   def update(self, value):
     if value is None:

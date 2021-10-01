@@ -1098,11 +1098,7 @@ class terrariumAPI(object):
   def sensor_detail(self, sensor):
     try:
       sensor = Sensor[sensor]
-      sensor_data = sensor.to_dict()
-      sensor_data['value']  = sensor.value
-      sensor_data['alarm']  = sensor.alarm
-      sensor_data['error']  = sensor.error
-      return sensor_data
+      return sensor.to_dict()
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Sensor with id {sensor} does not exists.')
     except Exception as ex:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
-logger = terrariumLogging.logging.getLogger(__name__)
+logger = terrariumLogging.logging.getLogger(None)
 
 import re
 
@@ -39,6 +39,11 @@ class terrariumNotification(terrariumSingleton):
     'authentication_error' : _('Authentication login error'),
     'system_warning'       : _('System warning'),
     'system_error'         : _('System error'),
+
+    'sensor_update'        : _('Sensor update'),
+    'sensor_alarm'         : _('Sensor alarm'),
+
+    'relay_change'         : _('Sensor update'),
   }
 
   @classproperty
@@ -110,9 +115,6 @@ class terrariumNotification(terrariumSingleton):
         message = NotificationMessage[message_id]
       except orm.core.ObjectNotFound as ex:
         return
-
-      # print('Notification message')
-      # print(message)
 
       if not message.enabled:
         logger.debug(f'Notification message {message} is (temporary) disabled.')
@@ -199,7 +201,7 @@ class terrariumNotificationService(object):
     },
 
     'mqtt' : {
-      'name'    : _('MQTT '),
+      'name'    : _('MQTT'),
       'class' : lambda: terrariumNotificationServiceMQTT
     },
   }
@@ -214,14 +216,15 @@ class terrariumNotificationService(object):
 
   # Return polymorph area....
   def __new__(cls, id, type, name = '', enabled = True, setup = None):
-#    print(f'New notification: {id}, {type}, {name}')
     if type not in [service['type'] for service in terrariumNotificationService.available_services]:
-#      print(f'Service of type {type} is unknown.')
       raise terrariumNotificationServiceException(f'Service of type {type} is unknown.')
 
     return super(terrariumNotificationService, cls).__new__(terrariumNotificationService.__TYPES[type]['class']())
 
   def __init__(self, id, type, name, enabled, setup):
+    # Hacky to fix the logging in these classes...
+    global logger
+    logger = terrariumLogging.logging.getLogger(__name__)
 
     if id is None:
       id = terrariumUtils.generate_uuid()
@@ -697,7 +700,7 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
 
     r = requests.post(self.setup['address'], json=data)
     if r.status_code != 200:
-      print('Error sending webhook to url \'{}\' with status code: {}'.format(url,r.status_code))
+      logger.error(f'Error sending webhook to url \'{self.setup["address"]}\' with status code: {r.status_code}')
 
 class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
   __YELLOW_TIMEOUT = 5 * 60
@@ -763,25 +766,18 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
   # The callback for when the client receives a CONNACK response from the server.
   def on_connect(self, client, userdata, flags, rc):
     if rc == 0:
-      msg = f'Logged in to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}.'
-      if not self.setup['connected']:
-        self.setup['connected'] = True
-        logger.info(msg)
-        print(msg)
+      logger.info(f'Logged in to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}.')
 
     else:
-      msg = f'Error! Login to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]} failed! Error code: {rc}'
       self.connection = None
-      logger.error(msg)
-      print(msg)
+      logger.error(f'Error! Login to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]} failed! Error code: {rc}')
 
   def load_setup(self, setup_data):
     self.setup = {
       'address'   : setup_data.get('address'),
       'port'      : int(setup_data.get('port')),
       'username'  : setup_data.get('username'),
-      'password'  : setup_data.get('password'),
-      'connected' : False
+      'password'  : setup_data.get('password')
     }
 
     super().load_setup(setup_data)
@@ -795,26 +791,24 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
       self.connection.username_pw_set(terrariumUtils.decrypt(self.setup['username']), terrariumUtils.decrypt(self.setup['password']))
       self.connection.connect(self.setup['address'], self.setup['port'], 30)
       self.connection.loop_start()
-      print(f'Connected to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
       logger.info(f'Connected to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
 
     except Exception as ex:
-      print('Failed to load terrariumNotificationServiceMQTT setup')
-      print(ex)
+      logger.exception(f'Failed connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}: {ex}')
 
   def stop(self):
     # TODO: Flush the queueu
-    logger.info(f'Disconnected from the MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
-    print(f'Disconnect from the MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
-    try:
-      self.connection.loop_stop()
-      print('Loop stopped')
-    except Exception as ex:
-      print('INGORE')
-      print(ex)
 
-    self.connection.disconnect()
-    print('Disconnected!!!')
+    if self.connection is not None:
+      try:
+        self.connection.loop_stop()
+      except Exception as ex:
+        # Ignore
+        pass
+
+      self.connection.disconnect()
+
+    logger.info(f'Disconnected from the MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
 
   def send_message(self, type, subject, message, data = None, attachments = []):
     if self.connection is not None:
@@ -833,6 +827,6 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
       # Add the message
       data['message'] = message
 
-#      print(f'Send MQTT message: topic: terrariumpi/{type}')
-#      print(json.dumps(data))
       self.connection.publish(f'terrariumpi/{type}', payload=json.dumps(data), qos=1)
+    else:
+      logger.error(f'Could not send message {data["subject"]} to topic {data["topic"]} as we are not connected to the MQTT broker at address: {self.setup["address"]}:{self.setup["port"]}')
