@@ -43,7 +43,11 @@ class terrariumNotification(terrariumSingleton):
     'sensor_update'        : _('Sensor update'),
     'sensor_alarm'         : _('Sensor alarm'),
 
-    'relay_change'         : _('Sensor update'),
+    'relay_change'         : _('Relay change'),
+
+    'button_change'        : _('Button change'),
+
+    'webcam_archive'       : _('Webcam archive')
   }
 
   @classproperty
@@ -164,21 +168,14 @@ class terrariumNotificationServiceException(TypeError):
 class terrariumNotificationService(object):
 
   __TYPES = {
-
     'display' : {
       'name'  : _('Display'),
       'class' : lambda: terrariumNotificationServiceDisplay
     },
-
     'email' : {
       'name'  : _('Email'),
       'class' : lambda: terrariumNotificationServiceEmail
     },
-
-#     'pushover' : {
-#       'name'  : _('Pushover'),
-#       'class' : lambda: terrariumNotificationServicePushover
-#     },
 
 #     'telegram' : {
 #       'name'    : _('Telegram'),
@@ -189,21 +186,18 @@ class terrariumNotificationService(object):
       'name'    : _('Traffic light'),
       'class' : lambda: terrariumNotificationServiceTrafficLight
     },
-
-#     'twitter' : {
-#       'name'    : _('Twitter'),
-# #      'class' : lambda: terrariumAreaWatertank
-#     },
-
     'webhook' : {
       'name'    : _('Web-hook'),
       'class' : lambda: terrariumNotificationServiceWebhook
     },
-
     'mqtt' : {
       'name'    : _('MQTT'),
       'class' : lambda: terrariumNotificationServiceMQTT
     },
+    'pushover' : {
+      'name': _('Pushover'),
+      'class': lambda: terrariumNotificationServicePushover
+    }
   }
 
   @classproperty
@@ -830,3 +824,32 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
       self.connection.publish(f'terrariumpi/{type}', payload=json.dumps(data), qos=1)
     else:
       logger.error(f'Could not send message {data["subject"]} to topic {data["topic"]} as we are not connected to the MQTT broker at address: {self.setup["address"]}:{self.setup["port"]}')
+
+
+class terrariumNotificationServicePushover(terrariumNotificationService):
+  def load_setup(self, setup_data):
+    self.setup = {
+      'api_token' : setup_data.get('api_token'),
+      'user_key'  : setup_data.get('user_key'),
+
+      'address'   : 'https://api.pushover.net/1/messages.json' # https://support.pushover.net/i44-example-code-and-pushover-libraries#python-image
+    }
+
+    super().load_setup(setup_data)
+
+  def send_message(self, type, subject, message, data = None, attachments = []):
+    attachment = None
+    if len(attachments) > 0:
+      attachment = {'attachment' : (os.path.basename(attachments[0]), open(attachments[0],'rb'), 'image/jpeg')}
+
+    r = requests.post(self.setup['url'],
+      data = {
+        'token'    : self.setup['api_token'],
+        'user_key' : self.setup['user_key'],
+        'message'  : f'{subject}\n{message}'
+      },
+      files = attachment
+    )
+
+    if r.status_code != 200:
+      logger.error(f'Error sending Pusover message \'{subject}\' with status code: {r.status_code}')

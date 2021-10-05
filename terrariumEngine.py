@@ -743,6 +743,11 @@ class terrariumEngine(object):
       # And send a websocket update
       self.webserver.websocket_message('relay' , {'id' : relay.id, 'value' : state})
 
+      # Notification message
+      relay_data = relay.to_dict()
+      self.notification.message(f'relay_change' , relay_data)
+
+
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
     if self.__engine['thread'] is not None and self.__engine['thread'].is_alive() and hasattr(self,'enclosures'):
@@ -805,6 +810,10 @@ class terrariumEngine(object):
     with orm.db_session():
       button = Button[button]
       button.update(state,True)
+
+      # Notification message
+      button_data = button.to_dict()
+      self.notification.message(f'button_change' , button_data)
 
       # Update the button state on the button page
       self.webserver.websocket_message('button' , {'id' : button.id, 'hardware' : button.hardware, 'value' : button.value})
