@@ -71,6 +71,41 @@ def create_defaults(version):
       pass
 
 
+# def recover(self):
+#     starttime = time.time()
+#     # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
+#     # Enable recovery status
+#     self.__recovery = True
+#     logger.warn('TerrariumPI Collecter recovery mode is starting! %s', (self.__recovery,))
+
+#     # Create empty sql dump variable
+#     sqldump = ''
+#     lines = 0
+#     with open('.recovery.sql', 'w') as f:
+#       # Dump SQL data line for line
+#       for line in self.db.iterdump():
+#         lines += 1
+#         sqldump += line + "\n"
+#         f.write('%s\n' % line)
+
+#     logger.warn('TerrariumPI Collecter recovery mode created SQL dump of %s lines and %s bytes!', (lines,strlen(sqldump),))
+
+#     # Delete broken db
+#     os.remove(terrariumCollector.DATABASE)
+#     logger.warn('TerrariumPI Collecter recovery mode deleted faulty database from disk %s', (terrariumCollector.DATABASE,))
+
+#     # Reconnect will recreate the db
+#     logger.warn('TerrariumPI Collecter recovery mode starts reconnecting database to create a new clean database at %s', (terrariumCollector.DATABASE,))
+#     self.__connect()
+#     self.__create_database_structure()
+#     cur = self.db.cursor()
+#     # Load the SQL data back to db
+#     cur.executescript(sqldump)
+#     logger.warn('TerrariumPI Collecter recovery mode restored the old data in a new database. %s', (terrariumCollector.DATABASE,))
+
+#     # Return to normal mode
+#     self.__recovery = False
+#     logger.warn('TerrariumPI Collecter recovery mode is finished in %s seconds!', (time.time()-starttime,))
 
 class Area(db.Entity):
 
@@ -326,6 +361,15 @@ class Relay(db.Entity):
   @property
   def type(self):
     return 'dimmer' if self.is_dimmer else 'relay'
+
+  def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+    # Add extra fields
+    data['dimmer']      = self.is_dimmer
+    data['value']       = self.value
+    data['replacement'] = self.replacement
+
+    return data
 
   def update(self, new_value, force = False):
     if new_value is None:

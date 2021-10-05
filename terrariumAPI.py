@@ -950,14 +950,7 @@ class terrariumAPI(object):
   def relay_detail(self, relay):
     try:
       relay = Relay[relay]
-      relay_data = relay.to_dict(exclude='webcam')
-      relay_data['value']       = relay.value
-      relay_data['dimmer']      = relay.is_dimmer
-      relay_data['replacement'] = 0
-      if relay.replacement:
-        relay_data['replacement'] = relay.replacement.timestamp()
-
-      return relay_data
+      return relay.to_dict(exclude='webcam')
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
