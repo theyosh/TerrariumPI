@@ -75,6 +75,12 @@ class terrariumArea(object):
       'class' : lambda: terrariumAreaConductivity
     },
 
+    'fertility' : {
+      'name'    : _('Fertility'),
+      'sensors' : ['fertility'],
+      'class' : lambda: terrariumAreaFertility
+    },
+
     'moisture' : {
       'name'    : _('Moisture'),
       'sensors' : ['moisture','humidity'],
@@ -734,6 +740,9 @@ class terrariumAreaCO2(terrariumAreaHeater):
   pass
 
 class terrariumAreaConductivity(terrariumAreaHeater):
+  pass
+
+class terrariumAreaFertility(terrariumAreaHeater):
   pass
 
 class terrariumAreaPH(terrariumAreaHeater):
