@@ -208,7 +208,7 @@ class terrariumNotificationService(object):
 
     return sorted(data, key=itemgetter('name'))
 
-  # Return polymorph area....
+  # Return polymorph service....
   def __new__(cls, id, type, name = '', enabled = True, setup = None):
     if type not in [service['type'] for service in terrariumNotificationService.available_services]:
       raise terrariumNotificationServiceException(f'Service of type {type} is unknown.')
