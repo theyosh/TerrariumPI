@@ -6,6 +6,7 @@ from pathlib import Path
 from terrariumUtils import terrariumUtils
 import copy
 import re
+import sqlite3
 
 
 DATABASE = 'terrariumpi.db'
@@ -71,27 +72,60 @@ def create_defaults(version):
       pass
 
 
-# def recover(self):
-#     starttime = time.time()
-#     # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
-#     # Enable recovery status
-#     self.__recovery = True
-#     logger.warn('TerrariumPI Collecter recovery mode is starting! %s', (self.__recovery,))
+def recover(self):
+#    starttime = time.time()
+    # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
+    # Enable recovery status
+ #   logger.warn('TerrariumPI Collecter recovery mode is starting! %s', (self.__recovery,))
 
-#     # Create empty sql dump variable
-#     sqldump = ''
-#     lines = 0
-#     with open('.recovery.sql', 'w') as f:
-#       # Dump SQL data line for line
-#       for line in self.db.iterdump():
-#         lines += 1
-#         sqldump += line + "\n"
-#         f.write('%s\n' % line)
+    def progress(status, remaining, total):
+      print(f'Copied {total-remaining} of {total} pages...')
 
-#     logger.warn('TerrariumPI Collecter recovery mode created SQL dump of %s lines and %s bytes!', (lines,strlen(sqldump),))
+    broken_db = sqlite3.connect(DATABASE)
+    new_db = sqlite3.connect(f'new_{DATABASE}')
 
-#     # Delete broken db
-#     os.remove(terrariumCollector.DATABASE)
+    with new_db:
+      broken_db.backup(new_db, pages=10, progress=progress)
+
+    new_db.close()
+    broken_db.close()
+
+    # Delete broken db
+    Path(DATABASE).unlink()
+    Path(f'new_{DATABASE}').rename(DATABASE)
+
+    # Reinitialize the new database
+    self.init()
+
+
+
+
+
+    # db = sqlite3.connect(DATABASE)
+    # new_db = sqlite3.connect(f'new_{DATABASE}')
+    # lines = 0
+    # for line in db.iterdump():
+    #   lines += 1
+    #   new_db.executescript(line)
+
+    # db.close()
+    # new_db.close()
+
+    # # Delete broken db
+    # Path(DATABASE).unlink()
+    # Path(f'new_{DATABASE}').rename(DATABASE)
+
+    # # Reinitialize the new database
+    # self.init()
+
+
+
+
+
+
+#    db = sqlite3.connect(DATABASE)
+
+#     os.remove(DATABASE)
 #     logger.warn('TerrariumPI Collecter recovery mode deleted faulty database from disk %s', (terrariumCollector.DATABASE,))
 
 #     # Reconnect will recreate the db
@@ -364,10 +398,11 @@ class Relay(db.Entity):
 
   def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
     data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+
     # Add extra fields
     data['dimmer']      = self.is_dimmer
     data['value']       = self.value
-    data['replacement'] = self.replacement
+    data['replacement'] = self.replacement.timestamp()
 
     return data
 
