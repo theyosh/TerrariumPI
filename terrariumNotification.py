@@ -842,7 +842,7 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
     if len(attachments) > 0:
       attachment = {'attachment' : (os.path.basename(attachments[0]), open(attachments[0],'rb'), 'image/jpeg')}
 
-    r = requests.post(self.setup['url'],
+    r = requests.post(self.setup['address'],
       data = {
         'token'    : self.setup['api_token'],
         'user_key' : self.setup['user_key'],
