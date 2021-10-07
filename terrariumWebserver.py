@@ -147,7 +147,8 @@ class terrariumWebserver(object):
       'show_environment'         : not self.engine.settings['hide_environment_dashboard'],
       'graph_smooth_value'       : self.engine.settings['graph_smooth_value'],
       'graph_show_min_max_gauge' : 1 if self.engine.settings['show_min_max_gauge'] else 0,
-      'auto_dark_mode'           : 1 if self.engine.settings['auto_dark_mode'] else 0
+      'auto_dark_mode'           : 1 if self.engine.settings['auto_dark_mode'] else 0,
+      'is_night'                 : 0 if self.engine.weather is None or self.engine.weather.is_day else 1
     }
 
     # Template functions
@@ -277,7 +278,7 @@ class terrariumWebserver(object):
   def start(self):
     # Start the webserver
     logger.info(f'Running webserver at {self.engine.settings["host"]}:{self.engine.settings["port"]}')
-    print(f'{datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S,000")} - INFO    - terrariumWebserver   - Running webserver at {self.engine.settings["host"]}:{self.engine.settings["port"]}')
+    print(f'{datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S,000")} - INFO    - terrariumWebserver    - Running webserver at {self.engine.settings["host"]}:{self.engine.settings["port"]}')
 
     self.bottle.run(host=self.engine.settings['host'],
                     port=self.engine.settings['port'],
