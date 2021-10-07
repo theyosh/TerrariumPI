@@ -844,9 +844,10 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
 
     r = requests.post(self.setup['address'],
       data = {
-        'token'    : self.setup['api_token'],
-        'user_key' : self.setup['user_key'],
-        'message'  : f'{subject}\n{message}'
+        'token'   : self.setup['api_token'],
+        'user'    : self.setup['user_key'],
+        'title'   : subject,
+        'message' : message
       },
       files = attachment
     )
