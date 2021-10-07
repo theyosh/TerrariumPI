@@ -838,17 +838,22 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
     super().load_setup(setup_data)
 
   def send_message(self, type, subject, message, data = None, attachments = []):
+    data = {
+      'token'   : self.setup['api_token'],
+      'user'    : self.setup['user_key'],
+      'title'   : subject,
+      'message' : message
+    }
+
+    if 'system_error' == type:
+      data['sound'] = 'siren'
+
     attachment = None
     if len(attachments) > 0:
       attachment = {'attachment' : (os.path.basename(attachments[0]), open(attachments[0],'rb'), 'image/jpeg')}
 
     r = requests.post(self.setup['address'],
-      data = {
-        'token'   : self.setup['api_token'],
-        'user'    : self.setup['user_key'],
-        'title'   : subject,
-        'message' : message
-      },
+      data = data,
       files = attachment
     )
 
