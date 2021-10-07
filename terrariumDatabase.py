@@ -248,7 +248,6 @@ class Enclosure(db.Entity):
       image = Path(self.image)
       image_name = f'{image.parent}/{self.id}{image.suffix}'
       image.rename(image_name)
-      print(f'Renamed from {self.image} to {image_name}')
       self.image = str(image_name)
 
   def before_insert(self):
@@ -261,7 +260,6 @@ class Enclosure(db.Entity):
     image = Path(self.image)
     if image.exists() and image.is_file():
       image.unlink()
-      print(f'Deleted file {image}')
 
   def __repr__(self):
     return f'Enclosure {self.name} with {len(self.areas)} areas'
