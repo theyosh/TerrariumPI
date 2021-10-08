@@ -46,7 +46,7 @@ Run the command `i2cdetect -y 1` in order to see what is connected to your I2C b
 ```
 
 {% assign relays = site.hardware | where_exp: "hardware", "hardware.tags contains 'relay'" | sort_natural: "title" %}
-## Relays ({{ relays | size}})
+## Relays
 We currently support <strong>{{ relays | size}}</strong> types of relays. Relays which has a dial icon ![Dimmer icon](/assets/img/dimmer_icon.png){: style="height: 20px" .normal} after their name are dimmers.
 
 {% for relay in relays %}
@@ -59,18 +59,15 @@ We currently support <strong>{{ relays | size}}</strong> types of relays. Relays
 {% endfor %}
 
 
-{% assign sensors = site.hardware | where_exp: "hardware", "hardware.tags contains 'sensor'" | sort_natural: "title %}
-## Sensors ({{ sensors | size}})
+{% assign sensors = site.hardware | where_exp: "hardware", "hardware.tags contains 'sensor'" | sort_natural: "title" %}
+## Sensors
 We currently support <strong>{{ sensors | size}}</strong> types of sensors:
 <br />
 
 {% for sensor in sensors %}
+{% assign types = sensor.device_types | sort_natural | join: ", " %}
   <h3>
     <a href="{{ sensor.url | relative_url }}">{{ sensor.title }}</a>
-    <small class="ml-xl-3">
-    {% for type in sensor.device_types %}
-      {{ type }}{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-    </small>
+    <small class="ml-xl-3"> {{ types }}</small>
   </h3>
 {% endfor %}

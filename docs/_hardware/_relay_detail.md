@@ -18,28 +18,13 @@ Hardware
 Address
 : {{ page.device_address }}
 
-Name
-: The name of the relay
-
-Wattage
-: The ammount of power that is used when on or at full power (dimmer)
-
-Water flow
-: The ammount of water that is used when on or at full power (dimmer) in Liter/Gallon per minute
-
-Current
-: The current state of the relay. Value 0 is off, 100 is full on, or a value between 0 - 100 (dimmer)
-
-{% if page.tags contains 'dimmer' %}
-### Optional
 {% if page.dimmer_frequency %}
+### Calibration
+This is only available for dimmers.
+
 Dimmer frequency in Hz
-: The frequency of wicht the dimmer is working on. Default {{ page.dimmer_frequency }}
+: Default frequentie: {{ page.dimmer_frequency }} Hz
+
 {% endif %}
 
-Max power in %
-: The max power the dimmer is allowed to use. Default 100
-
-Dimmer offset in %
-: An offset value that is reduced from the actual value. Default 0
-{% endif %}
+Other settings can be found at the [relay setup]({{ 'setup' | relative_url}}/#relays) information

@@ -1,6 +1,5 @@
 ---
 ---
-
 /*
   If the number of TAB files has changed, the following variable is required.
   And it must be defined before `@import`.
@@ -9,16 +8,12 @@ $tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
 
 @import "{{ site.theme }}";
 
-/* append your custom style below */
-div.post-content a.external,
-footer a.external {
-  padding-right: 1.1rem;
-  background-repeat: no-repeat;
-  background-position: right;
-  background-image: url('../img/external-link-alt-solid.svg');
-  background-size: 0.8rem;
+div.post-content a.external:after,
+footer a.external:after {
+  content: "\f35d";
+  padding-left: 0.2rem;
+  font-size: 0.8rem;
 }
-
 
 ul.jekyllcodex_accordion {padding-left: 0rem; position: relative; margin: 1.4rem 0!important; border-bottom: 1px solid rgba(0,0,0,0.25); padding-bottom: 0;}
 ul.jekyllcodex_accordion > li {border-top: 1px solid rgba(0,0,0,0.25); list-style: none; margin-left: 0;}

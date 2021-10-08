@@ -15,6 +15,8 @@ After the installation, you need to setup TerrariumPI. In order to do that, logi
 ## Help
 On every form popup you have a small question mark <i class="far fa-question-circle" aria-hidden="true"></i> next to the form title. Click on it to get more information about the form fields.
 
+## Required fields
+All fields with a red start (<span style="color:red;font-weight:bold">*</span>) are required to fill out. Some fields can be come required based on selected options.
 
 ## Settings
 ![Settings form](/assets/img/Settings.webp)
@@ -126,17 +128,78 @@ Other weather data is just for show. Does not have a function.
 In order to use the weather system, you need to create a free account at [OpenWeatherMap](https://home.openweathermap.org/users/sign_up).
 
 The url format needs to be `https://api.openweathermap.org/data/2.5/weather?q=[City],[Country]&appid=[API_KEY]`. Do not add the `&metric=` part in the url.
-## Sensors
-![Sensor settings form](/assets/img/Sensor_Settings.webp)
-_Popup form adding/updating the sensors_
-
-### Calibration
 
 ## Relays
 ![Relay form](/assets/img/Add_Relay_Form.webp)
 _Popup form for adding and updating relays - Calibration is only available for dimmers_
 
+Hardware
+: The hardware type of the relay
+
+Address
+: Enter the address of the relay. This is specific for each [relay]({{ 'hardware/' | relative_url }}#relays).
+
+Name
+: The name of the relay. Use an easy to remember name.
+
+Wattage
+: The ammount of power that is used when on or at full power (dimmer)
+
+Water flow
+: The ammount of water that is used when on or at full power (dimmer) in Liter/Gallon per minute
+
+Current
+: The current state of the relay. Value 0 is off, 100 is full on, or a value between 0 - 100 (dimmer)
+
 ### Calibration
+This is only available for dimmers.
+
+Dimmer frequency in Hz
+: The frequency of wicht the dimmer is working on. The default depends on the selected dimmer type.
+
+Max power in %
+: The max power the dimmer is allowed to use. Default 100
+
+Dimmer offset in %
+: An offset value that is reduced from the actual value. Default 0
+## Sensors
+![Sensor settings form](/assets/img/Sensor_Settings.webp)
+_Popup form adding/updating the sensors_
+Adding and changing sensors is done with the above sensor form.
+
+Hardware
+: The hardware type of the sensor
+
+Type
+: Select what kind of sensor it is.
+
+Address
+: Enter the address of the sensor. This is specific for each [sensor]({{ 'hardware/' | relative_url }}#sensors).
+
+Name
+: The name of the sensor. Use an easy to remember name.
+
+Alarm min
+: The lower alarm value. When the sensor gets below this value, the **low** alarm will be triggered
+
+Alarm max
+: The high alarm value. When the sensor gets higher then this value, the **hight** alarm will be triggered
+
+Limit min
+: The minimun value that is valid for this sensor. Values measured below this value will be ignored.
+
+Limit max
+: The maximum value that is valid for this sensor. Values measured higher then this value will be ignored.
+
+Max diff
+: The maximum difference between two measurements that is valid. Enter **0** to disable.
+
+Exclude average
+: Exclude this sensor from the average calculation and graphs on the dashboard.
+
+### Calibration
+Offset
+: Enter a value to correct the output reading. This can be a positive or negative value.
 
 ## Doors / buttons
 ![Button form](/assets/img/Button_Settings.webp)

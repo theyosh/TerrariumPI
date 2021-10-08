@@ -22,9 +22,7 @@ The 1-Wire bus is enabled by the installer and therefore, it will work out of th
 
 Make sure you use a 4.7K resistor.
 
-
 ![1-Wire schema](/assets/img/1-wire-temp.webp)
 _1-Wire schema_
-
 
 {% include_relative _sensor_detail.md %}
