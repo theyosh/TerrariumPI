@@ -112,12 +112,13 @@ $grey-color-light: #a2a19f;
     width: 100%;
 
     th, td {
-        border: 1px solid darken($grey-color-light, 5%);
+        border: 1px solid var(--tb-border-color);
+        /* border: 1px solid darken($grey-color-light, 5%); */
         padding: 4px 10px;
     }
 
     th {
-        background: lighten($grey-color-light, 6%);
+       /* background: lighten($grey-color-light, 6%); */
     }
 }
 

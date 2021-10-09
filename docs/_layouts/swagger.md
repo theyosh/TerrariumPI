@@ -32,105 +32,107 @@ layout: post
             {% if method[1].parameters %}
                 <div class="swagger-parameters">
                     <h4>Parameters</h4>
-                    <table class="swagger-parameters-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Located in</th>
-                                <th>Description</th>
-                                <th>Type</th>
-                            <tr>
-                        </thead>
-                        <tbody>
-                        {% for parameter in method[1].parameters %}
-
-                            {% if parameter.schema['$ref'] %}
-                                {% assign schema_path =  parameter.schema['$ref'] | remove: "#/" | split: "/"  %}
-                                {% assign schema = swagger %}
-                                {% for path in schema_path %}
-                                {% assign schema = schema[path] %}
-                                {% endfor %}
-
-                                {% for item in schema.properties %}
-
-                                    {% unless item[1].readOnly %}
-                                        <tr>
-                                            <td>
-                                                {% if schema.required contains item[0] %}
-                                                    <span class="swagger-parameter-required">
-                                                {% endif %}
-                                                {{ item[0] }}
-                                                {% if schema.required contains item[0] %}
-                                                    </span>
-                                                {% endif %}
-                                            </td>
-                                            <td>body</td>
-                                            <td>
-                                                {{ item[1].description }}
-                                            </td>
-                                            <td>
-                                                {% if item[1].type %}
-                                                    {{ item[1].type | capitalize }}
-                                                    {% if item[1].items %}
-                                                        of {{ item[1].items.type | capitalize }}
-                                                        {% if item[1].items.enum %}
-                                                            allowed ({% for val in item[1].items.enum %}{{val}} {% endfor %})
-                                                        {% endif %}
-                                                    {% endif %}
-
-                                                {% elsif item[1].schema %}
-                                                    {% if item[1].schema.example %}
-                                                        {% highlight json %}{{ item[1].schema.example }}{% endhighlight %}
-                                                    {% else %}
-                                                        {% highlight json %}{{ item[1].schema }}{% endhighlight %}
-                                                    {% endif %}
-                                                {% else %}
-                                                String
-                                                {% endif %}
-                                                {% if item[1].default %}
-                                                    <br />Default: {{item[1].default}}
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                    {% endunless %}
-                                {% endfor %}
-                            {% else %}
+                    <div class="table-wrapper">
+                        <table class="swagger-parameters-table">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        {% if parameter.required %}
-                                        <span class="swagger-parameter-required">
-                                        {% endif %}
-                                        {{ parameter.name }}
-                                        {% if parameter.required %}
-                                        </span>
-                                        {% endif %}
-                                    </td>
-                                    <td>{{ parameter.in }}</td>
-                                    <td>{{ parameter.description }}</td>
-                                    <td>
-                                        {% if parameter.type %}
-                                        {{ parameter.type | capitalize }}
-                                            {% if parameter.items %}
-                                            of {{ parameter.items.type | capitalize }}
-                                                {% if parameter.items.enum %}
-                                                allowed ({% for val in parameter.items.enum %}{{val}} {% endfor %})
+                                    <th>Name</th>
+                                    <th>Located in</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                <tr>
+                            </thead>
+                            <tbody>
+                            {% for parameter in method[1].parameters %}
+
+                                {% if parameter.schema['$ref'] %}
+                                    {% assign schema_path =  parameter.schema['$ref'] | remove: "#/" | split: "/"  %}
+                                    {% assign schema = swagger %}
+                                    {% for path in schema_path %}
+                                    {% assign schema = schema[path] %}
+                                    {% endfor %}
+
+                                    {% for item in schema.properties %}
+
+                                        {% unless item[1].readOnly %}
+                                            <tr>
+                                                <td>
+                                                    {% if schema.required contains item[0] %}
+                                                        <span class="swagger-parameter-required">
+                                                    {% endif %}
+                                                    {{ item[0] }}
+                                                    {% if schema.required contains item[0] %}
+                                                        </span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>body</td>
+                                                <td>
+                                                    {{ item[1].description }}
+                                                </td>
+                                                <td>
+                                                    {% if item[1].type %}
+                                                        {{ item[1].type | capitalize }}
+                                                        {% if item[1].items %}
+                                                            of {{ item[1].items.type | capitalize }}
+                                                            {% if item[1].items.enum %}
+                                                                allowed ({% for val in item[1].items.enum %}{{val}} {% endfor %})
+                                                            {% endif %}
+                                                        {% endif %}
+
+                                                    {% elsif item[1].schema %}
+                                                        {% if item[1].schema.example %}
+                                                            {% highlight json %}{{ item[1].schema.example }}{% endhighlight %}
+                                                        {% else %}
+                                                            {% highlight json %}{{ item[1].schema }}{% endhighlight %}
+                                                        {% endif %}
+                                                    {% else %}
+                                                    String
+                                                    {% endif %}
+                                                    {% if item[1].default %}
+                                                        <br />Default: {{item[1].default}}
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endunless %}
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td>
+                                            {% if parameter.required %}
+                                            <span class="swagger-parameter-required">
+                                            {% endif %}
+                                            {{ parameter.name }}
+                                            {% if parameter.required %}
+                                            </span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ parameter.in }}</td>
+                                        <td>{{ parameter.description }}</td>
+                                        <td>
+                                            {% if parameter.type %}
+                                            {{ parameter.type | capitalize }}
+                                                {% if parameter.items %}
+                                                of {{ parameter.items.type | capitalize }}
+                                                    {% if parameter.items.enum %}
+                                                    allowed ({% for val in parameter.items.enum %}{{val}} {% endfor %})
+                                                    {% endif %}
                                                 {% endif %}
-                                            {% endif %}
-                                        {% elsif parameter.schema %}
-                                            {% if parameter.schema.example %}
-                                                {% highlight json %}{{ parameter.schema.example }}{% endhighlight %}
+                                            {% elsif parameter.schema %}
+                                                {% if parameter.schema.example %}
+                                                    {% highlight json %}{{ parameter.schema.example }}{% endhighlight %}
+                                                {% else %}
+                                                    {% highlight json %}{{ parameter.schema }}{% endhighlight %}
+                                                {% endif %}
                                             {% else %}
-                                                {% highlight json %}{{ parameter.schema }}{% endhighlight %}
+                                                String
                                             {% endif %}
-                                        {% else %}
-                                            String
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                    </tbody>
-                    </table>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
                 </div>
             {% endif %}
             {% if method[1].responses %}
