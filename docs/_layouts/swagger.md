@@ -40,7 +40,7 @@ layout: post
                                     <th>Located in</th>
                                     <th>Description</th>
                                     <th>Type</th>
-                                <tr>
+                                </tr>
                             </thead>
                             <tbody>
                             {% for parameter in method[1].parameters %}
@@ -130,7 +130,7 @@ layout: post
                                     </tr>
                                 {% endif %}
                             {% endfor %}
-                        </tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -165,9 +165,9 @@ layout: post
 {% endfor %}
 <script type="text/javascript">
 /* Add open/close toggles for REST methods */
-$(document).ready(function(){
-    $('.swagger-method-title').on('click',function(event){
-        $(this).siblings('.swagger-method-details').toggleClass('open');
+jQuery(document).ready(function() {
+    jQuery('.swagger-method-title').on('click',function(event){
+        jQuery(this).siblings('.swagger-method-details').toggleClass('open');
         event.preventDefault();
     })
 });
