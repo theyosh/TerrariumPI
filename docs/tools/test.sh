@@ -60,6 +60,7 @@ if $_build; then
 fi
 
 bundle exec htmlproofer "$DEST" \
+  --trace \
   --disable-external \
   --check-html \
   --empty_alt_ignore \
