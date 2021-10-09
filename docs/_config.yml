@@ -92,6 +92,7 @@ plugins:
   - jekyll-target-blank
   - jemoji
   - jekyll-minifier
+  - jekyll-analytics
 
 jekyll-minifier:
   uglifier_args:
@@ -99,6 +100,11 @@ jekyll-minifier:
 
 target-blank:
     add_css_classes: external
+
+jekyll_analytics:
+  Matomo:                   # Add, if you want to track with Matomo (former Piwik Analytics)
+    url: stats.theyosh.nl # Required - url to Matomo installation without trailing /
+    siteId: "279"          # Required - replace with your Matomo site id (Write id as string)
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:

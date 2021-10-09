@@ -14,6 +14,7 @@ group :jekyll_plugins do
   gem "jekyll-target-blank"
   gem "jemoji"
   gem "jekyll-minifier"
+  gem "jekyll-analytics"
 end
 
 group :test do
