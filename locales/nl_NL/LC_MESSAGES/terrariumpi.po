@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2021-08-13 12:32+CEST\n"
-"PO-Revision-Date: 2021-08-14 08:33+0000\n"
+"POT-Creation-Date: 2021-10-09 23:27+CEST\n"
+"PO-Revision-Date: 2021-10-09 21:39+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/nl/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 4.8\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -52,10 +52,14 @@ msgid "Conductivity"
 msgstr "Geleidingsvermogen"
 
 #: terrariumArea.py:79
+msgid "Fertility"
+msgstr "Vruchtbaarheid"
+
+#: terrariumArea.py:85
 msgid "Moisture"
 msgstr "Vochtigheid"
 
-#: terrariumArea.py:85
+#: terrariumArea.py:91
 msgid "pH"
 msgstr "pH"
 
@@ -135,85 +139,106 @@ msgstr "waterstroom"
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:1055 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1071 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Actief"
 
-#: terrariumEngine.py:1061
+#: terrariumEngine.py:1077
 msgid "System load"
 msgstr "Systeembelasting"
 
-#: terrariumEngine.py:1067 views/status.html:44
+#: terrariumEngine.py:1083 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Processor temperatuur"
 
-#: terrariumEngine.py:1073
+#: terrariumEngine.py:1089
 msgid "Storage"
 msgstr "Opslag"
 
-#: terrariumEngine.py:1079
+#: terrariumEngine.py:1095
 msgid "Memory"
 msgstr "Geheugen"
 
-#: terrariumEngine.py:1096
+#: terrariumEngine.py:1112
 msgid "average {sensor_type}"
 msgstr "gemiddelde {sensor_type}"
 
-#: terrariumEngine.py:1267
+#: terrariumEngine.py:1283
 msgid "last update"
 msgstr "laatste wijziging"
 
-#: terrariumNotification.py:42
+#: terrariumNotification.py:39
 msgid "Authentication login error"
 msgstr "Authenticatie inlogfout"
 
-#: terrariumNotification.py:43
+#: terrariumNotification.py:40
 msgid "System warning"
 msgstr "Systeemwaarschuwing"
 
-#: terrariumNotification.py:44
+#: terrariumNotification.py:41
 msgid "System error"
 msgstr "Systeemfout"
 
-#: terrariumNotification.py:164
+#: terrariumNotification.py:43
+msgid "Sensor update"
+msgstr "Sensor update"
+
+#: terrariumNotification.py:44
+msgid "Sensor alarm"
+msgstr "Sensor alarm"
+
+#: terrariumNotification.py:46
+msgid "Relay change"
+msgstr "Schakelaar verandering"
+
+#: terrariumNotification.py:48
+msgid "Button change"
+msgstr "Knop verandering"
+
+#: terrariumNotification.py:50
+msgid "Webcam archive"
+msgstr "Webcam archief"
+
+#: terrariumNotification.py:172
 msgid "Display"
 msgstr "Beeldscherm"
 
-#: terrariumNotification.py:169
+#: terrariumNotification.py:176
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:174
-msgid "Pushover"
-msgstr "Pushover"
-
-#: terrariumNotification.py:179
-msgid "Telegram"
-msgstr "Telegram"
-
-#: terrariumNotification.py:184
+#: terrariumNotification.py:186
 msgid "Traffic light"
 msgstr "Verkeerslicht"
 
-#: terrariumNotification.py:189
-msgid "Twitter"
-msgstr "Twitter"
-
-#: terrariumNotification.py:194
+#: terrariumNotification.py:190
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumWebserver.py:158 terrariumWebserver.py:236
+#: terrariumNotification.py:194
+msgid "MQTT"
+msgstr "MQTT"
+
+#: terrariumNotification.py:198
+msgid "Pushover"
+msgstr "Pushover"
+
+#: terrariumWebserver.py:161 terrariumWebserver.py:239
 msgid "Authenticate to make any changes"
 msgstr "Login om wijzigingen te kunnen maken"
 
-#: terrariumWebserver.py:158 terrariumWebserver.py:236
+#: terrariumWebserver.py:161 terrariumWebserver.py:239
 msgid "Authentication"
 msgstr "Authenticatie"
 
-#: terrariumWebserver.py:158 terrariumWebserver.py:236 views/index.html:2
+#: terrariumWebserver.py:161 terrariumWebserver.py:239 views/index.html:2
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
+
+#: views/about.html:2 views/about.html:9 views/includes/sidebar.html:292
+#: views/includes/sidebar.html:305
+msgid "About"
+msgstr "Over"
 
 #: views/audio_files.html:2 views/audio_files.html:10
 #: views/modals/playlist.html:62
@@ -243,8 +268,8 @@ msgstr "Bestandsnaam"
 msgid "Size"
 msgstr "Grootte"
 
-#: views/audio_files.html:28 views/audio_files.html:39 views/playlists.html:31
-#: views/playlists.html:46
+#: views/audio_files.html:28 views/audio_files.html:39
+#: views/modals/area.html:803 views/playlists.html:31 views/playlists.html:46
 msgid "Action"
 msgstr "Actie"
 
@@ -498,8 +523,8 @@ msgid "Scan sensors"
 msgstr "Scan sensoren"
 
 #: views/includes/sidebar.html:111 views/modals/area.html:178
-#: views/modals/area.html:221 views/modals/area.html:629
-#: views/modals/area.html:759 views/relays.html:2
+#: views/modals/area.html:221 views/modals/area.html:636
+#: views/modals/area.html:766 views/relays.html:2
 msgid "Relays"
 msgstr "Schakelaars"
 
@@ -577,23 +602,9 @@ msgstr "Opnieuw opstarten"
 msgid "Shutdown"
 msgstr "Uitschakelen"
 
-#: views/includes/sidebar.html:292 views/includes/sidebar.html:305
-msgid "About"
-msgstr "Over"
-
 #: views/includes/sidebar.html:297
 msgid "Help"
 msgstr "Hulp"
-
-#: views/includes/sidebar.html:311
-msgid "Usage"
-msgstr "Gebruik"
-
-#: views/includes/sidebar.html:317 views/modals/button.html:17
-#: views/modals/relay.html:17 views/modals/sensor.html:17
-#: views/modals/service.html:64 views/modals/webcam.html:21
-msgid "Hardware"
-msgstr "Hardware"
 
 #: views/layouts/modal.html:23
 msgid "Save changes"
@@ -733,7 +744,6 @@ msgid "Main lights"
 msgstr "Hoofd verlichting"
 
 #: views/modals/area.html:118 views/modals/message.html:52
-#: views/modals/service.html:53
 msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
@@ -759,39 +769,40 @@ msgstr "Nachtinstellingen"
 
 #: views/modals/area.html:136 views/modals/area.html:197
 #: views/modals/area.html:283 views/modals/area.html:353
-#: views/modals/area.html:519 views/modals/area.html:648
+#: views/modals/area.html:526 views/modals/area.html:655
 msgid "Begin time"
 msgstr "Begintijd"
 
 #: views/modals/area.html:139 views/modals/area.html:286
-#: views/modals/area.html:522
+#: views/modals/area.html:529
 msgid "The time of the day when the relays are toggled on each day."
 msgstr "Het tijdstip van de dag waarop de relais elke dag worden ingeschakeld."
 
 #: views/modals/area.html:142 views/modals/area.html:154
 #: views/modals/area.html:166 views/modals/area.html:289
 #: views/modals/area.html:301 views/modals/area.html:359
-#: views/modals/area.html:371 views/modals/area.html:525
-#: views/modals/area.html:537 views/modals/area.html:654
-#: views/modals/area.html:666
+#: views/modals/area.html:371 views/modals/area.html:532
+#: views/modals/area.html:544 views/modals/area.html:661
+#: views/modals/area.html:673 views/modals/area.html:881
+#: views/modals/area.html:890
 msgid "Enter a valid time."
 msgstr "Voer een geldige tijd in."
 
 #: views/modals/area.html:148 views/modals/area.html:203
 #: views/modals/area.html:295 views/modals/area.html:365
-#: views/modals/area.html:531 views/modals/area.html:660
+#: views/modals/area.html:538 views/modals/area.html:667
 msgid "End time"
 msgstr "Eindtijd"
 
 #: views/modals/area.html:151 views/modals/area.html:298
-#: views/modals/area.html:534
+#: views/modals/area.html:541
 msgid "The time of the day when the relays are toggled off each day."
 msgstr ""
 "Het tijdstip van de dag waarop de relais elke dag worden uitgeschakeld."
 
 #: views/modals/area.html:160 views/modals/area.html:209
 #: views/modals/area.html:307 views/modals/area.html:377
-#: views/modals/area.html:543 views/modals/area.html:672
+#: views/modals/area.html:550 views/modals/area.html:679
 msgid "On duration"
 msgstr "Tijdsduur aan"
 
@@ -806,12 +817,12 @@ msgstr ""
 
 #: views/modals/area.html:172 views/modals/area.html:215
 #: views/modals/area.html:319 views/modals/area.html:389
-#: views/modals/area.html:555 views/modals/area.html:684
+#: views/modals/area.html:562 views/modals/area.html:691
 msgid "Off duration"
 msgstr "Tijdsduur uit"
 
-#: views/modals/area.html:181 views/modals/area.html:632
-#: views/modals/area.html:762
+#: views/modals/area.html:181 views/modals/area.html:639
+#: views/modals/area.html:769
 msgid "Select the relays to toggle."
 msgstr "Selecteer de schakelaars."
 
@@ -833,13 +844,14 @@ msgstr "Selecteer de geluidskaart die voor dit verblijf wordt gebruikt."
 
 #: views/modals/area.html:313 views/modals/area.html:325
 #: views/modals/area.html:383 views/modals/area.html:395
-#: views/modals/area.html:549 views/modals/area.html:561
-#: views/modals/area.html:678 views/modals/area.html:690
+#: views/modals/area.html:556 views/modals/area.html:568
+#: views/modals/area.html:685 views/modals/area.html:697
+#: views/modals/area.html:898
 msgid "Enter a valid duration in minutes."
 msgstr "Vul een geldige tijdsduur in minuten."
 
-#: views/modals/area.html:322 views/modals/area.html:558
-#: views/modals/area.html:687
+#: views/modals/area.html:322 views/modals/area.html:565
+#: views/modals/area.html:694
 msgid ""
 "The duration when the relays should be stay off when switched off. Enter '0' "
 "to disable."
@@ -855,12 +867,12 @@ msgstr "Selecteer de afspeellijsten."
 msgid "Select at least 1 playlist."
 msgstr "Selecteer minimaal 1 afspeellijst."
 
-#: views/modals/area.html:356 views/modals/area.html:651
+#: views/modals/area.html:356 views/modals/area.html:658
 msgid "The time of the day when the relays are toggled on each night."
 msgstr ""
 "Het tijdstip van de dag waarop de relais elke nacht worden ingeschakeld."
 
-#: views/modals/area.html:368 views/modals/area.html:663
+#: views/modals/area.html:368 views/modals/area.html:670
 msgid "The time of the day when the relays are toggled off each night."
 msgstr ""
 "Het tijdstip van de dag waarop de relais elke nacht worden uitgeschakeld."
@@ -908,8 +920,8 @@ msgid "Enter the volume of the water tank."
 msgstr "Voer de volume in van de watertank."
 
 #: views/modals/area.html:459 views/modals/area.html:471
-#: views/modals/area.html:483 views/modals/area.html:623
-#: views/modals/area.html:753 views/modals/relay.html:62
+#: views/modals/area.html:483 views/modals/area.html:630
+#: views/modals/area.html:760 views/modals/relay.html:62
 #: views/modals/relay.html:72 views/modals/sensor.html:88
 #: views/modals/sensor.html:100 views/modals/sensor.html:112
 #: views/modals/sensor.html:124 views/modals/sensor.html:136
@@ -954,15 +966,19 @@ msgstr "Lampen"
 msgid "Select source when it is 'day'."
 msgstr "Selecteer de bron wanneer het 'dag' is."
 
-#: views/modals/area.html:512
-msgid "High alarm"
-msgstr "Hoog alarm"
-
-#: views/modals/area.html:512
+#: views/modals/area.html:514
 msgid "Low alarm"
 msgstr "Laag alarm"
 
-#: views/modals/area.html:546 views/modals/area.html:675
+#: views/modals/area.html:516
+msgid "High alarm"
+msgstr "Hoog alarm"
+
+#: views/modals/area.html:518
+msgid "Variation"
+msgstr "Variatie"
+
+#: views/modals/area.html:553 views/modals/area.html:682
 msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full night."
@@ -971,87 +987,131 @@ msgstr ""
 "de hele dag, krijg je een timer functie. Voer '0' in om een volledige nacht "
 "te hebben."
 
-#: views/modals/area.html:567 views/modals/area.html:696
+#: views/modals/area.html:574 views/modals/area.html:703
 msgid "Power on time"
 msgstr "Ingeschakeld"
 
-#: views/modals/area.html:570 views/modals/area.html:699
+#: views/modals/area.html:577 views/modals/area.html:706
 msgid "The duration in seconds to toggle on the relay."
 msgstr "De duur in seconden om het schakelaars in te schakelen."
 
-#: views/modals/area.html:573 views/modals/area.html:585
-#: views/modals/area.html:702 views/modals/area.html:714
+#: views/modals/area.html:580 views/modals/area.html:592
+#: views/modals/area.html:709 views/modals/area.html:721
 msgid "Enter a valid duration in seconds."
 msgstr "Voer een geldige duur in seconden in."
 
-#: views/modals/area.html:579 views/modals/area.html:708
+#: views/modals/area.html:586 views/modals/area.html:715
 msgid "Settle time"
 msgstr "Stabilisatietijd"
 
-#: views/modals/area.html:582 views/modals/area.html:711
+#: views/modals/area.html:589 views/modals/area.html:718
 msgid "The duration in seconds between two actions."
 msgstr "De duur in seconden tussen twee acties."
 
-#: views/modals/area.html:591 views/modals/area.html:720
+#: views/modals/area.html:598 views/modals/area.html:727
 msgid "Light status"
 msgstr "Status van het licht"
 
-#: views/modals/area.html:593 views/modals/area.html:606
-#: views/modals/area.html:722 views/modals/area.html:735
+#: views/modals/area.html:600 views/modals/area.html:613
+#: views/modals/area.html:729 views/modals/area.html:742
 #: views/modals/webcam.html:143 views/modals/webcam.html:158
 msgid "Ignored"
 msgstr "Genegeerd"
 
-#: views/modals/area.html:594 views/modals/area.html:723
+#: views/modals/area.html:601 views/modals/area.html:730
 msgid "On"
 msgstr "Aan"
 
-#: views/modals/area.html:595 views/modals/area.html:724
+#: views/modals/area.html:602 views/modals/area.html:731
 msgid "Off"
 msgstr "Uit"
 
-#: views/modals/area.html:598
+#: views/modals/area.html:605
 msgid "Select the lights status."
 msgstr "Selecteer de lichtstatus."
 
-#: views/modals/area.html:604 views/modals/area.html:733
+#: views/modals/area.html:611 views/modals/area.html:740
 msgid "Door status"
 msgstr "Deur status"
 
-#: views/modals/area.html:607 views/modals/area.html:736
+#: views/modals/area.html:614 views/modals/area.html:743
 #: views/modals/webcam.html:160
 msgid "Open"
 msgstr "Open"
 
-#: views/modals/area.html:608 views/modals/area.html:737
+#: views/modals/area.html:615 views/modals/area.html:744
 msgid "Closed"
 msgstr "Gesloten"
 
-#: views/modals/area.html:611 views/modals/area.html:740
+#: views/modals/area.html:618 views/modals/area.html:747
 msgid "Select the door status."
 msgstr "Selecteer de deurstatus."
 
-#: views/modals/area.html:617 views/modals/area.html:747
+#: views/modals/area.html:624 views/modals/area.html:754
 msgid "Alarm threshold"
 msgstr "Alarmdrempel"
 
-#: views/modals/area.html:620 views/modals/area.html:750
+#: views/modals/area.html:627 views/modals/area.html:757
 msgid "Enter the amount of alarms before action take place."
 msgstr "Voer het aantal alarmen in voordat actie plaatsvindt."
 
-#: views/modals/area.html:727
+#: views/modals/area.html:734
 msgid "Select the light status."
 msgstr "Selecteer de lichtstatus."
 
-#: views/modals/area.html:777
+#: views/modals/area.html:785
+msgid "When"
+msgstr "Wanneer"
+
+#: views/modals/area.html:791
+msgid "Period/duration"
+msgstr "Periode/tijdsduur"
+
+#: views/modals/area.html:797
+msgid "Value"
+msgstr "Waarde"
+
+#: views/modals/area.html:826
+msgid "After x minutes change to value or at exactly a time stamp."
+msgstr "Verander na x minuten naar waarde of op exact een tijdstip."
+
+#: views/modals/area.html:834
+msgid "Enter a duration in minutes or the actual time of the day."
+msgstr "Voer een duur in minuten of de werkelijke tijd van de dag in."
+
+#: views/modals/area.html:842
+msgid ""
+"Enter a negative or positive value for a relative action. A number is "
+"treated as an absolute value."
+msgstr ""
+"Voer een negatieve of positieve waarde in voor een relatieve actie. Een "
+"getal wordt behandeld als een absolute waarde."
+
+#: views/modals/area.html:851
+msgid "Add a new row"
+msgstr "Voeg een nieuwe rij toe"
+
+#: views/modals/area.html:860
+msgid "Remove row"
+msgstr "Verwijder rij"
+
+#: views/modals/area.html:876
+msgid "After x minutes"
+msgstr "Na x minuten"
+
+#: views/modals/area.html:877
+msgid "At time"
+msgstr "Op tijdstip"
+
+#: views/modals/area.html:929
 msgid "Dimmer on duration"
 msgstr "Dimmer aan tijd in seconden"
 
-#: views/modals/area.html:781
+#: views/modals/area.html:933
 msgid "Dimmer of duration"
 msgstr "Dimmer uit tijdsduur"
 
-#: views/modals/area.html:791
+#: views/modals/area.html:943
 msgid ""
 "Select the delay and duration for the dimmer to go to on or off in minutes. "
 "Max duration is 180 minutes."
@@ -1059,15 +1119,15 @@ msgstr ""
 "Selecteer de vertraging en duur voor de dimmer om aan of uit te gaan in "
 "minuten. De maximale duur is 180 minuten."
 
-#: views/modals/area.html:798
+#: views/modals/area.html:950
 msgid "Relay delay on"
 msgstr "Schakelaar vertraging aan"
 
-#: views/modals/area.html:802
+#: views/modals/area.html:954
 msgid "Relay delay off"
 msgstr "Schakelaar vertraging uit"
 
-#: views/modals/area.html:810
+#: views/modals/area.html:962
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
@@ -1079,6 +1139,12 @@ msgstr ""
 msgid "Button settings"
 msgstr "Knop instellingen"
 
+#: views/modals/button.html:17 views/modals/relay.html:17
+#: views/modals/sensor.html:17 views/modals/service.html:61
+#: views/modals/webcam.html:21
+msgid "Hardware"
+msgstr "Hardware"
+
 #: views/modals/button.html:23
 msgid "Select the hardware type for this button."
 msgstr "Selecteer het hardwaretype voor deze knop."
@@ -1089,7 +1155,7 @@ msgid "Please select a hardware type."
 msgstr "Selecteer een hardwaretype."
 
 #: views/modals/button.html:32 views/modals/relay.html:32
-#: views/modals/sensor.html:47 views/modals/service.html:74
+#: views/modals/sensor.html:47 views/modals/service.html:70
 #: views/modals/webcam.html:36
 msgid "Address"
 msgstr "Adres"
@@ -1436,90 +1502,110 @@ msgstr "Selecteer de sensoren voor de compensatieberekening."
 msgid "Notification service settings"
 msgstr "Instellingen voor meldingsservices"
 
-#: views/modals/service.html:82
+#: views/modals/service.html:77
 msgid "Show title"
 msgstr "Titel weergeven"
 
-#: views/modals/service.html:87
+#: views/modals/service.html:82
 msgid "Show a title on the display."
 msgstr "Toon een titel op het scherm."
 
-#: views/modals/service.html:99
+#: views/modals/service.html:92
 msgid "Receiver email"
 msgstr "E-mail van de ontvager"
 
-#: views/modals/service.html:106
+#: views/modals/service.html:98
 msgid "SMTP Server address"
 msgstr "SMTP-server adres"
 
-#: views/modals/service.html:113
+#: views/modals/service.html:104
 msgid "SMTP Server port"
 msgstr "SMTP-serverpoort"
 
-#: views/modals/service.html:117
+#: views/modals/service.html:108
 msgid "The email notification service will auto detect SSL/TLS connections."
 msgstr ""
 "De e-mailmeldingsservice detecteert automatisch SSL / TLS-verbindingen."
 
-#: views/modals/service.html:123
+#: views/modals/service.html:113
 msgid "SMTP Server username"
 msgstr "SMTP-server gebruikersnaam"
 
-#: views/modals/service.html:130
+#: views/modals/service.html:119
 msgid "SMTP Server password"
 msgstr "SMTP-serverpoort"
 
-#: views/modals/service.html:142
+#: views/modals/service.html:128
 msgid "API Token"
 msgstr "API Token"
 
-#: views/modals/service.html:149
+#: views/modals/service.html:134
 msgid "User key"
 msgstr "Gebruikerssleutel"
 
-#: views/modals/service.html:162
+#: views/modals/service.html:147
 msgid "Bot Token"
 msgstr "Bot-token"
 
-#: views/modals/service.html:169
+#: views/modals/service.html:153
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: views/modals/service.html:176
+#: views/modals/service.html:159
 msgid "HTTP Proxy"
 msgstr "HTTP-proxy"
 
-#: views/modals/service.html:187 views/modals/webcam.html:188
+#: views/modals/service.html:170 views/modals/webcam.html:188
 msgid "Red"
 msgstr "Rood"
 
-#: views/modals/service.html:194
+#: views/modals/service.html:177
 msgid "Yellow"
 msgstr "Geel"
 
-#: views/modals/service.html:201 views/modals/webcam.html:189
+#: views/modals/service.html:184 views/modals/webcam.html:189
 msgid "Green"
 msgstr "Groen"
 
-#: views/modals/service.html:213
+#: views/modals/service.html:196
 msgid "Customer key"
 msgstr "Klantsleutel"
 
-#: views/modals/service.html:220
+#: views/modals/service.html:203
 msgid "Customer secret"
 msgstr "Klant geheim"
 
-#: views/modals/service.html:227
+#: views/modals/service.html:210
 msgid "Access token"
 msgstr "Toegangstoken"
 
-#: views/modals/service.html:234
+#: views/modals/service.html:217
 msgid "Access token secret"
 msgstr "Toegang sleutel geheim"
 
-#: views/modals/service.html:245
+#: views/modals/service.html:228
 msgid "Full post url"
 msgstr "Volledige bericht-URL (post)"
+
+#: views/modals/service.html:241
+msgid "MQTT Server address"
+msgstr "MQTT-server adres"
+
+#: views/modals/service.html:248
+msgid "MQTT Server port"
+msgstr "MQTT-serverpoort"
+
+#: views/modals/service.html:258
+msgid "MQTT secure connection"
+msgstr "MQTT beveiligde verbinding"
+
+#: views/modals/service.html:267
+msgid "MQTT Server username"
+msgstr "MQTT-server gebruikersnaam"
+
+#: views/modals/service.html:274
+msgid "MQTT Server password"
+msgstr "MQTT Server-wachtwoord"
 
 #: views/modals/weather.html:11
 msgid "Weather settings"
@@ -2264,7 +2350,7 @@ msgstr "Huidige activiteit"
 msgid "Current value"
 msgstr "Huidige waarde"
 
-#: views/modals/area.html:875 views/modals/area.html:877
+#: views/modals/area.html:1027 views/modals/area.html:1029
 msgid "Delay"
 msgstr "Vertraging"
 
@@ -2288,7 +2374,7 @@ msgstr "Verwijder verblijf"
 msgid "Delete event {title}"
 msgstr "Afspraak {title} verwijderen"
 
-#: views/notifications.html:140
+#: views/notifications.html:143
 msgid "Delete message"
 msgstr "Bericht verwijderen"
 
@@ -2324,7 +2410,7 @@ msgstr "Knop bewerken"
 msgid "Edit enclosure"
 msgstr "Bewerk verblijf"
 
-#: views/notifications.html:137
+#: views/notifications.html:140
 msgid "Edit message"
 msgstr "Bericht bewerken"
 
@@ -2348,6 +2434,10 @@ msgstr "Bewerk webcam"
 msgid "Enter a description"
 msgstr "Voer een beschrijving in"
 
+#: views/modals/area.html:887
+msgid "Enter a duration in minutes or time"
+msgstr "Voer een duur in minuten of tijd in"
+
 #: views/modals/message.html:64
 msgid "Enter a message"
 msgstr "Voer een bericht in"
@@ -2369,7 +2459,7 @@ msgstr "Vul een naam in"
 msgid "Enter a name for this area."
 msgstr "Voer een naam in voor dit gebied."
 
-#: views/modals/service.html:100
+#: views/modals/service.html:93
 msgid "Enter an email address"
 msgstr "Vul een e-mailadres in"
 
@@ -2379,17 +2469,17 @@ msgstr "Vul een onderwerp in"
 
 #: views/modals/area.html:137 views/modals/area.html:198
 #: views/modals/area.html:284 views/modals/area.html:354
-#: views/modals/area.html:520 views/modals/area.html:649
+#: views/modals/area.html:527 views/modals/area.html:656
 msgid "Enter begin time"
 msgstr "Voer de begintijd in"
 
 #: views/modals/area.html:149 views/modals/area.html:204
 #: views/modals/area.html:296 views/modals/area.html:366
-#: views/modals/area.html:532 views/modals/area.html:661
+#: views/modals/area.html:539 views/modals/area.html:668
 msgid "Enter end time"
 msgstr "Voer de eindtijd in"
 
-#: views/modals/service.html:202
+#: views/modals/service.html:185
 msgid "Enter green GPIO pin"
 msgstr "Voer de groene GPIO-pin in"
 
@@ -2401,7 +2491,7 @@ msgstr "Voer hoogte in"
 msgid "Enter number"
 msgstr "Voer nummer in"
 
-#: views/modals/service.html:188
+#: views/modals/service.html:171
 msgid "Enter red GPIO pin"
 msgstr "Voer de rode GPIO-pin in"
 
@@ -2409,7 +2499,7 @@ msgstr "Voer de rode GPIO-pin in"
 msgid "Enter search terms"
 msgstr "Voer zoektermen in"
 
-#: views/modals/service.html:75
+#: views/modals/service.html:71
 msgid "Enter the address"
 msgstr "Vul het adres in"
 
@@ -2437,27 +2527,43 @@ msgstr "Voer het maximale aantal uren in"
 msgid "Enter the minimum amount of hours"
 msgstr "Voer het minimum aantal uren in"
 
+#: views/modals/service.html:242 views/modals/service.html:260
+msgid "Enter the MQTT server address name or ip"
+msgstr "Voer de adresnaam of ip van de MQTT-server in"
+
+#: views/modals/service.html:249
+msgid "Enter the MQTT server port number"
+msgstr "Voer het MQTT-serverpoortnummer in"
+
 #: views/modals/area.html:478
 msgid "Enter the offset"
 msgstr "Voer de offset in"
 
-#: views/modals/service.html:107
+#: views/modals/service.html:129
+msgid "Enter the Pushover API token"
+msgstr "Voer de Pushover API-token in"
+
+#: views/modals/service.html:135
+msgid "Enter the Pushover user key"
+msgstr "Voer de Pushover-gebruikerssleutel in"
+
+#: views/modals/service.html:99
 msgid "Enter the SMTP server address name or ip"
 msgstr "Voer de adresnaam of ip van de SMTP-server in"
 
-#: views/modals/service.html:131 views/modals/service.html:150
-#: views/modals/service.html:170 views/modals/service.html:177
-#: views/modals/service.html:221 views/modals/service.html:235
+#: views/modals/service.html:120 views/modals/service.html:154
+#: views/modals/service.html:160 views/modals/service.html:204
+#: views/modals/service.html:218 views/modals/service.html:275
 msgid "Enter the SMTP server password"
 msgstr "Voer het SMTP-serverwachtwoord in"
 
-#: views/modals/service.html:114
+#: views/modals/service.html:105
 msgid "Enter the SMTP server port number"
 msgstr "Voer het SMTP-serverpoortnummer in"
 
-#: views/modals/service.html:124 views/modals/service.html:143
-#: views/modals/service.html:163 views/modals/service.html:214
-#: views/modals/service.html:228 views/modals/service.html:246
+#: views/modals/service.html:114 views/modals/service.html:148
+#: views/modals/service.html:197 views/modals/service.html:211
+#: views/modals/service.html:229 views/modals/service.html:268
 msgid "Enter the SMTP server username"
 msgstr "Voer de gebruikersnaam van de SMTP-server in"
 
@@ -2465,7 +2571,7 @@ msgstr "Voer de gebruikersnaam van de SMTP-server in"
 msgid "Enter width"
 msgstr "Breedte invoeren"
 
-#: views/modals/service.html:195
+#: views/modals/service.html:178
 msgid "Enter yellow GPIO pin"
 msgstr "Voer de gele GPIO-pin in"
 
@@ -2525,7 +2631,7 @@ msgstr "Max. Vermogen in procenten"
 msgid "Messages per minute"
 msgstr "Berichten per minuut"
 
-#: views/modals/area.html:875 views/modals/area.html:877
+#: views/modals/area.html:1027 views/modals/area.html:1029
 msgid "minutes"
 msgstr "minuten"
 
@@ -2614,8 +2720,8 @@ msgstr "Archiveren selecteren"
 msgid "Select a sound card"
 msgstr "Selecteer een geluidskaart"
 
-#: views/modals/area.html:592 views/modals/area.html:605
-#: views/modals/area.html:721 views/modals/area.html:734
+#: views/modals/area.html:599 views/modals/area.html:612
+#: views/modals/area.html:728 views/modals/area.html:741
 msgid "Select a state"
 msgstr "Kies een status"
 
@@ -2657,7 +2763,7 @@ msgid "Select playlists"
 msgstr "Selecteer afspeellijsten"
 
 #: views/modals/area.html:179 views/modals/area.html:222
-#: views/modals/area.html:630 views/modals/area.html:760
+#: views/modals/area.html:637 views/modals/area.html:767
 msgid "Select relays"
 msgstr "Selecteer schakelaars"
 
@@ -2670,7 +2776,7 @@ msgid "Select sensors"
 msgstr "Selecteer sensoren"
 
 #: views/modals/message.html:20 views/modals/sensor.html:34
-#: views/modals/service.html:20 views/modals/service.html:66
+#: views/modals/service.html:20 views/modals/service.html:63
 msgid "Select type"
 msgstr "Selecteer type"
 
@@ -2694,7 +2800,11 @@ msgstr "Bewegingsvakken weergeven"
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI uitschakelen"
 
-#: views/modals/area.html:618 views/modals/area.html:748
+#: terrariumNotification.py:181
+msgid "Telegram"
+msgstr "Telegram"
+
+#: views/modals/area.html:625 views/modals/area.html:755
 msgid "Threshold"
 msgstr "Drempel"
 
@@ -2753,6 +2863,12 @@ msgstr "Wattage wanneer ingeschakeld"
 #: views/modals/weather.html:18
 msgid "Weather data source url"
 msgstr "URL van bron voor weergegevens"
+
+#~ msgid "Twitter"
+#~ msgstr "Twitter"
+
+#~ msgid "Usage"
+#~ msgstr "Gebruik"
 
 #~ msgid "Minimal moist value"
 #~ msgstr "Minimale vochtwaarde"
@@ -2820,9 +2936,6 @@ msgstr "URL van bron voor weergegevens"
 
 #~ msgid "PH"
 #~ msgstr "PH"
-
-#~ msgid "Step change"
-#~ msgstr "Stapverandering"
 
 #~ msgid "Action could not be satisfied"
 #~ msgstr "Actie kon niet worden uitgevoerd"
@@ -3702,9 +3815,6 @@ msgstr "URL van bron voor weergegevens"
 #~ msgid "GPIO"
 #~ msgstr "GPIO"
 
-#~ msgid "Remote"
-#~ msgstr "Extern"
-
 #~ msgid "No doors available"
 #~ msgstr "Geen deuren beschikbaar"
 
@@ -4218,9 +4328,6 @@ msgstr "URL van bron voor weergegevens"
 
 #~ msgid "Left side"
 #~ msgstr "Linker kant"
-
-#~ msgid "values"
-#~ msgstr "waardes"
 
 #~ msgid "The configured name"
 #~ msgstr "De geconfigureerde naam"
@@ -4904,9 +5011,6 @@ msgstr "URL van bron voor weergegevens"
 #~ msgid "Timer stop time"
 #~ msgstr "Klok stop tijd"
 
-#~ msgid "Timer on duration"
-#~ msgstr "Timer aan tijdsduur"
-
 #~ msgid "Dimmer action duration"
 #~ msgstr "Dimmer tijd"
 
@@ -5337,9 +5441,6 @@ msgstr "URL van bron voor weergegevens"
 
 #~ msgid "Sensor distance"
 #~ msgstr "Sensor afstand"
-
-#~ msgid "Sensor ph"
-#~ msgstr "Sensor ph"
 
 #~ msgid "Switch status"
 #~ msgstr "Schakelaar status"
