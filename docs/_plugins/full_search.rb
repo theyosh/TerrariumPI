@@ -9,12 +9,12 @@ Jekyll::Hooks.register :site, :post_write do |site|
     posts.docs.each do |post|
       json_content += '{'
 
-      json_content += '"title": "' + escape(post.data['title']) + '",'
+      json_content += '"title": "' + escape(post.data['title'].gsub(/\s+/, ' ')) + '",'
       json_content += '"url": "' + site.baseurl +  post.url + '",'
       json_content += '"category": "' + join(post.data['categories'],",") + '",'
       json_content += '"tags": "' + join(post.data['tags'],",") + '",'
       json_content += '"date": "' + post.date.to_s + '",'
-      json_content += '"snippet" : "' + replace(escape(strip_newlines(strip_html(post.content))), '\\' , '\\\\') + '"'
+      json_content += '"snippet" : "' + replace(escape(strip_newlines(strip_html(post.content)).gsub(/\s+/, ' ')), '\\' , '\\\\') + '"'
 
       json_content += '}'
 

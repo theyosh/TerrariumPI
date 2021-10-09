@@ -39,7 +39,6 @@
                             </thead>
                             <tbody>
                             {% for parameter in method[1].parameters %}
-
                                 {% if parameter.schema['$ref'] %}
                                     {% assign schema_path =  parameter.schema['$ref'] | remove: "#/" | split: "/"  %}
                                     {% assign schema = swagger %}
@@ -48,7 +47,6 @@
                                     {% endfor %}
 
                                     {% for item in schema.properties %}
-
                                         {% unless item[1].readOnly %}
                                             <tr>
                                                 <td>
