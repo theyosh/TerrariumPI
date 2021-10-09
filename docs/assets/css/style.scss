@@ -14,7 +14,9 @@ div.post-content a.external:after,
 footer a.external:after {
   content: "\f35d";
   padding-left: 0.2rem;
-  font-size: 0.8rem;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 0.75rem;
 }
 
 ul.jekyllcodex_accordion {padding-left: 0rem; position: relative; margin: 1.4rem 0!important; border-bottom: 1px solid rgba(0,0,0,0.25); padding-bottom: 0;}

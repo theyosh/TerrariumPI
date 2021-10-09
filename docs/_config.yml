@@ -98,7 +98,7 @@ jekyll-minifier:
     harmony: true
 
 target-blank:
-    add_css_classes: external fas
+    add_css_classes: external
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
