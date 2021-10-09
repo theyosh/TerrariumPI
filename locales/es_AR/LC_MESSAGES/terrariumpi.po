@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2021-10-09 23:18+CEST\n"
+"POT-Creation-Date: 2021-10-09 23:27+CEST\n"
 "PO-Revision-Date: 2020-09-14 14:14+0000\n"
 "Last-Translator: Marcnr1984 <marcnruiz@gmail.com>\n"
 "Language-Team: Spanish (Argentina) <https://weblate.theyosh.nl/projects/"
@@ -1240,13 +1240,15 @@ msgid "After x minutes change to value or at exactly a time stamp."
 msgstr ""
 
 #: views/modals/area.html:834
-msgid "Enter a druation in minutes or the actual time of the day."
-msgstr ""
+#, fuzzy
+#| msgid "Timer period on duration in minutes"
+msgid "Enter a duration in minutes or the actual time of the day."
+msgstr "Duración del período del temporizador en minutos"
 
 #: views/modals/area.html:842
 msgid ""
 "Enter a negative or positive value for a relative action. A number is "
-"threated as an absolute value."
+"treated as an absolute value."
 msgstr ""
 
 #: views/modals/area.html:851

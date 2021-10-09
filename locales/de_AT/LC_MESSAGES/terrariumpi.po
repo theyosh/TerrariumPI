@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-10-09 23:18+CEST\n"
+"POT-Creation-Date: 2021-10-09 23:27+CEST\n"
 "PO-Revision-Date: 2021-08-13 10:53+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
@@ -1153,13 +1153,15 @@ msgid "After x minutes change to value or at exactly a time stamp."
 msgstr ""
 
 #: views/modals/area.html:834
-msgid "Enter a druation in minutes or the actual time of the day."
-msgstr ""
+#, fuzzy
+#| msgid "Timer period on duration in minutes"
+msgid "Enter a duration in minutes or the actual time of the day."
+msgstr "Timer-Dauer in Minuten"
 
 #: views/modals/area.html:842
 msgid ""
 "Enter a negative or positive value for a relative action. A number is "
-"threated as an absolute value."
+"treated as an absolute value."
 msgstr ""
 
 #: views/modals/area.html:851
