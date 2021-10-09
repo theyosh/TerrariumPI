@@ -1,7 +1,7 @@
 ---
 title: Donate
 icon: fas fa-donate
-order: 8
+order: 9
 
 image:
   src: /assets/img/Donations.webp

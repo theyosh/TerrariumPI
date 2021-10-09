@@ -8,6 +8,8 @@ $tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
 
 @import "{{ site.theme }}";
 
+@import "swagger";
+
 div.post-content a.external:after,
 footer a.external:after {
   content: "\f35d";
