@@ -9,7 +9,6 @@ image:
   alt: TerrariumPI REST API
 
 data: terrariumpi
-api_url_prefix: /api/v1
 ---
 Here you can find information about the TerrariumPI REST API. An interactive version can be found at your own TerrariumPI at `http://[raspberrypi]:8090/api/swagger/`
 
