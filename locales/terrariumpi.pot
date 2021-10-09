@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2021-10-09 23:18+CEST\n"
+"POT-Creation-Date: 2021-10-09 23:27+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1010,11 +1010,11 @@ msgid "After x minutes change to value or at exactly a time stamp."
 msgstr ""
 
 #: views/modals/area.html:834
-msgid "Enter a druation in minutes or the actual time of the day."
+msgid "Enter a duration in minutes or the actual time of the day."
 msgstr ""
 
 #: views/modals/area.html:842
-msgid "Enter a negative or positive value for a relative action. A number is threated as an absolute value."
+msgid "Enter a negative or positive value for a relative action. A number is treated as an absolute value."
 msgstr ""
 
 #: views/modals/area.html:851
