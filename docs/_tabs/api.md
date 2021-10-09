@@ -2,12 +2,15 @@
 title: API
 icon: fas fa-file-alt
 order: 8
-layout: swagger
+layout: post
 
 image:
-  src: /assets/img/Donations.webp
-  alt: Donations header image
+  src: /assets/img/API_REST.webp
+  alt: TerrariumPI REST API
 
 data: terrariumpi
+api_url_prefix: /api/v1
 ---
 Here you can find information about the TerrariumPI REST API. An interactive version can be found at your own TerrariumPI at `http://[raspberrypi]:8090/api/swagger/`
+
+{% include swagger.html %}

@@ -1,8 +1,3 @@
----
-layout: post
----
-{{ content }}
-
 {% if page.data %}
 {% assign swagger = site.data[page.data] %}
 {% else %}
@@ -11,7 +6,7 @@ layout: post
 
 {% for route in swagger.paths %}
 <div class="swagger-paths">
-    <h2 class="swagger-path"><a href="#{{ route[0] }}" name="{{ route[0] }}">{{ route[0] }}</a></h2>
+    <h2 class="swagger-path"><a href="#{{ page.api_url_prefix }}{{ route[0] }}" name="{{ route[0] }}">{{ page.api_url_prefix }}{{ route[0] }}</a></h2>
     {% for method in route[1] %}
     <div class="swagger-method swagger-method-{{ method[0] }}">
         <h3 class="swagger-method-title">
