@@ -5,11 +5,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2021-08-13 12:32+CEST\n"
+"POT-Creation-Date: 2021-10-09 23:18+CEST\n"
 "PO-Revision-Date: 2021-08-16 07:40+0000\n"
 "Last-Translator: ntfd0 <nekromant.ntfd@gmail.com>\n"
-"Language-Team: Japanese <https://weblate.theyosh.nl/projects/terrariumpi/"
-"4-x-y-z/ja/>\n"
+"Language-Team: Japanese <https://weblate.theyosh.nl/projects/terrariumpi/4-x-"
+"y-z/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,10 +53,16 @@ msgstr ""
 
 #: terrariumArea.py:79
 #, fuzzy
+#| msgid "fertility"
+msgid "Fertility"
+msgstr "土壌肥沃度"
+
+#: terrariumArea.py:85
+#, fuzzy
 msgid "Moisture"
 msgstr "モイスチャー"
 
-#: terrariumArea.py:85
+#: terrariumArea.py:91
 msgid "pH"
 msgstr "pH"
 
@@ -140,92 +146,121 @@ msgstr "水流"
 msgid "wattage"
 msgstr "ワット数"
 
-#: terrariumEngine.py:1055 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1071 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "稼働時間"
 
-#: terrariumEngine.py:1061
+#: terrariumEngine.py:1077
 #, fuzzy
 msgid "System load"
 msgstr "システム負荷"
 
-#: terrariumEngine.py:1067 views/status.html:44
+#: terrariumEngine.py:1083 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU温度"
 
-#: terrariumEngine.py:1073
+#: terrariumEngine.py:1089
 msgid "Storage"
 msgstr "ストレージ"
 
-#: terrariumEngine.py:1079
+#: terrariumEngine.py:1095
 msgid "Memory"
 msgstr "メモリー"
 
-#: terrariumEngine.py:1096
+#: terrariumEngine.py:1112
 msgid "average {sensor_type}"
 msgstr "平均{sensor_type}"
 
-#: terrariumEngine.py:1267
+#: terrariumEngine.py:1283
 msgid "last update"
 msgstr "最新更新"
 
-#: terrariumNotification.py:42
+#: terrariumNotification.py:39
 #, fuzzy
 msgid "Authentication login error"
 msgstr "ログイン認証エラー"
 
-#: terrariumNotification.py:43
+#: terrariumNotification.py:40
 #, fuzzy
 msgid "System warning"
 msgstr "システム警告"
 
-#: terrariumNotification.py:44
+#: terrariumNotification.py:41
 msgid "System error"
 msgstr "システムエラー"
 
-#: terrariumNotification.py:164
+#: terrariumNotification.py:43
+#, fuzzy
+#| msgid "last update"
+msgid "Sensor update"
+msgstr "最新更新"
+
+#: terrariumNotification.py:44
+#, fuzzy
+#| msgid "Low alarm"
+msgid "Sensor alarm"
+msgstr "定値アラーム"
+
+#: terrariumNotification.py:46
+#, fuzzy
+#| msgid "Save changes"
+msgid "Relay change"
+msgstr "変更を保存する"
+
+#: terrariumNotification.py:48
+#, fuzzy
+#| msgid "Button settings"
+msgid "Button change"
+msgstr "ボタン設定"
+
+#: terrariumNotification.py:50
+msgid "Webcam archive"
+msgstr ""
+
+#: terrariumNotification.py:172
 msgid "Display"
 msgstr "表示器"
 
-#: terrariumNotification.py:169
+#: terrariumNotification.py:176
 msgid "Email"
 msgstr "メール"
 
-#: terrariumNotification.py:174
-msgid "Pushover"
-msgstr "Pushover"
-
-#: terrariumNotification.py:179
-msgid "Telegram"
-msgstr "Telegram"
-
-#: terrariumNotification.py:184
+#: terrariumNotification.py:186
 #, fuzzy
 msgid "Traffic light"
 msgstr "信号灯"
 
-#: terrariumNotification.py:189
-msgid "Twitter"
-msgstr "Twitter"
-
-#: terrariumNotification.py:194
+#: terrariumNotification.py:190
 #, fuzzy
 msgid "Web-hook"
 msgstr "Webフック"
 
-#: terrariumWebserver.py:158 terrariumWebserver.py:236
+#: terrariumNotification.py:194
+msgid "MQTT"
+msgstr ""
+
+#: terrariumNotification.py:198
+msgid "Pushover"
+msgstr "Pushover"
+
+#: terrariumWebserver.py:161 terrariumWebserver.py:239
 #, fuzzy
 msgid "Authenticate to make any changes"
 msgstr "変更するにはログインが必要です"
 
-#: terrariumWebserver.py:158 terrariumWebserver.py:236
+#: terrariumWebserver.py:161 terrariumWebserver.py:239
 #, fuzzy
 msgid "Authentication"
 msgstr "ログイン認証"
 
-#: terrariumWebserver.py:158 terrariumWebserver.py:236 views/index.html:2
+#: terrariumWebserver.py:161 terrariumWebserver.py:239 views/index.html:2
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
+
+#: views/about.html:2 views/about.html:9 views/includes/sidebar.html:292
+#: views/includes/sidebar.html:305
+msgid "About"
+msgstr "システム情報"
 
 #: views/audio_files.html:2 views/audio_files.html:10
 #: views/modals/playlist.html:62
@@ -257,8 +292,8 @@ msgstr "ファイル名"
 msgid "Size"
 msgstr "サイズ"
 
-#: views/audio_files.html:28 views/audio_files.html:39 views/playlists.html:31
-#: views/playlists.html:46
+#: views/audio_files.html:28 views/audio_files.html:39
+#: views/modals/area.html:803 views/playlists.html:31 views/playlists.html:46
 #, fuzzy
 msgid "Action"
 msgstr "動作"
@@ -524,8 +559,8 @@ msgid "Scan sensors"
 msgstr "センサーをスキャンする"
 
 #: views/includes/sidebar.html:111 views/modals/area.html:178
-#: views/modals/area.html:221 views/modals/area.html:629
-#: views/modals/area.html:759 views/relays.html:2
+#: views/modals/area.html:221 views/modals/area.html:636
+#: views/modals/area.html:766 views/relays.html:2
 msgid "Relays"
 msgstr "リレー"
 
@@ -604,24 +639,9 @@ msgstr "再起動"
 msgid "Shutdown"
 msgstr "シャットダウン"
 
-#: views/includes/sidebar.html:292 views/includes/sidebar.html:305
-msgid "About"
-msgstr "システム情報"
-
 #: views/includes/sidebar.html:297
 msgid "Help"
 msgstr "ヘルプ"
-
-#: views/includes/sidebar.html:311
-#, fuzzy
-msgid "Usage"
-msgstr "使用状況"
-
-#: views/includes/sidebar.html:317 views/modals/button.html:17
-#: views/modals/relay.html:17 views/modals/sensor.html:17
-#: views/modals/service.html:64 views/modals/webcam.html:21
-msgid "Hardware"
-msgstr "ハードウェア"
 
 #: views/layouts/modal.html:23
 msgid "Save changes"
@@ -717,7 +737,9 @@ msgstr "天気（夜・昼）"
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the relays."
-msgstr "該当エリアのモードを選択してください。モードによってリレーの起動タイミングや作動時間が変わります。"
+msgstr ""
+"該当エリアのモードを選択してください。モードによってリレーの起動タイミングや"
+"作動時間が変わります。"
 
 #: views/modals/area.html:76
 msgid "Minimum hours"
@@ -730,7 +752,8 @@ msgid ""
 "valid in weather mode. When the day is shorter then this minimum value, the "
 "day will be extended to this minimum value."
 msgstr ""
-"照明を点灯させる最小時間数です。天気モードを選択した場合のみ有効です。この最小時間数よりも日が短い場合は、点灯時間がこの時間数まで延長されます。"
+"照明を点灯させる最小時間数です。天気モードを選択した場合のみ有効です。この最"
+"小時間数よりも日が短い場合は、点灯時間がこの時間数まで延長されます。"
 
 #: views/modals/area.html:88
 msgid "Maximum hours"
@@ -742,7 +765,8 @@ msgid ""
 "valid in weather mode. When the day is longer then this maximum value, the "
 "day will be shortened to this maximum value."
 msgstr ""
-"照明を点灯させる最大時間数です。天気モードを選択した場合のみに有効です。この最大時間数よりも日が長い場合は、点灯時間がこの時間数まで短縮されます。"
+"照明を点灯させる最大時間数です。天気モードを選択した場合のみに有効です。この"
+"最大時間数よりも日が長い場合は、点灯時間がこの時間数まで短縮されます。"
 
 #: views/modals/area.html:100
 msgid "Hours shift"
@@ -753,7 +777,9 @@ msgstr "時間オフセット"
 msgid ""
 "The amount of time to shift in hours based on the sun rise time. Negative "
 "values will make the day start earlier."
-msgstr "日の出の時刻を基準に、点灯時刻を指定の時間分にオフセットします。マイナスの値は点灯時間を日の出より早まります。"
+msgstr ""
+"日の出の時刻を基準に、点灯時刻を指定の時間分にオフセットします。マイナスの値"
+"は点灯時間を日の出より早まります。"
 
 #: views/modals/area.html:106
 msgid "Enter a value between -12 and 12."
@@ -765,12 +791,13 @@ msgid "Main lights"
 msgstr "メイン照明"
 
 #: views/modals/area.html:118 views/modals/message.html:52
-#: views/modals/service.html:53
 #, fuzzy
 msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
-msgstr "選択された照明がこのケージのメイン照明である場合、このオプションをオンにしてください。他のエリアの照明チェックに使用されます。"
+msgstr ""
+"選択された照明がこのケージのメイン照明である場合、このオプションをオンにして"
+"ください。他のエリアの照明チェックに使用されます。"
 
 #: views/modals/area.html:126 views/modals/area.html:273
 msgid ""
@@ -788,38 +815,39 @@ msgstr "夜間設定"
 
 #: views/modals/area.html:136 views/modals/area.html:197
 #: views/modals/area.html:283 views/modals/area.html:353
-#: views/modals/area.html:519 views/modals/area.html:648
+#: views/modals/area.html:526 views/modals/area.html:655
 msgid "Begin time"
 msgstr "開始時間"
 
 #: views/modals/area.html:139 views/modals/area.html:286
-#: views/modals/area.html:522
+#: views/modals/area.html:529
 msgid "The time of the day when the relays are toggled on each day."
 msgstr "リレーをオンにする時間です。"
 
 #: views/modals/area.html:142 views/modals/area.html:154
 #: views/modals/area.html:166 views/modals/area.html:289
 #: views/modals/area.html:301 views/modals/area.html:359
-#: views/modals/area.html:371 views/modals/area.html:525
-#: views/modals/area.html:537 views/modals/area.html:654
-#: views/modals/area.html:666
+#: views/modals/area.html:371 views/modals/area.html:532
+#: views/modals/area.html:544 views/modals/area.html:661
+#: views/modals/area.html:673 views/modals/area.html:881
+#: views/modals/area.html:890
 msgid "Enter a valid time."
 msgstr "正しい時間値を入力してください。"
 
 #: views/modals/area.html:148 views/modals/area.html:203
 #: views/modals/area.html:295 views/modals/area.html:365
-#: views/modals/area.html:531 views/modals/area.html:660
+#: views/modals/area.html:538 views/modals/area.html:667
 msgid "End time"
 msgstr "終了時間"
 
 #: views/modals/area.html:151 views/modals/area.html:298
-#: views/modals/area.html:534
+#: views/modals/area.html:541
 msgid "The time of the day when the relays are toggled off each day."
 msgstr "リレーをオフにする時間です。"
 
 #: views/modals/area.html:160 views/modals/area.html:209
 #: views/modals/area.html:307 views/modals/area.html:377
-#: views/modals/area.html:543 views/modals/area.html:672
+#: views/modals/area.html:550 views/modals/area.html:679
 #, fuzzy
 msgid "On duration"
 msgstr "オン状態期間"
@@ -829,16 +857,18 @@ msgstr "オン状態期間"
 msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full day."
-msgstr "リレーがオン状態になっている期間。この値が日より短い場合、タイマー機能として使えます。「0」を入力すると丸一日になります。"
+msgstr ""
+"リレーがオン状態になっている期間。この値が日より短い場合、タイマー機能として"
+"使えます。「0」を入力すると丸一日になります。"
 
 #: views/modals/area.html:172 views/modals/area.html:215
 #: views/modals/area.html:319 views/modals/area.html:389
-#: views/modals/area.html:555 views/modals/area.html:684
+#: views/modals/area.html:562 views/modals/area.html:691
 msgid "Off duration"
 msgstr "オフ状態期間"
 
-#: views/modals/area.html:181 views/modals/area.html:632
-#: views/modals/area.html:762
+#: views/modals/area.html:181 views/modals/area.html:639
+#: views/modals/area.html:769
 msgid "Select the relays to toggle."
 msgstr "制御したいリレーを選択してください。"
 
@@ -846,7 +876,9 @@ msgstr "制御したいリレーを選択してください。"
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the players."
-msgstr "該当エリアのモードを選択してください。モードによってプレイヤーの起動タイミングや作動時間が変わります。"
+msgstr ""
+"該当エリアのモードを選択してください。モードによってプレイヤーの起動タイミン"
+"グや作動時間が変わります。"
 
 #: views/modals/area.html:257
 msgid "Sound card"
@@ -858,13 +890,14 @@ msgstr "該当ケージに使用されるサウンドカードを選択してく
 
 #: views/modals/area.html:313 views/modals/area.html:325
 #: views/modals/area.html:383 views/modals/area.html:395
-#: views/modals/area.html:549 views/modals/area.html:561
-#: views/modals/area.html:678 views/modals/area.html:690
+#: views/modals/area.html:556 views/modals/area.html:568
+#: views/modals/area.html:685 views/modals/area.html:697
+#: views/modals/area.html:898
 msgid "Enter a valid duration in minutes."
 msgstr "期間を分単位で正しく入力してください。"
 
-#: views/modals/area.html:322 views/modals/area.html:558
-#: views/modals/area.html:687
+#: views/modals/area.html:322 views/modals/area.html:565
+#: views/modals/area.html:694
 msgid ""
 "The duration when the relays should be stay off when switched off. Enter '0' "
 "to disable."
@@ -878,11 +911,11 @@ msgstr "再生するプレイリストを選択してください。"
 msgid "Select at least 1 playlist."
 msgstr "最低1個のプレイリストを選択してください。"
 
-#: views/modals/area.html:356 views/modals/area.html:651
+#: views/modals/area.html:356 views/modals/area.html:658
 msgid "The time of the day when the relays are toggled on each night."
 msgstr "リレーをオンにする夜の時刻。"
 
-#: views/modals/area.html:368 views/modals/area.html:663
+#: views/modals/area.html:368 views/modals/area.html:670
 msgid "The time of the day when the relays are toggled off each night."
 msgstr "リレーをオフにする夜の時刻。"
 
@@ -902,7 +935,9 @@ msgstr ""
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the actions."
-msgstr "該当エリアのモードを選択してください。動作のタイミングや作動期間に影響します。"
+msgstr ""
+"該当エリアのモードを選択してください。動作のタイミングや作動期間に影響しま"
+"す。"
 
 #: views/modals/area.html:444
 msgid "Select sensors to use for sensor based mode."
@@ -922,8 +957,8 @@ msgid "Enter the volume of the water tank."
 msgstr "水タンクの量を入力してください。"
 
 #: views/modals/area.html:459 views/modals/area.html:471
-#: views/modals/area.html:483 views/modals/area.html:623
-#: views/modals/area.html:753 views/modals/relay.html:62
+#: views/modals/area.html:483 views/modals/area.html:630
+#: views/modals/area.html:760 views/modals/relay.html:62
 #: views/modals/relay.html:72 views/modals/sensor.html:88
 #: views/modals/sensor.html:100 views/modals/sensor.html:112
 #: views/modals/sensor.html:124 views/modals/sensor.html:136
@@ -971,120 +1006,176 @@ msgstr "照明"
 msgid "Select source when it is 'day'."
 msgstr "「昼」の場合の基準を選択してください。"
 
-#: views/modals/area.html:512
-msgid "High alarm"
-msgstr "高値アラーム"
-
-#: views/modals/area.html:512
+#: views/modals/area.html:514
 msgid "Low alarm"
 msgstr "定値アラーム"
 
-#: views/modals/area.html:546 views/modals/area.html:675
+#: views/modals/area.html:516
+msgid "High alarm"
+msgstr "高値アラーム"
+
+#: views/modals/area.html:518
+#, fuzzy
+msgid "Variation"
+msgstr "期間"
+
+#: views/modals/area.html:553 views/modals/area.html:682
 msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
 
-#: views/modals/area.html:567 views/modals/area.html:696
+#: views/modals/area.html:574 views/modals/area.html:703
 #, fuzzy
 msgid "Power on time"
 msgstr "電源オン時間"
 
-#: views/modals/area.html:570 views/modals/area.html:699
+#: views/modals/area.html:577 views/modals/area.html:706
 msgid "The duration in seconds to toggle on the relay."
 msgstr "リレーをオンにする時間（秒単位）。"
 
-#: views/modals/area.html:573 views/modals/area.html:585
-#: views/modals/area.html:702 views/modals/area.html:714
+#: views/modals/area.html:580 views/modals/area.html:592
+#: views/modals/area.html:709 views/modals/area.html:721
 msgid "Enter a valid duration in seconds."
 msgstr ""
 
-#: views/modals/area.html:579 views/modals/area.html:708
+#: views/modals/area.html:586 views/modals/area.html:715
 #, fuzzy
 msgid "Settle time"
 msgstr "待機時間"
 
-#: views/modals/area.html:582 views/modals/area.html:711
+#: views/modals/area.html:589 views/modals/area.html:718
 #, fuzzy
 msgid "The duration in seconds between two actions."
 msgstr "2つの動作間の秒単位の期間。"
 
-#: views/modals/area.html:591 views/modals/area.html:720
+#: views/modals/area.html:598 views/modals/area.html:727
 msgid "Light status"
 msgstr "照明の状態"
 
-#: views/modals/area.html:593 views/modals/area.html:606
-#: views/modals/area.html:722 views/modals/area.html:735
+#: views/modals/area.html:600 views/modals/area.html:613
+#: views/modals/area.html:729 views/modals/area.html:742
 #: views/modals/webcam.html:143 views/modals/webcam.html:158
 #, fuzzy
 msgid "Ignored"
 msgstr "無視"
 
-#: views/modals/area.html:594 views/modals/area.html:723
+#: views/modals/area.html:601 views/modals/area.html:730
 msgid "On"
 msgstr "オン"
 
-#: views/modals/area.html:595 views/modals/area.html:724
+#: views/modals/area.html:602 views/modals/area.html:731
 msgid "Off"
 msgstr "オフ"
 
-#: views/modals/area.html:598
+#: views/modals/area.html:605
 msgid "Select the lights status."
 msgstr "照明の状態を選択してください。"
 
-#: views/modals/area.html:604 views/modals/area.html:733
+#: views/modals/area.html:611 views/modals/area.html:740
 msgid "Door status"
 msgstr "ドアの状態"
 
-#: views/modals/area.html:607 views/modals/area.html:736
+#: views/modals/area.html:614 views/modals/area.html:743
 #: views/modals/webcam.html:160
 msgid "Open"
 msgstr "開"
 
-#: views/modals/area.html:608 views/modals/area.html:737
+#: views/modals/area.html:615 views/modals/area.html:744
 msgid "Closed"
 msgstr "閉"
 
-#: views/modals/area.html:611 views/modals/area.html:740
+#: views/modals/area.html:618 views/modals/area.html:747
 msgid "Select the door status."
 msgstr "ドアの状態を選択してください。"
 
-#: views/modals/area.html:617 views/modals/area.html:747
+#: views/modals/area.html:624 views/modals/area.html:754
 #, fuzzy
 msgid "Alarm threshold"
 msgstr "アラームしきい値"
 
-#: views/modals/area.html:620 views/modals/area.html:750
+#: views/modals/area.html:627 views/modals/area.html:757
 msgid "Enter the amount of alarms before action take place."
 msgstr "アクションが実行されるまでの最大アラーム作動数を入力してください。"
 
-#: views/modals/area.html:727
+#: views/modals/area.html:734
 msgid "Select the light status."
 msgstr "照明の状態を選択してください。"
 
-#: views/modals/area.html:777
+#: views/modals/area.html:785
+#, fuzzy
+msgid "When"
+msgstr "オンの場合"
+
+#: views/modals/area.html:791
+#, fuzzy
+#| msgid "Dimmer on duration"
+msgid "Period/duration"
+msgstr "調光器の「オン」期間"
+
+#: views/modals/area.html:797
+msgid "Value"
+msgstr ""
+
+#: views/modals/area.html:826
+msgid "After x minutes change to value or at exactly a time stamp."
+msgstr ""
+
+#: views/modals/area.html:834
+msgid "Enter a druation in minutes or the actual time of the day."
+msgstr ""
+
+#: views/modals/area.html:842
+msgid ""
+"Enter a negative or positive value for a relative action. A number is "
+"threated as an absolute value."
+msgstr ""
+
+#: views/modals/area.html:851
+#, fuzzy
+#| msgid "Add new relay"
+msgid "Add a new row"
+msgstr "新しいリレーを追加する"
+
+#: views/modals/area.html:860
+msgid "Remove row"
+msgstr ""
+
+#: views/modals/area.html:876
+#, fuzzy
+#| msgid "5 minutes"
+msgid "After x minutes"
+msgstr "5分"
+
+#: views/modals/area.html:877
+#, fuzzy
+#| msgid "Up time"
+msgid "At time"
+msgstr "稼働時間"
+
+#: views/modals/area.html:929
 msgid "Dimmer on duration"
 msgstr "調光器の「オン」期間"
 
-#: views/modals/area.html:781
+#: views/modals/area.html:933
 msgid "Dimmer of duration"
 msgstr "調光器の「オフ」期間"
 
-#: views/modals/area.html:791
+#: views/modals/area.html:943
 msgid ""
 "Select the delay and duration for the dimmer to go to on or off in minutes. "
 "Max duration is 180 minutes."
 msgstr ""
 
-#: views/modals/area.html:798
+#: views/modals/area.html:950
 msgid "Relay delay on"
 msgstr "リレーの「オン」遅延"
 
-#: views/modals/area.html:802
+#: views/modals/area.html:954
 msgid "Relay delay off"
 msgstr "リレーの「オフ」遅延"
 
-#: views/modals/area.html:810
+#: views/modals/area.html:962
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
@@ -1093,6 +1184,12 @@ msgstr ""
 #: views/modals/button.html:11
 msgid "Button settings"
 msgstr "ボタン設定"
+
+#: views/modals/button.html:17 views/modals/relay.html:17
+#: views/modals/sensor.html:17 views/modals/service.html:61
+#: views/modals/webcam.html:21
+msgid "Hardware"
+msgstr "ハードウェア"
 
 #: views/modals/button.html:23
 msgid "Select the hardware type for this button."
@@ -1104,7 +1201,7 @@ msgid "Please select a hardware type."
 msgstr "種類を選択してください。"
 
 #: views/modals/button.html:32 views/modals/relay.html:32
-#: views/modals/sensor.html:47 views/modals/service.html:74
+#: views/modals/sensor.html:47 views/modals/service.html:70
 #: views/modals/webcam.html:36
 msgid "Address"
 msgstr "アドレス"
@@ -1132,7 +1229,9 @@ msgstr "コンデンサ容量（マイクロファラド単位）"
 msgid ""
 "Enter the capacitor value in &micro;F as this will influence the light "
 "calculation."
-msgstr "コンデンサの容量をマイクロファラド（&micro;F）で入力してください。それによって光の計算が変わります。"
+msgstr ""
+"コンデンサの容量をマイクロファラド（&micro;F）で入力してください。それによっ"
+"て光の計算が変わります。"
 
 #: views/modals/button.html:76 views/modals/relay.html:98
 #: views/modals/relay.html:110 views/modals/relay.html:122
@@ -1176,7 +1275,9 @@ msgstr "該当ケージで使用されるドアを選択してください。"
 msgid ""
 "Select the webcams that are used with this enclosure. You can use html "
 "colors and fonts and images."
-msgstr "該当ケージで使用されているカメラを選択してください。HTMLカラーコード、フォントや画像を利用できます。"
+msgstr ""
+"該当ケージで使用されているカメラを選択してください。HTMLカラーコード、フォン"
+"トや画像を利用できます。"
 
 #: views/modals/event.html:10 views/modals/event.html:25
 msgid "Event"
@@ -1452,90 +1553,118 @@ msgstr ""
 msgid "Notification service settings"
 msgstr "通知サービス設定"
 
-#: views/modals/service.html:82
+#: views/modals/service.html:77
 msgid "Show title"
 msgstr "タイトルを表示"
 
-#: views/modals/service.html:87
+#: views/modals/service.html:82
 msgid "Show a title on the display."
 msgstr "表示器にタイトルを表示します。"
 
-#: views/modals/service.html:99
+#: views/modals/service.html:92
 msgid "Receiver email"
 msgstr "受信用メールアドレス"
 
-#: views/modals/service.html:106
+#: views/modals/service.html:98
 msgid "SMTP Server address"
 msgstr "SMTPサーバーアドレス"
 
-#: views/modals/service.html:113
+#: views/modals/service.html:104
 msgid "SMTP Server port"
 msgstr "SMTPサーバーポート"
 
-#: views/modals/service.html:117
+#: views/modals/service.html:108
 msgid "The email notification service will auto detect SSL/TLS connections."
 msgstr "メール通知サービスは、SSL・TLS接続を自動的に検出します。"
 
-#: views/modals/service.html:123
+#: views/modals/service.html:113
 msgid "SMTP Server username"
 msgstr "SMTPサーバーのユーザー名"
 
-#: views/modals/service.html:130
+#: views/modals/service.html:119
 msgid "SMTP Server password"
 msgstr "SMTPサーバーのパスワード"
 
-#: views/modals/service.html:142
+#: views/modals/service.html:128
 msgid "API Token"
 msgstr "APIトークン"
 
-#: views/modals/service.html:149
+#: views/modals/service.html:134
 msgid "User key"
 msgstr "ユーザーキー"
 
-#: views/modals/service.html:162
+#: views/modals/service.html:147
 msgid "Bot Token"
 msgstr "ボットトークン"
 
-#: views/modals/service.html:169
+#: views/modals/service.html:153
 msgid "Username"
 msgstr "ユーザー名"
 
-#: views/modals/service.html:176
+#: views/modals/service.html:159
 msgid "HTTP Proxy"
 msgstr "HTTP プロキシー"
 
-#: views/modals/service.html:187 views/modals/webcam.html:188
+#: views/modals/service.html:170 views/modals/webcam.html:188
 msgid "Red"
 msgstr "赤"
 
-#: views/modals/service.html:194
+#: views/modals/service.html:177
 msgid "Yellow"
 msgstr "黄"
 
-#: views/modals/service.html:201 views/modals/webcam.html:189
+#: views/modals/service.html:184 views/modals/webcam.html:189
 msgid "Green"
 msgstr "青"
 
-#: views/modals/service.html:213
+#: views/modals/service.html:196
 #, fuzzy
 msgid "Customer key"
 msgstr "カスタマーキー"
 
-#: views/modals/service.html:220
+#: views/modals/service.html:203
 msgid "Customer secret"
 msgstr "カスタマーシークレット"
 
-#: views/modals/service.html:227
+#: views/modals/service.html:210
 msgid "Access token"
 msgstr "アクセストークン"
 
-#: views/modals/service.html:234
+#: views/modals/service.html:217
 msgid "Access token secret"
 msgstr "アクセストークンシークレット"
 
-#: views/modals/service.html:245
+#: views/modals/service.html:228
 msgid "Full post url"
 msgstr ""
+
+#: views/modals/service.html:241
+#, fuzzy
+#| msgid "SMTP Server address"
+msgid "MQTT Server address"
+msgstr "SMTPサーバーアドレス"
+
+#: views/modals/service.html:248
+#, fuzzy
+#| msgid "SMTP Server port"
+msgid "MQTT Server port"
+msgstr "SMTPサーバーポート"
+
+#: views/modals/service.html:258
+msgid "MQTT secure connection"
+msgstr ""
+
+#: views/modals/service.html:267
+#, fuzzy
+#| msgid "SMTP Server username"
+msgid "MQTT Server username"
+msgstr "SMTPサーバーのユーザー名"
+
+#: views/modals/service.html:274
+#, fuzzy
+#| msgid "SMTP Server password"
+msgid "MQTT Server password"
+msgstr "SMTPサーバーのパスワード"
 
 #: views/modals/weather.html:11
 msgid "Weather settings"
@@ -1552,7 +1681,8 @@ msgstr "ソースURL"
 
 #: views/modals/weather.html:20
 msgid "Enter the full OpenWeatherMap api url like: %s"
-msgstr "OpenWeatherMapのAPI用のURLを次のようなフォーマットで入力してください：％s"
+msgstr ""
+"OpenWeatherMapのAPI用のURLを次のようなフォーマットで入力してください：％s"
 
 #: views/modals/weather.html:23
 msgid "The entered url is not valid."
@@ -2272,7 +2402,7 @@ msgstr ""
 msgid "Current value"
 msgstr ""
 
-#: views/modals/area.html:875 views/modals/area.html:877
+#: views/modals/area.html:1027 views/modals/area.html:1029
 msgid "Delay"
 msgstr ""
 
@@ -2296,7 +2426,7 @@ msgstr ""
 msgid "Delete event {title}"
 msgstr ""
 
-#: views/notifications.html:140
+#: views/notifications.html:143
 msgid "Delete message"
 msgstr ""
 
@@ -2332,7 +2462,7 @@ msgstr ""
 msgid "Edit enclosure"
 msgstr ""
 
-#: views/notifications.html:137
+#: views/notifications.html:140
 msgid "Edit message"
 msgstr ""
 
@@ -2356,6 +2486,12 @@ msgstr ""
 msgid "Enter a description"
 msgstr ""
 
+#: views/modals/area.html:887
+#, fuzzy
+#| msgid "Enter a valid duration in minutes."
+msgid "Enter a duration in minutes or time"
+msgstr "期間を分単位で正しく入力してください。"
+
 #: views/modals/message.html:64
 msgid "Enter a message"
 msgstr ""
@@ -2377,7 +2513,7 @@ msgstr ""
 msgid "Enter a name for this area."
 msgstr ""
 
-#: views/modals/service.html:100
+#: views/modals/service.html:93
 msgid "Enter an email address"
 msgstr ""
 
@@ -2387,17 +2523,17 @@ msgstr ""
 
 #: views/modals/area.html:137 views/modals/area.html:198
 #: views/modals/area.html:284 views/modals/area.html:354
-#: views/modals/area.html:520 views/modals/area.html:649
+#: views/modals/area.html:527 views/modals/area.html:656
 msgid "Enter begin time"
 msgstr ""
 
 #: views/modals/area.html:149 views/modals/area.html:204
 #: views/modals/area.html:296 views/modals/area.html:366
-#: views/modals/area.html:532 views/modals/area.html:661
+#: views/modals/area.html:539 views/modals/area.html:668
 msgid "Enter end time"
 msgstr ""
 
-#: views/modals/service.html:202
+#: views/modals/service.html:185
 msgid "Enter green GPIO pin"
 msgstr ""
 
@@ -2409,7 +2545,7 @@ msgstr ""
 msgid "Enter number"
 msgstr ""
 
-#: views/modals/service.html:188
+#: views/modals/service.html:171
 msgid "Enter red GPIO pin"
 msgstr ""
 
@@ -2417,7 +2553,7 @@ msgstr ""
 msgid "Enter search terms"
 msgstr ""
 
-#: views/modals/service.html:75
+#: views/modals/service.html:71
 msgid "Enter the address"
 msgstr ""
 
@@ -2445,27 +2581,45 @@ msgstr ""
 msgid "Enter the minimum amount of hours"
 msgstr ""
 
+#: views/modals/service.html:242 views/modals/service.html:260
+msgid "Enter the MQTT server address name or ip"
+msgstr ""
+
+#: views/modals/service.html:249
+msgid "Enter the MQTT server port number"
+msgstr ""
+
 #: views/modals/area.html:478
 msgid "Enter the offset"
 msgstr ""
 
-#: views/modals/service.html:107
+#: views/modals/service.html:129
+#, fuzzy
+#| msgid "Enter the resolution."
+msgid "Enter the Pushover API token"
+msgstr "解像度を入力してください。"
+
+#: views/modals/service.html:135
+msgid "Enter the Pushover user key"
+msgstr ""
+
+#: views/modals/service.html:99
 msgid "Enter the SMTP server address name or ip"
 msgstr ""
 
-#: views/modals/service.html:131 views/modals/service.html:150
-#: views/modals/service.html:170 views/modals/service.html:177
-#: views/modals/service.html:221 views/modals/service.html:235
+#: views/modals/service.html:120 views/modals/service.html:154
+#: views/modals/service.html:160 views/modals/service.html:204
+#: views/modals/service.html:218 views/modals/service.html:275
 msgid "Enter the SMTP server password"
 msgstr ""
 
-#: views/modals/service.html:114
+#: views/modals/service.html:105
 msgid "Enter the SMTP server port number"
 msgstr ""
 
-#: views/modals/service.html:124 views/modals/service.html:143
-#: views/modals/service.html:163 views/modals/service.html:214
-#: views/modals/service.html:228 views/modals/service.html:246
+#: views/modals/service.html:114 views/modals/service.html:148
+#: views/modals/service.html:197 views/modals/service.html:211
+#: views/modals/service.html:229 views/modals/service.html:268
 msgid "Enter the SMTP server username"
 msgstr ""
 
@@ -2473,7 +2627,7 @@ msgstr ""
 msgid "Enter width"
 msgstr ""
 
-#: views/modals/service.html:195
+#: views/modals/service.html:178
 msgid "Enter yellow GPIO pin"
 msgstr ""
 
@@ -2533,7 +2687,7 @@ msgstr ""
 msgid "Messages per minute"
 msgstr ""
 
-#: views/modals/area.html:875 views/modals/area.html:877
+#: views/modals/area.html:1027 views/modals/area.html:1029
 msgid "minutes"
 msgstr ""
 
@@ -2622,8 +2776,8 @@ msgstr ""
 msgid "Select a sound card"
 msgstr ""
 
-#: views/modals/area.html:592 views/modals/area.html:605
-#: views/modals/area.html:721 views/modals/area.html:734
+#: views/modals/area.html:599 views/modals/area.html:612
+#: views/modals/area.html:728 views/modals/area.html:741
 msgid "Select a state"
 msgstr ""
 
@@ -2665,7 +2819,7 @@ msgid "Select playlists"
 msgstr ""
 
 #: views/modals/area.html:179 views/modals/area.html:222
-#: views/modals/area.html:630 views/modals/area.html:760
+#: views/modals/area.html:637 views/modals/area.html:767
 msgid "Select relays"
 msgstr ""
 
@@ -2678,7 +2832,7 @@ msgid "Select sensors"
 msgstr ""
 
 #: views/modals/message.html:20 views/modals/sensor.html:34
-#: views/modals/service.html:20 views/modals/service.html:66
+#: views/modals/service.html:20 views/modals/service.html:63
 msgid "Select type"
 msgstr ""
 
@@ -2702,7 +2856,11 @@ msgstr ""
 msgid "Shutdown TerrariumPI"
 msgstr ""
 
-#: views/modals/area.html:618 views/modals/area.html:748
+#: terrariumNotification.py:181
+msgid "Telegram"
+msgstr "Telegram"
+
+#: views/modals/area.html:625 views/modals/area.html:755
 msgid "Threshold"
 msgstr ""
 
@@ -2761,3 +2919,10 @@ msgstr ""
 #: views/modals/weather.html:18
 msgid "Weather data source url"
 msgstr "気象データソースのURL"
+
+#~ msgid "Twitter"
+#~ msgstr "Twitter"
+
+#, fuzzy
+#~ msgid "Usage"
+#~ msgstr "使用状況"
