@@ -30,55 +30,108 @@ layout: post
                 </ul>
             {% endif %}
             {% if method[1].parameters %}
-            <div class="swagger-parameters">
-                <h4>Parameters</h4>
-                <table class="swagger-parameters-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Located in</th>
-                            <th>Description</th>
-                            <th>Type</th>
-                        <tr>
-                    </thead>
-                    <tbody>
+                <div class="swagger-parameters">
+                    <h4>Parameters</h4>
+                    <table class="swagger-parameters-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Located in</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                            <tr>
+                        </thead>
+                        <tbody>
                         {% for parameter in method[1].parameters %}
-                        <tr>
-                            <td>
-                                {% if parameter.required %}
-                                <span class="swagger-parameter-required">
-                                {% endif %}
-                                {{ parameter.name }}
-                                {% if parameter.required %}
-                                </span>
-                                {% endif %}
-                            </td>
-                            <td>{{ parameter.in }}</td>
-                            <td>{{ parameter.description }}</td>
-                            <td>
-                                {% if parameter.type %}
-                                {{ parameter.type | capitalize }}
-                                    {% if parameter.items %}
-                                    of {{ parameter.items.type | capitalize }}
-                                        {% if parameter.items.enum %}
-                                        allowed ({% for val in parameter.items.enum %}{{val}} {% endfor %})
+
+                            {% if parameter.schema['$ref'] %}
+                                {% assign schema_path =  parameter.schema['$ref'] | remove: "#/" | split: "/"  %}
+                                {% assign schema = swagger %}
+                                {% for path in schema_path %}
+                                {% assign schema = schema[path] %}
+                                {% endfor %}
+
+                                {% for item in schema.properties %}
+
+                                    {% unless item[1].readOnly %}
+                                        <tr>
+                                            <td>
+                                                {% if schema.required contains item[0] %}
+                                                    <span class="swagger-parameter-required">
+                                                {% endif %}
+                                                {{ item[0] }}
+                                                {% if schema.required contains item[0] %}
+                                                    </span>
+                                                {% endif %}
+                                            </td>
+                                            <td>body</td>
+                                            <td>
+                                                {{ item[1].description }}
+                                            </td>
+                                            <td>
+                                                {% if item[1].type %}
+                                                    {{ item[1].type | capitalize }}
+                                                    {% if item[1].items %}
+                                                        of {{ item[1].items.type | capitalize }}
+                                                        {% if item[1].items.enum %}
+                                                            allowed ({% for val in item[1].items.enum %}{{val}} {% endfor %})
+                                                        {% endif %}
+                                                    {% endif %}
+
+                                                {% elsif item[1].schema %}
+                                                    {% if item[1].schema.example %}
+                                                        {% highlight json %}{{ item[1].schema.example }}{% endhighlight %}
+                                                    {% else %}
+                                                        {% highlight json %}{{ item[1].schema }}{% endhighlight %}
+                                                    {% endif %}
+                                                {% else %}
+                                                String
+                                                {% endif %}
+                                                {% if item[1].default %}
+                                                    <br />Default: {{item[1].default}}
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endunless %}
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td>
+                                        {% if parameter.required %}
+                                        <span class="swagger-parameter-required">
                                         {% endif %}
-                                    {% endif %}
-                                {% elsif parameter.schema %}
-                                    {% if parameter.schema.example %}
-                                        {% highlight json %}{{ parameter.schema.example }}{% endhighlight %}
-                                    {% else %}
-                                        {% highlight json %}{{ parameter.schema }}{% endhighlight %}
-                                    {% endif %}
-                                {% else %}
-                                String
-                                {% endif %}
-                            </td>
-                        </tr>
+                                        {{ parameter.name }}
+                                        {% if parameter.required %}
+                                        </span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ parameter.in }}</td>
+                                    <td>{{ parameter.description }}</td>
+                                    <td>
+                                        {% if parameter.type %}
+                                        {{ parameter.type | capitalize }}
+                                            {% if parameter.items %}
+                                            of {{ parameter.items.type | capitalize }}
+                                                {% if parameter.items.enum %}
+                                                allowed ({% for val in parameter.items.enum %}{{val}} {% endfor %})
+                                                {% endif %}
+                                            {% endif %}
+                                        {% elsif parameter.schema %}
+                                            {% if parameter.schema.example %}
+                                                {% highlight json %}{{ parameter.schema.example }}{% endhighlight %}
+                                            {% else %}
+                                                {% highlight json %}{{ parameter.schema }}{% endhighlight %}
+                                            {% endif %}
+                                        {% else %}
+                                            String
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                     </tbody>
-                </table>
-            </div>
+                    </table>
+                </div>
             {% endif %}
             {% if method[1].responses %}
             <div class="swagger-response">
@@ -108,62 +161,12 @@ layout: post
     {% endfor %}
 </div>
 {% endfor %}
-
 <script type="text/javascript">
-// Helpers
-
-var slice = Array.prototype.slice;
-
-function $(expr, parent) {
-    return typeof expr === "string" ? (parent || document).querySelector(expr) : expr || null;
-}
-
-function $$(expr, parent) {
-    return slice.call((parent || document).querySelectorAll(expr));
-}
-
-$.bind = function(element, o) {
-    if (element) {
-        for (var event in o) {
-            var callback = o[event];
-
-            event.split(/\s+/).forEach(function (event) {
-                element.addEventListener(event, callback);
-            });
-        }
-    }
-};
-
-$.toggleDetails = function (element) {
-    if (element.classList.contains('open')) {
-        element.classList.remove('open');
-    }
-    else {
-        element.classList.add('open');
-    }
-}
-
-// Initialization
-
-function init() {
-    $$('.swagger-method-title').forEach(function (title) {
-        $.bind(title, {
-            'click': function (e) {
-                var details = $('.swagger-method-details', title.parentNode)
-                $.toggleDetails(details);
-                e.preventDefault();
-            }
-        });
-    });
-}
-
-
-// DOM already loaded?
-if (document.readyState !== "loading") {
-    init();
-}
-else {
-    // Wait for it
-    document.addEventListener("DOMContentLoaded", init);
-}
+/* Add open/close toggles for REST methods */
+$(document).ready(function(){
+    $('.swagger-method-title').on('click',function(event){
+        $(this).siblings('.swagger-method-details').toggleClass('open');
+        event.preventDefault();
+    })
+});
 </script>

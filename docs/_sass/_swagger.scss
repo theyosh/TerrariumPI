@@ -1,22 +1,27 @@
 $base-font-size: 16px;
 $spacing-unit: 0;
-$grey-color-light: #ff00ff;
-$color: #ff0000;
+$grey-color-light: #a2a19f;
 
 @mixin swagger-method($color) {
     border: 1px solid $color;
 
     .swagger-method-title {
         background: lighten($color, 30%);
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .swagger-method-link {
-        color: darken($color, 20%);
+        color: darken($color, 20%) !important;
     }
 
     .swagger-method-name {
         background: $color;
     }
+}
+
+.swagger-paths a {
+    border-bottom: none !important;
 }
 
 .swagger-path {
@@ -87,7 +92,8 @@ $color: #ff0000;
     font-size: $base-font-size;
 
     h5 {
-        margin: 10px 0 5px 0;
+        margin: 10px 0 5px 0 !important;
+        padding: 0 !important;
     }
 }
 
