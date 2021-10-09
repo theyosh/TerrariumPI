@@ -2281,7 +2281,22 @@
             "in": "path",
             "description": "A valid sensor type",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "altitude",
+              "co2",
+              "distance",
+              "fertility",
+              "humidity",
+              "light",
+              "moisture",
+              "ph",
+              "pressure",
+              "temperature",
+              "uva",
+              "uvb",
+              "uvi"
+            ]
           }
         ],
         "responses": {
@@ -2802,17 +2817,292 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "object",
-                "properties": {
-                  "value": {
-                    "type": "number"
-                  },
-                  "timestamp": {
-                    "type": "integer"
-                  }
-                }
+                "$ref": "#/definitions/WeatherForecast"
               }
             }
+          }
+        }
+      }
+    },
+    "/webcams/hardware/": {
+      "get": {
+        "tags": [
+          "Webcam"
+        ],
+        "summary": "Get a list of supported webcams",
+        "description": "Get all the supported webcams",
+        "operationId": "getWebcamsHardware",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of supported hardware",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WebcamHardware"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webcams/": {
+      "get": {
+        "tags": [
+          "Webcam"
+        ],
+        "summary": "Get a list of existing webcams",
+        "description": "Get all the existing webcams",
+        "operationId": "getWebcams",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more webcams",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Webcam"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Webcam"
+        ],
+        "summary": "Add a new webcam",
+        "description": "Add a new webcam",
+        "operationId": "addWebcam",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created webcam object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Webcam"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A new created webcam",
+            "schema": {
+              "$ref": "#/definitions/Webcam"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/webcams/{id}/": {
+      "get": {
+        "tags": [
+          "Webcam"
+        ],
+        "summary": "Get a specific webcam",
+        "description": "Get a specific webcam selected by id",
+        "operationId": "getWebcam",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of webcam to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested webcam",
+            "schema": {
+              "$ref": "#/definitions/Webcam"
+            }
+          },
+          "404": {
+            "description": "Webcam does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Webcam"
+        ],
+        "summary": "Update an existing webcam with new data",
+        "description": "Update an existing webcam with new data.",
+        "operationId": "updateWebcam",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of webcam to update",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update the values that need to be changed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Webcam"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated webcam",
+            "schema": {
+              "$ref": "#/definitions/Webcam"
+            }
+          },
+          "404": {
+            "description": "Webcam does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Webcam"
+        ],
+        "summary": "Delete an existing webcam",
+        "description": "Delete an existing webcam",
+        "operationId": "deleteWebcam",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of webcam to delete",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "404": {
+            "description": "Webcam does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    },
+    "/webcams/{id}/archive/{period}/": {
+      "get": {
+        "tags": [
+          "Webcam"
+        ],
+        "summary": "Get a list of archived images for the selected period",
+        "description": "Get a list of archived images for the selected period",
+        "operationId": "getWebcamArchive",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of webcam for which to get the archive",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "period",
+            "in": "path",
+            "description": "The date for which to get archive images. Format %Y/%m/%d",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Webcam history for 1 day",
+            "schema": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "type": "string",
+                    "description": "Full url to the archive image"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "Webcam does not exists"
+          },
+          "500": {
+            "description": "Unexpected server error"
           }
         }
       }
@@ -2830,15 +3120,18 @@
       "properties": {
         "type": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Area type ID"
         },
         "name": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Area type readable name"
         },
         "sensors": {
           "type": "array",
           "readOnly": true,
+          "description": "List of sensor types that can be used by this area type",
           "items": {
             "allOf": [
               {
@@ -2862,31 +3155,44 @@
         "id": {
           "type": "string",
           "format": "uuid",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Auto generated ID"
         },
         "enclosure": {
           "type": "string",
-          "format": "uuid"
+          "format": "uuid",
+          "description": "The ID of the enclosure of which this area belongs to"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the area"
         },
         "type": {
           "type": "string",
-          "description": "Area type"
+          "description": "Area type from the AreaType list"
         },
         "mode": {
           "type": "string",
-          "description": "Operating mode"
+          "description": "Operating mode",
+          "enum": [
+            "disabled",
+            "main_lights",
+            "timer",
+            "sensors",
+            "weather",
+            "weather_inverse"
+          ]
         },
         "setup": {
           "type": "string",
-          "default": "{}"
+          "default": "{}",
+          "description": "JSON setup data"
         },
         "state": {
           "type": "string",
           "default": "{}",
-          "readOnly": true
+          "readOnly": true,
+          "description": "JSON state data"
         }
       }
     },
@@ -2895,11 +3201,13 @@
       "properties": {
         "index": {
           "type": "integer",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Audio hardware ID"
         },
         "name": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Audio hardware readable name"
         }
       }
     },
@@ -2908,21 +3216,26 @@
       "properties": {
         "id": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Auto generated ID"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Artist and song name based on ID3 tag data"
         },
         "filename": {
-          "type": "string"
+          "type": "string",
+          "description": "The full path of the audio file"
         },
         "duration": {
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Audio file duration in seconds"
         },
         "filesize": {
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Audio file size in bytes"
         }
       }
     },
@@ -2936,24 +3249,30 @@
       "properties": {
         "id": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Auto generated ID"
         },
         "hardware": {
-          "type": "string"
+          "type": "string",
+          "description": "Button hardware type from ButtonHardware list"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the button"
         },
         "address": {
-          "type": "string"
+          "type": "string",
+          "description": "The address of the button"
         },
         "calibration": {
           "format": "string",
-          "default": "{}"
+          "default": "{}",
+          "description": "JSON data"
         },
         "value": {
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The current state of the button"
         }
       }
     },
@@ -2962,11 +3281,13 @@
       "properties": {
         "hardware": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Button hardware type ID"
         },
         "name": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Button hardware type name"
         }
       }
     },
@@ -2975,11 +3296,13 @@
       "properties": {
         "timestamp": {
           "type": "integer",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Button measurement unix timestamp"
         },
         "value": {
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Button measurement state"
         }
       }
     },
@@ -2992,33 +3315,41 @@
       "properties": {
         "id": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Auto generated ID"
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "description": "Event title"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Event description"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "description": "Event location"
         },
         "dtstart": {
           "type": "string",
           "format": "date",
-          "default": 0
+          "default": 0,
+          "description": "Event start date and time"
         },
         "dtend": {
           "type": "string",
           "default": 0,
-          "format": "date"
+          "format": "date",
+          "description": "Event end date and time"
         },
         "all_day": {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "True when the event is an all day event"
         },
         "freq": {
           "type": "string",
+          "description": "Event repeat period",
           "enum": [
             "daily",
             "weekly",
@@ -3027,11 +3358,13 @@
           ]
         },
         "interval": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Event repeat period value"
         },
         "repeatend": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Event repeat end date and time"
         }
       }
     },
@@ -3044,10 +3377,12 @@
         "id": {
           "type": "string",
           "format": "uuid",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Auto generated ID"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the enclosure"
         },
         "image": {
           "type": "string",
@@ -3055,41 +3390,23 @@
         },
         "areas": {
           "type": "array",
+          "description": "A list of areas that are in this enclosure",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/Area"
-              },
-              {
-                "type": "object"
-              }
-            ]
+            "$ref": "#/definitions/Area"
           }
         },
         "doors": {
           "type": "array",
+          "description": "A list of doors (button) that are in this enclosure",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/Button"
-              },
-              {
-                "type": "object"
-              }
-            ]
+            "$ref": "#/definitions/Button"
           }
         },
         "webcams": {
           "type": "array",
+          "description": "A list of webcams that are in this enclosure",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/Webcam"
-              },
-              {
-                "type": "object"
-              }
-            ]
+            "$ref": "#/definitions/Webcam"
           }
         }
       }
@@ -3106,34 +3423,41 @@
     },
     "Playlist": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid"
+          "format": "uuid",
+          "description": "Auto generated ID"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the playlist"
         },
         "volume": {
-          "type": "string"
+          "type": "string",
+          "description": "Volume for this playlist",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 80
         },
         "shuffle": {
-          "type": "string"
+          "type": "boolean",
+          "description": "Enable shuffle for this playlist",
+          "default": false
         },
         "repeat": {
-          "type": "string"
+          "type": "boolean",
+          "description": "Enable repeating for this playlist",
+          "default": false
         },
         "files": {
           "type": "array",
+          "description": "List of audio files",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/AudioFile"
-              },
-              {
-                "type": "object"
-              }
-            ]
+            "$ref": "#/definitions/AudioFile"
           }
         }
       }
@@ -3148,47 +3472,57 @@
       "properties": {
         "id": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Auto generated ID"
         },
         "hardware": {
-          "type": "string"
+          "type": "string",
+          "description": "Relay hardware type from RelayHardware list"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the relay"
         },
         "address": {
-          "type": "string"
+          "type": "string",
+          "description": "The address of the relay"
         },
         "wattage": {
           "type": "number",
-          "default": 0
+          "default": 0,
+          "description": "The amount of power in watts the relay uses when on"
         },
         "flow": {
           "type": "number",
-          "default": 0
+          "default": 0,
+          "description": "The amount of water in liter per minute the relay uses when on"
         },
         "manual_mode": {
           "type": "boolean",
           "default": false,
-          "readOnly": true
+          "readOnly": true,
+          "description": "Is the relay in manual mode"
         },
         "replacement": {
           "type": "string",
           "format": "date-time",
           "default": "1970-01-01 00:00:00",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Last replacement date and time of the attached hardware"
         },
         "calibration": {
-          "format": "string",
-          "default": "{}"
+          "type": "object",
+          "description": "JSON data"
         },
         "value": {
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The current state of the relay"
         },
         "dimmer": {
           "type": "boolean",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Is the relay a dimmer"
         }
       }
     },
@@ -3197,11 +3531,13 @@
       "properties": {
         "hardware": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Relay hardware type ID"
         },
         "name": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Relay hardware type name"
         }
       }
     },
@@ -3210,11 +3546,13 @@
       "properties": {
         "timestamp": {
           "type": "integer",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Relay measurement unix timestamp"
         },
         "value": {
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Relay measurement state"
         }
       }
     },
@@ -3230,58 +3568,87 @@
       "properties": {
         "id": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Auto generated ID"
         },
         "hardware": {
-          "type": "string"
+          "type": "string",
+          "description": "Sensor hardware type from SensorHardware list"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "The sensor measurement type",
+          "enum": [
+            "altitude",
+            "co2",
+            "distance",
+            "fertility",
+            "humidity",
+            "light",
+            "moisture",
+            "ph",
+            "pressure",
+            "temperature",
+            "uva",
+            "uvb",
+            "uvi"
+          ]
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the sensor"
         },
         "address": {
-          "type": "string"
+          "type": "string",
+          "description": "The address of the sensor"
         },
         "limit_min": {
           "type": "number",
-          "default": 0
+          "default": 0,
+          "description": "The minimum value which is a valid measurement"
         },
         "limit_max": {
           "type": "number",
-          "default": 100
+          "default": 100,
+          "description": "The maximum value which is a valid measurement"
         },
         "alarm_min": {
           "type": "number",
-          "default": 0
+          "default": 0,
+          "description": "The minimum value which triggers the alarm"
         },
         "alarm_max": {
           "type": "number",
-          "default": 100
+          "default": 100,
+          "description": "The maximum value which triggers the alarm"
         },
         "max_diff": {
           "type": "number",
-          "default": 0
+          "default": 0,
+          "description": "The maximum difference between two measurements that is valid"
         },
         "exclude_avg": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Exclude this sensor from average calculation on the dashboard"
         },
         "calibration": {
-          "format": "string",
-          "default": "{}"
+          "type": "object",
+          "description": "JSON data"
         },
         "value": {
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The current value of the sensor"
         },
         "alarm": {
           "type": "boolean",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Is there a high or low alarm"
         },
         "error": {
           "type": "boolean",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Is there a hardware problem with the sensor"
         }
       }
     },
@@ -3290,14 +3657,17 @@
       "properties": {
         "hardware": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Sensor hardware type ID"
         },
         "name": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Sensor hardware type name"
         },
         "types": {
           "type": "array",
+          "description": "List of supported sensor types",
           "items": {
             "allOf": [
               {
@@ -3314,44 +3684,67 @@
       "properties": {
         "timestamp": {
           "type": "integer",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Sensor measurement unix timestamp"
         },
         "value": {
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Sensor measurement value"
         },
         "alarm_min": {
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Sensor measurement low alarm value"
         },
         "alarm_max": {
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Sensor measurement high alarm value"
         }
       }
     },
     "Setting": {
       "type": "object",
+      "required": [
+        "value"
+      ],
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true,
+          "description": "Setting ID"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "Setting value"
         }
       }
     },
     "Status": {
       "type": "object",
+      "description": "Read only system status",
       "properties": {
+        "is_day": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Is the system in day mode"
+        },
         "uptime": {
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true,
+          "description": "System uptime in seconds"
         },
         "load": {
           "type": "object",
+          "readOnly": true,
+          "description": "System load in percentage and absolute values. It contains the current, last 5 minutes and last 15 minutes load",
           "properties": {
             "percentage": {
               "type": "array",
+              "readOnly": true,
+              "minItems": 3,
+              "maxItems": 3,
               "items": {
                 "allOf": [
                   {
@@ -3362,6 +3755,9 @@
             },
             "absolute": {
               "type": "array",
+              "readOnly": true,
+              "minItems": 3,
+              "maxItems": 3,
               "items": {
                 "allOf": [
                   {
@@ -3374,39 +3770,50 @@
         },
         "cpu_temperature": {
           "type": "integer",
-          "items": {
-            "allOf": [
-              {
-                "type": "integer"
-              }
-            ]
-          }
+          "readOnly": true,
+          "description": "The current system CPU temperature"
         },
         "memory": {
           "type": "object",
+          "readOnly": true,
+          "description": "System memory usage status",
           "properties": {
             "total": {
-              "type": "integer"
+              "type": "integer",
+              "readOnly": true,
+              "description": "Total memory in bytes"
             },
             "used": {
-              "type": "integer"
+              "type": "integer",
+              "readOnly": true,
+              "description": "Used memory in bytes"
             },
             "free": {
-              "type": "integer"
+              "type": "integer",
+              "readOnly": true,
+              "description": "Free memory in bytes"
             }
           }
         },
         "storage": {
           "type": "object",
+          "readOnly": true,
+          "description": "System disk usage status",
           "properties": {
             "total": {
-              "type": "integer"
+              "type": "integer",
+              "readOnly": true,
+              "description": "Total disk space in bytes"
             },
             "used": {
-              "type": "integer"
+              "type": "integer",
+              "readOnly": true,
+              "description": "Used disk space in bytes"
             },
             "free": {
-              "type": "integer"
+              "type": "integer",
+              "readOnly": true,
+              "description": "Free disk space in bytes"
             }
           }
         }
@@ -3414,24 +3821,38 @@
     },
     "Weather": {
       "type": "object",
+      "description": "Read only current weather status",
+      "readOnly": true,
       "properties": {
         "location": {
           "type": "object",
+          "readOnly": true,
+          "description": "The location based on the weather setting data",
           "properties": {
             "city": {
-              "type": "string"
+              "type": "string",
+              "readOnly": true,
+              "description": "The location city name"
             },
             "country": {
-              "type": "string"
+              "type": "string",
+              "readOnly": true,
+              "description": "The location country name"
             },
             "geo": {
               "type": "object",
+              "readOnly": true,
+              "description": "The location geo coordinates",
               "properties": {
                 "lat": {
-                  "type": "number"
+                  "type": "number",
+                  "readOnly": true,
+                  "description": "The location latitude value"
                 },
                 "long": {
-                  "type": "number"
+                  "type": "number",
+                  "readOnly": true,
+                  "description": "The location longitude value"
                 }
               }
             }
@@ -3439,81 +3860,159 @@
         },
         "sun": {
           "type": "object",
+          "readOnly": true,
+          "description": "The sun rise and set values based on the weather setting data",
           "properties": {
             "rise": {
-              "type": "integer"
+              "type": "integer",
+              "readOnly": true,
+              "description": "The sun rise time in unix timestamp"
             },
             "set": {
-              "type": "integer"
+              "type": "integer",
+              "readOnly": true,
+              "description": "The sun set time in unix timestamp"
             }
           }
         },
         "is_day": {
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Is it currently day?"
         },
         "indicators": {
           "type": "object",
+          "readOnly": true,
+          "description": "Temperature and other indicators based on locale",
           "properties": {
             "wind": {
-              "type": "string"
+              "type": "string",
+              "readOnly": true,
+              "description": "Windspeed indicator"
             },
             "temperature": {
-              "type": "string"
+              "type": "string",
+              "readOnly": true,
+              "description": "Temperature indicator"
             }
           }
         },
         "credits": {
           "type": "object",
+          "readOnly": true,
+          "description": "Credits information from the free weather source",
           "properties": {
             "text": {
-              "type": "string"
+              "type": "string",
+              "readOnly": true,
+              "description": "Credits text"
             },
             "url": {
-              "type": "string"
+              "type": "string",
+              "readOnly": true,
+              "description": "Credits link"
             }
           }
         },
         "forecast": {
           "type": "array",
+          "readOnly": true,
+          "description": "A seven day weather forecast",
+          "minItems": 7,
+          "maxItems": 7,
           "items": {
             "type": "object",
+            "readOnly": true,
+            "description": "A single day weather forecast",
             "properties": {
               "dt": {
-                "type": "integer"
+                "type": "integer",
+                "readOnly": true,
+                "description": "The day for which this forecast is valid"
               },
               "rise": {
-                "type": "integer"
+                "type": "integer",
+                "readOnly": true,
+                "description": "Sun rise time in unix timestamp"
               },
               "set": {
-                "type": "integer"
+                "type": "integer",
+                "readOnly": true,
+                "description": "Sun set time in unix timestamp"
               },
               "temp": {
-                "type": "number"
+                "type": "number",
+                "readOnly": true,
+                "description": "The temperature forecast"
               },
-              "hudiity": {
-                "type": "number"
+              "humidity": {
+                "type": "number",
+                "readOnly": true,
+                "description": "The humidity forecast"
               },
               "wind": {
                 "type": "object",
+                "readOnly": true,
+                "description": "The wind forecast",
                 "properties": {
                   "speed": {
-                    "type": "number"
+                    "type": "number",
+                    "readOnly": true,
+                    "description": "Wind speed in the selected wind speed indicator value"
                   },
                   "direction": {
-                    "type": "integer"
+                    "type": "integer",
+                    "readOnly": true,
+                    "description": "Wind speed direction in degrees"
                   }
                 }
               },
               "weather": {
-                "type": "string"
+                "type": "string",
+                "readOnly": true,
+                "description": "Human readable weather forecast"
               }
             }
           }
         }
       }
     },
+    "WeatherForecast": {
+      "type": "object",
+      "readOnly": true,
+      "description": "14 days temperature weather forecast",
+      "properties": {
+        "value": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Weather forecast temperature in the selected temperature indicator value"
+        },
+        "timestamp": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Weather forecast unix timestamp"
+        }
+      }
+    },
+    "WebcamHardware": {
+      "type": "object",
+      "description": "Webcam hardware object",
+      "properties": {
+        "hardware": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Webcam hardware ID"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Webcam hardware readable name"
+        }
+      }
+    },
     "Webcam": {
       "type": "object",
+      "description": "Webcam object",
       "required": [
         "hardware",
         "name",
@@ -3527,32 +4026,184 @@
         "id": {
           "type": "string",
           "format": "uuid",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Auto generated ID"
         },
         "hardware": {
-          "type": "string"
+          "type": "string",
+          "description": "Webcam hardware type from WebcamHardware list"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the webcam"
         },
         "address": {
-          "type": "string"
+          "type": "string",
+          "description": "The address of the webcam"
         },
         "width": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The webcam resolution width in pixels"
         },
         "height": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The webcam resolution height in pixels"
         },
         "rotation": {
-          "type": "string"
+          "type": "string",
+          "description": "The webcam rotation",
+          "enum": [
+            "0",
+            "90",
+            "180",
+            "270",
+            "H",
+            "V"
+          ]
         },
         "awb": {
-          "type": "string"
+          "type": "string",
+          "description": "The webcam white balance mode",
+          "enum": [
+            "off",
+            "auto",
+            "sunlight",
+            "cloudy",
+            "shade",
+            "tungsten",
+            "fluorescent",
+            "incandescent",
+            "flash",
+            "horizon",
+            "greyworld"
+          ]
         },
         "is_live": {
           "type": "boolean",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Is the webcam a live streaming webcam"
+        },
+        "flash": {
+          "type": "array",
+          "description": "The relays that works like a flash before taking a picture from the webcam",
+          "minItems": 0,
+          "items": {
+            "allOf": [
+              {
+                "type": "string",
+                "description": "Relay ID"
+              }
+            ]
+          }
+        },
+        "archive": {
+          "type": "object",
+          "description": "Webcam archiving setting",
+          "properties": {
+            "door": {
+              "type": "string",
+              "description": "Door status for saving image to archive",
+              "enum": [
+                "ignore",
+                "close",
+                "open"
+              ]
+            },
+            "light": {
+              "type": "string",
+              "description": "Light status for saving image to archive",
+              "enum": [
+                "ignore",
+                "on",
+                "off"
+              ]
+            },
+            "state": {
+              "type": "string",
+              "description": "Webcam archiving modus. Either every x seconds or by motion",
+              "enum": [
+                "disabled",
+                "motion",
+                "60",
+                "300",
+                "900",
+                "1800",
+                "3600",
+                "10800",
+                "21600",
+                "43200",
+                "86400"
+              ]
+            }
+          }
+        },
+        "motion": {
+          "type": "object",
+          "description": "Webcam motion settings when archiving is set to motion",
+          "properties": {
+            "area": {
+              "type": "number",
+              "description": "The area in pixels where the movement needs to take place",
+              "default": 500
+            },
+            "boxes": {
+              "type": "string",
+              "description": "Show motion boxes and in what color",
+              "enum": [
+                "-1",
+                "red",
+                "green",
+                "blue"
+              ]
+            },
+            "frame": {
+              "type": "string",
+              "description": "Which frame to use to comparison",
+              "enum": [
+                "last",
+                "archived"
+              ]
+            },
+            "threashold": {
+              "type": "number",
+              "description": "Motion detection sensitivity"
+            }
+          }
+        },
+        "markers": {
+          "type": "array",
+          "minItems": 0,
+          "description": "A list of markers for the webcam with live sensor data",
+          "items": {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "lat": {
+                    "type": "number",
+                    "description": "The latitude value of the marker"
+                  },
+                  "long": {
+                    "type": "number",
+                    "description": "The longitude value of the marker"
+                  },
+                  "sensors": {
+                    "type": "array",
+                    "minItems": 0,
+                    "description": "A list of sensor IDs",
+                    "items": {
+                      "allOf": [
+                        {
+                          "type": "string",
+                          "description": "Sensor ID"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
         }
       }
     }
