@@ -513,12 +513,13 @@ class terrariumEngine(object):
         current_value = sensor.value
         start = time.time()
 
-        if 'ccs811' == sensor.hardware.lower():
+        if 'css811' == sensor.hardware.lower():
           calibration = {'temperature' : [], 'humidity' : []}
           for calibration_sensor in sensor.calibration['ccs811_compensation_sensors']:
-            calibration_sensor = self.sensors[calibration_sensor]
-            if calibration_sensor.type in calibration:
-              calibration[calibration_sensor.type].append(calibration_sensor.value)
+            if calibration_sensor in self.sensors:
+              calibration_sensor = self.sensors[calibration_sensor]
+              if calibration_sensor.type in calibration:
+                calibration[calibration_sensor.type].append(calibration_sensor.value)
 
           calibration['temperature'] = None if len(calibration['temperature']) == 0 else statistics.mean(calibration['temperature'])
           calibration['humidity']    = None if len(calibration['humidity']) == 0    else statistics.mean(calibration['humidity'])
@@ -564,6 +565,12 @@ class terrariumEngine(object):
           sensor.update(new_value)
           db_time = (time.time() - start) - measurement_time
           self.webserver.websocket_message('gauge_update' , {'id' : sensor.id, 'value' : new_value})
+
+          # Notification message
+          sensor_data = sensor.to_dict()
+          self.notification.message(f'sensor_update' , sensor_data)
+          if sensor_data['alarm']:
+            self.notification.message(f'sensor_alarm' , sensor_data)
 
           logger.info(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]} in {measurement_time+db_time:.2f} seconds.')
           logger.debug(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
@@ -736,6 +743,11 @@ class terrariumEngine(object):
       # And send a websocket update
       self.webserver.websocket_message('relay' , {'id' : relay.id, 'value' : state})
 
+      # Notification message
+      relay_data = relay.to_dict()
+      self.notification.message(f'relay_change' , relay_data)
+
+
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
     if self.__engine['thread'] is not None and self.__engine['thread'].is_alive() and hasattr(self,'enclosures'):
@@ -798,6 +810,10 @@ class terrariumEngine(object):
     with orm.db_session():
       button = Button[button]
       button.update(state,True)
+
+      # Notification message
+      button_data = button.to_dict()
+      self.notification.message(f'button_change' , button_data)
 
       # Update the button state on the button page
       self.webserver.websocket_message('button' , {'id' : button.id, 'hardware' : button.hardware, 'value' : button.value})

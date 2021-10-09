@@ -13,9 +13,6 @@ from pathlib import Path
 from ffprobe import FFProbe
 from hashlib import md5
 
-from apispec import APISpec
-from apispec_webframeworks.bottle import BottlePlugin
-
 from terrariumArea         import terrariumArea
 from terrariumAudio        import terrariumAudio
 from terrariumCalendar     import terrariumCalendar
@@ -35,15 +32,6 @@ class terrariumAPI(object):
 
   def __init__(self, webserver):
     self.webserver = webserver
-    self.apispec = APISpec(
-        title=self.webserver.engine.settings['title'],
-        version=self.webserver.engine.version,
-        openapi_version='3.0.2',
-        info=dict(description=f'{self.webserver.engine.settings["title"]} API'),
-        plugins=[BottlePlugin()],
-    )
-
-
 
   # Always (force = True) enable authentication on the API
   def authentication(self, force = True):
@@ -165,11 +153,7 @@ class terrariumAPI(object):
     bottle_app.route('/api/sensors/<filter:path>/<action:re:(history)>/', 'GET',    self.sensor_history,  apply=self.authentication(False), name='api:sensor_history')
     bottle_app.route('/api/sensors/<filter:path>/<action:re:(export)>/',  'GET',    self.sensor_history,  apply=self.authentication(),      name='api:sensor_export')
     bottle_app.route('/api/sensors/hardware/',      'GET',    self.sensor_hardware, apply=self.authentication(),      name='api:sensor_hardware')
-
-
-    bottle_app.route('/api/sensors/scan/',              'POST',    self.sensor_scan, apply=self.authentication(),      name='api:sensor_scan')
-
-
+    bottle_app.route('/api/sensors/scan/',          'POST',    self.sensor_scan,    apply=self.authentication(),      name='api:sensor_scan')
     bottle_app.route('/api/sensors/<sensor:path>/', 'GET',    self.sensor_detail,   apply=self.authentication(False), name='api:sensor_detail')
     bottle_app.route('/api/sensors/<sensor:path>/', 'PUT',    self.sensor_update,   apply=self.authentication(),      name='api:sensor_update')
     bottle_app.route('/api/sensors/<sensor:path>/', 'DELETE', self.sensor_delete,   apply=self.authentication(),      name='api:sensor_delete')
@@ -207,94 +191,8 @@ class terrariumAPI(object):
 
 
     # API DOC
-    bottle_app.route('/<page:re:(api/doc)>/', 'GET', self.webserver.render_page,   apply=self.authentication(False), name='api:documentation')
-    bottle_app.route('/api/doc/<filename:re:(swagger\.json)>', 'GET', self.webserver.__static_file, apply=self.authentication(False), name='api:swagger.json')
-
-    self._load_api()
-
-
-  def _load_api(self):
-    self.apispec.components.schema(
-      "SensorFilter",
-      {
-          "properties": {
-              "filter": {"type": "string"},
-          }
-      },
-    )
-
-    self.apispec.components.schema(
-      "Sensor",
-      {
-          "properties": {
-              "id": {"type": "string"},
-              "hardware": {"type": "string"},
-              "type": {"type": "string"},
-              "name": {"type": "string"},
-              "address": {"type": "string"},
-
-              "limit_min": {"type": "integer", "format": "int64"},
-              "limit_max": {"type": "integer", "format": "int64"},
-              "alarm_min": {"type": "integer", "format": "int64"},
-              "alarm_max": {"type": "integer", "format": "int64"},
-              "max_diff": {"type": "integer", "format": "int64"},
-
-
-
-          }
-      },
-    )
-
-
-
-
-
-     # "exclude_avg": false, "calibration": {"offset": 0}, "value": 22.562, "alarm": false, "error": false},
-
-
-
-
-    self.apispec.path(view=self.sensor_list)
-
-
-    #self.apispec.components.schema("AudioFile", schema=Audiofile)
-
-#    self.apispec.path(view=self.audiofile_detail)
-
-#    self.apispec.path(view=self.audiofile_list)
-#    self.apispec.path(view=self.audiofile_add)
-    # print('TESTETSETESTE')
-
-    # print(dir(orm))
-
-    # print(orm.ormtypes)
-    # print(dir(orm.ormtypes))
-
-    # print(orm.show(Audiofile))
-    # print(dir(orm))
-#    with orm.db_session():
-#      print(dir(Setting))
-#      print(Setting['host'].to_dict())
-#      print(Setting.to_json())
-
-    # from pprint import pprint
-    # print('APISPec test')
-    # print(spec.path(view=self.webcam_list))
-
-    # pprint(spec.to_dict())
-
-#   def api_doc(self):
-#     return jinja2_template(f'views/api.html')
-# #    return self.apispec.to_dict()
-
-
-  def api_spec(self):
-
-    return self.apispec.to_dict()
-
-  # def _return_data(self, message, data):
-  #   return {'message':message, 'data':data}
-
+    bottle_app.route('/<page:re:(api/doc|api/swagger)>/', 'GET', self.webserver.render_page,   apply=self.authentication(False), name='api:documentation')
+    bottle_app.route('/api/doc/<filename:re:(terrariumpi\.json)>', 'GET', self.webserver._static_file, apply=self.authentication(False), name='api:swagger.json')
 
   # Areas
   def area_types(self):
@@ -374,17 +272,6 @@ class terrariumAPI(object):
 
   @orm.db_session
   def audiofile_list(self):
-    """Audio files list view.
-    ---
-    get:
-      parameters:
-      responses:
-        200:
-          content:
-            application/json:
-              schema: GistSchema
-    """
-
     data = []
     for audiofile in Audiofile.select():
       data.append(audiofile.to_dict())
@@ -393,18 +280,6 @@ class terrariumAPI(object):
 
   @orm.db_session
   def audiofile_detail(self, audiofile):
-    """Audio file detail view.
-    ---
-    get:
-      parameters:
-      - in: audiofile
-        schema: GistParameter
-      responses:
-        200:
-          content:
-            application/json:
-              schema: GistSchema
-    """
     try:
       audiofile = Audiofile[audiofile]
       audiofile_data = audiofile.to_dict()
@@ -479,9 +354,6 @@ class terrariumAPI(object):
         period = 31
       elif 'year' == period:
         period = 365
-      elif 'replaced' == period:
-        # We need to calculate back to days...
-        period = (datetime.now() - relay.replacement).total_seconds() / (24.0 * 3600.0)
       else:
         period = 1
 
@@ -804,9 +676,9 @@ class terrariumAPI(object):
       orm.commit()
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
-      raise HTTPError(status=404, body=f'Notification message with id {enclosure} does not exists.')
+      raise HTTPError(status=404, body=f'Notification message with id {message} does not exists.')
     except Exception as ex:
-      raise HTTPError(status=500, body=f'Error deleting notification message with id {enclosure}. {ex}')
+      raise HTTPError(status=500, body=f'Error deleting notification message with id {message}. {ex}')
 
   @orm.db_session
   def notification_message_list(self):
@@ -863,9 +735,9 @@ class terrariumAPI(object):
  #     self.webserver.engine.delete(terrariumEnclosure,enclosure)
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
-      raise HTTPError(status=404, body=f'Notification service with id {enclosure} does not exists.')
+      raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
     except Exception as ex:
-      raise HTTPError(status=500, body=f'Error deleting notification service with id {enclosure}. {ex}')
+      raise HTTPError(status=500, body=f'Error deleting notification service with id {service}. {ex}')
 
   @orm.db_session
   def notification_service_list(self):
@@ -1078,14 +950,7 @@ class terrariumAPI(object):
   def relay_detail(self, relay):
     try:
       relay = Relay[relay]
-      relay_data = relay.to_dict(exclude='webcam')
-      relay_data['value']       = relay.value
-      relay_data['dimmer']      = relay.is_dimmer
-      relay_data['replacement'] = 0
-      if relay.replacement:
-        relay_data['replacement'] = relay.replacement.timestamp()
-
-      return relay_data
+      return relay.to_dict(exclude='webcam')
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
@@ -1215,20 +1080,6 @@ class terrariumAPI(object):
 
   @orm.db_session
   def sensor_list(self, filter = None):
-    """Gist detail view.
-    ---
-    get:
-        description: Get a list of sensors optional filtered on type
-        parameters:
-            - in:
-              name: filter
-              schema: SensorFilter
-        responses:
-              200:
-              schema:
-                  $ref: '#/definitions/Sensor'
-    """
-
     data = []
     for sensor in Sensor.select(lambda s: not s.id in self.webserver.engine.settings['exclude_ids']):
       if filter is None or filter == sensor.type:
@@ -1240,11 +1091,7 @@ class terrariumAPI(object):
   def sensor_detail(self, sensor):
     try:
       sensor = Sensor[sensor]
-      sensor_data = sensor.to_dict()
-      sensor_data['value']  = sensor.value
-      sensor_data['alarm']  = sensor.alarm
-      sensor_data['error']  = sensor.error
-      return sensor_data
+      return sensor.to_dict()
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Sensor with id {sensor} does not exists.')
     except Exception as ex:
@@ -1382,7 +1229,6 @@ class terrariumAPI(object):
       try:
         setting = Setting[key]
         if 'password' == key:
-
           setting.value = terrariumUtils.generate_password(request.json[key])
         else:
           setting.value = request.json[key]

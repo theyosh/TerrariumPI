@@ -1,8 +1,6 @@
 from . import terrariumRelay, terrariumRelayDimmer, terrariumRelayLoadingException
-from terrariumUtils import terrariumUtils
+from terrariumUtils import terrariumCache, terrariumUtils
 
-from zeroconf import ServiceBrowser, Zeroconf
-from gevent import sleep
 from hashlib import md5
 import re
 
@@ -16,7 +14,6 @@ class terrariumRelaySonoff(terrariumRelay):
   NAME = 'Sonoff (Tasmota)'
 
   __URL_REGEX = re.compile(r'^(?P<protocol>https?):\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$',re.IGNORECASE)
-#  __SCAN_TIME = 5
 
   @property
   def _address(self):
@@ -64,8 +61,15 @@ class terrariumRelaySonoff(terrariumRelay):
     if state is None:
       return None
 
-    # Always overule the ID generating, as we want to use the MAC as that is unique if the IP address is changing
-    self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}'.encode()).hexdigest()
+    # Create the cache key for caching the relay states.
+    # This is usefull when there are more then 1 relay per hardware device.
+    self.__cache_key = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}'.encode()).hexdigest()
+    self.__cache = terrariumCache()
+    self.__cache.set_data(self.__cache_key, state['StatusSTS'], self._CACHE_TIMEOUT)
+
+    # We need the use the address_nr value also, as there can multiple relays per sonoff device.
+    if self._device['id'] is None:
+      self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}{address["nr"]}'.encode()).hexdigest()
 
     return device
 
@@ -77,14 +81,25 @@ class terrariumRelaySonoff(terrariumRelay):
     if data is None:
       return False
 
-    return state == (self.ON if terrariumUtils.is_true(data['POWER']) else self.OFF)
+    if 'POWER' in data:
+      data = data['POWER']
+    elif f'POWER{self._address["nr"]}' in data:
+      data = data[f'POWER{self._address["nr"]}']
+
+    return state == (self.ON if terrariumUtils.is_true(data) else self.OFF)
 
   def _get_hardware_value(self):
-    url = f'{self.device}Power{self._address["nr"]}'
-    data = terrariumUtils.get_remote_data(url)
-
+    data = self.__cache.get_data(self.__cache_key)
     if data is None:
-      return None
+      # Cache is expired, so we update with new data
+      # Get the overall state information
+      url = f'{self.device}State'
+      data = terrariumUtils.get_remote_data(url)
+
+      if data is None:
+        return None
+
+      self.__cache.set_data(self.__cache_key, data, self._CACHE_TIMEOUT)
 
     if 'POWER' in data:
       data = data['POWER']

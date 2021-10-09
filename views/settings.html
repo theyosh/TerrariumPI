@@ -461,7 +461,7 @@
       }
     });
 
-    jQuery.get('{{ url_for("api:setting_list") }}',function(data) {
+    jQuery.get({url: '{{ url_for("api:setting_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
       jQuery.each(data.data,function(counter,item){
         let field = jQuery('[name="'+ item.id + '"]');
         if (field.attr('type') == 'checkbox') {

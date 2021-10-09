@@ -28,7 +28,6 @@ class terrariumMiTempSensor(terrariumBluetoothSensor):
 
     return data
 
-
   @staticmethod
   def _scan_sensors(unit_value_callback = None, trigger_callback = None):
     for sensor in terrariumBluetoothSensor._scan_sensors(__class__, ['mj_ht_v1'], unit_value_callback, trigger_callback):

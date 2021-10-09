@@ -6,6 +6,7 @@ from pathlib import Path
 from terrariumUtils import terrariumUtils
 import copy
 import re
+import sqlite3
 
 
 DATABASE = 'terrariumpi.db'
@@ -70,6 +71,75 @@ def create_defaults(version):
       # Setting is already in the database. Ignore
       pass
 
+
+def recover(self):
+#    starttime = time.time()
+    # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
+    # Enable recovery status
+ #   logger.warn('TerrariumPI Collecter recovery mode is starting! %s', (self.__recovery,))
+
+    def progress(status, remaining, total):
+      print(f'Copied {total-remaining} of {total} pages...')
+
+    broken_db = sqlite3.connect(DATABASE)
+    new_db = sqlite3.connect(f'new_{DATABASE}')
+
+    with new_db:
+      broken_db.backup(new_db, pages=10, progress=progress)
+
+    new_db.close()
+    broken_db.close()
+
+    # Delete broken db
+    Path(DATABASE).unlink()
+    Path(f'new_{DATABASE}').rename(DATABASE)
+
+    # Reinitialize the new database
+    self.init()
+
+
+
+
+
+    # db = sqlite3.connect(DATABASE)
+    # new_db = sqlite3.connect(f'new_{DATABASE}')
+    # lines = 0
+    # for line in db.iterdump():
+    #   lines += 1
+    #   new_db.executescript(line)
+
+    # db.close()
+    # new_db.close()
+
+    # # Delete broken db
+    # Path(DATABASE).unlink()
+    # Path(f'new_{DATABASE}').rename(DATABASE)
+
+    # # Reinitialize the new database
+    # self.init()
+
+
+
+
+
+
+#    db = sqlite3.connect(DATABASE)
+
+#     os.remove(DATABASE)
+#     logger.warn('TerrariumPI Collecter recovery mode deleted faulty database from disk %s', (terrariumCollector.DATABASE,))
+
+#     # Reconnect will recreate the db
+#     logger.warn('TerrariumPI Collecter recovery mode starts reconnecting database to create a new clean database at %s', (terrariumCollector.DATABASE,))
+#     self.__connect()
+#     self.__create_database_structure()
+#     cur = self.db.cursor()
+#     # Load the SQL data back to db
+#     cur.executescript(sqldump)
+#     logger.warn('TerrariumPI Collecter recovery mode restored the old data in a new database. %s', (terrariumCollector.DATABASE,))
+
+#     # Return to normal mode
+#     self.__recovery = False
+#     logger.warn('TerrariumPI Collecter recovery mode is finished in %s seconds!', (time.time()-starttime,))
 
 class Area(db.Entity):
 
@@ -189,7 +259,7 @@ class Enclosure(db.Entity):
 
   def before_delete(self):
     image = Path(self.image)
-    if image.exists():
+    if image.exists() and image.is_file():
       image.unlink()
       print(f'Deleted file {image}')
 
@@ -326,6 +396,16 @@ class Relay(db.Entity):
   def type(self):
     return 'dimmer' if self.is_dimmer else 'relay'
 
+  def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+
+    # Add extra fields
+    data['dimmer']      = self.is_dimmer
+    data['value']       = self.value
+    data['replacement'] = self.replacement.timestamp()
+
+    return data
+
   def update(self, new_value, force = False):
     if new_value is None:
       return None
@@ -393,7 +473,6 @@ class Sensor(db.Entity):
 
   @property
   def value(self):
-    timestamp_limit = datetime.now() - timedelta(seconds=Sensor.__MAX_VALUE_AGE)
     value = self.history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(seconds=Sensor.__MAX_VALUE_AGE)).order_by(orm.desc(SensorHistory.timestamp)).first()
     if value:
       return value.value
@@ -403,6 +482,15 @@ class Sensor(db.Entity):
   @property
   def error(self):
     return True if self.value is None else False
+
+  def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+    # Add extra fields
+    data['alarm']  = self.alarm
+    data['value']  = self.value
+    data['error']  = self.error
+
+    return data
 
   def update(self, value):
     if value is None:

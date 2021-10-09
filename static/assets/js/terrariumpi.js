@@ -461,6 +461,10 @@ function template_sensor_type_icon(type) {
       return 'fas fa-at'
       break;
 
+    case 'mqtt':
+      return 'fas fa-bullhorn'
+      break;
+
     case 'pushover':
       return 'fab fa-pinterest'
       break;

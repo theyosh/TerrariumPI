@@ -61,7 +61,7 @@
 </section>
 <script>
   jQuery(function () {
-    jQuery.get('{{ url_for("api:webcam_list") }}',function(data) {
+    jQuery.get({url: '{{ url_for("api:webcam_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
       data = data.data;
       // Sort the webcams based on the given webcam name
       data.sort((a, b) => a.name.localeCompare(b.name));

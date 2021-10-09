@@ -1,1949 +1,2911 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "Here you can find all the API calls and models that are available in TerrariumPI. More information can be found at https://theyosh.github.io/TerrariumPI/"
-  version: "1.0.0"
-  title: "TerrariumPI REST API"
+  description: >-
+    Here you can find all the API calls and models that are available in
+    TerrariumPI. More information can be found at
+    https://theyosh.github.io/TerrariumPI/
+  version: 1.0.0
+  title: TerrariumPI REST API
   contact:
-    email: "terrariumpi@theyosh.nl"
+    email: terrariumpi@theyosh.nl
   license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "localhost:8090"
-basePath: "/api"
-
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+basePath: /api
 tags:
-- name: "area"
-  description: "Enclosure areas"
-  # externalDocs:
-  #   description: "Find out more"
-  #   url: "http://theyosh.github.io/TerrariumPI/"
-
-- name: "audio"
-  description: "Audio files"
-- name: "button"
-  description: "Buttons, motion detectors and light sensors"
-- name: "enclosure"
-  description: "Enclosures"
-- name: "playlist"
-  description: "Playlists with audio files"
-- name: "relay"
-  description: "Relays"
-- name: "sensor"
-  description: "Sensors"
-- name: "webcam"
-  description: "Webcams"
-
-schemes:
-- "https"
-- "http"
-
+  - name: Area
+    description: Enclosure areas
+  - name: Audio
+    description: Audio files
+  - name: Button
+    description: 'Buttons, motion detectors and light sensors'
+  - name: Calendar
+    description: Calendar calls
+  - name: Enclosure
+    description: Enclosures
+  - name: Playlist
+    description: Playlists with audio files
+  - name: Relay
+    description: Relays
+  - name: Sensor
+    description: Sensors
+  - name: Settings
+    description: Settings
+  - name: System
+    description: System and general calls
+  - name: Weather
+    description: Weather
+  - name: Webcam
+    description: Webcams
 paths:
-
-  "/areas/types/":
+  /areas/types/:
     get:
       tags:
-      - "area"
-      summary: "Get a list of existing area types"
-      description: "Get all the existing area types with supported sensor types"
-      operationId: "getAreaTypes"
+        - Area
+      summary: Get available area types
+      description: Get all the available area types with supported sensor types.
+      operationId: getAreaTypes
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
-
+        - application/json
       responses:
-        200:
-          description: "Zero or more area types with supported sensor types"
+        '200':
+          description: Zero or more area types with supported sensor types.
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/AreaType"
-
-  "/areas/":
+              $ref: '#/definitions/AreaType'
+  /areas/:
     get:
       tags:
-      - "area"
-      summary: "Get a list of existing areas"
-      description: "Get all the existing areas"
-      operationId: "getAreas"
+        - Area
+      summary: Get existing areas
+      description: Get all the existing areas in a list.
+      operationId: getAreas
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
-
+        - application/json
       responses:
-        200:
-          description: "Zero or more areas"
+        '200':
+          description: Zero or more areas
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/Area"
-
+              $ref: '#/definitions/Area'
     post:
       tags:
-      - "area"
-      summary: "Add a new area to an enclosure"
-      description: "Add a new area to an enclosure. The enclosure needs to be existing"
-      operationId: "addArea"
+        - Area
+      summary: Add a new area to an enclosure
+      description: Add a new area to an enclosure. The enclosure needs to be existing
+      operationId: addArea
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-
-      - in: "body"
-        name: "body"
-        description: "Created area object"
-        required: true
-        schema:
-          $ref: "#/definitions/Area"
-
-      responses:
-        200:
-          description: "A new created area"
+        - in: body
+          name: body
+          description: Created area object
+          required: true
           schema:
             $ref: '#/definitions/Area'
-        500:
-          description: "Unexpected server error"
-
-      security:
-      - http_auth: []
-
-  "/areas/{id}/":
-    get:
-      tags:
-      - "area"
-      summary: "Get a specific area"
-      description: "Get a specific area selected by id"
-      operationId: "getArea"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of area to return"
-        required: true
-        type: "string"
-        format: "uuid"
-
       responses:
-        200:
-          description: "The requested area"
+        '200':
+          description: A new created area
           schema:
             $ref: '#/definitions/Area'
-
-        404:
-          description: "Area does not exists"
-        500:
-          description: "Unexpected server error"
-
-    put:
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/areas/{id}/':
+    get:
       tags:
-      - "area"
-      summary: "Update an existing area with new data"
-      description: "Update an existing area with new data. The enclosure needs to be existing"
-      operationId: "updateArea"
+        - Area
+      summary: Get a specific area
+      description: Get a specific area selected by id
+      operationId: getArea
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of area to update"
-        required: true
-        type: "string"
-        format: "uuid"
-
-      - in: "body"
-        name: "body"
-        description: "Update the values that need to be changed"
-        required: true
-        schema:
-          $ref: "#/definitions/Area"
-
+        - name: id
+          in: path
+          description: ID of area to return
+          required: true
+          type: string
+          format: uuid
       responses:
-        200:
-          description: "The updated area"
+        '200':
+          description: The requested area
           schema:
             $ref: '#/definitions/Area'
-        404:
-          description: "Area does not exists"
-        500:
-          description: "Unexpected server error"
-
-      security:
-      - http_auth: []
-
-    delete:
-      tags:
-      - "area"
-      summary: "Delete an existing area"
-      description: "Delete an existing area"
-      operationId: "deleteArea"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of area to delete"
-        required: true
-        type: "string"
-        format: "uuid"
-
-      responses:
-        200:
-          description: "Delete successfull"
-        404:
-          description: "Area does not exists"
-        500:
-          description: "Unexpected server error"
-
-      security:
-      - http_auth: []
-
-  "/audio/hardware/":
-    get:
-      tags:
-      - "audio"
-      summary: "Get a list of supported soundcards"
-      description: "Get all the supported soundcards"
-      operationId: "getAudioHardware"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-
-      responses:
-        200:
-          description: "List of supported soundcards"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/AudioHardware"
-
-  "/audio/files/":
-    get:
-      tags:
-      - "audio"
-      summary: "Get a list of existing audio files"
-      description: "Get all the existing audio files"
-      operationId: "getAudioFiles"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-
-      responses:
-        200:
-          description: "Zero or more audio files"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/AudioFile"
-
-    post:
-      tags:
-      - "audio"
-      summary: "Upload a new audio file"
-      description: "Upload a new audio file"
-      operationId: "postAudioFile"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-
-      parameters:
-      - in: "body"
-        name: "audiofiles"
-        description: "The uploaded audio file"
-        required: true
-        type: "array"
-        schema:
-          type: "string"
-
-      responses:
-        200:
-          description: "Audio file is uploaded"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/AudioFile"
-        500:
-          description: "Unexpected server error"
-
-  "/audio/files/{file}":
-    get:
-      tags:
-      - "audio"
-      summary: "Get an existing audio file"
-      description: "Get an existing audio file based on ID"
-      operationId: "getAudioFile"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "file"
-        in: "path"
-        description: "ID of audio file"
-        required: true
-        type: "string"
-
-      responses:
-        200:
-          description: "The requested audio file"
-          schema:
-            $ref: "#/definitions/AudioFile"
-        404:
-          description: "Audio file does not exists"
-        500:
-          description: "Unexpected server error"
-
-    delete:
-      tags:
-      - "audio"
-      summary: "Delete an existing audio file"
-      description: "Delete an existing audio file"
-      operationId: "delAudioFile"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "file"
-        in: "path"
-        description: "ID of audio file"
-        required: true
-        type: "string"
-
-      responses:
-        200:
-          description: "The requested audio file is deleted"
-        404:
-          description: "Audio file does not exists"
-        500:
-          description: "Unexpected server error"
-
-  "/buttons/hardware/":
-    get:
-      tags:
-      - "button"
-      summary: "Get a list of supported buttons"
-      description: "Get all the supported buttons"
-      operationId: "getButtonsHardware"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-
-      responses:
-        200:
-          description: "List of supported hardware"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/ButtonHardware"
-
-  "/buttons/":
-    get:
-      tags:
-      - "button"
-      summary: "Get a list of existing buttons"
-      description: "Get all the existing buttons"
-      operationId: "getButtons"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-
-      responses:
-        200:
-          description: "Zero or more buttons"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Button"
-
-    post:
-      tags:
-      - "button"
-      summary: "Add a new button"
-      description: "Add a new button"
-      operationId: "addButton"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-
-      - in: "body"
-        name: "body"
-        description: "Created button object"
-        required: true
-        schema:
-          $ref: "#/definitions/Button"
-
-      responses:
-        200:
-          description: "A new created button"
-          schema:
-            $ref: '#/definitions/Button'
-        500:
-          description: "Unexpected server error"
-
-      security:
-      - http_auth: []
-
-  "/buttons/{id}/":
-    get:
-      tags:
-      - "button"
-      summary: "Get a specific button"
-      description: "Get a specific button selected by id"
-      operationId: "getButton"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of button to return"
-        required: true
-        type: "string"
-        format: "uuid"
-
-      responses:
-        200:
-          description: "The requested button"
-          schema:
-            $ref: '#/definitions/Button'
-
-        404:
-          description: "Button does not exists"
-        500:
-          description: "Unexpected server error"
-
+        '404':
+          description: Area does not exists
+        '500':
+          description: Unexpected server error
     put:
       tags:
-      - "button"
-      summary: "Update an existing button with new data"
-      description: "Update an existing button with new data."
-      operationId: "updateButton"
+        - Area
+      summary: Update an existing area with new data
+      description: >-
+        Update an existing area with new data. The enclosure needs to be
+        existing
+      operationId: updateArea
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of button to update"
-        required: true
-        type: "string"
-        format: "uuid"
-
-      - in: "body"
-        name: "body"
-        description: "Update the values that need to be changed"
-        required: true
-        schema:
-          $ref: "#/definitions/Button"
-
+        - name: id
+          in: path
+          description: ID of area to update
+          required: true
+          type: string
+          format: uuid
+        - in: body
+          name: body
+          description: Update the values that need to be changed
+          required: true
+          schema:
+            $ref: '#/definitions/Area'
       responses:
-        200:
-          description: "The updated button"
+        '200':
+          description: The updated area
+          schema:
+            $ref: '#/definitions/Area'
+        '404':
+          description: Area does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+    delete:
+      tags:
+        - Area
+      summary: Delete an existing area
+      description: Delete an existing area
+      operationId: deleteArea
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of area to delete
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Delete successfull
+        '404':
+          description: Area does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  /audio/hardware/:
+    get:
+      tags:
+        - Audio
+      summary: Get a list of supported soundcards
+      description: Get all the supported soundcards
+      operationId: getAudioHardware
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: List of supported soundcards
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AudioHardware'
+  /audio/files/:
+    get:
+      tags:
+        - Audio
+      summary: Get a list of existing audio files
+      description: Get all the existing audio files
+      operationId: getAudioFiles
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Zero or more audio files
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AudioFile'
+    post:
+      tags:
+        - Audio
+      summary: Upload a new audio file
+      description: Upload a new audio file
+      operationId: postAudioFile
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: audiofiles
+          description: The uploaded audio file
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Audio file is uploaded
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AudioFile'
+        '500':
+          description: Unexpected server error
+  '/audio/files/{file}':
+    get:
+      tags:
+        - Audio
+      summary: Get an existing audio file
+      description: Get an existing audio file based on ID
+      operationId: getAudioFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: file
+          in: path
+          description: ID of audio file
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The requested audio file
+          schema:
+            $ref: '#/definitions/AudioFile'
+        '404':
+          description: Audio file does not exists
+        '500':
+          description: Unexpected server error
+    delete:
+      tags:
+        - Audio
+      summary: Delete an existing audio file
+      description: Delete an existing audio file
+      operationId: delAudioFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: file
+          in: path
+          description: ID of audio file
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The requested audio file is deleted
+        '404':
+          description: Audio file does not exists
+        '500':
+          description: Unexpected server error
+  /buttons/hardware/:
+    get:
+      tags:
+        - Button
+      summary: Get a list of supported buttons
+      description: Get all the supported buttons
+      operationId: getButtonsHardware
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: List of supported hardware
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ButtonHardware'
+  /buttons/:
+    get:
+      tags:
+        - Button
+      summary: Get a list of existing buttons
+      description: Get all the existing buttons
+      operationId: getButtons
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Zero or more buttons
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Button'
+    post:
+      tags:
+        - Button
+      summary: Add a new button
+      description: Add a new button
+      operationId: addButton
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created button object
+          required: true
           schema:
             $ref: '#/definitions/Button'
-        404:
-          description: "Button does not exists"
-        500:
-          description: "Unexpected server error"
-
+      responses:
+        '200':
+          description: A new created button
+          schema:
+            $ref: '#/definitions/Button'
+        '500':
+          description: Unexpected server error
       security:
-      - http_auth: []
-
-    delete:
-      tags:
-      - "button"
-      summary: "Delete an existing button"
-      description: "Delete an existing button"
-      operationId: "deleteButton"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of button to delete"
-        required: true
-        type: "string"
-        format: "uuid"
-
-      responses:
-        200:
-          description: "Delete successfull"
-        404:
-          description: "Button does not exists"
-        500:
-          description: "Unexpected server error"
-
-      security:
-      - http_auth: []
-
-  "/buttons/{id}/history/":
+        - Basic: []
+  '/buttons/{id}/':
     get:
       tags:
-      - "button"
-      summary: "Get the history for a specific button for a period of 1 day"
-      description: "Get the history for a specific button for a period of 1 day"
-      operationId: "getButtonHistory"
+        - Button
+      summary: Get a specific button
+      description: Get a specific button selected by id
+      operationId: getButton
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of button for which to get the history"
-        required: true
-        type: "string"
-        format: "uuid"
-
+        - name: id
+          in: path
+          description: ID of button to return
+          required: true
+          type: string
+          format: uuid
       responses:
-        200:
-          description: "Button history for 1 day"
+        '200':
+          description: The requested button
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/ButtonHistory"
-        404:
-          description: "Button does not exists"
-        500:
-          description: "Unexpected server error"
-
-  "/buttons/{id}/history/{period}/":
-    get:
-      tags:
-      - "button"
-      summary: "Get the history for a specific button for a period"
-      description: "Get the history for a specific button for a period"
-      operationId: "getButtonHistoryPeriod"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of button to return"
-        required: true
-        type: "string"
-        format: "uuid"
-      - name: "period"
-        in: "path"
-        description: "Period"
-        required: true
-        type: "string"
-        enum:
-        - day
-        - week
-        - month
-        - year
-
-      responses:
-        200:
-          description: "Button history for {period}"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/ButtonHistory"
-        404:
-          description: "Button does not exists"
-        500:
-          description: "Unexpected server error"
-
-
-
-
-
-  "/relays/hardware/":
-    get:
-      tags:
-      - "relay"
-      summary: "Get a list of supported relays"
-      description: "Get all the supported relays"
-      operationId: "getRelaysHardware"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-
-      responses:
-        200:
-          description: "List of supported hardware"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/RelayHardware"
-
-  "/relays/":
-    get:
-      tags:
-      - "relay"
-      summary: "Get a list of existing relays"
-      description: "Get all the existing relays"
-      operationId: "getRelays"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-
-      responses:
-        200:
-          description: "Zero or more relays"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Relay"
-
-    post:
-      tags:
-      - "relay"
-      summary: "Add a new relay"
-      description: "Add a new relay"
-      operationId: "addRelay"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-
-      - in: "body"
-        name: "body"
-        description: "Created relay object"
-        required: true
-        schema:
-          $ref: "#/definitions/Relay"
-
-      responses:
-        200:
-          description: "A new created relay"
-          schema:
-            $ref: '#/definitions/Relay'
-        500:
-          description: "Unexpected server error"
-
-      security:
-      - http_auth: []
-
-  "/relays/{id}/":
-    get:
-      tags:
-      - "relay"
-      summary: "Get a specific relay"
-      description: "Get a specific relay selected by id"
-      operationId: "getRelay"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of relay to return"
-        required: true
-        type: "string"
-        format: "uuid"
-
-      responses:
-        200:
-          description: "The requested relay"
-          schema:
-            $ref: '#/definitions/Relay'
-
-        404:
-          description: "Relay does not exists"
-        500:
-          description: "Unexpected server error"
-
+            $ref: '#/definitions/Button'
+        '404':
+          description: Button does not exists
+        '500':
+          description: Unexpected server error
     put:
       tags:
-      - "relay"
-      summary: "Update an existing relay with new data"
-      description: "Update an existing relay with new data."
-      operationId: "updateRelay"
+        - Button
+      summary: Update an existing button with new data
+      description: Update an existing button with new data.
+      operationId: updateButton
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of relay to update"
-        required: true
-        type: "string"
-        format: "uuid"
-
-      - in: "body"
-        name: "body"
-        description: "Update the values that need to be changed"
-        required: true
-        schema:
-          $ref: "#/definitions/Relay"
-
-      responses:
-        200:
-          description: "The updated relay"
+        - name: id
+          in: path
+          description: ID of button to update
+          required: true
+          type: string
+          format: uuid
+        - in: body
+          name: body
+          description: Update the values that need to be changed
+          required: true
           schema:
-            $ref: '#/definitions/Relay'
-        404:
-          description: "Relay does not exists"
-        500:
-          description: "Unexpected server error"
-
+            $ref: '#/definitions/Button'
+      responses:
+        '200':
+          description: The updated button
+          schema:
+            $ref: '#/definitions/Button'
+        '404':
+          description: Button does not exists
+        '500':
+          description: Unexpected server error
       security:
-      - http_auth: []
-
+        - Basic: []
     delete:
       tags:
-      - "relay"
-      summary: "Delete an existing relay"
-      description: "Delete an existing relay"
-      operationId: "deleteRelay"
+        - Button
+      summary: Delete an existing button
+      description: Delete an existing button
+      operationId: deleteButton
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of relay to delete"
-        required: true
-        type: "string"
-        format: "uuid"
-
+        - name: id
+          in: path
+          description: ID of button to delete
+          required: true
+          type: string
+          format: uuid
       responses:
-        200:
-          description: "Delete successfull"
-        404:
-          description: "Relay does not exists"
-        500:
-          description: "Unexpected server error"
-
+        '200':
+          description: Delete successfull
+        '404':
+          description: Button does not exists
+        '500':
+          description: Unexpected server error
       security:
-      - http_auth: []
-
-  "/relays/{id}/history/":
+        - Basic: []
+  '/buttons/{id}/history/':
     get:
       tags:
-      - "relay"
-      summary: "Get the history for a specific relay for a period of 1 day"
-      description: "Get the history for a specific relay for a period of 1 day"
-      operationId: "getRelayHistory"
+        - Button
+      summary: Get the history for a specific button for a period of 1 day
+      description: Get the history for a specific button for a period of 1 day
+      operationId: getButtonHistory
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of relay for which to get the history"
-        required: true
-        type: "string"
-        format: "uuid"
-
+        - name: id
+          in: path
+          description: ID of button for which to get the history
+          required: true
+          type: string
+          format: uuid
       responses:
-        200:
-          description: "Relay history for 1 day"
+        '200':
+          description: Button history for 1 day
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/RelayHistory"
-        404:
-          description: "Relay does not exists"
-        500:
-          description: "Unexpected server error"
-
-  "/relays/{id}/history/{period}/":
+              $ref: '#/definitions/ButtonHistory'
+        '404':
+          description: Button does not exists
+        '500':
+          description: Unexpected server error
+  '/buttons/{id}/history/{period}/':
     get:
       tags:
-      - "relay"
-      summary: "Get the history for a specific relay for a period"
-      description: "Get the history for a specific relay for a period"
-      operationId: "getRelayHistoryPeriod"
+        - Button
+      summary: Get the history for a specific button for a period
+      description: Get the history for a specific button for a period
+      operationId: getButtonHistoryPeriod
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of relay to return"
-        required: true
-        type: "string"
-        format: "uuid"
-      - name: "period"
-        in: "path"
-        description: "Period"
-        required: true
-        type: "string"
-        enum:
-        - day
-        - week
-        - month
-        - year
-
+        - name: id
+          in: path
+          description: ID of button to return
+          required: true
+          type: string
+          format: uuid
+        - name: period
+          in: path
+          description: Period
+          required: true
+          type: string
+          enum:
+            - day
+            - week
+            - month
+            - year
       responses:
-        200:
-          description: "Relay history for {period}"
+        '200':
+          description: 'Button history for {period}'
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/RelayHistory"
-        404:
-          description: "Relay does not exists"
-        500:
-          description: "Unexpected server error"
-  "/sensors/hardware/":
+              $ref: '#/definitions/ButtonHistory'
+        '404':
+          description: Button does not exists
+        '500':
+          description: Unexpected server error
+  /calendar/:
     get:
       tags:
-      - "sensor"
-      summary: "Get a list of supported sensors"
-      description: "Get all the supported sensors"
-      operationId: "getSensorsHardware"
+        - Calendar
+      summary: Get existing calendars
+      description: Get all the existing calendars in a list.
+      operationId: getCalendars
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
-
+        - application/json
+      parameters:
+        - in: query
+          name: start
+          description: Start date and time for calendar items
+          required: false
+          type: string
+          format: date-time
+        - in: query
+          name: end
+          description: End date and time for calendar items
+          required: false
+          type: string
+          format: date-time
       responses:
-        200:
-          description: "List of supported hardware"
+        '200':
+          description: Zero or more calendars
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/SensorHardware"
-
-  "/sensors/":
-    get:
-      tags:
-      - "sensor"
-      summary: "Get a list of existing sensors"
-      description: "Get all the existing sensors"
-      operationId: "getSensors"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-
-      responses:
-        200:
-          description: "Zero or more sensors"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Sensor"
-
+              $ref: '#/definitions/Calendar'
     post:
       tags:
-      - "sensor"
-      summary: "Add a new sensor"
-      description: "Add a new sensor"
-      operationId: "addSensor"
+        - Calendar
+      summary: Add a new calendar event
+      description: Add a new calendar event
+      operationId: addCalendar
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-
-      - in: "body"
-        name: "body"
-        description: "Created sensor object"
-        required: true
-        schema:
-          $ref: "#/definitions/Sensor"
-
-      responses:
-        200:
-          description: "A new created sensor"
+        - in: body
+          name: body
+          description: Created calendar object
+          required: true
           schema:
-            $ref: '#/definitions/Sensor'
-        500:
-          description: "Unexpected server error"
-
+            $ref: '#/definitions/Calendar'
+      responses:
+        '200':
+          description: A new created calendar
+          schema:
+            $ref: '#/definitions/Calendar'
+        '500':
+          description: Unexpected server error
       security:
-      - http_auth: []
-
-  "/sensors/{id}/":
+        - Basic: []
+  '/calendar/{id}/':
     get:
       tags:
-      - "sensor"
-      summary: "Get a specific sensor"
-      description: "Get a specific sensor selected by id"
-      operationId: "getSensor"
+        - Calendar
+      summary: Get a specific calendar
+      description: Get a specific calendar selected by id
+      operationId: getCalendar
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of sensor to return"
-        required: true
-        type: "string"
-        format: "uuid"
-
+        - name: id
+          in: path
+          description: ID of calendar to return
+          required: true
+          type: string
+          format: uuid
       responses:
-        200:
-          description: "The requested sensor"
+        '200':
+          description: The requested calendar
           schema:
-            $ref: '#/definitions/Sensor'
-
-        404:
-          description: "Sensor does not exists"
-        500:
-          description: "Unexpected server error"
-
+            $ref: '#/definitions/Calendar'
+        '404':
+          description: Calendar does not exists
+        '500':
+          description: Unexpected server error
     put:
       tags:
-      - "sensor"
-      summary: "Update an existing sensor with new data"
-      description: "Update an existing sensor with new data."
-      operationId: "updateSensor"
+        - Calendar
+      summary: Update an existing calendar with new data
+      description: >-
+        Update an existing calendar with new data. The enclosure needs to be
+        existing
+      operationId: updateCalendar
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of sensor to update"
-        required: true
-        type: "string"
-        format: "uuid"
-
-      - in: "body"
-        name: "body"
-        description: "Update the values that need to be changed"
-        required: true
-        schema:
-          $ref: "#/definitions/Sensor"
-
-      responses:
-        200:
-          description: "The updated sensor"
+        - name: id
+          in: path
+          description: ID of calendar to update
+          required: true
+          type: string
+          format: uuid
+        - in: body
+          name: body
+          description: Update the values that need to be changed
+          required: true
           schema:
-            $ref: '#/definitions/Sensor'
-        404:
-          description: "Sensor does not exists"
-        500:
-          description: "Unexpected server error"
-
+            $ref: '#/definitions/Calendar'
+      responses:
+        '200':
+          description: The updated calendar
+          schema:
+            $ref: '#/definitions/Calendar'
+        '404':
+          description: Calendar does not exists
+        '500':
+          description: Unexpected server error
       security:
-      - http_auth: []
-
+        - Basic: []
     delete:
       tags:
-      - "sensor"
-      summary: "Delete an existing sensor"
-      description: "Delete an existing sensor"
-      operationId: "deleteSensor"
+        - Calendar
+      summary: Delete an existing calendar
+      description: Delete an existing calendar
+      operationId: deleteCalendar
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of sensor to delete"
-        required: true
-        type: "string"
-        format: "uuid"
-
+        - name: id
+          in: path
+          description: ID of calendar to delete
+          required: true
+          type: string
+          format: uuid
       responses:
-        200:
-          description: "Delete successfull"
-        404:
-          description: "Sensor does not exists"
-        500:
-          description: "Unexpected server error"
-
+        '200':
+          description: Delete successfull
+        '404':
+          description: Calendar does not exists
+        '500':
+          description: Unexpected server error
       security:
-      - http_auth: []
-
-  "/sensors/{id}/history/":
+        - Basic: []
+  /calendar/download/:
     get:
       tags:
-      - "sensor"
-      summary: "Get the history for a specific sensor for a period of 1 day"
-      description: "Get the history for a specific sensor for a period of 1 day"
-      operationId: "getSensorHistory"
+        - Calendar
+      summary: Download iCal
+      description: Download iCal
+      operationId: downloadCalendar
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of sensor for which to get the history"
-        required: true
-        type: "string"
-        format: "uuid"
-
+        - application/json
       responses:
-        200:
-          description: "Sensor history for 1 day"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/SensorHistory"
-        404:
-          description: "Sensor does not exists"
-        500:
-          description: "Unexpected server error"
-
-
-  "/sensors/{id}/history/{period}/":
+        '200':
+          description: The calendar in iCal format
+        '404':
+          description: Calendar does not exists
+        '500':
+          description: Unexpected server error
+  /enclosures/:
     get:
       tags:
-      - "sensor"
-      summary: "Get the history for a specific sensor for a period"
-      description: "Get the history for a specific sensor for a period"
-      operationId: "getSensorHistoryPeriod"
+        - Enclosure
+      summary: Get a list of existing enclosures
+      description: Get all the existing enclosures
+      operationId: getEnclosures
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of sensor to return"
-        required: true
-        type: "string"
-        format: "uuid"
-      - name: "period"
-        in: "path"
-        description: "Period"
-        required: true
-        type: "string"
-        enum:
-        - day
-        - week
-        - month
-        - year
-
+        - application/json
       responses:
-        200:
-          description: "Sensor history for {period}"
+        '200':
+          description: Zero or more enclosures
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/SensorHistory"
-        404:
-          description: "Sensor does not exists"
-        500:
-          description: "Unexpected server error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  # /pet/findByStatus:
-  #   get:
-  #     tags:
-  #     - "pet"
-  #     summary: "Finds Pets by status"
-  #     description: "Multiple status values can be provided with comma separated strings"
-  #     operationId: "findPetsByStatus"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "status"
-  #       in: "query"
-  #       description: "Status values that need to be considered for filter"
-  #       required: true
-  #       type: "array"
-  #       items:
-  #         type: "string"
-  #         enum:
-  #         - "available"
-  #         - "pending"
-  #         - "sold"
-  #         default: "available"
-  #       collectionFormat: "multi"
-  #     responses:
-  #       "200":
-  #         description: "successful operation"
-  #         schema:
-  #           type: "array"
-  #           items:
-  #             $ref: "#/definitions/Pet"
-  #       "400":
-  #         description: "Invalid status value"
-  #     security:
-  #     - petstore_auth:
-  #       - "write:pets"
-  #       - "read:pets"
-  # /pet/findByTags:
-  #   get:
-  #     tags:
-  #     - "pet"
-  #     summary: "Finds Pets by tags"
-  #     description: "Muliple tags can be provided with comma separated strings. Use         tag1, tag2, tag3 for testing."
-  #     operationId: "findPetsByTags"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "tags"
-  #       in: "query"
-  #       description: "Tags to filter by"
-  #       required: true
-  #       type: "array"
-  #       items:
-  #         type: "string"
-  #       collectionFormat: "multi"
-  #     responses:
-  #       "200":
-  #         description: "successful operation"
-  #         schema:
-  #           type: "array"
-  #           items:
-  #             $ref: "#/definitions/Pet"
-  #       "400":
-  #         description: "Invalid tag value"
-  #     security:
-  #     - petstore_auth:
-  #       - "write:pets"
-  #       - "read:pets"
-  #     deprecated: true
-  # /pet/{petId}:
-  #   get:
-  #     tags:
-  #     - "pet"
-  #     summary: "Find pet by ID"
-  #     description: "Returns a single pet"
-  #     operationId: "getPetById"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "petId"
-  #       in: "path"
-  #       description: "ID of pet to return"
-  #       required: true
-  #       type: "integer"
-  #       format: "int64"
-  #     responses:
-  #       "200":
-  #         description: "successful operation"
-  #         schema:
-  #           $ref: "#/definitions/Pet"
-  #       "400":
-  #         description: "Invalid ID supplied"
-  #       "404":
-  #         description: "Pet not found"
-  #     security:
-  #     - api_key: []
-  #   post:
-  #     tags:
-  #     - "pet"
-  #     summary: "Updates a pet in the store with form data"
-  #     description: ""
-  #     operationId: "updatePetWithForm"
-  #     consumes:
-  #     - "application/x-www-form-urlencoded"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "petId"
-  #       in: "path"
-  #       description: "ID of pet that needs to be updated"
-  #       required: true
-  #       type: "integer"
-  #       format: "int64"
-  #     - name: "name"
-  #       in: "formData"
-  #       description: "Updated name of the pet"
-  #       required: false
-  #       type: "string"
-  #     - name: "status"
-  #       in: "formData"
-  #       description: "Updated status of the pet"
-  #       required: false
-  #       type: "string"
-  #     responses:
-  #       "405":
-  #         description: "Invalid input"
-  #     security:
-  #     - petstore_auth:
-  #       - "write:pets"
-  #       - "read:pets"
-  #   delete:
-  #     tags:
-  #     - "pet"
-  #     summary: "Deletes a pet"
-  #     description: ""
-  #     operationId: "deletePet"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "api_key"
-  #       in: "header"
-  #       required: false
-  #       type: "string"
-  #     - name: "petId"
-  #       in: "path"
-  #       description: "Pet id to delete"
-  #       required: true
-  #       type: "integer"
-  #       format: "int64"
-  #     responses:
-  #       "400":
-  #         description: "Invalid ID supplied"
-  #       "404":
-  #         description: "Pet not found"
-  #     security:
-  #     - petstore_auth:
-  #       - "write:pets"
-  #       - "read:pets"
-  # /pet/{petId}/uploadImage:
-  #   post:
-  #     tags:
-  #     - "pet"
-  #     summary: "uploads an image"
-  #     description: ""
-  #     operationId: "uploadFile"
-  #     consumes:
-  #     - "multipart/form-data"
-  #     produces:
-  #     - "application/json"
-  #     parameters:
-  #     - name: "petId"
-  #       in: "path"
-  #       description: "ID of pet to update"
-  #       required: true
-  #       type: "integer"
-  #       format: "int64"
-  #     - name: "additionalMetadata"
-  #       in: "formData"
-  #       description: "Additional data to pass to server"
-  #       required: false
-  #       type: "string"
-  #     - name: "file"
-  #       in: "formData"
-  #       description: "file to upload"
-  #       required: false
-  #       type: "file"
-  #     responses:
-  #       "200":
-  #         description: "successful operation"
-  #         schema:
-  #           $ref: "#/definitions/ApiResponse"
-  #     security:
-  #     - petstore_auth:
-  #       - "write:pets"
-  #       - "read:pets"
-  # /store/inventory:
-  #   get:
-  #     tags:
-  #     - "store"
-  #     summary: "Returns pet inventories by status"
-  #     description: "Returns a map of status codes to quantities"
-  #     operationId: "getInventory"
-  #     produces:
-  #     - "application/json"
-  #     parameters: []
-  #     responses:
-  #       "200":
-  #         description: "successful operation"
-  #         schema:
-  #           type: "object"
-  #           additionalProperties:
-  #             type: "integer"
-  #             format: "int32"
-  #     security:
-  #     - api_key: []
-  # /store/order:
-  #   post:
-  #     tags:
-  #     - "store"
-  #     summary: "Place an order for a pet"
-  #     description: ""
-  #     operationId: "placeOrder"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - in: "body"
-  #       name: "body"
-  #       description: "order placed for purchasing the pet"
-  #       required: true
-  #       schema:
-  #         $ref: "#/definitions/Order"
-  #     responses:
-  #       "200":
-  #         description: "successful operation"
-  #         schema:
-  #           $ref: "#/definitions/Order"
-  #       "400":
-  #         description: "Invalid Order"
-  # /store/order/{orderId}:
-  #   get:
-  #     tags:
-  #     - "store"
-  #     summary: "Find purchase order by ID"
-  #     description: "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions"
-  #     operationId: "getOrderById"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "orderId"
-  #       in: "path"
-  #       description: "ID of pet that needs to be fetched"
-  #       required: true
-  #       type: "integer"
-  #       maximum: 10.0
-  #       minimum: 1.0
-  #       format: "int64"
-  #     responses:
-  #       "200":
-  #         description: "successful operation"
-  #         schema:
-  #           $ref: "#/definitions/Order"
-  #       "400":
-  #         description: "Invalid ID supplied"
-  #       "404":
-  #         description: "Order not found"
-  #   delete:
-  #     tags:
-  #     - "store"
-  #     summary: "Delete purchase order by ID"
-  #     description: "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors"
-  #     operationId: "deleteOrder"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "orderId"
-  #       in: "path"
-  #       description: "ID of the order that needs to be deleted"
-  #       required: true
-  #       type: "integer"
-  #       minimum: 1.0
-  #       format: "int64"
-  #     responses:
-  #       "400":
-  #         description: "Invalid ID supplied"
-  #       "404":
-  #         description: "Order not found"
-  # /user:
-  #   post:
-  #     tags:
-  #     - "user"
-  #     summary: "Create user"
-  #     description: "This can only be done by the logged in user."
-  #     operationId: "createUser"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - in: "body"
-  #       name: "body"
-  #       description: "Created user object"
-  #       required: true
-  #       schema:
-  #         $ref: "#/definitions/User"
-  #     responses:
-  #       default:
-  #         description: "successful operation"
-  # /user/createWithArray:
-  #   post:
-  #     tags:
-  #     - "user"
-  #     summary: "Creates list of users with given input array"
-  #     description: ""
-  #     operationId: "createUsersWithArrayInput"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - in: "body"
-  #       name: "body"
-  #       description: "List of user object"
-  #       required: true
-  #       schema:
-  #         type: "array"
-  #         items:
-  #           $ref: "#/definitions/User"
-  #     responses:
-  #       default:
-  #         description: "successful operation"
-  # /user/createWithList:
-  #   post:
-  #     tags:
-  #     - "user"
-  #     summary: "Creates list of users with given input array"
-  #     description: ""
-  #     operationId: "createUsersWithListInput"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - in: "body"
-  #       name: "body"
-  #       description: "List of user object"
-  #       required: true
-  #       schema:
-  #         type: "array"
-  #         items:
-  #           $ref: "#/definitions/User"
-  #     responses:
-  #       default:
-  #         description: "successful operation"
-  # /user/login:
-  #   get:
-  #     tags:
-  #     - "user"
-  #     summary: "Logs user into the system"
-  #     description: ""
-  #     operationId: "loginUser"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "username"
-  #       in: "query"
-  #       description: "The user name for login"
-  #       required: true
-  #       type: "string"
-  #     - name: "password"
-  #       in: "query"
-  #       description: "The password for login in clear text"
-  #       required: true
-  #       type: "string"
-  #     responses:
-  #       "200":
-  #         description: "successful operation"
-  #         schema:
-  #           type: "string"
-  #         headers:
-  #           X-Rate-Limit:
-  #             type: "integer"
-  #             format: "int32"
-  #             description: "calls per hour allowed by the user"
-  #           X-Expires-After:
-  #             type: "string"
-  #             format: "date-time"
-  #             description: "date in UTC when token expires"
-  #       "400":
-  #         description: "Invalid username/password supplied"
-  # /user/logout:
-  #   get:
-  #     tags:
-  #     - "user"
-  #     summary: "Logs out current logged in user session"
-  #     description: ""
-  #     operationId: "logoutUser"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters: []
-  #     responses:
-  #       default:
-  #         description: "successful operation"
-  # /user/{username}:
-  #   get:
-  #     tags:
-  #     - "user"
-  #     summary: "Get user by user name"
-  #     description: ""
-  #     operationId: "getUserByName"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "username"
-  #       in: "path"
-  #       description: "The name that needs to be fetched. Use user1 for testing. "
-  #       required: true
-  #       type: "string"
-  #     responses:
-  #       "200":
-  #         description: "successful operation"
-  #         schema:
-  #           $ref: "#/definitions/User"
-  #       "400":
-  #         description: "Invalid username supplied"
-  #       "404":
-  #         description: "User not found"
-  #   put:
-  #     tags:
-  #     - "user"
-  #     summary: "Updated user"
-  #     description: "This can only be done by the logged in user."
-  #     operationId: "updateUser"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "username"
-  #       in: "path"
-  #       description: "name that need to be updated"
-  #       required: true
-  #       type: "string"
-  #     - in: "body"
-  #       name: "body"
-  #       description: "Updated user object"
-  #       required: true
-  #       schema:
-  #         $ref: "#/definitions/User"
-  #     responses:
-  #       "400":
-  #         description: "Invalid user supplied"
-  #       "404":
-  #         description: "User not found"
-  #   delete:
-  #     tags:
-  #     - "user"
-  #     summary: "Delete user"
-  #     description: "This can only be done by the logged in user."
-  #     operationId: "deleteUser"
-  #     produces:
-  #     - "application/xml"
-  #     - "application/json"
-  #     parameters:
-  #     - name: "username"
-  #       in: "path"
-  #       description: "The name that needs to be deleted"
-  #       required: true
-  #       type: "string"
-  #     responses:
-  #       "400":
-  #         description: "Invalid username supplied"
-  #       "404":
-  #         description: "User not found"
-
+              $ref: '#/definitions/Enclosure'
+    post:
+      tags:
+        - Enclosure
+      summary: Add a new enclosure
+      description: Add a new enclosure
+      operationId: addEnclosure
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created enclosure object
+          required: true
+          schema:
+            $ref: '#/definitions/Enclosure'
+      responses:
+        '200':
+          description: A new created enclosure
+          schema:
+            $ref: '#/definitions/Enclosure'
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/enclosures/{id}/':
+    get:
+      tags:
+        - Enclosure
+      summary: Get a specific enclosure
+      description: Get a specific enclosure selected by id
+      operationId: getEnclosure
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of enclosure to return
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The requested enclosure
+          schema:
+            $ref: '#/definitions/Enclosure'
+        '404':
+          description: Enclosure does not exists
+        '500':
+          description: Unexpected server error
+    put:
+      tags:
+        - Enclosure
+      summary: Update an existing enclosure with new data
+      description: Update an existing enclosure with new data.
+      operationId: updateEnclosure
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of enclosure to update
+          required: true
+          type: string
+          format: uuid
+        - in: body
+          name: body
+          description: Update the values that need to be changed
+          required: true
+          schema:
+            $ref: '#/definitions/Enclosure'
+      responses:
+        '200':
+          description: The updated enclosure
+          schema:
+            $ref: '#/definitions/Enclosure'
+        '404':
+          description: Enclosure does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+    delete:
+      tags:
+        - Enclosure
+      summary: Delete an existing enclosure
+      description: Delete an existing enclosure
+      operationId: deleteEnclosure
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of enclosure to delete
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Delete successfull
+        '404':
+          description: Enclosure does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/{action}/':
+    post:
+      tags:
+        - System
+      summary: Restart/reboot/shutdown TerrariumPI
+      description: Restart/reboot/shutdown TerrariumPI
+      operationId: actionPi
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: action
+          in: path
+          description: Action to perform
+          required: true
+          type: string
+          enum:
+            - restart
+            - reboot
+            - shutdown
+      responses:
+        '200':
+          description: Result of the action
+          schema:
+            $ref: '#/definitions/Message'
+      security:
+        - Basic: []
+  /logfile/download/:
+    get:
+      tags:
+        - System
+      summary: Download the logfile
+      description: Download the logfile
+      operationId: downloadLogfile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Get the logfile in plain text
+      security:
+        - Basic: []
+  /playlists/:
+    get:
+      tags:
+        - Playlist
+      summary: Get a list of existing playlists
+      description: Get all the existing playlists
+      operationId: getPlaylists
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Zero or more playlists
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Playlist'
+    post:
+      tags:
+        - Playlist
+      summary: Add a new playlist
+      description: Add a new playlist
+      operationId: addPlaylist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created playlist object
+          required: true
+          schema:
+            $ref: '#/definitions/Playlist'
+      responses:
+        '200':
+          description: A new created playlist
+          schema:
+            $ref: '#/definitions/Playlist'
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/playlists/{id}/':
+    get:
+      tags:
+        - Playlist
+      summary: Get a specific playlist
+      description: Get a specific playlist selected by id
+      operationId: getPlaylist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of playlist to return
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The requested playlist
+          schema:
+            $ref: '#/definitions/Playlist'
+        '404':
+          description: Playlist does not exists
+        '500':
+          description: Unexpected server error
+    put:
+      tags:
+        - Playlist
+      summary: Update an existing playlist with new data
+      description: Update an existing playlist with new data.
+      operationId: updatePlaylist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of playlist to update
+          required: true
+          type: string
+          format: uuid
+        - in: body
+          name: body
+          description: Update the values that need to be changed
+          required: true
+          schema:
+            $ref: '#/definitions/Playlist'
+      responses:
+        '200':
+          description: The updated playlist
+          schema:
+            $ref: '#/definitions/Playlist'
+        '404':
+          description: Playlist does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+    delete:
+      tags:
+        - Playlist
+      summary: Delete an existing playlist
+      description: Delete an existing playlist
+      operationId: deletePlaylist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of playlist to delete
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Delete successfull
+        '404':
+          description: Playlist does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  /relays/hardware/:
+    get:
+      tags:
+        - Relay
+      summary: Get a list of supported relays
+      description: Get all the supported relays
+      operationId: getRelaysHardware
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: List of supported hardware
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RelayHardware'
+  /relays/scan/:
+    post:
+      tags:
+        - Relay
+      summary: Scan for new relays
+      description: Scan for new relays
+      operationId: scanRelays
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Found zero or more new relays
+          schema:
+            $ref: '#/definitions/Message'
+      security:
+        - Basic: []
+  /relays/:
+    get:
+      tags:
+        - Relay
+      summary: Get a list of existing relays
+      description: Get all the existing relays
+      operationId: getRelays
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Zero or more relays
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Relay'
+    post:
+      tags:
+        - Relay
+      summary: Add a new relay
+      description: Add a new relay
+      operationId: addRelay
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created relay object
+          required: true
+          schema:
+            $ref: '#/definitions/Relay'
+      responses:
+        '200':
+          description: A new created relay
+          schema:
+            $ref: '#/definitions/Relay'
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/relays/{id}/':
+    get:
+      tags:
+        - Relay
+      summary: Get a specific relay
+      description: Get a specific relay selected by id
+      operationId: getRelay
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of relay to return
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The requested relay
+          schema:
+            $ref: '#/definitions/Relay'
+        '404':
+          description: Relay does not exists
+        '500':
+          description: Unexpected server error
+    put:
+      tags:
+        - Relay
+      summary: Update an existing relay with new data
+      description: Update an existing relay with new data.
+      operationId: updateRelay
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of relay to update
+          required: true
+          type: string
+          format: uuid
+        - in: body
+          name: body
+          description: Update the values that need to be changed
+          required: true
+          schema:
+            $ref: '#/definitions/Relay'
+      responses:
+        '200':
+          description: The updated relay
+          schema:
+            $ref: '#/definitions/Relay'
+        '404':
+          description: Relay does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+    delete:
+      tags:
+        - Relay
+      summary: Delete an existing relay
+      description: Delete an existing relay
+      operationId: deleteRelay
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of relay to delete
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Delete successfull
+        '404':
+          description: Relay does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/relays/{id}/history/':
+    get:
+      tags:
+        - Relay
+      summary: Get the history for a specific relay for a period of 1 day
+      description: Get the history for a specific relay for a period of 1 day
+      operationId: getRelayHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of relay for which to get the history
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Relay history for 1 day
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RelayHistory'
+        '404':
+          description: Relay does not exists
+        '500':
+          description: Unexpected server error
+  '/relays/{id}/history/{period}/':
+    get:
+      tags:
+        - Relay
+      summary: Get the history for a specific relay for a period
+      description: Get the history for a specific relay for a period
+      operationId: getRelayHistoryPeriod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of relay to return
+          required: true
+          type: string
+          format: uuid
+        - name: period
+          in: path
+          description: Period
+          required: true
+          type: string
+          enum:
+            - day
+            - week
+            - month
+            - year
+            - replaced
+      responses:
+        '200':
+          description: 'Relay history for {period}'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RelayHistory'
+        '404':
+          description: Relay does not exists
+        '500':
+          description: Unexpected server error
+  '/relays/{id}/export/':
+    get:
+      tags:
+        - Relay
+      summary: Get the export for a specific relay for a period of 1 day
+      description: Get the export for a specific relay for a period of 1 day
+      operationId: getRelayExport
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of relay for which to get the export
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Relay export for 1 day
+        '404':
+          description: Relay does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/relays/{id}/export/{period}/':
+    get:
+      tags:
+        - Relay
+      summary: Get the export for a specific relay for a period
+      description: Get the export for a specific relay for a period
+      operationId: getRelayExportPeriod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of relay to return
+          required: true
+          type: string
+          format: uuid
+        - name: period
+          in: path
+          description: Period
+          required: true
+          type: string
+          enum:
+            - day
+            - week
+            - month
+            - year
+            - replaced
+      responses:
+        '200':
+          description: 'Relay export for {period}'
+        '404':
+          description: Relay does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/relays/{id}/{action}/':
+    post:
+      tags:
+        - Relay
+      summary: Change relay
+      description: >-
+        Change the state of the relay. Action 0-100 means you can use a value
+        between 0 and 100 if it is a dimmer. Manual is used for setting the
+        relay in manual mode. Replaced is used to mark the date in the calendar
+        for reminding for next time.
+      operationId: actionRelay
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of relay
+          required: true
+          type: string
+        - name: action
+          in: path
+          description: Relay action
+          required: true
+          type: string
+          enum:
+            - manual
+            - replaced
+            - toggle
+            - 'on'
+            - 'off'
+            - 0-100
+      responses:
+        '200':
+          description: Return the new state
+          schema:
+            $ref: '#/definitions/Message'
+        '404':
+          description: Relay does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  /sensors/hardware/:
+    get:
+      tags:
+        - Sensor
+      summary: Get a list of supported sensors
+      description: Get all the supported sensors
+      operationId: getSensorsHardware
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: List of supported hardware
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SensorHardware'
+  /sensors/scan/:
+    get:
+      tags:
+        - Sensor
+      summary: Scan for new sensors
+      description: Scan for new sensors. Not all sensors have auto discovery.
+      operationId: getSensorsScan
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Found zero or more new sensors
+          schema:
+            $ref: '#/definitions/Message'
+  /sensors/:
+    get:
+      tags:
+        - Sensor
+      summary: Get a list of existing sensors
+      description: Get all the existing sensors
+      operationId: getSensors
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Zero or more sensors
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Sensor'
+    post:
+      tags:
+        - Sensor
+      summary: Add a new sensor
+      description: Add a new sensor
+      operationId: addSensor
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created sensor object
+          required: true
+          schema:
+            $ref: '#/definitions/Sensor'
+      responses:
+        '200':
+          description: A new created sensor
+          schema:
+            $ref: '#/definitions/Sensor'
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/sensors/{id}/':
+    get:
+      tags:
+        - Sensor
+      summary: Get a specific sensor
+      description: Get a specific sensor selected by id
+      operationId: getSensor
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of sensor to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The requested sensor
+          schema:
+            $ref: '#/definitions/Sensor'
+        '404':
+          description: Sensor does not exists
+        '500':
+          description: Unexpected server error
+    put:
+      tags:
+        - Sensor
+      summary: Update an existing sensor with new data
+      description: Update an existing sensor with new data.
+      operationId: updateSensor
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of sensor to update
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Update the values that need to be changed
+          required: true
+          schema:
+            $ref: '#/definitions/Sensor'
+      responses:
+        '200':
+          description: The updated sensor
+          schema:
+            $ref: '#/definitions/Sensor'
+        '404':
+          description: Sensor does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+    delete:
+      tags:
+        - Sensor
+      summary: Delete an existing sensor
+      description: Delete an existing sensor
+      operationId: deleteSensor
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of sensor to delete
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Delete successfull
+        '404':
+          description: Sensor does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/sensors/{type}/':
+    get:
+      tags:
+        - Sensor
+      summary: 'Get all sensor of {type}'
+      description: Get all sensor of a specified type
+      operationId: getSensorType
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: type
+          in: path
+          description: A valid sensor type
+          required: true
+          type: string
+          enum:
+            - altitude
+            - co2
+            - distance
+            - fertility
+            - humidity
+            - light
+            - moisture
+            - ph
+            - pressure
+            - temperature
+            - uva
+            - uvb
+            - uvi
+      responses:
+        '200':
+          description: The requested sensors
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Sensor'
+        '404':
+          description: Sensor type does not exists
+        '500':
+          description: Unexpected server error
+  '/sensors/{filter}/history/':
+    get:
+      tags:
+        - Sensor
+      summary: Get the history for a specific sensor or sensor type.
+      description: >-
+        Get the history for a specific sensor or sensor type for a period of 1
+        day. When using a sensor type, the values will be averages of all sensor
+        of the selected type.
+      operationId: getSensorHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: filter
+          in: path
+          description: Either a sensor ID or sensor type can be used as filter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Sensor history for 1 day
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SensorHistory'
+        '404':
+          description: Sensor does not exists
+        '500':
+          description: Unexpected server error
+  '/sensors/{filter}/history/{period}/':
+    get:
+      tags:
+        - Sensor
+      summary: Get the history for a specific sensor or sensor type.
+      description: >-
+        Get the history for a specific sensor or sensor type for a period of
+        {period}. When using a sensor type, the values will be averages of all
+        sensor of the selected type.
+      operationId: getSensorHistoryPeriod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: filter
+          in: path
+          description: Either a sensor ID or sensor type can be used as filter
+          required: true
+          type: string
+        - name: period
+          in: path
+          description: Period
+          required: true
+          type: string
+          enum:
+            - day
+            - week
+            - month
+            - year
+      responses:
+        '200':
+          description: 'Sensor history for {period}'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SensorHistory'
+        '404':
+          description: Sensor does not exists
+        '500':
+          description: Unexpected server error
+  '/sensors/{filter}/export/':
+    get:
+      tags:
+        - Sensor
+      summary: Get the export for a specific sensor or sensor type.
+      description: >-
+        Get the export for a specific sensor or sensor type for a period of 1
+        day. When using a sensor type, the values will be averages of all sensor
+        of the selected type.
+      operationId: getSensorExport
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: filter
+          in: path
+          description: Either a sensor ID or sensor type can be used as filter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Sensor export for 1 day
+        '404':
+          description: Sensor does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/sensors/{filter}/export/{period}/':
+    get:
+      tags:
+        - Sensor
+      summary: Get the export for a specific sensor or sensor type.
+      description: >-
+        Get the export for a specific sensor or sensor type for a period of
+        {period}. When using a sensor type, the values will be averages of all
+        sensor of the selected type.
+      operationId: getSensorExportPeriod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: filter
+          in: path
+          description: Either a sensor ID or sensor type can be used as filter
+          required: true
+          type: string
+        - name: period
+          in: path
+          description: Period
+          required: true
+          type: string
+          enum:
+            - day
+            - week
+            - month
+            - year
+      responses:
+        '200':
+          description: 'Sensor export for {period}'
+        '404':
+          description: Sensor does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  /system_status/:
+    get:
+      tags:
+        - System
+      summary: Get the current state
+      description: Get the current state of the system.
+      operationId: systemStatus
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: System status
+          schema:
+            $ref: '#/definitions/Status'
+  /settings/:
+    get:
+      tags:
+        - Settings
+      summary: Get all settings
+      description: Get all settings in an list. Password setting will be skipped.
+      operationId: settingList
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: All settings
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Setting'
+      security:
+        - Basic: []
+    put:
+      tags:
+        - Settings
+      summary: Update multiple settings
+      description: >-
+        Update multiple settings in one action. Non existing setting ids will be
+        ignored.
+      operationId: settingsUpdate
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: All settings to change in one action
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Setting'
+      responses:
+        '200':
+          description: All settings
+          schema:
+            $ref: '#/definitions/Message'
+        '400':
+          description: Password fields do not match.
+      security:
+        - Basic: []
+    post:
+      tags:
+        - Settings
+      summary: Add a new setting
+      description: Add a new setting
+      operationId: settingAdd
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: The new setting
+          required: true
+          schema:
+            $ref: '#/definitions/Setting'
+      responses:
+        '200':
+          description: All settings
+          schema:
+            $ref: '#/definitions/Setting'
+      security:
+        - Basic: []
+  '/settings/{id}/':
+    get:
+      tags:
+        - Settings
+      summary: Get a setting
+      description: Get a single setting based on ID
+      operationId: settingGet
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: Setting ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: All settings
+          schema:
+            $ref: '#/definitions/Setting'
+      security:
+        - Basic: []
+    put:
+      tags:
+        - Settings
+      summary: Update a setting
+      description: Update a single setting based on ID
+      operationId: settingUpdate
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: The setting to update
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Update the values that need to be changed
+          required: true
+          schema:
+            $ref: '#/definitions/Setting'
+      responses:
+        '200':
+          description: All settings
+          schema:
+            $ref: '#/definitions/Message'
+        '400':
+          description: Password fields do not match.
+      security:
+        - Basic: []
+    delete:
+      tags:
+        - Settings
+      summary: Delete a setting
+      description: Delete a setting
+      operationId: settingDelete
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: The setting to delete
+          required: true
+          type: string
+      responses:
+        '200':
+          description: All settings
+          schema:
+            $ref: '#/definitions/Message'
+        '404':
+          description: Setting does not exists
+      security:
+        - Basic: []
+  /weather/:
+    get:
+      tags:
+        - Weather
+      summary: Get weather data
+      description: Get weather data
+      operationId: weatherDetail
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Weather data
+          schema:
+            $ref: '#/definitions/Weather'
+  /weather/forecast/:
+    get:
+      tags:
+        - Weather
+      summary: Get weather temperature forecast
+      description: Get weather temperature forecast
+      operationId: weatherForecast
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Weather forecast data
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WeatherForecast'
+  /webcams/hardware/:
+    get:
+      tags:
+        - Webcam
+      summary: Get a list of supported webcams
+      description: Get all the supported webcams
+      operationId: getWebcamsHardware
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: List of supported hardware
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WebcamHardware'
+  /webcams/:
+    get:
+      tags:
+        - Webcam
+      summary: Get a list of existing webcams
+      description: Get all the existing webcams
+      operationId: getWebcams
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Zero or more webcams
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Webcam'
+    post:
+      tags:
+        - Webcam
+      summary: Add a new webcam
+      description: Add a new webcam
+      operationId: addWebcam
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created webcam object
+          required: true
+          schema:
+            $ref: '#/definitions/Webcam'
+      responses:
+        '200':
+          description: A new created webcam
+          schema:
+            $ref: '#/definitions/Webcam'
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/webcams/{id}/':
+    get:
+      tags:
+        - Webcam
+      summary: Get a specific webcam
+      description: Get a specific webcam selected by id
+      operationId: getWebcam
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of webcam to return
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The requested webcam
+          schema:
+            $ref: '#/definitions/Webcam'
+        '404':
+          description: Webcam does not exists
+        '500':
+          description: Unexpected server error
+    put:
+      tags:
+        - Webcam
+      summary: Update an existing webcam with new data
+      description: Update an existing webcam with new data.
+      operationId: updateWebcam
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of webcam to update
+          required: true
+          type: string
+          format: uuid
+        - in: body
+          name: body
+          description: Update the values that need to be changed
+          required: true
+          schema:
+            $ref: '#/definitions/Webcam'
+      responses:
+        '200':
+          description: The updated webcam
+          schema:
+            $ref: '#/definitions/Webcam'
+        '404':
+          description: Webcam does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+    delete:
+      tags:
+        - Webcam
+      summary: Delete an existing webcam
+      description: Delete an existing webcam
+      operationId: deleteWebcam
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of webcam to delete
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Delete successfull
+        '404':
+          description: Webcam does not exists
+        '500':
+          description: Unexpected server error
+      security:
+        - Basic: []
+  '/webcams/{id}/archive/{period}/':
+    get:
+      tags:
+        - Webcam
+      summary: Get a list of archived images for the selected period
+      description: Get a list of archived images for the selected period
+      operationId: getWebcamArchive
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of webcam for which to get the archive
+          required: true
+          type: string
+          format: uuid
+        - name: period
+          in: path
+          description: The date for which to get archive images. Format %Y/%m/%d
+          required: true
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Webcam history for 1 day
+          schema:
+            type: array
+            items:
+              allOf:
+                - type: string
+                  description: Full url to the archive image
+        '404':
+          description: Webcam does not exists
+        '500':
+          description: Unexpected server error
 securityDefinitions:
-  http_auth:
-    type: "basic"
-
+  Basic:
+    type: basic
+    description: >-
+      Basic HTTP authentication. Default user is "admin". You can change this in
+      the settings.
 definitions:
   AreaType:
-    type: "object"
+    type: object
     properties:
       type:
-        type: "string"
+        type: string
         readOnly: true
+        description: Area type ID
       name:
-        type: "string"
+        type: string
         readOnly: true
+        description: Area type readable name
       sensors:
-        type: "array"
+        type: array
         readOnly: true
+        description: List of sensor types that can be used by this area type
         items:
           allOf:
-          - type: "string"
-
+            - type: string
   Area:
-    type: "object"
+    type: object
     required:
-    - "enclosure"
-    - "name"
-    - "type"
-    - "mode"
-    - "setup"
+      - enclosure
+      - name
+      - type
+      - mode
+      - setup
     properties:
       id:
-        type: "string"
-        format: "uuid"
+        type: string
+        format: uuid
         readOnly: true
+        description: Auto generated ID
       enclosure:
-        type: "string"
-        format: "uuid"
+        type: string
+        format: uuid
+        description: The ID of the enclosure of which this area belongs to
       name:
-        type: "string"
+        type: string
+        description: Name of the area
       type:
-        type: "string"
-        description: "Area type"
+        type: string
+        description: Area type from the AreaType list
       mode:
-        type: "string"
-        description: "Operating mode"
+        type: string
+        description: Operating mode
+        enum:
+          - disabled
+          - main_lights
+          - timer
+          - sensors
+          - weather
+          - weather_inverse
       setup:
-        type: "string"
-        default: "{}"
+        type: string
+        default: '{}'
+        description: JSON setup data
       state:
-        type: "string"
-        default: "{}"
+        type: string
+        default: '{}'
         readOnly: true
-
+        description: JSON state data
   AudioHardware:
-    type: "object"
+    type: object
     properties:
       index:
-        type: "integer"
+        type: integer
         readOnly: true
+        description: Audio hardware ID
       name:
-        type: "string"
+        type: string
         readOnly: true
-
+        description: Audio hardware readable name
   AudioFile:
-    type: "object"
+    type: object
     properties:
       id:
-        type: "string"
+        type: string
         readOnly: true
+        description: Auto generated ID
       name:
-        type: "string"
-#        readOnly: true
+        type: string
+        description: Artist and song name based on ID3 tag data
       filename:
-        type: "string"
-#        readOnly: true
+        type: string
+        description: The full path of the audio file
       duration:
-        type: "number"
+        type: number
         readOnly: true
+        description: Audio file duration in seconds
       filesize:
-        type: "number"
+        type: number
         readOnly: true
-
-  Enclosure:
-    type: "object"
-    required:
-    - "name"
-
-    properties:
-      id:
-        type: "string"
-        format: "uuid"
-        readOnly: true
-      name:
-        type: "string"
-      image:
-        type: "string"
-        description: "Enclosure image"
-      areas:
-        type: "array"
-        items:
-          allOf:
-          - $ref: "#/definitions/Area"
-          - type: object
-
-      doors:
-        type: "string"
-        default: {}
-      webcams:
-        type: "string"
-        default: {}
-
+        description: Audio file size in bytes
   Button:
-    type: "object"
+    type: object
     required:
-    - "name"
-    - "hardware"
-    - "address"
-
+      - name
+      - hardware
+      - address
     properties:
       id:
-        type: "string"
-        format: "uuid"
+        type: string
         readOnly: true
+        description: Auto generated ID
       hardware:
-        type: "string"
+        type: string
+        description: Button hardware type from ButtonHardware list
       name:
-        type: "string"
+        type: string
+        description: Name of the button
       address:
-        type: "string"
+        type: string
+        description: The address of the button
       calibration:
-        format: "string"
-        default: "{}"
+        format: string
+        default: '{}'
+        description: JSON data
       value:
-        type: "number"
+        type: number
         readOnly: true
-
+        description: The current state of the button
   ButtonHardware:
-    type: "object"
+    type: object
     properties:
       hardware:
-        type: "string"
+        type: string
         readOnly: true
+        description: Button hardware type ID
       name:
-        type: "string"
+        type: string
         readOnly: true
-
+        description: Button hardware type name
   ButtonHistory:
-    type: "object"
+    type: object
     properties:
       timestamp:
-        type: "integer"
+        type: integer
         readOnly: true
+        description: Button measurement unix timestamp
       value:
-        type: "number"
+        type: number
         readOnly: true
-
-  Relay:
-    type: "object"
+        description: Button measurement state
+  Calendar:
+    type: object
     required:
-    - "name"
-    - "hardware"
-    - "address"
-
+      - summary
+      - dtstart
     properties:
       id:
-        type: "string"
-        format: "uuid"
+        type: string
         readOnly: true
-      hardware:
-        type: "string"
+        description: Auto generated ID
+      summary:
+        type: string
+        description: Event title
+      description:
+        type: string
+        description: Event description
+      location:
+        type: string
+        description: Event location
+      dtstart:
+        type: string
+        format: date
+        default: 0
+        description: Event start date and time
+      dtend:
+        type: string
+        default: 0
+        format: date
+        description: Event end date and time
+      all_day:
+        type: boolean
+        default: false
+        description: True when the event is an all day event
+      freq:
+        type: string
+        description: Event repeat period
+        enum:
+          - daily
+          - weekly
+          - monthly
+          - yearly
+      interval:
+        type: integer
+        description: Event repeat period value
+      repeatend:
+        type: string
+        format: date-time
+        description: Event repeat end date and time
+  Enclosure:
+    type: object
+    required:
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        readOnly: true
+        description: Auto generated ID
       name:
-        type: "string"
+        type: string
+        description: Name of the enclosure
+      image:
+        type: string
+        description: Enclosure image
+      areas:
+        type: array
+        description: A list of areas that are in this enclosure
+        items:
+          $ref: '#/definitions/Area'
+      doors:
+        type: array
+        description: A list of doors (button) that are in this enclosure
+        items:
+          $ref: '#/definitions/Button'
+      webcams:
+        type: array
+        description: A list of webcams that are in this enclosure
+        items:
+          $ref: '#/definitions/Webcam'
+  Message:
+    type: object
+    properties:
+      message:
+        type: string
+        description: Holds the return message from the server
+        default: Action succeeded
+  Playlist:
+    type: object
+    required:
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: Auto generated ID
+      name:
+        type: string
+        description: Name of the playlist
+      volume:
+        type: string
+        description: Volume for this playlist
+        minimum: 0
+        maximum: 100
+        default: 80
+      shuffle:
+        type: boolean
+        description: Enable shuffle for this playlist
+        default: false
+      repeat:
+        type: boolean
+        description: Enable repeating for this playlist
+        default: false
+      files:
+        type: array
+        description: List of audio files
+        items:
+          $ref: '#/definitions/AudioFile'
+  Relay:
+    type: object
+    required:
+      - name
+      - hardware
+      - address
+    properties:
+      id:
+        type: string
+        readOnly: true
+        description: Auto generated ID
+      hardware:
+        type: string
+        description: Relay hardware type from RelayHardware list
+      name:
+        type: string
+        description: Name of the relay
       address:
-        type: "string"
+        type: string
+        description: The address of the relay
       wattage:
-        type: "number"
-        default: 0.0
+        type: number
+        default: 0
+        description: The amount of power in watts the relay uses when on
       flow:
-        type: "number"
-        default: 0.0
+        type: number
+        default: 0
+        description: The amount of water in liter per minute the relay uses when on
       manual_mode:
-        type: "boolean"
+        type: boolean
         default: false
         readOnly: true
+        description: Is the relay in manual mode
       replacement:
-        type: "string"
-        format: "date-time"
-        default: "1970-01-01 00:00:00"
+        type: string
+        format: date-time
+        default: '1970-01-01 00:00:00'
         readOnly: true
+        description: Last replacement date and time of the attached hardware
       calibration:
-        format: "string"
-        default: "{}"
+        type: object
+        description: JSON data
       value:
-        type: "number"
+        type: number
         readOnly: true
+        description: The current state of the relay
       dimmer:
-        type: "boolean"
+        type: boolean
         readOnly: true
-
+        description: Is the relay a dimmer
   RelayHardware:
-    type: "object"
+    type: object
     properties:
       hardware:
-        type: "string"
+        type: string
         readOnly: true
+        description: Relay hardware type ID
       name:
-        type: "string"
+        type: string
         readOnly: true
-
+        description: Relay hardware type name
   RelayHistory:
-    type: "object"
+    type: object
     properties:
       timestamp:
-        type: "integer"
+        type: integer
         readOnly: true
+        description: Relay measurement unix timestamp
       value:
-        type: "number"
+        type: number
         readOnly: true
-
+        description: Relay measurement state
   Sensor:
-    type: "object"
+    type: object
     required:
-    - "name"
-    - "hardware"
-    - "type"
-    - "address"
-    - "exclude_avg"
-
+      - name
+      - hardware
+      - type
+      - address
+      - exclude_avg
     properties:
       id:
-        type: "string"
-        format: "uuid"
+        type: string
         readOnly: true
+        description: Auto generated ID
       hardware:
-        type: "string"
+        type: string
+        description: Sensor hardware type from SensorHardware list
       type:
-        type: "string"
+        type: string
+        description: The sensor measurement type
+        enum:
+          - altitude
+          - co2
+          - distance
+          - fertility
+          - humidity
+          - light
+          - moisture
+          - ph
+          - pressure
+          - temperature
+          - uva
+          - uvb
+          - uvi
       name:
-        type: "string"
+        type: string
+        description: Name of the sensor
       address:
-        type: "string"
+        type: string
+        description: The address of the sensor
       limit_min:
-        type: "number"
+        type: number
+        default: 0
+        description: The minimum value which is a valid measurement
       limit_max:
-        type: "number"
+        type: number
+        default: 100
+        description: The maximum value which is a valid measurement
       alarm_min:
-        type: "number"
+        type: number
+        default: 0
+        description: The minimum value which triggers the alarm
       alarm_max:
-        type: "number"
+        type: number
+        default: 100
+        description: The maximum value which triggers the alarm
       max_diff:
-        type: "number"
+        type: number
+        default: 0
+        description: The maximum difference between two measurements that is valid
       exclude_avg:
-        type: "boolean"
+        type: boolean
+        description: Exclude this sensor from average calculation on the dashboard
       calibration:
-        format: "string"
-        default: "{}"
+        type: object
+        description: JSON data
       value:
-        type: "number"
+        type: number
         readOnly: true
+        description: The current value of the sensor
       alarm:
-        type: "boolean"
+        type: boolean
         readOnly: true
+        description: Is there a high or low alarm
       error:
-        type: "boolean"
+        type: boolean
         readOnly: true
-
+        description: Is there a hardware problem with the sensor
   SensorHardware:
-    type: "object"
+    type: object
     properties:
       hardware:
-        type: "string"
+        type: string
         readOnly: true
+        description: Sensor hardware type ID
       name:
-        type: "string"
+        type: string
         readOnly: true
+        description: Sensor hardware type name
       types:
-        type: "array"
+        type: array
+        description: List of supported sensor types
         items:
           allOf:
-          - type: "string"
-
+            - type: string
         readOnly: true
-
   SensorHistory:
-    type: "object"
+    type: object
     properties:
       timestamp:
-        type: "integer"
+        type: integer
         readOnly: true
+        description: Sensor measurement unix timestamp
       value:
-        type: "number"
+        type: number
         readOnly: true
+        description: Sensor measurement value
       alarm_min:
-        type: "number"
+        type: number
         readOnly: true
+        description: Sensor measurement low alarm value
       alarm_max:
-        type: "number"
+        type: number
         readOnly: true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  # User:
-  #   type: "object"
-  #   properties:
-  #     id:
-  #       type: "integer"
-  #       format: "int64"
-  #     username:
-  #       type: "string"
-  #     firstName:
-  #       type: "string"
-  #     lastName:
-  #       type: "string"
-  #     email:
-  #       type: "string"
-  #     password:
-  #       type: "string"
-  #     phone:
-  #       type: "string"
-  #     userStatus:
-  #       type: "integer"
-  #       format: "int32"
-  #       description: "User Status"
-  #   xml:
-  #     name: "User"
-  # Tag:
-  #   type: "object"
-  #   properties:
-  #     id:
-  #       type: "integer"
-  #       format: "int64"
-  #     name:
-  #       type: "string"
-  #   xml:
-  #     name: "Tag"
-  # Pet:
-  #   type: "object"
-  #   required:
-  #   - "name"
-  #   - "photoUrls"
-  #   properties:
-  #     id:
-  #       type: "integer"
-  #       format: "int64"
-  #     category:
-  #       $ref: "#/definitions/Category"
-  #     name:
-  #       type: "string"
-  #       example: "doggie"
-  #     photoUrls:
-  #       type: "array"
-  #       xml:
-  #         name: "photoUrl"
-  #         wrapped: true
-  #       items:
-  #         type: "string"
-  #     tags:
-  #       type: "array"
-  #       xml:
-  #         name: "tag"
-  #         wrapped: true
-  #       items:
-  #         $ref: "#/definitions/Tag"
-  #     status:
-  #       type: "string"
-  #       description: "pet status in the store"
-  #       enum:
-  #       - "available"
-  #       - "pending"
-  #       - "sold"
-  #   xml:
-  #     name: "Pet"
-  # ApiResponse:
-  #   type: "object"
-  #   properties:
-  #     code:
-  #       type: "integer"
-  #       format: "int32"
-  #     type:
-  #       type: "string"
-  #     message:
-  #       type: "string"
+        description: Sensor measurement high alarm value
+  Setting:
+    type: object
+    required:
+      - value
+    properties:
+      id:
+        type: string
+        readOnly: true
+        description: Setting ID
+      value:
+        type: string
+        description: Setting value
+  Status:
+    type: object
+    description: Read only system status
+    properties:
+      is_day:
+        type: boolean
+        readOnly: true
+        description: Is the system in day mode
+      uptime:
+        type: integer
+        readOnly: true
+        description: System uptime in seconds
+      load:
+        type: object
+        readOnly: true
+        description: >-
+          System load in percentage and absolute values. It contains the
+          current, last 5 minutes and last 15 minutes load
+        properties:
+          percentage:
+            type: array
+            readOnly: true
+            minItems: 3
+            maxItems: 3
+            items:
+              allOf:
+                - type: integer
+          absolute:
+            type: array
+            readOnly: true
+            minItems: 3
+            maxItems: 3
+            items:
+              allOf:
+                - type: integer
+      cpu_temperature:
+        type: integer
+        readOnly: true
+        description: The current system CPU temperature
+      memory:
+        type: object
+        readOnly: true
+        description: System memory usage status
+        properties:
+          total:
+            type: integer
+            readOnly: true
+            description: Total memory in bytes
+          used:
+            type: integer
+            readOnly: true
+            description: Used memory in bytes
+          free:
+            type: integer
+            readOnly: true
+            description: Free memory in bytes
+      storage:
+        type: object
+        readOnly: true
+        description: System disk usage status
+        properties:
+          total:
+            type: integer
+            readOnly: true
+            description: Total disk space in bytes
+          used:
+            type: integer
+            readOnly: true
+            description: Used disk space in bytes
+          free:
+            type: integer
+            readOnly: true
+            description: Free disk space in bytes
+  Weather:
+    type: object
+    description: Read only current weather status
+    readOnly: true
+    properties:
+      location:
+        type: object
+        readOnly: true
+        description: The location based on the weather setting data
+        properties:
+          city:
+            type: string
+            readOnly: true
+            description: The location city name
+          country:
+            type: string
+            readOnly: true
+            description: The location country name
+          geo:
+            type: object
+            readOnly: true
+            description: The location geo coordinates
+            properties:
+              lat:
+                type: number
+                readOnly: true
+                description: The location latitude value
+              long:
+                type: number
+                readOnly: true
+                description: The location longitude value
+      sun:
+        type: object
+        readOnly: true
+        description: The sun rise and set values based on the weather setting data
+        properties:
+          rise:
+            type: integer
+            readOnly: true
+            description: The sun rise time in unix timestamp
+          set:
+            type: integer
+            readOnly: true
+            description: The sun set time in unix timestamp
+      is_day:
+        type: boolean
+        readOnly: true
+        description: Is it currently day?
+      indicators:
+        type: object
+        readOnly: true
+        description: Temperature and other indicators based on locale
+        properties:
+          wind:
+            type: string
+            readOnly: true
+            description: Windspeed indicator
+          temperature:
+            type: string
+            readOnly: true
+            description: Temperature indicator
+      credits:
+        type: object
+        readOnly: true
+        description: Credits information from the free weather source
+        properties:
+          text:
+            type: string
+            readOnly: true
+            description: Credits text
+          url:
+            type: string
+            readOnly: true
+            description: Credits link
+      forecast:
+        type: array
+        readOnly: true
+        description: A seven day weather forecast
+        minItems: 7
+        maxItems: 7
+        items:
+          type: object
+          readOnly: true
+          description: A single day weather forecast
+          properties:
+            dt:
+              type: integer
+              readOnly: true
+              description: The day for which this forecast is valid
+            rise:
+              type: integer
+              readOnly: true
+              description: Sun rise time in unix timestamp
+            set:
+              type: integer
+              readOnly: true
+              description: Sun set time in unix timestamp
+            temp:
+              type: number
+              readOnly: true
+              description: The temperature forecast
+            humidity:
+              type: number
+              readOnly: true
+              description: The humidity forecast
+            wind:
+              type: object
+              readOnly: true
+              description: The wind forecast
+              properties:
+                speed:
+                  type: number
+                  readOnly: true
+                  description: Wind speed in the selected wind speed indicator value
+                direction:
+                  type: integer
+                  readOnly: true
+                  description: Wind speed direction in degrees
+            weather:
+              type: string
+              readOnly: true
+              description: Human readable weather forecast
+  WeatherForecast:
+    type: object
+    readOnly: true
+    description: 14 days temperature weather forecast
+    properties:
+      value:
+        type: number
+        readOnly: true
+        description: >-
+          Weather forecast temperature in the selected temperature indicator
+          value
+      timestamp:
+        type: number
+        readOnly: true
+        description: Weather forecast unix timestamp
+  WebcamHardware:
+    type: object
+    description: Webcam hardware object
+    properties:
+      hardware:
+        type: string
+        readOnly: true
+        description: Webcam hardware ID
+      name:
+        type: string
+        readOnly: true
+        description: Webcam hardware readable name
+  Webcam:
+    type: object
+    description: Webcam object
+    required:
+      - hardware
+      - name
+      - address
+      - width
+      - height
+      - rotation
+      - awb
+    properties:
+      id:
+        type: string
+        format: uuid
+        readOnly: true
+        description: Auto generated ID
+      hardware:
+        type: string
+        description: Webcam hardware type from WebcamHardware list
+      name:
+        type: string
+        description: Name of the webcam
+      address:
+        type: string
+        description: The address of the webcam
+      width:
+        type: integer
+        description: The webcam resolution width in pixels
+      height:
+        type: integer
+        description: The webcam resolution height in pixels
+      rotation:
+        type: string
+        description: The webcam rotation
+        enum:
+          - '0'
+          - '90'
+          - '180'
+          - '270'
+          - H
+          - V
+      awb:
+        type: string
+        description: The webcam white balance mode
+        enum:
+          - 'off'
+          - auto
+          - sunlight
+          - cloudy
+          - shade
+          - tungsten
+          - fluorescent
+          - incandescent
+          - flash
+          - horizon
+          - greyworld
+      is_live:
+        type: boolean
+        readOnly: true
+        description: Is the webcam a live streaming webcam
+      flash:
+        type: array
+        description: >-
+          The relays that works like a flash before taking a picture from the
+          webcam
+        minItems: 0
+        items:
+          allOf:
+            - type: string
+              description: Relay ID
+      archive:
+        type: object
+        description: Webcam archiving setting
+        properties:
+          door:
+            type: string
+            description: Door status for saving image to archive
+            enum:
+              - ignore
+              - close
+              - open
+          light:
+            type: string
+            description: Light status for saving image to archive
+            enum:
+              - ignore
+              - 'on'
+              - 'off'
+          state:
+            type: string
+            description: Webcam archiving modus. Either every x seconds or by motion
+            enum:
+              - disabled
+              - motion
+              - '60'
+              - '300'
+              - '900'
+              - '1800'
+              - '3600'
+              - '10800'
+              - '21600'
+              - '43200'
+              - '86400'
+      motion:
+        type: object
+        description: Webcam motion settings when archiving is set to motion
+        properties:
+          area:
+            type: number
+            description: The area in pixels where the movement needs to take place
+            default: 500
+          boxes:
+            type: string
+            description: Show motion boxes and in what color
+            enum:
+              - '-1'
+              - red
+              - green
+              - blue
+          frame:
+            type: string
+            description: Which frame to use to comparison
+            enum:
+              - last
+              - archived
+          threashold:
+            type: number
+            description: Motion detection sensitivity
+      markers:
+        type: array
+        minItems: 0
+        description: A list of markers for the webcam with live sensor data
+        items:
+          allOf:
+            - type: object
+              properties:
+                lat:
+                  type: number
+                  description: The latitude value of the marker
+                long:
+                  type: number
+                  description: The longitude value of the marker
+                sensors:
+                  type: array
+                  minItems: 0
+                  description: A list of sensor IDs
+                  items:
+                    allOf:
+                      - type: string
+                        description: Sensor ID
 externalDocs:
-  description: "Find out more about TerrariumPI"
-  url: "https://theyosh.github.io/TerrariumPI/"
+  description: Find out more about TerrariumPI
+  url: 'https://theyosh.github.io/TerrariumPI/'

@@ -49,16 +49,13 @@
         <input type="checkbox" class="switch" id="service_enabled" name="enabled" checked="checked">
         <label for="service_enabled" class="mt-1"></label>
       </div>
-      <small class="text-muted">
-        {{ _('Toggle this if this is the main lights for this enclosure. This is used for the light checks in other areas.') }}
-      </small>
+
     </div>
   </div>
 </div>
 
 
 <div class="row display">
-
   <div class="col-12 col-sm-12 col-md-5 col-lg-5">
     <div class="form-group">
       <label for="hardware">{{ _('Hardware') }}</label>
@@ -68,14 +65,12 @@
       </div>
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-5 col-lg-5">
     <div class="form-group">
       <label for="address">{{ _('Address') }}</label>
       <input type="text" class="form-control" id="address" name="address" required="required" placeholder="{{ _('Enter the address') }}">
     </div>
   </div>
-
   <div class="col-10 col-sm-12 col-md-2 col-lg-2">
     <div class="form-group">
       <div class="switch">
@@ -88,26 +83,22 @@
       </small>
     </div>
   </div>
-
 </div>
 
 
 <div class="row email">
-
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="receiver">{{ _('Receiver email') }}</label>
       <input type="text" class="form-control" id="receiver" name="receiver" required="required" placeholder="{{ _('Enter an email address') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-2 col-lg-2">
     <div class="form-group">
       <label for="address">{{ _('SMTP Server address') }}</label>
       <input type="text" class="form-control" id="address" name="address" required="required" placeholder="{{ _('Enter the SMTP server address name or ip') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-2 col-lg-2">
     <div class="form-group">
       <label for="port">{{ _('SMTP Server port') }}</label>
@@ -117,68 +108,60 @@
       {{ _('The email notification service will auto detect SSL/TLS connections.') }}
     </small>
   </div>
-
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="username">{{ _('SMTP Server username') }}</label>
       <input type="text" class="form-control" id="username" name="username" placeholder="{{ _('Enter the SMTP server username') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-2 col-lg-2">
     <div class="form-group">
       <label for="password">{{ _('SMTP Server password') }}</label>
       <input type="text" class="form-control" id="password" name="password" placeholder="{{ _('Enter the SMTP server password') }}">
     </div>
   </div>
-
 </div>
 
-
 <div class="row pushover">
-
   <div class="col-12 col-sm-12 col-md-6 col-lg-6">
     <div class="form-group">
       <label for="api_token">{{ _('API Token') }}</label>
-      <input type="text" class="form-control" id="api_token" name="api_token" required="required" placeholder="{{ _('Enter the SMTP server username') }}">
+      <input type="text" class="form-control" id="api_token" name="api_token" required="required" placeholder="{{ _('Enter the Pushover API token') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-6 col-lg-6">
     <div class="form-group">
       <label for="user_key">{{ _('User key') }}</label>
-      <input type="text" class="form-control" id="user_key" name="user_key" required="required" placeholder="{{ _('Enter the SMTP server password') }}">
+      <input type="text" class="form-control" id="user_key" name="user_key" required="required" placeholder="{{ _('Enter the Pushover user key') }}">
     </div>
   </div>
-
+  <small class="text-muted">
+    {{ _('Create your tokens by registering TerrariumPI as an app %s' % ('<a href="https://pushover.net/api" target="_blank">https://pushover.net/api</a>',)) }}
+  </small>
 </div>
 
-
+<!--
 <div class="row telegram">
-
-
   <div class="col-12 col-sm-12 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="bot_token">{{ _('Bot Token') }}</label>
       <input type="text" class="form-control" id="bot_token" name="bot_token" required="required" placeholder="{{ _('Enter the SMTP server username') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="username">{{ _('Username') }}</label>
       <input type="text" class="form-control" id="username" name="username" required="required" placeholder="{{ _('Enter the SMTP server password') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="proxy">{{ _('HTTP Proxy') }}</label>
       <input type="text" class="form-control" id="proxy" name="proxy" placeholder="{{ _('Enter the SMTP server password') }}">
     </div>
   </div>
-
 </div>
+-->
 
 <div class="row traffic">
 
@@ -320,12 +303,7 @@ jQuery.when(
   jQuery.get('{{ url_for("api:notification_service_types") }}'),
   jQuery.get('{{ url_for("api:display_hardware") }}'),
 
-
 ).done(function(services, displays) {
-
-
-
-//jQuery.get('{{ url_for("api:notification_service_types") }}', function(data) {
     let service_type = {{modal_type}}_form.find('select#service_type');
     service_type.attr('readonly', false);
     service_type.find('option').remove();

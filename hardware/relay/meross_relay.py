@@ -37,53 +37,6 @@ class terrariumRelayMeross(terrariumRelay):
 
     return self._cloud.toggle_relay(self._device['device'], self._device['switch'], state)
 
-    # @unsync
-    # async def __set_hardware_state(state):
-    #   try:
-    #     # Setup the HTTP client API from user-password
-    #     http_api_client = await MerossHttpClient.async_from_user_password(email=EMAIL, password=PASSWORD)
-
-    #     # Setup and start the device manager
-    #     manager = MerossManager(http_client=http_api_client)
-    #     await manager.async_init()
-
-    #     # Get the device based on uuid
-    #     await manager.async_device_discovery()
-    #     device = manager.find_devices(device_uuids=[self._device['device']])
-
-    #     if len(device) < 1:
-    #       logger.error(f'Could not find the Meross device by id: {self._device["device"]}')
-    #     else:
-    #       device = device[0]
-    #       if state != 0.0:
-    #         await device.async_turn_on(channel=self._device['switch'])
-    #       else:
-    #         await device.async_turn_off(channel=self._device['switch'])
-
-    #   except CommandTimeoutError:
-    #     logger.error(f'Meross communication timed out connecting with the server.')
-    #   except BadLoginException:
-    #     logger.error(f'Wrong login credentials for Meross. Please check your settings')
-
-    #   finally:
-    #     # Close the manager and logout from http_api
-    #     manager.close()
-    #     await http_api_client.async_logout()
-
-    #   return state
-
-
-    # data = self.__state_cache.get_data(self._device['device'])
-    # if data is not None and terrariumUtils.is_true(data[self._device['switch']]) == (state != 0.0):
-    #   # If we have recent cached data and the new state is the cached current state, just return True....
-    #   return True
-
-    # return True
-
-    # work = __set_hardware_state(state)
-    # data = work.result()
-    # return data == state
-
   def _get_hardware_value(self):
     EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL'))
     PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD'))

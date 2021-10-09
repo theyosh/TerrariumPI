@@ -144,7 +144,7 @@
 {% endblock %}
 
 {% block modal_form_javascript_load %}
-jQuery.get('{{ url_for("api:relay_hardware") }}', function(data) {
+jQuery.get({url: '{{ url_for("api:relay_hardware") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
     let relay_hardware_select = {{modal_type}}_form.find('select#relay_hardware');
     relay_hardware_select.attr('readonly', false);
     relay_hardware_select.find('option').remove();

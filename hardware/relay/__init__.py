@@ -43,6 +43,9 @@ class terrariumRelay(object):
   OFF =   0.0
   ON  = 100.0
 
+  _CACHE_TIMEOUT = 30
+  _UPDATE_TIME_OUT = 10
+
   @classproperty
   def available_hardware(__cls__):
     __CACHE_KEY = 'known_relays'
@@ -116,14 +119,14 @@ class terrariumRelay(object):
     hardware = self.__relay_cache.get_data(hardware_cache_key)
     if hardware is None:
       try:
-        hardware = func_timeout(15, self._load_hardware)
+        hardware = func_timeout(self._UPDATE_TIME_OUT, self._load_hardware)
 
         if hardware is None:
           raise terrariumRelayLoadingException(f'Could not load hardware for relay {self}: Unknown error')
 
         self.__relay_cache.set_data(hardware_cache_key,hardware,-1)
       except FunctionTimedOut:
-        raise terrariumRelayLoadingException(f'Could not load hardware for relay {self}: Timed out after 15 seconds.')
+        raise terrariumRelayLoadingException(f'Could not load hardware for relay {self}: Timed out after {self._UPDATE_TIME_OUT} seconds.')
       except Exception as ex:
         raise terrariumRelayLoadingException(f'Could not load hardware for relay {self}: {ex}')
 
@@ -132,7 +135,7 @@ class terrariumRelay(object):
   @retry(terrariumRelayActionException, tries=3, delay=0.5, max_delay=2, logger=logger)
   def __set_hardware_value(self, state):
     try:
-      action_ok = func_timeout(15, self._set_hardware_value,(state,))
+      action_ok = func_timeout(self._UPDATE_TIME_OUT, self._set_hardware_value,(state,))
       if action_ok:
         # Update ok, store the new state
         self._device['value'] = state
@@ -140,7 +143,7 @@ class terrariumRelay(object):
         raise terrariumRelayActionException(f'Error changing relay {self} to state {state}. Error: unknown')
 
     except FunctionTimedOut:
-      raise terrariumRelayLoadingException(f'Error changing relay {self} to state {state}: Timed out after 15 seconds.')
+      raise terrariumRelayLoadingException(f'Error changing relay {self} to state {state}: Timed out after {self._UPDATE_TIME_OUT} seconds.')
     except Exception as ex:
       raise terrariumRelayActionException(f'Error changing relay {self} to state {state}. Error: {ex}')
 
@@ -148,10 +151,10 @@ class terrariumRelay(object):
   def __get_hardware_value(self):
     data = None
     try:
-      data = func_timeout(15, self._get_hardware_value)
+      data = func_timeout(self._UPDATE_TIME_OUT, self._get_hardware_value)
 
     except FunctionTimedOut:
-      logger.error(f'Error getting new data from relay {self}: Timed out after 15 seconds.')
+      logger.error(f'Error getting new data from relay {self}: Timed out after {self._UPDATE_TIME_OUT} seconds.')
     except Exception as ex:
       logger.error(f'Error getting new data from relay {self}. Error: {ex}')
 

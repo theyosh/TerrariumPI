@@ -33,7 +33,7 @@
 {% endblock %}
 
 {% block modal_form_javascript_load %}
-jQuery.get('{{ url_for('api:setting_detail', setting='weather_source') }}', function(data) {
+jQuery.get({url: '{{ url_for('api:setting_detail', setting='weather_source') }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
   {{modal_type}}_form.attr({'method' : 'PUT', 'action' : '{{ url_for('api:setting_update', setting='weather_source') }}'});
   {{modal_type}}_form.find('[name="value"]').val(data.value);
   {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();

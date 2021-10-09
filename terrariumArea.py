@@ -75,6 +75,12 @@ class terrariumArea(object):
       'class' : lambda: terrariumAreaConductivity
     },
 
+    'fertility' : {
+      'name'    : _('Fertility'),
+      'sensors' : ['fertility'],
+      'class' : lambda: terrariumAreaFertility
+    },
+
     'moisture' : {
       'name'    : _('Moisture'),
       'sensors' : ['moisture','humidity'],
@@ -414,6 +420,15 @@ class terrariumArea(object):
           logger.info(f'Relays for {self} are not switched because we have to wait for {self.setup[period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[period]["settle_time"]} seconds.')
           continue
 
+        other_period = list(self.setup.keys())
+        other_period.remove(period)
+        if 1 == len(other_period):
+          other_period = other_period[0]
+          time_elapsed = int(datetime.datetime.now().timestamp()) - self.state[other_period]['last_powered_on']
+          if time_elapsed <= self.setup[other_period]['settle_time']:
+            logger.info(f'Relays for {self} are not switched because of the other period {other_period} settle time. We have to wait for {self.setup[other_period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[other_period]["settle_time"]} seconds.')
+            continue
+
         if self.state[period]['alarm_count'] < self.setup[period]['alarm_threshold']:
           logger.info(f'The alarm counter ({self.state[period]["alarm_count"]}) for area {self} for alarm {period} is lower than the threshold ({self.setup[period]["alarm_threshold"]}). Skip this round.')
           self.state[period]['alarm_count'] += 1
@@ -725,6 +740,9 @@ class terrariumAreaCO2(terrariumAreaHeater):
   pass
 
 class terrariumAreaConductivity(terrariumAreaHeater):
+  pass
+
+class terrariumAreaFertility(terrariumAreaHeater):
   pass
 
 class terrariumAreaPH(terrariumAreaHeater):

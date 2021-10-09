@@ -45,7 +45,9 @@ class terrariumSensor(object):
   HARDWARE = None
   TYPES = []
   NAME = None
-  CACHE_TIMEOUT = 30
+
+  _CACHE_TIMEOUT = 30
+  _UPDATE_TIME_OUT = 10
 
   @classproperty
   def available_hardware(__cls__):
@@ -131,7 +133,7 @@ class terrariumSensor(object):
                     'last_update'    : 0,
                     'value'          : None}
 
-    self.__sensor_cache = terrariumCache()
+    self._sensor_cache = terrariumCache()
     self.__unit_value_callback = unit_value_callback
     self.__trigger_callback = trigger_callback
 
@@ -242,21 +244,21 @@ class terrariumSensor(object):
     # Get hardware cache key based on the combination of hardware and address
     hardware_cache_key = md5(f'HW-{self.HARDWARE}-{self.address}'.encode()).hexdigest()
     # Load hardware device from cache
-    hardware = self.__sensor_cache.get_data(hardware_cache_key)
+    hardware = self._sensor_cache.get_data(hardware_cache_key)
     if reload or hardware is None:
       # Could not find valid hardware cache. So create a new hardware device
       try:
-        hardware = func_timeout(15, self._load_hardware)
+        hardware = func_timeout(self._UPDATE_TIME_OUT, self._load_hardware)
         if hardware is not None:
           # Store the hardware in the cache for unlimited of time
-          self.__sensor_cache.set_data(hardware_cache_key,hardware,-1)
+          self._sensor_cache.set_data(hardware_cache_key,hardware,-1)
         else:
           # Raise error that hard is not loaded with an unknown message :(
           raise terrariumSensorLoadingException(f'Unable to load sensor {self}: Did not return a device.')
 
       except FunctionTimedOut:
       # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
-        raise terrariumSensorLoadingException(f'Unable to load sensor {self}: timed out (15 seconds) during loading.')
+        raise terrariumSensorLoadingException(f'Unable to load sensor {self}: timed out ({self._UPDATE_TIME_OUT} seconds) during loading.')
 
       except Exception as ex:
         raise terrariumSensorLoadingException(f'Unable to load sensor {self}: {ex}')
@@ -273,10 +275,10 @@ class terrariumSensor(object):
     self.__power_management(True)
 
     try:
-      data = func_timeout(15, self._get_data)
+      data = func_timeout(self._UPDATE_TIME_OUT, self._get_data)
     except FunctionTimedOut:
       # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
-      logger.error(f'Sensor {self} timed out after 15 seconds during updating...')
+      logger.error(f'Sensor {self} timed out after {self._UPDATE_TIME_OUT} seconds during updating...')
     except Exception as ex:
       logger.error(f'Sensor {self} has exception: {ex}')
 
@@ -293,22 +295,22 @@ class terrariumSensor(object):
       raise terrariumSensorLoadingException(f'Sensor {self} is not loaded! Can not update!')
 
     starttime = time()
-    data = self.__sensor_cache.get_data(self.__sensor_cache_key)
+    data = self._sensor_cache.get_data(self.__sensor_cache_key)
 
-    if (data is None or force) and self.__sensor_cache.set_running(self.__sensor_cache_key):
+    if (data is None or force) and self._sensor_cache.set_running(self.__sensor_cache_key):
       logger.debug(f'Start getting new data from  sensor {self}')
       try:
         data = self.get_data()
-        self.__sensor_cache.set_data(self.__sensor_cache_key,data,terrariumSensor.CACHE_TIMEOUT)
+        self._sensor_cache.set_data(self.__sensor_cache_key,data, self._CACHE_TIMEOUT)
       except Exception as ex:
         logger.error(f'Error updating sensor {self}. Check your hardware! {ex}')
 
-      self.__sensor_cache.clear_running(self.__sensor_cache_key)
+      self._sensor_cache.clear_running(self.__sensor_cache_key)
 
     current = None if data is None or self.sensor_type not in data else data[self.sensor_type]
 
     if current is None:
-      self.__sensor_cache.clear_data(self.__sensor_cache_key)
+      self._sensor_cache.clear_data(self.__sensor_cache_key)
 
     else:
       self._device['last_update'] = int(starttime)

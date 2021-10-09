@@ -345,8 +345,7 @@
       websocket_message({ 'type' : 'load_dashboard'});
 
       setTimeout(function(){
-        jQuery.get('{{ url_for("api:enclosure_list") }}',function(data){
-
+        jQuery.get({url: '{{ url_for("api:enclosure_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
           jQuery.each(data.data,function(counter,enclosure) {
             // Accordion toggle + link
             enclosure.collapse_link   = '#enclosure_' + enclosure.id;
@@ -375,7 +374,7 @@
           jQuery('#accordion .card-title a:first').trigger('click');
         });
 
-        jQuery.get('{{ url_for("api:sensor_list") }}',function(data){
+        jQuery.get({url: '{{ url_for("api:sensor_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
           data = data.data;
           loaded_sensor_type = {};
           // Sort the sensors based on the given sensor type

@@ -225,14 +225,14 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
     device.configureSensor(terrariumCCS811Sensor.MODE)
 
     self.calibrate()
+
     return device
 
   def _get_data(self):
     data = None
     try:
 
-      self.device.setCompensation(self.__calibration['temperature'],self.__calibration['humidity'])
-
+      self.device.setCompensation(self.__calibration['temperature'], self.__calibration['humidity'])
       statusbyte = self.device.readStatus()
       error = self.device.checkError(statusbyte)
 
@@ -246,14 +246,15 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
       if not result:
         return None
 
-      sensor_data['co2'] = result['eCO2']
+      if result.get('eCO2',None):
+        data = {'co2' : result['eCO2']}
+
+      return data
 
     except Exception as ex:
       pass
 
-    return data
-
-  def calibrate(self,temperature = 20,humidity = 50):
+  def calibrate(self, temperature = 20, humidity = 50):
     self.__calibration = {
       'temperature' : temperature,
       'humidity'    : humidity,

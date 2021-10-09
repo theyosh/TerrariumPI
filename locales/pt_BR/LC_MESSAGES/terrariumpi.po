@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-08-13 12:32+CEST\n"
-"PO-Revision-Date: 2021-08-13 10:55+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2021-09-23 04:41+0000\n"
+"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 4.8\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:31
@@ -152,7 +152,7 @@ msgstr "Memória"
 
 #: terrariumEngine.py:1096
 msgid "average {sensor_type}"
-msgstr "média {tipo_de_sensor}"
+msgstr "média {sensor_type}"
 
 #: terrariumEngine.py:1267
 msgid "last update"
@@ -291,7 +291,7 @@ msgstr "aviso"
 #: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:295
 #: views/enclosures.html:33 views/relays.html:45 views/sensors.html:49
 msgid "Day"
-msgstr "Dia"
+msgstr "Horário"
 
 #: views/buttons.html:40 views/dashboard.html:296 views/relays.html:46
 #: views/sensors.html:50
@@ -376,7 +376,7 @@ msgstr "Noite"
 
 #: views/dashboard.html:184 views/enclosures.html:61
 msgid "Low"
-msgstr "Baixo"
+msgstr "Desl."
 
 #: views/dashboard.html:201 views/enclosures.html:75
 msgid "High"
@@ -464,7 +464,7 @@ msgstr "Entrar"
 
 #: views/includes/sidebar.html:19
 msgid "Read only mode"
-msgstr "Modo Somente-Leitura"
+msgstr "Modo de visualização"
 
 #: views/includes/sidebar.html:40
 msgid "Home"
@@ -530,11 +530,11 @@ msgstr "Arquivos"
 #: views/includes/sidebar.html:200 views/modals/area.html:331
 #: views/modals/area.html:401 views/playlists.html:2 views/playlists.html:10
 msgid "Playlists"
-msgstr "Listas de reprodução"
+msgstr "Playlists"
 
 #: views/includes/sidebar.html:206
 msgid "New playlist"
-msgstr "Nova Lista de Reprodução"
+msgstr "Nova playlist"
 
 #: views/includes/sidebar.html:223
 msgid "List"
@@ -558,15 +558,15 @@ msgstr "Notificações"
 
 #: views/includes/sidebar.html:270 views/log.html:2
 msgid "Log"
-msgstr "Registro"
+msgstr "Registro de Atividades"
 
 #: views/includes/sidebar.html:276
 msgid "Restart"
-msgstr "Reiniciar"
+msgstr "Reiniciar TerrariumPI"
 
 #: views/includes/sidebar.html:282
 msgid "Reboot"
-msgstr "Reiniciar"
+msgstr "Reiniciar Raspberry"
 
 #: views/includes/sidebar.html:288
 msgid "Shutdown"
@@ -926,7 +926,7 @@ msgstr "Insira o valor de compensação entre o sensor e a altura da água."
 
 #: views/modals/area.html:489
 msgid "Day/night difference"
-msgstr "Diferença dia/noite"
+msgstr "Diferença dia / noite"
 
 #: views/modals/area.html:492
 msgid "Amount to change between day and night."
@@ -958,7 +958,7 @@ msgid ""
 "you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
 "A duração de tempo em que os relés devem estar ligados. Caso seja menor que "
-"a duração do dia, funciona como um timer. Digite 0 para acionar a noite toda."
+"a duração do dia, funciona como um timer. Insira 0 para acionar a noite toda."
 
 #: views/modals/area.html:567 views/modals/area.html:696
 msgid "Power on time"
@@ -1240,7 +1240,7 @@ msgstr "Serviços"
 
 #: views/modals/playlist.html:11
 msgid "Playlist settings"
-msgstr "Configurações de lista de reprodução"
+msgstr "Configurações da playlist"
 
 #: views/modals/playlist.html:32
 msgid "Select the volume for this playlist."
@@ -1266,7 +1266,7 @@ msgstr "Reproduzir playlist em modo repetir."
 
 #: views/modals/playlist.html:66
 msgid "Select all audio files for this playlist."
-msgstr "Selecione os arquivos de áudio para esta playlist."
+msgstr "Selecione os arquivos para esta playlist."
 
 #: views/modals/playlist.html:69
 msgid "Select at least 1 audio file."
@@ -1429,11 +1429,11 @@ msgstr "Configurações do serviço de notificação"
 
 #: views/modals/service.html:82
 msgid "Show title"
-msgstr "Exibir título"
+msgstr "Exibir nome"
 
 #: views/modals/service.html:87
 msgid "Show a title on the display."
-msgstr "Mostrar título no visor."
+msgstr "Mostrar nome no visor."
 
 #: views/modals/service.html:99
 msgid "Receiver email"
@@ -1821,7 +1821,7 @@ msgstr "Substituir hardware"
 
 #: views/sensors.html:4
 msgid "{sensor_type} sensors"
-msgstr "Sensores {tipo_sensor}"
+msgstr "Sensores {sensor_type}"
 
 #: views/sensors.html:15
 msgid "No sensors"
@@ -1837,7 +1837,7 @@ msgstr "Mostrar/ocultar informações de ajuda"
 
 #: views/settings.html:28
 msgid "Pi power usage"
-msgstr "Uso de energia do Pi"
+msgstr "Uso de energia do Raspberry"
 
 #: views/settings.html:32
 msgid ""
@@ -1871,19 +1871,19 @@ msgstr ""
 
 #: views/settings.html:64
 msgid "Authentication mode"
-msgstr "Tipo de autenticação"
+msgstr "Exigir autenticação"
 
 #: views/settings.html:67
 msgid "Full authentication"
-msgstr "Autenticação completa"
+msgstr "Para entrar no sistema"
 
 #: views/settings.html:68
 msgid "Only for changes"
-msgstr "Apenas alterações"
+msgstr "Apenas para alterações"
 
 #: views/settings.html:69
 msgid "No authentication"
-msgstr "Sem autenticação"
+msgstr "Não exigir autenticação"
 
 #: views/settings.html:72
 msgid "Always authenticate or only when changes are being made."
@@ -1947,7 +1947,7 @@ msgstr ""
 
 #: views/settings.html:153
 msgid "Temperature type"
-msgstr "Tipo de temperatura"
+msgstr "Medida de temperatura"
 
 #: views/settings.html:156
 msgid "Celsius"
@@ -1967,7 +1967,7 @@ msgstr "Selecione o indicador de temperatura. Afeta apenas os valores atuais."
 
 #: views/settings.html:166
 msgid "Distance type"
-msgstr "Tipo de distância"
+msgstr "Medida de distância"
 
 #: views/settings.html:169
 msgid "Centimetre"
@@ -1983,11 +1983,11 @@ msgstr "Selecione o indicador de distância. Afeta apenas os valores atuais."
 
 #: views/settings.html:178
 msgid "Liquid volume type"
-msgstr "Tipo de volume de líquido"
+msgstr "Medida de volume líquido"
 
 #: views/settings.html:181
 msgid "Litre"
-msgstr "Litros"
+msgstr "Litro"
 
 #: views/settings.html:182
 msgid "UK Gallons"
@@ -2004,7 +2004,7 @@ msgstr ""
 
 #: views/settings.html:191
 msgid "Wind speed type"
-msgstr "Tipo de velocidade do vento"
+msgstr "Medida de velocidade do vento"
 
 #: views/settings.html:194
 msgid "Meter per second"
@@ -2025,7 +2025,7 @@ msgstr ""
 
 #: views/settings.html:204
 msgid "Power price"
-msgstr "Preço da energia"
+msgstr "Valor da energia em reais"
 
 #: views/settings.html:208
 msgid "Enter the price per kWh."
@@ -2033,19 +2033,19 @@ msgstr "Insira o preço do kWh."
 
 #: views/settings.html:216
 msgid "Water price"
-msgstr "Preço da água"
+msgstr "Valor da água em reais"
 
 #: views/settings.html:220
 msgid "Enter the price per L/Gallon."
-msgstr "Insira o preço do litro de água."
+msgstr "Insira o valor do litro de água."
 
 #: views/settings.html:235
 msgid "GUI"
-msgstr "Interface GUI"
+msgstr "Interface do sistema"
 
 #: views/settings.html:247
 msgid "Title"
-msgstr "Título"
+msgstr "Nome do sistema"
 
 #: views/settings.html:251
 msgid "Enter a custom title."
@@ -2053,7 +2053,7 @@ msgstr "Insira o nome personalizado."
 
 #: views/settings.html:254
 msgid "The title cannot be empty."
-msgstr "O título não pode estar em branco."
+msgstr "O nome não pode estar em branco."
 
 #: views/settings.html:259
 msgid "Profile image"
@@ -2084,11 +2084,11 @@ msgstr "Acionar modo noturno automaticamente ao iniciar a noite."
 
 #: views/settings.html:298
 msgid "Show min and max values in gauge graphs"
-msgstr "Mostrar valores mínimo e máximo em gráficos de medidor"
+msgstr "Exibir mínimo e máximo em medidores gráficos"
 
 #: views/settings.html:305
 msgid "Show the minimum and maximum value on the gauges."
-msgstr "Mostrar valores mínimo e máximo nos gráficos dos medidores."
+msgstr "Mostrar valores mínimo e máximo nos medidores de gráficos."
 
 #: views/settings.html:310
 msgid "Hide enclosures on dashboard"
@@ -2100,7 +2100,7 @@ msgstr "Ocultar dados dos Anexos no painel de controle."
 
 #: views/settings.html:322
 msgid "All gauges on a single page"
-msgstr "Todos os medidores em uma página"
+msgstr "Exibir página com todos os sensores do sistema"
 
 #: views/settings.html:329
 msgid "Add extra menu item for all sensors on a single page."
@@ -2113,11 +2113,11 @@ msgstr "Nuvem"
 
 #: views/settings.html:351
 msgid "Meross username"
-msgstr "Nome de usuário do Meross"
+msgstr "Nome de usuário da Meross Cloud"
 
 #: views/settings.html:355
 msgid "Enter the username to login into Meross cloud."
-msgstr "Insira o nome de usuário do Meross cloud."
+msgstr "Insira o nome de usuário da Meross cloud."
 
 #: views/settings.html:360
 msgid "Meross password"
@@ -2125,7 +2125,7 @@ msgstr "Senha da Meross Cloud"
 
 #: views/settings.html:364
 msgid "Enter the password to login into Meross cloud."
-msgstr "Insira a senha do Meross cloud."
+msgstr "Insira a senha da Meross cloud."
 
 #: views/settings.html:377
 msgid "Save"
@@ -2205,7 +2205,7 @@ msgstr "Adicionar nova mensagem"
 
 #: views/includes/sidebar.html:204
 msgid "Add new playlist"
-msgstr "Adicionar nova lista de reprodução"
+msgstr "Adicionar nova playlist"
 
 #: views/notifications.html:18
 msgid "Add new service"
@@ -2230,7 +2230,7 @@ msgstr "Calibragem"
 
 #: views/relays.html:121
 msgid "Changed relay {name} to {state}"
-msgstr "Relé alterado {nome} para {estado}"
+msgstr "Relé {name} alterado para {state}"
 
 #: views/relays.html:123
 msgid "Change error"
@@ -2275,7 +2275,7 @@ msgstr "Excluir anexo"
 
 #: views/calendar.html:53
 msgid "Delete event {title}"
-msgstr "Apagar evento {title}"
+msgstr "Apagado evento {title}"
 
 #: views/notifications.html:140
 msgid "Delete message"
@@ -2283,7 +2283,7 @@ msgstr "Excluir mensagem"
 
 #: views/playlists.html:74
 msgid "Delete playlist"
-msgstr "Excluir lista de reprodução"
+msgstr "Excluir playlist"
 
 #: views/relays.html:79
 msgid "Delete relay"
@@ -2319,7 +2319,7 @@ msgstr "Editar Mensagem"
 
 #: views/playlists.html:73
 msgid "Edit playlist"
-msgstr "Editar lista de reprodução"
+msgstr "Editar playlist"
 
 #: views/relays.html:63
 msgid "Edit relay"
@@ -2544,7 +2544,7 @@ msgstr "A imagem do perfil foi carregada."
 
 #: views/includes/sidebar.html:280
 msgid "Reboot TerrariumPI"
-msgstr "Reinicializar o TerrariumPI"
+msgstr "Reinicializar TerrariumPI"
 
 #: views/includes/sidebar.html:274
 msgid "Restart TerrariumPI"
@@ -2556,7 +2556,7 @@ msgstr "Erro ao salvar"
 
 #: views/layouts/modal.html:89
 msgid "Save OK"
-msgstr "Salvar OK"
+msgstr "Salvado corretamente"
 
 #: views/includes/sidebar.html:129
 msgid "Scan for new relays"
@@ -2643,7 +2643,7 @@ msgstr "Selecionar período"
 
 #: views/modals/area.html:332 views/modals/area.html:402
 msgid "Select playlists"
-msgstr "Selecione listas de reprodução"
+msgstr "Selecione playlists"
 
 #: views/modals/area.html:179 views/modals/area.html:222
 #: views/modals/area.html:630 views/modals/area.html:760
@@ -2697,7 +2697,7 @@ msgstr "Alternar relé"
 
 #: views/layouts/modal.html:88
 msgid "{type} {name} is {action}"
-msgstr "{tipo} {nome} está {ação}"
+msgstr "{type} {name} é/foi {action}"
 
 #: views/layouts/modal.html:88
 msgid "updated"

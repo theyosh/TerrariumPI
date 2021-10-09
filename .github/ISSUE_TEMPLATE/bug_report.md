@@ -12,6 +12,7 @@ Please look first at the [FAQ](https://github.com/theyosh/TerrariumPI/wiki/FAQ) 
 Or search in the [closed tickets](https://github.com/theyosh/TerrariumPI/issues?q=is%3Aissue+is%3Aclosed) to see if it should been fixed in the past
 
 **Setup:**
+ - TerrariumPI version: [3 or 4]
  - Python version: [e.g. 2 or 3]
  - Raspberry PI: [e.g. 3B or 4]
 

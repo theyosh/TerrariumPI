@@ -128,7 +128,7 @@
   </section>
   <script>
   jQuery(function () {
-    jQuery.get('{{ url_for("api:system_status") }}', function(data) {
+    jQuery.get({url: '{{ url_for("api:system_status") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
       new sensor_gauge('gauge_' + 'cpu_load',
                         'humidity',
                         data.load.percentage[0],

@@ -192,7 +192,7 @@
 </section>
 <script>
   jQuery(function () {
-    jQuery.get('{{ url_for("api:enclosure_list") }}',function(data){
+    jQuery.get({url: '{{ url_for("api:enclosure_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
       data = data.data;
 
       (data.length > 0 ? jQuery('.zero_message').remove() : jQuery('.zero_message').show());
