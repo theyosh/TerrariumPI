@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-10-09 23:27+CEST\n"
-"PO-Revision-Date: 2021-08-14 08:33+0000\n"
+"PO-Revision-Date: 2021-10-09 21:39+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 4.8\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -52,10 +52,8 @@ msgid "Conductivity"
 msgstr "Geleidingsvermogen"
 
 #: terrariumArea.py:79
-#, fuzzy
-#| msgid "fertility"
 msgid "Fertility"
-msgstr "vruchtbaarheid"
+msgstr "Vruchtbaarheid"
 
 #: terrariumArea.py:85
 msgid "Moisture"
@@ -182,34 +180,24 @@ msgid "System error"
 msgstr "Systeemfout"
 
 #: terrariumNotification.py:43
-#, fuzzy
-#| msgid "Sensor ph"
 msgid "Sensor update"
-msgstr "Sensor ph"
+msgstr "Sensor update"
 
 #: terrariumNotification.py:44
-#, fuzzy
-#| msgid "Sensor ph"
 msgid "Sensor alarm"
-msgstr "Sensor ph"
+msgstr "Sensor alarm"
 
 #: terrariumNotification.py:46
-#, fuzzy
-#| msgid "Step change"
 msgid "Relay change"
-msgstr "Stapverandering"
+msgstr "Schakelaar verandering"
 
 #: terrariumNotification.py:48
-#, fuzzy
-#| msgid "Step change"
 msgid "Button change"
-msgstr "Stapverandering"
+msgstr "Knop verandering"
 
 #: terrariumNotification.py:50
-#, fuzzy
-#| msgid "Select archiving"
 msgid "Webcam archive"
-msgstr "Archiveren selecteren"
+msgstr "Webcam archief"
 
 #: terrariumNotification.py:172
 msgid "Display"
@@ -229,7 +217,7 @@ msgstr "Webhook"
 
 #: terrariumNotification.py:194
 msgid "MQTT"
-msgstr ""
+msgstr "MQTT"
 
 #: terrariumNotification.py:198
 msgid "Pushover"
@@ -987,10 +975,8 @@ msgid "High alarm"
 msgstr "Hoog alarm"
 
 #: views/modals/area.html:518
-#, fuzzy
-#| msgid "Duration"
 msgid "Variation"
-msgstr "Tijdsduur"
+msgstr "Variatie"
 
 #: views/modals/area.html:553 views/modals/area.html:682
 msgid ""
@@ -1074,62 +1060,48 @@ msgid "Select the light status."
 msgstr "Selecteer de lichtstatus."
 
 #: views/modals/area.html:785
-#, fuzzy
-#| msgid "When on"
 msgid "When"
-msgstr "Wanneer aan"
+msgstr "Wanneer"
 
 #: views/modals/area.html:791
-#, fuzzy
-#| msgid "Timer on duration"
 msgid "Period/duration"
-msgstr "Timer aan tijdsduur"
+msgstr "Periode/tijdsduur"
 
 #: views/modals/area.html:797
-#, fuzzy
-#| msgid "values"
 msgid "Value"
-msgstr "waardes"
+msgstr "Waarde"
 
 #: views/modals/area.html:826
 msgid "After x minutes change to value or at exactly a time stamp."
-msgstr ""
+msgstr "Verander na x minuten naar waarde of op exact een tijdstip."
 
 #: views/modals/area.html:834
-#, fuzzy
-#| msgid "Enter a valid duration in minutes."
 msgid "Enter a duration in minutes or the actual time of the day."
-msgstr "Vul een geldige tijdsduur in minuten."
+msgstr "Voer een duur in minuten of de werkelijke tijd van de dag in."
 
 #: views/modals/area.html:842
 msgid ""
 "Enter a negative or positive value for a relative action. A number is "
 "treated as an absolute value."
 msgstr ""
+"Voer een negatieve of positieve waarde in voor een relatieve actie. Een "
+"getal wordt behandeld als een absolute waarde."
 
 #: views/modals/area.html:851
-#, fuzzy
-#| msgid "Add new area"
 msgid "Add a new row"
-msgstr "Voeg een nieuw gebied toe"
+msgstr "Voeg een nieuwe rij toe"
 
 #: views/modals/area.html:860
-#, fuzzy
-#| msgid "Remote"
 msgid "Remove row"
-msgstr "Extern"
+msgstr "Verwijder rij"
 
 #: views/modals/area.html:876
-#, fuzzy
-#| msgid "5 minutes"
 msgid "After x minutes"
-msgstr "5 minuten"
+msgstr "Na x minuten"
 
 #: views/modals/area.html:877
-#, fuzzy
-#| msgid "Up time"
 msgid "At time"
-msgstr "Actief"
+msgstr "Op tijdstip"
 
 #: views/modals/area.html:929
 msgid "Dimmer on duration"
@@ -1616,32 +1588,24 @@ msgid "Full post url"
 msgstr "Volledige bericht-URL (post)"
 
 #: views/modals/service.html:241
-#, fuzzy
-#| msgid "SMTP Server address"
 msgid "MQTT Server address"
-msgstr "SMTP-server adres"
+msgstr "MQTT-server adres"
 
 #: views/modals/service.html:248
-#, fuzzy
-#| msgid "SMTP Server port"
 msgid "MQTT Server port"
-msgstr "SMTP-serverpoort"
+msgstr "MQTT-serverpoort"
 
 #: views/modals/service.html:258
 msgid "MQTT secure connection"
-msgstr ""
+msgstr "MQTT beveiligde verbinding"
 
 #: views/modals/service.html:267
-#, fuzzy
-#| msgid "SMTP Server username"
 msgid "MQTT Server username"
-msgstr "SMTP-server gebruikersnaam"
+msgstr "MQTT-server gebruikersnaam"
 
 #: views/modals/service.html:274
-#, fuzzy
-#| msgid "SMTP Server password"
 msgid "MQTT Server password"
-msgstr "SMTP-serverpoort"
+msgstr "MQTT Server-wachtwoord"
 
 #: views/modals/weather.html:11
 msgid "Weather settings"
@@ -2471,10 +2435,8 @@ msgid "Enter a description"
 msgstr "Voer een beschrijving in"
 
 #: views/modals/area.html:887
-#, fuzzy
-#| msgid "Enter a valid duration in minutes."
 msgid "Enter a duration in minutes or time"
-msgstr "Vul een geldige tijdsduur in minuten."
+msgstr "Voer een duur in minuten of tijd in"
 
 #: views/modals/message.html:64
 msgid "Enter a message"
@@ -2566,32 +2528,24 @@ msgid "Enter the minimum amount of hours"
 msgstr "Voer het minimum aantal uren in"
 
 #: views/modals/service.html:242 views/modals/service.html:260
-#, fuzzy
-#| msgid "Enter the SMTP server address name or ip"
 msgid "Enter the MQTT server address name or ip"
-msgstr "Voer de adresnaam of ip van de SMTP-server in"
+msgstr "Voer de adresnaam of ip van de MQTT-server in"
 
 #: views/modals/service.html:249
-#, fuzzy
-#| msgid "Enter the SMTP server port number"
 msgid "Enter the MQTT server port number"
-msgstr "Voer het SMTP-serverpoortnummer in"
+msgstr "Voer het MQTT-serverpoortnummer in"
 
 #: views/modals/area.html:478
 msgid "Enter the offset"
 msgstr "Voer de offset in"
 
 #: views/modals/service.html:129
-#, fuzzy
-#| msgid "Enter the SMTP server username"
 msgid "Enter the Pushover API token"
-msgstr "Voer de gebruikersnaam van de SMTP-server in"
+msgstr "Voer de Pushover API-token in"
 
 #: views/modals/service.html:135
-#, fuzzy
-#| msgid "Enter the SMTP server username"
 msgid "Enter the Pushover user key"
-msgstr "Voer de gebruikersnaam van de SMTP-server in"
+msgstr "Voer de Pushover-gebruikerssleutel in"
 
 #: views/modals/service.html:99
 msgid "Enter the SMTP server address name or ip"
