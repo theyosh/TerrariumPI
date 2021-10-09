@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-10-09 23:27+CEST\n"
-"PO-Revision-Date: 2021-08-13 10:53+0000\n"
+"PO-Revision-Date: 2021-10-09 21:39+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United States) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_US/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 4.8\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:31
@@ -51,10 +51,8 @@ msgid "Conductivity"
 msgstr "Conductivity"
 
 #: terrariumArea.py:79
-#, fuzzy
-#| msgid "fertility"
 msgid "Fertility"
-msgstr "fertility"
+msgstr "Fertility"
 
 #: terrariumArea.py:85
 msgid "Moisture"
@@ -181,34 +179,24 @@ msgid "System error"
 msgstr "System error"
 
 #: terrariumNotification.py:43
-#, fuzzy
-#| msgid "Sensor ph"
 msgid "Sensor update"
-msgstr "Sensor ph"
+msgstr "Sensor update"
 
 #: terrariumNotification.py:44
-#, fuzzy
-#| msgid "Sensor ph"
 msgid "Sensor alarm"
-msgstr "Sensor ph"
+msgstr "Sensor alarm"
 
 #: terrariumNotification.py:46
-#, fuzzy
-#| msgid "Step change"
 msgid "Relay change"
-msgstr "Step change"
+msgstr "Relay change"
 
 #: terrariumNotification.py:48
-#, fuzzy
-#| msgid "Step change"
 msgid "Button change"
-msgstr "Step change"
+msgstr "Button change"
 
 #: terrariumNotification.py:50
-#, fuzzy
-#| msgid "Select archiving"
 msgid "Webcam archive"
-msgstr "Select archiving"
+msgstr "Webcam archive"
 
 #: terrariumNotification.py:172
 msgid "Display"
@@ -228,7 +216,7 @@ msgstr "Web-hook"
 
 #: terrariumNotification.py:194
 msgid "MQTT"
-msgstr ""
+msgstr "MQTT"
 
 #: terrariumNotification.py:198
 msgid "Pushover"
@@ -982,10 +970,8 @@ msgid "High alarm"
 msgstr "High alarm"
 
 #: views/modals/area.html:518
-#, fuzzy
-#| msgid "Duration"
 msgid "Variation"
-msgstr "Duration"
+msgstr "Variation"
 
 #: views/modals/area.html:553 views/modals/area.html:682
 msgid ""
@@ -1068,62 +1054,48 @@ msgid "Select the light status."
 msgstr "Select the light status."
 
 #: views/modals/area.html:785
-#, fuzzy
-#| msgid "When on"
 msgid "When"
-msgstr "When on"
+msgstr "When"
 
 #: views/modals/area.html:791
-#, fuzzy
-#| msgid "Timer on duration"
 msgid "Period/duration"
-msgstr "Timer on duration"
+msgstr "Period/duration"
 
 #: views/modals/area.html:797
-#, fuzzy
-#| msgid "values"
 msgid "Value"
-msgstr "values"
+msgstr "Value"
 
 #: views/modals/area.html:826
 msgid "After x minutes change to value or at exactly a time stamp."
-msgstr ""
+msgstr "After x minutes change to value or at exactly a time stamp."
 
 #: views/modals/area.html:834
-#, fuzzy
-#| msgid "Enter a valid duration in minutes."
 msgid "Enter a duration in minutes or the actual time of the day."
-msgstr "Enter a valid duration in minutes."
+msgstr "Enter a duration in minutes or the actual time of the day."
 
 #: views/modals/area.html:842
 msgid ""
 "Enter a negative or positive value for a relative action. A number is "
 "treated as an absolute value."
 msgstr ""
+"Enter a negative or positive value for a relative action. A number is "
+"treated as an absolute value."
 
 #: views/modals/area.html:851
-#, fuzzy
-#| msgid "Add new area"
 msgid "Add a new row"
-msgstr "Add new area"
+msgstr "Add a new row"
 
 #: views/modals/area.html:860
-#, fuzzy
-#| msgid "Remote"
 msgid "Remove row"
-msgstr "Remote"
+msgstr "Remove row"
 
 #: views/modals/area.html:876
-#, fuzzy
-#| msgid "5 minutes"
 msgid "After x minutes"
-msgstr "5 minutes"
+msgstr "After x minutes"
 
 #: views/modals/area.html:877
-#, fuzzy
-#| msgid "Up time"
 msgid "At time"
-msgstr "Up time"
+msgstr "At time"
 
 #: views/modals/area.html:929
 msgid "Dimmer on duration"
@@ -1609,32 +1581,24 @@ msgid "Full post url"
 msgstr "Full post url"
 
 #: views/modals/service.html:241
-#, fuzzy
-#| msgid "SMTP Server address"
 msgid "MQTT Server address"
-msgstr "SMTP Server address"
+msgstr "MQTT Server address"
 
 #: views/modals/service.html:248
-#, fuzzy
-#| msgid "SMTP Server port"
 msgid "MQTT Server port"
-msgstr "SMTP Server port"
+msgstr "MQTT Server port"
 
 #: views/modals/service.html:258
 msgid "MQTT secure connection"
-msgstr ""
+msgstr "MQTT secure connection"
 
 #: views/modals/service.html:267
-#, fuzzy
-#| msgid "SMTP Server username"
 msgid "MQTT Server username"
-msgstr "SMTP Server username"
+msgstr "MQTT Server username"
 
 #: views/modals/service.html:274
-#, fuzzy
-#| msgid "SMTP Server password"
 msgid "MQTT Server password"
-msgstr "SMTP Server password"
+msgstr "MQTT Server password"
 
 #: views/modals/weather.html:11
 msgid "Weather settings"
@@ -2453,10 +2417,8 @@ msgid "Enter a description"
 msgstr "Enter a description"
 
 #: views/modals/area.html:887
-#, fuzzy
-#| msgid "Enter a valid duration in minutes."
 msgid "Enter a duration in minutes or time"
-msgstr "Enter a valid duration in minutes."
+msgstr "Enter a duration in minutes or time"
 
 #: views/modals/message.html:64
 msgid "Enter a message"
@@ -2548,32 +2510,24 @@ msgid "Enter the minimum amount of hours"
 msgstr "Enter the minimum amount of hours"
 
 #: views/modals/service.html:242 views/modals/service.html:260
-#, fuzzy
-#| msgid "Enter the SMTP server address name or ip"
 msgid "Enter the MQTT server address name or ip"
-msgstr "Enter the SMTP server address name or ip"
+msgstr "Enter the MQTT server address name or ip"
 
 #: views/modals/service.html:249
-#, fuzzy
-#| msgid "Enter the SMTP server port number"
 msgid "Enter the MQTT server port number"
-msgstr "Enter the SMTP server port number"
+msgstr "Enter the MQTT server port number"
 
 #: views/modals/area.html:478
 msgid "Enter the offset"
 msgstr "Enter the offset"
 
 #: views/modals/service.html:129
-#, fuzzy
-#| msgid "Enter the SMTP server username"
 msgid "Enter the Pushover API token"
-msgstr "Enter the SMTP server username"
+msgstr "Enter the Pushover API token"
 
 #: views/modals/service.html:135
-#, fuzzy
-#| msgid "Enter the SMTP server username"
 msgid "Enter the Pushover user key"
-msgstr "Enter the SMTP server username"
+msgstr "Enter the Pushover user key"
 
 #: views/modals/service.html:99
 msgid "Enter the SMTP server address name or ip"
