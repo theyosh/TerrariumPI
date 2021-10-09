@@ -68,7 +68,7 @@
 
   {% block stylesheets %}{% endblock stylesheets %}
 </head>
-<body class="hold-transition layout-fixed layout-navbar-fixed sidebar-mini pace-primary {% block body_class %}{% endblock body_class %}">
+<body class="hold-transition layout-fixed layout-navbar-fixed sidebar-mini pace-primary {% block body_class %}{% endblock body_class %}{% if auto_dark_mode and is_night %}dark-mode{%endif %}">
 <div class="wrapper">
   {% if not ajax %}
     {% include 'includes/navigation.html' %}

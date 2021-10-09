@@ -90,6 +90,10 @@ class TerrariumMerossCloud(terrariumSingleton):
     self.__engine['event'].set()
     self.__engine['thread'].join()
 
+  def reconnect(self):
+    self.stop()
+    self._start()
+
   async def _main_process(self):
 
     # https://stackoverflow.com/a/49632779
