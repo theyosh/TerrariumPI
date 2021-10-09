@@ -11,8 +11,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
 
       json_content += '"title": "' + escape(post.data['title'].gsub(/\s+/, ' ')) + '",'
       json_content += '"url": "' + site.baseurl +  post.url + '",'
-      json_content += '"category": "' + join(post.data['categories'],",") + '",'
-      json_content += '"tags": "' + join(post.data['tags'],",") + '",'
+      json_content += '"categories": "' + join(post.data['categories'],", ") + '",'
+      json_content += '"tags": "' + join(post.data['tags'],", ") + '",'
       json_content += '"date": "' + post.date.to_s + '",'
       json_content += '"snippet" : "' + replace(escape(strip_newlines(strip_html(post.content)).gsub(/\s+/, ' ')), '\\' , '\\\\') + '"'
 
