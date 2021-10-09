@@ -2,6 +2,10 @@
 title: Features
 icon: fas fa-info
 order: 2
+
+image:
+  src: /assets/img/options.webp
+  alt: Feature header image
 ---
 Here are some features that TerrariumPI has.
 
