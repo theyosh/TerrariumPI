@@ -66,11 +66,11 @@ $grey-color-light: #a2a19f;
     @include swagger-method(#248FB2);
 }
 
-.swagger-method-put {
+.swagger-method-patch {
     @include swagger-method(#9B708B);
 }
 
-.swagger-method-patch {
+.swagger-method-put {
     @include swagger-method(#D88541);
 }
 
