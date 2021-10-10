@@ -419,7 +419,7 @@
     </div>
   </div>
 </div>
-<div class="row area_type area_watertank area_heating area_cooling area_humidity area_co2 area_conductivity area_moisture area_ph">
+<div class="row area_type area_watertank area_heating area_cooling area_humidity area_co2 area_conductivity area_fertility area_moisture area_ph">
   <div class="col-12 col-sm-6 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="area_watertank_mode">{{ _('Mode') }}</label>
@@ -506,10 +506,17 @@
     </div>
   </div>
 </div>
-<div class="row area_type area_watertank area_heating area_cooling area_humidity area_co2 area_conductivity area_moisture area_ph">
+<div class="row area_type area_watertank area_heating area_cooling area_humidity area_co2 area_conductivity area_fertility area_moisture area_ph">
   <div class="col">
     <nav class="mb-2">
-      <div class="nav nav-tabs" role="tablist"> <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#area_alarm_low" role="tab" aria-controls="low" aria-selected="true"><i class="fas fa-battery-empty" ></i> {{ _('Low alarm') }}</a> <a class="nav-item nav-link" id="profile-tab" data-toggle="tab" href="#area_alarm_high" role="tab" aria-controls="high" aria-selected="false"><i class="fas fa-battery-full" ></i> {{ _('High alarm') }}</a> </div>
+      <div class="nav nav-tabs" role="tablist">
+        <a class="nav-item nav-link active" id="low-tab" data-toggle="tab" href="#area_alarm_low" role="tab" aria-controls="low" aria-selected="true">
+          <i class="fas fa-battery-empty" ></i> {{ _('Low alarm') }}</a>
+        <a class="nav-item nav-link" id="high-tab" data-toggle="tab" href="#area_alarm_high" role="tab" aria-controls="high" aria-selected="false">
+          <i class="fas fa-battery-full" ></i> {{ _('High alarm') }}</a>
+        <a class="nav-item nav-link" id="variation-tab" data-toggle="tab" href="#area_variation" role="tab" aria-controls="high" aria-selected="false">
+          <i class="fas fa-exchange-alt" ></i> {{ _('Variation') }}</a>
+      </div>
     </nav>
     <div class="tab-content">
       <div class="tab-pane fade show active" id="area_alarm_low" role="tabpanel" aria-labelledby="low-tab">
@@ -641,7 +648,7 @@
           </div>
         </div>
       </div>
-      <div class="tab-pane fade" id="area_alarm_high" role="tabpanel" aria-labelledby="low-tab">
+      <div class="tab-pane fade" id="area_alarm_high" role="tabpanel" aria-labelledby="high-tab">
         <div class="row">
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
@@ -769,6 +776,151 @@
           <div class="tab-content" id="area_dimmer_settings_high_relays_content"> </div>
         </div>
       </div>
+
+      <div class="tab-pane fade" id="area_variation" role="tabpanel" aria-labelledby="variation-tab">
+
+        <div class="row">
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="variation_when">{{ _('When') }}</label>
+
+            </div>
+          </div>
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="alarm_low_end">{{ _('Period/duration') }}</label>
+
+            </div>
+          </div>
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="variant_value">{{ _('Value') }}</label>
+
+            </div>
+          </div>
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="form-group">
+              <label for="action">{{ _('Action') }}</label>
+
+            </div>
+          </div>
+
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="form-group">
+              <label for="action">&nbsp;</label>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div id="variation_list">
+
+        </div>
+
+        <div class="row">
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="form-group">
+
+              <small class="text-muted">
+                {{ _('After x minutes change to value or at exactly a time stamp.') }}
+              </small>
+
+            </div>
+          </div>
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+            <div class="form-group">
+              <small class="text-muted">
+                {{ _('Enter a duration in minutes or the actual time of the day.') }}
+              </small>
+
+            </div>
+          </div>
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="form-group">
+              <small class="text-muted">
+                {{ _('Enter a negative or positive value for a relative action. A number is treated as an absolute value.') }}
+              </small>
+
+            </div>
+          </div>
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="form-group">
+
+              <small class="text-muted">
+                {{ _('Add a new row') }}
+              </small>
+            </div>
+          </div>
+
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="form-group">
+
+              <small class="text-muted">
+                {{ _('Remove row') }}
+              </small>
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+        <script type="text/html" id="variation">
+
+          <div class="row">
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+              <div class="form-group">
+                <select class="select2" data-id="when" name="variation_when" style="width: 100%;">
+                  <option value="after">{{ _('After x minutes') }}</option>
+                  <option value="at">{{ _('At time') }}</option>
+                </select>
+
+                <div class="invalid-feedback">
+                  {{ _('Enter a valid time.') }}
+                </div>
+              </div>
+            </div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+              <div class="form-group">
+                <input type="text" class="form-control" data-id="period" name="variation_period" placeholder="{{ _('Enter a duration in minutes or time') }}">
+
+                <div class="invalid-feedback">
+                  {{ _('Enter a valid time.') }}
+                </div>
+              </div>
+            </div>
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+              <div class="form-group">
+                <input type="text" class="form-control" data-id="value" name="variant_value" placeholder="{{ _('Value') }}">
+                <div class="invalid-feedback">
+                  {{ _('Enter a valid duration in minutes.') }}
+                </div>
+              </div>
+            </div>
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+              <div class="form-group">
+                <button type="button" class="form-control"><i class="fas fa-plus"></i></button>
+
+              </div>
+            </div>
+
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+              <div class="form-group">
+                <button type="button" class="form-control"><i class="fas fa-minus"></i></button>
+
+              </div>
+            </div>
+
+          </div>
+        </script>
+
+
+
+      </div>
+
+
     </div>
   </div>
 </div>
@@ -1022,6 +1174,52 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
     }
   }
 });
+
+// Enable/disable sensor variations
+{{modal_type}}_form.find('.row.area_type select[id$="sensors"]').on('change',function(event) {
+  jQuery('div#area_variation input').prop('readonly',jQuery(this).val().length == 0);
+  jQuery('div#area_variation select').prop('readonly',jQuery(this).val().length == 0);
+});
+
+function plus_minus_buttons() {
+
+  {{modal_type}}_form.find('div#area_variation button').off('click').on('click',function(event) {
+
+    let active_row = null;
+    $(this).parentsUntil('div.row').each(function(){
+      active_row = jQuery(this).parent();
+    })
+
+    let amount = {{modal_type}}_form.find('div#area_variation div#variation_list div.row').length;
+
+    if (jQuery(event.currentTarget).find('i').attr('class').indexOf('minus') != -1) {
+      // Remove row only when there is still 1 left
+      if (amount > 1) {
+        active_row.remove();
+      }
+    } else {
+      let html = jQuery('<div>');
+      html.loadTemplate($('#variation'), {
+        when:     'variation_when_' + (amount + 1),
+        period:     'variation_period_' + (amount + 1),
+        value:     'variation_value_' + (amount + 1)
+      },{ append: true, bindingOptions: {ignoreNull : true}});
+
+      active_row.after(html.find('div.row'));
+    }
+
+    plus_minus_buttons();
+    {{modal_type}}_form.find('div#variation_list select').select2();
+  });
+}
+
+{{modal_type}}_form.find('div#variation_list').loadTemplate($('#variation'), {
+  when:     'variation_when_1',
+  period:     'variation_period_1',
+  value:     'variation_value_1'
+},{ append: true, bindingOptions: {ignoreNull : true}});
+
+plus_minus_buttons();
 
 // Dimmer step settings for heating, humidity, etc
 {{modal_type}}_form.find('.row.area_type select[id$="relays"]').on('change',function(event) {
