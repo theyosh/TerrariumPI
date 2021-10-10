@@ -36,6 +36,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
+    - name: Install OS dependencies
+      run: sudo apt-get install -y python3-dev libasound2-dev
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
