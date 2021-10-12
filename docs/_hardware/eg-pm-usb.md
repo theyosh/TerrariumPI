@@ -34,7 +34,7 @@ make
 sudo make install
 sudo ldconfig
 ```
-3. Restart TerrariumPI service `sudo service terrariumpi restart`
+3. Restart TerrariumPI service ([FAQ]({{ 'faq/systemd/' | relative_url}}#restart))
 
 The needed permisions to connect to the device through USB are already set.
 
