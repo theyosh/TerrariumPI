@@ -94,6 +94,7 @@ plugins:
   - jekyll-minifier
   - jekyll-analytics
   - jekyll-seo-tag
+  - jekyll-liquify
 
 jekyll-minifier:
   uglifier_args:
@@ -185,7 +186,7 @@ defaults:
       path: ''
       type: faq             # see `site.collections`
     values:
-      layout: page
+      layout: faq
       dynamic_title: true
 
   - scope:
