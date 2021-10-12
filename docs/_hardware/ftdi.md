@@ -9,7 +9,7 @@ image:
   alt: "FTDI header image"
 
 device_type : FTDI
-device_address: "Enter the relay number from 1 - 4. Optional add the serial of the board seperated by a comma.<br />Ex: `1,A702JH8H`"
+device_address: "Enter the relay number from 1 - 4. Optional add the serial of the board separated by a comma.<br />Ex: `1,A702JH8H`"
 device_auto_detect: true
 device_url : http://denkovi.com/usb-relay-board-four-channels-for-home-automation
 ---

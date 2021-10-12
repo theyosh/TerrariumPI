@@ -10,7 +10,7 @@ image:
 
 device_hardware : AM2320
 device_types: [temperature,humidity]
-device_address: "Ex: `..`"
+device_address: "Enter the [physical pin](/hardware/#gpio) number where the data is connected<br />Ex: `27`"
 ---
 
 ## Information
