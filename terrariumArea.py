@@ -375,13 +375,12 @@ class terrariumArea(object):
         door_state_ok = self.setup[period]['door_status'] == door_state
 
       # First check: Shutdown power when power is on and either the lights or doors are in wrong state. Despite 'mode'
-      if self.state[period]['powered'] and not (light_state_ok and door_state_ok):
+      if not self.relays_state(period,False) and not (light_state_ok and door_state_ok):
         # Power is on, but either the lights or doors are in wrong state. Power down now.
         logger.info(f'Forcing down the {period} power for area {self} because either the lights({"OK" if light_state_ok else "ERROR"}) or doors({"OK" if door_state_ok else "ERROR"}) are in an invalid state.')
         self.relays_toggle(period,False)
         # And ignore the rest....
         continue
-
 
       if 'sensors' != self.mode:
         # Weather(inverse) and timer mode
