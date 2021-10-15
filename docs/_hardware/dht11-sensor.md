@@ -22,6 +22,6 @@ Compared to the DHT22, this sensor is less precise, less accurate, and works in 
 It needs a 4.7K - 10K resistor, which you will want to use as a pullup from the data pin to VCC.
 
 ## Warning
-As these sensors are cheap, they are not stable for 24/7 duty. After a few days they tend to give problems. Use at your own risk! https://github.com/theyosh/TerrariumPI/issues/470
+As these sensors are cheap, they are not stable for 24/7 duty. After a few days they tend to give problems. Use at your own risk! [Using DHT11 / DHT11 on Raspberry Pi 4b #470](https://github.com/theyosh/TerrariumPI/issues/470)
 
 {% include_relative _sensor_detail.md %}
