@@ -60,14 +60,16 @@ We currently support <strong>{{ relays | size}}</strong> types of relays. Relays
 
 
 {% assign sensors = site.hardware | where_exp: "hardware", "hardware.tags contains 'sensor'" | sort_natural: "title" %}
+{% assign measurements = sensors | map: "device_types" | join: "," %}
 ## Sensors
-We currently support <strong>{{ sensors | size}}</strong> types of sensors:
+We currently support <strong>{{ sensors | size}}</strong> hardware types of sensors, measuring `{{ measurements | split: "," | uniq | sort_natural | join: "`, `" }}`:
 <br />
 
 {% for sensor in sensors %}
 {% assign types = sensor.device_types | sort_natural | join: ", " %}
-  <h3>
+  <h3 style="margin-bottom: 0px">
     <a href="{{ sensor.url | relative_url }}">{{ sensor.title }}</a>
-    <small class="ml-xl-3"> {{ types }}</small>
   </h3>
+  {{ types }}
+
 {% endfor %}
