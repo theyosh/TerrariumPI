@@ -16,7 +16,7 @@ from hashlib import md5
 from terrariumArea         import terrariumArea
 from terrariumAudio        import terrariumAudio
 from terrariumCalendar     import terrariumCalendar
-from terrariumDatabase     import Area, Audiofile, Button, ButtonHistory, Enclosure, Playlist, NotificationMessage, NotificationService, Relay, RelayHistory, Sensor, SensorHistory, Setting, Webcam
+from terrariumDatabase     import Area, Audiofile, Button, Enclosure, Playlist, NotificationMessage, NotificationService, Relay, Sensor, SensorHistory, Setting, Webcam
 from terrariumEnclosure    import terrariumEnclosure
 from terrariumNotification import terrariumNotification, terrariumNotificationService
 
