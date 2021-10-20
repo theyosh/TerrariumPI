@@ -12,6 +12,7 @@ from operator import itemgetter
 
 from threading import Timer
 from hashlib import md5
+from  base64 import b64encode
 
 from terrariumDatabase import NotificationMessage, NotificationService
 from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
