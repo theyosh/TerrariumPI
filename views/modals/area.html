@@ -776,10 +776,14 @@
           <div class="tab-content" id="area_dimmer_settings_high_relays_content"> </div>
         </div>
       </div>
-
-
-
       <div class="tab-pane fade" id="area_variation" role="tabpanel" aria-labelledby="variation-tab">
+        <div class="row text-muted">
+          <div class="col">
+            <small class="text-muted">
+              {{ _('Here you can enter periods where the sensors will change their values according to the list below. Make sure the periods are in chronological order!') }}
+            </small>
+          </div>
+        </div>
         <div class="row">
           <div class="col-3 col-sm-3 col-md-3 col-lg-3">
             <div class="form-group">
@@ -807,11 +811,8 @@
             </div>
           </div>
         </div>
-
         <div id="variation_list">
-
         </div>
-
         <div class="row">
           <div class="col-3 col-sm-3 col-md-3 col-lg-3">
             <div class="form-group">
@@ -849,8 +850,6 @@
             </div>
           </div>
         </div>
-
-
         <script type="text/html" id="variation">
           <div class="row">
             <div class="col-3 col-sm-3 col-md-3 col-lg-3">
@@ -859,7 +858,6 @@
                   <option value="after">{{ _('After x minutes') }}</option>
                   <option value="at">{{ _('At time') }}</option>
                 </select>
-
                 <div class="invalid-feedback">
                   {{ _('Enter a valid time.') }}
                 </div>
@@ -893,12 +891,7 @@
             </div>
           </div>
         </script>
-
-
-
       </div>
-
-
     </div>
   </div>
 </div>
@@ -1445,7 +1438,14 @@ let variation = []
 for (let x = 0; x < form_data['setup']['variation']['when'].length; x++) {
   if ('at' == form_data['setup']['variation']['when'][x]) {
     /* Parse the timestamp and convert to unix timestamp */
-    form_data['setup']['variation']['period'][x] = moment(form_data['setup']['variation']['period'][x],'LT').unix();
+    let local_time = moment(form_data['setup']['variation']['period'][x],'LT', true);
+
+    if (!local_time.isValid()) {
+      {{modal_type}}_form.removeClass('was-validated');
+      toastr.error('{{ _('Invalid timestamp in varation settings.') }}', '{{ _('Form error') }}');
+      return false;
+    }
+    form_data['setup']['variation']['period'][x] = local_time.unix();
   }
 
   variation.push({
