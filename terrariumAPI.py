@@ -1268,23 +1268,10 @@ class terrariumAPI(object):
       'location'   : self.webserver.engine.weather.location,
       'sun'        : {'rise' : self.webserver.engine.weather.sunrise.timestamp(), 'set' : self.webserver.engine.weather.sunset.timestamp() },
       'is_day'     : self.webserver.engine.weather.is_day,
-      'indicators' : {'wind' : 'km/h', 'temperature' : '°C'},
+      'indicators' : {'wind' : self.webserver.engine.units['windspeed'], 'temperature' : self.webserver.engine.units['temperature']},
       'credits'    : self.webserver.engine.weather.credits,
-      'forecast'   : copy.deepcopy(self.webserver.engine.weather._data['days'])
+      'forecast'   : self.webserver.engine.weather.short_forecast
     }
-
-    for day in weather['forecast']:
-      if 'fahrenheit' == self.webserver.engine.settings['temperature_indicator']:
-        day['temp'] = terrariumUtils.to_fahrenheit(day['temp'])
-
-      elif 'kelvin' == self.webserver.engine.settings['temperature_indicator']:
-        day['temp'] = terrariumUtils.to_kelvin(day['temp'])
-
-      if 'm/s' == self.webserver.engine.settings['wind_speed_indicator']:
-        day['wind']['speed'] = terrariumUtils.to_ms(day['wind']['speed'])
-
-      elif 'beaufort' == self.webserver.engine.settings['wind_speed_indicator']:
-        day['wind']['speed'] = terrariumUtils.to_beaufort(day['wind']['speed'])
 
     return weather
 
@@ -1292,20 +1279,7 @@ class terrariumAPI(object):
     if not self.webserver.engine.weather:
       raise HTTPError(status=404, body=f'No weather data available.')
 
-    data = []
-    for forecast_item in self.webserver.engine.weather.forecast:
-      forecast = copy.copy(forecast_item)
-      forecast['timestamp'] = forecast['timestamp'].timestamp()
-
-      if 'fahrenheit' == self.webserver.engine.settings['temperature_indicator']:
-        forecast['value'] = terrariumUtils.to_fahrenheit(forecast['value'])
-
-      elif 'kelvin' == self.webserver.engine.settings['temperature_indicator']:
-        forecast['value'] = terrariumUtils.to_kelvin(forecast['value'])
-
-      data.append(forecast)
-
-    return {'data' : data}
+    return {'data' : self.webserver.engine.weather.forecast}
 
 
   # Webcams
