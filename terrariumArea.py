@@ -456,8 +456,11 @@ class terrariumArea(object):
       # If there are sensors in use, calculate the current values
       self.state['sensors'] = self.current_value(self.setup['sensors'])
 
+      # If there are variations on the alarm values, update them here
       if self.setup.get('variation'):
         self._update_variation()
+        # Due to changing min and max values, reload the current sensor values
+        self.state['sensors'] = self.current_value(self.setup['sensors'])
 
       # And set the alarm values
       self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_min']
