@@ -787,7 +787,7 @@
         <div class="row">
           <div class="col-3 col-sm-3 col-md-3 col-lg-3">
             <div class="form-group">
-              <label for="variation_when">{{ _('When') }}</label>
+              <label for="variation_when">{{ _('Source') }}</label>
             </div>
           </div>
           <div class="col-4 col-sm-4 col-md-4 col-lg-4">
@@ -857,38 +857,53 @@
                 <select class="select2" name="variation_when" style="width: 100%;">
                   <option value="after">{{ _('After x minutes') }}</option>
                   <option value="at">{{ _('At time') }}</option>
+                  <option value="weather">{{ _('Using current weather') }}</option>
+                  <option value="external">{{ _('Use external source') }}</option>
                 </select>
                 <div class="invalid-feedback">
                   {{ _('Enter a valid time.') }}
                 </div>
               </div>
             </div>
-            <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+
+            <div class="col-9 col-sm-9 col-md-9 col-lg-9 varation_external_source " style="display:none">
               <div class="form-group">
-                <input type="text" class="form-control" name="variation_period" placeholder="{{ _('Enter a duration in minutes or time') }}">
+                <input type="text" class="form-control" name="variation_source" placeholder="{{ _('Enter a full url') }}">
                 <div class="invalid-feedback">
                   {{ _('Enter a valid time.') }}
                 </div>
               </div>
             </div>
-            <div class="col-3 col-sm-3 col-md-3 col-lg-3">
-              <div class="form-group">
-                <input type="text" class="form-control" name="variation_value" placeholder="{{ _('Value') }}">
-                <div class="invalid-feedback">
-                  {{ _('Enter a valid duration in minutes.') }}
+
+
+              <div class="col-4 col-sm-4 col-md-4 col-lg-4 varation_time_settings">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="variation_period" placeholder="{{ _('Enter a duration in minutes or time') }}">
+                  <div class="invalid-feedback">
+                    {{ _('Enter a valid time.') }}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-1 col-sm-1 col-md-1 col-lg-1">
-              <div class="form-group">
-                <button type="button" class="form-control"><i class="fas fa-plus"></i></button>
+              <div class="col-3 col-sm-3 col-md-3 col-lg-3 varation_time_settings">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="variation_value" placeholder="{{ _('Value') }}">
+                  <div class="invalid-feedback">
+                    {{ _('Enter a valid duration in minutes.') }}
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-1 col-sm-1 col-md-1 col-lg-1">
-              <div class="form-group">
-                <button type="button" class="form-control"><i class="fas fa-minus"></i></button>
+              <div class="col-1 col-sm-1 col-md-1 col-lg-1 varation_time_settings">
+                <div class="form-group">
+                  <button type="button" class="form-control"><i class="fas fa-plus"></i></button>
+                </div>
               </div>
-            </div>
+              <div class="col-1 col-sm-1 col-md-1 col-lg-1 varation_time_settings">
+                <div class="form-group">
+                  <button type="button" class="form-control"><i class="fas fa-minus"></i></button>
+                </div>
+              </div>
+
+
           </div>
         </script>
       </div>
@@ -1026,6 +1041,19 @@ function plus_minus_buttons(form) {
 
     plus_minus_buttons(form);
   });
+
+  // toggle for weather or external
+  form.find('select[name="variation_when"]').off('change').on('change',function(event) {
+    let mode = jQuery(this).val();
+    jQuery('div.varation_time_settings').toggle('at' == mode || 'after' == mode);
+    jQuery('div.varation_external_source').toggle('external' == mode);
+
+    jQuery('input[name="variation_source"]').prop('disabled', 'external' != mode);
+    jQuery('input[name="variation_period"],[name="variation_value"]').prop('disabled', 'external' == mode || 'weather' == mode);
+  });
+
+  // Disable the weather and external source option when there are more then 1 row
+  form.find('select[name="variation_when"] option[value="weather"],[value="external"]').prop('disabled', form.find('div#area_variation div#variation_list div.row').length > 1);
   form.find('div#variation_list select').select2();
 }
 {% endblock %}
@@ -1435,24 +1463,37 @@ jQuery.each(form_data,function(field_name, value) {
 });
 
 let variation = []
-for (let x = 0; x < form_data['setup']['variation']['when'].length; x++) {
-  if ('at' == form_data['setup']['variation']['when'][x]) {
-    /* Parse the timestamp and convert to unix timestamp */
-    let local_time = moment(form_data['setup']['variation']['period'][x],'LT', true);
-
-    if (!local_time.isValid()) {
-      {{modal_type}}_form.removeClass('was-validated');
-      toastr.error('{{ _('Invalid timestamp in varation settings.') }}', '{{ _('Form error') }}');
-      return false;
-    }
-    form_data['setup']['variation']['period'][x] = local_time.unix();
+if (typeof form_data['setup']['variation']['when'] === 'string' || form_data['setup']['variation']['when'] instanceof String) {
+  if ('weather' == form_data['setup']['variation']['when']) {
+    variation.push({
+      'when'   : form_data['setup']['variation']['when'],
+    });
+  } else if ( 'external' == form_data['setup']['variation']['when']) {
+    variation.push({
+      'when'   : form_data['setup']['variation']['when'],
+      'source' : form_data['setup']['variation']['source']
+    });
   }
+} else {
+  for (let x = 0; x < form_data['setup']['variation']['when'].length; x++) {
+    if ('at' == form_data['setup']['variation']['when'][x]) {
+      /* Parse the timestamp and convert to unix timestamp */
+      let local_time = moment(form_data['setup']['variation']['period'][x],'LT', true);
 
-  variation.push({
-    'when'   : form_data['setup']['variation']['when'][x],
-    'period' : form_data['setup']['variation']['period'][x],
-    'value'  : form_data['setup']['variation']['value'][x]
-  });
+      if (!local_time.isValid()) {
+        {{modal_type}}_form.removeClass('was-validated');
+        toastr.error('{{ _('Invalid timestamp in varation settings.') }}', '{{ _('Form error') }}');
+        return false;
+      }
+      form_data['setup']['variation']['period'][x] = local_time.unix();
+    }
+
+    variation.push({
+      'when'   : form_data['setup']['variation']['when'][x],
+      'period' : form_data['setup']['variation']['period'][x],
+      'value'  : form_data['setup']['variation']['value'][x]
+    });
+  }
 }
 form_data['setup']['variation'] = variation;
 {% endblock %}
