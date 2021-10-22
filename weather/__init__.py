@@ -7,13 +7,13 @@ from pathlib import Path
 import inspect
 from importlib import import_module
 import sys
-from hashlib import md5
+import copy
 
 # pip install retry
 from retry import retry
 
 from time import time
-from datetime import date, datetime, timedelta
+from datetime import datetime
 import re
 
 from terrariumUtils import terrariumUtils
@@ -33,23 +33,16 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   INFO_SOURCE  = None
 
   # Weather data expects temperature in celcius degrees and windspeed in meters per second
-  __UPDATE_TIMEOUT = 4 * 60 * 60
+  __UPDATE_TIMEOUT = 1 * 60 * 60
 
-  def __init__(self, address, name = '', unit_value_callback = None, trigger_callback = None):
+  def __init__(self, address, unit_values):
     self._device = {'id'       : None,
                     'address'  : None,
-                    'name'     : None,
 
-                    'trigger_callback' : trigger_callback,
-                    'unit_callback'    : unit_value_callback,
+                    'unit_values' : unit_values,
                     'last_update' : None}
 
     self._data = {'forecast' : {}}
-
-#    self._device['trigger_callback'] = unit_value_callback
-#    self._device['unit_callback'] = trigger_callback
-
-    self.name = name
     self.address = address
 
   @retry(tries=3, delay=0.5, max_delay=2)
@@ -59,6 +52,14 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
       logger.debug(f'Loading online weather data from source: {self.address}')
 
       if self._load_data():
+        # Convert values to the right unit values
+        for day in self._data['days']:
+          day['temp'] = terrariumUtils.conver_to_value(day['temp'], self._device['unit_values']['temperature'])
+          day['wind']['speed'] = terrariumUtils.conver_to_value(day['wind']['speed'], self._device['unit_values']['windspeed'])
+
+        for timestamp in self._data['forecast'].keys():
+          self._data['forecast'][timestamp]['temp'] = terrariumUtils.conver_to_value(self._data['forecast'][timestamp]['temp'], self._device['unit_values']['temperature'])
+
         self._device['last_update'] = datetime.now()
         logger.info(terrariumUtils.clean_log_line(f'Loaded new weather data in {time()-start:.3f} seconds.'))
       else:
@@ -120,13 +121,17 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
     return self.sunrise < datetime.now() < self.sunset
 
   @property
+  def short_forecast(self):
+    return copy.deepcopy(self._data['days'])
+
+  @property
   def forecast(self):
     data = []
     timestamps = sorted(self._data['forecast'].keys())
     now = datetime.now().timestamp()
     for timestamp in timestamps:
       if int(timestamp) >= now:
-        data.append({'value' : self._data['forecast'][timestamp]['temp'], 'timestamp' : datetime.fromtimestamp(int(timestamp))})
+        data.append({'value' : self._data['forecast'][timestamp]['temp'], 'timestamp' : timestamp})
 
     return data
 
@@ -165,11 +170,11 @@ class terrariumWeather(object):
         setattr(sys.modules[__name__], file.stem, attribute)
         SOURCES[attribute.HARDWARE] = attribute
 
-  # Return polymorph sensor....
-  def __new__(self, address, name = '', unit_value_callback = None, trigger_callback = None):
+  # Return polymorph weather....
+  def __new__(self, address, unit_values):
     for weather_source in terrariumWeather.SOURCES:
       if re.search(terrariumWeather.SOURCES[weather_source].VALID_SOURCE, address, re.IGNORECASE):
-        return terrariumWeather.SOURCES[weather_source](address, name, unit_value_callback, trigger_callback)
+        return terrariumWeather.SOURCES[weather_source](address, unit_values)
 
     raise terrariumWeatherException('Weather url \'{}\' is not valid! Please check your source'.format(address))
 

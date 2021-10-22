@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(None)
 
@@ -11,6 +12,7 @@ from operator import itemgetter
 
 from threading import Timer
 from hashlib import md5
+from  base64 import b64encode
 
 from terrariumDatabase import NotificationMessage, NotificationService
 from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
@@ -96,11 +98,12 @@ class terrariumNotification(terrariumSingleton):
   def load_services(self):
     with orm.db_session():
       for service in NotificationService.select():
-        if service.id not in self.services:
-          setup = copy.deepcopy(service.setup)
+        service = service.to_dict()
+        if service['id'] not in self.services:
+          setup = copy.deepcopy(service['setup'])
           setup['version']       = self.version
           setup['profile_image'] = self.profile_image
-          self.services[service.id] = terrariumNotificationService(service.id, service.type, service.name, service.enabled, setup)
+          self.services[service['id']] = terrariumNotificationService(service['id'], service['type'], service['name'], service['enabled'], setup)
 
   @property
   def version(self):
@@ -831,7 +834,6 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
     self.setup = {
       'api_token' : setup_data.get('api_token'),
       'user_key'  : setup_data.get('user_key'),
-
       'address'   : 'https://api.pushover.net/1/messages.json' # https://support.pushover.net/i44-example-code-and-pushover-libraries#python-image
     }
 

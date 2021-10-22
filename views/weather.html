@@ -99,9 +99,10 @@
       'few clouds' : 'cloud_' + day_icon,
 
       'drizzle' : 'cloud_drizzle_' + day_icon,
-      'light rain' : 'cloud_drizzle_' + day_icon,
-      'heavy intensity drizzle' : 'cloud_drizzle_' + day_icon,
+      'light intensity drizzle' : 'cloud_drizzle_' + day_icon,
       'light intensity drizzle rain': 'cloud_drizzle_' + day_icon,
+      'heavy intensity drizzle' : 'cloud_drizzle_' + day_icon,
+      'light rain' : 'cloud_drizzle_' + day_icon,
 
       'moderate rain' : 'cloud_rain_' + day_icon,
       'heavy intensity rain' : 'cloud_rain_' + day_icon,
@@ -151,7 +152,7 @@
               'temperature' : formatNumber(day.temp) + ' ' + sensor_type_indicator('temperature'),
               'icon' : get_weather_icon(day.weather,data.is_day),
               'weather' : day.weather,
-              'wind' : formatNumber(day.wind.speed) + ' ' + sensor_type_indicator('windspeed'),
+              'wind' : formatNumber(day.wind.speed,1,1) + ' ' + sensor_type_indicator('windspeed'),
               'direction' : {'transform': 'rotate(' + (day.wind.direction + 135) + 'deg)'}
             });
         }

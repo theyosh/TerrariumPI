@@ -511,3 +511,9 @@ canvas.gauge {
 .dark-mode .dot-bg {
   background-image: url('../img/dot-dark.png' );
 }
+
+div.hide_environment table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

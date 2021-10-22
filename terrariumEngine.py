@@ -6,11 +6,9 @@ import threading
 import time
 import datetime
 import os
-import signal
 import psutil
 import subprocess
 import re
-import json
 import pyfiglet
 import copy
 import statistics
@@ -26,7 +24,7 @@ from packaging.version import Version
 from pyfancy.pyfancy import pyfancy
 
 from pony import orm
-from terrariumDatabase import init as init_db, db, Setting, Sensor, Relay, RelayHistory, Button, Webcam, Enclosure
+from terrariumDatabase import init as init_db, db, Setting, Sensor, Relay, Button, Webcam, Enclosure
 from terrariumWebserver import terrariumWebserver
 from terrariumCalendar import terrariumCalendar
 from terrariumUtils import terrariumUtils, terrariumAsync
@@ -34,11 +32,11 @@ from terrariumEnclosure import terrariumEnclosure
 from terrariumArea import terrariumArea
 from terrariumCloud import TerrariumMerossCloud
 
-from weather import terrariumWeather, terrariumWeatherException
+from weather import terrariumWeather
 from hardware.sensor import terrariumSensor, terrariumSensorLoadingException
 from hardware.relay import terrariumRelay, terrariumRelayLoadingException, terrariumRelayUpdateException
 from hardware.button import terrariumButton, terrariumButtonLoadingException
-from hardware.webcam import terrariumWebcam, terrariummWebcamLoadingException
+from hardware.webcam import terrariumWebcam
 
 from terrariumNotification import terrariumNotification
 
@@ -280,7 +278,7 @@ class terrariumEngine(object):
       if 'cm' == settings['distance_indicator']:
         self.units['windspeed'] = 'm/s'
       elif 'inch' == settings['distance_indicator']:
-        self.units['windspeed'] = 'i/f'
+        self.units['windspeed'] = 'f/s'
 
     elif 'beaufort' == settings['wind_speed_indicator']:
       self.units['windspeed'] = 'Bf'
@@ -298,12 +296,14 @@ class terrariumEngine(object):
       if '' != self.settings['weather_source']:
         logger.info(f'Loading weather data from source {self.settings["weather_source"]}')
         try:
-          self.weather = terrariumWeather(self.settings['weather_source'])
+          self.weather = terrariumWeather(self.settings['weather_source'], self.units)
         except Exception as ex:
           logger.error(f'Loading weather exception: {ex}')
       elif self.weather is not None:
         logger.info(f'Updating weather source data to {self.settings["weather_source"]}')
         self.weather.address = self.settings['weather_source']
+        # Force an update, due to maybe changing speed units or temperature.... lazy fix... :(
+        self.weather.update()
 
     # Loading Meross cloud
     if '' != settings['meross_cloud_username'] and '' != settings['meross_cloud_password'] and meross_login:
@@ -1034,8 +1034,11 @@ class terrariumEngine(object):
       current_process = psutil.Process()
       for process in current_process.children(recursive=True):
         if 'bluepy-helper' in ' '.join(process.cmdline()):
-          logger.warning(f'Killing hanging bluetooth helper process')
-          process.kill()
+          try:
+            logger.warning(f'Killing hanging bluetooth helper process')
+            process.kill()
+          except:
+            pass
 
       duration = time.time() - start
       time_left = terrariumEngine.__ENGINE_LOOP_TIMEOUT - duration
