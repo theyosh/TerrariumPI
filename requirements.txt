@@ -1,3 +1,4 @@
+pip
 setuptools
 wheel
 
@@ -45,7 +46,7 @@ simple-pid
 
 # Webcam packages
 Pillow
-opencv-python-headless
+opencv-python-headless==4.5.3.56
 piexif
 picamera
 
