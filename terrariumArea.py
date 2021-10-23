@@ -450,7 +450,7 @@ class terrariumArea(object):
         for sensor in Sensor.select(lambda s: s.id in self.setup['sensors']):
           sensor.alarm_min += sensor_diff
           sensor.alarm_max += sensor_diff
-          logger.info(f'Changed sensor {sensor} alarm values from min: {sensor.alarm_min - sensor_diff:.2f}, max: {sensor.alarm_max - sensor_diff:.2f} to new min: {sensor.alarm_min:.2f} and max: {sensor.alarm_max:.2f}. A difference of {sensor_diff}. New average is: {wanted_average_value:.2f}.')
+          logger.info(f'Changed {sensor.type} sensor \'{sensor.name}\' for area \'{self.name}\' alarm values from min: {sensor.alarm_min - sensor_diff:.2f}, max: {sensor.alarm_max - sensor_diff:.2f} to new min: {sensor.alarm_min:.2f} and max: {sensor.alarm_max:.2f}. A difference of {sensor_diff}. New average is: {wanted_average_value:.2f}.')
 
     # Reload the current sensor values after changing them
     self.state['sensors'] = self.current_value(self.setup['sensors'])
