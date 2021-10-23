@@ -33,7 +33,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   INFO_SOURCE  = None
 
   # Weather data expects temperature in celcius degrees and windspeed in meters per second
-  __UPDATE_TIMEOUT = 15 * 60
+  __UPDATE_TIMEOUT = 10 * 60 # 10 minutes, as the source updates every 10 minutes
 
   def __init__(self, address, unit_values):
     self._device = {'id'       : None,
@@ -124,6 +124,10 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   @property
   def current_temperature(self):
     return self._data['days'][0]['temp']
+
+  @property
+  def current_humidity(self):
+    return self._data['days'][0]['humidity']
 
   @property
   def short_forecast(self):
