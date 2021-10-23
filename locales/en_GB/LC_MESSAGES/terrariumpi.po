@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-10-23 10:47+CEST\n"
-"PO-Revision-Date: 2021-10-09 21:39+0000\n"
+"PO-Revision-Date: 2021-10-23 08:51+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_GB/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8\n"
+"X-Generator: Weblate 4.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:31
@@ -1059,22 +1059,21 @@ msgid ""
 "according to the list below. Make sure the periods are in chronological "
 "order!"
 msgstr ""
+"Here you can enter periods where the sensors will change their values "
+"according to the list below. Make sure the periods are in chronological "
+"order!"
 
 #: views/modals/area.html:790
-#, fuzzy
-#| msgid "Source url"
 msgid "Source"
-msgstr "Source url"
+msgstr "Source"
 
 #: views/modals/area.html:795
 msgid "Period/duration"
 msgstr "Period/duration"
 
 #: views/modals/area.html:800
-#, fuzzy
-#| msgid "External calendar url"
 msgid "External source url"
-msgstr "External calendar url"
+msgstr "External source url"
 
 #: views/modals/area.html:810
 msgid "Value"
@@ -1088,12 +1087,11 @@ msgstr "After x minutes change to value or at exactly a time stamp."
 msgid ""
 "Enter a full url to the external source according to the Remote data feature."
 msgstr ""
+"Enter a full url to the external source according to the Remote data feature."
 
 #: views/modals/area.html:844
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a negative or positive offset value."
-msgstr "Enter a name for this area."
+msgstr "Enter a negative or positive offset value."
 
 #: views/modals/area.html:851
 msgid "Enter a duration in minutes or the actual time of the day."
@@ -1125,31 +1123,23 @@ msgstr "At time"
 
 #: views/modals/area.html:884
 msgid "Using current weather"
-msgstr ""
+msgstr "Using current weather"
 
 #: views/modals/area.html:885
-#, fuzzy
-#| msgid "Remote source"
 msgid "Use external source"
-msgstr "Remote source"
+msgstr "Use external source"
 
 #: views/modals/area.html:888
-#, fuzzy
-#| msgid "Select a rotation."
 msgid "Select a valid option."
-msgstr "Select a rotation."
+msgstr "Select a valid option."
 
 #: views/modals/area.html:896
-#, fuzzy
-#| msgid "Enter a valid time."
 msgid "Enter a valid url."
-msgstr "Enter a valid time."
+msgstr "Enter a valid url."
 
 #: views/modals/area.html:904
-#, fuzzy
-#| msgid "Offset"
 msgid "Offset."
-msgstr "Offset"
+msgstr "Offset."
 
 #: views/modals/area.html:942
 msgid "Dimmer on duration"
@@ -1353,7 +1343,7 @@ msgstr "Enabled"
 
 #: views/modals/message.html:51
 msgid "Enable/disable this service."
-msgstr ""
+msgstr "Enable/disable this service."
 
 #: views/modals/message.html:59
 msgid "Message"
@@ -2480,7 +2470,7 @@ msgstr "Enter a duration in minutes or time"
 
 #: views/modals/area.html:894
 msgid "Enter a full url"
-msgstr ""
+msgstr "Enter a full url"
 
 #: views/modals/message.html:60
 msgid "Enter a message"
@@ -2662,7 +2652,7 @@ msgstr "Ignore webcam"
 
 #: views/modals/area.html:1524
 msgid "Invalid timestamp in varation settings."
-msgstr ""
+msgstr "Invalid timestamp in variation settings."
 
 #: views/relays.html:71
 msgid "Manual mode relay"
