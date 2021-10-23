@@ -104,8 +104,9 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
                                                                   'direction' : forecast['wind_deg']},
                                                     'weather'  : forecast['weather'][0]['description']}
 
-      self._data['days'][0]['temp'] = data['current']['temp']
-      self._data['days'][0]['weather'] = data['current']['weather'][0]['description']
+      self._data['days'][0]['temp']     = data['current']['temp']
+      self._data['days'][0]['humidity'] = data['current']['humidity']
+      self._data['days'][0]['weather']  = data['current']['weather'][0]['description']
 
       for timestamp in sorted(self._data['forecast'].keys()):
         for day in self._data['days']:
