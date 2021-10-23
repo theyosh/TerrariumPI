@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2021-10-23 10:47+CEST\n"
+"POT-Creation-Date: 2021-10-23 10:51+CEST\n"
 "PO-Revision-Date: 2020-05-21 19:44+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
@@ -3191,7 +3191,7 @@ msgid "Ignore webcam"
 msgstr "Ajouter une nouvelle webcam"
 
 #: views/modals/area.html:1524
-msgid "Invalid timestamp in varation settings."
+msgid "Invalid timestamp in variation settings."
 msgstr ""
 
 #: views/relays.html:71

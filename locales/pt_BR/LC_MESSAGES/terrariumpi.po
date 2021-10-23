@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2021-10-23 10:47+CEST\n"
+"POT-Creation-Date: 2021-10-23 10:51+CEST\n"
 "PO-Revision-Date: 2021-10-13 03:42+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
@@ -2671,7 +2671,7 @@ msgid "Ignore webcam"
 msgstr "Ignorar webcam"
 
 #: views/modals/area.html:1524
-msgid "Invalid timestamp in varation settings."
+msgid "Invalid timestamp in variation settings."
 msgstr ""
 
 #: views/relays.html:71
