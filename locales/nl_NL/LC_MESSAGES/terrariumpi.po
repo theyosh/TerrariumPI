@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-10-23 10:51+CEST\n"
-"PO-Revision-Date: 2021-10-09 21:39+0000\n"
+"PO-Revision-Date: 2021-10-23 08:59+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8\n"
+"X-Generator: Weblate 4.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -944,7 +944,7 @@ msgstr "Compensatie"
 
 #: views/modals/area.html:480
 msgid "Enter the offset between sensor and water height."
-msgstr "Voer de offset tussen sensor en waterhoogte in."
+msgstr "Voer de compensatie tussen sensor en waterhoogte in."
 
 #: views/modals/area.html:489
 msgid "Day/night difference"
@@ -1065,22 +1065,21 @@ msgid ""
 "according to the list below. Make sure the periods are in chronological "
 "order!"
 msgstr ""
+"Hier kunt u perioden invoeren waarin de sensoren hun waarden wijzigen "
+"volgens de onderstaande lijst. Zorg ervoor dat de perioden in chronologische "
+"volgorde staan!"
 
 #: views/modals/area.html:790
-#, fuzzy
-#| msgid "Source url"
 msgid "Source"
-msgstr "Bron url"
+msgstr "Bron"
 
 #: views/modals/area.html:795
 msgid "Period/duration"
 msgstr "Periode/tijdsduur"
 
 #: views/modals/area.html:800
-#, fuzzy
-#| msgid "External calendar url"
 msgid "External source url"
-msgstr "Externe kalender url"
+msgstr "Externe bron url"
 
 #: views/modals/area.html:810
 msgid "Value"
@@ -1094,12 +1093,12 @@ msgstr "Verander na x minuten naar waarde of op exact een tijdstip."
 msgid ""
 "Enter a full url to the external source according to the Remote data feature."
 msgstr ""
+"Voer een volledige url in naar de externe bron volgens de functie Externe "
+"gegevens."
 
 #: views/modals/area.html:844
-#, fuzzy
-#| msgid "Enter a name for this area."
 msgid "Enter a negative or positive offset value."
-msgstr "Voer een naam in voor dit gebied."
+msgstr "Voer een negatieve of positieve compensatie waarde in."
 
 #: views/modals/area.html:851
 msgid "Enter a duration in minutes or the actual time of the day."
@@ -1131,31 +1130,23 @@ msgstr "Op tijdstip"
 
 #: views/modals/area.html:884
 msgid "Using current weather"
-msgstr ""
+msgstr "Het huidige weer gebruiken"
 
 #: views/modals/area.html:885
-#, fuzzy
-#| msgid "Remote source"
 msgid "Use external source"
-msgstr "Externe bron"
+msgstr "Externe bron gebruiken"
 
 #: views/modals/area.html:888
-#, fuzzy
-#| msgid "Select a rotation."
 msgid "Select a valid option."
-msgstr "Selecteer een rotatie."
+msgstr "Selecteer een geldige optie."
 
 #: views/modals/area.html:896
-#, fuzzy
-#| msgid "Enter a valid time."
 msgid "Enter a valid url."
-msgstr "Voer een geldige tijd in."
+msgstr "Voer een geldige url in."
 
 #: views/modals/area.html:904
-#, fuzzy
-#| msgid "Offset"
 msgid "Offset."
-msgstr "Compensatie"
+msgstr "Compensatie."
 
 #: views/modals/area.html:942
 msgid "Dimmer on duration"
@@ -1359,7 +1350,7 @@ msgstr "Geactiveerd"
 
 #: views/modals/message.html:51
 msgid "Enable/disable this service."
-msgstr ""
+msgstr "Schakel deze service in/uit."
 
 #: views/modals/message.html:59
 msgid "Message"
@@ -1453,11 +1444,11 @@ msgstr "Het maximale vermogen voor deze dimmer."
 
 #: views/modals/relay.html:116
 msgid "Dimmer offset in %"
-msgstr "Dimmer-offset in%"
+msgstr "Dimmer compensatie in%"
 
 #: views/modals/relay.html:119
 msgid "The dimmer offset."
-msgstr "De dimmer-offset."
+msgstr "De dimmer compensatie."
 
 #: views/modals/sensor.html:11
 msgid "Sensor settings"
@@ -1525,7 +1516,7 @@ msgstr "Sluit deze sensoren uit van gemiddelde berekeningen."
 
 #: views/modals/sensor.html:162
 msgid "Enter offset for this sensor."
-msgstr "Voer de offset in voor deze sensor."
+msgstr "Voer de compensatie in voor deze sensor."
 
 #: views/modals/sensor.html:165 views/modals/sensor.html:177
 #: views/modals/sensor.html:189
@@ -2454,7 +2445,7 @@ msgstr "Verwijder webcam"
 
 #: views/modals/relay.html:117
 msgid "Dimmer offset in percentage"
-msgstr "Dimmer-offset in procenten"
+msgstr "Dimmer compensatie in procenten"
 
 #: views/enclosures.html:117
 msgid "Edit area"
@@ -2498,7 +2489,7 @@ msgstr "Voer een duur in minuten of tijd in"
 
 #: views/modals/area.html:894
 msgid "Enter a full url"
-msgstr ""
+msgstr "Voer een volledige URL in"
 
 #: views/modals/message.html:60
 msgid "Enter a message"
@@ -2599,7 +2590,7 @@ msgstr "Voer het MQTT-serverpoortnummer in"
 
 #: views/modals/area.html:478
 msgid "Enter the offset"
-msgstr "Voer de offset in"
+msgstr "Voer de compensatie in"
 
 #: views/modals/service.html:129
 msgid "Enter the Pushover API token"
@@ -2680,7 +2671,7 @@ msgstr "Negeer de webcam"
 
 #: views/modals/area.html:1524
 msgid "Invalid timestamp in variation settings."
-msgstr ""
+msgstr "Ongeldige tijd in variatie-instellingen."
 
 #: views/relays.html:71
 msgid "Manual mode relay"
