@@ -2,13 +2,15 @@ pip
 setuptools
 wheel
 
+# Database
+pony
+yoyo-migrations
+
 # Audio
 git+https://github.com/gbstack/ffprobe-python
 pyalsaaudio
 
 # Webserver packages
-# Gevent has strange issues with higher versions
-# gevent==20.9.0
 gevent
 bottle
 bottle_websocket
@@ -30,6 +32,7 @@ RPi.GPIO
 pyserial
 pigpio_dht
 pigpio
+# Version 0.0.4 Does not install correctly. https://github.com/ratcashdev/mitemp/issues/23
 mitemp_bt==0.0.3
 PyMLX90614
 pyownet
@@ -67,9 +70,3 @@ emails
 luma.oled
 i2c_lcd
 paho-mqtt
-
-# API
-pony
-apispec
-apispec-webframeworks
-yoyo-migrations

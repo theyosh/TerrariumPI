@@ -1434,8 +1434,7 @@ jQuery.when(
       });
 
       // Load the variation data...
-      console.log(data.setup.variation);
-      if (data.setup.variation) {
+      if (data.setup['variation'] !== undefined) {
         let variation_rows = data.setup['variation'].length;
         for (let x = 0; x < variation_rows; x++) {
 
@@ -1500,39 +1499,42 @@ jQuery.each(form_data,function(field_name, value) {
 });
 
 let variation = []
-if (typeof form_data['setup']['variation']['when'] === 'string' || form_data['setup']['variation']['when'] instanceof String) {
-  if ('weather' == form_data['setup']['variation']['when']) {
-    variation.push({
-      'when'   : form_data['setup']['variation']['when'],
-      'offset' : form_data['setup']['variation']['offset']
-    });
-  } else if ( 'external' == form_data['setup']['variation']['when']) {
-    variation.push({
-      'when'   : form_data['setup']['variation']['when'],
-      'source' : form_data['setup']['variation']['source'],
-      'offset' : form_data['setup']['variation']['offset']
-    });
-  }
-} else {
-  for (let x = 0; x < form_data['setup']['variation']['when'].length; x++) {
-    if ('at' == form_data['setup']['variation']['when'][x]) {
-      /* Parse the timestamp and convert to unix timestamp */
-      let local_time = moment(form_data['setup']['variation']['period'][x],'LT', true);
-
-      if (!local_time.isValid()) {
-        {{modal_type}}_form.removeClass('was-validated');
-        toastr.error('{{ _('Invalid timestamp in variation settings.') }}', '{{ _('Form error') }}');
-        return false;
-      }
-      form_data['setup']['variation']['period'][x] = local_time.unix();
+if (form_data['setup']['variation']['when'] !== undefined) {
+  if (typeof form_data['setup']['variation']['when'] === 'string' || form_data['setup']['variation']['when'] instanceof String) {
+    if ('weather' == form_data['setup']['variation']['when']) {
+      variation.push({
+        'when'   : form_data['setup']['variation']['when'],
+        'offset' : form_data['setup']['variation']['offset']
+      });
+    } else if ( 'external' == form_data['setup']['variation']['when']) {
+      variation.push({
+        'when'   : form_data['setup']['variation']['when'],
+        'source' : form_data['setup']['variation']['source'],
+        'offset' : form_data['setup']['variation']['offset']
+      });
     }
+  } else {
+    for (let x = 0; x < form_data['setup']['variation']['when'].length; x++) {
+      if ('at' == form_data['setup']['variation']['when'][x]) {
+        /* Parse the timestamp and convert to unix timestamp */
+        let local_time = moment(form_data['setup']['variation']['period'][x],'LT', true);
 
-    variation.push({
-      'when'   : form_data['setup']['variation']['when'][x],
-      'period' : form_data['setup']['variation']['period'][x],
-      'value'  : form_data['setup']['variation']['value'][x]
-    });
+        if (!local_time.isValid()) {
+          {{modal_type}}_form.removeClass('was-validated');
+          toastr.error('{{ _('Invalid timestamp in variation settings.') }}', '{{ _('Form error') }}');
+          return false;
+        }
+        form_data['setup']['variation']['period'][x] = local_time.unix();
+      }
+
+      variation.push({
+        'when'   : form_data['setup']['variation']['when'][x],
+        'period' : form_data['setup']['variation']['period'][x],
+        'value'  : form_data['setup']['variation']['value'][x]
+      });
+    }
   }
 }
+
 form_data['setup']['variation'] = variation;
 {% endblock %}
