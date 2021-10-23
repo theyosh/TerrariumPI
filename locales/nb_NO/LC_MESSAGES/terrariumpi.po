@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
-"POT-Creation-Date: 2021-10-09 23:27+CEST\n"
+"POT-Creation-Date: 2021-10-23 10:47+CEST\n"
 "PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
@@ -70,213 +70,213 @@ msgstr "Fuktighet"
 msgid "pH"
 msgstr "pH"
 
-#: terrariumEngine.py:56
+#: terrariumEngine.py:54
 #, fuzzy
 #| msgid "Temperature"
 msgid "temperature"
 msgstr "Temperatur"
 
-#: terrariumEngine.py:57
+#: terrariumEngine.py:55
 #, fuzzy
 #| msgid "Distance"
 msgid "distance"
 msgstr "Avstand"
 
-#: terrariumEngine.py:58
+#: terrariumEngine.py:56
 msgid "altitude"
 msgstr ""
 
-#: terrariumEngine.py:59
+#: terrariumEngine.py:57
 msgid "pressure"
 msgstr ""
 
-#: terrariumEngine.py:60
+#: terrariumEngine.py:58
 #, fuzzy
 #| msgid "Humidity"
 msgid "humidity"
 msgstr "Luftfuktighet"
 
-#: terrariumEngine.py:61
+#: terrariumEngine.py:59
 #, fuzzy
 #| msgid "Moisture"
 msgid "moisture"
 msgstr "Fuktighet"
 
-#: terrariumEngine.py:62
+#: terrariumEngine.py:60
 #, fuzzy
 #| msgid "Conductivity"
 msgid "conductivity"
 msgstr "Ledningsevne"
 
-#: terrariumEngine.py:63
+#: terrariumEngine.py:61
 msgid "ph"
 msgstr ""
 
-#: terrariumEngine.py:64
+#: terrariumEngine.py:62
 #, fuzzy
 #| msgid "Night"
 msgid "light"
 msgstr "Natt"
 
-#: terrariumEngine.py:65
+#: terrariumEngine.py:63
 msgid "uva"
 msgstr ""
 
-#: terrariumEngine.py:66
+#: terrariumEngine.py:64
 msgid "uvb"
 msgstr ""
 
-#: terrariumEngine.py:67
+#: terrariumEngine.py:65
 msgid "uvi"
 msgstr ""
 
-#: terrariumEngine.py:68
+#: terrariumEngine.py:66
 #, fuzzy
 #| msgid "Fertility"
 msgid "fertility"
 msgstr "Fruktbarhet"
 
-#: terrariumEngine.py:69
+#: terrariumEngine.py:67
 msgid "co2"
 msgstr ""
 
-#: terrariumEngine.py:70
+#: terrariumEngine.py:68
 #, fuzzy
 #| msgid "Volume"
 msgid "volume"
 msgstr "Volum"
 
-#: terrariumEngine.py:71
+#: terrariumEngine.py:69
 #, fuzzy
 #| msgid "Water tank"
 msgid "watertank"
 msgstr "Vanntank"
 
-#: terrariumEngine.py:72
+#: terrariumEngine.py:70
 #, fuzzy
 #| msgid "Wind speed"
 msgid "windspeed"
 msgstr "Vindhastighet"
 
-#: terrariumEngine.py:73
+#: terrariumEngine.py:71
 msgid "water_flow"
 msgstr ""
 
-#: terrariumEngine.py:74
+#: terrariumEngine.py:72
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1071 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1074 views/dashboard.html:18 views/status.html:112
 #, fuzzy
 #| msgid "Uptime"
 msgid "Up time"
 msgstr "Oppetid"
 
-#: terrariumEngine.py:1077
+#: terrariumEngine.py:1080
 #, fuzzy
 #| msgid "System log"
 msgid "System load"
 msgstr "Systemlogg"
 
-#: terrariumEngine.py:1083 views/status.html:44
+#: terrariumEngine.py:1086 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU Temperatur"
 
-#: terrariumEngine.py:1089
+#: terrariumEngine.py:1092
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1095
+#: terrariumEngine.py:1098
 #, fuzzy
 #| msgid "Memory usage"
 msgid "Memory"
 msgstr "Minnebruk"
 
-#: terrariumEngine.py:1112
+#: terrariumEngine.py:1115
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "Sensor typen"
 
-#: terrariumEngine.py:1283
+#: terrariumEngine.py:1286
 #, fuzzy
 #| msgid "Last update"
 msgid "last update"
 msgstr "Siste oppdatering"
 
-#: terrariumNotification.py:39
+#: terrariumNotification.py:41
 #, fuzzy
 #| msgid "Authentication"
 msgid "Authentication login error"
 msgstr "Autentisering"
 
-#: terrariumNotification.py:40
+#: terrariumNotification.py:42
 #, fuzzy
 #| msgid "System log"
 msgid "System warning"
 msgstr "Systemlogg"
 
-#: terrariumNotification.py:41
+#: terrariumNotification.py:43
 #, fuzzy
 #| msgid "System log"
 msgid "System error"
 msgstr "Systemlogg"
 
-#: terrariumNotification.py:43
+#: terrariumNotification.py:45
 #, fuzzy
 #| msgid "Sensor ph"
 msgid "Sensor update"
 msgstr "Sensor pH"
 
-#: terrariumNotification.py:44
+#: terrariumNotification.py:46
 #, fuzzy
 #| msgid "Sensor ph"
 msgid "Sensor alarm"
 msgstr "Sensor pH"
 
-#: terrariumNotification.py:46
+#: terrariumNotification.py:48
 #, fuzzy
 #| msgid "Webcam settings"
 msgid "Relay change"
 msgstr "Innstillinger for webkamera"
 
-#: terrariumNotification.py:48
+#: terrariumNotification.py:50
 #, fuzzy
 #| msgid "Door settings"
 msgid "Button change"
 msgstr "Dør innstillinger"
 
-#: terrariumNotification.py:50
+#: terrariumNotification.py:52
 #, fuzzy
 #| msgid "Language"
 msgid "Webcam archive"
 msgstr "Språk"
 
-#: terrariumNotification.py:172
+#: terrariumNotification.py:175
 msgid "Display"
 msgstr "Vis alternativer"
 
-#: terrariumNotification.py:176
+#: terrariumNotification.py:179
 msgid "Email"
 msgstr "E-post"
 
-#: terrariumNotification.py:186
+#: terrariumNotification.py:189
 #, fuzzy
 #| msgid "Minimum light hours"
 msgid "Traffic light"
 msgstr "Minimum lys timer"
 
-#: terrariumNotification.py:190
+#: terrariumNotification.py:193
 #, fuzzy
 #| msgid "Webhook"
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:194
+#: terrariumNotification.py:197
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:198
+#: terrariumNotification.py:201
 msgid "Pushover"
 msgstr "Pushover"
 
@@ -326,7 +326,7 @@ msgid "Size"
 msgstr "Størrelse"
 
 #: views/audio_files.html:28 views/audio_files.html:39
-#: views/modals/area.html:803 views/playlists.html:31 views/playlists.html:46
+#: views/modals/area.html:815 views/playlists.html:31 views/playlists.html:46
 msgid "Action"
 msgstr "Handling"
 
@@ -866,7 +866,7 @@ msgstr ""
 msgid "Main lights"
 msgstr "Minimum lys timer"
 
-#: views/modals/area.html:118 views/modals/message.html:52
+#: views/modals/area.html:118
 msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
@@ -908,8 +908,7 @@ msgstr ""
 #: views/modals/area.html:301 views/modals/area.html:359
 #: views/modals/area.html:371 views/modals/area.html:532
 #: views/modals/area.html:544 views/modals/area.html:661
-#: views/modals/area.html:673 views/modals/area.html:881
-#: views/modals/area.html:890
+#: views/modals/area.html:673 views/modals/area.html:912
 #, fuzzy
 #| msgid "Date and time"
 msgid "Enter a valid time."
@@ -979,7 +978,7 @@ msgstr "Viser lydkortet som brukes til å spille av lyd."
 #: views/modals/area.html:383 views/modals/area.html:395
 #: views/modals/area.html:556 views/modals/area.html:568
 #: views/modals/area.html:685 views/modals/area.html:697
-#: views/modals/area.html:898
+#: views/modals/area.html:920
 #, fuzzy
 #| msgid "Timer period on duration in minutes"
 msgid "Enter a valid duration in minutes."
@@ -1072,7 +1071,8 @@ msgstr "Høyde"
 msgid "Enter the height of the water tank."
 msgstr ""
 
-#: views/modals/area.html:477 views/modals/sensor.html:159
+#: views/modals/area.html:477 views/modals/area.html:805
+#: views/modals/sensor.html:159
 msgid "Offset"
 msgstr "Forskyvning"
 
@@ -1212,89 +1212,141 @@ msgstr ""
 msgid "Select the light status."
 msgstr "Arkiver lys status"
 
-#: views/modals/area.html:785
-#, fuzzy
-#| msgid "When on"
-msgid "When"
-msgstr "Når på"
+#: views/modals/area.html:783
+msgid ""
+"Here you can enter periods where the sensors will change their values "
+"according to the list below. Make sure the periods are in chronological "
+"order!"
+msgstr ""
 
-#: views/modals/area.html:791
+#: views/modals/area.html:790
+#, fuzzy
+#| msgid "Source"
+msgid "Source"
+msgstr "Kilde"
+
+#: views/modals/area.html:795
 #, fuzzy
 #| msgid "Timer on duration"
 msgid "Period/duration"
 msgstr "Tidtaker på varighet"
 
-#: views/modals/area.html:797
+#: views/modals/area.html:800
+#, fuzzy
+#| msgid "External calendar url"
+msgid "External source url"
+msgstr "URL-adresse for ekstern kalender"
+
+#: views/modals/area.html:810
 #, fuzzy
 #| msgid "values"
 msgid "Value"
 msgstr "verdier"
 
-#: views/modals/area.html:826
+#: views/modals/area.html:830
 msgid "After x minutes change to value or at exactly a time stamp."
 msgstr ""
 
-#: views/modals/area.html:834
+#: views/modals/area.html:837
+msgid ""
+"Enter a full url to the external source according to the Remote data feature."
+msgstr ""
+
+#: views/modals/area.html:844
+#, fuzzy
+#| msgid "Min moist value"
+msgid "Enter a negative or positive offset value."
+msgstr "Min fukt verdi"
+
+#: views/modals/area.html:851
 #, fuzzy
 #| msgid "Timer period on duration in minutes"
 msgid "Enter a duration in minutes or the actual time of the day."
 msgstr "Tidtaker periode på varighet i minutter"
 
-#: views/modals/area.html:842
+#: views/modals/area.html:858
 msgid ""
 "Enter a negative or positive value for a relative action. A number is "
 "treated as an absolute value."
 msgstr ""
 
-#: views/modals/area.html:851
+#: views/modals/area.html:865
 #, fuzzy
 #| msgid "Add new webcam"
 msgid "Add a new row"
 msgstr "Legg til nytt webkamera"
 
-#: views/modals/area.html:860
+#: views/modals/area.html:872
 #, fuzzy
 #| msgid "Remote"
 msgid "Remove row"
 msgstr "Fjern"
 
-#: views/modals/area.html:876
+#: views/modals/area.html:882
 #, fuzzy
 #| msgid "5 minutes"
 msgid "After x minutes"
 msgstr "5 minutter"
 
-#: views/modals/area.html:877
+#: views/modals/area.html:883
 #, fuzzy
 #| msgid "Uptime"
 msgid "At time"
 msgstr "Oppetid"
 
-#: views/modals/area.html:929
+#: views/modals/area.html:884
+msgid "Using current weather"
+msgstr ""
+
+#: views/modals/area.html:885
+#, fuzzy
+#| msgid "Remote source"
+msgid "Use external source"
+msgstr "Ekstern kilde"
+
+#: views/modals/area.html:888
+#, fuzzy
+#| msgid "Picture rotation"
+msgid "Select a valid option."
+msgstr "Bilderotasjon"
+
+#: views/modals/area.html:896
+#, fuzzy
+#| msgid "Date and time"
+msgid "Enter a valid url."
+msgstr "Dato og tid"
+
+#: views/modals/area.html:904
+#, fuzzy
+#| msgid "Offset"
+msgid "Offset."
+msgstr "Forskyvning"
+
+#: views/modals/area.html:942
 msgid "Dimmer on duration"
 msgstr "Dimmer på varighet"
 
-#: views/modals/area.html:933
+#: views/modals/area.html:946
 #, fuzzy
 #| msgid "Dimmer off duration"
 msgid "Dimmer of duration"
 msgstr "Dimmer av varighet"
 
-#: views/modals/area.html:943
+#: views/modals/area.html:956
 msgid ""
 "Select the delay and duration for the dimmer to go to on or off in minutes. "
 "Max duration is 180 minutes."
 msgstr ""
 
-#: views/modals/area.html:950
+#: views/modals/area.html:963
 msgid "Relay delay on"
 msgstr ""
 
-#: views/modals/area.html:954
+#: views/modals/area.html:967
 msgid "Relay delay off"
 msgstr ""
 
-#: views/modals/area.html:962
+#: views/modals/area.html:975
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
@@ -1482,19 +1534,23 @@ msgstr ""
 msgid "Rate limit"
 msgstr ""
 
-#: views/modals/message.html:47 views/modals/service.html:48
+#: views/modals/message.html:46 views/modals/service.html:48
 msgid "Enabled"
 msgstr "Aktivert"
 
-#: views/modals/message.html:63
+#: views/modals/message.html:51
+msgid "Enable/disable this service."
+msgstr ""
+
+#: views/modals/message.html:59
 msgid "Message"
 msgstr "Melding"
 
-#: views/modals/message.html:71
+#: views/modals/message.html:65
 msgid "Place holders"
 msgstr ""
 
-#: views/modals/message.html:84
+#: views/modals/message.html:74
 #, fuzzy
 #| msgid "Service"
 msgid "Services"
@@ -2766,7 +2822,7 @@ msgstr "Ledningsevne"
 msgid "Current value"
 msgstr "Nåværende verdi"
 
-#: views/modals/area.html:1027 views/modals/area.html:1029
+#: views/modals/area.html:1040 views/modals/area.html:1042
 msgid "Delay"
 msgstr ""
 
@@ -2882,13 +2938,17 @@ msgstr "Legg til nytt webkamera"
 msgid "Enter a description"
 msgstr "Beskrivelse"
 
-#: views/modals/area.html:887
+#: views/modals/area.html:910
 #, fuzzy
 #| msgid "Timer period on duration in minutes"
 msgid "Enter a duration in minutes or time"
 msgstr "Tidtaker periode på varighet i minutter"
 
-#: views/modals/message.html:64
+#: views/modals/area.html:894
+msgid "Enter a full url"
+msgstr ""
+
+#: views/modals/message.html:60
 #, fuzzy
 #| msgid "Username"
 msgid "Enter a message"
@@ -3095,7 +3155,8 @@ msgstr "Eksportere data"
 msgid "Export sensor"
 msgstr "pH sensor"
 
-#: views/layouts/modal.html:64 views/settings.html:404
+#: views/layouts/modal.html:64 views/modals/area.html:1524
+#: views/settings.html:404
 #, fuzzy
 #| msgid "error"
 msgid "Form error"
@@ -3125,6 +3186,10 @@ msgstr "Luftfuktighet sensor"
 msgid "Ignore webcam"
 msgstr "Legg til nytt webkamera"
 
+#: views/modals/area.html:1524
+msgid "Invalid timestamp in varation settings."
+msgstr ""
+
 #: views/relays.html:71
 #, fuzzy
 #| msgid "Manual mode"
@@ -3147,7 +3212,7 @@ msgstr "Dimmer på prosent"
 msgid "Messages per minute"
 msgstr ""
 
-#: views/modals/area.html:1027 views/modals/area.html:1029
+#: views/modals/area.html:1040 views/modals/area.html:1042
 #, fuzzy
 #| msgid "5 minutes"
 msgid "minutes"
@@ -3388,7 +3453,7 @@ msgstr "Vis bevegelses bokser"
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumNotification.py:181
+#: terrariumNotification.py:184
 msgid "Telegram"
 msgstr "Telegram"
 
@@ -3469,6 +3534,11 @@ msgstr ""
 #: views/modals/weather.html:18
 msgid "Weather data source url"
 msgstr ""
+
+#, fuzzy
+#~| msgid "When on"
+#~ msgid "When"
+#~ msgstr "Når på"
 
 #~ msgid "Twitter"
 #~ msgstr "Twitter"
@@ -5288,9 +5358,6 @@ msgstr ""
 #~ msgid "V4L"
 #~ msgstr "V4l"
 
-#~ msgid "Remote source"
-#~ msgstr "Ekstern kilde"
-
 #~ msgid "TerrariumPI %s"
 #~ msgstr "TerrariumPI %s"
 
@@ -5764,9 +5831,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Enten legge til lydfiler og spillelister. Eller har du en PWM-dimmer "
 #~ "bryter konfigurert."
-
-#~ msgid "External calendar url"
-#~ msgstr "URL-adresse for ekstern kalender"
 
 #~ msgid ""
 #~ "File is to big. Filesize {{filesize}} is more then max {{maxFilesize}}"
