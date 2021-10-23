@@ -18,7 +18,7 @@ from gevent import sleep
 from pony import orm
 from terrariumAudio import terrariumAudioPlayer
 from terrariumDatabase import Sensor, Playlist, Relay
-from terrariumUtils import terrariumUtils, classproperty
+from terrariumUtils import terrariumCache, terrariumUtils, classproperty
 
 class terrariumAreaException(TypeError):
   '''There is a problem with loading a hardware sensor.'''
@@ -296,6 +296,7 @@ class terrariumArea(object):
         'dynamic' : False,
         'weather' : False,
         'external' : None,
+        'offset' : float(0),
         'periods' : []
       }
 
@@ -321,8 +322,10 @@ class terrariumArea(object):
       else:
         if 'weather' == varation.get('when'):
           self.state['variation']['weather'] = True
+          self.state['variation']['offset'] = float(varation.get('offset',0))
         elif 'external' == varation.get('when'):
           self.state['variation']['external'] = varation.get('external')
+          self.state['variation']['offset'] = float(varation.get('offset',0))
           self.__external_cache = terrariumCache()
 
         continue
@@ -371,24 +374,27 @@ class terrariumArea(object):
     period = None
 
     if self.state['variation']['weather'] or self.state['variation']['external'] is not None:
-
-      temperature = None
+      value = None
       if self.state['variation']['weather']:
-        temperature = self.enclosure.weather.current_temperature
+        if self.type in ['heating','cooling']:
+          value = self.enclosure.weather.current_temperature + self.state['variation']['offset']
+        elif self.type in ['humidity']:
+          value = self.enclosure.weather.current_humidity + self.state['variation']['offset']
       else:
         # Here we get data from an external source. We cache this data for 15 minutes
         cache_key = f'{self.id}_external'
-        temperature = self.__external_cache.get_data(cache_key)
-        if temperature is None:
-          temperature = terrariumUtils.get_remote_data(self.state['variation']['external'])
-          self.__external_cache.set_data(cache_key, temperature, 15 * 60)
+        value = self.__external_cache.get_data(cache_key)
+        if value is None:
+          value = terrariumUtils.get_remote_data(self.state['variation']['external']) + self.state['variation']['offset']
+          if value is not None:
+            self.__external_cache.set_data(cache_key, value, 10 * 60)
 
-      if temperature is not None:
+      if value is not None:
         period = {
           'start'       : (datetime.datetime.now() - datetime.timedelta(minutes=2)).time(),
           'end'         : (datetime.datetime.now() + datetime.timedelta(minutes=2)).time(),   # By default, we stop at the end of the day
-          'start_value' : str(temperature),
-          'end_value'   : str(temperature), # This will be overwritten by the next value to get a nice change during the period
+          'start_value' : str(value),
+          'end_value'   : str(value), # This will be overwritten by the next value to get a nice change during the period
         }
 
     else:
@@ -442,11 +448,8 @@ class terrariumArea(object):
       # Change every sensor its min max alarm values with `sensor_diff` change
       with orm.db_session():
         for sensor in Sensor.select(lambda s: s.id in self.setup['sensors']):
-#          print(f'Updating sensor {sensor} alarm min: {sensor.alarm_min}, max: {sensor.alarm_max} with {sensor_diff}')
           sensor.alarm_min += sensor_diff
           sensor.alarm_max += sensor_diff
-#          print(f'New values sensor {sensor} alarm min: {sensor.alarm_min}, max: {sensor.alarm_max} ')
-
 
   @property
   def is_day(self):

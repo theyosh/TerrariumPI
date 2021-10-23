@@ -790,22 +790,32 @@
               <label for="variation_when">{{ _('Source') }}</label>
             </div>
           </div>
-          <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4 varation_time_settings">
             <div class="form-group">
               <label for="alarm_low_end">{{ _('Period/duration') }}</label>
             </div>
           </div>
-          <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+          <div class="col-7 col-sm-7 col-md-7 col-lg-7 varation_external_source" style="display:none">
+            <div class="form-group">
+              <label for="alarm_low_end">{{ _('External source url') }}</label>
+            </div>
+          </div>
+          <div class="col-2 col-sm-2 col-md-2 col-lg-2 varation_weather varation_external_source" style="display:none">
+            <div class="form-group">
+              <label for="alarm_low_end">{{ _('Offset') }}</label>
+            </div>
+          </div>
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3 varation_time_settings">
             <div class="form-group">
               <label for="variant_value">{{ _('Value') }}</label>
             </div>
           </div>
-          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 varation_time_settings">
             <div class="form-group">
               <label for="action">{{ _('Action') }}</label>
             </div>
           </div>
-          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 varation_time_settings">
             <div class="form-group">
               <label for="action">&nbsp;</label>
             </div>
@@ -821,28 +831,42 @@
               </small>
             </div>
           </div>
-          <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="col-7 col-sm-7 col-md-7 col-lg-7 varation_external_source" style="display:none">
+            <div class="form-group">
+              <small class="text-muted">
+                {{ _('Enter a full url to the external source according to the Remote data feature.') }}
+              </small>
+            </div>
+          </div>
+          <div class="col-2 col-sm-2 col-md-2 col-lg-2 varation_weather varation_external_source" style="display:none">
+            <div class="form-group">
+              <small class="text-muted">
+                {{ _('Enter a negative or positive offset value.') }}
+              </small>
+            </div>
+          </div>
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4 varation_time_settings">
             <div class="form-group">
               <small class="text-muted">
                 {{ _('Enter a duration in minutes or the actual time of the day.') }}
               </small>
             </div>
           </div>
-          <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3 varation_time_settings">
             <div class="form-group">
               <small class="text-muted">
                 {{ _('Enter a negative or positive value for a relative action. A number is treated as an absolute value.') }}
               </small>
             </div>
           </div>
-          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 varation_time_settings">
             <div class="form-group">
               <small class="text-muted">
                 {{ _('Add a new row') }}
               </small>
             </div>
           </div>
-          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 varation_time_settings">
             <div class="form-group">
               <small class="text-muted">
                 {{ _('Remove row') }}
@@ -861,49 +885,52 @@
                   <option value="external">{{ _('Use external source') }}</option>
                 </select>
                 <div class="invalid-feedback">
-                  {{ _('Enter a valid time.') }}
+                  {{ _('Select a valid option.') }}
                 </div>
               </div>
             </div>
-
-            <div class="col-9 col-sm-9 col-md-9 col-lg-9 varation_external_source " style="display:none">
+            <div class="col-7 col-sm-7 col-md-7 col-lg-7 varation_external_source" style="display:none">
               <div class="form-group">
                 <input type="text" class="form-control" name="variation_source" placeholder="{{ _('Enter a full url') }}">
+                <div class="invalid-feedback">
+                  {{ _('Enter a valid url.') }}
+                </div>
+              </div>
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2 varation_external_source varation_weather" style="display:none">
+              <div class="form-group">
+                <input type="number" class="form-control" name="variation_offset" placeholder="{{ _('Offset') }}">
+                <div class="invalid-feedback">
+                  {{ _('Offset.') }}
+                </div>
+              </div>
+            </div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 varation_time_settings">
+              <div class="form-group">
+                <input type="text" class="form-control" name="variation_period" placeholder="{{ _('Enter a duration in minutes or time') }}">
                 <div class="invalid-feedback">
                   {{ _('Enter a valid time.') }}
                 </div>
               </div>
             </div>
-
-
-              <div class="col-4 col-sm-4 col-md-4 col-lg-4 varation_time_settings">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="variation_period" placeholder="{{ _('Enter a duration in minutes or time') }}">
-                  <div class="invalid-feedback">
-                    {{ _('Enter a valid time.') }}
-                  </div>
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 varation_time_settings">
+              <div class="form-group">
+                <input type="text" class="form-control" name="variation_value" placeholder="{{ _('Value') }}">
+                <div class="invalid-feedback">
+                  {{ _('Enter a valid duration in minutes.') }}
                 </div>
               </div>
-              <div class="col-3 col-sm-3 col-md-3 col-lg-3 varation_time_settings">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="variation_value" placeholder="{{ _('Value') }}">
-                  <div class="invalid-feedback">
-                    {{ _('Enter a valid duration in minutes.') }}
-                  </div>
-                </div>
+            </div>
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 varation_time_settings">
+              <div class="form-group">
+                <button type="button" class="form-control"><i class="fas fa-plus"></i></button>
               </div>
-              <div class="col-1 col-sm-1 col-md-1 col-lg-1 varation_time_settings">
-                <div class="form-group">
-                  <button type="button" class="form-control"><i class="fas fa-plus"></i></button>
-                </div>
+            </div>
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 varation_time_settings">
+              <div class="form-group">
+                <button type="button" class="form-control"><i class="fas fa-minus"></i></button>
               </div>
-              <div class="col-1 col-sm-1 col-md-1 col-lg-1 varation_time_settings">
-                <div class="form-group">
-                  <button type="button" class="form-control"><i class="fas fa-minus"></i></button>
-                </div>
-              </div>
-
-
+            </div>
           </div>
         </script>
       </div>
@@ -1045,10 +1072,18 @@ function plus_minus_buttons(form) {
   // toggle for weather or external
   form.find('select[name="variation_when"]').off('change').on('change',function(event) {
     let mode = jQuery(this).val();
-    jQuery('div.varation_time_settings').toggle('at' == mode || 'after' == mode);
-    jQuery('div.varation_external_source').toggle('external' == mode);
+
+    jQuery('div.varation_time_settings, div.varation_external_source, div.varation_weather').hide();
+    if ('at' == mode || 'after' == mode) {
+      jQuery('div.varation_time_settings').show()
+    } else if ('weather' == mode) {
+      jQuery('div.varation_weather').show()
+    } else if ('external' == mode) {
+      jQuery('div.varation_external_source').show()
+    }
 
     jQuery('input[name="variation_source"]').prop('disabled', 'external' != mode);
+    jQuery('input[name="variation_offset"]').prop('disabled', 'at' == mode || 'after' == mode);
     jQuery('input[name="variation_period"],[name="variation_value"]').prop('disabled', 'external' == mode || 'weather' == mode);
   });
 
@@ -1399,6 +1434,7 @@ jQuery.when(
       });
 
       // Load the variation data...
+      console.log(data.setup.variation);
       if (data.setup.variation) {
         let variation_rows = data.setup['variation'].length;
         for (let x = 0; x < variation_rows; x++) {
@@ -1412,6 +1448,7 @@ jQuery.when(
           } else {
             row.find('[name="variation_period"]').val(variation['period']);
           }
+          row.find('[name="variation_offset"]').val(variation['offset']);
           row.find('[name="variation_value"]').val(variation['value']);
 
           if (x < variation_rows-1) {
@@ -1467,11 +1504,13 @@ if (typeof form_data['setup']['variation']['when'] === 'string' || form_data['se
   if ('weather' == form_data['setup']['variation']['when']) {
     variation.push({
       'when'   : form_data['setup']['variation']['when'],
+      'offset' : form_data['setup']['variation']['offset']
     });
   } else if ( 'external' == form_data['setup']['variation']['when']) {
     variation.push({
       'when'   : form_data['setup']['variation']['when'],
-      'source' : form_data['setup']['variation']['source']
+      'source' : form_data['setup']['variation']['source'],
+      'offset' : form_data['setup']['variation']['offset']
     });
   }
 } else {
