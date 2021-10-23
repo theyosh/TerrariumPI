@@ -5,8 +5,11 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import asyncio
 import contextlib
 import threading
+import socket
 
 from time import sleep, time
+
+from datetime import datetime
 
 from terrariumUtils import terrariumCache, terrariumUtils, terrariumSingleton, terrariumAsync
 
@@ -17,32 +20,42 @@ from meross_iot.manager import MerossManager
 from meross_iot.controller.mixins.toggle import ToggleXMixin
 from meross_iot.model.http.exception import BadLoginException
 from meross_iot.model.exception import CommandTimeoutError
+from meross_iot.model.enums import OnlineStatus, Namespace
+
 
 class TerrariumMerossCloud(terrariumSingleton):
 
   def __init__(self, username, password):
-    start = time()
-    self.__engine = { 'cache' : terrariumCache(), 'running': False, 'event': asyncio.Event() , 'asyncio' : terrariumAsync()}
+
+    self.__engine = { 'cache' : terrariumCache(), 'running': False, 'reconnecting': False, 'restart_counter' : 0, 'error': False, 'event': None , 'asyncio' : terrariumAsync()}
 
     self._data = {}
     self._username = username
     self._password = password
-    self._start()
 
-    while not self.__engine['running']:
-      logger.info('Waiting for Meross cloud connection ... ')
-      sleep(1)
+    self.start()
 
-    logger.info(f'Meross cloud is connected! Found {len(self._data)} devices in {time()-start:.2f} seconds.')
-
-  def _start(self):
+  def start(self, reconnecting = False):
 
     def _run():
       data = asyncio.run_coroutine_threadsafe(self._main_process(), self.__engine['asyncio'].async_loop)
       data.result()
 
+    start_time = time()
+    self.__engine['error']  = False
+    self.__engine['event']  = asyncio.Event()
     self.__engine['thread'] = threading.Thread(target=_run)
     self.__engine['thread'].start()
+
+    if reconnecting:
+      logger.info('Reconnecting to the Meross cloud')
+
+    while not self.__engine['running'] and not self.__engine['error']:
+      logger.info('Waiting for Meross cloud connection ... ')
+      sleep(1)
+
+    if not self.__engine['error']:
+      logger.info(f'Meross cloud is {"re-" if reconnecting else ""}connected! Found {len(self._data)} devices in {time()-start_time:.2f} seconds.')
 
   def _store_data(self):
     for key in self._data:
@@ -60,28 +73,45 @@ class TerrariumMerossCloud(terrariumSingleton):
 
       return meross_devices
 
+    if not self.__engine['running']:
+      return []
+
     data = asyncio.run_coroutine_threadsafe(_scan_hardware(type), self.__engine['asyncio'].async_loop)
     devices = data.result()
     return devices
 
   def toggle_relay(self, device, switch, state):
+    TIMEOUT = 5
 
     async def _toggle_relay(device, switch, state):
+
       device = self.manager.find_devices(device_uuids=[device])
       if len(device) == 1:
         device = device[0]
 
         if state != 0.0:
-          await device.async_turn_on(channel=switch)
+          await device.async_turn_on(channel=switch, timeout=TIMEOUT+1)
         else:
-          await device.async_turn_off(channel=switch)
+          await device.async_turn_off(channel=switch, timeout=TIMEOUT+1)
 
         return True
 
       return None
 
+    if not self.__engine['running']:
+      return None
+
+    # Create a timer for offline detection...
+    offline = threading.Timer(TIMEOUT, self.reconnect)
+    offline.start()
+
+    # Start the toggle action
     data = asyncio.run_coroutine_threadsafe(_toggle_relay(device, switch, state), self.__engine['asyncio'].async_loop)
     result = data.result()
+
+    # Stop the offline detection
+    offline.cancel()
+
     return result
 
   def stop(self):
@@ -91,8 +121,13 @@ class TerrariumMerossCloud(terrariumSingleton):
     self.__engine['thread'].join()
 
   def reconnect(self):
+    if self.__engine['reconnecting']:
+      return
+
+    self.__engine['reconnecting'] = True
+    logger.warning('Reconnecting to Meross cloud. Somehow the connection was lost ...')
     self.stop()
-    self._start()
+    self.start(True)
 
   async def _main_process(self):
 
@@ -105,20 +140,33 @@ class TerrariumMerossCloud(terrariumSingleton):
 
     async def _notification(push_notification, target_devices):
       logger.info('Got an update from the Meross Cloud.')
-      for device in target_devices:
-        if hasattr(device,'is_on'):
-          self._data[f'{device.uuid}'] = []
+#      print(push_notification)
+#      print(dir(push_notification))
+#      print(f'namespace: {push_notification.namespace}')
 
-          for channel in device.channels:
-            self._data[f'{device.uuid}'].append(device.is_on(channel=channel.index))
+      if push_notification.namespace == Namespace.SYSTEM_ONLINE:
+        # Connection issues...
+#        print(f'status: {push_notification.status}')
 
-        if hasattr(device,'last_sampled_temperature'):
-          self._data[f'{device.subdevice_id}'] = {
-            'temperature' : device.last_sampled_temperature,
-            'humidity'    : device.last_sampled_humidity
-          }
+        if push_notification.status == OnlineStatus.ONLINE:
+          # Reconnect
+          self.reconnect()
 
-      self._store_data()
+      else:
+        for device in target_devices:
+          if hasattr(device,'is_on'):
+            self._data[f'{device.uuid}'] = []
+
+            for channel in device.channels:
+              self._data[f'{device.uuid}'].append(device.is_on(channel=channel.index))
+
+          if hasattr(device,'last_sampled_temperature'):
+            self._data[f'{device.subdevice_id}'] = {
+              'temperature' : device.last_sampled_temperature,
+              'humidity'    : device.last_sampled_humidity
+            }
+
+        self._store_data()
 
     try:
       # Setup the HTTP client API from user-password
@@ -152,6 +200,8 @@ class TerrariumMerossCloud(terrariumSingleton):
 
       self._store_data()
       self.__engine['running'] = True
+      self.__engine['reconnecting'] = False
+      self.__engine['restart_counter'] = 0
       self.manager.register_push_notification_handler_coroutine(_notification)
 
       while not await event_wait(self.__engine['event'], 30):
@@ -160,7 +210,15 @@ class TerrariumMerossCloud(terrariumSingleton):
     except CommandTimeoutError:
       logger.error(f'Meross communication timed out connecting with the server.')
     except BadLoginException:
-      logger.error(f'Wrong login credentials for Meross. Please check your settings')
+      logger.error(f'Wrong login credentials for Meross. Please check your settings!')
+    except socket.timeout:
+      self.__engine['error'] = True
+      if self.__engine['restart_counter'] < 10:
+        self.__engine['restart_counter'] += 1
+        logger.error(f'Timeout logging into Meross Cloud. Reconnecting in 5 seconds attempt {self.__engine["restart_counter"]} ...')
+        threading.Timer(5,self.start).start()
+      else:
+        logger.error('Failed to connect to the Meross Cloud after 10 times. Please check your network configuration.')
 
     finally:
       # Close the manager and logout from http_api
