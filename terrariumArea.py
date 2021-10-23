@@ -288,11 +288,11 @@ class terrariumArea(object):
     if self.setup.get('variation'):
       self._setup_variation_data()
 
-
     self.state['powered'] = self._powered
 
   def _setup_variation_data(self):
     self.state['variation'] = {
+        'active' : len(self.setup['sensors']) > 0,
         'dynamic' : False,
         'weather' : False,
         'external' : None,
@@ -300,7 +300,7 @@ class terrariumArea(object):
         'periods' : []
       }
 
-    for varation in self.setup.get('variation'):
+    for varation in self.setup.get('variation',[]):
       periods = len(self.state['variation']['periods'])
 
       if 'at' == varation.get('when'):
@@ -367,6 +367,9 @@ class terrariumArea(object):
 
   def _update_variation(self):
     # !! This variation updates will interfeare with the 'day/night difference' setting !!
+
+    if ('variation' not in self.state) or (not self.state['variation']['active']):
+      return
 
     # Get the current time in minutes
     now = datetime.datetime.now().time()
@@ -441,15 +444,16 @@ class terrariumArea(object):
     # Get the difference between the actual current average and the wanted average rounded at .1
     sensor_diff = round(wanted_average_value - current_average_value,1)
 
-#    print(f'Period duration: {period_duration}, difference: {period_difference}, done: {period_duration_done}({period_duration_done / period_duration})')
-#    print(f'Temp difference: {period_difference}, current: {current_average_value}, set to average: {wanted_average_value}, change: {sensor_diff}, end average: {period["end_value"]}')
-
     if sensor_diff != 0.0:
       # Change every sensor its min max alarm values with `sensor_diff` change
       with orm.db_session():
         for sensor in Sensor.select(lambda s: s.id in self.setup['sensors']):
           sensor.alarm_min += sensor_diff
           sensor.alarm_max += sensor_diff
+          logger.info(f'Changed sensor {sensor} alarm values from min: {sensor.alarm_min - sensor_diff:.2f}, max: {sensor.alarm_max - sensor_diff:.2f} to new min: {sensor.alarm_min:.2f} and max: {sensor.alarm_max:.2f}. A difference of {sensor_diff}. New average is: {wanted_average_value:.2f}.')
+
+    # Reload the current sensor values after changing them
+    self.state['sensors'] = self.current_value(self.setup['sensors'])
 
   @property
   def is_day(self):
@@ -495,10 +499,7 @@ class terrariumArea(object):
       self.state['sensors'] = self.current_value(self.setup['sensors'])
 
       # If there are variations on the alarm values, update them here
-      if self.setup.get('variation'):
-        self._update_variation()
-        # Due to changing min and max values, reload the current sensor values
-        self.state['sensors'] = self.current_value(self.setup['sensors'])
+      self._update_variation()
 
       # And set the alarm values
       self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_min']
