@@ -2,7 +2,6 @@
 title: How to use remote data
 categories: [Website, FAQ]
 tags: [remote, API]
-permalink: /faq/:title/
 ---
 It is possible to use remote data with TerrariumPI. At the moment, only JSON and plain text are supported as content types.
 

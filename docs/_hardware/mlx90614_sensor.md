@@ -2,7 +2,6 @@
 title: MLX90614 IR Thermometer sensor
 categories: [Hardware, Sensor]
 tags: [sensor, temperature]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/mlx90614.webp

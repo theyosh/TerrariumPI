@@ -2,7 +2,6 @@
 title: Script relay
 categories: [Hardware, Relay]
 tags: [relay, script]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Code.webp

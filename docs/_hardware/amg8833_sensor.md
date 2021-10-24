@@ -2,7 +2,6 @@
 title: AMG8833 Grid-Eye IR Thermometer sensor
 categories: [Hardware, Sensor]
 tags: [sensor, IR]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/amg8833.webp

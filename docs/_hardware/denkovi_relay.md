@@ -2,7 +2,6 @@
 title: Denkovi V2
 categories: [Hardware, Relay]
 tags: [relay, denkovi]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Denkovi_V2_X_sockets.webp

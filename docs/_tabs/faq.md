@@ -20,13 +20,12 @@ Here you can find the most frequently asked question.
 {% endfor %}
 </ul>
 <script>
-jQuery(document).ready(function() {
+jQuery(function() {
   setTimeout(function(){
-    let faq = $(location).attr('hash').slice(1);
-    console.log('FAQ',faq);
+    let faq = jQuery(location).attr('hash').slice(1);
     if ('' != faq) {
       jQuery('#' + faq).parent().click();
     }
-  },700)
+  },500);
 })
 </script>

@@ -2,7 +2,6 @@
 title: Energenie RF
 categories: [Hardware, Relay]
 tags: [relay, energenie]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/ENER010-PI.webp

@@ -2,7 +2,6 @@
 title: AM2302
 categories: [Hardware, Sensor]
 tags: [sensor, gpio]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/am2302.webp

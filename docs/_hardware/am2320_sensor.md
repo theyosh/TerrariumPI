@@ -2,7 +2,6 @@
 title: AM2320
 categories: [Hardware, Sensor]
 tags: [sensor, i2c]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/am2320.webp

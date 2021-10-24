@@ -2,7 +2,6 @@
 title: FTDI
 categories: [Hardware, Relay]
 tags: [relay, ftdi]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/FTDI.webp

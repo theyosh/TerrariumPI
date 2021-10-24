@@ -2,7 +2,6 @@
 title: Meross power switches
 categories: [Hardware, Relay]
 tags: [relay, meross]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Meross.webp

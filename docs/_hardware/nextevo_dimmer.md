@@ -2,7 +2,6 @@
 title: NextEVO Universal AC MAINS Dimmer (MPDMv4.1)
 categories: [Hardware, Relay]
 tags: [relay, dimmer, ac mains]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/AC_Dimmer_MPDMv4_1_3_Kit.webp

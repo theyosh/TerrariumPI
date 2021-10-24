@@ -2,7 +2,6 @@
 title: DHT22 sensor
 categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/dht22.webp

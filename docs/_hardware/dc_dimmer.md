@@ -2,7 +2,6 @@
 title: DC Dimmer
 categories: [Hardware, Relay]
 tags: [relay, dimmer, dc]
-permalink: /hardware/relay/:title/
 
 # image:
 #   src: /assets/img/Bright-PI-Header.png

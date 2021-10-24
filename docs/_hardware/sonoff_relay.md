@@ -2,7 +2,6 @@
 title: Sonoff (Tasmota)
 categories: [Hardware, Relay]
 tags: [relay, wifi, sonoff, tasmota]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Sonoff.webp

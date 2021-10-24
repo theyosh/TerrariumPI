@@ -2,7 +2,6 @@
 title: MiTemperature bluetooth sensor
 categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/mitemp.webp

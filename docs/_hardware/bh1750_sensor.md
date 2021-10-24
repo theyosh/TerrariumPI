@@ -2,7 +2,6 @@
 title: BH1750 LUX light sensor
 categories: [Hardware, Sensor]
 tags: [sensor, light]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/bh1750.webp

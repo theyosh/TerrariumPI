@@ -2,7 +2,6 @@
 title: HC-SR04 ultrasonic ranging sensor
 categories: [Hardware, Sensor]
 tags: [sensor, distance]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/hc-sr04.webp

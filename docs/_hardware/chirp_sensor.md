@@ -2,7 +2,6 @@
 title: Chirp sensor
 categories: [Hardware, Sensor]
 tags: [sensor, temperature, moisture]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/chirp.webp

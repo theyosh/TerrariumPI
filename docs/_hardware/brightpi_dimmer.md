@@ -2,7 +2,6 @@
 title: Bright-PI
 categories: [Hardware, Relay]
 tags: [relay, dimmer, brightpi]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Bright-PI-Header.webp

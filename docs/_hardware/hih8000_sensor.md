@@ -2,7 +2,6 @@
 title: Honeywell HumidIcon HIH8000 sensor
 categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/hih8000.webp

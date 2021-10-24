@@ -2,7 +2,6 @@
 title: Script dimmer
 categories: [Hardware, Relay]
 tags: [relay, dimmer, script]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Code.webp

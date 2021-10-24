@@ -2,7 +2,6 @@
 title: GPIO Relays
 categories: [Hardware, Relay]
 tags: [relay, gpio]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/GPIO_Relay.webp

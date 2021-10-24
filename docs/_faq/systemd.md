@@ -2,7 +2,6 @@
 title: How to start/stop/restart and disable/enable TerrariumPI
 categories: [Website, FAQ]
 tags: [systemd, service]
-permalink: /faq/:title/
 ---
 TerrariumPI is using systemd for startup. Here you can find the commands to manually start, stop or restart it. Also there is an option to disable or enable TerrariumPI at bootup.
 

@@ -2,7 +2,6 @@
 title: Sequent Microsystems 4 Relay Card
 categories: [Hardware, Relay]
 tags: [relay, i2c, 4relay]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/4relay-stack.webp

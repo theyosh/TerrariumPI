@@ -2,7 +2,6 @@
 title: JSN-SR04T ultrasonic ranging sensor
 categories: [Hardware, Sensor]
 tags: [sensor, distance]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/JSN-SR04T.webp

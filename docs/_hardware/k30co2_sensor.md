@@ -2,7 +2,6 @@
 title: K30 CO2 sensor
 categories: [Hardware, Sensor]
 tags: [sensor, co2]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/k30co2.webp

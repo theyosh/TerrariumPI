@@ -2,7 +2,6 @@
 title: Sequent Microsystems 8 Relay Card Ver. 1 - 2
 categories: [Hardware, Relay]
 tags: [relay, i2c, 8relay]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/8relay-stack_v1v2.webp

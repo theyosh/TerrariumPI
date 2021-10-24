@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-#
 # Check for changed posts
 
 Jekyll::Hooks.register :documents, :post_init do |post|

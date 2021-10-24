@@ -2,7 +2,6 @@
 title: MH-Z19 CO2 sensor
 categories: [Hardware, Sensor]
 tags: [sensor, co2, temperature]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/mh-z19.webp

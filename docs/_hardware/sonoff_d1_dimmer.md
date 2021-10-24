@@ -2,7 +2,6 @@
 title: Sonoff D1 Dimmer (Tasmota)
 categories: [Hardware, Relay]
 tags: [relay, dimmer, wifi, sonoff, tasmota]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Sonoff-D1-Dimmer.webp

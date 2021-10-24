@@ -2,7 +2,6 @@
 title: IRF520 Dimmer
 categories: [Hardware, Relay]
 tags: [relay, dimmer, irf520, mosfet]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Mosfet_Dimmer.webp

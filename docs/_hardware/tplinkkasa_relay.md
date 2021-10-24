@@ -2,7 +2,6 @@
 title: Kasa Smart
 categories: [Hardware, Relay]
 tags: [relay, kasa]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Kasa_Smart.webp

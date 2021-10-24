@@ -2,7 +2,6 @@
 title: BME280 sensor
 categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity, pressure, altitude]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/bme280.webp

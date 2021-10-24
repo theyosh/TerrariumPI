@@ -2,7 +2,6 @@
 title: Meross MS100
 categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/ms100.webp

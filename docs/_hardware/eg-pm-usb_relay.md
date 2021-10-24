@@ -1,8 +1,7 @@
 ---
-title: Energenie USB
+title: "Energenie USB"
 categories: [Hardware, Relay]
 tags: [relay, energenie]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Energenie_USB.webp
@@ -34,7 +33,7 @@ make
 sudo make install
 sudo ldconfig
 ```
-3. Restart TerrariumPI service ([FAQ]({{ 'faq/systemd/' | relative_url}}#restart))
+3. Restart TerrariumPI service ([FAQ]({% link _faq/systemd.md %}#restart))
 
 The needed permisions to connect to the device through USB are already set.
 

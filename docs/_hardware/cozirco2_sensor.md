@@ -2,7 +2,6 @@
 title: COZIR CO2 sensor
 categories: [Hardware, Sensor]
 tags: [sensor, co2, temperature, humidity]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/COZIR_CO2.webp

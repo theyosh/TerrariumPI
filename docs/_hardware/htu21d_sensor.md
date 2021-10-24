@@ -2,7 +2,6 @@
 title: HTU21D sensor
 categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/htu21d.webp

@@ -2,7 +2,6 @@
 title: WEMO Smart plug
 categories: [Hardware, Relay]
 tags: [relay, wifi, wemo]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Wemo.webp

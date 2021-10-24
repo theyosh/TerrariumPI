@@ -2,7 +2,6 @@
 title: 1-Wire
 categories: [Hardware, Sensor]
 tags: [sensor, 1-wire, waterproof]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/1-Wire.webp

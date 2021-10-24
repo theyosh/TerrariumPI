@@ -2,7 +2,6 @@
 title: CCS811 Air Quality sensor
 categories: [Hardware, Sensor]
 tags: [sensor, co2]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/ccs-811.webp

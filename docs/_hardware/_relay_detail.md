@@ -27,4 +27,4 @@ Dimmer frequency in Hz
 
 {% endif %}
 
-Other settings can be found at the [relay setup]({{ 'setup' | relative_url}}/#relays) information
+Other settings can be found at the [relay setup]({% link _tabs/setup.md %}#relays) information

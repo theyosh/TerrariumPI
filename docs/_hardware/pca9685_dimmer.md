@@ -2,7 +2,6 @@
 title: PCA9685-dimmer
 categories: [Hardware, Relay]
 tags: [relay, dimmer, i2c, PCA9685]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/PCA9685-dimmer.webp

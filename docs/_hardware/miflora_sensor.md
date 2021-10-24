@@ -2,7 +2,6 @@
 title: MiFlora bluetooth sensor
 categories: [Hardware, Sensor]
 tags: [sensor, temperature, fertility,light,moisture]
-permalink: /hardware/sensor/:title/
 
 image:
   src: /assets/img/miflora.webp
