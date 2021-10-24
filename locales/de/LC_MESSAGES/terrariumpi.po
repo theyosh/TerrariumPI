@@ -6,114 +6,119 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2021-10-23 10:51+CEST\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-10-25 09:42+0000\n"
+"Last-Translator: Philipp Marmet <fujexo@c0d3.ch>\n"
+"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:31
 msgid "Lighting"
-msgstr ""
+msgstr "Beleuchtung"
 
 #: terrariumArea.py:37
 msgid "Heating"
-msgstr ""
+msgstr "Beheizung (heating)"
 
 #: terrariumArea.py:43
 msgid "Cooling"
-msgstr ""
+msgstr "Kühlung"
 
 #: terrariumArea.py:49
 msgid "Humidity"
-msgstr ""
+msgstr "Feuchtigkeit"
 
 #: terrariumArea.py:55
 msgid "Water tank"
-msgstr ""
+msgstr "Wassertank"
 
 #: terrariumArea.py:61 views/includes/sidebar.html:186
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: terrariumArea.py:67
 msgid "CO2"
-msgstr ""
+msgstr "CO2"
 
 #: terrariumArea.py:73
 msgid "Conductivity"
-msgstr ""
+msgstr "Leitfähigkeit"
 
 #: terrariumArea.py:79
 msgid "Fertility"
-msgstr ""
+msgstr "Fruchtbarkeit"
 
 #: terrariumArea.py:85
 msgid "Moisture"
-msgstr ""
+msgstr "Feuchtigkeit"
 
 #: terrariumArea.py:91
 msgid "pH"
-msgstr ""
+msgstr "pH"
 
 #: terrariumEngine.py:54
 msgid "temperature"
-msgstr ""
+msgstr "Temperatur"
 
 #: terrariumEngine.py:55
 msgid "distance"
-msgstr ""
+msgstr "Entfernung"
 
 #: terrariumEngine.py:56
 msgid "altitude"
-msgstr ""
+msgstr "Höhe"
 
 #: terrariumEngine.py:57
 msgid "pressure"
-msgstr ""
+msgstr "Druck"
 
 #: terrariumEngine.py:58
 msgid "humidity"
-msgstr ""
+msgstr "Feuchtigkeit"
 
 #: terrariumEngine.py:59
 msgid "moisture"
-msgstr ""
+msgstr "Feuchtigkeit"
 
 #: terrariumEngine.py:60
 msgid "conductivity"
-msgstr ""
+msgstr "Leitfähigkeit"
 
 #: terrariumEngine.py:61
 msgid "ph"
-msgstr ""
+msgstr "ph"
 
 #: terrariumEngine.py:62
 msgid "light"
-msgstr ""
+msgstr "leicht"
 
 #: terrariumEngine.py:63
+#, fuzzy
 msgid "uva"
-msgstr ""
+msgstr "uva"
 
 #: terrariumEngine.py:64
+#, fuzzy
 msgid "uvb"
-msgstr ""
+msgstr "uvb"
 
 #: terrariumEngine.py:65
 msgid "uvi"
-msgstr ""
+msgstr "UVI"
 
 #: terrariumEngine.py:66
 msgid "fertility"
-msgstr ""
+msgstr "Fruchtbarkeit"
 
 #: terrariumEngine.py:67
 msgid "co2"
-msgstr ""
+msgstr "CO2"
 
 #: terrariumEngine.py:68
 msgid "volume"
