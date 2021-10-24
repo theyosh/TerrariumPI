@@ -7,7 +7,6 @@ image:
   src: /assets/img/Hardware.webp
   alt: Hardware header image
 ---
-
 ## GPIO
 ![Raspberry PI GPIO pins layout](/assets/img/GPIO-Pinout-Diagram.webp){: style="max-width: 200px" .right}
 All the hardware that is connected through GPIO pins needs to use the **physical pin number** as address. This means a number from 1 - 40.
@@ -47,7 +46,7 @@ Run the command `i2cdetect -y 1` in order to see what is connected to your I2C b
 
 {% assign relays = site.hardware | where_exp: "hardware", "hardware.tags contains 'relay'" | sort_natural: "title" %}
 ## Relays
-We currently support <strong>{{ relays | size}}</strong> types of relays. Relays which has a dial icon ![Dimmer icon](/assets/img/dimmer_icon.png){: style="height: 20px" .normal} after their name are dimmers.
+We currently support <strong>{{ relays | size}}</strong> types of relays. Relays which has a dial icon ![Dimmer icon](/assets/img/dimmer_icon.png){: style="height: 20px" .normal .is_dimmer} after their name are dimmers.
 
 {% for relay in relays %}
   <h3>
@@ -57,7 +56,6 @@ We currently support <strong>{{ relays | size}}</strong> types of relays. Relays
   {% endif %}
   </h3>
 {% endfor %}
-
 
 {% assign sensors = site.hardware | where_exp: "hardware", "hardware.tags contains 'sensor'" | sort_natural: "title" %}
 {% assign measurements = sensors | map: "device_types" | join: "," | split: "," | uniq | sort_natural | join: "`, `"  %}
