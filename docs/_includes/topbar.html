@@ -70,56 +70,50 @@
       <select name="language">
         <option>Select language</option>
       </select>
-
-      <script>
-        jQuery.urlParam = function (name) {
-          var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.search);
-          return (results !== null) ? results[1] || 0 : false;
-        }
-
-        function getFlagEmoji(countryCode) {
-          const codePoints = countryCode
-            .toUpperCase()
-            .split('')
-            .map(char =>  127397 + char.charCodeAt());
-          return String.fromCodePoint(...codePoints);
-        }
-
-        jQuery(function() {
-
-          let languages = [
-            {'name' : 'Dutch', 'key' : 'NL'},
-            {'name' : 'German', 'key' : 'DE'},
-            {'name' : 'English', 'key' : 'GB'},
-            {'name' : 'French', 'key' : 'FR'},
-            {'name' : 'Italian', 'key' : 'IT'},
-            {'name' : 'Japanese', 'key' : 'JA', 'flag' : 'JP'},
-            {'name' : 'Norwegian', 'key' : 'NO'},
-            {'name' : 'Polish', 'key' : 'PL'},
-            {'name' : 'Portuguese', 'key' : 'PG'},
-            {'name' : 'Spanish', 'key' : 'ES'},
-          ];
-
-          let pulldown = jQuery('select[name="language"]');
-
-          jQuery.each(languages,function(counter, language){
-            pulldown.append(jQuery('<option>').val(language['key']).text(getFlagEmoji(language['flag'] || language['key']) + ' ' + language['name']));
-          });
-
-          // Set selected language
-          if (jQuery.urlParam('_x_tr_tl')) {
-            pulldown.val(jQuery.urlParam('_x_tr_tl'));
-          }
-
-          pulldown.on('change',function(event){
-            if (this.value == 'GB') {
-              location.href='https://theyosh.github.io/TerrariumPI/';
-            } else {
-              location.href='https://translate.google.com/translate?hl=en&sl=en&tl=' + this.value.toLowerCase() + '&u=https%3A%2F%2Ftheyosh.github.io%2FTerrariumPI%2F'
-            }
-          })
-        });
-        </script>
     </span>
+    <script>
+      function getFlagEmoji(countryCode) {
+        const codePoints = countryCode
+          .toUpperCase()
+          .split('')
+          .map(char =>  127397 + char.charCodeAt());
+        return String.fromCodePoint(...codePoints);
+      }
+
+      jQuery(function() {
+
+        let languages = [
+          {'name' : 'Dutch', 'key' : 'NL'},
+          {'name' : 'German', 'key' : 'DE'},
+          {'name' : 'English', 'key' : 'GB'},
+          {'name' : 'French', 'key' : 'FR'},
+          {'name' : 'Italian', 'key' : 'IT'},
+          {'name' : 'Japanese', 'key' : 'JA', 'flag' : 'JP'},
+          {'name' : 'Norwegian', 'key' : 'NO'},
+          {'name' : 'Polish', 'key' : 'PL'},
+          {'name' : 'Portuguese', 'key' : 'PG'},
+          {'name' : 'Spanish', 'key' : 'ES'},
+        ];
+
+        let pulldown = jQuery('select[name="language"]');
+
+        jQuery.each(languages,function(counter, language){
+          pulldown.append(jQuery('<option>').val(language['key'].toLowerCase()).text(getFlagEmoji(language['flag'] || language['key']) + ' ' + language['name']));
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('_x_tr_tl')) {
+          pulldown.val(params.get('_x_tr_tl'));
+        }
+
+        pulldown.on('change',function(event){
+          if (this.value == 'GB') {
+            location.href='https://theyosh.github.io/TerrariumPI/';
+          } else {
+            location.href='https://translate.google.com/translate?hl=en&sl=en&tl=' + this.value + '&u=https%3A%2F%2Ftheyosh.github.io%2FTerrariumPI%2F'
+          }
+        });
+      });
+    </script>
   </div>
 </div>
