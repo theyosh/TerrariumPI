@@ -209,7 +209,9 @@ sass:
 compress_html:
   clippings: all
   comments: all
-  endings: all
+  # Copy list from: https://github.com/penibelst/jekyll-compress-html/blob/v3.1.0/src/compress.liquid#L17
+  # We need the </head> tag for stats...
+  endings: [html, body, li, dt, dd, optgroup, option, colgroup, caption, thead, tbody, tfoot, tr, td, th]
   profile: false
   blanklines: false
   ignore:
