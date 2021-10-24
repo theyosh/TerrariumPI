@@ -14,4 +14,4 @@ device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number wh
 device_url: https://thepihut.com/blogs/raspberry-pi-tutorials/hc-sr04-ultrasonic-range-sensor-on-the-raspberry-pi
 ---
 
-{% include_relative hc-sr04-sensor.md %}
+{% include_relative hc-sr04_sensor.md %}

@@ -14,4 +14,4 @@ device_address: "Serial address and connect to GPIO pin 8 (TX) and 10 (RX). Ex: 
 device_url: https://gadget-freakz.com/product/mh-z19-air-co2-sensor/
 ---
 
-{% include_relative mh-z19-sensor.md %}
+{% include_relative mh-z19_sensor.md %}

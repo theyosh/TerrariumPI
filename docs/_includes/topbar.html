@@ -68,7 +68,7 @@
 
     <span class="align-items-center" style="margin-left:0.2rem">
       <select name="language">
-        <option>Select language</option>
+        <option value="">Select language</option>
       </select>
     </span>
     <script>
@@ -107,11 +107,14 @@
         }
 
         pulldown.on('change',function(event){
-          if (this.value == 'gb') {
-            location.href='https://theyosh.github.io/TerrariumPI/';
-          } else {
-            location.href='https://translate.google.com/translate?hl=en&sl=en&tl=' + this.value + '&u=https%3A%2F%2Ftheyosh.github.io%2FTerrariumPI%2F'
+          if (this.value != '') {
+            if (this.value == 'gb') {
+              location.href='https://theyosh.github.io/TerrariumPI/';
+            } else {
+              location.href='https://translate.google.com/translate?hl=en&sl=en&tl=' + this.value + '&u=https%3A%2F%2Ftheyosh.github.io%2FTerrariumPI%2F'
+            }
           }
+
         });
       });
     </script>

@@ -9,7 +9,7 @@ image:
   alt: "Meross header image"
 
 device_type : Meross power switches
-device_address: ""
+device_address: "Need Meross Cloud account credentials"
 device_auto_detect: true
 device_url : https://shop.meross.com/collections/smart-power-strip
 ---

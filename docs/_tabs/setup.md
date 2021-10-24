@@ -134,7 +134,7 @@ The url format needs to be `https://api.openweathermap.org/data/2.5/weather?q=[C
 _Popup form for adding and updating relays - Calibration is only available for dimmers_
 
 Hardware
-: The hardware type of the relay
+: The hardware type of the relay. [A full list of supported relays]({{ 'hardware/' | relative_url }}#relays)
 
 Address
 : Enter the address of the relay. This is specific for each [relay]({{ 'hardware/' | relative_url }}#relays).
@@ -168,7 +168,7 @@ _Popup form adding/updating the sensors_
 Adding and changing sensors is done with the above sensor form.
 
 Hardware
-: The hardware type of the sensor
+: The hardware type of the sensor. [A full list of supported sensors]({{ 'hardware/' | relative_url }}#sensors)
 
 Type
 : Select what kind of sensor it is.
