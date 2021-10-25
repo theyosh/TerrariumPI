@@ -211,7 +211,7 @@ div#services .btn.btn-app i:not(.active) {
 
         jQuery('i.delete_area', new_row).each(function(counter, element){
           element = jQuery(element);
-          let link = '{{ url_for('api:area_delete', area='_id_') }}'.replace('_id_',element.attr('id'));
+          let link = '{{ url_for('api:notification_message_delete', message='_id_') }}'.replace('_id_',element.attr('id'));
           link = jQuery('<a>').addClass('btn btn-light btn-sm text-danger').attr({'role':'button','data-action' : 'DELETE', 'data-toggle':'modal', 'data-target' : '#modal-confirm','title' : jQuery(this).attr('title'), 'href': link})
           element.wrap(link);
         });

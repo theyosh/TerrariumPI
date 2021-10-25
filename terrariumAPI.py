@@ -98,7 +98,6 @@ class terrariumAPI(object):
     bottle_app.route('/api/notification/messages/<message:path>/', 'DELETE', self.notification_message_delete, apply=self.authentication(), name='api:notification_message_delete')
     bottle_app.route('/api/notification/messages/',                'GET',    self.notification_message_list,   apply=self.authentication(), name='api:notification_message_list')
     bottle_app.route('/api/notification/messages/',                'POST',   self.notification_message_add,    apply=self.authentication(), name='api:notification_message_add')
-
     bottle_app.route('/api/notification/services/types/',          'GET',    self.notification_service_types,  apply=self.authentication(), name='api:notification_service_types')
     bottle_app.route('/api/notification/services/<service:path>/', 'GET',    self.notification_service_detail, apply=self.authentication(), name='api:notification_service_detail')
     bottle_app.route('/api/notification/services/<service:path>/', 'PUT',    self.notification_service_update, apply=self.authentication(), name='api:notification_service_update')
@@ -671,10 +670,10 @@ class terrariumAPI(object):
   @orm.db_session
   def notification_message_delete(self, message):
     try:
-      message = f'Notification message {NotificationMessage[message]} is deleted.'
+      title = f'Notification message {message} is deleted.'
       NotificationMessage[message].delete()
-      orm.commit()
-      return {'message' : message}
+#      orm.commit()
+      return {'message' : title}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Notification message with id {message} does not exists.')
     except Exception as ex:
@@ -729,10 +728,9 @@ class terrariumAPI(object):
   @orm.db_session
   def notification_service_delete(self, service):
     try:
-      message = f'Notification service {NotificationService[service]} is deleted.'
+      message = f'Notification service {service} is deleted.'
       NotificationService[service].delete()
-      orm.commit()
- #     self.webserver.engine.delete(terrariumEnclosure,enclosure)
+#      orm.commit()
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
@@ -749,16 +747,10 @@ class terrariumAPI(object):
 
   @orm.db_session
   def notification_service_add(self):
-    print('Add notification service:')
-    print(request.json)
     try:
       service = NotificationService(**request.json)
-      print('New service')
-      print(service)
       return self.notification_service_detail(service.id)
     except Exception as ex:
-      print('Exception')
-      print(ex)
       raise HTTPError(status=500, body=f'Notification service could not be added. {ex}')
 
 
