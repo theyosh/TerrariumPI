@@ -17,7 +17,9 @@ db = orm.Database()
 def sqlite_speedups(db, connection):
     cursor = connection.cursor()
     cursor.execute('PRAGMA synchronous  = OFF')
-    cursor.execute('PRAGMA journal_mode = MEMORY')
+    # cursor.execute('PRAGMA journal_mode = MEMORY')
+    # https://www.sqlite.org/wal.html
+    cursor.execute('PRAGMA journal_mode = WAL')
     cursor.execute('PRAGMA temp_store   = MEMORY')
 
 def init(version):
