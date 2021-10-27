@@ -32,17 +32,17 @@ class terrariumSHT3XSensor(terrariumI2CSensor):
       data['temperature'] = data[0] << 8 | data[1]
       data['temperature'] = -45.0 + 175.0 * np.float(data['temperature']) / 65535.0
 
-      print('Temperature data:')
+      print('sht3x temperature data:')
       print(data['temperature'])
 
       # Divide data into counts Humidity
       data['humidity'] = data[3] << 8 | data[4]
       data['humidity'] = 100.0 * np.float(data['humidity']) / 65535.0
 
-      print('Humidity data:')
+      print('sht3x humidity data:')
       print(data['humidity'])
 
 
-    print('Return data')
+    print('sht3x return data')
     print(data)
     return data
