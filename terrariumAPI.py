@@ -1160,13 +1160,23 @@ class terrariumAPI(object):
     try:
       data = Setting[setting].to_dict()
       if data['id'] in ['meross_cloud_username','meross_cloud_password']:
-        data = copy.copy(data)
         data['value'] = terrariumUtils.decrypt(data['value'])
+      elif 'exclude_ids' == data['id']:
+        ids = data['value'].split(',')
+        data['value'] = []
+
+        for part in [Area, Enclosure, Button, Relay, Sensor, Webcam]:
+          for item in part.select(lambda a: a.id in ids):
+            data['value'].append({
+              'id' : item.id,
+              'name' : item.name
+            })
+
       return data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Setting with id {setting} does not exists.')
-
-    raise HTTPError(status=500, body=f'Error processing setting {setting}.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error processing setting {setting}. {ex}')
 
   @orm.db_session
   def setting_add(self):

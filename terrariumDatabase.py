@@ -571,6 +571,8 @@ class Setting(db.Entity):
   def before_update(self):
     self.__encrypt_sensitive_fields()
 
+  def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    return copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
 
 class Webcam(db.Entity):
 

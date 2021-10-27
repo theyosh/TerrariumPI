@@ -469,11 +469,8 @@
           field.prop('checked',('true' != item.value)).trigger('change');
           field.prop('checked',('true' == item.value)).trigger('change');
         } else if ('exclude_ids' == item.id ) {
-          let ids = item.value.split(',');
-          jQuery.each(ids, function(index, value) {
-            if ('' != value) {
-              field.append(jQuery('<option>').attr('value',value).prop('selected',true).text(value)).trigger('change');
-            }
+          jQuery.each(item.value, function(index, value) {
+            field.append(jQuery('<option>').attr('value',value.id).prop('selected',true).text(value.name)).trigger('change');
           });
         } else {
           field.val(item.value).trigger('change');
