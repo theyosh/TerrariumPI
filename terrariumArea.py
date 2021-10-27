@@ -5,6 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 from operator import itemgetter
 import copy
 import datetime
+import time
 
 import statistics
 import threading
@@ -295,9 +296,10 @@ class terrariumArea(object):
         'active' : len(self.setup['sensors']) > 0,
         'dynamic' : False,
         'weather' : False,
-        'external' : None,
-        'script'   : None,
+        'external' : False,
+        'script'   : False,
         'offset' : float(0),
+        'source' : None,
         'periods' : []
       }
 
@@ -328,10 +330,11 @@ class terrariumArea(object):
 
         elif 'script' == varation.get('when'):
           self.state['variation']['script'] = True
-          self.state['variation']['external'] = varation.get('external')
+          self.state['variation']['source'] = varation.get('source')
 
         elif 'external' == varation.get('when'):
-          self.state['variation']['external'] = varation.get('external')
+          self.state['variation']['external'] = True
+          self.state['variation']['source'] = varation.get('source')
           self.__external_cache = terrariumCache()
 
         continue
@@ -382,7 +385,7 @@ class terrariumArea(object):
     # Loop over the periods to find the current period
     period = None
 
-    if self.state['variation']['weather'] or self.state['variation']['script'] or self.state['variation']['external'] is not None:
+    if self.state['variation']['weather'] or self.state['variation']['script'] or self.state['variation']['external']:
       value = None
       if self.state['variation']['weather']:
         if self.type in ['heating','cooling']:
@@ -391,19 +394,19 @@ class terrariumArea(object):
           value = self.enclosure.weather.current_humidity + self.state['variation']['offset']
 
       elif self.state['variation']['script']:
-        value = float(terrariumUtils.get_script_data(self.state['variation']['external'])) + self.state['variation']['offset']
+        value = float(terrariumUtils.get_script_data(self.state['variation']['source'])) + self.state['variation']['offset']
 
       elif self.state['variation']['external']:
         # Here we get data from an external source. We cache this data for 10 minutes
         cache_key = f'{self.id}_external'
         value = self.__external_cache.get_data(cache_key)
         if value is None:
-          start_time = datetime.datetime.now()
-          value = float(terrariumUtils.get_remote_data(self.state['variation']['external'])) + self.state['variation']['offset']
+          start = time.time()
+          value = float(terrariumUtils.get_remote_data(self.state['variation']['source'])) + self.state['variation']['offset']
           if value is not None:
             unit = self.enclosure.engine.units[self.state["sensors"]["unit"]]
-            logger.info(f'Updated external source variation data with value: {value}{unit} in {datetime.datetime.now() - start_time} seconds')
             self.__external_cache.set_data(cache_key, value, 10 * 60)
+            logger.info(f'Updated external source variation data with value: {value}{unit} in {time.time() - start:.2f} seconds')
           else:
             logger.error(f'Could not load data from external source! Please check your settings.')
 
