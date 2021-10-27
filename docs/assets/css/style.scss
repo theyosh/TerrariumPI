@@ -19,7 +19,6 @@ footer a.external:after {
   font-size: 0.75rem;
 }
 
-html:not([mode]) img.is_dimmer,
 html[mode="dark"] img.is_dimmer {
   -webkit-filter: invert(100%);
   filter: invert(100%);
