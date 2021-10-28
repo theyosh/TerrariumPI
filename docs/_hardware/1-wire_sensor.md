@@ -1,7 +1,7 @@
 ---
 title: 1-Wire
 categories: [Hardware, Sensor]
-tags: [sensor, 1-wire, waterproof]
+tags: [sensor, 1-wire, waterproof, temperature, humidity]
 
 image:
   src: /assets/img/1-Wire.webp
@@ -19,9 +19,10 @@ Using the 1-Wire bus is an easy way to add multiple sensors. This can be tempera
 
 The 1-Wire bus is enabled by the installer and therefore, it will work out of the box. Use physical pin 7 (GPIO 4) for the data wire.
 
-Make sure you use a 4.7K resistor.
+### DS18B20
+![1-Wire schema](/assets/img/1-wire-temp.webp){: .right width="300" }
 
-![1-Wire schema](/assets/img/1-wire-temp.webp)
-_1-Wire schema_
+An easy to use temperature sensor is the [DS18B20 sensor](https://components101.com/sensors/ds18b20-temperature-sensor) Make sure you use a 4.7K resistor when connecting 1 or more DS18B20 sensors.
+
 
 {% include_relative _sensor_detail.md %}
