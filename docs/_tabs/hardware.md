@@ -12,7 +12,7 @@ image:
 All the hardware that is connected through GPIO pins needs to use the **physical pin number** as address. This means a number from 1 - 40.
 
 ### Power saving
-Some GPIO sensors can benefit from using power saving. A good example is the analog/digital moisture sensor YTXX - TODO: Make link to actual sensor
+Some GPIO sensors can benefit from using power saving. A good example is the analog/digital moisture sensor [YTXX]({% link _hardware/ytxx-digital_sensor.md %})
 
 Power management works that you connect the red (power) wire of the sensor to a GPIO pin, which will be put to high so that the sensor get powered. After 0.25 sec a measurement is taken, and afterwards the power to the sensor is shutdown.
 
