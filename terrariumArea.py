@@ -388,10 +388,16 @@ class terrariumArea(object):
     if self.state['variation']['weather'] or self.state['variation']['script'] or self.state['variation']['external']:
       value = None
       if self.state['variation']['weather']:
+        timestamp = datetime.datetime.utcnow() - datetime.timedelta(hours=24)
+
         if self.type in ['heating','cooling']:
-          value = self.enclosure.weather.current_temperature + self.state['variation']['offset']
+          value = self.enclosure.engine.weather.get_history_at(timestamp, 'temperature')
+
         elif self.type in ['humidity']:
-          value = self.enclosure.weather.current_humidity + self.state['variation']['offset']
+          value = self.enclosure.engine.weather.get_history_at(timestamp, 'humidity')
+
+        if value is not None:
+          value += self.state['variation']['offset']
 
       elif self.state['variation']['script']:
         value = float(terrariumUtils.get_script_data(self.state['variation']['source'])) + self.state['variation']['offset']
@@ -518,7 +524,8 @@ class terrariumArea(object):
       self.state['sensors'] = self.current_value(self.setup['sensors'])
 
       # If there are variations on the alarm values, update them here
-      self._update_variation()
+      if not read_only:
+        self._update_variation()
 
       # And set the alarm values
       self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_min']
