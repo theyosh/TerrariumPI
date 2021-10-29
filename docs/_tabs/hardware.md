@@ -71,3 +71,13 @@ We currently support <strong>{{ sensors | size}}</strong> hardware types of sens
   {{ types }}
 
 {% endfor %}
+
+{% assign buttons = site.hardware | where_exp: "hardware", "hardware.tags contains 'button'" | sort_natural: "title" %}
+## Buttons
+We currently support <strong>{{ buttons | size}}</strong> types of buttons.
+
+{% for button in buttons %}
+  <h3>
+    <a href="{{ button.url | relative_url }}">{{ button.title }}</a>
+  </h3>
+{% endfor %}

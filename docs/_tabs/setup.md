@@ -132,6 +132,7 @@ The url format needs to be `https://api.openweathermap.org/data/2.5/weather?q=[C
 ## Relays
 ![Relay form](/assets/img/Add_Relay_Form.webp)
 _Popup form for adding and updating relays - Calibration is only available for dimmers_
+Adding and changing relays is done with the above relay form.
 
 Hardware
 : The hardware type of the relay. [A full list of supported relays]({% link _tabs/hardware.md %}#relays)
@@ -201,11 +202,31 @@ Exclude average
 Offset
 : Enter a value to correct the output reading. This can be a positive or negative value.
 
+
 ## Doors / buttons
 ![Button form](/assets/img/Button_Settings.webp)
 _Popup form for adding and updating buttons - Calibration is only available for light sensors_
+Adding and changing buttons is done with the above button form.
+
+Hardware
+: The hardware type of the button. [A full list of supported buttons]({% link _tabs/hardware.md %}#buttons)
+
+Address
+: Enter the address of the button. This is specific for each [button]({% link _tabs/hardware.md %}#buttons).
+
+Name
+: The name of the button. Use an easy to remember name.
+
+Current
+: The current state of the button. Value 1 is active, value 0 is not active
 
 ### Calibration
+This is only available for light sensors.
+
+Capacitor value in µF
+: Enter the value of the capacitor
+
+
 
 ## Webcams
 ![Webcam form](/assets/img/Webcam_Settings.webp)
