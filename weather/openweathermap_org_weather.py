@@ -5,7 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 from . import terrariumWeatherAbstract
 from terrariumUtils import terrariumUtils
 
-from datetime import date
+from datetime import date, datetime, timedelta
 import copy
 
 class terrariumOpenweathermap(terrariumWeatherAbstract):
@@ -34,6 +34,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
     return False
 
   def __load_forecast_data(self):
+    # Onecall API's are more expensive (max 1000 a day) so we update this at a lower frequency
     address = terrariumUtils.parse_url(self.address)
     data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}'.format(self._data['geo']['lat'],self._data['geo']['long'],address['query_params']['appid']))
 
@@ -44,7 +45,6 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
       # Loop over hourly and daily forecasts
       for day in data['hourly'] + data['daily']:
-        #print(day)
         # Here we store the new sunrise and sunset. If there is no new update, use the old values.
         sunrise = day.get('sunrise',sunrise)
         sunset  = day.get('sunset',sunset)
@@ -118,8 +118,31 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
     return False
 
+
+  def __load_history_data(self):
+    # Onecall API's are more expensive (max 1000 a day) so we update this at a lower frequency
+    address = terrariumUtils.parse_url(self.address)
+    data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={}&lon={}&units=metric&dt={}&appid={}'.format(self._data['geo']['lat'],self._data['geo']['long'],int((datetime.now() - timedelta(hours=24)).timestamp()),address['query_params']['appid']))
+
+    if data:
+      for item in data['hourly']:
+        if len(self._data['history']) > 0:
+          self._data['history'][len(self._data['history'])-1]['end'] = datetime.utcfromtimestamp(int(item['dt']))
+
+        self._data['history'].append({
+          'begin' : datetime.utcfromtimestamp(int(item['dt'])),
+          'end' : None,
+          'temperature' : float(item['temp']),
+          'humidity' : float(item['humidity']),
+          'pressure': float(item['pressure']),
+          'uvi': float(item['uvi']),
+        })
+
+    return True
+
   def _load_data(self):
     if self.__load_general_data():
-      return self.__load_forecast_data()
+      if self.__load_forecast_data():
+        return self.__load_history_data()
 
     return False

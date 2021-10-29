@@ -42,7 +42,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
                     'unit_values' : unit_values,
                     'last_update' : None}
 
-    self._data = {'forecast' : {}}
+    self._data = {'forecast' : {}, 'history' : []}
     self.address = address
 
   @retry(tries=3, delay=0.5, max_delay=2)
@@ -143,6 +143,11 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
         data.append({'value' : self._data['forecast'][timestamp]['temp'], 'timestamp' : timestamp})
 
     return data
+
+  def get_history_at(self,timestamp,unit):
+    for item in self._data['history']:
+      if item['begin'] < timestamp <  item['end']:
+        return item[unit]
 
   @property
   def location(self):
