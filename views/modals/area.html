@@ -882,7 +882,8 @@
                   <option value="after">{{ _('After x minutes') }}</option>
                   <option value="at">{{ _('At time') }}</option>
                   <option value="weather">{{ _('Using current weather') }}</option>
-                  <option value="external">{{ _('Use external source') }}</option>
+                  <option value="external">{{ _('Use json source') }}</option>
+                  <option value="script">{{ _('Use script') }}</option>
                 </select>
                 <div class="invalid-feedback">
                   {{ _('Select a valid option.') }}
@@ -891,9 +892,9 @@
             </div>
             <div class="col-7 col-sm-7 col-md-7 col-lg-7 variation_external_source" style="display:none">
               <div class="form-group">
-                <input type="text" class="form-control" name="variation_source" placeholder="{{ _('Enter a full url') }}">
+                <input type="text" class="form-control" name="variation_source" placeholder="{{ _('Enter a full url, local json file or script file.') }}">
                 <div class="invalid-feedback">
-                  {{ _('Enter a valid url.') }}
+                  {{ _('Enter a valid url, local json file or script file.') }}
                 </div>
               </div>
             </div>
@@ -1078,13 +1079,13 @@ function plus_minus_buttons(form) {
       jQuery('div.variation_time_settings').show()
     } else if ('weather' == mode) {
       jQuery('div.variation_weather').show()
-    } else if ('external' == mode) {
+    } else if ('external' == mode || 'script' == mode) {
       jQuery('div.variation_external_source').show()
     }
 
-    jQuery('input[name="variation_source"]').prop('disabled', 'external' != mode);
+    jQuery('input[name="variation_source"]').prop('disabled', 'external' != mode && 'script' != mode);
     jQuery('input[name="variation_offset"]').prop('disabled', 'at' == mode || 'after' == mode);
-    jQuery('input[name="variation_period"],[name="variation_value"]').prop('disabled', 'external' == mode || 'weather' == mode);
+    jQuery('input[name="variation_period"],[name="variation_value"]').prop('disabled', 'external' == mode || 'script' == mode || 'weather' == mode);
   });
 
   // Disable the weather and external source option when there are more then 1 row
@@ -1447,6 +1448,7 @@ jQuery.when(
           } else {
             row.find('[name="variation_period"]').val(variation['period']);
           }
+          row.find('[name="variation_source"]').val(variation['source']);
           row.find('[name="variation_offset"]').val(variation['offset']);
           row.find('[name="variation_value"]').val(variation['value']);
 

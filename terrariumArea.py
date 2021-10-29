@@ -5,6 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 from operator import itemgetter
 import copy
 import datetime
+import time
 
 import statistics
 import threading
@@ -295,8 +296,10 @@ class terrariumArea(object):
         'active' : len(self.setup['sensors']) > 0,
         'dynamic' : False,
         'weather' : False,
-        'external' : None,
+        'external' : False,
+        'script'   : False,
         'offset' : float(0),
+        'source' : None,
         'periods' : []
       }
 
@@ -320,12 +323,18 @@ class terrariumArea(object):
           period_timestamp = period_timestamp.strftime('%H:%M')
 
       else:
+        self.state['variation']['offset'] = float(varation.get('offset', 0.0))
+
         if 'weather' == varation.get('when'):
           self.state['variation']['weather'] = True
-          self.state['variation']['offset'] = float(varation.get('offset',0))
+
+        elif 'script' == varation.get('when'):
+          self.state['variation']['script'] = True
+          self.state['variation']['source'] = varation.get('source')
+
         elif 'external' == varation.get('when'):
-          self.state['variation']['external'] = varation.get('external')
-          self.state['variation']['offset'] = float(varation.get('offset',0))
+          self.state['variation']['external'] = True
+          self.state['variation']['source'] = varation.get('source')
           self.__external_cache = terrariumCache()
 
         continue
@@ -376,21 +385,30 @@ class terrariumArea(object):
     # Loop over the periods to find the current period
     period = None
 
-    if self.state['variation']['weather'] or self.state['variation']['external'] is not None:
+    if self.state['variation']['weather'] or self.state['variation']['script'] or self.state['variation']['external']:
       value = None
       if self.state['variation']['weather']:
         if self.type in ['heating','cooling']:
           value = self.enclosure.weather.current_temperature + self.state['variation']['offset']
         elif self.type in ['humidity']:
           value = self.enclosure.weather.current_humidity + self.state['variation']['offset']
-      else:
-        # Here we get data from an external source. We cache this data for 15 minutes
+
+      elif self.state['variation']['script']:
+        value = float(terrariumUtils.get_script_data(self.state['variation']['source'])) + self.state['variation']['offset']
+
+      elif self.state['variation']['external']:
+        # Here we get data from an external source. We cache this data for 10 minutes
         cache_key = f'{self.id}_external'
         value = self.__external_cache.get_data(cache_key)
         if value is None:
-          value = terrariumUtils.get_remote_data(self.state['variation']['external']) + self.state['variation']['offset']
+          start = time.time()
+          value = float(terrariumUtils.get_remote_data(self.state['variation']['source'])) + self.state['variation']['offset']
           if value is not None:
+            unit = self.enclosure.engine.units[self.state["sensors"]["unit"]]
             self.__external_cache.set_data(cache_key, value, 10 * 60)
+            logger.info(f'Updated external source variation data with value: {value}{unit} in {time.time() - start:.2f} seconds')
+          else:
+            logger.error(f'Could not load data from external source! Please check your settings.')
 
       if value is not None:
         period = {
@@ -450,7 +468,8 @@ class terrariumArea(object):
         for sensor in Sensor.select(lambda s: s.id in self.setup['sensors']):
           sensor.alarm_min += sensor_diff
           sensor.alarm_max += sensor_diff
-          logger.info(f'Changed {sensor.type} sensor \'{sensor.name}\' for area \'{self.name}\' alarm values from min: {sensor.alarm_min - sensor_diff:.2f}, max: {sensor.alarm_max - sensor_diff:.2f} to new min: {sensor.alarm_min:.2f} and max: {sensor.alarm_max:.2f}. A difference of {sensor_diff}. New average is: {wanted_average_value:.2f}.')
+          unit = self.enclosure.engine.units[self.state["sensors"]["unit"]]
+          logger.info(f'Changed {sensor.type} sensor \'{sensor.name}\' for area \'{self.name}\' alarm values from min: {sensor.alarm_min - sensor_diff:.2f}{unit}, max: {sensor.alarm_max - sensor_diff:.2f}{unit} to new min: {sensor.alarm_min:.2f}{unit} and max: {sensor.alarm_max:.2f}{unit}. A difference of {sensor_diff}{unit}. New average is: {wanted_average_value:.2f}{unit}.')
 
     # Reload the current sensor values after changing them
     self.state['sensors'] = self.current_value(self.setup['sensors'])
