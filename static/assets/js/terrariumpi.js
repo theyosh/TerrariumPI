@@ -1007,7 +1007,7 @@ function graph(canvas, source, type) {
         }
 
       } else {
-        if (window.terrariumPI.graph_smooth_value > 0) {
+        if (window.terrariumPI.graph_smooth_value > 0 && parsed_data['value'].length > 100) {
           parsed_data['value'] = smoothing(parsed_data['value'],window.terrariumPI.graph_smooth_value);
         }
       }

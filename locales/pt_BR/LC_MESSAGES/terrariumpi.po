@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2021-10-09 23:27+CEST\n"
-"PO-Revision-Date: 2021-09-23 04:41+0000\n"
+"POT-Creation-Date: 2021-10-23 10:51+CEST\n"
+"PO-Revision-Date: 2021-10-13 03:42+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.8\n"
+"X-Generator: Weblate 4.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:31
@@ -47,10 +47,8 @@ msgid "Conductivity"
 msgstr "Condutividade"
 
 #: terrariumArea.py:79
-#, fuzzy
-#| msgid "fertility"
 msgid "Fertility"
-msgstr "fertilidade"
+msgstr "Fertilidade"
 
 #: terrariumArea.py:85
 msgid "Moisture"
@@ -60,173 +58,163 @@ msgstr "Umidade absoluta"
 msgid "pH"
 msgstr "pH"
 
-#: terrariumEngine.py:56
+#: terrariumEngine.py:54
 msgid "temperature"
 msgstr "temperatura"
 
-#: terrariumEngine.py:57
+#: terrariumEngine.py:55
 msgid "distance"
 msgstr "distância"
 
-#: terrariumEngine.py:58
+#: terrariumEngine.py:56
 msgid "altitude"
 msgstr "altitude"
 
-#: terrariumEngine.py:59
+#: terrariumEngine.py:57
 msgid "pressure"
 msgstr "pressão"
 
-#: terrariumEngine.py:60
+#: terrariumEngine.py:58
 msgid "humidity"
 msgstr "umidade relativa"
 
-#: terrariumEngine.py:61
+#: terrariumEngine.py:59
 msgid "moisture"
 msgstr "umidade absoluta"
 
-#: terrariumEngine.py:62
+#: terrariumEngine.py:60
 msgid "conductivity"
 msgstr "condutividade"
 
-#: terrariumEngine.py:63
+#: terrariumEngine.py:61
 msgid "ph"
 msgstr "pH"
 
-#: terrariumEngine.py:64
+#: terrariumEngine.py:62
 msgid "light"
 msgstr "luz"
 
-#: terrariumEngine.py:65
+#: terrariumEngine.py:63
 msgid "uva"
 msgstr "UVA"
 
-#: terrariumEngine.py:66
+#: terrariumEngine.py:64
 msgid "uvb"
 msgstr "UVB"
 
-#: terrariumEngine.py:67
+#: terrariumEngine.py:65
 msgid "uvi"
 msgstr "uvi"
 
-#: terrariumEngine.py:68
+#: terrariumEngine.py:66
 msgid "fertility"
 msgstr "fertilidade"
 
-#: terrariumEngine.py:69
+#: terrariumEngine.py:67
 msgid "co2"
 msgstr "CO2"
 
-#: terrariumEngine.py:70
+#: terrariumEngine.py:68
 msgid "volume"
 msgstr "Volume"
 
-#: terrariumEngine.py:71
+#: terrariumEngine.py:69
 msgid "watertank"
 msgstr "Tanque de água"
 
-#: terrariumEngine.py:72
+#: terrariumEngine.py:70
 msgid "windspeed"
 msgstr "Velocidade do vento"
 
-#: terrariumEngine.py:73
+#: terrariumEngine.py:71
 msgid "water_flow"
 msgstr "fluxo_de_agua"
 
-#: terrariumEngine.py:74
+#: terrariumEngine.py:72
 msgid "wattage"
 msgstr "Potência"
 
-#: terrariumEngine.py:1071 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1074 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Tempo em atividade"
 
-#: terrariumEngine.py:1077
+#: terrariumEngine.py:1080
 msgid "System load"
 msgstr "Carga do sistema"
 
-#: terrariumEngine.py:1083 views/status.html:44
+#: terrariumEngine.py:1086 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Temperatura da CPU"
 
-#: terrariumEngine.py:1089
+#: terrariumEngine.py:1092
 msgid "Storage"
 msgstr "Armazenamento"
 
-#: terrariumEngine.py:1095
+#: terrariumEngine.py:1098
 msgid "Memory"
 msgstr "Memória"
 
-#: terrariumEngine.py:1112
+#: terrariumEngine.py:1115
 msgid "average {sensor_type}"
-msgstr "média {sensor_type}"
+msgstr "média de {sensor_type}"
 
-#: terrariumEngine.py:1283
+#: terrariumEngine.py:1286
 msgid "last update"
 msgstr "Última atualização"
 
-#: terrariumNotification.py:39
+#: terrariumNotification.py:41
 msgid "Authentication login error"
 msgstr "Erro de autenticação no login"
 
-#: terrariumNotification.py:40
+#: terrariumNotification.py:42
 msgid "System warning"
 msgstr "Aviso do sistema"
 
-#: terrariumNotification.py:41
+#: terrariumNotification.py:43
 msgid "System error"
 msgstr "Erro do sistema"
 
-#: terrariumNotification.py:43
-#, fuzzy
-#| msgid "Sensor ph"
+#: terrariumNotification.py:45
 msgid "Sensor update"
-msgstr "Sensor ph"
-
-#: terrariumNotification.py:44
-#, fuzzy
-#| msgid "Sensor ph"
-msgid "Sensor alarm"
-msgstr "Sensor ph"
+msgstr "Atualização de Sensor"
 
 #: terrariumNotification.py:46
-#, fuzzy
-#| msgid "Step change"
-msgid "Relay change"
-msgstr "Passo de mudança"
+msgid "Sensor alarm"
+msgstr "Alarme de Sensor"
 
 #: terrariumNotification.py:48
-#, fuzzy
-#| msgid "Step change"
-msgid "Button change"
-msgstr "Passo de mudança"
+msgid "Relay change"
+msgstr "Alteração de relé"
 
 #: terrariumNotification.py:50
-#, fuzzy
-#| msgid "Select archiving"
-msgid "Webcam archive"
-msgstr "Selecione arquivamento"
+msgid "Button change"
+msgstr "Alteração em botão"
 
-#: terrariumNotification.py:172
+#: terrariumNotification.py:52
+msgid "Webcam archive"
+msgstr "Arquivo da webcam"
+
+#: terrariumNotification.py:175
 msgid "Display"
 msgstr "Exibição"
 
-#: terrariumNotification.py:176
+#: terrariumNotification.py:179
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:186
+#: terrariumNotification.py:189
 msgid "Traffic light"
 msgstr "Luz de semáforo"
 
-#: terrariumNotification.py:190
+#: terrariumNotification.py:193
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:194
+#: terrariumNotification.py:197
 msgid "MQTT"
-msgstr ""
+msgstr "MQTT"
 
-#: terrariumNotification.py:198
+#: terrariumNotification.py:201
 msgid "Pushover"
 msgstr "Pushover"
 
@@ -276,7 +264,7 @@ msgid "Size"
 msgstr "Tamanho"
 
 #: views/audio_files.html:28 views/audio_files.html:39
-#: views/modals/area.html:803 views/playlists.html:31 views/playlists.html:46
+#: views/modals/area.html:815 views/playlists.html:31 views/playlists.html:46
 msgid "Action"
 msgstr "Ação"
 
@@ -435,7 +423,7 @@ msgstr "Adicionar novo Anexo"
 
 #: views/enclosures.html:168
 msgid "Areas"
-msgstr "Áreas"
+msgstr "Equipamentos"
 
 #: views/enclosures.html:173 views/modals/area.html:31
 #: views/modals/sensor.html:32 views/modals/service.html:18
@@ -477,7 +465,7 @@ msgstr "Ver todos os eventos"
 
 #: views/includes/navigation.html:31
 msgid "All doors status"
-msgstr "Status de todas as portas"
+msgstr "Estado de todas as portas"
 
 #: views/includes/navigation.html:34
 msgid "All doors are closed"
@@ -583,7 +571,7 @@ msgstr "Novo Anexo"
 
 #: views/includes/sidebar.html:235
 msgid "New area"
-msgstr "Nova área"
+msgstr "Novo equipamento"
 
 #: views/includes/sidebar.html:244 views/settings.html:16
 msgid "System"
@@ -639,7 +627,7 @@ msgstr "avisos"
 
 #: views/modals/area.html:11
 msgid "Area settings"
-msgstr "﻿Configurações de Área"
+msgstr "﻿Configurações de Equipamento"
 
 #: views/modals/area.html:17
 msgid "Enclosure"
@@ -647,11 +635,12 @@ msgstr "Anexo"
 
 #: views/modals/area.html:23
 msgid "Select the enclosure where this area belongs to."
-msgstr "Selecione o anexo ao qual esta área pertence."
+msgstr "Selecione o Anexo aonde o Equipamento está instalado."
 
 #: views/modals/area.html:37
 msgid "Select the type of area. Each type has its own extra options and logic."
-msgstr "Selecione o tipo de área. Cada tipo tem opções e lógicas diferentes."
+msgstr ""
+"Selecione o tipo de equipamento. Cada tipo tem opções e lógicas diferentes."
 
 #: views/modals/area.html:40 views/modals/area.html:82
 msgid "ERROR"
@@ -698,7 +687,8 @@ msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the relays."
 msgstr ""
-"Selecione o modo desta área. Esta opção altera o tempo e a duração dos relés."
+"Selecione o modo deste equipamento. Esta opção altera o tempo e a duração "
+"dos relés."
 
 #: views/modals/area.html:76
 msgid "Minimum hours"
@@ -750,13 +740,13 @@ msgstr "Insira um número entre -12 e 12."
 msgid "Main lights"
 msgstr "Luzes principais"
 
-#: views/modals/area.html:118 views/modals/message.html:52
+#: views/modals/area.html:118
 msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
 msgstr ""
 "Habilite para indicar que esta é a luz principal deste anexo. Este ajuste é "
-"usado para verificar as luzes das outras áreas."
+"usado para verificar as luzes dos outros equipamentos."
 
 #: views/modals/area.html:126 views/modals/area.html:273
 msgid ""
@@ -790,8 +780,7 @@ msgstr "A hora do dia em que os relés são ligados a cada dia."
 #: views/modals/area.html:301 views/modals/area.html:359
 #: views/modals/area.html:371 views/modals/area.html:532
 #: views/modals/area.html:544 views/modals/area.html:661
-#: views/modals/area.html:673 views/modals/area.html:881
-#: views/modals/area.html:890
+#: views/modals/area.html:673 views/modals/area.html:912
 msgid "Enter a valid time."
 msgstr "Digite uma hora válida."
 
@@ -836,8 +825,8 @@ msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the players."
 msgstr ""
-"Selecione o modo desta área. Esta opção altera o tempo e a duração da "
-"reprodução."
+"Selecione o modo deste equipamento. Esta opção altera o tempo e a duração "
+"dos players."
 
 #: views/modals/area.html:257
 msgid "Sound card"
@@ -851,7 +840,7 @@ msgstr "Selecione a placa de som usada neste anexo."
 #: views/modals/area.html:383 views/modals/area.html:395
 #: views/modals/area.html:556 views/modals/area.html:568
 #: views/modals/area.html:685 views/modals/area.html:697
-#: views/modals/area.html:898
+#: views/modals/area.html:920
 msgid "Enter a valid duration in minutes."
 msgstr "Insira o período em minutos."
 
@@ -902,7 +891,8 @@ msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the actions."
 msgstr ""
-"Selecione o modo desta área. Esta opção altera o tempo e a duração das ações."
+"Selecione o modo deste equipamento. Esta opção altera o tempo e a duração "
+"das ações."
 
 #: views/modals/area.html:444
 msgid "Select sensors to use for sensor based mode."
@@ -940,7 +930,8 @@ msgstr "Altura"
 msgid "Enter the height of the water tank."
 msgstr "Insira altura do tanque d'água."
 
-#: views/modals/area.html:477 views/modals/sensor.html:159
+#: views/modals/area.html:477 views/modals/area.html:805
+#: views/modals/sensor.html:159
 msgid "Offset"
 msgstr "Compensação"
 
@@ -977,10 +968,8 @@ msgid "High alarm"
 msgstr "Alarme quando alto"
 
 #: views/modals/area.html:518
-#, fuzzy
-#| msgid "Duration"
 msgid "Variation"
-msgstr "Duração"
+msgstr "Variação"
 
 #: views/modals/area.html:553 views/modals/area.html:682
 msgid ""
@@ -992,7 +981,7 @@ msgstr ""
 
 #: views/modals/area.html:574 views/modals/area.html:703
 msgid "Power on time"
-msgstr "Hora de ligar"
+msgstr "Tempo ligado"
 
 #: views/modals/area.html:577 views/modals/area.html:706
 msgid "The duration in seconds to toggle on the relay."
@@ -1013,13 +1002,13 @@ msgstr "A duração em segundos entre duas ações."
 
 #: views/modals/area.html:598 views/modals/area.html:727
 msgid "Light status"
-msgstr "Estado de luz"
+msgstr "Estado da luz"
 
 #: views/modals/area.html:600 views/modals/area.html:613
 #: views/modals/area.html:729 views/modals/area.html:742
 #: views/modals/webcam.html:143 views/modals/webcam.html:158
 msgid "Ignored"
-msgstr "Ignorado"
+msgstr "Ignorar estado"
 
 #: views/modals/area.html:601 views/modals/area.html:730
 msgid "On"
@@ -1031,11 +1020,11 @@ msgstr "Desl"
 
 #: views/modals/area.html:605
 msgid "Select the lights status."
-msgstr "Selecione o estado da luz."
+msgstr "Selecione o estado da luz para disparar a ação."
 
 #: views/modals/area.html:611 views/modals/area.html:740
 msgid "Door status"
-msgstr "Status da porta"
+msgstr "Estado da porta"
 
 #: views/modals/area.html:614 views/modals/area.html:743
 #: views/modals/webcam.html:160
@@ -1048,7 +1037,7 @@ msgstr "Fechada"
 
 #: views/modals/area.html:618 views/modals/area.html:747
 msgid "Select the door status."
-msgstr "Selecione o estado da porta."
+msgstr "Selecione o estado da porta para disparar a ação."
 
 #: views/modals/area.html:624 views/modals/area.html:754
 msgid "Alarm threshold"
@@ -1060,75 +1049,115 @@ msgstr "Insira a quantidade de alarmes necessários para iniciar a ação."
 
 #: views/modals/area.html:734
 msgid "Select the light status."
-msgstr "Selecione o estado da luz."
+msgstr "Selecione o estado da luz para disparar a ação."
 
-#: views/modals/area.html:785
-#, fuzzy
-#| msgid "When on"
-msgid "When"
-msgstr "Quando ligado"
-
-#: views/modals/area.html:791
-#, fuzzy
-#| msgid "Timer on duration"
-msgid "Period/duration"
-msgstr "Duração do Temporizador ligado"
-
-#: views/modals/area.html:797
-#, fuzzy
-#| msgid "values"
-msgid "Value"
-msgstr "valores"
-
-#: views/modals/area.html:826
-msgid "After x minutes change to value or at exactly a time stamp."
+#: views/modals/area.html:783
+msgid ""
+"Here you can enter periods where the sensors will change their values "
+"according to the list below. Make sure the periods are in chronological "
+"order!"
 msgstr ""
 
-#: views/modals/area.html:834
+#: views/modals/area.html:790
 #, fuzzy
-#| msgid "Enter a valid duration in minutes."
-msgid "Enter a duration in minutes or the actual time of the day."
-msgstr "Insira o período em minutos."
+#| msgid "Source url"
+msgid "Source"
+msgstr "URL de origem"
 
-#: views/modals/area.html:842
+#: views/modals/area.html:795
+msgid "Period/duration"
+msgstr "Período/Duração"
+
+#: views/modals/area.html:800
+#, fuzzy
+#| msgid "External calendar url"
+msgid "External source url"
+msgstr "URL externo da agenda"
+
+#: views/modals/area.html:810
+msgid "Value"
+msgstr "Valor"
+
+#: views/modals/area.html:830
+msgid "After x minutes change to value or at exactly a time stamp."
+msgstr "Após X minutos alterar o valor ou no tempo determinado."
+
+#: views/modals/area.html:837
+msgid ""
+"Enter a full url to the external source according to the Remote data feature."
+msgstr ""
+
+#: views/modals/area.html:844
+#, fuzzy
+#| msgid "Enter a name for this area."
+msgid "Enter a negative or positive offset value."
+msgstr "Digite um nome para este Equipamento."
+
+#: views/modals/area.html:851
+msgid "Enter a duration in minutes or the actual time of the day."
+msgstr "Insira o período em minutos ou o horário determinado do dia."
+
+#: views/modals/area.html:858
 msgid ""
 "Enter a negative or positive value for a relative action. A number is "
 "treated as an absolute value."
 msgstr ""
+"Inserir um valor positivo ou negativo em relação à ação a ser executada. O "
+"número é tratado como o valor absoluto de um número real."
 
-#: views/modals/area.html:851
-#, fuzzy
-#| msgid "Add new area"
+#: views/modals/area.html:865
 msgid "Add a new row"
-msgstr "Adicionar nova área"
+msgstr "Adicionar nova linha"
 
-#: views/modals/area.html:860
-#, fuzzy
-#| msgid "Remote"
+#: views/modals/area.html:872
 msgid "Remove row"
-msgstr "Remoto"
+msgstr "Remover linha"
 
-#: views/modals/area.html:876
-#, fuzzy
-#| msgid "5 minutes"
+#: views/modals/area.html:882
 msgid "After x minutes"
-msgstr "5 minutos"
+msgstr "Após x minutos"
 
-#: views/modals/area.html:877
-#, fuzzy
-#| msgid "Up time"
+#: views/modals/area.html:883
 msgid "At time"
-msgstr "Tempo em atividade"
+msgstr "Neste momento"
 
-#: views/modals/area.html:929
+#: views/modals/area.html:884
+msgid "Using current weather"
+msgstr ""
+
+#: views/modals/area.html:885
+#, fuzzy
+#| msgid "Remote source"
+msgid "Use external source"
+msgstr "Fonte remota"
+
+#: views/modals/area.html:888
+#, fuzzy
+#| msgid "Select a rotation."
+msgid "Select a valid option."
+msgstr "Selecionar a rotação."
+
+#: views/modals/area.html:896
+#, fuzzy
+#| msgid "Enter a valid time."
+msgid "Enter a valid url."
+msgstr "Digite uma hora válida."
+
+#: views/modals/area.html:904
+#, fuzzy
+#| msgid "Offset"
+msgid "Offset."
+msgstr "Compensação"
+
+#: views/modals/area.html:942
 msgid "Dimmer on duration"
 msgstr "Duração do Dimmer"
 
-#: views/modals/area.html:933
+#: views/modals/area.html:946
 msgid "Dimmer of duration"
 msgstr "Duração do Dimmer"
 
-#: views/modals/area.html:943
+#: views/modals/area.html:956
 msgid ""
 "Select the delay and duration for the dimmer to go to on or off in minutes. "
 "Max duration is 180 minutes."
@@ -1136,15 +1165,15 @@ msgstr ""
 "Selecione o atraso e a quantidade de minutos para ligar e desligar o dimmer. "
 "Duração máxima de 180 minutos."
 
-#: views/modals/area.html:950
+#: views/modals/area.html:963
 msgid "Relay delay on"
 msgstr "Atraso sobre o relé"
 
-#: views/modals/area.html:954
+#: views/modals/area.html:967
 msgid "Relay delay off"
 msgstr "Atraso sobre o relé desligado"
 
-#: views/modals/area.html:962
+#: views/modals/area.html:975
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
@@ -1316,19 +1345,23 @@ msgstr "Assunto"
 msgid "Rate limit"
 msgstr "Limite de taxa"
 
-#: views/modals/message.html:47 views/modals/service.html:48
+#: views/modals/message.html:46 views/modals/service.html:48
 msgid "Enabled"
 msgstr "Ativado"
 
-#: views/modals/message.html:63
+#: views/modals/message.html:51
+msgid "Enable/disable this service."
+msgstr ""
+
+#: views/modals/message.html:59
 msgid "Message"
 msgstr "Mensagem"
 
-#: views/modals/message.html:71
+#: views/modals/message.html:65
 msgid "Place holders"
 msgstr "Espaços reservados"
 
-#: views/modals/message.html:84
+#: views/modals/message.html:74
 msgid "Services"
 msgstr "Serviços"
 
@@ -1606,32 +1639,24 @@ msgid "Full post url"
 msgstr "URL da postagem completa"
 
 #: views/modals/service.html:241
-#, fuzzy
-#| msgid "SMTP Server address"
 msgid "MQTT Server address"
-msgstr "Endereço do servidor SMTP"
+msgstr "Endereço do servidor MQTT"
 
 #: views/modals/service.html:248
-#, fuzzy
-#| msgid "SMTP Server port"
 msgid "MQTT Server port"
-msgstr "Porta do servidor SMTP"
+msgstr "Porta do servidor MQTT"
 
 #: views/modals/service.html:258
 msgid "MQTT secure connection"
-msgstr ""
+msgstr "Conexão segura com MQTT"
 
 #: views/modals/service.html:267
-#, fuzzy
-#| msgid "SMTP Server username"
 msgid "MQTT Server username"
-msgstr "Nome de usuário no Servidor SMTP"
+msgstr "Nome de usuário no Servidor MQTT"
 
 #: views/modals/service.html:274
-#, fuzzy
-#| msgid "SMTP Server password"
 msgid "MQTT Server password"
-msgstr "Senha no Servidor SMTP"
+msgstr "Senha no Servidor MQTT"
 
 #: views/modals/weather.html:11
 msgid "Weather settings"
@@ -2311,7 +2336,7 @@ msgstr "Ação concluída"
 
 #: views/enclosures.html:140
 msgid "Add area"
-msgstr "Adicionar área"
+msgstr "Adicionar Equipamento"
 
 #: views/layouts/modal.html:88
 msgid "added"
@@ -2319,7 +2344,7 @@ msgstr "adicionado"
 
 #: views/includes/sidebar.html:233
 msgid "Add new area"
-msgstr "Adicionar nova área"
+msgstr "Adicionar novo equipamento"
 
 #: views/notifications.html:60
 msgid "Add new message"
@@ -2375,13 +2400,13 @@ msgstr "Atividade Atual"
 msgid "Current value"
 msgstr "Valor atual"
 
-#: views/modals/area.html:1027 views/modals/area.html:1029
+#: views/modals/area.html:1040 views/modals/area.html:1042
 msgid "Delay"
 msgstr "Atraso"
 
 #: views/enclosures.html:120
 msgid "Delete area"
-msgstr "Excluir área"
+msgstr "Excluir Equipamento"
 
 #: views/audio_files.html:86
 msgid "Delete audio file"
@@ -2425,7 +2450,7 @@ msgstr "Porcentagem de compensação do dimmer"
 
 #: views/enclosures.html:117
 msgid "Edit area"
-msgstr "Editar área"
+msgstr "Editar Equipamento"
 
 #: views/buttons.html:57
 msgid "Edit button"
@@ -2459,13 +2484,15 @@ msgstr "Editar webcam"
 msgid "Enter a description"
 msgstr "Insira a descrição"
 
-#: views/modals/area.html:887
-#, fuzzy
-#| msgid "Enter a valid duration in minutes."
+#: views/modals/area.html:910
 msgid "Enter a duration in minutes or time"
-msgstr "Insira o período em minutos."
+msgstr "Insira o período em minutos"
 
-#: views/modals/message.html:64
+#: views/modals/area.html:894
+msgid "Enter a full url"
+msgstr ""
+
+#: views/modals/message.html:60
 msgid "Enter a message"
 msgstr "Insira a mensagem"
 
@@ -2484,7 +2511,7 @@ msgstr "Insira o nome"
 
 #: views/modals/area.html:47
 msgid "Enter a name for this area."
-msgstr "Digite um nome para esta área."
+msgstr "Digite um nome para este Equipamento."
 
 #: views/modals/service.html:93
 msgid "Enter an email address"
@@ -2555,32 +2582,24 @@ msgid "Enter the minimum amount of hours"
 msgstr "Digite a quantidade mínima de horas"
 
 #: views/modals/service.html:242 views/modals/service.html:260
-#, fuzzy
-#| msgid "Enter the SMTP server address name or ip"
 msgid "Enter the MQTT server address name or ip"
-msgstr "Insira o endereço do servidor SMTP ou IP"
+msgstr "Insira o endereço do servidor MQTT ou seu IP"
 
 #: views/modals/service.html:249
-#, fuzzy
-#| msgid "Enter the SMTP server port number"
 msgid "Enter the MQTT server port number"
-msgstr "Insira a porta do servidor SMTP"
+msgstr "Insira a porta do servidor MQTT"
 
 #: views/modals/area.html:478
 msgid "Enter the offset"
 msgstr "Digite a compensação"
 
 #: views/modals/service.html:129
-#, fuzzy
-#| msgid "Enter the SMTP server username"
 msgid "Enter the Pushover API token"
-msgstr "Insira o nome de usuário no servidor SMTP"
+msgstr "Insira o token de API do Pushover"
 
 #: views/modals/service.html:135
-#, fuzzy
-#| msgid "Enter the SMTP server username"
 msgid "Enter the Pushover user key"
-msgstr "Insira o nome de usuário no servidor SMTP"
+msgstr "Insira a chave de usuário (user key) do Pushover"
 
 #: views/modals/service.html:99
 msgid "Enter the SMTP server address name or ip"
@@ -2630,7 +2649,8 @@ msgstr "Exportar relé"
 msgid "Export sensor"
 msgstr "Exportar sensor"
 
-#: views/layouts/modal.html:64 views/settings.html:404
+#: views/layouts/modal.html:64 views/modals/area.html:1524
+#: views/settings.html:404
 msgid "Form error"
 msgstr "Erro no Formulário"
 
@@ -2650,6 +2670,10 @@ msgstr "Ignorar sensor"
 msgid "Ignore webcam"
 msgstr "Ignorar webcam"
 
+#: views/modals/area.html:1524
+msgid "Invalid timestamp in variation settings."
+msgstr ""
+
 #: views/relays.html:71
 msgid "Manual mode relay"
 msgstr "Modo de relé manual"
@@ -2666,7 +2690,7 @@ msgstr "Consumo máximo em porcentagem"
 msgid "Messages per minute"
 msgstr "Mensagens por minuto"
 
-#: views/modals/area.html:1027 views/modals/area.html:1029
+#: views/modals/area.html:1040 views/modals/area.html:1042
 msgid "minutes"
 msgstr "minutos"
 
@@ -2708,7 +2732,7 @@ msgstr "Erro ao salvar"
 
 #: views/layouts/modal.html:89
 msgid "Save OK"
-msgstr "Salvado corretamente"
+msgstr "Salvo com sucesso"
 
 #: views/includes/sidebar.html:129
 msgid "Scan for new relays"
@@ -2733,7 +2757,7 @@ msgstr "Selecione a quantidade"
 
 #: views/modals/area.html:33
 msgid "Select an area type"
-msgstr "Selecione um tipo de área"
+msgstr "Selecione o tipo de Equipamento"
 
 #: views/modals/area.html:19
 msgid "Select an enclosure"
@@ -2835,7 +2859,7 @@ msgstr "Mostrar caixas de movimento"
 msgid "Shutdown TerrariumPI"
 msgstr "Desligar TerrariumPI"
 
-#: terrariumNotification.py:181
+#: terrariumNotification.py:184
 msgid "Telegram"
 msgstr "Telegram"
 
@@ -2898,6 +2922,9 @@ msgstr "Gasto em watts quando ligado"
 #: views/modals/weather.html:18
 msgid "Weather data source url"
 msgstr "Url da fonte de dados meteorológicos"
+
+#~ msgid "When"
+#~ msgstr "Quando"
 
 #~ msgid "Twitter"
 #~ msgstr "Twitter"
@@ -4810,9 +4837,6 @@ msgstr "Url da fonte de dados meteorológicos"
 #~ msgid "V4L"
 #~ msgstr "V4L"
 
-#~ msgid "Remote source"
-#~ msgstr "Fonte remota"
-
 #~ msgid "TerrariumPI %s"
 #~ msgstr "TerrariumPI %s"
 
@@ -5299,9 +5323,6 @@ msgstr "Url da fonte de dados meteorológicos"
 #~ msgstr ""
 #~ "Adicione arquivos de áudio e listas de reprodução. Ou você tem um "
 #~ "interruptor pwm-dimmer configurado."
-
-#~ msgid "External calendar url"
-#~ msgstr "URL externo da agenda"
 
 #~ msgid ""
 #~ "File is to big. Filesize {{filesize}} is more then max {{maxFilesize}}"

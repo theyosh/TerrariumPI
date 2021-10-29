@@ -10,7 +10,7 @@ image:
 
 ## Login
 ![New relay form](/assets/img/Login.webp){: style="max-height: 100px" .right}
-After the installation, you need to setup TerrariumPI. In order to do that, login with a browser at http://[raspberry_pi]:8090 and click on the `Login` link on the left side menu. The default login should be **admin** / **password** ([FAQ]({{ 'faq/login/' | relative_url}}))
+After the installation, you need to setup TerrariumPI. In order to do that, login with a browser at http://[raspberry_pi]:8090 and click on the `Login` link on the left side menu. The default login should be **admin** / **password** ([FAQ]({% link _faq/login.md %}))
 
 ## Help
 On every form popup you have a small question mark <i class="far fa-question-circle" aria-hidden="true"></i> next to the form title. Click on it to get more information about the form fields.
@@ -46,7 +46,7 @@ User name
 :  Enter the user name for authentication. Default admin
 
 New password
-:  Enter a new password for authentication. [Encrypted]({{ 'features/' | relative_url}}#admin-password)
+:  Enter a new password for authentication. [Encrypted]({% link _tabs/features.md %}#admin-password)
 
 Confirm new password
 : Confirm the new password for authentication.
@@ -111,10 +111,10 @@ In the cloud group you can enter credentials for different cloud integrations
 With the Meross cloud you can use all the relays and sensors that are connected to your account.
 
 Meross username
-: The username to login to your Meross cloud account. [Encrypted]({{ 'features/' | relative_url}}#other-sensitive-data)
+: The username to login to your Meross cloud account. [Encrypted]({% link _tabs/features.md %}#other-sensitive-data)
 
 Meross password
-: The password to login to your Meross cloud account. [Encrypted]({{ 'features/' | relative_url}}#other-sensitive-data)
+: The password to login to your Meross cloud account. [Encrypted]({% link _tabs/features.md %}#other-sensitive-data)
 
 ## Weather
 ![Weather source form](/assets/img/Weather_Settings.webp)
@@ -132,12 +132,13 @@ The url format needs to be `https://api.openweathermap.org/data/2.5/weather?q=[C
 ## Relays
 ![Relay form](/assets/img/Add_Relay_Form.webp)
 _Popup form for adding and updating relays - Calibration is only available for dimmers_
+Adding and changing relays is done with the above relay form.
 
 Hardware
-: The hardware type of the relay
+: The hardware type of the relay. [A full list of supported relays]({% link _tabs/hardware.md %}#relays)
 
 Address
-: Enter the address of the relay. This is specific for each [relay]({{ 'hardware/' | relative_url }}#relays).
+: Enter the address of the relay. This is specific for each [relay]({% link _tabs/hardware.md %}#relays).
 
 Name
 : The name of the relay. Use an easy to remember name.
@@ -168,13 +169,13 @@ _Popup form adding/updating the sensors_
 Adding and changing sensors is done with the above sensor form.
 
 Hardware
-: The hardware type of the sensor
+: The hardware type of the sensor. [A full list of supported sensors]({% link _tabs/hardware.md %}#sensors)
 
 Type
 : Select what kind of sensor it is.
 
 Address
-: Enter the address of the sensor. This is specific for each [sensor]({{ 'hardware/' | relative_url }}#sensors).
+: Enter the address of the sensor. This is specific for each [sensor]({% link _tabs/hardware.md %}#sensors).
 
 Name
 : The name of the sensor. Use an easy to remember name.
@@ -201,11 +202,31 @@ Exclude average
 Offset
 : Enter a value to correct the output reading. This can be a positive or negative value.
 
+
 ## Doors / buttons
 ![Button form](/assets/img/Button_Settings.webp)
 _Popup form for adding and updating buttons - Calibration is only available for light sensors_
+Adding and changing buttons is done with the above button form.
+
+Hardware
+: The hardware type of the button. [A full list of supported buttons]({% link _tabs/hardware.md %}#buttons)
+
+Address
+: Enter the address of the button. This is specific for each [button]({% link _tabs/hardware.md %}#buttons).
+
+Name
+: The name of the button. Use an easy to remember name.
+
+Current
+: The current state of the button. Value 1 is active, value 0 is not active
 
 ### Calibration
+This is only available for light sensors.
+
+Capacitor value in µF
+: Enter the value of the capacitor
+
+
 
 ## Webcams
 ![Webcam form](/assets/img/Webcam_Settings.webp)

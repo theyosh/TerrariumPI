@@ -2,7 +2,6 @@
 title: Custom logging
 categories: [Website, FAQ]
 tags: [logging]
-permalink: /faq/:title/
 ---
 
 By default all logging is done in the folder log where the actual log files are written to a temporary memory share. This is done to reduce the write wear on the SD card. A downside is that when the Pi reboots, all log info of that day is gone. During the night, the log file will be archived and that is stored on the SD card. So archived log files will survive reboots.

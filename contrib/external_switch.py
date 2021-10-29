@@ -13,7 +13,7 @@ DEBUG = True
 # Return -1.0 when not supported.
 if len(sys.argv) == 1:
   # Call your code here....
-  # By default no readout supported
+  # In this demo no read out option, return default value of -1.0
   print('-1.0')
 
 else:

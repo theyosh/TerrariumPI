@@ -76,7 +76,7 @@ cd TerrariumPI
 sudo ./install.sh
 ```
 
-After the installation is done, reboot once and you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({{ 'setup' | relative_url}})
+After the installation is done, reboot once and you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
 # Migration from V3 to V4
 

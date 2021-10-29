@@ -2,10 +2,10 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from . import terrariumWeatherAbstract, terrariumWeatherException
+from . import terrariumWeatherAbstract
 from terrariumUtils import terrariumUtils
 
-from datetime import datetime, date
+from datetime import date
 import copy
 
 class terrariumOpenweathermap(terrariumWeatherAbstract):
@@ -93,7 +93,6 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
             tempdata.append(tempday)
 
         # Put of the forecast data in one list indexed on the forecast timestamps
-
         for forecast  in tempdata:
           temperature = forecast['temp'] if terrariumUtils.is_float(forecast['temp']) else forecast['temp']['day']
 
@@ -105,21 +104,15 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
                                                                   'direction' : forecast['wind_deg']},
                                                     'weather'  : forecast['weather'][0]['description']}
 
-          # TODO: Make a sorting based on the timestamps??
+      self._data['days'][0]['temp']     = data['current']['temp']
+      self._data['days'][0]['humidity'] = data['current']['humidity']
+      self._data['days'][0]['weather']  = data['current']['weather'][0]['description']
 
-
-      self._data['days'][0]['temp'] = data['current']['temp']
-      self._data['days'][0]['weather'] = data['current']['weather'][0]['description']
-
-#      print(self._data['forecast'])
       for timestamp in sorted(self._data['forecast'].keys()):
         for day in self._data['days']:
           if date.fromtimestamp(int(timestamp)) == date.fromtimestamp(int(day['dt'])):
             self._data['forecast'][timestamp]['rise'] = day['rise']
             self._data['forecast'][timestamp]['set'] = day['set']
-
-#        print('{} -> {}, {}'.format(datetime.fromtimestamp(int(timestamp)), datetime.fromtimestamp(self._data['forecast'][timestamp]['rise']), datetime.fromtimestamp(self._data['forecast'][timestamp]['set'])))
-
 
       return True
 

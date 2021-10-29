@@ -5,7 +5,7 @@ order: 10
 
 image:
   src: /assets/img/FAQ.webp
-  alt: FAQ header image
+  alt: "FAQ header image"
 ---
 Here you can find the most frequently asked question.
 
@@ -15,20 +15,17 @@ Here you can find the most frequently asked question.
   <li>
     <input id="faq{{ forloop.index }}" type="checkbox" />
     <label for="faq{{ forloop.index }}"><h2>{{ faq.title }}</h2></label>
-    <div class="faq_content">{{ faq.content | markdownify  }}</div>
+    <div class="faq_content">{{ faq.content | liquify | markdownify }}</div>
   </li>
 {% endfor %}
 </ul>
-
-
 <script>
-jQuery(document).ready(function() {
+jQuery(function() {
   setTimeout(function(){
-    let faq = $(location).attr('hash').slice(1);
-    console.log('FAQ',faq);
+    let faq = jQuery(location).attr('hash').slice(1);
     if ('' != faq) {
       jQuery('#' + faq).parent().click();
     }
-  },700)
+  },500);
 })
 </script>

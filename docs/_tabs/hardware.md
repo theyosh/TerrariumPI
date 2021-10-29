@@ -7,13 +7,12 @@ image:
   src: /assets/img/Hardware.webp
   alt: Hardware header image
 ---
-
 ## GPIO
 ![Raspberry PI GPIO pins layout](/assets/img/GPIO-Pinout-Diagram.webp){: style="max-width: 200px" .right}
 All the hardware that is connected through GPIO pins needs to use the **physical pin number** as address. This means a number from 1 - 40.
 
 ### Power saving
-Some GPIO sensors can benefit from using power saving. A good example is the analog/digital moisture sensor YTXX - TODO: Make link to actual sensor
+Some GPIO sensors can benefit from using power saving. A good example is the analog/digital moisture sensor [YTXX]({% link _hardware/ytxx-digital_sensor.md %})
 
 Power management works that you connect the red (power) wire of the sensor to a GPIO pin, which will be put to high so that the sensor get powered. After 0.25 sec a measurement is taken, and afterwards the power to the sensor is shutdown.
 
@@ -47,27 +46,38 @@ Run the command `i2cdetect -y 1` in order to see what is connected to your I2C b
 
 {% assign relays = site.hardware | where_exp: "hardware", "hardware.tags contains 'relay'" | sort_natural: "title" %}
 ## Relays
-We currently support <strong>{{ relays | size}}</strong> types of relays. Relays which has a dial icon ![Dimmer icon](/assets/img/dimmer_icon.png){: style="height: 20px" .normal} after their name are dimmers.
+We currently support <strong>{{ relays | size}}</strong> types of relays. Relays which has a dial icon ![Dimmer icon](/assets/img/dimmer_icon.png){: style="height: 20px" .normal .is_dimmer} after their name are dimmers.
 
 {% for relay in relays %}
   <h3>
     <a href="{{ relay.url | relative_url }}">{{ relay.title }}</a>
   {% if relay.tags contains 'dimmer' %}
-    <img src="../assets/img/dimmer_icon.png" title="Relay is a dimmer" alt="Relay is a dimmer" style="height: 20px" class="ml-xl-3">
+    <img src="../assets/img/dimmer_icon.png" title="Relay is a dimmer" alt="Relay is a dimmer" style="height: 20px" class="ml-xl-3 is_dimmer">
   {% endif %}
   </h3>
 {% endfor %}
 
-
 {% assign sensors = site.hardware | where_exp: "hardware", "hardware.tags contains 'sensor'" | sort_natural: "title" %}
+{% assign measurements = sensors | map: "device_types" | join: "," | split: "," | uniq | sort_natural | join: "`, `"  %}
 ## Sensors
-We currently support <strong>{{ sensors | size}}</strong> types of sensors:
+We currently support <strong>{{ sensors | size}}</strong> hardware types of sensors, measuring `{{ measurements }}`:
 <br />
 
 {% for sensor in sensors %}
 {% assign types = sensor.device_types | sort_natural | join: ", " %}
-  <h3>
+  <h3 style="margin-bottom: 0px">
     <a href="{{ sensor.url | relative_url }}">{{ sensor.title }}</a>
-    <small class="ml-xl-3"> {{ types }}</small>
+  </h3>
+  {{ types }}
+
+{% endfor %}
+
+{% assign buttons = site.hardware | where_exp: "hardware", "hardware.tags contains 'button'" | sort_natural: "title" %}
+## Buttons
+We currently support <strong>{{ buttons | size}}</strong> types of buttons.
+
+{% for button in buttons %}
+  <h3>
+    <a href="{{ button.url | relative_url }}">{{ button.title }}</a>
   </h3>
 {% endfor %}

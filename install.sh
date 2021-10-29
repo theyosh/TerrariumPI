@@ -68,9 +68,6 @@ esac
 debconf-apt-progress -- apt-get -y autoremove
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-
-#NOT_NEEDED="libftdi1-dev build-essential subversion libfreetype6-dev libjpeg-dev libasound2-dev libffi-dev libglib2.0-dev rng-tools libcblas3 libatlas3-base libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev libgpiod2"
-
 debconf-apt-progress -- apt-get -y install $APT_PACKAGES
 
 # Set the timezone
@@ -221,7 +218,7 @@ Install required software
 Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${MODULE_NAME} (attempt ${ATTEMPT}) ...
 XXX
 EOF
-    pip install --upgrade ${PIP_MODULE}
+    pip install --upgrade ${PIP_MODULE} 2> /dev/null
     # > /dev/null 2>/dev/null
 
     if [ $? -eq 0 ]; then
@@ -252,6 +249,7 @@ EOF
 cd "${BASEDIR}/"
 chown ${SCRIPT_USER}. .
 chown ${SCRIPT_USER}. * -Rf
+sync
 
 
 PROGRESS=$((PROGRESS + 1))

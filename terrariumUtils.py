@@ -171,31 +171,47 @@ class terrariumUtils():
     return float(value) / 4.54609
 
   @staticmethod
-  def to_ms(value):
-    return float(value) * 0.27777777777778
+  def to_kmh(value):
+    return float(value) * 3.6
+
+  @staticmethod
+  def to_mph(value):
+    return float(value) * 2.236936
+
+  @staticmethod
+  def to_fs(value):
+    return float(value) * 3.2808399
 
   @staticmethod
   def to_beaufort(value):
-    return math.ceil(math.pow(math.pow(terrariumUtils.to_ms(value),2), float(1)/3))
+    return math.ceil(math.pow(math.pow(value,2), float(1)/3))
 
-  # @staticmethod
-  # def conver_to_value(current,indicator):
-  #   if not terrariumUtils.is_float(current):
-  #     return None
+  @staticmethod
+  def conver_to_value(current, indicator):
+    if not terrariumUtils.is_float(current):
+      return None
 
-  #   indicator = indicator.lower()
-  #   if 'f' == indicator:
-  #     current = terrariumUtils.to_fahrenheit(current)
-  #   elif 'k' == indicator:
-  #     current = terrariumUtils.to_kelvin(current)
-  #   elif 'inch' == indicator:
-  #     current = terrariumUtils.to_inches(current)
-  #   elif 'usgall' == indicator:
-  #     current = terrariumUtils.to_us_gallons(current)
-  #   elif 'ukgall' == indicator:
-  #     current = terrariumUtils.to_uk_gallons(current)
+    indicator = indicator.lower()
+    if 'f' == indicator:
+      current = terrariumUtils.to_fahrenheit(current)
+    elif 'k' == indicator:
+      current = terrariumUtils.to_kelvin(current)
+    elif 'km/h' == indicator:
+      current = terrariumUtils.to_kmh(current)
+    elif 'm/h' == indicator:
+      current = terrariumUtils.to_mph(current)
+    elif 'f/s' == indicator:
+      current = terrariumUtils.to_fs(current)
+    elif 'bf' == indicator:
+      current = terrariumUtils.to_beaufort(current)
+    elif 'inch' == indicator:
+      current = terrariumUtils.to_inches(current)
+    elif 'usgall' == indicator:
+      current = terrariumUtils.to_us_gallons(current)
+    elif 'ukgall' == indicator:
+      current = terrariumUtils.to_uk_gallons(current)
 
-  #   return float(current)
+    return float(current)
 
   # @staticmethod
   # def convert_from_to(current, indicator_from, indicator_to):
@@ -402,71 +418,6 @@ class terrariumUtils():
       logger.exception('Error parsing script data for script %s. Exception %s' % (script, ex))
 
     return data
-
-  # @staticmethod
-  # def calculate_time_table(start, stop, on_duration = None, off_duration = None):
-  #   timer_time_table = []
-
-  #   now = datetime.datetime.now()
-  #   starttime = start.split(':')
-  #   starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]), second=0)
-
-  #   stoptime = stop.split(':')
-  #   stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]),second=0)
-
-  #   if starttime == stoptime:
-  #     stoptime += datetime.timedelta(hours=24)
-
-  #   elif starttime > stoptime:
-  #     if now > stoptime:
-  #       stoptime += datetime.timedelta(hours=24)
-  #     else:
-  #       starttime -= datetime.timedelta(hours=24)
-
-  #   # Calculate next day when current day is done...
-  #   if now > stoptime:
-  #     starttime += datetime.timedelta(hours=24)
-  #     stoptime += datetime.timedelta(hours=24)
-
-  #   if (on_duration is None and off_duration is None) or (0 == on_duration and 0 == off_duration):
-  #     # Only start and stop time. No periods
-  #     timer_time_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
-  #   elif on_duration is not None and off_duration is None:
-
-  #     if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
-  #       on_duration = (stoptime - starttime).total_seconds() / 60
-  #     timer_time_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
-  #   else:
-  #     # Create time periods based on both duration between start and stop time
-  #     while starttime < stoptime:
-  #       if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
-  #         on_duration = (stoptime - starttime).total_seconds() / 60
-
-  #       timer_time_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
-  #       starttime += datetime.timedelta(minutes=on_duration + off_duration)
-
-  #   return timer_time_table
-
-  # @staticmethod
-  # def is_time(time_table):
-  #   now = int(datetime.datetime.now().strftime('%s'))
-  #   for time_schedule in time_table:
-  #     if time_schedule[0] <= now < time_schedule[1]:
-  #       return True
-
-  #     elif now < time_schedule[0]:
-  #       return False
-
-  #   #End of time_table. No data to decide for today
-  #   return None
-
-  # @staticmethod
-  # def duration(time_table):
-  #   duration = 0
-  #   for time_schedule in time_table:
-  #     duration += time_schedule[1] - time_schedule[0]
-
-  #   return duration
 
   @staticmethod
   # https://stackoverflow.com/a/19647596

@@ -2,7 +2,7 @@ from . import terrariumI2CSensor, terrariumI2CSensorMixin
 
 class terrariumSi7021Sensor(terrariumI2CSensor, terrariumI2CSensorMixin):
   HARDWARE = 'si7021'
-  TYPES    = ['temperature']
+  TYPES    = ['temperature','humidity']
   NAME     = 'SI7021 sensor'
 
   # Datasheet - https://www.silabs.com/documents/public/data-sheets/Si7021-A20.pdf

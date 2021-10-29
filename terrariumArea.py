@@ -5,6 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 from operator import itemgetter
 import copy
 import datetime
+import time
 
 import statistics
 import threading
@@ -18,7 +19,7 @@ from gevent import sleep
 from pony import orm
 from terrariumAudio import terrariumAudioPlayer
 from terrariumDatabase import Sensor, Playlist, Relay
-from terrariumUtils import terrariumUtils, classproperty
+from terrariumUtils import terrariumCache, terrariumUtils, classproperty
 
 class terrariumAreaException(TypeError):
   '''There is a problem with loading a hardware sensor.'''
@@ -284,7 +285,72 @@ class terrariumArea(object):
     if 'sensors' != self.mode:
       self._time_table()
 
+    # Setup variation data
+    if self.setup.get('variation'):
+      self._setup_variation_data()
+
     self.state['powered'] = self._powered
+
+  def _setup_variation_data(self):
+    self.state['variation'] = {
+        'active' : len(self.setup['sensors']) > 0,
+        'dynamic' : False,
+        'weather' : False,
+        'external' : False,
+        'script'   : False,
+        'offset' : float(0),
+        'source' : None,
+        'periods' : []
+      }
+
+    for varation in self.setup.get('variation',[]):
+      periods = len(self.state['variation']['periods'])
+
+      if 'at' == varation.get('when'):
+        # Format datetime object to a time object
+        period_timestamp = datetime.datetime.fromtimestamp(int(varation.get('period'))).strftime('%H:%M')
+
+      elif 'after' == varation.get('when'):
+        # !! UNTESTED !!
+        if periods == 0:
+          # We need main lights on starting time....
+          pass
+
+        else:
+          # We need the previous period start time and adding the 'after' period duration
+          period_timestamp = datetime.time.fromisoformat(self.state['variation']['periods'][periods-1]['start'])
+          period_timestamp = datetime.datetime.now().replace(hour=period_timestamp.hour, minute=period_timestamp.minute) + datetime.timeldeta(minute=int(varation.get('period')))
+          period_timestamp = period_timestamp.strftime('%H:%M')
+
+      else:
+        self.state['variation']['offset'] = float(varation.get('offset', 0.0))
+
+        if 'weather' == varation.get('when'):
+          self.state['variation']['weather'] = True
+
+        elif 'script' == varation.get('when'):
+          self.state['variation']['script'] = True
+          self.state['variation']['source'] = varation.get('source')
+
+        elif 'external' == varation.get('when'):
+          self.state['variation']['external'] = True
+          self.state['variation']['source'] = varation.get('source')
+          self.__external_cache = terrariumCache()
+
+        continue
+
+
+      if periods > 0:
+        # We have at least 1 item so we need to update the previous entry with the new end time and value
+        self.state['variation']['periods'][periods-1]['end']       = period_timestamp
+        self.state['variation']['periods'][periods-1]['end_value'] = str(varation.get('value'))
+
+      self.state['variation']['periods'].append({
+        'start'       : period_timestamp,
+        'end'         : '23:59',    # By default, we stop at the end of the day
+        'start_value' : str(varation.get('value')),
+        'end_value'   : str(varation.get('value')), # This will be overwritten by the next value to get a nice change during the period
+      })
 
   def _is_timer_time(self, period):
     if 'main_lights' == self.mode:
@@ -307,6 +373,106 @@ class terrariumArea(object):
       return False
 
     return None
+
+  def _update_variation(self):
+    # !! This variation updates will interfeare with the 'day/night difference' setting !!
+
+    if ('variation' not in self.state) or (not self.state['variation']['active']):
+      return
+
+    # Get the current time in minutes
+    now = datetime.datetime.now().time()
+    # Loop over the periods to find the current period
+    period = None
+
+    if self.state['variation']['weather'] or self.state['variation']['script'] or self.state['variation']['external']:
+      value = None
+      if self.state['variation']['weather']:
+        if self.type in ['heating','cooling']:
+          value = self.enclosure.weather.current_temperature + self.state['variation']['offset']
+        elif self.type in ['humidity']:
+          value = self.enclosure.weather.current_humidity + self.state['variation']['offset']
+
+      elif self.state['variation']['script']:
+        value = float(terrariumUtils.get_script_data(self.state['variation']['source'])) + self.state['variation']['offset']
+
+      elif self.state['variation']['external']:
+        # Here we get data from an external source. We cache this data for 10 minutes
+        cache_key = f'{self.id}_external'
+        value = self.__external_cache.get_data(cache_key)
+        if value is None:
+          start = time.time()
+          value = float(terrariumUtils.get_remote_data(self.state['variation']['source'])) + self.state['variation']['offset']
+          if value is not None:
+            unit = self.enclosure.engine.units[self.state["sensors"]["unit"]]
+            self.__external_cache.set_data(cache_key, value, 10 * 60)
+            logger.info(f'Updated external source variation data with value: {value}{unit} in {time.time() - start:.2f} seconds')
+          else:
+            logger.error(f'Could not load data from external source! Please check your settings.')
+
+      if value is not None:
+        period = {
+          'start'       : (datetime.datetime.now() - datetime.timedelta(minutes=2)).time(),
+          'end'         : (datetime.datetime.now() + datetime.timedelta(minutes=2)).time(),   # By default, we stop at the end of the day
+          'start_value' : str(value),
+          'end_value'   : str(value), # This will be overwritten by the next value to get a nice change during the period
+        }
+
+    else:
+      for item in self.state['variation']['periods']:
+        if now >= datetime.time.fromisoformat(item['start']) and now < datetime.time.fromisoformat(item['end']):
+          # Fond the right period, so save and stop looping
+          period = copy.copy(item)
+          period['start'] = datetime.time.fromisoformat(item['start'])
+          period['end']   = datetime.time.fromisoformat(item['end'])
+          break
+
+    if period is None:
+      # No valid period found, so we are done!
+      return
+
+    # Get the current 'wanted' average value based on the alarm min and max values
+    current_average_value = (self.state['sensors']['alarm_min'] + self.state['sensors']['alarm_max']) / 2.0
+
+    # Convert relative sensor values to absolute values based on the current state.
+    # This is done only once when the period starts. Once converted, we keep the absolute values
+    # !! UNTESTED !!
+    if period['start_value'].startswith('+'):
+      period['start_value'] = current_average_value + int(period['start_value'][1:])
+
+    elif period['start_value'].startswith('-'):
+      period['start_value'] = current_average_value - int(period['start_value'][1:])
+
+    if period['end_value'].startswith('+'):
+      period['end_value'] = current_average_value + int(period['end_value'][1:])
+
+    elif period['end_value'].startswith('-'):
+      period['end_value'] = current_average_value+ - int(period['end_value'][1:])
+
+
+    # Start calculation
+    # Get the total duration of the period in minutes
+    period_duration   = (datetime.datetime.now().replace(hour=period['end'].hour, minute=period['end'].minute) - datetime.datetime.now().replace(hour=period['start'].hour, minute=period['start'].minute) ).total_seconds()
+    # Get the total difference that needs to change during the period
+    period_difference = float(period['end_value']) - float(period['start_value'])
+    # How far are we in this period in minutes
+    period_duration_done = (datetime.datetime.now().replace(hour=now.hour, minute=now.minute) - datetime.datetime.now().replace(hour=period['start'].hour, minute=period['start'].minute)).total_seconds()
+    # Calculate the wanted average based on the start period value and the time elapsed * sensor difference/m
+    wanted_average_value = float(period['start_value']) + (float(period_duration_done) * float(period_difference / period_duration))
+    # Get the difference between the actual current average and the wanted average rounded at .1
+    sensor_diff = round(wanted_average_value - current_average_value,1)
+
+    if sensor_diff != 0.0:
+      # Change every sensor its min max alarm values with `sensor_diff` change
+      with orm.db_session():
+        for sensor in Sensor.select(lambda s: s.id in self.setup['sensors']):
+          sensor.alarm_min += sensor_diff
+          sensor.alarm_max += sensor_diff
+          unit = self.enclosure.engine.units[self.state["sensors"]["unit"]]
+          logger.info(f'Changed {sensor.type} sensor \'{sensor.name}\' for area \'{self.name}\' alarm values from min: {sensor.alarm_min - sensor_diff:.2f}{unit}, max: {sensor.alarm_max - sensor_diff:.2f}{unit} to new min: {sensor.alarm_min:.2f}{unit} and max: {sensor.alarm_max:.2f}{unit}. A difference of {sensor_diff}{unit}. New average is: {wanted_average_value:.2f}{unit}.')
+
+    # Reload the current sensor values after changing them
+    self.state['sensors'] = self.current_value(self.setup['sensors'])
 
   @property
   def is_day(self):
@@ -350,6 +516,10 @@ class terrariumArea(object):
 
       # If there are sensors in use, calculate the current values
       self.state['sensors'] = self.current_value(self.setup['sensors'])
+
+      # If there are variations on the alarm values, update them here
+      self._update_variation()
+
       # And set the alarm values
       self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_min']
       self.state['sensors']['alarm_high'] = self.state['sensors']['current'] > self.state['sensors']['alarm_max']
@@ -375,13 +545,12 @@ class terrariumArea(object):
         door_state_ok = self.setup[period]['door_status'] == door_state
 
       # First check: Shutdown power when power is on and either the lights or doors are in wrong state. Despite 'mode'
-      if self.state[period]['powered'] and not (light_state_ok and door_state_ok):
+      if not self.relays_state(period,False) and not (light_state_ok and door_state_ok):
         # Power is on, but either the lights or doors are in wrong state. Power down now.
         logger.info(f'Forcing down the {period} power for area {self} because either the lights({"OK" if light_state_ok else "ERROR"}) or doors({"OK" if door_state_ok else "ERROR"}) are in an invalid state.')
         self.relays_toggle(period,False)
         # And ignore the rest....
         continue
-
 
       if 'sensors' != self.mode:
         # Weather(inverse) and timer mode

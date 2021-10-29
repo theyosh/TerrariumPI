@@ -16,7 +16,7 @@ from hashlib import md5
 from terrariumArea         import terrariumArea
 from terrariumAudio        import terrariumAudio
 from terrariumCalendar     import terrariumCalendar
-from terrariumDatabase     import Area, Audiofile, Button, ButtonHistory, Enclosure, Playlist, NotificationMessage, NotificationService, Relay, RelayHistory, Sensor, SensorHistory, Setting, Webcam
+from terrariumDatabase     import Area, Audiofile, Button, Enclosure, Playlist, NotificationMessage, NotificationService, Relay, Sensor, SensorHistory, Setting, Webcam
 from terrariumEnclosure    import terrariumEnclosure
 from terrariumNotification import terrariumNotification, terrariumNotificationService
 
@@ -98,7 +98,6 @@ class terrariumAPI(object):
     bottle_app.route('/api/notification/messages/<message:path>/', 'DELETE', self.notification_message_delete, apply=self.authentication(), name='api:notification_message_delete')
     bottle_app.route('/api/notification/messages/',                'GET',    self.notification_message_list,   apply=self.authentication(), name='api:notification_message_list')
     bottle_app.route('/api/notification/messages/',                'POST',   self.notification_message_add,    apply=self.authentication(), name='api:notification_message_add')
-
     bottle_app.route('/api/notification/services/types/',          'GET',    self.notification_service_types,  apply=self.authentication(), name='api:notification_service_types')
     bottle_app.route('/api/notification/services/<service:path>/', 'GET',    self.notification_service_detail, apply=self.authentication(), name='api:notification_service_detail')
     bottle_app.route('/api/notification/services/<service:path>/', 'PUT',    self.notification_service_update, apply=self.authentication(), name='api:notification_service_update')
@@ -671,10 +670,10 @@ class terrariumAPI(object):
   @orm.db_session
   def notification_message_delete(self, message):
     try:
-      message = f'Notification message {NotificationMessage[message]} is deleted.'
+      title = f'Notification message {message} is deleted.'
       NotificationMessage[message].delete()
-      orm.commit()
-      return {'message' : message}
+#      orm.commit()
+      return {'message' : title}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Notification message with id {message} does not exists.')
     except Exception as ex:
@@ -729,10 +728,9 @@ class terrariumAPI(object):
   @orm.db_session
   def notification_service_delete(self, service):
     try:
-      message = f'Notification service {NotificationService[service]} is deleted.'
+      message = f'Notification service {service} is deleted.'
       NotificationService[service].delete()
-      orm.commit()
- #     self.webserver.engine.delete(terrariumEnclosure,enclosure)
+#      orm.commit()
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
@@ -749,16 +747,10 @@ class terrariumAPI(object):
 
   @orm.db_session
   def notification_service_add(self):
-    print('Add notification service:')
-    print(request.json)
     try:
       service = NotificationService(**request.json)
-      print('New service')
-      print(service)
       return self.notification_service_detail(service.id)
     except Exception as ex:
-      print('Exception')
-      print(ex)
       raise HTTPError(status=500, body=f'Notification service could not be added. {ex}')
 
 
@@ -1168,13 +1160,23 @@ class terrariumAPI(object):
     try:
       data = Setting[setting].to_dict()
       if data['id'] in ['meross_cloud_username','meross_cloud_password']:
-        data = copy.copy(data)
         data['value'] = terrariumUtils.decrypt(data['value'])
+      elif 'exclude_ids' == data['id']:
+        ids = data['value'].split(',')
+        data['value'] = []
+
+        for part in [Area, Enclosure, Button, Relay, Sensor, Webcam]:
+          for item in part.select(lambda a: a.id in ids):
+            data['value'].append({
+              'id' : item.id,
+              'name' : item.name
+            })
+
       return data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Setting with id {setting} does not exists.')
-
-    raise HTTPError(status=500, body=f'Error processing setting {setting}.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Error processing setting {setting}. {ex}')
 
   @orm.db_session
   def setting_add(self):
@@ -1268,23 +1270,10 @@ class terrariumAPI(object):
       'location'   : self.webserver.engine.weather.location,
       'sun'        : {'rise' : self.webserver.engine.weather.sunrise.timestamp(), 'set' : self.webserver.engine.weather.sunset.timestamp() },
       'is_day'     : self.webserver.engine.weather.is_day,
-      'indicators' : {'wind' : 'km/h', 'temperature' : '°C'},
+      'indicators' : {'wind' : self.webserver.engine.units['windspeed'], 'temperature' : self.webserver.engine.units['temperature']},
       'credits'    : self.webserver.engine.weather.credits,
-      'forecast'   : copy.deepcopy(self.webserver.engine.weather._data['days'])
+      'forecast'   : self.webserver.engine.weather.short_forecast
     }
-
-    for day in weather['forecast']:
-      if 'fahrenheit' == self.webserver.engine.settings['temperature_indicator']:
-        day['temp'] = terrariumUtils.to_fahrenheit(day['temp'])
-
-      elif 'kelvin' == self.webserver.engine.settings['temperature_indicator']:
-        day['temp'] = terrariumUtils.to_kelvin(day['temp'])
-
-      if 'm/s' == self.webserver.engine.settings['wind_speed_indicator']:
-        day['wind']['speed'] = terrariumUtils.to_ms(day['wind']['speed'])
-
-      elif 'beaufort' == self.webserver.engine.settings['wind_speed_indicator']:
-        day['wind']['speed'] = terrariumUtils.to_beaufort(day['wind']['speed'])
 
     return weather
 
@@ -1292,20 +1281,7 @@ class terrariumAPI(object):
     if not self.webserver.engine.weather:
       raise HTTPError(status=404, body=f'No weather data available.')
 
-    data = []
-    for forecast_item in self.webserver.engine.weather.forecast:
-      forecast = copy.copy(forecast_item)
-      forecast['timestamp'] = forecast['timestamp'].timestamp()
-
-      if 'fahrenheit' == self.webserver.engine.settings['temperature_indicator']:
-        forecast['value'] = terrariumUtils.to_fahrenheit(forecast['value'])
-
-      elif 'kelvin' == self.webserver.engine.settings['temperature_indicator']:
-        forecast['value'] = terrariumUtils.to_kelvin(forecast['value'])
-
-      data.append(forecast)
-
-    return {'data' : data}
+    return {'data' : self.webserver.engine.weather.forecast}
 
 
   # Webcams

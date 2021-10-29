@@ -94,6 +94,7 @@ plugins:
   - jekyll-minifier
   - jekyll-analytics
   - jekyll-seo-tag
+  - jekyll-liquify
 
 jekyll-minifier:
   uglifier_args:
@@ -129,7 +130,7 @@ collections:
 
   faq:
     output: true
-    sort_by: order
+    sort_by: title
 
 
 defaults:
@@ -138,8 +139,7 @@ defaults:
     values:
       image: true
 
-  -
-    scope:
+  - scope:
       path: ''          # An empty string here means all files in the project
       type: posts
     values:
@@ -148,15 +148,15 @@ defaults:
       toc: true         # Display TOC column in posts.
       # DO NOT modify the following parameter unless you are confident enough
       # to update the code of all other post links in this project.
-      permalink: /posts/:title/
+      permalink: /posts/:year/:month/:day/:title/
       dynamic_title: true
-  -
-    scope:
+
+  - scope:
       path: _drafts
     values:
       comments: false
-  -
-    scope:
+
+  - scope:
       path: ''
       type: tabs             # see `site.collections`
     values:
@@ -168,25 +168,25 @@ defaults:
         width: 100%
         height: auto
 
-  -
-    scope:
+  - scope:
       path: ''
       type: hardware             # see `site.collections`
     values:
       layout: post
       dynamic_title: true
+      permalink: /:categories/:title/
       toc: true
       image:
         width: 75%
         height: auto
 
-  -
-    scope:
+  - scope:
       path: ''
       type: faq             # see `site.collections`
     values:
-      layout: page
+      layout: faq
       dynamic_title: true
+      permalink: /faq/:title/
 
   - scope:
       type: categories  # Used in _plugins/all_tags_and_categories.rb
@@ -209,7 +209,9 @@ sass:
 compress_html:
   clippings: all
   comments: all
-  endings: all
+  # Copy list from: https://github.com/penibelst/jekyll-compress-html/blob/v3.1.0/src/compress.liquid#L17
+  # We need the </head> tag for stats...
+  endings: [html, body, li, dt, dd, optgroup, option, colgroup, caption, thead, tbody, tfoot, tr, td, th]
   profile: false
   blanklines: false
   ignore:

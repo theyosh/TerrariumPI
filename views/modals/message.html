@@ -40,7 +40,6 @@
       <input type="number" class="form-control" id="message_rate_limit" name="rate_limit" required="required" placeholder="{{ _('Messages per minute') }}">
     </div>
   </div>
-
   <div class="col-10 col-sm-10 col-md-8 col-lg-2 text-center">
     <div class="form-group">
       <div class="switch">
@@ -49,35 +48,26 @@
         <label for="service_enabled" class="mt-1"></label>
       </div>
       <small class="text-muted">
-        {{ _('Toggle this if this is the main lights for this enclosure. This is used for the light checks in other areas.') }}
+        {{ _('Enable/disable this service.') }}
       </small>
     </div>
   </div>
-
-
 </div>
-
 <div class="row">
   <div class="col-10">
     <div class="form-group">
       <label for="message_message">{{ _('Message') }}</label>
-      <textarea class="form-control" id="message_message" name="message" placeholder="{{ _('Enter a message') }}">
-
-      </textarea>
+      <textarea class="form-control" id="message_message" name="message" placeholder="{{ _('Enter a message') }}"></textarea>
     </div>
   </div>
   <div class="col-2">
     <div class="form-group">
       <label for="message_reate_limit">{{ _('Place holders') }}</label>
       <div id="place_holders">
-
       </div>
     </div>
   </div>
-
 </div>
-
-
 <div class="row">
   <div class="col">
     <div class="form-group">
@@ -85,15 +75,7 @@
       <div id="services"></div>
     </div>
   </div>
-
-
 </div>
-
-
-<style>
-
-</style>
-
 {% endblock %}
 
 {% block modal_form_javascript_functions %}

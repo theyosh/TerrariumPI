@@ -4,7 +4,7 @@ __pycache__
 
 
 calendar.ics
-terrariumpi.db
+terrariumpi.db*
 webcam
 !hardware/webcam
 log/*.log*

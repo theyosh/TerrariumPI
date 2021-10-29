@@ -2,7 +2,6 @@
 title: How to debug TerrariumPI
 categories: [Website, FAQ]
 tags: [debug]
-permalink: /faq/:title/
 ---
 
 1. Stop the terrariumpi service: `sudo service terrariumpi stop`.

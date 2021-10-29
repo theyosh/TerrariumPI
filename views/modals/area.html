@@ -776,151 +776,165 @@
           <div class="tab-content" id="area_dimmer_settings_high_relays_content"> </div>
         </div>
       </div>
-
       <div class="tab-pane fade" id="area_variation" role="tabpanel" aria-labelledby="variation-tab">
-
+        <div class="row text-muted">
+          <div class="col">
+            <small class="text-muted">
+              {{ _('Here you can enter periods where the sensors will change their values according to the list below. Make sure the periods are in chronological order!') }}
+            </small>
+          </div>
+        </div>
         <div class="row">
           <div class="col-3 col-sm-3 col-md-3 col-lg-3">
             <div class="form-group">
-              <label for="variation_when">{{ _('When') }}</label>
-
+              <label for="variation_when">{{ _('Source') }}</label>
             </div>
           </div>
-          <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4 variation_time_settings">
             <div class="form-group">
               <label for="alarm_low_end">{{ _('Period/duration') }}</label>
-
             </div>
           </div>
-          <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+          <div class="col-7 col-sm-7 col-md-7 col-lg-7 variation_external_source" style="display:none">
+            <div class="form-group">
+              <label for="alarm_low_end">{{ _('External source url') }}</label>
+            </div>
+          </div>
+          <div class="col-2 col-sm-2 col-md-2 col-lg-2 variation_weather variation_external_source" style="display:none">
+            <div class="form-group">
+              <label for="alarm_low_end">{{ _('Offset') }}</label>
+            </div>
+          </div>
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3 variation_time_settings">
             <div class="form-group">
               <label for="variant_value">{{ _('Value') }}</label>
-
             </div>
           </div>
-          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 variation_time_settings">
             <div class="form-group">
               <label for="action">{{ _('Action') }}</label>
-
             </div>
           </div>
-
-          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 variation_time_settings">
             <div class="form-group">
               <label for="action">&nbsp;</label>
-
             </div>
           </div>
-
         </div>
-
         <div id="variation_list">
-
         </div>
-
         <div class="row">
           <div class="col-3 col-sm-3 col-md-3 col-lg-3">
             <div class="form-group">
-
               <small class="text-muted">
                 {{ _('After x minutes change to value or at exactly a time stamp.') }}
               </small>
-
             </div>
           </div>
-          <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="col-7 col-sm-7 col-md-7 col-lg-7 variation_external_source" style="display:none">
+            <div class="form-group">
+              <small class="text-muted">
+                {{ _('Enter a full url to the external source according to the Remote data feature.') }}
+              </small>
+            </div>
+          </div>
+          <div class="col-2 col-sm-2 col-md-2 col-lg-2 variation_weather variation_external_source" style="display:none">
+            <div class="form-group">
+              <small class="text-muted">
+                {{ _('Enter a negative or positive offset value.') }}
+              </small>
+            </div>
+          </div>
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4 variation_time_settings">
             <div class="form-group">
               <small class="text-muted">
                 {{ _('Enter a duration in minutes or the actual time of the day.') }}
               </small>
-
             </div>
           </div>
-          <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3 variation_time_settings">
             <div class="form-group">
               <small class="text-muted">
                 {{ _('Enter a negative or positive value for a relative action. A number is treated as an absolute value.') }}
               </small>
-
             </div>
           </div>
-          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 variation_time_settings">
             <div class="form-group">
-
               <small class="text-muted">
                 {{ _('Add a new row') }}
               </small>
             </div>
           </div>
-
-          <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 variation_time_settings">
             <div class="form-group">
-
               <small class="text-muted">
                 {{ _('Remove row') }}
               </small>
             </div>
           </div>
-
         </div>
-
-
-
-
         <script type="text/html" id="variation">
-
           <div class="row">
             <div class="col-3 col-sm-3 col-md-3 col-lg-3">
               <div class="form-group">
-                <select class="select2" data-id="when" name="variation_when" style="width: 100%;">
+                <select class="select2" name="variation_when" style="width: 100%;">
                   <option value="after">{{ _('After x minutes') }}</option>
                   <option value="at">{{ _('At time') }}</option>
+                  <option value="weather">{{ _('Using current weather') }}</option>
+                  <option value="external">{{ _('Use json source') }}</option>
+                  <option value="script">{{ _('Use script') }}</option>
                 </select>
-
+                <div class="invalid-feedback">
+                  {{ _('Select a valid option.') }}
+                </div>
+              </div>
+            </div>
+            <div class="col-7 col-sm-7 col-md-7 col-lg-7 variation_external_source" style="display:none">
+              <div class="form-group">
+                <input type="text" class="form-control" name="variation_source" placeholder="{{ _('Enter a full url, local json file or script file.') }}">
+                <div class="invalid-feedback">
+                  {{ _('Enter a valid url, local json file or script file.') }}
+                </div>
+              </div>
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2 variation_external_source variation_weather" style="display:none">
+              <div class="form-group">
+                <input type="number" class="form-control" name="variation_offset" placeholder="{{ _('Offset') }}">
+                <div class="invalid-feedback">
+                  {{ _('Offset.') }}
+                </div>
+              </div>
+            </div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 variation_time_settings">
+              <div class="form-group">
+                <input type="text" class="form-control" name="variation_period" placeholder="{{ _('Enter a duration in minutes or time') }}">
                 <div class="invalid-feedback">
                   {{ _('Enter a valid time.') }}
                 </div>
               </div>
             </div>
-            <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 variation_time_settings">
               <div class="form-group">
-                <input type="text" class="form-control" data-id="period" name="variation_period" placeholder="{{ _('Enter a duration in minutes or time') }}">
-
-                <div class="invalid-feedback">
-                  {{ _('Enter a valid time.') }}
-                </div>
-              </div>
-            </div>
-            <div class="col-3 col-sm-3 col-md-3 col-lg-3">
-              <div class="form-group">
-                <input type="text" class="form-control" data-id="value" name="variant_value" placeholder="{{ _('Value') }}">
+                <input type="text" class="form-control" name="variation_value" placeholder="{{ _('Value') }}">
                 <div class="invalid-feedback">
                   {{ _('Enter a valid duration in minutes.') }}
                 </div>
               </div>
             </div>
-            <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 variation_time_settings">
               <div class="form-group">
                 <button type="button" class="form-control"><i class="fas fa-plus"></i></button>
-
               </div>
             </div>
-
-            <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 variation_time_settings">
               <div class="form-group">
                 <button type="button" class="form-control"><i class="fas fa-minus"></i></button>
-
               </div>
             </div>
-
           </div>
         </script>
-
-
-
       </div>
-
-
     </div>
   </div>
 </div>
@@ -1008,7 +1022,7 @@ function add_relay_tab(form, part, relay_id, relay_name, dimmer) {
     }
   }
 
-  jQuery(dimmer_field).loadTemplate($(template), {
+  jQuery(dimmer_field).loadTemplate(jQuery(template), {
     dimmer_field:     dimmer_field_id,
     dimmer_field_on:  dimmer_field_id.replace(relay_id,'on_'+relay_id),
     dimmer_field_off: dimmer_field_id.replace(relay_id,'off_'+relay_id),
@@ -1029,6 +1043,54 @@ function add_relay_tab(form, part, relay_id, relay_name, dimmer) {
       return '{{ _('Delay') }}: ' + value + ' {{ _('minutes')}}'
     }
   });
+}
+
+function plus_minus_buttons(form) {
+
+  form.find('div#area_variation button').off('click').on('click',function(event) {
+
+    let active_row = null;
+    jQuery(this).parentsUntil('div.row').each(function(){
+      active_row = jQuery(this).parent();
+    })
+
+    let amount = form.find('div#area_variation div#variation_list div.row').length;
+
+    if (jQuery(event.currentTarget).find('i').attr('class').indexOf('minus') != -1) {
+      // Remove row only when there is still 1 left
+      if (amount > 1) {
+        active_row.remove();
+      }
+    } else {
+      let html = jQuery('<div>');
+      html.loadTemplate(jQuery('#variation'), {},{ append: true, bindingOptions: {ignoreNull : true}});
+      active_row.after(html.find('div.row'));
+    }
+
+    plus_minus_buttons(form);
+  });
+
+  // toggle for weather or external
+  form.find('select[name="variation_when"]').off('change').on('change',function(event) {
+    let mode = jQuery(this).val();
+
+    jQuery('div.variation_time_settings, div.variation_external_source, div.variation_weather').hide();
+    if ('at' == mode || 'after' == mode) {
+      jQuery('div.variation_time_settings').show()
+    } else if ('weather' == mode) {
+      jQuery('div.variation_weather').show()
+    } else if ('external' == mode || 'script' == mode) {
+      jQuery('div.variation_external_source').show()
+    }
+
+    jQuery('input[name="variation_source"]').prop('disabled', 'external' != mode && 'script' != mode);
+    jQuery('input[name="variation_offset"]').prop('disabled', 'at' == mode || 'after' == mode);
+    jQuery('input[name="variation_period"],[name="variation_value"]').prop('disabled', 'external' == mode || 'script' == mode || 'weather' == mode);
+  });
+
+  // Disable the weather and external source option when there are more then 1 row
+  form.find('select[name="variation_when"] option[value="weather"],[value="external"]').prop('disabled', form.find('div#area_variation div#variation_list div.row').length > 1);
+  form.find('div#variation_list select').select2();
 }
 {% endblock %}
 
@@ -1181,46 +1243,6 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
   jQuery('div#area_variation select').prop('readonly',jQuery(this).val().length == 0);
 });
 
-function plus_minus_buttons() {
-
-  {{modal_type}}_form.find('div#area_variation button').off('click').on('click',function(event) {
-
-    let active_row = null;
-    $(this).parentsUntil('div.row').each(function(){
-      active_row = jQuery(this).parent();
-    })
-
-    let amount = {{modal_type}}_form.find('div#area_variation div#variation_list div.row').length;
-
-    if (jQuery(event.currentTarget).find('i').attr('class').indexOf('minus') != -1) {
-      // Remove row only when there is still 1 left
-      if (amount > 1) {
-        active_row.remove();
-      }
-    } else {
-      let html = jQuery('<div>');
-      html.loadTemplate($('#variation'), {
-        when:     'variation_when_' + (amount + 1),
-        period:     'variation_period_' + (amount + 1),
-        value:     'variation_value_' + (amount + 1)
-      },{ append: true, bindingOptions: {ignoreNull : true}});
-
-      active_row.after(html.find('div.row'));
-    }
-
-    plus_minus_buttons();
-    {{modal_type}}_form.find('div#variation_list select').select2();
-  });
-}
-
-{{modal_type}}_form.find('div#variation_list').loadTemplate($('#variation'), {
-  when:     'variation_when_1',
-  period:     'variation_period_1',
-  value:     'variation_value_1'
-},{ append: true, bindingOptions: {ignoreNull : true}});
-
-plus_minus_buttons();
-
 // Dimmer step settings for heating, humidity, etc
 {{modal_type}}_form.find('.row.area_type select[id$="relays"]').on('change',function(event) {
 
@@ -1334,8 +1356,6 @@ jQuery.when(
 
   sensor_data = sensors[0].data;
 
-
-
   // Clear dimmer step settings
   {{modal_type}}_form.find('.area_alarm_day_dimmer_settings ul.nav').html('');
   {{modal_type}}_form.find('.area_alarm_day_dimmer_settings div.tab-content').html('');
@@ -1349,6 +1369,10 @@ jQuery.when(
 
   {{modal_type}}_form.find('.area_alarm_high_dimmer_settings ul.nav').html('');
   {{modal_type}}_form.find('.area_alarm_high_dimmer_settings div.tab-content').html('');
+
+  // Clear variation data
+  {{modal_type}}_form.find('div#variation_list').loadTemplate(jQuery('#variation'), {},{ append: false, bindingOptions: {ignoreNull : true}});
+  plus_minus_buttons({{modal_type}}_form);
 
   {{modal_type}}_area_select.trigger('change');
 
@@ -1410,12 +1434,37 @@ jQuery.when(
         }
       });
 
+      // Load the variation data...
+      if (data.setup['variation'] !== undefined) {
+        let variation_rows = data.setup['variation'].length;
+        for (let x = 0; x < variation_rows; x++) {
+
+          let row = jQuery('div#variation_list div.row:last');
+          let variation = data.setup['variation'][x];
+
+          row.find('[name="variation_when"]').val(variation['when']).trigger('change');
+          if ('at' == variation['when']) {
+            row.find('[name="variation_period"]').val(moment.unix(variation['period']).format('LT'));
+          } else {
+            row.find('[name="variation_period"]').val(variation['period']);
+          }
+          row.find('[name="variation_source"]').val(variation['source']);
+          row.find('[name="variation_offset"]').val(variation['offset']);
+          row.find('[name="variation_value"]').val(variation['value']);
+
+          if (x < variation_rows-1) {
+            row.find('button:first').click();
+          }
+        }
+      }
+
       setTimeout(function(){
         jQuery.each(dimmer_steps,function(counter,data) {
           let field = {{modal_type}}_form.find('[name="' + data['id'] + '"]').bootstrapSlider();
           field.bootstrapSlider('setValue', data['value']);
         });
       },100);
+
       {{modal_type}}_form.find('select[id$="_mode"]').trigger('change');
       {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
     });
@@ -1435,6 +1484,8 @@ if (['lights','audio'].indexOf(form_data['type']) != -1) {
 } else {
   form_data['setup'] = {'low': {}, 'high': {}}
 }
+// We want to collect the variation fields, so we can overwrite it later on
+form_data['setup']['variation'] = {}
 
 jQuery.each(form_data,function(field_name, value) {
   // Exclude fields in array below from parsing
@@ -1448,4 +1499,44 @@ jQuery.each(form_data,function(field_name, value) {
     delete(form_data[field_name])
   }
 });
+
+let variation = []
+if (form_data['setup']['variation']['when'] !== undefined) {
+  if (typeof form_data['setup']['variation']['when'] === 'string' || form_data['setup']['variation']['when'] instanceof String) {
+    if ('weather' == form_data['setup']['variation']['when']) {
+      variation.push({
+        'when'   : form_data['setup']['variation']['when'],
+        'offset' : form_data['setup']['variation']['offset']
+      });
+    } else if ( 'external' == form_data['setup']['variation']['when']) {
+      variation.push({
+        'when'   : form_data['setup']['variation']['when'],
+        'source' : form_data['setup']['variation']['source'],
+        'offset' : form_data['setup']['variation']['offset']
+      });
+    }
+  } else {
+    for (let x = 0; x < form_data['setup']['variation']['when'].length; x++) {
+      if ('at' == form_data['setup']['variation']['when'][x]) {
+        /* Parse the timestamp and convert to unix timestamp */
+        let local_time = moment(form_data['setup']['variation']['period'][x],'LT', true);
+
+        if (!local_time.isValid()) {
+          {{modal_type}}_form.removeClass('was-validated');
+          toastr.error('{{ _('Invalid timestamp in variation settings.') }}', '{{ _('Form error') }}');
+          return false;
+        }
+        form_data['setup']['variation']['period'][x] = local_time.unix();
+      }
+
+      variation.push({
+        'when'   : form_data['setup']['variation']['when'][x],
+        'period' : form_data['setup']['variation']['period'][x],
+        'value'  : form_data['setup']['variation']['value'][x]
+      });
+    }
+  }
+}
+
+form_data['setup']['variation'] = variation;
 {% endblock %}

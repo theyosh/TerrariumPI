@@ -13,7 +13,7 @@ In order to use the **{{ page.device_title | default: page.title }}** use the fo
 ### Mandantory
 
 Hardware
-: {{ page.device_type }}
+: {{ page.device_hardware | default: page.title }}
 
 Address
 : {{ page.device_address }}
@@ -27,4 +27,4 @@ Dimmer frequency in Hz
 
 {% endif %}
 
-Other settings can be found at the [relay setup]({{ 'setup' | relative_url}}/#relays) information
+Other settings can be found at the [relay setup]({% link _tabs/setup.md %}#relays) information

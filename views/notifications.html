@@ -200,16 +200,18 @@ div#services .btn.btn-app i:not(.active) {
 
         $('#messages_overview').loadTemplate($('#notification_message_template'), message, { append: true, bindingOptions: {ignoreNull : false}});
 
-        jQuery('i.edit_message').each(function(counter, element){
+        let new_row = $('#messages_overview tr:last');
+
+        jQuery('i.edit_message', new_row).each(function(counter, element){
           element = jQuery(element);
           let link = '{{ url_for('api:notification_message_update', message='_id_') }}'.replace('_id_',element.attr('id'));
           link = jQuery('<a>').addClass('btn btn-light btn-sm text-primary').attr({'role':'button','data-toggle':'modal', 'data-target' : '#modal-message-setup','href': link})
           element.wrap(link);
         });
 
-        jQuery('i.delete_area').each(function(counter, element){
+        jQuery('i.delete_area', new_row).each(function(counter, element){
           element = jQuery(element);
-          let link = '{{ url_for('api:area_delete', area='_id_') }}'.replace('_id_',element.attr('id'));
+          let link = '{{ url_for('api:notification_message_delete', message='_id_') }}'.replace('_id_',element.attr('id'));
           link = jQuery('<a>').addClass('btn btn-light btn-sm text-danger').attr({'role':'button','data-action' : 'DELETE', 'data-toggle':'modal', 'data-target' : '#modal-confirm','title' : jQuery(this).attr('title'), 'href': link})
           element.wrap(link);
         });
