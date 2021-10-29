@@ -1,5 +1,5 @@
 ---
-title: 1-Wire
+title: 1-Wire sensor
 categories: [Hardware, Sensor]
 tags: [sensor, 1-wire, waterproof, temperature, humidity]
 
@@ -7,7 +7,6 @@ image:
   src: /assets/img/1-Wire.webp
   alt: "1-Wire header image"
 
-device_hardware : 1-Wire sensor
 device_types: [temperature,humidity]
 device_address: "Enter the symlink folder name that are available at `/sys/bus/w1/devices/`<br />Ex: `28-0115b231f3ff`"
 device_auto_detect: true

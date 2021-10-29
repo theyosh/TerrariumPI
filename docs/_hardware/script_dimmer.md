@@ -7,7 +7,6 @@ image:
   src: /assets/img/Code.webp
   alt: "Script dimmer (API)"
 
-device_type : Script dimmer
 device_address: /home/user/location/executable/script
 ---
 

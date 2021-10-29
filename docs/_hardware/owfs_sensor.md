@@ -7,7 +7,6 @@ image:
   src: /assets/img/owfs.webp
   alt: "One-Wire File System (OWFS) header image"
 
-device_hardware : One-Wire File System
 device_types: [temperature,humidity]
 device_address: "Enter the sensors address <br />Ex: `280115b231f3ff`"
 device_auto_detect: true

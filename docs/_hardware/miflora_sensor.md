@@ -7,7 +7,6 @@ image:
   src: /assets/img/miflora.webp
   alt: "MiFlora bluetooth sensor header image"
 
-device_hardware : miflora
 device_types: [temperature, fertility,light,moisture]
 device_address: "Bluetooth MAC address. Ex: `c2:7c:9e:66:e3:52`"
 device_auto_detect: true

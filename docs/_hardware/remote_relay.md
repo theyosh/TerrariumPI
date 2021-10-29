@@ -7,7 +7,7 @@ image:
   src: /assets/img/REST_API.webp
   alt: "Remote relay (API)"
 
-device_type : Remote power switch (API)
+device_hardware : Remote power switch (API)
 device_address: http(s)://some.domain.com/path/location/script.php
 ---
 

@@ -7,7 +7,6 @@ image:
   src: /assets/img/SI7021.webp
   alt: "SI7021 sensor header image"
 
-device_hardware : si7021
 device_types: [temperature, humidity]
 device_address: "[I2C Address](/TerrariumPI/hardware#i2c-bus) <br />Ex: `0x40`"
 device_url: http://www.pibits.net/code/raspberry-pi-si7021-sensor-example.php

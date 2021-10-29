@@ -7,7 +7,6 @@ image:
   src: /assets/img/COZIR_CO2.webp
   alt: "COZIR CO2 sensor header image"
 
-device_hardware : cozirco2
 device_types: [co2, temperature, humidity]
 device_address: "[I2C Address](/TerrariumPI/hardware#i2c-bus) <br />Ex: `0x3f`"
 device_url: https://www.gassensing.co.uk/products

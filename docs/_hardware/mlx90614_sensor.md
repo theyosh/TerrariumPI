@@ -7,7 +7,6 @@ image:
   src: /assets/img/mlx90614.webp
   alt: "MLX90614 IR Thermometer sensor header image"
 
-device_hardware : mlx90614
 device_types: [temperature]
 device_address: "[I2C Address](/TerrariumPI/hardware#i2c-bus) followed by either `,o` for object or `,a` for ambient temperature <br />Ex: `0x3f,1,o`"
 device_url: https://www.sparkfun.com/products/9570

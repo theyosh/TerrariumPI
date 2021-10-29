@@ -7,7 +7,6 @@ image:
   src: /assets/img/remote_sensor.webp
   alt: "Remote sensor header image"
 
-device_hardware : Remote Sensor
 device_types: [temperature, humidity,fertility,ph,uva,moisture,uvb,altitude,co2,distance,uvi,pressure,light]
 device_address: "Enter the full url and json path traversal. More information at [remote hardware](/TerrariumPI/faq/how-to-use-remote-data/)."
 device_url: /TerrariumPI/faq/how-to-use-remote-data/

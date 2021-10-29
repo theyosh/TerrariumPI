@@ -7,7 +7,6 @@ image:
   src: /assets/img/Mosfet_Dimmer.webp
   alt: "IRF520 dimmer header image"
 
-device_type : IRF520 Dimmer
 device_address: Physical GPIO pin number 1 - 40
 dimmer_frequency: 1000
 device_url : https://hobbycomponents.com/motor-drivers/661-irf520-mosfet-driver-module

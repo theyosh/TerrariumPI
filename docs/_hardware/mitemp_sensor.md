@@ -7,7 +7,6 @@ image:
   src: /assets/img/mitemp.webp
   alt: "MiTemperature bluetooth sensor header image"
 
-device_hardware : mitemp
 device_types: [temperature, humidity]
 device_address: "Bluetooth MAC address. Ex: `c2:7c:9e:66:e3:52`"
 device_auto_detect: true

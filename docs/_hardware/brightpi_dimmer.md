@@ -7,7 +7,7 @@ image:
   src: /assets/img/Bright-PI-Header.webp
   alt: "Bright-PI header image"
 
-device_type : Bright-PI (dimmer)
+device_hardware : Bright-PI (dimmer)
 device_address: anything will do. This address is not used in code.
 dimmer_frequency: null
 device_url : https://github.com/PiSupply/Bright-Pi

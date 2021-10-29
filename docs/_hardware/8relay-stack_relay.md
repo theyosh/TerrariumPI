@@ -7,7 +7,6 @@ image:
   src: /assets/img/8relay-stack_v1v2.webp
   alt: "Sequent Microsystems 8 Relay Card Ver. 1 - 2 header image"
 
-device_type : Sequent Microsystems 8 Relay Card Ver. 1 - 2
 device_address: "Enter the relay number from 1 - 8. Optional add the stack level number. Default 0."
 device_auto_detect: true
 device_url : https://github.com/SequentMicrosystems/relay8-rpi

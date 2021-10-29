@@ -7,7 +7,6 @@ image:
   src: /assets/img/script_sensor.webp
   alt: "Script sensor header image"
 
-device_hardware : Script Sensor
 device_types: [temperature, humidity,fertility,ph,uva,moisture,uvb,altitude,co2,distance,uvi,pressure,light]
 device_address: "Enter the full path to the script."
 device_url: https://github.com/theyosh/TerrariumPI/blob/4.x.y.z/contrib/script_sensor.py

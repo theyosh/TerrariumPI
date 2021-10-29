@@ -7,7 +7,6 @@ image:
   src: /assets/img/dht11.webp
   alt: "DHT11 sensor header image"
 
-device_hardware : dht11
 device_types: [temperature, humidity]
 device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the data is connected<br />Ex: `27`"
 device_url: https://www.adafruit.com/product/386

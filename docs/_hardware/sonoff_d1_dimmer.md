@@ -7,7 +7,6 @@ image:
   src: /assets/img/Sonoff-D1-Dimmer.webp
   alt: "Sonoff D1 Dimmer (Tasmota) header image"
 
-device_type : Sonoff D1 Dimmer (Tasmota)
 device_address: "Enter the hostname or IP address."
 device_url : https://tasmota.github.io/docs/
 ---

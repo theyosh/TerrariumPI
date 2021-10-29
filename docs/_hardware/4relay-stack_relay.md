@@ -7,7 +7,6 @@ image:
   src: /assets/img/4relay-stack.webp
   alt: "Sequent Microsystems 4 Relay Card header image"
 
-device_type : Sequent Microsystems 4 Relay Card
 device_address: "Enter the relay number from 1 - 4. Optional add the stack level number. Default 0."
 device_auto_detect: true
 device_url : https://github.com/SequentMicrosystems/4relay-rpi

@@ -7,7 +7,7 @@ image:
   src: /assets/img/REST_API.webp
   alt: "Remote dimmer (API)"
 
-device_type : Remote dimmer (API)
+device_hardware : Remote dimmer (API)
 device_address: http(s)://some.domain.com/path/location/script.php
 ---
 

@@ -7,7 +7,6 @@ image:
   src: /assets/img/Code.webp
   alt: "Script relay (API)"
 
-device_type : Script relay
 device_address: /home/user/location/executable/script
 ---
 

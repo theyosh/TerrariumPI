@@ -1,5 +1,5 @@
 ---
-title: AM2302
+title: AM2302 Sensor
 categories: [Hardware, Sensor]
 tags: [sensor, gpio]
 
@@ -7,7 +7,6 @@ image:
   src: /assets/img/am2302.webp
   alt: "AM2302 header image"
 
-device_hardware : AM2302
 device_types: [temperature,humidity]
 device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the data is connected<br />Ex: `27`"
 device_power_management: true

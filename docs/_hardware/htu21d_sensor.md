@@ -7,7 +7,6 @@ image:
   src: /assets/img/htu21d.webp
   alt: "HTU21D sensor header image"
 
-device_hardware : htu21d
 device_types: [temperature, humidity]
 device_address: "[I2C Address](/TerrariumPI/hardware#i2c-bus) <br />Ex: `0x3f`"
 device_url: https://learn.adafruit.com/adafruit-htu21d-f-temperature-humidity-sensor/overview

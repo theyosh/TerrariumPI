@@ -7,7 +7,6 @@ image:
   src: /assets/img/ms100.webp
   alt: "Meross MS100 sensor header image"
 
-device_hardware : ms100
 device_types: [temperature, humidity]
 device_address: "Need Meross Cloud account credentials"
 device_auto_detect: true

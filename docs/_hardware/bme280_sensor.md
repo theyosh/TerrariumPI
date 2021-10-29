@@ -7,7 +7,6 @@ image:
   src: /assets/img/bme280.webp
   alt: "BME280 sensor header image"
 
-device_hardware : bme280
 device_types: [temperature, humidity, pressure, altitude]
 device_address: "[I2C Address](/TerrariumPI/hardware#i2c-bus) <br />Ex: `0x3f`"
 device_url: https://www.adafruit.com/product/2652

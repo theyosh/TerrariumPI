@@ -7,7 +7,6 @@ image:
   src: /assets/img/Energenie_Lan.webp
   alt: "Energenie LAN header image"
 
-device_type : Energenie LAN
 device_address: "Enter the full http url and adding '#' and number to speicfy the relay.<br />Ex: `http://[Optional_Password]@[Energenie_IP]/#2` will toggle the 2nd relay on the device."
 device_url : https://energenie.com/item.aspx?id=7557
 ---

@@ -13,7 +13,7 @@ In order to use the **{{ page.device_title | default: page.title }}** use the fo
 ### Mandantory
 
 Hardware
-: {{ page.device_hardware }}
+: {{ page.device_hardware | default: page.title }}
 
 Types
 {% assign types = page.device_types | sort_natural | join: ", " %}

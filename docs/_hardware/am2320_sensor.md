@@ -1,5 +1,5 @@
 ---
-title: AM2320
+title: AM2320 Sensor
 categories: [Hardware, Sensor]
 tags: [sensor, i2c]
 
@@ -7,7 +7,6 @@ image:
   src: /assets/img/am2320.webp
   alt: "AM2320 header image"
 
-device_hardware : AM2320
 device_types: [temperature,humidity]
 device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the data is connected<br />Ex: `27`"
 ---

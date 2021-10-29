@@ -7,7 +7,6 @@ image:
   src: /assets/img/ENER010-PI.webp
   alt: "Energenie RF header image"
 
-device_type : Energenie RF
 device_address: "Enter the relay number from 1 - 4."
 device_url : https://energenie4u.co.uk/catalogue/product/ENER010-PI
 ---

@@ -7,7 +7,6 @@ image:
   src: /assets/img/hih8000.webp
   alt: "Honeywell HumidIcon HIH8000 sensor header image"
 
-device_hardware : hih8000
 device_types: [temperature, humidity]
 device_address: "[I2C Address](/TerrariumPI/hardware#i2c-bus) <br />Ex: `0x3f`"
 device_url: https://www.sensorwell.at/en/products/sensors/environmental-sensors/humidity-sensors/honeywell-humidicon-hih8000-series/

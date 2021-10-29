@@ -7,7 +7,6 @@ image:
   src: /assets/img/Wemo.webp
   alt: "WEMO Smart plug header image"
 
-device_type : WEMO Smart plug
 device_address: "Enter the hostname or IP address"
 device_url : https://www.wemo.com/
 ---

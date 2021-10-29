@@ -7,7 +7,6 @@ image:
   src: /assets/img/AC_Dimmer_MPDMv4_1_3_Kit.webp
   alt: "NextEVO Universal AC MAINS Dimmer (MPDMv4.1) header image"
 
-device_type : NextEVO Universal AC MAINS Dimmer (MPDMv4.1)
 device_address: Physical GPIO pin number 1 - 40
 dimmer_frequency: 5000
 device_url : https://www.tindie.com/products/nEXT_EVO1/universal-ac-mains-dimmer-mpdmv41/

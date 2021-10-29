@@ -1,5 +1,5 @@
 ---
-title: GPIO Relays
+title: GPIO
 categories: [Hardware, Relay]
 tags: [relay, gpio]
 
@@ -7,7 +7,7 @@ image:
   src: /assets/img/GPIO_Relay.webp
   alt: "GPIO Relays header image"
 
-device_type : GPIO
+device_hardware : GPIO devices
 device_address: "Enter the relay GPIO physical port number for a single relay."
 #device_url : https://shop.meross.com/collections/smart-power-strip
 ---
