@@ -552,7 +552,7 @@ class terrariumArea(object):
     old_is_day = self.state['is_day']
     self.state['is_day'] = self.is_day
 
-    if old_is_day != self.state['is_day'] and self.state['variation'['dynamic']]:
+    if old_is_day != self.state['is_day'] and 'variation' in self.state and self.state['variation']['dynamic']:
       print('Update variation data based on date / night change')
       self._setup_variation_data()
 
