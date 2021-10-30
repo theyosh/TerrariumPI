@@ -29,8 +29,11 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-12">
-                <strong id="weather_today">{{ _('Today') }}</strong> {{ _('in') }} <strong id="weather_temperature_indicator">°C</strong>
+              <div class="col-9">
+                <strong id="weather_today">{{ _('Today') }}</strong>
+              </div>
+              <div class="col-3 text-right">
+                <i class="fas fa-location-arrow" id="wind_direction" style="transform: rotate(-45deg);"></i> <span class="text-nowrap" id="wind_speed">{{ _('Wind') }}</span>
               </div>
             </div>
             <div class="row">
@@ -42,7 +45,7 @@
               </div>
               <div class="col-2 text-right text-nowrap">
                 <i class="fas fa-sun"></i> <span id="weather_sunrise">{{ _('Rise') }}</span><br />
-                <i class="fas fa-moon"></i> <span id="weather_sunset">{{ _('Set') }}</span><br />
+                <i class="fas fa-moon"></i> <span id="weather_sunset">{{ _('Set') }}</span>
                 <h5 class="mt-4" id="weather_temp">{{ _('Temp.') }}</h5>
               </div>
             </div>
@@ -138,13 +141,12 @@
 
         if (counter == 0) {
           jQuery('#weather_today').text(moment(day.dt * 1000).format('dddd LL'));
-
           jQuery('#weather_image').attr({'title':day.weather}).css({'background-image' : 'url(' + get_weather_icon(day.weather,data.is_day) + ')'})
           jQuery('#weather_type').text(day.weather);
-
           jQuery('#weather_sunrise').text(moment(day.rise * 1000).format('LT'));
           jQuery('#weather_sunset').text(moment(day.set * 1000).format('LT'));
-
+          jQuery('#wind_direction').css('transform' , 'rotate(' + (day.wind.direction + 135) + 'deg)' );
+          jQuery('#wind_speed').text(formatNumber(day.wind.speed,1,1) + ' ' + sensor_type_indicator('windspeed'));
           jQuery('#weather_temp').text(formatNumber(day.temp) + ' ' + sensor_type_indicator('temperature'));
         } else if (counter < 7) {
           days.push({
