@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-10-23 10:51+CEST\n"
-"PO-Revision-Date: 2021-08-13 10:53+0000\n"
+"PO-Revision-Date: 2021-10-30 15:16+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/de_AT/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 4.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:31
@@ -1138,10 +1138,8 @@ msgid ""
 msgstr ""
 
 #: views/modals/area.html:790
-#, fuzzy
-#| msgid "Source url"
 msgid "Source"
-msgstr "Quelle URL"
+msgstr "Quelle"
 
 #: views/modals/area.html:795
 #, fuzzy
