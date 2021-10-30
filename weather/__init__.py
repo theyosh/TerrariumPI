@@ -144,10 +144,9 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
 
     return data
 
-  def get_history_at(self,timestamp,unit):
-    for item in self._data['history']:
-      if item['begin'] < timestamp <  item['end']:
-        return item[unit]
+  @property
+  def history(self):
+    return self._data['history']
 
   @property
   def location(self):

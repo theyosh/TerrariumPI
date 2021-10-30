@@ -14,6 +14,10 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
   VALID_SOURCE = '^https?://api\.openweathermap\.org/data/2\.5/weather\?q=(?P<city>[^,&]+),(?P<country>[^,&]{2})&appid=[a-z0-9]{32}$'
   INFO_SOURCE  = 'https://api.openweathermap.org/data/2.5/weather?q=[CITY],[COUNTRY_2CHAR]&appid=[YOUR_API_KEY]'
 
+  def __init__(self, address, unit_values):
+    self.__history_day = None
+    super().__init__(address, unit_values)
+
   def __load_general_data(self):
     address = self.address + '&units=metric'
     logger.debug('Loading weather source {}'.format(address))
@@ -121,6 +125,11 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
   def __load_history_data(self):
     # Onecall API's are more expensive (max 1000 a day) so we update this at a lower frequency
+    # Here we can do 1 hit a day. As the history is per hole full day at a time, and will not change anymore
+    if self.__history_day is not None and self.__history_day == int(datetime.now().strftime('%d')):
+      return True
+
+    self.__history_day = int(datetime.now().strftime('%d'))
     address = terrariumUtils.parse_url(self.address)
     data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={}&lon={}&units=metric&dt={}&appid={}'.format(self._data['geo']['lat'],self._data['geo']['long'],int((datetime.now() - timedelta(hours=24)).timestamp()),address['query_params']['appid']))
 

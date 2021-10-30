@@ -295,7 +295,6 @@ class terrariumArea(object):
     self.state['variation'] = {
         'active' : len(self.setup['sensors']) > 0,
         'dynamic' : False,
-        'weather' : False,
         'external' : False,
         'script'   : False,
         'offset' : float(0),
@@ -303,7 +302,51 @@ class terrariumArea(object):
         'periods' : []
       }
 
-    for varation in self.setup.get('variation',[]):
+    varation_data = copy.deepcopy(self.setup.get('variation',[]))
+    if len(varation_data) == 0:
+      return
+
+    if varation_data[0]['when'] in ['script','external']:
+      try:
+        self.state['variation']['offset'] = float(varation_data[0]['offset'])
+      except:
+        pass
+
+      self.state['variation'][varation_data[0]['when']] = True
+      self.state['variation']['source'] = varation_data[0]['source']
+
+      if 'external' == varation_data[0]['when']:
+        self.__external_cache = terrariumCache()
+
+      varation = []
+
+    elif 'weather' == varation_data[0]['when']:
+      # Load the weather history as a new variation setup
+      self.state['variation']['dynamic'] = True
+      try:
+        self.state['variation']['offset'] = float(varation_data[0]['offset'])
+      except:
+        pass
+
+      weather_current_source = None
+      if self.type in ['heating','cooling']:
+        weather_current_source = 'temperature'
+      elif self.type in ['humidity']:
+        weather_current_source = 'humidity'
+
+      if weather_current_source is None:
+        return
+
+      # Reset variation data and fill with history data
+      varation_data = []
+      for history in self.enclosure.engine.weather.history:
+        varation_data.append({
+          'when': 'at',
+          'period' : int(history['begin'].astimezone(tz=None).timestamp()),
+          'value' : float(history[weather_current_source]) + self.state['variation']['offset']
+        })
+
+    for varation in varation_data:
       periods = len(self.state['variation']['periods'])
 
       if 'at' == varation.get('when'):
@@ -314,7 +357,7 @@ class terrariumArea(object):
         # !! UNTESTED !!
         if periods == 0:
           # We need main lights on starting time....
-          pass
+          self.state['variation']['dynamic'] = True
 
         else:
           # We need the previous period start time and adding the 'after' period duration
@@ -322,22 +365,22 @@ class terrariumArea(object):
           period_timestamp = datetime.datetime.now().replace(hour=period_timestamp.hour, minute=period_timestamp.minute) + datetime.timeldeta(minute=int(varation.get('period')))
           period_timestamp = period_timestamp.strftime('%H:%M')
 
-      else:
-        self.state['variation']['offset'] = float(varation.get('offset', 0.0))
+      # else:
+      #   self.state['variation']['offset'] = float(varation.get('offset', 0.0))
 
-        if 'weather' == varation.get('when'):
-          self.state['variation']['weather'] = True
+      #   # if 'weather' == varation.get('when'):
+      #   #   self.state['variation']['weather'] = True
 
-        elif 'script' == varation.get('when'):
-          self.state['variation']['script'] = True
-          self.state['variation']['source'] = varation.get('source')
+      #   if 'script' == varation.get('when'):
+      #     self.state['variation']['script'] = True
+      #     self.state['variation']['source'] = varation.get('source')
 
-        elif 'external' == varation.get('when'):
-          self.state['variation']['external'] = True
-          self.state['variation']['source'] = varation.get('source')
-          self.__external_cache = terrariumCache()
+      #   elif 'external' == varation.get('when'):
+      #     self.state['variation']['external'] = True
+      #     self.state['variation']['source'] = varation.get('source')
+      #     self.__external_cache = terrariumCache()
 
-        continue
+      #   continue
 
 
       if periods > 0:
@@ -384,22 +427,22 @@ class terrariumArea(object):
     now = datetime.datetime.now().time()
     # Loop over the periods to find the current period
     period = None
-
-    if self.state['variation']['weather'] or self.state['variation']['script'] or self.state['variation']['external']:
+    #self.state['variation']['weather'] or
+    if self.state['variation']['script'] or self.state['variation']['external']:
       value = None
-      if self.state['variation']['weather']:
-        timestamp = datetime.datetime.utcnow() - datetime.timedelta(hours=24)
+      # if self.state['variation']['weather']:
+      #   timestamp = datetime.datetime.utcnow() - datetime.timedelta(hours=24)
 
-        if self.type in ['heating','cooling']:
-          value = self.enclosure.engine.weather.get_history_at(timestamp, 'temperature')
+      #   if self.type in ['heating','cooling']:
+      #     value = self.enclosure.engine.weather.get_history_at(timestamp, 'temperature')
 
-        elif self.type in ['humidity']:
-          value = self.enclosure.engine.weather.get_history_at(timestamp, 'humidity')
+      #   elif self.type in ['humidity']:
+      #     value = self.enclosure.engine.weather.get_history_at(timestamp, 'humidity')
 
-        if value is not None:
-          value += self.state['variation']['offset']
+      #   if value is not None:
+      #     value += self.state['variation']['offset']
 
-      elif self.state['variation']['script']:
+      if self.state['variation']['script']:
         value = float(terrariumUtils.get_script_data(self.state['variation']['source'])) + self.state['variation']['offset']
 
       elif self.state['variation']['external']:
@@ -508,6 +551,10 @@ class terrariumArea(object):
 
     old_is_day = self.state['is_day']
     self.state['is_day'] = self.is_day
+
+    if old_is_day != self.state['is_day'] and self.state['variation'['dynamic']]:
+      print('Update variation data based on date / night change')
+      self._setup_variation_data()
 
     if 'sensors' in self.setup:
       # Change the sensor limits when changing from day to night and vs.
