@@ -15,33 +15,19 @@ class terrariumSHT3XSensor(terrariumI2CSensor):
     data = None
     with self._open_hardware() as i2c_bus:
       # MS to SL
-      print('Open sht3x I2C bus')
-      print('sht3x start write action')
       i2c_bus.write_i2c_block_data(self.device[0],self.__SHT3x_SS,[0x06])
-      print('Done writing, wait 0.2 sec')
       sleep(0.2)
-      # Read out data
 
-      print('sht3x start read action')
+      # Read out data
       result = i2c_bus.read_i2c_block_data(self.device[0],self.__SHT3x_READ,6)
-      print('Done reading, data:')
-      print(data)
+
       # Divide data into counts Temperature
       data = {}
       data['temperature'] = result[0] << 8 | result[1]
       data['temperature'] = -45.0 + 175.0 * float(data['temperature']) / 65535.0
 
-      print('sht3x temperature data:')
-      print(data['temperature'])
-
       # Divide data into counts Humidity
       data['humidity'] = result[3] << 8 | result[4]
       data['humidity'] = 100.0 * float(data['humidity']) / 65535.0
 
-      print('sht3x humidity data:')
-      print(data['humidity'])
-
-
-    print('sht3x return data')
-    print(data)
     return data
