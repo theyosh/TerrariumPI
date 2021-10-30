@@ -1,6 +1,5 @@
 from . import terrariumI2CSensor
 
-import numpy as np
 from gevent import sleep
 # https://github.com/OlivierdenOuden/Sensirion_SHT35/blob/master/simple_SHT31.py
 
@@ -24,20 +23,20 @@ class terrariumSHT3XSensor(terrariumI2CSensor):
       # Read out data
 
       print('sht3x start read action')
-      data = i2c_bus.read_i2c_block_data(self.device[0],self.__SHT3x_READ,6)
+      result = i2c_bus.read_i2c_block_data(self.device[0],self.__SHT3x_READ,6)
       print('Done reading, data:')
       print(data)
       # Divide data into counts Temperature
       data = {}
-      data['temperature'] = data[0] << 8 | data[1]
-      data['temperature'] = -45.0 + 175.0 * np.float(data['temperature']) / 65535.0
+      data['temperature'] = result[0] << 8 | result[1]
+      data['temperature'] = -45.0 + 175.0 * float(data['temperature']) / 65535.0
 
       print('sht3x temperature data:')
       print(data['temperature'])
 
       # Divide data into counts Humidity
-      data['humidity'] = data[3] << 8 | data[4]
-      data['humidity'] = 100.0 * np.float(data['humidity']) / 65535.0
+      data['humidity'] = result[3] << 8 | result[4]
+      data['humidity'] = 100.0 * float(data['humidity']) / 65535.0
 
       print('sht3x humidity data:')
       print(data['humidity'])
