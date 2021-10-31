@@ -4,7 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, i2c]
 
 image:
-  src: /assets/img/Qwiic_Relay.jpg
+  src: /assets/img/Qwiic_Relay.webp
   alt: "Qwiic Relays header image"
 
 device_address: "[relay_number],[I2C Address](/TerrariumPI/hardware#i2c-bus) <br />Ex: `1,0x3f`"
