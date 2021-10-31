@@ -7,7 +7,6 @@ image:
   src: /assets/img/PCA9685-dimmer.webp
   alt: "PCA9685 header image"
 
-device_type : PCA9685-dimmer
 device_address: I2C Address
 dimmer_frequency: 5000
 device_url : https://custom-build-robots.com/electronic/raspberry-pi-led-dimmer-pca9685-servo-controller/8840?lang=en

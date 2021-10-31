@@ -2,14 +2,12 @@
 title: Qwiic Relay
 categories: [Hardware, Relay]
 tags: [relay, i2c]
-permalink: /hardware/relay/:title/
 
 image:
   src: /assets/img/Qwiic_Relay.jpg
   alt: "Qwiic Relays header image"
 
-device_type : Qwiic Relay
-device_address: "Enter the relay number and the I2C address seperated by a comma: [relay_number, i2c_address]"
+device_address: "[relay_number],[I2C Address](/TerrariumPI/hardware#i2c-bus) <br />Ex: `1,0x3f`"
 device_url : https://www.sparkfun.com/search/results?term=Qwiic+relay
 ---
 
