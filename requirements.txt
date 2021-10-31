@@ -46,6 +46,7 @@ PCA9685-driver
 zeroconf==0.31.0
 pywemo
 simple-pid
+sparkfun-qwiic-relay
 
 # Webcam packages
 Pillow
