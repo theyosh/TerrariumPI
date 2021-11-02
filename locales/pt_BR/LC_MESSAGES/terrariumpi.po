@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-10-13 02:42+0000\n"
+"PO-Revision-Date: 2021-11-03 18:42+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/3-x-y-z/pt_BR/>\n"
@@ -3204,7 +3204,7 @@ msgstr "PIP"
 
 #: views/info.tpl:51
 msgid "Source"
-msgstr "Fonte"
+msgstr "Origem"
 
 #: views/info.tpl:57 views/info.tpl:73
 msgid "Web interface"
