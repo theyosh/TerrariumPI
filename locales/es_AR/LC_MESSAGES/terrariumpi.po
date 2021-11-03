@@ -6,23 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-10-23 10:51+CEST\n"
-"PO-Revision-Date: 2020-09-14 14:14+0000\n"
-"Last-Translator: Marcnr1984 <marcnruiz@gmail.com>\n"
+"PO-Revision-Date: 2021-11-03 19:45+0000\n"
+"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Spanish (Argentina) <https://weblate.theyosh.nl/projects/"
-"terrariumpi/webinterface/es_AR/>\n"
+"terrariumpi/4-x-y-z/es_AR/>\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.2.2\n"
+"X-Generator: Weblate 4.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:31
-#, fuzzy
-#| msgid "Light"
 msgid "Lighting"
-msgstr "Luz"
+msgstr "Iluminación"
 
 #: terrariumArea.py:37
 #, fuzzy
@@ -39,8 +37,6 @@ msgid "Humidity"
 msgstr "Humedad relativa"
 
 #: terrariumArea.py:55
-#, fuzzy
-#| msgid "Water tank"
 msgid "Water tank"
 msgstr "Tanque de agua"
 
@@ -71,16 +67,12 @@ msgid "pH"
 msgstr "pH"
 
 #: terrariumEngine.py:54
-#, fuzzy
-#| msgid "Temperature"
 msgid "temperature"
-msgstr "Temperatura"
+msgstr "temperatura"
 
 #: terrariumEngine.py:55
-#, fuzzy
-#| msgid "Distance"
 msgid "distance"
-msgstr "Distancia"
+msgstr "distancia"
 
 #: terrariumEngine.py:56
 msgid "altitude"
@@ -91,22 +83,16 @@ msgid "pressure"
 msgstr ""
 
 #: terrariumEngine.py:58
-#, fuzzy
-#| msgid "Humidity"
 msgid "humidity"
-msgstr "Humedad relativa"
+msgstr "humedad relativa"
 
 #: terrariumEngine.py:59
-#, fuzzy
-#| msgid "Moisture"
 msgid "moisture"
-msgstr "Humedad"
+msgstr "humedad"
 
 #: terrariumEngine.py:60
-#, fuzzy
-#| msgid "Conductivity"
 msgid "conductivity"
-msgstr "Conductividad"
+msgstr "conductividad"
 
 #: terrariumEngine.py:61
 msgid "ph"
@@ -141,22 +127,16 @@ msgid "co2"
 msgstr ""
 
 #: terrariumEngine.py:68
-#, fuzzy
-#| msgid "Volume"
 msgid "volume"
-msgstr "Volumen"
+msgstr "volumen"
 
 #: terrariumEngine.py:69
-#, fuzzy
-#| msgid "Water tank"
 msgid "watertank"
-msgstr "Tanque de agua"
+msgstr "tanque de agua"
 
 #: terrariumEngine.py:70
-#, fuzzy
-#| msgid "Wind speed"
 msgid "windspeed"
-msgstr "Velocidad del viento"
+msgstr "velocidad del viento"
 
 #: terrariumEngine.py:71
 msgid "water_flow"
@@ -167,8 +147,6 @@ msgid "wattage"
 msgstr ""
 
 #: terrariumEngine.py:1074 views/dashboard.html:18 views/status.html:112
-#, fuzzy
-#| msgid "Uptime"
 msgid "Up time"
 msgstr "Tiempo de actividad"
 
@@ -187,10 +165,8 @@ msgid "Storage"
 msgstr ""
 
 #: terrariumEngine.py:1098
-#, fuzzy
-#| msgid "Memory usage"
 msgid "Memory"
-msgstr "Uso de la memoria"
+msgstr "memoria"
 
 #: terrariumEngine.py:1115
 #, fuzzy
@@ -267,10 +243,8 @@ msgid "Traffic light"
 msgstr "Mínimo de horas de luz"
 
 #: terrariumNotification.py:193
-#, fuzzy
-#| msgid "Webhook"
 msgid "Web-hook"
-msgstr "Webhook"
+msgstr "Web-hook"
 
 #: terrariumNotification.py:197
 msgid "MQTT"
@@ -393,10 +367,8 @@ msgstr "Semana"
 
 #: views/buttons.html:41 views/dashboard.html:297 views/relays.html:47
 #: views/sensors.html:51
-#, fuzzy
-#| msgid "Months"
 msgid "Month"
-msgstr "Meses"
+msgstr "Mes"
 
 #: views/buttons.html:42 views/dashboard.html:298 views/relays.html:48
 #: views/sensors.html:52
@@ -405,10 +377,8 @@ msgstr "Año"
 
 #: views/buttons.html:53 views/dashboard.html:309 views/relays.html:60
 #: views/sensors.html:64
-#, fuzzy
-#| msgid "Export data"
 msgid "Export"
-msgstr "Exportar datos"
+msgstr "Exportar"
 
 #: views/buttons.html:58 views/calendar.html:7 views/dashboard.html:117
 #: views/includes/sidebar.html:264 views/relays.html:64 views/sensors.html:69
@@ -423,20 +393,16 @@ msgstr "Ignorar"
 
 #: views/buttons.html:68 views/modals/webcam.html:400 views/relays.html:80
 #: views/sensors.html:79 views/webcams.html:38
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete"
-msgstr "Eliminar archivo"
+msgstr "Eliminar"
 
 #: views/calendar.html:2 views/includes/sidebar.html:68
 msgid "Calendar"
 msgstr "Calendario"
 
 #: views/calendar.html:6
-#, fuzzy
-#| msgid "Download"
 msgid "Download iCal"
-msgstr "Descargar"
+msgstr "Descargar iCal"
 
 #: views/dashboard.html:2 views/includes/sidebar.html:48
 msgid "Dashboard"
@@ -447,10 +413,8 @@ msgid "Power usage in Watt"
 msgstr "Consumo en watts"
 
 #: views/dashboard.html:59
-#, fuzzy
-#| msgid "Water flow in L/m"
 msgid "Water flow in %s"
-msgstr "Flujo de agua en L/m"
+msgstr "Flujo de agua en %s"
 
 #: views/dashboard.html:73
 #, fuzzy
@@ -528,10 +492,8 @@ msgid "Status"
 msgstr "Estado"
 
 #: views/enclosures.html:177
-#, fuzzy
-#| msgid "Action"
 msgid "Actions"
-msgstr "Acción"
+msgstr "Acciones"
 
 #: views/includes/modals.html:5 views/includes/modals.html:17
 #: views/modals/webcam.html:399
@@ -3247,10 +3209,8 @@ msgid "Not all required fields are entered correctly."
 msgstr "Los campos obligatorios están marcados con '%s'."
 
 #: views/audio_files.html:161 views/audio_files.html:168 views/relays.html:121
-#, fuzzy
-#| msgid "OK!"
 msgid "OK"
-msgstr "OK!"
+msgstr "OK"
 
 #: views/includes/navigation.html:22
 #, fuzzy
