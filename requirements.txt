@@ -32,8 +32,7 @@ RPi.GPIO
 pyserial
 pigpio_dht
 pigpio
-# Version 0.0.4 Does not install correctly. https://github.com/ratcashdev/mitemp/issues/23
-mitemp_bt==0.0.3
+mitemp_bt
 PyMLX90614
 pyownet
 veml6075
