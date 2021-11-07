@@ -273,7 +273,7 @@
         {% endif %}
         <div class="col" id="sensor_list">
           <script type="text/html" id="sensor_template">
-            <div class="card">
+            <div class="card dashboard_sensor">
               <div class="card-header">
                 <h3 class="card-title mr-1">
                   <i class="fas fa-fw mr-2" data-class="icon"></i><span data-content="name">...</span>
@@ -377,8 +377,6 @@
         jQuery.get({url: '{{ url_for("api:sensor_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
           data = data.data;
           loaded_sensor_type = {};
-          // Sort the sensors based on the given sensor type
-          data.sort((a, b) => a.type.localeCompare(b.type));
 
           // Preprocess the data
           jQuery.each(data,function(counter,sensor) {
@@ -433,6 +431,12 @@
 
             new graph('graph_avg_' + sensor_type, '{{ url_for("api:sensor_type_history", action="history", filter="_id_") }}'.replace('_id_',sensor_type), sensor_type);
           });
+
+          jQuery('div.dashboard_sensor').sort(function (a, b) {
+            let contentA = jQuery(a).find('h3.card-title').text()
+            let contentB = jQuery(b).find('h3.card-title').text()
+            return contentA.localeCompare(contentB);
+          }).appendTo(jQuery('div#sensor_list'));
         });
       },500);
     });
