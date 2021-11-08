@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2021-10-23 10:51+CEST\n"
-"PO-Revision-Date: 2021-11-05 17:58+0000\n"
-"Last-Translator: Philipp Marmet <fujexo@c0d3.ch>\n"
+"PO-Revision-Date: 2021-11-09 09:42+0000\n"
+"Last-Translator: kahuwi14 <karsten@wingen.net>\n"
 "Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/de/>\n"
 "Language: de\n"
@@ -32,7 +32,7 @@ msgstr "Kühlen"
 
 #: terrariumArea.py:49
 msgid "Humidity"
-msgstr "Feuchtigkeit"
+msgstr "Luftfeuchtigkeit"
 
 #: terrariumArea.py:55
 msgid "Water tank"
@@ -80,7 +80,7 @@ msgstr "Druck"
 
 #: terrariumEngine.py:58
 msgid "humidity"
-msgstr "Feuchtigkeit"
+msgstr "Luftfeuchtigkeit"
 
 #: terrariumEngine.py:59
 msgid "moisture"
@@ -469,7 +469,7 @@ msgstr "Alle Termine anzeigen"
 
 #: views/includes/navigation.html:31
 msgid "All doors status"
-msgstr "Türstatus"
+msgstr "Status aller Türen"
 
 #: views/includes/navigation.html:34
 msgid "All doors are closed"
@@ -559,7 +559,7 @@ msgstr "Dateien"
 #: views/includes/sidebar.html:200 views/modals/area.html:331
 #: views/modals/area.html:401 views/playlists.html:2 views/playlists.html:10
 msgid "Playlists"
-msgstr "Playlists"
+msgstr "Playlisten"
 
 #: views/includes/sidebar.html:206
 msgid "New playlist"
@@ -689,8 +689,8 @@ msgstr "Wetter Nacht/Tag"
 #: views/modals/area.html:68
 msgid "Select the mode of this area. This will change the timing and duration of the relays."
 msgstr ""
-"Wählen Sie den Modus dieses Bereichs. Das ändert das timing und die Dauer "
-"der Relais."
+"Wählen Sie den Modus dieses Bereichs. Das ändert Schaltzeit- und dauer der "
+"Relais."
 
 #: views/modals/area.html:76
 msgid "Minimum hours"
