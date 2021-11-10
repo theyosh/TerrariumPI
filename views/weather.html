@@ -140,17 +140,17 @@
       jQuery.each(data.forecast,function(counter,day){
 
         if (counter == 0) {
-          jQuery('#weather_today').text(moment(day.dt * 1000).format('dddd LL'));
+          jQuery('#weather_today').text(moment.utc(day.timestamp * 1000).format('dddd LL'));
           jQuery('#weather_image').attr({'title':day.weather}).css({'background-image' : 'url(' + get_weather_icon(day.weather,data.is_day) + ')'})
           jQuery('#weather_type').text(day.weather);
-          jQuery('#weather_sunrise').text(moment(day.rise * 1000).format('LT'));
-          jQuery('#weather_sunset').text(moment(day.set * 1000).format('LT'));
+          jQuery('#weather_sunrise').text(moment.utc(day.rise * 1000).format('LT'));
+          jQuery('#weather_sunset').text(moment.utc(day.set * 1000).format('LT'));
           jQuery('#wind_direction').css('transform' , 'rotate(' + (day.wind.direction + 135) + 'deg)' );
           jQuery('#wind_speed').text(formatNumber(day.wind.speed,1,1) + ' ' + sensor_type_indicator('windspeed'));
           jQuery('#weather_temp').text(formatNumber(day.temp) + ' ' + sensor_type_indicator('temperature'));
         } else if (counter < 7) {
           days.push({
-              'day' : moment(day.dt * 1000).format('ddd'),
+              'day' : moment(day.timestamp * 1000).format('ddd'),
               'temperature' : formatNumber(day.temp) + ' ' + sensor_type_indicator('temperature'),
               'icon' : get_weather_icon(day.weather,data.is_day),
               'weather' : day.weather,

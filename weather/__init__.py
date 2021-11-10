@@ -42,7 +42,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
                     'unit_values' : unit_values,
                     'last_update' : None}
 
-    self._data = {'forecast' : {}, 'history' : []}
+    self._data = {'days' : [], 'forecast' : [], 'history' : []}
     self.address = address
 
   @retry(tries=3, delay=0.5, max_delay=2)
@@ -57,8 +57,12 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
           day['temp'] = terrariumUtils.conver_to_value(day['temp'], self._device['unit_values']['temperature'])
           day['wind']['speed'] = terrariumUtils.conver_to_value(day['wind']['speed'], self._device['unit_values']['windspeed'])
 
-        for timestamp in self._data['forecast'].keys():
-          self._data['forecast'][timestamp]['temp'] = terrariumUtils.conver_to_value(self._data['forecast'][timestamp]['temp'], self._device['unit_values']['temperature'])
+        # TODO: Change to list!!!!
+        for forecast in self._data['forecast']:
+          forecast['temperature'] = terrariumUtils.conver_to_value(forecast['temperature'], self._device['unit_values']['temperature'])
+
+        for history in self._data['history']:
+          history['temperature'] = terrariumUtils.conver_to_value(history['temperature'], self._device['unit_values']['temperature'])
 
         self._device['last_update'] = datetime.now()
         logger.info(terrariumUtils.clean_log_line(f'Loaded new weather data in {time()-start:.3f} seconds.'))
@@ -67,9 +71,10 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
 
   def __get_today_data(self):
     now = int(time())
-    for timestamp in sorted(self._data['forecast'].keys()):
-      if not now > self._data['forecast'][timestamp]['set']:
-        return self._data['forecast'][timestamp]
+    # TODO: Change to list!!!!
+    for forecast in self._data['days']:
+      if not now > forecast['set']:
+        return forecast
 
     return None
 
@@ -104,7 +109,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   def sunrise(self):
     data = self.__get_today_data()
     if data is not None:
-      return datetime.fromtimestamp(data['rise'])
+      return datetime.utcfromtimestamp(data['rise'])
 
     return datetime.now().replace(hour=8, minute=0, second=0, microsecond=0)
 
@@ -112,7 +117,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   def sunset(self):
     data = self.__get_today_data()
     if data is not None:
-      return datetime.fromtimestamp(data['set'])
+      return datetime.utcfromtimestamp(data['set'])
 
     return datetime.now().replace(hour=20, minute=0, second=0, microsecond=0)
 
@@ -120,10 +125,9 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   def is_day(self):
     return self.sunrise < datetime.now() < self.sunset
 
-
   @property
   def current_temperature(self):
-    return self._data['days'][0]['temp']
+    return self._data['days'][0]['temperature']
 
   @property
   def current_humidity(self):
@@ -135,18 +139,11 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
 
   @property
   def forecast(self):
-    data = []
-    timestamps = sorted(self._data['forecast'].keys())
-    now = datetime.now().timestamp()
-    for timestamp in timestamps:
-      if int(timestamp) >= now:
-        data.append({'value' : self._data['forecast'][timestamp]['temp'], 'timestamp' : timestamp})
-
-    return data
+    return copy.deepcopy(self._data['forecast'])
 
   @property
   def history(self):
-    return self._data['history']
+    return copy.deepcopy(self._data['history'])
 
   @property
   def location(self):
@@ -157,10 +154,6 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   @property
   def credits(self):
     return {'text' :  self._data['credits'] , 'url' : self._data['url']}
-
-  @property
-  def get_available_types(self):
-    return terrariumWeather.get_available_types()
 
   @abstractmethod
   def _load_data(self):

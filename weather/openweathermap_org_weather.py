@@ -2,11 +2,11 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
+from datetime import datetime
+from time import time
+
 from . import terrariumWeatherAbstract
 from terrariumUtils import terrariumUtils
-
-from datetime import date, datetime, timedelta
-import copy
 
 class terrariumOpenweathermap(terrariumWeatherAbstract):
   HARDWARE     = 'Openweathermap.org'
@@ -23,14 +23,13 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
     logger.debug('Loading weather source {}'.format(address))
     data = terrariumUtils.get_remote_data(self.address)
     if data:
-      self._data['city']    = data['name']
-      self._data['country'] = data['sys']['country']
-      self._data['geo']     = {'lat'  : float(data['coord']['lat']),
+      self._data['city']     = data['name']
+      self._data['country']  = data['sys']['country']
+      self._data['geo']      = {'lat' : float(data['coord']['lat']),
                                'long' : float(data['coord']['lon']) }
-      self._data['url']     = 'https://openweathermap.org/city/{}'.format(data['id'])
-      self._data['credits'] = 'OpenWeatherMap weather data'
-
-      self._data['days'] = []
+      self._data['url']      = 'https://openweathermap.org/city/{}'.format(data['id'])
+      self._data['credits']  = 'OpenWeatherMap weather data'
+      self._data['timezone'] = int(data['timezone'])
 
       return True
 
@@ -38,85 +37,57 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
     return False
 
   def __load_forecast_data(self):
-    # Onecall API's are more expensive (max 1000 a day) so we update this at a lower frequency
+    # Onecall API's are more expensive (max 1000 a day - 1 call per 2 minutes) so we update this at a lower frequency
     address = terrariumUtils.parse_url(self.address)
     data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}'.format(self._data['geo']['lat'],self._data['geo']['long'],address['query_params']['appid']))
 
     if data:
-      # Get the sunrise and sunset from the current data
-      sunrise = data['current']['sunrise']
-      sunset = data['current']['sunset']
+      self._data['days'] = []
+      self._data['forecast'] = []
 
-      # Loop over hourly and daily forecasts
-      for day in data['hourly'] + data['daily']:
-        # Here we store the new sunrise and sunset. If there is no new update, use the old values.
-        sunrise = day.get('sunrise',sunrise)
-        sunset  = day.get('sunset',sunset)
+      for hourly in data['hourly']:
+        self._data['forecast'].append({
+          'timestamp'   : int(hourly["dt"] + self._data["timezone"]),
+          'temperature' : float(hourly['temp']),
+          'humidity'    : float(hourly['humidity']),
+        })
 
-        # As daily forecast has four time parts, we have to use a list.
-        tempdata = []
+      day_periods = {'morn' : -6 * 60 * 60, 'day' : 0, 'eve' : 6 * 60 * 60, 'night' : 12 * 60 * 60}
+      for daily in data['daily']:
 
-        # Is the temp value a float (hourly forecast), then just process this single forecast
-        if terrariumUtils.is_float(day['temp']):
-          tempdata.append(day)
+        for period in day_periods:
+          timestamp = int(daily["dt"] + self._data["timezone"] + day_periods[period])
 
-        else:
-          # Else we have to create multiple forecasts with differnt timestamps and temperatures
-          for part in day['temp']:
-            tempday = copy.deepcopy(day)
-            tempday['temp'] = day['temp'][part]
+          # Exlude already existing and pasted hourly forecasts
+          if timestamp not in [item['timestamp'] for item in self._data['forecast']] and timestamp > self._data['forecast'][0]['timestamp']:
 
-            if part == 'day':
-              self._data['days'].append({
-                'dt' : tempday['dt'],
-                'rise'     : sunrise,
-                'set'      : sunset,
-                'temp'     : tempday['temp'],
-                'humidity' : tempday['humidity'],
-                'wind'     : {'speed'     : tempday['wind_speed'],    # Speed is in meter per second
-                              'direction' : tempday['wind_deg']},
-                'weather'  : tempday['weather'][0]['description']
-              })
+            self._data['forecast'].append({
+              'timestamp'   : timestamp,
+              'temperature' : float(daily['temp'][period]),
+              'humidity'    : float(daily['humidity']),
+            })
 
-            elif part == 'night':
-              continue
+          if 'day' == period:
+            # Store day data for icons
+            day = daily
+            if len(self._data['days']) == 0:
+              # First day, we use the current data
+              day = data['current']
+              day['temp'] = {period : data['current']['temp']}
 
-            # Modify the timestamp based on period of the day and the timestamp of the forecast
-            # The forecast timestamp is always 12:00 UTC (middle of the day)
-            if 'night' == part:
-              tempday['dt'] = day['dt'] + 12 * 60 * 60
+            self._data['days'].append({
+              'timestamp' : timestamp,
+              'rise'      : int(day['sunrise'] + self._data["timezone"]),
+              'set'       : int(day['sunset']  + self._data["timezone"]),
+              'temp'      : float(day['temp'][period]),
+              'humidity'  : float(day['humidity']),
+              'wind'      : {'speed'    : float(day['wind_speed']),    # Speed is in meter per second
+                            'direction' : float(day['wind_deg'])},
+              'weather'   : day['weather'][0]['description']
+            })
 
-              sunrise += 24 * 60 * 60
-              sunset += 24 * 60 * 60
-
-            elif 'eve' == part:
-              tempday['dt'] = day['dt'] + 6 * 60 * 60
-            elif 'morn' == part:
-              tempday['dt'] = day['dt'] - 6 * 60 * 60
-
-            tempdata.append(tempday)
-
-        # Put of the forecast data in one list indexed on the forecast timestamps
-        for forecast  in tempdata:
-          temperature = forecast['temp'] if terrariumUtils.is_float(forecast['temp']) else forecast['temp']['day']
-
-          self._data['forecast'][str(forecast['dt'])] = {'rise'     : sunrise,
-                                                    'set'      : sunset,
-                                                    'temp'     : temperature,
-                                                    'humidity' : forecast['humidity'],
-                                                    'wind'     : {'speed'     : forecast['wind_speed'],    # Speed is in meter per second
-                                                                  'direction' : forecast['wind_deg']},
-                                                    'weather'  : forecast['weather'][0]['description']}
-
-      self._data['days'][0]['temp']     = data['current']['temp']
-      self._data['days'][0]['humidity'] = data['current']['humidity']
-      self._data['days'][0]['weather']  = data['current']['weather'][0]['description']
-
-      for timestamp in sorted(self._data['forecast'].keys()):
-        for day in self._data['days']:
-          if date.fromtimestamp(int(timestamp)) == date.fromtimestamp(int(day['dt'])):
-            self._data['forecast'][timestamp]['rise'] = day['rise']
-            self._data['forecast'][timestamp]['set'] = day['set']
+      self._data['forecast'] = sorted(self._data['forecast'], key=lambda d: d['timestamp'])
+      self._data['days'] = sorted(self._data['days'], key=lambda d: d['timestamp'])
 
       return True
 
@@ -124,29 +95,34 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
 
   def __load_history_data(self):
-    # Onecall API's are more expensive (max 1000 a day) so we update this at a lower frequency
+    # Onecall API's are more expensive (max 1000 a day - 1 call per 2 minutes) so we update this at a lower frequency
     # Here we can do 1 hit a day. As the history is per hole full day at a time, and will not change anymore
-    if self.__history_day is not None and self.__history_day == int(datetime.now().strftime('%d')):
+    if self.__history_day is not None and self.__history_day == int(datetime.utcfromtimestamp(int(datetime.now().timestamp()) + self._data["timezone"]).strftime('%d')):
       return True
 
-    self.__history_day = int(datetime.now().strftime('%d'))
+    start = time()
+    self._data['history'] = []
     address = terrariumUtils.parse_url(self.address)
-    data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={}&lon={}&units=metric&dt={}&appid={}'.format(self._data['geo']['lat'],self._data['geo']['long'],int((datetime.now() - timedelta(hours=24)).timestamp()),address['query_params']['appid']))
+    for day in range(1,3):
+      now = int(datetime.now().timestamp()) + self._data["timezone"] - (day * 24 * 60 * 60)
+      history_url = 'https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={}&lon={}&units=metric&dt={}&appid={}'.format(self._data['geo']['lat'],self._data['geo']['long'],now,address['query_params']['appid'])
+      data = terrariumUtils.get_remote_data(history_url)
 
-    if data:
+      if data is None:
+        continue
+
       for item in data['hourly']:
-        if len(self._data['history']) > 0:
-          self._data['history'][len(self._data['history'])-1]['end'] = datetime.utcfromtimestamp(int(item['dt']))
-
         self._data['history'].append({
-          'begin' : datetime.utcfromtimestamp(int(item['dt'])),
-          'end' : None,
+          'timestamp'   : int(item["dt"] + self._data["timezone"]),
           'temperature' : float(item['temp']),
-          'humidity' : float(item['humidity']),
-          'pressure': float(item['pressure']),
-          'uvi': float(item['uvi']),
+          'humidity'    : float(item['humidity']),
+          'pressure'    : float(item['pressure']),
+          'uvi'         : float(item['uvi']),
         })
 
+    self._data['history'] = sorted(self._data['history'], key=lambda d: d['timestamp'])
+    self.__history_day = int(datetime.utcfromtimestamp(int(datetime.now().timestamp()) + self._data["timezone"]).strftime('%d'))
+    logger.info(f'Loaded new historical weather data ({len(self._data["history"])} measurements) in {time()-start:.2f} seconds')
     return True
 
   def _load_data(self):

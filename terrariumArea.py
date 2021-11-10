@@ -342,7 +342,7 @@ class terrariumArea(object):
       for history in self.enclosure.engine.weather.history:
         varation_data.append({
           'when': 'at',
-          'period' : int(history['begin'].astimezone(tz=None).timestamp()),
+          'period' : history['timestamp'],
           'value' : float(history[weather_current_source]) + self.state['variation']['offset']
         })
 
@@ -351,6 +351,8 @@ class terrariumArea(object):
 
       if 'at' == varation.get('when'):
         # Format datetime object to a time object
+
+        # TODO: Need to check if this will interfear with utc timestamps from history...
         period_timestamp = datetime.datetime.fromtimestamp(int(varation.get('period'))).strftime('%H:%M')
 
       elif 'after' == varation.get('when'):
@@ -364,24 +366,6 @@ class terrariumArea(object):
           period_timestamp = datetime.time.fromisoformat(self.state['variation']['periods'][periods-1]['start'])
           period_timestamp = datetime.datetime.now().replace(hour=period_timestamp.hour, minute=period_timestamp.minute) + datetime.timeldeta(minute=int(varation.get('period')))
           period_timestamp = period_timestamp.strftime('%H:%M')
-
-      # else:
-      #   self.state['variation']['offset'] = float(varation.get('offset', 0.0))
-
-      #   # if 'weather' == varation.get('when'):
-      #   #   self.state['variation']['weather'] = True
-
-      #   if 'script' == varation.get('when'):
-      #     self.state['variation']['script'] = True
-      #     self.state['variation']['source'] = varation.get('source')
-
-      #   elif 'external' == varation.get('when'):
-      #     self.state['variation']['external'] = True
-      #     self.state['variation']['source'] = varation.get('source')
-      #     self.__external_cache = terrariumCache()
-
-      #   continue
-
 
       if periods > 0:
         # We have at least 1 item so we need to update the previous entry with the new end time and value
@@ -427,20 +411,8 @@ class terrariumArea(object):
     now = datetime.datetime.now().time()
     # Loop over the periods to find the current period
     period = None
-    #self.state['variation']['weather'] or
     if self.state['variation']['script'] or self.state['variation']['external']:
       value = None
-      # if self.state['variation']['weather']:
-      #   timestamp = datetime.datetime.utcnow() - datetime.timedelta(hours=24)
-
-      #   if self.type in ['heating','cooling']:
-      #     value = self.enclosure.engine.weather.get_history_at(timestamp, 'temperature')
-
-      #   elif self.type in ['humidity']:
-      #     value = self.enclosure.engine.weather.get_history_at(timestamp, 'humidity')
-
-      #   if value is not None:
-      #     value += self.state['variation']['offset']
 
       if self.state['variation']['script']:
         value = float(terrariumUtils.get_script_data(self.state['variation']['source'])) + self.state['variation']['offset']

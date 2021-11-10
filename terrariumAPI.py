@@ -1281,7 +1281,14 @@ class terrariumAPI(object):
     if not self.webserver.engine.weather:
       raise HTTPError(status=404, body=f'No weather data available.')
 
-    return {'data' : self.webserver.engine.weather.forecast}
+    forecast_data = []
+    for forecast in self.webserver.engine.weather.forecast:
+      forecast_data.append({
+        'value' : forecast['temperature'],
+        'timestamp' : forecast['timestamp']
+      })
+
+    return {'data' : forecast_data}
 
 
   # Webcams
