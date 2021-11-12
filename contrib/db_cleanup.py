@@ -25,7 +25,7 @@ def humansize(nbytes):
 
 class HistoryCleanup():
 
-  def __init__(self, database = '../terrariumpi.db', period = timedelta(weeks = 60), batch = 1000):
+  def __init__(self, database = '../data/terrariumpi.db', period = timedelta(weeks = 60), batch = 1000):
     self.database = database
     self.new_database = self.database.replace('.db','.new.db')
     self.period = period
