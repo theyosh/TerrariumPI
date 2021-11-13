@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   terrariumpi:
-    image: wkd1/test:new-slim-10
+    image: wkd1/test:new-slim-14
     volumes:
       - /terrariumpi-logs:/TerrariumPI/logs
       - /terrariumpi-data:/TerrariumPI/data

@@ -42,6 +42,15 @@ WORKDIR /TerrariumPI
 COPY . .
 RUN rm -rf .git
 
+FROM gcc:9.4.0-buster as sispmctl_builder
+RUN apt-get update && apt-get install -y --no-install-recommends libusb-dev && \
+  wget https://sourceforge.net/projects/sispmctl/files/sispmctl/sispmctl-4.9/sispmctl-4.9.tar.gz/download -O sispmctl-4.9.tar.gz && \
+  tar zxvf sispmctl-4.9.tar.gz && \
+  cd sispmctl-4.9/ && \
+  ./configure && \
+  make && \
+  make install
+
 # actual image
 FROM python:3.8.0-slim-buster
 ENV DEBIAN_FRONTEND=noninteractive
@@ -62,6 +71,10 @@ RUN ln -s /usr/lib/python3/dist-packages/cv2.cpython-37m-arm-linux-gnueabihf.so 
   mv /usr/lib/python3.7/gettext.py /usr/local/lib/python3.8/gettext.py && \
   rm -rf /usr/lib/python3/dist-packages/numpy /usr/lib/python3/dist-packages/numpy-1.16.2.egg-info
 WORKDIR /TerrariumPI
+COPY --from=sispmctl_builder /usr/local/lib/libsispmctl* /usr/local/lib/.
+COPY --from=sispmctl_builder /usr/local/bin/sispmctl /usr/local/bin/sispmctl
+RUN rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so.0 && \
+  ldconfig
 COPY --from=builder /TerrariumPI/ /TerrariumPI/.
 COPY --from=remove_git_dir /TerrariumPI /TerrariumPI
 CMD ["/bin/bash", "/TerrariumPI/run.sh"]
