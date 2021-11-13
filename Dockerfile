@@ -73,8 +73,8 @@ RUN ln -s /usr/lib/python3/dist-packages/cv2.cpython-37m-arm-linux-gnueabihf.so 
 WORKDIR /TerrariumPI
 COPY --from=sispmctl_builder /usr/local/lib/libsispmctl* /usr/local/lib/.
 COPY --from=sispmctl_builder /usr/local/bin/sispmctl /usr/local/bin/sispmctl
+RUN rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so.0 && \
+  ldconfig
 COPY --from=builder /TerrariumPI/ /TerrariumPI/.
 COPY --from=remove_git_dir /TerrariumPI /TerrariumPI
-  
-RUN ldconfig
 CMD ["/bin/bash", "/TerrariumPI/run.sh"]
