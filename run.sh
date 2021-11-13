@@ -73,6 +73,14 @@ if [ -f /boot/cmdline.txt ]; then
 
 fi
 
+# Setup logging symlinks
+if [ ! -h log/terrariumpi.log ]; then
+  ln -s /dev/shm/terrariumpi.log log/terrariumpi.log
+fi
+if [ ! -h log/terrariumpi.access.log ]; then
+  ln -s /dev/shm/terrariumpi.access.log log/terrariumpi.access.log
+fi
+
 if [[ $REBOOT_REQUIRED == 1 ]]; then
   if [[ $AUTO_REBOOT == true ]]; then
     echo "Some settings have been updated that require reboot, your Raspberry Pi will reboot in 60 seconds..."

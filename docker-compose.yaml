@@ -1,19 +1,21 @@
 version: "3.3"
 services:
   terrariumpi:
-    image: wkd1/test:new-slim-14
+    image: wkd1/test:new-slim-15
     volumes:
-      - /terrariumpi-logs:/TerrariumPI/logs
+      - /terrariumpi-logs:/TerrariumPI/log
       - /terrariumpi-data:/TerrariumPI/data
       - /terrariumpi-media:/TerrariumPI/media
       - /terrariumpi-DenkoviRelayCommandLineTool:/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool
       - /boot/config.txt:/boot/config.txt
       - /boot/cmdline.txt:/boot/cmdline.txt
       - /etc/modules:/etc/modules
+      - /opt/vc/bin:/opt/vc/bin
     network_mode: host
     restart: always
     privileged: true
     environment:
+      LD_LIBRARY_PATH: /opt/vc/lib # confirm whether this is needed, if so move to Dockerfile
       TZ: "Europe/Amsterdam" # timezone list can be found here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
       ENABLE_I2C: "true"
       ENABLE_1_WIRE: "true"
