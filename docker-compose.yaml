@@ -11,6 +11,7 @@ services:
       - /boot/cmdline.txt:/boot/cmdline.txt
       - /etc/modules:/etc/modules
       - /opt/vc/bin:/opt/vc/bin
+      - /dev:/dev
     network_mode: host
     restart: always
     privileged: true
