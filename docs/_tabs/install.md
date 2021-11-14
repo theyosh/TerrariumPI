@@ -47,6 +47,44 @@ When the Raspberry PI is up and running, you should be able to SSH to it. On Lin
 ssh pi@[raspberrypi]
 ```
 
+## Docker
+As from version 4.1 there is a Docker image that can be used to run TerrariumPI. When you run it in Docker, you can skip the rest of the page. Only the migration could be followed if you want to restore your current relay history.
+
+Install docker according to: https://pimylifeup.com/raspberry-pi-docker/
+
+Then you need to setup a `docker-compose.yaml` file. There is an example `docker-compose.yaml.example` which can be used as a starting point:
+
+```yaml
+version: "3.3"
+services:
+  terrariumpi:
+    image: theyosh/terrariumpi:4.1.0
+    volumes:
+      - /opt/terrariumpi/logs:/TerrariumPI/log
+      - /opt/terrariumpi/data:/TerrariumPI/data
+      - /opt/terrariumpi/media:/TerrariumPI/media
+      - /opt/terrariumpi/webcam-archive:/TerrariumPI/webcam/archive
+      - /opt/terrariumpi/DenkoviRelayCommandLineTool:/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool
+      - /boot/config.txt:/boot/config.txt
+      - /boot/cmdline.txt:/boot/cmdline.txt
+      - /etc/modules:/etc/modules
+      - /opt/vc/bin:/opt/vc/bin
+      - /dev:/dev
+    network_mode: host
+    restart: always
+    privileged: true
+    environment:
+      TZ: "Europe/Amsterdam" # timezone list can be found here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      ENABLE_I2C: "true"
+      ENABLE_1_WIRE: "true"
+      ENABLE_CAMERA: "true"
+      ENABLE_SERIAL: "true"
+      ENABLE_CO2_SENSORS: "true"
+      AUTO_REBOOT: "true"
+```
+
+then you can run `docker-compose up -d` to start the docker image. It could be that it needs a reboot. After that, you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
+
 ## Prerequisites
 
 First we need to install Git. This is used to download the software from Github.com
