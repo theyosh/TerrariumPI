@@ -50,7 +50,7 @@ ssh pi@[raspberrypi]
 ## Docker
 As from version 4.1 there is a Docker image that can be used to run TerrariumPI. When you run it in Docker, you can skip the rest of the page. Only the migration could be followed if you want to restore your current relay history.
 
-Install docker according to: https://pimylifeup.com/raspberry-pi-docker/
+Install docker according to: [https://pimylifeup.com/raspberry-pi-docker/](https://pimylifeup.com/raspberry-pi-docker/)
 
 Then you need to setup a `docker-compose.yaml` file. There is an example `docker-compose.yaml.example` which can be used as a starting point:
 
@@ -82,6 +82,10 @@ services:
       ENABLE_CO2_SENSORS: "true"
       AUTO_REBOOT: "true"
 ```
+The only real setting is the `TZ` value. Make sure it is set to your local/home time zone. [A valid list can be found here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
+
+We run the container with **[privileged](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)** enabled. This is less secure, but needed in order to be able to handle all the hardware that is connected to the Raspberry PI.
 
 then you can run `docker-compose up -d` to start the docker image. It could be that it needs a reboot. After that, you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
