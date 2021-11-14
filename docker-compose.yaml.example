@@ -3,11 +3,11 @@ services:
   terrariumpi:
     image: wkd1/test:new-slim-20
     volumes:
-      - /terrariumpi-logs:/TerrariumPI/log
-      - /terrariumpi-data:/TerrariumPI/data
-      - /terrariumpi-media:/TerrariumPI/media
-      - /terrariumpi-webcam-archive:/TerrariumPI/webcam/archive
-      - /terrariumpi-DenkoviRelayCommandLineTool:/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool
+      - /opt/terrariumpi/logs:/TerrariumPI/log
+      - /opt/terrariumpi/data:/TerrariumPI/data
+      - /opt/terrariumpi/media:/TerrariumPI/media
+      - /opt/terrariumpi/webcam-archive:/TerrariumPI/webcam/archive
+      - /opt/terrariumpi/DenkoviRelayCommandLineTool:/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool
       - /boot/config.txt:/boot/config.txt
       - /boot/cmdline.txt:/boot/cmdline.txt
       - /etc/modules:/etc/modules
