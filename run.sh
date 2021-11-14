@@ -96,4 +96,4 @@ if [[ $REBOOT_REQUIRED == 1 ]]; then
 fi
 
 # No reboot required, Pi must already be fully configured, start TP
-/opt/venv/bin/python /TerrariumPI/terrariumPI.py
+exec /opt/venv/bin/python /TerrariumPI/terrariumPI.py
