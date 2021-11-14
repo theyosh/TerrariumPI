@@ -81,6 +81,9 @@ if [ ! -h log/terrariumpi.access.log ]; then
   ln -s /dev/shm/terrariumpi.access.log log/terrariumpi.access.log
 fi
 
+# Add some pi camera symbolic links
+ln -s /opt/vc/bin/raspi* /usr/bin/ 2>/dev/null
+
 if [[ $REBOOT_REQUIRED == 1 ]]; then
   if [[ $AUTO_REBOOT == true ]]; then
     echo "Some settings have been updated that require reboot, your Raspberry Pi will reboot in 60 seconds..."
