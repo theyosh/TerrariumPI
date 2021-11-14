@@ -247,8 +247,29 @@ EOF
 
 # Change the rights to the Pi user
 cd "${BASEDIR}/"
+
+# Updates for docker support
+# Create data directory
+mkdir -p data
+
+# Custom logging
+if [ -f logging.custom.conf ]; then
+  mv logging.custom.conf log
+fi
+
+# Calendar
+if [ -f calendar.ics ]; then
+  mv calendar.ics data
+fi
+
+# Database
+if [ -f terrariumpi.db ]; then
+  mv terrariumpi.db* data
+fi
+
 chown ${SCRIPT_USER}. .
 chown ${SCRIPT_USER}. * -Rf
+
 sync
 
 
