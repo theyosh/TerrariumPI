@@ -51,7 +51,6 @@ sparkfun-qwiic-relay
 Pillow
 opencv-python-headless==4.5.3.56
 piexif
-picamera
 
 # Calendar and utils
 icalendar

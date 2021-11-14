@@ -64,6 +64,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends gnupg ca-certif
   apt-get install -y --no-install-recommends bc watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev && \
   apt-get install -y --no-install-recommends libopenexr23 libilmbase23 liblapack3 libatlas3-base && \
   apt-get install -y --no-install-recommends python3-opencv libftdi1 libasound-dev && \
+  mkdir -p /usr/share/man/man1 && apt-get install -y --no-install-recommends openjdk-11-jre-headless && \
   apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 ENV PATH="/opt/venv/bin:$PATH"
 COPY --from=builder /opt/venv /opt/venv

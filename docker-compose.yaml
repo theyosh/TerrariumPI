@@ -1,15 +1,17 @@
 version: "3.3"
 services:
   terrariumpi:
-    image: wkd1/test:new-slim-14
+    image: wkd1/test:new-slim-16
     volumes:
-      - /terrariumpi-logs:/TerrariumPI/logs
+      - /terrariumpi-logs:/TerrariumPI/log
       - /terrariumpi-data:/TerrariumPI/data
       - /terrariumpi-media:/TerrariumPI/media
       - /terrariumpi-DenkoviRelayCommandLineTool:/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool
       - /boot/config.txt:/boot/config.txt
       - /boot/cmdline.txt:/boot/cmdline.txt
       - /etc/modules:/etc/modules
+      - /opt/vc/bin:/opt/vc/bin
+      - /dev:/dev
     network_mode: host
     restart: always
     privileged: true
