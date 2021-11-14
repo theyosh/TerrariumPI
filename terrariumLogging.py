@@ -80,7 +80,7 @@ class NotificationLogger(logging.StreamHandler):
     if 'terrariumNotification' != data.name and str(data.levelname.lower()) in ['warning','error']:
       self.notification.message(f'system_{data.levelname.lower()}' , {'message' : data.getMessage()} )
 
-if os.path.isfile('logging.custom.cfg'):
-  logging.config.fileConfig('logging.custom.cfg')
+if os.path.isfile('log/logging.custom.cfg'):
+  logging.config.fileConfig('log/logging.custom.cfg')
 else:
   logging.config.fileConfig('logging.cfg')
