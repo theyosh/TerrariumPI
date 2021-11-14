@@ -1,5 +1,6 @@
+.dockerignore
 Dockerfile*
-docker-compose.yaml
+docker-compose.yaml*
 screenshots
 docs
 *.md

@@ -2,6 +2,16 @@
 # Build for raspberry pi
 # docker buildx build --platform linux/arm/v7 --progress=plain -t theyosh/terrariumpi:4.0.0 -f Dockerfile --push .
 
+# build sispmctl 4.9
+FROM gcc:9.4.0-buster as sispmctl_builder
+RUN apt-get update && apt-get install -y --no-install-recommends libusb-dev && \
+  wget https://sourceforge.net/projects/sispmctl/files/sispmctl/sispmctl-4.9/sispmctl-4.9.tar.gz/download -O sispmctl-4.9.tar.gz && \
+  tar zxvf sispmctl-4.9.tar.gz && \
+  cd sispmctl-4.9/ && \
+  ./configure && \
+  make && \
+  make install
+
 # python builder, help keep image small
 FROM python:3.8.0 as builder
 ENV DEBIAN_FRONTEND=noninteractive
@@ -39,15 +49,6 @@ FROM python:3.8.0 as remove_git_dir
 WORKDIR /TerrariumPI
 COPY . .
 RUN rm -rf .git
-
-FROM gcc:9.4.0-buster as sispmctl_builder
-RUN apt-get update && apt-get install -y --no-install-recommends libusb-dev && \
-  wget https://sourceforge.net/projects/sispmctl/files/sispmctl/sispmctl-4.9/sispmctl-4.9.tar.gz/download -O sispmctl-4.9.tar.gz && \
-  tar zxvf sispmctl-4.9.tar.gz && \
-  cd sispmctl-4.9/ && \
-  ./configure && \
-  make && \
-  make install
 
 # actual image
 FROM python:3.8.0-slim-buster
