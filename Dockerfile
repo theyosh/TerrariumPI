@@ -61,7 +61,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends gnupg ca-certif
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9165938D90FDDD2E 82B129927FA3303E 7EA0A9C3F273FCD8 && \
   rm -rf /var/lib/apt/lists/* && \
   apt-get update && \
-  apt-get install -y --no-install-recommends bc watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev && \
+  apt-get install -y --no-install-recommends sudo bc watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev && \
   apt-get install -y --no-install-recommends libopenexr23 libilmbase23 liblapack3 libatlas3-base && \
   apt-get install -y --no-install-recommends python3-opencv libftdi1 libasound-dev && \
   mkdir -p /usr/share/man/man1 && apt-get install -y --no-install-recommends openjdk-11-jre-headless && \
