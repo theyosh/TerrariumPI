@@ -47,6 +47,8 @@ When the Raspberry PI is up and running, you should be able to SSH to it. On Lin
 ssh pi@[raspberrypi]
 ```
 
+**Disclaimer:** If you have TerrariumPI 3 running on this Raspberry PI, then you can [read here](#backup) how to stop and make a backup.
+
 ## Docker
 As from version 4.1 there is a Docker image that can be used to run TerrariumPI. When you run it in Docker, you can skip the rest of the page. Only the migration could be followed if you want to restore your current relay history.
 
@@ -99,8 +101,6 @@ sudo apt -y install git
 ```
 
 ### Download
-
-**Disclaimer:** If you have TerrariumPI 3 running on this Raspberry PI, then you can [read here](#backup) how to stop and make a backup.
 
 After Git is installed, we can download the Terrariumpi source code. We will only download the latest version.
 
