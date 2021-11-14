@@ -18,7 +18,7 @@ The second version of our popular USB 4 Relay Board with several improvements. I
 
 ## Installation
 
-** This is included in the Docker image.**
+**This is already included in the Docker image.**
 
 As the license of Denkovi does not allow to ship their command line tool with my software. Therefore you have to download and install it manually.
 
@@ -34,8 +34,7 @@ Then either rename the jar file to DenkoviRelayCommandLineTool.jar or make a sym
 The software expects the following file to exists: `3rdparty/DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar` from the root TerrariumPI directory.
 
 #### Docker
-For docker please put the jar file in the Docker volume `/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool`. Depending on your setup look in your docker-compose.yaml file. Here also make sure the file is called `DenkoviRelayCommandLineTool.jar` inside the volume.
-
+For docker please put the jar file in the Docker volume `/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool`. Depending on your setup look in your [docker-compose.yaml]({% link _tabs/install.md %}#docker) file. Here also make sure the file is called `DenkoviRelayCommandLineTool.jar` inside the volume.
 
 
 {% include_relative _relay_detail.md %}

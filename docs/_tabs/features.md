@@ -38,3 +38,6 @@ For encryption we use [bcrypt](https://en.wikipedia.org/wiki/Bcrypt).
 Cloud credentials are stored with symmetric encryption. This means that the data can be reverted back to plain text. This is needed to able to login to the cloud providers. TerrariumPI is logging as 'you'.
 
 For encryption we use [Fernet](https://cryptography.io/en/latest/fernet/#using-passwords-with-fernet) encryption with the CPU serial as salt. As every CPU has it's own serial, the salt is unique and locked to your Raspberry PI.
+
+## Docker
+You can also install a Docker image to make the installation easier. More information can be found at [installation page]({% link _tabs/install.md %}#docker)

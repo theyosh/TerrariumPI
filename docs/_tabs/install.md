@@ -89,7 +89,8 @@ We run the container with **[privileged](https://docs.docker.com/engine/referenc
 
 then you can run `docker-compose up -d` to start the docker image. It could be that it needs a reboot. After that, you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
-## Prerequisites
+## Manual
+### Prerequisites
 
 First we need to install Git. This is used to download the software from Github.com
 
@@ -97,7 +98,7 @@ First we need to install Git. This is used to download the software from Github.
 sudo apt -y install git
 ```
 
-## Download
+### Download
 
 **Disclaimer:** If you have TerrariumPI 3 running on this Raspberry PI, then you can [read here](#backup) how to stop and make a backup.
 
@@ -107,7 +108,7 @@ After Git is installed, we can download the Terrariumpi source code. We will onl
 git clone --branch 4.x.y.z --depth 1 https://github.com/theyosh/TerrariumPI.git
 ```
 
-## Installation
+### Installation
 
 And the final step is to start the installer. This will guide you through the installation process.
 
