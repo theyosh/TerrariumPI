@@ -76,4 +76,4 @@ RUN ln -s /usr/lib/python3/dist-packages/cv2.cpython-37m-arm-linux-gnueabihf.so 
 WORKDIR /TerrariumPI
 COPY --from=builder /TerrariumPI/ /TerrariumPI/.
 COPY --from=remove_git_dir /TerrariumPI /TerrariumPI
-CMD ["/bin/bash", "/TerrariumPI/run.sh"]
+ENTRYPOINT ["/bin/bash", "/TerrariumPI/run.sh"]
