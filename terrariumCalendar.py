@@ -10,7 +10,7 @@ from pathlib import Path
 
 class terrariumCalendar(object):
 
-  __ICS_FILE = Path(__file__).parent.joinpath('calendar.ics').resolve()
+  __ICS_FILE = Path(__file__).parent.joinpath('data/calendar.ics').resolve()
 
   def __init__(self):
 
