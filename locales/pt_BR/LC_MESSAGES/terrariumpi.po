@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2021-10-23 10:51+CEST\n"
+"POT-Creation-Date: 2021-11-15 21:43+CET\n"
 "PO-Revision-Date: 2021-11-03 19:45+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
@@ -14,47 +14,47 @@ msgstr ""
 "X-Generator: Weblate 4.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:31
+#: terrariumArea.py:32
 msgid "Lighting"
 msgstr "Iluminação"
 
-#: terrariumArea.py:37
+#: terrariumArea.py:38
 msgid "Heating"
 msgstr "Aquecimento"
 
-#: terrariumArea.py:43
+#: terrariumArea.py:44
 msgid "Cooling"
 msgstr "Resfriamento"
 
-#: terrariumArea.py:49
+#: terrariumArea.py:50
 msgid "Humidity"
 msgstr "Umidade relativa"
 
-#: terrariumArea.py:55
+#: terrariumArea.py:56
 msgid "Water tank"
 msgstr "Tanque de água"
 
-#: terrariumArea.py:61 views/includes/sidebar.html:186
+#: terrariumArea.py:62 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Áudio"
 
-#: terrariumArea.py:67
+#: terrariumArea.py:68
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:73
+#: terrariumArea.py:74
 msgid "Conductivity"
 msgstr "Condutividade"
 
-#: terrariumArea.py:79
+#: terrariumArea.py:80
 msgid "Fertility"
 msgstr "Fertilidade"
 
-#: terrariumArea.py:85
+#: terrariumArea.py:86
 msgid "Moisture"
 msgstr "Umidade absoluta"
 
-#: terrariumArea.py:91
+#: terrariumArea.py:92
 msgid "pH"
 msgstr "pH"
 
@@ -382,7 +382,7 @@ msgstr "Uso de energia total"
 msgid "kWh"
 msgstr "kWh"
 
-#: views/dashboard.html:78 views/dashboard.html:96 views/weather.html:33
+#: views/dashboard.html:78 views/dashboard.html:96
 msgid "in"
 msgstr "em"
 
@@ -780,7 +780,7 @@ msgstr "A hora do dia em que os relés são ligados a cada dia."
 #: views/modals/area.html:301 views/modals/area.html:359
 #: views/modals/area.html:371 views/modals/area.html:532
 #: views/modals/area.html:544 views/modals/area.html:661
-#: views/modals/area.html:673 views/modals/area.html:912
+#: views/modals/area.html:673 views/modals/area.html:913
 msgid "Enter a valid time."
 msgstr "Digite uma hora válida."
 
@@ -840,7 +840,7 @@ msgstr "Selecione a placa de som usada neste anexo."
 #: views/modals/area.html:383 views/modals/area.html:395
 #: views/modals/area.html:556 views/modals/area.html:568
 #: views/modals/area.html:685 views/modals/area.html:697
-#: views/modals/area.html:920
+#: views/modals/area.html:921
 msgid "Enter a valid duration in minutes."
 msgstr "Insira o período em minutos."
 
@@ -1125,30 +1125,40 @@ msgid "Using current weather"
 msgstr "Utilizando clima atual"
 
 #: views/modals/area.html:885
-msgid "Use external source"
+#, fuzzy
+#| msgid "Use external source"
+msgid "Use json source"
 msgstr "Fonte externa remota"
 
-#: views/modals/area.html:888
+#: views/modals/area.html:886
+#, fuzzy
+#| msgid "Custom script"
+msgid "Use script"
+msgstr "Script personalizado"
+
+#: views/modals/area.html:889
 msgid "Select a valid option."
 msgstr "Selecione uma opção válida."
 
-#: views/modals/area.html:896
-msgid "Enter a valid url."
-msgstr "Digite uma URL válida."
+#: views/modals/area.html:897
+#, fuzzy
+#| msgid "Enter a valid duration in minutes."
+msgid "Enter a valid url, local json file or script file."
+msgstr "Insira o período em minutos."
 
-#: views/modals/area.html:904
+#: views/modals/area.html:905
 msgid "Offset."
 msgstr "Compensação."
 
-#: views/modals/area.html:942
+#: views/modals/area.html:943
 msgid "Dimmer on duration"
 msgstr "Duração do Dimmer"
 
-#: views/modals/area.html:946
+#: views/modals/area.html:947
 msgid "Dimmer of duration"
 msgstr "Duração do Dimmer"
 
-#: views/modals/area.html:956
+#: views/modals/area.html:957
 msgid ""
 "Select the delay and duration for the dimmer to go to on or off in minutes. "
 "Max duration is 180 minutes."
@@ -1156,15 +1166,15 @@ msgstr ""
 "Selecione o atraso e a quantidade de minutos para ligar e desligar o dimmer. "
 "Duração máxima de 180 minutos."
 
-#: views/modals/area.html:963
+#: views/modals/area.html:964
 msgid "Relay delay on"
 msgstr "Atraso sobre o relé"
 
-#: views/modals/area.html:967
+#: views/modals/area.html:968
 msgid "Relay delay off"
 msgstr "Atraso sobre o relé desligado"
 
-#: views/modals/area.html:975
+#: views/modals/area.html:976
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
@@ -2289,27 +2299,31 @@ msgstr "Créditos da previsão do tempo"
 msgid "Today"
 msgstr "Hoje"
 
-#: views/weather.html:40
+#: views/weather.html:36
+msgid "Wind"
+msgstr ""
+
+#: views/weather.html:43
 msgid "Location"
 msgstr "Localização"
 
-#: views/weather.html:41
+#: views/weather.html:44
 msgid "Weather type"
 msgstr "Tipo de Clima"
 
-#: views/weather.html:44
+#: views/weather.html:47
 msgid "Rise"
 msgstr "Elevação"
 
-#: views/weather.html:45
+#: views/weather.html:48
 msgid "Set"
 msgstr "Ajustado"
 
-#: views/weather.html:46
+#: views/weather.html:49
 msgid "Temp."
 msgstr "Temp."
 
-#: views/weather.html:68
+#: views/weather.html:71
 msgid "Forecast"
 msgstr "Previsão do dia"
 
@@ -2391,7 +2405,7 @@ msgstr "Atividade Atual"
 msgid "Current value"
 msgstr "Valor atual"
 
-#: views/modals/area.html:1040 views/modals/area.html:1042
+#: views/modals/area.html:1041 views/modals/area.html:1043
 msgid "Delay"
 msgstr "Atraso"
 
@@ -2475,13 +2489,13 @@ msgstr "Editar webcam"
 msgid "Enter a description"
 msgstr "Insira a descrição"
 
-#: views/modals/area.html:910
+#: views/modals/area.html:911
 msgid "Enter a duration in minutes or time"
 msgstr "Insira o período em minutos"
 
-#: views/modals/area.html:894
-msgid "Enter a full url"
-msgstr "Insira uma url completa"
+#: views/modals/area.html:895
+msgid "Enter a full url, local json file or script file."
+msgstr ""
 
 #: views/modals/message.html:60
 msgid "Enter a message"
@@ -2640,7 +2654,7 @@ msgstr "Exportar relé"
 msgid "Export sensor"
 msgstr "Exportar sensor"
 
-#: views/layouts/modal.html:64 views/modals/area.html:1524
+#: views/layouts/modal.html:64 views/modals/area.html:1526
 #: views/settings.html:404
 msgid "Form error"
 msgstr "Erro no Formulário"
@@ -2661,7 +2675,7 @@ msgstr "Ignorar sensor"
 msgid "Ignore webcam"
 msgstr "Ignorar webcam"
 
-#: views/modals/area.html:1524
+#: views/modals/area.html:1526
 msgid "Invalid timestamp in variation settings."
 msgstr "Indicação de tempo inválido em configurações de variação."
 
@@ -2681,7 +2695,7 @@ msgstr "Consumo máximo em porcentagem"
 msgid "Messages per minute"
 msgstr "Mensagens por minuto"
 
-#: views/modals/area.html:1040 views/modals/area.html:1042
+#: views/modals/area.html:1041 views/modals/area.html:1043
 msgid "minutes"
 msgstr "minutos"
 
@@ -2913,6 +2927,12 @@ msgstr "Gasto em watts quando ligado"
 #: views/modals/weather.html:18
 msgid "Weather data source url"
 msgstr "Url da fonte de dados meteorológicos"
+
+#~ msgid "Enter a valid url."
+#~ msgstr "Digite uma URL válida."
+
+#~ msgid "Enter a full url"
+#~ msgstr "Insira uma url completa"
 
 #~ msgid "When"
 #~ msgstr "Quando"
@@ -5005,9 +5025,6 @@ msgstr "Url da fonte de dados meteorológicos"
 
 #~ msgid "YTXX-digital"
 #~ msgstr "YTXX-digital"
-
-#~ msgid "Custom script"
-#~ msgstr "Script personalizado"
 
 #~ msgid "pH SKU-SEN0161"
 #~ msgstr "pH SKU-SEN0161"
