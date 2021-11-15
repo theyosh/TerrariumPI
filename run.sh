@@ -100,5 +100,3 @@ pigpiod -l
 
 # No reboot required, Pi must already be fully configured, start TP
 exec /opt/venv/bin/python /TerrariumPI/terrariumPI.py
-
-# test pretend code change
