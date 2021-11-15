@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends libusb-dev && \
 # python builder, help keep image small
 FROM python:3.8.0 as builder
 ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get update && apt-get install -y gnupg ca-certificates && \
   echo "deb http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list && \
   echo "deb http://archive.raspberrypi.org/debian/ buster main" >> /etc/apt/sources.list.d/raspberrypi.list && \
