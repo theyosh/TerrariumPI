@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-11-15 21:43+CET\n"
-"PO-Revision-Date: 2021-10-23 08:59+0000\n"
+"PO-Revision-Date: 2021-11-15 20:49+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United States) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_US/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1\n"
+"X-Generator: Weblate 4.9\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -1126,26 +1126,20 @@ msgid "Using current weather"
 msgstr "Using current weather"
 
 #: views/modals/area.html:885
-#, fuzzy
-#| msgid "Use external source"
 msgid "Use json source"
-msgstr "Use external source"
+msgstr "Use json source"
 
 #: views/modals/area.html:886
-#, fuzzy
-#| msgid "Custom script"
 msgid "Use script"
-msgstr "Custom script"
+msgstr "Use script"
 
 #: views/modals/area.html:889
 msgid "Select a valid option."
 msgstr "Select a valid option."
 
 #: views/modals/area.html:897
-#, fuzzy
-#| msgid "Enter a valid duration in minutes."
 msgid "Enter a valid url, local json file or script file."
-msgstr "Enter a valid duration in minutes."
+msgstr "Enter a valid url, local json file or script file."
 
 #: views/modals/area.html:905
 msgid "Offset."
@@ -2290,7 +2284,7 @@ msgstr "Today"
 
 #: views/weather.html:36
 msgid "Wind"
-msgstr ""
+msgstr "Wind"
 
 #: views/weather.html:43
 msgid "Location"
@@ -2484,7 +2478,7 @@ msgstr "Enter a duration in minutes or time"
 
 #: views/modals/area.html:895
 msgid "Enter a full url, local json file or script file."
-msgstr ""
+msgstr "Enter a full url, local json file or script file."
 
 #: views/modals/message.html:60
 msgid "Enter a message"
