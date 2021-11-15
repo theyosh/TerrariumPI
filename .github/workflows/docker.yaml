@@ -2,8 +2,8 @@ name: docker build & publish
 
 on:
   push:
-    # branches:
-    #   - 'master'
+    paths-ignore:
+      - 'docs/**'
 
 jobs:
   docker:
