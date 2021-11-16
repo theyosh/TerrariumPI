@@ -43,7 +43,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: theyosh/terrariumpi
+          images: wkd1/test
       -
         name: Login to DockerHub
         if: steps.Dockerfile.outputs.files_exists == 'true'
@@ -57,7 +57,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          push: false
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/arm/v7
