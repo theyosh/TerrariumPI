@@ -54,6 +54,8 @@ As from version 4.1 there is a Docker image that can be used to run TerrariumPI.
 
 Install docker according to: [https://pimylifeup.com/raspberry-pi-docker/](https://pimylifeup.com/raspberry-pi-docker/)
 
+Finally install docker compose `sudo apt install docker-compose`
+
 Then you need to setup a `docker-compose.yaml` file. There is an example `docker-compose.yaml.example` which can be used as a starting point:
 
 ```yaml
