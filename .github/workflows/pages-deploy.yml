@@ -9,7 +9,7 @@ on:
     branches:
       - 4.x.y.z
     paths:
-      - docs/*
+      - 'docs/**'
 
 
 #  pull_request:
