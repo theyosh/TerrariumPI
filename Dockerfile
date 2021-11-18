@@ -84,4 +84,5 @@ RUN ln -s /usr/lib/python3/dist-packages/cv2.cpython-37m-arm-linux-gnueabihf.so 
 WORKDIR /TerrariumPI
 COPY --from=builder /TerrariumPI/ /TerrariumPI/.
 COPY --from=remove_git_dir /TerrariumPI /TerrariumPI
+HEALTHCHECK --interval=30s --timeout=5s --start-period=120s CMD python contrib/docker_health.py || bash -c 'kill -s 2 -1 && (sleep 60; kill -s 9 -1)'
 ENTRYPOINT ["/bin/bash", "/TerrariumPI/run.sh"]
