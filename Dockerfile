@@ -39,10 +39,17 @@ RUN sed -i 's/cryptography/cryptography==3.4.6/g' requirements.txt && \
   echo "numpy" >> requirements.txt && \
   pip install -r requirements.txt
 WORKDIR /TerrariumPI
-COPY .git .git
-RUN git submodule init && \
-  git submodule update && \
-  rm -rf .git
+# we previously copied .git and then did git submodule init and submodule update, however as .git dir changes all the time it invalidates docker cache
+RUN mkdir 3rdparty && cd 3rdparty && \
+  git clone https://github.com/SequentMicrosystems/4relay-rpi.git && git -C "4relay-rpi" checkout "09a44bfbde18791750534ba204e1dfc7506a7eb2" && \
+  git clone https://github.com/PiSupply/Bright-Pi.git && git -C "Bright-Pi" checkout "eccfbbb1221c4966cd337126bedcbb8bb03c3c71" && \
+  git clone https://github.com/ageir/chirp-rpi.git && git -C "chirp-rpi" checkout "6e411d6c382d5e43ee1fd269ec4de6a316893407" && \
+  git clone https://github.com/perryflynn/energenie-connect0r.git && git -C "energenie-connect0r" checkout "12ca24ab9d60cf4ede331de9a6817c3d64227ea0" && \
+  git clone https://github.com/SequentMicrosystems/relay8-rpi.git && git -C "relay8-rpi" checkout "5083730e415ee91fa4785e228f02a36e8bbaa717"
+RUN mkdir -p static/assets/plguins && cd static/assets/plguins && \
+  git clone https://github.com/fancyapps/fancybox.git && git -C "fancybox" checkout "eea1345256ded510ed9fae1e415aec2a7bb9620d" && \
+  git clone https://github.com/mapshakers/leaflet-icon-pulse.git && git -C "leaflet-icon-pulse" checkout "f57da1e45f6d00f340f429a75a39324cad141061" && \
+  git clone https://github.com/ebrelsford/Leaflet.loading.git && git -C "Leaflet.loading" checkout "7b22aff19a5a8fa9534fb2dcd48e06c6dc84b2ed"
 
 # remove git dir from code copy to help keep image smaller
 FROM python:3.8.0 as remove_git_dir
