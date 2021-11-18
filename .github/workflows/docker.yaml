@@ -2,9 +2,6 @@
 name: docker build & publish
 
 on:
-  pull_request:
-    paths-ignore:
-      - 'docs/**'
   push:
     branches:
       - 'master'
@@ -43,7 +40,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: wkd1/test
+          images: theyosh/terrariumpi
       -
         name: Login to DockerHub
         if: steps.Dockerfile.outputs.files_exists == 'true'
@@ -52,20 +49,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build
-        if: steps.Dockerfile.outputs.files_exists == 'true'
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/arm/v7
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      -
         name: Build and push
-        if: steps.Dockerfile.outputs.files_exists == 'true' && GitHub.event_name == 'release'
+        if: steps.Dockerfile.outputs.files_exists == 'true'
         uses: docker/build-push-action@v2
         with:
           context: .
