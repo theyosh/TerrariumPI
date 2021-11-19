@@ -95,8 +95,22 @@ if [[ $REBOOT_REQUIRED == 1 ]]; then
   fi
 fi
 
+# Clear after restart
+if [ -f /var/run/pigpio.pid ]; then
+  rm /var/run/pigpio.pid
+fi
 # run localhost socket only
 pigpiod -l
+
+# Remove the restart file from last unhealty status
+if [ -f .restart ]; then
+  rm .restart
+fi
+
+# Clear after restart
+if [ -f motd.sh ]; then
+  rm motd.sh
+fi
 
 # No reboot required, Pi must already be fully configured, start TP
 exec /opt/venv/bin/python /TerrariumPI/terrariumPI.py
