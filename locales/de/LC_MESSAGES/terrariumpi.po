@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2021-11-15 21:43+CET\n"
 "PO-Revision-Date: 2021-11-21 09:42+0000\n"
-"Last-Translator: Philipp Marmet <fujexo@c0d3.ch>\n"
+"Last-Translator: kahuwi14 <karsten@wingen.net>\n"
 "Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/de/>\n"
 "Language: de\n"
@@ -136,7 +136,7 @@ msgstr "Wassermenge"
 
 #: terrariumEngine.py:72
 msgid "wattage"
-msgstr "Watt"
+msgstr "Wattleistung"
 
 #: terrariumEngine.py:1074 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
