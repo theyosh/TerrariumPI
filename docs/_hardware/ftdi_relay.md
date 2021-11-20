@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, ftdi]
 
 image:
+  path: /assets/img/FTDI.webp
   src: /assets/img/FTDI.webp
   alt: "FTDI header image"
 

@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, co2]
 
 image:
+  path: /assets/img/k30co2.webp
   src: /assets/img/k30co2.webp
   alt: "K30 CO2 sensor header image"
 

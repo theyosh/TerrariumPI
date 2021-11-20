@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, energenie]
 
 image:
+  path: /assets/img/Energenie_Lan.webp
   src: /assets/img/Energenie_Lan.webp
   alt: "Energenie LAN header image"
 

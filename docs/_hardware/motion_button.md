@@ -4,6 +4,7 @@ categories: [Hardware, Button]
 tags: [button, motion]
 
 image:
+  path: /assets/img/motion.webp
   src: /assets/img/motion.webp
   alt: "Motion sensor header image"
 

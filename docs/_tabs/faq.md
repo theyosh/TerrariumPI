@@ -4,6 +4,7 @@ icon: fas fa-question
 order: 10
 
 image:
+  path: /assets/img/FAQ.webp
   src: /assets/img/FAQ.webp
   alt: "FAQ header image"
 ---

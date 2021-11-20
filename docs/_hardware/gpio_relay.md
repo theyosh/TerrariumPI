@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, gpio]
 
 image:
+  path: /assets/img/GPIO_Relay.webp
   src: /assets/img/GPIO_Relay.webp
   alt: "GPIO Relays header image"
 

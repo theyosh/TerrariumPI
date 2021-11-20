@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, IR]
 
 image:
+  path: /assets/img/amg8833.webp
   src: /assets/img/amg8833.webp
   alt: "AMG8833 Grid-Eye IR Thermometer sensor header image"
 

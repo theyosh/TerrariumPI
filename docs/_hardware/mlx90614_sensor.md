@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature]
 
 image:
+  path: /assets/img/mlx90614.webp
   src: /assets/img/mlx90614.webp
   alt: "MLX90614 IR Thermometer sensor header image"
 

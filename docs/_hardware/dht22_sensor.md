@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
 
 image:
+  path: /assets/img/dht22.webp
   src: /assets/img/dht22.webp
   alt: "DHT22 sensor header image"
 

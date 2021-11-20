@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, meross]
 
 image:
+  path: /assets/img/Meross.webp
   src: /assets/img/Meross.webp
   alt: "Meross header image"
 

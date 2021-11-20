@@ -4,6 +4,7 @@ icon: fas fa-microchip
 order: 3
 
 image:
+  path: /assets/img/Hardware.webp
   src: /assets/img/Hardware.webp
   alt: Hardware header image
 ---

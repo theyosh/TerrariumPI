@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, 1-wire, waterproof, temperature, humidity]
 
 image:
+  path: /assets/img/1-Wire.webp
   src: /assets/img/1-Wire.webp
   alt: "1-Wire header image"
 

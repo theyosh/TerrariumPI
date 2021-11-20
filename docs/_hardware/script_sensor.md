@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, script, temperature, humidity,fertility,ph,uva,moisture,uvb,altitude,co2,distance,uvi,pressure,light]
 
 image:
+  path: /assets/img/script_sensor.webp
   src: /assets/img/script_sensor.webp
   alt: "Script sensor header image"
 

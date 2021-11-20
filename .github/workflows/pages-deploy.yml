@@ -7,14 +7,18 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches:
-      - documentation
+      - 4.x.y.z
+    paths:
+      - 'docs/**'
+
+
 #  pull_request:
 #    branches: [ master ]
 
-    paths-ignore:
-      - .gitignore
-      - README.md
-      - LICENSE
+#    paths-ignore:
+#      - .gitignore
+#      - README.md
+#      - LICENSE
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

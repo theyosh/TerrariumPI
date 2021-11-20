@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, light]
 
 image:
+  path: /assets/img/bh1750.webp
   src: /assets/img/bh1750.webp
   alt: "BH1750 LUX light sensor header image"
 

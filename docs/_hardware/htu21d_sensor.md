@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
 
 image:
+  path: /assets/img/htu21d.webp
   src: /assets/img/htu21d.webp
   alt: "HTU21D sensor header image"
 
