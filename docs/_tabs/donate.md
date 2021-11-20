@@ -4,6 +4,7 @@ icon: fas fa-donate
 order: 9
 
 image:
+  path: /assets/img/Donations.webp
   src: /assets/img/Donations.webp
   alt: Donations header image
 ---
