@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, i2c]
 
 image:
+  path: /assets/img/Qwiic_Relay.webp
   src: /assets/img/Qwiic_Relay.webp
   alt: "Qwiic Relays header image"
 

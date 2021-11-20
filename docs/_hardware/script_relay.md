@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, script]
 
 image:
+  path: /assets/img/Code.webp
   src: /assets/img/Code.webp
   alt: "Script relay (API)"
 

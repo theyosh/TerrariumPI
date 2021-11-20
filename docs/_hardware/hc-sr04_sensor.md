@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, distance]
 
 image:
+  path: /assets/img/hc-sr04.webp
   src: /assets/img/hc-sr04.webp
   alt: "HC-SR04 ultrasonic ranging sensor header image"
 

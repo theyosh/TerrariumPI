@@ -4,6 +4,7 @@ icon: fas fa-info
 order: 2
 
 image:
+  path: /assets/img/options.webp
   src: /assets/img/options.webp
   alt: Feature header image
 ---

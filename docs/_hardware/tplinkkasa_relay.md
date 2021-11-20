@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, kasa]
 
 image:
+  path: /assets/img/Kasa_Smart.webp
   src: /assets/img/Kasa_Smart.webp
   alt: "Kasa Smart header image"
 

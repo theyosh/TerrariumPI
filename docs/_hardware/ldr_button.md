@@ -4,6 +4,7 @@ categories: [Hardware, Button]
 tags: [button, ldr, light]
 
 image:
+  path: /assets/img/ldr.webp
   src: /assets/img/ldr.webp
   alt: "Light sensor header image"
 

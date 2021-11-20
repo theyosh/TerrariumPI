@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, energenie]
 
 image:
+  path: /assets/img/Energenie_USB.webp
   src: /assets/img/Energenie_USB.webp
   alt: "Energenie USB header image"
 

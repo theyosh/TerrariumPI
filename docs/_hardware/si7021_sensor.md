@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
 
 image:
+  path: /assets/img/SI7021.webp
   src: /assets/img/SI7021.webp
   alt: "SI7021 sensor header image"
 

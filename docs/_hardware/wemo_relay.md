@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, wifi, wemo]
 
 image:
+  path: /assets/img/Wemo.webp
   src: /assets/img/Wemo.webp
   alt: "WEMO Smart plug header image"
 

@@ -21,7 +21,6 @@ You can donate through:
   <input type="hidden" name="item_name" value="TerrariumPI" />
   <input type="hidden" name="currency_code" value="EUR" />
   <input type="image" src="https://www.paypalobjects.com/en_US/NL/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-  <img alt="" border="0" src="https://www.paypal.com/en_NL/i/scr/pixel.gif" width="1" height="1" />
   </form>
 
 - Monero: 42wnSZopYj52kwQFM9sNaZRaCmoT3Q9MEFKKsbbgqfD6CpwQM3RwLTp2jLPiB35EX7NEZLSvk2TrMi7WTcxvGps4LrtPPj5

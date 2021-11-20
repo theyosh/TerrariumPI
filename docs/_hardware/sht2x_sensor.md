@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
 
 image:
+  path: /assets/img/SHT2X.webp
   src: /assets/img/SHT2X.webp
   alt: "Sensirion SHT2X sensor header image"
 

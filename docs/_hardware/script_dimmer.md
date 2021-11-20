@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, dimmer, script]
 
 image:
+  path: /assets/img/Code.webp
   src: /assets/img/Code.webp
   alt: "Script dimmer (API)"
 

@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, remote]
 
 image:
+  path: /assets/img/REST_API.webp
   src: /assets/img/REST_API.webp
   alt: "Remote relay (API)"
 

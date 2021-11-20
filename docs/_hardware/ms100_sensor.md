@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
 
 image:
+  path: /assets/img/ms100.webp
   src: /assets/img/ms100.webp
   alt: "Meross MS100 sensor header image"
 

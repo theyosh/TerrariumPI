@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, energenie]
 
 image:
+  path: /assets/img/ENER010-PI.webp
   src: /assets/img/ENER010-PI.webp
   alt: "Energenie RF header image"
 

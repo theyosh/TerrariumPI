@@ -4,6 +4,7 @@ icon: fas fa-tools
 order: 4
 
 image:
+  path: /assets/img/Installation.webp
   src: /assets/img/Installation.webp
   alt: Installation header image
 ---

@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, denkovi]
 
 image:
+  path: /assets/img/Denkovi_V2_X_sockets.webp
   src: /assets/img/Denkovi_V2_X_sockets.webp
   alt: "Denkovi V2 Relay header image"
 

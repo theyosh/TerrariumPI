@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
 
 image:
+  path: /assets/img/mitemp.webp
   src: /assets/img/mitemp.webp
   alt: "MiTemperature bluetooth sensor header image"
 

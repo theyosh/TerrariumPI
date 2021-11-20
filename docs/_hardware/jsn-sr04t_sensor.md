@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, distance]
 
 image:
+  path: /assets/img/JSN-SR04T.webp
   src: /assets/img/JSN-SR04T.webp
   alt: "JSN-SR04T ultrasonic ranging sensor header image"
 

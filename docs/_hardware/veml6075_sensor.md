@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, uva, uvb, uvi]
 
 image:
+  path: /assets/img/VEML6075.webp
   src: /assets/img/VEML6075.webp
   alt: "VEML6075 UVA and UVB light sensor header image"
 
