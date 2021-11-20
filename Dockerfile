@@ -87,6 +87,7 @@ RUN ln -s /usr/lib/python3/dist-packages/cv2.cpython-37m-arm-linux-gnueabihf.so 
 WORKDIR /TerrariumPI
 COPY --from=builder /TerrariumPI/ /TerrariumPI/.
 COPY --from=sourcecode /TerrariumPI /TerrariumPI
+RUN echo '[ ! -z "$TERM" -a -r /TerrariumPI/motd.sh ] && /TerrariumPI/motd.sh' >> /etc/bash.bashrc
 
 HEALTHCHECK --interval=120s --timeout=5s --start-period=120s CMD python contrib/docker_health.py
 
