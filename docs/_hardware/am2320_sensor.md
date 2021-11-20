@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, i2c]
 
 image:
+  path: /assets/img/am2320.webp
   src: /assets/img/am2320.webp
   alt: "AM2320 header image"
 

@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity, pressure, altitude]
 
 image:
+  path: /assets/img/bme280.webp
   src: /assets/img/bme280.webp
   alt: "BME280 sensor header image"
 

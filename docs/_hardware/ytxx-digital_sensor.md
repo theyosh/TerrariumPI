@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, moisture]
 
 image:
+  path: /assets/img/YT-69.webp
   src: /assets/img/YT-69.webp
   alt: "YT-69 sensor (digital) header image"
 

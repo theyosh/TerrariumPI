@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, i2c, 8relay]
 
 image:
+  path: /assets/img/8relay-stack_v3.webp
   src: /assets/img/8relay-stack_v3.webp
   alt: "Sequent Microsystems 8 Relay Card Ver. 3 header image"
 

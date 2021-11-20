@@ -5,11 +5,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2021-10-23 10:51+CEST\n"
+"POT-Creation-Date: 2021-11-15 21:43+CET\n"
 "PO-Revision-Date: 2021-11-09 09:42+0000\n"
 "Last-Translator: kahuwi14 <karsten@wingen.net>\n"
-"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
-"4-x-y-z/de/>\n"
+"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
+"z/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,47 +18,47 @@ msgstr ""
 "X-Generator: Weblate 4.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:31
+#: terrariumArea.py:32
 msgid "Lighting"
 msgstr "Beleuchtung"
 
-#: terrariumArea.py:37
+#: terrariumArea.py:38
 msgid "Heating"
 msgstr "Beheizung (heating)"
 
-#: terrariumArea.py:43
+#: terrariumArea.py:44
 msgid "Cooling"
 msgstr "Kühlen"
 
-#: terrariumArea.py:49
+#: terrariumArea.py:50
 msgid "Humidity"
 msgstr "Luftfeuchtigkeit"
 
-#: terrariumArea.py:55
+#: terrariumArea.py:56
 msgid "Water tank"
 msgstr "Wassertank"
 
-#: terrariumArea.py:61 views/includes/sidebar.html:186
+#: terrariumArea.py:62 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:67
+#: terrariumArea.py:68
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:73
+#: terrariumArea.py:74
 msgid "Conductivity"
 msgstr "Leitfähigkeit"
 
-#: terrariumArea.py:79
+#: terrariumArea.py:80
 msgid "Fertility"
 msgstr "Fruchtbarkeit"
 
-#: terrariumArea.py:85
+#: terrariumArea.py:86
 msgid "Moisture"
 msgstr "Feuchtigkeit"
 
-#: terrariumArea.py:91
+#: terrariumArea.py:92
 msgid "pH"
 msgstr "pH"
 
@@ -386,7 +386,7 @@ msgstr "Gesamtleistung"
 msgid "kWh"
 msgstr "kWh"
 
-#: views/dashboard.html:78 views/dashboard.html:96 views/weather.html:33
+#: views/dashboard.html:78 views/dashboard.html:96
 msgid "in"
 msgstr "im"
 
@@ -687,7 +687,9 @@ msgid "Weather night/day"
 msgstr "Wetter Nacht/Tag"
 
 #: views/modals/area.html:68
-msgid "Select the mode of this area. This will change the timing and duration of the relays."
+msgid ""
+"Select the mode of this area. This will change the timing and duration of "
+"the relays."
 msgstr ""
 "Wählen Sie den Modus dieses Bereichs. Das ändert Schaltzeit- und dauer der "
 "Relais."
@@ -697,7 +699,10 @@ msgid "Minimum hours"
 msgstr "Mindeststunden"
 
 #: views/modals/area.html:79
-msgid "The minimum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is shorter then this minimum value, the day will be extended to this minimum value."
+msgid ""
+"The minimum amount of hours that the lights are turned on. This is only "
+"valid in weather mode. When the day is shorter then this minimum value, the "
+"day will be extended to this minimum value."
 msgstr ""
 "Die Mindeststundenzahl, in der das Licht eingeschaltet ist. Dies ist nur "
 "valide im Wetter-Modus. Wenn der Tag kürzer als die Mindeststundenzahl ist, "
@@ -708,7 +713,10 @@ msgid "Maximum hours"
 msgstr "Maximale Stunden"
 
 #: views/modals/area.html:91
-msgid "The maximum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is longer then this maximum value, the day will be shortened to this maximum value."
+msgid ""
+"The maximum amount of hours that the lights are turned on. This is only "
+"valid in weather mode. When the day is longer then this maximum value, the "
+"day will be shortened to this maximum value."
 msgstr ""
 "Die Maximalstundenzahl, in der das Licht eingeschaltet ist. Dies ist nur "
 "valide im Wetter-Modus. Wenn der Tag kürzer als die Mindeststundenzahl ist, "
@@ -719,7 +727,9 @@ msgid "Hours shift"
 msgstr "Zeitverschiebung"
 
 #: views/modals/area.html:103
-msgid "The amount of time to shift in hours based on the sun rise time. Negative values will make the day start earlier."
+msgid ""
+"The amount of time to shift in hours based on the sun rise time. Negative "
+"values will make the day start earlier."
 msgstr ""
 "Die Zeit für die Verschiebung in Stunden basierend auf der "
 "Sonnenaufgangszeit. Negative Werte lassen den Tag füher starten."
@@ -734,13 +744,17 @@ msgid "Main lights"
 msgstr "Hauptlichter"
 
 #: views/modals/area.html:118
-msgid "Toggle this if this is the main lights for this enclosure. This is used for the light checks in other areas."
+msgid ""
+"Toggle this if this is the main lights for this enclosure. This is used for "
+"the light checks in other areas."
 msgstr ""
 "Schalten Sie dies um, wenn dies die Hauptbeleuchtung für dieses Gehäuse ist. "
 "Diese Einstellung wird für die Lichtoptionen in anderen Bereichen verwendet."
 
 #: views/modals/area.html:126 views/modals/area.html:273
-msgid "Below you can per select the relays and timer settings per period daytime and nighttime."
+msgid ""
+"Below you can per select the relays and timer settings per period daytime "
+"and nighttime."
 msgstr ""
 "Unten können Sie die Relais- und Timereinstellungen pro Zeitraum Tag und "
 "Nacht auswählen."
@@ -769,7 +783,7 @@ msgstr "Die Tageszeit, zu der die Relais jeden Tag eingeschaltet werden."
 #: views/modals/area.html:301 views/modals/area.html:359
 #: views/modals/area.html:371 views/modals/area.html:532
 #: views/modals/area.html:544 views/modals/area.html:661
-#: views/modals/area.html:673 views/modals/area.html:912
+#: views/modals/area.html:673 views/modals/area.html:913
 msgid "Enter a valid time."
 msgstr "Geben Sie eine gültige Zeit ein."
 
@@ -791,7 +805,9 @@ msgid "On duration"
 msgstr "Einschaltdauer"
 
 #: views/modals/area.html:163 views/modals/area.html:310
-msgid "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full day."
+msgid ""
+"The duration when the relays should be on. If this is shorter then all day, "
+"you will get a timer functionality. Enter '0' to have a full day."
 msgstr ""
 "Die Dauer, in der die Relais eingeschaltet sein sollen. '0' für einen ganzen "
 "Tag, grössere Werte für Timer-Funktion."
@@ -808,7 +824,9 @@ msgid "Select the relays to toggle."
 msgstr "Wählen Sie die Relais aus um diese Umzuschalten."
 
 #: views/modals/area.html:249
-msgid "Select the mode of this area. This will change the timing and duration of the players."
+msgid ""
+"Select the mode of this area. This will change the timing and duration of "
+"the players."
 msgstr ""
 "Wählen Sie den Modus dieses Bereichs. Das ändert das timing und die Dauer "
 "der Relais."
@@ -825,13 +843,15 @@ msgstr "Wählen Sie die Soundkarte aus, die für dieses Gehäuse verwendet wird.
 #: views/modals/area.html:383 views/modals/area.html:395
 #: views/modals/area.html:556 views/modals/area.html:568
 #: views/modals/area.html:685 views/modals/area.html:697
-#: views/modals/area.html:920
+#: views/modals/area.html:921
 msgid "Enter a valid duration in minutes."
 msgstr "Geben Sie eine gültige Dauer in Minuten ein."
 
 #: views/modals/area.html:322 views/modals/area.html:565
 #: views/modals/area.html:694
-msgid "The duration when the relays should be stay off when switched off. Enter '0' to disable."
+msgid ""
+"The duration when the relays should be stay off when switched off. Enter '0' "
+"to disable."
 msgstr ""
 "Die Dauer, in der die Relais beim Ausschalten ausgeschaltet bleiben sollen' "
 "'0' zum deaktivieren."
@@ -853,19 +873,25 @@ msgid "The time of the day when the relays are toggled off each night."
 msgstr "Der Zeitpunk am Tag wenn die Relais umgeschaltet werden sollen."
 
 #: views/modals/area.html:380
-msgid "The duration when the players should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full night."
+msgid ""
+"The duration when the players should be on. If this is shorter then all day, "
+"you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
 "Die Zeitspanne, wie lang der Player an ist. '0' für eine ganze Nacht, hóhere "
 "Werte für Timer Modus."
 
 #: views/modals/area.html:392
-msgid "The duration when the players should be stay off when switched off. Enter '0' to disable."
+msgid ""
+"The duration when the players should be stay off when switched off. Enter "
+"'0' to disable."
 msgstr ""
 "Die Zeitspanne wie lange Player aus sein sollen, nachdem diese ausgeschaltet "
 "wurden. '0' zum deaktivieren."
 
 #: views/modals/area.html:435
-msgid "Select the mode of this area. This will change the timing and duration of the actions."
+msgid ""
+"Select the mode of this area. This will change the timing and duration of "
+"the actions."
 msgstr ""
 "Wählen Sie den Modus dieses Bereichs. Das ändert das timing und die Dauer "
 "der Relais."
@@ -949,7 +975,9 @@ msgid "Variation"
 msgstr "Variation"
 
 #: views/modals/area.html:553 views/modals/area.html:682
-msgid "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full night."
+msgid ""
+"The duration when the relays should be on. If this is shorter then all day, "
+"you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
 "Die Dauer, in der die Relais eingeschaltet sein sollen. '0' für einen ganze "
 "Nacht, grössere Werte für Timer-Funktion."
@@ -1020,14 +1048,18 @@ msgstr "Alarm-Grenzwert"
 
 #: views/modals/area.html:627 views/modals/area.html:757
 msgid "Enter the amount of alarms before action take place."
-msgstr "Geben Sie die Anzahl der Alarme ein, bevor eine Aktion ausgeführt wird."
+msgstr ""
+"Geben Sie die Anzahl der Alarme ein, bevor eine Aktion ausgeführt wird."
 
 #: views/modals/area.html:734
 msgid "Select the light status."
 msgstr "Wählen Sie den Lichtstatus aus."
 
 #: views/modals/area.html:783
-msgid "Here you can enter periods where the sensors will change their values according to the list below. Make sure the periods are in chronological order!"
+msgid ""
+"Here you can enter periods where the sensors will change their values "
+"according to the list below. Make sure the periods are in chronological "
+"order!"
 msgstr ""
 "Hier können Sie Zeiträume eingeben, in denen die Sensoren ihre Werte gemäß "
 "der folgenden Liste ändern. Stellen Sie sicher, dass die Zeiträume in "
@@ -1054,7 +1086,8 @@ msgid "After x minutes change to value or at exactly a time stamp."
 msgstr "Wechsle Wert nach x Minuten oder zu einem bestimmten Zeitpunkt."
 
 #: views/modals/area.html:837
-msgid "Enter a full url to the external source according to the Remote data feature."
+msgid ""
+"Enter a full url to the external source according to the Remote data feature."
 msgstr ""
 "Geben Sie gemäß der Remote-Datenfunktion eine vollständige URL zur externen "
 "Quelle ein."
@@ -1068,7 +1101,9 @@ msgid "Enter a duration in minutes or the actual time of the day."
 msgstr "Geben Sie eine Dauer in Minuten oder die aktuelle Tageszeit ein."
 
 #: views/modals/area.html:858
-msgid "Enter a negative or positive value for a relative action. A number is treated as an absolute value."
+msgid ""
+"Enter a negative or positive value for a relative action. A number is "
+"treated as an absolute value."
 msgstr ""
 "Geben Sie einen negativen oder positiven Wert für eine relative Aktion ein."
 
@@ -1093,45 +1128,59 @@ msgid "Using current weather"
 msgstr "Aktuelles Wetter verwenden"
 
 #: views/modals/area.html:885
-msgid "Use external source"
+#, fuzzy
+#| msgid "Use external source"
+msgid "Use json source"
 msgstr "Externe Quelle verwenden"
 
-#: views/modals/area.html:888
+#: views/modals/area.html:886
+#, fuzzy
+#| msgid "Description"
+msgid "Use script"
+msgstr "Beschreibung"
+
+#: views/modals/area.html:889
 msgid "Select a valid option."
 msgstr "Wählen Sie eine gültige Option aus."
 
-#: views/modals/area.html:896
-msgid "Enter a valid url."
-msgstr "Geben Sie eine gültige URL ein."
+#: views/modals/area.html:897
+#, fuzzy
+#| msgid "Enter a valid duration in minutes."
+msgid "Enter a valid url, local json file or script file."
+msgstr "Geben Sie eine gültige Dauer in Minuten ein."
 
-#: views/modals/area.html:904
+#: views/modals/area.html:905
 msgid "Offset."
 msgstr "Korrektur."
 
-#: views/modals/area.html:942
+#: views/modals/area.html:943
 msgid "Dimmer on duration"
 msgstr "Dimmer Einschaltdauer"
 
-#: views/modals/area.html:946
+#: views/modals/area.html:947
 msgid "Dimmer of duration"
 msgstr "Dimmer Ausschaltdauer"
 
-#: views/modals/area.html:956
-msgid "Select the delay and duration for the dimmer to go to on or off in minutes. Max duration is 180 minutes."
+#: views/modals/area.html:957
+msgid ""
+"Select the delay and duration for the dimmer to go to on or off in minutes. "
+"Max duration is 180 minutes."
 msgstr ""
 "Wählen Sie die Verzögerung und Dauer für das Ein- oder Ausschalten des "
 "Dimmers in Minuten. Maximale Dauer ist 180 Minuten."
 
-#: views/modals/area.html:963
+#: views/modals/area.html:964
 msgid "Relay delay on"
 msgstr "Relaisverzögerung ein"
 
-#: views/modals/area.html:967
+#: views/modals/area.html:968
 msgid "Relay delay off"
 msgstr "Relaisverzögerung aus"
 
-#: views/modals/area.html:975
-msgid "Select the delay in minutes that a relay waits before it turns on. Max delay is 180 minutes."
+#: views/modals/area.html:976
+msgid ""
+"Select the delay in minutes that a relay waits before it turns on. Max delay "
+"is 180 minutes."
 msgstr ""
 "Wählen Sie die Verzögerung in Minuten aus, die ein Relais wartet, bevor es "
 "einschaltet. Maximale Verzögerung ist 180 Minuten."
@@ -1180,7 +1229,9 @@ msgid "Capacitor value in &micro;F"
 msgstr "Kondensatorwert in &micro;F"
 
 #: views/modals/button.html:73
-msgid "Enter the capacitor value in &micro;F as this will influence the light calculation."
+msgid ""
+"Enter the capacitor value in &micro;F as this will influence the light "
+"calculation."
 msgstr ""
 "Geben Sie den Kondensatorwert in &micro;F ein, da dieser Einfluss auf die "
 "Lichtberechnung hat."
@@ -1206,7 +1257,8 @@ msgstr ""
 
 #: views/modals/enclosure.html:39
 msgid "Please select a filename with the extension of .jpg, .png, .gif."
-msgstr "Bitte wählen Sie einen Dateinamen mit der Erweiterung .jpg, .png, .gif."
+msgstr ""
+"Bitte wählen Sie einen Dateinamen mit der Erweiterung .jpg, .png, .gif."
 
 #: views/modals/enclosure.html:47
 msgid "Description"
@@ -1225,7 +1277,9 @@ msgid "Select the doors that are used with this enclosure."
 msgstr "Wählen Sie die Türen aus, die mit diesem Gehäuse verwendet werden."
 
 #: views/modals/enclosure.html:76
-msgid "Select the webcams that are used with this enclosure. You can use html colors and fonts and images."
+msgid ""
+"Select the webcams that are used with this enclosure. You can use html "
+"colors and fonts and images."
 msgstr ""
 "Wählen Sie die Webcams aus, die mit diesem Gehäuse verwendet werden. Sie "
 "können HTML Farben, Schriftarten und Bilder verwenden."
@@ -1615,7 +1669,8 @@ msgid "Weather settings"
 msgstr "Wettereinstellungen"
 
 #: views/modals/weather.html:14
-msgid "In order to use the weather system, you need to create a free account at %s."
+msgid ""
+"In order to use the weather system, you need to create a free account at %s."
 msgstr ""
 "Um das Wettersystem nutzen zu können, müssen Sie ein kostenloses Konto bei "
 "%s erstellen."
@@ -1937,7 +1992,8 @@ msgid "Pi power usage"
 msgstr "Pi-Stromverbrauch"
 
 #: views/settings.html:32
-msgid "Enter the total power usage of the Pi with all its USB devices connected."
+msgid ""
+"Enter the total power usage of the Pi with all its USB devices connected."
 msgstr ""
 "Geben Sie den Gesamtstromverbrauch des Pi mit allen angeschlossenen USB-"
 "Geräten ein."
@@ -2034,7 +2090,9 @@ msgid "Language"
 msgstr "Sprache"
 
 #: views/settings.html:148
-msgid "Select the interface language. This will also change number and currency formatting."
+msgid ""
+"Select the interface language. This will also change number and currency "
+"formatting."
 msgstr "Wählen Sie die Sprache für die Benutzeroberfläche."
 
 #: views/settings.html:153
@@ -2158,7 +2216,8 @@ msgid "Graph smoothing"
 msgstr "Graphenglättung"
 
 #: views/settings.html:276
-msgid "Enter the amount of data points to average. 0 will disable this feature."
+msgid ""
+"Enter the amount of data points to average. 0 will disable this feature."
 msgstr ""
 "Geben Sie die Anzahl der Datenpunkte zum Durchschnitt ein. '0' zum "
 "deaktivieren."
@@ -2242,27 +2301,31 @@ msgstr "Wetterquelle credits"
 msgid "Today"
 msgstr "Heute"
 
-#: views/weather.html:40
+#: views/weather.html:36
+msgid "Wind"
+msgstr ""
+
+#: views/weather.html:43
 msgid "Location"
 msgstr "Standort"
 
-#: views/weather.html:41
+#: views/weather.html:44
 msgid "Weather type"
 msgstr "Wettertyp"
 
-#: views/weather.html:44
+#: views/weather.html:47
 msgid "Rise"
 msgstr "Anstieg"
 
-#: views/weather.html:45
+#: views/weather.html:48
 msgid "Set"
 msgstr "Einstellung"
 
-#: views/weather.html:46
+#: views/weather.html:49
 msgid "Temp."
 msgstr "Temp."
 
-#: views/weather.html:68
+#: views/weather.html:71
 msgid "Forecast"
 msgstr "Vorhersage"
 
@@ -2314,7 +2377,8 @@ msgstr "Die Audio-Datei wird bearbeitet"
 msgid "Audio files are uploaded."
 msgstr "Audiodateien wurden hochgeladen."
 
-#: views/modals/button.html:65 views/modals/relay.html:87 views/modals/sensor.html:154
+#: views/modals/button.html:65 views/modals/relay.html:87
+#: views/modals/sensor.html:154
 msgid "calibration"
 msgstr "Kalibrierung"
 
@@ -2338,11 +2402,12 @@ msgstr "Der Relaiszustand von konnte nicht geändert werden"
 msgid "Current activity"
 msgstr "Aktuelle Tätigkeit"
 
-#: views/modals/button.html:57 views/modals/relay.html:79 views/modals/sensor.html:72
+#: views/modals/button.html:57 views/modals/relay.html:79
+#: views/modals/sensor.html:72
 msgid "Current value"
 msgstr "Aktueller Wert"
 
-#: views/modals/area.html:1040 views/modals/area.html:1042
+#: views/modals/area.html:1041 views/modals/area.html:1043
 msgid "Delay"
 msgstr "Verzögerung"
 
@@ -2426,23 +2491,28 @@ msgstr "Webcam bearbeiten"
 msgid "Enter a description"
 msgstr "Beschreibung eingeben"
 
-#: views/modals/area.html:910
+#: views/modals/area.html:911
 msgid "Enter a duration in minutes or time"
 msgstr "Geben Sie eine Dauer in Minuten oder Zeit ein"
 
-#: views/modals/area.html:894
-msgid "Enter a full url"
-msgstr "Geben Sie eine vollständige URL ein"
+#: views/modals/area.html:895
+msgid "Enter a full url, local json file or script file."
+msgstr ""
 
 #: views/modals/message.html:60
 msgid "Enter a message"
 msgstr "Nachricht eingeben"
 
-#: views/modals/button.html:33 views/modals/relay.html:33 views/modals/sensor.html:48 views/modals/webcam.html:37
+#: views/modals/button.html:33 views/modals/relay.html:33
+#: views/modals/sensor.html:48 views/modals/webcam.html:37
 msgid "Enter an address"
 msgstr "Geben Sie eine Adresse ein"
 
-#: views/modals/button.html:45 views/modals/enclosure.html:18 views/modals/event.html:16 views/modals/message.html:34 views/modals/playlist.html:18 views/modals/relay.html:45 views/modals/sensor.html:60 views/modals/service.html:28 views/modals/webcam.html:49
+#: views/modals/button.html:45 views/modals/enclosure.html:18
+#: views/modals/event.html:16 views/modals/message.html:34
+#: views/modals/playlist.html:18 views/modals/relay.html:45
+#: views/modals/sensor.html:60 views/modals/service.html:28
+#: views/modals/webcam.html:49
 msgid "Enter a name"
 msgstr "Geben Sie einen Namen ein"
 
@@ -2458,11 +2528,15 @@ msgstr "Bitte geben Sie eine E-Mail-Adresse ein"
 msgid "Enter a subject"
 msgstr "Betreff eingeben"
 
-#: views/modals/area.html:137 views/modals/area.html:198 views/modals/area.html:284 views/modals/area.html:354 views/modals/area.html:527 views/modals/area.html:656
+#: views/modals/area.html:137 views/modals/area.html:198
+#: views/modals/area.html:284 views/modals/area.html:354
+#: views/modals/area.html:527 views/modals/area.html:656
 msgid "Enter begin time"
 msgstr "Geben Sie eine Startzeit ein"
 
-#: views/modals/area.html:149 views/modals/area.html:204 views/modals/area.html:296 views/modals/area.html:366 views/modals/area.html:539 views/modals/area.html:668
+#: views/modals/area.html:149 views/modals/area.html:204
+#: views/modals/area.html:296 views/modals/area.html:366
+#: views/modals/area.html:539 views/modals/area.html:668
 msgid "Enter end time"
 msgstr "Geben Sie eine Endzeit ein"
 
@@ -2538,7 +2612,9 @@ msgstr "Geben Sie den Pushover-Benutzerschlüssel ein"
 msgid "Enter the SMTP server address name or ip"
 msgstr "Geben Sie den MQTT-Servernamen oder die IP-Adresse ein"
 
-#: views/modals/service.html:120 views/modals/service.html:154 views/modals/service.html:160 views/modals/service.html:204 views/modals/service.html:218 views/modals/service.html:275
+#: views/modals/service.html:120 views/modals/service.html:154
+#: views/modals/service.html:160 views/modals/service.html:204
+#: views/modals/service.html:218 views/modals/service.html:275
 msgid "Enter the SMTP server password"
 msgstr "Geben Sie das SMTP-Serverkennwort ein"
 
@@ -2546,7 +2622,9 @@ msgstr "Geben Sie das SMTP-Serverkennwort ein"
 msgid "Enter the SMTP server port number"
 msgstr "Portnummer des SMTP-Servers eingeben"
 
-#: views/modals/service.html:114 views/modals/service.html:148 views/modals/service.html:197 views/modals/service.html:211 views/modals/service.html:229 views/modals/service.html:268
+#: views/modals/service.html:114 views/modals/service.html:148
+#: views/modals/service.html:197 views/modals/service.html:211
+#: views/modals/service.html:229 views/modals/service.html:268
 msgid "Enter the SMTP server username"
 msgstr "Geben Sie den Benutzernamen des SMTP-Servers ein"
 
@@ -2578,7 +2656,8 @@ msgstr "Relais exportieren"
 msgid "Export sensor"
 msgstr "Sensor exportieren"
 
-#: views/layouts/modal.html:64 views/modals/area.html:1524 views/settings.html:404
+#: views/layouts/modal.html:64 views/modals/area.html:1526
+#: views/settings.html:404
 msgid "Form error"
 msgstr "Formularfehler"
 
@@ -2598,7 +2677,7 @@ msgstr "Sensor ignorieren"
 msgid "Ignore webcam"
 msgstr "Webcam ignorieren"
 
-#: views/modals/area.html:1524
+#: views/modals/area.html:1526
 msgid "Invalid timestamp in variation settings."
 msgstr "Ungültiger Zeitstempel in den Variationseinstellungen."
 
@@ -2618,7 +2697,7 @@ msgstr "Maximale Leistung in Prozent"
 msgid "Messages per minute"
 msgstr "Nachrichten pro Minute"
 
-#: views/modals/area.html:1040 views/modals/area.html:1040 views/modals/area.html:1042
+#: views/modals/area.html:1041 views/modals/area.html:1043
 msgid "minutes"
 msgstr "Minuten"
 
@@ -2674,7 +2753,8 @@ msgstr "Nach neuen Sensoren suchen"
 msgid "Select a day/night source"
 msgstr "Wählen Sie eine Tag/Nacht-Quelle"
 
-#: views/modals/area.html:241 views/modals/area.html:426 views/modals/area.html:61
+#: views/modals/area.html:241 views/modals/area.html:426
+#: views/modals/area.html:61
 msgid "Select a mode"
 msgstr "Wählen Sie einen Modus"
 
@@ -2706,7 +2786,8 @@ msgstr "Archivierung auswählen"
 msgid "Select a sound card"
 msgstr "Wählen Sie eine Soundkarte aus"
 
-#: views/modals/area.html:599 views/modals/area.html:612 views/modals/area.html:728 views/modals/area.html:741
+#: views/modals/area.html:599 views/modals/area.html:612
+#: views/modals/area.html:728 views/modals/area.html:741
 msgid "Select a state"
 msgstr "Status auswählen"
 
@@ -2726,7 +2807,8 @@ msgstr "Verfügbare Webcams auswählen"
 msgid "Select compensation sensors"
 msgstr "Kompensationssensoren auswählen"
 
-#: views/modals/button.html:19 views/modals/relay.html:19 views/modals/sensor.html:19 views/modals/webcam.html:23
+#: views/modals/button.html:19 views/modals/relay.html:19
+#: views/modals/sensor.html:19 views/modals/webcam.html:23
 msgid "Select hardware"
 msgstr "Hardware auswählen"
 
@@ -2746,7 +2828,8 @@ msgstr "Zeitraum auswählen"
 msgid "Select playlists"
 msgstr "Wiedergabelisten auswählen"
 
-#: views/modals/area.html:179 views/modals/area.html:222 views/modals/area.html:637 views/modals/area.html:767
+#: views/modals/area.html:179 views/modals/area.html:222
+#: views/modals/area.html:637 views/modals/area.html:767
 msgid "Select relays"
 msgstr "Relais auswählen"
 
@@ -2758,7 +2841,8 @@ msgstr "Wählen Sie eine Drehung aus"
 msgid "Select sensors"
 msgstr "Sensoren auswählen"
 
-#: views/modals/message.html:20 views/modals/sensor.html:34 views/modals/service.html:20 views/modals/service.html:63
+#: views/modals/message.html:20 views/modals/sensor.html:34
+#: views/modals/service.html:20 views/modals/service.html:63
 msgid "Select type"
 msgstr "Typ auswählen"
 
@@ -2845,3 +2929,9 @@ msgstr "Leistung in Watt wenn eingeschaltet"
 #: views/modals/weather.html:18
 msgid "Weather data source url"
 msgstr "URL der Wetterdatenquelle"
+
+#~ msgid "Enter a valid url."
+#~ msgstr "Geben Sie eine gültige URL ein."
+
+#~ msgid "Enter a full url"
+#~ msgstr "Geben Sie eine vollständige URL ein"

@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, 1-wire, temperature, humidity]
 
 image:
+  path: /assets/img/owfs.webp
   src: /assets/img/owfs.webp
   alt: "One-Wire File System (OWFS) header image"
 

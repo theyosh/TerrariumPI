@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, wifi, sonoff, tasmota]
 
 image:
+  path: /assets/img/Sonoff.webp
   src: /assets/img/Sonoff.webp
   alt: "Sonoff (Tasmota) header image"
 

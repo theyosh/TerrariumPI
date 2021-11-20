@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
 
 image:
+  path: /assets/img/hih8000.webp
   src: /assets/img/hih8000.webp
   alt: "Honeywell HumidIcon HIH8000 sensor header image"
 

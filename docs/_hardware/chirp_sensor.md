@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, moisture]
 
 image:
+  path: /assets/img/chirp.webp
   src: /assets/img/chirp.webp
   alt: "Chirp sensor header image"
 

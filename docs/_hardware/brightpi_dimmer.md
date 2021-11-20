@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, dimmer, brightpi]
 
 image:
+  path: /assets/img/Bright-PI-Header.webp
   src: /assets/img/Bright-PI-Header.webp
   alt: "Bright-PI header image"
 

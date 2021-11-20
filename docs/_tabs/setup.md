@@ -4,6 +4,7 @@ icon: fas fa-cogs
 order: 5
 
 image:
+  path: /assets/img/Setup.webp
   src: /assets/img/Setup.webp
   alt: Setup header image
 ---

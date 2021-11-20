@@ -4,6 +4,7 @@ categories: [Hardware, Button]
 tags: [button, magnetic, door]
 
 image:
+  path: /assets/img/Magnetic.webp
   src: /assets/img/Magnetic.webp
   alt: "Magnetic (door) button header image"
 

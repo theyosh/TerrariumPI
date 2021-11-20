@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, fertility,light,moisture]
 
 image:
+  path: /assets/img/miflora.webp
   src: /assets/img/miflora.webp
   alt: "MiFlora bluetooth sensor header image"
 

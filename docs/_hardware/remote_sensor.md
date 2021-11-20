@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, remote, json, temperature, humidity,fertility,ph,uva,moisture,uvb,altitude,co2,distance,uvi,pressure,light]
 
 image:
+  path: /assets/img/remote_sensor.webp
   src: /assets/img/remote_sensor.webp
   alt: "Remote sensor header image"
 

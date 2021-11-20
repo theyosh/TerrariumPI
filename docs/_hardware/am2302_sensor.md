@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, gpio]
 
 image:
+  path: /assets/img/am2302.webp
   src: /assets/img/am2302.webp
   alt: "AM2302 header image"
 

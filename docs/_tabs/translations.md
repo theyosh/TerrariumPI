@@ -4,6 +4,7 @@ icon: fas fa-globe
 order: 7
 
 image:
+  path: /assets/img/languages.webp
   src: /assets/img/languages.webp
   alt: Languages header image
 ---

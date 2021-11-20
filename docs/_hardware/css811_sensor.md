@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, co2]
 
 image:
+  path: /assets/img/ccs-811.webp
   src: /assets/img/ccs-811.webp
   alt: "CCS811 Air Quality sensor header image"
 

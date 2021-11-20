@@ -4,6 +4,7 @@ categories: [Hardware, Sensor]
 tags: [sensor, co2, temperature, humidity]
 
 image:
+  path: /assets/img/COZIR_CO2.webp
   src: /assets/img/COZIR_CO2.webp
   alt: "COZIR CO2 sensor header image"
 

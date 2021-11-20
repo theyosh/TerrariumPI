@@ -4,6 +4,7 @@ categories: [Hardware, Relay]
 tags: [relay, i2c, 4relay]
 
 image:
+  path: /assets/img/4relay-stack.webp
   src: /assets/img/4relay-stack.webp
   alt: "Sequent Microsystems 4 Relay Card header image"
 
