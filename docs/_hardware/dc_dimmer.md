@@ -5,7 +5,7 @@ tags: [relay, dimmer, dc]
 
 # image:
 #   path: /assets/img/Bright-PI-Header.png
-  src: /assets/img/Bright-PI-Header.png
+#   src: /assets/img/Bright-PI-Header.png
 #   width: 1000   # in pixels
 #   height: 400   # in pixels
 #   alt: image alternative text

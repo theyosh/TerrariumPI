@@ -29,8 +29,8 @@ url: 'https://theyosh.github.io'
 github:
   username: theyosh             # change to your github username
 
-# twitter:
-#   username: twitter_username            # change to your twitter username
+twitter:
+  username: false            # change to your twitter username
 
 social:
   # Change to your full name.
@@ -150,6 +150,7 @@ defaults:
       # to update the code of all other post links in this project.
       permalink: /posts/:year/:month/:day/:title/
       dynamic_title: true
+      image: /assets/img/profile_image.jpg
 
   - scope:
       path: _drafts
