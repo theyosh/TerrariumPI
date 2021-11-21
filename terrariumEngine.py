@@ -154,6 +154,8 @@ class terrariumEngine(object):
 
     self.environment = None
 
+    self.motd()
+
     logger.info(f'TerrariumPI is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-self.starttime:.2f} seconds.')
     # Return console logging back to 'normal'
     terrariumLogging.logging.getLogger().handlers[0].setLevel(old_log_level)
@@ -1196,7 +1198,7 @@ class terrariumEngine(object):
       motd_title += '\n'
 
     # Current version and update message
-    update_available = Version(self.version) < Version(self.latest_version)
+    update_available = False if self.latest_version is None else Version(self.version) < Version(self.latest_version)
     motd_version = f'Version: {self.version}' + (f' / {self.latest_version}' if update_available else '')
     version_length = len(motd_version)
     version_padding = (int(max_line_length*0.66) - version_length) * ' '
