@@ -89,6 +89,6 @@ COPY --from=builder /TerrariumPI/ /TerrariumPI/.
 COPY --from=sourcecode /TerrariumPI /TerrariumPI
 RUN echo '[ ! -z "$TERM" -a -r /TerrariumPI/motd.sh ] && /TerrariumPI/motd.sh' >> /etc/bash.bashrc
 
-HEALTHCHECK --interval=120s --timeout=5s --start-period=120s CMD python contrib/docker_health.py
+HEALTHCHECK --interval=180s --timeout=5s --start-period=120s CMD python contrib/docker_health.py
 
 ENTRYPOINT ["/bin/bash", "/TerrariumPI/run.sh"]
