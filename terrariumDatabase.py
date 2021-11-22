@@ -9,7 +9,7 @@ import re
 import sqlite3
 
 
-DATABASE = 'terrariumpi.db'
+DATABASE = 'data/terrariumpi.db'
 
 db = orm.Database()
 

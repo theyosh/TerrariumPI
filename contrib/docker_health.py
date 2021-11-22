@@ -14,6 +14,7 @@ def restart_docker():
   restart = Path('.restart')
   if not restart.exists():
     restart.write_text('restart')
+    print(f'Restarting unhealty docker {datetime.now()}')
     os.system("bash -c 'kill -s 2 -1 && (sleep 60; kill -s 9 -1)'")
 
 health_file = Path(FILE_TO_CHECK)
@@ -27,4 +28,5 @@ if timeout > TIMEOUT:
   restart_docker()
   exit(1)
 
+print(f'OK {datetime.now()}')
 exit(0)

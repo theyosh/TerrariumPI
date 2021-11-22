@@ -12,9 +12,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends libusb-dev && \
   make install
 
 # python builder, help keep image small
-FROM python:3.8.0 as builder
+FROM python:3.8-buster as builder
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y gnupg ca-certificates && \
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg ca-certificates && \
   echo "deb http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list && \
   echo "deb http://archive.raspberrypi.org/debian/ buster main" >> /etc/apt/sources.list.d/raspberrypi.list && \
   echo "deb [arch=armhf] https://download.docker.com/linux/raspbian buster stable" > /etc/apt/sources.list.d/docker.list && \
@@ -29,6 +29,9 @@ ENV PATH="/opt/venv/bin:$PATH"
 ENV CFLAGS=-fcommon
 # cryptography - https://stackoverflow.com/questions/66118337/how-to-get-rid-of-cryptography-build-error
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
+# These two environment variables prevent __pycache__/ files.
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 RUN pip install --upgrade pip && pip install wheel
 COPY requirements.txt .
 # requirements are slightly different for docker
@@ -39,24 +42,27 @@ RUN sed -i 's/cryptography/cryptography==3.4.6/g' requirements.txt && \
 WORKDIR /TerrariumPI
 # we previously copied .git and then did git submodule init and submodule update, however as .git dir changes all the time it invalidates docker cache
 RUN mkdir 3rdparty && cd 3rdparty && \
-  git clone https://github.com/SequentMicrosystems/4relay-rpi.git && git -C "4relay-rpi" checkout "09a44bfbde18791750534ba204e1dfc7506a7eb2" && \
-  git clone https://github.com/PiSupply/Bright-Pi.git && git -C "Bright-Pi" checkout "eccfbbb1221c4966cd337126bedcbb8bb03c3c71" && \
-  git clone https://github.com/ageir/chirp-rpi.git && git -C "chirp-rpi" checkout "6e411d6c382d5e43ee1fd269ec4de6a316893407" && \
-  git clone https://github.com/perryflynn/energenie-connect0r.git && git -C "energenie-connect0r" checkout "12ca24ab9d60cf4ede331de9a6817c3d64227ea0" && \
-  git clone https://github.com/SequentMicrosystems/relay8-rpi.git && git -C "relay8-rpi" checkout "5083730e415ee91fa4785e228f02a36e8bbaa717"
-RUN mkdir -p static/assets/plguins && cd static/assets/plguins && \
-  git clone https://github.com/fancyapps/fancybox.git && git -C "fancybox" checkout "eea1345256ded510ed9fae1e415aec2a7bb9620d" && \
-  git clone https://github.com/mapshakers/leaflet-icon-pulse.git && git -C "leaflet-icon-pulse" checkout "f57da1e45f6d00f340f429a75a39324cad141061" && \
-  git clone https://github.com/ebrelsford/Leaflet.loading.git && git -C "Leaflet.loading" checkout "7b22aff19a5a8fa9534fb2dcd48e06c6dc84b2ed"
+  git clone https://github.com/SequentMicrosystems/4relay-rpi.git && git -C "4relay-rpi" checkout "09a44bfbde18791750534ba204e1dfc7506a7eb2" && rm -rf "4relay-rpi/.git" && \
+  git clone https://github.com/PiSupply/Bright-Pi.git && git -C "Bright-Pi" checkout "eccfbbb1221c4966cd337126bedcbb8bb03c3c71" && rm -rf "Bright-Pi/.git" && \
+  git clone https://github.com/ageir/chirp-rpi.git && git -C "chirp-rpi" checkout "6e411d6c382d5e43ee1fd269ec4de6a316893407" && rm -rf "chirp-rpi/.git" && \
+  git clone https://github.com/perryflynn/energenie-connect0r.git && git -C "energenie-connect0r" checkout "12ca24ab9d60cf4ede331de9a6817c3d64227ea0" && rm -rf "energenie-connect0r/.git" && \
+  git clone https://github.com/SequentMicrosystems/relay8-rpi.git && git -C "relay8-rpi" checkout "5083730e415ee91fa4785e228f02a36e8bbaa717" && rm -rf "relay8-rpi/.git"
+RUN mkdir -p static/assets/plugins && cd static/assets/plugins && \
+  git clone https://github.com/fancyapps/fancybox.git "fancybox" && git -C "fancybox" checkout "eea1345256ded510ed9fae1e415aec2a7bb9620d" && rm -rf "fancybox/.git" && \
+  git clone https://github.com/mapshakers/leaflet-icon-pulse.git "leaflet.icon-pulse" && git -C "leaflet.icon-pulse" checkout "f57da1e45f6d00f340f429a75a39324cad141061" && rm -rf "leaflet.icon-pulse/.git" && \
+  git clone https://github.com/ebrelsford/Leaflet.loading.git "leaflet.loading" && git -C "leaflet.loading" checkout "7b22aff19a5a8fa9534fb2dcd48e06c6dc84b2ed" && rm -rf "leaflet.loading/.git"
 
-# remove git dir from code copy to help keep image smaller
-FROM python:3.8.0 as remove_git_dir
+# remove git and 3rdparty dir from code copy to help keep image smaller
+# 3rdparty is coming from the builder image
+FROM bash as sourcecode
 WORKDIR /TerrariumPI
 COPY . .
-RUN rm -rf .git
+RUN rm -rf .git 3rdparty
 
 # actual image
-FROM python:3.8.0-slim-buster
+FROM python:3.8-slim-buster
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends gnupg ca-certificates && \
   echo "deb http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list && \
@@ -80,8 +86,9 @@ RUN ln -s /usr/lib/python3/dist-packages/cv2.cpython-37m-arm-linux-gnueabihf.so 
   rm -rf /usr/lib/python3/dist-packages/numpy /usr/lib/python3/dist-packages/numpy-1.16.2.egg-info
 WORKDIR /TerrariumPI
 COPY --from=builder /TerrariumPI/ /TerrariumPI/.
-COPY --from=remove_git_dir /TerrariumPI /TerrariumPI
+COPY --from=sourcecode /TerrariumPI /TerrariumPI
+RUN echo '[ ! -z "$TERM" -a -r /TerrariumPI/motd.sh ] && /TerrariumPI/motd.sh' >> /etc/bash.bashrc
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=120s CMD python contrib/docker_health.py
+HEALTHCHECK --interval=180s --timeout=5s --start-period=120s CMD python contrib/docker_health.py
 
 ENTRYPOINT ["/bin/bash", "/TerrariumPI/run.sh"]

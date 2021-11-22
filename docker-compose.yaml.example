@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  terrariumpi:
+    image: theyosh/terrariumpi
+    volumes:
+      - /opt/terrariumpi/logs:/TerrariumPI/log
+      - /opt/terrariumpi/data:/TerrariumPI/data
+      - /opt/terrariumpi/media:/TerrariumPI/media
+      - /opt/terrariumpi/webcam-archive:/TerrariumPI/webcam/archive
+      - /opt/terrariumpi/DenkoviRelayCommandLineTool:/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool
+      - /boot/config.txt:/boot/config.txt
+      - /boot/cmdline.txt:/boot/cmdline.txt
+      - /etc/modules:/etc/modules
+      - /opt/vc/bin:/opt/vc/bin
+      - /dev:/dev
+    network_mode: host
+    restart: always
+    privileged: true
+    stop_grace_period: 1m
+    stop_signal: SIGINT
+    init: true
+    environment:
+      TZ: "Europe/Amsterdam" # timezone list can be found here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      ENABLE_I2C: "true"
+      ENABLE_1_WIRE: "true"
+      ENABLE_CAMERA: "true"
+      ENABLE_SERIAL: "true"
+      ENABLE_CO2_SENSORS: "true"
+      AUTO_REBOOT: "true"

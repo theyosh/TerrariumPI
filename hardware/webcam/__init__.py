@@ -504,7 +504,12 @@ class terrariumWebcam(object):
 
     threshold = cv2.threshold(cv2.absdiff(self.__compare_image, current_image), int(motion_threshold), 255, cv2.THRESH_BINARY)[1]
     threshold = cv2.dilate(threshold, None, iterations=2)
-    (cnts ,_) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    
+    # Different OpenCV versions (docker vs native)
+    try:
+      (cnts ,_) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    except:
+      (_,cnts ,_) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     # don't draw if motion boxes is disabled
     # Color Red and Blue are swapped... very strange...

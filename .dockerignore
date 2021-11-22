@@ -1,0 +1,11 @@
+.dockerignore
+.git*
+Dockerfile*
+docker-compose.yaml*
+screenshots
+docs
+*.md
+Gemfile*
+venv
+.cache
+media/*
