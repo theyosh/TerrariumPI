@@ -4,7 +4,7 @@ name: docker build & publish
 on:
   push:
     branches:
-      - 'master'
+      - '4.x.y.z'
     tags:
     paths-ignore:
       - 'docs/**'
