@@ -35,8 +35,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 RUN pip install --upgrade pip && pip install wheel
 COPY requirements.txt .
 # requirements are slightly different for docker
-RUN sed -i 's/cryptography/cryptography==3.4.6/g' requirements.txt && \
-  sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.txt && \
+RUN sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.txt && \
   echo "numpy" >> requirements.txt && \
   pip install -r requirements.txt
 WORKDIR /TerrariumPI

@@ -1,5 +1,5 @@
 pip
-setuptools
+setuptools==58.5.3
 wheel
 
 # Database
@@ -17,7 +17,7 @@ bottle_websocket
 jinja2
 retry
 bcrypt
-cryptography
+cryptography==3.4.8
 
 # Hardware / sensors packages
 gpiozero
