@@ -149,7 +149,7 @@
                 </tr>
                 <tr data-class="state.day" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
                   <td >{{ _('Day') }}:</td>
-                  <td>
+                  <td class="truncate">
                     <span data-template-bind='[
                     {"attribute": "content", "value": "state.day.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_day_start_"} ]'></span>
@@ -166,7 +166,7 @@
                 </tr>
                 <tr data-class="state.night" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
                   <td >{{ _('Night') }}:</td>
-                  <td colspan="2">
+                  <td colspan="2" class="truncate">
                     <span data-template-bind='[
                     {"attribute": "content", "value": "state.night.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_night_start_"} ]'></span>
@@ -182,7 +182,7 @@
                 </tr>
                 <tr data-class="state.low.begin" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
                   <td >{{ _('Low') }}:</td>
-                  <td colspan="2">
+                  <td colspan="2" class="truncate">
                     <span data-template-bind='[
                     {"attribute": "content", "value": "state.low.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_low_start_"} ]'></span>
@@ -195,11 +195,10 @@
                     {"attribute": "content", "value": "state.low.duration", "formatter": "durationformatter", "formatOptions": "LTS"},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_low_duration_"} ]'></span>)
                   </td>
-                  <!-- <td></td> -->
                 </tr>
                 <tr data-class="state.high.begin" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
                   <td >{{ _('High') }}:</td>
-                  <td colspan="2">
+                  <td colspan="2" class="truncate">
                     <span data-template-bind='[
                     {"attribute": "content", "value": "state.high.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_high_start_"} ]'></span>
@@ -212,11 +211,10 @@
                     {"attribute": "content", "value": "state.high.duration", "formatter": "durationformatter"},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_high_duration_"} ]'></span>)
                   </td>
-                  <!-- <td></td> -->
                 </tr>
                 <tr data-class="state.sensors" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
                   <td >{{ _('Current') }}:</td>
-                  <td>
+                  <td class="truncate">
                     <span data-template-bind='[
                     {"attribute": "content", "value": "state.sensors.current", "formatter" : "numberformatter", "formatOptions" : "2"},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_current_"} ]'></span><span data-template-bind='[

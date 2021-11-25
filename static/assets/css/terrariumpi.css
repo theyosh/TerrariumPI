@@ -517,3 +517,28 @@ div.hide_environment table td {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+div.hide_environment td.truncate {
+  max-width: 15rem;
+}
+
+@media (max-width:1600px) {
+  div.hide_environment td.truncate {
+    max-width: 9rem;
+  }
+}
+
+@media (max-width:1000px) {
+  div.hide_environment td.truncate {
+    max-width: 6rem;
+    white-space: normal;
+  }
+}
+
+@media (max-width:750px) {
+  div.hide_environment td.truncate {
+    max-width: 10rem;
+  }
+}
+
