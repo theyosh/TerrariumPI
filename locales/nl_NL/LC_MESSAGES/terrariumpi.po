@@ -5,11 +5,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2021-11-15 21:43+CET\n"
+"POT-Creation-Date: 2021-11-25 22:12+CET\n"
 "PO-Revision-Date: 2021-11-15 20:49+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
-"4-x-y-z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
+"z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,31 +139,31 @@ msgstr "waterstroom"
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:1074 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1076 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Actief"
 
-#: terrariumEngine.py:1080
+#: terrariumEngine.py:1082
 msgid "System load"
 msgstr "Systeembelasting"
 
-#: terrariumEngine.py:1086 views/status.html:44
+#: terrariumEngine.py:1088 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Processor temperatuur"
 
-#: terrariumEngine.py:1092
+#: terrariumEngine.py:1094
 msgid "Storage"
 msgstr "Opslag"
 
-#: terrariumEngine.py:1098
+#: terrariumEngine.py:1100
 msgid "Memory"
 msgstr "Geheugen"
 
-#: terrariumEngine.py:1115
+#: terrariumEngine.py:1117
 msgid "average {sensor_type}"
 msgstr "gemiddelde {sensor_type}"
 
-#: terrariumEngine.py:1286
+#: terrariumEngine.py:1288
 msgid "last update"
 msgstr "laatste wijziging"
 
@@ -295,7 +295,7 @@ msgid "Add new button"
 msgstr "Voeg nieuwe knop toe"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
-#: views/dashboard.html:120 views/dashboard.html:312 views/enclosures.html:14
+#: views/dashboard.html:120 views/dashboard.html:310 views/enclosures.html:14
 #: views/enclosures.html:149 views/log.html:8 views/notifications.html:20
 #: views/notifications.html:62 views/relays.html:14 views/relays.html:83
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
@@ -303,42 +303,42 @@ msgstr "Voeg nieuwe knop toe"
 msgid "Login to make changes"
 msgstr "Log in om wijzigingen aan te brengen"
 
-#: views/buttons.html:25 views/dashboard.html:280 views/relays.html:27
+#: views/buttons.html:25 views/dashboard.html:278 views/relays.html:27
 #: views/sensors.html:31 views/webcams.html:23
 msgid "Last update"
 msgstr "Laatste wijziging"
 
-#: views/buttons.html:31 views/dashboard.html:286 views/relays.html:34
+#: views/buttons.html:31 views/dashboard.html:284 views/relays.html:34
 #: views/sensors.html:37
 msgid "error"
 msgstr "error"
 
-#: views/buttons.html:32 views/dashboard.html:287 views/relays.html:35
+#: views/buttons.html:32 views/dashboard.html:285 views/relays.html:35
 #: views/sensors.html:38
 msgid "warning"
 msgstr "waarschuwing"
 
-#: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:295
+#: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:293
 #: views/enclosures.html:33 views/relays.html:45 views/sensors.html:49
 msgid "Day"
 msgstr "Dag"
 
-#: views/buttons.html:40 views/dashboard.html:296 views/relays.html:46
+#: views/buttons.html:40 views/dashboard.html:294 views/relays.html:46
 #: views/sensors.html:50
 msgid "Week"
 msgstr "Week"
 
-#: views/buttons.html:41 views/dashboard.html:297 views/relays.html:47
+#: views/buttons.html:41 views/dashboard.html:295 views/relays.html:47
 #: views/sensors.html:51
 msgid "Month"
 msgstr "Maand"
 
-#: views/buttons.html:42 views/dashboard.html:298 views/relays.html:48
+#: views/buttons.html:42 views/dashboard.html:296 views/relays.html:48
 #: views/sensors.html:52
 msgid "Year"
 msgstr "Jaar"
 
-#: views/buttons.html:53 views/dashboard.html:309 views/relays.html:60
+#: views/buttons.html:53 views/dashboard.html:307 views/relays.html:60
 #: views/sensors.html:64
 msgid "Export"
 msgstr "Exporteren"
@@ -408,11 +408,11 @@ msgstr "Nacht"
 msgid "Low"
 msgstr "Laag"
 
-#: views/dashboard.html:201 views/enclosures.html:75
+#: views/dashboard.html:200 views/enclosures.html:75
 msgid "High"
 msgstr "Hoog"
 
-#: views/dashboard.html:218 views/enclosures.html:89
+#: views/dashboard.html:216 views/enclosures.html:89
 #: views/modals/button.html:56 views/modals/relay.html:78
 #: views/modals/sensor.html:71 views/weather.html:20
 msgid "Current"
@@ -909,10 +909,11 @@ msgstr "Selecteer sensoren om te gebruiken voor de sensorgebaseerde modus."
 msgid "Select at least 1 sensor."
 msgstr "Selecteer minimaal 1 sensor."
 
-#: views/modals/area.html:453 views/modals/playlist.html:29
-#: views/playlists.html:27 views/playlists.html:42
-msgid "Volume"
-msgstr "Volume"
+#: views/modals/area.html:453
+#, fuzzy
+#| msgid "volume"
+msgid "Water volume"
+msgstr "volume"
 
 #: views/modals/area.html:456
 msgid "Enter the volume of the water tank."
@@ -1371,6 +1372,12 @@ msgstr "Diensten"
 #: views/modals/playlist.html:11
 msgid "Playlist settings"
 msgstr "Afspeellijst instellingen"
+
+#: views/modals/playlist.html:29
+#, fuzzy
+#| msgid "Audio files"
+msgid "Audio volume"
+msgstr "Audio bestanden"
 
 #: views/modals/playlist.html:32
 msgid "Select the volume for this playlist."
@@ -1937,6 +1944,10 @@ msgstr "Bericht toevoegen"
 #: views/playlists.html:26 views/playlists.html:41
 msgid "# Files"
 msgstr "# Bestanden"
+
+#: views/playlists.html:27 views/playlists.html:42
+msgid "Volume"
+msgstr "Volume"
 
 #: views/relays.html:9
 msgid "No relays"
@@ -2652,7 +2663,7 @@ msgstr "Exporteren knop"
 msgid "Export relay"
 msgstr "Exporteer schakelaar"
 
-#: views/dashboard.html:308 views/sensors.html:63
+#: views/dashboard.html:306 views/sensors.html:63
 msgid "Export sensor"
 msgstr "Exporteer sensor"
 
