@@ -2,7 +2,8 @@
 name: docker build & publish
 
 on:
-  push:
+  release:
+    types: [published]
     branches:
       - '4.x.y.z'
     tags:
