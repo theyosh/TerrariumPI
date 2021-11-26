@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-11-25 22:12+CET\n"
-"PO-Revision-Date: 2021-10-30 15:16+0000\n"
+"PO-Revision-Date: 2021-11-26 14:38+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/de_AT/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1\n"
+"X-Generator: Weblate 4.9\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -488,10 +488,8 @@ msgid "All doors are closed"
 msgstr "Alle Türen geschlossen"
 
 #: views/includes/navigation.html:44
-#, fuzzy
-#| msgid "Current value"
 msgid "Current status"
-msgstr "Aktueller Wert"
+msgstr "Aktueller Zustand"
 
 #: views/includes/sidebar.html:14
 msgid "Hello"
@@ -678,7 +676,7 @@ msgstr "Nutzername eingeben."
 #: views/modals/sensor.html:65 views/modals/service.html:33
 #: views/modals/webcam.html:54
 msgid "The name cannot be empty."
-msgstr ""
+msgstr "Das Feld \"Name\" muss gefüllt sein"
 
 #: views/modals/area.html:62 views/modals/area.html:242
 #: views/modals/area.html:427 views/modals/webcam.html:120
@@ -798,8 +796,6 @@ msgstr "Zeitpunkt an dem die Relais täglich eingeschaltet werden."
 #: views/modals/area.html:371 views/modals/area.html:532
 #: views/modals/area.html:544 views/modals/area.html:661
 #: views/modals/area.html:673 views/modals/area.html:913
-#, fuzzy
-#| msgid "Enter a valid time of the day."
 msgid "Enter a valid time."
 msgstr "Gebe eine gültige Zeit ein."
 
@@ -837,10 +833,8 @@ msgstr "Dauer Aus"
 
 #: views/modals/area.html:181 views/modals/area.html:639
 #: views/modals/area.html:769
-#, fuzzy
-#| msgid "Select the operating mode."
 msgid "Select the relays to toggle."
-msgstr "Wählen Sie den Betriebsmodus."
+msgstr "Wählen Sie das Relais zum Umschalten"
 
 #: views/modals/area.html:249
 msgid ""
@@ -1114,10 +1108,8 @@ msgid "Select the door status."
 msgstr "Zustand der archivierten Tür auswählen"
 
 #: views/modals/area.html:624 views/modals/area.html:754
-#, fuzzy
-#| msgid "Threshold"
 msgid "Alarm threshold"
-msgstr "Schwelle"
+msgstr "Alarm Schwelle"
 
 #: views/modals/area.html:627 views/modals/area.html:757
 #, fuzzy
@@ -1541,7 +1533,7 @@ msgstr "Dimmer Frequenz in Hz"
 
 #: views/modals/relay.html:95
 msgid "The frequency on which the dimmer operates."
-msgstr "Die Frequenz, auf der der Dimmer arbeitet."
+msgstr "Die Frequenz, auf welcher der Dimmer arbeitet."
 
 #: views/modals/relay.html:104
 msgid "Max power in %"
@@ -2196,10 +2188,8 @@ msgid "Only for changes"
 msgstr "Nur bei Änderungen"
 
 #: views/settings.html:69
-#, fuzzy
-#| msgid "Authentication"
 msgid "No authentication"
-msgstr "Authentifizierung"
+msgstr "keine Authentifizierung"
 
 #: views/settings.html:72
 msgid "Always authenticate or only when changes are being made."
