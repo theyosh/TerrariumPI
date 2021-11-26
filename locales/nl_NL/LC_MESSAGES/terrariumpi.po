@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-11-25 22:12+CET\n"
-"PO-Revision-Date: 2021-11-15 20:49+0000\n"
+"PO-Revision-Date: 2021-11-26 14:34+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -910,10 +910,8 @@ msgid "Select at least 1 sensor."
 msgstr "Selecteer minimaal 1 sensor."
 
 #: views/modals/area.html:453
-#, fuzzy
-#| msgid "volume"
 msgid "Water volume"
-msgstr "volume"
+msgstr "Watervolume"
 
 #: views/modals/area.html:456
 msgid "Enter the volume of the water tank."
@@ -1374,10 +1372,8 @@ msgid "Playlist settings"
 msgstr "Afspeellijst instellingen"
 
 #: views/modals/playlist.html:29
-#, fuzzy
-#| msgid "Audio files"
 msgid "Audio volume"
-msgstr "Audio bestanden"
+msgstr "Audiovolume"
 
 #: views/modals/playlist.html:32
 msgid "Select the volume for this playlist."
