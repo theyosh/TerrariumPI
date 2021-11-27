@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-03-25 11:52+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2021-11-28 20:27+0000\n"
+"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Spanish (Argentina) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/3-x-y-z/es_AR/>\n"
 "Language: es_AR\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 4.9\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
@@ -1693,7 +1693,7 @@ msgstr "Tanque de agua"
 #: views/dashboard.tpl:436 views/inc/menu.tpl:68 views/sensor_settings.tpl:149
 #: views/system_environment.tpl:1378
 msgid "Fertility"
-msgstr "Fertilizante"
+msgstr "Fertilidad"
 
 #: views/dashboard.tpl:489 views/inc/menu.tpl:71 views/sensor_settings.tpl:150
 #: views/system_environment.tpl:1589
