@@ -138,35 +138,32 @@ class TerrariumMerossCloud(terrariumSingleton):
         await asyncio.wait_for(evt.wait(), timeout)
       return evt.is_set()
 
-    async def _notification(push_notification, target_devices):
+    async def _notification(namespace: Namespace, data: dict, device_internal_id: str, *args, **kwargs):
+
       logger.info('Got an update from the Meross Cloud.')
-#      print(push_notification)
-#      print(dir(push_notification))
-#      print(f'namespace: {push_notification.namespace}')
+#       if push_notification.namespace == Namespace.SYSTEM_ONLINE:
+#         # Connection issues...
+# #        print(f'status: {push_notification.status}')
 
-      if push_notification.namespace == Namespace.SYSTEM_ONLINE:
-        # Connection issues...
-#        print(f'status: {push_notification.status}')
+#         if push_notification.status == OnlineStatus.ONLINE:
+#           # Reconnect
+#           self.reconnect()
 
-        if push_notification.status == OnlineStatus.ONLINE:
-          # Reconnect
-          self.reconnect()
+#       else:
+      for device in data:
+        if hasattr(device,'is_on'):
+          self._data[f'{device.uuid}'] = []
 
-      else:
-        for device in target_devices:
-          if hasattr(device,'is_on'):
-            self._data[f'{device.uuid}'] = []
+          for channel in device.channels:
+            self._data[f'{device.uuid}'].append(device.is_on(channel=channel.index))
 
-            for channel in device.channels:
-              self._data[f'{device.uuid}'].append(device.is_on(channel=channel.index))
+        if hasattr(device,'last_sampled_temperature'):
+          self._data[f'{device.subdevice_id}'] = {
+            'temperature' : device.last_sampled_temperature,
+            'humidity'    : device.last_sampled_humidity
+          }
 
-          if hasattr(device,'last_sampled_temperature'):
-            self._data[f'{device.subdevice_id}'] = {
-              'temperature' : device.last_sampled_temperature,
-              'humidity'    : device.last_sampled_humidity
-            }
-
-        self._store_data()
+      self._store_data()
 
     try:
       # Setup the HTTP client API from user-password
@@ -192,7 +189,6 @@ class TerrariumMerossCloud(terrariumSingleton):
         # Is a sensor
         if hasattr(dev,'last_sampled_temperature'):
           await dev.async_update()
-          #print(f'Last data: {dev.last_sampled_time}')
           self._data[f'{dev.subdevice_id}'] = {
             'temperature' : dev.last_sampled_temperature,
             'humidity'    : dev.last_sampled_humidity
