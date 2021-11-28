@@ -293,13 +293,13 @@ class terrariumArea(object):
 
   def _setup_variation_data(self):
     self.state['variation'] = {
-        'active' : len(self.setup['sensors']) > 0,
-        'dynamic' : False,
+        'active'   : len(self.setup['sensors']) > 0,
+        'dynamic'  : False,
         'external' : False,
         'script'   : False,
-        'offset' : float(0),
-        'source' : None,
-        'periods' : []
+        'offset'   : float(0),
+        'source'   : None,
+        'periods'  : []
       }
 
     varation_data = copy.deepcopy(self.setup.get('variation',[]))

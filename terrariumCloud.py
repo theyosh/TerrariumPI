@@ -9,9 +9,7 @@ import socket
 
 from time import sleep, time
 
-from datetime import datetime
-
-from terrariumUtils import terrariumCache, terrariumUtils, terrariumSingleton, terrariumAsync
+from terrariumUtils import terrariumCache, terrariumSingleton, terrariumAsync
 
 # pip install meross-iot
 # https://github.com/albertogeniola/MerossIot
@@ -20,7 +18,7 @@ from meross_iot.manager import MerossManager
 from meross_iot.controller.mixins.toggle import ToggleXMixin
 from meross_iot.model.http.exception import BadLoginException
 from meross_iot.model.exception import CommandTimeoutError
-from meross_iot.model.enums import OnlineStatus, Namespace
+from meross_iot.model.enums import Namespace
 
 
 class TerrariumMerossCloud(terrariumSingleton):
@@ -50,9 +48,15 @@ class TerrariumMerossCloud(terrariumSingleton):
     if reconnecting:
       logger.info('Reconnecting to the Meross cloud')
 
-    while not self.__engine['running'] and not self.__engine['error']:
+    counter = 0
+    while not self.__engine['running'] and not self.__engine['error'] and counter < 30:
       logger.info('Waiting for Meross cloud connection ... ')
+      counter += 1
       sleep(1)
+
+    if counter >= 30:
+      logger.error('Could not login to Meross cloud within 30 seconds. Restarting...')
+      self.reconnect()
 
     if not self.__engine['error']:
       logger.info(f'Meross cloud is {"re-" if reconnecting else ""}connected! Found {len(self._data)} devices in {time()-start_time:.2f} seconds.')
@@ -139,29 +143,23 @@ class TerrariumMerossCloud(terrariumSingleton):
       return evt.is_set()
 
     async def _notification(namespace: Namespace, data: dict, device_internal_id: str, *args, **kwargs):
-
-      logger.info('Got an update from the Meross Cloud.')
-#       if push_notification.namespace == Namespace.SYSTEM_ONLINE:
-#         # Connection issues...
-# #        print(f'status: {push_notification.status}')
-
-#         if push_notification.status == OnlineStatus.ONLINE:
-#           # Reconnect
-#           self.reconnect()
-
-#       else:
       for device in data:
+
         if hasattr(device,'is_on'):
           self._data[f'{device.uuid}'] = []
 
           for channel in device.channels:
             self._data[f'{device.uuid}'].append(device.is_on(channel=channel.index))
 
+          logger.info(f'Got an update from the Meross Cloud. Relay state {device.uuid} {self._data[device.uuid]}')
+
         if hasattr(device,'last_sampled_temperature'):
           self._data[f'{device.subdevice_id}'] = {
             'temperature' : device.last_sampled_temperature,
             'humidity'    : device.last_sampled_humidity
           }
+
+          logger.info(f'Got an update from the Meross Cloud. Setting temperature to {device.last_sampled_temperature} and humidity to {device.last_sampled_humidity}')
 
       self._store_data()
 
