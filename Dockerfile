@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends libusb-dev && \
 # python builder, help keep image small
 FROM python:3.8-buster as builder
 ENV DEBIAN_FRONTEND=noninteractive
+# These two environment variables prevent __pycache__/ files.
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 RUN apt-get update && apt-get install -y --no-install-recommends gnupg ca-certificates && \
   echo "deb http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list && \
   echo "deb http://archive.raspberrypi.org/debian/ buster main" >> /etc/apt/sources.list.d/raspberrypi.list && \
@@ -29,13 +32,11 @@ ENV PATH="/opt/venv/bin:$PATH"
 ENV CFLAGS=-fcommon
 # cryptography - https://stackoverflow.com/questions/66118337/how-to-get-rid-of-cryptography-build-error
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
-# These two environment variables prevent __pycache__/ files.
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
 RUN pip install --upgrade pip && pip install wheel
 COPY requirements.txt .
 # requirements are slightly different for docker
 RUN sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.txt && \
+  sed -i 's/cryptography==.*/cryptography==3.4.8/g' requirements.txt && \
   echo "numpy" >> requirements.txt && \
   pip install -r requirements.txt
 WORKDIR /TerrariumPI
@@ -53,7 +54,7 @@ RUN mkdir -p static/assets/plugins && cd static/assets/plugins && \
 
 # remove git and 3rdparty dir from code copy to help keep image smaller
 # 3rdparty is coming from the builder image
-FROM bash as sourcecode
+FROM python:3.8-buster as sourcecode
 WORKDIR /TerrariumPI
 COPY . .
 RUN rm -rf .git 3rdparty
