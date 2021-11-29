@@ -12,6 +12,11 @@ div#weather_image {
   background-repeat: no-repeat;
 }
 
+.dark-mode div#weather_days img,
+.dark-mode div#weather_image {
+  filter: invert(100%);
+}
+
 /* https://github.hubspot.com/pace/docs/welcome/ */
 .pace {
   -webkit-pointer-events: none;
