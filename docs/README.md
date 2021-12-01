@@ -1,6 +1,6 @@
 # Update documentation
 
-In order to update or add new documentation you need to have Jekyll installed. Then fork this repository and checkout the `documentation` branch. From that, make a new branch to make your changes. Then create a pull request for the documentation branch. When the pull request is finished, a new version of the documentation will be created at https://theyosh.github.io/TerrariumPI
+In order to update or add new documentation you need to have Jekyll installed. Then fork this repository and checkout the `4.x.y.z` branch. From that, make a new branch to make your changes. Then create a pull request for the `4.x.y.z` branch. When the pull request is finished, a new version of the documentation will be created at https://theyosh.github.io/TerrariumPI
 
 This can be done on a normal computer/laptop. The documentation does not need a running TerrariumPI.
 
