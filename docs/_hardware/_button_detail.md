@@ -5,7 +5,7 @@
 
 In order to use the **{{ page.device_title | default: page.title }}** use the following settings:
 
-### Mandantory
+### Mandatory
 
 Hardware
 : {{ page.device_hardware | default: page.title }}

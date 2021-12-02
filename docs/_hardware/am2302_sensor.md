@@ -18,7 +18,7 @@ The AM2302 is a wired version of the DHT22, in a large plastic body. It is a bas
 
 Simply connect the red 3-5V power, the yellow wire to your data input pin and the black wire to ground. Although it uses a single-wire to send data it is not Dallas One Wire compatible! If you want multiple sensors, each one must have its own data pin.
 
-**There is a 5.1K resistor inside the sensor connecting VCC and DATA so you do not need any additional pullup resistors**
+**There is a 5.1K resistor inside the sensor connecting VCC and DATA so you do not need any additional pull-up resistors**
 
 **remark:** From experience, this sensor is not very stable after a few days.
 

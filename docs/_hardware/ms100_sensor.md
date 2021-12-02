@@ -20,6 +20,6 @@ device_url: https://www.meross.com/mTerminal/product?type=0&category_id=29
 - Compact size (1.57 x 1.57 x 0.55 in.), thread for fixation, with wide range connection (100 ft typically).
 - When Temperature or Relative Humidity reaches a particular value, trigger other devices on/off automatically.
 - To analyze how the data affects your life, view and extract the history data.
-- *Meross hub is required for the connection.
+- * Meross hub is required for the connection.
 
 {% include_relative _sensor_detail.md %}

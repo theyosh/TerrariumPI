@@ -13,20 +13,20 @@ Here are some features that TerrariumPI has.
 ## Local weather and climate mirroring
 Using local weather data, you can use sunrise and sunset as timers for your lights or other relays. This way you get automatically seasons following the season outside. [More...]({% link _tabs/setup.md %}#weather)
 
-It is also possible to mirror the temperature and humdity of the weather at the given location. This can be set on every temperature or humidity controlled area. And per area you can even select an offset, so you can create shade area and a full sun area based on the same cimate. Look at the variation tab to set this up.
+It is also possible to mirror the temperature and humidity of the weather at the given location. This can be set on every temperature or humidity controlled area. And per area you can even select an offset, so you can create shade area and a full sun area based on the same climate. Look at the variation tab to set this up.
 
 But you can even enter an external JSON source for climate mirroring. Look [How to use remote data FAQ]({% link _faq/remote_data.md %}) how to add the correct url.
 
-## Multilanguage
+## Multilingual
 The software is translated to multiple languages. This will also select the correct currency, number and date formatting. If you language is not available or is not complete, go to the [translation page]({% link _tabs/translations.md %}) to see how to update it.
 
 ## Multiple enclosures and multi area
-It is possible to controll multiple enclosures with a single Rasbperry PI. As long you can hook up enough sensors and relays, you can create unlimited enclosures and areas.
+It is possible to control multiple enclosures with a single Raspberry PI. As long you can hook up enough sensors and relays, you can create unlimited enclosures and areas.
 
 In every enclosure you can create multiple areas, even of the same type, to setup your enclosure. So you can create a sun spot area and a shading spot area that have their own settings and logic in the same enclosure.
 
 ## Data encryption
-Some data is sensitive like the authentication password or the cloud credentials. This data is stored encrypted in the TerrariumPI database. That means when you database is lost, your passwords will not be comprimised directly.
+Some data is sensitive like the authentication password or the cloud credentials. This data is stored encrypted in the TerrariumPI database. That means when you database is lost, your passwords will not be compromised directly.
 
 There is a difference in how the data is encrypted.
 

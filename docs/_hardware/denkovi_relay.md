@@ -13,7 +13,7 @@ device_address: "Enter the relay number 1 - X. Optional you can enter the Serial
 ---
 
 ## Information
-The second version of our popular USB 4 Relay Board with several improvements. It comes with MCP2200 chipset, 4 SPDT Relays each rated with up to 10A, relays states saving in internal EEPROM and improved USB interference resistance. Suitable for home automation applications, hobby projects, industrial automation. The free DRM / DRMv3 software allows to control relays manually, create timers (weekly and calendar) and multivibrators, use date and time for alarms. We have developed and tool for control from command line. We provide various software examples.
+The second version of our popular USB 4 Relay Board with several improvements. It comes with MCP2200 chip-set, 4 SPDT Relays each rated with up to 10A, relays states saving in internal EEPROM and improved USB interference resistance. Suitable for home automation applications, hobby projects, industrial automation. The free DRM / DRMv3 software allows to control relays manually, create timers (weekly and calendar) and multivibrators, use date and time for alarms. We have developed and tool for control from command line. We provide various software examples.
 
 [Denkovi Assembly Electronics ltd.](https://denkovi.com/usb-relay-board-four-channels-for-home-automation-v2)
 

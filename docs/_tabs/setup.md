@@ -41,7 +41,7 @@ Authentication mode
 : There are 3 authentication options.
 - Full authentication: For all actions you need to be logged in.
 - Only for changes: Only adding and updating needs authentication.
-- No authentication: No authentication at all. **Be very carefull with this!**
+- No authentication: No authentication at all. **Be very careful with this!**
 
 User name
 :  Enter the user name for authentication. Default admin
@@ -91,7 +91,7 @@ Profile image
 : Upload a small image. That is used in the left menu.
 
 Graph smoothing
-: If the graph is spikey, you can enter a value which is the amount of measurements that are averaged.
+: If the graph is spiky, you can enter a value which is the amount of measurements that are averaged.
 
 Auto dark mode
 : Tun dark mode on based on weather sun rise and set
@@ -145,10 +145,10 @@ Name
 : The name of the relay. Use an easy to remember name.
 
 Wattage
-: The ammount of power that is used when on or at full power (dimmer)
+: The amount of power that is used when on or at full power (dimmer)
 
 Water flow
-: The ammount of water that is used when on or at full power (dimmer) in Liter/Gallon per minute
+: The amount of water that is used when on or at full power (dimmer) in Liter/Gallon per minute
 
 Current
 : The current state of the relay. Value 0 is off, 100 is full on, or a value between 0 - 100 (dimmer)
@@ -157,7 +157,7 @@ Current
 This is only available for dimmers.
 
 Dimmer frequency in Hz
-: The frequency of wicht the dimmer is working on. The default depends on the selected dimmer type.
+: The frequency of witch the dimmer is working on. The default depends on the selected dimmer type.
 
 Max power in %
 : The max power the dimmer is allowed to use. Default 100
@@ -188,7 +188,7 @@ Alarm max
 : The high alarm value. When the sensor gets higher then this value, the **hight** alarm will be triggered
 
 Limit min
-: The minimun value that is valid for this sensor. Values measured below this value will be ignored.
+: The minimum value that is valid for this sensor. Values measured below this value will be ignored.
 
 Limit max
 : The maximum value that is valid for this sensor. Values measured higher then this value will be ignored.

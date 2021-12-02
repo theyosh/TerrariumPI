@@ -18,7 +18,7 @@ The DHT22 is a basic, low-cost digital temperature and humidity sensor. It uses 
 
 Simply connect the first pin on the left to 3-5V power, the second pin to your data input pin, and the rightmost pin to ground. Although it uses a single wire to send data it is not Dallas One Wire compatible! If you want multiple sensors, each one must have its own data pin.
 
-It needs a 4.7K - 10K resistor, which you will want to use as a pullup from the data pin to VCC.
+**It needs a 4.7K - 10K resistor, which you will want to use as a pull-up from the data pin to VCC.**
 
 ## Warning
 As these sensors are cheap, they are not stable for 24/7 duty. After a few days they tend to give problems. Use at your own risk! [Using DHT11 / DHT11 on Raspberry Pi 4b #470](https://github.com/theyosh/TerrariumPI/issues/470)

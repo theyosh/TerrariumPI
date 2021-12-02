@@ -17,7 +17,7 @@ Some GPIO sensors can benefit from using power saving. A good example is the ana
 
 Power management works that you connect the red (power) wire of the sensor to a GPIO pin, which will be put to high so that the sensor get powered. After 0.25 sec a measurement is taken, and afterwards the power to the sensor is shutdown.
 
-When you want to enable power saving just enter an extra GPIO pin number, where the RED power cable is connected to, to the address seperated by a comma.
+When you want to enable power saving just enter an extra GPIO pin number, where the RED power cable is connected to, to the address separated by a comma.
 <br />Ex: `[GPIO Readout pin],[GPIO power saving pin]`
 
 **remark:** Not all sensors will work with power management.
@@ -28,7 +28,7 @@ It is possible to add analog sensors to TerrariumPI. But as TerrariumPI only has
 
 ## I2C bus
 By default there is only 1 I2C bus available. [But it is possible to add more I2C busses to your Raspberry PI](https://www.instructables.com/id/Raspberry-PI-Multiple-I2c-Devices/). To select a different I2C bus then 1, use the following address notation:<br />
-`[I2C Address],[I2C Bus numer]`
+`[I2C Address],[I2C Bus number]`
 
 For `[I2C Address]` you can use the number shown in the i2cdetect. Adding '**0x**' in front is allowed. So either **3c**, **3c,1**, **0x3c** and **0x3c,1** are valid and the same I2C addresses.
 

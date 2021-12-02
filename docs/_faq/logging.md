@@ -6,11 +6,11 @@ tags: [logging]
 
 By default all logging is done in the folder log where the actual log files are written to a temporary memory share. This is done to reduce the write wear on the SD card. A downside is that when the Pi reboots, all log info of that day is gone. During the night, the log file will be archived and that is stored on the SD card. So archived log files will survive reboots.
 
-In order to change the default logging of TerrariumPI you only need to create your own custom logging configuration file with the name `logging.custom.cfg`. So start with:
+In order to change the default logging of TerrariumPI you only need to create your own custom logging configuration file with the name `logging.custom.cfg` and place that in the `log` folder. So start with:
 
-`cp logging.cfg logging.custom.cfg`
+`cp logging.cfg log/logging.custom.cfg`
 
-And start editing the `logging.custom.cfg` file with an editor. After editing restart TerrariumPI and the new logging will be loaded.
+And start editing the `log/logging.custom.cfg` file with an editor. After editing restart TerrariumPI and the new logging will be loaded.
 
 ### Enable debug
 

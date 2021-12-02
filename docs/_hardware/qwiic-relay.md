@@ -19,7 +19,7 @@ Qwiic Relays are available in different configurations:
 * Single relay
 * Quad relay
 * Dual Solid State relay
-* Quad Solid State rekay
+* Quad Solid State relay
 
 These relays are addressable through I2C and can be controlled by any micro-controller with I2C support.
 This allows to control various appliances.

@@ -10,7 +10,7 @@ This relay will be auto detected during startup or added by 'Scan relays' in the
 
 In order to use the **{{ page.device_title | default: page.title }}** use the following settings:
 
-### Mandantory
+### Mandatory
 
 Hardware
 : {{ page.device_hardware | default: page.title }}
@@ -23,7 +23,7 @@ Address
 This is only available for dimmers.
 
 Dimmer frequency in Hz
-: Default frequentie: {{ page.dimmer_frequency }} Hz
+: Default frequency: {{ page.dimmer_frequency }} Hz
 
 {% endif %}
 

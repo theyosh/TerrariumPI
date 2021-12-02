@@ -53,9 +53,7 @@ ssh pi@[raspberrypi]
 ## Docker
 As from version 4.1 there is a Docker image that can be used to run TerrariumPI. When you run it in Docker, you can skip the rest of the page. Only the migration could be followed if you want to restore your current relay history.
 
-Install docker according to: [https://pimylifeup.com/raspberry-pi-docker/](https://pimylifeup.com/raspberry-pi-docker/)
-
-Finally install docker compose `sudo pip3 install -U docker-compose`
+Install docker according to: [https://www.upswift.io/post/install-docker-compose-on-raspberry-pi](https://www.upswift.io/post/install-docker-compose-on-raspberry-pi) including install Docker-compose at chapter 7
 
 Then you need to setup a `docker-compose.yaml` file. There is an example `docker-compose.yaml.example` which can be used as a starting point:
 
@@ -162,7 +160,7 @@ Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need
   - full path to OLD database (`history.db`)
   - full path to NEW database (`terrariumpi.db`)
 
-7. Answer the questions asked by the script. This should match your old and new relays, in order to copy the historycal data.
+7. Answer the questions asked by the script. This should match your old and new relays, in order to copy the historical data.
 
 ```
 Found 7 out of 8 are found. Below is a summary of the founded relays that can converted.

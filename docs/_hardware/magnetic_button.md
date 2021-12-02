@@ -27,7 +27,7 @@ Features:
 - Rated voltage: 200 VDC max
 - Distance: 15mm max
 - Magnet Dimensions: 27.75 x 14.4 x 8.5mm
-- Wire Lenght: 330mm / 13″
+- Wire Length: 330mm / 13″
 
 
 {% include_relative _button_detail.md %}
