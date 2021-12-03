@@ -3,7 +3,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import asyncio
 
-from . import terrariumRelay, terrariumRelayException
+from . import terrariumRelay
 from terrariumUtils import terrariumUtils, terrariumAsync, terrariumCache
 
 # pip install python-kasa
@@ -37,7 +37,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
 
     async def __set_hardware_state(state):
       await self.device.update()
-      plug = self.device if len(self._address) == 1 else self.device.plugs[self._device['switch']]
+      plug = self.device if len(self._address) == 1 else self.device.children[self._device['switch']]
 
       if state != 0.0:
         await plug.turn_on()
@@ -61,7 +61,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
       data = []
       await self.device.update()
 
-      plugs = [self.device] if len(self._address) == 1 else self.device.plugs
+      plugs = [self.device] if len(self._address) == 1 else self.device.children
       for plug in plugs:
         data.append(plug.is_on)
 
@@ -95,12 +95,12 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
         device = devices[ip_address]
         await device.update()
         if device.is_strip:
-          for counter in range(1,len(device.plugs)+1):
+          for counter in range(1,len(device.children)+1):
             found_devices.append(
               terrariumRelay(None,
                              terrariumRelayTPLinkKasa.HARDWARE,
                              '{},{}'.format(device.host,counter),
-                             f'Channel {device.plugs[counter-1].alias}',
+                             f'Channel {device.children[counter-1].alias}',
                              None,
                              callback)
             )
