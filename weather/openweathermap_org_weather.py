@@ -122,7 +122,8 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
     self._data['history'] = sorted(self._data['history'], key=lambda d: d['timestamp'])
     self.__history_day = int(datetime.utcfromtimestamp(int(datetime.now().timestamp()) + self._data["timezone"]).strftime('%d'))
-    logger.info(f'Loaded new historical weather data ({len(self._data["history"])} measurements) in {time()-start:.2f} seconds')
+
+    logger.info(f'Loaded new historical weather data ({len(self._data["history"])} measurements) from {datetime.fromtimestamp(int(self._data["history"][0]["timestamp"]))} till {datetime.fromtimestamp(int(self._data["history"][len(self._data["history"])-1]["timestamp"]))} in {time()-start:.2f} seconds.')
     return True
 
   def _load_data(self):
