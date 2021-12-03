@@ -83,7 +83,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
               'humidity'  : float(day['humidity']),
               'wind'      : {'speed'    : float(day['wind_speed']),    # Speed is in meter per second
                             'direction' : float(day['wind_deg'])},
-              'weather'   : day['weather'][0]['description']
+              'weather'   : day['weather'][0].get('description','')
             })
 
       self._data['forecast'] = sorted(self._data['forecast'], key=lambda d: d['timestamp'])
