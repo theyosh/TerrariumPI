@@ -82,3 +82,14 @@ We currently support <strong>{{ buttons | size}}</strong> types of buttons.
     <a href="{{ button.url | relative_url }}">{{ button.title }}</a>
   </h3>
 {% endfor %}
+
+{% assign webcams = site.hardware | where_exp: "hardware", "hardware.tags contains 'webcam'" | sort_natural: "title" %}
+## Webcams
+We currently support <strong>{{ webcams | size}}</strong> types of webcams.
+
+{% for webcam in webcams %}
+  <h3 style="margin-bottom: 0px">
+    <a href="{{ webcam.url | relative_url }}">{{ webcam.title }}</a>
+  </h3>
+  {{ webcam.device_type }}
+{% endfor %}

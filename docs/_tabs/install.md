@@ -51,7 +51,7 @@ ssh pi@[raspberrypi]
 **Disclaimer:** If you have TerrariumPI 3 running on this Raspberry PI, then you can [read here](#backup) how to stop and make a backup.
 
 ## Docker
-As from version 4.1 there is a Docker image that can be used to run TerrariumPI. When you run it in Docker, you can skip the rest of the page. Only the migration could be followed if you want to restore your current relay history.
+As from version 4.1 there is a [Docker image](https://hub.docker.com/r/theyosh/terrariumpi) that can be used to run TerrariumPI. When you run it in Docker, you can skip the rest of the page. Only the migration could be followed if you want to restore your current relay history.
 
 Install docker according to: [https://www.upswift.io/post/install-docker-compose-on-raspberry-pi](https://www.upswift.io/post/install-docker-compose-on-raspberry-pi) including install Docker-compose at chapter 7
 
@@ -106,6 +106,8 @@ sudo apt -y install git
 ### Download
 
 After Git is installed, we can download the Terrariumpi source code. We will only download the latest version.
+
+If you want to do some development or testing, ommit the part `--depth 1`. Then you will get the full repository with all the branches.
 
 ```console
 git clone --branch 4.x.y.z --depth 1 https://github.com/theyosh/TerrariumPI.git
