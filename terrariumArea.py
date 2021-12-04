@@ -297,6 +297,7 @@ class terrariumArea(object):
         'dynamic'  : False,
         'external' : False,
         'script'   : False,
+        'weather'  : False,
         'offset'   : float(0),
         'source'   : None,
         'periods'  : []
@@ -306,45 +307,20 @@ class terrariumArea(object):
     if len(varation_data) == 0:
       return
 
-    if varation_data[0]['when'] in ['script','external']:
+    if varation_data[0]['when'] in ['script','external','weather']:
       try:
         self.state['variation']['offset'] = float(varation_data[0]['offset'])
       except:
         pass
 
       self.state['variation'][varation_data[0]['when']] = True
-      self.state['variation']['source'] = varation_data[0]['source']
+      if 'weather' != varation_data[0]['when']:
+        self.state['variation']['source'] = varation_data[0]['source']
 
       if 'external' == varation_data[0]['when']:
         self.__external_cache = terrariumCache()
 
-      varation = []
-
-    elif 'weather' == varation_data[0]['when']:
-      # Load the weather history as a new variation setup
-      self.state['variation']['dynamic'] = True
-      try:
-        self.state['variation']['offset'] = float(varation_data[0]['offset'])
-      except:
-        pass
-
-      weather_current_source = None
-      if self.type in ['heating','cooling']:
-        weather_current_source = 'temperature'
-      elif self.type in ['humidity']:
-        weather_current_source = 'humidity'
-
-      if weather_current_source is None:
-        return
-
-      # Reset variation data and fill with history data
       varation_data = []
-      for history in self.enclosure.engine.weather.history:
-        varation_data.append({
-          'when': 'at',
-          'period' : history['timestamp'],
-          'value' : float(history[weather_current_source]) + self.state['variation']['offset']
-        })
 
     for varation in varation_data:
       periods = len(self.state['variation']['periods'])
@@ -439,6 +415,31 @@ class terrariumArea(object):
           'end_value'   : str(value), # This will be overwritten by the next value to get a nice change during the period
         }
 
+    elif self.state['variation']['weather']:
+
+      weather_current_source = None
+      if self.type in ['heating','cooling']:
+        weather_current_source = 'temperature'
+      elif self.type in ['humidity']:
+        weather_current_source = 'humidity'
+
+      if weather_current_source is None:
+        return
+
+      current_timestamp = int( (datetime.datetime.now()-datetime.timedelta(hours=24)).timestamp() )
+      for counter,history in enumerate(self.enclosure.engine.weather.history):
+        logger.info(f'{counter}. Current timestamp {datetime.datetime.fromtimestamp(current_timestamp)} vs History timestamp: {datetime.datetime.fromtimestamp(int(history["timestamp"]))}')
+        print(f'{counter}. Current timestamp {datetime.datetime.fromtimestamp(current_timestamp)} vs History timestamp: {datetime.datetime.fromtimestamp(int(history["timestamp"]))}')
+        if current_timestamp < history["timestamp"]:
+          period = {
+            'start'       : datetime.datetime.fromtimestamp(int(self.enclosure.engine.weather.history[counter-1]["timestamp"])),
+            'end'         : datetime.datetime.fromtimestamp(int(history["timestamp"])),
+            'start_value' : str(self.enclosure.engine.weather.history[counter-1][weather_current_source]),
+            'end_value'   : str(history[weather_current_source]),
+          }
+
+          break
+
     else:
       for item in self.state['variation']['periods']:
         if now >= datetime.time.fromisoformat(item['start']) and now < datetime.time.fromisoformat(item['end']):
@@ -447,6 +448,10 @@ class terrariumArea(object):
           period['start'] = datetime.time.fromisoformat(item['start'])
           period['end']   = datetime.time.fromisoformat(item['end'])
           break
+
+
+    logger.info(f'Using variation period: {period}')
+    print(f'Using variation period: {period}')
 
     if period is None:
       # No valid period found, so we are done!
@@ -490,7 +495,7 @@ class terrariumArea(object):
           sensor.alarm_min += sensor_diff
           sensor.alarm_max += sensor_diff
           unit = self.enclosure.engine.units[self.state["sensors"]["unit"]]
-          logger.info(f'Changed {sensor.type} sensor \'{sensor.name}\' for area \'{self.name}\' alarm values from min: {sensor.alarm_min - sensor_diff:.2f}{unit}, max: {sensor.alarm_max - sensor_diff:.2f}{unit} to new min: {sensor.alarm_min:.2f}{unit} and max: {sensor.alarm_max:.2f}{unit}. A difference of {sensor_diff}{unit}. New average is: {wanted_average_value:.2f}{unit}.')
+          logger.info(f'Variation change {sensor.type} sensor \'{sensor.name}\' for area \'{self.name}\' alarm values from min: {sensor.alarm_min - sensor_diff:.2f}{unit}, max: {sensor.alarm_max - sensor_diff:.2f}{unit} to new min: {sensor.alarm_min:.2f}{unit} and max: {sensor.alarm_max:.2f}{unit}. A difference of {sensor_diff}{unit}. New average is: {wanted_average_value:.2f}{unit}.')
 
     # Reload the current sensor values after changing them
     self.state['sensors'] = self.current_value(self.setup['sensors'])
@@ -524,9 +529,10 @@ class terrariumArea(object):
     old_is_day = self.state['is_day']
     self.state['is_day'] = self.is_day
 
-    if old_is_day != self.state['is_day'] and 'variation' in self.state and self.state['variation']['dynamic']:
-      print('Update variation data based on date / night change')
-      self._setup_variation_data()
+    if 'variation' in self.state and self.state['variation']['dynamic']:
+      if old_is_day != self.state['is_day'] or int(datetime.datetime.now().strftime("%H%M")) % 400 == 0:
+        logger.info('Updating variation data based on day/night change or modulo 400')
+        self._setup_variation_data()
 
     if 'sensors' in self.setup:
       # Change the sensor limits when changing from day to night and vs.
