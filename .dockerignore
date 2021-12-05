@@ -9,3 +9,4 @@ Gemfile*
 venv
 .cache
 media/*
+*.js.map
