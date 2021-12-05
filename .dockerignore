@@ -1,5 +1,10 @@
 .dockerignore
+.git
 .git*
+**/.git
+**/.git*
+__pycache__
+**/__pycache__
 Dockerfile*
 docker-compose.yaml*
 screenshots
@@ -10,3 +15,5 @@ venv
 .cache
 media/*
 *.js.map
+**/*.js.map
+install.sh
