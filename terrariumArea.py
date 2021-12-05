@@ -428,8 +428,6 @@ class terrariumArea(object):
 
       current_timestamp = int( (datetime.datetime.now()-datetime.timedelta(hours=24)).timestamp() )
       for counter,history in enumerate(self.enclosure.engine.weather.history):
-        logger.info(f'{counter}. Current timestamp {datetime.datetime.fromtimestamp(current_timestamp)} vs History timestamp: {datetime.datetime.fromtimestamp(int(history["timestamp"]))}')
-        print(f'{counter}. Current timestamp {datetime.datetime.fromtimestamp(current_timestamp)} vs History timestamp: {datetime.datetime.fromtimestamp(int(history["timestamp"]))}')
         if current_timestamp < history["timestamp"]:
           period = {
             'start'       : datetime.datetime.fromtimestamp(int(self.enclosure.engine.weather.history[counter-1]["timestamp"])),
@@ -448,10 +446,6 @@ class terrariumArea(object):
           period['start'] = datetime.time.fromisoformat(item['start'])
           period['end']   = datetime.time.fromisoformat(item['end'])
           break
-
-
-    logger.info(f'Using variation period: {period}')
-    print(f'Using variation period: {period}')
 
     if period is None:
       # No valid period found, so we are done!
@@ -531,7 +525,7 @@ class terrariumArea(object):
 
     if 'variation' in self.state and self.state['variation']['dynamic']:
       if old_is_day != self.state['is_day'] or int(datetime.datetime.now().strftime("%H%M")) % 400 == 0:
-        logger.info('Updating variation data based on day/night change or modulo 400')
+        # logger.info('Updating variation data based on day/night change or modulo 400')
         self._setup_variation_data()
 
     if 'sensors' in self.setup:
