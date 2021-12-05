@@ -1,5 +1,4 @@
-from . import terrariumRelay, terrariumRelayDimmer, terrariumRelayException
-from terrariumUtils import terrariumUtils
+from . import terrariumRelayDimmer
 
 # pip install PCA9685-driver
 # pip uninstall smbus-cffi
@@ -13,12 +12,18 @@ class terrariumRelayDimmerPCA9685(terrariumRelayDimmer):
   _DIMMER_FREQ   = 1000
   _DIMMER_MAXDIM = 4095
 
+  _DEFAULT_ADDRESS = '0x40'
+
   def _load_hardware(self):
+    # address is expected as `[relay_number],[i2c_address]`
     address = self._address
     if len(address) == 1:
-      address.append(1)
+      address.append(self._DEFAULT_ADDRESS)
 
-    self._device['switch'] = int(address[0] if address[0].startswith('0x') else '0x' + address[0],16)
+    elif not address[1].startswith('0x'):
+      address[1] = int('0x' + address[1],16)
+
+    self._device['switch'] = int(address[0])
     self._device['device'] = pca9685_driver.Device(self._device['switch'], int(address[1]))
     self._device['device'].set_pwm_frequency(self._DIMMER_FREQ)
 

@@ -8,7 +8,7 @@ image:
   src: /assets/img/PCA9685-dimmer.webp
   alt: "PCA9685 header image"
 
-device_address: I2C Address
+device_address: "[relay_number],[I2C Address](/TerrariumPI/hardware#i2c-bus) where the I2C address is optional<br />Ex: `1,0x40`"
 dimmer_frequency: 5000
 device_url : https://custom-build-robots.com/electronic/raspberry-pi-led-dimmer-pca9685-servo-controller/8840?lang=en
 ---
