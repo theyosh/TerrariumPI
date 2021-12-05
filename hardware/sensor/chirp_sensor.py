@@ -1,5 +1,4 @@
 from . import terrariumI2CSensor
-from terrariumUtils import terrariumUtils
 
 from pathlib import Path
 

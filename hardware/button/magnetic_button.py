@@ -2,7 +2,7 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from . import terrariumButton, terrariumButtonException
+from . import terrariumButton
 
 class terrariumMagneticButton(terrariumButton):
   HARDWARE = 'magnetic'

@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 from gevent import sleep
 import threading
 
-from . import terrariumButton, terrariumButtonException
+from . import terrariumButton
 
 class terrariumLDRSensor(terrariumButton):
   HARDWARE = 'ldr'

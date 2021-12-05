@@ -3,7 +3,6 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 from . import terrariumI2CSensor
-from terrariumUtils import terrariumUtils
 
 from struct import unpack
 from time import sleep

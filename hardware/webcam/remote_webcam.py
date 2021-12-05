@@ -1,10 +1,8 @@
-from . import terrariumWebcam, terrariumWebcamException
+from . import terrariumWebcam
 from terrariumUtils import terrariumUtils
 
-from pathlib import Path
 from PIL import Image
 from io import BytesIO
-import re
 
 class terrariumRemoteWebcam(terrariumWebcam):
   HARDWARE     = 'remote'

@@ -1,4 +1,4 @@
-from . import terrariumRelay, terrariumRelayDimmer, terrariumRelayException
+from . import terrariumRelayDimmer
 from terrariumUtils import terrariumUtils
 
 # pip install gpiozero

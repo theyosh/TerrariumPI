@@ -1,9 +1,7 @@
 from . import terrariumI2CSensor
-from terrariumUtils import terrariumUtils
 
 # pip install RPi.bme280
 import bme280
-import smbus2
 
 class terrariumBME280Sensor(terrariumI2CSensor):
   HARDWARE = 'bme280'

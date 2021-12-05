@@ -1,5 +1,4 @@
-from . import terrariumRelay, terrariumRelayException
-from terrariumUtils import terrariumUtils
+from . import terrariumRelay
 
 # pip install sparkfun-qwiic-relay
 import qwiic_relay

@@ -3,7 +3,6 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import inspect
-import pkgutil
 from importlib import import_module
 import sys
 
@@ -19,7 +18,6 @@ import re
 import math
 import glob
 import cv2
-import numpy as np
 
 # pip install retry
 from retry import retry
@@ -37,13 +35,13 @@ class terrariumWebcamException(TypeError):
     self.message = message
     super().__init__(message, *args)
 
-class terrariummWebcamLoadingException(terrariumWebcamException):
+class terrariumWebcamLoadingException(terrariumWebcamException):
   pass
 
-class terrariummWebcamUpdateException(terrariumWebcamException):
+class terrariumWebcamUpdateException(terrariumWebcamException):
   pass
 
-class terrariummWebcamActionException(terrariumWebcamException):
+class terrariumWebcamActionException(terrariumWebcamException):
   pass
 
 # https://www.bnmetrics.com/blog/factory-pattern-in-python3-simple-version
@@ -156,10 +154,10 @@ class terrariumWebcam(object):
     try:
       hardware = self._load_hardware()
     except Exception as ex:
-      raise terrariummWebcamLoadingException(f'Unable to load webcam {self}: {ex}.')
+      raise terrariumWebcamLoadingException(f'Unable to load webcam {self}: {ex}.')
 
     if hardware is None:
-      raise terrariummWebcamLoadingException(f'Unable to load webcam {self}: Did not return a device.')
+      raise terrariumWebcamLoadingException(f'Unable to load webcam {self}: Did not return a device.')
 
     self._device['device'] = hardware
 
@@ -504,7 +502,7 @@ class terrariumWebcam(object):
 
     threshold = cv2.threshold(cv2.absdiff(self.__compare_image, current_image), int(motion_threshold), 255, cv2.THRESH_BINARY)[1]
     threshold = cv2.dilate(threshold, None, iterations=2)
-    
+
     # Different OpenCV versions (docker vs native)
     try:
       (cnts ,_) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)

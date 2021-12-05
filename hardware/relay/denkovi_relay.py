@@ -1,4 +1,4 @@
-from . import terrariumRelay, terrariumRelayException
+from . import terrariumRelay
 from terrariumUtils import terrariumUtils, terrariumCache
 
 import subprocess

@@ -1,6 +1,6 @@
 from . import terrariumI2CSensor
-from terrariumUtils import terrariumUtils
 
+from gevent import sleep
 # pip install melopero-amg8833
 import melopero_amg8833
 
@@ -18,6 +18,6 @@ class terrariumAMG8833Sensor(terrariumI2CSensor):
   def _get_data(self):
     data = {}
     self.device.update_pixel_temperature_matrix()
-    time.sleep(0.1)
+    sleep(0.1)
     data['temperature'] = float(self.device.get_thermistor_temperature())
     return data

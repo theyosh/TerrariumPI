@@ -2,14 +2,11 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from gevent import sleep
-from pathlib import Path
 from io import BytesIO
 import subprocess
-import threading
 import shlex
 
-from . import terrariumWebcam, terrariummWebcamLoadingException
+from . import terrariumWebcam
 from terrariumUtils import terrariumUtils
 
 class terrariumHLSLiveWebcam(terrariumWebcam):

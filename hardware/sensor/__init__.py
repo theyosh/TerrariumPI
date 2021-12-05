@@ -4,7 +4,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 from pathlib import Path
 import inspect
-import pkgutil
 from importlib import import_module
 import sys
 import statistics
@@ -17,7 +16,7 @@ import RPi.GPIO as GPIO
 # pip install retry
 from retry import retry
 # For analog sensors
-from gpiozero import MCP3008#, LED
+from gpiozero import MCP3008
 # For I2C sensors
 import smbus2
 # Bluetooth sensors

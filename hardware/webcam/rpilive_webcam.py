@@ -9,7 +9,7 @@ import subprocess
 import threading
 import shlex
 
-from . import terrariumWebcam, terrariummWebcamLoadingException
+from . import terrariumWebcam, terrariumWebcamLoadingException
 
 class terrariumRPILiveWebcam(terrariumWebcam):
   HARDWARE     = 'rpicam-live'
@@ -40,10 +40,10 @@ class terrariumRPILiveWebcam(terrariumWebcam):
 
   def _load_hardware(self):
     if not Path(self.__RASPIVID).exists():
-      raise terrariummWebcamLoadingException(f'Please install raspivid.')
+      raise terrariumWebcamLoadingException(f'Please install raspivid.')
 
     if not Path(self.__FFMPEG).exists():
-      raise terrariummWebcamLoadingException(f'Please install ffmpeg.')
+      raise terrariumWebcamLoadingException(f'Please install ffmpeg.')
 
     try:
       self.__process_id.terminate()

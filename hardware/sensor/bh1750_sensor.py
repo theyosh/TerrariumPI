@@ -1,5 +1,4 @@
-from . import terrariumI2CSensor, terrariumSensorException
-from terrariumUtils import terrariumUtils
+from . import terrariumI2CSensor
 
 # https://bitbucket.org/MattHawkinsUK/rpispy-misc/raw/master/python/bh1750.py
 

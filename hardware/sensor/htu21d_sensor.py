@@ -1,5 +1,4 @@
 from . import terrariumI2CSensor, terrariumI2CSensorMixin
-from terrariumUtils import terrariumUtils
 
 class terrariumHTU21DSensor(terrariumI2CSensor, terrariumI2CSensorMixin):
   HARDWARE = 'htu21d'

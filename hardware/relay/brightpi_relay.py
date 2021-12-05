@@ -1,5 +1,4 @@
-from . import terrariumRelay, terrariumRelayDimmer, terrariumRelayException
-from terrariumUtils import terrariumUtils
+from . import terrariumRelayDimmer
 
 import statistics
 import sys

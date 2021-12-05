@@ -1,5 +1,4 @@
 from . import terrariumSensor
-from terrariumUtils import terrariumUtils
 
 import serial
 

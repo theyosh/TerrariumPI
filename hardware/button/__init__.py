@@ -4,11 +4,9 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 from pathlib import Path
 import inspect
-import pkgutil
 from importlib import import_module
 import sys
 from hashlib import md5
-import pigpio
 import RPi.GPIO as GPIO
 import threading
 from gevent import sleep

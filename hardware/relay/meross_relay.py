@@ -4,7 +4,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import os
 
-from . import terrariumRelay, terrariumRelayException
+from . import terrariumRelay
 from terrariumUtils import terrariumUtils, terrariumCache
 from terrariumCloud import TerrariumMerossCloud
 

@@ -4,13 +4,12 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import threading
 import inspect
-import pkgutil
 from importlib import import_module
 import sys
 
 from pathlib import Path
 from hashlib import md5
-from time import time, sleep
+from time import time
 from operator import itemgetter
 from func_timeout import func_timeout, FunctionTimedOut
 

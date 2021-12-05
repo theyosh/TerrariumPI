@@ -1,10 +1,9 @@
 from . import terrariumSensor
-from terrariumUtils import terrariumCache, terrariumUtils
+from terrariumUtils import terrariumUtils
 
 # apt install pigpiod
 # pip install pigpio-dht
 from pigpio_dht import DHT11, DHT22
-from hashlib import md5
 
 class terrariumDHTXXSensor(terrariumSensor):
   HARDWARE = None

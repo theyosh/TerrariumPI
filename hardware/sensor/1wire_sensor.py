@@ -1,5 +1,4 @@
 from . import terrariumSensor, terrariumSensorLoadingException
-from terrariumUtils import terrariumUtils
 
 from pathlib import Path
 import re
