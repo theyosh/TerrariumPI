@@ -20,11 +20,11 @@ class terrariumRelayDimmerPCA9685(terrariumRelayDimmer):
     if len(address) == 1:
       address.append(self._DEFAULT_ADDRESS)
 
-    elif not address[1].startswith('0x'):
-      address[1] = int('0x' + address[1],16)
+    if not address[1].startswith('0x'):
+      address[1] = '0x' + address[1]
 
     self._device['switch'] = int(address[0])
-    self._device['device'] = pca9685_driver.Device(self._device['switch'], int(address[1]))
+    self._device['device'] = pca9685_driver.Device(int(address[1],16), None if len(address) != 3 else int(address[2]))
     self._device['device'].set_pwm_frequency(self._DIMMER_FREQ)
 
     return self._device['device']
