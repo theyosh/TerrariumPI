@@ -35,4 +35,4 @@ class terrariumRelayDimmerPCA9685(terrariumRelayDimmer):
     return True
 
   def _get_hardware_value(self):
-    return round((1 - self._device['device'].get_pwm(self._device['switch']) / 1000 / self._DIMMER_MAXDIM) * 100)
+    return round((1.0 - float(self._device['device'].get_pwm(self._device['switch'])) / 1000.0 / self._DIMMER_MAXDIM) * 100.0)
