@@ -363,6 +363,9 @@ class terrariumArea(object):
 
       return main_lights._is_timer_time(period)
 
+    if period not in self.setup or 'timetable' not in self.setup[period]:
+      return False
+
     now = int(datetime.datetime.now().timestamp())
     for time_schedule in self.setup[period]['timetable']:
       if now < time_schedule[0]:
