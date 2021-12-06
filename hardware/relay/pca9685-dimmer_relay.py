@@ -30,9 +30,10 @@ class terrariumRelayDimmerPCA9685(terrariumRelayDimmer):
     return self._device['device']
 
   def _set_hardware_value(self, state):
-    dim_value = int(self._DIMMER_MAXDIM * (float(state) / 100.0))
+    dim_value =  max(0.0,min(self._DIMMER_MAXDIM, int(self._DIMMER_MAXDIM * ((float(state) + float(self._dimmer_offset)) / 100.0))))
     self._device['device'].set_pwm(self._device['switch'], dim_value)
     return True
 
   def _get_hardware_value(self):
-    return round((1.0 - float(self._device['device'].get_pwm(self._device['switch'])) / 1000.0 / self._DIMMER_MAXDIM) * 100.0)
+    pwm_value = float(self._device['device'].get_pwm(self._device['switch']))
+    return round(max(0.0,min(100.0,(float(pwm_value / self._DIMMER_MAXDIM) * 100.0) - float(self._dimmer_offset))))
