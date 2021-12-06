@@ -2,8 +2,545 @@ Changelog
 =========
 
 
+(unreleased)
+------------
+
+**New**
+------
+- Add the option for areas to have depenencies on other areas. [#630](https://github.com/theyosh/TerrariumPI/issues/630)
+  [#249](https://github.com/theyosh/TerrariumPI/issues/249). [TheYOSH]
+- Add docker yaml file for github actions. [theyosh]
+- Add docker health check with restart. [theyosh]
+- Add MOTD when attaching to docker. [theyosh]
+- Added healthcheck to dockerfile using [@theyosh](https://github.com/theyosh) `docker_health.py`
+  python script. [Alec]
+- Add webcam archive mount and also include sudo package. [Alec]
+- Added new mounts, timezone option and removed unnecessary packages.
+  [Alec]
+- Added support for TP4 in Docker. [Alec]
+
+  There is a breaking change here for previous versions which is due to needing to move the database to /TerrariumPI/data
+- Add Opengraph image to posts. [theyosh]
+- Add docker health check. [TheYOSH]
+- Add docker compose install. [theyosh]
+- Add humidity to SI7021 sensor. [TheYOSH]
+- Add script for varation data. [TheYOSH]
+- Add debug [#332](https://github.com/theyosh/TerrariumPI/issues/332). [TheYOSH]
+- Added translation using Weblate (German) [Philipp Marmet]
+- Add button documentation. [theyosh]
+- Add image to post. [theyosh]
+- Add new sensors. [theyosh]
+- Added reconnect and network timeout logic. [#569](https://github.com/theyosh/TerrariumPI/issues/569). [TheYOSH]
+- Add an offset option to weater or external source variation. [TheYOSH]
+- Add current humidity value to weather object. [TheYOSH]
+- Add support for weather source temperature varation. And external
+  source for varaition. [#337](https://github.com/theyosh/TerrariumPI/issues/337), [#166](https://github.com/theyosh/TerrariumPI/issues/166). [TheYOSH]
+- Add missing import. [TheYOSH]
+- Add extra tab for sensor variations during the day. Only storing the
+  data.  Ref [#602](https://github.com/theyosh/TerrariumPI/issues/602) and [#248](https://github.com/theyosh/TerrariumPI/issues/248). [TheYOSH]
+- Add a new FAQ. [theyosh]
+- Add documentation update docu. [theyosh]
+- Add FAQ layout. [theyosh]
+- Add plugin. [theyosh]
+- Add fertility area. [TheYOSH]
+- Add OS dependencies (2) [TheYOSH]
+- Add OS dependencies. [TheYOSH]
+- Add response object to API documentation. [J.G. Rubingh]
+- Add Matomo stats. [theyosh]
+- Add a reconnect function. [TheYOSH]
+- Add siren sound for errors to Pushover. [TheYOSH]
+- Add fertility area. [TheYOSH]
+- Add Pushover notification service. [TheYOSH]
+- Add Swagger API documentation. [TheYOSH]
+- Add status caching. [TheYOSH]
+- Add caching of remote sensor data. Should speed up issue [#612](https://github.com/theyosh/TerrariumPI/issues/612).
+  [TheYOSH]
+- Add caching support for multiple relays on a single hardware device.
+  [#612](https://github.com/theyosh/TerrariumPI/issues/612). [TheYOSH]
+- Add humidity to am2320 sensor. [TheYOSH]
+- Add extra debug. [#589](https://github.com/theyosh/TerrariumPI/issues/589). [TheYOSH]
+- Add raw debug for testig. [#599](https://github.com/theyosh/TerrariumPI/issues/599). [TheYOSH]
+- Add raw debug for testig. [#599](https://github.com/theyosh/TerrariumPI/issues/599). [TheYOSH]
+- Add raw debug for testig. [#599](https://github.com/theyosh/TerrariumPI/issues/599). [TheYOSH]
+- Add error tracing. [theyosh]
+- Add API docu. [theyosh]
+
+**Fixes**
+------
+- Update documentation. Fix[#637](https://github.com/theyosh/TerrariumPI/issues/637). [theyosh]
+- Small fix for incorrect config. [TheYOSH]
+- Fix dimmer readout. [TheYOSH]
+- Fix dimmer readout. [TheYOSH]
+- Fix loading relay. [TheYOSH]
+- Fix PCA9685 dimmer. [#628](https://github.com/theyosh/TerrariumPI/issues/628). [TheYOSH]
+- Fix weather mirroring. [TheYOSH]
+- Fix small weather bug [#632](https://github.com/theyosh/TerrariumPI/issues/632). [TheYOSH]
+- Fixed Kasa support. Thanks to [@biohazard827.](https://github.com/biohazard827.) [theyosh]
+- Fix matrix link. [J.G. Rubingh]
+- Fix dark mode weather images. [TheYOSH]
+- Fix python package versions. [TheYOSH]
+- Fixed Meross-iot package update. [TheYOSH]
+- Fix python packages. [TheYOSH]
+- Fix docker-compose version. [theyosh]
+- Attempting to fix `debconf: delaying package configuration, since apt-
+  utils is not installed` [Alec]
+- Merge pull request [#25](https://github.com/theyosh/TerrariumPI/issues/25) from alec-pinson/fix-pigpiod. [Alec]
+
+  fix pigpiod
+- Fix pigpiod. [Alec]
+- Fixed a few little issues that were causing docker to rebuild too many
+  layers. [Alec]
+- Hopefully fixes issue with gracefully stopping TP. [Alec]
+- Fix pi camera also include openjdk in the docker image. [Alec]
+- Attempted 2 fixes for logging + pi camera. [Alec]
+- Fixed symbolic links. [Alec]
+- Fix documentation building. [theyosh]
+- Fix2. [theyosh]
+- Fix. [theyosh]
+- Fixed mitemp package. [TheYOSH]
+- Fix header image. [TheYOSH]
+- Clear debug. Fix [#332](https://github.com/theyosh/TerrariumPI/issues/332). [TheYOSH]
+- Fix variation updating. [TheYOSH]
+- Cosmetic gui fix. [TheYOSH]
+- Fix script relay and script dimmer. [TheYOSH]
+- Fix deleting notification messages [#617](https://github.com/theyosh/TerrariumPI/issues/617). [TheYOSH]
+- Fix analytics. [theyosh]
+- Fix slug urls. [theyosh]
+- Fix return to original language. [theyosh]
+- Fix site building. [theyosh]
+- Fix javascript error. [TheYOSH]
+- Fixed stupid typo. [TheYOSH]
+- Fix OpenCV version. [TheYOSH]
+- Fix weater data. [TheYOSH]
+- Fix weater data. [TheYOSH]
+- Fix icons. [TheYOSH]
+- Fix light and door status check. [TheYOSH]
+- Fix hardware page links. [theyosh]
+- Small gui fix. [TheYOSH]
+- Fix search. [theyosh]
+- Fix Pushover [#597](https://github.com/theyosh/TerrariumPI/issues/597). [TheYOSH]
+- Fix relay data issue. [TheYOSH]
+- Fix typo: [#597](https://github.com/theyosh/TerrariumPI/issues/597). [TheYOSH]
+- Fix multi sonoff. [#612](https://github.com/theyosh/TerrariumPI/issues/612). [TheYOSH]
+- Fix unique ID error [#612](https://github.com/theyosh/TerrariumPI/issues/612). [TheYOSH]
+- Fix unique ID error [#612](https://github.com/theyosh/TerrariumPI/issues/612). [TheYOSH]
+- Fix unique ID error [#612](https://github.com/theyosh/TerrariumPI/issues/612). [TheYOSH]
+- Fix calendar. [TheYOSH]
+- Fixed stupid bug. And made a better test example [#603](https://github.com/theyosh/TerrariumPI/issues/603). [TheYOSH]
+- Fix callibration [#589](https://github.com/theyosh/TerrariumPI/issues/589). [TheYOSH]
+- Fix callibration [#589](https://github.com/theyosh/TerrariumPI/issues/589). [TheYOSH]
+- Fix for [#589](https://github.com/theyosh/TerrariumPI/issues/589)? [TheYOSH]
+- Fix API caching. Should prefent empty dashboards and other list pages.
+  [#600](https://github.com/theyosh/TerrariumPI/issues/600). [TheYOSH]
+- Fix broken 3rd party package. [#598](https://github.com/theyosh/TerrariumPI/issues/598). [TheYOSH]
+- Docu fix. [theyosh]
+- Fixed API documentation page. [theyosh]
+- Fix table header. [theyosh]
+- Fix external links. [theyosh]
+- Fix typo. [#607](https://github.com/theyosh/TerrariumPI/issues/607). [J.G. Rubingh]
+
+**Updates**
+------
+- Update docker build. [theyosh]
+- Update documentation. [theyosh]
+- Update weather logging. [theyosh]
+- Small GUI updates. [TheYOSH]
+- Small GUI updates. [TheYOSH]
+- Update. [J.G. Rubingh]
+- Update README.md. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update docker.yaml. [TheYOSH]
+- Small GUI dashboard update. [TheYOSH]
+- Update docker.yaml. [TheYOSH]
+- Updated healthceck and building the docker image. [theyosh]
+- No longer runs on PR and set updated image path. [Alec]
+- Updated workflow. [Alec]
+- Updated image tag. [Alec]
+- Update install.sh. [TheYOSH]
+
+  Move existing files for Docker support. [#21](https://github.com/theyosh/TerrariumPI/issues/21)
+- Updated to new image version with this change in. [Alec]
+- Update calendar.ics location to data dir. [Alec]
+- Update __init__.py. [TheYOSH]
+
+  Fix webcam motion detection for Docker usage.
+- Update docker-compose install. [theyosh]
+- Update docker healthcheck. [theyosh]
+- Update docker-composer install. [theyosh]
+- Update pages workflow. [TheYOSH]
+- Only build documentation when new documentation is created/updates.
+  [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update docker-composer example. [theyosh]
+- Docker documentation updates. [theyosh]
+- Update docker setup. [theyosh]
+- Update documentation for Docker support (1) [theyosh]
+- Update documentation. [TheYOSH]
+- Weather gui update. [TheYOSH]
+- Update excluded ids to readable names in Settings page. [TheYOSH]
+- Update documentation remaining sensors. [theyosh]
+- Update style and mlx90614 address information. [theyosh]
+- Update features. [theyosh]
+- Update to AdminLTE 3.2.0rc1. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update source translations. [TheYOSH]
+- Extra sensor update after variation update. [TheYOSH]
+- Update breadcumb. [theyosh]
+- Update codeql-analysis.yml. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update docu. [J.G. Rubingh]
+- Update workflows. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation sources. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation sources. [TheYOSH]
+- Update Swagger API documentation. [theyosh]
+- Model updates. [TheYOSH]
+- Update MQTT support for sensors. [TheYOSH]
+- Update API documentation. [TheYOSH]
+- Update API doc. [J.G. Rubingh]
+- Update API documentation. [TheYOSH]
+- Update API doc. [TheYOSH]
+- Update API documentation. [J.G. Rubingh]
+- Update issue templates. [TheYOSH]
+- Update API docu. [theyosh]
+- Update docu. [theyosh]
+- Updates. [theyosh]
+- Update API documentation. [theyosh]
+- Update API documentation. [theyosh]
+- Update API documentation. [theyosh]
+- Update API documentation. [theyosh]
+- Update swagger docu. [theyosh]
+- Docu updates. [theyosh]
+- Documentation updates. [theyosh]
+- Update documentation [#593](https://github.com/theyosh/TerrariumPI/issues/593). [theyosh]
+- Update API documentation. [J.G. Rubingh]
+- Update documentation. [theyosh]
+- Docu update. Add first sensor. [J.G. Rubingh]
+
+**Other**
+------
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [theyosh]
+- Remove unused imports. [TheYOSH]
+- Ignore some more files in Docker. [TheYOSH]
+- Remove some debug. [TheYOSH]
+- Cleanup. [J.G. Rubingh]
+- Spellcheck ;) [J.G. Rubingh]
+- Small docker changes. [theyosh]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Merge with master. [TheYOSH]
+- Translated using Weblate (Spanish (Argentina)) [Cleber Tavano]
+
+  Currently translated at 93.2% (815 of 874 strings)
+- Translated using Weblate (Spanish (Argentina)) [Cleber Tavano]
+
+  Currently translated at 36.5% (245 of 671 strings)
+- Logging tuning. [TheYOSH]
+- Translated using Weblate (Polish) [theyosh]
+
+  Currently translated at 33.5% (225 of 671 strings)
+- Translated using Weblate (German (Austria)) [theyosh]
+
+  Currently translated at 80.7% (542 of 671 strings)
+- Translated using Weblate (German) [theyosh]
+
+  Currently translated at 100.0% (671 of 671 strings)
+- Translated using Weblate (Portuguese (Brazil)) [theyosh]
+
+  Currently translated at 100.0% (671 of 671 strings)
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (671 of 671 strings)
+- Translated using Weblate (English (United States)) [theyosh]
+
+  Currently translated at 100.0% (671 of 671 strings)
+- Translated using Weblate (English (United Kingdom)) [theyosh]
+
+  Currently translated at 100.0% (671 of 671 strings)
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Merge branch 'master' into 4.x.y.z. [TheYOSH]
+- Different volumes can now be better translated. [#115](https://github.com/theyosh/TerrariumPI/issues/115). [TheYOSH]
+- Merge branch 'master' into 4.x.y.z. [theyosh]
+- Merge branch 'master' into 4.x.y.z. [theyosh]
+- Merge pull request [#626](https://github.com/theyosh/TerrariumPI/issues/626) from alec-pinson/4.x.y.z-docker. [TheYOSH]
+
+  Added support for TP4 in Docker
+- Increate timeout due to the fact the healthcheck has 1 minute grace
+  timeout. So timeout needs 60 seconds more then the startup timeout.
+  [theyosh]
+- Earlier MOTD for health check. [theyosh]
+- Line end. [Alec]
+- Line end. [Alec]
+- Merge branch '4.x.y.z-docker' of github.com:alec-pinson/TerrariumPI
+  into 4.x.y.z-docker. [theyosh]
+- Merge branch '4.x.y.z' into 4.x.y.z-docker. [TheYOSH]
+- Merge remote-tracking branch 'upstream/4.x.y.z' into 4.x.y.z-docker.
+  [theyosh]
+- Remove unused packages. [Alec]
+- Merge pull request [#26](https://github.com/theyosh/TerrariumPI/issues/26) from alec-pinson/workflow. [Alec]
+
+  Setup workflow for building & publishing docker image
+- Interested to see what tags get added. [Alec]
+- Don't build docker image if updating docs. [Alec]
+- Test improvement. [Alec]
+- Slight improvement to caching to help speed up future workflows.
+  [Alec]
+- Checking to see if docker cache works. [Alec]
+- Ok think the runners hit the same issue as [@theyosh](https://github.com/theyosh) on ubuntu. [Alec]
+- Now time to try the real dockerfile. [Alec]
+- Build for armv7 and remove the move cache thing as it failed. [Alec]
+- Lets see what happens. [Alec]
+- Newer image. [Alec]
+- Merge pull request [#24](https://github.com/theyosh/TerrariumPI/issues/24) from alec-pinson/webcam-archive-mount-sudo.
+  [Alec]
+
+  webcam archive mount, sudo package, docker-compose cleanup
+- Removed unneeded libs from dockerfile. [Alec]
+- Move docker-compose.yaml to .example and tidy up volumes. [Alec]
+- Merge pull request [#20](https://github.com/theyosh/TerrariumPI/issues/20) from alec-pinson/patch-custom-log-location.
+  [Alec]
+
+  patch custom log location, move to log/
+- Patch custom log location, move to log/ [Alec]
+- Merge pull request [#19](https://github.com/theyosh/TerrariumPI/issues/19) from alec-pinson/calendar-location. [Alec]
+
+  update calendar.ics location to data dir
+- Rebuilt docker image to include this change. [Alec]
+- Merge pull request [#17](https://github.com/theyosh/TerrariumPI/issues/17) from alec-pinson/logging+picamera. [Alec]
+
+  attempted 2 fixes for logging + pi camera
+- Remove LD_LIBRARY_PATH. [Alec]
+- As per issue [#18](https://github.com/theyosh/TerrariumPI/issues/18) this is required to access /dev/serial0 for CO2
+  sensors. [Alec]
+- Picamera package no longer used. [Alec]
+- Merge pull request [#15](https://github.com/theyosh/TerrariumPI/issues/15) from alec-pinson/sispmctl-4.9. [Alec]
+
+  compiled and copied sispmctl 4.9 to image
+- Initial work to include sispmctl builder. [Alec]
+- Merge pull request [#14](https://github.com/theyosh/TerrariumPI/issues/14) from alec-pinson/package-clean-tz-new-mounts.
+  [Alec]
+
+  Added new mounts, timezone option and removed unnecessary packages
+- Translated using Weblate (German) [kahuwi14]
+
+  Currently translated at 100.0% (669 of 669 strings)
+- Translated using Weblate (German) [Philipp Marmet]
+
+  Currently translated at 100.0% (669 of 669 strings)
+- More Opengraph images. [theyosh]
+- Testing opengraph image index page. [theyosh]
+- Documentation Opengraph test. [theyosh]
+- Small change. [theyosh]
+- Documentation test. [theyosh]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Merge branch 'master' into 4.x.y.z. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (669 of 669 strings)
+- Merge branch 'master' into 4.x.y.z. [TheYOSH]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (669 of 669 strings)
+- Translated using Weblate (English (United States)) [theyosh]
+
+  Currently translated at 100.0% (669 of 669 strings)
+- Translated using Weblate (English (United Kingdom)) [theyosh]
+
+  Currently translated at 100.0% (669 of 669 strings)
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Merge with master. [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (874 of 874 strings)
+- Merge branch 'documentation' into 4.x.y.z. [TheYOSH]
+- Final source strings for version 4.1. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Translated using Weblate (German) [kahuwi14]
+
+  Currently translated at 100.0% (667 of 667 strings)
+- Better weather data handling and climate mirorring. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Translated using Weblate (German) [Philipp Marmet]
+
+  Currently translated at 100.0% (667 of 667 strings)
+- Sort dashboard sensors based on translated names. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (667 of 667 strings)
+- Translated using Weblate (Spanish (Argentina)) [Cleber Tavano]
+
+  Currently translated at 26.3% (176 of 667 strings)
+- Merge pull request [#621](https://github.com/theyosh/TerrariumPI/issues/621) from fujexo/qwiic_relay. [TheYOSH]
+
+  Implement Sparkfun Qwiic Relays
+- Implement Sparkfun Qwiic Relays. [Fujexo]
+
+  This allows TerrariumPI to control Sparkfun Qwiic relays.
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Translated using Weblate (Italian) [theyosh]
+
+  Currently translated at 16.7% (112 of 667 strings)
+- Translated using Weblate (German (Austria)) [theyosh]
+
+  Currently translated at 80.3% (536 of 667 strings)
+- Very stupid bug... [TheYOSH]
+- Better weather climate mirroring. [TheYOSH]
+- Merge branch '4.x.y.z' into documentation. [TheYOSH]
+- Better climate mirroring using 24 hours old history data. [TheYOSH]
+- Merge branch 'documentation' of github.com:theyosh/TerrariumPI into
+  documentation. [TheYOSH]
+- Refactor documentation. [theyosh]
+- Merge branch '4.x.y.z' into documentation. [theyosh]
+- Area variation updstes. [TheYOSH]
+- Better info. [TheYOSH]
+- Reduce database write actions. [TheYOSH]
+- Extra debug. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Translated using Weblate (German) [Philipp Marmet]
+
+  Currently translated at 3.4% (23 of 667 strings)
+- New documentation. [theyosh]
+- Enable stats. [theyosh]
+- Cleanup. [theyosh]
+- Invert dimmer icons in dark mode. [theyosh]
+- Make the website translatable with Google Translate. [theyosh]
+- Merge branch '4.x.y.z' into documentation. [TheYOSH]
+- Merge branch '4.x.y.z' into documentation. [TheYOSH]
+- Small installation changes and remove unused libraries. [TheYOSH]
+- Fine tuning logging. [TheYOSH]
+- Better logging. [TheYOSH]
+- Fine tune area variation. [TheYOSH]
+- Merge branch '4.x.y.z' into documentation. [TheYOSH]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (667 of 667 strings)
+- Translated using Weblate (English (United States)) [theyosh]
+
+  Currently translated at 100.0% (667 of 667 strings)
+- Translated using Weblate (English (United Kingdom)) [theyosh]
+
+  Currently translated at 100.0% (667 of 667 strings)
+- Translated using Weblate (English (United Kingdom)) [theyosh]
+
+  Currently translated at 100.0% (667 of 667 strings)
+- Do not smooth weather graphs. [TheYOSH]
+- Merge branch '4.x.y.z' into documentation. [TheYOSH]
+- Merge with master. [TheYOSH]
+- Merge branch 'master' into 3.x.y.z. [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (874 of 874 strings)
+- First attempt to Time of day temperature [#602](https://github.com/theyosh/TerrariumPI/issues/602) and [#248](https://github.com/theyosh/TerrariumPI/issues/248). Only the
+  option "at time" is working. [TheYOSH]
+- Cleanup unused imports. [TheYOSH]
+- Working Pushover. [#597](https://github.com/theyosh/TerrariumPI/issues/597). [TheYOSH]
+- Do not send messages from terrariumNotification logging, as that will
+  trigger a recursing error. [TheYOSH]
+- Catch killing non existing pids. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (655 of 655 strings)
+- Ref issue in docu. [theyosh]
+- Ref issue in docu. [theyosh]
+- New sensor documentation. [theyosh]
+- New sensor documentation. [theyosh]
+- More updtes. [theyosh]
+- Merge branch 'documentation' of github.com:theyosh/TerrariumPI into
+  documentation. [TheYOSH]
+- Merge branch '4.x.y.z' into documentation. [TheYOSH]
+- Merge branch 'master' into 4.x.y.z. [TheYOSH]
+- Merge branch 'master' into 4.x.y.z. [TheYOSH]
+- Revert. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Merge branch 'master' into 4.x.y.z. [TheYOSH]
+- Merge branch '4.x.y.z' into documentation. [TheYOSH]
+- Merge branch 'master' into 4.x.y.z. [TheYOSH]
+- Merge branch '4.x.y.z' into documentation. [TheYOSH]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (655 of 655 strings)
+- Translated using Weblate (English (United States)) [theyosh]
+
+  Currently translated at 100.0% (655 of 655 strings)
+- Translated using Weblate (English (United Kingdom)) [theyosh]
+
+  Currently translated at 100.0% (655 of 655 strings)
+- Translated using Weblate (English (United Kingdom)) [theyosh]
+
+  Currently translated at 100.0% (655 of 655 strings)
+- Merge branch '4.x.y.z' into documentation. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Merge with master. [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (874 of 874 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (874 of 874 strings)
+- Autodark mode during loading. [TheYOSH]
+- Remove some debug. [TheYOSH]
+- Merge with 4.x.y.z. [theyosh]
+- Typo. [TheYOSH]
+- More general caching timeing. [TheYOSH]
+- More general caching timeing. [TheYOSH]
+- Clean up. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Remove debug. [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (629 of 629 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (629 of 629 strings)
+- Extra check if the image is a file! [#608](https://github.com/theyosh/TerrariumPI/issues/608). [TheYOSH]
+- Merge branch 'master' into 4.x.y.z. [TheYOSH]
+- Better script relay feedback when toggling on/off [#603](https://github.com/theyosh/TerrariumPI/issues/603). [TheYOSH]
+- Better script relay feedback when toggling on/off [#603](https://github.com/theyosh/TerrariumPI/issues/603). [TheYOSH]
+- Remove debug. [#589](https://github.com/theyosh/TerrariumPI/issues/589). [TheYOSH]
+- Some more debug... [TheYOSH]
+- Respect the settle time from both alarms when toggle. [#522](https://github.com/theyosh/TerrariumPI/issues/522). [TheYOSH]
+- Remove debug [#599](https://github.com/theyosh/TerrariumPI/issues/599). [TheYOSH]
+- Disable Google. [theyosh]
+- Remove google tracking. [theyosh]
+- Test. [theyosh]
+- New news item. [J.G. Rubingh]
+
+
 4.0.0 (2021-08-26)
--------------------
+------------------
 
 **New**
 ------
@@ -204,6 +741,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [TheYOSH]
 - Update documentation. [TheYOSH]
 - Update documentation. [J.G. Rubingh]
 - Update screenshots. [J.G. Rubingh]

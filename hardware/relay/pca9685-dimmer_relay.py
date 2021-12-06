@@ -15,7 +15,7 @@ class terrariumRelayDimmerPCA9685(terrariumRelayDimmer):
   _DEFAULT_ADDRESS = '0x40'
 
   def _load_hardware(self):
-    # address is expected as `[relay_number],[i2c_address]`
+    # address is expected as `[relay_number],[i2c_address],[I2C bus number]`
     address = self._address
     if len(address) == 1:
       address.append(self._DEFAULT_ADDRESS)
