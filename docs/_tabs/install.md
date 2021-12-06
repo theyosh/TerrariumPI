@@ -128,9 +128,9 @@ After the installation is done, reboot once and you should be able to access Ter
 
 # Migration from V3 to V4
 
-There is no real migration from version 3 to version 4. The changes are to big. So that means you have to install TerrariumPI v4 as it was a new PI. These migrations steps will only copy the existing relay history data from V3 to V4 so that the total power and water usages is still there. And the total costs are still correct. This is all what will be migrated.
+There is **no real migration** from version 3 to version 4. The changes are to big. So that means you have to install TerrariumPI v4 as it was a new PI. These migrations steps will only copy the *existing relay history data* from V3 to V4 so that the total power and water usages is still there. And the total costs are still correct. This is all what will be migrated.
 
-If you do **not care** about your relay history, you can just skip this migration.
+If you do **not care** about your relay history, you can just skip this migration. This is the **only** data that will be migrated!
 
 ## Backup
 
@@ -140,7 +140,8 @@ So make sure you have **stopped** the old TerrariumPI. And rename the folder `Te
 
 2. Make a backup of existing version. `mv /home/pi/TerrariumPI /home/pi/TerrariumPI.old`
 
-Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need to set it up as you want. So that means adding sensors and relays. When that is running, you can start migrating the relay history data.
+## First setup
+Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need to set it up as you want. So that means adding at least all the relays you want to use/migrate. When that is done, shutdown TerrariumPI 4 and continue with the last migrations step.
 
 
 ## Migrate
