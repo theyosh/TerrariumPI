@@ -123,6 +123,8 @@ class terrariumArea(object):
     self.name = name
     self.mode = mode
 
+    self.depends_on = []
+
     self.enclosure = enclosure
 
     self.state = {}
@@ -262,6 +264,8 @@ class terrariumArea(object):
         'last_update' : int(datetime.datetime(1970,1,1).timestamp()),
         'powered'     : None
       }
+
+    self.depends_on = self.setup.get('depends_on',[])
 
     # Clean up parts that do not have relays configured)
     for period in self.PERIODS:
@@ -553,6 +557,18 @@ class terrariumArea(object):
       self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_min']
       self.state['sensors']['alarm_high'] = self.state['sensors']['current'] > self.state['sensors']['alarm_max']
 
+    # If the depending area is in alarm state, we cannot toggle this area
+    depends_on_alarm = False
+    if len(self.depends_on) > 0:
+      for area in self.depends_on:
+        if area in self.enclosure.areas:
+
+          depends_on_alarm = depends_on_alarm or self.enclosure.areas[area].state['sensors']['alarm']
+          if depends_on_alarm:
+            unit_value = self.enclosure.engine.units[self.enclosure.areas[area].state['sensors']['unit']]
+            logger.info(f'Depending area {self.enclosure.areas[area].name} is in alarm state for area {self}. Current: {self.enclosure.areas[area].state["sensors"]["current"]:.2f}{unit_value}')
+            break
+
     for period in self.PERIODS:
       if period not in self.setup:
         continue
@@ -574,9 +590,9 @@ class terrariumArea(object):
         door_state_ok = self.setup[period]['door_status'] == door_state
 
       # First check: Shutdown power when power is on and either the lights or doors are in wrong state. Despite 'mode'
-      if not self.relays_state(period,False) and not (light_state_ok and door_state_ok):
+      if not self.relays_state(period,False) and not (light_state_ok and door_state_ok and (not depends_on_alarm)):
         # Power is on, but either the lights or doors are in wrong state. Power down now.
-        logger.info(f'Forcing down the {period} power for area {self} because either the lights({"OK" if light_state_ok else "ERROR"}) or doors({"OK" if door_state_ok else "ERROR"}) are in an invalid state.')
+        logger.info(f'Forcing down the {period} power for area {self} because either the lights({"OK" if light_state_ok else "ERROR"}), doors({"OK" if door_state_ok else "ERROR"}) or depending area ({"OK" if not depends_on_alarm else "ERROR"}) are in an invalid state.')
         self.relays_toggle(period,False)
         # And ignore the rest....
         continue
@@ -611,6 +627,10 @@ class terrariumArea(object):
 
         if not door_state_ok:
           logger.info(f'Relays for {self} are not switched because the door is {door_state} while {self.setup[period]["door_status"]} is requested.')
+          continue
+
+        if depends_on_alarm:
+          logger.info(f'Relays for {self} are not switched because one of the depending areas are in an alarm state.')
           continue
 
         time_elapsed = int(datetime.datetime.now().timestamp()) - self.state[period]['last_powered_on']

@@ -484,7 +484,7 @@
       </div>
     </div>
   </div>
-  <div class="col col-12 col-sm-6 col-md-3 col-lg-3 area_all">
+  <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_all">
     <div class="form-group">
       <label for="area_day_night_difference">{{ _('Day/night difference') }}</label>
       <input type="number" step="0.001" class="form-control" id="area_day_night_difference" name="day_night_difference" value="0" placeholder="{{ _('Day/night difference') }}">
@@ -493,7 +493,7 @@
       </small>
     </div>
   </div>
-  <div class="col col-12 col-sm-6 col-md-3 col-lg-3 area_all">
+  <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_all">
     <div class="form-group">
       <label for="area_day_night_source">{{ _('Day/night source') }}</label>
       <select class="select2" id="area_day_night_source" name="day_night_source" data-placeholder="{{ _('Select a day/night source') }}" style="width: 100%;">
@@ -502,6 +502,16 @@
       </select>
       <small class="text-muted">
         {{ _('Select source when it is \'day\'.') }}
+      </small>
+    </div>
+  </div>
+  <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_all">
+    <div class="form-group">
+      <label for="area_depends_on">{{ _('Depends on') }}</label>
+      <select class="select2" id="area_depends_on" name="depends_on" multiple="multiple" data-placeholder="{{ _('Select areas') }}" style="width: 100%;">
+      </select>
+      <small class="text-muted">
+        {{ _('Select the areas where this area depends on.') }}
       </small>
     </div>
   </div>
@@ -1303,7 +1313,9 @@ jQuery.when(
   jQuery.get('{{ url_for("api:audio_hardware") }}'),
   jQuery.get('{{ url_for("api:playlist_list") }}'),
 
-).done(function(areas, enclosures, relays, sensors, soundcards, playlists) {
+  jQuery.get('{{ url_for("api:area_list") }}'),
+
+).done(function(areas, enclosures, relays, sensors, soundcards, playlists, areas_names) {
 
   jQuery.each(areas[0].data,function(counter,item){
     area_types[item.type] = item;
@@ -1321,6 +1333,13 @@ jQuery.when(
 
   jQuery.each(enclosures[0].data,function(counter,item){
     {{modal_type}}_enclosure_select.append(jQuery('<option>').attr('value',item.id).text(item.name));
+  });
+
+  let {{modal_type}}_other_areas = {{modal_type}}_form.find('select#area_depends_on');
+  {{modal_type}}_other_areas.prop('disabled', false).attr('readonly', false).find('option').remove();
+
+  jQuery.each(areas_names[0].data,function(counter,item){
+    {{modal_type}}_other_areas.append(jQuery('<option>').attr('value',item.id).text(item.name));
   });
 
   // Check if we are adding an area from selected enclosure.
@@ -1381,6 +1400,10 @@ jQuery.when(
     // Load the button data
     let url = jQuery(event.relatedTarget).attr('href');
     jQuery.get(url, function(data){
+
+      // Remove 'own' area as that would create an area depening loop
+      {{modal_type}}_other_areas.find('option[value=' + data['id'] + ']').remove()
+
       // Enable the hidden id field
       {{modal_type}}_form.find('input[name="id"]').prop('disabled',false)
       // Change the form url to an PUT (update)

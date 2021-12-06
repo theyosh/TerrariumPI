@@ -110,7 +110,14 @@ class terrariumEnclosure(object):
       if self.areas[area_id].setup.get('main_lights', False):
         area_states[area_id] = self.areas[area_id].update(read_only)
 
-    # Update the remaining areas
+    # Update the remaining areas, skipping all that have dependencies...
+    for area_id in self.areas:
+      if 'disabled' == self.areas[area_id].mode or area_id in area_states or len(self.areas[area_id].depends_on) > 0:
+        continue
+
+      area_states[area_id] = self.areas[area_id].update(read_only)
+
+    # Update the remaining areas that have depencies on other areas
     for area_id in self.areas:
       if 'disabled' == self.areas[area_id].mode or area_id in area_states:
         continue
