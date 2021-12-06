@@ -9,7 +9,7 @@ image:
   alt: "Sequent Microsystems 4 Relay Card header image"
 
 device_address: "Enter the relay number from 1 - 4. Optional add the stack level number. Default 0."
-device_auto_detect: true
+device_auto_detect: false
 device_url : https://github.com/SequentMicrosystems/4relay-rpi
 ---
 

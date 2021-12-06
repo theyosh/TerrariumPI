@@ -47,7 +47,9 @@ RUN mkdir 3rdparty && cd 3rdparty && \
   git clone https://github.com/PiSupply/Bright-Pi.git && git -C "Bright-Pi" checkout "eccfbbb1221c4966cd337126bedcbb8bb03c3c71" && rm -rf Bright-Pi/.git* Bright-Pi/Documents && \
   git clone https://github.com/ageir/chirp-rpi.git && git -C "chirp-rpi" checkout "6e411d6c382d5e43ee1fd269ec4de6a316893407" && rm -rf chirp-rpi/.git* && \
   git clone https://github.com/perryflynn/energenie-connect0r.git && git -C "energenie-connect0r" checkout "12ca24ab9d60cf4ede331de9a6817c3d64227ea0" && rm -rf energenie-connect0r/.git* && \
-  git clone https://github.com/SequentMicrosystems/relay8-rpi.git && git -C "relay8-rpi" checkout "5083730e415ee91fa4785e228f02a36e8bbaa717" && rm -rf relay8-rpi/.git*
+  git clone https://github.com/SequentMicrosystems/relay8-rpi.git && git -C "relay8-rpi" checkout "5083730e415ee91fa4785e228f02a36e8bbaa717" && rm -rf relay8-rpi/.git* && \
+  git clone https://github.com/SequentMicrosystems/4relind-rpi.git && git -C "4relind-rpi" checkout "6b40c531578a939e8f65a0d6714444ca03356d91" && rm -rf 4relind-rpi/.git* && \
+  git clone https://github.com/SequentMicrosystems/8relind-rpi.git && git -C "8relind-rpi" checkout "1c2d1856e0d98b96b67745da2e922ca7e1f50ee0" && rm -rf 8relind-rpi/.git*
 RUN mkdir -p static/assets/plugins && cd static/assets/plugins && \
   git clone https://github.com/fancyapps/fancybox.git "fancybox" && git -C "fancybox" checkout "eea1345256ded510ed9fae1e415aec2a7bb9620d" && rm -rf fancybox/.git* && \
   git clone https://github.com/mapshakers/leaflet-icon-pulse.git "leaflet.icon-pulse" && git -C "leaflet.icon-pulse" checkout "f57da1e45f6d00f340f429a75a39324cad141061" && rm -rf leaflet.icon-pulse/.git* && \

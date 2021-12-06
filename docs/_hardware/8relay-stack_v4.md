@@ -1,16 +1,16 @@
 ---
-title: Sequent Microsystems 8 Relay Card Ver. 3
+title: Sequent Microsystems 8 Relay Card Ver. 4
 categories: [Hardware, Relay]
 tags: [relay, i2c, 8relay]
 
 image:
   path: /assets/img/8relay-stack_v3.webp
   src: /assets/img/8relay-stack_v3.webp
-  alt: "Sequent Microsystems 8 Relay Card Ver. 3 header image"
+  alt: "Sequent Microsystems 8 Relay Card Ver. 4 header image"
 
 device_address: "Enter the relay number from 1 - 8. Optional add the stack level number. Default 0."
 device_auto_detect: false
-device_url : https://github.com/SequentMicrosystems/8relay-rpi
+device_url : https://github.com/SequentMicrosystems/8relind-rpi
 ---
 
 ## Information

@@ -22,3 +22,9 @@
 [submodule "3rdparty/chirp-rpi"]
 	path = 3rdparty/chirp-rpi
 	url = https://github.com/ageir/chirp-rpi.git
+[submodule "3rdparty/4relind-rpi"]
+	path = 3rdparty/4relind-rpi
+	url = https://github.com/SequentMicrosystems/4relind-rpi.git
+[submodule "3rdparty/8relind-rpi"]
+	path = 3rdparty/8relind-rpi
+	url = https://github.com/SequentMicrosystems/8relind-rpi.git
