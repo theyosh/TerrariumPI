@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-11-25 22:12+CET\n"
-"PO-Revision-Date: 2021-11-26 14:34+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2021-12-08 00:50+0000\n"
+"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -220,7 +220,7 @@ msgstr "Pushover"
 
 #: terrariumWebserver.py:161 terrariumWebserver.py:239
 msgid "Authenticate to make any changes"
-msgstr "Autenticar para fazer alterações"
+msgstr "Faça login para efetuar alterações"
 
 #: terrariumWebserver.py:161 terrariumWebserver.py:239
 msgid "Authentication"
@@ -1484,19 +1484,19 @@ msgstr "Insira o valor máximo para o alarme."
 
 #: views/modals/sensor.html:106
 msgid "Limit min"
-msgstr "Limite mín"
+msgstr "Limite mín gráfico"
 
 #: views/modals/sensor.html:109
 msgid "Enter the minimum value that is valid."
-msgstr "Insira um número mínimo válido."
+msgstr "Insira o valor mínimo para exibição no gráfico de temperaturas."
 
 #: views/modals/sensor.html:118
 msgid "Limit max"
-msgstr "Limite máx"
+msgstr "Limite máx gráfico"
 
 #: views/modals/sensor.html:121
 msgid "Enter the maximum value that is valid."
-msgstr "Insira o valor máximo a ser considerado como válido."
+msgstr "Insira o valor máximo para exibição no gráfico de temperaturas."
 
 #: views/modals/sensor.html:130
 msgid "Max diff"
@@ -1505,11 +1505,12 @@ msgstr "Diferença máxima"
 #: views/modals/sensor.html:133
 msgid "Enter the max difference between two measurements that is valid."
 msgstr ""
-"Insira a diferença máxima entre duas medições a ser considerada como válida."
+"Insira a diferença máxima que pode haver entre duas medições seguidas para o "
+"valor medido ser considerado como válido."
 
 #: views/modals/sensor.html:143 views/sensors.html:41
 msgid "Excl. avg"
-msgstr "Excl. média"
+msgstr "Excluir da média"
 
 #: views/modals/sensor.html:148
 msgid "Exclude this sensors from average calculations."
