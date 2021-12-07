@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-11-03 18:42+0000\n"
+"PO-Revision-Date: 2021-12-08 00:50+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/3-x-y-z/pt_BR/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.8.1\n"
+"X-Generator: Weblate 4.9\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
@@ -1004,7 +1004,7 @@ msgstr "Off-line desde"
 
 #: terrariumWebserver.py:92 terrariumWebserver.py:201
 msgid "Authenticate to make any changes"
-msgstr "Autenticar para fazer alterações"
+msgstr "Faça login para efetuar alterações"
 
 #: terrariumWebserver.py:92 terrariumWebserver.py:201
 #: views/system_settings.tpl:57
@@ -2882,12 +2882,12 @@ msgstr "Alarme máx"
 #: views/inc/usage_sensors.tpl:149 views/inc/usage_sensors.tpl:183
 #: views/sensor_settings.tpl:37 views/sensor_settings.tpl:173
 msgid "Limit min"
-msgstr "Limite mín"
+msgstr "Limite mín gráfico"
 
 #: views/inc/usage_sensors.tpl:153 views/inc/usage_sensors.tpl:186
 #: views/sensor_settings.tpl:40 views/sensor_settings.tpl:177
 msgid "Limit max"
-msgstr "Limite máx"
+msgstr "Limite máx gráfico"
 
 #: views/inc/usage_switches.tpl:14
 msgid "Per switch the title holds shows some values and options."
