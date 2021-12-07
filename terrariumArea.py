@@ -433,9 +433,9 @@ class terrariumArea(object):
       if weather_current_source is None:
         return
 
-      current_timestamp = int( (datetime.datetime.now()-datetime.timedelta(hours=24)).timestamp() )
+      current_timestamp = int( (datetime.datetime.utcnow()-datetime.timedelta(hours=24)).timestamp() )
       for counter,history in enumerate(self.enclosure.engine.weather.history):
-        if current_timestamp < history["timestamp"]:
+        if current_timestamp <= history["timestamp"]:
           period = {
             'start'       : datetime.datetime.fromtimestamp(int(self.enclosure.engine.weather.history[counter-1]["timestamp"])),
             'end'         : datetime.datetime.fromtimestamp(int(history["timestamp"])),
