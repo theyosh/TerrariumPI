@@ -8,12 +8,12 @@ import inspect
 from importlib import import_module
 import sys
 import copy
+import time
 
 # pip install retry
 from retry import retry
 
-from time import time
-from datetime import datetime
+from datetime import datetime, timedelta
 import re
 
 from terrariumUtils import terrariumUtils
@@ -33,7 +33,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   INFO_SOURCE  = None
 
   # Weather data expects temperature in celcius degrees and windspeed in meters per second
-  __UPDATE_TIMEOUT = 10 * 60 # 10 minutes, as the source updates every 10 minutes
+  __UPDATE_TIMEOUT = 15 * 60 # 15 minutes. The source updates every 10 minutes
 
   def __init__(self, address, unit_values):
     self._device = {'id'       : None,
@@ -48,7 +48,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   @retry(tries=3, delay=0.5, max_delay=2)
   def update(self):
     if self._device['last_update'] is None or (datetime.now() - self._device['last_update']).total_seconds() > self.__UPDATE_TIMEOUT:
-      start = time()
+      start = time.time()
       logger.debug(f'Loading online weather data from source: {self.address}')
 
       if self._load_data():
@@ -65,13 +65,12 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
           history['temperature'] = terrariumUtils.conver_to_value(history['temperature'], self._device['unit_values']['temperature'])
 
         self._device['last_update'] = datetime.now()
-        logger.info(terrariumUtils.clean_log_line(f'Loaded new weather data in {time()-start:.3f} seconds.'))
+        logger.info(terrariumUtils.clean_log_line(f'Loaded new weather data in {time.time()-start:.3f} seconds.'))
       else:
         logger.error(terrariumUtils.clean_log_line(f'Error loading online weather data! Please check your source address: {self.address}.'))
 
   def __get_today_data(self):
-    now = int(time())
-    # TODO: Change to list!!!!
+    now = int(time.time())
     for forecast in self._data['days']:
       if not now > forecast['set']:
         return forecast
@@ -123,7 +122,11 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
 
   @property
   def is_day(self):
-    return self.sunrise < datetime.now() < self.sunset
+    now = datetime.now()
+    if now < self.sunrise:
+      now += timedelta(hours=24)
+
+    return self.sunrise < now < self.sunset
 
   @property
   def current_temperature(self):

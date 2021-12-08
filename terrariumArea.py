@@ -433,16 +433,15 @@ class terrariumArea(object):
       if weather_current_source is None:
         return
 
-      current_timestamp = int( (datetime.datetime.now()-datetime.timedelta(seconds=(24.0*3600.0) - float(time.altzone if time.daylight else time.timezone))).timestamp() )
-      for counter,history in enumerate(self.enclosure.engine.weather.history):
-        if current_timestamp <= history["timestamp"]:
+      current_timestamp = int( (datetime.datetime.now()-datetime.timedelta(hours=24)).timestamp() )
+      for counter, history in enumerate(self.enclosure.engine.weather.history):
+        if current_timestamp <= history["timestamp"] + time.timezone:
           period = {
-            'start'       : datetime.datetime.fromtimestamp(int(self.enclosure.engine.weather.history[counter-1]["timestamp"])),
-            'end'         : datetime.datetime.fromtimestamp(int(history["timestamp"])),
+            'start'       : datetime.datetime.fromtimestamp(int(self.enclosure.engine.weather.history[counter-1]["timestamp"] + time.timezone)),
+            'end'         : datetime.datetime.fromtimestamp(int(history["timestamp"] + time.timezone)),
             'start_value' : str(self.enclosure.engine.weather.history[counter-1][weather_current_source]),
             'end_value'   : str(history[weather_current_source]),
           }
-
           break
 
     else:
@@ -478,13 +477,13 @@ class terrariumArea(object):
 
 
     # Start calculation
-    # Get the total duration of the period in minutes
-    period_duration   = (datetime.datetime.now().replace(hour=period['end'].hour, minute=period['end'].minute) - datetime.datetime.now().replace(hour=period['start'].hour, minute=period['start'].minute) ).total_seconds()
+    # Get the total duration of the period in seconds
+    period_duration   = round((datetime.datetime.now().replace(hour=period['end'].hour, minute=period['end'].minute) - datetime.datetime.now().replace(hour=period['start'].hour, minute=period['start'].minute) ).total_seconds())
     # Get the total difference that needs to change during the period
     period_difference = float(period['end_value']) - float(period['start_value'])
-    # How far are we in this period in minutes
-    period_duration_done = (datetime.datetime.now().replace(hour=now.hour, minute=now.minute) - datetime.datetime.now().replace(hour=period['start'].hour, minute=period['start'].minute)).total_seconds()
-    # Calculate the wanted average based on the start period value and the time elapsed * sensor difference/m
+    # How far are we in this period in seconds
+    period_duration_done = round((datetime.datetime.now().replace(hour=now.hour, minute=now.minute) - datetime.datetime.now().replace(hour=period['start'].hour, minute=period['start'].minute)).total_seconds())
+    # Calculate the wanted average based on the start period value and the time elapsed * sensor difference/second
     wanted_average_value = float(period['start_value']) + (float(period_duration_done) * float(period_difference / period_duration))
     # Get the difference between the actual current average and the wanted average rounded at .1
     sensor_diff = round(wanted_average_value - current_average_value,1)
@@ -496,7 +495,7 @@ class terrariumArea(object):
           sensor.alarm_min += sensor_diff
           sensor.alarm_max += sensor_diff
           unit = self.enclosure.engine.units[self.state["sensors"]["unit"]]
-          logger.info(f'Variation change {sensor.type} sensor \'{sensor.name}\' for area \'{self.name}\' alarm values from min: {sensor.alarm_min - sensor_diff:.2f}{unit}, max: {sensor.alarm_max - sensor_diff:.2f}{unit} to new min: {sensor.alarm_min:.2f}{unit} and max: {sensor.alarm_max:.2f}{unit}. A difference of {sensor_diff}{unit}. New average is: {wanted_average_value:.2f}{unit}.')
+          logger.info(f'Variation change {sensor.type} sensor \'{sensor.name}\' for area \'{self.name}\'. New values min: {sensor.alarm_min:.2f}{unit}, max:{sensor.alarm_max:.2f}{unit}. New average is: {wanted_average_value:.2f}{unit}.')
 
     # Reload the current sensor values after changing them
     self.state['sensors'] = self.current_value(self.setup['sensors'])
