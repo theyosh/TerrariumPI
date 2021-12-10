@@ -1,4 +1,4 @@
-# TerrariumPI 4.0.0
+# TerrariumPI 4.1.0
 [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/4-x-y-z/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
 
