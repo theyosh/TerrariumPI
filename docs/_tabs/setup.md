@@ -283,7 +283,7 @@ Motion comparison frame
 ### Markers
 It is possible to add markers on the webcam image to show realtime sensor information. Click on the <img src="../assets/img/Webcam_Marker.webp" title="Webcam markers" alt="Webcam markers" style="height: 20px; position: relative; left: 0px; display: inline" class="ml-xl-3">icon in the preview window to drop a marker and select the sensors you want to show.
 
-## Audio
+## Playlists
 ![Playlist form](/assets/img/Playlist_Settings.webp)
 _Popup form for adding and updating playlists_
 Adding and changing playlists is done with the above button form.
