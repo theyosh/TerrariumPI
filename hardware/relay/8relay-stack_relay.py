@@ -77,7 +77,7 @@ class terrariumRelay4Stack(terrariumRelay8Stack):
   HARDWARE = '4relay-stack'
   NAME = 'Sequent Microsystems 4 Relay Card'
 
-  def _device(self, device, nr, action):
+  def _device_set(self, device, nr, action):
     return relay4Set(device, nr, action)
 
   def _device_get(self, device, nr):
@@ -87,7 +87,7 @@ class terrariumRelay4StackV4(terrariumRelay8Stack):
   HARDWARE = '4relind-stack'
   NAME = 'Sequent Microsystems 4 Relay Card Ver. 4'
 
-  def _device(self, device, nr, action):
+  def _device_set(self, device, nr, action):
     return relay4SetV4(device, nr, action)
 
   def _device_get(self, device, nr):
@@ -97,7 +97,7 @@ class terrariumRelay8StackV4(terrariumRelay8Stack):
   HARDWARE = '8relind-stack'
   NAME = 'Sequent Microsystems 8 Relay Card Ver. 4'
 
-  def _device(self, device, nr, action):
+  def _device_set(self, device, nr, action):
     return relay8SetV4(device, nr, action)
 
   def _device_get(self, device, nr):
