@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-(unreleased)
-------------
+4.1.0 (2021-12-10)
+------------------
 
 **New**
 ------
+- Add Version 4 of Sequent Microsystems relay cards. [#633](https://github.com/theyosh/TerrariumPI/issues/633). [TheYOSH]
 - Add the option for areas to have depenencies on other areas. [#630](https://github.com/theyosh/TerrariumPI/issues/630)
   [#249](https://github.com/theyosh/TerrariumPI/issues/249). [TheYOSH]
 - Add docker yaml file for github actions. [theyosh]
@@ -67,6 +68,13 @@ Changelog
 
 **Fixes**
 ------
+- Fix stupid bug... [TheYOSH]
+- Final fix climate mirroring. [TheYOSH]
+- Timezone fix again(2) [TheYOSH]
+- Timezone fix again. [TheYOSH]
+- Fix timezones in climate mirroring. [TheYOSH]
+- Fix 0% and 100% value setting. [TheYOSH]
+- Fix dimmer readout. [#628](https://github.com/theyosh/TerrariumPI/issues/628). [TheYOSH]
 - Update documentation. Fix[#637](https://github.com/theyosh/TerrariumPI/issues/637). [theyosh]
 - Small fix for incorrect config. [TheYOSH]
 - Fix dimmer readout. [TheYOSH]
@@ -141,6 +149,11 @@ Changelog
 
 **Updates**
 ------
+- Update release docu. [TheYOSH]
+- Small docu update. [TheYOSH]
+- Update version number. [TheYOSH]
+- Update to main repository. [TheYOSH]
+- Update documentations and help info. [TheYOSH]
 - Update docker build. [theyosh]
 - Update documentation. [theyosh]
 - Update weather logging. [theyosh]
@@ -233,6 +246,15 @@ Changelog
 
 **Other**
 ------
+- New release documentation. [TheYOSH]
+- Merge branch 'master' into 4.x.y.z. [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (874 of 874 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (671 of 671 strings)
+- Docu. [TheYOSH]
 - Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
   [TheYOSH]
 - Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
