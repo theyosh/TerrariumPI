@@ -3,7 +3,7 @@
 {% block options %}
 <ol class="breadcrumb float-right ">
   {% if authenticated %}
-  <li class="breadcrumb-item"><a href="{{ url_for('api:calendar_download') }}" target="_blank" title="{{ _('Download iCal') }}"><i class="fas fa-download pt-1 mr-1"></i> {{ _('Download iCal') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ url_for('api:calendar_download') }}" target="_blank" rel="noopener" title="{{ _('Download iCal') }}"><i class="fas fa-download pt-1 mr-1"></i> {{ _('Download iCal') }}</a></li>
   <!-- <li class="breadcrumb-item "><i class="fas fa-wrench pt-1 mr-1"></i> {{ _('Settings') }}</li> -->
   {% else %}
   <li class="breadcrumb-item "><a href="{{ url_for('login') }}" title="{{ _('Login to make changes') }}"><i class="fas fa-wrench pt-1 mr-1"></i> {{ _('Login to make changes') }}</a></li>
