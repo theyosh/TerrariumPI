@@ -16,7 +16,7 @@ Here we will install Raspberry PI and TerrariumPI software step by step.
 ![Raspberry PI Logo](/assets/img/RaspberryPI_Logo.webp){: .right width="100" }
 In order to run TerrariumPI you first need a working Raspberry PI with the '[Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)' image. This is very important, as the Desktop version will not work well with the GPIO pins.
 
-Also 64bit is not supported due to missing mmal code which is needed for the webcams.
+Also **64bit is not supported** due to missing mmal code which is needed for the webcams.
 
 ## Creating SD Card
 
@@ -119,10 +119,16 @@ And the final step is to start the installer. This will guide you through the in
 
 The first time you run the installer, it will also update the Raspberry PI OS to the latest version. This can take some more time.
 
+Make sure you select the **correct timezone**. This is your home timezone. If you do not select the correct timezone during installation, you could get strange time schedules when running TerrariumPI.
+
 ```console
 cd TerrariumPI
 sudo ./install.sh
 ```
+
+<video muted controls style="max-width:100%">
+  <source src="/TerrariumPI/assets/video/TerrariumPI_Install.mp4" type="video/mp4">
+</video>
 
 After the installation is done, reboot once and you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
