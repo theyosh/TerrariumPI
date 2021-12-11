@@ -10,7 +10,7 @@
           <button type="button" class="btn btn-rounded helpbutton text-secondary" title="{{ _('Show/hide help information') }}"><i class="far fa-question-circle" aria-hidden="true"></i></button>
           {% if more_help %}
           <small class="text-muted" style="padding-top: 1rem">
-            <a href="{{ more_help }}" target=_blank>{{ _('More help online') }}</a>
+            <a href="{{ more_help }}" target="_blank" rel="noopener">{{ _('More help online') }}</a>
           </small>
           {% endif %}
           <button type="button" class="close" data-dismiss="modal" title="{{ _('Close') }}" aria-label="{{ _('Close') }}">
