@@ -206,6 +206,8 @@ do
   MAX_ATTEMPTS=5
   IFS='/' read -ra MODULE_NAME <<< "${PIP_MODULE}"
   MODULE_NAME=${MODULE_NAME[-1]}
+  IFS='==' read -ra MODULE_NAME <<< "${MODULE_NAME}"
+  MODULE_NAME=${MODULE_NAME[0]}
 
   while [ $ATTEMPT -le $MAX_ATTEMPTS ]
   do
