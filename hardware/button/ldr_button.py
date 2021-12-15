@@ -37,8 +37,10 @@ class terrariumLDRSensor(terrariumButton):
         sleep(.1)
 
       except KeyboardInterrupt as ex:
-        print(f'Fetch CTRL-c... and now what..? For now.. press again Ctrl-C ..')
         self._checker['running'] = False
+        print(f'Fetch CTRL-c... and now what..? For now.. press again Ctrl-C ..')
+        self.stop()
+
 
   def _get_state(self):
     return self._device['internal_state']
@@ -57,7 +59,11 @@ class terrariumLDRSensor(terrariumButton):
 
   def stop(self):
     self._checker['running'] = False
-    self.__thread.join()
+    try:
+      self.__thread.join()
+    except Exception:
+      pass
+
     super().stop()
 
   @property
