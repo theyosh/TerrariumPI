@@ -347,6 +347,9 @@ class terrariumWebsocket(object):
             self.send_message({'type' : 'systemstats', 'data' : self.webserver.engine.system_stats()}, messages)
             self.send_message({'type' : 'power_usage_water_flow', 'data' : self.webserver.engine.get_power_usage_water_flow}, messages)
 
+            if self.webserver.engine.update_available:
+              self.send_message({'type' : 'softwareupdate', 'data' : {'title':_('Software Update'), 'message' : '<a href="https://github.com/theyosh/TerrariumPI/releases" target="_blank" rel="noopener">' + _('A new version ({version}) is available!').format(version=self.webserver.engine.latest_version) + '</a>'}}, messages)
+
           elif 'load_dashboard' == message['type']:
             self.send_message({'type' : 'systemstats', 'data' : self.webserver.engine.system_stats()}, messages)
             self.send_message({'type' : 'power_usage_water_flow', 'data' : self.webserver.engine.get_power_usage_water_flow}, messages)

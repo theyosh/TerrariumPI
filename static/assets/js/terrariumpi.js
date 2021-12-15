@@ -2014,6 +2014,10 @@ function websocket_init(reconnect) {
         indicator.find('.badge').text(0 == error_counter ? '' : error_counter);
 
         break;
+
+      case 'softwareupdate':
+        toastr.success(message.data.message, message.data.title,{closeButton:true, timeOut:0, extendedTimeOut:0});
+        break;
     }
   };
   window.terrariumPI.websocket.onclose = function(evt) {

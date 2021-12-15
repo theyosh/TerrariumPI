@@ -13,10 +13,7 @@ import pyfiglet
 import copy
 import statistics
 import sdnotify
-
 import gettext
-# Loading translations
-gettext.install('terrariumpi', 'locales/')
 
 from pathlib import Path
 from gevent import sleep
@@ -83,6 +80,7 @@ class terrariumEngine(object):
 
     self.version = version
     self.latest_version = None
+    self.update_available = False
     init_db(self.version)
 
     # Send message that startup is ready..... else the startup will wait until done.... can take more then 1 minute
@@ -333,10 +331,10 @@ class terrariumEngine(object):
         return False
 
       self.latest_version = version_data['tag_name']
-      update_available = Version(self.version) < Version(self.latest_version)
+      self.update_available = Version(self.version) < Version(self.latest_version)
       self.__last_update_check = datetime.datetime.now()
 
-      return update_available
+      return self.update_available
 
     return False
 
@@ -1209,7 +1207,7 @@ class terrariumEngine(object):
     motd_version = padding + version_padding + motd_version + '\n'
 
     if update_available:
-      motd_version += padding + 'New version available: https://github.com/theyosh/TerrariumPI/releases' + '\n'
+      motd_version += padding + pyfancy().yellow('New version available: https://github.com/theyosh/TerrariumPI/releases').get() + '\n'
 
     # Relays
     relays = []
