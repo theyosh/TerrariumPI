@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-12-15 23:10+CET\n"
-"PO-Revision-Date: 2021-11-26 14:34+0000\n"
+"PO-Revision-Date: 2021-12-15 22:13+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_GB/>\n"
@@ -236,13 +236,11 @@ msgstr "TerrariumPI"
 
 #: terrariumWebserver.py:351
 msgid "A new version ({version}) is available!"
-msgstr ""
+msgstr "A new version ({version}) is available!"
 
 #: terrariumWebserver.py:351
-#, fuzzy
-#| msgid "Sensor update"
 msgid "Software Update"
-msgstr "Sensor update"
+msgstr "Software Update"
 
 #: views/about.html:2 views/about.html:9 views/includes/sidebar.html:292
 #: views/includes/sidebar.html:305
@@ -617,7 +615,7 @@ msgstr "Help"
 
 #: views/layouts/modal.html:13
 msgid "More help online"
-msgstr ""
+msgstr "More help online"
 
 #: views/layouts/modal.html:28
 msgid "Save changes"
@@ -976,13 +974,11 @@ msgstr "Select source when it is 'day'."
 
 #: views/modals/area.html:511
 msgid "Depends on"
-msgstr ""
+msgstr "Depends on"
 
 #: views/modals/area.html:515
-#, fuzzy
-#| msgid "Select the enclosure where this area belongs to."
 msgid "Select the areas where this area depends on."
-msgstr "Select the enclosure where this area belongs to."
+msgstr "Select the areas where this area depends on."
 
 #: views/modals/area.html:525
 msgid "Low alarm"
@@ -2795,10 +2791,8 @@ msgid "Select archiving"
 msgstr "Select archiving"
 
 #: views/modals/area.html:512
-#, fuzzy
-#| msgid "Select relays"
 msgid "Select areas"
-msgstr "Select relays"
+msgstr "Select areas"
 
 #: views/modals/area.html:259
 msgid "Select a sound card"
