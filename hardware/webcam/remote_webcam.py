@@ -8,7 +8,7 @@ class terrariumRemoteWebcam(terrariumWebcam):
   HARDWARE     = 'remote'
   NAME         = 'Remote file webcam'
   VALID_SOURCE = r'^https?://.*(?<!\.m3u8)$'
-  INFO_SOURCE  = 'https://server.com/location/path/stream.jpg'
+  INFO_SOURCE  = 'http(s)://server.com/location/path/stream.jpg'
 
   def _load_hardware(self):
     remote_image = terrariumUtils.get_remote_data(self.address)

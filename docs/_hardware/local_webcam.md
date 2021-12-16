@@ -9,10 +9,10 @@ image:
   alt: "Local file webcam"
 
 device_type: Still picture
-device_address: "A webcam that reads a local image file<br />Ex: `/opt/webcam/picture.jpg`"
+device_address: "A webcam that reads a local image file. Prefix with `local://`<br />Ex: `local:///opt/webcam/picture.jpg`"
 ---
 
 ## Information
-If you have already a system in place that creates images from a webcam like source, you can use those images here for a webcam.
+If you have already a system in place that creates images from a webcam on disk, you can use those images here for a webcam.
 
 {% include_relative _webcam_detail.md %}

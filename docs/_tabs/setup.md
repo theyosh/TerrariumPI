@@ -254,7 +254,7 @@ White balance
 : Select the white balance correction option.
 
 Archiving
-: Select the archiving type. This can either be motion or timebased.
+: Select the archiving type. This can either be motion or time based.
 
 Archive light state
 : Select the state of the lights for making archive images. In order to use this, make sure this webcam is selected at the correct [enclosure](#enclosures)
@@ -263,7 +263,7 @@ Archive door state
 : Select the state of the doors for making archive images. In order to use this, make sure this webcam is selected at the correct [enclosure](#enclosures)
 
 Flash
-: Select relays that act as a flasher. When updating the webcam image, these releays will be toggled on just before taking a picture.
+: Select relays that act as a flasher. When updating the webcam image, these relays will be toggled on just before taking a picture.
 
 ### Motion detection
 This is only available when `motion` is selected at **Archiving**.
@@ -281,7 +281,10 @@ Motion comparison frame
 : Select which frame to use for motion detection. Either the latest updated image (last frame), or the latest archived image (when there was motion).
 
 ### Markers
+![Markers popup](/assets/img/MarkersModal.webp){: .right width="200" }
 It is possible to add markers on the webcam image to show realtime sensor information. Click on the <img src="../assets/img/Webcam_Marker.webp" title="Webcam markers" alt="Webcam markers" style="height: 20px; position: relative; left: 0px; display: inline" class="ml-xl-3">icon in the preview window to drop a marker and select the sensors you want to show.
+
+In order to update or delete an existing marker, double click the marker.
 
 ## Playlists
 ![Playlist form](/assets/img/Playlist_Settings.webp)
@@ -298,7 +301,7 @@ Shuffle
 : Shuffle the playlist every time it is (re)started.
 
 Repeat
-: Repeat the plyalist. If shuffle is enabled, it will be shuffled every repeat action.
+: Repeat the playlist. If shuffle is enabled, it will be shuffled every repeat action.
 
 Audio files
 : List of audio files. The order of adding is order or playing.
@@ -336,7 +339,7 @@ Enclosure
 : Select the enclosure to which this area belongs.
 
 Type
-: Select the type of area. Depending on the type, new/different opions are available.
+: Select the type of area. Depending on the type, new/different options are available.
 
 Name
 : The name of the area. Use an easy to remember name.
@@ -365,16 +368,16 @@ Then you need to setup at least the `Day settings` tab else the software will no
 In the day and night setting tab you can configure the following:
 
 Begin time
-: This is the start time when the relay(s) should go on.
+: Depending on the selected **mode** you can enter the start time when the relay(s) should go on.
 
 End time
-: This is the end time when the relay(s) should go off. The duration between begin and end time call we the `operating window`
+: Depending on the selected **mode** you can enter the end time when the relay(s) should go off. The duration between begin and end time we call the `operating window`
 
 On duration
-: Here you can finetune the time that the relay(s) should on in **minutes** time. Enter a value of **0** to put the relays on for the complete operating window time.
+: Depending on the selected **mode** you can fine tune the time that the relay(s) should on in **minutes** time. Enter a value of **0** to put the relays on for the complete operating window time.
 
 Off duration
-: Enter the amount of **minutes** the relay(s) should be off during the operating window. Enter **0** to disable.
+: Depending on the selected **mode** you can enter the amount of **minutes** the relay(s) should be off during the operating window. Enter **0** to disable.
 
 **Timer functionality:** When you have an operating window of 10 hours, and selected 45 min on duration and 15 min off duration, you will get a that the relays will toggle on at the start, run for 45 minutes, and go off for 15 minutes. As this is in total 1 hour, this will be repeated 10 times during the operating window time.
 
@@ -384,8 +387,113 @@ Relays
 **Simulate sun rise/set**: When you select a dimmer and a normal relay, you could setup the dimmer to go on in 30 minutes, and delay the normal relay for 30 minutes, so that when the dimmer is at full power, the other light is toggled on. This will give a nice sun rise effect.
 
 ### Other areas
+There are multiple types of areas that can be used. Almost all types have the same logic, but the type of area is of influence on the used sensors. In the screenshot below you see the `Humidity` type area. But for `CO2`, `Conductivity`, `Cooling`, `Heating`, `Moisture`, `Fertility`, `PH` this is all the same. Only `audio` and `watertank` are special areas which have their own setup.
+
+The system uses the sensors alarm values to determine the right conditions you want. For example, using an area with a heater relay and temperature sensors will try to get the temperature in the middle of the minimum and maximum sensor values. Either by using a dimmer or by just toggling on and off. By changing the sensor alarm values, you can raise or lower the wanted temperature. This is the basic logic we use.
+
 ![Area form](/assets/img/Area_Settings_Type.webp)
 _Popup form for adding and updating areas_
+
+Mode
+: [Same as lights area](#main-lights)
+
+Sensors
+: Select the sensors you want to use with this type of area. The area will use the average values of the current, min and max alarm values.
+
+Day/night difference
+: Enter the a value that the sensors should raise or lower when it become night. Enter a negative value for lowering the temperature. When it become day again, the sensor values will go the opposite direction and return to normal.
+Leave it **0** if you are planning to use the [variation tab](#variation)
+
+Day/night source
+: Select the day and night source. This can either be the main lights or weather. This is used for light settings later on the day or night tabs.
+
+Next you can configure either the `Low alarm` or `High alarm` tab. This is optional. When you do not select at least **1** relay in these tabs, you will only get a summary for that area with no actions. The `Variation` tab is [described separately](#variation).
+
+**Make sure you do not select a relay more then once in these tabs and areas!**
+
+Begin time
+: Depending on the selected **mode** you can enter the start time when the relay(s) should go on.
+
+End time
+: Depending on the selected **mode** you can enter the end time when the relay(s) should go off. The duration between begin and end time we call the `operating window`
+
+On duration
+: Here you can fine tune the time that the relay(s) should on in **minutes** time. Enter a value of **0** to put the relays on for the complete operating window time.
+
+Off duration
+: Here you can e enter the amount of **minutes** the relay(s) should be off during the operating window. Enter **0** to disable.
+
+Power on time
+: Here you can even more fine tine the on duration. The value here is in **seconds**. When this value is higher then **0** the relay will on for this amount of seconds and will then toggle down.
+
+Settle time
+: The time between two relay actions. This is a value in **seconds**. This means that when the relay goes off, it will wait this amount of time before it will toggle on again. This value is also affective between the `Low alarm` and `High alarm`.
+
+Light status
+: Select the state of the lights. If the light state is not in the selected state here, the relays will **not** toggle and power down. This depends on the option _Day/night source_ you have selected earlier.
+
+Door status
+: Select the state of the doors. If the door state is not in the selected state here, the relays will **not** toggle and power down.
+
+Alarm threshold
+: The amount of errors that have to pass before the relays toggles on.
+
+Relays
+: Select the relays that you want to use for this area. Make sure a relay is **only used once**!
+
+#### Variation
+With the variation tab, you can fine tune the alarms of the sensors during the day so that you can have for example different temperatures during the day. Or you can even mirror a remote climate setting the **source** on `Using current weather`.
+
+![Area Variation tab](/assets/img/Area_Variation.webp)
+_Area variation tab_
+
+Source
+: Select the variation type. Depending on this option, some fields will hide and other shows up.
+
+Period/duration
+: Depending on the source, you fill in a time or a duration in minutes.
+
+Value
+: Depending on the source, the new value that should be set at the selected time
+
+External source url
+: This is only available with the source option `Use json source` and `Use script`
+
+Offset
+: This is only available with the source option `Using current weather`, `Use json source` and `Use script`. This is a value that will be added to the wanted current value.
+
 ### Audio
+![Area Audio form](/assets/img/Area_Audio.webp)
+_Popup form for adding and updating audio areas_
+
+Mode
+: [Same as lights area](#main-lights)
+
+Sound card
+: Select the sound card you want to use to play the audio.
+
+Playlists
+: Select all the playlists you want to use. Make sure that the playlist with repeat option is selected as last.
 
 ### Water tank
+![Area Water tank form](/assets/img/Area_Watertank.webp)
+_Popup form for adding and updating water tank areas_
+
+The water tank area is a bit special. This can be used to measure your water levels in a tank. This is done by using [HC-SR04 ultrasonic ranging sensor]({% link _hardware/hc-sr04_sensor.md %}).
+
+Mode
+: [Same as lights area](#main-lights)
+
+Sensors
+: Select the sensors you want to use with this type of area. Only distance sensors can be used here.
+
+Water volume
+: Enter the total amount of water that the tank can hold in **litres**
+
+Height
+: Enter the height of the water tank in **centimeters**
+
+Offset
+: Enter the distance between the sensor and the top of the water level in **centimeters**
+
+Other options are the same the other areas. You can use water pumps to fill your water tank based on the alarm values.

@@ -13,7 +13,7 @@ class terrariumHLSLiveWebcam(terrariumWebcam):
   HARDWARE     = 'hls-live'
   NAME         = 'Live HLS Stream'
   VALID_SOURCE = r'^https?://.*\.m3u8$'
-  INFO_SOURCE  = 'https://server.com/stream/playlist.m3u8'
+  INFO_SOURCE  = 'http(s)://server.com/stream/playlist.m3u8'
 
   def _load_hardware(self):
     data = terrariumUtils.get_remote_data(self.address)
