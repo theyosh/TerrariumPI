@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2021-12-15 23:10+CET\n"
-"PO-Revision-Date: 2021-11-28 20:27+0000\n"
+"PO-Revision-Date: 2021-12-17 22:01+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Spanish (Argentina) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/es_AR/>\n"
@@ -165,10 +165,8 @@ msgid "average {sensor_type}"
 msgstr "El tipo de sensor"
 
 #: terrariumEngine.py:1286
-#, fuzzy
-#| msgid "Last update"
 msgid "last update"
-msgstr "Ultima actualización"
+msgstr "última actualización"
 
 #: terrariumNotification.py:41
 #, fuzzy
@@ -2959,8 +2957,6 @@ msgid "Enter the amount"
 msgstr "Introduzca la cantidad"
 
 #: views/modals/area.html:102
-#, fuzzy
-#| msgid "Enter the amount of days/weeks/months/years to reminder."
 msgid "Enter the amount of hours to shift"
 msgstr "Ingrese la cantidad de horas para cambiar"
 
