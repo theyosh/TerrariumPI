@@ -20,7 +20,7 @@ After the installation, you need to setup TerrariumPI. In order to do that, logi
 On every form popup you have a small question mark <i class="far fa-question-circle" aria-hidden="true"></i> next to the form title. Click on it to get more information about the form fields.
 
 ## Required fields
-All fields with a red start (<span style="color:red;font-weight:bold">*</span>) are required to fill out. Some fields can be come required based on selected options.
+All fields with a red star (<span style="color:red;font-weight:bold">*</span>) are required to fill out. Some fields can be come required based on selected options.
 
 ## Settings
 ![Settings form](/assets/img/Settings.webp)
