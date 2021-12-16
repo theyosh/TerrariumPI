@@ -11,7 +11,7 @@ class terrariumLocalWebcam(terrariumWebcam):
   INFO_SOURCE  = 'local:///path/to/folder/with/image/file'
 
   def _load_hardware(self):
-    self._device['device'] = Path(re.search(self.VALID_SOURCE, self.address, re.IGNORECASE).group(1))
+    return Path(re.search(self.VALID_SOURCE, self.address, re.IGNORECASE).group(1))
 
   def _get_raw_data(self):
     if not self._device['device'].exists():
