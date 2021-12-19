@@ -34,6 +34,7 @@ pyserial==3.5
 pigpio_dht==0.3.6
 pigpio==1.78
 mitemp_bt==0.0.5
+lywsd03mmc==0.1.0
 PyMLX90614==0.0.3
 pyownet==0.10.0.post1
 veml6075==0.0.2
