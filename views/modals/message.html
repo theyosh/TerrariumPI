@@ -6,7 +6,7 @@
 {% set modal_type = 'message' %}
 {% set modal_form_add_action  = url_for('api:notification_message_add') %}
 {% set modal_form_edit_action = url_for('api:notification_message_update',message='_id_') %}
-{% set modal_reload_url = url_for('page', page='messages') %}
+{% set modal_reload_url = url_for('page', page='notifications') %}
 
 {% block modal_title %}<i class="fas fa-thumbtack mr-2" ></i>{{ _('Message settings') }}{% endblock %}
 {% block modal_body %}
@@ -108,10 +108,9 @@ jQuery.when(
     message_services.html('');
 
     jQuery.each(services[0].data,function(counter,item) {
-      let service_icon = jQuery('<button>').data('service',item.id).attr({'type':'button','id':item.id}).addClass('btn btn-app').append(jQuery('<i>').addClass(' text-warning ' + template_sensor_type_icon(item.type)))
+      let service_icon = jQuery('<button>').data('service',item.id).attr({'type':'button','id':item.id, 'title' : item.name}).addClass('btn btn-app').append(jQuery('<i>').addClass(' text-warning ' + template_sensor_type_icon(item.type)))
         message_services.append(service_icon);
     });
-
 
     {{modal_type}}_form.find('button.btn-app').on('click',function() {
       jQuery(this).find('i').toggleClass('active');
@@ -122,15 +121,7 @@ jQuery.when(
       });
 
       {{modal_type}}_form.find('input#services').val(services.join(','));
-
-
-
-      //jQuery('.message_callibration').toggle('ldr' == this.value);
-      //jQuery('#ldr_capacitor').prop('disabled','ldr' != this.value);
     });
-
-
-
 
     // Check if we are in edit mode.... and need to load more data....
     if ('#' != jQuery(event.relatedTarget).attr('href')) {
@@ -149,27 +140,17 @@ jQuery.when(
         jQuery.each(data,function(key,value) {
 
           if ('services' == key && value != null) {
-            console.log(value)
             for (const [ counter, service ] of Object.entries(value)) {
-              console.log(counter, service)
-              //let field =
               {{modal_type}}_form.find('button#' + service.id).trigger('click');
-             // field.val(calibration_value).trigger('change');
             }
-          }
-
-          let field = {{modal_type}}_form.find('[name="' + key + '"]');
-          if (field.attr('type') == 'checkbox') {
-            field.prop('checked',(1 != value)).trigger('change');
-            field.prop('checked',(1 == value)).trigger('change');
           } else {
-            /*
-            if ('doors' == key) {
-              // Create a new array from the doors array with only the door ids
-              value = Array.from(value, door => door.id);
+            let field = {{modal_type}}_form.find('[name="' + key + '"]');
+            if (field.attr('type') == 'checkbox') {
+              field.prop('checked',(1 != value)).trigger('change');
+              field.prop('checked',(1 == value)).trigger('change');
+            } else {
+              field.val(value).trigger('change');
             }
-            */
-            field.val(value).trigger('change');
           }
         });
         {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
@@ -181,12 +162,4 @@ jQuery.when(
 {% endblock %}
 
 {% block modal_form_javascript_pre_submit_formdata %}
-if ('ldr' == form_data['hardware']) {
-  // Set the calibration JSON
-  form_data['calibration'] = {}
-  try {
-    form_data['calibration']['ldr_capacitor'] = form_data['ldr_capacitor'];
-    delete(form_data['ldr_capacitor']);
-  } catch (error) { }
-}
 {% endblock %}

@@ -25,22 +25,15 @@ class terrariumOLEDMixin():
     self.width  = self._device['device'].width
     self.height = self._device['device'].height
 
-
     self._device['lines_buffer'] = []
-
-    #print(f'Cleared: {self._device["clear"]}')
-    #self.clear()
 
   def unload_hardware(self):
     self._device['device'].lcd_device.bus.close()
     del(self._device['device'])
 
-  def _write_line(self, text, line_nr):
-    print(f'OLED: nr {line_nr}, {text}')
-    xpos = 1
-#    self.__text_lines[line_nr-1] = text
+  def _write_line(self, text, line_nr = None):
+    # print(f'OLED: nr {line_nr}, {text}')
     with canvas(self._device['device']) as draw:
-      #if len(self._device['lines_buffer']) == 0:
       draw.rectangle(self._device['device'].bounding_box, outline='white', fill='black')
 
       if self.title is not None:
@@ -48,20 +41,17 @@ class terrariumOLEDMixin():
         draw.text((1,0), self.title, font=self.font, fill='black')
 
       self._device['lines_buffer'].append(text)
-      #for x in range(line_nr):
-
-
       for nr, line in enumerate(self._device['lines_buffer']):
         if line is None:
           continue
 
-        ypos = (nr + 0) * self.fontsize
-        draw.text((xpos, ypos), line, font=self.font, fill='white')
+        ypos = (nr + (0 if self.title is None else 1)) * self.fontsize
+        draw.text((1, ypos), line, font=self.font, fill='white')
 
   def write_image(self, image):
     if Path(image).exists():
       image = Image.open(image)
-      scale = max(float(self.width) / float(image.size[0]),float(self.height) / float(image.size[1]))
+      scale = min(float(self.width) / float(image.size[0]),float(self.height) / float(image.size[1]))
       image = image.resize((int(scale * float(image.size[0])),int(scale * float(image.size[1]))),Image.ANTIALIAS)
 
       top_x = int((image.size[0] - int(self.width)) / 2)
@@ -75,17 +65,11 @@ class terrariumOLEDMixin():
 
   def clear(self):
     self._device['device'].clear()
-    with canvas(self._device['device']) as draw:
-      draw.rectangle(self._device['device'].bounding_box, outline='white', fill='black')
-
-    self._device['clear'] = True
     self._device['lines_buffer'] = []
-    print(f'Oled clear: True')
+    self._write_line(None)
+    self._device['lines_buffer'] = []
 
-    #self.__text_lines = [None] * int(self.height / self.fontsize)
-    super().clear()
-
-class terrariumOLEDSSD1306(terrariumDisplay, terrariumOLEDMixin):
+class terrariumOLEDSSD1306(terrariumOLEDMixin, terrariumDisplay):
   HARDWARE = 'SSD1306'
   NAME = 'OLED SSD1306 (I2C)'
 

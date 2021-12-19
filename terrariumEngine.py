@@ -109,8 +109,6 @@ class terrariumEngine(object):
     # Load Webserver, as we need it for websocket communication (even when the webserver is not yet started)
     self.webserver = terrariumWebserver(self)
 
-    # Load notification......
-
     # Loading calendar
     self.calendar = terrariumCalendar()
 
@@ -154,7 +152,10 @@ class terrariumEngine(object):
 
     self.motd()
 
-    logger.info(f'TerrariumPI is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-self.starttime:.2f} seconds.')
+    startup_message = f'TerrariumPI is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-self.starttime:.2f} seconds.'
+    logger.info(startup_message)
+    self.notification.broadcast(startup_message, startup_message, self.settings['profile_image'])
+
     # Return console logging back to 'normal'
     terrariumLogging.logging.getLogger().handlers[0].setLevel(old_log_level)
     self.__engine['logtail'] = threading.Thread(target=self.__log_tailing)
@@ -920,7 +921,7 @@ class terrariumEngine(object):
         if enclosure.id not in self.enclosures:
           logger.debug(f'Loading {enclosure}.')
 
-          # TODO: Sensors should be database entities... so query them when needed in the area itselfs
+          # TODO: Sensors should be database entities... so query them when needed in the area it selfs
           new_enclosure = self.add(terrariumEnclosure(
                                       str(enclosure.id),
                                       enclosure.name,
@@ -1065,38 +1066,51 @@ class terrariumEngine(object):
     # Enable translations
     _ = terrariumUtils.get_translator(self.settings['language'])
 
+    motd_data = {}
+
     # Default left padding
     padding = 2 * ' '
     # Longest text lines first...
     tmp = self.system_stats()
+
+    motd_data['uptime'] = terrariumUtils.format_uptime(tmp['uptime'])
+    motd_data['system_load'] = str(tmp['load']['absolute'])[1:-1]
+    motd_data['system_load_alarm'] = tmp['load']['absolute'][0] > 1.0
+
+    motd_data['cpu_temperature'] = f'{tmp["cpu_temperature"]} {self.units["temperature"]}'
+    motd_data['cpu_temperature_alarm'] = tmp["cpu_temperature"] > 50
+
+    motd_data['storage'] = f'{terrariumUtils.format_filesize(tmp["storage"]["used"])}({ tmp["storage"]["used"] / tmp["storage"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["storage"]["total"])}'
+    motd_data['memory'] = f'{terrariumUtils.format_filesize(tmp["memory"]["used"])}({ tmp["memory"]["used"] / tmp["memory"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["memory"]["total"])}'
+
     system_stats = []
     system_stats.append({
       'title' : _('Up time') + ':',
-      'value' : terrariumUtils.format_uptime(tmp['uptime']),
+      'value' : motd_data['uptime'],
       'alarm' : False
     })
 
     system_stats.append({
       'title' : _('System load') + ':',
-      'value' : str(tmp['load']['absolute'])[1:-1],
-      'alarm' : tmp['load']['absolute'][0] > 1.0
+      'value' : motd_data['system_load'],
+      'alarm' : motd_data['system_load_alarm']
     })
 
     system_stats.append({
       'title' : _('CPU Temperature') + ':',
-      'value' : f'{tmp["cpu_temperature"]} {self.units["temperature"]}',
-      'alarm' : tmp["cpu_temperature"] > 50
+      'value' : motd_data['cpu_temperature'],
+      'alarm' : motd_data['cpu_temperature_alarm']
     })
 
     system_stats.append({
       'title' : _('Storage') + ':',
-      'value' : f'{terrariumUtils.format_filesize(tmp["storage"]["used"])}({ tmp["storage"]["used"] / tmp["storage"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["storage"]["total"])}',
+      'value' : motd_data['storage'],
       'alarm' : False
     })
 
     system_stats.append({
       'title' : _('Memory') + ':',
-      'value' : f'{terrariumUtils.format_filesize(tmp["memory"]["used"])}({ tmp["memory"]["used"] / tmp["memory"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["memory"]["total"])}',
+      'value' : motd_data['memory'],
       'alarm' : False
     })
     system_title_length = max([len(line['title']) for line in system_stats])
@@ -1111,11 +1125,15 @@ class terrariumEngine(object):
     averages = []
     if len(tmp) > 0:
       for avg_type in self.sensor_averages.keys():
+        motd_data[f'average_{avg_type}']       = f'{tmp[avg_type]["value"]:.2f}'
+        motd_data[f'average_{avg_type}_unit']  = self.units[avg_type]
+        motd_data[f'average_{avg_type}_alarm'] = not tmp[avg_type]['alarm_min'] <= tmp[avg_type]['value'] <= tmp[avg_type]['alarm_max']
+
         averages.append({
           'title' : _('average {sensor_type}').format(sensor_type=_(avg_type)).capitalize() + ':',
-          'value' : f'{tmp[avg_type]["value"]:.2f}',
-          'unit'  : self.units[avg_type],
-          'alarm' : not tmp[avg_type]['alarm_min'] <= tmp[avg_type]['value'] <= tmp[avg_type]['alarm_max']
+          'value' : motd_data[f'average_{avg_type}'],
+          'unit'  : motd_data[f'average_{avg_type}_unit'],
+          'alarm' : motd_data[f'average_{avg_type}_alarm']
         })
 
       averages = sorted(averages, key=lambda k: k['title'])
@@ -1154,7 +1172,6 @@ class terrariumEngine(object):
     # Generate ascii art title in color
     figlet = pyfiglet.Figlet(font='doom')
     title = self.settings['title']
-    red_color = 0
 
     if 'PI' in title:
       split_pos   = title.find('PI')
@@ -1230,11 +1247,18 @@ class terrariumEngine(object):
         relays.append({
           'title' : f'{relay_title}  ',
           'power' : f'{relay.current_wattage:.2f} Watt,',
-          # TODO: Fix waterflow volume indicator (L/m)
-          'flow'  : f'{relay.current_flow:.2f} L/m'
+          'flow'  : f'{relay.current_flow:.2f} {self.units["water_flow"]}'
         })
 
     relays = sorted(relays, key=lambda k: k['title'])
+
+    # TODO: Optimize variable usage here
+
+    motd_data['current_watt']  = relay_averages['power']['current']
+    motd_data['max_watt']      = relay_averages['power']['max']
+    motd_data['current_flow']  = relay_averages['flow']['current']
+    motd_data['max_flow']      = relay_averages['flow']['max']
+    motd_data['relays_active'] = len(relays)
 
     current_watt = relay_averages['power']['current']
     max_watt     = relay_averages['power']['max']
@@ -1244,8 +1268,7 @@ class terrariumEngine(object):
 
     relays_active     = len(relays)
     relay_title_left  = len(f'Current active relays {relays_active}/{len(self.relays)}  ')
-    # TODO: Fix waterflow volume indicator (L/m)
-    relay_title_right = len(f'{current_watt:.2f}/{max_watt:.2f} Watt, {current_flow:.2f}/{max_flow:.2f} L/m')
+    relay_title_right = len(f'{current_watt:.2f}/{max_watt:.2f} Watt, {current_flow:.2f}/{max_flow:.2f} {self.units["water_flow"]}')
     relay_title_padding = 0
 
     motd_relays = ''
@@ -1299,6 +1322,10 @@ class terrariumEngine(object):
 
     motd_file.chmod(0o755)
 
+    # Send notification message
+    self.notification.message('system_summary', motd_data)
+
+
   # -= NEW =-
   def __log_tailing(self):
     logger.info('Starting log tailing.')
@@ -1311,7 +1338,7 @@ class terrariumEngine(object):
   # -= NEW =-
   def stop(self):
     terrariumLogging.logging.getLogger().handlers[0].setLevel(terrariumLogging.logging.INFO)
-    logger.info(f'Stopping TerrariumPI {self.version} after running for {terrariumUtils.format_uptime(time.time()-self.starttime)} ...')
+    logger.info(f'Stopping TerrariumPI {self.version} ...')
 
     self.running = False
     self.__engine['exit'].set()
@@ -1344,11 +1371,14 @@ class terrariumEngine(object):
     if self.meross_cloud is not None:
       self.meross_cloud.stop()
 
+    shutdown_message = f'Stopped TerrariumPI {self.version} after running for {terrariumUtils.format_uptime(time.time()-self.starttime)}. Bye bye.'
+    #f'Shutdown TerrariumPI {self.version} done. Bye bye ...'
+    self.notification.broadcast(shutdown_message, shutdown_message, self.settings['profile_image'])
     self.notification.stop()
 
     self.__engine['asyncio'].stop()
 
-    logger.info(f'Shutdown TerrariumPI {self.version} done. Bye bye ...')
+    logger.info(shutdown_message)
 
   def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
     # Two events:

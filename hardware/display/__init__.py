@@ -4,19 +4,19 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 from pathlib import Path
 import inspect
-import pkgutil
+#import pkgutil
 from importlib import import_module
 import sys
 from hashlib import md5
-import pigpio
-import RPi.GPIO as GPIO
+#import pigpio
+#import RPi.GPIO as GPIO
 import threading
 from gevent import sleep
 import queue
 
 import textwrap
 
-from terrariumUtils import terrariumUtils, terrariumSingleton, terrariumCache, classproperty
+from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 class terrariumDisplayException(TypeError):
   '''There is a problem with loading a hardware sensor.'''
@@ -85,8 +85,7 @@ class terrariumDisplay(object):
                     'font'     : None,
                     'queue'    : None,
                     'thread'   : None,
-                    'running'  : False,
-                    'clear'    : True}
+                    'running'  : False}
 
     self.id      = id
     self.title   = title
@@ -265,19 +264,19 @@ class terrariumDisplay(object):
           # Show the text line. This is a substring of max width characters, starting at char_step
           self._write_line(line[char_step:(char_step+max_chars_per_line)].ljust(max_chars_per_line),line_nr+screen_line_number_offset)
           if extra_chars > 0:
-            # If we have exta chars, we pauze and show the same line again, but then 1 character shifted to the left
+            # If we have extra chars, we pause and show the same line again, but then 1 character shifted to the left
             sleep(0.1)
 
         # If we have normal horizontal scrolling, we will scroll backwards.
         if self.__MODE_TEXT_H_SCROLL == self.mode:
-          time.sleep(0.25)
+          sleep(0.25)
           if extra_chars > 0:
             for char_step in range(extra_chars+1,0,-1):
               self._write_line(line[char_step:(char_step+max_chars_per_line)].ljust(max_chars_per_line),line_nr+screen_line_number_offset)
               sleep(0.1)
         # Else we just revert the text back to show only the first max width characters
         elif self.__MODE_TEXT_H_SCROLL_ONCE == self.mode:
-          time.sleep(0.25)
+          sleep(0.25)
           self._write_line(line[:max_chars_per_line].ljust(max_chars_per_line),line_nr+screen_line_number_offset)
 
       if line_animations > 0:
@@ -291,9 +290,12 @@ class terrariumDisplay(object):
   def unload_hardware(self):
     pass
 
+  def write_image(self, image):
+    pass
+
   def clear(self):
     if self.title is not None:
-      self._write_line(self.title[:self.width].ljust(self.width),1)
+      self._write_line(self.title[:self.width].ljust(self.width),0,'black')
 
 
 

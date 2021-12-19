@@ -30,11 +30,7 @@
               </div>
             </div>
             <div class="card-body">
-
-
-
               <div class="row" id="service_overview">
-
                 <div class="overlay d-flex justify-content-center align-items-center loading">
                   <i class="fas fa-3x fa-sync-alt fa-spin"></i>
                 </div>
@@ -43,8 +39,6 @@
           </div>
       </div>
     </div>
-
-
     <div class="row">
       <div class="col">
           <div class="card">
@@ -76,25 +70,21 @@
                 <div class="message_loading overlay d-flex justify-content-center align-items-center loading">
                   <i class="fas fa-3x fa-sync-alt fa-spin"></i>
                 </div>
-
                 <table class="table">
                   <thead>
                     <tr>
                       <th>Type</th>
                       <th>Subject</th>
                       <th>Message</th>
-                      <th>Rate limit</th>
+                      <th style="white-space: nowrap;">Rate limit</th>
                       <th>Enabled</th>
                       <th>Services</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody id="messages_overview">
-
                   </tbody>
                 </table>
-
-
               </div>
             </div>
           </div>
@@ -102,17 +92,14 @@
     </div>
   </div>
 </section>
-
 <script type="text/html" id="notification_service_template">
 <div class="col-2">
-  <div class="info-box text-body" >
+  <div class="info-box" >
     <a data-href="edit" data-toggle="modal" data-target="#modal-service-setup" data-class="color" class="info-box-icon"><i class="fa-fw" data-class="icon"></i></a>
-
     <div class="info-box-content">
       <span class="info-box-text" data-content="name"></span>
       <span class="info-box-number" data-content="rate_limit"></span>
       <span class="info-box-text">Enabled: <span data-content="enabled"></span></span>
-
       <a data-href="delete_link" data-title="delete_title" class="float-right mr-2 mt-2 d-block text-danger" style="visibility:hidden; position: absolute; z-index:99; top: 0px; right: 0px" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
         <i class="fas fa-fw fa-trash-alt"></i>
       </a>
@@ -120,7 +107,6 @@
   </div>
 </div>
 </script>
-
 <script type="text/html" id="notification_message_template">
 <tr>
   <td data-content="id"></td>
@@ -129,12 +115,8 @@
   <td data-content="rate_limit"></td>
   <td data-content="enabled"></td>
   <td data-content="services">
-
-
   </td>
-
   <td class="actions">
-
     <i class="fas fa-fw fa-wrench edit_message" data-template-bind='[
     {"attribute": "id", "value": "id" },
     {"attribute": "title", "value": "title", "formatter": "prefixer", "formatOptions": "{{ _('Edit message') }} "} ]'></i>
@@ -142,7 +124,6 @@
     {"attribute": "id", "value": "id" },
     {"attribute": "title", "value": "title", "formatter": "prefixer", "formatOptions": "{{ _('Delete message') }} "} ]'></i>
   </td>
-
 </tr>
 </script>
 <style>
@@ -168,6 +149,7 @@ div#services .btn.btn-app i:not(.active) {
         service.edit = '{{ url_for('api:notification_service_update',  service='_id_') }}'.replace('_id_',service.id);
         service.delete_link = '{{ url_for('api:notification_service_delete',  service='_id_') }}'.replace('_id_',service.id);
         service.delete_title = 'Delete service ' + service.name;
+        service.enabled = (service.enabled ? 'true' : 'false');
 
         switch (service.type) {
           case 'email':
@@ -178,7 +160,7 @@ div#services .btn.btn-app i:not(.active) {
         if (service.rate_limit > 0) {
           service.rate_limit = 'Max {rate_limit} per minute'.replace('{rate_limit}',service.rate_limit);
         } else {
-          service.rate_limit = 'Unlimited'
+          service.rate_limit = 'Unlimited messages'
         }
 
         $('#service_overview').loadTemplate($('#notification_service_template'), service, { append: true, bindingOptions: {ignoreNull : true}});
@@ -190,8 +172,11 @@ div#services .btn.btn-app i:not(.active) {
       (data.data.length > 0 ? jQuery('.zero_message').remove() : jQuery('.zero_message').show());
 
       jQuery.each(data.data, function(index, message){
-        message.services.sort((a, b) => a.name.localeCompare(b.name));
+        message.enabled = (message.enabled ? 'enabled' : 'disabled');
+        message.message = message.message.replace(/\n/g,'<br />');
+        message.rate_limit = (message.rate_limit == 0 ? 'Unlimited' : 'Max {rate_limit}/min.'.replace('{rate_limit}',message.rate_limit));
 
+        message.services.sort((a, b) => a.name.localeCompare(b.name));
         services = '';
         jQuery.each(message.services, function(counter, service){
           services += '<i class="fa-fw ' + template_sensor_type_icon(service.type) + (service.enabled ? ' text-warning' : '') +'" title="' + service.name + '" ></i>&nbsp;';

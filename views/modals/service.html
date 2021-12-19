@@ -11,7 +11,6 @@
 {% block modal_title %}<i class="fas fa-thumbtack mr-2" ></i>{{ _('Notification service settings') }}{% endblock %}
 {% block modal_body %}
 <input type="hidden" name="id" id="service_id" value="" disabled="disabled">
-
 <div class="row">
   <div class="col-12 col-sm-12 col-md-5 col-lg-4">
     <div class="form-group">
@@ -34,27 +33,22 @@
       </div>
     </div>
   </div>
-
   <div class="col-10 col-sm-10 col-md-8 col-lg-2">
     <div class="form-group">
       <label for="message_rate_limit">{{ _('Rate limit') }}</label>
       <input type="number" class="form-control" id="message_rate_limit" name="rate_limit" required="required" placeholder="{{ _('Messages per minute') }}">
     </div>
   </div>
-
   <div class="col-10 col-sm-12 col-md-2 col-lg-2 text-center">
     <div class="form-group">
       <div class="switch">
-        <label for="service_enabled" class="d-block">{{ _('Enabled') }}</label>
-        <input type="checkbox" class="switch" id="service_enabled" name="enabled" checked="checked">
-        <label for="service_enabled" class="mt-1"></label>
+        <label for="enabled" class="d-block">{{ _('Enabled') }}</label>
+        <input type="checkbox" class="switch" id="enabled" name="enabled" checked="checked">
+        <label for="enabled" class="mt-1"></label>
       </div>
-
     </div>
   </div>
 </div>
-
-
 <div class="row display">
   <div class="col-12 col-sm-12 col-md-5 col-lg-5">
     <div class="form-group">
@@ -84,8 +78,6 @@
     </div>
   </div>
 </div>
-
-
 <div class="row email">
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
@@ -121,7 +113,6 @@
     </div>
   </div>
 </div>
-
 <div class="row pushover">
   <div class="col-12 col-sm-12 col-md-6 col-lg-6">
     <div class="form-group">
@@ -164,118 +155,96 @@
 -->
 
 <div class="row traffic">
-
   <div class="col-4 col-sm-4 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="red">{{ _('Red') }}</label>
       <input type="number" class="form-control" id="red" name="red" placeholder="{{ _('Enter red GPIO pin') }}">
     </div>
   </div>
-
   <div class="col-4 col-sm-4 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="yellow">{{ _('Yellow') }}</label>
       <input type="number" class="form-control" id="yellow" name="yellow" placeholder="{{ _('Enter yellow GPIO pin') }}">
     </div>
   </div>
-
   <div class="col-4 col-sm-4 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="green">{{ _('Green') }}</label>
       <input type="number" class="form-control" id="green" name="green" placeholder="{{ _('Enter green GPIO pin') }}">
     </div>
   </div>
-
 </div>
-
+<!--
 <div class="row twitter">
-
-
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="bot_token">{{ _('Customer key') }}</label>
       <input type="text" class="form-control" id="bot_token" name="bot_token" required="required" placeholder="{{ _('Enter the SMTP server username') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="username">{{ _('Customer secret') }}</label>
       <input type="text" class="form-control" id="username" name="username" required="required" placeholder="{{ _('Enter the SMTP server password') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="access_token">{{ _('Access token') }}</label>
       <input type="text" class="form-control" id="access_token" name="access_token" required="required" placeholder="{{ _('Enter the SMTP server username') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="access_secret">{{ _('Access token secret') }}</label>
       <input type="text" class="form-control" id="access_secret" name="access_secret" required="required" placeholder="{{ _('Enter the SMTP server password') }}">
     </div>
   </div>
-
-</div>
+</div> -->
 
 <div class="row webhook">
-
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
     <div class="form-group">
       <label for="url">{{ _('Full post url') }}</label>
       <input type="text" class="form-control" id="url" name="url" required="required" placeholder="{{ _('Enter the SMTP server username') }}">
     </div>
   </div>
-
 </div>
-
 <div class="row mqtt">
-
-
-
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="address">{{ _('MQTT Server address') }}</label>
       <input type="text" class="form-control" id="address" name="address" required="required" placeholder="{{ _('Enter the MQTT server address name or ip') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="port">{{ _('MQTT Server port') }}</label>
       <input type="number" class="form-control" id="port" name="port" required="required" value="25" placeholder="{{ _('Enter the MQTT server port number') }}">
     </div>
     <small class="text-muted">
-
     </small>
   </div>
 <!--
   <div class="col-12 col-sm-12 col-md-2 col-lg-2">
     <div class="form-group">
       <label for="address">{{ _('MQTT secure connection') }}</label>
-
       <input type="text" class="form-control" id="address" name="address" required="required" placeholder="{{ _('Enter the MQTT server address name or ip') }}">
-
     </div>
-  </div> -->
-
+  </div>
+-->
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="username">{{ _('MQTT Server username') }}</label>
       <input type="text" class="form-control" id="username" name="username" placeholder="{{ _('Enter the SMTP server username') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="password">{{ _('MQTT Server password') }}</label>
       <input type="text" class="form-control" id="password" name="password" placeholder="{{ _('Enter the SMTP server password') }}">
     </div>
   </div>
-
 </div>
 {% endblock %}
 
@@ -292,11 +261,7 @@
 {% endblock %}
 
 {% block modal_form_javascript_load %}
-
 {{modal_type}}_form.find('select#service_type').trigger('change');
-
-//{{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
-
 
 jQuery.when(
 
@@ -314,7 +279,6 @@ jQuery.when(
 
     service_type.trigger('change');
 
-
     let display_hardware = {{modal_type}}_form.find('select#hardware');
     display_hardware.attr('readonly', false);
     display_hardware.find('option').remove();
@@ -322,8 +286,6 @@ jQuery.when(
     jQuery.each(displays[0].data,function(counter,item){
       display_hardware.append(jQuery('<option>').attr('value',item.hardware).text(item.name));
     });
-
-
 
     // Check if we are in edit mode.... and need to load more data....
     if ('#' != jQuery(event.relatedTarget).attr('href')) {
@@ -343,15 +305,6 @@ jQuery.when(
         data = { ...data, ...data.setup };
 
         jQuery.each(data,function(key,value) {
-/*
-          if ('calibration' == key && value != null) {
-            for (const [ calibration_key, calibration_value ] of Object.entries(value)) {
-              let field = {{modal_type}}_form.find('[name="' + calibration_key + '"]');
-              field.val(calibration_value).trigger('change');
-            }
-          }
-
-*/
           let field = {{modal_type}}_form.find('[name="' + key + '"]');
           if (field.attr('type') == 'checkbox') {
             field.prop('checked',(1 != value)).trigger('change');
@@ -378,17 +331,4 @@ jQuery.each(Object.keys(form_data),function(counter, key) {
     delete(form_data[key]);
   }
 });
-
-console.log('Post notification service data:',form_data);
-
-/*
-if ('ldr' == form_data['hardware']) {
-  // Set the calibration JSON
-  form_data['calibration'] = {}
-  try {
-    form_data['calibration']['ldr_capacitor'] = form_data['ldr_capacitor'];
-    delete(form_data['ldr_capacitor']);
-  } catch (error) { }
-}
-*/
 {% endblock %}

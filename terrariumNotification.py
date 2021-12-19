@@ -11,14 +11,14 @@ import datetime
 from operator import itemgetter
 
 from threading import Timer
-from hashlib import md5
+#from hashlib import md5
 from  base64 import b64encode
 
 from terrariumDatabase import NotificationMessage, NotificationService
 from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
 
 # Display support
-#from terrariumDisplay import terrariumDisplay, terrariumDisplaySourceException
+from hardware.display import terrariumDisplay
 
 # Traffic light Support
 import RPi.GPIO as GPIO
@@ -41,6 +41,8 @@ class terrariumNotification(terrariumSingleton):
     'authentication_error' : _('Authentication login error'),
     'system_warning'       : _('System warning'),
     'system_error'         : _('System error'),
+
+    'system_summary'         : _('System summary'),
 
     'sensor_update'        : _('Sensor update'),
     'sensor_alarm'         : _('Sensor alarm'),
@@ -105,6 +107,11 @@ class terrariumNotification(terrariumSingleton):
           setup['profile_image'] = self.profile_image
           self.services[service['id']] = terrariumNotificationService(service['id'], service['type'], service['name'], service['enabled'], setup)
 
+  def broadcast(self, subject, message, image):
+    for _, service in self.services.items():
+      if service.enabled:
+        service.send_message('system_broadcast', subject, message, None, [image])
+
   @property
   def version(self):
     return None if self.engine is None else self.engine.version
@@ -113,7 +120,7 @@ class terrariumNotification(terrariumSingleton):
   def profile_image(self):
     return None if self.engine is None else self.engine.settings['profile_image']
 
-  def message(self, message_id, data = None, files = []):
+  def message(self, message_id, data = {}, files = []):
     if message_id not in self.__MESSAGES:
       return
 
@@ -132,6 +139,9 @@ class terrariumNotification(terrariumSingleton):
         return
 
       # Translate message variables
+      data['date'] = datetime.datetime.now().strftime('%x')
+      data['time'] = datetime.datetime.now().strftime('%X')
+      data['now'] = data['date'] + ' ' + data['time']
       title = Template(message.title).safe_substitute(**data)
       text  = Template(message.message).safe_substitute(**data)
 
@@ -141,7 +151,7 @@ class terrariumNotification(terrariumSingleton):
 
       for service in message.services:
         if not service.enabled:
-          logger.info(f'Service {self} is (temporary) disabled.')
+          logger.debug(f'Service {self} is (temporary) disabled.')
           continue
 
         if service.rate_limit > 0 and self.__rate_limit(service.type, service.rate_limit):
@@ -244,377 +254,24 @@ class terrariumNotificationService(object):
   def stop(self):
     pass
 
-class terrariumScreen(object):
-  TYPE = None
-
-  def __init__(self, display_id, address, name, title = False):
-    self.display_id = display_id
-    self.resolution = [0,0]
-    self.font_size = 1
-    self.animating = False
-
-    self.set_name(name)
-    self.set_title(title)
-    self.set_address(address)
-
-    self.loading()
-
-  def get_type(self):
-    return self.TYPE
-
-  def get_id(self):
-    if self.display_id in [None,'None','']:
-      self.display_id = md5((self.get_type() + self.get_address()).encode('utf-8')).hexdigest()
-
-    return self.display_id
-
-  def set_name(self,value):
-    self.name = None
-    if value is not None and '' != value:
-      self.name = value
-
-  def get_name(self):
-    return self.name
-
-  def set_address(self,address):
-    self.address = None
-    self.bus = None
-    if address is not None and '' != address:
-      address = address.split(',')
-      self.address = address[0]
-      self.bus = 1 if len(address) == 1 else address[1]
-
-  def get_address(self):
-    data = self.address
-    if self.bus is not None:
-      data = data + ',' + str(self.bus)
-    return data
-
-  def set_title(self,value):
-    self.title = terrariumUtils.is_true(value)
-
-  def get_title(self):
-    return terrariumUtils.is_true(self.title)
-
-  def get_config(self):
-    data = {'id'          : self.get_id(),
-            'address'     : self.get_address(),
-            'name'        : self.get_name(),
-            'title'       : self.get_title(),
-            'hardwaretype': self.get_type(),
-            'supported'   : terrariumDisplay.valid_hardware_types()}
-
-    return data
-
-  def loading(self):
-    self.message('Starting TerrariumPI')
-
-  def clear(self):
-    pass
-
-  def write_image(self,imagefile):
-    pass
-
-  def get_max_chars(self):
-    return int(math.floor(float(self.resolution[0]) / float(self.font_size)))
-
-  def get_max_lines(self):
-    return int(math.floor(float(self.resolution[1]) / float(self.font_size)))
-
-  def get_resolution(self):
-    return 'x'.join(self.resolution)
-
-  def format_message(self,text):
-    lines = []
-    try:
-      text = text.decode('utf-8')
-    except Exception as ex:
-      pass
-
-    for line in text.split("\n"):
-      if '' == line.strip():
-        continue
-
-      for wrapline in textwrap.wrap(line.strip(),self.get_max_chars()):
-        if '' == wrapline.strip():
-          continue
-
-        lines.append(wrapline.strip())
-
-    return lines
-
-  def message(self,text):
-    if self.get_max_chars() == 0:
-      return
-
-    text_lines = []
-    if self.get_title():
-      # Set 'now' timestamp as title
-      text_lines = [datetime.datetime.now().strftime('%c')]
-
-    text_lines += self.format_message(text)
-    _thread.start_new_thread(self.display_message, (text_lines,))
-
-class terrariumLCD(terrariumScreen):
-
-  def set_address(self,address):
-    super(terrariumLCD,self).set_address(address)
-    try:
-      self.device = lcd(int('0x' + str(self.address),16),int(self.bus))
-    except OSError as ex:
-      print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
-      self.device = None
-    except IOError as ex:
-      print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
-      self.device = None
-
-  def display_message(self,text_lines):
-    if self.device is None or self.animating:
-      return
-
-    self.animating = True
-
-    if self.get_title():
-      title = text_lines.pop(0).ljust(self.resolution[0])
-
-    if len(text_lines) < self.get_max_lines():
-      text_lines += [''] * (self.get_max_lines() - (1 if self.get_title() else 0) - len(text_lines))
-
-    while len(text_lines) >= self.get_max_lines()- (1 if self.get_title() else 0):
-      if self.get_title():
-        self.device.lcd_display_string(title,1)
-
-      linenr = 0
-      while linenr < len(text_lines) and linenr < self.get_max_lines()- (1 if self.get_title() else 0):
-        self.device.lcd_display_string(text_lines[linenr].ljust(self.resolution[0]),linenr + (2 if self.get_title() else 1))
-        linenr += 1
-
-      text_lines.pop(0)
-      sleep(0.5)
-
-    self.animating = False
-
-class terrariumLCD16x2(terrariumLCD):
-  TYPE = 'LCD16x2'
-
-  def set_address(self,address):
-    super(terrariumLCD16x2,self).set_address(address)
-    self.resolution = [16,2]
-
-class terrariumLCD20x4(terrariumLCD):
-  TYPE = 'LCD20x4'
-
-  def set_address(self,address):
-    super(terrariumLCD20x4,self).set_address(address)
-    self.resolution = [20,4]
-
-class terrariumLCDSerial(terrariumScreen):
-
-  def set_address(self,address):
-    super(terrariumLCDSerial,self).set_address(address)
-    if self.bus == 1:
-      self.bus = 9600
-
-    try:
-      self.device = serial.Serial(self.address, int(self.bus))
-    except serial.serialutil.SerialException as ex:
-      print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
-      self.device = None
-
-  #def clear(self):
-  #  if self.device is None:
-  #    return
-
-  #  self.device.write(str.encode('00clr'))
-  #  sleep(1)
-
-  def display_message(self,text_lines):
-    if self.device is None or self.animating:
-      return
-
-    self.animating = True
-
-    if self.get_title():
-      title = text_lines.pop(0).ljust(self.resolution[0])
-
-    if len(text_lines) < self.get_max_lines():
-      text_lines += [''] * (self.get_max_lines() - (1 if self.get_title() else 0) - len(text_lines))
-
-    while len(text_lines) >= self.get_max_lines()- (1 if self.get_title() else 0):
-      if self.get_title():
-        self.device.write(str.encode('00' + str(title)))
-        sleep(1)
-
-      linenr = 0
-      while linenr < len(text_lines) and linenr < self.get_max_lines()- (1 if self.get_title() else 0):
-        self.device.write(str.encode('0' + str(linenr + (1 if self.get_title() else 0)) + str(text_lines[linenr].ljust(self.resolution[0]))))
-        sleep(1)
-        linenr += 1
-
-      text_lines.pop(0)
-
-    self.animating = False
-
-class terrariumLCDSerial16x2(terrariumLCDSerial):
-  TYPE = 'LCDSerial16x2'
-
-  def set_address(self,address):
-    super(terrariumLCDSerial16x2,self).set_address(address)
-    self.resolution = [16,2]
-
-class terrariumLCDSerial20x4(terrariumLCDSerial):
-  TYPE = 'LCDSerial20x4'
-
-  def set_address(self,address):
-    super(terrariumLCDSerial20x4,self).set_address(address)
-    self.resolution = [20,4]
-
-class terrariumOLED(terrariumScreen):
-  def set_address(self,address):
-    super(terrariumOLED,self).set_address(address)
-    try:
-      address = i2c(port=int(self.bus), address=int('0x' + str(self.address),16))
-
-      if self.get_type() == terrariumOLEDSSD1306.TYPE:
-        self.device = ssd1306(address)
-      elif self.get_type() == terrariumOLEDSSD1309.TYPE:
-        self.device = ssd1309(address)
-      elif self.get_type() == terrariumOLEDSSD1322.TYPE:
-        self.device = ssd1322(address)
-      elif self.get_type() == terrariumOLEDSSD1325.TYPE:
-        self.device = ssd1325(address)
-      elif self.get_type() == terrariumOLEDSSD1327.TYPE:
-        self.device = ssd1327(address)
-      elif self.get_type() == terrariumOLEDSSD1331.TYPE:
-        self.device = ssd1331(address)
-      elif self.get_type() == terrariumOLEDSSD1351.TYPE:
-        self.device = ssd1351(address)
-      elif self.get_type() == terrariumOLEDSH1106.TYPE:
-        self.device = sh1106(address)
-
-    except DeviceNotFoundError as ex:
-      print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
-      self.device = None
-
-    self.init()
-
-  def loading(self):
-    self.write_image('static/images/profile_image.jpg')
-
-  def get_max_chars(self):
-    return int(math.floor(float(self.resolution[0]) / (self.font_size/2.0)))
-
-  def init(self):
-    if self.device is None:
-      return
-
-    self.font_size = 10
-    self.font = ImageFont.truetype('fonts/DejaVuSans.ttf', self.font_size)
-    try:
-      self.resolution = [self.device.width,self.device.height]
-      self.device.clear()
-      self.device.show()
-    except Exception as ex:
-      print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
-
-  def display_message(self,text_lines):
-    if self.device is None or self.animating:
-      return
-
-    self.animating = True
-
-    if self.get_title():
-      title = text_lines.pop(0)
-
-    while len(text_lines) >= self.get_max_lines() - (1 if self.get_title() else 0):
-      with canvas(self.device) as draw:
-        draw.rectangle(self.device.bounding_box, outline='white', fill='black')
-
-        if self.get_title():
-          draw.rectangle((0,0,self.resolution[0],self.font_size), fill='white')
-          draw.text((1,0), title, font=self.font, fill='black')
-          #print(title)
-
-        linenr = 0
-        while linenr < len(text_lines) and linenr < self.get_max_lines()- (1 if self.get_title() else 0):
-          draw.text((1, (linenr + (1 if self.get_title() else 0)) * self.font_size), text_lines[linenr], font=self.font, fill='white')
-          #print(text_lines[linenr])
-          linenr += 1
-
-      #print('')
-      text_lines.pop(0)
-      sleep(0.75)
-
-    self.animating = False
-
-  def write_image(self,imagefile):
-    if self.device is None:
-      return
-
-    image = Image.open(imagefile)
-    scale = max(float(self.resolution[0]) / float(image.size[0]),float(self.resolution[1]) / float(image.size[1]))
-    image = image.resize((int(scale * float(image.size[0])),int(scale * float(image.size[1]))),Image.ANTIALIAS)
-
-    top_x = int((image.size[0] - int(self.resolution[0])) / 2)
-    top_y = int((image.size[1] - int(self.resolution[1])) / 2)
-    image = image.crop((top_x,top_y,top_x + int(self.resolution[0]),top_y + int(self.resolution[1])))
-
-    self.device.display(image.convert(self.device.mode))
-
-class terrariumOLEDSSD1306(terrariumOLED):
-  TYPE = 'SSD1306'
-
-class terrariumOLEDSSD1309(terrariumOLED):
-  TYPE = 'SSD1309'
-
-class terrariumOLEDSSD1322(terrariumOLED):
-  TYPE = 'SSD1322'
-
-class terrariumOLEDSSD1325(terrariumOLED):
-  TYPE = 'SSD1325'
-
-class terrariumOLEDSSD1327(terrariumOLED):
-  TYPE = 'SSD1327'
-
-class terrariumOLEDSSD1331(terrariumOLED):
-  TYPE = 'SSD1331'
-
-class terrariumOLEDSSD1351(terrariumOLED):
-  TYPE = 'SSD1351'
-
-class terrariumOLEDSH1106(terrariumOLED):
-  TYPE = 'SH1106'
 
 class terrariumNotificationServiceDisplay(terrariumNotificationService):
 
-
   def load_setup(self, setup_data):
-
-
-    # print('Load Oled Display data')
-    # print(setup_data)
-
-
-    self.setup = {
-      'address'  : setup_data.get('address'),
-      'port'     : int(setup_data.get('port',25)),
-      'receiver' : setup_data.get('receiver','').split(','),
-      'username' : setup_data.get('username'),
-      'password' : setup_data.get('password'),
-    }
     super().load_setup(setup_data)
 
+    # Now load the actual display device
+    self.setup['device'] = terrariumDisplay(None, setup_data['hardware'], setup_data['address'], None if not setup_data['show_title'] else f'TerrariumPI {self.setup["version"]}')
+    self.show_picture(self.setup['profile_image'])
+
   def send_message(self, type, subject, message, data = None, attachments = []):
-    #print(f'Send {type} type message to display')
-    # print(subject)
-    # print(message)
-    # print(attachments)
-
-    pass
-
+    self.setup['device'].message(message)
 
   def show_picture(self, picture):
-    pass
+    self.setup['device'].write_image(picture)
+
+  def stop(self):
+    self.setup['device'].stop()
 
 class terrariumNotificationServiceEmail(terrariumNotificationService):
   def load_setup(self, setup_data):
@@ -794,7 +451,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
       logger.exception(f'Failed connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}: {ex}')
 
   def stop(self):
-    # TODO: Flush the queueu
+    # TODO: Flush the queue
 
     if self.connection is not None:
       try:
@@ -861,3 +518,349 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
 
     if r.status_code != 200:
       logger.error(f'Error sending Pusover message \'{subject}\' with status code: {r.status_code}')
+
+
+
+
+
+# class terrariumScreen(object):
+#   TYPE = None
+
+#   def __init__(self, display_id, address, name, title = False):
+#     self.display_id = display_id
+#     self.resolution = [0,0]
+#     self.font_size = 1
+#     self.animating = False
+
+#     self.set_name(name)
+#     self.set_title(title)
+#     self.set_address(address)
+
+#     self.loading()
+
+#   def get_type(self):
+#     return self.TYPE
+
+#   def get_id(self):
+#     if self.display_id in [None,'None','']:
+#       self.display_id = md5((self.get_type() + self.get_address()).encode('utf-8')).hexdigest()
+
+#     return self.display_id
+
+#   def set_name(self,value):
+#     self.name = None
+#     if value is not None and '' != value:
+#       self.name = value
+
+#   def get_name(self):
+#     return self.name
+
+#   def set_address(self,address):
+#     self.address = None
+#     self.bus = None
+#     if address is not None and '' != address:
+#       address = address.split(',')
+#       self.address = address[0]
+#       self.bus = 1 if len(address) == 1 else address[1]
+
+#   def get_address(self):
+#     data = self.address
+#     if self.bus is not None:
+#       data = data + ',' + str(self.bus)
+#     return data
+
+#   def set_title(self,value):
+#     self.title = terrariumUtils.is_true(value)
+
+#   def get_title(self):
+#     return terrariumUtils.is_true(self.title)
+
+#   def get_config(self):
+#     data = {'id'          : self.get_id(),
+#             'address'     : self.get_address(),
+#             'name'        : self.get_name(),
+#             'title'       : self.get_title(),
+#             'hardwaretype': self.get_type(),
+#             'supported'   : terrariumDisplay.valid_hardware_types()}
+
+#     return data
+
+#   def loading(self):
+#     self.message('Starting TerrariumPI')
+
+#   def clear(self):
+#     pass
+
+#   def write_image(self,imagefile):
+#     pass
+
+#   def get_max_chars(self):
+#     return int(math.floor(float(self.resolution[0]) / float(self.font_size)))
+
+#   def get_max_lines(self):
+#     return int(math.floor(float(self.resolution[1]) / float(self.font_size)))
+
+#   def get_resolution(self):
+#     return 'x'.join(self.resolution)
+
+#   def format_message(self,text):
+#     lines = []
+#     try:
+#       text = text.decode('utf-8')
+#     except Exception as ex:
+#       pass
+
+#     for line in text.split("\n"):
+#       if '' == line.strip():
+#         continue
+
+#       for wrapline in textwrap.wrap(line.strip(),self.get_max_chars()):
+#         if '' == wrapline.strip():
+#           continue
+
+#         lines.append(wrapline.strip())
+
+#     return lines
+
+#   def message(self,text):
+#     if self.get_max_chars() == 0:
+#       return
+
+#     text_lines = []
+#     if self.get_title():
+#       # Set 'now' timestamp as title
+#       text_lines = [datetime.datetime.now().strftime('%c')]
+
+#     text_lines += self.format_message(text)
+#     _thread.start_new_thread(self.display_message, (text_lines,))
+
+# class terrariumLCD(terrariumScreen):
+
+#   def set_address(self,address):
+#     super(terrariumLCD,self).set_address(address)
+#     try:
+#       self.device = lcd(int('0x' + str(self.address),16),int(self.bus))
+#     except OSError as ex:
+#       print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
+#       self.device = None
+#     except IOError as ex:
+#       print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
+#       self.device = None
+
+#   def display_message(self,text_lines):
+#     if self.device is None or self.animating:
+#       return
+
+#     self.animating = True
+
+#     if self.get_title():
+#       title = text_lines.pop(0).ljust(self.resolution[0])
+
+#     if len(text_lines) < self.get_max_lines():
+#       text_lines += [''] * (self.get_max_lines() - (1 if self.get_title() else 0) - len(text_lines))
+
+#     while len(text_lines) >= self.get_max_lines()- (1 if self.get_title() else 0):
+#       if self.get_title():
+#         self.device.lcd_display_string(title,1)
+
+#       linenr = 0
+#       while linenr < len(text_lines) and linenr < self.get_max_lines()- (1 if self.get_title() else 0):
+#         self.device.lcd_display_string(text_lines[linenr].ljust(self.resolution[0]),linenr + (2 if self.get_title() else 1))
+#         linenr += 1
+
+#       text_lines.pop(0)
+#       sleep(0.5)
+
+#     self.animating = False
+
+# class terrariumLCD16x2(terrariumLCD):
+#   TYPE = 'LCD16x2'
+
+#   def set_address(self,address):
+#     super(terrariumLCD16x2,self).set_address(address)
+#     self.resolution = [16,2]
+
+# class terrariumLCD20x4(terrariumLCD):
+#   TYPE = 'LCD20x4'
+
+#   def set_address(self,address):
+#     super(terrariumLCD20x4,self).set_address(address)
+#     self.resolution = [20,4]
+
+# class terrariumLCDSerial(terrariumScreen):
+
+#   def set_address(self,address):
+#     super(terrariumLCDSerial,self).set_address(address)
+#     if self.bus == 1:
+#       self.bus = 9600
+
+#     try:
+#       self.device = serial.Serial(self.address, int(self.bus))
+#     except serial.serialutil.SerialException as ex:
+#       print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
+#       self.device = None
+
+#   #def clear(self):
+#   #  if self.device is None:
+#   #    return
+
+#   #  self.device.write(str.encode('00clr'))
+#   #  sleep(1)
+
+#   def display_message(self,text_lines):
+#     if self.device is None or self.animating:
+#       return
+
+#     self.animating = True
+
+#     if self.get_title():
+#       title = text_lines.pop(0).ljust(self.resolution[0])
+
+#     if len(text_lines) < self.get_max_lines():
+#       text_lines += [''] * (self.get_max_lines() - (1 if self.get_title() else 0) - len(text_lines))
+
+#     while len(text_lines) >= self.get_max_lines()- (1 if self.get_title() else 0):
+#       if self.get_title():
+#         self.device.write(str.encode('00' + str(title)))
+#         sleep(1)
+
+#       linenr = 0
+#       while linenr < len(text_lines) and linenr < self.get_max_lines()- (1 if self.get_title() else 0):
+#         self.device.write(str.encode('0' + str(linenr + (1 if self.get_title() else 0)) + str(text_lines[linenr].ljust(self.resolution[0]))))
+#         sleep(1)
+#         linenr += 1
+
+#       text_lines.pop(0)
+
+#     self.animating = False
+
+# class terrariumLCDSerial16x2(terrariumLCDSerial):
+#   TYPE = 'LCDSerial16x2'
+
+#   def set_address(self,address):
+#     super(terrariumLCDSerial16x2,self).set_address(address)
+#     self.resolution = [16,2]
+
+# class terrariumLCDSerial20x4(terrariumLCDSerial):
+#   TYPE = 'LCDSerial20x4'
+
+#   def set_address(self,address):
+#     super(terrariumLCDSerial20x4,self).set_address(address)
+#     self.resolution = [20,4]
+
+# class terrariumOLED(terrariumScreen):
+#   def set_address(self,address):
+#     super(terrariumOLED,self).set_address(address)
+#     try:
+#       address = i2c(port=int(self.bus), address=int('0x' + str(self.address),16))
+
+#       if self.get_type() == terrariumOLEDSSD1306.TYPE:
+#         self.device = ssd1306(address)
+#       elif self.get_type() == terrariumOLEDSSD1309.TYPE:
+#         self.device = ssd1309(address)
+#       elif self.get_type() == terrariumOLEDSSD1322.TYPE:
+#         self.device = ssd1322(address)
+#       elif self.get_type() == terrariumOLEDSSD1325.TYPE:
+#         self.device = ssd1325(address)
+#       elif self.get_type() == terrariumOLEDSSD1327.TYPE:
+#         self.device = ssd1327(address)
+#       elif self.get_type() == terrariumOLEDSSD1331.TYPE:
+#         self.device = ssd1331(address)
+#       elif self.get_type() == terrariumOLEDSSD1351.TYPE:
+#         self.device = ssd1351(address)
+#       elif self.get_type() == terrariumOLEDSH1106.TYPE:
+#         self.device = sh1106(address)
+
+#     except DeviceNotFoundError as ex:
+#       print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
+#       self.device = None
+
+#     self.init()
+
+#   def loading(self):
+#     self.write_image('static/images/profile_image.jpg')
+
+#   def get_max_chars(self):
+#     return int(math.floor(float(self.resolution[0]) / (self.font_size/2.0)))
+
+#   def init(self):
+#     if self.device is None:
+#       return
+
+#     self.font_size = 10
+#     self.font = ImageFont.truetype('fonts/DejaVuSans.ttf', self.font_size)
+#     try:
+#       self.resolution = [self.device.width,self.device.height]
+#       self.device.clear()
+#       self.device.show()
+#     except Exception as ex:
+#       print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
+
+#   def display_message(self,text_lines):
+#     if self.device is None or self.animating:
+#       return
+
+#     self.animating = True
+
+#     if self.get_title():
+#       title = text_lines.pop(0)
+
+#     while len(text_lines) >= self.get_max_lines() - (1 if self.get_title() else 0):
+#       with canvas(self.device) as draw:
+#         draw.rectangle(self.device.bounding_box, outline='white', fill='black')
+
+#         if self.get_title():
+#           draw.rectangle((0,0,self.resolution[0],self.font_size), fill='white')
+#           draw.text((1,0), title, font=self.font, fill='black')
+#           #print(title)
+
+#         linenr = 0
+#         while linenr < len(text_lines) and linenr < self.get_max_lines()- (1 if self.get_title() else 0):
+#           draw.text((1, (linenr + (1 if self.get_title() else 0)) * self.font_size), text_lines[linenr], font=self.font, fill='white')
+#           #print(text_lines[linenr])
+#           linenr += 1
+
+#       #print('')
+#       text_lines.pop(0)
+#       sleep(0.75)
+
+#     self.animating = False
+
+#   def write_image(self,imagefile):
+#     if self.device is None:
+#       return
+
+#     image = Image.open(imagefile)
+#     scale = max(float(self.resolution[0]) / float(image.size[0]),float(self.resolution[1]) / float(image.size[1]))
+#     image = image.resize((int(scale * float(image.size[0])),int(scale * float(image.size[1]))),Image.ANTIALIAS)
+
+#     top_x = int((image.size[0] - int(self.resolution[0])) / 2)
+#     top_y = int((image.size[1] - int(self.resolution[1])) / 2)
+#     image = image.crop((top_x,top_y,top_x + int(self.resolution[0]),top_y + int(self.resolution[1])))
+
+#     self.device.display(image.convert(self.device.mode))
+
+# class terrariumOLEDSSD1306(terrariumOLED):
+#   TYPE = 'SSD1306'
+
+# class terrariumOLEDSSD1309(terrariumOLED):
+#   TYPE = 'SSD1309'
+
+# class terrariumOLEDSSD1322(terrariumOLED):
+#   TYPE = 'SSD1322'
+
+# class terrariumOLEDSSD1325(terrariumOLED):
+#   TYPE = 'SSD1325'
+
+# class terrariumOLEDSSD1327(terrariumOLED):
+#   TYPE = 'SSD1327'
+
+# class terrariumOLEDSSD1331(terrariumOLED):
+#   TYPE = 'SSD1331'
+
+# class terrariumOLEDSSD1351(terrariumOLED):
+#   TYPE = 'SSD1351'
+
+# class terrariumOLEDSH1106(terrariumOLED):
+#   TYPE = 'SH1106'
+
