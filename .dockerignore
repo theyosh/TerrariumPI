@@ -17,3 +17,4 @@ media/*
 *.js.map
 **/*.js.map
 install.sh
+Makefile
