@@ -1,5 +1,5 @@
-IMAGE=theyosh/terrariumpi
-VERSION=4.1.0
+IMAGE ?= theyosh/terrariumpi
+VERSION ?= 4.1.0
 
 .PHONY: all build run logs
 
