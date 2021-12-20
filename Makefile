@@ -1,4 +1,4 @@
-IMAGE=cnelson/terrariumpi
+IMAGE=theyosh/terrariumpi
 VERSION=4.1.0
 
 .PHONY: all build run logs
@@ -6,7 +6,7 @@ VERSION=4.1.0
 all: build
 
 build:
-	sudo docker buildx build \
+	docker buildx build \
 		--progress=plain \
 		--platform linux/arm/v7 \
 		-t $(IMAGE):$(VERSION) \
@@ -14,7 +14,7 @@ build:
 		.
 
 run: build
-	cd /media/external/runtime; sudo docker-compose down; sudo docker-compose up -d
+	docker-compose down; docker-compose up -d
 
 logs:
-	cd /media/external/runtime; sudo docker-compose logs -f
+	docker-compose logs -f

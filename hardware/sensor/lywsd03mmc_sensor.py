@@ -5,7 +5,6 @@ from . import terrariumBluetoothSensor
 
 # pip install lywsd03mmc
 from lywsd03mmc import Lywsd03mmcClient
-from bluepy.btle import BTLEDisconnectError, BTLEInternalError, BTLEGattError, BTLEException
 
 class terrariumLywsd03mmcSensor(terrariumBluetoothSensor):
   HARDWARE = 'LYWSD03MMC'
