@@ -12,7 +12,6 @@ class terrariumLywsd03mmcSensor(terrariumBluetoothSensor):
   NAME     = 'LYWSD03MMC bluetooth sensor'
 
   _UPDATE_TIME_OUT = 30 # This has to be >~25 to reliably get data.
-  #_CACHE_TIMEOUT = 60 # Set this higher to avoid errors.
 
   def _load_hardware(self):
     address = self._address
