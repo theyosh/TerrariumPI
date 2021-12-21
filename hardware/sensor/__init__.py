@@ -465,7 +465,6 @@ class terrariumBluetoothSensor(terrariumSensor):
         break
 
       except Exception as ex:
-        logger.exception(ex)
         ok = False
 
     if not ok:
