@@ -464,8 +464,12 @@ class terrariumWebcam(object):
       self._device['state'] = True
       self.__raw_image = Image.open(image)
       if not self.live:
-        self.__rotate()
-        self.__tile_image()
+        try:
+          self.__rotate()
+          self.__tile_image()
+        except Exception as ex:
+          logger.error(f'Could not process webcam image: {ex}')
+          return
 
       self.__raw_image.save(self.raw_image_path,'jpeg', quality=self.__JPEG_QUALITY, exif=self.__exit_data)
       self._device['last_update'] = datetime.now()
