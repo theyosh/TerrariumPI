@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2021-12-15 23:10+CET\n"
+"POT-Creation-Date: 2021-12-22 21:26+CET\n"
 "PO-Revision-Date: 2021-11-26 14:34+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
@@ -138,87 +138,151 @@ msgstr "Wassermenge"
 msgid "wattage"
 msgstr "Wattleistung"
 
-#: terrariumEngine.py:1074 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1088 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Betriebszeit"
 
-#: terrariumEngine.py:1080
+#: terrariumEngine.py:1094
 msgid "System load"
 msgstr "Systemauslastung"
 
-#: terrariumEngine.py:1086 views/status.html:44
+#: terrariumEngine.py:1100 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU Temperatur"
 
-#: terrariumEngine.py:1092
+#: terrariumEngine.py:1106
 msgid "Storage"
 msgstr "Speicher"
 
-#: terrariumEngine.py:1098
+#: terrariumEngine.py:1112
 msgid "Memory"
 msgstr "RAM"
 
-#: terrariumEngine.py:1115
+#: terrariumEngine.py:1133
 msgid "average {sensor_type}"
 msgstr "Durchschnitt {sensor_type}"
 
-#: terrariumEngine.py:1286
+#: terrariumEngine.py:1309
 msgid "last update"
 msgstr "letztes Update"
 
-#: terrariumNotification.py:41
+#: terrariumNotification.py:37
+#, fuzzy
+#| msgid "Locale"
+msgid "Local date"
+msgstr "Sprache"
+
+#: terrariumNotification.py:38
+#, fuzzy
+#| msgid "Locale"
+msgid "Local time"
+msgstr "Sprache"
+
+#: terrariumNotification.py:39
+#, fuzzy
+#| msgid "Enter end time"
+msgid "Local date and time"
+msgstr "Geben Sie eine Endzeit ein"
+
+#: terrariumNotification.py:47
 msgid "Authentication login error"
 msgstr "Login error"
 
-#: terrariumNotification.py:42
+#: terrariumNotification.py:49
+msgid "IP of the wrong login attempt"
+msgstr ""
+
+#: terrariumNotification.py:50
+#, fuzzy
+#| msgid "Username"
+msgid "Used username"
+msgstr "Benutzername"
+
+#: terrariumNotification.py:51
+#, fuzzy
+#| msgid "New password"
+msgid "Used password"
+msgstr "Neues Passwort"
+
+#: terrariumNotification.py:57
 msgid "System warning"
 msgstr "Systemwarnung"
 
-#: terrariumNotification.py:43
+#: terrariumNotification.py:59
+#, fuzzy
+#| msgid "Warning messages"
+msgid "Warning message"
+msgstr "Warnmeldungen"
+
+#: terrariumNotification.py:65
 msgid "System error"
 msgstr "Systemfehler"
 
-#: terrariumNotification.py:45
+#: terrariumNotification.py:67
+#, fuzzy
+#| msgid "Error messages"
+msgid "Error message"
+msgstr "Fehlermeldungen"
+
+#: terrariumNotification.py:73
+#, fuzzy
+#| msgid "System warning"
+msgid "System summary"
+msgstr "Systemwarnung"
+
+#: terrariumNotification.py:80
 msgid "Sensor update"
 msgstr "Sensorupdate"
 
-#: terrariumNotification.py:46
+#: terrariumNotification.py:87
+#, fuzzy
+#| msgid "Save changes"
+msgid "Sensor change"
+msgstr "Änderungen speichern"
+
+#: terrariumNotification.py:94
 msgid "Sensor alarm"
 msgstr "Sensoralarm"
 
-#: terrariumNotification.py:48
+#: terrariumNotification.py:102
 msgid "Relay change"
 msgstr "Relaisänderung"
 
-#: terrariumNotification.py:50
+#: terrariumNotification.py:109
+#, fuzzy
+#| msgid "Relay change"
+msgid "Relay toggle"
+msgstr "Relaisänderung"
+
+#: terrariumNotification.py:116
 msgid "Button change"
 msgstr "Tastenänderung"
 
-#: terrariumNotification.py:52
+#: terrariumNotification.py:123
 msgid "Webcam archive"
 msgstr "Webcam-Archiv"
 
-#: terrariumNotification.py:175
+#: terrariumNotification.py:267
 msgid "Display"
 msgstr "Anzeige"
 
-#: terrariumNotification.py:179
+#: terrariumNotification.py:271
 msgid "Email"
 msgstr "E-Mail"
 
-#: terrariumNotification.py:189
+#: terrariumNotification.py:281
 msgid "Traffic light"
 msgstr "Ampel"
 
-#: terrariumNotification.py:193
+#: terrariumNotification.py:285
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:197
+#: terrariumNotification.py:289
 msgid "MQTT"
 msgstr "MQTT"
 
-#: terrariumNotification.py:201
+#: terrariumNotification.py:293
 msgid "Pushover"
 msgstr "Pushover"
 
@@ -257,10 +321,10 @@ msgstr "Audiodateien"
 #: views/audio_files.html:24 views/audio_files.html:35
 #: views/enclosures.html:172 views/modals/area.html:47
 #: views/modals/button.html:45 views/modals/enclosure.html:18
-#: views/modals/event.html:15 views/modals/message.html:33
-#: views/modals/playlist.html:18 views/modals/relay.html:45
-#: views/modals/sensor.html:60 views/modals/service.html:27
-#: views/modals/webcam.html:49 views/playlists.html:24 views/playlists.html:39
+#: views/modals/event.html:15 views/modals/playlist.html:18
+#: views/modals/relay.html:45 views/modals/sensor.html:60
+#: views/modals/service.html:29 views/modals/webcam.html:49
+#: views/playlists.html:24 views/playlists.html:39
 msgid "Name"
 msgstr "Name"
 
@@ -306,7 +370,7 @@ msgstr "Taster hinzufügen"
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
 #: views/dashboard.html:120 views/dashboard.html:310 views/enclosures.html:14
 #: views/enclosures.html:149 views/log.html:8 views/notifications.html:20
-#: views/notifications.html:62 views/relays.html:14 views/relays.html:83
+#: views/notifications.html:56 views/relays.html:14 views/relays.html:83
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
 #: views/webcams.html:14 views/webcams.html:41
 msgid "Login to make changes"
@@ -440,7 +504,7 @@ msgid "Areas"
 msgstr "Bereich"
 
 #: views/enclosures.html:173 views/modals/area.html:32
-#: views/modals/sensor.html:33 views/modals/service.html:18
+#: views/modals/sensor.html:33 views/modals/service.html:17
 msgid "Type"
 msgstr "Typ"
 
@@ -667,7 +731,7 @@ msgstr "ERROR"
 #: views/modals/area.html:50 views/modals/button.html:48
 #: views/modals/enclosure.html:21 views/modals/event.html:18
 #: views/modals/playlist.html:21 views/modals/relay.html:48
-#: views/modals/sensor.html:63 views/modals/service.html:30
+#: views/modals/sensor.html:63 views/modals/service.html:32
 #: views/modals/webcam.html:52
 msgid "Enter a name."
 msgstr "Geben Sie einen Namen ein."
@@ -675,7 +739,7 @@ msgstr "Geben Sie einen Namen ein."
 #: views/modals/area.html:53 views/modals/button.html:51
 #: views/modals/enclosure.html:24 views/modals/event.html:21
 #: views/modals/playlist.html:24 views/modals/relay.html:51
-#: views/modals/sensor.html:66 views/modals/service.html:33
+#: views/modals/sensor.html:66 views/modals/service.html:35
 #: views/modals/webcam.html:55
 msgid "The name cannot be empty."
 msgstr "Der Name darf nicht leer sein."
@@ -1208,7 +1272,7 @@ msgid "Button settings"
 msgstr "Taster Einstellungen"
 
 #: views/modals/button.html:18 views/modals/relay.html:18
-#: views/modals/sensor.html:18 views/modals/service.html:61
+#: views/modals/sensor.html:18 views/modals/service.html:64
 #: views/modals/webcam.html:22
 msgid "Hardware"
 msgstr "Hardware"
@@ -1218,23 +1282,28 @@ msgid "Select the hardware type for this button."
 msgstr "Wählen Sie den Hardwaretyp für diesen Taster aus."
 
 #: views/modals/button.html:27 views/modals/relay.html:27
-#: views/modals/sensor.html:26 views/modals/webcam.html:30
+#: views/modals/sensor.html:26 views/modals/service.html:73
+#: views/modals/webcam.html:30
 msgid "Please select a hardware type."
 msgstr "Bitte wählen Sie einen Hardwaretyp aus."
 
 #: views/modals/button.html:33 views/modals/relay.html:33
-#: views/modals/sensor.html:48 views/modals/service.html:70
+#: views/modals/sensor.html:48 views/modals/service.html:79
 #: views/modals/webcam.html:37
 msgid "Address"
 msgstr "Adresse"
 
 #: views/modals/button.html:36 views/modals/relay.html:36
-#: views/modals/sensor.html:51 views/modals/webcam.html:40
+#: views/modals/sensor.html:51 views/modals/service.html:82
+#: views/modals/service.html:291 views/modals/webcam.html:40
 msgid "Enter an address."
 msgstr "Geben Sie eine Adresse ein."
 
 #: views/modals/button.html:39 views/modals/relay.html:39
-#: views/modals/sensor.html:54 views/modals/webcam.html:43
+#: views/modals/sensor.html:54 views/modals/service.html:85
+#: views/modals/service.html:111 views/modals/service.html:123
+#: views/modals/service.html:280 views/modals/service.html:294
+#: views/modals/webcam.html:43
 msgid "The address cannot be empty."
 msgstr "Adresse darf nicht leer sein."
 
@@ -1362,33 +1431,76 @@ msgstr "Benachrichtigungseinstellungen"
 msgid "Message type"
 msgstr "Nachrichtentyp"
 
-#: views/modals/message.html:27
+#: views/modals/message.html:24
+#, fuzzy
+#| msgid "Notification messages"
+msgid "Select the notification message type."
+msgstr "Benachrichtigungen"
+
+#: views/modals/message.html:30
 msgid "Subject"
 msgstr "Betreff"
 
-#: views/modals/message.html:39 views/modals/service.html:40
+#: views/modals/message.html:33
+msgid "Enter a short subject. You can use placeholder values here."
+msgstr ""
+
+#: views/modals/message.html:36
+#, fuzzy
+#| msgid "The name cannot be empty."
+msgid "The subject cannot be empty."
+msgstr "Der Name darf nicht leer sein."
+
+#: views/modals/message.html:42 views/modals/service.html:41
 msgid "Rate limit"
 msgstr "Rate limit"
 
-#: views/modals/message.html:46 views/modals/service.html:48
+#: views/modals/message.html:45
+msgid ""
+"Maximum number of messages per minute for this message. Use 0 for unlimited."
+msgstr ""
+
+#: views/modals/message.html:48
+#, fuzzy
+#| msgid "Enter a valid url."
+msgid "Enter a valid number."
+msgstr "Geben Sie eine gültige URL ein."
+
+#: views/modals/message.html:55 views/modals/service.html:51
 msgid "Enabled"
 msgstr "Aktiviert"
 
-#: views/modals/message.html:51
-msgid "Enable/disable this service."
+#: views/modals/message.html:60
+#, fuzzy
+#| msgid "Enable/disable this service."
+msgid "Enable/disable this notification message."
 msgstr "Aktivieren/deaktivieren Sie diesen Dienst."
 
-#: views/modals/message.html:59
+#: views/modals/message.html:70
 msgid "Message"
 msgstr "Nachricht"
 
-#: views/modals/message.html:65
+#: views/modals/message.html:73
+msgid "Enter a message. You can use placeholder values here."
+msgstr ""
+
+#: views/modals/message.html:81
+msgid "Services"
+msgstr "Services"
+
+#: views/modals/message.html:84
+#, fuzzy
+#| msgid "Select the hardware type for this button."
+msgid "Select the service to use for this notification message."
+msgstr "Wählen Sie den Hardwaretyp für diesen Taster aus."
+
+#: views/modals/message.html:92
 msgid "Place holders"
 msgstr "Platzhalter"
 
-#: views/modals/message.html:74
-msgid "Services"
-msgstr "Services"
+#: views/modals/message.html:95
+msgid "List of available placeholders."
+msgstr ""
 
 #: views/modals/playlist.html:12
 msgid "Playlist settings"
@@ -1581,108 +1693,207 @@ msgstr "Wählen Sie die Sensoren für die Kompensationsberechnung aus."
 msgid "Notification service settings"
 msgstr "Einstellungen für den Benachrichtigungsdienst"
 
-#: views/modals/service.html:77
+#: views/modals/service.html:23
+#, fuzzy
+#| msgid "Notification services"
+msgid "Select the notification service type."
+msgstr "Benachrichtigungsdienste"
+
+#: views/modals/service.html:44
+msgid ""
+"Maximum number of messages per minute for this service. Use 0 for unlimited."
+msgstr ""
+
+#: views/modals/service.html:55
+#, fuzzy
+#| msgid "Enable/disable this service."
+msgid "Enable/disable this notification service."
+msgstr "Aktivieren/deaktivieren Sie diesen Dienst."
+
+#: views/modals/service.html:70
+#, fuzzy
+#| msgid "Select the hardware type for this relay."
+msgid "Select the hardware type for this display."
+msgstr "Wählen Sie den Hardwaretyp für diesen Taster aus."
+
+#: views/modals/service.html:92
 msgid "Show title"
 msgstr "Titel anzeigen"
 
-#: views/modals/service.html:82
-msgid "Show a title on the display."
+#: views/modals/service.html:97
+#, fuzzy
+#| msgid "Show a title on the display."
+msgid "Show a name and version as title on the display."
 msgstr "Titel auf dem Display anzeigen."
 
-#: views/modals/service.html:92
+#: views/modals/service.html:105
 msgid "Receiver email"
 msgstr "Empfänger-E-Mail"
 
-#: views/modals/service.html:98
+#: views/modals/service.html:108
+#, fuzzy
+#| msgid "Enter an email address"
+msgid "Enter an email address."
+msgstr "Bitte geben Sie eine E-Mail-Adresse ein"
+
+#: views/modals/service.html:117
 msgid "SMTP Server address"
 msgstr "SMTP Server Adresse"
 
-#: views/modals/service.html:104
+#: views/modals/service.html:120
+#, fuzzy
+#| msgid "Enter an email address"
+msgid "Enter the mail server address."
+msgstr "Bitte geben Sie eine E-Mail-Adresse ein"
+
+#: views/modals/service.html:129
 msgid "SMTP Server port"
 msgstr "SMTP Server port"
 
-#: views/modals/service.html:108
+#: views/modals/service.html:132 views/modals/service.html:303
+#, fuzzy
+#| msgid "Enter number"
+msgid "Enter a port number."
+msgstr "Nummer eingeben"
+
+#: views/modals/service.html:135 views/modals/service.html:306
+#, fuzzy
+#| msgid "The name cannot be empty."
+msgid "The port number cannot be empty."
+msgstr "Der Name darf nicht leer sein."
+
+#: views/modals/service.html:141
+msgid "SMTP Server username"
+msgstr "SMTP Server Benutzername"
+
+#: views/modals/service.html:144 views/modals/service.html:315
+#, fuzzy
+#| msgid "Enter a name."
+msgid "Enter a username."
+msgstr "Geben Sie einen Namen ein."
+
+#: views/modals/service.html:150
+msgid "SMTP Server password"
+msgstr "SMTP Server Passwort"
+
+#: views/modals/service.html:153 views/modals/service.html:324
+#, fuzzy
+#| msgid "Enter an address."
+msgid "Enter a password."
+msgstr "Geben Sie eine Adresse ein."
+
+#: views/modals/service.html:158
 msgid "The email notification service will auto detect SSL/TLS connections."
 msgstr ""
 "Der E-Mail-Benachrichtigungsdienst erkennt automatisch SSL/TLS-Verbindungen."
 
-#: views/modals/service.html:113
-msgid "SMTP Server username"
-msgstr "SMTP Server Benutzername"
-
-#: views/modals/service.html:119
-msgid "SMTP Server password"
-msgstr "SMTP Server Passwort"
-
-#: views/modals/service.html:128
+#: views/modals/service.html:164
 msgid "API Token"
 msgstr "API-Token"
 
-#: views/modals/service.html:134
+#: views/modals/service.html:167
+#, fuzzy
+#| msgid "Enter the Pushover API token"
+msgid "Enter the API Token."
+msgstr "Geben Sie das Pushover-API-Token ein"
+
+#: views/modals/service.html:170
+#, fuzzy
+#| msgid "The title cannot be empty."
+msgid "The API token cannot be empty."
+msgstr "Der Titel darf nicht leer sein."
+
+#: views/modals/service.html:176
 msgid "User key"
 msgstr "Benutzerschlüssel"
 
-#: views/modals/service.html:147
+#: views/modals/service.html:179
+#, fuzzy
+#| msgid "Enter the Pushover user key"
+msgid "Enter the user key."
+msgstr "Geben Sie den Pushover-Benutzerschlüssel ein"
+
+#: views/modals/service.html:182
+#, fuzzy
+#| msgid "The user name cannot be empty."
+msgid "The user key cannot be empty."
+msgstr "Der Benutzername darf nicht leer sein."
+
+#: views/modals/service.html:195
 msgid "Bot Token"
 msgstr "Bot Token"
 
-#: views/modals/service.html:153
+#: views/modals/service.html:201
 msgid "Username"
 msgstr "Benutzername"
 
-#: views/modals/service.html:159
+#: views/modals/service.html:207
 msgid "HTTP Proxy"
 msgstr "HTTP Proxy"
 
-#: views/modals/service.html:170 views/modals/webcam.html:189
+#: views/modals/service.html:217 views/modals/webcam.html:189
 msgid "Red"
 msgstr "Rot"
 
-#: views/modals/service.html:177
-msgid "Yellow"
-msgstr "Gelb"
+#: views/modals/service.html:220
+msgid "Enter GPIO pin for red light."
+msgstr ""
 
-#: views/modals/service.html:184 views/modals/webcam.html:190
+#: views/modals/service.html:226
+msgid "Amber"
+msgstr ""
+
+#: views/modals/service.html:229
+msgid "Enter GPIO pin for amber light."
+msgstr ""
+
+#: views/modals/service.html:235 views/modals/webcam.html:190
 msgid "Green"
 msgstr "Grün"
 
-#: views/modals/service.html:196
+#: views/modals/service.html:238
+msgid "Enter GPIO pin for green light."
+msgstr ""
+
+#: views/modals/service.html:247
 msgid "Customer key"
 msgstr "Kundenschlüssel"
 
-#: views/modals/service.html:203
+#: views/modals/service.html:253
 msgid "Customer secret"
 msgstr "Kunden secret"
 
-#: views/modals/service.html:210
+#: views/modals/service.html:259
 msgid "Access token"
 msgstr "Zugriffstoken"
 
-#: views/modals/service.html:217
+#: views/modals/service.html:265
 msgid "Access token secret"
 msgstr "Zugriffstokenschlüssel"
 
-#: views/modals/service.html:228
+#: views/modals/service.html:274
 msgid "Full post url"
 msgstr "Vollständige Beitrags-URL"
 
-#: views/modals/service.html:241
+#: views/modals/service.html:277
+#, fuzzy
+#| msgid "Enter a full url"
+msgid "Enter the full post url."
+msgstr "Geben Sie eine vollständige URL ein"
+
+#: views/modals/service.html:288
 msgid "MQTT Server address"
 msgstr "MQTT Server Adresse"
 
-#: views/modals/service.html:248
+#: views/modals/service.html:300
 msgid "MQTT Server port"
 msgstr "MQTT Server port"
 
-#: views/modals/service.html:258
-msgid "MQTT secure connection"
-msgstr "MQTT TLS/SSL Verbindung"
-
-#: views/modals/service.html:267
+#: views/modals/service.html:312
 msgid "MQTT Server username"
 msgstr "MQTT Server Benutzername"
 
-#: views/modals/service.html:274
+#: views/modals/service.html:321
 msgid "MQTT Server password"
 msgstr "MQTT Server Passwort"
 
@@ -1953,11 +2164,11 @@ msgstr "Benachrichtigungsdienste"
 msgid "Add service"
 msgstr "Service hinzufügen"
 
-#: views/notifications.html:52
+#: views/notifications.html:46
 msgid "Notification messages"
 msgstr "Benachrichtigungen"
 
-#: views/notifications.html:60
+#: views/notifications.html:54
 msgid "Add message"
 msgstr "Nachricht hinzufügen"
 
@@ -2379,7 +2590,7 @@ msgstr "hinzugefügt"
 msgid "Add new area"
 msgstr "Neuer Bereich hinzufügen"
 
-#: views/notifications.html:60
+#: views/notifications.html:54
 msgid "Add new message"
 msgstr "Neue Nachricht hinzufügen"
 
@@ -2457,7 +2668,7 @@ msgstr "Gehäuse löschen"
 msgid "Delete event {title}"
 msgstr "Ereignis {title} löschen"
 
-#: views/notifications.html:143
+#: views/notifications.html:125
 msgid "Delete message"
 msgstr "Nachricht löschen"
 
@@ -2493,7 +2704,7 @@ msgstr "Taster bearbeiten"
 msgid "Edit enclosure"
 msgstr "Gehäuse bearbeiten"
 
-#: views/notifications.html:140
+#: views/notifications.html:122
 msgid "Edit message"
 msgstr "Nachricht bearbeiten"
 
@@ -2527,7 +2738,13 @@ msgstr ""
 "Geben Sie eine vollständige URL zu einer lokalen JSON-Datei oder einer "
 "Script Datei an."
 
-#: views/modals/message.html:60
+#: views/modals/service.html:227
+#, fuzzy
+#| msgid "Enter red GPIO pin"
+msgid "Enter amber GPIO pin"
+msgstr "Geben Sie den roten GPIO-Pin ein"
+
+#: views/modals/message.html:71
 msgid "Enter a message"
 msgstr "Nachricht eingeben"
 
@@ -2537,10 +2754,9 @@ msgid "Enter an address"
 msgstr "Geben Sie eine Adresse ein"
 
 #: views/modals/button.html:46 views/modals/enclosure.html:19
-#: views/modals/event.html:16 views/modals/message.html:34
-#: views/modals/playlist.html:19 views/modals/relay.html:46
-#: views/modals/sensor.html:61 views/modals/service.html:28
-#: views/modals/webcam.html:50
+#: views/modals/event.html:16 views/modals/playlist.html:19
+#: views/modals/relay.html:46 views/modals/sensor.html:61
+#: views/modals/service.html:30 views/modals/webcam.html:50
 msgid "Enter a name"
 msgstr "Geben Sie einen Namen ein"
 
@@ -2548,11 +2764,11 @@ msgstr "Geben Sie einen Namen ein"
 msgid "Enter a name for this area."
 msgstr "Geben Sie einen Namen für diesen Bereich ein."
 
-#: views/modals/service.html:93
+#: views/modals/service.html:106
 msgid "Enter an email address"
 msgstr "Bitte geben Sie eine E-Mail-Adresse ein"
 
-#: views/modals/message.html:28
+#: views/modals/message.html:31
 msgid "Enter a subject"
 msgstr "Betreff eingeben"
 
@@ -2568,7 +2784,7 @@ msgstr "Geben Sie eine Startzeit ein"
 msgid "Enter end time"
 msgstr "Geben Sie eine Endzeit ein"
 
-#: views/modals/service.html:185
+#: views/modals/service.html:236
 msgid "Enter green GPIO pin"
 msgstr "Geben Sie den grünen GPIO-Pin ein"
 
@@ -2580,7 +2796,7 @@ msgstr "Höhe eingeben"
 msgid "Enter number"
 msgstr "Nummer eingeben"
 
-#: views/modals/service.html:171
+#: views/modals/service.html:218
 msgid "Enter red GPIO pin"
 msgstr "Geben Sie den roten GPIO-Pin ein"
 
@@ -2588,7 +2804,7 @@ msgstr "Geben Sie den roten GPIO-Pin ein"
 msgid "Enter search terms"
 msgstr "Suchbegriffe eingeben"
 
-#: views/modals/service.html:71
+#: views/modals/service.html:80
 msgid "Enter the address"
 msgstr "Geben Sie eine Adresse ein"
 
@@ -2604,6 +2820,12 @@ msgstr "Geben Sie die Zeitverschiebung ein"
 msgid "Enter the capacitor value in &micro;F"
 msgstr "Geben Sie den Kondensatorwert in &micro;F ein"
 
+#: views/modals/service.html:275
+#, fuzzy
+#| msgid "Enter a full url"
+msgid "Enter the full post url"
+msgstr "Geben Sie eine vollständige URL ein"
+
 #: views/modals/area.html:467
 msgid "Enter the height"
 msgstr "Geben Sie die Höhe ein"
@@ -2616,11 +2838,11 @@ msgstr "Geben Sie die maximale Stundenanzahl ein"
 msgid "Enter the minimum amount of hours"
 msgstr "Geben Sie die Mindestanzahl von Stunden ein"
 
-#: views/modals/service.html:242 views/modals/service.html:260
+#: views/modals/service.html:289
 msgid "Enter the MQTT server address name or ip"
 msgstr "Geben Sie den MQTT-Servernamen oder die IP-Adresse ein"
 
-#: views/modals/service.html:249
+#: views/modals/service.html:301
 msgid "Enter the MQTT server port number"
 msgstr "Geben Sie die Portnummer des MQTT-Servers ein"
 
@@ -2628,41 +2850,33 @@ msgstr "Geben Sie die Portnummer des MQTT-Servers ein"
 msgid "Enter the offset"
 msgstr "Gebe die Offset-Nummer ein"
 
-#: views/modals/service.html:129
+#: views/modals/service.html:165
 msgid "Enter the Pushover API token"
 msgstr "Geben Sie das Pushover-API-Token ein"
 
-#: views/modals/service.html:135
+#: views/modals/service.html:177
 msgid "Enter the Pushover user key"
 msgstr "Geben Sie den Pushover-Benutzerschlüssel ein"
 
-#: views/modals/service.html:99
+#: views/modals/service.html:118
 msgid "Enter the SMTP server address name or ip"
 msgstr "Geben Sie den MQTT-Servernamen oder die IP-Adresse ein"
 
-#: views/modals/service.html:120 views/modals/service.html:154
-#: views/modals/service.html:160 views/modals/service.html:204
-#: views/modals/service.html:218 views/modals/service.html:275
+#: views/modals/service.html:151 views/modals/service.html:322
 msgid "Enter the SMTP server password"
 msgstr "Geben Sie das SMTP-Serverkennwort ein"
 
-#: views/modals/service.html:105
+#: views/modals/service.html:130
 msgid "Enter the SMTP server port number"
 msgstr "Portnummer des SMTP-Servers eingeben"
 
-#: views/modals/service.html:114 views/modals/service.html:148
-#: views/modals/service.html:197 views/modals/service.html:211
-#: views/modals/service.html:229 views/modals/service.html:268
+#: views/modals/service.html:142 views/modals/service.html:313
 msgid "Enter the SMTP server username"
 msgstr "Geben Sie den Benutzernamen des SMTP-Servers ein"
 
 #: views/modals/webcam.html:63
 msgid "Enter width"
 msgstr "Breite eingeben"
-
-#: views/modals/service.html:178
-msgid "Enter yellow GPIO pin"
-msgstr "Geben Sie den gelben GPIO-Pin ein"
 
 #: views/audio_files.html:143
 msgid "Error"
@@ -2721,7 +2935,7 @@ msgstr "Maximale Differenz"
 msgid "Max power in percentage"
 msgstr "Maximale Leistung in Prozent"
 
-#: views/modals/message.html:40 views/modals/service.html:41
+#: views/modals/message.html:43 views/modals/service.html:42
 msgid "Messages per minute"
 msgstr "Nachrichten pro Minute"
 
@@ -2876,7 +3090,7 @@ msgid "Select sensors"
 msgstr "Sensoren auswählen"
 
 #: views/modals/message.html:20 views/modals/sensor.html:35
-#: views/modals/service.html:20 views/modals/service.html:63
+#: views/modals/service.html:19 views/modals/service.html:66
 msgid "Select type"
 msgstr "Typ auswählen"
 
@@ -2900,7 +3114,7 @@ msgstr "Bewegungsboxen anzeigen"
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI abschalten"
 
-#: terrariumNotification.py:184
+#: terrariumNotification.py:276
 msgid "Telegram"
 msgstr "Telegram"
 
@@ -2964,8 +3178,11 @@ msgstr "Leistung in Watt wenn eingeschaltet"
 msgid "Weather data source url"
 msgstr "URL der Wetterdatenquelle"
 
-#~ msgid "Enter a valid url."
-#~ msgstr "Geben Sie eine gültige URL ein."
+#~ msgid "Yellow"
+#~ msgstr "Gelb"
 
-#~ msgid "Enter a full url"
-#~ msgstr "Geben Sie eine vollständige URL ein"
+#~ msgid "MQTT secure connection"
+#~ msgstr "MQTT TLS/SSL Verbindung"
+
+#~ msgid "Enter yellow GPIO pin"
+#~ msgstr "Geben Sie den gelben GPIO-Pin ein"
