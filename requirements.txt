@@ -1,7 +1,7 @@
 pip==21.3.1
 # Do not upgrade setup tools, as this will break building https://github.com/gbstack/ffprobe-python
 setuptools==58.5.3
-wheel==0.37.0
+wheel==0.37.1
 
 # Database
 pony==0.7.14
@@ -12,7 +12,7 @@ git+https://github.com/gbstack/ffprobe-python
 pyalsaaudio==0.9.0
 
 # Webserver packages
-gevent==21.8.0
+gevent==21.12.0
 bottle==0.12.19
 bottle_websocket==0.2.9
 jinja2==3.0.3
@@ -28,7 +28,7 @@ smbus==1.1.post2
 git+https://github.com/IanHarvey/bluepy
 requests==2.26.0
 melopero_amg8833==0.2.1
-RPi.bme280==0.2.3
+RPi.bme280==0.2.4
 RPi.GPIO==0.7.0
 pyserial==3.5
 pigpio_dht==0.3.6
@@ -44,7 +44,7 @@ python-kasa==0.4.0
 # Meross-iot has a bad happed not being backwards compatible in the versions....
 meross-iot==0.4.3.0
 PCA9685-driver==1.2.0
-pywemo==0.6.8
+pywemo==0.7.0
 simple-pid==1.0.1
 sparkfun-qwiic-relay==0.0.2
 
