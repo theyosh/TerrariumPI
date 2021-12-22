@@ -2050,7 +2050,9 @@ function websocket_message(message) {
 
 
 function christmas() {
-  if (moment(moment().year() + '-12-25').week() == moment().week()) {
+  let christmas_start = moment(moment().year() + '-12-25').subtract(7, 'days');
+  let christmas_end   = moment(moment().year() + '-12-26').add(7, 'days');
+  if (christmas_start <= moment() && moment() <= christmas_end) {
     $('img.christmashat').show().parent().addClass('mt-3');
   } else {
     $('img.christmashat').hide().parent().removeClass('mt-3');
