@@ -232,17 +232,14 @@ class terrariumRelay(object):
     return changed
 
   def update(self, force = False):
-    starttime = time()
-
     new_data = None
     try:
       new_data = self.__get_hardware_value()
     except Exception as ex:
-      logger.exception(ex)
+      logger.error(ex)
 
     self._device['value'] = new_data
     return self._device['value']
-
 
   def on(self, value = 100, delay = 0.0):
     if self._timer is not None and self._timer.is_alive():
