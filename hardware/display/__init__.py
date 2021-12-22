@@ -106,7 +106,7 @@ class terrariumDisplay(object):
     self.clear()
 
   def __repr__(self):
-    return f'{self.NAME} at address \'{self.address}\''
+    return f'{self.NAME} at address \'{self.address}\' ({self.width}x{self.height})'
 
   def __run(self):
     if self._device['device'] is None:

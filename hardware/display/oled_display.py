@@ -1,15 +1,13 @@
-from . import terrariumDisplay
-from terrariumUtils import terrariumUtils
-
 from pathlib import Path
+from PIL import Image, ImageFont
+from time import sleep
 
 # pip install luma.oled
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import ssd1306, ssd1309, ssd1322, ssd1325, ssd1327, ssd1331, ssd1351, sh1106
 
-from PIL import Image, ImageFont
-from time import sleep
+from . import terrariumDisplay
 
 class terrariumOLEDMixin():
 
@@ -83,49 +81,49 @@ class terrariumOLEDSSD1306(terrariumOLEDMixin, terrariumDisplay):
   def _load_hardware(self):
     self._load_oled_hardware(ssd1306)
 
-class terrariumOLEDSSD1309(terrariumDisplay, terrariumOLEDMixin):
+class terrariumOLEDSSD1309(terrariumOLEDMixin, terrariumDisplay):
   HARDWARE = 'SSD1309'
   NAME = 'OLED SSD1309 (I2C)'
 
   def _load_hardware(self):
     self._load_oled_hardware(ssd1309)
 
-class terrariumOLEDSSD1322(terrariumDisplay, terrariumOLEDMixin):
+class terrariumOLEDSSD1322(terrariumOLEDMixin, terrariumDisplay):
   HARDWARE = 'SSD1322'
   NAME = 'OLED SSD1322 (I2C)'
 
   def _load_hardware(self):
     self._load_oled_hardware(ssd1322)
 
-class terrariumOLEDSSD1325(terrariumDisplay, terrariumOLEDMixin):
+class terrariumOLEDSSD1325(terrariumOLEDMixin, terrariumDisplay):
   HARDWARE = 'SSD1325'
   NAME = 'OLED SSD1325 (I2C)'
 
   def _load_hardware(self):
     self._load_oled_hardware(ssd1325)
 
-class terrariumOLEDSSD1327(terrariumDisplay, terrariumOLEDMixin):
+class terrariumOLEDSSD1327(terrariumOLEDMixin, terrariumDisplay):
   HARDWARE = 'SSD1327'
   NAME = 'OLED SSD1327 (I2C)'
 
   def _load_hardware(self):
     self._load_oled_hardware(ssd1327)
 
-class terrariumOLEDSSD1331(terrariumDisplay, terrariumOLEDMixin):
+class terrariumOLEDSSD1331(terrariumOLEDMixin, terrariumDisplay):
   HARDWARE = 'SSD1331'
   NAME = 'OLED SSD1331 (I2C)'
 
   def _load_hardware(self):
     self._load_oled_hardware(ssd1331)
 
-class terrariumOLEDSSD1351(terrariumDisplay, terrariumOLEDMixin):
+class terrariumOLEDSSD1351(terrariumOLEDMixin, terrariumDisplay):
   HARDWARE = 'SSD1351'
   NAME = 'OLED SSD1351 (I2C)'
 
   def _load_hardware(self):
     self._load_oled_hardware(ssd1351)
 
-class terrariumOLEDSH1106(terrariumDisplay, terrariumOLEDMixin):
+class terrariumOLEDSH1106(terrariumOLEDMixin, terrariumDisplay):
   HARDWARE = 'SH1106'
   NAME = 'OLED SH1106 (I2C)'
 

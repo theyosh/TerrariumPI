@@ -268,7 +268,7 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
     super().load_setup(setup_data)
 
     # Now load the actual display device
-    self.setup['device'] = terrariumDisplay(None, setup_data['hardware'], setup_data['address'], None if not setup_data['show_title'] else f'TerrariumPI {self.setup["version"]}')
+    self.setup['device'] = terrariumDisplay(None, setup_data['hardware'], setup_data['address'], None if not terrariumUtils.is_true(setup_data['show_title']) else f'TerrariumPI {self.setup["version"]}')
     self.show_picture(self.setup['profile_image'])
 
   def send_message(self, type, subject, message, data = None, attachments = []):
