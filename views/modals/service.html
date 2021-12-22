@@ -19,6 +19,9 @@
         <select class="select2" id="service_type" name="type" required="required" data-placeholder="{{ _('Select type') }}" style="width: 100%">
         </select>
       </div>
+      <small class="text-muted">
+        {{ _('Select the notification service type.') }}
+      </small>
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-5 col-lg-4">
@@ -37,6 +40,9 @@
     <div class="form-group">
       <label for="message_rate_limit">{{ _('Rate limit') }}</label>
       <input type="number" class="form-control" id="message_rate_limit" name="rate_limit" required="required" placeholder="{{ _('Messages per minute') }}">
+      <small class="text-muted">
+        {{ _('Maximum number of messages per minute for this service. Use 0 for unlimited.') }}
+      </small>
     </div>
   </div>
   <div class="col-10 col-sm-12 col-md-2 col-lg-2 text-center">
@@ -45,6 +51,9 @@
         <label for="enabled" class="d-block">{{ _('Enabled') }}</label>
         <input type="checkbox" class="switch" id="enabled" name="enabled" checked="checked">
         <label for="enabled" class="mt-1"></label>
+        <small class="text-muted">
+          {{ _('Enable/disable this notification service.') }}
+        </small>
       </div>
     </div>
   </div>
@@ -57,12 +66,24 @@
         <select class="select2" id="hardware" name="hardware" required="required" data-placeholder="{{ _('Select type') }}" style="width: 100%">
         </select>
       </div>
+      <small class="text-muted">
+        {{ _('Select the hardware type for this display.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('Please select a hardware type.') }}
+      </div>
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-5 col-lg-5">
     <div class="form-group">
       <label for="address">{{ _('Address') }}</label>
       <input type="text" class="form-control" id="address" name="address" required="required" placeholder="{{ _('Enter the address') }}">
+      <small class="text-muted">
+        {{ _('Enter an address.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('The address cannot be empty.') }}
+      </div>
     </div>
   </div>
   <div class="col-10 col-sm-12 col-md-2 col-lg-2">
@@ -73,7 +94,7 @@
         <label for="show_title" class="mt-1"></label>
       </div>
       <small class="text-muted">
-        {{ _('Show a title on the display.') }}
+        {{ _('Show a name and version as title on the display.') }}
       </small>
     </div>
   </div>
@@ -83,47 +104,83 @@
     <div class="form-group">
       <label for="receiver">{{ _('Receiver email') }}</label>
       <input type="text" class="form-control" id="receiver" name="receiver" required="required" placeholder="{{ _('Enter an email address') }}">
+      <small class="text-muted">
+        {{ _('Enter an email address.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('The address cannot be empty.') }}
+      </div>
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-2 col-lg-2">
     <div class="form-group">
       <label for="address">{{ _('SMTP Server address') }}</label>
       <input type="text" class="form-control" id="address" name="address" required="required" placeholder="{{ _('Enter the SMTP server address name or ip') }}">
+      <small class="text-muted">
+        {{ _('Enter the mail server address.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('The address cannot be empty.') }}
+      </div>
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-2 col-lg-2">
     <div class="form-group">
       <label for="port">{{ _('SMTP Server port') }}</label>
       <input type="number" class="form-control" id="port" name="port" required="required" value="25" placeholder="{{ _('Enter the SMTP server port number') }}">
+      <small class="text-muted">
+        {{ _('Enter a port number.') }}<br />
+      </small>
+      <div class="invalid-feedback">
+        {{ _('The port number cannot be empty.') }}
+      </div>
     </div>
-    <small class="text-muted">
-      {{ _('The email notification service will auto detect SSL/TLS connections.') }}
-    </small>
   </div>
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="username">{{ _('SMTP Server username') }}</label>
       <input type="text" class="form-control" id="username" name="username" placeholder="{{ _('Enter the SMTP server username') }}">
+      <small class="text-muted">
+        {{ _('Enter a username.') }}
+      </small>
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-2 col-lg-2">
     <div class="form-group">
       <label for="password">{{ _('SMTP Server password') }}</label>
       <input type="text" class="form-control" id="password" name="password" placeholder="{{ _('Enter the SMTP server password') }}">
+      <small class="text-muted">
+        {{ _('Enter a password.') }}
+      </small>
     </div>
   </div>
+  <small class="text-muted">
+    {{ _('The email notification service will auto detect SSL/TLS connections.') }}
+  </small>
 </div>
 <div class="row pushover">
   <div class="col-12 col-sm-12 col-md-6 col-lg-6">
     <div class="form-group">
       <label for="api_token">{{ _('API Token') }}</label>
       <input type="text" class="form-control" id="api_token" name="api_token" required="required" placeholder="{{ _('Enter the Pushover API token') }}">
+      <small class="text-muted">
+        {{ _('Enter the API Token.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('The API token cannot be empty.') }}
+      </div>
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-6 col-lg-6">
     <div class="form-group">
       <label for="user_key">{{ _('User key') }}</label>
       <input type="text" class="form-control" id="user_key" name="user_key" required="required" placeholder="{{ _('Enter the Pushover user key') }}">
+      <small class="text-muted">
+        {{ _('Enter the user key.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('The user key cannot be empty.') }}
+      </div>
     </div>
   </div>
   <small class="text-muted">
@@ -136,19 +193,19 @@
   <div class="col-12 col-sm-12 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="bot_token">{{ _('Bot Token') }}</label>
-      <input type="text" class="form-control" id="bot_token" name="bot_token" required="required" placeholder="{{ _('Enter the SMTP server username') }}">
+      <input type="text" class="form-control" id="bot_token" name="bot_token" required="required" >
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="username">{{ _('Username') }}</label>
-      <input type="text" class="form-control" id="username" name="username" required="required" placeholder="{{ _('Enter the SMTP server password') }}">
+      <input type="text" class="form-control" id="username" name="username" required="required" >
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="proxy">{{ _('HTTP Proxy') }}</label>
-      <input type="text" class="form-control" id="proxy" name="proxy" placeholder="{{ _('Enter the SMTP server password') }}">
+      <input type="text" class="form-control" id="proxy" name="proxy" >
     </div>
   </div>
 </div>
@@ -159,18 +216,27 @@
     <div class="form-group">
       <label for="red">{{ _('Red') }}</label>
       <input type="number" class="form-control" id="red" name="red" placeholder="{{ _('Enter red GPIO pin') }}">
+      <small class="text-muted">
+        {{ _('Enter GPIO pin for red light.') }}
+      </small>
     </div>
   </div>
   <div class="col-4 col-sm-4 col-md-4 col-lg-4">
     <div class="form-group">
-      <label for="yellow">{{ _('Yellow') }}</label>
-      <input type="number" class="form-control" id="yellow" name="yellow" placeholder="{{ _('Enter yellow GPIO pin') }}">
+      <label for="yellow">{{ _('Amber') }}</label>
+      <input type="number" class="form-control" id="yellow" name="yellow" placeholder="{{ _('Enter amber GPIO pin') }}">
+      <small class="text-muted">
+        {{ _('Enter GPIO pin for amber light.') }}
+      </small>
     </div>
   </div>
   <div class="col-4 col-sm-4 col-md-4 col-lg-4">
     <div class="form-group">
       <label for="green">{{ _('Green') }}</label>
       <input type="number" class="form-control" id="green" name="green" placeholder="{{ _('Enter green GPIO pin') }}">
+      <small class="text-muted">
+        {{ _('Enter GPIO pin for green light.') }}
+      </small>
     </div>
   </div>
 </div>
@@ -179,25 +245,25 @@
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="bot_token">{{ _('Customer key') }}</label>
-      <input type="text" class="form-control" id="bot_token" name="bot_token" required="required" placeholder="{{ _('Enter the SMTP server username') }}">
+      <input type="text" class="form-control" id="bot_token" name="bot_token" required="required" >
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="username">{{ _('Customer secret') }}</label>
-      <input type="text" class="form-control" id="username" name="username" required="required" placeholder="{{ _('Enter the SMTP server password') }}">
+      <input type="text" class="form-control" id="username" name="username" required="required">
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="access_token">{{ _('Access token') }}</label>
-      <input type="text" class="form-control" id="access_token" name="access_token" required="required" placeholder="{{ _('Enter the SMTP server username') }}">
+      <input type="text" class="form-control" id="access_token" name="access_token" required="required" >
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="access_secret">{{ _('Access token secret') }}</label>
-      <input type="text" class="form-control" id="access_secret" name="access_secret" required="required" placeholder="{{ _('Enter the SMTP server password') }}">
+      <input type="text" class="form-control" id="access_secret" name="access_secret" required="required">
     </div>
   </div>
 </div> -->
@@ -206,7 +272,13 @@
   <div class="col-12 col-sm-12 col-md-12 col-lg-12">
     <div class="form-group">
       <label for="url">{{ _('Full post url') }}</label>
-      <input type="text" class="form-control" id="url" name="url" required="required" placeholder="{{ _('Enter the SMTP server username') }}">
+      <input type="text" class="form-control" id="url" name="url" required="required" placeholder="{{ _('Enter the full post url') }}">
+      <small class="text-muted">
+        {{ _('Enter the full post url.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('The address cannot be empty.') }}
+      </div>
     </div>
   </div>
 </div>
@@ -215,34 +287,42 @@
     <div class="form-group">
       <label for="address">{{ _('MQTT Server address') }}</label>
       <input type="text" class="form-control" id="address" name="address" required="required" placeholder="{{ _('Enter the MQTT server address name or ip') }}">
+      <small class="text-muted">
+        {{ _('Enter an address.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('The address cannot be empty.') }}
+      </div>
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="port">{{ _('MQTT Server port') }}</label>
       <input type="number" class="form-control" id="port" name="port" required="required" value="25" placeholder="{{ _('Enter the MQTT server port number') }}">
-    </div>
-    <small class="text-muted">
-    </small>
-  </div>
-<!--
-  <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-    <div class="form-group">
-      <label for="address">{{ _('MQTT secure connection') }}</label>
-      <input type="text" class="form-control" id="address" name="address" required="required" placeholder="{{ _('Enter the MQTT server address name or ip') }}">
+      <small class="text-muted">
+        {{ _('Enter a port number.') }}
+      </small>
+      <div class="invalid-feedback">
+        {{ _('The port number cannot be empty.') }}
+      </div>
     </div>
   </div>
--->
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="username">{{ _('MQTT Server username') }}</label>
       <input type="text" class="form-control" id="username" name="username" placeholder="{{ _('Enter the SMTP server username') }}">
+      <small class="text-muted">
+        {{ _('Enter a username.') }}
+      </small>
     </div>
   </div>
   <div class="col-12 col-sm-12 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="password">{{ _('MQTT Server password') }}</label>
       <input type="text" class="form-control" id="password" name="password" placeholder="{{ _('Enter the SMTP server password') }}">
+      <small class="text-muted">
+        {{ _('Enter a password.') }}
+      </small>
     </div>
   </div>
 </div>

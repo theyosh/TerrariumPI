@@ -33,30 +33,105 @@ from hardware.display import terrariumDisplay, terrariumDisplayLoadingException
 
 
 class terrariumNotification(terrariumSingleton):
+  __DEFAULT_PLACEHOLDERS = {
+    'date' : _('Local date'),
+    'time' : _('Local time'),
+    'now'  : _('Local date and time'),
+  }
+
   __MAX_MESSAGES_TOTAL_PER_MINUTE = 60
 
   __MESSAGES = {
-    'authentication_error' : _('Authentication login error'),
-    'system_warning'       : _('System warning'),
-    'system_error'         : _('System error'),
 
-    'system_summary'         : _('System summary'),
+    'authentication_error' : {
+      'name':_('Authentication login error'),
+      'placeholders' : {
+        'ip'       : _('IP of the wrong login attempt'),
+        'username' : _('Used username'),
+        'password' : _('Used password'),
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
 
-    'sensor_update'        : _('Sensor update'),
-    'sensor_alarm'         : _('Sensor alarm'),
+    'system_warning' : {
+      'name':_('System warning'),
+      'placeholders' : {
+        'message' : _('Warning message'),
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
 
-    'relay_change'         : _('Relay change'),
+    'system_error' : {
+      'name':_('System error'),
+      'placeholders' : {
+        'message' : _('Error message'),
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
 
-    'button_change'        : _('Button change'),
+    'system_summary' : {
+      'name':_('System summary'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
 
-    'webcam_archive'       : _('Webcam archive')
+    'sensor_update' : {
+      'name':_('Sensor update'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
+
+    'sensor_change' : {
+      'name':_('Sensor change'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
+
+    'sensor_alarm' : {
+      'name':_('Sensor alarm'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
+
+
+    'relay_change' : {
+      'name':_('Relay change'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
+
+    'relay_toggle' : {
+      'name':_('Relay toggle'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
+
+    'button_change' : {
+      'name':_('Button change'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
+
+    'webcam_archive' : {
+      'name':_('Webcam archive'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
   }
 
   @classproperty
   def available_messages(__cls__):
     data = []
-    for (type, name) in terrariumNotification.__MESSAGES.items():
-      data.append({'type' : type, 'name' : name})
+    for (type, msgdata) in terrariumNotification.__MESSAGES.items():
+      data.append({'type' : type, 'name' : msgdata['name'], 'placeholders' : msgdata['placeholders']})
 
     return sorted(data, key=itemgetter('name'))
 
