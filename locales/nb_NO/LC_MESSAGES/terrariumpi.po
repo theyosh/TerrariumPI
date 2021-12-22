@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
-"POT-Creation-Date: 2021-12-15 23:10+CET\n"
+"POT-Creation-Date: 2021-12-22 21:26+CET\n"
 "PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
@@ -166,117 +166,181 @@ msgstr ""
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1074 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1088 views/dashboard.html:18 views/status.html:112
 #, fuzzy
 #| msgid "Uptime"
 msgid "Up time"
 msgstr "Oppetid"
 
-#: terrariumEngine.py:1080
+#: terrariumEngine.py:1094
 #, fuzzy
 #| msgid "System log"
 msgid "System load"
 msgstr "Systemlogg"
 
-#: terrariumEngine.py:1086 views/status.html:44
+#: terrariumEngine.py:1100 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU Temperatur"
 
-#: terrariumEngine.py:1092
+#: terrariumEngine.py:1106
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1098
+#: terrariumEngine.py:1112
 #, fuzzy
 #| msgid "Memory usage"
 msgid "Memory"
 msgstr "Minnebruk"
 
-#: terrariumEngine.py:1115
+#: terrariumEngine.py:1133
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "Sensor typen"
 
-#: terrariumEngine.py:1286
+#: terrariumEngine.py:1309
 #, fuzzy
 #| msgid "Last update"
 msgid "last update"
 msgstr "Siste oppdatering"
 
-#: terrariumNotification.py:41
+#: terrariumNotification.py:37
+#, fuzzy
+#| msgid "Local source"
+msgid "Local date"
+msgstr "Lokal kilde"
+
+#: terrariumNotification.py:38
+#, fuzzy
+#| msgid "Local source"
+msgid "Local time"
+msgstr "Lokal kilde"
+
+#: terrariumNotification.py:39
+#, fuzzy
+#| msgid "Date and time"
+msgid "Local date and time"
+msgstr "Dato og tid"
+
+#: terrariumNotification.py:47
 #, fuzzy
 #| msgid "Authentication"
 msgid "Authentication login error"
 msgstr "Autentisering"
 
-#: terrariumNotification.py:42
+#: terrariumNotification.py:49
+msgid "IP of the wrong login attempt"
+msgstr ""
+
+#: terrariumNotification.py:50
+#, fuzzy
+#| msgid "Username"
+msgid "Used username"
+msgstr "Brukernavn"
+
+#: terrariumNotification.py:51
+#, fuzzy
+#| msgid "New admin password"
+msgid "Used password"
+msgstr "Nytt admin passord"
+
+#: terrariumNotification.py:57
 #, fuzzy
 #| msgid "System log"
 msgid "System warning"
 msgstr "Systemlogg"
 
-#: terrariumNotification.py:43
+#: terrariumNotification.py:59
+#, fuzzy
+#| msgid "No warning messages"
+msgid "Warning message"
+msgstr "Ingen advarsler"
+
+#: terrariumNotification.py:65
 #, fuzzy
 #| msgid "System log"
 msgid "System error"
 msgstr "Systemlogg"
 
-#: terrariumNotification.py:45
+#: terrariumNotification.py:67
+#, fuzzy
+#| msgid "No error messages"
+msgid "Error message"
+msgstr "Ingen feilmeldinger"
+
+#: terrariumNotification.py:73
+#, fuzzy
+#| msgid "System status"
+msgid "System summary"
+msgstr "Systemstatus"
+
+#: terrariumNotification.py:80
 #, fuzzy
 #| msgid "Sensor ph"
 msgid "Sensor update"
 msgstr "Sensor pH"
 
-#: terrariumNotification.py:46
+#: terrariumNotification.py:87
+#, fuzzy
+#| msgid "Sensor distance"
+msgid "Sensor change"
+msgstr "Sensor avstand"
+
+#: terrariumNotification.py:94
 #, fuzzy
 #| msgid "Sensor ph"
 msgid "Sensor alarm"
 msgstr "Sensor pH"
 
-#: terrariumNotification.py:48
+#: terrariumNotification.py:102
 #, fuzzy
 #| msgid "Webcam settings"
 msgid "Relay change"
 msgstr "Innstillinger for webkamera"
 
-#: terrariumNotification.py:50
+#: terrariumNotification.py:109
+#, fuzzy
+#| msgid "Webcam settings"
+msgid "Relay toggle"
+msgstr "Innstillinger for webkamera"
+
+#: terrariumNotification.py:116
 #, fuzzy
 #| msgid "Door settings"
 msgid "Button change"
 msgstr "Dør innstillinger"
 
-#: terrariumNotification.py:52
+#: terrariumNotification.py:123
 #, fuzzy
 #| msgid "Language"
 msgid "Webcam archive"
 msgstr "Språk"
 
-#: terrariumNotification.py:175
+#: terrariumNotification.py:267
 msgid "Display"
 msgstr "Vis alternativer"
 
-#: terrariumNotification.py:179
+#: terrariumNotification.py:271
 msgid "Email"
 msgstr "E-post"
 
-#: terrariumNotification.py:189
+#: terrariumNotification.py:281
 #, fuzzy
 #| msgid "Minimum light hours"
 msgid "Traffic light"
 msgstr "Minimum lys timer"
 
-#: terrariumNotification.py:193
+#: terrariumNotification.py:285
 #, fuzzy
 #| msgid "Webhook"
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:197
+#: terrariumNotification.py:289
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:201
+#: terrariumNotification.py:293
 msgid "Pushover"
 msgstr "Pushover"
 
@@ -315,10 +379,10 @@ msgstr "Lydfiler"
 #: views/audio_files.html:24 views/audio_files.html:35
 #: views/enclosures.html:172 views/modals/area.html:47
 #: views/modals/button.html:45 views/modals/enclosure.html:18
-#: views/modals/event.html:15 views/modals/message.html:33
-#: views/modals/playlist.html:18 views/modals/relay.html:45
-#: views/modals/sensor.html:60 views/modals/service.html:27
-#: views/modals/webcam.html:49 views/playlists.html:24 views/playlists.html:39
+#: views/modals/event.html:15 views/modals/playlist.html:18
+#: views/modals/relay.html:45 views/modals/sensor.html:60
+#: views/modals/service.html:29 views/modals/webcam.html:49
+#: views/playlists.html:24 views/playlists.html:39
 msgid "Name"
 msgstr "Navn"
 
@@ -368,7 +432,7 @@ msgstr "Legg til ny sensor"
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
 #: views/dashboard.html:120 views/dashboard.html:310 views/enclosures.html:14
 #: views/enclosures.html:149 views/log.html:8 views/notifications.html:20
-#: views/notifications.html:62 views/relays.html:14 views/relays.html:83
+#: views/notifications.html:56 views/relays.html:14 views/relays.html:83
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
 #: views/webcams.html:14 views/webcams.html:41
 #, fuzzy
@@ -522,7 +586,7 @@ msgid "Areas"
 msgstr ""
 
 #: views/enclosures.html:173 views/modals/area.html:32
-#: views/modals/sensor.html:33 views/modals/service.html:18
+#: views/modals/sensor.html:33 views/modals/service.html:17
 msgid "Type"
 msgstr "Type"
 
@@ -796,7 +860,7 @@ msgstr ""
 #: views/modals/area.html:50 views/modals/button.html:48
 #: views/modals/enclosure.html:21 views/modals/event.html:18
 #: views/modals/playlist.html:21 views/modals/relay.html:48
-#: views/modals/sensor.html:63 views/modals/service.html:30
+#: views/modals/sensor.html:63 views/modals/service.html:32
 #: views/modals/webcam.html:52
 #, fuzzy
 #| msgid "Username"
@@ -806,7 +870,7 @@ msgstr "Brukernavn"
 #: views/modals/area.html:53 views/modals/button.html:51
 #: views/modals/enclosure.html:24 views/modals/event.html:21
 #: views/modals/playlist.html:24 views/modals/relay.html:51
-#: views/modals/sensor.html:66 views/modals/service.html:33
+#: views/modals/sensor.html:66 views/modals/service.html:35
 #: views/modals/webcam.html:55
 msgid "The name cannot be empty."
 msgstr ""
@@ -1390,7 +1454,7 @@ msgid "Button settings"
 msgstr "Dør innstillinger"
 
 #: views/modals/button.html:18 views/modals/relay.html:18
-#: views/modals/sensor.html:18 views/modals/service.html:61
+#: views/modals/sensor.html:18 views/modals/service.html:64
 #: views/modals/webcam.html:22
 msgid "Hardware"
 msgstr "Maskinvare"
@@ -1402,27 +1466,32 @@ msgid "Select the hardware type for this button."
 msgstr "Viser lydkortet som brukes til å spille av lyd."
 
 #: views/modals/button.html:27 views/modals/relay.html:27
-#: views/modals/sensor.html:26 views/modals/webcam.html:30
+#: views/modals/sensor.html:26 views/modals/service.html:73
+#: views/modals/webcam.html:30
 #, fuzzy
 #| msgid "Select an option"
 msgid "Please select a hardware type."
 msgstr "Merk et valg"
 
 #: views/modals/button.html:33 views/modals/relay.html:33
-#: views/modals/sensor.html:48 views/modals/service.html:70
+#: views/modals/sensor.html:48 views/modals/service.html:79
 #: views/modals/webcam.html:37
 msgid "Address"
 msgstr "Adresse"
 
 #: views/modals/button.html:36 views/modals/relay.html:36
-#: views/modals/sensor.html:51 views/modals/webcam.html:40
+#: views/modals/sensor.html:51 views/modals/service.html:82
+#: views/modals/service.html:291 views/modals/webcam.html:40
 #, fuzzy
 #| msgid "I2C address"
 msgid "Enter an address."
 msgstr "I2C-adresse"
 
 #: views/modals/button.html:39 views/modals/relay.html:39
-#: views/modals/sensor.html:54 views/modals/webcam.html:43
+#: views/modals/sensor.html:54 views/modals/service.html:85
+#: views/modals/service.html:111 views/modals/service.html:123
+#: views/modals/service.html:280 views/modals/service.html:294
+#: views/modals/webcam.html:43
 msgid "The address cannot be empty."
 msgstr ""
 
@@ -1557,35 +1626,76 @@ msgstr "Innstillinger for webkamera"
 msgid "Message type"
 msgstr "Melding"
 
-#: views/modals/message.html:27
+#: views/modals/message.html:24
+#, fuzzy
+#| msgid "Notifications"
+msgid "Select the notification message type."
+msgstr "Varsler"
+
+#: views/modals/message.html:30
 msgid "Subject"
 msgstr ""
 
-#: views/modals/message.html:39 views/modals/service.html:40
+#: views/modals/message.html:33
+msgid "Enter a short subject. You can use placeholder values here."
+msgstr ""
+
+#: views/modals/message.html:36
+msgid "The subject cannot be empty."
+msgstr ""
+
+#: views/modals/message.html:42 views/modals/service.html:41
 msgid "Rate limit"
 msgstr ""
 
-#: views/modals/message.html:46 views/modals/service.html:48
+#: views/modals/message.html:45
+msgid ""
+"Maximum number of messages per minute for this message. Use 0 for unlimited."
+msgstr ""
+
+#: views/modals/message.html:48
+#, fuzzy
+#| msgid "Date and time"
+msgid "Enter a valid number."
+msgstr "Dato og tid"
+
+#: views/modals/message.html:55 views/modals/service.html:51
 msgid "Enabled"
 msgstr "Aktivert"
 
-#: views/modals/message.html:51
-msgid "Enable/disable this service."
-msgstr ""
+#: views/modals/message.html:60
+#, fuzzy
+#| msgid "Notifications"
+msgid "Enable/disable this notification message."
+msgstr "Varsler"
 
-#: views/modals/message.html:59
+#: views/modals/message.html:70
 msgid "Message"
 msgstr "Melding"
 
-#: views/modals/message.html:65
-msgid "Place holders"
+#: views/modals/message.html:73
+msgid "Enter a message. You can use placeholder values here."
 msgstr ""
 
-#: views/modals/message.html:74
+#: views/modals/message.html:81
 #, fuzzy
 #| msgid "Service"
 msgid "Services"
 msgstr "Tjeneste"
+
+#: views/modals/message.html:84
+#, fuzzy
+#| msgid "Holds the soundcard that is used for playing audio."
+msgid "Select the service to use for this notification message."
+msgstr "Viser lydkortet som brukes til å spille av lyd."
+
+#: views/modals/message.html:92
+msgid "Place holders"
+msgstr ""
+
+#: views/modals/message.html:95
+msgid "List of available placeholders."
+msgstr ""
 
 #: views/modals/playlist.html:12
 #, fuzzy
@@ -1846,131 +1956,224 @@ msgstr "Velg miljø dør status når arkivering er aktivert."
 msgid "Notification service settings"
 msgstr "Varsler"
 
-#: views/modals/service.html:77
+#: views/modals/service.html:23
+#, fuzzy
+#| msgid "Notifications"
+msgid "Select the notification service type."
+msgstr "Varsler"
+
+#: views/modals/service.html:44
+msgid ""
+"Maximum number of messages per minute for this service. Use 0 for unlimited."
+msgstr ""
+
+#: views/modals/service.html:55
+#, fuzzy
+#| msgid "Notifications"
+msgid "Enable/disable this notification service."
+msgstr "Varsler"
+
+#: views/modals/service.html:70
+#, fuzzy
+#| msgid "Holds the soundcard that is used for playing audio."
+msgid "Select the hardware type for this display."
+msgstr "Viser lydkortet som brukes til å spille av lyd."
+
+#: views/modals/service.html:92
 msgid "Show title"
 msgstr ""
 
-#: views/modals/service.html:82
-msgid "Show a title on the display."
+#: views/modals/service.html:97
+msgid "Show a name and version as title on the display."
 msgstr ""
 
-#: views/modals/service.html:92
+#: views/modals/service.html:105
 msgid "Receiver email"
 msgstr "Mottakers Email"
 
-#: views/modals/service.html:98
+#: views/modals/service.html:108
+#, fuzzy
+#| msgid "I2C address"
+msgid "Enter an email address."
+msgstr "I2C-adresse"
+
+#: views/modals/service.html:117
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "SMTP Server address"
 msgstr "SMTP-serverporten"
 
-#: views/modals/service.html:104
+#: views/modals/service.html:120
+#, fuzzy
+#| msgid "I2C address"
+msgid "Enter the mail server address."
+msgstr "I2C-adresse"
+
+#: views/modals/service.html:129
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "SMTP Server port"
 msgstr "SMTP-serverporten"
 
-#: views/modals/service.html:108
-msgid "The email notification service will auto detect SSL/TLS connections."
+#: views/modals/service.html:132 views/modals/service.html:303
+#, fuzzy
+#| msgid "Username"
+msgid "Enter a port number."
+msgstr "Brukernavn"
+
+#: views/modals/service.html:135 views/modals/service.html:306
+msgid "The port number cannot be empty."
 msgstr ""
 
-#: views/modals/service.html:113
+#: views/modals/service.html:141
 #, fuzzy
 #| msgid "SMTP username"
 msgid "SMTP Server username"
 msgstr "SMTP brukernavn"
 
-#: views/modals/service.html:119
+#: views/modals/service.html:144 views/modals/service.html:315
+#, fuzzy
+#| msgid "Username"
+msgid "Enter a username."
+msgstr "Brukernavn"
+
+#: views/modals/service.html:150
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "SMTP Server password"
 msgstr "SMTP-serverporten"
 
-#: views/modals/service.html:128
+#: views/modals/service.html:153 views/modals/service.html:324
+#, fuzzy
+#| msgid "I2C address"
+msgid "Enter a password."
+msgstr "I2C-adresse"
+
+#: views/modals/service.html:158
+msgid "The email notification service will auto detect SSL/TLS connections."
+msgstr ""
+
+#: views/modals/service.html:164
 msgid "API Token"
 msgstr "API-token"
 
-#: views/modals/service.html:134
+#: views/modals/service.html:167
+#, fuzzy
+#| msgid "SMTP username"
+msgid "Enter the API Token."
+msgstr "SMTP brukernavn"
+
+#: views/modals/service.html:170
+msgid "The API token cannot be empty."
+msgstr ""
+
+#: views/modals/service.html:176
 msgid "User key"
 msgstr "Brukernøkkel"
 
-#: views/modals/service.html:147
+#: views/modals/service.html:179
+#, fuzzy
+#| msgid "SMTP username"
+msgid "Enter the user key."
+msgstr "SMTP brukernavn"
+
+#: views/modals/service.html:182
+msgid "The user key cannot be empty."
+msgstr ""
+
+#: views/modals/service.html:195
 msgid "Bot Token"
 msgstr "Bot token"
 
-#: views/modals/service.html:153
+#: views/modals/service.html:201
 #, fuzzy
 #| msgid "Username"
 msgid "Username"
 msgstr "Brukernavn"
 
-#: views/modals/service.html:159
+#: views/modals/service.html:207
 #, fuzzy
 #| msgid "Proxy"
 msgid "HTTP Proxy"
 msgstr "Mellomtjener"
 
-#: views/modals/service.html:170 views/modals/webcam.html:189
+#: views/modals/service.html:217 views/modals/webcam.html:189
 #, fuzzy
 #| msgid "Wed"
 msgid "Red"
 msgstr "Ons"
 
-#: views/modals/service.html:177
-msgid "Yellow"
+#: views/modals/service.html:220
+#, fuzzy
+#| msgid "Holds the volume for this playlist."
+msgid "Enter GPIO pin for red light."
+msgstr "Viser volumet for denne spillelisten."
+
+#: views/modals/service.html:226
+msgid "Amber"
 msgstr ""
 
-#: views/modals/service.html:184 views/modals/webcam.html:190
+#: views/modals/service.html:229
+msgid "Enter GPIO pin for amber light."
+msgstr ""
+
+#: views/modals/service.html:235 views/modals/webcam.html:190
 msgid "Green"
 msgstr ""
 
-#: views/modals/service.html:196
+#: views/modals/service.html:238
+msgid "Enter GPIO pin for green light."
+msgstr ""
+
+#: views/modals/service.html:247
 #, fuzzy
 #| msgid "Consumer key"
 msgid "Customer key"
 msgstr "Bruker Nøkkel"
 
-#: views/modals/service.html:203
+#: views/modals/service.html:253
 #, fuzzy
 #| msgid "Consumer secret"
 msgid "Customer secret"
 msgstr "Bruker hemlighet"
 
-#: views/modals/service.html:210
+#: views/modals/service.html:259
 msgid "Access token"
 msgstr "Tilgang Token"
 
-#: views/modals/service.html:217
+#: views/modals/service.html:265
 msgid "Access token secret"
 msgstr "Tilgang token hemlighet"
 
-#: views/modals/service.html:228
+#: views/modals/service.html:274
 msgid "Full post url"
 msgstr "Full post url"
 
-#: views/modals/service.html:241
+#: views/modals/service.html:277
+#, fuzzy
+#| msgid "Min moist value"
+msgid "Enter the full post url."
+msgstr "Min fukt verdi"
+
+#: views/modals/service.html:288
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "MQTT Server address"
 msgstr "SMTP-serverporten"
 
-#: views/modals/service.html:248
+#: views/modals/service.html:300
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "MQTT Server port"
 msgstr "SMTP-serverporten"
 
-#: views/modals/service.html:258
-msgid "MQTT secure connection"
-msgstr ""
-
-#: views/modals/service.html:267
+#: views/modals/service.html:312
 #, fuzzy
 #| msgid "SMTP username"
 msgid "MQTT Server username"
 msgstr "SMTP brukernavn"
 
-#: views/modals/service.html:274
+#: views/modals/service.html:321
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "MQTT Server password"
@@ -2286,13 +2489,13 @@ msgstr "Varsler"
 msgid "Add service"
 msgstr "Tjeneste"
 
-#: views/notifications.html:52
+#: views/notifications.html:46
 #, fuzzy
 #| msgid "Notifications"
 msgid "Notification messages"
 msgstr "Varsler"
 
-#: views/notifications.html:60
+#: views/notifications.html:54
 #, fuzzy
 #| msgid "No messages"
 msgid "Add message"
@@ -2795,7 +2998,7 @@ msgstr ""
 msgid "Add new area"
 msgstr "Legg til nytt webkamera"
 
-#: views/notifications.html:60
+#: views/notifications.html:54
 #, fuzzy
 #| msgid "Add new webcam"
 msgid "Add new message"
@@ -2899,7 +3102,7 @@ msgstr "Slett fil"
 msgid "Delete event {title}"
 msgstr "Kalender"
 
-#: views/notifications.html:143
+#: views/notifications.html:125
 #, fuzzy
 #| msgid "Delete file"
 msgid "Delete message"
@@ -2949,7 +3152,7 @@ msgstr ""
 msgid "Edit enclosure"
 msgstr ""
 
-#: views/notifications.html:140
+#: views/notifications.html:122
 #, fuzzy
 #| msgid "No messages"
 msgid "Edit message"
@@ -2993,7 +3196,13 @@ msgstr "Tidtaker periode på varighet i minutter"
 msgid "Enter a full url, local json file or script file."
 msgstr ""
 
-#: views/modals/message.html:60
+#: views/modals/service.html:227
+#, fuzzy
+#| msgid "Date and time"
+msgid "Enter amber GPIO pin"
+msgstr "Dato og tid"
+
+#: views/modals/message.html:71
 #, fuzzy
 #| msgid "Username"
 msgid "Enter a message"
@@ -3007,10 +3216,9 @@ msgid "Enter an address"
 msgstr "I2C-adresse"
 
 #: views/modals/button.html:46 views/modals/enclosure.html:19
-#: views/modals/event.html:16 views/modals/message.html:34
-#: views/modals/playlist.html:19 views/modals/relay.html:46
-#: views/modals/sensor.html:61 views/modals/service.html:28
-#: views/modals/webcam.html:50
+#: views/modals/event.html:16 views/modals/playlist.html:19
+#: views/modals/relay.html:46 views/modals/sensor.html:61
+#: views/modals/service.html:30 views/modals/webcam.html:50
 #, fuzzy
 #| msgid "Username"
 msgid "Enter a name"
@@ -3020,13 +3228,13 @@ msgstr "Brukernavn"
 msgid "Enter a name for this area."
 msgstr ""
 
-#: views/modals/service.html:93
+#: views/modals/service.html:106
 #, fuzzy
 #| msgid "I2C address"
 msgid "Enter an email address"
 msgstr "I2C-adresse"
 
-#: views/modals/message.html:28
+#: views/modals/message.html:31
 #, fuzzy
 #| msgid "Username"
 msgid "Enter a subject"
@@ -3048,7 +3256,7 @@ msgstr "Dato og tid"
 msgid "Enter end time"
 msgstr "Dato og tid"
 
-#: views/modals/service.html:185
+#: views/modals/service.html:236
 msgid "Enter green GPIO pin"
 msgstr ""
 
@@ -3064,7 +3272,7 @@ msgstr "Dato og tid"
 msgid "Enter number"
 msgstr "Brukernavn"
 
-#: views/modals/service.html:171
+#: views/modals/service.html:218
 #, fuzzy
 #| msgid "Date and time"
 msgid "Enter red GPIO pin"
@@ -3076,7 +3284,7 @@ msgstr "Dato og tid"
 msgid "Enter search terms"
 msgstr "I2C-adresse"
 
-#: views/modals/service.html:71
+#: views/modals/service.html:80
 #, fuzzy
 #| msgid "I2C address"
 msgid "Enter the address"
@@ -3094,6 +3302,12 @@ msgstr ""
 msgid "Enter the capacitor value in &micro;F"
 msgstr ""
 
+#: views/modals/service.html:275
+#, fuzzy
+#| msgid "Full post url"
+msgid "Enter the full post url"
+msgstr "Full post url"
+
 #: views/modals/area.html:467
 msgid "Enter the height"
 msgstr ""
@@ -3106,13 +3320,13 @@ msgstr ""
 msgid "Enter the minimum amount of hours"
 msgstr ""
 
-#: views/modals/service.html:242 views/modals/service.html:260
+#: views/modals/service.html:289
 #, fuzzy
 #| msgid "SMTP username"
 msgid "Enter the MQTT server address name or ip"
 msgstr "SMTP brukernavn"
 
-#: views/modals/service.html:249
+#: views/modals/service.html:301
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "Enter the MQTT server port number"
@@ -3124,39 +3338,35 @@ msgstr "SMTP-serverporten"
 msgid "Enter the offset"
 msgstr "Temperatur forskyvning"
 
-#: views/modals/service.html:129
+#: views/modals/service.html:165
 #, fuzzy
 #| msgid "SMTP username"
 msgid "Enter the Pushover API token"
 msgstr "SMTP brukernavn"
 
-#: views/modals/service.html:135
+#: views/modals/service.html:177
 #, fuzzy
 #| msgid "SMTP username"
 msgid "Enter the Pushover user key"
 msgstr "SMTP brukernavn"
 
-#: views/modals/service.html:99
+#: views/modals/service.html:118
 msgid "Enter the SMTP server address name or ip"
 msgstr ""
 
-#: views/modals/service.html:120 views/modals/service.html:154
-#: views/modals/service.html:160 views/modals/service.html:204
-#: views/modals/service.html:218 views/modals/service.html:275
+#: views/modals/service.html:151 views/modals/service.html:322
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "Enter the SMTP server password"
 msgstr "SMTP-serverporten"
 
-#: views/modals/service.html:105
+#: views/modals/service.html:130
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "Enter the SMTP server port number"
 msgstr "SMTP-serverporten"
 
-#: views/modals/service.html:114 views/modals/service.html:148
-#: views/modals/service.html:197 views/modals/service.html:211
-#: views/modals/service.html:229 views/modals/service.html:268
+#: views/modals/service.html:142 views/modals/service.html:313
 #, fuzzy
 #| msgid "SMTP username"
 msgid "Enter the SMTP server username"
@@ -3167,10 +3377,6 @@ msgstr "SMTP brukernavn"
 #| msgid "Date and time"
 msgid "Enter width"
 msgstr "Dato og tid"
-
-#: views/modals/service.html:178
-msgid "Enter yellow GPIO pin"
-msgstr ""
 
 #: views/audio_files.html:143
 msgid "Error"
@@ -3253,7 +3459,7 @@ msgstr "Maks diff"
 msgid "Max power in percentage"
 msgstr "Dimmer på prosent"
 
-#: views/modals/message.html:40 views/modals/service.html:41
+#: views/modals/message.html:43 views/modals/service.html:42
 msgid "Messages per minute"
 msgstr ""
 
@@ -3472,7 +3678,7 @@ msgid "Select sensors"
 msgstr "Temperatur sensorer"
 
 #: views/modals/message.html:20 views/modals/sensor.html:35
-#: views/modals/service.html:20 views/modals/service.html:63
+#: views/modals/service.html:19 views/modals/service.html:66
 #, fuzzy
 #| msgid "Temperature sensors"
 msgid "Select type"
@@ -3504,7 +3710,7 @@ msgstr "Vis bevegelses bokser"
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumNotification.py:184
+#: terrariumNotification.py:276
 msgid "Telegram"
 msgstr "Telegram"
 
@@ -3587,11 +3793,6 @@ msgid "Weather data source url"
 msgstr ""
 
 #, fuzzy
-#~| msgid "Date and time"
-#~ msgid "Enter a valid url."
-#~ msgstr "Dato og tid"
-
-#, fuzzy
 #~| msgid "When on"
 #~ msgid "When"
 #~ msgstr "Når på"
@@ -3629,11 +3830,6 @@ msgstr ""
 #~| msgid "Power on"
 #~ msgid "Power off"
 #~ msgstr "Slå på"
-
-#, fuzzy
-#~| msgid "Holds the volume for this playlist."
-#~ msgid "Enter a name for this playlist."
-#~ msgstr "Viser volumet for denne spillelisten."
 
 #, fuzzy
 #~| msgid "Holds the mail server hostname or IP."
@@ -6051,14 +6247,8 @@ msgstr ""
 #~ msgid "Sensor humidity"
 #~ msgstr "Sensor luftfuktighet"
 
-#~ msgid "Sensor distance"
-#~ msgstr "Sensor avstand"
-
 #~ msgid "Switch status"
 #~ msgstr "Bryter status"
-
-#~ msgid "System status"
-#~ msgstr "Systemstatus"
 
 #~ msgid "System environment"
 #~ msgstr "System miljø"
