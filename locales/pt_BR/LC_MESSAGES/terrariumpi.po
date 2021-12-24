@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-12-24 15:45+CET\n"
-"PO-Revision-Date: 2021-12-17 22:01+0000\n"
+"PO-Revision-Date: 2021-12-25 20:01+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -163,22 +163,16 @@ msgid "last update"
 msgstr "Última atualização"
 
 #: terrariumNotification.py:37
-#, fuzzy
-#| msgid "Locale"
 msgid "Local date"
-msgstr "Localização"
+msgstr "Data local"
 
 #: terrariumNotification.py:38
-#, fuzzy
-#| msgid "Locale"
 msgid "Local time"
-msgstr "Localização"
+msgstr "Hora local"
 
 #: terrariumNotification.py:39
-#, fuzzy
-#| msgid "Enter end time"
 msgid "Local date and time"
-msgstr "Digite o horário de término"
+msgstr "Data e hora local"
 
 #: terrariumNotification.py:47
 msgid "Authentication login error"
@@ -186,72 +180,56 @@ msgstr "Erro de autenticação no login"
 
 #: terrariumNotification.py:49
 msgid "IP of the wrong login attempt"
-msgstr ""
+msgstr "IP da tentativa de login errada"
 
 #: terrariumNotification.py:50
-#, fuzzy
-#| msgid "Username"
 msgid "Used username"
-msgstr "Nome de usuário"
+msgstr "Nome de usuário usado"
 
 #: terrariumNotification.py:51
-#, fuzzy
-#| msgid "New password"
 msgid "Used password"
-msgstr "Nova senha"
+msgstr "Senha usada"
 
 #: terrariumNotification.py:57
 msgid "System warning"
 msgstr "Aviso do sistema"
 
 #: terrariumNotification.py:59
-#, fuzzy
-#| msgid "Warning messages"
 msgid "Warning message"
-msgstr "Mensagens de aviso"
+msgstr "Mensagem de Aviso"
 
 #: terrariumNotification.py:65
 msgid "System error"
 msgstr "Erro do sistema"
 
 #: terrariumNotification.py:67
-#, fuzzy
-#| msgid "Error messages"
 msgid "Error message"
-msgstr "Mensagens de erro"
+msgstr "Mensagem de erro"
 
 #: terrariumNotification.py:73
-#, fuzzy
-#| msgid "System status"
 msgid "System summary"
-msgstr "Status do sistema"
+msgstr "Resumo do sistema"
 
 #: terrariumNotification.py:75
 msgid "System uptime in humand readable format"
-msgstr ""
+msgstr "Tempo de atividade do sistema em formato humano e legível"
 
 #: terrariumNotification.py:76
-#, fuzzy
-#| msgid "System load"
 msgid "System load last minute"
-msgstr "Carga do sistema"
+msgstr "Carga do sistema no último minuto"
 
 #: terrariumNotification.py:77 terrariumNotification.py:79
 #: terrariumNotification.py:84 terrariumNotification.py:108
 msgid "True if there is an alarm"
-msgstr ""
+msgstr "Verdadeiro se houver um alarme"
 
 #: terrariumNotification.py:78
-#, fuzzy
-#| msgid "CPU Temperature"
 msgid "System CPU temperature"
-msgstr "Temperatura da CPU"
+msgstr "Temperatura da CPU do sistema"
 
 #: terrariumNotification.py:80
-#, fuzzy
-#| msgid "Storage"
 msgid "Storage usage"
-msgstr "Armazenamento"
+msgstr "Uso de armazenamento"
 
 #: terrariumNotification.py:81 views/status.html:66
 msgid "Memory usage"
@@ -259,45 +237,35 @@ msgstr "Uso de memória"
 
 #: terrariumNotification.py:82
 msgid "Average of [sensor type] (ex. temperature)"
-msgstr ""
+msgstr "Média de [sensor type] (ex. temperatura)"
 
 #: terrariumNotification.py:83 terrariumNotification.py:111
-#, fuzzy
-#| msgid "Sensor temperature"
 msgid "Sensor type unit value"
-msgstr "Sensor temperatura"
+msgstr "Valor da unidade do tipo de sensor"
 
 #: terrariumNotification.py:85
-#, fuzzy
-#| msgid "Pi power usage"
 msgid "Current power usage"
-msgstr "Uso de energia do Raspberry"
+msgstr "Uso de energia atual"
 
 #: terrariumNotification.py:86
-#, fuzzy
-#| msgid "Pi power usage"
 msgid "Max power usage"
-msgstr "Uso de energia do Raspberry"
+msgstr "Uso máximo de energia"
 
 #: terrariumNotification.py:87
-#, fuzzy
-#| msgid "Current value"
 msgid "Current water flow"
-msgstr "Valor atual"
+msgstr "Fluxo de água atual"
 
 #: terrariumNotification.py:88 terrariumNotification.py:138
-#, fuzzy
-#| msgid "Water flow"
 msgid "Max water flow"
-msgstr "Fluxo d'água"
+msgstr "Fluxo máximo de água"
 
 #: terrariumNotification.py:89
 msgid "Number of relays active"
-msgstr ""
+msgstr "Número de relés ativos"
 
 #: terrariumNotification.py:95
 msgid "Sensor update (every 30 seconds)"
-msgstr ""
+msgstr "Atualização do sensor (a cada 30 segundos)"
 
 #: terrariumNotification.py:97 terrariumNotification.py:133
 #: terrariumNotification.py:164
@@ -306,16 +274,12 @@ msgstr "ID"
 
 #: terrariumNotification.py:98 terrariumNotification.py:134
 #: terrariumNotification.py:165
-#, fuzzy
-#| msgid "Hardware"
 msgid "Hardware type"
-msgstr "Hardware"
+msgstr "Tipo de Hardware"
 
 #: terrariumNotification.py:99
-#, fuzzy
-#| msgid "Sensor update"
 msgid "Sensor type"
-msgstr "Atualização de Sensor"
+msgstr "Tipo de sensor"
 
 #: terrariumNotification.py:100 terrariumNotification.py:135
 #: terrariumNotification.py:166 views/audio_files.html:24
@@ -357,7 +321,7 @@ msgstr "Diferença máxima"
 
 #: terrariumNotification.py:107
 msgid "Exclude from average"
-msgstr ""
+msgstr "Excluir da média"
 
 #: terrariumNotification.py:109
 msgid "Current value"
@@ -366,11 +330,11 @@ msgstr "Valor atual"
 #: terrariumNotification.py:110 terrariumNotification.py:142
 #: terrariumNotification.py:169
 msgid "True if there is an error"
-msgstr ""
+msgstr "Verdadeiro se houver um erro"
 
 #: terrariumNotification.py:117
 msgid "Sensor change (only when value is changed)"
-msgstr ""
+msgstr "Mudança do sensor (apenas quando o valor é alterado)"
 
 #: terrariumNotification.py:124
 msgid "Sensor alarm"
@@ -378,53 +342,43 @@ msgstr "Alarme de Sensor"
 
 #: terrariumNotification.py:131
 msgid "Relay update (every 30 seconds)"
-msgstr ""
+msgstr "Atualização do sensor (a cada 30 segundos)"
 
 #: terrariumNotification.py:137
-#, fuzzy
-#| msgid "wattage"
 msgid "Max wattage"
-msgstr "Potência"
+msgstr "Potência máxima"
 
 #: terrariumNotification.py:139
-#, fuzzy
-#| msgid "in manual mode"
 msgid "True if in manual mode"
-msgstr "no modo manual"
+msgstr "Verdadeiro se estiver no modo manual"
 
 #: terrariumNotification.py:140
 msgid "True if it is a dimmer"
-msgstr ""
+msgstr "Verdadeiro se for um dimmer"
 
 #: terrariumNotification.py:141 terrariumNotification.py:168
-#, fuzzy
-#| msgid "Current status"
 msgid "Current state"
 msgstr "Estado atual"
 
 #: terrariumNotification.py:148
 msgid "Relay change (only when value is changed)"
-msgstr ""
+msgstr "Mudança de relé (somente quando o valor é alterado)"
 
 #: terrariumNotification.py:155
-#, fuzzy
-#| msgid "Relay change"
 msgid "Relay toggle"
-msgstr "Alteração de relé"
+msgstr "Alternar relé"
 
 #: terrariumNotification.py:162
 msgid "Button update (every 30 seconds)"
-msgstr ""
+msgstr "Atualização do botão (a cada 30 segundos)"
 
 #: terrariumNotification.py:175
 msgid "Button change (only when value is changed)"
-msgstr ""
+msgstr "Mudança do botão (somente quando o valor é alterado)"
 
 #: terrariumNotification.py:182
-#, fuzzy
-#| msgid "Button settings"
 msgid "Button action"
-msgstr "Configurações dos botões"
+msgstr "Ação do Botão"
 
 #: terrariumNotification.py:190
 msgid "Webcam archive"
@@ -1577,10 +1531,8 @@ msgid "Message type"
 msgstr "Tipo de mensagem"
 
 #: views/modals/message.html:24
-#, fuzzy
-#| msgid "Notification messages"
 msgid "Select the notification message type."
-msgstr "Mensagens de notificação"
+msgstr "Selecione o tipo de mensagem de notificação."
 
 #: views/modals/message.html:30
 msgid "Subject"
@@ -1588,13 +1540,11 @@ msgstr "Assunto"
 
 #: views/modals/message.html:33
 msgid "Enter a short subject. You can use placeholder values here."
-msgstr ""
+msgstr "Insira um assunto. Podem ser usados placeholders aqui."
 
 #: views/modals/message.html:36
-#, fuzzy
-#| msgid "The name cannot be empty."
 msgid "The subject cannot be empty."
-msgstr "O nome não pode ficar em branco."
+msgstr "O assunto não pode ficar em branco."
 
 #: views/modals/message.html:42 views/modals/service.html:41
 msgid "Rate limit"
@@ -1604,22 +1554,20 @@ msgstr "Limite de taxa"
 msgid ""
 "Maximum number of messages per minute for this message. Use 0 for unlimited."
 msgstr ""
+"Número máximo de mensagens por minuto para esta mensagem. Use 0 para "
+"ilimitado."
 
 #: views/modals/message.html:48
-#, fuzzy
-#| msgid "Enter a valid url."
 msgid "Enter a valid number."
-msgstr "Digite uma URL válida."
+msgstr "Digite um número válido."
 
 #: views/modals/message.html:55 views/modals/service.html:51
 msgid "Enabled"
 msgstr "Ativado"
 
 #: views/modals/message.html:60
-#, fuzzy
-#| msgid "Enable/disable this service."
 msgid "Enable/disable this notification message."
-msgstr "Ativar/desativar este serviço."
+msgstr "Ativar/desativar esta mensagem de notificação."
 
 #: views/modals/message.html:70
 msgid "Message"
@@ -1627,17 +1575,15 @@ msgstr "Mensagem"
 
 #: views/modals/message.html:73
 msgid "Enter a message. You can use placeholder values here."
-msgstr ""
+msgstr "Insira uma mensagem. Podem ser usados placeholders aqui."
 
 #: views/modals/message.html:81
 msgid "Services"
 msgstr "Serviços"
 
 #: views/modals/message.html:84
-#, fuzzy
-#| msgid "Select the hardware type for this button."
 msgid "Select the service to use for this notification message."
-msgstr "Selecione o hardware usado para este botão."
+msgstr "Selecione o serviço a ser usado para esta mensagem de notificação."
 
 #: views/modals/message.html:92
 msgid "Place holders"
@@ -1645,7 +1591,7 @@ msgstr "Espaços reservados"
 
 #: views/modals/message.html:95
 msgid "List of available placeholders."
-msgstr ""
+msgstr "Lista de placeholders disponíveis."
 
 #: views/modals/playlist.html:12
 msgid "Playlist settings"
@@ -1826,93 +1772,75 @@ msgid "Notification service settings"
 msgstr "Configurações do serviço de notificação"
 
 #: views/modals/service.html:23
-#, fuzzy
-#| msgid "Notification services"
 msgid "Select the notification service type."
-msgstr "Serviços de notificação"
+msgstr "Selecione o tipo de serviço de notificação."
 
 #: views/modals/service.html:44
 msgid ""
 "Maximum number of messages per minute for this service. Use 0 for unlimited."
 msgstr ""
+"Número máximo de mensagens por minuto para este serviço. Use 0 para "
+"ilimitado."
 
 #: views/modals/service.html:55
-#, fuzzy
-#| msgid "Enable/disable this service."
 msgid "Enable/disable this notification service."
-msgstr "Ativar/desativar este serviço."
+msgstr "Ativar/desativar este serviço de notificação."
 
 #: views/modals/service.html:70
-#, fuzzy
-#| msgid "Select the hardware type for this relay."
 msgid "Select the hardware type for this display."
-msgstr "Selecione o hardware usado para este botão."
+msgstr "Selecione o tipo de hardware usado para este display."
 
 #: views/modals/service.html:92
 msgid "Show title"
 msgstr "Exibir nome"
 
 #: views/modals/service.html:97
-#, fuzzy
-#| msgid "Show a title on the display."
 msgid "Show a name and version as title on the display."
-msgstr "Mostrar nome no visor."
+msgstr "Mostrar nome e versão como título no display."
 
 #: views/modals/service.html:105
 msgid "Receiver email"
 msgstr "Email do destinatário"
 
 #: views/modals/service.html:108
-#, fuzzy
-#| msgid "Enter an email address"
 msgid "Enter an email address."
-msgstr "Insira o email"
+msgstr "Insira o email."
 
 #: views/modals/service.html:117
 msgid "SMTP Server address"
 msgstr "Endereço do servidor SMTP"
 
 #: views/modals/service.html:120
-#, fuzzy
-#| msgid "Enter an email address"
 msgid "Enter the mail server address."
-msgstr "Insira o email"
+msgstr "Insira o endereço do servidor de email."
 
 #: views/modals/service.html:129
 msgid "SMTP Server port"
 msgstr "Porta do servidor SMTP"
 
 #: views/modals/service.html:132 views/modals/service.html:303
-#, fuzzy
-#| msgid "Enter number"
 msgid "Enter a port number."
-msgstr "Inserir o número"
+msgstr "Inserir o número da porta."
 
 #: views/modals/service.html:135 views/modals/service.html:306
-#, fuzzy
-#| msgid "The name cannot be empty."
 msgid "The port number cannot be empty."
-msgstr "O nome não pode ficar em branco."
+msgstr "O número da porta não pode ficar em branco."
 
 #: views/modals/service.html:141
 msgid "SMTP Server username"
 msgstr "Nome de usuário no Servidor SMTP"
 
 #: views/modals/service.html:144 views/modals/service.html:315
-#, fuzzy
-#| msgid "Enter a name."
 msgid "Enter a username."
-msgstr "Insira o nome."
+msgstr "Insira o nome de usuário."
 
 #: views/modals/service.html:150
 msgid "SMTP Server password"
 msgstr "Senha no Servidor SMTP"
 
 #: views/modals/service.html:153 views/modals/service.html:324
-#, fuzzy
-#| msgid "Enter an address."
 msgid "Enter a password."
-msgstr "Insira o endereço."
+msgstr "Insira a senha."
 
 #: views/modals/service.html:158
 msgid "The email notification service will auto detect SSL/TLS connections."
@@ -1923,32 +1851,24 @@ msgid "API Token"
 msgstr "Token de API"
 
 #: views/modals/service.html:167
-#, fuzzy
-#| msgid "Enter the Pushover API token"
 msgid "Enter the API Token."
-msgstr "Insira o token de API do Pushover"
+msgstr "Insira o token de API."
 
 #: views/modals/service.html:170
-#, fuzzy
-#| msgid "The title cannot be empty."
 msgid "The API token cannot be empty."
-msgstr "O nome não pode estar em branco."
+msgstr "O token do API não pode estar em branco."
 
 #: views/modals/service.html:176
 msgid "User key"
 msgstr "Chave do usuário"
 
 #: views/modals/service.html:179
-#, fuzzy
-#| msgid "Enter the Pushover user key"
 msgid "Enter the user key."
-msgstr "Insira a chave de usuário (user key) do Pushover"
+msgstr "Insira a chave de usuário (user key)."
 
 #: views/modals/service.html:182
-#, fuzzy
-#| msgid "The user name cannot be empty."
 msgid "The user key cannot be empty."
-msgstr "O nome de usuário não pode estar em branco."
+msgstr "A chave de usuário (user key) não pode estar em branco."
 
 #: views/modals/service.html:195
 msgid "Bot Token"
@@ -1967,28 +1887,24 @@ msgid "Red"
 msgstr "Vermelho"
 
 #: views/modals/service.html:220
-#, fuzzy
-#| msgid "Enter a name for this playlist."
 msgid "Enter GPIO pin for red light."
-msgstr "Insira o nome para esta playlist."
+msgstr "Insira o pino GPIO para a luz vermelha."
 
 #: views/modals/service.html:226
 msgid "Amber"
-msgstr ""
+msgstr "Amarelo"
 
 #: views/modals/service.html:229
 msgid "Enter GPIO pin for amber light."
-msgstr ""
+msgstr "Insira o pino GPIO para a luz amarela."
 
 #: views/modals/service.html:235 views/modals/webcam.html:190
 msgid "Green"
 msgstr "Verde"
 
 #: views/modals/service.html:238
-#, fuzzy
-#| msgid "Enter a name for this event."
 msgid "Enter GPIO pin for green light."
-msgstr "Insira o nome para este evento."
+msgstr "Insira o pino GPIO para a luz verde."
 
 #: views/modals/service.html:247
 msgid "Customer key"
@@ -2011,10 +1927,8 @@ msgid "Full post url"
 msgstr "URL da postagem completa"
 
 #: views/modals/service.html:277
-#, fuzzy
-#| msgid "Enter a full url"
 msgid "Enter the full post url."
-msgstr "Insira uma url completa"
+msgstr "Insira a url completa para o post."
 
 #: views/modals/service.html:288
 msgid "MQTT Server address"
@@ -2866,10 +2780,8 @@ msgid "Enter a full url, local json file or script file."
 msgstr "Insira uma URL válida, um arquivo JSON local ou um script."
 
 #: views/modals/service.html:227
-#, fuzzy
-#| msgid "Enter red GPIO pin"
 msgid "Enter amber GPIO pin"
-msgstr "Insira o pino GPIO para o vermelho"
+msgstr "Insira o pino GPIO para o amarelo"
 
 #: views/modals/message.html:71
 msgid "Enter a message"
@@ -2948,10 +2860,8 @@ msgid "Enter the capacitor value in &micro;F"
 msgstr "Insira o valor de capacitância em &micro;F"
 
 #: views/modals/service.html:275
-#, fuzzy
-#| msgid "Enter a full url"
 msgid "Enter the full post url"
-msgstr "Insira uma url completa"
+msgstr "Insira a url completa para o post"
 
 #: views/modals/area.html:467
 msgid "Enter the height"
