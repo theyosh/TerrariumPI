@@ -219,6 +219,14 @@ class Button(db.Entity):
 
       return button_data
 
+  def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+    # Add extra fields
+    data['value']  = self.value
+    data['error']  = self.error
+
+    return data
+
   def __repr__(self):
     return f'{self.hardware} button \'{self.name}\' at address \'{self.address}\''
 
@@ -403,6 +411,7 @@ class Relay(db.Entity):
     data['dimmer']      = self.is_dimmer
     data['value']       = self.value
     data['replacement'] = self.replacement.timestamp()
+    data['error']       = self.error
 
     return data
 

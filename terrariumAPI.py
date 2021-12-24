@@ -41,7 +41,11 @@ class terrariumAPI(object):
 
     # Area API
     bottle_app.route('/api/areas/types/',       'GET',    self.area_types,  apply=self.authentication(False), name='api:area_types')
+    bottle_app.route('/api/areas/<area:path>/history/', 'GET',    self.area_detail_history, apply=self.authentication(False), name='api:area_history')
+
     bottle_app.route('/api/areas/<area:path>/', 'GET',    self.area_detail, apply=self.authentication(False), name='api:area_detail')
+
+
     bottle_app.route('/api/areas/<area:path>/', 'PUT',    self.area_update, apply=self.authentication(),      name='api:area_update')
     bottle_app.route('/api/areas/<area:path>/', 'DELETE', self.area_delete, apply=self.authentication(),      name='api:area_delete')
     bottle_app.route('/api/areas/',             'GET',    self.area_list,   apply=self.authentication(False), name='api:area_list')
@@ -217,6 +221,10 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting area {area} detail. {ex}')
 
+  def area_detail_history(self, area):
+    area = self.area_detail(area)
+    return self.sensor_history(list(area['setup']['sensors']))
+
   @orm.db_session
   def area_add(self):
     try:
@@ -266,7 +274,6 @@ class terrariumAPI(object):
 
   # Audiofiles
   def audio_hardware(self):
-    # self.webserver
     return { 'data' : terrariumAudio.available_soundcards }
 
   @orm.db_session
@@ -1013,7 +1020,16 @@ class terrariumAPI(object):
     else:
       period = 1
 
-    if filter in terrariumSensor.sensor_types:
+    if type(filter) is list:
+      # Get history based on selected sensor IDs
+      query = orm.select((sh.timestamp,
+                          orm.avg(sh.value),
+                          orm.avg(sh.alarm_min),
+                          orm.avg(sh.alarm_max)) for sh in SensorHistory if  sh.sensor.id in filter
+                                                                         and sh.exclude_avg == False
+                                                                         and sh.timestamp >= datetime.now() - timedelta(days=period))
+
+    elif filter in terrariumSensor.sensor_types:
       query = orm.select((sh.timestamp,
                           orm.avg(sh.value),
                           orm.avg(sh.alarm_min),

@@ -212,6 +212,7 @@
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_high_duration_"} ]'></span>)
                   </td>
                 </tr>
+
                 <tr data-class="state.sensors" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
                   <td >{{ _('Current') }}:</td>
                   <td class="truncate">
@@ -235,6 +236,11 @@
                     {"attribute": "class", "value": "warning"},
                     {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_warning_"} ]'> </i>
                   </td>
+                </tr>
+                <tr data-class="show_history" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                  <td colspan="3" data-template-bind='[
+                  {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_history_"}
+                  ]'></td>
                 </tr>
               </script>
               <script type="text/html" id="enclosure_template">
@@ -343,7 +349,10 @@
       websocket_message({ 'type' : 'load_dashboard'});
 
       setTimeout(function(){
+
         jQuery.get({url: '{{ url_for("api:enclosure_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
+          let area_history = [];
+
           jQuery.each(data.data,function(counter,enclosure) {
             // Accordion toggle + link
             enclosure.collapse_link   = '#enclosure_' + enclosure.id;
@@ -363,13 +372,16 @@
               // TODO: Translate the area type names...
               area.status  = (area.state.powered === true ? 'badge-success' : (area.state.powered === false ? 'badge-secondary' : ''));
               if (area.state.sensors != undefined) {
+                //area.show_history = true;
                 area.warning = 'fas fa-exclamation-triangle text-danger' + (area.state.sensors.alarm ? '' : ' d-none');
+                area_history.push(area.id)
               }
             });
             jQuery('#accordion').loadTemplate(jQuery('#enclosure_template'),enclosure,{ append: true, });
           });
 
           jQuery('#accordion .card-title a:first').trigger('click');
+          loadSparkLines();
         });
 
         jQuery.get({url: '{{ url_for("api:sensor_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
@@ -438,6 +450,26 @@
         });
       },500);
     });
+
+    function loadSparkLines() {
+      let darkmode = jQuery('body').hasClass('dark-mode');
+      jQuery('td[id^="area_history_"]').each(function(counter, area){
+        let area_id = jQuery(area).attr('id').replace('area_history_','');
+        jQuery.get({url: '{{ url_for("api:area_history", area="_") }}'.replace('_',area_id), cache: '1' != Cookies.get('no-cache')}).then(function(data) {
+          var sparkline = new Sparkline($('#area_history_' + area_id)[0], {
+            width: 300,
+            height: 20,
+            lineWidth: 1,
+            dotRadius: 2,
+            lineColor: ( darkmode ? 'white' : 'black'),
+            endColor:  ( darkmode ? 'white' : 'black'),
+            fillBelow: false
+          });
+          sparkline.draw(data.data.map(item => item.value));
+          sparkline.canvas.style.width = '100%';
+        });
+      });
+    }
   </script>
 </div>
 {% endblock content %}
