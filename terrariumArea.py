@@ -307,26 +307,26 @@ class terrariumArea(object):
         'periods'  : []
       }
 
-    varation_data = copy.deepcopy(self.setup.get('variation',[]))
-    if len(varation_data) == 0:
+    variation_data = copy.deepcopy(self.setup.get('variation',[]))
+    if len(variation_data) == 0:
       return
 
-    if varation_data[0]['when'] in ['script','external','weather']:
+    if variation_data[0]['when'] in ['script','external','weather']:
       try:
-        self.state['variation']['offset'] = float(varation_data[0]['offset'])
+        self.state['variation']['offset'] = float(variation_data[0]['offset'])
       except:
         pass
 
-      self.state['variation'][varation_data[0]['when']] = True
-      if 'weather' != varation_data[0]['when']:
-        self.state['variation']['source'] = varation_data[0]['source']
+      self.state['variation'][variation_data[0]['when']] = True
+      if 'weather' != variation_data[0]['when']:
+        self.state['variation']['source'] = variation_data[0]['source']
 
-      if 'external' == varation_data[0]['when']:
+      if 'external' == variation_data[0]['when']:
         self.__external_cache = terrariumCache()
 
-      varation_data = []
+      variation_data = []
 
-    for varation in varation_data:
+    for varation in variation_data:
       periods = len(self.state['variation']['periods'])
 
       if 'at' == varation.get('when'):
