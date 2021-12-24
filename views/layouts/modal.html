@@ -46,8 +46,10 @@
     let {{modal_type}}_form  = {{modal_type}}_modal.find('form');
 
     {{modal_type}}_form.find('small.text-muted').hide();
-    {{modal_type}}_form.find('button.helpbutton').off('click').on('click',function(){
-      {{modal_type}}_form.find('small.text-muted').toggle();
+    {{modal_type}}_form.find('button.helpbutton').find('i').removeClass('font-weight-bold');
+    {{modal_type}}_form.find('button.helpbutton').off('click').on('click',function() {
+      {{modal_type}}_form.find('small.text-muted').toggle( !jQuery(this).find('i').hasClass('font-weight-bold'));
+      jQuery(this).find('i').toggleClass('font-weight-bold');
     })
 
     {% block modal_form_javascript_pre %}

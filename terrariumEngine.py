@@ -563,13 +563,19 @@ class terrariumEngine(object):
           self.sensors[sensor.id].erratic = 0
 
         if new_value is not None:
+          change = new_value != sensor.value
           sensor.update(new_value)
           db_time = (time.time() - start) - measurement_time
           self.webserver.websocket_message('gauge_update' , {'id' : sensor.id, 'value' : new_value})
 
           # Notification message
           sensor_data = sensor.to_dict()
+          sensor_data['unit'] = self.units[sensor.type]
           self.notification.message(f'sensor_update' , sensor_data)
+
+          if change:
+            self.notification.message(f'sensor_change' , sensor_data)
+
           if sensor_data['alarm']:
             self.notification.message(f'sensor_alarm' , sensor_data)
 
@@ -709,12 +715,21 @@ class terrariumEngine(object):
           logger.warning(f'Could not take a new measurement from relay {relay}. Tried for {measurement_time:.2f} seconds. Skipping this update.')
           continue
 
+        change = new_value != relay.value
         relay.update(new_value,force_update)
+
         db_time = (time.time() - start) - measurement_time
         self.webserver.websocket_message('relay' , {'id' : relay.id, 'value' : new_value})
 
         logger.info(f'Updated relay {relay} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds.')
         logger.debug(f'Updated relay {relay} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
+
+        # Notification message
+        relay_data = relay.to_dict()
+        self.notification.message(f'relay_update' , relay_data)
+
+        if change:
+          self.notification.message(f'relay_change' , relay_data)
 
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
@@ -746,8 +761,7 @@ class terrariumEngine(object):
 
       # Notification message
       relay_data = relay.to_dict()
-      self.notification.message(f'relay_change' , relay_data)
-
+      self.notification.message(f'relay_toggle' , relay_data)
 
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
@@ -800,11 +814,19 @@ class terrariumEngine(object):
           logger.warning(f'Could not take a new measurement from {button}. Tried for {measurement_time:.2f} seconds. Skipping this update.')
           continue
 
+        change = new_value != button.value
         button.update(new_value,force_update)
         db_time = (time.time() - start) - measurement_time
 
         logger.info(f'Updated {button} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds.')
         logger.debug(f'Updated {button} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
+
+        # Notification message
+        button_data = button.to_dict()
+        self.notification.message(f'button_update' , button_data)
+
+        if change:
+          self.notification.message(f'button_change' , button_data)
 
   # -= NEW =-
   def button_action(self, button, state):
@@ -814,7 +836,7 @@ class terrariumEngine(object):
 
       # Notification message
       button_data = button.to_dict()
-      self.notification.message(f'button_change' , button_data)
+      self.notification.message(f'button_action' , button_data)
 
       # Update the button state on the button page
       self.webserver.websocket_message('button' , {'id' : button.id, 'hardware' : button.hardware, 'value' : button.value})

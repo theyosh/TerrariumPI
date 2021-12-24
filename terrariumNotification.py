@@ -72,19 +72,49 @@ class terrariumNotification(terrariumSingleton):
     'system_summary' : {
       'name':_('System summary'),
       'placeholders' : {
+        'uptime' : _('System uptime in humand readable format'),
+        'system_load' : _('System load last minute'),
+        'system_load_alarm' : _('True if there is an alarm'),
+        'cpu_temperature' : _('System CPU temperature'),
+        'cpu_temperature_alarm' : _('True if there is an alarm'),
+        'storage' : _('Storage usage'),
+        'memory' : _('Memory usage'),
+        'average_[sensor_type]' : _('Average of [sensor type] (ex. temperature)'),
+        'average_[sensor_type]_unit' : _('Sensor type unit value'),
+        'average_[sensor_type]_alarm' : _('True if there is an alarm'),
+        'current_watt' : _('Current power usage'),
+        'max_watt' : _('Max power usage'),
+        'current_flow' : _('Current water flow'),
+        'max_flow' : _('Max water flow'),
+        'relays_active' : _('Number of relays active'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'sensor_update' : {
-      'name':_('Sensor update'),
+      'name':_('Sensor update (every 30 seconds)'),
       'placeholders' : {
+        'id': _('ID'),
+        'hardware': _('Hardware type'),
+        'type': _('Sensor type'),
+        'name': _('Name'),
+        'address': _('Address'),
+        'limit_min': _('Limit min'),
+        'limit_max': _('Limit max'),
+        'alarm_min': _('Alarm min'),
+        'alarm_max': _('Alarm max'),
+        'max_diff': _('Max difference'),
+        'exclude_avg': _('Exclude from average'),
+        'alarm': _('True if there is an alarm'),
+        'value': _('Current value'),
+        'error': _('True if there is an error'),
+        'unit' : _('Sensor type unit value'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'sensor_change' : {
-      'name':_('Sensor change'),
+      'name':_('Sensor change (only when value is changed)'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
@@ -97,9 +127,25 @@ class terrariumNotification(terrariumSingleton):
       }
     },
 
+    'relay_update' : {
+      'name':_('Relay update (every 30 seconds)'),
+      'placeholders' : {
+        'id': _('ID'),
+        'hardware': _('Hardware type'),
+        'name': _('Name'),
+        'address': _('Address'),
+        'wattage': _('Max wattage'),
+        'flow': _('Max water flow'),
+        'manual_mode': _('True if in manual mode'),
+        'dimmer': _('True if it is a dimmer'),
+        'value': _('Current state'),
+        'error': _('True if there is an error'),
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
 
     'relay_change' : {
-      'name':_('Relay change'),
+      'name':_('Relay change (only when value is changed)'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
@@ -112,12 +158,33 @@ class terrariumNotification(terrariumSingleton):
       }
     },
 
+    'button_update' : {
+      'name':_('Button update (every 30 seconds)'),
+      'placeholders' : {
+        'id': _('ID'),
+        'hardware': _('Hardware type'),
+        'name': _('Name'),
+        'address': _('Address'),
+        'value': _('Current state'),
+        'error': _('True if there is an error'),
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
+
     'button_change' : {
-      'name':_('Button change'),
+      'name':_('Button change (only when value is changed)'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
     },
+
+    'button_action' : {
+      'name':_('Button action'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
+
 
     'webcam_archive' : {
       'name':_('Webcam archive'),
@@ -126,6 +193,16 @@ class terrariumNotification(terrariumSingleton):
       }
     },
   }
+
+  __MESSAGES['sensor_change']['placeholders'] = __MESSAGES['sensor_update']['placeholders']
+  __MESSAGES['sensor_alarm']['placeholders']  = __MESSAGES['sensor_update']['placeholders']
+
+  __MESSAGES['relay_change']['placeholders']  = __MESSAGES['relay_update']['placeholders']
+  __MESSAGES['relay_toggle']['placeholders']  = __MESSAGES['relay_update']['placeholders']
+
+  __MESSAGES['button_change']['placeholders'] = __MESSAGES['button_update']['placeholders']
+  __MESSAGES['button_action']['placeholders'] = __MESSAGES['button_update']['placeholders']
+
 
   @classproperty
   def available_messages(__cls__):
