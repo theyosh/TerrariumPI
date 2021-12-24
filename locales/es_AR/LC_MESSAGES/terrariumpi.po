@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2021-12-22 21:26+CET\n"
+"POT-Creation-Date: 2021-12-24 15:45+CET\n"
 "PO-Revision-Date: 2021-12-17 22:01+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Spanish (Argentina) <https://weblate.theyosh.nl/projects/"
@@ -138,33 +138,33 @@ msgstr ""
 msgid "wattage"
 msgstr "Vataje"
 
-#: terrariumEngine.py:1088 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1110 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Tiempo de actividad"
 
-#: terrariumEngine.py:1094
+#: terrariumEngine.py:1116
 msgid "System load"
 msgstr "Carga del sistema"
 
-#: terrariumEngine.py:1100 views/status.html:44
+#: terrariumEngine.py:1122 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Temperatura CPU"
 
-#: terrariumEngine.py:1106
+#: terrariumEngine.py:1128
 msgid "Storage"
 msgstr "Almacenamiento"
 
-#: terrariumEngine.py:1112
+#: terrariumEngine.py:1134
 msgid "Memory"
 msgstr "memoria"
 
-#: terrariumEngine.py:1133
+#: terrariumEngine.py:1155
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "El tipo de sensor"
 
-#: terrariumEngine.py:1309
+#: terrariumEngine.py:1331
 msgid "last update"
 msgstr "última actualización"
 
@@ -238,71 +238,239 @@ msgstr "Ningún mensaje de error"
 msgid "System summary"
 msgstr "Estado del sistema"
 
+#: terrariumNotification.py:75
+msgid "System uptime in humand readable format"
+msgstr ""
+
+#: terrariumNotification.py:76
+#, fuzzy
+#| msgid "System load"
+msgid "System load last minute"
+msgstr "Carga del sistema"
+
+#: terrariumNotification.py:77 terrariumNotification.py:79
+#: terrariumNotification.py:84 terrariumNotification.py:108
+msgid "True if there is an alarm"
+msgstr ""
+
+#: terrariumNotification.py:78
+#, fuzzy
+#| msgid "CPU Temperature"
+msgid "System CPU temperature"
+msgstr "Temperatura CPU"
+
 #: terrariumNotification.py:80
 #, fuzzy
-#| msgid "Sensor ph"
-msgid "Sensor update"
-msgstr "Sensor de pH"
+#| msgid "Storage"
+msgid "Storage usage"
+msgstr "Almacenamiento"
+
+#: terrariumNotification.py:81 views/status.html:66
+msgid "Memory usage"
+msgstr "Uso de la memoria"
+
+#: terrariumNotification.py:82
+msgid "Average of [sensor type] (ex. temperature)"
+msgstr ""
+
+#: terrariumNotification.py:83 terrariumNotification.py:111
+#, fuzzy
+#| msgid "Sensor temperature"
+msgid "Sensor type unit value"
+msgstr "Sensor de temperatura"
+
+#: terrariumNotification.py:85
+#, fuzzy
+#| msgid "Pi power usage in W"
+msgid "Current power usage"
+msgstr "Consumo PI en W"
+
+#: terrariumNotification.py:86
+#, fuzzy
+#| msgid "Pi power usage in W"
+msgid "Max power usage"
+msgstr "Consumo PI en W"
 
 #: terrariumNotification.py:87
 #, fuzzy
-#| msgid "Sensor distance"
-msgid "Sensor change"
-msgstr "Sensor de distancia"
+#| msgid "Current value"
+msgid "Current water flow"
+msgstr "Valor actual"
 
-#: terrariumNotification.py:94
+#: terrariumNotification.py:88 terrariumNotification.py:138
+#, fuzzy
+#| msgid "Water flow in L/m"
+msgid "Max water flow"
+msgstr "Flujo de agua en L/m"
+
+#: terrariumNotification.py:89
+msgid "Number of relays active"
+msgstr ""
+
+#: terrariumNotification.py:95
+msgid "Sensor update (every 30 seconds)"
+msgstr ""
+
+#: terrariumNotification.py:97 terrariumNotification.py:133
+#: terrariumNotification.py:164
+msgid "ID"
+msgstr "ID"
+
+#: terrariumNotification.py:98 terrariumNotification.py:134
+#: terrariumNotification.py:165
+#, fuzzy
+#| msgid "Hardware"
+msgid "Hardware type"
+msgstr "Hardware"
+
+#: terrariumNotification.py:99
+#, fuzzy
+#| msgid "Sensor ph"
+msgid "Sensor type"
+msgstr "Sensor de pH"
+
+#: terrariumNotification.py:100 terrariumNotification.py:135
+#: terrariumNotification.py:166 views/audio_files.html:24
+#: views/audio_files.html:35 views/enclosures.html:172
+#: views/modals/area.html:47 views/modals/button.html:45
+#: views/modals/enclosure.html:18 views/modals/event.html:15
+#: views/modals/playlist.html:18 views/modals/relay.html:45
+#: views/modals/sensor.html:60 views/modals/service.html:29
+#: views/modals/webcam.html:49 views/playlists.html:24 views/playlists.html:39
+msgid "Name"
+msgstr "Nombre"
+
+#: terrariumNotification.py:101 terrariumNotification.py:136
+#: terrariumNotification.py:167 views/modals/button.html:33
+#: views/modals/relay.html:33 views/modals/sensor.html:48
+#: views/modals/service.html:79 views/modals/webcam.html:37
+msgid "Address"
+msgstr "Dirección"
+
+#: terrariumNotification.py:102 views/modals/sensor.html:107
+msgid "Limit min"
+msgstr "Limite mínimo"
+
+#: terrariumNotification.py:103 views/modals/sensor.html:119
+msgid "Limit max"
+msgstr "Limite máximo"
+
+#: terrariumNotification.py:104 views/modals/sensor.html:83
+msgid "Alarm min"
+msgstr "Alarma mínimo"
+
+#: terrariumNotification.py:105 views/modals/sensor.html:95
+msgid "Alarm max"
+msgstr "Alarma máximo"
+
+#: terrariumNotification.py:106
+#, fuzzy
+#| msgid "Max diff"
+msgid "Max difference"
+msgstr "Diferencia máxima"
+
+#: terrariumNotification.py:107
+msgid "Exclude from average"
+msgstr ""
+
+#: terrariumNotification.py:109
+msgid "Current value"
+msgstr "Valor actual"
+
+#: terrariumNotification.py:110 terrariumNotification.py:142
+#: terrariumNotification.py:169
+msgid "True if there is an error"
+msgstr ""
+
+#: terrariumNotification.py:117
+msgid "Sensor change (only when value is changed)"
+msgstr ""
+
+#: terrariumNotification.py:124
 #, fuzzy
 #| msgid "Sensor ph"
 msgid "Sensor alarm"
 msgstr "Sensor de pH"
 
-#: terrariumNotification.py:102
-#, fuzzy
-#| msgid "Webcam settings"
-msgid "Relay change"
-msgstr "Configuraciones de la webcam"
+#: terrariumNotification.py:131
+msgid "Relay update (every 30 seconds)"
+msgstr ""
 
-#: terrariumNotification.py:109
+#: terrariumNotification.py:137
+#, fuzzy
+#| msgid "wattage"
+msgid "Max wattage"
+msgstr "Vataje"
+
+#: terrariumNotification.py:139
+#, fuzzy
+#| msgid "in manual mode"
+msgid "True if in manual mode"
+msgstr "en modo manual"
+
+#: terrariumNotification.py:140
+msgid "True if it is a dimmer"
+msgstr ""
+
+#: terrariumNotification.py:141 terrariumNotification.py:168
+#, fuzzy
+#| msgid "Current value"
+msgid "Current state"
+msgstr "Valor actual"
+
+#: terrariumNotification.py:148
+msgid "Relay change (only when value is changed)"
+msgstr ""
+
+#: terrariumNotification.py:155
 #, fuzzy
 #| msgid "Webcam settings"
 msgid "Relay toggle"
 msgstr "Configuraciones de la webcam"
 
-#: terrariumNotification.py:116
+#: terrariumNotification.py:162
+msgid "Button update (every 30 seconds)"
+msgstr ""
+
+#: terrariumNotification.py:175
+msgid "Button change (only when value is changed)"
+msgstr ""
+
+#: terrariumNotification.py:182
 #, fuzzy
 #| msgid "Door settings"
-msgid "Button change"
+msgid "Button action"
 msgstr "Configuraciones de puerta"
 
-#: terrariumNotification.py:123
+#: terrariumNotification.py:190
 #, fuzzy
 #| msgid "Language"
 msgid "Webcam archive"
 msgstr "Idioma"
 
-#: terrariumNotification.py:267
+#: terrariumNotification.py:344
 msgid "Display"
 msgstr "Monitor"
 
-#: terrariumNotification.py:271
+#: terrariumNotification.py:348
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:281
+#: terrariumNotification.py:358
 #, fuzzy
 #| msgid "Minimum light hours"
 msgid "Traffic light"
 msgstr "Mínimo de horas de luz"
 
-#: terrariumNotification.py:285
+#: terrariumNotification.py:362
 msgid "Web-hook"
 msgstr "Web-hook"
 
-#: terrariumNotification.py:289
+#: terrariumNotification.py:366
 msgid "MQTT"
 msgstr "MQTT"
 
-#: terrariumNotification.py:293
+#: terrariumNotification.py:370
 msgid "Pushover"
 msgstr "Pushover"
 
@@ -337,16 +505,6 @@ msgstr "Acerca de"
 #: views/modals/playlist.html:63
 msgid "Audio files"
 msgstr "Archivos de audio"
-
-#: views/audio_files.html:24 views/audio_files.html:35
-#: views/enclosures.html:172 views/modals/area.html:47
-#: views/modals/button.html:45 views/modals/enclosure.html:18
-#: views/modals/event.html:15 views/modals/playlist.html:18
-#: views/modals/relay.html:45 views/modals/sensor.html:60
-#: views/modals/service.html:29 views/modals/webcam.html:49
-#: views/playlists.html:24 views/playlists.html:39
-msgid "Name"
-msgstr "Nombre"
 
 #: views/audio_files.html:25 views/audio_files.html:36 views/playlists.html:25
 #: views/playlists.html:40
@@ -392,7 +550,7 @@ msgid "Add new button"
 msgstr "Agregar un nuevo sensor"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
-#: views/dashboard.html:120 views/dashboard.html:310 views/enclosures.html:14
+#: views/dashboard.html:120 views/dashboard.html:316 views/enclosures.html:14
 #: views/enclosures.html:149 views/log.html:8 views/notifications.html:20
 #: views/notifications.html:56 views/relays.html:14 views/relays.html:83
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
@@ -402,42 +560,42 @@ msgstr "Agregar un nuevo sensor"
 msgid "Login to make changes"
 msgstr "Autenticarse para realizar modificaciones"
 
-#: views/buttons.html:25 views/dashboard.html:278 views/relays.html:27
+#: views/buttons.html:25 views/dashboard.html:284 views/relays.html:27
 #: views/sensors.html:31 views/webcams.html:23
 msgid "Last update"
 msgstr "Ultima actualización"
 
-#: views/buttons.html:31 views/dashboard.html:284 views/relays.html:34
+#: views/buttons.html:31 views/dashboard.html:290 views/relays.html:34
 #: views/sensors.html:37
 msgid "error"
 msgstr "error"
 
-#: views/buttons.html:32 views/dashboard.html:285 views/relays.html:35
+#: views/buttons.html:32 views/dashboard.html:291 views/relays.html:35
 #: views/sensors.html:38
 msgid "warning"
 msgstr "atención"
 
-#: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:293
+#: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:299
 #: views/enclosures.html:33 views/relays.html:45 views/sensors.html:49
 msgid "Day"
 msgstr "Día"
 
-#: views/buttons.html:40 views/dashboard.html:294 views/relays.html:46
+#: views/buttons.html:40 views/dashboard.html:300 views/relays.html:46
 #: views/sensors.html:50
 msgid "Week"
 msgstr "Semana"
 
-#: views/buttons.html:41 views/dashboard.html:295 views/relays.html:47
+#: views/buttons.html:41 views/dashboard.html:301 views/relays.html:47
 #: views/sensors.html:51
 msgid "Month"
 msgstr "Mes"
 
-#: views/buttons.html:42 views/dashboard.html:296 views/relays.html:48
+#: views/buttons.html:42 views/dashboard.html:302 views/relays.html:48
 #: views/sensors.html:52
 msgid "Year"
 msgstr "Año"
 
-#: views/buttons.html:53 views/dashboard.html:307 views/relays.html:60
+#: views/buttons.html:53 views/dashboard.html:313 views/relays.html:60
 #: views/sensors.html:64
 msgid "Export"
 msgstr "Exportar"
@@ -517,7 +675,7 @@ msgstr "Registro"
 msgid "High"
 msgstr "Alto"
 
-#: views/dashboard.html:216 views/enclosures.html:89
+#: views/dashboard.html:217 views/enclosures.html:89
 #: views/modals/button.html:57 views/modals/relay.html:79
 #: views/modals/sensor.html:72 views/weather.html:20
 msgid "Current"
@@ -1391,12 +1549,6 @@ msgstr "Contiene la tarjeta de sonido que se utiliza para reproducir audio."
 msgid "Please select a hardware type."
 msgstr "Seleccione un tipo de hardware."
 
-#: views/modals/button.html:33 views/modals/relay.html:33
-#: views/modals/sensor.html:48 views/modals/service.html:79
-#: views/modals/webcam.html:37
-msgid "Address"
-msgstr "Dirección"
-
 #: views/modals/button.html:36 views/modals/relay.html:36
 #: views/modals/sensor.html:51 views/modals/service.html:82
 #: views/modals/service.html:291 views/modals/webcam.html:40
@@ -1749,37 +1901,21 @@ msgstr "Contiene la tarjeta de sonido que se utiliza para reproducir audio."
 msgid "Please select a measurement type."
 msgstr "Seleccione un tipo de medida."
 
-#: views/modals/sensor.html:83
-msgid "Alarm min"
-msgstr "Alarma mínimo"
-
 #: views/modals/sensor.html:86
 #, fuzzy
 #| msgid "Holds the mail server hostname or IP."
 msgid "Enter the minimum value for the alarm."
 msgstr "Contiene el nombre de host o IP del servidor de correo."
 
-#: views/modals/sensor.html:95
-msgid "Alarm max"
-msgstr "Alarma máximo"
-
 #: views/modals/sensor.html:98
 msgid "Enter the maximum value for the alarm."
 msgstr "Ingrese el valor máximo para la alarma."
-
-#: views/modals/sensor.html:107
-msgid "Limit min"
-msgstr "Limite mínimo"
 
 #: views/modals/sensor.html:110
 #, fuzzy
 #| msgid "Holds the mail server hostname or IP."
 msgid "Enter the minimum value that is valid."
 msgstr "Contiene el nombre de host o IP del servidor de correo."
-
-#: views/modals/sensor.html:119
-msgid "Limit max"
-msgstr "Limite máximo"
 
 #: views/modals/sensor.html:122
 #, fuzzy
@@ -2788,10 +2924,6 @@ msgstr "Guardar"
 msgid "CPU Load"
 msgstr "Carga CPU"
 
-#: views/status.html:66
-msgid "Memory usage"
-msgstr "Uso de la memoria"
-
 #: views/status.html:88
 msgid "Disk usage"
 msgstr "Uso del disco"
@@ -2864,7 +2996,7 @@ msgstr "Acción"
 msgid "Add area"
 msgstr "Adicionar marcador"
 
-#: views/layouts/modal.html:93
+#: views/layouts/modal.html:95
 msgid "added"
 msgstr ""
 
@@ -2936,11 +3068,6 @@ msgstr ""
 #| msgid "Conductivity"
 msgid "Current activity"
 msgstr "Conductividad"
-
-#: views/modals/button.html:58 views/modals/relay.html:80
-#: views/modals/sensor.html:73
-msgid "Current value"
-msgstr "Valor actual"
 
 #: views/modals/area.html:1052 views/modals/area.html:1054
 msgid "Delay"
@@ -3270,13 +3397,13 @@ msgstr "Exportar datos"
 msgid "Export relay"
 msgstr "Exportar datos"
 
-#: views/dashboard.html:306 views/sensors.html:63
+#: views/dashboard.html:312 views/sensors.html:63
 #, fuzzy
 #| msgid "pH sensor"
 msgid "Export sensor"
 msgstr "Sensor de pH"
 
-#: views/layouts/modal.html:69 views/modals/area.html:1550
+#: views/layouts/modal.html:71 views/modals/area.html:1550
 #: views/settings.html:404
 #, fuzzy
 #| msgid "error"
@@ -3317,12 +3444,6 @@ msgstr ""
 msgid "Manual mode relay"
 msgstr "Modo manual"
 
-#: views/modals/sensor.html:132
-#, fuzzy
-#| msgid "Max diff"
-msgid "Max difference"
-msgstr "Diferencia máxima"
-
 #: views/modals/relay.html:106
 #, fuzzy
 #| msgid "Dimmer on percentage"
@@ -3345,7 +3466,7 @@ msgstr "5 minutos"
 msgid "No reminder"
 msgstr "Repetir"
 
-#: views/layouts/modal.html:69 views/settings.html:404
+#: views/layouts/modal.html:71 views/settings.html:404
 #, fuzzy
 #| msgid "Required fields are marked with '%s'."
 msgid "Not all required fields are entered correctly."
@@ -3383,13 +3504,13 @@ msgstr "TerrariumPI"
 msgid "Restart TerrariumPI"
 msgstr "TerrariumPI"
 
-#: views/layouts/modal.html:101
+#: views/layouts/modal.html:103
 #, fuzzy
 #| msgid "Error"
 msgid "Save Error"
 msgstr "Error"
 
-#: views/layouts/modal.html:94
+#: views/layouts/modal.html:96
 #, fuzzy
 #| msgid "Save"
 msgid "Save OK"
@@ -3576,7 +3697,7 @@ msgstr "Mostrar cuadros de movimiento"
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumNotification.py:276
+#: terrariumNotification.py:353
 msgid "Telegram"
 msgstr "Telegram"
 
@@ -3596,11 +3717,11 @@ msgstr "Alternar audio"
 msgid "Toggle relay"
 msgstr "Alternar audio"
 
-#: views/layouts/modal.html:93
+#: views/layouts/modal.html:95
 msgid "{type} {name} is {action}"
 msgstr ""
 
-#: views/layouts/modal.html:93
+#: views/layouts/modal.html:95
 #, fuzzy
 #| msgid "Last update"
 msgid "updated"
@@ -3658,6 +3779,21 @@ msgstr ""
 #: views/modals/weather.html:19
 msgid "Weather data source url"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Sensor distance"
+#~ msgid "Sensor change"
+#~ msgstr "Sensor de distancia"
+
+#, fuzzy
+#~| msgid "Webcam settings"
+#~ msgid "Relay change"
+#~ msgstr "Configuraciones de la webcam"
+
+#, fuzzy
+#~| msgid "Door settings"
+#~ msgid "Button change"
+#~ msgstr "Configuraciones de puerta"
 
 #, fuzzy
 #~| msgid "When on"
@@ -5884,9 +6020,6 @@ msgstr ""
 #~ msgid "No switches available"
 #~ msgstr "No hay interruptores disponibles"
 
-#~ msgid "in manual mode"
-#~ msgstr "en modo manual"
-
 #~ msgid "Last replacement"
 #~ msgstr "Ultimo reemplazo"
 
@@ -6103,9 +6236,6 @@ msgstr ""
 #~ msgid "I2C bus adapter"
 #~ msgstr "Adaptador bus I2C"
 
-#~ msgid "ID"
-#~ msgstr "ID"
-
 #~ msgid "Information"
 #~ msgstr "Información"
 
@@ -6232,9 +6362,6 @@ msgstr ""
 
 #~ msgid "Width"
 #~ msgstr "Ancho"
-
-#~ msgid "Sensor temperature"
-#~ msgstr "Sensor de temperatura"
 
 #~ msgid "Sensor humidity"
 #~ msgstr "Sensor de humedad relativa"
