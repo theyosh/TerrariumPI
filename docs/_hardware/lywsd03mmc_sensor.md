@@ -9,7 +9,7 @@ image:
   alt: "LYWSD03MMC bluetooth sensor header image"
 
 device_types: [temperature, humidity]
-device_address: "Bluetooth MAC address. Ex: `c2:7c:9e:66:e3:52`"
+device_address: "Bluetooth MAC address. Ex: `a4:c1:38:66:e3:52`"
 device_auto_detect: true
 device_url: https://www.adafruit.com/product/4881
 ---
