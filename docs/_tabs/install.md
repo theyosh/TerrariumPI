@@ -77,8 +77,11 @@ services:
     network_mode: host
     restart: always
     privileged: true
+    cap_add:
+      - NET_ADMIN
     stop_grace_period: 1m
     stop_signal: SIGINT
+    init: true
     environment:
       TZ: "Europe/Amsterdam" # timezone list can be found here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
       ENABLE_I2C: "true"
