@@ -13,7 +13,9 @@ docs
 Gemfile*
 venv
 .cache
+*.swp
 media/*
 *.js.map
 **/*.js.map
 install.sh
+Makefile

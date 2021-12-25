@@ -18,6 +18,7 @@ screenlog.*
 .vscode*
 .Trash*
 *.old
+*.swp
 .jekyll-cache
 Gemfile.lock
 docs/_site/

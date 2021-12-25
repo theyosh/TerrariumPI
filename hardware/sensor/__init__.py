@@ -452,6 +452,7 @@ class terrariumBluetoothSensor(terrariumSensor):
         for device in devices:
           if device.rssi > terrariumBluetoothSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ids:
             for sensor_type in sensorclass.TYPES:
+              logger.debug(sensor_type, sensorclass, device.addr)
               yield terrariumSensor(None,
                                     sensorclass.HARDWARE,
                                     sensor_type,
