@@ -4,8 +4,8 @@ categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
 
 image:
-  path: /assets/img/mitemp.webp
-  src: /assets/img/mitemp.webp
+  path: /assets/img/lywsd03mmc.webp
+  src: /assets/img/lywsd03mmc.webp
   alt: "LYWSD03MMC bluetooth sensor header image"
 
 device_types: [temperature, humidity]
