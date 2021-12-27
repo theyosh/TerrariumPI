@@ -59,7 +59,7 @@ class terrariumEnclosure(object):
       area_setup = copy.deepcopy(area.setup)
       area_setup['is_day'] = area.state.get('is_day',None)
 
-      new_areay = self.add(terrariumArea(
+      new_area = self.add(terrariumArea(
         area.id,
         self,
         area.type,
@@ -75,7 +75,7 @@ class terrariumEnclosure(object):
       area_setup = copy.deepcopy(area.setup)
       area_setup['is_day'] = area.state.get('is_day',None)
 
-      new_areay = self.add(terrariumArea(
+      new_area = self.add(terrariumArea(
         area.id,
         self,
         area.type,
@@ -88,6 +88,9 @@ class terrariumEnclosure(object):
   def main_lights(self):
     for area in self.areas:
       area = self.areas[area]
+      if 'disabled' == area.mode:
+        continue
+
       if area.setup.get('main_lights', False):
         return self.areas[area.id]
 
