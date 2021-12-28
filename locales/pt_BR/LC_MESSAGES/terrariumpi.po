@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-12-28 13:13+CET\n"
-"PO-Revision-Date: 2021-12-25 20:01+0000\n"
-"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
+"PO-Revision-Date: 2021-12-28 12:15+0000\n"
+"Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.9\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -211,8 +211,6 @@ msgid "System summary"
 msgstr "Resumo do sistema"
 
 #: terrariumNotification.py:75
-#, fuzzy
-#| msgid "System uptime in humand readable format"
 msgid "System uptime in human readable format"
 msgstr "Tempo de atividade do sistema em formato humano e legível"
 
