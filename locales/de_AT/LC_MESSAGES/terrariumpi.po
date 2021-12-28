@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-12-24 15:45+CET\n"
+"POT-Creation-Date: 2021-12-28 13:13+CET\n"
 "PO-Revision-Date: 2021-11-26 14:38+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
@@ -233,7 +233,7 @@ msgid "System summary"
 msgstr "Systemstatus"
 
 #: terrariumNotification.py:75
-msgid "System uptime in humand readable format"
+msgid "System uptime in human readable format"
 msgstr ""
 
 #: terrariumNotification.py:76
