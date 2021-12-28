@@ -72,7 +72,7 @@ class terrariumNotification(terrariumSingleton):
     'system_summary' : {
       'name':_('System summary'),
       'placeholders' : {
-        'uptime' : _('System uptime in humand readable format'),
+        'uptime' : _('System uptime in human readable format'),
         'system_load' : _('System load last minute'),
         'system_load_alarm' : _('True if there is an alarm'),
         'cpu_temperature' : _('System CPU temperature'),
