@@ -71,7 +71,3 @@ emails==0.6
 luma.oled==3.8.1
 i2c_lcd==0.1.0
 paho-mqtt==1.6.1
-
-# Downgrade some libraries to make it all work on Pi Zero
-numpy==1.21.4
-lxml==4.6.4

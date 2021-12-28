@@ -30,6 +30,11 @@ while IFS= read -r line; do
   PIP_MODULES="${PIP_MODULES} ${line}"
 done < requirements.txt
 
+if [ `grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo` -eq 1 ]; then
+  PIP_MODULES="$(echo $PIP_MODULES | sed 's/gevent==[^ ]\+/gevent==21.8.0/')"
+  PIP_MODULES="${PIP_MODULES} numpy==1.21.4 lxml==4.6.4"
+fi
+
 #set -e
 
 # Install dialog for further installation
