@@ -26,6 +26,9 @@ class terrariumDisplayLCDI2CMixin():
   def _write_line(self, text, line_nr):
     self._device['device'].lcd_display_string(text,line_nr)
 
+  def _write_title(self):
+    self._write_line(self.title[:self.width].ljust(self.width),1)
+
   def clear(self):
     self._device['device'].lcd_clear()
     super().clear()

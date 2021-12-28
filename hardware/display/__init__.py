@@ -13,7 +13,6 @@ import queue
 import textwrap
 from retry import retry
 
-
 from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 class terrariumDisplayLoadingException(TypeError):
@@ -312,4 +311,4 @@ class terrariumDisplay(object):
 
   def clear(self):
     if self.title is not None:
-      self._write_line(self.title[:self.width].ljust(self.width),0,'black')
+      self._write_title()
