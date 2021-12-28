@@ -62,7 +62,7 @@ Then you need to setup a `docker-compose.yaml` file. There is an example `docker
 version: "3.7"
 services:
   terrariumpi:
-    image: theyosh/terrariumpi:4.1.0
+    image: theyosh/terrariumpi:latest
     volumes:
       - /opt/terrariumpi/logs:/TerrariumPI/log
       - /opt/terrariumpi/data:/TerrariumPI/data
