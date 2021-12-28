@@ -37,6 +37,7 @@ COPY requirements.txt .
 # requirements are slightly different for docker
 RUN sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.txt && \
   sed -i 's/cryptography==.*/cryptography==3.4.8/g' requirements.txt && \
+  echo "numpy" >> requirements.txt && \
   pip install -r requirements.txt && \
   find /opt/venv -type d -name  "__pycache__" -exec rm -r {} +
 WORKDIR /TerrariumPI
