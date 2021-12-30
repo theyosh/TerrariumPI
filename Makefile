@@ -1,5 +1,5 @@
 IMAGE ?= theyosh/terrariumpi
-VERSION ?= 4.1.0
+VERSION ?= $(shell grep -E "__version__ = '(.*)'" terrariumPI.py | grep -Po [0-9\.]+)
 
 .PHONY: all build run logs
 
@@ -18,7 +18,6 @@ run: build restart
 restart:
 	docker-compose down; docker-compose up -d
 	sleep 30 # Wait for it to come up
-	$(MAKE) scan
 	$(MAKE) logs
 
 logs:
