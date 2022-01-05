@@ -29,7 +29,7 @@ git+https://github.com/IanHarvey/bluepy
 requests==2.26.0
 melopero_amg8833==0.2.1
 RPi.bme280==0.2.4
-RPi.GPIO==0.7.0
+RPi.GPIO==0.7.1a4
 pyserial==3.5
 pigpio_dht==0.3.6
 pigpio==1.78
