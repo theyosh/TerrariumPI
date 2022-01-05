@@ -42,7 +42,7 @@ lib8relay==1.0.3
 pylibftdi==0.19.0
 asyncio==3.4.3
 python-kasa==0.4.0
-# Meross-iot has a bad happed not being backwards compatible in the versions....
+# Meross-iot has a bad habbit not being backwards compatible in the versions....
 meross-iot==0.4.3.0
 PCA9685-driver==1.2.0
 pywemo==0.7.0
@@ -51,7 +51,7 @@ sparkfun-qwiic-relay==0.0.2
 
 # Webcam packages
 Pillow==8.4.0
-opencv-python-headless==4.5.4.60
+opencv-python-headless==4.5.5.62
 piexif==1.1.3
 
 # Calendar and utils

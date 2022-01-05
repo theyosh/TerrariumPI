@@ -36,6 +36,10 @@ SCRIPT_GROUP=`id -gn ${SCRIPT_USER}`
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered java openjdk chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
 OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
+# For Bullseye we need libopenexr25 and libilmbase25
+if [ ${BUSTER_OS} -eq 0 ]; then
+  OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
+fi
 APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
 
 PIP_MODULES=""
