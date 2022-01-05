@@ -299,8 +299,10 @@ if [ -f terrariumpi.db ]; then
   mv terrariumpi.db* data
 fi
 
-chown ${SCRIPT_USER}. .
-chown ${SCRIPT_USER}. * -Rf
+if [ ${PI_ZERO} -eq 0 ]; then
+  chown ${SCRIPT_USER}. .
+  chown ${SCRIPT_USER}. * -Rf
+fi
 
 sync
 
