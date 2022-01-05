@@ -5,19 +5,12 @@ VERSION=`grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3`
 VERSION="${VERSION//\'/}"
 INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python 3)"
 PI_ZERO=`grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo`
-BUSTER_OS=`grep -ic "VERSION_CODENAME=buster" /etc/os-release`
+BUSTER_OS=`grep -ic "^VERSION_CODENAME=buster" /etc/os-release`
 
 WHOAMI=`whoami`
 if [ "${WHOAMI}" != "root" ]; then
   echo "Start TerrariumPI installation as user root"
   echo "sudo ./install.sh"
-  exit 0
-fi
-
-# OS version check
-if [ ${BUSTER_OS} -eq 0 ]; then
-  echo "TerrariumPI ${VERSION} can only run on Buster OS (Legacy OS)"
-  echo "Download from: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy"
   exit 0
 fi
 
@@ -33,7 +26,7 @@ fi
 
 SCRIPT_GROUP=`id -gn ${SCRIPT_USER}`
 
-CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered java openjdk chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
+CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
 OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
 # For Bullseye we need libopenexr25 and libilmbase25
@@ -62,6 +55,19 @@ if ! hash whiptail 2>/dev/null; then
 fi
 
 clear
+
+# OS version check
+if [ ${BUSTER_OS} -eq 0 ]; then
+  whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is not Raspbian Bullseye OS compatible. You can install it, but the Raspberry PI cameras are not working.\nDownload the old Legacy OS Raspbian Buster\n\nDo you want to continue?" 0 60
+
+  case $? in
+    1|255) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
+      echo "TerrariumPI ${VERSION} is supported on Buster OS (Legacy OS)"
+      echo "Download from: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy"
+      exit 0
+    ;;
+  esac
+fi
 
 whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'. If this is not the right user stop the installation now!\n\nDo you want to continue?" 0 60
 
