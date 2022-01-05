@@ -91,6 +91,25 @@ class terrariumNotification(terrariumSingleton):
       }
     },
 
+    'system_update_warning' : {
+      'name':_('System to slow with updates (warning)'),
+      'placeholders' : {
+        'message' : _('Error message'),
+        'time_short' : _('Duration in seconds that are short'),
+        'update_duration' : _('The update duration in seconds'),
+        'loop_timeout' : _('The max update duration'),
+        'times_late' : _('Amount of times to late with updates'),
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
+
+    'system_update_error' : {
+      'name':_('System to slow with updates more then 30 times'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
+
     'sensor_update' : {
       'name':_('Sensor update (every 30 seconds)'),
       'placeholders' : {
@@ -194,14 +213,16 @@ class terrariumNotification(terrariumSingleton):
     },
   }
 
-  __MESSAGES['sensor_change']['placeholders'] = __MESSAGES['sensor_update']['placeholders']
-  __MESSAGES['sensor_alarm']['placeholders']  = __MESSAGES['sensor_update']['placeholders']
+  __MESSAGES['system_update_error']['placeholders'] = __MESSAGES['system_update_warning']['placeholders']
 
-  __MESSAGES['relay_change']['placeholders']  = __MESSAGES['relay_update']['placeholders']
-  __MESSAGES['relay_toggle']['placeholders']  = __MESSAGES['relay_update']['placeholders']
+  __MESSAGES['sensor_change']['placeholders']       = __MESSAGES['sensor_update']['placeholders']
+  __MESSAGES['sensor_alarm']['placeholders']        = __MESSAGES['sensor_update']['placeholders']
 
-  __MESSAGES['button_change']['placeholders'] = __MESSAGES['button_update']['placeholders']
-  __MESSAGES['button_action']['placeholders'] = __MESSAGES['button_update']['placeholders']
+  __MESSAGES['relay_change']['placeholders']        = __MESSAGES['relay_update']['placeholders']
+  __MESSAGES['relay_toggle']['placeholders']        = __MESSAGES['relay_update']['placeholders']
+
+  __MESSAGES['button_change']['placeholders']       = __MESSAGES['button_update']['placeholders']
+  __MESSAGES['button_action']['placeholders']       = __MESSAGES['button_update']['placeholders']
 
 
   @classproperty

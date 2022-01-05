@@ -290,7 +290,7 @@ class terrariumEngine(object):
     logger.info(f'Loaded {len(settings)} settings in {time.time()-start:.2f} seconds.')
 
     # Loading active language
-    gettext.translation('terrariumpi', 'locales/', languages=[self.settings['language']]).install(True)
+    gettext.translation('terrariumpi', 'locales/', languages=[self.settings['language']]).install()
 
     # Loading weather
     if 'weather_source' in self.settings:
@@ -1078,9 +1078,23 @@ class terrariumEngine(object):
       else:
         self.__engine['too_late'] += 1
         prev_delay = abs(time_left)
-        logger.warning(f'Engine update took {duration:.2f} seconds. That is {prev_delay:.2f} seconds short.')
+        message = f'Engine update took {duration:.2f} seconds. That is {prev_delay:.2f} seconds short.'
+        message_data = {
+          'message'         : message,
+          'time_short'      : prev_delay,
+          'update_duration' : duration,
+          'loop_timeout'    : terrariumEngine.__ENGINE_LOOP_TIMEOUT,
+          'times_late'      : self.__engine["too_late"],
+        }
+        self.notification.message('system_update_warning', message_data)
+        logger.warning(message)
+
         if self.__engine['too_late'] > 30:
-          logger.error(f'Engine can\'t keep up. For {self.__engine["too_late"]} times it could not finish in {terrariumEngine.__ENGINE_LOOP_TIMEOUT} seconds.')
+          message = f'Engine can\'t keep up. For {self.__engine["too_late"]} times it could not finish in {terrariumEngine.__ENGINE_LOOP_TIMEOUT} seconds.'
+          message_data['message'] = message
+          self.notification.message('system_update_error', message_data)
+          logger.error(message)
+
 
     logger.info('Stopped main engine thread')
 
