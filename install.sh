@@ -42,14 +42,16 @@ while IFS= read -r line; do
 done < requirements.txt
 
 if [ ${PI_ZERO} -eq 1 ]; then
+  # Pi Zero needs some fixed python modules
+  PIP_MODULES="$(echo $PIP_MODULES | sed 's/gevent==[^ ]\+/gevent==21.8.0/')"
 
   if [ ${BUSTER_OS} -eq 1 ]; then
-    # Pi Zero needs some fixed python modules
-    PIP_MODULES="$(echo $PIP_MODULES | sed 's/gevent==[^ ]\+/gevent==21.8.0/')"
     PIP_MODULES="$(echo $PIP_MODULES | sed 's/opencv-python-headless==[^ ]\+/opencv-python-headless==4.5.4.60/')"
-
-    PIP_MODULES="${PIP_MODULES} numpy==1.21.4 lxml==4.6.4"
+  else
+    PIP_MODULES="$(echo $PIP_MODULES | sed 's/opencv-python-headless==[^ ]\+/opencv-python-headless==4.5.3.56/')"
   fi
+
+  PIP_MODULES="${PIP_MODULES} numpy==1.21.4 lxml==4.6.4"
 fi
 
 #set -e
