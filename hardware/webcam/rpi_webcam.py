@@ -16,17 +16,23 @@ class terrariumRPIWebcam(terrariumWebcam):
   INFO_SOURCE  = 'rpicam'
 
   def _load_hardware(self):
-    raspistill = Path('/usr/bin/raspistill')
+    # New RPI Camera app
+    raspistill = Path('/usr/bin/libcamera-still')
     if not raspistill.exists():
-      return None
+      # Old RPI Camera app
+      raspistill = Path('/usr/bin/raspistill')
+      if not raspistill.exists():
+        return None
 
-    return f'{raspistill} -q 95 -t {self._WARM_UP*1000} -e jpg'
+    return f'{raspistill} --quality 95 --timeout {self._WARM_UP*1000} --encoding jpg'
 
   def _get_raw_data(self):
-    logger.debug('Starting rpicam')
-    stream = BytesIO()
+    if self._device["device"] is None:
+      return False
 
-    cmd = f'{self._device["device"]} -w {self.width} -h {self.height} -awb {self.awb} -o -'
+    logger.debug('Starting rpicam')
+
+    cmd = f'{self._device["device"]} --width {self.width} --height {self.height} --awb {self.awb} --output -'
     cmd = shlex.split(cmd)
 
     with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:

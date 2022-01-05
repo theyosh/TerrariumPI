@@ -8,6 +8,7 @@ AWB=$5
 DIR=$6
 
 RASPIVID=`which raspivid`
+# RASPIVID=`which libcamera-vid`
 FFMPEG=`which ffmpeg`
 
 
@@ -41,12 +42,12 @@ if [[ ! -d "${DIR}" ]]; then
 fi
 
 if [[ "${ROTATION}" == "h" ]]; then
-  ROTATION="-hf"
+  ROTATION="--hflip"
 elif [[ "${ROTATION}" == "v" ]]; then
-  ROTATION="-vf"
+  ROTATION="--vflip"
 else
-  ROTATION="-rot ${ROTATION}"
+  ROTATION="--rotation ${ROTATION}"
 fi
 
-${RASPIVID} -o - -b 2000000 -t 0 -w ${WIDTH} -h ${HEIGHT} ${ROTATION} -awb ${AWB} --drc low -fps 30 -g 30 -pf high -lev 4.2 -ae 16,0xff,0x808000 -a 8 -a " ${NAME} @ %d/%m/%Y %X " -a 1024 | \
+${RASPIVID} --output - --bitrate 2000000 --timeout 0 --width ${WIDTH} --height ${HEIGHT} ${ROTATION} --awb ${AWB} --framerate 30 --intra 30 --profile high --level 4.2 -ae 16,0xff,0x808000 -a 8 -a " ${NAME} @ %d/%m/%Y %X " -a 1024 | \
  ${FFMPEG} -hide_banner -nostdin -re -i - -c:v copy -f hls -hls_time 2 -hls_list_size 3 -hls_flags delete_segments+split_by_time -hls_segment_filename "${DIR}/chunk_%03d.ts" "${DIR}/stream.m3u8"

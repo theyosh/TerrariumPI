@@ -33,7 +33,7 @@ OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
 if [ ${BUSTER_OS} -eq 0 ]; then
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
 fi
-APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
+APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 libcamera-apps-lite ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
 
 PIP_MODULES=""
 while IFS= read -r line; do
