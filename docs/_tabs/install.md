@@ -14,7 +14,8 @@ Here we will install Raspberry PI and TerrariumPI software step by step.
 # Raspberry PI
 
 ![Raspberry PI Logo](/assets/img/RaspberryPI_Logo.webp){: .right width="100" }
-In order to run TerrariumPI you first need a working Raspberry PI with the '[Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)' image. This is very important, as the Desktop version will not work well with the GPIO pins.
+In order to run TerrariumPI you first need a working Raspberry PI with the '[Raspberry Pi OS Lite (Legacy)](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy)' image. Make sure you are using the **Legacy** version!
+This is very important, as the Desktop and/or the new OS version will not work well with the GPIO pins and Raspberry PI cameras.
 
 Also **64bit is not supported** due to missing mmal code which is needed for the webcams.
 
@@ -109,7 +110,7 @@ sudo apt -y install git
 
 ### Download
 
-After Git is installed, we can download the Terrariumpi source code. We will only download the latest version.
+After Git is installed, we can download the TerrariumPI source code. We will only download the latest version.
 
 If you want to do some development or testing, omit the part `--depth 1`. Then you will get the full repository with all the branches.
 

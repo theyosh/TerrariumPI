@@ -1,5 +1,12 @@
 #!/bin/bash
 
+BASEDIR=$(dirname $(readlink -nf $0))
+VERSION=`grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3`
+VERSION="${VERSION//\'/}"
+INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python 3)"
+PI_ZERO=`grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo`
+BUSTER_OS=`grep -ic "VERSION_CODENAME=buster" /etc/os-release`
+
 WHOAMI=`whoami`
 if [ "${WHOAMI}" != "root" ]; then
   echo "Start TerrariumPI installation as user root"
@@ -7,17 +14,24 @@ if [ "${WHOAMI}" != "root" ]; then
   exit 0
 fi
 
-BASEDIR=$(dirname $(readlink -nf $0))
-SCRIPT_USER=`stat -c "%U" "${BASEDIR}"`
-if [ "" == "${SCRIPT_USER}" ]; then
-  SCRIPT_USER="pi"
+# OS version check
+if [ ${BUSTER_OS} -eq 0 ]; then
+  echo "TerrariumPI ${VERSION} can only run on Buster OS (Legacy OS)"
+  echo "Download from: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy"
+  exit 0
+fi
+
+if [ ${PI_ZERO} -eq 1 ]; then
+  # Pi Zero needs root user to run
+  SCRIPT_USER="root"
+else
+  SCRIPT_USER=`stat -c "%U" "${BASEDIR}"`
+  if [ "" == "${SCRIPT_USER}" ]; then
+    SCRIPT_USER="pi"
+  fi
 fi
 
 SCRIPT_GROUP=`id -gn ${SCRIPT_USER}`
-
-VERSION=`grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3`
-VERSION="${VERSION//\'/}"
-INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python 3)"
 
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered java openjdk chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
@@ -30,7 +44,8 @@ while IFS= read -r line; do
   PIP_MODULES="${PIP_MODULES} ${line}"
 done < requirements.txt
 
-if [ `grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo` -eq 1 ]; then
+if [ ${PI_ZERO} -eq 1 ]; then
+  # Pi Zero needs some fixed python modules
   PIP_MODULES="$(echo $PIP_MODULES | sed 's/gevent==[^ ]\+/gevent==21.8.0/')"
   PIP_MODULES="${PIP_MODULES} numpy==1.21.4 lxml==4.6.4"
 fi
