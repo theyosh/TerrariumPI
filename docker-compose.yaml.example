@@ -1,11 +1,12 @@
 version: "3.7"
 services:
   terrariumpi:
-    image: theyosh/terrariumpi:latest
+    image: theyosh/terrariumpi:latest # Or use a specific version
     volumes:
       - /opt/terrariumpi/logs:/TerrariumPI/log
       - /opt/terrariumpi/data:/TerrariumPI/data
       - /opt/terrariumpi/media:/TerrariumPI/media
+      - /opt/terrariumpi/scripts:/TerrariumPI/scripts
       - /opt/terrariumpi/webcam-archive:/TerrariumPI/webcam/archive
       - /opt/terrariumpi/DenkoviRelayCommandLineTool:/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool
       - /boot/config.txt:/boot/config.txt
