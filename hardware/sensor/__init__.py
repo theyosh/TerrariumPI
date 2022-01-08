@@ -345,7 +345,7 @@ class terrariumAnalogSensor(terrariumSensor):
   def _load_hardware(self):
     address = self._address
     # Load the analog converter here
-    device = MCP3008(channel=int(data_pin), device=0 if len(address) == 1 or int(address[1]) < 0 else int(address[1]))
+    device = MCP3008(channel=int(address[0]), device=0 if len(address) == 1 or int(address[1]) < 0 else int(address[1]))
     return device
 
   def _get_data(self):
@@ -376,12 +376,16 @@ class terrariumI2CSensor(terrariumSensor):
 
   def _open_hardware(self):
     address = self._address
+
     return smbus2.SMBus(1 if len(address) == 1 or int(address[1]) < 1 else int(address[1]))
 
   def _load_hardware(self):
     address = self._address
     device  = (address[0], smbus2.SMBus(1 if len(address) == 1 or int(address[1]) < 1 else int(address[1])))
     return device
+
+  def __exit__(self):
+    print('I2C close with block')
 
 class terrariumI2CSensorMixin():
 
@@ -426,6 +430,84 @@ class terrariumI2CSensorMixin():
         data['humidity'] = ((bytedata[0]*256.0+bytedata[1])*125.0/65536.0)-6.0
 
     return data
+
+
+"""
+TCA9548A I2C switch driver, Texas instruments
+8 bidirectional translating switches
+I2C SMBus protocol
+Manual: tca9548.pdf
+Source: https://github.com/IRNAS/tca9548a-python/blob/master/tca9548a.py
+Added option for different I2C bus
+"""
+# import smbus
+# import logging
+
+class TCA9548A(object):
+    def __init__(self, address, bus = 1):
+        """Init smbus channel and tca driver on specified address."""
+        try:
+            self.PORTS_COUNT = 8     # number of switches
+
+            self.i2c_bus = smbus2.SMBus(bus)
+            self.i2c_address = address
+            if self.get_control_register() is None:
+                raise ValueError
+        except ValueError:
+            logger.error("No device found on specified address!")
+            self.i2c_bus = None
+        except:
+            logger.error("Bus on channel {} is not available.".format(bus))
+            logger.info("Available busses are listed as /dev/i2c*")
+            self.i2c_bus = None
+
+    def get_control_register(self):
+        """Read value (length: 1 byte) from control register."""
+        try:
+            value = self.i2c_bus.read_byte(self.i2c_address)
+            return value
+        except:
+            return None
+
+    def get_channel(self, ch_num):
+        """Get channel state (specified with ch_num), return 0=disabled or 1=enabled."""
+        if ch_num < 0 or ch_num > self.PORTS_COUNT - 1:
+            return None
+        register = self.get_control_register()
+        if register is None:
+            return None
+        value = ((register >> ch_num) & 1)
+        return value
+
+    def set_control_register(self, value):
+        """Write value (length: 1 byte) to control register."""
+        try:
+            if value < 0 or value > 255:
+                return False
+            self.i2c_bus.write_byte(self.i2c_address, value)
+            return True
+        except:
+            return False
+
+    def set_channel(self, ch_num, state):
+        """Change state (0=disable, 1=enable) of a channel specified in ch_num."""
+        if ch_num < 0 or ch_num > self.PORTS_COUNT - 1:
+            return False
+        if state != 0 and state != 1:
+            return False
+        current_value = self.get_control_register()
+        if current_value is None:
+            return False
+        if state:
+            new_value = current_value | 1 << ch_num
+        else:
+            new_value = current_value & (255 - (1 << ch_num))
+        return_value = self.set_control_register(new_value)
+        return return_value
+
+    def __del__(self):
+        """Driver destructor."""
+        self.i2c_bus = None
 
 class terrariumBluetoothSensor(terrariumSensor):
 
