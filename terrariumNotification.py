@@ -33,9 +33,11 @@ from hardware.display import terrariumDisplay, terrariumDisplayLoadingException
 
 class terrariumNotification(terrariumSingleton):
   __DEFAULT_PLACEHOLDERS = {
-    'date' : _('Local date'),
-    'time' : _('Local time'),
-    'now'  : _('Local date and time'),
+    'date'       : _('Local date'),
+    'date_short' : _('Local date, day and month'),
+    'time'       : _('Local time'),
+    'time_short' : _('Local time, hours and minutes'),
+    'now'        : _('Local date and time'),
   }
 
   __MAX_MESSAGES_TOTAL_PER_MINUTE = 60
@@ -311,6 +313,8 @@ class terrariumNotification(terrariumSingleton):
         # Translate message variables
         data['date'] = datetime.datetime.now().strftime('%x')
         data['time'] = datetime.datetime.now().strftime('%X')
+        data['date_short'] = datetime.datetime.now().strftime('%d-%m')
+        data['time_short'] = datetime.datetime.now().strftime('%H:%M')
         data['now'] = data['date'] + ' ' + data['time']
         title = Template(message.title).safe_substitute(**data)
         text  = Template(message.message).safe_substitute(**data)
