@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2022-01-05 11:24+CET\n"
+"POT-Creation-Date: 2022-01-08 22:42+CET\n"
 "PO-Revision-Date: 2021-12-28 12:15+0000\n"
 "Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
@@ -162,155 +162,167 @@ msgstr "média de {sensor_type}"
 msgid "last update"
 msgstr "Última atualização"
 
-#: terrariumNotification.py:37
+#: terrariumNotification.py:36
 msgid "Local date"
 msgstr "Data local"
+
+#: terrariumNotification.py:37
+#, fuzzy
+#| msgid "Local date and time"
+msgid "Local date, day and month"
+msgstr "Data e hora local"
 
 #: terrariumNotification.py:38
 msgid "Local time"
 msgstr "Hora local"
 
 #: terrariumNotification.py:39
+#, fuzzy
+#| msgid "Local date and time"
+msgid "Local time, hours and minutes"
+msgstr "Data e hora local"
+
+#: terrariumNotification.py:40
 msgid "Local date and time"
 msgstr "Data e hora local"
 
-#: terrariumNotification.py:47
+#: terrariumNotification.py:48
 msgid "Authentication login error"
 msgstr "Erro de autenticação no login"
 
-#: terrariumNotification.py:49
+#: terrariumNotification.py:50
 msgid "IP of the wrong login attempt"
 msgstr "IP da tentativa de login errada"
 
-#: terrariumNotification.py:50
+#: terrariumNotification.py:51
 msgid "Used username"
 msgstr "Nome de usuário usado"
 
-#: terrariumNotification.py:51
+#: terrariumNotification.py:52
 msgid "Used password"
 msgstr "Senha usada"
 
-#: terrariumNotification.py:57
+#: terrariumNotification.py:58
 msgid "System warning"
 msgstr "Aviso do sistema"
 
-#: terrariumNotification.py:59
+#: terrariumNotification.py:60
 msgid "Warning message"
 msgstr "Mensagem de Aviso"
 
-#: terrariumNotification.py:65
+#: terrariumNotification.py:66
 msgid "System error"
 msgstr "Erro do sistema"
 
-#: terrariumNotification.py:67 terrariumNotification.py:97
+#: terrariumNotification.py:68 terrariumNotification.py:98
 msgid "Error message"
 msgstr "Mensagem de erro"
 
-#: terrariumNotification.py:73
+#: terrariumNotification.py:74
 msgid "System summary"
 msgstr "Resumo do sistema"
 
-#: terrariumNotification.py:75
+#: terrariumNotification.py:76
 msgid "System uptime in human readable format"
 msgstr "Tempo de atividade do sistema em formato humano e legível"
 
-#: terrariumNotification.py:76
+#: terrariumNotification.py:77
 msgid "System load last minute"
 msgstr "Carga do sistema no último minuto"
 
-#: terrariumNotification.py:77 terrariumNotification.py:79
-#: terrariumNotification.py:84 terrariumNotification.py:127
+#: terrariumNotification.py:78 terrariumNotification.py:80
+#: terrariumNotification.py:85 terrariumNotification.py:128
 msgid "True if there is an alarm"
 msgstr "Verdadeiro se houver um alarme"
 
-#: terrariumNotification.py:78
+#: terrariumNotification.py:79
 msgid "System CPU temperature"
 msgstr "Temperatura da CPU do sistema"
 
-#: terrariumNotification.py:80
+#: terrariumNotification.py:81
 msgid "Storage usage"
 msgstr "Uso de armazenamento"
 
-#: terrariumNotification.py:81 views/status.html:66
+#: terrariumNotification.py:82 views/status.html:66
 msgid "Memory usage"
 msgstr "Uso de memória"
 
-#: terrariumNotification.py:82
+#: terrariumNotification.py:83
 msgid "Average of [sensor type] (ex. temperature)"
 msgstr "Média de [sensor type] (ex. temperatura)"
 
-#: terrariumNotification.py:83 terrariumNotification.py:130
+#: terrariumNotification.py:84 terrariumNotification.py:131
 msgid "Sensor type unit value"
 msgstr "Valor da unidade do tipo de sensor"
 
-#: terrariumNotification.py:85
+#: terrariumNotification.py:86
 msgid "Current power usage"
 msgstr "Uso de energia atual"
 
-#: terrariumNotification.py:86
+#: terrariumNotification.py:87
 msgid "Max power usage"
 msgstr "Uso máximo de energia"
 
-#: terrariumNotification.py:87
+#: terrariumNotification.py:88
 msgid "Current water flow"
 msgstr "Fluxo de água atual"
 
-#: terrariumNotification.py:88 terrariumNotification.py:157
+#: terrariumNotification.py:89 terrariumNotification.py:158
 msgid "Max water flow"
 msgstr "Fluxo máximo de água"
 
-#: terrariumNotification.py:89
+#: terrariumNotification.py:90
 msgid "Number of relays active"
 msgstr "Número de relés ativos"
 
-#: terrariumNotification.py:95
+#: terrariumNotification.py:96
 msgid "System to slow with updates (warning)"
 msgstr ""
 
-#: terrariumNotification.py:98
+#: terrariumNotification.py:99
 #, fuzzy
 #| msgid "The duration in seconds to toggle on the relay."
 msgid "Duration in seconds that are short"
 msgstr "Duração em segundos para ligar o relé."
 
-#: terrariumNotification.py:99
+#: terrariumNotification.py:100
 #, fuzzy
 #| msgid "Enter a valid duration in seconds."
 msgid "The update duration in seconds"
 msgstr "Insira a duração em segundos."
 
-#: terrariumNotification.py:100
+#: terrariumNotification.py:101
 msgid "The max update duration"
 msgstr ""
 
-#: terrariumNotification.py:101
+#: terrariumNotification.py:102
 msgid "Amount of times to late with updates"
 msgstr ""
 
-#: terrariumNotification.py:107
+#: terrariumNotification.py:108
 msgid "System to slow with updates more then 30 times"
 msgstr ""
 
-#: terrariumNotification.py:114
+#: terrariumNotification.py:115
 msgid "Sensor update (every 30 seconds)"
 msgstr "Atualização do sensor (a cada 30 segundos)"
 
-#: terrariumNotification.py:116 terrariumNotification.py:152
-#: terrariumNotification.py:183
+#: terrariumNotification.py:117 terrariumNotification.py:153
+#: terrariumNotification.py:184
 msgid "ID"
 msgstr "ID"
 
-#: terrariumNotification.py:117 terrariumNotification.py:153
-#: terrariumNotification.py:184
+#: terrariumNotification.py:118 terrariumNotification.py:154
+#: terrariumNotification.py:185
 msgid "Hardware type"
 msgstr "Tipo de Hardware"
 
-#: terrariumNotification.py:118
+#: terrariumNotification.py:119
 msgid "Sensor type"
 msgstr "Tipo de sensor"
 
-#: terrariumNotification.py:119 terrariumNotification.py:154
-#: terrariumNotification.py:185 views/audio_files.html:24
+#: terrariumNotification.py:120 terrariumNotification.py:155
+#: terrariumNotification.py:186 views/audio_files.html:24
 #: views/audio_files.html:35 views/enclosures.html:172
 #: views/modals/area.html:47 views/modals/button.html:45
 #: views/modals/enclosure.html:18 views/modals/event.html:15
@@ -320,121 +332,125 @@ msgstr "Tipo de sensor"
 msgid "Name"
 msgstr "Nome"
 
-#: terrariumNotification.py:120 terrariumNotification.py:155
-#: terrariumNotification.py:186 views/modals/button.html:33
+#: terrariumNotification.py:121 terrariumNotification.py:156
+#: terrariumNotification.py:187 views/modals/button.html:33
 #: views/modals/relay.html:33 views/modals/sensor.html:48
 #: views/modals/service.html:79 views/modals/webcam.html:37
 msgid "Address"
 msgstr "Endereço"
 
-#: terrariumNotification.py:121 views/modals/sensor.html:107
+#: terrariumNotification.py:122 views/modals/sensor.html:107
 msgid "Limit min"
 msgstr "Limite mín gráfico"
 
-#: terrariumNotification.py:122 views/modals/sensor.html:119
+#: terrariumNotification.py:123 views/modals/sensor.html:119
 msgid "Limit max"
 msgstr "Limite máx gráfico"
 
-#: terrariumNotification.py:123 views/modals/sensor.html:83
+#: terrariumNotification.py:124 views/modals/sensor.html:83
 msgid "Alarm min"
 msgstr "Alarme mín"
 
-#: terrariumNotification.py:124 views/modals/sensor.html:95
+#: terrariumNotification.py:125 views/modals/sensor.html:95
 msgid "Alarm max"
 msgstr "Alarme máx"
 
-#: terrariumNotification.py:125
+#: terrariumNotification.py:126
 msgid "Max difference"
 msgstr "Diferença máxima"
 
-#: terrariumNotification.py:126
+#: terrariumNotification.py:127
 msgid "Exclude from average"
 msgstr "Excluir da média"
 
-#: terrariumNotification.py:128
+#: terrariumNotification.py:129
 msgid "Current value"
 msgstr "Valor atual"
 
-#: terrariumNotification.py:129 terrariumNotification.py:161
-#: terrariumNotification.py:188
+#: terrariumNotification.py:130 terrariumNotification.py:162
+#: terrariumNotification.py:189
 msgid "True if there is an error"
 msgstr "Verdadeiro se houver um erro"
 
-#: terrariumNotification.py:136
+#: terrariumNotification.py:137
 msgid "Sensor change (only when value is changed)"
 msgstr "Mudança do sensor (apenas quando o valor é alterado)"
 
-#: terrariumNotification.py:143
+#: terrariumNotification.py:144
 msgid "Sensor alarm"
 msgstr "Alarme de Sensor"
 
-#: terrariumNotification.py:150
+#: terrariumNotification.py:151
 msgid "Relay update (every 30 seconds)"
 msgstr "Atualização do sensor (a cada 30 segundos)"
 
-#: terrariumNotification.py:156
+#: terrariumNotification.py:157
 msgid "Max wattage"
 msgstr "Potência máxima"
 
-#: terrariumNotification.py:158
+#: terrariumNotification.py:159
 msgid "True if in manual mode"
 msgstr "Verdadeiro se estiver no modo manual"
 
-#: terrariumNotification.py:159
+#: terrariumNotification.py:160
 msgid "True if it is a dimmer"
 msgstr "Verdadeiro se for um dimmer"
 
-#: terrariumNotification.py:160 terrariumNotification.py:187
+#: terrariumNotification.py:161 terrariumNotification.py:188
 msgid "Current state"
 msgstr "Estado atual"
 
-#: terrariumNotification.py:167
+#: terrariumNotification.py:168
 msgid "Relay change (only when value is changed)"
 msgstr "Mudança de relé (somente quando o valor é alterado)"
 
-#: terrariumNotification.py:174
+#: terrariumNotification.py:175
 msgid "Relay toggle"
 msgstr "Alternar relé"
 
-#: terrariumNotification.py:181
+#: terrariumNotification.py:182
 msgid "Button update (every 30 seconds)"
 msgstr "Atualização do botão (a cada 30 segundos)"
 
-#: terrariumNotification.py:194
+#: terrariumNotification.py:195
 msgid "Button change (only when value is changed)"
 msgstr "Mudança do botão (somente quando o valor é alterado)"
 
-#: terrariumNotification.py:201
+#: terrariumNotification.py:202
 msgid "Button action"
 msgstr "Ação do Botão"
 
-#: terrariumNotification.py:209
+#: terrariumNotification.py:210
 msgid "Webcam archive"
 msgstr "Arquivo da webcam"
 
-#: terrariumNotification.py:365
+#: terrariumNotification.py:364
 msgid "Display"
 msgstr "Exibição"
 
-#: terrariumNotification.py:369
+#: terrariumNotification.py:368
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:379
+#: terrariumNotification.py:378
 msgid "Traffic light"
 msgstr "Luz de semáforo"
 
-#: terrariumNotification.py:383
+#: terrariumNotification.py:382
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:387
+#: terrariumNotification.py:386
 msgid "MQTT"
 msgstr "MQTT"
 
-#: terrariumNotification.py:391
+#: terrariumNotification.py:390
 msgid "Pushover"
 msgstr "Pushover"
+
+#: terrariumNotification.py:394
+msgid "Buzzer"
+msgstr ""
 
 #: terrariumWebserver.py:161 terrariumWebserver.py:239
 msgid "Authenticate to make any changes"
@@ -1425,14 +1441,14 @@ msgstr "Selecione um tipo de hardware."
 
 #: views/modals/button.html:36 views/modals/relay.html:36
 #: views/modals/sensor.html:51 views/modals/service.html:82
-#: views/modals/service.html:291 views/modals/webcam.html:40
+#: views/modals/service.html:306 views/modals/webcam.html:40
 msgid "Enter an address."
 msgstr "Insira o endereço."
 
 #: views/modals/button.html:39 views/modals/relay.html:39
 #: views/modals/sensor.html:54 views/modals/service.html:85
 #: views/modals/service.html:111 views/modals/service.html:123
-#: views/modals/service.html:280 views/modals/service.html:294
+#: views/modals/service.html:295 views/modals/service.html:309
 #: views/modals/webcam.html:43
 msgid "The address cannot be empty."
 msgstr "O endereço não pode ficar em branco."
@@ -1554,70 +1570,70 @@ msgstr "Insira a quantidade de repetições do período."
 msgid "Message settings"
 msgstr "Configurações de mensagem"
 
-#: views/modals/message.html:18
+#: views/modals/message.html:19
 msgid "Message type"
 msgstr "Tipo de mensagem"
 
-#: views/modals/message.html:24
+#: views/modals/message.html:25
 msgid "Select the notification message type."
 msgstr "Selecione o tipo de mensagem de notificação."
 
-#: views/modals/message.html:30
+#: views/modals/message.html:31
 msgid "Subject"
 msgstr "Assunto"
 
-#: views/modals/message.html:33
+#: views/modals/message.html:34
 msgid "Enter a short subject. You can use placeholder values here."
 msgstr "Insira um assunto. Podem ser usados placeholders aqui."
 
-#: views/modals/message.html:36
+#: views/modals/message.html:37
 msgid "The subject cannot be empty."
 msgstr "O assunto não pode ficar em branco."
 
-#: views/modals/message.html:42 views/modals/service.html:41
+#: views/modals/message.html:43 views/modals/service.html:41
 msgid "Rate limit"
 msgstr "Limite de taxa"
 
-#: views/modals/message.html:45
+#: views/modals/message.html:46
 msgid ""
 "Maximum number of messages per minute for this message. Use 0 for unlimited."
 msgstr ""
 "Número máximo de mensagens por minuto para esta mensagem. Use 0 para "
 "ilimitado."
 
-#: views/modals/message.html:48
+#: views/modals/message.html:49
 msgid "Enter a valid number."
 msgstr "Digite um número válido."
 
-#: views/modals/message.html:55 views/modals/service.html:51
+#: views/modals/message.html:56 views/modals/service.html:51
 msgid "Enabled"
 msgstr "Ativado"
 
-#: views/modals/message.html:60
+#: views/modals/message.html:61
 msgid "Enable/disable this notification message."
 msgstr "Ativar/desativar esta mensagem de notificação."
 
-#: views/modals/message.html:70
+#: views/modals/message.html:71
 msgid "Message"
 msgstr "Mensagem"
 
-#: views/modals/message.html:73
+#: views/modals/message.html:74
 msgid "Enter a message. You can use placeholder values here."
 msgstr "Insira uma mensagem. Podem ser usados placeholders aqui."
 
-#: views/modals/message.html:81
+#: views/modals/message.html:82
 msgid "Services"
 msgstr "Serviços"
 
-#: views/modals/message.html:84
+#: views/modals/message.html:85
 msgid "Select the service to use for this notification message."
 msgstr "Selecione o serviço a ser usado para esta mensagem de notificação."
 
-#: views/modals/message.html:92
+#: views/modals/message.html:93
 msgid "Place holders"
 msgstr "Espaços reservados"
 
-#: views/modals/message.html:95
+#: views/modals/message.html:96
 msgid "List of available placeholders."
 msgstr "Lista de placeholders disponíveis."
 
@@ -1846,11 +1862,11 @@ msgstr "Insira o endereço do servidor de email."
 msgid "SMTP Server port"
 msgstr "Porta do servidor SMTP"
 
-#: views/modals/service.html:132 views/modals/service.html:303
+#: views/modals/service.html:132 views/modals/service.html:318
 msgid "Enter a port number."
 msgstr "Inserir o número da porta."
 
-#: views/modals/service.html:135 views/modals/service.html:306
+#: views/modals/service.html:135 views/modals/service.html:321
 msgid "The port number cannot be empty."
 msgstr "O número da porta não pode ficar em branco."
 
@@ -1858,7 +1874,7 @@ msgstr "O número da porta não pode ficar em branco."
 msgid "SMTP Server username"
 msgstr "Nome de usuário no Servidor SMTP"
 
-#: views/modals/service.html:144 views/modals/service.html:315
+#: views/modals/service.html:144 views/modals/service.html:330
 msgid "Enter a username."
 msgstr "Insira o nome de usuário."
 
@@ -1866,7 +1882,7 @@ msgstr "Insira o nome de usuário."
 msgid "SMTP Server password"
 msgstr "Senha no Servidor SMTP"
 
-#: views/modals/service.html:153 views/modals/service.html:324
+#: views/modals/service.html:153 views/modals/service.html:339
 msgid "Enter a password."
 msgstr "Insira a senha."
 
@@ -1934,43 +1950,55 @@ msgstr "Verde"
 msgid "Enter GPIO pin for green light."
 msgstr "Insira o pino GPIO para a luz verde."
 
-#: views/modals/service.html:247
+#: views/modals/service.html:249
+#, fuzzy
+#| msgid "GPIO"
+msgid "GPIO pin"
+msgstr "GPIO"
+
+#: views/modals/service.html:252
+#, fuzzy
+#| msgid "Enter GPIO pin for amber light."
+msgid "Enter GPIO pin for the buzzer."
+msgstr "Insira o pino GPIO para a luz amarela."
+
+#: views/modals/service.html:262
 msgid "Customer key"
 msgstr "Chave do consumidor (Customer key)"
 
-#: views/modals/service.html:253
+#: views/modals/service.html:268
 msgid "Customer secret"
 msgstr "Segredo do Consumidor (Customer secret)"
 
-#: views/modals/service.html:259
+#: views/modals/service.html:274
 msgid "Access token"
 msgstr "Token de acesso"
 
-#: views/modals/service.html:265
+#: views/modals/service.html:280
 msgid "Access token secret"
 msgstr "Segredo do token de acesso"
 
-#: views/modals/service.html:274
+#: views/modals/service.html:289
 msgid "Full post url"
 msgstr "URL da postagem completa"
 
-#: views/modals/service.html:277
+#: views/modals/service.html:292
 msgid "Enter the full post url."
 msgstr "Insira a url completa para o post."
 
-#: views/modals/service.html:288
+#: views/modals/service.html:303
 msgid "MQTT Server address"
 msgstr "Endereço do servidor MQTT"
 
-#: views/modals/service.html:300
+#: views/modals/service.html:315
 msgid "MQTT Server port"
 msgstr "Porta do servidor MQTT"
 
-#: views/modals/service.html:312
+#: views/modals/service.html:327
 msgid "MQTT Server username"
 msgstr "Nome de usuário no Servidor MQTT"
 
-#: views/modals/service.html:321
+#: views/modals/service.html:336
 msgid "MQTT Server password"
 msgstr "Senha no Servidor MQTT"
 
@@ -2811,7 +2839,7 @@ msgstr "Insira uma URL válida, um arquivo JSON local ou um script."
 msgid "Enter amber GPIO pin"
 msgstr "Insira o pino GPIO para o amarelo"
 
-#: views/modals/message.html:71
+#: views/modals/message.html:72
 msgid "Enter a message"
 msgstr "Insira a mensagem"
 
@@ -2835,7 +2863,7 @@ msgstr "Digite um nome para este Equipamento."
 msgid "Enter an email address"
 msgstr "Insira o email"
 
-#: views/modals/message.html:31
+#: views/modals/message.html:32
 msgid "Enter a subject"
 msgstr "Insira o assunto"
 
@@ -2850,6 +2878,12 @@ msgstr "Digite o horário de início"
 #: views/modals/area.html:550 views/modals/area.html:679
 msgid "Enter end time"
 msgstr "Digite o horário de término"
+
+#: views/modals/service.html:250
+#, fuzzy
+#| msgid "Enter red GPIO pin"
+msgid "Enter GPIO pin"
+msgstr "Insira o pino GPIO para o vermelho"
 
 #: views/modals/service.html:236
 msgid "Enter green GPIO pin"
@@ -2887,7 +2921,7 @@ msgstr "Digite a quantidade de horas para alterar"
 msgid "Enter the capacitor value in &micro;F"
 msgstr "Insira o valor de capacitância em &micro;F"
 
-#: views/modals/service.html:275
+#: views/modals/service.html:290
 msgid "Enter the full post url"
 msgstr "Insira a url completa para o post"
 
@@ -2903,11 +2937,11 @@ msgstr "Digite a quantidade máxima de horas"
 msgid "Enter the minimum amount of hours"
 msgstr "Digite a quantidade mínima de horas"
 
-#: views/modals/service.html:289
+#: views/modals/service.html:304
 msgid "Enter the MQTT server address name or ip"
 msgstr "Insira o endereço do servidor MQTT ou seu IP"
 
-#: views/modals/service.html:301
+#: views/modals/service.html:316
 msgid "Enter the MQTT server port number"
 msgstr "Insira a porta do servidor MQTT"
 
@@ -2927,7 +2961,7 @@ msgstr "Insira a chave de usuário (user key) do Pushover"
 msgid "Enter the SMTP server address name or ip"
 msgstr "Insira o endereço do servidor SMTP ou IP"
 
-#: views/modals/service.html:151 views/modals/service.html:322
+#: views/modals/service.html:151 views/modals/service.html:337
 msgid "Enter the SMTP server password"
 msgstr "Insira a senha do servidor SMTP"
 
@@ -2935,7 +2969,7 @@ msgstr "Insira a senha do servidor SMTP"
 msgid "Enter the SMTP server port number"
 msgstr "Insira a porta do servidor SMTP"
 
-#: views/modals/service.html:142 views/modals/service.html:313
+#: views/modals/service.html:142 views/modals/service.html:328
 msgid "Enter the SMTP server username"
 msgstr "Insira o nome de usuário no servidor SMTP"
 
@@ -2996,7 +3030,7 @@ msgstr "Modo de relé manual"
 msgid "Max power in percentage"
 msgstr "Consumo máximo em porcentagem"
 
-#: views/modals/message.html:43 views/modals/service.html:42
+#: views/modals/message.html:44 views/modals/service.html:42
 msgid "Messages per minute"
 msgstr "Mensagens por minuto"
 
@@ -3148,7 +3182,7 @@ msgstr "Selecionar rotação"
 msgid "Select sensors"
 msgstr "Selecionar sensores"
 
-#: views/modals/message.html:20 views/modals/sensor.html:35
+#: views/modals/message.html:21 views/modals/sensor.html:35
 #: views/modals/service.html:19 views/modals/service.html:66
 msgid "Select type"
 msgstr "Selecionar tipo"
@@ -3173,7 +3207,7 @@ msgstr "Mostrar caixas de movimento"
 msgid "Shutdown TerrariumPI"
 msgstr "Desligar TerrariumPI"
 
-#: terrariumNotification.py:374
+#: terrariumNotification.py:373
 msgid "Telegram"
 msgstr "Telegram"
 
@@ -4206,9 +4240,6 @@ msgstr "Url da fonte de dados meteorológicos"
 
 #~ msgid "Door"
 #~ msgstr "Porta"
-
-#~ msgid "GPIO"
-#~ msgstr "GPIO"
 
 #~ msgid "No doors available"
 #~ msgstr "Nenhuma porta disponível"
