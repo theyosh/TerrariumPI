@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2022-01-08 22:42+CET\n"
-"PO-Revision-Date: 2021-12-28 12:15+0000\n"
-"Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
+"PO-Revision-Date: 2022-01-08 22:06+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_GB/>\n"
 "Language: en_GB\n"
@@ -171,20 +171,16 @@ msgid "Local date"
 msgstr "Local date"
 
 #: terrariumNotification.py:37
-#, fuzzy
-#| msgid "Local date and time"
 msgid "Local date, day and month"
-msgstr "Local date and time"
+msgstr "Local date, day and month"
 
 #: terrariumNotification.py:38
 msgid "Local time"
 msgstr "Local time"
 
 #: terrariumNotification.py:39
-#, fuzzy
-#| msgid "Local date and time"
 msgid "Local time, hours and minutes"
-msgstr "Local date and time"
+msgstr "Local time, hours and minutes"
 
 #: terrariumNotification.py:40
 msgid "Local date and time"
@@ -281,31 +277,27 @@ msgstr "Number of relays active"
 
 #: terrariumNotification.py:96
 msgid "System to slow with updates (warning)"
-msgstr ""
+msgstr "System to slow with updates (warning)"
 
 #: terrariumNotification.py:99
-#, fuzzy
-#| msgid "The duration in seconds to toggle on the relay."
 msgid "Duration in seconds that are short"
-msgstr "The duration in seconds to toggle on the relay."
+msgstr "Duration in seconds that are short"
 
 #: terrariumNotification.py:100
-#, fuzzy
-#| msgid "Enter a valid duration in seconds."
 msgid "The update duration in seconds"
-msgstr "Enter a valid duration in seconds."
+msgstr "The update duration in seconds"
 
 #: terrariumNotification.py:101
 msgid "The max update duration"
-msgstr ""
+msgstr "The max update duration"
 
 #: terrariumNotification.py:102
 msgid "Amount of times to late with updates"
-msgstr ""
+msgstr "Amount of times to late with updates"
 
 #: terrariumNotification.py:108
 msgid "System to slow with updates more then 30 times"
-msgstr ""
+msgstr "System to slow with updates more then 30 times"
 
 #: terrariumNotification.py:115
 msgid "Sensor update (every 30 seconds)"
@@ -454,7 +446,7 @@ msgstr "Pushover"
 
 #: terrariumNotification.py:394
 msgid "Buzzer"
-msgstr ""
+msgstr "Buzzer"
 
 #: terrariumWebserver.py:161 terrariumWebserver.py:239
 msgid "Authenticate to make any changes"
@@ -1947,16 +1939,12 @@ msgid "Enter GPIO pin for green light."
 msgstr "Enter GPIO pin for green light."
 
 #: views/modals/service.html:249
-#, fuzzy
-#| msgid "GPIO"
 msgid "GPIO pin"
-msgstr "GPIO"
+msgstr "GPIO pin"
 
 #: views/modals/service.html:252
-#, fuzzy
-#| msgid "Enter GPIO pin for amber light."
 msgid "Enter GPIO pin for the buzzer."
-msgstr "Enter GPIO pin for amber light."
+msgstr "Enter GPIO pin for the buzzer."
 
 #: views/modals/service.html:262
 msgid "Customer key"
@@ -2866,10 +2854,8 @@ msgid "Enter end time"
 msgstr "Enter end time"
 
 #: views/modals/service.html:250
-#, fuzzy
-#| msgid "Enter red GPIO pin"
 msgid "Enter GPIO pin"
-msgstr "Enter red GPIO pin"
+msgstr "Enter GPIO pin"
 
 #: views/modals/service.html:236
 msgid "Enter green GPIO pin"
