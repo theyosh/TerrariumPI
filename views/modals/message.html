@@ -11,13 +11,14 @@
 {% block modal_title %}<i class="fas fa-thumbtack mr-2" ></i>{{ _('Message settings') }}{% endblock %}
 {% block modal_body %}
 <input type="hidden" name="services" id="services" value="">
+<input type="hidden" name="id" id="message_id" value="">
 
 <div class="row">
   <div class="col-12 col-sm-6 col-md-4 col-lg-4">
     <div class="form-group">
-      <label for="message_id">{{ _('Message type') }}</label>
+      <label for="message_type">{{ _('Message type') }}</label>
       <div class="select2-primary">
-        <select class="select2" id="message_id" name="id" required="required" data-placeholder="{{ _('Select type') }}" style="width: 100%">
+        <select class="select2" id="message_type" name="type" required="required" data-placeholder="{{ _('Select type') }}" style="width: 100%">
         </select>
       </div>
       <small class="text-muted">
@@ -114,7 +115,8 @@ jQuery.when(
   jQuery.get('{{ url_for("api:notification_service_list") }}'),
 
 ).done(function(message_types, services) {
-    let message_type_select = {{modal_type}}_form.find('select#message_id');
+    {{modal_type}}_form.find('input[name="id"]').prop('disabled',true)
+    let message_type_select = {{modal_type}}_form.find('select#message_type');
     message_type_select.attr('readonly', false);
     message_type_select.find('option').remove();
 
@@ -162,7 +164,7 @@ jQuery.when(
 
       jQuery.get(url, function(data){
         // Enable the hidden id field
-        // {{modal_type}}_form.find('input[name="id"]').prop('disabled',false)
+        {{modal_type}}_form.find('input[name="id"]').prop('disabled',false)
         // Change the form url to an PUT (update)
         {{modal_type}}_form.attr({'method' : 'PUT', 'action' : url});
         // Make hardware type readonly

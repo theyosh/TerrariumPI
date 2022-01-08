@@ -2,9 +2,6 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-import copy
-import json
-
 from datetime import datetime, timezone, timedelta
 from pony import orm
 from bottle import request, response, static_file, HTTPError
@@ -12,10 +9,10 @@ from json import dumps
 from pathlib import Path
 from ffprobe import FFProbe
 from hashlib import md5
+from uuid import uuid4
 
 from terrariumArea         import terrariumArea
 from terrariumAudio        import terrariumAudio
-from terrariumCalendar     import terrariumCalendar
 from terrariumDatabase     import Area, Audiofile, Button, Enclosure, Playlist, NotificationMessage, NotificationService, Relay, Sensor, SensorHistory, Setting, Webcam
 from terrariumEnclosure    import terrariumEnclosure
 from terrariumNotification import terrariumNotification, terrariumNotificationService
@@ -698,6 +695,7 @@ class terrariumAPI(object):
   def notification_message_add(self):
     try:
       request.json['services'] = NotificationService.select(lambda ns: ns.id in request.json['services'].split(','))
+      request.json['id'] = str(uuid4())
       message = NotificationMessage(**request.json)
 
       return self.notification_message_detail(message.id)

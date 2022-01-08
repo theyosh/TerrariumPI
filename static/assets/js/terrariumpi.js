@@ -481,6 +481,10 @@ function template_sensor_type_icon(type) {
       return 'fab fa-twitter'
       break;
 
+    case 'buzzer':
+      return 'fas fa-music'
+      break;
+
     case 'webhook':
       return 'fas fa-cloud-upload-alt'
       break;

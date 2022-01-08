@@ -277,6 +277,7 @@ class Enclosure(db.Entity):
 
 class NotificationMessage(db.Entity):
   id         = orm.PrimaryKey(str)
+  type       = orm.Required(str)
   title      = orm.Required(str)
   message    = orm.Required(str)
   rate_limit = orm.Optional(int, default=0)

@@ -22,7 +22,7 @@ from pony import orm
 from string import Template
 from gevent import sleep
 from operator import itemgetter
-from threading import Timer
+from threading import Thread, Timer
 from base64 import b64encode
 
 from terrariumDatabase import NotificationMessage, NotificationService
@@ -30,7 +30,6 @@ from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
 
 # Display support
 from hardware.display import terrariumDisplay, terrariumDisplayLoadingException
-
 
 class terrariumNotification(terrariumSingleton):
   __DEFAULT_PLACEHOLDERS = {
@@ -295,56 +294,52 @@ class terrariumNotification(terrariumSingleton):
   def profile_image(self):
     return None if self.engine is None else self.engine.settings['profile_image']
 
-  def message(self, message_id, data = {}, files = []):
-    if message_id not in self.__MESSAGES:
+  def message(self, message_type, data = {}, files = []):
+    if message_type not in self.__MESSAGES:
       return
 
     with orm.db_session():
-      try:
-        message = NotificationMessage[message_id]
-      except orm.core.ObjectNotFound as ex:
-        return
-
-      if not message.enabled:
-        logger.debug(f'Notification message {message} is (temporary) disabled.')
-        return
-
-      if self.__rate_limit('total'):
-        logger.warning(f'Hitting the total max rate limit of {self.__rate_limiter_counter["total"]["rate"]} messages per minute. Message will be ignored.')
-        return
-
-      # Translate message variables
-      data['date'] = datetime.datetime.now().strftime('%x')
-      data['time'] = datetime.datetime.now().strftime('%X')
-      data['now'] = data['date'] + ' ' + data['time']
-      title = Template(message.title).safe_substitute(**data)
-      text  = Template(message.message).safe_substitute(**data)
-
-      if message.rate_limit > 0 and self.__rate_limit(title, message.rate_limit):
-        logger.warning(f'Hitting the max rate limit of {self.__rate_limiter_counter[title]["rate"]} messages per minute for message {message.title}. Message will be ignored.')
-        return
-
-      for service in message.services:
-
-        if self.services[service.id] is None:
-          logger.debug(f'Ignoring service {self} as it did not loaded correctly.')
+      for message in NotificationMessage.select(lambda nm: nm.type == message_type):
+        if not message.enabled:
+          logger.debug(f'Notification message {message} is (temporary) disabled.')
           continue
 
-        if not service.enabled:
-          logger.debug(f'Service {self} is (temporary) disabled.')
+        if self.__rate_limit('total'):
+          logger.warning(f'Hitting the total max rate limit of {self.__rate_limiter_counter["total"]["rate"]} messages per minute. Message will be ignored.')
           continue
 
-        if service.rate_limit > 0 and self.__rate_limit(service.type, service.rate_limit):
-          logger.warning(f'Hitting the max rate limit of {self.__rate_limiter_counter[service.type]["rate"]} messages per minute for service {service.type}. Message will be ignored.')
+        # Translate message variables
+        data['date'] = datetime.datetime.now().strftime('%x')
+        data['time'] = datetime.datetime.now().strftime('%X')
+        data['now'] = data['date'] + ' ' + data['time']
+        title = Template(message.title).safe_substitute(**data)
+        text  = Template(message.message).safe_substitute(**data)
+
+        if message.rate_limit > 0 and self.__rate_limit(title, message.rate_limit):
+          logger.warning(f'Hitting the max rate limit of {self.__rate_limiter_counter[title]["rate"]} messages per minute for message {message.title}. Message will be ignored.')
           continue
 
-        if service.id not in self.services:
-          setup = copy.copy(service.setup)
-          setup['version']       = self.version
-          setup['profile_image'] = self.profile_image
-          self.services[service.id] = terrariumNotificationService(service.id, service.type, service.name, service.enabled, setup)
+        for service in message.services:
 
-        self.services[service.id].send_message(message_id, title, text, data)
+          if self.services[service.id] is None:
+            logger.debug(f'Ignoring service {self} as it did not loaded correctly.')
+            continue
+
+          if not service.enabled:
+            logger.debug(f'Service {self} is (temporary) disabled.')
+            continue
+
+          if service.rate_limit > 0 and self.__rate_limit(service.type, service.rate_limit):
+            logger.warning(f'Hitting the max rate limit of {self.__rate_limiter_counter[service.type]["rate"]} messages per minute for service {service.type}. Message will be ignored.')
+            continue
+
+          if service.id not in self.services:
+            setup = copy.copy(service.setup)
+            setup['version']       = self.version
+            setup['profile_image'] = self.profile_image
+            self.services[service.id] = terrariumNotificationService(service.id, service.type, service.name, service.enabled, setup)
+
+          self.services[service.id].send_message(message_type, title, text, data)
 
   def stop(self):
     for _, service in self.services.items():
@@ -390,6 +385,10 @@ class terrariumNotificationService(object):
     'pushover' : {
       'name': _('Pushover'),
       'class': lambda: terrariumNotificationServicePushover
+    },
+    'buzzer' : {
+      'name': _('Buzzer'),
+      'class': lambda: terrariumNotificationServiceBuzzer
     }
   }
 
@@ -595,6 +594,554 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
           except Exception as ex:
             print(f'Traffic STOP {led} exception')
             print(ex)
+
+
+class terrariumNotificationServiceBuzzer(terrariumNotificationService):
+  # Original code from https://github.com/gumslone/raspi_buzzer_player
+
+  __NOTES = {
+    'B0' : 31,
+    'C1' : 33, 'CS1' : 35,
+    'D1' : 37, 'DS1' : 39,
+    'EB1' : 39,
+    'E1' : 41,
+    'F1' : 44, 'FS1' : 46,
+    'G1' : 49, 'GS1' : 52,
+    'A1' : 55, 'AS1' : 58,
+    'BB1' : 58,
+    'B1' : 62,
+    'C2' : 65, 'CS2' : 69,
+    'D2' : 73, 'DS2' : 78,
+    'EB2' : 78,
+    'E2' : 82,
+    'F2' : 87, 'FS2' : 93,
+    'G2' : 98, 'GS2' : 104,
+    'A2' : 110, 'AS2' : 117,
+    'BB2' : 123,
+    'B2' : 123,
+    'C3' : 131, 'CS3' : 139,
+    'D3' : 147, 'DS3' : 156,
+    'EB3' : 156,
+    'E3' : 165,
+    'F3' : 175, 'FS3' : 185,
+    'G3' : 196, 'GS3' : 208,
+    'A3' : 220, 'AS3' : 233,
+    'BB3' : 233,
+    'B3' : 247,
+    'C4' : 262, 'CS4' : 277,
+    'D4' : 294, 'DS4' : 311,
+    'EB4' : 311,
+    'E4' : 330,
+    'F4' : 349, 'FS4' : 370,
+    'G4' : 392, 'GS4' : 415,
+    'A4' : 440, 'AS4' : 466,
+    'BB4' : 466,
+    'B4' : 494,
+    'C5' : 523, 'CS5' : 554,
+    'D5' : 587, 'DS5' : 622,
+    'EB5' : 622,
+    'E5' : 659,
+    'F5' : 698, 'FS5' : 740,
+    'G5' : 784, 'GS5' : 831,
+    'A5' : 880, 'AS5' : 932,
+    'BB5' : 932,
+    'B5' : 988,
+    'C6' : 1047, 'CS6' : 1109,
+    'D6' : 1175, 'DS6' : 1245,
+    'EB6' : 1245,
+    'E6' : 1319,
+    'F6' : 1397, 'FS6' : 1480,
+    'G6' : 1568, 'GS6' : 1661,
+    'A6' : 1760, 'AS6' : 1865,
+    'BB6' : 1865,
+    'B6' : 1976,
+    'C7' : 2093, 'CS7' : 2217,
+    'D7' : 2349, 'DS7' : 2489,
+    'EB7' : 2489,
+    'E7' : 2637,
+    'F7' : 2794, 'FS7' : 2960,
+    'G7' : 3136, 'GS7' : 3322,
+    'A7' : 3520, 'AS7' : 3729,
+    'BB7' : 3729,
+    'B7' : 3951,
+    'C8' : 4186, 'CS8' : 4435,
+    'D8' : 4699, 'DS8' : 4978
+  }
+
+  __SONGS = {
+    'The Final Countdown' : {
+      'melody' : [
+        __NOTES['A3'],__NOTES['E5'],__NOTES['D5'],__NOTES['E5'],__NOTES['A4'],
+        __NOTES['F3'],__NOTES['F5'],__NOTES['E5'],__NOTES['F5'],__NOTES['E5'],__NOTES['D5'],
+        __NOTES['D3'],__NOTES['F5'],__NOTES['E5'],__NOTES['F5'],__NOTES['A4'],
+        __NOTES['G3'],0,__NOTES['D5'],__NOTES['C5'],__NOTES['D5'],__NOTES['C5'],__NOTES['B4'],__NOTES['D5'],
+        __NOTES['C5'],__NOTES['A3'],__NOTES['E5'],__NOTES['D5'],__NOTES['E5'],__NOTES['A4'],
+        __NOTES['F3'],__NOTES['F5'],__NOTES['E5'],__NOTES['F5'],__NOTES['E5'],__NOTES['D5'],
+        __NOTES['D3'],__NOTES['F5'],__NOTES['E5'],__NOTES['F5'],__NOTES['A4'],
+        __NOTES['G3'],0,__NOTES['D5'],__NOTES['C5'],__NOTES['D5'],__NOTES['C5'],__NOTES['B4'],__NOTES['D5'],
+        __NOTES['C5'],__NOTES['B4'],__NOTES['C5'],__NOTES['D5'],__NOTES['C5'],__NOTES['D5'],
+        __NOTES['E5'],__NOTES['D5'],__NOTES['C5'],__NOTES['B4'],__NOTES['A4'],__NOTES['F5'],
+        __NOTES['E5'],__NOTES['E5'],__NOTES['F5'],__NOTES['E5'],__NOTES['D5'],
+        __NOTES['E5'],
+      ],
+      'tempo' : [
+        1,16,16,4,4,
+        1,16,16,8,8,4,
+        1,16,16,4,4,
+        2,4,16,16,8,8,8,8,
+        4,4,16,16,4,4,
+        1,16,16,8,8,4,
+        1,16,16,4,4,
+        2,4,16,16,8,8,8,8,
+        4,16,16,4,16,16,
+        8,8,8,8,4,4,
+        2,8,4,16,16,
+        1,
+      ],
+      'pause' : 0.30,
+      'pace' : 1.2000
+    },
+
+    'Old MacDonald Had A Farm' : {
+      'melody' : [
+        __NOTES['C5'],__NOTES['C5'],__NOTES['C5'],__NOTES['G4'],
+        __NOTES['A4'],__NOTES['A4'],__NOTES['G4'],
+        __NOTES['E5'],__NOTES['E5'],__NOTES['D5'],__NOTES['D5'],
+        __NOTES['C5'],0,__NOTES['G4'],
+
+        __NOTES['C5'],__NOTES['C5'],__NOTES['C5'],__NOTES['G4'],
+        __NOTES['A4'],__NOTES['A4'],__NOTES['G4'],
+        __NOTES['E5'],__NOTES['E5'],__NOTES['D5'],__NOTES['D5'],
+        __NOTES['C5'],0,__NOTES['G4'],__NOTES['G4'],
+
+        __NOTES['C5'],__NOTES['C5'],__NOTES['C5'],__NOTES['G4'],__NOTES['G4'],
+        __NOTES['C5'],__NOTES['C5'],__NOTES['G4'],
+        __NOTES['C5'],__NOTES['C5'],__NOTES['C5'],__NOTES['C5'],__NOTES['C5'],__NOTES['C5'],
+        __NOTES['C5'],__NOTES['C5'],__NOTES['C5'],__NOTES['C5'],__NOTES['C5'],__NOTES['C5'],0,
+
+        __NOTES['C5'],__NOTES['C5'],__NOTES['C5'],__NOTES['G4'],
+        __NOTES['A4'],__NOTES['A4'],__NOTES['G4'],
+        __NOTES['E5'],__NOTES['E5'],__NOTES['D5'],__NOTES['D5'],
+        __NOTES['C5'],0,
+      ],
+      'tempo' : [
+        2,2,2,2,
+        2,2,1,
+        2,2,2,2,
+        1,2,2,
+
+        2,2,2,2,
+        2,2,1,
+        2,2,2,2,
+        1,2,4,4,
+
+        2,2,2,4,4,
+        2,2,1,
+        4,4,2,4,4,2,
+        4,4,4,4,2,2,4,
+
+        2,2,2,2,
+        2,2,1,
+        2,2,2,2,
+        1,1,
+      ],
+      'pause' : 0.30,
+      'pace' : 0.800
+
+    },
+    'Manaderna (Symphony No. 9)': {
+      'melody' : [
+        __NOTES['E4'],__NOTES['E4'],__NOTES['F4'],__NOTES['G4'],
+        __NOTES['G4'],__NOTES['F4'],__NOTES['E4'],__NOTES['D4'],
+        __NOTES['C4'],__NOTES['C4'],__NOTES['D4'],__NOTES['E4'],
+        __NOTES['E4'],0,__NOTES['D4'],__NOTES['D4'],0,
+
+        __NOTES['E4'],__NOTES['E4'],__NOTES['F4'],__NOTES['G4'],
+        __NOTES['G4'],__NOTES['F4'],__NOTES['E4'],__NOTES['D4'],
+        __NOTES['C4'],__NOTES['C4'],__NOTES['D4'],__NOTES['E4'],
+        __NOTES['D4'],0,__NOTES['C4'],__NOTES['C4'],0,
+
+        __NOTES['D4'],__NOTES['D4'],__NOTES['E4'],__NOTES['C4'],
+        __NOTES['D4'],__NOTES['E4'],__NOTES['F4'],__NOTES['E4'],__NOTES['C4'],
+        __NOTES['D4'],__NOTES['E4'],__NOTES['F4'],__NOTES['E4'],__NOTES['D4'],
+        __NOTES['C4'],__NOTES['D4'],__NOTES['G3'],0,
+
+        __NOTES['E4'],__NOTES['E4'],__NOTES['F4'],__NOTES['G4'],
+        __NOTES['G4'],__NOTES['F4'],__NOTES['E4'],__NOTES['D4'],
+        __NOTES['C4'],__NOTES['C4'],__NOTES['D4'],__NOTES['E4'],
+        __NOTES['D4'],0,__NOTES['C4'],__NOTES['C4'],
+      ],
+      'tempo' : [
+        2,2,2,2,
+        2,2,2,2,
+        2,2,2,2,
+        2,4,4,2,4,
+
+        2,2,2,2,
+        2,2,2,2,
+        2,2,2,2,
+        2,4,4,2,4,
+
+        2,2,2,2,
+        2,4,4,2,2,
+        2,4,4,2,2,
+        2,2,1,4,
+
+        2,2,2,2,
+        2,2,2,2,
+        2,2,2,2,
+        2,4,4,2,
+      ],
+      'pause' : 0.30,
+      'pace' : 0.800
+    },
+    'Deck The Halls': {
+      'melody' : [
+        __NOTES['G5'], __NOTES['F5'], __NOTES['E5'], __NOTES['D5'],
+        __NOTES['C5'], __NOTES['D5'], __NOTES['E5'], __NOTES['C5'],
+        __NOTES['D5'], __NOTES['E5'], __NOTES['F5'], __NOTES['D5'], __NOTES['E5'], __NOTES['D5'],
+        __NOTES['C5'], __NOTES['B4'], __NOTES['C5'], 0,
+
+        __NOTES['G5'], __NOTES['F5'], __NOTES['E5'], __NOTES['D5'],
+        __NOTES['C5'], __NOTES['D5'], __NOTES['E5'], __NOTES['C5'],
+        __NOTES['D5'], __NOTES['E5'], __NOTES['F5'], __NOTES['D5'], __NOTES['E5'], __NOTES['D5'],
+        __NOTES['C5'], __NOTES['B4'], __NOTES['C5'], 0,
+
+        __NOTES['D5'], __NOTES['E5'], __NOTES['F5'], __NOTES['D5'],
+        __NOTES['E5'], __NOTES['F5'], __NOTES['G5'], __NOTES['D5'],
+        __NOTES['E5'], __NOTES['F5'], __NOTES['G5'], __NOTES['A5'], __NOTES['B5'], __NOTES['C6'],
+        __NOTES['B5'], __NOTES['A5'], __NOTES['G5'], 0,
+
+        __NOTES['G5'], __NOTES['F5'], __NOTES['E5'], __NOTES['D5'],
+        __NOTES['C5'], __NOTES['D5'], __NOTES['E5'], __NOTES['C5'],
+        __NOTES['D5'], __NOTES['E5'], __NOTES['F5'], __NOTES['D5'], __NOTES['E5'], __NOTES['D5'],
+        __NOTES['C5'], __NOTES['B4'], __NOTES['C5'], 0,
+      ],
+      'tempo' : [
+        2,4,2,2,
+        2,2,2,2,
+        4,4,4,4,2,4,
+        2,2,2,2,
+
+        2,4,2,2,
+        2,2,2,2,
+        4,4,4,4,2,4,
+        2,2,2,2,
+
+        2,4,2,2,
+        2,4,2,2,
+        4,4,2,4,4,2,
+        2,2,2,2,
+
+        2,4,2,2,
+        2,2,2,2,
+        4,4,4,4,2,4,
+        2,2,2,2,
+      ],
+      'pause' : 0.30,
+      'pace' : 0.800
+    },
+    'Crazy Frog (Axel F) Theme': {
+      'melody' : [
+        __NOTES['A4'], __NOTES['C5'], __NOTES['A4'], __NOTES['A4'], __NOTES['D5'], __NOTES['A4'], __NOTES['G4'],
+        __NOTES['A4'], __NOTES['E5'], __NOTES['A4'], __NOTES['A4'], __NOTES['F5'], __NOTES['E5'], __NOTES['C5'],
+        __NOTES['A4'], __NOTES['E5'], __NOTES['A5'], __NOTES['A4'], __NOTES['G4'], __NOTES['G4'], __NOTES['E4'], __NOTES['B4'],
+        __NOTES['A4'],0,
+
+        __NOTES['A4'], __NOTES['C5'], __NOTES['A4'], __NOTES['A4'], __NOTES['D5'], __NOTES['A4'], __NOTES['G4'],
+        __NOTES['A4'], __NOTES['E5'], __NOTES['A4'], __NOTES['A4'], __NOTES['F5'], __NOTES['E5'], __NOTES['C5'],
+        __NOTES['A4'], __NOTES['E5'], __NOTES['A5'], __NOTES['A4'], __NOTES['G4'], __NOTES['G4'], __NOTES['E4'], __NOTES['B4'],
+        __NOTES['A4'],0,
+
+
+        __NOTES['A3'], __NOTES['G3'], __NOTES['E3'], __NOTES['D3'],
+
+        __NOTES['A4'], __NOTES['C5'], __NOTES['A4'], __NOTES['A4'], __NOTES['D5'], __NOTES['A4'], __NOTES['G4'],
+        __NOTES['A4'], __NOTES['E5'], __NOTES['A4'], __NOTES['A4'], __NOTES['F5'], __NOTES['E5'], __NOTES['C5'],
+        __NOTES['A4'], __NOTES['E5'], __NOTES['A5'], __NOTES['A4'], __NOTES['G4'], __NOTES['G4'], __NOTES['E4'], __NOTES['B4'],
+        __NOTES['A4'],
+      ],
+      'tempo' : [
+        2,4,4,8,4,4,4,
+        2,4,4,8,4,4,4,
+        4,4,4,8,4,8,4,4,
+        1,4,
+
+        2,4,4,8,4,4,4,
+        2,4,4,8,4,4,4,
+        4,4,4,8,4,8,4,4,
+        1,4,
+
+        8,4,4,4,
+
+        2,4,4,8,4,4,4,
+        2,4,4,8,4,4,4,
+        4,4,4,8,4,8,4,4,
+        1,
+      ],
+      'pause' : 0.30,
+      'pace' : 0.900
+    },
+    'Twinkle, Twinkle, Little Star': {
+      'melody' : [
+        __NOTES['C4'], __NOTES['C4'], __NOTES['G4'], __NOTES['G4'], __NOTES['A4'], __NOTES['A4'], __NOTES['G4'],
+        __NOTES['F4'], __NOTES['F4'], __NOTES['E4'], __NOTES['E4'], __NOTES['D4'], __NOTES['D4'], __NOTES['C4'],
+
+        __NOTES['G4'], __NOTES['G4'], __NOTES['F4'], __NOTES['F4'], __NOTES['E4'], __NOTES['E4'], __NOTES['D4'],
+        __NOTES['G4'], __NOTES['G4'], __NOTES['F4'], __NOTES['F4'], __NOTES['E4'], __NOTES['E4'], __NOTES['D4'],
+
+        __NOTES['C4'], __NOTES['C4'], __NOTES['G4'], __NOTES['G4'], __NOTES['A4'], __NOTES['A4'], __NOTES['G4'],
+        __NOTES['F4'], __NOTES['F4'], __NOTES['E4'], __NOTES['E4'], __NOTES['D4'], __NOTES['D4'], __NOTES['C4'],
+      ],
+      'tempo' : [
+        4,4,4,4,4,4,2,
+        4,4,4,4,4,4,2,
+
+        4,4,4,4,4,4,2,
+        4,4,4,4,4,4,2,
+
+        4,4,4,4,4,4,2,
+        4,4,4,4,4,4,2,
+      ],
+      'pause' : 0.50,
+      'pace' : 1.000
+    },
+    'Popcorn': {
+      'melody' : [
+        __NOTES['A4'], __NOTES['G4'], __NOTES['A4'], __NOTES['E4'], __NOTES['C4'], __NOTES['E4'], __NOTES['A3'],
+        __NOTES['A4'], __NOTES['G4'], __NOTES['A4'], __NOTES['E4'], __NOTES['C4'], __NOTES['E4'], __NOTES['A3'],
+
+        __NOTES['A4'], __NOTES['B4'], __NOTES['C5'], __NOTES['B4'], __NOTES['C5'], __NOTES['A4'], __NOTES['B4'], __NOTES['A4'], __NOTES['B4'], __NOTES['G4'],
+        __NOTES['A4'], __NOTES['G4'],__NOTES['A4'], __NOTES['F4'], __NOTES['A4'],
+
+
+        __NOTES['A4'], __NOTES['G4'], __NOTES['A4'], __NOTES['E4'], __NOTES['C4'], __NOTES['E4'], __NOTES['A3'],
+        __NOTES['A4'], __NOTES['G4'], __NOTES['A4'], __NOTES['E4'], __NOTES['C4'], __NOTES['E4'], __NOTES['A3'],
+
+        __NOTES['A4'], __NOTES['B4'], __NOTES['C5'], __NOTES['B4'], __NOTES['C5'], __NOTES['A4'], __NOTES['B4'], __NOTES['A4'], __NOTES['B4'], __NOTES['G4'],
+        __NOTES['A4'], __NOTES['G4'],__NOTES['A4'], __NOTES['B4'], __NOTES['C5'],
+
+        __NOTES['E5'], __NOTES['D5'], __NOTES['E5'], __NOTES['C5'], __NOTES['G4'], __NOTES['C5'], __NOTES['E4'],
+        __NOTES['E5'], __NOTES['D5'], __NOTES['E5'], __NOTES['C5'], __NOTES['G4'], __NOTES['C5'], __NOTES['E4'],
+
+        __NOTES['E5'], __NOTES['FS5'], __NOTES['G5'], __NOTES['FS5'], __NOTES['G5'], __NOTES['E5'], __NOTES['FS5'], __NOTES['E5'], __NOTES['FS5'], __NOTES['D5'],
+        __NOTES['E5'], __NOTES['D5'],__NOTES['E5'], __NOTES['C5'], __NOTES['E5'],
+
+        ###
+
+        __NOTES['E5'], __NOTES['D5'], __NOTES['E5'], __NOTES['C5'], __NOTES['G4'], __NOTES['C5'], __NOTES['E4'],
+        __NOTES['E5'], __NOTES['D5'], __NOTES['E5'], __NOTES['C5'], __NOTES['G4'], __NOTES['C5'], __NOTES['E4'],
+
+        __NOTES['E5'], __NOTES['FS5'], __NOTES['G5'], __NOTES['FS5'], __NOTES['G5'], __NOTES['E5'], __NOTES['FS5'], __NOTES['E5'], __NOTES['FS5'], __NOTES['D5'],
+        __NOTES['E5'], __NOTES['D5'],__NOTES['B4'], __NOTES['D5'], __NOTES['E5'],
+      ],
+      'tempo' : [
+        8,8,8,8,8,8,4,
+        8,8,8,8,8,8,4,
+
+        8,8,8,8,8,8,8,8,8,8,
+        8,8,8,8,4,
+
+        8,8,8,8,8,8,4,
+        8,8,8,8,8,8,4,
+
+        8,8,8,8,8,8,8,8,8,8,
+        8,8,8,8,4,
+
+        8,8,8,8,8,8,4,
+        8,8,8,8,8,8,4,
+
+        8,8,8,8,8,8,8,8,8,8,
+        8,8,8,8,4,
+
+        8,8,8,8,8,8,4,
+        8,8,8,8,8,8,4,
+
+        8,8,8,8,8,8,8,8,8,8,
+        8,8,8,8,4,
+      ],
+      'pause' : 0.50,
+      'pace' : 1.000
+    },
+    'Star Wars': {
+      'melody' : [
+        __NOTES['G4'], __NOTES['G4'], __NOTES['G4'],
+        __NOTES['EB4'], 0, __NOTES['BB4'], __NOTES['G4'],
+        __NOTES['EB4'], 0, __NOTES['BB4'], __NOTES['G4'], 0,
+
+        __NOTES['D4'], __NOTES['D4'], __NOTES['D4'],
+        __NOTES['EB4'], 0, __NOTES['BB3'], __NOTES['FS3'],
+        __NOTES['EB3'], 0, __NOTES['BB3'], __NOTES['G3'], 0,
+
+        __NOTES['G4'], 0, __NOTES['G3'], __NOTES['G3'], 0,
+        __NOTES['G4'], 0, __NOTES['FS4'], __NOTES['F4'],
+        __NOTES['E4'], __NOTES['EB4'], __NOTES['E4'], 0,
+        __NOTES['GS3'], __NOTES['CS3'], 0,
+
+        __NOTES['C3'], __NOTES['B3'], __NOTES['BB3'], __NOTES['A3'], __NOTES['BB3'], 0,
+        __NOTES['EB3'], __NOTES['FS3'], __NOTES['EB3'], __NOTES['FS3'],
+        __NOTES['BB3'], 0, __NOTES['G3'], __NOTES['BB3'], __NOTES['D4'], 0,
+
+
+        __NOTES['G4'], 0, __NOTES['G3'], __NOTES['G3'], 0,
+        __NOTES['G4'], 0, __NOTES['FS4'], __NOTES['F4'],
+        __NOTES['E4'], __NOTES['EB4'], __NOTES['E4'], 0,
+        __NOTES['GS3'], __NOTES['CS3'], 0,
+
+        __NOTES['C3'], __NOTES['B3'], __NOTES['BB3'], __NOTES['A3'], __NOTES['BB3'], 0,
+
+        __NOTES['EB3'], __NOTES['FS3'], __NOTES['EB3'],
+        __NOTES['BB3'], __NOTES['G3'], __NOTES['EB3'], 0, __NOTES['BB3'], __NOTES['G3'],
+			],
+      'tempo' : [
+        2,2,2,
+        4,8,6,2,
+        4,8,6,2,8,
+
+        2,2,2,
+        4,8,6,2,
+        4,8,6,2,8,
+
+        2,16,4,4,8,
+        2,8,4,6,
+        6,4,4,8,
+        4,2,8,
+        4,4,6,4,2,8,
+        4,2,4,4,
+        2,8,4,6,2,8,
+
+        2,16,4,4,8,
+        2,8,4,6,
+        6,4,4,8,
+        4,2,8,
+        4,4,6,4,2,8,
+        4,2,2,
+        4,2,4,8,4,2,
+      ],
+      'pause' : 0.50,
+      'pace' : 1.000
+    },
+    'Super Mario': {
+      'melody' : [
+        __NOTES['E7'], __NOTES['E7'], 0, __NOTES['E7'],
+        0, __NOTES['C7'], __NOTES['E7'], 0,
+        __NOTES['G7'], 0, 0,  0,
+        __NOTES['G6'], 0, 0, 0,
+
+        __NOTES['C7'], 0, 0, __NOTES['G6'],
+        0, 0, __NOTES['E6'], 0,
+        0, __NOTES['A6'], 0, __NOTES['B6'],
+        0, __NOTES['AS6'], __NOTES['A6'], 0,
+
+        __NOTES['G6'], __NOTES['E7'], __NOTES['G7'],
+        __NOTES['A7'], 0, __NOTES['F7'], __NOTES['G7'],
+        0, __NOTES['E7'], 0, __NOTES['C7'],
+        __NOTES['D7'], __NOTES['B6'], 0, 0,
+
+        __NOTES['C7'], 0, 0, __NOTES['G6'],
+        0, 0, __NOTES['E6'], 0,
+        0, __NOTES['A6'], 0, __NOTES['B6'],
+        0, __NOTES['AS6'], __NOTES['A6'], 0,
+
+        __NOTES['G6'], __NOTES['E7'], __NOTES['G7'],
+        __NOTES['A7'], 0, __NOTES['F7'], __NOTES['G7'],
+        0, __NOTES['E7'], 0, __NOTES['C7'],
+        __NOTES['D7'], __NOTES['B6'], 0, 0
+      ],
+      'tempo' : [
+        12,12,12,12,
+        12,12,12,12,
+        12,12,12,12,
+        12,12,12,12,
+
+        12,12,12,12,
+        12,12,12,12,
+        12,12,12,12,
+        12,12,12,12,
+
+        9,9,9,
+        12,12,12,12,
+        12,12,12,12,
+        12,12,12,12,
+
+        12,12,12,12,
+        12,12,12,12,
+        12,12,12,12,
+        12,12,12,12,
+
+        9,9,9,
+        12,12,12,12,
+        12,12,12,12,
+        12,12,12,12,
+      ],
+      'pause' : 1.30,
+      'pace' : 0.800
+    },
+  }
+
+  def __play(self, song):
+
+    def buzz(frequency, length):	        #create the function "buzz" and feed it the pitch and duration)
+
+      if frequency == 0:
+        sleep(length)
+        return
+
+      period = 1.0 / frequency 		        #in physics, the period (sec/cyc) is the inverse of the frequency (cyc/sec)
+      delayValue = period / 2.0		        #calculate the time for half of the wave
+      numCycles = int(length * frequency)	#the number of waves to produce is the duration times the frequency
+
+      for i in range(numCycles):		      #start a loop from 0 to the variable "cycles" calculated above
+        GPIO.output(self.setup['address'], True)	    #set pin 27 to high
+        sleep(delayValue)		              #wait with pin 27 high
+        GPIO.output(self.setup['address'], False)		#set pin 27 to low
+        sleep(delayValue)		              #wait with pin 27 low
+
+
+    if self._playing or song not in self.__SONGS:
+      return False
+
+    self._playing = True
+    for i in range(0, len(self.__SONGS[song]['melody'])):		# Play song
+
+      noteDuration = self.__SONGS[song]['pace']/self.__SONGS[song]['tempo'][i]
+      buzz(self.__SONGS[song]['melody'][i],noteDuration)	# Change the frequency along the song note
+
+      pauseBetweenNotes = noteDuration * self.__SONGS[song]['pause']
+      sleep(pauseBetweenNotes)
+
+      if not self._playing:
+        break
+
+    self._playing = False
+
+  def load_setup(self, setup_data):
+    self._playing = False
+    self._player = None
+    self.setup = {
+      'address' : terrariumUtils.to_BCM_port_number(setup_data.get('address'))
+    }
+
+    GPIO.setup(self.setup['address'], GPIO.OUT)
+    super().load_setup(setup_data)
+
+  def send_message(self, type, subject, message, data = None, attachments = []):
+    if self._playing:
+      return
+
+    for song in self.__SONGS:
+      if song.lower() == subject.lower():
+        self._player = Thread(target = self.__play, args = (song,))
+        self._player.start()
+        break
+
+  def stop(self):
+    self._playing = False
+    if self._player is not None:
+      self._player.join()
+
+    GPIO.output(self.setup['address'],False)
+    GPIO.cleanup(self.setup['address'])
 
 class terrariumNotificationServiceMQTT(terrariumNotificationService):
   # The callback for when the client receives a CONNACK response from the server.
