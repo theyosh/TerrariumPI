@@ -169,7 +169,8 @@ class terrariumEngine(object):
 
   def restart(self):
     def sigint_process():
-      terrariumUtils.get_script_data(f'kill -INT {os.getpid()}')
+      # If running with the service, it should restart automatically after 5 sec.
+      terrariumUtils.get_script_data(f'sleep 1; kill -INT {os.getpid()} &')
 
     threading.Timer(2,sigint_process).start()
     logger.warning(f'Restarting TerrariumPI {self.settings["version"]} now!')
@@ -177,7 +178,7 @@ class terrariumEngine(object):
 
   def reboot(self):
     def sigint_process():
-      terrariumUtils.get_script_data('sudo reboot')
+      terrariumUtils.get_script_data('sleep 1; sudo reboot &')
 
     threading.Timer(2,sigint_process).start()
     logger.warning(f'Rebooting TerrariumPI {self.settings["version"]} now!')
@@ -185,7 +186,7 @@ class terrariumEngine(object):
 
   def shutdown(self):
     def sigint_process():
-      terrariumUtils.get_script_data('sudo shutdown')
+      terrariumUtils.get_script_data('sleep 1; sudo shutdown &')
 
     threading.Timer(2,sigint_process).start()
     logger.warning(f'Shutting down TerrariumPI {self.settings["version"]} now!')

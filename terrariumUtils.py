@@ -411,9 +411,9 @@ class terrariumUtils():
   def get_script_data(script):
     data = None
     try:
-      logger.info('Running script: %s.' % (script))
+      logger.debug('Running script: %s.' % (script))
       data = subprocess.check_output(script, shell=True)
-      logger.info('Output was: %s.' % (data))
+      logger.debug('Output was: %s.' % (data))
     except Exception as ex:
       logger.exception('Error parsing script data for script %s. Exception %s' % (script, ex))
 
