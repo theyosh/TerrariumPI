@@ -25,7 +25,7 @@ from operator import itemgetter
 from threading import Thread, Timer
 from base64 import b64encode
 
-from terrariumDatabase import NotificationMessage, NotificationService
+from terrariumDatabase import NotificationMessage, NotificationService, Setting
 from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
 
 # Display support
@@ -271,12 +271,14 @@ class terrariumNotification(terrariumSingleton):
 
   def load_services(self):
     with orm.db_session():
+      tp_name = Setting['title']
       for service in NotificationService.select():
         service = service.to_dict()
         if service['id'] not in self.services:
           setup = copy.deepcopy(service['setup'])
-          setup['version']       = self.version
-          setup['profile_image'] = self.profile_image
+          setup['terrariumpi_name'] = tp_name.value
+          setup['version']          = self.version
+          setup['profile_image']    = self.profile_image
           try:
             self.services[service['id']] = terrariumNotificationService(service['id'], service['type'], service['name'], service['enabled'], setup)
           except terrariumDisplayLoadingException as ex:
@@ -444,8 +446,11 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
     super().load_setup(setup_data)
 
     # Now load the actual display device
-    self.setup['device'] = terrariumDisplay(None, setup_data['hardware'], setup_data['address'], None if not terrariumUtils.is_true(setup_data['show_title']) else f'TerrariumPI {self.setup["version"]}')
-    self.show_picture(self.setup['profile_image'])
+    self.setup['device'] = terrariumDisplay(None, setup_data['hardware'], setup_data['address'], None if not terrariumUtils.is_true(setup_data['show_title']) else f'{setup_data["terrariumpi_name"]} {self.setup["version"]}')
+    try:
+      self.show_picture(self.setup['profile_image'])
+    except Exception:
+      self.send_message(None, None, f'{setup_data["terrariumpi_name"]} {self.setup["version"]} starting up...')
 
   def send_message(self, type, subject, message, data = None, attachments = []):
     self.setup['device'].message(message)
@@ -1128,6 +1133,8 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
 
     GPIO.setup(self.setup['address'], GPIO.OUT)
     super().load_setup(setup_data)
+    # Startup song :P
+    # self.send_message(None, 'Popcorn', None)
 
   def send_message(self, type, subject, message, data = None, attachments = []):
     if self._playing:

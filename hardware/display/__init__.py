@@ -306,8 +306,8 @@ class terrariumDisplay(object):
       except Exception:
         pass
 
-  def write_image(self, image):
-    pass
+  # def write_image(self, image):
+  #   pass
 
   def clear(self):
     if self.title is not None:

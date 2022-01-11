@@ -16,7 +16,7 @@ from terrariumUtils import terrariumCache, terrariumSingleton, terrariumAsync
 from meross_iot.http_api import MerossHttpClient
 from meross_iot.manager import MerossManager
 from meross_iot.controller.mixins.toggle import ToggleXMixin
-from meross_iot.model.http.exception import BadLoginException
+from meross_iot.model.http.exception import BadLoginException, TooManyTokensException
 from meross_iot.model.exception import CommandTimeoutError
 from meross_iot.model.enums import Namespace
 
@@ -205,6 +205,9 @@ class TerrariumMerossCloud(terrariumSingleton):
       logger.error(f'Meross communication timed out connecting with the server.')
     except BadLoginException:
       logger.error(f'Wrong login credentials for Meross. Please check your settings!')
+    except TooManyTokensException as ex:
+      logger.error(ex)
+      self.stop()
     except socket.timeout:
       self.__engine['error'] = True
       if self.__engine['restart_counter'] < 10:
