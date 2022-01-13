@@ -50,7 +50,7 @@ simple-pid==1.0.1
 sparkfun-qwiic-relay==0.0.2
 
 # Webcam packages
-Pillow==8.4.0
+Pillow==9.0.0
 opencv-python-headless==4.5.4.60
 piexif==1.1.3
 
