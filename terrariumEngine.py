@@ -677,14 +677,22 @@ class terrariumEngine(object):
     for relay in terrariumRelay.scan_relays(callback=self.callback_relay):
       if relay.id not in self.settings['exclude_ids'] and relay.id not in self.relays:
         logger.debug(f'Found new relay {relay}')
+
+        action = 'Added new'
         with orm.db_session():
-          # Store new relay in database
-          new_relay = Relay(
-            id        = relay.id,
-            hardware  = relay.HARDWARE,
-            name      = relay.name,
-            address   = relay.address
-          )
+          try:
+            # First try to see if the Relay does exist based on ID (means address change)
+            new_relay = Relay[relay.id]
+            new_relay.address = relay.address
+            action = 'Updated existing'
+          except orm.core.ObjectNotFound:
+            # Store new relay in database
+            new_relay = Relay(
+              id        = relay.id,
+              hardware  = relay.HARDWARE,
+              name      = relay.name,
+              address   = relay.address
+            )
 
           # Create a new relaydata entry, so we have at least one relay value
           value = relay.update()
@@ -692,7 +700,7 @@ class terrariumEngine(object):
 
         # Store the hardware relay in memory, so we can benefit from the shared cached data for relays with multiple relay types
         self.add(relay)
-        logger.info(f'Added new relay {new_relay} to database with current value {value:.2f}.')
+        logger.info(f'{action} relay {new_relay} to database with current value {value:.2f}.')
       else:
         logger.debug('Ignored relay {} because it is {}.'.format(relay, 'excluded' if relay.id in self.settings['exclude_ids'] else 'already loaded'))
 
