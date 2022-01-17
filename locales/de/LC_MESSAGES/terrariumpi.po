@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2022-01-08 22:42+CET\n"
-"PO-Revision-Date: 2021-11-26 14:34+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/de/>\n"
+"PO-Revision-Date: 2022-01-16 23:01+0000\n"
+"Last-Translator: kahuwi14 <karsten@wingen.net>\n"
+"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -869,15 +869,15 @@ msgstr "Protokoll"
 
 #: views/includes/sidebar.html:276
 msgid "Restart"
-msgstr "Neustart"
+msgstr "Dienst neustarten"
 
 #: views/includes/sidebar.html:282
 msgid "Reboot"
-msgstr "Neustart"
+msgstr "System neustarten"
 
 #: views/includes/sidebar.html:288
 msgid "Shutdown"
-msgstr "Herunterfahren"
+msgstr "System herunterfahren"
 
 #: views/includes/sidebar.html:297
 msgid "Help"
@@ -885,7 +885,7 @@ msgstr "Hilfe"
 
 #: views/layouts/modal.html:13
 msgid "More help online"
-msgstr ""
+msgstr "Weitere Informationen"
 
 #: views/layouts/modal.html:28
 msgid "Save changes"
@@ -1087,12 +1087,13 @@ msgid "On duration"
 msgstr "Einschaltdauer"
 
 #: views/modals/area.html:164 views/modals/area.html:311
+#, fuzzy
 msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full day."
 msgstr ""
-"Die Dauer, in der die Relais eingeschaltet sein sollen. '0' für einen ganzen "
-"Tag, grössere Werte für Timer-Funktion."
+"Die Dauer, die das Relais eingeschaltet sein soll. '0' für einen ganzen Tag, "
+"grössere Werte für Timer-Funktion."
 
 #: views/modals/area.html:173 views/modals/area.html:216
 #: views/modals/area.html:320 views/modals/area.html:390
@@ -1103,15 +1104,15 @@ msgstr "Ausschaltdauer"
 #: views/modals/area.html:182 views/modals/area.html:650
 #: views/modals/area.html:780
 msgid "Select the relays to toggle."
-msgstr "Wählen Sie die Relais aus um diese Umzuschalten."
+msgstr "Definition des zu schaltenden Relais."
 
 #: views/modals/area.html:250
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the players."
 msgstr ""
-"Wählen Sie den Modus dieses Bereichs. Das ändert das timing und die Dauer "
-"der Relais."
+"Wählen Sie den Modus dieses Bereichs. Das ändert Einschaltzeit und -dauer "
+"der Elemente."
 
 #: views/modals/area.html:258
 msgid "Sound card"
@@ -1135,8 +1136,8 @@ msgid ""
 "The duration when the relays should be stay off when switched off. Enter '0' "
 "to disable."
 msgstr ""
-"Die Dauer, in der die Relais beim Ausschalten ausgeschaltet bleiben sollen' "
-"'0' zum deaktivieren."
+"Die Dauer, die das Relais nach Ausschalten ausgeschaltet bleiben soll. '0' "
+"zum deaktivieren."
 
 #: views/modals/area.html:335 views/modals/area.html:405
 msgid "Select the playlist(s) to be played."
@@ -1152,7 +1153,7 @@ msgstr "Der Zeitpunkt in der Nacht wenn die Relais umgeschaltet werden sollen."
 
 #: views/modals/area.html:369 views/modals/area.html:681
 msgid "The time of the day when the relays are toggled off each night."
-msgstr "Der Zeitpunk am Tag wenn die Relais umgeschaltet werden sollen."
+msgstr "Der Zeitpunkt in der Nacht wenn die Relais umgeschaltet werden sollen."
 
 #: views/modals/area.html:381
 msgid ""
@@ -1175,8 +1176,8 @@ msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the actions."
 msgstr ""
-"Wählen Sie den Modus dieses Bereichs. Das ändert das timing und die Dauer "
-"der Relais."
+"Wählen Sie den Modus dieses Bereichs. Das ändert Einschaltzeit und -dauer "
+"der Elemente."
 
 #: views/modals/area.html:445
 msgid "Select sensors to use for sensor based mode."
@@ -1245,7 +1246,7 @@ msgstr "Wählen Sie die Quelle wann es 'Tag' ist."
 
 #: views/modals/area.html:511
 msgid "Depends on"
-msgstr ""
+msgstr "Abhängig von"
 
 #: views/modals/area.html:515
 #, fuzzy
@@ -1270,8 +1271,8 @@ msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
-"Die Dauer, in der die Relais eingeschaltet sein sollen. '0' für einen ganze "
-"Nacht, grössere Werte für Timer-Funktion."
+"Die Dauer, die die Relais eingeschaltet sein sollen. '0' für den ganze "
+"Zeitraum."
 
 #: views/modals/area.html:585 views/modals/area.html:714
 msgid "Power on time"
@@ -1279,7 +1280,7 @@ msgstr "Einschaltzeit"
 
 #: views/modals/area.html:588 views/modals/area.html:717
 msgid "The duration in seconds to toggle on the relay."
-msgstr "Die Dauer in Sekunden zum Einschalten des Relais."
+msgstr "Die Dauer in Sekunden, die ein Relais zum Einschalten benötigt."
 
 #: views/modals/area.html:591 views/modals/area.html:603
 #: views/modals/area.html:720 views/modals/area.html:732
@@ -1288,7 +1289,7 @@ msgstr "Geben Sie eine gültige Dauer in Sekunden ein."
 
 #: views/modals/area.html:597 views/modals/area.html:726
 msgid "Settle time"
-msgstr "Einschwingzeit"
+msgstr "Wartezeit"
 
 #: views/modals/area.html:600 views/modals/area.html:729
 msgid "The duration in seconds between two actions."
@@ -2667,7 +2668,7 @@ msgstr "Zeigen Sie Min- und Max-Werte in Grafiken an"
 
 #: views/settings.html:305
 msgid "Show the minimum and maximum value on the gauges."
-msgstr "Zeigen Sie den minimalen und maximalen Wert auf den Grafen an."
+msgstr "Zeigen Sie den minimalen und maximalen Wert auf den Graphen an."
 
 #: views/settings.html:310
 msgid "Hide enclosures on dashboard"
@@ -2679,7 +2680,7 @@ msgstr "Blenden Sie die Gehäusedaten auf dem Dashboard aus."
 
 #: views/settings.html:322
 msgid "All gauges on a single page"
-msgstr "Alle Grafen auf einer Seite"
+msgstr "Alle Grafen auf einer zusätzlichen Seite"
 
 #: views/settings.html:329
 msgid "Add extra menu item for all sensors on a single page."
