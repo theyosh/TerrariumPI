@@ -138,7 +138,7 @@ class terrariumArea(object):
   def _powered(self):
     powered = None
     for period in self.PERIODS:
-      if period not in self.state or len(self.setup[period]['relays']) == 0:
+      if period not in self.state or self.setup.get(period) is None or len(self.setup[period]['relays']) == 0:
         continue
 
       powered = powered or self.state[period]['powered']
@@ -558,15 +558,14 @@ class terrariumArea(object):
 
     # If the depending area is in alarm state, we cannot toggle this area
     depends_on_alarm = False
-    if len(self.depends_on) > 0:
-      for area in self.depends_on:
-        if area in self.enclosure.areas:
+    for area in self.depends_on:
+      if area in self.enclosure.areas and self.enclosure.areas[area].state.get('sensors'):
 
-          depends_on_alarm = depends_on_alarm or self.enclosure.areas[area].state['sensors']['alarm']
-          if depends_on_alarm:
-            unit_value = self.enclosure.engine.units[self.enclosure.areas[area].state['sensors']['unit']]
-            logger.info(f'Depending area {self.enclosure.areas[area].name} is in alarm state for area {self}. Current: {self.enclosure.areas[area].state["sensors"]["current"]:.2f}{unit_value}')
-            break
+        depends_on_alarm = depends_on_alarm or self.enclosure.areas[area].state['sensors']['alarm']
+        if depends_on_alarm:
+          unit_value = self.enclosure.engine.units[self.enclosure.areas[area].state['sensors']['unit']]
+          logger.info(f'Depending area {self.enclosure.areas[area].name} is in alarm state for area {self}. Current: {self.enclosure.areas[area].state["sensors"]["current"]:.2f}{unit_value}')
+          break
 
     for period in self.PERIODS:
       if period not in self.setup:
