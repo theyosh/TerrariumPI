@@ -310,7 +310,7 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+  <div class="col-6 col-sm-6 col-md-2 col-lg-2">
     <div class="form-group">
       <label for="port">{{ _('MQTT Server port') }}</label>
       <input type="number" class="form-control" id="port" name="port" required="required" value="25" placeholder="{{ _('Enter the MQTT server port number') }}">
@@ -337,6 +337,18 @@
       <input type="text" class="form-control" id="password" name="password" placeholder="{{ _('Enter the SMTP server password') }}">
       <small class="text-muted">
         {{ _('Enter a password.') }}
+      </small>
+    </div>
+  </div>
+  <div class="col-6 col-sm-6 col-md-2 col-lg-1">
+    <div class="form-group">
+      <div class="switch">
+        <label for="ssl" class="d-block">{{ _('Use SSL') }}</label>
+        <input type="checkbox" class="switch" id="ssl" name="ssl">
+        <label for="ssl" class="mt-1"></label>
+      </div>
+      <small class="text-muted">
+        {{ _('Toggle this to enable SSL connection.') }}
       </small>
     </div>
   </div>

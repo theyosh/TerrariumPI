@@ -1169,7 +1169,8 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
       'address'   : setup_data.get('address'),
       'port'      : int(setup_data.get('port')),
       'username'  : setup_data.get('username'),
-      'password'  : setup_data.get('password')
+      'password'  : setup_data.get('password'),
+      'ssl'       : setup_data.get('ssl', False),
     }
 
     super().load_setup(setup_data)
@@ -1177,16 +1178,17 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
     self.connection = None
 
     try:
-      self.connection = mqtt.Client()
+      self.connection = mqtt.Client(client_id=f"TerrariumPI {self.setup['version']}")
       self.connection.on_connect = self.on_connect
-      self.connection.tls_set(tls_version=mqtt.ssl.PROTOCOL_TLS)
+      if self.setup['ssl']:
+        self.connection.tls_set(tls_version=mqtt.ssl.PROTOCOL_TLS)
       self.connection.username_pw_set(terrariumUtils.decrypt(self.setup['username']), terrariumUtils.decrypt(self.setup['password']))
       self.connection.connect(self.setup['address'], self.setup['port'], 30)
       self.connection.loop_start()
       logger.info(f'Connected to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
 
     except Exception as ex:
-      logger.exception(f'Failed connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}: {ex}')
+      logger.warning(f'Failed connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}: {ex}')
 
   def stop(self):
     # TODO: Flush the queue
@@ -1219,7 +1221,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
       # Add the message
       data['message'] = message
 
-      self.connection.publish(f'terrariumpi/{type}', payload=json.dumps(data), qos=1)
+      self.connection.publish(topic, payload=json.dumps(data), qos=1)
     else:
       logger.error(f'Could not send message {data["subject"]} to topic {data["topic"]} as we are not connected to the MQTT broker at address: {self.setup["address"]}:{self.setup["port"]}')
 
