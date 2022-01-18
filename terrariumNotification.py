@@ -1212,6 +1212,9 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
       if data is None:
         data = {}
 
+      if 'id' in data:
+        topic = f'{topic}/{data["id"]}'
+
       # Add a unique ID to make clients able to filter duplicate messages
       data['uuid']    = terrariumUtils.generate_uuid()
       # Add the 'direct' topic to subscribe to
