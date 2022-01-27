@@ -9,14 +9,14 @@ import sys
 from pathlib import Path
 from hashlib import md5
 from operator import itemgetter
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 from time import time
 from gevent import sleep
 from func_timeout import func_timeout, FunctionTimedOut
 
 import re
 import math
-import glob
+#import glob
 import cv2
 
 # pip install retry
@@ -434,17 +434,18 @@ class terrariumWebcam(object):
         for relay in relays:
           relay.on()
 
-        sleep(0.5)
+        sleep(1)
 
       try:
         image = func_timeout(10, self._get_raw_data)
       except FunctionTimedOut:
-        # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
         logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
         image = False
-      except Exception as ex:
-        logger.error(f'Webcam {self} has exception: {ex}')
-        image = False
+        # TODO: Need to raise an error, for the retry action?
+
+      # except Exception as ex:
+      #   logger.error(f'Webcam {self} has exception: {ex}')
+      #   image = False
 
       if len(relays) > 0:
         for relay in relays:
@@ -463,6 +464,10 @@ class terrariumWebcam(object):
 
       self._device['state'] = True
       self.__raw_image = Image.open(image)
+      # Test if image is correctly loaded....
+      self.__raw_image.getexif()
+
+      # After here, no errors should happen, the image data should be save and correct
       if not self.live:
         try:
           self.__rotate()
