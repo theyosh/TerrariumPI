@@ -531,7 +531,7 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
           smtp_settings['user']     = terrariumUtils.decrypt(self.setup['username'])
           smtp_settings['password'] = terrariumUtils.decrypt(self.setup['password'])
 
-        response = email_message.send(to=receiver, smtp=smtp_settings)
+        response = email_message.send(to=(receiver, receiver), smtp=smtp_settings)
 
         if response.status_code == 250:
           # Mail sent, clear remaining connection types
@@ -700,6 +700,21 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
   }
 
   __SONGS = {
+
+      'SOS' : {
+        'melody' : [
+          __NOTES['BB2'],__NOTES['BB2'],__NOTES['BB2'],0,
+          __NOTES['BB2'],__NOTES['BB2'],__NOTES['BB2'],0,
+          __NOTES['BB2'],__NOTES['BB2'],__NOTES['BB2']
+        ],
+        'tempo' : [
+          8,8,8,2,
+          2,2,2,2,
+          8,8,8
+        ],
+        'pause' : 0.30,
+        'pace' : 1.0
+      },
     'The Final Countdown' : {
       'melody' : [
         __NOTES['A3'],__NOTES['E5'],__NOTES['D5'],__NOTES['E5'],__NOTES['A4'],
