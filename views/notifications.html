@@ -95,7 +95,7 @@
 <script type="text/html" id="notification_service_template">
 <div class="col-2">
   <div class="info-box" >
-    <a data-href="edit" data-toggle="modal" data-target="#modal-service-setup" data-class="color" class="info-box-icon"><i class="fa-fw" data-class="icon"></i></a>
+    <a data-href="edit" data-toggle="modal" data-target="#modal-service-setup" data-class="color" class="info-box-icon {% if not authenticated %}disabled{% endif %}"><i class="fa-fw" data-class="icon"></i></a>
     <div class="info-box-content">
       <span class="info-box-text" data-content="name"></span>
       <span class="info-box-number" data-content="rate_limit"></span>
