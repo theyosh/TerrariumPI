@@ -50,8 +50,8 @@
 
       eventMouseEnter : function(data) {
         let event = jQuery(data.el);
-        let delete_link = jQuery('<a>').css({'z-index':'9','position':'relative'}).addClass('float-right text-white mr-2').attr({'href':'{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',data.event._def.publicId),'title':'{{ _('Delete event {title}') }}'.replace('{title}',event.text()),'data-action' : 'DELETE', 'data-toggle' : 'modal', 'data-target' : '#modal-confirm' }).append(jQuery('<i>').addClass('fas fa-trash-alt'))
-        event.parent().prepend(delete_link);
+        let delete_link = jQuery('<a>').css({'z-index':'999','position':'relative'}).addClass('float-right text-white mr-2').attr({'href':'{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',data.event._def.publicId),'title':'{{ _('Delete event {title}') }}'.replace('{title}',event.text()),'data-action' : 'DELETE', 'data-toggle' : 'modal', 'data-target' : '#modal-confirm' }).append(jQuery('<i>').addClass('fas fa-trash-alt'))
+        event.prepend(delete_link);
       },
       eventMouseLeave: function(data) {
         jQuery(data.el).parent().find('i.fa-trash-alt').remove();
