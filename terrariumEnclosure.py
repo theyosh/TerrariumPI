@@ -11,8 +11,6 @@ import copy
 class terrariumEnclosure(object):
 
   def __init__(self, id, name, engine, doors = [], areas = []):
-    self.__main_lights = None
-
     if id is None:
       id = terrariumUtils.generate_uuid()
 
@@ -52,30 +50,12 @@ class terrariumEnclosure(object):
     return main_lights.state['day']['powered']
 
   def load_areas(self, data):
-    for area in data:
-      if area.type != 'lights':
-        continue
-
+    # First we want to load all the lights areas and then the other areas in any order (not sure if this is still needed -> see def update)
+    for area in [area for area in data if area.type == 'lights'] + [area for area in data if area.type != 'lights']:
       area_setup = copy.deepcopy(area.setup)
       area_setup['is_day'] = area.state.get('is_day',None)
 
-      new_area = self.add(terrariumArea(
-        area.id,
-        self,
-        area.type,
-        area.name,
-        area.mode,
-        area_setup
-      ))
-
-    for area in data:
-      if area.type == 'lights':
-        continue
-
-      area_setup = copy.deepcopy(area.setup)
-      area_setup['is_day'] = area.state.get('is_day',None)
-
-      new_area = self.add(terrariumArea(
+      self.add(terrariumArea(
         area.id,
         self,
         area.type,
@@ -102,30 +82,29 @@ class terrariumEnclosure(object):
 
     return area
 
+  def delete(self, area_id):
+    if area_id in self.areas:
+      del(self.areas[area_id])
+
+    return True
+
   def update(self, read_only = False):
     area_states = {}
 
-    # First we update the main lights area, as they can change the power state for heaters and other areas
-    for area_id in self.areas:
-      if 'disabled' == self.areas[area_id].mode or 'lights' != self.areas[area_id].type:
+    # Construct a list in the order of:
+    # - First list is only main lights area, as they can change the power state for heaters and other areas
+    # - Then all the areas that do not have dependencies
+    # - The the rest of the areas that have dependencies on the previous areas
+    for area_id in \
+      [area_id for area_id, area in self.areas.items() if area.type == 'lights' and area.setup.get('main_lights',False)] + \
+      [area_id for area_id, area in self.areas.items() if len(area.depends_on) == 0] + \
+      [area_id for area_id, area in self.areas.items() if len(area.depends_on) > 0]:
+      if area_id in area_states:
+        # This area is already processed...
         continue
 
-      if self.areas[area_id].setup.get('main_lights', False):
-        area_states[area_id] = self.areas[area_id].update(read_only)
-
-    # Update the remaining areas, skipping all that have dependencies...
-    for area_id in self.areas:
-      if 'disabled' == self.areas[area_id].mode or area_id in area_states or len(self.areas[area_id].depends_on) > 0:
-        continue
-
-      area_states[area_id] = self.areas[area_id].update(read_only)
-
-    # Update the remaining areas that have depencies on other areas
-    for area_id in self.areas:
-      if 'disabled' == self.areas[area_id].mode or area_id in area_states:
-        continue
-
-      area_states[area_id] = self.areas[area_id].update(read_only)
+      print(f'Updating area: {self.areas[area_id].name} of type: {self.areas[area_id].type} has dependencies: {len(self.areas[area_id].depends_on)}')
+      area_states[area_id] = self.areas[area_id].update(read_only or 'disabled' == self.areas[area_id].mode)
 
     return area_states
 
