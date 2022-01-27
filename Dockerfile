@@ -42,19 +42,20 @@ RUN sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.tx
   find /opt/venv -type d -name  "__pycache__" -exec rm -r {} +
 WORKDIR /TerrariumPI
 # we previously copied .git and then did git submodule init and submodule update, however as .git dir changes all the time it invalidates docker cache
-RUN mkdir 3rdparty && cd 3rdparty && \
-  git clone https://github.com/SequentMicrosystems/4relay-rpi.git && git -C "4relay-rpi" checkout "09a44bfbde18791750534ba204e1dfc7506a7eb2" && rm -rf 4relay-rpi/.git* && \
-  git clone https://github.com/PiSupply/Bright-Pi.git && git -C "Bright-Pi" checkout "eccfbbb1221c4966cd337126bedcbb8bb03c3c71" && rm -rf Bright-Pi/.git* Bright-Pi/Documents && \
-  git clone https://github.com/ageir/chirp-rpi.git && git -C "chirp-rpi" checkout "6e411d6c382d5e43ee1fd269ec4de6a316893407" && rm -rf chirp-rpi/.git* && \
-  git clone https://github.com/perryflynn/energenie-connect0r.git && git -C "energenie-connect0r" checkout "12ca24ab9d60cf4ede331de9a6817c3d64227ea0" && rm -rf energenie-connect0r/.git* && \
-  git clone https://github.com/SequentMicrosystems/relay8-rpi.git && git -C "relay8-rpi" checkout "5083730e415ee91fa4785e228f02a36e8bbaa717" && rm -rf relay8-rpi/.git* && \
-  git clone https://github.com/SequentMicrosystems/4relind-rpi.git && git -C "4relind-rpi" checkout "6b40c531578a939e8f65a0d6714444ca03356d91" && rm -rf 4relind-rpi/.git* && \
-  git clone https://github.com/SequentMicrosystems/8relind-rpi.git && git -C "8relind-rpi" checkout "1c2d1856e0d98b96b67745da2e922ca7e1f50ee0" && rm -rf 8relind-rpi/.git*
-RUN mkdir -p static/assets/plugins && cd static/assets/plugins && \
-  git clone https://github.com/fancyapps/fancybox.git "fancybox" && git -C "fancybox" checkout "eea1345256ded510ed9fae1e415aec2a7bb9620d" && rm -rf fancybox/.git* && \
-  git clone https://github.com/mapshakers/leaflet-icon-pulse.git "leaflet.icon-pulse" && git -C "leaflet.icon-pulse" checkout "f57da1e45f6d00f340f429a75a39324cad141061" && rm -rf leaflet.icon-pulse/.git* && \
-  git clone https://github.com/ebrelsford/Leaflet.loading.git "leaflet.loading" && git -C "leaflet.loading" checkout "7b22aff19a5a8fa9534fb2dcd48e06c6dc84b2ed" && rm -rf leaflet.loading/.git*
-
+RUN mkdir 3rdparty && \
+  git clone https://github.com/SequentMicrosystems/4relay-rpi.git && git -C "3rdparty/4relay-rpi" checkout "09a44bfbde18791750534ba204e1dfc7506a7eb2" && \
+  git clone https://github.com/PiSupply/Bright-Pi.git && git -C "3rdparty/Bright-Pi" checkout "eccfbbb1221c4966cd337126bedcbb8bb03c3c71" && \
+  git clone https://github.com/ageir/chirp-rpi.git && git -C "3rdparty/chirp-rpi" checkout "6e411d6c382d5e43ee1fd269ec4de6a316893407" && \
+  git clone https://github.com/perryflynn/energenie-connect0r.git && git -C "3rdparty/energenie-connect0r" checkout "12ca24ab9d60cf4ede331de9a6817c3d64227ea0" && \
+  git clone https://github.com/SequentMicrosystems/relay8-rpi.git && git -C "3rdparty/relay8-rpi" checkout "5083730e415ee91fa4785e228f02a36e8bbaa717" && \
+  git clone https://github.com/SequentMicrosystems/4relind-rpi.git && git -C "3rdparty/4relind-rpi" checkout "6b40c531578a939e8f65a0d6714444ca03356d91" && \
+  git clone https://github.com/SequentMicrosystems/8relind-rpi.git && git -C "3rdparty/8relind-rpi" checkout "1c2d1856e0d98b96b67745da2e922ca7e1f50ee0" && \
+  find 3rdparty -type d -name  ".git" -exec rm -r {} +
+RUN mkdir -p static/assets/plugins && \
+  git clone https://github.com/fancyapps/fancybox.git "fancybox" && git -C "static/assets/plugins/fancybox" checkout "eea1345256ded510ed9fae1e415aec2a7bb9620d" && \
+  git clone https://github.com/mapshakers/leaflet-icon-pulse.git "static/assets/plugins/leaflet.icon-pulse" && git -C "leaflet.icon-pulse" checkout "f57da1e45f6d00f340f429a75a39324cad141061" && \
+  git clone https://github.com/ebrelsford/Leaflet.loading.git "static/assets/plugins/leaflet.loading" && git -C "leaflet.loading" checkout "7b22aff19a5a8fa9534fb2dcd48e06c6dc84b2ed" && \
+  find static/assets/plugins -type d -name  ".git" -exec rm -r {} +
 # remove git and 3rdparty dir from code copy to help keep image smaller
 # 3rdparty is coming from the builder image
 FROM python:3.8-buster as sourcecode

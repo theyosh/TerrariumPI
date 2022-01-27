@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.1.0\n"
-"POT-Creation-Date: 2022-01-08 22:42+CET\n"
+"POT-Creation-Date: 2022-01-28 00:29+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,31 +135,31 @@ msgstr ""
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1124 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1139 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr ""
 
-#: terrariumEngine.py:1130
+#: terrariumEngine.py:1145
 msgid "System load"
 msgstr ""
 
-#: terrariumEngine.py:1136 views/status.html:44
+#: terrariumEngine.py:1151 views/status.html:44
 msgid "CPU Temperature"
 msgstr ""
 
-#: terrariumEngine.py:1142
+#: terrariumEngine.py:1157
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1148
+#: terrariumEngine.py:1163
 msgid "Memory"
 msgstr ""
 
-#: terrariumEngine.py:1169
+#: terrariumEngine.py:1184
 msgid "average {sensor_type}"
 msgstr ""
 
-#: terrariumEngine.py:1345
+#: terrariumEngine.py:1360
 msgid "last update"
 msgstr ""
 
@@ -417,31 +417,31 @@ msgstr ""
 msgid "Webcam archive"
 msgstr ""
 
-#: terrariumNotification.py:364
+#: terrariumNotification.py:377
 msgid "Display"
 msgstr ""
 
-#: terrariumNotification.py:368
+#: terrariumNotification.py:381
 msgid "Email"
 msgstr ""
 
-#: terrariumNotification.py:378
+#: terrariumNotification.py:391
 msgid "Traffic light"
 msgstr ""
 
-#: terrariumNotification.py:382
+#: terrariumNotification.py:395
 msgid "Web-hook"
 msgstr ""
 
-#: terrariumNotification.py:386
+#: terrariumNotification.py:399
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:390
+#: terrariumNotification.py:403
 msgid "Pushover"
 msgstr ""
 
-#: terrariumNotification.py:394
+#: terrariumNotification.py:407
 msgid "Buzzer"
 msgstr ""
 
@@ -1354,14 +1354,14 @@ msgstr ""
 
 #: views/modals/button.html:36 views/modals/relay.html:36
 #: views/modals/sensor.html:51 views/modals/service.html:82
-#: views/modals/service.html:306 views/modals/webcam.html:40
+#: views/modals/service.html:325 views/modals/webcam.html:40
 msgid "Enter an address."
 msgstr ""
 
 #: views/modals/button.html:39 views/modals/relay.html:39
 #: views/modals/sensor.html:54 views/modals/service.html:85
 #: views/modals/service.html:111 views/modals/service.html:123
-#: views/modals/service.html:295 views/modals/service.html:309
+#: views/modals/service.html:314 views/modals/service.html:328
 #: views/modals/webcam.html:43
 msgid "The address cannot be empty."
 msgstr ""
@@ -1758,11 +1758,11 @@ msgstr ""
 msgid "SMTP Server port"
 msgstr ""
 
-#: views/modals/service.html:132 views/modals/service.html:318
+#: views/modals/service.html:132 views/modals/service.html:337
 msgid "Enter a port number."
 msgstr ""
 
-#: views/modals/service.html:135 views/modals/service.html:321
+#: views/modals/service.html:135 views/modals/service.html:340
 msgid "The port number cannot be empty."
 msgstr ""
 
@@ -1770,7 +1770,7 @@ msgstr ""
 msgid "SMTP Server username"
 msgstr ""
 
-#: views/modals/service.html:144 views/modals/service.html:330
+#: views/modals/service.html:144 views/modals/service.html:349
 msgid "Enter a username."
 msgstr ""
 
@@ -1778,7 +1778,7 @@ msgstr ""
 msgid "SMTP Server password"
 msgstr ""
 
-#: views/modals/service.html:153 views/modals/service.html:339
+#: views/modals/service.html:153 views/modals/service.html:358
 msgid "Enter a password."
 msgstr ""
 
@@ -1846,52 +1846,68 @@ msgstr ""
 msgid "Enter GPIO pin for green light."
 msgstr ""
 
-#: views/modals/service.html:249
+#: views/modals/service.html:246
 msgid "GPIO pin"
 msgstr ""
 
-#: views/modals/service.html:252
+#: views/modals/service.html:249
 msgid "Enter GPIO pin for the buzzer."
 msgstr ""
 
-#: views/modals/service.html:262
+#: views/modals/service.html:255
+msgid "Buzzer songs"
+msgstr ""
+
+#: views/modals/service.html:271
+msgid "List of available songs to use in the message subject."
+msgstr ""
+
+#: views/modals/service.html:281
 msgid "Customer key"
 msgstr ""
 
-#: views/modals/service.html:268
+#: views/modals/service.html:287
 msgid "Customer secret"
 msgstr ""
 
-#: views/modals/service.html:274
+#: views/modals/service.html:293
 msgid "Access token"
 msgstr ""
 
-#: views/modals/service.html:280
+#: views/modals/service.html:299
 msgid "Access token secret"
 msgstr ""
 
-#: views/modals/service.html:289
+#: views/modals/service.html:308
 msgid "Full post url"
 msgstr ""
 
-#: views/modals/service.html:292
+#: views/modals/service.html:311
 msgid "Enter the full post url."
 msgstr ""
 
-#: views/modals/service.html:303
+#: views/modals/service.html:322
 msgid "MQTT Server address"
 msgstr ""
 
-#: views/modals/service.html:315
+#: views/modals/service.html:334
 msgid "MQTT Server port"
 msgstr ""
 
-#: views/modals/service.html:327
+#: views/modals/service.html:346
 msgid "MQTT Server username"
 msgstr ""
 
-#: views/modals/service.html:336
+#: views/modals/service.html:355
 msgid "MQTT Server password"
+msgstr ""
+
+#: views/modals/service.html:365
+msgid "Use SSL"
+msgstr ""
+
+#: views/modals/service.html:370
+msgid "Toggle this to enable SSL connection."
 msgstr ""
 
 #: views/modals/weather.html:12
@@ -2550,579 +2566,603 @@ msgstr ""
 msgid "Add new webcam"
 msgstr ""
 
-#: views/includes/modals.html:77
+#: ./views/includes/modals.html:77
 msgid "Action succeeded"
 msgstr ""
 
-#: views/enclosures.html:140
+#: ./views/enclosures.html:140
 msgid "Add area"
 msgstr ""
 
-#: views/layouts/modal.html:95
+#: ./views/layouts/modal.html:95
 msgid "added"
 msgstr ""
 
-#: views/includes/sidebar.html:233
+#: ./views/includes/sidebar.html:233
 msgid "Add new area"
 msgstr ""
 
-#: views/notifications.html:54
+#: ./views/notifications.html:54
 msgid "Add new message"
 msgstr ""
 
-#: views/includes/sidebar.html:204
+#: ./views/includes/sidebar.html:204
 msgid "Add new playlist"
 msgstr ""
 
-#: views/notifications.html:18
+#: ./views/notifications.html:18
 msgid "Add new service"
 msgstr ""
 
-#: views/audio_files.html:138
+#: ./views/audio_files.html:138
 msgid "Audio file {file} is not valid."
 msgstr ""
 
-#: views/audio_files.html:161
+#: ./views/audio_files.html:161
 msgid "Audio file is being processed. Please wait..."
 msgstr ""
 
-#: views/audio_files.html:168
+#: ./views/audio_files.html:168
 msgid "Audio files are uploaded."
 msgstr ""
 
-#: views/modals/button.html:66 views/modals/relay.html:88 views/modals/sensor.html:155
+#: ./views/modals/button.html:66 ./views/modals/relay.html:88 ./views/modals/sensor.html:155
 msgid "calibration"
 msgstr ""
 
-#: views/relays.html:121
+#: ./views/relays.html:121
 msgid "Changed relay {name} to {state}"
 msgstr ""
 
-#: views/relays.html:123
+#: ./views/relays.html:123
 msgid "Change error"
 msgstr ""
 
-#: views/settings.html:103
+#: ./views/settings.html:103
 msgid "Confirm password"
 msgstr ""
 
-#: views/relays.html:123
+#: ./views/relays.html:123
 msgid "Could not change the relay state of"
 msgstr ""
 
-#: views/includes/footer.html:9
+#: ./views/includes/footer.html:9
 msgid "Current activity"
 msgstr ""
 
-#: views/modals/area.html:1052 views/modals/area.html:1054
+#: ./views/modals/area.html:1052 ./views/modals/area.html:1054
 msgid "Delay"
 msgstr ""
 
-#: views/enclosures.html:120
+#: ./views/enclosures.html:120
 msgid "Delete area"
 msgstr ""
 
-#: views/audio_files.html:86
+#: ./views/audio_files.html:86
 msgid "Delete audio file"
 msgstr ""
 
-#: views/buttons.html:67
+#: ./views/buttons.html:67
 msgid "Delete button"
 msgstr ""
 
-#: views/enclosures.html:147
+#: ./views/enclosures.html:147
 msgid "Delete enclosure"
 msgstr ""
 
-#: views/calendar.html:53
+#: ./views/calendar.html:53
 msgid "Delete event {title}"
 msgstr ""
 
-#: views/notifications.html:125
+#: ./views/notifications.html:125
 msgid "Delete message"
 msgstr ""
 
-#: views/playlists.html:74
+#: ./views/playlists.html:74
 msgid "Delete playlist"
 msgstr ""
 
-#: views/relays.html:79
+#: ./views/relays.html:79
 msgid "Delete relay"
 msgstr ""
 
-#: views/sensors.html:78
+#: ./views/sensors.html:78
 msgid "Delete sensor"
 msgstr ""
 
-#: views/webcams.html:82
+#: ./views/webcams.html:82
 msgid "Delete webcam"
 msgstr ""
 
-#: views/modals/relay.html:118
+#: ./views/modals/relay.html:118
 msgid "Dimmer offset in percentage"
 msgstr ""
 
-#: views/enclosures.html:117
+#: ./views/enclosures.html:117
 msgid "Edit area"
 msgstr ""
 
-#: views/buttons.html:57
+#: ./views/buttons.html:57
 msgid "Edit button"
 msgstr ""
 
-#: views/enclosures.html:144
+#: ./views/enclosures.html:144
 msgid "Edit enclosure"
 msgstr ""
 
-#: views/notifications.html:122
+#: ./views/notifications.html:122
 msgid "Edit message"
 msgstr ""
 
-#: views/playlists.html:73
+#: ./views/playlists.html:73
 msgid "Edit playlist"
 msgstr ""
 
-#: views/relays.html:63
+#: ./views/relays.html:63
 msgid "Edit relay"
 msgstr ""
 
-#: views/sensors.html:68
+#: ./views/sensors.html:68
 msgid "Edit sensor"
 msgstr ""
 
-#: views/webcams.html:80
+#: ./views/webcams.html:80
 msgid "Edit webcam"
 msgstr ""
 
-#: views/modals/enclosure.html:49 views/modals/event.html:26
+#: ./views/modals/enclosure.html:49 ./views/modals/event.html:26
 msgid "Enter a description"
 msgstr ""
 
-#: views/modals/area.html:922
+#: ./views/modals/area.html:922
 msgid "Enter a duration in minutes or time"
 msgstr ""
 
-#: views/modals/area.html:906
+#: ./views/modals/area.html:906
 msgid "Enter a full url, local json file or script file."
 msgstr ""
 
-#: views/modals/service.html:227
+#: ./views/modals/service.html:227
 msgid "Enter amber GPIO pin"
 msgstr ""
 
-#: views/modals/message.html:72
+#: ./views/modals/message.html:72
 msgid "Enter a message"
 msgstr ""
 
-#: views/modals/button.html:34 views/modals/relay.html:34 views/modals/sensor.html:49 views/modals/webcam.html:38
+#: ./views/modals/button.html:34 ./views/modals/relay.html:34 ./views/modals/sensor.html:49 ./views/modals/webcam.html:38
 msgid "Enter an address"
 msgstr ""
 
-#: views/modals/button.html:46 views/modals/enclosure.html:19 views/modals/event.html:16 views/modals/playlist.html:19 views/modals/relay.html:46 views/modals/sensor.html:61 views/modals/service.html:30 views/modals/webcam.html:50
+#: ./views/modals/button.html:46 ./views/modals/enclosure.html:19 ./views/modals/event.html:16 ./views/modals/playlist.html:19 ./views/modals/relay.html:46 ./views/modals/sensor.html:61 ./views/modals/service.html:30 ./views/modals/webcam.html:50
 msgid "Enter a name"
 msgstr ""
 
-#: views/modals/area.html:48
+#: ./views/modals/area.html:48
 msgid "Enter a name for this area."
 msgstr ""
 
-#: views/modals/service.html:106
+#: ./views/modals/service.html:106
 msgid "Enter an email address"
 msgstr ""
 
-#: views/modals/message.html:32
+#: ./views/modals/message.html:32
 msgid "Enter a subject"
 msgstr ""
 
-#: views/modals/area.html:138 views/modals/area.html:199 views/modals/area.html:285 views/modals/area.html:355 views/modals/area.html:538 views/modals/area.html:667
+#: ./views/modals/area.html:138 ./views/modals/area.html:199 ./views/modals/area.html:285 ./views/modals/area.html:355 ./views/modals/area.html:538 ./views/modals/area.html:667
 msgid "Enter begin time"
 msgstr ""
 
-#: views/modals/area.html:150 views/modals/area.html:205 views/modals/area.html:297 views/modals/area.html:367 views/modals/area.html:550 views/modals/area.html:679
+#: ./views/modals/area.html:150 ./views/modals/area.html:205 ./views/modals/area.html:297 ./views/modals/area.html:367 ./views/modals/area.html:550 ./views/modals/area.html:679
 msgid "Enter end time"
 msgstr ""
 
-#: views/modals/service.html:250
+#: ./views/modals/service.html:247
 msgid "Enter GPIO pin"
 msgstr ""
 
-#: views/modals/service.html:236
+#: ./views/modals/service.html:236
 msgid "Enter green GPIO pin"
 msgstr ""
 
-#: views/modals/webcam.html:65
+#: ./views/modals/webcam.html:65
 msgid "Enter height"
 msgstr ""
 
-#: views/modals/webcam.html:202 views/modals/webcam.html:211
+#: ./views/modals/webcam.html:202 ./views/modals/webcam.html:211
 msgid "Enter number"
 msgstr ""
 
-#: views/modals/service.html:218
+#: ./views/modals/service.html:218
 msgid "Enter red GPIO pin"
 msgstr ""
 
-#: views/log.html:29
+#: ./views/log.html:29
 msgid "Enter search terms"
 msgstr ""
 
-#: views/modals/service.html:80
+#: ./views/modals/service.html:80
 msgid "Enter the address"
 msgstr ""
 
-#: views/modals/area.html:455
+#: ./views/modals/area.html:455
 msgid "Enter the amount"
 msgstr ""
 
-#: views/modals/area.html:102
+#: ./views/modals/area.html:102
 msgid "Enter the amount of hours to shift"
 msgstr ""
 
-#: views/modals/button.html:72
+#: ./views/modals/button.html:72
 msgid "Enter the capacitor value in &micro;F"
 msgstr ""
 
-#: views/modals/service.html:290
+#: ./views/modals/service.html:309
 msgid "Enter the full post url"
 msgstr ""
 
-#: views/modals/area.html:467
+#: ./views/modals/area.html:467
 msgid "Enter the height"
 msgstr ""
 
-#: views/modals/area.html:90
+#: ./views/modals/area.html:90
 msgid "Enter the maximum amount of hours"
 msgstr ""
 
-#: views/modals/area.html:78
+#: ./views/modals/area.html:78
 msgid "Enter the minimum amount of hours"
 msgstr ""
 
-#: views/modals/service.html:304
+#: ./views/modals/service.html:323
 msgid "Enter the MQTT server address name or ip"
 msgstr ""
 
-#: views/modals/service.html:316
+#: ./views/modals/service.html:335
 msgid "Enter the MQTT server port number"
 msgstr ""
 
-#: views/modals/area.html:479
+#: ./views/modals/area.html:479
 msgid "Enter the offset"
 msgstr ""
 
-#: views/modals/service.html:165
+#: ./views/modals/service.html:165
 msgid "Enter the Pushover API token"
 msgstr ""
 
-#: views/modals/service.html:177
+#: ./views/modals/service.html:177
 msgid "Enter the Pushover user key"
 msgstr ""
 
-#: views/modals/service.html:118
+#: ./views/modals/service.html:118
 msgid "Enter the SMTP server address name or ip"
 msgstr ""
 
-#: views/modals/service.html:151 views/modals/service.html:337
+#: ./views/modals/service.html:151 ./views/modals/service.html:356
 msgid "Enter the SMTP server password"
 msgstr ""
 
-#: views/modals/service.html:130
+#: ./views/modals/service.html:130
 msgid "Enter the SMTP server port number"
 msgstr ""
 
-#: views/modals/service.html:142 views/modals/service.html:328
+#: ./views/modals/service.html:142 ./views/modals/service.html:347
 msgid "Enter the SMTP server username"
 msgstr ""
 
-#: views/modals/webcam.html:63
+#: ./views/modals/webcam.html:63
 msgid "Enter width"
 msgstr ""
 
-#: views/audio_files.html:143
+#: ./views/audio_files.html:143
 msgid "Error"
 msgstr ""
 
-#: views/includes/footer.html:11
+#: ./views/includes/footer.html:11
 msgid "Error messages"
 msgstr ""
 
-#: views/buttons.html:52
+#: ./views/buttons.html:52
 msgid "Export button"
 msgstr ""
 
-#: views/relays.html:59
+#: ./views/relays.html:59
 msgid "Export relay"
 msgstr ""
 
-#: views/dashboard.html:312 views/sensors.html:63
+#: ./views/dashboard.html:312 ./views/sensors.html:63
 msgid "Export sensor"
 msgstr ""
 
-#: views/layouts/modal.html:71 views/modals/area.html:1550 views/settings.html:404
+#: ./views/layouts/modal.html:71 ./views/modals/area.html:1550 ./views/settings.html:404
 msgid "Form error"
 msgstr ""
 
-#: views/buttons.html:62
+#: ./views/buttons.html:62
 msgid "Ignore button"
 msgstr ""
 
-#: views/relays.html:75
+#: ./views/relays.html:75
 msgid "Ignore relay"
 msgstr ""
 
-#: views/sensors.html:73
+#: ./views/sensors.html:73
 msgid "Ignore sensor"
 msgstr ""
 
-#: views/webcams.html:81
+#: ./views/webcams.html:81
 msgid "Ignore webcam"
 msgstr ""
 
-#: views/modals/area.html:1550
+#: ./views/modals/area.html:1550
 msgid "Invalid timestamp in variation settings."
 msgstr ""
 
-#: views/relays.html:71
+#: ./views/relays.html:71
 msgid "Manual mode relay"
 msgstr ""
 
-#: views/modals/relay.html:106
+#: ./views/modals/relay.html:106
 msgid "Max power in percentage"
 msgstr ""
 
-#: views/modals/message.html:44 views/modals/service.html:42
+#: ./views/modals/message.html:44 ./views/modals/service.html:42
 msgid "Messages per minute"
 msgstr ""
 
-#: views/modals/area.html:1052 views/modals/area.html:1052 views/modals/area.html:1054
+#: ./views/modals/area.html:1052 ./views/modals/area.html:1052 ./views/modals/area.html:1054
 msgid "minutes"
 msgstr ""
 
-#: views/modals/event.html:97
+#: ./views/modals/event.html:97
 msgid "No reminder"
 msgstr ""
 
-#: views/layouts/modal.html:71 views/settings.html:404
+#: ./views/layouts/modal.html:71 ./views/settings.html:404
 msgid "Not all required fields are entered correctly."
 msgstr ""
 
-#: views/audio_files.html:161 views/audio_files.html:168 views/relays.html:121
+#: ./views/audio_files.html:161 ./views/audio_files.html:168 ./views/relays.html:121
 msgid "OK"
 msgstr ""
 
-#: views/includes/navigation.html:22
+#: ./views/includes/navigation.html:22
 msgid "Open calender page"
 msgstr ""
 
-#: views/settings.html:91
+#: ./views/settings.html:91
 msgid "Password"
 msgstr ""
 
-#: views/modals/enclosure.html:177 views/settings.html:427
+#: ./views/modals/enclosure.html:177 ./views/settings.html:427
 msgid "Profile image is uploaded."
 msgstr ""
 
-#: views/includes/sidebar.html:280
+#: ./views/includes/sidebar.html:280
 msgid "Reboot TerrariumPI"
 msgstr ""
 
-#: views/includes/sidebar.html:274
+#: ./views/includes/sidebar.html:274
 msgid "Restart TerrariumPI"
 msgstr ""
 
-#: views/layouts/modal.html:103
+#: ./views/layouts/modal.html:103
 msgid "Save Error"
 msgstr ""
 
-#: views/layouts/modal.html:96
+#: ./views/layouts/modal.html:96
 msgid "Save OK"
 msgstr ""
 
-#: views/includes/sidebar.html:129
+#: ./views/includes/sidebar.html:129
 msgid "Scan for new relays"
 msgstr ""
 
-#: views/includes/sidebar.html:100
+#: ./views/includes/sidebar.html:100
 msgid "Scan for new sensors"
 msgstr ""
 
-#: views/modals/area.html:500
+#: ./views/modals/area.html:500
 msgid "Select a day/night source"
 msgstr ""
 
-#: views/modals/area.html:242 views/modals/area.html:427 views/modals/area.html:62
+#: ./views/modals/area.html:242 ./views/modals/area.html:427 ./views/modals/area.html:62
 msgid "Select a mode"
 msgstr ""
 
-#: views/modals/event.html:55
+#: ./views/modals/event.html:55
 msgid "Select amount"
 msgstr ""
 
-#: views/modals/area.html:34
+#: ./views/modals/area.html:34
 msgid "Select an area type"
 msgstr ""
 
-#: views/modals/area.html:20
+#: ./views/modals/area.html:20
 msgid "Select an enclosure"
 msgstr ""
 
-#: views/modals/webcam.html:158
+#: ./views/modals/webcam.html:158
 msgid "Select archive door state"
 msgstr ""
 
-#: views/modals/webcam.html:143
+#: ./views/modals/webcam.html:143
 msgid "Select archive light state"
 msgstr ""
 
-#: views/modals/webcam.html:120
+#: ./views/modals/webcam.html:120
 msgid "Select archiving"
 msgstr ""
 
-#: views/modals/area.html:512
+#: ./views/modals/area.html:512
 msgid "Select areas"
 msgstr ""
 
-#: views/modals/area.html:259
+#: ./views/modals/area.html:259
 msgid "Select a sound card"
 msgstr ""
 
-#: views/modals/area.html:610 views/modals/area.html:623 views/modals/area.html:739 views/modals/area.html:752
+#: ./views/modals/area.html:610 ./views/modals/area.html:623 ./views/modals/area.html:739 ./views/modals/area.html:752
 msgid "Select a state"
 msgstr ""
 
-#: views/modals/playlist.html:64
+#: ./views/modals/playlist.html:64
 msgid "Select audio files"
 msgstr ""
 
-#: views/modals/enclosure.html:61
+#: ./views/modals/enclosure.html:61
 msgid "Select available doors"
 msgstr ""
 
-#: views/modals/enclosure.html:73
+#: ./views/modals/enclosure.html:73
 msgid "Select available webcams"
 msgstr ""
 
-#: views/modals/sensor.html:198
+#: ./views/modals/sensor.html:198
 msgid "Select compensation sensors"
 msgstr ""
 
-#: views/modals/button.html:20 views/modals/relay.html:20 views/modals/sensor.html:20 views/modals/webcam.html:24
+#: ./views/modals/button.html:20 ./views/modals/relay.html:20 ./views/modals/sensor.html:20 ./views/modals/webcam.html:24
 msgid "Select hardware"
 msgstr ""
 
-#: views/settings.html:142
+#: ./views/settings.html:142
 msgid "Select language"
 msgstr ""
 
-#: views/modals/webcam.html:173
+#: ./views/modals/webcam.html:173
 msgid "Select optional relay for flash"
 msgstr ""
 
-#: views/modals/event.html:47
+#: ./views/modals/event.html:47
 msgid "Select period"
 msgstr ""
 
-#: views/modals/area.html:333 views/modals/area.html:403
+#: ./views/modals/area.html:333 ./views/modals/area.html:403
 msgid "Select playlists"
 msgstr ""
 
-#: views/modals/area.html:180 views/modals/area.html:223 views/modals/area.html:648 views/modals/area.html:778
+#: ./views/modals/area.html:180 ./views/modals/area.html:223 ./views/modals/area.html:648 ./views/modals/area.html:778
 msgid "Select relays"
 msgstr ""
 
-#: views/modals/webcam.html:79
+#: ./views/modals/webcam.html:79
 msgid "Select rotation"
 msgstr ""
 
-#: views/modals/area.html:443
+#: ./views/modals/area.html:443
 msgid "Select sensors"
 msgstr ""
 
-#: views/modals/message.html:21 views/modals/sensor.html:35 views/modals/service.html:19 views/modals/service.html:66
+#:
+msgid "Select source when it is \'day\'."
+msgstr ""
+
+#: ./views/modals/message.html:21 ./views/modals/sensor.html:35 ./views/modals/service.html:19 ./views/modals/service.html:66
 msgid "Select type"
 msgstr ""
 
-#: views/modals/webcam.html:221
+#: ./views/modals/webcam.html:221
 msgid "Select which frame to comparison"
 msgstr ""
 
-#: views/modals/webcam.html:97
+#: ./views/modals/webcam.html:97
 msgid "Select white balance"
 msgstr ""
 
-#: views/settings.html:453
+#: ./views/settings.html:453
 msgid "Settings are updated."
 msgstr ""
 
-#: views/modals/webcam.html:187
+#: ./views/modals/webcam.html:187
 msgid "Show the motion boxes"
 msgstr ""
 
-#: views/includes/sidebar.html:286
+#: ./views/includes/sidebar.html:286
 msgid "Shutdown TerrariumPI"
 msgstr ""
 
-#: terrariumNotification.py:373
+#: ./terrariumNotification.py:386
 msgid "Telegram"
 msgstr ""
 
-#: views/modals/area.html:636 views/modals/area.html:766
+#:
+msgid "The duration when the players should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full night."
+msgstr ""
+
+#:
+msgid "The duration when the players should be stay off when switched off. Enter \'0\' to disable."
+msgstr ""
+
+#:
+msgid "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full day."
+msgstr ""
+
+#:
+msgid "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full night."
+msgstr ""
+
+#:
+msgid "The duration when the relays should be stay off when switched off. Enter \'0\' to disable."
+msgstr ""
+
+#: ./views/modals/area.html:636 ./views/modals/area.html:766
 msgid "Threshold"
 msgstr ""
 
-#: views/includes/navigation.html:4
+#: ./views/includes/navigation.html:4
 msgid "Toggle menu"
 msgstr ""
 
-#: views/relays.html:162
+#: ./views/relays.html:162
 msgid "Toggle relay"
 msgstr ""
 
-#: views/layouts/modal.html:95
+#: ./views/layouts/modal.html:95
 msgid "{type} {name} is {action}"
 msgstr ""
 
-#: views/layouts/modal.html:95
+#: ./views/layouts/modal.html:95
 msgid "updated"
 msgstr ""
 
-#: views/settings.html:458
+#: ./views/settings.html:458
 msgid "Update error"
 msgstr ""
 
-#: views/settings.html:453
+#: ./views/settings.html:453
 msgid "Update ok"
 msgstr ""
 
-#: views/audio_files.html:143
+#: ./views/audio_files.html:143
 msgid "Uploaded files are not valid."
 msgstr ""
 
-#: views/modals/enclosure.html:181 views/settings.html:431
+#: ./views/modals/enclosure.html:181 ./views/settings.html:431
 msgid "Upload error"
 msgstr ""
 
-#: views/modals/enclosure.html:177 views/settings.html:427
+#: ./views/modals/enclosure.html:177 ./views/settings.html:427
 msgid "Upload ok"
 msgstr ""
 
-#: views/audio_files.html:138
+#: ./views/audio_files.html:138
 msgid "Warning"
 msgstr ""
 
-#: views/includes/footer.html:10
+#: ./views/includes/footer.html:10
 msgid "Warning messages"
 msgstr ""
 
-#: views/modals/relay.html:68
+#: ./views/modals/relay.html:68
 msgid "Water flow in liters per minute when powered on"
 msgstr ""
 
-#: views/modals/relay.html:58
+#: ./views/modals/relay.html:58
 msgid "Wattage when powered on"
 msgstr ""
 
-#: views/modals/weather.html:19
+#: ./views/modals/weather.html:19
 msgid "Weather data source url"
 msgstr ""
 

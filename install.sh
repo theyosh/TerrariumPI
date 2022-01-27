@@ -1,13 +1,13 @@
 #!/bin/bash
 
-BASEDIR=$(dirname $(readlink -nf $0))
-VERSION=`grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3`
+BASEDIR=$(dirname $(readlink -nf "$0"))
+VERSION=$(grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3)
 VERSION="${VERSION//\'/}"
 INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python 3)"
-PI_ZERO=`grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo`
-BUSTER_OS=`grep -ic "^VERSION_CODENAME=buster" /etc/os-release`
+PI_ZERO=$(grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo)
+BUSTER_OS=$(grep -ic "^VERSION_CODENAME=buster" /etc/os-release)
 
-WHOAMI=`whoami`
+WHOAMI=$(whoami)
 if [ "${WHOAMI}" != "root" ]; then
   echo "Start TerrariumPI installation as user root"
   echo "sudo ./install.sh"
@@ -18,13 +18,13 @@ if [ ${PI_ZERO} -eq 1 ]; then
   # Pi Zero needs root user to run
   SCRIPT_USER="root"
 else
-  SCRIPT_USER=`stat -c "%U" "${BASEDIR}"`
+  SCRIPT_USER=$(stat -c "%U" "${BASEDIR}")
   if [ "" == "${SCRIPT_USER}" ]; then
     SCRIPT_USER="pi"
   fi
 fi
 
-SCRIPT_GROUP=`id -gn ${SCRIPT_USER}`
+SCRIPT_GROUP=$(id -gn ${SCRIPT_USER})
 
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
@@ -96,7 +96,7 @@ case $? in
       CLEANUP="${CLEANUP} \"*${PACKAGE}*\""
     done
 
-    debconf-apt-progress -- apt-get -y remove ${CLEANUP}
+    debconf-apt-progress -- apt-get -y remove "${CLEANUP}"
   ;;
 esac
 
@@ -105,7 +105,7 @@ esac
 debconf-apt-progress -- apt-get -y autoremove
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install $APT_PACKAGES
+debconf-apt-progress -- apt-get -y install "${APT_PACKAGES}"
 
 # Set the timezone
 dpkg-reconfigure tzdata
@@ -115,32 +115,32 @@ dpkg-reconfigure tzdata
 if [ -f /boot/config.txt ]; then
 
   # Enable I2C
-  if [ `grep -ic "^dtparam=i2c_arm=on" /boot/config.txt` -eq 0 ]; then
+  if [ $(grep -ic "^dtparam=i2c_arm=on" /boot/config.txt) -eq 0 ]; then
     echo "dtparam=i2c_arm=on" >> /boot/config.txt
   fi
 
   if [ -f /etc/modules ]; then
-    if [ `grep -ic "i2c-dev" /etc/modules` -eq 0 ]; then
+    if [ $(grep -ic "i2c-dev" /etc/modules) -eq 0 ]; then
       echo "i2c-dev" >> /etc/modules
     fi
   fi
 
   # Enable 1-Wire
-  if [ `grep -ic "^dtoverlay=w1-gpio" /boot/config.txt` -eq 0 ]; then
+  if [ $(grep -ic "^dtoverlay=w1-gpio" /boot/config.txt) -eq 0 ]; then
     echo "dtoverlay=w1-gpio" >> /boot/config.txt
   fi
 
   # Enable camera
-  if [ `grep -ic "^gpu_mem=" /boot/config.txt` -eq 0 ]; then
+  if [ $(grep -ic "^gpu_mem=" /boot/config.txt) -eq 0 ]; then
     echo "gpu_mem=128" >> /boot/config.txt
   fi
 
-  if [ `grep -ic "^start_x=1" /boot/config.txt` -eq 0 ]; then
+  if [ $(grep -ic "^start_x=1" /boot/config.txt) -eq 0 ]; then
     echo "start_x=1" >> /boot/config.txt
   fi
 
   # Enable serial
-  if [ `grep -ic "^enable_uart=1" /boot/config.txt` -eq 0 ]; then
+  if [ $(grep -ic "^enable_uart=1" /boot/config.txt) -eq 0 ]; then
     echo "enable_uart=1" >> /boot/config.txt
   fi
 fi
@@ -156,7 +156,7 @@ groupadd -f dialout 2> /dev/null
 groupadd -f sispmctl 2> /dev/null
 groupadd -f gpio 2> /dev/null
 # Add user to all groupds
-usermod -a -G dialout,sispmctl,gpio ${SCRIPT_USER} 2> /dev/null
+usermod -a -G dialout,sispmctl,gpio "${SCRIPT_USER}" 2> /dev/null
 
 # Docu https://pylibftdi.readthedocs.io/
 # Make sure that the normal Pi user can read and write to the usb driver
@@ -257,7 +257,7 @@ Install required software
 Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${MODULE_NAME} (attempt ${ATTEMPT}) ...
 XXX
 EOF
-    pip install --upgrade ${PIP_MODULE} 2> /dev/null
+    pip install --upgrade "${PIP_MODULE}" 2> /dev/null
     # > /dev/null 2>/dev/null
 
     if [ $? -eq 0 ]; then
@@ -307,8 +307,8 @@ if [ -f terrariumpi.db ]; then
 fi
 
 if [ ${PI_ZERO} -eq 0 ]; then
-  chown ${SCRIPT_USER}. .
-  chown ${SCRIPT_USER}. * -Rf
+  chown "${SCRIPT_USER}". .
+  chown "${SCRIPT_USER}". * -Rf
 fi
 
 sync
@@ -373,10 +373,10 @@ EOF
 
 # Setup logging symlinks
 if [ ! -h log/terrariumpi.log ]; then
-  su -c 'ln -s /dev/shm/terrariumpi.log log/terrariumpi.log' -s /bin/bash ${SCRIPT_USER}
+  su -c 'ln -s /dev/shm/terrariumpi.log log/terrariumpi.log' -s /bin/bash "${SCRIPT_USER}"
 fi
 if [ ! -h log/terrariumpi.access.log ]; then
-  su -c 'ln -s /dev/shm/terrariumpi.access.log log/terrariumpi.access.log' -s /bin/bash ${SCRIPT_USER}
+  su -c 'ln -s /dev/shm/terrariumpi.access.log log/terrariumpi.access.log' -s /bin/bash "${SCRIPT_USER}"
 fi
 
 PROGRESS=100

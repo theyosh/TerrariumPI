@@ -11,6 +11,6 @@ PID="$(ps fax | grep terrariumPI.py | grep -v grep | awk {'print $1'})"
 AGE="$(($(date +%s) - $(date +%s -r ${LOGFILE})))"
 
 if [ $AGE -gt $MAXTIME ]; then
-  echo "Logfile is not updated for $MAXTIME seconds. Restarting..."
-  kill $PID
+  echo "Logfile is not updated for ${MAXTIME} seconds. Restarting..."
+  kill "${PID}"
 fi
