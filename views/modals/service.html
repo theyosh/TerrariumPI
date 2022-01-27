@@ -240,9 +240,6 @@
     </div>
   </div>
 </div>
-
-
-
 <div class="row buzzer">
   <div class="col-4 col-sm-4 col-md-4 col-lg-4">
     <div class="form-group">
@@ -250,6 +247,28 @@
       <input type="number" class="form-control" id="address" name="address" placeholder="{{ _('Enter GPIO pin') }}">
       <small class="text-muted">
         {{ _('Enter GPIO pin for the buzzer.') }}
+      </small>
+    </div>
+  </div>
+  <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+    <div class="form-group">
+      <label>{{ _('Buzzer songs') }}</label>
+      <div id="place_holders">
+          <p>The following songs are supported. Copy the name exactly as written in the list below in the <strong>message subject</strong>. Original found at: <a href="https://github.com/gumslone/raspi_buzzer_player" target="_blank" rel="noopener">https://github.com/gumslone/raspi_buzzer_player</a></p>
+          <ul>
+            <li>The Final Countdown</li>
+            <li>Old MacDonald Had A Farm</li>
+            <li>Manaderna (Symphony No. 9)</li>
+            <li>Deck The Halls</li>
+            <li>Crazy Frog (Axel F) Theme</li>
+            <li>Twinkle, Twinkle, Little Star</li>
+            <li>Popcorn</li>
+            <li>Star Wars</li>
+            <li>Super Mario</li>
+          </ul>
+      </div>
+      <small class="text-muted">
+        {{ _('List of available songs to use in the message subject.') }}
       </small>
     </div>
   </div>
