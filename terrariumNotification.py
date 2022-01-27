@@ -285,6 +285,17 @@ class terrariumNotification(terrariumSingleton):
             self.services[service['id']] = None
             logger.error(f'Error loading display {service["name"]}: {ex}')
 
+  def reload_service(self, service_id, new_setup):
+    if service_id not in self.services:
+      return
+
+    setup = copy.deepcopy(new_setup)
+    setup['terrariumpi_name'] = Setting['title'].value
+    setup['version']          = self.version
+    setup['profile_image']    = self.profile_image
+
+    self.services[service_id].reload_setup(setup)
+
   def broadcast(self, subject, message, image):
     for _, service in self.services.items():
       if service is not None and service.enabled:
@@ -433,12 +444,23 @@ class terrariumNotificationService(object):
     return f'{terrariumNotificationService.__TYPES[self.type]["name"]} service {self.name}'
 
   def load_setup(self, setup_data):
-    self.setup['version']       = setup_data.get('version')
-    self.setup['profile_image'] = setup_data.get('profile_image')
+    self.setup['terrariumpi_name'] = setup_data.get('terrariumpi_name')
+    self.setup['version']          = setup_data.get('version')
+    self.setup['profile_image']    = setup_data.get('profile_image')
+
+  def reload_setup(self, setup_data):
+    # Stop first
+    self.stop()
+
+    # Update some settings
+    self.name    = setup_data['name']
+    self.enabled = setup_data['enabled']
+
+    # Load the new setup
+    self.load_setup(setup_data['setup'])
 
   def stop(self):
     pass
-
 
 class terrariumNotificationServiceDisplay(terrariumNotificationService):
 
@@ -447,10 +469,6 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
 
     # Now load the actual display device
     self.setup['device'] = terrariumDisplay(None, setup_data['hardware'], setup_data['address'], None if not terrariumUtils.is_true(setup_data['show_title']) else f'{setup_data["terrariumpi_name"]} {self.setup["version"]}')
-    try:
-      self.show_picture(self.setup['profile_image'])
-    except Exception:
-      self.send_message(None, None, f'{setup_data["terrariumpi_name"]} {self.setup["version"]} starting up...')
 
   def send_message(self, type, subject, message, data = None, attachments = []):
     self.setup['device'].message(message)
@@ -459,7 +477,11 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
     self.setup['device'].write_image(picture)
 
   def stop(self):
-    self.setup['device'].stop()
+    try:
+      self.setup['device'].stop()
+      self.setup['device'] = None
+    except Exception:
+      pass
 
 class terrariumNotificationServiceEmail(terrariumNotificationService):
   def load_setup(self, setup_data):
@@ -1161,8 +1183,8 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
       logger.info(f'Logged in to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}.')
 
     else:
-      self.connection = None
       logger.error(f'Error! Login to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]} failed! Error code: {rc}')
+      self.stop()
 
   def load_setup(self, setup_data):
     self.setup = {
@@ -1185,7 +1207,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
       self.connection.username_pw_set(terrariumUtils.decrypt(self.setup['username']), terrariumUtils.decrypt(self.setup['password']))
       self.connection.connect(self.setup['address'], self.setup['port'], 30)
       self.connection.loop_start()
-      logger.info(f'Connected to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
+      logger.info(f'Connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]} ...')
 
     except Exception as ex:
       logger.warning(f'Failed connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}: {ex}')
@@ -1201,29 +1223,30 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
         pass
 
       self.connection.disconnect()
+      self.connection = None
 
     logger.info(f'Disconnected from the MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
 
   def send_message(self, type, subject, message, data = None, attachments = []):
+    topic = type.replace('_','/')
+    topic = f'terrariumpi/{topic}'
+
+    if data is None:
+      data = {}
+
+    if 'id' in data:
+      topic = f'{topic}/{data["id"]}'
+
+    # Add a unique ID to make clients able to filter duplicate messages
+    data['uuid']    = terrariumUtils.generate_uuid()
+    # Add the 'direct' topic to subscribe to
+    data['topic']   = topic
+    # Add the subject
+    data['subject'] = subject
+    # Add the message
+    data['message'] = message
+
     if self.connection is not None:
-      topic = type.replace('_','/')
-      topic = f'terrariumpi/{topic}'
-
-      if data is None:
-        data = {}
-
-      if 'id' in data:
-        topic = f'{topic}/{data["id"]}'
-
-      # Add a unique ID to make clients able to filter duplicate messages
-      data['uuid']    = terrariumUtils.generate_uuid()
-      # Add the 'direct' topic to subscribe to
-      data['topic']   = topic
-      # Add the subject
-      data['subject'] = subject
-      # Add the message
-      data['message'] = message
-
       self.connection.publish(topic, payload=json.dumps(data), qos=1)
     else:
       logger.error(f'Could not send message {data["subject"]} to topic {data["topic"]} as we are not connected to the MQTT broker at address: {self.setup["address"]}:{self.setup["port"]}')

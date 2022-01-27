@@ -680,7 +680,8 @@ class terrariumAPI(object):
     try:
       title = f'Notification message {message} is deleted.'
       NotificationMessage[message].delete()
-#      orm.commit()
+      orm.commit()
+
       return {'message' : title}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Notification message with id {message} does not exists.')
@@ -728,6 +729,8 @@ class terrariumAPI(object):
       service.set(**request.json)
       orm.commit()
 
+      self.webserver.engine.notification.reload_service(service.id,{**request.json})
+
       return self.notification_service_detail(service.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
@@ -739,7 +742,8 @@ class terrariumAPI(object):
     try:
       message = f'Notification service {service} is deleted.'
       NotificationService[service].delete()
-#      orm.commit()
+      orm.commit()
+
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
