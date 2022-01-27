@@ -103,7 +103,6 @@ class terrariumEnclosure(object):
         # This area is already processed...
         continue
 
-      print(f'Updating area: {self.areas[area_id].name} of type: {self.areas[area_id].type} has dependencies: {len(self.areas[area_id].depends_on)}')
       area_states[area_id] = self.areas[area_id].update(read_only or 'disabled' == self.areas[area_id].mode)
 
     return area_states
