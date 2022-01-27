@@ -226,7 +226,7 @@ class terrariumAPI(object):
   def area_add(self):
     try:
       # Make sure the enclosure does exists
-      enclosure = Enclosure[request.json['enclosure']]
+      Enclosure[request.json['enclosure']]
 
       new_area = self.webserver.engine.add(terrariumArea(None, self.webserver.engine.enclosures[request.json['enclosure']], request.json['type'], request.json['name'], request.json['mode'], request.json['setup']))
       request.json['id'] = new_area.id
@@ -257,11 +257,15 @@ class terrariumAPI(object):
   @orm.db_session
   def area_delete(self, area):
     try:
-      message = f'Area {Area[area]} is deleted.'
-      Area[area].delete()
+      area = Area[area]
+      message = f'Area {area} is deleted.'
+
+      area_id = area.id
+      enclosure_id = area.enclosure.id
+      area.delete()
       orm.commit()
 
-#      self.webserver.engine.delete(terrariumArea,area)
+      self.webserver.engine.delete(terrariumArea, area_id, enclosure_id)
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')

@@ -417,7 +417,7 @@ class terrariumEngine(object):
     return update_ok
 
   # -= NEW =-
-  def delete(self, item, id):
+  def delete(self, item, id, sub_id = None):
     delete_ok = False
 
     if issubclass(item, terrariumButton):
@@ -438,6 +438,10 @@ class terrariumEngine(object):
     elif issubclass(item, terrariumWebcam):
       self.webcams[id].stop()
       del(self.webcams[id])
+      delete_ok = True
+
+    elif issubclass(item, terrariumArea):
+      self.enclosures[sub_id].delete(id)
       delete_ok = True
 
     return delete_ok
