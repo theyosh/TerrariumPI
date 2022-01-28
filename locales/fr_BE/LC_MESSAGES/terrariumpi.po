@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2022-01-08 22:42+CET\n"
+"POT-Creation-Date: 2022-01-28 14:29+CET\n"
 "PO-Revision-Date: 2020-05-21 19:44+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
@@ -164,39 +164,39 @@ msgstr ""
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1124 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1146 views/dashboard.html:18 views/status.html:112
 #, fuzzy
 #| msgid "Uptime"
 msgid "Up time"
 msgstr "En ligne depuis"
 
-#: terrariumEngine.py:1130
+#: terrariumEngine.py:1152
 #, fuzzy
 #| msgid "System log"
 msgid "System load"
 msgstr "Journaux du système"
 
-#: terrariumEngine.py:1136 views/status.html:44
+#: terrariumEngine.py:1158 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Température du CPU"
 
-#: terrariumEngine.py:1142
+#: terrariumEngine.py:1164
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1148
+#: terrariumEngine.py:1170
 #, fuzzy
 #| msgid "Memory usage"
 msgid "Memory"
 msgstr "Utilisation de la mémoire"
 
-#: terrariumEngine.py:1169
+#: terrariumEngine.py:1191
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "Le type de capteur"
 
-#: terrariumEngine.py:1345
+#: terrariumEngine.py:1367
 #, fuzzy
 #| msgid "Last update"
 msgid "last update"
@@ -518,33 +518,33 @@ msgstr "Paramètres de porte"
 msgid "Webcam archive"
 msgstr "Langue"
 
-#: terrariumNotification.py:364
+#: terrariumNotification.py:377
 msgid "Display"
 msgstr ""
 
-#: terrariumNotification.py:368
+#: terrariumNotification.py:381
 msgid "Email"
 msgstr ""
 
-#: terrariumNotification.py:378
+#: terrariumNotification.py:391
 #, fuzzy
 #| msgid "Minimum light hours"
 msgid "Traffic light"
 msgstr "Heures de lumière minimales"
 
-#: terrariumNotification.py:382
+#: terrariumNotification.py:395
 msgid "Web-hook"
 msgstr ""
 
-#: terrariumNotification.py:386
+#: terrariumNotification.py:399
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:390
+#: terrariumNotification.py:403
 msgid "Pushover"
 msgstr ""
 
-#: terrariumNotification.py:394
+#: terrariumNotification.py:407
 msgid "Buzzer"
 msgstr ""
 
@@ -1667,7 +1667,7 @@ msgstr "Choisir une option"
 
 #: views/modals/button.html:36 views/modals/relay.html:36
 #: views/modals/sensor.html:51 views/modals/service.html:82
-#: views/modals/service.html:306 views/modals/webcam.html:40
+#: views/modals/service.html:325 views/modals/webcam.html:40
 #, fuzzy
 #| msgid "Address"
 msgid "Enter an address."
@@ -1676,7 +1676,7 @@ msgstr "Adresse"
 #: views/modals/button.html:39 views/modals/relay.html:39
 #: views/modals/sensor.html:54 views/modals/service.html:85
 #: views/modals/service.html:111 views/modals/service.html:123
-#: views/modals/service.html:295 views/modals/service.html:309
+#: views/modals/service.html:314 views/modals/service.html:328
 #: views/modals/webcam.html:43
 msgid "The address cannot be empty."
 msgstr ""
@@ -2191,13 +2191,13 @@ msgstr "Adresse"
 msgid "SMTP Server port"
 msgstr "Port du serveur OWFS"
 
-#: views/modals/service.html:132 views/modals/service.html:318
+#: views/modals/service.html:132 views/modals/service.html:337
 #, fuzzy
 #| msgid "Filename"
 msgid "Enter a port number."
 msgstr "Nom de fichier"
 
-#: views/modals/service.html:135 views/modals/service.html:321
+#: views/modals/service.html:135 views/modals/service.html:340
 msgid "The port number cannot be empty."
 msgstr ""
 
@@ -2207,7 +2207,7 @@ msgstr ""
 msgid "SMTP Server username"
 msgstr "Nom de fichier"
 
-#: views/modals/service.html:144 views/modals/service.html:330
+#: views/modals/service.html:144 views/modals/service.html:349
 #, fuzzy
 #| msgid "Filename"
 msgid "Enter a username."
@@ -2219,7 +2219,7 @@ msgstr "Nom de fichier"
 msgid "SMTP Server password"
 msgstr "Port du serveur OWFS"
 
-#: views/modals/service.html:153 views/modals/service.html:339
+#: views/modals/service.html:153 views/modals/service.html:358
 #, fuzzy
 #| msgid "Address"
 msgid "Enter a password."
@@ -2301,67 +2301,83 @@ msgstr ""
 msgid "Enter GPIO pin for green light."
 msgstr ""
 
-#: views/modals/service.html:249
+#: views/modals/service.html:246
 #, fuzzy
 #| msgid "GPIO"
 msgid "GPIO pin"
 msgstr "GPIO"
 
-#: views/modals/service.html:252
+#: views/modals/service.html:249
 #, fuzzy
 #| msgid "Holds the volume for this playlist."
 msgid "Enter GPIO pin for the buzzer."
 msgstr "Contient le volume pour cette liste de lecture."
 
-#: views/modals/service.html:262
+#: views/modals/service.html:255
+msgid "Buzzer songs"
+msgstr ""
+
+#: views/modals/service.html:271
+msgid "List of available songs to use in the message subject."
+msgstr ""
+
+#: views/modals/service.html:281
 msgid "Customer key"
 msgstr ""
 
-#: views/modals/service.html:268
+#: views/modals/service.html:287
 msgid "Customer secret"
 msgstr ""
 
-#: views/modals/service.html:274
+#: views/modals/service.html:293
 msgid "Access token"
 msgstr ""
 
-#: views/modals/service.html:280
+#: views/modals/service.html:299
 msgid "Access token secret"
 msgstr ""
 
-#: views/modals/service.html:289
+#: views/modals/service.html:308
 msgid "Full post url"
 msgstr ""
 
-#: views/modals/service.html:292
+#: views/modals/service.html:311
 #, fuzzy
 #| msgid "Maximum lights hours"
 msgid "Enter the full post url."
 msgstr "Heures maximales de lumières"
 
-#: views/modals/service.html:303
+#: views/modals/service.html:322
 #, fuzzy
 #| msgid "OWFS server port"
 msgid "MQTT Server address"
 msgstr "Port du serveur OWFS"
 
-#: views/modals/service.html:315
+#: views/modals/service.html:334
 #, fuzzy
 #| msgid "OWFS server port"
 msgid "MQTT Server port"
 msgstr "Port du serveur OWFS"
 
-#: views/modals/service.html:327
+#: views/modals/service.html:346
 #, fuzzy
 #| msgid "Filename"
 msgid "MQTT Server username"
 msgstr "Nom de fichier"
 
-#: views/modals/service.html:336
+#: views/modals/service.html:355
 #, fuzzy
 #| msgid "OWFS server port"
 msgid "MQTT Server password"
 msgstr "Port du serveur OWFS"
+
+#: views/modals/service.html:365
+msgid "Use SSL"
+msgstr ""
+
+#: views/modals/service.html:370
+msgid "Toggle this to enable SSL connection."
+msgstr ""
 
 #: views/modals/weather.html:12
 #, fuzzy
@@ -3439,7 +3455,7 @@ msgstr "Date et heure"
 msgid "Enter end time"
 msgstr "Date et heure"
 
-#: views/modals/service.html:250
+#: views/modals/service.html:247
 #, fuzzy
 #| msgid "Date and time"
 msgid "Enter GPIO pin"
@@ -3491,7 +3507,7 @@ msgstr ""
 msgid "Enter the capacitor value in &micro;F"
 msgstr ""
 
-#: views/modals/service.html:290
+#: views/modals/service.html:309
 #, fuzzy
 #| msgid "Temperature sensor"
 msgid "Enter the full post url"
@@ -3509,13 +3525,13 @@ msgstr ""
 msgid "Enter the minimum amount of hours"
 msgstr ""
 
-#: views/modals/service.html:304
+#: views/modals/service.html:323
 #, fuzzy
 #| msgid "OWFS server port"
 msgid "Enter the MQTT server address name or ip"
 msgstr "Port du serveur OWFS"
 
-#: views/modals/service.html:316
+#: views/modals/service.html:335
 #, fuzzy
 #| msgid "OWFS server port"
 msgid "Enter the MQTT server port number"
@@ -3543,7 +3559,7 @@ msgstr "Port du serveur OWFS"
 msgid "Enter the SMTP server address name or ip"
 msgstr ""
 
-#: views/modals/service.html:151 views/modals/service.html:337
+#: views/modals/service.html:151 views/modals/service.html:356
 #, fuzzy
 #| msgid "OWFS server port"
 msgid "Enter the SMTP server password"
@@ -3555,7 +3571,7 @@ msgstr "Port du serveur OWFS"
 msgid "Enter the SMTP server port number"
 msgstr "Port du serveur OWFS"
 
-#: views/modals/service.html:142 views/modals/service.html:328
+#: views/modals/service.html:142 views/modals/service.html:347
 msgid "Enter the SMTP server username"
 msgstr ""
 
@@ -3885,7 +3901,7 @@ msgstr ""
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumNotification.py:373
+#: terrariumNotification.py:386
 msgid "Telegram"
 msgstr ""
 

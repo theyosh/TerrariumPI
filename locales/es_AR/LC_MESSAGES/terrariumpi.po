@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2022-01-08 22:42+CET\n"
+"POT-Creation-Date: 2022-01-28 14:29+CET\n"
 "PO-Revision-Date: 2021-12-17 22:01+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Spanish (Argentina) <https://weblate.theyosh.nl/projects/"
@@ -138,33 +138,33 @@ msgstr ""
 msgid "wattage"
 msgstr "Vataje"
 
-#: terrariumEngine.py:1124 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1146 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Tiempo de actividad"
 
-#: terrariumEngine.py:1130
+#: terrariumEngine.py:1152
 msgid "System load"
 msgstr "Carga del sistema"
 
-#: terrariumEngine.py:1136 views/status.html:44
+#: terrariumEngine.py:1158 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Temperatura CPU"
 
-#: terrariumEngine.py:1142
+#: terrariumEngine.py:1164
 msgid "Storage"
 msgstr "Almacenamiento"
 
-#: terrariumEngine.py:1148
+#: terrariumEngine.py:1170
 msgid "Memory"
 msgstr "memoria"
 
-#: terrariumEngine.py:1169
+#: terrariumEngine.py:1191
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "El tipo de sensor"
 
-#: terrariumEngine.py:1345
+#: terrariumEngine.py:1367
 msgid "last update"
 msgstr "última actualización"
 
@@ -488,33 +488,33 @@ msgstr "Configuraciones de puerta"
 msgid "Webcam archive"
 msgstr "Idioma"
 
-#: terrariumNotification.py:364
+#: terrariumNotification.py:377
 msgid "Display"
 msgstr "Monitor"
 
-#: terrariumNotification.py:368
+#: terrariumNotification.py:381
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:378
+#: terrariumNotification.py:391
 #, fuzzy
 #| msgid "Minimum light hours"
 msgid "Traffic light"
 msgstr "Mínimo de horas de luz"
 
-#: terrariumNotification.py:382
+#: terrariumNotification.py:395
 msgid "Web-hook"
 msgstr "Web-hook"
 
-#: terrariumNotification.py:386
+#: terrariumNotification.py:399
 msgid "MQTT"
 msgstr "MQTT"
 
-#: terrariumNotification.py:390
+#: terrariumNotification.py:403
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:394
+#: terrariumNotification.py:407
 msgid "Buzzer"
 msgstr ""
 
@@ -1595,14 +1595,14 @@ msgstr "Seleccione un tipo de hardware."
 
 #: views/modals/button.html:36 views/modals/relay.html:36
 #: views/modals/sensor.html:51 views/modals/service.html:82
-#: views/modals/service.html:306 views/modals/webcam.html:40
+#: views/modals/service.html:325 views/modals/webcam.html:40
 msgid "Enter an address."
 msgstr "Introducir Una Dirección."
 
 #: views/modals/button.html:39 views/modals/relay.html:39
 #: views/modals/sensor.html:54 views/modals/service.html:85
 #: views/modals/service.html:111 views/modals/service.html:123
-#: views/modals/service.html:295 views/modals/service.html:309
+#: views/modals/service.html:314 views/modals/service.html:328
 #: views/modals/webcam.html:43
 msgid "The address cannot be empty."
 msgstr ""
@@ -2093,13 +2093,13 @@ msgstr "Dirección"
 msgid "SMTP Server port"
 msgstr "Puerto de servidor SMTP"
 
-#: views/modals/service.html:132 views/modals/service.html:318
+#: views/modals/service.html:132 views/modals/service.html:337
 #, fuzzy
 #| msgid "Username"
 msgid "Enter a port number."
 msgstr "Nombre de usuario"
 
-#: views/modals/service.html:135 views/modals/service.html:321
+#: views/modals/service.html:135 views/modals/service.html:340
 msgid "The port number cannot be empty."
 msgstr ""
 
@@ -2109,7 +2109,7 @@ msgstr ""
 msgid "SMTP Server username"
 msgstr "Nombre de usuario SMTP"
 
-#: views/modals/service.html:144 views/modals/service.html:330
+#: views/modals/service.html:144 views/modals/service.html:349
 #, fuzzy
 #| msgid "Enter a name."
 msgid "Enter a username."
@@ -2121,7 +2121,7 @@ msgstr "Ingrese un nombre."
 msgid "SMTP Server password"
 msgstr "Puerto de servidor SMTP"
 
-#: views/modals/service.html:153 views/modals/service.html:339
+#: views/modals/service.html:153 views/modals/service.html:358
 #, fuzzy
 #| msgid "Enter an address."
 msgid "Enter a password."
@@ -2203,71 +2203,87 @@ msgstr ""
 msgid "Enter GPIO pin for green light."
 msgstr ""
 
-#: views/modals/service.html:249
+#: views/modals/service.html:246
 #, fuzzy
 #| msgid "GPIO"
 msgid "GPIO pin"
 msgstr "GPIO"
 
-#: views/modals/service.html:252
+#: views/modals/service.html:249
 #, fuzzy
 #| msgid "Holds the volume for this playlist."
 msgid "Enter GPIO pin for the buzzer."
 msgstr "Contiene el volumen de la lista de reproducción."
 
-#: views/modals/service.html:262
+#: views/modals/service.html:255
+msgid "Buzzer songs"
+msgstr ""
+
+#: views/modals/service.html:271
+msgid "List of available songs to use in the message subject."
+msgstr ""
+
+#: views/modals/service.html:281
 #, fuzzy
 #| msgid "Consumer key"
 msgid "Customer key"
 msgstr "Clave del consumidor"
 
-#: views/modals/service.html:268
+#: views/modals/service.html:287
 #, fuzzy
 #| msgid "Consumer secret"
 msgid "Customer secret"
 msgstr "Secreto del Consumidor"
 
-#: views/modals/service.html:274
+#: views/modals/service.html:293
 msgid "Access token"
 msgstr "Token de acceso"
 
-#: views/modals/service.html:280
+#: views/modals/service.html:299
 msgid "Access token secret"
 msgstr "Secreto de Token de acceso"
 
-#: views/modals/service.html:289
+#: views/modals/service.html:308
 msgid "Full post url"
 msgstr "URL de publicación completa"
 
-#: views/modals/service.html:292
+#: views/modals/service.html:311
 #, fuzzy
 #| msgid "Enter the maximum moisture value."
 msgid "Enter the full post url."
 msgstr "Ingrese este valor máximo de humedad."
 
-#: views/modals/service.html:303
+#: views/modals/service.html:322
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "MQTT Server address"
 msgstr "Puerto de servidor SMTP"
 
-#: views/modals/service.html:315
+#: views/modals/service.html:334
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "MQTT Server port"
 msgstr "Puerto de servidor SMTP"
 
-#: views/modals/service.html:327
+#: views/modals/service.html:346
 #, fuzzy
 #| msgid "SMTP username"
 msgid "MQTT Server username"
 msgstr "Nombre de usuario SMTP"
 
-#: views/modals/service.html:336
+#: views/modals/service.html:355
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "MQTT Server password"
 msgstr "Puerto de servidor SMTP"
+
+#: views/modals/service.html:365
+msgid "Use SSL"
+msgstr ""
+
+#: views/modals/service.html:370
+msgid "Toggle this to enable SSL connection."
+msgstr ""
 
 #: views/modals/weather.html:12
 #, fuzzy
@@ -3311,7 +3327,7 @@ msgstr "Fecha y hora"
 msgid "Enter end time"
 msgstr "Fecha y hora"
 
-#: views/modals/service.html:250
+#: views/modals/service.html:247
 #, fuzzy
 #| msgid "Date and time"
 msgid "Enter GPIO pin"
@@ -3361,7 +3377,7 @@ msgstr "Ingrese la cantidad de horas para cambiar"
 msgid "Enter the capacitor value in &micro;F"
 msgstr ""
 
-#: views/modals/service.html:290
+#: views/modals/service.html:309
 #, fuzzy
 #| msgid "Full post url"
 msgid "Enter the full post url"
@@ -3379,13 +3395,13 @@ msgstr ""
 msgid "Enter the minimum amount of hours"
 msgstr ""
 
-#: views/modals/service.html:304
+#: views/modals/service.html:323
 #, fuzzy
 #| msgid "SMTP username"
 msgid "Enter the MQTT server address name or ip"
 msgstr "Nombre de usuario SMTP"
 
-#: views/modals/service.html:316
+#: views/modals/service.html:335
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "Enter the MQTT server port number"
@@ -3413,7 +3429,7 @@ msgstr "Nombre de usuario SMTP"
 msgid "Enter the SMTP server address name or ip"
 msgstr ""
 
-#: views/modals/service.html:151 views/modals/service.html:337
+#: views/modals/service.html:151 views/modals/service.html:356
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "Enter the SMTP server password"
@@ -3425,7 +3441,7 @@ msgstr "Puerto de servidor SMTP"
 msgid "Enter the SMTP server port number"
 msgstr "Puerto de servidor SMTP"
 
-#: views/modals/service.html:142 views/modals/service.html:328
+#: views/modals/service.html:142 views/modals/service.html:347
 #, fuzzy
 #| msgid "SMTP username"
 msgid "Enter the SMTP server username"
@@ -3759,7 +3775,7 @@ msgstr "Mostrar cuadros de movimiento"
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumNotification.py:373
+#: terrariumNotification.py:386
 msgid "Telegram"
 msgstr "Telegram"
 

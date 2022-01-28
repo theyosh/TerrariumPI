@@ -5,11 +5,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2022-01-08 22:42+CET\n"
+"POT-Creation-Date: 2022-01-28 14:29+CET\n"
 "PO-Revision-Date: 2022-01-08 22:06+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
-"4-x-y-z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
+"z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,31 +139,31 @@ msgstr "waterstroom"
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:1124 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1146 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Actief"
 
-#: terrariumEngine.py:1130
+#: terrariumEngine.py:1152
 msgid "System load"
 msgstr "Systeembelasting"
 
-#: terrariumEngine.py:1136 views/status.html:44
+#: terrariumEngine.py:1158 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Processor temperatuur"
 
-#: terrariumEngine.py:1142
+#: terrariumEngine.py:1164
 msgid "Storage"
 msgstr "Opslag"
 
-#: terrariumEngine.py:1148
+#: terrariumEngine.py:1170
 msgid "Memory"
 msgstr "Geheugen"
 
-#: terrariumEngine.py:1169
+#: terrariumEngine.py:1191
 msgid "average {sensor_type}"
 msgstr "gemiddelde {sensor_type}"
 
-#: terrariumEngine.py:1345
+#: terrariumEngine.py:1367
 msgid "last update"
 msgstr "laatste wijziging"
 
@@ -421,31 +421,31 @@ msgstr "Knop actie"
 msgid "Webcam archive"
 msgstr "Webcam archief"
 
-#: terrariumNotification.py:364
+#: terrariumNotification.py:377
 msgid "Display"
 msgstr "Beeldscherm"
 
-#: terrariumNotification.py:368
+#: terrariumNotification.py:381
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:378
+#: terrariumNotification.py:391
 msgid "Traffic light"
 msgstr "Verkeerslicht"
 
-#: terrariumNotification.py:382
+#: terrariumNotification.py:395
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:386
+#: terrariumNotification.py:399
 msgid "MQTT"
 msgstr "MQTT"
 
-#: terrariumNotification.py:390
+#: terrariumNotification.py:403
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:394
+#: terrariumNotification.py:407
 msgid "Buzzer"
 msgstr "Zoemer"
 
@@ -1441,14 +1441,14 @@ msgstr "Selecteer een hardwaretype."
 
 #: views/modals/button.html:36 views/modals/relay.html:36
 #: views/modals/sensor.html:51 views/modals/service.html:82
-#: views/modals/service.html:306 views/modals/webcam.html:40
+#: views/modals/service.html:325 views/modals/webcam.html:40
 msgid "Enter an address."
 msgstr "Vul een adres in."
 
 #: views/modals/button.html:39 views/modals/relay.html:39
 #: views/modals/sensor.html:54 views/modals/service.html:85
 #: views/modals/service.html:111 views/modals/service.html:123
-#: views/modals/service.html:295 views/modals/service.html:309
+#: views/modals/service.html:314 views/modals/service.html:328
 #: views/modals/webcam.html:43
 msgid "The address cannot be empty."
 msgstr "Het adres mag niet leeg zijn."
@@ -1859,11 +1859,11 @@ msgstr "Voer het mailserveradres in."
 msgid "SMTP Server port"
 msgstr "SMTP-serverpoort"
 
-#: views/modals/service.html:132 views/modals/service.html:318
+#: views/modals/service.html:132 views/modals/service.html:337
 msgid "Enter a port number."
 msgstr "Voer poortnummer in."
 
-#: views/modals/service.html:135 views/modals/service.html:321
+#: views/modals/service.html:135 views/modals/service.html:340
 msgid "The port number cannot be empty."
 msgstr "Het poortnummer mag niet leeg zijn."
 
@@ -1871,7 +1871,7 @@ msgstr "Het poortnummer mag niet leeg zijn."
 msgid "SMTP Server username"
 msgstr "SMTP-server gebruikersnaam"
 
-#: views/modals/service.html:144 views/modals/service.html:330
+#: views/modals/service.html:144 views/modals/service.html:349
 msgid "Enter a username."
 msgstr "Vul een gebruikersnaam in."
 
@@ -1879,7 +1879,7 @@ msgstr "Vul een gebruikersnaam in."
 msgid "SMTP Server password"
 msgstr "SMTP-serverpoort"
 
-#: views/modals/service.html:153 views/modals/service.html:339
+#: views/modals/service.html:153 views/modals/service.html:358
 msgid "Enter a password."
 msgstr "Vul een wachtwoord in."
 
@@ -1948,53 +1948,71 @@ msgstr "Groen"
 msgid "Enter GPIO pin for green light."
 msgstr "Voer GPIO-pin in voor groen licht."
 
-#: views/modals/service.html:249
+#: views/modals/service.html:246
 msgid "GPIO pin"
 msgstr "GPIO-pin"
 
-#: views/modals/service.html:252
+#: views/modals/service.html:249
 msgid "Enter GPIO pin for the buzzer."
 msgstr "Voer de GPIO-pin in voor de zoemer."
 
-#: views/modals/service.html:262
+#: views/modals/service.html:255
+#, fuzzy
+#| msgid "Buzzer"
+msgid "Buzzer songs"
+msgstr "Zoemer"
+
+#: views/modals/service.html:271
+msgid "List of available songs to use in the message subject."
+msgstr ""
+
+#: views/modals/service.html:281
 msgid "Customer key"
 msgstr "Klantsleutel"
 
-#: views/modals/service.html:268
+#: views/modals/service.html:287
 msgid "Customer secret"
 msgstr "Klant geheim"
 
-#: views/modals/service.html:274
+#: views/modals/service.html:293
 msgid "Access token"
 msgstr "Toegangstoken"
 
-#: views/modals/service.html:280
+#: views/modals/service.html:299
 msgid "Access token secret"
 msgstr "Toegang sleutel geheim"
 
-#: views/modals/service.html:289
+#: views/modals/service.html:308
 msgid "Full post url"
 msgstr "Volledige bericht-URL (post)"
 
-#: views/modals/service.html:292
+#: views/modals/service.html:311
 msgid "Enter the full post url."
 msgstr "Voer de volledige post-URL in."
 
-#: views/modals/service.html:303
+#: views/modals/service.html:322
 msgid "MQTT Server address"
 msgstr "MQTT-server adres"
 
-#: views/modals/service.html:315
+#: views/modals/service.html:334
 msgid "MQTT Server port"
 msgstr "MQTT-serverpoort"
 
-#: views/modals/service.html:327
+#: views/modals/service.html:346
 msgid "MQTT Server username"
 msgstr "MQTT-server gebruikersnaam"
 
-#: views/modals/service.html:336
+#: views/modals/service.html:355
 msgid "MQTT Server password"
 msgstr "MQTT Server-wachtwoord"
+
+#: views/modals/service.html:365
+msgid "Use SSL"
+msgstr ""
+
+#: views/modals/service.html:370
+msgid "Toggle this to enable SSL connection."
+msgstr ""
 
 #: views/modals/weather.html:12
 msgid "Weather settings"
@@ -2874,7 +2892,7 @@ msgstr "Voer de begintijd in"
 msgid "Enter end time"
 msgstr "Voer de eindtijd in"
 
-#: views/modals/service.html:250
+#: views/modals/service.html:247
 msgid "Enter GPIO pin"
 msgstr "Voer de GPIO-pin in"
 
@@ -2914,7 +2932,7 @@ msgstr "Voer het aantal te verschuiven uren in"
 msgid "Enter the capacitor value in &micro;F"
 msgstr "Voer de condensatorwaarde in µF in"
 
-#: views/modals/service.html:290
+#: views/modals/service.html:309
 msgid "Enter the full post url"
 msgstr "Voer de volledige post-URL in"
 
@@ -2930,11 +2948,11 @@ msgstr "Voer het maximale aantal uren in"
 msgid "Enter the minimum amount of hours"
 msgstr "Voer het minimum aantal uren in"
 
-#: views/modals/service.html:304
+#: views/modals/service.html:323
 msgid "Enter the MQTT server address name or ip"
 msgstr "Voer de adresnaam of ip van de MQTT-server in"
 
-#: views/modals/service.html:316
+#: views/modals/service.html:335
 msgid "Enter the MQTT server port number"
 msgstr "Voer het MQTT-serverpoortnummer in"
 
@@ -2954,7 +2972,7 @@ msgstr "Voer de Pushover-gebruikerssleutel in"
 msgid "Enter the SMTP server address name or ip"
 msgstr "Voer de adresnaam of ip van de SMTP-server in"
 
-#: views/modals/service.html:151 views/modals/service.html:337
+#: views/modals/service.html:151 views/modals/service.html:356
 msgid "Enter the SMTP server password"
 msgstr "Voer het SMTP-serverwachtwoord in"
 
@@ -2962,7 +2980,7 @@ msgstr "Voer het SMTP-serverwachtwoord in"
 msgid "Enter the SMTP server port number"
 msgstr "Voer het SMTP-serverpoortnummer in"
 
-#: views/modals/service.html:142 views/modals/service.html:328
+#: views/modals/service.html:142 views/modals/service.html:347
 msgid "Enter the SMTP server username"
 msgstr "Voer de gebruikersnaam van de SMTP-server in"
 
@@ -3200,7 +3218,7 @@ msgstr "Bewegingsvakken weergeven"
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI uitschakelen"
 
-#: terrariumNotification.py:373
+#: terrariumNotification.py:386
 msgid "Telegram"
 msgstr "Telegram"
 
