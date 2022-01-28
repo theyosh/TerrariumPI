@@ -437,8 +437,6 @@ class terrariumNotificationService(object):
     self.enabled = enabled
 
     self.setup = {}
-    print('Loading initial setup')
-    print(setup)
     self.load_setup(setup)
 
   def __repr__(self):
