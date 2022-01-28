@@ -492,15 +492,22 @@ class terrariumEngine(object):
       if sensor.id not in self.settings['exclude_ids'] and sensor.id not in self.sensors:
         start = time.time()
         logger.debug(f'Found new sensor {sensor}')
+        action = 'Added new'
         with orm.db_session():
-          # Store new sensor in database
-          new_sensor = Sensor(
-            id        = sensor.id,
-            hardware  = sensor.HARDWARE,
-            type      = sensor.sensor_type,
-            name      = sensor.name,
-            address   = sensor.address
-          )
+          try:
+            # First try to see if the Sensor does exist based on ID (means address change)
+            new_sensor = Sensor[sensor.id]
+            new_sensor.address = sensor.address
+            action = 'Updated existing'
+          except orm.core.ObjectNotFound:
+            # Store new sensor in database
+            new_sensor = Sensor(
+              id        = sensor.id,
+              hardware  = sensor.HARDWARE,
+              type      = sensor.sensor_type,
+              name      = sensor.name,
+              address   = sensor.address
+            )
 
           # Create a new sensordata entry, so we have at least one sensor value
           value = sensor.update()
@@ -509,7 +516,7 @@ class terrariumEngine(object):
         # Store the hardware sensor in memory, so we can benefit from the shared cached data for sensors with multiple sensor types
         self.add(sensor)
 
-        logger.info(f'Added new sensor {new_sensor} to database with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds.')
+        logger.info(f'{action} new sensor {new_sensor} to database with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds.')
       else:
         reason = 'excluded' if sensor.id in self.settings['exclude_ids'] else 'already loaded'
         logger.debug(f'Ignored sensor {sensor} because it is {reason}.')
