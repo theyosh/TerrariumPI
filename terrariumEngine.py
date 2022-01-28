@@ -33,7 +33,7 @@ from weather import terrariumWeather
 from hardware.sensor import terrariumSensor, terrariumSensorLoadingException
 from hardware.relay import terrariumRelay, terrariumRelayLoadingException, terrariumRelayUpdateException
 from hardware.button import terrariumButton, terrariumButtonLoadingException
-from hardware.webcam import terrariumWebcam
+from hardware.webcam import terrariumWebcam, terrariumWebcamLoadingException
 
 from terrariumNotification import terrariumNotification
 
@@ -894,18 +894,18 @@ class terrariumEngine(object):
         start = time.time()
         if webcam.id not in self.webcams:
           logger.debug(f'Loading {webcam}.')
-          #try:
-          self.add(terrariumWebcam(webcam.id,
-                                    webcam.address,
-                                    webcam.name,
-                                    int(webcam.width),
-                                    int(webcam.height),
-                                    webcam.rotation,
-                                    webcam.awb))
+          try:
+            self.add(terrariumWebcam(webcam.id,
+                                      webcam.address,
+                                      webcam.name,
+                                      int(webcam.width),
+                                      int(webcam.height),
+                                      webcam.rotation,
+                                      webcam.awb))
 
-          #except terrariumWebcamLoadingException as ex:
-          #  logger.error(f'Error loading {webcam} with error: {ex.message}.'))
-          #  continue
+          except terrariumWebcamLoadingException as ex:
+            logger.error(f'Error loading {webcam} with error: {ex.message}.')
+            continue
 
         else:
           logger.debug(f'Updated already loaded {webcam}.')
