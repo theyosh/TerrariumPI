@@ -14,12 +14,12 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
   VALID_SOURCE = '^https?://api\.openweathermap\.org/data/2\.5/weather\?q=(?P<city>[^,&]+),(?P<country>[^,&]{2})&appid=[a-z0-9]{32}$'
   INFO_SOURCE  = 'https://api.openweathermap.org/data/2.5/weather?q=[CITY],[COUNTRY_2CHAR]&appid=[YOUR_API_KEY]'
 
-  def __init__(self, address, unit_values):
+  def __init__(self, address, unit_values, language):
     self.__history_day = None
-    super().__init__(address, unit_values)
+    super().__init__(address, unit_values, language)
 
   def __load_general_data(self):
-    address = self.address + '&units=metric'
+    address = self.address + '&units=metric&lang=' + self._device['language'][0:2]
     logger.debug('Loading weather source {}'.format(address))
     data = terrariumUtils.get_remote_data(self.address)
     if data:
@@ -39,7 +39,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
   def __load_forecast_data(self):
     # Onecall API's are more expensive (max 1000 a day - 1 call per 2 minutes) so we update this at a lower frequency
     address = terrariumUtils.parse_url(self.address)
-    data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}'.format(self._data['geo']['lat'],self._data['geo']['long'],address['query_params']['appid']))
+    data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],address['query_params']['appid'],self._device['language'][0:2]))
 
     if data:
       self._data['days'] = []
@@ -83,7 +83,9 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
               'humidity'  : float(day['humidity']),
               'wind'      : {'speed'    : float(day['wind_speed']),    # Speed is in meter per second
                             'direction' : float(day['wind_deg'])},
-              'weather'   : day['weather'][0].get('description','')
+
+              'weather'   : { 'description' : day['weather'][0].get('description',''),
+                              'icon'        : day['weather'][0].get('icon','') }
             })
 
       self._data['forecast'] = sorted(self._data['forecast'], key=lambda d: d['timestamp'])
@@ -105,7 +107,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
     address = terrariumUtils.parse_url(self.address)
     for day in range(1,3):
       now = int(datetime.now().timestamp()) + self._data["timezone"] - (day * 24 * 60 * 60)
-      history_url = 'https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={}&lon={}&units=metric&dt={}&appid={}'.format(self._data['geo']['lat'],self._data['geo']['long'],now,address['query_params']['appid'])
+      history_url = 'https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={}&lon={}&units=metric&dt={}&appid={}&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],now,address['query_params']['appid'],self._device['language'][0:2])
       data = terrariumUtils.get_remote_data(history_url)
 
       if data is None:

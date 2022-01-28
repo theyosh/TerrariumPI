@@ -35,11 +35,12 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   # Weather data expects temperature in celcius degrees and windspeed in meters per second
   __UPDATE_TIMEOUT = 15 * 60 # 15 minutes. The source updates every 10 minutes
 
-  def __init__(self, address, unit_values):
+  def __init__(self, address, unit_values, language):
     self._device = {'id'       : None,
                     'address'  : None,
 
                     'unit_values' : unit_values,
+                    'language'    : language,
                     'last_update' : None}
 
     self._data = {'days' : [], 'forecast' : [], 'history' : []}
@@ -180,10 +181,10 @@ class terrariumWeather(object):
         SOURCES[attribute.HARDWARE] = attribute
 
   # Return polymorph weather....
-  def __new__(self, address, unit_values):
+  def __new__(self, address, unit_values, language):
     for weather_source in terrariumWeather.SOURCES:
       if re.search(terrariumWeather.SOURCES[weather_source].VALID_SOURCE, address, re.IGNORECASE):
-        return terrariumWeather.SOURCES[weather_source](address, unit_values)
+        return terrariumWeather.SOURCES[weather_source](address, unit_values, language)
 
     raise terrariumWeatherException('Weather url \'{}\' is not valid! Please check your source'.format(address))
 

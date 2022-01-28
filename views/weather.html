@@ -90,36 +90,23 @@
   </div>
 </section>
 <script>
-  function get_weather_icon(weather_type,is_day) {
+  function get_weather_icon(weather_type, is_day) {
+    // https://openweathermap.org/weather-conditions
     let day_icon = (is_day ? 'sun' : 'moon');
+    weather_type = weather_type.slice(0,-1)
 
-    let weater_icons = {
-      'clear sky' : day_icon,
-
-      'broken clouds' : 'cloud_' + day_icon,
-      'overcast clouds' : 'cloud_' + day_icon,
-      'scattered clouds' : 'cloud_' + day_icon,
-      'few clouds' : 'cloud_' + day_icon,
-
-      'drizzle' : 'cloud_drizzle_' + day_icon,
-      'light intensity drizzle' : 'cloud_drizzle_' + day_icon,
-      'light intensity drizzle rain': 'cloud_drizzle_' + day_icon,
-      'heavy intensity drizzle' : 'cloud_drizzle_' + day_icon,
-      'light rain' : 'cloud_drizzle_' + day_icon,
-
-      'moderate rain' : 'cloud_rain_' + day_icon,
-      'heavy intensity rain' : 'cloud_rain_' + day_icon,
-      'light intensity shower rain' : 'cloud_rain_' + day_icon,
-
-      'haze' : 'cloud_fog_' + day_icon,
-      'mist' : 'cloud_fog_' + day_icon,
-      'fog' : 'cloud_fog_' + day_icon,
-
-      'snow' : 'cloud_snow_alt_' + day_icon,
-      'rain and snow' : 'cloud_snow_alt_' + day_icon,
-      'light snow' : 'cloud_snow_alt_' + day_icon
+    let weather_icons = {
+      '01' : day_icon,
+      '02' : 'cloud_' + day_icon,
+      '03' : 'cloud',
+      '04' : 'cloud_' + day_icon,
+      '09' : 'cloud_drizzle_' + day_icon,
+      '10' : 'cloud_rain_' + day_icon,
+      '11' : 'cloud_lightning_' + day_icon,
+      '13' : 'cloud_snow_alt_' + day_icon,
+      '50' : 'cloud_fog_' + day_icon,
     }
-    return '/static/assets/img/weather_icons/' + 'climacon-' + weater_icons[weather_type] + '.svg';
+    return '/static/assets/img/weather_icons/' + 'climacon-' + weather_icons[weather_type] + '.svg';
   }
 
   jQuery(function(){
@@ -141,8 +128,8 @@
 
         if (counter == 0) {
           jQuery('#weather_today').text(moment.utc(day.timestamp * 1000).format('dddd LL'));
-          jQuery('#weather_image').attr({'title':day.weather}).css({'background-image' : 'url(' + get_weather_icon(day.weather,data.is_day) + ')'})
-          jQuery('#weather_type').text(day.weather);
+          jQuery('#weather_image').attr({'title':day.weather}).css({'background-image' : 'url(' + get_weather_icon(day.weather.icon,data.is_day) + ')'})
+          jQuery('#weather_type').text(day.weather.description);
           jQuery('#weather_sunrise').text(moment.utc(day.rise * 1000).format('LT'));
           jQuery('#weather_sunset').text(moment.utc(day.set * 1000).format('LT'));
           jQuery('#wind_direction').css('transform' , 'rotate(' + (day.wind.direction + 135) + 'deg)' );
@@ -152,8 +139,8 @@
           days.push({
               'day' : moment(day.timestamp * 1000).format('ddd'),
               'temperature' : formatNumber(day.temp) + ' ' + sensor_type_indicator('temperature'),
-              'icon' : get_weather_icon(day.weather,data.is_day),
-              'weather' : day.weather,
+              'icon' : get_weather_icon(day.weather.icon,data.is_day),
+              'weather' : day.weather.description,
               'wind' : formatNumber(day.wind.speed,1,1) + ' ' + sensor_type_indicator('windspeed'),
               'direction' : {'transform': 'rotate(' + (day.wind.direction + 135) + 'deg)'}
             });
