@@ -341,7 +341,7 @@ XXX
 EOF
 
 # To run this as non-root run the following, https://github.com/marcelrv/miflora, https://github.com/IanHarvey/bluepy/issues/218
-for BLUETOOTH_HELPER in `ls venv/lib/python*/*-packages/bluepy/bluepy-helper`; do
+for BLUETOOTH_HELPER in $(ls venv/lib/python*/*-packages/bluepy/bluepy-helper); do
   setcap 'cap_net_raw,cap_net_admin+eip' "${BLUETOOTH_HELPER}"
 done
 
