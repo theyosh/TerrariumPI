@@ -209,6 +209,10 @@ class terrariumEngine(object):
 
     return sorted(languages, key=lambda l: l['name'])
 
+  @property
+  def active_language(self):
+    return self.settings['language']
+
   # -=NEW=-
   def load_settings(self):
     start = time.time()
@@ -300,7 +304,7 @@ class terrariumEngine(object):
       if '' != self.settings['weather_source']:
         logger.info(f'Loading weather data from source {self.settings["weather_source"]}')
         try:
-          self.weather = terrariumWeather(self.settings['weather_source'], self.units)
+          self.weather = terrariumWeather(self.settings['weather_source'], self.units, self.active_language)
         except Exception as ex:
           logger.error(f'Loading weather exception: {ex}')
       elif self.weather is not None:
