@@ -11,6 +11,7 @@ for translation in $(grep -r -h -o -e "N\?_('[^)]\+')" ${FILES} | sort | uniq | 
   if [ "${translation:0:1}" = "'" ]; then
     translation=${translation:1}
   fi
+  translation="${translation//\\\'/\'}"
 
   if [ $(grep -c -F "\"${translation}\"" locales/terrariumpi.pot) -eq 0 ]; then
     echo "Adding missing text '${translation}'"

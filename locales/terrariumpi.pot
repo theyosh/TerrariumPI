@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.1.0\n"
-"POT-Creation-Date: 2022-01-28 14:14+CET\n"
+"POT-Creation-Date: 2022-01-28 14:29+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3054,10 +3054,6 @@ msgstr ""
 msgid "Select sensors"
 msgstr ""
 
-#: 
-msgid "Select source when it is \'day\'."
-msgstr ""
-
 #:  ./views/modals/message.html:21 ./views/modals/sensor.html:35 ./views/modals/service.html:19 ./views/modals/service.html:66
 msgid "Select type"
 msgstr ""
@@ -3084,26 +3080,6 @@ msgstr ""
 
 #:  ./terrariumNotification.py:386
 msgid "Telegram"
-msgstr ""
-
-#: 
-msgid "The duration when the players should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full night."
-msgstr ""
-
-#: 
-msgid "The duration when the players should be stay off when switched off. Enter \'0\' to disable."
-msgstr ""
-
-#: 
-msgid "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full day."
-msgstr ""
-
-#: 
-msgid "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter \'0\' to have a full night."
-msgstr ""
-
-#: 
-msgid "The duration when the relays should be stay off when switched off. Enter \'0\' to disable."
 msgstr ""
 
 #:  ./views/modals/area.html:636 ./views/modals/area.html:766
