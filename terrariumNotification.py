@@ -437,6 +437,8 @@ class terrariumNotificationService(object):
     self.enabled = enabled
 
     self.setup = {}
+    print('Loading initial setup')
+    print(setup)
     self.load_setup(setup)
 
   def __repr__(self):
@@ -456,7 +458,8 @@ class terrariumNotificationService(object):
     self.enabled = setup_data['enabled']
 
     # Load the new setup
-    self.load_setup(setup_data['setup'])
+    setup_data.update(setup_data['setup'])
+    self.load_setup(setup_data)
 
   def stop(self):
     pass
