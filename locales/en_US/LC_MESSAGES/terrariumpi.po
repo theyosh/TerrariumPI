@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2022-01-28 14:29+CET\n"
-"PO-Revision-Date: 2022-01-08 22:06+0000\n"
+"PO-Revision-Date: 2022-01-28 13:32+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United States) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_US/>\n"
@@ -1947,14 +1947,12 @@ msgid "Enter GPIO pin for the buzzer."
 msgstr "Enter GPIO pin for the buzzer."
 
 #: views/modals/service.html:255
-#, fuzzy
-#| msgid "Buzzer"
 msgid "Buzzer songs"
-msgstr "Buzzer"
+msgstr "Buzzer songs"
 
 #: views/modals/service.html:271
 msgid "List of available songs to use in the message subject."
-msgstr ""
+msgstr "List of available songs to use in the message subject."
 
 #: views/modals/service.html:281
 msgid "Customer key"
@@ -1998,11 +1996,11 @@ msgstr "MQTT Server password"
 
 #: views/modals/service.html:365
 msgid "Use SSL"
-msgstr ""
+msgstr "Use SSL"
 
 #: views/modals/service.html:370
 msgid "Toggle this to enable SSL connection."
-msgstr ""
+msgstr "Toggle this to enable SSL connection."
 
 #: views/modals/weather.html:12
 msgid "Weather settings"
