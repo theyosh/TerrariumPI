@@ -271,14 +271,13 @@ class terrariumNotification(terrariumSingleton):
 
   def load_services(self):
     with orm.db_session():
-      tp_name = Setting['title']
       for service in NotificationService.select():
         service = service.to_dict()
         if service['id'] not in self.services:
           setup = copy.deepcopy(service['setup'])
-          setup['terrariumpi_name'] = tp_name.value
-          setup['version']          = self.version
-          setup['profile_image']    = self.profile_image
+          setup['terrariumpi_name'] = self.engine.settings['title']
+          setup['version']          = self.engine.settings['version']
+          setup['profile_image']    = self.engine.settings['profile_image']
           try:
             self.services[service['id']] = terrariumNotificationService(service['id'], service['type'], service['name'], service['enabled'], setup)
           except terrariumDisplayLoadingException as ex:
@@ -290,9 +289,9 @@ class terrariumNotification(terrariumSingleton):
       return
 
     setup = copy.deepcopy(new_setup)
-    setup['terrariumpi_name'] = Setting['title'].value
-    setup['version']          = self.version
-    setup['profile_image']    = self.profile_image
+    setup['terrariumpi_name'] = self.engine.settings['title']
+    setup['version']          = self.engine.settings['version']
+    setup['profile_image']    = self.engine.settings['profile_image']
 
     self.services[service_id].reload_setup(setup)
 
