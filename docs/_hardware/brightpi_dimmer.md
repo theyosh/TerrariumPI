@@ -15,6 +15,7 @@ device_url : https://github.com/PiSupply/Bright-Pi
 ---
 
 ## Information
+
 The Bright-Pi is a small little board based around the Semtech SC620 that powers 4 white LEDs and 8 infrared ones.
 
 {% include_relative _relay_detail.md %}

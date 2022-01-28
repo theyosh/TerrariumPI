@@ -3,6 +3,7 @@
 {% if page.device_url %}
 [More information ...]({{ page.device_url }})
 {% endif %}
+
 ## Setup
 
 In order to use the **{{ page.device_title | default: page.title }}** use the following settings:

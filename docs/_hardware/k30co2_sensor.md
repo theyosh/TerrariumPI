@@ -14,9 +14,11 @@ device_url: https://www.co2meter.com/products/k-30-3-co2-sensor
 ---
 
 ## Information
+
 The K30 10% (100,000 ppm) carbon dioxide sensor module is a maintenance-free transmitter module intended to monitor high levels of CO2  found in storage tanks or biological applications. It is an accurate, low-cost solution for OEMs products like CO2 safety alarms or leak detectors.
 
-Features
+### Features
+
 - Built on tested K30 Sensor platform
 - Simple to install, pre-calibrated and ready-to-use
 - Proven reliability, low cost

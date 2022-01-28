@@ -1,10 +1,13 @@
 {% if page.device_url %}
 [More information ...]({{ page.device_url }})
 {% endif %}
+
 ## Setup
 
 {% if page.device_auto_detect %}
+
 ### Auto detect
+
 This sensor will be auto detected during startup or added by 'Scan sensors' in the menu.
 {% endif %}
 

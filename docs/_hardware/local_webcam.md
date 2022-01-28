@@ -13,6 +13,7 @@ device_address: "A webcam that reads a local image file. Prefix with `local://`<
 ---
 
 ## Information
+
 If you have already a system in place that creates images from a webcam on disk, you can use those images here for a webcam.
 
 {% include_relative _webcam_detail.md %}

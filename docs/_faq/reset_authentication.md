@@ -3,7 +3,7 @@ title: Reset authentication
 categories: [Website, FAQ]
 tags: [authentication]
 ---
-When you loose your password, there is no way to retreive it. So you need to manually reset it. Use the following steps to clear your existing password, and generate a new one.
+When you loose your password, there is no way to retrieve it. So you need to manually reset it. Use the following steps to clear your existing password, and generate a new one.
 
 1. Stop TerrariumPI ([FAQ]({% link _faq/systemd.md %}#stop))
 2. Enter the TerrariumPI folder `cd /home/pi/TerrariumPI/data`

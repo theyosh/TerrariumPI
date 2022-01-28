@@ -14,9 +14,9 @@ device_url: /TerrariumPI/faq/how-to-use-remote-data/
 ---
 
 ## Information
+
 With the remote sensor you can use an external source for measurements. This needs to be a [JSON](https://nl.wikipedia.org/wiki/JSON) source. And the remote source needs to be able to serve the data once every 30 seconds. So make sure you will not hit any rate limits on the remote source.
 
 By using JSON path traversal in the url after the `#` sign, you can specify which value to use from the JSON data.
-
 
 {% include_relative _sensor_detail.md %}

@@ -150,11 +150,11 @@ This updating is based on that the software is installed with the steps in the I
   `sudo ./install.sh`
 4. Restart TerrariumPI: `sudo service terrariumpi restart`
 
-Now **clear your browser cache** and reload the webinterface. A brand new version should be running.
+Now **clear your browser cache** and reload the web interface. A brand new version should be running.
 
 ## Hardware
 
-This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimun and tested hardware is
+This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimum and tested hardware is
 
 - Raspberry PI with at least **4GB SD card** running [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/).
   - Pi 2 (At own risk/no support)
@@ -165,7 +165,7 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
   - USB versions (Serial and Bitbang)
   - GPIO versions
   - PWM Dimmer versions
-- Temperature/humdity/ultrasonic/PH sensors DHT11, DHT22, AM2303, DS1820, HIH4000, HC-SR04, SEN0161, etc through
+- Temperature/humidity/ultrasonic/PH sensors DHT11, DHT22, AM2303, DS1820, HIH4000, HC-SR04, SEN0161, etc through
   - OWFS
   - GPIO
   - 1 Wire interface
@@ -185,7 +185,7 @@ If there is some other hardware which is not working with TerrariumPI, open an i
 
 ## Remote data
 
-It is possible to use external sensor data that is available through HTTP(S) in JSON format. This way you can combine multiple Raspberry Pi's with TerrariumPI running to one single system. By using multiple Rapsberry PI's you can cover a bigger area. But there are limitations.
+It is possible to use external sensor data that is available through HTTP(S) in JSON format. This way you can combine multiple Raspberry Pi's with TerrariumPI running to one single system. By using multiple Raspberry PI's you can cover a bigger area. But there are limitations.
 
 Currently it is READONLY. So you can read out remote sensors and switches but you cannot control the remote switches. But this way you can combine the power swiches total costs and power usage.
 

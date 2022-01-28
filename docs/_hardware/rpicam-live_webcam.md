@@ -14,6 +14,7 @@ device_url: https://projects.raspberrypi.org/en/projects/getting-started-with-pi
 ---
 
 ## Information
+
 You can use the official Raspberry PI camera module to setup a webcam.
 
 Using as a live streaming webcam, the maximum resolution is: **1920** x **1080** pixels

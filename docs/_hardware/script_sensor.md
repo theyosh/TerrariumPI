@@ -14,11 +14,13 @@ device_url: https://github.com/theyosh/TerrariumPI/blob/4.x.y.z/contrib/script_s
 ---
 
 ## Information
+
 With a script sensor you can make your own script/program that does a measurement and give back the current value.
 
 For temperature, it needs to return the value in Celsius degrees.
 
 ### Docker
+
 When using docker, you can place them in the `scripts` volume that you have defined in the [docker-compose.yaml]({% link _tabs/install.md %}#docker) file. And then you can use the following address: `/TerrariumPI/scripts/[name_of_script].[extension]`
 
 {% include_relative _sensor_detail.md %}

@@ -14,6 +14,7 @@ device_url : https://shop.meross.com/collections/smart-power-strip
 ---
 
 ## Information
+
 4 Outlets and 4 USB Ports: Equipped with 4 individually controlled Outlets and 4 groups controlled USB ports. Up to 4.0A for four USB ports. You can charge your cellphone, tablets, and other USB gadgets with a smart power strip.
 
 {% include_relative _relay_detail.md %}

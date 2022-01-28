@@ -14,6 +14,7 @@ device_url: https://www.probots.co.in/carbon-dioxide-gas-detection-sensor-module
 ---
 
 ## Information
+
 The CCS811 Air Quality Breakout is a digital gas sensor solution and comes with an I2C interface that senses a wide range of Total Volatile Organic Compounds (TVOCs), including equivalent carbon dioxide (eCO2) and metal oxide (MOX) levels. VOCs are often categorized as pollutants and/or sensory irritants and can come from a variety of sources like construction materials (paint, carpet, etc.), machines (copiers, processors, etc.), and even people (breathing, smoking, etc.).
 
 The sensor offers simple and easy interface through I2C. Libraries, circuit and sample codes are available for Arduino, Raspberry pi, ESP32, etc.

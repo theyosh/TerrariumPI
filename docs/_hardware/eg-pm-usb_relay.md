@@ -13,6 +13,7 @@ device_auto_detect: true
 ---
 
 ## Information
+
 EG-PM2 / EG-PMS2 is a power outlet strip with advanced power management features. It is possible to individually switch 4 sockets on or off manually via your PC, by timer schedule, or by programmable special events (eg: switch on my scanner whenever I start Photoshop, or have my printer switched on only when I really print)
 
 [More information ...](https://energenie.com/item.aspx?id=7556)
@@ -39,6 +40,5 @@ sudo ldconfig
 3. Restart TerrariumPI service ([FAQ]({% link _faq/systemd.md %}#restart))
 
 The needed permissions to connect to the device through USB are already set.
-
 
 {% include_relative _relay_detail.md %}

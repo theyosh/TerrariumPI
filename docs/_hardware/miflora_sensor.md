@@ -15,9 +15,11 @@ device_url: https://gadget-freakz.com/product/xiaomi-mi-flora-plant-sensor/
 ---
 
 ## Information
+
 The Xiaomi Mi Flora Plant sensor is a perfect tool to test the soil conditions of fruits, flowers, vegetables and shrubs. So it is a very good device to be used by gardeners, vegetable and fruit growers, and all those who grow trees and grasses. When connected with Xiaomi Smart Home, you can even monitor the plant conditions from your phone screen. The Xiaomi Mi Flora Plant sensor has a high sensor accuracy and easy operation so you can take good care of your plants, fruits and flowers.
 
-The main Features of the Xiaomi Mi Flora Plant sensor are:
+### Features
+
 - pH tester can measure different soil.
 - Light monitor measuring range is 0 – 100000 lm and the measuring accuracy is 100 lm.
 - It can measure different soil conditions: Moisture / light / pH / humidity / temperature / nutrient

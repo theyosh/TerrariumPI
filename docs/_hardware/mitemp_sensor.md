@@ -15,9 +15,11 @@ device_url: https://www.plantcaretools.com/en/product/bluetooth-temperature-humi
 ---
 
 ## Information
+
 This Bluetooth Temperature Humidity Sensor is a smart sensor with Bluetooth connectivity by using the free Mi Home App which continuously displays your home or greenhouse indoor environment (temperature and humidity).
 
-Features:
+### Features
+
 - Compact design.
 - Constantly monitors and displays humidity (air moisture) in Celsius, temperature and battery life.
 - Suitable for indoor environments.

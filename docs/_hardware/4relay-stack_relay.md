@@ -14,6 +14,7 @@ device_url : https://github.com/SequentMicrosystems/4relay-rpi
 ---
 
 ## Information
+
 Drive 8A/240VAC loads and read 3V to 240V, AC or DC, opto-isolated inputs for all your Home or Industrial Automation Projects
 
 Perfect add-on to your project when you have to control large number of heavy duty AC loads and/or you have to read wide range inputs. Stackable to 8 layers, the card can add up to 32 relays to each Raspberry Pi in a very compact form factor. In addition, you can read up to 32 opto-isolated inputs.

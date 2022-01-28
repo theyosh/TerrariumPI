@@ -15,5 +15,4 @@ device_url : https://www.kasasmart.com/
 
 ## Information
 
-
 {% include_relative _relay_detail.md %}

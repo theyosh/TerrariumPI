@@ -15,6 +15,7 @@ device_url: https://en.wikipedia.org/wiki/HTTP_Live_Streaming
 ---
 
 ## Information
+
 If you have already a live stream running which is of the format [HLS](https://en.wikipedia.org/wiki/HTTP_Live_Streaming), you can use that as a webcam source. Just enter the full url to the m3u8 master playlist.
 
 **Multi bitrate streams are not supported at the moment.**

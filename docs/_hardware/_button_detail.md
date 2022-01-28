@@ -1,6 +1,7 @@
 {% if page.device_url %}
 [More information ...]({{ page.device_url }})
 {% endif %}
+
 ## Setup
 
 In order to use the **{{ page.device_title | default: page.title }}** use the following settings:
@@ -14,7 +15,9 @@ Address
 : {{ page.device_address }}
 
 {% if page.calibration %}
+
 ### Calibration
+
 This is only available for light sensors.
 
 Capacitor value in µF

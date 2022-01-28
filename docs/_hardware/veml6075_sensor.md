@@ -14,13 +14,15 @@ device_url: https://pimylifeup.com/raspberry-pi-uv-sensor-veml6075/
 ---
 
 ## Information
+
 This is a UV sensor module based on Vishay VEML6075 sensor, adopting individual UVA and UVB channel solution with 16-bit resolution. It can convert solar UV light intensity to digital data to provide an accurate measure of the signal strength.
 
 VEML6075 UV sensor can give a reliable performance of UV radiation measurement under long time solar UV exposure. Furthermore, the sensor provides excellent temperature compensation capability within -40℃ to +85℃. VEML6075 features, low power consumption, and its minimum power can be as low as 800nA in shut-down mode. The operating voltage of the sensor ranges from 3.3V to 5V. It adopts IIC protocol, which can work well with any micro-controller that supports IIC.
 
 Compatible with Arduino and Raspberry Pi, this sensor can be used in portable electronic product, wearable device, weather station, flame detecting and so on.
 
-Specification
+### Features
+
 - Operating Voltage: 3.3V~5V
 - Operating Current: 700uA
 - Shut-down Mode: 10uA

@@ -17,5 +17,5 @@ Then go to the root folder of TerrariumPI and run: `bundle install`. This will i
 After Jekyll is installed, go to the `docs` folder and run the command `jekyll serve` to open the website at: http://localhost:4000/TerrariumPI/
 
 ### Bug
-Somehow auto reloading does not work, It produces an error. So you have to manually stop and start again to see the changes.
 
+Somehow auto reloading does not work, It produces an error. So you have to manually stop and start again to see the changes.

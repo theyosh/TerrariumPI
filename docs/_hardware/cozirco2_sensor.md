@@ -14,6 +14,7 @@ device_url: https://www.gassensing.co.uk/products
 ---
 
 ## Information
+
 The ExplorIR®-W is a small footprint low power CO₂ sensor designed for applications where space is at a premium. The combination of small size, low power and high accuracy makes this sensor suitable for portable, battery powered personal safety equipment.
 
 The ExplorIR®-W has a very wide dynamic range and is capable of measuring CO₂ gas concentrations up to 100%, without compromising measurement accuracy or responsiveness.

@@ -15,9 +15,11 @@ device_url: https://www.adafruit.com/product/4881
 ---
 
 ## Information
+
 This Bluetooth Temperature Humidity Sensor is a smart sensor with Bluetooth connectivity by using a free app which continuously displays your home or greenhouse indoor environment (temperature and humidity).
 
-Features:
+### Features
+
 - Compact design.
 - Constantly monitors and displays humidity (air moisture), temperature in Celsius or Fahrenheit, and battery life.
 - Displays a happy face when conditions are right, and a displeased face when wrong.

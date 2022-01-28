@@ -12,23 +12,29 @@ image:
 Here you can find how you can setup various parts that works together as a single enclosure. You can even setup multiple enclosures. But make sure that relays and areas are not shared in multiple enclosures or areas.
 
 A simple rule to remember: *A relay can only be used once*.
+
 ## Login
+
 ![New relay form](/assets/img/Login.webp){: style="max-height: 100px" .right}
 After the installation, you need to setup TerrariumPI. In order to do that, login with a browser at http://[raspberry_pi]:8090 and click on the `Login` link on the left side menu. The default login should be **admin** / **password** ([FAQ]({% link _faq/login.md %}))
 
 ## Help
+
 On every form popup you have a small question mark <i class="far fa-question-circle" aria-hidden="true"></i> next to the form title. Click on it to get more information about the form fields.
 
 ## Required fields
+
 All fields with a red star (<span style="color:red;font-weight:bold">*</span>) are required to fill out. Some fields can be come required based on selected options.
 
 ## Settings
+
 ![Settings form](/assets/img/Settings.webp)
 _Settings form with four parts_
 
 The settings is split up in multiple parts. Each group contains settings that are related to each other.
 
 ### System
+
 In the system group you setup the minimal settings to get TerrariumPI running.
 
 Pi power usage
@@ -42,6 +48,7 @@ Port number
 
 Authentication mode
 : There are 3 authentication options.
+
 - Full authentication: For all actions you need to be logged in.
 - Only for changes: Only adding and updating needs authentication.
 - No authentication: No authentication at all. **Be very careful with this!**
@@ -58,8 +65,8 @@ Confirm new password
 Excluded ids
 : List of IDs that are excluded. If you mis a sensor or relay, remove it from this list, and it will be used again.
 
-
 ### Locale
+
 In the locale group you can setup your locales that are custom to.
 
 Language
@@ -83,8 +90,8 @@ Power price
 Water price
 :  Enter the price per L/Gallon.
 
-
 ### Gui
+
 In the Gui group you can tune the web interface.
 
 Title
@@ -109,9 +116,11 @@ All gauges on a single page
 : Add an extra menu option to show all the sensors on a single page.
 
 ### Cloud
+
 In the cloud group you can enter credentials for different cloud integrations
 
 #### Meross
+
 With the Meross cloud you can use all the relays and sensors that are connected to your account.
 
 Meross username
@@ -121,6 +130,7 @@ Meross password
 : The password to login to your Meross cloud account. [Encrypted]({% link _tabs/features.md %}#other-sensitive-data)
 
 ## Weather
+
 ![Weather source form](/assets/img/Weather_Settings.webp)
 _Popup form adding/updating the weather source_
 
@@ -129,11 +139,13 @@ With the weather data you can schedule your light system based on the **sun rise
 Other weather data is just for show. Does not have a function.
 
 ### Setup
+
 In order to use the weather system, you need to create a free account at [OpenWeatherMap](https://home.openweathermap.org/users/sign_up).
 
 The url format needs to be `https://api.openweathermap.org/data/2.5/weather?q=[City],[Country]&appid=[API_KEY]`. Do not add the `&metric=` part in the url.
 
 ## Relays
+
 ![Relay form](/assets/img/Add_Relay_Form.webp)
 _Popup form for adding and updating relays - Calibration is only available for dimmers_
 Adding and changing relays is done with the above relay form.
@@ -157,6 +169,7 @@ Current
 : The current state of the relay. Value 0 is off, 100 is full on, or a value between 0 - 100 (dimmer)
 
 ### Calibration
+
 This is only available for dimmers.
 
 Dimmer frequency in Hz
@@ -167,7 +180,9 @@ Max power in %
 
 Dimmer offset in %
 : An offset value that is reduced from the actual value. Default 0
+
 ## Sensors
+
 ![Sensor settings form](/assets/img/Sensor_Settings.webp)
 _Popup form adding/updating the sensors_
 Adding and changing sensors is done with the above sensor form.
@@ -203,10 +218,18 @@ Exclude average
 : Exclude this sensor from the average calculation and graphs on the dashboard.
 
 ### Calibration
+
 Offset
 : Enter a value to correct the output reading. This can be a positive or negative value.
 
+Minimum moist value
+: Only available for Chirp sensors. More information at [Chirp sensor]({% link _hardware/chirp_sensor.md %}#calibration)
+
+Maximum moist value
+: Only available for Chirp sensors. More information at [Chirp sensor]({% link _hardware/chirp_sensor.md %}#calibration)
+
 ## Doors / buttons
+
 ![Button form](/assets/img/Button_Settings.webp)
 _Popup form for adding and updating buttons - Calibration is only available for light sensors_
 Adding and changing buttons is done with the above button form.
@@ -224,12 +247,14 @@ Current
 : The current state of the button. Value 1 is active, value 0 is not active
 
 ### Calibration
+
 This is only available for light sensors.
 
 Capacitor value in µF
 : Enter the value of the capacitor
 
 ## Webcams
+
 ![Webcam form](/assets/img/Webcam_Settings.webp)
 _Popup form for adding and updating webcams_
 
@@ -266,6 +291,7 @@ Flash
 : Select relays that act as a flasher. When updating the webcam image, these relays will be toggled on just before taking a picture.
 
 ### Motion detection
+
 This is only available when `motion` is selected at **Archiving**.
 
 Show motion boxes
@@ -281,12 +307,14 @@ Motion comparison frame
 : Select which frame to use for motion detection. Either the latest updated image (last frame), or the latest archived image (when there was motion).
 
 ### Markers
+
 ![Markers popup](/assets/img/MarkersModal.webp){: .right width="200" }
 It is possible to add markers on the webcam image to show realtime sensor information. Click on the <img src="../assets/img/Webcam_Marker.webp" title="Webcam markers" alt="Webcam markers" style="height: 20px; position: relative; left: 0px; display: inline" class="ml-xl-3">icon in the preview window to drop a marker and select the sensors you want to show.
 
 In order to update or delete an existing marker, double click the marker.
 
 ## Playlists
+
 ![Playlist form](/assets/img/Playlist_Settings.webp)
 _Popup form for adding and updating playlists_
 Adding and changing playlists is done with the above button form.
@@ -307,6 +335,7 @@ Audio files
 : List of audio files. The order of adding is order or playing.
 
 ## Enclosures
+
 ![Enclosure form](/assets/img/Enclosure_Settings.webp)
 _Popup form for adding and updating enclosures_
 Adding and changing enclosures is done with the above button form.
@@ -327,6 +356,7 @@ Webcams
 : One or more webcams that are used in this enclosure. Webcams selected here can use the `archive light state`  and `archive door state` option at the [webcam settings](#webcams).
 
 ## Areas
+
 Adding and changing areas is done here. But as areas have a but more functionality, they are discussed per area type. The most important is that there is an area configured as `main lights` as this will influence the timing of other areas if they depend on the timing of the main lights. Without this, the system will not work.
 
 Also make sure that the light area has relays configured at the `Day settings` tab.
@@ -345,6 +375,7 @@ Name
 : The name of the area. Use an easy to remember name.
 
 ### Main Lights
+
 ![Area form](/assets/img/Area_Settings.webp)
 _Popup form for adding and updating areas_
 
@@ -387,6 +418,7 @@ Relays
 **Simulate sun rise/set**: When you select a dimmer and a normal relay, you could setup the dimmer to go on in 30 minutes, and delay the normal relay for 30 minutes, so that when the dimmer is at full power, the other light is toggled on. This will give a nice sun rise effect.
 
 ### Other areas
+
 There are multiple types of areas that can be used. Almost all types have the same logic, but the type of area is of influence on the used sensors. In the screenshot below you see the `Humidity` type area. But for `CO2`, `Conductivity`, `Cooling`, `Heating`, `Moisture`, `Fertility`, `PH` this is all the same. Only `audio` and `watertank` are special areas which have their own setup.
 
 The system uses the sensors alarm values to determine the right conditions you want. For example, using an area with a heater relay and temperature sensors will try to get the temperature in the middle of the minimum and maximum sensor values. Either by using a dimmer or by just toggling on and off. By changing the sensor alarm values, you can raise or lower the wanted temperature. This is the basic logic we use.
@@ -442,6 +474,7 @@ Relays
 : Select the relays that you want to use for this area. Make sure a relay is **only used once**!
 
 #### Variation
+
 With the variation tab, you can fine tune the alarms of the sensors during the day so that you can have for example different temperatures during the day. Or you can even mirror a remote climate setting the **source** on `Using current weather`.
 
 ![Area Variation tab](/assets/img/Area_Variation.webp)
@@ -463,6 +496,7 @@ Offset
 : This is only available with the source option `Using current weather`, `Use json source` and `Use script`. This is a value that will be added to the wanted current value.
 
 ### Audio
+
 ![Area Audio form](/assets/img/Area_Audio.webp)
 _Popup form for adding and updating audio areas_
 
@@ -476,6 +510,7 @@ Playlists
 : Select all the playlists you want to use. Make sure that the playlist with repeat option is selected as last.
 
 ### Water tank
+
 ![Area Water tank form](/assets/img/Area_Watertank.webp)
 _Popup form for adding and updating water tank areas_
 

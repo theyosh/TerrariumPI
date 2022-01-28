@@ -27,7 +27,8 @@ Download and instal the [Raspberry Pi Imager](https://www.raspberrypi.org/softwa
 When the SD card is written, you can read/write the 'boot' partition. Add a file called 'ssh' to it. This will [enable SSH on a headless Raspberry Pi (add file to SD card on another machine)](https://www.raspberrypi.org/documentation/remote-access/ssh/).
 
 And if you want to use WiFi also add a small file called `wpa_supplicant.conf` in the 'boot' partition. The contents of the file should be something like this:
-```
+
+```console
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=[Your 2 letter country code]
@@ -37,6 +38,7 @@ network={
         psk="[Your WiFi password]"
 }
 ```
+
 And that should make your Raspberry PI connect to the WiFi network first time it boots.
 
 Put your SD card in the Pi and power it up.
@@ -52,6 +54,7 @@ ssh pi@[raspberrypi]
 **Disclaimer:** If you have TerrariumPI 3 running on this Raspberry PI, then you can [read here](#backup) how to stop and make a backup.
 
 ## Docker
+
 ![Docker Logo](/assets/img/DockerLogo.webp){: .right width="200" }
 As from version 4.1 there is a [Docker image](https://hub.docker.com/r/theyosh/terrariumpi) that can be used to run TerrariumPI. When you run it in Docker, you can skip the rest of the page. Only the migration could be followed if you want to restore your current relay history.
 
@@ -93,14 +96,15 @@ services:
       ENABLE_CO2_SENSORS: "true"
       AUTO_REBOOT: "true"
 ```
-The only real setting is the `TZ` value. Make sure it is set to your local/home time zone. [A valid list can be found here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
+The only real setting is the `TZ` value. Make sure it is set to your local/home time zone. [A valid list can be found here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
 We run the container with **[privileged](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)** enabled. This is less secure, but needed in order to be able to handle all the hardware that is connected to the Raspberry PI.
 
 then you can run `docker-compose up -d` to start the docker image. It could be that it needs a reboot. After that, you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
 ## Manual
+
 ### Prerequisites
 
 First we need to install Git. This is used to download the software from Github.com
@@ -153,8 +157,8 @@ So make sure you have **stopped** the old TerrariumPI. And rename the folder `Te
 2. Make a backup of existing version. `mv /home/pi/TerrariumPI /home/pi/TerrariumPI.old`
 
 ## First setup
-Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need to set it up as you want. So that means adding at least all the relays you want to use/migrate. When that is done, shutdown TerrariumPI 4 and continue with the last migrations step.
 
+Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need to set it up as you want. So that means adding at least all the relays you want to use/migrate. When that is done, shutdown TerrariumPI 4 and continue with the last migrations step.
 
 ## Migrate
 
@@ -177,7 +181,7 @@ Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need
 
 7. Answer the questions asked by the script. This should match your old and new relays, in order to copy the historical data.
 
-```
+```console
 Found 7 out of 8 are found. Below is a summary of the founded relays that can converted.
 
 Relay 'Waterton verwarming' of type 'ftdi' at address '4,A500WMST'. Old ID: 7506c0e9ca0288be148b9617d959e7a6 => New ID: 91e8236ba878587c218b5a9a941a1d48

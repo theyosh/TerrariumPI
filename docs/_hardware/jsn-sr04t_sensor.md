@@ -14,6 +14,7 @@ device_url: https://raspberrypi.stackexchange.com/a/81793
 ---
 
 ## Information
+
 This water proof ultrasonic sensor has good performance with almost the same usage as the HC-S04 module.
 
 Features

@@ -14,9 +14,11 @@ device_url: http://www.pibits.net/code/raspberry-pi-si7021-sensor-example.php
 ---
 
 ## Information
+
 The  Si7021  I2C Humidity  and  Temperature  Sensor  is  a  monolithic  CMOS  IC integrating   humidity   and   temperature   sensor   elements,   an   analog-to-digital converter, signal processing, calibration data, and an I2C Interface. The Si7021 offers an accurate, low-power, factory-calibrated digital solution ideal for measuring humidity, dew-point, and temperature, in applications ranging from HVAC/R and asset tracking to industrial and consumer platforms.
 
-Features
+### Features
+
 - Precision Relative Humidity Sensor ± 3% RH (max), 0–80% RH
 - High Accuracy Temperature Sensor ±0.4 °C (max), –10 to 85 °C
 - 0 to 100% RH operating range

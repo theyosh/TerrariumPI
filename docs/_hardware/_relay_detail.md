@@ -1,10 +1,13 @@
 {% if page.device_url %}
 [More information ...]({{ page.device_url }})
 {% endif %}
+
 ## Setup
 
 {% if page.device_auto_detect %}
+
 ### Auto detect
+
 This relay will be auto detected during startup or added by 'Scan relays' in the menu.
 {% endif %}
 
@@ -19,7 +22,9 @@ Address
 : {{ page.device_address }}
 
 {% if page.dimmer_frequency %}
+
 ### Calibration
+
 This is only available for dimmers.
 
 Dimmer frequency in Hz

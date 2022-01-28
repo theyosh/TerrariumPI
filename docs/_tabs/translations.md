@@ -10,6 +10,7 @@ image:
 ---
 
 ## Available languages
+
 The software is currently available in multiple languages.
 
 ![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/4-x-y-z/multi-auto.svg){: width="85%"}

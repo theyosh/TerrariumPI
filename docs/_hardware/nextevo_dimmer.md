@@ -14,6 +14,7 @@ device_url : https://www.tindie.com/products/nEXT_EVO1/universal-ac-mains-dimmer
 ---
 
 ## Information
+
 A MAINS Power Dimmer/Switch with integrated Phase detection and ZCD (Zero Crossing Detection) processing. It is Triac driven and intended to be used for lighting control. Tested and working ok with standard lightbulb (incandescent lamps or the new Halogen ECO). For LED or fluorescent lights you need to check first that they are dimmable units.
 
 Designed and tested for EU MAINS 240V/50Hz but working also OK on US 110/60hz.

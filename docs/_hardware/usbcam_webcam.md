@@ -10,10 +10,10 @@ image:
 
 device_type: Still picture
 device_address: "Enter the device path<br />Ex: `/dev/video0`"
-
 ---
 
 ## Information
+
 Use any USB webcam that is supported by Linux.
 
 {% include_relative _webcam_detail.md %}

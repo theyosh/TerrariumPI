@@ -14,6 +14,7 @@ device_url: http://arduinolearning.com/amp/code/sht21-humidity-and-temperature-s
 ---
 
 ## Information
+
 The SHT21 is a low cost humidity and temperature sensor. Its an I2C device so again is very simple to connect to any arduino
 
 The digital SHT2x humidity sensor series is used in high volumes in a wide variety of applications and has today become the de facto industry standard. The SHT2x series consists of a low-cost version with the SHT20 humidity sensor, a standard version with the SHT21 humidity sensor, and a high-end version with the SHT25 humidity sensor. The open cavity mold package – which encapsulates the complete chip except for the humidity sensor area – protects the capacitive humidity sensor against external impact and facilitates excellent long-term stability.
