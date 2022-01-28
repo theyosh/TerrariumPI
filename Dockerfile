@@ -3,10 +3,12 @@
 
 # build sispmctl 4.9
 FROM gcc:9.4.0-buster as sispmctl_builder
+ENV SISPMCTL_VERSION="4.9"
+WORKDIR /sispmctl
 RUN apt-get update && apt-get install -y --no-install-recommends libusb-dev && \
-  wget https://sourceforge.net/projects/sispmctl/files/sispmctl/sispmctl-4.9/sispmctl-4.9.tar.gz/download -O sispmctl-4.9.tar.gz && \
-  tar zxvf sispmctl-4.9.tar.gz && \
-  cd sispmctl-4.9/ && \
+  wget https://sourceforge.net/projects/sispmctl/files/sispmctl/sispmctl-${SISPMCTL_VERSION}/sispmctl-${SISPMCTL_VERSION}.tar.gz/download -O sispmctl-${SISPMCTL_VERSION}.tar.gz && \
+  tar zxvf sispmctl-${SISPMCTL_VERSION}.tar.gz && \
+  cd sispmctl-${SISPMCTL_VERSION}/ && \
   ./configure && \
   make && \
   make install
@@ -32,7 +34,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 ENV CFLAGS=-fcommon
 # cryptography - https://stackoverflow.com/questions/66118337/how-to-get-rid-of-cryptography-build-error
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
-RUN pip install --upgrade pip && pip install wheel
+RUN pip install --upgrade pip==21.3.1 && pip install wheel==0.37.1
 COPY requirements.txt .
 # requirements are slightly different for docker
 RUN sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.txt && \
@@ -42,26 +44,26 @@ RUN sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.tx
   find /opt/venv -type d -name  "__pycache__" -exec rm -r {} +
 WORKDIR /TerrariumPI
 # we previously copied .git and then did git submodule init and submodule update, however as .git dir changes all the time it invalidates docker cache
-RUN mkdir 3rdparty && \
-  git clone https://github.com/SequentMicrosystems/4relay-rpi.git && git -C "3rdparty/4relay-rpi" checkout "09a44bfbde18791750534ba204e1dfc7506a7eb2" && \
-  git clone https://github.com/PiSupply/Bright-Pi.git && git -C "3rdparty/Bright-Pi" checkout "eccfbbb1221c4966cd337126bedcbb8bb03c3c71" && \
-  git clone https://github.com/ageir/chirp-rpi.git && git -C "3rdparty/chirp-rpi" checkout "6e411d6c382d5e43ee1fd269ec4de6a316893407" && \
-  git clone https://github.com/perryflynn/energenie-connect0r.git && git -C "3rdparty/energenie-connect0r" checkout "12ca24ab9d60cf4ede331de9a6817c3d64227ea0" && \
-  git clone https://github.com/SequentMicrosystems/relay8-rpi.git && git -C "3rdparty/relay8-rpi" checkout "5083730e415ee91fa4785e228f02a36e8bbaa717" && \
-  git clone https://github.com/SequentMicrosystems/4relind-rpi.git && git -C "3rdparty/4relind-rpi" checkout "6b40c531578a939e8f65a0d6714444ca03356d91" && \
-  git clone https://github.com/SequentMicrosystems/8relind-rpi.git && git -C "3rdparty/8relind-rpi" checkout "1c2d1856e0d98b96b67745da2e922ca7e1f50ee0" && \
-  find 3rdparty -type d -name  ".git" -exec rm -r {} +
-RUN mkdir -p static/assets/plugins && \
-  git clone https://github.com/fancyapps/fancybox.git "fancybox" && git -C "static/assets/plugins/fancybox" checkout "eea1345256ded510ed9fae1e415aec2a7bb9620d" && \
-  git clone https://github.com/mapshakers/leaflet-icon-pulse.git "static/assets/plugins/leaflet.icon-pulse" && git -C "leaflet.icon-pulse" checkout "f57da1e45f6d00f340f429a75a39324cad141061" && \
-  git clone https://github.com/ebrelsford/Leaflet.loading.git "static/assets/plugins/leaflet.loading" && git -C "leaflet.loading" checkout "7b22aff19a5a8fa9534fb2dcd48e06c6dc84b2ed" && \
-  find static/assets/plugins -type d -name  ".git" -exec rm -r {} +
+RUN git clone https://github.com/SequentMicrosystems/4relay-rpi.git --depth 1 "3rdparty/4relay-rpi" && \
+  git clone https://github.com/PiSupply/Bright-Pi.git --depth 1 "3rdparty/Bright-Pi" && \
+  git clone https://github.com/ageir/chirp-rpi.git --depth 1 "3rdparty/chirp-rpi" && \
+  git clone https://github.com/perryflynn/energenie-connect0r.git --depth 1 "3rdparty/energenie-connect0r" && \
+  git clone https://github.com/SequentMicrosystems/relay8-rpi.git --depth 1 "3rdparty/relay8-rpi" && \
+  git clone https://github.com/SequentMicrosystems/4relind-rpi.git --depth 1 "3rdparty/4relind-rpi" && \
+  git clone https://github.com/SequentMicrosystems/8relind-rpi.git --depth 1 "3rdparty/8relind-rpi" && \
+  git clone https://github.com/fancyapps/fancybox.git --depth 1 "static/assets/plugins/fancybox" && \
+  git clone https://github.com/mapshakers/leaflet-icon-pulse.git --depth 1 "static/assets/plugins/leaflet.icon-pulse" && \
+  git clone https://github.com/ebrelsford/Leaflet.loading.git --depth 1 "static/assets/plugins/leaflet.loading" && \
+  rm -Rf 3rdparty/Bright-Pi/Documents && \
+  find . -type d -name ".git" -exec rm -r {} +
+
 # remove git and 3rdparty dir from code copy to help keep image smaller
 # 3rdparty is coming from the builder image
+
 FROM python:3.8-buster as sourcecode
 WORKDIR /TerrariumPI
 COPY . .
-RUN rm -rf .git 3rdparty
+RUN rm -Rf .git 3rdparty
 
 # actual image
 FROM python:3.8-slim-buster
