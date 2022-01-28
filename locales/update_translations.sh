@@ -6,9 +6,9 @@ cd ..
 pygettext -k N_ -v -a -n -o locales/terrariumpi.pot ${FILES}
 
 for translation in $(grep -r -h -o -e "N\?_('[^)]\+')" ${FILES} | sort | uniq | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" ); do
-  translation=${translation:3:-2}
-  translation=${translation//\%20/ }
-  if [ ${translation:0:1} = "'" ]; then
+  translation="${translation:3:-2}"
+  translation="${translation//\%20/ }"
+  if [ "${translation:0:1}" = "'" ]; then
     translation=${translation:1}
   fi
 
@@ -23,7 +23,7 @@ for translation in $(grep -r -h -o -e "N\?_('[^)]\+')" ${FILES} | sort | uniq | 
     done
     IFS=' '
 
-    echo ${locations} >> locales/terrariumpi.pot
+    echo "${locations}" >> locales/terrariumpi.pot
     echo "msgid \"${translation}\"" >> locales/terrariumpi.pot
     echo "msgstr \"\"" >> locales/terrariumpi.pot
     echo "" >> locales/terrariumpi.pot
