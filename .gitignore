@@ -22,3 +22,4 @@ screenlog.*
 .jekyll-cache
 Gemfile.lock
 docs/_site/
+node_modules

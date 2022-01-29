@@ -186,6 +186,12 @@ class terrariumWebserver(object):
       return template(filename,template_lookup=[root])
 
     # Load the static file
+    if 'gzip' in request.headers.get('Accept-Encoding'):
+      staticfile = static_file(filename + '.gz', root=root)
+      if not isinstance(staticfile, HTTPError):
+        self.__add_caching_headers(staticfile,f'{root}/{filename}')
+        return staticfile
+
     staticfile = static_file(filename, root=root)
     if isinstance(staticfile,HTTPError):
       # File does not exists, so just return the error
