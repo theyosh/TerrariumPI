@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2022-01-28 14:29+CET\n"
-"PO-Revision-Date: 2022-01-16 23:01+0000\n"
+"PO-Revision-Date: 2022-01-31 10:57+0000\n"
 "Last-Translator: kahuwi14 <karsten@wingen.net>\n"
-"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/de/>\n"
+"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -561,11 +561,11 @@ msgstr "Datei auswählen"
 
 #: views/buttons.html:2 views/includes/sidebar.html:140
 msgid "Buttons"
-msgstr "Tasten"
+msgstr "Taster"
 
 #: views/buttons.html:9
 msgid "No buttons"
-msgstr "Keine Tasten"
+msgstr "Keine Taster"
 
 #: views/buttons.html:12
 msgid "Add new button"
@@ -2309,11 +2309,11 @@ msgstr "Türstatus zum Aufnehmen eines Archivbildes."
 
 #: views/modals/webcam.html:171
 msgid "Flash"
-msgstr "Blinkt"
+msgstr "Blitzlicht"
 
 #: views/modals/webcam.html:177
 msgid "Select a relay that will act as a flasher."
-msgstr "Wählen Sie ein Relais aus, das als Blitzlicht fungiert."
+msgstr "Wählen Sie das Relais aus, das das Blitzlicht steuert."
 
 #: views/modals/webcam.html:185
 msgid "Show motion boxes"
