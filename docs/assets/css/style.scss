@@ -35,3 +35,9 @@ ul.jekyllcodex_accordion li label::before {content: "+"; font-weight: normal; fo
 ul.jekyllcodex_accordion li input:checked + label::before {transform: rotate(-45deg);}
 ul.jekyllcodex_accordion label h2 {margin: 0px !important;padding: 0px !important;}
 i.far.fa-circle {display: none;}
+
+table.timertable {width: 100%}
+table.timertable input {
+  width: 120px;
+  margin: 0px auto;
+}
