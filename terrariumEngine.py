@@ -600,6 +600,9 @@ class terrariumEngine(object):
           logger.info(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]} in {measurement_time+db_time:.2f} seconds.')
           logger.debug(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
 
+        # A small sleep between sensor measurement to get a bit more responsiveness of the system
+        sleep(0.1)
+
     for sensor_type, avg_data in self.sensor_averages.items():
       self.webserver.websocket_message('gauge_update', { 'id' : f'avg_{sensor_type}', 'value' : avg_data['value']})
 
@@ -731,8 +734,7 @@ class terrariumEngine(object):
         start = time.time()
         try:
           new_value = self.relays[relay.id].update()
-        except terrariumRelayUpdateException as ex:
-#          logger.error(f'Error updating relay {relay}:{ex}')
+        except terrariumRelayUpdateException:
           pass
 
         measurement_time = time.time() - start
@@ -756,6 +758,9 @@ class terrariumEngine(object):
 
         if change:
           self.notification.message(f'relay_change' , relay_data)
+
+        # A small sleep between sensor measurement to get a bit more responsiveness of the system
+        sleep(0.1)
 
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
@@ -853,6 +858,9 @@ class terrariumEngine(object):
 
         if change:
           self.notification.message(f'button_change' , button_data)
+
+        # A small sleep between sensor measurement to get a bit more responsiveness of the system
+        sleep(0.1)
 
   # -= NEW =-
   def button_action(self, button, state):
@@ -958,6 +966,9 @@ class terrariumEngine(object):
             self.webcams[webcam.id].archive(int(webcam.archive['state']))
 
         logger.info(f'Updated {webcam} in {time.time()-start:.2f} seconds.')
+
+        # A small sleep between sensor measurement to get a bit more responsiveness of the system
+        sleep(0.1)
 
   # -= NEW =-
   def __load_existing_enclosures(self):
