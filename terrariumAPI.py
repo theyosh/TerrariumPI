@@ -222,11 +222,33 @@ class terrariumAPI(object):
     area = self.area_detail(area)
     return self.sensor_history(list(area['setup']['sensors']))
 
+  def __area_relay_check(self, api_data):
+    update_ids = []
+    if api_data.get('id') is not None:
+      update_ids.append(api_data['id'])
+
+    new_relays = []
+    used_relays = []
+    for part in ['day','night','low','high']:
+      # Store relays from the post form data
+      if part in api_data['setup'] and 'relays' in api_data['setup'][part] and len(api_data['setup'][part]['relays']) > 0:
+        new_relays += api_data['setup'][part]['relays']
+
+      # Get all the used relays in other areas
+      for relay_data in orm.select(area.setup[part]['relays'] for area in Area if area.id not in update_ids and area.setup[part]['relays'] is not None and len(area.setup[part]['relays']) > 0):
+        used_relays += relay_data
+
+    duplicate = any(item in new_relays for item in used_relays)
+    if duplicate:
+      raise Exception('Duplicate relay usage. One or more relays are already used in other areas.')
+
   @orm.db_session
   def area_add(self):
     try:
       # Make sure the enclosure does exists
       Enclosure[request.json['enclosure']]
+
+      self.__area_relay_check(request.json)
 
       new_area = self.webserver.engine.add(terrariumArea(None, self.webserver.engine.enclosures[request.json['enclosure']], request.json['type'], request.json['name'], request.json['mode'], request.json['setup']))
       request.json['id'] = new_area.id
@@ -243,6 +265,9 @@ class terrariumAPI(object):
   def area_update(self, area):
     try:
       area = Area[area]
+
+      self.__area_relay_check(request.json)
+
       area.set(**request.json)
       orm.commit()
 
