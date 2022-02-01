@@ -7,7 +7,7 @@ from terrariumUtils import terrariumUtils
 import copy
 import re
 import sqlite3
-
+import time
 
 DATABASE = 'data/terrariumpi.db'
 
@@ -62,7 +62,6 @@ def create_defaults(version):
     {'id' : 'all_gauges_on_single_page',  'value' : 'false'},
     {'id' : 'graph_smooth_value',         'value' : '0'},
     {'id' : 'auto_dark_mode',             'value' : '0'},
-
   ]
 
   for setting in setting_defaults:
@@ -74,17 +73,16 @@ def create_defaults(version):
       pass
 
 
-def recover(self):
-#    starttime = time.time()
+def recover():
+    starttime = time.time()
     # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
-    # Enable recovery status
- #   logger.warn('TerrariumPI Collecter recovery mode is starting! %s', (self.__recovery,))
-
     def progress(status, remaining, total):
-      print(f'Copied {total-remaining} of {total} pages...')
+      status = ((total-remaining) / total) * 100
+
+      print(f'Copied {total-remaining}({status:.2f}%) of {total} pages...')
 
     broken_db = sqlite3.connect(DATABASE)
-    new_db = sqlite3.connect(f'new_{DATABASE}')
+    new_db = sqlite3.connect(f'{DATABASE}.new')
 
     with new_db:
       broken_db.backup(new_db, pages=10, progress=progress)
@@ -94,54 +92,13 @@ def recover(self):
 
     # Delete broken db
     Path(DATABASE).unlink()
-    Path(f'new_{DATABASE}').rename(DATABASE)
+    Path(f'{DATABASE}.new').rename(DATABASE)
+
+    print(f'Recovery done in {time.time()-starttime:.2f} seconds')
 
     # Reinitialize the new database
-    self.init()
-
-
-
-
-
-    # db = sqlite3.connect(DATABASE)
-    # new_db = sqlite3.connect(f'new_{DATABASE}')
-    # lines = 0
-    # for line in db.iterdump():
-    #   lines += 1
-    #   new_db.executescript(line)
-
-    # db.close()
-    # new_db.close()
-
-    # # Delete broken db
-    # Path(DATABASE).unlink()
-    # Path(f'new_{DATABASE}').rename(DATABASE)
-
-    # # Reinitialize the new database
-    # self.init()
-
-
-
-
-
-
-#    db = sqlite3.connect(DATABASE)
-
-#     os.remove(DATABASE)
-#     logger.warn('TerrariumPI Collecter recovery mode deleted faulty database from disk %s', (terrariumCollector.DATABASE,))
-
-#     # Reconnect will recreate the db
-#     logger.warn('TerrariumPI Collecter recovery mode starts reconnecting database to create a new clean database at %s', (terrariumCollector.DATABASE,))
-#     self.__connect()
-#     self.__create_database_structure()
-#     cur = self.db.cursor()
-#     # Load the SQL data back to db
-#     cur.executescript(sqldump)
-#     logger.warn('TerrariumPI Collecter recovery mode restored the old data in a new database. %s', (terrariumCollector.DATABASE,))
-
-#     # Return to normal mode
-#     self.__recovery = False
-#     logger.warn('TerrariumPI Collecter recovery mode is finished in %s seconds!', (time.time()-starttime,))
+    # init(version)
+    return True
 
 class Area(db.Entity):
 
@@ -157,7 +114,7 @@ class Area(db.Entity):
   state     = orm.Optional(orm.Json)
 
   def __repr__(self):
-    return f'Area {self.type} {self.name} in {self.mode} modus, part of {self.enclosure}'
+    return f'Area {self.type} {self.name} in {self.mode} mode, part of {self.enclosure}'
 
 class Audiofile(db.Entity):
 
