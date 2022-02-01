@@ -158,11 +158,12 @@ class terrariumArea(object):
       if begin >= end:
         end += datetime.timedelta(hours=24)
 
-      if now < begin:
-        begin -= datetime.timedelta(hours=24)
-        end   -= datetime.timedelta(hours=24)
+      # TODO: TESTING is this still needed.... we should not go back in time....
+      # if now < begin:
+      #   begin -= datetime.timedelta(hours=24)
+      #   end   -= datetime.timedelta(hours=24)
 
-      elif now > end:
+      if now > end:
         begin += datetime.timedelta(hours=24)
         end   += datetime.timedelta(hours=24)
 
@@ -180,7 +181,7 @@ class terrariumArea(object):
           periods.append((int(begin.timestamp()), int((begin + datetime.timedelta(seconds=on_period)).timestamp())))
           duration += periods[-1][1] - periods[-1][0]
 
-          # Increate the start time with the on and off duration for the next round
+          # Increase the start time with the on and off duration for the next round
           begin += datetime.timedelta(seconds=on_period + off_period)
 
       data = {
@@ -191,6 +192,7 @@ class terrariumArea(object):
 
     timetable = {}
     if 'main_lights' == self.mode:
+      # We copy the timetable from the area with the toggle 'main lights' on. We follow that area its timetable
       main_lights = self.enclosure.main_lights
       if main_lights is not None:
         for period in self.PERIODS:
@@ -206,15 +208,26 @@ class terrariumArea(object):
       return True
 
     if 'weather' == self.mode or 'weather_inverse' == self.mode:
-      sunrise = copy.copy(self.enclosure.weather.sunrise if 'weather' == self.mode else self.enclosure.weather.sunset - datetime.timedelta(hours=24))
-      sunset  = copy.copy(self.enclosure.weather.sunset  if 'weather' == self.mode else self.enclosure.weather.sunrise)
 
+      sunrise = self.enclosure.weather.sunrise if 'weather' == self.mode else self.enclosure.weather.sunset - datetime.timedelta(hours=24)
+      sunset  = self.enclosure.weather.sunset  if 'weather' == self.mode else self.enclosure.weather.sunrise
+
+      next_sunrise = self.enclosure.weather.next_sunrise if 'weather' == self.mode else self.enclosure.weather.next_sunset - datetime.timedelta(hours=24)
+      next_sunset  = self.enclosure.weather.next_sunset  if 'weather' == self.mode else self.enclosure.weather.next_sunrise
+
+      now = datetime.datetime.now()
       max_hours = self.setup.get('max_day_hours',0.0)
       if max_hours != 0 and (sunset - sunrise) > datetime.timedelta(hours=max_hours):
         # On period to long, so reduce the on period by shifting the sunrise and sunset times closer to each other
         seconds_difference = ((sunset - sunrise) - datetime.timedelta(hours=max_hours)) / 2
         sunrise += seconds_difference
         sunset  -= seconds_difference
+
+      if max_hours != 0 and (next_sunset - next_sunrise) > datetime.timedelta(hours=max_hours):
+        # On period to long, so reduce the on period by shifting the sunrise and sunset times closer to each other
+        seconds_difference = ((next_sunset - next_sunrise) - datetime.timedelta(hours=max_hours)) / 2
+        next_sunrise += seconds_difference
+        next_sunset  -= seconds_difference
 
       min_hours = self.setup.get('min_day_hours',0.0)
       if min_hours != 0 and (sunset - sunrise) < datetime.timedelta(hours=min_hours):
@@ -223,14 +236,31 @@ class terrariumArea(object):
         sunrise -= seconds_difference
         sunset  += seconds_difference
 
+      if min_hours != 0 and (next_sunset - next_sunrise) < datetime.timedelta(hours=min_hours):
+        # On period to short, so extend the on period by shifting the sunrise and sunset times away from to each other
+        seconds_difference = (datetime.timedelta(hours=min_hours) - (next_sunset - next_sunrise)) / 2
+        next_sunrise -= seconds_difference
+        next_sunset  += seconds_difference
+
       shift_hours = self.setup.get('shift_day_hours',0.0)
       if shift_hours != 0:
         # Shift the times back or forth...
         sunrise += datetime.timedelta(hours=shift_hours)
         sunset  += datetime.timedelta(hours=shift_hours)
 
-      timetable['day']   = make_time_table(sunrise, sunset)
-      timetable['night'] = make_time_table(sunset, sunrise)
+        next_sunrise += datetime.timedelta(hours=shift_hours)
+        next_sunset  += datetime.timedelta(hours=shift_hours)
+
+      if datetime.datetime.now() < sunset:
+        timetable['day'] = make_time_table(sunrise, sunset)
+      else:
+        timetable['day'] = make_time_table(next_sunrise, next_sunset)
+
+      timetable['night'] = make_time_table(sunset, next_sunrise)
+
+      for period in timetable:
+        startTime = datetime.datetime.fromtimestamp(timetable[period]['periods'][0][0])
+        endTime = datetime.datetime.fromtimestamp(timetable[period]['periods'][0][1])
 
     elif 'timer' == self.mode:
       for period in self.PERIODS:
@@ -326,16 +356,16 @@ class terrariumArea(object):
 
       variation_data = []
 
-    for varation in variation_data:
+    for variation in variation_data:
       periods = len(self.state['variation']['periods'])
 
-      if 'at' == varation.get('when'):
+      if 'at' == variation.get('when'):
         # Format datetime object to a time object
 
         # TODO: Need to check if this will interfear with utc timestamps from history...
-        period_timestamp = datetime.datetime.fromtimestamp(int(varation.get('period'))).strftime('%H:%M')
+        period_timestamp = datetime.datetime.fromtimestamp(int(variation.get('period'))).strftime('%H:%M')
 
-      elif 'after' == varation.get('when'):
+      elif 'after' == variation.get('when'):
         # !! UNTESTED !!
         if periods == 0:
           # We need main lights on starting time....
@@ -344,19 +374,19 @@ class terrariumArea(object):
         else:
           # We need the previous period start time and adding the 'after' period duration
           period_timestamp = datetime.time.fromisoformat(self.state['variation']['periods'][periods-1]['start'])
-          period_timestamp = datetime.datetime.now().replace(hour=period_timestamp.hour, minute=period_timestamp.minute) + datetime.timeldeta(minute=int(varation.get('period')))
+          period_timestamp = datetime.datetime.now().replace(hour=period_timestamp.hour, minute=period_timestamp.minute) + datetime.timeldeta(minute=int(variation.get('period')))
           period_timestamp = period_timestamp.strftime('%H:%M')
 
       if periods > 0:
         # We have at least 1 item so we need to update the previous entry with the new end time and value
         self.state['variation']['periods'][periods-1]['end']       = period_timestamp
-        self.state['variation']['periods'][periods-1]['end_value'] = str(varation.get('value'))
+        self.state['variation']['periods'][periods-1]['end_value'] = str(variation.get('value'))
 
       self.state['variation']['periods'].append({
         'start'       : period_timestamp,
         'end'         : '23:59',    # By default, we stop at the end of the day
-        'start_value' : str(varation.get('value')),
-        'end_value'   : str(varation.get('value')), # This will be overwritten by the next value to get a nice change during the period
+        'start_value' : str(variation.get('value')),
+        'end_value'   : str(variation.get('value')), # This will be overwritten by the next value to get a nice change during the period
       })
 
   def _is_timer_time(self, period):
@@ -378,15 +408,17 @@ class terrariumArea(object):
       elif time_schedule[0] <= now < time_schedule[1]:
         return True
 
-    if 'weather' == self.mode and datetime.datetime.fromtimestamp(self.setup[period]['timetable'][-1][1]).day == datetime.datetime.now().day:
-      # The day is not over yet, so return False. Else a new timetable for tomorrow will be calculated, and give wrong effect... This will delay it
-      return False
+
+    # # TESTING TESTING THEYOSH
+    # if 'weather' == self.mode and datetime.datetime.fromtimestamp(self.setup[period]['timetable'][-1][1]).day == datetime.datetime.now().day:
+    #   # The day is not over yet, so return False. Else a new timetable for tomorrow will be calculated, and give wrong effect... This will delay it
+    #   #return False
+    #   logger.info('DEBUG: Weather night is starting... normally we return False here... but should be true when night relays in use')
 
     return None
 
   def _update_variation(self):
-    # !! This variation updates will interfeare with the 'day/night difference' setting !!
-
+    # !! This variation updates will interfere with the 'day/night difference' setting !!
     if ('variation' not in self.state) or (not self.state['variation']['active']):
       return
 
@@ -520,8 +552,10 @@ class terrariumArea(object):
     return True
 
   def update(self, read_only = False):
-    if 'disabled' == self.mode:
+    if not read_only and 'disabled' == self.mode:
       return self.state
+
+    start = time.time()
 
     light_state = ('on'     if self.enclosure.lights_on   else 'off')
     door_state  = ('closed' if self.enclosure.door_closed else 'open')
@@ -534,7 +568,7 @@ class terrariumArea(object):
         # logger.info('Updating variation data based on day/night change or modulo 400')
         self._setup_variation_data()
 
-    if 'sensors' in self.setup:
+    if 'sensors' in self.setup and len(self.setup['sensors']) > 0:
       # Change the sensor limits when changing from day to night and vs.
       if old_is_day != self.state['is_day'] and self.setup.get('day_night_difference', 0) != 0:
         difference = float(self.setup['day_night_difference']) * (-1.0 if self.state['is_day'] else 1.0)
@@ -598,9 +632,10 @@ class terrariumArea(object):
       if 'sensors' != self.mode:
         # Weather(inverse) and timer mode
         toggle_relay = self._is_timer_time(period)
+#        logger.info(f'Need to toggle the relays for {self} period {period}? {toggle_relay}')
 
         if toggle_relay is None:
-         # print(f'Re-calculate time table for {self}')
+          logger.info(f'Refreshing timer table for {self} period: {period}')
           self._time_table()
           toggle_relay = False
 
@@ -620,20 +655,20 @@ class terrariumArea(object):
       if toggle_relay is True and not self.relays_state(period): #self.state[period]['powered']:
 
         if not light_state_ok:
-          logger.info(f'Relays for {self} are not switched because the lights are {light_state} while {self.setup[period]["light_status"]} is requested.')
+          logger.info(f'Relays for {self} period {period} are not switched because the lights are {light_state} while {self.setup[period]["light_status"]} is requested.')
           continue
 
         if not door_state_ok:
-          logger.info(f'Relays for {self} are not switched because the door is {door_state} while {self.setup[period]["door_status"]} is requested.')
+          logger.info(f'Relays for {self} period {period} are not switched because the door is {door_state} while {self.setup[period]["door_status"]} is requested.')
           continue
 
         if depends_on_alarm:
-          logger.info(f'Relays for {self} are not switched because one of the depending areas are in an alarm state.')
+          logger.info(f'Relays for {self} period {period} are not switched because one of the depending areas are in an alarm state.')
           continue
 
         time_elapsed = int(datetime.datetime.now().timestamp()) - self.state[period]['last_powered_on']
         if time_elapsed <= self.setup[period]['settle_time']:
-          logger.info(f'Relays for {self} are not switched because we have to wait for {self.setup[period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[period]["settle_time"]} seconds.')
+          logger.info(f'Relays for {self} period {period} are not switched because we have to wait for {self.setup[period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[period]["settle_time"]} seconds.')
           continue
 
         other_period = list(self.setup.keys())
@@ -642,7 +677,7 @@ class terrariumArea(object):
           other_period = other_period[0]
           time_elapsed = int(datetime.datetime.now().timestamp()) - self.state[other_period]['last_powered_on']
           if time_elapsed <= self.setup[other_period]['settle_time']:
-            logger.info(f'Relays for {self} are not switched because of the other period {other_period} settle time. We have to wait for {self.setup[other_period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[other_period]["settle_time"]} seconds.')
+            logger.info(f'Relays for {self} period {period} are not switched because of the other period {other_period} settle time. We have to wait for {self.setup[other_period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[other_period]["settle_time"]} seconds.')
             continue
 
         if self.state[period]['alarm_count'] < self.setup[period]['alarm_threshold']:
@@ -668,6 +703,8 @@ class terrariumArea(object):
 
     self.state['powered'] = self._powered
     self.state['last_update'] = int(datetime.datetime.now().timestamp())
+
+    logger.info(f'Updated area {self} in {self.mode} mode at enclosure {self.enclosure.name} in {time.time()-start:.2f} seconds.')
     return self.state
 
   def current_value(self, sensors):
@@ -715,7 +752,7 @@ class terrariumArea(object):
     return all(relay_states)
 
   def relays_toggle(self, part, on):
-    logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
+    logger.info(f'Toggle the relays for area {self} part {part} to state {("on" if on else "off")}.')
 
     with orm.db_session():
       relays = orm.select(r.id for r in Relay if r.id in self.setup[part]['relays'] and not r.manual_mode)
@@ -811,6 +848,7 @@ class terrariumAreaLights(terrariumArea):
     if relay.id not in self.enclosure.relays:
       return
 
+#    logger.info(f'DEBUG: Toggle light of part: {part} relay: {relay}, to action: {action}')
     duration = 0
     delay = 0
 
@@ -823,6 +861,7 @@ class terrariumAreaLights(terrariumArea):
       print(ex)
 
     if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
+#      logger.info(f'DEBUG: Force off action to zero seconds..?')
       delay = 0
 
     if relay.is_dimmer:
@@ -838,7 +877,10 @@ class terrariumAreaLights(terrariumArea):
           logger.info(f'Stopping the dimmer {relay.name} from {old_state}% to {relay.OFF}% in {duration:.2f} seconds with a delay of {delay/60:.2f} minutes')
 
     else:
+
       action_ok = self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, delay=delay)
+#      logger.info(f'DEBUG: Toggle light of part: {part} relay: {relay}, to action: {action} -> success: {action_ok}')
+
       if action_ok:
         logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF} with a delay of {delay/60:.2f} minutes')
 
@@ -897,7 +939,7 @@ class terrariumAreaHeater(terrariumArea):
             self.__dimmers[relay.id].output_limits = (relay.OFF,relay.ON)
 
             dimmer_value = round(self.__dimmers[relay.id](sensor_values['current']))
-            logger.info(f'Updating the dimmer {relay} to value {dimmer_value}%. Current value {sensor_values["current"]}{self.enclosure.engine.units[sensor_values["unit"]]}, target of {sensor_average}{self.enclosure.engine.units[sensor_values["unit"]]}')
+            logger.info(f'Updating {relay} to value {dimmer_value}%. Current: {sensor_values["current"]:.2f}{self.enclosure.engine.units[sensor_values["unit"]]}, target: {sensor_average:.2f}{self.enclosure.engine.units[sensor_values["unit"]]}')
             self.enclosure.relays[relay.id].on(dimmer_value)
 
     self.state['powered'] = self._powered
@@ -1038,9 +1080,10 @@ class terrariumAreaAudio(terrariumArea):
       other_period.remove(period)
       other_period = other_period[0]
 
-      if other_period in self.setup:
+      if other_period in self.setup and self.state[other_period]['powered']:
         logger.info(f'Forcing to stop the player for area {self} period {other_period} due to period change.')
         self.setup[other_period]['player'].stop()
+        self.state[other_period]['powered'] = False
 
       self.setup[period]['player'].play()
 
@@ -1056,3 +1099,4 @@ class terrariumAreaAudio(terrariumArea):
         continue
 
       self.setup[period]['player'].stop()
+      self.state[period]['powered'] = False

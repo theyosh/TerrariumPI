@@ -70,8 +70,8 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
       else:
         logger.error(terrariumUtils.clean_log_line(f'Error loading online weather data! Please check your source address: {self.address}.'))
 
-  def __get_today_data(self):
-    now = int(time.time())
+  def __get_today_data(self, offset = 0):
+    now = int(time.time()) + offset
     for forecast in self._data['days']:
       if not now > forecast['set']:
         return forecast
@@ -116,6 +116,22 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   @property
   def sunset(self):
     data = self.__get_today_data()
+    if data is not None:
+      return datetime.utcfromtimestamp(data['set'])
+
+    return datetime.now().replace(hour=20, minute=0, second=0, microsecond=0)
+
+  @property
+  def next_sunrise(self):
+    data = self.__get_today_data(24 * 3600)
+    if data is not None:
+      return datetime.utcfromtimestamp(data['rise'])
+
+    return datetime.now().replace(hour=8, minute=0, second=0, microsecond=0)
+
+  @property
+  def next_sunset(self):
+    data = self.__get_today_data(24 * 3600)
     if data is not None:
       return datetime.utcfromtimestamp(data['set'])
 
