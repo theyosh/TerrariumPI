@@ -384,8 +384,8 @@ class terrariumI2CSensor(terrariumSensor):
     device  = (address[0], smbus2.SMBus(1 if len(address) == 1 or int(address[1]) < 1 else int(address[1])))
     return device
 
-  def __exit__(self):
-    print('I2C close with block')
+  # def __exit__(self):
+  #   print('I2C close with block')
 
 class terrariumI2CSensorMixin():
 
