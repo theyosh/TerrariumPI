@@ -215,7 +215,6 @@ class terrariumArea(object):
       next_sunrise = self.enclosure.weather.next_sunrise if 'weather' == self.mode else self.enclosure.weather.next_sunset - datetime.timedelta(hours=24)
       next_sunset  = self.enclosure.weather.next_sunset  if 'weather' == self.mode else self.enclosure.weather.next_sunrise
 
-      now = datetime.datetime.now()
       max_hours = self.setup.get('max_day_hours',0.0)
       if max_hours != 0 and (sunset - sunrise) > datetime.timedelta(hours=max_hours):
         # On period to long, so reduce the on period by shifting the sunrise and sunset times closer to each other
@@ -257,10 +256,6 @@ class terrariumArea(object):
         timetable['day'] = make_time_table(next_sunrise, next_sunset)
 
       timetable['night'] = make_time_table(sunset, next_sunrise)
-
-      for period in timetable:
-        startTime = datetime.datetime.fromtimestamp(timetable[period]['periods'][0][0])
-        endTime = datetime.datetime.fromtimestamp(timetable[period]['periods'][0][1])
 
     elif 'timer' == self.mode:
       for period in self.PERIODS:
