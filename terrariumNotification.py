@@ -544,7 +544,7 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
     }
     super().load_setup(setup_data)
 
-  def send_message(self, type, subject, message, data = {}, attachments = []):
+  def send_message(self, type, subject, message, data = None, attachments = []):
     if data is None:
       data = {}
 
@@ -552,6 +552,7 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
     data['subject'] = subject
     # Add a unique ID to make clients able to filter duplicate messages
     data['uuid']    = terrariumUtils.generate_uuid()
+    data['type']    = type
 
     if len(attachments) > 0:
       data['files'] = []
