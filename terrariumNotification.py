@@ -677,23 +677,22 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
     }
     super().load_setup(setup_data)
 
-  def send_message(self, type, subject, message, data = None, attachments = []):
-    data = {}
-    try:
-      data = json.loads(message.replace('False','false').replace('True','true').replace('None','null').replace('\'','"'))
-    except Exception as ex:
-      print(ex)
-      data['message'] = message
+  def send_message(self, type, subject, message, data = {}, attachments = []):
+    if data is None:
+      data = {}
 
+    data['message'] = message
     data['subject'] = subject
+    # Add a unique ID to make clients able to filter duplicate messages
+    data['uuid']    = terrariumUtils.generate_uuid()
 
     if len(attachments) > 0:
-      message['files'] = []
+      data['files'] = []
 
       for attachment in attachments:
         with open(attachment,'rb') as fp:
           attachment_data = fp.read()
-          message['files'].append({'name' : os.path.basename(attachment), 'data' : b64encode(attachment_data).decode('utf-8')})
+          data['files'].append({'name' : os.path.basename(attachment), 'data' : b64encode(attachment_data).decode('utf-8')})
 
     r = requests.post(self.setup['address'], json=data)
     if r.status_code != 200:
