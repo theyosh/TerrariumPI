@@ -31,7 +31,7 @@ class terrariumRPILiveWebcam(terrariumWebcam):
     cmd = f'{cmd} "{self.name}" {width} {height} {self.rotation} {self.awb} {Path(self._STORE_LOCATION).joinpath(self.id)}'
     cmd = shlex.split(cmd)
 
-    self.__process_id = subprocess.Popen(cmd,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL, start_new_session=True, shell=True)
+    self.__process_id = subprocess.Popen(cmd,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL, start_new_session=True)
 
   def stop(self):
     try:
