@@ -876,12 +876,12 @@ class terrariumEngine(object):
       button = Button[button]
       button.update(state,True)
 
+      # Update the button state on the button page
+      self.webserver.websocket_message('button' , {'id' : button.id, 'hardware' : button.hardware, 'value' : button.value})
+
       # Notification message
       button_data = button.to_dict()
       self.notification.message(f'button_action' , button_data)
-
-      # Update the button state on the button page
-      self.webserver.websocket_message('button' , {'id' : button.id, 'hardware' : button.hardware, 'value' : button.value})
 
       if button.enclosure:
         # This is called a door, because has a link with an enclosure
