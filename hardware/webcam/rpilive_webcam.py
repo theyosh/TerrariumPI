@@ -8,6 +8,8 @@ from io import BytesIO
 import subprocess
 import threading
 import shlex
+import os
+import signal
 
 from . import terrariumWebcam, terrariumWebcamLoadingException
 
@@ -29,13 +31,14 @@ class terrariumRPILiveWebcam(terrariumWebcam):
     cmd = f'{cmd} "{self.name}" {width} {height} {self.rotation} {self.awb} {Path(self._STORE_LOCATION).joinpath(self.id)}'
     cmd = shlex.split(cmd)
 
-    self.__process_id = subprocess.Popen(cmd,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+    self.__process_id = subprocess.Popen(cmd,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL, start_new_session=True)
 
   def stop(self):
     try:
-      self.__process_id.terminate()
+      os.killpg(os.getpgid(self.__process_id.pid), signal.SIGTERM)
     except Exception as ex:
-      pass
+      logger.debug(f'Live webcam is not running: {ex}')
+
     super().stop()
 
   def _load_hardware(self):
@@ -46,9 +49,9 @@ class terrariumRPILiveWebcam(terrariumWebcam):
       raise terrariumWebcamLoadingException(f'Please install ffmpeg.')
 
     try:
-      self.__process_id.terminate()
+      os.killpg(os.getpgid(self.__process_id.pid), signal.SIGTERM)
     except Exception as ex:
-      pass
+      logger.debug(f'Live webcam is not running: {ex}')
 
     threading.Thread(target=self.__run).start()
     # We need some time to wait so that the live stream has produced the first chunks

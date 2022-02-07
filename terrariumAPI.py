@@ -1421,7 +1421,6 @@ class terrariumAPI(object):
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Webcam with id {webcam} does not exists.')
     except Exception as ex:
-      print(ex)
       raise HTTPError(status=500, body=f'Error updating webcam {webcam}. {ex}')
 
   @orm.db_session
