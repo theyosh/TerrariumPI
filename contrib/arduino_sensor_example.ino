@@ -1,7 +1,11 @@
 #include <Wire.h>
 #include <MHZ.h>
 #include <SoftwareSerial.h>
-
+/****************************
+code for arduino pro mini.
+It is an example code to be able to integrate any sensor to TerrariumPi using arduino and i2c protocol together with the type of sensor "Arduino Sensor".
+The example code transforms 3 HC-SR04 sensors and one MHZ19C sensor to a block of bytes and sends them through i2c.
+****************************/
 /***************************
 A0 =>     | MH_Z19_RX
 A1 =>     | MH_Z19_TX
@@ -26,6 +30,7 @@ A7 =>     |
 #define SOUND_VELOCITY 0.034
 #define SDA_PIN 27
 #define SCL_PIN 28
+#define I2C_ADDRESS 0x08
 #define FLOAT 4
 #define INT 4
 #define SONAR_SENDOR FLOAT
@@ -76,7 +81,7 @@ void setup() {
   pinMode(sonar3.echoPin, INPUT);               // Sets the echoPin as an Input
   digitalWrite(sonar3.trigPin, LOW);
 
-  Wire.begin(0x08);                             // join i2c bus with address #8
+  Wire.begin(I2C_ADDRESS);                      // join i2c bus with address #8
   Wire.onRequest(RequestEvent);                 // register event
 
   Serial.println("Whait a evnet");
