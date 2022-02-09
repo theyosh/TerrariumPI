@@ -439,7 +439,7 @@ class terrariumWebcam(object):
       try:
         image = func_timeout(10, self._get_raw_data)
       except FunctionTimedOut:
-        logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
+        logger.error(f'Webcam {self} timed out after 10 seconds during updating...')
         image = False
         # TODO: Need to raise an error, for the retry action?
 
@@ -459,6 +459,7 @@ class terrariumWebcam(object):
           logger.error('Webcam {} has gone offline! Please check your webcam connections.'.format(self.name))
           self.__raw_image = self.__set_offline_image()
           self.__tile_image()
+          self.__raw_image.save(self.raw_image_path,'jpeg', quality=self.__JPEG_QUALITY)
 
         return False
 

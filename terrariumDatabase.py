@@ -572,5 +572,18 @@ class Webcam(db.Entity):
     #TODO: Property/setting ??
     return f'webcam/archive/{self.id}'
 
+  @property
+  def raw_image(self):
+    #TODO: Property/setting ??
+    return f'webcam/{self.id}/{self.id}_raw.jpg'
+
+  def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+    # Add extra fields
+    data['archive_path']  = self.archive_path
+    data['raw_image']  = self.raw_image
+
+    return data
+
   def __repr__(self):
     return f'{self.hardware} webcam \'{self.name}\' at address \'{self.address}\''
