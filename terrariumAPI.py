@@ -10,6 +10,7 @@ from pathlib import Path
 from ffprobe import FFProbe
 from hashlib import md5
 from uuid import uuid4
+from ansi2html import Ansi2HTMLConverter
 
 from terrariumArea         import terrariumArea
 from terrariumAudio        import terrariumAudio
@@ -1305,7 +1306,12 @@ class terrariumAPI(object):
 
   # System
   def system_status(self):
-    return self.webserver.engine.system_stats()
+    data = self.webserver.engine.system_stats()
+    conv = Ansi2HTMLConverter()
+    motd_text = Path('motd.sh').read_text().split('\n')
+    motd_text = motd_text[1:-1]
+    data['summary'] = conv.convert("\n".join(motd_text).replace('echo "','').replace('\`','`'), full=True)
+    return data
 
 
   # Weather
