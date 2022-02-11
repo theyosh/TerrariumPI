@@ -34,7 +34,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 ENV CFLAGS=-fcommon
 # cryptography - https://stackoverflow.com/questions/66118337/how-to-get-rid-of-cryptography-build-error
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
-RUN pip install --upgrade pip==22.0.2 && pip install wheel==0.37.1
+RUN pip install --upgrade pip==22.0.3 && pip install wheel==0.37.1
 COPY requirements.txt .
 # requirements are slightly different for docker
 RUN sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.txt && \
