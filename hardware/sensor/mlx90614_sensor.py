@@ -34,9 +34,9 @@ class terrariumMLX90614Sensor(terrariumI2CSensor):
       sensor = mlx90614.MLX90614(i2c_bus, address=self.device[0])
       data = {}
       if  self.__AMBIENT_MODE == mode:
-        data['temperature'] = sensor.get_ambient()
+        data['temperature'] = sensor.get_amb_temp()
       elif self.__OBJECT_MODE == mode:
         # Seems like get_object_2 give a very low negative value... does not seems the one we need
-        data['temperature'] = sensor.get_object_1()
+        data['temperature'] = sensor.get_obj_temp()
 
     return data
