@@ -9,7 +9,6 @@ import sqlite3
 from datetime import datetime, timedelta
 import time
 import math
-import subprocess
 import shutil
 import os
 import requests
@@ -26,6 +25,17 @@ def humansize(nbytes):
 class HistoryCleanup():
 
   def __init__(self, database = '../data/terrariumpi.db', period = timedelta(weeks = 60), batch = 1000):
+    """Construct the database history clean up object
+
+    Args:
+        database (str, optional): The database location path. Defaults to '../data/terrariumpi.db'.
+        period (_type_, optional): Period in weeks to keep. Defaults to 60 weeks.
+        batch (int, optional): Amount of records to delete at once. Defaults to 1000.
+    """
+    print(f'This script will cleanup your terrariumpi.db file. We will keep {period} of data from now. If you want to make a backup first, please enter no and make your backup.')
+
+    self.check_offline()
+
     self.database = database
     self.new_database = self.database.replace('.db','.new.db')
     self.period = period
@@ -40,13 +50,6 @@ class HistoryCleanup():
 
     self.db.row_factory = sqlite3.Row
     self.get_current_db_version()
-
-    self.new_db = sqlite3.connect(self.new_database)
-    with self.new_db as db:
-      cur = db.cursor()
-      cur.execute('PRAGMA journal_mode = MEMORY')
-      cur.execute('PRAGMA temp_store = MEMORY')
-      cur.execute('PRAGMA user_version = {}'.format(self.version))
 
   def get_current_db_version(self):
     self.version = 0
@@ -73,15 +76,13 @@ class HistoryCleanup():
 
   def get_total_records(self, table, period = None):
     with self.db as db:
-      sql = 'SELECT count(*) as total, MIN(timestamp) as begin, MAX(timestamp) as end FROM {}'.format(table)
-      filter = ()
+      sql = f'SELECT count(*) as total, MIN(timestamp) as begin, MAX(timestamp) as end FROM {table}'
+      parameters = ()
       if period is not None:
         sql += ' WHERE timestamp < ?'
-        filter = (self.timestamp_limit,)
+        parameters = (self.timestamp_limit,)
 
-      cur = db.cursor()
-
-      for row in cur.execute(sql, filter):
+      for row in db.execute(sql, parameters):
         return (row['total'],row['begin'],row['end'])
 
   def get_clean_up_records(self,table):
@@ -91,30 +92,15 @@ class HistoryCleanup():
     start = time.time()
     print('Start reclaming lost space. This will rebuild the database and give all the delete space back. This will take a lot of time')
 
-    source = subprocess.Popen(['/usr/bin/sqlite3', self.database, '.dump'],
-                        stdout=subprocess.PIPE,
-                        )
+    self.db.execute(f'VACUUM INTO \'{self.new_database}\'')
 
-    destination = subprocess.Popen(['/usr/bin/sqlite3',self.new_database],
-                        stdin=source.stdout,
-                        stdout=subprocess.PIPE,
-                        )
+    with sqlite3.connect(self.new_database) as db:
+      cur = db.cursor()
+      cur.execute('PRAGMA journal_mode = MEMORY')
+      cur.execute('PRAGMA temp_store = MEMORY')
+      cur.execute('PRAGMA user_version = {}'.format(self.version))
 
-    while source.returncode is None:
-      source.poll()
-      print('.',end='',flush=True)
-      time.sleep(1)
-
-    while destination.returncode is None:
-      destination.poll()
-      print('.',end='',flush=True)
-      time.sleep(1)
-
-    if not (source.returncode == 0 and destination.returncode == 0):
-      print('Error cleaning up deleted space. Looks like database corruption...')
-      exit(1)
-
-    print('Done in {}'.format(time.time()-start))
+    print(f'Done in {(time.time()-start)} seconds')
 
   def __clean_up(self, table):
     print('Starting cleaning up table \'{}\'. Deleting data older then {} in batches of {} records. This could take some time...'.format(table, datetime.now() - self.period,self.delete_batch))
@@ -145,8 +131,8 @@ class HistoryCleanup():
     print('0%',end='',flush=True)
     new_percentage = 10
 
-    sql = 'DELETE FROM {} WHERE timestamp < ? LIMIT {}'.format(table, self.delete_batch)
-    filter = (self.timestamp_limit,)
+    sql = f'DELETE FROM {table} WHERE timestamp < ? LIMIT ?'
+    parameters = (self.timestamp_limit, self.delete_batch)
 
     for step in range(delete_steps):
       if int( (step / delete_steps) * 100) == new_percentage:
@@ -156,8 +142,7 @@ class HistoryCleanup():
       print('.',end='',flush=True)
 
       with self.db as db:
-        cur = db.cursor()
-        cur.execute(sql,filter)
+        db.execute(sql,parameters)
 
     print('100%')
     print('Clean up is done in {}'.format(time.time()-start))
@@ -172,11 +157,8 @@ class HistoryCleanup():
   def clean_up_doors(self):
     self.__clean_up('ButtonHistory')
 
-print('This script will cleanup your history.db file. We will keep 60 weeks of data from now. If you want to make a backup first, please enter no and make your backup.')
-
 cleanup = HistoryCleanup()
 cleanup.check_free_storage()
-cleanup.check_offline()
 
 go = input('Would you like to continue? Enter yes to start. Anything else will abort.\n')
 if go.lower() != 'yes':
