@@ -2,11 +2,9 @@
 # -*- coding: utf-8 -*-
 
 #Main modules
-import sys
 import time
 import datetime
 import telepot
-#import sqlite3
 import requests
 from picamera import PiCamera
 import calendar
@@ -14,9 +12,7 @@ current_year = int(datetime.datetime.now().strftime("%Y"))
 current_month = int(datetime.datetime.now().strftime("%m"))
 
 #Modules for buttons
-from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, ForceReply
-from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
-from telepot.namedtuple import InlineQueryResultArticle, InlineQueryResultPhoto, InputTextMessageContent
+from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 
 #Whitelist with "Username" from Telegram
 users = ["Username_1,Username_2"]
@@ -50,7 +46,7 @@ def handle(msg): #Wait message from user in telegram
 		#counter += 1
 		#dict_switches_name["Switch{0}".format(counter)] = str(item["name"])
 
-	print "Got command: %s" % command
+	print (f"Got command: {command}")
 
 #Check whitelist
 	if user_id not in users:
@@ -63,7 +59,7 @@ def handle(msg): #Wait message from user in telegram
 		str(datetime.datetime.now().strftime(
 		"Current date and time:\n%d %B %Y %H:%M \nWeek number of year: %W \nDay of year: %j"))
 		)
-	
+
 #Simple calendar on month
 	elif command == '/calendar':
 		calendar_print = calendar.LocaleTextCalendar(firstweekday=0, locale = "ru_RU.UTF-8").formatmonth(current_year, current_month, 0, 0).encode("utf8")
@@ -83,7 +79,7 @@ def handle(msg): #Wait message from user in telegram
 		[KeyboardButton(text="Other tools")],
 		]
 		))
-		
+
 #Info about raspberry pi
 	elif command == "/status":
 		api_req_get_status_rpi = requests.get(url = "http://localhost:8090/api/system").json()
@@ -93,7 +89,7 @@ def handle(msg): #Wait message from user in telegram
 		"\nFree memory is "+format(api_req_get_status_rpi['memory']['free']/1024/1024, ".1f")+" MB"+
 		" of total "+format(api_req_get_status_rpi['memory']['total']/1024/1024, ".1f")+" MB"
 		)
-		
+
 		#Print in terminal or in log(nohup.out) if you execute - "nohup BOT.py &"
 		print(for_print)
 		#Send message to user
@@ -182,7 +178,7 @@ def handle(msg): #Wait message from user in telegram
 		for item in api_req_get_switches:
 			counter += 1
 			dict_switches_name["Switch{0}".format(counter)] = str(item["name"])
-			dict_switches_id["Switch{0}".format(counter)] = str(item["id"])		
+			dict_switches_id["Switch{0}".format(counter)] = str(item["id"])
 		bot.sendMessage(chat_id,for_print,
 		reply_markup = ReplyKeyboardMarkup(
 		keyboard=[
@@ -199,25 +195,25 @@ def handle(msg): #Wait message from user in telegram
 		for_print = requests.get(url = 'http://localhost:8090/api/switches/dict_switches_id.get("Switch1")').json()["switches"][0]["state"]
 		print (for_print)
 		bot.sendMessage(chat_id, for_print)
-		
+
 	elif command == str("Toggle "+dict_switches_name.get("Switch2")):
 		requests.post(url = str("http://localhost:8090/api/switch/toggle/"+dict_switches_id.get("Switch2")), auth=(login_user_Terrarium_Pi, login_password_Terrarium_Pi))
 		for_print = requests.get(url = 'http://localhost:8090/api/switches/dict_switches_id.get("Switch2")').json()["switches"][0]["state"]
 		print (for_print)
 		bot.sendMessage(chat_id, for_print)
-		
+
 	elif command == str("Toggle "+dict_switches_name.get("Switch3")):
 		requests.post(url = str("http://localhost:8090/api/switch/toggle/"+dict_switches_id.get("Switch3")), auth=(login_user_Terrarium_Pi, login_password_Terrarium_Pi))
 		for_print = requests.get(url = 'http://localhost:8090/api/switches/dict_switches_id.get("Switch3")').json()["switches"][0]["state"]
 		print (for_print)
 		bot.sendMessage(chat_id, for_print)
-		
+
 	elif command == str("Toggle "+dict_switches_name.get("Switch4")):
 		requests.post(url = str("http://localhost:8090/api/switch/toggle/"+dict_switches_id.get("Switch4")), auth=(login_user_Terrarium_Pi, login_password_Terrarium_Pi))
 		for_print = requests.get(url = 'http://localhost:8090/api/switches/dict_switches_id.get("Switch4")').json()["switches"][0]["state"]
 		print (for_print)
 		bot.sendMessage(chat_id, for_print)
-		
+
 	elif command == "Administration": #Menu - "Administration"
 		bot.sendMessage(chat_id, "In this menu you can add or remove users who can chat with bot \nUNDER CONSTRUCTION",
 		reply_markup = ReplyKeyboardMarkup(
@@ -239,7 +235,7 @@ def handle(msg): #Wait message from user in telegram
 
 bot = telepot.Bot(TOKEN_BOT)
 bot.message_loop(handle)
-print "I am listening..."
+print ("I am listening...")
 
 while 1:
 	time.sleep(10)
