@@ -1,5 +1,6 @@
 # TerrariumPI 4.2.0
 
+![Latest release](https://github-basic-badges.herokuapp.com/release/theyosh/TerrariumPI.svg?text=latest%20release)
 ![GitHub Release Date](https://img.shields.io/github/release-date/theyosh/TerrariumPI)
 [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/4-x-y-z/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/theyosh/terrariumpi)](https://hub.docker.com/repository/docker/theyosh/terrariumpi)
@@ -34,9 +35,10 @@ And all this is controlled with a nice web interface based on AdminLTE 3 with Bo
    1. [GPIO numbering](#gpio-numbering)
    2. [New hardware](#new-hardware)
 6. [Remote data](#remote-data)
-7. [Screenshots](#screenshots)
-8. [Testing](#testing)
-9. [About](#about)
+7. [Contributors](#contributors)
+8. [Screenshots](#screenshots)
+9. [Testing](#testing)
+10. [About](#about)
 
 ## Features
 
@@ -81,7 +83,7 @@ And all this is controlled with a nice web interface based on AdminLTE 3 with Bo
 - Weather forecast from external source for lighting schema
   - Supports <https://openweathermap.org>
 - Temperatures in Celsius or Fahrenheit
-- Distances in centimetres or inches
+- Distances in centimeters or inches
 - Alarm detections
 - Audio support through internal audio jack or USB sound cards [#42](https://github.com/theyosh/TerrariumPI/issues/42)
   - Create playlists (loop and repeat)
@@ -132,7 +134,7 @@ It is possible to use USB or SSD drives to speed things up: <https://www.tomshar
   `sudo ./install.sh`
 6. Reboot Raspberry PI to get all the needed modules loaded<br>
   `sudo reboot` (if done manual)
-7. Go to the webinterface at <http://[raspberry_ip>]:8090 (login: **admin/password**)
+7. Go to the web interface at <http://[raspberry_ip>]:8090 (login: **admin/password**)
 
 All needed options and modules are setup by the installer script. This means that I2C and 1Wire overlay are enabled by default.
 
@@ -189,9 +191,13 @@ If there is some other hardware which is not working with TerrariumPI, open an i
 
 It is possible to use external sensor data that is available through HTTP(S) in JSON format. This way you can combine multiple Raspberry Pi's with TerrariumPI running to one single system. By using multiple Raspberry PI's you can cover a bigger area. But there are limitations.
 
-Currently it is READONLY. So you can read out remote sensors and switches but you cannot control the remote switches. But this way you can combine the power swiches total costs and power usage.
+Currently it is READONLY. So you can read out remote sensors and switches but you cannot control the remote switches. But this way you can combine the power switches total costs and power usage.
 
 more information is here: [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data)
+
+## Contributors
+
+![GitHub Contributors Image](https://contrib.rocks/image?repo=theyosh/TerrariumPI)
 
 ## Screenshots
 
