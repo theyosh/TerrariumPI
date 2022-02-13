@@ -3,8 +3,8 @@
 # add using command 'crontab -e' as running TerrariumPI user
 # * * * * * ~/TerrariumPI/contrib/watchdog.sh
 
-BASEDIR=$(dirname $(readlink -nf $0))
-RUN_AS_USER=`stat -c "%U" "${BASEDIR}"`
+BASEDIR="$(dirname $(readlink -nf $0))"
+RUN_AS_USER="$(stat -c "%U" "${BASEDIR}")"
 MAXTIME=600 # In seconds
 LOGFILE="/home/${RUN_AS_USER}/TerrariumPI/log/terrariumpi.log"
 PID="$(ps fax | grep terrariumPI.py | grep -v grep | awk {'print $1'})"
