@@ -287,6 +287,9 @@ EOF
 # Change the rights to the Pi user
 cd "${BASEDIR}/"
 
+# Compress js and css files
+find static/assets/ -type f -regex ".*\.\(css\|js\)" -exec gzip -f9k '{}' \;
+
 # Updates for docker support
 # Create data directory
 mkdir -p data

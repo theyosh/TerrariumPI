@@ -64,6 +64,7 @@ FROM python:3.8-buster as sourcecode
 WORKDIR /TerrariumPI
 COPY . .
 RUN rm -Rf .git 3rdparty
+RUN find static/assets/ -type f -regex ".*\.\(css\|js\)" -exec gzip -f9k '{}' \;
 
 # actual image
 FROM python:3.8-slim-buster
