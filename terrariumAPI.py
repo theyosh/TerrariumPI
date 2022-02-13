@@ -1052,7 +1052,7 @@ class terrariumAPI(object):
     else:
       period = 1
 
-    if type(filter) is list:
+    if isinstance(filter, list):
       # Get history based on selected sensor IDs
       query = orm.select((sh.timestamp,
                           orm.avg(sh.value),

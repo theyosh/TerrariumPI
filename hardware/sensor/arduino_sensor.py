@@ -16,7 +16,7 @@ class terrariumArduinoSensor(terrariumI2CSensor):
     if len(address) > 1:
         address = [address[1],address[2],address[0]] if len(address) != 2 else [address[1],1,address[0]]
 
-    if type(address[0]) is str:
+    if isinstance(address[0], str):
       if not address[0].startswith('0x'):
         address[0] = '0x' + address[0]
       address[0] = int(address[0],16)
