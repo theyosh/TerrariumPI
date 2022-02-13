@@ -1,6 +1,8 @@
-# TerrariumPI 4.1.0
+# TerrariumPI 4.2.0
 
+![GitHub Release Date](https://img.shields.io/github/release-date/theyosh/TerrariumPI)
 [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/4-x-y-z/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/theyosh/terrariumpi)](https://hub.docker.com/repository/docker/theyosh/terrariumpi)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
 
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.

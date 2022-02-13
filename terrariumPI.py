@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__version__ = '4.1.0'
+__version__ = '4.2.0'
 
 from gevent import monkey
 monkey.patch_all()
@@ -14,5 +14,5 @@ from terrariumEngine import terrariumEngine
 
 if __name__  == "__main__":
   terrariumEngine = terrariumEngine(__version__)
-  # This keeps running until CRTL-C is entered or given
+  # This keeps running until CTRL-C is entered or given
   terrariumEngine.stop()
