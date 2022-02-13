@@ -18,94 +18,94 @@ Extra documentation can be found at [https://theyosh.github.io/TerrariumPI/](htt
 
 Think off:
 
-- Terrarium (wet or dry)
-- Aquarium
-- Tanks with animals or plants
-- Greenhouse
+  - Terrarium (wet or dry)
+  - Aquarium
+  - Tanks with animals or plants
+  - Greenhouse
 
 And all this is controlled with a nice web interface based on AdminLTE 3 with Bootstrap 4.
 
 ## Table of Contents
 
-1. [Features](#features)
-2. [Translations](#translations)
-3. [Installation](#installation)
-4. [Updating](#updating)
-5. [Hardware](#hardware)
-   1. [GPIO numbering](#gpio-numbering)
-   2. [New hardware](#new-hardware)
-6. [Remote data](#remote-data)
-7. [Contributors](#contributors)
-8. [Screenshots](#screenshots)
-9. [Testing](#testing)
-10. [About](#about)
+ 1. [Features](#features)
+ 2. [Translations](#translations)
+ 3. [Installation](#installation)
+ 4. [Updating](#updating)
+ 5. [Hardware](#hardware)
+    1. [GPIO numbering](#gpio-numbering)
+    2. [New hardware](#new-hardware)
+ 6. [Remote data](#remote-data)
+ 7. [Contributors](#contributors)
+ 8. [Screenshots](#screenshots)
+ 9. [Testing](#testing)
+ 10. [About](#about)
 
 ## Features
 
-- Controlling electronic devices like lights, sprayers, heating, cooling, water pump equipment etc
-- Support for dimming electronic devices
-  - Manual dimming through web interface
-  - Predefined on and off dimming durations
-  - Predefined on and off dimming percentages
-  - Predefined dimming steps for environment system (heater and cooler)
-- Support for timers in power switches and environment [#72](https://github.com/theyosh/TerrariumPI/issues/72)
-  - Predefined start and stop times based on timer or weather
-  - Predefined on and off durations in minutes
-- Support for Energenie USB, LAN and RF power switches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
-- Support for WeMo Wifi power switches
-- Support for [Meross MSS425E Power Switches](https://www.meross.com/product/16/article/) (Requires Python 3 setup)
-- Support for Sonoff remote power devices
-  - [Tasmota](https://github.com/arendst/Sonoff-Tasmota)
-- Support for [multiple type of sensors](https://github.com/theyosh/TerrariumPI/wiki/Hardware#sensors)
-  - Temperature
-  - Humidity
-  - Moisture
-  - Conductivity
-  - Distance
-  - pH
-  - Light intensity
-  - UV A and B
-  - Fertility
-  - Volume
-- Support for webcams and native Raspberry Pi cam out of the box
-  - Raspberry Pi cam can be streamed live with 6 seconds delay
-  - Archiving images based on motion or time interval
-- Support for analog devices through a MCP3008
-  - Support for PH probe SKU SEN0161
-- Support for MiFlora Bluetooth sensors
-- Open door detection. This can be used in different environment parts
-- Total power and water usage for costs calculation
-- Lights control based on sun rise and sun set or timers
-- Rain control based on humidity sensors and timers
-- Temperature control based on temperature sensors or timers
-  - Variable day and night difference for min and max temperature
-- Water tank level control based on ultrasonic sound range sensors or volume sensors
-- Weather forecast from external source for lighting schema
-  - Supports <https://openweathermap.org>
-- Temperatures in Celsius or Fahrenheit
-- Distances in centimeters or inches
-- Alarm detections
-- Audio support through internal audio jack or USB sound cards [#42](https://github.com/theyosh/TerrariumPI/issues/42)
-  - Create playlists (loop and repeat)
-  - Volume control in the web interface
-  - Uploading audio files through web interface
-  - Audio meta data support (mediainfo)
-- Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
-- Display support
-  - LCD 16x2 or 20x4 screens either through I2C or [Serial](https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/)
-  - OLED based on SSD1306
-- Calendar system when hardware is replacement and when new hardware needs to be installed
-- Notifications system. Custom messages for custom actions with use of variables in the messages
-  - Get notifications through
-    - Email
-    - Display
-    - Webhooks
-  - Notifications for
-    - Environment part low and high alarm
-    - Sensor high and low measurements
-    - Power switch toggle on and off
-    - Open and close doors
-    - System error and warning messages
+  - Controlling electronic devices like lights, sprayers, heating, cooling, water pump equipment etc
+  - Support for dimming electronic devices
+    - Manual dimming through web interface
+    - Predefined on and off dimming durations
+    - Predefined on and off dimming percentages
+    - Predefined dimming steps for environment system (heater and cooler)
+  - Support for timers in power switches and environment [#72](https://github.com/theyosh/TerrariumPI/issues/72)
+    - Predefined start and stop times based on timer or weather
+    - Predefined on and off durations in minutes
+  - Support for Energenie USB, LAN and RF power switches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
+  - Support for WeMo Wifi power switches
+  - Support for [Meross MSS425E Power Switches](https://www.meross.com/product/16/article/) (Requires Python 3 setup)
+  - Support for Sonoff remote power devices
+    - [Tasmota](https://github.com/arendst/Sonoff-Tasmota)
+  - Support for [multiple type of sensors](https://github.com/theyosh/TerrariumPI/wiki/Hardware#sensors)
+    - Temperature
+    - Humidity
+    - Moisture
+    - Conductivity
+    - Distance
+    - pH
+    - Light intensity
+    - UV A and B
+    - Fertility
+    - Volume
+  - Support for webcams and native Raspberry Pi cam out of the box
+    - Raspberry Pi cam can be streamed live with 6 seconds delay
+    - Archiving images based on motion or time interval
+  - Support for analog devices through a MCP3008
+    - Support for PH probe SKU SEN0161
+  - Support for MiFlora Bluetooth sensors
+  - Open door detection. This can be used in different environment parts
+  - Total power and water usage for costs calculation
+  - Lights control based on sun rise and sun set or timers
+  - Rain control based on humidity sensors and timers
+  - Temperature control based on temperature sensors or timers
+    - Variable day and night difference for min and max temperature
+  - Water tank level control based on ultrasonic sound range sensors or volume sensors
+  - Weather forecast from external source for lighting schema
+    - Supports <https://openweathermap.org>
+  - Temperatures in Celsius or Fahrenheit
+  - Distances in centimeters or inches
+  - Alarm detections
+  - Audio support through internal audio jack or USB sound cards [#42](https://github.com/theyosh/TerrariumPI/issues/42)
+    - Create playlists (loop and repeat)
+    - Volume control in the web interface
+    - Uploading audio files through web interface
+    - Audio meta data support (mediainfo)
+  - Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
+  - Display support
+    - LCD 16x2 or 20x4 screens either through I2C or [Serial](https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/)
+    - OLED based on SSD1306
+  - Calendar system when hardware is replacement and when new hardware needs to be installed
+  - Notifications system. Custom messages for custom actions with use of variables in the messages
+    - Get notifications through
+      - Email
+      - Display
+      - Webhooks
+    - Notifications for
+      - Environment part low and high alarm
+      - Sensor high and low measurements
+      - Power switch toggle on and off
+      - Open and close doors
+      - System error and warning messages
 
 It is currently controling my reptile terrarium since 2015! And my Madagascar Day Gecko is very happy with it!
 
