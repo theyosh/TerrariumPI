@@ -12,11 +12,10 @@
 import ntfy
 import datetime
 import os
-import pygtail
 from ntfy.config import load_config
 from pygtail import Pygtail
-from datetime import date
 from parse import *
+import sys
 
 conffile_str = '/home/pi/TerrariumPI/contrib/notifications/tepinot.conf'
 
@@ -54,7 +53,7 @@ else:
         elif line.find('#') == -1 and line.strip():
             if switch == 1:
                 tplog_str = format(line.strip())
-            elif switch == 2:    
+            elif switch == 2:
                 modulesearch_list.append(format(line.strip()))
             elif switch == 3:
                 lvlsearch_list.append(format(line.strip()))
@@ -88,12 +87,12 @@ else:
                                 timestamp_acst, lvl_str, module_str, message_str = parse('{} - {} - {} - {}', line_str)
                                 if not debug_bool:
                                     if not ntfyconfig_str:
-                                        ntfy.notify(message_str, module_str.strip()+'-'+lvl_str.strip())                      
+                                        ntfy.notify(message_str, module_str.strip()+'-'+lvl_str.strip())
                                     else:
                                         ntfy.notify(message_str, module_str.strip()+'-'+lvl_str.strip(), config=load_config(ntfyconfig_str.strip()))
                                 else:
-                                    logfile_obj.write('%s - Notify-Message: %s\n\n' %(datetime.datetime.now(), message_str))    
+                                    logfile_obj.write('%s - Notify-Message: %s\n\n' %(datetime.datetime.now(), message_str))
                                 sentmsg_int+=1
-    
+
         logfile_obj.write('%s - %s read and %d messages sent.\n' %(datetime.datetime.now(), tplog_str.strip(), sentmsg_int))
         logfile_obj.close() #close TePiNot-log

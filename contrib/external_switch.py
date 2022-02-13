@@ -21,7 +21,7 @@ else:
   try:
     value = int(float(sys.argv[1]))
   except Exception as ex:
-    raise ValueError('Invalid input value. Should be a number between 0 and 100 including')
+    raise ValueError(f'Invalid input value. Should be a number between 0 and 100 including. Error {ex}')
 
   if not (0 <= value <= 100):
     raise ValueError('Invalid input value. Should be a number between 0 and 100 including')
