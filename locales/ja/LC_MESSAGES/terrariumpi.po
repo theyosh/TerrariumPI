@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2022-01-28 14:29+CET\n"
+"POT-Creation-Date: 2022-02-13 15:56+CET\n"
 "PO-Revision-Date: 2021-08-16 07:40+0000\n"
 "Last-Translator: ntfd0 <nekromant.ntfd@gmail.com>\n"
 "Language-Team: Japanese <https://weblate.theyosh.nl/projects/terrariumpi/4-x-"
@@ -66,112 +66,112 @@ msgstr "モイスチャー"
 msgid "pH"
 msgstr "pH"
 
-#: terrariumEngine.py:51
+#: terrariumEngine.py:52
 msgid "temperature"
 msgstr "温度"
 
-#: terrariumEngine.py:52
+#: terrariumEngine.py:53
 #, fuzzy
 msgid "distance"
 msgstr "距離"
 
-#: terrariumEngine.py:53
+#: terrariumEngine.py:54
 #, fuzzy
 msgid "altitude"
 msgstr "高度"
 
-#: terrariumEngine.py:54
+#: terrariumEngine.py:55
 msgid "pressure"
 msgstr "気圧"
 
-#: terrariumEngine.py:55
+#: terrariumEngine.py:56
 msgid "humidity"
 msgstr "湿度"
 
-#: terrariumEngine.py:56
+#: terrariumEngine.py:57
 #, fuzzy
 msgid "moisture"
 msgstr "モイスチャー"
 
-#: terrariumEngine.py:57
+#: terrariumEngine.py:58
 msgid "conductivity"
 msgstr ""
 
-#: terrariumEngine.py:58
+#: terrariumEngine.py:59
 msgid "ph"
 msgstr "pH"
 
-#: terrariumEngine.py:59
+#: terrariumEngine.py:60
 msgid "light"
 msgstr "照明"
 
-#: terrariumEngine.py:60
+#: terrariumEngine.py:61
 msgid "uva"
 msgstr "紫外線A波"
 
-#: terrariumEngine.py:61
+#: terrariumEngine.py:62
 msgid "uvb"
 msgstr "紫外線B波"
 
-#: terrariumEngine.py:62
+#: terrariumEngine.py:63
 msgid "uvi"
 msgstr "UVインデックス"
 
-#: terrariumEngine.py:63
+#: terrariumEngine.py:64
 msgid "fertility"
 msgstr "土壌肥沃度"
 
-#: terrariumEngine.py:64
+#: terrariumEngine.py:65
 msgid "co2"
 msgstr "CO2"
 
-#: terrariumEngine.py:65
+#: terrariumEngine.py:66
 msgid "volume"
 msgstr "量"
 
-#: terrariumEngine.py:66
+#: terrariumEngine.py:67
 msgid "watertank"
 msgstr "水タンク"
 
-#: terrariumEngine.py:67
+#: terrariumEngine.py:68
 msgid "windspeed"
 msgstr "風速"
 
-#: terrariumEngine.py:68
+#: terrariumEngine.py:69
 #, fuzzy
 msgid "water_flow"
 msgstr "水流"
 
-#: terrariumEngine.py:69
+#: terrariumEngine.py:70
 msgid "wattage"
 msgstr "ワット数"
 
-#: terrariumEngine.py:1146 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1169 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "稼働時間"
 
-#: terrariumEngine.py:1152
+#: terrariumEngine.py:1175
 #, fuzzy
 msgid "System load"
 msgstr "システム負荷"
 
-#: terrariumEngine.py:1158 views/status.html:44
+#: terrariumEngine.py:1181 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU温度"
 
-#: terrariumEngine.py:1164
+#: terrariumEngine.py:1187
 msgid "Storage"
 msgstr "ストレージ"
 
-#: terrariumEngine.py:1170
+#: terrariumEngine.py:1193
 msgid "Memory"
 msgstr "メモリー"
 
-#: terrariumEngine.py:1191
+#: terrariumEngine.py:1214
 msgid "average {sensor_type}"
 msgstr "平均{sensor_type}"
 
-#: terrariumEngine.py:1367
+#: terrariumEngine.py:1390
 msgid "last update"
 msgstr "最新更新"
 
@@ -474,55 +474,55 @@ msgstr "ボタン設定"
 msgid "Webcam archive"
 msgstr ""
 
-#: terrariumNotification.py:377
+#: terrariumNotification.py:376
 msgid "Display"
 msgstr "表示器"
 
-#: terrariumNotification.py:381
+#: terrariumNotification.py:380
 msgid "Email"
 msgstr "メール"
 
-#: terrariumNotification.py:391
+#: terrariumNotification.py:390
 #, fuzzy
 msgid "Traffic light"
 msgstr "信号灯"
 
-#: terrariumNotification.py:395
+#: terrariumNotification.py:394
 #, fuzzy
 msgid "Web-hook"
 msgstr "Webフック"
 
-#: terrariumNotification.py:399
+#: terrariumNotification.py:398
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:403
+#: terrariumNotification.py:402
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:407
+#: terrariumNotification.py:406
 msgid "Buzzer"
 msgstr ""
 
-#: terrariumWebserver.py:161 terrariumWebserver.py:239
+#: terrariumWebserver.py:161 terrariumWebserver.py:245
 #, fuzzy
 msgid "Authenticate to make any changes"
 msgstr "変更するにはログインが必要です"
 
-#: terrariumWebserver.py:161 terrariumWebserver.py:239
+#: terrariumWebserver.py:161 terrariumWebserver.py:245
 #, fuzzy
 msgid "Authentication"
 msgstr "ログイン認証"
 
-#: terrariumWebserver.py:161 terrariumWebserver.py:239 views/index.html:2
+#: terrariumWebserver.py:161 terrariumWebserver.py:245 views/index.html:2
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:351
+#: terrariumWebserver.py:357
 msgid "A new version ({version}) is available!"
 msgstr ""
 
-#: terrariumWebserver.py:351
+#: terrariumWebserver.py:357
 #, fuzzy
 #| msgid "last update"
 msgid "Software Update"
@@ -3356,7 +3356,7 @@ msgstr ""
 msgid "Shutdown TerrariumPI"
 msgstr ""
 
-#: terrariumNotification.py:386
+#: terrariumNotification.py:385
 msgid "Telegram"
 msgstr "Telegram"
 
