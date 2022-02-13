@@ -34,7 +34,7 @@ def find_new_relays(relay_data, db):
     relay['address'] = '%' + relay['address'] + '%'
     relay['type'] = relay['type'].replace('pwm-dimmer','nextevo-dimmer')
 
-    query = cur.execute('select id, name, address, hardware from Relay where hardware = :type and address LIKE :address', relay)
+    cur.execute('select id, name, address, hardware from Relay where hardware = :type and address LIKE :address', relay)
     data = cur.fetchall()
     if len(data) == 1:
       # We are sure we have found the correct relay.
