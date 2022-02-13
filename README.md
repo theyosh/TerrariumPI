@@ -34,7 +34,6 @@ And all this is controlled with a nice web interface based on AdminLTE 3 with Bo
  5. [Hardware](#hardware)
   1. [GPIO numbering](#gpio-numbering)
   2. [New hardware](#new-hardware)
-
  6. [Remote data](#remote-data)
  7. [Contributors](#contributors)
  8. [Screenshots](#screenshots)
