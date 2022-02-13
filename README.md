@@ -27,18 +27,18 @@ And all this is controlled with a nice web interface based on AdminLTE 3 with Bo
 
 ## Table of Contents
 
- 1. [Features](#features)
- 2. [Translations](#translations)
- 3. [Installation](#installation)
- 4. [Updating](#updating)
- 5. [Hardware](#hardware)
-  1. [GPIO numbering](#gpio-numbering)
-  2. [New hardware](#new-hardware)
- 6. [Remote data](#remote-data)
- 7. [Contributors](#contributors)
- 8. [Screenshots](#screenshots)
- 9. [Testing](#testing)
- 10. [About](#about)
+  1. [Features](#features)
+  2. [Translations](#translations)
+  3. [Installation](#installation)
+  4. [Updating](#updating)
+  5. [Hardware](#hardware)
+     1. [GPIO numbering](#gpio-numbering)
+     2. [New hardware](#new-hardware)
+  6. [Remote data](#remote-data)
+  7. [Contributors](#contributors)
+  8. [Screenshots](#screenshots)
+  9. [Testing](#testing)
+  10. [About](#about)
 
 ## Features
 
