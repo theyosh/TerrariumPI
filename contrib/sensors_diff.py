@@ -15,7 +15,7 @@ if len(SENSORS) == 2:
     if sensor1_value.status_code == 200:
       sensor1_value = sensor1_value.json()['current']
 
-  except Exception as ex:
+  except Exception:
     sensor1_value = None
 
   if sensor1_value is not None:
@@ -25,7 +25,7 @@ if len(SENSORS) == 2:
         sensor2_value = sensor2_value.json()['current']
         difference = abs(sensor1_value - sensor2_value)
 
-    except Exception as ex:
+    except Exception:
       sensor2_value = None
 
 if difference is None:
