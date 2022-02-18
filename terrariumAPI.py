@@ -1205,6 +1205,9 @@ class terrariumAPI(object):
 
   @orm.db_session
   def setting_detail(self, setting):
+    if 'languages' == setting:
+      return { 'languages' : self.webserver.engine.available_languages}
+
     try:
       data = Setting[setting].to_dict()
       if data['id'] in ['meross_cloud_username','meross_cloud_password']:
@@ -1321,9 +1324,11 @@ class terrariumAPI(object):
 
     weather = {
       'location'   : self.webserver.engine.weather.location,
-      'sun'        : {'rise' : self.webserver.engine.weather.sunrise.timestamp(), 'set' : self.webserver.engine.weather.sunset.timestamp() },
+      'sun'        : {'rise' : self.webserver.engine.weather.sunrise.timestamp(),
+                      'set'  : self.webserver.engine.weather.sunset.timestamp()},
       'is_day'     : self.webserver.engine.weather.is_day,
-      'indicators' : {'wind' : self.webserver.engine.units['windspeed'], 'temperature' : self.webserver.engine.units['temperature']},
+      'indicators' : {'wind' : self.webserver.engine.units['windspeed'],
+                      'temperature' : self.webserver.engine.units['temperature']},
       'credits'    : self.webserver.engine.weather.credits,
       'forecast'   : self.webserver.engine.weather.short_forecast
     }
@@ -1337,8 +1342,10 @@ class terrariumAPI(object):
     forecast_data = []
     for forecast in self.webserver.engine.weather.forecast:
       forecast_data.append({
-        'value' : forecast['temperature'],
-        'timestamp' : forecast['timestamp']
+        'value'       : forecast['temperature'],
+        'temperature' : forecast['temperature'],
+        'humidity'    : forecast['humidity'],
+        'timestamp'   : forecast['timestamp']
       })
 
     return {'data' : forecast_data}
