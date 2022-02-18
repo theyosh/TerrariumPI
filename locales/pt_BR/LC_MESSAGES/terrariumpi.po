@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2022-02-13 15:56+CET\n"
-"PO-Revision-Date: 2021-12-28 12:15+0000\n"
-"Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
+"PO-Revision-Date: 2022-02-17 20:58+0000\n"
+"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -167,20 +167,16 @@ msgid "Local date"
 msgstr "Data local"
 
 #: terrariumNotification.py:37
-#, fuzzy
-#| msgid "Local date and time"
 msgid "Local date, day and month"
-msgstr "Data e hora local"
+msgstr "Data dia e mês no local"
 
 #: terrariumNotification.py:38
 msgid "Local time"
 msgstr "Hora local"
 
 #: terrariumNotification.py:39
-#, fuzzy
-#| msgid "Local date and time"
 msgid "Local time, hours and minutes"
-msgstr "Data e hora local"
+msgstr "Hora local, horas e minutos"
 
 #: terrariumNotification.py:40
 msgid "Local date and time"
@@ -277,31 +273,27 @@ msgstr "Número de relés ativos"
 
 #: terrariumNotification.py:96
 msgid "System to slow with updates (warning)"
-msgstr ""
+msgstr "Sistema para desacelerar com atualizações (aviso)"
 
 #: terrariumNotification.py:99
-#, fuzzy
-#| msgid "The duration in seconds to toggle on the relay."
 msgid "Duration in seconds that are short"
-msgstr "Duração em segundos para ligar o relé."
+msgstr "Duração em segundos para fechar circuito"
 
 #: terrariumNotification.py:100
-#, fuzzy
-#| msgid "Enter a valid duration in seconds."
 msgid "The update duration in seconds"
-msgstr "Insira a duração em segundos."
+msgstr "A duração da atualização em segundos"
 
 #: terrariumNotification.py:101
 msgid "The max update duration"
-msgstr ""
+msgstr "A duração máxima da atualização"
 
 #: terrariumNotification.py:102
 msgid "Amount of times to late with updates"
-msgstr ""
+msgstr "Quantidade de vezes a ignorar as atualizações"
 
 #: terrariumNotification.py:108
 msgid "System to slow with updates more then 30 times"
-msgstr ""
+msgstr "Sistema para desacelerar com atualizações mais de 30 vezes"
 
 #: terrariumNotification.py:115
 msgid "Sensor update (every 30 seconds)"
@@ -450,7 +442,7 @@ msgstr "Pushover"
 
 #: terrariumNotification.py:406
 msgid "Buzzer"
-msgstr ""
+msgstr "Alarme"
 
 #: terrariumWebserver.py:161 terrariumWebserver.py:245
 msgid "Authenticate to make any changes"
@@ -1951,24 +1943,20 @@ msgid "Enter GPIO pin for green light."
 msgstr "Insira o pino GPIO para a luz verde."
 
 #: views/modals/service.html:246
-#, fuzzy
-#| msgid "GPIO"
 msgid "GPIO pin"
-msgstr "GPIO"
+msgstr "pino GPIO"
 
 #: views/modals/service.html:249
-#, fuzzy
-#| msgid "Enter GPIO pin for amber light."
 msgid "Enter GPIO pin for the buzzer."
-msgstr "Insira o pino GPIO para a luz amarela."
+msgstr "Insira o pino GPIO para o alarme."
 
 #: views/modals/service.html:255
 msgid "Buzzer songs"
-msgstr ""
+msgstr "Canções do alarme"
 
 #: views/modals/service.html:271
 msgid "List of available songs to use in the message subject."
-msgstr ""
+msgstr "Lista de músicas disponíveis para usar no assunto da mensagem."
 
 #: views/modals/service.html:281
 msgid "Customer key"
@@ -2012,11 +2000,11 @@ msgstr "Senha no Servidor MQTT"
 
 #: views/modals/service.html:365
 msgid "Use SSL"
-msgstr ""
+msgstr "Usar SSL"
 
 #: views/modals/service.html:370
 msgid "Toggle this to enable SSL connection."
-msgstr ""
+msgstr "Marque esta opção para ativar conexão SSL."
 
 #: views/modals/weather.html:12
 msgid "Weather settings"
@@ -2896,10 +2884,8 @@ msgid "Enter end time"
 msgstr "Digite o horário de término"
 
 #: views/modals/service.html:247
-#, fuzzy
-#| msgid "Enter red GPIO pin"
 msgid "Enter GPIO pin"
-msgstr "Insira o pino GPIO para o vermelho"
+msgstr "Insira o pino GPIO"
 
 #: views/modals/service.html:236
 msgid "Enter green GPIO pin"
