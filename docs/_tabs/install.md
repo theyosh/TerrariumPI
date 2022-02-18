@@ -14,7 +14,7 @@ Here we will install Raspberry PI and TerrariumPI software step by step.
 # Raspberry PI
 
 ![Raspberry PI Logo](/assets/img/RaspberryPI_Logo.webp){: .right width="100" }
-In order to run TerrariumPI you first need a working Raspberry PI with the '[Raspberry Pi OS Lite (Legacy)](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy)' image. Make sure you are using the **Legacy** version!
+In order to run TerrariumPI you first need a working Raspberry PI with the '[Raspberry Pi OS Lite (Legacy)](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy)' image. Make sure you are using the **Legacy** version! This is Debian Buster.
 This is very important, as the Desktop and/or the new OS version will not work well with the GPIO pins and Raspberry PI cameras.
 
 Also **64bit is not supported** due to missing mmal code which is needed for the webcams.
