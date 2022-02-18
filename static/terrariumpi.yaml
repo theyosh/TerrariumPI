@@ -1353,7 +1353,7 @@ paths:
             items:
               $ref: '#/definitions/SensorHardware'
   /sensors/scan/:
-    get:
+    post:
       tags:
         - Sensor
       summary: Scan for new sensors

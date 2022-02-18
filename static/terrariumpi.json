@@ -2041,7 +2041,7 @@
       }
     },
     "/sensors/scan/": {
-      "get": {
+      "post": {
         "tags": [
           "Sensor"
         ],
