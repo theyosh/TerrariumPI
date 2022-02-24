@@ -372,6 +372,8 @@ function template_sensor_type_color(type) {
       return 'fa-cloud-upload-alt'
       break;
     case 'magnetic':
+    case 'magnetic-PCF8574':
+    case 'magnetic-PCF8575':
       return 'fa-lock'
       break;
     case 'motion':
@@ -438,6 +440,8 @@ function template_sensor_type_icon(type) {
       return 'fas fa-cloud-upload-alt'
       break;
     case 'magnetic':
+    case 'magnetic-PCF8574':
+    case 'magnetic-PCF8575':
       return 'fas fa-lock'
       break;
     case 'ldr':
@@ -840,7 +844,7 @@ function graph(canvas, source, type) {
           }
         }
 
-        if (['wattage','magnetic','motion','ldr'].indexOf(self.__type) == -1) {
+        if (['wattage','magnetic','magnetic-PCF8574','magnetic-PCF8575','motion','ldr'].indexOf(self.__type) == -1) {
           graph_data.datasets.push({
             label: 'Current',
             data: data.value,
@@ -860,7 +864,7 @@ function graph(canvas, source, type) {
           self._graph.options.scales.yAxes[1].display = true;
         }
 
-        if (['magnetic','motion','ldr'].indexOf(self.__type) != -1) {
+        if (['magnetic','magnetic-PCF8574','magnetic-PCF8575','motion','ldr'].indexOf(self.__type) != -1) {
           graph_data.datasets.push({
             label: self.__type,
             data: data.value,
@@ -959,12 +963,12 @@ function graph(canvas, source, type) {
           // Multiplay the timestamp value with 1000 to get javascript miliseconds values
           data[counter].timestamp = data[counter].timestamp * 1000;
         }
-        if ('magnetic' == this.__type) {
+        if (['magnetic','magnetic-PCF8574','magnetic-PCF8575'].indexOf(this.__type) != -1) {
           // reverse door graphs for now
           data[counter].value = (data[counter].value ? 0 : 1);
         }
 
-        if (['wattage','magnetic','motion','ldr'].indexOf(this.__type) != -1  && counter > 0) {
+        if (['wattage','magnetic','magnetic-PCF8574','magnetic-PCF8575','motion','ldr'].indexOf(this.__type) != -1  && counter > 0) {
           // Here we add an extra item. This is the previous item, but with the timestamp of the new/current item
           // This will make the graph nicely showing filled areas when the power is on
           if (counter == 1) {
@@ -996,7 +1000,7 @@ function graph(canvas, source, type) {
         }
       }
 
-      if (['wattage','magnetic','motion','ldr'].indexOf(this.__type) != -1) {
+      if (['wattage','magnetic','magnetic-PCF8574','magnetic-PCF8575','motion','ldr'].indexOf(this.__type) != -1) {
         // Add a duplicate record on the 'end' with the current time stamp. This will keep the graph updating at every refresh
         last_item = data[data.length-1]
         last_item.timestamp = +moment();
@@ -1068,6 +1072,8 @@ function graph(canvas, source, type) {
                   }
                   switch (self.__type) {
                     case 'magnetic':
+                    case 'magnetic-PCF8574':
+                    case 'magnetic-PCF8575':
                       label += (tooltipItem.yLabel == 0 ? 'closed' : 'open');
 
                       break;
@@ -1113,6 +1119,8 @@ function graph(canvas, source, type) {
               callback: function(value, index, values) {
                 switch (self.__type) {
                   case 'magnetic':
+                  case 'magnetic-PCF8574':
+                  case 'magnetic-PCF8575':
                     return (value == 0 ? 'closed' : 'open');
                     break;
                   case 'ldr':
@@ -1759,6 +1767,8 @@ function button_state(button_data) {
 
   switch(button_data.hardware) {
     case 'magnetic':
+    case 'magnetic-PCF8574':
+    case 'magnetic-PCF8575':
       classes += ' ' + (button_data.value > 0 ? 'fa-lock' : 'fa-lock-open');
       break;
 

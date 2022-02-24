@@ -48,6 +48,8 @@ pywemo==0.8.0
 simple-pid==1.0.1
 sparkfun-qwiic-relay==0.0.2
 sht20==0.1.4
+pcf8574==0.1.3
+pcf8575==0.3
 
 # Webcam packages
 Pillow==9.0.1
