@@ -11,6 +11,7 @@ image:
 device_types: [temperature, humidity]
 device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the data is connected<br />Ex: `27`"
 device_url: https://www.adafruit.com/product/386
+device_power_management: true
 ---
 
 ## Information
