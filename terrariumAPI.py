@@ -457,9 +457,7 @@ class terrariumAPI(object):
       button = Button[button]
       button.set(**request.json)
       orm.commit()
-
       self.webserver.engine.update(terrariumButton,**request.json)
-
       return self.button_detail(button.id)
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
