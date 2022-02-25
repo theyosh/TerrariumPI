@@ -36,8 +36,14 @@ class TerrariumMerossCloud(terrariumSingleton):
   def start(self, reconnecting = False):
 
     def _run():
-      data = asyncio.run_coroutine_threadsafe(self._main_process(), self.__engine['asyncio'].async_loop)
-      data.result()
+      try:
+        data = asyncio.run_coroutine_threadsafe(self._main_process(), self.__engine['asyncio'].async_loop)
+        data.result()
+      except Exception as ex:
+        print('Exception in the cloud run:')
+        print(ex)
+        logger.exception(f'Error in cloud run: {ex}')
+        self.reconnect()
 
     start_time = time()
     self.__engine['error']  = False
