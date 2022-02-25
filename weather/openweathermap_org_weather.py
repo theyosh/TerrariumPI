@@ -21,7 +21,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
   def __load_general_data(self):
     address = self.address + '&units=metric&lang=' + self._device['language'][0:2]
     logger.debug('Loading weather source {}'.format(address))
-    data = terrariumUtils.get_remote_data(self.address)
+    data = terrariumUtils.get_remote_data(address)
     if data:
       self._data['city']     = data['name']
       self._data['country']  = data['sys']['country']
@@ -46,6 +46,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
       self._data['forecast'] = []
 
       for hourly in data['hourly']:
+	      # Store all timestamp data as GMT+0000 in memory/database
         self._data['forecast'].append({
           'timestamp'   : int(hourly["dt"] + self._data["timezone"]),
           'temperature' : float(hourly['temp']),
@@ -58,7 +59,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
         for period in day_periods:
           timestamp = int(daily["dt"] + self._data["timezone"] + day_periods[period])
 
-          # Exlude already existing and pasted hourly forecasts
+          # Exclude already existing and pasted hourly forecasts
           if timestamp not in [item['timestamp'] for item in self._data['forecast']] and timestamp > self._data['forecast'][0]['timestamp']:
 
             self._data['forecast'].append({

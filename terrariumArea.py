@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
@@ -152,8 +153,12 @@ class terrariumArea(object):
       duration = 0
 
       now = datetime.datetime.now()
-      begin = now.replace(hour=begin.hour, minute=begin.minute, second=begin.second)
-      end   = now.replace(hour=end.hour,   minute=end.minute,   second=end.second)
+
+      if not isinstance(begin, datetime.datetime):
+        begin = now.replace(hour=begin.hour, minute=begin.minute, second=begin.second)
+
+      if not isinstance(end, datetime.datetime):
+        end   = now.replace(hour=end.hour,   minute=end.minute,   second=end.second)
 
       if begin >= end:
         end += datetime.timedelta(hours=24)
@@ -250,12 +255,17 @@ class terrariumArea(object):
         next_sunrise += datetime.timedelta(hours=shift_hours)
         next_sunset  += datetime.timedelta(hours=shift_hours)
 
-      if datetime.datetime.now() < sunset:
-        timetable['day'] = make_time_table(sunrise, sunset)
-      else:
+      # Default day and night schedule:
+      timetable['day']   = make_time_table(sunrise, sunset)
+      timetable['night'] = make_time_table(sunset, next_sunrise)
+
+      # Pick the next day
+      if datetime.datetime.now() > sunset:
         timetable['day'] = make_time_table(next_sunrise, next_sunset)
 
-      timetable['night'] = make_time_table(sunset, next_sunrise)
+      # Night is still active till sunrise
+      if datetime.datetime.now() < sunrise:
+        timetable['night'] = make_time_table(sunset - datetime.timedelta(hours=24), sunrise)
 
     elif 'timer' == self.mode:
       for period in self.PERIODS:

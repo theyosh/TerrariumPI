@@ -32,7 +32,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
   VALID_SOURCE = None
   INFO_SOURCE  = None
 
-  # Weather data expects temperature in celcius degrees and windspeed in meters per second
+  # Weather data expects temperature in celsius degrees and windspeed in meters per second
   __UPDATE_TIMEOUT = 15 * 60 # 15 minutes. The source updates every 10 minutes
 
   def __init__(self, address, unit_values, language):
@@ -71,12 +71,20 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
         logger.error(terrariumUtils.clean_log_line(f'Error loading online weather data! Please check your source address: {self.address}.'))
 
   def __get_today_data(self, offset = 0):
-    now = int(time.time()) + offset
+    now = datetime.now()
     for forecast in self._data['days']:
-      if not now > forecast['set']:
+      if now.strftime('%d') == datetime.utcfromtimestamp(forecast['rise'] - offset).strftime('%d'):
         return forecast
 
     return None
+
+  @property
+  def today(self):
+    return self.__get_today_data()
+
+  @property
+  def tomorrow(self):
+    return self.__get_today_data(24 * 3600)
 
   @property
   def address(self):
@@ -107,7 +115,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
 
   @property
   def sunrise(self):
-    data = self.__get_today_data()
+    data = self.today
     if data is not None:
       return datetime.utcfromtimestamp(data['rise'])
 
@@ -115,7 +123,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
 
   @property
   def sunset(self):
-    data = self.__get_today_data()
+    data = self.today
     if data is not None:
       return datetime.utcfromtimestamp(data['set'])
 
@@ -123,7 +131,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
 
   @property
   def next_sunrise(self):
-    data = self.__get_today_data(24 * 3600)
+    data = self.tomorrow
     if data is not None:
       return datetime.utcfromtimestamp(data['rise'])
 
@@ -131,7 +139,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
 
   @property
   def next_sunset(self):
-    data = self.__get_today_data(24 * 3600)
+    data = self.tomorrow
     if data is not None:
       return datetime.utcfromtimestamp(data['set'])
 
