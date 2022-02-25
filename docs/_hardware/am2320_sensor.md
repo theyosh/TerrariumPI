@@ -9,7 +9,7 @@ image:
   alt: "AM2320 header image"
 
 device_types: [temperature,humidity]
-device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the data is connected<br />Ex: `27`"
+device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the device is connected<br />Ex: `27`"
 device_power_management: true
 ---
 

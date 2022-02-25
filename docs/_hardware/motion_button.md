@@ -8,7 +8,7 @@ image:
   src: /assets/img/motion.webp
   alt: "Motion sensor header image"
 
-device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the data is connected<br />Ex: `27`"
+device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the device is connected<br />Ex: `27`"
 device_url: https://tutorials-raspberrypi.com/connect-and-control-raspberry-pi-motion-detector-pir/
 ---
 

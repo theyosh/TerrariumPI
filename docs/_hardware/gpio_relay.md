@@ -9,7 +9,7 @@ image:
   alt: "GPIO Relays header image"
 
 device_hardware : GPIO devices
-device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the data is connected<br />Ex: `27`"
+device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the device is connected<br />Ex: `27`"
 #device_url : https://shop.meross.com/collections/smart-power-strip
 ---
 
