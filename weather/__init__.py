@@ -76,7 +76,12 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
       if now.strftime('%d') == datetime.utcfromtimestamp(forecast['rise'] - offset).strftime('%d'):
         return forecast
 
-    return None
+    # There is no today data, as we load data with a timezone that is in the future
+    today = copy.deepcopy(self._data['days'][0])
+    today['rise']      -= 24 * 60 * 60
+    today['set']       -= 24 * 60 * 60
+    today['timestamp'] -= 24 * 60 * 60
+    return today
 
   @property
   def today(self):
