@@ -55,15 +55,15 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
       if self._load_data():
         # Convert values to the right unit values
         for day in self._data['days']:
-          day['temp'] = terrariumUtils.conver_to_value(day['temp'], self._device['unit_values']['temperature'])
-          day['wind']['speed'] = terrariumUtils.conver_to_value(day['wind']['speed'], self._device['unit_values']['windspeed'])
+          day['temp'] = terrariumUtils.convert_to_value(day['temp'], self._device['unit_values']['temperature'])
+          day['wind']['speed'] = terrariumUtils.convert_to_value(day['wind']['speed'], self._device['unit_values']['windspeed'])
 
         # TODO: Change to list!!!!
         for forecast in self._data['forecast']:
-          forecast['temperature'] = terrariumUtils.conver_to_value(forecast['temperature'], self._device['unit_values']['temperature'])
+          forecast['temperature'] = terrariumUtils.convert_to_value(forecast['temperature'], self._device['unit_values']['temperature'])
 
         for history in self._data['history']:
-          history['temperature'] = terrariumUtils.conver_to_value(history['temperature'], self._device['unit_values']['temperature'])
+          history['temperature'] = terrariumUtils.convert_to_value(history['temperature'], self._device['unit_values']['temperature'])
 
         self._device['last_update'] = datetime.now()
         logger.info(terrariumUtils.clean_log_line(f'Loaded new weather data in {time.time()-start:.3f} seconds.'))

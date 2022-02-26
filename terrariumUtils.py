@@ -187,7 +187,7 @@ class terrariumUtils():
     return math.ceil(math.pow(math.pow(value,2), float(1)/3))
 
   @staticmethod
-  def conver_to_value(current, indicator):
+  def convert_to_value(current, indicator):
     if not terrariumUtils.is_float(current):
       return None
 
