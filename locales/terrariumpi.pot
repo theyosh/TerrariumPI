@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.2.0\n"
-"POT-Creation-Date: 2022-02-13 15:56+CET\n"
+"POT-Creation-Date: 2022-02-26 21:46+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,47 +15,47 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumArea.py:32
+#: terrariumArea.py:33
 msgid "Lighting"
 msgstr ""
 
-#: terrariumArea.py:38
+#: terrariumArea.py:39
 msgid "Heating"
 msgstr ""
 
-#: terrariumArea.py:44
+#: terrariumArea.py:45
 msgid "Cooling"
 msgstr ""
 
-#: terrariumArea.py:50
+#: terrariumArea.py:51
 msgid "Humidity"
 msgstr ""
 
-#: terrariumArea.py:56
+#: terrariumArea.py:57
 msgid "Water tank"
 msgstr ""
 
-#: terrariumArea.py:62 views/includes/sidebar.html:186
+#: terrariumArea.py:63 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr ""
 
-#: terrariumArea.py:68
+#: terrariumArea.py:69
 msgid "CO2"
 msgstr ""
 
-#: terrariumArea.py:74
+#: terrariumArea.py:75
 msgid "Conductivity"
 msgstr ""
 
-#: terrariumArea.py:80
+#: terrariumArea.py:81
 msgid "Fertility"
 msgstr ""
 
-#: terrariumArea.py:86
+#: terrariumArea.py:87
 msgid "Moisture"
 msgstr ""
 
-#: terrariumArea.py:92
+#: terrariumArea.py:93
 msgid "pH"
 msgstr ""
 
@@ -1627,6 +1627,18 @@ msgstr ""
 
 #: views/modals/relay.html:120
 msgid "The dimmer offset."
+msgstr ""
+
+#: views/modals/relay.html:129
+msgid "Dimmer max dim value"
+msgstr ""
+
+#: views/modals/relay.html:132
+msgid "The dimmer max dim value."
+msgstr ""
+
+#: views/modals/relay.html:135
+msgid "Please enter valid number"
 msgstr ""
 
 #: views/modals/sensor.html:12
