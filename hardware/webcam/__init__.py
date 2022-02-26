@@ -437,9 +437,9 @@ class terrariumWebcam(object):
         sleep(1)
 
       try:
-        image = func_timeout(10, self._get_raw_data)
+        image = func_timeout(15, self._get_raw_data)
       except FunctionTimedOut:
-        logger.error(f'Webcam {self} timed out after 10 seconds during updating...')
+        logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
         image = False
         # TODO: Need to raise an error, for the retry action?
 
