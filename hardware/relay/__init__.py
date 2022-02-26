@@ -303,9 +303,12 @@ class terrariumRelay(object):
 
 class terrariumRelayDimmer(terrariumRelay):
   TYPE = None
+  _DIMMER_MAXDIM = None
 
   def __init__(self, id, _, address, name = '', prev_state = None, callback = None):
     self._dimmer_offset = 0
+    self._dimmer_state = 0
+    self._legacy = False
 
     self.running = False
     self.__running = threading.Event()
@@ -321,7 +324,7 @@ class terrariumRelayDimmer(terrariumRelay):
     direction = 1 if current_state < to else -1
     pause_time = duration / steps
 
-    for counter in range(int(steps)):
+    for _ in range(int(steps)):
       if not self.running:
         break
 
