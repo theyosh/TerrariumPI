@@ -595,7 +595,7 @@ class terrariumArea(object):
       self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_min']
       self.state['sensors']['alarm_high'] = self.state['sensors']['current'] > self.state['sensors']['alarm_max']
 
-    # If the depending area is in alarm state, we cannot toggle this area
+    # If the depending area is in alarm state, we cannot toggle this area and all the relays should be shutdown
     depends_on_alarm = False
     for area in self.depends_on:
       if area in self.enclosure.areas and self.enclosure.areas[area].state.get('sensors'):
@@ -604,6 +604,12 @@ class terrariumArea(object):
         if depends_on_alarm:
           unit_value = self.enclosure.engine.units[self.enclosure.areas[area].state['sensors']['unit']]
           logger.info(f'Depending area {self.enclosure.areas[area].name} is in alarm state for area {self}. Current: {self.enclosure.areas[area].state["sensors"]["current"]:.2f}{unit_value}')
+
+          for period in self.PERIODS:
+            if period in self.setup and self.relays_state(period):
+              logger.info(f'Toggle down the power for period {period} due to depending area {self.enclosure.areas[area].name} alarm state.')
+              self.relays_toggle(period,False)
+
           break
 
     for period in self.PERIODS:
@@ -759,11 +765,13 @@ class terrariumArea(object):
   def relays_toggle(self, part, on):
     logger.info(f'Toggle the relays for area {self} part {part} to state {("on" if on else "off")}.')
 
+    relays = []
     with orm.db_session():
       relays = orm.select(r.id for r in Relay if r.id in self.setup[part]['relays'] and not r.manual_mode)
-      for relay in relays:
-        relay = self.enclosure.relays[relay]
-        self._relay_action(part, relay, on)
+
+    for relay in relays:
+      relay = self.enclosure.relays[relay]
+      self._relay_action(part, relay, on)
 
     if on:
       self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
