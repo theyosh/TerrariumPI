@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2022-02-13 15:56+CET\n"
+"POT-Creation-Date: 2022-02-26 21:46+CET\n"
 "PO-Revision-Date: 2020-05-21 19:44+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
@@ -18,53 +18,53 @@ msgstr ""
 "X-Generator: Weblate 4.0.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:32
+#: terrariumArea.py:33
 #, fuzzy
 #| msgid "Lights"
 msgid "Lighting"
 msgstr "Eclairage"
 
-#: terrariumArea.py:38
+#: terrariumArea.py:39
 #, fuzzy
 #| msgid "Settings"
 msgid "Heating"
 msgstr "Paramètres"
 
-#: terrariumArea.py:44
+#: terrariumArea.py:45
 msgid "Cooling"
 msgstr "Refroidissement"
 
-#: terrariumArea.py:50
+#: terrariumArea.py:51
 msgid "Humidity"
 msgstr "Humidité"
 
-#: terrariumArea.py:56
+#: terrariumArea.py:57
 msgid "Water tank"
 msgstr "Réservoir d'eau"
 
-#: terrariumArea.py:62 views/includes/sidebar.html:186
+#: terrariumArea.py:63 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:68
+#: terrariumArea.py:69
 msgid "CO2"
 msgstr ""
 
-#: terrariumArea.py:74
+#: terrariumArea.py:75
 msgid "Conductivity"
 msgstr ""
 
-#: terrariumArea.py:80
+#: terrariumArea.py:81
 #, fuzzy
 #| msgid "Humidity sensor"
 msgid "Fertility"
 msgstr "Capteur d'humidité"
 
-#: terrariumArea.py:86
+#: terrariumArea.py:87
 msgid "Moisture"
 msgstr ""
 
-#: terrariumArea.py:92
+#: terrariumArea.py:93
 msgid "pH"
 msgstr "pH"
 
@@ -2014,6 +2014,24 @@ msgstr "Dimmer éteint durée"
 #| msgid "Dimmer off duration"
 msgid "The dimmer offset."
 msgstr "Dimmer éteint durée"
+
+#: views/modals/relay.html:129
+#, fuzzy
+#| msgid "Maximum lights hours"
+msgid "Dimmer max dim value"
+msgstr "Heures maximales de lumières"
+
+#: views/modals/relay.html:132
+#, fuzzy
+#| msgid "Dimmer off duration"
+msgid "The dimmer max dim value."
+msgstr "Dimmer éteint durée"
+
+#: views/modals/relay.html:135
+#, fuzzy
+#| msgid "Date and time"
+msgid "Please enter valid number"
+msgstr "Date et heure"
 
 #: views/modals/sensor.html:12
 msgid "Sensor settings"

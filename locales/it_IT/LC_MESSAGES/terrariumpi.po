@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-02-13 15:56+CET\n"
+"POT-Creation-Date: 2022-02-26 21:46+CET\n"
 "PO-Revision-Date: 2021-10-30 15:16+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/4-x-"
@@ -18,51 +18,51 @@ msgstr ""
 "X-Generator: Weblate 4.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:32
+#: terrariumArea.py:33
 #, fuzzy
 #| msgid "Lights"
 msgid "Lighting"
 msgstr "Luci"
 
-#: terrariumArea.py:38
+#: terrariumArea.py:39
 #, fuzzy
 #| msgid "Settings"
 msgid "Heating"
 msgstr "Impostazioni"
 
-#: terrariumArea.py:44
+#: terrariumArea.py:45
 msgid "Cooling"
 msgstr "Refrigerazione"
 
-#: terrariumArea.py:50
+#: terrariumArea.py:51
 msgid "Humidity"
 msgstr "Umidità"
 
-#: terrariumArea.py:56
+#: terrariumArea.py:57
 msgid "Water tank"
 msgstr "Riserva d'acqua"
 
-#: terrariumArea.py:62 views/includes/sidebar.html:186
+#: terrariumArea.py:63 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:68
+#: terrariumArea.py:69
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:74
+#: terrariumArea.py:75
 msgid "Conductivity"
 msgstr "Conductività"
 
-#: terrariumArea.py:80
+#: terrariumArea.py:81
 msgid "Fertility"
 msgstr "Fertilizzante"
 
-#: terrariumArea.py:86
+#: terrariumArea.py:87
 msgid "Moisture"
 msgstr "Umidità"
 
-#: terrariumArea.py:92
+#: terrariumArea.py:93
 msgid "pH"
 msgstr "pH"
 
@@ -1984,6 +1984,24 @@ msgstr "Durata del dimmer spento"
 #| msgid "Dimmer off duration"
 msgid "The dimmer offset."
 msgstr "Durata del dimmer spento"
+
+#: views/modals/relay.html:129
+#, fuzzy
+#| msgid "Moisture"
+msgid "Dimmer max dim value"
+msgstr "Umidità"
+
+#: views/modals/relay.html:132
+#, fuzzy
+#| msgid "Dimmer off duration"
+msgid "The dimmer max dim value."
+msgstr "Durata del dimmer spento"
+
+#: views/modals/relay.html:135
+#, fuzzy
+#| msgid "Date and time"
+msgid "Please enter valid number"
+msgstr "Data e ora"
 
 #: views/modals/sensor.html:12
 msgid "Sensor settings"
