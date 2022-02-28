@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2022-02-13 15:56+CET\n"
+"POT-Creation-Date: 2022-02-26 21:46+CET\n"
 "PO-Revision-Date: 2022-01-28 13:32+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
@@ -19,47 +19,47 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: terrariumArea.py:32
+#: terrariumArea.py:33
 msgid "Lighting"
 msgstr "Verlichting"
 
-#: terrariumArea.py:38
+#: terrariumArea.py:39
 msgid "Heating"
 msgstr "Verwarming"
 
-#: terrariumArea.py:44
+#: terrariumArea.py:45
 msgid "Cooling"
 msgstr "Koelen"
 
-#: terrariumArea.py:50
+#: terrariumArea.py:51
 msgid "Humidity"
 msgstr "Luchtvochtigheid"
 
-#: terrariumArea.py:56
+#: terrariumArea.py:57
 msgid "Water tank"
 msgstr "Watertank"
 
-#: terrariumArea.py:62 views/includes/sidebar.html:186
+#: terrariumArea.py:63 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:68
+#: terrariumArea.py:69
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:74
+#: terrariumArea.py:75
 msgid "Conductivity"
 msgstr "Geleidingsvermogen"
 
-#: terrariumArea.py:80
+#: terrariumArea.py:81
 msgid "Fertility"
 msgstr "Vruchtbaarheid"
 
-#: terrariumArea.py:86
+#: terrariumArea.py:87
 msgid "Moisture"
 msgstr "Vochtigheid"
 
-#: terrariumArea.py:92
+#: terrariumArea.py:93
 msgid "pH"
 msgstr "pH"
 
@@ -1726,6 +1726,24 @@ msgstr "Dimmer compensatie in%"
 #: views/modals/relay.html:120
 msgid "The dimmer offset."
 msgstr "De dimmer compensatie."
+
+#: views/modals/relay.html:129
+#, fuzzy
+#| msgid "minimum moist value"
+msgid "Dimmer max dim value"
+msgstr "minimale vochtigheidswaarde"
+
+#: views/modals/relay.html:132
+#, fuzzy
+#| msgid "The dimmer offset."
+msgid "The dimmer max dim value."
+msgstr "De dimmer compensatie."
+
+#: views/modals/relay.html:135
+#, fuzzy
+#| msgid "Enter a valid number."
+msgid "Please enter valid number"
+msgstr "Geef een geldig getal op."
 
 #: views/modals/sensor.html:12
 msgid "Sensor settings"

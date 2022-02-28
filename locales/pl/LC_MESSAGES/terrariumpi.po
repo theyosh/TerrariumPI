@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2022-02-13 15:56+CET\n"
+"POT-Creation-Date: 2022-02-26 21:46+CET\n"
 "PO-Revision-Date: 2021-11-26 14:38+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Polish <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
@@ -19,49 +19,49 @@ msgstr ""
 "X-Generator: Weblate 4.9\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:32
+#: terrariumArea.py:33
 msgid "Lighting"
 msgstr "Oświetlenie"
 
-#: terrariumArea.py:38
+#: terrariumArea.py:39
 msgid "Heating"
 msgstr "Ogrzewanie"
 
-#: terrariumArea.py:44
+#: terrariumArea.py:45
 msgid "Cooling"
 msgstr "Chłodzenie"
 
-#: terrariumArea.py:50
+#: terrariumArea.py:51
 msgid "Humidity"
 msgstr "Wilgotność"
 
-#: terrariumArea.py:56
+#: terrariumArea.py:57
 msgid "Water tank"
 msgstr "Zbiornik wody"
 
-#: terrariumArea.py:62 views/includes/sidebar.html:186
+#: terrariumArea.py:63 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:68
+#: terrariumArea.py:69
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:74
+#: terrariumArea.py:75
 msgid "Conductivity"
 msgstr "Przewodność"
 
-#: terrariumArea.py:80
+#: terrariumArea.py:81
 #, fuzzy
 #| msgid "fertility"
 msgid "Fertility"
 msgstr "Żyzność"
 
-#: terrariumArea.py:86
+#: terrariumArea.py:87
 msgid "Moisture"
 msgstr "Wilgoć"
 
-#: terrariumArea.py:92
+#: terrariumArea.py:93
 msgid "pH"
 msgstr "pH"
 
@@ -1829,6 +1829,20 @@ msgstr ""
 #: views/modals/relay.html:120
 msgid "The dimmer offset."
 msgstr ""
+
+#: views/modals/relay.html:129
+msgid "Dimmer max dim value"
+msgstr ""
+
+#: views/modals/relay.html:132
+msgid "The dimmer max dim value."
+msgstr ""
+
+#: views/modals/relay.html:135
+#, fuzzy
+#| msgid "Enter a valid time of the day."
+msgid "Please enter valid number"
+msgstr "Wprowadź poprawny czas dnia."
 
 #: views/modals/sensor.html:12
 msgid "Sensor settings"
