@@ -101,7 +101,9 @@ class terrariumButton(object):
       if new_state != self._device['state']:
         self._device['state'] = new_state
         if self._device['callback'] is not None:
-          self._device['callback'](self.id, self._device['state'])
+          # Tricky stuff... more threads...
+          threading.Thread(target=self._device['callback'], args=(self.id, self._device['state'])).start()
+#          self._device['callback'](self.id, self._device['state'])
 
       sleep(.1)
 

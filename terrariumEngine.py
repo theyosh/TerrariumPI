@@ -464,7 +464,6 @@ class terrariumEngine(object):
   # -=NEW=-
   def __load_existing_sensors(self):
     self.sensors = {}
-
     with orm.db_session():
       for sensor in Sensor.select(lambda s: s.id not in self.settings['exclude_ids']):
         start = time.time()
@@ -505,6 +504,8 @@ class terrariumEngine(object):
         start = time.time()
         logger.debug(f'Found new sensor {sensor}')
         action = 'Added new'
+        value = sensor.update()
+
         with orm.db_session():
           try:
             # First try to see if the Sensor does exist based on ID (means address change)
@@ -522,7 +523,6 @@ class terrariumEngine(object):
             )
 
           # Create a new sensordata entry, so we have at least one sensor value
-          value = sensor.update()
           new_sensor.update(value)
 
         # Store the hardware sensor in memory, so we can benefit from the shared cached data for sensors with multiple sensor types
@@ -535,81 +535,88 @@ class terrariumEngine(object):
 
   # -= NEW =-
   def _update_sensors(self):
+    sensors = []
     with orm.db_session():
-      for sensor in Sensor.select(lambda s: s.id in self.sensors.keys() and not s.id in self.settings['exclude_ids']):
+      # Get all loaded sensors ordered by hardware address
+      sensors = sorted(Sensor.select(lambda s: s.id in self.sensors.keys() and not s.id in self.settings['exclude_ids'])[:], key=lambda item: item.address)
+
+    for sensor in sensors:
+      with orm.db_session():
         current_value = sensor.value
-        start = time.time()
 
-        if 'css811' == sensor.hardware.lower():
-          calibration = {'temperature' : [], 'humidity' : []}
-          for calibration_sensor in sensor.calibration['ccs811_compensation_sensors']:
-            if calibration_sensor in self.sensors:
-              calibration_sensor = self.sensors[calibration_sensor]
-              if calibration_sensor.type in calibration:
-                calibration[calibration_sensor.type].append(calibration_sensor.value)
+      start = time.time()
 
-          calibration['temperature'] = None if len(calibration['temperature']) == 0 else statistics.mean(calibration['temperature'])
-          calibration['humidity']    = None if len(calibration['humidity']) == 0    else statistics.mean(calibration['humidity'])
+      if 'css811' == sensor.hardware.lower():
+        calibration = {'temperature' : [], 'humidity' : []}
+        for calibration_sensor in sensor.calibration['ccs811_compensation_sensors']:
+          if calibration_sensor in self.sensors:
+            calibration_sensor = self.sensors[calibration_sensor]
+            if calibration_sensor.type in calibration:
+              calibration[calibration_sensor.type].append(calibration_sensor.value)
 
-          self.sensors[sensor.id].calibrate(calibration['temperature'],calibration['humidity'])
+        calibration['temperature'] = None if len(calibration['temperature']) == 0 else statistics.mean(calibration['temperature'])
+        calibration['humidity']    = None if len(calibration['humidity']) == 0    else statistics.mean(calibration['humidity'])
 
-        new_value = self.sensors[sensor.id].update(self.sensors[sensor.id].erratic > 0)
-        measurement_time = time.time() - start
-        if new_value is None:
-          logger.warning(f'Could not take a new measurement from sensor {sensor}. Tried for {measurement_time:.2f} seconds. Skipping this update.')
-          continue
+        self.sensors[sensor.id].calibrate(calibration['temperature'],calibration['humidity'])
 
-        # Convert some values like temperature and distance ...
-        if 'temperature' == sensor.type.lower():
-          if 'fahrenheit' == self.settings['temperature_indicator']:
-            new_value = terrariumUtils.to_fahrenheit(new_value)
-          elif 'kelvin' == self.settings['temperature_indicator']:
-            new_value = terrariumUtils.to_kelvin(new_value)
+      new_value = self.sensors[sensor.id].update(self.sensors[sensor.id].erratic > 0)
+      measurement_time = time.time() - start
+      if new_value is None:
+        logger.warning(f'Could not take a new measurement from sensor {sensor}. Tried for {measurement_time:.2f} seconds. Skipping this update.')
+        continue
 
-        elif 'distance' == sensor.type.lower():
-          if 'inch' == self.settings['distance_indicator']:
-            new_value = terrariumUtils.to_inches(new_value)
+      # Convert some values like temperature and distance ...
+      if 'temperature' == sensor.type.lower():
+        if 'fahrenheit' == self.settings['temperature_indicator']:
+          new_value = terrariumUtils.to_fahrenheit(new_value)
+        elif 'kelvin' == self.settings['temperature_indicator']:
+          new_value = terrariumUtils.to_kelvin(new_value)
 
-        # We have a valid reading from the hardware sensor. Now increase/decrease with the offset
-        new_value += sensor.offset
+      elif 'distance' == sensor.type.lower():
+        if 'inch' == self.settings['distance_indicator']:
+          new_value = terrariumUtils.to_inches(new_value)
 
-        if not sensor.limit_min <= new_value <= sensor.limit_max:
-          logger.error(f'Measurement for sensor {sensor} of {new_value:.2f}{self.units[sensor.type]} is outside valide range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]}. Skipping this update.')
-          continue
+      # We have a valid reading from the hardware sensor. Now increase/decrease with the offset
+      new_value += sensor.offset
 
-        if current_value is not None and sensor.max_diff != 0 and abs(current_value - new_value) > sensor.max_diff:
-          self.sensors[sensor.id].erratic += 1
-          if self.sensors[sensor.id].erratic < 5:
-            logger.warning(f'Sensor {sensor} has an erratic({self.sensors[sensor.id].erratic}) measurement of value {new_value:.2f}{self.units[sensor.type]} compared to old value {current_value:.2f}{self.units[sensor.type]}. The difference of {abs(current_value - new_value):.2f}{self.units[sensor.type]} is more than max allowed difference of {sensor.max_diff:.2f}{self.units[sensor.type]} and will be ignored.')
-            new_value = current_value
-          else:
-            logger.warning(f'After {self.sensors[sensor.id].erratic} erratic measurements the new value {new_value:.2f}{self.units[sensor.type]} is promoted to the current value for sensor {sensor}.')
-            self.sensors[sensor.id].erratic = 0
+      if not sensor.limit_min <= new_value <= sensor.limit_max:
+        logger.error(f'Measurement for sensor {sensor} of {new_value:.2f}{self.units[sensor.type]} is outside valide range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]}. Skipping this update.')
+        continue
+
+      if current_value is not None and sensor.max_diff != 0 and abs(current_value - new_value) > sensor.max_diff:
+        self.sensors[sensor.id].erratic += 1
+        if self.sensors[sensor.id].erratic < 5:
+          logger.warning(f'Sensor {sensor} has an erratic({self.sensors[sensor.id].erratic}) measurement of value {new_value:.2f}{self.units[sensor.type]} compared to old value {current_value:.2f}{self.units[sensor.type]}. The difference of {abs(current_value - new_value):.2f}{self.units[sensor.type]} is more than max allowed difference of {sensor.max_diff:.2f}{self.units[sensor.type]} and will be ignored.')
+          new_value = current_value
         else:
+          logger.warning(f'After {self.sensors[sensor.id].erratic} erratic measurements the new value {new_value:.2f}{self.units[sensor.type]} is promoted to the current value for sensor {sensor}.')
           self.sensors[sensor.id].erratic = 0
+      else:
+        self.sensors[sensor.id].erratic = 0
 
-        if new_value is not None:
-          change = new_value != sensor.value
-          sensor.update(new_value)
-          db_time = (time.time() - start) - measurement_time
-          self.webserver.websocket_message('gauge_update' , {'id' : sensor.id, 'value' : new_value})
-
-          # Notification message
+      if new_value is not None:
+        with orm.db_session():
+          Sensor[sensor.id].update(new_value)
           sensor_data = sensor.to_dict()
-          sensor_data['unit'] = self.units[sensor.type]
-          self.notification.message(f'sensor_update' , sensor_data)
 
-          if change:
-            self.notification.message(f'sensor_change' , sensor_data)
+        db_time = (time.time() - start) - measurement_time
+        self.webserver.websocket_message('gauge_update' , {'id' : sensor.id, 'value' : new_value})
 
-          if sensor_data['alarm']:
-            self.notification.message(f'sensor_alarm' , sensor_data)
+        # Notification message
+        sensor_data['unit'] = self.units[sensor.type]
+        self.notification.message(f'sensor_update' , sensor_data)
 
-          logger.info(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]} in {measurement_time+db_time:.2f} seconds.')
-          logger.debug(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
+        if new_value != current_value:
+          self.notification.message(f'sensor_change' , sensor_data)
 
-        # A small sleep between sensor measurement to get a bit more responsiveness of the system
-        sleep(0.1)
+        if sensor_data['alarm']:
+          self.notification.message(f'sensor_alarm' , sensor_data)
+
+        logger.info(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]} in {measurement_time+db_time:.2f} seconds.')
+        logger.debug(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
+
+      # A small sleep between sensor measurement to get a bit more responsiveness of the system
+      sleep(0.1)
 
     for sensor_type, avg_data in self.sensor_averages.items():
       self.webserver.websocket_message('gauge_update', { 'id' : f'avg_{sensor_type}', 'value' : avg_data['value']})
@@ -647,7 +654,7 @@ class terrariumEngine(object):
 
   @property
   def sensor_types_loaded(self):
-    start = time.time()
+    # start = time.time()
     data = []
     with orm.db_session():
       for sensor in Sensor.select(lambda s: s.id in self.sensors.keys() and not s.id in self.settings['exclude_ids']):
@@ -705,8 +712,9 @@ class terrariumEngine(object):
     for relay in terrariumRelay.scan_relays(callback=self.callback_relay):
       if relay.id not in self.settings['exclude_ids'] and relay.id not in self.relays:
         logger.debug(f'Found new relay {relay}')
-
         action = 'Added new'
+        value = relay.update()
+
         with orm.db_session():
           try:
             # First try to see if the Relay does exist based on ID (means address change)
@@ -723,7 +731,6 @@ class terrariumEngine(object):
             )
 
           # Create a new relaydata entry, so we have at least one relay value
-          value = relay.update()
           new_relay.update(value)
 
         # Store the hardware relay in memory, so we can benefit from the shared cached data for relays with multiple relay types
@@ -737,40 +744,49 @@ class terrariumEngine(object):
   def _update_relays(self):
     # Force an update every 15 minutes. This will make the graphs work better...
     force_update = int(time.time()) % (15 * 60) <= terrariumEngine.__ENGINE_LOOP_TIMEOUT
+
+    relays = []
     with orm.db_session():
-      for relay in Relay.select(lambda r: r.id in self.relays.keys() and not r.id in self.settings['exclude_ids']):
-        start = time.time()
-        try:
-          new_value = self.relays[relay.id].update()
-        except terrariumRelayUpdateException:
-          pass
+      # Get all loaded relays ordered by hardware address
+      relays = sorted(Relay.select(lambda r: r.id in self.relays.keys() and not r.id in self.settings['exclude_ids'])[:], key=lambda item: item.address)
 
-        measurement_time = time.time() - start
+    for relay in relays:
+      with orm.db_session():
+        current_value = relay.value
 
-        if new_value is None:
-          logger.warning(f'Could not take a new measurement from relay {relay}. Tried for {measurement_time:.2f} seconds. Skipping this update.')
-          continue
+      start = time.time()
+      try:
+        new_value = self.relays[relay.id].update()
+      except terrariumRelayUpdateException:
+        pass
 
-        change = new_value != relay.value
-        relay.update(new_value,force_update)
+      measurement_time = time.time() - start
 
-        db_time = (time.time() - start) - measurement_time
-        self.webserver.websocket_message('relay' , {'id' : relay.id, 'value' : new_value})
+      if new_value is None:
+        logger.warning(f'Could not take a new measurement from relay {relay}. Tried for {measurement_time:.2f} seconds. Skipping this update.')
+        continue
 
-        logger.info(f'Updated relay {relay} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds.')
-        logger.debug(f'Updated relay {relay} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
-
-        # Notification message
+      with orm.db_session():
+        Relay[relay.id].update(new_value,force_update)
         relay_data = relay.to_dict()
-        self.notification.message(f'relay_update' , relay_data)
 
-        if change:
-          self.notification.message(f'relay_change' , relay_data)
+      db_time = (time.time() - start) - measurement_time
+      self.webserver.websocket_message('relay' , {'id' : relay.id, 'value' : new_value})
 
-        # A small sleep between sensor measurement to get a bit more responsiveness of the system
-        sleep(0.1)
+      logger.info(f'Updated relay {relay} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds.')
+      logger.debug(f'Updated relay {relay} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
+
+      # Notification message
+      self.notification.message(f'relay_update' , relay_data)
+
+      if new_value != current_value:
+        self.notification.message(f'relay_change' , relay_data)
+
+      # A small sleep between sensor measurement to get a bit more responsiveness of the system
+      sleep(0.1)
 
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
+
 
   # -= NEW =-
   def toggle_relay(self, relay, action = 'toggle', duration = 0):
@@ -792,18 +808,22 @@ class terrariumEngine(object):
 
   # -= NEW =-
   def callback_relay(self, relay, state):
+    # First send websocket message before updating database
+    self.webserver.websocket_message('relay' , {'id' : relay, 'value' : state})
+
+    # Update database
     with orm.db_session():
       relay = Relay[relay]
       relay.update(state)
-      # And send a websocket update
-      self.webserver.websocket_message('relay' , {'id' : relay.id, 'value' : state})
-
-      # Notification message
       relay_data = relay.to_dict()
-      self.notification.message(f'relay_toggle' , relay_data)
 
+    # Update totals through websocket
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
+    # Notification message
+    self.notification.message(f'relay_toggle' , relay_data)
+
+    # Update enclosure states to reflect the new relay states
     if self.__engine['thread'] is not None and self.__engine['thread'].is_alive() and hasattr(self,'enclosures'):
       self._update_enclosures(True)
 
@@ -843,40 +863,51 @@ class terrariumEngine(object):
   def _update_buttons(self):
     # Force an update every hour. This will make the graphs work better...
     force_update = int(time.time()) % (60 * 60) <= terrariumEngine.__ENGINE_LOOP_TIMEOUT
+
+    buttons = []
     with orm.db_session():
-      for button in Button.select(lambda b: b.id in self.buttons.keys() and not b.id in self.settings['exclude_ids']):
-        start = time.time()
-        new_value = self.buttons[button.id].update()
-        measurement_time = time.time() - start
+      # Get all loaded buttons ordered by hardware address
+      buttons = sorted(Button.select(lambda b: b.id in self.buttons.keys() and not b.id in self.settings['exclude_ids'])[:], key=lambda item: item.address)
 
-        if new_value is None:
-          logger.warning(f'Could not take a new measurement from {button}. Tried for {measurement_time:.2f} seconds. Skipping this update.')
-          continue
+    for button in buttons:
+      with orm.db_session():
+        current_value = button.value
 
-        change = new_value != button.value
-        button.update(new_value,force_update)
-        db_time = (time.time() - start) - measurement_time
+      start = time.time()
+      new_value = self.buttons[button.id].update()
+      measurement_time = time.time() - start
 
-        logger.info(f'Updated {button} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds.')
-        logger.debug(f'Updated {button} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
+      if new_value is None:
+        logger.warning(f'Could not take a new measurement from {button}. Tried for {measurement_time:.2f} seconds. Skipping this update.')
+        continue
 
-        # Notification message
+      with orm.db_session():
+        Button[button.id].update(new_value,force_update)
         button_data = button.to_dict()
-        self.notification.message(f'button_update' , button_data)
 
-        if change:
-          self.notification.message(f'button_change' , button_data)
+      db_time = (time.time() - start) - measurement_time
 
-        # A small sleep between sensor measurement to get a bit more responsiveness of the system
-        sleep(0.1)
+      logger.info(f'Updated {button} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds.')
+      logger.debug(f'Updated {button} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
+
+      # Notification message
+      self.notification.message(f'button_update' , button_data)
+
+      if new_value != current_value:
+        self.notification.message(f'button_change' , button_data)
+
+      # A small sleep between sensor measurement to get a bit more responsiveness of the system
+      sleep(0.1)
 
   # -= NEW =-
+  # TODO: DB Optimization
   def button_action(self, button, state):
     with orm.db_session():
       button = Button[button]
       button.update(state,True)
 
       # Update the button state on the button page
+      # TODO: Remove the hardware value.... in new GUI not needed anymore
       self.webserver.websocket_message('button' , {'id' : button.id, 'hardware' : button.hardware, 'value' : button.value})
 
       # Notification message
@@ -940,43 +971,50 @@ class terrariumEngine(object):
 
   # -= NEW =-
   def _update_webcams(self):
+    webcams = []
     with orm.db_session():
-      for webcam in Webcam.select(lambda w: w.id in self.webcams.keys() and not w.id in self.settings['exclude_ids']):
-        start = time.time()
+      # Get all loaded webcam ordered by hardware address
+      webcams = sorted(Webcam.select(lambda w: w.id in self.webcams.keys() and not w.id in self.settings['exclude_ids'])[:], key=lambda item: item.address)
 
+    for webcam in webcams:
+      start = time.time()
+      with orm.db_session():
+        # Reload webcam from DB in order to get Enclosure and flash relays data.... :(
+        webcam = Webcam[webcam.id]
         # Get the current light state first, as processing new image could take 10 sec. In that period the lights could have been turned on,
         # where the picture is taken when the lights are off.
         current_state = 'on' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on else 'off'
         # Set the flash relays if selected
         relays = [] if webcam.flash is None else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
-        self.webcams[webcam.id].update(relays)
 
-        # Check archiving/motion settings
-        if 'disabled' != webcam.archive['state']:
+      self.webcams[webcam.id].update(relays)
 
-          # Check light status
-          if 'ignore' != webcam.archive['light'] and current_state != webcam.archive['light']:
-            #print(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
+      # Check archiving/motion settings
+      if 'disabled' != webcam.archive['state']:
+
+        # Check light status
+        if 'ignore' != webcam.archive['light'] and current_state != webcam.archive['light']:
+          #print(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
+          continue
+
+        # Check door status
+        if 'ignore' != webcam.archive['door']:
+          # Default state is that the doors are closed....
+          current_state = 'close' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].door_closed else 'open'
+
+          if webcam.archive['door'] != current_state:
+            #print(f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}')
             continue
 
-          # Check door status
-          if 'ignore' != webcam.archive['door']:
-            # Default state is that the doors are closed....
-            current_state = 'close' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].door_closed else 'open'
+        if 'motion' == webcam.archive['state']:
+          self.webcams[webcam.id].motion_capture(webcam.motion['frame'], int(webcam.motion['threshold']), int(webcam.motion['area']), webcam.motion['boxes'])
+        else:
+          self.webcams[webcam.id].archive(int(webcam.archive['state']))
 
-            if webcam.archive['door'] != current_state:
-              #print(f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}')
-              continue
+      logger.info(f'Updated {webcam} in {time.time()-start:.2f} seconds.')
 
-          if 'motion' == webcam.archive['state']:
-            self.webcams[webcam.id].motion_capture(webcam.motion['frame'], int(webcam.motion['threshold']), int(webcam.motion['area']), webcam.motion['boxes'])
-          else:
-            self.webcams[webcam.id].archive(int(webcam.archive['state']))
-
-        logger.info(f'Updated {webcam} in {time.time()-start:.2f} seconds.')
-
-        # A small sleep between sensor measurement to get a bit more responsiveness of the system
-        sleep(0.1)
+      # A small sleep between sensor measurement to get a bit more responsiveness of the system
+      sleep(0.1)
 
   # -= NEW =-
   def __load_existing_enclosures(self):
@@ -1597,7 +1635,7 @@ class terrariumEngine(object):
     data['power']['duration'] = total['duration']
     # Total power is converted from watt/s in kWh
     data['power']['total'] = total['total_watt'] / 3600.0 / 1000.0
-    # Price is intered as cents per kWh
+    # Price is entered as cents per kWh
     data['power']['costs'] = data['power']['total'] * self.settings['power_price']
 
     data['flow']['duration'] = total['duration']

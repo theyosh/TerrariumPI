@@ -2,9 +2,7 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from pony import orm
 from terrariumArea import terrariumArea
-from terrariumDatabase import Button, Relay, Sensor
 from terrariumUtils import terrariumUtils
 
 import copy

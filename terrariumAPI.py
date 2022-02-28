@@ -520,7 +520,7 @@ class terrariumAPI(object):
 
     return event
 
-  def calendar_list(self, upcoming = False):
+  def calendar_list(self):
     start = request.query.get('start', None)
     if start:
       start = datetime.fromisoformat(start)
