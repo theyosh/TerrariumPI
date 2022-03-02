@@ -1,6 +1,6 @@
 pip==22.0.3
 # Do not upgrade setup tools, as this will break building https://github.com/gbstack/ffprobe-python
-setuptools==60.8.2
+setuptools==60.9.3
 wheel==0.37.1
 
 # Database
