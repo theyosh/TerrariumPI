@@ -228,8 +228,8 @@ class terrariumRelay(object):
 
     if changed and self.callback is not None:
       # Tricky stuff... more threads...
-      threading.Thread(target=self.callback, args=(self.id, self.state)).start()
-#      self.callback(self.id, self.state)
+      threading.Thread(target=self.callback, args=(self.id, new_state)).start()
+      # self.callback(self.id, new_state)
 
     return changed
 

@@ -1105,7 +1105,7 @@ class terrariumEngine(object):
       # Sensors
       update_threads['sensors'] = threading.Thread(target=self._update_sensors)
       # Relays
-      update_threads['relays'] = threading.Thread(target=self._update_relays)
+      update_threads['relays']  = threading.Thread(target=self._update_relays)
       # Buttons
       update_threads['buttons'] = threading.Thread(target=self._update_buttons)
       # Webcams

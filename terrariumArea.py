@@ -767,7 +767,7 @@ class terrariumArea(object):
 
     relays = []
     with orm.db_session():
-      relays = orm.select(r.id for r in Relay if r.id in self.setup[part]['relays'] and not r.manual_mode)
+      relays = orm.select(r.id for r in Relay if r.id in self.setup[part]['relays'] and not r.manual_mode)[:]
 
     for relay in relays:
       relay = self.enclosure.relays[relay]

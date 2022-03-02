@@ -298,7 +298,10 @@ class terrariumNotification(terrariumSingleton):
   def broadcast(self, subject, message, image):
     for _, service in self.services.items():
       if service is not None and service.enabled:
-        service.send_message('system_broadcast', subject, message, None, [image])
+        try:
+          service.send_message('system_broadcast', subject, message, None, [image])
+        except Exception as ex:
+          logger.exception(f'Error sending broadcast message: {ex}')
 
   @property
   def version(self):
@@ -355,7 +358,11 @@ class terrariumNotification(terrariumSingleton):
             setup['profile_image'] = self.profile_image
             self.services[service.id] = terrariumNotificationService(service.id, service.type, service.name, service.enabled, setup)
 
-          self.services[service.id].send_message(message_type, title, text, data)
+          try:
+            self.services[service.id].send_message(message_type, title, text, data)
+          except Exception as ex:
+            logger.exception(f'Error sending notification message \'{title}\': {ex}')
+
 
   def stop(self):
     for _, service in self.services.items():
