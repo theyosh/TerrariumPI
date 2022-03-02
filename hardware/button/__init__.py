@@ -77,7 +77,6 @@ class terrariumButton(object):
                     'id'       : None,
                     'address'  : None,
                     'name'     : None,
-                    'callback' : callback,
                     'state'    : None}
 
     self._checker = {
@@ -85,8 +84,9 @@ class terrariumButton(object):
       'thread'  : None
     }
 
-    self.id      = id
-    self.name    = name
+    self.id       = id
+    self.name     = name
+    self.callback = callback
 
     # By setting the address, we will load the hardware.
     self.address = address
@@ -100,10 +100,8 @@ class terrariumButton(object):
       new_state = self._get_state()
       if new_state != self._device['state']:
         self._device['state'] = new_state
-        if self._device['callback'] is not None:
-          # Tricky stuff... more threads...
-          threading.Thread(target=self._device['callback'], args=(self.id, self._device['state'])).start()
-#          self._device['callback'](self.id, self._device['state'])
+        if self.callback is not None:
+          self.callback(self.id, self._device['state'])
 
       sleep(.1)
 
