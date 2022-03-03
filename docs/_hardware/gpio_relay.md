@@ -9,7 +9,7 @@ image:
   alt: "GPIO Relays header image"
 
 device_hardware : GPIO devices
-device_address: "Enter the relay GPIO physical port number for a single relay."
+device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the device is connected<br />Ex: `27`"
 #device_url : https://shop.meross.com/collections/smart-power-strip
 ---
 
