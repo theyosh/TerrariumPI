@@ -21,16 +21,17 @@ class terrariumIOExpander(object):
 
   @classproperty
   def available_hardware(__cls__):
-    return {'PCF8574' : 'PCF8574 Expander (8 ports)', 'PCF8575' : 'PCF8575 Expander (16 ports)'}
+    return {'PCF8574' : lambda: terrariumPCF8574IOExpander,
+            'PCF8575' : lambda: terrariumPCF8575IOExpander}
 
   # Return polymorph IO expander....
   def __new__(cls, hardware_type, address):
-    known_buttons = terrariumIOExpander.available_hardware
+    known_devices = terrariumIOExpander.available_hardware
 
-    if hardware_type not in known_buttons:
+    if hardware_type not in known_devices:
       raise terrariumIOExpanderException(f'IO Expander of hardware type {hardware_type} is unknown.')
 
-    return super(terrariumIOExpander, cls).__new__(known_buttons[hardware_type])
+    return super(terrariumIOExpander, cls).__new__(known_devices[hardware_type])
 
   def __init__(self, _, address):
     self.address = address
