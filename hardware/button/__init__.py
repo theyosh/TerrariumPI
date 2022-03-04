@@ -13,6 +13,9 @@ from gevent import sleep
 
 from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
+from hardware.io_expander import terrariumIOExpander
+
+
 class terrariumButtonException(TypeError):
   '''There is a problem with loading a hardware sensor.'''
   pass
@@ -73,11 +76,12 @@ class terrariumButton(object):
 
   def __init__(self, id, _, address, name = '', callback = None):
 
-    self._device = {'device'   : None,
-                    'id'       : None,
-                    'address'  : None,
-                    'name'     : None,
-                    'state'    : None}
+    self._device = {'device'      : None,
+                    'io_expander' : None,
+                    'id'          : None,
+                    'address'     : None,
+                    'name'        : None,
+                    'state'       : None}
 
     self._checker = {
       'running' : False,
@@ -106,13 +110,33 @@ class terrariumButton(object):
       sleep(.1)
 
   def _get_state(self):
-    return self.PRESSED if GPIO.input(self._device['device']) else self.RELEASED
+    if self._device['io_expander'] is not None:
+      # IO Expander in use
+      return self.PRESSED if self._device['io_expander'].port[self._device['device']] else self.RELEASED
+
+    else:
+      return self.PRESSED if GPIO.input(self._device['device']) else self.RELEASED
 
   def load_hardware(self):
     address = self._address
-    self._device['device'] = terrariumUtils.to_BCM_port_number(address[0])
-    GPIO.setup(self._device['device'], GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Data in
+
+    if len(address) >= 2:
+      # IO Expander in use... Only valid for motion and magnetic... LDR seems not suitable at the moment
+      if address[0].startsWith('16-'):
+        self._device['io_expander'] = terrariumIOExpander('PCF8575',','.join(address[1:]))
+      elif address[0].startsWith('8-'):
+        self._device['io_expander'] = terrariumIOExpander('PCF8574',','.join(address[1:]))
+
+      address[0] = int(address[0].split('-')[1])
+      self._device['device'] =  address[0] if self._PIN_OUT == None else self._PIN_OUT[address[0]]
+
+    else:
+      self._device['device'] = terrariumUtils.to_BCM_port_number(address[0])
+      GPIO.setup(self._device['device'], GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Data in
+
+
     self._load_hardware()
+
     self._checker['thread'] = threading.Thread(target=self._run)
     self._checker['thread'].start()
 
