@@ -74,7 +74,7 @@ class terrariumPCF8574IOExpander(terrariumIOExpander):
 
 class terrariumPCF8575IOExpander(terrariumIOExpander):
   HARDWARE = 'PCF8575'
-  NAME = 'PCF8575 Expander (8 ports)'
+  NAME = 'PCF8575 Expander (16 ports)'
 
   _PIN_OUT = [15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0]
 
