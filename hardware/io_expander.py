@@ -67,7 +67,7 @@ class terrariumPCF8574IOExpander(terrariumIOExpander):
 
   _PIN_OUT = [7,6,5,4,3,2,1,0]
 
-  def _load_hardware(self):
+  def load_hardware(self):
     address = self._address
     return PCF8574(address[1], address[0])
 
@@ -78,6 +78,6 @@ class terrariumPCF8575IOExpander(terrariumIOExpander):
 
   _PIN_OUT = [15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0]
 
-  def _load_hardware(self):
+  def load_hardware(self):
     address = self._address
     return PCF8575(address[1], address[0])
