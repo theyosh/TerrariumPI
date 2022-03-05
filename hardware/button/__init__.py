@@ -77,7 +77,7 @@ class terrariumButton(object):
   def __init__(self, id, _, address, name = '', callback = None):
 
     self._device = {'device'      : None,
-                    'io_expander' : None,
+#                    'io_expander' : None,
                     'id'          : None,
                     'address'     : None,
                     'name'        : None,
@@ -110,9 +110,13 @@ class terrariumButton(object):
       sleep(.1)
 
   def _get_state(self):
-    if self._device['io_expander'] is not None:
+    if isinstance(self._device['device'], terrariumIOExpander):
       # IO Expander in use
-      return self.PRESSED if self._device['io_expander'].port[self._device['device']] else self.RELEASED
+      state = self._device['device'].state
+      if state is None:
+        return None
+      else:
+        return self.PRESSED if state else self.RELEASED
 
     else:
       return self.PRESSED if GPIO.input(self._device['device']) else self.RELEASED
@@ -122,18 +126,16 @@ class terrariumButton(object):
 
     if len(address) >= 2:
       # IO Expander in use... Only valid for motion and magnetic... LDR seems not suitable at the moment
-      if address[0].startsWith('16-'):
-        self._device['io_expander'] = terrariumIOExpander('PCF8575',','.join(address[1:]))
-      elif address[0].startsWith('8-'):
-        self._device['io_expander'] = terrariumIOExpander('PCF8574',','.join(address[1:]))
+      if address[0].lower().startswith('pcf8575-'):
+        self._device['device'] = terrariumIOExpander('PCF8575',','.join(address[1:]))
+      elif address[0].lower().startswith('pcf8574-'):
+        self._device['device'] = terrariumIOExpander('PCF8574',','.join(address[1:]))
 
-      address[0] = int(address[0].split('-')[1])
-      self._device['device'] =  address[0] if self._PIN_OUT == None else self._PIN_OUT[address[0]]
+      self._device['device'].set_pin(int(address[0].split('-')[1]))
 
     else:
       self._device['device'] = terrariumUtils.to_BCM_port_number(address[0])
       GPIO.setup(self._device['device'], GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Data in
-
 
     self._load_hardware()
 
@@ -200,4 +202,5 @@ class terrariumButton(object):
     self._checker['running'] = False
     self._checker['thread'].join()
 
-    GPIO.cleanup(self._device['device'])
+    if not isinstance(self._device['device'], terrariumIOExpander):
+      GPIO.cleanup(self._device['device'])

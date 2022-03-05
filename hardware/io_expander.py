@@ -14,7 +14,6 @@ class terrariumIOExpanderException(TypeError):
   '''There is a problem with loading a hardware IO expander.'''
   pass
 
-
 class terrariumIOExpander(object):
   HARDWARE = None
   NAME = None
@@ -31,14 +30,18 @@ class terrariumIOExpander(object):
     if hardware_type not in known_devices:
       raise terrariumIOExpanderException(f'IO Expander of hardware type {hardware_type} is unknown.')
 
-    return super(terrariumIOExpander, cls).__new__(known_devices[hardware_type])
+    return super(terrariumIOExpander, cls).__new__(known_devices[hardware_type]())
 
   def __init__(self, _, address):
+    self.pin = None
     self.address = address
     self.device = self.load_hardware()
 
   def __repr__(self):
     return f'IO Expander at address \'{self.address}\''
+
+  def set_pin(self, nr):
+    self.pin = nr
 
   @property
   def _address(self):
@@ -51,22 +54,23 @@ class terrariumIOExpander(object):
 
     if len(address) == 1:
       address.append(1)
+    else:
+      address[1] = int(address[1])
 
     return address
 
-  def port(self, nr, state = None):
-    if state is None:
-      return self.device.port(self._PIN_OUT[nr])
-    else:
-      self.device.set_output(self._PIN_OUT[nr], state)
-      return True #?? Needed a return value for changing..
+  @property
+  def state(self):
+    try:
+      return 1 if self.device.get_pin_state(self.pin) else 0
+    except Exception as ex:
+      logger.error(f'Got an error reading IO expander {self}: {ex}')
+      return None
 
 
 class terrariumPCF8574IOExpander(terrariumIOExpander):
   HARDWARE = 'PCF8574'
   NAME = 'PCF8574 Expander (8 ports)'
-
-  _PIN_OUT = [7,6,5,4,3,2,1,0]
 
   def load_hardware(self):
     address = self._address
@@ -76,8 +80,6 @@ class terrariumPCF8574IOExpander(terrariumIOExpander):
 class terrariumPCF8575IOExpander(terrariumIOExpander):
   HARDWARE = 'PCF8575'
   NAME = 'PCF8575 Expander (16 ports)'
-
-  _PIN_OUT = [15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0]
 
   def load_hardware(self):
     address = self._address
