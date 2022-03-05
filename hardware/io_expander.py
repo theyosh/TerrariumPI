@@ -59,14 +59,6 @@ class terrariumIOExpander(object):
 
     return address
 
-  @property
-  def state(self):
-    try:
-      return 1 if self.device.get_pin_state(self.pin) else 0
-    except Exception as ex:
-      logger.error(f'Got an error reading IO expander {self}: {ex}')
-      return None
-
 
 class terrariumPCF8574IOExpander(terrariumIOExpander):
   HARDWARE = 'PCF8574'
@@ -76,8 +68,16 @@ class terrariumPCF8574IOExpander(terrariumIOExpander):
     address = self._address
     return PCF8574(address[1], address[0])
 
+  @property
+  def state(self):
+    try:
+      return 1 if self.device.get_pin_state(self.pin) else 0
+    except Exception as ex:
+      logger.error(f'Got an error reading IO expander {self}: {ex}')
+      return None
 
-class terrariumPCF8575IOExpander(terrariumIOExpander):
+
+class terrariumPCF8575IOExpander(terrariumPCF8574IOExpander):
   HARDWARE = 'PCF8575'
   NAME = 'PCF8575 Expander (16 ports)'
 
