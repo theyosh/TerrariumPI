@@ -1,4 +1,4 @@
-pip==22.0.3
+pip==22.0.4
 # Do not upgrade setup tools, as this will break building https://github.com/gbstack/ffprobe-python
 setuptools==60.9.3
 wheel==0.37.1
@@ -51,7 +51,9 @@ sht20==0.1.4
 
 # Webcam packages
 Pillow==9.0.1
-opencv-python-headless==4.5.5.62
+# Numpy is fixed to a working version
+numpy==1.21.4
+opencv-python-headless==4.5.5.64
 piexif==1.1.3
 
 # Calendar and utils
