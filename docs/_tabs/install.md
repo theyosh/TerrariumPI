@@ -120,7 +120,7 @@ After Git is installed, we can download the TerrariumPI source code. We will onl
 If you want to do some development or testing, omit the part `--depth 1`. Then you will get the full repository with all the branches.
 
 ```console
-git clone --branch 4.x.y.z --depth 1 https://github.com/theyosh/TerrariumPI.git
+git clone --branch main --depth 1 https://github.com/theyosh/TerrariumPI.git
 ```
 
 ### Installation
