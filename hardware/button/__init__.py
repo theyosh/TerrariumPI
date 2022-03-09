@@ -77,7 +77,6 @@ class terrariumButton(object):
   def __init__(self, id, _, address, name = '', callback = None):
 
     self._device = {'device'      : None,
-#                    'io_expander' : None,
                     'id'          : None,
                     'address'     : None,
                     'name'        : None,
@@ -114,6 +113,7 @@ class terrariumButton(object):
       # IO Expander in use
       state = self._device['device'].state
       if state is None:
+        # Device in error...
         return None
       else:
         return self.PRESSED if state else self.RELEASED

@@ -21,6 +21,7 @@ from math import log
 import time
 import uuid
 
+# https://stackoverflow.com/a/6798042
 # works in Python 2 & 3
 class _Singleton(type):
   """ A metaclass that creates a Singleton base class when called. """
