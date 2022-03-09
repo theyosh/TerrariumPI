@@ -71,7 +71,15 @@ class terrariumPCF8574IOExpander(terrariumIOExpander):
   @property
   def state(self):
     try:
-      return self.device.get_pin_state(self.pin)
+      return True if self.device.get_pin_state(self.pin) else False
+    except Exception as ex:
+      logger.error(f'Got an error reading {self}: {ex}')
+      return None
+
+  @state.setter
+  def state(self, state):
+    try:
+      return self.device.set_output(self.pin, state)
     except Exception as ex:
       logger.error(f'Got an error reading {self}: {ex}')
       return None
