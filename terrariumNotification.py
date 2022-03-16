@@ -331,8 +331,23 @@ class terrariumNotification(terrariumSingleton):
         data['date_short'] = datetime.datetime.now().strftime('%d-%m')
         data['time_short'] = datetime.datetime.now().strftime('%H:%M')
         data['now'] = data['date'] + ' ' + data['time']
-        title = Template(message.title).safe_substitute(**data)
-        text  = Template(message.message).safe_substitute(**data)
+
+        title = None
+        text = None
+        try:
+          # Legacy text formatting using '$' sign
+          title = message.title.replace('${','{').format(**data)
+        except Exception as ex:
+          logger.error(f'Wrong message formatting {ex}')
+
+        try:
+          # Legacy text formatting using '$' sign
+          text  = message.message.replace('${','{').format(**data)
+        except Exception as ex:
+          logger.error(f'Wrong message formatting {ex}')
+
+        if title is None and message is None:
+          continue
 
         if message.rate_limit > 0 and self.__rate_limit(title, message.rate_limit):
           logger.warning(f'Hitting the max rate limit of {self.__rate_limiter_counter[title]["rate"]} messages per minute for message {message.title}. Message will be ignored.')
