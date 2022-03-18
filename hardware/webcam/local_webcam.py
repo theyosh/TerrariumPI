@@ -1,8 +1,13 @@
+# -*- coding: utf-8 -*-
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
+
 from . import terrariumWebcam
 
 from pathlib import Path
 from io import BytesIO
 import re
+from PIL import Image
 
 class terrariumLocalWebcam(terrariumWebcam):
   HARDWARE     = 'local'
@@ -17,4 +22,12 @@ class terrariumLocalWebcam(terrariumWebcam):
     if not self._device['device'].exists():
       return False
 
-    return BytesIO(self._device['device'].read_bytes())
+    image = BytesIO(self._device['device'].read_bytes())
+
+    try:
+      with Image.open(image) as img:
+        img.verify() # verify that it is, in fact an image
+      return image
+    except Exception as e:
+      logger.error(f'Webcam image for {self} is not ready yet')
+      return None
