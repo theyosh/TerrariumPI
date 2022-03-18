@@ -163,11 +163,6 @@ class terrariumArea(object):
       if begin >= end:
         end += datetime.timedelta(hours=24)
 
-      # TODO: TESTING is this still needed.... we should not go back in time....
-      # if now < begin:
-      #   begin -= datetime.timedelta(hours=24)
-      #   end   -= datetime.timedelta(hours=24)
-
       if now > end:
         begin += datetime.timedelta(hours=24)
         end   += datetime.timedelta(hours=24)
@@ -395,13 +390,6 @@ class terrariumArea(object):
       })
 
   def _is_timer_time(self, period):
-    if 'main_lights' == self.mode:
-      main_lights = self.enclosure.main_lights
-      if main_lights is None:
-        return None
-
-      return main_lights._is_timer_time(period)
-
     if period not in self.setup or 'timetable' not in self.setup[period]:
       return False
 
@@ -412,13 +400,6 @@ class terrariumArea(object):
 
       elif time_schedule[0] <= now < time_schedule[1]:
         return True
-
-
-    # # TESTING TESTING THEYOSH
-    # if 'weather' == self.mode and datetime.datetime.fromtimestamp(self.setup[period]['timetable'][-1][1]).day == datetime.datetime.now().day:
-    #   # The day is not over yet, so return False. Else a new timetable for tomorrow will be calculated, and give wrong effect... This will delay it
-    #   #return False
-    #   logger.info('DEBUG: Weather night is starting... normally we return False here... but should be true when night relays in use')
 
     return None
 
@@ -883,7 +864,6 @@ class terrariumAreaLights(terrariumArea):
     if relay.id not in self.enclosure.relays:
       return
 
-#    logger.info(f'DEBUG: Toggle light of part: {part} relay: {relay}, to action: {action}')
     duration = 0
     delay = 0
 
@@ -896,7 +876,6 @@ class terrariumAreaLights(terrariumArea):
       print(ex)
 
     if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
-#      logger.info(f'DEBUG: Force off action to zero seconds..?')
       delay = 0
 
     if relay.is_dimmer:
@@ -912,9 +891,7 @@ class terrariumAreaLights(terrariumArea):
           logger.info(f'Stopping the dimmer {relay.name} from {old_state}% to {relay.OFF}% in {duration:.2f} seconds with a delay of {delay/60:.2f} minutes')
 
     else:
-
       action_ok = self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, delay=delay)
-#      logger.info(f'DEBUG: Toggle light of part: {part} relay: {relay}, to action: {action} -> success: {action_ok}')
 
       if action_ok:
         logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF} with a delay of {delay/60:.2f} minutes')
@@ -932,10 +909,7 @@ class terrariumAreaHeater(terrariumArea):
       if period not in self.state or len(self.setup[period]['relays']) == 0:
         continue
 
-#      for relay in self.setup[part]['relays']:
       powered = powered or (not self.relays_state(period, False))
-
-#      powered = powered or self.state[period]['powered']
 
     return powered
 
