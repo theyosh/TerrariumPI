@@ -592,8 +592,30 @@ class terrariumArea(object):
         self._update_variation()
 
       # And set the alarm values
-      self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_min']
-      self.state['sensors']['alarm_high'] = self.state['sensors']['current'] > self.state['sensors']['alarm_max']
+      ignore_low_alarm  = False
+      ignore_high_alarm = False
+      try:
+        ignore_low_alarm = self.setup['low']['ignore_low']
+      except:
+        pass
+
+      try:
+        ignore_high_alarm = self.setup['high']['ignore_high']
+      except:
+        pass
+
+      if ignore_low_alarm:
+        # Use the max alarm value to changing the relays
+        self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_max']
+      else:
+        # Normal state
+        self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_min']
+
+      if ignore_high_alarm:
+        # Use the min alarm value to changing the relays
+        self.state['sensors']['alarm_high'] = self.state['sensors']['current'] > self.state['sensors']['alarm_min']
+      else:
+        self.state['sensors']['alarm_high'] = self.state['sensors']['current'] > self.state['sensors']['alarm_max']
 
     # If the depending area is in alarm state, we cannot toggle this area and all the relays should be shutdown
     depends_on_alarm = False

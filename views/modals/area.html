@@ -604,41 +604,59 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-            <div class="form-group">
-              <label for="area_alarm_low_light_status">{{ _('Light status') }}</label>
-              <select class="select2" id="area_alarm_low_light_status" name="low_light_status" data-placeholder="{{ _('Select a state') }}" style="width: 100%;">
-                <option value="ignore">{{ _('Ignored') }}</option>
-                <option value="on">{{ _('On') }}</option>
-                <option value="off">{{ _('Off') }}</option>
-              </select>
-              <small class="text-muted">
-                {{ _('Select the lights status.') }}
-              </small>
-            </div>
-          </div>
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-            <div class="form-group">
-              <label for="area_alarm_low_door_status">{{ _('Door status') }}</label>
-              <select class="select2" id="area_alarm_low_door_status" name="low_door_status" data-placeholder="{{ _('Select a state') }}" style="width: 100%;">
-                <option value="ignore">{{ _('Ignored') }}</option>
-                <option value="open">{{ _('Open') }}</option>
-                <option value="closed">{{ _('Closed') }}</option>
-              </select>
-              <small class="text-muted">
-                {{ _('Select the door status.') }}
-              </small>
-            </div>
-          </div>
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-            <div class="form-group">
-              <label for="area_alarm_low_trigger_threshold">{{ _('Alarm threshold') }}</label>
-              <input type="number" step="1" min="0" class="form-control" id="area_alarm_low_trigger_threshold" value="0" name="low_trigger_threshold" placeholder="{{ _('Threshold') }}">
-              <small class="text-muted">
-                {{ _('Enter the amount of alarms before action take place.') }}
-              </small>
-              <div class="invalid-feedback">
-                {{ _('Please enter a minimum value of %s.') % ('0',) }}
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="area_alarm_low_light_status">{{ _('Light status') }}</label>
+                  <select class="select2" id="area_alarm_low_light_status" name="low_light_status" data-placeholder="{{ _('Select a state') }}" style="width: 100%;">
+                    <option value="ignore">{{ _('Ignored') }}</option>
+                    <option value="on">{{ _('On') }}</option>
+                    <option value="off">{{ _('Off') }}</option>
+                  </select>
+                  <small class="text-muted">
+                    {{ _('Select the lights status.') }}
+                  </small>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="area_alarm_low_door_status">{{ _('Door status') }}</label>
+                  <select class="select2" id="area_alarm_low_door_status" name="low_door_status" data-placeholder="{{ _('Select a state') }}" style="width: 100%;">
+                    <option value="ignore">{{ _('Ignored') }}</option>
+                    <option value="open">{{ _('Open') }}</option>
+                    <option value="closed">{{ _('Closed') }}</option>
+                  </select>
+                  <small class="text-muted">
+                    {{ _('Select the door status.') }}
+                  </small>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="area_alarm_low_trigger_threshold">{{ _('Alarm threshold') }}</label>
+                  <input type="number" step="1" min="0" class="form-control" id="area_alarm_low_trigger_threshold" value="0" name="low_trigger_threshold" placeholder="{{ _('Threshold') }}">
+                  <small class="text-muted">
+                    {{ _('Enter the amount of alarms before action take place.') }}
+                  </small>
+                  <div class="invalid-feedback">
+                    {{ _('Please enter a minimum value of %s.') % ('0',) }}
+                  </div>
+                </div>
+              </div>
+              <div class="col ignore_low_alarm">
+                <div class="form-group">
+                  <div class="switch">
+                    <label for="area_alarm_low_ignore_low" class="d-block">{{ _('Ignore low alarm') }}</label>
+                    <input type="checkbox" class="switch" id="area_alarm_low_ignore_low" name="low_ignore_low">
+                    <label for="area_alarm_low_ignore_low" class="mt-1"></label>
+                    <small class="text-muted">
+                      {{ _('Toggle to ignore the low alarm value of the sensors.') }}
+                    </small>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -733,45 +751,67 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-            <div class="form-group">
-              <label for="area_alarm_high_light_status">{{ _('Light status') }}</label>
-              <select class="select2" id="area_alarm_high_light_status" name="high_light_status" data-placeholder="{{ _('Select a state') }}" style="width: 100%;">
-                <option value="ignore">{{ _('Ignored') }}</option>
-                <option value="on">{{ _('On') }}</option>
-                <option value="off">{{ _('Off') }}</option>
-              </select>
-              <small class="text-muted">
-                {{ _('Select the light status.') }}
-              </small>
-            </div>
-          </div>
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-            <div class="form-group">
-              <label for="area_alarm_high_door_status">{{ _('Door status') }}</label>
-              <select class="select2" id="area_alarm_high_door_status" name="high_door_status" data-placeholder="{{ _('Select a state') }}" style="width: 100%;">
-                <option value="ignore">{{ _('Ignored') }}</option>
-                <option value="open">{{ _('Open') }}</option>
-                <option value="closed">{{ _('Closed') }}</option>
-              </select>
-              <small class="text-muted">
-                {{ _('Select the door status.') }}
-              </small>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="area_alarm_high_light_status">{{ _('Light status') }}</label>
+                  <select class="select2" id="area_alarm_high_light_status" name="high_light_status" data-placeholder="{{ _('Select a state') }}" style="width: 100%;">
+                    <option value="ignore">{{ _('Ignored') }}</option>
+                    <option value="on">{{ _('On') }}</option>
+                    <option value="off">{{ _('Off') }}</option>
+                  </select>
+                  <small class="text-muted">
+                    {{ _('Select the light status.') }}
+                  </small>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="area_alarm_high_door_status">{{ _('Door status') }}</label>
+                  <select class="select2" id="area_alarm_high_door_status" name="high_door_status" data-placeholder="{{ _('Select a state') }}" style="width: 100%;">
+                    <option value="ignore">{{ _('Ignored') }}</option>
+                    <option value="open">{{ _('Open') }}</option>
+                    <option value="closed">{{ _('Closed') }}</option>
+                  </select>
+                  <small class="text-muted">
+                    {{ _('Select the door status.') }}
+                  </small>
 
-            </div>
-          </div>
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-            <div class="form-group">
-              <label for="area_alarm_high_trigger_threshold">{{ _('Alarm threshold') }}</label>
-              <input type="number" step="1" min="0" class="form-control" id="area_alarm_high_trigger_threshold" value="0" name="high_trigger_threshold" placeholder="{{ _('Threshold') }}">
-              <small class="text-muted">
-                {{ _('Enter the amount of alarms before action take place.') }}
-              </small>
-              <div class="invalid-feedback">
-                {{ _('Please enter a minimum value of %s.') % ('0',) }}
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="area_alarm_high_trigger_threshold">{{ _('Alarm threshold') }}</label>
+                  <input type="number" step="1" min="0" class="form-control" id="area_alarm_high_trigger_threshold" value="0" name="high_trigger_threshold" placeholder="{{ _('Threshold') }}">
+                  <small class="text-muted">
+                    {{ _('Enter the amount of alarms before action take place.') }}
+                  </small>
+                  <div class="invalid-feedback">
+                    {{ _('Please enter a minimum value of %s.') % ('0',) }}
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col ignore_low_alarm">
+                <div class="form-group">
+                  <div class="switch">
+                    <label for="area_alarm_high_ignore_high" class="d-block">{{ _('Ignore high alarm') }}</label>
+                    <input type="checkbox" class="switch" id="area_alarm_high_ignore_high" name="high_ignore_high">
+                    <label for="area_alarm_high_ignore_high" class="mt-1"></label>
+                    <small class="text-muted">
+                      {{ _('Toggle to ignore the low alarm value of the sensors.') }}
+                    </small>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+
+
           <div class="col">
             <div class="form-group">
               <label for="area_alarm_high_relays">{{ _('Relays') }}</label>
@@ -1252,6 +1292,8 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
 {{modal_type}}_form.find('.row.area_type select[id$="sensors"]').on('change',function(event) {
   jQuery('div#area_variation input').prop('readonly',jQuery(this).val().length == 0);
   jQuery('div#area_variation select').prop('readonly',jQuery(this).val().length == 0);
+
+  jQuery('.ignore_low_alarm').toggle(jQuery(this).val().length != 0);
 });
 
 // Dimmer step settings for heating, humidity, etc
