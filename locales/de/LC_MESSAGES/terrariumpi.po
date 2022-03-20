@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2022-02-26 21:46+CET\n"
-"PO-Revision-Date: 2022-03-19 07:38+0000\n"
+"PO-Revision-Date: 2022-03-21 09:38+0000\n"
 "Last-Translator: Tobias Nitsch <info@sni-reptiles.com>\n"
 "Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/de/>\n"
@@ -172,19 +172,19 @@ msgstr "Lokales Datum"
 
 #: terrariumNotification.py:37
 msgid "Local date, day and month"
-msgstr "Datum, Tag und Monat"
+msgstr "Lokales Datum, Tag und Monat"
 
 #: terrariumNotification.py:38
 msgid "Local time"
-msgstr "lokale Uhrzeit"
+msgstr "Lokale Zeit"
 
 #: terrariumNotification.py:39
 msgid "Local time, hours and minutes"
-msgstr "lokale Uhrzeit, in Stunden und Minuten"
+msgstr "Lokale Zeit, in Stunden und Minuten"
 
 #: terrariumNotification.py:40
 msgid "Local date and time"
-msgstr "lokales Datum und Uhrzeit"
+msgstr "Lokales Datum und Uhrzeit"
 
 #: terrariumNotification.py:48
 msgid "Authentication login error"
@@ -249,7 +249,7 @@ msgstr "Speicherverbrauch"
 
 #: terrariumNotification.py:83
 msgid "Average of [sensor type] (ex. temperature)"
-msgstr "Wert von [Sensortyp] (außer Temperatur)"
+msgstr "Durchschnitt von [Sensortyp] (außer Temperatur)"
 
 #: terrariumNotification.py:84 terrariumNotification.py:131
 msgid "Sensor type unit value"
@@ -277,7 +277,7 @@ msgstr "Anzahl der aktiven Relais"
 
 #: terrariumNotification.py:96
 msgid "System to slow with updates (warning)"
-msgstr "System Update zu langsam (Warnung)"
+msgstr "System zu langsam mit Uptdates (Warnung)"
 
 #: terrariumNotification.py:99
 msgid "Duration in seconds that are short"
@@ -285,11 +285,11 @@ msgstr "Dauer in Sekunden die kurz sind"
 
 #: terrariumNotification.py:100
 msgid "The update duration in seconds"
-msgstr "Updatedauer in Sekunden"
+msgstr "Die Update Dauer in Sekunden"
 
 #: terrariumNotification.py:101
 msgid "The max update duration"
-msgstr "Die max. Updatedauer"
+msgstr "Die max. Update Dauer"
 
 #: terrariumNotification.py:102
 msgid "Amount of times to late with updates"
@@ -297,11 +297,11 @@ msgstr "Anzahl der verspäteten Updates"
 
 #: terrariumNotification.py:108
 msgid "System to slow with updates more then 30 times"
-msgstr "Systemupdates mehr als 30 mal zu langsam"
+msgstr "System mehr als 30 mal zu langsam mit Updates"
 
 #: terrariumNotification.py:115
 msgid "Sensor update (every 30 seconds)"
-msgstr "Sensorupdate (jede 30 Sekunden)"
+msgstr "Sensor Update (jede 30 Sekunden)"
 
 #: terrariumNotification.py:117 terrariumNotification.py:153
 #: terrariumNotification.py:184
@@ -337,11 +337,11 @@ msgstr "Adresse"
 
 #: terrariumNotification.py:122 views/modals/sensor.html:107
 msgid "Limit min"
-msgstr "Minimum"
+msgstr "Limit Minimum"
 
 #: terrariumNotification.py:123 views/modals/sensor.html:119
 msgid "Limit max"
-msgstr "Maximum"
+msgstr "Limit Maximum"
 
 #: terrariumNotification.py:124 views/modals/sensor.html:83
 msgid "Alarm min"
@@ -357,7 +357,7 @@ msgstr "Maximale Differenz"
 
 #: terrariumNotification.py:127
 msgid "Exclude from average"
-msgstr "Im Durchschnitt nicht berücksichtigen"
+msgstr "Ausschließen im Durchschnitt"
 
 #: terrariumNotification.py:129
 msgid "Current value"
@@ -442,7 +442,7 @@ msgstr "MQTT"
 
 #: terrariumNotification.py:402
 msgid "Pushover"
-msgstr "Pushover"
+msgstr "Push Over"
 
 #: terrariumNotification.py:406
 msgid "Buzzer"
@@ -766,7 +766,7 @@ msgstr "Taster hinzufügen"
 #: views/includes/sidebar.html:163 views/modals/enclosure.html:71
 #: views/webcams.html:2
 msgid "Webcams"
-msgstr "Webcams"
+msgstr "Webkameras"
 
 #: views/includes/sidebar.html:171
 msgid "Show"
@@ -1214,7 +1214,7 @@ msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
-"Die Dauer, die die Relais eingeschaltet sein sollen. Wenn dies kürzer als "
+"Die Dauer welche die Relais eingeschaltet sein sollen. Wenn dies kürzer als "
 "den ganzen Tag sein soll, gibt es eine Timerfunktion. Geben Sie '0' für die "
 "ganze Nacht ein."
 
@@ -1622,7 +1622,7 @@ msgstr "Geben Sie eine Nachricht ein. Sie können hier Platzhalter Werte nutzen.
 
 #: views/modals/message.html:82
 msgid "Services"
-msgstr "Services"
+msgstr "Leistungen"
 
 #: views/modals/message.html:85
 msgid "Select the service to use for this notification message."
@@ -1708,7 +1708,7 @@ msgstr "Dimmerfrequenz in Hz"
 
 #: views/modals/relay.html:96
 msgid "The frequency on which the dimmer operates."
-msgstr "Die Frequenz, mit der der Dimmer arbeitet."
+msgstr "Arbeitsfrequenz des Dimmers."
 
 #: views/modals/relay.html:105
 msgid "Max power in %"
@@ -1924,7 +1924,7 @@ msgstr "Der Schlüssel darf nicht leer sein."
 
 #: views/modals/service.html:195
 msgid "Bot Token"
-msgstr "Bot Token"
+msgstr "Bot Einheit"
 
 #: views/modals/service.html:201
 msgid "Username"
@@ -2004,7 +2004,7 @@ msgstr "MQTT Server Adresse"
 
 #: views/modals/service.html:334
 msgid "MQTT Server port"
-msgstr "MQTT Server port"
+msgstr "MQTT Server Port"
 
 #: views/modals/service.html:346
 msgid "MQTT Server username"
@@ -2527,7 +2527,7 @@ msgstr "Kilometer pro Stunde"
 
 #: views/settings.html:196
 msgid "Beaufort"
-msgstr "Beaufort"
+msgstr "Beaufort-Skala"
 
 #: views/settings.html:199
 msgid "Select the wind speed indicator. Only affects the current values."
@@ -2681,7 +2681,7 @@ msgstr "Einstellung"
 
 #: views/weather.html:49
 msgid "Temp."
-msgstr "Temp."
+msgstr "Temperatur."
 
 #: views/weather.html:71
 msgid "Forecast"
