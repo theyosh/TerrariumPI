@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2022-03-21 12:16+CET\n"
-"PO-Revision-Date: 2022-01-28 13:32+0000\n"
+"PO-Revision-Date: 2022-03-21 11:21+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1291,44 +1291,32 @@ msgid "Enter the amount of alarms before action take place."
 msgstr "Voer het aantal alarmen in voordat actie plaatsvindt."
 
 #: views/modals/area.html:652
-#, fuzzy
-#| msgid "Ignore webcam"
 msgid "Ignore low alarm"
-msgstr "Negeer de webcam"
+msgstr "Negeer laag alarm"
 
 #: views/modals/area.html:656
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor lower alarm value of the sensor. When below this value, "
-#| "alarms can be triggered."
 msgid ""
 "Toggle to ignore the low alarm value of the sensors, and use high alarm "
 "value only."
 msgstr ""
-"Bevat de sensor onderste alarmwaarde van de sensor. Onder deze waarde kunnen "
-"alarmen worden geactiveerd."
+"Schakel om de lage alarmwaarde van de sensoren te negeren en alleen de hoge "
+"alarmwaarde te gebruiken."
 
 #: views/modals/area.html:767
 msgid "Select the light status."
 msgstr "Selecteer de lichtstatus."
 
 #: views/modals/area.html:802
-#, fuzzy
-#| msgid "High alarm"
 msgid "Ignore high alarm"
-msgstr "Hoog alarm"
+msgstr "Negeer hoog alarm"
 
 #: views/modals/area.html:806
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor lower alarm value of the sensor. When below this value, "
-#| "alarms can be triggered."
 msgid ""
 "Toggle to ignore the high alarm value of the sensors, and use the low alarm "
 "value only"
 msgstr ""
-"Bevat de sensor onderste alarmwaarde van de sensor. Onder deze waarde kunnen "
-"alarmen worden geactiveerd."
+"Schakel om de hoge alarmwaarde van de sensoren te negeren en gebruik alleen "
+"de lage alarmwaarde"
 
 #: views/modals/area.html:834
 msgid ""
@@ -1764,22 +1752,16 @@ msgid "The dimmer offset."
 msgstr "De dimmer compensatie."
 
 #: views/modals/relay.html:129
-#, fuzzy
-#| msgid "minimum moist value"
 msgid "Dimmer max dim value"
-msgstr "minimale vochtigheidswaarde"
+msgstr "Dimmer max dim waarde"
 
 #: views/modals/relay.html:132
-#, fuzzy
-#| msgid "The dimmer offset."
 msgid "The dimmer max dim value."
-msgstr "De dimmer compensatie."
+msgstr "De maximale dim waarde van de dimmer."
 
 #: views/modals/relay.html:135
-#, fuzzy
-#| msgid "Enter a valid number."
 msgid "Please enter valid number"
-msgstr "Geef een geldig getal op."
+msgstr "Geef een geldig getal op"
 
 #: views/modals/sensor.html:12
 msgid "Sensor settings"
