@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2022-03-21 12:16+CET\n"
-"PO-Revision-Date: 2022-01-28 13:32+0000\n"
+"PO-Revision-Date: 2022-03-21 11:21+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United Kingdom) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_GB/>\n"
@@ -1285,44 +1285,32 @@ msgid "Enter the amount of alarms before action take place."
 msgstr "Enter the amount of alarms before action take place."
 
 #: views/modals/area.html:652
-#, fuzzy
-#| msgid "Ignore webcam"
 msgid "Ignore low alarm"
-msgstr "Ignore webcam"
+msgstr "Ignore low alarm"
 
 #: views/modals/area.html:656
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor lower alarm value of the sensor. When below this value, "
-#| "alarms can be triggered."
 msgid ""
 "Toggle to ignore the low alarm value of the sensors, and use high alarm "
 "value only."
 msgstr ""
-"Holds the sensor lower alarm value of the sensor. When below this value, "
-"alarms can be triggered."
+"Toggle to ignore the low alarm value of the sensors, and use high alarm "
+"value only."
 
 #: views/modals/area.html:767
 msgid "Select the light status."
 msgstr "Select the light status."
 
 #: views/modals/area.html:802
-#, fuzzy
-#| msgid "High alarm"
 msgid "Ignore high alarm"
-msgstr "High alarm"
+msgstr "Ignore high alarm"
 
 #: views/modals/area.html:806
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor lower alarm value of the sensor. When below this value, "
-#| "alarms can be triggered."
 msgid ""
 "Toggle to ignore the high alarm value of the sensors, and use the low alarm "
 "value only"
 msgstr ""
-"Holds the sensor lower alarm value of the sensor. When below this value, "
-"alarms can be triggered."
+"Toggle to ignore the high alarm value of the sensors, and use the low alarm "
+"value only"
 
 #: views/modals/area.html:834
 msgid ""
@@ -1756,22 +1744,16 @@ msgid "The dimmer offset."
 msgstr "The dimmer offset."
 
 #: views/modals/relay.html:129
-#, fuzzy
-#| msgid "minimum moist value"
 msgid "Dimmer max dim value"
-msgstr "minimum moist value"
+msgstr "Dimmer max dim value"
 
 #: views/modals/relay.html:132
-#, fuzzy
-#| msgid "The dimmer offset."
 msgid "The dimmer max dim value."
-msgstr "The dimmer offset."
+msgstr "The dimmer max dim value."
 
 #: views/modals/relay.html:135
-#, fuzzy
-#| msgid "Enter a valid number."
 msgid "Please enter valid number"
-msgstr "Enter a valid number."
+msgstr "Please enter valid number"
 
 #: views/modals/sensor.html:12
 msgid "Sensor settings"
