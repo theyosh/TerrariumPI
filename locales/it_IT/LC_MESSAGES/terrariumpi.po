@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-03-21 12:16+CET\n"
-"PO-Revision-Date: 2022-03-21 11:16+0000\n"
+"PO-Revision-Date: 2022-03-21 11:21+0000\n"
 "Last-Translator: Luca <lucagattuso.code@gmail.com>\n"
-"Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/4-x-"
-"y-z/it/>\n"
+"Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/it/>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1421,10 +1421,8 @@ msgid "Closed"
 msgstr "Chiuso"
 
 #: views/modals/area.html:633 views/modals/area.html:780
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select the door status."
-msgstr "Seleziona un'opzione"
+msgstr "Seleziona lo stato della porta."
 
 #: views/modals/area.html:639 views/modals/area.html:787
 #, fuzzy
@@ -1455,10 +1453,8 @@ msgstr ""
 "sotto questo valore possono essere attivati allarmi."
 
 #: views/modals/area.html:767
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select the light status."
-msgstr "Seleziona un'opzione"
+msgstr "Seleziona lo stato delle luci."
 
 #: views/modals/area.html:802
 #, fuzzy
@@ -1519,16 +1515,12 @@ msgid ""
 msgstr ""
 
 #: views/modals/area.html:895
-#, fuzzy
-#| msgid "Moisture"
 msgid "Enter a negative or positive offset value."
-msgstr "Umidità"
+msgstr "Inserisci un valore positivo o negativo di offset."
 
 #: views/modals/area.html:902
-#, fuzzy
-#| msgid "Timer period on duration in minutes"
 msgid "Enter a duration in minutes or the actual time of the day."
-msgstr "Durata in minuti timer acceso"
+msgstr "Inserisci una durata in minuti o l'orario del giorno."
 
 #: views/modals/area.html:909
 msgid ""
@@ -1576,22 +1568,16 @@ msgid "Use script"
 msgstr "Descrizione"
 
 #: views/modals/area.html:940
-#, fuzzy
-#| msgid "Picture rotation"
 msgid "Select a valid option."
-msgstr "Rotazione dell'immagine"
+msgstr "Seleziona un'opzione valida."
 
 #: views/modals/area.html:948
-#, fuzzy
-#| msgid "Timer period on duration in minutes"
 msgid "Enter a valid url, local json file or script file."
-msgstr "Durata in minuti timer acceso"
+msgstr "Inserisci un URL valido, un file JSON o uno script."
 
 #: views/modals/area.html:956
-#, fuzzy
-#| msgid "Offset in cm"
 msgid "Offset."
-msgstr "Offset in cm"
+msgstr "Offset"
 
 #: views/modals/area.html:994
 msgid "Dimmer on duration"
@@ -1644,18 +1630,14 @@ msgstr "Contiene la scheda audio utilizzata per la riproduzione audio."
 #: views/modals/button.html:27 views/modals/relay.html:27
 #: views/modals/sensor.html:26 views/modals/service.html:73
 #: views/modals/webcam.html:30
-#, fuzzy
-#| msgid "Select an option"
 msgid "Please select a hardware type."
-msgstr "Seleziona un'opzione"
+msgstr "Per favore seleziona un tipo di hardware."
 
 #: views/modals/button.html:36 views/modals/relay.html:36
 #: views/modals/sensor.html:51 views/modals/service.html:82
 #: views/modals/service.html:325 views/modals/webcam.html:40
-#, fuzzy
-#| msgid "Address"
 msgid "Enter an address."
-msgstr "Indirizzo"
+msgstr "Inserisci un indirizzo"
 
 #: views/modals/button.html:39 views/modals/relay.html:39
 #: views/modals/sensor.html:54 views/modals/service.html:85
@@ -1803,10 +1785,8 @@ msgid "Message type"
 msgstr "Nessun messaggio"
 
 #: views/modals/message.html:25
-#, fuzzy
-#| msgid "Location"
 msgid "Select the notification message type."
-msgstr "Località"
+msgstr "Seleziona il tipo di messaggio di notifica."
 
 #: views/modals/message.html:31
 msgid "Subject"
@@ -1830,20 +1810,16 @@ msgid ""
 msgstr ""
 
 #: views/modals/message.html:49
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter a valid number."
-msgstr "Data e ora"
+msgstr "Inserisci un numero valido."
 
 #: views/modals/message.html:56 views/modals/service.html:51
 msgid "Enabled"
 msgstr "Abilitato"
 
 #: views/modals/message.html:61
-#, fuzzy
-#| msgid "Location"
 msgid "Enable/disable this notification message."
-msgstr "Località"
+msgstr "Attiva/disattiva questo messaggio di notifica."
 
 #: views/modals/message.html:71
 #, fuzzy
@@ -1922,10 +1898,8 @@ msgid "Select all audio files for this playlist."
 msgstr "Contiene il volume per questa playlist."
 
 #: views/modals/playlist.html:70
-#, fuzzy
-#| msgid "Delete file"
 msgid "Select at least 1 audio file."
-msgstr "Elimina file"
+msgstr "Seleziona almeno un file audio."
 
 #: views/modals/relay.html:12
 #, fuzzy
@@ -1958,17 +1932,12 @@ msgid "Water flow"
 msgstr "Flusso d'acqua in L/m"
 
 #: views/modals/relay.html:70
-#, fuzzy
-#| msgid "The power usage and/or water flow per minute when switched on"
 msgid "Enter the max water flow when switched on."
-msgstr ""
-"Il consumo di elettricità e/o il flusso d'acqua al minuto quando acceso"
+msgstr "Inserisci la portata massima dell'acqua quando attivato."
 
 #: views/modals/relay.html:82 views/modals/sensor.html:75
-#, fuzzy
-#| msgid "Channels"
 msgid "The current state of the relay."
-msgstr "Canali"
+msgstr "Lo stato attuale del relay."
 
 #: views/modals/relay.html:93
 msgid "Dimmer frequency in Hz"
