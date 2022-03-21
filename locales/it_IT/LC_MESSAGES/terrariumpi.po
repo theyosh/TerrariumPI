@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-02-26 21:46+CET\n"
-"PO-Revision-Date: 2021-10-30 15:16+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/4-x-"
-"y-z/it/>\n"
+"PO-Revision-Date: 2022-03-21 11:16+0000\n"
+"Last-Translator: Luca <lucagattuso.code@gmail.com>\n"
+"Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/it/>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:33
@@ -25,10 +25,8 @@ msgid "Lighting"
 msgstr "Luci"
 
 #: terrariumArea.py:39
-#, fuzzy
-#| msgid "Settings"
 msgid "Heating"
-msgstr "Impostazioni"
+msgstr "Riscaldamento"
 
 #: terrariumArea.py:45
 msgid "Cooling"
@@ -76,11 +74,11 @@ msgstr "distanza"
 
 #: terrariumEngine.py:54
 msgid "altitude"
-msgstr ""
+msgstr "altitudine"
 
 #: terrariumEngine.py:55
 msgid "pressure"
-msgstr ""
+msgstr "pressione"
 
 #: terrariumEngine.py:56
 msgid "humidity"
@@ -1015,10 +1013,8 @@ msgstr ""
 #: views/modals/playlist.html:21 views/modals/relay.html:48
 #: views/modals/sensor.html:63 views/modals/service.html:32
 #: views/modals/webcam.html:52
-#, fuzzy
-#| msgid "Filename"
 msgid "Enter a name."
-msgstr "Nome file"
+msgstr "Inserisci un nome."
 
 #: views/modals/area.html:53 views/modals/button.html:51
 #: views/modals/enclosure.html:24 views/modals/event.html:21
@@ -1148,10 +1144,8 @@ msgstr ""
 #: views/modals/area.html:372 views/modals/area.html:543
 #: views/modals/area.html:555 views/modals/area.html:672
 #: views/modals/area.html:684 views/modals/area.html:924
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter a valid time."
-msgstr "Data e ora"
+msgstr "Inserisci un'ora valida."
 
 #: views/modals/area.html:149 views/modals/area.html:204
 #: views/modals/area.html:296 views/modals/area.html:366
@@ -1218,10 +1212,8 @@ msgstr "Contiene la scheda audio utilizzata per la riproduzione audio."
 #: views/modals/area.html:567 views/modals/area.html:579
 #: views/modals/area.html:696 views/modals/area.html:708
 #: views/modals/area.html:932
-#, fuzzy
-#| msgid "Timer period on duration in minutes"
 msgid "Enter a valid duration in minutes."
-msgstr "Durata in minuti timer acceso"
+msgstr "Inserisci una durata in minuti valida."
 
 #: views/modals/area.html:323 views/modals/area.html:576
 #: views/modals/area.html:705
@@ -1231,16 +1223,12 @@ msgid ""
 msgstr ""
 
 #: views/modals/area.html:335 views/modals/area.html:405
-#, fuzzy
-#| msgid "Temperature sensors"
 msgid "Select the playlist(s) to be played."
-msgstr "Sensori di temperatura"
+msgstr "Seleziona la/le playlist che devono essere riprodotte."
 
 #: views/modals/area.html:338 views/modals/area.html:408
-#, fuzzy
-#| msgid "Delete file"
 msgid "Select at least 1 playlist."
-msgstr "Elimina file"
+msgstr "Seleziona almeno una playlist."
 
 #: views/modals/area.html:357 views/modals/area.html:669
 msgid "The time of the day when the relays are toggled on each night."
@@ -1273,10 +1261,8 @@ msgid "Select sensors to use for sensor based mode."
 msgstr ""
 
 #: views/modals/area.html:448
-#, fuzzy
-#| msgid "Delete file"
 msgid "Select at least 1 sensor."
-msgstr "Elimina file"
+msgstr "Seleziona almeno un sensore."
 
 #: views/modals/area.html:454
 #, fuzzy
@@ -1285,11 +1271,8 @@ msgid "Water volume"
 msgstr "volume"
 
 #: views/modals/area.html:457
-#, fuzzy
-#| msgid "The power usage and/or water flow per minute when switched on"
 msgid "Enter the volume of the water tank."
-msgstr ""
-"Il consumo di elettricità e/o il flusso d'acqua al minuto quando acceso"
+msgstr "Inserisci il volume del serbatoio dell'acqua."
 
 #: views/modals/area.html:460 views/modals/area.html:472
 #: views/modals/area.html:484 views/modals/area.html:641
@@ -1380,17 +1363,13 @@ msgid "Power on time"
 msgstr "Acceso"
 
 #: views/modals/area.html:588 views/modals/area.html:717
-#, fuzzy
-#| msgid "Channels"
 msgid "The duration in seconds to toggle on the relay."
-msgstr "Canali"
+msgstr "La durata in secondi per attivare il relay."
 
 #: views/modals/area.html:591 views/modals/area.html:603
 #: views/modals/area.html:720 views/modals/area.html:732
-#, fuzzy
-#| msgid "Spray duration (seconds)"
 msgid "Enter a valid duration in seconds."
-msgstr "Durata della nebulizzazione (secondi)"
+msgstr "Inserisci una durata valida in secondi."
 
 #: views/modals/area.html:597 views/modals/area.html:726
 #, fuzzy
@@ -2075,34 +2054,24 @@ msgstr "Contiene la scheda audio utilizzata per la riproduzione audio."
 
 #: views/modals/sensor.html:166 views/modals/sensor.html:178
 #: views/modals/sensor.html:190
-#, fuzzy
-#| msgid "Filename"
 msgid "Enter a numeric value."
-msgstr "Nome file"
+msgstr "Inserisci un valore numerico."
 
 #: views/modals/sensor.html:172
-#, fuzzy
-#| msgid "Moisture"
 msgid "minimum moist value"
-msgstr "Umidità"
+msgstr "valore minimo umidità"
 
 #: views/modals/sensor.html:175
-#, fuzzy
-#| msgid "Moisture"
 msgid "Enter this minimum moist value."
-msgstr "Umidità"
+msgstr "Inserisci il valore minimo di umidità"
 
 #: views/modals/sensor.html:184
-#, fuzzy
-#| msgid "Moisture"
 msgid "Maximum moist value"
-msgstr "Umidità"
+msgstr "Umidità massima"
 
 #: views/modals/sensor.html:187
-#, fuzzy
-#| msgid "Moisture"
 msgid "Enter the maximum moisture value."
-msgstr "Umidità"
+msgstr "Inserisci il valore più alto di umidità."
 
 #: views/modals/sensor.html:196
 #, fuzzy
@@ -2125,90 +2094,71 @@ msgid "Notification service settings"
 msgstr "Località"
 
 #: views/modals/service.html:23
-#, fuzzy
-#| msgid "Location"
 msgid "Select the notification service type."
-msgstr "Località"
+msgstr "Seleziona il tipo di servizio per le notifiche."
 
 #: views/modals/service.html:44
 msgid ""
 "Maximum number of messages per minute for this service. Use 0 for unlimited."
 msgstr ""
+"Numero massimo di messaggi al minuto per questo servizio. Utilizza 0 se non "
+"vuoi impostare alcun limite."
 
 #: views/modals/service.html:55
-#, fuzzy
-#| msgid "Location"
 msgid "Enable/disable this notification service."
-msgstr "Località"
+msgstr "Attiva/disattiva il servizio di notifica."
 
 #: views/modals/service.html:70
-#, fuzzy
-#| msgid "Holds the soundcard that is used for playing audio."
 msgid "Select the hardware type for this display."
-msgstr "Contiene la scheda audio utilizzata per la riproduzione audio."
+msgstr "Seleziona il tipo di hardware per questo display."
 
 #: views/modals/service.html:92
 msgid "Show title"
-msgstr ""
+msgstr "Mostra il titolo"
 
 #: views/modals/service.html:97
 msgid "Show a name and version as title on the display."
-msgstr ""
+msgstr "Mostra il nome e la versione come titolo sul display."
 
 #: views/modals/service.html:105
 msgid "Receiver email"
-msgstr ""
+msgstr "Indirizzo email del destinatario"
 
 #: views/modals/service.html:108
-#, fuzzy
-#| msgid "Address"
 msgid "Enter an email address."
-msgstr "Indirizzo"
+msgstr "Inserisci un indirizzo email."
 
 #: views/modals/service.html:117
-#, fuzzy
-#| msgid "OWFS server port"
 msgid "SMTP Server address"
-msgstr "Porta server OWFS"
+msgstr "Indirizzo del server SMTP"
 
 #: views/modals/service.html:120
-#, fuzzy
-#| msgid "Address"
 msgid "Enter the mail server address."
-msgstr "Indirizzo"
+msgstr "Insierisci l'indirizzo del mail server"
 
 #: views/modals/service.html:129
-#, fuzzy
-#| msgid "OWFS server port"
 msgid "SMTP Server port"
-msgstr "Porta server OWFS"
+msgstr "Porta del server SMTP"
 
 #: views/modals/service.html:132 views/modals/service.html:337
-#, fuzzy
-#| msgid "Filename"
 msgid "Enter a port number."
-msgstr "Nome file"
+msgstr "Inserisci il numero della porta."
 
 #: views/modals/service.html:135 views/modals/service.html:340
 msgid "The port number cannot be empty."
-msgstr ""
+msgstr "Il numero della porta non può essere vuoto."
 
 #: views/modals/service.html:141
-#, fuzzy
 msgid "SMTP Server username"
-msgstr "username Meross Cloud"
+msgstr "username del server SMTP"
 
 #: views/modals/service.html:144 views/modals/service.html:349
-#, fuzzy
-#| msgid "Filename"
 msgid "Enter a username."
-msgstr "Nome file"
+msgstr "Inserisci un nome utente"
 
 #: views/modals/service.html:150
-#, fuzzy
-#| msgid "OWFS server port"
 msgid "SMTP Server password"
-msgstr "Porta server OWFS"
+msgstr "Password del server SMTP"
 
 #: views/modals/service.html:153 views/modals/service.html:358
 #, fuzzy
@@ -2235,10 +2185,8 @@ msgid "The API token cannot be empty."
 msgstr ""
 
 #: views/modals/service.html:176
-#, fuzzy
-#| msgid "Filename"
 msgid "User key"
-msgstr "Nome file"
+msgstr "User key"
 
 #: views/modals/service.html:179
 #, fuzzy
@@ -2609,10 +2557,8 @@ msgid "Light status for taking an archive image."
 msgstr ""
 
 #: views/modals/webcam.html:156
-#, fuzzy
-#| msgid "Door status"
 msgid "Archive door state"
-msgstr "Stato della porta"
+msgstr "Archivia lo stato della porta"
 
 #: views/modals/webcam.html:165
 msgid "Door status for taking an archive image."
@@ -3680,10 +3626,8 @@ msgid "Not all required fields are entered correctly."
 msgstr "I campi richiesti sono segnati con '%s'."
 
 #: views/audio_files.html:161 views/audio_files.html:168 views/relays.html:121
-#, fuzzy
-#| msgid "OK!"
 msgid "OK"
-msgstr "OK!"
+msgstr "OK"
 
 #: views/includes/navigation.html:22
 #, fuzzy
@@ -3696,10 +3640,8 @@ msgid "Password"
 msgstr ""
 
 #: views/modals/enclosure.html:177 views/settings.html:427
-#, fuzzy
-#| msgid "File is not uploaded!"
 msgid "Profile image is uploaded."
-msgstr "Il file non è stato caricato!"
+msgstr "L'immagine profilo è stata caricata."
 
 #: views/includes/sidebar.html:280
 #, fuzzy
