@@ -1985,8 +1985,6 @@ function websocket_init(reconnect) {
               }
             });
           });
-
-          loadSparkLines()
           break;
 
       case 'door_status':

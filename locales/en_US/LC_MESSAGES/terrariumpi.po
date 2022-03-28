@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2022-02-26 21:46+CET\n"
-"PO-Revision-Date: 2022-01-28 13:32+0000\n"
+"POT-Creation-Date: 2022-03-21 12:16+CET\n"
+"PO-Revision-Date: 2022-03-21 11:21+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: English (United States) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/en_US/>\n"
@@ -138,31 +138,31 @@ msgstr "water_flow"
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:1169 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1207 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Up time"
 
-#: terrariumEngine.py:1175
+#: terrariumEngine.py:1213
 msgid "System load"
 msgstr "System load"
 
-#: terrariumEngine.py:1181 views/status.html:44
+#: terrariumEngine.py:1219 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU Temperature"
 
-#: terrariumEngine.py:1187
+#: terrariumEngine.py:1225
 msgid "Storage"
 msgstr "Storage"
 
-#: terrariumEngine.py:1193
+#: terrariumEngine.py:1231
 msgid "Memory"
 msgstr "Memory"
 
-#: terrariumEngine.py:1214
+#: terrariumEngine.py:1252
 msgid "average {sensor_type}"
 msgstr "average {sensor_type}"
 
-#: terrariumEngine.py:1390
+#: terrariumEngine.py:1428
 msgid "last update"
 msgstr "last update"
 
@@ -420,31 +420,31 @@ msgstr "Button action"
 msgid "Webcam archive"
 msgstr "Webcam archive"
 
-#: terrariumNotification.py:376
+#: terrariumNotification.py:398
 msgid "Display"
 msgstr "Display"
 
-#: terrariumNotification.py:380
+#: terrariumNotification.py:402
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:390
+#: terrariumNotification.py:412
 msgid "Traffic light"
 msgstr "Traffic light"
 
-#: terrariumNotification.py:394
+#: terrariumNotification.py:416
 msgid "Web-hook"
 msgstr "Web-hook"
 
-#: terrariumNotification.py:398
+#: terrariumNotification.py:420
 msgid "MQTT"
 msgstr "MQTT"
 
-#: terrariumNotification.py:402
+#: terrariumNotification.py:424
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:406
+#: terrariumNotification.py:428
 msgid "Buzzer"
 msgstr "Buzzer"
 
@@ -492,7 +492,7 @@ msgid "Size"
 msgstr "Size"
 
 #: views/audio_files.html:28 views/audio_files.html:39
-#: views/modals/area.html:826 views/playlists.html:31 views/playlists.html:46
+#: views/modals/area.html:866 views/playlists.html:31 views/playlists.html:46
 msgid "Action"
 msgstr "Action"
 
@@ -746,8 +746,8 @@ msgid "Scan sensors"
 msgstr "Scan sensors"
 
 #: views/includes/sidebar.html:111 views/modals/area.html:179
-#: views/modals/area.html:222 views/modals/area.html:647
-#: views/modals/area.html:777 views/relays.html:2
+#: views/modals/area.html:222 views/modals/area.html:665
+#: views/modals/area.html:817 views/relays.html:2
 msgid "Relays"
 msgstr "Relays"
 
@@ -997,7 +997,7 @@ msgstr "Night settings"
 
 #: views/modals/area.html:137 views/modals/area.html:198
 #: views/modals/area.html:284 views/modals/area.html:354
-#: views/modals/area.html:537 views/modals/area.html:666
+#: views/modals/area.html:537 views/modals/area.html:684
 msgid "Begin time"
 msgstr "Begin time"
 
@@ -1010,14 +1010,14 @@ msgstr "The time of the day when the relays are toggled on each day."
 #: views/modals/area.html:167 views/modals/area.html:290
 #: views/modals/area.html:302 views/modals/area.html:360
 #: views/modals/area.html:372 views/modals/area.html:543
-#: views/modals/area.html:555 views/modals/area.html:672
-#: views/modals/area.html:684 views/modals/area.html:924
+#: views/modals/area.html:555 views/modals/area.html:690
+#: views/modals/area.html:702 views/modals/area.html:964
 msgid "Enter a valid time."
 msgstr "Enter a valid time."
 
 #: views/modals/area.html:149 views/modals/area.html:204
 #: views/modals/area.html:296 views/modals/area.html:366
-#: views/modals/area.html:549 views/modals/area.html:678
+#: views/modals/area.html:549 views/modals/area.html:696
 msgid "End time"
 msgstr "End time"
 
@@ -1028,7 +1028,7 @@ msgstr "The time of the day when the relays are toggled off each day."
 
 #: views/modals/area.html:161 views/modals/area.html:210
 #: views/modals/area.html:308 views/modals/area.html:378
-#: views/modals/area.html:561 views/modals/area.html:690
+#: views/modals/area.html:561 views/modals/area.html:708
 msgid "On duration"
 msgstr "On duration"
 
@@ -1042,12 +1042,12 @@ msgstr ""
 
 #: views/modals/area.html:173 views/modals/area.html:216
 #: views/modals/area.html:320 views/modals/area.html:390
-#: views/modals/area.html:573 views/modals/area.html:702
+#: views/modals/area.html:573 views/modals/area.html:720
 msgid "Off duration"
 msgstr "Off duration"
 
-#: views/modals/area.html:182 views/modals/area.html:650
-#: views/modals/area.html:780
+#: views/modals/area.html:182 views/modals/area.html:668
+#: views/modals/area.html:820
 msgid "Select the relays to toggle."
 msgstr "Select the relays to toggle."
 
@@ -1070,13 +1070,13 @@ msgstr "Select the sound card that is used for this enclosure."
 #: views/modals/area.html:314 views/modals/area.html:326
 #: views/modals/area.html:384 views/modals/area.html:396
 #: views/modals/area.html:567 views/modals/area.html:579
-#: views/modals/area.html:696 views/modals/area.html:708
-#: views/modals/area.html:932
+#: views/modals/area.html:714 views/modals/area.html:726
+#: views/modals/area.html:972
 msgid "Enter a valid duration in minutes."
 msgstr "Enter a valid duration in minutes."
 
 #: views/modals/area.html:323 views/modals/area.html:576
-#: views/modals/area.html:705
+#: views/modals/area.html:723
 msgid ""
 "The duration when the relays should be stay off when switched off. Enter '0' "
 "to disable."
@@ -1092,11 +1092,11 @@ msgstr "Select the playlist(s) to be played."
 msgid "Select at least 1 playlist."
 msgstr "Select at least 1 playlist."
 
-#: views/modals/area.html:357 views/modals/area.html:669
+#: views/modals/area.html:357 views/modals/area.html:687
 msgid "The time of the day when the relays are toggled on each night."
 msgstr "The time of the day when the relays are toggled on each night."
 
-#: views/modals/area.html:369 views/modals/area.html:681
+#: views/modals/area.html:369 views/modals/area.html:699
 msgid "The time of the day when the relays are toggled off each night."
 msgstr "The time of the day when the relays are toggled off each night."
 
@@ -1141,8 +1141,8 @@ msgid "Enter the volume of the water tank."
 msgstr "Enter the volume of the water tank."
 
 #: views/modals/area.html:460 views/modals/area.html:472
-#: views/modals/area.html:484 views/modals/area.html:641
-#: views/modals/area.html:771 views/modals/relay.html:63
+#: views/modals/area.html:484 views/modals/area.html:645
+#: views/modals/area.html:793 views/modals/relay.html:63
 #: views/modals/relay.html:73 views/modals/sensor.html:89
 #: views/modals/sensor.html:101 views/modals/sensor.html:113
 #: views/modals/sensor.html:125 views/modals/sensor.html:137
@@ -1159,7 +1159,7 @@ msgstr "Height"
 msgid "Enter the height of the water tank."
 msgstr "Enter the height of the water tank."
 
-#: views/modals/area.html:478 views/modals/area.html:816
+#: views/modals/area.html:478 views/modals/area.html:856
 #: views/modals/sensor.html:160
 msgid "Offset"
 msgstr "Offset"
@@ -1208,7 +1208,7 @@ msgstr "High alarm"
 msgid "Variation"
 msgstr "Variation"
 
-#: views/modals/area.html:564 views/modals/area.html:693
+#: views/modals/area.html:564 views/modals/area.html:711
 msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full night."
@@ -1216,79 +1216,103 @@ msgstr ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full night."
 
-#: views/modals/area.html:585 views/modals/area.html:714
+#: views/modals/area.html:585 views/modals/area.html:732
 msgid "Power on time"
 msgstr "Power on time"
 
-#: views/modals/area.html:588 views/modals/area.html:717
+#: views/modals/area.html:588 views/modals/area.html:735
 msgid "The duration in seconds to toggle on the relay."
 msgstr "The duration in seconds to toggle on the relay."
 
 #: views/modals/area.html:591 views/modals/area.html:603
-#: views/modals/area.html:720 views/modals/area.html:732
+#: views/modals/area.html:738 views/modals/area.html:750
 msgid "Enter a valid duration in seconds."
 msgstr "Enter a valid duration in seconds."
 
-#: views/modals/area.html:597 views/modals/area.html:726
+#: views/modals/area.html:597 views/modals/area.html:744
 msgid "Settle time"
 msgstr "Settle time"
 
-#: views/modals/area.html:600 views/modals/area.html:729
+#: views/modals/area.html:600 views/modals/area.html:747
 msgid "The duration in seconds between two actions."
 msgstr "The duration in seconds between two actions."
 
-#: views/modals/area.html:609 views/modals/area.html:738
+#: views/modals/area.html:613 views/modals/area.html:760
 msgid "Light status"
 msgstr "Light status"
 
-#: views/modals/area.html:611 views/modals/area.html:624
-#: views/modals/area.html:740 views/modals/area.html:753
+#: views/modals/area.html:615 views/modals/area.html:628
+#: views/modals/area.html:762 views/modals/area.html:775
 #: views/modals/webcam.html:144 views/modals/webcam.html:159
 msgid "Ignored"
 msgstr "Ignored"
 
-#: views/modals/area.html:612 views/modals/area.html:741
+#: views/modals/area.html:616 views/modals/area.html:763
 msgid "On"
 msgstr "On"
 
-#: views/modals/area.html:613 views/modals/area.html:742
+#: views/modals/area.html:617 views/modals/area.html:764
 msgid "Off"
 msgstr "Off"
 
-#: views/modals/area.html:616
+#: views/modals/area.html:620
 msgid "Select the lights status."
 msgstr "Select the lights status."
 
-#: views/modals/area.html:622 views/modals/area.html:751
+#: views/modals/area.html:626 views/modals/area.html:773
 msgid "Door status"
 msgstr "Door status"
 
-#: views/modals/area.html:625 views/modals/area.html:754
+#: views/modals/area.html:629 views/modals/area.html:776
 #: views/modals/webcam.html:161
 msgid "Open"
 msgstr "Open"
 
-#: views/modals/area.html:626 views/modals/area.html:755
+#: views/modals/area.html:630 views/modals/area.html:777
 msgid "Closed"
 msgstr "Closed"
 
-#: views/modals/area.html:629 views/modals/area.html:758
+#: views/modals/area.html:633 views/modals/area.html:780
 msgid "Select the door status."
 msgstr "Select the door status."
 
-#: views/modals/area.html:635 views/modals/area.html:765
+#: views/modals/area.html:639 views/modals/area.html:787
 msgid "Alarm threshold"
 msgstr "Alarm threshold"
 
-#: views/modals/area.html:638 views/modals/area.html:768
+#: views/modals/area.html:642 views/modals/area.html:790
 msgid "Enter the amount of alarms before action take place."
 msgstr "Enter the amount of alarms before action take place."
 
-#: views/modals/area.html:745
+#: views/modals/area.html:652
+msgid "Ignore low alarm"
+msgstr "Ignore low alarm"
+
+#: views/modals/area.html:656
+msgid ""
+"Toggle to ignore the low alarm value of the sensors, and use high alarm "
+"value only."
+msgstr ""
+"Toggle to ignore the low alarm value of the sensors, and use high alarm "
+"value only."
+
+#: views/modals/area.html:767
 msgid "Select the light status."
 msgstr "Select the light status."
 
-#: views/modals/area.html:794
+#: views/modals/area.html:802
+msgid "Ignore high alarm"
+msgstr "Ignore high alarm"
+
+#: views/modals/area.html:806
+msgid ""
+"Toggle to ignore the high alarm value of the sensors, and use the low alarm "
+"value only"
+msgstr ""
+"Toggle to ignore the high alarm value of the sensors, and use the low alarm "
+"value only"
+
+#: views/modals/area.html:834
 msgid ""
 "Here you can enter periods where the sensors will change their values "
 "according to the list below. Make sure the periods are in chronological "
@@ -1298,41 +1322,41 @@ msgstr ""
 "according to the list below. Make sure the periods are in chronological "
 "order!"
 
-#: views/modals/area.html:801
+#: views/modals/area.html:841
 msgid "Source"
 msgstr "Source"
 
-#: views/modals/area.html:806
+#: views/modals/area.html:846
 msgid "Period/duration"
 msgstr "Period/duration"
 
-#: views/modals/area.html:811
+#: views/modals/area.html:851
 msgid "External source url"
 msgstr "External source url"
 
-#: views/modals/area.html:821
+#: views/modals/area.html:861
 msgid "Value"
 msgstr "Value"
 
-#: views/modals/area.html:841
+#: views/modals/area.html:881
 msgid "After x minutes change to value or at exactly a time stamp."
 msgstr "After x minutes change to value or at exactly a time stamp."
 
-#: views/modals/area.html:848
+#: views/modals/area.html:888
 msgid ""
 "Enter a full url to the external source according to the Remote data feature."
 msgstr ""
 "Enter a full url to the external source according to the Remote data feature."
 
-#: views/modals/area.html:855
+#: views/modals/area.html:895
 msgid "Enter a negative or positive offset value."
 msgstr "Enter a negative or positive offset value."
 
-#: views/modals/area.html:862
+#: views/modals/area.html:902
 msgid "Enter a duration in minutes or the actual time of the day."
 msgstr "Enter a duration in minutes or the actual time of the day."
 
-#: views/modals/area.html:869
+#: views/modals/area.html:909
 msgid ""
 "Enter a negative or positive value for a relative action. A number is "
 "treated as an absolute value."
@@ -1340,55 +1364,55 @@ msgstr ""
 "Enter a negative or positive value for a relative action. A number is "
 "treated as an absolute value."
 
-#: views/modals/area.html:876
+#: views/modals/area.html:916
 msgid "Add a new row"
 msgstr "Add a new row"
 
-#: views/modals/area.html:883
+#: views/modals/area.html:923
 msgid "Remove row"
 msgstr "Remove row"
 
-#: views/modals/area.html:893
+#: views/modals/area.html:933
 msgid "After x minutes"
 msgstr "After x minutes"
 
-#: views/modals/area.html:894
+#: views/modals/area.html:934
 msgid "At time"
 msgstr "At time"
 
-#: views/modals/area.html:895
+#: views/modals/area.html:935
 msgid "Using current weather"
 msgstr "Using current weather"
 
-#: views/modals/area.html:896
+#: views/modals/area.html:936
 msgid "Use json source"
 msgstr "Use json source"
 
-#: views/modals/area.html:897
+#: views/modals/area.html:937
 msgid "Use script"
 msgstr "Use script"
 
-#: views/modals/area.html:900
+#: views/modals/area.html:940
 msgid "Select a valid option."
 msgstr "Select a valid option."
 
-#: views/modals/area.html:908
+#: views/modals/area.html:948
 msgid "Enter a valid url, local json file or script file."
 msgstr "Enter a valid url, local json file or script file."
 
-#: views/modals/area.html:916
+#: views/modals/area.html:956
 msgid "Offset."
 msgstr "Offset."
 
-#: views/modals/area.html:954
+#: views/modals/area.html:994
 msgid "Dimmer on duration"
 msgstr "Dimmer on duration"
 
-#: views/modals/area.html:958
+#: views/modals/area.html:998
 msgid "Dimmer of duration"
 msgstr "Dimmer of duration"
 
-#: views/modals/area.html:968
+#: views/modals/area.html:1008
 msgid ""
 "Select the delay and duration for the dimmer to go to on or off in minutes. "
 "Max duration is 180 minutes."
@@ -1396,15 +1420,15 @@ msgstr ""
 "Select the delay and duration for the dimmer to go to on or off in minutes. "
 "Max duration is 180 minutes."
 
-#: views/modals/area.html:975
+#: views/modals/area.html:1015
 msgid "Relay delay on"
 msgstr "Relay delay on"
 
-#: views/modals/area.html:979
+#: views/modals/area.html:1019
 msgid "Relay delay off"
 msgstr "Relay delay off"
 
-#: views/modals/area.html:987
+#: views/modals/area.html:1027
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
@@ -1720,22 +1744,16 @@ msgid "The dimmer offset."
 msgstr "The dimmer offset."
 
 #: views/modals/relay.html:129
-#, fuzzy
-#| msgid "minimum moist value"
 msgid "Dimmer max dim value"
-msgstr "minimum moist value"
+msgstr "Dimmer max dim value"
 
 #: views/modals/relay.html:132
-#, fuzzy
-#| msgid "The dimmer offset."
 msgid "The dimmer max dim value."
-msgstr "The dimmer offset."
+msgstr "The dimmer max dim value."
 
 #: views/modals/relay.html:135
-#, fuzzy
-#| msgid "Enter a valid number."
 msgid "Please enter valid number"
-msgstr "Enter a valid number."
+msgstr "Please enter valid number"
 
 #: views/modals/sensor.html:12
 msgid "Sensor settings"
@@ -2751,7 +2769,7 @@ msgstr "Could not change the relay state of"
 msgid "Current activity"
 msgstr "Current activity"
 
-#: views/modals/area.html:1052 views/modals/area.html:1054
+#: views/modals/area.html:1092 views/modals/area.html:1094
 msgid "Delay"
 msgstr "Delay"
 
@@ -2835,11 +2853,11 @@ msgstr "Edit webcam"
 msgid "Enter a description"
 msgstr "Enter a description"
 
-#: views/modals/area.html:922
+#: views/modals/area.html:962
 msgid "Enter a duration in minutes or time"
 msgstr "Enter a duration in minutes or time"
 
-#: views/modals/area.html:906
+#: views/modals/area.html:946
 msgid "Enter a full url, local json file or script file."
 msgstr "Enter a full url, local json file or script file."
 
@@ -2877,13 +2895,13 @@ msgstr "Enter a subject"
 
 #: views/modals/area.html:138 views/modals/area.html:199
 #: views/modals/area.html:285 views/modals/area.html:355
-#: views/modals/area.html:538 views/modals/area.html:667
+#: views/modals/area.html:538 views/modals/area.html:685
 msgid "Enter begin time"
 msgstr "Enter begin time"
 
 #: views/modals/area.html:150 views/modals/area.html:205
 #: views/modals/area.html:297 views/modals/area.html:367
-#: views/modals/area.html:550 views/modals/area.html:679
+#: views/modals/area.html:550 views/modals/area.html:697
 msgid "Enter end time"
 msgstr "Enter end time"
 
@@ -3003,7 +3021,7 @@ msgstr "Export relay"
 msgid "Export sensor"
 msgstr "Export sensor"
 
-#: views/layouts/modal.html:71 views/modals/area.html:1550
+#: views/layouts/modal.html:71 views/modals/area.html:1592
 #: views/settings.html:404
 msgid "Form error"
 msgstr "Form error"
@@ -3024,7 +3042,7 @@ msgstr "Ignore sensor"
 msgid "Ignore webcam"
 msgstr "Ignore webcam"
 
-#: views/modals/area.html:1550
+#: views/modals/area.html:1592
 msgid "Invalid timestamp in variation settings."
 msgstr "Invalid timestamp in variation settings."
 
@@ -3040,7 +3058,7 @@ msgstr "Max power in percentage"
 msgid "Messages per minute"
 msgstr "Messages per minute"
 
-#: views/modals/area.html:1052 views/modals/area.html:1054
+#: views/modals/area.html:1092 views/modals/area.html:1094
 msgid "minutes"
 msgstr "minutes"
 
@@ -3133,8 +3151,8 @@ msgstr "Select areas"
 msgid "Select a sound card"
 msgstr "Select a sound card"
 
-#: views/modals/area.html:610 views/modals/area.html:623
-#: views/modals/area.html:739 views/modals/area.html:752
+#: views/modals/area.html:614 views/modals/area.html:627
+#: views/modals/area.html:761 views/modals/area.html:774
 msgid "Select a state"
 msgstr "Select a state"
 
@@ -3176,7 +3194,7 @@ msgid "Select playlists"
 msgstr "Select playlists"
 
 #: views/modals/area.html:180 views/modals/area.html:223
-#: views/modals/area.html:648 views/modals/area.html:778
+#: views/modals/area.html:666 views/modals/area.html:818
 msgid "Select relays"
 msgstr "Select relays"
 
@@ -3213,11 +3231,11 @@ msgstr "Show the motion boxes"
 msgid "Shutdown TerrariumPI"
 msgstr "Shutdown TerrariumPI"
 
-#: terrariumNotification.py:385
+#: terrariumNotification.py:407
 msgid "Telegram"
 msgstr "Telegram"
 
-#: views/modals/area.html:636 views/modals/area.html:766
+#: views/modals/area.html:640 views/modals/area.html:788
 msgid "Threshold"
 msgstr "Threshold"
 
@@ -3509,13 +3527,6 @@ msgstr "Weather data source url"
 
 #~ msgid "Holds the name of the sensor."
 #~ msgstr "Holds the name of the sensor."
-
-#~ msgid ""
-#~ "Holds the sensor lower alarm value of the sensor. When below this value, "
-#~ "alarms can be triggered."
-#~ msgstr ""
-#~ "Holds the sensor lower alarm value of the sensor. When below this value, "
-#~ "alarms can be triggered."
 
 #~ msgid ""
 #~ "Holds the sensor maximum alarm value of the sensor. When above this "

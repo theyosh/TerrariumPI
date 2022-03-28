@@ -441,7 +441,6 @@ class terrariumWebcam(object):
       except FunctionTimedOut:
         logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
         image = False
-        # TODO: Need to raise an error, for the retry action?
 
       # except Exception as ex:
       #   logger.error(f'Webcam {self} has exception: {ex}')
@@ -465,8 +464,6 @@ class terrariumWebcam(object):
 
       self._device['state'] = True
       self.__raw_image = Image.open(image)
-      # Test if image is correctly loaded....
-      self.__raw_image.getexif()
 
       # After here, no errors should happen, the image data should be save and correct
       if not self.live:
@@ -474,8 +471,9 @@ class terrariumWebcam(object):
           self.__rotate()
           self.__tile_image()
         except Exception as ex:
-          logger.error(f'Could not process webcam image: {ex}')
-          return
+          logger.error(f'Could not process webcam image {self}: {ex}')
+          # Raise an exception
+          raise ex
 
       self.__raw_image.save(self.raw_image_path,'jpeg', quality=self.__JPEG_QUALITY, exif=self.__exit_data)
       self._device['last_update'] = datetime.now()

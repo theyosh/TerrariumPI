@@ -1244,13 +1244,13 @@ class terrariumEngine(object):
     averages = []
     if len(tmp) > 0:
       for avg_type in self.sensor_averages.keys():
-        motd_data[f'average_{avg_type}']       = f'{tmp[avg_type]["value"]:.2f}'
+        motd_data[f'average_{avg_type}']       = tmp[avg_type]["value"]
         motd_data[f'average_{avg_type}_unit']  = self.units[avg_type]
         motd_data[f'average_{avg_type}_alarm'] = not tmp[avg_type]['alarm_min'] <= tmp[avg_type]['value'] <= tmp[avg_type]['alarm_max']
 
         averages.append({
           'title' : _('average {sensor_type}').format(sensor_type=_(avg_type)).capitalize() + ':',
-          'value' : motd_data[f'average_{avg_type}'],
+          'value' : '{:.2f}'.format(motd_data[f'average_{avg_type}']),
           'unit'  : motd_data[f'average_{avg_type}_unit'],
           'alarm' : motd_data[f'average_{avg_type}_alarm']
         })
