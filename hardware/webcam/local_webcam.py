@@ -30,4 +30,5 @@ class terrariumLocalWebcam(terrariumWebcam):
       return image
     except Exception as e:
       logger.error(f'Webcam image for {self} is not ready yet')
-      return None
+#      return None
+      raise e
