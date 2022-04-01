@@ -125,7 +125,7 @@ jQuery.when(
     let placeholder_div = jQuery('#place_holders');
     message_type_select.on('change',function(event){
       // Clear
-      placeholder_div.html('');
+      placeholder_div.html('<p>Number values can be rounded using the <a href="https://docs.python.org/3.8/library/string.html#formatspec" target="_blank">`.:2f` format</a></p>');
       jQuery.each(placeholders[this.value],function(placeholder_key,placeholder_value){
         placeholder_div.append(jQuery('<div>').html('<strong>${' + placeholder_key + '}</strong>: ' + placeholder_value));
       });
