@@ -63,17 +63,20 @@ class terrariumRelayGPIOInverse(terrariumRelayGPIO):
   NAME = 'GPIO devices (inverse)'
 
   def _load_hardware(self):
-    return LED(terrariumUtils.to_BCM_port_number(self._address[0]), active_high=False)
+    if len(self._address) >= 2:
+      return super()._load_hardware()
+    else:
+      return LED(terrariumUtils.to_BCM_port_number(self._address[0]), active_high=False)
 
   def _set_hardware_value(self, state):
     if isinstance(self._device['device'], terrariumIOExpander):
-      state = not state
+      state = self.ON if (state == self.OFF) else self.OFF
 
     return super()._set_hardware_value(state)
 
   def _get_hardware_value(self):
     state = super()._get_hardware_value()
     if isinstance(self._device['device'], terrariumIOExpander):
-      state = not state
+      state = self.ON if (state == self.OFF) else self.OFF
 
     return state
