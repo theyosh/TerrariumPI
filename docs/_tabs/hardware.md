@@ -36,6 +36,8 @@ By default there is only 1 I2C bus available. [But it is possible to add more I2
 
 For `[I2C Address]` you can use the number shown in the i2cdetect. Adding '**0x**' in front is allowed. So either **3c**, **3c,1**, **0x3c** and **0x3c,1** are valid and the same I2C addresses.
 
+The `[I2C Bus number]` is optional and can be omitted. The default value is 1.
+
 Run the command `i2cdetect -y 1` in order to see what is connected to your I2C bus. A correct working I2C bus should produce the following outcome:
 
 ```console

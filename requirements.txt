@@ -49,6 +49,7 @@ simple-pid==1.0.1
 sparkfun-qwiic-relay==0.0.2
 sensirion_i2c_driver==1.0.0
 sensirion_i2c_sht==1.0.0
+bme680==1.1.1
 
 # Webcam packages
 Pillow==9.0.1
