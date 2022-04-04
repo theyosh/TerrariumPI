@@ -8,7 +8,7 @@ image:
   src: /assets/img/motion.webp
   alt: "Motion sensor header image"
 
-device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the device is connected<br />Ex: `27`"
+device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the device is connected<br />Ex: `27`<br />Or when used with an [IO expander](/TerrariumPI/hardware/io-expander/) use format: pcf857[4/5]-[IO-expander-port],[I2C_address],[I2C_buss] where I2C_buss is optional<br />Ex:`pcf8575-9,0x4c,3`"
 device_url: https://tutorials-raspberrypi.com/connect-and-control-raspberry-pi-motion-detector-pir/
 ---
 
