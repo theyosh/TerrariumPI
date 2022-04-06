@@ -652,10 +652,10 @@
                     <label for="area_alarm_low_ignore_low" class="d-block">{{ _('Ignore low alarm') }}</label>
                     <input type="checkbox" class="switch" id="area_alarm_low_ignore_low" name="low_ignore_low">
                     <label for="area_alarm_low_ignore_low" class="mt-1"></label>
-                    <small class="text-muted">
-                      {{ _('Toggle to ignore the low alarm value of the sensors, and use high alarm value only.') }}
-                    </small>
                   </div>
+                  <small class="text-muted">
+                    {{ _('Toggle to ignore the low alarm value of the sensors, and use high alarm value only.') }}
+                  </small>
                 </div>
               </div>
             </div>
@@ -794,8 +794,6 @@
                   </div>
                 </div>
               </div>
-
-
               <div class="col ignore_low_alarm">
                 <div class="form-group">
                   <div class="switch">
@@ -810,8 +808,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="col">
             <div class="form-group">
               <label for="area_alarm_high_relays">{{ _('Relays') }}</label>
@@ -1211,9 +1207,9 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
     // Make the timers required
     // Only make the pane timers required, if there are relays selected in the same pane
     // Alarm low pane.
-    {{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  input[type!="search"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  select[id$="_alarm_low_relays"]  option:selected').length > 0);
+    {{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  input[type!="search"]').filter('input[type!="checkbox"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  select[id$="_alarm_low_relays"]  option:selected').length > 0);
     // Alarm high pane.
-    {{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] input[type!="search"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] select[id$="_alarm_high_relays"] option:selected').length > 0);
+    {{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] input[type!="search"]').filter('input[type!="checkbox"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] select[id$="_alarm_high_relays"] option:selected').length > 0);
 
     // Disable hours fields
     {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id*="_hours"]').prop('readonly',true);
@@ -1312,9 +1308,9 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
 
   // Only make the pane timers required, if there are relays selected in the same pane
   // Alarm low pane.
-  {{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  input[type!="search"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  select[id$="_alarm_low_relays"]  option:selected').length > 0);
+  {{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  input[type!="search"]').filter('input[type!="checkbox"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_low"]  select[id$="_alarm_low_relays"]  option:selected').length > 0);
   // Alarm high pane.
-  {{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] input[type!="search"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] select[id$="_alarm_high_relays"] option:selected').length > 0);
+  {{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] input[type!="search"]').filter('input[type!="checkbox"]').prop('required',{{modal_type}}_form.find('div.tab-pane[id$="_alarm_high"] select[id$="_alarm_high_relays"] option:selected').length > 0);
 
   if (!light_modus) {
     return;
