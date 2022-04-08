@@ -300,16 +300,17 @@ class terrariumEngine(object):
     # Loading active language
     gettext.translation('terrariumpi', 'locales/', languages=[self.settings['language']]).install()
 
-    # TODO: Loading git data
+    # Loading git data
     gitversion = Path('.gitversion')
     if gitversion.exists():
       gitversion = gitversion.read_text().strip()
-    elif Path('.git').exists():
+      gitversion = None if gitversion == '' else gitversion
+
+    if gitversion is None and Path('.git').exists():
       gitversion = str(terrariumUtils.get_script_data('git rev-parse HEAD')).strip()
     else:
       gitversion = None
 
-    print(f'Setting git version to: {gitversion}')
     self.settings['gitversion'] = gitversion
 
     # Loading weather

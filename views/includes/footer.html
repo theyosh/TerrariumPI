@@ -10,7 +10,7 @@
     <small class="badge badge-warning opacity-1" title="{{ _('Warning messages') }}">&nbsp;&nbsp;</small>
     <small class="badge badge-danger  opacity-1" title="{{ _('Error messages') }}">&nbsp;&nbsp;</small>
 
-    <span class="d-none d-sm-inline">&nbsp;&nbsp; {{title}} {{version}} - <small>{{device}} - {% if authenticated %}<a href="https://github.com/theyosh/TerrariumPI/commit/{{gitversion}}" target="_blank" title="Git commit">{{gitversion[0:8]}}</a> -{% endif %}</span>
+    <span class="d-none d-sm-inline">&nbsp;&nbsp; {{title}} {{version}} - <small>{{device}} - {% if authenticated and gitversion %}<a href="https://github.com/theyosh/TerrariumPI/commit/{{gitversion}}" target="_blank" title="Git commit">{{gitversion[0:8]}}</a> -{% endif %}</span>
 
       <a href="https://github.com/theyosh/TerrariumPI" target="_blank" rel="noopener" title="Download TerrariumPI on Github">Terrarium home automation</a>
     </small>
