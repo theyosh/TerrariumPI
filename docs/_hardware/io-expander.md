@@ -2,6 +2,7 @@
 title: IO Expander
 categories: [Hardware, Button, I2C]
 tags: [button, expander]
+permalink: /hardware/io-expander/
 
 image:
   path: /assets/img/pcf857X_IO_expander.webp
