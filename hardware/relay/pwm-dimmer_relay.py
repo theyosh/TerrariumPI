@@ -146,4 +146,3 @@ class terrariumRelayDimmerIRF520(terrariumRelayDimmerPWM):
   # # Dimmer settings
   _DIMMER_FREQ       = 10000 # Tested with a 12V PC fan. Low freq. caused some high pitching noise
   _DIMMER_MAXDIM     = 100
-  _DIMMER_DUTY_CYCLE = 10000
