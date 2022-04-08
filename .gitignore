@@ -24,3 +24,4 @@ Gemfile.lock
 docs/_site/
 node_modules
 static/**/*.gz
+.gitversion

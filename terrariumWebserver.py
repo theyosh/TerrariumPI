@@ -139,6 +139,7 @@ class terrariumWebserver(object):
       'username'      : self.engine.settings['username'],
       'profile_image' : self.engine.settings['profile_image'],
       'favicon'       : self.engine.settings['favicon'],
+      'gitversion'    : self.engine.settings['gitversion'],
 
       'languages'     : self.engine.settings['languages'],
       'units'         : unit_variables(),

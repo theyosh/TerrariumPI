@@ -42,7 +42,9 @@ RUN sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.tx
   pip install -r requirements.txt && \
   find /opt/venv -type d -name  "__pycache__" -exec rm -r {} +
 WORKDIR /TerrariumPI
-# we previously copied .git and then did git submodule init and submodule update, however as .git dir changes all the time it invalidates docker cache
+# Set git version in a temp file
+RUN git rev-parse HEAD > .gitversion
+# Just clone the libraries, ignore docker cache...
 RUN git clone https://github.com/SequentMicrosystems/4relay-rpi.git --depth 1 "3rdparty/4relay-rpi" && \
   git clone https://github.com/PiSupply/Bright-Pi.git --depth 1 "3rdparty/Bright-Pi" && \
   git clone https://github.com/ageir/chirp-rpi.git --depth 1 "3rdparty/chirp-rpi" && \
@@ -56,13 +58,14 @@ RUN git clone https://github.com/SequentMicrosystems/4relay-rpi.git --depth 1 "3
   rm -Rf 3rdparty/Bright-Pi/Documents && \
   find . -type d -name ".git" -exec rm -r {} +
 
-# remove git and 3rdparty dir from code copy to help keep image smaller
-# 3rdparty is coming from the builder image
 
 FROM python:3.8-buster as sourcecode
 WORKDIR /TerrariumPI
 COPY . .
+# remove git and 3rdparty dir from code copy to help keep image smaller
+# 3rdparty is coming from the builder image
 RUN rm -Rf .git 3rdparty
+# Compress HTML, JS and CSS files so browsers can download compressed versions of the files
 RUN find static/assets/ -type f -regex ".*\.\(css\|js\)" -exec gzip -f9k '{}' \;
 
 # actual image
