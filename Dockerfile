@@ -41,9 +41,10 @@ RUN sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.tx
   sed -i 's/cryptography==.*/cryptography==3.4.8/g' requirements.txt && \
   pip install -r requirements.txt && \
   find /opt/venv -type d -name  "__pycache__" -exec rm -r {} +
+
 WORKDIR /TerrariumPI
 # Set git version in a temp file
-RUN git rev-parse HEAD > .gitversion
+RUN echo "${GITHUB_SHA}" > .gitversion
 # Just clone the libraries, ignore docker cache...
 RUN git clone https://github.com/SequentMicrosystems/4relay-rpi.git --depth 1 "3rdparty/4relay-rpi" && \
   git clone https://github.com/PiSupply/Bright-Pi.git --depth 1 "3rdparty/Bright-Pi" && \
