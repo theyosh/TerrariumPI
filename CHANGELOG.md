@@ -2,11 +2,152 @@ Changelog
 =========
 
 
+(unreleased)
+------------
+
+**New**
+------
+- Add SHT4X documentation. [TheYOSH]
+- Add commit information to source code and footer when adming is logged
+  in. [#637](https://github.com/theyosh/TerrariumPI/issues/637). [TheYOSH]
+- Add RTSP sourced camera. [#665](https://github.com/theyosh/TerrariumPI/issues/665). [TheYOSH]
+- Add some more info about number formatting. [#676](https://github.com/theyosh/TerrariumPI/issues/676). [TheYOSH]
+- Add support for BME680. [#682](https://github.com/theyosh/TerrariumPI/issues/682). [TheYOSH]
+- Add missing Sensiron library. [TheYOSH]
+- Add Sensirion SHT4X support. [#674](https://github.com/theyosh/TerrariumPI/issues/674). [TheYOSH]
+- Add old legacy dimmer functionality. [#643](https://github.com/theyosh/TerrariumPI/issues/643). [TheYOSH]
+- Add new API call. [TheYOSH]
+
+**Fixes**
+------
+- Fix required field switch. [#669](https://github.com/theyosh/TerrariumPI/issues/669). [TheYOSH]
+- Fix device loading. [TheYOSH]
+- Fix stupid typos and version numbers. [TheYOSH]
+- Fix local webcam image. [TheYOSH]
+- Fix adding relays. [TheYOSH]
+- Fix main light mode. [TheYOSH]
+- Fix again type Sensiron drivers. [TheYOSH]
+- Fix typo in function. [TheYOSH]
+- Fix weather in the future. [TheYOSH]
+- Small fix when cloud connection is dropped. [TheYOSH]
+- Fix area day and night lighting based on weather data. [TheYOSH]
+- Fix TOC. [TheYOSH]
+
+**Updates**
+------
+- Update documentation. [TheYOSH]
+- Update gpio_relay.py. [cmonicob]
+
+  edited inverse GPIO to work correctly with IOExpander
+- Update libraries. [TheYOSH]
+- Update logic. [TheYOSH]
+- New updates... I think this should work. [TheYOSH]
+- Update requirements. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update GUI. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update docker file. [TheYOSH]
+- Update requirements.txt. [TheYOSH]
+- Update requirements.txt. [TheYOSH]
+- Update install.sh. [TheYOSH]
+- Update install.md. [TheYOSH]
+- Docu updates. [TheYOSH]
+- Lib update. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translations. [TheYOSH]
+- Tuning webcam update timeout. [TheYOSH]
+- Docu updates. [TheYOSH]
+- Update docu. [TheYOSH]
+- Update online docu. [TheYOSH]
+- Update API doc. [TheYOSH]
+
+**Other**
+------
+- Do not show commit version when nog available. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Scale down hardware dimming. [#674](https://github.com/theyosh/TerrariumPI/issues/674). [TheYOSH]
+- Try to add git commit info to docker. [TheYOSH]
+- Merge branch 'IOexpander' into 4.x.y.z. [TheYOSH]
+- Merge pull request [#684](https://github.com/theyosh/TerrariumPI/issues/684) from cmonicob/IOexpander. [TheYOSH]
+
+  Update gpio_relay.py
+- Merge branch '4.x.y.z' into IOexpander. [TheYOSH]
+- GPIO exanpder for relays. [TheYOSH]
+- Cleanup. [TheYOSH]
+- Typos. [TheYOSH]
+- Typo. [TheYOSH]
+- More general IO Expander usage in buttons. [TheYOSH]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (761 of 761 strings)
+- Translated using Weblate (Italian) [Luca]
+
+  Currently translated at 21.6% (165 of 761 strings)
+- Translated using Weblate (English (United States)) [theyosh]
+
+  Currently translated at 100.0% (761 of 761 strings)
+- Translated using Weblate (English (United Kingdom)) [theyosh]
+
+  Currently translated at 100.0% (761 of 761 strings)
+- Merge branch 'origin/4.x.y.z' into Weblate. [Weblate]
+- Translated using Weblate (Italian) [Luca]
+
+  Currently translated at 19.8% (150 of 757 strings)
+- Translated using Weblate (German) [Tobias Nitsch]
+
+  Currently translated at 100.0% (757 of 757 strings)
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Translated using Weblate (German) [Tobias Nitsch]
+
+  Currently translated at 100.0% (757 of 757 strings)
+- Extra check if webcam image is valid. [TheYOSH]
+- Remove old code. [TheYOSH]
+- Ignore low or high sensor values in areas. [#669](https://github.com/theyosh/TerrariumPI/issues/669). [TheYOSH]
+- Allow number formatting in notification messages. [#676](https://github.com/theyosh/TerrariumPI/issues/676). [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Improvements. [TheYOSH]
+- Optimalisation. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Database speed ups and more responsive notifications (Doors and
+  relays) [TheYOSH]
+- Remove invalid log line. [TheYOSH]
+- Shutdown area when depending area is in alarm state. [#669](https://github.com/theyosh/TerrariumPI/issues/669). [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Clean up. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (754 of 754 strings)
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+- Codacy code cleanup. [TheYOSH]
+
+
 4.2.0 (2022-02-13)
 ------------------
 
 **New**
 ------
+- Add new badge. [TheYOSH]
 - Add timer wizard to github page (2) [TheYOSH]
 - Add timer wizard to github page. [TheYOSH]
 - Add support for compressed content. [TheYOSH]
@@ -69,6 +210,10 @@ Changelog
 
 **Updates**
 ------
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update version number. [TheYOSH]
 - Update translations. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Small update. [TheYOSH]
@@ -120,6 +265,8 @@ Changelog
 
 **Other**
 ------
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
 - Compress js and css files during installation. [TheYOSH]
 - Revert back compressed files. [TheYOSH]
 - Code improvements. [TheYOSH]
