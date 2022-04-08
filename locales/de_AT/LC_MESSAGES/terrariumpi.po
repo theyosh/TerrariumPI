@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-03-21 12:16+CET\n"
+"POT-Creation-Date: 2022-04-08 17:25+CEST\n"
 "PO-Revision-Date: 2021-11-26 14:38+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
@@ -140,31 +140,31 @@ msgstr "Wasserfluss"
 msgid "wattage"
 msgstr "Leistung"
 
-#: terrariumEngine.py:1207 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1220 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Betriebszeit"
 
-#: terrariumEngine.py:1213
+#: terrariumEngine.py:1226
 msgid "System load"
 msgstr "Systemlast"
 
-#: terrariumEngine.py:1219 views/status.html:44
+#: terrariumEngine.py:1232 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU Temperatur"
 
-#: terrariumEngine.py:1225
+#: terrariumEngine.py:1238
 msgid "Storage"
 msgstr "Speicher"
 
-#: terrariumEngine.py:1231
+#: terrariumEngine.py:1244
 msgid "Memory"
 msgstr "Speicher"
 
-#: terrariumEngine.py:1252
+#: terrariumEngine.py:1265
 msgid "average {sensor_type}"
 msgstr "Durchschnitt {sensor_type}"
 
-#: terrariumEngine.py:1428
+#: terrariumEngine.py:1441
 msgid "last update"
 msgstr "Letztes Update"
 
@@ -508,23 +508,23 @@ msgstr "Überzieher"
 msgid "Buzzer"
 msgstr ""
 
-#: terrariumWebserver.py:161 terrariumWebserver.py:245
+#: terrariumWebserver.py:162 terrariumWebserver.py:246
 msgid "Authenticate to make any changes"
 msgstr "Authentifizieren, um Änderungen vorzunehmen"
 
-#: terrariumWebserver.py:161 terrariumWebserver.py:245
+#: terrariumWebserver.py:162 terrariumWebserver.py:246
 msgid "Authentication"
 msgstr "Authentifizierung"
 
-#: terrariumWebserver.py:161 terrariumWebserver.py:245 views/index.html:2
+#: terrariumWebserver.py:162 terrariumWebserver.py:246 views/index.html:2
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:357
+#: terrariumWebserver.py:358
 msgid "A new version ({version}) is available!"
 msgstr ""
 
-#: terrariumWebserver.py:357
+#: terrariumWebserver.py:358
 #, fuzzy
 #| msgid "Sensor ph"
 msgid "Software Update"
@@ -554,7 +554,7 @@ msgid "Size"
 msgstr "Größe"
 
 #: views/audio_files.html:28 views/audio_files.html:39
-#: views/modals/area.html:866 views/playlists.html:31 views/playlists.html:46
+#: views/modals/area.html:862 views/playlists.html:31 views/playlists.html:46
 msgid "Action"
 msgstr "Aktion"
 
@@ -809,7 +809,7 @@ msgstr "Sensoren scannen"
 
 #: views/includes/sidebar.html:111 views/modals/area.html:179
 #: views/modals/area.html:222 views/modals/area.html:665
-#: views/modals/area.html:817 views/relays.html:2
+#: views/modals/area.html:813 views/relays.html:2
 msgid "Relays"
 msgstr "Relais"
 
@@ -1073,7 +1073,7 @@ msgstr "Zeitpunkt an dem die Relais täglich eingeschaltet werden."
 #: views/modals/area.html:302 views/modals/area.html:360
 #: views/modals/area.html:372 views/modals/area.html:543
 #: views/modals/area.html:555 views/modals/area.html:690
-#: views/modals/area.html:702 views/modals/area.html:964
+#: views/modals/area.html:702 views/modals/area.html:960
 msgid "Enter a valid time."
 msgstr "Gebe eine gültige Zeit ein."
 
@@ -1110,7 +1110,7 @@ msgid "Off duration"
 msgstr "Dauer Aus"
 
 #: views/modals/area.html:182 views/modals/area.html:668
-#: views/modals/area.html:820
+#: views/modals/area.html:816
 msgid "Select the relays to toggle."
 msgstr "Wählen Sie das Relais zum Umschalten"
 
@@ -1134,7 +1134,7 @@ msgstr "Wähle die Soundkarte aus, die für diese Anlage verwendet wird."
 #: views/modals/area.html:384 views/modals/area.html:396
 #: views/modals/area.html:567 views/modals/area.html:579
 #: views/modals/area.html:714 views/modals/area.html:726
-#: views/modals/area.html:972
+#: views/modals/area.html:968
 #, fuzzy
 #| msgid "Timer period on duration in minutes"
 msgid "Enter a valid duration in minutes."
@@ -1261,7 +1261,7 @@ msgstr "Höhe"
 msgid "Enter the height of the water tank."
 msgstr "Höhe eingeben"
 
-#: views/modals/area.html:478 views/modals/area.html:856
+#: views/modals/area.html:478 views/modals/area.html:852
 #: views/modals/sensor.html:160
 msgid "Offset"
 msgstr "Versatz"
@@ -1411,7 +1411,7 @@ msgstr "Gebe Anzahl der zu verschiebenden Stunden ein"
 msgid "Ignore low alarm"
 msgstr "Webcam ignorieren"
 
-#: views/modals/area.html:656
+#: views/modals/area.html:657
 #, fuzzy
 #| msgid ""
 #| "Holds the sensor lower alarm value of the sensor. When below this value, "
@@ -1429,13 +1429,13 @@ msgstr ""
 msgid "Select the light status."
 msgstr "Zustand des archivierten Lichts auswählen"
 
-#: views/modals/area.html:802
+#: views/modals/area.html:800
 #, fuzzy
 #| msgid "High alarm"
 msgid "Ignore high alarm"
 msgstr "Alarm hoch"
 
-#: views/modals/area.html:806
+#: views/modals/area.html:804
 #, fuzzy
 #| msgid ""
 #| "Holds the sensor lower alarm value of the sensor. When below this value, "
@@ -1447,129 +1447,129 @@ msgstr ""
 "Unterer Alarmwert des Sensors. Unterhalb dieses Wertes können Alarme "
 "ausgelöst werden."
 
-#: views/modals/area.html:834
+#: views/modals/area.html:830
 msgid ""
 "Here you can enter periods where the sensors will change their values "
 "according to the list below. Make sure the periods are in chronological "
 "order!"
 msgstr ""
 
-#: views/modals/area.html:841
+#: views/modals/area.html:837
 msgid "Source"
 msgstr "Quelle"
 
-#: views/modals/area.html:846
+#: views/modals/area.html:842
 #, fuzzy
 #| msgid "Timer on duration"
 msgid "Period/duration"
 msgstr "Timer-Einschaltdauer"
 
-#: views/modals/area.html:851
+#: views/modals/area.html:847
 #, fuzzy
 #| msgid "External calendar url"
 msgid "External source url"
 msgstr "Externe Kalender-URL"
 
-#: views/modals/area.html:861
+#: views/modals/area.html:857
 #, fuzzy
 #| msgid "values"
 msgid "Value"
 msgstr "Werte"
 
-#: views/modals/area.html:881
+#: views/modals/area.html:877
 msgid "After x minutes change to value or at exactly a time stamp."
 msgstr ""
 
-#: views/modals/area.html:888
+#: views/modals/area.html:884
 msgid ""
 "Enter a full url to the external source according to the Remote data feature."
 msgstr ""
 
-#: views/modals/area.html:895
+#: views/modals/area.html:891
 #, fuzzy
 #| msgid "Enter a name for this area."
 msgid "Enter a negative or positive offset value."
 msgstr "Trage den Namen dieses Bereichs ein."
 
-#: views/modals/area.html:902
+#: views/modals/area.html:898
 #, fuzzy
 #| msgid "Timer period on duration in minutes"
 msgid "Enter a duration in minutes or the actual time of the day."
 msgstr "Timer-Dauer in Minuten"
 
-#: views/modals/area.html:909
+#: views/modals/area.html:905
 msgid ""
 "Enter a negative or positive value for a relative action. A number is "
 "treated as an absolute value."
 msgstr ""
 
-#: views/modals/area.html:916
+#: views/modals/area.html:912
 #, fuzzy
 #| msgid "Add new area"
 msgid "Add a new row"
 msgstr "Neuen Bereich hinzufügen"
 
-#: views/modals/area.html:923
+#: views/modals/area.html:919
 #, fuzzy
 #| msgid "Remote"
 msgid "Remove row"
 msgstr "Remote"
 
-#: views/modals/area.html:933
+#: views/modals/area.html:929
 #, fuzzy
 #| msgid "5 minutes"
 msgid "After x minutes"
 msgstr "5 Minuten"
 
-#: views/modals/area.html:934
+#: views/modals/area.html:930
 #, fuzzy
 #| msgid "Up time"
 msgid "At time"
 msgstr "Betriebszeit"
 
-#: views/modals/area.html:935
+#: views/modals/area.html:931
 msgid "Using current weather"
 msgstr ""
 
-#: views/modals/area.html:936
+#: views/modals/area.html:932
 #, fuzzy
 #| msgid "Remote source"
 msgid "Use json source"
 msgstr "Fernquelle"
 
-#: views/modals/area.html:937
+#: views/modals/area.html:933
 #, fuzzy
 #| msgid "Custom script"
 msgid "Use script"
 msgstr "Benutzerdefiniertes Script"
 
-#: views/modals/area.html:940
+#: views/modals/area.html:936
 #, fuzzy
 #| msgid "Select rotation"
 msgid "Select a valid option."
 msgstr "Bilddrehung auswählen"
 
-#: views/modals/area.html:948
+#: views/modals/area.html:944
 #, fuzzy
 #| msgid "Timer period on duration in minutes"
 msgid "Enter a valid url, local json file or script file."
 msgstr "Timer-Dauer in Minuten"
 
-#: views/modals/area.html:956
+#: views/modals/area.html:952
 #, fuzzy
 #| msgid "Offset"
 msgid "Offset."
 msgstr "Versatz"
 
-#: views/modals/area.html:994
+#: views/modals/area.html:990
 msgid "Dimmer on duration"
 msgstr "Dimmer dauer"
 
-#: views/modals/area.html:998
+#: views/modals/area.html:994
 msgid "Dimmer of duration"
 msgstr "Dauer Dimmer Aus"
 
-#: views/modals/area.html:1008
+#: views/modals/area.html:1004
 #, fuzzy
 #| msgid ""
 #| "Select the duration for the dimmer to go to on or off in minutes. Max "
@@ -1581,15 +1581,15 @@ msgstr ""
 "Wähle die Dauer in Minuten, nach der der Dimmer ein- oder ausgeschaltet "
 "werden soll. Die maximale Dauer beträgt 180 Minuten."
 
-#: views/modals/area.html:1015
+#: views/modals/area.html:1011
 msgid "Relay delay on"
 msgstr "Relais verzögerung Ein"
 
-#: views/modals/area.html:1019
+#: views/modals/area.html:1015
 msgid "Relay delay off"
 msgstr "Relais Verzögerung Aus"
 
-#: views/modals/area.html:1027
+#: views/modals/area.html:1023
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
@@ -3066,7 +3066,7 @@ msgstr "Konnte Relais Status nicht ändern auf"
 msgid "Current activity"
 msgstr "Aktuelle Tätigkeit"
 
-#: views/modals/area.html:1092 views/modals/area.html:1094
+#: views/modals/area.html:1088 views/modals/area.html:1090
 msgid "Delay"
 msgstr "Verzögerung"
 
@@ -3150,13 +3150,13 @@ msgstr "Webcam bearbeiten"
 msgid "Enter a description"
 msgstr "Trage eine Beschreibung ein"
 
-#: views/modals/area.html:962
+#: views/modals/area.html:958
 #, fuzzy
 #| msgid "Timer period on duration in minutes"
 msgid "Enter a duration in minutes or time"
 msgstr "Timer-Dauer in Minuten"
 
-#: views/modals/area.html:946
+#: views/modals/area.html:942
 msgid "Enter a full url, local json file or script file."
 msgstr ""
 
@@ -3334,7 +3334,7 @@ msgstr "Relais exportieren"
 msgid "Export sensor"
 msgstr "Sensor exportieren"
 
-#: views/layouts/modal.html:71 views/modals/area.html:1592
+#: views/layouts/modal.html:71 views/modals/area.html:1588
 #: views/settings.html:404
 msgid "Form error"
 msgstr "Form Error"
@@ -3355,7 +3355,7 @@ msgstr "Sensor ignorieren"
 msgid "Ignore webcam"
 msgstr "Webcam ignorieren"
 
-#: views/modals/area.html:1592
+#: views/modals/area.html:1588
 msgid "Invalid timestamp in variation settings."
 msgstr ""
 
@@ -3371,7 +3371,7 @@ msgstr "Maximale Leistung in %"
 msgid "Messages per minute"
 msgstr "Nachrichten pro Minute"
 
-#: views/modals/area.html:1092 views/modals/area.html:1094
+#: views/modals/area.html:1088 views/modals/area.html:1090
 msgid "minutes"
 msgstr "Minuten"
 
@@ -3511,7 +3511,7 @@ msgid "Select playlists"
 msgstr "Playlist auswählen"
 
 #: views/modals/area.html:180 views/modals/area.html:223
-#: views/modals/area.html:666 views/modals/area.html:818
+#: views/modals/area.html:666 views/modals/area.html:814
 msgid "Select relays"
 msgstr "Relais auswählen"
 

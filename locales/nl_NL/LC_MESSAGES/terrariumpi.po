@@ -5,11 +5,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2022-03-21 12:16+CET\n"
+"POT-Creation-Date: 2022-04-08 17:25+CEST\n"
 "PO-Revision-Date: 2022-03-21 11:21+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
-"4-x-y-z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
+"z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,31 +139,31 @@ msgstr "waterstroom"
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:1207 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1220 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Actief"
 
-#: terrariumEngine.py:1213
+#: terrariumEngine.py:1226
 msgid "System load"
 msgstr "Systeembelasting"
 
-#: terrariumEngine.py:1219 views/status.html:44
+#: terrariumEngine.py:1232 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Processor temperatuur"
 
-#: terrariumEngine.py:1225
+#: terrariumEngine.py:1238
 msgid "Storage"
 msgstr "Opslag"
 
-#: terrariumEngine.py:1231
+#: terrariumEngine.py:1244
 msgid "Memory"
 msgstr "Geheugen"
 
-#: terrariumEngine.py:1252
+#: terrariumEngine.py:1265
 msgid "average {sensor_type}"
 msgstr "gemiddelde {sensor_type}"
 
-#: terrariumEngine.py:1428
+#: terrariumEngine.py:1441
 msgid "last update"
 msgstr "laatste wijziging"
 
@@ -449,23 +449,23 @@ msgstr "Pushover"
 msgid "Buzzer"
 msgstr "Zoemer"
 
-#: terrariumWebserver.py:161 terrariumWebserver.py:245
+#: terrariumWebserver.py:162 terrariumWebserver.py:246
 msgid "Authenticate to make any changes"
 msgstr "Login om wijzigingen te kunnen maken"
 
-#: terrariumWebserver.py:161 terrariumWebserver.py:245
+#: terrariumWebserver.py:162 terrariumWebserver.py:246
 msgid "Authentication"
 msgstr "Authenticatie"
 
-#: terrariumWebserver.py:161 terrariumWebserver.py:245 views/index.html:2
+#: terrariumWebserver.py:162 terrariumWebserver.py:246 views/index.html:2
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:357
+#: terrariumWebserver.py:358
 msgid "A new version ({version}) is available!"
 msgstr "Er is een nieuwe versie ({version}) beschikbaar!"
 
-#: terrariumWebserver.py:357
+#: terrariumWebserver.py:358
 msgid "Software Update"
 msgstr "Software update"
 
@@ -493,7 +493,7 @@ msgid "Size"
 msgstr "Grootte"
 
 #: views/audio_files.html:28 views/audio_files.html:39
-#: views/modals/area.html:866 views/playlists.html:31 views/playlists.html:46
+#: views/modals/area.html:862 views/playlists.html:31 views/playlists.html:46
 msgid "Action"
 msgstr "Actie"
 
@@ -748,7 +748,7 @@ msgstr "Scan sensoren"
 
 #: views/includes/sidebar.html:111 views/modals/area.html:179
 #: views/modals/area.html:222 views/modals/area.html:665
-#: views/modals/area.html:817 views/relays.html:2
+#: views/modals/area.html:813 views/relays.html:2
 msgid "Relays"
 msgstr "Schakelaars"
 
@@ -1011,7 +1011,7 @@ msgstr "Het tijdstip van de dag waarop de relais elke dag worden ingeschakeld."
 #: views/modals/area.html:302 views/modals/area.html:360
 #: views/modals/area.html:372 views/modals/area.html:543
 #: views/modals/area.html:555 views/modals/area.html:690
-#: views/modals/area.html:702 views/modals/area.html:964
+#: views/modals/area.html:702 views/modals/area.html:960
 msgid "Enter a valid time."
 msgstr "Voer een geldige tijd in."
 
@@ -1049,7 +1049,7 @@ msgid "Off duration"
 msgstr "Tijdsduur uit"
 
 #: views/modals/area.html:182 views/modals/area.html:668
-#: views/modals/area.html:820
+#: views/modals/area.html:816
 msgid "Select the relays to toggle."
 msgstr "Selecteer de schakelaars."
 
@@ -1073,7 +1073,7 @@ msgstr "Selecteer de geluidskaart die voor dit verblijf wordt gebruikt."
 #: views/modals/area.html:384 views/modals/area.html:396
 #: views/modals/area.html:567 views/modals/area.html:579
 #: views/modals/area.html:714 views/modals/area.html:726
-#: views/modals/area.html:972
+#: views/modals/area.html:968
 msgid "Enter a valid duration in minutes."
 msgstr "Vul een geldige tijdsduur in minuten."
 
@@ -1164,7 +1164,7 @@ msgstr "Hoogte"
 msgid "Enter the height of the water tank."
 msgstr "Voer de hoogte in van de watertank."
 
-#: views/modals/area.html:478 views/modals/area.html:856
+#: views/modals/area.html:478 views/modals/area.html:852
 #: views/modals/sensor.html:160
 msgid "Offset"
 msgstr "Compensatie"
@@ -1294,7 +1294,7 @@ msgstr "Voer het aantal alarmen in voordat actie plaatsvindt."
 msgid "Ignore low alarm"
 msgstr "Negeer laag alarm"
 
-#: views/modals/area.html:656
+#: views/modals/area.html:657
 msgid ""
 "Toggle to ignore the low alarm value of the sensors, and use high alarm "
 "value only."
@@ -1306,11 +1306,11 @@ msgstr ""
 msgid "Select the light status."
 msgstr "Selecteer de lichtstatus."
 
-#: views/modals/area.html:802
+#: views/modals/area.html:800
 msgid "Ignore high alarm"
 msgstr "Negeer hoog alarm"
 
-#: views/modals/area.html:806
+#: views/modals/area.html:804
 msgid ""
 "Toggle to ignore the high alarm value of the sensors, and use the low alarm "
 "value only"
@@ -1318,7 +1318,7 @@ msgstr ""
 "Schakel om de hoge alarmwaarde van de sensoren te negeren en gebruik alleen "
 "de lage alarmwaarde"
 
-#: views/modals/area.html:834
+#: views/modals/area.html:830
 msgid ""
 "Here you can enter periods where the sensors will change their values "
 "according to the list below. Make sure the periods are in chronological "
@@ -1328,42 +1328,42 @@ msgstr ""
 "volgens de onderstaande lijst. Zorg ervoor dat de perioden in chronologische "
 "volgorde staan!"
 
-#: views/modals/area.html:841
+#: views/modals/area.html:837
 msgid "Source"
 msgstr "Bron"
 
-#: views/modals/area.html:846
+#: views/modals/area.html:842
 msgid "Period/duration"
 msgstr "Periode/tijdsduur"
 
-#: views/modals/area.html:851
+#: views/modals/area.html:847
 msgid "External source url"
 msgstr "Externe bron url"
 
-#: views/modals/area.html:861
+#: views/modals/area.html:857
 msgid "Value"
 msgstr "Waarde"
 
-#: views/modals/area.html:881
+#: views/modals/area.html:877
 msgid "After x minutes change to value or at exactly a time stamp."
 msgstr "Verander na x minuten naar waarde of op exact een tijdstip."
 
-#: views/modals/area.html:888
+#: views/modals/area.html:884
 msgid ""
 "Enter a full url to the external source according to the Remote data feature."
 msgstr ""
 "Voer een volledige url in naar de externe bron volgens de functie Externe "
 "gegevens."
 
-#: views/modals/area.html:895
+#: views/modals/area.html:891
 msgid "Enter a negative or positive offset value."
 msgstr "Voer een negatieve of positieve compensatie waarde in."
 
-#: views/modals/area.html:902
+#: views/modals/area.html:898
 msgid "Enter a duration in minutes or the actual time of the day."
 msgstr "Voer een duur in minuten of de werkelijke tijd van de dag in."
 
-#: views/modals/area.html:909
+#: views/modals/area.html:905
 msgid ""
 "Enter a negative or positive value for a relative action. A number is "
 "treated as an absolute value."
@@ -1371,55 +1371,55 @@ msgstr ""
 "Voer een negatieve of positieve waarde in voor een relatieve actie. Een "
 "getal wordt behandeld als een absolute waarde."
 
-#: views/modals/area.html:916
+#: views/modals/area.html:912
 msgid "Add a new row"
 msgstr "Voeg een nieuwe rij toe"
 
-#: views/modals/area.html:923
+#: views/modals/area.html:919
 msgid "Remove row"
 msgstr "Verwijder rij"
 
-#: views/modals/area.html:933
+#: views/modals/area.html:929
 msgid "After x minutes"
 msgstr "Na x minuten"
 
-#: views/modals/area.html:934
+#: views/modals/area.html:930
 msgid "At time"
 msgstr "Op tijdstip"
 
-#: views/modals/area.html:935
+#: views/modals/area.html:931
 msgid "Using current weather"
 msgstr "Het huidige weer gebruiken"
 
-#: views/modals/area.html:936
+#: views/modals/area.html:932
 msgid "Use json source"
 msgstr "JSON bron gebruiken"
 
-#: views/modals/area.html:937
+#: views/modals/area.html:933
 msgid "Use script"
 msgstr "Script gebruiken"
 
-#: views/modals/area.html:940
+#: views/modals/area.html:936
 msgid "Select a valid option."
 msgstr "Selecteer een geldige optie."
 
-#: views/modals/area.html:948
+#: views/modals/area.html:944
 msgid "Enter a valid url, local json file or script file."
 msgstr "Voer een geldige url, lokaal json-bestand of script in."
 
-#: views/modals/area.html:956
+#: views/modals/area.html:952
 msgid "Offset."
 msgstr "Compensatie."
 
-#: views/modals/area.html:994
+#: views/modals/area.html:990
 msgid "Dimmer on duration"
 msgstr "Dimmer aan tijd in seconden"
 
-#: views/modals/area.html:998
+#: views/modals/area.html:994
 msgid "Dimmer of duration"
 msgstr "Dimmer uit tijdsduur"
 
-#: views/modals/area.html:1008
+#: views/modals/area.html:1004
 msgid ""
 "Select the delay and duration for the dimmer to go to on or off in minutes. "
 "Max duration is 180 minutes."
@@ -1427,15 +1427,15 @@ msgstr ""
 "Selecteer de vertraging en duur voor de dimmer om aan of uit te gaan in "
 "minuten. De maximale duur is 180 minuten."
 
-#: views/modals/area.html:1015
+#: views/modals/area.html:1011
 msgid "Relay delay on"
 msgstr "Schakelaar vertraging aan"
 
-#: views/modals/area.html:1019
+#: views/modals/area.html:1015
 msgid "Relay delay off"
 msgstr "Schakelaar vertraging uit"
 
-#: views/modals/area.html:1027
+#: views/modals/area.html:1023
 msgid ""
 "Select the delay in minutes that a relay waits before it turns on. Max delay "
 "is 180 minutes."
@@ -2790,7 +2790,7 @@ msgstr "Kan de schakelaar niet wijzigen van"
 msgid "Current activity"
 msgstr "Huidige activiteit"
 
-#: views/modals/area.html:1092 views/modals/area.html:1094
+#: views/modals/area.html:1088 views/modals/area.html:1090
 msgid "Delay"
 msgstr "Vertraging"
 
@@ -2874,11 +2874,11 @@ msgstr "Bewerk webcam"
 msgid "Enter a description"
 msgstr "Voer een beschrijving in"
 
-#: views/modals/area.html:962
+#: views/modals/area.html:958
 msgid "Enter a duration in minutes or time"
 msgstr "Voer een duur in minuten of tijd in"
 
-#: views/modals/area.html:946
+#: views/modals/area.html:942
 msgid "Enter a full url, local json file or script file."
 msgstr "Voer een geldige url, lokaal json-bestand of script in."
 
@@ -3042,7 +3042,7 @@ msgstr "Exporteer schakelaar"
 msgid "Export sensor"
 msgstr "Exporteer sensor"
 
-#: views/layouts/modal.html:71 views/modals/area.html:1592
+#: views/layouts/modal.html:71 views/modals/area.html:1588
 #: views/settings.html:404
 msgid "Form error"
 msgstr "Formulierfout"
@@ -3063,7 +3063,7 @@ msgstr "Negeer sensor"
 msgid "Ignore webcam"
 msgstr "Negeer de webcam"
 
-#: views/modals/area.html:1592
+#: views/modals/area.html:1588
 msgid "Invalid timestamp in variation settings."
 msgstr "Ongeldige tijd in variatie-instellingen."
 
@@ -3079,7 +3079,7 @@ msgstr "Max. Vermogen in procenten"
 msgid "Messages per minute"
 msgstr "Berichten per minuut"
 
-#: views/modals/area.html:1092 views/modals/area.html:1094
+#: views/modals/area.html:1088 views/modals/area.html:1090
 msgid "minutes"
 msgstr "minuten"
 
@@ -3215,7 +3215,7 @@ msgid "Select playlists"
 msgstr "Selecteer afspeellijsten"
 
 #: views/modals/area.html:180 views/modals/area.html:223
-#: views/modals/area.html:666 views/modals/area.html:818
+#: views/modals/area.html:666 views/modals/area.html:814
 msgid "Select relays"
 msgstr "Selecteer schakelaars"
 
