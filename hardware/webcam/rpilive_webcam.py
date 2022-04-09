@@ -10,6 +10,7 @@ import threading
 import shlex
 import os
 import signal
+import psutil
 
 from . import terrariumWebcam, terrariumWebcamLoadingException
 
@@ -22,20 +23,9 @@ class terrariumRPILiveWebcam(terrariumWebcam):
   __RASPIVID = '/usr/bin/raspivid'
   __FFMPEG   = '/usr/bin/ffmpeg'
 
-  def __run(self):
-    cmd = Path(__file__).parent / 'rpilive_webcam.sh'
-
-    width  = self.width  if self.rotation not in ['90','270'] else self.height
-    height = self.height if self.rotation not in ['90','270'] else self.width
-
-    cmd = f'{cmd} "{self.name}" {width} {height} {self.rotation} {self.awb} {Path(self._STORE_LOCATION).joinpath(self.id)}'
-    cmd = shlex.split(cmd)
-
-    self.__process_id = subprocess.Popen(cmd,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL, start_new_session=True)
-
   def stop(self):
     try:
-      os.killpg(os.getpgid(self.__process_id.pid), signal.SIGTERM)
+      os.killpg(os.getpgid(self.__process.pid), signal.SIGTERM)
     except Exception as ex:
       logger.debug(f'Live webcam is not running: {ex}')
 
@@ -49,17 +39,33 @@ class terrariumRPILiveWebcam(terrariumWebcam):
       raise terrariumWebcamLoadingException(f'Please install ffmpeg.')
 
     try:
-      os.killpg(os.getpgid(self.__process_id.pid), signal.SIGTERM)
+      os.killpg(os.getpgid(self.__process.pid), signal.SIGTERM)
     except Exception as ex:
       logger.debug(f'Live webcam is not running: {ex}')
 
-    threading.Thread(target=self.__run).start()
+    cmd = Path(__file__).parent / 'rpilive_webcam.sh'
+
+    width  = self.width  if self.rotation not in ['90','270'] else self.height
+    height = self.height if self.rotation not in ['90','270'] else self.width
+
+    cmd = f'{cmd} "{self.name}" {width} {height} {self.rotation} {self.awb} {Path(self._STORE_LOCATION).joinpath(self.id)}'
+    cmd = shlex.split(cmd)
+
+    self.__process = subprocess.Popen(cmd,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL, start_new_session=True)
+    logger.debug(f'Started {self} with process id: {self.__process.pid} exit code: {self.__process.returncode}')
+
     # We need some time to wait so that the live stream has produced the first chunks
     sleep(5)
 
     return True
 
   def _get_raw_data(self):
+    if not psutil.pid_exists(self.__process.pid):
+      # Should restart the bash script
+      logger.warning(f'Webcam {self} is crashed. Restarting the webcam.')
+      self._load_hardware()
+      return False
+
     url = f'{Path(self._STORE_LOCATION).joinpath(self.id)}/stream.m3u8'
     cmd = f'{self.__FFMPEG} -hide_banner -loglevel panic -i {url} -vframes 1 -f image2 -'
     cmd = shlex.split(cmd)
