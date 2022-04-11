@@ -182,7 +182,7 @@ Dimmer offset in %
 : An offset value that is reduced from the actual value. Default 0
 
 Dimmer max dim
-: When this value is greater then 0, then the dimmer will use the RPI PWM hardware for dimming. This only works on GPIO pin **12, 32, 33 and 35**
+: Legacy dimming like TP3. Enter the technical max dim value. When this value is greater then 0, then the dimmer will use the RPI PWM hardware for dimming. This only works on GPIO pin **12, 32, 33 and 35**
 
 ## Sensors
 

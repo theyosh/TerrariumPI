@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-(unreleased)
-------------
+4.3.0 (2022-04-11)
+------------------
 
 **New**
 ------
@@ -20,6 +20,7 @@ Changelog
 
 **Fixes**
 ------
+- Fix webcam issues. [TheYOSH]
 - Fix required field switch. [#669](https://github.com/theyosh/TerrariumPI/issues/669). [TheYOSH]
 - Fix device loading. [TheYOSH]
 - Fix stupid typos and version numbers. [TheYOSH]
@@ -35,6 +36,13 @@ Changelog
 
 **Updates**
 ------
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation source. [TheYOSH]
+- Update documentation. [TheYOSH]
+- Update documentation. [TheYOSH]
+- Update relay documentation. [TheYOSH]
 - Update documentation. [TheYOSH]
 - Update gpio_relay.py. [cmonicob]
 
@@ -67,6 +75,8 @@ Changelog
 
 **Other**
 ------
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
 - Do not show commit version when nog available. [TheYOSH]
 - Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
   [TheYOSH]
