@@ -52,6 +52,7 @@ sparkfun-qwiic-relay==0.0.2
 sensirion-i2c-driver==1.0.0
 sensirion-i2c-sht==0.3.0
 bme680==1.1.1
+adafruit-circuitpython-sht31d==2.3.10
 
 # Webcam packages
 Pillow==9.0.1
