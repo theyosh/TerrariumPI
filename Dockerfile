@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends libusb-dev && \
   make install
 
 # python builder, help keep image small
-FROM python:3.8-buster as builder
+FROM python:3.8-buster as python_builder
 ENV DEBIAN_FRONTEND=noninteractive
 # These two environment variables prevent __pycache__/ files.
 ENV PYTHONUNBUFFERED=1
@@ -67,11 +67,11 @@ COPY . .
 # remove git and 3rdparty dir from code copy to help keep image smaller
 # 3rdparty is coming from the builder image
 RUN rm -Rf .git 3rdparty
-# Compress HTML, JS and CSS files so browsers can download compressed versions of the files
+# Compress JS and CSS files so browsers can download compressed versions of the files
 RUN find static/assets/ -type f -regex ".*\.\(css\|js\)" -exec gzip -f9k '{}' \;
 
 # actual image
-FROM python:3.8-slim-buster
+FROM python:3.8-slim-buster as finalimage
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV DEBIAN_FRONTEND=noninteractive
@@ -91,12 +91,12 @@ COPY --from=sispmctl_builder /usr/local/bin/sispmctl /usr/local/bin/sispmctl
 RUN rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so.0 && \
   ldconfig
 ENV PATH="/opt/venv/bin:$PATH"
-COPY --from=builder /opt/venv /opt/venv
+COPY --from=python_builder /opt/venv /opt/venv
 RUN ln -s /usr/lib/python3/dist-packages/cv2.cpython-37m-arm-linux-gnueabihf.so /opt/venv/lib/python3.8/site-packages/cv2.so && \
   mv /usr/lib/python3.7/gettext.py /usr/local/lib/python3.8/gettext.py && \
   rm -rf /usr/lib/python3/dist-packages/numpy /usr/lib/python3/dist-packages/numpy-1.16.2.egg-info
 WORKDIR /TerrariumPI
-COPY --from=builder /TerrariumPI/ /TerrariumPI/.
+COPY --from=python_builder /TerrariumPI/ /TerrariumPI/.
 COPY --from=sourcecode /TerrariumPI /TerrariumPI
 RUN echo '[ ! -z "$TERM" -a -r /TerrariumPI/motd.sh ] && /TerrariumPI/motd.sh' >> /etc/bash.bashrc
 
