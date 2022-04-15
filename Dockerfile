@@ -39,7 +39,7 @@ COPY requirements.txt .
 # requirements are slightly different for docker
 RUN sed -i 's/opencv-python-headless/# opencv-python-headless/g' requirements.txt && \
   sed -i 's/cryptography==.*/cryptography==3.4.8/g' requirements.txt && \
-  sed -i 's/numpy==.*/munpy==1.21.4/g' requirements.txt && \
+  sed -i 's/numpy==.*/numpy==1.21.4/g' requirements.txt && \
   pip install -r requirements.txt && \
   find /opt/venv -type d -name  "__pycache__" -exec rm -r {} +
 
