@@ -42,17 +42,26 @@ if [ -f /boot/config.txt ]; then
     REBOOT_REQUIRED=1
   fi
 
-  if [ $ENABLE_CAMERA == "true" ]; then
-    # Bullseye legacy camera
-    # can't inline sed due to docker mount
+  # Bullseye legacy camera support
+  if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^dtoverlay=vc4-kms-v3d" /boot/config.txt) -neq 0 ]; then
     cp /boot/config.txt /config.tmp
-    sed -i "/config.tmp" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@"
-    sed -i "/config.tmp" -e "s@^[ ]*camera_auto_detect=.*@@"
+    sed -i "/config.tmp" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@g"
+    echo `cat /config.tmp` > /boot/config.txt
+    rm /config.tmp
+    REBOOT_REQUIRED=1
+  fi
 
-    if  [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" /config.tmp) -eq 0 ]; then
-      sed -i "/config.tmp" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
-    fi
+  if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^camera_auto_detect=.*" /boot/config.txt) -neq 0 ]; then
+    cp /boot/config.txt /config.tmp
+    sed -i "/config.tmp" -e "s@^[ ]*camera_auto_detect=.*@@g"
+    echo `cat /config.tmp` > /boot/config.txt
+    rm /config.tmp
+    REBOOT_REQUIRED=1
+  fi
 
+  if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" /boot/config.txt) -eq 0 ]; then
+    cp /boot/config.txt /config.tmp
+    sed -i "/config.tmp" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
     echo `cat /config.tmp` > /boot/config.txt
     rm /config.tmp
     REBOOT_REQUIRED=1
