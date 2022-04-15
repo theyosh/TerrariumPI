@@ -42,6 +42,22 @@ if [ -f /boot/config.txt ]; then
     REBOOT_REQUIRED=1
   fi
 
+  if [ $ENABLE_CAMERA == "true" ]; then
+    # Bullseye legacy camera
+    # can't inline sed due to docker mount
+    cp /boot/config.txt /config.tmp
+    sed -i "/config.tmp" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@"
+    sed -i "/config.tmp" -e "s@^[ ]*camera_auto_detect=.*@@"
+
+    if  [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" /config.tmp) -eq 0 ]; then
+      sed -i "/config.tmp" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
+    fi
+
+    echo `cat /config.tmp` > /boot/config.txt
+    rm /config.tmp
+    REBOOT_REQUIRED=1
+  fi
+
   # Enable serial
   if [[ $ENABLE_SERIAL == "true" ]] && [ $(grep -ic "^enable_uart=1" /boot/config.txt) -eq 0 ]; then
     echo "enable_uart=1" >> /boot/config.txt

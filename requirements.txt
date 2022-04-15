@@ -56,8 +56,7 @@ adafruit-circuitpython-sht31d==2.3.10
 
 # Webcam packages
 Pillow==9.0.1
-# Numpy is fixed to a working version. Do NOT upgrade
-numpy==1.21.4
+numpy==1.22.3
 opencv-python-headless==4.5.5.64
 piexif==1.1.3
 

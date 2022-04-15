@@ -51,7 +51,13 @@ if [ ${PI_ZERO} -eq 1 ]; then
     PIP_MODULES="$(echo $PIP_MODULES | sed 's/opencv-python-headless==[^ ]\+/opencv-python-headless==4.5.3.56/')"
   fi
 
-  PIP_MODULES="${PIP_MODULES} numpy==1.21.4 lxml==4.6.4"
+  PIP_MODULES="$(echo $PIP_MODULES | sed 's/numpy==[^ ]\+/numpy==1.21.4/')"
+  PIP_MODULES="${PIP_MODULES} lxml==4.6.4"
+fi
+
+# Debian buster does not like numpy .... :(
+if [ ${BUSTER_OS} -eq 1 ]; then
+  PIP_MODULES="$(echo $PIP_MODULES | sed 's/numpy==[^ ]\+/numpy==1.21.4/')"
 fi
 
 #set -e
@@ -64,17 +70,18 @@ fi
 clear
 
 # OS version check
-if [ ${BUSTER_OS} -eq 0 ]; then
-  whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is not Raspbian Bullseye OS compatible. You can install it, but the Raspberry PI cameras are not working.\nDownload the old Legacy OS Raspbian Buster\n\nDo you want to continue?" 0 60
 
-  case $? in
-    1|255) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
-      echo "TerrariumPI ${VERSION} is supported on Buster OS (Legacy OS)"
-      echo "Download from: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy"
-      exit 0
-    ;;
-  esac
-fi
+# if [ ${BUSTER_OS} -eq 0 ]; then
+#   whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is not Raspbian Bullseye OS compatible. You can install it, but the Raspberry PI cameras are not working.\nDownload the old Legacy OS Raspbian Buster\n\nDo you want to continue?" 0 60
+
+#   case $? in
+#     1|255) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
+#       echo "TerrariumPI ${VERSION} is supported on Buster OS (Legacy OS)"
+#       echo "Download from: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy"
+#       exit 0
+#     ;;
+#   esac
+# fi
 
 whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'. If this is not the right user stop the installation now!\n\nDo you want to continue?" 0 60
 
@@ -137,6 +144,14 @@ if [ -f /boot/config.txt ]; then
 
   if [ $(grep -ic "^start_x=1" /boot/config.txt) -eq 0 ]; then
     echo "start_x=1" >> /boot/config.txt
+  fi
+
+  # Bullseye legacy camera
+  sed -i "/boot/config.txt" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@"
+  sed -i "/boot/config.txt" -e "s@^[ ]*camera_auto_detect=.*@@"
+
+  if [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" /boot/config.txt) -eq 0 ]; then
+    sed -i "/boot/config.txt" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
   fi
 
   # Enable serial
@@ -309,10 +324,9 @@ if [ -f terrariumpi.db ]; then
   mv terrariumpi.db* data
 fi
 
-if [ ${PI_ZERO} -eq 0 ]; then
-  chown "${SCRIPT_USER}". .
-  chown "${SCRIPT_USER}". * -Rf
-fi
+# Set file owner rights
+chown "${SCRIPT_USER}". .
+chown "${SCRIPT_USER}". * -Rf
 
 sync
 

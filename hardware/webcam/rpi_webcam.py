@@ -16,13 +16,14 @@ class terrariumRPIWebcam(terrariumWebcam):
   INFO_SOURCE  = 'rpicam'
 
   def _load_hardware(self):
-    # New RPI Camera app
-    raspistill = Path('/usr/bin/libcamera-still')
+    # # New RPI Camera app
+    # raspistill = Path('/usr/bin/libcamera-still')
+    # if not raspistill.exists():
+
+    # Old RPI Camera app (works better...)
+    raspistill = Path('/usr/bin/raspistill')
     if not raspistill.exists():
-      # Old RPI Camera app
-      raspistill = Path('/usr/bin/raspistill')
-      if not raspistill.exists():
-        return None
+      return None
 
     return f'{raspistill} --quality 95 --timeout {self._WARM_UP*1000} --encoding jpg'
 
