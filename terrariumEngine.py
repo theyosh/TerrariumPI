@@ -301,15 +301,13 @@ class terrariumEngine(object):
     gettext.translation('terrariumpi', 'locales/', languages=[self.settings['language']]).install()
 
     # Loading git data
-    gitversion = Path('.gitversion')
-    if gitversion.exists():
-      gitversion = gitversion.read_text().strip()
+    gitversion = None
+    if Path('.gitversion').exists():
+      gitversion = Path('.gitversion').read_text().strip()
       gitversion = None if gitversion == '' else gitversion
 
     if gitversion is None and Path('.git').exists():
-      gitversion = str(terrariumUtils.get_script_data('git rev-parse HEAD')).strip()
-    else:
-      gitversion = None
+      gitversion = str(terrariumUtils.get_script_data('git rev-parse HEAD').decode('utf-8')).strip()
 
     self.settings['gitversion'] = gitversion
 

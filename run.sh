@@ -43,7 +43,7 @@ if [ -f /boot/config.txt ]; then
   fi
 
   # Bullseye legacy camera support
-  if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^dtoverlay=vc4-kms-v3d" /boot/config.txt) -neq 0 ]; then
+  if [[ $ENABLE_CAMERA == "true" ]] && [ ! $(grep -ic "^dtoverlay=vc4-kms-v3d" /boot/config.txt) -eq 0 ]; then
     cp /boot/config.txt /config.tmp
     sed -i "/config.tmp" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@g"
     echo `cat /config.tmp` > /boot/config.txt
@@ -51,7 +51,7 @@ if [ -f /boot/config.txt ]; then
     REBOOT_REQUIRED=1
   fi
 
-  if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^camera_auto_detect=.*" /boot/config.txt) -neq 0 ]; then
+  if [[ $ENABLE_CAMERA == "true" ]] && [ ! $(grep -ic "^camera_auto_detect=.*" /boot/config.txt) -eq 0 ]; then
     cp /boot/config.txt /config.tmp
     sed -i "/config.tmp" -e "s@^[ ]*camera_auto_detect=.*@@g"
     echo `cat /config.tmp` > /boot/config.txt
