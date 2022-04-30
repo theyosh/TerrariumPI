@@ -25,11 +25,10 @@ class terrariumArduinoSensor(terrariumI2CSensor):
   def _get_data(self):
     data = None
     address = self._address
-    start_pos = (0 if len(address) != 3 else int(address[2]))*4
-    read_n_bytes = (start_pos + 1) * 4
+    sensor_pos = (0 if len(address) != 3 else int(address[2]))
     with self._open_hardware() as i2c_bus:
-      bytedata = i2c_bus.read_i2c_block_data(address[0],self.__I2C_READ,read_n_bytes)
-      value = bytes(bytedata[start_pos:])
+      bytedata = i2c_bus.read_i2c_block_data(address[0],sensor_pos,4)
+      value = bytes(bytedata[0:])
 
       float_value = struct.unpack('!f',value)[0]
       int_value = struct.unpack('!i',value)[0]

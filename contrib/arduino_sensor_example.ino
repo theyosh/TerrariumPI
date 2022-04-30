@@ -30,11 +30,9 @@ A7 =>     |
 #define SOUND_VELOCITY 0.034
 #define SDA_PIN 27
 #define SCL_PIN 28
-#define I2C_ADDRESS 0x08
-#define FLOAT 4
-#define INT 4
-#define SONAR_SENDOR FLOAT
-#define MHZ_SENSOR (2*INT)
+#define BYTES_VAR 4
+#define SONAR_SENDOR BYTES_VAR
+#define MHZ_SENSOR (2*BYTES_VAR)
 #define DATALENCH ((3*SONAR_SENDOR)+MHZ_SENSOR)
 
 
@@ -56,11 +54,12 @@ MHZ co2(MH_Z19_RX, MH_Z19_TX, MHZ19C);
 float d1 = 0,
       d2 = 0,
       d3 = 0,
-      d4 = 0;
-int ppm  = 0,
-    temp = 0;
-int cnt = 0;
-byte data[DATALENCH];
+int   ppm  = 0,
+      temp = 0;
+int   cnt = 0,
+      option = 0;
+byte  data[DATALENCH],
+      datasensor[(DATALENCH/BYTES_VAR)][BYTES_VAR];
 
 float getSonarDistance(sonar sonarSensor, float soundVelocity);
 byte toByte(int invalue);
@@ -81,30 +80,31 @@ void setup() {
   pinMode(sonar3.echoPin, INPUT);               // Sets the echoPin as an Input
   digitalWrite(sonar3.trigPin, LOW);
 
-  Wire.begin(I2C_ADDRESS);                      // join i2c bus with address #8
-  Wire.onRequest(RequestEvent);                 // register event
+  Wire.begin(0x08);                             // join i2c bus with address #8
+  Wire.onReceive(receiveEvent);                 // register event read
+  Wire.onRequest(requestEvent);                 // register event write
 
   Serial.println("Whait a evnet");
 }
 
 void loop() {
   d1 = getSonarDistance(sonar1,SOUND_VELOCITY);
-  data[0] = ((byte*)&d1)[3];
-  data[1] = ((byte*)&d1)[2];
-  data[2] = ((byte*)&d1)[1];
-  data[3] = ((byte*)&d1)[0];
+  data[0] = datasensor[0][0] = ((byte*)&d1)[3];
+  data[1] = datasensor[0][1] = ((byte*)&d1)[2];
+  data[2] = datasensor[0][2] = ((byte*)&d1)[1];
+  data[3] = datasensor[0][3] = ((byte*)&d1)[0];
 
   d2 = getSonarDistance(sonar2,SOUND_VELOCITY);
-  data[4] = ((byte*)&d2)[3];
-  data[5] = ((byte*)&d2)[2];
-  data[6] = ((byte*)&d2)[1];
-  data[7] = ((byte*)&d2)[0];
+  data[4] = datasensor[1][0] = ((byte*)&d2)[3];
+  data[5] = datasensor[1][1] = ((byte*)&d2)[2];
+  data[6] = datasensor[1][2] = ((byte*)&d2)[1];
+  data[7] = datasensor[1][3] = ((byte*)&d2)[0];
 
   d3 = getSonarDistance(sonar3,SOUND_VELOCITY);
-  data[8] = ((byte*)&d3)[3];
-  data[9] = ((byte*)&d3)[2];
-  data[10] = ((byte*)&d3)[1];
-  data[11] = ((byte*)&d3)[0];
+  data[8]  = datasensor[2][0] = ((byte*)&d3)[3];
+  data[9]  = datasensor[2][1] = ((byte*)&d3)[2];
+  data[10] = datasensor[2][2] = ((byte*)&d3)[1];
+  data[11] = datasensor[2][3] = ((byte*)&d3)[0];
 
   if(cnt <= 5){
     cnt++;
@@ -113,33 +113,61 @@ void loop() {
       ppm = co2.readCO2UART();
       temp = co2.getLastTemperature();
       cnt = 0;
-      data[16] = ((byte*)&ppm)[3];
-      data[17] = ((byte*)&ppm)[2];
-      data[18] = ((byte*)&ppm)[1];
-      data[19] = ((byte*)&ppm)[0];
-      data[20] = ((byte*)&temp)[3];
-      data[21] = ((byte*)&temp)[2];
-      data[22] = ((byte*)&temp)[1];
-      data[23] = ((byte*)&temp)[0];
+      data[16] = datasensor[3][0] = ((byte*)&ppm)[3];
+      data[17] = datasensor[3][1] = ((byte*)&ppm)[2];
+      data[18] = datasensor[3][2] = ((byte*)&ppm)[1];
+      data[19] = datasensor[3][3] = ((byte*)&ppm)[0];
+      data[20] = datasensor[4][0] = ((byte*)&temp)[3];
+      data[21] = datasensor[4][1] = ((byte*)&temp)[2];
+      data[22] = datasensor[4][2] = ((byte*)&temp)[1];
+      data[23] = datasensor[4][3] = ((byte*)&temp)[0];
     }
   }
 
   delay(1000);
 }
 
-void RequestEvent() {
-  Wire.write(data,DATALENCH); //send data
+void receiveEvent(int howMany) {
+  while (1 < Wire.available()) {  // loop through all but the last
+    char c = Wire.read();         // receive byte as a character
+    Serial.print(c);              // print the character
+  }
+  option = Wire.read();           // receive byte as an integer
+  Serial.println(option);         // print the integer
+}
 
-  Serial.print("Distance S1 (cm): ");
-  Serial.println(d1);
-  Serial.print("Distance S2 (cm): ");
-  Serial.println(d2);
-  Serial.print("Distance S3 (cm): ");
-  Serial.println(d3);
-  Serial.print("PPM S4: ");
-  Serial.println(ppm);
-  Serial.print("Temperature S4: ");
-  Serial.println(temp);
+void requestEvent() {
+  switch (option){
+    case 0:
+      Wire.write(datasensor[0], SONAR_SENDOR);
+      Serial.print("Distance S1 (cm): ");
+      Serial.println(d1);
+      break;
+    case 1:
+      Wire.write(datasensor[1], SONAR_SENDOR);
+      Serial.print("Distance S2 (cm): ");
+      Serial.println(d2);
+      break;
+    case 2:
+      Wire.write(datasensor[2], SONAR_SENDOR);
+      Serial.print("Distance S3 (cm): ");
+      Serial.println(d3);
+      break;
+    case 3:
+      Wire.write(datasensor[3], SONAR_SENDOR);
+      Serial.print("PPM S4: ");
+      Serial.println(ppm);
+      break;
+    case 4:
+      Wire.write(datasensor[4], SONAR_SENDOR);
+      Serial.print("Temperature S4: ");
+      Serial.println(temp);
+      break;
+    default:
+      Wire.write(data, DATALENCH);
+      Serial.println("Dafeult");
+      break;
+  }
   for (int i=0; i<DATALENCH;i++){
     Serial.print(data[i],HEX);
     if((i+1)%4==0){
