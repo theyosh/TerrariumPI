@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2022-04-08 17:25+CEST\n"
-"PO-Revision-Date: 2022-03-21 09:38+0000\n"
-"Last-Translator: Tobias Nitsch <info@sni-reptiles.com>\n"
-"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/de/>\n"
+"PO-Revision-Date: 2022-04-16 22:39+0000\n"
+"Last-Translator: deraragorn <felix.humpert@gmail.com>\n"
+"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +44,7 @@ msgstr "Audio"
 
 #: terrariumArea.py:69
 msgid "CO2"
-msgstr "CO²"
+msgstr "CO2"
 
 #: terrariumArea.py:75
 msgid "Conductivity"
@@ -84,7 +84,7 @@ msgstr "Luftfeuchtigkeit"
 
 #: terrariumEngine.py:57
 msgid "moisture"
-msgstr "Feuchtigkeit"
+msgstr "Bodenfeuchtigkeit"
 
 #: terrariumEngine.py:58
 msgid "conductivity"
@@ -136,7 +136,7 @@ msgstr "Wasserdurchfluss"
 
 #: terrariumEngine.py:70
 msgid "wattage"
-msgstr "Wattleistung"
+msgstr "Leistung"
 
 #: terrariumEngine.py:1220 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
@@ -180,7 +180,7 @@ msgstr "Lokale Zeit"
 
 #: terrariumNotification.py:39
 msgid "Local time, hours and minutes"
-msgstr "Lokale Zeit, in Stunden und Minuten"
+msgstr "Ortszeit, Stunden und Minuten"
 
 #: terrariumNotification.py:40
 msgid "Local date and time"
@@ -188,15 +188,15 @@ msgstr "Lokales Datum und Uhrzeit"
 
 #: terrariumNotification.py:48
 msgid "Authentication login error"
-msgstr "Authentifizierung Login Error"
+msgstr "Login Fehler"
 
 #: terrariumNotification.py:50
 msgid "IP of the wrong login attempt"
-msgstr "IP des falschen Login Versuchs"
+msgstr "Falsche IP bei Anmeldeversuch"
 
 #: terrariumNotification.py:51
 msgid "Used username"
-msgstr "benutzter Benutzername"
+msgstr "benutzter Nutzername"
 
 #: terrariumNotification.py:52
 msgid "Used password"
@@ -224,16 +224,16 @@ msgstr "Systemzusammenfassung"
 
 #: terrariumNotification.py:76
 msgid "System uptime in human readable format"
-msgstr "System online in Stunden"
+msgstr "System online in lesbarem Format"
 
 #: terrariumNotification.py:77
 msgid "System load last minute"
-msgstr "Systemauslastung in der letzten Minute"
+msgstr "Systemauslastung in der vergangenen Minute"
 
 #: terrariumNotification.py:78 terrariumNotification.py:80
 #: terrariumNotification.py:85 terrariumNotification.py:128
 msgid "True if there is an alarm"
-msgstr "Wahr wenn es einen Alarm gibt"
+msgstr "Alarm vorhanden"
 
 #: terrariumNotification.py:79
 msgid "System CPU temperature"
@@ -249,7 +249,7 @@ msgstr "Speicherverbrauch"
 
 #: terrariumNotification.py:83
 msgid "Average of [sensor type] (ex. temperature)"
-msgstr "Durchschnitt von [Sensortyp] (außer Temperatur)"
+msgstr "Durchschnitt von [sensor type] (außer Temperatur)"
 
 #: terrariumNotification.py:84 terrariumNotification.py:131
 msgid "Sensor type unit value"
@@ -277,7 +277,7 @@ msgstr "Anzahl der aktiven Relais"
 
 #: terrariumNotification.py:96
 msgid "System to slow with updates (warning)"
-msgstr "System zu langsam mit Uptdates (Warnung)"
+msgstr "System zu langsam mit Aktualisierungen (Warnung)"
 
 #: terrariumNotification.py:99
 msgid "Duration in seconds that are short"
@@ -285,23 +285,23 @@ msgstr "Dauer in Sekunden die kurz sind"
 
 #: terrariumNotification.py:100
 msgid "The update duration in seconds"
-msgstr "Die Update Dauer in Sekunden"
+msgstr "Aktualisierungsdauer in Sekunden"
 
 #: terrariumNotification.py:101
 msgid "The max update duration"
-msgstr "Die max. Update Dauer"
+msgstr "Die maximale Aktualisierungsdauer"
 
 #: terrariumNotification.py:102
 msgid "Amount of times to late with updates"
-msgstr "Anzahl der verspäteten Updates"
+msgstr "Anzahl Aktualisierungsprobleme"
 
 #: terrariumNotification.py:108
 msgid "System to slow with updates more then 30 times"
-msgstr "System mehr als 30 mal zu langsam mit Updates"
+msgstr "Häufigkeit von Aktualisierungsproblemen höher als 30"
 
 #: terrariumNotification.py:115
 msgid "Sensor update (every 30 seconds)"
-msgstr "Sensor Update (jede 30 Sekunden)"
+msgstr "Sensoraktualisierung (alle 30 Sekunden)"
 
 #: terrariumNotification.py:117 terrariumNotification.py:153
 #: terrariumNotification.py:184
@@ -337,11 +337,11 @@ msgstr "Adresse"
 
 #: terrariumNotification.py:122 views/modals/sensor.html:107
 msgid "Limit min"
-msgstr "Limit Minimum"
+msgstr "niedrigster Wert"
 
 #: terrariumNotification.py:123 views/modals/sensor.html:119
 msgid "Limit max"
-msgstr "Limit Maximum"
+msgstr "Höchster Wert"
 
 #: terrariumNotification.py:124 views/modals/sensor.html:83
 msgid "Alarm min"
@@ -357,7 +357,7 @@ msgstr "Maximale Differenz"
 
 #: terrariumNotification.py:127
 msgid "Exclude from average"
-msgstr "Ausschließen im Durchschnitt"
+msgstr "Im Durchschnittswert nicht berücksichtigen"
 
 #: terrariumNotification.py:129
 msgid "Current value"
@@ -366,7 +366,7 @@ msgstr "Aktueller Wert"
 #: terrariumNotification.py:130 terrariumNotification.py:162
 #: terrariumNotification.py:189
 msgid "True if there is an error"
-msgstr "Wahr, wenn ein Fehler auftritt"
+msgstr "Fehler vorhanden"
 
 #: terrariumNotification.py:137
 msgid "Sensor change (only when value is changed)"
@@ -390,7 +390,7 @@ msgstr "Wahr, wenn im manuellen Modus"
 
 #: terrariumNotification.py:160
 msgid "True if it is a dimmer"
-msgstr "Wahr, wenn es ein Dimmer ist"
+msgstr "Dimmer vorhanden"
 
 #: terrariumNotification.py:161 terrariumNotification.py:188
 msgid "Current state"
@@ -406,11 +406,11 @@ msgstr "Relaisauslöser"
 
 #: terrariumNotification.py:182
 msgid "Button update (every 30 seconds)"
-msgstr "Schalterupdate (alle 30 Sek.)"
+msgstr "Schalteraktualisierung (alle 30 Sekunden)"
 
 #: terrariumNotification.py:195
 msgid "Button change (only when value is changed)"
-msgstr "Schalterwechsel (nur wenn der Wert sich ändert)"
+msgstr "Schaltflächenwechsel (nur bei Wertänderung)"
 
 #: terrariumNotification.py:202
 msgid "Button action"
@@ -446,7 +446,7 @@ msgstr "Push Over"
 
 #: terrariumNotification.py:428
 msgid "Buzzer"
-msgstr "Taster"
+msgstr "Summer"
 
 #: terrariumWebserver.py:162 terrariumWebserver.py:246
 msgid "Authenticate to make any changes"
@@ -462,7 +462,7 @@ msgstr "TerrariumPI"
 
 #: terrariumWebserver.py:358
 msgid "A new version ({version}) is available!"
-msgstr "Eine neue Version ({Version}) ist verfügbar!"
+msgstr "Eine neue Version ({version}) ist verfügbar!"
 
 #: terrariumWebserver.py:358
 msgid "Software Update"
@@ -621,7 +621,7 @@ msgstr "Gesamtwasserverbrauch"
 #: views/dashboard.html:108 views/enclosures.html:2
 #: views/includes/sidebar.html:215
 msgid "Enclosures"
-msgstr "Gehäuse"
+msgstr "Terrarien"
 
 #: views/dashboard.html:168 views/enclosures.html:47
 msgid "Night"
@@ -643,11 +643,11 @@ msgstr "Aktuell"
 
 #: views/enclosures.html:9
 msgid "No enclosures"
-msgstr "Keine Gehäuse"
+msgstr "Keine Terrarien"
 
 #: views/enclosures.html:12
 msgid "Add new enclosure"
-msgstr "Neues Gehäuse hinzufügen"
+msgstr "Neues Terrarium hinzufügen"
 
 #: views/enclosures.html:168
 msgid "Areas"
@@ -795,7 +795,7 @@ msgstr "Liste"
 
 #: views/includes/sidebar.html:229
 msgid "New enclosure"
-msgstr "Neues Gehäuse"
+msgstr "Neues Terrarium"
 
 #: views/includes/sidebar.html:235
 msgid "New area"
@@ -863,11 +863,11 @@ msgstr "Bereichseinstellungen"
 
 #: views/modals/area.html:18
 msgid "Enclosure"
-msgstr "Gehäuse"
+msgstr "Terrarium"
 
 #: views/modals/area.html:24
 msgid "Select the enclosure where this area belongs to."
-msgstr "Wählen Sie das Gehäuse aus, zu dem dieser Bereich gehört."
+msgstr "Wählen Sie das Terrarium aus, zu dem dieser Bereich gehört."
 
 #: views/modals/area.html:38
 msgid "Select the type of area. Each type has its own extra options and logic."
@@ -976,8 +976,8 @@ msgid ""
 "Toggle this if this is the main lights for this enclosure. This is used for "
 "the light checks in other areas."
 msgstr ""
-"Schalten Sie dies um, wenn dies die Hauptbeleuchtung für dieses Gehäuse ist. "
-"Diese Einstellung wird für die Lichtoptionen in anderen Bereichen verwendet."
+"Aktivieren, wenn dies die Hauptbeleuchtung für dieses Terrarium ist. Diese "
+"Einstellung wird für die Lichtoptionen in anderen Bereichen verwendet."
 
 #: views/modals/area.html:127 views/modals/area.html:274
 msgid ""
@@ -1037,8 +1037,8 @@ msgid ""
 "The duration when the relays should be on. If this is shorter then all day, "
 "you will get a timer functionality. Enter '0' to have a full day."
 msgstr ""
-"Die Dauer, die das Relais eingeschaltet sein soll. '0' für einen ganzen Tag, "
-"grössere Werte für Timer-Funktion."
+"Die Dauer für die das Relais eingeschaltet sein soll. 0 entspricht dauerhaft "
+"eingeschaltet, andere Werte für Timer-Funktion."
 
 #: views/modals/area.html:173 views/modals/area.html:216
 #: views/modals/area.html:320 views/modals/area.html:390
@@ -1065,7 +1065,7 @@ msgstr "Soundkarte"
 
 #: views/modals/area.html:262
 msgid "Select the sound card that is used for this enclosure."
-msgstr "Wählen Sie die Soundkarte aus, die für dieses Gehäuse verwendet wird."
+msgstr "Wählen Sie die Soundkarte aus, die für dieses Terrarium verwendet wird."
 
 #: views/modals/area.html:314 views/modals/area.html:326
 #: views/modals/area.html:384 views/modals/area.html:396
@@ -1288,32 +1288,32 @@ msgstr ""
 "Geben Sie die Anzahl der Alarme ein, bevor eine Aktion ausgeführt wird."
 
 #: views/modals/area.html:652
-#, fuzzy
-#| msgid "Ignore webcam"
 msgid "Ignore low alarm"
-msgstr "Webcam ignorieren"
+msgstr "Niedrigen Alarm ignorieren"
 
 #: views/modals/area.html:657
 msgid ""
 "Toggle to ignore the low alarm value of the sensors, and use high alarm "
 "value only."
 msgstr ""
+"Aktivieren, um den niedrigen Alarmwert der Sensoren zu ignorieren und nur "
+"den hohen Alarmwert zu verwenden."
 
 #: views/modals/area.html:767
 msgid "Select the light status."
 msgstr "Wählen Sie den Lichtstatus aus."
 
 #: views/modals/area.html:800
-#, fuzzy
-#| msgid "High alarm"
 msgid "Ignore high alarm"
-msgstr "Oberer Alarm"
+msgstr "Oberen Alarm ignorieren"
 
 #: views/modals/area.html:804
 msgid ""
 "Toggle to ignore the high alarm value of the sensors, and use the low alarm "
 "value only"
 msgstr ""
+"Aktivieren, um den oberen Alarmwert der Sensoren zu ignorieren und nur den "
+"niedrigen Alarmwert zu benutzen"
 
 #: views/modals/area.html:830
 msgid ""
@@ -1497,7 +1497,7 @@ msgstr "Bitte geben Sie einen Wert zwischen %s und %s ein."
 
 #: views/modals/enclosure.html:12
 msgid "Enclosure settings"
-msgstr "Gehäuseeinstellungen"
+msgstr "Terrarieneinstellungen"
 
 #: views/modals/enclosure.html:30
 msgid "Image"
@@ -1520,7 +1520,7 @@ msgstr "Beschreibung"
 
 #: views/modals/enclosure.html:52
 msgid "Enter some information about this enclosure."
-msgstr "Geben Sie einige Informationen zu diesem Gehäuse ein."
+msgstr "Geben Sie einige Informationen zu diesem Terrarium ein."
 
 #: views/modals/enclosure.html:59
 msgid "Doors"
@@ -1528,14 +1528,14 @@ msgstr "Türen"
 
 #: views/modals/enclosure.html:65
 msgid "Select the doors that are used with this enclosure."
-msgstr "Wählen Sie die Türen aus, die mit diesem Gehäuse verwendet werden."
+msgstr "Wählen Sie die Türen aus, die mit diesem Terrarium verwendet werden."
 
 #: views/modals/enclosure.html:77
 msgid ""
 "Select the webcams that are used with this enclosure. You can use html "
 "colors and fonts and images."
 msgstr ""
-"Wählen Sie die Webcams aus, die mit diesem Gehäuse verwendet werden. Sie "
+"Wählen Sie die Webcams aus, die mit diesem Terrarium verwendet werden. Sie "
 "können HTML Farben, Schriftarten und Bilder verwenden."
 
 #: views/modals/event.html:10 views/modals/event.html:25
@@ -1600,7 +1600,7 @@ msgstr "Nachrichtentyp"
 
 #: views/modals/message.html:25
 msgid "Select the notification message type."
-msgstr "Wählen Sie den Benachrichtigungstyp."
+msgstr "Benachrichtigungstyp wählen"
 
 #: views/modals/message.html:31
 msgid "Subject"
@@ -1609,11 +1609,12 @@ msgstr "Betreff"
 #: views/modals/message.html:34
 msgid "Enter a short subject. You can use placeholder values here."
 msgstr ""
-"Geben Sie einen kleinen Text ein. Sie können Platzhalter Werte benutzen."
+"Geben Sie ein kurzes Thema ein. Hier können Platzhalterwerte verwendet "
+"werden."
 
 #: views/modals/message.html:37
 msgid "The subject cannot be empty."
-msgstr "Das Feld darf nicht leer sein."
+msgstr "Eingabe erforderlich."
 
 #: views/modals/message.html:43 views/modals/service.html:41
 msgid "Rate limit"
@@ -1622,7 +1623,7 @@ msgstr "Geschwindigkeitslimit"
 #: views/modals/message.html:46
 msgid ""
 "Maximum number of messages per minute for this message. Use 0 for unlimited."
-msgstr "Maximale Anzahl an Nachrichten pro Minute. 0 steht für unendlich."
+msgstr "Maximale Anzahl von Benachrichtigungen pro Minute. 0 = unbegrenzt."
 
 #: views/modals/message.html:49
 msgid "Enter a valid number."
@@ -2488,6 +2489,7 @@ msgid "Temperature type"
 msgstr "Temperaturtyp"
 
 #: views/settings.html:156
+#, fuzzy
 msgid "Celsius"
 msgstr "Celsius"
 
