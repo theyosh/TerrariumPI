@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends libusb-dev && \
 
 # python builder, help keep image small
 FROM python:3.8-buster as python_builder
+ARG GITHUB_SHA=${GITHUB_SHA}
+
 ENV DEBIAN_FRONTEND=noninteractive
 # These two environment variables prevent __pycache__/ files.
 ENV PYTHONUNBUFFERED=1
