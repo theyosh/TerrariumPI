@@ -15,6 +15,9 @@ Changelog
 
 **Updates**
 ------
+- Update docker.yaml. [TheYOSH]
+- Update docker.yaml. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update pages-deploy.yml. [TheYOSH]
 - Update docker.yaml. [TheYOSH]
 - Update docker.yaml. [TheYOSH]
