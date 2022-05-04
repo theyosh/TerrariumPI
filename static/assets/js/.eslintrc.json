@@ -14,6 +14,10 @@
   ],
   "rules": {
     "capitalized-comments": "off",
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
     "indent": [
       "error",
       2,
@@ -26,10 +30,13 @@
       "error",
       "always-multiline"
     ],
+    "no-var": "off",
     "object-curly-spacing": [
       "error",
       "always"
     ],
+    "object-shorthand": "off",
+    "prefer-arrow-callback": "off",
     "semi": [
       "error",
       "never"
@@ -38,8 +45,10 @@
     "unicorn/no-array-for-each": "off",
     "unicorn/no-for-loop": "off",
     "unicorn/no-null": "off",
+    "unicorn/numeric-separators-style": "off",
     "unicorn/prefer-dataset": "off",
     "unicorn/prefer-includes": "off",
+    "unicorn/prefer-module": "off",
     "unicorn/prefer-node-append": "off",
     "unicorn/prefer-query-selector": "off",
     "unicorn/prefer-spread": "off",
