@@ -21,6 +21,13 @@ class terrariumMS100Sensor(terrariumSensor):
       raise terrariumSensorLoadingException('Meross cloud is not enabled.')
 
     self._cache = terrariumCache()
+
+    print(f'Loaded the cache for {self.name}')
+    print(self)
+    print(dir(self))
+    print(self._cache)
+    print(dir(self._cache))
+
     return self.address
 
   def _get_data(self):
@@ -31,7 +38,16 @@ class terrariumMS100Sensor(terrariumSensor):
       logger.error('Meross cloud is not enabled.')
       return
 
-    return self._cache.get_data(self.address)
+    try:
+      return self._cache.get_data(self.address)
+    except Exception as ex:
+      print(f'Error with caching merross: {ex}')
+      print(self)
+      print(dir(self))
+      print(self._cache)
+      logger.error(f'Error getting new data for {self}: {ex}')
+      return None
+
 
   @staticmethod
   def _scan_sensors(unit_value_callback = None, trigger_callback = None):

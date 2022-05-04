@@ -70,7 +70,7 @@
       responsive: true,
       autoWidth: false,
       language: {
-        url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/{{ lang[3:].lower() }}_{{ lang[:2].lower() }}.json'
+        url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/{{ lang[:2].lower() }}-{{ lang[3:].upper() }}.json'
       },
       ajax: {
         url: '{{ url_for("api:audiofile_list") }}',
