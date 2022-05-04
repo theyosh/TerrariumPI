@@ -1,6 +1,5 @@
 # This is a basic workflow to help you get started with Actions
-
-name: 'Documentation builder'
+name: Documentation builder
 
 # Controls when the action will run.
 on:
