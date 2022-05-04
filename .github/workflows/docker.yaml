@@ -65,4 +65,4 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            GITHUB_SHA=${GITHUB_SHA}
+            GITHUB_SHA=${{ GITHUB_SHA }}
