@@ -62,6 +62,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/arm/v7
-          build-args: GITHUB_SHA=${{ GITHUB_SHA }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            GITHUB_SHA=${GITHUB_SHA}
