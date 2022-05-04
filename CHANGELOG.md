@@ -15,6 +15,12 @@ Changelog
 
 **Updates**
 ------
+- Update pages-deploy.yml. [TheYOSH]
+- Update docker.yaml. [TheYOSH]
+- Update docker.yaml. [TheYOSH]
+- Update docker.yaml. [TheYOSH]
+- Update docker.yaml. [TheYOSH]
+- Update version number and changelog. [TheYOSH]
 - Update AdminLTE 3.2.0 plugins and removed unused. [TheYOSH]
 - Update AdminLTE template to version 3.2.0. [TheYOSH]
 - Update Leaflet JS library. [TheYOSH]
