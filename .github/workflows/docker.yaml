@@ -1,5 +1,5 @@
 # Runs on PR or Release and only if Dockerfile exists and not docs being updated
-name: docker build & publish
+name: Docker build & publish
 
 on:
   release:
