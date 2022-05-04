@@ -2,6 +2,58 @@ Changelog
 =========
 
 
+4.3.1 (2022-05-04)
+------------------
+
+**New**
+------
+- Add old SHT3XD sensor. [#332](https://github.com/theyosh/TerrariumPI/issues/332). [TheYOSH]
+
+**Fixes**
+------
+- Fix github commit sha. [TheYOSH]
+
+**Updates**
+------
+- Update AdminLTE 3.2.0 plugins and removed unused. [TheYOSH]
+- Update AdminLTE template to version 3.2.0. [TheYOSH]
+- Update Leaflet JS library. [TheYOSH]
+- Update docker build. [TheYOSH]
+- Update pca9685-dimmer_relay.py. [cmonicob]
+
+  Docker error inicialitzation
+- Update docker startup script. [TheYOSH]
+- Docker build updates (4) [TheYOSH]
+- Docker build updates (3) [TheYOSH]
+- Docker build updates (2) [TheYOSH]
+- Docker build updates. [TheYOSH]
+
+**Other**
+------
+- Remove debug. [TheYOSH]
+- Merge branch '4.x.y.z' into main. [TheYOSH]
+- Merge pull request [#696](https://github.com/theyosh/TerrariumPI/issues/696) from cmonicob/patch-1. [TheYOSH]
+
+  Update pca9685-dimmer_relay.py
+- Merge pull request [#694](https://github.com/theyosh/TerrariumPI/issues/694) from theyosh/4.x.y.z. [TheYOSH]
+
+  4.x.y.z
+- Merge pull request [#691](https://github.com/theyosh/TerrariumPI/issues/691) from cmonicob/4.x.y.z. [TheYOSH]
+
+  code optimization
+- Code optimization. [cmonicob]
+
+  the code is modified to optimize i2c transmission, and to be more
+  compatible with new possibilities.
+  now you can request the sensor number and return only the 4 bytes with
+  the result of the requested sensor
+- Translated using Weblate (German) [deraragorn]
+
+  Currently translated at 99.8% (760 of 761 strings)
+- Debian Bullseye support (2) [TheYOSH]
+- Debian Bullseye support. [TheYOSH]
+
+
 4.3.0 (2022-04-11)
 ------------------
 
@@ -75,6 +127,7 @@ Changelog
 
 **Other**
 ------
+- Release 4.3.0 preperation. [J.G. Rubingh]
 - Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
   [TheYOSH]
 - Do not show commit version when nog available. [TheYOSH]
