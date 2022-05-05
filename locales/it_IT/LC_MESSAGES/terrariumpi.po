@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2022-03-22 11:38+0000\n"
-"Last-Translator: Luca <lucagattuso.code@gmail.com>\n"
+"PO-Revision-Date: 2022-05-06 10:39+0000\n"
+"Last-Translator: Rob <robe.mulargia@gmail.com>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
 "3-x-y-z/it/>\n"
 "Language: it_IT\n"
@@ -1662,10 +1662,8 @@ msgstr "Sensore"
 #: views/system_environment.tpl:598 views/system_environment.tpl:809
 #: views/system_environment.tpl:1020 views/system_environment.tpl:1231
 #: views/system_environment.tpl:1395 views/system_environment.tpl:1606
-#, fuzzy
-#| msgid "Water tank height"
 msgid "Weather day/night"
-msgstr "Altezza riserva d'acqua"
+msgstr "Clima giorno/notte"
 
 #: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
 #: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
@@ -1675,10 +1673,8 @@ msgstr "Altezza riserva d'acqua"
 #: views/system_environment.tpl:599 views/system_environment.tpl:810
 #: views/system_environment.tpl:1021 views/system_environment.tpl:1232
 #: views/system_environment.tpl:1396 views/system_environment.tpl:1607
-#, fuzzy
-#| msgid "Water tank height"
 msgid "Weather night/day"
-msgstr "Altezza riserva d'acqua"
+msgstr "Clima notte/giorno"
 
 #: views/dashboard.tpl:83 views/inc/usage_dashboard.tpl:122
 #: views/inc/usage_environment.tpl:15 views/inc/usage_environment.tpl:398
@@ -2260,10 +2256,8 @@ msgid "System"
 msgstr "Sistema"
 
 #: views/inc/menu.tpl:137
-#, fuzzy
-#| msgid "Location"
 msgid "Notifications"
-msgstr "Località"
+msgstr "Notifiche"
 
 #: views/inc/menu.tpl:146
 msgid "Log"
@@ -3516,7 +3510,7 @@ msgstr ""
 
 #: views/notifications.tpl:27
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: views/notifications.tpl:37
 msgid "Receiver email"
@@ -3542,7 +3536,7 @@ msgstr ""
 
 #: views/notifications.tpl:64
 msgid "Display"
-msgstr ""
+msgstr "Display"
 
 #: views/notifications.tpl:101
 msgid "Twitter"
@@ -3985,16 +3979,12 @@ msgid "Mode"
 msgstr ""
 
 #: views/system_environment.tpl:51
-#, fuzzy
-#| msgid "Maximum lights hours"
 msgid "Maximum hours"
-msgstr "Massimo numero di ore di luce"
+msgstr "Massimo numero di ore"
 
 #: views/system_environment.tpl:57
-#, fuzzy
-#| msgid "Minimum light hours"
 msgid "Minimum hours"
-msgstr "Minimo numero di ore di luce"
+msgstr "Minimo numero di ore"
 
 #: views/system_environment.tpl:86 views/system_environment.tpl:126
 #: views/system_environment.tpl:226 views/system_environment.tpl:302
@@ -4081,7 +4071,7 @@ msgstr "Spento"
 #: views/system_environment.tpl:1750 views/system_environment.tpl:1762
 #: views/webcam_settings.tpl:164 views/webcam_settings.tpl:175
 msgid "Ignore"
-msgstr ""
+msgstr "Ignora"
 
 #: views/system_environment.tpl:250 views/system_environment.tpl:326
 #: views/system_environment.tpl:461 views/system_environment.tpl:537
