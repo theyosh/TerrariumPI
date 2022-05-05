@@ -104,16 +104,6 @@ div#weather_image {
     transform: rotate(360deg);
   }
 }
-@-ms-keyframes pace-spinner {
-  0% {
-    -ms-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
 @keyframes pace-spinner {
   0% {
     transform: rotate(0deg);
