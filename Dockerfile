@@ -97,7 +97,7 @@ COPY --from=python_builder /opt/venv /opt/venv
 RUN ln -s /usr/lib/python3/dist-packages/cv2.cpython-37m-arm-linux-gnueabihf.so /opt/venv/lib/python3.8/site-packages/cv2.so && \
   mv /usr/lib/python3.7/gettext.py /usr/local/lib/python3.8/gettext.py && \
   rm -rf /usr/lib/python3/dist-packages/numpy /usr/lib/python3/dist-packages/numpy-1.16.2.egg-info
-RUN echo "/opt/vc/lib" > /etc/ld.so.conf.d/00-vmcs.conf && ldconfig
+RUN echo "/opt/vc/lib" > /etc/ld.so.conf.d/00-vmcs.conf
 WORKDIR /TerrariumPI
 COPY --from=python_builder /TerrariumPI/ /TerrariumPI/.
 COPY --from=sourcecode /TerrariumPI /TerrariumPI

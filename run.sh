@@ -137,5 +137,8 @@ if [ -f motd.sh ]; then
   rm motd.sh
 fi
 
+# We need to update the libraries with the mounted /opt/vc/lib/ :(
+ldconfig
+
 # No reboot required, Pi must already be fully configured, start TP
 exec /opt/venv/bin/python /TerrariumPI/terrariumPI.py
