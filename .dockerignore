@@ -15,7 +15,7 @@ venv
 .cache
 *.swp
 media/*
-*.js.map
-**/*.js.map
+*.map
+**/*.map
 install.sh
 Makefile
