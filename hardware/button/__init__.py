@@ -105,7 +105,8 @@ class terrariumButton(object):
     self.address = address
 
   def __repr__(self):
-    """Returns readable button name
+    """
+    Returns readable button name
 
     Returns:
         string: Button type and name with address
