@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-04-08 17:25+CEST\n"
-"PO-Revision-Date: 2022-03-21 11:21+0000\n"
-"Last-Translator: Luca <lucagattuso.code@gmail.com>\n"
-"Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/4-x-"
-"y-z/it/>\n"
+"PO-Revision-Date: 2022-05-06 10:39+0000\n"
+"Last-Translator: Rob <robe.mulargia@gmail.com>\n"
+"Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/it/>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,10 +19,8 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:33
-#, fuzzy
-#| msgid "Lights"
 msgid "Lighting"
-msgstr "Luci"
+msgstr "Illuminazione"
 
 #: terrariumArea.py:39
 msgid "Heating"
@@ -94,25 +92,23 @@ msgstr "conductività"
 
 #: terrariumEngine.py:59
 msgid "ph"
-msgstr ""
+msgstr "pH"
 
 #: terrariumEngine.py:60
-#, fuzzy
-#| msgid "Night"
 msgid "light"
-msgstr "Notte"
+msgstr "Luce"
 
 #: terrariumEngine.py:61
 msgid "uva"
-msgstr ""
+msgstr "UV-a"
 
 #: terrariumEngine.py:62
 msgid "uvb"
-msgstr ""
+msgstr "UV-b"
 
 #: terrariumEngine.py:63
 msgid "uvi"
-msgstr ""
+msgstr "UV-i"
 
 #: terrariumEngine.py:64
 msgid "fertility"
@@ -120,7 +116,7 @@ msgstr "fertilizzante"
 
 #: terrariumEngine.py:65
 msgid "co2"
-msgstr ""
+msgstr "CO2"
 
 #: terrariumEngine.py:66
 msgid "volume"
@@ -136,21 +132,19 @@ msgstr "velocità del vento"
 
 #: terrariumEngine.py:69
 msgid "water_flow"
-msgstr ""
+msgstr "flusso_acqua"
 
 #: terrariumEngine.py:70
 msgid "wattage"
-msgstr ""
+msgstr "Potenza in watt"
 
 #: terrariumEngine.py:1220 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Tempo di funzionamento"
 
 #: terrariumEngine.py:1226
-#, fuzzy
-#| msgid "System log"
 msgid "System load"
-msgstr "Log di Sistema"
+msgstr "Carico del sistema"
 
 #: terrariumEngine.py:1232 views/status.html:44
 msgid "CPU Temperature"
@@ -158,7 +152,7 @@ msgstr "Temperatura CPU"
 
 #: terrariumEngine.py:1238
 msgid "Storage"
-msgstr ""
+msgstr "Memoria"
 
 #: terrariumEngine.py:1244
 msgid "Memory"
@@ -173,107 +167,77 @@ msgid "last update"
 msgstr "ultimo aggiornamento"
 
 #: terrariumNotification.py:36
-#, fuzzy
-#| msgid "Remote source"
 msgid "Local date"
-msgstr "Sorgente remota"
+msgstr "Data locale"
 
 #: terrariumNotification.py:37
-#, fuzzy
-#| msgid "Date and time"
 msgid "Local date, day and month"
-msgstr "Data e ora"
+msgstr "Data locale, giorno e mese"
 
 #: terrariumNotification.py:38
-#, fuzzy
-#| msgid "Remote source"
 msgid "Local time"
-msgstr "Sorgente remota"
+msgstr "Ora locale"
 
 #: terrariumNotification.py:39
-#, fuzzy
-#| msgid "Date and time"
 msgid "Local time, hours and minutes"
-msgstr "Data e ora"
+msgstr "Ora locale, ore e minuti"
 
 #: terrariumNotification.py:40
-#, fuzzy
-#| msgid "Date and time"
 msgid "Local date and time"
-msgstr "Data e ora"
+msgstr "Data e ora locali"
 
 #: terrariumNotification.py:48
-#, fuzzy
-#| msgid "Authentication"
 msgid "Authentication login error"
-msgstr "Autenticazione"
+msgstr "Errore nel login"
 
 #: terrariumNotification.py:50
 msgid "IP of the wrong login attempt"
-msgstr ""
+msgstr "Indirizzo IP del tentativo di login non riuscito"
 
 #: terrariumNotification.py:51
-#, fuzzy
-#| msgid "Filename"
 msgid "Used username"
-msgstr "Nome file"
+msgstr "Username utilizzato"
 
 #: terrariumNotification.py:52
-#, fuzzy
-#| msgid "New admin password"
 msgid "Used password"
-msgstr "Nuova password Amministratore"
+msgstr "Password utilizzata"
 
 #: terrariumNotification.py:58
-#, fuzzy
-#| msgid "System log"
 msgid "System warning"
-msgstr "Log di Sistema"
+msgstr "Avviso di sistema"
 
 #: terrariumNotification.py:60
-#, fuzzy
-#| msgid "No warning messages"
 msgid "Warning message"
-msgstr "Nessun messaggio di warning"
+msgstr "Messaggio di avviso"
 
 #: terrariumNotification.py:66
-#, fuzzy
-#| msgid "System log"
 msgid "System error"
-msgstr "Log di Sistema"
+msgstr "Errore di sistema"
 
 #: terrariumNotification.py:68 terrariumNotification.py:98
-#, fuzzy
-#| msgid "No error messages"
 msgid "Error message"
-msgstr "Nessun messaggio di errore"
+msgstr "Messaggio di errore"
 
 #: terrariumNotification.py:74
-#, fuzzy
-#| msgid "System status"
 msgid "System summary"
-msgstr "Stato sistema"
+msgstr "Riepilogo sistema"
 
 #: terrariumNotification.py:76
 msgid "System uptime in human readable format"
-msgstr ""
+msgstr "Tempo di funzionamento del sistema in formato umanamente leggibile"
 
 #: terrariumNotification.py:77
-#, fuzzy
-#| msgid "System log"
 msgid "System load last minute"
-msgstr "Log di Sistema"
+msgstr "Carico del sistema nell'ultimo minuto"
 
 #: terrariumNotification.py:78 terrariumNotification.py:80
 #: terrariumNotification.py:85 terrariumNotification.py:128
 msgid "True if there is an alarm"
-msgstr ""
+msgstr "Vero se c'è un allarme"
 
 #: terrariumNotification.py:79
-#, fuzzy
-#| msgid "CPU Temperature"
 msgid "System CPU temperature"
-msgstr "Temperatura CPU"
+msgstr "Temperatura CPU di sistema"
 
 #: terrariumNotification.py:81
 #, fuzzy
@@ -287,45 +251,35 @@ msgstr "Utilizzo di memoria"
 
 #: terrariumNotification.py:83
 msgid "Average of [sensor type] (ex. temperature)"
-msgstr ""
+msgstr "Media di [tipo di sensore] (es. temperatura)"
 
 #: terrariumNotification.py:84 terrariumNotification.py:131
-#, fuzzy
-#| msgid "Sensor temperature"
 msgid "Sensor type unit value"
-msgstr "Sensore di temperatura"
+msgstr "Unità di misura del tipo di sensore"
 
 #: terrariumNotification.py:86
-#, fuzzy
-#| msgid "Pi power usage in W"
 msgid "Current power usage"
-msgstr "Consumo di elettricità della Pi in W"
+msgstr "Potenza utilizzata al momento"
 
 #: terrariumNotification.py:87
-#, fuzzy
-#| msgid "Pi power usage in W"
 msgid "Max power usage"
-msgstr "Consumo di elettricità della Pi in W"
+msgstr "Massimo consumo di potenza"
 
 #: terrariumNotification.py:88
-#, fuzzy
-#| msgid "Current value"
 msgid "Current water flow"
-msgstr "Valore attuale"
+msgstr "Flusso d'acqua attuale"
 
 #: terrariumNotification.py:89 terrariumNotification.py:158
-#, fuzzy
-#| msgid "Water flow in L/m"
 msgid "Max water flow"
-msgstr "Flusso d'acqua in L/m"
+msgstr "Flusso d'acqua massimo"
 
 #: terrariumNotification.py:90
 msgid "Number of relays active"
-msgstr ""
+msgstr "Numero di relay attivi"
 
 #: terrariumNotification.py:96
 msgid "System to slow with updates (warning)"
-msgstr ""
+msgstr "Il sistema sarà lento per aggiornamenti (avviso)"
 
 #: terrariumNotification.py:99
 #, fuzzy
@@ -334,14 +288,12 @@ msgid "Duration in seconds that are short"
 msgstr "Canali"
 
 #: terrariumNotification.py:100
-#, fuzzy
-#| msgid "Spray duration (seconds)"
 msgid "The update duration in seconds"
-msgstr "Durata della nebulizzazione (secondi)"
+msgstr "Durata dell'aggiornamento in secondi"
 
 #: terrariumNotification.py:101
 msgid "The max update duration"
-msgstr ""
+msgstr "Massima durata dell'aggiornamento"
 
 #: terrariumNotification.py:102
 msgid "Amount of times to late with updates"
@@ -353,7 +305,7 @@ msgstr ""
 
 #: terrariumNotification.py:115
 msgid "Sensor update (every 30 seconds)"
-msgstr ""
+msgstr "Aggiornamento sensore (ogni 30 secondi)"
 
 #: terrariumNotification.py:117 terrariumNotification.py:153
 #: terrariumNotification.py:184
@@ -362,16 +314,12 @@ msgstr "ID"
 
 #: terrariumNotification.py:118 terrariumNotification.py:154
 #: terrariumNotification.py:185
-#, fuzzy
-#| msgid "Hardware"
 msgid "Hardware type"
-msgstr "Hardware"
+msgstr "Tipo di hardware"
 
 #: terrariumNotification.py:119
-#, fuzzy
-#| msgid "Sensor ph"
 msgid "Sensor type"
-msgstr "Sensore pH"
+msgstr "Tipo di sensore"
 
 #: terrariumNotification.py:120 terrariumNotification.py:155
 #: terrariumNotification.py:186 views/audio_files.html:24
@@ -408,14 +356,12 @@ msgid "Alarm max"
 msgstr "Allarme massimo"
 
 #: terrariumNotification.py:126
-#, fuzzy
-#| msgid "Day/night difference"
 msgid "Max difference"
-msgstr "Differenza giorno/notte"
+msgstr "Massima differenza"
 
 #: terrariumNotification.py:127
 msgid "Exclude from average"
-msgstr ""
+msgstr "Escludi da media"
 
 #: terrariumNotification.py:129
 msgid "Current value"
@@ -424,91 +370,79 @@ msgstr "Valore attuale"
 #: terrariumNotification.py:130 terrariumNotification.py:162
 #: terrariumNotification.py:189
 msgid "True if there is an error"
-msgstr ""
+msgstr "Vero se ci sono errori"
 
 #: terrariumNotification.py:137
 msgid "Sensor change (only when value is changed)"
-msgstr ""
+msgstr "Cambio valore nel sensore"
 
 #: terrariumNotification.py:144
-#, fuzzy
-#| msgid "Sensor ph"
 msgid "Sensor alarm"
-msgstr "Sensore pH"
+msgstr "Allarme sensore"
 
 #: terrariumNotification.py:151
 msgid "Relay update (every 30 seconds)"
-msgstr ""
+msgstr "Aggiornamento relay (ogni 30 secondi)"
 
 #: terrariumNotification.py:157
 msgid "Max wattage"
-msgstr ""
+msgstr "Max potenza in watt"
 
 #: terrariumNotification.py:159
 msgid "True if in manual mode"
-msgstr ""
+msgstr "Vero se in modalità manuale"
 
 #: terrariumNotification.py:160
 msgid "True if it is a dimmer"
-msgstr ""
+msgstr "Vero se c'è un dimmer (attenuatore)"
 
 #: terrariumNotification.py:161 terrariumNotification.py:188
-#, fuzzy
-#| msgid "Current value"
 msgid "Current state"
-msgstr "Valore attuale"
+msgstr "Stato attuale"
 
 #: terrariumNotification.py:168
 msgid "Relay change (only when value is changed)"
-msgstr ""
+msgstr "Cambio di valore nel relay"
 
 #: terrariumNotification.py:175
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Relay toggle"
-msgstr "Impostazioni webcam"
+msgstr "Azionare relay (accendere o spegnere)"
 
 #: terrariumNotification.py:182
 msgid "Button update (every 30 seconds)"
-msgstr ""
+msgstr "Aggiornamento pulsante (ogni 30 secondi)"
 
 #: terrariumNotification.py:195
 msgid "Button change (only when value is changed)"
-msgstr ""
+msgstr "Cambio valore pulsante"
 
 #: terrariumNotification.py:202
-#, fuzzy
-#| msgid "Door settings"
 msgid "Button action"
-msgstr "Impostazioni della porta"
+msgstr "Azione pulsante"
 
 #: terrariumNotification.py:210
-#, fuzzy
-#| msgid "Language"
 msgid "Webcam archive"
-msgstr "Lingua"
+msgstr "Archivio webcam"
 
 #: terrariumNotification.py:398
 msgid "Display"
-msgstr ""
+msgstr "Display"
 
 #: terrariumNotification.py:402
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: terrariumNotification.py:412
-#, fuzzy
-#| msgid "Minimum light hours"
 msgid "Traffic light"
-msgstr "Minimo numero di ore di luce"
+msgstr "Semaforo"
 
 #: terrariumNotification.py:416
 msgid "Web-hook"
-msgstr ""
+msgstr "Web-hook"
 
 #: terrariumNotification.py:420
 msgid "MQTT"
-msgstr ""
+msgstr "MQTT"
 
 #: terrariumNotification.py:424
 msgid "Pushover"
@@ -516,7 +450,7 @@ msgstr ""
 
 #: terrariumNotification.py:428
 msgid "Buzzer"
-msgstr ""
+msgstr "Buzzer (cicalino)"
 
 #: terrariumWebserver.py:162 terrariumWebserver.py:246
 msgid "Authenticate to make any changes"
@@ -532,13 +466,11 @@ msgstr "TerrariumPi"
 
 #: terrariumWebserver.py:358
 msgid "A new version ({version}) is available!"
-msgstr ""
+msgstr "Una nuova versione ([versione]) è disponibile!"
 
 #: terrariumWebserver.py:358
-#, fuzzy
-#| msgid "Sensor ph"
 msgid "Software Update"
-msgstr "Sensore pH"
+msgstr "Aggiornamento software"
 
 #: views/about.html:2 views/about.html:9 views/includes/sidebar.html:292
 #: views/includes/sidebar.html:305
@@ -569,29 +501,25 @@ msgid "Action"
 msgstr "Azione"
 
 #: views/audio_files.html:46
-#, fuzzy
-#| msgid "Add new audio playlist"
 msgid "Upload new audio file"
-msgstr "Aggiungi una nuova playlist audio"
+msgstr "Upload nuovo file audio"
 
 #: views/audio_files.html:51 views/modals/enclosure.html:34
 #: views/settings.html:264
 msgid "Choose a file"
-msgstr ""
+msgstr "Scegli un file"
 
 #: views/buttons.html:2 views/includes/sidebar.html:140
 msgid "Buttons"
-msgstr ""
+msgstr "Pulsanti"
 
 #: views/buttons.html:9
 msgid "No buttons"
-msgstr ""
+msgstr "Nessun pulsante"
 
 #: views/buttons.html:12
-#, fuzzy
-#| msgid "Add new sensor"
 msgid "Add new button"
-msgstr "Aggiungi un nuovo sensore"
+msgstr "Aggiungi un nuovo pulsante"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
 #: views/dashboard.html:120 views/dashboard.html:316 views/enclosures.html:14
@@ -599,10 +527,8 @@ msgstr "Aggiungi un nuovo sensore"
 #: views/notifications.html:56 views/relays.html:14 views/relays.html:83
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
 #: views/webcams.html:14 views/webcams.html:41
-#, fuzzy
-#| msgid "Authenticate to make any changes"
 msgid "Login to make changes"
-msgstr "Autenticarsi per applicare le modifiche"
+msgstr "Autenticarsi per effettuare le modifiche"
 
 #: views/buttons.html:25 views/dashboard.html:284 views/relays.html:27
 #: views/sensors.html:31 views/webcams.html:23
@@ -653,7 +579,7 @@ msgstr "Impostazioni"
 #: views/buttons.html:63 views/relays.html:76 views/sensors.html:74
 #: views/webcams.html:35
 msgid "Ignore"
-msgstr ""
+msgstr "Ignora"
 
 #: views/buttons.html:68 views/modals/webcam.html:401 views/relays.html:80
 #: views/sensors.html:79 views/webcams.html:38
@@ -665,10 +591,8 @@ msgid "Calendar"
 msgstr "Calendario"
 
 #: views/calendar.html:6
-#, fuzzy
-#| msgid "Download"
 msgid "Download iCal"
-msgstr "Download"
+msgstr "Download file per iCal"
 
 #: views/dashboard.html:2 views/includes/sidebar.html:48
 msgid "Dashboard"
@@ -683,24 +607,20 @@ msgid "Water flow in %s"
 msgstr "Flusso d'acqua in %s"
 
 #: views/dashboard.html:73
-#, fuzzy
-#| msgid "Total power in kWh"
 msgid "Total power usage"
-msgstr "Energia totale in kWh"
+msgstr "Potenza complessiva in uso"
 
 #: views/dashboard.html:74 views/relays.html:26
 msgid "kWh"
-msgstr ""
+msgstr "kWh"
 
 #: views/dashboard.html:78 views/dashboard.html:96
 msgid "in"
 msgstr "in"
 
 #: views/dashboard.html:91
-#, fuzzy
-#| msgid "Total water in L"
 msgid "Total water usage"
-msgstr "Acqua totale in L"
+msgstr "Utilizzo complessivo di acqua"
 
 #: views/dashboard.html:108 views/enclosures.html:2
 #: views/includes/sidebar.html:215
@@ -775,55 +695,47 @@ msgstr "Chiudi"
 
 #: views/includes/navigation.html:17
 msgid "Upcoming events"
-msgstr ""
+msgstr "Eventi futuri"
 
 #: views/includes/navigation.html:22
 msgid "See All Events"
-msgstr ""
+msgstr "Vedi tutti gli eventi"
 
 #: views/includes/navigation.html:31
-#, fuzzy
-#| msgid "Door status"
 msgid "All doors status"
-msgstr "Stato della porta"
+msgstr "Stato di tutte le porte"
 
 #: views/includes/navigation.html:34
-#, fuzzy
-#| msgid "Door is closed"
 msgid "All doors are closed"
-msgstr "La porta è chiusa"
+msgstr "Tutte le porte sono chiuse"
 
 #: views/includes/navigation.html:44
-#, fuzzy
-#| msgid "Current value"
 msgid "Current status"
-msgstr "Valore attuale"
+msgstr "Stato attuale"
 
 #: views/includes/sidebar.html:14
 msgid "Hello"
-msgstr ""
+msgstr "Ciao"
 
 #: views/includes/sidebar.html:16
 msgid "Logout"
-msgstr ""
+msgstr "Logout"
 
 #: views/includes/sidebar.html:19
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 #: views/includes/sidebar.html:19
 msgid "Read only mode"
-msgstr ""
+msgstr "Modalità sola lettura"
 
 #: views/includes/sidebar.html:40
 msgid "Home"
 msgstr "Home"
 
 #: views/includes/sidebar.html:55 views/sensors.html:6
-#, fuzzy
-#| msgid "Temperature sensors"
 msgid "All sensors"
-msgstr "Sensori di temperatura"
+msgstr "Tutti i sensori"
 
 #: views/includes/sidebar.html:62 views/modals/area.html:502
 #: views/weather.html:2
@@ -836,10 +748,8 @@ msgid "Sensors"
 msgstr "Sensori"
 
 #: views/includes/sidebar.html:96
-#, fuzzy
-#| msgid "pH sensor"
 msgid "New sensor"
-msgstr "sensore pH"
+msgstr "Nuovo sensore"
 
 #: views/includes/sidebar.html:102
 #, fuzzy
@@ -851,13 +761,11 @@ msgstr "Sensori di temperatura"
 #: views/modals/area.html:222 views/modals/area.html:665
 #: views/modals/area.html:813 views/relays.html:2
 msgid "Relays"
-msgstr ""
+msgstr "Relay"
 
 #: views/includes/sidebar.html:125
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "New relay"
-msgstr "Aggiungi una nuova webcam"
+msgstr "Nuovo relay"
 
 #: views/includes/sidebar.html:131
 #, fuzzy
@@ -866,10 +774,8 @@ msgid "Scan relays"
 msgstr "Sensori di temperatura"
 
 #: views/includes/sidebar.html:154
-#, fuzzy
-#| msgid "Add new sensor"
 msgid "New button"
-msgstr "Aggiungi un nuovo sensore"
+msgstr "Nuovo pulsante"
 
 #: views/includes/sidebar.html:163 views/modals/enclosure.html:71
 #: views/webcams.html:2
@@ -881,10 +787,8 @@ msgid "Show"
 msgstr "Mostra"
 
 #: views/includes/sidebar.html:177
-#, fuzzy
-#| msgid "Webcams"
 msgid "New webcam"
-msgstr "Webcams"
+msgstr "Nuova webcam"
 
 #: views/includes/sidebar.html:194
 msgid "Files"
@@ -896,14 +800,12 @@ msgid "Playlists"
 msgstr "Playlist"
 
 #: views/includes/sidebar.html:206
-#, fuzzy
-#| msgid "Audio playlist"
 msgid "New playlist"
-msgstr "Playlist audio"
+msgstr "Nuova playlist"
 
 #: views/includes/sidebar.html:223
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 #: views/includes/sidebar.html:229
 #, fuzzy
@@ -922,20 +824,16 @@ msgid "System"
 msgstr "Sistema"
 
 #: views/includes/sidebar.html:258 views/notifications.html:2
-#, fuzzy
-#| msgid "Location"
 msgid "Notifications"
-msgstr "Località"
+msgstr "Notifiche"
 
 #: views/includes/sidebar.html:270 views/log.html:2
 msgid "Log"
 msgstr "Log"
 
 #: views/includes/sidebar.html:276
-#, fuzzy
-#| msgid "Start"
 msgid "Restart"
-msgstr "Avvia"
+msgstr "Riavvia"
 
 #: views/includes/sidebar.html:282
 msgid "Reboot"
@@ -951,17 +849,15 @@ msgstr "Aiuto"
 
 #: views/layouts/modal.html:13
 msgid "More help online"
-msgstr ""
+msgstr "Ulteriore assistenza online"
 
 #: views/layouts/modal.html:28
 msgid "Save changes"
-msgstr ""
+msgstr "Salva modifiche"
 
 #: views/log.html:6
-#, fuzzy
-#| msgid "Download"
 msgid "Download log file"
-msgstr "Download"
+msgstr "Download log file"
 
 #: views/log.html:19
 #, fuzzy
@@ -971,25 +867,19 @@ msgstr "Log di Sistema"
 
 #: views/log.html:25
 msgid "Filters"
-msgstr ""
+msgstr "Filtri"
 
 #: views/log.html:35
-#, fuzzy
-#| msgid "error"
 msgid "errors"
-msgstr "errore"
+msgstr "errori"
 
 #: views/log.html:39
-#, fuzzy
-#| msgid "warning"
 msgid "warnings"
-msgstr "attenzione"
+msgstr "avvisi"
 
 #: views/modals/area.html:12
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Area settings"
-msgstr "Impostazioni webcam"
+msgstr "Impostazioni area"
 
 #: views/modals/area.html:18
 #, fuzzy
@@ -1002,11 +892,11 @@ msgstr ""
 
 #: views/modals/area.html:38
 msgid "Select the type of area. Each type has its own extra options and logic."
-msgstr ""
+msgstr "Seleziona il tipo di area. Ogni tipo ha le sue opzioni e logiche."
 
 #: views/modals/area.html:41 views/modals/area.html:83
 msgid "ERROR"
-msgstr ""
+msgstr "ERRORE"
 
 #: views/modals/area.html:50 views/modals/button.html:48
 #: views/modals/enclosure.html:21 views/modals/event.html:18
@@ -1022,7 +912,7 @@ msgstr "Inserisci un nome."
 #: views/modals/sensor.html:66 views/modals/service.html:35
 #: views/modals/webcam.html:55
 msgid "The name cannot be empty."
-msgstr ""
+msgstr "Il nome non può essere vuoto"
 
 #: views/modals/area.html:63 views/modals/area.html:243
 #: views/modals/area.html:428 views/modals/webcam.html:121
@@ -1036,29 +926,25 @@ msgstr "Timer"
 
 #: views/modals/area.html:65 views/modals/area.html:246
 #: views/modals/area.html:432
-#, fuzzy
-#| msgid "Water tank height"
 msgid "Weather day/night"
-msgstr "Altezza riserva d'acqua"
+msgstr "Clima giorno/notte"
 
 #: views/modals/area.html:66 views/modals/area.html:247
 #: views/modals/area.html:433
-#, fuzzy
-#| msgid "Water tank height"
 msgid "Weather night/day"
-msgstr "Altezza riserva d'acqua"
+msgstr "Clima notte/giorno"
 
 #: views/modals/area.html:69
 msgid ""
 "Select the mode of this area. This will change the timing and duration of "
 "the relays."
 msgstr ""
+"Seleziona la modalità di questa area. Questo modificherà l'orario e la "
+"durata dei relay."
 
 #: views/modals/area.html:77
-#, fuzzy
-#| msgid "Minimum light hours"
 msgid "Minimum hours"
-msgstr "Minimo numero di ore di luce"
+msgstr "Minimo numero di ore"
 
 #: views/modals/area.html:80
 msgid ""
@@ -1066,12 +952,13 @@ msgid ""
 "valid in weather mode. When the day is shorter then this minimum value, the "
 "day will be extended to this minimum value."
 msgstr ""
+"Il minimo numero di ore per cui le luci sono accese. Questo è valido "
+"soltanto in modalità clima. Quando il giorno è più corto del valore minimo, "
+"esso verrà esteso fino a raggiungere il questo valore minimo."
 
 #: views/modals/area.html:89
-#, fuzzy
-#| msgid "Maximum lights hours"
 msgid "Maximum hours"
-msgstr "Massimo numero di ore di luce"
+msgstr "Massimo numero di ore"
 
 #: views/modals/area.html:92
 msgid ""
@@ -1079,6 +966,9 @@ msgid ""
 "valid in weather mode. When the day is longer then this maximum value, the "
 "day will be shortened to this maximum value."
 msgstr ""
+"Il massimo numero di ore per cui le luci sono accese. Questo è valido solo "
+"in modalità clima. Quando il giorno è lungo di questo massimo, il giorno "
+"sarà accorciato fino a questo valore massimo."
 
 #: views/modals/area.html:101
 msgid "Hours shift"
