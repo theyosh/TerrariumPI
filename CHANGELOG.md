@@ -2,6 +2,20 @@ Changelog
 =========
 
 
+4.3.2 (2022-05-05)
+------------------
+
+**Fixes**
+------
+- Fix ffmpeg in docker. [TheYOSH]
+
+**Updates**
+------
+- Update documentation (2) [TheYOSH]
+- Update documentation. [TheYOSH]
+- Update README.md. [TheYOSH]
+
+
 4.3.1 (2022-05-04)
 ------------------
 
@@ -15,6 +29,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [TheYOSH]
 - Update docker.yaml. [TheYOSH]
 - Update docker.yaml. [TheYOSH]
 - Update changelog. [TheYOSH]
