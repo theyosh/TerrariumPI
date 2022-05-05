@@ -22,7 +22,7 @@ But you can even enter an external JSON source for climate mirroring. Look [How 
 
 The software is translated to multiple languages. This will also select the correct currency, number and date formatting. If you language is not available or is not complete, go to the [translation page]({% link _tabs/translations.md %}) to see how to update it.
 
-## Multiple enclosures and multi area
+## Multiple enclosures and multi areas
 
 It is possible to control multiple enclosures with a single Raspberry PI. As long you can hook up enough sensors and relays, you can create unlimited enclosures and areas.
 
