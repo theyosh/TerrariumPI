@@ -19,13 +19,13 @@ import paho.mqtt.client as mqtt
 import json
 
 from pony import orm
-from string import Template
+# from string import Template
 from gevent import sleep
 from operator import itemgetter
 from threading import Thread, Timer
 from base64 import b64encode
 
-from terrariumDatabase import NotificationMessage, NotificationService, Setting
+from terrariumDatabase import NotificationMessage, NotificationService
 from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
 
 # Display support
@@ -229,12 +229,15 @@ class terrariumNotification(terrariumSingleton):
   @classproperty
   def available_messages(__cls__):
     data = []
-    for (type, msgdata) in terrariumNotification.__MESSAGES.items():
-      data.append({'type' : type, 'name' : msgdata['name'], 'placeholders' : msgdata['placeholders']})
+    for (msgtype, msgdata) in terrariumNotification.__MESSAGES.items():
+      data.append({'type' : msgtype, 'name' : msgdata['name'], 'placeholders' : msgdata['placeholders']})
 
     return sorted(data, key=itemgetter('name'))
 
   def __init__(self):
+    """
+    Initialize empty notification system with system defaults
+    """
     self.__rate_limiter_counter = {
       'total' :
         {
@@ -311,9 +314,12 @@ class terrariumNotification(terrariumSingleton):
   def profile_image(self):
     return None if self.engine is None else self.engine.settings['profile_image']
 
-  def message(self, message_type, data = {}, files = []):
+  def message(self, message_type, data = None, files = []):
     if message_type not in self.__MESSAGES:
       return
+
+    if data is None:
+      data = {}
 
     with orm.db_session():
       for message in NotificationMessage.select(lambda nm: nm.type == message_type):
@@ -433,13 +439,13 @@ class terrariumNotificationService(object):
   @classproperty
   def available_services(__cls__):
     data = []
-    for (type, area) in terrariumNotificationService.__TYPES.items():
-      data.append({'type' : type, 'name' : area['name']})
+    for (areatype, area) in terrariumNotificationService.__TYPES.items():
+      data.append({'type' : areatype, 'name' : area['name']})
 
     return sorted(data, key=itemgetter('name'))
 
   # Return polymorph service....
-  def __new__(cls, id, type, name = '', enabled = True, setup = None):
+  def __new__(cls, _, type, name = '', enabled = True, setup = None):
     if type not in [service['type'] for service in terrariumNotificationService.available_services]:
       raise terrariumNotificationServiceException(f'Service of type {type} is unknown.')
 
@@ -492,7 +498,7 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
     # Now load the actual display device
     self.setup['device'] = terrariumDisplay(None, setup_data['hardware'], setup_data['address'], None if not terrariumUtils.is_true(setup_data['show_title']) else f'{setup_data["terrariumpi_name"]} {self.setup["version"]}')
 
-  def send_message(self, type, subject, message, data = None, attachments = []):
+  def send_message(self, msg_type, subject, message, data = None, attachments = []):
     self.setup['device'].message(message)
 
   def show_picture(self, picture):
@@ -502,8 +508,8 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
     try:
       self.setup['device'].stop()
       self.setup['device'] = None
-    except Exception:
-      pass
+    except Exception as ex:
+      logger.error(f'Error stopping display: {ex}')
 
 class terrariumNotificationServiceEmail(terrariumNotificationService):
   def load_setup(self, setup_data):
@@ -516,7 +522,7 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
     }
     super().load_setup(setup_data)
 
-  def send_message(self, type, subject, message, data = None, attachments = []):
+  def send_message(self, msg_type, subject, message, data = None, attachments = []):
     if self.setup is None or len(self.setup.get('receiver',[])) == 0:
       # Configuration is not loaded, or no receivers, ignore sending emails
       return
@@ -566,7 +572,7 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
     }
     super().load_setup(setup_data)
 
-  def send_message(self, type, subject, message, data = None, attachments = []):
+  def send_message(self, msg_type, subject, message, data = None, attachments = []):
     if data is None:
       data = {}
 
@@ -574,7 +580,7 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
     data['subject'] = subject
     # Add a unique ID to make clients able to filter duplicate messages
     data['uuid']    = terrariumUtils.generate_uuid()
-    data['type']    = type
+    data['type']    = msg_type
 
     if len(attachments) > 0:
       data['files'] = []
@@ -612,13 +618,13 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
 
     super().load_setup(setup_data)
 
-  def send_message(self, type, subject, message, data = None, attachments = []):
+  def send_message(self, msg_type, subject, message, data = None, attachments = []):
     led   = None
-    if 'system_warning' == type:
+    if 'system_warning' == msg_type:
       led     = 'yellow'
       timeout = self.__YELLOW_TIMEOUT
 
-    elif 'system_error' == type:
+    elif 'system_error' == msg_type:
       led     = 'yellow'
       timeout = self.__RED_TIMEOUT
 
@@ -645,9 +651,7 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
           try:
             self.setup[f'{led}_timer'].cancel()
           except Exception as ex:
-            print(f'Traffic STOP {led} exception')
-            print(ex)
-
+            logger.error(f'Error stopping traffic light led {led}: {ex}')
 
 class terrariumNotificationServiceBuzzer(terrariumNotificationService):
   # Original code from https://github.com/gumslone/raspi_buzzer_player
@@ -1159,7 +1163,7 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
       delayValue = period / 2.0		        #calculate the time for half of the wave
       numCycles = int(length * frequency)	#the number of waves to produce is the duration times the frequency
 
-      for i in range(numCycles):		      #start a loop from 0 to the variable "cycles" calculated above
+      for _ in range(numCycles):		      #start a loop from 0 to the variable "cycles" calculated above
         GPIO.output(self.setup['address'], True)	    #set pin 27 to high
         sleep(delayValue)		              #wait with pin 27 high
         GPIO.output(self.setup['address'], False)		#set pin 27 to low
@@ -1256,8 +1260,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
       try:
         self.connection.loop_stop()
       except Exception as ex:
-        # Ignore
-        pass
+        logger.error(f'Error stopping MQTT broker: {ex}')
 
       self.connection.disconnect()
       self.connection = None

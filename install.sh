@@ -14,7 +14,7 @@ if [ "${WHOAMI}" != "root" ]; then
   exit 0
 fi
 
-if [ ${PI_ZERO} -eq 1 ]; then
+if [ "${PI_ZERO}" -eq 1 ]; then
   # Pi Zero needs root user to run
   SCRIPT_USER="root"
 else
@@ -24,13 +24,13 @@ else
   fi
 fi
 
-SCRIPT_GROUP=$(id -gn ${SCRIPT_USER})
+SCRIPT_GROUP="$(id -gn ${SCRIPT_USER})"
 
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
 OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
 # For Bullseye we need libopenexr25 and libilmbase25
-if [ ${BUSTER_OS} -eq 0 ]; then
+if [ "${BUSTER_OS}" -eq 0 ]; then
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
 fi
 APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
@@ -41,11 +41,11 @@ while IFS= read -r line; do
   PIP_MODULES="${PIP_MODULES} ${line}"
 done < requirements.txt
 
-if [ ${PI_ZERO} -eq 1 ]; then
+if [ "${PI_ZERO}" -eq 1 ]; then
   # Pi Zero needs some fixed python modules
   PIP_MODULES="$(echo $PIP_MODULES | sed 's/gevent==[^ ]\+/gevent==21.8.0/')"
 
-  if [ ${BUSTER_OS} -eq 1 ]; then
+  if [ "${BUSTER_OS}" -eq 1 ]; then
     PIP_MODULES="$(echo $PIP_MODULES | sed 's/opencv-python-headless==[^ ]\+/opencv-python-headless==4.5.4.60/')"
   else
     PIP_MODULES="$(echo $PIP_MODULES | sed 's/opencv-python-headless==[^ ]\+/opencv-python-headless==4.5.3.56/')"
@@ -56,7 +56,7 @@ if [ ${PI_ZERO} -eq 1 ]; then
 fi
 
 # Debian buster does not like numpy .... :(
-if [ ${BUSTER_OS} -eq 1 ]; then
+if [ "${BUSTER_OS}" -eq 1 ]; then
   PIP_MODULES="$(echo $PIP_MODULES | sed 's/numpy==[^ ]\+/numpy==1.21.4/')"
 fi
 
@@ -112,7 +112,7 @@ esac
 debconf-apt-progress -- apt-get -y autoremove
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install ${APT_PACKAGES}
+debconf-apt-progress -- apt-get -y install "${APT_PACKAGES}"
 
 # Set the timezone
 dpkg-reconfigure tzdata

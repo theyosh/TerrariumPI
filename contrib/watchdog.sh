@@ -14,7 +14,7 @@ if [ ! -f "${LOGFILE}" ]; then
 fi
 
 PID="$(ps fax | grep terrariumPI.py | grep -v grep | awk {'print $1'})"
-AGE="$(("$(date +%s)" - "$(date +%s -r ${LOGFILE})"))"
+AGE="$(("$(date +%s)" - "$(date +%s -r "${LOGFILE}")"))"
 
 if [ $AGE -gt $MAXTIME ]; then
   echo "Logfile is not updated for ${MAXTIME} seconds. Restarting..."

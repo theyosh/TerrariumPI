@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import logging
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
@@ -15,7 +14,6 @@ import threading
 # https://onion.io/2bt-pid-control-python/
 # https://github.com/m-lundberg/simple-pid
 from simple_pid import PID
-from gevent import sleep
 
 from pony import orm
 from terrariumAudio import terrariumAudioPlayer
@@ -23,7 +21,9 @@ from terrariumDatabase import Sensor, Playlist, Relay
 from terrariumUtils import terrariumCache, terrariumUtils, classproperty
 
 class terrariumAreaException(TypeError):
-  '''There is a problem with loading a hardware sensor.'''
+  '''
+  There is a problem with loading a hardware sensor.
+  '''
   pass
 
 class terrariumArea(object):
@@ -101,19 +101,19 @@ class terrariumArea(object):
   @classproperty
   def available_areas(__cls__):
     data = []
-    for (type, area) in terrariumArea.__TYPES.items():
-      data.append({'type' : type, 'name' : _(area['name']), 'sensors' : area['sensors']})
+    for (area_type, area) in terrariumArea.__TYPES.items():
+      data.append({'type' : area_type, 'name' : _(area['name']), 'sensors' : area['sensors']})
 
     return sorted(data, key=itemgetter('name'))
 
   # Return polymorph area....
-  def __new__(cls, id, enclosure, type, name = '', mode = None, setup = None):
+  def __new__(cls, id, enclosure, area_type, name = '', mode = None, setup = None):
     known_areas = terrariumArea.available_areas
 
-    if type not in [area['type'] for area in known_areas]:
-      raise terrariumAreaException(f'Area of type {type} is unknown.')
+    if area_type not in [area['type'] for area in known_areas]:
+      raise terrariumAreaException(f'Area of type {area_type} is unknown.')
 
-    return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[type]['class']())
+    return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[area_type]['class']())
 
   def __init__(self, id, enclosure, type, name, mode, setup):
     if id is None:
@@ -132,6 +132,12 @@ class terrariumArea(object):
     self.load_setup(setup)
 
   def __repr__(self):
+    """
+    Show the area in a nice way
+
+    Returns:
+        string: Area with area type
+    """
     return f'{terrariumArea.__TYPES[self.type]["name"]} named {self.name}'
 
 
@@ -430,7 +436,7 @@ class terrariumArea(object):
             self.__external_cache.set_data(cache_key, value, 10 * 60)
             logger.info(f'Updated external source variation data with value: {value}{unit} in {time.time() - start:.2f} seconds')
           else:
-            logger.error(f'Could not load data from external source! Please check your settings.')
+            logger.error('Could not load data from external source! Please check your settings.')
 
       if value is not None:
         period = {
