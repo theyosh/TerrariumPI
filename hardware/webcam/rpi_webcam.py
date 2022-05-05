@@ -7,7 +7,6 @@ from io import BytesIO
 
 from pathlib import Path
 import subprocess
-import shlex
 
 class terrariumRPIWebcam(terrariumWebcam):
   HARDWARE     = 'rpicam'
@@ -25,22 +24,17 @@ class terrariumRPIWebcam(terrariumWebcam):
     if not raspistill.exists():
       return None
 
-    return f'{raspistill} --quality 95 --timeout {self._WARM_UP*1000} --encoding jpg'
+    return [raspistill, '--quality', '95', '--timeout', str(self._WARM_UP*1000), '--encoding', 'jpg']
 
   def _get_raw_data(self):
     if self._device["device"] is None:
       return False
 
-    logger.debug('Starting rpicam')
+    cmd = self._device["device"] + ['--width', str(self.width), '--height', str(self.height), '--awb', self.awb, '--output', '-']
+    logger.debug(f'Starting rpicam: {cmd}')
 
-    cmd = f'{self._device["device"]} --width {self.width} --height {self.height} --awb {self.awb} --output -'
-    cmd = shlex.split(cmd)
-
-    with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
-      out, err = proc.communicate()
-      if err != b'':
-        return False
-
+    with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False) as proc:
+      out, _ = proc.communicate()
       return BytesIO(out)
 
     return False

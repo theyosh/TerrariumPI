@@ -29,6 +29,7 @@ import piexif
 from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 class terrariumWebcamException(TypeError):
+
   '''There is a problem with loading a hardware switch. Invalid power switch action.'''
 
   def __init__(self, message, *args):
@@ -100,7 +101,7 @@ class terrariumWebcam(object):
     return sorted(data, key=itemgetter('name'))
 
   # Return polymorph webcam....
-  def __new__(cls, id, address, name = '', rotation = '0', width = 640, height = 480, wb = 'auto'):
+  def __new__(cls, _, address, name = '', rotation = '0', width = 640, height = 480, wb = 'auto'):
     known_webcams = terrariumWebcam.available_hardware
 
     # Check based on entered address, not type
@@ -111,6 +112,9 @@ class terrariumWebcam(object):
     raise terrariumWebcamException(f'Webcam url \'{address}\' is not valid! Please check your source')
 
   def __init__(self, id, address, name = '', width = 640, height = 480, rotation = '0', awb = 'auto'):
+
+    """Create a new Webcam instance based on type"""
+
     self._device = {'device'      : None,
                     'id'          : None,
                     'address'     : None,
@@ -147,6 +151,11 @@ class terrariumWebcam(object):
       store_location.joinpath(self._TILE_LOCATION).mkdir(parents=True,exist_ok=True)
 
   def __repr__(self):
+    """Return a readable name back for the Webcam
+
+    Returns:
+        string: The webcam type and name with address
+    """
     return f'{self.NAME} named \'{self.name}\' at address \'{self.address}\''
 
   @retry(tries=3, delay=0.5, max_delay=2)
@@ -326,6 +335,7 @@ class terrariumWebcam(object):
     try:
       exif_bytes = piexif.dump(exif_dict)
     except Exception as ex:
+      logger.debug(f'No exif data available: {ex}')
       return None
 
     return exif_bytes
@@ -428,7 +438,10 @@ class terrariumWebcam(object):
     return self.__ARCHIVE_LOCATION.joinpath(self.id, datetime.now().strftime('%Y/%m/%d'), f'{self.id}_archive_{int(time())}.jpg')
 
   @retry(tries=3, delay=0.5, max_delay=2)
-  def update(self, relays = []):
+  def update(self, relays = None):
+    if relays is None:
+      return self.value
+
     if self._device['last_update'] is None or (datetime.now() - self._device['last_update']).total_seconds() > self.__UPDATE_TIMEOUT:
       if len(relays) > 0:
         for relay in relays:
@@ -514,7 +527,7 @@ class terrariumWebcam(object):
     # Different OpenCV versions (docker vs native)
     try:
       (cnts ,_) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    except:
+    except Exception as _:
       (_,cnts ,_) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     # don't draw if motion boxes is disabled

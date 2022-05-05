@@ -41,14 +41,17 @@ if [[ ! -d "${DIR}" ]]; then
   mkdir -p "${DIR}"
 fi
 
+ROTATION_ACTION=""
 if [[ "${ROTATION}" == "h" ]]; then
-  ROTATION="--hflip"
+  ROTATION_ACTION="--hflip"
+  ROTATION=""
 elif [[ "${ROTATION}" == "v" ]]; then
-  ROTATION="--vflip"
+  ROTATION_ACTION="--vflip"
+  ROTATION=""
 else
-  ROTATION="--rotation ${ROTATION}"
+  ROTATION_ACTION="--rotation"
 fi
 
 # Start streaming
-"${RASPIVID}" --output - --bitrate 2000000 --timeout 0 --width "${WIDTH}" --height "${HEIGHT}" ${ROTATION} --awb "${AWB}" --framerate 30 --intra 30 --profile high --level 4.2 -ae 16,0xff,0x808000 -a 8 -a " ${NAME} @ %d/%m/%Y %X " -a 1024 | \
+"${RASPIVID}" --output - --bitrate 2000000 --timeout 0 --width "${WIDTH}" --height "${HEIGHT}" "${ROTATION_ACTION}" "${ROTATION}" --awb "${AWB}" --framerate 30 --intra 30 --profile high --level 4.2 -ae 16,0xff,0x808000 -a 8 -a " ${NAME} @ %d/%m/%Y %X " -a 1024 | \
  "${FFMPEG}" -hide_banner -nostdin -re -i - -c:v copy -f hls -hls_time 2 -hls_list_size 3 -hls_flags delete_segments+split_by_time -hls_segment_filename "${DIR}/chunk_%03d.ts" "${DIR}/stream.m3u8"

@@ -6,8 +6,6 @@ from gevent import sleep
 from pathlib import Path
 from io import BytesIO
 import subprocess
-import threading
-import shlex
 import os
 import signal
 import psutil
@@ -33,25 +31,26 @@ class terrariumRPILiveWebcam(terrariumWebcam):
 
   def _load_hardware(self):
     if not Path(self.__RASPIVID).exists():
-      raise terrariumWebcamLoadingException(f'Please install raspivid.')
+      raise terrariumWebcamLoadingException('Please install raspivid.')
 
     if not Path(self.__FFMPEG).exists():
-      raise terrariumWebcamLoadingException(f'Please install ffmpeg.')
+      raise terrariumWebcamLoadingException('Please install ffmpeg.')
 
-    try:
-      os.killpg(os.getpgid(self.__process.pid), signal.SIGTERM)
-    except Exception as ex:
-      logger.debug(f'Live webcam is not running: {ex}')
+    if hasattr(self,'__process'):
+      try:
+        os.killpg(os.getpgid(self.__process.pid), signal.SIGTERM)
+      except Exception as ex:
+        print(f'Live webcam is not running: {ex}')
+        logger.debug(f'Live webcam is not running: {ex}')
 
     cmd = Path(__file__).parent / 'rpilive_webcam.sh'
 
     width  = self.width  if self.rotation not in ['90','270'] else self.height
     height = self.height if self.rotation not in ['90','270'] else self.width
 
-    cmd = f'{cmd} "{self.name}" {width} {height} {self.rotation} {self.awb} {Path(self._STORE_LOCATION).joinpath(self.id)}'
-    cmd = shlex.split(cmd)
+    cmd = [str(cmd), self.name, str(width), str(height), str(self.rotation), self.awb, str(Path(self._STORE_LOCATION).joinpath(self.id))]
+    self.__process = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, shell=False, start_new_session=True)
 
-    self.__process = subprocess.Popen(cmd,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL, start_new_session=True)
     logger.debug(f'Started {self} with process id: {self.__process.pid} exit code: {self.__process.returncode}')
 
     # We need some time to wait so that the live stream has produced the first chunks
@@ -67,11 +66,10 @@ class terrariumRPILiveWebcam(terrariumWebcam):
       return False
 
     url = f'{Path(self._STORE_LOCATION).joinpath(self.id)}/stream.m3u8'
-    cmd = f'{self.__FFMPEG} -hide_banner -loglevel panic -i {url} -vframes 1 -f image2 -'
-    cmd = shlex.split(cmd)
+    cmd = [self.__FFMPEG, '-hide_banner', '-loglevel', 'panic', '-i', url, '-vframes', '1', '-f', 'image2', '-']
 
-    with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
-      out, err = proc.communicate()
+    with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False) as proc:
+      out, _ = proc.communicate()
       return BytesIO(out)
 
     return False
