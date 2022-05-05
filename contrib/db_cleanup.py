@@ -25,13 +25,15 @@ def humansize(nbytes):
 class HistoryCleanup():
 
   def __init__(self, database = '../data/terrariumpi.db', period = timedelta(weeks = 60), batch = 1000):
-    """Construct the database history clean up object
+    """
+    Construct the database history clean up object
 
     Args:
         database (str, optional): The database location path. Defaults to '../data/terrariumpi.db'.
         period (_type_, optional): Period in weeks to keep. Defaults to 60 weeks.
         batch (int, optional): Amount of records to delete at once. Defaults to 1000.
     """
+
     print(f'This script will cleanup your terrariumpi.db file. We will keep {period} of data from now. If you want to make a backup first, please enter no and make your backup.')
 
     self.check_offline()

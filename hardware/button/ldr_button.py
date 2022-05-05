@@ -38,7 +38,7 @@ class terrariumLDRSensor(terrariumButton):
 
       except KeyboardInterrupt as ex:
         self._checker['running'] = False
-        print(f'Fetch CTRL-c... and now what..? For now.. press again Ctrl-C ..')
+        print(f'Fetch CTRL-c... and now what..? For now.. press again Ctrl-C .. ({ex})')
         self.stop()
 
 
@@ -61,7 +61,8 @@ class terrariumLDRSensor(terrariumButton):
     self._checker['running'] = False
     try:
       self.__thread.join()
-    except Exception:
+    except Exception as ex:
+      logger.debug(f'Could not join thread to wait for: {ex}')
       pass
 
     super().stop()

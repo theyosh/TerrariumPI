@@ -1,3 +1,12 @@
+"""
+Button package which produces different buttons to use in TerrariumPI
+
+Raises:
+    terrariumButtonException: There is a general problem with a hardware button
+
+Returns:
+    terrariumButton: A working button of specified type
+"""
 # -*- coding: utf-8 -*-
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
@@ -17,13 +26,19 @@ from hardware.io_expander import terrariumIOExpander
 
 
 class terrariumButtonException(TypeError):
-  '''There is a problem with loading a hardware sensor.'''
+
+  '''There is a general problem with a hardware button.'''
   pass
 
 class terrariumButtonLoadingException(terrariumButtonException):
+
+  '''There is a problem with loading a hardware button.'''
+
   pass
 
 class terrariumButtonUpdateException(terrariumButtonException):
+
+  '''There is a problem with updating a hardware button.'''
   pass
 
 # Factory class
@@ -66,7 +81,7 @@ class terrariumButton(object):
     return data
 
   # Return polymorph relay....
-  def __new__(cls, id, hardware_type, address, name = '', callback = None):
+  def __new__(cls, _, hardware_type, address, name = '', callback = None):
     known_buttons = terrariumButton.available_hardware
 
     if hardware_type not in known_buttons:
@@ -75,6 +90,7 @@ class terrariumButton(object):
     return super(terrariumButton, cls).__new__(known_buttons[hardware_type])
 
   def __init__(self, id, _, address, name = '', callback = None):
+    """Create a new button based on type"""
 
     self._device = {'device'      : None,
                     'id'          : None,
@@ -95,6 +111,12 @@ class terrariumButton(object):
     self.address = address
 
   def __repr__(self):
+    """
+    Returns readable button name
+
+    Returns:
+        string: Button type and name with address
+    """
     return f'{self.NAME} named \'{self.name}\' at address \'{self.address}\''
 
   def _run(self):
