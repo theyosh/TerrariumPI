@@ -1,5 +1,4 @@
-"""
-Button package which produces different buttons to use in TerrariumPI
+"""Button package which produces different buttons to use in TerrariumPI
 
 Raises:
     terrariumButtonException: There is a general problem with a hardware button
@@ -26,18 +25,14 @@ from hardware.io_expander import terrariumIOExpander
 
 
 class terrariumButtonException(TypeError):
-
   '''There is a general problem with a hardware button.'''
   pass
 
 class terrariumButtonLoadingException(terrariumButtonException):
-
   '''There is a problem with loading a hardware button.'''
-
   pass
 
 class terrariumButtonUpdateException(terrariumButtonException):
-
   '''There is a problem with updating a hardware button.'''
   pass
 
@@ -91,7 +86,6 @@ class terrariumButton(object):
 
   def __init__(self, id, _, address, name = '', callback = None):
     """Create a new button based on type"""
-
     self._device = {'device'      : None,
                     'id'          : None,
                     'address'     : None,
@@ -111,8 +105,7 @@ class terrariumButton(object):
     self.address = address
 
   def __repr__(self):
-    """
-    Returns readable button name
+    """Returns readable button name
 
     Returns:
         string: Button type and name with address
