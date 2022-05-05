@@ -112,7 +112,6 @@ class terrariumWebcam(object):
     raise terrariumWebcamException(f'Webcam url \'{address}\' is not valid! Please check your source')
 
   def __init__(self, id, address, name = '', width = 640, height = 480, rotation = '0', awb = 'auto'):
-
     """Create a new Webcam instance based on type"""
 
     self._device = {'device'      : None,
@@ -151,7 +150,8 @@ class terrariumWebcam(object):
       store_location.joinpath(self._TILE_LOCATION).mkdir(parents=True,exist_ok=True)
 
   def __repr__(self):
-    """Return a readable name back for the Webcam
+    """
+    Return a readable name back for the Webcam
 
     Returns:
         string: The webcam type and name with address
@@ -527,7 +527,8 @@ class terrariumWebcam(object):
     # Different OpenCV versions (docker vs native)
     try:
       (cnts ,_) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    except Exception as _:
+    except Exception as ex:
+      logger.debug(f'Wrong CV2 version. Retry: {ex}')
       (_,cnts ,_) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     # don't draw if motion boxes is disabled

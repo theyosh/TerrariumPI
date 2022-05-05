@@ -23,7 +23,6 @@ from terrariumUtils import terrariumCache, terrariumUtils, classproperty
 class terrariumAreaException(TypeError):
 
   '''There is a problem with loading a hardware sensor.'''
-
   pass
 
 class terrariumArea(object):
