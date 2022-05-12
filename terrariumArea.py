@@ -115,8 +115,8 @@ class terrariumArea(object):
     return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[area_type]['class']())
 
   def __init__(self, area_id, enclosure, type, name, mode, setup):
-    if id is None:
-      id = terrariumUtils.generate_uuid()
+    if area_id is None:
+      area_id = terrariumUtils.generate_uuid()
 
     self.id   = area_id
     self.type = type
