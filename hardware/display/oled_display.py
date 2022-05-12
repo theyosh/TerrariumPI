@@ -48,7 +48,7 @@ class terrariumOLEDMixin():
         draw.text((1, ypos), line, font=self.font, fill='white')
 
   def _write_title(self):
-    self._write_line(self.title,0, 'black')
+    self._write_line(self.title, 0)
 
   def write_image(self, image):
     if self._device['device'] is None:

@@ -63,7 +63,7 @@ class terrariumDisplay(object):
     return data
 
   # Return polymorph relay....
-  def __new__(cls, id, hardware_type, address, title = None, width = 16, height = 2):
+  def __new__(cls, device_id, hardware_type, address, title = None, width = 16, height = 2):
     known_displays = terrariumDisplay.available_hardware
 
     if hardware_type not in known_displays:
@@ -72,7 +72,7 @@ class terrariumDisplay(object):
     return super(terrariumDisplay, cls).__new__(known_displays[hardware_type])
 
 
-  def __init__(self, id, _, address, title = None, width = 16, height = 2):
+  def __init__(self, device_id, _, address, title = None, width = 16, height = 2):
     self._device = {'device'   : None,
                     'address'  : None,
                     'id'       : None,
@@ -87,7 +87,7 @@ class terrariumDisplay(object):
                     'thread'   : None,
                     'running'  : False}
 
-    self.id      = id
+    self.id      = device_id
     self.title   = title
     self.width   = width
     self.height  = height
@@ -198,19 +198,6 @@ class terrariumDisplay(object):
   def font(self):
     return self._device['font']
 
-  # def message(self,text):
-  #   if self.get_max_chars() == 0:
-  #     return
-
-  #   text_lines = []
-  #   if self.get_title():
-  #     # Set 'now' timestamp as title
-  #     text_lines = [datetime.datetime.now().strftime('%c')]
-
-  #   text_lines += self.format_message(text)
-  #   _thread.start_new_thread(self.display_message, (text_lines,))
-
-
   def message(self, text):
     if self._device['running']:
       self._device['queue'].put(text)
@@ -305,9 +292,6 @@ class terrariumDisplay(object):
         del(self._device['device'])
       except Exception:
         pass
-
-  # def write_image(self, image):
-  #   pass
 
   def clear(self):
     if self.title is not None:

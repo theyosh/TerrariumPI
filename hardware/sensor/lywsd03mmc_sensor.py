@@ -34,5 +34,5 @@ class terrariumLywsd03mmcSensor(terrariumBluetoothSensor):
 
   @staticmethod
   def _scan_sensors(unit_value_callback = None, trigger_callback = None):
-    for sensor in terrariumBluetoothSensor._scan_sensors(__class__, [__class__.HARDWARE.lower()], unit_value_callback, trigger_callback):
+    for sensor in terrariumBluetoothSensor._scan_bt_sensors(__class__, [__class__.HARDWARE.lower()], unit_value_callback, trigger_callback):
       yield sensor

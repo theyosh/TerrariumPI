@@ -134,8 +134,6 @@ class terrariumRelayEnergenieLAN(terrariumRelay):
       address = data.groupdict()
       if 'nr' not in address or address['nr'] is None or '' == address['nr']:
         address['nr'] = 1
-      if address.get('passwd') is None:
-        address['passwd'] = ''
 
       address['nr'] = int(address['nr'])
 
@@ -163,7 +161,7 @@ class terrariumRelayEnergenieLAN(terrariumRelay):
 
     address = self._address
     # TEMP data. Will be overwritten by the return value later on
-    self._device['device'] = energenieconnector.EnergenieConnector(f'{address["protocol"]}://{address["host"]}',address['passwd'])
+    self._device['device'] = energenieconnector.EnergenieConnector(f'{address["protocol"]}://{address["host"]}', address.get('passwd', ''))
     if not self.__connect():
       raise terrariumRelayLoadingException(f'Failed loading relay {self}. Unable to login')
 

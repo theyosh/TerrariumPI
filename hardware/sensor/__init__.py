@@ -26,7 +26,10 @@ from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 class terrariumSensorException(TypeError):
   '''There is a problem with loading a hardware sensor.'''
-  pass
+
+  def __init__(self, message, *args):
+    self.message = message
+    super().__init__(message, *args)
 
 class terrariumSensorUnknownHardwareException(terrariumSensorException):
   pass
@@ -327,11 +330,11 @@ class terrariumSensor(object):
   # Auto discovery of known and connected sensors
   @staticmethod
   def scan_sensors(unit_value_callback = None, trigger_callback = None, **kwargs):
-    for (hardware_type,sensor_device) in terrariumSensor.available_hardware.items():
+    for (_,sensor_device) in terrariumSensor.available_hardware.items():
       try:
         for sensor in sensor_device._scan_sensors(unit_value_callback, trigger_callback, **kwargs):
           yield sensor
-      except AttributeError as ex:
+      except AttributeError:
         # Scanning not supported, just ignore
         pass
 
@@ -351,7 +354,7 @@ class terrariumAnalogSensor(terrariumSensor):
   def _get_data(self):
     # This will return the measured voltage of the analog device.
     values = []
-    for counter in range(self.__AMOUNT_OF_MEASUREMENTS):
+    for _ in range(self.__AMOUNT_OF_MEASUREMENTS):
       value = self.device.value
       if terrariumUtils.is_float(value):
         values.append(float(value))
@@ -383,9 +386,6 @@ class terrariumI2CSensor(terrariumSensor):
     address = self._address
     device  = (address[0], smbus2.SMBus(1 if len(address) == 1 or int(address[1]) < 1 else int(address[1])))
     return device
-
-  # def __exit__(self):
-  #   print('I2C close with block')
 
 class terrariumI2CSensorMixin():
 
@@ -440,8 +440,6 @@ Manual: tca9548.pdf
 Source: https://github.com/IRNAS/tca9548a-python/blob/master/tca9548a.py
 Added option for different I2C bus
 """
-# import smbus
-# import logging
 
 class TCA9548A(object):
     def __init__(self, address, bus = 1):
@@ -525,7 +523,7 @@ class terrariumBluetoothSensor(terrariumSensor):
     return address
 
   @staticmethod
-  def _scan_sensors(sensorclass, ids = [], unit_value_callback = None, trigger_callback = None):
+  def _scan_bt_sensors(sensorclass, ids = [], unit_value_callback = None, trigger_callback = None):
     # Due to multiple bluetooth dongles, we are looping 10 times to see which devices can scan. Exit after first success
     ok = True
     for counter in range(10):
@@ -546,6 +544,7 @@ class terrariumBluetoothSensor(terrariumSensor):
         break
 
       except Exception as ex:
+        logger.debug(f'Error during scanning: {ex}')
         ok = False
 
     if not ok:
