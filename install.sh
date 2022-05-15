@@ -112,7 +112,7 @@ esac
 debconf-apt-progress -- apt-get -y autoremove
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install "${APT_PACKAGES}"
+debconf-apt-progress -- apt-get -y install ${APT_PACKAGES}
 
 # Set the timezone
 dpkg-reconfigure tzdata
