@@ -106,7 +106,7 @@ class terrariumArea(object):
     return sorted(data, key=itemgetter('name'))
 
   # Return polymorph area....
-  def __new__(cls, id, enclosure, area_type, name = '', mode = None, setup = None):
+  def __new__(cls, area_id, enclosure, area_type, name = '', mode = None, setup = None):
     known_areas = terrariumArea.available_areas
 
     if area_type not in [area['type'] for area in known_areas]:
@@ -114,11 +114,11 @@ class terrariumArea(object):
 
     return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[area_type]['class']())
 
-  def __init__(self, id, enclosure, type, name, mode, setup):
-    if id is None:
-      id = terrariumUtils.generate_uuid()
+  def __init__(self, area_id, enclosure, type, name, mode, setup):
+    if area_id is None:
+      area_id = terrariumUtils.generate_uuid()
 
-    self.id   = id
+    self.id   = area_id
     self.type = type
     self.name = name
     self.mode = mode
@@ -349,7 +349,8 @@ class terrariumArea(object):
     if variation_data[0]['when'] in ['script','external','weather']:
       try:
         self.state['variation']['offset'] = float(variation_data[0]['offset'])
-      except:
+      except Exception:
+        # Not a valid float, so use default 0
         pass
 
       self.state['variation'][variation_data[0]['when']] = True

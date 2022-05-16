@@ -433,9 +433,9 @@ class terrariumUtils():
     return str(datetime.timedelta(seconds=int(value)))
 
   @staticmethod
-  def format_filesize(n,pow=0,b=1024,u='B',pre=['']+[p+'i'for p in'KMGTPEZY']):
-    pow,n=min(int(log(max(n*b**pow,1),b)),len(pre)-1),n*b**pow
-    return "%%.%if %%s%%s"%abs(pow%(-pow-1))%(n/b**float(pow),pre[pow],u)
+  def format_filesize(n,power=0,b=1024,u='B',pre=['']+[p+'i'for p in'KMGTPEZY']):
+    power,n=min(int(log(max(n*b**power,1),b)),len(pre)-1),n*b**power
+    return "%%.%if %%s%%s"%abs(power%(-power-1))%(n/b**float(power),pre[power],u)
 
   @staticmethod
   def clean_log_line(logline):

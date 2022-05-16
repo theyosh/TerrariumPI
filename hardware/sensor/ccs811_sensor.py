@@ -1,4 +1,8 @@
-from . import terrariumI2CSensor
+# -*- coding: utf-8 -*-
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
+
+from . import terrariumI2CSensor, terrariumSensorUpdateException
 
 # https://gist.github.com/xxlukas42/60ae08f75e68a0cfcdb7c9dd60145d34
 #
@@ -252,7 +256,7 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
       return data
 
     except Exception as ex:
-      pass
+      raise terrariumSensorUpdateException(ex)
 
   def calibrate(self, temperature = 20, humidity = 50):
     self.__calibration = {

@@ -518,7 +518,7 @@ class SensorHistory(db.Entity):
   orm.PrimaryKey(sensor, timestamp)
 
   @property
-  def alarm():
+  def alarm(self):
     if self.value is None:
       return False
 

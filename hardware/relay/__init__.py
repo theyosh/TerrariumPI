@@ -78,7 +78,7 @@ class terrariumRelay(object):
     return sorted(data, key=itemgetter('name'))
 
   # Return polymorph relay....
-  def __new__(cls, id, hardware_type, address, name = '', prev_state = None, callback = None):
+  def __new__(cls, device_id, hardware_type, address, name = '', prev_state = None, callback = None):
     known_relays = terrariumRelay.available_hardware
 
     if hardware_type not in known_relays:
@@ -86,7 +86,7 @@ class terrariumRelay(object):
 
     return super(terrariumRelay, cls).__new__(known_relays[hardware_type])
 
-  def __init__(self, id, _, address, name = '', prev_state = None, callback = None):
+  def __init__(self, device_id, _, address, name = '', prev_state = None, callback = None):
     self._device = {'device'      : None,
                     'address'     : None,
                     'name'        : None,
@@ -102,7 +102,7 @@ class terrariumRelay(object):
 
     self._timer = None
 
-    self.id = id
+    self.id = device_id
     self.name = name
     self.address = address
     self.callback = callback

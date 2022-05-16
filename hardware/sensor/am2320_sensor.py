@@ -17,7 +17,8 @@ class terrariumAM2320Sensor(terrariumI2CSensor):
   __REG_AM2320_HUMIDITY_MSB = 0x00
 
   def __get_raw_data(self,command, regaddr, regcount):
-    def __am_crc16(self, buf):
+
+    def __am_crc16(buf):
       crc = 0xFFFF
       for c in buf:
         crc ^= c
@@ -35,7 +36,7 @@ class terrariumAM2320Sensor(terrariumI2CSensor):
         # This write will fail as AM2320 won't ACK this write
         i2c_bus.write_i2c_block_data(self.device[0], 0x00, [])
       except Exception as ex:
-        pass # As this is expected
+        logger.debug(f'Wake up {self} hardware: {ex}')
 
       sleep(0.01)
       i2c_bus.write_i2c_block_data(self.device[0], command, [regaddr, regcount])

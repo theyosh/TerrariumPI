@@ -15,7 +15,14 @@ class terrariumRelayMeross(terrariumRelay):
   def _load_hardware(self):
     # Use an internal caching for speeding things up.
     self.__state_cache = terrariumCache()
-    self._cloud = TerrariumMerossCloud()
+    EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL',''))
+    PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD',''))
+
+    if '' == EMAIL or '' == PASSWORD:
+      logger.error('Meross credentials are not set!')
+      return None
+
+    self._cloud = TerrariumMerossCloud(EMAIL,PASSWORD)
 
     address = self._address
     if len(address) == 1:
@@ -32,7 +39,7 @@ class terrariumRelayMeross(terrariumRelay):
     PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD'))
 
     if '' == EMAIL or '' == PASSWORD:
-      logger.error('Meross cloud is not enabled.')
+      logger.error('Meross credentials are not set!')
       return
 
     return self._cloud.toggle_relay(self._device['device'], self._device['switch'], state)
@@ -42,7 +49,7 @@ class terrariumRelayMeross(terrariumRelay):
     PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD'))
 
     if '' == EMAIL or '' == PASSWORD:
-      logger.error('Meross cloud is not enabled.')
+      logger.error('Meross credentials are not set!')
       return None
 
     data = self.__state_cache.get_data(self._device['device'])

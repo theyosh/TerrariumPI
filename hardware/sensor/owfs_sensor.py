@@ -1,4 +1,4 @@
-from . import terrariumSensor
+from . import terrariumSensor, terrariumSensorUpdateException
 
 # pip install pyownet
 from pyownet import protocol
@@ -20,13 +20,13 @@ class terrariumOWFSSensor(terrariumSensor):
 
     try:
       data['temperature'] = float(self.device.read('/{}/temperature'.format(self.address.strip('/'))))
-    except protocol.OwnetError:
-       pass
+    except protocol.OwnetError as ex:
+       terrariumSensorUpdateException(ex)
 
     try:
       data['humidity'] = float(self.device.read('/{}/humidity'.format(self.address.strip('/'))))
-    except protocol.OwnetError:
-       pass
+    except protocol.OwnetError as ex:
+       terrariumSensorUpdateException(ex)
 
     return data
 
@@ -35,10 +35,10 @@ class terrariumOWFSSensor(terrariumSensor):
     try:
       proxy = protocol.proxy(terrariumOWFSSensor.__HOST, terrariumOWFSSensor.__PORT)
       for sensor in proxy.dir(slash=False, bus=False):
-        stype = proxy.read(sensor + '/type').decode()
+        # proxy.read(sensor + '/type').decode()
         address = proxy.read(sensor + '/address').decode()
         try:
-          temp = float(proxy.read(sensor + '/temperature'))
+          float(proxy.read(sensor + '/temperature'))
           yield terrariumSensor(None,
                                 terrariumOWFSSensor.HARDWARE,
                                 'temperature',
@@ -47,11 +47,11 @@ class terrariumOWFSSensor(terrariumSensor):
                                 unit_value_callback = unit_value_callback,
                                 trigger_callback    = trigger_callback)
 
-        except protocol.OwnetError as ex:
+        except protocol.OwnetError:
           pass
 
         try:
-          humidity = float(proxy.read(sensor + '/humidity'))
+          float(proxy.read(sensor + '/humidity'))
           yield terrariumSensor(None,
                                 terrariumOWFSSensor.HARDWARE,
                                 'humidity',
@@ -63,5 +63,6 @@ class terrariumOWFSSensor(terrariumSensor):
         except protocol.OwnetError:
           pass
 
-    except Exception as ex:
+    except Exception:
+      # No hardware available
       pass

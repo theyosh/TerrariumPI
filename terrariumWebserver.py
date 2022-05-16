@@ -317,7 +317,7 @@ class terrariumWebsocket(object):
             try:
               self.clients.remove(messages)
             except Exception as ex:
-              pass
+              logger.debug(f'Disconnected {socket} is not in the clients queue... {ex}')
 
             break
 
@@ -385,6 +385,6 @@ class terrariumWebsocket(object):
         try:
           self.clients.remove(client)
         except Exception as ex:
-          pass
+          logger.debug(f'Client {client} was not on the client list anymore: {ex}')
 
     logger.debug(f'Websocket message {message} is send to {len(self.clients)} clients')

@@ -42,7 +42,6 @@ class terrarium1WireSensor(terrariumSensor):
   def _scan_sensors(unit_value_callback = None, trigger_callback = None):
     # Scanning w1 system bus
     for device in sorted(Path(terrarium1WireSensor.__W1_BASE_PATH).glob('[1-9][0-9]-*')):
-      data = None
       with device.joinpath('w1_slave').open('r') as sensor:
         sensor_data = terrarium1WireSensor.__W1_TEMP_REGEX.search(sensor.read())
 

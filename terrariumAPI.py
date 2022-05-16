@@ -1288,7 +1288,7 @@ class terrariumAPI(object):
 
       except orm.core.ObjectNotFound as ex:
         # Non existing setting can be ignored
-        pass
+        logger.debug(f'Database setting {key} gives error: {ex}')
 
     self.webserver.engine.load_settings()
     return {'status' : True}

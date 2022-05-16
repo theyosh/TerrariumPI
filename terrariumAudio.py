@@ -4,7 +4,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 from gevent import sleep
 import psutil
-from subprocess import PIPE
+from subprocess import DEVNULL
 import threading
 import copy
 
@@ -12,7 +12,7 @@ import alsaaudio
 import tempfile
 import random
 
-from terrariumUtils import terrariumUtils, classproperty
+from terrariumUtils import classproperty
 
 class terrariumAudio(object):
 
@@ -21,10 +21,10 @@ class terrariumAudio(object):
     soundcards = []
     for i in alsaaudio.card_indexes():
       try:
-        (name, longname) = alsaaudio.card_name(i)
+        (_, longname) = alsaaudio.card_name(i)
         soundcards.append({'index' : int(i), 'name' : longname})
 
-      except Exception as ex:
+      except Exception:
         # Just ignore error, and skip it
         pass
 
@@ -35,6 +35,7 @@ class terrariumAudio(object):
     try:
       mixer = alsaaudio.Mixer(control='PCM',cardindex=hw)
     except alsaaudio.ALSAAudioError as ex:
+      logger.debug(f'Falling back to headphones: {ex}')
       mixer = alsaaudio.Mixer(control='Headphone',cardindex=hw)
 
     if value is None:
@@ -87,7 +88,7 @@ class terrariumAudioPlayer(object):
           fp.flush()
 
           cmd = f'{self.CMD} -hide_banner -nostdin -v 0 -f concat -safe 0 -i {fp.name} -f alsa hw:{self.__hw}'.split(' ')
-          self.__player['ffmpeg'] = psutil.Popen(cmd, stdout=PIPE)
+          self.__player['ffmpeg'] = psutil.Popen(cmd, stdout=DEVNULL)
           self.__player['exit_status'] = self.__player['ffmpeg'].poll()
           while self.__player['exit_status'] is None:
             self.__player['exit_status'] = self.__player['ffmpeg'].poll()
