@@ -103,7 +103,7 @@ case $? in
       CLEANUP="${CLEANUP} \"*${PACKAGE}*\""
     done
 
-    debconf-apt-progress -- apt-get -y remove "${CLEANUP}"
+    debconf-apt-progress -- apt-get -y remove ${CLEANUP}
   ;;
 esac
 
