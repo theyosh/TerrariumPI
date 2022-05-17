@@ -27,14 +27,14 @@ Ex: `[GPIO Readout pin],[GPIO power saving pin]`
 ### Analog sensors
 
 ![RaspIO Analog Zero](/assets/img/RasPiO-Analog-Zero.webp){: style="max-width: 200px" .right}
-It is possible to add analog sensors to TerrariumPI. But as TerrariumPI only has digital GPIO ports, an extra add on is needed to add analog ports. For now the [RaspIO Analog Zero](https://rasp.io/analogzero/) is known to work. But any MCP3008 based board should work.
+It is possible to add analog sensors to TerrariumPI. But as TerrariumPI only has digital GPIO ports, an extra add-on is needed to add analog ports. For now the [RaspIO Analog Zero](https://rasp.io/analogzero/) is known to work. But any MCP3008 based board should work. The downside is that you will miss some GPIO pins for other use.
 
 ## I2C bus
 
 By default there is only 1 I2C bus available. [But it is possible to add more I2C busses to your Raspberry PI](https://www.instructables.com/id/Raspberry-PI-Multiple-I2c-Devices/). To select a different I2C bus then 1, use the following address notation:\
-`[I2C Address],[I2C Bus number]`
+`<I2C Address>,[I2C Bus number]`
 
-For `[I2C Address]` you can use the number shown in the i2cdetect. Adding '**0x**' in front is allowed. So either **3c**, **3c,1**, **0x3c** and **0x3c,1** are valid and the same I2C addresses.
+`<I2C Address>` is mandatory and you can use the number shown in the i2cdetect. Adding '**0x**' in front is allowed. So either **3c**, **3c,1**, **0x3c** and **0x3c,1** are valid and the same I2C addresses.
 
 The `[I2C Bus number]` is optional and can be omitted. The default value is 1.
 
@@ -51,6 +51,17 @@ Run the command `i2cdetect -y 1` in order to see what is connected to your I2C b
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: 70 -- -- -- -- -- -- --
 ```
+
+### I2C IO Expander
+
+There is support for two I2C IO Expanders so you can have extra GPIO relays or GPIO buttons if needed. This will update the GPIO address to:\
+`pcf857<4/5>-<IO expander port>,<I2C Address>,[I2C Bus number]`
+
+Either use [pcf857**4**](/TerrariumPI/hardware/io-expander/) or [pcf857**5**](/TerrariumPI/hardware/io-expander/) to select the used IO expander.
+
+`<IO expander port>` is mandatory and is a number from 0 till max ports - 1.
+
+`<I2C Address>` is mandatory and specified [here](#i2c-bus).
 
 {% assign relays = site.hardware | where_exp: "hardware", "hardware.tags contains 'relay'" | sort_natural: "title" %}
 

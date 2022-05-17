@@ -22,26 +22,9 @@ Also **64bit is not supported** due to missing mmal code which is needed for the
 ## Creating SD Card
 
 ![Raspberry PI Imager](/assets/img/RPI_Imager.webp){: .right width="200" }
-Download and instal the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to prepare your SD card. Make sure you have a SD card of at least 4GB of size. Bigger is better :)
+Download and instal the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to prepare your SD card. Make sure you have a SD card of at least 4GB of size. Bigger is better :) Make sure you select **Raspberry Pi OS Lite (legacy)** from the other Raspberry Pi OS images.
 
-When the SD card is written, you can read/write the 'boot' partition. Add a file called 'ssh' to it. This will [enable SSH on a headless Raspberry Pi (add file to SD card on another machine)](https://www.raspberrypi.org/documentation/remote-access/ssh/).
-
-And if you want to use WiFi also add a small file called `wpa_supplicant.conf` in the 'boot' partition. The contents of the file should be something like this:
-
-```console
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=[Your 2 letter country code]
-
-network={
-        ssid="[Your WiFi Name]"
-        psk="[Your WiFi password]"
-}
-```
-
-And that should make your Raspberry PI connect to the WiFi network first time it boots.
-
-Put your SD card in the Pi and power it up.
+![Raspberry PI Imager settings icon](/assets/img/RPI_Imager_settings.webp){: .left width="50"}In order to enable SSH, Wifi and other settings, click on the settings icon in the lower right corner. Here you enter your Wifi settings, pi password etc. Use this to install the Raspberry PI headless. Add the SD card in the Raspberry PI and withing a minute you should have a running Raspberry PI.
 
 # TerrariumPI
 

@@ -429,6 +429,9 @@ The system uses the sensors alarm values to determine the right conditions you w
 ![Area form](/assets/img/Area_Settings_Type.webp)
 _Popup form for adding and updating areas_
 
+Depends on
+: Here you can select other areas on which this area depends on. If the depending area is in an alarm state, this area will not toggle on, or if already on, toggle off. For example you have a water tank area and a humidity area where you use a sprayer. When the water tank is (near) empty the low alarm of the water tank will go on, and this humidity area will then not toggle on. Protect against dry running the water sprayer.
+
 Mode
 : [Same as lights area](#main-lights)
 

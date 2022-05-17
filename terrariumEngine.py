@@ -1651,8 +1651,8 @@ class terrariumEngine(object):
 
     data['flow']['duration'] = total['duration']
     data['flow']['total'] = total['total_flow']
-    # Total water costs is in m3 (1000 L)
-    data['flow']['costs'] = (data['flow']['total']  / 1000.0) * self.settings['water_price']
+    # Total water costs is in L
+    data['flow']['costs'] = data['flow']['total'] * self.settings['water_price']
 
     return data
 

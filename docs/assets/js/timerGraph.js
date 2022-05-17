@@ -183,5 +183,6 @@ function showTimerGraph() {
   }
 }
 jQuery(function() {
+  showTimerGraph();
   jQuery('input').on('change',showTimerGraph);
 });

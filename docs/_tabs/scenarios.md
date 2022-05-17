@@ -11,7 +11,7 @@ image:
 On this page you can find various information on how to setup areas and create scenarios.
 
 <h2>Timer wizard</h2>
-<p>Using the <code class="language-plaintext highlighter-rouge">weather</code> or <code class="language-plaintext highlighter-rouge">timer</code> mode in an area, you can set the following 6 fields. The minimal fields that needs to be entered are the <code class="language-plaintext highlighter-rouge">begin</code> and <code class="language-plaintext highlighter-rouge">end</code> time field. All other fields are optional. Using a value of '' or 0 will ignore the setting.<p>
+<p>Using the <code class="language-plaintext highlighter-rouge">weather</code> or <code class="language-plaintext highlighter-rouge">timer</code> mode in an area, you can set the following 6 fields. The minimal fields that needs to be entered are the <code class="language-plaintext highlighter-rouge">begin</code> and <code class="language-plaintext highlighter-rouge">end</code> time field. All other fields are optional. Using a value of '' or 0 will ignore the setting. Change some values in the form to see the outcome of the timer schedule.<p>
 <p>The graph area in <span style="color:red">red</span> is the time the relay(s) are toggled on</p>
 <p>And when you have selected <code class="language-plaintext highlighter-rouge">sensors</code>, used <code class="language-plaintext highlighter-rouge">light state</code> or <code class="language-plaintext highlighter-rouge">door state</code>, then the relay will only go on when that state is met during the on period in the red are of the graph.</p>
 <table class="timertable">
@@ -19,8 +19,8 @@ On this page you can find various information on how to setup areas and create s
     <th colspan="4" style="text-align:center">Operating window</th>
   </tr>
   <tr>
-    <th>Begin time *</th><td><input type="time" id="begin_time"></td>
-    <th>End time *</th><td><input type="time" id="end_time"></td>
+    <th>Begin time *</th><td><input type="time" id="begin_time" value="08:00"></td>
+    <th>End time *</th><td><input type="time" id="end_time" value="20:00"></td>
   </tr>
   <tr>
     <td colspan="4">Enter the begin and end time off the operating window in which the relay(s) may operate</td>
