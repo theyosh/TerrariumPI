@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
-"POT-Creation-Date: 2022-04-08 17:25+CEST\n"
+"POT-Creation-Date: 2022-05-17 11:58+CEST\n"
 "PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
@@ -18,55 +18,55 @@ msgstr ""
 "X-Generator: Weblate 4.0.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:33
+#: terrariumArea.py:32
 #, fuzzy
 #| msgid "Light"
 msgid "Lighting"
 msgstr "Lys"
 
-#: terrariumArea.py:39
+#: terrariumArea.py:38
 #, fuzzy
 #| msgid "Settings"
 msgid "Heating"
 msgstr "Innstillinger"
 
-#: terrariumArea.py:45
+#: terrariumArea.py:44
 msgid "Cooling"
 msgstr "Kjøling"
 
-#: terrariumArea.py:51
+#: terrariumArea.py:50
 msgid "Humidity"
 msgstr "Luftfuktighet"
 
-#: terrariumArea.py:57
+#: terrariumArea.py:56
 #, fuzzy
 #| msgid "Water tank"
 msgid "Water tank"
 msgstr "Vanntank"
 
-#: terrariumArea.py:63 views/includes/sidebar.html:186
+#: terrariumArea.py:62 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Lyd"
 
-#: terrariumArea.py:69
+#: terrariumArea.py:68
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:75
+#: terrariumArea.py:74
 msgid "Conductivity"
 msgstr "Ledningsevne"
 
-#: terrariumArea.py:81
+#: terrariumArea.py:80
 #, fuzzy
 #| msgid "Fertility"
 msgid "Fertility"
 msgstr "Fruktbarhet"
 
-#: terrariumArea.py:87
+#: terrariumArea.py:86
 msgid "Moisture"
 msgstr "Fuktighet"
 
-#: terrariumArea.py:93
+#: terrariumArea.py:92
 msgid "pH"
 msgstr "pH"
 
@@ -166,39 +166,39 @@ msgstr ""
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1220 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1218 views/dashboard.html:18 views/status.html:112
 #, fuzzy
 #| msgid "Uptime"
 msgid "Up time"
 msgstr "Oppetid"
 
-#: terrariumEngine.py:1226
+#: terrariumEngine.py:1224
 #, fuzzy
 #| msgid "System log"
 msgid "System load"
 msgstr "Systemlogg"
 
-#: terrariumEngine.py:1232 views/status.html:44
+#: terrariumEngine.py:1230 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU Temperatur"
 
-#: terrariumEngine.py:1238
+#: terrariumEngine.py:1236
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1244
+#: terrariumEngine.py:1242
 #, fuzzy
 #| msgid "Memory usage"
 msgid "Memory"
 msgstr "Minnebruk"
 
-#: terrariumEngine.py:1265
+#: terrariumEngine.py:1263
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "Sensor typen"
 
-#: terrariumEngine.py:1441
+#: terrariumEngine.py:1439
 #, fuzzy
 #| msgid "Last update"
 msgid "last update"
@@ -522,35 +522,35 @@ msgstr "Dør innstillinger"
 msgid "Webcam archive"
 msgstr "Språk"
 
-#: terrariumNotification.py:398
+#: terrariumNotification.py:411
 msgid "Display"
 msgstr "Vis alternativer"
 
-#: terrariumNotification.py:402
+#: terrariumNotification.py:415
 msgid "Email"
 msgstr "E-post"
 
-#: terrariumNotification.py:412
+#: terrariumNotification.py:425
 #, fuzzy
 #| msgid "Minimum light hours"
 msgid "Traffic light"
 msgstr "Minimum lys timer"
 
-#: terrariumNotification.py:416
+#: terrariumNotification.py:429
 #, fuzzy
 #| msgid "Webhook"
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:420
+#: terrariumNotification.py:433
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:424
+#: terrariumNotification.py:437
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:428
+#: terrariumNotification.py:441
 msgid "Buzzer"
 msgstr ""
 
@@ -3583,11 +3583,23 @@ msgstr ""
 msgid "Enter the MQTT server address name or ip"
 msgstr "SMTP brukernavn"
 
+#: views/modals/service.html:356
+#, fuzzy
+#| msgid "SMTP server port"
+msgid "Enter the MQTT server password"
+msgstr "SMTP-serverporten"
+
 #: views/modals/service.html:335
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "Enter the MQTT server port number"
 msgstr "SMTP-serverporten"
+
+#: views/modals/service.html:347
+#, fuzzy
+#| msgid "SMTP username"
+msgid "Enter the MQTT server username"
+msgstr "SMTP brukernavn"
 
 #: views/modals/area.html:479
 #, fuzzy
@@ -3611,7 +3623,7 @@ msgstr "SMTP brukernavn"
 msgid "Enter the SMTP server address name or ip"
 msgstr ""
 
-#: views/modals/service.html:151 views/modals/service.html:356
+#: views/modals/service.html:151
 #, fuzzy
 #| msgid "SMTP server port"
 msgid "Enter the SMTP server password"
@@ -3623,7 +3635,7 @@ msgstr "SMTP-serverporten"
 msgid "Enter the SMTP server port number"
 msgstr "SMTP-serverporten"
 
-#: views/modals/service.html:142 views/modals/service.html:347
+#: views/modals/service.html:142
 #, fuzzy
 #| msgid "SMTP username"
 msgid "Enter the SMTP server username"
@@ -3961,7 +3973,7 @@ msgstr "Vis bevegelses bokser"
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumNotification.py:407
+#: terrariumNotification.py:420
 msgid "Telegram"
 msgstr "Telegram"
 
