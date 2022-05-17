@@ -1,4 +1,4 @@
-# TerrariumPI 4.3.2
+# TerrariumPI 4.3.3
 
 ![Latest release](https://github-basic-badges.herokuapp.com/release/theyosh/TerrariumPI.svg?text=latest%20release)
 ![GitHub Release Date](https://img.shields.io/github/release-date/theyosh/TerrariumPI)
