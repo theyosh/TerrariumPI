@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2022-04-08 17:25+CEST\n"
+"POT-Creation-Date: 2022-05-17 11:58+CEST\n"
 "PO-Revision-Date: 2020-05-21 19:44+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
@@ -18,53 +18,53 @@ msgstr ""
 "X-Generator: Weblate 4.0.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:33
+#: terrariumArea.py:32
 #, fuzzy
 #| msgid "Lights"
 msgid "Lighting"
 msgstr "Eclairage"
 
-#: terrariumArea.py:39
+#: terrariumArea.py:38
 #, fuzzy
 #| msgid "Settings"
 msgid "Heating"
 msgstr "Paramètres"
 
-#: terrariumArea.py:45
+#: terrariumArea.py:44
 msgid "Cooling"
 msgstr "Refroidissement"
 
-#: terrariumArea.py:51
+#: terrariumArea.py:50
 msgid "Humidity"
 msgstr "Humidité"
 
-#: terrariumArea.py:57
+#: terrariumArea.py:56
 msgid "Water tank"
 msgstr "Réservoir d'eau"
 
-#: terrariumArea.py:63 views/includes/sidebar.html:186
+#: terrariumArea.py:62 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:69
+#: terrariumArea.py:68
 msgid "CO2"
 msgstr ""
 
-#: terrariumArea.py:75
+#: terrariumArea.py:74
 msgid "Conductivity"
 msgstr ""
 
-#: terrariumArea.py:81
+#: terrariumArea.py:80
 #, fuzzy
 #| msgid "Humidity sensor"
 msgid "Fertility"
 msgstr "Capteur d'humidité"
 
-#: terrariumArea.py:87
+#: terrariumArea.py:86
 msgid "Moisture"
 msgstr ""
 
-#: terrariumArea.py:93
+#: terrariumArea.py:92
 msgid "pH"
 msgstr "pH"
 
@@ -164,39 +164,39 @@ msgstr ""
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1220 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1218 views/dashboard.html:18 views/status.html:112
 #, fuzzy
 #| msgid "Uptime"
 msgid "Up time"
 msgstr "En ligne depuis"
 
-#: terrariumEngine.py:1226
+#: terrariumEngine.py:1224
 #, fuzzy
 #| msgid "System log"
 msgid "System load"
 msgstr "Journaux du système"
 
-#: terrariumEngine.py:1232 views/status.html:44
+#: terrariumEngine.py:1230 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Température du CPU"
 
-#: terrariumEngine.py:1238
+#: terrariumEngine.py:1236
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1244
+#: terrariumEngine.py:1242
 #, fuzzy
 #| msgid "Memory usage"
 msgid "Memory"
 msgstr "Utilisation de la mémoire"
 
-#: terrariumEngine.py:1265
+#: terrariumEngine.py:1263
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "Le type de capteur"
 
-#: terrariumEngine.py:1441
+#: terrariumEngine.py:1439
 #, fuzzy
 #| msgid "Last update"
 msgid "last update"
@@ -518,33 +518,33 @@ msgstr "Paramètres de porte"
 msgid "Webcam archive"
 msgstr "Langue"
 
-#: terrariumNotification.py:398
+#: terrariumNotification.py:411
 msgid "Display"
 msgstr ""
 
-#: terrariumNotification.py:402
+#: terrariumNotification.py:415
 msgid "Email"
 msgstr ""
 
-#: terrariumNotification.py:412
+#: terrariumNotification.py:425
 #, fuzzy
 #| msgid "Minimum light hours"
 msgid "Traffic light"
 msgstr "Heures de lumière minimales"
 
-#: terrariumNotification.py:416
+#: terrariumNotification.py:429
 msgid "Web-hook"
 msgstr ""
 
-#: terrariumNotification.py:420
+#: terrariumNotification.py:433
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:424
+#: terrariumNotification.py:437
 msgid "Pushover"
 msgstr ""
 
-#: terrariumNotification.py:428
+#: terrariumNotification.py:441
 msgid "Buzzer"
 msgstr ""
 
@@ -3585,10 +3585,22 @@ msgstr ""
 msgid "Enter the MQTT server address name or ip"
 msgstr "Port du serveur OWFS"
 
+#: views/modals/service.html:356
+#, fuzzy
+#| msgid "OWFS server port"
+msgid "Enter the MQTT server password"
+msgstr "Port du serveur OWFS"
+
 #: views/modals/service.html:335
 #, fuzzy
 #| msgid "OWFS server port"
 msgid "Enter the MQTT server port number"
+msgstr "Port du serveur OWFS"
+
+#: views/modals/service.html:347
+#, fuzzy
+#| msgid "OWFS server port"
+msgid "Enter the MQTT server username"
 msgstr "Port du serveur OWFS"
 
 #: views/modals/area.html:479
@@ -3613,7 +3625,7 @@ msgstr "Port du serveur OWFS"
 msgid "Enter the SMTP server address name or ip"
 msgstr ""
 
-#: views/modals/service.html:151 views/modals/service.html:356
+#: views/modals/service.html:151
 #, fuzzy
 #| msgid "OWFS server port"
 msgid "Enter the SMTP server password"
@@ -3625,7 +3637,7 @@ msgstr "Port du serveur OWFS"
 msgid "Enter the SMTP server port number"
 msgstr "Port du serveur OWFS"
 
-#: views/modals/service.html:142 views/modals/service.html:347
+#: views/modals/service.html:142
 msgid "Enter the SMTP server username"
 msgstr ""
 
@@ -3955,7 +3967,7 @@ msgstr ""
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumNotification.py:407
+#: terrariumNotification.py:420
 msgid "Telegram"
 msgstr ""
 

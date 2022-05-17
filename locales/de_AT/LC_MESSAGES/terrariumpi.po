@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-04-08 17:25+CEST\n"
+"POT-Creation-Date: 2022-05-17 11:58+CEST\n"
 "PO-Revision-Date: 2021-11-26 14:38+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
@@ -18,49 +18,49 @@ msgstr ""
 "X-Generator: Weblate 4.9\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: terrariumArea.py:33
+#: terrariumArea.py:32
 msgid "Lighting"
 msgstr "Beleuchtung"
 
-#: terrariumArea.py:39
+#: terrariumArea.py:38
 msgid "Heating"
 msgstr "Heizung"
 
-#: terrariumArea.py:45
+#: terrariumArea.py:44
 msgid "Cooling"
 msgstr "Kühlung"
 
-#: terrariumArea.py:51
+#: terrariumArea.py:50
 msgid "Humidity"
 msgstr "Luftfeuchtigkeit"
 
-#: terrariumArea.py:57
+#: terrariumArea.py:56
 msgid "Water tank"
 msgstr "Wassertank"
 
-#: terrariumArea.py:63 views/includes/sidebar.html:186
+#: terrariumArea.py:62 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:69
+#: terrariumArea.py:68
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:75
+#: terrariumArea.py:74
 msgid "Conductivity"
 msgstr "Leitfähigkeit"
 
-#: terrariumArea.py:81
+#: terrariumArea.py:80
 #, fuzzy
 #| msgid "fertility"
 msgid "Fertility"
 msgstr "Fruchtbarkeit"
 
-#: terrariumArea.py:87
+#: terrariumArea.py:86
 msgid "Moisture"
 msgstr "Feuchtigkeit"
 
-#: terrariumArea.py:93
+#: terrariumArea.py:92
 msgid "pH"
 msgstr "pH"
 
@@ -140,31 +140,31 @@ msgstr "Wasserfluss"
 msgid "wattage"
 msgstr "Leistung"
 
-#: terrariumEngine.py:1220 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1218 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Betriebszeit"
 
-#: terrariumEngine.py:1226
+#: terrariumEngine.py:1224
 msgid "System load"
 msgstr "Systemlast"
 
-#: terrariumEngine.py:1232 views/status.html:44
+#: terrariumEngine.py:1230 views/status.html:44
 msgid "CPU Temperature"
 msgstr "CPU Temperatur"
 
-#: terrariumEngine.py:1238
+#: terrariumEngine.py:1236
 msgid "Storage"
 msgstr "Speicher"
 
-#: terrariumEngine.py:1244
+#: terrariumEngine.py:1242
 msgid "Memory"
 msgstr "Speicher"
 
-#: terrariumEngine.py:1265
+#: terrariumEngine.py:1263
 msgid "average {sensor_type}"
 msgstr "Durchschnitt {sensor_type}"
 
-#: terrariumEngine.py:1441
+#: terrariumEngine.py:1439
 msgid "last update"
 msgstr "Letztes Update"
 
@@ -480,31 +480,31 @@ msgstr "Schalter Einstellungen"
 msgid "Webcam archive"
 msgstr "Archivierung auswählen"
 
-#: terrariumNotification.py:398
+#: terrariumNotification.py:411
 msgid "Display"
 msgstr "Anzeige"
 
-#: terrariumNotification.py:402
+#: terrariumNotification.py:415
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:412
+#: terrariumNotification.py:425
 msgid "Traffic light"
 msgstr "Ampel"
 
-#: terrariumNotification.py:416
+#: terrariumNotification.py:429
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:420
+#: terrariumNotification.py:433
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:424
+#: terrariumNotification.py:437
 msgid "Pushover"
 msgstr "Überzieher"
 
-#: terrariumNotification.py:428
+#: terrariumNotification.py:441
 msgid "Buzzer"
 msgstr ""
 
@@ -3272,11 +3272,23 @@ msgstr "Minimale Stundenanzahl eingeben"
 msgid "Enter the MQTT server address name or ip"
 msgstr "SMTP Server Adresse oder IP eingeben"
 
+#: views/modals/service.html:356
+#, fuzzy
+#| msgid "Enter the SMTP server password"
+msgid "Enter the MQTT server password"
+msgstr "SMTP Server Passwort eingeben"
+
 #: views/modals/service.html:335
 #, fuzzy
 #| msgid "Enter the SMTP server port number"
 msgid "Enter the MQTT server port number"
 msgstr "SMTP Server Port Nummer eingeben"
+
+#: views/modals/service.html:347
+#, fuzzy
+#| msgid "Enter the SMTP server username"
+msgid "Enter the MQTT server username"
+msgstr "SMTP Server Benutzername eingeben"
 
 #: views/modals/area.html:479
 msgid "Enter the offset"
@@ -3298,7 +3310,7 @@ msgstr "SMTP Server Benutzername eingeben"
 msgid "Enter the SMTP server address name or ip"
 msgstr "SMTP Server Adresse oder IP eingeben"
 
-#: views/modals/service.html:151 views/modals/service.html:356
+#: views/modals/service.html:151
 msgid "Enter the SMTP server password"
 msgstr "SMTP Server Passwort eingeben"
 
@@ -3306,7 +3318,7 @@ msgstr "SMTP Server Passwort eingeben"
 msgid "Enter the SMTP server port number"
 msgstr "SMTP Server Port Nummer eingeben"
 
-#: views/modals/service.html:142 views/modals/service.html:347
+#: views/modals/service.html:142
 msgid "Enter the SMTP server username"
 msgstr "SMTP Server Benutzername eingeben"
 
@@ -3548,7 +3560,7 @@ msgstr "Bewegungsfelder anzeigen"
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI herunterfahren"
 
-#: terrariumNotification.py:407
+#: terrariumNotification.py:420
 msgid "Telegram"
 msgstr "Telegramm"
 

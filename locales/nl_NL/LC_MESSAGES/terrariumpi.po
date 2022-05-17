@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2022-04-08 17:25+CEST\n"
+"POT-Creation-Date: 2022-05-17 11:58+CEST\n"
 "PO-Revision-Date: 2022-03-21 11:21+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
@@ -19,47 +19,47 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: terrariumArea.py:33
+#: terrariumArea.py:32
 msgid "Lighting"
 msgstr "Verlichting"
 
-#: terrariumArea.py:39
+#: terrariumArea.py:38
 msgid "Heating"
 msgstr "Verwarming"
 
-#: terrariumArea.py:45
+#: terrariumArea.py:44
 msgid "Cooling"
 msgstr "Koelen"
 
-#: terrariumArea.py:51
+#: terrariumArea.py:50
 msgid "Humidity"
 msgstr "Luchtvochtigheid"
 
-#: terrariumArea.py:57
+#: terrariumArea.py:56
 msgid "Water tank"
 msgstr "Watertank"
 
-#: terrariumArea.py:63 views/includes/sidebar.html:186
+#: terrariumArea.py:62 views/includes/sidebar.html:186
 msgid "Audio"
 msgstr "Audio"
 
-#: terrariumArea.py:69
+#: terrariumArea.py:68
 msgid "CO2"
 msgstr "CO2"
 
-#: terrariumArea.py:75
+#: terrariumArea.py:74
 msgid "Conductivity"
 msgstr "Geleidingsvermogen"
 
-#: terrariumArea.py:81
+#: terrariumArea.py:80
 msgid "Fertility"
 msgstr "Vruchtbaarheid"
 
-#: terrariumArea.py:87
+#: terrariumArea.py:86
 msgid "Moisture"
 msgstr "Vochtigheid"
 
-#: terrariumArea.py:93
+#: terrariumArea.py:92
 msgid "pH"
 msgstr "pH"
 
@@ -139,31 +139,31 @@ msgstr "waterstroom"
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:1220 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1218 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Actief"
 
-#: terrariumEngine.py:1226
+#: terrariumEngine.py:1224
 msgid "System load"
 msgstr "Systeembelasting"
 
-#: terrariumEngine.py:1232 views/status.html:44
+#: terrariumEngine.py:1230 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Processor temperatuur"
 
-#: terrariumEngine.py:1238
+#: terrariumEngine.py:1236
 msgid "Storage"
 msgstr "Opslag"
 
-#: terrariumEngine.py:1244
+#: terrariumEngine.py:1242
 msgid "Memory"
 msgstr "Geheugen"
 
-#: terrariumEngine.py:1265
+#: terrariumEngine.py:1263
 msgid "average {sensor_type}"
 msgstr "gemiddelde {sensor_type}"
 
-#: terrariumEngine.py:1441
+#: terrariumEngine.py:1439
 msgid "last update"
 msgstr "laatste wijziging"
 
@@ -421,31 +421,31 @@ msgstr "Knop actie"
 msgid "Webcam archive"
 msgstr "Webcam archief"
 
-#: terrariumNotification.py:398
+#: terrariumNotification.py:411
 msgid "Display"
 msgstr "Beeldscherm"
 
-#: terrariumNotification.py:402
+#: terrariumNotification.py:415
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:412
+#: terrariumNotification.py:425
 msgid "Traffic light"
 msgstr "Verkeerslicht"
 
-#: terrariumNotification.py:416
+#: terrariumNotification.py:429
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:420
+#: terrariumNotification.py:433
 msgid "MQTT"
 msgstr "MQTT"
 
-#: terrariumNotification.py:424
+#: terrariumNotification.py:437
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:428
+#: terrariumNotification.py:441
 msgid "Buzzer"
 msgstr "Zoemer"
 
@@ -2986,9 +2986,21 @@ msgstr "Voer het minimum aantal uren in"
 msgid "Enter the MQTT server address name or ip"
 msgstr "Voer de adresnaam of ip van de MQTT-server in"
 
+#: views/modals/service.html:356
+#, fuzzy
+#| msgid "Enter the SMTP server password"
+msgid "Enter the MQTT server password"
+msgstr "Voer het SMTP-serverwachtwoord in"
+
 #: views/modals/service.html:335
 msgid "Enter the MQTT server port number"
 msgstr "Voer het MQTT-serverpoortnummer in"
+
+#: views/modals/service.html:347
+#, fuzzy
+#| msgid "Enter the SMTP server username"
+msgid "Enter the MQTT server username"
+msgstr "Voer de gebruikersnaam van de SMTP-server in"
 
 #: views/modals/area.html:479
 msgid "Enter the offset"
@@ -3006,7 +3018,7 @@ msgstr "Voer de Pushover-gebruikerssleutel in"
 msgid "Enter the SMTP server address name or ip"
 msgstr "Voer de adresnaam of ip van de SMTP-server in"
 
-#: views/modals/service.html:151 views/modals/service.html:356
+#: views/modals/service.html:151
 msgid "Enter the SMTP server password"
 msgstr "Voer het SMTP-serverwachtwoord in"
 
@@ -3014,7 +3026,7 @@ msgstr "Voer het SMTP-serverwachtwoord in"
 msgid "Enter the SMTP server port number"
 msgstr "Voer het SMTP-serverpoortnummer in"
 
-#: views/modals/service.html:142 views/modals/service.html:347
+#: views/modals/service.html:142
 msgid "Enter the SMTP server username"
 msgstr "Voer de gebruikersnaam van de SMTP-server in"
 
@@ -3252,7 +3264,7 @@ msgstr "Bewegingsvakken weergeven"
 msgid "Shutdown TerrariumPI"
 msgstr "TerrariumPI uitschakelen"
 
-#: terrariumNotification.py:407
+#: terrariumNotification.py:420
 msgid "Telegram"
 msgstr "Telegram"
 
