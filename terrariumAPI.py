@@ -764,8 +764,10 @@ class terrariumAPI(object):
   @orm.db_session
   def notification_service_delete(self, service):
     try:
+      service = NotificationService[service]
+      self.webserver.engine.notification.delete_service(service.id)
       message = f'Notification service {service} is deleted.'
-      NotificationService[service].delete()
+      service.delete()
       orm.commit()
 
       return {'message' : message}
@@ -786,6 +788,10 @@ class terrariumAPI(object):
   def notification_service_add(self):
     try:
       service = NotificationService(**request.json)
+      orm.commit()
+
+      self.webserver.engine.notification.load_services()
+
       return self.notification_service_detail(service.id)
     except Exception as ex:
       raise HTTPError(status=500, body=f'Notification service could not be added. {ex}')

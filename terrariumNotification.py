@@ -298,6 +298,13 @@ class terrariumNotification(terrariumSingleton):
 
     self.services[service_id].reload_setup(setup)
 
+  def delete_service(self, service_id):
+    if service_id not in self.services:
+      return
+
+    self.services[service_id].stop()
+    del(self.services[service_id])
+
   def broadcast(self, subject, message, image):
     for _, service in self.services.items():
       if service is not None and service.enabled:
