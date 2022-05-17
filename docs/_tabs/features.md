@@ -28,6 +28,10 @@ It is possible to control multiple enclosures with a single Raspberry PI. As lon
 
 In every enclosure you can create multiple areas, even of the same type, to setup your enclosure. So you can create a sun spot area and a shading spot area that have their own settings and logic in the same enclosure.
 
+## Costs indication
+
+Based on the entered power and water usage per relay and with the power and water price in the settings page, we can make an estimate of the running costs of your terrarium. Keep in mind this is an estimate, and does not handle big price fluctuations.
+
 ## Data encryption
 
 Some data is sensitive like the authentication password or the cloud credentials. This data is stored encrypted in the TerrariumPI database. That means when you database is lost, your passwords will not be compromised directly.
