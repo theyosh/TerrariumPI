@@ -2,6 +2,51 @@ Changelog
 =========
 
 
+4.3.3 (2022-05-17)
+------------------
+
+**Fixes**
+------
+- Fix (re)loading MQTT service (and probably others) [TheYOSH]
+- Fixed water calculation (2) [TheYOSH]
+- Fix total water usage on dashboard. [TheYOSH]
+- Fix docker ffmeg (3) [TheYOSH]
+- Final docker fix ffmpeg. [TheYOSH]
+
+**Updates**
+------
+- Update version number. [TheYOSH]
+- Update translation source. [TheYOSH]
+- Small text updates. [TheYOSH]
+- Update documentation. [TheYOSH]
+- Codacy updates (2) [J.G. Rubingh]
+- Codacy updates. [J.G. Rubingh]
+- Update install.sh. [TheYOSH]
+- Update install.sh. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Update Codacy issues. [TheYOSH]
+- Codacy code update. [TheYOSH]
+
+**Other**
+------
+- Merge branch '4.x.y.z' into main. [TheYOSH]
+- Merge branch '4.x.y.z' into main. [TheYOSH]
+- Merge branch '4.x.y.z' into main. [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Translated using Weblate (Italian) [Rob]
+
+  Currently translated at 36.5% (278 of 761 strings)
+- Codacy code improvements. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Remove debug. [TheYOSH]
+
+
 4.3.2 (2022-05-05)
 ------------------
 
@@ -11,6 +56,7 @@ Changelog
 
 **Updates**
 ------
+- Update version. [TheYOSH]
 - Update documentation (2) [TheYOSH]
 - Update documentation. [TheYOSH]
 - Update README.md. [TheYOSH]
