@@ -16,6 +16,9 @@ import statistics
 import sdnotify
 import gettext
 
+
+from concurrent import futures
+
 from pathlib import Path
 from gevent import sleep
 from packaging.version import Version
@@ -158,6 +161,9 @@ class terrariumEngine(object):
     startup_message = f'TerrariumPI is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-self.starttime:.2f} seconds.'
     logger.info(startup_message)
     self.notification.broadcast(startup_message, startup_message, self.settings['profile_image'])
+
+
+#    self.pool = futures.ThreadPoolExecutor()
 
     # Return console logging back to 'normal'
     terrariumLogging.logging.getLogger().handlers[0].setLevel(old_log_level)
@@ -632,6 +638,8 @@ class terrariumEngine(object):
     for sensor_type, avg_data in self.sensor_averages.items():
       self.webserver.websocket_message('gauge_update', { 'id' : f'avg_{sensor_type}', 'value' : avg_data['value']})
 
+    return True
+
   @property
   def sensor_averages(self):
     start = time.time()
@@ -982,22 +990,9 @@ class terrariumEngine(object):
 
   # -= NEW =-
   def _update_webcams(self):
-    webcams = []
-    with orm.db_session():
-      # Get all loaded webcam ordered by hardware address
-      webcams = sorted(Webcam.select(lambda w: w.id in self.webcams.keys() and not w.id in self.settings['exclude_ids'])[:], key=lambda item: item.address)
 
-    for webcam in webcams:
+    def __process_webcam(self, webcam, current_state, relays):
       start = time.time()
-      with orm.db_session():
-        # Reload webcam from DB in order to get Enclosure and flash relays data.... :(
-        webcam = Webcam[webcam.id]
-        # Get the current light state first, as processing new image could take 10 sec. In that period the lights could have been turned on,
-        # where the picture is taken when the lights are off.
-        current_state = 'on' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on else 'off'
-        # Set the flash relays if selected
-        relays = [] if webcam.flash is None else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
-
       self.webcams[webcam.id].update(relays)
 
       # Check archiving/motion settings
@@ -1006,7 +1001,7 @@ class terrariumEngine(object):
         # Check light status
         if 'ignore' != webcam.archive['light'] and current_state != webcam.archive['light']:
           #print(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
-          continue
+          return
 
         # Check door status
         if 'ignore' != webcam.archive['door']:
@@ -1015,7 +1010,7 @@ class terrariumEngine(object):
 
           if webcam.archive['door'] != current_state:
             #print(f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}')
-            continue
+            return
 
         if 'motion' == webcam.archive['state']:
           self.webcams[webcam.id].motion_capture(webcam.motion['frame'], int(webcam.motion['threshold']), int(webcam.motion['area']), webcam.motion['boxes'])
@@ -1024,8 +1019,18 @@ class terrariumEngine(object):
 
       logger.info(f'Updated {webcam} in {time.time()-start:.2f} seconds.')
 
-      # A small sleep between sensor measurement to get a bit more responsiveness of the system
-      sleep(0.1)
+
+    with futures.ThreadPoolExecutor() as pool:
+      with orm.db_session():
+        # Get all loaded webcam ordered by hardware address
+        for webcam in sorted(Webcam.select(lambda w: w.id in self.webcams.keys() and not w.id in self.settings['exclude_ids'])[:], key=lambda item: item.address):
+          # Get the current light state first, as processing new image could take 10 sec. In that period the lights could have been turned on,
+          # where the picture is taken when the lights are off.
+          current_state = 'on' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on else 'off'
+          # Set the flash relays if selected
+          relays = [] if webcam.flash is None else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
+          # Start update in parallel
+          pool.submit(__process_webcam, self, webcam,current_state,relays)
 
   # -= NEW =-
   def __load_existing_enclosures(self):
@@ -1112,21 +1117,6 @@ class terrariumEngine(object):
       logger.info(f'Starting a new update round with {len(self.sensors)} sensors, {len(self.relays)} relays, {len(self.buttons)} buttons and {len(self.webcams)} webcams.')
       start = time.time()
 
-      update_threads = {}
-      # Sensors
-      update_threads['sensors'] = threading.Thread(target=self._update_sensors)
-      # Relays
-      update_threads['relays']  = threading.Thread(target=self._update_relays)
-      # Buttons
-      update_threads['buttons'] = threading.Thread(target=self._update_buttons)
-      # Webcams
-      update_threads['webcams'] = threading.Thread(target=self._update_webcams)
-      # Version check
-      update_threads['version'] = threading.Thread(target=self.__update_checker)
-
-      for updater in update_threads:
-        update_threads[updater].start()
-
       # Weather data
       if self.weather is not None:
         self.weather.update()
@@ -1134,16 +1124,39 @@ class terrariumEngine(object):
       # Systemstats (needs weather update)
       self.webserver.websocket_message('systemstats', self.system_stats())
 
-      # Wait till sensors and buttons all updates are done before continue
-      for updater in ['sensors','buttons','relays']:
-        update_threads[updater].join()
+      # Run updates in parallel and wait till all done
+      with futures.ThreadPoolExecutor() as pool:
+        pool.submit(self._update_sensors)
+        pool.submit(self._update_relays)
+        pool.submit(self._update_buttons)
+        pool.submit(self._update_webcams)
+        pool.submit(self.__update_checker)
 
-      # Run encouter/environment updates
+      # update_threads = {}
+      # # Sensors
+      # #update_threads['sensors'] = threading.Thread(target=self._update_sensors)
+      # # Relays
+      # update_threads['relays']  = threading.Thread(target=self._update_relays)
+      # # Buttons
+      # update_threads['buttons'] = threading.Thread(target=self._update_buttons)
+      # # Webcams
+      # update_threads['webcams'] = threading.Thread(target=self._update_webcams)
+      # # Version check
+      # update_threads['version'] = threading.Thread(target=self.__update_checker)
+
+      # for updater in update_threads:
+      #   update_threads[updater].start()
+
+      # # Wait till sensors and buttons all updates are done before continue
+      # for updater in ['buttons','relays']:
+      #   update_threads[updater].join()
+
+      # Run encounter/environment updates
       self._update_enclosures()
 
-      # Wait for all threads to end
-      for updater in update_threads:
-        update_threads[updater].join()
+      # # Wait for all threads to end
+      # for updater in update_threads:
+      #   update_threads[updater].join()
 
       self.motd()
 
