@@ -14,7 +14,7 @@ class terrariumRelayDimmerBrightPi(terrariumRelayDimmer):
   HARDWARE = 'brightpi-dimmer'
   NAME = 'Bright-PI (dimmer)'
 
-  def _load_hardware():
+  def _load_hardware(_):
     device = brightpi.BrightPi()
     # By resetting, we lose the old state after a reboot.....
     device.reset()
