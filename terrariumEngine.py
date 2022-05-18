@@ -16,9 +16,7 @@ import statistics
 import sdnotify
 import gettext
 
-
 from concurrent import futures
-
 from pathlib import Path
 from gevent import sleep
 from packaging.version import Version

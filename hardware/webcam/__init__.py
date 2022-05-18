@@ -439,57 +439,78 @@ class terrariumWebcam(object):
 
   @retry(tries=3, delay=0.5, max_delay=2)
   def update(self, relays = None):
+    # Readonly call
     if relays is None:
       return self.value
 
-    if self._device['last_update'] is None or (datetime.now() - self._device['last_update']).total_seconds() > self.__UPDATE_TIMEOUT:
-      if len(relays) > 0:
-        for relay in relays:
-          relay.on()
+    # To early update
+    if not (self._device['last_update'] is None or (datetime.now() - self._device['last_update']).total_seconds() > self.__UPDATE_TIMEOUT):
+      return self.value
 
-        sleep(1)
+    # Toggle on relays (flash)
+    if len(relays) > 0:
+      start = time()
+      for relay in relays:
+        relay.on()
 
+      sleep(1)
+      logger.debug(f'Webcam {self.name}: Toggle on flash lights took {time()-start:.3f} seconds')
+
+    start = time()
+    try:
+      image = func_timeout(15, self._get_raw_data)
+    except FunctionTimedOut:
+      logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
+      image = False
+
+    logger.debug(f'Webcam {self.name}: Getting a new image took: {time()-start:.3f} seconds')
+
+    # except Exception as ex:
+    #   logger.error(f'Webcam {self} has exception: {ex}')
+    #   image = False
+
+    if len(relays) > 0:
+      start = time()
+      for relay in relays:
+        relay.off()
+
+      logger.debug(f'Webcam {self.name}: Toggle off flash lights took {time()-start:.3f} seconds')
+
+    if image is False:
+      # Camera is offline!!
+      logger.warning('Webcam {} has errors!'.format(self.name))
+      if self.state:
+        self._device['state'] = False
+        logger.error('Webcam {} has gone offline! Please check your webcam connections.'.format(self.name))
+        self.__raw_image = self.__set_offline_image()
+        self.__tile_image()
+        self.__raw_image.save(self.raw_image_path,'jpeg', quality=self.__JPEG_QUALITY)
+
+      return False
+
+    self._device['state'] = True
+    start = time()
+    self.__raw_image = Image.open(image)
+    logger.debug(f'Webcam {self.name}: Loaded image in memory took: {time()-start:.3f} seconds')
+
+    # After here, no errors should happen, the image data should be save and correct
+    if not self.live:
       try:
-        image = func_timeout(15, self._get_raw_data)
-      except FunctionTimedOut:
-        logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
-        image = False
+        start = time()
+        self.__rotate()
+        logger.debug(f'Webcam {self.name}: Rotating image took: {time()-start:.3f} seconds')
+        start = time()
+        self.__tile_image()
+        logger.debug(f'Webcam {self.name}: Tiling image took: {time()-start:.3f} seconds')
+      except Exception as ex:
+        logger.error(f'Could not process webcam image {self}: {ex}')
+        # Raise an exception
+        raise ex
 
-      # except Exception as ex:
-      #   logger.error(f'Webcam {self} has exception: {ex}')
-      #   image = False
-
-      if len(relays) > 0:
-        for relay in relays:
-          relay.off()
-
-      if image is False:
-        # Camera is offline!!
-        logger.warning('Webcam {} has errors!'.format(self.name))
-        if self.state:
-          self._device['state'] = False
-          logger.error('Webcam {} has gone offline! Please check your webcam connections.'.format(self.name))
-          self.__raw_image = self.__set_offline_image()
-          self.__tile_image()
-          self.__raw_image.save(self.raw_image_path,'jpeg', quality=self.__JPEG_QUALITY)
-
-        return False
-
-      self._device['state'] = True
-      self.__raw_image = Image.open(image)
-
-      # After here, no errors should happen, the image data should be save and correct
-      if not self.live:
-        try:
-          self.__rotate()
-          self.__tile_image()
-        except Exception as ex:
-          logger.error(f'Could not process webcam image {self}: {ex}')
-          # Raise an exception
-          raise ex
-
-      self.__raw_image.save(self.raw_image_path,'jpeg', quality=self.__JPEG_QUALITY, exif=self.__exit_data)
-      self._device['last_update'] = datetime.now()
+    start = time()
+    self.__raw_image.save(self.raw_image_path,'jpeg', quality=self.__JPEG_QUALITY, exif=self.__exit_data)
+    logger.debug(f'Webcam {self.name}: Saving image to disk took: {time()-start:.3f} seconds')
+    self._device['last_update'] = datetime.now()
 
     return self.value
 
@@ -499,15 +520,19 @@ class terrariumWebcam(object):
 
     archive = self.__last_archive_image is None or int(time() - self.__last_archive_image.stat().st_mtime) >= timeout
     if archive:
+      start = time()
       self.__last_archive_image = self.raw_archive_path
       self.__last_archive_image.parent.mkdir(parents=True,exist_ok=True)
       self.__raw_image.save(self.__last_archive_image,'jpeg', quality=self.__JPEG_QUALITY, exif=self.__exit_data)
       #self.__environment.notification.message('webcam_archive',self.get_data(),[archive_image])
+      logger.debug(f'Webcam {self.name}: Archiving image to disk took: {time()-start:.3f} seconds')
 
 
   def motion_capture(self, motion_frame = 'last', motion_threshold = 25, motion_area = 500, motion_boxes = 'green'):
     if not self.state:
       return
+
+    start = time()
 
     # https://www.pyimagesearch.com/2015/05/25/basic-motion-detection-and-tracking-with-python-and-opencv/
     #try:
@@ -568,6 +593,8 @@ class terrariumWebcam(object):
     elif 'last' == motion_frame:
       # Only store the current frame when we use the 'last' frame option
       self.__compare_image = current_image
+
+    logger.debug(f'Webcam {self.name}: Motion detection image took: {time()-start:.3f} seconds')
 
 
   # TODO: What to stop....?
