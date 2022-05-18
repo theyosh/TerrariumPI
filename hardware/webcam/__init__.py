@@ -67,6 +67,7 @@ class terrariumWebcam(object):
   __UPDATE_TIMEOUT = 1
   __VALID_ROTATIONS = ['0','90','180','270','h','v']
 
+  # Can be overridden in child classes if used.
   _WARM_UP = 2
 
   @classproperty
@@ -244,17 +245,23 @@ class terrariumWebcam(object):
       # Create black canvas on zoom factor dimensions
       logger.debug('Creating new black canvas with dimensions %sx%s' % (canvas_width,canvas_height))
       canvas = Image.new("RGB", ((int(round(canvas_width)),int(round(canvas_height)))), "black")
-      # Scale the raw image to the zoomfactor dimensions
+      # Scale the raw image to the zoom factor dimensions
       logger.debug('Scale raw image to new canvas size (%sx%s)' % (canvas_width,canvas_height))
+      start = time()
       source = self.__raw_image.resize((int(round(source_width)),int(round(source_height))))
+      logger.debug(f'Resizing {self.name} image to {source_width}x{source_height} for tiling took: {time()-start:.2f} seconds')
       # Set the timestamp on resized image
 
+      start = time()
       self.__set_timestamp(source)
+      logger.debug(f'Setting correct timestamp image {self.name} took: {time()-start:.2f} seconds')
 
       # Calculate the center in the canvas for pasting raw image
       paste_center_position = (int(round((canvas_width - source_width) / 2)),int(round((canvas_height - source_height) / 2)))
       logger.debug('Pasting resized image to center of canvas at position %s' % (paste_center_position,))
+      start = time()
       canvas.paste(source,paste_center_position)
+      logger.debug(f'Pasting image {self.name} into canvas took: {time()-start:.2f} seconds')
 
       # Loop over the canvas to create the tiles
       logger.debug('Creating the lose tiles with dimensions %sx%s' % (canvas_width, canvas_height,))
@@ -262,11 +269,12 @@ class terrariumWebcam(object):
         for column in range(0,int(math.ceil(canvas_width/self.__TILE_SIZE))):
           crop_size = ( int(row*self.__TILE_SIZE), int(column*self.__TILE_SIZE) ,int((row+1)*self.__TILE_SIZE), int((column+1)*self.__TILE_SIZE))
           #logger.debug('Cropping image from position %s' % (crop_size,))
+          start = time()
           tile = canvas.crop(crop_size)
+          logger.debug(f'Cropping image size: {crop_size} took: {time()-start:.2f} seconds')
           #logger.debug('Saving cropped image to %s' % (terrariumWebcamSource.TILE_LOCATION + self.__id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
-          tile_file_name = self.raw_image_path.parent.joinpath('tiles','tile_{}_{}_{}.jpg'.format(zoom_factor,row,column))
-          #print('Save tile: {}'.format(tile_file_name))
 
+          tile_file_name = self.raw_image_path.parent.joinpath('tiles','tile_{}_{}_{}.jpg'.format(zoom_factor,row,column))
           tile.save(tile_file_name,'jpeg',quality=self.__JPEG_QUALITY)
           logger.debug('Done saving {}'.format(tile_file_name))
 
