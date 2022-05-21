@@ -265,6 +265,7 @@ class terrariumWebcam(object):
 
       # Loop over the canvas to create the tiles
       logger.debug('Creating the lose tiles with dimensions %sx%s' % (canvas_width, canvas_height,))
+      start2 = time()
       for row in range(0,int(math.ceil(canvas_height/self.__TILE_SIZE))):
         for column in range(0,int(math.ceil(canvas_width/self.__TILE_SIZE))):
           crop_size = ( int(row*self.__TILE_SIZE), int(column*self.__TILE_SIZE) ,int((row+1)*self.__TILE_SIZE), int((column+1)*self.__TILE_SIZE))
@@ -277,6 +278,8 @@ class terrariumWebcam(object):
           tile_file_name = self.raw_image_path.parent.joinpath('tiles','tile_{}_{}_{}.jpg'.format(zoom_factor,row,column))
           tile.save(tile_file_name,'jpeg',quality=self.__JPEG_QUALITY)
           logger.debug('Done saving {}'.format(tile_file_name))
+
+      logger.debug(f'Webcam {self.name}: Done creating tiles in {time()-start2:.2f} seconds')
 
       # Scale down by 50%
       canvas_width /= 2.0

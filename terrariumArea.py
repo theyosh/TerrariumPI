@@ -149,11 +149,13 @@ class terrariumArea(object):
 
       powered = powered or self.state[period]['powered']
 
+    logger.debug(f'Area {self} is powered: {powered}')
     return powered
 
   def _time_table(self):
 
     def make_time_table(begin, end, on_period = 0, off_period = 0):
+      logger.debug(f'Make new time table for {self}. Begin: {begin}, End: {end}, On: {on_period}, Off: {off_period}')
       periods = []
       duration = 0
 
@@ -166,17 +168,21 @@ class terrariumArea(object):
         end   = now.replace(hour=end.hour,   minute=end.minute,   second=end.second)
 
       if begin >= end:
+        logger.debug(f'Begin time is bigger then end time (swap). Add 24 hours to end time (next day) {self}')
         end += datetime.timedelta(hours=24)
 
       if now > end:
+        logger.debug(f'Current time past end. Period is pasted. Use next day by adding 24 hours {self}')
         begin += datetime.timedelta(hours=24)
         end   += datetime.timedelta(hours=24)
 
       if 0 == on_period and 0 == off_period:
+        logger.debug(f'Area {self} is full period usage')
         periods.append((int(begin.timestamp()), int(end.timestamp())))
         duration += periods[-1][1] - periods[-1][0]
 
       else:
+        logger.debug(f'Area {self} has different periods')
         while begin < end:
           # The 'on' period is to big for the rest of the total timer time. So reduce it to the max left time
           if (begin + datetime.timedelta(seconds=on_period)) > end:
@@ -193,6 +199,9 @@ class terrariumArea(object):
         'periods'  : periods,
         'duration' : duration
       }
+      logger.debug(f'New time table for {self}')
+      logger.debug(data)
+
       return data
 
     timetable = {}
@@ -397,16 +406,20 @@ class terrariumArea(object):
 
   def _is_timer_time(self, period):
     if period not in self.setup or 'timetable' not in self.setup[period]:
+      logger.debug(f'Area {self} does not have a timer table')
       return False
 
     now = int(datetime.datetime.now().timestamp())
     for time_schedule in self.setup[period]['timetable']:
       if now < time_schedule[0]:
+        logger.debug(f'Area {self} is not time yet. Period has to start first.')
         return False
 
       elif time_schedule[0] <= now < time_schedule[1]:
+        logger.debug(f'Area {self} is in period, so toggle on: {time_schedule[0]} <= {now} <= {time_schedule[1]}')
         return True
 
+    logger.debug(f'Area {self} does not know if it is time.... Should update new timetable for next day?')
     return None
 
   def _update_variation(self):
@@ -652,7 +665,7 @@ class terrariumArea(object):
       if 'sensors' != self.mode:
         # Weather(inverse) and timer mode
         toggle_relay = self._is_timer_time(period)
-#        logger.info(f'Need to toggle the relays for {self} period {period}? {toggle_relay}')
+        logger.debug(f'Need to toggle the relays for {self} period {period}? {toggle_relay}')
 
         if toggle_relay is None:
           logger.info(f'Refreshing timer table for {self} period: {period}')

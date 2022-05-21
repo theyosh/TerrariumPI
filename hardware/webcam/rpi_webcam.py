@@ -24,13 +24,13 @@ class terrariumRPIWebcam(terrariumWebcam):
     if not raspistill.exists():
       return None
 
-    return [raspistill, '--quality', '95', '--timeout', str(self._WARM_UP*1000), '--encoding', 'jpg']
+    return [str(raspistill), '--quality', '95', '--timeout', str(self._WARM_UP*1000), '--encoding', 'jpg']
 
   def _get_raw_data(self):
-    if self._device["device"] is None:
+    if self._device['device'] is None:
       return False
 
-    cmd = self._device["device"] + ['--width', str(self.width), '--height', str(self.height), '--awb', self.awb, '--output', '-']
+    cmd = self._device['device'] + ['--width', str(self.width), '--height', str(self.height), '--awb', self.awb, '--output', '-']
     logger.debug(f'Starting rpicam: {cmd}')
 
     with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False) as proc:
