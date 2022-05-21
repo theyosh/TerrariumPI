@@ -171,7 +171,11 @@ class terrariumArea(object):
         logger.debug(f'Begin time is bigger then end time (swap). Add 24 hours to end time (next day) {self}')
         end += datetime.timedelta(hours=24)
 
-      if now > end:
+      if now < end - datetime.timedelta(hours=24):
+        logger.debug(f'Current time should be running previous day. Period is upcoming. Use previous day by subtracting 24 hours {self}')
+        begin -= datetime.timedelta(hours=24)
+        end   -= datetime.timedelta(hours=24)
+      elif now > end:
         logger.debug(f'Current time past end. Period is pasted. Use next day by adding 24 hours {self}')
         begin += datetime.timedelta(hours=24)
         end   += datetime.timedelta(hours=24)
