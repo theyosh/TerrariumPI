@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2022-05-17 11:58+CEST\n"
-"PO-Revision-Date: 2022-02-17 20:58+0000\n"
+"PO-Revision-Date: 2022-05-23 15:42+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/4-x-y-z/pt_BR/>\n"
@@ -1283,44 +1283,32 @@ msgid "Enter the amount of alarms before action take place."
 msgstr "Insira a quantidade de alarmes necessários para iniciar a ação."
 
 #: views/modals/area.html:652
-#, fuzzy
-#| msgid "Ignore webcam"
 msgid "Ignore low alarm"
-msgstr "Ignorar webcam"
+msgstr "Ignorar alarme baixo"
 
 #: views/modals/area.html:657
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor lower alarm value of the sensor. When below this value, "
-#| "alarms can be triggered."
 msgid ""
 "Toggle to ignore the low alarm value of the sensors, and use high alarm "
 "value only."
 msgstr ""
-"Contém o valor mais baixo para disparar o alarme do sensor. Quando abaixo "
-"desse valor, os alarmes podem ser acionados."
+"Ligue para ignorar o valor mais baixo dos sensores e utilizar apenas os "
+"valores mais altos."
 
 #: views/modals/area.html:767
 msgid "Select the light status."
 msgstr "Selecione o estado da luz para disparar a ação."
 
 #: views/modals/area.html:800
-#, fuzzy
-#| msgid "High alarm"
 msgid "Ignore high alarm"
-msgstr "Alarme quando alto"
+msgstr "Ignorar alarme alto"
 
 #: views/modals/area.html:804
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor lower alarm value of the sensor. When below this value, "
-#| "alarms can be triggered."
 msgid ""
 "Toggle to ignore the high alarm value of the sensors, and use the low alarm "
 "value only"
 msgstr ""
-"Contém o valor mais baixo para disparar o alarme do sensor. Quando abaixo "
-"desse valor, os alarmes podem ser acionados."
+"Ligue para ignorar o valor mais alto dos sensores e utilizar apenas os "
+"valores mais baixos"
 
 #: views/modals/area.html:830
 msgid ""
@@ -1757,22 +1745,16 @@ msgid "The dimmer offset."
 msgstr "Compensação do dimmer."
 
 #: views/modals/relay.html:129
-#, fuzzy
-#| msgid "minimum moist value"
 msgid "Dimmer max dim value"
-msgstr "valor mínimo umidade"
+msgstr "Valor máximo do dimmer"
 
 #: views/modals/relay.html:132
-#, fuzzy
-#| msgid "The dimmer offset."
 msgid "The dimmer max dim value."
-msgstr "Compensação do dimmer."
+msgstr "Valor máximo do dimmer."
 
 #: views/modals/relay.html:135
-#, fuzzy
-#| msgid "Enter a valid number."
 msgid "Please enter valid number"
-msgstr "Digite um número válido."
+msgstr "Insira um número válido"
 
 #: views/modals/sensor.html:12
 msgid "Sensor settings"
@@ -2998,20 +2980,16 @@ msgid "Enter the MQTT server address name or ip"
 msgstr "Insira o endereço do servidor MQTT ou seu IP"
 
 #: views/modals/service.html:356
-#, fuzzy
-#| msgid "Enter the SMTP server password"
 msgid "Enter the MQTT server password"
-msgstr "Insira a senha do servidor SMTP"
+msgstr "Insira a senha do servidor MQTT"
 
 #: views/modals/service.html:335
 msgid "Enter the MQTT server port number"
 msgstr "Insira a porta do servidor MQTT"
 
 #: views/modals/service.html:347
-#, fuzzy
-#| msgid "Enter the SMTP server username"
 msgid "Enter the MQTT server username"
-msgstr "Insira o nome de usuário no servidor SMTP"
+msgstr "Insira o nome de usuário no servidor MQTT"
 
 #: views/modals/area.html:479
 msgid "Enter the offset"
