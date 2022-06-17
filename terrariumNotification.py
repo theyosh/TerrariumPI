@@ -1330,4 +1330,4 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
     )
 
     if r.status_code != 200:
-      logger.error(f'Error sending Pusover message \'{subject}\' with status code: {r.status_code}')
+      logger.error(f'Error sending Pushover message \'{subject}\' with status code: {r.status_code}')

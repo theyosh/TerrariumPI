@@ -108,9 +108,7 @@ class terrariumEngine(object):
     startup_message = f'Starting up TerrariumPI {self.version} ...'
     self.notification.broadcast(startup_message, startup_message, self.settings['profile_image'])
 
-#    self.notification.set_profile_image(self.get_profile_image())
-
-    # Load Webserver, as we need it for websocket communication (even when the webserver is not yet started)
+    # Load Web server, as we need it for websocket communication (even when the web server is not yet started)
     self.webserver = terrariumWebserver(self)
 
     # Loading calendar
@@ -160,9 +158,6 @@ class terrariumEngine(object):
     logger.info(startup_message)
     self.notification.broadcast(startup_message, startup_message, self.settings['profile_image'])
 
-
-#    self.pool = futures.ThreadPoolExecutor()
-
     # Return console logging back to 'normal'
     terrariumLogging.logging.getLogger().handlers[0].setLevel(old_log_level)
     self.__engine['logtail'] = threading.Thread(target=self.__log_tailing)
@@ -171,7 +166,7 @@ class terrariumEngine(object):
     self.__engine['logtail'].start()
     self.__engine['thread'].start()
 
-    # Start the webserver. This will be ending by pressing Ctrl-C or sending kill -INT {PID}
+    # Start the web server. This will be ending by pressing Ctrl-C or sending kill -INT {PID}
     self.webserver.start()
 
   def restart(self):
@@ -431,8 +426,6 @@ class terrariumEngine(object):
       update_ok = True
 
     elif issubclass(item, terrariumEnclosure):
-      #self.enclosures[data['id']].setup = data['setup']
-
       update_ok = True
 
     elif issubclass(item, terrariumArea):
@@ -441,7 +434,6 @@ class terrariumEngine(object):
       self.enclosures[data['enclosure']].areas[data['id']].load_setup(data['setup'])
 
       update_ok = True
-
 
     return update_ok
 
@@ -537,7 +529,7 @@ class terrariumEngine(object):
               address   = sensor.address
             )
 
-          # Create a new sensordata entry, so we have at least one sensor value
+          # Create a new sensor data entry, so we have at least one sensor value
           new_sensor.update(value)
 
         # Store the hardware sensor in memory, so we can benefit from the shared cached data for sensors with multiple sensor types
@@ -708,11 +700,6 @@ class terrariumEngine(object):
           except terrariumRelayLoadingException as ex:
             logger.error(f'Error loading relay {relay} with error: {ex.message}.')
             continue
-
-        # else:
-        #   logger.debug(f'Updated already loaded {relay}.')
-        #   # Update existing relay with new address
-        #   self.relays[relay.id].address = relay.address
 
         # Take a measurement from the relay
         value = self.relays[relay.id].update()
@@ -1130,31 +1117,8 @@ class terrariumEngine(object):
         pool.submit(self._update_webcams)
         pool.submit(self.__update_checker)
 
-      # update_threads = {}
-      # # Sensors
-      # #update_threads['sensors'] = threading.Thread(target=self._update_sensors)
-      # # Relays
-      # update_threads['relays']  = threading.Thread(target=self._update_relays)
-      # # Buttons
-      # update_threads['buttons'] = threading.Thread(target=self._update_buttons)
-      # # Webcams
-      # update_threads['webcams'] = threading.Thread(target=self._update_webcams)
-      # # Version check
-      # update_threads['version'] = threading.Thread(target=self.__update_checker)
-
-      # for updater in update_threads:
-      #   update_threads[updater].start()
-
-      # # Wait till sensors and buttons all updates are done before continue
-      # for updater in ['buttons','relays']:
-      #   update_threads[updater].join()
-
       # Run encounter/environment updates
       self._update_enclosures()
-
-      # # Wait for all threads to end
-      # for updater in update_threads:
-      #   update_threads[updater].join()
 
       self.motd()
 
@@ -1513,7 +1477,6 @@ class terrariumEngine(object):
       self.meross_cloud.stop()
 
     shutdown_message = f'Stopped TerrariumPI {self.version} after running for {terrariumUtils.format_uptime(time.time()-self.starttime)}. Bye bye.'
-    #f'Shutdown TerrariumPI {self.version} done. Bye bye ...'
     self.notification.broadcast(shutdown_message, shutdown_message, self.settings['profile_image'])
     self.notification.stop()
 
@@ -1523,7 +1486,7 @@ class terrariumEngine(object):
 
   def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
     # Two events:
-    # 1. When it happend
+    # 1. When it happened
     # 2. Reminder for next time
 
     current_time = datetime.date.today()

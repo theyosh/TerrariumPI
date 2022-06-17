@@ -40,7 +40,6 @@ class classproperty(property):
 class terrariumAsync(terrariumSingleton):
   def __init__(self):
     def __run():
-#      asyncio.set_event_loop(self.async_loop)
       self.async_loop.run_until_complete(self._keep_running())
       self.async_loop.close()
 
@@ -457,7 +456,6 @@ class terrariumUtils():
         pass
 
     return logline
-
 
   @staticmethod
   def clean_address(address):
