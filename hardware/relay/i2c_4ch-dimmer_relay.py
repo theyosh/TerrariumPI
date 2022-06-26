@@ -6,7 +6,7 @@ import smbus2
 
 class terrariumDimmerI2C4CH(terrariumRelayDimmer):
   HARDWARE = 'i2c_4ch-dimmer'
-  NAME = 'I2C 4Channel AC dimmer'
+  NAME = 'I2C 4Channel LED AC dimmer'
 
   def _load_hardware(self):
     self.state = 0

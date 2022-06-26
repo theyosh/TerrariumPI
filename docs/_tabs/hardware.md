@@ -52,6 +52,10 @@ Run the command `i2cdetect -y 1` in order to see what is connected to your I2C b
 70: 70 -- -- -- -- -- -- --
 ```
 
+### I2C Multiplexer
+
+With an [I2C multiplexer](/TerrariumPI/hardware/i2c-multiplexer/) you can add more I2C busses to TerrariumPI. Support for I2C multiplexers depends on the support in the OS. For now there is support for pca9542 (2 channel), pca9545 (4 channel), and pca9548 (8 channel) muxes.
+
 ### I2C IO Expander
 
 There is support for two I2C IO Expanders so you can have extra GPIO relays or GPIO buttons if needed. This will update the GPIO address to:\
