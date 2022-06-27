@@ -9,7 +9,7 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
   NAME = 'I2C 4Channel LED AC dimmer'
 
   def _load_hardware(self):
-    self.state = 0
+    self._dimmer_state = 0
     # address is expected as `[relay_number],[i2c_address],[i2c_bus (optional)]`
     address = self.address.split(',')
     relay_nr = int(address[0])
@@ -37,9 +37,9 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
       # Set dim value
       bus.write_byte(self.device[1], 100 - state)
       # Keep copy for readout
-      self.state = state
+      self._dimmer_state = state
 
     return True
 
   def _get_hardware_value(self):
-    return self.state
+    return self._dimmer_state
