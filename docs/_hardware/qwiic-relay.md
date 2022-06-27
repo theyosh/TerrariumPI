@@ -8,7 +8,7 @@ image:
   src: /assets/img/Qwiic_Relay.webp
   alt: "Qwiic Relays header image"
 
-device_address: "[relay_number],[I2C Address](/TerrariumPI/hardware#i2c-bus) <br />Ex: `1,0x3f`"
+device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `1,0x3f`"
 device_url : https://www.sparkfun.com/search/results?term=Qwiic+relay
 ---
 

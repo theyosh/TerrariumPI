@@ -8,7 +8,7 @@ image:
   src: /assets/img/i2c_4ch-dimmer.webp
   alt: "I2C 4Channels LED AC Dimmer header image"
 
-device_address: "&gt;relay_number&lt;,&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `1,0x70`"
+device_address: "&lt;relay_number&gt;,&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `1,0x70`"
 device_url : https://www.tindie.com/products/bugrovs2012/i2c-4ch-ac-led-dimmer-module/
 ---
 

@@ -9,7 +9,7 @@ image:
   alt: "Sensirion SHT3X sensor header image"
 
 device_types: [temperature, humidity]
-device_address: "[I2C Address](/TerrariumPI/hardware#i2c-bus) <br />Ex: `0x44`"
+device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x44`"
 device_url: http://www.pibits.net/code/raspberry-pi-sht31-sensor-example.php
 ---
 
