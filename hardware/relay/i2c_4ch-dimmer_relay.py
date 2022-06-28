@@ -35,7 +35,7 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
       # Select channel
       bus.write_byte(self.device[1], self.device[0])
       # Set dim value
-      bus.write_byte(self.device[1], 100 - state)
+      bus.write_byte(self.device[1], int(100.0 - state))
       # Keep copy for readout
       self._dimmer_state = state
 
