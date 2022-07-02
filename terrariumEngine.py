@@ -211,7 +211,7 @@ class terrariumEngine(object):
 
   @property
   def active_language(self):
-    return self.settings['language']
+    return self.settings['language'].replace('-','_')
 
   # -=NEW=-
   def load_settings(self):
@@ -297,7 +297,7 @@ class terrariumEngine(object):
     logger.info(f'Loaded {len(settings)} settings in {time.time()-start:.2f} seconds.')
 
     # Loading active language
-    gettext.translation('terrariumpi', 'locales/', languages=[self.settings['language']]).install()
+    gettext.translation('terrariumpi', 'locales/', languages=[self.active_language]).install()
 
     # Loading git data
     gitversion = None
@@ -1169,7 +1169,7 @@ class terrariumEngine(object):
 
   def motd(self):
     # Enable translations
-    _ = terrariumUtils.get_translator(self.settings['language'])
+    _ = terrariumUtils.get_translator(self.active_language)
 
     motd_data = {}
 

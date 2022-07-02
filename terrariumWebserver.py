@@ -48,7 +48,7 @@ class terrariumWebserver(object):
     self.api           = terrariumAPI(self)
 
     # Load language
-    gettext.translation('terrariumpi', 'locales/', languages=[self.engine.settings['language']]).install()
+    gettext.translation('terrariumpi', 'locales/', languages=[self.engine.active_language]).install()
 
     # Load the routes
     self.__routes()
@@ -131,7 +131,7 @@ class terrariumWebserver(object):
     # Variables
     variables = {
       'authenticated' : int(self.engine.settings['always_authenticate']) == -1 or authenticated,
-      'lang'          : self.engine.settings['language'],
+      'lang'          : self.engine.active_language,
       'title'         : self.engine.settings['title'],
       'version'       : self.engine.settings['version'],
       'template'      : template,

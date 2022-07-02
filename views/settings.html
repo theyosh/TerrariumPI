@@ -472,6 +472,8 @@
           jQuery.each(item.value, function(index, value) {
             field.append(jQuery('<option>').attr('value',value.id).prop('selected',true).text(value.name)).trigger('change');
           });
+        } else if ('language' == item.id ) {
+          field.val(item.value.replace('-','_')).trigger('change');
         } else {
           field.val(item.value).trigger('change');
         }
