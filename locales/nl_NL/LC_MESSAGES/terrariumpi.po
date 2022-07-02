@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2022-07-02 11:57+CEST\n"
-"PO-Revision-Date: 2022-03-21 11:21+0000\n"
+"PO-Revision-Date: 2022-07-02 11:39+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2987,20 +2987,16 @@ msgid "Enter the MQTT server address name or ip"
 msgstr "Voer de adresnaam of ip van de MQTT-server in"
 
 #: views/modals/service.html:356
-#, fuzzy
-#| msgid "Enter the SMTP server password"
 msgid "Enter the MQTT server password"
-msgstr "Voer het SMTP-serverwachtwoord in"
+msgstr "Voer het MQTT-serverwachtwoord in"
 
 #: views/modals/service.html:335
 msgid "Enter the MQTT server port number"
 msgstr "Voer het MQTT-serverpoortnummer in"
 
 #: views/modals/service.html:347
-#, fuzzy
-#| msgid "Enter the SMTP server username"
 msgid "Enter the MQTT server username"
-msgstr "Voer de gebruikersnaam van de SMTP-server in"
+msgstr "Voer de gebruikersnaam van de MQTT-server in"
 
 #: views/modals/area.html:479
 msgid "Enter the offset"
