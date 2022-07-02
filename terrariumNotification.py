@@ -24,6 +24,7 @@ from gevent import sleep
 from operator import itemgetter
 from threading import Thread, Timer
 from base64 import b64encode
+from pathlib import Path
 
 from terrariumDatabase import NotificationMessage, NotificationService
 from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
@@ -319,7 +320,16 @@ class terrariumNotification(terrariumSingleton):
 
   @property
   def profile_image(self):
-    return None if self.engine is None else self.engine.settings['profile_image']
+    image = None
+
+    if self.engine is not None:
+      try:
+        Path(self.engine.settings['profile_image']).exists()
+        image = self.engine.settings['profile_image']
+      except FileNotFoundError:
+        pass
+
+    return image
 
   def message(self, message_type, data = None, files = []):
     if message_type not in self.__MESSAGES:
@@ -546,14 +556,20 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
                         subject   = subject,
                         mail_from = ('TerrariumPI', re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE)))
 
-        with open(self.setup['profile_image'],'rb') as fp:
-          profile_image = fp.read()
-          email_message.attach(filename=os.path.basename(self.setup['profile_image']), content_disposition='inline', data=profile_image)
+        try:
+          with open(self.setup['profile_image'],'rb') as fp:
+            profile_image = fp.read()
+            email_message.attach(filename=os.path.basename(self.setup['profile_image']), content_disposition='inline', data=profile_image)
+        except FileNotFoundError:
+          pass
 
         for attachment in attachments:
-          with open(attachment,'rb') as fp:
-            attachment_data = fp.read()
-            email_message.attach(filename=os.path.basename(attachment), data=attachment_data)
+          try:
+            with open(attachment,'rb') as fp:
+              attachment_data = fp.read()
+              email_message.attach(filename=os.path.basename(attachment), data=attachment_data)
+          except FileNotFoundError:
+            pass
 
         smtp_settings = {'host': self.setup['address'],
                          'port': self.setup['port']}
@@ -593,9 +609,12 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
       data['files'] = []
 
       for attachment in attachments:
-        with open(attachment,'rb') as fp:
-          attachment_data = fp.read()
-          data['files'].append({'name' : os.path.basename(attachment), 'data' : b64encode(attachment_data).decode('utf-8')})
+        try:
+          with open(attachment,'rb') as fp:
+            attachment_data = fp.read()
+            data['files'].append({'name' : os.path.basename(attachment), 'data' : b64encode(attachment_data).decode('utf-8')})
+        except FileNotFoundError:
+          pass
 
     r = requests.post(self.setup['address'], json=data)
     if r.status_code != 200:
@@ -1321,8 +1340,11 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
       data['sound'] = 'siren'
 
     attachment = None
-    if len(attachments) > 0:
-      attachment = {'attachment' : (os.path.basename(attachments[0]), open(attachments[0],'rb'), 'image/jpeg')}
+    try:
+      if len(attachments) > 0:
+        attachment = {'attachment' : (os.path.basename(attachments[0]), open(attachments[0],'rb'), 'image/jpeg')}
+    except FileNotFoundError:
+      pass
 
     r = requests.post(self.setup['address'],
       data = data,
