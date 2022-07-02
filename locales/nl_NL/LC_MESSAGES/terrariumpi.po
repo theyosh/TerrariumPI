@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-08-26 11:21+0000\n"
+"PO-Revision-Date: 2022-07-03 11:42+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "3-x-y-z/nl/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -3593,7 +3593,7 @@ msgstr "Dimmer aan percentage"
 
 #: views/switch_settings.tpl:58 views/switch_settings.tpl:182
 msgid "Dimmer off duration"
-msgstr "Dimmer uit in seconden"
+msgstr "Dimmer uit tijdsduur"
 
 #: views/switch_settings.tpl:61 views/switch_settings.tpl:186
 msgid "Dimmer off percentage"
