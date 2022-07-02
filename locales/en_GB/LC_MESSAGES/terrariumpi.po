@@ -1409,8 +1409,8 @@ msgid "Dimmer on duration"
 msgstr "Dimmer on duration"
 
 #: views/modals/area.html:994
-msgid "Dimmer of duration"
-msgstr "Dimmer of duration"
+msgid "Dimmer off duration"
+msgstr "Dimmer off duration"
 
 #: views/modals/area.html:1004
 msgid ""

@@ -1499,7 +1499,7 @@ msgid "Dimmer on duration"
 msgstr "Czas włączenia ściemniacza"
 
 #: views/modals/area.html:994
-msgid "Dimmer of duration"
+msgid "Dimmer off duration"
 msgstr "Czas wyłączenia ściemniacza"
 
 #: views/modals/area.html:1004

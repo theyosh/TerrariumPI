@@ -1660,7 +1660,7 @@ msgstr "Dimmer på varighet"
 #: views/modals/area.html:994
 #, fuzzy
 #| msgid "Dimmer off duration"
-msgid "Dimmer of duration"
+msgid "Dimmer off duration"
 msgstr "Dimmer av varighet"
 
 #: views/modals/area.html:1004

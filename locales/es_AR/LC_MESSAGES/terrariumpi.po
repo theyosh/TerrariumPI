@@ -1582,7 +1582,7 @@ msgstr "Duración de la atenuación"
 #: views/modals/area.html:994
 #, fuzzy
 #| msgid "Dimmer off duration"
-msgid "Dimmer of duration"
+msgid "Dimmer off duration"
 msgstr "Duración del atenuador apagado"
 
 #: views/modals/area.html:1004

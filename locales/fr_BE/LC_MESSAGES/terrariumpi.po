@@ -1652,7 +1652,7 @@ msgstr "Dimmer ouvert durée"
 #: views/modals/area.html:994
 #, fuzzy
 #| msgid "Dimmer off duration"
-msgid "Dimmer of duration"
+msgid "Dimmer off duration"
 msgstr "Dimmer éteint durée"
 
 #: views/modals/area.html:1004

@@ -1515,7 +1515,7 @@ msgid "Dimmer on duration"
 msgstr "調光器の「オン」期間"
 
 #: views/modals/area.html:994
-msgid "Dimmer of duration"
+msgid "Dimmer off duration"
 msgstr "調光器の「オフ」期間"
 
 #: views/modals/area.html:1004
