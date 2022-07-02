@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2022-05-17 11:58+CEST\n"
+"POT-Creation-Date: 2022-07-02 11:57+CEST\n"
 "PO-Revision-Date: 2021-12-17 22:01+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Spanish (Argentina) <https://weblate.theyosh.nl/projects/"
@@ -62,109 +62,109 @@ msgstr "Humedad"
 msgid "pH"
 msgstr "pH"
 
-#: terrariumEngine.py:52
+#: terrariumEngine.py:53
 msgid "temperature"
 msgstr "temperatura"
 
-#: terrariumEngine.py:53
+#: terrariumEngine.py:54
 msgid "distance"
 msgstr "distancia"
 
-#: terrariumEngine.py:54
+#: terrariumEngine.py:55
 msgid "altitude"
 msgstr "altitud"
 
-#: terrariumEngine.py:55
+#: terrariumEngine.py:56
 msgid "pressure"
 msgstr "presión"
 
-#: terrariumEngine.py:56
+#: terrariumEngine.py:57
 msgid "humidity"
 msgstr "humedad relativa"
 
-#: terrariumEngine.py:57
+#: terrariumEngine.py:58
 msgid "moisture"
 msgstr "humedad"
 
-#: terrariumEngine.py:58
+#: terrariumEngine.py:59
 msgid "conductivity"
 msgstr "conductividad"
 
-#: terrariumEngine.py:59
+#: terrariumEngine.py:60
 msgid "ph"
 msgstr "pH"
 
-#: terrariumEngine.py:60
+#: terrariumEngine.py:61
 msgid "light"
 msgstr "claro"
 
-#: terrariumEngine.py:61
+#: terrariumEngine.py:62
 msgid "uva"
 msgstr "uva"
 
-#: terrariumEngine.py:62
+#: terrariumEngine.py:63
 msgid "uvb"
 msgstr "uvb"
 
-#: terrariumEngine.py:63
+#: terrariumEngine.py:64
 msgid "uvi"
 msgstr "uvi"
 
-#: terrariumEngine.py:64
+#: terrariumEngine.py:65
 msgid "fertility"
 msgstr "Fertilidad"
 
-#: terrariumEngine.py:65
+#: terrariumEngine.py:66
 msgid "co2"
 msgstr "CO2"
 
-#: terrariumEngine.py:66
+#: terrariumEngine.py:67
 msgid "volume"
 msgstr "volumen"
 
-#: terrariumEngine.py:67
+#: terrariumEngine.py:68
 msgid "watertank"
 msgstr "tanque de agua"
 
-#: terrariumEngine.py:68
+#: terrariumEngine.py:69
 msgid "windspeed"
 msgstr "velocidad del viento"
 
-#: terrariumEngine.py:69
+#: terrariumEngine.py:70
 msgid "water_flow"
 msgstr ""
 
-#: terrariumEngine.py:70
+#: terrariumEngine.py:71
 msgid "wattage"
 msgstr "Vataje"
 
-#: terrariumEngine.py:1218 views/dashboard.html:18 views/status.html:112
+#: terrariumEngine.py:1193 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
 msgstr "Tiempo de actividad"
 
-#: terrariumEngine.py:1224
+#: terrariumEngine.py:1199
 msgid "System load"
 msgstr "Carga del sistema"
 
-#: terrariumEngine.py:1230 views/status.html:44
+#: terrariumEngine.py:1205 views/status.html:44
 msgid "CPU Temperature"
 msgstr "Temperatura CPU"
 
-#: terrariumEngine.py:1236
+#: terrariumEngine.py:1211
 msgid "Storage"
 msgstr "Almacenamiento"
 
-#: terrariumEngine.py:1242
+#: terrariumEngine.py:1217
 msgid "Memory"
 msgstr "memoria"
 
-#: terrariumEngine.py:1263
+#: terrariumEngine.py:1238
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "El tipo de sensor"
 
-#: terrariumEngine.py:1439
+#: terrariumEngine.py:1414
 msgid "last update"
 msgstr "última actualización"
 
