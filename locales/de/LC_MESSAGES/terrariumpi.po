@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2022-07-02 11:57+CEST\n"
-"PO-Revision-Date: 2022-04-16 22:39+0000\n"
-"Last-Translator: deraragorn <felix.humpert@gmail.com>\n"
-"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/de/>\n"
+"PO-Revision-Date: 2022-07-02 11:39+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2490,7 +2490,6 @@ msgid "Temperature type"
 msgstr "Temperaturtyp"
 
 #: views/settings.html:156
-#, fuzzy
 msgid "Celsius"
 msgstr "Celsius"
 
@@ -2988,20 +2987,16 @@ msgid "Enter the MQTT server address name or ip"
 msgstr "Geben Sie den MQTT-Servernamen oder die IP-Adresse ein"
 
 #: views/modals/service.html:356
-#, fuzzy
-#| msgid "Enter the SMTP server password"
 msgid "Enter the MQTT server password"
-msgstr "Geben Sie das SMTP-Serverkennwort ein"
+msgstr "Geben Sie das MQTT-Serverkennwort ein"
 
 #: views/modals/service.html:335
 msgid "Enter the MQTT server port number"
 msgstr "Geben Sie die Portnummer des MQTT-Servers ein"
 
 #: views/modals/service.html:347
-#, fuzzy
-#| msgid "Enter the SMTP server username"
 msgid "Enter the MQTT server username"
-msgstr "Geben Sie den Benutzernamen des SMTP-Servers ein"
+msgstr "Geben Sie den Benutzernamen des MQTT-Servers ein"
 
 #: views/modals/area.html:479
 msgid "Enter the offset"
