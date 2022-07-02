@@ -318,7 +318,7 @@ class terrariumAPI(object):
       audiofile_data = audiofile.to_dict()
       return audiofile_data
     except orm.core.ObjectNotFound as ex:
-      raise HTTPError(status=404, body=f'Audiofile with id {audiofile} does not exists.')
+      raise HTTPError(status=404, body=f'Audio file with id {audiofile} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting audiofile {audiofile} detail. {ex}')
 
@@ -352,7 +352,7 @@ class terrariumAPI(object):
 
       return {'data' : data}
     except Exception as ex:
-      raise HTTPError(status=500, body=f'Error getting audiofile {audiofile} detail. {ex}')
+      raise HTTPError(status=500, body=f'Error getting audio file {audiofile} detail. {ex}')
 
   @orm.db_session
   def audiofile_delete(self, audiofile):
@@ -363,7 +363,7 @@ class terrariumAPI(object):
       orm.commit()
       return {'message' : message}
     except orm.core.ObjectNotFound as ex:
-      raise HTTPError(status=404, body=f'Audiofile with id {audiofile} does not exists.')
+      raise HTTPError(status=404, body=f'Audio file with id {audiofile} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting audiofile {audiofile}. {ex}')
 

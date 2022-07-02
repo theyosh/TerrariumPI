@@ -497,7 +497,7 @@ class terrariumEngine(object):
           logger.warning(f'{sensor} had problems reading a new value during startup in {time.time()-start:.2f} seconds. Will be updated in the next round.')
 
         elif not sensor.limit_min <= value <= sensor.limit_max:
-          logger.warning(f'Measurement for sensor {sensor} of {value:.2f}{self.units[sensor.type]} is outside valide range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]} during startup in {time.time()-start:.2f} seconds. Will be updated in the next round.')
+          logger.warning(f'Measurement for sensor {sensor} of {value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]} during startup in {time.time()-start:.2f} seconds. Will be updated in the next round.')
 
         else:
           # Store the new measurement value in the database
@@ -587,7 +587,7 @@ class terrariumEngine(object):
       new_value += sensor.offset
 
       if not sensor.limit_min <= new_value <= sensor.limit_max:
-        logger.error(f'Measurement for sensor {sensor} of {new_value:.2f}{self.units[sensor.type]} is outside valide range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]}. Skipping this update.')
+        logger.error(f'Measurement for sensor {sensor} of {new_value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]}. Skipping this update.')
         continue
 
       if current_value is not None and sensor.max_diff != 0 and abs(current_value - new_value) > sensor.max_diff:
@@ -734,7 +734,7 @@ class terrariumEngine(object):
               address   = relay.address
             )
 
-          # Create a new relaydata entry, so we have at least one relay value
+          # Create a new relay data entry, so we have at least one relay value
           new_relay.update(value)
 
         # Store the hardware relay in memory, so we can benefit from the shared cached data for relays with multiple relay types
@@ -1106,7 +1106,7 @@ class terrariumEngine(object):
       if self.weather is not None:
         self.weather.update()
 
-      # Systemstats (needs weather update)
+      # System stats (needs weather update)
       self.webserver.websocket_message('systemstats', self.system_stats())
 
       # Run updates in parallel and wait till all done

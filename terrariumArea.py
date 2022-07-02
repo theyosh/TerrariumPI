@@ -381,7 +381,7 @@ class terrariumArea(object):
       if 'at' == variation.get('when'):
         # Format datetime object to a time object
 
-        # TODO: Need to check if this will interfear with utc timestamps from history...
+        # TODO: Need to check if this will interfere with utc timestamps from history...
         period_timestamp = datetime.datetime.fromtimestamp(int(variation.get('period'))).strftime('%H:%M')
 
       elif 'after' == variation.get('when'):
