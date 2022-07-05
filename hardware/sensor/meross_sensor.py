@@ -20,7 +20,7 @@ class terrariumMS100Sensor(terrariumSensor):
     if '' == EMAIL or '' == PASSWORD:
       raise terrariumSensorLoadingException('Meross cloud is not enabled.')
 
-    self._cache = terrariumCache()
+    self._tp_cache = terrariumCache()
 
     return self.address
 
@@ -33,7 +33,7 @@ class terrariumMS100Sensor(terrariumSensor):
       return
 
     try:
-      return self._cache.get_data(self.address)
+      return self._tp_cache.get_data(self.address)
     except Exception as ex:
       logger.error(f'Error getting new data for {self}: {ex}')
       return None
