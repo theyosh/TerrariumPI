@@ -28,3 +28,6 @@
 [submodule "3rdparty/8relind-rpi"]
 	path = 3rdparty/8relind-rpi
 	url = https://github.com/SequentMicrosystems/8relind-rpi.git
+[submodule "3rdparty/AtlasScientific"]
+	path = 3rdparty/AtlasScientific
+	url = https://github.com/AtlasScientific/Raspberry-Pi-sample-code.git

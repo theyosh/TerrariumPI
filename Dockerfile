@@ -59,6 +59,7 @@ RUN git clone https://github.com/SequentMicrosystems/4relay-rpi.git --depth 1 "3
   git clone https://github.com/fancyapps/fancybox.git --depth 1 "static/assets/plugins/fancybox" && \
   git clone https://github.com/mapshakers/leaflet-icon-pulse.git --depth 1 "static/assets/plugins/leaflet.icon-pulse" && \
   git clone https://github.com/ebrelsford/Leaflet.loading.git --depth 1 "static/assets/plugins/leaflet.loading" && \
+  git clone https://github.com/AtlasScientific/Raspberry-Pi-sample-code.git --depth 1 "3rdparty/AtlasScientific" && \
   rm -Rf 3rdparty/Bright-Pi/Documents && \
   find . -type d -name ".git" -exec rm -r {} +
 
