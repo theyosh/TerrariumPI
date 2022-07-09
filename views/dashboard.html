@@ -381,7 +381,6 @@
           });
 
           jQuery('#accordion .card-title a:first').trigger('click');
-          loadSparkLines();
         });
 
         jQuery.get({url: '{{ url_for("api:sensor_list") }}', cache: '1' != Cookies.get('no-cache')}).then(function(data) {
@@ -450,26 +449,6 @@
         });
       },500);
     });
-
-    function loadSparkLines() {
-      let darkmode = jQuery('body').hasClass('dark-mode');
-      jQuery('td[id^="area_history_"]').each(function(counter, area){
-        let area_id = jQuery(area).attr('id').replace('area_history_','');
-        jQuery.get({url: '{{ url_for("api:area_history", area="_") }}'.replace('_',area_id), cache: '1' != Cookies.get('no-cache')}).then(function(data) {
-          var sparkline = new Sparkline($('#area_history_' + area_id)[0], {
-            width: 300,
-            height: 20,
-            lineWidth: 1,
-            dotRadius: 2,
-            lineColor: ( darkmode ? 'white' : 'black'),
-            endColor:  ( darkmode ? 'white' : 'black'),
-            fillBelow: false
-          });
-          sparkline.draw(data.data.map(item => item.value));
-          sparkline.canvas.style.width = '100%';
-        });
-      });
-    }
   </script>
 </div>
 {% endblock content %}
