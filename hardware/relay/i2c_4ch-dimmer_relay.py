@@ -13,10 +13,10 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
     # address is expected as `[relay_number],[i2c_address],[i2c_bus (optional)]`
     address = self.address.split(',')
     relay_nr = int(address[0])
-    if not (relay_nr > 0 and relay_nr <= 4):
+    if not (relay_nr >= 1 and relay_nr <= 4):
       raise terrariumRelayLoadingException('Invalid relay number')
 
-    address[0] = int(f'0x{81-relay_nr}',16)
+    address[0] = 0x7F + relay_nr
 
     if not address[1].startswith('0x'):
       address[1] = '0x' + address[1]
