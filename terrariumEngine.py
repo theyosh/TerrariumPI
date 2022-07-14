@@ -472,7 +472,7 @@ class terrariumEngine(object):
   def __load_existing_sensors(self):
     self.sensors = {}
     with orm.db_session():
-      for sensor in Sensor.select(lambda s: s.id not in self.settings['exclude_ids']):
+      for sensor in Sensor.select(lambda s: s.id not in self.settings['exclude_ids']).order_by(Sensor.address):
         start = time.time()
         if sensor.id not in self.sensors:
           logger.debug(f'Loading {sensor}.')
@@ -679,7 +679,7 @@ class terrariumEngine(object):
 
     with orm.db_session():
       # TODO: Fix Meross better!!  and r.hardware != 'meross'
-      for relay in Relay.select(lambda r: r.id not in self.settings['exclude_ids']):
+      for relay in Relay.select(lambda r: r.id not in self.settings['exclude_ids']).order_by(Relay.address):
         start = time.time()
         if relay.id not in self.relays:
           logger.debug(f'Loading {relay}.')
@@ -836,7 +836,7 @@ class terrariumEngine(object):
     self.buttons = {}
 
     with orm.db_session():
-      for button in Button.select(lambda b: b.id not in self.settings['exclude_ids']):
+      for button in Button.select(lambda b: b.id not in self.settings['exclude_ids']).order_by(Button.address):
         start = time.time()
         if button.id not in self.buttons:
           logger.debug(f'Loading {button}.')
@@ -945,7 +945,7 @@ class terrariumEngine(object):
     self.webcams = {}
 
     with orm.db_session():
-      for webcam in Webcam.select(lambda w: w.id not in self.settings['exclude_ids']):
+      for webcam in Webcam.select(lambda w: w.id not in self.settings['exclude_ids']).order_by(Webcam.address):
         start = time.time()
         if webcam.id not in self.webcams:
           logger.debug(f'Loading {webcam}.')

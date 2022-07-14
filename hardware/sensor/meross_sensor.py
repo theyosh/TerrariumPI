@@ -13,7 +13,7 @@ class terrariumMS100Sensor(terrariumSensor):
   TYPES    = ['temperature','humidity']
   NAME     = 'Meross MS100'
 
-  def __is_cloud_enabled(self):
+  def is_cloud_enabled():
     EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL',''))
     PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD',''))
 
@@ -23,21 +23,29 @@ class terrariumMS100Sensor(terrariumSensor):
     return True
 
   def _load_hardware(self):
-    if self.__is_cloud_enabled():
+    if terrariumMS100Sensor.is_cloud_enabled():
       self.__state_cache = terrariumCache()
+      try:
+        self.__state_cache.get_data(self.address)
+      except Exception:
+        raise terrariumSensorLoadingException('Sensor is not found at the Meross cloud.')
+
       return self.address
 
   def _get_data(self):
-    if self.__is_cloud_enabled():
-      if not hasattr(self,'__state_cache'):
-        logger.warning(f'Strange bug. Lost data cache, so we re-connect it. {self}')
-        self.__state_cache = terrariumCache()
-
+    if terrariumMS100Sensor.is_cloud_enabled():
       try:
         return self.__state_cache.get_data(self.address)
-      except Exception as ex:
-        logger.error(f'Error getting new data for {self}: {ex}')
-        return None
+
+      except Exception:
+        logger.warning(f'Strange bug... just ignore for now: {self}')
+        try:
+          self.__state_cache = terrariumCache()
+          return self.__state_cache.get_data(self.address)
+
+        except Exception:
+          logger.error(f'Error getting new data for {self}: {ex}')
+          return None
 
   @staticmethod
   def _scan_sensors(unit_value_callback = None, trigger_callback = None):
