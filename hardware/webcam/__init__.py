@@ -296,13 +296,13 @@ class terrariumWebcam(object):
       text_height = text_top = None
       linecounter = 0
       for line in text:
-        text_size = draw.textsize(line, font)
+        text_size = draw.textbbox((0,0), line, font, anchor='lt')
         if text_height is None:
-          text_height = len(text) * ( text_size[1])
+          text_height = len(text) * ( text_size[3] + 6) # Add some top-bottom padding (+6)
           text_top = (im.size[1] - text_height) / 2
 
         draw.text(
-          ((im.size[0] - text_size[0]) / 2, (text_top + (linecounter * text_height)) / 2),
+          ((im.size[0] - text_size[2]) / 2, (text_top + (linecounter * text_height)) / 2),
           line, font=font, **kwargs)
 
         linecounter += 1
