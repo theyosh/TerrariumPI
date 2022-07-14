@@ -13,17 +13,8 @@ class terrariumMS100Sensor(terrariumSensor):
   TYPES    = ['temperature','humidity']
   NAME     = 'Meross MS100'
 
-  def is_cloud_enabled():
-    EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL',''))
-    PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD',''))
-
-    if EMAIL == '' or PASSWORD == '':
-      raise terrariumSensorLoadingException('Meross cloud is not enabled.')
-
-    return True
-
   def _load_hardware(self):
-    if terrariumMS100Sensor.is_cloud_enabled():
+    if TerrariumMerossCloud.is_enabled:
       self.__state_cache = terrariumCache()
       try:
         self.__state_cache.get_data(self.address)
@@ -33,7 +24,7 @@ class terrariumMS100Sensor(terrariumSensor):
       return self.address
 
   def _get_data(self):
-    if terrariumMS100Sensor.is_cloud_enabled():
+    if TerrariumMerossCloud.is_enabled:
       try:
         return self.__state_cache.get_data(self.address)
 
