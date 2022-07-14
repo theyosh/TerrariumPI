@@ -13,31 +13,31 @@ class terrariumMS100Sensor(terrariumSensor):
   TYPES    = ['temperature','humidity']
   NAME     = 'Meross MS100'
 
-  def _load_hardware(self):
+  def __is_cloud_enabled(self):
     EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL',''))
     PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD',''))
 
-    if '' == EMAIL or '' == PASSWORD:
+    if EMAIL == '' or PASSWORD == '':
       raise terrariumSensorLoadingException('Meross cloud is not enabled.')
 
-    self._tp_cache = terrariumCache()
+    return True
 
-    return self.address
+  def _load_hardware(self):
+    if self.__is_cloud_enabled():
+      self.__state_cache = terrariumCache()
+      return self.address
 
   def _get_data(self):
-    EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL',''))
-    PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD',''))
+    if self.__is_cloud_enabled():
+      if not hasattr(self,'__state_cache'):
+        logger.warning(f'Strange bug. Lost data cache, so we re-connect it. {self}')
+        self.__state_cache = terrariumCache()
 
-    if '' == EMAIL or '' == PASSWORD:
-      logger.error('Meross cloud is not enabled.')
-      return
-
-    try:
-      return self._tp_cache.get_data(self.address)
-    except Exception as ex:
-      logger.error(f'Error getting new data for {self}: {ex}')
-      return None
-
+      try:
+        return self.__state_cache.get_data(self.address)
+      except Exception as ex:
+        logger.error(f'Error getting new data for {self}: {ex}')
+        return None
 
   @staticmethod
   def _scan_sensors(unit_value_callback = None, trigger_callback = None):
@@ -46,7 +46,7 @@ class terrariumMS100Sensor(terrariumSensor):
     EMAIL    = terrariumUtils.decrypt(os.environ.get('MEROSS_EMAIL',''))
     PASSWORD = terrariumUtils.decrypt(os.environ.get('MEROSS_PASSWORD',''))
 
-    if not ('' == EMAIL or '' == PASSWORD):
+    if EMAIL != '' and PASSWORD != '':
 
       cloud = TerrariumMerossCloud(EMAIL,PASSWORD)
       devices = cloud.scan_hardware('sensors')
