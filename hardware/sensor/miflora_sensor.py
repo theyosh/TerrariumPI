@@ -23,7 +23,7 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
     address = self._address
     # Load Bluetooth device and try to load battery and firmware version to check if the connection does work
     with Peripheral(address[0], iface=address[1], timeout=terrariumMiFloraSensor.__MIFLORA_TIMEOUT) as device:
-      data   = device.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY)
+      data = device.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY)
       data = {'battery': data[0], 'firmware' : data[2:].decode('utf8')}
       # Return the device
       return device
