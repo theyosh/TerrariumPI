@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2022-07-02 11:57+CEST\n"
-"PO-Revision-Date: 2022-07-02 11:39+0000\n"
+"PO-Revision-Date: 2022-07-14 21:18+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/nl/>\n"
@@ -740,7 +740,7 @@ msgstr "Sensoren"
 
 #: views/includes/sidebar.html:96
 msgid "New sensor"
-msgstr "Nieuwe sensor"
+msgstr "Nieuw sensor"
 
 #: views/includes/sidebar.html:102
 msgid "Scan sensors"
@@ -754,7 +754,7 @@ msgstr "Schakelaars"
 
 #: views/includes/sidebar.html:125
 msgid "New relay"
-msgstr "Nieuwe schakelaar"
+msgstr "Nieuw schakelaar"
 
 #: views/includes/sidebar.html:131
 msgid "Scan relays"
@@ -762,7 +762,7 @@ msgstr "Scan schakelaars"
 
 #: views/includes/sidebar.html:154
 msgid "New button"
-msgstr "Nieuwe knop"
+msgstr "Nieuw knop"
 
 #: views/includes/sidebar.html:163 views/modals/enclosure.html:71
 #: views/webcams.html:2
@@ -775,7 +775,7 @@ msgstr "Toon"
 
 #: views/includes/sidebar.html:177
 msgid "New webcam"
-msgstr "Nieuwe webcam"
+msgstr "Nieuw webcam"
 
 #: views/includes/sidebar.html:194
 msgid "Files"
@@ -788,7 +788,7 @@ msgstr "Afspeellijsten"
 
 #: views/includes/sidebar.html:206
 msgid "New playlist"
-msgstr "Nieuwe afspeellijst"
+msgstr "Nieuw afspeellijst"
 
 #: views/includes/sidebar.html:223
 msgid "List"
@@ -796,7 +796,7 @@ msgstr "Lijst"
 
 #: views/includes/sidebar.html:229
 msgid "New enclosure"
-msgstr "Nieuwe verblijf"
+msgstr "Nieuw verblijf"
 
 #: views/includes/sidebar.html:235
 msgid "New area"
