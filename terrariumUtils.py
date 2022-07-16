@@ -75,11 +75,11 @@ class terrariumCache(terrariumSingleton):
     logger.debug('Added new cache data with hash: {}. Total in cache: {}'.format(hash_key,len(self.__cache)))
     self.__cleanup()
 
-  def get_data(self,hash_key):
+  def get_data(self, hash_key, default = None):
     if hash_key in self.__cache and self.__cache[hash_key]['expire'] > int(time.time()):
       return self.__cache[hash_key]['data']
 
-    return None
+    return default
 
   def clear_data(self,hash_key):
     if hash_key in self.__cache:
