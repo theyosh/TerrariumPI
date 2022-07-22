@@ -63,29 +63,30 @@ class terrariumRelayDimmerLEDWarrior18(terrariumRelayDimmer):
     return 0
 
   @property
-  def __channel_nr(self):
-    return self.address[0]-1
+  def __relay_nr(self):
+    return self.device[0]-1
 
   def calibrate(self, data):
     super().calibrate(data)
 
-    frequencies = self.__frequencies.get_data(self.__frequencies_key, [self._DIMMER_FREQ,self._DIMMER_FREQ])
+    frequencies = self.device[3].get_data(self.device[4], [self._DIMMER_FREQ,self._DIMMER_FREQ])
     frequency = data.get('dimmer_frequency', self._DIMMER_FREQ)
+
     if '' == frequency or frequency < 0:
       frequency = self._DIMMER_FREQ
 
-    frequencies[self.__channel_nr] = int(frequency)
+    frequencies[self.__relay_nr] = int(frequency)
 
     self.WriteFrequency(frequencies[0],frequencies[1])
 
-    self.__frequencies.set_data(self.__frequencies_key,frequencies,-1)
+    self.device[3].set_data(self.device[4],frequencies,-1)
 
   def _load_hardware(self):
     # address is expected as `[relay_number],[i2c_address],[i2c_bus (optional)]`
     address = self.address.split(',')
     relay_nr = int(address[0])
     if not (relay_nr >= 1 and relay_nr <= 2):
-      raise terrariumRelayLoadingException('Invalid relay number')
+      raise terrariumRelayLoadingException('Invalid relay number.')
 
     address[0] = relay_nr
 
@@ -99,18 +100,20 @@ class terrariumRelayDimmerLEDWarrior18(terrariumRelayDimmer):
     else:
       address[2] = int(address[2])
 
-    self.__frequencies = terrariumCache()
-    self.__frequencies_key = f'{self.HARDWARE}{address[1]}{address[2]}'
+    address.append(terrariumCache())
+    address.append(f'{self.HARDWARE}{address[1]}{address[2]}')
 
+    # self.__frequencies = terrariumCache()
+    # self.__frequencies_key = f'{self.HARDWARE}{address[1]}{address[2]}'
     return address
 
   def _set_hardware_value(self, state):
     pwm = self.ReadPwm16()
-    pwm[self.__channel_nr] = int((float(state) / 100.0) * float(self._DIMMER_DIM))
+    pwm[self.__relay_nr] = int((float(state) / 100.0) * float(self._DIMMER_DIM))
     self.WritePwm16(pwm[0],pwm[1])
     return True
 
   def _get_hardware_value(self):
     pwm = self.ReadPwm16()
 
-    return int((float(pwm[self.__channel_nr]) / float(self._DIMMER_DIM)) * 100)
+    return int((float(pwm[self.__relay_nr]) / float(self._DIMMER_DIM)) * 100)
