@@ -895,8 +895,10 @@ class terrariumAreaLights(terrariumArea):
       duration = tweaks['duration']
       delay = tweaks['delay']
     except Exception as ex:
-      print(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}')
-      print(ex)
+      pass
+
+      # print(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}')
+      # print(ex)
 
     if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
       delay = 0
