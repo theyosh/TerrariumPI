@@ -190,11 +190,12 @@ class Button(db.Entity):
 
 class ButtonHistory(db.Entity):
 
-  button    = orm.Required('Button')
-  timestamp = orm.Required(datetime)
+  button    = orm.PrimaryKey('Button')
+  timestamp = orm.Required(datetime, index=True)
   value     = orm.Required(float)
 
-  orm.PrimaryKey(button, timestamp)
+  # Create a unique index based on button and timestamp
+  orm.composite_key(button, timestamp)
 
 
 class Enclosure(db.Entity):
@@ -395,13 +396,14 @@ class Relay(db.Entity):
 
 class RelayHistory(db.Entity):
 
-  relay     = orm.Required('Relay')
-  timestamp = orm.Required(datetime)
+  relay     = orm.PrimaryKey('Relay')
+  timestamp = orm.Required(datetime, index=True)
   value     = orm.Required(float)
   wattage   = orm.Required(float)
   flow      = orm.Required(float)
 
-  orm.PrimaryKey(relay, timestamp)
+  # Create a unique index based on relay and timestamp
+  orm.composite_key(relay, timestamp)
 
 
 class Sensor(db.Entity):
@@ -504,9 +506,9 @@ class Sensor(db.Entity):
 
 
 class SensorHistory(db.Entity):
-  sensor    = orm.Required('Sensor')
+  sensor    = orm.PrimaryKey('Sensor')
 
-  timestamp = orm.Required(datetime)
+  timestamp = orm.Required(datetime, index=True)
   value     = orm.Required(float)
   limit_min = orm.Required(float)
   limit_max = orm.Required(float)
@@ -515,7 +517,8 @@ class SensorHistory(db.Entity):
 
   exclude_avg = orm.Required(bool, default = False)
 
-  orm.PrimaryKey(sensor, timestamp)
+  # Create a unique index based on sensor and timestamp
+  orm.composite_key(sensor, timestamp)
 
   @property
   def alarm(self):
