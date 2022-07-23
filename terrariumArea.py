@@ -564,8 +564,6 @@ class terrariumArea(object):
     if self.mode == 'disabled':
       # Make it readonly, so sensors and relay changes are still shown
       read_only = True
-    # if not read_only and 'disabled' == self.mode:
-    #   return self.state
 
     start = time.time()
 
