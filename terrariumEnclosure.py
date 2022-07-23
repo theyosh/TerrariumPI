@@ -66,8 +66,6 @@ class terrariumEnclosure(object):
   def main_lights(self):
     for area in self.areas:
       area = self.areas[area]
-      if 'disabled' == area.mode:
-        continue
 
       if area.setup.get('main_lights', False):
         return self.areas[area.id]
@@ -101,7 +99,7 @@ class terrariumEnclosure(object):
         # This area is already processed...
         continue
 
-      area_states[area_id] = self.areas[area_id].update(read_only or 'disabled' == self.areas[area_id].mode)
+      area_states[area_id] = self.areas[area_id].update(read_only)
 
     return area_states
 

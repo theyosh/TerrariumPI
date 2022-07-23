@@ -561,8 +561,9 @@ class terrariumArea(object):
     return True
 
   def update(self, read_only = False):
-    if not read_only and 'disabled' == self.mode:
-      return self.state
+    if self.mode == 'disabled':
+      # Make it readonly, so sensors and relay changes are still shown
+      read_only = True
 
     start = time.time()
 
@@ -895,8 +896,10 @@ class terrariumAreaLights(terrariumArea):
       duration = tweaks['duration']
       delay = tweaks['delay']
     except Exception as ex:
-      print(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}')
-      print(ex)
+      pass
+
+      # print(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}')
+      # print(ex)
 
     if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
       delay = 0
@@ -955,7 +958,7 @@ class terrariumAreaHeater(terrariumArea):
   def update(self, read_only = False):
     super().update(read_only)
 
-    if not read_only and 'disabled' != self.mode and len(self.__dimmers) > 0:
+    if not read_only and self.mode != 'disabled' and len(self.__dimmers) > 0:
       sensor_values  = self.current_value(self.setup['sensors'])
       sensor_average = float(sensor_values['alarm_min'] + sensor_values['alarm_max']) / 2.0
 
