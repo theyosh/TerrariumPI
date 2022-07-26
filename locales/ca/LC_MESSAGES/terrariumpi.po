@@ -6,313 +6,317 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.3.3\n"
 "POT-Creation-Date: 2022-07-02 11:57+CEST\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-07-26 21:09+0000\n"
+"Last-Translator: cmonicob <cmonicob@gmail.com>\n"
+"Language-Team: Catalan <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
 msgid "Lighting"
-msgstr ""
+msgstr "Il·luminació"
 
 #: terrariumArea.py:38
 msgid "Heating"
-msgstr ""
+msgstr "Calefacció"
 
 #: terrariumArea.py:44
 msgid "Cooling"
-msgstr ""
+msgstr "Refrigeració"
 
 #: terrariumArea.py:50
 msgid "Humidity"
-msgstr ""
+msgstr "Humitat"
 
 #: terrariumArea.py:56
 msgid "Water tank"
-msgstr ""
+msgstr "Tanc d'aigua"
 
 #: terrariumArea.py:62 views/includes/sidebar.html:186
 msgid "Audio"
-msgstr ""
+msgstr "Àudio"
 
 #: terrariumArea.py:68
 msgid "CO2"
-msgstr ""
+msgstr "CO2"
 
 #: terrariumArea.py:74
 msgid "Conductivity"
-msgstr ""
+msgstr "Conductivitat"
 
 #: terrariumArea.py:80
 msgid "Fertility"
-msgstr ""
+msgstr "Fertilitat"
 
 #: terrariumArea.py:86
 msgid "Moisture"
-msgstr ""
+msgstr "Humitat del sòl"
 
 #: terrariumArea.py:92
 msgid "pH"
-msgstr ""
+msgstr "pH"
 
 #: terrariumEngine.py:53
 msgid "temperature"
-msgstr ""
+msgstr "temperatura"
 
 #: terrariumEngine.py:54
 msgid "distance"
-msgstr ""
+msgstr "distància"
 
 #: terrariumEngine.py:55
 msgid "altitude"
-msgstr ""
+msgstr "altitud"
 
 #: terrariumEngine.py:56
 msgid "pressure"
-msgstr ""
+msgstr "pressió atmosfèrica"
 
 #: terrariumEngine.py:57
 msgid "humidity"
-msgstr ""
+msgstr "humitat relativa"
 
 #: terrariumEngine.py:58
 msgid "moisture"
-msgstr ""
+msgstr "humitat del sòl"
 
 #: terrariumEngine.py:59
 msgid "conductivity"
-msgstr ""
+msgstr "conductivitat"
 
 #: terrariumEngine.py:60
 msgid "ph"
-msgstr ""
+msgstr "ph"
 
 #: terrariumEngine.py:61
 msgid "light"
-msgstr ""
+msgstr "llum"
 
 #: terrariumEngine.py:62
 msgid "uva"
-msgstr ""
+msgstr "UV-a"
 
 #: terrariumEngine.py:63
 msgid "uvb"
-msgstr ""
+msgstr "UV-b"
 
 #: terrariumEngine.py:64
 msgid "uvi"
-msgstr ""
+msgstr "UV-i"
 
 #: terrariumEngine.py:65
 msgid "fertility"
-msgstr ""
+msgstr "fertilitat"
 
 #: terrariumEngine.py:66
 msgid "co2"
-msgstr ""
+msgstr "co2"
 
 #: terrariumEngine.py:67
 msgid "volume"
-msgstr ""
+msgstr "volum"
 
 #: terrariumEngine.py:68
 msgid "watertank"
-msgstr ""
+msgstr "tanc d'aigua"
 
 #: terrariumEngine.py:69
 msgid "windspeed"
-msgstr ""
+msgstr "velocitat del vent"
 
 #: terrariumEngine.py:70
 msgid "water_flow"
-msgstr ""
+msgstr "flux d'aigua"
 
 #: terrariumEngine.py:71
 msgid "wattage"
-msgstr ""
+msgstr "potència"
 
 #: terrariumEngine.py:1193 views/dashboard.html:18 views/status.html:112
 msgid "Up time"
-msgstr ""
+msgstr "Temps d'activitat"
 
 #: terrariumEngine.py:1199
 msgid "System load"
-msgstr ""
+msgstr "Càrrega del sistema"
 
 #: terrariumEngine.py:1205 views/status.html:44
 msgid "CPU Temperature"
-msgstr ""
+msgstr "Temperatura de la CPU"
 
 #: terrariumEngine.py:1211
 msgid "Storage"
-msgstr ""
+msgstr "Emmagatzematge"
 
 #: terrariumEngine.py:1217
 msgid "Memory"
-msgstr ""
+msgstr "Memòria"
 
 #: terrariumEngine.py:1238
 msgid "average {sensor_type}"
-msgstr ""
+msgstr "mitjana {sensor_type}"
 
 #: terrariumEngine.py:1414
 msgid "last update"
-msgstr ""
+msgstr "darrera actualització"
 
 #: terrariumNotification.py:36
 msgid "Local date"
-msgstr ""
+msgstr "Data local"
 
 #: terrariumNotification.py:37
 msgid "Local date, day and month"
-msgstr ""
+msgstr "Data local, dia i mes"
 
 #: terrariumNotification.py:38
 msgid "Local time"
-msgstr ""
+msgstr "Hora local"
 
 #: terrariumNotification.py:39
 msgid "Local time, hours and minutes"
-msgstr ""
+msgstr "Hora local, hores i minuts"
 
 #: terrariumNotification.py:40
 msgid "Local date and time"
-msgstr ""
+msgstr "Data i hora locals"
 
 #: terrariumNotification.py:48
 msgid "Authentication login error"
-msgstr ""
+msgstr "Error d'autenticació d'inici de sessió"
 
 #: terrariumNotification.py:50
 msgid "IP of the wrong login attempt"
-msgstr ""
+msgstr "IP d'intent d'inici de sessió incorrecte"
 
 #: terrariumNotification.py:51
 msgid "Used username"
-msgstr ""
+msgstr "Nom d'usuari utilitzat"
 
 #: terrariumNotification.py:52
 msgid "Used password"
-msgstr ""
+msgstr "Contrasenya utilitzada"
 
 #: terrariumNotification.py:58
 msgid "System warning"
-msgstr ""
+msgstr "Avís del sistema"
 
 #: terrariumNotification.py:60
 msgid "Warning message"
-msgstr ""
+msgstr "Missatge d'advertència"
 
 #: terrariumNotification.py:66
 msgid "System error"
-msgstr ""
+msgstr "Error del sistema"
 
 #: terrariumNotification.py:68 terrariumNotification.py:98
 msgid "Error message"
-msgstr ""
+msgstr "Missatge d'error"
 
 #: terrariumNotification.py:74
 msgid "System summary"
-msgstr ""
+msgstr "Resum del sistema"
 
 #: terrariumNotification.py:76
 msgid "System uptime in human readable format"
-msgstr ""
+msgstr "Temps de funcionament del sistema en format llegible per humans"
 
 #: terrariumNotification.py:77
 msgid "System load last minute"
-msgstr ""
+msgstr "Càrrega del sistema en l'últim minut"
 
 #: terrariumNotification.py:78 terrariumNotification.py:80
 #: terrariumNotification.py:85 terrariumNotification.py:128
 msgid "True if there is an alarm"
-msgstr ""
+msgstr "Alarma activa"
 
 #: terrariumNotification.py:79
 msgid "System CPU temperature"
-msgstr ""
+msgstr "Temperatura de la CPU del sistema"
 
 #: terrariumNotification.py:81
 msgid "Storage usage"
-msgstr ""
+msgstr "Ús d'emmagatzematge"
 
 #: terrariumNotification.py:82 views/status.html:66
 msgid "Memory usage"
-msgstr ""
+msgstr "Ús de memòria"
 
 #: terrariumNotification.py:83
 msgid "Average of [sensor type] (ex. temperature)"
-msgstr ""
+msgstr "Mitjana de [tipus de sensor] (p. ex. temperatura)"
 
 #: terrariumNotification.py:84 terrariumNotification.py:131
 msgid "Sensor type unit value"
-msgstr ""
+msgstr "Valor de la unitat del tipus de sensor"
 
 #: terrariumNotification.py:86
 msgid "Current power usage"
-msgstr ""
+msgstr "Ús d'energia actual"
 
 #: terrariumNotification.py:87
 msgid "Max power usage"
-msgstr ""
+msgstr "Consum màxim d'energia"
 
 #: terrariumNotification.py:88
 msgid "Current water flow"
-msgstr ""
+msgstr "Flux d'aigua actual"
 
 #: terrariumNotification.py:89 terrariumNotification.py:158
 msgid "Max water flow"
-msgstr ""
+msgstr "Caudal màxim d'aigua"
 
 #: terrariumNotification.py:90
 msgid "Number of relays active"
-msgstr ""
+msgstr "Numero de relés actius"
 
 #: terrariumNotification.py:96
 msgid "System to slow with updates (warning)"
-msgstr ""
+msgstr "El sistema s'alenteix amb les actualitzacions (advertència)"
 
 #: terrariumNotification.py:99
 msgid "Duration in seconds that are short"
-msgstr ""
+msgstr "Temps per encendre el relé (en segons)"
 
 #: terrariumNotification.py:100
 msgid "The update duration in seconds"
-msgstr ""
+msgstr "Durada de l'actualització (en segons)"
 
 #: terrariumNotification.py:101
 msgid "The max update duration"
-msgstr ""
+msgstr "Durada màxima de l'actualització"
 
 #: terrariumNotification.py:102
+#, fuzzy
 msgid "Amount of times to late with updates"
-msgstr ""
+msgstr "Nombre de problemes d'actualització"
 
 #: terrariumNotification.py:108
 msgid "System to slow with updates more then 30 times"
-msgstr ""
+msgstr "El sistema s'alenteix amb actualitzacions més de 30 vegades"
 
 #: terrariumNotification.py:115
 msgid "Sensor update (every 30 seconds)"
-msgstr ""
+msgstr "Actualització del sensor (cada 30 segons)"
 
 #: terrariumNotification.py:117 terrariumNotification.py:153
 #: terrariumNotification.py:184
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: terrariumNotification.py:118 terrariumNotification.py:154
 #: terrariumNotification.py:185
 msgid "Hardware type"
-msgstr ""
+msgstr "Tipus de hardware"
 
 #: terrariumNotification.py:119
 msgid "Sensor type"
-msgstr ""
+msgstr "Tipus de sensor"
 
 #: terrariumNotification.py:120 terrariumNotification.py:155
 #: terrariumNotification.py:186 views/audio_files.html:24
@@ -323,196 +327,197 @@ msgstr ""
 #: views/modals/sensor.html:60 views/modals/service.html:29
 #: views/modals/webcam.html:49 views/playlists.html:24 views/playlists.html:39
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: terrariumNotification.py:121 terrariumNotification.py:156
 #: terrariumNotification.py:187 views/modals/button.html:33
 #: views/modals/relay.html:33 views/modals/sensor.html:48
 #: views/modals/service.html:79 views/modals/webcam.html:37
 msgid "Address"
-msgstr ""
+msgstr "adreça"
 
 #: terrariumNotification.py:122 views/modals/sensor.html:107
 msgid "Limit min"
-msgstr ""
+msgstr "Límit mínim"
 
 #: terrariumNotification.py:123 views/modals/sensor.html:119
 msgid "Limit max"
-msgstr ""
+msgstr "Límit màxim"
 
 #: terrariumNotification.py:124 views/modals/sensor.html:83
 msgid "Alarm min"
-msgstr ""
+msgstr "Alarma mínim"
 
 #: terrariumNotification.py:125 views/modals/sensor.html:95
 msgid "Alarm max"
-msgstr ""
+msgstr "Alarma màxim"
 
 #: terrariumNotification.py:126
 msgid "Max difference"
-msgstr ""
+msgstr "Diferència màxima"
 
 #: terrariumNotification.py:127
 msgid "Exclude from average"
-msgstr ""
+msgstr "Exclou de la mitjana"
 
 #: terrariumNotification.py:129
 msgid "Current value"
-msgstr ""
+msgstr "Valor actual"
 
 #: terrariumNotification.py:130 terrariumNotification.py:162
 #: terrariumNotification.py:189
 msgid "True if there is an error"
-msgstr ""
+msgstr "Error actiu"
 
 #: terrariumNotification.py:137
 msgid "Sensor change (only when value is changed)"
-msgstr ""
+msgstr "Canvi de sensor (només quan es canvia el valor)"
 
 #: terrariumNotification.py:144
 msgid "Sensor alarm"
-msgstr ""
+msgstr "Alarma del sensor"
 
 #: terrariumNotification.py:151
 msgid "Relay update (every 30 seconds)"
-msgstr ""
+msgstr "Actualització de relé (cada 30 segons)"
 
 #: terrariumNotification.py:157
 msgid "Max wattage"
-msgstr ""
+msgstr "Potència màxima"
 
 #: terrariumNotification.py:159
 msgid "True if in manual mode"
-msgstr ""
+msgstr "Mode manual"
 
 #: terrariumNotification.py:160
 msgid "True if it is a dimmer"
-msgstr ""
+msgstr "dimmer disponible"
 
 #: terrariumNotification.py:161 terrariumNotification.py:188
 msgid "Current state"
-msgstr ""
+msgstr "Estat actual"
 
 #: terrariumNotification.py:168
 msgid "Relay change (only when value is changed)"
-msgstr ""
+msgstr "Canvi de relé (només quan es canvia el valor)"
 
 #: terrariumNotification.py:175
 msgid "Relay toggle"
-msgstr ""
+msgstr "Canviar el estat del relé (on/off)"
 
 #: terrariumNotification.py:182
 msgid "Button update (every 30 seconds)"
-msgstr ""
+msgstr "Actualització del botó (cada 30 segons)"
 
 #: terrariumNotification.py:195
 msgid "Button change (only when value is changed)"
-msgstr ""
+msgstr "Canvi de botó (només quan es canvia el valor)"
 
 #: terrariumNotification.py:202
 msgid "Button action"
-msgstr ""
+msgstr "Configuració del botó"
 
 #: terrariumNotification.py:210
 msgid "Webcam archive"
-msgstr ""
+msgstr "Arxiu de la càmera web"
 
 #: terrariumNotification.py:411
 msgid "Display"
-msgstr ""
+msgstr "Monitor"
 
 #: terrariumNotification.py:415
 msgid "Email"
-msgstr ""
+msgstr "Correu electrònic"
 
 #: terrariumNotification.py:425
 msgid "Traffic light"
-msgstr ""
+msgstr "Semàfor"
 
 #: terrariumNotification.py:429
 msgid "Web-hook"
-msgstr ""
+msgstr "Webhook"
 
 #: terrariumNotification.py:433
 msgid "MQTT"
-msgstr ""
+msgstr "MQTT"
 
 #: terrariumNotification.py:437
 msgid "Pushover"
-msgstr ""
+msgstr "Empènyer"
 
 #: terrariumNotification.py:441
 msgid "Buzzer"
-msgstr ""
+msgstr "Brunzidor (buzzer)"
 
 #: terrariumWebserver.py:162 terrariumWebserver.py:246
 msgid "Authenticate to make any changes"
-msgstr ""
+msgstr "Autentiqueu-vos per fer qualsevol canvi"
 
 #: terrariumWebserver.py:162 terrariumWebserver.py:246
 msgid "Authentication"
-msgstr ""
+msgstr "Autenticació"
 
 #: terrariumWebserver.py:162 terrariumWebserver.py:246 views/index.html:2
 msgid "TerrariumPI"
-msgstr ""
+msgstr "TerrariumPI"
 
 #: terrariumWebserver.py:358
 msgid "A new version ({version}) is available!"
-msgstr ""
+msgstr "Hi ha disponible una versió nova ({version})!"
 
 #: terrariumWebserver.py:358
 msgid "Software Update"
-msgstr ""
+msgstr "Actualització de software"
 
 #: views/about.html:2 views/about.html:9 views/includes/sidebar.html:292
 #: views/includes/sidebar.html:305
+#, fuzzy
 msgid "About"
-msgstr ""
+msgstr "Informació"
 
 #: views/audio_files.html:2 views/audio_files.html:10
 #: views/modals/playlist.html:63
 msgid "Audio files"
-msgstr ""
+msgstr "Arxius d'àudio"
 
 #: views/audio_files.html:25 views/audio_files.html:36 views/playlists.html:25
 #: views/playlists.html:40
 msgid "Duration"
-msgstr ""
+msgstr "Durada"
 
 #: views/audio_files.html:26 views/audio_files.html:37
 msgid "Filename"
-msgstr ""
+msgstr "Nom de l'arxiu"
 
 #: views/audio_files.html:27 views/audio_files.html:38
 msgid "Size"
-msgstr ""
+msgstr "Mida"
 
 #: views/audio_files.html:28 views/audio_files.html:39
 #: views/modals/area.html:862 views/playlists.html:31 views/playlists.html:46
 msgid "Action"
-msgstr ""
+msgstr "Acció"
 
 #: views/audio_files.html:46
 msgid "Upload new audio file"
-msgstr ""
+msgstr "Carregar un fitxer d'àudio nou"
 
 #: views/audio_files.html:51 views/modals/enclosure.html:34
 #: views/settings.html:264
 msgid "Choose a file"
-msgstr ""
+msgstr "Trieu un fitxer"
 
 #: views/buttons.html:2 views/includes/sidebar.html:140
 msgid "Buttons"
-msgstr ""
+msgstr "Botons"
 
 #: views/buttons.html:9
 msgid "No buttons"
-msgstr ""
+msgstr "Sense botons"
 
 #: views/buttons.html:12
 msgid "Add new button"
-msgstr ""
+msgstr "Afegeix un botó nou"
 
 #: views/buttons.html:14 views/buttons.html:71 views/calendar.html:9
 #: views/dashboard.html:120 views/dashboard.html:316 views/enclosures.html:14
@@ -521,226 +526,226 @@ msgstr ""
 #: views/sensors.html:20 views/sensors.html:82 views/weather.html:9
 #: views/webcams.html:14 views/webcams.html:41
 msgid "Login to make changes"
-msgstr ""
+msgstr "Inicieu sessió per fer canvis"
 
 #: views/buttons.html:25 views/dashboard.html:284 views/relays.html:27
 #: views/sensors.html:31 views/webcams.html:23
 msgid "Last update"
-msgstr ""
+msgstr "Darrera actualització"
 
 #: views/buttons.html:31 views/dashboard.html:290 views/relays.html:34
 #: views/sensors.html:37
 msgid "error"
-msgstr ""
+msgstr "error"
 
 #: views/buttons.html:32 views/dashboard.html:291 views/relays.html:35
 #: views/sensors.html:38
 msgid "warning"
-msgstr ""
+msgstr "advertència"
 
 #: views/buttons.html:39 views/dashboard.html:151 views/dashboard.html:299
 #: views/enclosures.html:33 views/relays.html:45 views/sensors.html:49
 msgid "Day"
-msgstr ""
+msgstr "Dia"
 
 #: views/buttons.html:40 views/dashboard.html:300 views/relays.html:46
 #: views/sensors.html:50
 msgid "Week"
-msgstr ""
+msgstr "Setmana"
 
 #: views/buttons.html:41 views/dashboard.html:301 views/relays.html:47
 #: views/sensors.html:51
 msgid "Month"
-msgstr ""
+msgstr "Mes"
 
 #: views/buttons.html:42 views/dashboard.html:302 views/relays.html:48
 #: views/sensors.html:52
 msgid "Year"
-msgstr ""
+msgstr "Any"
 
 #: views/buttons.html:53 views/dashboard.html:313 views/relays.html:60
 #: views/sensors.html:64
 msgid "Export"
-msgstr ""
+msgstr "Exporta"
 
 #: views/buttons.html:58 views/calendar.html:7 views/dashboard.html:117
 #: views/includes/sidebar.html:264 views/relays.html:64 views/sensors.html:69
 #: views/settings.html:2 views/weather.html:7 views/webcams.html:32
 msgid "Settings"
-msgstr ""
+msgstr "Configuració"
 
 #: views/buttons.html:63 views/relays.html:76 views/sensors.html:74
 #: views/webcams.html:35
 msgid "Ignore"
-msgstr ""
+msgstr "Ignorar"
 
 #: views/buttons.html:68 views/modals/webcam.html:401 views/relays.html:80
 #: views/sensors.html:79 views/webcams.html:38
 msgid "Delete"
-msgstr ""
+msgstr "Suprimeix"
 
 #: views/calendar.html:2 views/includes/sidebar.html:68
 msgid "Calendar"
-msgstr ""
+msgstr "Calendari"
 
 #: views/calendar.html:6
 msgid "Download iCal"
-msgstr ""
+msgstr "Descarrega iCal"
 
 #: views/dashboard.html:2 views/includes/sidebar.html:48
 msgid "Dashboard"
-msgstr ""
+msgstr "Panell"
 
 #: views/dashboard.html:44
 msgid "Power usage in Watt"
-msgstr ""
+msgstr "Consum d'energia en watts"
 
 #: views/dashboard.html:59
 msgid "Water flow in %s"
-msgstr ""
+msgstr "Flux d'aigua en %s"
 
 #: views/dashboard.html:73
 msgid "Total power usage"
-msgstr ""
+msgstr "Consum total d'energia"
 
 #: views/dashboard.html:74 views/relays.html:26
 msgid "kWh"
-msgstr ""
+msgstr "kWh"
 
 #: views/dashboard.html:78 views/dashboard.html:96
 msgid "in"
-msgstr ""
+msgstr "ca"
 
 #: views/dashboard.html:91
 msgid "Total water usage"
-msgstr ""
+msgstr "Consum total d'aigua"
 
 #: views/dashboard.html:108 views/enclosures.html:2
 #: views/includes/sidebar.html:215
 msgid "Enclosures"
-msgstr ""
+msgstr "Recinte"
 
 #: views/dashboard.html:168 views/enclosures.html:47
 msgid "Night"
-msgstr ""
+msgstr "Nit"
 
 #: views/dashboard.html:184 views/enclosures.html:61
 msgid "Low"
-msgstr ""
+msgstr "Baixa"
 
 #: views/dashboard.html:200 views/enclosures.html:75
 msgid "High"
-msgstr ""
+msgstr "Alta"
 
 #: views/dashboard.html:217 views/enclosures.html:89
 #: views/modals/button.html:57 views/modals/relay.html:79
 #: views/modals/sensor.html:72 views/weather.html:20
 msgid "Current"
-msgstr ""
+msgstr "Actual"
 
 #: views/enclosures.html:9
 msgid "No enclosures"
-msgstr ""
+msgstr "Sense recinte"
 
 #: views/enclosures.html:12
 msgid "Add new enclosure"
-msgstr ""
+msgstr "Afegeix un nou recinte"
 
 #: views/enclosures.html:168
 msgid "Areas"
-msgstr ""
+msgstr "Àrees"
 
 #: views/enclosures.html:173 views/modals/area.html:32
 #: views/modals/sensor.html:33 views/modals/service.html:17
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 #: views/enclosures.html:174 views/modals/area.html:61
 #: views/modals/area.html:241 views/modals/area.html:426
 msgid "Mode"
-msgstr ""
+msgstr "Mode"
 
 #: views/enclosures.html:175 views/includes/sidebar.html:119
 #: views/includes/sidebar.html:148 views/includes/sidebar.html:252
 #: views/status.html:2 views/status.html:9
 msgid "Status"
-msgstr ""
+msgstr "Estat"
 
 #: views/enclosures.html:177
 msgid "Actions"
-msgstr ""
+msgstr "Accions"
 
 #: views/includes/modals.html:5 views/includes/modals.html:17
 #: views/modals/webcam.html:400
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 #: views/includes/modals.html:14 views/layouts/modal.html:25
 #: views/modals/webcam.html:160 views/modals/webcam.html:399
 msgid "Close"
-msgstr ""
+msgstr "Tanca"
 
 #: views/includes/navigation.html:17
 msgid "Upcoming events"
-msgstr ""
+msgstr "Pròxims esdeveniments"
 
 #: views/includes/navigation.html:22
 msgid "See All Events"
-msgstr ""
+msgstr "Veure tots els esdeveniments"
 
 #: views/includes/navigation.html:31
 msgid "All doors status"
-msgstr ""
+msgstr "Estat de totes les portes"
 
 #: views/includes/navigation.html:34
 msgid "All doors are closed"
-msgstr ""
+msgstr "Totes les portes estan tancades"
 
 #: views/includes/navigation.html:44
 msgid "Current status"
-msgstr ""
+msgstr "Estat actual"
 
 #: views/includes/sidebar.html:14
 msgid "Hello"
-msgstr ""
+msgstr "Hola"
 
 #: views/includes/sidebar.html:16
 msgid "Logout"
-msgstr ""
+msgstr "Tancar sessió"
 
 #: views/includes/sidebar.html:19
 msgid "Login"
-msgstr ""
+msgstr "iniciar Sessió"
 
 #: views/includes/sidebar.html:19
 msgid "Read only mode"
-msgstr ""
+msgstr "Mode només lectura"
 
 #: views/includes/sidebar.html:40
 msgid "Home"
-msgstr ""
+msgstr "Casa"
 
 #: views/includes/sidebar.html:55 views/sensors.html:6
 msgid "All sensors"
-msgstr ""
+msgstr "Tots els sensors"
 
 #: views/includes/sidebar.html:62 views/modals/area.html:502
 #: views/weather.html:2
 msgid "Weather"
-msgstr ""
+msgstr "El temps"
 
 #: views/includes/sidebar.html:77 views/modals/area.html:431
 #: views/modals/area.html:442 views/modals/webcam.html:385
 msgid "Sensors"
-msgstr ""
+msgstr "Sensors"
 
 #: views/includes/sidebar.html:96
 msgid "New sensor"
-msgstr ""
+msgstr "Nou sensor"
 
 #: views/includes/sidebar.html:102
 msgid "Scan sensors"
-msgstr ""
+msgstr "Escaneig de sensors"
 
 #: views/includes/sidebar.html:111 views/modals/area.html:179
 #: views/modals/area.html:222 views/modals/area.html:665
@@ -754,16 +759,16 @@ msgstr ""
 
 #: views/includes/sidebar.html:131
 msgid "Scan relays"
-msgstr ""
+msgstr "Escaneig de relés"
 
 #: views/includes/sidebar.html:154
 msgid "New button"
-msgstr ""
+msgstr "Botó nou"
 
 #: views/includes/sidebar.html:163 views/modals/enclosure.html:71
 #: views/webcams.html:2
 msgid "Webcams"
-msgstr ""
+msgstr "Càmeres web"
 
 #: views/includes/sidebar.html:171
 msgid "Show"
@@ -771,108 +776,110 @@ msgstr ""
 
 #: views/includes/sidebar.html:177
 msgid "New webcam"
-msgstr ""
+msgstr "Nova càmera web"
 
 #: views/includes/sidebar.html:194
 msgid "Files"
-msgstr ""
+msgstr "Fitxers"
 
 #: views/includes/sidebar.html:200 views/modals/area.html:332
 #: views/modals/area.html:402 views/playlists.html:2 views/playlists.html:10
 msgid "Playlists"
-msgstr ""
+msgstr "Llistes de reproducció"
 
 #: views/includes/sidebar.html:206
 msgid "New playlist"
-msgstr ""
+msgstr "Nova llista de reproducció"
 
 #: views/includes/sidebar.html:223
 msgid "List"
-msgstr ""
+msgstr "Llista"
 
 #: views/includes/sidebar.html:229
 msgid "New enclosure"
-msgstr ""
+msgstr "Nou recinte"
 
 #: views/includes/sidebar.html:235
 msgid "New area"
-msgstr ""
+msgstr "Nova àrea"
 
 #: views/includes/sidebar.html:244 views/settings.html:16
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #: views/includes/sidebar.html:258 views/notifications.html:2
 msgid "Notifications"
-msgstr ""
+msgstr "Notificacions"
 
 #: views/includes/sidebar.html:270 views/log.html:2
 msgid "Log"
-msgstr ""
+msgstr "Registre"
 
 #: views/includes/sidebar.html:276
 msgid "Restart"
-msgstr ""
+msgstr "Reinicia app"
 
 #: views/includes/sidebar.html:282
 msgid "Reboot"
-msgstr ""
+msgstr "Reinicia sistema"
 
 #: views/includes/sidebar.html:288
 msgid "Shutdown"
-msgstr ""
+msgstr "Tancar"
 
 #: views/includes/sidebar.html:297
 msgid "Help"
-msgstr ""
+msgstr "Ajuda"
 
 #: views/layouts/modal.html:13
 msgid "More help online"
-msgstr ""
+msgstr "Més ajuda en línia"
 
 #: views/layouts/modal.html:28
 msgid "Save changes"
-msgstr ""
+msgstr "Guardar canvis"
 
 #: views/log.html:6
 msgid "Download log file"
-msgstr ""
+msgstr "Descarrega el fitxer de registre"
 
 #: views/log.html:19
 msgid "System logging"
-msgstr ""
+msgstr "Registre del sistema"
 
 #: views/log.html:25
 msgid "Filters"
-msgstr ""
+msgstr "Filtres"
 
 #: views/log.html:35
 msgid "errors"
-msgstr ""
+msgstr "errors"
 
 #: views/log.html:39
 msgid "warnings"
-msgstr ""
+msgstr "avisos"
 
 #: views/modals/area.html:12
 msgid "Area settings"
-msgstr ""
+msgstr "Configuració de l'àrea"
 
 #: views/modals/area.html:18
 msgid "Enclosure"
-msgstr ""
+msgstr "Recinte"
 
 #: views/modals/area.html:24
 msgid "Select the enclosure where this area belongs to."
-msgstr ""
+msgstr "Seleccioneu el recinte al qual pertany aquesta àrea."
 
 #: views/modals/area.html:38
 msgid "Select the type of area. Each type has its own extra options and logic."
 msgstr ""
+"Seleccioneu el tipus d'àrea. Cada tipus té les seves pròpies opcions "
+"addicionals i lògica."
 
 #: views/modals/area.html:41 views/modals/area.html:83
 msgid "ERROR"
-msgstr ""
+msgstr "ERROR"
 
 #: views/modals/area.html:50 views/modals/button.html:48
 #: views/modals/enclosure.html:21 views/modals/event.html:18
@@ -880,7 +887,7 @@ msgstr ""
 #: views/modals/sensor.html:63 views/modals/service.html:32
 #: views/modals/webcam.html:52
 msgid "Enter a name."
-msgstr ""
+msgstr "Introduïu un nom."
 
 #: views/modals/area.html:53 views/modals/button.html:51
 #: views/modals/enclosure.html:24 views/modals/event.html:21
@@ -888,27 +895,27 @@ msgstr ""
 #: views/modals/sensor.html:66 views/modals/service.html:35
 #: views/modals/webcam.html:55
 msgid "The name cannot be empty."
-msgstr ""
+msgstr "El nom no pot estar buit."
 
 #: views/modals/area.html:63 views/modals/area.html:243
 #: views/modals/area.html:428 views/modals/webcam.html:121
 msgid "Disabled"
-msgstr ""
+msgstr "Inhabilitat"
 
 #: views/modals/area.html:64 views/modals/area.html:245
 #: views/modals/area.html:430
 msgid "Timer"
-msgstr ""
+msgstr "Temporitzador"
 
 #: views/modals/area.html:65 views/modals/area.html:246
 #: views/modals/area.html:432
 msgid "Weather day/night"
-msgstr ""
+msgstr "Temps dia/nit"
 
 #: views/modals/area.html:66 views/modals/area.html:247
 #: views/modals/area.html:433
 msgid "Weather night/day"
-msgstr ""
+msgstr "Temps nit/dia"
 
 #: views/modals/area.html:69
 msgid "Select the mode of this area. This will change the timing and duration of the relays."
