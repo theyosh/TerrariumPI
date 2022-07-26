@@ -225,6 +225,8 @@ class terrariumEngine(object):
           settings[setting.id] = float(setting.value)
         elif setting.value.lower() in ['true','false','on','off','1','0']:
           settings[setting.id] = terrariumUtils.is_true(setting.value)
+        elif setting.id.lower() in ['power_price','water_price']:
+          settings[setting.id] = float(setting.value) if terrariumUtils.is_float(setting.value) else 0.0
         else:
           settings[setting.id] = setting.value
 
