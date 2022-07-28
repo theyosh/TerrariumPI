@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.3.3\n"
 "POT-Creation-Date: 2022-07-02 11:57+CEST\n"
-"PO-Revision-Date: 2022-07-26 21:09+0000\n"
+"PO-Revision-Date: 2022-07-29 19:42+0000\n"
 "Last-Translator: cmonicob <cmonicob@gmail.com>\n"
 "Language-Team: Catalan <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/ca/>\n"
@@ -751,11 +751,11 @@ msgstr "Escaneig de sensors"
 #: views/modals/area.html:222 views/modals/area.html:665
 #: views/modals/area.html:813 views/relays.html:2
 msgid "Relays"
-msgstr ""
+msgstr "Relés"
 
 #: views/includes/sidebar.html:125
 msgid "New relay"
-msgstr ""
+msgstr "Nou relé"
 
 #: views/includes/sidebar.html:131
 msgid "Scan relays"
@@ -772,7 +772,7 @@ msgstr "Càmeres web"
 
 #: views/includes/sidebar.html:171
 msgid "Show"
-msgstr ""
+msgstr "Mostra"
 
 #: views/includes/sidebar.html:177
 msgid "New webcam"
@@ -920,66 +920,80 @@ msgstr "Temps nit/dia"
 #: views/modals/area.html:69
 msgid "Select the mode of this area. This will change the timing and duration of the relays."
 msgstr ""
+"Seleccioneu el mode d'aquesta àrea. Això canviarà el temps i la durada dels "
+"relés."
 
 #: views/modals/area.html:77
 msgid "Minimum hours"
-msgstr ""
+msgstr "Hores mínimes"
 
 #: views/modals/area.html:80
 msgid "The minimum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is shorter then this minimum value, the day will be extended to this minimum value."
 msgstr ""
+"La quantitat mínima d'hores que s'encenen els llums. Això només és vàlid en "
+"mode meteorològic. Quan el dia sigui inferior a aquest valor mínim, el dia "
+"s'allargarà fins a aquest valor mínim."
 
 #: views/modals/area.html:89
 msgid "Maximum hours"
-msgstr ""
+msgstr "Hores màximes"
 
 #: views/modals/area.html:92
 msgid "The maximum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is longer then this maximum value, the day will be shortened to this maximum value."
 msgstr ""
+"La quantitat màxima d'hores que s'encenen els llums. Això només és vàlid en "
+"mode meteorològic. Quan el dia sigui més llarg que aquest valor màxim, el "
+"dia s'escurçarà a aquest valor màxim."
 
 #: views/modals/area.html:101
 msgid "Hours shift"
-msgstr ""
+msgstr "Hores per període"
 
 #: views/modals/area.html:104
 msgid "The amount of time to shift in hours based on the sun rise time. Negative values will make the day start earlier."
 msgstr ""
+"La quantitat de temps per canviar en hores en funció de l'hora de sortida "
+"del sol. Els valors negatius faran que el dia comenci abans."
 
 #: views/modals/area.html:107
 msgid "Enter a value between -12 and 12."
-msgstr ""
+msgstr "Introduïu un valor entre -12 i 12."
 
 #: views/modals/area.html:114 views/modals/area.html:244
 #: views/modals/area.html:429
 msgid "Main lights"
-msgstr ""
+msgstr "Llums principals"
 
 #: views/modals/area.html:119
 msgid "Toggle this if this is the main lights for this enclosure. This is used for the light checks in other areas."
 msgstr ""
+"Activar si aquestes són les llums principals d'aquest recinte. S'utilitza "
+"per als controls de llum en altres zones."
 
 #: views/modals/area.html:127 views/modals/area.html:274
 msgid "Below you can per select the relays and timer settings per period daytime and nighttime."
 msgstr ""
+"A continuació podeu seleccionar els relés i la configuració del "
+"temporitzador per període diürn i nocturn."
 
 #: views/modals/area.html:130 views/modals/area.html:277
 msgid "Day settings"
-msgstr ""
+msgstr "Configuració del dia"
 
 #: views/modals/area.html:130 views/modals/area.html:277
 msgid "Night settings"
-msgstr ""
+msgstr "Configuració nocturna"
 
 #: views/modals/area.html:137 views/modals/area.html:198
 #: views/modals/area.html:284 views/modals/area.html:354
 #: views/modals/area.html:537 views/modals/area.html:684
 msgid "Begin time"
-msgstr ""
+msgstr "Temps d'inici"
 
 #: views/modals/area.html:140 views/modals/area.html:287
 #: views/modals/area.html:540
 msgid "The time of the day when the relays are toggled on each day."
-msgstr ""
+msgstr "Hora en què els relés s'encenen diàriament."
 
 #: views/modals/area.html:143 views/modals/area.html:155
 #: views/modals/area.html:167 views/modals/area.html:290
@@ -988,51 +1002,57 @@ msgstr ""
 #: views/modals/area.html:555 views/modals/area.html:690
 #: views/modals/area.html:702 views/modals/area.html:960
 msgid "Enter a valid time."
-msgstr ""
+msgstr "Introduïu una hora vàlida."
 
 #: views/modals/area.html:149 views/modals/area.html:204
 #: views/modals/area.html:296 views/modals/area.html:366
 #: views/modals/area.html:549 views/modals/area.html:696
 msgid "End time"
-msgstr ""
+msgstr "Hora finalització"
 
 #: views/modals/area.html:152 views/modals/area.html:299
 #: views/modals/area.html:552
 msgid "The time of the day when the relays are toggled off each day."
-msgstr ""
+msgstr "Hora en què els relés s'apaguen diàriament."
 
 #: views/modals/area.html:161 views/modals/area.html:210
 #: views/modals/area.html:308 views/modals/area.html:378
 #: views/modals/area.html:561 views/modals/area.html:708
 msgid "On duration"
-msgstr ""
+msgstr "Durada activada"
 
 #: views/modals/area.html:164 views/modals/area.html:311
 msgid "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full day."
 msgstr ""
+"La durada en què els relés haurien d'estar encès. Si això és més curt que "
+"tot el dia, obtindreu una funcionalitat de temporitzador. Introduïu \"0\" "
+"per tenir un dia complet."
 
 #: views/modals/area.html:173 views/modals/area.html:216
 #: views/modals/area.html:320 views/modals/area.html:390
 #: views/modals/area.html:573 views/modals/area.html:720
 msgid "Off duration"
-msgstr ""
+msgstr "Durada desactivada"
 
 #: views/modals/area.html:182 views/modals/area.html:668
 #: views/modals/area.html:816
 msgid "Select the relays to toggle."
-msgstr ""
+msgstr "Seleccioneu els relés que voleu controlar."
 
 #: views/modals/area.html:250
 msgid "Select the mode of this area. This will change the timing and duration of the players."
 msgstr ""
+"Seleccioneu el mode d'aquesta àrea. Això canviarà el temps i la durada dels "
+"iniciadors."
 
 #: views/modals/area.html:258
 msgid "Sound card"
-msgstr ""
+msgstr "Targeta de so"
 
 #: views/modals/area.html:262
+#, fuzzy
 msgid "Select the sound card that is used for this enclosure."
-msgstr ""
+msgstr "Seleccioneu la targeta de so que s'utilitza per a aquest allotjament."
 
 #: views/modals/area.html:314 views/modals/area.html:326
 #: views/modals/area.html:384 views/modals/area.html:396
@@ -1040,28 +1060,30 @@ msgstr ""
 #: views/modals/area.html:714 views/modals/area.html:726
 #: views/modals/area.html:968
 msgid "Enter a valid duration in minutes."
-msgstr ""
+msgstr "Introduïu una durada vàlida en minuts."
 
 #: views/modals/area.html:323 views/modals/area.html:576
 #: views/modals/area.html:723
 msgid "The duration when the relays should be stay off when switched off. Enter '0' to disable."
 msgstr ""
+"La durada en què els relés han d'estar apagats quan estan apagats. Introduïu "
+"\"0\" per desactivar."
 
 #: views/modals/area.html:335 views/modals/area.html:405
 msgid "Select the playlist(s) to be played."
-msgstr ""
+msgstr "Seleccioneu les llistes de reproducció que voleu reproduir."
 
 #: views/modals/area.html:338 views/modals/area.html:408
 msgid "Select at least 1 playlist."
-msgstr ""
+msgstr "Seleccioneu almenys 1 llista de reproducció."
 
 #: views/modals/area.html:357 views/modals/area.html:687
 msgid "The time of the day when the relays are toggled on each night."
-msgstr ""
+msgstr "L'hora del dia en què s'activen els relés cada nit."
 
 #: views/modals/area.html:369 views/modals/area.html:699
 msgid "The time of the day when the relays are toggled off each night."
-msgstr ""
+msgstr "L'hora del dia en què els relés es desactiven cada nit."
 
 #: views/modals/area.html:381
 msgid "The duration when the players should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full night."
@@ -1070,26 +1092,31 @@ msgstr ""
 #: views/modals/area.html:393
 msgid "The duration when the players should be stay off when switched off. Enter '0' to disable."
 msgstr ""
+"La durada que haurien d'estar encesos els relés. Si és més curt que tot el "
+"dia, obtindreu la funcionalitat del temporitzador. Introduïu \"0\" per tenir "
+"un dia complet."
 
 #: views/modals/area.html:436
 msgid "Select the mode of this area. This will change the timing and duration of the actions."
 msgstr ""
+"Seleccioneu un mode per a aquesta àrea. Això canviarà l'hora i la durada "
+"dels relés activats."
 
 #: views/modals/area.html:445
 msgid "Select sensors to use for sensor based mode."
-msgstr ""
+msgstr "Seleccioneu els sensors que voleu utilitzar en mode sensor."
 
 #: views/modals/area.html:448
 msgid "Select at least 1 sensor."
-msgstr ""
+msgstr "Seleccioneu almenys 1 sensor."
 
 #: views/modals/area.html:454
 msgid "Water volume"
-msgstr ""
+msgstr "Volum d'aigua"
 
 #: views/modals/area.html:457
 msgid "Enter the volume of the water tank."
-msgstr ""
+msgstr "Introduïu el volum del dipòsit d'aigua."
 
 #: views/modals/area.html:460 views/modals/area.html:472
 #: views/modals/area.html:484 views/modals/area.html:645
@@ -1100,184 +1127,196 @@ msgstr ""
 #: views/settings.html:35 views/settings.html:59 views/settings.html:211
 #: views/settings.html:223 views/settings.html:279
 msgid "Please enter a minimum value of %s."
-msgstr ""
+msgstr "Introduïu un valor mínim de %s."
 
 #: views/modals/area.html:466
 msgid "Height"
-msgstr ""
+msgstr "Alçada"
 
 #: views/modals/area.html:469
 msgid "Enter the height of the water tank."
-msgstr ""
+msgstr "Introduïu l'alçada del dipòsit d'aigua."
 
 #: views/modals/area.html:478 views/modals/area.html:852
 #: views/modals/sensor.html:160
 msgid "Offset"
-msgstr ""
+msgstr "Compensació"
 
 #: views/modals/area.html:481
 msgid "Enter the offset between sensor and water height."
-msgstr ""
+msgstr "Introduïu la compensació entre el sensor i l'alçada de l'aigua."
 
 #: views/modals/area.html:490
 msgid "Day/night difference"
-msgstr ""
+msgstr "Diferència entre el dia i la nit"
 
 #: views/modals/area.html:493
 msgid "Amount to change between day and night."
-msgstr ""
+msgstr "Valor per alternar entre el dia i la nit."
 
 #: views/modals/area.html:499
 msgid "Day/night source"
-msgstr ""
+msgstr "Criteris dia/nit"
 
 #: views/modals/area.html:501
 msgid "Lights"
-msgstr ""
+msgstr "Llums"
 
 #: views/modals/area.html:505
+#, fuzzy
 msgid "Select source when it is 'day'."
-msgstr ""
+msgstr "Seleccioneu el valor quan sigui \"dia\"."
 
 #: views/modals/area.html:511
 msgid "Depends on"
-msgstr ""
+msgstr "Depén de"
 
 #: views/modals/area.html:515
 msgid "Select the areas where this area depends on."
-msgstr ""
+msgstr "Seleccioneu les àrees de les quals depèn aquesta àrea."
 
 #: views/modals/area.html:525
 msgid "Low alarm"
-msgstr ""
+msgstr "Alarma inferior"
 
 #: views/modals/area.html:527
 msgid "High alarm"
-msgstr ""
+msgstr "Alarma superior"
 
 #: views/modals/area.html:529
 msgid "Variation"
-msgstr ""
+msgstr "Variació"
 
 #: views/modals/area.html:564 views/modals/area.html:711
 msgid "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
+"La durada en què els relés haurien d'estar encès. Si això és més curt que "
+"tot el dia, obtindreu una funcionalitat de temporitzador. Introduïu \"0\" "
+"per tenir una nit completa."
 
 #: views/modals/area.html:585 views/modals/area.html:732
 msgid "Power on time"
-msgstr ""
+msgstr "temps en marxa"
 
 #: views/modals/area.html:588 views/modals/area.html:735
 msgid "The duration in seconds to toggle on the relay."
-msgstr ""
+msgstr "La durada en segons per activar el relé."
 
 #: views/modals/area.html:591 views/modals/area.html:603
 #: views/modals/area.html:738 views/modals/area.html:750
 msgid "Enter a valid duration in seconds."
-msgstr ""
+msgstr "Introduïu una durada vàlida en segons."
 
 #: views/modals/area.html:597 views/modals/area.html:744
 msgid "Settle time"
-msgstr ""
+msgstr "Temps d'estabilització del sensor (s)."
 
 #: views/modals/area.html:600 views/modals/area.html:747
 msgid "The duration in seconds between two actions."
-msgstr ""
+msgstr "La durada en segons entre dues accions."
 
 #: views/modals/area.html:613 views/modals/area.html:760
 msgid "Light status"
-msgstr ""
+msgstr "Estat de la llum"
 
 #: views/modals/area.html:615 views/modals/area.html:628
 #: views/modals/area.html:762 views/modals/area.html:775
 #: views/modals/webcam.html:144 views/modals/webcam.html:159
 msgid "Ignored"
-msgstr ""
+msgstr "Ignorar"
 
 #: views/modals/area.html:616 views/modals/area.html:763
 msgid "On"
-msgstr ""
+msgstr "Encès"
 
 #: views/modals/area.html:617 views/modals/area.html:764
 msgid "Off"
-msgstr ""
+msgstr "Apagat"
 
 #: views/modals/area.html:620
 msgid "Select the lights status."
-msgstr ""
+msgstr "Seleccioneu l'estat dels llums."
 
 #: views/modals/area.html:626 views/modals/area.html:773
 msgid "Door status"
-msgstr ""
+msgstr "Estat de la porta"
 
 #: views/modals/area.html:629 views/modals/area.html:776
 #: views/modals/webcam.html:161
 msgid "Open"
-msgstr ""
+msgstr "Obert"
 
 #: views/modals/area.html:630 views/modals/area.html:777
 msgid "Closed"
-msgstr ""
+msgstr "Tancat"
 
 #: views/modals/area.html:633 views/modals/area.html:780
 msgid "Select the door status."
-msgstr ""
+msgstr "Seleccioneu l'estat de la porta."
 
 #: views/modals/area.html:639 views/modals/area.html:787
 msgid "Alarm threshold"
-msgstr ""
+msgstr "Llindar d'alarma"
 
 #: views/modals/area.html:642 views/modals/area.html:790
 msgid "Enter the amount of alarms before action take place."
-msgstr ""
+msgstr "Introduïu el nombre d'alarmes abans de dur a terme una acció."
 
 #: views/modals/area.html:652
 msgid "Ignore low alarm"
-msgstr ""
+msgstr "Ignora l'alarma inferior"
 
 #: views/modals/area.html:657
 msgid "Toggle to ignore the low alarm value of the sensors, and use high alarm value only."
 msgstr ""
+"Habiliteu per ignorar el valor d'alarma inferior del sensor i utilitzeu "
+"només el valor d'alarma superior."
 
 #: views/modals/area.html:767
 msgid "Select the light status."
-msgstr ""
+msgstr "Seleccioneu l'estat de la llum."
 
 #: views/modals/area.html:800
 msgid "Ignore high alarm"
-msgstr ""
+msgstr "Ignora l'alarma superior"
 
 #: views/modals/area.html:804
 msgid "Toggle to ignore the high alarm value of the sensors, and use the low alarm value only"
 msgstr ""
+"Habiliteu per ignorar el valor d'alarma superior dels sensors i utilitzeu "
+"només el valor d'alarma inferior"
 
 #: views/modals/area.html:830
 msgid "Here you can enter periods where the sensors will change their values according to the list below. Make sure the periods are in chronological order!"
 msgstr ""
+"Aquí podeu introduir períodes en què els sensors canviaran els seus valors "
+"segons la llista següent. Assegureu-vos que els períodes estiguin en ordre "
+"cronològic!"
 
 #: views/modals/area.html:837
 msgid "Source"
-msgstr ""
+msgstr "Origen"
 
 #: views/modals/area.html:842
 msgid "Period/duration"
-msgstr ""
+msgstr "Període/durada"
 
 #: views/modals/area.html:847
 msgid "External source url"
-msgstr ""
+msgstr "URL d'origen extern"
 
 #: views/modals/area.html:857
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #: views/modals/area.html:877
 msgid "After x minutes change to value or at exactly a time stamp."
-msgstr ""
+msgstr "Canvieu el valor després de x minuts o a una hora específica."
 
 #: views/modals/area.html:884
 msgid "Enter a full url to the external source according to the Remote data feature."
 msgstr ""
+"Introduïu un URL complet d'origen extern segons la funció de dades remotes."
 
 #: views/modals/area.html:891
 msgid "Enter a negative or positive offset value."
