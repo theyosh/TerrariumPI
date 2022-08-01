@@ -35,3 +35,5 @@ Software and sample programs for the LED-Warrior18 can be downloaded from our [G
 - Minimal external circuitry
 - 5 V supply
 - Measurement: 35mm x 25mm
+
+{% include_relative _relay_detail.md %}
