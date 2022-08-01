@@ -75,11 +75,19 @@ class terrariumRelayDimmerLEDWarrior18(terrariumRelayDimmer):
     if '' == frequency or frequency < 0:
       frequency = self._DIMMER_FREQ
 
+
+    print('[calibrate] Using old/existing/loaded frequencies')
+    print(frequencies)
+    print(f'[calibrate] Set new frequency for relay nr {self.device[0]}: {frequency}')
+
     frequencies[self.__relay_nr] = int(frequency)
 
     self.WriteFrequency(frequencies[0],frequencies[1])
 
     self.device[3].set_data(self.device[4],frequencies,-1)
+    print(f'[calibrate] Set frequency for relay {self.device[0]} at value: {frequencies[self.__relay_nr]}')
+    print(frequencies)
+
 
   def _load_hardware(self):
     # address is expected as `[relay_number],[i2c_address],[i2c_bus (optional)]`
@@ -108,12 +116,30 @@ class terrariumRelayDimmerLEDWarrior18(terrariumRelayDimmer):
     return address
 
   def _set_hardware_value(self, state):
+
     pwm = self.ReadPwm16()
+
+    print('[_set_hardware_value] Old existing/running PWM')
+    print(pwm)
+    print(f'[_set_hardware_value] Set new PWM value to: {state} -> {int((float(state) / 100.0) * float(self._DIMMER_DIM))}')
+
     pwm[self.__relay_nr] = int((float(state) / 100.0) * float(self._DIMMER_DIM))
+    print('[_set_hardware_value] New PWM values')
+    print(pwm)
+
     self.WritePwm16(pwm[0],pwm[1])
+
+    print(f'[_set_hardware_value] Changed relay {self.device[0]} to value: {state}')
+
     return True
 
   def _get_hardware_value(self):
     pwm = self.ReadPwm16()
 
-    return int((float(pwm[self.__relay_nr]) / float(self._DIMMER_DIM)) * 100)
+    print('[_get_hardware_value] Current relays pwm values')
+    print(pwm)
+
+    value = int((float(pwm[self.__relay_nr]) / float(self._DIMMER_DIM)) * 100)
+    print(f'[_get_hardware_value] Current pwm value for relay {self.device[0]} is {value}')
+
+    return value
