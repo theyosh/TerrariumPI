@@ -91,12 +91,12 @@
       <div class="col-6 col-sm-6 col-md-6 col-lg-3">
         <div class="form-group">
           <label for="dimmer_frequency">{{ _('Dimmer frequency in Hz') }}</label>
-          <input type="number" step="1" min="100" max="10000" class="form-control" id="dimmer_frequency" name="dimmer_frequency" placeholder="{{ _('Dimmer frequency in Hz') }}" value="10000">
+          <input type="number" step="1" min="100" max="65535" class="form-control" id="dimmer_frequency" name="dimmer_frequency" placeholder="{{ _('Dimmer frequency in Hz') }}" value="10000">
           <small class="text-muted">
             {{ _('The frequency on which the dimmer operates.') }}
           </small>
           <div class="invalid-feedback">
-            {{ _('Please enter value between %s and %s.') % ('100','10000') }}
+            {{ _('Please enter value between %s and %s.') % ('100','65535') }}
           </div>
         </div>
       </div>
