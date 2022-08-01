@@ -10,3 +10,5 @@ tags: [debug]
 4. Manual start TerrariumPI: `python terrariumPI.py`
 
 This should start the TerrariumPI in console mode. So all errors should now be visible to the console.
+
+When you are done debugging, you can press `Ctrl+C` once to stop TerrariumPI.
