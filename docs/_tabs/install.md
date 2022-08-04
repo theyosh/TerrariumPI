@@ -43,7 +43,7 @@ As from version 4.1 there is a [Docker image](https://hub.docker.com/r/theyosh/t
 
 Install docker according to: [https://www.upswift.io/post/install-docker-compose-on-raspberry-pi](https://www.upswift.io/post/install-docker-compose-on-raspberry-pi) including install Docker-compose at chapter 7
 
-Then you need to setup a `docker-compose.yaml` file. There is an example `docker-compose.yaml.example` which can be used as a starting point:
+Then you need to setup a `docker-compose.yaml` file. There is an example `docker-compose.yaml.example` in the `contrib` folder which can be used as a starting point:
 
 ```yaml
 version: "3.7"
