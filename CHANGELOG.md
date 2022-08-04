@@ -2,6 +2,125 @@ Changelog
 =========
 
 
+4.4.0 (2022-08-04)
+------------------
+
+**New**
+------
+- Add new release post. [TheYOSH]
+- Add documentation. [#720](https://github.com/theyosh/TerrariumPI/issues/720). [TheYOSH]
+- Add extra documentation about deleting old data. [#723](https://github.com/theyosh/TerrariumPI/issues/723). [TheYOSH]
+- Add extra info about to stop debugging. [TheYOSH]
+- Add some debug. [#720](https://github.com/theyosh/TerrariumPI/issues/720). [TheYOSH]
+- Added translation using Weblate (Catalan) [cmonicob]
+- Add Tasmota flashing requirement. [J.G. Rubingh]
+- Added translation using Weblate (Spanish) [vikrilow]
+- Add support for AtlasScientific sensors. [#718](https://github.com/theyosh/TerrariumPI/issues/718). [TheYOSH]
+- Add I2C 4channel documentation. [#709](https://github.com/theyosh/TerrariumPI/issues/709) [#705](https://github.com/theyosh/TerrariumPI/issues/705). [TheYOSH]
+- Add I2C 4Channel dimmer. [#709](https://github.com/theyosh/TerrariumPI/issues/709). [TheYOSH]
+- Add some debugging. [TheYOSH]
+
+**Fixes**
+------
+- Fix adding new relay. [#720](https://github.com/theyosh/TerrariumPI/issues/720). [TheYOSH]
+- Fix Meross sensor. [TheYOSH]
+- Spacing fix. [TheYOSH]
+- Fix Pillow depricated call. [TheYOSH]
+- Fix some spell checks. [TheYOSH]
+- Fix notification system when profile image is missing. [TheYOSH]
+- Fix translations. [TheYOSH]
+- Fix text typo. [#716](https://github.com/theyosh/TerrariumPI/issues/716). [TheYOSH]
+- Fix float cast issue. [TheYOSH]
+- Docu fix 1. [TheYOSH]
+- Fix readout. [#709](https://github.com/theyosh/TerrariumPI/issues/709). [TheYOSH]
+- Fix nasty timetable bug. [TheYOSH]
+- Fix BrightPi. [TheYOSH]
+
+**Updates**
+------
+- Update release date. [TheYOSH]
+- Update version number. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update docu. [TheYOSH]
+- TExt update. [J.G. Rubingh]
+- Meross updates. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update image (2) [TheYOSH]
+- Update image. [TheYOSH]
+- Language updates. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update I2C address documentation. [TheYOSH]
+- Update I2C 4Channel dimmer. [#709](https://github.com/theyosh/TerrariumPI/issues/709). [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+
+**Other**
+------
+- Cleanup docker compose example file. [TheYOSH]
+- Allow higher frequencies. [#720](https://github.com/theyosh/TerrariumPI/issues/720). [TheYOSH]
+- Translated using Weblate (Catalan) [cmonicob]
+
+  Currently translated at 37.3% (285 of 763 strings)
+- Translated using Weblate (Catalan) [cmonicob]
+
+  Currently translated at 26.6% (203 of 763 strings)
+- Settings check. [TheYOSH]
+- Translated using Weblate (Spanish (Argentina)) [cmonicob]
+
+  Currently translated at 32.5% (248 of 763 strings)
+- Merge branch '4.x.y.z' into main. [TheYOSH]
+- Make disabled areas readonly (part2). [TheYOSH]
+- Make disalbed areas readonly. [TheYOSH]
+- Remove some debug. [TheYOSH]
+- Revert back some DB changes. [TheYOSH]
+- Database improvements. [TheYOSH]
+- First attempt to support the LED Warrior18 dimmer. [#720](https://github.com/theyosh/TerrariumPI/issues/720). [TheYOSH]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (763 of 763 strings)
+- Improve sensor stability. [#569](https://github.com/theyosh/TerrariumPI/issues/569). [TheYOSH]
+- Seccond attempt. [#709](https://github.com/theyosh/TerrariumPI/issues/709). [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Fine tune docker file. [TheYOSH]
+- Cleanup. [TheYOSH]
+- Try to get a more stable sensor. [TheYOSH]
+- Translated using Weblate (German) [theyosh]
+
+  Currently translated at 100.0% (763 of 763 strings)
+- Translated using Weblate (Portuguese (Brazil)) [theyosh]
+
+  Currently translated at 100.0% (763 of 763 strings)
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (763 of 763 strings)
+- Translated using Weblate (English (United States)) [theyosh]
+
+  Currently translated at 100.0% (763 of 763 strings)
+- Translated using Weblate (English (United Kingdom)) [theyosh]
+
+  Currently translated at 100.0% (763 of 763 strings)
+- Change enclosure overview page. [#716](https://github.com/theyosh/TerrariumPI/issues/716). [TheYOSH]
+- Translated using Weblate (Polish) [oliwertrzeciak]
+
+  Currently translated at 30.9% (236 of 763 strings)
+- Debug cleanup. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (763 of 763 strings)
+- More webcam debug logging. [TheYOSH]
+- Webcam debug logging. [TheYOSH]
+- Speed up engine with more parallel processing. [TheYOSH]
+
+
 4.3.3 (2022-05-17)
 ------------------
 
@@ -15,6 +134,11 @@ Changelog
 
 **Updates**
 ------
+- Update docu. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update translation source. [TheYOSH]
 - Small text updates. [TheYOSH]
@@ -34,6 +158,9 @@ Changelog
 
 **Other**
 ------
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [TheYOSH]
+- Merge branch '4.x.y.z' into main. [TheYOSH]
 - Merge branch '4.x.y.z' into main. [TheYOSH]
 - Merge branch '4.x.y.z' into main. [TheYOSH]
 - Merge branch '4.x.y.z' into main. [TheYOSH]
