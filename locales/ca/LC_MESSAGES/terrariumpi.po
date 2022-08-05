@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.3.3\n"
 "POT-Creation-Date: 2022-07-02 11:57+CEST\n"
-"PO-Revision-Date: 2022-07-29 19:42+0000\n"
+"PO-Revision-Date: 2022-08-06 19:42+0000\n"
 "Last-Translator: cmonicob <cmonicob@gmail.com>\n"
 "Language-Team: Catalan <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/ca/>\n"
@@ -1088,6 +1088,9 @@ msgstr "L'hora del dia en què els relés es desactiven cada nit."
 #: views/modals/area.html:381
 msgid "The duration when the players should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full night."
 msgstr ""
+"La durada que haurien d'estar encesos els relés. Si és més curt que tot el "
+"dia, obtindreu la funcionalitat del temporitzador. Introduïu \"0\" per tenir "
+"un dia complet."
 
 #: views/modals/area.html:393
 msgid "The duration when the players should be stay off when switched off. Enter '0' to disable."
@@ -1320,75 +1323,79 @@ msgstr ""
 
 #: views/modals/area.html:891
 msgid "Enter a negative or positive offset value."
-msgstr ""
+msgstr "Introduïu un valor de compensació negatiu o positiu."
 
 #: views/modals/area.html:898
 msgid "Enter a duration in minutes or the actual time of the day."
-msgstr ""
+msgstr "Introduïu la durada en minuts o l'hora especificada del dia."
 
 #: views/modals/area.html:905
 msgid "Enter a negative or positive value for a relative action. A number is treated as an absolute value."
 msgstr ""
+"Introduïu un valor negatiu o positiu per a una acció relativa. Un numero es "
+"tracta com un valor absolut."
 
 #: views/modals/area.html:912
 msgid "Add a new row"
-msgstr ""
+msgstr "Afegeix una fila nova"
 
 #: views/modals/area.html:919
 msgid "Remove row"
-msgstr ""
+msgstr "Elimina fila"
 
 #: views/modals/area.html:929
 msgid "After x minutes"
-msgstr ""
+msgstr "Després de x minuts"
 
 #: views/modals/area.html:930
 msgid "At time"
-msgstr ""
+msgstr "Temps de funcionament"
 
 #: views/modals/area.html:931
 msgid "Using current weather"
-msgstr ""
+msgstr "Utilitzant el clima actual"
 
 #: views/modals/area.html:932
 msgid "Use json source"
-msgstr ""
+msgstr "Utilitzeu una font JSON externa"
 
 #: views/modals/area.html:933
 msgid "Use script"
-msgstr ""
+msgstr "Utilitzar script"
 
 #: views/modals/area.html:936
 msgid "Select a valid option."
-msgstr ""
+msgstr "Seleccioneu una opció vàlida."
 
 #: views/modals/area.html:944
 msgid "Enter a valid url, local json file or script file."
-msgstr ""
+msgstr "Introduïu una URL vàlida, un fitxer JSON local o un fitxer d'script."
 
 #: views/modals/area.html:952
 msgid "Offset."
-msgstr ""
+msgstr "Compensació."
 
 #: views/modals/area.html:990
 msgid "Dimmer on duration"
-msgstr ""
+msgstr "Durada de l'atenuació"
 
 #: views/modals/area.html:994
 msgid "Dimmer off duration"
-msgstr ""
+msgstr "Durada de l'atenuació de l'apagat"
 
 #: views/modals/area.html:1004
 msgid "Select the delay and duration for the dimmer to go to on or off in minutes. Max duration is 180 minutes."
 msgstr ""
+"Seleccioneu el retard i la durada perquè el regulador s'encengui o s'apagui "
+"en minuts. La durada màxima és de 180 minuts."
 
 #: views/modals/area.html:1011
 msgid "Relay delay on"
-msgstr ""
+msgstr "Retard activació del relé"
 
 #: views/modals/area.html:1015
 msgid "Relay delay off"
-msgstr ""
+msgstr "Retard apagar el relé"
 
 #: views/modals/area.html:1023
 msgid "Select the delay in minutes that a relay waits before it turns on. Max delay is 180 minutes."
