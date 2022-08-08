@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-03-25 12:31+CET\n"
-"PO-Revision-Date: 2021-08-15 09:40+0000\n"
-"Last-Translator: PETIT Jordan <jordan33004@laposte.net>\n"
+"PO-Revision-Date: 2022-08-09 16:42+0000\n"
+"Last-Translator: Christophe <chris.internet@live.ca>\n"
 "Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/3-x-y-z/fr_BE/>\n"
 "Language: fr_BE\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
@@ -1697,12 +1697,12 @@ msgstr "Différence jour/nuit"
 #: views/inc/usage_dashboard.tpl:158 views/inc/usage_sensors.tpl:132
 #: views/sensor_settings.tpl:140 views/system_environment.tpl:370
 msgid "Humidity"
-msgstr "Humidité"
+msgstr "Hygrométrie"
 
 #: views/dashboard.tpl:224 views/inc/menu.tpl:53 views/sensor_settings.tpl:141
 #: views/system_environment.tpl:581
 msgid "Moisture"
-msgstr ""
+msgstr "Humidité"
 
 #: views/dashboard.tpl:277 views/inc/menu.tpl:62 views/sensor_settings.tpl:144
 #: views/system_environment.tpl:1003
@@ -1712,7 +1712,7 @@ msgstr "pH"
 #: views/dashboard.tpl:330 views/inc/menu.tpl:56 views/sensor_settings.tpl:142
 #: views/system_environment.tpl:792
 msgid "Conductivity"
-msgstr ""
+msgstr "Conductivité"
 
 #: views/dashboard.tpl:383 views/system_environment.tpl:1214
 msgid "Water tank"
@@ -1721,12 +1721,12 @@ msgstr "Réservoir d'eau"
 #: views/dashboard.tpl:436 views/inc/menu.tpl:68 views/sensor_settings.tpl:149
 #: views/system_environment.tpl:1378
 msgid "Fertility"
-msgstr ""
+msgstr "Engrais"
 
 #: views/dashboard.tpl:489 views/inc/menu.tpl:71 views/sensor_settings.tpl:150
 #: views/system_environment.tpl:1589
 msgid "CO2"
-msgstr ""
+msgstr "CO2"
 
 #: views/dashboard.tpl:600
 msgid "Average Temperature"
