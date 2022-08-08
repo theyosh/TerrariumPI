@@ -6,29 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2022-07-02 11:57+CEST\n"
-"PO-Revision-Date: 2020-05-21 19:44+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2022-08-09 16:42+0000\n"
+"Last-Translator: Christophe <chris.internet@live.ca>\n"
 "Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
-"terrariumpi/webinterface/fr_BE/>\n"
+"terrariumpi/4-x-y-z/fr_BE/>\n"
 "Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.0.2\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
-#, fuzzy
-#| msgid "Lights"
 msgid "Lighting"
-msgstr "Eclairage"
+msgstr "Éclairage"
 
 #: terrariumArea.py:38
-#, fuzzy
-#| msgid "Settings"
 msgid "Heating"
-msgstr "Paramètres"
+msgstr "Chauffage"
 
 #: terrariumArea.py:44
 msgid "Cooling"
@@ -36,7 +32,7 @@ msgstr "Refroidissement"
 
 #: terrariumArea.py:50
 msgid "Humidity"
-msgstr "Humidité"
+msgstr "Hygrométrie"
 
 #: terrariumArea.py:56
 msgid "Water tank"
@@ -48,121 +44,99 @@ msgstr "Audio"
 
 #: terrariumArea.py:68
 msgid "CO2"
-msgstr ""
+msgstr "CO2"
 
 #: terrariumArea.py:74
 msgid "Conductivity"
-msgstr ""
+msgstr "Conductivité"
 
 #: terrariumArea.py:80
-#, fuzzy
-#| msgid "Humidity sensor"
 msgid "Fertility"
-msgstr "Capteur d'humidité"
+msgstr "Engrais"
 
 #: terrariumArea.py:86
 msgid "Moisture"
-msgstr ""
+msgstr "Humidité"
 
 #: terrariumArea.py:92
 msgid "pH"
 msgstr "pH"
 
 #: terrariumEngine.py:53
-#, fuzzy
-#| msgid "Temperature"
 msgid "temperature"
-msgstr "Température"
+msgstr "température"
 
 #: terrariumEngine.py:54
-#, fuzzy
-#| msgid "Distance"
 msgid "distance"
-msgstr "Distance"
+msgstr "distance"
 
 #: terrariumEngine.py:55
 msgid "altitude"
-msgstr ""
+msgstr "altitude"
 
 #: terrariumEngine.py:56
 msgid "pressure"
-msgstr ""
+msgstr "pression"
 
 #: terrariumEngine.py:57
-#, fuzzy
-#| msgid "Humidity"
 msgid "humidity"
-msgstr "Humidité"
+msgstr "humidité"
 
 #: terrariumEngine.py:58
-#, fuzzy
-#| msgid "Moisture sensor"
 msgid "moisture"
-msgstr "Capteur de humidité"
+msgstr "humidité"
 
 #: terrariumEngine.py:59
-#, fuzzy
-#| msgid "Humidity sensor"
 msgid "conductivity"
-msgstr "Capteur d'humidité"
+msgstr "conductivité"
 
 #: terrariumEngine.py:60
 msgid "ph"
-msgstr ""
+msgstr "pH"
 
 #: terrariumEngine.py:61
-#, fuzzy
-#| msgid "Night"
 msgid "light"
-msgstr "Nuit"
+msgstr "lumière"
 
 #: terrariumEngine.py:62
 msgid "uva"
-msgstr ""
+msgstr "UVa"
 
 #: terrariumEngine.py:63
 msgid "uvb"
-msgstr ""
+msgstr "UVb"
 
 #: terrariumEngine.py:64
 msgid "uvi"
-msgstr ""
+msgstr "UVi"
 
 #: terrariumEngine.py:65
-#, fuzzy
-#| msgid "Humidity sensor"
 msgid "fertility"
-msgstr "Capteur d'humidité"
+msgstr "engrais"
 
 #: terrariumEngine.py:66
 msgid "co2"
-msgstr ""
+msgstr "co2"
 
 #: terrariumEngine.py:67
-#, fuzzy
-#| msgid "Volume"
 msgid "volume"
-msgstr "Volume"
+msgstr "volume"
 
 #: terrariumEngine.py:68
-#, fuzzy
-#| msgid "Watertank"
 msgid "watertank"
-msgstr "Réservoir d'eau"
+msgstr "réservoir d'eau"
 
 #: terrariumEngine.py:69
-#, fuzzy
-#| msgid "Wind speed"
 msgid "windspeed"
-msgstr "Vitesse du vent"
+msgstr "vitesse du vent"
 
 #: terrariumEngine.py:70
 msgid "water_flow"
-msgstr ""
+msgstr "débit_d'eau"
 
 #: terrariumEngine.py:71
 msgid "wattage"
-msgstr ""
+msgstr "wattage"
 
 #: terrariumEngine.py:1193 views/dashboard.html:18 views/status.html:112
 #, fuzzy
@@ -171,10 +145,8 @@ msgid "Up time"
 msgstr "En ligne depuis"
 
 #: terrariumEngine.py:1199
-#, fuzzy
-#| msgid "System log"
 msgid "System load"
-msgstr "Journaux du système"
+msgstr "Charge du système"
 
 #: terrariumEngine.py:1205 views/status.html:44
 msgid "CPU Temperature"
@@ -182,19 +154,15 @@ msgstr "Température du CPU"
 
 #: terrariumEngine.py:1211
 msgid "Storage"
-msgstr ""
+msgstr "Stockage"
 
 #: terrariumEngine.py:1217
-#, fuzzy
-#| msgid "Memory usage"
 msgid "Memory"
-msgstr "Utilisation de la mémoire"
+msgstr "Mémoire"
 
 #: terrariumEngine.py:1238
-#, fuzzy
-#| msgid "The sensor type"
 msgid "average {sensor_type}"
-msgstr "Le type de capteur"
+msgstr "moyenne {type_de_capteur}"
 
 #: terrariumEngine.py:1414
 #, fuzzy
@@ -203,68 +171,48 @@ msgid "last update"
 msgstr "Dernière Mise à jour"
 
 #: terrariumNotification.py:36
-#, fuzzy
-#| msgid "Remote source"
 msgid "Local date"
-msgstr "Source distante"
+msgstr "Date locale"
 
 #: terrariumNotification.py:37
-#, fuzzy
-#| msgid "Date and time"
 msgid "Local date, day and month"
-msgstr "Date et heure"
+msgstr "Date locale, jour et mois"
 
 #: terrariumNotification.py:38
-#, fuzzy
-#| msgid "Remote source"
 msgid "Local time"
-msgstr "Source distante"
+msgstr "Heure locale"
 
 #: terrariumNotification.py:39
-#, fuzzy
-#| msgid "Date and time"
 msgid "Local time, hours and minutes"
-msgstr "Date et heure"
+msgstr "Heure locale, heures et minutes"
 
 #: terrariumNotification.py:40
-#, fuzzy
-#| msgid "Date and time"
 msgid "Local date and time"
-msgstr "Date et heure"
+msgstr "Date et heure locales"
 
 #: terrariumNotification.py:48
-#, fuzzy
-#| msgid "Authentication"
 msgid "Authentication login error"
-msgstr "Authentication"
+msgstr "Erreur d'authentification"
 
 #: terrariumNotification.py:50
 msgid "IP of the wrong login attempt"
-msgstr ""
+msgstr "IP de la mauvaise tentative de connexion"
 
 #: terrariumNotification.py:51
-#, fuzzy
-#| msgid "Filename"
 msgid "Used username"
-msgstr "Nom de fichier"
+msgstr "Nom d'utilisateur utilisé"
 
 #: terrariumNotification.py:52
-#, fuzzy
-#| msgid "New admin password"
 msgid "Used password"
-msgstr "Nouveau mot de passe administrateur"
+msgstr "Mot de passe utilisé"
 
 #: terrariumNotification.py:58
-#, fuzzy
-#| msgid "System log"
 msgid "System warning"
-msgstr "Journaux du système"
+msgstr "Avertissement système"
 
 #: terrariumNotification.py:60
-#, fuzzy
-#| msgid "No warning messages"
 msgid "Warning message"
-msgstr "Aucun message d'avertissement"
+msgstr "Message d'avertissement"
 
 #: terrariumNotification.py:66
 #, fuzzy
