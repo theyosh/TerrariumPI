@@ -1129,10 +1129,10 @@ class terrariumEngine(object):
       for process in current_process.children(recursive=True):
         if 'bluepy-helper' in ' '.join(process.cmdline()):
           try:
-            logger.warning(f'Killing hanging bluetooth helper process')
+            logger.warning('Killing hanging bluetooth helper process')
             process.kill()
-          except:
-            pass
+          except Exception as ex:
+            logger.error(f'Error killing hanging bluetooth helper process: {ex}')
 
       duration = time.time() - start
       time_left = terrariumEngine.__ENGINE_LOOP_TIMEOUT - duration

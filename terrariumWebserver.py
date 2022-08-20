@@ -5,9 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import gettext
 import threading
 import json
-import os
 import datetime
-import hashlib
 import functools
 import re
 from PIL import Image
@@ -16,7 +14,7 @@ from uuid import uuid4
 from pathlib import Path
 from hashlib import md5
 
-from bottle import BaseRequest, Bottle, default_app, request, abort, redirect, static_file, jinja2_template, url, error, response, auth_basic, HTTPError, RouteBuildError
+from bottle import BaseRequest, default_app, request, redirect, static_file, jinja2_template, response, auth_basic, HTTPError, RouteBuildError
 #Increase bottle memory to max 5MB to process images in WYSIWYG editor
 BaseRequest.MEMFILE_MAX = 5 * 1024 * 1024
 
@@ -124,9 +122,9 @@ class terrariumWebserver(object):
       cookie_data = request.get_cookie('auth', secret=self.cookie_secret)
       if cookie_data is not None:
         authenticated = self.engine.authenticate(cookie_data[0],cookie_data[1])
-    except Exception:
+    except Exception as ex:
       # Some strange cookie error when cleared... we can ignore that
-      pass
+      logger.debug(f'Clear cookie issue: {ex}')
 
     # Variables
     variables = {
@@ -330,7 +328,7 @@ class terrariumWebsocket(object):
           try:
             self.clients.remove(messages)
           except Exception as ex:
-            pass
+            logger.debug(f'Could not remove websocket client from queue: {ex}')
 
           break
 

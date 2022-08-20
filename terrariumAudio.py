@@ -24,9 +24,9 @@ class terrariumAudio(object):
         (_, longname) = alsaaudio.card_name(i)
         soundcards.append({'index' : int(i), 'name' : longname})
 
-      except Exception:
+      except Exception as ex:
         # Just ignore error, and skip it
-        pass
+        logger.debug(f'Not a valid soundcard. Just ignore: {ex}')
 
     return soundcards
 

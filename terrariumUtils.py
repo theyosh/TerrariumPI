@@ -452,8 +452,8 @@ class terrariumUtils():
     for index in range(len(search)):
       try:
         logline = re.sub(search[index], replace[index], logline)
-      except Exception:
-        pass
+      except Exception as ex:
+        logger.debug(f'Could not clear with regex: {ex}')
 
     return logline
 

@@ -1,3 +1,6 @@
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
+
 from . import terrariumSensor, terrariumSensorUpdateException
 
 # pip install pyownet
@@ -47,8 +50,8 @@ class terrariumOWFSSensor(terrariumSensor):
                                 unit_value_callback = unit_value_callback,
                                 trigger_callback    = trigger_callback)
 
-        except protocol.OwnetError:
-          pass
+        except protocol.OwnetError as ex:
+          logger.warning(f'Some problems with OWFS reading temperature: {ex}')
 
         try:
           float(proxy.read(sensor + '/humidity'))
@@ -60,9 +63,9 @@ class terrariumOWFSSensor(terrariumSensor):
                                 unit_value_callback = unit_value_callback,
                                 trigger_callback    = trigger_callback)
 
-        except protocol.OwnetError:
-          pass
+        except protocol.OwnetError as ex:
+          logger.warning(f'Some problems with OWFS reading humidity: {ex}')
 
     except Exception:
       # No hardware available
-      pass
+      logger.debug('No OWFS hardware available')

@@ -9,7 +9,6 @@ import sys
 
 from pathlib import Path
 from hashlib import md5
-from time import time
 from operator import itemgetter
 from func_timeout import func_timeout, FunctionTimedOut
 
@@ -299,7 +298,7 @@ class terrariumRelay(object):
           yield relay
       except AttributeError as ex:
         # The relay does not support scanning. Just ignore
-        pass
+        logger.debug(f'Relay {relay_device} does not support scanning: {ex}')
 
 class terrariumRelayDimmer(terrariumRelay):
   TYPE = None

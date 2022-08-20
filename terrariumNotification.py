@@ -236,9 +236,8 @@ class terrariumNotification(terrariumSingleton):
     return sorted(data, key=itemgetter('name'))
 
   def __init__(self):
-    """
-    Initialize empty notification system with system defaults
-    """
+    "Initialize empty notification system with system defaults"
+
     self.__rate_limiter_counter = {
       'total' :
         {

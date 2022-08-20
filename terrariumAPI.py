@@ -214,7 +214,7 @@ class terrariumAPI(object):
       area_data = area.to_dict(exclude='enclosure')
       area_data['enclosure'] = area.enclosure.id
       return area_data
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting area {area} detail. {ex}')
@@ -247,7 +247,7 @@ class terrariumAPI(object):
   def area_add(self):
     try:
       # Make sure the enclosure does exists
-      Enclosure[request.json['enclosure']]
+      _ = Enclosure[request.json['enclosure']]
 
       self.__area_relay_check(request.json)
 
@@ -257,7 +257,7 @@ class terrariumAPI(object):
       area = Area(**request.json)
 
       return self.area_detail(area.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Enclosure with id {request.json["enclosure"]} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Area could not be added. {ex}')
@@ -275,7 +275,7 @@ class terrariumAPI(object):
       self.webserver.engine.update(terrariumArea,**request.json)
 
       return self.area_detail(area.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating area {area}. {ex}')
@@ -293,7 +293,7 @@ class terrariumAPI(object):
 
       self.webserver.engine.delete(terrariumArea, area_id, enclosure_id)
       return {'message' : message}
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting area {area}. {ex}')
@@ -317,7 +317,7 @@ class terrariumAPI(object):
       audiofile = Audiofile[audiofile]
       audiofile_data = audiofile.to_dict()
       return audiofile_data
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Audio file with id {audiofile} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting audiofile {audiofile} detail. {ex}')
@@ -362,7 +362,7 @@ class terrariumAPI(object):
       audiofile.delete()
       orm.commit()
       return {'message' : message}
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Audio file with id {audiofile} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting audiofile {audiofile}. {ex}')
@@ -411,7 +411,7 @@ class terrariumAPI(object):
 
       return { 'data' : data }
 
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting history for button {button}: {ex}')
@@ -431,7 +431,7 @@ class terrariumAPI(object):
       button_data = button.to_dict(exclude='enclosure')
       button_data['value']  = button.value
       return button_data
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting button {button}: {ex}')
@@ -459,7 +459,7 @@ class terrariumAPI(object):
       orm.commit()
       self.webserver.engine.update(terrariumButton,**request.json)
       return self.button_detail(button.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating button {button}: {ex}')
@@ -472,7 +472,7 @@ class terrariumAPI(object):
       orm.commit()
       self.webserver.engine.delete(terrariumButton,button)
       return {'message' : message}
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting button {button}: {ex}')
@@ -487,7 +487,7 @@ class terrariumAPI(object):
         raise HTTPError(status=404, body=f'Calender with id {calendar} does not exists.')
 
       return data
-    except Exception as ex:
+    except Exception:
       raise HTTPError(status=404, body=f'Calender with id {calendar} does not exists.')
 
   def calendar_delete(self, calendar):
@@ -600,7 +600,7 @@ class terrariumAPI(object):
         enclosure_data['webcams'].append(webcam.to_dict(exclude='enclosure'))
 
       return enclosure_data
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Enclosure with id {enclosure} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting enclosure {enclosure} detail. {ex}')
@@ -616,7 +616,7 @@ class terrariumAPI(object):
       enclosure = Enclosure(**request.json)
 
       return self.enclosure_detail(enclosure.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Door with id {request.json["doors"]} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Enclosure could not be added. {ex}')
@@ -640,7 +640,7 @@ class terrariumAPI(object):
       orm.commit()
 
       return self.enclosure_detail(enclosure.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Enclosure with id {enclosure} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating enclosure {enclosure}. {ex}')
@@ -653,7 +653,7 @@ class terrariumAPI(object):
       orm.commit()
  #     self.webserver.engine.delete(terrariumEnclosure,enclosure)
       return {'message' : message}
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Enclosure with id {enclosure} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting enclosure {enclosure}. {ex}')
@@ -677,7 +677,7 @@ class terrariumAPI(object):
       message_data = message.to_dict(with_collections=True)
       message_data['services'] = [self.notification_service_detail(service) for service in message_data['services']]
       return message_data
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Notification message with id {message} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting notification message with id {message} detail. {ex}')
@@ -694,7 +694,7 @@ class terrariumAPI(object):
       orm.commit()
 
       return self.notification_message_detail(message.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Notification message with id {message} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating notification message with id {message}. {ex}')
@@ -707,7 +707,7 @@ class terrariumAPI(object):
       orm.commit()
 
       return {'message' : title}
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Notification message with id {message} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting notification message with id {message}. {ex}')
@@ -741,7 +741,7 @@ class terrariumAPI(object):
       service_data = service.to_dict()
 
       return service_data
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting notification service with id {service} detail. {ex}')
@@ -756,7 +756,7 @@ class terrariumAPI(object):
       self.webserver.engine.notification.reload_service(service.id,{**request.json})
 
       return self.notification_service_detail(service.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating notification service with id {service}. {ex}')
@@ -771,7 +771,7 @@ class terrariumAPI(object):
       orm.commit()
 
       return {'message' : message}
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting notification service with id {service}. {ex}')
@@ -815,7 +815,7 @@ class terrariumAPI(object):
       playlist_data['duration'] = playlist.duration
 
       return playlist_data
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Playlist with id {playlist} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting playlist {playlist} detail. {ex}')
@@ -827,7 +827,7 @@ class terrariumAPI(object):
       playlist = Playlist(**request.json)
 
       return self.playlist_detail(playlist.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Enclosure with id {request.json["enclosure"]} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Playlist could not be added. {ex}')
@@ -840,7 +840,7 @@ class terrariumAPI(object):
       playlist.set(**request.json)
       orm.commit()
       return self.playlist_detail(playlist.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Playlist with id {playlist} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating playlist {playlist}. {ex}')
@@ -853,7 +853,7 @@ class terrariumAPI(object):
       orm.commit()
 
       return {'message' : message}
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Playlist with id {playlist} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting playlist {playlist}. {ex}')
@@ -862,13 +862,13 @@ class terrariumAPI(object):
   # Reboot/start API
   def server_action(self, action):
     if 'restart' == action:
-      ok = self.webserver.engine.restart()
+      self.webserver.engine.restart()
       return { 'message' : f'TerrariumPI {self.webserver.engine.settings["version"]} is being restarted!' }
     elif 'reboot' == action:
-      ok = self.webserver.engine.reboot()
+      self.webserver.engine.reboot()
       return { 'message' : f'TerrariumPI {self.webserver.engine.settings["version"]} is being rebooted!' }
     elif 'shutdown' == action:
-      ok = self.webserver.engine.shutdown()
+      self.webserver.engine.shutdown()
       return { 'message' : f'TerrariumPI {self.webserver.engine.settings["version"]} is being shutdown!' }
 
 
@@ -882,7 +882,7 @@ class terrariumAPI(object):
       orm.commit()
 
       return self.relay_detail(relay.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting relay {relay} detail. {ex}')
@@ -895,7 +895,7 @@ class terrariumAPI(object):
       orm.commit()
 
       return self.relay_detail(relay.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating manual mode on relay {relay} detail. {ex}')
@@ -909,7 +909,7 @@ class terrariumAPI(object):
       orm.commit()
 
       return self.relay_detail(relay.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating manual mode on relay {relay} detail. {ex}')
@@ -959,7 +959,7 @@ class terrariumAPI(object):
 
       return { 'data' : data }
 
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'{ex}')
@@ -986,7 +986,7 @@ class terrariumAPI(object):
     try:
       relay = Relay[relay]
       return relay.to_dict(exclude='webcam')
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting relay {relay} detail. {ex}')
@@ -1019,7 +1019,7 @@ class terrariumAPI(object):
       self.webserver.engine.update(terrariumRelay,**request.json)
 
       return self.relay_detail(relay.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating relay {relay}. {ex}')
@@ -1034,7 +1034,7 @@ class terrariumAPI(object):
       self.webserver.engine.delete(terrariumRelay,relay)
 
       return {'message' : message}
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting relay {relay}. {ex}')
@@ -1136,7 +1136,7 @@ class terrariumAPI(object):
     try:
       sensor = Sensor[sensor]
       return sensor.to_dict()
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Sensor with id {sensor} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting sensor {sensor} detail. {ex}')
@@ -1177,7 +1177,7 @@ class terrariumAPI(object):
         self.webserver.engine.sensors[sensor.id].calibrate(request.json['calibration'])
 
       return self.sensor_detail(sensor.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Sensor with id {sensor} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating sensor {sensor}. {ex}')
@@ -1190,7 +1190,7 @@ class terrariumAPI(object):
       orm.commit()
       self.webserver.engine.delete(terrariumSensor,sensor)
       return {'message' : message}
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Sensor with id {sensor} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting sensor {sensor}. {ex}')
@@ -1228,7 +1228,7 @@ class terrariumAPI(object):
             })
 
       return data
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Setting with id {setting} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error processing setting {setting}. {ex}')
@@ -1265,7 +1265,7 @@ class terrariumAPI(object):
 
       self.webserver.engine.load_settings()
       return data.to_dict()
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Setting with id {setting} does not exists.')
     except Exception as ex:
       raise HTTPError(status=400, body=f'Error updating new setting {setting}. {ex}')
@@ -1292,7 +1292,7 @@ class terrariumAPI(object):
 
         orm.commit()
 
-      except orm.core.ObjectNotFound as ex:
+      except orm.core.ObjectNotFound:
         # Non existing setting can be ignored
         logger.debug(f'Database setting {key} gives error: {ex}')
 
@@ -1305,7 +1305,7 @@ class terrariumAPI(object):
       Setting[setting].delete()
       orm.commit()
       return {'message' : f'Setting id {setting} is deleted.'}
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Setting with id {setting} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Setting {setting} could not be removed. {ex}')
@@ -1372,7 +1372,7 @@ class terrariumAPI(object):
       webcam_data['archive_images'] = [f'/{archive_file}' for archive_file in sorted(archive_path.glob('*.jpg'), reverse=True)]
 
       return webcam_data
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Webcam with id {webcam} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting webcam {webcam} archive images. {ex}')
@@ -1392,7 +1392,7 @@ class terrariumAPI(object):
       webcam_data = webcam.to_dict(exclude='enclosure',with_collections=True)
       webcam_data['is_live'] = webcam.is_live
       return webcam_data
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Webcam with id {webcam} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting webcam {webcam} detail. {ex}')
@@ -1435,7 +1435,7 @@ class terrariumAPI(object):
       self.webserver.engine.update(terrariumWebcam,**request.json)
 
       return self.webcam_detail(webcam.id)
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Webcam with id {webcam} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating webcam {webcam}. {ex}')
@@ -1448,7 +1448,7 @@ class terrariumAPI(object):
       orm.commit()
       self.webserver.engine.delete(terrariumWebcam,webcam)
       return message
-    except orm.core.ObjectNotFound as ex:
+    except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Webcam with id {webcam} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting webcam {webcam}. {ex}')

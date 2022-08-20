@@ -48,8 +48,6 @@ class TerrariumMerossCloud(terrariumSingleton):
         data = asyncio.run_coroutine_threadsafe(self._main_process(), self.__engine['asyncio'].async_loop)
         data.result()
       except Exception as ex:
-        print('Exception in the cloud run:')
-        print(ex)
         logger.exception(f'Error in cloud run: {ex}')
         self.reconnect()
 
@@ -216,12 +214,15 @@ class TerrariumMerossCloud(terrariumSingleton):
         self._store_data()
 
     except CommandTimeoutError:
-      logger.error(f'Meross communication timed out connecting with the server.')
+      logger.error('Meross communication timed out connecting with the server.')
+
     except BadLoginException:
-      logger.error(f'Wrong login credentials for Meross. Please check your settings!')
+      logger.error('Wrong login credentials for Meross. Please check your settings!')
+
     except TooManyTokensException as ex:
       logger.error(ex)
       self.stop()
+
     except socket.timeout:
       self.__engine['error'] = True
       if self.__engine['restart_counter'] < 10:

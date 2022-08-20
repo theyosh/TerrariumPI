@@ -290,8 +290,8 @@ class terrariumDisplay(object):
       try:
         self._unload_hardware()
         del(self._device['device'])
-      except Exception:
-        pass
+      except Exception as ex:
+        logger.warning(f'Unable to unload hardware: {ex}')
 
   def clear(self):
     if self.title is not None:

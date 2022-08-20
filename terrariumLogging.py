@@ -33,8 +33,6 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
         the one with the oldest suffix.
         """
 
-
-
         def zipAction():
           # get the time that this sequence started at and make it a TimeTuple
           t = self.rolloverAt - self.interval

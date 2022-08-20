@@ -362,9 +362,9 @@ class terrariumArea(object):
     if variation_data[0]['when'] in ['script','external','weather']:
       try:
         self.state['variation']['offset'] = float(variation_data[0]['offset'])
-      except Exception:
+      except Exception as ex:
         # Not a valid float, so use default 0
-        pass
+        logger.debug(f'Invalid variation offset value {variation_data[0]["offset"]}: {ex}')
 
       self.state['variation'][variation_data[0]['when']] = True
       if 'weather' != variation_data[0]['when']:
@@ -896,10 +896,7 @@ class terrariumAreaLights(terrariumArea):
       duration = tweaks['duration']
       delay = tweaks['delay']
     except Exception as ex:
-      pass
-
-      # print(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}')
-      # print(ex)
+      logger.debug(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}, error: {ex}')
 
     if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
       delay = 0
