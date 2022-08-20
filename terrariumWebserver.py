@@ -342,7 +342,7 @@ class terrariumWebsocket(object):
                 messages.authenticated = self.webserver.engine.authenticate(cookie_data[0],cookie_data[1])
             except Exception:
               # Some strange cookie error when cleared... we can ignore that
-              pass
+              logger.debug('Ignoring cleared cookie')
 
             logger.debug(f'Starting authenticated socket? {messages.authenticated}')
             threading.Thread(target=listen_for_messages, args=(messages, socket)).start()

@@ -19,10 +19,7 @@
 
 /* https://github.hubspot.com/pace/docs/welcome/ */
 .pace {
-  /* -webkit-pointer-events: none; */
   pointer-events: none;
-  /* -webkit-user-select: none;
-  -moz-user-select: none; */
   user-select: none;
 }
 
@@ -67,54 +64,14 @@
   border-top-color: #29d;
   border-left-color: #29d;
   border-radius: 10px;
-
-  /* -webkit-animation: pace-spinner 400ms linear infinite;
-  -moz-animation: pace-spinner 400ms linear infinite;
-  -ms-animation: pace-spinner 400ms linear infinite;
-  -o-animation: pace-spinner 400ms linear infinite; */
-
   animation: pace-spinner 400ms linear infinite;
 }
 
-/*
-@-webkit-keyframes pace-spinner {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-moz-keyframes pace-spinner {
-  0% {
-    -moz-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -moz-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-o-keyframes pace-spinner {
-  0% {
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-} */
-
 @keyframes pace-spinner {
   0% {
-    /* transform: rotate(0deg); */
     transform: rotate(0deg);
   }
   100% {
-    /* transform: rotate(360deg); */
     transform: rotate(360deg);
   }
 }
@@ -167,8 +124,6 @@
 .opacity-0h5 {
   opacity: 0 !important;
   transition: opacity 0.25s ease-in-out !important;
-  /* -moz-transition: opacity 0.25s ease-in-out !important;
-  -webkit-transition: opacity 0.25s ease-in-out !important; */
 }
 
 .opacity-0h5:hover {
@@ -343,7 +298,6 @@ select[readonly].select2-hidden-accessible + .select2-container .select2-selecti
   content: attr(data-content);
   position: relative;
   display: inline-block;
-  /* color: black; */
   padding: 0 0.5em;
   color: #818078;
   background-color: #fcfcfa;

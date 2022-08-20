@@ -600,14 +600,14 @@ class terrariumArea(object):
       ignore_low_alarm  = False
       ignore_high_alarm = False
       try:
-        ignore_low_alarm = self.setup['low']['ignore_low']
+        ignore_low_alarm = bool(self.setup['low']['ignore_low'])
       except Exception:
-        pass
+        ignore_low_alarm  = False
 
       try:
-        ignore_high_alarm = self.setup['high']['ignore_high']
+        ignore_high_alarm = bool(self.setup['high']['ignore_high'])
       except Exception:
-        pass
+        ignore_high_alarm = False
 
       if ignore_low_alarm:
         # Use the max alarm value to changing the relays
