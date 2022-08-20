@@ -30,7 +30,7 @@ if len(sys.argv) >= 2:
 if len(sys.argv) == 3:
   try:
     timeout = float(sys.argv[2])
-  except Exception as ex:
+  except Exception:
     raise ValueError('Invalid timeout specified')
 
 if action in ['auto','on','off']:

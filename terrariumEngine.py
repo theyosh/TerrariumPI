@@ -613,13 +613,13 @@ class terrariumEngine(object):
 
         # Notification message
         sensor_data['unit'] = self.units[sensor.type]
-        self.notification.message(f'sensor_update' , sensor_data)
+        self.notification.message('sensor_update' , sensor_data)
 
         if new_value != current_value:
-          self.notification.message(f'sensor_change' , sensor_data)
+          self.notification.message('sensor_change' , sensor_data)
 
         if sensor_data['alarm']:
-          self.notification.message(f'sensor_alarm' , sensor_data)
+          self.notification.message('sensor_alarm' , sensor_data)
 
         logger.info(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]} in {measurement_time+db_time:.2f} seconds.')
         logger.debug(f'Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
@@ -783,10 +783,10 @@ class terrariumEngine(object):
       logger.debug(f'Updated relay {relay} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
 
       # Notification message
-      self.notification.message(f'relay_update' , relay_data)
+      self.notification.message('relay_update' , relay_data)
 
       if new_value != current_value:
-        self.notification.message(f'relay_change' , relay_data)
+        self.notification.message('relay_change' , relay_data)
 
       # A small sleep between sensor measurement to get a bit more responsiveness of the system
       sleep(0.1)
@@ -827,7 +827,7 @@ class terrariumEngine(object):
     self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
 
     # Notification message
-    self.notification.message(f'relay_toggle' , relay_data)
+    self.notification.message('relay_toggle' , relay_data)
 
     # Update enclosure states to reflect the new relay states
     if self.__engine['thread'] is not None and self.__engine['thread'].is_alive() and hasattr(self,'enclosures'):
@@ -897,10 +897,10 @@ class terrariumEngine(object):
       logger.debug(f'Updated {button} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec.')
 
       # Notification message
-      self.notification.message(f'button_update' , button_data)
+      self.notification.message('button_update' , button_data)
 
       if new_value != current_value:
-        self.notification.message(f'button_change' , button_data)
+        self.notification.message('button_change' , button_data)
 
       # A small sleep between sensor measurement to get a bit more responsiveness of the system
       sleep(0.1)
@@ -918,7 +918,7 @@ class terrariumEngine(object):
 
       # Notification message
       button_data = button.to_dict()
-      self.notification.message(f'button_action' , button_data)
+      self.notification.message('button_action' , button_data)
 
       if button.enclosure:
         # This is called a door, because has a link with an enclosure
@@ -971,7 +971,7 @@ class terrariumEngine(object):
 
         # # Take a shot from the webcam
         relays = [] if webcam.flash is None else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
-        value = self.webcams[webcam.id].update(relays)
+        self.webcams[webcam.id].update(relays)
 
         logger.info(f'Loaded {webcam} in {time.time()-start:.2f} seconds.')
 
@@ -1409,7 +1409,7 @@ class terrariumEngine(object):
     if self.__engine['too_late'] > 30:
       motd_relays += '\n'
       motd_relays += (2 * padding) + pyfancy().red(f'Engine can\'t keep up! For {self.__engine["too_late"]} times it could not finish in {terrariumEngine.__ENGINE_LOOP_TIMEOUT} seconds.').get()
-      motd_relays += (3 * padding) + pyfancy().red(f'Please check your setup and hardware!').get()
+      motd_relays += (3 * padding) + pyfancy().red('Please check your setup and hardware!').get()
       motd_relays += '\n'
 
     # Last update line

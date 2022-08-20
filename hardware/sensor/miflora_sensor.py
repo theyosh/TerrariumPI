@@ -55,12 +55,12 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
 
     except BTLEDisconnectError as ex:
       # Lost connection.... retry getting a 'new' device. The data will be red the next round
-      logger.debug(f'Lost connection with sensor {self}. Reconnecting... (BTLEDisconnectError)')
+      logger.debug(f'Lost connection with sensor {self}. Reconnecting... (BTLEDisconnectError): {ex}')
       self.load_hardware(True)
 
     except BrokenPipeError as ex:
       # Lost connection.... retry getting a 'new' device. The data will be red the next round
-      logger.debug(f'Lost connection with sensor {self}. Reconnecting... (BrokenPipeError)')
+      logger.debug(f'Lost connection with sensor {self}. Reconnecting... (BrokenPipeError): {ex}')
       self.load_hardware(True)
 
     logger.warning(f'Reconnecting sensor {self} hardware. (No data)')

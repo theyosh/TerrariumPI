@@ -34,7 +34,7 @@ class terrariumMS100Sensor(terrariumSensor):
           self.__state_cache = terrariumCache()
           return self.__state_cache.get_data(self.address)
 
-        except Exception:
+        except Exception as ex:
           logger.error(f'Error getting new data for {self}: {ex}')
           return None
 

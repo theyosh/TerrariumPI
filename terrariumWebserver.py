@@ -14,14 +14,13 @@ from uuid import uuid4
 from pathlib import Path
 from hashlib import md5
 
-from bottle import BaseRequest, default_app, request, redirect, static_file, jinja2_template, response, auth_basic, HTTPError, RouteBuildError
+from bottle import BaseRequest, default_app, request, redirect, static_file, jinja2_template, response, auth_basic, HTTPError, RouteBuildError, template
 #Increase bottle memory to max 5MB to process images in WYSIWYG editor
 BaseRequest.MEMFILE_MAX = 5 * 1024 * 1024
 
 from bottle.ext.websocket import GeventWebSocketServer
 from bottle.ext.websocket import websocket
 from queue import Queue
-from gevent import sleep
 
 from terrariumUtils import terrariumUtils
 from terrariumAPI import terrariumAPI

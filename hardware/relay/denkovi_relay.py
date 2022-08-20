@@ -42,7 +42,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
 
     try:
       data = subprocess.check_output(cmd).strip().decode('utf-8').strip().split('\n')
-    except subprocess.CalledProcessError as ex:
+    except subprocess.CalledProcessError:
       # Device does not exists....
       return False
 

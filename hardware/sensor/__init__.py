@@ -412,7 +412,7 @@ class terrariumI2CSensorMixin():
     data1 = i2c_bus.read_byte(self.device[0])
     try:
       data2 = i2c_bus.read_byte(self.device[0])
-    except Exception as ex:
+    except Exception:
       data2 = data1
 
     return (data1,data2)

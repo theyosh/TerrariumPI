@@ -21,7 +21,7 @@ class relayScriptMixin():
 
     try:
       terrariumUtils.get_script_data(cmd)
-    except subprocess.CalledProcessError as ex:
+    except subprocess.CalledProcessError:
       # Device does not exists....
       return None
 
@@ -35,7 +35,7 @@ class relayScriptMixin():
       # When the return value is -1, it means that there is not readout possible. So return the current state from memory
       if -1.0 == data:
         data = self.state
-    except subprocess.CalledProcessError as ex:
+    except subprocess.CalledProcessError:
       # Device does not exists....
       return None
 

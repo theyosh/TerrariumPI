@@ -2,7 +2,7 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from datetime import datetime, timedelta, date, timezone
+from datetime import datetime, timedelta, timezone
 from operator import attrgetter
 from icalendar import Calendar, Event
 from icalevents.icalevents import events

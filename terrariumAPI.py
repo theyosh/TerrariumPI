@@ -1274,7 +1274,7 @@ class terrariumAPI(object):
   def setting_update_multi(self):
     # First check if new password is set and is entered twice:
     if '' != request.json['password'] and request.json['password'] != request.json['password2']:
-      raise HTTPError(status=400, body=f'Password fields do not match.')
+      raise HTTPError(status=400, body='Password fields do not match.')
 
     # Delete the confirmation password
     del(request.json['password2'])
@@ -1324,7 +1324,7 @@ class terrariumAPI(object):
   # Weather
   def weather_detail(self):
     if not self.webserver.engine.weather:
-      raise HTTPError(status=404, body=f'No weather data available.')
+      raise HTTPError(status=404, body='No weather data available.')
 
     weather = {
       'location'   : self.webserver.engine.weather.location,

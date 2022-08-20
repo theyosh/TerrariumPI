@@ -131,7 +131,7 @@ class terrariumUtils():
     try:
       encryption = terrariumUtils.__encryption_key()
       return encryption.encrypt(string.encode()).decode()
-    except Exception as ex:
+    except Exception:
       return string
 
   @staticmethod

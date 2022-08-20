@@ -83,11 +83,11 @@ class terrariumRelayEnergenieUSB(terrariumRelay):
     data = []
     try:
       data = terrariumUtils.get_script_data(cmd).decode('utf-8').strip().split('\n')
-    except subprocess.CalledProcessError as ex:
-      logger.info('No Energenie USB relays connected')
+    except subprocess.CalledProcessError:
+      logger.info('No Energenie USB relays connected.')
       return False
-    except FileNotFoundError as ex:
-      raise terrariumRelayLoadingException('Please install tool \'sispmctl\'. Can\'t controll EnergenieUSB relays without it.')
+    except FileNotFoundError:
+      raise terrariumRelayLoadingException('Please install tool \'sispmctl\'. Can\'t control EnergenieUSB relays without it.')
 
     amount_sockets = 1
     serial = None
