@@ -63,7 +63,6 @@ class terrariumLDRSensor(terrariumButton):
       self.__thread.join()
     except Exception as ex:
       logger.debug(f'Could not join thread to wait for: {ex}')
-      pass
 
     super().stop()
 

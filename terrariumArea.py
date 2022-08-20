@@ -601,12 +601,12 @@ class terrariumArea(object):
       ignore_high_alarm = False
       try:
         ignore_low_alarm = self.setup['low']['ignore_low']
-      except:
+      except Exception:
         pass
 
       try:
         ignore_high_alarm = self.setup['high']['ignore_high']
-      except:
+      except Exception:
         pass
 
       if ignore_low_alarm:

@@ -138,7 +138,7 @@ class terrariumDisplay(object):
   @property
   def _address(self):
     address = [ part.strip() for part in self.address.split(',') ]
-    if type(address[0]) is str:
+    if isinstance(address[0], str):
       if not address[0].startswith('0x'):
         address[0] = '0x' + address[0]
       address[0] = int(address[0],16)

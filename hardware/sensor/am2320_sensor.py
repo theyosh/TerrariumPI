@@ -22,7 +22,7 @@ class terrariumAM2320Sensor(terrariumI2CSensor):
       crc = 0xFFFF
       for c in buf:
         crc ^= c
-        for i in range(8):
+        for _ in range(8):
           if crc & 0x01:
             crc >>= 1
             crc ^= 0xA001
