@@ -41,11 +41,10 @@ class terrariumEnclosure(object):
     return True
 
   def __light_status(self):
-    main_lights = self.main_lights
-    if main_lights is None:
+    if self.main_lights is None or 'day' not in self.main_lights.state:
       return True
 
-    return main_lights.state['day']['powered']
+    return self.main_lights.state['day']['powered']
 
   def load_areas(self, data):
     # First we want to load all the lights areas and then the other areas in any order (not sure if this is still needed -> see def update)
