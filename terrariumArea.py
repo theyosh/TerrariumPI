@@ -549,7 +549,7 @@ class terrariumArea(object):
 
     # Else we have to see if we are between the begin and end time of the 'main lights' light area
     main_lights_area = self.enclosure.main_lights
-    if main_lights_area is not None:
+    if main_lights_area is not None and main_lights_area.mode != 'disabled':
       is_day_time = main_lights_area.state['day']['begin'] < int(datetime.datetime.now().timestamp()) < main_lights_area.state['day']['end']
       return is_day_time
 
