@@ -16,6 +16,8 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
   def __init__(self, address, unit_values, language):
     self.__history_day = None
+    self.__one_call_version = None
+    self.__appid = None
     super().__init__(address, unit_values, language)
 
   def __load_general_data(self):
@@ -31,71 +33,130 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
       self._data['credits']  = 'OpenWeatherMap weather data'
       self._data['timezone'] = int(data['timezone'])
 
+      address = terrariumUtils.parse_url(self.address)
+      self.__appid = address['query_params']['appid']
+
       return True
 
     logger.warning('Error loading online weather data from source {} !'.format(address))
     return False
 
-  def __load_forecast_data(self):
-    # Onecall API's are more expensive (max 1000 a day - 1 call per 2 minutes) so we update this at a lower frequency
-    address = terrariumUtils.parse_url(self.address)
-    data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],address['query_params']['appid'],self._device['language'][0:2]))
 
-    if data:
-      self._data['days'] = []
-      self._data['forecast'] = []
+  def __load_minimal_forecast_data(self):
+    data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/forecast?lat={}&lon={}&appid={}&units=metric&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],self.__appid,self._device['language'][0:2]))
 
-      for hourly in data['hourly']:
-	      # Store all timestamp data as GMT+0000 in memory/database
-        self._data['forecast'].append({
-          'timestamp'   : int(hourly["dt"] + self._data["timezone"]),
-          'temperature' : float(hourly['temp']),
-          'humidity'    : float(hourly['humidity']),
+    if not data:
+      return False
+
+    # Reset data
+    self._data['days'] = []
+    self._data['forecast'] = []
+    sunrise = int(data['city']['sunrise'] + self._data["timezone"])
+    sunset  = int(data['city']['sunset']  + self._data["timezone"])
+
+    for forecast in data['list']:
+      timestamp = int(forecast["dt"] + self._data["timezone"])
+
+      self._data['forecast'].append({
+        'timestamp'   : timestamp,
+        'temperature' : float(forecast['main']['temp']),
+        'humidity'    : float(forecast['main']['humidity']),
+      })
+
+      if '12:00' in forecast['dt_txt']:
+        self._data['days'].append({
+          'timestamp' : timestamp,
+          'rise'      : sunrise + (len(self._data['days']) * 24 * 3600),
+          'set'       : sunset  + (len(self._data['days']) * 24 * 3600),
+          'temp'      : float(forecast['main']['temp']),
+          'humidity'  : float(forecast['main']['humidity']),
+          'wind'      : {'speed'    : float(forecast['wind']['speed']),    # Speed is in meter per second
+                        'direction' : float(forecast['wind']['deg'])},
+
+          'weather'   : { 'description' : forecast['weather'][0].get('description',''),
+                          'icon'        : forecast['weather'][0].get('icon','') }
         })
 
-      day_periods = {'morn' : -6 * 60 * 60, 'day' : 0, 'eve' : 6 * 60 * 60, 'night' : 12 * 60 * 60}
-      for daily in data['daily']:
+    logger.info('Using Openweathermap Free API')
+    self.__one_call_version = None
+    return True
 
-        for period in day_periods:
-          timestamp = int(daily["dt"] + self._data["timezone"] + day_periods[period])
+  def __load_forecast_data_one_call(self):
+    data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/3.0/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],self.__appid,self._device['language'][0:2]))
 
-          # Exclude already existing and pasted hourly forecasts
-          if timestamp not in [item['timestamp'] for item in self._data['forecast']] and timestamp > self._data['forecast'][0]['timestamp']:
+    if not data:
+      data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],self.__appid,self._device['language'][0:2]))
+      if data:
+        self.__one_call_version = '2.5'
+        logger.info(f'Using Openweathermap One Call API {self.__one_call_version}')
 
-            self._data['forecast'].append({
-              'timestamp'   : timestamp,
-              'temperature' : float(daily['temp'][period]),
-              'humidity'    : float(daily['humidity']),
-            })
+    else:
+      self.__one_call_version = '3.0'
+      logger.info(f'Using Openweathermap One Call API {self.__one_call_version}')
 
-          if 'day' == period:
-            # Store day data for icons
-            day = daily
-            if len(self._data['days']) == 0:
-              # First day, we use the current data
-              day = data['current']
-              day['temp'] = {period : data['current']['temp']}
+    if not data:
+      return False
 
-            self._data['days'].append({
-              'timestamp' : timestamp,
-              'rise'      : int(day['sunrise'] + self._data["timezone"]),
-              'set'       : int(day['sunset']  + self._data["timezone"]),
-              'temp'      : float(day['temp'][period]),
-              'humidity'  : float(day['humidity']),
-              'wind'      : {'speed'    : float(day['wind_speed']),    # Speed is in meter per second
-                            'direction' : float(day['wind_deg'])},
+    # Reset data
+    self._data['days'] = []
+    self._data['forecast'] = []
 
-              'weather'   : { 'description' : day['weather'][0].get('description',''),
-                              'icon'        : day['weather'][0].get('icon','') }
-            })
+    for hourly in data['hourly']:
+      # Store all timestamp data as GMT+0000 in memory/database
+      self._data['forecast'].append({
+        'timestamp'   : int(hourly["dt"] + self._data["timezone"]),
+        'temperature' : float(hourly['temp']),
+        'humidity'    : float(hourly['humidity']),
+      })
 
-      self._data['forecast'] = sorted(self._data['forecast'], key=lambda d: d['timestamp'])
-      self._data['days'] = sorted(self._data['days'], key=lambda d: d['timestamp'])
+    day_periods = {'morn' : -6 * 60 * 60, 'day' : 0, 'eve' : 6 * 60 * 60, 'night' : 12 * 60 * 60}
+    for daily in data['daily']:
 
-      return True
+      for period in day_periods:
+        timestamp = int(daily["dt"] + self._data["timezone"] + day_periods[period])
 
-    return False
+        # Exclude already existing and pasted hourly forecasts
+        if timestamp not in [item['timestamp'] for item in self._data['forecast']] and timestamp > self._data['forecast'][0]['timestamp']:
 
+          self._data['forecast'].append({
+            'timestamp'   : timestamp,
+            'temperature' : float(daily['temp'][period]),
+            'humidity'    : float(daily['humidity']),
+          })
+
+        if 'day' == period:
+          # Store day data for icons
+          day = daily
+          if len(self._data['days']) == 0:
+            # First day, we use the current data
+            day = data['current']
+            day['temp'] = {period : data['current']['temp']}
+
+          self._data['days'].append({
+            'timestamp' : timestamp,
+            'rise'      : int(day['sunrise'] + self._data["timezone"]),
+            'set'       : int(day['sunset']  + self._data["timezone"]),
+            'temp'      : float(day['temp'][period]),
+            'humidity'  : float(day['humidity']),
+            'wind'      : {'speed'    : float(day['wind_speed']),    # Speed is in meter per second
+                          'direction' : float(day['wind_deg'])},
+
+            'weather'   : { 'description' : day['weather'][0].get('description',''),
+                            'icon'        : day['weather'][0].get('icon','') }
+          })
+
+    return True
+
+  def __load_forecast_data(self):
+    # Onecall API's are more expensive (max 1000 a day - 1 call per 2 minutes) so we update this at a lower frequency
+    if not self.__load_forecast_data_one_call():
+      if not self.__load_minimal_forecast_data():
+        return False
+
+    self._data['forecast'] = sorted(self._data['forecast'], key=lambda d: d['timestamp'])
+    self._data['days']     = sorted(self._data['days'], key=lambda d: d['timestamp'])
+
+    return True
 
   def __load_history_data(self):
     # Onecall API's are more expensive (max 1000 a day - 1 call per 2 minutes) so we update this at a lower frequency
@@ -105,6 +166,12 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
     start = time()
     self._data['history'] = []
+    self.__history_day = int(datetime.utcfromtimestamp(int(datetime.now().timestamp()) + self._data["timezone"]).strftime('%d'))
+
+    if not self.__one_call_version:
+      # Use an empty history list... should disable the feature in the GUI...
+      return True
+
     address = terrariumUtils.parse_url(self.address)
     for day in range(1,3):
       now = int(datetime.now().timestamp()) + self._data["timezone"] - (day * 24 * 60 * 60)
