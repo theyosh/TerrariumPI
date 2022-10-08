@@ -274,7 +274,7 @@ class terrariumNotification(terrariumSingleton):
 
   def load_services(self):
     with orm.db_session():
-      for service in NotificationService.select():
+      for service in NotificationService.select(lambda ns: ns.enabled is True):
         service = service.to_dict()
         if service['id'] not in self.services:
           setup = copy.deepcopy(service['setup'])
@@ -1265,18 +1265,19 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
 
     self.connection = None
 
-    try:
-      self.connection = mqtt.Client(client_id=f"TerrariumPI {self.setup['version']}")
-      self.connection.on_connect = self.on_connect
-      if self.setup['ssl']:
-        self.connection.tls_set(tls_version=mqtt.ssl.PROTOCOL_TLS)
-      self.connection.username_pw_set(terrariumUtils.decrypt(self.setup['username']), terrariumUtils.decrypt(self.setup['password']))
-      self.connection.connect(self.setup['address'], self.setup['port'], 30)
-      self.connection.loop_start()
-      logger.info(f'Connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]} ...')
+    if self.enabled:
+      try:
+        self.connection = mqtt.Client(client_id=f"TerrariumPI {self.setup['version']}")
+        self.connection.on_connect = self.on_connect
+        if self.setup['ssl']:
+          self.connection.tls_set(tls_version=mqtt.ssl.PROTOCOL_TLS)
+        self.connection.username_pw_set(terrariumUtils.decrypt(self.setup['username']), terrariumUtils.decrypt(self.setup['password']))
+        self.connection.connect(self.setup['address'], self.setup['port'], 30)
+        self.connection.loop_start()
+        logger.info(f'Connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]} ...')
 
-    except Exception as ex:
-      logger.warning(f'Failed connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}: {ex}')
+      except Exception as ex:
+        logger.warning(f'Failed connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}: {ex}')
 
   def stop(self):
     # TODO: Flush the queue
