@@ -191,15 +191,15 @@ class terrariumWebcam(object):
       return
 
     if '90' == self.rotation:
-      self.__raw_image = self.__raw_image.transpose(Image.ROTATE_90)
+      self.__raw_image = self.__raw_image.transpose(Image.Transpose.ROTATE_90)
     elif '180' == self.rotation:
-      self.__raw_image = self.__raw_image.transpose(Image.ROTATE_180)
+      self.__raw_image = self.__raw_image.transpose(Image.Transpose.ROTATE_180)
     elif '270' == self.rotation:
-      self.__raw_image = self.__raw_image.transpose(Image.ROTATE_270)
+      self.__raw_image = self.__raw_image.transpose(Image.Transpose.ROTATE_270)
     elif 'h' == self.rotation:
-      self.__raw_image = self.__raw_image.transpose(Image.FLIP_TOP_BOTTOM)
+      self.__raw_image = self.__raw_image.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
     elif 'v' == self.rotation:
-      self.__raw_image = self.__raw_image.transpose(Image.FLIP_LEFT_RIGHT)
+      self.__raw_image = self.__raw_image.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
 
     logger.debug('Rotated raw image %s to %s' % (self.name,self.rotation))
 

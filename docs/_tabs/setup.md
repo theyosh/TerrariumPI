@@ -142,7 +142,13 @@ Other weather data is just for show. Does not have a function.
 
 In order to use the weather system, you need to create a free account at [OpenWeatherMap](https://home.openweathermap.org/users/sign_up).
 
-The url format needs to be `https://api.openweathermap.org/data/2.5/weather?q=[City],[Country]&appid=[API_KEY]`. Do not add the `&metric=` part in the url.
+As from October 2022 they changed the conditions to a free account. Which means that we have fewer data to work with. This also means no history data for climate mirroring out of the box. If you have created an account before that date, you should still be able to use the One call API 2.5 which does hold all the needed information. With One call API 3.0, you need an extra (free) subscription which needs credit card data.
+
+For everybody that is registed with OpenWeatherMap after October, will have less data or you have to subscribe for the [One call API 3.0](https://openweathermap.org/price)
+
+The url format needs to be `https://api.openweathermap.org/data/2.5/weather?q=[City],[Country]&appid=[API_KEY]`. Do **not** add the `&metric=` part in the url.
+
+TerrariumPI does about 6-10 calls on the One call API per day, what would result in 300 calls max per month. And it can detect which API is available with your OpenWeatherMap account.
 
 ## Relays
 

@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from pony import orm
 from yoyo import read_migrations
 from yoyo import get_backend
+from dotenv import dotenv_values
 from pathlib import Path
 from terrariumUtils import terrariumUtils
 import copy
@@ -10,17 +11,24 @@ import sqlite3
 import time
 
 DATABASE = 'data/terrariumpi.db'
+ADVANCED_SETTINGS_FILE = 'data/.database-env'
 
 db = orm.Database()
 
 @db.on_connect(provider='sqlite')
 def sqlite_speedups(db, connection):
-    cursor = connection.cursor()
-    cursor.execute('PRAGMA synchronous  = OFF')
-    # cursor.execute('PRAGMA journal_mode = MEMORY')
-    # https://www.sqlite.org/wal.html
-    cursor.execute('PRAGMA journal_mode = WAL')
-    cursor.execute('PRAGMA temp_store   = MEMORY')
+  settings = {
+    'auto_vacuum'  : 'NONE',
+    'cache_size'   : -10000,
+    'journal_mode' : 'WAL',
+    'synchronous'  : 'OFF',
+    'temp_store'   : 'MEMORY'
+  }
+
+  settings = {**settings, **load_advanced_settings()}
+  cursor = connection.cursor()
+  for key, value in settings.items():
+    cursor.execute(f'PRAGMA {key}  = {value}')
 
 def init(version):
   backend = get_backend(f'sqlite:///{DATABASE}')
@@ -71,6 +79,12 @@ def create_defaults(version):
     except orm.core.TransactionIntegrityError:
       # Setting is already in the database. Ignore
       pass
+
+def load_advanced_settings():
+  if Path(ADVANCED_SETTINGS_FILE).exists():
+    return dotenv_values(ADVANCED_SETTINGS_FILE)
+
+  return {}
 
 
 def recover():

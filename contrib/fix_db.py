@@ -117,7 +117,7 @@ def fix_database(database):
   Path(str(database)).rename(f'{database}.broken')
   Path(f'{database}.new').rename(database)
 
-  print(f'\nRecovery done in {time.time()-starttime:.2f} seconds. New database is at location: {database.resolve()}')
+  print(f'\nRecovery done in {time.time()-starttime:.2f} seconds. New database is located at: {database.resolve()}')
 
 
 if __name__ == '__main__':
