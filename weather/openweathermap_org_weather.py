@@ -33,7 +33,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
       self._data['credits']  = 'OpenWeatherMap weather data'
       self._data['timezone'] = int(data['timezone'])
 
-      address = terrariumUtils.parse_url(self.address)
+      address = terrariumUtils.parse_url(self.address.lower())
       self.__appid = address['query_params']['appid']
 
       return True
