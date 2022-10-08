@@ -11,7 +11,7 @@ from terrariumUtils import terrariumUtils
 class terrariumOpenweathermap(terrariumWeatherAbstract):
   HARDWARE     = 'Openweathermap.org'
   NAME         = 'OpenWeatherMap weather data'
-  VALID_SOURCE = '^https?://api\.openweathermap\.org/data/2\.5/weather\?q=(?P<city>[^,&]+),(?P<country>[^,&]{2})&appid=[a-z0-9]{32}$'
+  VALID_SOURCE = '^https?://api\.openweathermap\.org/data/2\.5/weather\?q=(?P<city>[^,&]+),(?P<country>[^,&]{2,3})&appid=[a-z0-9]{32}'
   INFO_SOURCE  = 'https://api.openweathermap.org/data/2.5/weather?q=[CITY],[COUNTRY_2CHAR]&appid=[YOUR_API_KEY]'
 
   def __init__(self, address, unit_values, language):
