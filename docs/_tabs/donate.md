@@ -12,8 +12,8 @@ If you like to donate me for developing this software, you are free to do so and
 
 You can donate through:
 
-- [![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/lato-blue.png){: style="max-height: 50px"}](https://www.buymeacoffee.com/theyosh)
-- [![Buy Me A Coffee](https://storage.ko-fi.com/cdn/Kofi_Logo_Blue.svg){: style="max-height: 50px"}](https://ko-fi.com/theyosh)
+- [![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=Donate&emoji=🦎&slug=theyosh&button_colour=40DCA5&font_colour=ffffff&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00){: style="max-height: 50px"}](https://www.buymeacoffee.com/theyosh)
+- [![Buy Me A Coffee](https://storage.ko-fi.com/cdn/brandasset/kofi_button_stroke.png){: style="max-height: 50px"}](https://ko-fi.com/theyosh)
 - Paypal:
   <form action="https://www.paypal.com/donate" method="post" target="_top">
   <input type="hidden" name="business" value="DSR8CRJ5JDK5Y" />
