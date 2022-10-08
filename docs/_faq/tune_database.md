@@ -9,7 +9,7 @@ Currently the database SQLITE3 settings are setup for speed. And therefore it ca
 [pragma setting name]=[value]
 ```
 
-All [SQLITE3 pragmas](https://www.sqlite.org/pragma.html) should be supported. Make sure you use the correct pragma name and value.
+All [SQLITE3 pragmas](https://www.sqlite.org/pragma.html) should be supported. Make sure you use the correct pragma name and value. Only the entered values will be overwritten from the default.
 
 For example the current defaults are:
 
