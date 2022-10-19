@@ -9,7 +9,7 @@ on:
     tags:
     paths-ignore:
       - 'docs/**'
-      
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -19,7 +19,7 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         name: Check Dockerfile exists
         id: dockerfile
