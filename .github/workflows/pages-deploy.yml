@@ -10,15 +10,6 @@ on:
     paths:
       - 'docs/**'
 
-
-#  pull_request:
-#    branches: [ master ]
-
-#    paths-ignore:
-#      - .gitignore
-#      - README.md
-#      - LICENSE
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
