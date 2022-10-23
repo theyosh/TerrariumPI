@@ -44,7 +44,7 @@ jobs:
           node-version: '16'
 
       - name: Install NPM Modules
-        run: npm install
+        run: npm install && ./gui/patch.sh
 
       - name: Build Project
         run: npm run build
