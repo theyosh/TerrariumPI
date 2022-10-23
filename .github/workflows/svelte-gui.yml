@@ -50,21 +50,29 @@ jobs:
         run: npm run build
 
       - name: Commit GUI build
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          # Optional. Option used by `git-status` to determine if the repository is
-          # dirty. See https://git-scm.com/docs/git-status#_options
-          # status_options: '--untracked-files=no'
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/*
+          git commit -am "New Svelte GUI build" --author="theyosh <theyosh@users.noreply.github.com>"
+          git push
 
-          # Optional. Disable dirty check and always try to create a commit and push
-          skip_dirty_check: true
 
-          # Optional. Skip internal call to `git fetch`
-          skip_fetch: true
+        # uses: stefanzweifel/git-auto-commit-action@v4
+        # with:
+        #   # Optional. Option used by `git-status` to determine if the repository is
+        #   # dirty. See https://git-scm.com/docs/git-status#_options
+        #   # status_options: '--untracked-files=no'
 
-          # Optional. Skip internal call to `git checkout`
-          skip_checkout: true
+        #   # Optional. Disable dirty check and always try to create a commit and push
+        #   skip_dirty_check: true
 
-          # Optional. Options used by `git-add`.
-          # See https://git-scm.com/docs/git-add#_options
-          add_options: '-u'
+        #   # Optional. Skip internal call to `git fetch`
+        #   skip_fetch: true
+
+        #   # Optional. Skip internal call to `git checkout`
+        #   skip_checkout: true
+
+        #   # Optional. Options used by `git-add`.
+        #   # See https://git-scm.com/docs/git-add#_options
+        #   add_options: '-u'
