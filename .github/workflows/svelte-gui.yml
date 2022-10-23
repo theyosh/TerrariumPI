@@ -51,6 +51,7 @@ jobs:
 
       - name: Commit GUI build
         uses: stefanzweifel/git-auto-commit-action@v4
+        with:
           # Optional. Option used by `git-status` to determine if the repository is
           # dirty. See https://git-scm.com/docs/git-status#_options
           # status_options: '--untracked-files=no'
