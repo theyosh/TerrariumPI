@@ -78,19 +78,20 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
         })
 
     logger.info('Using Openweathermap Free API')
-    self.__one_call_version = None
+    self.__one_call_version = 'free'
     return True
 
   def __load_forecast_data_one_call(self):
-    data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/3.0/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],self.__appid,self._device['language'][0:2]))
+    if self.__one_call_version is None or self.__one_call_version == '3.0':
+      data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/3.0/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],self.__appid,self._device['language'][0:2]))
 
-    if not data:
+    if (self.__one_call_version is None and not data) or self.__one_call_version == '2.5':
       data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],self.__appid,self._device['language'][0:2]))
       if data:
         self.__one_call_version = '2.5'
         logger.info(f'Using Openweathermap One Call API {self.__one_call_version}')
 
-    else:
+    elif self.__one_call_version is None:
       self.__one_call_version = '3.0'
       logger.info(f'Using Openweathermap One Call API {self.__one_call_version}')
 
@@ -168,14 +169,14 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
     self._data['history'] = []
     self.__history_day = int(datetime.utcfromtimestamp(int(datetime.now().timestamp()) + self._data["timezone"]).strftime('%d'))
 
-    if not self.__one_call_version:
+    if self.__one_call_version not in ['2.5','3.0']:
       # Use an empty history list... should disable the feature in the GUI...
       return True
 
     address = terrariumUtils.parse_url(self.address)
     for day in range(1,3):
       now = int(datetime.now().timestamp()) + self._data["timezone"] - (day * 24 * 60 * 60)
-      history_url = 'https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={}&lon={}&units=metric&dt={}&appid={}&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],now,address['query_params']['appid'],self._device['language'][0:2])
+      history_url = 'https://api.openweathermap.org/data/{}/onecall/timemachine?lat={}&lon={}&units=metric&dt={}&appid={}&lang={}'.format(self.__one_call_version, self._data['geo']['lat'],self._data['geo']['long'],now,address['query_params']['appid'],self._device['language'][0:2])
       data = terrariumUtils.get_remote_data(history_url)
 
       if data is None:
