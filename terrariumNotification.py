@@ -377,12 +377,12 @@ class terrariumNotification(terrariumSingleton):
 
         for service in message.services:
 
-          if self.services[service.id] is None:
-            logger.debug(f'Ignoring service {self} as it did not loaded correctly.')
-            continue
-
           if not service.enabled:
             logger.debug(f'Service {self} is (temporary) disabled.')
+            continue
+
+          if service.id not in self.services or self.services[service.id] is None:
+            logger.debug(f'Ignoring service {self} as it did not loaded correctly.')
             continue
 
           if service.rate_limit > 0 and self.__rate_limit(service.type, service.rate_limit):
