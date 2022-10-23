@@ -51,3 +51,19 @@ jobs:
 
       - name: Commit GUI build
         uses: stefanzweifel/git-auto-commit-action@v4
+          # Optional. Option used by `git-status` to determine if the repository is
+          # dirty. See https://git-scm.com/docs/git-status#_options
+          # status_options: '--untracked-files=no'
+
+          # Optional. Disable dirty check and always try to create a commit and push
+          skip_dirty_check: true
+
+          # Optional. Skip internal call to `git fetch`
+          skip_fetch: true
+
+          # Optional. Skip internal call to `git checkout`
+          skip_checkout: true
+
+          # Optional. Options used by `git-add`.
+          # See https://git-scm.com/docs/git-add#_options
+          add_options: '-u'
