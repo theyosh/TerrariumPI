@@ -9,7 +9,8 @@ on:
       - svelte
     paths:
       - 'gui/**'
-
+      - '*.json'
+      - '**/*.js'
 
 #  pull_request:
 #    branches: [ master ]
