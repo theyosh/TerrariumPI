@@ -12,14 +12,6 @@ on:
       - '*.json'
       - '**/*.js'
 
-#  pull_request:
-#    branches: [ master ]
-
-#    paths-ignore:
-#      - .gitignore
-#      - README.md
-#      - LICENSE
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -35,14 +27,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
         uses: actions/checkout@v3
-        # with:
-        #   fetch-depth: 0  # for posts's lastmod
+        with:
+          fetch-depth: 0
 
-      - name: Use Node.js 16 LTS
-        uses: actions/setup-node@v2
+      - name: Use Node.js 18 LTS
+        uses: actions/setup-node@v3
         with:
           registry-url: https://registry.npmjs.org/
-          node-version: '16'
+          node-version: 18
 
       - name: Install NPM Modules
         run: npm install && ./gui/patch.sh
@@ -57,23 +49,3 @@ jobs:
           git add -f public/*
           git commit -am "New Svelte GUI build" --author="theyosh <theyosh@users.noreply.github.com>" || true
           git push -f
-
-
-        # uses: stefanzweifel/git-auto-commit-action@v4
-        # with:
-        #   # Optional. Option used by `git-status` to determine if the repository is
-        #   # dirty. See https://git-scm.com/docs/git-status#_options
-        #   # status_options: '--untracked-files=no'
-
-        #   # Optional. Disable dirty check and always try to create a commit and push
-        #   skip_dirty_check: true
-
-        #   # Optional. Skip internal call to `git fetch`
-        #   skip_fetch: true
-
-        #   # Optional. Skip internal call to `git checkout`
-        #   skip_checkout: true
-
-        #   # Optional. Options used by `git-add`.
-        #   # See https://git-scm.com/docs/git-add#_options
-        #   add_options: '-u'
