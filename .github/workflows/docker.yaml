@@ -23,39 +23,39 @@ jobs:
       -
         name: Check Dockerfile exists
         id: dockerfile
-        uses: andstor/file-existence-action@v1
+        uses: andstor/file-existence-action@v2
         with:
           files: "Dockerfile"
       -
         name: Set up QEMU
         if: steps.Dockerfile.outputs.files_exists == 'true'
         id: qemu
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
         with:
           image: tonistiigi/binfmt:latest
           platforms: arm
       -
         name: Set up Docker Buildx
         if: steps.Dockerfile.outputs.files_exists == 'true'
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
       -
         name: Docker meta
         if: steps.Dockerfile.outputs.files_exists == 'true'
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: theyosh/terrariumpi
       -
         name: Login to DockerHub
         if: steps.Dockerfile.outputs.files_exists == 'true'
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
         if: steps.Dockerfile.outputs.files_exists == 'true'
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           push: true
