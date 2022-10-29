@@ -2,6 +2,78 @@ Changelog
 =========
 
 
+4.5.0 (2022-10-29)
+------------------
+
+**New**
+------
+- Add database tuning. Requires a re-run of the installer. [#734](https://github.com/theyosh/TerrariumPI/issues/734).
+  [TheYOSH]
+
+  Add database tuning. Requires a re-run of the installer. [#734](https://github.com/theyosh/TerrariumPI/issues/734)
+- Add db fix script. [#734](https://github.com/theyosh/TerrariumPI/issues/734). [TheYOSH]
+
+**Fixes**
+------
+- Workflow fix. [TheYOSH]
+- Fix workflow. [TheYOSH]
+- Fix sending messages on disabled services. [TheYOSH]
+- Fix wrong casing. [#736](https://github.com/theyosh/TerrariumPI/issues/736). [TheYOSH]
+- Fix Openweathermap API changes. [#736](https://github.com/theyosh/TerrariumPI/issues/736). [TheYOSH]
+- Fix daylight detection when main ligts are disabled. [TheYOSH]
+- Fix [#735](https://github.com/theyosh/TerrariumPI/issues/735). [TheYOSH]
+
+**Updates**
+------
+- Update libraries. [TheYOSH]
+- Update workflow. [TheYOSH]
+- Workflow updates. [TheYOSH]
+- Workflow updates. [TheYOSH]
+- Update workflows. [TheYOSH]
+- Update workflows to NodeJS 16. [TheYOSH]
+- Update CodeQL workflow. [TheYOSH]
+- Update CodeQL workflow. [TheYOSH]
+- Update javascript libraries. [TheYOSH]
+- Update documentation. [TheYOSH]
+- Update database recovery. [#734](https://github.com/theyosh/TerrariumPI/issues/734). [TheYOSH]
+- Update Weather setup data about new API changes at OpenWeatherMap.
+  [#736](https://github.com/theyosh/TerrariumPI/issues/736). [TheYOSH]
+- Update url regex [#736](https://github.com/theyosh/TerrariumPI/issues/736). [TheYOSH]
+- Update to new Pillow transposing code. [TheYOSH]
+- Codacy updates (4) [TheYOSH]
+- Codacy updates (3) [TheYOSH]
+- Codacy updates (2) [TheYOSH]
+- Codacy updates. [TheYOSH]
+
+**Other**
+------
+- New release. [TheYOSH]
+- Better gui builder. [TheYOSH]
+- Better workflow trigger. [TheYOSH]
+- Less workflow triggers. [TheYOSH]
+- Workflow force git actions. [TheYOSH]
+- Allow public in git repository. [TheYOSH]
+- Patch css for building gui. [TheYOSH]
+- Create svelte-gui.yml. [TheYOSH]
+- Support API 3.0. [TheYOSH]
+- Translated using Weblate (Polish) [kwiatekp]
+
+  Currently translated at 53.4% (408 of 763 strings)
+- Ignore disabled services during startup. [#721](https://github.com/theyosh/TerrariumPI/issues/721). [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Translated using Weblate (Polish) [kwiatekp]
+
+  Currently translated at 36.5% (279 of 763 strings)
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Speed up log rotation. [TheYOSH]
+- Translated using Weblate (French (Belgium)) [Christophe]
+
+  Currently translated at 16.3% (125 of 763 strings)
+- Translated using Weblate (Catalan) [cmonicob]
+
+  Currently translated at 39.8% (304 of 763 strings)
+
+
 4.4.0 (2022-08-04)
 ------------------
 
@@ -38,6 +110,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [TheYOSH]
 - Update release date. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update libraries. [TheYOSH]
