@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__version__ = '4.4.0'
+__version__ = '4.5.0'
 
 from gevent import monkey
 monkey.patch_all()
