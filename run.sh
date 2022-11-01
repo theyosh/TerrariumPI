@@ -68,7 +68,7 @@ if [ -f /boot/config.txt ]; then
     REBOOT_REQUIRED=1
   fi
 
-  if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" /boot/config.txt) -eq 0 ]; then
+  if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" /boot/config.txt) -eq 0 ] && [ $(grep -ic "^\[pi4\]" /boot/config.txt) -eq 1 ]; then
     # can't inline sed due to docker mount
     cp /boot/config.txt /config.tmp
     sed -i "/config.tmp" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
