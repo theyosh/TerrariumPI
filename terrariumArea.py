@@ -704,7 +704,7 @@ class terrariumArea(object):
           logger.info(f'Relays for {self} period {period} are not switched because one of the depending areas are in an alarm state.')
           continue
 
-        time_elapsed = int(datetime.datetime.now().timestamp()) - self.state[period]['last_powered_on']
+        time_elapsed = abs(int(datetime.datetime.now().timestamp()) - self.state[period]['last_powered_on'])
         if time_elapsed <= self.setup[period]['settle_time']:
           logger.info(f'Relays for {self} period {period} are not switched because we have to wait for {self.setup[period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[period]["settle_time"]} seconds.')
           continue
@@ -713,7 +713,7 @@ class terrariumArea(object):
         other_period.remove(period)
         if 1 == len(other_period):
           other_period = other_period[0]
-          time_elapsed = int(datetime.datetime.now().timestamp()) - self.state[other_period]['last_powered_on']
+          time_elapsed = abs(int(datetime.datetime.now().timestamp()) - self.state[other_period]['last_powered_on'])
           if time_elapsed <= self.setup[other_period]['settle_time']:
             logger.info(f'Relays for {self} period {period} are not switched because of the other period {other_period} settle time. We have to wait for {self.setup[other_period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[other_period]["settle_time"]} seconds.')
             continue
@@ -991,8 +991,8 @@ class terrariumAreaHeater(terrariumArea):
           heating_or_cooling = 1.0 if 'low' == part else -1.0
           unit               = self.enclosure.engine.units[sensor_values['unit']]
 
-          logger.info(f'Start the dimmer {relay} in PID modus to go to average value {sensor_average}{unit} with a settile timeout of {settle_time} seconds.')
-          self.__dimmers[relay.id] = PID(heating_or_cooling * 1, heating_or_cooling * 0.1, heating_or_cooling * 0.05,
+          logger.info(f'Start the dimmer {relay} in PID modus to go to average value {sensor_average}{unit} with a settle timeout of {settle_time} seconds.')
+          self.__dimmers[f'{relay.id}'] = PID(heating_or_cooling * 1, heating_or_cooling * 0.1, heating_or_cooling * 0.05,
                                         setpoint=sensor_average,
                                         sample_time=settle_time,
                                         output_limits=(relay.OFF,relay.ON))
