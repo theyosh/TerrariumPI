@@ -60,7 +60,6 @@ services:
       - /boot/config.txt:/boot/config.txt
       - /boot/cmdline.txt:/boot/cmdline.txt
       - /etc/modules:/etc/modules
-      - /opt/vc:/opt/vc
       - /dev:/dev
     network_mode: host
     restart: always
