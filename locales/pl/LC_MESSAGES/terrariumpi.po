@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2022-07-02 11:57+CEST\n"
-"PO-Revision-Date: 2022-11-12 12:02+0000\n"
+"PO-Revision-Date: 2022-11-14 17:26+0000\n"
 "Last-Translator: kwiatekp <kwiatekp@gmail.com>\n"
 "Language-Team: Polish <https://weblate.theyosh.nl/projects/terrariumpi/"
 "4-x-y-z/pl/>\n"
@@ -808,7 +808,7 @@ msgstr "System"
 
 #: views/includes/sidebar.html:258 views/notifications.html:2
 msgid "Notifications"
-msgstr "Pwoiadomienia"
+msgstr "Powiadomienia"
 
 #: views/includes/sidebar.html:270 views/log.html:2
 msgid "Log"
