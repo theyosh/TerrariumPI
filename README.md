@@ -1,6 +1,6 @@
 # TerrariumPI 4.5.0
 
-![Latest release](https://github-basic-badges.herokuapp.com/release/theyosh/TerrariumPI.svg?text=latest%20release)
+![Latest release](https://img.shields.io/github/v/release/theyosh/terrariumpi?label=Latest%20release)
 ![GitHub Release Date](https://img.shields.io/github/release-date/theyosh/TerrariumPI)
 [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/4-x-y-z/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/theyosh/terrariumpi)](https://hub.docker.com/r/theyosh/terrariumpi)
