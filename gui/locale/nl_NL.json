@@ -534,8 +534,8 @@
       },
       "calibration": {
         "inverse": {
-          "help": "",
-          "label": ""
+          "help": "Schakelen om de externe waarde om te keren.",
+          "label": "Inverse waarde"
         },
         "ldr_capacitor": {
           "help": "Voer de condensatorwaarde in µF in, omdat dit de lichtberekening beïnvloedt.",
@@ -544,10 +544,10 @@
           "placeholder": "Voer de condensatorwaarde in µF in"
         },
         "timeout": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Voer de time-out in seconden in tussen controles op afstand.",
+          "invalid": "De ingevoerde time-out is niet geldig. Voer een geldig getal tussen {min} en {max} in.",
+          "label": "Time-out in seconden",
+          "placeholder": "Voer de time-out in seconden in"
         }
       },
       "current": {
