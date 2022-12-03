@@ -114,7 +114,7 @@ It is currently controling my reptile terrarium since 2015! And my Madagascar Da
 
 The software has support for the following languages:
 
-[![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/4-x-y-z/multi-auto.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
+[![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/multi-auto.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 
 Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
 
