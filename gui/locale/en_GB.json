@@ -533,10 +533,21 @@
         "placeholder": "Enter an address"
       },
       "calibration": {
+        "inverse": {
+          "help": "Toggle to inverse the remote value.",
+          "label": "Inverse value"
+        },
         "ldr_capacitor": {
           "help": "Enter the capacitor value in µF as this will influence the light calculation.",
+          "invalid": "The entered capacitor value is not valid. Enter a valid number between {min} and {max}.",
           "label": "Capacitor value in µF",
           "placeholder": "Enter the capacitor value in µF"
+        },
+        "timeout": {
+          "help": "Enter the timeout in seconds between remote checks.",
+          "invalid": "The entered timeout value is not valid. Enter a valid number between {min} and {max}.",
+          "label": "Time out in seconds",
+          "placeholder": "Enter the time out in seconds"
         }
       },
       "current": {
