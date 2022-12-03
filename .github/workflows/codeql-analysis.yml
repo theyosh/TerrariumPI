@@ -13,14 +13,14 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "main", "3.x.y.z", "4.x.y.z", "svelte"]
+    branches: [ "main", "3.x.y.z", "4.x.y.z"]
     paths:
       - '**.js'
       - '**.py'
 
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "main", "3.x.y.z", "4.x.y.z", "svelte"]
+    branches: [ "main", "3.x.y.z", "4.x.y.z"]
     paths:
       - '**.js'
       - '**.py'

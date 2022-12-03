@@ -5,8 +5,7 @@ name: Svelte GUI builder
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches:
-      - svelte
+    branches: [ "main", "4.x.y.z"]
     paths:
       - 'gui/**'
       - '*.json'
