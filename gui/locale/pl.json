@@ -1,0 +1,2115 @@
+{
+  "about": {
+    "online": {
+      "help": "Więcej pomocy online."
+    },
+    "title": "O programie"
+  },
+  "areas": {
+    "delete": {
+      "confirm": {
+        "message": "Czy na pewno chcesz usunąć obszar ''{name}''?"
+      },
+      "error": {
+        "message": "Nie można usunąć obszaru ''{name}''!\nBłąd: {błąd}"
+      },
+      "ok": {
+        "message": "Obszar ''{name}'' jest usunięty."
+      }
+    },
+    "settings": {
+      "depends_on": {
+        "help": "Wybierz klatkę należącą do tego obszaru.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Zależy od",
+        "placeholder": "Wybierz zależne obszary"
+      },
+      "enclosure": {
+        "help": "Wybierz klatkę należącą do tego obszaru.",
+        "invalid": "Proszę dokonać wyboru.",
+        "label": "Klatka",
+        "placeholder": "Wybierz obudowę"
+      },
+      "mode": {
+        "help": "Wybierz tryb dla tego obszaru. To zmieni czas i długość załączenia przekaźników.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Tryb",
+        "options": {
+          "disabled": "Wyłączony",
+          "main_lights": "Główne światła",
+          "sensors": "Czujniki",
+          "timer": "Timer",
+          "weather": "Pogoda dzień/noc",
+          "weather_inverse": "Pogoda noc/dzień"
+        },
+        "placeholder": "Wybierz tryb"
+      },
+      "name": {
+        "help": "Wpisz łatwą do zapamiętania nazwę.",
+        "invalid": "Wprowadzona nazwa jest nieprawidłowa. Nie może być pusty.",
+        "label": "Imię",
+        "placeholder": "Wpisz imię"
+      },
+      "save": {
+        "error": {
+          "duplicate_relays": "Wybrałeś te same przekaźniki dla alarmu niskiego i wysokiego. To nie jest ważne.",
+          "required_fields": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+        },
+        "ok": {
+          "message": "Obszar ''{name}'' został zaktualizowany."
+        }
+      },
+      "setup": {
+        "day_night_difference": {
+          "help": "Kwota do zmiany między dniem a nocą.",
+          "invalid": "Wprowadź poprawny czas dnia.",
+          "label": "Różnica dzień/noc",
+          "placeholder": "Wpisz numer"
+        },
+        "day_night_source": {
+          "help": "Wybierz źródło, gdy jest „dzień”.",
+          "invalid": "Dokonaj wyboru.",
+          "label": "Żródło dnia/nocy",
+          "options": {
+            "lights": "Światła",
+            "weather": "Pogoda"
+          },
+          "placeholder": "Żródło dnia/nocy"
+        },
+        "deviation_high_alarm": {
+          "help": "",
+          "invalid": "Wprowadź prawidłowy numer.",
+          "label": "Wysokie odchylenie alarmu",
+          "placeholder": "Wysokie odchylenie alarmu"
+        },
+        "deviation_low_alarm": {
+          "help": "Zwiększenie lub zmniejszenie dolnej wartości alarmu.",
+          "invalid": "Wprowadź prawidłowy numer.",
+          "label": "Niskie odchylenie alarmu",
+          "placeholder": "Niskie odchylenie alarmu"
+        },
+        "high": {
+          "begin": {
+            "help": "Czas dnia gdy przekaźniki powinny zostać włączone. Dla każdego dnia.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Czas rozpoczęcia",
+            "placeholder": "Wprowadź czas rozpoczęcia"
+          },
+          "door_status": {
+            "help": "Status wszystkich drzwi.",
+            "invalid": "Proszę dokonać wyboru.",
+            "label": "Statrus drzwi",
+            "options": {
+              "closed": "Zamknięty",
+              "ignore": "Zignorowany",
+              "open": "Otwarty"
+            },
+            "placeholder": "Wybierz stan"
+          },
+          "end": {
+            "help": "Czas dnia gdy przekaźniki powinny zostać wyłączone. Dla każdego dnia.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Czas zakończenia",
+            "placeholder": "Wprowadź czas zakończenia"
+          },
+          "ignore_high": {
+            "help": ".",
+            "label": "Alarm wysoki"
+          },
+          "light_status": {
+            "help": "Wybierz stan świateł.",
+            "invalid": "Dokonaj wyboru.",
+            "label": "Status światła",
+            "options": {
+              "ignore": "Zignorowany",
+              "off": "Wyłączony",
+              "on": "Włączony"
+            },
+            "placeholder": "Wybierz stan"
+          },
+          "off_duration": {
+            "help": "Czas przez który przełączniki powinny być włączone. Jeśli jest krótszy niż dzień działa jako timer. Wpisz zero aby uzyskać cały dzień.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Czas jako wyłączony",
+            "placeholder": "Czas jako wyłączony"
+          },
+          "on_duration": {
+            "help": "Czas przez który przełączniki powinny być włączone. Jeśli jest krótszy niż dzień działa jako timer. Wpisz zero aby uzyskać cały dzień.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Długość czasu włączenia",
+            "placeholder": "Długość czasu włączenia"
+          },
+          "playlists": {
+            "help": "Wybierz listę odtwarzania do gry.",
+            "invalid": "Proszę dokonać wyboru.",
+            "label": "Lista odtwarzania",
+            "placeholder": "Wybierz listy odtwarzania"
+          },
+          "power_on_time": {
+            "help": "Czas trwania w sekundach, aby przełączyć przekaźnik.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Czas włączenia",
+            "placeholder": "Czas włączenia"
+          },
+          "relays": {
+            "help": "Wybierz przekaźniki do przełączenia.",
+            "invalid": "Proszę dokonać wyboru.",
+            "label": "Przełączniki",
+            "placeholder": "Wybierz przekaźniki"
+          },
+          "settle_time": {
+            "help": "Czas trwania w sekundach między dwiema czynnościami.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Czas uregulawania",
+            "placeholder": "Czas uregulawania"
+          },
+          "trigger_threshold": {
+            "help": "Wprowadź liczbę alarmów przed wykonaniem akcji.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Próg alarmowy",
+            "placeholder": "Próg"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Wybierz czas w którym ścmiemniacz ma się włączać lub wyłączać w minutach. Max czas 180min."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Czas trwania ściemniania"
+              },
+              "relay": {
+                "label": "Opóźnienie przełącznika wyłączone"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Czas włączenia ściemniacza"
+              },
+              "relay": {
+                "label": "Opóżnienie włączenia przełącznika"
+              }
+            },
+            "relay": {
+              "info": "Wybierz opoźnienie załączenia przełącznika w minutach. Maksymalne opóźnienienie 180 minut."
+            }
+          }
+        },
+        "low": {
+          "begin": {
+            "help": "Czas dnia gdy przekaźniki powinny zostać włączone. Dla każdego dnia.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Czas rozpoczęcia",
+            "placeholder": "Wprowadź czas rozpoczęcia"
+          },
+          "door_status": {
+            "help": "Status wszystkich drzwi.",
+            "invalid": "Proszę dokonać wyboru.",
+            "label": "Statrus drzwi",
+            "options": {
+              "closed": "Zamknięty",
+              "ignore": "Zignorowany",
+              "open": "Otwarty"
+            },
+            "placeholder": "Wybierz stan"
+          },
+          "end": {
+            "help": "Czas dnia gdy przekaźniki powinny zostać wyłączone. Dla każdego dnia.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Czas zakończenia",
+            "placeholder": "Podaj czas zakończenia"
+          },
+          "ignore_low": {
+            "help": "Przełącz, aby zignorować dolną wartość alarmową czujników i używać tylko wysokiej wartości alarmowej.",
+            "label": "Alarm niski"
+          },
+          "light_status": {
+            "help": "Wybierz stan świateł.",
+            "invalid": "Dokonaj wyboru.",
+            "label": "Status światła",
+            "options": {
+              "ignore": "Zignorowany",
+              "off": "Wyłączony",
+              "on": "Włączony"
+            },
+            "placeholder": "Wybierz stan"
+          },
+          "off_duration": {
+            "help": "Czas przez który przełączniki powinny być włączone. Jeśli jest krótszy niż dzień działa jako timer. Wpisz zero aby uzyskać cały dzień.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Czas jako wyłączony",
+            "placeholder": "Czas jako wyłączony"
+          },
+          "on_duration": {
+            "help": "Czas przez który przełączniki powinny być włączone. Jeśli jest krótszy niż dzień działa jako timer. Wpisz zero aby uzyskać cały dzień.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Długość czasu włączenia",
+            "placeholder": "Długość czasu włączenia"
+          },
+          "playlists": {
+            "help": "Wybierz listy odtwarzania do odtworzenia.",
+            "invalid": "Dokonaj wyboru.",
+            "label": "Lista odtwarzania",
+            "placeholder": "Wybierz listy odtwarzania"
+          },
+          "power_on_time": {
+            "help": "Czas w sekundach do włączenia przekaźnika.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Czas włączenia",
+            "placeholder": "Czas włączenia"
+          },
+          "relays": {
+            "help": "Wybierz przekaźniki do przełączenia.",
+            "invalid": "Proszę dokonać wyboru.",
+            "label": "Przełączniki",
+            "placeholder": "Wybierz przekaźniki"
+          },
+          "settle_time": {
+            "help": "Czas trwania w sekundach między dwiema czynnościami.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Czas uregulawania",
+            "placeholder": "Czas uregulawania"
+          },
+          "trigger_threshold": {
+            "help": "Wprowadź liczbę alarmów przed wykonaniem akcji.",
+            "invalid": "Wprowadź poprawny czas dnia.",
+            "label": "Próg alarmowy",
+            "placeholder": "Próg"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Wybierz czas w którym ścmiemniacz ma się włączać lub wyłączać w minutach. Max czas 180min."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Czas trwania ściemniania"
+              },
+              "relay": {
+                "label": "Opóźnienie przełącznika wyłączone"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Czas włączenia ściemniacza"
+              },
+              "relay": {
+                "label": "Opóżnienie włączenia przełącznika"
+              }
+            },
+            "relay": {
+              "info": "Wybierz opoźnienie załączenia przełącznika w minutach. Maksymalne opóźnienienie 180 minut."
+            }
+          }
+        },
+        "main_lights": {
+          "help": "Przełącz jeśli to są główne światła w tej klatce. Ta wartość jest używana do sprawdzenia świateł w innych obszarach.",
+          "label": "Główne światła"
+        },
+        "max_day_hours": {
+          "help": "Maksymalna ilość godzin przez którą światła będą włączone. Odnośni się wyłącznie do trybu pogodowego. Jeśli dzień z serwera jest dłuższy niż ta wartość maksymalna zostanie skrócony do wartości maksymalnej.",
+          "invalid": "Wprowadzona wartość jest nieprawidłowa. Wpisz prawidłową liczbę od {min} do {max}.",
+          "label": "Maksymalna ilość godzin",
+          "placeholder": "Wpisz numer"
+        },
+        "min_day_hours": {
+          "help": "Minimalna ilość godzin przez którą światła będą włączone. Odnośni się wyłącznie do trybu pogodowego. Jeśli dzień z serwera jest krótszy niż ta wrtość minimalna zostanie wydłużony do wartości minimalnej.",
+          "invalid": "Wprowadzona wartość jest nieprawidłowa. Wpisz prawidłową liczbę od {min} do {max}.",
+          "label": "Minimalna ilość godzin",
+          "placeholder": "Wpisz numer"
+        },
+        "periods": {
+          "day": "Ustawienia dzienne",
+          "high": "Alarm wysoki",
+          "info": "Poniżej możesz wybrać ustawienia przełączników i sterownika czasowego dla okresu dziennego i nocnego.",
+          "low": "Alarm niski",
+          "night": "Ustawienia nocne",
+          "varation": "Czas trwania"
+        },
+        "sensors": {
+          "help": "Wybierz czujniki do użycia w trybie opartym na czujnikach.",
+          "invalid": "Proszę dokonać wyboru.",
+          "label": "Czujniki",
+          "placeholder": "Wybierz czujniki"
+        },
+        "shift_day_hours": {
+          "help": "Ilość godzin o którą czas powinien zostać przesunięty oparta na czasie wschodu słońca. Wartości ujemne spowodują wcześniejsze rozpoczęcie dnia.",
+          "invalid": "Wprowadzona wartość jest nieprawidłowa. Wpisz prawidłową liczbę od {min} do {max}.",
+          "label": "Przesunięcie godzin",
+          "placeholder": "Wpisz numer"
+        },
+        "soundcard": {
+          "help": "Wybierz kartę dźwiękową używaną w tym obszarze.",
+          "invalid": "Dokonaj wyboru.",
+          "label": "Karta dźwiękowa",
+          "placeholder": "Wybierz kartę dźwiękową"
+        },
+        "variation": {
+          "offset": {
+            "invalid": "Wprowadź prawidłowy numer."
+          },
+          "period": {
+            "invalid": "Wprowadź prawidłowy numer.",
+            "offset": "Zrównoważyć",
+            "placeholder": "Próg",
+            "source": "Wpisz pełny adres URL, lokalny plik JSON lub plik skryptu"
+          },
+          "value": {
+            "invalid": "Wprowadź prawidłowy numer.",
+            "placeholder": "Różnica"
+          },
+          "when": {
+            "invalid": "Proszę dokonać wyboru.",
+            "options": {
+              "after": "Po x minutach",
+              "at": "O czasie",
+              "external": "Użyj źródła JSON",
+              "script": "Użyj skryptu",
+              "weather": "Korzystając z aktualnej pogody"
+            },
+            "placeholder": "Wybierz akcję"
+          }
+        },
+        "watertank_height": {
+          "help": "Wejdź na wysokość zbiornika na wodę.",
+          "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+          "label": "Wysokość",
+          "placeholder": "Wpisz numer"
+        },
+        "watertank_offset": {
+          "help": "Wprowadź przesunięcie między czujnikiem a wysokością wody.",
+          "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+          "label": "Prezesunięcie",
+          "placeholder": "Wpisz numer"
+        },
+        "watertank_volume": {
+          "help": "Wprowadź poprawny czas dnia.",
+          "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+          "label": "objętość",
+          "placeholder": "Wpisz numer"
+        }
+      },
+      "title": "Ustawienia obszaru",
+      "type": {
+        "help": "Wybierz typ obszaru. Każdy typ ma własne opcje i logikę.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Rodzaj",
+        "placeholder": "Wybierz rodzaj"
+      }
+    }
+  },
+  "audio": {
+    "files": {
+      "delete": {
+        "confirm": {
+          "message": "Czy na pewno usuniesz plik audio ''{name}'' ({filename})?"
+        },
+        "error": {
+          "message": "Plik audio ''{name}'' nie można było usunąć!\nBłąd: {error}"
+        },
+        "ok": {
+          "message": "Plik audio ''{name}'' został usunięty."
+        }
+      },
+      "settings": {
+        "audiofiles": {
+          "label": "Prześlij nowy plik audio",
+          "placeholder": "Prześlij nowy plik audio"
+        },
+        "save": {
+          "error": {
+            "invalid_file": "Nieprawidłowe pliki audio"
+          },
+          "ok": {
+            "message": "Przesłano {amount, plural, =1 {# plik audio} other {# pliki audio}}"
+          }
+        }
+      },
+      "title": "Pliki audio"
+    },
+    "menu": {
+      "files": {
+        "title": "Pliki"
+      },
+      "new_playlist": {
+        "title": "Nowa lista odtwarzania"
+      },
+      "playlists": {
+        "title": "Lista odtwarzania"
+      },
+      "title": "Audio"
+    },
+    "playlists": {
+      "delete": {
+        "confirm": {
+          "message": "Czy na pewno chcesz usunąć playlistę ''{name}'' z numerami {length}?"
+        },
+        "error": {
+          "message": "Lista odtwarzania ''{name}'' nie można było usunąć!\nBłąd: {error}"
+        },
+        "ok": {
+          "message": "Lista odtwarzania ''{name}'' została usunięta."
+        }
+      },
+      "settings": {
+        "files": {
+          "help": "Wybierz wszystkie pliki audio dla tej listy odtwarzania.",
+          "invalid": "Wybierz co najmniej 1 plik audio.",
+          "label": "Pliki audio",
+          "placeholder": "Wybierz pliki audio"
+        },
+        "name": {
+          "help": "Wprowadź łatwe do zapamiętania nazwę.",
+          "invalid": "Wprowadzona nazwa jest nieprawidłowa. Nie może być pusty.",
+          "label": "Imię",
+          "placeholder": "Wpisz imię"
+        },
+        "repeat": {
+          "help": "Zagraj w tę listę odtwarzania w trybie powtarzalnym.",
+          "label": "Powtarzać"
+        },
+        "save": {
+          "error": {
+            "required_fields": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+          },
+          "ok": {
+            "message": "Playlista ''{name}'' została zaktualizowana."
+          }
+        },
+        "shuffle": {
+          "help": "Tasuj tę listę odtwarzania za każdym razem, gdy jest odtwarzana.",
+          "label": "Człapać"
+        },
+        "title": "Ustawienia listy odtwarzania",
+        "volume": {
+          "help": "Wybierz głośność tej listy odtwarzania.",
+          "label": "Pliki audio"
+        }
+      },
+      "title": "Lista odtwarzania"
+    }
+  },
+  "buttons": {
+    "actions": {
+      "delete": "Usuń przycisk",
+      "export": "Przycisk eksportu",
+      "ignore": "Ignoruj przycisk",
+      "settings": "Przycisk edytuj"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Czy na pewno chcesz usunąć przycisk ''{name}''?"
+      },
+      "error": {
+        "message": "Nie można było usunąć przycisku ''{name}''!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Przycisk ''{name}'' jest usunięty."
+      }
+    },
+    "ignore": {
+      "confirm": {
+        "message": "Czy na pewno chcesz zignorować przycisk ''{name}''?"
+      },
+      "error": {
+        "message": "Nie można zignorować przycisku ''{name}''!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Przycisk ''{name}'' jest ignorowany."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nowy przycisk"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Przyciski"
+    },
+    "settings": {
+      "address": {
+        "help": "Wprowadź fizyczny numer PIO GPIO.",
+        "invalid": "Wprowadzony adres jest nieprawidłowy. Wprowadź prawidłowy numer między {min} i {max}.",
+        "label": "Adres",
+        "placeholder": "Podaj adres"
+      },
+      "calibration": {
+        "inverse": {
+          "help": "",
+          "label": ""
+        },
+        "ldr_capacitor": {
+          "help": "Wprowadź wartość kondensatora w µF, ponieważ wpłynie to na obliczenie światła.",
+          "invalid": "Wprowadzona wartość kondensatora jest nieprawidłowa. Wprowadź prawidłową liczbę z zakresu od {min} do {max}.",
+          "label": "Wartość kondensatora w µF",
+          "placeholder": "Wprowadź wartość kondensatora w µF"
+        },
+        "timeout": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "current": {
+        "help": "Obecny stan przycisku.",
+        "label": "Aktualny",
+        "placeholder": "Bieżąca wartość"
+      },
+      "hardware": {
+        "help": "Wybierz urządzenie dla tego rodzaju przycisku.",
+        "invalid": "Wybierz rodzaj urządzenia.",
+        "label": "Sprzęt",
+        "placeholder": "Wybierz sprzęt"
+      },
+      "name": {
+        "help": "Wprowadź łatwe do zapamiętania nazwę.",
+        "invalid": "Wprowadzona nazwa jest nieprawidłowa. Nie może być pusty.",
+        "label": "Imię",
+        "placeholder": "Wpisz imię"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+        },
+        "ok": {
+          "message": "Przycisk ''{name}'' jest aktualizowany."
+        }
+      },
+      "title": "Ustawienia przycisków"
+    },
+    "title": "Przyciski"
+  },
+  "calendar": {
+    "actions": {
+      "download": "Pobierz iCal"
+    },
+    "event": {
+      "delete": {
+        "confirm": {
+          "message": "Czy na pewno chcesz usunąć zdarzenie ''{name}''?"
+        },
+        "error": {
+          "message": "Wydarzenie ''{name}'' nie można było usunąć!\nBłąd: {error}"
+        },
+        "ok": {
+          "message": "Wydarzenie ''{name}'' jest usunięte."
+        }
+      },
+      "duration": "Czas trwania",
+      "periods": {
+        "days": "Dni",
+        "months": "Miesiące",
+        "no_reminder": "Bez przypomnienia",
+        "no_repeat": "Nie powtarzaj",
+        "weeks": "Tygodnie",
+        "years": "Lata"
+      },
+      "settings": {
+        "date": {
+          "help": "Data lub okres trwania tego wydarzenia.",
+          "label": "Data"
+        },
+        "description": {
+          "help": "Wpisz opis wydarzenia.",
+          "label": "Wprowadź opis"
+        },
+        "remind": {
+          "label": "Przypomnij mi"
+        },
+        "repeat": {
+          "help": "Wybierz okres i ilość powtórzeń.",
+          "invalid": "Wybierz poprawny okres i ilość powtórzeń.",
+          "label": "Powtarzaj co"
+        },
+        "repeat_amount": {
+          "label": "Wybierz kwotę"
+        },
+        "save": {
+          "error": {
+            "required_fields": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+          },
+          "ok": {
+            "message": "Zdarzenie ''{name}'' jest aktualizowane."
+          }
+        },
+        "summary": {
+          "help": "Podaj nazwę tego obszaru.",
+          "invalid": "Nazwa nie może być pusta.",
+          "label": "Wpisz imię"
+        },
+        "title": "Wydarzenie",
+        "update": {
+          "error": {
+            "message": "Wydarzenie ''{name}'' nie można zaktualizować!\nBłąd: {error}"
+          },
+          "ok": {
+            "message": "Wydarzenie ''{name}'' jest aktualizowane."
+          }
+        }
+      }
+    },
+    "menu": {
+      "title": "Kalendarz"
+    },
+    "title": "Kalendarz"
+  },
+  "dashboard": {
+    "enclosures": {
+      "menu": {
+        "title": "Klatka"
+      },
+      "mode": "Tryb",
+      "title": "Klatka"
+    },
+    "infobox": {
+      "current_power_usage": {
+        "title": "Zużycie energii w Watach"
+      },
+      "current_water_flow": {
+        "title": "Przepływ wody na s"
+      },
+      "total_power_usage": {
+        "duration": "W {duration}",
+        "title": "Całkowite zużycie energi"
+      },
+      "total_water_usage": {
+        "duration": "W {duration}",
+        "title": "Całkowite zużycie wody"
+      },
+      "uptime": {
+        "title": "czas działania"
+      }
+    },
+    "menu": {
+      "title": "Panel Główny"
+    },
+    "title": "Panel Główny"
+  },
+  "enclosures": {
+    "actions": {
+      "delete": "Usuń obudowę",
+      "settings": "Edytuj obudowę"
+    },
+    "area": {
+      "current": "Aktualny",
+      "current_status": "Aktualny",
+      "delete": {
+        "title": "Usuń obszar"
+      },
+      "edit": {
+        "title": "Edytuj obszar"
+      },
+      "mode": {
+        "disabled": "Wyłączony",
+        "sensors": "Czujniki",
+        "timer": "Timer",
+        "title": "Tryb",
+        "weather": "Pogoda"
+      },
+      "now": "Teraz",
+      "period": {
+        "day": "Dzień",
+        "high": "Wysoki",
+        "low": "Niski",
+        "night": "Noc"
+      },
+      "range": "Zasięg",
+      "type": {
+        "audio": "Audio",
+        "cooling": "Chłodzenie",
+        "heating": "Ogrzewanie",
+        "humidity": "Wilgotność",
+        "lights": "Światła",
+        "main_lights": "Główne światła",
+        "watertank": "zbiornik wody"
+      }
+    },
+    "areas": {
+      "title": "Obszary"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Czy na pewno chcesz usunąć obudowę ''{name}''?"
+      },
+      "error": {
+        "message": "Nie można było usunąć obudowy ''{name}''!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Zakład ''{name}'' jest usunięty."
+      }
+    },
+    "doors": {
+      "title": "Drzwi"
+    },
+    "menu": {
+      "list": {
+        "title": "Lista"
+      },
+      "new_area": {
+        "title": "Nowy obszar"
+      },
+      "new_enclosure": {
+        "title": "Nowa klatka"
+      },
+      "title": "Klatka"
+    },
+    "settings": {
+      "description": {
+        "help": "Wprowadź tekst opisu o tej obudowie.",
+        "label": "Opis",
+        "placeholder": "Wprowadź opis"
+      },
+      "doors": {
+        "help": "Wybierz drzwi do tej obudowy.",
+        "label": "Drzwi"
+      },
+      "image": {
+        "help": "Prześlij JPG lub PNG.",
+        "invalid": "Wybrany plik jest nieprawidłowy. To nie jest plik obrazu.",
+        "label": "Obrazek",
+        "placeholder": "Wybierz plik obrazu"
+      },
+      "name": {
+        "help": "Wprowadź łatwe do zapamiętania nazwę.",
+        "invalid": "Wprowadzona nazwa jest nieprawidłowa. Nie może być pusty.",
+        "label": "Imię",
+        "placeholder": "Wpisz imię"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+        },
+        "ok": {
+          "message": "Obudowa ''{name}'' jest aktualizowana."
+        }
+      },
+      "title": "Ustawienia klatki",
+      "webcams": {
+        "help": "Wybierz kamerę internetową dla tej obudowy.",
+        "label": "Kamera internetowa"
+      }
+    },
+    "title": "Klatka",
+    "webcams": {
+      "title": "Kamera internetowa"
+    }
+  },
+  "footer": {
+    "current_activity": "Działalność",
+    "error_messages": "Komunikaty o błędach",
+    "warning_messages": "Wiadomości ostrzegawcze"
+  },
+  "gauge": {
+    "error": "błąd",
+    "last_update": "Ostatnia aktualizacja",
+    "warning": "ostrzeżenie"
+  },
+  "general": {
+    "download": {
+      "title": "Ściągnij"
+    },
+    "exclude": {
+      "average": "."
+    },
+    "humidity": "Wilgotność",
+    "login": {
+      "title": "Zaloguj się by wprowadzać zmiany"
+    },
+    "logout": {
+      "title": "Wyloguj"
+    },
+    "settings": {
+      "title": "Ustawienia"
+    },
+    "temperature": "temperatura",
+    "uptime_format": {
+      "days": "{number, plural, =1 {# dzień} other {# dzieńs}}",
+      "hours": "{number, plural, =1 {# godzina} other {# godzinas}}",
+      "minutes": "{number, plural, =1 {# minuta} other {# minutas}}",
+      "months": "{number, plural, =1 {# miesiąc} other {# miesiącs}}",
+      "seconds": "{number, plural, =1 {# druga} other {# drugas}}",
+      "years": "{number, plural, =1 {# rok} other {# roks}}"
+    }
+  },
+  "graph": {
+    "alarm": {
+      "max": "Alarm max",
+      "min": "Alarm min"
+    },
+    "current": "Aktualny",
+    "flow": "Przepływ wody",
+    "ldr": "Status światła",
+    "magnetic": "Statrus drzwi",
+    "motion": "Ruch",
+    "no-data": "Brak danych ...",
+    "period": {
+      "day": "Dzień",
+      "month": "Miesiąc",
+      "replaced": "Zastąpiony",
+      "week": "Tydzień",
+      "year": "Rok"
+    },
+    "settings": {
+      "export": "Export"
+    },
+    "wattage": "Wattage"
+  },
+  "home": {
+    "menu": {
+      "title": "Home"
+    },
+    "title": "Home"
+  },
+  "messages": {
+    "actions": {
+      "delete": "Usuń wiadomość",
+      "edit": "Edytuj wiadomość"
+    },
+    "add": "Dodaj wiadomość",
+    "delete": {
+      "confirm": {
+        "message": "Czy na pewno chcesz usunąć wiadomość ''{name}''?"
+      },
+      "error": {
+        "message": "Wiadomość ''{name}'' nie można było usunąć!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Wiadomość ''{name}'' jest usunięta."
+      }
+    },
+    "ratelimit": "{number, plural, =0 {Nieograniczone wiadomości} other {Max # na minutę}}",
+    "settings": {
+      "available_services": {
+        "help": "Wybierz urządzenie dla tego rodzaju przycisku.",
+        "label": "Usługi"
+      },
+      "enabled": {
+        "help": "Włącz/wyłącz ten komunikat powiadomienia.",
+        "label": "Włączony"
+      },
+      "message": {
+        "help": "Wprowadź wiadomość. Możesz użyć wartości zastępczych tutaj.",
+        "label": "Wiadomość",
+        "placeholder": "Wprowadź wiadomość"
+      },
+      "placeholders": {
+        "format": "Wartości liczb można zaokrąglić za pomocą {link_start} `.: 2f` format {link_end}",
+        "help": "Lista dostępnych symboli zastępczych.",
+        "label": "Posiadacze miejsca"
+      },
+      "rate_limit": {
+        "help": "Maksymalna liczba wiadomości na minutę dla tego wiadomości. Użyj 0 dla nieograniczonego.",
+        "invalid": "Wprowadzona wartość jest nieprawidłowa. Wprowadź prawidłową liczbę wyższą niż {min}.",
+        "label": "Ograniczenie szybkości",
+        "placeholder": "Wiadomości na minutę"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+        },
+        "ok": {
+          "message": "Wiadomość ''{name}'' jest aktualizowana."
+        }
+      },
+      "subject": {
+        "help": "Wprowadź krótki temat. Możesz użyć wartości zastępczych tutaj.",
+        "invalid": "Przedmiot nie może być pusty.",
+        "label": "Temat",
+        "placeholder": "Wprowadź temat"
+      },
+      "title": "Ustawienia wiadomości",
+      "type": {
+        "help": "Status wszystkich drzwi.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Rodzaj wiadomości",
+        "placeholder": "Wybierz rodzaj"
+      }
+    },
+    "table": {
+      "actions": "Akcje",
+      "enabled": "Włączony",
+      "message": "Wiadomość",
+      "rate_limit": "Ograniczenie szybkości",
+      "services": "Usługi",
+      "subject": "Temat",
+      "type": "Rodzaj"
+    },
+    "title": "Wiadomości powiadomień"
+  },
+  "modal": {
+    "confirm": {
+      "relays": {
+        "scan": "To rozpocznie nowy skan, aby znaleźć nowe przekaźniki. Może to potrwać do 30 sekund."
+      },
+      "sensors": {
+        "scan": "To rozpocznie nowy skan, aby znaleźć nowe czujniki. Może to potrwać do 30 sekund."
+      },
+      "submit": {
+        "title": "Potwierdź"
+      },
+      "system": {
+        "logout": "Czy na pewno chcesz się wylogować?",
+        "reboot": "To ponownie uruchomi Raspberry Pi. Może to potrwać do 60 sekund.",
+        "restart": "To ponownie uruchomi Terrariumpi. Może to potrwać do 30 sekund.",
+        "shutdown": "To zamknie Raspberry Pi. Używaj z ostrożnością!"
+      },
+      "title": "Jesteś pewny?"
+    },
+    "form": {
+      "toggle": {
+        "info": "Pokaż/ukryj informacje o pomocy"
+      }
+    },
+    "general": {
+      "close": "Zamknij",
+      "save": "Ratować"
+    },
+    "login": {
+      "error": "Nieprawidłowy login",
+      "form": {
+        "password": {
+          "help": "Podaj hasło.",
+          "invalid": "Hasło nie może być puste.",
+          "label": "Hasło"
+        },
+        "submit": "Zaloguj",
+        "username": {
+          "help": "Wprowadź nazwę użytkownika.",
+          "invalid": "Nazwa użytkownika nie może być pusta.",
+          "label": "Nazwa użytkownika"
+        }
+      },
+      "title": "Zaloguj"
+    },
+    "notification": {
+      "service": {
+        "form": {
+          "field": {
+            "setup": {
+              "address": {
+                "label": "Podaj adres"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "not-found": {
+    "header": "Strona nie znaleziona",
+    "link": "Wróć do strony głównej",
+    "title": "Strona nie znaleziona"
+  },
+  "notification": {
+    "delete": {
+      "error": {
+        "title": "BŁĄD"
+      },
+      "invalid": {
+        "title": "BŁĄD"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "door": {
+      "status": {
+        "title": "Aktualizacja statusu drzwi"
+      }
+    },
+    "exclude": {
+      "error": {
+        "title": "BŁĄD"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "form": {
+      "save": {
+        "error": {
+          "title": "Zapisz błąd"
+        },
+        "ok": {
+          "title": "Zapisz OK"
+        }
+      },
+      "upload": {
+        "error": {
+          "title": "Prześlij błąd"
+        }
+      }
+    },
+    "login": {
+      "message": {
+        "error": "Przepraszam, ale login jest nieprawidłowy",
+        "ok": "Udało ci się zalogować."
+      },
+      "title": "Zaloguj"
+    },
+    "manual_mode": {
+      "error": {
+        "title": "BŁĄD"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "offline": {
+      "message": "Połączenie jest utracone",
+      "title": "Offline"
+    },
+    "online": {
+      "message": "Jesteśmy połączeni",
+      "title": "online"
+    },
+    "reboot": {
+      "ok": {
+        "title": "System ponownie uruchamia się OK"
+      }
+    },
+    "restart": {
+      "ok": {
+        "title": "Uruchom ponownie system"
+      }
+    },
+    "scanning": {
+      "ok": {
+        "title": "Skanowanie zakończyło się"
+      }
+    },
+    "shutdown": {
+      "ok": {
+        "title": "Wyłączenie systemu OK"
+      }
+    },
+    "toggle": {
+      "error": {
+        "title": "BŁĄD"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    }
+  },
+  "relays": {
+    "actions": {
+      "delete": "Usuń przekaźnik",
+      "export": "Przekaźnik eksportowy",
+      "ignore": "Zignoruj przekaźnik",
+      "manual_mode": "Przekaźnik trybu ręcznego",
+      "replace_hardware": "Wymień sprzęt",
+      "settings": "Edytuj przekaźnik"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Czy na pewno chcesz zignorować przekaźnik ''{name}''?"
+      },
+      "manual_mode": {
+        "message": "Przełącz tryb ręczny dla przekaźnika ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Czy na pewno chcesz usunąć przekaźnik ''{name}''?"
+      },
+      "error": {
+        "message": "Przekaźnik ''{name}'' nie można było usunąć!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Przekaźnik ''{name}'' jest usunięty."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "Przekaźnik ''{name}'' nie można zignorować!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Przekaźnik ''{name}'' jest ignorowany."
+      }
+    },
+    "manual-mode": "Tryb ręczny",
+    "manual_mode": {
+      "error": {
+        "message": "Błąd zmieniający tryb ręczny dla przekaźnika ''{name}''.\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Tryb ręczny dla przekaźnika ''{name}'' został zmieniony."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nowy przełącznik"
+      },
+      "scan": {
+        "title": "Wyszukaj przełączniki"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Przełączniki"
+    },
+    "settings": {
+      "address": {
+        "help": "Aby uzyskać więcej informacji, zobacz online.",
+        "invalid": "Wprowadzony adres jest nieprawidłowy. Nie może być pusty.",
+        "label": "Adres",
+        "placeholder": "Podaj adres"
+      },
+      "calibration": {
+        "dimmer_frequency": {
+          "help": "Częstotliwość, na której działa ściemniacz.",
+          "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+          "label": "Częstotliwość ściemniacza w HZ"
+        },
+        "dimmer_max_dim": {
+          "help": "Maksymalna wartość ściemniacza (dziedzictwo).",
+          "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+          "label": "Maksymalna wartość ściemniacza"
+        },
+        "dimmer_max_power": {
+          "help": "Maksymalna moc dla tego ściemniacza.",
+          "invalid": "Wprowadzona wartość jest nieprawidłowa. Wprowadź prawidłowy numer między {min} i {max}.",
+          "label": "Maksymalna moc w %"
+        },
+        "dimmer_offset": {
+          "help": "Przesunięcie ściemniacza.",
+          "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+          "label": "Dimmer offset w %"
+        }
+      },
+      "current": {
+        "help": "Obecny stan przekaźnika.",
+        "label": "Aktualny",
+        "placeholder": "Bieżąca wartość"
+      },
+      "flow": {
+        "help": "Wprowadź (maksymalny) przepływ wody po włączeniu.",
+        "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+        "label": "Przepływ wody"
+      },
+      "hardware": {
+        "help": "Wybierz typ sprzętu dla tego przekaźnika.",
+        "invalid": "Wybierz rodzaj urządzenia.",
+        "label": "Sprzęt",
+        "placeholder": "Wybierz sprzęt"
+      },
+      "name": {
+        "help": "Wprowadź łatwe do zapamiętania nazwę.",
+        "invalid": "Wprowadzona nazwa jest nieprawidłowa. Nie może być pusty.",
+        "label": "Imię",
+        "placeholder": "Wpisz imię"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+        },
+        "ok": {
+          "message": "Przekaźnik ''{name}'' jest aktualizowany."
+        }
+      },
+      "title": "Ustawienia przekaźnika",
+      "wattage": {
+        "help": "Wprowadź (maks. ) Watwa po włączeniu.",
+        "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+        "label": "Wattage"
+      }
+    },
+    "title": "Przełączniki",
+    "toggle": {
+      "error": {
+        "message": "Błąd podczas przełączania przekaźnika ''{name}''.\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Przełączono przekaźnik ''{name}'' na stan {value}"
+      }
+    }
+  },
+  "sensors": {
+    "actions": {
+      "delete": "Usuń czujnik",
+      "export": "Czujnik eksportu",
+      "ignore": "Zignoruj czujnik",
+      "settings": "Edytuj czujnik"
+    },
+    "all": {
+      "menu": {
+        "title": "Wszystkie czujniki"
+      },
+      "title": "Wszystkie czujniki"
+    },
+    "altitude": {
+      "menu": {
+        "title": "Wysokość"
+      },
+      "title": "Czujniki wysokości"
+    },
+    "average": {
+      "altitude": "Średnia wysokość",
+      "co2": "Średni CO2",
+      "distance": "Średni dystans",
+      "fertility": "Średnia płodność",
+      "humidity": "Średnia wilgotność",
+      "light": "Średnie światło",
+      "moisture": "Średnia wilgoć",
+      "pressure": "Średnia presja",
+      "temperature": "Średnia temperatura",
+      "uva": "Średnia UVA",
+      "uvb": "Średni UVB",
+      "uvi": "Średni wskaźnik UV"
+    },
+    "co2": {
+      "menu": {
+        "title": "CO2"
+      },
+      "title": "Czujniki CO2"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Czy na pewno chcesz zignorować czujnik ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Czy na pewno chcesz usunąć czujnik ''{name}''?"
+      },
+      "error": {
+        "message": "Nie można usunąć czujnika ''{name}''!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Usunięto czujnik ''{name}''."
+      }
+    },
+    "distance": {
+      "menu": {
+        "title": "odległość"
+      },
+      "title": "Czujniki odległości"
+    },
+    "exclude": {
+      "error": {
+        "message": "Nie można zignorować czujnika ''{name}''!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Czujnik ''{name}'' jest ignorowany."
+      }
+    },
+    "fertility": {
+      "menu": {
+        "title": "Żyzność"
+      },
+      "title": "Czujniki płodności"
+    },
+    "humidity": {
+      "menu": {
+        "title": "Wilgotność"
+      },
+      "title": "Czujniki wilgotności"
+    },
+    "light": {
+      "menu": {
+        "title": "światło"
+      },
+      "title": "Czujniki światła"
+    },
+    "menu": {
+      "new": {
+        "title": "Nowy czujnik"
+      },
+      "scan": {
+        "title": "Wyszukaj czujniki"
+      },
+      "title": "Czujniki"
+    },
+    "moisture": {
+      "menu": {
+        "title": "Wilgoć"
+      },
+      "title": "Czujniki wilgoci"
+    },
+    "ph": {
+      "menu": {
+        "title": "pH"
+      },
+      "title": "Czujniki pH"
+    },
+    "pressure": {
+      "menu": {
+        "title": "Ciśnienie"
+      },
+      "title": "Czujniki ciśnienia"
+    },
+    "settings": {
+      "address": {
+        "help": "Podaj adres.",
+        "invalid": "Wprowadzony adres jest nieprawidłowy. Nie może być pusty.",
+        "label": "Adres",
+        "placeholder": "Podaj adres"
+      },
+      "alarm_max": {
+        "help": "Podaj nazwę tego obszaru.",
+        "invalid": "Wprowadzona wartość jest nieprawidłowa. To musi być liczba.",
+        "label": "Alarm max",
+        "placeholder": "Alarm max"
+      },
+      "alarm_min": {
+        "help": "Podaj nazwę tego obszaru.",
+        "invalid": "Wprowadzona wartość jest nieprawidłowa. To musi być liczba.",
+        "label": "Alarm min",
+        "placeholder": "Alarm min"
+      },
+      "calibration": {
+        "ccs811_compensation_sensors": {
+          "help": "Wybierz czujniki obliczeń kompensacji.",
+          "label": "Czujniki kompensacyjne",
+          "placeholder": "Wybierz czujniki kompensacyjne"
+        },
+        "chirp_max_moist": {
+          "help": "Wprowadź maksymalną wartość wilgotną.",
+          "invalid": "Wprowadzona wartość jest nieprawidłowa. Musi być liczba wyższa niż {min}.",
+          "label": "Maksymalna wilgotna wartość"
+        },
+        "chirp_min_moist": {
+          "help": "Wprowadź minimalną wartość wilgotną.",
+          "invalid": "Wprowadzona wartość jest nieprawidłowa. Musi być liczba wyższa niż {min}.",
+          "label": "Minimalna wilgotna wartość"
+        },
+        "offset": {
+          "help": "Wpisz nazwę tej klatki.",
+          "invalid": "Wprowadzona wartość jest nieprawidłowa. To musi być liczba.",
+          "label": "Prezesunięcie"
+        }
+      },
+      "current": {
+        "help": "Obecny stan czujnika.",
+        "label": "Aktualny",
+        "placeholder": "Bieżąca wartość"
+      },
+      "exclude_avg": {
+        "help": "Wyklucz te czujniki ze średnich obliczeń.",
+        "label": "Wyłącz.Avg"
+      },
+      "fields": {
+        "error": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+      },
+      "hardware": {
+        "help": "Wybierz urządzenie dla tego rodzaju przycisku.",
+        "invalid": "Wybierz rodzaj urządzenia.",
+        "label": "Sprzęt",
+        "placeholder": "Wybierz sprzęt"
+      },
+      "limit_max": {
+        "help": "Podaj nazwę tego obszaru.",
+        "invalid": "Wprowadzona wartość jest nieprawidłowa. To musi być liczba.",
+        "label": "Ogranicz maks"
+      },
+      "limit_min": {
+        "help": "Podaj nazwę tego obszaru.",
+        "invalid": "Wprowadzona wartość jest nieprawidłowa. To musi być liczba.",
+        "label": "Ogranicz mins"
+      },
+      "max_diff": {
+        "help": "Wprowadź maksymalną różnicę między dwoma ważnymi pomiarami. Wprowadź „0”, aby wyłączyć.",
+        "invalid": "Wprowadzona wartość jest nieprawidłowa. Musi być liczba wyższa niż {min}.",
+        "label": "Maksymalny dyferencjał",
+        "placeholder": "Maksymalna różnica"
+      },
+      "name": {
+        "help": "Wprowadź łatwe do zapamiętania nazwę.",
+        "invalid": "Wprowadzona nazwa jest nieprawidłowa. Nie może być pusty.",
+        "label": "Imię",
+        "placeholder": "Wpisz imię"
+      },
+      "save": {
+        "ok": {
+          "message": "Czujnik ''{name}''."
+        }
+      },
+      "title": "Ustawienia czujnika",
+      "type": {
+        "help": "Wybierz urządzenie dla tego rodzaju przycisku.",
+        "invalid": "Wybierz rodzaj urządzenia.",
+        "label": "Rodzaj",
+        "placeholder": "Wybierz rodzaj"
+      }
+    },
+    "temperature": {
+      "menu": {
+        "title": "temperatura"
+      },
+      "title": "Czujniki temperatury"
+    },
+    "title": "Czujniki",
+    "uva": {
+      "menu": {
+        "title": "UVA"
+      },
+      "title": "Czujniki UVA"
+    },
+    "uvb": {
+      "menu": {
+        "title": "UVB"
+      },
+      "title": "Czujniki UVB"
+    },
+    "uvi": {
+      "menu": {
+        "title": "UVI"
+      },
+      "title": "Czujniki UVI"
+    }
+  },
+  "services": {
+    "actions": {
+      "delete": "Usuń usługę",
+      "edit": "Edytuj usługę"
+    },
+    "add": "Dodaj usługę",
+    "delete": {
+      "confirm": {
+        "message": "Czy na pewno chcesz usunąć usługę ''{name}''?"
+      },
+      "error": {
+        "message": "Usługi ''{name}'' nie można było usunąć!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Usługa ''{name}'' jest usunięta."
+      }
+    },
+    "enabled": "Włączony",
+    "ratelimit": "{number, plural, =0 {Nieograniczone wiadomości} other {Max # na minutę}}",
+    "settings": {
+      "enabled": {
+        "help": "Włącz/wyłącz tę usługę powiadomienia.",
+        "label": "Włączony"
+      },
+      "name": {
+        "help": "Wprowadź łatwe do zapamiętania nazwę.",
+        "invalid": "Wprowadzona nazwa jest nieprawidłowa. Nie może być pusty.",
+        "label": "Imię",
+        "placeholder": "Wpisz imię"
+      },
+      "rate_limit": {
+        "help": "Maksymalna liczba wiadomości na minutę dla tej usługi. Użyj 0 dla nieograniczonego.",
+        "invalid": "Wprowadzona wartość jest nieprawidłowa. Wprowadź prawidłową liczbę wyższą niż {min}.",
+        "label": "Ograniczenie szybkości",
+        "placeholder": "Wiadomości na minutę"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+        },
+        "ok": {
+          "message": "Serwis ''{name}'' jest aktualizowany."
+        }
+      },
+      "setup": {
+        "address": {
+          "help": "Podaj adres.",
+          "invalid": "Wprowadzony adres jest nieprawidłowy. Nie może być pusty.",
+          "label": "Adres",
+          "placeholder": "Podaj adres"
+        },
+        "api_token": {
+          "help": "Wpisz nazwę tego przycisku..",
+          "invalid": "Wprowadzony token API jest nieprawidłowy. Nie może być pusty.",
+          "label": "Token API",
+          "placeholder": "Wpisz nazwę tego przycisku"
+        },
+        "buzzer": {
+          "help": "Lista dostępnych utworów do użycia w temacie wiadomości."
+        },
+        "green": {
+          "help": "Wpisz nazwę wydarzenia.",
+          "invalid": "Wprowadzona wartość jest nieprawidłowa. Wprowadź prawidłowy numer między {min} i {max}.",
+          "label": "Zielony",
+          "placeholder": "Wprowadź zielony pin GPIO"
+        },
+        "hardware": {
+          "help": "Wybierz urządzenie dla tego rodzaju przycisku.",
+          "invalid": "Dokonaj wyboru.",
+          "label": "Sprzęt",
+          "placeholder": "Wybierz sprzęt"
+        },
+        "password": {
+          "help": "Wprowadź hasło serwera.",
+          "label": "Hasło serwera",
+          "placeholder": "Podaj nazwę tego obszaru"
+        },
+        "port": {
+          "help": "Wprowadź numer portu serwera.",
+          "invalid": "Wprowadzony numer portu jest nieprawidłowy. Nie może być pusty.",
+          "label": "Port serwera",
+          "placeholder": "Podaj nazwę tego obszaru"
+        },
+        "pushover": {
+          "label": "Utwórz swoje tokeny, rejestrując TerrarIumpi jako aplikację {link}."
+        },
+        "receiver": {
+          "help": "Podaj nazwę tego obszaru.",
+          "invalid": "Adres nie może być pusty.",
+          "label": "E -mail odbiorcy",
+          "placeholder": "Wprowadź adres email"
+        },
+        "red": {
+          "help": "Wprowadź szpilkę GPIO dla czerwonego światła.",
+          "invalid": "Wprowadzona wartość jest nieprawidłowa. Wprowadź prawidłowy numer między {min} i {max}.",
+          "label": "Czerwony",
+          "placeholder": "Wprowadź czerwony pin GPIO"
+        },
+        "show_title": {
+          "help": "Pokaż nazwę i wersję jako tytuł na wyświetlaczu.",
+          "label": "Pokaż Tytuł"
+        },
+        "ssl": {
+          "email": {
+            "label": "Usługa powiadomienia e -mail automatycznie wykryje połączenia SSL/TLS."
+          },
+          "mqtt": {
+            "label": "Usługa powiadomienia MQTT automatycznie wykryje połączenia SSL/TLS."
+          }
+        },
+        "url": {
+          "help": "Podaj nazwę tego obszaru.",
+          "invalid": "Wprowadzony adres URL jest nieprawidłowy. Nie może być pusty.",
+          "label": "Pełny adres URL",
+          "placeholder": "Podaj nazwę tego obszaru"
+        },
+        "user_key": {
+          "help": ".",
+          "invalid": "Wprowadzony klawisz użytkownika jest nieprawidłowy. Nie może być pusty.",
+          "label": "Klucz użytkownika",
+          "placeholder": "Wpisz nazwę tego przycisku"
+        },
+        "username": {
+          "help": "Wprowadź nazwę użytkownika serwera.",
+          "label": "Nazwa użytkownika serwera",
+          "placeholder": "Podaj nazwę tego obszaru"
+        },
+        "yellow": {
+          "help": "Wprowadź szpilkę GPIO dla bursztynu.",
+          "invalid": "Wprowadzona wartość jest nieprawidłowa. Wprowadź prawidłowy numer między {min} i {max}.",
+          "label": "Bursztyn",
+          "placeholder": "Wprowadź bursztynowy styk GPIO"
+        }
+      },
+      "title": "Ustawienia usługi powiadomień",
+      "type": {
+        "help": "Wybierz typ usługi powiadomień.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Rodzaj",
+        "placeholder": "Wybierz rodzaj"
+      }
+    },
+    "title": "Usługi powiadomień"
+  },
+  "system": {
+    "log": {
+      "download": {
+        "title": "Pobierz log"
+      },
+      "filters": {
+        "errors": "błędy",
+        "search": "Wprowadź wyszukiwane hasła",
+        "title": "Filtry",
+        "warnings": "ostrzeżnia"
+      },
+      "lines": "{lines} linie",
+      "loading": "Ładowanie danych",
+      "title": "Logowanie systemu"
+    },
+    "menu": {
+      "log": {
+        "title": "Log"
+      },
+      "notifications": {
+        "title": "Pwoiadomienia"
+      },
+      "reboot": {
+        "title": "Uruchom ponownie"
+      },
+      "restart": {
+        "title": "Uruchom ponownie"
+      },
+      "settings": {
+        "title": "Ustawienia"
+      },
+      "shutdown": {
+        "title": "Wyłącz"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "System"
+    },
+    "notifications": {
+      "title": "Pwoiadomienia"
+    },
+    "settings": {
+      "all_gauges_on_single_page": {
+        "help": "Dodaj dodatkowy element menu dla wszystkich czujników na jednej stronie.",
+        "label": "Wszystkie wskaźniki na jednej stronie"
+      },
+      "authenticate": {
+        "help": "Zawsze uwierzytelniaj lub tylko wtedy, gdy wprowadzane są zmiany.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Tryb uwierzytelniania",
+        "options": {
+          "changes": "Tylko dla zmian",
+          "full": "Pełne uwierzytelnianie",
+          "no_authentication": "Logowanie"
+        }
+      },
+      "auto_dark_mode": {
+        "help": "Przełącz ciemny tryb, gdy zaczyna się noc.",
+        "label": "Auto Dark Tryb"
+      },
+      "currency": {
+        "help": "Wybierz walutę interfejsu.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Waluta"
+      },
+      "dashboard_mode": {
+        "help": "Wybierz wygląd pulpitu nawigacyjnego.",
+        "invalid": "Proszę dokonać wyboru.",
+        "label": "Tryb pulpitu nawigacyjnego",
+        "options": {
+          "normal": "Wykresy i załączniki",
+          "only_enclosures": "Tylko obudowy",
+          "only_graphs": "Tylko wykresy"
+        }
+      },
+      "distance_indicator": {
+        "help": "Wybierz wskaźnik odległości. Wpływa tylko na bieżące wartości.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Typ odległości"
+      },
+      "exclude-ids": {
+        "help": "Identyfikatory, które są wykluczone.",
+        "label": "Wykluczone identyfikatory"
+      },
+      "graph_smooth_value": {
+        "help": "Wprowadź ilość punktów danych do średniej. 0 wyłączy tę funkcję.",
+        "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+        "label": "Wygładzanie wykresu"
+      },
+      "header": {
+        "cloud": "Chmura",
+        "gui": "GUI",
+        "locale": "Widownia",
+        "system": "System"
+      },
+      "hide_environment_dashboard": {
+        "help": "Ukryj dane o obudowie na desce rozdzielczej.",
+        "label": "Ukryj obudowy na desce rozdzielczej"
+      },
+      "host": {
+        "help": "Wprowadź adres IP, aby słuchać połączeń. Domyślnie 0. 0.0. 0.",
+        "invalid": "Wybierz poprawny okres i ilość powtórzeń.",
+        "label": "Numer IP"
+      },
+      "language": {
+        "help": "Wybierz język interfejsu. Zmieni to również liczbę i formatowanie walut.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Język"
+      },
+      "meross_cloud_password": {
+        "help": "Wprowadź hasło, aby zalogować się do Meross Cloud.",
+        "label": "Hasło Merossa"
+      },
+      "meross_cloud_username": {
+        "help": "Wprowadź nazwę użytkownika, aby zalogować się do Meross Cloud.",
+        "label": "Nazwa użytkownika Merossa"
+      },
+      "page": {
+        "title": "Ustawienia systemowe"
+      },
+      "password": {
+        "help": "Wpisz nazwę tego przycisku.",
+        "invalid": "Hasło nie może być puste.",
+        "label": "Nowe hasło"
+      },
+      "password2": {
+        "help": "Wprowadź ponownie nowe hasło.",
+        "invalid": "Nowe hasło nie pasuje.",
+        "label": "Potwierdź nowe hasło"
+      },
+      "pi-wattage": {
+        "help": "Wprowadź całkowite zużycie mocy PI ze wszystkimi podłączonymi urządzeniami USB.",
+        "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+        "label": "Zużycie mocy PI"
+      },
+      "port": {
+        "help": "Wprowadź numer portu, aby słuchać połączeń. Domyślnie 8090.",
+        "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+        "label": "Numer portu"
+      },
+      "power_price": {
+        "help": "Wprowadź cenę za kWh.",
+        "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+        "label": "Cena mocy"
+      },
+      "profile_image": {
+        "help": "Zaktualizuj niestandardowy obraz użyty w menu.",
+        "invalid": "Nieprawidłowy format obrazu profilowego.",
+        "label": "Zdjęcie profilowe"
+      },
+      "save": {
+        "ok": {
+          "message": "Ustawienia są aktualizowane.",
+          "title": "Aktualizacja OK"
+        }
+      },
+      "show_min_max_gauge": {
+        "help": "Pokaż minimalną i maksymalną wartość wskaźników.",
+        "label": "Pokaż wartości min i maksymalne na wykresach mierników"
+      },
+      "temperature_indicator": {
+        "help": "Wybierz wskaźnik temperatury. Wpływa tylko na bieżące wartości.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Typ temperatury"
+      },
+      "title": {
+        "help": "Wprowadź niestandardowy tytuł.",
+        "invalid": "Tytuł nie może być pusty.",
+        "label": "Tytuł"
+      },
+      "username": {
+        "help": "Wprowadź nazwę użytkownika do uwierzytelnienia.",
+        "invalid": "Nazwa użytkownika nie może być pusta.",
+        "label": "Nazwa użytkownika"
+      },
+      "water_price": {
+        "help": "Wprowadź cenę za l/galon.",
+        "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+        "label": "Cena wody"
+      },
+      "water_volume_indicator": {
+        "help": "Wybierz wskaźnik objętości wody. Wpływa tylko na bieżące wartości.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Typ objętości cieczy"
+      },
+      "wind_speed_indicator": {
+        "help": "Wybierz wskaźnik prędkości wiatru. Wpływa tylko na bieżące wartości.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Typ prędkości wiatru"
+      }
+    },
+    "status": {
+      "cpu_temp": {
+        "title": "Temperatura Procesora"
+      },
+      "disk": {
+        "title": "Użycie dysku"
+      },
+      "load": {
+        "title": "Obciążenie systemu"
+      },
+      "memory": {
+        "title": "Zużycie pamięci"
+      },
+      "summary": {
+        "title": "Podsumowanie systemu"
+      },
+      "title": "Status systemu",
+      "uptime": {
+        "title": "Czas aktualizacji systemu"
+      }
+    }
+  },
+  "table": {
+    "field": {
+      "range": "zasięg"
+    },
+    "header": {
+      "actions": "Akcje",
+      "duration": "Czas trwania",
+      "filename": "Nazwa pliku",
+      "filesize": "Rozmiar pliku",
+      "mode": "Tryb",
+      "name": "Imię",
+      "number_files": "# Akta",
+      "repeat": "Powtarzać",
+      "shuffle": "Człapać",
+      "status": "Status",
+      "type": "Rodzaj",
+      "volume": "Pliki audio"
+    }
+  },
+  "topbar": {
+    "current_status": "Aktualny",
+    "door_status": "Statrus drzwi",
+    "upcoming_events": "{number, plural, =0 {brak wydarzeń} =1 {jedno wydarzenie} other {# wydarzenia}}"
+  },
+  "userpanel": {
+    "login": {
+      "text1": "Tryb tylko do odczytu",
+      "text2": "Zaloguj"
+    },
+    "logout": {
+      "text1": "Witam {name}",
+      "text2": "Wyloguj"
+    }
+  },
+  "weather": {
+    "current": "Aktualny",
+    "forecast": "Prognoza",
+    "menu": {
+      "title": "Pogoda"
+    },
+    "settings": {
+      "fields": {
+        "error": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+      },
+      "information": "Aby użyć systemu pogodowego, musisz utworzyć bezpłatne konto w {source_link}.",
+      "save": {
+        "ok": {
+          "message": "Ustawienie pogody zostanie zapisane."
+        }
+      },
+      "title": "Ustawienia pogody",
+      "weather_source": {
+        "help": "Wprowadź pełny adres URL API OpenWeatherMap Like: {api_url_example}.",
+        "invalid": "Wprowadzony adres URL jest nieprawidłowy.",
+        "label": "URL źródłowego"
+      }
+    },
+    "title": "Pogoda"
+  },
+  "webcams": {
+    "actions": {
+      "delete": "Usuń kamerę internetową",
+      "ignore": "Zignoruj kamerę internetową",
+      "settings": "Edytuj kamerę internetową"
+    },
+    "archive": {
+      "no_images": "Brak dostępnych obrazów archiwum"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Czy na pewno chcesz zignorować kamerę internetową ''{name}''?"
+      }
+    },
+    "controls": {
+      "archive": "Archiwum",
+      "new_marker": "Dodaj marker",
+      "save_raw_image": "Zapisz surowy obraz",
+      "show_markers": "Pokaż markery",
+      "toggle_volume": "Objętość przełączania"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Czy na pewno chcesz usunąć kamerę internetową ''{name}''?"
+      },
+      "error": {
+        "message": "Nie można usunąć kamery internetowej ''{name}''!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Kamama internetowa ''{name}'' jest usunięta."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "Nie można zignorować kamery internetowej ''{name}''!\nBłąd: {error}"
+      },
+      "ok": {
+        "message": "Kamera internetowa ''{name}'' jest ignorowana."
+      }
+    },
+    "marker": {
+      "delete": {
+        "confirm": {
+          "message": "Czy na pewno chcesz usunąć znacznik?"
+        },
+        "error": {
+          "message": "Nie można usunąć znacznika"
+        },
+        "invalid": {
+          "message": "Nieprawidłowy znacznik"
+        }
+      }
+    },
+    "markers": {
+      "settings": {
+        "delete": "Usuń",
+        "doors": {
+          "help": "Wybierz senorów, których chcesz pokazać.",
+          "invalid": "Dokonaj wyboru.",
+          "label": "Czujniki"
+        },
+        "title": "Czujniki"
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nowa kamera internetowa"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Kamera internetowa"
+    },
+    "settings": {
+      "address": {
+        "help": "Aby uzyskać więcej informacji, zobacz online.",
+        "invalid": "Wprowadzony adres jest nieprawidłowy. Nie może być pusty.",
+        "label": "Adres",
+        "placeholder": "Podaj adres"
+      },
+      "archive": {
+        "door": {
+          "help": "Status drzwi do zrobienia obrazu archiwalnego.",
+          "invalid": "Dokonaj wyboru.",
+          "label": "Stan drzwi archiwum",
+          "options": {
+            "close": "Zamknij",
+            "ignore": "Ignoruj",
+            "open": "Otwarty"
+          },
+          "placeholder": "Wybierz stan drzwi archiwum"
+        },
+        "flash": {
+          "help": "Wybierz przekaźnik, który będzie działał jako flasher.",
+          "invalid": "Dokonaj wyboru.",
+          "label": "Błysk",
+          "placeholder": "Wybierz opcjonalny przekaźnik Flash"
+        },
+        "light": {
+          "help": "Status światła do wykonania obrazu archiwum.",
+          "invalid": "Dokonaj wyboru.",
+          "label": "Archiwum Stan światła",
+          "options": {
+            "ignore": "Ignoruj",
+            "off": "Kiedy się wyłączy",
+            "on": "Kiedy włączono"
+          },
+          "placeholder": "Wybierz stan światła archiwum"
+        },
+        "options": {
+          "day_1": "1 dzień",
+          "disabled": "Wyłączony",
+          "hour_1": "30 minut",
+          "hour_12": "12 godzin",
+          "hour_3": "3 godziny",
+          "hour_6": "6 godzin",
+          "minute_1": "1 minuta",
+          "minute_15": "15 minut",
+          "minute_30": "30 minut",
+          "minute_5": "5 minut",
+          "motion": "Ruch"
+        },
+        "state": {
+          "help": "Wybierz czas trwania między zarchiwizowanymi obrazami.",
+          "invalid": "Dokonaj wyboru.",
+          "label": "Archiwizacja",
+          "placeholder": "Wybierz archiwizację"
+        }
+      },
+      "awb": {
+        "help": "Wybierz bilans biały.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Bilans biały",
+        "options": {
+          "auto": "Automatyczny",
+          "cloudy": "Pochmurny",
+          "flash": "Błysk",
+          "fluorescent": "Fluorescencyjny",
+          "greyworld": "Greyworld",
+          "horizon": "Horyzont",
+          "incandescent": "Rozżarzony",
+          "off": "Wyłączony",
+          "shade": "Cień",
+          "sunlight": "Światło słoneczne",
+          "tungsten": "Wolfram"
+        },
+        "placeholder": "Wybierz Bilans White"
+      },
+      "hardware": {
+        "help": "Wybierz urządzenie dla tego rodzaju przycisku.",
+        "invalid": "Wybierz rodzaj urządzenia.",
+        "label": "Sprzęt",
+        "placeholder": "Wybierz sprzęt"
+      },
+      "height": {
+        "help": "Wprowadź wysokość rozdzielczości w pikselach.",
+        "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+        "label": "Wysokość"
+      },
+      "motion": {
+        "area": {
+          "help": "Podaj nazwę tego obszaru.",
+          "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+          "label": "Minimalny obszar ruchu",
+          "placeholder": "Wpisz numer"
+        },
+        "boxes": {
+          "help": "Pokaż skrzynki ruchowe na zarchiwizowanych obrazach.",
+          "invalid": "Dokonaj wyboru.",
+          "label": "Pokaż skrzynki ruchowe",
+          "options": {
+            "blue": "Niebieski",
+            "green": "Zielony",
+            "none": "Nic",
+            "red": "Czerwony"
+          },
+          "placeholder": "Pokaż skrzynki ruchowe"
+        },
+        "frame": {
+          "help": "Którą ramkę użyć do wykrywania ruchu.",
+          "invalid": "Dokonaj wyboru.",
+          "label": "Rama porównawcza ruchu",
+          "options": {
+            "archived": "Ostatnia zarchiwizowana ramka",
+            "last": "Ostatnia ramka"
+          },
+          "placeholder": "Wybierz ramkę do porównania"
+        },
+        "threshold": {
+          "help": "Wprowadź próg ruchu.",
+          "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+          "label": "Próg delta ruchu",
+          "placeholder": "Wpisz numer"
+        }
+      },
+      "name": {
+        "help": "Wprowadź łatwe do zapamiętania nazwę.",
+        "invalid": "Wprowadzona nazwa jest nieprawidłowa. Nie może być pusty.",
+        "label": "Imię",
+        "placeholder": "Wpisz imię"
+      },
+      "preview": {
+        "label": "Zapowiedź"
+      },
+      "rotation": {
+        "help": "Wybierz obrót.",
+        "invalid": "Dokonaj wyboru.",
+        "label": "Obrót",
+        "options": {
+          "degrees_0": "0 stopni",
+          "degrees_180": "180 stopni",
+          "degrees_270": "270 stopni",
+          "degrees_90": "90 stopni",
+          "flip_h": "Flip poziomy",
+          "flip_v": "Odwróć pion",
+          "zero_degrees": "0 stopni"
+        },
+        "placeholder": "Wybierz obrót"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
+        },
+        "ok": {
+          "message": "WebCam ''{name}'' jest aktualizowany."
+        }
+      },
+      "title": "Ustawienia kamery internetowej",
+      "width": {
+        "help": "Wprowadź szerokość rozdzielczości w pikselach.",
+        "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
+        "label": "Szerokość"
+      }
+    },
+    "title": "Kamera internetowa"
+  }
+}

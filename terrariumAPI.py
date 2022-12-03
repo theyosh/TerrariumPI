@@ -19,12 +19,15 @@ from terrariumEnclosure    import terrariumEnclosure
 from terrariumNotification import terrariumNotification, terrariumNotificationService
 
 from hardware.button    import terrariumButton
-from hardware.display    import terrariumDisplay
+from hardware.display   import terrariumDisplay
 from hardware.relay     import terrariumRelay
 from hardware.sensor    import terrariumSensor
 from hardware.webcam    import terrariumWebcam
 
 from terrariumUtils import terrariumUtils
+
+# Set to false in production, else every API call that uses DB will produce a logline
+DEBUG = False
 
 class terrariumAPI(object):
 
@@ -192,14 +195,13 @@ class terrariumAPI(object):
 
 
     # API DOC
-    bottle_app.route('/<page:re:(api/doc|api/swagger)>/', 'GET', self.webserver.render_page,   apply=self.authentication(False), name='api:documentation')
-    bottle_app.route('/api/doc/<filename:re:(terrariumpi\.json)>', 'GET', self.webserver._static_file, apply=self.authentication(False), name='api:swagger.json')
+    bottle_app.route('/<page:re:(api/redoc|api/swagger)>/', 'GET', self.webserver.render_page,   apply=self.authentication(False), name='api:documentation')
 
   # Areas
   def area_types(self):
     return { 'data' : terrariumArea.available_areas }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def area_list(self):
     data = []
     for area in Area.select(lambda r: not r.id in self.webserver.engine.settings['exclude_ids']):
@@ -207,7 +209,7 @@ class terrariumAPI(object):
 
     return { 'data' : data }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def area_detail(self, area):
     try:
       area = Area[area]
@@ -243,7 +245,7 @@ class terrariumAPI(object):
     if duplicate:
       raise Exception('Duplicate relay usage. One or more relays are already used in other areas.')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def area_add(self):
     try:
       # Make sure the enclosure does exists
@@ -262,7 +264,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Area could not be added. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def area_update(self, area):
     try:
       area = Area[area]
@@ -280,7 +282,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating area {area}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def area_delete(self, area):
     try:
       area = Area[area]
@@ -303,7 +305,7 @@ class terrariumAPI(object):
   def audio_hardware(self):
     return { 'data' : terrariumAudio.available_soundcards }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def audiofile_list(self):
     data = []
     for audiofile in Audiofile.select():
@@ -311,7 +313,7 @@ class terrariumAPI(object):
 
     return { 'data' : data }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def audiofile_detail(self, audiofile):
     try:
       audiofile = Audiofile[audiofile]
@@ -354,7 +356,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting audio file {audiofile} detail. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def audiofile_delete(self, audiofile):
     try:
       audiofile = Audiofile[audiofile]
@@ -372,7 +374,7 @@ class terrariumAPI(object):
   def button_hardware(self):
     return { 'data' : terrariumButton.available_buttons }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def button_history(self, button, action = 'history', period = 'day'):
     try:
       button = Button[button]
@@ -416,7 +418,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting history for button {button}: {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def button_list(self):
     data = []
     for button in Button.select(lambda r: not r.id in self.webserver.engine.settings['exclude_ids']):
@@ -424,7 +426,7 @@ class terrariumAPI(object):
 
     return { 'data' : data }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def button_detail(self, button):
     try:
       button = Button[button]
@@ -436,7 +438,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting button {button}: {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def button_add(self):
     try:
       new_button = self.webserver.engine.add(terrariumButton(None, request.json['hardware'], request.json['address'], request.json['name']))
@@ -451,7 +453,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Button could not be added: {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def button_update(self, button):
     try:
       button = Button[button]
@@ -464,7 +466,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating button {button}: {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def button_delete(self, button):
     try:
       message = f'Button {Button[button]} is deleted.'
@@ -486,19 +488,22 @@ class terrariumAPI(object):
         # TODO: Make raising a CalendarNotFound exception
         raise HTTPError(status=404, body=f'Calender with id {calendar} does not exists.')
 
+      # Convert uid to id field
+      data['id'] = data['uid']
+      del(data['uid'])
       return data
-    except Exception:
-      raise HTTPError(status=404, body=f'Calender with id {calendar} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Calender detail error. {ex}')
 
   def calendar_delete(self, calendar):
     data = self.calendar_detail(calendar)
-    if not self.webserver.engine.calendar.delete_event(data['uid']):
+    if not self.webserver.engine.calendar.delete_event(data['id']):
       raise HTTPError(status=500, body=f'Calender event {data["summary"]} could not be removed.')
 
     return {'message' : f'Calender event {data["summary"]} is deleted.'}
 
   def calendar_update(self, calendar):
-    data = data = self.calendar_detail(calendar)
+    data = self.calendar_detail(calendar)
     for field in request.json:
 
       if field in ['dtstart','dtend'] and request.json[field]:
@@ -507,7 +512,7 @@ class terrariumAPI(object):
         data[field] = request.json[field]
 
     event = self.webserver.engine.calendar.create_event(
-      data['uid'],
+      data['id'],
       data['summary'],
       data['description'],
       data.get('location'),
@@ -518,7 +523,7 @@ class terrariumAPI(object):
       data.get('interval')
     )
 
-    return event
+    return self.calendar_detail(event['uid'])
 
   def calendar_list(self):
     start = request.query.get('start', None)
@@ -556,11 +561,12 @@ class terrariumAPI(object):
       request.json.get('repeatend')
     )
 
-    return event
+    return self.calendar_detail(event['uid'])
 
   def calendar_download(self):
-    icalfile = Path(self.webserver.engine.calendar.get_file())
-    return static_file(icalfile.name, root='', download=icalfile.name)
+    icalfile = self.webserver.engine.calendar.get_file().relative_to(Path(__file__).parent)
+    return static_file(icalfile.name, root=icalfile.parent, download=icalfile.name)
+  # End Calendar
 
 
   def display_hardware(self):
@@ -568,7 +574,7 @@ class terrariumAPI(object):
 
 
   # Enclosure
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def enclosure_list(self):
     data = []
     for enclosure in Enclosure.select(lambda e: not e.id in self.webserver.engine.settings['exclude_ids']):
@@ -576,7 +582,7 @@ class terrariumAPI(object):
 
     return { 'data' : data }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def enclosure_detail(self, enclosure):
     try:
       enclosure = Enclosure[enclosure]
@@ -605,14 +611,20 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting enclosure {enclosure} detail. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def enclosure_add(self):
     try:
+      del(request.json['delete_image'])
+
+      doors   = Button.select(lambda b: b.id in request.json['doors'])
+      webcams = Webcam.select(lambda w: w.id in request.json['webcams'])
+
+      # TODO: Swap logic! First try to create the enclosure in database, before loading it into the engine...
       new_enclosure = self.webserver.engine.add(terrariumEnclosure(None, request.json['name'], self.webserver.engine, request.json['doors']))
 
       request.json['id']      = new_enclosure.id
-      request.json['doors']   = Button.select(lambda b: b.id in request.json['doors'])
-      request.json['webcams'] = Webcam.select(lambda w: w.id in request.json['webcams'])
+      request.json['doors']   = doors
+      request.json['webcams'] = webcams
       enclosure = Enclosure(**request.json)
 
       return self.enclosure_detail(enclosure.id)
@@ -621,31 +633,37 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Enclosure could not be added. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def enclosure_update(self, enclosure):
     try:
       enclosure = Enclosure[enclosure]
+      doors     = Button.select(lambda b: b.id in request.json['doors'])
+      webcams   = Webcam.select(lambda w: w.id in request.json['webcams'])
 
-      print('Update enclosure data to the engine')
+      # Check if we need to delete the image
+      if request.json['delete_image']:
+        enclosure.delete_image()
+        request.json['image'] = ''
+
+      del(request.json['delete_image'])
+
       # TODO: Will this work... not sure....
       self.webserver.engine.update(terrariumEnclosure,**request.json)
 
-      doors_set = Button.select(lambda b: b.id in request.json['doors'])
-      request.json['doors'] = doors_set
-
-      webcams_set = Webcam.select(lambda w: w.id in request.json['webcams'])
-      request.json['webcams'] = webcams_set
+      request.json['doors'] = doors
+      request.json['webcams'] = webcams
 
       enclosure.set(**request.json)
       orm.commit()
 
       return self.enclosure_detail(enclosure.id)
+    # TODO: Make a better exception here. As it could be an enclosure, door or webcam exception
     except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Enclosure with id {enclosure} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating enclosure {enclosure}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def enclosure_delete(self, enclosure):
     try:
       message = f'Enclosure {Enclosure[enclosure]} is deleted.'
@@ -668,9 +686,9 @@ class terrariumAPI(object):
 
   # Notifications
   def notification_message_types(self):
-    return { 'data' : terrariumNotification.available_messages }
+    return { 'data' : terrariumNotification.available_messages(self.webserver.engine.active_language) }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_message_detail(self, message):
     try:
       message = NotificationMessage[message]
@@ -682,7 +700,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting notification message with id {message} detail. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_message_update(self, message):
     try:
       message = NotificationMessage[message]
@@ -699,7 +717,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating notification message with id {message}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_message_delete(self, message):
     try:
       title = f'Notification message {message} is deleted.'
@@ -712,7 +730,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting notification message with id {message}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_message_list(self):
     data = []
     for message in NotificationMessage.select(lambda ns: not ns.id in self.webserver.engine.settings['exclude_ids']):
@@ -720,7 +738,7 @@ class terrariumAPI(object):
 
     return { 'data' : data }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_message_add(self):
     try:
       request.json['services'] = NotificationService.select(lambda ns: ns.id in request.json['services'].split(','))
@@ -734,7 +752,7 @@ class terrariumAPI(object):
   def notification_service_types(self):
     return { 'data' : terrariumNotificationService.available_services }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_service_detail(self, service):
     try:
       service = NotificationService[service]
@@ -746,7 +764,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting notification service with id {service} detail. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_service_update(self, service):
     try:
       service = NotificationService[service]
@@ -761,7 +779,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating notification service with id {service}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_service_delete(self, service):
     try:
       service = NotificationService[service]
@@ -776,7 +794,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting notification service with id {service}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_service_list(self):
     data = []
     for service in NotificationService.select(lambda ns: not ns.id in self.webserver.engine.settings['exclude_ids']):
@@ -784,7 +802,7 @@ class terrariumAPI(object):
 
     return { 'data' : data }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_service_add(self):
     try:
       service = NotificationService(**request.json)
@@ -798,7 +816,7 @@ class terrariumAPI(object):
 
 
   # Playlist
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def playlist_list(self):
     data = []
     for playlist in Playlist.select(lambda p: not p.id in self.webserver.engine.settings['exclude_ids']):
@@ -806,7 +824,7 @@ class terrariumAPI(object):
 
     return { 'data' : data }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def playlist_detail(self, playlist):
     try:
       playlist = Playlist[playlist]
@@ -820,7 +838,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting playlist {playlist} detail. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def playlist_add(self):
     try:
       request.json['files'] = Audiofile.select(lambda af: af.id in request.json['files'])
@@ -832,7 +850,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Playlist could not be added. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def playlist_update(self, playlist):
     try:
       playlist = Playlist[playlist]
@@ -845,7 +863,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating playlist {playlist}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def playlist_delete(self, playlist):
     try:
       message = f'Playlist {Playlist[playlist]} is deleted.'
@@ -873,7 +891,7 @@ class terrariumAPI(object):
 
 
   # Relays
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def relay_action(self, relay, action = 'toggle'):
     try:
       relay = Relay[relay]
@@ -887,7 +905,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting relay {relay} detail. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def relay_manual(self, relay):
     try:
       relay = Relay[relay]
@@ -901,7 +919,7 @@ class terrariumAPI(object):
       raise HTTPError(status=500, body=f'Error updating manual mode on relay {relay} detail. {ex}')
 
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def relay_replace_hardware(self, relay):
     try:
       relay = Relay[relay]
@@ -915,7 +933,7 @@ class terrariumAPI(object):
       raise HTTPError(status=500, body=f'Error updating manual mode on relay {relay} detail. {ex}')
 
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def relay_history(self, relay, action = 'history', period = 'day'):
     try:
       relay = Relay[relay]
@@ -973,7 +991,7 @@ class terrariumAPI(object):
     new = len(self.webserver.engine.relays) - current_amount
     return { 'message' : f'Found {new} new relays' }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def relay_list(self):
     data = []
     for relay in Relay.select(lambda r: not r.id in self.webserver.engine.settings['exclude_ids']):
@@ -981,7 +999,7 @@ class terrariumAPI(object):
 
     return { 'data' : data }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def relay_detail(self, relay):
     try:
       relay = Relay[relay]
@@ -991,7 +1009,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting relay {relay} detail. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def relay_add(self):
     try:
       new_relay = self.webserver.engine.add(terrariumRelay(None, request.json['hardware'], request.json['address'], request.json['name']))
@@ -1009,7 +1027,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Relay could not be added. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def relay_update(self, relay):
     try:
       relay = Relay[relay]
@@ -1024,7 +1042,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating relay {relay}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def relay_delete(self, relay):
     try:
       message = f'Relay {Relay[relay]} is deleted.'
@@ -1041,7 +1059,7 @@ class terrariumAPI(object):
 
 
   # Sensors
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def sensor_history(self, filter = None, action = 'history', period = 'day'):
     data = []
 
@@ -1122,7 +1140,7 @@ class terrariumAPI(object):
     new = len(self.webserver.engine.sensors) - current_amount
     return { 'message' : f'Found {new} new sensors' }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def sensor_list(self, filter = None):
     data = []
     for sensor in Sensor.select(lambda s: not s.id in self.webserver.engine.settings['exclude_ids']):
@@ -1131,7 +1149,7 @@ class terrariumAPI(object):
 
     return { 'data' : data }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def sensor_detail(self, sensor):
     try:
       sensor = Sensor[sensor]
@@ -1141,7 +1159,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting sensor {sensor} detail. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def sensor_add(self):
     try:
       # Try to add a new sensor to the system
@@ -1158,12 +1176,11 @@ class terrariumAPI(object):
       new_value = new_sensor.update()
       sensor.update(new_value)
 
-      self.webserver.websocket_message('sensortypes', self.webserver.engine.sensor_types_loaded)
       return self.sensor_detail(sensor.id)
     except Exception as ex:
       raise HTTPError(status=500, body=f'Sensor could not be added. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def sensor_update(self, sensor):
     try:
       sensor = Sensor[sensor]
@@ -1182,7 +1199,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating sensor {sensor}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def sensor_delete(self, sensor):
     try:
       message = f'Sensor {Sensor[sensor]} is deleted.'
@@ -1195,19 +1212,19 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error deleting sensor {sensor}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def setting_list(self):
     settings = []
     for setting in Setting.select():
       # Never give out this value in a list
-      if setting.id in ['password']:
+      if setting.id in ['password','encryption_salt']:
         continue
 
       settings.append(self.setting_detail(setting.id))
 
     return { 'data' : settings }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def setting_detail(self, setting):
     if 'languages' == setting:
       return { 'languages' : self.webserver.engine.available_languages}
@@ -1233,7 +1250,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error processing setting {setting}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def setting_add(self):
     try:
       if 'password' == request.json['id']:
@@ -1245,7 +1262,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=400, body=f'Error adding new setting. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def setting_update(self, setting):
     try:
       data = Setting[setting]
@@ -1270,16 +1287,26 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=400, body=f'Error updating new setting {setting}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def setting_update_multi(self):
     # First check if new password is set and is entered twice:
     if '' != request.json['password'] and request.json['password'] != request.json['password2']:
       raise HTTPError(status=400, body='Password fields do not match.')
 
+    if terrariumUtils.is_true(request.json['delete_profile_image']):
+      setting = Setting['profile_image']
+      profile_image = Path(setting.value)
+      if profile_image.exists() and profile_image.is_file():
+        profile_image.unlink()
+
+      request.json['profile_image'] = ''
+
+    del(request.json['delete_profile_image'])
+
     # Delete the confirmation password
     del(request.json['password2'])
     # Delete normal password when empty so we keep the old one. Do not allow empty passwords
-    if '' == request.json['password']:
+    if request.json['password'] == '':
       del(request.json['password'])
 
     for key in request.json.keys():
@@ -1299,7 +1326,7 @@ class terrariumAPI(object):
     self.webserver.engine.load_settings()
     return {'status' : True}
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def setting_delete(self, setting):
     try:
       Setting[setting].delete()
@@ -1359,7 +1386,7 @@ class terrariumAPI(object):
   def webcam_hardware(self):
     return { 'data' : terrariumWebcam.available_webcams }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def webcam_archive(self, webcam, period = None):
     try:
       webcam = Webcam[webcam]
@@ -1377,7 +1404,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting webcam {webcam} archive images. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def webcam_list(self):
     data = []
     for webcam in Webcam.select(lambda w: not w.id in self.webserver.engine.settings['exclude_ids']):
@@ -1385,7 +1412,7 @@ class terrariumAPI(object):
 
     return { 'data' : data }
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def webcam_detail(self, webcam):
     try:
       webcam = Webcam[webcam]
@@ -1397,7 +1424,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error getting webcam {webcam} detail. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def webcam_add(self):
     try:
       new_webcam = self.webserver.engine.add(terrariumWebcam(None,
@@ -1424,7 +1451,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Webcam could not be added. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def webcam_update(self, webcam):
     try:
       webcam = Webcam[webcam]
@@ -1440,7 +1467,7 @@ class terrariumAPI(object):
     except Exception as ex:
       raise HTTPError(status=500, body=f'Error updating webcam {webcam}. {ex}')
 
-  @orm.db_session
+  @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def webcam_delete(self, webcam):
     try:
       message = f'Webcam {Webcam[webcam]} is deleted.'

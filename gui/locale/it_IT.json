@@ -1,0 +1,2115 @@
+{
+  "about": {
+    "online": {
+      "help": "Ulteriore assistenza online."
+    },
+    "title": "Informazioni"
+  },
+  "areas": {
+    "delete": {
+      "confirm": {
+        "message": "Sei sicuro di voler eliminare l'area ''{name}''?"
+      },
+      "error": {
+        "message": "L'area ''{name}'' non potrebbe essere eliminata!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "L'area ''{name}'' è eliminata."
+      }
+    },
+    "settings": {
+      "depends_on": {
+        "help": "Contiene la scheda audio utilizzata per la riproduzione audio.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Dipende da",
+        "placeholder": "Seleziona aree a seconda"
+      },
+      "enclosure": {
+        "help": "Seleziona il contenitore a cui appartiene quest'area.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Quando chiuso",
+        "placeholder": "Selezionare il recinto"
+      },
+      "mode": {
+        "help": "Seleziona la modalità di questa area. Questo modificherà l'orario e la durata dei relay.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Modalità",
+        "options": {
+          "disabled": "Disabilitato",
+          "main_lights": "Minimo numero di ore di luce",
+          "sensors": "Sensori",
+          "timer": "Timer",
+          "weather": "Clima giorno/notte",
+          "weather_inverse": "Clima notte/giorno"
+        },
+        "placeholder": "Seleziona la modalità"
+      },
+      "name": {
+        "help": "Inserisci un nome facile da ricordare.",
+        "invalid": "Il nome inserito non è valido. Non può essere vuoto.",
+        "label": "Nome",
+        "placeholder": "Nome file"
+      },
+      "save": {
+        "error": {
+          "duplicate_relays": "Hai selezionato gli stessi relè sia nell'allarme basso che in quello alto. Questo non è valido.",
+          "required_fields": "I campi richiesti sono segnati con '%s'."
+        },
+        "ok": {
+          "message": "Area ''{name}'' viene aggiornato."
+        }
+      },
+      "setup": {
+        "day_night_difference": {
+          "help": "Equivale a cambiare tra giorno e notte.",
+          "invalid": "Inserisci un numero valido.",
+          "label": "Differenza giorno/notte",
+          "placeholder": "Nome file"
+        },
+        "day_night_source": {
+          "help": "Seleziona la fonte quando è 'giorno'.",
+          "invalid": "Si prega di fare una scelta.",
+          "label": "Sorgente differenza giorno/notte",
+          "options": {
+            "lights": "Luci",
+            "weather": "Meteo"
+          },
+          "placeholder": "Sorgente differenza giorno/notte"
+        },
+        "deviation_high_alarm": {
+          "help": "",
+          "invalid": "Inserisci un numero valido.",
+          "label": "Deviazione allarme alta",
+          "placeholder": "Deviazione allarme alta"
+        },
+        "deviation_low_alarm": {
+          "help": "Aumento o diminuzione del valore di allarme basso.",
+          "invalid": "Inserisci un numero valido.",
+          "label": "Deviazione allarme bassa",
+          "placeholder": "Deviazione allarme bassa"
+        },
+        "high": {
+          "begin": {
+            "help": "L'ora del giorno in cui i relè vengono attivati ogni notte.",
+            "invalid": "Inserisci un'ora valida.",
+            "label": "Data e ora",
+            "placeholder": "Data e ora"
+          },
+          "door_status": {
+            "help": "Seleziona lo stato della porta.",
+            "invalid": "Per favore, fai una scelta.",
+            "label": "Stato della porta",
+            "options": {
+              "closed": "Chiuso",
+              "ignore": "Ignorato",
+              "open": "Aperto"
+            },
+            "placeholder": "Seleziona un'opzione"
+          },
+          "end": {
+            "help": "L'ora del giorno in cui i relè vengono attivati ogni notte.",
+            "invalid": "Inserisci un'ora valida.",
+            "label": "Data e ora",
+            "placeholder": "Data e ora"
+          },
+          "ignore_high": {
+            "help": "Contiene il valore per il livello d'allarme inferiore del sensore. Quando va sotto questo valore possono essere attivati allarmi..",
+            "label": "Aggiungi una nuova webcam"
+          },
+          "light_status": {
+            "help": "Seleziona un'opzione.",
+            "invalid": "Si prega di fare una scelta.",
+            "label": "Luci",
+            "options": {
+              "ignore": "Ignorato",
+              "off": "Spento",
+              "on": "Acceso"
+            },
+            "placeholder": "Seleziona un'opzione"
+          },
+          "off_duration": {
+            "help": "La durata quando i relè devono essere spenti quando si spengono. Immettere '0' per disabilitare.",
+            "invalid": "Inserisci una durata in minuti valida.",
+            "label": "Durata del timer spento",
+            "placeholder": "Durata del timer spento"
+          },
+          "on_duration": {
+            "help": "La durata quando i relè dovrebbero essere attivi. Se questo è più breve, tutto il giorno, otterrai una funzionalità timer. Inserisci '0' per avere una notte intera.",
+            "invalid": "Inserisci una durata in minuti valida.",
+            "label": "Durata",
+            "placeholder": "Durata"
+          },
+          "playlists": {
+            "help": "Seleziona la/le playlist che devono essere riprodotte.",
+            "invalid": "Si prega di fare una scelta.",
+            "label": "Playlist",
+            "placeholder": "Sensori di temperatura"
+          },
+          "power_on_time": {
+            "help": "La durata in secondi per attivare il relay.",
+            "invalid": "Inserisci un numero valido.",
+            "label": "Acceso",
+            "placeholder": "Acceso"
+          },
+          "relays": {
+            "help": "Seleziona una modalità operativa.",
+            "invalid": "Si prega di fare una scelta.",
+            "label": "Relay",
+            "placeholder": "Sensori di temperatura"
+          },
+          "settle_time": {
+            "help": "La durata in secondi tra due azioni.",
+            "invalid": "Inserisci un numero valido.",
+            "label": "Tempo di stabilizzazione sensore/i",
+            "placeholder": "Tempo di stabilizzazione sensore/i"
+          },
+          "trigger_threshold": {
+            "help": "Immettere la quantità di allarmi prima che si verifichino l'azione.",
+            "invalid": "Inserisci un numero valido.",
+            "label": "Soglia",
+            "placeholder": "Soglia"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Selezionare il ritardo e la durata per il dimmer per andare avanti o spegnere in pochi minuti. La durata massima è di 180 minuti."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Durata del dimmer spento"
+              },
+              "relay": {
+                "label": "Ritardo del relè disattivato"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Durata dimmer acceso"
+              },
+              "relay": {
+                "label": "Rilay ritardo"
+              }
+            },
+            "relay": {
+              "info": "Seleziona il ritardo in minuti in cui un relè attende prima che si accenda. Il ritardo massimo è di 180 minuti."
+            }
+          }
+        },
+        "low": {
+          "begin": {
+            "help": "L'ora del giorno in cui i relè vengono attivati ogni notte.",
+            "invalid": "Inserisci un'ora valida.",
+            "label": "Data e ora",
+            "placeholder": "Data e ora"
+          },
+          "door_status": {
+            "help": "Seleziona lo stato della porta.",
+            "invalid": "Si prega di fare una scelta.",
+            "label": "Stato della porta",
+            "options": {
+              "closed": "Chiuso",
+              "ignore": "Ignorato",
+              "open": "Aperto"
+            },
+            "placeholder": "Seleziona un'opzione"
+          },
+          "end": {
+            "help": "L'ora del giorno in cui i relè vengono attivati ogni notte.",
+            "invalid": "Inserisci un'ora valida.",
+            "label": "Data e ora",
+            "placeholder": "Data e ora"
+          },
+          "ignore_low": {
+            "help": "Contiene il valore per il livello d'allarme inferiore del sensore. Quando va sotto questo valore possono essere attivati allarmi.",
+            "label": "Aggiungi una nuova webcam"
+          },
+          "light_status": {
+            "help": "Seleziona un'opzione.",
+            "invalid": "Si prega di fare una scelta.",
+            "label": "Luci",
+            "options": {
+              "ignore": "Ignorato",
+              "off": "Spento",
+              "on": "Acceso"
+            },
+            "placeholder": "Seleziona un'opzione"
+          },
+          "off_duration": {
+            "help": "La durata quando i relè devono essere spenti quando si spengono. Immettere '0' per disabilitare.",
+            "invalid": "Inserisci una durata in minuti valida.",
+            "label": "Durata del timer spento",
+            "placeholder": "Durata del timer spento"
+          },
+          "on_duration": {
+            "help": "La durata quando i relè dovrebbero essere attivi. Se questo è più breve, tutto il giorno, otterrai una funzionalità timer. Inserisci '0' per avere una notte intera.",
+            "invalid": "Inserisci una durata in minuti valida.",
+            "label": "Durata",
+            "placeholder": "Durata"
+          },
+          "playlists": {
+            "help": "Seleziona la/le playlist che devono essere riprodotte.",
+            "invalid": "Si prega di fare una scelta.",
+            "label": "Playlist",
+            "placeholder": "Sensori di temperatura"
+          },
+          "power_on_time": {
+            "help": "La durata in secondi per attivare il relay.",
+            "invalid": "Inserisci un numero valido.",
+            "label": "Acceso",
+            "placeholder": "Acceso"
+          },
+          "relays": {
+            "help": "Seleziona una modalità operativa.",
+            "invalid": "Per favore, fai una scelta.",
+            "label": "Relay",
+            "placeholder": "Sensori di temperatura"
+          },
+          "settle_time": {
+            "help": "La durata in secondi tra due azioni.",
+            "invalid": "Inserisci un numero valido.",
+            "label": "Tempo di stabilizzazione sensore/i",
+            "placeholder": "Tempo di stabilizzazione sensore/i"
+          },
+          "trigger_threshold": {
+            "help": "Immettere la quantità di allarmi prima che si verifichino l'azione.",
+            "invalid": "Inserisci un numero valido.",
+            "label": "Soglia",
+            "placeholder": "Soglia"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Selezionare il ritardo e la durata per il dimmer per andare avanti o spegnere in pochi minuti. La durata massima è di 180 minuti."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Durata del dimmer spento"
+              },
+              "relay": {
+                "label": "Ritardo del relè disattivato"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Durata dimmer acceso"
+              },
+              "relay": {
+                "label": "Rilay ritardo"
+              }
+            },
+            "relay": {
+              "info": "Seleziona il ritardo in minuti in cui un relè attende prima che si accenda. Il ritardo massimo è di 180 minuti."
+            }
+          }
+        },
+        "main_lights": {
+          "help": "Attiva questo se questa è le luci principali per questo recinto. Questo viene utilizzato per i controlli della luce in altre aree.",
+          "label": "Minimo numero di ore di luce"
+        },
+        "max_day_hours": {
+          "help": "Il massimo numero di ore per cui le luci sono accese. Questo è valido solo in modalità clima. Quando il giorno è lungo di questo massimo, il giorno sarà accorciato fino a questo valore massimo.",
+          "invalid": "Il valore immesso non è valido. Immettere un numero valido tra {min} e {max}.",
+          "label": "Massimo numero di ore",
+          "placeholder": "Nome file"
+        },
+        "min_day_hours": {
+          "help": "Il minimo numero di ore per cui le luci sono accese. Questo è valido soltanto in modalità clima. Quando il giorno è più corto del valore minimo, esso verrà esteso fino a raggiungere il questo valore minimo.",
+          "invalid": "Il valore immesso non è valido. Immettere un numero valido tra {min} e {max}.",
+          "label": "Minimo numero di ore",
+          "placeholder": "Nome file"
+        },
+        "periods": {
+          "day": "Impostazioni della porta",
+          "high": "Alta allarme",
+          "info": "Di seguito è possibile selezionare i relè e le impostazioni del timer per periodo diurno e notte.",
+          "low": "Basso allarme",
+          "night": "Impostazioni interruttore",
+          "varation": "Durata"
+        },
+        "sensors": {
+          "help": "Selezionare i sensori da utilizzare per la modalità basata sul sensore.",
+          "invalid": "Si prega di fare una scelta.",
+          "label": "Sensori",
+          "placeholder": "Sensori di temperatura"
+        },
+        "shift_day_hours": {
+          "help": "La quantità di tempo per spostarsi in ore in base al tempo di ascesa del sole. I valori negativi farà iniziare la giornata prima.",
+          "invalid": "Il valore immesso non è valido. Immettere un numero valido tra {min} e {max}.",
+          "label": "Aggiustamento del numero di ore",
+          "placeholder": "Nome file"
+        },
+        "soundcard": {
+          "help": "Seleziona la scheda audio utilizzata per quest'area.",
+          "invalid": "Si prega di fare una scelta.",
+          "label": "Scheda audio",
+          "placeholder": "Seleziona un'opzione"
+        },
+        "variation": {
+          "offset": {
+            "invalid": "Inserisci un numero valido."
+          },
+          "period": {
+            "invalid": "Inserisci un numero valido.",
+            "offset": "Compensare",
+            "placeholder": "Soglia",
+            "source": "Inserisci un URL completo, un file JSON locale o un file di script"
+          },
+          "value": {
+            "invalid": "Inserisci un numero valido.",
+            "placeholder": "Differenza"
+          },
+          "when": {
+            "invalid": "Si prega di fare una scelta.",
+            "options": {
+              "after": "Dopo x minuti",
+              "at": "A tempo",
+              "external": "Utilizza l'origine JSON",
+              "script": "Usa la sceneggiatura",
+              "weather": "Utilizzando il tempo corrente"
+            },
+            "placeholder": "Seleziona azione"
+          }
+        },
+        "watertank_height": {
+          "help": "Inserisci l'altezza del serbatoio dell'acqua.",
+          "invalid": "Contiene il nome del sensore.",
+          "label": "Altezza",
+          "placeholder": "Nome file"
+        },
+        "watertank_offset": {
+          "help": "Immettere l'offset tra sensore e altezza dell'acqua.",
+          "invalid": "Contiene il nome del sensore.",
+          "label": "Compensare",
+          "placeholder": "Nome file"
+        },
+        "watertank_volume": {
+          "help": "Inserisci il volume del serbatoio dell'acqua.",
+          "invalid": "Contiene il nome del sensore.",
+          "label": "volume",
+          "placeholder": "Nome file"
+        }
+      },
+      "title": "Impostazioni area",
+      "type": {
+        "help": "Seleziona il tipo di area. Ogni tipo ha le sue opzioni e logiche.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Tipo",
+        "placeholder": "Sensori di temperatura"
+      }
+    }
+  },
+  "audio": {
+    "files": {
+      "delete": {
+        "confirm": {
+          "message": "Sei sicuro di eliminare il file audio ''{name}'' ({filename})?"
+        },
+        "error": {
+          "message": "Il file audio ''{name}'' non può essere eliminato!\nErrore: {error}"
+        },
+        "ok": {
+          "message": "Il file audio ''{name}'' è eliminato."
+        }
+      },
+      "settings": {
+        "audiofiles": {
+          "label": "Upload nuovo file audio",
+          "placeholder": "Upload nuovo file audio"
+        },
+        "save": {
+          "error": {
+            "invalid_file": "File audio non validi"
+          },
+          "ok": {
+            "message": "Caricato {amount, plural, =1 {# file audio} other {# file audios}}"
+          }
+        }
+      },
+      "title": "File audio"
+    },
+    "menu": {
+      "files": {
+        "title": "File"
+      },
+      "new_playlist": {
+        "title": "Nuova playlist"
+      },
+      "playlists": {
+        "title": "Playlist"
+      },
+      "title": "Audio"
+    },
+    "playlists": {
+      "delete": {
+        "confirm": {
+          "message": "Sei sicuro di eliminare i numeri di playlist ''{name}'' con {length}?"
+        },
+        "error": {
+          "message": "La playlist ''{name}'' non potrebbe essere eliminata!\nErrore: {error}"
+        },
+        "ok": {
+          "message": "La playlist ''{name}'' è eliminata."
+        }
+      },
+      "settings": {
+        "files": {
+          "help": "Contiene il volume per questa playlist.",
+          "invalid": "Seleziona almeno un file audio.",
+          "label": "File audio",
+          "placeholder": "Elimina file"
+        },
+        "name": {
+          "help": "Inserisci un nome facile da ricordare.",
+          "invalid": "Il nome immesso non è valido. Non può essere vuoto.",
+          "label": "Nome",
+          "placeholder": "Nome file"
+        },
+        "repeat": {
+          "help": "Contiene il nome della playlist audio.",
+          "label": "Ripeti"
+        },
+        "save": {
+          "error": {
+            "required_fields": "I campi richiesti sono segnati con '%s'."
+          },
+          "ok": {
+            "message": "PlayList ''{name}'' viene aggiornato."
+          }
+        },
+        "shuffle": {
+          "help": "Shuffle questa playlist ogni volta che viene giocato.",
+          "label": "Riproduzione casuale"
+        },
+        "title": "Impostazioni webcam",
+        "volume": {
+          "help": "Contiene il volume per questa playlist.",
+          "label": "File audio"
+        }
+      },
+      "title": "Playlist"
+    }
+  },
+  "buttons": {
+    "actions": {
+      "delete": "Pulsante Elimina",
+      "export": "Esporta dati",
+      "ignore": "Aggiungi un nuovo sensore",
+      "settings": "Pulsante Modifica"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Sei sicuro di voler eliminare il pulsante ''{name}''?"
+      },
+      "error": {
+        "message": "Il pulsante ''{name}'' non potrebbe essere eliminato!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "Il pulsante ''{nome}'' viene eliminato."
+      }
+    },
+    "ignore": {
+      "confirm": {
+        "message": "Sei sicuro di voler ignorare il pulsante ''{name}''?"
+      },
+      "error": {
+        "message": "Il pulsante ''{name}'' non potrebbe essere ignorato!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "Il pulsante ''{name}'' viene ignorato."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nuovo pulsante"
+      },
+      "status": {
+        "title": "Stato"
+      },
+      "title": "Pulsanti"
+    },
+    "settings": {
+      "address": {
+        "help": "Immettere il numero di pin GPIO fisico.",
+        "invalid": "L'indirizzo inserito non è valido. Immettere un numero valido tra {min} e {max}.",
+        "label": "Indirizzo",
+        "placeholder": "Indirizzo"
+      },
+      "calibration": {
+        "inverse": {
+          "help": "",
+          "label": ""
+        },
+        "ldr_capacitor": {
+          "help": "Immettere il valore del condensatore in µF poiché ciò influenzerà il calcolo della luce.",
+          "invalid": "Il valore del condensatore inserito non è valido. Inserisci un numero valido compreso tra {min} e {max}.",
+          "label": "Valore del condensatore in µF",
+          "placeholder": "Immettere il valore del condensatore in µF"
+        },
+        "timeout": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "current": {
+        "help": "Lo stato attuale del pulsante.",
+        "label": "Attuale",
+        "placeholder": "Valore attuale"
+      },
+      "hardware": {
+        "help": "Contiene la scheda audio utilizzata per la riproduzione audio.",
+        "invalid": "Per favore seleziona un tipo di hardware.",
+        "label": "Hardware",
+        "placeholder": "Hardware"
+      },
+      "name": {
+        "help": "Inserisci un nome facile da ricordare.",
+        "invalid": "Il nome immesso non è valido. Non può essere vuoto.",
+        "label": "Nome",
+        "placeholder": "Nome file"
+      },
+      "save": {
+        "error": {
+          "required_fields": "I campi richiesti sono segnati con '%s'."
+        },
+        "ok": {
+          "message": "Il pulsante ''{name}'' viene aggiornato."
+        }
+      },
+      "title": "Impostazioni della porta"
+    },
+    "title": "Pulsanti"
+  },
+  "calendar": {
+    "actions": {
+      "download": "Download file per iCal"
+    },
+    "event": {
+      "delete": {
+        "confirm": {
+          "message": "Sei sicuro di voler eliminare l'evento ''{name}''?"
+        },
+        "error": {
+          "message": "L'evento ''{name}'' non potrebbe essere eliminato!\nErrore: {error}"
+        },
+        "ok": {
+          "message": "L'evento ''{name}'' è eliminato."
+        }
+      },
+      "duration": "Durata",
+      "periods": {
+        "days": "Giorni",
+        "months": "Mese",
+        "no_reminder": "Ripeti",
+        "no_repeat": "Ripeti",
+        "weeks": "Settimana",
+        "years": "Anno"
+      },
+      "settings": {
+        "date": {
+          "help": "La data o il periodo per questo evento.",
+          "label": "Data"
+        },
+        "description": {
+          "help": "Inserisci alcune informazioni su questo evento.",
+          "label": "Descrizione"
+        },
+        "remind": {
+          "label": "Ricordare"
+        },
+        "repeat": {
+          "help": "Seleziona un periodo di ripetizione e un importo.",
+          "invalid": "Contiene il nome del sensore.",
+          "label": "Ripeti"
+        },
+        "repeat_amount": {
+          "label": "Seleziona un'opzione"
+        },
+        "save": {
+          "error": {
+            "required_fields": "I campi richiesti sono segnati con '%s'."
+          },
+          "ok": {
+            "message": "Evento ''{name}'' viene aggiornato."
+          }
+        },
+        "summary": {
+          "help": "Inserisci un nome.",
+          "invalid": "Il nome non può essere vuoto.",
+          "label": "Nome file"
+        },
+        "title": "Evento",
+        "update": {
+          "error": {
+            "message": "L'evento ''{name}'' non potrebbe essere aggiornato!\nErrore: {error}"
+          },
+          "ok": {
+            "message": "L'evento ''{name}'' viene aggiornato."
+          }
+        }
+      }
+    },
+    "menu": {
+      "title": "Calendario"
+    },
+    "title": "Calendario"
+  },
+  "dashboard": {
+    "enclosures": {
+      "menu": {
+        "title": "Recinti"
+      },
+      "mode": "Modalità",
+      "title": "Recinzioni"
+    },
+    "infobox": {
+      "current_power_usage": {
+        "title": "Utilizzo di energia in Watt"
+      },
+      "current_water_flow": {
+        "title": "Flusso d'acqua in {water_flow_indicator}"
+      },
+      "total_power_usage": {
+        "duration": "in {duration}",
+        "title": "Potenza complessiva in uso"
+      },
+      "total_water_usage": {
+        "duration": "in {duration}",
+        "title": "Utilizzo complessivo di acqua"
+      },
+      "uptime": {
+        "title": "Tempo di funzionamento"
+      }
+    },
+    "menu": {
+      "title": "Dashboard"
+    },
+    "title": "Dashboard"
+  },
+  "enclosures": {
+    "actions": {
+      "delete": "Elimina file",
+      "settings": "Modifica recinto"
+    },
+    "area": {
+      "current": "Attuale",
+      "current_status": "Stato attuale",
+      "delete": {
+        "title": "Elimina file"
+      },
+      "edit": {
+        "title": "Modifica"
+      },
+      "mode": {
+        "disabled": "Disabilitato",
+        "sensors": "Sensori",
+        "timer": "Timer",
+        "title": "Modalità",
+        "weather": "Meteo"
+      },
+      "now": "adesso",
+      "period": {
+        "day": "Giorno",
+        "high": "Alto",
+        "low": "Log",
+        "night": "Notte"
+      },
+      "range": "Intervallo",
+      "type": {
+        "audio": "Audio",
+        "cooling": "Refrigerazione",
+        "heating": "Riscaldamento",
+        "humidity": "Umidità",
+        "lights": "Luci",
+        "main_lights": "Minimo numero di ore di luce",
+        "watertank": "riserva d'acqua"
+      }
+    },
+    "areas": {
+      "title": "le zone"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Sei sicuro di voler eliminare il contenitore ''{name}''?"
+      },
+      "error": {
+        "message": "Il contenitore ''{name}'' non potrebbe essere eliminato!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "Il contenitore ''{name}'' è eliminato."
+      }
+    },
+    "doors": {
+      "title": "Porte"
+    },
+    "menu": {
+      "list": {
+        "title": "Lista"
+      },
+      "new_area": {
+        "title": "Aggiungi una nuova webcam"
+      },
+      "new_enclosure": {
+        "title": "Aggiungi un nuovo sensore"
+      },
+      "title": "Recinzioni"
+    },
+    "settings": {
+      "description": {
+        "help": "Immettere un testo di descrizione su questo recinto.",
+        "label": "Descrizione",
+        "placeholder": "Descrizione"
+      },
+      "doors": {
+        "help": "Seleziona le porte per questo recinto.",
+        "label": "Porte"
+      },
+      "image": {
+        "help": "Carica un jpg o png.",
+        "invalid": "Il file selezionato non è valido. Non è un file di immagine.",
+        "label": "Immagine",
+        "placeholder": "Seleziona un file immagine"
+      },
+      "name": {
+        "help": "Inserisci un nome facile da ricordare.",
+        "invalid": "Il nome immesso non è valido. Non può essere vuoto.",
+        "label": "Nome",
+        "placeholder": "Nome file"
+      },
+      "save": {
+        "error": {
+          "required_fields": "I campi richiesti sono segnati con '%s'."
+        },
+        "ok": {
+          "message": "Enclosure ''{name}'' viene aggiornato."
+        }
+      },
+      "title": "Impostazione sensore",
+      "webcams": {
+        "help": "Seleziona le webcam per questo contenitore.",
+        "label": "Webcams"
+      }
+    },
+    "title": "Recinzioni",
+    "webcams": {
+      "title": "Webcams"
+    }
+  },
+  "footer": {
+    "current_activity": "Attività",
+    "error_messages": "Nessun messaggio di errore",
+    "warning_messages": "Nessun messaggio di warning"
+  },
+  "gauge": {
+    "error": "errore",
+    "last_update": "Ultimo aggiornamento",
+    "warning": "attenzione"
+  },
+  "general": {
+    "download": {
+      "title": "Scarica"
+    },
+    "exclude": {
+      "average": "."
+    },
+    "humidity": "Umidità",
+    "login": {
+      "title": "Autenticarsi per effettuare le modifiche"
+    },
+    "logout": {
+      "title": "Logout"
+    },
+    "settings": {
+      "title": "Impostazioni"
+    },
+    "temperature": "temperatura",
+    "uptime_format": {
+      "days": "{number, plural, =1 {# giorno} other {# giornos}}",
+      "hours": "{number, plural, =1 {# ora} other {# ore}}",
+      "minutes": "{number, plural, =1 {# minuto} other {# minutos}}",
+      "months": "{number, plural, =1 {# mese} other {# meses}}",
+      "seconds": "{number, plural, =1 {# seconda} other {# secondi}}",
+      "years": "{number, plural, =1 {# anno} other {# annos}}"
+    }
+  },
+  "graph": {
+    "alarm": {
+      "max": "Allarme massimo",
+      "min": "Allarme minimo"
+    },
+    "current": "Attuale",
+    "flow": "Flusso d'acqua in L/m",
+    "ldr": "Luci",
+    "magnetic": "Stato della porta",
+    "motion": "Movimento",
+    "no-data": "Nessun dato ...",
+    "period": {
+      "day": "Giorno",
+      "month": "Mese",
+      "replaced": "Sostituito",
+      "week": "Settimana",
+      "year": "Anno"
+    },
+    "settings": {
+      "export": "Esporta"
+    },
+    "wattage": "Wattaggio"
+  },
+  "home": {
+    "menu": {
+      "title": "Home"
+    },
+    "title": "Home"
+  },
+  "messages": {
+    "actions": {
+      "delete": "Elimina file",
+      "edit": "Nessun messaggio"
+    },
+    "add": "Nessun messaggio",
+    "delete": {
+      "confirm": {
+        "message": "Sei sicuro di voler eliminare il messaggio ''{name}''?"
+      },
+      "error": {
+        "message": "Il messaggio ''{name}'' non potrebbe essere eliminato!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "Il messaggio ''{name}'' è eliminato."
+      }
+    },
+    "ratelimit": "{number, plural, =0 {Messaggi illimitati} other {Max # al minuto}}",
+    "settings": {
+      "available_services": {
+        "help": "Contiene la scheda audio utilizzata per la riproduzione audio.",
+        "label": "Panoramica"
+      },
+      "enabled": {
+        "help": "Attiva/disattiva questo messaggio di notifica.",
+        "label": "Abilitato"
+      },
+      "message": {
+        "help": "Immettere un messaggio. Puoi utilizzare i valori dei segnaposto qui.",
+        "label": "Nessun messaggio",
+        "placeholder": "Nome file"
+      },
+      "placeholders": {
+        "format": "I valori dei numeri possono essere arrotondati usando {link_start} `.: formato 2f` {link_end}",
+        "help": "Elenco dei segnaposto disponibili.",
+        "label": "Posizionare i titolari"
+      },
+      "rate_limit": {
+        "help": "Numero massimo di messaggi al minuto per questo messaggio. Usa 0 per illimitato.",
+        "invalid": "Il valore immesso non è valido. Immettere un numero valido superiore a {min}.",
+        "label": "Limite di tasso",
+        "placeholder": "Messaggi al minuto"
+      },
+      "save": {
+        "error": {
+          "required_fields": "I campi richiesti sono segnati con '%s'."
+        },
+        "ok": {
+          "message": "Il messaggio ''{name}'' viene aggiornato."
+        }
+      },
+      "subject": {
+        "help": "Inserisci un argomento corto. Puoi utilizzare i valori dei segnaposto qui.",
+        "invalid": "Il soggetto non può essere vuoto.",
+        "label": "Materia",
+        "placeholder": "Nome file"
+      },
+      "title": "Impostazioni webcam",
+      "type": {
+        "help": "Seleziona il tipo di messaggio di notifica.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Nessun messaggio",
+        "placeholder": "Sensori di temperatura"
+      }
+    },
+    "table": {
+      "actions": "Azione",
+      "enabled": "Abilitato",
+      "message": "Nessun messaggio",
+      "rate_limit": "Limite di tasso",
+      "services": "Panoramica",
+      "subject": "Materia",
+      "type": "Tipo"
+    },
+    "title": "Località"
+  },
+  "modal": {
+    "confirm": {
+      "relays": {
+        "scan": "Questo avverrà una nuova scansione per trovare nuovi relè. Questo può richiedere fino a 30 secondi."
+      },
+      "sensors": {
+        "scan": "Questo avverrà una nuova scansione per trovare nuovi sensori. Questo può richiedere fino a 30 secondi."
+      },
+      "submit": {
+        "title": "Confermare"
+      },
+      "system": {
+        "logout": "Sei sicuro di voler uscire?",
+        "reboot": "Questo riavvierà il Raspberry Pi. Questo può richiedere fino a 60 secondi.",
+        "restart": "Questo riavvierà Terriumumumumi. Questo può richiedere fino a 30 secondi.",
+        "shutdown": "Questo chiuderà il Raspberry Pi. Usa con cura!"
+      },
+      "title": "Sei sicuro?"
+    },
+    "form": {
+      "toggle": {
+        "info": "Informazioni generali"
+      }
+    },
+    "general": {
+      "close": "Chiudi",
+      "save": "Salva"
+    },
+    "login": {
+      "error": "Login non valido",
+      "form": {
+        "password": {
+          "help": "Immettere la password.",
+          "invalid": "La password non può essere vuota.",
+          "label": "Parola d'ordine"
+        },
+        "submit": "Login",
+        "username": {
+          "help": "Inserisci il nome utente.",
+          "invalid": "Il nome utente non può essere vuoto.",
+          "label": "Nome file"
+        }
+      },
+      "title": "Login"
+    },
+    "notification": {
+      "service": {
+        "form": {
+          "field": {
+            "setup": {
+              "address": {
+                "label": "Indirizzo"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "not-found": {
+    "header": "pagina non trovata",
+    "link": "Vai alla pagina principale",
+    "title": "pagina non trovata"
+  },
+  "notification": {
+    "delete": {
+      "error": {
+        "title": "ERRORE"
+      },
+      "invalid": {
+        "title": "ERRORE"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "door": {
+      "status": {
+        "title": "Aggiornamento dello stato della porta"
+      }
+    },
+    "exclude": {
+      "error": {
+        "title": "ERRORE"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "form": {
+      "save": {
+        "error": {
+          "title": "Errore"
+        },
+        "ok": {
+          "title": "Salva OK"
+        }
+      },
+      "upload": {
+        "error": {
+          "title": "Data upload"
+        }
+      }
+    },
+    "login": {
+      "message": {
+        "error": "Scusa, ma l'accesso non è valido",
+        "ok": "Hai effettuato l'accesso con successo."
+      },
+      "title": "Login"
+    },
+    "manual_mode": {
+      "error": {
+        "title": "ERRORE"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "offline": {
+      "message": "La connessione è persa",
+      "title": "Offline"
+    },
+    "online": {
+      "message": "Siamo connessi",
+      "title": "Online"
+    },
+    "reboot": {
+      "ok": {
+        "title": "Riavvia del sistema OK"
+      }
+    },
+    "restart": {
+      "ok": {
+        "title": "Sistema Riavvia OK"
+      }
+    },
+    "scanning": {
+      "ok": {
+        "title": "La scansione è finita"
+      }
+    },
+    "shutdown": {
+      "ok": {
+        "title": "Arresto del sistema ok"
+      }
+    },
+    "toggle": {
+      "error": {
+        "title": "ERRORE"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    }
+  },
+  "relays": {
+    "actions": {
+      "delete": "Elimina file",
+      "export": "Esporta dati",
+      "ignore": "Aggiungi una nuova webcam",
+      "manual_mode": "Relè in modalità manuale",
+      "replace_hardware": "Sostituire l'hardware",
+      "settings": "Relè di modifica"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Sei sicuro di voler ignorare il relè ''{name}''?"
+      },
+      "manual_mode": {
+        "message": "Attiva la modalità manuale per il relè ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Sei sicuro di voler eliminare il relè ''{name}''?"
+      },
+      "error": {
+        "message": "Il relè ''{name}'' non potrebbe essere eliminato!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "Il relè ''{name}'' è eliminato."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "Il relè ''{name}'' non potrebbe essere ignorato!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "Il relè ''{name}'' viene ignorato."
+      }
+    },
+    "manual-mode": "Modalità manuale",
+    "manual_mode": {
+      "error": {
+        "message": "Errore durante la modifica della modalità manuale per il relè ''{name}''.\nErrore: {errore}"
+      },
+      "ok": {
+        "message": "La modalità manuale per il relè ''{name}'' viene modificata."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nuovo relay"
+      },
+      "scan": {
+        "title": "Sensori di temperatura"
+      },
+      "status": {
+        "title": "Stato"
+      },
+      "title": "Relay"
+    },
+    "settings": {
+      "address": {
+        "help": "Per ulteriori informazioni, consultare online.",
+        "invalid": "L'indirizzo inserito non è valido. Non può essere vuoto.",
+        "label": "Indirizzo",
+        "placeholder": "Indirizzo"
+      },
+      "calibration": {
+        "dimmer_frequency": {
+          "help": "La frequenza su cui opera il dimmer.",
+          "invalid": "Contiene il nome del sensore.",
+          "label": "Frequenza dimmer in Hz"
+        },
+        "dimmer_max_dim": {
+          "help": "Valore massimo del dimmer (legacy).",
+          "invalid": "Contiene il nome del sensore.",
+          "label": "Valore dimmer massimo"
+        },
+        "dimmer_max_power": {
+          "help": "La massima potenza per questo dimmer.",
+          "invalid": "Il valore immesso non è valido. Immettere un numero valido tra {min} e {max}.",
+          "label": "Flusso d'acqua in L/m"
+        },
+        "dimmer_offset": {
+          "help": "Durata del dimmer spento.",
+          "invalid": "Contiene il nome del sensore.",
+          "label": "Durata del dimmer spento"
+        }
+      },
+      "current": {
+        "help": "Lo stato attuale del relay.",
+        "label": "Attuale",
+        "placeholder": "Valore attuale"
+      },
+      "flow": {
+        "help": "Immettere il flusso d'acqua (max) quando acceso.",
+        "invalid": "Contiene il nome del sensore.",
+        "label": "Flusso d'acqua in L/m"
+      },
+      "hardware": {
+        "help": "Contiene la scheda audio utilizzata per la riproduzione audio.",
+        "invalid": "Per favore seleziona un tipo di hardware.",
+        "label": "Hardware",
+        "placeholder": "Hardware"
+      },
+      "name": {
+        "help": "Inserisci un nome facile da ricordare.",
+        "invalid": "Il nome immesso non è valido. Non può essere vuoto.",
+        "label": "Nome",
+        "placeholder": "Nome file"
+      },
+      "save": {
+        "error": {
+          "required_fields": "I campi richiesti sono segnati con '%s'."
+        },
+        "ok": {
+          "message": "Il relè ''{name}'' viene aggiornato."
+        }
+      },
+      "title": "Impostazioni webcam",
+      "wattage": {
+        "help": "Immettere la potenza (max) quando acceso.",
+        "invalid": "Contiene il nome del sensore.",
+        "label": "Wattaggio"
+      }
+    },
+    "title": "Relay",
+    "toggle": {
+      "error": {
+        "message": "Errore durante la commutazione del relè ''{name}''.\nErrore: {error}"
+      },
+      "ok": {
+        "message": "Relè ''{name}'' commutato allo stato {value}"
+      }
+    }
+  },
+  "sensors": {
+    "actions": {
+      "delete": "Sensori di temperatura",
+      "export": "sensore pH",
+      "ignore": "Sensore di umidità",
+      "settings": "Sensore pH"
+    },
+    "all": {
+      "menu": {
+        "title": "Tutti i sensori"
+      },
+      "title": "Tutti i sensori"
+    },
+    "altitude": {
+      "menu": {
+        "title": "altitudine"
+      },
+      "title": "Sensori di altitudine"
+    },
+    "average": {
+      "altitude": "Altitudine media",
+      "co2": "Media pH",
+      "distance": "Distanza media",
+      "fertility": "Umidità media",
+      "humidity": "Umidità media",
+      "light": "Media pH",
+      "moisture": "Umidità media",
+      "pressure": "Pressione media",
+      "temperature": "Temperatura media",
+      "uva": "UVA media",
+      "uvb": "UVB medio",
+      "uvi": "Indice UV medio"
+    },
+    "co2": {
+      "menu": {
+        "title": "CO2"
+      },
+      "title": "Sensori di CO2"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Sei sicuro di voler ignorare il sensore ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Sei sicuro di voler eliminare il sensore ''{name}''?"
+      },
+      "error": {
+        "message": "Il sensore ''{name}'' non potrebbe essere eliminato!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "Il sensore ''{name}'' è eliminato."
+      }
+    },
+    "distance": {
+      "menu": {
+        "title": "distanza"
+      },
+      "title": "Sensori di distanza"
+    },
+    "exclude": {
+      "error": {
+        "message": "Il sensore ''{name}'' non potrebbe essere ignorato!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "Il sensore ''{name}'' viene ignorato."
+      }
+    },
+    "fertility": {
+      "menu": {
+        "title": "Fertilizzante"
+      },
+      "title": "Sensori di fertilità"
+    },
+    "humidity": {
+      "menu": {
+        "title": "Umidità"
+      },
+      "title": "Sensori di umidità"
+    },
+    "light": {
+      "menu": {
+        "title": "Luce"
+      },
+      "title": "Sensori di luce"
+    },
+    "menu": {
+      "new": {
+        "title": "Nuovo sensore"
+      },
+      "scan": {
+        "title": "Sensori di temperatura"
+      },
+      "title": "Sensori"
+    },
+    "moisture": {
+      "menu": {
+        "title": "Umidità"
+      },
+      "title": "Sensori di umidità"
+    },
+    "ph": {
+      "menu": {
+        "title": "pH"
+      },
+      "title": "Sensori pH"
+    },
+    "pressure": {
+      "menu": {
+        "title": "pressione"
+      },
+      "title": "Sensori di pressione"
+    },
+    "settings": {
+      "address": {
+        "help": "Indirizzo.",
+        "invalid": "L'indirizzo inserito non è valido. Non può essere vuoto.",
+        "label": "Indirizzo",
+        "placeholder": "Indirizzo"
+      },
+      "alarm_max": {
+        "help": "Il consumo di elettricità e/o il flusso d'acqua al minuto quando acceso.",
+        "invalid": "Il valore immesso non è valido. Deve essere numero.",
+        "label": "Allarme massimo",
+        "placeholder": "Allarme massimo"
+      },
+      "alarm_min": {
+        "help": "Contiene il nome del sensore.",
+        "invalid": "Il valore immesso non è valido. Deve essere numero.",
+        "label": "Allarme minimo",
+        "placeholder": "Allarme minimo"
+      },
+      "calibration": {
+        "ccs811_compensation_sensors": {
+          "help": "Selezionare lo stato della porta dell'ambiente quando si abilita l'archiviazione.",
+          "label": "Sensore di temperatura",
+          "placeholder": "Sensori di temperatura"
+        },
+        "chirp_max_moist": {
+          "help": "Immettere il valore massimo umido.",
+          "invalid": "Il valore immesso non è valido. Deve essere un numero superiore quindi {min}.",
+          "label": "Umidità massima"
+        },
+        "chirp_min_moist": {
+          "help": "Immettere il valore minimo umido.",
+          "invalid": "Il valore immesso non è valido. Deve essere un numero superiore quindi {min}.",
+          "label": "valore minimo umidità"
+        },
+        "offset": {
+          "help": "Contiene la scheda audio utilizzata per la riproduzione audio.",
+          "invalid": "Il valore immesso non è valido. Deve essere numero.",
+          "label": "Compensare"
+        }
+      },
+      "current": {
+        "help": "Lo stato attuale del sensore.",
+        "label": "Attuale",
+        "placeholder": "Valore attuale"
+      },
+      "exclude_avg": {
+        "help": "Escluso dal calcolo della media.",
+        "label": "Escl.Avg"
+      },
+      "fields": {
+        "error": "I campi richiesti sono segnati con '%s'."
+      },
+      "hardware": {
+        "help": "Contiene la scheda audio utilizzata per la riproduzione audio.",
+        "invalid": "Per favore seleziona un tipo di hardware.",
+        "label": "Hardware",
+        "placeholder": "Hardware"
+      },
+      "limit_max": {
+        "help": "Contiene il nome del sensore.",
+        "invalid": "Il valore immesso non è valido. Deve essere numero.",
+        "label": "Limite massimo"
+      },
+      "limit_min": {
+        "help": "Contiene il nome del sensore.",
+        "invalid": "Il valore immesso non è valido. Deve essere numero.",
+        "label": "Limite minimo"
+      },
+      "max_diff": {
+        "help": "Immettere la differenza massima valida tra due misurazioni. Immettere '0' per disabilitare.",
+        "invalid": "Il valore immesso non è valido. Deve essere un numero superiore quindi {min}.",
+        "label": "Max Diff",
+        "placeholder": "Massima differenza"
+      },
+      "name": {
+        "help": "Inserisci un nome facile da ricordare.",
+        "invalid": "Il nome immesso non è valido. Non può essere vuoto.",
+        "label": "Nome",
+        "placeholder": "Nome file"
+      },
+      "save": {
+        "ok": {
+          "message": "Il sensore ''{name}'' viene aggiornato."
+        }
+      },
+      "title": "Impostazione sensore",
+      "type": {
+        "help": "Contiene la scheda audio utilizzata per la riproduzione audio.",
+        "invalid": "Seleziona un'opzione.",
+        "label": "Tipo",
+        "placeholder": "Sensori di temperatura"
+      }
+    },
+    "temperature": {
+      "menu": {
+        "title": "temperatura"
+      },
+      "title": "Sensori di temperatura"
+    },
+    "title": "Sensori",
+    "uva": {
+      "menu": {
+        "title": "UV-a"
+      },
+      "title": "Sensori UVA"
+    },
+    "uvb": {
+      "menu": {
+        "title": "UV-b"
+      },
+      "title": "Sensori UVB"
+    },
+    "uvi": {
+      "menu": {
+        "title": "UV-i"
+      },
+      "title": "Sensori UVI"
+    }
+  },
+  "services": {
+    "actions": {
+      "delete": "Elimina il servizio",
+      "edit": "Modifica servizio"
+    },
+    "add": "Panoramica",
+    "delete": {
+      "confirm": {
+        "message": "Sei sicuro di voler eliminare il servizio ''{name}''?"
+      },
+      "error": {
+        "message": "Il servizio ''{name}'' non potrebbe essere eliminato!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "Il servizio ''{name}'' è eliminato."
+      }
+    },
+    "enabled": "Abilitato",
+    "ratelimit": "{number, plural, =0 {Messaggi illimitati} other {Max # al minuto}}",
+    "settings": {
+      "enabled": {
+        "help": "Attiva/disattiva il servizio di notifica.",
+        "label": "Abilitato"
+      },
+      "name": {
+        "help": "Inserisci un nome facile da ricordare.",
+        "invalid": "Il nome immesso non è valido. Non può essere vuoto.",
+        "label": "Nome",
+        "placeholder": "Nome file"
+      },
+      "rate_limit": {
+        "help": "Numero massimo di messaggi al minuto per questo servizio. Utilizza 0 se non vuoi impostare alcun limite.",
+        "invalid": "Il valore immesso non è valido. Immettere un numero valido superiore a {min}.",
+        "label": "Limite di tasso",
+        "placeholder": "Messaggi al minuto"
+      },
+      "save": {
+        "error": {
+          "required_fields": "I campi richiesti sono segnati con '%s'."
+        },
+        "ok": {
+          "message": "Il servizio ''{name}'' viene aggiornato."
+        }
+      },
+      "setup": {
+        "address": {
+          "help": "Inserisci un indirizzo.",
+          "invalid": "L'indirizzo inserito non è valido. Non può essere vuoto.",
+          "label": "Indirizzo",
+          "placeholder": "Indirizzo"
+        },
+        "api_token": {
+          "help": "Indirizzo.",
+          "invalid": "Il token API immesso non è valido. Non può essere vuoto.",
+          "label": "Token API",
+          "placeholder": "Indirizzo"
+        },
+        "buzzer": {
+          "help": "Elenco dei brani disponibili da utilizzare nell'argomento del messaggio."
+        },
+        "green": {
+          "help": "Immettere il perno GPIO per la luce verde.",
+          "invalid": "Il valore inserito non è valido. Inserisci un numero valido compreso tra {min} e {max}.",
+          "label": "Verde",
+          "placeholder": "Immettere il pin Green GPIO"
+        },
+        "hardware": {
+          "help": "Seleziona il tipo di hardware per questo display.",
+          "invalid": "Si prega di fare una scelta.",
+          "label": "Hardware",
+          "placeholder": "Hardware"
+        },
+        "password": {
+          "help": "Immettere la password del server.",
+          "label": "Password del server",
+          "placeholder": "Inserisci un nome utente"
+        },
+        "port": {
+          "help": "Immettere il numero della porta del server.",
+          "invalid": "Il numero di porta inserito non è valido. Non può essere vuoto.",
+          "label": "Porta del server",
+          "placeholder": "Inserisci il numero della porta"
+        },
+        "pushover": {
+          "label": "Crea i tuoi token registrando Terriumumpi come app {link}."
+        },
+        "receiver": {
+          "help": "Inserisci un indirizzo email.",
+          "invalid": "L'indirizzo non può essere vuoto.",
+          "label": "Indirizzo email del destinatario",
+          "placeholder": "Indirizzo"
+        },
+        "red": {
+          "help": "Contiene il volume per questa playlist.",
+          "invalid": "Il valore immesso non è valido. Immettere un numero valido tra {min} e {max}.",
+          "label": "Mer",
+          "placeholder": "Data e ora"
+        },
+        "show_title": {
+          "help": "Mostra il nome e la versione come titolo sul display.",
+          "label": "Mostra il titolo"
+        },
+        "ssl": {
+          "email": {
+            "label": "Il servizio di notifica e -mail rileverà automaticamente le connessioni SSL/TLS."
+          },
+          "mqtt": {
+            "label": "Il servizio di notifica MQTT rileverà automaticamente le connessioni SSL/TLS."
+          }
+        },
+        "url": {
+          "help": "Umidità.",
+          "invalid": "L'URL inserito non è valido. Non può essere vuoto.",
+          "label": "Post completo URL",
+          "placeholder": "Sensore di temperatura"
+        },
+        "user_key": {
+          "help": "Porta server OWFS.",
+          "invalid": "La chiave utente inserita non è valida. Non può essere vuoto.",
+          "label": "User key",
+          "placeholder": "Porta server OWFS"
+        },
+        "username": {
+          "help": "Immettere il nome utente del server.",
+          "label": "Nome utente del server",
+          "placeholder": "Inserisci un nome utente"
+        },
+        "yellow": {
+          "help": "Immettere il pin GPIO per la luce ambra.",
+          "invalid": "Il valore immesso non è valido. Immettere un numero valido tra {min} e {max}.",
+          "label": "Ambra",
+          "placeholder": "Data e ora"
+        }
+      },
+      "title": "Località",
+      "type": {
+        "help": "Seleziona il tipo di servizio per le notifiche.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Tipo",
+        "placeholder": "Sensori di temperatura"
+      }
+    },
+    "title": "Località"
+  },
+  "system": {
+    "log": {
+      "download": {
+        "title": "Download log file"
+      },
+      "filters": {
+        "errors": "errori",
+        "search": "Indirizzo",
+        "title": "Filtri",
+        "warnings": "avvisi"
+      },
+      "lines": "{lines} righe",
+      "loading": "Caricamento dati",
+      "title": "Log di Sistema"
+    },
+    "menu": {
+      "log": {
+        "title": "Log"
+      },
+      "notifications": {
+        "title": "Notifiche"
+      },
+      "reboot": {
+        "title": "Riavvio"
+      },
+      "restart": {
+        "title": "Riavvia"
+      },
+      "settings": {
+        "title": "Impostazioni"
+      },
+      "shutdown": {
+        "title": "Spegnimento"
+      },
+      "status": {
+        "title": "Stato"
+      },
+      "title": "Sistema"
+    },
+    "notifications": {
+      "title": "Notifiche"
+    },
+    "settings": {
+      "all_gauges_on_single_page": {
+        "help": "Aggiungi extra di menu per tutti i sensori in una singola pagina.",
+        "label": "Mostra tutti i sensori di misura attivi in pagina 1"
+      },
+      "authenticate": {
+        "help": "Autentare sempre o solo quando vengono apportate modifiche.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Autenticazione",
+        "options": {
+          "changes": "Solo per i cambiamenti",
+          "full": "Autenticazione",
+          "no_authentication": "Autenticazione"
+        }
+      },
+      "auto_dark_mode": {
+        "help": "Abilitato con le luci accese.",
+        "label": "Modalità della riserva d'acqua"
+      },
+      "currency": {
+        "help": "Seleziona la valuta dell'interfaccia.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Moneta"
+      },
+      "dashboard_mode": {
+        "help": "Seleziona l'aspetto della dashboard.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Modalità cruscotto",
+        "options": {
+          "normal": "Grafici e allegati",
+          "only_enclosures": "Solo recinti",
+          "only_graphs": "Solo grafici"
+        }
+      },
+      "distance_indicator": {
+        "help": "Selezionare l'indicatore di distanza. Influisce solo sui valori attuali.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Distanza"
+      },
+      "exclude-ids": {
+        "help": "ID che sono esclusi.",
+        "label": "ID esclusi"
+      },
+      "graph_smooth_value": {
+        "help": "Immettere la quantità di punti dati in media. 0 Disabiliterà questa funzione.",
+        "invalid": "Contiene il nome del sensore.",
+        "label": "Levigatura del grafico"
+      },
+      "header": {
+        "cloud": "nuvoloso",
+        "gui": "GUI",
+        "locale": "Sorgente remota",
+        "system": "Sistema"
+      },
+      "hide_environment_dashboard": {
+        "help": "Nascondi sommario ambientale dalla dashboard.",
+        "label": "Nascondi sommario ambientale dalla dashboard"
+      },
+      "host": {
+        "help": "Immettere l'IP per ascoltare le connessioni. Predefinito 0. 0.0. 0.",
+        "invalid": "Contiene il nome del sensore.",
+        "label": "Numero porta"
+      },
+      "language": {
+        "help": "Seleziona la lingua dell'interfaccia. Questo cambierà anche il numero e la formattazione della valuta.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Lingua"
+      },
+      "meross_cloud_password": {
+        "help": "Inserisci la password per accedere al cloud Meross.",
+        "label": "Nuova password Amministratore"
+      },
+      "meross_cloud_username": {
+        "help": "Immettere il nome utente per accedere a Meross Cloud.",
+        "label": "username Meross Cloud"
+      },
+      "page": {
+        "title": "Impostazioni di sistema"
+      },
+      "password": {
+        "help": "Nome file.",
+        "invalid": "La password non può essere vuota.",
+        "label": "Nuova password Amministratore"
+      },
+      "password2": {
+        "help": "Porta server OWFS.",
+        "invalid": "La nuova password non corrisponde.",
+        "label": "Password Amministratore attuale"
+      },
+      "pi-wattage": {
+        "help": "Inserisci l'utilizzo totale di alimentazione del PI con tutti i suoi dispositivi USB collegati.",
+        "invalid": "Contiene il nome del sensore.",
+        "label": "Consumo di elettricità della Pi in W"
+      },
+      "port": {
+        "help": "Contiene il numero di porta sul quale il software sarà in ascolto per le connessioni.",
+        "invalid": "Contiene il nome del sensore.",
+        "label": "Numero porta"
+      },
+      "power_price": {
+        "help": "Indirizzo.",
+        "invalid": "Contiene il nome del sensore.",
+        "label": "Prezzo dell'elettricità"
+      },
+      "profile_image": {
+        "help": "Aggiorna un'immagine personalizzata utilizzata nel menu.",
+        "invalid": "Formato immagine profilo non valido.",
+        "label": "Immagine del profilo"
+      },
+      "save": {
+        "ok": {
+          "message": "Le impostazioni vengono aggiornate.",
+          "title": "Data upload"
+        }
+      },
+      "show_min_max_gauge": {
+        "help": "Mostra il minimo e il massimo valore di misura graficamente.",
+        "label": "Mostra il minimo e il massimo valore di misura graficamente"
+      },
+      "temperature_indicator": {
+        "help": "Mantiene il valore di offset di temperatura.",
+        "invalid": "Per favore, fai una scelta.",
+        "label": "Temperatura"
+      },
+      "title": {
+        "help": "Nome file.",
+        "invalid": "Il titolo non può essere vuoto.",
+        "label": "Titolo"
+      },
+      "username": {
+        "help": "Immettere il nome utente per l'autenticazione.",
+        "invalid": "Il nome utente non può essere vuoto.",
+        "label": "Nome file"
+      },
+      "water_price": {
+        "help": "Immettere il prezzo per l/gallone.",
+        "invalid": "Contiene il nome del sensore.",
+        "label": "Prezzo dell'acqua"
+      },
+      "water_volume_indicator": {
+        "help": "Selezionare l'indicatore del volume dell'acqua. Influisce solo sui valori correnti.",
+        "invalid": "Per favore, fai una scelta.",
+        "label": "Tipo di volume liquido"
+      },
+      "wind_speed_indicator": {
+        "help": "Selezionare l'indicatore di velocità del vento. Influisce solo sui valori attuali.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "Velocità del vento"
+      }
+    },
+    "status": {
+      "cpu_temp": {
+        "title": "Temperatura CPU"
+      },
+      "disk": {
+        "title": "Utilizzo disco"
+      },
+      "load": {
+        "title": "Carico del sistema"
+      },
+      "memory": {
+        "title": "Utilizzo di memoria"
+      },
+      "summary": {
+        "title": "Riepilogo sistema"
+      },
+      "title": "Stato del sistema",
+      "uptime": {
+        "title": "Uptime del sistema"
+      }
+    }
+  },
+  "table": {
+    "field": {
+      "range": "Intervallo"
+    },
+    "header": {
+      "actions": "Azione",
+      "duration": "Durata",
+      "filename": "Nome del file",
+      "filesize": "Dimensione del file",
+      "mode": "Modalità",
+      "name": "Nome",
+      "number_files": "File",
+      "repeat": "Ripeti",
+      "shuffle": "Riproduzione casuale",
+      "status": "Stato",
+      "type": "Tipo",
+      "volume": "File audio"
+    }
+  },
+  "topbar": {
+    "current_status": "Stato attuale",
+    "door_status": "Stato della porta",
+    "upcoming_events": "{number, plural, =0 {nessun evento} =1 {un evento} other {# eventi}}"
+  },
+  "userpanel": {
+    "login": {
+      "text1": "Modalità sola lettura",
+      "text2": "Login"
+    },
+    "logout": {
+      "text1": "Ciao {name}",
+      "text2": "Logout"
+    }
+  },
+  "weather": {
+    "current": "Attuale",
+    "forecast": "Previsioni",
+    "menu": {
+      "title": "Meteo"
+    },
+    "settings": {
+      "fields": {
+        "error": "I campi richiesti sono segnati con '%s'."
+      },
+      "information": "Per utilizzare il sistema meteorologico, devi creare un account gratuito su {source_link}.",
+      "save": {
+        "ok": {
+          "message": "L'impostazione meteo viene salvata."
+        }
+      },
+      "title": "Impostazioni meteo",
+      "weather_source": {
+        "help": "Inserisci l'URL completo dell'API di OpenWeatherMap come: {api_url_example}.",
+        "invalid": "La url inserita non è valida.",
+        "label": "Sorgente"
+      }
+    },
+    "title": "Meteo"
+  },
+  "webcams": {
+    "actions": {
+      "delete": "Elimina file",
+      "ignore": "Aggiungi una nuova webcam",
+      "settings": "Aggiungi una nuova webcam"
+    },
+    "archive": {
+      "no_images": "Nessuna immagine di archivio disponibile"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Sei sicuro di voler ignorare la webcam ''{name}''?"
+      }
+    },
+    "controls": {
+      "archive": "Archivio",
+      "new_marker": "Aggiungi marcatore",
+      "save_raw_image": "Salva immagine grezza",
+      "show_markers": "Mostra i marcatori",
+      "toggle_volume": "Attiva/disattiva il volume"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Sei sicuro di voler eliminare la webcam ''{name}''?"
+      },
+      "error": {
+        "message": "La webcam ''{name}'' non potrebbe essere eliminata!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "La webcam ''{name}'' è stata eliminata."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "La webcam ''{name}'' non potrebbe essere ignorata!\nErrore: {error}"
+      },
+      "ok": {
+        "message": "La webcam ''{name}'' viene ignorata."
+      }
+    },
+    "marker": {
+      "delete": {
+        "confirm": {
+          "message": "Sei sicuro di eliminare il marcatore?"
+        },
+        "error": {
+          "message": "Impossibile eliminare il contrassegno"
+        },
+        "invalid": {
+          "message": "Indicatore non valido"
+        }
+      }
+    },
+    "markers": {
+      "settings": {
+        "delete": "Elimina",
+        "doors": {
+          "help": "Seleziona i senors che vuoi mostrare.",
+          "invalid": "Per favore, fai una scelta.",
+          "label": "Sensori"
+        },
+        "title": "Sensori"
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nuova webcam"
+      },
+      "status": {
+        "title": "Stato"
+      },
+      "title": "Webcams"
+    },
+    "settings": {
+      "address": {
+        "help": "Per ulteriori informazioni, consultare online.",
+        "invalid": "L'indirizzo inserito non è valido. Non può essere vuoto.",
+        "label": "Indirizzo",
+        "placeholder": "Indirizzo"
+      },
+      "archive": {
+        "door": {
+          "help": "Stato della porta per acquisire un'immagine di archivio.",
+          "invalid": "Si prega di fare una scelta.",
+          "label": "Archivia lo stato della porta",
+          "options": {
+            "close": "Chiudi",
+            "ignore": "Ignora",
+            "open": "Aperto"
+          },
+          "placeholder": "Seleziona un'opzione"
+        },
+        "flash": {
+          "help": "Seleziona un relè che fungerà da lampeggiatore.",
+          "invalid": "Si prega di fare una scelta.",
+          "label": "flash",
+          "placeholder": "Seleziona il relè opzionale per il flash"
+        },
+        "light": {
+          "help": "Stato della luce per acquisire un'immagine di archivio.",
+          "invalid": "Per favore, fai una scelta.",
+          "label": "Stato della luce dell'archivio",
+          "options": {
+            "ignore": "Ignora",
+            "off": "Quando spento",
+            "on": "Quando acceso"
+          },
+          "placeholder": "Seleziona un'opzione"
+        },
+        "options": {
+          "day_1": "1 giorno",
+          "disabled": "Disabilitato",
+          "hour_1": "30 minuti",
+          "hour_12": "12 ore",
+          "hour_3": "3 ore",
+          "hour_6": "6 ore",
+          "minute_1": "1 minuto",
+          "minute_15": "15 minuti",
+          "minute_30": "30 minuti",
+          "minute_5": "5 minuti",
+          "motion": "Località"
+        },
+        "state": {
+          "help": "Seleziona la durata tra le immagini archiviate.",
+          "invalid": "Si prega di fare una scelta.",
+          "label": "Archivia",
+          "placeholder": "Lingua"
+        }
+      },
+      "awb": {
+        "help": "bilanciamento di bianco.",
+        "invalid": "Si prega di fare una scelta.",
+        "label": "bilanciamento di bianco",
+        "options": {
+          "auto": "auto",
+          "cloudy": "nuvoloso",
+          "flash": "flash",
+          "fluorescent": "fluorescenza",
+          "greyworld": "Greyworld",
+          "horizon": "Inverti Orizzontalmente",
+          "incandescent": "incandescenza",
+          "off": "Spento",
+          "shade": "ombra",
+          "sunlight": "luce del sole",
+          "tungsten": "tungsteno"
+        },
+        "placeholder": "bilanciamento di bianco"
+      },
+      "hardware": {
+        "help": "Contiene la scheda audio utilizzata per la riproduzione audio.",
+        "invalid": "Per favore seleziona un tipo di hardware.",
+        "label": "Hardware",
+        "placeholder": "Hardware"
+      },
+      "height": {
+        "help": "Immettere l'altezza della risoluzione in pixel.",
+        "invalid": "Contiene il nome del sensore.",
+        "label": "Altezza"
+      },
+      "motion": {
+        "area": {
+          "help": "Indirizzo.",
+          "invalid": "Contiene il nome del sensore.",
+          "label": "Zoom al minimo",
+          "placeholder": "Nome file"
+        },
+        "boxes": {
+          "help": "Abilita o disabilita l'archiviazione di immagini in base al rilevamento del movimento.",
+          "invalid": "Per favore, fai una scelta.",
+          "label": "Mostra le caselle di movimento",
+          "options": {
+            "blue": "Blu",
+            "green": "Verde",
+            "none": "Nessuno",
+            "red": "Mer"
+          },
+          "placeholder": "Mostra le caselle di movimento"
+        },
+        "frame": {
+          "help": "Quale cornice utilizzare per il rilevamento del movimento.",
+          "invalid": "Per favore, fai una scelta.",
+          "label": "Confronto tra i rilevamenti",
+          "options": {
+            "archived": "Ultimo frame archiviato",
+            "last": "Ultimo aggiornamento"
+          },
+          "placeholder": "Seleziona quale frame in confronto"
+        },
+        "threshold": {
+          "help": "Soglia delta di movimento.",
+          "invalid": "Contiene il nome del sensore.",
+          "label": "Soglia delta di movimento",
+          "placeholder": "Nome file"
+        }
+      },
+      "name": {
+        "help": "Inserisci un nome facile da ricordare.",
+        "invalid": "Il nome inserito non è valido. Non può essere vuoto.",
+        "label": "Nome",
+        "placeholder": "Nome file"
+      },
+      "preview": {
+        "label": "Anteprima"
+      },
+      "rotation": {
+        "help": "Rotazione dell'immagine.",
+        "invalid": "Per favore, fai una scelta.",
+        "label": "Località",
+        "options": {
+          "degrees_0": "gradi",
+          "degrees_180": "gradi",
+          "degrees_270": "gradi",
+          "degrees_90": "gradi",
+          "flip_h": "Inverti Orizzontalmente",
+          "flip_v": "Inverti Verticalmente",
+          "zero_degrees": "gradi"
+        },
+        "placeholder": "Rotazione dell'immagine"
+      },
+      "save": {
+        "error": {
+          "required_fields": "I campi richiesti sono segnati con '%s'."
+        },
+        "ok": {
+          "message": "La webcam ''{name}'' è aggiornata."
+        }
+      },
+      "title": "Impostazioni webcam",
+      "width": {
+        "help": "Immettere la larghezza della risoluzione in pixel.",
+        "invalid": "Contiene il nome del sensore.",
+        "label": "Larghezza"
+      }
+    },
+    "title": "Webcams"
+  }
+}

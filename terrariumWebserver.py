@@ -9,12 +9,12 @@ import datetime
 import functools
 import re
 from PIL import Image
-
+import base64
 from uuid import uuid4
 from pathlib import Path
 from hashlib import md5
 
-from bottle import BaseRequest, default_app, request, redirect, static_file, jinja2_template, response, auth_basic, HTTPError, RouteBuildError, template
+from bottle import BaseRequest,  default_app, request, redirect, static_file, jinja2_template, response, auth_basic, HTTPError, RouteBuildError
 #Increase bottle memory to max 5MB to process images in WYSIWYG editor
 BaseRequest.MEMFILE_MAX = 5 * 1024 * 1024
 
@@ -30,11 +30,13 @@ class terrariumWebserver(object):
   def __init__(self, terrariumEngine):
     # Define caching timeouts per url/path
     self.__caching_timeouts = [
-      {'path' : re.compile(r'^/webcam/.*\.m3u8$',re.I), 'timeout':                 1}, # 1 Second
+      {'path' : re.compile(r'^/webcam/.*\.m3u8$',re.I), 'timeout':                 2}, #  2 Seconds
       {'path' : re.compile(r'^/webcam/.*\.ts$',re.I),   'timeout':                10}, # 10 Seconds
       {'path' : re.compile(r'^/webcam/.*\.jpg$',re.I),  'timeout':                30}, # 30 Seconds
-      {'path' : re.compile(r'^/static/assets/',re.I),   'timeout': 30 * 24 * 60 * 60}, # 1 Month
-      {'path' : re.compile(r'^/api/',re.I),             'timeout':                60}, # 1 Minute
+      {'path' : re.compile(r'^/api/',re.I),             'timeout':                60}, #  1 Minute
+
+      {'path' : re.compile(r'^/(media|css|img|js|webfonts)/',re.I), 'timeout': 1 * 24 * 60 * 60}, # 1 Day
+      {'path' : re.compile(r'^/(main\..*)',re.I),                   'timeout': 1 * 24 * 60 * 60}, # 1 Day
     ]
 
     # This secret will change every reboot. So cookies will not work anymore after a reboot.
@@ -59,8 +61,10 @@ class terrariumWebserver(object):
 
       @functools.wraps(func)
       def wrapper(*a, **ka):
+        # Get user info from auth request, then from cookie or else nothing
+        user, password = request.auth or request.get_cookie('auth', secret=self.cookie_secret) or (None, None)
+
         if int(self.engine.settings['always_authenticate']) != -1 and (required or terrariumUtils.is_true(self.engine.settings['always_authenticate'])):
-          user, password = request.auth or (None, None)
           ip = request.remote_addr if request.get_header('X-Real-Ip') is None else request.get_header('X-Real-Ip')
           if user is None or not check(user, password):
             err = HTTPError(401, text)
@@ -70,14 +74,11 @@ class terrariumWebserver(object):
               logger.warning(f'Incorrect login detected using username \'{user}\' and password \'{password}\' from ip {ip}')
             return err
 
-        if request.method.lower() in ['get','head']:
+        if request.method.lower() in ['get','head','options']:
           self.__add_caching_headers(response,request.fullpath)
-
-          if request.url.lower().endswith('.html') or '/' == request.fullpath:
-            user, password = request.get_cookie('auth', secret=self.cookie_secret) or (None, None)
-            if check(user, password):
-              # Update the cookie timeout so that we are staying logged in as long as we are working on the interface
-              response.set_cookie('auth', request.get_cookie('auth', secret=self.cookie_secret), secret=self.cookie_secret, **{ 'max_age' : 3600, 'path' : '/'})
+          if check(user, password):
+            # Update the cookie timeout so that we are staying logged in as long as we are working on the interface
+            response.set_cookie('auth', request.get_cookie('auth', secret=self.cookie_secret), secret=self.cookie_secret, **{ 'max_age' : 3600, 'path' : '/'})
 
         elif request.method.lower() in ['post','put','delete']:
           response.set_cookie('no-cache','1', secret=None, **{ 'max_age' : 90, 'path' : '/'})
@@ -95,6 +96,7 @@ class terrariumWebserver(object):
 
   def __add_caching_headers(self, response, fullpath):
     if 200 == response.status_code:
+      response.content_type = response.content_type.replace('application/javascript','application/javascript; charset=UTF-8')
       # Add the caching headers
       for caching in self.__caching_timeouts:
         if caching['path'].search(request.fullpath):
@@ -127,31 +129,35 @@ class terrariumWebserver(object):
 
     # Variables
     variables = {
+
       'authenticated' : int(self.engine.settings['always_authenticate']) == -1 or authenticated,
-      'lang'          : self.engine.active_language,
+      'username'      : self.engine.settings['username'],
+
+      'lang'          : self.engine.active_language.replace('_','-'),
+      'currency'      : self.engine.settings['currency'],
       'title'         : self.engine.settings['title'],
       'version'       : self.engine.settings['version'],
       'template'      : template,
       'device'        : self.engine.settings['device'],
-      'username'      : self.engine.settings['username'],
-      'profile_image' : self.engine.settings['profile_image'],
-      'favicon'       : self.engine.settings['favicon'],
+      'profile_image' : self.engine.settings['profile_image'].lstrip('/'),
+      'favicon'       : self.engine.settings['favicon'].lstrip('/'),
       'gitversion'    : self.engine.settings['gitversion'],
 
-      'languages'     : self.engine.settings['languages'],
+      # 'languages'     : self.engine.settings['languages'],	# Should be removed
       'units'         : unit_variables(),
+      'available_sensor_types'     : list(map(lambda sensor: sensor['id'], self.engine.sensor_types_loaded)),
 
-      'show_gauge_overview'      : self.engine.settings['all_gauges_on_single_page'],
-      'show_environment'         : not self.engine.settings['hide_environment_dashboard'],
-      'graph_smooth_value'       : self.engine.settings['graph_smooth_value'],
-      'graph_show_min_max_gauge' : 1 if self.engine.settings['show_min_max_gauge'] else 0,
-      'auto_dark_mode'           : 1 if self.engine.settings['auto_dark_mode'] else 0,
-      'is_night'                 : 0 if self.engine.weather is None or self.engine.weather.is_day else 1
+      'show_gauge_overview'        : str(self.engine.settings['all_gauges_on_single_page']).lower(),
+      'dashboard_mode'             : self.engine.settings['dashboard_mode'],
+      'graph_smooth_value'         : self.engine.settings['graph_smooth_value'],
+      'graph_show_min_max_gauge'   : str(self.engine.settings['show_min_max_gauge']).lower(),
+      'auto_dark_mode'             : str(self.engine.settings['auto_dark_mode']).lower(),
+      'is_night'                   : str(not (self.engine.weather is None or self.engine.weather.is_day)).lower()
     }
 
     # Template functions
-    variables['url_for'] = self.url_for
-    variables['_']  = _
+    # variables['url_for'] = self.url_for
+    # variables['_']  = _
 
     return variables
 
@@ -164,7 +170,7 @@ class terrariumWebserver(object):
       page_name = page
       page = 'sensors'
 
-    page = Path(f'views/{page}.html')
+    page = Path(f'public/{page}.html')
     if not page.is_file():
       return HTTPError(404, 'Page does not exist.')
 
@@ -176,17 +182,21 @@ class terrariumWebserver(object):
 
     return jinja2_template(f'{page}',**variables)
 
-  def _static_file(self, filename, root = 'static'):
-    # TODO: This javascript file should not be templated parsed..... not correct
-    if filename == 'js/terrariumpi.js':
-      response.headers['Content-Type'] = 'application/javascript; charset=UTF-8'
-      response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(days=self.__caching_days)).strftime('%a, %d %b %Y %H:%M:%S GMT')
-      return template(filename,template_lookup=[root])
+  def _static_file_gui(self, filename, root = ''):
+    return self._static_file(filename, f'public/{root}')
+
+  def _static_file(self, filename, root = ''):
+    # Backwards compatibility for '/static/' folder
+    if root == 'static':
+      filename = filename.split('/')
+      root = f'public/{filename[0]}'
+      filename = '/'.join(filename[1:])
 
     # Load the static file
     if request.headers.get('Accept-Encoding') and 'gzip' in request.headers.get('Accept-Encoding'):
       staticfile = static_file(filename + '.gz', root=root)
       if not isinstance(staticfile, HTTPError):
+        staticfile.set_header('Content-Disposition', f'inline; filename="{Path(filename).name}"')
         self.__add_caching_headers(staticfile,f'{root}/{filename}')
         return staticfile
 
@@ -228,7 +238,8 @@ class terrariumWebserver(object):
 
       variables = self.__template_variables(f'{error.status}')
       variables['page_title'] = f'{error.status} Error'
-      return jinja2_template('views/error.html',variables)
+
+      return jinja2_template('public/error.html',variables)
 
     # Add API including all the CRUD urls
     self.api.routes(self.bottle)
@@ -246,14 +257,15 @@ class terrariumWebserver(object):
     self.bottle.route('/', method='GET', callback=self.render_page, apply=self.authenticate(), name='home')
 
     # Template pages
-    self.bottle.route('/<page:re:[^/]+>.html',        method='GET', callback=self.render_page, apply=self.authenticate(), name='page')
-    self.bottle.route('/<page:re:modals/[^/]+>.html', method='GET', callback=self.render_page, apply=self.authenticate(), name='modal')
+    self.bottle.route('/<page:re:[^/]+>.html', method='GET', callback=self.render_page, apply=self.authenticate(), name='page')
 
-    # Special case: robots.txt and favicon.ico
-    self.bottle.route('/<filename:re:(robots\.txt|favicon\.ico)>', method='GET', callback=self._static_file)
+    # Special case: Svelte main.js|css and robots.txt and favicon.ico
+    self.bottle.route('/<filename:re:(robots\.txt|favicon\.ico|main\.css|main\.js)>', method='GET', callback=self._static_file_gui)
+    # Static files Svelte app
+    self.bottle.route('/<root:re:(css|img|js|webfonts)>/<filename:path>', method='GET', callback=self._static_file_gui)
 
-    # Static files
-    self.bottle.route('/<root:re:(static|webcam|media|log)>/<filename:path>', method='GET', callback=self._static_file, apply=self.authenticate())
+    # Other static files
+    self.bottle.route('/<root:re:(static|webcam|media|log)>/<filename:path>', method='GET',  callback=self._static_file,  apply=self.authenticate())
     self.bottle.route('/<root:re:(media)>/upload/', method='POST', callback=self.__file_upload, apply=self.authenticate(), name='file_upload')
 
   def url_for(self, name, **kwargs):
@@ -267,6 +279,9 @@ class terrariumWebserver(object):
 
   def __login(self):
     response.set_cookie('auth', request.auth, secret=self.cookie_secret, **{ 'max_age' : 3600, 'path' : '/'})
+    if request.is_ajax:
+      return {'location' : self.url_for('home'), 'message' : 'User logged in.'}
+
     redirect(self.url_for('home'))
 
   def __logout(self):
@@ -297,72 +312,94 @@ class terrariumWebsocket(object):
     self.clients = []
 
   def connect(self,socket):
-      messages = Queue()
 
-      def listen_for_messages(messages, socket):
-        self.clients.append(messages)
-        logger.debug(f'Got a new websocket connection from {socket}')
+    def listen_for_messages(messages, socket):
+      try:
+        self.clients.remove(messages)
+      except Exception as ex:
+        logger.debug(f'Client {messages} was not on the client list when started: {ex}')
 
-        while True:
-          message = messages.get()
-          try:
-            socket.send(json.dumps(message))
-            messages.task_done()
-          except Exception as ex:
-            # Socket connection is lost/closed, stop looping....
-            logger.debug(f'Disconnected {socket}. Stop listening and remove queue... {ex}')
-            try:
-              self.clients.remove(messages)
-            except Exception as ex:
-              logger.debug(f'Disconnected {socket} is not in the clients queue... {ex}')
-
-            break
+      self.clients.append(messages)
+      logger.debug(f'Got a new websocket connection from {socket}')
 
       while True:
+        message = messages.get()
         try:
-          message = socket.receive()
+          socket.send(json.dumps(message))
+          messages.task_done()
         except Exception as ex:
-          # Closed websocket connection.
-          logger.debug(f'Websocket error receiving messages: {ex}')
+          # Socket connection is lost/closed, stop looping....
+          logger.debug(f'Disconnected {socket}. Stop listening and remove queue... {ex}')
           try:
             self.clients.remove(messages)
           except Exception as ex:
-            logger.debug(f'Could not remove websocket client from queue: {ex}')
+            logger.debug(f'Disconnected {socket} is not in the clients queue... {ex}')
 
           break
 
-        if message is not None:
-          message = json.loads(message)
+    messages = Queue()
+    authenticated = False
 
-          if 'client_init' == message['type']:
-            messages.authenticated = False
-            try:
-              cookie_data = request.get_cookie('auth', secret=self.webserver.cookie_secret)
-              if cookie_data is not None:
-                messages.authenticated = self.webserver.engine.authenticate(cookie_data[0],cookie_data[1])
-            except Exception:
-              # Some strange cookie error when cleared... we can ignore that
-              logger.debug('Ignoring cleared cookie')
+    # First try (existing) cookie login
+    try:
+      cookie_data = request.get_cookie('auth', secret=self.webserver.cookie_secret)
+      if cookie_data is not None:
+        authenticated = self.webserver.engine.authenticate(cookie_data[0],cookie_data[1])
+    except Exception as ex:
+      logger.debug(f'Invalid cookie data. Either wrong secret or strange auth. We can ignore this. {ex}')
 
+    while True:
+      try:
+        message = socket.receive()
+      except Exception as ex:
+        # Closed websocket connection.
+        logger.debug(f'Websocket error receiving messages: {ex}')
+        try:
+          self.clients.remove(messages)
+        except Exception as ex:
+          logger.debug('Clashed client was not in the list of clients {ex}')
+
+        break
+
+      if message is not None:
+        message = json.loads(message)
+
+        if 'client_init' == message['type']:
+          socket_auth = message.get('auth', None)
+          if socket_auth != None:
+            # Either do a login, or a logout
+            if socket_auth == '':
+              # Logout!
+              authenticated = False
+
+            else:
+              try:
+                auth = base64.b64decode(message['auth']).decode('utf-8').split(':')
+                authenticated = self.webserver.engine.authenticate(auth[0], auth[1])
+
+              except Exception as ex:
+                logger.debug(f'Invalid auth data. Either wrong base64 or strange auth. We can ignore this.: {ex}')
+
+          if not messages in self.clients:
+            messages.authenticated = authenticated
             logger.debug(f'Starting authenticated socket? {messages.authenticated}')
+
             threading.Thread(target=listen_for_messages, args=(messages, socket)).start()
-            # Load the running sensor types for adding new menu items below sensors
-            self.send_message({'type' : 'sensortypes', 'data' : self.webserver.engine.sensor_types_loaded}, messages)
-            self.send_message({'type' : 'systemstats', 'data' : self.webserver.engine.system_stats()}, messages)
-            self.send_message({'type' : 'power_usage_water_flow', 'data' : self.webserver.engine.get_power_usage_water_flow}, messages)
-
-            if self.webserver.engine.update_available:
-              self.send_message({'type' : 'softwareupdate', 'data' : {'title':_('Software Update'), 'message' : '<a href="https://github.com/theyosh/TerrariumPI/releases" target="_blank" rel="noopener">' + _('A new version ({version}) is available!').format(version=self.webserver.engine.latest_version) + '</a>'}}, messages)
-
-          elif 'load_dashboard' == message['type']:
-            self.send_message({'type' : 'systemstats', 'data' : self.webserver.engine.system_stats()}, messages)
-            self.send_message({'type' : 'power_usage_water_flow', 'data' : self.webserver.engine.get_power_usage_water_flow}, messages)
-
-            for sensor_type, avg_data in self.webserver.engine.sensor_averages.items():
-              self.send_message({'type' : 'gauge_update', 'data' : { 'id' : f'avg_{sensor_type}', 'value' : avg_data['value']}}, messages)
-
+            for door in self.webserver.engine.load_doors():
+              self.send_message({'type' : 'button', 'data' : door}, messages)
           else:
-            pass
+            self.clients[self.clients.index(messages)].authenticated = authenticated
+
+          if self.webserver.engine.update_available:
+            self.send_message({'type' : 'softwareupdate', 'data' : {'title':_('Software Update'), 'message' : '<a href="https://github.com/theyosh/TerrariumPI/releases" target="_blank" rel="noopener">' + _('A new version ({version}) is available!').format(version=self.webserver.engine.latest_version) + '</a>'}}, messages)
+
+        elif 'load_dashboard' == message['type']:
+          self.send_message({'type' : 'systemstats', 'data' : self.webserver.engine.system_stats()}, messages)
+          self.send_message({'type' : 'power_usage_water_flow', 'data' : self.webserver.engine.get_power_usage_water_flow}, messages)
+
+          for sensor_type, avg_data in self.webserver.engine.sensor_averages.items():
+            avg_data['id'] = sensor_type
+            self.send_message({'type' : 'sensor', 'data' : avg_data}, messages)
 
   def send_message(self, message, queue = None):
     # Get all the connected websockets (get a copy of the list, as we could delete entries and change the list length during the loop)
@@ -370,8 +407,7 @@ class terrariumWebsocket(object):
     # Loop over all the clients
     for client in clients:
       if queue is None or queue == client:
-
-        if 'logfile_update' == message['type'] and not client.authenticated:
+        if 'logline' == message['type'] and not client.authenticated:
           # Clean the logline message. Keep date and type for web indicators
           message['data'] = message['data'][0:36].strip()
 

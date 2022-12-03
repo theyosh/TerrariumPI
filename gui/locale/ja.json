@@ -1,0 +1,2115 @@
+{
+  "about": {
+    "online": {
+      "help": "オンラインでより多くのヘルプ."
+    },
+    "title": "システム情報"
+  },
+  "areas": {
+    "delete": {
+      "confirm": {
+        "message": "領域を削除したいですか ''{name}''？"
+      },
+      "error": {
+        "message": "エリア ''{name}''は削除できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "領域 ''{name}''が削除されます。"
+      }
+    },
+    "settings": {
+      "depends_on": {
+        "help": "本エリアに該当するケージを選択してください.",
+        "invalid": "選択してください。.",
+        "label": "に依存します",
+        "placeholder": "領域に応じて選択します"
+      },
+      "enclosure": {
+        "help": "本エリアに該当するケージを選択してください.",
+        "invalid": "選択してください。.",
+        "label": "ケージ",
+        "placeholder": "エンクロージャーを選択します"
+      },
+      "mode": {
+        "help": "該当エリアのモードを選択してください。モードによってリレーの起動タイミングや作動時間が変わります。.",
+        "invalid": "選択してください。.",
+        "label": "モード",
+        "options": {
+          "disabled": "無効",
+          "main_lights": "メイン照明",
+          "sensors": "センサー",
+          "timer": "タイマー",
+          "weather": "天気（昼・夜）",
+          "weather_inverse": "天気（夜・昼）"
+        },
+        "placeholder": "[モード]を選択します"
+      },
+      "name": {
+        "help": "覚えやすい名前を入力してください。.",
+        "invalid": "入力された名前は無効です。空にすることはできません。.",
+        "label": "名",
+        "placeholder": "名前を入力します"
+      },
+      "save": {
+        "error": {
+          "duplicate_relays": "下限アラームと上限アラームの両方で同じリレーを選択しました。これは無効です。",
+          "required_fields": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+        },
+        "ok": {
+          "message": "エリア''{name}''が更新されます."
+        }
+      },
+      "setup": {
+        "day_night_difference": {
+          "help": "昼と夜の間で変更する量。.",
+          "invalid": "正しい時間値を入力してください。.",
+          "label": "昼と夜の差",
+          "placeholder": "番号を入力します"
+        },
+        "day_night_source": {
+          "help": "「昼」の場合の基準を選択してください。.",
+          "invalid": "選択してください。.",
+          "label": "昼/夜の判定基準",
+          "options": {
+            "lights": "照明",
+            "weather": "天気"
+          },
+          "placeholder": "昼/夜のソースを選択します"
+        },
+        "deviation_high_alarm": {
+          "help": "",
+          "invalid": "有効な数値を入力してください。",
+          "label": "高警報偏差",
+          "placeholder": "高警報偏差"
+        },
+        "deviation_low_alarm": {
+          "help": "下限アラーム値の増加。",
+          "invalid": "有効な数値を入力してください。",
+          "label": "低警報偏差",
+          "placeholder": "低警報偏差"
+        },
+        "high": {
+          "begin": {
+            "help": "リレーをオンにする夜の時刻。.",
+            "invalid": "正しい時間値を入力してください。.",
+            "label": "開始時間",
+            "placeholder": "開始時間を入力します"
+          },
+          "door_status": {
+            "help": "ドアの状態を選択してください。.",
+            "invalid": "選択してください。.",
+            "label": "ドアの状態",
+            "options": {
+              "closed": "閉",
+              "ignore": "無視",
+              "open": "開"
+            },
+            "placeholder": "状態を選択します"
+          },
+          "end": {
+            "help": "リレーをオフにする夜の時刻。.",
+            "invalid": "正しい時間値を入力してください。.",
+            "label": "終了時間",
+            "placeholder": "終了時間を入力します"
+          },
+          "ignore_high": {
+            "help": ".",
+            "label": "高値アラーム"
+          },
+          "light_status": {
+            "help": "照明の状態を選択してください。.",
+            "invalid": "選択してください。.",
+            "label": "照明の状態",
+            "options": {
+              "ignore": "無視",
+              "off": "オフ",
+              "on": "オン"
+            },
+            "placeholder": "状態を選択します"
+          },
+          "off_duration": {
+            "help": "スイッチを切ったときにリレーをオフにする期間。「0」を入力して無効にします。.",
+            "invalid": "期間を分単位で正しく入力してください。.",
+            "label": "オフ状態期間",
+            "placeholder": "オフ状態期間"
+          },
+          "on_duration": {
+            "help": "リレーがオンになるはずの期間。これがより短い場合、1日中、タイマー機能が得られます。「0」を入力して、一晩を過ごします。.",
+            "invalid": "期間を分単位で正しく入力してください。.",
+            "label": "オン状態期間",
+            "placeholder": "オン状態期間"
+          },
+          "playlists": {
+            "help": "再生するプレイリストを選択してください。.",
+            "invalid": "選択してください。.",
+            "label": "プレイリスト",
+            "placeholder": "プレイリストを選択します"
+          },
+          "power_on_time": {
+            "help": "リレーをオンにする時間（秒単位）。.",
+            "invalid": "正しい時間値を入力してください。.",
+            "label": "電源オン時間",
+            "placeholder": "電源オン時間"
+          },
+          "relays": {
+            "help": "制御したいリレーを選択してください。.",
+            "invalid": "選択してください。.",
+            "label": "リレー",
+            "placeholder": "リレーを選択します"
+          },
+          "settle_time": {
+            "help": "2つの動作間の秒単位の期間。.",
+            "invalid": "正しい時間値を入力してください。.",
+            "label": "待機時間",
+            "placeholder": "待機時間"
+          },
+          "trigger_threshold": {
+            "help": "アクションが実行されるまでの最大アラーム作動数を入力してください。.",
+            "invalid": "正しい時間値を入力してください。.",
+            "label": "アラームしきい値",
+            "placeholder": "しきい値"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "調光器が数分でオンまたはオフになるまでの遅延と期間を選択します。最大期間は180分です。"
+            },
+            "off": {
+              "dimmer": {
+                "label": "調光器の「オフ」期間"
+              },
+              "relay": {
+                "label": "リレーの「オフ」遅延"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "調光器の「オン」期間"
+              },
+              "relay": {
+                "label": "リレーの「オン」遅延"
+              }
+            },
+            "relay": {
+              "info": "リレーがオンになる前に待機する議事録の遅延を選択します。最大遅延は180分です。"
+            }
+          }
+        },
+        "low": {
+          "begin": {
+            "help": "リレーをオンにする夜の時刻。.",
+            "invalid": "正しい時間値を入力してください。.",
+            "label": "開始時間",
+            "placeholder": "開始時間を入力します"
+          },
+          "door_status": {
+            "help": "ドアの状態を選択してください。.",
+            "invalid": "選択してください。.",
+            "label": "ドアの状態",
+            "options": {
+              "closed": "閉",
+              "ignore": "無視",
+              "open": "開"
+            },
+            "placeholder": "状態を選択します"
+          },
+          "end": {
+            "help": "リレーをオフにする夜の時刻。.",
+            "invalid": "正しい時間値を入力してください。.",
+            "label": "終了時間",
+            "placeholder": "終了時間を入力します"
+          },
+          "ignore_low": {
+            "help": "トグルセンサーのアラーム値が低いことを無視し、高いアラーム値のみを使用します。.",
+            "label": "定値アラーム"
+          },
+          "light_status": {
+            "help": "照明の状態を選択してください。.",
+            "invalid": "選択してください。.",
+            "label": "照明の状態",
+            "options": {
+              "ignore": "無視",
+              "off": "オフ",
+              "on": "オン"
+            },
+            "placeholder": "状態を選択します"
+          },
+          "off_duration": {
+            "help": "スイッチを切ったときにリレーをオフにする期間。「0」を入力して無効にします。.",
+            "invalid": "期間を分単位で正しく入力してください。.",
+            "label": "オフ状態期間",
+            "placeholder": "オフ状態期間"
+          },
+          "on_duration": {
+            "help": "リレーがオンになるはずの期間。これがより短い場合、1日中、タイマー機能が得られます。「0」を入力して、一晩を過ごします。.",
+            "invalid": "期間を分単位で正しく入力してください。.",
+            "label": "オン状態期間",
+            "placeholder": "オン状態期間"
+          },
+          "playlists": {
+            "help": "再生するプレイリストを選択してください。.",
+            "invalid": "選択してください。.",
+            "label": "プレイリスト",
+            "placeholder": "プレイリストを選択します"
+          },
+          "power_on_time": {
+            "help": "リレーをオンにする時間（秒単位）。.",
+            "invalid": "正しい時間値を入力してください。.",
+            "label": "電源オン時間",
+            "placeholder": "電源オン時間"
+          },
+          "relays": {
+            "help": "制御したいリレーを選択してください。.",
+            "invalid": "選択してください。.",
+            "label": "リレー",
+            "placeholder": "リレーを選択します"
+          },
+          "settle_time": {
+            "help": "2つの動作間の秒単位の期間。.",
+            "invalid": "正しい時間値を入力してください。.",
+            "label": "待機時間",
+            "placeholder": "待機時間"
+          },
+          "trigger_threshold": {
+            "help": "アクションが実行されるまでの最大アラーム作動数を入力してください。.",
+            "invalid": "正しい時間値を入力してください。.",
+            "label": "アラームしきい値",
+            "placeholder": "しきい値"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "調光器が数分でオンまたはオフになるまでの遅延と期間を選択します。最大期間は180分です。"
+            },
+            "off": {
+              "dimmer": {
+                "label": ""
+              },
+              "relay": {
+                "label": ""
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "調光器の「オン」期間"
+              },
+              "relay": {
+                "label": "リレーの「オン」遅延"
+              }
+            },
+            "relay": {
+              "info": "リレーがオンになる前に待機する議事録の遅延を選択します。最大遅延は180分です。"
+            }
+          }
+        },
+        "main_lights": {
+          "help": "選択された照明がこのケージのメイン照明である場合、このオプションをオンにしてください。他のエリアの照明チェックに使用されます。.",
+          "label": "メイン照明"
+        },
+        "max_day_hours": {
+          "help": "照明を点灯させる最大時間数です。天気モードを選択した場合のみに有効です。この最大時間数よりも日が長い場合は、点灯時間がこの時間数まで短縮されます。.",
+          "invalid": "入力された値は無効です。{min}と{max}の間に有効な番号を入力します。.",
+          "label": "最大点灯時間",
+          "placeholder": "番号を入力します"
+        },
+        "min_day_hours": {
+          "help": "照明を点灯させる最小時間数です。天気モードを選択した場合のみ有効です。この最小時間数よりも日が短い場合は、点灯時間がこの時間数まで延長されます。.",
+          "invalid": "入力された値は無効です。{min}と{max}の間に有効な番号を入力します。.",
+          "label": "最小点灯時間",
+          "placeholder": "番号を入力します"
+        },
+        "periods": {
+          "day": "昼間設定",
+          "high": "高値アラーム",
+          "info": "以下に、昼間と夜間にリレーとタイマー設定を選択し、タイマー設定を選択できます。",
+          "low": "定値アラーム",
+          "night": "夜間設定",
+          "varation": "期間"
+        },
+        "sensors": {
+          "help": "センサーベースモードに使用するセンサーを選択してください。.",
+          "invalid": "選択してください。.",
+          "label": "センサー",
+          "placeholder": "センサーを選択します"
+        },
+        "shift_day_hours": {
+          "help": "日の出の時刻を基準に、点灯時刻を指定の時間分にオフセットします。マイナスの値は点灯時間を日の出より早まります。.",
+          "invalid": "入力された値は無効です。{min}と{max}の間に有効な番号を入力します。.",
+          "label": "時間オフセット",
+          "placeholder": "番号を入力します"
+        },
+        "soundcard": {
+          "help": "このエリアに使用されるサウンドカードを選択します。.",
+          "invalid": "選択してください。.",
+          "label": "サウンドカード",
+          "placeholder": "サウンドカードを選択します"
+        },
+        "variation": {
+          "offset": {
+            "invalid": "有効な数値を入力してください。"
+          },
+          "period": {
+            "invalid": "有効な数値を入力してください。",
+            "offset": "オフセット",
+            "placeholder": "しきい値",
+            "source": "完全な URL、ローカルの JSON ファイル、またはスクリプト ファイルを入力してください"
+          },
+          "value": {
+            "invalid": "有効な数値を入力してください。",
+            "placeholder": "違い"
+          },
+          "when": {
+            "invalid": "選択してください。",
+            "options": {
+              "after": "x分後",
+              "at": "当時の",
+              "external": "JSON ソースを使用する",
+              "script": "スクリプトを使用",
+              "weather": "現在の天気の使用"
+            },
+            "placeholder": "アクションを選択"
+          }
+        },
+        "watertank_height": {
+          "help": "水タンクの高さを入力してください。.",
+          "invalid": "％sの最小値を入力してください。.",
+          "label": "高さ",
+          "placeholder": "番号を入力します"
+        },
+        "watertank_offset": {
+          "help": "センサーと水位の間のオフセットを入力してください。.",
+          "invalid": "％sの最小値を入力してください。.",
+          "label": "オフセット",
+          "placeholder": "番号を入力します"
+        },
+        "watertank_volume": {
+          "help": "水タンクの量を入力してください。.",
+          "invalid": "％sの最小値を入力してください。.",
+          "label": "量",
+          "placeholder": "番号を入力します"
+        }
+      },
+      "title": "エリアー設定",
+      "type": {
+        "help": "エリアの種類を選択してください。各種類には独特なオプションやロジックがついています。.",
+        "invalid": "選択してください。.",
+        "label": "タイプ",
+        "placeholder": "[タイプ]を選択します"
+      }
+    }
+  },
+  "audio": {
+    "files": {
+      "delete": {
+        "confirm": {
+          "message": "オーディオファイル ''{name}''（{filename}）を削除しますか？"
+        },
+        "error": {
+          "message": "オーディオファイル ''{name}''は削除できませんでした！\nエラー：{error}"
+        },
+        "ok": {
+          "message": "オーディオファイル ''{name}''が削除されます。"
+        }
+      },
+      "settings": {
+        "audiofiles": {
+          "label": "新しい音声ファイルをアップロード",
+          "placeholder": "新しい音声ファイルをアップロード"
+        },
+        "save": {
+          "error": {
+            "invalid_file": "無効なオーディオファイル"
+          },
+          "ok": {
+            "message": "アップロード {amount, plural, =1 {＃オーディオファイル} other {＃オーディオファイルs}}"
+          }
+        }
+      },
+      "title": "音声ファイル"
+    },
+    "menu": {
+      "files": {
+        "title": "ファイル一覧"
+      },
+      "new_playlist": {
+        "title": "プレイリストを追加"
+      },
+      "playlists": {
+        "title": "プレイリスト"
+      },
+      "title": "音声"
+    },
+    "playlists": {
+      "delete": {
+        "confirm": {
+          "message": "{length}番号でプレイリスト ''{name}''を削除しますか？"
+        },
+        "error": {
+          "message": "プレイリスト ''{name}''は削除できませんでした！\nエラー：{error}"
+        },
+        "ok": {
+          "message": "プレイリスト ''{name}''が削除されます。"
+        }
+      },
+      "settings": {
+        "files": {
+          "help": "該当プレイリストのすべての音源ファイルを選択してください。.",
+          "invalid": "音源ファイルを最低1個選択してください。.",
+          "label": "音声ファイル",
+          "placeholder": "オーディオファイルを選択します"
+        },
+        "name": {
+          "help": "覚えやすい名前を入力してください。.",
+          "invalid": "入力された名前は無効です。空にすることはできません。.",
+          "label": "名",
+          "placeholder": "名前を入力します"
+        },
+        "repeat": {
+          "help": "該当プレイリストをリピートモードで再生します。.",
+          "label": "リピート"
+        },
+        "save": {
+          "error": {
+            "required_fields": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+          },
+          "ok": {
+            "message": "プレイリスト''{name}''が更新されます."
+          }
+        },
+        "shuffle": {
+          "help": "このプレイリストは、再生されるたびにシャッフルします。.",
+          "label": "シャッフル"
+        },
+        "title": "プレイリスト設定",
+        "volume": {
+          "help": "該当プレイリストの音量を選択してください。.",
+          "label": "音声ファイル"
+        }
+      },
+      "title": "プレイリスト"
+    }
+  },
+  "buttons": {
+    "actions": {
+      "delete": "ボタンを削除します",
+      "export": "エクスポートボタン",
+      "ignore": "ボタンを無視します",
+      "settings": "編集ボタン"
+    },
+    "delete": {
+      "confirm": {
+        "message": "ボタン ''{name}''を削除する必要がありますか？"
+      },
+      "error": {
+        "message": "ボタン ''{name}''は削除できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "ボタン ''{name}''が削除されています。"
+      }
+    },
+    "ignore": {
+      "confirm": {
+        "message": "ボタンを無視したいですか ''{name}''？"
+      },
+      "error": {
+        "message": "ボタン ''{name}''は無視できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "ボタン ''{name}''は無視されます。"
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "ボタンを追加"
+      },
+      "status": {
+        "title": "ステータス"
+      },
+      "title": "ボタン類"
+    },
+    "settings": {
+      "address": {
+        "help": "物理的なGPIO PIN番号を入力します。.",
+        "invalid": "入力されたアドレスは無効です。{min}と{max}の間に有効な番号を入力します。.",
+        "label": "アドレス",
+        "placeholder": "アドレスを入力します"
+      },
+      "calibration": {
+        "inverse": {
+          "help": "",
+          "label": ""
+        },
+        "ldr_capacitor": {
+          "help": "これは光計算に影響を与えるため、µFでコンデンサ値を入力します。.",
+          "invalid": "入力されたコンデンサの値が無効です。 {min} から {max} までの有効な数値を入力してください。",
+          "label": "µFのコンデンサ値",
+          "placeholder": "µFにコンデンサ値を入力します"
+        },
+        "timeout": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "current": {
+        "help": "ボタンの現在の状態。.",
+        "label": "現在",
+        "placeholder": "現在の価値"
+      },
+      "hardware": {
+        "help": "該当ボタンの種類を選択してください。.",
+        "invalid": "種類を選択してください。.",
+        "label": "ハードウェア",
+        "placeholder": "ハードウェアを選択します"
+      },
+      "name": {
+        "help": "覚えやすい名前を入力してください。.",
+        "invalid": "入力された名前は無効です。空にすることはできません。.",
+        "label": "名",
+        "placeholder": "名前を入力します"
+      },
+      "save": {
+        "error": {
+          "required_fields": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+        },
+        "ok": {
+          "message": "ボタン''{name}''が更新されます."
+        }
+      },
+      "title": "ボタン設定"
+    },
+    "title": "ボタン類"
+  },
+  "calendar": {
+    "actions": {
+      "download": "iCalをダウンロード"
+    },
+    "event": {
+      "delete": {
+        "confirm": {
+          "message": "イベント ''{name}''を削除したいですか？"
+        },
+        "error": {
+          "message": "イベント「''{name}''」は削除できませんでした！\nエラー：{error}"
+        },
+        "ok": {
+          "message": "イベント「''{name}''」が削除されます。"
+        }
+      },
+      "duration": "期間",
+      "periods": {
+        "days": "日",
+        "months": "ヶ月",
+        "no_reminder": "リマインダーはありません",
+        "no_repeat": "繰り返さない",
+        "weeks": "週",
+        "years": "年"
+      },
+      "settings": {
+        "date": {
+          "help": "該当イベントの日程または期間。.",
+          "label": "日付"
+        },
+        "description": {
+          "help": "該当イベントに関する情報を入力してください。.",
+          "label": "説明を入力してください"
+        },
+        "remind": {
+          "label": "リマインダーを送る日時："
+        },
+        "repeat": {
+          "help": "繰り返し頻度と数を選択してください。.",
+          "invalid": "繰り返し頻度を正しく入力してください。.",
+          "label": "頻度：毎"
+        },
+        "repeat_amount": {
+          "label": "選択金額を選択します"
+        },
+        "save": {
+          "error": {
+            "required_fields": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+          },
+          "ok": {
+            "message": "イベント''{name}''が更新されます."
+          }
+        },
+        "summary": {
+          "help": "名前を入力してください。.",
+          "invalid": "名前は必須です。.",
+          "label": "名前を入力します"
+        },
+        "title": "イベント",
+        "update": {
+          "error": {
+            "message": "イベント「''{name}''」は更新できませんでした！\nエラー：{error}"
+          },
+          "ok": {
+            "message": "イベント「''{name}''」が更新されます。"
+          }
+        }
+      }
+    },
+    "menu": {
+      "title": "カレンダー"
+    },
+    "title": "カレンダー"
+  },
+  "dashboard": {
+    "enclosures": {
+      "menu": {
+        "title": "ケージ"
+      },
+      "mode": "モード",
+      "title": "ケージ"
+    },
+    "infobox": {
+      "current_power_usage": {
+        "title": "消費電力（ワット）"
+      },
+      "current_water_flow": {
+        "title": "水流量（{water_flow_indicator}）"
+      },
+      "total_power_usage": {
+        "duration": "{duration}",
+        "title": "電力消費量合計"
+      },
+      "total_water_usage": {
+        "duration": "{duration}",
+        "title": "水使用量"
+      },
+      "uptime": {
+        "title": "稼働時間"
+      }
+    },
+    "menu": {
+      "title": "ダッシュボード"
+    },
+    "title": "ダッシュボード"
+  },
+  "enclosures": {
+    "actions": {
+      "delete": "エンクロージャーを削除します",
+      "settings": "エンクロージャーを編集します"
+    },
+    "area": {
+      "current": "現在",
+      "current_status": "現状",
+      "delete": {
+        "title": "エリアを削除します"
+      },
+      "edit": {
+        "title": "エリアを編集します"
+      },
+      "mode": {
+        "disabled": "",
+        "sensors": "センサー",
+        "timer": "タイマー",
+        "title": "モード",
+        "weather": "天気"
+      },
+      "now": "今",
+      "period": {
+        "day": "日",
+        "high": "高",
+        "low": "低",
+        "night": "夜"
+      },
+      "range": "範囲",
+      "type": {
+        "audio": "音声",
+        "cooling": "冷却",
+        "heating": "ヒーター",
+        "humidity": "湿度",
+        "lights": "照明",
+        "main_lights": "メイン照明",
+        "watertank": "水タンク"
+      }
+    },
+    "areas": {
+      "title": "エリア一覧"
+    },
+    "delete": {
+      "confirm": {
+        "message": "エンクロージャー ''{name}''を削除したいですか？"
+      },
+      "error": {
+        "message": "エンクロージャー ''{name}''は削除できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "エンクロージャー ''{name}''が削除されます。"
+      }
+    },
+    "doors": {
+      "title": "ドア"
+    },
+    "menu": {
+      "list": {
+        "title": "一覧"
+      },
+      "new_area": {
+        "title": "エリアを追加"
+      },
+      "new_enclosure": {
+        "title": "ケージを追加"
+      },
+      "title": "ケージ"
+    },
+    "settings": {
+      "description": {
+        "help": "このエンクロージャーについて説明テキストを入力してください。.",
+        "label": "記述",
+        "placeholder": "説明を入力してください"
+      },
+      "doors": {
+        "help": "このエンクロージャーのドアを選択します。.",
+        "label": "ドア"
+      },
+      "image": {
+        "help": "JPGまたはPNGをアップロードします。.",
+        "invalid": "選択したファイルは無効です。画像ファイルではありません。.",
+        "label": "画像",
+        "placeholder": "画像ファイルを選択します"
+      },
+      "name": {
+        "help": "覚えやすい名前を入力してください。.",
+        "invalid": "入力された名前は無効です。空にすることはできません。.",
+        "label": "名",
+        "placeholder": "名前を入力します"
+      },
+      "save": {
+        "error": {
+          "required_fields": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+        },
+        "ok": {
+          "message": "エンクロージャー''{name}''が更新されます."
+        }
+      },
+      "title": "ケージ設定",
+      "webcams": {
+        "help": "このエンクロージャーのウェブカメラを選択します。.",
+        "label": "カメラ"
+      }
+    },
+    "title": "ケージ",
+    "webcams": {
+      "title": "カメラ"
+    }
+  },
+  "footer": {
+    "current_activity": "アクティビティ",
+    "error_messages": "エラーメッセージ",
+    "warning_messages": "警告メッセージ"
+  },
+  "gauge": {
+    "error": "エラー",
+    "last_update": "最新更新",
+    "warning": "警告"
+  },
+  "general": {
+    "download": {
+      "title": "ダウンロード"
+    },
+    "exclude": {
+      "average": "平均除外."
+    },
+    "humidity": "湿度",
+    "login": {
+      "title": "変更するにはログインが必要です"
+    },
+    "logout": {
+      "title": "ログアウト"
+    },
+    "settings": {
+      "title": "設定"
+    },
+    "temperature": "温度",
+    "uptime_format": {
+      "days": "{number, plural, =1 {＃ 日} other {＃ 日s}}",
+      "hours": "{number, plural, =1 {＃ 時間} other {＃ 時間s}}",
+      "minutes": "{number, plural, =1 {＃ 分} other {＃ 分s}}",
+      "months": "{number, plural, =1 {＃ 月} other {＃ 月s}}",
+      "seconds": "{number, plural, =1 {＃ 2番目} other {＃ 2番目s}}",
+      "years": "{number, plural, =1 {＃ 年} other {＃ 年s}}"
+    }
+  },
+  "graph": {
+    "alarm": {
+      "max": "アラームの最大値",
+      "min": "アラームの最低値"
+    },
+    "current": "現在",
+    "flow": "水流量",
+    "ldr": "照明の状態",
+    "magnetic": "ドアの状態",
+    "motion": "動き",
+    "no-data": "データなし ...",
+    "period": {
+      "day": "日",
+      "month": "月",
+      "replaced": "交換",
+      "week": "週",
+      "year": "年"
+    },
+    "settings": {
+      "export": "エキスポート"
+    },
+    "wattage": "ワット数"
+  },
+  "home": {
+    "menu": {
+      "title": "トップ"
+    },
+    "title": ""
+  },
+  "messages": {
+    "actions": {
+      "delete": "メッセージを削除します",
+      "edit": "メッセージを編集します"
+    },
+    "add": "メッセージを追加",
+    "delete": {
+      "confirm": {
+        "message": "メッセージ「''{name}''」というメッセージを削除したいですか？"
+      },
+      "error": {
+        "message": "メッセージ「''{name}''」は削除できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "メッセージ「''{name}''」が削除されます。"
+      }
+    },
+    "ratelimit": "{number, plural, =0 {無制限のメッセージ} other {1分あたりの最大＃}}",
+    "settings": {
+      "available_services": {
+        "help": "該当ボタンの種類を選択してください。.",
+        "label": "サービス"
+      },
+      "enabled": {
+        "help": "通知メッセージ.",
+        "label": "有効"
+      },
+      "message": {
+        "help": "メッセージを入力します。ここでプレースホルダーの値を使用できます。.",
+        "label": "内容",
+        "placeholder": "メッセージを入力します"
+      },
+      "placeholders": {
+        "format": "{link_start} `.：2f`フォーマット{link_end}",
+        "help": "利用可能なプレースホルダーのリスト。.",
+        "label": "プレースホルダー"
+      },
+      "rate_limit": {
+        "help": "このメッセージの最大メッセージ数あたりのメッセージ。無制限に0を使用します。.",
+        "invalid": "入力された値は無効です。{min}よりも高い有効な数字を入力します。.",
+        "label": "制限",
+        "placeholder": "1分あたりのメッセージ"
+      },
+      "save": {
+        "error": {
+          "required_fields": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+        },
+        "ok": {
+          "message": "メッセージ''{name}''が更新されます."
+        }
+      },
+      "subject": {
+        "help": "短い件名を入力します。ここでプレースホルダーの値を使用できます。.",
+        "invalid": "名前は必須です。.",
+        "label": "件名",
+        "placeholder": "件名を入力します"
+      },
+      "title": "メッセージの設定",
+      "type": {
+        "help": "通知メッセージ.",
+        "invalid": "選択してください。.",
+        "label": "メッセージの種類",
+        "placeholder": "[タイプ]を選択します"
+      }
+    },
+    "table": {
+      "actions": "動作",
+      "enabled": "有効",
+      "message": "内容",
+      "rate_limit": "制限",
+      "services": "サービス",
+      "subject": "件名",
+      "type": "タイプ"
+    },
+    "title": "通知メッセージ"
+  },
+  "modal": {
+    "confirm": {
+      "relays": {
+        "scan": "これにより、新しいリレーを見つけるための新しいスキャンが開始されます。これには最大30秒かかる場合があります。"
+      },
+      "sensors": {
+        "scan": "これにより、新しいセンサーを見つけるための新しいスキャンが開始されます。これには最大30秒かかる場合があります。"
+      },
+      "submit": {
+        "title": "OK"
+      },
+      "system": {
+        "logout": "ログアウトしたいですか？",
+        "reboot": "これにより、Raspberry Piが再起動されます。これには最大60秒かかる場合があります。",
+        "restart": "これはTerrariumpiを再開します。これには最大30秒かかる場合があります。",
+        "shutdown": "これにより、Raspberry Piがシャットダウンします。慎重に使用してください！"
+      },
+      "title": "本気ですか？"
+    },
+    "form": {
+      "toggle": {
+        "info": "ヘルプ情報を表示/非表示"
+      }
+    },
+    "general": {
+      "close": "閉じる",
+      "save": "保存"
+    },
+    "login": {
+      "error": "不正なログイン",
+      "form": {
+        "password": {
+          "help": "パスワードを入力します.",
+          "invalid": "パスワードを空にすることはできません.",
+          "label": "パスワード"
+        },
+        "submit": "ログイン",
+        "username": {
+          "help": "ユーザー名を入力します.",
+          "invalid": "ユーザー名は空にすることはできません.",
+          "label": "ユーザー名"
+        }
+      },
+      "title": "ログイン"
+    },
+    "notification": {
+      "service": {
+        "form": {
+          "field": {
+            "setup": {
+              "address": {
+                "label": "アドレスを入力します"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "not-found": {
+    "header": "ページが見つかりません",
+    "link": "ホームページへ",
+    "title": "ページが見つかりません"
+  },
+  "notification": {
+    "delete": {
+      "error": {
+        "title": "【エラー】"
+      },
+      "invalid": {
+        "title": "エラー"
+      },
+      "ok": {
+        "title": "わかった"
+      }
+    },
+    "door": {
+      "status": {
+        "title": "ドアステータスの更新"
+      }
+    },
+    "exclude": {
+      "error": {
+        "title": "【エラー】"
+      },
+      "ok": {
+        "title": "わかった"
+      }
+    },
+    "form": {
+      "save": {
+        "error": {
+          "title": "エラーを保存します"
+        },
+        "ok": {
+          "title": "OKを保存します"
+        }
+      },
+      "upload": {
+        "error": {
+          "title": "エラーをアップロードします"
+        }
+      }
+    },
+    "login": {
+      "message": {
+        "error": "申し訳ありませんが、ログインは無効です",
+        "ok": "あなたは正常にログインしています。"
+      },
+      "title": "ログイン"
+    },
+    "manual_mode": {
+      "error": {
+        "title": "【エラー】"
+      },
+      "ok": {
+        "title": "わかった"
+      }
+    },
+    "offline": {
+      "message": "接続が失われます",
+      "title": "オフライン"
+    },
+    "online": {
+      "message": "私たちはつながっています",
+      "title": "オンライン"
+    },
+    "reboot": {
+      "ok": {
+        "title": "システムの再起動OK"
+      }
+    },
+    "restart": {
+      "ok": {
+        "title": "システムを再起動します"
+      }
+    },
+    "scanning": {
+      "ok": {
+        "title": "スキャンが終了しました"
+      }
+    },
+    "shutdown": {
+      "ok": {
+        "title": "システムシャットダウンOK"
+      }
+    },
+    "toggle": {
+      "error": {
+        "title": ""
+      },
+      "ok": {
+        "title": ""
+      }
+    }
+  },
+  "relays": {
+    "actions": {
+      "delete": "リレーを削除します",
+      "export": "リレーをエクスポートします",
+      "ignore": "リレーを無視します",
+      "manual_mode": "手動モードリレー",
+      "replace_hardware": "ハードウェアを交換します",
+      "settings": ""
+    },
+    "confirm": {
+      "ignore": {
+        "message": "リレー ''{name}''を無視したいですか？"
+      },
+      "manual_mode": {
+        "message": "リレーのトグルマニュアルモード ''{name}''？"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "リレー ''{name}''を削除したいですか？"
+      },
+      "error": {
+        "message": "リレー ''{name}''は削除できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "リレー ''{name}''が削除されます。"
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "リレー ''{name}''は無視できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "リレー ''{name}''は無視されます。"
+      }
+    },
+    "manual-mode": "手動モード",
+    "manual_mode": {
+      "error": {
+        "message": "リレーのマニュアルモードの変更エラー ''{name}''。\nエラー：{error}"
+      },
+      "ok": {
+        "message": "リレーのマニュアルモード ''{name}''が変更されました。"
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "リレーを追加"
+      },
+      "scan": {
+        "title": "リレーをスキャンする"
+      },
+      "status": {
+        "title": "ステータス"
+      },
+      "title": "リレー"
+    },
+    "settings": {
+      "address": {
+        "help": "詳細については、オンラインを参照してください。.",
+        "invalid": "入力されたアドレスは無効です。空にすることはできません。.",
+        "label": "アドレス",
+        "placeholder": "アドレスを入力します"
+      },
+      "calibration": {
+        "dimmer_frequency": {
+          "help": "調光器の周波数。.",
+          "invalid": "％sの最小値を入力してください。.",
+          "label": "調光周波数（Hz）"
+        },
+        "dimmer_max_dim": {
+          "help": "最大調光値（レガシー）。.",
+          "invalid": "％sの最小値を入力してください。.",
+          "label": "最大調光値"
+        },
+        "dimmer_max_power": {
+          "help": "該当調光器の最大電力。.",
+          "invalid": "入力された値は無効です。{min}と{max}の間に有効な番号を入力します。.",
+          "label": "最大電力（％）"
+        },
+        "dimmer_offset": {
+          "help": "調光器のオフセット値。.",
+          "invalid": "％sの最小値を入力してください。.",
+          "label": "調光器のオフセット（％）"
+        }
+      },
+      "current": {
+        "help": "リレーの現在の状態。.",
+        "label": "現在",
+        "placeholder": "現在の価値"
+      },
+      "flow": {
+        "help": "オンになったときに（最大）水の流れを入力します.",
+        "invalid": "％sの最小値を入力してください。.",
+        "label": "水流量"
+      },
+      "hardware": {
+        "help": "このリレーの種類を選択してください。.",
+        "invalid": "種類を選択してください。.",
+        "label": "ハードウェア",
+        "placeholder": "ハードウェアを選択します"
+      },
+      "name": {
+        "help": "覚えやすい名前を入力してください。.",
+        "invalid": "入力された名前は無効です。空にすることはできません。.",
+        "label": "名",
+        "placeholder": "名前を入力します"
+      },
+      "save": {
+        "error": {
+          "required_fields": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+        },
+        "ok": {
+          "message": "リレー''{name}''が更新されます."
+        }
+      },
+      "title": "リレー設定",
+      "wattage": {
+        "help": "オンになったら（最大）ワット数を入力します。.",
+        "invalid": "％sの最小値を入力してください。.",
+        "label": "ワット数"
+      }
+    },
+    "title": "リレー",
+    "toggle": {
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    }
+  },
+  "sensors": {
+    "actions": {
+      "delete": "センサーを削除します",
+      "export": "エクスポートセンサー",
+      "ignore": "センサーを無視します",
+      "settings": "センサーの編集"
+    },
+    "all": {
+      "menu": {
+        "title": "センサー一覧"
+      },
+      "title": "センサー一覧"
+    },
+    "altitude": {
+      "menu": {
+        "title": "高度"
+      },
+      "title": "高度センサー"
+    },
+    "average": {
+      "altitude": "平均高度",
+      "co2": "平均CO2",
+      "distance": "平均距離",
+      "fertility": "平均出生率",
+      "humidity": "平均湿度",
+      "light": "平均光",
+      "moisture": "平均水分",
+      "pressure": "平均圧力",
+      "temperature": "平均温度",
+      "uva": "平均UVA",
+      "uvb": "平均UVB",
+      "uvi": "平均UVインデックス"
+    },
+    "co2": {
+      "menu": {
+        "title": "CO2"
+      },
+      "title": "CO2センサー"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "センサー ''{name}''を無視したいですか？"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "センサー ''{name}''を削除したいですか？"
+      },
+      "error": {
+        "message": "センサー ''{name}''は削除できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "センサー ''{name}''が削除されます。"
+      }
+    },
+    "distance": {
+      "menu": {
+        "title": "距離"
+      },
+      "title": "距離センサー"
+    },
+    "exclude": {
+      "error": {
+        "message": "センサー ''{name}''は無視できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "センサー ''{name}''は無視されます。"
+      }
+    },
+    "fertility": {
+      "menu": {
+        "title": "土壌肥沃度"
+      },
+      "title": "不妊センサー"
+    },
+    "humidity": {
+      "menu": {
+        "title": "湿度"
+      },
+      "title": "湿度センサー"
+    },
+    "light": {
+      "menu": {
+        "title": "照明"
+      },
+      "title": "光センサー"
+    },
+    "menu": {
+      "new": {
+        "title": "センサーを追加"
+      },
+      "scan": {
+        "title": "センサーをスキャンする"
+      },
+      "title": "センサー"
+    },
+    "moisture": {
+      "menu": {
+        "title": "モイスチャー"
+      },
+      "title": "湿気センサー"
+    },
+    "ph": {
+      "menu": {
+        "title": "pH"
+      },
+      "title": "pHセンサー"
+    },
+    "pressure": {
+      "menu": {
+        "title": "気圧"
+      },
+      "title": "圧力センサー"
+    },
+    "settings": {
+      "address": {
+        "help": "アドレスを入力します.",
+        "invalid": "入力されたアドレスは無効です。空にすることはできません。.",
+        "label": "アドレス",
+        "placeholder": "アドレスを入力します"
+      },
+      "alarm_max": {
+        "help": "アラームの最大値を入力してください。.",
+        "invalid": "入力された値は無効です。番号である必要があります。.",
+        "label": "アラームの最大値",
+        "placeholder": "アラームの最大値"
+      },
+      "alarm_min": {
+        "help": "アラームの最低値を入力してください。.",
+        "invalid": "入力された値は無効です。番号である必要があります。.",
+        "label": "アラームの最低値",
+        "placeholder": "アラームの最低値"
+      },
+      "calibration": {
+        "ccs811_compensation_sensors": {
+          "help": "報酬計算のためにセンサーを選択します。.",
+          "label": "補償センサー",
+          "placeholder": "補償センサーを選択します"
+        },
+        "chirp_max_moist": {
+          "help": "最大湿気を入力します。.",
+          "invalid": "入力された値は無効です。{min}よりも高い数値である必要があります。.",
+          "label": "最高水分値"
+        },
+        "chirp_min_moist": {
+          "help": "最小湿気の値を入力します。.",
+          "invalid": "入力された値は無効です。{min}よりも高い数値である必要があります。.",
+          "label": "最低水分値"
+        },
+        "offset": {
+          "help": "該当センサーのオフセット値を入力してください。.",
+          "invalid": "入力された値は無効です。番号である必要があります。.",
+          "label": "オフセット"
+        }
+      },
+      "current": {
+        "help": "センサーの現在の状態。.",
+        "label": "現在",
+        "placeholder": "現在の価値"
+      },
+      "exclude_avg": {
+        "help": "該当センサーを平均計算から除外します。.",
+        "label": "平均除外"
+      },
+      "fields": {
+        "error": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+      },
+      "hardware": {
+        "help": "該当ボタンの種類を選択してください。.",
+        "invalid": "種類を選択してください。.",
+        "label": "ハードウェア",
+        "placeholder": "ハードウェアを選択します"
+      },
+      "limit_max": {
+        "help": "有効な最大値を入力します。.",
+        "invalid": "入力された値は無効です。番号である必要があります。.",
+        "label": "最大制限"
+      },
+      "limit_min": {
+        "help": "有効な最小値を入力します。.",
+        "invalid": "入力された値は無効です。番号である必要があります。.",
+        "label": ""
+      },
+      "max_diff": {
+        "help": "有効な2つの測定値に最大差を入力します。「0」を入力して無効にします。.",
+        "invalid": "入力された値は無効です。{min}よりも高い数値である必要があります。.",
+        "label": "Max Diff",
+        "placeholder": "最大差"
+      },
+      "name": {
+        "help": "覚えやすい名前を入力してください。.",
+        "invalid": "入力された名前は無効です。空にすることはできません。.",
+        "label": "名",
+        "placeholder": "名前を入力します"
+      },
+      "save": {
+        "ok": {
+          "message": "センサー ''{name}''が更新されます."
+        }
+      },
+      "title": "センサー設定",
+      "type": {
+        "help": "センサーの測定タイプを選択してください。.",
+        "invalid": "測定タイプを選択してください。.",
+        "label": "タイプ",
+        "placeholder": "[タイプ]を選択します"
+      }
+    },
+    "temperature": {
+      "menu": {
+        "title": "温度"
+      },
+      "title": "温度センサー"
+    },
+    "title": "センサー",
+    "uva": {
+      "menu": {
+        "title": "紫外線A波"
+      },
+      "title": "UVAセンサー"
+    },
+    "uvb": {
+      "menu": {
+        "title": "紫外線B波"
+      },
+      "title": "UVBセンサー"
+    },
+    "uvi": {
+      "menu": {
+        "title": "UVインデックス"
+      },
+      "title": "UVIセンサー"
+    }
+  },
+  "services": {
+    "actions": {
+      "delete": "サービスを削除します",
+      "edit": "サービスの編集"
+    },
+    "add": "サービスを追加",
+    "delete": {
+      "confirm": {
+        "message": "サービス ''{name}''を削除したいですか？"
+      },
+      "error": {
+        "message": "サービス ''{name}''は削除できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "サービス ''{name}''が削除されます。"
+      }
+    },
+    "enabled": "有効",
+    "ratelimit": "{number, plural, =0 {無制限のメッセージ} other {1分あたりの最大＃}}",
+    "settings": {
+      "enabled": {
+        "help": "通知サービス.",
+        "label": "有効"
+      },
+      "name": {
+        "help": "覚えやすい名前を入力してください。.",
+        "invalid": "入力された名前は無効です。空にすることはできません。.",
+        "label": "名",
+        "placeholder": "名前を入力します"
+      },
+      "rate_limit": {
+        "help": "このサービスの最大メッセージ数あたりのメッセージ。無制限に0を使用します。.",
+        "invalid": "入力された値は無効です。{min}よりも高い有効な数字を入力します。.",
+        "label": "制限",
+        "placeholder": "1分あたりのメッセージ"
+      },
+      "save": {
+        "error": {
+          "required_fields": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+        },
+        "ok": {
+          "message": "サービス''{name}''が更新されます."
+        }
+      },
+      "setup": {
+        "address": {
+          "help": "アドレスを入力してください。.",
+          "invalid": "入力されたアドレスは無効です。空にすることはできません。.",
+          "label": "アドレス",
+          "placeholder": "アドレスを入力します"
+        },
+        "api_token": {
+          "help": "解像度を入力してください。.",
+          "invalid": "入力されたAPIトークンは無効です。空にすることはできません。.",
+          "label": "APIトークン",
+          "placeholder": "解像度を入力してください。"
+        },
+        "buzzer": {
+          "help": "メッセージ主題で使用できる曲のリスト。."
+        },
+        "green": {
+          "help": "緑色の光のためにGPIOピンを入力します。.",
+          "invalid": "入力された値は無効です。{min}と{max}の間に有効な番号を入力します。.",
+          "label": "青",
+          "placeholder": "グリーンGPIOピンを入力します"
+        },
+        "hardware": {
+          "help": "このリレーの種類を選択してください。.",
+          "invalid": "選択してください。.",
+          "label": "ハードウェア",
+          "placeholder": "ハードウェアを選択します"
+        },
+        "password": {
+          "help": "サーバーパスワードを入力します。.",
+          "label": "サーバーパスワード",
+          "placeholder": "名前を入力してください。"
+        },
+        "port": {
+          "help": "サーバーポート番号を入力します。.",
+          "invalid": "入力されたポート番号は無効です。空にすることはできません。.",
+          "label": "サーバポート",
+          "placeholder": "名前を入力してください。"
+        },
+        "pushover": {
+          "label": "Terrariumpiをアプリ{link}として登録して、トークンを作成します。"
+        },
+        "receiver": {
+          "help": "アドレスを入力してください。.",
+          "invalid": "アドレスは必須項目です。.",
+          "label": "受信用メールアドレス",
+          "placeholder": "メールアドレスを入力"
+        },
+        "red": {
+          "help": "赤信号のためにGPIOピンを入力します。.",
+          "invalid": "入力された値は無効です。{min}と{max}の間に有効な番号を入力します。.",
+          "label": "赤",
+          "placeholder": "赤いgpioピンを入力します"
+        },
+        "show_title": {
+          "help": "表示器にタイトルを表示します。.",
+          "label": "タイトルを表示"
+        },
+        "ssl": {
+          "email": {
+            "label": "メール通知サービスは、SSL・TLS接続を自動的に検出します。"
+          },
+          "mqtt": {
+            "label": "MQTT通知サービスは、SSL/TLS接続を自動検出します。"
+          }
+        },
+        "url": {
+          "help": "最高水分値を入力してください。.",
+          "invalid": "入力されたURLは無効です。空にすることはできません。.",
+          "label": "フルポストURL",
+          "placeholder": "最高水分値を入力してください。"
+        },
+        "user_key": {
+          "help": ".",
+          "invalid": "入力されたユーザーキーは無効です。空にすることはできません。.",
+          "label": "ユーザーキー",
+          "placeholder": "解像度を入力してください。"
+        },
+        "username": {
+          "help": "サーバーのユーザー名を入力します。.",
+          "label": "サーバーユーザー名",
+          "placeholder": "名前を入力してください。"
+        },
+        "yellow": {
+          "help": "mber光のためにGpio Pinを入力します。.",
+          "invalid": "入力された値は無効です。{min}と{max}の間に有効な番号を入力します。.",
+          "label": "アンバー",
+          "placeholder": "Amber Gpio Pinを入力します"
+        }
+      },
+      "title": "通知サービス設定",
+      "type": {
+        "help": "通知サービス.",
+        "invalid": "選択してください。.",
+        "label": "タイプ",
+        "placeholder": "[タイプ]を選択します"
+      }
+    },
+    "title": "通知サービス"
+  },
+  "system": {
+    "log": {
+      "download": {
+        "title": "ログファイルをダウンロード"
+      },
+      "filters": {
+        "errors": "エラー",
+        "search": "検索用語を入力します",
+        "title": "フィルター",
+        "warnings": "警告"
+      },
+      "lines": "{lines}行",
+      "loading": "データのロード",
+      "title": "システムログ"
+    },
+    "menu": {
+      "log": {
+        "title": "ログ"
+      },
+      "notifications": {
+        "title": "通知"
+      },
+      "reboot": {
+        "title": "再起動"
+      },
+      "restart": {
+        "title": "リスタート"
+      },
+      "settings": {
+        "title": "設定"
+      },
+      "shutdown": {
+        "title": "シャットダウン"
+      },
+      "status": {
+        "title": "ステータス"
+      },
+      "title": "システム"
+    },
+    "notifications": {
+      "title": "通知"
+    },
+    "settings": {
+      "all_gauges_on_single_page": {
+        "help": "1つのページにすべてのセンサーに追加のメニュー項目を追加します。.",
+        "label": "単一ページのすべてのゲージ"
+      },
+      "authenticate": {
+        "help": "常に認証するか、変更が行われている場合にのみ。.",
+        "invalid": "選択してください.",
+        "label": "認証モード",
+        "options": {
+          "changes": "変更のみ",
+          "full": "完全な認証",
+          "no_authentication": "認証なし"
+        }
+      },
+      "auto_dark_mode": {
+        "help": "夜が始まるときにダークモードを切り替えます。.",
+        "label": "オートダークモード"
+      },
+      "currency": {
+        "help": "インターフェイス通貨を選択します。.",
+        "invalid": "選択してください。.",
+        "label": "通貨"
+      },
+      "dashboard_mode": {
+        "help": "ダッシュボードの外観を選択します。",
+        "invalid": "選択してください。",
+        "label": "ダッシュボード モード",
+        "options": {
+          "normal": "グラフと囲み",
+          "only_enclosures": "エンクロージャーのみ",
+          "only_graphs": "グラフのみ"
+        }
+      },
+      "distance_indicator": {
+        "help": "距離インジケータを選択します。現在の値にのみ影響します。.",
+        "invalid": "選択してください。.",
+        "label": "距離タイプ"
+      },
+      "exclude-ids": {
+        "help": "除外されたID。.",
+        "label": "除外されたID"
+      },
+      "graph_smooth_value": {
+        "help": "データポイントの量を平均して入力します。0はこの機能を無効にします。.",
+        "invalid": "％sの最小値を入力してください。.",
+        "label": "グラフスムージング"
+      },
+      "header": {
+        "cloud": "クラウド",
+        "gui": "GUI",
+        "locale": "ロケール",
+        "system": "システム"
+      },
+      "hide_environment_dashboard": {
+        "help": "ダッシュボード上のエンクロージャーデータを非表示にします。.",
+        "label": "ダッシュボードにエンクロージャを非表示にします"
+      },
+      "host": {
+        "help": "IPを入力して、接続を聞きます。デフォルト0. 0.0. 0.",
+        "invalid": "有効なIPアドレスを入力してください.",
+        "label": "IP番号"
+      },
+      "language": {
+        "help": "インターフェイス言語を選択します。これにより、数と通貨のフォーマットも変更されます。.",
+        "invalid": "選択してください.",
+        "label": "言語"
+      },
+      "meross_cloud_password": {
+        "help": "パスワードを入力して、Meross Cloudにログインします。.",
+        "label": "Merossパスワード"
+      },
+      "meross_cloud_username": {
+        "help": "ユーザー名を入力して、Meross Cloudにログインします。.",
+        "label": "Merossユーザー名"
+      },
+      "page": {
+        "title": "システム設定"
+      },
+      "password": {
+        "help": "認証用のパスワードを入力します。.",
+        "invalid": "パスワードを空にすることはできません。.",
+        "label": "新しいパスワード"
+      },
+      "password2": {
+        "help": "もう一度新しいパスワードを入力してください。.",
+        "invalid": "新しいパスワードは一致しません。.",
+        "label": "新しいパスワードを確認"
+      },
+      "pi-wattage": {
+        "help": "すべてのUSBデバイスが接続されている状態で、PIの総電力使用量を入力します。.",
+        "invalid": "％sの最小値を入力してください。.",
+        "label": "PI電力使用量"
+      },
+      "port": {
+        "help": "接続を聞くには、ポート番号を入力します。デフォルト8090.",
+        "invalid": "％sの最小値を入力してください。.",
+        "label": "ポート番号"
+      },
+      "power_price": {
+        "help": "kWhあたりの価格を入力します。.",
+        "invalid": "％sの最小値を入力してください。.",
+        "label": "電源価格"
+      },
+      "profile_image": {
+        "help": "メニューで使用されるカスタム画像を更新します。.",
+        "invalid": "無効なプロファイル画像形式。.",
+        "label": "プロフィール画像"
+      },
+      "save": {
+        "ok": {
+          "message": "設定が更新されます。",
+          "title": "OKを更新します"
+        }
+      },
+      "show_min_max_gauge": {
+        "help": "ゲージの最小値と最大値を表示します。.",
+        "label": "ゲージグラフで最小値と最大値を表示します"
+      },
+      "temperature_indicator": {
+        "help": "温度インジケーターを選択します。現在の値にのみ影響します。.",
+        "invalid": "選択してください。.",
+        "label": "温度タイプ"
+      },
+      "title": {
+        "help": "カスタムタイトルを入力します。.",
+        "invalid": "タイトルを空にすることはできません。.",
+        "label": "題名"
+      },
+      "username": {
+        "help": "認証用のユーザー名を入力します。.",
+        "invalid": "ユーザー名を空にすることはできません。.",
+        "label": "ユーザー名"
+      },
+      "water_price": {
+        "help": "L/ガロンあたりの価格を入力します。.",
+        "invalid": "％sの最小値を入力してください。.",
+        "label": "水価格"
+      },
+      "water_volume_indicator": {
+        "help": "水量インジケーターを選択します。現在の値にのみ影響します。.",
+        "invalid": "選択してください。.",
+        "label": "液体体積タイプ"
+      },
+      "wind_speed_indicator": {
+        "help": "風速インジケーターを選択します。現在の値にのみ影響します。.",
+        "invalid": "選択してください。.",
+        "label": "風速タイプ"
+      }
+    },
+    "status": {
+      "cpu_temp": {
+        "title": "CPU温度"
+      },
+      "disk": {
+        "title": "ディスクの使用状況"
+      },
+      "load": {
+        "title": "システム負荷"
+      },
+      "memory": {
+        "title": "メモリ使用量"
+      },
+      "summary": {
+        "title": "システム警告"
+      },
+      "title": "システムステータス",
+      "uptime": {
+        "title": "システムアップタイム"
+      }
+    }
+  },
+  "table": {
+    "field": {
+      "range": "範囲"
+    },
+    "header": {
+      "actions": "動作",
+      "duration": "期間",
+      "filename": "ファイル名",
+      "filesize": "ファイルサイズ",
+      "mode": "モード",
+      "name": "名",
+      "number_files": "#件のファイル",
+      "repeat": "リピート",
+      "shuffle": "シャッフル",
+      "status": "ステータス",
+      "type": "タイプ",
+      "volume": "音声ファイル"
+    }
+  },
+  "topbar": {
+    "current_status": "現状",
+    "door_status": "ドアの状態",
+    "upcoming_events": "{number, plural, =0 {イベントはありません} =1 {1つのイベント} other {＃イベント}}"
+  },
+  "userpanel": {
+    "login": {
+      "text1": "変更不可",
+      "text2": "ログイン"
+    },
+    "logout": {
+      "text1": "こんにちは{name}",
+      "text2": "ログアウト"
+    }
+  },
+  "weather": {
+    "current": "現在",
+    "forecast": "天気",
+    "menu": {
+      "title": "天気"
+    },
+    "settings": {
+      "fields": {
+        "error": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+      },
+      "information": "天気システムを使用するには、％sで無料のアカウントを作成してください。",
+      "save": {
+        "ok": {
+          "message": ""
+        }
+      },
+      "title": "天気設定",
+      "weather_source": {
+        "help": "OpenWeatherMapのAPI用のURLを次のようなフォーマットで入力してください：％s.",
+        "invalid": "",
+        "label": "ソースURL"
+      }
+    },
+    "title": "天気"
+  },
+  "webcams": {
+    "actions": {
+      "delete": "Webカメラを削除します",
+      "ignore": "ウェブカメラを無視します",
+      "settings": "ウェブカメラを編集します"
+    },
+    "archive": {
+      "no_images": "利用可能なアーカイブ画像はありません"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "webcam ''{name}''を無視したいですか？"
+      }
+    },
+    "controls": {
+      "archive": "記録",
+      "new_marker": "マーカーを追加します",
+      "save_raw_image": "生の画像を保存します",
+      "show_markers": "マーカーを表示します",
+      "toggle_volume": "ボリュームを切り替えます"
+    },
+    "delete": {
+      "confirm": {
+        "message": "webcam ''{name}''を削除したいですか？"
+      },
+      "error": {
+        "message": "webcam ''{name}''は削除できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "webcam ''{name}''が削除されます。"
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "webcam ''{name}''は無視できませんでした！\nエラー：{error}"
+      },
+      "ok": {
+        "message": "webcam ''{name}''は無視されます。"
+      }
+    },
+    "marker": {
+      "delete": {
+        "confirm": {
+          "message": "マーカーを削除してもよろしいですか？"
+        },
+        "error": {
+          "message": "マーカーを削除できませんでした"
+        },
+        "invalid": {
+          "message": "無効なマーカー"
+        }
+      }
+    },
+    "markers": {
+      "settings": {
+        "delete": "削除",
+        "doors": {
+          "help": "見せたい上院議員を選択してください。.",
+          "invalid": "選択してください。.",
+          "label": "センサー"
+        },
+        "title": "センサー"
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "カメラを追加"
+      },
+      "status": {
+        "title": "ステータス"
+      },
+      "title": "カメラ"
+    },
+    "settings": {
+      "address": {
+        "help": "詳細については、オンラインを参照してください。.",
+        "invalid": "入力されたアドレスは無効です。空にすることはできません。.",
+        "label": "アドレス",
+        "placeholder": "アドレスを入力します"
+      },
+      "archive": {
+        "door": {
+          "help": "アーカイブ画像を取得するためのドアステータス。.",
+          "invalid": "選択してください。.",
+          "label": "アーカイブドア状態",
+          "options": {
+            "close": "閉じる",
+            "ignore": "ミュート",
+            "open": "開"
+          },
+          "placeholder": "アーカイブドア状態を選択します"
+        },
+        "flash": {
+          "help": "フラッシャーとして機能するリレーを選択します。.",
+          "invalid": "選択してください。.",
+          "label": "フラッシュ",
+          "placeholder": "フラッシュ用のオプションのリレーを選択します"
+        },
+        "light": {
+          "help": "アーカイブ画像を取得するためのライトステータス。.",
+          "invalid": "選択してください。.",
+          "label": "ライト状態アーカイブ",
+          "options": {
+            "ignore": "ミュート",
+            "off": "オフの場合",
+            "on": "オンの場合"
+          },
+          "placeholder": "アーカイブライト状態を選択します"
+        },
+        "options": {
+          "day_1": "1日",
+          "disabled": "無効",
+          "hour_1": "30分",
+          "hour_12": "12時間",
+          "hour_3": "3時間",
+          "hour_6": "6時間",
+          "minute_1": "1分",
+          "minute_15": "15分",
+          "minute_30": "30分",
+          "minute_5": "5分",
+          "motion": "モーション"
+        },
+        "state": {
+          "help": "アーカイブ画像間の期間を選択します。.",
+          "invalid": "選択してください。.",
+          "label": "アーカイブ設定",
+          "placeholder": "アーカイブを選択します"
+        }
+      },
+      "awb": {
+        "help": "ホワイトバランスを設定してください。.",
+        "invalid": "選択してください。.",
+        "label": "ホワイトバランス",
+        "options": {
+          "auto": "自動",
+          "cloudy": "曇",
+          "flash": "フラッシュ",
+          "fluorescent": "蛍光",
+          "greyworld": "greyworld",
+          "horizon": "水平線",
+          "incandescent": "白熱灯",
+          "off": "オフ",
+          "shade": "日陰",
+          "sunlight": "太陽光",
+          "tungsten": "タングステン"
+        },
+        "placeholder": "ホワイトバランスを選択します"
+      },
+      "hardware": {
+        "help": "該当ボタンの種類を選択してください。.",
+        "invalid": "種類を選択してください。.",
+        "label": "ハードウェア",
+        "placeholder": "ハードウェアを選択します"
+      },
+      "height": {
+        "help": "ピクセルの解像度の高さを入力します。.",
+        "invalid": "％sの最小値を入力してください。.",
+        "label": "高さ"
+      },
+      "motion": {
+        "area": {
+          "help": "エリアサイズを入力します。.",
+          "invalid": "％sの最小値を入力してください。.",
+          "label": "モーション最小エリア",
+          "placeholder": "番号を入力します"
+        },
+        "boxes": {
+          "help": "アーカイブされた画像にモーションボックスを表示します。.",
+          "invalid": "選択してください。.",
+          "label": "モーションボックスを表示します",
+          "options": {
+            "blue": "青",
+            "green": "青",
+            "none": "なし",
+            "red": "赤"
+          },
+          "placeholder": "モーションボックスを表示します"
+        },
+        "frame": {
+          "help": "モーション検出に使用するフレーム。.",
+          "invalid": "選択してください。.",
+          "label": "モーション比較フレーム",
+          "options": {
+            "archived": "最後のアーカイブされたフレーム",
+            "last": "最後のフレーム"
+          },
+          "placeholder": "比較するフレームを選択します"
+        },
+        "threshold": {
+          "help": "モーションしきい値を入力します。.",
+          "invalid": "％sの最小値を入力してください。.",
+          "label": "モーションデルタしきい値",
+          "placeholder": "番号を入力します"
+        }
+      },
+      "name": {
+        "help": "覚えやすい名前を入力してください。.",
+        "invalid": "入力された名前は無効です。空にすることはできません。.",
+        "label": "名",
+        "placeholder": "名前を入力します"
+      },
+      "preview": {
+        "label": "プレビュー"
+      },
+      "rotation": {
+        "help": "回転角度を選択してください。.",
+        "invalid": "選択してください。.",
+        "label": "回転（角度）",
+        "options": {
+          "degrees_0": "0 度",
+          "degrees_180": "180度",
+          "degrees_270": "270度",
+          "degrees_90": "90度",
+          "flip_h": "水平反転",
+          "flip_v": "垂直反転",
+          "zero_degrees": "0 度"
+        },
+        "placeholder": "選択を選択します"
+      },
+      "save": {
+        "error": {
+          "required_fields": "必要なすべてのフィールドが正しく入力されるわけではありません。"
+        },
+        "ok": {
+          "message": "webcam ''{name}''が更新されます."
+        }
+      },
+      "title": "カメラ設定",
+      "width": {
+        "help": "ピクセルで解像度幅を入力します。.",
+        "invalid": "％sの最小値を入力してください。.",
+        "label": "幅"
+      }
+    },
+    "title": "カメラ"
+  }
+}

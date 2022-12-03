@@ -142,7 +142,11 @@ class terrariumButton(object):
   def load_hardware(self):
     address = self._address
 
-    if len(address) >= 2:
+    if terrariumUtils.is_valid_url(self.address):
+      # Remote button
+      self._device['device'] = self.address
+
+    elif len(address) >= 2:
       # IO Expander in use... Only valid for motion and magnetic... LDR seems not suitable at the moment
       if address[0].lower().startswith('pcf8575-'):
         self._device['device'] = terrariumIOExpander('PCF8575',','.join(address[1:]))
@@ -221,4 +225,7 @@ class terrariumButton(object):
     self._checker['thread'].join()
 
     if not isinstance(self._device['device'], terrariumIOExpander):
-      GPIO.cleanup(self._device['device'])
+      try:
+        GPIO.cleanup(self._device['device'])
+      except Exception as ex:
+        pass

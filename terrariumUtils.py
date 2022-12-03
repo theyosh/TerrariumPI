@@ -466,7 +466,7 @@ class terrariumUtils():
     return re.sub(strip_regex, '', str(address), 0, re.MULTILINE)
 
   @staticmethod
-  def get_translator(lang = 'en'):
+  def get_translator(lang = 'en-US'):
     # Load language
-    trans = gettext.translation('terrariumpi', 'locales/', languages=(lang,))
+    trans = gettext.translation('terrariumpi', 'locales/', languages=(lang.replace('-','_'),))
     return trans.gettext

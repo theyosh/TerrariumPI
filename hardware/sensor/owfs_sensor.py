@@ -50,8 +50,8 @@ class terrariumOWFSSensor(terrariumSensor):
                                 unit_value_callback = unit_value_callback,
                                 trigger_callback    = trigger_callback)
 
-        except protocol.OwnetError as ex:
-          logger.warning(f'Some problems with OWFS reading temperature: {ex}')
+        except Exception as ex:
+          logger.debug(f'Some problems with OWFS reading temperature: {ex}')
 
         try:
           float(proxy.read(sensor + '/humidity'))
@@ -63,8 +63,8 @@ class terrariumOWFSSensor(terrariumSensor):
                                 unit_value_callback = unit_value_callback,
                                 trigger_callback    = trigger_callback)
 
-        except protocol.OwnetError as ex:
-          logger.warning(f'Some problems with OWFS reading humidity: {ex}')
+        except Exception as ex:
+          logger.debug(f'Some problems with OWFS reading humidity: {ex}')
 
     except Exception:
       # No hardware available

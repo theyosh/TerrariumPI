@@ -3,7 +3,7 @@ VERSION ?= $(shell grep -E "__version__ = '(.*)'" terrariumPI.py | grep -Po [0-9
 GITHUB_SHA ?= $(shell git rev-parse HEAD)
 
 
-.PHONY: build run logs
+.PHONY: all build run logs gui
 
 all: build push
 
@@ -37,6 +37,10 @@ restart:
 
 logs:
 	docker-compose logs -f
+
+gui:
+	npm install
+	npm run build
 
 docs:
 	bundle install

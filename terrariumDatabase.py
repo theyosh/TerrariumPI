@@ -51,10 +51,11 @@ def create_defaults(version):
     {'id' : 'pi_wattage',                 'value' : '5'},
     {'id' : 'username',                   'value' : 'admin'},
     {'id' : 'password',                   'value' : terrariumUtils.generate_password('password')},
-    {'id' : 'profile_image',              'value' : 'static/assets/img/profile_image.jpg'},
+    {'id' : 'profile_image',              'value' : 'img/terrariumpi.jpg'},
     {'id' : 'always_authenticate',        'value' : 'false'},
     {'id' : 'weather_source',             'value' : ''},
-    {'id' : 'language',                   'value' : 'EN'},
+    {'id' : 'language',                   'value' : 'en_US'},
+    {'id' : 'currency',                   'value' : 'eur'},
     {'id' : 'title',                      'value' : 'TerrariumPI'},
     {'id' : 'exclude_ids',                'value' : ''},
     {'id' : 'power_price',                'value' : '0'},
@@ -66,7 +67,7 @@ def create_defaults(version):
     {'id' : 'distance_indicator',         'value' : 'cm'},
     {'id' : 'water_volume_indicator',     'value' : 'l'},
     {'id' : 'show_min_max_gauge',         'value' : 'false'},
-    {'id' : 'hide_environment_dashboard', 'value' : 'false'},
+    {'id' : 'dashboard_mode',             'value' : '0'},
     {'id' : 'all_gauges_on_single_page',  'value' : 'false'},
     {'id' : 'graph_smooth_value',         'value' : '0'},
     {'id' : 'auto_dark_mode',             'value' : '0'},
@@ -231,6 +232,12 @@ class Enclosure(db.Entity):
       image.rename(image_name)
       self.image = str(image_name)
 
+  def delete_image(self):
+    image = Path(self.image)
+    if image.exists() and image.is_file():
+      image.unlink()
+
+  # Pony DB Hooks
   def before_insert(self):
     self.__rename_image()
 
@@ -238,9 +245,7 @@ class Enclosure(db.Entity):
     self.__rename_image()
 
   def before_delete(self):
-    image = Path(self.image)
-    if image.exists() and image.is_file():
-      image.unlink()
+    self.delete_image()
 
   def __repr__(self):
     return f'Enclosure {self.name} with {len(self.areas)} areas'
@@ -335,8 +340,7 @@ class Relay(db.Entity):
 
   @property
   def value(self):
-    timestamp_limit = datetime.now() - timedelta(seconds=Relay.__MAX_VALUE_AGE)
-    value = self.history.filter(lambda h: h.timestamp >= timestamp_limit).order_by(orm.desc(RelayHistory.timestamp)).first()
+    value = self.history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(seconds=Relay.__MAX_VALUE_AGE)).order_by(orm.desc(RelayHistory.timestamp)).first()
     if value:
       return value.value
 
@@ -443,7 +447,10 @@ class Sensor(db.Entity):
 
   @property
   def offset(self):
-    return 0 if self.calibration is None else self.calibration.get('offset', 0)
+    try:
+      return float(self.calibration.get('offset', 0.0))
+    except Exception:
+      return 0
 
   @property
   def alarm(self):

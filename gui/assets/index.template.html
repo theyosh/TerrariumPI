@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html __HTML_ATTRS__>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<meta name="description" content="Software for automating your reptile enclosure or any other area. Using sensors and relays to keep your environment at a controlled state. All with a nice web interface.">
+	<!-- __METAS__ -->
+	<title>TerrariumPI</title>
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- __LINKS__ -->
+
+	<script defer src="js/jquery.min.js"></script>
+	<script defer src="js/select2.min.js"></script>
+
+	<script defer src="js/fullcalendar.min.js"></script>
+	<script defer src="js/fullcalendar-locales.min.js"></script>
+
+	<script defer src="js/jquery.knob.min.js"></script>
+
+	<script defer src="js/jquery.dataTables.min.js"></script>
+	<script defer src="js/dataTables.bootstrap4.min.js"></script>
+	<script defer src="js/dataTables.responsive.min.js"></script>
+	<script defer src="js/responsive.bootstrap4.min.js"></script>
+	<!-- __SCRIPTS__ -->
+	<script>
+	window.terrariumPI = {
+	language : '{{ lang }}',
+	currency : '{{ currency }}',
+		name     : '{{ title }}',
+		version  : '{{ version }}',
+		device   : '{{ device }}',
+		profile  : '{{ profile_image }}',
+		favicon  : '{{ favicon }}',
+		logged_in : {% if authenticated %}true{% else %}false{% endif %},
+		{% if authenticated %}username: '{{ username }}', {% endif %}
+
+		gitversion: '{% if authenticated %}{{gitversion}}{% endif %}',
+		graph_show_min_max_gauge : {{ graph_show_min_max_gauge }},
+		graph_smooth_value : {{ graph_smooth_value }},
+		show_gauge_overview: {{ show_gauge_overview }},
+		auto_dark_mode : {{ auto_dark_mode }},
+		is_night : {{ is_night }},
+		dashboard_mode : {{ dashboard_mode }},
+		units: {{ units }},
+		available_sensor_types : {{available_sensor_types}}
+	};
+</script>
+</head>
+<body class="sidebar-mini layout-fixed layout-navbar-fixed">
+	<div id="app"></div>
+</body>
+</html>

@@ -66,7 +66,7 @@ class terrariumCalendar(object):
     return return_data
 
   def create_event(self, uid, summary, description, location = None, dtstart = None, dtend = None, freq = None, interval = None, repeat_end = None):
-    create = uid is None or '' == uid
+    create = uid is None or uid == ''
 
     if dtstart is None:
       dtstart = datetime.now(timezone.utc)
@@ -76,7 +76,8 @@ class terrariumCalendar(object):
       dtend = dtstart
 
     event = Event()
-    uid = uid if uid is not None else '{}'.format(datetime.now(timezone.utc).timestamp())
+    if create:
+      uid = str(datetime.now(timezone.utc).timestamp())
     event.add('uid',uid)
 
     event.add('summary', summary)
@@ -100,8 +101,7 @@ class terrariumCalendar(object):
 
     else:
       for subcomponent in self.__ical.subcomponents:
-        if subcomponent.get('uid') == uid:
-
+        if str(subcomponent.get('uid')) == str(uid):
           if location is None and subcomponent.get('location'):
             del(subcomponent['location'])
 
@@ -119,7 +119,7 @@ class terrariumCalendar(object):
   def get_event(self,uid):
     # This will always return a copy of the event in the ical. Changes will not be saved
     for subcomponent in self.__ical.subcomponents:
-      if subcomponent.get('uid') == uid:
+      if str(subcomponent.get('uid')) == str(uid):
         return self.__event_schema(subcomponent)
 
     return False

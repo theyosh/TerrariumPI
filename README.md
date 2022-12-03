@@ -19,94 +19,94 @@ Extra documentation can be found at [https://theyosh.github.io/TerrariumPI/](htt
 
 Think off:
 
-  - Terrarium (wet or dry)
-  - Aquarium
-  - Tanks with animals or plants
-  - Greenhouse
+- Terrarium (wet or dry)
+- Aquarium
+- Tanks with animals or plants
+- Greenhouse
 
 And all this is controlled with a nice web interface based on AdminLTE 3 with Bootstrap 4.
 
 ## Table of Contents
 
-  1. [Features](#features)
-  2. [Translations](#translations)
-  3. [Installation](#installation)
-  4. [Updating](#updating)
-  5. [Hardware](#hardware)
-     1. [GPIO numbering](#gpio-numbering)
-     2. [New hardware](#new-hardware)
-  6. [Remote data](#remote-data)
-  7. [Contributors](#contributors)
-  8. [Screenshots](#screenshots)
-  9. [Testing](#testing)
-  10. [About](#about)
+1. [Features](#features)
+2. [Translations](#translations)
+3. [Installation](#installation)
+4. [Updating](#updating)
+5. [Hardware](#hardware)
+   1. [GPIO numbering](#gpio-numbering)
+   2. [New hardware](#new-hardware)
+6. [Remote data](#remote-data)
+7. [Contributors](#contributors)
+8. [Screenshots](#screenshots)
+9. [Testing](#testing)
+10. [About](#about)
 
 ## Features
 
-  - Controlling electronic devices like lights, sprayers, heating, cooling, water pump equipment etc
-  - Support for dimming electronic devices
-    - Manual dimming through web interface
-    - Predefined on and off dimming durations
-    - Predefined on and off dimming percentages
-    - Predefined dimming steps for environment system (heater and cooler)
-  - Support for timers in power switches and environment [#72](https://github.com/theyosh/TerrariumPI/issues/72)
-    - Predefined start and stop times based on timer or weather
-    - Predefined on and off durations in minutes
-  - Support for Energenie USB, LAN and RF power switches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
-  - Support for WeMo Wifi power switches
-  - Support for [Meross MSS425E Power Switches](https://www.meross.com/product/16/article/) (Requires Python 3 setup)
-  - Support for Sonoff remote power devices
-    - [Tasmota](https://github.com/arendst/Sonoff-Tasmota)
-  - Support for [multiple type of sensors](https://github.com/theyosh/TerrariumPI/wiki/Hardware#sensors)
-    - Temperature
-    - Humidity
-    - Moisture
-    - Conductivity
-    - Distance
-    - pH
-    - Light intensity
-    - UV A and B
-    - Fertility
-    - Volume
-  - Support for webcams and native Raspberry Pi cam out of the box
-    - Raspberry Pi cam can be streamed live with 6 seconds delay
-    - Archiving images based on motion or time interval
-  - Support for analog devices through a MCP3008
-    - Support for PH probe SKU SEN0161
-  - Support for MiFlora Bluetooth sensors
-  - Open door detection. This can be used in different environment parts
-  - Total power and water usage for costs calculation
-  - Lights control based on sun rise and sun set or timers
-  - Rain control based on humidity sensors and timers
-  - Temperature control based on temperature sensors or timers
-    - Variable day and night difference for min and max temperature
-  - Water tank level control based on ultrasonic sound range sensors or volume sensors
-  - Weather forecast from external source for lighting schema
-    - Supports <https://openweathermap.org>
-  - Temperatures in Celsius or Fahrenheit
-  - Distances in centimeters or inches
-  - Alarm detections
-  - Audio support through internal audio jack or USB sound cards [#42](https://github.com/theyosh/TerrariumPI/issues/42)
-    - Create playlists (loop and repeat)
-    - Volume control in the web interface
-    - Uploading audio files through web interface
-    - Audio meta data support (mediainfo)
-  - Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
-  - Display support
-    - LCD 16x2 or 20x4 screens either through I2C or [Serial](https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/)
-    - OLED based on SSD1306
-  - Calendar system when hardware is replacement and when new hardware needs to be installed
-  - Notifications system. Custom messages for custom actions with use of variables in the messages
-    - Get notifications through
-      - Email
-      - Display
-      - Webhooks
-    - Notifications for
-      - Environment part low and high alarm
-      - Sensor high and low measurements
-      - Power switch toggle on and off
-      - Open and close doors
-      - System error and warning messages
+- Controlling electronic devices like lights, sprayers, heating, cooling, water pump equipment etc
+- Support for dimming electronic devices
+  - Manual dimming through web interface
+  - Predefined on and off dimming durations
+  - Predefined on and off dimming percentages
+  - Predefined dimming steps for environment system (heater and cooler)
+- Support for timers in power switches and environment [#72](https://github.com/theyosh/TerrariumPI/issues/72)
+  - Predefined start and stop times based on timer or weather
+  - Predefined on and off durations in minutes
+- Support for Energenie USB, LAN and RF power switches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
+- Support for WeMo Wifi power switches
+- Support for [Meross MSS425E Power Switches](https://www.meross.com/product/16/article/) (Requires Python 3 setup)
+- Support for Sonoff remote power devices
+  - [Tasmota](https://github.com/arendst/Sonoff-Tasmota)
+- Support for [multiple type of sensors](https://github.com/theyosh/TerrariumPI/wiki/Hardware#sensors)
+  - Temperature
+  - Humidity
+  - Moisture
+  - Conductivity
+  - Distance
+  - pH
+  - Light intensity
+  - UV A and B
+  - Fertility
+  - Volume
+- Support for webcams and native Raspberry Pi cam out of the box
+  - Raspberry Pi cam can be streamed live with 6 seconds delay
+  - Archiving images based on motion or time interval
+- Support for analog devices through a MCP3008
+  - Support for PH probe SKU SEN0161
+- Support for MiFlora Bluetooth sensors
+- Open door detection. This can be used in different environment parts
+- Total power and water usage for costs calculation
+- Lights control based on sun rise and sun set or timers
+- Rain control based on humidity sensors and timers
+- Temperature control based on temperature sensors or timers
+  - Variable day and night difference for min and max temperature
+- Water tank level control based on ultrasonic sound range sensors or volume sensors
+- Weather forecast from external source for lighting schema
+  - Supports <https://openweathermap.org>
+- Temperatures in Celsius or Fahrenheit
+- Distances in centimeters or inches
+- Alarm detections
+- Audio support through internal audio jack or USB sound cards [#42](https://github.com/theyosh/TerrariumPI/issues/42)
+  - Create playlists (loop and repeat)
+  - Volume control in the web interface
+  - Uploading audio files through web interface
+  - Audio meta data support (mediainfo)
+- Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
+- Display support
+  - LCD 16x2 or 20x4 screens either through I2C or [Serial](https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/)
+  - OLED based on SSD1306
+- Calendar system when hardware is replacement and when new hardware needs to be installed
+- Notifications system. Custom messages for custom actions with use of variables in the messages
+  - Get notifications through
+    - Email
+    - Display
+    - Webhooks
+  - Notifications for
+    - Environment part low and high alarm
+    - Sensor high and low measurements
+    - Power switch toggle on and off
+    - Open and close doors
+    - System error and warning messages
 
 It is currently controling my reptile terrarium since 2015! And my Madagascar Day Gecko is very happy with it!
 
@@ -123,18 +123,18 @@ Your language not in the list or not up to date? [Create your own language trans
 The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/). For now the Desktop/Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
 It is possible to use USB or SSD drives to speed things up: <https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb>
 
-1. Get a working Raspberry Pi and login as user 'pi'<br>
-  `ssh pi@[raspberry_ip]`
-2. Install git<br>
-  `sudo apt -y install git`
-3. Clone this repository and submodules!<br>
-  `git clone --depth 1 https://github.com/theyosh/TerrariumPI.git`
-4. Enter the new TerrariumPI folder<br>
-  `cd TerrariumPI`
-5. Run the installer script and wait<br>
-  `sudo ./install.sh`
-6. Reboot Raspberry PI to get all the needed modules loaded<br>
-  `sudo reboot` (if done manual)
+1. Get a working Raspberry Pi and login as user 'pi' \
+   `ssh pi@[raspberry_ip]`
+2. Install git \
+   `sudo apt -y install git`
+3. Clone this repository and submodules! \
+   `git clone --depth 1 https://github.com/theyosh/TerrariumPI.git`
+4. Enter the new TerrariumPI folder \
+   `cd TerrariumPI`
+5. Run the installer script and wait \
+   `sudo ./install.sh`
+6. Reboot Raspberry PI to get all the needed modules loaded \
+   `sudo reboot` (if done manual)
 7. Go to the web interface at <http://[raspberry_ip>]:8090 (login: **admin/password**)
 
 All needed options and modules are setup by the installer script. This means that I2C and 1Wire overlay are enabled by default.
@@ -145,15 +145,15 @@ Make sure that your Pi is secured when you put it to the Internet. Would be a sh
 
 This updating is based on that the software is installed with the steps in the Installation above. When updating between release versions it will take more time due to database updates and cleanups. This can be seen in the logfile.
 
-1. Get a working Raspberry Pi and login as user 'pi'<br>
-  `ssh pi@[raspberry_ip]`
-2. Enter the TerrariumPI folder<br>
-  `cd TerrariumPI`
-3. Update the new code with git<br>
-  `git pull`
-4. Re-run the installation script in order to update software dependencies<br>
-  `sudo ./install.sh`
-4. Restart TerrariumPI: `sudo service terrariumpi restart`
+1. Get a working Raspberry Pi and login as user 'pi' \
+   `ssh pi@[raspberry_ip]`
+2. Enter the TerrariumPI folder \
+   `cd TerrariumPI`
+3. Update the new code with git \
+   `git pull`
+4. Re-run the installation script in order to update software dependencies \
+   `sudo ./install.sh`
+5. Restart TerrariumPI: `sudo service terrariumpi restart`
 
 Now **clear your browser cache** and reload the web interface. A brand new version should be running.
 
@@ -237,11 +237,11 @@ more information is here: [Remote data wiki](https://github.com/theyosh/Terrariu
 
 ![TerrariumPI 4.0 MOTD screenshot](screenshots/terrariumpi-motd.webp)
 
-More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/master/screenshots)
+More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/main/screenshots)
 
 ## Testing
 
-[Free tested with BrowserStack for opensource](https://browserstack.com)
+[Free tested with BrowserStack for open source](https://browserstack.com)
 [![BrowserStack](screenshots/BrowserStack.webp)](https://browserstack.com)
 
 ## About

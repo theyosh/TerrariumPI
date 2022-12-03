@@ -65,14 +65,19 @@ class terrariumEngine(object):
       N_('fertility')   : 'µS/cm',
       N_('co2')         : 'ppm',
       N_('volume')      : 'L',
+
+      # New version... should replace 'volume'
+      N_('water_volume')      : 'L',
+
       N_('watertank')   : 'L',
       N_('windspeed')   : 'kmh',
       N_('water_flow')  : 'L/m',
       N_('wattage')     : 'W',
+      N_('powerusage')     : 'kWh',
     }
 
-    self.__engine = {'exit' : threading.Event(),
-                     'thread' : None,
+    self.__engine = {'exit'    : threading.Event(),
+                     'thread'  : None,
                      'logtail' : None,
                      'too_late': 0,
                      'systemd' : sdnotify.SystemdNotifier(),
@@ -267,6 +272,9 @@ class terrariumEngine(object):
     # Custom favicon
     favicon = Path('media/favicon.ico')
     settings['favicon'] = '/media/favicon.ico' if favicon.exists() else '/favicon.ico'
+
+    if settings['profile_image'] == '':
+      settings['profile_image'] = 'public/img/terrariumpi.jpg'
 
     # Set unit values
     self.units['temperature'] = ('C' if 'celsius' == settings['temperature_indicator'] else ( 'F' if 'fahrenheit' == settings['temperature_indicator'] else 'K' ))
@@ -609,10 +617,12 @@ class terrariumEngine(object):
           sensor_data = sensor.to_dict()
 
         db_time = (time.time() - start) - measurement_time
-        self.webserver.websocket_message('gauge_update' , {'id' : sensor.id, 'value' : new_value})
+
+        sensor_data['unit'] = self.units[sensor.type]
+        sensor_data['type'] = sensor.type
+        self.webserver.websocket_message('sensor' , { field: sensor_data[field] for field in ['id', 'value', 'error', 'alarm_min', 'alarm_max', 'limit_min', 'limit_max', 'alarm', 'unit', 'type', 'name'] })
 
         # Notification message
-        sensor_data['unit'] = self.units[sensor.type]
         self.notification.message('sensor_update' , sensor_data)
 
         if new_value != current_value:
@@ -628,7 +638,8 @@ class terrariumEngine(object):
       sleep(0.1)
 
     for sensor_type, avg_data in self.sensor_averages.items():
-      self.webserver.websocket_message('gauge_update', { 'id' : f'avg_{sensor_type}', 'value' : avg_data['value']})
+      avg_data['id'] = sensor_type
+      self.webserver.websocket_message('sensor', avg_data)
 
     return True
 
@@ -638,27 +649,39 @@ class terrariumEngine(object):
     data = {}
 
     with orm.db_session():
-      for sensor in Sensor.select(lambda s: s.id in self.sensors.keys() and s.exclude_avg == False and not s.id in self.settings['exclude_ids']):
-        if sensor.value is None:
-          continue
-
+      for sensor in Sensor.select(lambda s: s.exclude_avg == False and not s.id in self.settings['exclude_ids']):
         if sensor.type not in data:
-          data[sensor.type] = {'value' : 0.0, 'count' : 0.0, 'alarm_min' : 0, 'alarm_max' : 0, 'limit_min' : 0, 'limit_max' : 0}
+          data[sensor.type] = {'value' : 0.0, 'count' : 0.0, 'error' : 0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'limit_min' : 0.0, 'limit_max' : 0.0}
+
+        if sensor.error:
+          data[sensor.type]['error'] += 1
+          continue
 
         data[sensor.type]['value']     += sensor.value
         data[sensor.type]['alarm_min'] += sensor.alarm_min
         data[sensor.type]['alarm_max'] += sensor.alarm_max
         data[sensor.type]['limit_min'] += sensor.limit_min
         data[sensor.type]['limit_max'] += sensor.limit_max
+
         data[sensor.type]['count']     += 1.0
 
     averages = {}
     for sensor_type, sensor_data in data.items():
       count = sensor_data['count']
+      if count == 0:
+        continue
+
       del(sensor_data['count'])
+      error = sensor_data['error'] > 0
+      del(sensor_data['error'])
+
       averages[sensor_type] = {}
       for part, value in sensor_data.items():
         averages[sensor_type][part] = value / count
+
+      averages[sensor_type]['error'] = error
+      averages[sensor_type]['alarm'] = not averages[sensor_type]['alarm_min'] <= averages[sensor_type]['value'] <= averages[sensor_type]['alarm_max']
+      averages[sensor_type]['unit'] = self.units[sensor_type]
 
     logger.debug(f'Calculated sensor averages in {time.time()-start:.2f} seconds.')
     return averages
@@ -905,42 +928,31 @@ class terrariumEngine(object):
       # A small sleep between sensor measurement to get a bit more responsiveness of the system
       sleep(0.1)
 
+
+  # -= NEW =-
+  def load_doors(self):
+    doors = []
+    with orm.db_session():
+      # Get all loaded buttons ordered by hardware address
+      for button in Button.select(lambda b: b.id in self.buttons.keys() and b.enclosure is not None and not b.id in self.settings['exclude_ids']):
+        doors.append(button.to_dict())
+
+    return doors
+
+
   # -= NEW =-
   # TODO: DB Optimization
   def button_action(self, button, state):
     with orm.db_session():
       button = Button[button]
       button.update(state,True)
-
-      # Update the button state on the button page
-      # TODO: Remove the hardware value.... in new GUI not needed anymore
-      self.webserver.websocket_message('button' , {'id' : button.id, 'hardware' : button.hardware, 'value' : button.value})
-
-      # Notification message
       button_data = button.to_dict()
-      self.notification.message('button_action' , button_data)
 
-      if button.enclosure:
-        # This is called a door, because has a link with an enclosure
-        # But not sure if this is handy, because of inverse use of open/closed
-        status = 'closed' if button.value else 'open'
-        self.webserver.websocket_message('door_status' , {'message' : f'Door {button.name} at enclosure {button.enclosure.name} is {status}', 'status' : status})
+    # Update the button state on the button page
+    self.webserver.websocket_message('button', button_data)
 
-        # Get a list of all the used doors and their status
-        door_status = []
-        for door in button.enclosure.doors:
-          status = 'closed' if door.value else 'open'
-          door_status.append({
-            'id' : door.id,
-            'name' : door.name,
-            'enclosure' : door.enclosure.name,
-            'enclosure_id' : str(door.enclosure.id),
-            'status' : status,
-            'message' : f'Door {door.name} is {status}'
-          })
-
-        self.webserver.websocket_message('doors' , door_status)
-
+    # Notification message
+    self.notification.message(f'button_action', button_data)
 
   # -= NEW =-
   def __load_existing_webcams(self):
@@ -1059,33 +1071,6 @@ class terrariumEngine(object):
           if area_state:
             area.state = area_state
 
-        enclosure_data = enclosure.to_dict(with_collections=True, related_objects=True)
-        enclosure_data['id']  = str(enclosure.id)
-
-        for area in list(enclosure_data['areas']):
-          enclosure_data['areas'].remove(area)
-
-          area = area.to_dict(exclude='enclosure')
-          area['id'] = str(area['id'])
-
-          enclosure_data['areas'].append(area)
-
-        for door in list(enclosure_data['doors']):
-          enclosure_data['doors'].remove(door)
-
-          door_data = door.to_dict(exclude='enclosure')
-          door_data['value'] = door.value
-
-          enclosure_data['doors'].append(door_data)
-
-        for webcam in list(enclosure_data['webcams']):
-          enclosure_data['webcams'].remove(webcam)
-
-          webcam_data = webcam.to_dict(exclude='enclosure')
-
-          enclosure_data['webcams'].append(webcam_data)
-
-        self.webserver.websocket_message('enclosure' , enclosure_data)
         measurement_time = time.time() - start
 
         logger.info(f'Updated {enclosure} in {measurement_time:.2f} seconds.')
@@ -1188,7 +1173,7 @@ class terrariumEngine(object):
     motd_data['cpu_temperature_alarm'] = tmp["cpu_temperature"] > 50
 
     motd_data['storage'] = f'{terrariumUtils.format_filesize(tmp["storage"]["used"])}({ tmp["storage"]["used"] / tmp["storage"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["storage"]["total"])}'
-    motd_data['memory'] = f'{terrariumUtils.format_filesize(tmp["memory"]["used"])}({ tmp["memory"]["used"] / tmp["memory"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["memory"]["total"])}'
+    motd_data['memory']  = f'{terrariumUtils.format_filesize(tmp["memory"]["used"])}({ tmp["memory"]["used"] / tmp["memory"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["memory"]["total"])}'
 
     system_stats = []
     system_stats.append({
@@ -1309,7 +1294,7 @@ class terrariumEngine(object):
     title_padding = int((max_line_length - max_title_length) / 3) * ' '
 
     motd_title = ''
-    for counter, __dummy in enumerate(title_part2):
+    for counter, _dummy in enumerate(title_part2):
       if '' == title_part1[counter].strip() and '' == title_part2[counter].strip() and '' == title_part3[counter].strip():
         continue
 
@@ -1321,7 +1306,7 @@ class terrariumEngine(object):
 
     # Current version and update message
     update_available = False if self.latest_version is None else Version(self.version) < Version(self.latest_version)
-    motd_version = f'Version: {self.version}' + (f' / {self.latest_version}' if update_available else '')
+    motd_version = '{}: {}{}'.format(_('Version'), self.version, (f' / {self.latest_version}' if update_available else ''))
     version_length = len(motd_version)
     version_padding = (int(max_line_length*0.66) - version_length) * ' '
 
@@ -1331,7 +1316,8 @@ class terrariumEngine(object):
     motd_version = padding + version_padding + motd_version + '\n'
 
     if update_available:
-      motd_version += padding + pyfancy().yellow('New version available: https://github.com/theyosh/TerrariumPI/releases').get() + '\n'
+      motd_version += padding + pyfancy().yellow(_('A new version ({version}) is available!').format(version=self.latest_version) + ' https://github.com/theyosh/TerrariumPI/releases').get() + '\n'
+
 
     # Relays
     relays = []
@@ -1353,7 +1339,7 @@ class terrariumEngine(object):
 
         relays.append({
           'title' : f'{relay_title}  ',
-          'power' : f'{relay.current_wattage:.2f} Watt,',
+          'power' : f'{relay.current_wattage:.2f} {_("Watt")},',
           'flow'  : f'{relay.current_flow:.2f} {self.units["water_flow"]}'
         })
 
@@ -1374,8 +1360,8 @@ class terrariumEngine(object):
     max_flow     = relay_averages['flow']['max']
 
     relays_active     = len(relays)
-    relay_title_left  = len(f'Current active relays {relays_active}/{len(self.relays)}  ')
-    relay_title_right = len(f'{current_watt:.2f}/{max_watt:.2f} Watt, {current_flow:.2f}/{max_flow:.2f} {self.units["water_flow"]}')
+    relay_title_left  = len(_('Current active relays') + f' {relays_active}/{len(self.relays)}  ')
+    relay_title_right = len(f'{current_watt:.2f}/{max_watt:.2f} ' + _('Watt') + f', {current_flow:.2f}/{max_flow:.2f} {self.units["water_flow"]}')
     relay_title_padding = 0
 
     motd_relays = ''
@@ -1404,7 +1390,7 @@ class terrariumEngine(object):
         current_watt  = pyfancy().green(f'{current_watt:.2f}').get()
         current_flow  = pyfancy().blue(f'{current_flow:.2f}').get()
 
-    motd_relays = f'{padding}Current active relays ({relays_active}/{len(self.relays)})  ' + (relay_title_padding * ' ') + f'{current_watt}/{max_watt:.2f} Watt, {current_flow}/{max_flow:.2f} L/m' + '\n' + motd_relays
+    motd_relays = padding + _('Current active relays') + f' ({relays_active}/{len(self.relays)})  ' + (relay_title_padding * ' ') + f'{current_watt}/{max_watt:.2f} {_("Watt")}, {current_flow}/{max_flow:.2f} {self.units["water_flow"]}' + '\n' + motd_relays
 
     if self.__engine['too_late'] > 30:
       motd_relays += '\n'
@@ -1438,7 +1424,7 @@ class terrariumEngine(object):
     logger.info('Starting log tailing.')
     with subprocess.Popen(['tail','-F',terrariumLogging.logging.getLogger().handlers[1].baseFilename],stdout=subprocess.PIPE,stderr=subprocess.PIPE, text=True) as self.__logtail_process:
       for line in self.__logtail_process.stdout:
-        self.webserver.websocket_message('logfile_update' , line.strip())
+        self.webserver.websocket_message('logline' , line.strip())
 
     logger.info('Stopped log tailing.')
 

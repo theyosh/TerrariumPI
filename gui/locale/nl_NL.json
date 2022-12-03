@@ -1,0 +1,2115 @@
+{
+  "about": {
+    "online": {
+      "help": "Meer hulp online."
+    },
+    "title": "Over"
+  },
+  "areas": {
+    "delete": {
+      "confirm": {
+        "message": "Weet u zeker dat u het gebied ''{name}'' wilt verwijderen?"
+      },
+      "error": {
+        "message": "Het gebied ''{name}'' kon niet worden verwijderd!\nFout: {error}"
+      },
+      "ok": {
+        "message": "Het gebied ''{name}'' wordt verwijderd."
+      }
+    },
+    "settings": {
+      "depends_on": {
+        "help": "Selecteer de gebieden waar dit gebied van afhankelijk is.",
+        "invalid": "Maak een keuze.",
+        "label": "Is afhankelijk van",
+        "placeholder": "Selecteer afhankelijk gebieden"
+      },
+      "enclosure": {
+        "help": "Selecteer het verblijf waartoe dit gebied behoort.",
+        "invalid": "Maak een keuze.",
+        "label": "Verblijf",
+        "placeholder": "Selecteer behuizing"
+      },
+      "mode": {
+        "help": "Selecteer de modus van dit gebied. Dit bepaald de timing en duur van de schakelaars.",
+        "invalid": "Maak een keuze.",
+        "label": "Modus",
+        "options": {
+          "disabled": "Gedeactiveerd",
+          "main_lights": "Hoofd verlichting",
+          "sensors": "Sensoren",
+          "timer": "Klok",
+          "weather": "Weer dag / nacht",
+          "weather_inverse": "Weer nacht / dag"
+        },
+        "placeholder": "Selecteer modus"
+      },
+      "name": {
+        "help": "Voer een gemakkelijk te onthouden naam in.",
+        "invalid": "De ingevoerde naam is niet geldig. Het kan niet leeg zijn.",
+        "label": "Naam",
+        "placeholder": "Vul een naam in"
+      },
+      "save": {
+        "error": {
+          "duplicate_relays": "U heeft in zowel het laag- als hoogalarm dezelfde relais(s) geselecteerd. Dit is niet geldig.",
+          "required_fields": "Niet alle verplichte velden zijn correct ingevuld."
+        },
+        "ok": {
+          "message": "Gebied ''{name}'' is bijgewerkt."
+        }
+      },
+      "setup": {
+        "day_night_difference": {
+          "help": "Waarde om te wisselen tussen dag en nacht.",
+          "invalid": "Geef een geldig getal op.",
+          "label": "Dag/nacht verschil",
+          "placeholder": "Voer nummer in"
+        },
+        "day_night_source": {
+          "help": "Selecteer de bron wanneer het 'dag' is.",
+          "invalid": "Maak een keuze.",
+          "label": "Dag/nacht bron",
+          "options": {
+            "lights": "Lampen",
+            "weather": "Weer"
+          },
+          "placeholder": "Selecteer een dag/nacht bron"
+        },
+        "deviation_high_alarm": {
+          "help": "Toename of afname hoge alarmwaarde.",
+          "invalid": "Voer een geldig nummer in.",
+          "label": "Hoge alarmafwijking",
+          "placeholder": "Hoge alarmafwijking"
+        },
+        "deviation_low_alarm": {
+          "help": "Toename of afname lage alarmwaarde.",
+          "invalid": "Voer een geldig nummer in.",
+          "label": "Lage alarmafwijking",
+          "placeholder": "Lage alarmafwijking"
+        },
+        "high": {
+          "begin": {
+            "help": "Het tijdstip van de dag waarop de schakelaar elke nacht worden ingeschakeld.",
+            "invalid": "Voer een geldige tijd in.",
+            "label": "Begintijd",
+            "placeholder": "Voer de begintijd in"
+          },
+          "door_status": {
+            "help": "Selecteer de deurstatus.",
+            "invalid": "Maak alstublieft een keuze.",
+            "label": "Deur status",
+            "options": {
+              "closed": "Gesloten",
+              "ignore": "Genegeerd",
+              "open": "Open"
+            },
+            "placeholder": "Kies een status"
+          },
+          "end": {
+            "help": "Het tijdstip van de dag waarop de schakelaar elke nacht worden uitgeschakeld.",
+            "invalid": "Voer een geldige tijd in.",
+            "label": "Eindtijd",
+            "placeholder": "Voer de eindtijd in"
+          },
+          "ignore_high": {
+            "help": "Schakel om de hoge alarmwaarde van de sensoren te negeren en gebruik alleen de lage alarmwaarde.",
+            "label": "Negeer hoog alarm"
+          },
+          "light_status": {
+            "help": "Selecteer de lichtstatus.",
+            "invalid": "Maak een keuze.",
+            "label": "Status van het licht",
+            "options": {
+              "ignore": "Genegeerd",
+              "off": "Uit",
+              "on": "Aan"
+            },
+            "placeholder": "Kies een status"
+          },
+          "off_duration": {
+            "help": "De tijdsduur dat de schakelaar uitgeschakeld moeten blijven. Voer '0' in om uit te schakelen.",
+            "invalid": "Vul een geldige tijdsduur in minuten.",
+            "label": "Tijdsduur uit",
+            "placeholder": "Tijdsduur uit"
+          },
+          "on_duration": {
+            "help": "De tijdsduur dat de schakelaar ingeschakeld moeten zijn. Als dit korter is dan de hele dag, krijg je een timer functie. Voer '0' in om een volledige nacht te hebben.",
+            "invalid": "Vul een geldige tijdsduur in minuten.",
+            "label": "Tijdsduur aan",
+            "placeholder": "Tijdsduur aan"
+          },
+          "playlists": {
+            "help": "Selecteer de afspeellijsten.",
+            "invalid": "Maak een keuze.",
+            "label": "Afspeellijsten",
+            "placeholder": "Selecteer afspeellijsten"
+          },
+          "power_on_time": {
+            "help": "De duur in seconden om het schakelaars in te schakelen.",
+            "invalid": "Geef een geldig getal op.",
+            "label": "Ingeschakeld",
+            "placeholder": "Ingeschakeld"
+          },
+          "relays": {
+            "help": "Selecteer de schakelaars.",
+            "invalid": "Maak een keuze.",
+            "label": "Schakelaars",
+            "placeholder": "Selecteer schakelaars"
+          },
+          "settle_time": {
+            "help": "De duur in seconden tussen twee acties.",
+            "invalid": "Geef een geldig getal op.",
+            "label": "Stabilisatietijd",
+            "placeholder": "Stabilisatietijd"
+          },
+          "trigger_threshold": {
+            "help": "Voer het aantal alarmen in voordat actie plaatsvindt.",
+            "invalid": "Geef een geldig getal op.",
+            "label": "Alarmdrempel",
+            "placeholder": "Drempel"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Selecteer de vertraging en duur voor de dimmer om aan of uit te gaan in minuten. De maximale duur is 180 minuten."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Dimmer uit tijdsduur"
+              },
+              "relay": {
+                "label": "Schakelaar vertraging uit"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Dimmer aan tijd in seconden"
+              },
+              "relay": {
+                "label": "Schakelaar vertraging aan"
+              }
+            },
+            "relay": {
+              "info": "Selecteer de vertraging in minuten die een schakelaar wacht voordat het wordt ingeschakeld. Max vertraging is 180 minuten."
+            }
+          }
+        },
+        "low": {
+          "begin": {
+            "help": "Het tijdstip van de dag waarop de schakelaar elke nacht worden ingeschakeld.",
+            "invalid": "Voer een geldige tijd in.",
+            "label": "Begintijd",
+            "placeholder": "Voer de begintijd in"
+          },
+          "door_status": {
+            "help": "Selecteer de deurstatus.",
+            "invalid": "Maak een keuze.",
+            "label": "Deur status",
+            "options": {
+              "closed": "Gesloten",
+              "ignore": "Genegeerd",
+              "open": "Open"
+            },
+            "placeholder": "Kies een status"
+          },
+          "end": {
+            "help": "Het tijdstip van de dag waarop de schakelaar elke nacht worden uitgeschakeld.",
+            "invalid": "Voer een geldige tijd in.",
+            "label": "Eindtijd",
+            "placeholder": "Voer de eindtijd in"
+          },
+          "ignore_low": {
+            "help": "Schakel om de lage alarmwaarde van de sensoren te negeren en alleen de hoge alarmwaarde te gebruiken.",
+            "label": "Negeer laag alarm"
+          },
+          "light_status": {
+            "help": "Selecteer de lichtstatus.",
+            "invalid": "Maak een keuze.",
+            "label": "Status van het licht",
+            "options": {
+              "ignore": "Genegeerd",
+              "off": "Uit",
+              "on": "Aan"
+            },
+            "placeholder": "Kies een status"
+          },
+          "off_duration": {
+            "help": "De tijdsduur dat de schakelaar uitgeschakeld moeten blijven. Voer '0' in om uit te schakelen.",
+            "invalid": "Vul een geldige tijdsduur in minuten.",
+            "label": "Tijdsduur uit",
+            "placeholder": "Tijdsduur uit"
+          },
+          "on_duration": {
+            "help": "De tijdsduur dat de schakelaar ingeschakeld moeten zijn. Als dit korter is dan de hele dag, krijg je een timer functie. Voer '0' in om een volledige nacht te hebben.",
+            "invalid": "Vul een geldige tijdsduur in minuten.",
+            "label": "Tijdsduur aan",
+            "placeholder": "Tijdsduur aan"
+          },
+          "playlists": {
+            "help": "Selecteer de afspeellijsten.",
+            "invalid": "Maak een keuze.",
+            "label": "Afspeellijsten",
+            "placeholder": "Selecteer afspeellijsten"
+          },
+          "power_on_time": {
+            "help": "De duur in seconden om het schakelaars in te schakelen.",
+            "invalid": "Geef een geldig getal op.",
+            "label": "Ingeschakeld",
+            "placeholder": "Ingeschakeld"
+          },
+          "relays": {
+            "help": "Selecteer de schakelaars.",
+            "invalid": "Maak een keuze.",
+            "label": "Schakelaars",
+            "placeholder": "Selecteer schakelaars"
+          },
+          "settle_time": {
+            "help": "De duur in seconden tussen twee acties.",
+            "invalid": "Geef een geldig getal op.",
+            "label": "Stabilisatietijd",
+            "placeholder": "Stabilisatietijd"
+          },
+          "trigger_threshold": {
+            "help": "Voer het aantal alarmen in voordat actie plaatsvindt.",
+            "invalid": "Geef een geldig getal op.",
+            "label": "Alarmdrempel",
+            "placeholder": "Drempel"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Selecteer de vertraging en duur voor de dimmer om aan of uit te gaan in minuten. De maximale duur is 180 minuten."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Dimmer uit tijdsduur"
+              },
+              "relay": {
+                "label": "Schakelaar vertraging uit"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Dimmer aan tijd in seconden"
+              },
+              "relay": {
+                "label": "Schakelaar vertraging aan"
+              }
+            },
+            "relay": {
+              "info": "Selecteer de vertraging in minuten die een schakelaar wacht voordat het wordt ingeschakeld. Max vertraging is 180 minuten."
+            }
+          }
+        },
+        "main_lights": {
+          "help": "Schakel dit in als dit de hoofdlichten zijn voor dit verblijf. Dit wordt gebruikt voor de lichtcontroles in andere gebieden.",
+          "label": "Hoofd verlichting"
+        },
+        "max_day_hours": {
+          "help": "Het maximale aantal uren dat de lichten zijn ingeschakeld. Dit is alleen geldig in de weer modus. Als de dag langer is dan deze maximale waarde, wordt de dag ingekort tot deze maximale waarde.",
+          "invalid": "De ingevoerde waarde is niet geldig. Voer een geldig nummer in tussen {min} en {max}.",
+          "label": "Maximum aantal uren",
+          "placeholder": "Voer nummer in"
+        },
+        "min_day_hours": {
+          "help": "Het minimum aantal uren dat de lichten zijn ingeschakeld. Dit is alleen geldig in de weer modus. Als de dag korter is dan deze minimumwaarde, wordt de dag verlengd tot deze minimumwaarde.",
+          "invalid": "De ingevoerde waarde is niet geldig. Voer een geldig nummer in tussen {min} en {max}.",
+          "label": "Minimale uren",
+          "placeholder": "Voer nummer in"
+        },
+        "periods": {
+          "day": "Daginstellingen",
+          "high": "Hoog alarm",
+          "info": "Hieronder kunt u de schakelaar en timer instellingen per periode dag en nacht selecteren.",
+          "low": "Laag alarm",
+          "night": "Nachtinstellingen",
+          "varation": "Variatie"
+        },
+        "sensors": {
+          "help": "Selecteer sensoren om te gebruiken voor de sensorgebaseerde modus.",
+          "invalid": "Maak een keuze.",
+          "label": "Sensoren",
+          "placeholder": "Selecteer sensoren"
+        },
+        "shift_day_hours": {
+          "help": "De hoeveelheid tijd die moet worden verschoven in uren op basis van de opkomsttijd van de zon. Negatieve waarden zal de dag eerder doen starten.",
+          "invalid": "De ingevoerde waarde is niet geldig. Voer een geldig nummer in tussen {min} en {max}.",
+          "label": "Uren opschuiven",
+          "placeholder": "Voer nummer in"
+        },
+        "soundcard": {
+          "help": "Selecteer de geluidskaart die voor dit gebied wordt gebruikt.",
+          "invalid": "Maak een keuze.",
+          "label": "Geluidskaart",
+          "placeholder": "Selecteer een geluidskaart"
+        },
+        "variation": {
+          "offset": {
+            "invalid": "Voer een geldig nummer in."
+          },
+          "period": {
+            "invalid": "Voer een geldig nummer in.",
+            "offset": "Verschuiving",
+            "placeholder": "Drempel",
+            "source": "Voer een volledige URL, lokaal JSON-bestand of scriptbestand in"
+          },
+          "value": {
+            "invalid": "Voer een geldig nummer in.",
+            "placeholder": "Verschil"
+          },
+          "when": {
+            "invalid": "Maak alstublieft een keuze.",
+            "options": {
+              "after": "Na x minuten",
+              "at": "Op tijd",
+              "external": "Gebruik JSON-bron",
+              "script": "Gebruik schrift",
+              "weather": "Actueel weer gebruiken"
+            },
+            "placeholder": "Selecteer actie"
+          }
+        },
+        "watertank_height": {
+          "help": "Voer de hoogte in van de watertank.",
+          "invalid": "Voer een minimale waarde in van {value}.",
+          "label": "Hoogte",
+          "placeholder": "Voer nummer in"
+        },
+        "watertank_offset": {
+          "help": "Voer de compensatie tussen sensor en waterhoogte in.",
+          "invalid": "Voer een minimale waarde in van {value}.",
+          "label": "Compensatie",
+          "placeholder": "Voer nummer in"
+        },
+        "watertank_volume": {
+          "help": "Voer de volume in van de watertank.",
+          "invalid": "Voer een minimale waarde in van {value}.",
+          "label": "Watervolume",
+          "placeholder": "Voer nummer in"
+        }
+      },
+      "title": "Gebiedsinstellingen",
+      "type": {
+        "help": "Selecteer het type gebied. Elk gebied heeft zijn eigen logica.",
+        "invalid": "Maak een keuze.",
+        "label": "Type",
+        "placeholder": "Selecteer type"
+      }
+    }
+  },
+  "audio": {
+    "files": {
+      "delete": {
+        "confirm": {
+          "message": "Weet u zeker dat u het audiobestand ''{name}'' ({filename}) verwijdert?"
+        },
+        "error": {
+          "message": "Het audiobestand ''{name}'' kan niet worden verwijderd!\nFout: {error}"
+        },
+        "ok": {
+          "message": "Het audiobestand ''{name}'' is verwijderd."
+        }
+      },
+      "settings": {
+        "audiofiles": {
+          "label": "Upload een nieuw audiobestand",
+          "placeholder": "Upload een nieuw audiobestand"
+        },
+        "save": {
+          "error": {
+            "invalid_file": "Ongeldige audiobestand (s)"
+          },
+          "ok": {
+            "message": "Geüpload {amount, plural, =1 {# geluidsbestand} other {# geluidsbestands}}"
+          }
+        }
+      },
+      "title": "Audio bestanden"
+    },
+    "menu": {
+      "files": {
+        "title": "Bestanden"
+      },
+      "new_playlist": {
+        "title": "Nieuw afspeellijst"
+      },
+      "playlists": {
+        "title": "Afspeellijsten"
+      },
+      "title": "Audio"
+    },
+    "playlists": {
+      "delete": {
+        "confirm": {
+          "message": "Weet u zeker dat u de afspeellijst ''{name}'' verwijdert met {length} nummers?"
+        },
+        "error": {
+          "message": "De afspeellijst ''{name}'' kon niet worden verwijderd!\nFout: {error}"
+        },
+        "ok": {
+          "message": "De afspeellijst ''{name}'' wordt verwijderd."
+        }
+      },
+      "settings": {
+        "files": {
+          "help": "Selecteer alle audiobestanden voor deze afspeellijst.",
+          "invalid": "Selecteer minimaal 1 audiobestand.",
+          "label": "Audio bestanden",
+          "placeholder": "Selecteer audio bestanden"
+        },
+        "name": {
+          "help": "Voer een gemakkelijk te onthouden naam in.",
+          "invalid": "De ingevoerde naam is niet geldig. Het kan niet leeg zijn.",
+          "label": "Naam",
+          "placeholder": "Vul een naam in"
+        },
+        "repeat": {
+          "help": "Speel deze afspeellijst in herhaalmodus.",
+          "label": "Herhaal"
+        },
+        "save": {
+          "error": {
+            "required_fields": "Niet alle verplichte velden zijn correct ingevuld."
+          },
+          "ok": {
+            "message": "Afspeellijst ''{name}'' is bijgewerkt."
+          }
+        },
+        "shuffle": {
+          "help": "Schud deze afspeellijst elke keer dat deze wordt afgespeeld.",
+          "label": "Random"
+        },
+        "title": "Afspeellijst instellingen",
+        "volume": {
+          "help": "Selecteer het volume voor deze afspeellijst.",
+          "label": "Audiovolume"
+        }
+      },
+      "title": "Afspeellijsten"
+    }
+  },
+  "buttons": {
+    "actions": {
+      "delete": "Knop verwijderen",
+      "export": "Exporteren knop",
+      "ignore": "Negeer knop",
+      "settings": "Knop bewerken"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Weet u zeker dat u de knop ''{name}'' wilt verwijderen?"
+      },
+      "error": {
+        "message": "De knop ''{name}'' kon niet worden verwijderd!\nFout: {error}"
+      },
+      "ok": {
+        "message": "De knop ''{name}'' is verwijderd."
+      }
+    },
+    "ignore": {
+      "confirm": {
+        "message": "Weet u zeker dat u de knop ''{name}'' wilt negeren?"
+      },
+      "error": {
+        "message": "De knop ''{name}'' kon niet worden genegeerd!\nFout: {error}"
+      },
+      "ok": {
+        "message": "De knop ''{name}'' wordt genegeerd."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nieuw knop"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Knoppen"
+    },
+    "settings": {
+      "address": {
+        "help": "Voer het fysieke GPIO pin nummer in.",
+        "invalid": "Het ingevoerde adres is niet geldig. Voer een geldig nummer in tussen {min} en {max}.",
+        "label": "Adres",
+        "placeholder": "Vul een adres in"
+      },
+      "calibration": {
+        "inverse": {
+          "help": "",
+          "label": ""
+        },
+        "ldr_capacitor": {
+          "help": "Voer de condensatorwaarde in µF in, omdat dit de lichtberekening beïnvloedt.",
+          "invalid": "De ingevoerde condensatorwaarde is niet geldig. Voer een geldig getal tussen {min} en {max} in.",
+          "label": "Condensatorwaarde in µF",
+          "placeholder": "Voer de condensatorwaarde in µF in"
+        },
+        "timeout": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "current": {
+        "help": "De huidige status van de knop.",
+        "label": "Huidig",
+        "placeholder": "Huidige waarde"
+      },
+      "hardware": {
+        "help": "Selecteer het hardwaretype voor deze knop.",
+        "invalid": "Selecteer een hardwaretype.",
+        "label": "Hardware",
+        "placeholder": "Selecteer hardware"
+      },
+      "name": {
+        "help": "Voer een gemakkelijk te onthouden naam in.",
+        "invalid": "De ingevoerde naam is niet geldig. Het kan niet leeg zijn.",
+        "label": "Naam",
+        "placeholder": "Vul een naam in"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Niet alle verplichte velden zijn correct ingevuld."
+        },
+        "ok": {
+          "message": "Knop ''{name}'' is bijgewerkt."
+        }
+      },
+      "title": "Knop instellingen"
+    },
+    "title": "Knoppen"
+  },
+  "calendar": {
+    "actions": {
+      "download": "Download iCal"
+    },
+    "event": {
+      "delete": {
+        "confirm": {
+          "message": "Weet u zeker dat u de gebeurtenis ''{name}'' wilt verwijderen?"
+        },
+        "error": {
+          "message": "De gebeurtenis ''{name}'' kon niet worden verwijderd!\nFout: {error}"
+        },
+        "ok": {
+          "message": "De gebeurtenis ''{name}'' wordt verwijderd."
+        }
+      },
+      "duration": "Tijdsduur",
+      "periods": {
+        "days": "Dagen",
+        "months": "Maanden",
+        "no_reminder": "Geen herinnering",
+        "no_repeat": "Niet herhalen",
+        "weeks": "Weken",
+        "years": "Jaren"
+      },
+      "settings": {
+        "date": {
+          "help": "De datum of periode voor dit evenement.",
+          "label": "Datum"
+        },
+        "description": {
+          "help": "Voer wat informatie over dit evenement in.",
+          "label": "Voer een beschrijving in"
+        },
+        "remind": {
+          "label": "Herinneren in"
+        },
+        "repeat": {
+          "help": "Selecteer een herhalingsperiode en een aantal.",
+          "invalid": "Voer een geldige herhaal hoeveelheid in.",
+          "label": "Herhaal elke"
+        },
+        "repeat_amount": {
+          "label": "Selecteer aantal"
+        },
+        "save": {
+          "error": {
+            "required_fields": "Niet alle verplichte velden zijn correct ingevuld."
+          },
+          "ok": {
+            "message": "Gebeurtenis ''{name}'' is bijgewerkt."
+          }
+        },
+        "summary": {
+          "help": "Vul een naam in.",
+          "invalid": "De naam kan niet leeg zijn.",
+          "label": "Vul een naam in"
+        },
+        "title": "Evenement",
+        "update": {
+          "error": {
+            "message": "De gebeurtenis ''{name}'' kon niet worden bijgewerkt!\nFout: {error}"
+          },
+          "ok": {
+            "message": "De gebeurtenis ''{name}'' is bijgewerkt."
+          }
+        }
+      }
+    },
+    "menu": {
+      "title": "Kalender"
+    },
+    "title": "Kalender"
+  },
+  "dashboard": {
+    "enclosures": {
+      "menu": {
+        "title": "Verblijven"
+      },
+      "mode": "Modus",
+      "title": "Verblijven"
+    },
+    "infobox": {
+      "current_power_usage": {
+        "title": "Stroomverbruik in Watt"
+      },
+      "current_water_flow": {
+        "title": "Waterverbruik in {water_flow_indicator}"
+      },
+      "total_power_usage": {
+        "duration": "in {duration}",
+        "title": "Totaal stroomverbruik"
+      },
+      "total_water_usage": {
+        "duration": "in {duration}",
+        "title": "Totaal waterverbruik"
+      },
+      "uptime": {
+        "title": "Actief"
+      }
+    },
+    "menu": {
+      "title": "Overzicht"
+    },
+    "title": "Overzicht"
+  },
+  "enclosures": {
+    "actions": {
+      "delete": "Verwijder verblijf",
+      "settings": "Bewerk verblijf"
+    },
+    "area": {
+      "current": "Huidig",
+      "current_status": "Huidige status",
+      "delete": {
+        "title": "Gebied verwijderen"
+      },
+      "edit": {
+        "title": "Gebied bewerken"
+      },
+      "mode": {
+        "disabled": "Gedeactiveerd",
+        "sensors": "Sensoren",
+        "timer": "Klok",
+        "title": "Modus",
+        "weather": "Weer"
+      },
+      "now": "nu",
+      "period": {
+        "day": "Dag",
+        "high": "Hoog",
+        "low": "Laag",
+        "night": "Nacht"
+      },
+      "range": "Bereik",
+      "type": {
+        "audio": "Audio",
+        "cooling": "Koelen",
+        "heating": "Verwarming",
+        "humidity": "Luchtvochtigheid",
+        "lights": "Lampen",
+        "main_lights": "Hoofd verlichting",
+        "watertank": "watertank"
+      }
+    },
+    "areas": {
+      "title": "Gebieden"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Weet u zeker dat u de omheining ''{name}'' wilt verwijderen?"
+      },
+      "error": {
+        "message": "De behuizing ''{name}'' kon niet worden verwijderd!\nFout: {error}"
+      },
+      "ok": {
+        "message": "De behuizing ''{name}'' wordt verwijderd."
+      }
+    },
+    "doors": {
+      "title": "Deuren"
+    },
+    "menu": {
+      "list": {
+        "title": "Lijst"
+      },
+      "new_area": {
+        "title": "Nieuw gebied"
+      },
+      "new_enclosure": {
+        "title": "Nieuw verblijf"
+      },
+      "title": "Verblijven"
+    },
+    "settings": {
+      "description": {
+        "help": "Voer wat beschrijvingstekst in over deze behuizing.",
+        "label": "Beschrijving",
+        "placeholder": "Voer een beschrijving in"
+      },
+      "doors": {
+        "help": "Selecteer de deur (en) voor deze behuizing.",
+        "label": "Deuren"
+      },
+      "image": {
+        "help": "Upload een JPG of PNG.",
+        "invalid": "Het geselecteerde bestand is niet geldig. Het is geen afbeeldingsbestand.",
+        "label": "Afbeelding",
+        "placeholder": "Selecteer een afbeeldingsbestand"
+      },
+      "name": {
+        "help": "Voer een gemakkelijk te onthouden naam in.",
+        "invalid": "De ingevoerde naam is niet geldig. Het kan niet leeg zijn.",
+        "label": "Naam",
+        "placeholder": "Vul een naam in"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Niet alle verplichte velden zijn correct ingevuld."
+        },
+        "ok": {
+          "message": "Verblijf ''{name}'' is bijgewerkt."
+        }
+      },
+      "title": "Verblijf instellingen",
+      "webcams": {
+        "help": "Selecteer de webcam (s) voor deze behuizing.",
+        "label": "Webcams"
+      }
+    },
+    "title": "Verblijven",
+    "webcams": {
+      "title": "Webcams"
+    }
+  },
+  "footer": {
+    "current_activity": "Werkzaamheid",
+    "error_messages": "Fout berichten",
+    "warning_messages": "Waarschuwingsberichten"
+  },
+  "gauge": {
+    "error": "error",
+    "last_update": "Laatste wijziging",
+    "warning": "waarschuwing"
+  },
+  "general": {
+    "download": {
+      "title": "Downloaden"
+    },
+    "exclude": {
+      "average": "Excl. gem."
+    },
+    "humidity": "Luchtvochtigheid",
+    "login": {
+      "title": "Log in om wijzigingen aan te brengen"
+    },
+    "logout": {
+      "title": "Uitloggen"
+    },
+    "settings": {
+      "title": "Instellingen"
+    },
+    "temperature": "temperatuur",
+    "uptime_format": {
+      "days": "{number, plural, =1 {# dag} other {# dagen}}",
+      "hours": "{number, plural, =1 {# uur} other {# uren}}",
+      "minutes": "{number, plural, =1 {# minuut} other {# minuten}}",
+      "months": "{number, plural, =1 {# maand} other {# maanden}}",
+      "seconds": "{number, plural, =1 {# seconde} other {# seconden}}",
+      "years": "{number, plural, =1 {# jaar} other {# jaren}}"
+    }
+  },
+  "graph": {
+    "alarm": {
+      "max": "Alarm max",
+      "min": "Alarm min"
+    },
+    "current": "Huidig",
+    "flow": "Waterstroom",
+    "ldr": "Status van het licht",
+    "magnetic": "Deur status",
+    "motion": "Beweging",
+    "no-data": "Geen gegevens ...",
+    "period": {
+      "day": "Dag",
+      "month": "Maand",
+      "replaced": "Vervangen",
+      "week": "Week",
+      "year": "Jaar"
+    },
+    "settings": {
+      "export": "Exporteren"
+    },
+    "wattage": "Wattage"
+  },
+  "home": {
+    "menu": {
+      "title": "Thuis"
+    },
+    "title": "Thuis"
+  },
+  "messages": {
+    "actions": {
+      "delete": "Bericht verwijderen",
+      "edit": "Bericht bewerken"
+    },
+    "add": "Bericht toevoegen",
+    "delete": {
+      "confirm": {
+        "message": "Weet u zeker dat u het bericht ''{name}'' wilt verwijderen?"
+      },
+      "error": {
+        "message": "Het bericht ''{name}'' kon niet worden verwijderd!\nFout: {error}"
+      },
+      "ok": {
+        "message": "Het bericht ''{name}'' is verwijderd."
+      }
+    },
+    "ratelimit": "{number, plural, =0 {Onbeperkte berichten} other {Max # per minuut}}",
+    "settings": {
+      "available_services": {
+        "help": "Selecteer de service die u voor dit meldingsbericht wilt gebruiken.",
+        "label": "Diensten"
+      },
+      "enabled": {
+        "help": "Schakel dit meldingsbericht in/uit.",
+        "label": "Geactiveerd"
+      },
+      "message": {
+        "help": "Vul een bericht in. Je kunt gebruik maken van placeholders.",
+        "label": "Bericht",
+        "placeholder": "Voer een bericht in"
+      },
+      "placeholders": {
+        "format": "Numberwaarden kunnen worden afgerond met de {link_start} `.: 2f` format {link_end}",
+        "help": "Beschikbare plaatshouders.",
+        "label": "Plaatshouders"
+      },
+      "rate_limit": {
+        "help": "Maximum aantal berichten per minuut voor dit bericht. Gebruik 0 voor onbeperkt.",
+        "invalid": "De ingevoerde waarde is niet geldig. Voer een geldig nummer in dat hoger is dan {min}.",
+        "label": "Limit",
+        "placeholder": "Berichten per minuut"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Niet alle verplichte velden zijn correct ingevuld."
+        },
+        "ok": {
+          "message": "Bericht ''{name}'' is bijgewerkt."
+        }
+      },
+      "subject": {
+        "help": "Vul een onderwerp in. Je kunt gebruik maken van placeholders.",
+        "invalid": "Onderwerp kan niet leeg zijn.",
+        "label": "Onderwerp",
+        "placeholder": "Vul een onderwerp in"
+      },
+      "title": "Berichtinstellingen",
+      "type": {
+        "help": "Selecteer het type meldingsbericht.",
+        "invalid": "Maak een keuze.",
+        "label": "Berichttype",
+        "placeholder": "Selecteer type"
+      }
+    },
+    "table": {
+      "actions": "Acties",
+      "enabled": "Geactiveerd",
+      "message": "Bericht",
+      "rate_limit": "Limit",
+      "services": "Diensten",
+      "subject": "Onderwerp",
+      "type": "Type"
+    },
+    "title": "Meldingsberichten"
+  },
+  "modal": {
+    "confirm": {
+      "relays": {
+        "scan": "Dit start een nieuwe scan om nieuwe schakelaar te vinden. Dit kan tot 30 seconden duren."
+      },
+      "sensors": {
+        "scan": "Dit start een nieuwe scan om nieuwe sensoren te vinden. Dit kan tot 30 seconden duren."
+      },
+      "submit": {
+        "title": "Bevestigen"
+      },
+      "system": {
+        "logout": "Weet je zeker dat je wilt uitloggen?",
+        "reboot": "Dit zal de Raspberry Pi opnieuw opstarten. Dit kan tot 60 seconden duren.",
+        "restart": "Dit zal Terrariumpi opnieuw opstarten. Dit kan tot 30 seconden duren.",
+        "shutdown": "Hierdoor wordt de Raspberry PI afgesloten. Gebruik met zorg!"
+      },
+      "title": "Weet je het zeker?"
+    },
+    "form": {
+      "toggle": {
+        "info": "Help informatie weergeven / verbergen"
+      }
+    },
+    "general": {
+      "close": "Sluiten",
+      "save": "Bewaar"
+    },
+    "login": {
+      "error": "Ongeldige login",
+      "form": {
+        "password": {
+          "help": "Voer het wachtwoord in.",
+          "invalid": "Wachtwoord kan niet leeg zijn.",
+          "label": "Wachtwoord"
+        },
+        "submit": "Inloggen",
+        "username": {
+          "help": "Voer de gebruikersnaam in.",
+          "invalid": "Gebruikersnaam kan niet leeg zijn.",
+          "label": "Gebruikersnaam"
+        }
+      },
+      "title": "Inloggen"
+    },
+    "notification": {
+      "service": {
+        "form": {
+          "field": {
+            "setup": {
+              "address": {
+                "label": "Vul een adres in"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "not-found": {
+    "header": "Pagina niet gevonden",
+    "link": "Ga naar homepagina",
+    "title": "Pagina niet gevonden"
+  },
+  "notification": {
+    "delete": {
+      "error": {
+        "title": "Fout"
+      },
+      "invalid": {
+        "title": "FOUT"
+      },
+      "ok": {
+        "title": "Oké"
+      }
+    },
+    "door": {
+      "status": {
+        "title": "Deurstatusupdate"
+      }
+    },
+    "exclude": {
+      "error": {
+        "title": "Fout"
+      },
+      "ok": {
+        "title": "Oké"
+      }
+    },
+    "form": {
+      "save": {
+        "error": {
+          "title": "Fout bij opslaan"
+        },
+        "ok": {
+          "title": "Opslaan OK"
+        }
+      },
+      "upload": {
+        "error": {
+          "title": "Uploadfout"
+        }
+      }
+    },
+    "login": {
+      "message": {
+        "error": "Sorry, maar inloggen is ongeldig",
+        "ok": "U bent met succes ingelogd."
+      },
+      "title": "Inloggen"
+    },
+    "manual_mode": {
+      "error": {
+        "title": "Fout"
+      },
+      "ok": {
+        "title": "Oké"
+      }
+    },
+    "offline": {
+      "message": "Verbinding gaat verloren",
+      "title": "Offline"
+    },
+    "online": {
+      "message": "We zijn verbonden",
+      "title": "Online"
+    },
+    "reboot": {
+      "ok": {
+        "title": "System opnieuw opstarten OK"
+      }
+    },
+    "restart": {
+      "ok": {
+        "title": "Systeem herstart OK"
+      }
+    },
+    "scanning": {
+      "ok": {
+        "title": "Scannen afgewerkt"
+      }
+    },
+    "shutdown": {
+      "ok": {
+        "title": "System afsluiten ok"
+      }
+    },
+    "toggle": {
+      "error": {
+        "title": "ERROR"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    }
+  },
+  "relays": {
+    "actions": {
+      "delete": "Verwijder schakelaar",
+      "export": "Exporteer schakelaar",
+      "ignore": "Negeer schakelaar",
+      "manual_mode": "Handmatige modus schakelaar",
+      "replace_hardware": "Vervang hardware",
+      "settings": "Bewerk schakelaar"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Weet u zeker dat u het schakelaar ''{name}'' wilt negeren?"
+      },
+      "manual_mode": {
+        "message": "Schakelhandmatige modus voor schakelaar ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Weet u zeker dat u het schakelaar ''{name}'' wilt verwijderen?"
+      },
+      "error": {
+        "message": "Het schakelaar ''{name}'' kon niet worden verwijderd!\nFout: {fout}"
+      },
+      "ok": {
+        "message": "Het schakelaar ''{name}'' wordt verwijderd."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "Het schakelaar ''{name}'' kon niet worden genegeerd!\nFout: {error}"
+      },
+      "ok": {
+        "message": "Het schakelaar ''{name}'' wordt genegeerd."
+      }
+    },
+    "manual-mode": "Handmatige bediening",
+    "manual_mode": {
+      "error": {
+        "message": "Fout wijzigen handmatige modus voor schakelaar ''{name}''.\nFout: {error}"
+      },
+      "ok": {
+        "message": "De handmatige modus voor schakelaar ''{name}'' is gewijzigd."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nieuw schakelaar"
+      },
+      "scan": {
+        "title": "Scan schakelaars"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Schakelaars"
+    },
+    "settings": {
+      "address": {
+        "help": "Zie online voor meer informatie.",
+        "invalid": "Het ingevoerde adres is niet geldig. Het kan niet leeg zijn.",
+        "label": "Adres",
+        "placeholder": "Vul een adres in"
+      },
+      "calibration": {
+        "dimmer_frequency": {
+          "help": "De frequentie waarop de dimmer werkt.",
+          "invalid": "Voer een minimale waarde in van {value}.",
+          "label": "Dimmerfrequentie in Hz"
+        },
+        "dimmer_max_dim": {
+          "help": "Maximale dimmerwaarde (legacy).",
+          "invalid": "Voer een minimale waarde in van {value}.",
+          "label": "Maximale dimmerwaarde"
+        },
+        "dimmer_max_power": {
+          "help": "Het maximale vermogen voor deze dimmer.",
+          "invalid": "De ingevoerde waarde is niet geldig. Voer een geldig nummer in tussen {min} en {max}.",
+          "label": "Maximaal vermogen in %"
+        },
+        "dimmer_offset": {
+          "help": "De dimmer compensatie.",
+          "invalid": "Voer een minimale waarde in van {value}.",
+          "label": "Dimmer compensatie in%"
+        }
+      },
+      "current": {
+        "help": "De huidige status van de schakelaar.",
+        "label": "Huidig",
+        "placeholder": "Huidige waarde"
+      },
+      "flow": {
+        "help": "Voer de (max) waterstroom in wanneer ingeschakeld.",
+        "invalid": "Voer een minimale waarde in van {value}.",
+        "label": "Waterstroom"
+      },
+      "hardware": {
+        "help": "Selecteer het hardwaretype voor deze schakelaar.",
+        "invalid": "Selecteer een hardwaretype.",
+        "label": "Hardware",
+        "placeholder": "Selecteer hardware"
+      },
+      "name": {
+        "help": "Voer een gemakkelijk te onthouden naam in.",
+        "invalid": "De ingevoerde naam is niet geldig. Het kan niet leeg zijn.",
+        "label": "Naam",
+        "placeholder": "Vul een naam in"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Niet alle verplichte velden zijn correct ingevuld."
+        },
+        "ok": {
+          "message": "Schakelaar ''{name}'' is bijgewerkt."
+        }
+      },
+      "title": "Schakelaar instellingen",
+      "wattage": {
+        "help": "Vul het (max) wattage in wanneer ingeschakeld.",
+        "invalid": "Voer een minimale waarde in van {value}.",
+        "label": "Wattage"
+      }
+    },
+    "title": "Schakelaars",
+    "toggle": {
+      "error": {
+        "message": "Fout bij het omschakelen van schakelaar ''{name}''.\nFout: {error}"
+      },
+      "ok": {
+        "message": "Schakelaar ''{name}'' omgeschakeld naar {value}"
+      }
+    }
+  },
+  "sensors": {
+    "actions": {
+      "delete": "Sensor verwijderen",
+      "export": "Exporteer sensor",
+      "ignore": "Negeer sensor",
+      "settings": "Bewerk sensor"
+    },
+    "all": {
+      "menu": {
+        "title": "Alle sensoren"
+      },
+      "title": "Alle sensoren"
+    },
+    "altitude": {
+      "menu": {
+        "title": "Hoogte"
+      },
+      "title": "Hoogtesensoren"
+    },
+    "average": {
+      "altitude": "Gemiddelde hoogte",
+      "co2": "Gemiddelde CO2",
+      "distance": "Gemiddelde afstand",
+      "fertility": "Gemiddelde vruchtbaarheid",
+      "humidity": "Gemiddelde luchtvochtigheid",
+      "light": "Gemiddelde licht",
+      "moisture": "Gemiddelde vochtigheid",
+      "pressure": "Gemiddelde luchtdruk",
+      "temperature": "Gemiddelde temperatuur",
+      "uva": "Gemiddelde UVA",
+      "uvb": "Gemiddelde UVB",
+      "uvi": "Gemiddelde UV index"
+    },
+    "co2": {
+      "menu": {
+        "title": "CO2"
+      },
+      "title": "CO2 sensoren"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Weet u zeker dat u de sensor ''{name}'' wilt negeren?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Weet u zeker dat u de sensor ''{name}'' wilt verwijderen?"
+      },
+      "error": {
+        "message": "De sensor ''{name}'' kon niet worden verwijderd!\nFout: {fout}"
+      },
+      "ok": {
+        "message": "De sensor ''{name}'' wordt verwijderd."
+      }
+    },
+    "distance": {
+      "menu": {
+        "title": "Afstand"
+      },
+      "title": "Afstandssensors"
+    },
+    "exclude": {
+      "error": {
+        "message": "De sensor ''{name}'' kon niet worden genegeerd!\nFout: {error}"
+      },
+      "ok": {
+        "message": "De sensor ''{name}'' wordt genegeerd."
+      }
+    },
+    "fertility": {
+      "menu": {
+        "title": "Vruchtbaarheid"
+      },
+      "title": "Vruchtbaarheidssensoren"
+    },
+    "humidity": {
+      "menu": {
+        "title": "Luchtvochtigheid"
+      },
+      "title": "Luchtvochtigheidssensoren"
+    },
+    "light": {
+      "menu": {
+        "title": "Licht"
+      },
+      "title": "Lichtsensoren"
+    },
+    "menu": {
+      "new": {
+        "title": "Nieuw sensor"
+      },
+      "scan": {
+        "title": "Scan sensoren"
+      },
+      "title": "Sensoren"
+    },
+    "moisture": {
+      "menu": {
+        "title": "Vochtigheid"
+      },
+      "title": "Vochtigheidssensoren"
+    },
+    "ph": {
+      "menu": {
+        "title": "pH"
+      },
+      "title": "PH sensoren"
+    },
+    "pressure": {
+      "menu": {
+        "title": "Luchtdruk"
+      },
+      "title": "Luchtdruksensoren"
+    },
+    "settings": {
+      "address": {
+        "help": "Vul een adres in.",
+        "invalid": "Het ingevoerde adres is niet geldig. Het kan niet leeg zijn.",
+        "label": "Adres",
+        "placeholder": "Vul een adres in"
+      },
+      "alarm_max": {
+        "help": "Voer de maximale waarde voor het alarm in.",
+        "invalid": "De ingevoerde waarde is niet geldig. Het moet nummer zijn.",
+        "label": "Alarm max",
+        "placeholder": "Alarm max"
+      },
+      "alarm_min": {
+        "help": "Voer de minimale waarde voor het alarm in.",
+        "invalid": "De ingevoerde waarde is niet geldig. Het moet nummer zijn.",
+        "label": "Alarm min",
+        "placeholder": "Alarm min"
+      },
+      "calibration": {
+        "ccs811_compensation_sensors": {
+          "help": "Selecteer de sensoren voor de compensatieberekening.",
+          "label": "Compensatiesensoren",
+          "placeholder": "Selecteer compensatiesensoren"
+        },
+        "chirp_max_moist": {
+          "help": "Voer de maximale vochtige waarde in.",
+          "invalid": "De ingevoerde waarde is niet geldig. Het moet nummer hoger zijn dan {min}.",
+          "label": "Minimale vochtwaarde"
+        },
+        "chirp_min_moist": {
+          "help": "Voer de minimale vochtige waarde in.",
+          "invalid": "De ingevoerde waarde is niet geldig. Het moet een getal hoger zijn dan {min}.",
+          "label": "minimale vochtigheidswaarde"
+        },
+        "offset": {
+          "help": "Voer de compensatie in voor deze sensor.",
+          "invalid": "De ingevoerde waarde is niet geldig. Het moet nummer zijn.",
+          "label": "Compensatie"
+        }
+      },
+      "current": {
+        "help": "De huidige status van de sensor.",
+        "label": "Huidig",
+        "placeholder": "Huidige waarde"
+      },
+      "exclude_avg": {
+        "help": "Sluit deze sensoren uit van gemiddelde berekeningen.",
+        "label": "Excl. gem"
+      },
+      "fields": {
+        "error": "Niet alle verplichte velden zijn correct ingevuld."
+      },
+      "hardware": {
+        "help": "Selecteer het hardwaretype voor deze knop.",
+        "invalid": "Selecteer een hardwaretype.",
+        "label": "Hardware",
+        "placeholder": "Selecteer hardware"
+      },
+      "limit_max": {
+        "help": "Voer de maximale waarde in die geldig is.",
+        "invalid": "De ingevoerde waarde is niet geldig. Het moet nummer zijn.",
+        "label": "Limiet max"
+      },
+      "limit_min": {
+        "help": "Voer de minimale waarde in die geldig is.",
+        "invalid": "De ingevoerde waarde is niet geldig. Het moet nummer zijn.",
+        "label": "Limiet min"
+      },
+      "max_diff": {
+        "help": "Voer het maximale verschil in tussen twee metingen die geldig zijn. Voer '0' in om uit te schakelen.",
+        "invalid": "De ingevoerde waarde is niet geldig. Het moet nummer hoger zijn dan {min}.",
+        "label": "Max verschil",
+        "placeholder": "Max verschil"
+      },
+      "name": {
+        "help": "Voer een gemakkelijk te onthouden naam in.",
+        "invalid": "De ingevoerde naam is niet geldig. Het kan niet leeg zijn.",
+        "label": "Naam",
+        "placeholder": "Vul een naam in"
+      },
+      "save": {
+        "ok": {
+          "message": "Sensor ''{name}'' is bijgewerkt."
+        }
+      },
+      "title": "Sensor instellingen",
+      "type": {
+        "help": "Selecteer het meettype voor deze sensor.",
+        "invalid": "Selecteer een meettype.",
+        "label": "Type",
+        "placeholder": "Selecteer type"
+      }
+    },
+    "temperature": {
+      "menu": {
+        "title": "Temperatuur"
+      },
+      "title": "Temperatuursensoren"
+    },
+    "title": "Sensoren",
+    "uva": {
+      "menu": {
+        "title": "UVA"
+      },
+      "title": "UVA sensoren"
+    },
+    "uvb": {
+      "menu": {
+        "title": "UVB"
+      },
+      "title": "UVB sensoren"
+    },
+    "uvi": {
+      "menu": {
+        "title": "UVI"
+      },
+      "title": "UVI sensoren"
+    }
+  },
+  "services": {
+    "actions": {
+      "delete": "Service verwijderen",
+      "edit": "Bewerkingsservice"
+    },
+    "add": "Voeg een dienst toe",
+    "delete": {
+      "confirm": {
+        "message": "Weet u zeker dat u de service ''{name}'' wilt verwijderen?"
+      },
+      "error": {
+        "message": "De service ''{name}'' kon niet worden verwijderd!\nFout: {error}"
+      },
+      "ok": {
+        "message": "De dienst ''{name}'' is verwijderd."
+      }
+    },
+    "enabled": "Geactiveerd",
+    "ratelimit": "{number, plural, =0 {Onbeperkte berichten} other {Max # per minuut}}",
+    "settings": {
+      "enabled": {
+        "help": "Schakel deze meldingsservice in/uit.",
+        "label": "Geactiveerd"
+      },
+      "name": {
+        "help": "Voer een gemakkelijk te onthouden naam in.",
+        "invalid": "De ingevoerde naam is niet geldig. Het kan niet leeg zijn.",
+        "label": "Naam",
+        "placeholder": "Vul een naam in"
+      },
+      "rate_limit": {
+        "help": "Maximum aantal berichten per minuut voor deze service. Gebruik 0 voor onbeperkt.",
+        "invalid": "De ingevoerde waarde is niet geldig. Voer een geldig nummer in dat hoger is dan {min}.",
+        "label": "Limit",
+        "placeholder": "Berichten per minuut"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Niet alle verplichte velden zijn correct ingevuld."
+        },
+        "ok": {
+          "message": "Service ''{name}'' is bijgewerkt."
+        }
+      },
+      "setup": {
+        "address": {
+          "help": "Vul een adres in.",
+          "invalid": "Het ingevoerde adres is niet geldig. Het kan niet leeg zijn.",
+          "label": "Adres",
+          "placeholder": "Vul een adres in"
+        },
+        "api_token": {
+          "help": "Voer de Pushover API token in.",
+          "invalid": "Het ingevoerde API token is niet geldig. Het kan niet leeg zijn.",
+          "label": "API Token",
+          "placeholder": "Voer het API token in"
+        },
+        "buzzer": {
+          "help": "Lijst met beschikbare nummers om te gebruiken in het berichtonderwerp."
+        },
+        "green": {
+          "help": "Voer GPIO pin nummer in voor groen licht.",
+          "invalid": "De ingevoerde waarde is niet geldig. Voer een geldig nummer in tussen {min} en {max}.",
+          "label": "Groen",
+          "placeholder": "Voer de groene GPIO pin nummer in"
+        },
+        "hardware": {
+          "help": "Selecteer het hardwaretype voor dit beeldscherm.",
+          "invalid": "Maak een keuze.",
+          "label": "Hardware",
+          "placeholder": "Selecteer hardware"
+        },
+        "password": {
+          "help": "Voer het serverwachtwoord in.",
+          "label": "Server wachtwoord",
+          "placeholder": "Vul een gebruikersnaam in"
+        },
+        "port": {
+          "help": "Voer het serverpoortnummer in.",
+          "invalid": "Het ingevoerde poortnummer is niet geldig. Het kan niet leeg zijn.",
+          "label": "Server poort",
+          "placeholder": "Voer poortnummer in"
+        },
+        "pushover": {
+          "label": "Maak uw tokens door terrariumpi te registreren als een app {link}."
+        },
+        "receiver": {
+          "help": "Vul een e-mailadres in.",
+          "invalid": "Het adres mag niet leeg zijn.",
+          "label": "E-mail van de ontvanger",
+          "placeholder": "Vul een e-mailadres in"
+        },
+        "red": {
+          "help": "Voer GPIO pin nummer in voor rood licht.",
+          "invalid": "De ingevoerde waarde is niet geldig. Voer een geldig nummer in tussen {min} en {max}.",
+          "label": "Rood",
+          "placeholder": "Voer de rode GPIO pin nummer in"
+        },
+        "show_title": {
+          "help": "Toon een naam en versie als titel op het display.",
+          "label": "Titel weergeven"
+        },
+        "ssl": {
+          "email": {
+            "label": "De e-mailmeldingsservice detecteert automatisch SSL/TLS verbindingen."
+          },
+          "mqtt": {
+            "label": "De MQTT meldingsservice zal SSL/TLS verbindingen automatisch detecteren."
+          }
+        },
+        "url": {
+          "help": "Voer de volledige post URL in.",
+          "invalid": "De ingevoerde URL is niet geldig. Het kan niet leeg zijn.",
+          "label": "Volledige bericht URL (post)",
+          "placeholder": "Voer de volledige post URL in"
+        },
+        "user_key": {
+          "help": "Voer de Pushover gebruikerssleutel in.",
+          "invalid": "De ingevoerde gebruikerssleutel is niet geldig. Het kan niet leeg zijn.",
+          "label": "Gebruikerssleutel",
+          "placeholder": "Voer de gebruikerssleutel in"
+        },
+        "username": {
+          "help": "Voer de gebruikersnaam van de server in.",
+          "label": "Server gebruikersnaam",
+          "placeholder": "Vul een gebruikersnaam in"
+        },
+        "yellow": {
+          "help": "Voer de GPIO pin nummer in voor oranje licht.",
+          "invalid": "De ingevoerde waarde is niet geldig. Voer een geldig nummer in tussen {min} en {max}.",
+          "label": "Oranje",
+          "placeholder": "Voer de oranje GPIO pin nummer in"
+        }
+      },
+      "title": "Instellingen voor meldingsservices",
+      "type": {
+        "help": "Selecteer het type meldingsservice.",
+        "invalid": "Maak een keuze.",
+        "label": "Type",
+        "placeholder": "Selecteer type"
+      }
+    },
+    "title": "Meldingsdiensten"
+  },
+  "system": {
+    "log": {
+      "download": {
+        "title": "Download logfile"
+      },
+      "filters": {
+        "errors": "fouten",
+        "search": "Voer zoektermen in",
+        "title": "Filters",
+        "warnings": "waarschuwingen"
+      },
+      "lines": "{lines} regels",
+      "loading": "Data laden",
+      "title": "Systeemregistratie"
+    },
+    "menu": {
+      "log": {
+        "title": "Log"
+      },
+      "notifications": {
+        "title": "Meldingen"
+      },
+      "reboot": {
+        "title": "Opnieuw opstarten"
+      },
+      "restart": {
+        "title": "Opnieuw starten"
+      },
+      "settings": {
+        "title": "Instellingen"
+      },
+      "shutdown": {
+        "title": "Uitschakelen"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Systeem"
+    },
+    "notifications": {
+      "title": "Meldingen"
+    },
+    "settings": {
+      "all_gauges_on_single_page": {
+        "help": "Voeg een extra menu item toe voor alle sensoren op één pagina.",
+        "label": "Alle meters op één pagina"
+      },
+      "authenticate": {
+        "help": "Verifieer altijd of alleen wanneer er wijzigingen worden aangebracht.",
+        "invalid": "Maak een keuze.",
+        "label": "Authenticatiemodus",
+        "options": {
+          "changes": "Alleen voor wijzigingen",
+          "full": "Volledige authenticatie",
+          "no_authentication": "Geen authenticatie"
+        }
+      },
+      "auto_dark_mode": {
+        "help": "Schakel de donkere modus in wanneer de nacht begint.",
+        "label": "Automatische donkere modus"
+      },
+      "currency": {
+        "help": "Selecteer de interfacevaluta.",
+        "invalid": "Maak een keuze.",
+        "label": "Munteenheid"
+      },
+      "dashboard_mode": {
+        "help": "Selecteer hoe het dashboard eruit ziet.",
+        "invalid": "Maak alstublieft een keuze.",
+        "label": "Dashboard-modus",
+        "options": {
+          "normal": "Grafieken en verblijven",
+          "only_enclosures": "Alleen verblijven",
+          "only_graphs": "Alleen grafieken"
+        }
+      },
+      "distance_indicator": {
+        "help": "Selecteer de afstandsindicator. Heeft alleen invloed op de huidige waarden.",
+        "invalid": "Maak een keuze.",
+        "label": "Afstandstype"
+      },
+      "exclude-ids": {
+        "help": "ID's die zijn uitgesloten.",
+        "label": "Uitgesloten ID's"
+      },
+      "graph_smooth_value": {
+        "help": "Voer het aantal gegevenspunten in dat moet worden gemiddeld. 0 schakelt deze functie uit.",
+        "invalid": "Voer een minimale waarde in van {value}.",
+        "label": "Grafiek vloeiend maken"
+      },
+      "header": {
+        "cloud": "Cloud",
+        "gui": "GUI",
+        "locale": "Land/taal",
+        "system": "Systeem"
+      },
+      "hide_environment_dashboard": {
+        "help": "Verberg de verblijfgegevens op het dashboard.",
+        "label": "Verberg verblijven op het dashboard"
+      },
+      "host": {
+        "help": "Voer het IP adres in om naar verbindingen te luisteren. Standaard 0.0.0.0.",
+        "invalid": "Voer een geldig IP adres in.",
+        "label": "IP nummer"
+      },
+      "language": {
+        "help": "Selecteer de interface taal. Dit verandert ook de opmaak van getallen en valuta.",
+        "invalid": "Maak een keuze.",
+        "label": "Taal"
+      },
+      "meross_cloud_password": {
+        "help": "Voer het wachtwoord in om in te loggen op Meross cloud.",
+        "label": "Meross wachtwoord"
+      },
+      "meross_cloud_username": {
+        "help": "Voer de gebruikersnaam in om in te loggen op Meross cloud.",
+        "label": "Meross gebruikersnaam"
+      },
+      "page": {
+        "title": "Systeem instellingen"
+      },
+      "password": {
+        "help": "Voer een wachtwoord in voor authenticatie.",
+        "invalid": "Het wachtwoord mag niet leeg zijn.",
+        "label": "Nieuw wachtwoord"
+      },
+      "password2": {
+        "help": "Voer het nieuwe wachtwoord opnieuw in.",
+        "invalid": "Het nieuwe wachtwoord komt niet overeen.",
+        "label": "Bevestig het nieuwe wachtwoord"
+      },
+      "pi-wattage": {
+        "help": "Voer het totale stroomverbruik van de Pi in met al zijn USB apparaten aangesloten.",
+        "invalid": "Voer een minimale waarde in van {value}.",
+        "label": "Pi stroomverbruik"
+      },
+      "port": {
+        "help": "Voer het poortnummer in om naar verbindingen te luisteren. Standaard 8090.",
+        "invalid": "Voer een minimale waarde in van {value}.",
+        "label": "Poort nummer"
+      },
+      "power_price": {
+        "help": "Vul de prijs per kWh in.",
+        "invalid": "Voer een minimale waarde in van {value}.",
+        "label": "Stroom prijs"
+      },
+      "profile_image": {
+        "help": "Werk een aangepaste afbeelding bij die in het menu wordt gebruikt.",
+        "invalid": "Ongeldig profielbeeldformaat.",
+        "label": "Profielafbeelding"
+      },
+      "save": {
+        "ok": {
+          "message": "De instellingen zijn bijgewerkt.",
+          "title": "Update ok"
+        }
+      },
+      "show_min_max_gauge": {
+        "help": "Toon de minimale en maximale waarde op de meters.",
+        "label": "Toon min en max waarden in meter grafieken"
+      },
+      "temperature_indicator": {
+        "help": "Selecteer de temperatuurindicator. Heeft alleen invloed op de huidige waarden.",
+        "invalid": "Maak een keuze.",
+        "label": "Temperatuur type"
+      },
+      "title": {
+        "help": "Voer een aangepaste titel in.",
+        "invalid": "De titel mag niet leeg zijn.",
+        "label": "Titel"
+      },
+      "username": {
+        "help": "Voer de gebruikersnaam in voor authenticatie.",
+        "invalid": "De gebruikersnaam kan niet leeg zijn.",
+        "label": "Gebruikersnaam"
+      },
+      "water_price": {
+        "help": "Voer de prijs per L/Gallon in.",
+        "invalid": "Voer een minimale waarde in van {value}.",
+        "label": "Water prijs"
+      },
+      "water_volume_indicator": {
+        "help": "Selecteer de watervolume indicator. Heeft alleen invloed op de huidige waarden.",
+        "invalid": "Maak een keuze.",
+        "label": "Type vloeistofvolume"
+      },
+      "wind_speed_indicator": {
+        "help": "Selecteer de windsnelheidsindicator. Heeft alleen invloed op de huidige waarden.",
+        "invalid": "Maak een keuze.",
+        "label": "Type windsnelheid"
+      }
+    },
+    "status": {
+      "cpu_temp": {
+        "title": "Processor temperatuur"
+      },
+      "disk": {
+        "title": "Harde schijf gebruik"
+      },
+      "load": {
+        "title": "Systeembelasting"
+      },
+      "memory": {
+        "title": "Geheugen verbruik"
+      },
+      "summary": {
+        "title": "Systeemsamenvatting"
+      },
+      "title": "Systeem status",
+      "uptime": {
+        "title": "Uptime van het systeem"
+      }
+    }
+  },
+  "table": {
+    "field": {
+      "range": "Bereik"
+    },
+    "header": {
+      "actions": "Acties",
+      "duration": "Tijdsduur",
+      "filename": "Bestandsnaam",
+      "filesize": "Bestandsgrootte",
+      "mode": "Modus",
+      "name": "Naam",
+      "number_files": "# Bestanden",
+      "repeat": "Herhaal",
+      "shuffle": "Random",
+      "status": "Status",
+      "type": "Type",
+      "volume": "Audiovolume"
+    }
+  },
+  "topbar": {
+    "current_status": "Huidige status",
+    "door_status": "Deur status",
+    "upcoming_events": "{number, plural, =0 {geen evenementen} =1 {1 evenement} other {# evenementen}}"
+  },
+  "userpanel": {
+    "login": {
+      "text1": "Alleen lezen modus",
+      "text2": "Inloggen"
+    },
+    "logout": {
+      "text1": "Hallo {name}",
+      "text2": "Uitloggen"
+    }
+  },
+  "weather": {
+    "current": "Huidig",
+    "forecast": "Voorspelling",
+    "menu": {
+      "title": "Weer"
+    },
+    "settings": {
+      "fields": {
+        "error": "Niet alle verplichte velden zijn correct ingevuld."
+      },
+      "information": "Om het weer systeem te gebruiken, moet u een gratis account aanmaken op {source_link}.",
+      "save": {
+        "ok": {
+          "message": "De weerinstelling is opgeslagen."
+        }
+      },
+      "title": "Weer instellingen",
+      "weather_source": {
+        "help": "Voer de volledige OpenWeatherMap api URL in, zoals: {api_url_example}.",
+        "invalid": "De ingevoerde url is niet geldig.",
+        "label": "Bron url"
+      }
+    },
+    "title": "Weer"
+  },
+  "webcams": {
+    "actions": {
+      "delete": "Verwijder webcam",
+      "ignore": "Negeer de webcam",
+      "settings": "Bewerk webcam"
+    },
+    "archive": {
+      "no_images": "Geen archiefafbeeldingen beschikbaar"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Weet u zeker dat u de webcam ''{name}'' wilt negeren?"
+      }
+    },
+    "controls": {
+      "archive": "Archief",
+      "new_marker": "Marker toevoegen",
+      "save_raw_image": "Sla Raw afbeelding op",
+      "show_markers": "Toon markeringen",
+      "toggle_volume": "Schakelvolume"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Weet u zeker dat u de webcam ''{name}'' wilt verwijderen?"
+      },
+      "error": {
+        "message": "De webcam ''{name}'' kon niet worden verwijderd!\nFout: {error}"
+      },
+      "ok": {
+        "message": "De webcam ''{name}'' is verwijderd."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "De webcam ''{name}'' kon niet worden genegeerd!\nFout: {error}"
+      },
+      "ok": {
+        "message": "De webcam ''{name}'' wordt genegeerd."
+      }
+    },
+    "marker": {
+      "delete": {
+        "confirm": {
+          "message": "Weet u zeker dat u de markering wilt verwijderen?"
+        },
+        "error": {
+          "message": "Markering kan niet worden verwijderd"
+        },
+        "invalid": {
+          "message": "Ongeldige markering"
+        }
+      }
+    },
+    "markers": {
+      "settings": {
+        "delete": "Verwijder",
+        "doors": {
+          "help": "Selecteer de sensoren die je wilt laten zien.",
+          "invalid": "Maak een keuze.",
+          "label": "Sensoren"
+        },
+        "title": "Sensoren"
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nieuw webcam"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Webcams"
+    },
+    "settings": {
+      "address": {
+        "help": "Zie online voor meer informatie.",
+        "invalid": "Het ingevoerde adres is niet geldig. Het kan niet leeg zijn.",
+        "label": "Adres",
+        "placeholder": "Vul een adres in"
+      },
+      "archive": {
+        "door": {
+          "help": "Deurstatus voor het maken van een archiefbeeld.",
+          "invalid": "Maak alstublieft een keuze.",
+          "label": "Archief deur status",
+          "options": {
+            "close": "Sluiten",
+            "ignore": "Negeer",
+            "open": "Open"
+          },
+          "placeholder": "Archief deur status"
+        },
+        "flash": {
+          "help": "Selecteer een schakelaar dat als flitser zal fungeren.",
+          "invalid": "Maak een keuze.",
+          "label": "Flits",
+          "placeholder": "Selecteer optionele schakelaar voor flits"
+        },
+        "light": {
+          "help": "Lichtstatus voor het maken van een archiefbeeld.",
+          "invalid": "Maak een keuze.",
+          "label": "Archief licht status",
+          "options": {
+            "ignore": "Negeer",
+            "off": "Wanneer uitgeschakeld",
+            "on": "Wanneer aan"
+          },
+          "placeholder": "Archief licht status"
+        },
+        "options": {
+          "day_1": "1 dag",
+          "disabled": "Gedeactiveerd",
+          "hour_1": "30 minuten",
+          "hour_12": "12 uren",
+          "hour_3": "3 uren",
+          "hour_6": "6 uren",
+          "minute_1": "1 minuut",
+          "minute_15": "15 minuten",
+          "minute_30": "30 minuten",
+          "minute_5": "5 minuten",
+          "motion": "Beweging"
+        },
+        "state": {
+          "help": "Selecteer de duur tussen gearchiveerde afbeeldingen.",
+          "invalid": "Maak een keuze.",
+          "label": "Archivering",
+          "placeholder": "Archiveren selecteren"
+        }
+      },
+      "awb": {
+        "help": "Selecteer een witbalans.",
+        "invalid": "Maak een keuze.",
+        "label": "Witbalans",
+        "options": {
+          "auto": "auto",
+          "cloudy": "bewolkt",
+          "flash": "Flits",
+          "fluorescent": "fluorescerend",
+          "greyworld": "grijze wereld",
+          "horizon": "horizon",
+          "incandescent": "gloeiend",
+          "off": "Uit",
+          "shade": "schaduw",
+          "sunlight": "zonlicht",
+          "tungsten": "wolfraam"
+        },
+        "placeholder": "Witbalans"
+      },
+      "hardware": {
+        "help": "Selecteer het hardwaretype voor deze knop.",
+        "invalid": "Selecteer een hardwaretype.",
+        "label": "Hardware",
+        "placeholder": "Selecteer hardware"
+      },
+      "height": {
+        "help": "Voer de resolutiehoogte in pixels in.",
+        "invalid": "Voer een minimale waarde in van {value}.",
+        "label": "Hoogte"
+      },
+      "motion": {
+        "area": {
+          "help": "Voer een gebiedsgrootte in.",
+          "invalid": "Voer een minimale waarde in van {value}.",
+          "label": "Beweging minimaal oppervlakte",
+          "placeholder": "Voer nummer in"
+        },
+        "boxes": {
+          "help": "Toon motion boxen op de gearchiveerde beelden.",
+          "invalid": "Maak een keuze.",
+          "label": "Bewegingsvakken weergeven",
+          "options": {
+            "blue": "Blauw",
+            "green": "Groen",
+            "none": "Geen",
+            "red": "Rood"
+          },
+          "placeholder": "Bewegingsvakken weergeven"
+        },
+        "frame": {
+          "help": "Welk frame te gebruiken voor bewegingsdetectie.",
+          "invalid": "Maak een keuze.",
+          "label": "Afbeelding voor bewegingsvergelijking",
+          "options": {
+            "archived": "Laatst gearchiveerde afbeelding",
+            "last": "Laatste beeld"
+          },
+          "placeholder": "Selecteer welke frame voor vergelijking"
+        },
+        "threshold": {
+          "help": "Voer de bewegingsdrempel in.",
+          "invalid": "Voer een minimale waarde in van {value}.",
+          "label": "Drempel bewegingsdelta",
+          "placeholder": "Voer nummer in"
+        }
+      },
+      "name": {
+        "help": "Voer een gemakkelijk te onthouden naam in.",
+        "invalid": "De ingevoerde naam is niet geldig. Het kan niet leeg zijn.",
+        "label": "Naam",
+        "placeholder": "Vul een naam in"
+      },
+      "preview": {
+        "label": "Voorbeeld"
+      },
+      "rotation": {
+        "help": "Selecteer een rotatie.",
+        "invalid": "Maak een keuze.",
+        "label": "Rotatie",
+        "options": {
+          "degrees_0": "0 graden",
+          "degrees_180": "180 graden",
+          "degrees_270": "270 graden",
+          "degrees_90": "90 graden",
+          "flip_h": "Spiegel horizontaal",
+          "flip_v": "Spiegel verticaal",
+          "zero_degrees": "0 graden"
+        },
+        "placeholder": "Rotatie selecteren"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Niet alle verplichte velden zijn correct ingevuld."
+        },
+        "ok": {
+          "message": "Webcam ''{name}'' is bijgewerkt."
+        }
+      },
+      "title": "Webcam instellingen",
+      "width": {
+        "help": "Voer de resolutiebreedte in pixels in.",
+        "invalid": "Voer een minimale waarde in van {value}.",
+        "label": "Breedte"
+      }
+    },
+    "title": "Webcams"
+  }
+}

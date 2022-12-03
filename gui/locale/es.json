@@ -1,0 +1,2040 @@
+{
+  "about": {
+    "online": {
+      "help": "Más ayuda en línea."
+    },
+    "title": "Sobre"
+  },
+  "areas": {
+    "delete": {
+      "confirm": {
+        "message": "¿Estás seguro de que quieres eliminar el área ''{name}''?"
+      },
+      "error": {
+        "message": "¡El área ''{name}'' no se pudo eliminar!\nError: {error}"
+      },
+      "ok": {
+        "message": "El área ''{name}'' se elimina."
+      }
+    },
+    "settings": {
+      "depends_on": {
+        "help": "Seleccione las áreas de donde depende esta área.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Depende de",
+        "placeholder": "Seleccionar áreas dependientes"
+      },
+      "enclosure": {
+        "help": "Seleccione el recinto donde pertenece esta área.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Recinto",
+        "placeholder": "Seleccionar el recinto"
+      },
+      "mode": {
+        "help": "Seleccione el modo de esta área. Esto cambiará el momento y la duración de los relés.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Modo",
+        "options": {
+          "disabled": "Desactivado",
+          "main_lights": "Luces principales",
+          "sensors": "Sensores",
+          "timer": "Temporizador",
+          "weather": "Clima día/noche",
+          "weather_inverse": "Noche/día del clima"
+        },
+        "placeholder": "Seleccionar modo"
+      },
+      "name": {
+        "help": "Ingrese un nombre fácil de recordar.",
+        "invalid": "El nombre ingresado no es válido. No puede estar vacío.",
+        "label": "Nombre",
+        "placeholder": "Ingresa un nombre"
+      },
+      "save": {
+        "error": {
+          "duplicate_relays": "Ha seleccionado los mismos relés en la alarma alta y baja. Esto no es válido.",
+          "required_fields": "No todos los campos requeridos se ingresan correctamente."
+        },
+        "ok": {
+          "message": "El área ''{name}'' está actualizado."
+        }
+      },
+      "setup": {
+        "day_night_difference": {
+          "help": "Cantidad para cambiar entre día y noche.",
+          "invalid": "Ingrese un número válido.",
+          "label": "Diferencia de día/noche",
+          "placeholder": "Ingresar número"
+        },
+        "day_night_source": {
+          "help": "Seleccione Fuente cuando sea 'Día'.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Fuente de día/noche",
+          "options": {
+            "lights": "Luces",
+            "weather": "Clima"
+          },
+          "placeholder": "Seleccione una fuente de día/noche"
+        },
+        "high": {
+          "begin": {
+            "help": "La hora del día en que los relés se alternan cada noche.",
+            "invalid": "Ingrese un tiempo válido.",
+            "label": "Comienza el tiempo",
+            "placeholder": "Ingrese el tiempo de inicio"
+          },
+          "door_status": {
+            "help": "Seleccione el estado de la puerta.",
+            "invalid": "Por favor tome una decisión.",
+            "label": "Estado de la puerta",
+            "options": {
+              "closed": "Cerrado",
+              "ignore": "ignorado",
+              "open": "Abierto"
+            },
+            "placeholder": "Selecciona un Estado"
+          },
+          "end": {
+            "help": "La hora del día en que los relés se alternan cada noche.",
+            "invalid": "Ingrese un tiempo válido.",
+            "label": "Hora de finalización",
+            "placeholder": "Ingrese la hora de finalización"
+          },
+          "ignore_high": {
+            "help": ".",
+            "label": "Ignorar una alarma alta"
+          },
+          "light_status": {
+            "help": "Seleccione el estado de las luces.",
+            "invalid": "Por favor tome una decisión.",
+            "label": "Estado de luz",
+            "options": {
+              "ignore": "ignorado",
+              "off": "Apagado",
+              "on": "En"
+            },
+            "placeholder": "Selecciona un Estado"
+          },
+          "off_duration": {
+            "help": "La duración cuando los relés deben permanecer apagados cuando se apagan. Ingrese '0' para deshabilitar.",
+            "invalid": "Ingrese una duración válida en minutos.",
+            "label": "Fuera de duración",
+            "placeholder": "Fuera de duración"
+          },
+          "on_duration": {
+            "help": "La duración cuando los relés deben estar encendidos. Si esto es más corto, entonces todo el día, obtendrá una funcionalidad del temporizador. Ingrese '0' para tener una noche completa.",
+            "invalid": "Ingrese una duración válida en minutos.",
+            "label": "En duración",
+            "placeholder": "En duración"
+          },
+          "playlists": {
+            "help": "Seleccione las listas de reproducción que se jugarán.",
+            "invalid": "Por favor tome una decisión.",
+            "label": "Listas de reproducción",
+            "placeholder": "Seleccionar listas de reproducción"
+          },
+          "power_on_time": {
+            "help": "La duración en segundos para alternar en el relé.",
+            "invalid": "Ingrese un número válido.",
+            "label": "Tiempo de encendido",
+            "placeholder": "Tiempo de encendido"
+          },
+          "relays": {
+            "help": "Seleccione los relés para alternar.",
+            "invalid": "Por favor tome una decisión.",
+            "label": "Relés",
+            "placeholder": "Relés seleccionados"
+          },
+          "settle_time": {
+            "help": "La duración en segundos entre dos acciones.",
+            "invalid": "Ingrese un número válido.",
+            "label": "Tiempo de asentamiento",
+            "placeholder": "Tiempo de asentamiento"
+          },
+          "trigger_threshold": {
+            "help": "Ingrese la cantidad de alarmas antes de que se realicen la acción.",
+            "invalid": "Ingrese un número válido.",
+            "label": "Umbral de alarma",
+            "placeholder": "Límite"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Seleccione el retraso y la duración del atenuador para ir o apagar en minutos. La duración máxima es de 180 minutos."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Atenuador fuera de duración"
+              },
+              "relay": {
+                "label": "Retraso de retransmisión apagado"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Atenuador en la duración"
+              },
+              "relay": {
+                "label": "Retraso de relé en"
+              }
+            },
+            "relay": {
+              "info": "Seleccione el retraso en minutos que espera un relé antes de que se encienda. El retraso máximo es de 180 minutos."
+            }
+          }
+        },
+        "low": {
+          "begin": {
+            "help": "La hora del día en que los relés se alternan cada noche.",
+            "invalid": "Ingrese un tiempo válido.",
+            "label": "Comienza el tiempo",
+            "placeholder": "Ingrese el tiempo de inicio"
+          },
+          "door_status": {
+            "help": "Seleccione el estado de la puerta.",
+            "invalid": "Por favor tome una decisión.",
+            "label": "Estado de la puerta",
+            "options": {
+              "closed": "Cerrado",
+              "ignore": "ignorado",
+              "open": "Abierto"
+            },
+            "placeholder": "Selecciona un Estado"
+          },
+          "end": {
+            "help": "La hora del día en que los relés se alternan cada noche.",
+            "invalid": "Ingrese un tiempo válido.",
+            "label": "Hora de finalización",
+            "placeholder": "Ingrese la hora de finalización"
+          },
+          "ignore_low": {
+            "help": "Alterne para ignorar el bajo valor de alarma de los sensores y use solo un alto valor de alarma.",
+            "label": "Ignorar la alarma baja"
+          },
+          "light_status": {
+            "help": "Seleccione el estado de las luces.",
+            "invalid": "Por favor tome una decisión.",
+            "label": "Estado de luz",
+            "options": {
+              "ignore": "ignorado",
+              "off": "Apagado",
+              "on": "En"
+            },
+            "placeholder": "Selecciona un Estado"
+          },
+          "off_duration": {
+            "help": "La duración cuando los relés deben permanecer apagados cuando se apagan. Ingrese '0' para deshabilitar.",
+            "invalid": "Ingrese una duración válida en minutos.",
+            "label": "Fuera de duración",
+            "placeholder": "Fuera de duración"
+          },
+          "on_duration": {
+            "help": "La duración cuando los relés deben estar encendidos. Si esto es más corto, entonces todo el día, obtendrá una funcionalidad del temporizador. Ingrese '0' para tener una noche completa.",
+            "invalid": "Ingrese una duración válida en minutos.",
+            "label": "En duración",
+            "placeholder": "En duración"
+          },
+          "playlists": {
+            "help": "Seleccione las listas de reproducción que se jugarán.",
+            "invalid": "Por favor tome una decisión.",
+            "label": "Listas de reproducción",
+            "placeholder": "Seleccionar listas de reproducción"
+          },
+          "power_on_time": {
+            "help": "La duración en segundos para alternar en el relé.",
+            "invalid": "Ingrese un número válido.",
+            "label": "Tiempo de encendido",
+            "placeholder": "Tiempo de encendido"
+          },
+          "relays": {
+            "help": "Seleccione los relés para alternar.",
+            "invalid": "Por favor tome una decisión.",
+            "label": "Relés",
+            "placeholder": "Relés seleccionados"
+          },
+          "settle_time": {
+            "help": "La duración en segundos entre dos acciones.",
+            "invalid": "Ingrese un número válido.",
+            "label": "Tiempo de asentamiento",
+            "placeholder": "Tiempo de asentamiento"
+          },
+          "trigger_threshold": {
+            "help": "Ingrese la cantidad de alarmas antes de que se realicen la acción.",
+            "invalid": "Ingrese un número válido.",
+            "label": "Umbral de alarma",
+            "placeholder": "Límite"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Seleccione el retraso y la duración del atenuador para ir o apagar en minutos. La duración máxima es de 180 minutos."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Atenuador fuera de duración"
+              },
+              "relay": {
+                "label": "Retraso de retransmisión apagado"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Atenuador en la duración"
+              },
+              "relay": {
+                "label": "Retraso de relé en"
+              }
+            },
+            "relay": {
+              "info": "Seleccione el retraso en minutos que espera un relé antes de que se encienda. El retraso máximo es de 180 minutos."
+            }
+          }
+        },
+        "main_lights": {
+          "help": "Alterne esto si estas son las luces principales para este recinto. Esto se usa para las verificaciones de luz en otras áreas.",
+          "label": "Luces principales"
+        },
+        "max_day_hours": {
+          "help": "La cantidad máxima de horas que se encienden las luces. Esto solo es válido en el modo climático. Cuando el día sea más largo que este valor máximo, el día se acortará a este valor máximo.",
+          "invalid": "El valor ingresado no es válido. Ingrese un número válido entre {min} y {max}.",
+          "label": "Horas máximas",
+          "placeholder": "Ingresar número"
+        },
+        "min_day_hours": {
+          "help": "La cantidad mínima de horas que se encienden las luces. Esto solo es válido en el modo climático. Cuando el día sea más corto que este valor mínimo, el día se extenderá a este valor mínimo.",
+          "invalid": "El valor ingresado no es válido. Ingrese un número válido entre {min} y {max}.",
+          "label": "Horas mínimas",
+          "placeholder": "Ingresar número"
+        },
+        "periods": {
+          "day": "Configuración de día",
+          "high": "Alarma alta",
+          "info": "A continuación, puede seleccionar los relevos y la configuración del temporizador por período de día y noche.",
+          "low": "Alarma baja",
+          "night": "Configuración nocturna",
+          "varation": "Variación"
+        },
+        "sensors": {
+          "help": "Seleccione sensores para usar para el modo basado en el sensor.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Sensores",
+          "placeholder": "Seleccionar sensores"
+        },
+        "shift_day_hours": {
+          "help": "La cantidad de tiempo para cambiar en horas según el tiempo de levantamiento del sol. Los valores negativos harán que el día comience antes.",
+          "invalid": "El valor ingresado no es válido. Ingrese un número válido entre {min} y {max}.",
+          "label": "Turno de horas",
+          "placeholder": "Ingresar número"
+        },
+        "soundcard": {
+          "help": "Seleccione la tarjeta de sonido que se usa para esta área.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Tarjeta de sonido",
+          "placeholder": "Seleccione una tarjeta de sonido"
+        },
+        "watertank_height": {
+          "help": "Ingrese la altura del tanque de agua.",
+          "invalid": "Ingrese un valor mínimo de {value}.",
+          "label": "Altura",
+          "placeholder": "Ingresar número"
+        },
+        "watertank_offset": {
+          "help": "Ingrese el desplazamiento entre el sensor y la altura del agua.",
+          "invalid": "Ingrese un valor mínimo de {value}.",
+          "label": "Compensar",
+          "placeholder": "Ingresar número"
+        },
+        "watertank_volume": {
+          "help": "Ingrese el volumen del tanque de agua.",
+          "invalid": "Ingrese un valor mínimo de {value}.",
+          "label": "Volumen de agua",
+          "placeholder": "Ingresar número"
+        }
+      },
+      "title": "Configuración de área",
+      "type": {
+        "help": "Seleccione el tipo de área. Cada tipo tiene sus propias opciones adicionales y lógica.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Escribe",
+        "placeholder": "Seleccione tipo"
+      }
+    }
+  },
+  "audio": {
+    "files": {
+      "delete": {
+        "confirm": {
+          "message": "¿Seguro que eliminará el archivo de audio ''{name}'' ({filename})?"
+        },
+        "error": {
+          "message": "¡El archivo de audio ''{name}'' no se pudo eliminar!\nError: {error}"
+        },
+        "ok": {
+          "message": "El archivo de audio ''{name}'' se elimina."
+        }
+      },
+      "settings": {
+        "audiofiles": {
+          "label": "Subir un nuevo archivo de audio",
+          "placeholder": "Subir un nuevo archivo de audio"
+        },
+        "save": {
+          "error": {
+            "invalid_file": "Archivos de audio no válidos"
+          },
+          "ok": {
+            "message": "Subido {amount, plural, =1 {# archivo de audio} other {# archivos de audio}}"
+          }
+        }
+      },
+      "title": "Archivos de sonido"
+    },
+    "menu": {
+      "files": {
+        "title": "Archivos"
+      },
+      "new_playlist": {
+        "title": "Nueva lista de reproducción"
+      },
+      "playlists": {
+        "title": "Listas de reproducción"
+      },
+      "title": "Audio"
+    },
+    "playlists": {
+      "delete": {
+        "confirm": {
+          "message": "¿Seguro que eliminará la lista de reproducción ''{name}'' con {length}?"
+        },
+        "error": {
+          "message": "¡La lista de reproducción ''{name}'' no se pudo eliminar!\nError: {error}"
+        },
+        "ok": {
+          "message": "La lista de reproducción ''{name}'' se elimina."
+        }
+      },
+      "settings": {
+        "files": {
+          "help": "Seleccione todos los archivos de audio para esta lista de reproducción.",
+          "invalid": "Seleccione al menos 1 archivo de audio.",
+          "label": "Archivos de sonido",
+          "placeholder": "Seleccionar archivos de audio"
+        },
+        "name": {
+          "help": "Ingrese un nombre fácil de recordar.",
+          "invalid": "El nombre ingresado no es válido. No puede estar vacío.",
+          "label": "Nombre",
+          "placeholder": "Ingresa un nombre"
+        },
+        "repeat": {
+          "help": "Juega esta lista de reproducción en modo repetido.",
+          "label": "Repetir"
+        },
+        "save": {
+          "error": {
+            "required_fields": "No todos los campos requeridos se ingresan correctamente."
+          },
+          "ok": {
+            "message": "PlayList ''{name}'' está actualizado."
+          }
+        },
+        "shuffle": {
+          "help": "Basta esta lista de reproducción cada vez que se juega.",
+          "label": "Barajar"
+        },
+        "title": "Configuración de la lista de reproducción",
+        "volume": {
+          "help": "Seleccione el volumen para esta lista de reproducción.",
+          "label": "Volumen de audio"
+        }
+      },
+      "title": "Listas de reproducción"
+    }
+  },
+  "buttons": {
+    "actions": {
+      "delete": "Botón Eliminar",
+      "export": "Botón de exportación",
+      "ignore": "Botón Ignorar",
+      "settings": "Botón Editar"
+    },
+    "delete": {
+      "confirm": {
+        "message": "¿Estás seguro de que quieres eliminar el botón ''{name}''?"
+      },
+      "error": {
+        "message": "¡El botón ''{name}'' no se pudo eliminar!\nError: {error}"
+      },
+      "ok": {
+        "message": "El botón ''{name}'' se elimina."
+      }
+    },
+    "ignore": {
+      "confirm": {
+        "message": "¿Estás seguro de que quieres ignorar el botón ''{name}''?"
+      },
+      "error": {
+        "message": "¡El botón ''{name}'' no se pudo ignorar!\nError: {error}"
+      },
+      "ok": {
+        "message": "El botón ''{name}'' se ignora."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nuevo botón"
+      },
+      "status": {
+        "title": "Estado"
+      },
+      "title": "Botones"
+    },
+    "settings": {
+      "address": {
+        "help": "Ingrese el número físico de PIN GPIO.",
+        "invalid": "La dirección ingresada no es válida. Ingrese un número válido entre {min} y {max}.",
+        "label": "Dirección",
+        "placeholder": "Introduce una direccion"
+      },
+      "calibration": {
+        "ldr_capacitor": {
+          "help": "Ingrese el valor del condensador en µF, ya que esto influirá en el cálculo de la luz.",
+          "invalid": "El valor del capacitor ingresado no es válido. Introduzca un número válido entre {min} y {max}.",
+          "label": "Valor del condensador en µF",
+          "placeholder": "Ingrese el valor del condensador en µF"
+        }
+      },
+      "current": {
+        "help": "El estado actual del botón.",
+        "label": "Actual",
+        "placeholder": "Valor actual"
+      },
+      "hardware": {
+        "help": "Seleccione el tipo de hardware para este botón.",
+        "invalid": "Seleccione un tipo de hardware.",
+        "label": "Hardware",
+        "placeholder": "Seleccionar hardware"
+      },
+      "name": {
+        "help": "Ingrese un nombre fácil de recordar.",
+        "invalid": "El nombre ingresado no es válido. No puede estar vacío.",
+        "label": "Nombre",
+        "placeholder": "Ingresa un nombre"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No todos los campos requeridos se ingresan correctamente."
+        },
+        "ok": {
+          "message": "Botón ''{name}'' está actualizado."
+        }
+      },
+      "title": "Configuración de botones"
+    },
+    "title": "Botones"
+  },
+  "calendar": {
+    "actions": {
+      "download": "Descargar ical"
+    },
+    "event": {
+      "delete": {
+        "confirm": {
+          "message": "¿Estás seguro de que quieres eliminar el evento ''{name}''?"
+        },
+        "error": {
+          "message": "¡El evento ''{name}'' no se pudo eliminar!\nError: {error}"
+        },
+        "ok": {
+          "message": "El evento ''{name}'' se elimina."
+        }
+      },
+      "duration": "Duración",
+      "periods": {
+        "days": "Días",
+        "months": "Meses",
+        "no_reminder": "Sin recordatorio",
+        "no_repeat": "Sin repetición",
+        "weeks": "Semanas",
+        "years": "Años"
+      },
+      "settings": {
+        "date": {
+          "help": "La fecha o el período para este evento.",
+          "label": "Fecha"
+        },
+        "description": {
+          "help": "Ingrese información sobre este evento.",
+          "label": "Ingrese una descripción"
+        },
+        "remind": {
+          "label": "Recordar en"
+        },
+        "repeat": {
+          "help": "Seleccione un período de repetición y una cantidad.",
+          "invalid": "Ingrese un monto de período de repetición válido.",
+          "label": "Repite cada"
+        },
+        "repeat_amount": {
+          "label": "Cantidad de selección"
+        },
+        "save": {
+          "error": {
+            "required_fields": "No todos los campos requeridos se ingresan correctamente."
+          },
+          "ok": {
+            "message": "El evento ''{name}'' está actualizado."
+          }
+        },
+        "summary": {
+          "help": "Ingresa un nombre.",
+          "invalid": "El nombre no puede estar vacío.",
+          "label": "Ingresa un nombre"
+        },
+        "title": "Evento",
+        "update": {
+          "error": {
+            "message": "¡El evento ''{name}'' no se pudo actualizar!\nError: {error}"
+          },
+          "ok": {
+            "message": "El evento ''{name}'' se actualiza."
+          }
+        }
+      }
+    },
+    "menu": {
+      "title": "Calendario"
+    },
+    "title": "Calendario"
+  },
+  "dashboard": {
+    "enclosures": {
+      "menu": {
+        "title": "Gabinetes"
+      },
+      "mode": "Modo",
+      "title": "Gabinetes"
+    },
+    "infobox": {
+      "current_power_usage": {
+        "title": "Uso de energía en Watt"
+      },
+      "current_water_flow": {
+        "title": "Flujo de agua en {water_flow_indicator}"
+      },
+      "total_power_usage": {
+        "duration": "en {duration}",
+        "title": "Uso total de energía"
+      },
+      "total_water_usage": {
+        "duration": "en {duration}",
+        "title": "Uso total del agua"
+      },
+      "uptime": {
+        "title": "Tiempo"
+      }
+    },
+    "menu": {
+      "title": "Tablero"
+    },
+    "title": "Tablero"
+  },
+  "enclosures": {
+    "actions": {
+      "delete": "Eliminar el recinto",
+      "settings": "Editar el recinto"
+    },
+    "area": {
+      "current": "Actual",
+      "current_status": "Estado actual",
+      "delete": {
+        "title": "Área de eliminación"
+      },
+      "edit": {
+        "title": "Área de edición"
+      },
+      "mode": {
+        "disabled": "Desactivado",
+        "sensors": "Sensores",
+        "timer": "Temporizador",
+        "title": "Modo",
+        "weather": "Clima"
+      },
+      "now": "ahora",
+      "period": {
+        "day": "Día",
+        "high": "Alto",
+        "low": "Bajo",
+        "night": "Noche"
+      },
+      "range": "Rango",
+      "type": {
+        "audio": "Audio",
+        "cooling": "Enfriamiento",
+        "heating": "Calefacción",
+        "humidity": "Humedad",
+        "lights": "Luces",
+        "main_lights": "Luces principales",
+        "watertank": "Depósito de agua"
+      }
+    },
+    "areas": {
+      "title": "Áreas"
+    },
+    "delete": {
+      "confirm": {
+        "message": "¿Estás seguro de que quieres eliminar el recinto ''{name}''?"
+      },
+      "error": {
+        "message": "¡El recinto ''{name}'' no se pudo eliminar!\nError: {error}"
+      },
+      "ok": {
+        "message": "Se elimina el recinto ''{name}''."
+      }
+    },
+    "doors": {
+      "title": "Puertas"
+    },
+    "menu": {
+      "list": {
+        "title": "Lista"
+      },
+      "new_area": {
+        "title": "NUEVA Área"
+      },
+      "new_enclosure": {
+        "title": "Nuevo recinto"
+      },
+      "title": "Gabinetes"
+    },
+    "settings": {
+      "description": {
+        "help": "Ingrese algún texto de descripción sobre este recinto.",
+        "label": "Descripción",
+        "placeholder": "Ingrese una descripción"
+      },
+      "doors": {
+        "help": "Seleccione la (s) puerta (s) para este recinto.",
+        "label": "Puertas"
+      },
+      "image": {
+        "help": "Sube un JPG o PNG.",
+        "invalid": "El archivo seleccionado no es válido. No es un archivo de imagen.",
+        "label": "Imagen",
+        "placeholder": "Seleccione un archivo de imagen"
+      },
+      "name": {
+        "help": "Ingrese un nombre fácil de recordar.",
+        "invalid": "El nombre ingresado no es válido. No puede estar vacío.",
+        "label": "Nombre",
+        "placeholder": "Ingresa un nombre"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No todos los campos requeridos se ingresan correctamente."
+        },
+        "ok": {
+          "message": "Cubro ''{name}'' está actualizado."
+        }
+      },
+      "title": "Configuración del recinto",
+      "webcams": {
+        "help": "Seleccione las cámaras web para este recinto.",
+        "label": "Cámaras web"
+      }
+    },
+    "title": "Gabinetes",
+    "webcams": {
+      "title": "Cámaras web"
+    }
+  },
+  "footer": {
+    "current_activity": "Actividad",
+    "error_messages": "Error de mensajes",
+    "warning_messages": "Mensajes de advertencia"
+  },
+  "gauge": {
+    "error": "error",
+    "last_update": "Última actualización",
+    "warning": "advertencia"
+  },
+  "general": {
+    "download": {
+      "title": "Descargar"
+    },
+    "exclude": {
+      "average": "."
+    },
+    "humidity": "Humedad",
+    "login": {
+      "title": "Iniciar sesión para hacer cambios"
+    },
+    "logout": {
+      "title": "Cerrar sesión"
+    },
+    "settings": {
+      "title": "Ajustes"
+    },
+    "temperature": "la temperatura",
+    "uptime_format": {
+      "days": "{number, plural, =1 {# día} other {# días}}",
+      "hours": "{number, plural, =1 {# hora} other {# horas}}",
+      "minutes": "{number, plural, =1 {# minuto} other {# minutos}}",
+      "months": "{number, plural, =1 {# mes} other {# mess}}",
+      "seconds": "{number, plural, =1 {# segundo} other {# segundos}}",
+      "years": "{number, plural, =1 {# año} other {# años}}"
+    }
+  },
+  "graph": {
+    "alarm": {
+      "max": "Alarma max",
+      "min": "Alarma min"
+    },
+    "current": "Actual",
+    "flow": "Flujo de agua",
+    "ldr": "Estado de luz",
+    "magnetic": "Estado de la puerta",
+    "motion": "Movimienot",
+    "no-data": "Sin datos ...",
+    "period": {
+      "day": "Día",
+      "month": "Mes",
+      "replaced": "Sustituido",
+      "week": "Semana",
+      "year": "Año"
+    },
+    "settings": {
+      "export": "Exportar"
+    },
+    "wattage": "Potencia"
+  },
+  "home": {
+    "menu": {
+      "title": "Hogar"
+    },
+    "title": "Hogar"
+  },
+  "messages": {
+    "actions": {
+      "delete": "Borrar mensaje",
+      "edit": "Editar mensaje"
+    },
+    "add": "Agregar mensaje",
+    "delete": {
+      "confirm": {
+        "message": "¿Estás seguro de que quieres eliminar el mensaje ''{name}''?"
+      },
+      "error": {
+        "message": "¡El mensaje ''{name}'' no se pudo eliminar!\nError: {error}"
+      },
+      "ok": {
+        "message": "Se elimina el mensaje ''{name}''."
+      }
+    },
+    "ratelimit": "{number, plural, =0 {Mensajes ilimitados} other {Máx # por minuto}}",
+    "settings": {
+      "available_services": {
+        "help": "Seleccione el servicio para usar para este mensaje de notificación.",
+        "label": "Servicios"
+      },
+      "enabled": {
+        "help": "Habilitar/deshabilitar este mensaje de notificación.",
+        "label": "Activado"
+      },
+      "message": {
+        "help": "Ingrese un mensaje. Puede usar valores de marcador de posición aquí.",
+        "label": "Mensaje",
+        "placeholder": "Ingrese un mensaje"
+      },
+      "placeholders": {
+        "format": "Los valores de número se pueden redondear usando el {link_start} `.: 2F` formato {link_end}",
+        "help": "Lista de marcadores de posición disponibles.",
+        "label": "Titulares de lugar"
+      },
+      "rate_limit": {
+        "help": "Número máximo de mensajes por minuto para este mensaje. Use 0 para ilimitado.",
+        "invalid": "El valor ingresado no es válido. Ingrese un número válido más alto que {min}.",
+        "label": "Límite de tarifa",
+        "placeholder": "Mensajes por minuto"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No todos los campos requeridos se ingresan correctamente."
+        },
+        "ok": {
+          "message": "Se actualiza el mensaje ''{name}''."
+        }
+      },
+      "subject": {
+        "help": "Ingrese un tema corto. Puede usar valores de marcador de posición aquí.",
+        "invalid": "El sujeto no puede estar vacío.",
+        "label": "Tema",
+        "placeholder": "Ingrese un sujeto"
+      },
+      "title": "Configuración de mensajes",
+      "type": {
+        "help": "Seleccione el tipo de mensaje de notificación.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Tipo de mensaje",
+        "placeholder": "Seleccione tipo"
+      }
+    },
+    "table": {
+      "actions": "Comportamiento",
+      "enabled": "Activado",
+      "message": "Mensaje",
+      "rate_limit": "Límite de tarifa",
+      "services": "Servicios",
+      "subject": "Tema",
+      "type": "Escribe"
+    },
+    "title": "Mensajes de notificación"
+  },
+  "modal": {
+    "confirm": {
+      "relays": {
+        "scan": "Esto comenzará un nuevo escaneo para encontrar nuevos relés. Esto puede tomar hasta 30 segundos."
+      },
+      "sensors": {
+        "scan": "Esto comenzará un nuevo escaneo para encontrar nuevos sensores. Esto puede tomar hasta 30 segundos."
+      },
+      "submit": {
+        "title": "Confirmar"
+      },
+      "system": {
+        "logout": "¿Estás seguro de que quieres cerrar sesión?",
+        "reboot": "Esto reiniciará la Raspberry Pi. Esto puede tomar hasta 60 segundos.",
+        "restart": "Esto reiniciará Terrariumpi. Esto puede tomar hasta 30 segundos.",
+        "shutdown": "Esto cerrará la Raspberry Pi. Úselo con cuidado!"
+      },
+      "title": "¿Está seguro?"
+    },
+    "form": {
+      "toggle": {
+        "info": "Mostrar/ocultar información de ayuda"
+      }
+    },
+    "general": {
+      "close": "Cerca",
+      "save": "Ahorrar"
+    },
+    "login": {
+      "form": {
+        "password": {
+          "help": "Introduce la contraseña.",
+          "invalid": "La contraseña no puede estar vacía.",
+          "label": "Clave"
+        },
+        "submit": "Acceso",
+        "username": {
+          "help": "Ingrese el nombre de usuario.",
+          "invalid": "El nombre de usuario no puede estar vacío.",
+          "label": "Nombre de usuario"
+        }
+      },
+      "title": "Acceso"
+    },
+    "notification": {
+      "service": {
+        "form": {
+          "field": {
+            "setup": {
+              "address": {
+                "label": "Introduce una direccion"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "not-found": {
+    "header": "Página no encontrada",
+    "link": "Ir a la página de inicio",
+    "title": "Página no encontrada"
+  },
+  "notification": {
+    "delete": {
+      "error": {
+        "title": "ERROR"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "door": {
+      "status": {
+        "title": "Actualización del estado de la puerta"
+      }
+    },
+    "exclude": {
+      "error": {
+        "title": "ERROR"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "form": {
+      "save": {
+        "error": {
+          "title": "Guardar error"
+        },
+        "ok": {
+          "title": "Guardar ok"
+        }
+      },
+      "upload": {
+        "error": {
+          "title": "Error al Subir"
+        }
+      }
+    },
+    "login": {
+      "message": {
+        "error": "Lo siento, pero el inicio de sesión no es válido",
+        "ok": "Estás iniciado con éxito."
+      },
+      "title": "Acceso"
+    },
+    "manual_mode": {
+      "error": {
+        "title": "ERROR"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "offline": {
+      "message": "La conexión se pierde",
+      "title": "Desconectado"
+    },
+    "online": {
+      "message": "Estamos conectados",
+      "title": "En línea"
+    },
+    "reboot": {
+      "ok": {
+        "title": "Reiniciar el sistema OK"
+      }
+    },
+    "restart": {
+      "ok": {
+        "title": "Reinicio del sistema OK"
+      }
+    },
+    "scanning": {
+      "ok": {
+        "title": "Escaneo terminado"
+      }
+    },
+    "shutdown": {
+      "ok": {
+        "title": "Apagado del sistema OK"
+      }
+    },
+    "toggle": {
+      "error": {
+        "title": "ERROR"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    }
+  },
+  "relays": {
+    "actions": {
+      "delete": "Eliminar relé",
+      "export": "Relé de exportación",
+      "ignore": "Ignorar el relé",
+      "manual_mode": "Relé del modo manual",
+      "replace_hardware": "Reemplazar hardware",
+      "settings": "Editar relé"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "¿Estás seguro de que quieres ignorar el relé ''{name}''?"
+      },
+      "manual_mode": {
+        "message": "Modo manual de al revés para el relé ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "¿Estás seguro de que quieres eliminar el relé ''{name}''?"
+      },
+      "error": {
+        "message": "¡El relé ''{name}'' no se pudo eliminar!\nError: {error}"
+      },
+      "ok": {
+        "message": "Se elimina el relé ''{name}''."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "¡El relé ''{name}'' no se pudo ignorar!\nError: {error}"
+      },
+      "ok": {
+        "message": "Se ignora el relé ''{name}''."
+      }
+    },
+    "manual-mode": "Modo manual",
+    "manual_mode": {
+      "error": {
+        "message": "Error al cambiar el modo manual para el relé ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "Se cambia el modo manual para el relé ''{name}''."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nuevo relé"
+      },
+      "scan": {
+        "title": "Relés de escaneo"
+      },
+      "status": {
+        "title": "Estado"
+      },
+      "title": "Relés"
+    },
+    "settings": {
+      "address": {
+        "help": "Para más información, consulte en línea.",
+        "invalid": "La dirección ingresada no es válida. No puede estar vacío.",
+        "label": "Dirección",
+        "placeholder": "Introduce una direccion"
+      },
+      "calibration": {
+        "dimmer_frequency": {
+          "help": "La frecuencia en la que funciona el atenuador.",
+          "invalid": "Ingrese un valor mínimo de {value}.",
+          "label": "Frecuencia de atenuación en HZ"
+        },
+        "dimmer_max_dim": {
+          "help": "Valor de atenuación máximo (legado).",
+          "invalid": "Ingrese un valor mínimo de {value}.",
+          "label": "Valor de tenue máximo"
+        },
+        "dimmer_max_power": {
+          "help": "La potencia máxima para este atenuador.",
+          "invalid": "El valor ingresado no es válido. Ingrese un número válido entre {min} y {max}.",
+          "label": "Potencia máxima en %"
+        },
+        "dimmer_offset": {
+          "help": "El desplazamiento de atenuador.",
+          "invalid": "Ingrese un valor mínimo de {value}.",
+          "label": "Desplazamiento de atenuación en %"
+        }
+      },
+      "current": {
+        "help": "El estado actual del relé.",
+        "label": "Actual",
+        "placeholder": "Valor actual"
+      },
+      "flow": {
+        "help": "Ingrese el flujo de agua (máximo) cuando se enciende.",
+        "invalid": "Ingrese un valor mínimo de {value}.",
+        "label": "Flujo de agua"
+      },
+      "hardware": {
+        "help": "Seleccione el tipo de hardware para este relé.",
+        "invalid": "Seleccione un tipo de hardware.",
+        "label": "Hardware",
+        "placeholder": "Seleccionar hardware"
+      },
+      "name": {
+        "help": "Ingrese un nombre fácil de recordar.",
+        "invalid": "El nombre ingresado no es válido. No puede estar vacío.",
+        "label": "Nombre",
+        "placeholder": "Ingresa un nombre"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No todos los campos requeridos se ingresan correctamente."
+        },
+        "ok": {
+          "message": "Relay ''{name}'' está actualizado."
+        }
+      },
+      "title": "Configuración de relé",
+      "wattage": {
+        "help": "Ingrese la potencia (máxima) cuando se enciende.",
+        "invalid": "Ingrese un valor mínimo de {value}.",
+        "label": "Potencia"
+      }
+    },
+    "title": "Relés",
+    "toggle": {
+      "error": {
+        "message": "Error al conmutar el relé ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "Relé conmutado ''{name}'' a estado {value}"
+      }
+    }
+  },
+  "sensors": {
+    "actions": {
+      "delete": "Eliminar sensor",
+      "export": "Sensor de exportación",
+      "ignore": "Ignorar el sensor",
+      "settings": "Sensor de edición"
+    },
+    "all": {
+      "menu": {
+        "title": "Todos los sensores"
+      },
+      "title": "Todos los sensores"
+    },
+    "altitude": {
+      "menu": {
+        "title": "Altitud"
+      },
+      "title": "Sensores de altitud"
+    },
+    "average": {
+      "altitude": "Altitud promedio",
+      "co2": "CO2 promedio",
+      "distance": "Distancia promedio",
+      "fertility": "Fertilidad promedio",
+      "humidity": "Humedad promedio",
+      "light": "Luz promedio",
+      "moisture": "Humedad promedio",
+      "pressure": "Presión promedio",
+      "temperature": "Temperatura media",
+      "uva": "UVA promedio",
+      "uvb": "UVB promedio",
+      "uvi": "Índice UV promedio"
+    },
+    "co2": {
+      "menu": {
+        "title": "Enfermo"
+      },
+      "title": "Sensores de CO2"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "¿Estás seguro de que quieres ignorar el sensor ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "¿Estás seguro de que quieres eliminar el sensor ''{name}''?"
+      },
+      "error": {
+        "message": "¡El sensor ''{name}'' no se pudo eliminar!\nError: {error}"
+      },
+      "ok": {
+        "message": "El sensor ''{name}'' se elimina."
+      }
+    },
+    "distance": {
+      "menu": {
+        "title": "Distancia"
+      },
+      "title": "Sensores de distancia"
+    },
+    "exclude": {
+      "error": {
+        "message": "¡El sensor ''{name}'' no se pudo ignorar!\nError: {error}"
+      },
+      "ok": {
+        "message": "Se ignora el sensor ''{name}''."
+      }
+    },
+    "fertility": {
+      "menu": {
+        "title": "Fertilidad"
+      },
+      "title": "Sensores de fertilidad"
+    },
+    "humidity": {
+      "menu": {
+        "title": "Humedad"
+      },
+      "title": "Sensores de humedad"
+    },
+    "light": {
+      "menu": {
+        "title": "luz"
+      },
+      "title": "Sensores de luz"
+    },
+    "menu": {
+      "new": {
+        "title": "Nuevo sensor"
+      },
+      "scan": {
+        "title": "Sensores de escaneo"
+      },
+      "title": "Sensores"
+    },
+    "moisture": {
+      "menu": {
+        "title": "Humedad"
+      },
+      "title": "Sensores de humedad"
+    },
+    "ph": {
+      "menu": {
+        "title": "ph"
+      },
+      "title": "Sensores de pH"
+    },
+    "pressure": {
+      "menu": {
+        "title": "presión"
+      },
+      "title": "Sensores de presión"
+    },
+    "settings": {
+      "address": {
+        "help": "Introduce una direccion.",
+        "invalid": "La dirección ingresada no es válida. No puede estar vacío.",
+        "label": "Dirección",
+        "placeholder": "Introduce una direccion"
+      },
+      "alarm_max": {
+        "help": "Ingrese el valor máximo para la alarma.",
+        "invalid": "El valor ingresado no es válido. Necesita ser número.",
+        "label": "Alarma max",
+        "placeholder": "Alarma max"
+      },
+      "alarm_min": {
+        "help": "Ingrese el valor mínimo para la alarma.",
+        "invalid": "El valor ingresado no es válido. Necesita ser número.",
+        "label": "Alarma min",
+        "placeholder": "Alarma min"
+      },
+      "calibration": {
+        "ccs811_compensation_sensors": {
+          "help": "Seleccione los sensores para el cálculo de la compensación.",
+          "label": "Sensores de compensación",
+          "placeholder": "Seleccionar sensores de compensación"
+        },
+        "chirp_max_moist": {
+          "help": "Ingrese el valor máximo húmedo.",
+          "invalid": "El valor ingresado no es válido. Debe ser un número más alto que {min}.",
+          "label": "Valor húmedo máximo"
+        },
+        "chirp_min_moist": {
+          "help": "Ingrese el valor mínimo húmedo.",
+          "invalid": "El valor ingresado no es válido. Debe ser un número más alto que {min}.",
+          "label": "Valor mínimo húmedo"
+        },
+        "offset": {
+          "help": "Ingrese offset para este sensor.",
+          "invalid": "El valor ingresado no es válido. Necesita ser número.",
+          "label": "Compensar"
+        }
+      },
+      "current": {
+        "help": "El estado actual del sensor.",
+        "label": "Actual",
+        "placeholder": "Valor actual"
+      },
+      "exclude_avg": {
+        "help": "Excluya estos sensores de los cálculos promedio.",
+        "label": "Excl.Aviso"
+      },
+      "fields": {
+        "error": "No todos los campos requeridos se ingresan correctamente."
+      },
+      "hardware": {
+        "help": "Seleccione el tipo de hardware para este botón.",
+        "invalid": "Seleccione un tipo de hardware.",
+        "label": "Hardware",
+        "placeholder": "Seleccionar hardware"
+      },
+      "limit_max": {
+        "help": "Ingrese el valor máximo que es válido.",
+        "invalid": "El valor ingresado no es válido. Necesita ser número.",
+        "label": "Límite máximo"
+      },
+      "limit_min": {
+        "help": "Ingrese el valor mínimo que es válido.",
+        "invalid": "El valor ingresado no es válido. Necesita ser número.",
+        "label": "Límite mínimo"
+      },
+      "max_diff": {
+        "help": "Ingrese la diferencia máxima entre dos medidas que es válida. Ingrese '0' para deshabilitar.",
+        "invalid": "El valor ingresado no es válido. Debe ser un número más alto que {min}.",
+        "label": "Max Diff",
+        "placeholder": "Diferencia máxima"
+      },
+      "name": {
+        "help": "Ingrese un nombre fácil de recordar.",
+        "invalid": "El nombre ingresado no es válido. No puede estar vacío.",
+        "label": "Nombre",
+        "placeholder": "Ingresa un nombre"
+      },
+      "save": {
+        "ok": {
+          "message": "Sensor ''{name}'' está actualizado."
+        }
+      },
+      "title": "Configuración del sensor",
+      "type": {
+        "help": "Seleccione el tipo de medición para este sensor.",
+        "invalid": "Seleccione un tipo de medición.",
+        "label": "Escribe",
+        "placeholder": "Seleccione tipo"
+      }
+    },
+    "temperature": {
+      "menu": {
+        "title": "la temperatura"
+      },
+      "title": "Sensores de temperatura"
+    },
+    "title": "Sensores",
+    "uva": {
+      "menu": {
+        "title": "UVA"
+      },
+      "title": "Sensores UVA"
+    },
+    "uvb": {
+      "menu": {
+        "title": "UVB"
+      },
+      "title": "Sensores UVB"
+    },
+    "uvi": {
+      "menu": {
+        "title": "uvi"
+      },
+      "title": "Sensores UVI"
+    }
+  },
+  "services": {
+    "actions": {
+      "delete": "Eliminar servicio",
+      "edit": "Editar servicio"
+    },
+    "add": "Agregar servicio",
+    "delete": {
+      "confirm": {
+        "message": "¿Estás seguro de que quieres eliminar el servicio ''{name}''?"
+      },
+      "error": {
+        "message": "¡El servicio ''{name}'' no se pudo eliminar!\nError: {error}"
+      },
+      "ok": {
+        "message": "Se elimina el servicio ''{name}''."
+      }
+    },
+    "enabled": "Activado",
+    "ratelimit": "{number, plural, =0 {Mensajes ilimitados} other {Máx # por minuto}}",
+    "settings": {
+      "enabled": {
+        "help": "Habilitar/deshabilitar este servicio de notificación.",
+        "label": "Activado"
+      },
+      "name": {
+        "help": "Ingrese un nombre fácil de recordar.",
+        "invalid": "El nombre ingresado no es válido. No puede estar vacío.",
+        "label": "Nombre",
+        "placeholder": "Ingresa un nombre"
+      },
+      "rate_limit": {
+        "help": "Número máximo de mensajes por minuto para este servicio. Use 0 para ilimitado.",
+        "invalid": "El valor ingresado no es válido. Ingrese un número válido más alto que {min}.",
+        "label": "Límite de tarifa",
+        "placeholder": "Mensajes por minuto"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No todos los campos requeridos se ingresan correctamente."
+        },
+        "ok": {
+          "message": "Se actualiza el servicio ''{name}''."
+        }
+      },
+      "setup": {
+        "address": {
+          "help": "Introduce una direccion.",
+          "invalid": "La dirección ingresada no es válida. No puede estar vacío.",
+          "label": "Dirección",
+          "placeholder": "Introduce una direccion"
+        },
+        "api_token": {
+          "help": ".",
+          "invalid": "El token API ingresado no es válido. No puede estar vacío.",
+          "label": "Token API",
+          "placeholder": "Ingrese el token API"
+        },
+        "buzzer": {
+          "help": "Lista de canciones disponibles para usar en el asunto del mensaje."
+        },
+        "green": {
+          "help": "Ingrese el pasador GPIO para luz verde.",
+          "invalid": "El valor ingresado no es válido. Ingrese un número válido entre {min} y {max}.",
+          "label": "Verde",
+          "placeholder": "Ingrese el pin verde GPIO"
+        },
+        "hardware": {
+          "help": "Seleccione el tipo de hardware para esta pantalla.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Hardware",
+          "placeholder": "Seleccionar hardware"
+        },
+        "password": {
+          "help": "Ingrese la contraseña del servidor.",
+          "label": "Contraseña del servidor",
+          "placeholder": "Introduzca un nombre de usuario"
+        },
+        "port": {
+          "help": "Ingrese el número de puerto del servidor.",
+          "invalid": "El número de puerto ingresado no es válido. No puede estar vacío.",
+          "label": "Puerto de servicio",
+          "placeholder": "Ingrese un número de puerto"
+        },
+        "pushover": {
+          "label": "Cree sus tokens registrando Terrariumpi como una aplicación {link}."
+        },
+        "receiver": {
+          "help": "Introduzca una dirección de correo electrónico.",
+          "invalid": "La dirección no puede estar vacía.",
+          "label": "Correo electrónico del receptor",
+          "placeholder": "Introduzca una dirección de correo electrónico"
+        },
+        "red": {
+          "help": "Ingrese el pasador GPIO para la luz roja.",
+          "invalid": "El valor ingresado no es válido. Ingrese un número válido entre {min} y {max}.",
+          "label": "Rojo",
+          "placeholder": "Ingrese el pin Red GPIO"
+        },
+        "show_title": {
+          "help": "Muestre un nombre y versión como título en la pantalla.",
+          "label": "Mostrar título"
+        },
+        "ssl": {
+          "email": {
+            "label": "El servicio de notificación de correo electrónico detectará automáticamente las conexiones SSL/TLS."
+          },
+          "mqtt": {
+            "label": "El servicio de notificación MQTT detectará automáticamente las conexiones SSL/TLS."
+          }
+        },
+        "url": {
+          "help": "Ingrese la URL de publicación completa.",
+          "invalid": "La URL ingresada no es válida. No puede estar vacío.",
+          "label": "URL de publicación completa",
+          "placeholder": "Ingrese la URL de publicación completa"
+        },
+        "user_key": {
+          "help": ".",
+          "invalid": "La clave de usuario ingresada no es válida. No puede estar vacío.",
+          "label": "Clave de usuario",
+          "placeholder": "Ingrese la clave de usuario"
+        },
+        "username": {
+          "help": "Ingrese el nombre de usuario del servidor.",
+          "label": "Nombre de usuario del servidor",
+          "placeholder": "Introduzca un nombre de usuario"
+        },
+        "yellow": {
+          "help": "Ingrese el pin GPIO para la luz ámbar.",
+          "invalid": "El valor ingresado no es válido. Ingrese un número válido entre {min} y {max}.",
+          "label": "Ámbar",
+          "placeholder": "Ingrese a Amber GPIO PIN"
+        }
+      },
+      "title": "Configuración del servicio de notificación",
+      "type": {
+        "help": "Seleccione el tipo de servicio de notificación.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Escribe",
+        "placeholder": "Seleccione tipo"
+      }
+    },
+    "title": "Servicios de notificación"
+  },
+  "system": {
+    "log": {
+      "download": {
+        "title": "Descargar archivo de registro"
+      },
+      "filters": {
+        "errors": "errores",
+        "search": "Ingrese los términos de búsqueda",
+        "title": "Filtros",
+        "warnings": "advertencias"
+      },
+      "lines": "{lines} líneas",
+      "loading": "Cargando datos",
+      "title": "Registro del sistema"
+    },
+    "menu": {
+      "log": {
+        "title": "Tronco"
+      },
+      "notifications": {
+        "title": "Notificaciones"
+      },
+      "reboot": {
+        "title": "Reiniciar"
+      },
+      "restart": {
+        "title": "Reiniciar"
+      },
+      "settings": {
+        "title": "Ajustes"
+      },
+      "shutdown": {
+        "title": "Cerrar"
+      },
+      "status": {
+        "title": "Estado"
+      },
+      "title": "Sistema"
+    },
+    "notifications": {
+      "title": "Notificaciones"
+    },
+    "settings": {
+      "all_gauges_on_single_page": {
+        "help": "Agregue el elemento de menú adicional para todos los sensores en una sola página.",
+        "label": "Todos los medidores en una sola página"
+      },
+      "authenticate": {
+        "help": "Siempre autenticarse o solo cuando se realizan cambios.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Modo de autenticación",
+        "options": {
+          "changes": "Solo para los cambios",
+          "full": "Autenticación completa",
+          "no_authentication": "Sin autenticacion"
+        }
+      },
+      "auto_dark_mode": {
+        "help": "Alternar el modo oscuro cuando comience la noche.",
+        "label": "Modo Auto Dark"
+      },
+      "currency": {
+        "help": "Seleccione la moneda de interfaz.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Divisa"
+      },
+      "distance_indicator": {
+        "help": "Seleccione el indicador de distancia. Solo afecta los valores actuales.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Tipo de distancia"
+      },
+      "exclude-ids": {
+        "help": "IDS que están excluidos.",
+        "label": "IDS excluidos"
+      },
+      "graph_smooth_value": {
+        "help": "Ingrese la cantidad de puntos de datos al promedio. 0 deshabilitará esta característica.",
+        "invalid": "Ingrese un valor mínimo de {value}.",
+        "label": "Suavizado de gráficos"
+      },
+      "header": {
+        "cloud": "Nube",
+        "gui": "Guía",
+        "locale": "Lugar",
+        "system": "Sistema"
+      },
+      "hide_environment_dashboard": {
+        "help": "Ocultar los datos del recinto en el tablero.",
+        "label": "Ocultar recintos en el tablero"
+      },
+      "host": {
+        "help": "Ingrese la IP para escuchar las conexiones. Predeterminado 0. 0.0. 0.",
+        "invalid": "Ingrese una dirección IP válida.",
+        "label": "Número de IP"
+      },
+      "language": {
+        "help": "Seleccione el idioma de interfaz. Esto también cambiará el número y el formato de moneda.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Idioma"
+      },
+      "meross_cloud_password": {
+        "help": "Ingrese la contraseña para iniciar sesión en MeraS Cloud.",
+        "label": "Contraseña de Meross"
+      },
+      "meross_cloud_username": {
+        "help": "Ingrese el nombre de usuario para iniciar sesión en MeraS Cloud.",
+        "label": "Nombre de usuario de Meross"
+      },
+      "page": {
+        "title": "Ajustes del sistema"
+      },
+      "password": {
+        "help": "Ingrese una contraseña para la autenticación.",
+        "invalid": "La contraseña no puede estar vacía.",
+        "label": "Nueva contraseña"
+      },
+      "password2": {
+        "help": "Ingrese la nueva contraseña nuevamente.",
+        "invalid": "La nueva contraseña no coincide.",
+        "label": "Confirmar nueva contraseña"
+      },
+      "pi-wattage": {
+        "help": "Ingrese el uso total de energía del PI con todos sus dispositivos USB conectados.",
+        "invalid": "Ingrese un valor mínimo de {value}.",
+        "label": "Uso de potencia de Pi"
+      },
+      "port": {
+        "help": "Ingrese el número de puerto para escuchar las conexiones. Valor predeterminado 8090.",
+        "invalid": "Ingrese un valor mínimo de {value}.",
+        "label": "Número de puerto"
+      },
+      "power_price": {
+        "help": "Ingrese el precio por kWh.",
+        "invalid": "Ingrese un valor mínimo de {value}.",
+        "label": "Precio de energía"
+      },
+      "profile_image": {
+        "help": "Actualice una imagen personalizada utilizada en el menú.",
+        "invalid": "Formato de imagen de perfil no válido.",
+        "label": "Imagen de perfil"
+      },
+      "save": {
+        "ok": {
+          "message": "La configuración se actualiza.",
+          "title": "Actualización OK"
+        }
+      },
+      "show_min_max_gauge": {
+        "help": "Muestre el valor mínimo y máximo en los medidores.",
+        "label": "Mostrar valores min y máximo en gráficos de calibre"
+      },
+      "temperature_indicator": {
+        "help": "Seleccione el indicador de temperatura. Solo afecta los valores actuales.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Tipo de temperatura"
+      },
+      "title": {
+        "help": "Ingrese un título personalizado.",
+        "invalid": "El título no puede estar vacío.",
+        "label": "Título"
+      },
+      "username": {
+        "help": "Ingrese el nombre de usuario para la autenticación.",
+        "invalid": "El nombre de usuario no puede estar vacío.",
+        "label": "Nombre de usuario"
+      },
+      "water_price": {
+        "help": "Ingrese el precio por l/galón.",
+        "invalid": "Ingrese un valor mínimo de {value}.",
+        "label": "Precio del agua"
+      },
+      "water_volume_indicator": {
+        "help": "Seleccione el indicador de volumen de agua. Solo afecta los valores actuales.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Tipo de volumen líquido"
+      },
+      "wind_speed_indicator": {
+        "help": "Seleccione el indicador de velocidad del viento. Solo afecta los valores actuales.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Tipo de velocidad del viento"
+      }
+    },
+    "status": {
+      "cpu_temp": {
+        "title": "Temperatura de la CPU"
+      },
+      "disk": {
+        "title": "Uso del disco"
+      },
+      "load": {
+        "title": "Carga del sistema"
+      },
+      "memory": {
+        "title": "Uso de memoria"
+      },
+      "summary": {
+        "title": "Resumen del sistema"
+      },
+      "title": "Estado del sistema",
+      "uptime": {
+        "title": "Tiempo de actividad del sistema"
+      }
+    }
+  },
+  "table": {
+    "field": {
+      "range": "rango"
+    },
+    "header": {
+      "actions": "Comportamiento",
+      "duration": "Duración",
+      "filename": "Nombre del archivo",
+      "filesize": "Tamaño del archivo",
+      "mode": "Modo",
+      "name": "Nombre",
+      "number_files": "# Archivos",
+      "repeat": "Repetir",
+      "shuffle": "Barajar",
+      "status": "Estado",
+      "type": "Escribe",
+      "volume": "Volumen de audio"
+    }
+  },
+  "topbar": {
+    "current_status": "Estado actual",
+    "door_status": "Estado de la puerta",
+    "upcoming_events": "{number, plural, =0 {no hay eventos} =1 {un evento} other {# eventos}}"
+  },
+  "userpanel": {
+    "login": {
+      "text1": "Solo leer modo",
+      "text2": "Acceso"
+    },
+    "logout": {
+      "text1": "Hola {name}",
+      "text2": "Cerrar sesión"
+    }
+  },
+  "weather": {
+    "current": "Actual",
+    "forecast": "Pronóstico",
+    "menu": {
+      "title": "Clima"
+    },
+    "settings": {
+      "fields": {
+        "error": "No todos los campos requeridos se ingresan correctamente."
+      },
+      "information": "Para usar el sistema meteorológico, debe crear una cuenta gratuita en {source_link}.",
+      "save": {
+        "ok": {
+          "message": "Se guarda la configuración meteorológica."
+        }
+      },
+      "title": "Configuración meteorológica",
+      "weather_source": {
+        "help": "Ingrese la URL de API OpenWeathermap completa como: {api_url_example}.",
+        "invalid": "La url introducida no es válida.",
+        "label": "URL de origen"
+      }
+    },
+    "title": "Clima"
+  },
+  "webcams": {
+    "actions": {
+      "delete": "Eliminar la cámara web",
+      "ignore": "Ignorar la cámara web",
+      "settings": "Editar cámaras web"
+    },
+    "archive": {
+      "no_images": "No hay imágenes de archivo disponibles"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "¿Estás seguro de que quieres ignorar la cámara web ''{name}''?"
+      }
+    },
+    "controls": {
+      "archive": "Archivo",
+      "new_marker": "Agregar marcador",
+      "save_raw_image": "Guardar imagen sin procesar",
+      "show_markers": "Espectáculo",
+      "toggle_volume": "Volumen de palanca"
+    },
+    "delete": {
+      "confirm": {
+        "message": "¿Estás seguro de que quieres eliminar la cámara web ''{name}''?"
+      },
+      "error": {
+        "message": "¡La webcam ''{name}'' no se pudo eliminar!\nError: {error}"
+      },
+      "ok": {
+        "message": "Se elimina la webcam ''{name}''."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "¡La webcam ''{name}'' no podría ignorarse!\nError: {error}"
+      },
+      "ok": {
+        "message": "Se ignora la webcam ''{name}''."
+      }
+    },
+    "markers": {
+      "settings": {
+        "delete": "Borrar",
+        "doors": {
+          "help": "Seleccione los senores que desea mostrar.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Sensores"
+        },
+        "title": "Sensores"
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nueva cámara web"
+      },
+      "status": {
+        "title": "Estado"
+      },
+      "title": "Cámaras web"
+    },
+    "settings": {
+      "address": {
+        "help": "Para más información, consulte en línea.",
+        "invalid": "La dirección ingresada no es válida. No puede estar vacío.",
+        "label": "Dirección",
+        "placeholder": "Introduce una direccion"
+      },
+      "archive": {
+        "door": {
+          "help": "Estado de la puerta para tomar una imagen de archivo.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Estado de la puerta de archivo",
+          "options": {
+            "close": "Cerca",
+            "ignore": "Pasar por alto",
+            "open": "Abierto"
+          },
+          "placeholder": "Seleccione el estado de la puerta de archivo"
+        },
+        "flash": {
+          "help": "Seleccione un relé que actúe como un intermitente.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Destello",
+          "placeholder": "Seleccione Relé opcional para Flash"
+        },
+        "light": {
+          "help": "Estado de luz para tomar una imagen de archivo.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Estado de luz de archivo",
+          "options": {
+            "ignore": "Pasar por alto",
+            "off": "Cuando no",
+            "on": "Cuando en"
+          },
+          "placeholder": "Seleccione Archive Light State"
+        },
+        "options": {
+          "day_1": "1 día",
+          "disabled": "Desactivado",
+          "hour_1": "30 minutos",
+          "hour_12": "12 horas",
+          "hour_3": "3 horas",
+          "hour_6": "6 horas",
+          "minute_1": "1 minuto",
+          "minute_15": "15 minutos",
+          "minute_30": "30 minutos",
+          "minute_5": "5 minutos",
+          "motion": "Movimiento"
+        },
+        "state": {
+          "help": "Seleccione la duración entre imágenes archivadas.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Archivo",
+          "placeholder": "Seleccione Archivado"
+        }
+      },
+      "awb": {
+        "help": "Seleccione un balance de blancos.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Equilibrio de blancos",
+        "options": {
+          "auto": "Auto",
+          "cloudy": "Nuboso",
+          "flash": "Destello",
+          "fluorescent": "Fluorescente",
+          "greyworld": "Greyworld",
+          "horizon": "Horizonte",
+          "incandescent": "Incandescente",
+          "off": "Apagado",
+          "shade": "Sombra",
+          "sunlight": "Luz de sol",
+          "tungsten": "Tungsteno"
+        },
+        "placeholder": "Seleccionar balance de blancos"
+      },
+      "hardware": {
+        "help": "Seleccione el tipo de hardware para este botón.",
+        "invalid": "Seleccione un tipo de hardware.",
+        "label": "Hardware",
+        "placeholder": "Seleccionar hardware"
+      },
+      "height": {
+        "help": "Ingrese la altura de resolución en píxeles.",
+        "invalid": "Ingrese un valor mínimo de {value}.",
+        "label": "Altura"
+      },
+      "motion": {
+        "area": {
+          "help": "Ingrese un tamaño de área.",
+          "invalid": "Ingrese un valor mínimo de {value}.",
+          "label": "Área mínima de movimiento",
+          "placeholder": "Ingresar número"
+        },
+        "boxes": {
+          "help": "Mostrar cajas de movimiento en las imágenes archivadas.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Mostrar cajas de movimiento",
+          "options": {
+            "blue": "Azul",
+            "green": "Verde",
+            "none": "Ninguna",
+            "red": "Rojo"
+          },
+          "placeholder": "Mostrar las cajas de movimiento"
+        },
+        "frame": {
+          "help": "Qué marco usar para la detección de movimiento.",
+          "invalid": "Por favor tome una decisión.",
+          "label": "Marco de comparación de movimiento",
+          "options": {
+            "archived": "Último marco archivado",
+            "last": "Último cuadro"
+          },
+          "placeholder": "Seleccione qué marco se comparan"
+        },
+        "threshold": {
+          "help": "Ingrese el umbral de movimiento.",
+          "invalid": "Ingrese un valor mínimo de {value}.",
+          "label": "Umbral delta de movimiento",
+          "placeholder": "Ingresar número"
+        }
+      },
+      "name": {
+        "help": "Ingrese un nombre fácil de recordar.",
+        "invalid": "El nombre ingresado no es válido. No puede estar vacío.",
+        "label": "Nombre",
+        "placeholder": "Ingresa un nombre"
+      },
+      "preview": {
+        "label": "Avance"
+      },
+      "rotation": {
+        "help": "Seleccione una rotación.",
+        "invalid": "Por favor tome una decisión.",
+        "label": "Rotación",
+        "options": {
+          "degrees_0": "0 grados",
+          "degrees_180": "180 grados",
+          "degrees_270": "270 grados",
+          "degrees_90": "90 grados",
+          "flip_h": "Voltear horizontal",
+          "flip_v": "Voltear vertical",
+          "zero_degrees": "0 grados"
+        },
+        "placeholder": "Seleccionar rotación"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No todos los campos requeridos se ingresan correctamente."
+        },
+        "ok": {
+          "message": "Webcam ''{name}'' está actualizado."
+        }
+      },
+      "title": "Configuración de la webcam",
+      "width": {
+        "help": "Ingrese el ancho de resolución en píxeles.",
+        "invalid": "Ingrese un valor mínimo de {value}.",
+        "label": "Ancho"
+      }
+    },
+    "title": "Cámaras web"
+  }
+}

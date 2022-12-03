@@ -1,4 +1,4 @@
-pip==22.3
+pip==22.3.1
 # !! Do not upgrade setup tools, as this will break building https://github.com/gbstack/ffprobe-python !!
 setuptools==63.4.1
 wheel==0.38.4
@@ -21,7 +21,7 @@ retry==0.9.2
 # !! Check first: https://piwheels.org/project/bcrypt/ !!
 bcrypt==3.2.2
 # !! Check first: https://piwheels.org/project/cryptography/ !!
-cryptography==37.0.4
+cryptography==38.0.1
 
 # Hardware / sensors packages
 pcf8574==0.1.3

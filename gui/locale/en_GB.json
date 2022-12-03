@@ -1,0 +1,2104 @@
+{
+  "about": {
+    "online": {
+      "help": "More help online."
+    },
+    "title": "About"
+  },
+  "areas": {
+    "delete": {
+      "confirm": {
+        "message": "Are you sure you want to delete the area ''{name}''?"
+      },
+      "error": {
+        "message": "The area ''{name}'' could not be deleted!\nError: {error}"
+      },
+      "ok": {
+        "message": "The area ''{name}'' is deleted."
+      }
+    },
+    "settings": {
+      "depends_on": {
+        "help": "Select the areas where this area depends on.",
+        "invalid": "Please make a choice.",
+        "label": "Depends on",
+        "placeholder": "Select depending areas"
+      },
+      "enclosure": {
+        "help": "Select the enclosure where this area belongs to.",
+        "invalid": "Please make a choice.",
+        "label": "Enclosure",
+        "placeholder": "Select enclosure"
+      },
+      "mode": {
+        "help": "Select the mode of this area. This will change the timing and duration of the relays.",
+        "invalid": "Please make a choice.",
+        "label": "Mode",
+        "options": {
+          "disabled": "Disabled",
+          "main_lights": "Main lights",
+          "sensors": "Sensors",
+          "timer": "Timer",
+          "weather": "Weather day/night",
+          "weather_inverse": "Weather night/day"
+        },
+        "placeholder": "Select mode"
+      },
+      "name": {
+        "help": "Enter an easy to remember name.",
+        "invalid": "The entered name is not valid. It cannot be empty.",
+        "label": "Name",
+        "placeholder": "Enter a name"
+      },
+      "save": {
+        "error": {
+          "duplicate_relays": "You have selected the same relay(s) in both the low and high alarm. This is not valid.",
+          "required_fields": "Not all required fields are entered correctly."
+        },
+        "ok": {
+          "message": "Area ''{name}'' is updated."
+        }
+      },
+      "setup": {
+        "day_night_difference": {
+          "help": "Amount to change between day and night.",
+          "invalid": "Enter a valid number.",
+          "label": "Day/night difference",
+          "placeholder": "Enter number"
+        },
+        "day_night_source": {
+          "help": "Select source when it is 'day'.",
+          "invalid": "Please make a choice.",
+          "label": "Day/night source",
+          "options": {
+            "lights": "Lights",
+            "weather": "Weather"
+          },
+          "placeholder": "Select a day/night source"
+        },
+        "deviation_high_alarm": {
+          "help": "Increase of decrease high alarm value.",
+          "invalid": "Enter a valid number.",
+          "label": "High alarm deviation",
+          "placeholder": "High alarm deviation"
+        },
+        "deviation_low_alarm": {
+          "help": "Increase of decrease low alarm value.",
+          "invalid": "Enter a valid number.",
+          "label": "Low alarm deviation",
+          "placeholder": "Low alarm deviation"
+        },
+        "high": {
+          "begin": {
+            "help": "The time of the day when the relays are toggled on each night.",
+            "invalid": "Enter a valid time.",
+            "label": "Begin time",
+            "placeholder": "Enter begin time"
+          },
+          "door_status": {
+            "help": "Select the door status.",
+            "invalid": "Please make a choice.",
+            "label": "Door status",
+            "options": {
+              "closed": "Closed",
+              "ignore": "Ignored",
+              "open": "Open"
+            },
+            "placeholder": "Select a state"
+          },
+          "end": {
+            "help": "The time of the day when the relays are toggled off each night.",
+            "invalid": "Enter a valid time.",
+            "label": "End time",
+            "placeholder": "Enter end time"
+          },
+          "ignore_high": {
+            "help": "Toggle to ignore the high alarm value of the sensors, and use the low alarm value only.",
+            "label": "Ignore high alarm"
+          },
+          "light_status": {
+            "help": "Select the lights status.",
+            "invalid": "Please make a choice.",
+            "label": "Light status",
+            "options": {
+              "ignore": "Ignored",
+              "off": "Off",
+              "on": "On"
+            },
+            "placeholder": "Select a state"
+          },
+          "off_duration": {
+            "help": "The duration when the relays should be stay off when switched off. Enter '0' to disable.",
+            "invalid": "Enter a valid duration in minutes.",
+            "label": "Off duration",
+            "placeholder": "Off duration"
+          },
+          "on_duration": {
+            "help": "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full night.",
+            "invalid": "Enter a valid duration in minutes.",
+            "label": "On duration",
+            "placeholder": "On duration"
+          },
+          "playlists": {
+            "help": "Select the playlist(s) to be played.",
+            "invalid": "Please make a choice.",
+            "label": "Playlists",
+            "placeholder": "Select playlists"
+          },
+          "power_on_time": {
+            "help": "The duration in seconds to toggle on the relay.",
+            "invalid": "Enter a valid number.",
+            "label": "Power on time",
+            "placeholder": "Power on time"
+          },
+          "relays": {
+            "help": "Select the relays to toggle.",
+            "invalid": "Please make a choice.",
+            "label": "Relays",
+            "placeholder": "Select relays"
+          },
+          "settle_time": {
+            "help": "The duration in seconds between two actions.",
+            "invalid": "Enter a valid number.",
+            "label": "Settle time",
+            "placeholder": "Settle time"
+          },
+          "trigger_threshold": {
+            "help": "Enter the amount of alarms before action take place.",
+            "invalid": "Enter a valid number.",
+            "label": "Alarm threshold",
+            "placeholder": "Threshold"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Select the delay and duration for the dimmer to go to on or off in minutes. Max duration is 180 minutes."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Dimmer off duration"
+              },
+              "relay": {
+                "label": "Relay delay off"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Dimmer on duration"
+              },
+              "relay": {
+                "label": "Relay delay on"
+              }
+            },
+            "relay": {
+              "info": "Select the delay in minutes that a relay waits before it turns on. Max delay is 180 minutes."
+            }
+          }
+        },
+        "low": {
+          "begin": {
+            "help": "The time of the day when the relays are toggled on each night.",
+            "invalid": "Enter a valid time.",
+            "label": "Begin time",
+            "placeholder": "Enter begin time"
+          },
+          "door_status": {
+            "help": "Select the door status.",
+            "invalid": "Please make a choice.",
+            "label": "Door status",
+            "options": {
+              "closed": "Closed",
+              "ignore": "Ignored",
+              "open": "Open"
+            },
+            "placeholder": "Select a state"
+          },
+          "end": {
+            "help": "The time of the day when the relays are toggled off each night.",
+            "invalid": "Enter a valid time.",
+            "label": "End time",
+            "placeholder": "Enter end time"
+          },
+          "ignore_low": {
+            "help": "Toggle to ignore the low alarm value of the sensors, and use high alarm value only.",
+            "label": "Ignore low alarm"
+          },
+          "light_status": {
+            "help": "Select the lights status.",
+            "invalid": "Please make a choice.",
+            "label": "Light status",
+            "options": {
+              "ignore": "Ignored",
+              "off": "Off",
+              "on": "On"
+            },
+            "placeholder": "Select a state"
+          },
+          "off_duration": {
+            "help": "The duration when the relays should be stay off when switched off. Enter '0' to disable.",
+            "invalid": "Enter a valid duration in minutes.",
+            "label": "Off duration",
+            "placeholder": "Off duration"
+          },
+          "on_duration": {
+            "help": "The duration when the relays should be on. If this is shorter then all day, you will get a timer functionality. Enter '0' to have a full night.",
+            "invalid": "Enter a valid duration in minutes.",
+            "label": "On duration",
+            "placeholder": "On duration"
+          },
+          "playlists": {
+            "help": "Select the playlist(s) to be played.",
+            "invalid": "Please make a choice.",
+            "label": "Playlists",
+            "placeholder": "Select playlists"
+          },
+          "power_on_time": {
+            "help": "The duration in seconds to toggle on the relay.",
+            "invalid": "Enter a valid number.",
+            "label": "Power on time",
+            "placeholder": "Power on time"
+          },
+          "relays": {
+            "help": "Select the relays to toggle.",
+            "invalid": "Please make a choice.",
+            "label": "Relays",
+            "placeholder": "Select relays"
+          },
+          "settle_time": {
+            "help": "The duration in seconds between two actions.",
+            "invalid": "Enter a valid number.",
+            "label": "Settle time",
+            "placeholder": "Settle time"
+          },
+          "trigger_threshold": {
+            "help": "Enter the amount of alarms before action take place.",
+            "invalid": "Enter a valid number.",
+            "label": "Alarm threshold",
+            "placeholder": "Threshold"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Select the delay and duration for the dimmer to go to on or off in minutes. Max duration is 180 minutes."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Dimmer off duration"
+              },
+              "relay": {
+                "label": "Relay delay off"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Dimmer on duration"
+              },
+              "relay": {
+                "label": "Relay delay on"
+              }
+            },
+            "relay": {
+              "info": "Select the delay in minutes that a relay waits before it turns on. Max delay is 180 minutes."
+            }
+          }
+        },
+        "main_lights": {
+          "help": "Toggle this if this is the main lights for this enclosure. This is used for the light checks in other areas.",
+          "label": "Main lights"
+        },
+        "max_day_hours": {
+          "help": "The maximum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is longer then this maximum value, the day will be shortened to this maximum value.",
+          "invalid": "The entered value is not valid. Enter a valid number between {min} and {max}.",
+          "label": "Maximum hours",
+          "placeholder": "Enter number"
+        },
+        "min_day_hours": {
+          "help": "The minimum amount of hours that the lights are turned on. This is only valid in weather mode. When the day is shorter then this minimum value, the day will be extended to this minimum value.",
+          "invalid": "The entered value is not valid. Enter a valid number between {min} and {max}.",
+          "label": "Minimum hours",
+          "placeholder": "Enter number"
+        },
+        "periods": {
+          "day": "Day settings",
+          "high": "High alarm",
+          "info": "Below you can per select the relays and timer settings per period daytime and nighttime.",
+          "low": "Low alarm",
+          "night": "Night settings",
+          "varation": "Variation"
+        },
+        "sensors": {
+          "help": "Select sensors to use for sensor based mode.",
+          "invalid": "Please make a choice.",
+          "label": "Sensors",
+          "placeholder": "Select sensors"
+        },
+        "shift_day_hours": {
+          "help": "The amount of time to shift in hours based on the sun rise time. Negative values will make the day start earlier.",
+          "invalid": "The entered value is not valid. Enter a valid number between {min} and {max}.",
+          "label": "Hours shift",
+          "placeholder": "Enter number"
+        },
+        "soundcard": {
+          "help": "Select the sound card that is used for this area.",
+          "invalid": "Please make a choice.",
+          "label": "Sound card",
+          "placeholder": "Select a sound card"
+        },
+        "variation": {
+          "offset": {
+            "invalid": "Enter a valid number."
+          },
+          "period": {
+            "invalid": "Enter a valid number.",
+            "offset": "Offset",
+            "placeholder": "Threshold",
+            "source": "Enter a full url, local JSON file or script file"
+          },
+          "value": {
+            "invalid": "Enter a valid number.",
+            "placeholder": "Difference"
+          },
+          "when": {
+            "invalid": "Please make a choice.",
+            "options": {
+              "after": "After x minutes",
+              "at": "At time",
+              "external": "Use JSON source",
+              "script": "Use script",
+              "weather": "Using current weather"
+            },
+            "placeholder": "Select action"
+          }
+        },
+        "watertank_height": {
+          "help": "Enter the height of the water tank.",
+          "invalid": "Please enter a minimum value of {value}.",
+          "label": "Height",
+          "placeholder": "Enter number"
+        },
+        "watertank_offset": {
+          "help": "Enter the offset between sensor and water height.",
+          "invalid": "Please enter a minimum value of {value}.",
+          "label": "Offset",
+          "placeholder": "Enter number"
+        },
+        "watertank_volume": {
+          "help": "Enter the volume of the water tank.",
+          "invalid": "Please enter a minimum value of {value}.",
+          "label": "Water volume",
+          "placeholder": "Enter number"
+        }
+      },
+      "title": "Area settings",
+      "type": {
+        "help": "Select the type of area. Each type has its own extra options and logic.",
+        "invalid": "Please make a choice.",
+        "label": "Type",
+        "placeholder": "Select type"
+      }
+    }
+  },
+  "audio": {
+    "files": {
+      "delete": {
+        "confirm": {
+          "message": "Are you sure to delete audio file ''{name}'' ({filename})?"
+        },
+        "error": {
+          "message": "The audio file ''{name}'' could not be deleted!\nError: {error}"
+        },
+        "ok": {
+          "message": "The audio file ''{name}'' is deleted."
+        }
+      },
+      "settings": {
+        "audiofiles": {
+          "label": "Upload new audio file",
+          "placeholder": "Upload new audio file"
+        },
+        "save": {
+          "error": {
+            "invalid_file": "Invalid audio file(s)"
+          },
+          "ok": {
+            "message": "Uploaded {amount, plural, =1 {# audio file} other {# audio files}}"
+          }
+        }
+      },
+      "title": "Audio files"
+    },
+    "menu": {
+      "files": {
+        "title": "Files"
+      },
+      "new_playlist": {
+        "title": "New playlist"
+      },
+      "playlists": {
+        "title": "Playlists"
+      },
+      "title": "Audio"
+    },
+    "playlists": {
+      "delete": {
+        "confirm": {
+          "message": "Are you sure to delete the playlist ''{name}'' with {length} numbers?"
+        },
+        "error": {
+          "message": "The playlist ''{name}'' could not be deleted!\nError: {error}"
+        },
+        "ok": {
+          "message": "The playlist ''{name}'' is deleted."
+        }
+      },
+      "settings": {
+        "files": {
+          "help": "Select all audio files for this playlist.",
+          "invalid": "Select at least 1 audio file.",
+          "label": "Audio files",
+          "placeholder": "Select audio files"
+        },
+        "name": {
+          "help": "Enter an easy to remember name.",
+          "invalid": "The entered name is not valid. It cannot be empty.",
+          "label": "Name",
+          "placeholder": "Enter a name"
+        },
+        "repeat": {
+          "help": "Play this playlist in repeat mode.",
+          "label": "Repeat"
+        },
+        "save": {
+          "error": {
+            "required_fields": "Not all required fields are entered correctly."
+          },
+          "ok": {
+            "message": "Playlist ''{name}'' is updated."
+          }
+        },
+        "shuffle": {
+          "help": "Shuffle this playlist every time it is played.",
+          "label": "Shuffle"
+        },
+        "title": "Playlist settings",
+        "volume": {
+          "help": "Select the volume for this playlist.",
+          "label": "Audio volume"
+        }
+      },
+      "title": "Playlists"
+    }
+  },
+  "buttons": {
+    "actions": {
+      "delete": "Delete button",
+      "export": "Export button",
+      "ignore": "Ignore button",
+      "settings": "Edit button"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Are you sure you want to delete the button ''{name}''?"
+      },
+      "error": {
+        "message": "The button ''{name}'' could not be deleted!\nError: {error}"
+      },
+      "ok": {
+        "message": "The button ''{name}'' is deleted."
+      }
+    },
+    "ignore": {
+      "confirm": {
+        "message": "Are you sure you want to ignore the button ''{name}''?"
+      },
+      "error": {
+        "message": "The button ''{name}'' could not be ignored!\nError: {error}"
+      },
+      "ok": {
+        "message": "The button ''{name}'' is ignored."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "New button"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Buttons"
+    },
+    "settings": {
+      "address": {
+        "help": "Enter the physical GPIO pin number.",
+        "invalid": "The entered address is not valid. Enter a valid number between {min} and {max}.",
+        "label": "Address",
+        "placeholder": "Enter an address"
+      },
+      "calibration": {
+        "ldr_capacitor": {
+          "help": "Enter the capacitor value in µF as this will influence the light calculation.",
+          "label": "Capacitor value in µF",
+          "placeholder": "Enter the capacitor value in µF"
+        }
+      },
+      "current": {
+        "help": "The current state of the button.",
+        "label": "Current",
+        "placeholder": "Current value"
+      },
+      "hardware": {
+        "help": "Select the hardware type for this button.",
+        "invalid": "Please select a hardware type.",
+        "label": "Hardware",
+        "placeholder": "Select hardware"
+      },
+      "name": {
+        "help": "Enter an easy to remember name.",
+        "invalid": "The entered name is not valid. It cannot be empty.",
+        "label": "Name",
+        "placeholder": "Enter a name"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Not all required fields are entered correctly."
+        },
+        "ok": {
+          "message": "Button ''{name}'' is updated."
+        }
+      },
+      "title": "Button settings"
+    },
+    "title": "Buttons"
+  },
+  "calendar": {
+    "actions": {
+      "download": "Download Ical"
+    },
+    "event": {
+      "delete": {
+        "confirm": {
+          "message": "Are you sure you want to delete the event ''{name}''?"
+        },
+        "error": {
+          "message": "The event ''{name}'' could not be deleted!\nError: {error}"
+        },
+        "ok": {
+          "message": "The event ''{name}'' is deleted."
+        }
+      },
+      "duration": "Duration",
+      "periods": {
+        "days": "Days",
+        "months": "Months",
+        "no_reminder": "No reminder",
+        "no_repeat": "No repeat",
+        "weeks": "Weeks",
+        "years": "Years"
+      },
+      "settings": {
+        "date": {
+          "help": "The date or period for this event.",
+          "label": "Date"
+        },
+        "description": {
+          "help": "Enter some information about this event.",
+          "label": "Enter a description"
+        },
+        "remind": {
+          "label": "Remind in"
+        },
+        "repeat": {
+          "help": "Select a repeat period and an amount.",
+          "invalid": "Please enter a valid repeat period amount.",
+          "label": "Repeat every"
+        },
+        "repeat_amount": {
+          "label": "Select amount"
+        },
+        "save": {
+          "error": {
+            "required_fields": "Not all required fields are entered correctly."
+          },
+          "ok": {
+            "message": "Event ''{name}'' is updated."
+          }
+        },
+        "summary": {
+          "help": "Enter a name.",
+          "invalid": "The name cannot be empty.",
+          "label": "Enter a name"
+        },
+        "title": "Event",
+        "update": {
+          "error": {
+            "message": "The event ''{name}'' could not be updated!\nError: {error}"
+          },
+          "ok": {
+            "message": "The event ''{name}'' is updated."
+          }
+        }
+      }
+    },
+    "menu": {
+      "title": "Calendar"
+    },
+    "title": "Calendar"
+  },
+  "dashboard": {
+    "enclosures": {
+      "menu": {
+        "title": "Enclosures"
+      },
+      "mode": "Mode",
+      "title": "Enclosures"
+    },
+    "infobox": {
+      "current_power_usage": {
+        "title": "Power usage in Watt"
+      },
+      "current_water_flow": {
+        "title": "Water flow in {water_flow_indicator}"
+      },
+      "total_power_usage": {
+        "duration": "in {duration}",
+        "title": "Total power usage"
+      },
+      "total_water_usage": {
+        "duration": "in {duration}",
+        "title": "Total water usage"
+      },
+      "uptime": {
+        "title": "Up time"
+      }
+    },
+    "menu": {
+      "title": "Dashboard"
+    },
+    "title": "Dashboard"
+  },
+  "enclosures": {
+    "actions": {
+      "delete": "Delete enclosure",
+      "settings": "Edit enclosure"
+    },
+    "area": {
+      "current": "current",
+      "current_status": "Current status",
+      "delete": {
+        "title": "Delete area"
+      },
+      "edit": {
+        "title": "Edit area"
+      },
+      "mode": {
+        "disabled": "Disabled",
+        "sensors": "Sensors",
+        "timer": "Timer",
+        "title": "Mode",
+        "weather": "Weather"
+      },
+      "now": "now",
+      "period": {
+        "day": "Day",
+        "high": "High",
+        "low": "Low",
+        "night": "Night"
+      },
+      "range": "Range",
+      "type": {
+        "audio": "Audio",
+        "cooling": "Cooling",
+        "heating": "Heating",
+        "humidity": "Humidity",
+        "lights": "Lights",
+        "main_lights": "Main lights",
+        "watertank": "Watertank"
+      }
+    },
+    "areas": {
+      "title": "Areas"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Are you sure you want to delete the enclosure ''{name}''?"
+      },
+      "error": {
+        "message": "The enclosure ''{name}'' could not be deleted!\nError: {error}"
+      },
+      "ok": {
+        "message": "The enclosure ''{name}'' is deleted."
+      }
+    },
+    "doors": {
+      "title": "Doors"
+    },
+    "menu": {
+      "list": {
+        "title": "List"
+      },
+      "new_area": {
+        "title": "New area"
+      },
+      "new_enclosure": {
+        "title": "New enclosure"
+      },
+      "title": "Enclosures"
+    },
+    "settings": {
+      "description": {
+        "help": "Enter some description text about this enclosure.",
+        "label": "Description",
+        "placeholder": "Enter a description"
+      },
+      "doors": {
+        "help": "Select the door(s) for this enclosure.",
+        "label": "Doors"
+      },
+      "image": {
+        "help": "Upload a JPG or PNG.",
+        "invalid": "The selected file is not valid. It is not an image file.",
+        "label": "Image",
+        "placeholder": "Select an image file"
+      },
+      "name": {
+        "help": "Enter an easy to remember name.",
+        "invalid": "The entered name is not valid. It cannot be empty.",
+        "label": "Name",
+        "placeholder": "Enter a name"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Not all required fields are entered correctly."
+        },
+        "ok": {
+          "message": "Enclosure ''{name}'' is updated."
+        }
+      },
+      "title": "Enclosure settings",
+      "webcams": {
+        "help": "Select the webcam(s) for this enclosure.",
+        "label": "Webcams"
+      }
+    },
+    "title": "Enclosures",
+    "webcams": {
+      "title": "Webcams"
+    }
+  },
+  "footer": {
+    "current_activity": "Activity",
+    "error_messages": "Error messages",
+    "warning_messages": "Warning messages"
+  },
+  "gauge": {
+    "error": "error",
+    "last_update": "Last update",
+    "warning": "warning"
+  },
+  "general": {
+    "download": {
+      "title": "Download"
+    },
+    "exclude": {
+      "average": "Excl. avg."
+    },
+    "humidity": "Humidity",
+    "login": {
+      "title": "Login to make changes"
+    },
+    "logout": {
+      "title": "Logout"
+    },
+    "settings": {
+      "title": "Settings"
+    },
+    "temperature": "temperature",
+    "uptime_format": {
+      "days": "{number, plural, =1 {# day} other {# days}}",
+      "hours": "{number, plural, =1 {# hour} other {# hours}}",
+      "minutes": "{number, plural, =1 {# minute} other {# minutes}}",
+      "months": "{number, plural, =1 {# month} other {# months}}",
+      "seconds": "{number, plural, =1 {# second} other {# seconds}}",
+      "years": "{number, plural, =1 {# year} other {# years}}"
+    }
+  },
+  "graph": {
+    "alarm": {
+      "max": "Alarm max",
+      "min": "Alarm min"
+    },
+    "current": "Current",
+    "flow": "Water flow",
+    "ldr": "Light status",
+    "magnetic": "Door status",
+    "motion": "Movement",
+    "no-data": "No data ...",
+    "period": {
+      "day": "Day",
+      "month": "Month",
+      "replaced": "Replaced",
+      "week": "Week",
+      "year": "Year"
+    },
+    "settings": {
+      "export": "Export"
+    },
+    "wattage": "Wattage"
+  },
+  "home": {
+    "menu": {
+      "title": "Home"
+    },
+    "title": "Home"
+  },
+  "messages": {
+    "actions": {
+      "delete": "Delete message",
+      "edit": "Edit message"
+    },
+    "add": "Add message",
+    "delete": {
+      "confirm": {
+        "message": "Are you sure you want to delete the message ''{name}''?"
+      },
+      "error": {
+        "message": "The message ''{name}'' could not be deleted!\nError: {error}"
+      },
+      "ok": {
+        "message": "The message ''{name}'' is deleted."
+      }
+    },
+    "ratelimit": "{number, plural, =0 {Unlimited messages} other {Max # per minute}}",
+    "settings": {
+      "available_services": {
+        "help": "Select the service to use for this notification message.",
+        "label": "Services"
+      },
+      "enabled": {
+        "help": "Enable/disable this notification message.",
+        "label": "Enabled"
+      },
+      "message": {
+        "help": "Enter a message. You can use placeholder values here.",
+        "label": "Message",
+        "placeholder": "Enter a message"
+      },
+      "placeholders": {
+        "format": "Number values can be rounded using the {link_start}`.:2f` format{link_end}",
+        "help": "List of available placeholders.",
+        "label": "Place holders"
+      },
+      "rate_limit": {
+        "help": "Maximum number of messages per minute for this message. Use 0 for unlimited.",
+        "invalid": "The entered value is not valid. Enter a valid number higher than {min}.",
+        "label": "Rate limit",
+        "placeholder": "Messages per minute"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Not all required fields are entered correctly."
+        },
+        "ok": {
+          "message": "Message ''{name}'' is updated."
+        }
+      },
+      "subject": {
+        "help": "Enter a short subject. You can use placeholder values here.",
+        "invalid": "The subject cannot be empty.",
+        "label": "Subject",
+        "placeholder": "Enter a subject"
+      },
+      "title": "Message settings",
+      "type": {
+        "help": "Select the notification message type.",
+        "invalid": "Please make a choice.",
+        "label": "Message type",
+        "placeholder": "Select type"
+      }
+    },
+    "table": {
+      "actions": "Actions",
+      "enabled": "Enabled",
+      "message": "Message",
+      "rate_limit": "Rate limit",
+      "services": "Services",
+      "subject": "Subject",
+      "type": "Type"
+    },
+    "title": "Notification messages"
+  },
+  "modal": {
+    "confirm": {
+      "relays": {
+        "scan": "This will start a new scan to find new relays. This can take up to 30 seconds."
+      },
+      "sensors": {
+        "scan": "This will start a new scan to find new sensors. This can take up to 30 seconds."
+      },
+      "submit": {
+        "title": "Confirm"
+      },
+      "system": {
+        "logout": "Are you sure you want to logout?",
+        "reboot": "This will reboot the Raspberry PI. This can take up to 60 seconds.",
+        "restart": "This will restart TerrariumPI. This can take up to 30 seconds.",
+        "shutdown": "This will shutdown the Raspberry PI. Use with care!"
+      },
+      "title": "Are you sure?"
+    },
+    "form": {
+      "toggle": {
+        "info": "Show/hide help information"
+      }
+    },
+    "general": {
+      "close": "Close",
+      "save": "Save"
+    },
+    "login": {
+      "error": "Invalid login",
+      "form": {
+        "password": {
+          "help": "Enter the password.",
+          "invalid": "Password cannot be empty.",
+          "label": "Password"
+        },
+        "submit": "Login",
+        "username": {
+          "help": "Enter the username.",
+          "invalid": "Username cannot be empty.",
+          "label": "Username"
+        }
+      },
+      "title": "Login"
+    },
+    "notification": {
+      "service": {
+        "form": {
+          "field": {
+            "setup": {
+              "address": {
+                "label": "Enter an address"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "not-found": {
+    "header": "Page not found",
+    "link": "Go to homepage",
+    "title": "Page not found"
+  },
+  "notification": {
+    "delete": {
+      "error": {
+        "title": "ERROR"
+      },
+      "invalid": {
+        "title": "ERROR"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "door": {
+      "status": {
+        "title": "Door status update"
+      }
+    },
+    "exclude": {
+      "error": {
+        "title": "ERROR"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "form": {
+      "save": {
+        "error": {
+          "title": "Save Error"
+        },
+        "ok": {
+          "title": "Save OK"
+        }
+      },
+      "upload": {
+        "error": {
+          "title": "Upload error"
+        }
+      }
+    },
+    "login": {
+      "message": {
+        "error": "Sorry, but login is invalid",
+        "ok": "You are successfully logged in."
+      },
+      "title": "Login"
+    },
+    "manual_mode": {
+      "error": {
+        "title": "ERROR"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "offline": {
+      "message": "Connection is lost",
+      "title": "Offline"
+    },
+    "online": {
+      "message": "We are connected",
+      "title": "Online"
+    },
+    "reboot": {
+      "ok": {
+        "title": "System reboot ok"
+      }
+    },
+    "restart": {
+      "ok": {
+        "title": "System restart ok"
+      }
+    },
+    "scanning": {
+      "ok": {
+        "title": "Scanning finished"
+      }
+    },
+    "shutdown": {
+      "ok": {
+        "title": "System shutdown ok"
+      }
+    },
+    "toggle": {
+      "error": {
+        "title": "ERROR"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    }
+  },
+  "relays": {
+    "actions": {
+      "delete": "Delete relay",
+      "export": "Export relay",
+      "ignore": "Ignore relay",
+      "manual_mode": "Manual mode relay",
+      "replace_hardware": "Replace hardware",
+      "settings": "Edit relay"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Are you sure you want to ignore the relay ''{name}''?"
+      },
+      "manual_mode": {
+        "message": "Toggle manual mode for relay ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Are you sure you want to delete the relay ''{name}''?"
+      },
+      "error": {
+        "message": "The relay ''{name}'' could not be deleted!\nError: {error}"
+      },
+      "ok": {
+        "message": "The relay ''{name}'' is deleted."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "The relay ''{name}'' could not be ignored!\nError: {error}"
+      },
+      "ok": {
+        "message": "The relay ''{name}'' is ignored."
+      }
+    },
+    "manual-mode": "Manual mode",
+    "manual_mode": {
+      "error": {
+        "message": "Error changing manual mode for relay ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "The manual mode for relay ''{name}'' is changed."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "New relay"
+      },
+      "scan": {
+        "title": "Scan relays"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Relays"
+    },
+    "settings": {
+      "address": {
+        "help": "For more information see online.",
+        "invalid": "The entered address is not valid. It cannot be empty.",
+        "label": "Address",
+        "placeholder": "Enter an address"
+      },
+      "calibration": {
+        "dimmer_frequency": {
+          "help": "The frequency on which the dimmer operates.",
+          "invalid": "Please enter a minimum value of {value}.",
+          "label": "Dimmer frequency in Hz"
+        },
+        "dimmer_max_dim": {
+          "help": "Maximum dimmer value (Legacy).",
+          "invalid": "Please enter a minimum value of {value}.",
+          "label": "Maximum dimmer value"
+        },
+        "dimmer_max_power": {
+          "help": "The maximum power for this dimmer.",
+          "invalid": "The entered value is not valid. Enter a valid number between {min} and {max}.",
+          "label": "Max power in %"
+        },
+        "dimmer_offset": {
+          "help": "The dimmer offset.",
+          "invalid": "Please enter a minimum value of {value}.",
+          "label": "Dimmer offset in %"
+        }
+      },
+      "current": {
+        "help": "The current state of the relay.",
+        "label": "Current",
+        "placeholder": "Current value"
+      },
+      "flow": {
+        "help": "Enter the (max) water flow when switched on.",
+        "invalid": "Please enter a minimum value of {value}.",
+        "label": "Water flow"
+      },
+      "hardware": {
+        "help": "Select the hardware type for this relay.",
+        "invalid": "Please select a hardware type.",
+        "label": "Hardware",
+        "placeholder": "Select hardware"
+      },
+      "name": {
+        "help": "Enter an easy to remember name.",
+        "invalid": "The entered name is not valid. It cannot be empty.",
+        "label": "Name",
+        "placeholder": "Enter a name"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Not all required fields are entered correctly."
+        },
+        "ok": {
+          "message": "Relay ''{name}'' is updated."
+        }
+      },
+      "title": "Relay settings",
+      "wattage": {
+        "help": "Enter the (max) wattage when switched on.",
+        "invalid": "Please enter a minimum value of {value}.",
+        "label": "Wattage"
+      }
+    },
+    "title": "Relays",
+    "toggle": {
+      "error": {
+        "message": "Error toggling relay ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "Toggled relay ''{name}'' to state {value}"
+      }
+    }
+  },
+  "sensors": {
+    "actions": {
+      "delete": "Delete sensor",
+      "export": "Export sensor",
+      "ignore": "Ignore sensor",
+      "settings": "Edit sensor"
+    },
+    "all": {
+      "menu": {
+        "title": "All sensors"
+      },
+      "title": "All sensors"
+    },
+    "altitude": {
+      "menu": {
+        "title": "Altitude"
+      },
+      "title": "Altitude sensors"
+    },
+    "average": {
+      "altitude": "Average altitude",
+      "co2": "Average CO2",
+      "distance": "Average distance",
+      "fertility": "Average fertility",
+      "humidity": "Average humidity",
+      "light": "Average light",
+      "moisture": "Average moisture",
+      "pressure": "Average pressure",
+      "temperature": "Average temperature",
+      "uva": "Average UVA",
+      "uvb": "Average UVB",
+      "uvi": "Average UV Index"
+    },
+    "co2": {
+      "menu": {
+        "title": "CO2"
+      },
+      "title": "CO2 sensors"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Are you sure you want to ignore the sensor ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Are you sure you want to delete the sensor ''{name}''?"
+      },
+      "error": {
+        "message": "The sensor ''{name}'' could not be deleted!\nError: {error}"
+      },
+      "ok": {
+        "message": "The sensor ''{name}'' is deleted."
+      }
+    },
+    "distance": {
+      "menu": {
+        "title": "Distance"
+      },
+      "title": "Distance sensors"
+    },
+    "exclude": {
+      "error": {
+        "message": "The sensor ''{name}'' could not be ignored!\nError: {error}"
+      },
+      "ok": {
+        "message": "The sensor ''{name}'' is ignored."
+      }
+    },
+    "fertility": {
+      "menu": {
+        "title": "Fertility"
+      },
+      "title": "Fertility sensors"
+    },
+    "humidity": {
+      "menu": {
+        "title": "Humidity"
+      },
+      "title": "Humidity sensors"
+    },
+    "light": {
+      "menu": {
+        "title": "light"
+      },
+      "title": "Light sensors"
+    },
+    "menu": {
+      "new": {
+        "title": "New sensor"
+      },
+      "scan": {
+        "title": "Scan sensors"
+      },
+      "title": "Sensors"
+    },
+    "moisture": {
+      "menu": {
+        "title": "Moisture"
+      },
+      "title": "Moisture sensors"
+    },
+    "ph": {
+      "menu": {
+        "title": "pH"
+      },
+      "title": "Ph sensors"
+    },
+    "pressure": {
+      "menu": {
+        "title": "pressure"
+      },
+      "title": "Pressure sensors"
+    },
+    "settings": {
+      "address": {
+        "help": "Enter an address.",
+        "invalid": "The entered address is not valid. It cannot be empty.",
+        "label": "Address",
+        "placeholder": "Enter an address"
+      },
+      "alarm_max": {
+        "help": "Enter the maximum value for the alarm.",
+        "invalid": "The entered value is not valid. It needs to be number.",
+        "label": "Alarm max",
+        "placeholder": "Alarm max"
+      },
+      "alarm_min": {
+        "help": "Enter the minimum value for the alarm.",
+        "invalid": "The entered value is not valid. It needs to be number.",
+        "label": "Alarm min",
+        "placeholder": "Alarm min"
+      },
+      "calibration": {
+        "ccs811_compensation_sensors": {
+          "help": "Select the sensors for the compensation calculation.",
+          "label": "Compensation sensors",
+          "placeholder": "Select compensation sensors"
+        },
+        "chirp_max_moist": {
+          "help": "Enter the maximum moist value.",
+          "invalid": "The entered value is not valid. It needs to be number higher then {min}.",
+          "label": "Maximum moist value"
+        },
+        "chirp_min_moist": {
+          "help": "Enter the minimum moist value.",
+          "invalid": "The entered value is not valid. It needs to be number higher then {min}.",
+          "label": "Minimum moist value"
+        },
+        "offset": {
+          "help": "Enter offset for this sensor.",
+          "invalid": "The entered value is not valid. It needs to be number.",
+          "label": "Offset"
+        }
+      },
+      "current": {
+        "help": "The current state of the sensor.",
+        "label": "Current",
+        "placeholder": "Current value"
+      },
+      "exclude_avg": {
+        "help": "Exclude this sensors from average calculations.",
+        "label": "Excl. avg"
+      },
+      "fields": {
+        "error": "Not all required fields are entered correctly."
+      },
+      "hardware": {
+        "help": "Select the hardware type for this button.",
+        "invalid": "Please select a hardware type.",
+        "label": "Hardware",
+        "placeholder": "Select hardware"
+      },
+      "limit_max": {
+        "help": "Enter the maximum value that is valid.",
+        "invalid": "The entered value is not valid. It needs to be number.",
+        "label": "Limit max"
+      },
+      "limit_min": {
+        "help": "Enter the minimum value that is valid.",
+        "invalid": "The entered value is not valid. It needs to be number.",
+        "label": "Limit min"
+      },
+      "max_diff": {
+        "help": "Enter the max difference between two measurements that is valid. Enter '0' to disable.",
+        "invalid": "The entered value is not valid. It needs to be number higher then {min}.",
+        "label": "Max diff",
+        "placeholder": "Max difference"
+      },
+      "name": {
+        "help": "Enter an easy to remember name.",
+        "invalid": "The entered name is not valid. It cannot be empty.",
+        "label": "Name",
+        "placeholder": "Enter a name"
+      },
+      "save": {
+        "ok": {
+          "message": "Sensor ''{name}'' is updated."
+        }
+      },
+      "title": "Sensor settings",
+      "type": {
+        "help": "Select the measurement type for this sensor.",
+        "invalid": "Please select a measurement type.",
+        "label": "Type",
+        "placeholder": "Select type"
+      }
+    },
+    "temperature": {
+      "menu": {
+        "title": "temperature"
+      },
+      "title": "Temperature sensors"
+    },
+    "title": "Sensors",
+    "uva": {
+      "menu": {
+        "title": "uva"
+      },
+      "title": "UVA sensors"
+    },
+    "uvb": {
+      "menu": {
+        "title": "uvb"
+      },
+      "title": "UVB sensors"
+    },
+    "uvi": {
+      "menu": {
+        "title": "uvi"
+      },
+      "title": "UVI sensors"
+    }
+  },
+  "services": {
+    "actions": {
+      "delete": "Delete service",
+      "edit": "Edit service"
+    },
+    "add": "Add service",
+    "delete": {
+      "confirm": {
+        "message": "Are you sure you want to delete the service ''{name}''?"
+      },
+      "error": {
+        "message": "The service ''{name}'' could not be deleted!\nError: {error}"
+      },
+      "ok": {
+        "message": "The service ''{name}'' is deleted."
+      }
+    },
+    "enabled": "Enabled",
+    "ratelimit": "{number, plural, =0 {Unlimited messages} other {Max # per minute}}",
+    "settings": {
+      "enabled": {
+        "help": "Enable/disable this notification service.",
+        "label": "Enabled"
+      },
+      "name": {
+        "help": "Enter an easy to remember name.",
+        "invalid": "The entered name is not valid. It cannot be empty.",
+        "label": "Name",
+        "placeholder": "Enter a name"
+      },
+      "rate_limit": {
+        "help": "Maximum number of messages per minute for this service. Use 0 for unlimited.",
+        "invalid": "The entered value is not valid. Enter a valid number higher than {min}.",
+        "label": "Rate limit",
+        "placeholder": "Messages per minute"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Not all required fields are entered correctly."
+        },
+        "ok": {
+          "message": "Service ''{name}'' is updated."
+        }
+      },
+      "setup": {
+        "address": {
+          "help": "Enter an address.",
+          "invalid": "The entered address is not valid. It cannot be empty.",
+          "label": "Address",
+          "placeholder": "Enter an address"
+        },
+        "api_token": {
+          "help": "Enter the Pushover API token.",
+          "invalid": "The entered API token is not valid. It cannot be empty.",
+          "label": "API Token",
+          "placeholder": "Enter the API Token"
+        },
+        "buzzer": {
+          "help": "List of available songs to use in the message subject."
+        },
+        "green": {
+          "help": "Enter GPIO pin for green light.",
+          "invalid": "The entered value is not valid. Enter a valid number between {min} and {max}.",
+          "label": "Green",
+          "placeholder": "Enter green GPIO pin"
+        },
+        "hardware": {
+          "help": "Select the hardware type for this display.",
+          "invalid": "Please make a choice.",
+          "label": "Hardware",
+          "placeholder": "Select hardware"
+        },
+        "password": {
+          "help": "Enter the server password.",
+          "label": "Server password",
+          "placeholder": "Enter a username"
+        },
+        "port": {
+          "help": "Enter the server port number.",
+          "invalid": "The entered port number is not valid. It cannot be empty.",
+          "label": "Server port",
+          "placeholder": "Enter a port number"
+        },
+        "pushover": {
+          "label": "Create your tokens by registering TerrariumPI as an app {link}."
+        },
+        "receiver": {
+          "help": "Enter an email address.",
+          "invalid": "The address cannot be empty.",
+          "label": "Receiver email",
+          "placeholder": "Enter an email address"
+        },
+        "red": {
+          "help": "Enter GPIO pin for red light.",
+          "invalid": "The entered value is not valid. Enter a valid number between {min} and {max}.",
+          "label": "Red",
+          "placeholder": "Enter red GPIO pin"
+        },
+        "show_title": {
+          "help": "Show a name and version as title on the display.",
+          "label": "Show title"
+        },
+        "ssl": {
+          "email": {
+            "label": "The email notification service will auto detect SSL/TLS connections."
+          },
+          "mqtt": {
+            "label": "The MQTT notification service will auto detect SSL/TLS connections."
+          }
+        },
+        "url": {
+          "help": "Enter the full post url.",
+          "invalid": "The entered url is not valid. It cannot be empty.",
+          "label": "Full post url",
+          "placeholder": "Enter the full post url"
+        },
+        "user_key": {
+          "help": "Enter the Pushover user key.",
+          "invalid": "The entered user key is not valid. It cannot be empty.",
+          "label": "User key",
+          "placeholder": "Enter the user key"
+        },
+        "username": {
+          "help": "Enter the server username.",
+          "label": "Server username",
+          "placeholder": "Enter a username"
+        },
+        "yellow": {
+          "help": "Enter GPIO pin for amber light.",
+          "invalid": "The entered value is not valid. Enter a valid number between {min} and {max}.",
+          "label": "Amber",
+          "placeholder": "Enter amber GPIO pin"
+        }
+      },
+      "title": "Notification service settings",
+      "type": {
+        "help": "Select the notification service type.",
+        "invalid": "Please make a choice.",
+        "label": "Type",
+        "placeholder": "Select type"
+      }
+    },
+    "title": "Notification services"
+  },
+  "system": {
+    "log": {
+      "download": {
+        "title": "Download log file"
+      },
+      "filters": {
+        "errors": "errors",
+        "search": "Enter search terms",
+        "title": "Filters",
+        "warnings": "warnings"
+      },
+      "lines": "{lines} lines",
+      "loading": "Loading data",
+      "title": "System logging"
+    },
+    "menu": {
+      "log": {
+        "title": "Log"
+      },
+      "notifications": {
+        "title": "Notifications"
+      },
+      "reboot": {
+        "title": "Reboot"
+      },
+      "restart": {
+        "title": "Restart"
+      },
+      "settings": {
+        "title": "Settings"
+      },
+      "shutdown": {
+        "title": "Shutdown"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "System"
+    },
+    "notifications": {
+      "title": "Notifications"
+    },
+    "settings": {
+      "all_gauges_on_single_page": {
+        "help": "Add extra menu item for all sensors on a single page.",
+        "label": "All gauges on a single page"
+      },
+      "authenticate": {
+        "help": "Always authenticate or only when changes are being made.",
+        "invalid": "Please make a choice.",
+        "label": "Authentication mode",
+        "options": {
+          "changes": "Only for changes",
+          "full": "Full authentication",
+          "no_authentication": "No authentication"
+        }
+      },
+      "auto_dark_mode": {
+        "help": "Toggle dark mode when the night starts.",
+        "label": "Auto dark mode"
+      },
+      "currency": {
+        "help": "Select the interface currency.",
+        "invalid": "Please make a choice.",
+        "label": "Currency"
+      },
+      "dashboard_mode": {
+        "help": "Select how the dashboard looks like.",
+        "invalid": "Please make a choice.",
+        "label": "Dashboard mode",
+        "options": {
+          "normal": "Graphs and enclosures",
+          "only_enclosures": "Only enclosures",
+          "only_graphs": "Only graphs"
+        }
+      },
+      "distance_indicator": {
+        "help": "Select the distance indicator. Only affects the current values.",
+        "invalid": "Please make a choice.",
+        "label": "Distance type"
+      },
+      "exclude-ids": {
+        "help": "IDs that are excluded.",
+        "label": "Excluded ids"
+      },
+      "graph_smooth_value": {
+        "help": "Enter the amount of data points to average. 0 will disable this feature.",
+        "invalid": "Please enter a minimum value of {value}.",
+        "label": "Graph smoothing"
+      },
+      "header": {
+        "cloud": "Cloud",
+        "gui": "GUI",
+        "locale": "Locale",
+        "system": "System"
+      },
+      "hide_environment_dashboard": {
+        "help": "Hide the enclosure data on the dashboard.",
+        "label": "Hide enclosures on dashboard"
+      },
+      "host": {
+        "help": "Enter the IP to listen for connections. Default 0.0.0.0.",
+        "invalid": "Please enter a valid IP address.",
+        "label": "IP number"
+      },
+      "language": {
+        "help": "Select the interface language. This will also change number and currency formatting.",
+        "invalid": "Please make a choice.",
+        "label": "Language"
+      },
+      "meross_cloud_password": {
+        "help": "Enter the password to login into Meross cloud.",
+        "label": "Meross password"
+      },
+      "meross_cloud_username": {
+        "help": "Enter the username to login into Meross cloud.",
+        "label": "Meross username"
+      },
+      "page": {
+        "title": "System settings"
+      },
+      "password": {
+        "help": "Enter a password for authentication.",
+        "invalid": "The password cannot be empty.",
+        "label": "New password"
+      },
+      "password2": {
+        "help": "Enter the new password again.",
+        "invalid": "The new password do not match.",
+        "label": "Confirm new password"
+      },
+      "pi-wattage": {
+        "help": "Enter the total power usage of the Pi with all its USB devices connected.",
+        "invalid": "Please enter a minimum value of {value}.",
+        "label": "Pi power usage"
+      },
+      "port": {
+        "help": "Enter the port number to listen for connections. Default 8090.",
+        "invalid": "Please enter a minimum value of {value}.",
+        "label": "Port number"
+      },
+      "power_price": {
+        "help": "Enter the price per kWh.",
+        "invalid": "Please enter a minimum value of {value}.",
+        "label": "Power price"
+      },
+      "profile_image": {
+        "help": "Update a custom image used in the menu.",
+        "invalid": "Invalid profile image format.",
+        "label": "Profile image"
+      },
+      "save": {
+        "ok": {
+          "message": "Settings are updated.",
+          "title": "Update OK"
+        }
+      },
+      "show_min_max_gauge": {
+        "help": "Show the minimum and maximum value on the gauges.",
+        "label": "Show min and max values in gauge graphs"
+      },
+      "temperature_indicator": {
+        "help": "Select the temperature indicator. Only affects the current values.",
+        "invalid": "Please make a choice.",
+        "label": "Temperature type"
+      },
+      "title": {
+        "help": "Enter a custom title.",
+        "invalid": "The title cannot be empty.",
+        "label": "Title"
+      },
+      "username": {
+        "help": "Enter the username for authentication.",
+        "invalid": "The username cannot be empty.",
+        "label": "Username"
+      },
+      "water_price": {
+        "help": "Enter the price per L/Gallon.",
+        "invalid": "Please enter a minimum value of {value}.",
+        "label": "Water price"
+      },
+      "water_volume_indicator": {
+        "help": "Select the water volume indicator. Only affects the current values.",
+        "invalid": "Please make a choice.",
+        "label": "Liquid volume type"
+      },
+      "wind_speed_indicator": {
+        "help": "Select the wind speed indicator. Only affects the current values.",
+        "invalid": "Please make a choice.",
+        "label": "Wind speed type"
+      }
+    },
+    "status": {
+      "cpu_temp": {
+        "title": "CPU Temperature"
+      },
+      "disk": {
+        "title": "Disk usage"
+      },
+      "load": {
+        "title": "System load"
+      },
+      "memory": {
+        "title": "Memory usage"
+      },
+      "summary": {
+        "title": "System summary"
+      },
+      "title": "System status",
+      "uptime": {
+        "title": "System uptime"
+      }
+    }
+  },
+  "table": {
+    "field": {
+      "range": "range"
+    },
+    "header": {
+      "actions": "Actions",
+      "duration": "Duration",
+      "filename": "File name",
+      "filesize": "File size",
+      "mode": "Mode",
+      "name": "Name",
+      "number_files": "# Files",
+      "repeat": "Repeat",
+      "shuffle": "Shuffle",
+      "status": "Status",
+      "type": "Type",
+      "volume": "Audio volume"
+    }
+  },
+  "topbar": {
+    "current_status": "Current status",
+    "door_status": "Door status",
+    "upcoming_events": "{number, plural, =0 {no events} =1 {one event} other {# events}}"
+  },
+  "userpanel": {
+    "login": {
+      "text1": "Read only mode",
+      "text2": "Login"
+    },
+    "logout": {
+      "text1": "Hello {name}",
+      "text2": "Logout"
+    }
+  },
+  "weather": {
+    "current": "Current",
+    "forecast": "Forecast",
+    "menu": {
+      "title": "Weather"
+    },
+    "settings": {
+      "fields": {
+        "error": "Not all required fields are entered correctly."
+      },
+      "information": "In order to use the weather system, you need to create a free account at {source_link}.",
+      "save": {
+        "ok": {
+          "message": "The weather setting is saved."
+        }
+      },
+      "title": "Weather settings",
+      "weather_source": {
+        "help": "Enter the full OpenWeatherMap api url like: {api_url_example}.",
+        "invalid": "The entered url is not valid.",
+        "label": "Source url"
+      }
+    },
+    "title": "Weather"
+  },
+  "webcams": {
+    "actions": {
+      "delete": "Delete webcam",
+      "ignore": "Ignore webcam",
+      "settings": "Edit webcam"
+    },
+    "archive": {
+      "no_images": "No archive images available"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Are you sure you want to ignore the webcam ''{name}''?"
+      }
+    },
+    "controls": {
+      "archive": "Archive",
+      "new_marker": "Add marker",
+      "save_raw_image": "Save RAW image",
+      "show_markers": "Show markers",
+      "toggle_volume": "Toggle volume"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Are you sure you want to delete the webcam ''{name}''?"
+      },
+      "error": {
+        "message": "The webcam ''{name}'' could not be deleted!\nError: {error}"
+      },
+      "ok": {
+        "message": "The webcam ''{name}'' is deleted."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "The webcam ''{name}'' could not be ignored!\nError: {error}"
+      },
+      "ok": {
+        "message": "The webcam ''{name}'' is ignored."
+      }
+    },
+    "marker": {
+      "delete": {
+        "confirm": {
+          "message": "Are you sure to delete the marker?"
+        },
+        "error": {
+          "message": "Marker could not be deleted"
+        },
+        "invalid": {
+          "message": "Invalid marker"
+        }
+      }
+    },
+    "markers": {
+      "settings": {
+        "delete": "Delete",
+        "doors": {
+          "help": "Select the senors you want to show.",
+          "invalid": "Please make a choice.",
+          "label": "Sensors"
+        },
+        "title": "Sensors"
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "New webcam"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Webcams"
+    },
+    "settings": {
+      "address": {
+        "help": "For more information see online.",
+        "invalid": "The entered address is not valid. It cannot be empty.",
+        "label": "Address",
+        "placeholder": "Enter an address"
+      },
+      "archive": {
+        "door": {
+          "help": "Door status for taking an archive image.",
+          "invalid": "Please make a choice.",
+          "label": "Archive door state",
+          "options": {
+            "close": "Close",
+            "ignore": "Ignore",
+            "open": "Open"
+          },
+          "placeholder": "Select archive door state"
+        },
+        "flash": {
+          "help": "Select a relay that will act as a flasher.",
+          "invalid": "Please make a choice.",
+          "label": "Flash",
+          "placeholder": "Select optional relay for flash"
+        },
+        "light": {
+          "help": "Light status for taking an archive image.",
+          "invalid": "Please make a choice.",
+          "label": "Archive light state",
+          "options": {
+            "ignore": "Ignore",
+            "off": "When off",
+            "on": "When on"
+          },
+          "placeholder": "Select archive light state"
+        },
+        "options": {
+          "day_1": "1 Day",
+          "disabled": "Disabled",
+          "hour_1": "30 Minutes",
+          "hour_12": "12 Hours",
+          "hour_3": "3 Hours",
+          "hour_6": "6 Hours",
+          "minute_1": "1 Minute",
+          "minute_15": "15 Minutes",
+          "minute_30": "30 Minutes",
+          "minute_5": "5 Minutes",
+          "motion": "Motion"
+        },
+        "state": {
+          "help": "Select the duration between archived images.",
+          "invalid": "Please make a choice.",
+          "label": "Archiving",
+          "placeholder": "Select archiving"
+        }
+      },
+      "awb": {
+        "help": "Select a white balance.",
+        "invalid": "Please make a choice.",
+        "label": "White balance",
+        "options": {
+          "auto": "Auto",
+          "cloudy": "Cloudy",
+          "flash": "Flash",
+          "fluorescent": "Fluorescent",
+          "greyworld": "Greyworld",
+          "horizon": "Horizon",
+          "incandescent": "Incandescent",
+          "off": "Off",
+          "shade": "Shade",
+          "sunlight": "Sunlight",
+          "tungsten": "Tungsten"
+        },
+        "placeholder": "Select white balance"
+      },
+      "hardware": {
+        "help": "Select the hardware type for this button.",
+        "invalid": "Please select a hardware type.",
+        "label": "Hardware",
+        "placeholder": "Select hardware"
+      },
+      "height": {
+        "help": "Enter the resolution height in pixels.",
+        "invalid": "Please enter a minimum value of {value}.",
+        "label": "Height"
+      },
+      "motion": {
+        "area": {
+          "help": "Enter an area size.",
+          "invalid": "Please enter a minimum value of {value}.",
+          "label": "Motion minimum area",
+          "placeholder": "Enter number"
+        },
+        "boxes": {
+          "help": "Show motion boxes on the archived images.",
+          "invalid": "Please make a choice.",
+          "label": "Show motion boxes",
+          "options": {
+            "blue": "Blue",
+            "green": "Green",
+            "none": "None",
+            "red": "Red"
+          },
+          "placeholder": "Show the motion boxes"
+        },
+        "frame": {
+          "help": "Which frame to use for motion detection.",
+          "invalid": "Please make a choice.",
+          "label": "Motion comparison frame",
+          "options": {
+            "archived": "Last archived frame",
+            "last": "Last frame"
+          },
+          "placeholder": "Select which frame to comparison"
+        },
+        "threshold": {
+          "help": "Enter the motion threshold.",
+          "invalid": "Please enter a minimum value of {value}.",
+          "label": "Motion delta threshold",
+          "placeholder": "Enter number"
+        }
+      },
+      "name": {
+        "help": "Enter an easy to remember name.",
+        "invalid": "The entered name is not valid. It cannot be empty.",
+        "label": "Name",
+        "placeholder": "Enter a name"
+      },
+      "preview": {
+        "label": "Preview"
+      },
+      "rotation": {
+        "help": "Select a rotation.",
+        "invalid": "Please make a choice.",
+        "label": "Rotation",
+        "options": {
+          "degrees_0": "0 degrees",
+          "degrees_180": "180 degrees",
+          "degrees_270": "270 degrees",
+          "degrees_90": "90 degrees",
+          "flip_h": "Flip horizontal",
+          "flip_v": "Flip vertical",
+          "zero_degrees": "0 degrees"
+        },
+        "placeholder": "Select rotation"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Not all required fields are entered correctly."
+        },
+        "ok": {
+          "message": "Webcam ''{name}'' is updated."
+        }
+      },
+      "title": "Webcam settings",
+      "width": {
+        "help": "Enter the resolution width in pixels.",
+        "invalid": "Please enter a minimum value of {value}.",
+        "label": "Width"
+      }
+    },
+    "title": "Webcams"
+  }
+}

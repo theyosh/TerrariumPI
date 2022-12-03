@@ -3,6 +3,8 @@
 .git*
 **/.git
 **/.git*
+*.pyc
+**/*.pyc
 __pycache__
 **/__pycache__
 Dockerfile*
@@ -19,3 +21,18 @@ media/*
 **/*.map
 install.sh
 Makefile
+.vscode
+.mypy_cache
+
+# Gui parts
+.env.dev.json
+node_modules
+
+# gui
+# gui/*
+#.env.*
+# html-template.js
+# package-lock.json
+# package.json
+# postcss.config.js
+# rollup.config.js

@@ -1,12 +1,3 @@
-[submodule "static/assets/plugins/fancybox"]
-	path = static/assets/plugins/fancybox
-	url = https://github.com/fancyapps/fancybox.git
-[submodule "static/assets/plugins/leaflet.loading"]
-	path = static/assets/plugins/leaflet.loading
-	url = https://github.com/ebrelsford/Leaflet.loading.git
-[submodule "static/assets/plugins/leaflet.icon-pulse"]
-	path = static/assets/plugins/leaflet.icon-pulse
-	url = https://github.com/mapshakers/leaflet-icon-pulse.git
 [submodule "3rdparty/Bright-Pi"]
 	path = 3rdparty/Bright-Pi
 	url = https://github.com/PiSupply/Bright-Pi

@@ -1,0 +1,2115 @@
+{
+  "about": {
+    "online": {
+      "help": "Més ajuda en línia."
+    },
+    "title": "Sobre"
+  },
+  "areas": {
+    "delete": {
+      "confirm": {
+        "message": "Esteu segur que voleu eliminar l'àrea ''{name}''?"
+      },
+      "error": {
+        "message": "No s'ha pogut suprimir l'àrea ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "S'ha suprimit l'àrea ''{name}''."
+      }
+    },
+    "settings": {
+      "depends_on": {
+        "help": "Seleccioneu les àrees d’on depèn aquesta àrea.",
+        "invalid": "Feu una tria.",
+        "label": "Depén de",
+        "placeholder": "Seleccioneu les àrees depenents"
+      },
+      "enclosure": {
+        "help": "Seleccioneu el recinte on pertany aquesta zona.",
+        "invalid": "Feu una tria.",
+        "label": "Encerclament",
+        "placeholder": "Seleccioneu el recinte"
+      },
+      "mode": {
+        "help": "Seleccioneu el mode d'aquesta àrea. Això canviarà el temps i la durada dels relés.",
+        "invalid": "Feu una tria.",
+        "label": "Model",
+        "options": {
+          "disabled": "Inepte",
+          "main_lights": "Llums principals",
+          "sensors": "Sensors",
+          "timer": "Temporitzador",
+          "weather": "Dia/nit del temps",
+          "weather_inverse": "Nit/dia de temps"
+        },
+        "placeholder": "Seleccioneu el mode"
+      },
+      "name": {
+        "help": "Introduïu un nom fàcil de recordar.",
+        "invalid": "El nom introduït no és vàlid. No pot estar buit.",
+        "label": "Nom",
+        "placeholder": "Introduïu un nom"
+      },
+      "save": {
+        "error": {
+          "duplicate_relays": "Heu seleccionat els mateixos relés tant a l'alarma baixa com a la alta. Això no és vàlid.",
+          "required_fields": "No tots els camps obligatoris s’introdueixen correctament."
+        },
+        "ok": {
+          "message": "Area ''{name}'' s'actualitza."
+        }
+      },
+      "setup": {
+        "day_night_difference": {
+          "help": "Import per canviar entre dia i nit.",
+          "invalid": "Introduïu un número vàlid.",
+          "label": "Diferència de dia/nit",
+          "placeholder": "Introduir el número"
+        },
+        "day_night_source": {
+          "help": "Seleccioneu la font quan sigui 'dia'.",
+          "invalid": "Feu una tria.",
+          "label": "Font del dia/nit",
+          "options": {
+            "lights": "Llums",
+            "weather": "Temps"
+          },
+          "placeholder": "Seleccioneu una font de dia/nit"
+        },
+        "deviation_high_alarm": {
+          "help": "Augment de la disminució del valor d'alarma alt.",
+          "invalid": "Introduïu un número vàlid.",
+          "label": "Alta desviació d'alarma",
+          "placeholder": "Alta desviació d'alarma"
+        },
+        "deviation_low_alarm": {
+          "help": "Augment de la disminució del valor d'alarma baix.",
+          "invalid": "Introduïu un número vàlid.",
+          "label": "Desviació d'alarma baixa",
+          "placeholder": "Desviació d'alarma baixa"
+        },
+        "high": {
+          "begin": {
+            "help": "L’època del dia en què els relés s’encenguen cada nit.",
+            "invalid": "Introduïu un temps vàlid.",
+            "label": "Temps d’inici",
+            "placeholder": "Introduïu el temps d’inici"
+          },
+          "door_status": {
+            "help": "Seleccioneu l'estat de la porta.",
+            "invalid": "Feu una tria.",
+            "label": "Estat de la porta",
+            "options": {
+              "closed": "Tancada",
+              "ignore": "Ignorat",
+              "open": "Obrir"
+            },
+            "placeholder": "Seleccioneu un estat"
+          },
+          "end": {
+            "help": "L’hora del dia en què els relés s’encenen cada nit.",
+            "invalid": "Introduïu un temps vàlid.",
+            "label": "Fi del temps",
+            "placeholder": "Introduïu el temps final"
+          },
+          "ignore_high": {
+            "help": ".",
+            "label": "Ignora alarma alta"
+          },
+          "light_status": {
+            "help": "Seleccioneu l'estat de les llums.",
+            "invalid": "Feu una tria.",
+            "label": "Estat de llum",
+            "options": {
+              "ignore": "Ignorat",
+              "off": "Apagada",
+              "on": "Al damunt de"
+            },
+            "placeholder": "Seleccioneu un estat"
+          },
+          "off_duration": {
+            "help": "La durada quan els relés s’han d’estar apagats quan s’apaguen. Introduïu '0' per desactivar.",
+            "invalid": "Introduïu una durada vàlida en minuts.",
+            "label": "Durada fora",
+            "placeholder": "Durada fora"
+          },
+          "on_duration": {
+            "help": "La durada quan els relés haurien d’estar encesos. Si això és més curt, tot el dia, obtindreu una funcionalitat del temporitzador. Introduïu '0' per passar una nit completa.",
+            "invalid": "Introduïu una durada vàlida en minuts.",
+            "label": "Durant la durada",
+            "placeholder": "Durant la durada"
+          },
+          "playlists": {
+            "help": "Seleccioneu la llista de reproducció (s) per jugar.",
+            "invalid": "Feu una tria.",
+            "label": "Llistes de reproducció",
+            "placeholder": "Seleccioneu les llistes de reproducció"
+          },
+          "power_on_time": {
+            "help": "La durada en segons per canviar el relé.",
+            "invalid": "Introduïu un número vàlid.",
+            "label": "Potència a temps",
+            "placeholder": "Potència a temps"
+          },
+          "relays": {
+            "help": "Seleccioneu els relés per canviar.",
+            "invalid": "Feu una tria.",
+            "label": "Actuadors",
+            "placeholder": "Seleccioneu Relays"
+          },
+          "settle_time": {
+            "help": "La durada en segons entre dues accions.",
+            "invalid": "Introduïu un número vàlid.",
+            "label": "Settelleu el temps",
+            "placeholder": "Settelleu el temps"
+          },
+          "trigger_threshold": {
+            "help": "Introduïu la quantitat d’alarmes abans que es produeixi l’acció.",
+            "invalid": "Introduïu un número vàlid.",
+            "label": "Llindar d'alarma",
+            "placeholder": "Llindar"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Seleccioneu el retard i la durada del dimmer que es posi o apagueu en pocs minuts. La durada màxima és de 180 minuts."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Durada de Dimmer Off"
+              },
+              "relay": {
+                "label": "Retardament del relé"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Dimmer a la durada"
+              },
+              "relay": {
+                "label": "Retard de relé"
+              }
+            },
+            "relay": {
+              "info": "Seleccioneu el retard en minuts que un relé espera abans que s'encengui. El retard màxim és de 180 minuts."
+            }
+          }
+        },
+        "low": {
+          "begin": {
+            "help": "L’època del dia en què els relés s’encenguen cada nit.",
+            "invalid": "Introduïu un temps vàlid.",
+            "label": "Temps d’inici",
+            "placeholder": "Introduïu el temps d’inici"
+          },
+          "door_status": {
+            "help": "Seleccioneu l'estat de la porta.",
+            "invalid": "Feu una tria.",
+            "label": "Estat de la porta",
+            "options": {
+              "closed": "Tancada",
+              "ignore": "Ignorat",
+              "open": "Obrir"
+            },
+            "placeholder": "Seleccioneu un estat"
+          },
+          "end": {
+            "help": "L’hora del dia en què els relés s’encenen cada nit.",
+            "invalid": "Introduïu un temps vàlid.",
+            "label": "Fi del temps",
+            "placeholder": "Introduïu el temps final"
+          },
+          "ignore_low": {
+            "help": "Commuta per ignorar el baix valor d’alarma dels sensors i només utilitza un valor d’alarma elevat.",
+            "label": "Ignora alarma baixa"
+          },
+          "light_status": {
+            "help": "Seleccioneu l'estat de les llums.",
+            "invalid": "Feu una tria.",
+            "label": "Estat de llum",
+            "options": {
+              "ignore": "Ignorat",
+              "off": "Apagada",
+              "on": "Al damunt de"
+            },
+            "placeholder": "Seleccioneu un estat"
+          },
+          "off_duration": {
+            "help": "La durada quan els relés s’han d’estar apagats quan s’apaguen. Introduïu '0' per desactivar.",
+            "invalid": "Introduïu una durada vàlida en minuts.",
+            "label": "Durada fora",
+            "placeholder": "Durada fora"
+          },
+          "on_duration": {
+            "help": "La durada quan els relés haurien d’estar encesos. Si això és més curt, tot el dia, obtindreu una funcionalitat del temporitzador. Introduïu '0' per passar una nit completa.",
+            "invalid": "Introduïu una durada vàlida en minuts.",
+            "label": "Durant la durada",
+            "placeholder": "Durant la durada"
+          },
+          "playlists": {
+            "help": "Seleccioneu la llista de reproducció (s) per jugar.",
+            "invalid": "Feu una tria.",
+            "label": "Llistes de reproducció",
+            "placeholder": "Seleccioneu les llistes de reproducció"
+          },
+          "power_on_time": {
+            "help": "La durada en segons per canviar el relé.",
+            "invalid": "Introduïu un número vàlid.",
+            "label": "Potència a temps",
+            "placeholder": "Potència a temps"
+          },
+          "relays": {
+            "help": "Seleccioneu els relés per canviar.",
+            "invalid": "Feu una tria.",
+            "label": "Actuadors",
+            "placeholder": "Seleccioneu Relays"
+          },
+          "settle_time": {
+            "help": "La durada en segons entre dues accions.",
+            "invalid": "Introduïu un número vàlid.",
+            "label": "Settelleu el temps",
+            "placeholder": "Settelleu el temps"
+          },
+          "trigger_threshold": {
+            "help": "Introduïu la quantitat d’alarmes abans que es produeixi l’acció.",
+            "invalid": "Introduïu un número vàlid.",
+            "label": "Llindar d'alarma",
+            "placeholder": "Llindar"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Seleccioneu el retard i la durada del dimmer que es posi o apagueu en pocs minuts. La durada màxima és de 180 minuts."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Durada de l'apagat (dimmer)"
+              },
+              "relay": {
+                "label": "Retard d'apagat del relé"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Dimmer a la durada"
+              },
+              "relay": {
+                "label": "Retard de relé"
+              }
+            },
+            "relay": {
+              "info": "Seleccioneu el retard en minuts que un relé espera abans que s'encengui. El retard màxim és de 180 minuts."
+            }
+          }
+        },
+        "main_lights": {
+          "help": "Commuta això si es tracta dels llums principals d’aquest recinte. S'utilitza per a les comprovacions de llum d'altres zones.",
+          "label": "Llums principals"
+        },
+        "max_day_hours": {
+          "help": "La quantitat màxima d’hores que s’encenen els llums. Això només és vàlid en mode meteorològic. Quan el dia sigui més llarg, aquest valor màxim, el dia s’escurçarà a aquest valor màxim.",
+          "invalid": "El valor introduït no és vàlid. Introduïu un número vàlid entre {min} i {max}.",
+          "label": "Hores màximes",
+          "placeholder": "Introduir el número"
+        },
+        "min_day_hours": {
+          "help": "La quantitat mínima d’hores que s’encenen els llums. Això només és vàlid en mode meteorològic. Quan el dia sigui més curt, aquest valor mínim, el dia s’ampliarà a aquest valor mínim.",
+          "invalid": "El valor introduït no és vàlid. Introduïu un número vàlid entre {min} i {max}.",
+          "label": "Hores mínimes",
+          "placeholder": "Introduir el número"
+        },
+        "periods": {
+          "day": "Configuració del dia",
+          "high": "Alarma alta",
+          "info": "A continuació, podeu seleccionar els relés i la configuració del temporitzador per període durant el dia i la nit.",
+          "low": "Alarma baixa",
+          "night": "Configuració nocturna",
+          "varation": "Variació"
+        },
+        "sensors": {
+          "help": "Seleccioneu Sensors a utilitzar per al mode basat en el sensor.",
+          "invalid": "Feu una tria.",
+          "label": "Sensors",
+          "placeholder": "Seleccioneu Sensors"
+        },
+        "shift_day_hours": {
+          "help": "La quantitat de temps per canviar les hores en funció del temps de pujada del sol. Els valors negatius faran que el dia comenci abans.",
+          "invalid": "El valor introduït no és vàlid. Introduïu un número vàlid entre {min} i {max}.",
+          "label": "Hores Shift",
+          "placeholder": "Introduir el número"
+        },
+        "soundcard": {
+          "help": "Seleccioneu la targeta de so que s'utilitza per a aquesta àrea.",
+          "invalid": "Feu una tria.",
+          "label": "Targeta de son",
+          "placeholder": "Seleccioneu una targeta de so"
+        },
+        "variation": {
+          "offset": {
+            "invalid": "Introduïu un número vàlid."
+          },
+          "period": {
+            "invalid": "Introduïu un número vàlid.",
+            "offset": "Offset",
+            "placeholder": "Llindar",
+            "source": "Introduïu un URL complet, un fitxer JSON local o un fitxer d'script"
+          },
+          "value": {
+            "invalid": "Introduïu un número vàlid.",
+            "placeholder": "Diferència"
+          },
+          "when": {
+            "invalid": "Si us plau, feu una elecció.",
+            "options": {
+              "after": "Després de x minuts",
+              "at": "En el moment",
+              "external": "Utilitzeu la font JSON",
+              "script": "Utilitza script",
+              "weather": "Utilitzant el temps actual"
+            },
+            "placeholder": "Seleccioneu l'acció"
+          }
+        },
+        "watertank_height": {
+          "help": "Entra a l’altura del dipòsit d’aigua.",
+          "invalid": "Introduïu un valor mínim de {value}.",
+          "label": "Altura",
+          "placeholder": "Introduir el número"
+        },
+        "watertank_offset": {
+          "help": "Introduïu el desplaçament entre el sensor i l'alçada de l'aigua.",
+          "invalid": "Introduïu un valor mínim de {value}.",
+          "label": "Marcar",
+          "placeholder": "Introduir el número"
+        },
+        "watertank_volume": {
+          "help": "Introduïu el volum del dipòsit d’aigua.",
+          "invalid": "Introduïu un valor mínim de {value}.",
+          "label": "Volum d'aigua",
+          "placeholder": "Introduir el número"
+        }
+      },
+      "title": "Configuració de l’àrea",
+      "type": {
+        "help": "Seleccioneu el tipus d’àrea. Cada tipus té les seves pròpies opcions i lògica addicionals.",
+        "invalid": "Feu una tria.",
+        "label": "Lletra",
+        "placeholder": "Seleccioneu Tipus"
+      }
+    }
+  },
+  "audio": {
+    "files": {
+      "delete": {
+        "confirm": {
+          "message": "Esteu segur que suprimiu el fitxer d'àudio ''{name}'' ({filename})?"
+        },
+        "error": {
+          "message": "No es pot suprimir el fitxer d'àudio ''{name}''.\nError: {error}"
+        },
+        "ok": {
+          "message": "S'ha suprimit el fitxer d'àudio ''{name}''."
+        }
+      },
+      "settings": {
+        "audiofiles": {
+          "label": "Pengeu un fitxer d'àudio nou",
+          "placeholder": "Pengeu un fitxer d'àudio nou"
+        },
+        "save": {
+          "error": {
+            "invalid_file": "Fitxers d'àudio no vàlids (s)"
+          },
+          "ok": {
+            "message": "Penjat {amount, plural, =1 {# fitxer d'àudio} other {# fitxer d'àudios}}"
+          }
+        }
+      },
+      "title": "Fitxers d'àudio"
+    },
+    "menu": {
+      "files": {
+        "title": "Fitxers"
+      },
+      "new_playlist": {
+        "title": "Nova llista de reproducció"
+      },
+      "playlists": {
+        "title": "Llistes de reproducció"
+      },
+      "title": "Àudio"
+    },
+    "playlists": {
+      "delete": {
+        "confirm": {
+          "message": "Esteu segur de suprimir la llista de reproducció ''{name}'' amb {length} números?"
+        },
+        "error": {
+          "message": "La llista de reproducció ''{name}'' no s'ha pogut suprimir!\nError: {error}"
+        },
+        "ok": {
+          "message": "S'ha suprimit la llista de reproducció ''{name}''."
+        }
+      },
+      "settings": {
+        "files": {
+          "help": "Seleccioneu tots els fitxers d'àudio per a aquesta llista de reproducció.",
+          "invalid": "Seleccioneu almenys 1 fitxer d'àudio.",
+          "label": "Fitxers d'àudio",
+          "placeholder": "Seleccioneu fitxers d'àudio"
+        },
+        "name": {
+          "help": "Introduïu un nom fàcil de recordar.",
+          "invalid": "El nom introduït no és vàlid. No pot estar buit.",
+          "label": "Nom",
+          "placeholder": "Introduïu un nom"
+        },
+        "repeat": {
+          "help": "Reprodueix aquesta llista de reproducció en mode repetit.",
+          "label": "Repetir"
+        },
+        "save": {
+          "error": {
+            "required_fields": "No tots els camps obligatoris s’introdueixen correctament."
+          },
+          "ok": {
+            "message": "PlayList ''{name}'' s'actualitza."
+          }
+        },
+        "shuffle": {
+          "help": "Barregeu aquesta llista de reproducció cada vegada que es juga.",
+          "label": "Barrejar"
+        },
+        "title": "Configuració de la llista de reproducció",
+        "volume": {
+          "help": "Seleccioneu el volum d'aquesta llista de reproducció.",
+          "label": "Volum d'àudio"
+        }
+      },
+      "title": "Llistes de reproducció"
+    }
+  },
+  "buttons": {
+    "actions": {
+      "delete": "Esborra el botó",
+      "export": "Botó d'exportació",
+      "ignore": "Ignora el botó",
+      "settings": "Editar el botó"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Esteu segur que voleu suprimir el botó ''{name}''?"
+      },
+      "error": {
+        "message": "No es pot suprimir el botó ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "El botó ''{name}'' s'elimina."
+      }
+    },
+    "ignore": {
+      "confirm": {
+        "message": "Esteu segur que voleu ignorar el botó ''{name}''?"
+      },
+      "error": {
+        "message": "No es pot ignorar el botó ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "El botó ''{name}'' s'ignora."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nou botó"
+      },
+      "status": {
+        "title": "Estat"
+      },
+      "title": "Botons"
+    },
+    "settings": {
+      "address": {
+        "help": "Introduïu el número de Pin GPIO físic.",
+        "invalid": "L’adreça introduïda no és vàlida. Introduïu un número vàlid entre {min} i {max}.",
+        "label": "adreça",
+        "placeholder": "Introduïu una adreça"
+      },
+      "calibration": {
+        "inverse": {
+          "help": "",
+          "label": ""
+        },
+        "ldr_capacitor": {
+          "help": "Introduïu el valor del condensador en µF, ja que això influirà en el càlcul de la llum.",
+          "invalid": "El valor del condensador introduït no és vàlid. Introduïu un número vàlid entre {min} i {max}.",
+          "label": "Valor del condensador en µF",
+          "placeholder": "Introduïu el valor del condensador en µF"
+        },
+        "timeout": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "current": {
+        "help": "L’estat actual del botó.",
+        "label": "Corrent",
+        "placeholder": "Valor actual"
+      },
+      "hardware": {
+        "help": "Seleccioneu el tipus de maquinari per a aquest botó.",
+        "invalid": "Seleccioneu un tipus de maquinari.",
+        "label": "Maquinari",
+        "placeholder": "Seleccioneu el maquinari"
+      },
+      "name": {
+        "help": "Introduïu un nom fàcil de recordar.",
+        "invalid": "El nom introduït no és vàlid. No pot estar buit.",
+        "label": "Nom",
+        "placeholder": "Introduïu un nom"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No tots els camps obligatoris s’introdueixen correctament."
+        },
+        "ok": {
+          "message": "Botó ''{name}'' està actualitzat."
+        }
+      },
+      "title": "Configuració del botó"
+    },
+    "title": "Botons"
+  },
+  "calendar": {
+    "actions": {
+      "download": "Descarregueu iCal"
+    },
+    "event": {
+      "delete": {
+        "confirm": {
+          "message": "Esteu segur que voleu eliminar l'esdeveniment ''{name}''?"
+        },
+        "error": {
+          "message": "L'esdeveniment ''{name}'' no s'ha pogut eliminar!\nError: {error}"
+        },
+        "ok": {
+          "message": "Es elimina l'esdeveniment ''{name}''."
+        }
+      },
+      "duration": "Durada",
+      "periods": {
+        "days": "Dies",
+        "months": "Mesos",
+        "no_reminder": "Sense recordatori",
+        "no_repeat": "Sense repetir",
+        "weeks": "Setmanalment",
+        "years": "Anys"
+      },
+      "settings": {
+        "date": {
+          "help": "La data o el període d’aquest esdeveniment.",
+          "label": "Data"
+        },
+        "description": {
+          "help": "Introduïu informació sobre aquest esdeveniment.",
+          "label": "Introduïu una descripció"
+        },
+        "remind": {
+          "label": "Recordar -ho"
+        },
+        "repeat": {
+          "help": "Seleccioneu un període de repetició i una quantitat.",
+          "invalid": "Introduïu un import del període de repetició vàlid.",
+          "label": "Repetiu tots"
+        },
+        "repeat_amount": {
+          "label": "Seleccioneu la quantitat"
+        },
+        "save": {
+          "error": {
+            "required_fields": "No tots els camps obligatoris s’introdueixen correctament."
+          },
+          "ok": {
+            "message": "L'esdeveniment ''{name}'' s'actualitza."
+          }
+        },
+        "summary": {
+          "help": "Introduïu un nom.",
+          "invalid": "El nom no pot estar buit.",
+          "label": "Introduïu un nom"
+        },
+        "title": "Aconteixement",
+        "update": {
+          "error": {
+            "message": "L'esdeveniment ''{name}'' no s'ha pogut actualitzar!\nError: {error}"
+          },
+          "ok": {
+            "message": "L'esdeveniment ''{name}'' s'actualitza."
+          }
+        }
+      }
+    },
+    "menu": {
+      "title": "Calendari"
+    },
+    "title": "Calendari"
+  },
+  "dashboard": {
+    "enclosures": {
+      "menu": {
+        "title": "Tancaments"
+      },
+      "mode": "Model",
+      "title": "Tancaments"
+    },
+    "infobox": {
+      "current_power_usage": {
+        "title": "Ús de potència a Watt"
+      },
+      "current_water_flow": {
+        "title": "Flux d'aigua a {water_flow_indicator}"
+      },
+      "total_power_usage": {
+        "duration": "A {duration}",
+        "title": "Ús total de la potència"
+      },
+      "total_water_usage": {
+        "duration": "A {duration}",
+        "title": "Ús total de l’aigua"
+      },
+      "uptime": {
+        "title": "Temps amunt"
+      }
+    },
+    "menu": {
+      "title": "panell"
+    },
+    "title": "panell"
+  },
+  "enclosures": {
+    "actions": {
+      "delete": "Suprimeix el recinte",
+      "settings": "Edita el recinte"
+    },
+    "area": {
+      "current": "corrent",
+      "current_status": "Estat actual",
+      "delete": {
+        "title": "Esborrar àrea"
+      },
+      "edit": {
+        "title": "Edició"
+      },
+      "mode": {
+        "disabled": "Inepte",
+        "sensors": "Sensors",
+        "timer": "Temporitzador",
+        "title": "Model",
+        "weather": "Temps"
+      },
+      "now": "ara",
+      "period": {
+        "day": "Dia",
+        "high": "Alt",
+        "low": "baix",
+        "night": "Nit"
+      },
+      "range": "Distància",
+      "type": {
+        "audio": "Àudio",
+        "cooling": "Refrigeració",
+        "heating": "Calefacció",
+        "humidity": "Humitat",
+        "lights": "Llums",
+        "main_lights": "Llums principals",
+        "watertank": "Tanc d'aigua"
+      }
+    },
+    "areas": {
+      "title": "Zones"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Esteu segur que voleu suprimir el recinte ''{name}''?"
+      },
+      "error": {
+        "message": "No s'ha pogut suprimir el recinte ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "S'ha suprimit el recinte ''{name}''."
+      }
+    },
+    "doors": {
+      "title": "Portes"
+    },
+    "menu": {
+      "list": {
+        "title": "Inscriure"
+      },
+      "new_area": {
+        "title": "Nova zona"
+      },
+      "new_enclosure": {
+        "title": "Nou recinte"
+      },
+      "title": "Tancaments"
+    },
+    "settings": {
+      "description": {
+        "help": "Introduïu algun text de descripció sobre aquest recinte.",
+        "label": "Descripció",
+        "placeholder": "Introduïu una descripció"
+      },
+      "doors": {
+        "help": "Seleccioneu la porta (s) per a aquest recinte.",
+        "label": "Portes"
+      },
+      "image": {
+        "help": "Pengeu un jpg o png.",
+        "invalid": "El fitxer seleccionat no és vàlid. No és un fitxer d'imatge.",
+        "label": "Imatge",
+        "placeholder": "Seleccioneu un fitxer d'imatge"
+      },
+      "name": {
+        "help": "Introduïu un nom fàcil de recordar.",
+        "invalid": "El nom introduït no és vàlid. No pot estar buit.",
+        "label": "Nom",
+        "placeholder": "Introduïu un nom"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No tots els camps obligatoris s’introdueixen correctament."
+        },
+        "ok": {
+          "message": "El recinte ''{name}'' està actualitzat."
+        }
+      },
+      "title": "Configuració del recinte",
+      "webcams": {
+        "help": "Seleccioneu la càmera web per a aquest recinte.",
+        "label": "Càmeres web"
+      }
+    },
+    "title": "Tancaments",
+    "webcams": {
+      "title": "Càmeres web"
+    }
+  },
+  "footer": {
+    "current_activity": "Activitat",
+    "error_messages": "Missatges d'error",
+    "warning_messages": "Missatges d’avís"
+  },
+  "gauge": {
+    "error": "error",
+    "last_update": "Darrera actualització",
+    "warning": "advertència"
+  },
+  "general": {
+    "download": {
+      "title": "descarregar"
+    },
+    "exclude": {
+      "average": "."
+    },
+    "humidity": "Humitat",
+    "login": {
+      "title": "Inicieu la sessió per fer canvis"
+    },
+    "logout": {
+      "title": "Tancar sessió"
+    },
+    "settings": {
+      "title": "Configuració"
+    },
+    "temperature": "temperatura",
+    "uptime_format": {
+      "days": "{number, plural, =1 {# dia} other {# dias}}",
+      "hours": "{number, plural, =1 {# hores} other {# horess}}",
+      "minutes": "{number, plural, =1 {# minut} other {# minuts}}",
+      "months": "{number, plural, =1 {# mes} other {# mess}}",
+      "seconds": "{number, plural, =1 {# segon} other {# segons}}",
+      "years": "{number, plural, =1 {# curs} other {# curss}}"
+    }
+  },
+  "graph": {
+    "alarm": {
+      "max": "Alarma màxima",
+      "min": "Min alarma"
+    },
+    "current": "Corrent",
+    "flow": "Flux d'aigua",
+    "ldr": "Estat de llum",
+    "magnetic": "Estat de la porta",
+    "motion": "Moviment",
+    "no-data": "No hi ha dades ...",
+    "period": {
+      "day": "Dia",
+      "month": "Mes",
+      "replaced": "Reemplaçat",
+      "week": "Setmana",
+      "year": "Curs"
+    },
+    "settings": {
+      "export": "Exportació"
+    },
+    "wattage": "Potència"
+  },
+  "home": {
+    "menu": {
+      "title": "Casa"
+    },
+    "title": "Casa"
+  },
+  "messages": {
+    "actions": {
+      "delete": "Esborra el missatge",
+      "edit": "Editar el missatge"
+    },
+    "add": "Afegiu missatge",
+    "delete": {
+      "confirm": {
+        "message": "Esteu segur que voleu suprimir el missatge ''{name}''?"
+      },
+      "error": {
+        "message": "No es pot suprimir el missatge ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "S'ha suprimit el missatge ''{name}''."
+      }
+    },
+    "ratelimit": "{number, plural, =0 {Missatges il·limitats} other {Max # per minut}}",
+    "settings": {
+      "available_services": {
+        "help": "Seleccioneu el servei a utilitzar per a aquest missatge de notificació.",
+        "label": "Serveis"
+      },
+      "enabled": {
+        "help": "Activa/Desactiva aquest missatge de notificació.",
+        "label": "Activat"
+      },
+      "message": {
+        "help": "Introduïu un missatge. Podeu utilitzar els valors del marcador de lloc aquí.",
+        "label": "Missatge",
+        "placeholder": "Introduïu un missatge"
+      },
+      "placeholders": {
+        "format": "Els valors del número es poden arrodonir mitjançant el {link_start} `.: 2f` format {link_end}",
+        "help": "Llista de marcadors de lloc disponibles.",
+        "label": "Place Holders"
+      },
+      "rate_limit": {
+        "help": "Nombre màxim de missatges per minut per a aquest missatge. Utilitzeu 0 per a il·limitats.",
+        "invalid": "El valor introduït no és vàlid. Introduïu un número vàlid superior a {min}.",
+        "label": "Límit de preu",
+        "placeholder": "Missatges per minut"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No tots els camps obligatoris s’introdueixen correctament."
+        },
+        "ok": {
+          "message": "El missatge ''{name}'' s'actualitza."
+        }
+      },
+      "subject": {
+        "help": "Introduïu un tema curt. Podeu utilitzar els valors del marcador de lloc aquí.",
+        "invalid": "El tema no pot estar buit.",
+        "label": "Assignatura",
+        "placeholder": "Introduïu un tema"
+      },
+      "title": "Configuració del missatge",
+      "type": {
+        "help": "Seleccioneu el tipus de missatge de notificació.",
+        "invalid": "Feu una tria.",
+        "label": "Tipus de missatge",
+        "placeholder": "Seleccioneu Tipus"
+      }
+    },
+    "table": {
+      "actions": "Accions",
+      "enabled": "Activat",
+      "message": "Missatge",
+      "rate_limit": "Límit de preu",
+      "services": "Serveis",
+      "subject": "Assignatura",
+      "type": "Lletra"
+    },
+    "title": "Missatges de notificació"
+  },
+  "modal": {
+    "confirm": {
+      "relays": {
+        "scan": "Això iniciarà una nova exploració per trobar nous relés. Això pot trigar fins a 30 segons."
+      },
+      "sensors": {
+        "scan": "Això iniciarà una nova exploració per trobar nous sensors. Això pot trigar fins a 30 segons."
+      },
+      "submit": {
+        "title": "Confirmar"
+      },
+      "system": {
+        "logout": "Esteu segur que voleu tancar la sessió?",
+        "reboot": "Això reiniciarà el Raspberry Pi. Això pot trigar fins a 60 segons.",
+        "restart": "Això reiniciarà Terrariumpi. Això pot trigar fins a 30 segons.",
+        "shutdown": "Això tancarà el Raspberry Pi. Utilitzeu -ho amb cura!"
+      },
+      "title": "Estàs segur?"
+    },
+    "form": {
+      "toggle": {
+        "info": "Mostra/amaga la informació d’ajuda"
+      }
+    },
+    "general": {
+      "close": "Tanca",
+      "save": "Estalviar"
+    },
+    "login": {
+      "error": "Accés incorrecte",
+      "form": {
+        "password": {
+          "help": "Introduïu la contrasenya.",
+          "invalid": "La contrasenya no pot estar buida.",
+          "label": "Contrasenya"
+        },
+        "submit": "iniciar Sessió",
+        "username": {
+          "help": "Introduïu el nom d'usuari.",
+          "invalid": "Nom d'usuari no pot estar buit.",
+          "label": "Nom d'usuari"
+        }
+      },
+      "title": "iniciar Sessió"
+    },
+    "notification": {
+      "service": {
+        "form": {
+          "field": {
+            "setup": {
+              "address": {
+                "label": "Introduïu una adreça"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "not-found": {
+    "header": "Pàgina no trobada",
+    "link": "Vés a la pàgina d'inici",
+    "title": "Pàgina no trobada"
+  },
+  "notification": {
+    "delete": {
+      "error": {
+        "title": "Error"
+      },
+      "invalid": {
+        "title": "ERROR"
+      },
+      "ok": {
+        "title": "D'acord"
+      }
+    },
+    "door": {
+      "status": {
+        "title": "Actualització d'estat de la porta"
+      }
+    },
+    "exclude": {
+      "error": {
+        "title": "Error"
+      },
+      "ok": {
+        "title": "D'acord"
+      }
+    },
+    "form": {
+      "save": {
+        "error": {
+          "title": "Desa l'error"
+        },
+        "ok": {
+          "title": "Desa bé"
+        }
+      },
+      "upload": {
+        "error": {
+          "title": "Error de càrrega"
+        }
+      }
+    },
+    "login": {
+      "message": {
+        "error": "Ho sento, però l’inici de sessió no és vàlid",
+        "ok": "Heu iniciat la sessió amb èxit."
+      },
+      "title": "iniciar Sessió"
+    },
+    "manual_mode": {
+      "error": {
+        "title": "Error"
+      },
+      "ok": {
+        "title": "D'acord"
+      }
+    },
+    "offline": {
+      "message": "La connexió es perd",
+      "title": "Fora de línia"
+    },
+    "online": {
+      "message": "Estem connectats",
+      "title": "En línia"
+    },
+    "reboot": {
+      "ok": {
+        "title": "Sistema reinicieu bé"
+      }
+    },
+    "restart": {
+      "ok": {
+        "title": "Reinici del sistema D'acord"
+      }
+    },
+    "scanning": {
+      "ok": {
+        "title": "Scanning va acabar"
+      }
+    },
+    "shutdown": {
+      "ok": {
+        "title": "Apagat del sistema D'acord"
+      }
+    },
+    "toggle": {
+      "error": {
+        "title": "Error"
+      },
+      "ok": {
+        "title": "D'acord"
+      }
+    }
+  },
+  "relays": {
+    "actions": {
+      "delete": "Suprimeix el relé",
+      "export": "Relé d'exportació",
+      "ignore": "Ignora el relé",
+      "manual_mode": "Relé de mode manual",
+      "replace_hardware": "Substituir el maquinari",
+      "settings": "Edita el relé"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Esteu segur que voleu ignorar el relé ''{name}''?"
+      },
+      "manual_mode": {
+        "message": "Mode manual de commutació per al relé ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Esteu segur que voleu suprimir el relé ''{name}''?"
+      },
+      "error": {
+        "message": "No es pot suprimir el relé ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "S'ha suprimit el relé ''{name}''."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "No es pot ignorar el relé ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "El relé ''{name}'' s'ignora."
+      }
+    },
+    "manual-mode": "Mode manual",
+    "manual_mode": {
+      "error": {
+        "message": "Error de canvi de mode manual per al relé ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "Es canvia el mode manual per al relé ''{name}''."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nou relé"
+      },
+      "scan": {
+        "title": "Relays d’escaneig"
+      },
+      "status": {
+        "title": "Estat"
+      },
+      "title": "Actuadors"
+    },
+    "settings": {
+      "address": {
+        "help": "Per obtenir més informació, vegeu en línia.",
+        "invalid": "L’adreça introduïda no és vàlida. No pot estar buit.",
+        "label": "adreça",
+        "placeholder": "Introduïu una adreça"
+      },
+      "calibration": {
+        "dimmer_frequency": {
+          "help": "La freqüència sobre la qual funciona el dimmer.",
+          "invalid": "Introduïu un valor mínim de {value}.",
+          "label": "Freqüència Dimmer en Hz"
+        },
+        "dimmer_max_dim": {
+          "help": "Valor màxim Dimmer (llegat).",
+          "invalid": "Introduïu un valor mínim de {value}.",
+          "label": "Valor màxim Dimmer"
+        },
+        "dimmer_max_power": {
+          "help": "La potència màxima per a aquest dimmer.",
+          "invalid": "El valor introduït no és vàlid. Introduïu un número vàlid entre {min} i {max}.",
+          "label": "Potència màxima en %"
+        },
+        "dimmer_offset": {
+          "help": "El Dimmer Offset.",
+          "invalid": "Introduïu un valor mínim de {value}.",
+          "label": "Dimmer compensat en %"
+        }
+      },
+      "current": {
+        "help": "L’estat actual del relé.",
+        "label": "Corrent",
+        "placeholder": "Valor actual"
+      },
+      "flow": {
+        "help": "Introduïu el flux d'aigua (màxim) quan s'encén.",
+        "invalid": "Introduïu un valor mínim de {value}.",
+        "label": "Flux d'aigua"
+      },
+      "hardware": {
+        "help": "Seleccioneu el tipus de maquinari per a aquest relé.",
+        "invalid": "Seleccioneu un tipus de maquinari.",
+        "label": "Maquinari",
+        "placeholder": "Seleccioneu el maquinari"
+      },
+      "name": {
+        "help": "Introduïu un nom fàcil de recordar.",
+        "invalid": "El nom introduït no és vàlid. No pot estar buit.",
+        "label": "Nom",
+        "placeholder": "Introduïu un nom"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No tots els camps obligatoris s’introdueixen correctament."
+        },
+        "ok": {
+          "message": "Relé ''{name}'' s'actualitza."
+        }
+      },
+      "title": "Configuració del relé",
+      "wattage": {
+        "help": "Introduïu el wattage (màxim) quan s’encengui.",
+        "invalid": "Introduïu un valor mínim de {value}.",
+        "label": "Potència"
+      }
+    },
+    "title": "Actuadors",
+    "toggle": {
+      "error": {
+        "message": "S'ha produït un error en commutar el relleu '' {name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "S'ha canviat el relleu ''{name}'' a l'estat {value}"
+      }
+    }
+  },
+  "sensors": {
+    "actions": {
+      "delete": "Suprimeix el sensor",
+      "export": "Sensor d’exportació",
+      "ignore": "Ignora el sensor",
+      "settings": "Edita el sensor"
+    },
+    "all": {
+      "menu": {
+        "title": "Tots els sensors"
+      },
+      "title": "Tots els sensors"
+    },
+    "altitude": {
+      "menu": {
+        "title": "Altitud"
+      },
+      "title": "Sensors d’altitud"
+    },
+    "average": {
+      "altitude": "Altitud mitjana",
+      "co2": "CO2 mitjà",
+      "distance": "Distància mitjana",
+      "fertility": "Fertilitat mitjana",
+      "humidity": "Humitat mitjana",
+      "light": "Llum mitjana",
+      "moisture": "Humitat mitjana",
+      "pressure": "Pressió mitjana",
+      "temperature": "Temperatura mitjana",
+      "uva": "UVA mitjana",
+      "uvb": "UVB mitjà",
+      "uvi": "Índex UV mitjà"
+    },
+    "co2": {
+      "menu": {
+        "title": "Malalt"
+      },
+      "title": "Sensors de CO2"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Esteu segur que voleu ignorar el sensor ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Esteu segur que voleu suprimir el sensor ''{name}''?"
+      },
+      "error": {
+        "message": "No es pot suprimir el sensor ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "S'ha suprimit el sensor ''{name}''."
+      }
+    },
+    "distance": {
+      "menu": {
+        "title": "Distància"
+      },
+      "title": "Sensors de distància"
+    },
+    "exclude": {
+      "error": {
+        "message": "No es pot ignorar el sensor ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "El sensor ''{name}'' s'ignora."
+      }
+    },
+    "fertility": {
+      "menu": {
+        "title": "Fertilitat"
+      },
+      "title": "Sensors de fertilitat"
+    },
+    "humidity": {
+      "menu": {
+        "title": "Humitat"
+      },
+      "title": "Sensors d’humitat"
+    },
+    "light": {
+      "menu": {
+        "title": "llum"
+      },
+      "title": "Sensors de llum"
+    },
+    "menu": {
+      "new": {
+        "title": "Nou sensor"
+      },
+      "scan": {
+        "title": "Sensors d’escaneig"
+      },
+      "title": "Sensors"
+    },
+    "moisture": {
+      "menu": {
+        "title": "Humitat"
+      },
+      "title": "Sensors d’humitat"
+    },
+    "ph": {
+      "menu": {
+        "title": "p."
+      },
+      "title": "Sensors de pH"
+    },
+    "pressure": {
+      "menu": {
+        "title": "pressió"
+      },
+      "title": "Sensors de pressió"
+    },
+    "settings": {
+      "address": {
+        "help": "Introduïu una adreça.",
+        "invalid": "L’adreça introduïda no és vàlida. No pot estar buit.",
+        "label": "adreça",
+        "placeholder": "Introduïu una adreça"
+      },
+      "alarm_max": {
+        "help": "Introduïu el valor màxim per a l’alarma.",
+        "invalid": "El valor introduït no és vàlid. Ha de ser número.",
+        "label": "Alarma màxima",
+        "placeholder": "Alarma màxima"
+      },
+      "alarm_min": {
+        "help": "Introduïu el valor mínim per a l’alarma.",
+        "invalid": "El valor introduït no és vàlid. Ha de ser número.",
+        "label": "Min alarma",
+        "placeholder": "Min alarma"
+      },
+      "calibration": {
+        "ccs811_compensation_sensors": {
+          "help": "Seleccioneu els sensors per al càlcul de la compensació.",
+          "label": "Sensors de compensació",
+          "placeholder": "Seleccioneu Sensors de compensació"
+        },
+        "chirp_max_moist": {
+          "help": "Introduïu el valor humit màxim.",
+          "invalid": "El valor introduït no és vàlid. Ha de ser un nombre més alt que {min}.",
+          "label": "Valor humit màxim"
+        },
+        "chirp_min_moist": {
+          "help": "Introduïu el valor humit mínim.",
+          "invalid": "El valor introduït no és vàlid. Ha de ser un nombre més alt que {min}.",
+          "label": "Valor humit mínim"
+        },
+        "offset": {
+          "help": "Introduïu Offset per a aquest sensor.",
+          "invalid": "El valor introduït no és vàlid. Ha de ser número.",
+          "label": "Marcar"
+        }
+      },
+      "current": {
+        "help": "L’estat actual del sensor.",
+        "label": "Corrent",
+        "placeholder": "Valor actual"
+      },
+      "exclude_avg": {
+        "help": "Exclou aquests sensors dels càlculs mitjans.",
+        "label": "Exc.Avg"
+      },
+      "fields": {
+        "error": "No tots els camps obligatoris s’introdueixen correctament."
+      },
+      "hardware": {
+        "help": "Seleccioneu el tipus de maquinari per a aquest botó.",
+        "invalid": "Seleccioneu un tipus de maquinari.",
+        "label": "Maquinari",
+        "placeholder": "Seleccioneu el maquinari"
+      },
+      "limit_max": {
+        "help": "Introduïu el valor màxim vàlid.",
+        "invalid": "El valor introduït no és vàlid. Ha de ser número.",
+        "label": "Limit MAX"
+      },
+      "limit_min": {
+        "help": "Introduïu el valor mínim vàlid.",
+        "invalid": "El valor introduït no és vàlid. Ha de ser número.",
+        "label": "Límit mínim"
+      },
+      "max_diff": {
+        "help": "Introduïu la diferència màxima entre dues mesures vàlides. Introduïu '0' per desactivar.",
+        "invalid": "El valor introduït no és vàlid. Ha de ser un nombre més alt que {min}.",
+        "label": "Max Diff",
+        "placeholder": "Diferència màxima"
+      },
+      "name": {
+        "help": "Introduïu un nom fàcil de recordar.",
+        "invalid": "El nom introduït no és vàlid. No pot estar buit.",
+        "label": "Nom",
+        "placeholder": "Introduïu un nom"
+      },
+      "save": {
+        "ok": {
+          "message": "Sensor ''{name}'' s'actualitza."
+        }
+      },
+      "title": "Configuració del sensor",
+      "type": {
+        "help": "Seleccioneu el tipus de mesura per a aquest sensor.",
+        "invalid": "Seleccioneu un tipus de mesura.",
+        "label": "Lletra",
+        "placeholder": "Seleccioneu Tipus"
+      }
+    },
+    "temperature": {
+      "menu": {
+        "title": "temperatura"
+      },
+      "title": "Sensors de temperatura"
+    },
+    "title": "Sensors",
+    "uva": {
+      "menu": {
+        "title": "UV-a"
+      },
+      "title": "Sensors UVA"
+    },
+    "uvb": {
+      "menu": {
+        "title": "UVB"
+      },
+      "title": "Sensors UVB"
+    },
+    "uvi": {
+      "menu": {
+        "title": "UVI"
+      },
+      "title": "Sensors UVI"
+    }
+  },
+  "services": {
+    "actions": {
+      "delete": "Suprimeix el servei",
+      "edit": "Servei"
+    },
+    "add": "Afegeix servei",
+    "delete": {
+      "confirm": {
+        "message": "Esteu segur que voleu suprimir el servei ''{name}''?"
+      },
+      "error": {
+        "message": "No es pot suprimir el servei ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "S'ha suprimit el servei ''{name}''."
+      }
+    },
+    "enabled": "Activat",
+    "ratelimit": "{number, plural, =0 {Missatges il·limitats} other {Max # per minut}}",
+    "settings": {
+      "enabled": {
+        "help": "Activa/desactiva aquest servei de notificació.",
+        "label": "Activat"
+      },
+      "name": {
+        "help": "Introduïu un nom fàcil de recordar.",
+        "invalid": "El nom introduït no és vàlid. No pot estar buit.",
+        "label": "Nom",
+        "placeholder": "Introduïu un nom"
+      },
+      "rate_limit": {
+        "help": "Nombre màxim de missatges per minut per a aquest servei. Utilitzeu 0 per a il·limitats.",
+        "invalid": "El valor introduït no és vàlid. Introduïu un número vàlid superior a {min}.",
+        "label": "Límit de preu",
+        "placeholder": "Missatges per minut"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No tots els camps obligatoris s’introdueixen correctament."
+        },
+        "ok": {
+          "message": "El servei ''{name}'' està actualitzat."
+        }
+      },
+      "setup": {
+        "address": {
+          "help": "Introduïu una adreça.",
+          "invalid": "L’adreça introduïda no és vàlida. No pot estar buit.",
+          "label": "adreça",
+          "placeholder": "Introduïu una adreça"
+        },
+        "api_token": {
+          "help": ".",
+          "invalid": "El testimoni API introduït no és vàlid. No pot estar buit.",
+          "label": "Token API",
+          "placeholder": "Introduïu el testimoni API"
+        },
+        "buzzer": {
+          "help": "Llista de cançons disponibles per utilitzar -les en el tema del missatge."
+        },
+        "green": {
+          "help": "Introduïu el passador GPIO per a la llum verda.",
+          "invalid": "El valor introduït no és vàlid. Introduïu un número vàlid entre {min} i {max}.",
+          "label": "Verd",
+          "placeholder": "Introduïu el pin GPIO verd"
+        },
+        "hardware": {
+          "help": "Seleccioneu el tipus de maquinari per a aquesta pantalla.",
+          "invalid": "Feu una tria.",
+          "label": "Maquinari",
+          "placeholder": "Seleccioneu el maquinari"
+        },
+        "password": {
+          "help": "Introduïu la contrasenya del servidor.",
+          "label": "Contrasenya del servidor",
+          "placeholder": "Introduïu un nom d'usuari"
+        },
+        "port": {
+          "help": "Introduïu el número de port del servidor.",
+          "invalid": "El número de port introduït no és vàlid. No pot estar buit.",
+          "label": "Port de servidor",
+          "placeholder": "Introduïu un número de port"
+        },
+        "pushover": {
+          "label": "Creeu les vostres fitxes registrant Terrariumpi com a aplicació {link}."
+        },
+        "receiver": {
+          "help": "Introduïu una adreça de correu electrònic.",
+          "invalid": "L’adreça no pot estar buida.",
+          "label": "Correu electrònic del receptor",
+          "placeholder": "Introduïu una adreça de correu electrònic"
+        },
+        "red": {
+          "help": "Introduïu el pin GPIO per a la llum vermella.",
+          "invalid": "El valor introduït no és vàlid. Introduïu un número vàlid entre {min} i {max}.",
+          "label": "Vermell",
+          "placeholder": "Introduïu el pin GPIO vermell"
+        },
+        "show_title": {
+          "help": "Mostra un nom i una versió com a títol a la pantalla.",
+          "label": "Títol de l'espectacle"
+        },
+        "ssl": {
+          "email": {
+            "label": "El servei de notificació per correu electrònic detectarà automàticament les connexions SSL/TLS."
+          },
+          "mqtt": {
+            "label": "El servei de notificació MQTT detectarà automàticament les connexions SSL/TLS."
+          }
+        },
+        "url": {
+          "help": "Introduïu l'URL de la publicació completa.",
+          "invalid": "L’URL introduït no és vàlida. No pot estar buit.",
+          "label": "URL de publicació completa",
+          "placeholder": "Introduïu l'URL de la publicació completa"
+        },
+        "user_key": {
+          "help": ".",
+          "invalid": "La tecla d'usuari introduïda no és vàlida. No pot estar buit.",
+          "label": "Clau d'usuari",
+          "placeholder": "Introduïu la tecla d'usuari"
+        },
+        "username": {
+          "help": "Introduïu el nom d'usuari del servidor.",
+          "label": "Nom d'usuari del servidor",
+          "placeholder": "Introduïu un nom d'usuari"
+        },
+        "yellow": {
+          "help": "Introduïu el passador GPIO per a la llum ambre.",
+          "invalid": "El valor introduït no és vàlid. Introduïu un número vàlid entre {min} i {max}.",
+          "label": "Ambre",
+          "placeholder": "Introduïu el pin GPIO Amber"
+        }
+      },
+      "title": "Configuració del servei de notificació",
+      "type": {
+        "help": "Seleccioneu el tipus de servei de notificació.",
+        "invalid": "Feu una tria.",
+        "label": "Lletra",
+        "placeholder": "Seleccioneu Tipus"
+      }
+    },
+    "title": "Serveis de notificació"
+  },
+  "system": {
+    "log": {
+      "download": {
+        "title": "Descarregueu el fitxer de registre"
+      },
+      "filters": {
+        "errors": "errors",
+        "search": "Introduïu els termes de cerca",
+        "title": "Filtres",
+        "warnings": "advertències"
+      },
+      "lines": "{lines} línies",
+      "loading": "Carregant dades",
+      "title": "Registre del sistema"
+    },
+    "menu": {
+      "log": {
+        "title": "Registre"
+      },
+      "notifications": {
+        "title": "Notificacions"
+      },
+      "reboot": {
+        "title": "Reiniciar"
+      },
+      "restart": {
+        "title": "Reinicia"
+      },
+      "settings": {
+        "title": "Configuració"
+      },
+      "shutdown": {
+        "title": "Tancar"
+      },
+      "status": {
+        "title": "Estat"
+      },
+      "title": "Sistema"
+    },
+    "notifications": {
+      "title": "Notificacions"
+    },
+    "settings": {
+      "all_gauges_on_single_page": {
+        "help": "Afegiu un element de menú addicional per a tots els sensors en una sola pàgina.",
+        "label": "Tots els calibres en una sola pàgina"
+      },
+      "authenticate": {
+        "help": "Sempre autenticar -se o només quan es fan canvis.",
+        "invalid": "Feu una tria.",
+        "label": "Mode d'autenticació",
+        "options": {
+          "changes": "Només per a canvis",
+          "full": "Autenticació completa",
+          "no_authentication": "Sense autenticació"
+        }
+      },
+      "auto_dark_mode": {
+        "help": "Commuta el mode fosc quan comenci la nit.",
+        "label": "Mode fosc automàtic"
+      },
+      "currency": {
+        "help": "Seleccioneu la moneda de la interfície.",
+        "invalid": "Feu una tria.",
+        "label": "Moneda"
+      },
+      "dashboard_mode": {
+        "help": "Seleccioneu com es veu el tauler.",
+        "invalid": "Si us plau, feu una elecció.",
+        "label": "Mode tauler de control",
+        "options": {
+          "normal": "Gràfics i tancaments",
+          "only_enclosures": "Només tancaments",
+          "only_graphs": "Només gràfics"
+        }
+      },
+      "distance_indicator": {
+        "help": "Seleccioneu l'indicador de distància. Només afecta els valors actuals.",
+        "invalid": "Feu una tria.",
+        "label": "Tipus de distància"
+      },
+      "exclude-ids": {
+        "help": "Identificadors exclosos.",
+        "label": "Identificadors exclosos"
+      },
+      "graph_smooth_value": {
+        "help": "Introduïu la quantitat de punts de dades a la mitjana. 0 Desactivarà aquesta funció.",
+        "invalid": "Introduïu un valor mínim de {value}.",
+        "label": "Gràfic de suavització"
+      },
+      "header": {
+        "cloud": "Núvol",
+        "gui": "Greentia",
+        "locale": "Local",
+        "system": "Sistema"
+      },
+      "hide_environment_dashboard": {
+        "help": "Amagueu les dades del recinte al tauler.",
+        "label": "Amagueu els tancaments al tauler"
+      },
+      "host": {
+        "help": "Introduïu la IP per escoltar connexions. Per defecte 0. 0.0. 0.",
+        "invalid": "Introduïu una adreça IP vàlida.",
+        "label": "Número IP"
+      },
+      "language": {
+        "help": "Seleccioneu el llenguatge de la interfície. Això també canviarà el format de nombre i moneda.",
+        "invalid": "Feu una tria.",
+        "label": "Llenguatge"
+      },
+      "meross_cloud_password": {
+        "help": "Introduïu la contrasenya per iniciar la sessió al núvol de Meross.",
+        "label": "Contrasenya de Meross"
+      },
+      "meross_cloud_username": {
+        "help": "Introduïu el nom d'usuari per iniciar la sessió a Meross Cloud.",
+        "label": "Nom d'usuari de Meross"
+      },
+      "page": {
+        "title": "Ajustos del sistema"
+      },
+      "password": {
+        "help": "Introduïu una contrasenya per a l'autenticació.",
+        "invalid": "La contrasenya no pot estar buida.",
+        "label": "Nova contrasenya"
+      },
+      "password2": {
+        "help": "Introduïu de nou la nova contrasenya.",
+        "invalid": "La nova contrasenya no coincideix.",
+        "label": "Confirmar nova contrasenya"
+      },
+      "pi-wattage": {
+        "help": "Introduïu l'ús total de potència del PI amb tots els seus dispositius USB connectats.",
+        "invalid": "Introduïu un valor mínim de {value}.",
+        "label": "Ús de Pi Power"
+      },
+      "port": {
+        "help": "Introduïu el número de port per escoltar connexions. 8090 per defecte.",
+        "invalid": "Introduïu un valor mínim de {value}.",
+        "label": "Número de port"
+      },
+      "power_price": {
+        "help": "Introduïu el preu per kWh.",
+        "invalid": "Introduïu un valor mínim de {value}.",
+        "label": "Preu elèctric"
+      },
+      "profile_image": {
+        "help": "Actualitzeu una imatge personalitzada utilitzada al menú.",
+        "invalid": "Format de la imatge del perfil no vàlid.",
+        "label": "Imatge de perfil"
+      },
+      "save": {
+        "ok": {
+          "message": "La configuració s'actualitza.",
+          "title": "Actualitzeu D'acord"
+        }
+      },
+      "show_min_max_gauge": {
+        "help": "Mostra el valor mínim i màxim dels calibres.",
+        "label": "Mostra valors min i màxims en gràfics de calibre"
+      },
+      "temperature_indicator": {
+        "help": "Seleccioneu l'indicador de temperatura. Només afecta els valors actuals.",
+        "invalid": "Feu una tria.",
+        "label": "Tipus de temperatura"
+      },
+      "title": {
+        "help": "Introduïu un títol personalitzat.",
+        "invalid": "El títol no pot estar buit.",
+        "label": "Títol"
+      },
+      "username": {
+        "help": "Introduïu el nom d'usuari per a l'autenticació.",
+        "invalid": "El nom d'usuari no pot estar buit.",
+        "label": "Nom d'usuari"
+      },
+      "water_price": {
+        "help": "Introduïu el preu per L/galó.",
+        "invalid": "Introduïu un valor mínim de {value}.",
+        "label": "Preu de l'aigua"
+      },
+      "water_volume_indicator": {
+        "help": "Seleccioneu l'indicador de volum d'aigua. Només afecta els valors actuals.",
+        "invalid": "Feu una tria.",
+        "label": "Tipus de volum de líquid"
+      },
+      "wind_speed_indicator": {
+        "help": "Seleccioneu l'indicador de velocitat del vent. Només afecta els valors actuals.",
+        "invalid": "Feu una tria.",
+        "label": "Tipus de velocitat del vent"
+      }
+    },
+    "status": {
+      "cpu_temp": {
+        "title": "Temperatura de la CPU"
+      },
+      "disk": {
+        "title": "Ús del disc"
+      },
+      "load": {
+        "title": "Càrrega del sistema"
+      },
+      "memory": {
+        "title": "Ús de la memòria"
+      },
+      "summary": {
+        "title": "Resum del sistema"
+      },
+      "title": "Estat del sistema",
+      "uptime": {
+        "title": "Temps del sistema"
+      }
+    }
+  },
+  "table": {
+    "field": {
+      "range": "distància"
+    },
+    "header": {
+      "actions": "Accions",
+      "duration": "Durada",
+      "filename": "Nom de l'arxiu",
+      "filesize": "Mida de l'arxiu",
+      "mode": "Model",
+      "name": "Nom",
+      "number_files": "# Fitxers",
+      "repeat": "Repetir",
+      "shuffle": "Barrejar",
+      "status": "Estat",
+      "type": "Lletra",
+      "volume": "Volum d'àudio"
+    }
+  },
+  "topbar": {
+    "current_status": "Estat actual",
+    "door_status": "Estat de la porta",
+    "upcoming_events": "{number, plural, =0 {Sense esdeveniments} =1 {un esdeveniment} other {# esdeveniments}}"
+  },
+  "userpanel": {
+    "login": {
+      "text1": "Llegiu només el mode",
+      "text2": "iniciar Sessió"
+    },
+    "logout": {
+      "text1": "Hola {name}",
+      "text2": "Tancar sessió"
+    }
+  },
+  "weather": {
+    "current": "Corrent",
+    "forecast": "Pronòstic",
+    "menu": {
+      "title": "Temps"
+    },
+    "settings": {
+      "fields": {
+        "error": "No tots els camps obligatoris s’introdueixen correctament."
+      },
+      "information": "Per utilitzar el sistema meteorològic, heu de crear un compte gratuït a {source_link}.",
+      "save": {
+        "ok": {
+          "message": "La configuració del temps es desada."
+        }
+      },
+      "title": "Configuració meteorològica",
+      "weather_source": {
+        "help": "Introduïu l'URL de l'API d'OpenWeathermap complet com: {api_url_example}.",
+        "invalid": "L'URL introduït no és vàlid.",
+        "label": "URL font"
+      }
+    },
+    "title": "Temps"
+  },
+  "webcams": {
+    "actions": {
+      "delete": "Suprimeix la càmera web",
+      "ignore": "Ignora la càmera web",
+      "settings": "Edita la càmera web"
+    },
+    "archive": {
+      "no_images": "No hi ha imatges d’arxiu disponibles"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Esteu segur que voleu ignorar la càmera web ''{name}''?"
+      }
+    },
+    "controls": {
+      "archive": "Arxiu",
+      "new_marker": "Afegiu el marcador",
+      "save_raw_image": "Desa la imatge crua",
+      "show_markers": "Mostra marcadors",
+      "toggle_volume": "Volum de commutació"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Esteu segur que voleu suprimir la càmera web ''{name}''?"
+      },
+      "error": {
+        "message": "No es pot suprimir la càmera web ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "S'ha suprimit la càmera web ''{name}''."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "No es pot ignorar la càmera web ''{name}''.\nError: {error}"
+      },
+      "ok": {
+        "message": "La càmera web ''{name}'' s'ignora."
+      }
+    },
+    "marker": {
+      "delete": {
+        "confirm": {
+          "message": "Esteu segur que suprimiu el marcador?"
+        },
+        "error": {
+          "message": "No s'ha pogut suprimir el marcador"
+        },
+        "invalid": {
+          "message": "Marcador no vàlid"
+        }
+      }
+    },
+    "markers": {
+      "settings": {
+        "delete": "Esborrar",
+        "doors": {
+          "help": "Seleccioneu els senadors que vulgueu mostrar.",
+          "invalid": "Feu una tria.",
+          "label": "Sensors"
+        },
+        "title": "Sensors"
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nova càmera web"
+      },
+      "status": {
+        "title": "Estat"
+      },
+      "title": "Càmeres web"
+    },
+    "settings": {
+      "address": {
+        "help": "Per obtenir més informació, vegeu en línia.",
+        "invalid": "L’adreça introduïda no és vàlida. No pot estar buit.",
+        "label": "adreça",
+        "placeholder": "Introduïu una adreça"
+      },
+      "archive": {
+        "door": {
+          "help": "Estat de la porta per prendre una imatge d’arxiu.",
+          "invalid": "Feu una tria.",
+          "label": "Estat de la porta de l'arxiu",
+          "options": {
+            "close": "Tanca",
+            "ignore": "Ignorar",
+            "open": "Obrir"
+          },
+          "placeholder": "Seleccioneu l'Estat de la porta d'Arxiu"
+        },
+        "flash": {
+          "help": "Seleccioneu un relé que actuï com a flaix.",
+          "invalid": "Feu una tria.",
+          "label": "Ràfega",
+          "placeholder": "Seleccioneu el relé opcional per a Flash"
+        },
+        "light": {
+          "help": "Estat de llum per prendre una imatge d’arxiu.",
+          "invalid": "Feu una tria.",
+          "label": "Estat de llum arxiu",
+          "options": {
+            "ignore": "Ignorar",
+            "off": "Quan es desactivi",
+            "on": "Quan acabi"
+          },
+          "placeholder": "Seleccioneu Estat de llum de l'arxiu"
+        },
+        "options": {
+          "day_1": "1 dia",
+          "disabled": "Inepte",
+          "hour_1": "30 minuts",
+          "hour_12": "12 hores",
+          "hour_3": "3 hores",
+          "hour_6": "6 hores",
+          "minute_1": "1 minut",
+          "minute_15": "15 minuts",
+          "minute_30": "30 minuts",
+          "minute_5": "5 minuts",
+          "motion": "Moviment"
+        },
+        "state": {
+          "help": "Seleccioneu la durada entre imatges arxivades.",
+          "invalid": "Feu una tria.",
+          "label": "Arxivatge",
+          "placeholder": "Seleccioneu Arxivatge"
+        }
+      },
+      "awb": {
+        "help": "Seleccioneu un saldo blanc.",
+        "invalid": "Feu una tria.",
+        "label": "Equilibri blanc",
+        "options": {
+          "auto": "Automàtic",
+          "cloudy": "Nuvolós",
+          "flash": "Ràfega",
+          "fluorescent": "Fluorescent",
+          "greyworld": "Opció desactivada",
+          "horizon": "Horitzó",
+          "incandescent": "Incandescent",
+          "off": "Apagada",
+          "shade": "Persiana",
+          "sunlight": "Llum de sol",
+          "tungsten": "Tungstè"
+        },
+        "placeholder": "Seleccioneu el saldo blanc"
+      },
+      "hardware": {
+        "help": "Seleccioneu el tipus de maquinari per a aquest botó.",
+        "invalid": "Seleccioneu un tipus de maquinari.",
+        "label": "Maquinari",
+        "placeholder": "Seleccioneu el maquinari"
+      },
+      "height": {
+        "help": "Introduïu l'alçada de resolució en píxels.",
+        "invalid": "Introduïu un valor mínim de {value}.",
+        "label": "Altura"
+      },
+      "motion": {
+        "area": {
+          "help": "Introduïu una mida de l’àrea.",
+          "invalid": "Introduïu un valor mínim de {value}.",
+          "label": "Àrea mínima del moviment",
+          "placeholder": "Introduir el número"
+        },
+        "boxes": {
+          "help": "Mostra caixes de moviment a les imatges arxivades.",
+          "invalid": "Feu una tria.",
+          "label": "Mostra caixes de moviment",
+          "options": {
+            "blue": "Blava",
+            "green": "Verd",
+            "none": "Res",
+            "red": "Vermell"
+          },
+          "placeholder": "Mostra les caixes de moviment"
+        },
+        "frame": {
+          "help": "Quin marc d’utilitzar per a la detecció de moviment.",
+          "invalid": "Feu una tria.",
+          "label": "Marc de comparació de moviments",
+          "options": {
+            "archived": "Últim marc arxivat",
+            "last": "Últim marc"
+          },
+          "placeholder": "Seleccioneu quin marc per comparar"
+        },
+        "threshold": {
+          "help": "Introduïu el llindar de moviment.",
+          "invalid": "Introduïu un valor mínim de {value}.",
+          "label": "Llindar del delta del moviment",
+          "placeholder": "Introduir el número"
+        }
+      },
+      "name": {
+        "help": "Introduïu un nom fàcil de recordar.",
+        "invalid": "El nom introduït no és vàlid. No pot estar buit.",
+        "label": "Nom",
+        "placeholder": "Introduïu un nom"
+      },
+      "preview": {
+        "label": "Vista prèvia"
+      },
+      "rotation": {
+        "help": "Seleccioneu una rotació.",
+        "invalid": "Feu una tria.",
+        "label": "Rotació",
+        "options": {
+          "degrees_0": "0 graus",
+          "degrees_180": "180 graus",
+          "degrees_270": "270 graus",
+          "degrees_90": "90 graus",
+          "flip_h": "Flipeu horitzontal",
+          "flip_v": "Voltejar vertical",
+          "zero_degrees": "0 graus"
+        },
+        "placeholder": "Seleccioneu la rotació"
+      },
+      "save": {
+        "error": {
+          "required_fields": "No tots els camps obligatoris s’introdueixen correctament."
+        },
+        "ok": {
+          "message": "Webcam ''{name}'' s'actualitza."
+        }
+      },
+      "title": "Configuració de la càmera web",
+      "width": {
+        "help": "Introduïu l'amplada de resolució en píxels.",
+        "invalid": "Introduïu un valor mínim de {value}.",
+        "label": "Amplada"
+      }
+    },
+    "title": "Càmeres web"
+  }
+}

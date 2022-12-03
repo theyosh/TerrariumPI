@@ -101,7 +101,7 @@ class terrariumArea(object):
   def available_areas(__cls__):
     data = []
     for (area_type, area) in terrariumArea.__TYPES.items():
-      data.append({'type' : area_type, 'name' : _(area['name']), 'sensors' : area['sensors']})
+      data.append({'type' : area_type, 'name' : area['name'], 'sensors' : area['sensors']})
 
     return sorted(data, key=itemgetter('name'))
 
@@ -782,6 +782,9 @@ class terrariumArea(object):
     relay_states = []
     for relay in self.setup[part]['relays']:
 
+      if relay not in self.enclosure.relays:
+        continue
+
       if state:
         relay_states.append(self.enclosure.relays[relay].is_on())
       else:
@@ -797,6 +800,9 @@ class terrariumArea(object):
       relays = orm.select(r.id for r in Relay if r.id in self.setup[part]['relays'] and not r.manual_mode)[:]
 
     for relay in relays:
+      if relay not in self.enclosure.relays:
+        continue
+
       relay = self.enclosure.relays[relay]
       self._relay_action(part, relay, on)
 
@@ -811,7 +817,7 @@ class terrariumArea(object):
   def _relay_action(self, part, relay, action):
     if relay.id in self.enclosure.relays:
       logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF}')
-      self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF)
+      self.enclosure.relays[f'{relay.id}'].on(relay.ON if action else relay.OFF)
 
   def stop(self):
     logger.info(f'Stopped Area {self}')
@@ -829,43 +835,68 @@ class terrariumAreaLights(terrariumArea):
       if period not in self.setup:
         continue
 
-      for relay_id in self.setup[period]['relays']:
-        relay = self.enclosure.relays[relay_id]
+      if data[period].get('tweaks', None) in [None, {}]:
+        # Legacy tweaks loading
+        for relay_id in self.setup[period]['relays']:
+          relay = self.enclosure.relays[relay_id]
 
-        extra_tweaks = self.setup[period].get(('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'on_' + relay.id, None)
-        if extra_tweaks is None:
-          continue
+          extra_tweaks = self.setup[period].get(('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'on_' + relay.id, None)
+          if extra_tweaks is None:
+            continue
 
-        self.setup[period]['tweaks'][relay.id] = {
-          'on' : {
-            'delay'    : 0,
-            'duration' : 0
-          },
-          'off' : {
-            'delay'    : 0,
-            'duration' : 0
+          self.setup[period]['tweaks'][f'{relay.id}'] = {
+            'on' : {
+              'delay'    : 0,
+              'duration' : 0
+            },
+            'off' : {
+              'delay'    : 0,
+              'duration' : 0
+            }
           }
-        }
 
-        if relay.is_dimmer:
-          values = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'on_' + relay.id].split(',')
-          if len(values) == 1:
-            values = [0,values[0]]
+          if relay.is_dimmer:
+            values = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'on_' + relay.id].split(',')
+            if len(values) == 1:
+              values = [0,values[0]]
 
-          self.setup[period]['tweaks'][relay.id]['on']['delay']    = float(values[0]) * 60.0
-          self.setup[period]['tweaks'][relay.id]['on']['duration'] = float(values[1]) * 60.0
+            self.setup[period]['tweaks'][f'{relay.id}']['on']['delay']    = float(values[0]) * 60.0
+            self.setup[period]['tweaks'][f'{relay.id}']['on']['duration'] = float(values[1]) * 60.0
 
-          values = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'off_' + relay.id].split(',')
-          if len(values) == 1:
-            values = [0,values[0]]
+            values = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'off_' + relay.id].split(',')
+            if len(values) == 1:
+              values = [0,values[0]]
 
-          self.setup[period]['tweaks'][relay.id]['off']['delay']    = float(values[0]) * 60.0
-          self.setup[period]['tweaks'][relay.id]['off']['duration'] = float(values[1]) * 60.0
-        else:
-          value = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'on_' + relay.id]
-          self.setup[period]['tweaks'][relay.id]['on']['delay']  = float(value) * 60.0
-          value = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'off_' + relay.id]
-          self.setup[period]['tweaks'][relay.id]['off']['delay'] = float(value) * 60.0
+            self.setup[period]['tweaks'][f'{relay.id}']['off']['delay']    = float(values[0]) * 60.0
+            self.setup[period]['tweaks'][f'{relay.id}']['off']['duration'] = float(values[1]) * 60.0
+          else:
+            value = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'on_' + relay.id]
+            self.setup[period]['tweaks'][f'{relay.id}']['on']['delay']  = float(value) * 60.0
+            value = self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_delay_') + 'off_' + relay.id]
+            self.setup[period]['tweaks'][f'{relay.id}']['off']['delay'] = float(value) * 60.0
+      else:
+        # New tweaks loading
+        tweaks = {}
+        for relay in data[period]['tweaks']:
+          # Input is either a number, or a string with two numbers and a comma separator
+          # We cast value to a string, split it on ',' and convert the values back to integers
+          # We have now an array with 1 or 2 integers
+          value_on  = [int(value) for value in str(relay['on']).split(',')]
+          #.map(int, value)
+          value_off = [int(value) for value in str(relay['off']).split(',')]
+          # str(relay['off']).split(',').map(int, value)
+          tweaks[f'{relay["id"]}'] = {
+            'on' : {
+              'delay'    : 0 if len(value_on) == 0 else value_on[0],
+              'duration' : 0 if len(value_on) == 1 else value_on[1]
+            },
+            'off' : {
+              'delay'    : 0 if len(value_off) == 0 else value_off[0],
+              'duration' : 0 if len(value_off) == 1 else value_off[1]
+            }
+          }
+
+        self.setup[period]['tweaks'] = tweaks
 
     # Reset the powered on state if the dimmers are not at max value. So the dimmer will continue where it left off
     for period in self.PERIODS:
@@ -905,7 +936,7 @@ class terrariumAreaLights(terrariumArea):
       step_size = duration / (relay.ON - relay.OFF)
       duration = step_size * abs((relay.ON if action else relay.OFF) - relay.state)
       old_state = relay.state
-      action_ok = self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, duration=duration, delay=delay)
+      action_ok = self.enclosure.relays[f'{relay.id}'].on(relay.ON if action else relay.OFF, duration=duration, delay=delay)
 
       if action_ok:
         if action:
@@ -914,7 +945,7 @@ class terrariumAreaLights(terrariumArea):
           logger.info(f'Stopping the dimmer {relay.name} from {old_state}% to {relay.OFF}% in {duration:.2f} seconds with a delay of {delay/60:.2f} minutes')
 
     else:
-      action_ok = self.enclosure.relays[relay.id].on(relay.ON if action else relay.OFF, delay=delay)
+      action_ok = self.enclosure.relays[f'{relay.id}'].on(relay.ON if action else relay.OFF, delay=delay)
 
       if action_ok:
         logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF} with a delay of {delay/60:.2f} minutes')
@@ -967,12 +998,12 @@ class terrariumAreaHeater(terrariumArea):
           relay = self.enclosure.relays[relay]
           if relay.id in self.__dimmers:
 
-            self.__dimmers[relay.id].setpoint = sensor_average
-            self.__dimmers[relay.id].output_limits = (relay.OFF,relay.ON)
+            self.__dimmers[f'{relay.id}'].setpoint = sensor_average
+            self.__dimmers[f'{relay.id}'].output_limits = (relay.OFF,relay.ON)
 
-            dimmer_value = round(self.__dimmers[relay.id](sensor_values['current']))
+            dimmer_value = round(self.__dimmers[f'{relay.id}'](sensor_values['current']))
             logger.info(f'Updating {relay} to value {dimmer_value}%. Current: {sensor_values["current"]:.2f}{self.enclosure.engine.units[sensor_values["unit"]]}, target: {sensor_average:.2f}{self.enclosure.engine.units[sensor_values["unit"]]}')
-            self.enclosure.relays[relay.id].on(dimmer_value)
+            self.enclosure.relays[f'{relay.id}'].on(dimmer_value)
 
     self.state['powered'] = self._powered
     return self.state
@@ -1000,22 +1031,22 @@ class terrariumAreaHeater(terrariumArea):
           if relay.state > 0:
             dimmer_value = relay.state
             logger.info(f'Restoring old dimmer value {dimmer_value}% for relay {relay}')
-            self.__dimmers[relay.id].set_auto_mode(True, last_output=dimmer_value)
+            self.__dimmers[f'{relay.id}'].set_auto_mode(True, last_output=dimmer_value)
           else:
-            dimmer_value = round(self.__dimmers[relay.id](sensor_values['current']))
+            dimmer_value = round(self.__dimmers[f'{relay.id}'](sensor_values['current']))
             logger.info(f'Setting the dimmer {relay} to value {dimmer_value}%. Current value {sensor_values["current"]}{self.enclosure.engine.units[sensor_values["unit"]]}, target of {sensor_average}{self.enclosure.engine.units[sensor_values["unit"]]}')
 
-          self.enclosure.relays[relay.id].on(dimmer_value)
+          self.enclosure.relays[f'{relay.id}'].on(dimmer_value)
         else:
           logger.info(f'Set the relay {relay} to {relay.ON} with 0 seconds delay')
-          self.enclosure.relays[relay.id].on(relay.ON)
+          self.enclosure.relays[f'{relay.id}'].on(relay.ON)
 
       else:
         logger.info(f'Set the relay {relay} to {relay.OFF} with 0 seconds delay')
-        self.enclosure.relays[relay.id].on(relay.OFF)
+        self.enclosure.relays[f'{relay.id}'].on(relay.OFF)
         self.state[part]['timer_on'] = False
         if relay.id in self.__dimmers:
-          del(self.__dimmers[relay.id])
+          del(self.__dimmers[f'{relay.id}'])
 
 class terrariumAreaCooler(terrariumAreaHeater):
   pass

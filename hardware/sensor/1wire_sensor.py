@@ -51,7 +51,7 @@ class terrarium1WireSensor(terrariumSensor):
         if 't' == sensor_data.group('type'):
           sensor_type = 'temperature'
         elif 'h' == sensor_data.group('type'):
-          sensor_type = 'himidity'
+          sensor_type = 'humidity'
 
         if sensor_type is not None:
           yield terrariumSensor(None,

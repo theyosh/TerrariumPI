@@ -1,0 +1,2115 @@
+{
+  "about": {
+    "online": {
+      "help": "Mer hjelp på nettet."
+    },
+    "title": "Om"
+  },
+  "areas": {
+    "delete": {
+      "confirm": {
+        "message": "Er du sikker på at du vil slette området ''{name}''?"
+      },
+      "error": {
+        "message": "Området ''{name}'' kunne ikke slettes!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Området ''{name}'' er slettet."
+      }
+    },
+    "settings": {
+      "depends_on": {
+        "help": "Viser lydkortet som brukes til å spille av lyd.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Kommer an på",
+        "placeholder": "Velg avhengige områder"
+      },
+      "enclosure": {
+        "help": "Velg innhegningen der dette området tilhører.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Når lukket",
+        "placeholder": "Velg kabinett"
+      },
+      "mode": {
+        "help": "Velg modusen for dette området. Dette vil endre tidspunktet og varigheten til reléene.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Modus",
+        "options": {
+          "disabled": "Deaktivert",
+          "main_lights": "Minimum lys timer",
+          "sensors": "Sensorer",
+          "timer": "Timer",
+          "weather": "Været dag/natt",
+          "weather_inverse": "Været natt/dag"
+        },
+        "placeholder": "Velg modus"
+      },
+      "name": {
+        "help": "Skriv inn et navn som er lett å huske.",
+        "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
+        "label": "Navn",
+        "placeholder": "Brukernavn"
+      },
+      "save": {
+        "error": {
+          "duplicate_relays": "Du har valgt de samme reléene i både lav og høy alarm. Dette er ikke gyldig.",
+          "required_fields": "Obligatoriske felt er merket med ‘%s’."
+        },
+        "ok": {
+          "message": "Området ''{name}'' er oppdatert."
+        }
+      },
+      "setup": {
+        "day_night_difference": {
+          "help": "Mengde å endre mellom dag og natt.",
+          "invalid": "Dato og tid.",
+          "label": "Dag/natt forskjell",
+          "placeholder": "Brukernavn"
+        },
+        "day_night_source": {
+          "help": "Velg kilde når det er 'dag'.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Dag/natt kilde",
+          "options": {
+            "lights": "Lys",
+            "weather": "Vær"
+          },
+          "placeholder": "Dag/natt kilde"
+        },
+        "deviation_high_alarm": {
+          "help": "",
+          "invalid": "Skriv inn et gyldig nummer.",
+          "label": "Høyt alarmavvik",
+          "placeholder": "Høyt alarmavvik"
+        },
+        "deviation_low_alarm": {
+          "help": "Økning av senking lav alarmverdi.",
+          "invalid": "Skriv inn et gyldig nummer.",
+          "label": "Lavt alarmavvik",
+          "placeholder": "Lavt alarmavvik"
+        },
+        "high": {
+          "begin": {
+            "help": "Tiden på døgnet da reléene slås på hver natt.",
+            "invalid": "Dato og tid.",
+            "label": "Dato og tid",
+            "placeholder": "Dato og tid"
+          },
+          "door_status": {
+            "help": "Arkiver dør status.",
+            "invalid": "Vennligst ta et valg.",
+            "label": "Dør status",
+            "options": {
+              "closed": "Lukket",
+              "ignore": "Ignorer",
+              "open": "Åpen"
+            },
+            "placeholder": "Merk et valg"
+          },
+          "end": {
+            "help": "Tiden på døgnet da reléene slås av hver natt.",
+            "invalid": "Dato og tid.",
+            "label": "Dato og tid",
+            "placeholder": "Dato og tid"
+          },
+          "ignore_high": {
+            "help": "Viser sensorens lavest alarm verdi av sensoren. Når den er under denne verdien, kan alarmer utløses..",
+            "label": "Legg til nytt webkamera"
+          },
+          "light_status": {
+            "help": "Arkiver lys status.",
+            "invalid": "Vennligst ta et valg.",
+            "label": "Lys tilstand",
+            "options": {
+              "ignore": "Ignorer",
+              "off": "Av",
+              "on": "På"
+            },
+            "placeholder": "Merk et valg"
+          },
+          "off_duration": {
+            "help": "Varigheten når reléene skal være avslått når de er slått av. Skriv inn '0' for å deaktivere.",
+            "invalid": "Tidtaker periode på varighet i minutter.",
+            "label": "Tidtaker av varighet",
+            "placeholder": "Tidtaker av varighet"
+          },
+          "on_duration": {
+            "help": "Varigheten når reléene skal være på. Hvis dette er kortere enn hele dagen, vil du få en timerfunksjonalitet. Skriv inn '0' for å ha en hel natt.",
+            "invalid": "Tidtaker periode på varighet i minutter.",
+            "label": "Varighet",
+            "placeholder": "Varighet"
+          },
+          "playlists": {
+            "help": "Temperatur sensorer.",
+            "invalid": "Vennligst ta et valg.",
+            "label": "Spilleliste",
+            "placeholder": "Temperatur sensorer"
+          },
+          "power_on_time": {
+            "help": "Kun endring.",
+            "invalid": "Dato og tid.",
+            "label": "Slå på",
+            "placeholder": "Slå på"
+          },
+          "relays": {
+            "help": "Temperatur sensorer.",
+            "invalid": "Vennligst ta et valg.",
+            "label": "Reléer",
+            "placeholder": "Temperatur sensorer"
+          },
+          "settle_time": {
+            "help": "Varigheten i sekunder mellom to handlinger.",
+            "invalid": "Dato og tid.",
+            "label": "Tidsavbrudd for utligning",
+            "placeholder": "Tidsavbrudd for utligning"
+          },
+          "trigger_threshold": {
+            "help": "Angi antall alarmer før handling finner sted.",
+            "invalid": "Dato og tid.",
+            "label": "Grense",
+            "placeholder": "Grense"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Velg forsinkelse og varighet for dimmeren å gå til på eller av i minutter. Maks varighet er 180 minutter."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Dimmer av varighet"
+              },
+              "relay": {
+                "label": "Reléforsinkelse av"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Dimmer på varighet"
+              },
+              "relay": {
+                "label": "Reléforsinkelse på"
+              }
+            },
+            "relay": {
+              "info": "Velg forsinkelsen i minutter som et relé venter før det slås på. Maks forsinkelse er 180 minutter."
+            }
+          }
+        },
+        "low": {
+          "begin": {
+            "help": "Tiden på døgnet da reléene slås på hver natt.",
+            "invalid": "Dato og tid.",
+            "label": "Dato og tid",
+            "placeholder": "Dato og tid"
+          },
+          "door_status": {
+            "help": "Arkiver dør status.",
+            "invalid": "Vennligst ta et valg.",
+            "label": "Dør status",
+            "options": {
+              "closed": "Lukket",
+              "ignore": "Ignorer",
+              "open": "Åpen"
+            },
+            "placeholder": "Merk et valg"
+          },
+          "end": {
+            "help": "Tiden på døgnet da reléene slås av hver natt.",
+            "invalid": "Dato og tid.",
+            "label": "Dato og tid",
+            "placeholder": "Dato og tid"
+          },
+          "ignore_low": {
+            "help": "Viser sensorens lavest alarm verdi av sensoren. Når den er under denne verdien, kan alarmer utløses.",
+            "label": "Legg til nytt webkamera"
+          },
+          "light_status": {
+            "help": "Arkiver lys status.",
+            "invalid": "Vennligst ta et valg.",
+            "label": "Lys tilstand",
+            "options": {
+              "ignore": "Ignorer",
+              "off": "Av",
+              "on": "På"
+            },
+            "placeholder": "Merk et valg"
+          },
+          "off_duration": {
+            "help": "Varigheten når reléene skal være avslått når de er slått av. Skriv inn '0' for å deaktivere.",
+            "invalid": "Tidtaker periode på varighet i minutter.",
+            "label": "Tidtaker av varighet",
+            "placeholder": "Tidtaker av varighet"
+          },
+          "on_duration": {
+            "help": "Varigheten når reléene skal være på. Hvis dette er kortere enn hele dagen, vil du få en timerfunksjonalitet. Skriv inn '0' for å ha en hel natt.",
+            "invalid": "Tidtaker periode på varighet i minutter.",
+            "label": "Varighet",
+            "placeholder": "Varighet"
+          },
+          "playlists": {
+            "help": "Temperatur sensorer.",
+            "invalid": "Vennligst ta et valg.",
+            "label": "Spilleliste",
+            "placeholder": "Temperatur sensorer"
+          },
+          "power_on_time": {
+            "help": "Kun endring.",
+            "invalid": "Dato og tid.",
+            "label": "Slå på",
+            "placeholder": "Slå på"
+          },
+          "relays": {
+            "help": "Temperatur sensorer.",
+            "invalid": "Vennligst ta et valg.",
+            "label": "Reléer",
+            "placeholder": "Temperatur sensorer"
+          },
+          "settle_time": {
+            "help": "Varigheten i sekunder mellom to handlinger.",
+            "invalid": "Dato og tid.",
+            "label": "Tidsavbrudd for utligning",
+            "placeholder": "Tidsavbrudd for utligning"
+          },
+          "trigger_threshold": {
+            "help": "Angi antall alarmer før handling finner sted.",
+            "invalid": "Dato og tid.",
+            "label": "Grense",
+            "placeholder": "Grense"
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": "Velg forsinkelse og varighet for dimmeren å gå til på eller av i minutter. Maks varighet er 180 minutter."
+            },
+            "off": {
+              "dimmer": {
+                "label": "Dimmer av varighet"
+              },
+              "relay": {
+                "label": "Reléforsinkelse av"
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": "Dimmer på varighet"
+              },
+              "relay": {
+                "label": "Reléforsinkelse på"
+              }
+            },
+            "relay": {
+              "info": "Velg forsinkelsen i minutter som et relé venter før det slås på. Maks forsinkelse er 180 minutter."
+            }
+          }
+        },
+        "main_lights": {
+          "help": "Slå på dette hvis dette er hovedlysene for dette kabinettet. Denne brukes til lyssjekkene i andre områder.",
+          "label": "Minimum lys timer"
+        },
+        "max_day_hours": {
+          "help": "Det maksimale antallet timer som lysene er slått på. Dette er kun gyldig i værmodus. Når dagen er lengre enn denne maksimumsverdien, vil dagen bli forkortet til denne maksimumsverdien.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "label": "Maksimalt antall timer",
+          "placeholder": "Brukernavn"
+        },
+        "min_day_hours": {
+          "help": "Minimum antall timer som lysene er slått på. Dette er kun gyldig i værmodus. Når dagen er kortere enn denne minimumsverdien, utvides dagen til denne minimumsverdien.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "label": "Minste antall timer",
+          "placeholder": "Brukernavn"
+        },
+        "periods": {
+          "day": "Dør innstillinger",
+          "high": "Høy alarm",
+          "info": "Nedenfor kan du velge releer og timerinnstillinger per periode dagtid og natt.",
+          "low": "Lav alarm",
+          "night": "Bryter innstillinger",
+          "varation": "Varighet"
+        },
+        "sensors": {
+          "help": "Velg sensorer som skal brukes for sensorbasert modus.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Sensorer",
+          "placeholder": "Temperatur sensorer"
+        },
+        "shift_day_hours": {
+          "help": "Hvor lang tid det tar å skifte i timer basert på solens stigetid. Negative verdier vil gjøre at dagen starter tidligere.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "label": "Timer skifte",
+          "placeholder": "Brukernavn"
+        },
+        "soundcard": {
+          "help": "Velg lydkortet som brukes for dette området.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Lydkort",
+          "placeholder": "Merk et valg"
+        },
+        "variation": {
+          "offset": {
+            "invalid": "Skriv inn et gyldig nummer."
+          },
+          "period": {
+            "invalid": "Skriv inn et gyldig nummer.",
+            "offset": "Offset",
+            "placeholder": "Terskel",
+            "source": "Skriv inn en fullstendig url, lokal JSON-fil eller skriptfil"
+          },
+          "value": {
+            "invalid": "Skriv inn et gyldig nummer.",
+            "placeholder": "Forskjell"
+          },
+          "when": {
+            "invalid": "Vennligst ta et valg.",
+            "options": {
+              "after": "Etter x minutter",
+              "at": "På tidspunktet",
+              "external": "Bruk JSON-kilde",
+              "script": "Bruk script",
+              "weather": "Bruker nåværende vær"
+            },
+            "placeholder": "Velg handling"
+          }
+        },
+        "watertank_height": {
+          "help": "Angi høyden på vanntanken.",
+          "invalid": "Viser epost serverens hostname eller IP.",
+          "label": "Høyde",
+          "placeholder": "Brukernavn"
+        },
+        "watertank_offset": {
+          "help": "Angi offset mellom sensor og vannhøyde.",
+          "invalid": "Viser epost serverens hostname eller IP.",
+          "label": "Forskyvning",
+          "placeholder": "Brukernavn"
+        },
+        "watertank_volume": {
+          "help": "Strømforbruket og/eller vannstrømmen per minutt når den slås på.",
+          "invalid": "Viser epost serverens hostname eller IP.",
+          "label": "Volum",
+          "placeholder": "Brukernavn"
+        }
+      },
+      "title": "Innstillinger for webkamera",
+      "type": {
+        "help": "Velg type område. Hver type har sine egne ekstra alternativer og logikk.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Type",
+        "placeholder": "Temperatur sensorer"
+      }
+    }
+  },
+  "audio": {
+    "files": {
+      "delete": {
+        "confirm": {
+          "message": "Er du sikker på at du vil slette lydfilen ''{name}'' ({filename})?"
+        },
+        "error": {
+          "message": "Lydfilen ''{name}'' kunne ikke slettes!\nFeil: {error}"
+        },
+        "ok": {
+          "message": "Lydfilen ''{name}'' er slettet."
+        }
+      },
+      "settings": {
+        "audiofiles": {
+          "label": "Legg til ny lyd spilleliste",
+          "placeholder": "Legg til ny lyd spilleliste"
+        },
+        "save": {
+          "error": {
+            "invalid_file": "Ugyldig lydfil(er)"
+          },
+          "ok": {
+            "message": "Lastet opp {amount, plural, =1 {# lydfil} other {# lydfiler}}"
+          }
+        }
+      },
+      "title": "Lydfiler"
+    },
+    "menu": {
+      "files": {
+        "title": "Filer"
+      },
+      "new_playlist": {
+        "title": "Lyd spilleliste"
+      },
+      "playlists": {
+        "title": "Spilleliste"
+      },
+      "title": "Lyd"
+    },
+    "playlists": {
+      "delete": {
+        "confirm": {
+          "message": "Er du sikker på at du vil slette spillelisten ''{name}'' med {length} tall?"
+        },
+        "error": {
+          "message": "Spillelisten ''{name}'' kunne ikke slettes!\nFeil: {error}"
+        },
+        "ok": {
+          "message": "Spillelisten ''{name}'' er slettet."
+        }
+      },
+      "settings": {
+        "files": {
+          "help": "Viser volumet for denne spillelisten.",
+          "invalid": "Slett fil.",
+          "label": "Lydfiler",
+          "placeholder": "Slett fil"
+        },
+        "name": {
+          "help": "Skriv inn et navn som er lett å huske.",
+          "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
+          "label": "Navn",
+          "placeholder": "Brukernavn"
+        },
+        "repeat": {
+          "help": "Viser navnet på musikk spillelisten.",
+          "label": "Gjenta"
+        },
+        "save": {
+          "error": {
+            "required_fields": "Obligatoriske felt er merket med ‘%s’."
+          },
+          "ok": {
+            "message": "Spillelisten ''{name}'' er oppdatert."
+          }
+        },
+        "shuffle": {
+          "help": "Bland denne spillelisten hver gang den spilles av.",
+          "label": "Stokk"
+        },
+        "title": "Innstillinger for webkamera",
+        "volume": {
+          "help": "Viser volumet for denne spillelisten.",
+          "label": "Lydfiler"
+        }
+      },
+      "title": "Spilleliste"
+    }
+  },
+  "buttons": {
+    "actions": {
+      "delete": "Slett-knapp",
+      "export": "Eksportere data",
+      "ignore": "Legg til ny sensor",
+      "settings": "Rediger-knapp"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Er du sikker på at du vil slette knappen ''{name}''?"
+      },
+      "error": {
+        "message": "Knappen ''{name}'' kunne ikke slettes!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Knappen ''{name}'' er slettet."
+      }
+    },
+    "ignore": {
+      "confirm": {
+        "message": "Er du sikker på at du vil ignorere knappen ''{name}''?"
+      },
+      "error": {
+        "message": "Knappen ''{name}'' kunne ikke ignoreres!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Knappen ''{name}'' ignoreres."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Legg til ny sensor"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Knapper"
+    },
+    "settings": {
+      "address": {
+        "help": "Skriv inn det fysiske GPIO-pinnummeret.",
+        "invalid": "Den angitte adressen er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
+        "label": "Adresse",
+        "placeholder": "I2C-adresse"
+      },
+      "calibration": {
+        "inverse": {
+          "help": "",
+          "label": ""
+        },
+        "ldr_capacitor": {
+          "help": "Skriv inn kondensatorverdien i µF da dette vil påvirke lysberegningen.",
+          "invalid": "Den angitte kondensatorverdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "label": "Kondensatorverdi i µF",
+          "placeholder": "Angi kondensatorverdien i µF"
+        },
+        "timeout": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "current": {
+        "help": "Nåværende status for knappen.",
+        "label": "Nåværende",
+        "placeholder": "Nåværende verdi"
+      },
+      "hardware": {
+        "help": "Viser lydkortet som brukes til å spille av lyd.",
+        "invalid": "Merk et valg.",
+        "label": "Maskinvare",
+        "placeholder": "Skift maskinvare"
+      },
+      "name": {
+        "help": "Skriv inn et navn som er lett å huske.",
+        "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
+        "label": "Navn",
+        "placeholder": "Brukernavn"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Obligatoriske felt er merket med ‘%s’."
+        },
+        "ok": {
+          "message": "Knappen ''{name}'' er oppdatert."
+        }
+      },
+      "title": "Dør innstillinger"
+    },
+    "title": "Knapper"
+  },
+  "calendar": {
+    "actions": {
+      "download": "Last ned"
+    },
+    "event": {
+      "delete": {
+        "confirm": {
+          "message": "Er du sikker på at du vil slette hendelsen ''{name}''?"
+        },
+        "error": {
+          "message": "Hendelsen ''{name}'' kunne ikke slettes!\nFeil: {error}"
+        },
+        "ok": {
+          "message": "Hendelsen ''{name}'' er slettet."
+        }
+      },
+      "duration": "Varighet",
+      "periods": {
+        "days": "Dager",
+        "months": "Måneder",
+        "no_reminder": "Gjenta",
+        "no_repeat": "Gjenta",
+        "weeks": "Uker",
+        "years": "År"
+      },
+      "settings": {
+        "date": {
+          "help": "Datoen eller perioden for denne hendelsen.",
+          "label": "Dato"
+        },
+        "description": {
+          "help": "Skriv inn litt informasjon om denne hendelsen.",
+          "label": "Beskrivelse"
+        },
+        "remind": {
+          "label": "Påminn innen"
+        },
+        "repeat": {
+          "help": "Velg en gjentakelsesperiode og et beløp.",
+          "invalid": "Viser epost serverens hostname eller IP.",
+          "label": "Gjenta"
+        },
+        "repeat_amount": {
+          "label": "Merk et valg"
+        },
+        "save": {
+          "error": {
+            "required_fields": "Obligatoriske felt er merket med ‘%s’."
+          },
+          "ok": {
+            "message": "Arrangementet ''{name}'' er oppdatert."
+          }
+        },
+        "summary": {
+          "help": "Brukernavn.",
+          "invalid": "Navnet kan ikke være tomt.",
+          "label": "Brukernavn"
+        },
+        "title": "Begivenhet",
+        "update": {
+          "error": {
+            "message": "Arrangementet ''{name}'' kunne ikke oppdateres!\nFeil: {error}"
+          },
+          "ok": {
+            "message": "Arrangementet ''{name}'' er oppdatert."
+          }
+        }
+      }
+    },
+    "menu": {
+      "title": "Kalender"
+    },
+    "title": "Kalender"
+  },
+  "dashboard": {
+    "enclosures": {
+      "menu": {
+        "title": "Vedlegg"
+      },
+      "mode": "Modus",
+      "title": "Vedlegg"
+    },
+    "infobox": {
+      "current_power_usage": {
+        "title": "Strømforbruk i watt"
+      },
+      "current_water_flow": {
+        "title": "Vannføring i L/m"
+      },
+      "total_power_usage": {
+        "duration": "om {duration}",
+        "title": "Total strøm i kWh"
+      },
+      "total_water_usage": {
+        "duration": "om {duration}",
+        "title": "Totalt vann i L"
+      },
+      "uptime": {
+        "title": "Oppetid"
+      }
+    },
+    "menu": {
+      "title": "Kontrollpanel"
+    },
+    "title": "Kontrollpanel"
+  },
+  "enclosures": {
+    "actions": {
+      "delete": "Slett fil",
+      "settings": "Rediger vedlegg"
+    },
+    "area": {
+      "current": "Nåværende",
+      "current_status": "Nåværende verdi",
+      "delete": {
+        "title": "Slett fil"
+      },
+      "edit": {
+        "title": "Rediger"
+      },
+      "mode": {
+        "disabled": "Deaktivert",
+        "sensors": "Sensorer",
+        "timer": "Timer",
+        "title": "Modus",
+        "weather": "Vær"
+      },
+      "now": "nå",
+      "period": {
+        "day": "Dag",
+        "high": "Høy",
+        "low": "Logg",
+        "night": "Natt"
+      },
+      "range": "Område",
+      "type": {
+        "audio": "Lyd",
+        "cooling": "Kjøling",
+        "heating": "Innstillinger",
+        "humidity": "Luftfuktighet",
+        "lights": "Lys",
+        "main_lights": "Minimum lys timer",
+        "watertank": "Vanntank"
+      }
+    },
+    "areas": {
+      "title": "Områder"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Er du sikker på at du vil slette vedlegget ''{name}''?"
+      },
+      "error": {
+        "message": "Vedlegget ''{name}'' kunne ikke slettes!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Vedlegget ''{name}'' er slettet."
+      }
+    },
+    "doors": {
+      "title": "Dører"
+    },
+    "menu": {
+      "list": {
+        "title": "Liste"
+      },
+      "new_area": {
+        "title": "Legg til nytt webkamera"
+      },
+      "new_enclosure": {
+        "title": "Legg til ny sensor"
+      },
+      "title": "Vedlegg"
+    },
+    "settings": {
+      "description": {
+        "help": "Skriv inn litt beskrivelsestekst om dette kabinettet.",
+        "label": "Beskrivelse",
+        "placeholder": "Beskrivelse"
+      },
+      "doors": {
+        "help": "Velg døren(e) for dette skapet.",
+        "label": "Dører"
+      },
+      "image": {
+        "help": "Last opp en JPG eller PNG.",
+        "invalid": "Den valgte filen er ikke gyldig. Det er ikke en bildefil.",
+        "label": "Bilde",
+        "placeholder": "Velg en bildefil"
+      },
+      "name": {
+        "help": "Skriv inn et navn som er lett å huske.",
+        "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
+        "label": "Navn",
+        "placeholder": "Brukernavn"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Obligatoriske felt er merket med ‘%s’."
+        },
+        "ok": {
+          "message": "Vedlegg ''{name}'' er oppdatert."
+        }
+      },
+      "title": "Sensor innstillinger",
+      "webcams": {
+        "help": "Velg webkameraet(e) for dette kabinettet.",
+        "label": "Nettkamera"
+      }
+    },
+    "title": "Vedlegg",
+    "webcams": {
+      "title": "Nettkamera"
+    }
+  },
+  "footer": {
+    "current_activity": "Aktivitet",
+    "error_messages": "Ingen feilmeldinger",
+    "warning_messages": "Ingen advarsler"
+  },
+  "gauge": {
+    "error": "feil",
+    "last_update": "Siste oppdatering",
+    "warning": "advarsel"
+  },
+  "general": {
+    "download": {
+      "title": "nedlasting"
+    },
+    "exclude": {
+      "average": "excl. avg."
+    },
+    "humidity": "Luftfuktighet",
+    "login": {
+      "title": "Godkjenn for å gjøre endringer"
+    },
+    "logout": {
+      "title": "Logg ut"
+    },
+    "settings": {
+      "title": "Innstillinger"
+    },
+    "temperature": "Temperatur",
+    "uptime_format": {
+      "days": "{number, plural, =1 {# dag} other {# dager}}",
+      "hours": "{number, plural, =1 {# time} other {# timer}}",
+      "minutes": "{number, plural, =1 {# minutt} other {# minutter}}",
+      "months": "{number, plural, =1 {# måned} other {# måneder}}",
+      "seconds": "{number, plural, =1 {# sekund} other {# sekunder}}",
+      "years": "{number, plural, =1 {# år} other {# år}}"
+    }
+  },
+  "graph": {
+    "alarm": {
+      "max": "Alarm Max",
+      "min": "Alarm min"
+    },
+    "current": "Nåværende",
+    "flow": "Vannføring i L/m",
+    "ldr": "Lys tilstand",
+    "magnetic": "Dør status",
+    "motion": "Bevegelse",
+    "no-data": "Ingen data ...",
+    "period": {
+      "day": "Dag",
+      "month": "Måneder",
+      "replaced": "Skift ut",
+      "week": "Uke",
+      "year": "År"
+    },
+    "settings": {
+      "export": "Eksportere data"
+    },
+    "wattage": "Watt"
+  },
+  "home": {
+    "menu": {
+      "title": "Hjem"
+    },
+    "title": "Hjem"
+  },
+  "messages": {
+    "actions": {
+      "delete": "Slett fil",
+      "edit": "Ingen meldinger"
+    },
+    "add": "Ingen meldinger",
+    "delete": {
+      "confirm": {
+        "message": "Er du sikker på at du vil slette meldingen ''{name}''?"
+      },
+      "error": {
+        "message": "Meldingen ''{name}'' kunne ikke slettes!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Meldingen ''{name}'' er slettet."
+      }
+    },
+    "ratelimit": "{number, plural, =0 {Ubegrensede meldinger} other {Maks # per minutt}}",
+    "settings": {
+      "available_services": {
+        "help": "Viser lydkortet som brukes til å spille av lyd.",
+        "label": "Tjeneste"
+      },
+      "enabled": {
+        "help": "Varsler.",
+        "label": "Aktivert"
+      },
+      "message": {
+        "help": "Skriv inn en melding. Du kan bruke plassholderverdier her.",
+        "label": "Melding",
+        "placeholder": "Brukernavn"
+      },
+      "placeholders": {
+        "format": "Tallverdier kan avrundes ved å bruke {link_start}`.:2f`-formatet{link_end}",
+        "help": "Liste over tilgjengelige plassholdere.",
+        "label": "Plassholdere"
+      },
+      "rate_limit": {
+        "help": "Maksimalt antall meldinger per minutt for denne meldingen. Bruk 0 for ubegrenset.",
+        "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall høyere enn {min}.",
+        "label": "Satsgrense",
+        "placeholder": "Meldinger per minutt"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Obligatoriske felt er merket med ‘%s’."
+        },
+        "ok": {
+          "message": "Meldingen ''{name}'' er oppdatert."
+        }
+      },
+      "subject": {
+        "help": "Skriv inn et kort emne. Du kan bruke plassholderverdier her.",
+        "invalid": "Emnet kan ikke være tomt.",
+        "label": "Emne",
+        "placeholder": "Brukernavn"
+      },
+      "title": "Innstillinger for webkamera",
+      "type": {
+        "help": "Varsler.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Melding",
+        "placeholder": "Temperatur sensorer"
+      }
+    },
+    "table": {
+      "actions": "Handling",
+      "enabled": "Aktivert",
+      "message": "Melding",
+      "rate_limit": "Satsgrense",
+      "services": "Tjeneste",
+      "subject": "Emne",
+      "type": "Type"
+    },
+    "title": "Varsler"
+  },
+  "modal": {
+    "confirm": {
+      "relays": {
+        "scan": "Dette vil starte en ny skanning for å finne nye releer. Dette kan ta opptil 30 sekunder."
+      },
+      "sensors": {
+        "scan": "Dette vil starte en ny skanning for å finne nye sensorer. Dette kan ta opptil 30 sekunder."
+      },
+      "submit": {
+        "title": "Bekrefte"
+      },
+      "system": {
+        "logout": "Er du sikker på at du vil logge ut?",
+        "reboot": "Dette vil starte Raspberry PI på nytt. Dette kan ta opptil 60 sekunder.",
+        "restart": "Dette vil starte TerrariumPI på nytt. Dette kan ta opptil 30 sekunder.",
+        "shutdown": "Dette vil slå av Raspberry PI. Bruk med forsiktighet!"
+      },
+      "title": "Er du sikker?"
+    },
+    "form": {
+      "toggle": {
+        "info": "Generell informasjon"
+      }
+    },
+    "general": {
+      "close": "Lukk",
+      "save": "Lagre"
+    },
+    "login": {
+      "error": "Ugyldig innlogging",
+      "form": {
+        "password": {
+          "help": "Skriv inn passordet.",
+          "invalid": "Passordet kan ikke være tomt.",
+          "label": "SMTP passord"
+        },
+        "submit": "Logg Inn",
+        "username": {
+          "help": "Skriv inn brukernavnet.",
+          "invalid": "Brukernavnet kan ikke være tomt.",
+          "label": "Brukernavn"
+        }
+      },
+      "title": "Logg Inn"
+    },
+    "notification": {
+      "service": {
+        "form": {
+          "field": {
+            "setup": {
+              "address": {
+                "label": "I2C-adresse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "not-found": {
+    "header": "Side ikke funnet",
+    "link": "Gå til hjemmesiden",
+    "title": "Side ikke funnet"
+  },
+  "notification": {
+    "delete": {
+      "error": {
+        "title": "FEIL"
+      },
+      "invalid": {
+        "title": "FEIL"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "door": {
+      "status": {
+        "title": "Dørstatusoppdatering"
+      }
+    },
+    "exclude": {
+      "error": {
+        "title": "FEIL"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "form": {
+      "save": {
+        "error": {
+          "title": "Feil"
+        },
+        "ok": {
+          "title": "Lagre OK"
+        }
+      },
+      "upload": {
+        "error": {
+          "title": "Dato opplastet"
+        }
+      }
+    },
+    "login": {
+      "message": {
+        "error": "Beklager, men påloggingen er ugyldig",
+        "ok": "Du er pålogget."
+      },
+      "title": "Logg Inn"
+    },
+    "manual_mode": {
+      "error": {
+        "title": "FEIL"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    },
+    "offline": {
+      "message": "Forbindelsen er brutt",
+      "title": "Avlogget"
+    },
+    "online": {
+      "message": "Vi er tilkoblet",
+      "title": "Online"
+    },
+    "reboot": {
+      "ok": {
+        "title": "System omstart ok"
+      }
+    },
+    "restart": {
+      "ok": {
+        "title": "System omstart ok"
+      }
+    },
+    "scanning": {
+      "ok": {
+        "title": "Skanning fullført"
+      }
+    },
+    "shutdown": {
+      "ok": {
+        "title": "Systemavslutning ok"
+      }
+    },
+    "toggle": {
+      "error": {
+        "title": "FEIL"
+      },
+      "ok": {
+        "title": "OK"
+      }
+    }
+  },
+  "relays": {
+    "actions": {
+      "delete": "Slett fil",
+      "export": "Eksportere data",
+      "ignore": "Legg til nytt webkamera",
+      "manual_mode": "Manuell modus",
+      "replace_hardware": "Skift maskinvare",
+      "settings": "Rediger relé"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Er du sikker på at du vil ignorere reléet ''{name}''?"
+      },
+      "manual_mode": {
+        "message": "Vil du veksle mellom manuell modus for relé ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Er du sikker på at du vil slette reléet ''{name}''?"
+      },
+      "error": {
+        "message": "Reléet ''{name}'' kunne ikke slettes!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Reléet ''{name}'' er slettet."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "Reléet ''{name}'' kunne ikke ignoreres!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Reléet ''{name}'' ignoreres."
+      }
+    },
+    "manual-mode": "Manuell modus",
+    "manual_mode": {
+      "error": {
+        "message": "Feil ved endring av manuell modus for relé ''{name}''.\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Den manuelle modusen for relé ''{name}'' er endret."
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Legg til nytt webkamera"
+      },
+      "scan": {
+        "title": "Temperatur sensorer"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Reléer"
+    },
+    "settings": {
+      "address": {
+        "help": "For mer informasjon se online.",
+        "invalid": "Den angitte adressen er ikke gyldig. Den kan ikke være tom.",
+        "label": "Adresse",
+        "placeholder": "I2C-adresse"
+      },
+      "calibration": {
+        "dimmer_frequency": {
+          "help": "Frekvensen som dimmeren fungerer på.",
+          "invalid": "Viser epost serverens hostname eller IP.",
+          "label": "Dimmerfrekvens i Hz"
+        },
+        "dimmer_max_dim": {
+          "help": "Maksimal dimmerverdi (Legacy).",
+          "invalid": "Viser epost serverens hostname eller IP.",
+          "label": "Maksimal dimmerverdi"
+        },
+        "dimmer_max_power": {
+          "help": "Maksimal effekt for denne dimmeren.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "label": "Vannføring i L/m"
+        },
+        "dimmer_offset": {
+          "help": "Dimmer av varighet.",
+          "invalid": "Viser epost serverens hostname eller IP.",
+          "label": "Dimmer av varighet"
+        }
+      },
+      "current": {
+        "help": "Kun endring.",
+        "label": "Nåværende",
+        "placeholder": "Nåværende verdi"
+      },
+      "flow": {
+        "help": "Angi (maks) vannmengde når den er slått på.",
+        "invalid": "Viser epost serverens hostname eller IP.",
+        "label": "Vannføring i L/m"
+      },
+      "hardware": {
+        "help": "Viser lydkortet som brukes til å spille av lyd.",
+        "invalid": "Merk et valg.",
+        "label": "Maskinvare",
+        "placeholder": "Skift maskinvare"
+      },
+      "name": {
+        "help": "Skriv inn et navn som er lett å huske.",
+        "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
+        "label": "Navn",
+        "placeholder": "Brukernavn"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Obligatoriske felt er merket med ‘%s’."
+        },
+        "ok": {
+          "message": "Relé ''{name}'' er oppdatert."
+        }
+      },
+      "title": "Innstillinger for webkamera",
+      "wattage": {
+        "help": "Angi (maks) wattstyrke når den er slått på.",
+        "invalid": "Viser epost serverens hostname eller IP.",
+        "label": "Watt"
+      }
+    },
+    "title": "Reléer",
+    "toggle": {
+      "error": {
+        "message": "Feil ved veksling av relé ''{name}''.\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Vekslet relé ''{name}'' til tilstand {value}"
+      }
+    }
+  },
+  "sensors": {
+    "actions": {
+      "delete": "Temperatur sensorer",
+      "export": "pH sensor",
+      "ignore": "Luftfuktighet sensor",
+      "settings": "Lyssensor"
+    },
+    "all": {
+      "menu": {
+        "title": "Temperatur sensorer"
+      },
+      "title": "Temperatur sensorer"
+    },
+    "altitude": {
+      "menu": {
+        "title": "Høyde"
+      },
+      "title": "Høydesensorer"
+    },
+    "average": {
+      "altitude": "Gjennomsnittlig høyde",
+      "co2": "Gjennomsnittlig CO2",
+      "distance": "Gjennomsnittlig avstand",
+      "fertility": "Gjennomsnittlig fruktbarhet",
+      "humidity": "Gjennomsnittlig luftfuktighet",
+      "light": "Gjennomsnittlig lys",
+      "moisture": "Gjennomsnittlig fuktighet",
+      "pressure": "Gjennomsnittlig trykk",
+      "temperature": "Gjennomsnittstemperatur",
+      "uva": "Gjennomsnittlig UVA",
+      "uvb": "Gjennomsnittlig UVB",
+      "uvi": "Gjennomsnittlig UV-indeks"
+    },
+    "co2": {
+      "menu": {
+        "title": "CO2"
+      },
+      "title": "CO2-sensorer"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Er du sikker på at du vil ignorere sensoren ''{name}''?"
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": "Er du sikker på at du vil slette sensoren ''{name}''?"
+      },
+      "error": {
+        "message": "Sensoren ''{name}'' kunne ikke slettes!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Sensoren ''{name}'' er slettet."
+      }
+    },
+    "distance": {
+      "menu": {
+        "title": "Avstand"
+      },
+      "title": "Avstandssensorer"
+    },
+    "exclude": {
+      "error": {
+        "message": "Sensoren ''{name}'' kunne ikke ignoreres!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Sensoren ''{name}'' ignoreres."
+      }
+    },
+    "fertility": {
+      "menu": {
+        "title": "Fruktbarhet"
+      },
+      "title": "Fertilitetssensorer"
+    },
+    "humidity": {
+      "menu": {
+        "title": "Luftfuktighet"
+      },
+      "title": "Luftfuktighet sensorer"
+    },
+    "light": {
+      "menu": {
+        "title": "Natt"
+      },
+      "title": "Lyssensorer"
+    },
+    "menu": {
+      "new": {
+        "title": "pH sensor"
+      },
+      "scan": {
+        "title": "Temperatur sensorer"
+      },
+      "title": "Sensorer"
+    },
+    "moisture": {
+      "menu": {
+        "title": "Fuktighet"
+      },
+      "title": "Fuktighetssensorer"
+    },
+    "ph": {
+      "menu": {
+        "title": "pH"
+      },
+      "title": "Ph-sensorer"
+    },
+    "pressure": {
+      "menu": {
+        "title": "press"
+      },
+      "title": "Trykksensorer"
+    },
+    "settings": {
+      "address": {
+        "help": "I2C-adresse.",
+        "invalid": "Den angitte adressen er ikke gyldig. Den kan ikke være tom.",
+        "label": "Adresse",
+        "placeholder": "I2C-adresse"
+      },
+      "alarm_max": {
+        "help": "Strømforbruket og/eller vannstrømmen per minutt når den slås på.",
+        "invalid": "Den angitte verdien er ikke gyldig. Det må være nummer.",
+        "label": "Alarm Max",
+        "placeholder": "Alarm Max"
+      },
+      "alarm_min": {
+        "help": "Viser epost serverens hostname eller IP.",
+        "invalid": "Den angitte verdien er ikke gyldig. Det må være nummer.",
+        "label": "Alarm min",
+        "placeholder": "Alarm min"
+      },
+      "calibration": {
+        "ccs811_compensation_sensors": {
+          "help": "Velg miljø dør status når arkivering er aktivert.",
+          "label": "Temperatursensor",
+          "placeholder": "Temperatur sensorer"
+        },
+        "chirp_max_moist": {
+          "help": "Angi maksimal fuktighetsverdi.",
+          "invalid": "Den angitte verdien er ikke gyldig. Det må være nummer høyere enn {min}.",
+          "label": "Maksimal fukt verdi"
+        },
+        "chirp_min_moist": {
+          "help": "Angi minimum fuktighetsverdi.",
+          "invalid": "Den angitte verdien er ikke gyldig. Det må være nummer høyere enn {min}.",
+          "label": "Maksimal fukt verdi"
+        },
+        "offset": {
+          "help": "Viser lydkortet som brukes til å spille av lyd.",
+          "invalid": "Den angitte verdien er ikke gyldig. Det må være nummer.",
+          "label": "Forskyvning"
+        }
+      },
+      "current": {
+        "help": "Sensorens nåværende tilstand.",
+        "label": "Nåværende",
+        "placeholder": "Nåværende verdi"
+      },
+      "exclude_avg": {
+        "help": "Ekskludert fra gjennomsnitts kalkuleringen.",
+        "label": "excl. avg"
+      },
+      "fields": {
+        "error": "Obligatoriske felt er merket med ‘%s’."
+      },
+      "hardware": {
+        "help": "Viser lydkortet som brukes til å spille av lyd.",
+        "invalid": "Merk et valg.",
+        "label": "Maskinvare",
+        "placeholder": "Skift maskinvare"
+      },
+      "limit_max": {
+        "help": "Viser epost serverens hostname eller IP.",
+        "invalid": "Den angitte verdien er ikke gyldig. Det må være nummer.",
+        "label": "Begrens max"
+      },
+      "limit_min": {
+        "help": "Viser epost serverens hostname eller IP.",
+        "invalid": "Den angitte verdien er ikke gyldig. Det må være nummer.",
+        "label": "Begrens min"
+      },
+      "max_diff": {
+        "help": "Angi maksimal forskjell mellom to målinger som er gyldige. Skriv inn '0' for å deaktivere.",
+        "invalid": "Den angitte verdien er ikke gyldig. Det må være nummer høyere enn {min}.",
+        "label": "Maks diff",
+        "placeholder": "Maks diff"
+      },
+      "name": {
+        "help": "Skriv inn et navn som er lett å huske.",
+        "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
+        "label": "Navn",
+        "placeholder": "Brukernavn"
+      },
+      "save": {
+        "ok": {
+          "message": "Sensor ''{name}'' er oppdatert."
+        }
+      },
+      "title": "Sensor innstillinger",
+      "type": {
+        "help": "Viser lydkortet som brukes til å spille av lyd.",
+        "invalid": "Merk et valg.",
+        "label": "Type",
+        "placeholder": "Temperatur sensorer"
+      }
+    },
+    "temperature": {
+      "menu": {
+        "title": "Temperatur"
+      },
+      "title": "Temperatursensorer"
+    },
+    "title": "Sensorer",
+    "uva": {
+      "menu": {
+        "title": "uva"
+      },
+      "title": "UVA-sensorer"
+    },
+    "uvb": {
+      "menu": {
+        "title": "uvb"
+      },
+      "title": "UVB-sensorer"
+    },
+    "uvi": {
+      "menu": {
+        "title": "uvi"
+      },
+      "title": "UVI-sensorer"
+    }
+  },
+  "services": {
+    "actions": {
+      "delete": "Slett tjenesten",
+      "edit": "Rediger tjeneste"
+    },
+    "add": "Tjeneste",
+    "delete": {
+      "confirm": {
+        "message": "Er du sikker på at du vil slette tjenesten ''{name}''?"
+      },
+      "error": {
+        "message": "Tjenesten ''{name}'' kunne ikke slettes!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Tjenesten ''{name}'' er slettet."
+      }
+    },
+    "enabled": "Aktivert",
+    "ratelimit": "{number, plural, =0 {Ubegrensede meldinger} other {Maks # per minutt}}",
+    "settings": {
+      "enabled": {
+        "help": "Varsler.",
+        "label": "Aktivert"
+      },
+      "name": {
+        "help": "Skriv inn et navn som er lett å huske.",
+        "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
+        "label": "Navn",
+        "placeholder": "Brukernavn"
+      },
+      "rate_limit": {
+        "help": "Maksimalt antall meldinger per minutt for denne tjenesten. Bruk 0 for ubegrenset.",
+        "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall høyere enn {min}.",
+        "label": "Satsgrense",
+        "placeholder": "Meldinger per minutt"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Obligatoriske felt er merket med ‘%s’."
+        },
+        "ok": {
+          "message": "Tjenesten ''{name}'' er oppdatert."
+        }
+      },
+      "setup": {
+        "address": {
+          "help": "I2C-adresse.",
+          "invalid": "Den angitte adressen er ikke gyldig. Den kan ikke være tom.",
+          "label": "Adresse",
+          "placeholder": "I2C-adresse"
+        },
+        "api_token": {
+          "help": "SMTP brukernavn.",
+          "invalid": "Det angitte API-tokenet er ikke gyldig. Den kan ikke være tom.",
+          "label": "API-token",
+          "placeholder": "SMTP brukernavn"
+        },
+        "buzzer": {
+          "help": "Liste over tilgjengelige sanger som skal brukes i meldingsemnet."
+        },
+        "green": {
+          "help": "Skriv inn GPIO pin for grønt lys.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "label": "Grønn",
+          "placeholder": "Skriv inn grønn GPIO-pin"
+        },
+        "hardware": {
+          "help": "Viser lydkortet som brukes til å spille av lyd.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Maskinvare",
+          "placeholder": "Skift maskinvare"
+        },
+        "password": {
+          "help": "Skriv inn serverpassordet.",
+          "label": "Server passord",
+          "placeholder": "Brukernavn"
+        },
+        "port": {
+          "help": "Skriv inn serverportnummeret.",
+          "invalid": "Det angitte portnummeret er ikke gyldig. Den kan ikke være tom.",
+          "label": "Serverport",
+          "placeholder": "Brukernavn"
+        },
+        "pushover": {
+          "label": "Lag dine tokens ved å registrere TerrariumPI som en app {link}."
+        },
+        "receiver": {
+          "help": "I2C-adresse.",
+          "invalid": "Adressen kan ikke være tom.",
+          "label": "Mottakers Email",
+          "placeholder": "I2C-adresse"
+        },
+        "red": {
+          "help": "Viser volumet for denne spillelisten.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "label": "Ons",
+          "placeholder": "Dato og tid"
+        },
+        "show_title": {
+          "help": "Vis navn og versjon som tittel på skjermen.",
+          "label": "Vis tittel"
+        },
+        "ssl": {
+          "email": {
+            "label": "E-postvarslingstjenesten vil automatisk oppdage SSL/TLS-tilkoblinger."
+          },
+          "mqtt": {
+            "label": "MQTT-varslingstjenesten vil automatisk oppdage SSL/TLS-tilkoblinger."
+          }
+        },
+        "url": {
+          "help": "Min fukt verdi.",
+          "invalid": "Den angitte nettadressen er ikke gyldig. Den kan ikke være tom.",
+          "label": "Full post url",
+          "placeholder": "Full post url"
+        },
+        "user_key": {
+          "help": "SMTP brukernavn.",
+          "invalid": "Den angitte brukernøkkelen er ikke gyldig. Den kan ikke være tom.",
+          "label": "Brukernøkkel",
+          "placeholder": "SMTP brukernavn"
+        },
+        "username": {
+          "help": "Skriv inn serverbrukernavnet.",
+          "label": "Server brukernavn",
+          "placeholder": "Brukernavn"
+        },
+        "yellow": {
+          "help": "Skriv inn GPIO-pinne for gult lys.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "label": "Rav",
+          "placeholder": "Dato og tid"
+        }
+      },
+      "title": "Varsler",
+      "type": {
+        "help": "Varsler.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Type",
+        "placeholder": "Temperatur sensorer"
+      }
+    },
+    "title": "Varsler"
+  },
+  "system": {
+    "log": {
+      "download": {
+        "title": "Last ned"
+      },
+      "filters": {
+        "errors": "feil",
+        "search": "I2C-adresse",
+        "title": "Filtre",
+        "warnings": "advarsel"
+      },
+      "lines": "{lines} linjer",
+      "loading": "Laster inn data",
+      "title": "Systemlogg"
+    },
+    "menu": {
+      "log": {
+        "title": "Logg"
+      },
+      "notifications": {
+        "title": "Varsler"
+      },
+      "reboot": {
+        "title": "Start på nytt"
+      },
+      "restart": {
+        "title": "Start"
+      },
+      "settings": {
+        "title": "Innstillinger"
+      },
+      "shutdown": {
+        "title": "Skru av"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "System"
+    },
+    "notifications": {
+      "title": "Varsler"
+    },
+    "settings": {
+      "all_gauges_on_single_page": {
+        "help": "Legg til ekstra menyelement for alle sensorer på en enkelt side.",
+        "label": "Vis alle sensor målere på 1 side"
+      },
+      "authenticate": {
+        "help": "Autentiser alltid eller bare når endringer gjøres.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Autentisering",
+        "options": {
+          "changes": "Kun for endringer",
+          "full": "Fullstendig godkjenning",
+          "no_authentication": "Autentisering"
+        }
+      },
+      "auto_dark_mode": {
+        "help": "Bytt mørk modus når natten begynner.",
+        "label": "Automatisk mørk modus"
+      },
+      "currency": {
+        "help": "Velg grensesnittvalutaen.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Valuta"
+      },
+      "dashboard_mode": {
+        "help": "Velg hvordan dashbordet ser ut.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Dashboard-modus",
+        "options": {
+          "normal": "Grafer og vedlegg",
+          "only_enclosures": "Kun vedlegg",
+          "only_graphs": "Kun grafer"
+        }
+      },
+      "distance_indicator": {
+        "help": "Velg avstandsindikatoren. Påvirker kun gjeldende verdier.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Avstand"
+      },
+      "exclude-ids": {
+        "help": "ID-er som er ekskludert.",
+        "label": "Ekskluderte IDer"
+      },
+      "graph_smooth_value": {
+        "help": "Angi mengden datapunkter for gjennomsnittet. 0 vil deaktivere denne funksjonen.",
+        "invalid": "Viser epost serverens hostname eller IP.",
+        "label": "Grafe utjevning verdi"
+      },
+      "header": {
+        "cloud": "Sky",
+        "gui": "GUI",
+        "locale": "Lokal kilde",
+        "system": "System"
+      },
+      "hide_environment_dashboard": {
+        "help": "Skjul miljø oppsummeringen på dashbordet.",
+        "label": "Skjul miljø oppsummeringen på dashbordet"
+      },
+      "host": {
+        "help": "Skriv inn IP for å lytte etter tilkoblinger. Standard 0.0.0.0.",
+        "invalid": "Viser epost serverens hostname eller IP.",
+        "label": "Port nummer"
+      },
+      "language": {
+        "help": "Velg grensesnittspråket. Dette vil også endre tall- og valutaformatering.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Språk"
+      },
+      "meross_cloud_password": {
+        "help": "Skriv inn passordet for å logge på Meross cloud.",
+        "label": "Meross Cloud passord"
+      },
+      "meross_cloud_username": {
+        "help": "Skriv inn brukernavnet for å logge på Meross cloud.",
+        "label": "Meross Cloud brukernavn"
+      },
+      "page": {
+        "title": "Systeminnsillinger"
+      },
+      "password": {
+        "help": "Brukernavn.",
+        "invalid": "Passordet kan ikke være tomt.",
+        "label": "Nytt admin passord"
+      },
+      "password2": {
+        "help": "SMTP-serverporten.",
+        "invalid": "Det nye passordet stemmer ikke.",
+        "label": "Nåværende admin passord"
+      },
+      "pi-wattage": {
+        "help": "Angi det totale strømforbruket til Pi med alle USB-enhetene tilkoblet.",
+        "invalid": "Viser epost serverens hostname eller IP.",
+        "label": "Pi strømforbruk i W"
+      },
+      "port": {
+        "help": "Viser portnummeret som programvaren lytter etter tilkoblinger på.",
+        "invalid": "Viser epost serverens hostname eller IP.",
+        "label": "Port nummer"
+      },
+      "power_price": {
+        "help": "I2C-adresse.",
+        "invalid": "Viser epost serverens hostname eller IP.",
+        "label": "Strømpris"
+      },
+      "profile_image": {
+        "help": "Oppdater et tilpasset bilde som brukes i menyen.",
+        "invalid": "Ugyldig profilbildeformat.",
+        "label": "Profil"
+      },
+      "save": {
+        "ok": {
+          "message": "Innstillingene er oppdatert.",
+          "title": "Dato opplastet"
+        }
+      },
+      "show_min_max_gauge": {
+        "help": "Vis min og maks verdier i måler grafene.",
+        "label": "Vis min og maks verdier i måler grafene"
+      },
+      "temperature_indicator": {
+        "help": "Vis temperatur offset verdi.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Temperatur"
+      },
+      "title": {
+        "help": "Brukernavn.",
+        "invalid": "Tittelen kan ikke være tom.",
+        "label": "Tittel"
+      },
+      "username": {
+        "help": "Skriv inn brukernavnet for autentisering.",
+        "invalid": "Brukernavnet kan ikke være tomt.",
+        "label": "Brukernavn"
+      },
+      "water_price": {
+        "help": "Skriv inn prisen per L/Gallon.",
+        "invalid": "Viser epost serverens hostname eller IP.",
+        "label": "Vannpris"
+      },
+      "water_volume_indicator": {
+        "help": "Velg vannvolumindikatoren. Påvirker kun gjeldende verdier.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Type væskevolum"
+      },
+      "wind_speed_indicator": {
+        "help": "Velg vindhastighetsindikatoren. Påvirker kun gjeldende verdier.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Vindhastighet"
+      }
+    },
+    "status": {
+      "cpu_temp": {
+        "title": "CPU Temperatur"
+      },
+      "disk": {
+        "title": "Harddisk bruk"
+      },
+      "load": {
+        "title": "Systemlogg"
+      },
+      "memory": {
+        "title": "Minnebruk"
+      },
+      "summary": {
+        "title": "Systemstatus"
+      },
+      "title": "System status",
+      "uptime": {
+        "title": "Systemoppetid"
+      }
+    }
+  },
+  "table": {
+    "field": {
+      "range": "Område"
+    },
+    "header": {
+      "actions": "Handling",
+      "duration": "Varighet",
+      "filename": "Filnavn",
+      "filesize": "Filstørrelse",
+      "mode": "Modus",
+      "name": "Navn",
+      "number_files": "Filer",
+      "repeat": "Gjenta",
+      "shuffle": "Stokk",
+      "status": "Status",
+      "type": "Type",
+      "volume": "Lydfiler"
+    }
+  },
+  "topbar": {
+    "current_status": "Nåværende verdi",
+    "door_status": "Dør status",
+    "upcoming_events": "{number, plural, =0 {ingen hendelser} =1 {ett arrangement} other {# arrangementer}}"
+  },
+  "userpanel": {
+    "login": {
+      "text1": "Manuell modus",
+      "text2": "Logg Inn"
+    },
+    "logout": {
+      "text1": "Hei {name}",
+      "text2": "Logg ut"
+    }
+  },
+  "weather": {
+    "current": "Nåværende",
+    "forecast": "Dag varsel",
+    "menu": {
+      "title": "Vær"
+    },
+    "settings": {
+      "fields": {
+        "error": "Obligatoriske felt er merket med ‘%s’."
+      },
+      "information": "For å bruke værsystemet må du opprette en gratis konto på {source_link}.",
+      "save": {
+        "ok": {
+          "message": "Værinnstillingen lagres."
+        }
+      },
+      "title": "Innstillinger for webkamera",
+      "weather_source": {
+        "help": "Skriv inn hele OpenWeatherMap api-url som: {api_url_example}.",
+        "invalid": "Den angitte URL-adressen er ikke gyldig.",
+        "label": "Kilde"
+      }
+    },
+    "title": "Vær"
+  },
+  "webcams": {
+    "actions": {
+      "delete": "Slett fil",
+      "ignore": "Legg til nytt webkamera",
+      "settings": "Legg til nytt webkamera"
+    },
+    "archive": {
+      "no_images": "Ingen arkivbilder tilgjengelig"
+    },
+    "confirm": {
+      "ignore": {
+        "message": "Er du sikker på at du vil ignorere webkameraet ''{name}''?"
+      }
+    },
+    "controls": {
+      "archive": "Arkiv",
+      "new_marker": "Legg til markør",
+      "save_raw_image": "Lagre RAW-bilde",
+      "show_markers": "Vis markører",
+      "toggle_volume": "Slå på volum"
+    },
+    "delete": {
+      "confirm": {
+        "message": "Er du sikker på at du vil slette webkameraet ''{name}''?"
+      },
+      "error": {
+        "message": "Webkameraet ''{name}'' kunne ikke slettes!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Webkameraet ''{name}'' er slettet."
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": "Webkameraet ''{name}'' kunne ikke ignoreres!\nFeil: {error}"
+      },
+      "ok": {
+        "message": "Webkameraet ''{name}'' ignoreres."
+      }
+    },
+    "marker": {
+      "delete": {
+        "confirm": {
+          "message": "Er du sikker på at du vil slette markøren?"
+        },
+        "error": {
+          "message": "Markøren kunne ikke slettes"
+        },
+        "invalid": {
+          "message": "Ugyldig markør"
+        }
+      }
+    },
+    "markers": {
+      "settings": {
+        "delete": "Slett fil",
+        "doors": {
+          "help": "Velg sensorene du vil vise.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Sensorer"
+        },
+        "title": "Sensorer"
+      }
+    },
+    "menu": {
+      "new": {
+        "title": "Nettkamera"
+      },
+      "status": {
+        "title": "Status"
+      },
+      "title": "Nettkamera"
+    },
+    "settings": {
+      "address": {
+        "help": "For mer informasjon se online.",
+        "invalid": "Den angitte adressen er ikke gyldig. Den kan ikke være tom.",
+        "label": "Adresse",
+        "placeholder": "I2C-adresse"
+      },
+      "archive": {
+        "door": {
+          "help": "Dørstatus for å ta et arkivbilde.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Arkiver dør status",
+          "options": {
+            "close": "Lukk",
+            "ignore": "Ignorer",
+            "open": "Åpen"
+          },
+          "placeholder": "Arkiver dør status"
+        },
+        "flash": {
+          "help": "Velg et relé som fungerer som et blinklys.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Blits",
+          "placeholder": "Velg valgfritt relé for blits"
+        },
+        "light": {
+          "help": "Lysstatus for å ta et arkivbilde.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Arkiver lys status",
+          "options": {
+            "ignore": "Ignorer",
+            "off": "Når av",
+            "on": "Når på"
+          },
+          "placeholder": "Arkiver lys status"
+        },
+        "options": {
+          "day_1": "1 dag",
+          "disabled": "Deaktivert",
+          "hour_1": "30 minutter",
+          "hour_12": "12 timer",
+          "hour_3": "3 timer",
+          "hour_6": "6 timer",
+          "minute_1": "1 minutt",
+          "minute_15": "15 minutter",
+          "minute_30": "30 minutter",
+          "minute_5": "5 minutter",
+          "motion": "Bevegelse"
+        },
+        "state": {
+          "help": "Velg varigheten mellom arkiverte bilder.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Arkiv",
+          "placeholder": "Språk"
+        }
+      },
+      "awb": {
+        "help": "Skift maskinvare.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "hvit balanse",
+        "options": {
+          "auto": "Auto",
+          "cloudy": "Skyet",
+          "flash": "Blits",
+          "fluorescent": "Fluorescerende",
+          "greyworld": "Gråverden",
+          "horizon": "Horisontal",
+          "incandescent": "Glødelampe",
+          "off": "Av",
+          "shade": "Skygge",
+          "sunlight": "Natt",
+          "tungsten": "Wolfram"
+        },
+        "placeholder": "Skift maskinvare"
+      },
+      "hardware": {
+        "help": "Viser lydkortet som brukes til å spille av lyd.",
+        "invalid": "Merk et valg.",
+        "label": "Maskinvare",
+        "placeholder": "Skift maskinvare"
+      },
+      "height": {
+        "help": "Angi oppløsningshøyden i piksler.",
+        "invalid": "Viser epost serverens hostname eller IP.",
+        "label": "Høyde"
+      },
+      "motion": {
+        "area": {
+          "help": "I2C-adresse.",
+          "invalid": "Viser epost serverens hostname eller IP.",
+          "label": "Bevegelse minimum område",
+          "placeholder": "Brukernavn"
+        },
+        "boxes": {
+          "help": "Aktiver eller deaktivere bevegelsesbokser for bevegelsesdeteksjon arkivering.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Vis bevegelses bokser",
+          "options": {
+            "blue": "Blå",
+            "green": "Grønn",
+            "none": "Ingen",
+            "red": "Ons"
+          },
+          "placeholder": "Vis bevegelses bokser"
+        },
+        "frame": {
+          "help": "Hvilken ramme skal brukes til bevegelsesdeteksjon.",
+          "invalid": "Vennligst ta et valg.",
+          "label": "Bevegelse sammenlignings bilde",
+          "options": {
+            "archived": "Siste arkiverte bilde",
+            "last": "Siste bilde"
+          },
+          "placeholder": "Velg hvilken ramme som skal sammenlignes"
+        },
+        "threshold": {
+          "help": "Bevegelses delta grense.",
+          "invalid": "Viser epost serverens hostname eller IP.",
+          "label": "Bevegelses delta grense",
+          "placeholder": "Brukernavn"
+        }
+      },
+      "name": {
+        "help": "Skriv inn et navn som er lett å huske.",
+        "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
+        "label": "Navn",
+        "placeholder": "Brukernavn"
+      },
+      "preview": {
+        "label": "Forhåndsvisning"
+      },
+      "rotation": {
+        "help": "Bilderotasjon.",
+        "invalid": "Vennligst ta et valg.",
+        "label": "Sted",
+        "options": {
+          "degrees_0": "grader",
+          "degrees_180": "grader",
+          "degrees_270": "grader",
+          "degrees_90": "grader",
+          "flip_h": "Speilvend vannrett",
+          "flip_v": "Speilvend loddrett",
+          "zero_degrees": "grader"
+        },
+        "placeholder": "Bilderotasjon"
+      },
+      "save": {
+        "error": {
+          "required_fields": "Obligatoriske felt er merket med ‘%s’."
+        },
+        "ok": {
+          "message": "Webkamera ''{name}'' er oppdatert."
+        }
+      },
+      "title": "Innstillinger for webkamera",
+      "width": {
+        "help": "Angi oppløsningsbredden i piksler.",
+        "invalid": "Viser epost serverens hostname eller IP.",
+        "label": "Bredde"
+      }
+    },
+    "title": "Nettkamera"
+  }
+}

@@ -47,6 +47,7 @@ if [ "${PI_ZERO}" -eq 1 ]; then
 
   if [ "${BUSTER_OS}" -eq 1 ]; then
     PIP_MODULES="$(echo $PIP_MODULES | sed 's/opencv-python-headless==[^ ]\+/opencv-python-headless==4.5.4.60/')"
+    PIP_MODULES="$(echo $PIP_MODULES | sed 's/cryptography==[^ ]\+/cryptography==37.0.4/')"
   else
     PIP_MODULES="$(echo $PIP_MODULES | sed 's/opencv-python-headless==[^ ]\+/opencv-python-headless==4.5.3.56/')"
   fi
@@ -55,9 +56,10 @@ if [ "${PI_ZERO}" -eq 1 ]; then
   PIP_MODULES="${PIP_MODULES} lxml==4.6.4"
 fi
 
-# Debian buster does not like numpy .... :(
+# Debian buster does not like numpy or cryptography .... :(
 if [ "${BUSTER_OS}" -eq 1 ]; then
   PIP_MODULES="$(echo $PIP_MODULES | sed 's/numpy==[^ ]\+/numpy==1.21.4/')"
+  PIP_MODULES="$(echo $PIP_MODULES | sed 's/cryptography==[^ ]\+/cryptography==37.0.4/')"
 fi
 
 #set -e
@@ -250,7 +252,7 @@ NUMBER_OF_MODULES=($PIP_MODULES)
 NUMBER_OF_MODULES=${#NUMBER_OF_MODULES[@]}
 MODULE_COUNTER=1
 MODULE_OFFSET=${PROGRESS}
-MODULE_MAX=95
+MODULE_MAX=86
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$(printf '%.*f\n' 0 $(echo "scale=2; ( ${MODULE_COUNTER} * ((${MODULE_MAX} - ${MODULE_OFFSET}) / ${NUMBER_OF_MODULES}) ) + ${MODULE_OFFSET}" | bc -l))
@@ -273,7 +275,6 @@ Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}:
 XXX
 EOF
     pip install --upgrade "${PIP_MODULE}" 2> /dev/null
-    # > /dev/null 2>/dev/null
 
     if [ $? -eq 0 ]; then
       # PIP install succeeded normally
@@ -290,6 +291,54 @@ EOF
 done
 
 PROGRESS=${MODULE_MAX}
+
+# We use the Github actions to create the GUI so we do not need to install NodeJS and all the Libraries
+# https://github.com/theyosh/TerrariumPI/actions/workflows/svelte-gui.yml
+# cat <<EOF
+# XXX
+# $PROGRESS
+# Building WebGUI
+
+# Installing Node Version Manager ...
+# XXX
+# EOF
+# cd "${BASEDIR}/"
+# sudo -u ${SCRIPT_USER} bash -c 'wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash' > /dev/null 2>/dev/null
+
+# PROGRESS=$((PROGRESS + 2))
+# cat <<EOF
+# XXX
+# $PROGRESS
+# Building WebGUI
+
+# Installing latest NodeJS LTS ...
+# XXX
+# EOF
+# sudo -u ${SCRIPT_USER} bash -c "\. /home/${SCRIPT_USER}/.nvm/nvm.sh; nvm install --lts" > /dev/null 2>/dev/null
+
+# PROGRESS=$((PROGRESS + 3))
+# cat <<EOF
+# XXX
+# $PROGRESS
+# Building WebGUI
+
+# Installing NodeJS libraries (first time will take some time) ...
+# XXX
+# EOF
+# sudo -u ${SCRIPT_USER} bash -c "\. /home/${SCRIPT_USER}/.nvm/nvm.sh; npm install --no-progress; ./gui/patch.sh" > /dev/null 2>/dev/null
+
+# ROGRESS=$((PROGRESS + 3))
+# cat <<EOF
+# XXX
+# $PROGRESS
+# Building WebGUI
+
+# Compiling Svelte WebGUI ...
+# XXX
+# EOF
+# sudo -u ${SCRIPT_USER} bash -c "\. /home/${SCRIPT_USER}/.nvm/nvm.sh; npm run build" > /dev/null 2>/dev/null
+
+PROGRESS=$((PROGRESS + 3))
 cat <<EOF
 XXX
 $PROGRESS
@@ -301,9 +350,6 @@ EOF
 
 # Change the rights to the Pi user
 cd "${BASEDIR}/"
-
-# Compress js and css files
-find static/assets/ -type f -regex ".*\.\(css\|js\)" -exec gzip -f9k '{}' \;
 
 # Updates for docker support
 # Create data directory
@@ -331,7 +377,7 @@ chown "${SCRIPT_USER}". * -Rf
 sync
 
 
-PROGRESS=$((PROGRESS + 1))
+PROGRESS=$((PROGRESS + 2))
 cat <<EOF
 XXX
 $PROGRESS
@@ -347,7 +393,7 @@ systemctl daemon-reload
 systemctl enable terrariumpi
 
 
-PROGRESS=$((PROGRESS + 1))
+PROGRESS=$((PROGRESS + 2))
 cat <<EOF
 XXX
 $PROGRESS
@@ -363,7 +409,7 @@ for BLUETOOTH_HELPER in $(ls venv/lib/python*/*-packages/bluepy/bluepy-helper); 
 done
 
 
-PROGRESS=$((PROGRESS + 1))
+PROGRESS=$((PROGRESS + 2))
 cat <<EOF
 XXX
 $PROGRESS
@@ -378,7 +424,7 @@ if [ ! -h /etc/update-motd.d/05-terrariumpi ]; then
   ln -s "${BASEDIR}/motd.sh" /etc/update-motd.d/05-terrariumpi
 fi
 
-PROGRESS=$((PROGRESS + 1))
+PROGRESS=$((PROGRESS + 2))
 cat <<EOF
 XXX
 $PROGRESS
