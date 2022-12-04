@@ -1014,7 +1014,9 @@
     },
     "door": {
       "status": {
-        "title": "Door status update"
+        "title": "Door status update",
+        "closed" : "Door ''{name}'' closed",
+        "open": "Door ''{name}'' opened"
       }
     },
     "exclude": {

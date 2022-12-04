@@ -1,5 +1,5 @@
-import {writable} from "svelte/store"
+import { writable } from "svelte/store";
 
-const currentUserStore = writable(null)
+const currentUserStore = writable(null);
 
-export default currentUserStore
+export default currentUserStore;
