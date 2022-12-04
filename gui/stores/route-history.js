@@ -26,7 +26,7 @@ export function pushRoute(route) {
           : [route, ...history]
       };
   });
-};
+}
 
 export function popRoute() {
   let newRoute;
@@ -41,9 +41,9 @@ export function popRoute() {
       ...rh,
       index: newIndex
     };
-  })
+  });
 
   return newRoute;
-};
+}
 
 export default routeHistory;
