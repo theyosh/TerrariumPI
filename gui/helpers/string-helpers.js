@@ -42,8 +42,8 @@ export const externalLinks = (content) => {
   for (let links = container.getElementsByTagName('a'), i = 0, a; a = links[i]; i++) {
     if (a.host !== location.host) {
       a.target = '_blank';
-    };
-  };
+    }
+  }
   return container.innerHTML;
 }
 

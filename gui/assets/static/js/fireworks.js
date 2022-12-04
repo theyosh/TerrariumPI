@@ -240,7 +240,7 @@ function loop() {
       // start the firework at the bottom middle of the screen, then set the random target coordinates, the random y coordinates will be set within the range of the top half of the screen
       fireworks.push(new Firework(cw / 2, ch, random(0, cw), random(0, ch / 2)));
       timerTick = 0;
-    };
+    }
   } else {
     timerTick++;
   }

@@ -45,7 +45,7 @@ const _setOnline = () => {
     current_state.status = true;
     isOnline.set(current_state);
     successNotification($_('notification.online.message'), $_('notification.online.title'));
-  };
+  }
 
   offlineCounter = setTimeout(() => {
     let current_state = get(isOnline);
@@ -55,9 +55,8 @@ const _setOnline = () => {
       isOnline.set(current_state);
       errorNotification($_('notification.offline.message'), $_('notification.offline.title'));
       _reConnect();
-    };
-  }
-    , 60 * 1000);
+    }
+  }, 60 * 1000);
 };
 
 const _reConnect = () => {
@@ -66,7 +65,7 @@ const _reConnect = () => {
     websocket.set({ type: 'client_init', reconnect: true });
   } catch (e) {
     setTimeout(() => { _reConnect() }, 30 * 1000);
-  };
+  }
 };
 
 websocket.subscribe(message => {
@@ -120,13 +119,13 @@ websocket.subscribe(message => {
     case 'logline':
       if (get(isAuthenticated)) {
         last_log_line.set(message.data);
-      };
+      }
 
       if (message.data.indexOf('WARNING') != -1) {
         animate_footer_badge('warning');
       } else if (message.data.indexOf('ERROR') != -1) {
         animate_footer_badge('danger');
-      };
+      }
       animate_footer_badge();
       break;
 
@@ -143,5 +142,5 @@ websocket.subscribe(message => {
 
   if (onlineUpdate) {
     _setOnline();
-  };
+  }
 });

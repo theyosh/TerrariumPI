@@ -347,7 +347,7 @@ export const PageUrls = Pages.reduce((acc, x) => {
       bcc[y.name] = y.url;
       return bcc;
     }, acc);
-  };
+  }
   return acc;
 }, {});
 

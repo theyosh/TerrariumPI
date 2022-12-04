@@ -30,7 +30,7 @@ export const apiLogin = async (username, password) => {
     }
   })
     .then(response => {
-      if ([200, 302, 303, 307].indexOf(response.status) != -1 || response.type == 'opaqueredirect') { // Redirect only for dev??
+      if ([200, 302, 303, 307].indexOf(response.status) !== -1 || response.type == 'opaqueredirect') { // Redirect only for dev??
         return true;
       }
       return false;
@@ -43,14 +43,14 @@ export const apiLogin = async (username, password) => {
 const __processData = async (type, url, data, cb, extra_headers) => {
 
   extra_headers = extra_headers || {};
-  let body = ['GET', 'HEAD'].indexOf(type) != -1 ? null : data;
+  let body = ['GET', 'HEAD'].indexOf(type) !== -1 ? null : data;
   let postheaders = headers(extra_headers);
 
   if (type == 'UPLOAD') {
     type = 'POST';
     // Make the upload fix there own Content type headers for multipart boundary
     delete (postheaders['Content-Type']);
-  } else if (['PUT', 'POST'].indexOf(type) != -1) {
+  } else if (['PUT', 'POST'].indexOf(type) !== -1) {
     body = JSON.stringify(body);
   }
 
@@ -60,9 +60,9 @@ const __processData = async (type, url, data, cb, extra_headers) => {
     body: body,
   });
 
-  if (response.status == 401) {
+  if (response.status === 401) {
     throw new Error('Authentication required (401)');
-  } else if (response.status == 404) {
+  } else if (response.status === 404) {
     throw new Error('Requested data is not available (404)');
   }
 
@@ -73,7 +73,7 @@ const __processData = async (type, url, data, cb, extra_headers) => {
     // Not JSON content, so keep the text version
   }
 
-  if (response.status == 500) {
+  if (response.status === 500) {
     throw new Error(result.message);
   }
 
@@ -137,7 +137,7 @@ export const fetchCalendarEvents = async (id, cb) => {
   let url = `${apiHost}/calendar/`;
   if (id) {
     url += `${id}/`;
-  };
+  }
   await _getData(url, cb);
 };
 
@@ -154,7 +154,7 @@ export const updateCalendarEvent = async (data, cb) => {
     await _updateData(`${apiHost}/calendar/${data.id}/`, data, cb);
   } else {
     await addCalendarEvent(data, cb);
-  };
+  }
 };
 
 export const deleteCalendarEvent = async (id, cb) => {
@@ -180,7 +180,7 @@ export const fetchSensors = async (sensor_id, cb) => {
   let url = `${apiHost}/sensors/`;
   if (sensor_id) {
     url += `${sensor_id}/`;
-  };
+  }
   await _getData(url, cb);
 };
 
@@ -194,7 +194,7 @@ export const updateSensor = async (data, cb) => {
     await _updateData(`${apiHost}/sensors/${data.id}/`, data, cb);
   } else {
     await addSensor(data, cb);
-  };
+  }
 };
 
 export const deleteSensor = async (id, cb) => {
@@ -228,7 +228,7 @@ export const fetchRelays = async (id, cb) => {
   let url = `${apiHost}/relays/`;
   if (id) {
     url += `${id}/`;
-  };
+  }
   await _getData(url, cb);
 };
 
@@ -242,7 +242,7 @@ export const updateRelay = async (data, cb) => {
     await _updateData(`${apiHost}/relays/${data.id}/`, data, cb);
   } else {
     await addRelay(data, cb);
-  };
+  }
 };
 
 export const deleteRelay = async (id, cb) => {
@@ -260,7 +260,7 @@ export const fetchButtons = async (id, cb) => {
   let url = `${apiHost}/buttons/`;
   if (id) {
     url += `${id}/`;
-  };
+  }
   await _getData(url, cb);
 };
 
@@ -274,7 +274,7 @@ export const updateButton = async (data, cb) => {
     await _updateData(`${apiHost}/buttons/${data.id}/`, data, cb);
   } else {
     await addButton(data, cb);
-  };
+  }
 };
 
 export const deleteButton = async (id, cb) => {
@@ -296,7 +296,7 @@ export const fetchWebcams = async (id, cb) => {
   let url = `${apiHost}/webcams/`;
   if (id) {
     url += `${id}/`;
-  };
+  }
   await _getData(url, cb);
 };
 
@@ -307,11 +307,10 @@ export const addWebcam = async (data, cb) => {
 
 export const updateWebcam = async (data, cb) => {
   if (data.id) {
-    ;
     await _updateData(`${apiHost}/webcams/${data.id}/`, data, cb);
   } else {
     await addWebcam(data, cb);
-  };
+  }
 };
 
 export const deleteWebcam = async (id, cb) => {
@@ -337,7 +336,7 @@ export const fetchPlaylists = async (id, cb) => {
   let url = `${apiHost}/playlists/`;
   if (id) {
     url += `${id}/`;
-  };
+  }
   await _getData(url, cb);
 };
 
@@ -351,7 +350,7 @@ export const updatePlaylist = async (data, cb) => {
     await _updateData(`${apiHost}/playlists/${data.id}/`, data, cb);
   } else {
     await addPlaylist(data, cb);
-  };
+  }
 };
 
 export const deletePlaylist = async (playlist, cb) => {
@@ -365,7 +364,7 @@ export const fetchEnclosures = async (enclosure_id, cb) => {
   let url = `${apiHost}/enclosures/`;
   if (enclosure_id) {
     url += `${enclosure_id}/`;
-  };
+  }
   await _getData(url, cb);
 };
 
@@ -379,7 +378,7 @@ export const updateEnclosure = async (data, cb) => {
     await _updateData(`${apiHost}/enclosures/${data.id}/`, data, cb);
   } else {
     await addEnclosure(data, cb);
-  };
+  }
 };
 
 export const deleteEnclosure = async (playlist, cb) => {
@@ -397,7 +396,7 @@ export const fetchAreas = async (area_id, cb) => {
   let url = `${apiHost}/areas/`;
   if (area_id) {
     url += `${area_id}/`;
-  };
+  }
   await _getData(url, cb);
 };
 
@@ -411,7 +410,7 @@ export const updateArea = async (data, cb) => {
     await _updateData(`${apiHost}/areas/${data.id}/`, data, cb);
   } else {
     await addArea(data, cb);
-  };
+  }
 };
 
 export const deleteArea = async (playlist, cb) => {
@@ -436,7 +435,7 @@ export const updateSystemSettings = async (data, cb) => {
     let key = Object.keys(data)[0];
     url += key + '/';
     data = { value: data[key] };
-  };
+  }
   await _updateData(url, data, cb);
 };
 
@@ -482,7 +481,7 @@ export const fetchNotificationServices = async (service_id, cb) => {
   let url = `${apiHost}/notification/services/`;
   if (service_id) {
     url += `${service_id}/`;
-  };
+  }
   await _getData(url, cb);
 };
 
@@ -496,7 +495,7 @@ export const updateNotificationService = async (data, cb) => {
     await _updateData(`${apiHost}/notification/services/${data.id}/`, data, cb);
   } else {
     await addNotificationService(data, cb);
-  };
+  }
 };
 
 export const deleteNotificationService = async (service_id, cb) => {
@@ -514,7 +513,7 @@ export const fetchNotificationMessages = async (message_id, cb) => {
   let url = `${apiHost}/notification/messages/`;
   if (message_id) {
     url += `${message_id}/`;
-  };
+  }
   await _getData(url, cb);
 };
 
@@ -528,7 +527,7 @@ export const updateNotificationMessage = async (data, cb) => {
     await _updateData(`${apiHost}/notification/messages/${data.id}/`, data, cb);
   } else {
     await addNotificationMessage(data, cb);
-  };
+  }
 };
 
 export const deleteNotificationMessage = async (message_id, cb) => {
