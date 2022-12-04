@@ -25,8 +25,8 @@ export function pushRoute(route) {
           ? [route, ...history.slice(current.location === route.location && 1 || 0)]
           : [route, ...history]
       };
-  })
-}
+  });
+};
 
 export function popRoute() {
   let newRoute;
@@ -44,6 +44,6 @@ export function popRoute() {
   })
 
   return newRoute;
-}
+};
 
 export default routeHistory;

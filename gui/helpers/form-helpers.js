@@ -40,7 +40,7 @@ export const formToJSON = (form) => {
     }
   }
   return rv;
-}
+};
 
 export const invalid_form_fields = (form) => {
   let fields = [];
@@ -48,4 +48,4 @@ export const invalid_form_fields = (form) => {
     fields.push(form.querySelector('label[for="' + item.id + '"]').textContent.replace('*', ''));
   });
   return fields;
-}
+};

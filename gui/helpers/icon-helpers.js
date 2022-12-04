@@ -49,7 +49,7 @@ export const template_sensor_type_color = (type) => {
     case 'audio':
       return 'text-success';
   }
-}
+};
 
 export const template_sensor_type_icon = (type) => {
   switch (type) {
@@ -162,7 +162,7 @@ export const template_sensor_type_icon = (type) => {
     case 'remote':
       return 'fas fa-wifi';
   }
-}
+};
 
 export const get_weather_icon = (weather_type, is_day) => {
   // https://openweathermap.org/weather-conditions
@@ -182,7 +182,7 @@ export const get_weather_icon = (weather_type, is_day) => {
   }
 
   return 'img/weather_icons/' + 'climacon-' + weather_icons[weather_type] + '.svg';
-}
+};
 
 export const setFavicon = (url) => {
   const headTitle = document.querySelector('head');
@@ -191,4 +191,4 @@ export const setFavicon = (url) => {
   setFavicon.setAttribute('type', 'image/x-icon');
   setFavicon.setAttribute('href', url);
   headTitle.appendChild(setFavicon);
-}
+};

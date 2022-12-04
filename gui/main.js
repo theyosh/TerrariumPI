@@ -27,6 +27,6 @@ window.addEventListener('error', (event) => {
   });
 
   window.dispatchEvent(new Event('resize'));
-})
+});
 
 export default app;

@@ -64,7 +64,7 @@ const _reConnect = () => {
   try {
     websocket.set({ type: 'client_init', reconnect: true });
   } catch (e) {
-    setTimeout(() => { _reConnect() }, 30 * 1000);
+    setTimeout(() => { _reConnect(); }, 30 * 1000);
   }
 };
 

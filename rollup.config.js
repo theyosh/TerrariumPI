@@ -34,7 +34,7 @@ function serve() {
       process.on("exit", toExit);
     }
   }
-}
+};
 
 export default {
   input: "gui/main.js",

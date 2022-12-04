@@ -110,7 +110,7 @@ const langs = [
   }
 ];
 
-export { locale, locales, langs }
+export { locale, locales, langs };
 export const languages = langs;
 export const currencies = [...new Set([...[].concat(...langs.map(language => language.currency))])];
 export const currency = writable(settings.currency);
@@ -118,7 +118,7 @@ export const currency = writable(settings.currency);
 export const saveLanguageFile = (json, lang) => {
   addMessages(lang, json);
   localStorage.setItem(lang + '-locale', JSON.stringify(json));
-}
+};
 
 export const deleteSaveLocals = () => {
   let keys, i;
@@ -131,13 +131,13 @@ export const deleteSaveLocals = () => {
     }
   }
   location.reload();
-}
+};
 
 export const changeLang = (lang) => {
   if (languages.find((x) => x.code === lang)) {
     locale.set(lang);
   }
-}
+};
 
 const initialize = () => {
   langs.forEach((lang) => {
@@ -155,6 +155,6 @@ const initialize = () => {
     initialLocale: settings.language || localStorage.getItem('language') || getLocaleFromNavigator()
   });
   changeLang(settings.language);
-}
+};
 
 initialize();

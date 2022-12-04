@@ -2,16 +2,16 @@ import { dayjs } from "svelte-time";
 import { get } from 'svelte/store';
 import { _ } from 'svelte-i18n';
 import duration from "dayjs/esm/plugin/duration";
-dayjs.extend(duration)
+dayjs.extend(duration);
 
 export const roundToPrecision = (number, precision = 2) => {
   const coefficient = Math.pow(10, precision);
   return Math.round((number + Number.EPSILON) * coefficient) / coefficient;
-}
+};
 
 export const average = (numbers) => {
   return numbers.reduce((a, b) => (a + b)) / numbers.length;
-}
+};
 
 export const uptime_format = (duration) => {
   duration = duration || 0;
@@ -28,7 +28,7 @@ export const uptime_format = (duration) => {
     }
   }
   return uptime_text.join(', ');
-}
+};
 
 /*
     Simple compare. Assumes single-dimension arrays.
@@ -47,4 +47,4 @@ export const arrIdentical = (a1, a2) => {
     if (a1[i] !== a2[i]) return false;
   }
   return true;
-}
+};

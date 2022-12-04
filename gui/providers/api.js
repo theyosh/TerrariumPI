@@ -19,7 +19,7 @@ const headers = (extra_headers) => {
   }
 
   return headers;
-}
+};
 
 export const apiLogin = async (username, password) => {
   return await fetch(`${ApiUrl}/login/`, {
@@ -38,7 +38,7 @@ export const apiLogin = async (username, password) => {
     .catch(() => {
       return false;
     });
-}
+};
 
 const __processData = async (type, url, data, cb, extra_headers) => {
 
@@ -81,7 +81,7 @@ const __processData = async (type, url, data, cb, extra_headers) => {
     data = result.data ? result.data : result;
     cb(data);
   }
-}
+};
 
 // API Helpers
 const _getData = async (url, cb, extra_headers) => {
@@ -117,7 +117,7 @@ export const uploadFile = async (file) => {
   });
 
   return filename;
-}
+};
 // End Upload helpers
 
 
@@ -415,7 +415,7 @@ export const updateArea = async (data, cb) => {
 
 export const deleteArea = async (playlist, cb) => {
   await _deleteData(`${apiHost}/areas/${playlist}/`, cb);
-}
+};
 // End Area API
 
 
@@ -520,7 +520,7 @@ export const fetchNotificationMessages = async (message_id, cb) => {
 export const addNotificationMessage = async (data, cb) => {
   delete (data.id);
   await _postData(`${apiHost}/notification/messages/`, data, cb);
-}
+};
 
 export const updateNotificationMessage = async (data, cb) => {
   if (data.id) {

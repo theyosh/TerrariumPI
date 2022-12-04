@@ -18,7 +18,7 @@ export const fireworks = () => {
   } else if (fireworksCanvas) {
     fireworksCanvas.remove();
   }
-}
+};
 
 export const christmas = () => {
   const today = new Date();
@@ -30,4 +30,4 @@ export const christmas = () => {
   } else {
     hat.classList.add('d-none');
   }
-}
+};

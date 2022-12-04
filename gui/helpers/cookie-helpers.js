@@ -6,4 +6,4 @@ export const getCookie = (key) => {
       return cookie[1].replace(/^"+/, '').replace(/"+$/, '');
     }
   }
-}
+};

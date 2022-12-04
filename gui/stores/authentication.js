@@ -10,7 +10,7 @@ export const credentials = writable(null);
 export const showLogin = () => {
   // Show modal
   get(loginModal).show();
-}
+};
 
 export const doLogin = async (username, password) => {
   // Call to login API and check result
@@ -30,13 +30,13 @@ export const doLogin = async (username, password) => {
     }, 1000);
   }
   return login;
-}
+};
 
 export const doLogout = () => {
   // Delete all cookies....
   document.cookie.split(';').forEach(function (c) {
     document.cookie = c.trim().split('=')[0] + '=;' + 'expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-  })
+  });
 
   websocket.set({ type: 'client_init', auth: '' });
   credentials.set({});
@@ -45,4 +45,4 @@ export const doLogout = () => {
   setTimeout(function () {
     isAuthenticated.set(false);
   }, 500);
-}
+};

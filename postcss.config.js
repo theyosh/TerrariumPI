@@ -1,4 +1,4 @@
-const production = process.env.MIX_ENV === "prod"
+const production = process.env.MIX_ENV === "prod";
 
 module.exports = {
   plugins: [
@@ -6,4 +6,4 @@ module.exports = {
     require("autoprefixer"),
     production ? require("cssnano") : false
   ]
-}
+};

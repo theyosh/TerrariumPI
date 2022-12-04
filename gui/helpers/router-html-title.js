@@ -6,4 +6,4 @@ export const setHtmlTitle = (newTitle, absolute = false) => {
   document.title = absolute
     ? newTitle
     : (newTitle && `${newTitle} - ${settings.name} - ${settings.version}` || BaseHtmlTitle)
-}
+};

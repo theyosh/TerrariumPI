@@ -19,16 +19,16 @@ export const fileSizeToString = (fileSize) => {
     unit: Units[unitCount],
     value: roundToPrecision(fileSize / divider)
   }
-}
+};
 
 export const formatBytes = (fileSize) => {
   let data = fileSizeToString(fileSize);
   return data.value + ' ' + data.unit;
-}
+};
 
 export const toMegabytes = (fileSize) => {
   if (!fileSize || isNaN(fileSize))
     return "";
 
   return roundToPrecision((fileSize / 1_000_000));
-}
+};

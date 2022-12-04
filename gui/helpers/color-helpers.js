@@ -17,7 +17,7 @@ export const get_template_color = (classname, transparency, hexformat) => {
     color = '#' + hex(color[1]) + hex(color[2]) + hex(color[3]);
   }
   return color;
-}
+};
 
 export const autoDarkmode = (isDark) => {
   const body = document.querySelector('body');
@@ -26,4 +26,4 @@ export const autoDarkmode = (isDark) => {
   } else if (!isDark && body.classList.contains('dark-mode')) {
     body.classList.remove('dark-mode');
   }
-}
+};

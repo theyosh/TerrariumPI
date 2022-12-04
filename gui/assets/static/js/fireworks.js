@@ -13,7 +13,7 @@ window.requestAnimFrame = (function () {
 })();
 
 // now we will setup our basic variables for the demo
-var canvas = document.getElementById('fireworks')
+var canvas = document.getElementById('fireworks');
 ctx = canvas.getContext('2d');
 
 // Set dimension based on the canvas size after css styling
@@ -117,7 +117,7 @@ Firework.prototype.update = function (index) {
     this.x += vx;
     this.y += vy;
   }
-}
+};
 
 // draw firework
 Firework.prototype.draw = function () {
@@ -132,7 +132,7 @@ Firework.prototype.draw = function () {
   // draw the target for this firework with a pulsing circle
   ctx.arc(this.tx, this.ty, this.targetRadius, 0, Math.PI * 2);
   ctx.stroke();
-}
+};
 
 // create particle
 function Particle(x, y) {
@@ -177,7 +177,7 @@ Particle.prototype.update = function (index) {
   if (this.alpha <= this.decay) {
     particles.splice(index, 1);
   }
-}
+};
 
 // draw particle
 Particle.prototype.draw = function () {
@@ -187,7 +187,7 @@ Particle.prototype.draw = function () {
   ctx.lineTo(this.x, this.y);
   ctx.strokeStyle = 'hsla(' + this.hue + ', 100%, ' + this.brightness + '%, ' + this.alpha + ')';
   ctx.stroke();
-}
+};
 
 // create particle group/explosion
 function createParticles(x, y) {

@@ -11,19 +11,19 @@ export const getRandomString = (length) => {
     randomNumbers.push(_getRandomCharCode());
 
   return String.fromCharCode(...randomNumbers);
-}
+};
 
 export const capitalize = ([first, ...rest]) => {
   return first.toLocaleUpperCase() + rest.join('');
-}
+};
 
 export const removeDiacritics = (str) => {
   return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-}
+};
 
 export const capitalizeFirstLetter = (string) => {
   return string[0].toUpperCase() + string.slice(1);
-}
+};
 
 // https://stackoverflow.com/a/6680877
 export const removeAllTrailingChars = (str, char = '/') => {
@@ -33,7 +33,7 @@ export const removeAllTrailingChars = (str, char = '/') => {
     /* empty */
   }
   return str.slice(0, i + 1);
-}
+};
 
 // https://stackoverflow.com/a/12042044
 export const externalLinks = (content) => {
@@ -45,22 +45,22 @@ export const externalLinks = (content) => {
     }
   }
   return container.innerHTML;
-}
+};
 
 export const nl2br = (text) => {
   return text.replace(/\n/g, '<br />');
-}
+};
 
 export const languageFlag = (language) => {
   let flag = language.slice(-2);
 
   switch (flag) {
     case 'ja':
-      flag = 'jp'
+      flag = 'jp';
       break;
     case 'ca':
-      flag = 'es'
+      flag = 'es';
       break;
   }
   return countryCodeEmoji(flag);
-}
+};

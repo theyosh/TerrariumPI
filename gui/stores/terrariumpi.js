@@ -66,7 +66,7 @@ export const updateButton = (button) => {
   }
 
   buttons.set(loaded_buttons);
-}
+};
 
 export const updateRelay = (relay) => {
   if (!relay) return;
@@ -80,7 +80,7 @@ export const updateRelay = (relay) => {
   loaded_relays[relay.id].last_update = new Date();
 
   relays.set(loaded_relays);
-}
+};
 
 export const doors = derived(
   buttons,
@@ -96,7 +96,7 @@ export const doors = derived(
     })
     return { closed: Object.values(doors).every(door => door.closed), doors: doors, enclosures: enclosures };
   }
-)
+);
 
 export const isDarkInterface = derived(
   isDay,
@@ -105,7 +105,7 @@ export const isDarkInterface = derived(
     const isDark = settings.auto_dark_mode && !$isDay;
     return isDark;
   }
-)
+);
 
 export const updateSensor = (gauge) => {
   if (!gauge) return;
@@ -123,7 +123,7 @@ export const updateSensor = (gauge) => {
   loaded_gauges[gauge.id].last_update = new Date();
 
   sensors.set(loaded_gauges);
-}
+};
 
 systemLoad.subscribe(store => {
   let known_gauges = get(sensors);
@@ -132,7 +132,7 @@ systemLoad.subscribe(store => {
     known_gauges.system_load.changed = true;
     sensors.set(known_gauges);
   }
-})
+});
 
 systemCPUTemp.subscribe(store => {
   let known_gauges = get(sensors);
@@ -141,7 +141,7 @@ systemCPUTemp.subscribe(store => {
     known_gauges.cpu_temp.changed = true;
     sensors.set(known_gauges);
   }
-})
+});
 
 systemMemory.subscribe(store => {
   let known_gauges = get(sensors);
@@ -150,7 +150,7 @@ systemMemory.subscribe(store => {
     known_gauges.memory.changed = true;
     sensors.set(known_gauges);
   }
-})
+});
 
 systemDisk.subscribe(store => {
   let known_gauges = get(sensors);
@@ -159,4 +159,4 @@ systemDisk.subscribe(store => {
     known_gauges.disk.changed = true;
     sensors.set(known_gauges);
   }
-})
+});

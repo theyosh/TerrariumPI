@@ -23,7 +23,7 @@ export const animate_footer_badge = (type, number) => {
       opacity: (number < 10 ? number : 10) / 10
     }, 150);
   });
-}
+};
 
 let hourGlassTimer = null;
 export const animateHourglass = () => {
@@ -40,4 +40,4 @@ export const animateHourglass = () => {
       icon.removeClass(clearClasses).addClass('fa-hourglass-end');
     }, 14 * 1000);
   }, 14 * 1000);
-}
+};

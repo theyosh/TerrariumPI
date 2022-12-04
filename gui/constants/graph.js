@@ -154,7 +154,7 @@ export const graphDefaultOpts = {
       }
     }
   }
-}
+};
 
 export const graphTypes = {
   alarm_min: {
@@ -221,4 +221,4 @@ export const graphTypes = {
       background: get_template_color('text-success', 0.7),
     }
   },
-}
+};
