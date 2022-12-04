@@ -2,20 +2,20 @@ export const template_sensor_type_color = (type) => {
   switch (type) {
     case 'temperature':
     case 'heating':
-      return 'text-danger'
+      return 'text-danger';
 
     case 'humidity':
-      return 'text-info'
+      return 'text-info';
 
     case 'cooling':
     case 'watertank':
-      return 'text-primary'
+      return 'text-primary';
 
     case 'moisture':
-      return 'text-info'
+      return 'text-info';
 
     case 'distance':
-      return 'fa-signal'
+      return 'fa-signal';
 
     case 'light':
     case 'lights':
@@ -24,143 +24,143 @@ export const template_sensor_type_color = (type) => {
     case 'uva':
     case 'uvb':
     case 'ldr':
-      return 'text-warning'
+      return 'text-warning';
 
     case 'ph':
-      return 'fa-flask'
+      return 'fa-flask';
 
     case 'fertility':
     case 'conductivity':
-      return 'text-success'
+      return 'text-success';
 
     case 'co2':
     case 'altitude':
-      return 'text-secondary'
+      return 'text-secondary';
 
     case 'pressure':
-      return 'fa-cloud-upload-alt'
+      return 'fa-cloud-upload-alt';
 
     case 'magnetic':
-      return 'fa-lock'
+      return 'fa-lock';
 
     case 'motion':
-      return 'fa-walking'
+      return 'fa-walking';
 
     case 'audio':
-      return 'text-success'
+      return 'text-success';
   }
 }
 
 export const template_sensor_type_icon = (type) => {
   switch (type) {
     case 'temperature':
-      return 'fas fa-thermometer-half'
+      return 'fas fa-thermometer-half';
 
     case 'heating':
-      return 'fas fa-fire'
+      return 'fas fa-fire';
 
     case 'cooling':
-      return 'fas fa-fan'
+      return 'fas fa-fan';
 
     case 'humidity':
     case 'sensors':
-      return 'fas fa-tint'
+      return 'fas fa-tint';
 
     case 'moisture':
-      return 'fas fa-water'
+      return 'fas fa-water';
 
     case 'distance':
-      return 'fas fa-signal'
+      return 'fas fa-signal';
 
     case 'light':
     case 'lights':
     case 'main_lights':
-      return 'fas fa-lightbulb'
+      return 'fas fa-lightbulb';
 
     case 'main lights':
-      return 'fas fa-sun'
+      return 'fas fa-sun';
 
     case 'ph':
-      return 'fas fa-flask'
+      return 'fas fa-flask';
 
     case 'uvi':
-      return 'fas fa-sun'
+      return 'fas fa-sun';
 
     case 'uva':
-      return 'fas fa-adjust'
+      return 'fas fa-adjust';
 
     case 'uvb':
-      return 'fas fa-adjust fa-rotate-180'
+      return 'fas fa-adjust fa-rotate-180';
 
     case 'fertility':
     case 'conductivity':
-      return 'fas fa-seedling'
+      return 'fas fa-seedling';
 
     case 'co2':
-      return 'fas fa-wind'
+      return 'fas fa-wind';
 
     case 'altitude':
-      return 'fas fa-level-up-alt'
+      return 'fas fa-level-up-alt';
 
     case 'pressure':
-      return 'fas fa-cloud-upload-alt'
+      return 'fas fa-cloud-upload-alt';
 
     case 'magnetic':
-      return 'fas fa-lock'
+      return 'fas fa-lock';
 
     case 'ldr':
-      return 'fas fa-lightbulb'
+      return 'fas fa-lightbulb';
 
     case 'motion':
-      return 'fas fa-walking'
+      return 'fas fa-walking';
 
     case 'watertank':
-      return 'fas fa-faucet'
+      return 'fas fa-faucet';
 
     case 'audio':
-      return 'fas fa-headphones'
+      return 'fas fa-headphones';
 
     case 'display':
-      return 'fas fa-newspaper'
+      return 'fas fa-newspaper';
 
     case 'email':
-      return 'fas fa-at'
+      return 'fas fa-at';
 
     case 'mqtt':
-      return 'fas fa-bullhorn'
+      return 'fas fa-bullhorn';
 
     case 'pushover':
-      return 'fab fa-pinterest'
+      return 'fab fa-pinterest';
 
     case 'telegram':
-      return 'fab fa-telegram-plane'
+      return 'fab fa-telegram-plane';
 
     case 'traffic':
-      return 'fas fa-traffic-light'
+      return 'fas fa-traffic-light';
 
     case 'twitter':
-      return 'fab fa-twitter'
+      return 'fab fa-twitter';
 
     case 'buzzer':
-      return 'fas fa-music'
+      return 'fas fa-music';
 
     case 'webhook':
-      return 'fas fa-cloud-upload-alt'
+      return 'fas fa-cloud-upload-alt';
 
     case 'weather':
-      return 'fas fa-cloud-sun'
+      return 'fas fa-cloud-sun';
 
     case 'timer':
-      return 'fas fa-clock'
+      return 'fas fa-clock';
 
     case 'disabled':
-      return 'fas fa-ban'
+      return 'fas fa-ban';
 
     case 'weather_inverse':
-      return 'fas fa-cloud-moon'
+      return 'fas fa-cloud-moon';
 
     case 'remote':
-      return 'fas fa-wifi'
+      return 'fas fa-wifi';
   }
 }
 

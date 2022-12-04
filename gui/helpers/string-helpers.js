@@ -2,7 +2,7 @@ import { countryCodeEmoji } from "country-code-emoji";
 
 const _getRandomCharCode = () => {
   return 65 + Math.round(Math.random() * 25);
-}
+};
 
 export const getRandomString = (length) => {
   let randomNumbers = [];
