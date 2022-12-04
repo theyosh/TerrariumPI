@@ -1,11 +1,12 @@
 
-import {get} from "svelte/store"
-import {get_template_color} from "../helpers/color-helpers"
-import {getCustomConfig} from "../config"
-import {locale} from "../locale/i18n"
-import {isDay} from "../stores/terrariumpi"
+import { get } from "svelte/store";
 
-const settings = getCustomConfig()
+import { get_template_color } from "../helpers/color-helpers";
+import { getCustomConfig } from "../config";
+import { locale } from "../locale/i18n";
+import { isDay } from "../stores/terrariumpi";
+
+const settings = getCustomConfig();
 
 export const graphDefaultOpts = {
 
@@ -13,7 +14,7 @@ export const graphDefaultOpts = {
   pointRadius: false,
   scales: {
     x: {
-      adapters : {
+      adapters: {
         date: {
           locale: get(locale),
         }
@@ -27,8 +28,8 @@ export const graphDefaultOpts = {
         unit: 'minute',
       },
       ticks: {
-        color: function() {
-          return get(isDay) ? '#6c757d' : '#adb5bd'
+        color: function () {
+          return get(isDay) ? '#6c757d' : '#adb5bd';
         },
       }
     },
@@ -36,20 +37,20 @@ export const graphDefaultOpts = {
       position: 'left',
       display: true,
       min: 0,
-      gridLines : {
-        display : true,
+      gridLines: {
+        display: true,
       },
       ticks: {
-        color: function() {
-          return get(isDay) ? '#6c757d' : '#adb5bd'
+        color: function () {
+          return get(isDay) ? '#6c757d' : '#adb5bd';
         },
-        callback : function(value, index, ticks) {
-          let unit = null
+        callback: function (value, index, ticks) {
+          let unit = null;
           this.chart.config._config.data.datasets.forEach(dataset => {
             if (dataset.yAxisID == this.id) {
-              unit = dataset.graphType
-            }
-          })
+              unit = dataset.graphType;
+            };
+          });
           switch (unit) {
             case 'magnetic':
               return (value === 0 ? 'closed' : 'open');
@@ -64,8 +65,8 @@ export const graphDefaultOpts = {
               return (value === 0 ? 'off' : 'on');
 
             default:
-              return value + ' ' + (unit != null ? settings.units[unit].value : '')
-          }
+              return value + ' ' + (unit != null ? settings.units[unit].value : '');
+          };
         }
       }
     },
@@ -73,20 +74,20 @@ export const graphDefaultOpts = {
       position: 'right',
       display: false,
       min: 0,
-      gridLines : {
-        display : false,
+      gridLines: {
+        display: false,
       },
       ticks: {
-        color: function() {
-          return get(isDay) ? '#6c757d' : '#adb5bd'
+        color: function () {
+          return get(isDay) ? '#6c757d' : '#adb5bd';
         },
-        callback : function(value, index, ticks) {
-          let unit = null
+        callback: function (value, index, ticks) {
+          let unit = null;
           this.chart.config._config.data.datasets.forEach(dataset => {
             if (dataset.yAxisID == this.id) {
-              unit = dataset.graphType
-            }
-          })
+              unit = dataset.graphType;
+            };
+          });
           switch (unit) {
             case 'magnetic':
               return (value === 0 ? 'closed' : 'open');
@@ -101,8 +102,8 @@ export const graphDefaultOpts = {
               return (value === 0 ? 'off' : 'off');
 
             default:
-              return value + ' ' + (unit != null ? settings.units[unit].value : '')
-          }
+              return value + ' ' + (unit != null ? settings.units[unit].value : '');
+          };
         }
       }
     },
@@ -112,112 +113,112 @@ export const graphDefaultOpts = {
   },
   plugins: {
     legend: {
-      display: function(context) {
-        return context.chart.legend.legendItems.length > 1
+      display: function (context) {
+        return context.chart.legend.legendItems.length > 1;
       },
       labels: {
-        color: function() {
-          return get(isDay) ? '#6c757d' : '#adb5bd'
+        color: function () {
+          return get(isDay) ? '#6c757d' : '#adb5bd';
         },
       }
     },
     tooltip: {
       callbacks: {
-        label: function(context) {
+        label: function (context) {
           let label = context.dataset.label || '';
           if (label != '') {
-              label = ` ${label}: `;
-          }
+            label = ` ${label}: `;
+          };
           switch (context.dataset.graphType) {
             case 'magnetic':
               label += (context.parsed.y === 0 ? 'closed' : 'open');
-              break
+              break;
 
             case 'ldr':
               label += (context.parsed.y === 0 ? 'dark' : 'light');
-              break
+              break;
 
             case 'motion':
               label += (context.parsed.y === 0 ? 'still' : 'motion');
-              break
+              break;
 
             case 'remote':
               label += (context.parsed.y === 0 ? 'off' : 'on');
-              break
+              break;
 
             default:
-              label += context.formattedValue + ' ' + (settings.units[context.dataset.graphType] ? settings.units[context.dataset.graphType].value : '')
-          }
-          return label
+              label += context.formattedValue + ' ' + (settings.units[context.dataset.graphType] ? settings.units[context.dataset.graphType].value : '');
+          };
+          return label;
         }
       }
     }
   }
-}
+};
 
 export const graphTypes = {
-  alarm_min : {
+  alarm_min: {
     label: 'graph.alarm.min',
     colors: {
       line: get_template_color('text-info'),
-      background: get_template_color('text-info',0.7),
+      background: get_template_color('text-info', 0.7),
     }
   },
-  alarm_max : {
+  alarm_max: {
     label: 'graph.alarm.max',
     colors: {
       line: get_template_color('text-danger'),
-      background: get_template_color('text-danger',0.7),
+      background: get_template_color('text-danger', 0.7),
     }
   },
-  value : {
+  value: {
     label: 'graph.current',
     colors: {
       line: get_template_color('text-success'),
-      background: get_template_color('text-success',0.7),
+      background: get_template_color('text-success', 0.7),
     }
   },
-  wattage : {
+  wattage: {
     label: 'graph.wattage',
     colors: {
       line: get_template_color('text-success'),
-      background: get_template_color('text-success',0.7),
+      background: get_template_color('text-success', 0.7),
     }
   },
-  flow : {
+  flow: {
     label: 'graph.flow',
     colors: {
       line: get_template_color('text-info'),
-      background: get_template_color('text-info',0.7),
+      background: get_template_color('text-info', 0.7),
     }
   },
 
-  magnetic : {
+  magnetic: {
     label: 'graph.magnetic',
     colors: {
       line: get_template_color('text-success'),
-      background: get_template_color('text-success',0.7),
+      background: get_template_color('text-success', 0.7),
     }
   },
-  ldr : {
+  ldr: {
     label: 'graph.ldr',
     colors: {
       line: get_template_color('text-success'),
-      background: get_template_color('text-success',0.7),
+      background: get_template_color('text-success', 0.7),
     }
   },
-  motion : {
+  motion: {
     label: 'graph.motion',
     colors: {
       line: get_template_color('text-success'),
-      background: get_template_color('text-success',0.7),
+      background: get_template_color('text-success', 0.7),
     }
   },
-  remote : {
+  remote: {
     label: 'graph.remote',
     colors: {
       line: get_template_color('text-success'),
-      background: get_template_color('text-success',0.7),
+      background: get_template_color('text-success', 0.7),
     }
   },
-}
+};

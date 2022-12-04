@@ -5,7 +5,7 @@ import { default as currentUserStore } from './stores/current-user';
 const custom = {
   ContactEmail: 'tp@theyosh.nl',
   logged_in: false,
-}
+};
 
 export const getCustomConfig = (extra) => {
   extra = extra || {};
@@ -14,13 +14,13 @@ export const getCustomConfig = (extra) => {
     ...window.terrariumPI,
     ...getConfig(),
     ...extra
-  }
+  };
   setConfig(settings);
 
   if (settings.logged_in && settings.username) {
     isAuthenticated.set(true);
     currentUserStore.set(settings.username);
-  }
+  };
 
   return getConfig();
-}
+};

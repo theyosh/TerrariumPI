@@ -1,29 +1,30 @@
-import { get } from "svelte/store"
-import { customPageTitleUsed, pageTitle } from "../stores/page-title"
-import { getCustomConfig } from "../config"
-import { template_sensor_type_icon } from "../helpers/icon-helpers"
+import { get } from "svelte/store";
 
-import Home from "./Home.svelte"
-import Dashboard from "./Dashboard.svelte"
-import Weather from "./Weather.svelte"
-import Calendar from "./Calendar.svelte"
-import Sensors from "./Sensors.svelte"
-import Relays from "./Relays.svelte"
-import Buttons from "./Buttons.svelte"
-import Webcams from "./Webcams.svelte"
-import AudioFiles from "./Audiofiles.svelte"
-import Playlists from "./Playlists.svelte"
-import Enclosures from "./Enclosures.svelte"
-import Status from "./Status.svelte"
-import Settings from "./Settings.svelte"
-import Log from "./Log.svelte"
-import Notifications from "./Notifications.svelte"
-import About from "./About.svelte"
+import { customPageTitleUsed, pageTitle } from "../stores/page-title";
+import { getCustomConfig } from "../config";
+import { template_sensor_type_icon } from "../helpers/icon-helpers";
 
-import NotFound from "./NotFound.svelte"
-import Error from "./Error.svelte"
+import Home from "./Home.svelte";
+import Dashboard from "./Dashboard.svelte";
+import Weather from "./Weather.svelte";
+import Calendar from "./Calendar.svelte";
+import Sensors from "./Sensors.svelte";
+import Relays from "./Relays.svelte";
+import Buttons from "./Buttons.svelte";
+import Webcams from "./Webcams.svelte";
+import AudioFiles from "./Audiofiles.svelte";
+import Playlists from "./Playlists.svelte";
+import Enclosures from "./Enclosures.svelte";
+import Status from "./Status.svelte";
+import Settings from "./Settings.svelte";
+import Log from "./Log.svelte";
+import Notifications from "./Notifications.svelte";
+import About from "./About.svelte";
 
-const settings = getCustomConfig()
+import NotFound from "./NotFound.svelte";
+import Error from "./Error.svelte";
+
+const settings = getCustomConfig();
 
 export const Pages = [
   {
@@ -92,7 +93,7 @@ export const Pages = [
         breadcrumb: ["Home", "Sensors"],
         icon: 'fas ' + template_sensor_type_icon(sensor_type),
         hide: false
-      }
+      };
     }), ...[{
       name: 'new_sensor',
       title: 'sensors.menu.new.title',
@@ -336,19 +337,19 @@ export const Pages = [
       }
     ]
   }
-]
+];
 
 export const PageUrls = Pages.reduce((acc, x) => {
-  acc[x.name] = x.url
+  acc[x.name] = x.url;
   if (x.subroutes) {
     // Recursive....
     acc = x.subroutes.reduce((bcc, y) => {
-      bcc[y.name] = y.url
-      return bcc
-    }, acc)
-  }
-  return acc
-}, {})
+      bcc[y.name] = y.url;
+      return bcc;
+    }, acc);
+  };
+  return acc;
+}, {});
 
 export const fillParams = (pageUrl, params) => {
   return Object
@@ -356,28 +357,28 @@ export const fillParams = (pageUrl, params) => {
     .reduce(
       (acc, key) => acc.replace(`:${key}`, params[key]),
       pageUrl
-    )
-}
+    );
+};
 
 export const pageUrlToRegex = (pageUrl) => {
-  return "^" + pageUrl.replace(/\/:\w+(\??)/, "/?([\\w\\-d]+)$1") + "$"
-}
+  return "^" + pageUrl.replace(/\/:\w+(\??)/, "/?([\\w\\-d]+)$1") + "$";
+};
 
 export const getPage = (name) => {
-  return Pages.find((o) => o.name === name)
-}
+  return Pages.find((o) => o.name === name);
+};
 
 export const onRouteLoaded = async (route) => {
-  const page = Pages.find(x => x.url === route.route)
+  const page = Pages.find(x => x.url === route.route);
 
   if (!page || get(customPageTitleUsed))
-    return
+    return;
 
   pageTitle.set(typeof page.title === "function"
     ? await page.title()
     : page.title
-  )
-}
+  );
+};
 
 export default {
   [PageUrls.Home]: Home,
@@ -402,4 +403,4 @@ export default {
   [PageUrls.Error]: Error,
   // The catch-all route must always be last
   "*": NotFound
-}
+};

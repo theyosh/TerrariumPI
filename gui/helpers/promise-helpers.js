@@ -1,1 +1,1 @@
-export const emptyPromise = new Promise(() => {})
+export const emptyPromise = new Promise(() => { });

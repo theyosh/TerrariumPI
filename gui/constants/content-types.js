@@ -1,1 +1,1 @@
-export const Json = "application/json"
+export const Json = "application/json";

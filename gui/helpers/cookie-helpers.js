@@ -1,9 +1,9 @@
 export const getCookie = (key) => {
-  let cookies = document.cookie.split(';')
+  let cookies = document.cookie.split(';');
   for (let cookie of cookies) {
-    cookie = cookie.split(/=(.*)/s)
+    cookie = cookie.split(/=(.*)/s);
     if (cookie[0] == key) {
-      return cookie[1].replace(/^"+/, '').replace(/"+$/, '')
-    }
-  }
-}
+      return cookie[1].replace(/^"+/, '').replace(/"+$/, '');
+    };
+  };
+};

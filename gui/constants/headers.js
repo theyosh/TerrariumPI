@@ -1,3 +1,3 @@
-export const ContentType = "Content-Type"
+export const ContentType = "Content-Type";
 
-export const Authorization = "Authorization"
+export const Authorization = "Authorization";
