@@ -5,14 +5,14 @@ export const animate_footer_badge = (type, number) => {
   const animation_badge = jQuery(`footer .badge.badge-${type}`);
   if (animation_badge.length === 0) {
     return;
-  };
+  }
 
   if ('success' != type) {
     number = animation_badge.text().trim();
     number = (number != '' ? number : 0);
     number++;
     animation_badge.text(number);
-  };
+  }
 
   animation_badge.stop(true);
   animation_badge.animate({
@@ -23,7 +23,7 @@ export const animate_footer_badge = (type, number) => {
       opacity: (number < 10 ? number : 10) / 10
     }, 150);
   });
-};
+}
 
 let hourGlassTimer = null;
 export const animateHourglass = () => {
@@ -31,7 +31,7 @@ export const animateHourglass = () => {
   const icon = jQuery('i.hourglass-animation');
   if (icon.length === 0) {
     return;
-  };
+  }
   const clearClasses = 'fa-hourglass-half fa-hourglass-end animate';
   icon.removeClass(clearClasses).addClass('fa-hourglass-end animate');
   hourGlassTimer = setTimeout(() => {
@@ -40,4 +40,4 @@ export const animateHourglass = () => {
       icon.removeClass(clearClasses).addClass('fa-hourglass-end');
     }, 14 * 1000);
   }, 14 * 1000);
-};
+}

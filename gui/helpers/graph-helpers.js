@@ -12,9 +12,9 @@ export const smoothing = (array, countBefore, countAfter) => {
     const subArr = array.slice(Math.max(i - countBefore, 0), Math.min(i + countAfter + 1, array.length));
     const avg = subArr.reduce((a, b) => a + (isNaN(b) ? 0 : b), 0) / subArr.length;
     result.push(avg);
-  };
+  }
   return result;
-};
+}
 
 export const toggleGraphPeriod = (graph, period) => {
   period = period || 'day';
@@ -23,7 +23,7 @@ export const toggleGraphPeriod = (graph, period) => {
   store[graph].period = period;
   store[graph].changed = true;
   graphs.set(store);
-};
+}
 
 export const exportGraphPeriod = async (type, graph) => {
   const store = get(graphs);
@@ -36,4 +36,4 @@ export const exportGraphPeriod = async (type, graph) => {
   link.href = window.URL.createObjectURL(new Blob([export_data]));
   link.download = filename;
   link.click();
-};
+}

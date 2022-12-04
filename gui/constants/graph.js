@@ -49,7 +49,7 @@ export const graphDefaultOpts = {
           this.chart.config._config.data.datasets.forEach(dataset => {
             if (dataset.yAxisID == this.id) {
               unit = dataset.graphType;
-            };
+            }
           });
           switch (unit) {
             case 'magnetic':
@@ -66,7 +66,7 @@ export const graphDefaultOpts = {
 
             default:
               return value + ' ' + (unit != null ? settings.units[unit].value : '');
-          };
+          }
         }
       }
     },
@@ -86,7 +86,7 @@ export const graphDefaultOpts = {
           this.chart.config._config.data.datasets.forEach(dataset => {
             if (dataset.yAxisID == this.id) {
               unit = dataset.graphType;
-            };
+            }
           });
           switch (unit) {
             case 'magnetic':
@@ -103,7 +103,7 @@ export const graphDefaultOpts = {
 
             default:
               return value + ' ' + (unit != null ? settings.units[unit].value : '');
-          };
+          }
         }
       }
     },
@@ -128,7 +128,7 @@ export const graphDefaultOpts = {
           let label = context.dataset.label || '';
           if (label != '') {
             label = ` ${label}: `;
-          };
+          }
           switch (context.dataset.graphType) {
             case 'magnetic':
               label += (context.parsed.y === 0 ? 'closed' : 'open');
@@ -148,13 +148,13 @@ export const graphDefaultOpts = {
 
             default:
               label += context.formattedValue + ' ' + (settings.units[context.dataset.graphType] ? settings.units[context.dataset.graphType].value : '');
-          };
+          }
           return label;
         }
       }
     }
   }
-};
+}
 
 export const graphTypes = {
   alarm_min: {
@@ -221,4 +221,4 @@ export const graphTypes = {
       background: get_template_color('text-success', 0.7),
     }
   },
-};
+}

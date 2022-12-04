@@ -358,15 +358,15 @@ export const fillParams = (pageUrl, params) => {
       (acc, key) => acc.replace(`:${key}`, params[key]),
       pageUrl
     );
-};
+}
 
 export const pageUrlToRegex = (pageUrl) => {
   return "^" + pageUrl.replace(/\/:\w+(\??)/, "/?([\\w\\-d]+)$1") + "$";
-};
+}
 
 export const getPage = (name) => {
   return Pages.find((o) => o.name === name);
-};
+}
 
 export const onRouteLoaded = async (route) => {
   const page = Pages.find(x => x.url === route.route);
@@ -378,7 +378,7 @@ export const onRouteLoaded = async (route) => {
     ? await page.title()
     : page.title
   );
-};
+}
 
 export default {
   [PageUrls.Home]: Home,
@@ -403,4 +403,4 @@ export default {
   [PageUrls.Error]: Error,
   // The catch-all route must always be last
   "*": NotFound
-};
+}

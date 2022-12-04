@@ -4,6 +4,6 @@ export const getCookie = (key) => {
     cookie = cookie.split(/=(.*)/s);
     if (cookie[0] == key) {
       return cookie[1].replace(/^"+/, '').replace(/"+$/, '');
-    };
-  };
-};
+    }
+  }
+}

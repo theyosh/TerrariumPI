@@ -17,12 +17,12 @@ export default function lazyLoader(resourceTask, showLoader, hideLoader) {
         clearTimeout(beforeShowTimer);
         hideLoader();
         return res;
-      };
+      }
 
       if (new Date() - loaderShowed > leaveLoaderFor) {
         hideLoader();
         return res;
-      };
+      }
 
       // this leaves the loader showed for additional time
       return new Promise(resolve => {
@@ -36,4 +36,4 @@ export default function lazyLoader(resourceTask, showLoader, hideLoader) {
       hideLoader();
       throw err;
     });
-};
+}

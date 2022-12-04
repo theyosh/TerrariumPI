@@ -13,22 +13,22 @@ export const fileSizeToString = (fileSize) => {
   while (fileSize / divider >= 1000) {
     divider *= 1000;
     unitCount++;
-  };
+  }
 
   return {
     unit: Units[unitCount],
     value: roundToPrecision(fileSize / divider)
-  };
-};
+  }
+}
 
 export const formatBytes = (fileSize) => {
   let data = fileSizeToString(fileSize);
   return data.value + ' ' + data.unit;
-};
+}
 
 export const toMegabytes = (fileSize) => {
   if (!fileSize || isNaN(fileSize))
     return "";
 
   return roundToPrecision((fileSize / 1_000_000));
-};
+}

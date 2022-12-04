@@ -20,7 +20,7 @@ export const getCustomConfig = (extra) => {
   if (settings.logged_in && settings.username) {
     isAuthenticated.set(true);
     currentUserStore.set(settings.username);
-  };
+  }
 
   return getConfig();
 };

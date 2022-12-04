@@ -17,7 +17,7 @@ export const stringifyFilters = (filters, newFilters, partial = false, mapper = 
     });
 
   return stringify(mappedFilters);
-};
+}
 
 export const parseQuerystringFilters = (querystring, parser = (x => x)) => {
   if (!querystring)
@@ -26,4 +26,4 @@ export const parseQuerystringFilters = (querystring, parser = (x => x)) => {
   const qsParsed = parse(querystring);
 
   return parser(qsParsed);
-};
+}

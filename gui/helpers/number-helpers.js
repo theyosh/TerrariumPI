@@ -7,11 +7,11 @@ dayjs.extend(duration)
 export const roundToPrecision = (number, precision = 2) => {
   const coefficient = Math.pow(10, precision);
   return Math.round((number + Number.EPSILON) * coefficient) / coefficient;
-};
+}
 
 export const average = (numbers) => {
   return numbers.reduce((a, b) => (a + b)) / numbers.length;
-};
+}
 
 export const uptime_format = (duration) => {
   duration = duration || 0;
@@ -22,13 +22,13 @@ export const uptime_format = (duration) => {
   for (const [key, value] of Object.entries(dur.$d)) {
     if (['milliseconds'].indexOf(key) != -1) {
       continue;
-    };
+    }
     if (value > 0 || uptime_text.length > 0 || 'seconds' == key) {
       uptime_text.push($_(`general.uptime_format.${key}`, { values: { number: Math.round(value) } }));
-    };
-  };
+    }
+  }
   return uptime_text.join(', ');
-};
+}
 
 /*
     Simple compare. Assumes single-dimension arrays.
@@ -45,6 +45,6 @@ export const arrIdentical = (a1, a2) => {
   a2.sort();
   while (i--) {
     if (a1[i] !== a2[i]) return false;
-  };
+  }
   return true;
-};
+}

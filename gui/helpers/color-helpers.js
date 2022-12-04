@@ -9,15 +9,15 @@ export const get_template_color = (classname, transparency, hexformat) => {
   if (transparency) {
     color = color.replace('rgb(', 'rgba(');
     color = color.replace(')', ',' + transparency + ')');
-  };
+  }
 
   if (hexformat) {
     const regex = /rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gm;
     color = regex.exec(color);
     color = '#' + hex(color[1]) + hex(color[2]) + hex(color[3]);
-  };
+  }
   return color;
-};
+}
 
 export const autoDarkmode = (isDark) => {
   const body = document.querySelector('body');
@@ -25,5 +25,5 @@ export const autoDarkmode = (isDark) => {
     body.classList.add('dark-mode');
   } else if (!isDark && body.classList.contains('dark-mode')) {
     body.classList.remove('dark-mode');
-  };
-};
+  }
+}

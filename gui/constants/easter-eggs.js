@@ -14,11 +14,11 @@ export const fireworks = () => {
       fireworksJS.setAttribute('type', 'text/javascript');
       fireworksJS.setAttribute('src', 'js/fireworks.js');
       document.querySelector('head').appendChild(fireworksJS);
-    };
+    }
   } else if (fireworksCanvas) {
     fireworksCanvas.remove();
-  };
-};
+  }
+}
 
 export const christmas = () => {
   const today = new Date();
@@ -29,5 +29,5 @@ export const christmas = () => {
     hat.classList.remove('d-none');
   } else {
     hat.classList.add('d-none');
-  };
-};
+  }
+}

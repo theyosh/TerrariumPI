@@ -16,10 +16,10 @@ const headers = (extra_headers) => {
   const creds = get(credentials);
   if (creds) {
     headers['Authorization'] = 'Basic ' + window.btoa(creds.username + ":" + creds.password);
-  };
+  }
 
   return headers;
-};
+}
 
 export const apiLogin = async (username, password) => {
   return await fetch(`${ApiUrl}/login/`, {
@@ -38,7 +38,7 @@ export const apiLogin = async (username, password) => {
     .catch(() => {
       return false;
     });
-};
+}
 
 const __processData = async (type, url, data, cb, extra_headers) => {
 
@@ -52,7 +52,7 @@ const __processData = async (type, url, data, cb, extra_headers) => {
     delete (postheaders['Content-Type']);
   } else if (['PUT', 'POST'].indexOf(type) != -1) {
     body = JSON.stringify(body);
-  };
+  }
 
   let response = await fetch(url, {
     method: type,
@@ -71,17 +71,17 @@ const __processData = async (type, url, data, cb, extra_headers) => {
     result = JSON.parse(result);
   } catch {
     // Not JSON content, so keep the text version
-  };
+  }
 
   if (response.status == 500) {
     throw new Error(result.message);
-  };
+  }
 
   if (cb) {
     data = result.data ? result.data : result;
     cb(data);
-  };
-};
+  }
+}
 
 // API Helpers
 const _getData = async (url, cb, extra_headers) => {

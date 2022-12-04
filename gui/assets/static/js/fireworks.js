@@ -46,14 +46,14 @@ canvas.height = ch;
 // get a random number within a range
 function random(min, max) {
   return Math.random() * (max - min) + min;
-};
+}
 
 // calculate the distance between two points
 function calculateDistance(p1x, p1y, p2x, p2y) {
   var xDistance = p1x - p2x,
     yDistance = p1y - p2y;
   return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
-};
+}
 
 // create firework
 function Firework(sx, sy, tx, ty) {
@@ -75,14 +75,14 @@ function Firework(sx, sy, tx, ty) {
   // populate initial coordinate collection with the current coordinates
   while (this.coordinateCount--) {
     this.coordinates.push([this.x, this.y]);
-  };
+  }
   this.angle = Math.atan2(ty - sy, tx - sx);
   this.speed = 2;
   this.acceleration = 1.05;
   this.brightness = random(50, 70);
   // circle target indicator radius
   this.targetRadius = 1;
-};
+}
 
 // update firework
 Firework.prototype.update = function (index) {
@@ -96,7 +96,7 @@ Firework.prototype.update = function (index) {
     this.targetRadius += 0.3;
   } else {
     this.targetRadius = 1;
-  };
+  }
 
   // speed up the firework
   this.speed *= this.acceleration;
@@ -116,8 +116,8 @@ Firework.prototype.update = function (index) {
     // target not reached, keep traveling
     this.x += vx;
     this.y += vy;
-  };
-};
+  }
+}
 
 // draw firework
 Firework.prototype.draw = function () {
@@ -132,7 +132,7 @@ Firework.prototype.draw = function () {
   // draw the target for this firework with a pulsing circle
   ctx.arc(this.tx, this.ty, this.targetRadius, 0, Math.PI * 2);
   ctx.stroke();
-};
+}
 
 // create particle
 function Particle(x, y) {
@@ -143,7 +143,7 @@ function Particle(x, y) {
   this.coordinateCount = 5;
   while (this.coordinateCount--) {
     this.coordinates.push([this.x, this.y]);
-  };
+  }
   // set a random angle in all possible directions, in radians
   this.angle = random(0, Math.PI * 2);
   this.speed = random(1, 10);
@@ -157,7 +157,7 @@ function Particle(x, y) {
   this.alpha = 1;
   // set how fast the particle fades out
   this.decay = random(0.015, 0.03);
-};
+}
 
 // update particle
 Particle.prototype.update = function (index) {
@@ -176,8 +176,8 @@ Particle.prototype.update = function (index) {
   // remove the particle once the alpha is low enough, based on the passed in index
   if (this.alpha <= this.decay) {
     particles.splice(index, 1);
-  };
-};
+  }
+}
 
 // draw particle
 Particle.prototype.draw = function () {
@@ -187,7 +187,7 @@ Particle.prototype.draw = function () {
   ctx.lineTo(this.x, this.y);
   ctx.strokeStyle = 'hsla(' + this.hue + ', 100%, ' + this.brightness + '%, ' + this.alpha + ')';
   ctx.stroke();
-};
+}
 
 // create particle group/explosion
 function createParticles(x, y) {
@@ -195,8 +195,8 @@ function createParticles(x, y) {
   var particleCount = 30;
   while (particleCount--) {
     particles.push(new Particle(x, y));
-  };
-};
+  }
+}
 
 // main demo loop
 function loop() {
@@ -225,14 +225,14 @@ function loop() {
   while (i--) {
     fireworks[i].draw();
     fireworks[i].update(i);
-  };
+  }
 
   // loop over each particle, draw it, update it
   var i = particles.length;
   while (i--) {
     particles[i].draw();
     particles[i].update(i);
-  };
+  }
 
   // launch fireworks automatically to random coordinates, when the mouse isn't down
   if (timerTick >= timerTotal) {
@@ -243,7 +243,7 @@ function loop() {
     };
   } else {
     timerTick++;
-  };
+  }
 
   // limit the rate at which fireworks get launched when mouse is down
   if (limiterTick >= limiterTotal) {
@@ -254,8 +254,8 @@ function loop() {
     };
   } else {
     limiterTick++;
-  };
-};
+  }
+}
 
 // once the window loads, we are ready for some fireworks!
 loop();

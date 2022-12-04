@@ -2,7 +2,7 @@ import { countryCodeEmoji } from "country-code-emoji";
 
 const _getRandomCharCode = () => {
   return 65 + Math.round(Math.random() * 25);
-};
+}
 
 export const getRandomString = (length) => {
   let randomNumbers = [];
@@ -11,19 +11,19 @@ export const getRandomString = (length) => {
     randomNumbers.push(_getRandomCharCode());
 
   return String.fromCharCode(...randomNumbers);
-};
+}
 
 export const capitalize = ([first, ...rest]) => {
   return first.toLocaleUpperCase() + rest.join('');
-};
+}
 
 export const removeDiacritics = (str) => {
   return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-};
+}
 
 export const capitalizeFirstLetter = (string) => {
   return string[0].toUpperCase() + string.slice(1);
-};
+}
 
 // https://stackoverflow.com/a/6680877
 export const removeAllTrailingChars = (str, char = '/') => {
@@ -45,11 +45,11 @@ export const externalLinks = (content) => {
     };
   };
   return container.innerHTML;
-};
+}
 
 export const nl2br = (text) => {
   return text.replace(/\n/g, '<br />');
-};
+}
 
 export const languageFlag = (language) => {
   let flag = language.slice(-2);
@@ -61,6 +61,6 @@ export const languageFlag = (language) => {
     case 'ca':
       flag = 'es'
       break;
-  };
+  }
   return countryCodeEmoji(flag);
-};
+}
