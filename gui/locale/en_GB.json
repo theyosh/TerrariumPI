@@ -1014,6 +1014,8 @@
     },
     "door": {
       "status": {
+        "closed": "Door ''{name}'' closed",
+        "open": "Door ''{name}'' opened",
         "title": "Door status update"
       }
     },
