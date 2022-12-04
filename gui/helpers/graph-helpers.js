@@ -14,7 +14,7 @@ export const smoothing = (array, countBefore, countAfter) => {
     result.push(avg);
   }
   return result;
-}
+};
 
 export const toggleGraphPeriod = (graph, period) => {
   period = period || 'day';

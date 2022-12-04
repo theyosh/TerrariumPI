@@ -179,7 +179,7 @@ export const get_weather_icon = (weather_type, is_day) => {
     '11': 'cloud_lightning_' + day_icon,
     '13': 'cloud_snow_alt_' + day_icon,
     '50': 'cloud_fog_' + day_icon,
-  }
+  };
 
   return 'img/weather_icons/' + 'climacon-' + weather_icons[weather_type] + '.svg';
 };

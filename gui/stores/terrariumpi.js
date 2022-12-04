@@ -93,7 +93,7 @@ export const doors = derived(
       }
       enclosures[$buttons[button_id].enclosure].closed = enclosures[$buttons[button_id].enclosure].closed && $buttons[button_id].closed;
       doors[button_id] = $buttons[button_id];
-    })
+    });
     return { closed: Object.values(doors).every(door => door.closed), doors: doors, enclosures: enclosures };
   }
 );

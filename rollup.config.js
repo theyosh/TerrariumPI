@@ -33,7 +33,7 @@ function serve() {
       process.on("SIGTERM", toExit);
       process.on("exit", toExit);
     }
-  }
+  };
 };
 
 export default {

@@ -18,7 +18,7 @@ export const fileSizeToString = (fileSize) => {
   return {
     unit: Units[unitCount],
     value: roundToPrecision(fileSize / divider)
-  }
+  };
 };
 
 export const formatBytes = (fileSize) => {
