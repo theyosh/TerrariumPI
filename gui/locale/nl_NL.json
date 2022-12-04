@@ -1014,6 +1014,8 @@
     },
     "door": {
       "status": {
+        "closed": "Deur ''{name}'' gesloten",
+        "open": "Deur ''{name}'' geopend",
         "title": "Deurstatusupdate"
       }
     },
