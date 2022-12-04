@@ -225,7 +225,6 @@
                 name="calibration.timeout"
                 min="1"
                 max="100"
-                required={selected_hardware === 'remote'}
                 disabled={selected_hardware !== 'remote'}
                 label="{$_('buttons.settings.calibration.timeout.label', { default: 'Time out in seconds' })}"
                 placeholder="{$_('buttons.settings.calibration.timeout.placeholder', { default: 'Enter the time out in seconds' })}"
