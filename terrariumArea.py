@@ -314,6 +314,21 @@ class terrariumArea(object):
       }
 
     self.depends_on = self.setup.get('depends_on',[])
+    self.ignore_low_alarm  = False
+    self.ignore_high_alarm = False
+
+    try:
+      self.ignore_low_alarm = bool(self.setup['low']['ignore_low'])
+    except Exception:
+      self.ignore_low_alarm  = False
+
+    try:
+      self.ignore_high_alarm = bool(self.setup['high']['ignore_high'])
+    except Exception:
+      self.ignore_high_alarm = False
+
+    self.low_deviation  = self.setup.get('deviation_low_alarm' ,0)
+    self.high_deviation = self.setup.get('deviation_high_alarm',0)
 
     # Clean up parts that do not have relays configured)
     for period in self.PERIODS:
@@ -596,27 +611,15 @@ class terrariumArea(object):
       if not read_only:
         self._update_variation()
 
-      # And set the alarm values
-      ignore_low_alarm  = False
-      ignore_high_alarm = False
-      try:
-        ignore_low_alarm = bool(self.setup['low']['ignore_low'])
-      except Exception:
-        ignore_low_alarm  = False
-
-      try:
-        ignore_high_alarm = bool(self.setup['high']['ignore_high'])
-      except Exception:
-        ignore_high_alarm = False
-
-      if ignore_low_alarm:
+      # Deviation calculation is done in current_value() function
+      if self.ignore_low_alarm:
         # Use the max alarm value to changing the relays
         self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_max']
       else:
         # Normal state
         self.state['sensors']['alarm_low']  = self.state['sensors']['current'] < self.state['sensors']['alarm_min']
 
-      if ignore_high_alarm:
+      if self.ignore_high_alarm:
         # Use the min alarm value to changing the relays
         self.state['sensors']['alarm_high'] = self.state['sensors']['current'] > self.state['sensors']['alarm_min']
       else:
@@ -773,6 +776,8 @@ class terrariumArea(object):
       else:
         sensor_values[key] = statistics.mean(sensor_values[key])
 
+    sensor_values['alarm_min'] += self.low_deviation
+    sensor_values['alarm_max'] += self.high_deviation
     sensor_values['alarm'] = not sensor_values['alarm_min'] <= sensor_values['current'] <= sensor_values['alarm_max']
 
     return sensor_values
@@ -1095,6 +1100,8 @@ class terrariumAreaWatertank(terrariumArea):
 
       sensor_values[key] = 0 if len(sensor_values[key]) == 0 else statistics.mean(sensor_values[key])
 
+    sensor_values['alarm_min'] += self.low_deviation
+    sensor_values['alarm_max'] += self.high_deviation
     sensor_values['alarm'] = not sensor_values['alarm_min'] <= sensor_values['current'] <= sensor_values['alarm_max']
 
     return sensor_values
