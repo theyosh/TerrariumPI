@@ -251,7 +251,7 @@ function loop() {
       // start the firework at the bottom middle of the screen, then set the current mouse coordinates as the target
       fireworks.push(new Firework(cw / 2, ch, mx, my));
       limiterTick = 0;
-    };
+    }
   } else {
     limiterTick++;
   }
