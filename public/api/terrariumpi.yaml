@@ -253,6 +253,8 @@ paths:
               $ref: '#/definitions/AudioFile'
         '500':
           description: Unexpected server error
+      security:
+        - Basic: []
   '/audio/files/{file}':
     get:
       tags:
@@ -302,6 +304,8 @@ paths:
           description: Audio file does not exists
         '500':
           description: Unexpected server error
+      security:
+        - Basic: []
   /buttons/hardware/:
     get:
       tags:
@@ -2240,11 +2244,11 @@ definitions:
       dtstart:
         type: string
         format: date
-        default: 0
+        default: '0'
         description: Event start date and time
       dtend:
         type: string
-        default: 0
+        default: '0'
         format: date
         description: Event end date and time
       all_day:
