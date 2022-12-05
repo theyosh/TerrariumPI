@@ -3343,12 +3343,10 @@
         "dtstart": {
           "type": "string",
           "format": "date",
-          "default": "0",
           "description": "Event start date and time"
         },
         "dtend": {
           "type": "string",
-          "default": "0",
           "format": "date",
           "description": "Event end date and time"
         },
@@ -3447,7 +3445,7 @@
           "description": "Name of the playlist"
         },
         "volume": {
-          "type": "string",
+          "type": "number",
           "description": "Volume for this playlist",
           "minimum": 0,
           "maximum": 100,
