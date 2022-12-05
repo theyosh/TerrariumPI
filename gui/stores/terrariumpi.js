@@ -56,7 +56,7 @@ export const updateButton = (button) => {
     let inverse = button.hardware == 'remote' && button.calibration?.inverse == 'on';
     loaded_buttons[button.id].closed = button.value === (inverse ? 0 : 1);
 
-    if ((old_state !== null || button.value === 0) && old_state !== button.value) {
+    if ((old_state !== null || button.value === (inverse ? 1 : 0)) && old_state !== button.value) {
       // Door notification
       successNotification(
         $_(loaded_buttons[button.id].closed ? 'notification.door.status.closed' : 'notification.door.status.opened', { values: { name: loaded_buttons[button.id].name } }),

@@ -357,7 +357,7 @@ class terrariumWebsocket(object):
         try:
           self.clients.remove(messages)
         except Exception as ex:
-          logger.debug('Clashed client was not in the list of clients {ex}')
+          logger.debug(f'Clashed client was not in the list of clients {ex}')
 
         break
 
