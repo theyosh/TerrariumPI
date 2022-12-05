@@ -1321,7 +1321,7 @@ class terrariumAPI(object):
 
       except orm.core.ObjectNotFound:
         # Non existing setting can be ignored
-        logger.debug(f'Database setting {key} gives error: {ex}')
+        logger.debug(f'Database setting {key} does not exists.')
 
     self.webserver.engine.load_settings()
     return {'status' : True}
@@ -1368,7 +1368,7 @@ class terrariumAPI(object):
 
   def weather_forecast(self):
     if not self.webserver.engine.weather:
-      raise HTTPError(status=404, body=f'No weather data available.')
+      raise HTTPError(status=404, body='No weather data available.')
 
     forecast_data = []
     for forecast in self.webserver.engine.weather.forecast:

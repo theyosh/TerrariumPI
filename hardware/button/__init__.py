@@ -227,5 +227,5 @@ class terrariumButton(object):
     if not isinstance(self._device['device'], terrariumIOExpander):
       try:
         GPIO.cleanup(self._device['device'])
-      except Exception as ex:
+      except Exception:
         pass

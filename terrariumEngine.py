@@ -952,7 +952,7 @@ class terrariumEngine(object):
     self.webserver.websocket_message('button', button_data)
 
     # Notification message
-    self.notification.message(f'button_action', button_data)
+    self.notification.message('button_action', button_data)
 
   # -= NEW =-
   def __load_existing_webcams(self):
