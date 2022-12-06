@@ -24,7 +24,7 @@ Think off:
 - Tanks with animals or plants
 - Greenhouse
 
-And all this is controlled with a nice web interface based on AdminLTE 3 with Bootstrap 4.
+And all this is controlled with a nice web interface with [AdminLTE 3](https://adminlte.io/) based on Bootstrap 4 made interactive with [Svelte](https://svelte.dev/).
 
 ## Table of Contents
 
