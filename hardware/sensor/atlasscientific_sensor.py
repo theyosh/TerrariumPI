@@ -1,4 +1,4 @@
-from . import terrariumSensor
+from . import terrariumI2CSensor
 
 from pathlib import Path
 import re
@@ -9,7 +9,7 @@ import sys
 sys.path.insert(0, str((Path(__file__).parent / Path('../../3rdparty/AtlasScientific')).resolve()))
 from AtlasI2C import AtlasI2C
 
-class terrariumAtlasScientificSensor(terrariumSensor):
+class terrariumAtlasScientificSensor(terrariumI2CSensor):
   HARDWARE = 'atlasscientific'
   TYPES    = ['ph','temperature','humidity','co2','conductivity','pressure']
   NAME     = 'AtlasScientific I2C sensor'
