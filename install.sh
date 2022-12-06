@@ -1,4 +1,6 @@
 #!/bin/bash
+# https://wiki.bash-hackers.org/syntax/pattern#extended_pattern_language
+shopt -s extglob
 
 BASEDIR=$(dirname $(readlink -nf "$0"))
 VERSION=$(grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3)
@@ -43,26 +45,26 @@ done < requirements.txt
 
 if [ "${PI_ZERO}" -eq 1 ]; then
   # Pi Zero needs some fixed python modules
-  PIP_MODULES="$(echo $PIP_MODULES | sed 's/gevent==[^ ]\+/gevent==21.8.0/')"
+  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==21.8.0}"
 
   if [ "${BUSTER_OS}" -eq 1 ]; then
-    PIP_MODULES="$(echo $PIP_MODULES | sed 's/opencv-python-headless==[^ ]\+/opencv-python-headless==4.5.4.60/')"
-    PIP_MODULES="$(echo $PIP_MODULES | sed 's/cryptography==[^ ]\+/cryptography==37.0.4/')"
+    PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.4.60}"
+    PIP_MODULES="${PIP_MODULES//cryptography==+([^ ])/cryptography==37.0.4}"
   else
-    PIP_MODULES="$(echo $PIP_MODULES | sed 's/opencv-python-headless==[^ ]\+/opencv-python-headless==4.5.3.56/')"
+    PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.3.56}"
   fi
 
-  PIP_MODULES="$(echo $PIP_MODULES | sed 's/numpy==[^ ]\+/numpy==1.21.4/')"
+  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
   PIP_MODULES="${PIP_MODULES} lxml==4.6.4"
 fi
 
 # Debian buster does not like numpy or cryptography .... :(
 if [ "${BUSTER_OS}" -eq 1 ]; then
-  PIP_MODULES="$(echo $PIP_MODULES | sed 's/numpy==[^ ]\+/numpy==1.21.4/')"
-  PIP_MODULES="$(echo $PIP_MODULES | sed 's/cryptography==[^ ]\+/cryptography==37.0.4/')"
+  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
+  PIP_MODULES="${PIP_MODULES//cryptography==+([^ ])/cryptography==37.0.4}"
 fi
 
-#set -e
+#set -ex
 
 # Install dialog for further installation
 if ! hash whiptail 2>/dev/null; then
@@ -290,55 +292,7 @@ EOF
 
 done
 
-PROGRESS=${MODULE_MAX}
-
-# We use the Github actions to create the GUI so we do not need to install NodeJS and all the Libraries
-# https://github.com/theyosh/TerrariumPI/actions/workflows/svelte-gui.yml
-# cat <<EOF
-# XXX
-# $PROGRESS
-# Building WebGUI
-
-# Installing Node Version Manager ...
-# XXX
-# EOF
-# cd "${BASEDIR}/"
-# sudo -u ${SCRIPT_USER} bash -c 'wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash' > /dev/null 2>/dev/null
-
-# PROGRESS=$((PROGRESS + 2))
-# cat <<EOF
-# XXX
-# $PROGRESS
-# Building WebGUI
-
-# Installing latest NodeJS LTS ...
-# XXX
-# EOF
-# sudo -u ${SCRIPT_USER} bash -c "\. /home/${SCRIPT_USER}/.nvm/nvm.sh; nvm install --lts" > /dev/null 2>/dev/null
-
-# PROGRESS=$((PROGRESS + 3))
-# cat <<EOF
-# XXX
-# $PROGRESS
-# Building WebGUI
-
-# Installing NodeJS libraries (first time will take some time) ...
-# XXX
-# EOF
-# sudo -u ${SCRIPT_USER} bash -c "\. /home/${SCRIPT_USER}/.nvm/nvm.sh; npm install --no-progress; ./gui/patch.sh" > /dev/null 2>/dev/null
-
-# ROGRESS=$((PROGRESS + 3))
-# cat <<EOF
-# XXX
-# $PROGRESS
-# Building WebGUI
-
-# Compiling Svelte WebGUI ...
-# XXX
-# EOF
-# sudo -u ${SCRIPT_USER} bash -c "\. /home/${SCRIPT_USER}/.nvm/nvm.sh; npm run build" > /dev/null 2>/dev/null
-
-PROGRESS=$((PROGRESS + 3))
+PROGRESS=$((MODULE_MAX + 3))
 cat <<EOF
 XXX
 $PROGRESS
