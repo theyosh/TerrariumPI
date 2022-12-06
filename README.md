@@ -120,7 +120,7 @@ Your language not in the list or not up to date? [Create your own language trans
 
 ## Installation
 
-The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/). For now the Desktop/Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
+The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/). For now the Desktop/Full version is not working somehow.... So use the lite image!
 It is possible to use USB or SSD drives to speed things up: <https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb>
 
 1. Get a working Raspberry Pi and login as user 'pi' \
