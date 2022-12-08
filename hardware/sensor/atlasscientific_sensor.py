@@ -19,7 +19,7 @@ class terrariumAtlasScientificSensor(terrariumI2CSensor):
     if len(address) == 1:
       address.append(1)
 
-    return AtlasI2C(address[0],bus=address[1])
+    return AtlasI2C(address[0],bus=int(address[1]))
 
   def _get_data(self):
     regex = r"[^:]+: ?(?P<value>[+-]?(\d*\.)?\d+)"
