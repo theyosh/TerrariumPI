@@ -14,7 +14,7 @@ services:
       - /etc/modules:/etc/modules
       - /dev:/dev
     network_mode: host
-    restart: always
+    restart: unless-stopped
     privileged: true
     cap_add:
       - NET_ADMIN

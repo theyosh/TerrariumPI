@@ -13,6 +13,8 @@
             <a href="#" class="swagger-method-link">
                 <span class="swagger-method-name">{{ method[0] | upcase }}</span>
                 {{ method[1].summary }}
+
+                {{ method[1].security }}
             </a>
         </h3>
         <div class="swagger-method-details">

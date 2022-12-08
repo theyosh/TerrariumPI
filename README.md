@@ -120,8 +120,18 @@ Your language not in the list or not up to date? [Create your own language trans
 
 ## Installation
 
+### Base
+
 The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/). For now the Desktop/Full version is not working somehow.... So use the lite image!
 It is possible to use USB or SSD drives to speed things up: <https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb>
+
+### Docker
+
+There is a Docker image which can be used instead of the source code. This should make the installation a bit more easier. More information can be found at: [https://theyosh.github.io/TerrariumPI/install/#docker](https://theyosh.github.io/TerrariumPI/install/#docker)
+
+You can skip the manual installation part.
+
+### Manual
 
 1. Get a working Raspberry Pi and login as user 'pi' \
    `ssh pi@[raspberry_ip]`
@@ -144,6 +154,12 @@ Make sure that your Pi is secured when you put it to the Internet. Would be a sh
 ## Updating
 
 This updating is based on that the software is installed with the steps in the Installation above. When updating between release versions it will take more time due to database updates and cleanups. This can be seen in the logfile.
+
+### Docker
+
+Stop the running container and pull the new image. Then you can start the container again.
+
+### Manual
 
 1. Get a working Raspberry Pi and login as user 'pi' \
    `ssh pi@[raspberry_ip]`

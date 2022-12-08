@@ -41,7 +41,7 @@ ssh pi@[raspberrypi]
 ![Docker Logo](/assets/img/DockerLogo.webp){: .right width="200" }
 As from version 4.1 there is a [Docker image](https://hub.docker.com/r/theyosh/terrariumpi) that can be used to run TerrariumPI. When you run it in Docker, you can skip the rest of the page. Only the migration could be followed if you want to restore your current relay history.
 
-Install docker according to: [https://www.upswift.io/post/install-docker-compose-on-raspberry-pi](https://www.upswift.io/post/install-docker-compose-on-raspberry-pi) including install Docker-compose at chapter 7
+Install docker according to: [https://docs.docker.com/engine/install/debian/](https://docs.docker.com/engine/install/debian/) Just follow the installation steps. And to run the docker commands as a normal user, [follow these steps](https://docs.docker.com/engine/install/linux-postinstall/)
 
 Then you need to setup a `docker-compose.yaml` file. There is an example `docker-compose.yaml.example` in the `contrib` folder which can be used as a starting point:
 
@@ -62,7 +62,7 @@ services:
       - /etc/modules:/etc/modules
       - /dev:/dev
     network_mode: host
-    restart: always
+    restart: unless-stopped
     privileged: true
     cap_add:
       - NET_ADMIN
@@ -83,7 +83,9 @@ The only real setting is the `TZ` value. Make sure it is set to your local/home 
 
 We run the container with **[privileged](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)** enabled. This is less secure, but needed in order to be able to handle all the hardware that is connected to the Raspberry PI.
 
-then you can run `docker-compose up -d` to start the docker image. It could be that it needs a reboot. After that, you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
+The network mode needs to be at `host`. Else bluetooth with not work, and you can't use bluetooth sensors.
+
+then you can run `docker compose up -d` to start the docker image. It could be that it needs a reboot. After that, you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
 ## Manual
 
