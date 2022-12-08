@@ -19,6 +19,10 @@ class terrariumAtlasScientificSensor(terrariumI2CSensor):
     if len(address) == 1:
       address.append(1)
 
+    print('\n\n===========================================')
+    print(f'Loading sensor at address: {address[0]}')
+    print('=============================================\n\n')
+
     return AtlasI2C(address[0],bus=int(address[1]))
 
   def _get_data(self):
