@@ -35,6 +35,7 @@ module AllCategoriesAndTags
             page_tags.each do |tag|
               unless all_tags[tag].include?(page)
                 # Pages in front of the list
+                page.date = page.last_modified_at
                 all_tags[tag].unshift(page)
               end
             end
@@ -45,6 +46,7 @@ module AllCategoriesAndTags
             page_categories.each do |category|
               unless all_categories[category].include?(page)
                 # Pages in front of the list
+                page.date = page.last_modified_at
                 all_categories[category].unshift(page)
               end
             end
