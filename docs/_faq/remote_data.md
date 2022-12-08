@@ -45,3 +45,5 @@ json output:
 json traversal path: `value`
 
 Construct full url by combining the remote source url and the json traversal path joining by a dash '#'. Full remote source url: `https://terrarium.theyosh.nl/api/sensors/e39b7d7931f8db191cedd83f3c80cec4/#value` and that will return the value of '23.7188'
+
+And for the calibration offset value you need the path `#calibration/offset`
