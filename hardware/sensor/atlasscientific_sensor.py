@@ -1,4 +1,4 @@
-from . import terrariumSensor
+from . import terrariumI2CSensor
 
 from pathlib import Path
 import re
@@ -9,7 +9,7 @@ import sys
 sys.path.insert(0, str((Path(__file__).parent / Path('../../3rdparty/AtlasScientific')).resolve()))
 from AtlasI2C import AtlasI2C
 
-class terrariumAtlasScientificSensor(terrariumSensor):
+class terrariumAtlasScientificSensor(terrariumI2CSensor):
   HARDWARE = 'atlasscientific'
   TYPES    = ['ph','temperature','humidity','co2','conductivity','pressure']
   NAME     = 'AtlasScientific I2C sensor'
@@ -19,7 +19,11 @@ class terrariumAtlasScientificSensor(terrariumSensor):
     if len(address) == 1:
       address.append(1)
 
-    return AtlasI2C(address[0],bus=address[1])
+    print('\n\n===========================================')
+    print(f'Loading sensor at address: {address[0]}')
+    print('=============================================\n\n')
+
+    return AtlasI2C(address[0],bus=int(address[1]))
 
   def _get_data(self):
     regex = r"[^:]+: ?(?P<value>[+-]?(\d*\.)?\d+)"
