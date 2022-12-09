@@ -26,14 +26,13 @@ class terrariumAtlasScientificSensor(terrariumI2CSensor):
     return AtlasI2C(address[0],bus=int(address[1]))
 
   def _get_data(self):
-    regex = r"[^:]+: ?(?P<value>[+-]?(\d*\.)?\d+)"
+    regex = r"[^:]+:(?P<value>.*)"
 
     data = self.device.query('R')
     data = re.search(regex, data)
 
     if data:
-      data = float(data.group('value'))
-      return data
+      return { f'{self.sensor_type}': float(data.group('value').strip()) }
 
     return None
 
