@@ -335,7 +335,7 @@
 
     {#if settings.dashboard_mode == 2 && enclosures}
       {#each enclosures.sort((a, b) => a.name.localeCompare(b.name)) as enclosure, counter}
-        <div class="col-4">
+        <div class="col-12 col-md-6 col-lg-3">
           <Card loading="{loading_enclosures}">
             <svelte:fragment slot="header">
               <i class="fas fa-globe mr-2"></i>{enclosure.name}
