@@ -19,7 +19,7 @@ export const formToJSON = (form) => {
       } else if (element.type === 'checkbox') {
         value = element.checked && element.value ? (!isNaN(element.value) ? parseFloat(element.value) : element.value) : element.checked;
       } else {
-        value = element.value != '' && !isNaN(element.value) ? parseFloat(element.value) : element.value;
+        value = element.value != '' && !element.value.startsWith('0x') && !isNaN(element.value) ? parseFloat(element.value) : element.value;
       }
 
       if (value === 'true') {

@@ -63,7 +63,7 @@
     ],
   };
 
-  if (settings.graph_show_min_max_gauge && minmax) {
+  if (settings.graph_show_min_max_gauge && minmax && $sensors[id]['measure_min'] && $sensors[id]['measure_max']) {
     opts.staticLabels = {
       labels: [$sensors[id]['measure_min'], $sensors[id]['measure_max']],
       font: '10px Helvetica Neue,sans-serif',
@@ -84,7 +84,7 @@
   // TODO: Not sure if we need to update min and max values in reactive mode... needs rethinking. As when you change this, you will reload the page.... and re-setup
   $: {
     if (gauge && $sensors[id].changed) {
-      if (settings.graph_show_min_max_gauge && minmax) {
+      if (settings.graph_show_min_max_gauge && minmax && $sensors[id].measure_min && $sensors[id].measure_max) {
         gauge.options.staticLabels = {
           labels: [$sensors[id].measure_min, $sensors[id].measure_max],
           font: '10px Helvetica Neue,sans-serif',
