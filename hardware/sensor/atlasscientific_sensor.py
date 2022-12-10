@@ -28,7 +28,7 @@ class terrariumAtlasScientificSensor(terrariumI2CSensor):
     data = re.search(regex, data)
 
     if data:
-      return { f'{self.sensor_type}': float(data.group('value').strip()) }
+      return { self.sensor_type : float(data.group('value')) }
 
     return None
 
