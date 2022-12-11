@@ -11,6 +11,7 @@ Changelog
 
 **Fixes**
 ------
+- Fix #GHSA-qq6h-5g6j-q3cm. [TheYOSH]
 - Small JS fixes. [TheYOSH]
 - Fix typo. [TheYOSH]
 - Readout fix [#753](https://github.com/theyosh/TerrariumPI/issues/753). [TheYOSH]
@@ -25,6 +26,8 @@ Changelog
 
 **Updates**
 ------
+- Update python libraries. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Atlas sensor update. [#753](https://github.com/theyosh/TerrariumPI/issues/753). [TheYOSH]
@@ -55,6 +58,7 @@ Changelog
 
 **Other**
 ------
+- New Svelte GUI build. [theyosh]
 - New Svelte GUI build. [theyosh]
 - New release post. [TheYOSH]
 - Code cleanup. [TheYOSH]
