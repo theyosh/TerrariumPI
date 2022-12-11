@@ -2,6 +2,130 @@ Changelog
 =========
 
 
+4.6.0 (2022-12-11)
+------------------
+
+**New**
+------
+- Add db cleanup FAQ. [TheYOSH]
+
+**Fixes**
+------
+- Fix #GHSA-qq6h-5g6j-q3cm. [TheYOSH]
+- Small JS fixes. [TheYOSH]
+- Fix typo. [TheYOSH]
+- Readout fix [#753](https://github.com/theyosh/TerrariumPI/issues/753). [TheYOSH]
+- Readout fix [#753](https://github.com/theyosh/TerrariumPI/issues/753). [TheYOSH]
+- Small fix (2) [TheYOSH]
+- Small fix. [TheYOSH]
+- Fix loading sensor. [#753](https://github.com/theyosh/TerrariumPI/issues/753). [TheYOSH]
+- Document reformatting and door fixes. [TheYOSH]
+- Fix button reverse setting. [TheYOSH]
+- Fix daylight saving time ending. Fix[#745](https://github.com/theyosh/TerrariumPI/issues/745). [TheYOSH]
+- Fix Bullseye boot config changes in Docker. [TheYOSH]
+
+**Updates**
+------
+- Update python libraries. [TheYOSH]
+- Update changelog. [TheYOSH]
+- Update version number. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Atlas sensor update. [#753](https://github.com/theyosh/TerrariumPI/issues/753). [TheYOSH]
+- Docu update. [TheYOSH]
+- Revert "License update" [TheYOSH]
+
+  This reverts commit 7dd33e7ec8f3a4ee2ff6920b5275acfefe7fcd61.
+- License update. [TheYOSH]
+- Update some documentation. [TheYOSH]
+- Update docu. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates 8. [TheYOSH]
+- Codacy updates 7. [TheYOSH]
+- Codacy updates 6. [TheYOSH]
+- Codacy updates 5. [TheYOSH]
+- Codacy updates 4. [TheYOSH]
+- Codacy updates 3. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Update Codacy formatting. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update translation badge. [TheYOSH]
+- Update workflows. [TheYOSH]
+- Upgrade to Svelte GUI. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update workflows. [TheYOSH]
+
+**Other**
+------
+- New Svelte GUI build. [theyosh]
+- New Svelte GUI build. [theyosh]
+- New release post. [TheYOSH]
+- Code cleanup. [TheYOSH]
+- New Svelte GUI build. [theyosh]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Remove debug. [TheYOSH]
+- Beter regex. [#753](https://github.com/theyosh/TerrariumPI/issues/753). [TheYOSH]
+- Beter regex. [#753](https://github.com/theyosh/TerrariumPI/issues/753). [TheYOSH]
+- New Svelte GUI build. [theyosh]
+- Better dashboard on small screens. [#737](https://github.com/theyosh/TerrariumPI/issues/737). [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Doc. [TheYOSH]
+- Better FAQ dates. [TheYOSH]
+- Trying to get correct date in FAQ. [TheYOSH]
+- New remote button info. [TheYOSH]
+- REadme. [TheYOSH]
+- Codcay. [TheYOSH]
+- Bla. [TheYOSH]
+- New Svelte GUI build. [theyosh]
+- New Svelte GUI build. [theyosh]
+- New Svelte GUI build. [theyosh]
+- Bla. [TheYOSH]
+- New Svelte GUI build. [theyosh]
+- New Svelte GUI build. [theyosh]
+- New Svelte GUI build. [theyosh]
+- New Svelte GUI build. [theyosh]
+- New Svelte GUI build. [theyosh]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1033 of 1033 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1033 of 1033 strings)
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- New Svelte GUI build. [theyosh]
+- Refactor deviation. [#744](https://github.com/theyosh/TerrariumPI/issues/744). [TheYOSH]
+- New Svelte GUI build. [theyosh]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1031 of 1031 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1031 of 1031 strings)
+- Weblate badge. [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Merge pull request [#748](https://github.com/theyosh/TerrariumPI/issues/748) from theyosh/4.x.y.z. [TheYOSH]
+
+  Translated using Weblate (Polish)
+- Translated using Weblate (Polish) [kwiatekp]
+
+  Currently translated at 100.0% (763 of 763 strings)
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Install RPI camera binaries in docker for better support on
+  (hopefully) Bulseye. [TheYOSH]
+- Translated using Weblate (Polish) [kwiatekp]
+
+  Currently translated at 100.0% (763 of 763 strings)
+- Extra check for PI4 settings and Bullseye. [TheYOSH]
+- Translated using Weblate (Polish) [kwiatekp]
+
+  Currently translated at 100.0% (763 of 763 strings)
+
+
 4.5.0 (2022-10-29)
 ------------------
 
@@ -25,6 +149,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Update workflow. [TheYOSH]
 - Workflow updates. [TheYOSH]
