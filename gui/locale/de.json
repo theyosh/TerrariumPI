@@ -28,11 +28,11 @@
         "help": "Wählen Sie das Terrarium aus, zu dem dieser Bereich gehört.",
         "invalid": "Bitte treffen Sie eine Wahl.",
         "label": "Terrarium",
-        "placeholder": "Wählen Sie Gehege"
+        "placeholder": "Wähle ein Terrarium"
       },
       "mode": {
-        "help": "Wählen Sie den Modus dieses Bereichs. Das ändert Schaltzeit- und dauer der Relais.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle den Modus dieses Bereichs. Das ändert Schaltzeit- und dauer der Relais.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Modus",
         "options": {
           "disabled": "Deaktiviert",
@@ -42,17 +42,17 @@
           "weather": "Wetter Tag/Nacht",
           "weather_inverse": "Wetter Nacht/Tag"
         },
-        "placeholder": "Auswahlmodus"
+        "placeholder": "Wähle den Modus"
       },
       "name": {
-        "help": "Geben Sie einen leicht zu merkenden Namen ein.",
-        "invalid": "Der eingegebene Name ist nicht gültig. Es kann nicht leer sein.",
+        "help": "Gib einen leicht zu merkenden Namen ein.",
+        "invalid": "Der eingegebene Name ist nicht gültig. Er kann nicht leer sein.",
         "label": "Name",
-        "placeholder": "Geben Sie einen Namen ein"
+        "placeholder": "Gib einen Namen ein"
       },
       "save": {
         "error": {
-          "duplicate_relays": "Sie haben für den niedrigen und den oberen Alarm dieselben Relais ausgewählt. Dies ist nicht gültig.",
+          "duplicate_relays": "Du hast für den niedrigen und den oberen Alarm dieselben Relais ausgewählt. Dies ist nicht gültig.",
           "required_fields": "Nicht alle Pflichtfelder sind korrekt eingegeben."
         },
         "ok": {
@@ -62,13 +62,13 @@
       "setup": {
         "day_night_difference": {
           "help": "Differenz zwischen Tag und Nacht.",
-          "invalid": "Geben Sie eine gültige Nummer ein.",
+          "invalid": "Gib eine gültige Nummer ein.",
           "label": "Tag/Nacht-Unterschied",
           "placeholder": "Nummer eingeben"
         },
         "day_night_source": {
           "help": "Wählen Sie die Quelle wann es 'Tag' ist.",
-          "invalid": "Bitte treffen Sie eine Wahl.",
+          "invalid": "Bitte triff eine Wahl.",
           "label": "Tag/Nacht-Quelle",
           "options": {
             "lights": "Lichter",
@@ -76,21 +76,33 @@
           },
           "placeholder": "Wählen Sie eine Tag/Nacht-Quelle"
         },
+        "deviation_high_alarm": {
+          "help": "Erhöhung des oberen Alarmwerts.",
+          "invalid": "Gib eine gültige Zahl ein.",
+          "label": "Max Alarm Abweichung",
+          "placeholder": "Max Alarm Abweichung"
+        },
+        "deviation_low_alarm": {
+          "help": "Erhöhung des unteren Alarmwerts.",
+          "invalid": "Gib eine gültige Zahl ein.",
+          "label": "Unterer Alarm Abweichung",
+          "placeholder": "Unterer Alarm Abweichung"
+        },
         "high": {
           "begin": {
             "help": "Der Zeitpunkt in der Nacht wenn die Relais umgeschaltet werden sollen.",
-            "invalid": "Geben Sie eine gültige Zeit ein.",
+            "invalid": "Gib eine gültige Zeit ein.",
             "label": "Start",
-            "placeholder": "Geben Sie eine Startzeit ein"
+            "placeholder": "Gib eine Startzeit ein"
           },
           "door_status": {
-            "help": "Wählen Sie den Türstatus aus.",
-            "invalid": "Bitte treffen Sie eine Wahl.",
+            "help": "Wähle den Türstatus aus.",
+            "invalid": "Bitte triff eine Wahl.",
             "label": "Türststatus",
             "options": {
               "closed": "Geschlossen",
               "ignore": "Ignoriert",
-              "open": "Öffnen"
+              "open": "Offen"
             },
             "placeholder": "Status auswählen"
           },
@@ -98,38 +110,38 @@
             "help": "Der Zeitpunkt in der Nacht wenn die Relais umgeschaltet werden sollen.",
             "invalid": "Geben Sie eine gültige Zeit ein.",
             "label": "Endzeit",
-            "placeholder": "Geben Sie eine Endzeit ein"
+            "placeholder": "Gib eine Endzeit ein"
           },
           "ignore_high": {
             "help": "Aktivieren, um den oberen Alarmwert der Sensoren zu ignorieren und nur den niedrigen Alarmwert zu benutzen.",
             "label": "Oberen Alarm ignorieren"
           },
           "light_status": {
-            "help": "Wählen Sie den Lichtstatus aus.",
-            "invalid": "Bitte treffen Sie eine Wahl.",
+            "help": "Wähle den Lichtstatus aus.",
+            "invalid": "Bitte triff eine Wahl.",
             "label": "Licht Status",
             "options": {
               "ignore": "Ignoriert",
               "off": "Aus",
-              "on": "Ein"
+              "on": "An"
             },
             "placeholder": "Status auswählen"
           },
           "off_duration": {
             "help": "Die Dauer, die das Relais nach Ausschalten ausgeschaltet bleiben soll. '0' zum deaktivieren.",
-            "invalid": "Geben Sie eine gültige Dauer in Minuten ein.",
+            "invalid": "Gib eine gültige Dauer in Minuten ein.",
             "label": "Ausschaltdauer",
             "placeholder": "Ausschaltdauer"
           },
           "on_duration": {
-            "help": "Die Dauer welche die Relais eingeschaltet sein sollen. Wenn dies kürzer als den ganzen Tag sein soll, gibt es eine Timerfunktion. Geben Sie '0' für die ganze Nacht ein.",
-            "invalid": "Geben Sie eine gültige Dauer in Minuten ein.",
+            "help": "Die Dauer welche die Relais eingeschaltet sein sollen. Wenn dies kürzer als den ganzen Tag sein soll, gibt es eine Timerfunktion. Gib '0' für die ganze Nacht ein.",
+            "invalid": "Gib eine gültige Dauer in Minuten ein.",
             "label": "Einschaltdauer",
             "placeholder": "Einschaltdauer"
           },
           "playlists": {
-            "help": "Wählen Sie die abzuspielende(n) Playlist(s).",
-            "invalid": "Bitte treffen Sie eine Wahl.",
+            "help": "Wähle die abzuspielende(n) Playlist(s).",
+            "invalid": "Bitte triff eine Wahl.",
             "label": "Playlisten",
             "placeholder": "Wiedergabelisten auswählen"
           },
@@ -141,25 +153,25 @@
           },
           "relays": {
             "help": "Definition des zu schaltenden Relais.",
-            "invalid": "Bitte treffen Sie eine Wahl.",
+            "invalid": "Bitte triff eine Wahl.",
             "label": "Relais",
             "placeholder": "Relais auswählen"
           },
           "settle_time": {
             "help": "Die Dauer in Sekunden zwischen zwei Aktionen.",
-            "invalid": "Geben Sie eine gültige Nummer ein.",
+            "invalid": "Gib eine gültige Nummer ein.",
             "label": "Wartezeit",
             "placeholder": "Wartezeit"
           },
           "trigger_threshold": {
-            "help": "Geben Sie die Anzahl der Alarme ein, bevor eine Aktion ausgeführt wird.",
-            "invalid": "Geben Sie eine gültige Nummer ein.",
+            "help": "Gib die Anzahl der Alarme ein, bevor eine Aktion ausgeführt wird.",
+            "invalid": "Gib eine gültige Nummer ein.",
             "label": "Alarm-Grenzwert",
             "placeholder": "Schwellenwert"
           },
           "tweaks": {
             "dimmer": {
-              "info": "Wählen Sie die Verzögerung und Dauer für das Ein- oder Ausschalten des Dimmers in Minuten. Maximale Dauer ist 180 Minuten."
+              "info": "Wähle die Verzögerung und Dauer für das Ein- oder Ausschalten des Dimmers in Minuten. Maximale Dauer ist 180 Minuten."
             },
             "off": {
               "dimmer": {
@@ -178,94 +190,94 @@
               }
             },
             "relay": {
-              "info": "Wählen Sie die Verzögerung in Minuten aus, die ein Relais wartet, bevor es einschaltet. Maximale Verzögerung ist 180 Minuten."
+              "info": "Wähle die Verzögerung in Minuten aus, die ein Relais wartet, bevor es einschaltet. Maximale Verzögerung ist 180 Minuten."
             }
           }
         },
         "low": {
           "begin": {
             "help": "Der Zeitpunkt in der Nacht wenn die Relais umgeschaltet werden sollen.",
-            "invalid": "Geben Sie eine gültige Zeit ein.",
+            "invalid": "Gib eine gültige Zeit ein.",
             "label": "Start",
-            "placeholder": "Geben Sie eine Startzeit ein"
+            "placeholder": "Gib eine Startzeit ein"
           },
           "door_status": {
-            "help": "Wählen Sie den Türstatus aus.",
-            "invalid": "Bitte treffen Sie eine Wahl.",
-            "label": "Türststatus",
+            "help": "Wähle den Türstatus aus.",
+            "invalid": "Bitte triff eine Wahl.",
+            "label": "Türstatus",
             "options": {
               "closed": "Geschlossen",
               "ignore": "Ignoriert",
-              "open": "Öffnen"
+              "open": "Offen"
             },
             "placeholder": "Status auswählen"
           },
           "end": {
             "help": "Der Zeitpunkt in der Nacht wenn die Relais umgeschaltet werden sollen.",
-            "invalid": "Geben Sie eine gültige Zeit ein.",
+            "invalid": "Gib eine gültige Zeit ein.",
             "label": "Endzeit",
-            "placeholder": "Geben Sie eine Endzeit ein"
+            "placeholder": "Gib eine Endzeit ein"
           },
           "ignore_low": {
             "help": "Aktivieren, um den niedrigen Alarmwert der Sensoren zu ignorieren und nur den hohen Alarmwert zu verwenden.",
             "label": "Niedrigen Alarm ignorieren"
           },
           "light_status": {
-            "help": "Wählen Sie den Lichtstatus aus.",
-            "invalid": "Bitte treffen Sie eine Wahl.",
+            "help": "Wähle den Lichtstatus aus.",
+            "invalid": "Bitte triff eine Wahl.",
             "label": "Licht Status",
             "options": {
               "ignore": "Ignoriert",
               "off": "Aus",
-              "on": "Ein"
+              "on": "An"
             },
             "placeholder": "Status auswählen"
           },
           "off_duration": {
-            "help": "Die Dauer, die das Relais nach Ausschalten ausgeschaltet bleiben soll. '0' zum deaktivieren.",
-            "invalid": "Geben Sie eine gültige Dauer in Minuten ein.",
+            "help": "Die Dauer, die das Relais nach dem Ausschalten ausgeschaltet bleiben soll. '0' zum deaktivieren.",
+            "invalid": "Gib eine gültige Dauer in Minuten ein.",
             "label": "Ausschaltdauer",
             "placeholder": "Ausschaltdauer"
           },
           "on_duration": {
-            "help": "Die Dauer welche die Relais eingeschaltet sein sollen. Wenn dies kürzer als den ganzen Tag sein soll, gibt es eine Timerfunktion. Geben Sie '0' für die ganze Nacht ein.",
-            "invalid": "Geben Sie eine gültige Dauer in Minuten ein.",
+            "help": "Die Dauer welche die Relais eingeschaltet sein sollen. Wenn dies kürzer als den ganzen Tag sein soll, gibt es eine Timerfunktion. Gib '0' für die ganze Nacht ein.",
+            "invalid": "Gib eine gültige Dauer in Minuten ein.",
             "label": "Einschaltdauer",
             "placeholder": "Einschaltdauer"
           },
           "playlists": {
-            "help": "Wählen Sie die abzuspielende(n) Playlist(s).",
-            "invalid": "Bitte treffen Sie eine Wahl.",
+            "help": "Wähle die abzuspielende(n) Playlist(s).",
+            "invalid": "Bitte triff eine Wahl.",
             "label": "Playlisten",
             "placeholder": "Wiedergabelisten auswählen"
           },
           "power_on_time": {
             "help": "Die Dauer in Sekunden, die ein Relais zum Einschalten benötigt.",
-            "invalid": "Geben Sie eine gültige Nummer ein.",
+            "invalid": "Gib eine gültige Nummer ein.",
             "label": "Einschaltzeit",
             "placeholder": "Einschaltzeit"
           },
           "relays": {
             "help": "Definition des zu schaltenden Relais.",
-            "invalid": "Bitte treffen Sie eine Wahl.",
+            "invalid": "Bitte triff eine Wahl.",
             "label": "Relais",
             "placeholder": "Relais auswählen"
           },
           "settle_time": {
             "help": "Die Dauer in Sekunden zwischen zwei Aktionen.",
-            "invalid": "Geben Sie eine gültige Nummer ein.",
+            "invalid": "Gib eine gültige Nummer ein.",
             "label": "Wartezeit",
             "placeholder": "Wartezeit"
           },
           "trigger_threshold": {
-            "help": "Geben Sie die Anzahl der Alarme ein, bevor eine Aktion ausgeführt wird.",
-            "invalid": "Geben Sie eine gültige Nummer ein.",
+            "help": "Gib die Anzahl der Alarme ein, bevor eine Aktion ausgeführt wird.",
+            "invalid": "Gib eine gültige Nummer ein.",
             "label": "Alarm-Grenzwert",
             "placeholder": "Schwellenwert"
           },
           "tweaks": {
             "dimmer": {
-              "info": "Wählen Sie die Verzögerung und Dauer für das Ein- oder Ausschalten des Dimmers in Minuten. Maximale Dauer ist 180 Minuten."
+              "info": "Wähle die Verzögerung und Dauer für das Ein- oder Ausschalten des Dimmers in Minuten. Maximale Dauer ist 180 Minuten."
             },
             "off": {
               "dimmer": {
@@ -280,11 +292,11 @@
                 "label": "Dimmer Einschaltdauer"
               },
               "relay": {
-                "label": "Relaisverzögerung ein"
+                "label": "Relaisverzögerung an"
               }
             },
             "relay": {
-              "info": "Wählen Sie die Verzögerung in Minuten aus, die ein Relais wartet, bevor es einschaltet. Maximale Verzögerung ist 180 Minuten."
+              "info": "Wähle die Verzögerung in Minuten aus, die ein Relais wartet, bevor es einschaltet. Maximale Verzögerung ist 180 Minuten."
             }
           }
         },
@@ -294,65 +306,91 @@
         },
         "max_day_hours": {
           "help": "Die Maximalstundenzahl, in der das Licht eingeschaltet ist. Dies ist nur valide im Wetter-Modus. Wenn der Tag kürzer als die Mindeststundenzahl ist, wird die Dauer verkürzt wenn die Maximalstundenzahl erreicht ist.",
-          "invalid": "Der eingegebene Wert ist nicht gültig. Geben Sie eine gültige Nummer zwischen {min} und {max} ein.",
+          "invalid": "Der eingegebene Wert ist nicht gültig. Gib eine gültige Nummer zwischen {min} und {max} ein.",
           "label": "Maximale Stunden",
-          "placeholder": "Nummer eingeben"
+          "placeholder": "Anzahl eingeben"
         },
         "min_day_hours": {
-          "help": "Die Mindeststundenzahl, in der das Licht eingeschaltet ist. Dies ist nur valide im Wetter-Modus. Wenn der Tag kürzer als die Mindeststundenzahl ist, wird die Dauer verlängert, bis die Mindeststundenzahl erreicht ist.",
-          "invalid": "Der eingegebene Wert ist ungültig. Geben Sie eine gültige Zahl zwischen {min} und {max} ein.",
+          "help": "Die Mindeststundenzahl, in der das Licht eingeschaltet ist. Dies ist nur gültig im Wetter-Modus. Wenn der Tag kürzer als die Mindeststundenzahl ist, wird die Dauer verlängert, bis die Mindeststundenzahl erreicht ist.",
+          "invalid": "Der eingegebene Wert ist ungültig. Gib eine gültige Zahl zwischen {min} und {max} ein.",
           "label": "Mindeststunden",
-          "placeholder": "Nummer eingeben"
+          "placeholder": "Anzahl eingeben"
         },
         "periods": {
           "day": "Tageseinstellungen",
           "high": "Oberer Alarm",
-          "info": "Unten können Sie die Relais- und Timereinstellungen pro Zeitraum Tag und Nacht auswählen.",
+          "info": "Unten kannst du die Relais- und Timereinstellungen pro Zeitraum Tag und Nacht auswählen.",
           "low": "Unterer Alarm",
           "night": "Nachteinstellungen",
           "varation": "Variationen"
         },
         "sensors": {
-          "help": "Wählen Sie die Sensoren aus , welche im Sensor-Modus verwendet werden sollen.",
-          "invalid": "Bitte treffen Sie eine Wahl.",
+          "help": "Wähle die Sensoren aus , welche im Sensor-Modus verwendet werden sollen.",
+          "invalid": "Bitte triff eine Wahl.",
           "label": "Sensoren",
           "placeholder": "Sensoren auswählen"
         },
         "shift_day_hours": {
           "help": "Die Zeit für die Verschiebung in Stunden basierend auf der Sonnenaufgangszeit. Negative Werte lassen den Tag füher starten.",
-          "invalid": "Der eingegebene Wert ist ungültig. Geben Sie eine gültige Zahl zwischen {min} und {max} ein.",
+          "invalid": "Der eingegebene Wert ist ungültig. Gib eine gültige Zahl zwischen {min} und {max} ein.",
           "label": "Zeitverschiebung",
-          "placeholder": "Nummer eingeben"
+          "placeholder": "Anzahl eingeben"
         },
         "soundcard": {
-          "help": "Wählen Sie die für diesen Bereich verwendete Soundkarte.",
-          "invalid": "Bitte treffen Sie eine Wahl.",
+          "help": "Wähle die für diesen Bereich verwendete Soundkarte.",
+          "invalid": "Bitte triff eine Wahl.",
           "label": "Soundkarte",
-          "placeholder": "Wählen Sie eine Soundkarte aus"
+          "placeholder": "Wähle eine Soundkarte aus"
+        },
+        "variation": {
+          "offset": {
+            "invalid": "Gib eine gültige Zahl ein."
+          },
+          "period": {
+            "invalid": "Gib eine gültige Zahl ein.",
+            "offset": "Abweichung",
+            "placeholder": "Schwelle",
+            "source": "Gib eine vollständige URL ein, lokale JSON Datei oder Skript Datei"
+          },
+          "value": {
+            "invalid": "Gib eine gültige Zahl ein.",
+            "placeholder": "Differenz"
+          },
+          "when": {
+            "invalid": "Bitte mach eine Auswahl.",
+            "options": {
+              "after": "Nach x Minuten",
+              "at": "Zeitpunkt",
+              "external": "Benutze JSON Quelle",
+              "script": "Benutze Skript",
+              "weather": "Benutze das aktuelle Wetter"
+            },
+            "placeholder": "Wähle eine Aktion"
+          }
         },
         "watertank_height": {
-          "help": "Geben Sie die Höhe des Wassertanks ein.",
-          "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+          "help": "Gib die Höhe des Wassertanks ein.",
+          "invalid": "Bitte gib einen Mindestwert von {value} ein.",
           "label": "Höhe",
-          "placeholder": "Nummer eingeben"
+          "placeholder": "Anzahl eingeben"
         },
         "watertank_offset": {
           "help": "Korrekturhöhe zwischen Sensor und Wasserhöhe.",
-          "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+          "invalid": "Bitte gib einen Mindestwert von {value} ein.",
           "label": "Korrektur",
-          "placeholder": "Nummer eingeben"
+          "placeholder": "Anzahl eingeben"
         },
         "watertank_volume": {
-          "help": "Geben Sie das Volumen des Wassertanks ein.",
-          "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+          "help": "Gib das Volumen des Wassertanks ein.",
+          "invalid": "Bitte gib einen Mindestwert von {value} ein.",
           "label": "Wasservolumen",
-          "placeholder": "Nummer eingeben"
+          "placeholder": "Anzahl eingeben"
         }
       },
       "title": "Bereichseinstellungen",
       "type": {
-        "help": "Wählen sie den Bereichstyp aus. Jeder Typ hat seine eigenen Einstellungen.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle den Bereichstyp aus. Jeder Typ hat seine eigenen Einstellungen.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Typ",
         "placeholder": "Typ auswählen"
       }
@@ -362,7 +400,7 @@
     "files": {
       "delete": {
         "confirm": {
-          "message": "Sind Sie sicher, die Audio -Datei ''{name}'' ({filename}) zu löschen?"
+          "message": "Bist du sicher, dass du die Audio -Datei ''{name}'' ({filename}) löschen willst?"
         },
         "error": {
           "message": "Die Audiodatei ''{name}''“ konnte nicht gelöscht werden!\nFehler: {Fehler}"
@@ -378,7 +416,7 @@
         },
         "save": {
           "error": {
-            "invalid_file": "Ungültige Audiodatei (en)"
+            "invalid_file": "Ungültige Audiodatei(en)"
           },
           "ok": {
             "message": "Hochgeladen {amount, plural, =1 {# Audiodatei} other {# Audiodateien}}"
@@ -402,7 +440,7 @@
     "playlists": {
       "delete": {
         "confirm": {
-          "message": "Sind Sie sicher, die Playlist ''{name}'' mit {length} Zahlen zu löschen?"
+          "message": "Bist du sicher, dass du die Playlist ''{name}'' mit {length} Nummern löschen willst?"
         },
         "error": {
           "message": "Die Wiedergabeliste ''{name}''“ konnte nicht gelöscht werden!\nFehler: {Fehler}"
@@ -413,19 +451,19 @@
       },
       "settings": {
         "files": {
-          "help": "Wählen Sie alle Audiodateien für diese Playlist aus.",
-          "invalid": "Wählen Sie mindestens 1 Audiodatei aus.",
+          "help": "Wähle alle Audiodateien für diese Playlist aus.",
+          "invalid": "Wähle mindestens 1 Audiodatei aus.",
           "label": "Audiodateien",
           "placeholder": "Audiodateien auswählen"
         },
         "name": {
-          "help": "Geben Sie einen leicht zu merkenden Namen ein.",
-          "invalid": "Der eingegebene Name ist ungültig. Es darf nicht leer sein.",
+          "help": "Gib einen leicht zu merkenden Namen ein.",
+          "invalid": "Der eingegebene Name ist ungültig. Er darf nicht leer sein.",
           "label": "Name",
-          "placeholder": "Geben Sie einen Namen ein"
+          "placeholder": "Gib einen Namen ein"
         },
         "repeat": {
-          "help": "Spielen Sie diese Playlist im Wiederholungsmodus ab.",
+          "help": "Spiele diese Playlist im Wiederholungsmodus ab.",
           "label": "Wiederholen"
         },
         "save": {
@@ -437,12 +475,12 @@
           }
         },
         "shuffle": {
-          "help": "Mischen Sie diese Playlist jedes Mal, wenn sie abgespielt wird.",
+          "help": "Mische diese Playlist jedes Mal, wenn sie abgespielt wird.",
           "label": "Mischen"
         },
         "title": "Playlist-Einstellungen",
         "volume": {
-          "help": "Wählen Sie die Lautstärke für diese Playlist aus.",
+          "help": "Wähle die Lautstärke für diese Playlist aus.",
           "label": "Audio Lautstärke"
         }
       },
@@ -458,7 +496,7 @@
     },
     "delete": {
       "confirm": {
-        "message": "Sind Sie sicher, dass Sie die Schaltfläche ''{name}'' löschen möchten?"
+        "message": "Bist du sicher, dass du die Schaltfläche ''{name}'' löschen möchtest?"
       },
       "error": {
         "message": "Die Schaltfläche ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
@@ -469,7 +507,7 @@
     },
     "ignore": {
       "confirm": {
-        "message": "Sind Sie sicher, dass Sie die Schaltfläche ''{name}'' ignorieren möchten?"
+        "message": "Bist du sicher, dass du die Schaltfläche ''{name}'' ignorieren möchtest?"
       },
       "error": {
         "message": "Der Button ''{name}'' konnte nicht ignoriert werden!\nFehler: {Fehler}"
@@ -489,16 +527,27 @@
     },
     "settings": {
       "address": {
-        "help": "Geben Sie die physische GPIO -PIN -Nummer ein.",
-        "invalid": "Die eingegebene Adresse ist ungültig. Geben Sie eine gültige Zahl zwischen {min} und {max} ein.",
+        "help": "Gib die physische GPIO -PIN -Nummer ein.",
+        "invalid": "Die eingegebene Adresse ist ungültig. Gib eine gültige Zahl zwischen {min} und {max} ein.",
         "label": "Adresse",
-        "placeholder": "Geben Sie eine Adresse ein"
+        "placeholder": "Gib eine Adresse ein"
       },
       "calibration": {
+        "inverse": {
+          "help": "Einschalten, um den Remote-Wert umzukehren.",
+          "label": "Umgekehrter Wert"
+        },
         "ldr_capacitor": {
-          "help": "Geben Sie den Kondensatorwert in µF ein, da dies die Lichtberechnung beeinflusst.",
+          "help": "Gib den Kondensatorwert in µF ein, da dies die Lichtberechnung beeinflusst.",
+          "invalid": "Der eingegebene Kondensatorwert ist ungültig. Gib eine gültige Zahl zwischen {min} und {max} ein.",
           "label": "Kondensatorwert in µF",
-          "placeholder": "Geben Sie den Kondensatorwert in µF ein"
+          "placeholder": "Gib den Kondensatorwert in µF ein"
+        },
+        "timeout": {
+          "help": "Gib den Timeout in Sekunden zwischen den Remotechecks ein.",
+          "invalid": "Der eingegebene Zeitüberschreitungswert ist ungültig. Gib eine gültige Zahl zwischen {min} und {max} ein.",
+          "label": "Timeout in Sekunden",
+          "placeholder": "Gib den Timeout in Sekunden ein"
         }
       },
       "current": {
@@ -507,16 +556,16 @@
         "placeholder": "Aktueller Wert"
       },
       "hardware": {
-        "help": "Wählen Sie den Hardwaretyp für diesen Taster aus.",
-        "invalid": "Bitte wählen Sie einen Hardwaretyp aus.",
+        "help": "Wähle den Hardwaretyp für diesen Taster aus.",
+        "invalid": "Bitte wähle einen Hardwaretyp aus.",
         "label": "Hardware",
         "placeholder": "Hardware auswählen"
       },
       "name": {
-        "help": "Geben Sie einen leicht zu merkenden Namen ein.",
-        "invalid": "Der eingegebene Name ist ungültig. Es darf nicht leer sein.",
+        "help": "Gib einen leicht zu merkenden Namen ein.",
+        "invalid": "Der eingegebene Name ist ungültig. Er darf nicht leer sein.",
         "label": "Name",
-        "placeholder": "Geben Sie einen Namen ein"
+        "placeholder": "Gib einen Namen ein"
       },
       "save": {
         "error": {
@@ -537,7 +586,7 @@
     "event": {
       "delete": {
         "confirm": {
-          "message": "Sind Sie sicher, dass Sie das Ereignis ''{name}'' löschen möchten?"
+          "message": "Bist du sicher, dass du das Ereignis ''{name}'' löschen möchtest?"
         },
         "error": {
           "message": "Der Termin ''{name}''“ konnte nicht gelöscht werden!\nFehler: {Fehler}"
@@ -561,19 +610,19 @@
           "label": "Datum"
         },
         "description": {
-          "help": "Geben Sie einige Informationen zu diesem Ereignis ein.",
+          "help": "Gib einige Informationen zu diesem Ereignis ein.",
           "label": "Beschreibung eingeben"
         },
         "remind": {
           "label": "Erinnerung in"
         },
         "repeat": {
-          "help": "Wählen Sie einen Wiederholungszeitraum und eine Anzahl aus.",
-          "invalid": "Geben Sie eine gültige Anzahl ein.",
+          "help": "Wähle einen Wiederholungszeitraum und eine Anzahl aus.",
+          "invalid": "Gib eine gültige Wiederholungsanzahl ein.",
           "label": "Wiederholen alle"
         },
         "repeat_amount": {
-          "label": "Wählen Sie Anzahl"
+          "label": "Wähle eine Anzahl"
         },
         "save": {
           "error": {
@@ -584,9 +633,9 @@
           }
         },
         "summary": {
-          "help": "Geben Sie einen Namen ein.",
+          "help": "Gib einen Namen ein.",
           "invalid": "Der Name darf nicht leer sein.",
-          "label": "Geben Sie einen Namen ein"
+          "label": "Gib einen Namen ein"
         },
         "title": "Ereignis",
         "update": {
@@ -638,8 +687,8 @@
   },
   "enclosures": {
     "actions": {
-      "delete": "Gehäuse löschen",
-      "settings": "Gehäuse bearbeiten"
+      "delete": "Terrarium löschen",
+      "settings": "Terrarium bearbeiten"
     },
     "area": {
       "current": "Aktuell",
@@ -680,13 +729,13 @@
     },
     "delete": {
       "confirm": {
-        "message": "Sind Sie sicher, dass Sie das Gehäuse ''{name}'' löschen möchten?"
+        "message": "Bist du sicher, dass du das Terrarium ''{name}'' löschen möchten?"
       },
       "error": {
-        "message": "Das Gehäuse ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
+        "message": "Das Terrarium ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
       },
       "ok": {
-        "message": "Das Gehäuse ''{name}'' wird gelöscht."
+        "message": "Das Terrarium ''{name}'' wird gelöscht."
       }
     },
     "doors": {
@@ -706,37 +755,37 @@
     },
     "settings": {
       "description": {
-        "help": "Geben Sie einen Beschreibungstext zu diesem Gehäuse ein.",
+        "help": "Gib einen Beschreibungstext zu diesem Terrarium ein.",
         "label": "Beschreibung",
         "placeholder": "Beschreibung eingeben"
       },
       "doors": {
-        "help": "Wählen Sie die Türen für dieses Gehäuse aus.",
+        "help": "Wähle die Türen für dieses Terrarium aus.",
         "label": "Türen"
       },
       "image": {
-        "help": "Laden Sie einen JPG oder PNG hoch.",
+        "help": "Lade einen JPG oder PNG hoch.",
         "invalid": "Die ausgewählte Datei ist nicht gültig. Es ist keine Bilddatei.",
         "label": "Bild",
-        "placeholder": "Wählen Sie eine Bilddatei aus"
+        "placeholder": "Wähle eine Bilddatei aus"
       },
       "name": {
-        "help": "Geben Sie einen leicht zu merkenden Namen ein.",
-        "invalid": "Der eingegebene Name ist nicht gültig. Es kann nicht leer sein.",
+        "help": "Gib einen leicht zu merkenden Namen ein.",
+        "invalid": "Der eingegebene Name ist nicht gültig. Er kann nicht leer sein.",
         "label": "Name",
-        "placeholder": "Geben Sie einen Namen ein"
+        "placeholder": "Gib einen Namen ein"
       },
       "save": {
         "error": {
           "required_fields": "Nicht alle Pflichtfelder sind korrekt eingegeben."
         },
         "ok": {
-          "message": "Gehege ''{name}'' wird aktualisiert."
+          "message": "Terrarium ''{name}'' wird aktualisiert."
         }
       },
       "title": "Terrarieneinstellungen",
       "webcams": {
-        "help": "Wählen Sie die Webcam (en) für dieses Gehäuse aus.",
+        "help": "Wähle die Webcam (en) für dieses Terrarium aus.",
         "label": "Webkameras"
       }
     },
@@ -764,7 +813,7 @@
     },
     "humidity": "Luftfeuchtigkeit",
     "login": {
-      "title": "Melden Sie sich an, um Änderungen vorzunehmen"
+      "title": "Melde dich an, um Änderungen vorzunehmen"
     },
     "logout": {
       "title": "Ausloggen"
@@ -777,8 +826,8 @@
       "days": "{number, plural, =1 {# Tag} other {# Tage}}",
       "hours": "{number, plural, =1 {# Stunde} other {# Stunden}}",
       "minutes": "{number, plural, =1 {# Minute} other {# Minutes}}",
-      "months": "{number, plural, =1 {# Monat} other {# Monate}}",
-      "seconds": "{number, plural, =1 {# zweite} other {# zweites}}",
+      "months": "{number, plural, =1 {# Monat} other {#Monate}}",
+      "seconds": "{number, plural, =1 {# Sekunde} other {# Sekunden}}",
       "years": "{number, plural, =1 {# Jahr} other {# Jahre}}"
     }
   },
@@ -819,7 +868,7 @@
     "add": "Nachricht hinzufügen",
     "delete": {
       "confirm": {
-        "message": "Sind Sie sicher, dass Sie die Meldung ''{name}'' löschen möchten?"
+        "message": "Bist du sicher, dass du die Meldung ''{name}'' löschen möchtest?"
       },
       "error": {
         "message": "Die Meldung ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
@@ -831,15 +880,15 @@
     "ratelimit": "{number, plural, =0 {Unbegrenzte Nachrichten} other {Max # pro Minute}}",
     "settings": {
       "available_services": {
-        "help": "Wählen Sie den Dienst der für die Benachrichtigung genutzt werden soll.",
+        "help": "Wähle den Dienst der für die Benachrichtigung genutzt werden soll.",
         "label": "Leistungen"
       },
       "enabled": {
-        "help": "Aktivieren/deaktivieren Sie diese Benachrichtigung.",
+        "help": "Aktiviere/deaktiviere diese Benachrichtigung.",
         "label": "Aktiviert"
       },
       "message": {
-        "help": "Geben Sie eine Nachricht ein. Sie können hier Platzhalter Werte nutzen.",
+        "help": "Gib eine Nachricht ein. Hier können Platzhalter Werte benutzt werden.",
         "label": "Nachricht",
         "placeholder": "Nachricht eingeben"
       },
@@ -850,7 +899,7 @@
       },
       "rate_limit": {
         "help": "Maximale Anzahl von Benachrichtigungen pro Minute. 0 = unbegrenzt.",
-        "invalid": "Der eingegebene Wert ist nicht gültig. Geben Sie eine gültige Nummer ein, die höher als {min}.",
+        "invalid": "Der eingegebene Wert ist nicht gültig. Gib eine gültige Anzahl ein, die höher als {min}.",
         "label": "Geschwindigkeitslimit",
         "placeholder": "Nachrichten pro Minute"
       },
@@ -863,7 +912,7 @@
         }
       },
       "subject": {
-        "help": "Geben Sie ein kurzes Thema ein. Hier können Platzhalterwerte verwendet werden.",
+        "help": "Gib ein kurzes Thema ein. Hier können Platzhalterwerte verwendet werden.",
         "invalid": "Eingabe erforderlich.",
         "label": "Betreff",
         "placeholder": "Betreff eingeben"
@@ -871,7 +920,7 @@
       "title": "Benachrichtigungseinstellungen",
       "type": {
         "help": "Benachrichtigungstyp wählen.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Nachrichtentyp",
         "placeholder": "Typ auswählen"
       }
@@ -899,9 +948,9 @@
         "title": "Bestätigen"
       },
       "system": {
-        "logout": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+        "logout": "Bist du sicher, dass du dich abmelden möchtest?",
         "reboot": "Dadurch wird der Raspberry Pi neu gestartet. Dies kann bis zu 60 Sekunden dauern.",
-        "restart": "Dies wird Terrariumpi neu starten. Dies kann bis zu 30 Sekunden dauern.",
+        "restart": "Dies wird TerrariumPi neu starten. Dies kann bis zu 30 Sekunden dauern.",
         "shutdown": "Dadurch wird der Raspberry Pi heruntergefahren. Mit Sorgfalt verwenden!"
       },
       "title": "Bist du dir sicher?"
@@ -916,15 +965,16 @@
       "save": "Speichern"
     },
     "login": {
+      "error": "Ungültiger Login",
       "form": {
         "password": {
-          "help": "Geben Sie das Passwort ein.",
+          "help": "Gib das Passwort ein.",
           "invalid": "Passwort kann nicht leer sein.",
           "label": "Passwort"
         },
         "submit": "Anmelden",
         "username": {
-          "help": "Geben Sie den Benutzernamen ein.",
+          "help": "Gib den Benutzernamen ein.",
           "invalid": "Der Benutzername darf nicht leer sein.",
           "label": "Benutzername"
         }
@@ -937,7 +987,7 @@
           "field": {
             "setup": {
               "address": {
-                "label": "Geben Sie eine Adresse ein"
+                "label": "Gib eine Adresse ein"
               }
             }
           }
@@ -947,7 +997,7 @@
   },
   "not-found": {
     "header": "Seite nicht gefunden",
-    "link": "Gehen Sie zur Homepage",
+    "link": "Gehe zur Homepage",
     "title": "Seite nicht gefunden"
   },
   "notification": {
@@ -955,12 +1005,17 @@
       "error": {
         "title": "ERROR"
       },
+      "invalid": {
+        "title": "Error"
+      },
       "ok": {
         "title": "OK"
       }
     },
     "door": {
       "status": {
+        "closed": "Tür ''{name}'' ist geschlossen",
+        "open": "Tür ''{name}'' ist geöffnet",
         "title": "Türstatus -Update"
       }
     },
@@ -990,7 +1045,7 @@
     "login": {
       "message": {
         "error": "Entschuldigung, aber Login ist ungültig",
-        "ok": "Sie werden erfolgreich angemeldet."
+        "ok": "Du bist erfolgreich angemeldet."
       },
       "title": "Anmelden"
     },
@@ -1003,7 +1058,7 @@
       }
     },
     "offline": {
-      "message": "Die Verbindung geht verloren",
+      "message": "Verbindung verloren",
       "title": "Offline"
     },
     "online": {
@@ -1022,7 +1077,7 @@
     },
     "scanning": {
       "ok": {
-        "title": "Scanning fertig"
+        "title": "Scan abgeschlossen"
       }
     },
     "shutdown": {
@@ -1050,38 +1105,38 @@
     },
     "confirm": {
       "ignore": {
-        "message": "Sind Sie sicher, dass Sie das Relay ''{name}'' ignorieren möchten?"
+        "message": "Bist du sicher, dass du das Relay ''{name}'' ignorieren möchtest?"
       },
       "manual_mode": {
-        "message": "Schaltethersteller für das Relay ''{name}''?"
+        "message": "Schalte den Manuellen Modus an für das Relais ''{name}''?"
       }
     },
     "delete": {
       "confirm": {
-        "message": "Sind Sie sicher, dass Sie das Relay ''{name}'' löschen möchten?"
+        "message": "Bist du sicher, dass du das Relais ''{name}'' löschen möchtest?"
       },
       "error": {
         "message": "Das Relay ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
       },
       "ok": {
-        "message": "Das Relay ''{name}'' wird gelöscht."
+        "message": "Das Relais ''{name}'' wird gelöscht."
       }
     },
     "exclude": {
       "error": {
-        "message": "Das Relay ''{name}'' konnte nicht ignoriert werden!\nFehler: {error}"
+        "message": "Das Relais ''{name}'' konnte nicht ignoriert werden!\nFehler: {error}"
       },
       "ok": {
-        "message": "Das Relay ''{name}'' wird ignoriert."
+        "message": "Das Relais ''{name}'' wird ignoriert."
       }
     },
     "manual-mode": "Manueller Modus",
     "manual_mode": {
       "error": {
-        "message": "Fehler ändern manueller Modus für Relay ''{name}''.\nFehler: {error}"
+        "message": "Fehler beim Wechsel zum manuellen Modus für Relais ''{name}''.\nFehler: {error}"
       },
       "ok": {
-        "message": "Der manuelle Modus für Relay ''{name}'' wird geändert."
+        "message": "Der manuelle Modus für Relais ''{name}'' wurde geändert."
       }
     },
     "menu": {
@@ -1099,30 +1154,30 @@
     "settings": {
       "address": {
         "help": "Weitere Informationen finden Sie online.",
-        "invalid": "Die eingegebene Adresse ist nicht gültig. Es kann nicht leer sein.",
+        "invalid": "Die eingegebene Adresse ist nicht gültig. Sie kann nicht leer sein.",
         "label": "Adresse",
-        "placeholder": "Geben Sie eine Adresse ein"
+        "placeholder": "Gib eine Adresse ein"
       },
       "calibration": {
         "dimmer_frequency": {
           "help": "Arbeitsfrequenz des Dimmers.",
-          "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+          "invalid": "Bitte gib einen Mindestwert von {value} ein.",
           "label": "Dimmerfrequenz in Hz"
         },
         "dimmer_max_dim": {
           "help": "Maximaler Dimmerwert (Vermächtnis).",
-          "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+          "invalid": "Bitte gib einen Mindestwert von {value} ein.",
           "label": "Maximaler Dimmerwert"
         },
         "dimmer_max_power": {
           "help": "Die maximale Leistung für diesen Dimmer.",
-          "invalid": "Der eingegebene Wert ist nicht gültig. Geben Sie eine gültige Nummer zwischen {min} und {max} ein.",
+          "invalid": "Der eingegebene Wert ist nicht gültig. Gib eine gültige Zahl zwischen {min} und {max} ein.",
           "label": "Maximale Leistung in %"
         },
         "dimmer_offset": {
-          "help": "Dimmer-Offset.",
-          "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
-          "label": "Dimmer-Offset in %"
+          "help": "Dimmerabweichung.",
+          "invalid": "Bitte gib einen Mindestwert von {value} ein.",
+          "label": "Dimmerabweichung in %"
         }
       },
       "current": {
@@ -1131,34 +1186,34 @@
         "placeholder": "Aktueller Wert"
       },
       "flow": {
-        "help": "Geben Sie den Wasserfluss (max) beim Einschalten ein.",
-        "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+        "help": "Gib den Wasserfluss (max) beim Einschalten ein.",
+        "invalid": "Bitte gib einen Mindestwert von {value} ein.",
         "label": "Wasserfluss"
       },
       "hardware": {
-        "help": "Wählen Sie den Hardwaretyp für diesen Taster aus.",
-        "invalid": "Bitte wählen Sie einen Hardwaretyp aus.",
+        "help": "Wähle den Hardwaretyp für diesen Taster aus.",
+        "invalid": "Bitte wähle einen Hardwaretyp aus.",
         "label": "Hardware",
         "placeholder": "Hardware auswählen"
       },
       "name": {
-        "help": "Geben Sie einen leicht zu merkenden Namen ein.",
-        "invalid": "Der eingegebene Name ist nicht gültig. Es kann nicht leer sein.",
+        "help": "Gib einen leicht zu merkenden Namen ein.",
+        "invalid": "Der eingegebene Name ist nicht gültig. Er kann nicht leer sein.",
         "label": "Name",
-        "placeholder": "Geben Sie einen Namen ein"
+        "placeholder": "Gib einen Namen ein"
       },
       "save": {
         "error": {
           "required_fields": "Nicht alle Pflichtfelder sind korrekt eingegeben."
         },
         "ok": {
-          "message": "Relay ''{name}'' wird aktualisiert."
+          "message": "Relais ''{name}'' wird aktualisiert."
         }
       },
       "title": "Relaiseinstellungen",
       "wattage": {
-        "help": "Geben Sie beim Einschalten die (maximale) Leistung ein.",
-        "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+        "help": "Gib die (maximale) Leistung beim Einschalten ein.",
+        "invalid": "Bitte gib einen Mindestwert von {value} ein.",
         "label": "Watt"
       }
     },
@@ -1199,7 +1254,7 @@
       "humidity": "Durchschnittliche Luftfeuchtigkeit",
       "light": "Durchschnittliches Licht",
       "moisture": "Durchschnittliche Feuchtigkeit",
-      "pressure": "Durchschnittlicher Druck",
+      "pressure": "Durchschnittlicher Luftdruck",
       "temperature": "Durchschnittstemperatur",
       "uva": "Durchschnittliche UVA",
       "uvb": "Durchschnittliches UVB",
@@ -1213,12 +1268,12 @@
     },
     "confirm": {
       "ignore": {
-        "message": "Sind Sie sicher, dass Sie den Sensor ''{name}'' ignorieren möchten?"
+        "message": "Bist du sicher, dass du den Sensor ''{name}'' ignorieren möchtest?"
       }
     },
     "delete": {
       "confirm": {
-        "message": "Sind Sie sicher, dass Sie den Sensor ''{name}'' löschen möchten?"
+        "message": "Bist du sicher, dass du den Sensor ''{name}'' löschen möchtest?"
       },
       "error": {
         "message": "Der Sensor ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
@@ -1284,46 +1339,46 @@
       "menu": {
         "title": "Luftdruck"
       },
-      "title": "Drucksensor"
+      "title": "Luftdrucksensor"
     },
     "settings": {
       "address": {
-        "help": "Geben Sie eine Adresse ein.",
-        "invalid": "Die eingegebene Adresse ist nicht gültig. Es kann nicht leer sein.",
+        "help": "Gib eine Adresse ein.",
+        "invalid": "Die eingegebene Adresse ist nicht gültig.Sie kann nicht leer sein.",
         "label": "Adresse",
-        "placeholder": "Geben Sie eine Adresse ein"
+        "placeholder": "Gib eine Adresse ein"
       },
       "alarm_max": {
-        "help": "Geben Sie den Maximalwert für den Alarm ein.",
+        "help": "Gib den Maximalwert für den Alarm ein.",
         "invalid": "Der eingegebene Wert ist nicht gültig. Es muss eine Nummer sein.",
         "label": "Alarm max",
         "placeholder": "Alarm max"
       },
       "alarm_min": {
-        "help": "Geben Sie den Mindestwert für den Alarm ein.",
+        "help": "Gib den Mindestwert für den Alarm ein.",
         "invalid": "Der eingegebene Wert ist nicht gültig. Es muss eine Nummer sein.",
         "label": "Alarm min",
         "placeholder": "Alarm min"
       },
       "calibration": {
         "ccs811_compensation_sensors": {
-          "help": "Wählen Sie die Sensoren für die Kompensationsberechnung aus.",
+          "help": "Wähle die Sensoren für die Kompensationsberechnung aus.",
           "label": "Kompensationssensoren",
           "placeholder": "Kompensationssensoren auswählen"
         },
         "chirp_max_moist": {
-          "help": "Geben Sie den maximalen feuchten Wert ein.",
+          "help": "Gib den maximalen feuchten Wert ein.",
           "invalid": "Der eingegebene Wert ist ungültig. Es muss eine Zahl größer als {min} sein.",
           "label": "Maximaler Feuchtigkeitswert"
         },
         "chirp_min_moist": {
-          "help": "Geben Sie den minimalen feuchten Wert ein.",
-          "invalid": "Der eingegebene Wert ist nicht gültig. Es muss eine Anzahl höher sein als {min}.",
+          "help": "Gib den minimalen Feuchtigkeitswert ein.",
+          "invalid": "Der eingegebene Wert ist nicht gültig. Es muss ein Wert höher sein als {min}.",
           "label": "Mindestfeuchtewert"
         },
         "offset": {
-          "help": "Offset für diesen Sensor eingeben.",
-          "invalid": "Der eingegebene Wert ist nicht gültig. Es muss eine Nummer sein.",
+          "help": "Abweichung für diesen Sensor eingeben.",
+          "invalid": "Der eingegebene Wert ist nicht gültig. Er muss eine Nummer sein.",
           "label": "Korrektur"
         }
       },
@@ -1333,49 +1388,49 @@
         "placeholder": "Aktueller Wert"
       },
       "exclude_avg": {
-        "help": "Sensor nicht für Durchscnnittsberechnungen verwenden.",
+        "help": "Sensor nicht für Durchschnittsberechnungen verwenden.",
         "label": "Exklusiver Durchschnitt"
       },
       "fields": {
         "error": "Nicht alle Pflichtfelder sind korrekt eingegeben."
       },
       "hardware": {
-        "help": "Wählen Sie den Hardwaretyp für diesen Taster aus.",
-        "invalid": "Bitte wählen Sie einen Hardwaretyp aus.",
+        "help": "Wähle den Hardwaretyp für diesen Taster aus.",
+        "invalid": "Bitte wähle einen Hardwaretyp aus.",
         "label": "Hardware",
         "placeholder": "Hardware auswählen"
       },
       "limit_max": {
-        "help": "Geben Sie den gültigen Maximalwert ein.",
+        "help": "Gib den gültigen Maximalwert ein.",
         "invalid": "Der eingegebene Wert ist nicht gültig. Es muss eine Nummer sein.",
         "label": "Höchster Wert"
       },
       "limit_min": {
-        "help": "Geben Sie den gültigen Mindestwert ein.",
-        "invalid": "Der eingegebene Wert ist nicht gültig. Es muss eine Nummer sein.",
+        "help": "Gib den gültigen Mindestwert ein.",
+        "invalid": "Der eingegebene Wert ist nicht gültig. Er muss eine Nummer sein.",
         "label": "niedrigster Wert"
       },
       "max_diff": {
-        "help": "Geben Sie die maximale Differenz zwischen zwei gültigen Messungen ein. Geben Sie '0' ein, um zu deaktivieren.",
-        "invalid": "Der eingegebene Wert ist nicht gültig. Es muss eine Anzahl höher sein als {min}.",
+        "help": "Gib die maximale Differenz zwischen zwei gültigen Messungen ein. Geben Sie '0' ein, um zu deaktivieren.",
+        "invalid": "Der eingegebene Wert ist nicht gültig. Es muss ein Wert höher sein als {min}.",
         "label": "Max. Differenz",
         "placeholder": "Maximale Differenz"
       },
       "name": {
-        "help": "Geben Sie einen leicht zu merkenden Namen ein.",
-        "invalid": "Der eingegebene Name ist nicht gültig. Es kann nicht leer sein.",
+        "help": "Gib einen leicht zu merkenden Namen ein.",
+        "invalid": "Der eingegebene Name ist nicht gültig. Er kann nicht leer sein.",
         "label": "Name",
-        "placeholder": "Geben Sie einen Namen ein"
+        "placeholder": "Gib einen Namen ein"
       },
       "save": {
         "ok": {
           "message": "Sensor ''{name}'' wird aktualisiert."
         }
       },
-      "title": "Sensoreneinstellung",
+      "title": "Sensoreinstellung",
       "type": {
-        "help": "Wählen Sie die Messart für diesen Sensor aus.",
-        "invalid": "Bitte wählen Sie die Messungsart aus.",
+        "help": "Wähle die Messart für diesen Sensor aus.",
+        "invalid": "Bitte wähle die Messungsart aus.",
         "label": "Typ",
         "placeholder": "Typ auswählen"
       }
@@ -1414,31 +1469,31 @@
     "add": "Service hinzufügen",
     "delete": {
       "confirm": {
-        "message": "Sind Sie sicher, dass Sie den Dienst ''{name}'' löschen möchten?"
+        "message": "Bist du sicher, dass du den Dienst ''{name}'' löschen möchtest?"
       },
       "error": {
         "message": "Der Dienst ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
       },
       "ok": {
-        "message": "Der Dienst ''{name}'' wird gelöscht."
+        "message": "Der Dienst ''{name}'' wurde gelöscht."
       }
     },
     "enabled": "Aktiviert",
     "ratelimit": "{number, plural, =0 {Unbegrenzte Nachrichten} other {Max # pro Minute}}",
     "settings": {
       "enabled": {
-        "help": "Aktivieren/deaktivieren Sie diesen Benachrichtigungsdienst.",
+        "help": "Aktiviere/deaktiviere diesen Benachrichtigungsdienst.",
         "label": "Aktiviert"
       },
       "name": {
-        "help": "Geben Sie einen leicht zu merkenden Namen ein.",
-        "invalid": "Der eingegebene Name ist nicht gültig. Es kann nicht leer sein.",
+        "help": "Gib einen leicht zu merkenden Namen ein.",
+        "invalid": "Der eingegebene Name ist nicht gültig. Er kann nicht leer sein.",
         "label": "Name",
-        "placeholder": "Geben Sie einen Namen ein"
+        "placeholder": "Gib einen Namen ein"
       },
       "rate_limit": {
         "help": "Maximale Anzahl der Nachrichten für diesen Dienst. Nutze 0 für unendlich.",
-        "invalid": "Der eingegebene Wert ist nicht gültig. Geben Sie eine gültige Nummer ein, die höher als {min}.",
+        "invalid": "Der eingegebene Wert ist nicht gültig. Gib eine gültige Nummer ein, die höher ist als {min}.",
         "label": "Geschwindigkeitslimit",
         "placeholder": "Nachrichten pro Minute"
       },
@@ -1452,57 +1507,57 @@
       },
       "setup": {
         "address": {
-          "help": "Geben Sie eine Adresse ein.",
-          "invalid": "Die eingegebene Adresse ist nicht gültig. Es kann nicht leer sein.",
+          "help": "Gib eine Adresse ein.",
+          "invalid": "Die eingegebene Adresse ist nicht gültig. Sie kann nicht leer sein.",
           "label": "Adresse",
-          "placeholder": "Geben Sie eine Adresse ein"
+          "placeholder": "Gib eine Adresse ein"
         },
         "api_token": {
-          "help": "Geben Sie das Pushover-API-Token ein.",
+          "help": "Gib das Pushover-API-Token ein.",
           "invalid": "Das eingegebene API -Token ist nicht gültig. Es kann nicht leer sein.",
           "label": "API-Token",
-          "placeholder": "Geben Sie das API-Token ein"
+          "placeholder": "Gib das API-Token ein"
         },
         "buzzer": {
           "help": "Liste der verfügbaren Lieder im Nachrichten Objekt."
         },
         "green": {
-          "help": "Geben Sie den GPIO für grünes Licht an.",
-          "invalid": "Der eingegebene Wert ist nicht gültig. Geben Sie eine gültige Nummer zwischen {min} und {max} ein.",
+          "help": "Gib den GPIO für grünes Licht an.",
+          "invalid": "Der eingegebene Wert ist nicht gültig. Gib eine gültige Nummer zwischen {min} und {max} ein.",
           "label": "Grün",
-          "placeholder": "Geben Sie den grünen GPIO-Pin ein"
+          "placeholder": "Gib den grünen GPIO-Pin ein"
         },
         "hardware": {
-          "help": "Wählen Sie den Hardwaretyp für diese Anzeige aus.",
-          "invalid": "Bitte treffen Sie eine Wahl.",
+          "help": "Wähle den Hardwaretyp für diese Anzeige aus.",
+          "invalid": "Bitte triff eine Wahl.",
           "label": "Hardware",
           "placeholder": "Hardware auswählen"
         },
         "password": {
-          "help": "Geben Sie das Serverkennwort ein.",
+          "help": "Gib das Serverkennwort ein.",
           "label": "Server-Passwort",
-          "placeholder": "Geben Sie einen Nutzernamen ein"
+          "placeholder": "Gib einen Nutzernamen ein"
         },
         "port": {
-          "help": "Geben Sie die Server -Portnummer ein.",
-          "invalid": "Die eingegebene Portnummer ist nicht gültig. Es kann nicht leer sein.",
+          "help": "Gib die Server -Portnummer ein.",
+          "invalid": "Die eingegebene Portnummer ist nicht gültig. Sie kann nicht leer sein.",
           "label": "Server Port",
           "placeholder": "Portnummer eingeben"
         },
         "pushover": {
-          "label": "Erstellen Sie Ihre Token, indem Sie Terrariumpi als App {link} registrieren."
+          "label": "Erstelle einen Token, indem du Terrariumpi als App {link} registrierst."
         },
         "receiver": {
-          "help": "Bitte geben Sie eine E-Mail-Adresse ein.",
+          "help": "Bitte gib eine E-Mail-Adresse ein.",
           "invalid": "Adresse darf nicht leer sein.",
           "label": "Empfänger-E-Mail",
-          "placeholder": "Bitte geben Sie eine E-Mail-Adresse ein"
+          "placeholder": "Bitte gib eine E-Mail-Adresse ein"
         },
         "red": {
-          "help": "Geben Sie Den GPIO für rotes Licht an.",
-          "invalid": "Der eingegebene Wert ist nicht gültig. Geben Sie eine gültige Nummer zwischen {min} und {max} ein.",
+          "help": "Gib den GPIO für rotes Licht an.",
+          "invalid": "Der eingegebene Wert ist nicht gültig. Gib eine gültige Nummer zwischen {min} und {max} ein.",
           "label": "Rot",
-          "placeholder": "Geben Sie den roten GPIO-Pin ein"
+          "placeholder": "Gib den roten GPIO-Pin ein"
         },
         "show_title": {
           "help": "Titel und Version auf dem Display anzeigen.",
@@ -1517,33 +1572,33 @@
           }
         },
         "url": {
-          "help": "Geben Sie eine vollständige URL ein.",
+          "help": "Gib eine vollständige URL ein.",
           "invalid": "Die eingegebene URL ist nicht gültig. Es kann nicht leer sein.",
           "label": "Vollständige Beitrags-URL",
-          "placeholder": "Geben Sie eine vollständige Post-URL ein"
+          "placeholder": "Gib eine vollständige Post-URL ein"
         },
         "user_key": {
-          "help": "Geben Sie den Pushover-Benutzerschlüssel ein.",
-          "invalid": "Der eingegebene Benutzerschlüssel ist nicht gültig. Es kann nicht leer sein.",
+          "help": "Gib den Pushover-Benutzerschlüssel ein.",
+          "invalid": "Der eingegebene Benutzerschlüssel ist nicht gültig. Er kann nicht leer sein.",
           "label": "Benutzerschlüssel",
-          "placeholder": "Geben Sie den Benutzerschlüssel ein"
+          "placeholder": "Gib den Benutzerschlüssel ein"
         },
         "username": {
-          "help": "Geben Sie den Server -Benutzernamen ein.",
+          "help": "Gib den Server -Benutzernamen ein.",
           "label": "Server -Benutzername",
-          "placeholder": "Geben Sie einen Nutzernamen ein"
+          "placeholder": "Gib einen Nutzernamen ein"
         },
         "yellow": {
-          "help": "Geben Sie den GPIO für gelbes Licht an.",
-          "invalid": "Der eingegebene Wert ist nicht gültig. Geben Sie eine gültige Nummer zwischen {min} und {max} ein.",
+          "help": "Gib den GPIO für gelbes Licht an.",
+          "invalid": "Der eingegebene Wert ist nicht gültig. Gib eine gültige Nummer zwischen {min} und {max} ein.",
           "label": "Gelb",
-          "placeholder": "Geben Sie den gelben GPIO an"
+          "placeholder": "Gib den gelben GPIO an"
         }
       },
       "title": "Einstellungen für den Benachrichtigungsdienst",
       "type": {
         "help": "Wählen Sie die Benachrichtigungsdienste.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Typ",
         "placeholder": "Typ auswählen"
       }
@@ -1594,12 +1649,12 @@
     },
     "settings": {
       "all_gauges_on_single_page": {
-        "help": "Fügen Sie einen zusätzlichen Menüpunkt für alle Sensoren auf einer einzigen Seite hinzu.",
+        "help": "Füge einen zusätzlichen Menüpunkt für alle Sensoren auf einer einzigen Seite hinzu.",
         "label": "Alle Grafen auf einer zusätzlichen Seite"
       },
       "authenticate": {
         "help": "Immer oder nur bei Änderungen authentifizieren.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Authentifizierungsmodus",
         "options": {
           "changes": "Nur für Änderungen",
@@ -1608,17 +1663,27 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Schalten Sie den Dunkelmodus um, wenn die Nacht beginnt.",
+        "help": "Schalte den Dunkelmodus um, wenn die Nacht beginnt.",
         "label": "Automatischer Dunkelmodus"
       },
       "currency": {
-        "help": "Wählen Sie die Schnittstellenwährung.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle die Währung.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Währung"
       },
+      "dashboard_mode": {
+        "help": "Wähle wie das Dashboard aussehen soll.",
+        "invalid": "Bitte mach eine Auswahl.",
+        "label": "Dashboard Modus",
+        "options": {
+          "normal": "Grafen und Terrarien",
+          "only_enclosures": "Nur Terrarien",
+          "only_graphs": "Nur Graphen"
+        }
+      },
       "distance_indicator": {
-        "help": "Wählen Sie die Entfernungsanzeige.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle die Entfernungsanzeige.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Distanztyp"
       },
       "exclude-ids": {
@@ -1626,8 +1691,8 @@
         "label": "Ausgeschlossene IDs"
       },
       "graph_smooth_value": {
-        "help": "Geben Sie die Anzahl der Datenpunkte zum Durchschnitt ein. '0' zum deaktivieren.",
-        "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+        "help": "Gib die Anzahl der Datenpunkte zum Durchschnitt ein. '0' zum deaktivieren.",
+        "invalid": "Bitte gib einen Mindestwert von {value} ein.",
         "label": "Graphenglättung"
       },
       "header": {
@@ -1637,48 +1702,48 @@
         "system": "System"
       },
       "hide_environment_dashboard": {
-        "help": "Blenden Sie die Gehäusedaten auf dem Dashboard aus.",
-        "label": "Gehäuse auf dem Dashboard ausblenden"
+        "help": "Blende Terrariendaten auf dem Dashboard aus.",
+        "label": "Terrarien auf dem Dashboard ausblenden"
       },
       "host": {
-        "help": "Geben Sie die IP Adresse an, auf der das Gerät erreichbar sein soll. Standard: 0.0.0.0.",
+        "help": "Gib die IP Adresse an, auf der das Gerät erreichbar sein soll. Standard: 0.0.0.0.",
         "invalid": "Bitte gültige IP-Adresse eingeben.",
         "label": "IP Adresse"
       },
       "language": {
-        "help": "Wählen Sie die Sprache für die Benutzeroberfläche.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle die Sprache für die Benutzeroberfläche.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Sprache"
       },
       "meross_cloud_password": {
-        "help": "Geben Sie das Passwort ein, um sich bei der Meross Cloud anzumelden.",
+        "help": "Gib das Passwort ein, um sich bei der Meross Cloud anzumelden.",
         "label": "Meross-Passwort"
       },
       "meross_cloud_username": {
-        "help": "Geben Sie den Benutzernamen ein, um sich bei der Meross-Cloud anzumelden.",
+        "help": "Gib den Benutzernamen ein, um sich bei der Meross-Cloud anzumelden.",
         "label": "Meross-Benutzername"
       },
       "page": {
         "title": "Systemeinstellungen"
       },
       "password": {
-        "help": "Geben Sie ein Passwort zur Authentifizierung ein.",
+        "help": "Gib ein Passwort zur Authentifizierung ein.",
         "invalid": "Das Passwort darf nicht leer sein.",
         "label": "Neues Passwort"
       },
       "password2": {
-        "help": "Bitte geben Sie das neue Passwort erneut ein.",
+        "help": "Bitte gib das neue Passwort erneut ein.",
         "invalid": "Das neue Passwort stimmt nicht überein.",
         "label": "Bestätige neues Passwort"
       },
       "pi-wattage": {
-        "help": "Geben Sie den Gesamtstromverbrauch des Pi mit allen angeschlossenen USB-Geräten ein.",
-        "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+        "help": "Gib den Gesamtstromverbrauch des Pi mit allen angeschlossenen USB-Geräten ein.",
+        "invalid": "Bitte gib einen Mindestwert von {value} ein.",
         "label": "Pi-Stromverbrauch"
       },
       "port": {
-        "help": "Geben Sie die Portnummer ein, um auf Verbindungen zu warten: Standard: 8090.",
-        "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+        "help": "Gib die Portnummer ein, um auf Verbindungen zu warten: Standard: 8090.",
+        "invalid": "Bitte gib einen Mindestwert von {value} ein.",
         "label": "Port-Nummer"
       },
       "power_price": {
@@ -1851,6 +1916,19 @@
       },
       "ok": {
         "message": "Die Webcam ''{name}'' wird ignoriert."
+      }
+    },
+    "marker": {
+      "delete": {
+        "confirm": {
+          "message": "Möchtest du die Markierung wirklich löschen?"
+        },
+        "error": {
+          "message": "Markierung kann nicht gelöscht werden"
+        },
+        "invalid": {
+          "message": "Ungültige Markierung"
+        }
       }
     },
     "markers": {
