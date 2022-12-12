@@ -2,12 +2,13 @@
 # Copyright (C) 2016-2021 TheYOSH
 # Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2021.
 # theyosh <github.com@theyosh.nl>, 2022.
+# Tobias Nitsch <info@sni-reptiles.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2022-08-21 13:28+CEST\n"
-"PO-Revision-Date: 2022-08-22 11:42+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2022-12-12 20:49+0000\n"
+"Last-Translator: Tobias Nitsch <info@sni-reptiles.com>\n"
 "Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/de/>\n"
 "Language: de\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.14.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -24,7 +25,7 @@ msgstr "Beleuchtung"
 
 #: terrariumArea.py:38
 msgid "Heating"
-msgstr "Beheizung"
+msgstr "Heizung"
 
 #: terrariumArea.py:44
 msgid "Cooling"
@@ -120,7 +121,7 @@ msgstr "CO²"
 
 #: terrariumEngine.py:67
 msgid "volume"
-msgstr "Inhalt"
+msgstr "Volumen"
 
 #: terrariumEngine.py:70
 msgid "water_volume"
@@ -192,15 +193,15 @@ msgstr "letztes Update"
 
 #: terrariumNotification.py:37
 msgid "Local date"
-msgstr "Lokales Datum"
+msgstr "Datum"
 
 #: terrariumNotification.py:38
 msgid "Local date, day and month"
-msgstr "Lokales Datum, Tag und Monat"
+msgstr "Datum, Tag und Monat"
 
 #: terrariumNotification.py:39
 msgid "Local time"
-msgstr "Lokale Zeit"
+msgstr "Ortszeit"
 
 #: terrariumNotification.py:40
 msgid "Local time, hours and minutes"
@@ -208,7 +209,7 @@ msgstr "Ortszeit, Stunden und Minuten"
 
 #: terrariumNotification.py:41
 msgid "Local date and time"
-msgstr "Lokales Datum und Uhrzeit"
+msgstr "Datum und Uhrzeit"
 
 #: terrariumNotification.py:49
 msgid "Authentication login error"
@@ -248,7 +249,7 @@ msgstr "Systemzusammenfassung"
 
 #: terrariumNotification.py:77
 msgid "System uptime in human readable format"
-msgstr "System online in lesbarem Format"
+msgstr "Betriebszeit in lesbarem Format"
 
 #: terrariumNotification.py:78
 msgid "System load last minute"
@@ -273,7 +274,7 @@ msgstr "Speicherverbrauch"
 
 #: terrariumNotification.py:84
 msgid "Average of [sensor type] (ex. temperature)"
-msgstr "Durchschnitt von [sensor type] (außer Temperatur)"
+msgstr "Durchschnitt von [sensor type] (exkl. Temperatur)"
 
 #: terrariumNotification.py:85 terrariumNotification.py:132
 msgid "Sensor type unit value"
@@ -321,7 +322,7 @@ msgstr "Anzahl Aktualisierungsprobleme"
 
 #: terrariumNotification.py:109
 msgid "System to slow with updates more then 30 times"
-msgstr "Häufigkeit von Aktualisierungsproblemen höher als 30"
+msgstr "System mehr als 30 Mal zu langsam beim Aktualisieren"
 
 #: terrariumNotification.py:116
 msgid "Sensor update (every 30 seconds)"
@@ -357,7 +358,7 @@ msgstr "niedrigster Wert"
 
 #: terrariumNotification.py:124
 msgid "Limit max"
-msgstr "Höchster Wert"
+msgstr "höchster Wert"
 
 #: terrariumNotification.py:125
 msgid "Alarm min"
@@ -382,7 +383,7 @@ msgstr "Aktueller Wert"
 #: terrariumNotification.py:131 terrariumNotification.py:163
 #: terrariumNotification.py:190
 msgid "True if there is an error"
-msgstr "Fehler vorhanden"
+msgstr "Wahr wenn Fehler vorhanden"
 
 #: terrariumNotification.py:138
 msgid "Sensor change (only when value is changed)"
@@ -406,7 +407,7 @@ msgstr "Wahr, wenn im manuellen Modus"
 
 #: terrariumNotification.py:161
 msgid "True if it is a dimmer"
-msgstr "Dimmer vorhanden"
+msgstr "Wahr, wenn es ein Dimmer ist"
 
 #: terrariumNotification.py:162 terrariumNotification.py:189
 msgid "Current state"
@@ -466,7 +467,7 @@ msgstr "Summer"
 
 #: terrariumWebserver.py:166 terrariumWebserver.py:255
 msgid "Authenticate to make any changes"
-msgstr "Authentifizieren Sie sich, um Änderungen vorzunehmen"
+msgstr "Authentifiziere dich, um Änderungen vorzunehmen"
 
 #: terrariumWebserver.py:166 terrariumWebserver.py:255
 msgid "Authentication"
