@@ -199,6 +199,11 @@
           delete values.setup.low;
           delete values.setup.high;
         }
+
+        if (values.setup.variation.length == 1 && values.setup.variation[0].period == '' && values.setup.variation[0].value == '' && values.setup.variation[0].when == '') {
+          delete values.setup.variation;
+        }
+
         try {
           // Post data
           await updateArea(values, (data) => (values = data));
