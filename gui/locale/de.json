@@ -1747,8 +1747,8 @@
         "label": "Port-Nummer"
       },
       "power_price": {
-        "help": "Geben Sie den Preis pro kWh ein.",
-        "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+        "help": "Gib den Preis pro kWh ein.",
+        "invalid": "Bitte gib einen Mindestwert von {value} ein.",
         "label": "Strompreis"
       },
       "profile_image": {
@@ -1763,37 +1763,37 @@
         }
       },
       "show_min_max_gauge": {
-        "help": "Zeigen Sie den minimalen und maximalen Wert auf den Graphen an.",
-        "label": "Zeigen Sie Min- und Max-Werte in Grafiken an"
+        "help": "Zeige den minimalen und maximalen Wert auf den Graphen an.",
+        "label": "Zeige Min- und Max-Werte in Grafiken an"
       },
       "temperature_indicator": {
-        "help": "Wählen Sie die Temperaturanzeige.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle die Temperaturanzeige.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Temperaturtyp"
       },
       "title": {
-        "help": "Geben Sie einen benutzerdefinierten Titel ein.",
+        "help": "Gib einen benutzerdefinierten Titel ein.",
         "invalid": "Der Titel darf nicht leer sein.",
         "label": "Titel"
       },
       "username": {
-        "help": "Geben Sie den Benutzernamen zur Authentifizierung ein.",
+        "help": "Gib den Benutzernamen zur Authentifizierung ein.",
         "invalid": "Der Benutzername kann nicht leer sein.",
         "label": "Benutzername"
       },
       "water_price": {
-        "help": "Geben Sie den Preis pro L/Gallone ein.",
-        "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+        "help": "Gib den Preis pro L ein.",
+        "invalid": "Bitte gib einen Mindestwert von {value} ein.",
         "label": "Wasserpreis"
       },
       "water_volume_indicator": {
-        "help": "Wählen Sie die Wassermengenanzeige.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle die Wassermengenanzeige.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Volumen Typ"
       },
       "wind_speed_indicator": {
-        "help": "Wählen Sie die Windgeschwindigkeitsanzeige.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle die Windgeschwindigkeitsanzeige.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Windgeschwindigkeitstyp"
       }
     },
@@ -1815,13 +1815,13 @@
       },
       "title": "Systemstatus",
       "uptime": {
-        "title": "Systemüberzeiten"
+        "title": "Betriebszeit"
       }
     }
   },
   "table": {
     "field": {
-      "range": "Angebot"
+      "range": "Spanne"
     },
     "header": {
       "actions": "Aktionen",
@@ -1863,15 +1863,15 @@
       "fields": {
         "error": "Nicht alle Pflichtfelder sind korrekt eingegeben."
       },
-      "information": "Um das Wettersystem nutzen zu können, müssen Sie ein kostenloses Konto bei {source_link} erstellen.",
+      "information": "Um das Wettersystem nutzen zu können, musst du ein kostenloses Konto bei {source_link} erstellen.",
       "save": {
         "ok": {
-          "message": "Die Wettereinstellung wird gespeichert."
+          "message": "Die Wettereinstellung wurde gespeichert."
         }
       },
       "title": "Wettereinstellungen",
       "weather_source": {
-        "help": "Geben Sie die vollständige OpenWeatherMap-API-URL ein wie: {api_url_example}.",
+        "help": "Gib die vollständige OpenWeatherMap-API-URL ein wie: {api_url_example}.",
         "invalid": "Die eingegebene URL ist ungültig.",
         "label": "Quelle URL"
       }
@@ -1889,7 +1889,7 @@
     },
     "confirm": {
       "ignore": {
-        "message": "Sind Sie sicher, dass Sie die Webcam ''{name}'' ignorieren möchten?"
+        "message": "Bist du sicher, dass du die Webcam ''{name}'' ignorieren möchtest?"
       }
     },
     "controls": {
@@ -1901,13 +1901,13 @@
     },
     "delete": {
       "confirm": {
-        "message": "Sind Sie sicher, dass Sie die Webcam ''{name}'' löschen möchten?"
+        "message": "Bist du sicher, dass du die Webcam ''{name}'' löschen möchtest?"
       },
       "error": {
         "message": "Die Webcam ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
       },
       "ok": {
-        "message": "Die Webcam ''{name}'' wird gelöscht."
+        "message": "Die Webcam ''{name}'' wurde gelöscht."
       }
     },
     "exclude": {
@@ -1935,8 +1935,8 @@
       "settings": {
         "delete": "Löschen",
         "doors": {
-          "help": "Wählen Sie die Senoren aus, die Sie anzeigen möchten.",
-          "invalid": "Bitte treffen Sie eine Wahl.",
+          "help": "Wähle die Senoren aus, die du anzeigen möchtest.",
+          "invalid": "Bitte triff eine Wahl.",
           "label": "Sensoren"
         },
         "title": "Sensoren"
@@ -1953,45 +1953,45 @@
     },
     "settings": {
       "address": {
-        "help": "Weitere Informationen finden Sie online.",
-        "invalid": "Die eingegebene Adresse ist nicht gültig. Es kann nicht leer sein.",
+        "help": "Weitere Informationen findest du online.",
+        "invalid": "Die eingegebene Adresse ist nicht gültig. Sie kann nicht leer sein.",
         "label": "Adresse",
-        "placeholder": "Geben Sie eine Adresse ein"
+        "placeholder": "Gib eine Adresse ein"
       },
       "archive": {
         "door": {
           "help": "Türstatus zum Aufnehmen eines Archivbildes.",
-          "invalid": "Bitte treffen Sie eine Wahl.",
+          "invalid": "Bitte triff eine Wahl.",
           "label": "Türstatus archivieren",
           "options": {
             "close": "Schließen",
             "ignore": "Ignorieren",
-            "open": "Öffnen"
+            "open": "Offen"
           },
-          "placeholder": "Wählen Sie Türstatus archivieren aus"
+          "placeholder": "Wähle Türstatus aus"
         },
         "flash": {
-          "help": "Wählen Sie das Relais aus, dass das Blitzlicht steuert.",
-          "invalid": "Bitte treffen Sie eine Wahl.",
+          "help": "Wähle das Relais aus, dass das Blitzlicht steuert.",
+          "invalid": "Bitte triff eine Wahl.",
           "label": "Blitzlicht",
           "placeholder": "Optionales Relais für Blitz auswählen"
         },
         "light": {
           "help": "Lichtstatus zum Aufnehmen eines Archivbildes.",
-          "invalid": "Bitte treffen Sie eine Wahl.",
+          "invalid": "Bitte triff eine Wahl.",
           "label": "Lichtstatus archivieren",
           "options": {
             "ignore": "Ignorieren",
             "off": "Wenn ausgeschaltet",
             "on": "Wenn eingeschaltet"
           },
-          "placeholder": "Wählen Sie Lichtarchiv aus"
+          "placeholder": "Wähle den Lichtstatus aus"
         },
         "options": {
           "day_1": "1 Tag",
           "disabled": "Deaktiviert",
           "hour_1": "30 Minuten",
-          "hour_12": "12 Studen",
+          "hour_12": "12 Stunden",
           "hour_3": "3 Stunden",
           "hour_6": "6 Stunden",
           "minute_1": "1 Minute",
@@ -2001,15 +2001,15 @@
           "motion": "Bewegung"
         },
         "state": {
-          "help": "Wählen Sie die Dauer zwischen archivierten Bildern.",
-          "invalid": "Bitte treffen Sie eine Wahl.",
+          "help": "Wähle die Dauer zwischen archivierten Bildern.",
+          "invalid": "Bitte triff eine Wahl.",
           "label": "Archivierung",
           "placeholder": "Archivierung auswählen"
         }
       },
       "awb": {
-        "help": "Wählen Sie einen Weißabgleich.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle einen Weißabgleich.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Weißabgleich",
         "options": {
           "auto": "automatich",
