@@ -1795,6 +1795,7 @@
     "menu": {
       "title": "Clima"
     },
+    "no_data": "No hay datos meteorológicos disponibles",
     "settings": {
       "fields": {
         "error": "No todos los campos requeridos se ingresan correctamente."

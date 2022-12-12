@@ -1014,9 +1014,9 @@
     },
     "door": {
       "status": {
-        "title": "Door status update",
-        "closed" : "Door ''{name}'' closed",
-        "open": "Door ''{name}'' opened"
+        "closed": "Door ''{name}'' closed",
+        "open": "Door ''{name}'' opened",
+        "title": "Door status update"
       }
     },
     "exclude": {
@@ -1859,6 +1859,7 @@
     "menu": {
       "title": "Weather"
     },
+    "no_data": "No weather data available",
     "settings": {
       "fields": {
         "error": "Not all required fields are entered correctly."

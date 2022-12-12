@@ -1859,6 +1859,7 @@
     "menu": {
       "title": "Weer"
     },
+    "no_data": "Geen weergegevens beschikbaar",
     "settings": {
       "fields": {
         "error": "Niet alle verplichte velden zijn correct ingevuld."

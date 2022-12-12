@@ -1014,6 +1014,8 @@
     },
     "door": {
       "status": {
+        "closed": "",
+        "open": "",
         "title": "Dørstatusoppdatering"
       }
     },
@@ -1857,6 +1859,7 @@
     "menu": {
       "title": "Vær"
     },
+    "no_data": "Ingen værdata tilgjengelig",
     "settings": {
       "fields": {
         "error": "Obligatoriske felt er merket med ‘%s’."

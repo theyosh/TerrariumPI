@@ -1014,6 +1014,8 @@
     },
     "door": {
       "status": {
+        "closed": "",
+        "open": "",
         "title": "Atualização do status da porta"
       }
     },
@@ -1857,6 +1859,7 @@
     "menu": {
       "title": "Clima"
     },
+    "no_data": "Não há dados meteorológicos disponíveis",
     "settings": {
       "fields": {
         "error": "Os campos obrigatórios não foram preenchidos."

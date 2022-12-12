@@ -1350,34 +1350,33 @@ class terrariumAPI(object):
 
   # Weather
   def weather_detail(self):
-    if not self.webserver.engine.weather:
-      raise HTTPError(status=404, body='No weather data available.')
+    weather = {}
 
-    weather = {
-      'location'   : self.webserver.engine.weather.location,
-      'sun'        : {'rise' : self.webserver.engine.weather.sunrise.timestamp(),
-                      'set'  : self.webserver.engine.weather.sunset.timestamp()},
-      'is_day'     : self.webserver.engine.weather.is_day,
-      'indicators' : {'wind' : self.webserver.engine.units['windspeed'],
-                      'temperature' : self.webserver.engine.units['temperature']},
-      'credits'    : self.webserver.engine.weather.credits,
-      'forecast'   : self.webserver.engine.weather.short_forecast
-    }
+    if self.webserver.engine.weather:
+      weather = {
+        'location'   : self.webserver.engine.weather.location,
+        'sun'        : {'rise' : self.webserver.engine.weather.sunrise.timestamp(),
+                        'set'  : self.webserver.engine.weather.sunset.timestamp()},
+        'is_day'     : self.webserver.engine.weather.is_day,
+        'indicators' : {'wind' : self.webserver.engine.units['windspeed'],
+                        'temperature' : self.webserver.engine.units['temperature']},
+        'credits'    : self.webserver.engine.weather.credits,
+        'forecast'   : self.webserver.engine.weather.short_forecast
+      }
 
     return weather
 
   def weather_forecast(self):
-    if not self.webserver.engine.weather:
-      raise HTTPError(status=404, body='No weather data available.')
-
     forecast_data = []
-    for forecast in self.webserver.engine.weather.forecast:
-      forecast_data.append({
-        'value'       : forecast['temperature'],
-        'temperature' : forecast['temperature'],
-        'humidity'    : forecast['humidity'],
-        'timestamp'   : forecast['timestamp']
-      })
+
+    if self.webserver.engine.weather:
+      for forecast in self.webserver.engine.weather.forecast:
+        forecast_data.append({
+          'value'       : forecast['temperature'],
+          'temperature' : forecast['temperature'],
+          'humidity'    : forecast['humidity'],
+          'timestamp'   : forecast['timestamp']
+        })
 
     return {'data' : forecast_data}
 

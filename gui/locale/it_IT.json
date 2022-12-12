@@ -1014,6 +1014,8 @@
     },
     "door": {
       "status": {
+        "closed": "",
+        "open": "",
         "title": "Aggiornamento dello stato della porta"
       }
     },
@@ -1857,6 +1859,7 @@
     "menu": {
       "title": "Meteo"
     },
+    "no_data": "Nessun dato meteorologico disponibile",
     "settings": {
       "fields": {
         "error": "I campi richiesti sono segnati con '%s'."

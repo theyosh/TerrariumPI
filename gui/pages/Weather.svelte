@@ -21,8 +21,8 @@
   import LoginLink from '../components/common/LoginLink.svelte';
   import WeatherSettings from '../modals/WeatherFormModal.svelte';
 
-  let weatherData;
-  let graphData;
+  let weatherData = {};
+  let graphData = [];
   let loading_current = true;
   let loading_forecast = true;
   let showModal;
@@ -164,7 +164,7 @@
         <LoginLink />
       {/if}
     </BreadcrumbItem>
-    {#if weatherData}
+    {#if weatherData.location}
       <BreadcrumbItem>
         <a href="{weatherData.credits.url}" target="_blank" rel="noopener noreferrer">{weatherData.credits.text}</a>
       </BreadcrumbItem>
@@ -181,7 +181,13 @@
             default: 'Current',
           })}
         </svelte:fragment>
-        {#if weatherData}
+        {#if !loading_current && !weatherData.location}
+          <div class="row">
+            <div class="col text-center">
+              <h1 class="m4">{$_('weather.no_data', { default: 'No weather data available'})}</h1>
+            </div>
+          </div>
+        {:else if !loading_current && weatherData.location}
           <div class="row">
             <div class="col-9">
               <strong>{$date(new Date(weatherData.forecast[0].timestamp * 1000), { format: 'full' })}</strong>
@@ -232,12 +238,19 @@
     <div class="col col-md-7">
       <Card loading="{loading_forecast}" class="forecast">
         <svelte:fragment slot="header">
-          <i class="fas mr-2" class:fa-cloud-sun="{$isDay}" class:fa-cloud-moon="{!$isDay}"></i>{$_('weather.forecast', {
-            default: 'Forecast',
-          })}
+          <i class="fas mr-2" class:fa-cloud-sun="{$isDay}" class:fa-cloud-moon="{!$isDay}"></i>
+          {$_('weather.forecast', { default: 'Forecast'})}
         </svelte:fragment>
         {#if !loading_forecast}
-          <Line data="{graphData}" options="{graphOpts}" />
+          {#if graphData.datasets[0].data.length > 0}
+            <Line data="{graphData}" options="{graphOpts}" />
+          {:else}
+            <div class="row">
+              <div class="col text-center">
+                <h1 class="m4">{$_('weather.no_data', { default: 'No weather data available'})}</h1>
+              </div>
+            </div>
+          {/if}
         {/if}
       </Card>
     </div>

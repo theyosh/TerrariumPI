@@ -258,7 +258,7 @@
   export const show = async (areaId, cb) => {
     // Anonymous (Async) functions always as first!!
     (async () => {
-      // Load all avaliable enclosures, area types, relays, sensors and more
+      // Load all available enclosures, area types, relays, sensors and more
       await Promise.all([
         fetchEnclosures(
           false,
@@ -531,8 +531,8 @@
               disabled: ['lights', 'audio'].indexOf($formData.type) != -1,
             },
             { value: 'timer', text: $_('areas.settings.mode.options.timer', { default: 'Timer' }) },
-            { value: 'weather', text: $_('areas.settings.mode.options.weather', { default: 'Weather day/night' }) },
-            { value: 'weather_inverse', text: $_('areas.settings.mode.options.weather_inverse', { default: 'Weather night/day' }) },
+            { value: 'weather', text: $_('areas.settings.mode.options.weather', { default: 'Weather day/night' }), disabled : weather === null || weather.location === undefined },
+            { value: 'weather_inverse', text: $_('areas.settings.mode.options.weather_inverse', { default: 'Weather night/day' }), disabled : weather === null || weather.location === undefined },
           ]}"
           label="{$_('areas.settings.mode.label', { default: 'Mode' })}"
           placeholder="{$_('areas.settings.mode.placeholder', { default: 'Select mode' })}"
