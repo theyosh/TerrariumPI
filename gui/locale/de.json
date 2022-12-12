@@ -1,14 +1,14 @@
 {
   "about": {
     "online": {
-      "help": "Weitere Informationen."
+      "help": "Weitere Informationen online."
     },
     "title": "Über"
   },
   "areas": {
     "delete": {
       "confirm": {
-        "message": "Sind Sie sicher, dass Sie den Bereich ''{name}'' löschen möchten?"
+        "message": "Bist du sicher, dass du den Bereich ''{name}'' löschen möchtest?"
       },
       "error": {
         "message": "Der Bereich ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
@@ -19,14 +19,14 @@
     },
     "settings": {
       "depends_on": {
-        "help": "Wählen Sie das Terrarium aus, zu dem dieser Bereich gehört.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle das Terrarium aus, zu dem dieser Bereich gehört.",
+        "invalid": "Bitte tiff eine Wahl.",
         "label": "Abhängig von",
-        "placeholder": "Wählen Sie abhängige Bereiche"
+        "placeholder": "Wähle abhängige Bereiche"
       },
       "enclosure": {
-        "help": "Wählen Sie das Terrarium aus, zu dem dieser Bereich gehört.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
+        "help": "Wähle das Terrarium aus, zu dem dieser Bereich gehört.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Terrarium",
         "placeholder": "Wähle ein Terrarium"
       },
@@ -717,7 +717,7 @@
       "type": {
         "audio": "Audio",
         "cooling": "Kühlung",
-        "heating": "Beheizung",
+        "heating": "Heizung",
         "humidity": "Luftfeuchtigkeit",
         "lights": "Lichter",
         "main_lights": "Hauptlichter",
