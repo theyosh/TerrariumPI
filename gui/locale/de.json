@@ -1859,6 +1859,7 @@
     "menu": {
       "title": "Wetter"
     },
+    "no_data": "Keine Wetterdaten verfügbar",
     "settings": {
       "fields": {
         "error": "Nicht alle Pflichtfelder sind korrekt eingegeben."
