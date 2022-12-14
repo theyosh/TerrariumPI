@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2022-08-21 13:28+CEST\n"
-"PO-Revision-Date: 2022-12-12 20:49+0000\n"
+"PO-Revision-Date: 2022-12-13 08:07+0000\n"
 "Last-Translator: Tobias Nitsch <info@sni-reptiles.com>\n"
 "Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/de/>\n"
@@ -73,7 +73,7 @@ msgstr "Entfernung"
 
 #: terrariumEngine.py:55
 msgid "altitude"
-msgstr "Höhe"
+msgstr "Wahr, wenn Fehler vorhanden"
 
 #: terrariumEngine.py:56
 msgid "pressure"
@@ -113,7 +113,7 @@ msgstr "UVI"
 
 #: terrariumEngine.py:65
 msgid "fertility"
-msgstr "Fruchtbarkeit"
+msgstr "Wahr, wenn Fehler vorhanden"
 
 #: terrariumEngine.py:66
 msgid "co2"

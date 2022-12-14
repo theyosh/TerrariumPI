@@ -327,8 +327,10 @@ class terrariumArea(object):
     except Exception:
       self.ignore_high_alarm = False
 
-    self.low_deviation  = self.setup.get('deviation_low_alarm' ,0)
-    self.high_deviation = self.setup.get('deviation_high_alarm',0)
+    self.low_deviation  = self.setup.get('deviation_low_alarm' ,0.0)
+    self.low_deviation  = 0.0 if not terrariumUtils.is_float(self.low_deviation)  else float(self.low_deviation)
+    self.high_deviation = self.setup.get('deviation_high_alarm',0.0)
+    self.high_deviation = 0.0 if not terrariumUtils.is_float(self.high_deviation) else float(self.high_deviation)
 
     # Clean up parts that do not have relays configured)
     for period in self.PERIODS:

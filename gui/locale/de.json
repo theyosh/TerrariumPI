@@ -14,7 +14,7 @@
         "message": "Der Bereich ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
       },
       "ok": {
-        "message": "Der Bereich ''{name}'' wird gelöscht."
+        "message": "Der Bereich ''{name}'' wurde gelöscht."
       }
     },
     "settings": {
@@ -67,14 +67,14 @@
           "placeholder": "Nummer eingeben"
         },
         "day_night_source": {
-          "help": "Wählen Sie die Quelle wann es 'Tag' ist.",
+          "help": "Wähle die Quelle für 'Tag'.",
           "invalid": "Bitte triff eine Wahl.",
           "label": "Tag/Nacht-Quelle",
           "options": {
             "lights": "Lichter",
             "weather": "Wetter"
           },
-          "placeholder": "Wählen Sie eine Tag/Nacht-Quelle"
+          "placeholder": "Wähle eine Tag/Nacht-Quelle"
         },
         "deviation_high_alarm": {
           "help": "Erhöhung des oberen Alarmwerts.",
@@ -108,7 +108,7 @@
           },
           "end": {
             "help": "Der Zeitpunkt in der Nacht wenn die Relais umgeschaltet werden sollen.",
-            "invalid": "Geben Sie eine gültige Zeit ein.",
+            "invalid": "Gib eine gültige Zeit ein.",
             "label": "Endzeit",
             "placeholder": "Gib eine Endzeit ein"
           },
@@ -147,7 +147,7 @@
           },
           "power_on_time": {
             "help": "Die Dauer in Sekunden, die ein Relais zum Einschalten benötigt.",
-            "invalid": "Geben Sie eine gültige Nummer ein.",
+            "invalid": "Gib eine gültige Nummer ein.",
             "label": "Einschaltzeit",
             "placeholder": "Einschaltzeit"
           },
@@ -681,9 +681,9 @@
       }
     },
     "menu": {
-      "title": "Dashboard"
+      "title": "Startseite"
     },
-    "title": "Dashboard"
+    "title": "Startseite"
   },
   "enclosures": {
     "actions": {
@@ -825,7 +825,7 @@
     "uptime_format": {
       "days": "{number, plural, =1 {# Tag} other {# Tage}}",
       "hours": "{number, plural, =1 {# Stunde} other {# Stunden}}",
-      "minutes": "{number, plural, =1 {# Minute} other {# Minutes}}",
+      "minutes": "{number, plural, =1 {# Minute} other {# Minuten}}",
       "months": "{number, plural, =1 {# Monat} other {#Monate}}",
       "seconds": "{number, plural, =1 {# Sekunde} other {# Sekunden}}",
       "years": "{number, plural, =1 {# Jahr} other {# Jahre}}"
@@ -1649,8 +1649,8 @@
     },
     "settings": {
       "all_gauges_on_single_page": {
-        "help": "Füge einen zusätzlichen Menüpunkt für alle Sensoren auf einer einzigen Seite hinzu.",
-        "label": "Alle Grafen auf einer zusätzlichen Seite"
+        "help": "Füge einen zusätzlichen Menüpunkt für alle Sensoren auf einer Extraseite hinzu.",
+        "label": "Alle Graphen auf einer zusätzlichen Seite"
       },
       "authenticate": {
         "help": "Immer oder nur bei Änderungen authentifizieren.",
@@ -1672,11 +1672,11 @@
         "label": "Währung"
       },
       "dashboard_mode": {
-        "help": "Wähle wie das Dashboard aussehen soll.",
+        "help": "Wähle wie die Startseite aussehen soll.",
         "invalid": "Bitte mach eine Auswahl.",
-        "label": "Dashboard Modus",
+        "label": "Startseite",
         "options": {
-          "normal": "Grafen und Terrarien",
+          "normal": "Graphen und Terrarien",
           "only_enclosures": "Nur Terrarien",
           "only_graphs": "Nur Graphen"
         }
@@ -1697,7 +1697,7 @@
       },
       "header": {
         "cloud": "Cloud",
-        "gui": "GUI",
+        "gui": "Benutzeroberfläche",
         "locale": "Sprache",
         "system": "System"
       },
@@ -1716,11 +1716,11 @@
         "label": "Sprache"
       },
       "meross_cloud_password": {
-        "help": "Gib das Passwort ein, um sich bei der Meross Cloud anzumelden.",
+        "help": "Gib das Passwort ein, um dich bei der Meross Cloud anzumelden.",
         "label": "Meross-Passwort"
       },
       "meross_cloud_username": {
-        "help": "Gib den Benutzernamen ein, um sich bei der Meross-Cloud anzumelden.",
+        "help": "Gib den Benutzernamen ein, um dich bei der Meross-Cloud anzumelden.",
         "label": "Meross-Benutzername"
       },
       "page": {
