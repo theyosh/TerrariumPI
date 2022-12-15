@@ -35,7 +35,7 @@
         "invalid": "Feu una tria.",
         "label": "Model",
         "options": {
-          "disabled": "Inepte",
+          "disabled": "Inhabilitat",
           "main_lights": "Llums principals",
           "sensors": "Sensors",
           "timer": "Temporitzador",
@@ -534,8 +534,8 @@
       },
       "calibration": {
         "inverse": {
-          "help": "",
-          "label": ""
+          "help": "Activar per invertir el valor remot.",
+          "label": "Valor invers"
         },
         "ldr_capacitor": {
           "help": "Introduïu el valor del condensador en µF, ja que això influirà en el càlcul de la llum.",
@@ -544,10 +544,10 @@
           "placeholder": "Introduïu el valor del condensador en µF"
         },
         "timeout": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Introduïu el temps d'espera en segons entre comprovacions remotes.",
+          "invalid": "El valor de temps d'espera introduït no és vàlid. Introduïu un número vàlid entre {min} i {max}.",
+          "label": "Temps d'espera en segons",
+          "placeholder": "Introduïu el temps d'espera en segons"
         }
       },
       "current": {
@@ -700,7 +700,7 @@
         "title": "Edició"
       },
       "mode": {
-        "disabled": "Inepte",
+        "disabled": "Inhabilitat",
         "sensors": "Sensors",
         "timer": "Temporitzador",
         "title": "Model",
@@ -1014,8 +1014,8 @@
     },
     "door": {
       "status": {
-        "closed": "",
-        "open": "",
+        "closed": "La porta ''{name}'' està tancada",
+        "open": "La porta ''{name}'' està oberta",
         "title": "Actualització d'estat de la porta"
       }
     },
@@ -1990,7 +1990,7 @@
         },
         "options": {
           "day_1": "1 dia",
-          "disabled": "Inepte",
+          "disabled": "Inhabilitat",
           "hour_1": "30 minuts",
           "hour_12": "12 hores",
           "hour_3": "3 hores",
