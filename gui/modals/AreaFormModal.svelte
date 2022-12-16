@@ -497,7 +497,7 @@
         <div class="col-12 col-sm-3 col-md-3 col-lg-3">
           <Select
             name="setup.depends_on"
-            value="{$formData.setup && $formData.setup.depends_on}"
+            value="{$formData.setup?.depends_on}"
             multiple="{true}"
             options="{areas.filter((item) => {
               return item.value != $formData.id;
@@ -611,7 +611,7 @@
         <div class="col-12 col-sm-6 col-md-3 col-lg-2">
           <Switch
             name="setup.main_lights"
-            value="{$formData.setup && $formData.setup.main_lights}"
+            value="{$formData.setup?.main_lights}"
             label="{$_('areas.settings.setup.main_lights.label', { default: 'Main lights' })}"
             help="{$_('areas.settings.setup.main_lights.help', {
               default: 'Toggle this if this is the main lights for this enclosure. This is used for the light checks in other areas.',
@@ -625,7 +625,7 @@
         <div class="col-12 col-sm-9 col-md-8 col-lg-8">
           <Select
             name="setup.soundcard"
-            value="{$formData.setup && $formData.setup.soundcard}"
+            value="{$formData.setup?.soundcard}"
             required="{true}"
             options="{soundcards}"
             label="{$_('areas.settings.setup.soundcard.label', { default: 'Sound card' })}"
@@ -640,7 +640,7 @@
         <div class="col-12 col-sm-6 col-md-3 col-lg-3">
           <Select
             name="setup.sensors"
-            value="{$formData.setup && $formData.setup.sensors}"
+            value="{$formData.setup?.sensors}"
             multiple="{true}"
             required="{$formData.mode == 'sensors'}"
             options="{sensors.filter((item) => sensor_filter.length == 0 || sensor_filter.indexOf(item.type) != -1)}"
@@ -668,7 +668,7 @@
         <div class="col col-12 col-sm-6 col-md-3 col-lg-3">
           <Select
             name="setup.day_night_source"
-            value="{$formData.setup && $formData.setup.day_night_source}"
+            value="{$formData.setup?.day_night_source}"
             options="{[
               { value: 'lights', text: $_('areas.settings.setup.day_night_source.options.lights', { default: 'Lights' }) },
               { value: 'weather', text: $_('areas.settings.setup.day_night_source.options.weather', { default: 'Weather' }) },
@@ -875,7 +875,7 @@
                 <div class="col">
                   <Select
                     name="setup.low.light_status"
-                    value="{$formData.setup && $formData.setup.low.light_status}"
+                    value="{$formData.setup?.low.light_status}"
                     options="{[
                       { value: 'ignore', text: $_('areas.settings.setup.low.light_status.options.ignore', { default: 'Ignored' }) },
                       { value: 'on', text: $_('areas.settings.setup.low.light_status.options.on', { default: 'On' }) },
@@ -889,7 +889,7 @@
                 <div class="col">
                   <Select
                     name="setup.low.door_status"
-                    value="{$formData.setup && $formData.setup.low.door_status}"
+                    value="{$formData.setup?.low.door_status}"
                     options="{[
                       { value: 'ignore', text: $_('areas.settings.setup.low.door_status.options.ignore', { default: 'Ignored' }) },
                       { value: 'open', text: $_('areas.settings.setup.low.door_status.options.open', { default: 'Open' }) },
@@ -916,7 +916,7 @@
                 <div class="col">
                   <Switch
                     name="setup.low.ignore_low"
-                    value="{$formData.setup && $formData.setup.low.ignore_low}"
+                    value="{$formData.setup?.low.ignore_low}"
                     label="{$_('areas.settings.setup.low.ignore_low.label', { default: 'Ignore low alarm' })}"
                     help="{$_('areas.settings.setup.low.ignore_low.help', {
                       default: 'Toggle to ignore the low alarm value of the sensors, and use high alarm value only.',
@@ -1131,7 +1131,7 @@
                 <div class="col">
                   <Select
                     name="setup.high.light_status"
-                    value="{$formData.setup && $formData.setup.high.light_status}"
+                    value="{$formData.setup?.high.light_status}"
                     options="{[
                       { value: 'ignore', text: $_('areas.settings.setup.high.light_status.options.ignore', { default: 'Ignored' }) },
                       { value: 'on', text: $_('areas.settings.setup.high.light_status.options.on', { default: 'On' }) },
@@ -1145,7 +1145,7 @@
                 <div class="col">
                   <Select
                     name="setup.high.door_status"
-                    value="{$formData.setup && $formData.setup.high.door_status}"
+                    value="{$formData.setup?.high.door_status}"
                     options="{[
                       { value: 'ignore', text: $_('areas.settings.setup.high.door_status.options.ignore', { default: 'Ignored' }) },
                       { value: 'open', text: $_('areas.settings.setup.high.door_status.options.open', { default: 'Open' }) },
@@ -1172,7 +1172,7 @@
                 <div class="col">
                   <Switch
                     name="setup.high.ignore_high"
-                    value="{$formData.setup && $formData.setup.high.ignore_high}"
+                    value="{$formData.setup?.high.ignore_high}"
                     label="{$_('areas.settings.setup.high.ignore_high.label', { default: 'Ignore high alarm' })}"
                     help="{$_('areas.settings.setup.high.ignore_high.help', {
                       default: 'Toggle to ignore the high alarm value of the sensors, and use high alarm value only.',
@@ -1348,7 +1348,7 @@
                 </div>
               </div>
             </div>
-            {#if $formData.setup && $formData.setup.variation}
+            {#if $formData.setup?.variation}
               {#each $formData.setup.variation as variation, index}
                 <div class="row">
                   <div class="col-3 col-sm-3 col-md-3 col-lg-3">
