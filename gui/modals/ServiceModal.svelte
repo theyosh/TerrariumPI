@@ -204,7 +204,7 @@
         <div class="col">
           <Select
             name="setup.hardware"
-            value="{$formData.setup.hardware}"
+            value="{$formData.setup?.hardware}"
             required="{true}"
             options="{display_types}"
             label="{$_('services.settings.setup.hardware.label', { default: 'Hardware' })}"
@@ -227,7 +227,7 @@
         <div class="col-1">
           <Switch
             name="setup.show_title"
-            value="{$formData.setup.show_title || true}"
+            value="{$formData.setup?.show_title || true}"
             label="{$_('services.settings.setup.show_title.label', { default: 'Show title' })}"
             help="{$_('services.settings.setup.show_title.help', { default: 'Show a name and version as title on the display.' })}" />
         </div>

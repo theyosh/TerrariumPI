@@ -233,7 +233,7 @@ class terrariumArea(object):
       next_sunrise = self.enclosure.weather.next_sunrise if 'weather' == self.mode else self.enclosure.weather.next_sunset - datetime.timedelta(hours=24)
       next_sunset  = self.enclosure.weather.next_sunset  if 'weather' == self.mode else self.enclosure.weather.next_sunrise
 
-      max_hours = self.setup.get('max_day_hours',0.0)
+      max_hours = self.setup['max_day_hours']
       if max_hours != 0 and (sunset - sunrise) > datetime.timedelta(hours=max_hours):
         # On period to long, so reduce the on period by shifting the sunrise and sunset times closer to each other
         seconds_difference = ((sunset - sunrise) - datetime.timedelta(hours=max_hours)) / 2
@@ -246,7 +246,7 @@ class terrariumArea(object):
         next_sunrise += seconds_difference
         next_sunset  -= seconds_difference
 
-      min_hours = self.setup.get('min_day_hours',0.0)
+      min_hours = self.setup['min_day_hours']
       if min_hours != 0 and (sunset - sunrise) < datetime.timedelta(hours=min_hours):
         # On period to short, so extend the on period by shifting the sunrise and sunset times away from to each other
         seconds_difference = (datetime.timedelta(hours=min_hours) - (sunset - sunrise)) / 2
@@ -259,7 +259,7 @@ class terrariumArea(object):
         next_sunrise -= seconds_difference
         next_sunset  += seconds_difference
 
-      shift_hours = self.setup.get('shift_day_hours',0.0)
+      shift_hours = self.setup['shift_day_hours']
       if shift_hours != 0:
         # Shift the times back or forth...
         sunrise += datetime.timedelta(hours=shift_hours)
@@ -287,8 +287,8 @@ class terrariumArea(object):
 
         begin      = datetime.time.fromisoformat(self.setup[period]['begin'])
         end        = datetime.time.fromisoformat(self.setup[period]['end'])
-        on_period  = max(0.0,float(self.setup[period]['on_duration']))  * 60.0
-        off_period = max(0.0,float(self.setup[period]['off_duration'])) * 60.0
+        on_period  = max(0.0,self.setup[period]['on_duration'])  * 60.0
+        off_period = max(0.0,self.setup[period]['off_duration']) * 60.0
 
         timetable[period] = make_time_table(begin, end, on_period, off_period)
 
@@ -327,30 +327,30 @@ class terrariumArea(object):
     except Exception:
       self.ignore_high_alarm = False
 
-    self.low_deviation  = self.setup.get('deviation_low_alarm' ,0.0)
+    self.low_deviation  = self.setup.get('deviation_low_alarm',  0.0)
     self.low_deviation  = 0.0 if not terrariumUtils.is_float(self.low_deviation)  else float(self.low_deviation)
-    self.high_deviation = self.setup.get('deviation_high_alarm',0.0)
+    self.high_deviation = self.setup.get('deviation_high_alarm', 0.0)
     self.high_deviation = 0.0 if not terrariumUtils.is_float(self.high_deviation) else float(self.high_deviation)
 
-    # Clean up parts that do not have relays configured)
+    float_values = ['max_day_hours','min_day_hours','shift_day_hours']
+    for float_value in float_values:
+      self.setup[float_value] = self.setup.get(float_value, 0.0)
+      self.setup[float_value] = 0.0 if not terrariumUtils.is_float(self.setup[float_value]) else float(self.setup[float_value])
+
     for period in self.PERIODS:
 
+      # Clean up parts that do not have relays configured)
       if period in self.setup and len(self.setup[period]['relays']) == 0:
         del(self.setup[period])
         continue
 
-      self.setup[period]['on_duration']     = self.setup[period].get('on_duration',       0.0)
-      self.setup[period]['on_duration']     = 0.0 if not terrariumUtils.is_float(self.setup[period]['on_duration'])     else float(self.setup[period]['on_duration'])
-      self.setup[period]['off_duration']    = self.setup[period].get('off_duration',      0.0)
-      self.setup[period]['off_duration']    = 0.0 if not terrariumUtils.is_float(self.setup[period]['off_duration'])    else float(self.setup[period]['off_duration'])
-      self.setup[period]['settle_time']     = self.setup[period].get('settle_time',       0.0)
-      self.setup[period]['settle_time']     = 0.0 if not terrariumUtils.is_float(self.setup[period]['settle_time'])     else float(self.setup[period]['settle_time'])
-      self.setup[period]['power_on_time']   = self.setup[period].get('power_on_time',     0.0)
-      self.setup[period]['power_on_time']   = 0.0 if not terrariumUtils.is_float(self.setup[period]['power_on_time'])   else float(self.setup[period]['power_on_time'])
-      self.setup[period]['alarm_threshold'] = self.setup[period].get('trigger_threshold', 0.0)
-      self.setup[period]['alarm_threshold'] = 0.0 if not terrariumUtils.is_float(self.setup[period]['alarm_threshold']) else float(self.setup[period]['alarm_threshold'])
+      # With version 4.6.0 we get also empty string fields back. So we have to make sure that the fields in the list below are all float values
+      float_values = ['on_duration','off_duration','settle_time','power_on_time','alarm_threshold']
+      for float_value in float_values:
+        self.setup[period][float_value] = self.setup[period].get(float_value, 0.0)
+        self.setup[period][float_value] = 0.0 if not terrariumUtils.is_float(self.setup[period][float_value]) else float(self.setup[period][float_value])
 
-      self.setup[period]['tweaks']          = {}
+      self.setup[period]['tweaks'] = {}
 
       if period not in self.state:
         self.state[period] = {}
