@@ -15,7 +15,7 @@ The software is that flexible that there is no limit in amount of sensors, relay
 
 If you are using this software for your animals or plants, **[please post some pictures](https://github.com/theyosh/TerrariumPI/issues/210)**
 
-Extra documentation can be found at [https://theyosh.github.io/TerrariumPI/](https://theyosh.github.io/TerrariumPI/)
+**Full documentation** can be found at [https://theyosh.github.io/TerrariumPI/](https://theyosh.github.io/TerrariumPI/)
 
 Think off:
 
