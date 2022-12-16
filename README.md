@@ -17,6 +17,8 @@ If you are using this software for your animals or plants, **[please post some p
 
 **Full documentation** can be found at [https://theyosh.github.io/TerrariumPI/](https://theyosh.github.io/TerrariumPI/)
 
+**Contact** https://matrix.to/#/#terrariumpi:theyosh.nl
+
 Think off:
 
 - Terrarium (wet or dry)
