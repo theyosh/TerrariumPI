@@ -483,6 +483,7 @@
           <Select
             name="motion.boxes"
             value="{$formData.motion ? $formData.motion.boxes : ''}"
+            required={motion_settings}
             options="{[
               { value: '-1', text: $_('webcams.settings.motion.boxes.options.none', { default: 'None' }) },
               { value: 'red', text: $_('webcams.settings.motion.boxes.options.red', { default: 'Red' }) },
@@ -500,6 +501,7 @@
             name="motion.threshold"
             step="1"
             min="0"
+            required={motion_settings}
             label="{$_('webcams.settings.motion.threshold.label', { default: 'Motion delta threshold' })}"
             placeholder="{$_('webcams.settings.motion.threshold.placeholder', { default: 'Enter number' })}"
             help="{$_('webcams.settings.motion.threshold.help', { default: 'Enter the motion threshold.' })}"
@@ -513,6 +515,7 @@
             type="number"
             name="motion.area"
             min="0"
+            required={motion_settings}
             label="{$_('webcams.settings.motion.area.label', { default: 'Motion minimum area' })}"
             placeholder="{$_('webcams.settings.motion.area.placeholder', { default: 'Enter number' })}"
             help="{$_('webcams.settings.motion.area.help', { default: 'Enter an area size.' })}"
@@ -525,6 +528,7 @@
           <Select
             name="motion.frame"
             value="{$formData.motion ? $formData.motion.frame : ''}"
+            required={motion_settings}
             options="{[
               { value: 'last', text: $_('webcams.settings.motion.frame.options.last', { default: 'Last frame' }) },
               { value: 'archived', text: $_('webcams.settings.motion.frame.options.archived', { default: 'Last archived frame' }) },

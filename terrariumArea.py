@@ -339,9 +339,17 @@ class terrariumArea(object):
         del(self.setup[period])
         continue
 
-      self.setup[period]['settle_time']     = self.setup[period].get('settle_time',0)
-      self.setup[period]['power_on_time']   = self.setup[period].get('power_on_time',0)
-      self.setup[period]['alarm_threshold'] = self.setup[period].get('trigger_threshold',0)
+      self.setup[period]['on_duration']     = self.setup[period].get('on_duration',       0.0)
+      self.setup[period]['on_duration']     = 0.0 if not terrariumUtils.is_float(self.setup[period]['on_duration'])     else float(self.setup[period]['on_duration'])
+      self.setup[period]['off_duration']    = self.setup[period].get('off_duration',      0.0)
+      self.setup[period]['off_duration']    = 0.0 if not terrariumUtils.is_float(self.setup[period]['off_duration'])    else float(self.setup[period]['off_duration'])
+      self.setup[period]['settle_time']     = self.setup[period].get('settle_time',       0.0)
+      self.setup[period]['settle_time']     = 0.0 if not terrariumUtils.is_float(self.setup[period]['settle_time'])     else float(self.setup[period]['settle_time'])
+      self.setup[period]['power_on_time']   = self.setup[period].get('power_on_time',     0.0)
+      self.setup[period]['power_on_time']   = 0.0 if not terrariumUtils.is_float(self.setup[period]['power_on_time'])   else float(self.setup[period]['power_on_time'])
+      self.setup[period]['alarm_threshold'] = self.setup[period].get('trigger_threshold', 0.0)
+      self.setup[period]['alarm_threshold'] = 0.0 if not terrariumUtils.is_float(self.setup[period]['alarm_threshold']) else float(self.setup[period]['alarm_threshold'])
+
       self.setup[period]['tweaks']          = {}
 
       if period not in self.state:
@@ -560,22 +568,19 @@ class terrariumArea(object):
 
   @property
   def is_day(self):
+    light_mode = self.setup.get('day_night_source', '')
+
     # Base day time on weather information
-    if 'weather' == self.setup.get('day_night_source', None) and self.enclosure.weather is not None:
+    if 'weather' == light_mode and self.enclosure.weather is not None:
       return self.enclosure.weather.is_day
 
     # Else we have to see if we are between the begin and end time of the 'main lights' light area
-    main_lights_area = self.enclosure.main_lights
-    if main_lights_area is not None and main_lights_area.mode != 'disabled':
-      is_day_time = main_lights_area.state['day']['begin'] < int(datetime.datetime.now().timestamp()) < main_lights_area.state['day']['end']
+    if 'lights' == light_mode and self.enclosure.main_lights is not None and self.enclosure.main_lights.mode != 'disabled':
+      is_day_time = self.enclosure.main_lights.state['day']['begin'] < int(datetime.datetime.now().timestamp()) < self.enclosure.main_lights.state['day']['end']
       return is_day_time
 
-    # Just try weather if there is no 'main lights' selected....
-    if self.enclosure.weather is not None:
-      return self.enclosure.weather.is_day
-
-    # For now, by default is it always day...
-    return True
+    # Default day period is from 07:00 till 19:00
+    return 700 < int(time.strftime('%H%M')) < 1900
 
   def update(self, read_only = False):
     if self.mode == 'disabled':
@@ -654,13 +659,13 @@ class terrariumArea(object):
 
       # Set the lights state. Default True
       light_state_ok = True
-      if 'light_status' in self.setup[period] and 'ignore' != self.setup[period]['light_status']:
+      if 'light_status' in self.setup[period] and self.setup[period]['light_status'] not in ['ignore','']:
         # Change the lights state based on the current state and requested state. False when not equal
         light_state_ok = self.setup[period]['light_status'] == light_state
 
       # Set the doors state. Default True
       door_state_ok = True
-      if 'door_status' in self.setup[period] and 'ignore' != self.setup[period]['door_status']:
+      if 'door_status' in self.setup[period] and self.setup[period]['door_status'] not in ['ignore','']:
         # Change the doors state based on the current state and requested state. False when not equal
         door_state_ok = self.setup[period]['door_status'] == door_state
 

@@ -994,21 +994,23 @@ class terrariumEngine(object):
       start = time.time()
       self.webcams[webcam.id].update(relays)
 
+      # TODO: Move this code to the webcam itself and pass through variable 'current_state'
+
       # Check archiving/motion settings
-      if 'disabled' != webcam.archive['state']:
+      if webcam.archive['state'] not in ['disabled','']:
 
         # Check light status
-        if 'ignore' != webcam.archive['light'] and current_state != webcam.archive['light']:
-          #print(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
+        if webcam.archive['light'] not in ['ignore',''] and current_state != webcam.archive['light']:
+          logger.debug(f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}')
           return
 
         # Check door status
-        if 'ignore' != webcam.archive['door']:
+        if webcam.archive['door'] not in ['ignore','']:
           # Default state is that the doors are closed....
           current_state = 'close' if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].door_closed else 'open'
 
           if webcam.archive['door'] != current_state:
-            #print(f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}')
+            logger.debug(f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}')
             return
 
         if 'motion' == webcam.archive['state']:
