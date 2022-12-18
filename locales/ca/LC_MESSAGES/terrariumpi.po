@@ -2,12 +2,13 @@
 # Copyright (C) 2016-2022 TheYOSH
 # Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2022.
 # theyosh <github.com@theyosh.nl>, 2022.
+# cmonicob <cmonicob@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.3.3\n"
 "POT-Creation-Date: 2022-08-21 13:28+CEST\n"
-"PO-Revision-Date: 2022-08-05 08:41+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2022-12-18 21:28+0000\n"
+"Last-Translator: cmonicob <cmonicob@gmail.com>\n"
 "Language-Team: Catalan <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/ca/>\n"
 "Language: ca\n"
@@ -15,12 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.15\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
 msgid "Lighting"
-msgstr ""
+msgstr "Il·luminació"
 
 #: terrariumArea.py:38
 msgid "Heating"
@@ -136,83 +137,84 @@ msgstr "velocitat del vent"
 
 #: terrariumEngine.py:74
 msgid "water_flow"
-msgstr ""
+msgstr "flux d'aigua"
 
 #: terrariumEngine.py:75
 msgid "wattage"
-msgstr ""
+msgstr "potència"
 
 #: terrariumEngine.py:76
 msgid "powerusage"
-msgstr ""
+msgstr "Ús d'energia Pi"
 
 #: terrariumEngine.py:1179
+#, fuzzy
 msgid "Up time"
-msgstr ""
+msgstr "Temps de vida"
 
 #: terrariumEngine.py:1185
 msgid "System load"
-msgstr ""
+msgstr "Càrrega del sistema"
 
 #: terrariumEngine.py:1191
 msgid "CPU Temperature"
-msgstr ""
+msgstr "Temperatura de la CPU"
 
 #: terrariumEngine.py:1197
 msgid "Storage"
-msgstr ""
+msgstr "Emmagatzematge"
 
 #: terrariumEngine.py:1203
 msgid "Memory"
-msgstr ""
+msgstr "Memòria"
 
 #: terrariumEngine.py:1224
 msgid "average {sensor_type}"
-msgstr ""
+msgstr "mitjana {sensor_type}"
 
 #: terrariumEngine.py:1308
 msgid "Version"
-msgstr ""
+msgstr "Versió"
 
 #: terrariumEngine.py:1318 terrariumWebserver.py:395
 msgid "A new version ({version}) is available!"
-msgstr ""
+msgstr "Hi ha disponible una nova versió ({version})!"
 
 #: terrariumEngine.py:1362 terrariumEngine.py:1392
 msgid "Current active relays"
-msgstr ""
+msgstr "Relés actius actuals"
 
 #: terrariumEngine.py:1363
 msgid "Watt"
-msgstr ""
+msgstr "Watt"
 
 #: terrariumEngine.py:1401
 msgid "last update"
-msgstr ""
+msgstr "darrera actualització"
 
 #: terrariumNotification.py:37
 msgid "Local date"
-msgstr ""
+msgstr "Data local"
 
 #: terrariumNotification.py:38
 msgid "Local date, day and month"
-msgstr ""
+msgstr "Data local, dia i mes"
 
 #: terrariumNotification.py:39
 msgid "Local time"
-msgstr ""
+msgstr "Hora local"
 
 #: terrariumNotification.py:40
 msgid "Local time, hours and minutes"
-msgstr ""
+msgstr "Hora local, hores i minuts"
 
 #: terrariumNotification.py:41
 msgid "Local date and time"
-msgstr ""
+msgstr "Data i hora local"
 
 #: terrariumNotification.py:49
 msgid "Authentication login error"
-msgstr ""
+msgstr "Error d'autenticació d'inici de sessió"
 
 #: terrariumNotification.py:51
 msgid "IP of the wrong login attempt"
@@ -220,39 +222,39 @@ msgstr ""
 
 #: terrariumNotification.py:52
 msgid "Used username"
-msgstr ""
+msgstr "Nom d'usuari"
 
 #: terrariumNotification.py:53
 msgid "Used password"
-msgstr ""
+msgstr "Contrasenya"
 
 #: terrariumNotification.py:59
 msgid "System warning"
-msgstr ""
+msgstr "Avís del sistema"
 
 #: terrariumNotification.py:61
 msgid "Warning message"
-msgstr ""
+msgstr "Missatge d'advertència"
 
 #: terrariumNotification.py:67
 msgid "System error"
-msgstr ""
+msgstr "Error del sistema"
 
 #: terrariumNotification.py:69 terrariumNotification.py:99
 msgid "Error message"
-msgstr ""
+msgstr "Missatge d'error"
 
 #: terrariumNotification.py:75
 msgid "System summary"
-msgstr ""
+msgstr "Resum del sistema"
 
 #: terrariumNotification.py:77
 msgid "System uptime in human readable format"
-msgstr ""
+msgstr "Temps de funcionament del sistema en format llegible per l'home"
 
 #: terrariumNotification.py:78
 msgid "System load last minute"
-msgstr ""
+msgstr "Càrrega del sistema de l'última hora"
 
 #: terrariumNotification.py:79 terrariumNotification.py:81
 #: terrariumNotification.py:86 terrariumNotification.py:129
@@ -261,19 +263,19 @@ msgstr ""
 
 #: terrariumNotification.py:80
 msgid "System CPU temperature"
-msgstr ""
+msgstr "Temperatura de la CPU del sistema"
 
 #: terrariumNotification.py:82
 msgid "Storage usage"
-msgstr ""
+msgstr "Ús d'emmagatzematge"
 
 #: terrariumNotification.py:83
 msgid "Memory usage"
-msgstr ""
+msgstr "Ús de memòria"
 
 #: terrariumNotification.py:84
 msgid "Average of [sensor type] (ex. temperature)"
-msgstr ""
+msgstr "Mitjana de [tipus de sensor] (p. ex. temperatura)"
 
 #: terrariumNotification.py:85 terrariumNotification.py:132
 msgid "Sensor type unit value"
@@ -281,27 +283,27 @@ msgstr ""
 
 #: terrariumNotification.py:87
 msgid "Current power usage"
-msgstr ""
+msgstr "Ús d'energia actual"
 
 #: terrariumNotification.py:88
 msgid "Max power usage"
-msgstr ""
+msgstr "Consum màxim d'energia"
 
 #: terrariumNotification.py:89
 msgid "Current water flow"
-msgstr ""
+msgstr "Flux d'aigua actual"
 
 #: terrariumNotification.py:90 terrariumNotification.py:159
 msgid "Max water flow"
-msgstr ""
+msgstr "Caudal màxim d'aigua"
 
 #: terrariumNotification.py:91
 msgid "Number of relays active"
-msgstr ""
+msgstr "Nombre de relés actius"
 
 #: terrariumNotification.py:97
 msgid "System to slow with updates (warning)"
-msgstr ""
+msgstr "El sistema s'alenteix amb les actualitzacions (advertència)"
 
 #: terrariumNotification.py:100
 msgid "Duration in seconds that are short"
@@ -309,11 +311,11 @@ msgstr ""
 
 #: terrariumNotification.py:101
 msgid "The update duration in seconds"
-msgstr ""
+msgstr "Durada de l'actualització en segons"
 
 #: terrariumNotification.py:102
 msgid "The max update duration"
-msgstr ""
+msgstr "Durada màxima de l'actualització"
 
 #: terrariumNotification.py:103
 msgid "Amount of times to late with updates"
@@ -325,59 +327,59 @@ msgstr ""
 
 #: terrariumNotification.py:116
 msgid "Sensor update (every 30 seconds)"
-msgstr ""
+msgstr "Actualització del sensor (cada 30 segons)"
 
 #: terrariumNotification.py:118 terrariumNotification.py:154
 #: terrariumNotification.py:185
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: terrariumNotification.py:119 terrariumNotification.py:155
 #: terrariumNotification.py:186
 msgid "Hardware type"
-msgstr ""
+msgstr "Tipus de maquinari"
 
 #: terrariumNotification.py:120
 msgid "Sensor type"
-msgstr ""
+msgstr "Tipus de sensor"
 
 #: terrariumNotification.py:121 terrariumNotification.py:156
 #: terrariumNotification.py:187
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: terrariumNotification.py:122 terrariumNotification.py:157
 #: terrariumNotification.py:188
 msgid "Address"
-msgstr ""
+msgstr "adreça"
 
 #: terrariumNotification.py:123
 msgid "Limit min"
-msgstr ""
+msgstr "Límit min"
 
 #: terrariumNotification.py:124
 msgid "Limit max"
-msgstr ""
+msgstr "Límit màx"
 
 #: terrariumNotification.py:125
 msgid "Alarm min"
-msgstr ""
+msgstr "Alarma min"
 
 #: terrariumNotification.py:126
 msgid "Alarm max"
-msgstr ""
+msgstr "Alarma màx"
 
 #: terrariumNotification.py:127
 msgid "Max difference"
-msgstr ""
+msgstr "Diferència màx"
 
 #: terrariumNotification.py:128
 msgid "Exclude from average"
-msgstr ""
+msgstr "Exclou de la mitjana"
 
 #: terrariumNotification.py:130
 msgid "Current value"
-msgstr ""
+msgstr "Valor actual"
 
 #: terrariumNotification.py:131 terrariumNotification.py:163
 #: terrariumNotification.py:190
@@ -390,15 +392,15 @@ msgstr ""
 
 #: terrariumNotification.py:145
 msgid "Sensor alarm"
-msgstr ""
+msgstr "Alarma del sensor"
 
 #: terrariumNotification.py:152
 msgid "Relay update (every 30 seconds)"
-msgstr ""
+msgstr "Actualització de relé (cada 30 segons)"
 
 #: terrariumNotification.py:158
 msgid "Max wattage"
-msgstr ""
+msgstr "Potència màxima"
 
 #: terrariumNotification.py:160
 msgid "True if in manual mode"
@@ -410,7 +412,7 @@ msgstr ""
 
 #: terrariumNotification.py:162 terrariumNotification.py:189
 msgid "Current state"
-msgstr ""
+msgstr "Estat actual"
 
 #: terrariumNotification.py:169
 msgid "Relay change (only when value is changed)"
@@ -422,7 +424,7 @@ msgstr ""
 
 #: terrariumNotification.py:183
 msgid "Button update (every 30 seconds)"
-msgstr ""
+msgstr "Actualització del botó (cada 30 segons)"
 
 #: terrariumNotification.py:196
 msgid "Button change (only when value is changed)"
@@ -434,7 +436,7 @@ msgstr ""
 
 #: terrariumNotification.py:211
 msgid "Webcam archive"
-msgstr ""
+msgstr "Arxiu de la càmera web"
 
 #: terrariumNotification.py:420
 msgid "Display"
@@ -442,31 +444,31 @@ msgstr ""
 
 #: terrariumNotification.py:424
 msgid "Email"
-msgstr ""
+msgstr "Correu electrònic"
 
 #: terrariumNotification.py:434
 msgid "Traffic light"
-msgstr ""
+msgstr "Semàfor"
 
 #: terrariumNotification.py:438
 msgid "Web-hook"
-msgstr ""
+msgstr "Web-hook"
 
 #: terrariumNotification.py:442
 msgid "MQTT"
-msgstr ""
+msgstr "MQTT"
 
 #: terrariumNotification.py:446
 msgid "Pushover"
-msgstr ""
+msgstr "Pushover"
 
 #: terrariumNotification.py:450
 msgid "Buzzer"
-msgstr ""
+msgstr "Brunzidor"
 
 #: terrariumWebserver.py:166 terrariumWebserver.py:255
 msgid "Authenticate to make any changes"
-msgstr ""
+msgstr "Autentiqueu-vos per fer qualsevol canvi"
 
 #: terrariumWebserver.py:166 terrariumWebserver.py:255
 msgid "Authentication"
@@ -474,12 +476,12 @@ msgstr ""
 
 #: terrariumWebserver.py:166 terrariumWebserver.py:255
 msgid "TerrariumPI"
-msgstr ""
+msgstr "TerrariumPI"
 
 #: terrariumWebserver.py:395
 msgid "Software Update"
-msgstr ""
+msgstr "Actualització de software"
 
 #: terrariumNotification.py:429
 msgid "Telegram"
-msgstr ""
+msgstr "Telegram"
