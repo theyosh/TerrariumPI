@@ -188,7 +188,7 @@
         editForm.elements['height'].value = 2464;
         break;
       case 'rpicam-live':
-        editForm.elements['address'].value = 'rpicam-live';
+        editForm.elements['address'].value = 'rpicam_live';
         editForm.elements['width'].value = 1920;
         editForm.elements['height'].value = 1080;
         break;
