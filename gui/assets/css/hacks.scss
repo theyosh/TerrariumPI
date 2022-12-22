@@ -360,14 +360,6 @@ select[readonly].select2-hidden-accessible + .select2-container .select2-selecti
   color: #ffffff
 }
 
-.dimmer canvas {
-  max-width: 165px;
-}
-
-.dimmer > div {
-  position: relative !important;
-}
-
 @media (min-width: 768px) and (max-width: 1440px) {
   .info-box-icon.float {
     position: absolute;

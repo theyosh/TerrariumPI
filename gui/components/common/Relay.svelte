@@ -39,7 +39,7 @@
         .data('update', 1)
         .prop('readonly', true)
         .siblings('canvas')
-        .addClass('btn btn-default m-2 p-2' + (!$isAuthenticated ? ' disabled' : ''));
+        .addClass((!$isAuthenticated ? ' disabled' : ''));
     }
     loaded = true;
   });
@@ -65,7 +65,10 @@
 </script>
 
 {#if relay.dimmer}
-  <div class="dimmer">
+  <div class="dimmer btn btn-default m-2">
+    {#if !$isAuthenticated}
+      <div class="dimmer-disabled disabled"></div>
+    {/if}
     <input
       type="text"
       id="{relay.id}"
@@ -73,16 +76,16 @@
       class:disabled="{!$isAuthenticated}"
       value="{relay.value}"
       disabled="{!$isAuthenticated}"
-      data-width="165"
-      data-height="165"
+      data-width="150"
+      data-height="150"
       data-min="0"
       data-max="100"
       data-angleArc="290"
       data-angleOffset="35" />
-    <span
+    <!-- <span
       style="position: absolute; top: 0px; left: 0px; height: 100%; width:100%; z-index:99"
       class:disabled="{!$isAuthenticated}"
-      class:d-none="{$isAuthenticated}"></span>
+      class:d-none="{$isAuthenticated}"></span> -->
   </div>
 {:else}
   <button
@@ -98,15 +101,18 @@
 {/if}
 
 <style>
-  .dimmer {
+ .dimmer {
     position: relative;
   }
-  input.dial {
-    z-index: 30;
-    left: 0px;
-    margin: 33% 30% !important;
-  }
 
+  .dimmer .dimmer-disabled {
+    position: absolute;
+    z-index: 999;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+  }
   input.dial.disabled {
     cursor: not-allowed;
   }
