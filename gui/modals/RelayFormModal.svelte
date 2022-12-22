@@ -57,9 +57,6 @@
         values.calibration = {};
       }
 
-
-
-
       try {
         // Post data
         await updateRelay(values, (data) => (values = data));
