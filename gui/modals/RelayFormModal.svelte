@@ -52,6 +52,14 @@
       delete values.value;
       delete values.dimmer;
 
+      // If all items of the calibration object are empty, then reset the complete calibration object.
+      if (!Object.values(values.calibration).some(Boolean)) {
+        values.calibration = {};
+      }
+
+
+
+
       try {
         // Post data
         await updateRelay(values, (data) => (values = data));
