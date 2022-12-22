@@ -82,10 +82,6 @@
       data-max="100"
       data-angleArc="290"
       data-angleOffset="35" />
-    <!-- <span
-      style="position: absolute; top: 0px; left: 0px; height: 100%; width:100%; z-index:99"
-      class:disabled="{!$isAuthenticated}"
-      class:d-none="{$isAuthenticated}"></span> -->
   </div>
 {:else}
   <button
