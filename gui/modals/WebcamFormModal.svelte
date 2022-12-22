@@ -213,11 +213,16 @@
       delete values.value;
 
       try {
-        // Post data
         values.markers = JSON.parse(values.markers);
+      } catch (error) {
+        values.markers = [];
+      }
+
+      try {
+        // Post data
         await updateWebcam(values, (data) => (values = data));
 
-        // Notifify OK!
+        // Notify OK!
         successNotification(
           $_('webcams.settings.save.ok.message', { default: "Webcam ''{name}'' is updated", values: { name: values.name } }),
           $_('notification.form.save.ok.title', { default: 'Save OK' })
