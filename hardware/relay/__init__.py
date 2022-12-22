@@ -340,9 +340,13 @@ class terrariumRelayDimmer(terrariumRelay):
     if '' == dimmer_offset:
       dimmer_offset = 0
 
-    self._dimmer_offset = dimmer_offset
+    self._dimmer_offset = int(dimmer_offset)
 
-    max_power = int(data.get('dimmer_max_power', -1))
+    max_power = data.get('dimmer_max_power', -1)
+    if '' == max_power:
+      max_power = -1
+
+    max_power = int(max_power)
     if 0 <= max_power <= 100:
       self.ON = max_power
       if self.state > self.ON:
