@@ -4,7 +4,7 @@
   import { onMount, onDestroy, getContext, setContext } from 'svelte';
 
   import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
-  import { fetchRelays, deleteRelay, toggleRelay, dimRelay, updateSystemSettings } from '../providers/api';
+  import { fetchRelays, deleteRelay, toggleRelay, dimRelay, manualRelay, updateSystemSettings } from '../providers/api';
   import { successNotification, errorNotification } from '../providers/notification-provider';
 
   import RelayCard from '../user-controls/RelayCard.svelte';
