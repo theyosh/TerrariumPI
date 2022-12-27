@@ -894,17 +894,15 @@ class terrariumAreaLights(terrariumArea):
           # We cast value to a string, split it on ',' and convert the values back to integers
           # We have now an array with 1 or 2 integers
           value_on  = [int(value) for value in str(relay['on']).split(',')]
-          #.map(int, value)
           value_off = [int(value) for value in str(relay['off']).split(',')]
-          # str(relay['off']).split(',').map(int, value)
           tweaks[f'{relay["id"]}'] = {
             'on' : {
-              'delay'    : 0 if len(value_on) == 0 else value_on[0],
-              'duration' : 0 if len(value_on) == 1 else value_on[1]
+              'delay'    : 0 if len(value_on) == 0 else float(values[0]) * 60.0,
+              'duration' : 0 if len(value_on) == 1 else float(values[1]) * 60.0
             },
             'off' : {
-              'delay'    : 0 if len(value_off) == 0 else value_off[0],
-              'duration' : 0 if len(value_off) == 1 else value_off[1]
+              'delay'    : 0 if len(value_off) == 0 else float(values[0]) * 60.0,
+              'duration' : 0 if len(value_off) == 1 else float(values[1]) * 60.0
             }
           }
 
