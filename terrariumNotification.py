@@ -32,13 +32,17 @@ from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty
 # Display support
 from hardware.display import terrariumDisplay, terrariumDisplayLoadingException
 
+# https://docs.python.org/3/library/gettext.html#deferred-translations
+def N_(message):
+  return message
+
 class terrariumNotification(terrariumSingleton):
   __DEFAULT_PLACEHOLDERS = {
-    'date'       : _('Local date'),
-    'date_short' : _('Local date, day and month'),
-    'time'       : _('Local time'),
-    'time_short' : _('Local time, hours and minutes'),
-    'now'        : _('Local date and time'),
+    'date'       : N_('Local date'),
+    'date_short' : N_('Local date, day and month'),
+    'time'       : N_('Local time'),
+    'time_short' : N_('Local time, hours and minutes'),
+    'now'        : N_('Local date and time'),
   }
 
   __MAX_MESSAGES_TOTAL_PER_MINUTE = 60
@@ -46,161 +50,161 @@ class terrariumNotification(terrariumSingleton):
   __MESSAGES = {
 
     'authentication_error' : {
-      'name':_('Authentication login error'),
+      'name': N_('Authentication login error'),
       'placeholders' : {
-        'ip'       : _('IP of the wrong login attempt'),
-        'username' : _('Used username'),
-        'password' : _('Used password'),
+        'ip'       : N_('IP of the wrong login attempt'),
+        'username' : N_('Used username'),
+        'password' : N_('Used password'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'system_warning' : {
-      'name':_('System warning'),
+      'name': N_('System warning'),
       'placeholders' : {
-        'message' : _('Warning message'),
+        'message' : N_('Warning message'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'system_error' : {
-      'name':_('System error'),
+      'name': N_('System error'),
       'placeholders' : {
-        'message' : _('Error message'),
+        'message' : N_('Error message'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'system_summary' : {
-      'name':_('System summary'),
+      'name': N_('System summary'),
       'placeholders' : {
-        'uptime' : _('System uptime in human readable format'),
-        'system_load' : _('System load last minute'),
+        'uptime' : N_('System uptime in human readable format'),
+        'system_load' : N_('System load last minute'),
         'system_load_alarm' : _('True if there is an alarm'),
-        'cpu_temperature' : _('System CPU temperature'),
-        'cpu_temperature_alarm' : _('True if there is an alarm'),
-        'storage' : _('Storage usage'),
-        'memory' : _('Memory usage'),
-        'average_[sensor_type]' : _('Average of [sensor type] (ex. temperature)'),
-        'average_[sensor_type]_unit' : _('Sensor type unit value'),
-        'average_[sensor_type]_alarm' : _('True if there is an alarm'),
-        'current_watt' : _('Current power usage'),
-        'max_watt' : _('Max power usage'),
-        'current_flow' : _('Current water flow'),
-        'max_flow' : _('Max water flow'),
-        'relays_active' : _('Number of relays active'),
+        'cpu_temperature' : N_('System CPU temperature'),
+        'cpu_temperature_alarm' : N_('True if there is an alarm'),
+        'storage' : N_('Storage usage'),
+        'memory' : N_('Memory usage'),
+        'average_[sensor_type]' : N_('Average of [sensor type] (ex. temperature)'),
+        'average_[sensor_type]_unit' : N_('Sensor type unit value'),
+        'average_[sensor_type]_alarm' : N_('True if there is an alarm'),
+        'current_watt' : N_('Current power usage'),
+        'max_watt' : N_('Max power usage'),
+        'current_flow' : N_('Current water flow'),
+        'max_flow' : N_('Max water flow'),
+        'relays_active' : N_('Number of relays active'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'system_update_warning' : {
-      'name':_('System to slow with updates (warning)'),
+      'name': N_('System to slow with updates (warning)'),
       'placeholders' : {
-        'message' : _('Error message'),
-        'time_short' : _('Duration in seconds that are short'),
-        'update_duration' : _('The update duration in seconds'),
-        'loop_timeout' : _('The max update duration'),
-        'times_late' : _('Amount of times to late with updates'),
+        'message' : N_('Error message'),
+        'time_short' : N_('Duration in seconds that are short'),
+        'update_duration' : N_('The update duration in seconds'),
+        'loop_timeout' : N_('The max update duration'),
+        'times_late' : N_('Amount of times to late with updates'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'system_update_error' : {
-      'name':_('System to slow with updates more then 30 times'),
+      'name': N_('System to slow with updates more then 30 times'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'sensor_update' : {
-      'name':_('Sensor update (every 30 seconds)'),
+      'name': N_('Sensor update (every 30 seconds)'),
       'placeholders' : {
-        'id': _('ID'),
-        'hardware': _('Hardware type'),
-        'type': _('Sensor type'),
-        'name': _('Name'),
-        'address': _('Address'),
-        'limit_min': _('Limit min'),
-        'limit_max': _('Limit max'),
-        'alarm_min': _('Alarm min'),
-        'alarm_max': _('Alarm max'),
-        'max_diff': _('Max difference'),
-        'exclude_avg': _('Exclude from average'),
-        'alarm': _('True if there is an alarm'),
-        'value': _('Current value'),
-        'error': _('True if there is an error'),
-        'unit' : _('Sensor type unit value'),
+        'id': N_('ID'),
+        'hardware': N_('Hardware type'),
+        'type': N_('Sensor type'),
+        'name': N_('Name'),
+        'address': N_('Address'),
+        'limit_min': N_('Limit min'),
+        'limit_max': N_('Limit max'),
+        'alarm_min': N_('Alarm min'),
+        'alarm_max': N_('Alarm max'),
+        'max_diff': N_('Max difference'),
+        'exclude_avg': N_('Exclude from average'),
+        'alarm': N_('True if there is an alarm'),
+        'value': N_('Current value'),
+        'error': N_('True if there is an error'),
+        'unit' : N_('Sensor type unit value'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'sensor_change' : {
-      'name':_('Sensor change (only when value is changed)'),
+      'name': N_('Sensor change (only when value is changed)'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'sensor_alarm' : {
-      'name':_('Sensor alarm'),
+      'name': N_('Sensor alarm'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'relay_update' : {
-      'name':_('Relay update (every 30 seconds)'),
+      'name': N_('Relay update (every 30 seconds)'),
       'placeholders' : {
-        'id': _('ID'),
-        'hardware': _('Hardware type'),
-        'name': _('Name'),
-        'address': _('Address'),
-        'wattage': _('Max wattage'),
-        'flow': _('Max water flow'),
-        'manual_mode': _('True if in manual mode'),
-        'dimmer': _('True if it is a dimmer'),
-        'value': _('Current state'),
-        'error': _('True if there is an error'),
+        'id': N_('ID'),
+        'hardware': N_('Hardware type'),
+        'name': N_('Name'),
+        'address': N_('Address'),
+        'wattage': N_('Max wattage'),
+        'flow': N_('Max water flow'),
+        'manual_mode': N_('True if in manual mode'),
+        'dimmer': N_('True if it is a dimmer'),
+        'value': N_('Current state'),
+        'error': N_('True if there is an error'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'relay_change' : {
-      'name':_('Relay change (only when value is changed)'),
+      'name': N_('Relay change (only when value is changed)'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'relay_toggle' : {
-      'name':_('Relay toggle'),
+      'name': N_('Relay toggle'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'button_update' : {
-      'name':_('Button update (every 30 seconds)'),
+      'name': N_('Button update (every 30 seconds)'),
       'placeholders' : {
-        'id': _('ID'),
-        'hardware': _('Hardware type'),
-        'name': _('Name'),
-        'address': _('Address'),
-        'value': _('Current state'),
-        'error': _('True if there is an error'),
+        'id': N_('ID'),
+        'hardware': N_('Hardware type'),
+        'name': N_('Name'),
+        'address': N_('Address'),
+        'value': N_('Current state'),
+        'error': N_('True if there is an error'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'button_change' : {
-      'name':_('Button change (only when value is changed)'),
+      'name': N_('Button change (only when value is changed)'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
     },
 
     'button_action' : {
-      'name':_('Button action'),
+      'name': N_('Button action'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
@@ -208,7 +212,7 @@ class terrariumNotification(terrariumSingleton):
 
 
     'webcam_archive' : {
-      'name':_('Webcam archive'),
+      'name': N_('Webcam archive'),
       'placeholders' : {
         **__DEFAULT_PLACEHOLDERS
       }
@@ -231,7 +235,11 @@ class terrariumNotification(terrariumSingleton):
   def available_messages(__cls__):
     data = []
     for (msgtype, msgdata) in terrariumNotification.__MESSAGES.items():
-      data.append({'type' : msgtype, 'name' : msgdata['name'], 'placeholders' : msgdata['placeholders']})
+      placeholders = {}
+      for (placeholder_id, placeholder_desc) in msgdata['placeholders'].items():
+        placeholders[placeholder_id] = _(placeholder_desc)
+
+      data.append({'type' : msgtype, 'name' : _(msgdata['name']), 'placeholders' : placeholders})
 
     return sorted(data, key=itemgetter('name'))
 

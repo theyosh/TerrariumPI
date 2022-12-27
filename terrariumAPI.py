@@ -686,7 +686,7 @@ class terrariumAPI(object):
 
   # Notifications
   def notification_message_types(self):
-    return { 'data' : terrariumNotification.available_messages(self.webserver.engine.active_language) }
+    return { 'data' : terrariumNotification.available_messages }
 
   @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_message_detail(self, message):

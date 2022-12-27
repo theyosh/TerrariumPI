@@ -39,6 +39,7 @@ from hardware.webcam import terrariumWebcam, terrariumWebcamLoadingException
 
 from terrariumNotification import terrariumNotification
 
+#https://docs.python.org/3/library/gettext.html#deferred-translations
 def N_(message):
   return message
 
