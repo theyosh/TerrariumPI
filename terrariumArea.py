@@ -897,12 +897,12 @@ class terrariumAreaLights(terrariumArea):
           value_off = [int(value) for value in str(relay['off']).split(',')]
           tweaks[f'{relay["id"]}'] = {
             'on' : {
-              'delay'    : 0 if len(value_on) == 0 else float(values[0]) * 60.0,
-              'duration' : 0 if len(value_on) == 1 else float(values[1]) * 60.0
+              'delay'    : 0 if len(value_on) == 0 else float(value_on[0]) * 60.0,
+              'duration' : 0 if len(value_on) == 1 else float(value_on[1]) * 60.0
             },
             'off' : {
-              'delay'    : 0 if len(value_off) == 0 else float(values[0]) * 60.0,
-              'duration' : 0 if len(value_off) == 1 else float(values[1]) * 60.0
+              'delay'    : 0 if len(value_off) == 0 else float(value_off[0]) * 60.0,
+              'duration' : 0 if len(value_off) == 1 else float(value_off[1]) * 60.0
             }
           }
 
