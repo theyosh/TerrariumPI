@@ -8,6 +8,7 @@ import { isDay } from "../stores/terrariumpi";
 
 const settings = getCustomConfig();
 
+/* jslint unparam: true */
 export const graphDefaultOpts = {
 
   maintainAspectRatio: false,
@@ -155,6 +156,7 @@ export const graphDefaultOpts = {
     }
   }
 };
+/* jslint unparam: false */
 
 export const graphTypes = {
   alarm_min: {

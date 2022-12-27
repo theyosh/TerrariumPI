@@ -10,6 +10,7 @@ let target = document.getElementById('app');
 
 const app = new App({target});
 
+/* jslint unparam: true */
 window.addEventListener('error', (event) => {
   app.$destroy();
   target.innerHTML = '';
@@ -28,5 +29,6 @@ window.addEventListener('error', (event) => {
 
   window.dispatchEvent(new Event('resize'));
 });
+/* jslint unparam: false */
 
 export default app;
