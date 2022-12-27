@@ -5,7 +5,7 @@ wheel==0.38.4
 
 # Database
 pony==0.7.16
-yoyo-migrations==8.1.0
+yoyo-migrations==8.2.0
 python-dotenv==0.21.0
 
 # Audio
@@ -60,7 +60,7 @@ adafruit-circuitpython-sht31d==2.3.20
 # Webcam packages
 Pillow==9.3.0
 # !! Check first: https://piwheels.org/project/numpy/ !!
-numpy==1.23.5
+numpy==1.24.1
 opencv-python-headless==4.6.0.66
 piexif==1.1.3
 
