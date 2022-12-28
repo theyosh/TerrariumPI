@@ -366,7 +366,7 @@
                 "alarm_count": 0,
                 "begin": 1667542592,
                 "duration": 36000,
-                "end": 1667578592,
+                "end": 1667578592
                 "last_powered_on": 1667456201,
                 "powered": false,
                 "timer_on": false
@@ -999,6 +999,7 @@
                             name="{`setup.low.tweaks.${index}.on`}"
                             horizontal="{true}"
                             required="{true}"
+                            max=180
                             on:change="{updateTweakSliders}"
                             value="{tweakValue($formData.setup.low.tweaks[index].on, relayDimmer(relay.id) ? [0, 30] : 0)}"
                             label="{relayDimmer(relay.id)
@@ -1010,6 +1011,7 @@
                             name="{`setup.low.tweaks.${index}.off`}"
                             horizontal="{true}"
                             required="{true}"
+                            max=180
                             on:change="{updateTweakSliders}"
                             value="{tweakValue($formData.setup.low.tweaks[index].off, relayDimmer(relay.id) ? [0, 30] : 0)}"
                             label="{relayDimmer(relay.id)
@@ -1255,6 +1257,7 @@
                             name="{`setup.high.tweaks.${index}.on`}"
                             horizontal="{true}"
                             required="{true}"
+                            max=180
                             on:change="{updateTweakSliders}"
                             value="{tweakValue($formData.setup.high.tweaks[index].on, relayDimmer(relay.id) ? [0, 30] : 0)}"
                             label="{relayDimmer(relay.id)
@@ -1266,6 +1269,7 @@
                             name="{`setup.high.tweaks.${index}.off`}"
                             horizontal="{true}"
                             required="{true}"
+                            max=180
                             on:change="{updateTweakSliders}"
                             value="{tweakValue($formData.setup.high.tweaks[index].off, relayDimmer(relay.id) ? [0, 30] : 0)}"
                             label="{relayDimmer(relay.id)
