@@ -1,4 +1,4 @@
-# TerrariumPI 4.6.0
+# TerrariumPI 4.6.1
 
 ![Latest release](https://img.shields.io/github/v/release/theyosh/terrariumpi?label=Latest%20release)
 ![GitHub Release Date](https://img.shields.io/github/release-date/theyosh/TerrariumPI)
@@ -9,7 +9,7 @@
 
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
-For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humidity sensors to get a constant humidity value. In order to lower the humidity you can add a dehumidifier.
+For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minimal period between two spray actions. Use at least one humidity sensors to get a constant humidity value. In order to lower the humidity you can add a dehumidifier.
 
 The software is that flexible that there is no limit in amount of sensors, relay boards or door sensors. The usage can be endless. All power switches have support for timers to trigger based on a time pattern.
 
@@ -151,11 +151,11 @@ You can skip the manual installation part.
 
 All needed options and modules are setup by the installer script. This means that I2C and 1Wire overlay are enabled by default.
 
-Make sure that your Pi is secured when you put it to the Internet. Would be a shame if TerrariumPI gets next fictum of '[A smart fish tank left a casino vulnerable to hackers](http://money.cnn.com/2017/07/19/technology/fish-tank-hack-darktrace/index.html)' :P
+Make sure that your Pi is secured when you put it to the Internet. Would be a shame if TerrariumPI gets next victim of '[A smart fish tank left a casino vulnerable to hackers](http://money.cnn.com/2017/07/19/technology/fish-tank-hack-darktrace/index.html)' :P
 
 ## Updating
 
-This updating is based on that the software is installed with the steps in the Installation above. When updating between release versions it will take more time due to database updates and cleanups. This can be seen in the logfile.
+This updating is based on that the software is installed with the steps in the Installation above. When updating between release versions it will take more time due to database updates and cleanups. This can be seen in the log file.
 
 ### Docker
 
