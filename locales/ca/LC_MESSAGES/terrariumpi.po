@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.3.3\n"
 "POT-Creation-Date: 2022-12-27 11:26+CET\n"
-"PO-Revision-Date: 2022-12-20 19:55+0000\n"
+"PO-Revision-Date: 2022-12-29 22:03+0000\n"
 "Last-Translator: cmonicob <cmonicob@gmail.com>\n"
 "Language-Team: Catalan <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/ca/>\n"
@@ -277,9 +277,8 @@ msgid "Average of [sensor type] (ex. temperature)"
 msgstr "Mitjana de [tipus de sensor] (p. ex. temperatura)"
 
 #: terrariumNotification.py:89 terrariumNotification.py:136
-#, fuzzy
 msgid "Sensor type unit value"
-msgstr "Valor de la unitat del tipus de sensor"
+msgstr "Valor de la unitat per al tipus de sensor"
 
 #: terrariumNotification.py:91
 msgid "Current power usage"
@@ -383,7 +382,6 @@ msgstr "Valor actual"
 
 #: terrariumNotification.py:135 terrariumNotification.py:167
 #: terrariumNotification.py:194
-#, fuzzy
 msgid "True if there is an error"
 msgstr "És cert si hi ha un error"
 
@@ -408,7 +406,6 @@ msgid "True if in manual mode"
 msgstr "En mode manual"
 
 #: terrariumNotification.py:165
-#, fuzzy
 msgid "True if it is a dimmer"
 msgstr "És cert si és un dimmer"
 
@@ -417,7 +414,6 @@ msgid "Current state"
 msgstr "Estat actual"
 
 #: terrariumNotification.py:173
-#, fuzzy
 msgid "Relay change (only when value is changed)"
 msgstr "Canvi de relé (només quan es canvia el valor)"
 
@@ -430,7 +426,6 @@ msgid "Button update (every 30 seconds)"
 msgstr "Actualització del botó (cada 30 segons)"
 
 #: terrariumNotification.py:200
-#, fuzzy
 msgid "Button change (only when value is changed)"
 msgstr "Canvi de botó (només quan es canvia el valor)"
 
