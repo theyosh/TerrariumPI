@@ -277,9 +277,7 @@ def publish(lines):
         for line in lines:
             line = re.sub("#(\d+)", "[#\\1](https://github.com/theyosh/TerrariumPI/issues/\\1)", line, 0, re.IGNORECASE)
             line = re.sub("@([^\s]+)", "[@\\1](https://github.com/\\1)", line, 0, re.IGNORECASE)
-
-            line = re.sub("~+","------", line, 0, re.IGNORECASE)
-
+            line = re.sub("~+","------\n", line, 0, re.IGNORECASE)
 
             f.write(line)
 
