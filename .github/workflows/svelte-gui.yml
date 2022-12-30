@@ -46,5 +46,5 @@ jobs:
           git config --global user.name 'GitHub Actions'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -f public/*
-          git commit -am "New Svelte GUI build" --author="theyosh <theyosh@users.noreply.github.com>" || true
+          git commit -am "New Svelte GUI build" --author="TheYOSH <theyosh@users.noreply.github.com>" || true
           git push -f
