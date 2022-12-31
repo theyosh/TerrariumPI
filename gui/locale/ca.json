@@ -1739,7 +1739,7 @@
       "pi-wattage": {
         "help": "Introduïu l'ús total de potència del PI amb tots els seus dispositius USB connectats.",
         "invalid": "Introduïu un valor mínim de {value}.",
-        "label": "Ús de Pi Power"
+        "label": "Consum d'energia Pi en W"
       },
       "port": {
         "help": "Introduïu el número de port per escoltar connexions. 8090 per defecte.",
