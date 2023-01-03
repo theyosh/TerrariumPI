@@ -82,6 +82,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
     return True
 
   def __load_forecast_data_one_call(self):
+    data = None
     if self.__one_call_version is None or self.__one_call_version == '3.0':
       data = terrariumUtils.get_remote_data('https://api.openweathermap.org/data/3.0/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}&lang={}'.format(self._data['geo']['lat'],self._data['geo']['long'],self.__appid,self._device['language'][0:2]))
 
