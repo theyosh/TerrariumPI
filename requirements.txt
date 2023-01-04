@@ -47,7 +47,7 @@ lib8relay==1.0.3
 pylibftdi==0.20.0
 asyncio==3.4.3
 python-kasa==0.5.0
-meross-iot==0.4.5.0
+meross-iot==0.4.5.4
 PCA9685-driver==1.2.0
 pywemo==0.9.1
 simple-pid==1.0.1
