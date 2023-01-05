@@ -4,11 +4,6 @@ from terrariumUtils import terrariumCache, terrariumUtils
 from hashlib import md5
 import re
 
-# pip install zeroconf
-# https://github.com/jstasiak/python-zeroconf
-# https://python-zeroconf.readthedocs.io/
-# Needs mDNS: https://tasmota.github.io/docs/Commands/#setoption55 => SO55 1
-
 class terrariumRelaySonoff(terrariumRelay):
   HARDWARE = 'sonoff'
   NAME = 'Sonoff (Tasmota)'
@@ -29,12 +24,6 @@ class terrariumRelaySonoff(terrariumRelay):
       raise terrariumRelayLoadingException(f'Incorrect address for a Sonoff device: {self}')
 
     return address
-
-  # # This will update the device based in mac address
-  # def load_hardware(self):
-  #   super().load_hardware()
-  #   # Bad choice: But reload the hardware once more to get the right mac address for unique ID. aKa forcing reloading, ignoring the hardware cache
-  #   self._load_hardware()
 
   def _load_hardware(self):
     # Input format should be either:
@@ -66,10 +55,6 @@ class terrariumRelaySonoff(terrariumRelay):
     self.__cache_key = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}'.encode()).hexdigest()
     self.__cache = terrariumCache()
     self.__cache.set_data(self.__cache_key, state['StatusSTS'], self._CACHE_TIMEOUT)
-
-    # # We need the use the address_nr value also, as there can multiple relays per sonoff device.
-    # if self._device['id'] is None:
-    #   self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}{address["nr"]}'.encode()).hexdigest()
 
     return device
 
@@ -129,12 +114,6 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
 
     return address
 
-  # # This will update the device based in mac address
-  # def load_hardware(self):
-  #   super().load_hardware()
-  #   # Bad choice: But reload the hardware once more to get the right mac address for unique ID. aKa forcing reloading, ignoring the hardware cache
-  #   self._load_hardware()
-
   def _load_hardware(self):
     # Input format should be either:
     # - http://[HOST]#[POWER_SWITCH_NR]
@@ -159,9 +138,6 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
 
     if state is None:
       return None
-
-    # # Always overrule the ID generating, as we want to use the MAC as that is unique if the IP address is changing
-    # self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}'.encode()).hexdigest()
 
     return device
 
