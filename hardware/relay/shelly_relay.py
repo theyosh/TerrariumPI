@@ -72,7 +72,7 @@ class terrariumRelayShelly(terrariumRelay):
     action = 'on' if state == self.ON else 'off'
     url = f'{self.device}?turn={action}'
     print(f'Set hardware url: {url}')
-    state = terrariumUtils.get_remote_data(url)
+    data = terrariumUtils.get_remote_data(url)
 
     if data is None:
       return False
@@ -98,6 +98,9 @@ class terrariumRelayShelly(terrariumRelay):
     #   self.__cache.set_data(self.__cache_key, data['relays'], self._CACHE_TIMEOUT)
 
     data = terrariumUtils.get_remote_data(self.device)
+
+    if data is None:
+      return None
 
     if 'ison' in data:
       data = data['ison']
