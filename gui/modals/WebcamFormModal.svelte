@@ -127,7 +127,7 @@
 
   const _update_marker_tooltip = (all_sensors) => {
     return (
-      `<div><strong>${$sensors[sensors[0]].name}</strong><br />` +
+      `<div><strong>${$sensors[all_sensors[0]].name}</strong><br />` +
       all_sensors
         .map((item) => {
           return (
