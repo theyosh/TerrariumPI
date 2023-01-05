@@ -39,27 +39,27 @@ class terrariumRelayShelly(terrariumRelay):
     # - http://[PASSWORD]@[HOST]/#[POWER_SWITCH_NR]
 
     address = self._address
-    device = f'{address["protocol"]}://{address["host"]}/'
+    device = f'{address["protocol"]}://{address["host"]}'
 
     if 'user' in address and 'password' in address:
-      device = f'{address["protocol"]}://{address["user"]}:{address["password"]}@{address["host"]}/'
+      device = f'{address["protocol"]}://{address["user"]}:{address["password"]}@{address["host"]}'
 
-    print('Address')
-    print(address)
+
+    device += f'/relay/{self._address["nr"]}'
 
     print('Device')
-    print(device + 'status')
+    print(device)
 
-    state = terrariumUtils.get_remote_data(f'{device}status')
+    data = terrariumUtils.get_remote_data(device)
 
-    if state is None:
+    if data is None:
       return None
 
     # Create the cache key for caching the relay states.
     # This is usefully when there are more then 1 relay per hardware device.
-    self.__cache_key = md5(f'{self.HARDWARE}{address["host"].lower()}'.encode()).hexdigest()
-    self.__cache = terrariumCache()
-    self.__cache.set_data(self.__cache_key, state['relays'], self._CACHE_TIMEOUT)
+    # self.__cache_key = md5(f'{self.HARDWARE}{address["host"].lower()}'.encode()).hexdigest()
+    # self.__cache = terrariumCache()
+    # self.__cache.set_data(self.__cache_key, state['relays'], self._CACHE_TIMEOUT)
 
     # We need the use the address_nr value also, as there can multiple relays per sonoff device.
 #    if self._device['id'] is None:
@@ -69,10 +69,10 @@ class terrariumRelayShelly(terrariumRelay):
     return device
 
   def _set_hardware_value(self, state):
-    action = 1 if state == self.ON else 0
-    url = f'{self.device}relay/{self._address["nr"]}?turn={action}'
+    action = 'on' if state == self.ON else 'off'
+    url = f'{self.device}?turn={action}'
     print(f'Set hardware url: {url}')
-    data = terrariumUtils.get_remote_data(url)
+    state = terrariumUtils.get_remote_data(url)
 
     if data is None:
       return False
@@ -83,20 +83,23 @@ class terrariumRelayShelly(terrariumRelay):
     return state == (self.ON if terrariumUtils.is_true(data) else self.OFF)
 
   def _get_hardware_value(self):
-    data = self.__cache.get_data(self.__cache_key)
-    if data is None:
-      # Cache is expired, so we update with new data
-      # Get the overall state information
-      url = f'{self.device}status'
-      print(f'Get hardware url: {url}')
-      data = terrariumUtils.get_remote_data(url)
 
-      if data is None:
-        return None
+    # data = self.__cache.get_data(self.__cache_key)
+    # if data is None:
+    #   # Cache is expired, so we update with new data
+    #   # Get the overall state information
+    #   url = f'{self.device}status'
+    #   print(f'Get hardware url: {url}')
+    #   data = terrariumUtils.get_remote_data(url)
 
-      self.__cache.set_data(self.__cache_key, data['relays'], self._CACHE_TIMEOUT)
+    #   if data is None:
+    #     return None
 
-    if 'ison' in data['relays'][self._address["nr"]]:
-      data = data['relays'][self._address["nr"]]['ison']
+    #   self.__cache.set_data(self.__cache_key, data['relays'], self._CACHE_TIMEOUT)
+
+    data = terrariumUtils.get_remote_data(self.device)
+
+    if 'ison' in data:
+      data = data['ison']
 
     return self.ON if terrariumUtils.is_true(data) else self.OFF
