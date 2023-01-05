@@ -44,6 +44,12 @@ class terrariumRelayShelly(terrariumRelay):
     if 'user' in address and 'password' in address:
       device = f'{address["protocol"]}://{address["user"]}:{address["password"]}@{address["host"]}/'
 
+    print('Address')
+    print(address)
+
+    print('Device')
+    print(device + 'status')
+
     state = terrariumUtils.get_remote_data(f'{device}status')
 
     if state is None:
@@ -59,11 +65,13 @@ class terrariumRelayShelly(terrariumRelay):
 #    if self._device['id'] is None:
 #      self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}{address["nr"]}'.encode()).hexdigest()
 
+
     return device
 
   def _set_hardware_value(self, state):
     action = 1 if state == self.ON else 0
     url = f'{self.device}relay/{self._address["nr"]}?turn={action}'
+    print(f'Set hardware url: {url}')
     data = terrariumUtils.get_remote_data(url)
 
     if data is None:
@@ -80,6 +88,7 @@ class terrariumRelayShelly(terrariumRelay):
       # Cache is expired, so we update with new data
       # Get the overall state information
       url = f'{self.device}status'
+      print(f'Get hardware url: {url}')
       data = terrariumUtils.get_remote_data(url)
 
       if data is None:
