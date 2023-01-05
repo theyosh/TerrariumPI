@@ -4,8 +4,8 @@ categories: [Hardware, Relay]
 tags: [relay, wifi, shelly]
 
 image:
-  path: /assets/img/Shelly.webp
-  src: /assets/img/Shelly.webp
+  path: /assets/img/shelly.webp
+  src: /assets/img/shelly.webp
   alt: "Shelly header image"
 
 device_address: "Enter the hostname or IP address and optional a relay number separated by a dash.<br />Ex: `http://[PASSWORD]@[HOST]#[POWER_SWITCH_NR]`"
