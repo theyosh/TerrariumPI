@@ -27,16 +27,15 @@
 	<script defer src="main.js"></script>
 	<script>
 	window.terrariumPI = {
-	language : '{{ lang }}',
-	currency : '{{ currency }}',
-		name     : '{{ title }}',
+		language : '{{ lang }}',
+		currency : '{{ currency }}',
+		name     : '{{ title.replace("'","\'") }}',
 		version  : '{{ version }}',
 		device   : '{{ device }}',
 		profile  : '{{ profile_image }}',
 		favicon  : '{{ favicon }}',
 		logged_in : {% if authenticated %}true{% else %}false{% endif %},
 		{% if authenticated %}username: '{{ username }}', {% endif %}
-
 		gitversion: '{% if authenticated %}{{gitversion}}{% endif %}',
 		graph_show_min_max_gauge : {{ graph_show_min_max_gauge }},
 		graph_smooth_value : {{ graph_smooth_value }},
