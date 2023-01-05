@@ -30,11 +30,11 @@ class terrariumRelaySonoff(terrariumRelay):
 
     return address
 
-  # This will update the device based in mac address
-  def load_hardware(self):
-    super().load_hardware()
-    # Bad choice: But reload the hardware once more to get the right mac address for unique ID. aKa forcing reloading, ignoring the hardware cache
-    self._load_hardware()
+  # # This will update the device based in mac address
+  # def load_hardware(self):
+  #   super().load_hardware()
+  #   # Bad choice: But reload the hardware once more to get the right mac address for unique ID. aKa forcing reloading, ignoring the hardware cache
+  #   self._load_hardware()
 
   def _load_hardware(self):
     # Input format should be either:
@@ -62,14 +62,14 @@ class terrariumRelaySonoff(terrariumRelay):
       return None
 
     # Create the cache key for caching the relay states.
-    # This is usefull when there are more then 1 relay per hardware device.
+    # This is usefully when there are more then 1 relay per hardware device.
     self.__cache_key = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}'.encode()).hexdigest()
     self.__cache = terrariumCache()
     self.__cache.set_data(self.__cache_key, state['StatusSTS'], self._CACHE_TIMEOUT)
 
-    # We need the use the address_nr value also, as there can multiple relays per sonoff device.
-    if self._device['id'] is None:
-      self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}{address["nr"]}'.encode()).hexdigest()
+    # # We need the use the address_nr value also, as there can multiple relays per sonoff device.
+    # if self._device['id'] is None:
+    #   self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}{address["nr"]}'.encode()).hexdigest()
 
     return device
 
@@ -129,11 +129,11 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
 
     return address
 
-  # This will update the device based in mac address
-  def load_hardware(self):
-    super().load_hardware()
-    # Bad choice: But reload the hardware once more to get the right mac address for unique ID. aKa forcing reloading, ignoring the hardware cache
-    self._load_hardware()
+  # # This will update the device based in mac address
+  # def load_hardware(self):
+  #   super().load_hardware()
+  #   # Bad choice: But reload the hardware once more to get the right mac address for unique ID. aKa forcing reloading, ignoring the hardware cache
+  #   self._load_hardware()
 
   def _load_hardware(self):
     # Input format should be either:
@@ -160,8 +160,8 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
     if state is None:
       return None
 
-    # Always overule the ID generating, as we want to use the MAC as that is unique if the IP address is changing
-    self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}'.encode()).hexdigest()
+    # # Always overrule the ID generating, as we want to use the MAC as that is unique if the IP address is changing
+    # self.id = md5(f'{self.HARDWARE}{state["StatusNET"]["Mac"].lower()}'.encode()).hexdigest()
 
     return device
 
