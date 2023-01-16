@@ -77,7 +77,7 @@
           "placeholder": "Selecione a fonte de informações para determinar dia / noite"
         },
         "deviation_high_alarm": {
-          "help": "",
+          "help": "Aumentar ou diminuir valor máximo do alarme.",
           "invalid": "Insira um número válido.",
           "label": "Desvio de alarme alto",
           "placeholder": "Desvio de alarme alto"
@@ -534,8 +534,8 @@
       },
       "calibration": {
         "inverse": {
-          "help": "",
-          "label": ""
+          "help": "Ative para inverter o valor remoto.",
+          "label": "Valor inverso"
         },
         "ldr_capacitor": {
           "help": "Digite o valor do capacitor em µF, pois isso influenciará o cálculo da luz.",
@@ -544,10 +544,10 @@
           "placeholder": "Insira o valor do capacitor em µF"
         },
         "timeout": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o limite de tempo em segundos entre as checagens remotas.",
+          "invalid": "O limite de tempo inserido não é válido. Insira um valor entre {min} e {max}.",
+          "label": "Tempo limite em segundos",
+          "placeholder": "Insira o tempo limite em segundos"
         }
       },
       "current": {
@@ -1014,8 +1014,8 @@
     },
     "door": {
       "status": {
-        "closed": "",
-        "open": "",
+        "closed": "Porta ''{name}'' fechada",
+        "open": "Porta ''{name}'' aberta",
         "title": "Atualização do status da porta"
       }
     },
