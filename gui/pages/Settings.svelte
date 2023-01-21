@@ -127,6 +127,10 @@
             $formData[field.id] = $formData[field.id].map((item) => {
               return item.id;
             });
+          } else if (field.id == 'language') {
+            $formData[field.id] = $formData[field.id].replace('_','-');
+          } else if (field.id == 'always_authenticate' && ($formData[field.id] === true || $formData[field.id] === false)) {
+            $formData[field.id] = $formData[field.id] ? 1 : 0
           }
         }
       });

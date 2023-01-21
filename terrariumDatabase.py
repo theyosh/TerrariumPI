@@ -52,7 +52,7 @@ def create_defaults(version):
     {'id' : 'username',                   'value' : 'admin'},
     {'id' : 'password',                   'value' : terrariumUtils.generate_password('password')},
     {'id' : 'profile_image',              'value' : 'img/terrariumpi.jpg'},
-    {'id' : 'always_authenticate',        'value' : 'false'},
+    {'id' : 'always_authenticate',        'value' : '0'},
     {'id' : 'weather_source',             'value' : ''},
     {'id' : 'language',                   'value' : 'en_US'},
     {'id' : 'currency',                   'value' : 'eur'},
