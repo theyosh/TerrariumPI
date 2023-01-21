@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
-from terrariumUtils import classproperty
+from terrariumUtils import classproperty, terrariumCache
 
 logger = terrariumLogging.logging.getLogger(__name__)
 
@@ -35,6 +35,7 @@ class terrariumIOExpander(object):
   def __init__(self, _, address):
     self.pin = None
     self.address = address
+    self.__hardware_cache = terrariumCache()
     self.device = self.load_hardware()
 
   def __repr__(self):
@@ -59,14 +60,16 @@ class terrariumIOExpander(object):
 
     return address
 
-
-class terrariumPCF8574IOExpander(terrariumIOExpander):
-  HARDWARE = 'PCF8574'
-  NAME = 'PCF8574 Expander (8 ports)'
-
   def load_hardware(self):
     address = self._address
-    return PCF8574(address[1], address[0])
+    hardware_key = f'{self.HARDWARE}_{address.join(",")}'
+    loaded_hardware = self.__hardware_cache.get_data(hardware_key,None)
+
+    if loaded_hardware is None:
+      loaded_hardware = self._load_device(address)
+      self.__hardware_cache.set_data(hardware_key, loaded_hardware, -1)
+
+    return loaded_hardware
 
   @property
   def state(self):
@@ -85,10 +88,16 @@ class terrariumPCF8574IOExpander(terrariumIOExpander):
       return None
 
 
-class terrariumPCF8575IOExpander(terrariumPCF8574IOExpander):
+class terrariumPCF8574IOExpander(terrariumIOExpander):
+  HARDWARE = 'PCF8574'
+  NAME = 'PCF8574 Expander (8 ports)'
+
+  def _load_device(self, address):
+    return PCF8574(address[1], address[0])
+
+class terrariumPCF8575IOExpander(terrariumIOExpander):
   HARDWARE = 'PCF8575'
   NAME = 'PCF8575 Expander (16 ports)'
 
-  def load_hardware(self):
-    address = self._address
+  def _load_device(self, address):
     return PCF8575(address[1], address[0])
