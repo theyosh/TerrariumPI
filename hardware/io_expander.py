@@ -71,6 +71,9 @@ class terrariumIOExpander(object):
 
     return loaded_hardware
 
+  def close(self):
+    pass
+
   @property
   def state(self):
     try:
