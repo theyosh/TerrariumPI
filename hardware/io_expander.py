@@ -62,7 +62,7 @@ class terrariumIOExpander(object):
 
   def load_hardware(self):
     address = self._address
-    hardware_key = f'{self.HARDWARE}_{",".join(address)}'
+    hardware_key = f'{self.HARDWARE}_{self.address}'
     loaded_hardware = self.__hardware_cache.get_data(hardware_key,None)
 
     if loaded_hardware is None:
