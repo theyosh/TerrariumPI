@@ -9,6 +9,7 @@ from hardware.io_expander import terrariumIOExpander
 class terrariumRelayGPIO(terrariumRelay):
   HARDWARE = 'gpio'
   NAME = 'GPIO devices'
+  ACTIVE_HIGH = True
 
   def _load_hardware(self):
     address = self._address
@@ -22,16 +23,16 @@ class terrariumRelayGPIO(terrariumRelay):
         device = terrariumIOExpander('PCF8574',','.join(address[1:]))
 
       if device is not None:
-        device.set_pin(int(address[0].split('-')[1]))
+        device.set_port(int(address[0].split('-')[1]), active_high=self.ACTIVE_HIGH)
 
       return device
 
     else:
-      return LED(terrariumUtils.to_BCM_port_number(self._address[0]))
+      return LED(terrariumUtils.to_BCM_port_number(self._address[0]), active_high=self.ACTIVE_HIGH)
 
   def _set_hardware_value(self, state):
-    if isinstance(self._device['device'], terrariumIOExpander):
-      self._device['device'].state = (state == self.ON)
+    if isinstance(self.device, terrariumIOExpander):
+      self.device.state = (state == self.ON)
 
     else:
       if state == self.ON:
@@ -42,9 +43,9 @@ class terrariumRelayGPIO(terrariumRelay):
     return True
 
   def _get_hardware_value(self):
-    if isinstance(self._device['device'], terrariumIOExpander):
+    if isinstance(self.device, terrariumIOExpander):
       # IO Expander in use
-      state = self._device['device'].state
+      state = self.device.state
       if state is None:
         # Device in error...
         return None
@@ -61,22 +62,4 @@ class terrariumRelayGPIO(terrariumRelay):
 class terrariumRelayGPIOInverse(terrariumRelayGPIO):
   HARDWARE = 'gpio-inverse'
   NAME = 'GPIO devices (inverse)'
-
-  def _load_hardware(self):
-    if len(self._address) >= 2:
-      return super()._load_hardware()
-    else:
-      return LED(terrariumUtils.to_BCM_port_number(self._address[0]), active_high=False)
-
-  def _set_hardware_value(self, state):
-    if isinstance(self._device['device'], terrariumIOExpander):
-      state = self.ON if (state == self.OFF) else self.OFF
-
-    return super()._set_hardware_value(state)
-
-  def _get_hardware_value(self):
-    state = super()._get_hardware_value()
-    if isinstance(self._device['device'], terrariumIOExpander):
-      state = self.ON if (state == self.OFF) else self.OFF
-
-    return state
+  ACTIVE_HIGH = False

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
-from terrariumUtils import classproperty, terrariumCache
+from terrariumUtils import classproperty, terrariumCache, terrariumUtils
 
 logger = terrariumLogging.logging.getLogger(__name__)
 
@@ -33,16 +33,18 @@ class terrariumIOExpander(object):
     return super(terrariumIOExpander, cls).__new__(known_devices[hardware_type]())
 
   def __init__(self, _, address):
-    self.pin = None
+    self.port = None
+    self.active_high = True
     self.address = address
     self.__hardware_cache = terrariumCache()
-    self.device = self.load_hardware()
+    self.__device = self.load_hardware()
 
   def __repr__(self):
-    return f'IO Expander at address \'{self.address}\''
+    return f'IO Expander at address \'{self.address}\' using port {self.port } (active_high:{self.active_high})'
 
-  def set_pin(self, nr):
-    self.pin = nr
+  def set_port(self, nr, active_high = True):
+    self.port = nr
+    self.active_high = active_high
 
   @property
   def _address(self):
@@ -61,13 +63,14 @@ class terrariumIOExpander(object):
     return address
 
   def load_hardware(self):
-    address = self._address
-    hardware_key = f'{self.HARDWARE}_{self.address}'
+    hardware_key = f'IO_{self.HARDWARE}_{self.address}'
     loaded_hardware = self.__hardware_cache.get_data(hardware_key,None)
 
     if loaded_hardware is None:
+      address = self._address
       loaded_hardware = self._load_device(address)
-      self.__hardware_cache.set_data(hardware_key, loaded_hardware, -1)
+      if loaded_hardware is not None:
+        self.__hardware_cache.set_data(hardware_key, loaded_hardware, -1)
 
     return loaded_hardware
 
@@ -77,7 +80,7 @@ class terrariumIOExpander(object):
   @property
   def state(self):
     try:
-      return True if self.device.get_pin_state(self.pin) else False
+      return self.__device.port[self.port] if self.active_high else not self.__device.port[self.port]
     except Exception as ex:
       logger.error(f'Got an error reading {self}: {ex}')
       return None
@@ -85,9 +88,12 @@ class terrariumIOExpander(object):
   @state.setter
   def state(self, state):
     try:
-      return self.device.set_output(self.pin, state)
+      state = terrariumUtils.is_true(state)
+      state = state if self.active_high else not state
+      self.__device.port[self.port] = state
+      return True
     except Exception as ex:
-      logger.error(f'Got an error reading {self}: {ex}')
+      logger.error(f'Got an error setting {self} to state {state}: {ex}')
       return None
 
 
