@@ -990,6 +990,9 @@ class terrariumAreaHeater(terrariumArea):
           continue
 
         for relay in self.setup[period]['relays']:
+          if relay not in self.enclosure.relays:
+            continue
+
           relay = self.enclosure.relays[relay]
           if relay.is_dimmer:
             self._relay_action(period,relay,True)
