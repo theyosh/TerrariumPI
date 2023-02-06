@@ -917,11 +917,14 @@ class terrariumAreaLights(terrariumArea):
         max_states = []
         if self._is_timer_time(period):
           for relay in self.setup[period]['relays']:
+            if relay not in self.enclosure.relays:
+              continue
+
             relay = self.enclosure.relays[relay]
             if relay.is_dimmer:
               max_states.append(relay.state == relay.ON)
 
-        self.state[period]['powered'] = all(max_states)
+        self.state[period]['powered'] = len(max_states) > 0 and all(max_states)
 
     self.state['powered'] = self._powered
 
