@@ -20,7 +20,7 @@ retry==0.9.2
 # !! Check first: https://piwheels.org/project/bcrypt/ !!
 bcrypt==3.2.2
 # !! Check first: https://piwheels.org/project/cryptography/ !!
-cryptography==38.0.1
+cryptography==39.0.1
 
 # Hardware / sensors packages
 pcf8574==0.1.3
