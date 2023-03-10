@@ -40,10 +40,11 @@ class terrariumIOExpander(object):
     self.__device = self.load_hardware()
 
   def __repr__(self):
-    return f'IO Expander at address \'{self.address}\' using port {self.port } (active_high:{self.active_high})'
+    return f'IO Expander at address \'{self.address}\' using port {self.port} (active high: {self.active_high})'
 
   def set_port(self, nr, active_high = True):
-    self.port = nr
+    # Humans start counting at 1
+    self.port = nr-1
     self.active_high = active_high
 
   @property
@@ -70,6 +71,8 @@ class terrariumIOExpander(object):
       address = self._address
       loaded_hardware = self._load_device(address)
       if loaded_hardware is not None:
+        # All off is all True
+        loaded_hardware.states = [True,True,True,True,True,True,True,True]
         self.__hardware_cache.set_data(hardware_key, loaded_hardware, -1)
 
     return loaded_hardware
@@ -80,7 +83,7 @@ class terrariumIOExpander(object):
   @property
   def state(self):
     try:
-      return self.__device.port[self.port] if self.active_high else not self.__device.port[self.port]
+      return not self.__device.states[self.port] if self.active_high else self.__device.states[self.port]
     except Exception as ex:
       logger.error(f'Got an error reading {self}: {ex}')
       return None
@@ -89,8 +92,10 @@ class terrariumIOExpander(object):
   def state(self, state):
     try:
       state = terrariumUtils.is_true(state)
-      state = state if self.active_high else not state
-      self.__device.port[self.port] = state
+      state = not state if self.active_high else state
+      self.__device.states[self.port] = state
+      self.__device.port = self.__device.states
+
       return True
     except Exception as ex:
       logger.error(f'Got an error setting {self} to state {state}: {ex}')
