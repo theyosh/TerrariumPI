@@ -491,7 +491,7 @@
     </div>
   </div>
   <footer class="main-footer p-2 text-sm">
-    &copy; 2015 - 2022 <a target="_blank" rel="noopener noreferrer" href="https://theyosh.nl">TheYOSH</a>
+    &copy; 2015 - 2023 <a target="_blank" rel="noopener noreferrer" href="https://theyosh.nl">TheYOSH</a>
     <!-- Credits to the original builders. The least I can do -->
     <small>
       using <a target="_blank" rel="noopener noreferrer" href="https://adminlte.io">AdminLTE</a>,
