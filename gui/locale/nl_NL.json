@@ -421,6 +421,11 @@
           "ok": {
             "message": "Geüpload {amount, plural, =1 {# geluidsbestand} other {# geluidsbestands}}"
           }
+        },
+        "upload": {
+          "error": {
+            "nologin": ""
+          }
         }
       },
       "title": "Audio bestanden"

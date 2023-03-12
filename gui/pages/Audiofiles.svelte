@@ -50,7 +50,7 @@
     confirmModal(
       $_('audio.files.delete.confirm.message', {
         default: "Are you sure to delete audio file ''{name}'' ({filename})?",
-        values: { name: audiofile.name },
+        values: { name: audiofile.name, filename: audiofile.filename },
       }),
       async () => {
         try {
@@ -74,6 +74,12 @@
   };
 
   const uploadFiles = async (files) => {
+    if (!$isAuthenticated) {
+      let error_message = $_('audio.files.settings.upload.error.nologin', { default: 'Please login to upload files.' });
+      errorNotification(error_message, $_('notification.form.upload.error.title', { default: 'Upload Error' }));
+      return;
+    }
+
     if (!fileUploader.isValid()) {
       let error_message = $_('audio.files.settings.save.error.invalid_file', { default: 'Invalid audio file(s)' });
       errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
@@ -86,7 +92,7 @@
     }
 
     let request = new XMLHttpRequest();
-    request.open('POST', `${ApiUrl}api/audio/files/`);
+    request.open('POST', `${ApiUrl}/api/audio/files/`);
     request.withCredentials = true;
 
     // upload progress event
@@ -107,7 +113,7 @@
             $_('notification.form.save.ok.title', { default: 'Save OK' })
           );
           percent_completed = 0;
-          reload();
+          loadData();
           break;
         default:
           errorNotification(request.response, $_('notification.form.save.error.title', { default: 'Save Error' }));

@@ -421,6 +421,11 @@
           "ok": {
             "message": "Enviado {amount, plural, =1 {# arquivo de áudio} other {# arquivos de áudio}}"
           }
+        },
+        "upload": {
+          "error": {
+            "nologin": ""
+          }
         }
       },
       "title": "Arquivos de áudio"
