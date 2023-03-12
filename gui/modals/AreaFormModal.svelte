@@ -187,9 +187,15 @@
     }
 
     if (editForm.checkValidity()) {
+      let formOk = true;
       values = formToJSON(editForm);
+
       // Check if we have selected relays multiple times in the low and high alarm parts
-      if (!values.setup.low.relays.some((item) => values.setup.high.relays.includes(item))) {
+      if (values.setup.low.relays) {
+        formOk = !values.setup.low.relays.some((item) => values.setup.high.relays.includes(item))
+      }
+
+      if (formOk) {
         loading = true;
 
         if (values.type == 'lights' || values.type == 'audio') {
