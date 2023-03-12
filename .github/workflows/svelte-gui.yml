@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           registry-url: https://registry.npmjs.org/
-          node-version: lts
+          node-version: lts/*
 
       - name: Install NPM Modules
         run: npm install && ./gui/patch.sh
