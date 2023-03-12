@@ -421,6 +421,11 @@
           "ok": {
             "message": "Hochgeladen {amount, plural, =1 {# Audiodatei} other {# Audiodateien}}"
           }
+        },
+        "upload": {
+          "error": {
+            "nologin": ""
+          }
         }
       },
       "title": "Audiodateien"

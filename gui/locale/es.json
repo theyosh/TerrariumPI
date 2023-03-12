@@ -383,6 +383,11 @@
           "ok": {
             "message": "Subido {amount, plural, =1 {# archivo de audio} other {# archivos de audio}}"
           }
+        },
+        "upload": {
+          "error": {
+            "nologin": ""
+          }
         }
       },
       "title": "Archivos de sonido"

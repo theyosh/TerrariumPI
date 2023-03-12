@@ -421,6 +421,11 @@
           "ok": {
             "message": "Lastet opp {amount, plural, =1 {# lydfil} other {# lydfiler}}"
           }
+        },
+        "upload": {
+          "error": {
+            "nologin": ""
+          }
         }
       },
       "title": "Lydfiler"

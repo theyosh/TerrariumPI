@@ -421,6 +421,11 @@
           "ok": {
             "message": "Penjat {amount, plural, =1 {# fitxer d'àudio} other {# fitxer d'àudios}}"
           }
+        },
+        "upload": {
+          "error": {
+            "nologin": ""
+          }
         }
       },
       "title": "Fitxers d'àudio"

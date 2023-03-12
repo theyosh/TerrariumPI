@@ -421,6 +421,11 @@
           "ok": {
             "message": "Uploaded {amount, plural, =1 {# audio file} other {# audio files}}"
           }
+        },
+        "upload": {
+          "error": {
+            "nologin": "Please login to upload files."
+          }
         }
       },
       "title": "Audio files"

@@ -421,6 +421,11 @@
           "ok": {
             "message": "Caricato {amount, plural, =1 {# file audio} other {# file audios}}"
           }
+        },
+        "upload": {
+          "error": {
+            "nologin": ""
+          }
         }
       },
       "title": "File audio"
