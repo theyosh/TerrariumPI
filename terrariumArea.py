@@ -673,7 +673,7 @@ class terrariumArea(object):
       if not self.relays_state(period,False) and not (light_state_ok and door_state_ok and (not depends_on_alarm)):
         # Power is on, but either the lights or doors are in wrong state. Power down now.
         logger.info(f'Forcing down the {period} power for area {self} because either the lights({"OK" if light_state_ok else "ERROR"}), doors({"OK" if door_state_ok else "ERROR"}) or depending area ({"OK" if not depends_on_alarm else "ERROR"}) are in an invalid state.')
-        self.relays_toggle(period,False)
+        self.relays_toggle(period, False)
         # And ignore the rest....
         continue
 
@@ -694,29 +694,38 @@ class terrariumArea(object):
             logger.info(f'Relays for area {self} at period {period} are not switched because the additional sensors are at value: {self.state["sensors"]["current"]:.2f}{self.enclosure.engine.units[self.state["sensors"]["unit"]]}.')
             continue
       else:
+        if self.state['sensors']['all_error']:
+          logger.warning(f'All sensors for area {self} at period {period} are in an error state. Relays will not power on! Please check you sensors hardware!')
+          if self.relays_state(period):
+            logger.warning(f'Relays for area {self} at period {period} are forced to state off due to non working sensors.')
+            self.relays_toggle(period, False)
+
+          # And ignore the rest....
+          continue
+
         # Sensor mode only toggle ON when alarms are triggered (True).
         toggle_relay = self.state['sensors'][f'alarm_{period}']
         if toggle_relay is False:
           other_alarm = self.state['sensors'][f'alarm_{("low" if period == "high" else "high")}']
           toggle_relay = False if other_alarm else None
 
-      if toggle_relay is True and not self.relays_state(period): #self.state[period]['powered']:
+      if toggle_relay is True and not self.relays_state(period):
 
         if not light_state_ok:
-          logger.info(f'Relays for {self} period {period} are not switched because the lights are {light_state} while {self.setup[period]["light_status"]} is requested.')
+          logger.info(f'Relays for {self} period {period} are not switched on because the lights are {light_state} while {self.setup[period]["light_status"]} is requested.')
           continue
 
         if not door_state_ok:
-          logger.info(f'Relays for {self} period {period} are not switched because the door is {door_state} while {self.setup[period]["door_status"]} is requested.')
+          logger.info(f'Relays for {self} period {period} are not switched on because the door is {door_state} while {self.setup[period]["door_status"]} is requested.')
           continue
 
         if depends_on_alarm:
-          logger.info(f'Relays for {self} period {period} are not switched because one of the depending areas are in an alarm state.')
+          logger.info(f'Relays for {self} period {period} are not switched on because at least one of the depending areas is in an alarm state.')
           continue
 
         time_elapsed = abs(int(datetime.datetime.now().timestamp()) - self.state[period]['last_powered_on'])
         if time_elapsed <= self.setup[period]['settle_time']:
-          logger.info(f'Relays for {self} period {period} are not switched because we have to wait for {self.setup[period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[period]["settle_time"]} seconds.')
+          logger.info(f'Relays for {self} period {period} are not switched on because we have to wait for {self.setup[period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[period]["settle_time"]} seconds.')
           continue
 
         other_period = list(self.setup.keys())
@@ -725,7 +734,7 @@ class terrariumArea(object):
           other_period = other_period[0]
           time_elapsed = abs(int(datetime.datetime.now().timestamp()) - self.state[other_period]['last_powered_on'])
           if time_elapsed <= self.setup[other_period]['settle_time']:
-            logger.info(f'Relays for {self} period {period} are not switched because of the other period {other_period} settle time. We have to wait for {self.setup[other_period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[other_period]["settle_time"]} seconds.')
+            logger.info(f'Relays for {self} period {period} are not switched on because of the other period {other_period} settle time. We have to wait for {self.setup[other_period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[other_period]["settle_time"]} seconds.')
             continue
 
         if self.state[period]['alarm_count'] < self.setup[period]['alarm_threshold']:
@@ -759,25 +768,26 @@ class terrariumArea(object):
     sensor_values = {
       'current'   : [],
       'alarm_max' : [],
-      'alarm_min' : [],
-      'unit' : ''
+      'alarm_min' : []
     }
 
+    unit_type = None
+    all_error = None
     with orm.db_session():
       for sensor in Sensor.select(lambda s: s.id in sensors):
-        sensor_values['unit'] = sensor.type
+        unit_type = sensor.type
         if sensor.value is None:
           # Broken sensor, so ignore it
+          if all_error is None:
+            all_error = True
           continue
 
         sensor_values['current'].append(sensor.value)
         sensor_values['alarm_max'].append(sensor.alarm_max)
         sensor_values['alarm_min'].append(sensor.alarm_min)
+        all_error = False
 
     for key in sensor_values:
-      if 'unit' == key:
-        continue
-
       if len(sensor_values[key]) == 0:
         sensor_values[key] = 0
       else:
@@ -786,6 +796,9 @@ class terrariumArea(object):
     sensor_values['alarm_min'] += self.low_deviation
     sensor_values['alarm_max'] += self.high_deviation
     sensor_values['alarm'] = not sensor_values['alarm_min'] <= sensor_values['current'] <= sensor_values['alarm_max']
+
+    sensor_values['unit'] = unit_type
+    sensor_values['all_error'] = all_error == True
 
     return sensor_values
 
