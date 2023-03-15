@@ -36,7 +36,11 @@ class terrariumAudio(object):
       mixer = alsaaudio.Mixer(control='PCM',cardindex=hw)
     except alsaaudio.ALSAAudioError as ex:
       logger.debug(f'Falling back to headphones: {ex}')
-      mixer = alsaaudio.Mixer(control='Headphone',cardindex=hw)
+      try:
+        mixer = alsaaudio.Mixer(control='Headphone',cardindex=hw)
+      except alsaaudio.ALSAAudioError as ex:
+        logger.error(f'Hardware \'{terrariumAudio.available_soundcards[hw]["name"]}\' is not correct, so we cannot set the player audio volume.')
+        return None
 
     if value is None:
       # We get stereo volume but asume that left and right channel are at the same volume.
