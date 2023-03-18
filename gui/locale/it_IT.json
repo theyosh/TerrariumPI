@@ -50,6 +50,12 @@
         "label": "Nome",
         "placeholder": "Nome file"
       },
+      "relay": {
+        "slider": {
+          "delay": "Ritardo: {delay} minuti.",
+          "duration": "Ritardo: {delay} minuti. Durata: {duration} minuti"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "Hai selezionato gli stessi relè sia nell'allarme basso che in quello alto. Questo non è valido.",
@@ -485,6 +491,7 @@
         },
         "title": "Impostazioni webcam",
         "volume": {
+          "formatter": "Livello del volume dell'audio: {value}",
           "help": "Contiene il volume per questa playlist.",
           "label": "File audio"
         }

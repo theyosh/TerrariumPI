@@ -50,6 +50,12 @@
         "label": "Name",
         "placeholder": "Nutzername eingeben"
       },
+      "relay": {
+        "slider": {
+          "delay": "Verzögerung: {delay} Minuten.",
+          "duration": "Verzögerung: {delay} Minuten. Dauer: {duration} Minuten"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "Sie haben das/die gleiche (n) Relais sowohl im niedrigen als auch im hohen Alarm ausgewählt.",
@@ -480,6 +486,7 @@
         },
         "title": "Playlist Einstellungen",
         "volume": {
+          "formatter": "Audio-Lautstärkepegel: {value}",
           "help": "Wähle die Lautstärke für diese Playlist.",
           "label": "Audiodateien"
         }

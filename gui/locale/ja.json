@@ -50,6 +50,12 @@
         "label": "名",
         "placeholder": "名前を入力します"
       },
+      "relay": {
+        "slider": {
+          "delay": "遅延: {delay} 分。",
+          "duration": "遅延: {delay} 分。期間: {duration} 分"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "下限アラームと上限アラームの両方で同じリレーを選択しました。これは無効です。",
@@ -485,6 +491,7 @@
         },
         "title": "プレイリスト設定",
         "volume": {
+          "formatter": "音量レベル: {value}",
           "help": "該当プレイリストの音量を選択してください。.",
           "label": "音声ファイル"
         }

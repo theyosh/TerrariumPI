@@ -50,6 +50,12 @@
         "label": "Navn",
         "placeholder": "Brukernavn"
       },
+      "relay": {
+        "slider": {
+          "delay": "Forsinkelse: {delay} minutter.",
+          "duration": "Forsinkelse: {delay} minutter. Varighet: {duration} minutter"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "Du har valgt de samme reléene i både lav og høy alarm. Dette er ikke gyldig.",
@@ -485,6 +491,7 @@
         },
         "title": "Innstillinger for webkamera",
         "volume": {
+          "formatter": "Lydvolumnivå: {value}",
           "help": "Viser volumet for denne spillelisten.",
           "label": "Lydfiler"
         }

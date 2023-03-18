@@ -50,6 +50,12 @@
         "label": "Nombre",
         "placeholder": "Nombre de usuario"
       },
+      "relay": {
+        "slider": {
+          "delay": "Retraso: {delay} minutos.",
+          "duration": "Retraso: {delay} minutos. Duración: {duration} minutos"
+        }
+      },
       "save": {
         "error": {
           "required_fields": "Los campos obligatorios están marcados con '%s'."
@@ -471,6 +477,7 @@
         },
         "title": "Configuraciones de la webcam",
         "volume": {
+          "formatter": "Nivel de volumen de audio: {value}",
           "help": "Contiene el volumen de la lista de reproducción.",
           "label": "Archivos de audio"
         }

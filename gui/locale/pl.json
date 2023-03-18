@@ -50,6 +50,12 @@
         "label": "Imię",
         "placeholder": "Wpisz imię"
       },
+      "relay": {
+        "slider": {
+          "delay": "Opóźnienie: {delay} min.",
+          "duration": "Opóźnienie: {delay} min. Czas trwania: {duration} minut"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "Wybrałeś te same przekaźniki dla alarmu niskiego i wysokiego. To nie jest ważne.",
@@ -485,6 +491,7 @@
         },
         "title": "Ustawienia listy odtwarzania",
         "volume": {
+          "formatter": "Poziom głośności dźwięku: {value}",
           "help": "Wybierz głośność tej listy odtwarzania.",
           "label": "Pliki audio"
         }

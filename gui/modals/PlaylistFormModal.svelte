@@ -25,6 +25,10 @@
 
   let editForm;
 
+  const formatter = (value) => {
+    return $_('audio.playlists.settings.volume.formatter', { default: "Volume level {value}", values: { value: value } });
+  };
+
   const dispatch = createEventDispatcher();
 
   const successAction = () => {
@@ -156,7 +160,8 @@
         <Slider
           name="volume"
           required="{true}"
-          value="{$formData.volume}"
+          value="{$formData.volume && $formData.volume != '' ? $formData.volume : 0}"
+          formatter={formatter}
           label="{$_('audio.playlists.settings.volume.label', { default: 'Audio volume' })}"
           help="{$_('audio.playlists.settings.volume.help', { default: 'Select the volume for this playlist.' })}" />
       </div>
