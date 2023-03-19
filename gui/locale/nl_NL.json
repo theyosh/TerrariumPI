@@ -50,6 +50,12 @@
         "label": "Naam",
         "placeholder": "Vul een naam in"
       },
+      "relay": {
+        "slider": {
+          "delay": "Vertraging: {delay} minuten.",
+          "duration": "Vertraging: {delay} minuten. Duur: {duration} minuten"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "U heeft in zowel het laag- als hoogalarm dezelfde relais(s) geselecteerd. Dit is niet geldig.",
@@ -485,6 +491,7 @@
         },
         "title": "Afspeellijst instellingen",
         "volume": {
+          "formatter": "Audiovolumeniveau: {value}",
           "help": "Selecteer het volume voor deze afspeellijst.",
           "label": "Audiovolume"
         }

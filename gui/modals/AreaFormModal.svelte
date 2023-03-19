@@ -48,6 +48,13 @@
 
   let editForm;
 
+  const formatter = (value) => {
+    if (undefined !== value.length && 2 == value.length) {
+      return $_('areas.settings.relay.slider.duration', { default: "Delay: {delay} minutes. Duration: {duration} minutes", values: { delay: value[0], duration: value[1] - value[0] } });
+    }
+    return $_('areas.settings.relay.slider.delay', { default: "Delay: {delay} minutes.", values: { delay: value } });
+  };
+
   const dispatch = createEventDispatcher();
 
   const successAction = () => {
@@ -1006,6 +1013,7 @@
                             horizontal="{true}"
                             required="{true}"
                             max=180
+                            formatter={formatter}
                             on:change="{updateTweakSliders}"
                             value="{tweakValue($formData.setup.low.tweaks[index].on, relayDimmer(relay.id) ? [0, 30] : 0)}"
                             label="{relayDimmer(relay.id)
@@ -1018,6 +1026,7 @@
                             horizontal="{true}"
                             required="{true}"
                             max=180
+                            formatter={formatter}
                             on:change="{updateTweakSliders}"
                             value="{tweakValue($formData.setup.low.tweaks[index].off, relayDimmer(relay.id) ? [0, 30] : 0)}"
                             label="{relayDimmer(relay.id)
@@ -1264,6 +1273,7 @@
                             horizontal="{true}"
                             required="{true}"
                             max=180
+                            formatter={formatter}
                             on:change="{updateTweakSliders}"
                             value="{tweakValue($formData.setup.high.tweaks[index].on, relayDimmer(relay.id) ? [0, 30] : 0)}"
                             label="{relayDimmer(relay.id)
@@ -1276,6 +1286,7 @@
                             horizontal="{true}"
                             required="{true}"
                             max=180
+                            formatter={formatter}
                             on:change="{updateTweakSliders}"
                             value="{tweakValue($formData.setup.high.tweaks[index].off, relayDimmer(relay.id) ? [0, 30] : 0)}"
                             label="{relayDimmer(relay.id)

@@ -50,6 +50,12 @@
         "label": "Name",
         "placeholder": "Enter a name"
       },
+      "relay": {
+        "slider": {
+          "delay": "Delay: {delay} minutes.",
+          "duration": "Delay: {delay} minutes. Duration: {duration} minutes"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "You have selected the same relay(s) in both the low and high alarm. This is not valid.",
@@ -485,6 +491,7 @@
         },
         "title": "Playlist settings",
         "volume": {
+          "formatter": "Audio volume level: {value}",
           "help": "Select the volume for this playlist.",
           "label": "Audio volume"
         }

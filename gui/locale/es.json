@@ -50,6 +50,11 @@
         "label": "Nombre",
         "placeholder": "Ingresa un nombre"
       },
+      "relay": {
+        "slider": {
+          "duration": "Retraso: {delay} minutos. Duración: {duración} minutos"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "Ha seleccionado los mismos relés en la alarma alta y baja. Esto no es válido.",
@@ -447,6 +452,7 @@
         },
         "title": "Configuración de la lista de reproducción",
         "volume": {
+          "formatter": "Nivel de volumen de audio {valor}",
           "help": "Seleccione el volumen para esta lista de reproducción.",
           "label": "Volumen de audio"
         }

@@ -50,6 +50,12 @@
         "label": "Nom",
         "placeholder": "Nom de fichier"
       },
+      "relay": {
+        "slider": {
+          "delay": "Retard : {delay} minutes.",
+          "duration": "Retard : {delay} minutes. Durée : {duration} minutes"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "Vous avez sélectionné le(s) même(s) relais pour l'alarme basse et haute. Ce n'est pas valide.",
@@ -485,6 +491,7 @@
         },
         "title": "Paramètres de la webcam",
         "volume": {
+          "formatter": "Niveau de volume audio: {value}",
           "help": "Contient le volume pour cette liste de lecture.",
           "label": "Fichiers audio"
         }

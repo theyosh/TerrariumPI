@@ -50,6 +50,12 @@
         "label": "Nome",
         "placeholder": "Insira o nome"
       },
+      "relay": {
+        "slider": {
+          "delay": "Atraso: {delay} minutos.",
+          "duration": "Atraso: {delay} minutos. Duração: {duration} minutos"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "Você selecionou o(s) mesmo(s) relé(s) no alarme alto e baixo. Isso não é válido.",
@@ -485,6 +491,7 @@
         },
         "title": "Configurações da playlist",
         "volume": {
+          "formatter": "Nível de volume de áudio: {value}",
           "help": "Selecione o volume desta playlist.",
           "label": "Volume de Áudio"
         }

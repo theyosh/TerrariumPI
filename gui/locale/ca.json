@@ -50,6 +50,12 @@
         "label": "Nom",
         "placeholder": "Introduïu un nom"
       },
+      "relay": {
+        "slider": {
+          "delay": "Retard: {delay} minuts.",
+          "duration": "Retard: {delay} minuts. Durada: {duration} minuts"
+        }
+      },
       "save": {
         "error": {
           "duplicate_relays": "Heu seleccionat els mateixos relés tant a l'alarma baixa com a la alta. Això no és vàlid.",
@@ -485,6 +491,7 @@
         },
         "title": "Configuració de la llista de reproducció",
         "volume": {
+          "formatter": "Nivell de volum d'àudio: {value}",
           "help": "Seleccioneu el volum d'aquesta llista de reproducció.",
           "label": "Volum d'àudio"
         }
