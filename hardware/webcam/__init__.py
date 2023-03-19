@@ -448,7 +448,6 @@ class terrariumWebcam(object):
   def raw_archive_path(self):
     return self.__ARCHIVE_LOCATION.joinpath(self.id, datetime.now().strftime('%Y/%m/%d'), f'{self.id}_archive_{int(time())}.jpg')
 
-  @retry(tries=3, delay=0.5, max_delay=2)
   def update(self, relays = None):
     # Readonly call
     if relays is None:
@@ -468,11 +467,17 @@ class terrariumWebcam(object):
       logger.debug(f'Webcam {self.name}: Toggle on flash lights took {time()-start:.3f} seconds')
 
     start = time()
-    try:
-      image = func_timeout(15, self._get_raw_data)
-    except FunctionTimedOut:
-      logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
-      image = False
+    for x in range(3):
+      try:
+        image = func_timeout(15, self._get_raw_data)
+        if image is not False:
+          break
+      except FunctionTimedOut:
+        logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
+        image = False
+
+      if x < 3:
+        sleep(1)
 
     logger.debug(f'Webcam {self.name}: Getting a new image took: {time()-start:.3f} seconds')
 
