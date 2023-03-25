@@ -430,7 +430,7 @@
         },
         "upload": {
           "error": {
-            "nologin": ""
+            "nologin": "Log in om bestanden te uploaden."
           }
         }
       },
