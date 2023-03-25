@@ -1,4 +1,4 @@
-# TerrariumPI 4.6.1
+# TerrariumPI 4.6.2
 
 ![Latest release](https://img.shields.io/github/v/release/theyosh/terrariumpi?label=Latest%20release)
 ![GitHub Release Date](https://img.shields.io/github/release-date/theyosh/TerrariumPI)
