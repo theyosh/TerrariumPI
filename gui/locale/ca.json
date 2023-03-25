@@ -430,7 +430,7 @@
         },
         "upload": {
           "error": {
-            "nologin": ""
+            "nologin": "Inicia sessió per pujar fitxers."
           }
         }
       },
