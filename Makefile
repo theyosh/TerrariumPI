@@ -3,7 +3,7 @@ VERSION ?= $(shell grep -E "__version__ = '(.*)'" terrariumPI.py | grep -Po [0-9
 GITHUB_SHA ?= $(shell git rev-parse HEAD)
 
 
-.PHONY: all build run logs gui
+.PHONY: all build run logs gui docs
 
 all: build push
 
