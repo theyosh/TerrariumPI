@@ -52,6 +52,7 @@
       },
       "relay": {
         "slider": {
+          "delay": "Verzögerung: {delay} Minuten.",
           "duration": "Verzögerung: {delay} Minuten. Dauer: {duration} Minuten"
         }
       },
@@ -429,7 +430,7 @@
         },
         "upload": {
           "error": {
-            "nologin": ""
+            "nologin": "Einloggen um Dateien hochzuladen."
           }
         }
       },
