@@ -430,7 +430,7 @@
         },
         "upload": {
           "error": {
-            "nologin": ""
+            "nologin": "Faça login para fazer upload de arquivos."
           }
         }
       },
