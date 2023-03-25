@@ -21,11 +21,10 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PATH="/opt/venv/bin:$PATH"
 RUN python -m venv /opt/venv
-RUN pip install --upgrade pip==23.0.1 && pip install --upgrade wheel==0.38.4
+RUN pip install --upgrade pip==23.0.1 && pip install --upgrade wheel==0.40.0
 COPY requirements.txt .
 # requirements are slightly different for docker
 RUN sed -i 's/numpy==.*/numpy==1.21.4/g' requirements.txt \
-#  && sed -i 's/cryptography==.*/cryptography==37.0.4/g' requirements.txt \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
   && find /opt/venv -type d -name  "__pycache__" -exec rm -r {} + \
   && find /opt/venv -type f -name "*.pyc" -delete \
