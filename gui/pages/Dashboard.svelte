@@ -66,15 +66,17 @@
       (async () => {
         // Store data in a enclosure store
         await fetchEnclosures(false, (data) => (enclosures = data));
-        enclosures.map((enclosure) => {
-          enclosures_doors[enclosure.id] = {
-            doors: enclosure.doors.map((door) => {
-              updateButton({ ...door, ...{ enclosure: enclosure.id } });
-              return door.id;
-            }), // Bad hack, but we get both door updates as enclosure door updates
-            closed: true,
-          };
-        });
+        if (Array.isArray(enclosures) && enclosures.length > 0) {
+          enclosures.map((enclosure) => {
+            enclosures_doors[enclosure.id] = {
+              doors: enclosure.doors.map((door) => {
+                updateButton({ ...door, ...{ enclosure: enclosure.id } });
+                return door.id;
+              }), // Bad hack, but we get both door updates as enclosure door updates
+              closed: true,
+            };
+          });
+        }
         loading_enclosures = false;
       })();
     }
@@ -83,47 +85,51 @@
       let averages = {};
 
       await fetchSensors(false, (data) => {
-        data.map((sensor) => {
-          updateSensor(sensor);
-          if (!averages[sensor.type]) {
-            averages[sensor.type] = {
-              value: [],
-              alarm_min: [],
-              alarm_max: [],
-              limit_min: [],
-              limit_max: [],
-              error: [],
-            };
-          }
+        if (Array.isArray(data) && data.length > 0) {
+          data.map((sensor) => {
+            updateSensor(sensor);
+            if (!averages[sensor.type]) {
+              averages[sensor.type] = {
+                value: [],
+                alarm_min: [],
+                alarm_max: [],
+                limit_min: [],
+                limit_max: [],
+                error: [],
+              };
+            }
 
-          averages[sensor.type].error.push(sensor.error);
+            averages[sensor.type].error.push(sensor.error);
 
-          if (!sensor.exclude_avg) {
-            averages[sensor.type].value.push(sensor.value);
-            averages[sensor.type].alarm_min.push(sensor.alarm_min);
-            averages[sensor.type].alarm_max.push(sensor.alarm_max);
-            averages[sensor.type].limit_min.push(sensor.limit_min);
-            averages[sensor.type].limit_max.push(sensor.limit_max);
-          }
-        });
+            if (!sensor.exclude_avg) {
+              averages[sensor.type].value.push(sensor.value);
+              averages[sensor.type].alarm_min.push(sensor.alarm_min);
+              averages[sensor.type].alarm_max.push(sensor.alarm_max);
+              averages[sensor.type].limit_min.push(sensor.limit_min);
+              averages[sensor.type].limit_max.push(sensor.limit_max);
+            }
+          });
+        }
 
-        Object.keys(averages).map((sensor_type) => {
-          averages[sensor_type]['type'] = sensor_type;
-          averages[sensor_type]['id'] = sensor_type;
-          averages[sensor_type]['name'] = $_(`sensors.average.${sensor_type}`, { default: `Average ${sensor_type}` });
-          averages[sensor_type]['exclude_avg'] = false;
-          averages[sensor_type]['error'] =
-            averages[sensor_type]['error'].filter((item) => {
-              return item == true;
-            }).length > 0;
+        if (Object.keys(averages).length > 0) {
+          Object.keys(averages).map((sensor_type) => {
+            averages[sensor_type]['type'] = sensor_type;
+            averages[sensor_type]['id'] = sensor_type;
+            averages[sensor_type]['name'] = $_(`sensors.average.${sensor_type}`, { default: `Average ${sensor_type}` });
+            averages[sensor_type]['exclude_avg'] = false;
+            averages[sensor_type]['error'] =
+              averages[sensor_type]['error'].filter((item) => {
+                return item == true;
+              }).length > 0;
 
-          for (let value of ['value', 'alarm_min', 'alarm_max', 'limit_min', 'limit_max']) {
-            averages[sensor_type][value] = average(averages[sensor_type][value]);
-          }
-          averages[sensor_type]['alarm'] =
-            averages[sensor_type]['alarm_min'] > averages[sensor_type]['value'] ||
-            averages[sensor_type]['value'] > averages[sensor_type]['alarm_max'];
-        });
+            for (let value of ['value', 'alarm_min', 'alarm_max', 'limit_min', 'limit_max']) {
+              averages[sensor_type][value] = average(averages[sensor_type][value]);
+            }
+            averages[sensor_type]['alarm'] =
+              averages[sensor_type]['alarm_min'] > averages[sensor_type]['value'] ||
+              averages[sensor_type]['value'] > averages[sensor_type]['alarm_max'];
+          });
+        }
 
         sensor_types = averages;
       });
