@@ -85,34 +85,35 @@
       let averages = {};
 
       await fetchSensors(false, (data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          data.map((sensor) => {
-            updateSensor(sensor);
-            if (!averages[sensor.type]) {
-              averages[sensor.type] = {
-                value: [],
-                alarm_min: [],
-                alarm_max: [],
-                limit_min: [],
-                limit_max: [],
-                error: [],
-              };
-            }
+        data.map((sensor) => {
+          updateSensor(sensor);
+          if (!averages[sensor.type]) {
+            averages[sensor.type] = {
+              value: [],
+              alarm_min: [],
+              alarm_max: [],
+              limit_min: [],
+              limit_max: [],
+              error: [],
+            };
+          }
 
-            averages[sensor.type].error.push(sensor.error);
+          averages[sensor.type].error.push(sensor.error);
 
-            if (!sensor.exclude_avg) {
-              averages[sensor.type].value.push(sensor.value);
-              averages[sensor.type].alarm_min.push(sensor.alarm_min);
-              averages[sensor.type].alarm_max.push(sensor.alarm_max);
-              averages[sensor.type].limit_min.push(sensor.limit_min);
-              averages[sensor.type].limit_max.push(sensor.limit_max);
-            }
-          });
-        }
+          if (!sensor.exclude_avg) {
+            averages[sensor.type].value.push(sensor.value);
+            averages[sensor.type].alarm_min.push(sensor.alarm_min);
+            averages[sensor.type].alarm_max.push(sensor.alarm_max);
+            averages[sensor.type].limit_min.push(sensor.limit_min);
+            averages[sensor.type].limit_max.push(sensor.limit_max);
+          }
+        });
 
-        if (Object.keys(averages).length > 0) {
-          Object.keys(averages).map((sensor_type) => {
+        Object.keys(averages).map((sensor_type) => {
+          if (averages[sensor_type]['value'].length == 0) {
+            // All sensors are excluded from average. Ignore this sensor type
+            delete(averages[sensor_type]);
+          } else {
             averages[sensor_type]['type'] = sensor_type;
             averages[sensor_type]['id'] = sensor_type;
             averages[sensor_type]['name'] = $_(`sensors.average.${sensor_type}`, { default: `Average ${sensor_type}` });
@@ -128,8 +129,8 @@
             averages[sensor_type]['alarm'] =
               averages[sensor_type]['alarm_min'] > averages[sensor_type]['value'] ||
               averages[sensor_type]['value'] > averages[sensor_type]['alarm_max'];
-          });
-        }
+          }
+        });
 
         sensor_types = averages;
       });

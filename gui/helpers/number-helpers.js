@@ -10,7 +10,7 @@ export const roundToPrecision = (number, precision = 2) => {
 };
 
 export const average = (numbers) => {
-  return numbers.reduce((a, b) => (a + b)) / numbers.length;
+  return numbers.length == 0 ? 0 : numbers.reduce((a, b) => (a + b)) / numbers.length;
 };
 
 export const uptime_format = (duration) => {
