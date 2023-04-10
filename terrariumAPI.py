@@ -528,10 +528,16 @@ class terrariumAPI(object):
   def calendar_list(self):
     start = request.query.get('start', None)
     if start:
+      if start.endswith('Z'):
+        start = start[0:-1]
+
       start = datetime.fromisoformat(start)
 
     end = request.query.get('end', None)
     if end:
+      if end.endswith('Z'):
+        end = end[0:-1]
+
       end = datetime.fromisoformat(end)
 
     output = []
