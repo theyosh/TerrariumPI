@@ -375,16 +375,21 @@ class terrariumI2CSensor(terrariumSensor):
         address[0] = '0x' + address[0]
       address[0] = int(address[0],16)
 
+    if (len(address) == 1):
+      address.append(1)
+    else:
+      address[1] = int(address[1])
+
+    if address[1] < 1:
+      address[1] = 1
+
     return address
 
   def _open_hardware(self):
-    address = self._address
-
-    return smbus2.SMBus(1 if len(address) == 1 or int(address[1]) < 1 else int(address[1]))
+    return smbus2.SMBus(self._address[1])
 
   def _load_hardware(self):
-    address = self._address
-    device  = (address[0], smbus2.SMBus(1 if len(address) == 1 or int(address[1]) < 1 else int(address[1])))
+    device  = (self._address[0], self._open_hardware())
     return device
 
 class terrariumI2CSensorMixin():

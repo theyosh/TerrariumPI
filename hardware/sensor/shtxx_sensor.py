@@ -24,8 +24,6 @@ class terrariumSHT2XSensor(terrariumI2CSensor):
 
   def _load_hardware(self):
     address = self._address
-    if len(address) == 1:
-      address.append(1)
 
     return f'/dev/i2c-{address[1]}'
 

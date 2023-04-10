@@ -11,7 +11,7 @@ class terrariumAMG8833Sensor(terrariumI2CSensor):
 
   def _load_hardware(self):
     address = self._address
-    device = melopero_amg8833.AMGGridEye(address[0],1 if len(address) == 1 or int(address[1]) < 1 else int(address[1]))
+    device = melopero_amg8833.AMGGridEye(address[0], address[1])
     device.set_fps_mode(melopero_amg8833.AMGGridEye.FPS_1_MODE)
     return device
 
