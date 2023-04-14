@@ -36,12 +36,7 @@ class terrariumRPILiveWebcam(terrariumWebcam):
     if not Path(self.__FFMPEG).exists():
       raise terrariumWebcamLoadingException('Please install ffmpeg.')
 
-    if hasattr(self,'__process'):
-      try:
-        os.killpg(os.getpgid(self.__process.pid), signal.SIGTERM)
-      except Exception as ex:
-        print(f'Live webcam is not running: {ex}')
-        logger.debug(f'Live webcam is not running: {ex}')
+    self.stop()
 
     cmd = Path(__file__).parent / 'rpilive_webcam.sh'
 

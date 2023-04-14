@@ -11,6 +11,7 @@ class terrariumDHTXXSensor(terrariumSensor):
   NAME     = None
 
   def _load_hardware(self):
+    device = None
     address = self._address
     if len(address) >= 2 and terrariumUtils.is_float(address[1]):
       # Set / enable power management
