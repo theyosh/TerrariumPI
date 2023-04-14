@@ -45,7 +45,7 @@ class AM2320:
     try:
       posix.write(fd, b'\0x00')
     except:
-      pass
+      logger.debug(f'Woke up sensor {self}')
 
     sleep(0.002) #Wait at least 0.8ms, at most 3ms
     # write at addr 0x03, start reg = 0x00, num regs = 0x04 */

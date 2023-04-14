@@ -78,7 +78,7 @@ with database:
                   del(setup[area_part][f'relay_{relay_tweak}_{old_id}'])
 
           except Exception as ex:
-            pass
+            print(ex)
 
         database.execute('UPDATE Area SET setup = ? where id = ?',(json.dumps(setup),area["id"]))
         print(f'Area {area["name"]} is updated with new relay ids')

@@ -228,4 +228,4 @@ class terrariumButton(object):
       try:
         GPIO.cleanup(self._device['device'])
       except Exception:
-        pass
+        logger.debug(f'Button {self} is already stopped.')
