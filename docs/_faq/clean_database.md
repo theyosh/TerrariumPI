@@ -5,7 +5,9 @@ tags: [database,cleanup,space]
 ---
 If TerrariumPI is running for years it happens that the database get rather big and therefore slowing down the system. Also deleting the data will not give back the disk space. So there is a script which can cleanup the database and reclaim disk space by reducing the database.
 
-In order to cleanup the database, make sure that TerrariumPI is stopped! Else there is a possibility on database corruption.
+In order to cleanup the database, make sure that TerrariumPI is **stopped**! Else there is a possibility on database corruption.
+
+The cleanup can take up to 30 minutes. So make sure your environment is stable and can survive for that period.
 
 1. Enter the TerrariumPI folder: `cd /home/pi/TerrariumPI/`
 2. Enable Python3 virtual environment: `source venv/bin/activate`
