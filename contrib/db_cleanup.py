@@ -24,7 +24,7 @@ def humansize(nbytes):
 
 class HistoryCleanup():
 
-  def __init__(self, database = '../data/terrariumpi.db', period = timedelta(weeks = 60), batch = 1000):
+  def __init__(self, database = '../data/terrariumpi.db', period = timedelta(weeks = 60), batch = 10000):
     """
     Construct the database history clean up object
 
@@ -76,27 +76,6 @@ class HistoryCleanup():
     except requests.ConnectionError:
       pass
 
-  def get_table_structure(self, table):
-    sql = f'SELECT sql FROM sqlite_master WHERE tbl_name = "{table}";'
-    with self.db as db:
-      for row in db.execute(sql):
-        return row['sql']
-
-  def create_temp_table(self, table):
-    temp_table = table+'_tmp'
-    sql = self.get_table_structure(table)
-    sql = sql.replace(table, temp_table)
-    with self.db as db:
-      db.execute(f'DROP TABLE IF EXISTS {temp_table}')
-      db.execute(sql)
-
-    return temp_table
-
-  def rename_and_cleanup(self, table):
-    with self.db as db:
-      db.execute(f'DROP TABLE IF EXISTS {table}')
-      db.execute(f'ALTER TABLE `{table}_tmp` RENAME TO `{table}`')
-
   def get_total_records(self, table, period = None):
     sql = f'SELECT count(*) as total, MIN(timestamp) as begin, MAX(timestamp) as end FROM {table}'
     parameters = ()
@@ -123,60 +102,53 @@ class HistoryCleanup():
       cur.execute('PRAGMA temp_store = MEMORY')
       cur.execute('PRAGMA user_version = {}'.format(self.version))
 
-    print(f'Done in {(time.time()-start)} seconds')
+    print(f'Done in {(time.time()-start):.2f} seconds')
 
   def __clean_up(self, table):
     print(f'Starting cleaning up table \'{table}\'. Deleting data older then {self.time_limit} in batches of {self.delete_batch} records. This could take some time...')
 
     start = time.time()
-    print('Total rows:', end='', flush=True)
+    print('Analyzing total rows:      ', end='', flush=True)
     total_sensor_data = self.get_total_records(table)
-    print(' {} from {:%Y-%m-%d %H:%M} till {:%Y-%m-%d %H:%M}. Took {:.2f} seconds'.format(total_sensor_data[0],
+    number_padding = len(str(total_sensor_data[0]))
+    print(' {} from {:%Y-%m-%d %H:%M} till {:%Y-%m-%d %H:%M}. Took {:.2f} seconds'.format(str(total_sensor_data[0]).rjust(number_padding),
                                                   datetime.fromisoformat(total_sensor_data[1]),
                                                   datetime.fromisoformat(total_sensor_data[2]),
                                                   time.time()-start))
     start = time.time()
-    print('Clean up rows:',end='', flush=True)
+    print('Analyzing rows to clean up:',end='', flush=True)
     total_cleanup_data = self.get_clean_up_records(table)
 
     if total_cleanup_data[0] == 0:
       print(' No data, nothing to do!')
       return
 
-    print(' {} from {:%Y-%m-%d %H:%M} till {:%Y-%m-%d %H:%M}. Took {:.2f} seconds'.format(total_cleanup_data[0],
+    print(' {} from {:%Y-%m-%d %H:%M} till {:%Y-%m-%d %H:%M}. Took {:.2f} seconds'.format(str(total_cleanup_data[0]).rjust(number_padding),
                                                   datetime.fromisoformat(total_cleanup_data[1]),
                                                   datetime.fromisoformat(total_cleanup_data[2]),
                                                   time.time()-start))
 
     start = time.time()
-    # delete_steps = math.ceil( total_cleanup_data[0] / self.delete_batch)
-    # print('Removing {} rows ({:.2f}%) of data in {} steps of {} rows.'.format(total_cleanup_data[0], (total_cleanup_data[0]/total_sensor_data[0]) * 100,delete_steps, self.delete_batch))
-    # print('0%',end='',flush=True)
-    # new_percentage = 10
+    delete_steps = math.ceil( total_cleanup_data[0] / self.delete_batch)
+    print('Removing {} rows ({:.2f}%) of data in {} steps of {} rows.'.format(total_cleanup_data[0],
+                                                                              (total_cleanup_data[0]/total_sensor_data[0]) * 100,
+                                                                              delete_steps, self.delete_batch))
+    print('0%',end='',flush=True)
+    new_percentage = 10
 
-    # sql = f'DELETE FROM {table} WHERE timestamp < ? LIMIT ?'
-    # parameters = (self.time_limit, self.delete_batch)
+    sql = f'DELETE FROM {table} WHERE timestamp < ? LIMIT ?'
+    parameters = (self.time_limit, self.delete_batch)
 
-    # for step in range(delete_steps):
-    #   if int( (step / delete_steps) * 100) >= new_percentage:
-    #     print('{:.0f}%'.format(new_percentage),end='',flush=True)
-    #     new_percentage += 10
-
-    #   print('.',end='',flush=True)
-
-    #   with self.db as db:
-    #     db.execute(sql,parameters)
-
-    # print('100%')
-
-    temp_table = self.create_temp_table(table)
-    sql = f'INSERT INTO {temp_table} SELECT * from {table} WHERE timestamp > ?'
-    parameters = (self.time_limit,)
     with self.db as db:
-      db.execute(sql,parameters)
+      for step in range(delete_steps):
+        if int( (step / delete_steps) * 100) >= new_percentage:
+          print('{:.0f}%'.format(new_percentage),end='',flush=True)
+          new_percentage += 10
 
-    self.rename_and_cleanup(table)
+        print('.',end='',flush=True)
+        db.execute(sql,parameters)
 
+    print('100%')
     print('Clean up is done in {:.2f} seconds'.format(time.time()-start))
 
   def move_db(self):

@@ -6,11 +6,11 @@
  2. Run this script with the -h for more information: ./fix_db.py -h
 """
 
-import sqlite3
 from pathlib import Path
 import time
 import psutil
 import argparse
+import os
 
 DATABASE = '../data/terrariumpi.db'
 
@@ -62,7 +62,6 @@ class HumanBytes:
         return HumanBytes.PRECISION_FORMATS[precision].format("-" if is_negative else "", num, unit)
 
 
-
 def find_procs_by_name(name):
     "Return a list of processes matching 'name'."
     ls = []
@@ -95,29 +94,24 @@ def check_disk_space(path):
   print(f'Found broken database at: {path.resolve()}. Size: {HumanBytes.format(path.stat().st_size)}. Remaining disk space: {HumanBytes.format(disk_usage.free)}')
   return True
 
+def check_sqlite3():
+  installed = os.system('sqlite3 -version >/dev/null 2>/dev/null') == 0
+  if not installed:
+    print('Please install sqlite3 with the command: sudo apt install sqlite3')
+
+  return installed
 
 def fix_database(database):
   starttime = time.time()
-  # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
-  def progress(status, remaining, total):
-    status = ((total-remaining) / total) * 100
+  print(f'Running recovering database ... ')
 
-    print('\r' + f'Copied {total-remaining}({status:.2f}%) of {total} pages...', end='')
+  os.system(f'sqlite3 {database} .dump | sed "s/ROLLBACK;.*/COMMIT;/" | sqlite3 {database}.new')
 
-  broken_db = sqlite3.connect(str(database))
-  new_db    = sqlite3.connect(f'{database}.new')
-
-  with new_db:
-    broken_db.backup(new_db, pages=10, progress=progress)
-
-  new_db.close()
-  broken_db.close()
-
-  # Delete broken db
+  # # Delete broken db
   Path(str(database)).rename(f'{database}.broken')
   Path(f'{database}.new').rename(database)
 
-  print(f'\nRecovery done in {time.time()-starttime:.2f} seconds. New database is located at: {database.resolve()}')
+  print(f'Recovery done in {time.time()-starttime:.2f} seconds. New database is located at: {database.resolve()}')
 
 
 if __name__ == '__main__':
@@ -125,6 +119,9 @@ if __name__ == '__main__':
   parser.add_argument('-d','--database', help='path to the broken database.', type=Path, default=Path(DATABASE))
 
   args = parser.parse_args()
+
+  if not check_sqlite3():
+    exit()
 
   if not check_terrariumpi_stopped():
     exit()
