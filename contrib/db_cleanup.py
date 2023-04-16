@@ -47,8 +47,8 @@ class HistoryCleanup():
     self.db = sqlite3.connect(self.database)
     with self.db as db:
       cur = db.cursor()
-      cur.execute('PRAGMA journal_mode = MEMORY')
-      cur.execute('PRAGMA temp_store = MEMORY')
+      cur.execute('PRAGMA journal_mode = OFF')
+      cur.execute('PRAGMA temp_store = OFF')
 
     self.db.row_factory = sqlite3.Row
     self.get_current_db_version()
@@ -63,8 +63,8 @@ class HistoryCleanup():
     diskstats = shutil.disk_usage(self.database)
     filesize = os.path.getsize(self.database)
     print('Database size: {}, free diskspace: {}'.format(humansize(filesize),humansize(diskstats[2])))
-    if (2 * filesize) > diskstats[0]:
-      print('Not enough space left for cleaning the database. We need at least {}'.format(humansize(2 * filesize)))
+    if filesize > diskstats[2]:
+      print('Not enough space left for cleaning the database. We need at least {}'.format(humansize(filesize)))
       exit(1)
 
   def check_offline(self):
@@ -87,13 +87,14 @@ class HistoryCleanup():
     sql = self.get_table_structure(table)
     sql = sql.replace(table, temp_table)
     with self.db as db:
+      db.execute(f'DROP TABLE IF EXISTS {temp_table}')
       db.execute(sql)
 
     return temp_table
 
   def rename_and_cleanup(self, table):
     with self.db as db:
-      db.execute(f'DROP table {table}')
+      db.execute(f'DROP TABLE IF EXISTS {table}')
       db.execute(f'ALTER TABLE `{table}_tmp` RENAME TO `{table}`')
 
   def get_total_records(self, table, period = None):
