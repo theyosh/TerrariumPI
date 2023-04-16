@@ -38,11 +38,11 @@ class HistoryCleanup():
 
     self.check_offline()
 
+    self.delete_batch = batch
+    self.time_limit = f'{datetime.now() - period:%Y-%m-%d %H:%M:%S}'
+
     self.database = database
     self.new_database = self.database.replace('.db','.new.db')
-    self.period = period
-    self.delete_batch = batch
-    self.timestamp_limit = int((datetime.now() - period).timestamp())
 
     self.db = sqlite3.connect(self.database)
     with self.db as db:
@@ -82,17 +82,17 @@ class HistoryCleanup():
       parameters = ()
       if period is not None:
         sql += ' WHERE timestamp < ?'
-        parameters = (self.timestamp_limit,)
+        parameters = (self.time_limit,)
 
       for row in db.execute(sql, parameters):
         return (row['total'],row['begin'],row['end'])
 
   def get_clean_up_records(self,table):
-    return self.get_total_records(table,self.period)
+    return self.get_total_records(table, True)
 
   def get_space_back(self):
     start = time.time()
-    print('Start reclaming lost space. This will rebuild the database and give all the delete space back. This will take a lot of time')
+    print('Start reclaiming lost space. This will rebuild the database and give all the delete space back. This will take a lot of time')
 
     self.db.execute(f'VACUUM INTO \'{self.new_database}\'')
 
@@ -105,12 +105,12 @@ class HistoryCleanup():
     print(f'Done in {(time.time()-start)} seconds')
 
   def __clean_up(self, table):
-    print('Starting cleaning up table \'{}\'. Deleting data older then {} in batches of {} records. This could take some time...'.format(table, datetime.now() - self.period,self.delete_batch))
+    print(f'Starting cleaning up table \'{table}\'. Deleting data older then {self.time_limit} in batches of {self.delete_batch} records. This could take some time...')
 
     start = time.time()
     print('Total rows:', end='', flush=True)
     total_sensor_data = self.get_total_records(table)
-    print(' {} from {} till {}. Took ({})'.format(total_sensor_data[0],
+    print(' {} from {:%Y-%m-%d %H:%M} till {:%Y-%m-%d %H:%M}. Took {:.2f} seconds'.format(total_sensor_data[0],
                                                   datetime.fromisoformat(total_sensor_data[1]),
                                                   datetime.fromisoformat(total_sensor_data[2]),
                                                   time.time()-start))
@@ -122,23 +122,23 @@ class HistoryCleanup():
       print(' No data, nothing to do!')
       return
 
-    print(' {} from {} till {}. Took ({})'.format(total_cleanup_data[0],
+    print(' {} from {:%Y-%m-%d %H:%M} till {:%Y-%m-%d %H:%M}. Took {:.2f} seconds'.format(total_cleanup_data[0],
                                                   datetime.fromisoformat(total_cleanup_data[1]),
                                                   datetime.fromisoformat(total_cleanup_data[2]),
                                                   time.time()-start))
 
     start = time.time()
     delete_steps = math.ceil( total_cleanup_data[0] / self.delete_batch)
-    print('Removing {} rows ({}%) of data in {} steps of {} rows.'.format(total_cleanup_data[0], (total_cleanup_data[0]/total_sensor_data[0]) * 100,delete_steps, self.delete_batch))
+    print('Removing {} rows ({:.2f}%) of data in {} steps of {} rows.'.format(total_cleanup_data[0], (total_cleanup_data[0]/total_sensor_data[0]) * 100,delete_steps, self.delete_batch))
     print('0%',end='',flush=True)
     new_percentage = 10
 
     sql = f'DELETE FROM {table} WHERE timestamp < ? LIMIT ?'
-    parameters = (self.timestamp_limit, self.delete_batch)
+    parameters = (self.time_limit, self.delete_batch)
 
     for step in range(delete_steps):
-      if int( (step / delete_steps) * 100) == new_percentage:
-        print('{}%'.format(new_percentage),end='',flush=True)
+      if int( (step / delete_steps) * 100) >= new_percentage:
+        print('{:.0f}%'.format(new_percentage),end='',flush=True)
         new_percentage += 10
 
       print('.',end='',flush=True)
@@ -147,7 +147,7 @@ class HistoryCleanup():
         db.execute(sql,parameters)
 
     print('100%')
-    print('Clean up is done in {}'.format(time.time()-start))
+    print('Clean up is done in {:.2f} seconds'.format(time.time()-start))
 
   def move_db(self):
     shutil.move(self.database,self.database.replace('.db','.db.old'))
