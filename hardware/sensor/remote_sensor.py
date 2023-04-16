@@ -8,6 +8,7 @@ class terrariumRemoteSensor(terrariumSensor):
   NAME     = 'Remote sensor (http/https)'
 
   def _load_hardware(self):
+    self.__source_cache_key = None
     if terrariumUtils.is_valid_url(self.address):
       url = self.address
       self.__json_path = []
@@ -21,14 +22,15 @@ class terrariumRemoteSensor(terrariumSensor):
       raise terrariumSensorLoadingException('Not a valid url.')
 
   def _get_data(self):
-    value = self._sensor_cache.get_data(self.__source_cache_key)
+    value = None if self.__source_cache_key is None else self._sensor_cache.get_data(self.__source_cache_key)
 
     if value is None:
       value = terrariumUtils.get_remote_data(self.device)
       if value is None:
         return None
 
-      self._sensor_cache.set_data(self.__source_cache_key,value, self._CACHE_TIMEOUT)
+      if self.__source_cache_key is not None:
+        self._sensor_cache.set_data(self.__source_cache_key,value, self._CACHE_TIMEOUT)
 
     for item in self.__json_path:
       # Dirty hack to process array data....
