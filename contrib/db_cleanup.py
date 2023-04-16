@@ -63,8 +63,8 @@ class HistoryCleanup():
     diskstats = shutil.disk_usage(self.database)
     filesize = os.path.getsize(self.database)
     print('Database size: {}, free diskspace: {}'.format(humansize(filesize),humansize(diskstats[2])))
-    if filesize > diskstats[0]:
-      print('Not enough space left for cleaning the database. We need at least {}'.format(humansize(filesize)))
+    if (2 * filesize) > diskstats[0]:
+      print('Not enough space left for cleaning the database. We need at least {}'.format(humansize(2 * filesize)))
       exit(1)
 
   def check_offline(self):
@@ -76,14 +76,34 @@ class HistoryCleanup():
     except requests.ConnectionError:
       pass
 
-  def get_total_records(self, table, period = None):
+  def get_table_structure(self, table):
+    sql = f'SELECT sql FROM sqlite_master WHERE tbl_name = "{table}";'
     with self.db as db:
-      sql = f'SELECT count(*) as total, MIN(timestamp) as begin, MAX(timestamp) as end FROM {table}'
-      parameters = ()
-      if period is not None:
-        sql += ' WHERE timestamp < ?'
-        parameters = (self.time_limit,)
+      for row in db.execute(sql):
+        return row['sql']
 
+  def create_temp_table(self, table):
+    temp_table = table+'_tmp'
+    sql = self.get_table_structure(table)
+    sql = sql.replace(table, temp_table)
+    with self.db as db:
+      db.execute(sql)
+
+    return temp_table
+
+  def rename_and_cleanup(self, table):
+    with self.db as db:
+      db.execute(f'DROP table {table}')
+      db.execute(f'ALTER TABLE `{table}_tmp` RENAME TO `{table}`')
+
+  def get_total_records(self, table, period = None):
+    sql = f'SELECT count(*) as total, MIN(timestamp) as begin, MAX(timestamp) as end FROM {table}'
+    parameters = ()
+    if period is not None:
+      sql += ' WHERE timestamp < ?'
+      parameters = (self.time_limit,)
+
+    with self.db as db:
       for row in db.execute(sql, parameters):
         return (row['total'],row['begin'],row['end'])
 
@@ -128,25 +148,34 @@ class HistoryCleanup():
                                                   time.time()-start))
 
     start = time.time()
-    delete_steps = math.ceil( total_cleanup_data[0] / self.delete_batch)
-    print('Removing {} rows ({:.2f}%) of data in {} steps of {} rows.'.format(total_cleanup_data[0], (total_cleanup_data[0]/total_sensor_data[0]) * 100,delete_steps, self.delete_batch))
-    print('0%',end='',flush=True)
-    new_percentage = 10
+    # delete_steps = math.ceil( total_cleanup_data[0] / self.delete_batch)
+    # print('Removing {} rows ({:.2f}%) of data in {} steps of {} rows.'.format(total_cleanup_data[0], (total_cleanup_data[0]/total_sensor_data[0]) * 100,delete_steps, self.delete_batch))
+    # print('0%',end='',flush=True)
+    # new_percentage = 10
 
-    sql = f'DELETE FROM {table} WHERE timestamp < ? LIMIT ?'
-    parameters = (self.time_limit, self.delete_batch)
+    # sql = f'DELETE FROM {table} WHERE timestamp < ? LIMIT ?'
+    # parameters = (self.time_limit, self.delete_batch)
 
-    for step in range(delete_steps):
-      if int( (step / delete_steps) * 100) >= new_percentage:
-        print('{:.0f}%'.format(new_percentage),end='',flush=True)
-        new_percentage += 10
+    # for step in range(delete_steps):
+    #   if int( (step / delete_steps) * 100) >= new_percentage:
+    #     print('{:.0f}%'.format(new_percentage),end='',flush=True)
+    #     new_percentage += 10
 
-      print('.',end='',flush=True)
+    #   print('.',end='',flush=True)
 
-      with self.db as db:
-        db.execute(sql,parameters)
+    #   with self.db as db:
+    #     db.execute(sql,parameters)
 
-    print('100%')
+    # print('100%')
+
+    temp_table = self.create_temp_table(table)
+    sql = f'INSERT INTO {temp_table} SELECT * from {table} WHERE timestamp > ?'
+    parameters = (self.time_limit,)
+    with self.db as db:
+      db.execute(sql,parameters)
+
+    self.rename_and_cleanup(table)
+
     print('Clean up is done in {:.2f} seconds'.format(time.time()-start))
 
   def move_db(self):
