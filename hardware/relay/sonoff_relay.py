@@ -8,7 +8,7 @@ class terrariumRelaySonoff(terrariumRelay):
   HARDWARE = 'sonoff'
   NAME = 'Sonoff (Tasmota)'
 
-  __URL_REGEX = re.compile(r'^(?P<protocol>https?):\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$',re.IGNORECASE)
+  __URL_REGEX = re.compile(r'^(?P<protocol>https?):\/\/(((?P<user>[^:]+):)?(?P<passwd>[^@]+)?@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$',re.IGNORECASE)
 
   @property
   def _address(self):

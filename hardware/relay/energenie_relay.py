@@ -124,7 +124,8 @@ class terrariumRelayEnergenieLAN(terrariumRelay):
   HARDWARE = 'eg-pm-lan'
   NAME = 'Energenie LAN'
 
-  __URL_REGEX = re.compile('^(?P<protocol>https?):\/\/((?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$',re.IGNORECASE)
+  __URL_REGEX = re.compile(r'^(?P<protocol>https?):\/\/(((?P<user>[^:]+):)?(?P<passwd>[^@]+)?@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$',re.IGNORECASE)
+
 
   @property
   def _address(self):

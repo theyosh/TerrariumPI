@@ -8,7 +8,7 @@ class terrariumRelayShelly(terrariumRelay):
   HARDWARE = 'shelly'
   NAME = 'Shelly'
 
-  __URL_REGEX = re.compile(r'^(?P<protocol>https?):\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$',re.IGNORECASE)
+  __URL_REGEX = re.compile(r'^(?P<protocol>https?):\/\/(((?P<user>[^:]+):)?(?P<passwd>[^@]+)?@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$',re.IGNORECASE)
 
   @property
   def _address(self):
@@ -37,6 +37,8 @@ class terrariumRelayShelly(terrariumRelay):
 
     if 'user' in address and 'password' in address:
       device = f'{address["protocol"]}://{address["user"]}:{address["password"]}@{address["host"]}'
+    elif 'password' in address:
+      device = f'{address["protocol"]}://{address["password"]}@{address["host"]}'
 
     device += f'/relay/{self._address["nr"]}'
 
