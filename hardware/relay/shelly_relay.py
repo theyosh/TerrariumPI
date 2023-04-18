@@ -17,7 +17,7 @@ class terrariumRelayShelly(terrariumRelay):
     if data:
       address = data.groupdict()
       if 'nr' not in address or address['nr'] is None or '' == address['nr']:
-        address['nr'] = 0
+        address['nr'] = 1
 
       address['nr'] = int(address['nr'])-1
     else:
