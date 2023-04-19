@@ -331,6 +331,9 @@ class terrariumRelayDimmer(terrariumRelay):
       self.set_state(current_state)
       self.__running.wait(timeout=pause_time)
 
+    # Force the 'to' value at the end to make sure the dimmer is at the actual value
+    self.set_state(to)
+
     self.__running.set()
     self.running = False
     self.__thread = None
@@ -366,8 +369,9 @@ class terrariumRelayDimmer(terrariumRelay):
       self._timer.name = f'Delay_{value}'
       self._timer.start()
     else:
+      # We assume when the to value is >- 0.9, it should off. So we force to zero (0%)
+      value = round(value) if value > 1.0 else 0.0
       # Make sure we set the value within the specified limits
-      value = round(value)
       value = max(self.OFF,min(self.ON,value))
 
       if 0 == duration:
