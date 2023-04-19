@@ -27,15 +27,12 @@ from hardware.io_expander import terrariumIOExpander
 
 class terrariumButtonException(TypeError):
   "There is a general problem with a hardware button."
-  pass
 
 class terrariumButtonLoadingException(terrariumButtonException):
   "There is a problem with loading a hardware button."
-  pass
 
 class terrariumButtonUpdateException(terrariumButtonException):
   "There is a problem with updating a hardware button."
-  pass
 
 # Factory class
 class terrariumButton(object):
@@ -153,7 +150,7 @@ class terrariumButton(object):
       elif address[0].lower().startswith('pcf8574-'):
         self._device['device'] = terrariumIOExpander('PCF8574',','.join(address[1:]))
 
-      self._device['device'].set_pin(int(address[0].split('-')[1]))
+      self._device['device'].set_port(int(address[0].split('-')[1]))
 
     else:
       self._device['device'] = terrariumUtils.to_BCM_port_number(address[0])
