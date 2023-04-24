@@ -24,6 +24,11 @@ html[mode="dark"] img.is_dimmer {
   filter: invert(100%);
 }
 
+/* Overrule aspect ration header image */
+div.post-meta .preview-img img {
+  aspect-ratio: auto;
+}
+
 ul.jekyllcodex_accordion {padding-left: 0rem; position: relative; margin: 1.4rem 0!important; border-bottom: 1px solid rgba(0,0,0,0.25); padding-bottom: 0;}
 ul.jekyllcodex_accordion > li {border-top: 1px solid rgba(0,0,0,0.25); list-style: none; margin-left: 0;}
 ul.jekyllcodex_accordion li input {display: none;}
