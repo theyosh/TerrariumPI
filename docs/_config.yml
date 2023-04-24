@@ -114,6 +114,11 @@ assets:
     # only works if `assets.self_host.enabled` is 'true'
     env: # [development|production]
 
+  # https://stackoverflow.com/a/57653810
+  external:
+      uglifier:
+        harmony: true
+
 pwa:
   enabled: true # the option for PWA feature
 
