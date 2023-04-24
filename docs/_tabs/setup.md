@@ -318,7 +318,7 @@ Motion comparison frame
 ### Markers
 
 ![Markers popup](/assets/img/MarkersModal.webp){: .right width="200" }
-It is possible to add markers on the webcam image to show realtime sensor information. Click on the <img src="../assets/img/Webcam_Marker.webp" title="Webcam markers" alt="Webcam markers" style="height: 20px; position: relative; left: 0px; display: inline" class="ml-xl-3">icon in the preview window to drop a marker and select the sensors you want to show.
+It is possible to add markers on the webcam image to show realtime sensor information. Click on the ![Webcam markers](/assets/img/Webcam_Marker.webp){: .normal style="height: 20px; position: relative; left: 0px; display: inline" } icon in the preview window to drop a marker and select the sensors you want to show.
 
 In order to update or delete an existing marker, double click the marker.
 

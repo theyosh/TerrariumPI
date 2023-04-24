@@ -3,6 +3,8 @@ title: DC Dimmer
 categories: [Hardware, Relay]
 tags: [relay, dimmer, dc]
 
+image: false
+
 # image:
 #   path: /assets/img/Bright-PI-Header.png
 #   src: /assets/img/Bright-PI-Header.png
@@ -17,6 +19,6 @@ dimmer_frequency: 1500
 
 ## Information
 
-DC Dimmer....
+DC Dimmer
 
 {% include_relative _relay_detail.md %}

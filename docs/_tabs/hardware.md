@@ -77,7 +77,7 @@ We currently support **{{ relays | size}}** types of relays. Relays which has a 
   <h3>
     <a href="{{ relay.url | relative_url }}">{{ relay.title }}</a>
   {% if relay.tags contains 'dimmer' %}
-    <img src="../assets/img/dimmer_icon.png" title="Relay is a dimmer" alt="Relay is a dimmer" style="height: 20px" class="ml-xl-3 is_dimmer">
+    <img src="/assets/img/dimmer_icon.png" title="Relay is a dimmer" alt="Relay is a dimmer" style="height: 20px" class="ml-xl-3 is_dimmer">
   {% endif %}
   </h3>
 {% endfor %}
