@@ -114,12 +114,6 @@ assets:
     # only works if `assets.self_host.enabled` is 'true'
     env: # [development|production]
 
-  # https://stackoverflow.com/a/57653810
-  js_compressor: uglifier
-  external:
-    uglifier:
-      harmony: true
-
 pwa:
   enabled: true # the option for PWA feature
 
@@ -241,6 +235,11 @@ defaults:
 
 sass:
   style: compressed
+
+# https://github.com/digitalsparky/jekyll-minifier
+jekyll-minifier:
+  uglifier_args:
+    harmony: true
 
 compress_html:
   clippings: all
