@@ -30,9 +30,9 @@ jobs:
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1
-          bundler-cache: true
+#        with:
+#          ruby-version: 3.1
+#          bundler-cache: true
 
       - name: Check baseurl
         run: |
