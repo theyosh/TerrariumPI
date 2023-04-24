@@ -115,6 +115,7 @@ assets:
     env: # [development|production]
 
   # https://stackoverflow.com/a/57653810
+  js_compressor: uglifier
   external:
     uglifier:
       harmony: true
