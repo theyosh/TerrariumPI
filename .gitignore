@@ -19,6 +19,7 @@ screenlog.*
 .Trash*
 *.old
 *.swp
+Gemfile.lock
 .jekyll-cache
 docs/_site/
 
