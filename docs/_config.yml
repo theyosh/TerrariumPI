@@ -117,7 +117,7 @@ assets:
 pwa:
   enabled: true # the option for PWA feature
 
-paginate: 5
+paginate: 6
 
 jekyll_analytics:
   Matomo:                   # Add, if you want to track with Matomo (former Piwik Analytics)
