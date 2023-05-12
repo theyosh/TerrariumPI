@@ -5,7 +5,7 @@ wheel==0.40.0
 # Database
 pony==0.7.16
 yoyo-migrations==8.2.0
-python-dotenv==0.1.0
+python-dotenv==0.21.1
 
 # Audio
 git+https://github.com/gbstack/ffprobe-python
