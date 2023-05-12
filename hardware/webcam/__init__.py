@@ -102,17 +102,15 @@ class terrariumWebcam(object):
     return sorted(data, key=itemgetter('name'))
 
   # Return polymorph webcam....
-  def __new__(cls, _, address, name = '', rotation = '0', width = 640, height = 480, wb = 'auto'):
+  def __new__(cls, _, hardware_type, address, name = '', rotation = '0', width = 640, height = 480, wb = 'auto'):
     known_webcams = terrariumWebcam.available_hardware
 
-    # Check based on entered address, not type
-    for webcam_device in known_webcams:
-      if re.search(known_webcams[webcam_device].VALID_SOURCE, address, re.IGNORECASE):
-        return super(terrariumWebcam, cls).__new__(known_webcams[webcam_device])
+    if hardware_type not in known_webcams:
+      raise terrariumWebcamException(f'Webcam of hardware type {hardware_type} is unknown.')
 
-    raise terrariumWebcamException(f'Webcam url \'{address}\' is not valid! Please check your source')
+    return super(terrariumWebcam, cls).__new__(known_webcams[hardware_type])
 
-  def __init__(self, id, address, name = '', width = 640, height = 480, rotation = '0', awb = 'auto'):
+  def __init__(self, device_id, _, address, name = '', width = 640, height = 480, rotation = '0', awb = 'auto'):
     """Create a new Webcam instance based on type"""
 
     self._device = {'device'      : None,
@@ -127,7 +125,7 @@ class terrariumWebcam(object):
                     'state'       : True,
                     'max_zoom'    : None,}
 
-    self.id = id
+    self.id = device_id
 
     self.name = name
     self.resolution = (width,height)

@@ -77,7 +77,7 @@ class terrariumRelay(object):
     return sorted(data, key=itemgetter('name'))
 
   # Return polymorph relay....
-  def __new__(cls, device_id, hardware_type, address, name = '', prev_state = None, callback = None):
+  def __new__(cls, _, hardware_type, address, name = '', prev_state = None, callback = None):
     known_relays = terrariumRelay.available_hardware
 
     if hardware_type not in known_relays:

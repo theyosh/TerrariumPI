@@ -966,6 +966,7 @@ class terrariumEngine(object):
           logger.debug(f'Loading {webcam}.')
           try:
             self.add(terrariumWebcam(webcam.id,
+                                      webcam.hardware,
                                       webcam.address,
                                       webcam.name,
                                       int(webcam.width),

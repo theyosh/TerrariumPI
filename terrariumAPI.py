@@ -157,7 +157,7 @@ class terrariumAPI(object):
     bottle_app.route('/api/sensors/<filter:path>/<action:re:(history)>/', 'GET',    self.sensor_history,  apply=self.authentication(False), name='api:sensor_history')
     bottle_app.route('/api/sensors/<filter:path>/<action:re:(export)>/',  'GET',    self.sensor_history,  apply=self.authentication(),      name='api:sensor_export')
     bottle_app.route('/api/sensors/hardware/',      'GET',    self.sensor_hardware, apply=self.authentication(),      name='api:sensor_hardware')
-    bottle_app.route('/api/sensors/scan/',          'POST',    self.sensor_scan,    apply=self.authentication(),      name='api:sensor_scan')
+    bottle_app.route('/api/sensors/scan/',          'POST',   self.sensor_scan,     apply=self.authentication(),      name='api:sensor_scan')
     bottle_app.route('/api/sensors/<sensor:path>/', 'GET',    self.sensor_detail,   apply=self.authentication(False), name='api:sensor_detail')
     bottle_app.route('/api/sensors/<sensor:path>/', 'PUT',    self.sensor_update,   apply=self.authentication(),      name='api:sensor_update')
     bottle_app.route('/api/sensors/<sensor:path>/', 'DELETE', self.sensor_delete,   apply=self.authentication(),      name='api:sensor_delete')
@@ -1433,6 +1433,7 @@ class terrariumAPI(object):
   def webcam_add(self):
     try:
       new_webcam = self.webserver.engine.add(terrariumWebcam(None,
+                                                             request.json['hardware'],
                                                              request.json['address'],
                                                              request.json['name'],
                                                              request.json['width'],
