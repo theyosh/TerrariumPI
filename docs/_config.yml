@@ -124,6 +124,9 @@ jekyll_analytics:
     url: stats.theyosh.nl   # Required - url to Matomo installation without trailing /
     siteId: "279"           # Required - replace with your Matomo site id (Write id as string)
 
+target-blank:
+    add_css_classes: external
+
 plugins:
   - jekyll-feed
   - jekyll-target-blank
