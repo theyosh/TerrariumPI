@@ -14,9 +14,7 @@ device_address: "Enter the device path<br />Ex: `/dev/video0`"
 
 ## Information
 
-You can use the official Raspberry PI camera module to setup a webcam.
-
-Using as a live streaming webcam, the maximum resolution is: **1920** x **1080** pixels
+Use any USB webcam that is supported by Linux.
 
 ## Warning
 
