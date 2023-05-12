@@ -331,6 +331,11 @@ class terrariumRelayDimmer(terrariumRelay):
       self.set_state(current_state)
       self.__running.wait(timeout=pause_time)
 
+    # Somehow the led-warrior18-dimmer does not go fully off when slowly dimming.
+    # So ramping it up a bit and then set to 0 hoping this will fully shutdown the dimmer.
+    # https://github.com/theyosh/TerrariumPI/issues/798
+    if self.HARDWARE == 'led-warrior18-dimmer' and to < 1.0:
+      self.set_state(5)
     # Force the 'to' value at the end to make sure the dimmer is at the actual value
     self.set_state(to)
 
