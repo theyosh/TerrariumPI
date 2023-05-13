@@ -207,7 +207,7 @@
 {/if}
 
 <style>
-  @import '@fancyapps/ui/dist/fancybox.css';
+  @import '@fancyapps/ui/dist/fancybox/fancybox.css';
   .profile_image {
     width: 200px;
   }

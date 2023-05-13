@@ -12,7 +12,7 @@
   import { errorNotification } from '../../providers/notification-provider';
 
   import { Fancybox } from '@fancyapps/ui';
-  import '@fancyapps/ui/dist/fancybox.css';
+  import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
   import L from 'leaflet';
   import 'leaflet-fullscreen';

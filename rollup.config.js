@@ -11,7 +11,7 @@ import gzipPlugin from 'rollup-plugin-gzip';
 import json from "@rollup/plugin-json";
 import esbuild from "rollup-plugin-esbuild";
 import del from "rollup-plugin-delete";
-import template from "./html-template";
+import template from "./html-template.js";
 
 const production = process.env.NODE_ENV === "prod";
 
