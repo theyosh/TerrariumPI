@@ -725,7 +725,7 @@
         "low": "baix",
         "night": "Nit"
       },
-      "range": "Distància",
+      "range": "Interval",
       "type": {
         "audio": "Àudio",
         "cooling": "Refrigeració",
@@ -974,7 +974,7 @@
     },
     "general": {
       "close": "Tanca",
-      "save": "Estalviar"
+      "save": "Guardar"
     },
     "login": {
       "error": "Accés incorrecte",
@@ -1833,7 +1833,7 @@
   },
   "table": {
     "field": {
-      "range": "distància"
+      "range": "Interval"
     },
     "header": {
       "actions": "Accions",
