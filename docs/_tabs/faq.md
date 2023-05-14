@@ -1,7 +1,7 @@
 ---
 title: FAQ
 icon: fas fa-question
-order: 10
+order: 11
 
 image:
   path: /assets/img/FAQ.webp

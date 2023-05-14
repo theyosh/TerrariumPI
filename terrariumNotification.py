@@ -356,11 +356,12 @@ class terrariumNotification(terrariumSingleton):
           continue
 
         # Translate message variables
-        data['date'] = datetime.datetime.now().strftime('%x')
-        data['time'] = datetime.datetime.now().strftime('%X')
-        data['date_short'] = datetime.datetime.now().strftime('%d-%m')
-        data['time_short'] = datetime.datetime.now().strftime('%H:%M')
-        data['now'] = data['date'] + ' ' + data['time']
+        now = datetime.datetime.now()
+        data['date'] = now.strftime('%x')
+        data['time'] = now.strftime('%X')
+        data['date_short'] = now.strftime('%d-%m')
+        data['time_short'] = now.strftime('%H:%M')
+        data['now'] = now
 
         title = None
         text = None

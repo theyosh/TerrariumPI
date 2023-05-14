@@ -1,7 +1,7 @@
 ---
 title: Translations
 icon: fas fa-globe
-order: 7
+order: 8
 
 image:
   path: /assets/img/languages.webp

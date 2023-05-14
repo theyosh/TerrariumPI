@@ -1,7 +1,7 @@
 ---
 title: Donate
 icon: fas fa-donate
-order: 9
+order: 10
 
 image:
   path: /assets/img/Donations.webp
@@ -12,7 +12,8 @@ If you like to donate me for developing this software, you are free to do so and
 
 You can donate through:
 
-- [![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=Donate&emoji=🦎&slug=theyosh&button_colour=40DCA5&font_colour=ffffff&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00){: style="max-height: 50px"}](https://www.buymeacoffee.com/theyosh)
+
+- <a href="https://www.buymeacoffee.com/theyosh"><img src="https://img.buymeacoffee.com/button-api/?text=Donate&emoji=%F0%9F%A6%8E&slug=theyosh&button_colour=40DCA5&font_colour=ffffff&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00" alt="Buy Me A Coffee" style="height: 50px"></a>
 - [![Buy Me A Coffee](https://storage.ko-fi.com/cdn/brandasset/kofi_button_stroke.png){: style="max-height: 50px"}](https://ko-fi.com/theyosh)
 - Paypal:
   <form action="https://www.paypal.com/donate" method="post" target="_top">
@@ -26,9 +27,5 @@ You can donate through:
 - Monero: 42wnSZopYj52kwQFM9sNaZRaCmoT3Q9MEFKKsbbgqfD6CpwQM3RwLTp2jLPiB35EX7NEZLSvk2TrMi7WTcxvGps4LrtPPj5
 - Ether:
   0x2Fcb59770A31611aad9C25E04a6bA52E7b8E8437
-- Ripple:
-  rnUnFxEFopBpNFN9xDWBmbh7HTz9AqMT4Q
-- Gulden:
-  GRMXdmvS6nwWefgc8tfmTP3RU5Mxmr4fwh
 
 Thanks!
