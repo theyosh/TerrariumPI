@@ -469,7 +469,16 @@ class terrariumWebcam(object):
       try:
         image = func_timeout(15, self._get_raw_data)
         if image is not False:
-          break
+          try:
+            start2 = time()
+            self.__raw_image = Image.open(image)
+            self._device['state'] = True
+            logger.debug(f'Webcam {self.name}: Loaded image in memory took: {time()-start2:.3f} seconds')
+            break
+          except Exception as ex:
+            logger.error(f'Could not process webcam image {self}: {ex}')
+            image = False
+
       except FunctionTimedOut:
         logger.error(f'Webcam {self} timed out after 15 seconds during updating...')
         image = False
@@ -502,11 +511,6 @@ class terrariumWebcam(object):
 
       return False
 
-    self._device['state'] = True
-    start = time()
-    self.__raw_image = Image.open(image)
-    logger.debug(f'Webcam {self.name}: Loaded image in memory took: {time()-start:.3f} seconds')
-
     # After here, no errors should happen, the image data should be save and correct
     if not self.live:
       try:
@@ -518,8 +522,7 @@ class terrariumWebcam(object):
         logger.debug(f'Webcam {self.name}: Tiling image took: {time()-start:.3f} seconds')
       except Exception as ex:
         logger.error(f'Could not process webcam image {self}: {ex}')
-        # Raise an exception
-        raise ex
+        return False
 
     start = time()
     self.__raw_image.save(self.raw_image_path,'jpeg', quality=self.__JPEG_QUALITY, exif=self.__exit_data)
