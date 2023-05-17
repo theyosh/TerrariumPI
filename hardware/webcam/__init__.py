@@ -238,6 +238,9 @@ class terrariumWebcam(object):
     logger.debug('Tiling image with source resolution %s, from %sx%s with resize factor %s in %s steps' %
                   ('{}x{}'.format(self.width ,self.height), source_width,source_height,resize_factor, zoom_factor))
 
+    if not self.live:
+      self.raw_image_path.parent.joinpath(self._TILE_LOCATION).mkdir(parents=True,exist_ok=True)
+
     # as long as there is a new layer, continue
     while zoom_factor >= 0:
       # Create black canvas on zoom factor dimensions
@@ -273,7 +276,7 @@ class terrariumWebcam(object):
           logger.debug(f'Cropping image size: {crop_size} took: {time()-start:.2f} seconds')
           #logger.debug('Saving cropped image to %s' % (terrariumWebcamSource.TILE_LOCATION + self.__id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
 
-          tile_file_name = self.raw_image_path.parent.joinpath('tiles','tile_{}_{}_{}.jpg'.format(zoom_factor,row,column))
+          tile_file_name = self.raw_image_path.parent.joinpath(self._TILE_LOCATION,'tile_{}_{}_{}.jpg'.format(zoom_factor,row,column))
           tile.save(tile_file_name,'jpeg',quality=self.__JPEG_QUALITY)
           logger.debug('Done saving {}'.format(tile_file_name))
 
@@ -501,7 +504,7 @@ class terrariumWebcam(object):
 
     if image is False:
       # Camera is offline!!
-      logger.warning('Webcam {} has errors!'.format(self.name))
+#      logger.warning('Webcam {} has errors!'.format(self.name))
       if self.state:
         self._device['state'] = False
         logger.error('Webcam {} has gone offline! Please check your webcam connections.'.format(self.name))
