@@ -1,5 +1,5 @@
 pip==23.1.2
-setuptools==67.7.2
+setuptools==67.8.0
 wheel==0.40.0
 
 # Database
@@ -68,7 +68,7 @@ piexif==1.1.3
 icalendar==5.0.5
 icalevents==0.1.25
 psutil==5.9.5
-packaging==23.0
+packaging==23.1
 func_timeout==4.3.5
 sdnotify==0.3.2
 
