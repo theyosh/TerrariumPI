@@ -17,8 +17,10 @@ class terrariumRelayShelly(terrariumRelay):
     if data:
       address = data.groupdict()
       if 'nr' not in address or address['nr'] is None or '' == address['nr']:
+        # Humans start counting at 1
         address['nr'] = 1
 
+      # Computers start counting at 0
       address['nr'] = int(address['nr'])-1
     else:
       raise terrariumRelayLoadingException(f'Incorrect address for a Shelly device: {self}')
