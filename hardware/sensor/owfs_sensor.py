@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
@@ -5,6 +6,7 @@ from . import terrariumSensor, terrariumSensorUpdateException
 
 # pip install pyownet
 from pyownet import protocol
+
 class terrariumOWFSSensor(terrariumSensor):
   HARDWARE = 'owfs'
   TYPES    = ['temperature','humidity']

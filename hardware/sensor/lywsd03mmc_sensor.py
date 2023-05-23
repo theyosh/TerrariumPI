@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 

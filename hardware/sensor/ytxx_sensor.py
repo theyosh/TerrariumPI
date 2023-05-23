@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from . import terrariumSensor
 from terrariumUtils import terrariumUtils
 

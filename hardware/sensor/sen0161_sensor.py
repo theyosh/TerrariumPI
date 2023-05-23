@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from . import terrariumAnalogSensor
 
 class terrariumSEN0161Sensor(terrariumAnalogSensor):

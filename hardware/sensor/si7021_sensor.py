@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from . import terrariumI2CSensor, terrariumI2CSensorMixin
 
 class terrariumSi7021Sensor(terrariumI2CSensor, terrariumI2CSensorMixin):

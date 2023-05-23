@@ -8,6 +8,7 @@ from terrariumUtils import terrariumUtils, terrariumAsync, terrariumCache
 
 # pip install python-kasa
 from kasa import Discover, SmartStrip, SmartPlug
+
 class terrariumRelayTPLinkKasa(terrariumRelay):
   HARDWARE = 'tplinkkasa'
   NAME = 'Kasa Smart'

@@ -1,8 +1,8 @@
+# -*- coding: utf-8 -*-
 from . import terrariumI2CSensor
 
 # pip install PyMLX90614
 import mlx90614
-import smbus2
 
 class terrariumMLX90614Sensor(terrariumI2CSensor):
   HARDWARE = 'mlx90614'

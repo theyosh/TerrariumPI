@@ -6,6 +6,7 @@ from terrariumArea import terrariumArea
 from terrariumUtils import terrariumUtils
 
 import copy
+
 class terrariumEnclosure(object):
 
   def __init__(self, id, name, engine, doors = [], areas = []):

@@ -24,7 +24,6 @@ from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 from hardware.io_expander import terrariumIOExpander
 
-
 class terrariumButtonException(TypeError):
   "There is a general problem with a hardware button."
 

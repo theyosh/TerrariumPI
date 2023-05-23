@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
 from pony import orm
 from yoyo import read_migrations
@@ -5,6 +6,7 @@ from yoyo import get_backend
 from dotenv import dotenv_values
 from pathlib import Path
 from terrariumUtils import terrariumUtils
+
 import copy
 import re
 import sqlite3

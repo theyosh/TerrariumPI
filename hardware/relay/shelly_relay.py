@@ -1,7 +1,6 @@
 from . import terrariumRelay, terrariumRelayLoadingException
-from terrariumUtils import terrariumCache, terrariumUtils
+from terrariumUtils import terrariumUtils
 
-from hashlib import md5
 import re
 
 class terrariumRelayShelly(terrariumRelay):

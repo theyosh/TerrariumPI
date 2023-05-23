@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from . import terrariumI2CSensor
 
 from gevent import sleep

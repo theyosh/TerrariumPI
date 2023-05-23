@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from . import terrariumI2CSensor
 
 # pip install sensirion-i2c-sht

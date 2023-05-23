@@ -14,7 +14,6 @@ from time import time
 from gevent import sleep
 from func_timeout import func_timeout, FunctionTimedOut
 
-import re
 import math
 #import glob
 import cv2

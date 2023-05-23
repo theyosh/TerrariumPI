@@ -4,7 +4,6 @@ from terrariumUtils import terrariumUtils
 from pathlib import Path
 import subprocess
 
-
 class relayScriptMixin():
   def _load_hardware(self):
     script = Path(self.address)

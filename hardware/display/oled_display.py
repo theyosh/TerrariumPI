@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from pathlib import Path
 from PIL import Image, ImageFont
 from time import sleep

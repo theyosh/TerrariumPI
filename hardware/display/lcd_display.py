@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from . import terrariumDisplay
 
 # pip install i2c_lcd
