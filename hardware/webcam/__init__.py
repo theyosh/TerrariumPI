@@ -237,8 +237,7 @@ class terrariumWebcam(object):
     logger.debug('Tiling image with source resolution %s, from %sx%s with resize factor %s in %s steps' %
                   ('{}x{}'.format(self.width ,self.height), source_width,source_height,resize_factor, zoom_factor))
 
-    if not self.live:
-      self.raw_image_path.parent.joinpath(self._TILE_LOCATION).mkdir(parents=True,exist_ok=True)
+    self.raw_image_path.parent.joinpath(self._TILE_LOCATION).mkdir(parents=True,exist_ok=True)
 
     # as long as there is a new layer, continue
     while zoom_factor >= 0:
