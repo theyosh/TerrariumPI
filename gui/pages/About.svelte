@@ -72,7 +72,7 @@
           >'
         </p>
         <p>API Documentation: <a href="api/redoc/" target="_blank">ReDoc</a> / <a href="api/swagger/" target="_blank">Swagger</a></p>
-        <p><br />&copy; Copyright 2015 - 2022<br /><a href="https://theyosh.nl" target="_blank" rel="noopener noreferrer">TheYOSH</a></p>
+        <p><br />&copy; Copyright 2015 - 2023<br /><a href="https://theyosh.nl" target="_blank" rel="noopener noreferrer">TheYOSH</a></p>
       </Card>
     </div>
   </div>

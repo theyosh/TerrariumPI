@@ -351,23 +351,6 @@ export const PageUrls = Pages.reduce((acc, x) => {
   return acc;
 }, {});
 
-export const fillParams = (pageUrl, params) => {
-  return Object
-    .keys(params)
-    .reduce(
-      (acc, key) => acc.replace(`:${key}`, params[key]),
-      pageUrl
-    );
-};
-
-export const pageUrlToRegex = (pageUrl) => {
-  return "^" + pageUrl.replace(/\/:\w+(\??)/, "/?([\\w\\-d]+)$1") + "$";
-};
-
-export const getPage = (name) => {
-  return Pages.find((o) => o.name === name);
-};
-
 export const onRouteLoaded = async (route) => {
   const page = Pages.find(x => x.url === route.route);
 

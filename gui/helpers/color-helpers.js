@@ -7,8 +7,8 @@ export const get_template_color = (classname, transparency, hexformat) => {
   span.remove();
 
   if (transparency) {
-    color = color.replace('rgb(', 'rgba(');
-    color = color.replace(')', ',' + transparency + ')');
+    color = color.replace(/rgb\(/gm, 'rgba(');
+    color = color.replace(/\)/gm, ',' + transparency + ')');
   }
 
   if (hexformat) {

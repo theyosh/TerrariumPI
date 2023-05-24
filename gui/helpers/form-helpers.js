@@ -9,7 +9,7 @@ export const formToJSON = (form) => {
     if (element.disabled) {
       continue;
     }
-    let name = element.name.replace('[]', '');
+    let name = element.name.replace(/[]/gm, '');
     if (name) {
       if (element.multiple && element.multiple === true) {
         value = [];
@@ -45,7 +45,7 @@ export const formToJSON = (form) => {
 export const invalid_form_fields = (form) => {
   let fields = [];
   form.querySelectorAll(':invalid').forEach((item) => {
-    fields.push(form.querySelector('label[for="' + item.id + '"]').textContent.replace('*', ''));
+    fields.push(form.querySelector('label[for="' + item.id + '"]').textContent.replace(/\*/gm, ''));
   });
   return fields;
 };
