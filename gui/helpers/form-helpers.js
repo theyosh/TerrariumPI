@@ -9,7 +9,7 @@ export const formToJSON = (form) => {
     if (element.disabled) {
       continue;
     }
-    let name = element.name.replace(/[]/gm, '');
+    let name = element.name.replace(/\[\]/gm, '');
     if (name) {
       if (element.multiple && element.multiple === true) {
         value = [];
