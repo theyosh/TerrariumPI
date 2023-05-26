@@ -318,7 +318,7 @@
           false,
           (data) =>
             (buttons = data.map((item) => {
-              return { value: item.id, text: item.name, type: item.type };
+              return { value: item.id, text: item.name, type: item.hardware };
             }))
         ),
         fetchAreas(
