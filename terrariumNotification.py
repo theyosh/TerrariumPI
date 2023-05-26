@@ -361,7 +361,6 @@ class terrariumNotification(terrariumSingleton):
         data['time'] = now.strftime('%X')
         data['date_short'] = now.strftime('%d-%m')
         data['time_short'] = now.strftime('%H:%M')
-        data['now'] = now
 
         title = None
         text = None
