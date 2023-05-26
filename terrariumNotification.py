@@ -361,6 +361,7 @@ class terrariumNotification(terrariumSingleton):
         data['time'] = now.strftime('%X')
         data['date_short'] = now.strftime('%d-%m')
         data['time_short'] = now.strftime('%H:%M')
+        data['now'] = now
 
         title = None
         text = None
@@ -404,7 +405,8 @@ class terrariumNotification(terrariumSingleton):
             self.services[service.id] = terrariumNotificationService(service.id, service.type, service.name, service.enabled, setup)
 
           try:
-            self.services[service.id].send_message(message_type, title, text, data)
+            message_data = data.copy()
+            self.services[service.id].send_message(message_type, title, text, message_data)
           except Exception as ex:
             logger.exception(f'Error sending notification message \'{title}\': {ex}')
 
@@ -611,6 +613,8 @@ class terrariumNotificationServiceWebhook(terrariumNotificationService):
     # Add a unique ID to make clients able to filter duplicate messages
     data['uuid']    = terrariumUtils.generate_uuid()
     data['type']    = msg_type
+    if 'now' in data:
+      data['now']   = data['now'].strftime('%c')
 
     if len(attachments) > 0:
       data['files'] = []
@@ -1319,6 +1323,8 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
     data['subject'] = subject
     # Add the message
     data['message'] = message
+    if 'now' in data:
+      data['now']   = data['now'].strftime('%c')
 
     if self.connection is not None:
       self.connection.publish(topic, payload=json.dumps(data), qos=1)
