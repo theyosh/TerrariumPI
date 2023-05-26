@@ -53,11 +53,19 @@
     slider.setValue(value);
     return () => {
       slider.destroy();
+      slider = null;
     };
   });
 
   $: if (slider) {
-      slider.setValue(value)
+      if (Array.isArray(value) && value.length === 1) {
+        value.push(0);
+      }
+      try {
+        slider.setValue(value);
+      } catch (e) {
+        // Just ignore
+      }
   }
 </script>
 
