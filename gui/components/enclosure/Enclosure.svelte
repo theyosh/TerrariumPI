@@ -31,7 +31,7 @@
                 })}</small>
             </td>
             <td>
-              {#if area.mode == 'sensors'}
+              {#if area.mode === 'sensors'}
                 <small
                   class="badge mt-1"
                   class:badge-success="{area.state.powered === true}"

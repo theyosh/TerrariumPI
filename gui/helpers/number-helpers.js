@@ -20,10 +20,10 @@ export const uptime_format = (duration) => {
 
   let uptime_text = [];
   for (const [key, value] of Object.entries(dur.$d)) {
-    if (['milliseconds'].indexOf(key) != -1) {
+    if (['milliseconds'].indexOf(key) !== -1) {
       continue;
     }
-    if (value > 0 || uptime_text.length > 0 || 'seconds' == key) {
+    if (value > 0 || uptime_text.length > 0 || 'seconds' === key) {
       uptime_text.push($_(`general.uptime_format.${key}`, { values: { number: Math.round(value) } }));
     }
   }
@@ -38,7 +38,7 @@ export const arrIdentical = (a1, a2) => {
   if (!Array.isArray(a1) || !Array.isArray(a2)) return false;
 
   let i = a1.length;
-  if (i != a2.length) return false;
+  if (i !== a2.length) return false;
 
   // Add sorting to the arrays, as order is not an issue
   a1.sort();

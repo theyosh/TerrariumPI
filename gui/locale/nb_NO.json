@@ -30,6 +30,12 @@
         "label": "Når lukket",
         "placeholder": "Velg kabinett"
       },
+      "light_sensors": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
       "mode": {
         "help": "Velg modusen for dette området. Dette vil endre tidspunktet og varigheten til reléene.",
         "invalid": "Vennligst ta et valg.",
@@ -1387,6 +1393,11 @@
           "help": "Angi minimum fuktighetsverdi.",
           "invalid": "Den angitte verdien er ikke gyldig. Det må være nummer høyere enn {min}.",
           "label": "Maksimal fukt verdi"
+        },
+        "light_threshold": {
+          "help": "",
+          "invalid": "",
+          "label": ""
         },
         "offset": {
           "help": "Viser lydkortet som brukes til å spille av lyd.",

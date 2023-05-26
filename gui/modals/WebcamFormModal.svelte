@@ -145,7 +145,7 @@
     let item = null;
     webcamMap.getWebcamMap().eachLayer((layer) => {
       if (item === null && layer instanceof L.Marker) {
-        if (id == layer._leaflet_id) {
+        if (id === layer._leaflet_id) {
           item = layer;
         }
       }
@@ -196,7 +196,7 @@
   };
 
   const archivingCalibration = (state) => {
-    motion_settings = state == 'motion';
+    motion_settings = state === 'motion';
   };
 
   const _processForm = async (values, context) => {
@@ -313,7 +313,7 @@
   </svelte:fragment>
 
   <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id != '' ? null : true}" />
+    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
     <input type="hidden" name="markers" readonly="readonly" />
 
     <div class="row">
@@ -323,7 +323,7 @@
             <Select
               name="hardware"
               value="{$formData.hardware}"
-              readonly="{$formData.id && $formData.id != ''}"
+              readonly="{$formData.id && $formData.id !== ''}"
               on:change="{(value) => hardwareType(value.detail)}"
               required="{true}"
               options="{hardware}"
@@ -337,7 +337,7 @@
               type="text"
               name="address"
               required="{true}"
-              readonly="{['rpicam', 'rpicam-live'].indexOf(hardware_type) != -1}"
+              readonly="{['rpicam', 'rpicam-live'].indexOf(hardware_type) !== -1}"
               label="{$_('webcams.settings.address.label', { default: 'Address' })}"
               placeholder="{$_('webcams.settings.address.placeholder', { default: 'Enter an address' })}"
               help="{$_('webcams.settings.address.help', { default: 'For more information see online.' })}"

@@ -173,7 +173,7 @@
   </svelte:fragment>
 
   <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id != '' ? null : true}" />
+    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
 
     <div class="row">
       <div class="col-12 col-sm-6 col-md-6 col-lg-6">

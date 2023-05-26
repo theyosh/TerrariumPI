@@ -29,7 +29,7 @@
   const event_periods = [
     {
       text:
-        mode == 'repeat'
+        mode === 'repeat'
           ? $_('calendar.event.periods.no_repeat', { default: 'No repeat' })
           : $_('calendar.event.periods.no_reminder', { default: 'No reminder' }),
       value: '_',
@@ -127,7 +127,7 @@
           $formData = data;
         });
         setFields($formData);
-        repeat = $formData.freq != '_';
+        repeat = $formData.freq !== '_';
       }
 
       // Loading done
@@ -135,7 +135,7 @@
     })();
 
     // Toggle loading div
-    loading = eventData.id != undefined && eventData.id != null;
+    loading = eventData.id !== undefined && eventData.id !== null;
 
     repeat = false;
 
@@ -177,7 +177,7 @@
   </svelte:fragment>
 
   <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id != '' ? null : true}" />
+    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
 
     <div class="row">
       <div class="col-12 col-sm-12 col-md-9 col-lg-9">
@@ -217,9 +217,9 @@
           value="{$formData.freq}"
           options="{event_periods}"
           on:change="{(value) => {
-            repeat = value.detail != '_';
+            repeat = value.detail !== '_';
           }}"
-          label="{mode == 'repeat'
+          label="{mode === 'repeat'
             ? $_('calendar.event.settings.repeat.label', { default: 'Repeat every' })
             : $_('calendar.event.settings.remind.label', { default: 'Remind in' })}"
           help="{$_('calendar.event.settings.repeat.help', { default: 'Select a repeat period and an amount.' })}"

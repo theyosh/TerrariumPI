@@ -30,6 +30,12 @@
         "label": "Terrarium",
         "placeholder": "Wähle ein Terrarium"
       },
+      "light_sensors": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
       "mode": {
         "help": "Wähle den Modus dieses Bereichs. Das ändert Schaltzeit- und dauer der Relais.",
         "invalid": "Bitte triff eine Wahl.",
@@ -1387,6 +1393,11 @@
           "help": "Gib den minimalen Feuchtigkeitswert ein.",
           "invalid": "Der eingegebene Wert ist nicht gültig. Es muss ein Wert höher sein als {min}.",
           "label": "Mindestfeuchtewert"
+        },
+        "light_threshold": {
+          "help": "",
+          "invalid": "",
+          "label": ""
         },
         "offset": {
           "help": "Abweichung für diesen Sensor eingeben.",

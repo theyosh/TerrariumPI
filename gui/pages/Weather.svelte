@@ -41,9 +41,9 @@
 
   const loadCurrentData = async (loading) => {
     loading = loading || false;
-    loading_current = loading == true;
+    loading_current = loading === true;
 
-    if (loading == true) {
+    if (loading === true) {
       await fetchWeatherData((data) => (weatherData = data));
     } else {
       fetchWeatherData((data) => (weatherData = data));
@@ -53,7 +53,7 @@
 
   const loadForecastData = async (loading) => {
     loading = loading || false;
-    loading_forecast = loading == true;
+    loading_forecast = loading === true;
 
     let new_data;
     await fetchWeatherForecast((data) => {
@@ -63,7 +63,7 @@
       });
     });
 
-    if (loading == true) {
+    if (loading === true) {
       graphData = {
         labels: null,
         datasets: [
@@ -217,7 +217,7 @@
           </div>
           <div class="row">
             {#each weatherData.forecast.slice(1, 7) as day, counter}
-              <div class="col pr-0" class:d-none="{counter == 5}" class:d-sm-inline="{counter == 5}">
+              <div class="col pr-0" class:d-none="{counter === 5}" class:d-sm-inline="{counter === 5}">
                 <div class="description-block">
                   <h5 class="description-header">{$date(new Date(day.timestamp * 1000), { weekday: 'short' })}</h5>
                   <span class="description-text">{roundToPrecision(day.temp)} {weatherData.indicators.temperature}</span>

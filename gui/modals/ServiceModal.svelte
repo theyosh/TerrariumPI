@@ -147,13 +147,13 @@
   </svelte:fragment>
 
   <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id != '' ? null : true}" />
+    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
     <div class="row">
       <div class="col">
         <Select
           name="type"
           value="{$formData.type}"
-          readonly="{$formData.id && $formData.id != ''}"
+          readonly="{$formData.id && $formData.id !== ''}"
           required="{true}"
           options="{service_types}"
           on:change="{(value) => ($formData.type = value.detail)}"
@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    {#if $formData.type == 'display'}
+    {#if $formData.type === 'display'}
       <div class="row">
         <div class="col">
           <Select
@@ -234,7 +234,7 @@
       </div>
     {/if}
 
-    {#if $formData.type == 'email'}
+    {#if $formData.type === 'email'}
       <div class="row">
         <div class="col">
           <Field
@@ -301,7 +301,7 @@
       </div>
     {/if}
 
-    {#if $formData.type == 'pushover'}
+    {#if $formData.type === 'pushover'}
       <div class="row">
         <div class="col">
           <Field
@@ -340,7 +340,7 @@
       </div>
     {/if}
 
-    {#if $formData.type == 'traffic'}
+    {#if $formData.type === 'traffic'}
       <div class="row">
         <div class="col">
           <Field
@@ -390,7 +390,7 @@
       </div>
     {/if}
 
-    {#if $formData.type == 'buzzer'}
+    {#if $formData.type === 'buzzer'}
       <div class="row">
         <div class="col">
           <Field
@@ -435,7 +435,7 @@
       </div>
     {/if}
 
-    {#if $formData.type == 'webhook'}
+    {#if $formData.type === 'webhook'}
       <div class="row">
         <div class="col">
           <Field
@@ -450,7 +450,7 @@
       </div>
     {/if}
 
-    {#if $formData.type == 'mqtt'}
+    {#if $formData.type === 'mqtt'}
       <div class="row">
         <div class="col">
           <Field

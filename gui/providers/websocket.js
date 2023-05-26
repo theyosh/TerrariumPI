@@ -121,9 +121,9 @@ websocket.subscribe(message => {
         last_log_line.set(message.data);
       }
 
-      if (message.data.indexOf('WARNING') != -1) {
+      if (message.data.indexOf('WARNING') !== -1) {
         animate_footer_badge('warning');
-      } else if (message.data.indexOf('ERROR') != -1) {
+      } else if (message.data.indexOf('ERROR') !== -1) {
         animate_footer_badge('danger');
       }
       animate_footer_badge();

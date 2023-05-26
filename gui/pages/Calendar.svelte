@@ -161,7 +161,7 @@
 
       eventDrop: function (data) {
         let move = data.delta.days * (24 * 3600) + data.delta.months * (30 * 24 * 3600);
-        if ($isAuthenticated && move != 0) {
+        if ($isAuthenticated && move !== 0) {
           (async () => {
             let item = null;
             await fetchCalendarEvents(data.event.id, (data) => (item = data));
@@ -198,7 +198,7 @@
       eventResize: function (data) {
         let moveStart = data.startDelta.days * (24 * 3600) + data.startDelta.months * (30 * 24 * 3600);
         let moveEnd = data.endDelta.days * (24 * 3600) + data.endDelta.months * (30 * 24 * 3600);
-        if ($isAuthenticated && (moveStart != 0 || moveEnd != 0)) {
+        if ($isAuthenticated && (moveStart !== 0 || moveEnd !== 0)) {
           (async () => {
             let item = null;
             await fetchCalendarEvents(data.event.id, (data) => (item = data));

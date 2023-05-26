@@ -48,7 +48,7 @@ export const graphDefaultOpts = {
         callback: function (value, index, ticks) {
           let unit = null;
           this.chart.config._config.data.datasets.forEach(dataset => {
-            if (dataset.yAxisID == this.id) {
+            if (dataset.yAxisID === this.id) {
               unit = dataset.graphType;
             }
           });
@@ -66,7 +66,7 @@ export const graphDefaultOpts = {
               return (value === 0 ? 'off' : 'on');
 
             default:
-              return value + ' ' + (unit != null ? settings.units[unit].value : '');
+              return value + ' ' + (unit !== null ? settings.units[unit].value : '');
           }
         }
       }
@@ -85,7 +85,7 @@ export const graphDefaultOpts = {
         callback: function (value, index, ticks) {
           let unit = null;
           this.chart.config._config.data.datasets.forEach(dataset => {
-            if (dataset.yAxisID == this.id) {
+            if (dataset.yAxisID === this.id) {
               unit = dataset.graphType;
             }
           });
@@ -103,7 +103,7 @@ export const graphDefaultOpts = {
               return (value === 0 ? 'off' : 'off');
 
             default:
-              return value + ' ' + (unit != null ? settings.units[unit].value : '');
+              return value + ' ' + (unit !== null ? settings.units[unit].value : '');
           }
         }
       }
@@ -127,7 +127,7 @@ export const graphDefaultOpts = {
       callbacks: {
         label: function (context) {
           let label = context.dataset.label || '';
-          if (label != '') {
+          if (label !== '') {
             label = ` ${label}: `;
           }
           switch (context.dataset.graphType) {

@@ -25,10 +25,10 @@
           if ($isAuthenticated) {
             // Bug in knob. When trigger a change, the release is fired.
             // So we check if the data value 'update' is 1 if the change should be fired to the backend
-            if (1 == dimmer.data('update')) {
+            if (1 === dimmer.data('update')) {
               let old_value = this.val();
               let value = Math.round(event);
-              if (old_value != value) {
+              if (old_value !== value) {
                 toggleAction(relay, value);
               }
             }
@@ -47,7 +47,7 @@
   $: {
     if (loaded && $relays[relay.id].changed) {
       if (relay.dimmer) {
-        if (parseInt(dimmer.val()) != $relays[relay.id].value) {
+        if (parseInt(dimmer.val()) !== $relays[relay.id].value) {
           dimmer.data('update', 0);
           dimmer.val($relays[relay.id].value);
 

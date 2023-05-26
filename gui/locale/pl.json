@@ -30,6 +30,12 @@
         "label": "Klatka",
         "placeholder": "Wybierz obudowę"
       },
+      "light_sensors": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
       "mode": {
         "help": "Wybierz tryb dla tego obszaru. To zmieni czas i długość załączenia przekaźników.",
         "invalid": "Dokonaj wyboru.",
@@ -1387,6 +1393,11 @@
           "help": "Wprowadź minimalną wartość wilgotną.",
           "invalid": "Wprowadzona wartość jest nieprawidłowa. Musi być liczba wyższa niż {min}.",
           "label": "Minimalna wilgotna wartość"
+        },
+        "light_threshold": {
+          "help": "",
+          "invalid": "",
+          "label": ""
         },
         "offset": {
           "help": "Wpisz nazwę tej klatki.",

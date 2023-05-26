@@ -49,7 +49,7 @@
   const { form, setFields, isSubmitting, reset } = createForm({
     onSubmit: async (values, context) => {
       // Extra check on the password
-      if (values.password != '' && values.password2 != '' && values.password != values.password2) {
+      if (values.password !== '' && values.password2 !== '' && values.password !== values.password2) {
         context.form.elements['password2'].setCustomValidity('dummy');
       } else {
         // Reset error
@@ -80,7 +80,7 @@
         delete values.file_profile_image;
         // TODO: Fix this. We need to convert to string, so that backend settings will work.... not handy or nice
         Object.keys(values).forEach((key) => {
-          if (key == 'exclude_ids') {
+          if (key === 'exclude_ids') {
             values[key] = values[key].join(',');
           } else {
             values[key] = values[key] + '';
@@ -124,16 +124,16 @@
           // TODO: Fix json data to real true and false values
           $formData[field.id] = $formData[field.id] === 'true' ? true : $formData[field.id] === 'false' ? false : $formData[field.id];
 
-          if (field.id == 'exclude_ids') {
+          if (field.id === 'exclude_ids') {
             excluded_ids = $formData[field.id].map((item) => {
               return { value: item.id, text: item.name };
             });
             $formData[field.id] = $formData[field.id].map((item) => {
               return item.id;
             });
-          } else if (field.id == 'language') {
+          } else if (field.id === 'language') {
             $formData[field.id] = $formData[field.id].replace(/_/gm,'-');
-          } else if (field.id == 'always_authenticate' && ($formData[field.id] === true || $formData[field.id] === false)) {
+          } else if (field.id === 'always_authenticate' && ($formData[field.id] === true || $formData[field.id] === false)) {
             $formData[field.id] = $formData[field.id] ? 1 : 0
           }
         }

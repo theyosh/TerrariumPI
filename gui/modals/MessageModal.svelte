@@ -39,10 +39,10 @@
 
   const updatePlaceholders = (message_type) => {
     let message = message_types.filter((item) => {
-      return item.value == message_type;
+      return item.value === message_type;
     });
 
-    if (message && message.length == 1) {
+    if (message && message.length === 1) {
       placeholders = Object.keys(message[0].placeholder)
         .sort()
         .map((item) => {
@@ -54,7 +54,7 @@
   };
 
   const toggleService = (service_id) => {
-    if (enabled_services.indexOf(service_id) == -1) {
+    if (enabled_services.indexOf(service_id) === -1) {
       // Enable
       enabled_services.push(service_id);
     } else {
@@ -186,14 +186,14 @@
   </svelte:fragment>
 
   <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id != '' ? null : true}" />
+    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
     <input type="hidden" name="services" value="{enabled_services.join(',')}" />
     <div class="row">
       <div class="col">
         <Select
           name="type"
           value="{$formData.type}"
-          readonly="{$formData.id && $formData.id != ''}"
+          readonly="{$formData.id && $formData.id !== ''}"
           required="{true}"
           options="{message_types}"
           on:change="{(value) => ($formData.type = value.detail)}"
@@ -257,10 +257,10 @@
               id="{service.id}"
               title="{service.name}"
               class="btn btn-app"
-              class:ml-0="{counter == 0}"
+              class:ml-0="{counter === 0}"
               disabled="{!service.enabled}"
               on:click="{() => toggleService(service.id)}">
-              <i class="{`${template_sensor_type_icon(service.type)}`}" class:text-warning="{enabled_services.indexOf(service.id) != -1}"
+              <i class="{`${template_sensor_type_icon(service.type)}`}" class:text-warning="{enabled_services.indexOf(service.id) !== -1}"
               ></i>
             </button>
           {/each}

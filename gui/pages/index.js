@@ -73,7 +73,7 @@ export const Pages = [
         url: "/sensors/all/",
         breadcrumb: ["Home"],
         icon: "fas fa-tint",
-        hide: settings.show_gauge_overview != 1
+        hide: settings.show_gauge_overview !== 1
       },
     ]
   },

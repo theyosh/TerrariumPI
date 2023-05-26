@@ -30,6 +30,12 @@
         "label": "Enclosure",
         "placeholder": "Select enclosure"
       },
+      "light_sensors": {
+        "help": "Select the lights sensors to detect if the lights are on.",
+        "invalid": "Please make a choice.",
+        "label": "Light detecting sensors",
+        "placeholder": "Select light sensors"
+      },
       "mode": {
         "help": "Select the mode of this area. This will change the timing and duration of the relays.",
         "invalid": "Please make a choice.",
@@ -1387,6 +1393,11 @@
           "help": "Enter the minimum moist value.",
           "invalid": "The entered value is not valid. It needs to be number higher then {min}.",
           "label": "Minimum moist value"
+        },
+        "light_threshold": {
+          "help": "Enter the value when considered the lights are on.",
+          "invalid": "The entered value is not valid. It needs to be number higher then {min}.",
+          "label": "Lights on threshold"
         },
         "offset": {
           "help": "Enter offset for this sensor.",

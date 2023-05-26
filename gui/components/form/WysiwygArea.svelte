@@ -76,7 +76,7 @@
   });
 
   $: if (wysiwyg) {
-    if (value && value != '') {
+    if (value && value !== '') {
       jQuery(wysiwyg).trumbowyg('html', value);
     } else {
       jQuery(wysiwyg).trumbowyg('empty');

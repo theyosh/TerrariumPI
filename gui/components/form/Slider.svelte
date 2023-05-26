@@ -45,8 +45,8 @@
     });
 
     slider.on('change', (data) => {
-      if (old_data != data) {
-        old_data == data;
+      if (old_data !== data) {
+        old_data === data;
         changeAction();
       }
     });

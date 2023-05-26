@@ -142,7 +142,7 @@ export const changeLang = (lang) => {
 const initialize = () => {
   langs.forEach((lang) => {
     let lc = localStorage.getItem(lang.code + '-locale');
-    if (lc != null) {
+    if (lc !== null) {
       addMessages(lang.code, { ...JSON.parse(lc), ...{ units: settings.units } });
       locales[lang.code] = { ...JSON.parse(lc), ...{ units: settings.units } };
     } else {

@@ -30,6 +30,12 @@
         "label": "Quando chiuso",
         "placeholder": "Selezionare il recinto"
       },
+      "light_sensors": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
       "mode": {
         "help": "Seleziona la modalità di questa area. Questo modificherà l'orario e la durata dei relay.",
         "invalid": "Si prega di fare una scelta.",
@@ -1387,6 +1393,11 @@
           "help": "Immettere il valore minimo umido.",
           "invalid": "Il valore immesso non è valido. Deve essere un numero superiore quindi {min}.",
           "label": "valore minimo umidità"
+        },
+        "light_threshold": {
+          "help": "",
+          "invalid": "",
+          "label": ""
         },
         "offset": {
           "help": "Contiene la scheda audio utilizzata per la riproduzione audio.",

@@ -46,14 +46,14 @@ export const updateButton = (button) => {
 
   loaded_buttons[button.id] = { ...loaded_buttons[button.id], ...button };
 
-  if (old_state != button.value) {
+  if (old_state !== button.value) {
     loaded_buttons[button.id].last_update = new Date();
   }
 
   // Add door property if it has an connected enclosure
-  loaded_buttons[button.id].door = button.enclosure != null;
+  loaded_buttons[button.id].door = button.enclosure !== null;
   if (loaded_buttons[button.id].door) {
-    let inverse = button.hardware == 'remote' && button.calibration?.inverse == 'on';
+    let inverse = button.hardware === 'remote' && button.calibration?.inverse === 'on';
     loaded_buttons[button.id].closed = button.value === (inverse ? 0 : 1);
 
     if ((old_state !== null || button.value === (inverse ? 1 : 0)) && old_state !== button.value) {
@@ -76,7 +76,7 @@ export const updateRelay = (relay) => {
 
   loaded_relays[relay.id] = { ...loaded_relays[relay.id], ...relay };
 
-  loaded_relays[relay.id].changed = old_state != relay.value;
+  loaded_relays[relay.id].changed = old_state !== relay.value;
   loaded_relays[relay.id].last_update = new Date();
 
   relays.set(loaded_relays);

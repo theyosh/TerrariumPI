@@ -23,12 +23,12 @@
       return;
     }
     if (context.raw.value < context.raw.alarm_min) {
-      return 'border' == type ? graphTypes.alarm_min.colors.line : graphTypes.alarm_min.colors.background;
+      return 'border' === type ? graphTypes.alarm_min.colors.line : graphTypes.alarm_min.colors.background;
     }
     if (context.raw.value > context.raw.alarm_max) {
-      return 'border' == type ? graphTypes.alarm_max.colors.line : graphTypes.alarm_max.colors.background;
+      return 'border' === type ? graphTypes.alarm_max.colors.line : graphTypes.alarm_max.colors.background;
     }
-    return 'border' == type ? graphTypes.value.colors.line : graphTypes.value.colors.background;
+    return 'border' === type ? graphTypes.value.colors.line : graphTypes.value.colors.background;
   };
 
   const dynamicBackgroundColor = (context) => {
@@ -43,21 +43,21 @@
     init = init || false;
 
     // Inverse the magnetic door data for better graphing
-    if (mode == 'buttons' && type == 'magnetic') {
+    if (mode === 'buttons' && type === 'magnetic') {
       new_data = new_data.map((item) => {
-        item.value = item.value == 1 ? 0 : 1;
+        item.value = item.value === 1 ? 0 : 1;
         return item;
       });
     }
 
-    if (['wattage', 'magnetic', 'motion', 'ldr', 'remote'].indexOf(type) != -1) {
+    if (['wattage', 'magnetic', 'motion', 'ldr', 'remote'].indexOf(type) !== -1) {
       // Add a duplicate record on the 'end' with the current time stamp. This will keep the graph updating at every refresh
       let last_item = new_data[new_data.length - 1];
       last_item.timestamp = new Date();
       new_data.push(last_item);
     }
 
-    if (mode == 'sensors' && settings.graph_smooth_value > 0) {
+    if (mode === 'sensors' && settings.graph_smooth_value > 0) {
       let smoothed_data = smoothing(
         new_data.map((point) => {
           return point.value;
@@ -76,32 +76,32 @@
       };
 
       for (let graphValue in new_data[0]) {
-        if (graphValue == 'timestamp' || (graphValue == 'value' && ['sensors', 'buttons'].indexOf(mode) == -1)) {
+        if (graphValue === 'timestamp' || (graphValue === 'value' && ['sensors', 'buttons'].indexOf(mode) === -1)) {
           continue;
         }
 
         let dataset = {
-          graphType: ['sensors', 'buttons'].indexOf(mode) !== -1 ? type : graphValue == 'flow' ? 'water_flow' : graphValue, // TODO: Make the flow field to water_flow field in the API
-          label: $_(graphTypes[mode == 'buttons' ? type : graphValue].label),
-          tension: mode == 'sensors' ? 0.4 : 0,
+          graphType: ['sensors', 'buttons'].indexOf(mode) !== -1 ? type : graphValue === 'flow' ? 'water_flow' : graphValue, // TODO: Make the flow field to water_flow field in the API
+          label: $_(graphTypes[mode === 'buttons' ? type : graphValue].label),
+          tension: mode === 'sensors' ? 0.4 : 0,
           data: new_data,
           parsing: {
             xAxisKey: 'timestamp',
             yAxisKey: graphValue,
           },
           yAxisID: 'y',
-          fill: mode != 'sensors',
-          stepped: mode != 'sensors',
-          borderColor: graphTypes[mode == 'buttons' ? type : graphValue].colors.line,
-          backgroundColor: graphTypes[mode == 'buttons' ? type : graphValue].colors.background,
+          fill: mode !== 'sensors',
+          stepped: mode !== 'sensors',
+          borderColor: graphTypes[mode === 'buttons' ? type : graphValue].colors.line,
+          backgroundColor: graphTypes[mode === 'buttons' ? type : graphValue].colors.background,
         };
 
-        if (graphValue == 'flow') {
+        if (graphValue === 'flow') {
           dataset.yAxisID = 'y2';
         }
         graphData.datasets.push(dataset);
 
-        if (graphValue == 'value') {
+        if (graphValue === 'value') {
           graphData.datasets[graphData.datasets.length - 1].pointRadius = 1;
 
           graphData.datasets[graphData.datasets.length - 1].pointBorderColor = dynamicBorderColor;
@@ -118,7 +118,7 @@
       });
     }
 
-    if (mode == 'sensors' && settings.graph_show_min_max_gauge) {
+    if (mode === 'sensors' && settings.graph_show_min_max_gauge) {
       updateSensor({
         id: id,
         measure_min: Math.min(
@@ -134,16 +134,16 @@
       });
     }
 
-    if ($graphs[id].period == 'day') {
+    if ($graphs[id].period === 'day') {
       graphOpts.scales.x.time.unit = 'minute';
       graphOpts.scales.x.time.displayFormats.minute = 'LT';
-    } else if ($graphs[id].period == 'week') {
+    } else if ($graphs[id].period === 'week') {
       graphOpts.scales.x.time.unit = 'hour';
       graphOpts.scales.x.time.displayFormats.hour = 'dd LT';
-    } else if ($graphs[id].period == 'month') {
+    } else if ($graphs[id].period === 'month') {
       graphOpts.scales.x.time.unit = 'hour';
       graphOpts.scales.x.time.displayFormats.hour = 'D/M LT';
-    } else if ($graphs[id].period == 'year') {
+    } else if ($graphs[id].period === 'year') {
       graphOpts.scales.x.time.unit = 'day';
       graphOpts.scales.x.time.displayFormats.day = 'D/M LT';
     }
@@ -157,10 +157,10 @@
 
   // Make a clone of the general graph settings ??? Not realy working :(
   let graphOpts = { ...graphDefaultOpts };
-  graphOpts.scales.y2.display = ['relays'].indexOf(mode) != -1;
-  graphOpts.scales.y.ticks.stepSize = ['buttons'].indexOf(mode) != -1 ? 1 : null;
-  graphOpts.scales.y.min = ['buttons', 'relays'].indexOf(mode) != -1 ? 0 : null;
-  graphOpts.scales.y2.min = ['relays'].indexOf(mode) != -1 ? 0 : null;
+  graphOpts.scales.y2.display = ['relays'].indexOf(mode) !== -1;
+  graphOpts.scales.y.ticks.stepSize = ['buttons'].indexOf(mode) !== -1 ? 1 : null;
+  graphOpts.scales.y.min = ['buttons', 'relays'].indexOf(mode) !== -1 ? 0 : null;
+  graphOpts.scales.y2.min = ['relays'].indexOf(mode) !== -1 ? 0 : null;
 
   let graphData;
   let loading = true;
@@ -181,7 +181,7 @@
               return point;
             }))
         );
-        nodata = new_data.length == 0;
+        nodata = new_data.length === 0;
 
         if (!nodata) {
           updateGraph(new_data, false);
@@ -210,7 +210,7 @@
               return point;
             }))
         );
-        nodata = new_data.length == 0;
+        nodata = new_data.length === 0;
 
         if (!nodata) {
           updateGraph(new_data, true);

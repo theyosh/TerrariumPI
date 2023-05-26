@@ -34,7 +34,7 @@
 
   const hardwareType = (hardware) => {
     hardware_type = hardware;
-    if (hardware_type == 'brightpi-dimmer') {
+    if (hardware_type === 'brightpi-dimmer') {
       // Change to a fixed default value
       editForm.elements['address'].value = 'fixed';
     }
@@ -151,14 +151,14 @@
   </svelte:fragment>
 
   <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id != '' ? null : true}" />
+    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
 
     <div class="row">
       <div class="col-12 col-sm-12 col-md-6 col-lg-2">
         <Select
           name="hardware"
           value="{$formData.hardware}"
-          readonly="{$formData.id && $formData.id != ''}"
+          readonly="{$formData.id && $formData.id !== ''}"
           on:change="{(value) => hardwareType(value.detail)}"
           required="{true}"
           options="{hardware}"
@@ -174,7 +174,7 @@
           min="1"
           max="40"
           required="{true}"
-          readonly="{hardware_type == 'brightpi-dimmer'}"
+          readonly="{hardware_type === 'brightpi-dimmer'}"
           label="{$_('relays.settings.address.label', { default: 'Address' })}"
           placeholder="{$_('relays.settings.address.placeholder', { default: 'Enter an address' })}"
           help="{$_('relays.settings.address.help', { default: 'For more information see online.' })}"
@@ -248,7 +248,7 @@
         <div class="collapse row pt-3" id="callibration">
           <div
             class="col-6 col-sm-6 col-md-6 col-lg-3"
-            class:d-none="{['brightpi-dimmer', 'remote-dimmer', 'script-dimmer', 'sonoff_d1-dimmer'].indexOf(hardware_type) != -1}">
+            class:d-none="{['brightpi-dimmer', 'remote-dimmer', 'script-dimmer', 'sonoff_d1-dimmer'].indexOf(hardware_type) !== -1}">
             <Field
               type="number"
               name="calibration.dimmer_frequency"
@@ -289,7 +289,7 @@
                 values: { value: 0 },
               })}" />
           </div>
-          {#if ['brightpi-dimmer', 'PCA9685-dimmer', 'remote-dimmer', 'script-dimmer', 'sonoff_d1-dimmer'].indexOf(hardware_type) == -1}
+          {#if ['brightpi-dimmer', 'PCA9685-dimmer', 'remote-dimmer', 'script-dimmer', 'sonoff_d1-dimmer'].indexOf(hardware_type) === -1}
             <div class="col-6 col-sm-6 col-md-6 col-lg-3">
               <Field
                 type="number"

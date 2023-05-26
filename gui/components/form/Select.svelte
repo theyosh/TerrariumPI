@@ -33,7 +33,7 @@
   };
 
   const iconFormat = (state) => {
-    if (!state.id || state.id == '') {
+    if (!state.id || state.id === '') {
       return state.text;
     }
 
@@ -56,7 +56,7 @@
       if (multiple) {
         update = !arrIdentical(old_value, new_value);
       } else {
-        update = old_value != new_value;
+        update = old_value !== new_value;
       }
 
       if (select && (force || update)) {
@@ -129,10 +129,10 @@
           return item.id;
         });
         if (!multiple) {
-          data = data.length == 0 ? null : data[0];
+          data = data.length === 0 ? null : data[0];
         }
 
-        let update = multiple ? !arrIdentical(old_data, data) : old_data != data;
+        let update = multiple ? !arrIdentical(old_data, data) : old_data !== data;
         if (update) {
           changeAction(data);
         }

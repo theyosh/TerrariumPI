@@ -30,6 +30,12 @@
         "label": "Recinto",
         "placeholder": "Seleccionar el recinto"
       },
+      "light_sensors": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
       "mode": {
         "help": "Seleccione el modo de esta área. Esto cambiará el momento y la duración de los relés.",
         "invalid": "Por favor tome una decisión.",
@@ -1332,6 +1338,11 @@
           "help": "Ingrese el valor mínimo húmedo.",
           "invalid": "El valor ingresado no es válido. Debe ser un número más alto que {min}.",
           "label": "Valor mínimo húmedo"
+        },
+        "light_threshold": {
+          "help": "",
+          "invalid": "",
+          "label": ""
         },
         "offset": {
           "help": "Ingrese offset para este sensor.",

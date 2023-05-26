@@ -40,13 +40,13 @@
   let settings = getCustomConfig();
   let sensor_types;
   let enclosures = [];
-  let loading_enclosures = settings.dashboard_mode != 1;
+  let loading_enclosures = settings.dashboard_mode !== 1;
   let enclosures_doors = {};
 
   const updateEnclosureDoors = (buttons) => {
     Object.keys(enclosures_doors).map((enclosure_id) => {
       enclosures_doors[enclosure_id].closed = enclosures_doors[enclosure_id].doors.every(
-        (doorid) => !buttons[doorid] || buttons[doorid].value == 1
+        (doorid) => !buttons[doorid] || buttons[doorid].value === 1
       );
     });
   };
@@ -110,7 +110,7 @@
         });
 
         Object.keys(averages).map((sensor_type) => {
-          if (averages[sensor_type]['value'].length == 0) {
+          if (averages[sensor_type]['value'].length === 0) {
             // All sensors are excluded from average. Ignore this sensor type
             delete(averages[sensor_type]);
           } else {
@@ -120,7 +120,7 @@
             averages[sensor_type]['exclude_avg'] = false;
             averages[sensor_type]['error'] =
               averages[sensor_type]['error'].filter((item) => {
-                return item == true;
+                return item === true;
               }).length > 0;
 
             for (let value of ['value', 'alarm_min', 'alarm_max', 'limit_min', 'limit_max']) {
@@ -177,7 +177,7 @@
     animateHourglass();
 
     let interval = null;
-    if (settings.dashboard_mode != 1) {
+    if (settings.dashboard_mode !== 1) {
       // Reload every 30 seconds the enclosure data
       interval = setInterval(async () => {
         fetchEnclosures(false, (data) => (enclosures = data));
@@ -325,8 +325,8 @@
     </div>
   </div>
 
-  <div class="row" class:flex-row-reverse="{settings.dashboard_mode == 0}">
-    {#if settings.dashboard_mode == 0}
+  <div class="row" class:flex-row-reverse="{settings.dashboard_mode === 0}">
+    {#if settings.dashboard_mode === 0}
       <div class="col-12 col-md-4 col-lg-3">
         <Card loading="{loading_enclosures}" removeParent="{true}">
           <svelte:fragment slot="header">
@@ -340,7 +340,7 @@
       </div>
     {/if}
 
-    {#if settings.dashboard_mode == 2 && enclosures}
+    {#if settings.dashboard_mode === 2 && enclosures}
       {#each enclosures.sort((a, b) => a.name.localeCompare(b.name)) as enclosure, counter}
         <div class="col-12 col-md-6 col-lg-3">
           <Card loading="{loading_enclosures}">

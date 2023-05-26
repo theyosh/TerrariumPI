@@ -94,7 +94,7 @@
       }
       gauge.set($sensors[id].value); // set actual value
       gauge_value =
-        type == 'filesize' ? formatBytes($sensors[id].value) : roundToPrecision($sensors[id].value) + ' ' + settings.units[type].value;
+        type === 'filesize' ? formatBytes($sensors[id].value) : roundToPrecision($sensors[id].value) + ' ' + settings.units[type].value;
       $sensors[id].changed = false;
     }
   }

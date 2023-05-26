@@ -140,14 +140,14 @@
   </svelte:fragment>
 
   <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id != '' ? null : true}" />
+    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
 
     <div class="row">
       <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <Select
           name="hardware"
           value="{$formData.hardware}"
-          readonly="{$formData.id && $formData.id != ''}"
+          readonly="{$formData.id && $formData.id !== ''}"
           on:change="{(value) => hardwareType(value.detail)}"
           required="{true}"
           options="{hardware}"

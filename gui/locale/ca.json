@@ -30,6 +30,12 @@
         "label": "Encerclament",
         "placeholder": "Seleccioneu el recinte"
       },
+      "light_sensors": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
       "mode": {
         "help": "Seleccioneu el mode d'aquesta àrea. Això canviarà el temps i la durada dels relés.",
         "invalid": "Feu una tria.",
@@ -1387,6 +1393,11 @@
           "help": "Introduïu el valor humit mínim.",
           "invalid": "El valor introduït no és vàlid. Ha de ser un nombre més alt que {min}.",
           "label": "Valor humit mínim"
+        },
+        "light_threshold": {
+          "help": "",
+          "invalid": "",
+          "label": ""
         },
         "offset": {
           "help": "Introduïu Offset per a aquest sensor.",

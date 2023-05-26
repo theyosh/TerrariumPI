@@ -30,6 +30,12 @@
         "label": "Anexo",
         "placeholder": "Selecione o gabinete"
       },
+      "light_sensors": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
       "mode": {
         "help": "Selecione o modo deste equipamento. Esta opção altera o tempo e a duração dos relés.",
         "invalid": "Por favor, faça uma escolha.",
@@ -1387,6 +1393,11 @@
           "help": "Digite o valor mínimo úmido.",
           "invalid": "O valor inserido não é válido. Ele precisa ser um número maior e então {min}.",
           "label": "valor mínimo umidade"
+        },
+        "light_threshold": {
+          "help": "",
+          "invalid": "",
+          "label": ""
         },
         "offset": {
           "help": "Insira o valor de compensação para este sensor.",

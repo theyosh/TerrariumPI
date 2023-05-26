@@ -86,7 +86,7 @@
   });
 
   $: {
-    translate_sensor_type = params && params.type != '' ? `.${params.type}` : !enableGraph ? '.all' : '';
+    translate_sensor_type = params && params.type !== '' ? `.${params.type}` : !enableGraph ? '.all' : '';
     setCustomPageTitle($_(`sensors${translate_sensor_type}.title`));
     sensors = [];
     loadData();

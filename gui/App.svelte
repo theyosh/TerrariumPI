@@ -428,7 +428,7 @@
             <svelte:fragment slot="children">
               {#each page.subroutes as sub}
                 {#if !sub.hide}
-                  {#if ['scan_sensors', 'scan_relays', 'system_restart', 'system_reboot', 'system_shutdown'].indexOf(sub.url) != -1}
+                  {#if ['scan_sensors', 'scan_relays', 'system_restart', 'system_reboot', 'system_shutdown'].indexOf(sub.url) !== -1}
                     <li class="nav-item">
                       <a
                         href="{'#'}"
@@ -439,7 +439,7 @@
                         <p>{$_(sub.title)}</p>
                       </a>
                     </li>
-                  {:else if ['new_button', 'new_relay', 'new_sensor', 'new_webcam', 'new_playlist', 'new_enclosure', 'new_area'].indexOf(sub.url) != -1}
+                  {:else if ['new_button', 'new_relay', 'new_sensor', 'new_webcam', 'new_playlist', 'new_enclosure', 'new_area'].indexOf(sub.url) !== -1}
                     <li class="nav-item">
                       <a href="{'#'}" class="nav-link" title="{$_(sub.title)}" on:click|preventDefault="{() => newModal(`${sub.url}`)}">
                         <i class="nav-icon fas {sub.icon}"></i>

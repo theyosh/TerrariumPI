@@ -19,7 +19,7 @@
   let downloading = false;
 
   const show_log_lines = (new_line, text_filter, error_filter, warning_filter) => {
-    if (!logdata || logdata == undefined || logdata == '') {
+    if (!logdata || logdata === undefined || logdata === '') {
       return;
     }
 
@@ -38,8 +38,8 @@
       filters.push('WARNING');
     }
 
-    if (text_filter != '' || filters.length > 0) {
-      if (text_filter != '' && filters.length > 0) {
+    if (text_filter !== '' || filters.length > 0) {
+      if (text_filter !== '' && filters.length > 0) {
         text_filter =
           '(.*' +
           text_filter +
@@ -51,14 +51,14 @@
           ')\\s+-\\s+.*' +
           text_filter +
           '.*)';
-      } else if (text_filter == '' || filters.length > 0) {
+      } else if (text_filter === '' || filters.length > 0) {
         text_filter = '\\s+-\\s+(' + filters.join('|') + ')\\s+-';
       }
 
       text_filter = new RegExp('^.*' + text_filter + '.*', 'img');
       filtered_logdata = logdata.match(text_filter);
 
-      if (filtered_logdata != null) {
+      if (filtered_logdata !== null) {
         filtered_logdata = filtered_logdata.join('\n').trim();
       } else {
         filtered_logdata = '';

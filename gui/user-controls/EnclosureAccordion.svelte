@@ -17,7 +17,7 @@
             </span>
           </h4>
         </div>
-        <div id="enclosure_{enclosure.id}" class="collapse" class:show="{counter == 0}" data-parent="#accordion">
+        <div id="enclosure_{enclosure.id}" class="collapse" class:show="{counter === 0}" data-parent="#accordion">
           <Enclosure enclosure="{enclosure}" />
         </div>
       </div>

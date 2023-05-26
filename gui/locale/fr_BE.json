@@ -30,6 +30,12 @@
         "label": "Enceinte",
         "placeholder": "Sélectionner un boîtier"
       },
+      "light_sensors": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
       "mode": {
         "help": "Sélectionnez le mode de cette zone. Cela modifiera le timing et la durée des relais.",
         "invalid": "Veuillez faire un choix.",
@@ -1387,6 +1393,11 @@
           "help": "Entrez la valeur humide minimale.",
           "invalid": "La valeur entrée n'est pas valide. Il doit être plus élevé alors {min}.",
           "label": "Heures maximales de lumières"
+        },
+        "light_threshold": {
+          "help": "",
+          "invalid": "",
+          "label": ""
         },
         "offset": {
           "help": "Contient la carte son utilisée pour la lecture audio.",

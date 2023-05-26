@@ -30,7 +30,7 @@ export const apiLogin = async (username, password) => {
     }
   })
     .then(response => {
-      if ([200, 302, 303, 307].indexOf(response.status) !== -1 || response.type == 'opaqueredirect') { // Redirect only for dev??
+      if ([200, 302, 303, 307].indexOf(response.status) !== -1 || response.type === 'opaqueredirect') { // Redirect only for dev??
         return true;
       }
       return false;
@@ -46,7 +46,7 @@ const __processData = async (type, url, data, cb, extra_headers) => {
   let body = ['GET', 'HEAD'].indexOf(type) !== -1 ? null : data;
   let postheaders = headers(extra_headers);
 
-  if (type == 'UPLOAD') {
+  if (type === 'UPLOAD') {
     type = 'POST';
     // Make the upload fix there own Content type headers for multipart boundary
     delete (postheaders['Content-Type']);

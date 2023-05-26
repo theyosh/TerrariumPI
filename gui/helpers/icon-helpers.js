@@ -75,6 +75,7 @@ export const template_sensor_type_icon = (type) => {
     case 'light':
     case 'lights':
     case 'main_lights':
+    case 'ldr':
       return 'fas fa-lightbulb';
 
     case 'main lights':
@@ -107,9 +108,6 @@ export const template_sensor_type_icon = (type) => {
 
     case 'magnetic':
       return 'fas fa-lock';
-
-    case 'ldr':
-      return 'fas fa-lightbulb';
 
     case 'motion':
       return 'fas fa-walking';

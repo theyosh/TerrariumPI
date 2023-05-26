@@ -7,9 +7,9 @@ export const animate_footer_badge = (type, number) => {
     return;
   }
 
-  if ('success' != type) {
+  if ('success' !== type) {
     number = animation_badge.text().trim();
-    number = (number != '' ? number : 0);
+    number = (number !== '' ? number : 0);
     number++;
     animation_badge.text(number);
   }

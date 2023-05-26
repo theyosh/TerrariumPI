@@ -290,7 +290,7 @@
     map.getMap().addControl(new ExtraWebcamControls());
 
     if (webcam.is_live) {
-      let hls_url = webcam.hardware.indexOf('remote') != -1 ? webcam.address : `${ApiUrl}/webcam/${webcam.id}/stream.m3u8`;
+      let hls_url = webcam.hardware.indexOf('remote') !== -1 ? webcam.address : `${ApiUrl}/webcam/${webcam.id}/stream.m3u8`;
       L.videoOverlay(
         hls_url,
         L.latLngBounds([
@@ -367,7 +367,7 @@
         {:else}
           <Tooltip options="{{ ...toolTipOptions, ...{ direction: marker.long > 0 ? 'right' : 'left' } }}">
             {#each marker.sensors as sensor_id, counter}
-              {#if counter == 0}
+              {#if counter === 0}
                 <strong>{$sensors[sensor_id].name}</strong>
               {/if}
               {#if $sensors[sensor_id]}

@@ -30,6 +30,12 @@
         "label": "Verblijf",
         "placeholder": "Selecteer behuizing"
       },
+      "light_sensors": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
       "mode": {
         "help": "Selecteer de modus van dit gebied. Dit bepaald de timing en duur van de schakelaars.",
         "invalid": "Maak een keuze.",
@@ -1387,6 +1393,11 @@
           "help": "Voer de minimale vochtige waarde in.",
           "invalid": "De ingevoerde waarde is niet geldig. Het moet een getal hoger zijn dan {min}.",
           "label": "minimale vochtigheidswaarde"
+        },
+        "light_threshold": {
+          "help": "",
+          "invalid": "",
+          "label": ""
         },
         "offset": {
           "help": "Voer de compensatie in voor deze sensor.",

@@ -21,14 +21,14 @@
 <h1 class="pt-3 button">
   <i
     class="fas text-secondary"
-    class:fa-lock="{button.hardware == 'magnetic' && $buttons[button.id].value}"
-    class:fa-lock-open="{button.hardware == 'magnetic' && !$buttons[button.id].value}"
-    class:fa-lightbulb="{button.hardware == 'ldr'}"
-    class:fa-walking="{button.hardware == 'motion'}"
-    class:fa-wifi="{button.hardware == 'remote'}"
+    class:fa-lock="{button.hardware === 'magnetic' && $buttons[button.id].value}"
+    class:fa-lock-open="{button.hardware === 'magnetic' && !$buttons[button.id].value}"
+    class:fa-lightbulb="{button.hardware === 'ldr'}"
+    class:fa-walking="{button.hardware === 'motion'}"
+    class:fa-wifi="{button.hardware === 'remote'}"
     class:text-success="{$buttons[button.id].value}"
     id="{button.id}"
-    class:text-danger="{button.hardware == 'magnetic' && !$buttons[button.id].value}"></i>
+    class:text-danger="{button.hardware === 'magnetic' && !$buttons[button.id].value}"></i>
 </h1>
 
 <style>
