@@ -103,7 +103,7 @@ def check_sqlite3():
 
 def fix_database(database):
   starttime = time.time()
-  print(f'Running recovering database ... ')
+  print('Running recovering database ... ')
 
   os.system(f'sqlite3 {database} .dump | sed "s/ROLLBACK;.*/COMMIT;/" | sqlite3 {database}.new')
 

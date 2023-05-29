@@ -48,9 +48,9 @@ with database:
       database.execute('UPDATE Relay SET id = ? WHERE id = ?',(new_id, old_id))
       print(f'Renamed the ID for relay {relay["name"]}. Old ID {old_id} vs New ID {new_id}')
 
-      print(f'Start updating Relay History')
+      print('Start updating Relay History')
       database.execute('UPDATE RelayHistory SET relay = ? WHERE relay = ?',(new_id, old_id))
-      print(f'Done updating Relay History')
+      print('Done updating Relay History')
 
       areas = database.execute('SELECT id, name, setup FROM Area WHERE setup LIKE ?',(f'%{old_id}%',)).fetchall()
       print(f'Update {len(areas)} enclosure areas')
