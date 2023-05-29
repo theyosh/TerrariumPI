@@ -30,6 +30,14 @@ class terrariumEnclosure(object):
   def relays(self):
     return self.engine.relays
 
+  @property
+  def sensors(self):
+    return self.engine.sensors
+
+  @property
+  def buttons(self):
+    return self.engine.buttons
+
   def __repr__(self):
     return f'Enclosure {self.name} with {len(self.areas)} areas'
 

@@ -316,9 +316,7 @@ class terrariumAPI(object):
   @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def audiofile_detail(self, audiofile):
     try:
-      audiofile = Audiofile[audiofile]
-      audiofile_data = audiofile.to_dict()
-      return audiofile_data
+      return Audiofile[audiofile].to_dict()
     except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Audio file with id {audiofile} does not exists.')
     except Exception as ex:
@@ -429,10 +427,7 @@ class terrariumAPI(object):
   @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def button_detail(self, button):
     try:
-      button = Button[button]
-      button_data = button.to_dict(exclude='enclosure')
-      button_data['value']  = button.value
-      return button_data
+      return Button[button].to_dict(exclude='enclosure')
     except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
     except Exception as ex:
@@ -470,9 +465,8 @@ class terrariumAPI(object):
   def button_delete(self, button):
     try:
       message = f'Button {Button[button]} is deleted.'
-      Button[button].delete()
-      orm.commit()
       self.webserver.engine.delete(terrariumButton,button)
+      Button.select(lambda s: s.id == button).delete(bulk=True)
       return {'message' : message}
     except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Button with id {button} does not exists.')
@@ -653,7 +647,6 @@ class terrariumAPI(object):
 
       del(request.json['delete_image'])
 
-      # TODO: Will this work... not sure....
       self.webserver.engine.update(terrariumEnclosure,**request.json)
 
       request.json['doors'] = doors
@@ -761,10 +754,7 @@ class terrariumAPI(object):
   @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def notification_service_detail(self, service):
     try:
-      service = NotificationService[service]
-      service_data = service.to_dict()
-
-      return service_data
+      return NotificationService[service].to_dict()
     except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Notification service with id {service} does not exists.')
     except Exception as ex:
@@ -1008,8 +998,7 @@ class terrariumAPI(object):
   @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def relay_detail(self, relay):
     try:
-      relay = Relay[relay]
-      return relay.to_dict(exclude='webcam')
+      return Relay[relay].to_dict(exclude='webcam')
     except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
     except Exception as ex:
@@ -1052,11 +1041,8 @@ class terrariumAPI(object):
   def relay_delete(self, relay):
     try:
       message = f'Relay {Relay[relay]} is deleted.'
-      Relay[relay].delete()
-      orm.commit()
-
       self.webserver.engine.delete(terrariumRelay,relay)
-
+      Relay.select(lambda s: s.id == relay).delete(bulk=True)
       return {'message' : message}
     except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
@@ -1158,8 +1144,7 @@ class terrariumAPI(object):
   @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def sensor_detail(self, sensor):
     try:
-      sensor = Sensor[sensor]
-      return sensor.to_dict()
+      return Sensor[sensor].to_dict()
     except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Sensor with id {sensor} does not exists.')
     except Exception as ex:
@@ -1209,9 +1194,8 @@ class terrariumAPI(object):
   def sensor_delete(self, sensor):
     try:
       message = f'Sensor {Sensor[sensor]} is deleted.'
-      Sensor[sensor].delete()
-      orm.commit()
       self.webserver.engine.delete(terrariumSensor,sensor)
+      Sensor.select(lambda s: s.id == sensor).delete(bulk=True)
       return {'message' : message}
     except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Sensor with id {sensor} does not exists.')
@@ -1420,10 +1404,7 @@ class terrariumAPI(object):
   @orm.db_session(sql_debug=DEBUG,show_values=DEBUG)
   def webcam_detail(self, webcam):
     try:
-      webcam = Webcam[webcam]
-      webcam_data = webcam.to_dict(exclude='enclosure',with_collections=True)
-      webcam_data['is_live'] = webcam.is_live
-      return webcam_data
+      return Webcam[webcam].to_dict(exclude='enclosure',with_collections=True)
     except orm.core.ObjectNotFound:
       raise HTTPError(status=404, body=f'Webcam with id {webcam} does not exists.')
     except Exception as ex:

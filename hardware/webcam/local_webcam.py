@@ -29,6 +29,6 @@ class terrariumLocalWebcam(terrariumWebcam):
         img.load()
       return image
     except Exception as e:
-      logger.error(f'Webcam image for {self} is not ready yet')
-      # Raise the exception so the webcam update will try again
-      raise e
+      logger.error(f'Webcam image for {self} is not ready yet: {e}')
+    except OSError as e:
+      logger.error(f'Webcam image for {self} is not ready yet: {e}')

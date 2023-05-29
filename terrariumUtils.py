@@ -13,6 +13,7 @@ import os
 import math
 import asyncio
 import base64
+import collections
 
 from cryptography.fernet import Fernet
 
@@ -403,12 +404,21 @@ class terrariumUtils():
     return data
 
   @staticmethod
-  # https://stackoverflow.com/a/19647596
-  def flatten_dict(dd, separator='_', prefix=''):
-    return { prefix + separator + k if prefix else k : v
-             for kk, vv in list(dd.items())
-             for k, v in list(terrariumUtils.flatten_dict(vv, separator, kk).items())
-             } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else ','.join(dd)}
+  # https://stackoverflow.com/a/62186053
+  def flatten_dict(dictionary, parent_key=False, separator='_'):
+
+    items = []
+    for key, value in dictionary.items():
+        new_key = str(parent_key) + separator + key if parent_key else key
+        if isinstance(value, collections.MutableMapping):
+            items.extend(terrariumUtils.flatten_dict(value, new_key, separator).items())
+        elif isinstance(value, list):
+            for k, v in enumerate(value):
+                items.extend(terrariumUtils.flatten_dict({str(k): v}, new_key, separator).items())
+        else:
+            items.append((new_key, value))
+
+    return dict(items)
 
   @staticmethod
   def format_uptime(value):

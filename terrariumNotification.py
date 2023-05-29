@@ -217,6 +217,13 @@ class terrariumNotification(terrariumSingleton):
         **__DEFAULT_PLACEHOLDERS
       }
     },
+
+    'area_lights_incorrect' : {
+      'name': N_('Lights area wrong state'),
+      'placeholders' : {
+        **__DEFAULT_PLACEHOLDERS
+      }
+    },
   }
 
   __MESSAGES['system_update_error']['placeholders'] = __MESSAGES['system_update_warning']['placeholders']

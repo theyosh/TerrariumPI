@@ -453,23 +453,27 @@ class terrariumEngine(object):
     delete_ok = False
 
     if issubclass(item, terrariumButton):
-      self.buttons[id].stop()
-      del(self.buttons[id])
+      if id in self.buttons:
+        self.buttons[id].stop()
+        del(self.buttons[id])
       delete_ok = True
 
     elif issubclass(item, terrariumRelay):
-      self.relays[id].stop()
-      del(self.relays[id])
+      if id in self.relays:
+        self.relays[id].stop()
+        del(self.relays[id])
       delete_ok = True
 
     elif issubclass(item, terrariumSensor):
-      self.sensors[id].stop()
-      del(self.sensors[id])
+      if id in self.sensors:
+        self.sensors[id].stop()
+        del(self.sensors[id])
       delete_ok = True
 
     elif issubclass(item, terrariumWebcam):
-      self.webcams[id].stop()
-      del(self.webcams[id])
+      if id in self.webcams:
+        self.webcams[id].stop()
+        del(self.webcams[id])
       delete_ok = True
 
     elif issubclass(item, terrariumArea):

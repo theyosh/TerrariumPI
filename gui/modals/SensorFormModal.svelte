@@ -318,70 +318,61 @@
                 default: 'The entered value is not valid. It needs to be number.',
               })}" />
           </div>
-
-          {#if hardware_type === 'chirp'}
-            <div class="col-6 col-sm-6 col-md-6 col-lg-2">
-              <Field
-                type="number"
-                name="calibration.chirp_min_moist"
-                step="0.0001"
-                min="0"
-                horizontal="{false}"
-                label="{$_('sensors.settings.calibration.chirp_min_moist.label', { default: 'Minimum moist value' })}"
-                help="{$_('sensors.settings.calibration.chirp_min_moist.help', { default: 'Enter the minimum moist value.' })}"
-                invalid="{$_('sensors.settings.calibration.chirp_min_moist.invalid', {
-                  default: 'The entered value is not valid. It needs to be number higher then {min}.',
-                  values: { min: 0 },
-                })}" />
-            </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-2">
-              <Field
-                type="number"
-                name="calibration.chirp_max_moist"
-                step="0.0001"
-                min="0"
-                horizontal="{false}"
-                label="{$_('sensors.settings.calibration.chirp_max_moist.label', { default: 'Maximum moist value' })}"
-                help="{$_('sensors.settings.calibration.chirp_max_moist.help', { default: 'Enter the maximum moist value.' })}"
-                invalid="{$_('sensors.settings.calibration.chirp_max_moist.invalid', {
-                  default: 'The entered value is not valid. It needs to be number higher then {min}.',
-                  values: { min: 0 },
-                })}" />
-            </div>
-          {/if}
-
-          {#if hardware_type === 'css811'}
-            <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-              <Select
-                name="calibration.ccs811_compensation_sensors"
-                multiple="{true}"
-                options="{ccs811_compensation_sensors}"
-                label="{$_('sensors.settings.calibration.ccs811_compensation_sensors.label', { default: 'Compensation sensors' })}"
-                placeholder="{$_('sensors.settings.calibration.ccs811_compensation_sensors.placeholder', {
-                  default: 'Select compensation sensors',
-                })}"
-                help="{$_('sensors.settings.calibration.ccs811_compensation_sensors.help', {
-                  default: 'Select the sensors for the compensation calculation.',
-                })}" />
-            </div>
-          {/if}
-
-          {#if sensor_type === 'light'}
-            <div class="col-6 col-sm-6 col-md-6 col-lg-2">
-              <Field
-                type="number"
-                name="calibration.light_on_off_threshold"
-                step="0.0001"
-                min="0"
-                horizontal="{false}"
-                label="{$_('sensors.settings.calibration.light_threshold.label', { default: 'Lights on threshold' })}"
-                help="{$_('sensors.settings.calibration.light_threshold.help', { default: 'Enter the value when considered the lights are on.' })}"
-                invalid="{$_('sensors.settings.calibration.light_threshold.invalid', {
+          <div class="col-6 col-sm-6 col-md-6 col-lg-2" class:d-none={sensor_type !== 'chirp'}>
+            <Field
+              type="number"
+              name="calibration.chirp_min_moist"
+              step="0.0001"
+              min="0"
+              horizontal="{false}"
+              label="{$_('sensors.settings.calibration.chirp_min_moist.label', { default: 'Minimum moist value' })}"
+              help="{$_('sensors.settings.calibration.chirp_min_moist.help', { default: 'Enter the minimum moist value.' })}"
+              invalid="{$_('sensors.settings.calibration.chirp_min_moist.invalid', {
+                default: 'The entered value is not valid. It needs to be number higher then {min}.',
+                values: { min: 0 },
+              })}" />
+          </div>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-2" class:d-none={sensor_type !== 'chirp'}>
+            <Field
+              type="number"
+              name="calibration.chirp_max_moist"
+              step="0.0001"
+              min="0"
+              horizontal="{false}"
+              label="{$_('sensors.settings.calibration.chirp_max_moist.label', { default: 'Maximum moist value' })}"
+              help="{$_('sensors.settings.calibration.chirp_max_moist.help', { default: 'Enter the maximum moist value.' })}"
+              invalid="{$_('sensors.settings.calibration.chirp_max_moist.invalid', {
+                default: 'The entered value is not valid. It needs to be number higher then {min}.',
+                values: { min: 0 },
+              })}" />
+          </div>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-4" class:d-none={sensor_type !== 'css811'}>
+            <Select
+              name="calibration.ccs811_compensation_sensors"
+              multiple="{true}"
+              options="{ccs811_compensation_sensors}"
+              label="{$_('sensors.settings.calibration.ccs811_compensation_sensors.label', { default: 'Compensation sensors' })}"
+              placeholder="{$_('sensors.settings.calibration.ccs811_compensation_sensors.placeholder', {
+                default: 'Select compensation sensors',
+              })}"
+              help="{$_('sensors.settings.calibration.ccs811_compensation_sensors.help', {
+                default: 'Select the sensors for the compensation calculation.',
+              })}" />
+          </div>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-2" class:d-none={sensor_type !== 'light'}>
+            <Field
+              type="number"
+              name="calibration.light_on_off_threshold"
+              step="0.0001"
+              min="0"
+              horizontal="{false}"
+              label="{$_('sensors.settings.calibration.light_threshold.label', { default: 'Lights on threshold' })}"
+              help="{$_('sensors.settings.calibration.light_threshold.help', { default: 'Enter the value when considered the lights are on.' })}"
+              invalid="{$_('sensors.settings.calibration.light_threshold.invalid', {
                   default: 'The entered value is not valid. It needs to be number higher then {min}.',
                   values: { min: 0 },
               })}" />
-            </div>
-          {/if}
+          </div>
         </div>
       </div>
     </div>

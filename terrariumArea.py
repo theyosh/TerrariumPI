@@ -17,7 +17,7 @@ from simple_pid import PID
 
 from pony import orm
 from terrariumAudio import terrariumAudioPlayer
-from terrariumDatabase import Sensor, Playlist, Relay
+from terrariumDatabase import Sensor, Playlist, Relay, Button, Area
 from terrariumUtils import terrariumCache, terrariumUtils, classproperty
 
 class terrariumAreaException(TypeError):
@@ -852,8 +852,48 @@ class terrariumAreaLights(terrariumArea):
 
   PERIODS = ['day','night']
 
+  def _relay_action(self, part, relay, action):
+    if relay.id not in self.enclosure.relays:
+      return
+
+    duration = 0
+    delay = 0
+
+    try:
+      tweaks = self.setup[part]['tweaks'][f'{relay.id}']['on' if action else 'off']
+      duration = tweaks['duration']
+      delay = tweaks['delay']
+    except Exception as ex:
+      logger.debug(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}, error: {ex}')
+
+    if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
+      delay = 0
+
+    if relay.is_dimmer:
+      step_size = duration / (relay.ON - relay.OFF)
+      duration = step_size * abs((relay.ON if action else relay.OFF) - relay.state)
+      old_state = relay.state
+      action_ok = self.enclosure.relays[f'{relay.id}'].on(relay.ON if action else relay.OFF, duration=duration, delay=delay)
+
+      if action_ok:
+        if action:
+          logger.info(f'Start the dimmer {relay.name} from {old_state}% to {relay.ON}% in {duration:.2f} seconds with a delay of {delay/60:.2f} minutes')
+        else:
+          logger.info(f'Stopping the dimmer {relay.name} from {old_state}% to {relay.OFF}% in {duration:.2f} seconds with a delay of {delay/60:.2f} minutes')
+
+    else:
+      action_ok = self.enclosure.relays[f'{relay.id}'].on(relay.ON if action else relay.OFF, delay=delay)
+
+      if action_ok:
+        logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF} with a delay of {delay/60:.2f} minutes')
+
   def load_setup(self, data):
     super().load_setup(data)
+
+    # Check and load optional light detecting sensors
+    self.setup['light_sensors'] = []
+    if 'light_sensors' in data:
+      self.setup['light_sensors'] = data['light_sensors']
 
     # Load extra tweaks
     for period in self.PERIODS:
@@ -941,40 +981,120 @@ class terrariumAreaLights(terrariumArea):
 
     self.state['powered'] = self._powered
 
-  def _relay_action(self, part, relay, action):
-    if relay.id not in self.enclosure.relays:
+
+  def update(self, read_only = False):
+    super().update(read_only)
+
+    if read_only:
       return
 
-    duration = 0
-    delay = 0
+    light_sensor = self.light_sensors_on()
+    if light_sensor is not None and light_sensor != self.state['day']['powered']:
+      data = {
+        'current_state' : self.state['day']['powered'],
+        'sensor_state'  : light_sensor
+      }
 
-    try:
-      tweaks = self.setup[part]['tweaks'][f'{relay.id}']['on' if action else 'off']
-      duration = tweaks['duration']
-      delay = tweaks['delay']
-    except Exception as ex:
-      logger.debug(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}, error: {ex}')
+      data = {**data, **terrariumUtils.flatten_dict(Area[self.id].to_dict())}
+# Example data:
+# {
+#   "current_state": true,
+#   "sensor_state": false,
+#   "id": "6f2ea912-8ac8-4985-a21d-c2f3686bae62",
+#   "enclosure": "08fba68a-05ff-4ae6-9265-a95c70885c52",
+#   "name": "Day light",
+#   "type": "lights",
+#   "mode": "weather",
+#   "setup_day_begin": "06:15",
+#   "setup_day_end": "20:55",
+#   "setup_day_off_duration": 559.666666666667,
+#   "setup_day_on_duration": 880.333333333333,
+#   "setup_day_relays_0": "379856a83bce28484f1d07bd98c3c108",
+#   "setup_day_relays_1": "a8df016cae5e89a65ba4576d49c676c3",
+#   "setup_day_tweaks_0_id": "379856a83bce28484f1d07bd98c3c108",
+#   "setup_day_tweaks_0_off": 20,
+#   "setup_day_tweaks_0_on": 10,
+#   "setup_day_tweaks_1_id": "a8df016cae5e89a65ba4576d49c676c3",
+#   "setup_day_tweaks_1_off": "0,30",
+#   "setup_day_tweaks_1_on": "23,65",
+#   "setup_light_sensors_0": "5621daae6bbfb47aed28707b3c3d9dfa",
+#   "setup_light_sensors_1": "0f39ec8d27d84c7ea6a7149e7453ca68",
+#   "setup_main_lights": "on",
+#   "setup_max_day_hours": 0,
+#   "setup_min_day_hours": 0,
+#   "setup_night_begin": "20:55",
+#   "setup_night_end": "06:15",
+#   "setup_night_off_duration": 880.333333333333,
+#   "setup_night_on_duration": 559.666666666667,
+#   "setup_night_relays_0": "34c655ec648d0720ef2e259522e70e22",
+#   "setup_night_tweaks_0_id": "34c655ec648d0720ef2e259522e70e22",
+#   "setup_night_tweaks_0_off": 54,
+#   "setup_night_tweaks_0_on": 19,
+#   "setup_shift_day_hours": 0,
+#   "state_day_alarm_count": 0,
+#   "state_day_begin": 1673592972,
+#   "state_day_duration": 34804,
+#   "state_day_end": 1673627776,
+#   "state_day_last_powered_on": 1673625263,
+#   "state_day_powered": true,
+#   "state_is_day": true,
+#   "state_last_update": 1673625520,
+#   "state_night_alarm_count": 0,
+#   "state_night_begin": 1673627776,
+#   "state_night_duration": 51577,
+#   "state_night_end": 1673679353,
+#   "state_night_last_powered_on": -3600,
+#   "state_night_powered": false,
+#   "state_night_timer_on": false,
+#   "state_powered": true
+# }
 
-    if (relay.ON if action else relay.OFF) != relay.state and self.state[part]['powered'] == action:
-      delay = 0
+      logger.warning(f'Area {self} lights are at incorrect state based on sensors. Current state {"on" if light_sensor else "off"} where it should be {"off" if light_sensor else "on"}')
+      self.enclosure.engine.notification.message('area_lights_incorrect', data)
 
-    if relay.is_dimmer:
-      step_size = duration / (relay.ON - relay.OFF)
-      duration = step_size * abs((relay.ON if action else relay.OFF) - relay.state)
-      old_state = relay.state
-      action_ok = self.enclosure.relays[f'{relay.id}'].on(relay.ON if action else relay.OFF, duration=duration, delay=delay)
+  def light_sensors_on(self):
+    if len(self.setup['light_sensors']) == 0:
+      # No sensors selected, so ignore this test and return None
+      logger.debug(f'Area {self} has no light sensors. Ignore light test.')
+      return None
 
-      if action_ok:
-        if action:
-          logger.info(f'Start the dimmer {relay.name} from {old_state}% to {relay.ON}% in {duration:.2f} seconds with a delay of {delay/60:.2f} minutes')
-        else:
-          logger.info(f'Stopping the dimmer {relay.name} from {old_state}% to {relay.OFF}% in {duration:.2f} seconds with a delay of {delay/60:.2f} minutes')
+    values = {'current' : [], 'threshold' : [], 'buttons' : []}
+    devices = Sensor.select(lambda s: s.id in self.setup['light_sensors'])[:] + Button.select(lambda b: b.id in self.setup['light_sensors'])[:]
+    for sensor in devices:
+      # Sensor needs to be operating correctly
+      if sensor.id in self.enclosure.sensors and sensor.calibration.get('light_on_off_threshold', False) and sensor.error is False:
+        values['current'].append(sensor.value)
+        values['threshold'].append(sensor.calibration['light_on_off_threshold'])
 
+      elif sensor.id in self.enclosure.buttons and sensor.error is False:
+        values['buttons'].append(sensor.value)
+
+    if len(values['current']) == 0 and len(values['buttons']) == 0:
+      # No valid sensors or buttons, so ignore this test and return None
+      logger.debug(f'Area {self} has no valid light sensors. Ignore light test.')
+      return None
+
+    # Calculate averages
+    if len(values['current']) > 0:
+      values['current']   = statistics.mean(values['current'])
+      values['threshold'] = statistics.mean(values['threshold'])
     else:
-      action_ok = self.enclosure.relays[f'{relay.id}'].on(relay.ON if action else relay.OFF, delay=delay)
+      del(values['current'])
+      del(values['threshold'])
 
-      if action_ok:
-        logger.info(f'Set the relay {relay.name} to {relay.ON if action else relay.OFF} with a delay of {delay/60:.2f} minutes')
+    if len(values['buttons']) > 0:
+      amount_buttons = len(values['buttons'])
+      values['buttons'] = [1 for value in values['buttons'] if value]
+      values['buttons'] = len(values['buttons']) >= amount_buttons / 2.0
+    else:
+      del(values['buttons'])
+
+    if 'buttons' not in values:
+      return values['current'] >= values['threshold']
+    elif 'current' not in values:
+      return values['buttons']
+    else:
+      return values['current'] >= values['threshold'] and values['buttons']
 
 class terrariumAreaHeater(terrariumArea):
 

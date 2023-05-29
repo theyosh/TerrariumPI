@@ -130,6 +130,9 @@ class Area(db.Entity):
 
   state     = orm.Optional(orm.Json)
 
+  def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    return copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+
   def __repr__(self):
     return f'Area {self.type} {self.name} in {self.mode} mode, part of {self.enclosure}'
 
@@ -452,7 +455,7 @@ class Sensor(db.Entity):
     try:
       return float(self.calibration.get('offset', 0.0))
     except Exception:
-      return 0
+      return 0.0
 
   @property
   def alarm(self):
@@ -604,8 +607,9 @@ class Webcam(db.Entity):
   def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
     data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
     # Add extra fields
-    data['archive_path']  = self.archive_path
-    data['raw_image']  = self.raw_image
+    data['archive_path'] = self.archive_path
+    data['raw_image']    = self.raw_image
+    data['is_live']      = self.is_live
 
     return data
 

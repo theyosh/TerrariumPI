@@ -204,7 +204,7 @@ class terrariumRelay(object):
   def state(self):
     return self._device['value']
 
-  def set_state(self, new_state, force = False):
+  def set_state(self, new_state, force = False, no_callback = False):
     if new_state is None or not (self.OFF <= new_state <= self.ON):
       logger.error(f'Illegal value for relay {self}: {new_state}')
       return False
@@ -225,7 +225,7 @@ class terrariumRelay(object):
         # Fix is to add power and water usage in constructor
         changed = old_state != self.state
 
-    if changed and self.callback is not None:
+    if changed and not no_callback and self.callback is not None:
       self.callback(self.id, new_state)
 
     return changed
@@ -336,7 +336,7 @@ class terrariumRelayDimmer(terrariumRelay):
     # https://github.com/theyosh/TerrariumPI/issues/798
     # This seems to work, and therefore enable it for all dimmers
     if to < 1.0:
-      self.set_state(5)
+      self.set_state(5, True, True)
     # Force the 'to' value at the end to make sure the dimmer is at the actual value
     self.set_state(to)
 
