@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-12-27 11:26+CET\n"
+"POT-Creation-Date: 2023-05-29 23:20+CEST\n"
 "PO-Revision-Date: 2022-08-22 11:42+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
@@ -146,47 +146,47 @@ msgstr "Potenza in watt"
 msgid "powerusage"
 msgstr "Consumo di elettricità della Pi"
 
-#: terrariumEngine.py:1183
+#: terrariumEngine.py:1188
 msgid "Up time"
 msgstr "Tempo di funzionamento"
 
-#: terrariumEngine.py:1189
+#: terrariumEngine.py:1194
 msgid "System load"
 msgstr "Carico del sistema"
 
-#: terrariumEngine.py:1195
+#: terrariumEngine.py:1200
 msgid "CPU Temperature"
 msgstr "Temperatura CPU"
 
-#: terrariumEngine.py:1201
+#: terrariumEngine.py:1206
 msgid "Storage"
 msgstr "Memoria"
 
-#: terrariumEngine.py:1207
+#: terrariumEngine.py:1212
 msgid "Memory"
 msgstr "Memoria"
 
-#: terrariumEngine.py:1228
+#: terrariumEngine.py:1233
 msgid "average {sensor_type}"
 msgstr "media {sensor_type}"
 
-#: terrariumEngine.py:1312
+#: terrariumEngine.py:1317
 msgid "Version"
 msgstr "Versione"
 
-#: terrariumEngine.py:1322 terrariumWebserver.py:394
+#: terrariumEngine.py:1327 terrariumWebserver.py:394
 msgid "A new version ({version}) is available!"
 msgstr "Una nuova versione ([versione]) è disponibile!"
 
-#: terrariumEngine.py:1366 terrariumEngine.py:1396
+#: terrariumEngine.py:1371 terrariumEngine.py:1401
 msgid "Current active relays"
 msgstr "Relè attivi correnti"
 
-#: terrariumEngine.py:1367
+#: terrariumEngine.py:1372
 msgid "Watt"
 msgstr "Watt"
 
-#: terrariumEngine.py:1405
+#: terrariumEngine.py:1410
 msgid "last update"
 msgstr "ultimo aggiornamento"
 
@@ -436,31 +436,35 @@ msgstr "Azione pulsante"
 msgid "Webcam archive"
 msgstr "Archivio webcam"
 
-#: terrariumNotification.py:428
+#: terrariumNotification.py:222
+msgid "Lights area wrong state"
+msgstr ""
+
+#: terrariumNotification.py:437
 msgid "Display"
 msgstr "Visualizzazione"
 
-#: terrariumNotification.py:432
+#: terrariumNotification.py:441
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:442
+#: terrariumNotification.py:451
 msgid "Traffic light"
 msgstr "Semaforo"
 
-#: terrariumNotification.py:446
+#: terrariumNotification.py:455
 msgid "Web-hook"
 msgstr "Web-hook"
 
-#: terrariumNotification.py:450
+#: terrariumNotification.py:459
 msgid "MQTT"
 msgstr "MQTT"
 
-#: terrariumNotification.py:454
+#: terrariumNotification.py:463
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:458
+#: terrariumNotification.py:467
 msgid "Buzzer"
 msgstr "Buzzer (cicalino)"
 
@@ -480,6 +484,6 @@ msgstr "TerrariumPi"
 msgid "Software Update"
 msgstr "Aggiornamento software"
 
-#: terrariumNotification.py:437
+#: terrariumNotification.py:446
 msgid "Telegram"
 msgstr "Telegram"
