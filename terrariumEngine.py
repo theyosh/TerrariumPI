@@ -89,20 +89,20 @@ class terrariumEngine(object):
     self.version = version
     self.latest_version = None
     self.update_available = False
+    self.weather = None
+    # Dirty hack... :(
+    self.device = re.search(r'Model\s+:\s+(?P<device>.*)', Path('/proc/cpuinfo').read_text()).group('device')
     init_db(self.version)
 
     # Send message that startup is ready..... else the startup will wait until done.... can take more then 1 minute
     self.__engine['systemd'].notify('READY=1')
-
     self.running = True
 
     # Make the first round of logging visible to the console, as this is the startup
     old_log_level = terrariumLogging.logging.getLogger().handlers[0].level
     terrariumLogging.logging.getLogger().handlers[0].setLevel(terrariumLogging.logging.INFO)
-    logger.info(f'Starting TerrariumPI {self.version} ...')
-
-    # Add 'empty' weather object
-    self.weather = None
+    startup_message = f'Starting up TerrariumPI {self.version} on a {self.device} ...'
+    logger.info(startup_message)
 
     # Load settings. This will also load the weather data if available
     self.load_settings()
@@ -111,7 +111,6 @@ class terrariumEngine(object):
     self.notification = terrariumNotification()
     self.notification.engine = self
     self.notification.load_services()
-    startup_message = f'Starting up TerrariumPI {self.version} ...'
     self.notification.broadcast(startup_message, startup_message, self.settings['profile_image'])
 
     # Load Web server, as we need it for websocket communication (even when the web server is not yet started)
