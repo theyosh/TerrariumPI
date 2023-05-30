@@ -23,12 +23,21 @@ class terrariumCalendar(object):
       self.create_event(
         None,
         'TerrariumPI initial github commit',
-        'First commit on Github',
+        '<p>First commit on Github</p>',
         'https://github.com/theyosh/TerrariumPI/commit/526d39a9ceac57768c6fffe6ffe19afd71782952',
         datetime(2016,1,14,0,0,0,0,timezone.utc)
       )
 
     self.__ical = Calendar.from_ical(self.__ICS_FILE.read_bytes())
+
+    if self.get_event('10-years-celebration') == False:
+        self.create_event(
+          '10-years-celebration',
+          'TerrariumPI 10 year celebration',
+          '<p>Software is 10 years on Github!</p>',
+          'https://github.com/theyosh/TerrariumPI/',
+          datetime(2026,1,14,0,0,0,0,timezone.utc)
+        )
 
   def __event_schema(self,item):
     event = {'uid'         : str(item.get('uid')),
@@ -66,14 +75,14 @@ class terrariumCalendar(object):
     return return_data
 
   def create_event(self, uid, summary, description, location = None, dtstart = None, dtend = None, freq = None, interval = None, repeat_end = None):
-    create = uid is None or uid == ''
+    create = self.get_event(uid) == False
 
     if dtstart is None:
-      dtstart = datetime.now(timezone.utc)
+      dtstart = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
 
     if dtend is None:
       # One day event
-      dtend = dtstart
+      dtend = dtstart + timedelta(days=1)
 
     event = Event()
     if create:
