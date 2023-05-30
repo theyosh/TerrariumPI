@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2022-12-27 11:26+CET\n"
+"POT-Creation-Date: 2023-05-29 23:20+CEST\n"
 "PO-Revision-Date: 2022-09-11 11:04+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Japanese <https://weblate.theyosh.nl/projects/terrariumpi/"
@@ -158,52 +158,52 @@ msgstr "ワット数"
 msgid "powerusage"
 msgstr "電力消費量合計"
 
-#: terrariumEngine.py:1183
+#: terrariumEngine.py:1188
 msgid "Up time"
 msgstr "稼働時間"
 
-#: terrariumEngine.py:1189
+#: terrariumEngine.py:1194
 #, fuzzy
 msgid "System load"
 msgstr "システム負荷"
 
-#: terrariumEngine.py:1195
+#: terrariumEngine.py:1200
 msgid "CPU Temperature"
 msgstr "CPU温度"
 
-#: terrariumEngine.py:1201
+#: terrariumEngine.py:1206
 msgid "Storage"
 msgstr "ストレージ"
 
-#: terrariumEngine.py:1207
+#: terrariumEngine.py:1212
 msgid "Memory"
 msgstr "メモリー"
 
-#: terrariumEngine.py:1228
+#: terrariumEngine.py:1233
 msgid "average {sensor_type}"
 msgstr "平均{sensor_type}"
 
-#: terrariumEngine.py:1312
+#: terrariumEngine.py:1317
 msgid "Version"
 msgstr ""
 
-#: terrariumEngine.py:1322 terrariumWebserver.py:394
+#: terrariumEngine.py:1327 terrariumWebserver.py:394
 msgid "A new version ({version}) is available!"
 msgstr ""
 
-#: terrariumEngine.py:1366 terrariumEngine.py:1396
+#: terrariumEngine.py:1371 terrariumEngine.py:1401
 #, fuzzy
 #| msgid "Water flow"
 msgid "Current active relays"
 msgstr "水流量"
 
-#: terrariumEngine.py:1367
+#: terrariumEngine.py:1372
 #, fuzzy
 #| msgid "Wattage"
 msgid "Watt"
 msgstr "ワット数"
 
-#: terrariumEngine.py:1405
+#: terrariumEngine.py:1410
 msgid "last update"
 msgstr "最新更新"
 
@@ -495,33 +495,37 @@ msgstr "ボタン設定"
 msgid "Webcam archive"
 msgstr ""
 
-#: terrariumNotification.py:428
+#: terrariumNotification.py:222
+msgid "Lights area wrong state"
+msgstr ""
+
+#: terrariumNotification.py:437
 msgid "Display"
 msgstr "表示器"
 
-#: terrariumNotification.py:432
+#: terrariumNotification.py:441
 msgid "Email"
 msgstr "メール"
 
-#: terrariumNotification.py:442
+#: terrariumNotification.py:451
 #, fuzzy
 msgid "Traffic light"
 msgstr "信号灯"
 
-#: terrariumNotification.py:446
+#: terrariumNotification.py:455
 #, fuzzy
 msgid "Web-hook"
 msgstr "Webフック"
 
-#: terrariumNotification.py:450
+#: terrariumNotification.py:459
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:454
+#: terrariumNotification.py:463
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:458
+#: terrariumNotification.py:467
 msgid "Buzzer"
 msgstr ""
 
@@ -545,7 +549,7 @@ msgstr "TerrariumPI"
 msgid "Software Update"
 msgstr "最新更新"
 
-#: terrariumNotification.py:437
+#: terrariumNotification.py:446
 msgid "Telegram"
 msgstr "Telegram"
 
