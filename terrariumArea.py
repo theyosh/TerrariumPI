@@ -753,10 +753,7 @@ class terrariumArea(object):
       elif toggle_relay is False and not self.relays_state(period, False) and not self.state[period].get('timer_on',False):
         self.relays_toggle(period,False)
 
-      # else:
-      #   # Just update the current relay state
-      #   print('No area action.. so NO update....')
-      #   #self.state[period]['powered'] = self.relays_state(period)
+      self.state[period]['powered'] = self.relays_state(period)
 
     self.state['powered'] = self._powered
     self.state['last_update'] = int(datetime.datetime.now().timestamp())
@@ -985,8 +982,8 @@ class terrariumAreaLights(terrariumArea):
   def update(self, read_only = False):
     super().update(read_only)
 
-    if read_only:
-      return
+    if read_only or self.mode == 'disabled':
+      return self.state
 
     light_sensor = self.light_sensors_on()
     if light_sensor is not None and light_sensor != self.state['day']['powered']:
@@ -996,61 +993,63 @@ class terrariumAreaLights(terrariumArea):
       }
 
       data = {**data, **terrariumUtils.flatten_dict(Area[self.id].to_dict())}
-# Example data:
-# {
-#   "current_state": true,
-#   "sensor_state": false,
-#   "id": "6f2ea912-8ac8-4985-a21d-c2f3686bae62",
-#   "enclosure": "08fba68a-05ff-4ae6-9265-a95c70885c52",
-#   "name": "Day light",
-#   "type": "lights",
-#   "mode": "weather",
-#   "setup_day_begin": "06:15",
-#   "setup_day_end": "20:55",
-#   "setup_day_off_duration": 559.666666666667,
-#   "setup_day_on_duration": 880.333333333333,
-#   "setup_day_relays_0": "379856a83bce28484f1d07bd98c3c108",
-#   "setup_day_relays_1": "a8df016cae5e89a65ba4576d49c676c3",
-#   "setup_day_tweaks_0_id": "379856a83bce28484f1d07bd98c3c108",
-#   "setup_day_tweaks_0_off": 20,
-#   "setup_day_tweaks_0_on": 10,
-#   "setup_day_tweaks_1_id": "a8df016cae5e89a65ba4576d49c676c3",
-#   "setup_day_tweaks_1_off": "0,30",
-#   "setup_day_tweaks_1_on": "23,65",
-#   "setup_light_sensors_0": "5621daae6bbfb47aed28707b3c3d9dfa",
-#   "setup_light_sensors_1": "0f39ec8d27d84c7ea6a7149e7453ca68",
-#   "setup_main_lights": "on",
-#   "setup_max_day_hours": 0,
-#   "setup_min_day_hours": 0,
-#   "setup_night_begin": "20:55",
-#   "setup_night_end": "06:15",
-#   "setup_night_off_duration": 880.333333333333,
-#   "setup_night_on_duration": 559.666666666667,
-#   "setup_night_relays_0": "34c655ec648d0720ef2e259522e70e22",
-#   "setup_night_tweaks_0_id": "34c655ec648d0720ef2e259522e70e22",
-#   "setup_night_tweaks_0_off": 54,
-#   "setup_night_tweaks_0_on": 19,
-#   "setup_shift_day_hours": 0,
-#   "state_day_alarm_count": 0,
-#   "state_day_begin": 1673592972,
-#   "state_day_duration": 34804,
-#   "state_day_end": 1673627776,
-#   "state_day_last_powered_on": 1673625263,
-#   "state_day_powered": true,
-#   "state_is_day": true,
-#   "state_last_update": 1673625520,
-#   "state_night_alarm_count": 0,
-#   "state_night_begin": 1673627776,
-#   "state_night_duration": 51577,
-#   "state_night_end": 1673679353,
-#   "state_night_last_powered_on": -3600,
-#   "state_night_powered": false,
-#   "state_night_timer_on": false,
-#   "state_powered": true
-# }
+        # Example data:
+        # {
+        #   "current_state": true,
+        #   "sensor_state": false,
+        #   "id": "6f2ea912-8ac8-4985-a21d-c2f3686bae62",
+        #   "enclosure": "08fba68a-05ff-4ae6-9265-a95c70885c52",
+        #   "name": "Day light",
+        #   "type": "lights",
+        #   "mode": "weather",
+        #   "setup_day_begin": "06:15",
+        #   "setup_day_end": "20:55",
+        #   "setup_day_off_duration": 559.666666666667,
+        #   "setup_day_on_duration": 880.333333333333,
+        #   "setup_day_relays_0": "379856a83bce28484f1d07bd98c3c108",
+        #   "setup_day_relays_1": "a8df016cae5e89a65ba4576d49c676c3",
+        #   "setup_day_tweaks_0_id": "379856a83bce28484f1d07bd98c3c108",
+        #   "setup_day_tweaks_0_off": 20,
+        #   "setup_day_tweaks_0_on": 10,
+        #   "setup_day_tweaks_1_id": "a8df016cae5e89a65ba4576d49c676c3",
+        #   "setup_day_tweaks_1_off": "0,30",
+        #   "setup_day_tweaks_1_on": "23,65",
+        #   "setup_light_sensors_0": "5621daae6bbfb47aed28707b3c3d9dfa",
+        #   "setup_light_sensors_1": "0f39ec8d27d84c7ea6a7149e7453ca68",
+        #   "setup_main_lights": "on",
+        #   "setup_max_day_hours": 0,
+        #   "setup_min_day_hours": 0,
+        #   "setup_night_begin": "20:55",
+        #   "setup_night_end": "06:15",
+        #   "setup_night_off_duration": 880.333333333333,
+        #   "setup_night_on_duration": 559.666666666667,
+        #   "setup_night_relays_0": "34c655ec648d0720ef2e259522e70e22",
+        #   "setup_night_tweaks_0_id": "34c655ec648d0720ef2e259522e70e22",
+        #   "setup_night_tweaks_0_off": 54,
+        #   "setup_night_tweaks_0_on": 19,
+        #   "setup_shift_day_hours": 0,
+        #   "state_day_alarm_count": 0,
+        #   "state_day_begin": 1673592972,
+        #   "state_day_duration": 34804,
+        #   "state_day_end": 1673627776,
+        #   "state_day_last_powered_on": 1673625263,
+        #   "state_day_powered": true,
+        #   "state_is_day": true,
+        #   "state_last_update": 1673625520,
+        #   "state_night_alarm_count": 0,
+        #   "state_night_begin": 1673627776,
+        #   "state_night_duration": 51577,
+        #   "state_night_end": 1673679353,
+        #   "state_night_last_powered_on": -3600,
+        #   "state_night_powered": false,
+        #   "state_night_timer_on": false,
+        #   "state_powered": true
+        # }
 
       logger.warning(f'Area {self} lights are at incorrect state based on sensors. Current state {"on" if light_sensor else "off"} where it should be {"off" if light_sensor else "on"}')
       self.enclosure.engine.notification.message('area_lights_incorrect', data)
+
+    return self.state
 
   def light_sensors_on(self):
     if len(self.setup['light_sensors']) == 0:
