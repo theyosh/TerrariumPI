@@ -1,5 +1,5 @@
 export const updateSiteBar = () => {
-  const url = window.location.hash;
+  const url = window.location.hash + (window.location.hash.substring(-1) !== '/' ? '/' : '');
   const sidebar = jQuery('ul.nav-sidebar');
   const menuitem = sidebar.find('a[href="' + url + '"]');
 
