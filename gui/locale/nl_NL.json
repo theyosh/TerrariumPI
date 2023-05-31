@@ -31,10 +31,10 @@
         "placeholder": "Selecteer behuizing"
       },
       "light_sensors": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Selecteer de lichtsensoren om te detecteren of de lichten branden.",
+        "invalid": "Maak een keuze.",
+        "label": "Lichtdetectiesensoren",
+        "placeholder": "Lichtsensoren selecteren"
       },
       "mode": {
         "help": "Selecteer de modus van dit gebied. Dit bepaald de timing en duur van de schakelaars.",
@@ -109,7 +109,7 @@
           },
           "door_status": {
             "help": "Selecteer de deurstatus.",
-            "invalid": "Maak alstublieft een keuze.",
+            "invalid": "Maak een keuze.",
             "label": "Deur status",
             "options": {
               "closed": "Gesloten",
@@ -369,7 +369,7 @@
             "placeholder": "Verschil"
           },
           "when": {
-            "invalid": "Maak alstublieft een keuze.",
+            "invalid": "Maak een keuze.",
             "options": {
               "after": "Na x minuten",
               "at": "Op tijd",
@@ -1386,7 +1386,7 @@
         },
         "chirp_max_moist": {
           "help": "Voer de maximale vochtige waarde in.",
-          "invalid": "De ingevoerde waarde is niet geldig. Het moet nummer hoger zijn dan {min}.",
+          "invalid": "De ingevoerde waarde is niet geldig. Het moet een getal hoger zijn dan {min}.",
           "label": "Minimale vochtwaarde"
         },
         "chirp_min_moist": {
@@ -1395,9 +1395,9 @@
           "label": "minimale vochtigheidswaarde"
         },
         "light_threshold": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Voer de waarde in als de lampen branden.",
+          "invalid": "De ingevoerde waarde is niet geldig. Het moet een getal hoger zijn dan {min}.",
+          "label": "Lichten aan waarde"
         },
         "offset": {
           "help": "Voer de compensatie in voor deze sensor.",
@@ -1435,7 +1435,7 @@
       },
       "max_diff": {
         "help": "Voer het maximale verschil in tussen twee metingen die geldig zijn. Voer '0' in om uit te schakelen.",
-        "invalid": "De ingevoerde waarde is niet geldig. Het moet nummer hoger zijn dan {min}.",
+        "invalid": "De ingevoerde waarde is niet geldig. Het moet een getal hoger zijn dan {min}.",
         "label": "Max verschil",
         "placeholder": "Max verschil"
       },
@@ -1696,7 +1696,7 @@
       },
       "dashboard_mode": {
         "help": "Selecteer hoe het dashboard eruit ziet.",
-        "invalid": "Maak alstublieft een keuze.",
+        "invalid": "Maak een keuze.",
         "label": "Dashboard-modus",
         "options": {
           "normal": "Grafieken en verblijven",
@@ -1985,7 +1985,7 @@
       "archive": {
         "door": {
           "help": "Deurstatus voor het maken van een archiefbeeld.",
-          "invalid": "Maak alstublieft een keuze.",
+          "invalid": "Maak een keuze.",
           "label": "Archief deur status",
           "options": {
             "close": "Sluiten",
