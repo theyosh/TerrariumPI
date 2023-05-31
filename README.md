@@ -118,7 +118,7 @@ The software has support for the following languages:
 
 [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/multi-auto.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 
-Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
+Your language not in the list or not up to date? [Create your own language translation](https://theyosh.github.io/TerrariumPI/translations/)
 
 ## Installation
 
