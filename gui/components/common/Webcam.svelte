@@ -4,15 +4,16 @@
   import { LeafletMap, TileLayer, Marker, Tooltip, DivIcon } from 'svelte-leafletjs';
   import 'leaflet/dist/leaflet.css';
 
+  import { Fancybox } from '@fancyapps/ui';
+  import '@fancyapps/ui/dist/fancybox/fancybox.css';
+
   import { sensors, updateSensor } from '../../stores/terrariumpi';
   import { fetchSensors, fetchWebcamArchive } from '../../providers/api';
   import { getCustomConfig } from '../../config';
   import { roundToPrecision } from '../../helpers/number-helpers';
   import { ApiUrl } from '../../constants/urls';
+  import { fancyAppsLanguage } from '../../constants/ui';
   import { errorNotification } from '../../providers/notification-provider';
-
-  import { Fancybox } from '@fancyapps/ui';
-  import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
   import L from 'leaflet';
   import 'leaflet-fullscreen';
@@ -260,14 +261,12 @@
           image_archive = [
             ...image_archive,
             ...data.archive_images.map((image) => {
+              let image_date = new Date(image.slice(-14, -4) * 1000);
               return {
                 src: `${ApiUrl}/${image.slice(1)}`,
                 thumb: `${ApiUrl}/${image.slice(1)}`,
                 type: 'image',
-                caption:
-                  $date(new Date(image.slice(-14, -4) * 1000), { format: 'full' }) +
-                  ' ' +
-                  $time(new Date(image.slice(-14, -4) * 1000), { format: 'medium' }),
+                caption: $date(image_date, { format: 'full' }) + ' ' + $time(image_date, { format: 'medium' }),
               };
             }),
           ];
@@ -275,7 +274,9 @@
           if (counter++ < 10) {
             loadImages(new Date(archive_date.getTime() - 24 * 60 * 60 * 1000));
           } else if (image_archive.length > 0) {
-            new Fancybox(image_archive);
+            new Fancybox(image_archive, {
+                 l10n: fancyAppsLanguage(),
+            });
           } else {
             errorNotification($_('webcams.archive.no_images', { default: 'No archive images available' }));
           }
