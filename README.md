@@ -124,7 +124,7 @@ Your language not in the list or not up to date? [Create your own language trans
 
 ### Base
 
-The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/). For now the Desktop/Full version is not working somehow.... So use the lite image!
+The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite] **Legacy** (https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy). Desktop images will not work. Installation seems to work, but it will not work stable. So make sure you download the correct image for the Pi.
 It is possible to use USB or SSD drives to speed things up: <https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb>
 
 ### Docker
