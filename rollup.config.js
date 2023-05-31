@@ -187,10 +187,8 @@ export default {
         'public/js/select2.min.js',
 
         'public/js/fireworks.js',
-        'public/js/js.cookie.min.js',
         'public/js/swagger-ui-bundle.js',
         'public/js/swagger-ui-standalone-preset.js',
-        'public/js/tinyicon.min.js',
         'public/js/redoc.standalone.js',
 
         'public/css/swagger-ui.css',
