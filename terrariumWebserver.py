@@ -236,10 +236,9 @@ class terrariumWebserver(object):
         response.content_type = 'application/json'
         return json.dumps({'message' : error.body})
 
-      variables = self.__template_variables(f'{error.status}')
-      variables['page_title'] = f'{error.status} Error'
-
-      return jinja2_template('public/error.html',variables)
+      response.status = 303
+      response.set_header('Location', f'/#{request.path}')
+      return
 
     # Add API including all the CRUD urls
     self.api.routes(self.bottle)
