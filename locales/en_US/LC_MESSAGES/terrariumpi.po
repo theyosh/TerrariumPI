@@ -2,12 +2,13 @@
 # Copyright (C) 2016-2020 TheYOSH
 # Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2020.
 # theyosh <github.com@theyosh.nl>, 2022.
+# TheYOSH <github.com@theyosh.nl>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2023-05-29 23:20+CEST\n"
-"PO-Revision-Date: 2022-07-26 16:56+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2023-05-31 20:18+0000\n"
+"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: English (United States) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/backend/en_US/>\n"
 "Language: en_US\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.17\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -438,7 +439,7 @@ msgstr "Webcam archive"
 
 #: terrariumNotification.py:222
 msgid "Lights area wrong state"
-msgstr ""
+msgstr "Lights area wrong state"
 
 #: terrariumNotification.py:437
 msgid "Display"
