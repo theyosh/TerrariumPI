@@ -221,6 +221,10 @@ class terrariumNotification(terrariumSingleton):
     'area_lights_incorrect' : {
       'name': N_('Lights area wrong state'),
       'placeholders' : {
+        'current_state': N_('Current power state'),
+        'sensor_state': N_('Sensor measure state'),
+        'name': N_('Enclosure name'),
+        'mode': N_('Enclosure running mode'),
         **__DEFAULT_PLACEHOLDERS
       }
     },
