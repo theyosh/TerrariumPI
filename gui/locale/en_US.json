@@ -911,7 +911,7 @@
         "placeholder": "Enter a message"
       },
       "placeholders": {
-        "format": "Number values can be rounded using the {link_start}`.:2f` format{link_end}",
+        "format": "Use {placeholder} format to use a placeholder below in your message.{new_line}Number values can be rounded using the {link_start}`.:2f` format{link_end}",
         "help": "List of available placeholders.",
         "label": "Place holders"
       },

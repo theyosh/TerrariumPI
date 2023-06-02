@@ -273,8 +273,10 @@
           help="{$_('messages.settings.placeholders.help', { default: 'List of available placeholders.' })}">
           <small class="text-muted mb-2 d-block">
             {@html $_('messages.settings.placeholders.format', {
-              default: 'Number values can be rounded using the {link_start}`.:2f` format{link_end}',
+              default: 'Use {placeholder} format to use a placeholder below in your message.{new_line}Number values can be rounded using the {link_start}`.:2f` format{link_end}',
               values: {
+                placeholder: '<strong>${placeholder_name}</strong>',
+                new_line: '<br />',
                 link_start: '<a href="https://docs.python.org/3.8/library/string.html#formatspec" target="_blank">',
                 link_end: '</a>',
               },

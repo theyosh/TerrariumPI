@@ -112,22 +112,22 @@ Rate limiting is explained [here](#rate-limits).
 
 ### Place holders
 
-In the subject and message field you can use place holders for actual data in the messages. Use the format `{name}` will use the name of the sensor or relay in the message. Where `name` is the place holder name that is available in the list of place holders on the right side of the form. Use `{now}` for the current date and time when the message is created.
+In the subject and message field you can use place holders for actual data in the messages. Use the format `${name}` will use the name of the sensor or relay in the message. Where `name` is the place holder name that is available in the list of place holders on the right side of the form. Use `${now}` for the current date and time when the message is created.
 
-For example based on the screen shot above. We can create a **subject** with the value `Button {name} is pressed`. And for the **message** you can enter something like:
+For example based on the screen shot above. We can create a **subject** with the value `Button ${name} is pressed`. And for the **message** you can enter something like:
 
 ```text
-The button {name}({id}) is pressed on {now}
+The button ${name}(${id}) is pressed on ${now}
 
-The current state is {value}
+The current state is ${value}
 
 Kind regards
 TerrariumPI
 ```
 
-You can also use `{now:%d-%m-%Y %H:%M}` for a custom date format.
+You can also use `${now:%d-%m-%Y %H:%M}` for a custom date format.
 
-For number formatting you can use the following place holder code: `{value:.2f}` will show the current number value with 2 decimals accuracy.
+For number formatting you can use the following place holder code: `${value:.2f}` will show the current number value with 2 decimals accuracy.
 
 More information about (python) text formatting can be found [here](https://docs.python.org/3.8/library/string.html#formatspec).
 
