@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
-"POT-Creation-Date: 2023-05-29 23:20+CEST\n"
+"POT-Creation-Date: 2023-06-02 22:35+CEST\n"
 "PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
@@ -178,57 +178,57 @@ msgstr ""
 msgid "powerusage"
 msgstr "Pi strømforbruk i W"
 
-#: terrariumEngine.py:1188
+#: terrariumEngine.py:1187
 #, fuzzy
 #| msgid "Uptime"
 msgid "Up time"
 msgstr "Oppetid"
 
-#: terrariumEngine.py:1194
+#: terrariumEngine.py:1193
 #, fuzzy
 #| msgid "System log"
 msgid "System load"
 msgstr "Systemlogg"
 
-#: terrariumEngine.py:1200
+#: terrariumEngine.py:1199
 msgid "CPU Temperature"
 msgstr "CPU Temperatur"
 
-#: terrariumEngine.py:1206
+#: terrariumEngine.py:1205
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1212
+#: terrariumEngine.py:1211
 #, fuzzy
 #| msgid "Memory usage"
 msgid "Memory"
 msgstr "Minnebruk"
 
-#: terrariumEngine.py:1233
+#: terrariumEngine.py:1232
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "Sensor typen"
 
-#: terrariumEngine.py:1317
+#: terrariumEngine.py:1316
 msgid "Version"
 msgstr "Versjon"
 
-#: terrariumEngine.py:1327 terrariumWebserver.py:394
+#: terrariumEngine.py:1326 terrariumWebserver.py:393
 msgid "A new version ({version}) is available!"
 msgstr ""
 
-#: terrariumEngine.py:1371 terrariumEngine.py:1401
+#: terrariumEngine.py:1370 terrariumEngine.py:1400
 #, fuzzy
 #| msgid "Conductivity"
 msgid "Current active relays"
 msgstr "Ledningsevne"
 
-#: terrariumEngine.py:1372
+#: terrariumEngine.py:1371
 msgid "Watt"
 msgstr ""
 
-#: terrariumEngine.py:1410
+#: terrariumEngine.py:1409
 #, fuzzy
 #| msgid "Last update"
 msgid "last update"
@@ -548,56 +548,74 @@ msgstr "Språk"
 msgid "Lights area wrong state"
 msgstr ""
 
-#: terrariumNotification.py:437
+#: terrariumNotification.py:224
+#, fuzzy
+#| msgid "Pi power usage in W"
+msgid "Current power state"
+msgstr "Pi strømforbruk i W"
+
+#: terrariumNotification.py:225
+msgid "Sensor measure state"
+msgstr ""
+
+#: terrariumNotification.py:226
+msgid "Enclosure name"
+msgstr ""
+
+#: terrariumNotification.py:227
+msgid "Enclosure running mode"
+msgstr ""
+
+#: terrariumNotification.py:441
 msgid "Display"
 msgstr "Vis alternativer"
 
-#: terrariumNotification.py:441
+#: terrariumNotification.py:445
 msgid "Email"
 msgstr "E-post"
 
-#: terrariumNotification.py:451
+#: terrariumNotification.py:455
 #, fuzzy
 #| msgid "Minimum light hours"
 msgid "Traffic light"
 msgstr "Minimum lys timer"
 
-#: terrariumNotification.py:455
+#: terrariumNotification.py:459
 #, fuzzy
 #| msgid "Webhook"
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:459
+#: terrariumNotification.py:463
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:463
+#: terrariumNotification.py:467
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:467
+#: terrariumNotification.py:471
 msgid "Buzzer"
 msgstr ""
 
-#: terrariumWebserver.py:165 terrariumWebserver.py:254
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
 msgid "Authenticate to make any changes"
 msgstr "Godkjenn for å gjøre endringer"
 
-#: terrariumWebserver.py:165 terrariumWebserver.py:254
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
 msgid "Authentication"
 msgstr "Autentisering"
 
-#: terrariumWebserver.py:165 terrariumWebserver.py:254
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:394
+#: terrariumWebserver.py:393
 #, fuzzy
 #| msgid "Sensor ph"
 msgid "Software Update"
 msgstr "Sensor pH"
 
-#: terrariumNotification.py:446
+#: terrariumNotification.py:450
 msgid "Telegram"
 msgstr "Telegram"

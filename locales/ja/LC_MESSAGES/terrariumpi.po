@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2023-05-29 23:20+CEST\n"
+"POT-Creation-Date: 2023-06-02 22:35+CEST\n"
 "PO-Revision-Date: 2022-09-11 11:04+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Japanese <https://weblate.theyosh.nl/projects/terrariumpi/"
@@ -158,52 +158,52 @@ msgstr "ワット数"
 msgid "powerusage"
 msgstr "電力消費量合計"
 
-#: terrariumEngine.py:1188
+#: terrariumEngine.py:1187
 msgid "Up time"
 msgstr "稼働時間"
 
-#: terrariumEngine.py:1194
+#: terrariumEngine.py:1193
 #, fuzzy
 msgid "System load"
 msgstr "システム負荷"
 
-#: terrariumEngine.py:1200
+#: terrariumEngine.py:1199
 msgid "CPU Temperature"
 msgstr "CPU温度"
 
-#: terrariumEngine.py:1206
+#: terrariumEngine.py:1205
 msgid "Storage"
 msgstr "ストレージ"
 
-#: terrariumEngine.py:1212
+#: terrariumEngine.py:1211
 msgid "Memory"
 msgstr "メモリー"
 
-#: terrariumEngine.py:1233
+#: terrariumEngine.py:1232
 msgid "average {sensor_type}"
 msgstr "平均{sensor_type}"
 
-#: terrariumEngine.py:1317
+#: terrariumEngine.py:1316
 msgid "Version"
 msgstr ""
 
-#: terrariumEngine.py:1327 terrariumWebserver.py:394
+#: terrariumEngine.py:1326 terrariumWebserver.py:393
 msgid "A new version ({version}) is available!"
 msgstr ""
 
-#: terrariumEngine.py:1371 terrariumEngine.py:1401
+#: terrariumEngine.py:1370 terrariumEngine.py:1400
 #, fuzzy
 #| msgid "Water flow"
 msgid "Current active relays"
 msgstr "水流量"
 
-#: terrariumEngine.py:1372
+#: terrariumEngine.py:1371
 #, fuzzy
 #| msgid "Wattage"
 msgid "Watt"
 msgstr "ワット数"
 
-#: terrariumEngine.py:1410
+#: terrariumEngine.py:1409
 msgid "last update"
 msgstr "最新更新"
 
@@ -499,57 +499,81 @@ msgstr ""
 msgid "Lights area wrong state"
 msgstr ""
 
-#: terrariumNotification.py:437
+#: terrariumNotification.py:224
+#, fuzzy
+#| msgid "Total power usage"
+msgid "Current power state"
+msgstr "電力消費量合計"
+
+#: terrariumNotification.py:225
+#, fuzzy
+#| msgid "Sensor settings"
+msgid "Sensor measure state"
+msgstr "センサー設定"
+
+#: terrariumNotification.py:226
+#, fuzzy
+#| msgid "Enclosure"
+msgid "Enclosure name"
+msgstr "ケージ"
+
+#: terrariumNotification.py:227
+#, fuzzy
+#| msgid "Enclosure settings"
+msgid "Enclosure running mode"
+msgstr "ケージ設定"
+
+#: terrariumNotification.py:441
 msgid "Display"
 msgstr "表示器"
 
-#: terrariumNotification.py:441
+#: terrariumNotification.py:445
 msgid "Email"
 msgstr "メール"
 
-#: terrariumNotification.py:451
+#: terrariumNotification.py:455
 #, fuzzy
 msgid "Traffic light"
 msgstr "信号灯"
 
-#: terrariumNotification.py:455
+#: terrariumNotification.py:459
 #, fuzzy
 msgid "Web-hook"
 msgstr "Webフック"
 
-#: terrariumNotification.py:459
+#: terrariumNotification.py:463
 msgid "MQTT"
 msgstr ""
 
-#: terrariumNotification.py:463
+#: terrariumNotification.py:467
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:467
+#: terrariumNotification.py:471
 msgid "Buzzer"
 msgstr ""
 
-#: terrariumWebserver.py:165 terrariumWebserver.py:254
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
 #, fuzzy
 msgid "Authenticate to make any changes"
 msgstr "変更するにはログインが必要です"
 
-#: terrariumWebserver.py:165 terrariumWebserver.py:254
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
 #, fuzzy
 msgid "Authentication"
 msgstr "ログイン認証"
 
-#: terrariumWebserver.py:165 terrariumWebserver.py:254
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:394
+#: terrariumWebserver.py:393
 #, fuzzy
 #| msgid "last update"
 msgid "Software Update"
 msgstr "最新更新"
 
-#: terrariumNotification.py:446
+#: terrariumNotification.py:450
 msgid "Telegram"
 msgstr "Telegram"
 
@@ -831,9 +855,6 @@ msgstr "Telegram"
 
 #~ msgid "Area settings"
 #~ msgstr "エリアー設定"
-
-#~ msgid "Enclosure"
-#~ msgstr "ケージ"
 
 #, fuzzy
 #~ msgid "Select the enclosure where this area belongs to."
@@ -1227,9 +1248,6 @@ msgstr "Telegram"
 #~ msgid "Please enter value between %s and %s."
 #~ msgstr "%sから%sまでの値を入力してください。"
 
-#~ msgid "Enclosure settings"
-#~ msgstr "ケージ設定"
-
 #~ msgid "Image"
 #~ msgstr "画像"
 
@@ -1426,9 +1444,6 @@ msgstr "Telegram"
 #~| msgid "Enter a valid time."
 #~ msgid "Please enter valid number"
 #~ msgstr "正しい時間値を入力してください。"
-
-#~ msgid "Sensor settings"
-#~ msgstr "センサー設定"
 
 #~ msgid "Select the hardware type for this sensor."
 #~ msgstr "センサーの種類を選択してください。"

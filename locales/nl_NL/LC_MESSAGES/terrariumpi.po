@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2023-05-29 23:20+CEST\n"
+"POT-Creation-Date: 2023-06-02 22:35+CEST\n"
 "PO-Revision-Date: 2023-05-31 20:18+0000\n"
 "Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
@@ -148,47 +148,47 @@ msgstr "wattage"
 msgid "powerusage"
 msgstr "Pi stroomverbruik"
 
-#: terrariumEngine.py:1188
+#: terrariumEngine.py:1187
 msgid "Up time"
 msgstr "Actief"
 
-#: terrariumEngine.py:1194
+#: terrariumEngine.py:1193
 msgid "System load"
 msgstr "Systeembelasting"
 
-#: terrariumEngine.py:1200
+#: terrariumEngine.py:1199
 msgid "CPU Temperature"
 msgstr "Processor temperatuur"
 
-#: terrariumEngine.py:1206
+#: terrariumEngine.py:1205
 msgid "Storage"
 msgstr "Opslag"
 
-#: terrariumEngine.py:1212
+#: terrariumEngine.py:1211
 msgid "Memory"
 msgstr "Geheugen"
 
-#: terrariumEngine.py:1233
+#: terrariumEngine.py:1232
 msgid "average {sensor_type}"
 msgstr "gemiddelde {sensor_type}"
 
-#: terrariumEngine.py:1317
+#: terrariumEngine.py:1316
 msgid "Version"
 msgstr "Versie"
 
-#: terrariumEngine.py:1327 terrariumWebserver.py:394
+#: terrariumEngine.py:1326 terrariumWebserver.py:393
 msgid "A new version ({version}) is available!"
 msgstr "Er is een nieuwe versie ({version}) beschikbaar!"
 
-#: terrariumEngine.py:1371 terrariumEngine.py:1401
+#: terrariumEngine.py:1370 terrariumEngine.py:1400
 msgid "Current active relays"
 msgstr "Huidige active schakelaars"
 
-#: terrariumEngine.py:1372
+#: terrariumEngine.py:1371
 msgid "Watt"
 msgstr "Watt"
 
-#: terrariumEngine.py:1410
+#: terrariumEngine.py:1409
 msgid "last update"
 msgstr "laatste wijziging"
 
@@ -442,50 +442,68 @@ msgstr "Webcam archief"
 msgid "Lights area wrong state"
 msgstr "Verlichting in verkeerde status"
 
-#: terrariumNotification.py:437
+#: terrariumNotification.py:224
+#, fuzzy
+#| msgid "Current power usage"
+msgid "Current power state"
+msgstr "Huidig stroomverbruik"
+
+#: terrariumNotification.py:225
+msgid "Sensor measure state"
+msgstr ""
+
+#: terrariumNotification.py:226
+msgid "Enclosure name"
+msgstr ""
+
+#: terrariumNotification.py:227
+msgid "Enclosure running mode"
+msgstr ""
+
+#: terrariumNotification.py:441
 msgid "Display"
 msgstr "Beeldscherm"
 
-#: terrariumNotification.py:441
+#: terrariumNotification.py:445
 msgid "Email"
 msgstr "Email"
 
-#: terrariumNotification.py:451
+#: terrariumNotification.py:455
 msgid "Traffic light"
 msgstr "Verkeerslicht"
 
-#: terrariumNotification.py:455
+#: terrariumNotification.py:459
 msgid "Web-hook"
 msgstr "Webhook"
 
-#: terrariumNotification.py:459
+#: terrariumNotification.py:463
 msgid "MQTT"
 msgstr "MQTT"
 
-#: terrariumNotification.py:463
+#: terrariumNotification.py:467
 msgid "Pushover"
 msgstr "Pushover"
 
-#: terrariumNotification.py:467
+#: terrariumNotification.py:471
 msgid "Buzzer"
 msgstr "Zoemer"
 
-#: terrariumWebserver.py:165 terrariumWebserver.py:254
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
 msgid "Authenticate to make any changes"
 msgstr "Login om wijzigingen te kunnen maken"
 
-#: terrariumWebserver.py:165 terrariumWebserver.py:254
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
 msgid "Authentication"
 msgstr "Authenticatie"
 
-#: terrariumWebserver.py:165 terrariumWebserver.py:254
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:394
+#: terrariumWebserver.py:393
 msgid "Software Update"
 msgstr "Software update"
 
-#: terrariumNotification.py:446
+#: terrariumNotification.py:450
 msgid "Telegram"
 msgstr "Telegram"
