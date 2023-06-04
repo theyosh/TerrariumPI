@@ -108,6 +108,15 @@
           error="{sensor.error}"
           excluded="{sensor.exclude_avg}"
           minmax="{enableGraph}" />
+          {#if $sensors[sensor.id].calibration.light_on_off_threshold && $sensors[sensor.id].calibration.light_on_off_threshold > 0}
+            <i class="fa-regular fa-lightbulb light_on_off_threshold" class:on={$sensors[sensor.id].value > $sensors[sensor.id].calibration.light_on_off_threshold}
+                title="{$_('sensors.calibration.light_on_off_threshold.light_bulb', {
+                  default: 'Light on of threshold value: {threshold}',
+                  values: {
+                    threshold: $sensors[sensor.id].calibration.light_on_off_threshold
+                  }})}">
+            </i>
+          {/if}
       </div>
       {#if enableGraph}
         <div class="col-12 col-sm-12 col-md-8 col-lg-9 pr-3">
@@ -121,5 +130,18 @@
 <style>
   .row {
     max-height: 180px;
+  }
+
+  .light_on_off_threshold {
+    position: absolute;
+    top: 1.2rem;
+    right: 5rem;
+    font-size: 1.8rem;
+    color: gray;
+  }
+
+  .light_on_off_threshold.on {
+    color: yellow;
+    text-shadow: 1px 1px 1px lightgray, 0 0 1em yellow, 0 0 0.2em orange
   }
 </style>

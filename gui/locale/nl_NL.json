@@ -1278,6 +1278,11 @@
       "uvb": "Gemiddelde UVB",
       "uvi": "Gemiddelde UV index"
     },
+    "calibration": {
+      "light_on_off_threshold": {
+        "light_bulb": ""
+      }
+    },
     "co2": {
       "menu": {
         "title": "CO2"

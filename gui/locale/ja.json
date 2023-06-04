@@ -1278,6 +1278,11 @@
       "uvb": "平均UVB",
       "uvi": "平均UVインデックス"
     },
+    "calibration": {
+      "light_on_off_threshold": {
+        "light_bulb": ""
+      }
+    },
     "co2": {
       "menu": {
         "title": "CO2"

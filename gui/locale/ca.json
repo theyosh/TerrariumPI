@@ -1278,6 +1278,11 @@
       "uvb": "UVB mitjà",
       "uvi": "Índex UV mitjà"
     },
+    "calibration": {
+      "light_on_off_threshold": {
+        "light_bulb": ""
+      }
+    },
     "co2": {
       "menu": {
         "title": "Malalt"

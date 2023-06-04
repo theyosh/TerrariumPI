@@ -1223,6 +1223,11 @@
       "uvb": "UVB promedio",
       "uvi": "Índice UV promedio"
     },
+    "calibration": {
+      "light_on_off_threshold": {
+        "light_bulb": ""
+      }
+    },
     "co2": {
       "menu": {
         "title": "Enfermo"

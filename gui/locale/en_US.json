@@ -1278,6 +1278,11 @@
       "uvb": "Average UVB",
       "uvi": "Average UV Index"
     },
+    "calibration": {
+      "light_on_off_threshold": {
+        "light_bulb": "Light on of threshold value: {threshold}"
+      }
+    },
     "co2": {
       "menu": {
         "title": "CO2"

@@ -1278,6 +1278,11 @@
       "uvb": "UVB medio",
       "uvi": "Indice UV medio"
     },
+    "calibration": {
+      "light_on_off_threshold": {
+        "light_bulb": ""
+      }
+    },
     "co2": {
       "menu": {
         "title": "CO2"
