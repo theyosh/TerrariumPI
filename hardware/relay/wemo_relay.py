@@ -20,7 +20,7 @@ class terrariumRelayWeMo(terrariumRelay):
     if port is None:
       raise terrariumRelayLoadingException(f'Relay {self} is not found')
 
-    device = pywemo.discovery.device_from_description(f'http://{self.address}:{port}/setup.xml', None)
+    device = pywemo.device_from_description(f'http://{self.address}:{port}/setup.xml')
     return device
 
   def _set_hardware_value(self, state):
