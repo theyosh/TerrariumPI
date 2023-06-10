@@ -108,7 +108,7 @@
           error="{sensor.error}"
           excluded="{sensor.exclude_avg}"
           minmax="{enableGraph}" />
-          {#if $sensors[sensor.id] && $sensors[sensor.id].calibration && $sensors[sensor.id].calibration.light_on_off_threshold && $sensors[sensor.id].calibration.light_on_off_threshold > 0}
+          {#if $sensors[sensor.id]?.calibration?.light_on_off_threshold > 0}
             <i class="fa-regular fa-lightbulb light_on_off_threshold" class:on={$sensors[sensor.id].value > $sensors[sensor.id].calibration.light_on_off_threshold}
                 title="{$_('sensors.calibration.light_on_off_threshold.light_bulb', {
                   default: 'Light on of threshold value: {threshold}',
