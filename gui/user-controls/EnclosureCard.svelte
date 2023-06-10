@@ -118,7 +118,9 @@
                     {settings.units[area.type].value},
                     {$_('enclosures.area.now', { default: 'now' })}: {roundToPrecision(area.state.sensors.current)}
                     {settings.units[area.type].value}
-                    <i class="fas fa-exclamation-triangle text-danger mt-1 ml-2" class:d-none="{!area.state.sensors.alarm}"> </i>
+                    <i class="fas fa-exclamation-triangle text-muted mt-1 ml-2"
+                       class:text-danger="{(area.state.low && area.state.sensor?.alarm_low) || (area.state.high && area.state.sensor?.alarm_high)}"
+                       class:d-none="{!area.state.sensors.alarm}"> </i>
                   {:else}
                     {#each ['day', 'night', 'low', 'high'] as period}
                       {#if area.state[period] && area.state[period].begin}
