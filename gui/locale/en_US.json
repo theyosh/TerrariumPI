@@ -982,6 +982,9 @@
       "close": "Close",
       "save": "Save"
     },
+    "loading": {
+      "title": "Loading"
+    },
     "login": {
       "error": "Invalid login",
       "form": {
@@ -1914,6 +1917,12 @@
       "settings": "Edit webcam"
     },
     "archive": {
+      "modal": {
+        "loading": {
+          "status": "Currently loaded {total} images ... ({percentage}%)",
+          "title": "Starting loading webcam archive images ..."
+        }
+      },
       "no_images": "No archive images available"
     },
     "confirm": {

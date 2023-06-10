@@ -982,6 +982,9 @@
       "close": "Tanca",
       "save": "Guardar"
     },
+    "loading": {
+      "title": "Carregant"
+    },
     "login": {
       "error": "Accés incorrecte",
       "form": {
@@ -1914,6 +1917,12 @@
       "settings": "Edita la càmera web"
     },
     "archive": {
+      "modal": {
+        "loading": {
+          "status": "S'han carregat {total} imatges... ({percentage}%)",
+          "title": "S'estan començant a carregar imatges d'arxiu de la càmera web..."
+        }
+      },
       "no_images": "No hi ha imatges d’arxiu disponibles"
     },
     "confirm": {

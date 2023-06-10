@@ -933,6 +933,9 @@
       "close": "Cerca",
       "save": "Ahorrar"
     },
+    "loading": {
+      "title": "Cargando"
+    },
     "login": {
       "form": {
         "password": {
@@ -1849,6 +1852,12 @@
       "settings": "Editar cámaras web"
     },
     "archive": {
+      "modal": {
+        "loading": {
+          "status": "Actualmente cargadas {total} imágenes... ({porcentaje}%)",
+          "title": "Comenzando a cargar imágenes de archivo de cámara web..."
+        }
+      },
       "no_images": "No hay imágenes de archivo disponibles"
     },
     "confirm": {

@@ -1909,6 +1909,11 @@
       "settings": "Edit webcam"
     },
     "archive": {
+      "modal": {
+        "loading": {
+          "title": "Starting loading webcam archive images ..."
+        }
+      },
       "no_images": "No archive images available"
     },
     "confirm": {

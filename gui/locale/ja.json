@@ -982,6 +982,9 @@
       "close": "閉じる",
       "save": "保存"
     },
+    "loading": {
+      "title": "読み込み中"
+    },
     "login": {
       "error": "不正なログイン",
       "form": {
@@ -1914,6 +1917,12 @@
       "settings": "ウェブカメラを編集します"
     },
     "archive": {
+      "modal": {
+        "loading": {
+          "status": "現在ロードされている {total} 枚の画像 ... ({percentage}%)",
+          "title": "ウェブカメラのアーカイブ画像の読み込みを開始しています..."
+        }
+      },
       "no_images": "利用可能なアーカイブ画像はありません"
     },
     "confirm": {

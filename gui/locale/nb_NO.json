@@ -982,6 +982,9 @@
       "close": "Lukk",
       "save": "Lagre"
     },
+    "loading": {
+      "title": "Laster"
+    },
     "login": {
       "error": "Ugyldig innlogging",
       "form": {
@@ -1914,6 +1917,12 @@
       "settings": "Legg til nytt webkamera"
     },
     "archive": {
+      "modal": {
+        "loading": {
+          "status": "For øyeblikket innlastede {total} bilder ... ({percentage}%)",
+          "title": "Begynner å laste inn arkivbilder for webkamera ..."
+        }
+      },
       "no_images": "Ingen arkivbilder tilgjengelig"
     },
     "confirm": {

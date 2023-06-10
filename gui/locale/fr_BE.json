@@ -982,6 +982,9 @@
       "close": "Fermer",
       "save": "sauvegarder"
     },
+    "loading": {
+      "title": "Chargement"
+    },
     "login": {
       "error": "Identifiant invalide",
       "form": {
@@ -1914,6 +1917,12 @@
       "settings": "Ajouter une nouvelle webcam"
     },
     "archive": {
+      "modal": {
+        "loading": {
+          "status": "{total} images actuellement chargées... ({pourcentage} %)",
+          "title": "Démarrage du chargement des images d'archives de la webcam..."
+        }
+      },
       "no_images": "Aucune image d'archive disponible"
     },
     "confirm": {

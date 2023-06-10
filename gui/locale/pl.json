@@ -982,6 +982,9 @@
       "close": "Zamknij",
       "save": "Ratować"
     },
+    "loading": {
+      "title": "Ładowanie"
+    },
     "login": {
       "error": "Nieprawidłowy login",
       "form": {
@@ -1914,6 +1917,12 @@
       "settings": "Edytuj kamerę internetową"
     },
     "archive": {
+      "modal": {
+        "loading": {
+          "status": "Aktualnie wczytane obrazy: {total}... ({percentage}%)",
+          "title": "Rozpoczęcie ładowania obrazów z archiwum kamery internetowej..."
+        }
+      },
       "no_images": "Brak dostępnych obrazów archiwum"
     },
     "confirm": {

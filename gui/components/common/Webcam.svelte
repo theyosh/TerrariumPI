@@ -14,6 +14,7 @@
   import { ApiUrl } from '../../constants/urls';
   import { fancyAppsLanguage } from '../../constants/ui';
   import { errorNotification } from '../../providers/notification-provider';
+  import LoadingModal from '../../modals/LoadingModal.svelte';
 
   import L from 'leaflet';
   import 'leaflet-fullscreen';
@@ -244,6 +245,7 @@
     }
   }
 
+  let webcamArchiveLoadingModal = null;
   const webcamArchive = () => {
     let image_archive = [];
     let counter = 0;
@@ -271,12 +273,15 @@
             }),
           ];
 
+          webcamArchiveLoadingModal.setMessage($_('webcams.archive.modal.loading.status', { default: 'Currently loaded {total} images ... ({percentage}%)', values: { total: image_archive.length, percentage: (counter/10)*100 } }));
+
           if (counter++ < 10) {
             loadImages(new Date(archive_date.getTime() - 24 * 60 * 60 * 1000));
           } else if (image_archive.length > 0) {
             new Fancybox(image_archive, {
                  l10n: fancyAppsLanguage(),
             });
+            webcamArchiveLoadingModal.hide();
           } else {
             errorNotification($_('webcams.archive.no_images', { default: 'No archive images available' }));
           }
@@ -284,6 +289,9 @@
       );
     }
 
+    // Open loading modal
+    webcamArchiveLoadingModal.setMessage($_('webcams.archive.modal.loading.title', { default: 'Starting loading webcam archive images ...' }));
+    webcamArchiveLoadingModal.show();
     loadImages();
   };
 
@@ -383,6 +391,9 @@
     {/each}
   {/if}
 </LeafletMap>
+
+<svelte:options accessors/>
+<LoadingModal bind:this="{webcamArchiveLoadingModal}" />
 
 <style>
   strong {

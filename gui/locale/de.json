@@ -982,6 +982,9 @@
       "close": "Schließen",
       "save": "Speichern"
     },
+    "loading": {
+      "title": "Wird geladen"
+    },
     "login": {
       "error": "Ungültiger Login",
       "form": {
@@ -1914,6 +1917,12 @@
       "settings": "Webcam bearbeiten"
     },
     "archive": {
+      "modal": {
+        "loading": {
+          "status": "Derzeit geladene {total} Bilder ... ({percentage}%)",
+          "title": "Das Laden der Webcam-Archivbilder beginnt ..."
+        }
+      },
       "no_images": "Keine Archivbilder verfügbar"
     },
     "confirm": {

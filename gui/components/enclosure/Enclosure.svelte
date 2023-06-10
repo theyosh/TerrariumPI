@@ -61,7 +61,7 @@
           {/each}
           {#if area.state.sensors}
             <tr>
-              <td>{$_('enclosures.area.current', { default: 'current' })}:</td><td>
+              <td>{$_('enclosures.area.current', { default: 'current' })}: </td><td>
                 {roundToPrecision(area.state.sensors.current)}
                 {settings.units[area.type].value} ({roundToPrecision(area.state.sensors.alarm_min)}
                 {settings.units[area.type].value} - {roundToPrecision(area.state.sensors.alarm_max)}
@@ -69,7 +69,8 @@
               </td>
               <td>
                 {#if area.state.sensors.alarm}
-                  <i class="fas fa-exclamation-triangle text-danger mt-1"> </i>
+                  <i class="fas fa-exclamation-triangle text-muted mt-1"
+                     class:text-danger="{(area.state.low && area.state.sensor?.alarm_low) || (area.state.high && area.state.sensor?.alarm_high)}"> </i>
                 {/if}
               </td>
             </tr>

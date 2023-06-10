@@ -982,6 +982,9 @@
       "close": "Sluiten",
       "save": "Bewaar"
     },
+    "loading": {
+      "title": "Bezig met laden"
+    },
     "login": {
       "error": "Ongeldige login",
       "form": {
@@ -1914,6 +1917,12 @@
       "settings": "Bewerk webcam"
     },
     "archive": {
+      "modal": {
+        "loading": {
+          "status": "Momenteel geladen {total} afbeeldingen ... ({percentage}%)",
+          "title": "Beginnen met het laden van webcamarchiefbeelden ..."
+        }
+      },
       "no_images": "Geen archiefafbeeldingen beschikbaar"
     },
     "confirm": {
