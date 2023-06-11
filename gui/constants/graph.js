@@ -85,6 +85,8 @@ export const graphDefaultOpts = {
           return get(isDay) ? '#6c757d' : '#adb5bd';
         },
         callback: function (value, index, ticks) {
+          index = null;
+          ticks = null;
           let unit = null;
           this.chart.config._config.data.datasets.forEach(dataset => {
             if (dataset.yAxisID === this.id) {
