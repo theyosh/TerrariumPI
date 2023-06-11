@@ -24,7 +24,7 @@ class AM2320:
 
     for x in data:
       crc = crc ^ x
-      for bit in range(0, 8):
+      for _ in range(0, 8):
         if (crc & 0x0001) == 0x0001:
           crc >>= 1
           crc ^= 0xA001

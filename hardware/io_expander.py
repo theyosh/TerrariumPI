@@ -11,7 +11,6 @@ from pcf8575 import PCF8575
 
 class terrariumIOExpanderException(TypeError):
   '''There is a problem with loading a hardware IO expander.'''
-  pass
 
 class terrariumIOExpander(object):
   HARDWARE = None

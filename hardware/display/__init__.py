@@ -17,10 +17,9 @@ from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 class terrariumDisplayLoadingException(TypeError):
   '''There is a problem with loading a hardware display.'''
-  pass
+
 class terrariumDisplayException(TypeError):
   '''There is a general problem with the display.'''
-  pass
 
 # Factory class
 class terrariumDisplay(object):

@@ -131,9 +131,9 @@ def google_translate(source, dest_lang):
 
 def walk(node, key, source, dest):
 
-  if type(node) is dict:
+  if isinstance(node, dict):
     return {k: walk(v, k, source, dest) for k, v in node.items()}
-  elif type(node) is list:
+  elif isinstance(node, list):
     return [walk(x, key, source, dest) for x in node]
   else:
     translation = translate(node, source, dest)

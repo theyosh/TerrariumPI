@@ -111,7 +111,7 @@ class terrariumSensor(object):
     return sorted(list(set(sensor_types)))
 
   # Return polymorph sensor....
-  def __new__(cls, sensor_id, hardware_type, sensor_type, address, name = '', unit_value_callback = None, trigger_callback = None):
+  def __new__(cls, _, hardware_type, sensor_type, address, name = '', unit_value_callback = None, trigger_callback = None):
     known_sensors = terrariumSensor.available_hardware
 
     if hardware_type not in known_sensors:
@@ -122,7 +122,7 @@ class terrariumSensor(object):
 
     return super(terrariumSensor, cls).__new__(known_sensors[hardware_type])
 
-  def __init__(self, id, _, sensor_type, address, name = '', unit_value_callback = None, trigger_callback = None):
+  def __init__(self, sensor_id, _, sensor_type, address, name = '', unit_value_callback = None, trigger_callback = None):
     self._device = {'id'             : None,
                     'name'           : None,
                     'address'        : None,
@@ -140,7 +140,7 @@ class terrariumSensor(object):
     self.__trigger_callback = trigger_callback
 
     # Set the properties
-    self.id          = id
+    self.id          = sensor_id
     self.name        = name
     self.address     = address
 
@@ -370,7 +370,7 @@ class terrariumI2CSensor(terrariumSensor):
   @property
   def _address(self):
     address = super()._address
-    if type(address[0]) is str:
+    if isinstance(address[0], str):
       if not address[0].startswith('0x'):
         address[0] = '0x' + address[0]
       address[0] = int(address[0],16)
@@ -437,14 +437,12 @@ class terrariumI2CSensorMixin():
     return data
 
 
-"""
-TCA9548A I2C switch driver, Texas instruments
-8 bidirectional translating switches
-I2C SMBus protocol
-Manual: tca9548.pdf
-Source: https://github.com/IRNAS/tca9548a-python/blob/master/tca9548a.py
-Added option for different I2C bus
-"""
+# TCA9548A I2C switch driver, Texas instruments
+# 8 bidirectional translating switches
+# I2C SMBus protocol
+# Manual: tca9548.pdf
+# Source: https://github.com/IRNAS/tca9548a-python/blob/master/tca9548a.py
+# Added option for different I2C bus
 
 class TCA9548A(object):
     def __init__(self, address, bus = 1):
@@ -459,7 +457,7 @@ class TCA9548A(object):
         except ValueError:
             logger.error("No device found on specified address!")
             self.i2c_bus = None
-        except:
+        except Exception:
             logger.error("Bus on channel {} is not available.".format(bus))
             logger.info("Available busses are listed as /dev/i2c*")
             self.i2c_bus = None
@@ -469,7 +467,7 @@ class TCA9548A(object):
         try:
             value = self.i2c_bus.read_byte(self.i2c_address)
             return value
-        except:
+        except Exception:
             return None
 
     def get_channel(self, ch_num):
@@ -489,7 +487,7 @@ class TCA9548A(object):
                 return False
             self.i2c_bus.write_byte(self.i2c_address, value)
             return True
-        except:
+        except Exception:
             return False
 
     def set_channel(self, ch_num, state):

@@ -81,7 +81,7 @@ class terrariumButton(object):
 
     return super(terrariumButton, cls).__new__(known_buttons[hardware_type])
 
-  def __init__(self, id, _, address, name = '', callback = None):
+  def __init__(self, button_id, _, address, name = '', callback = None):
     "Create a new button based on type"
 
     self._device = {'device'      : None,
@@ -95,7 +95,7 @@ class terrariumButton(object):
       'thread'  : None
     }
 
-    self.id       = id
+    self.id       = button_id
     self.name     = name
     self.callback = callback
 
