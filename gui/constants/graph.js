@@ -47,6 +47,8 @@ export const graphDefaultOpts = {
         },
         callback: function (value, index, ticks) {
           let unit = null;
+          index = null;
+          ticks = null;
           this.chart.config._config.data.datasets.forEach(dataset => {
             if (dataset.yAxisID === this.id) {
               unit = dataset.graphType;

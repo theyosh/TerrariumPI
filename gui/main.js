@@ -12,6 +12,7 @@ const app = new App({target});
 
 /* jslint unparam: true */
 window.addEventListener('error', (event) => {
+  event = null;
   app.$destroy();
   target.innerHTML = '';
   window.location = '#/error';
