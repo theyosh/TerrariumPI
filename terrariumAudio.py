@@ -39,7 +39,7 @@ class terrariumAudio(object):
       try:
         mixer = alsaaudio.Mixer(control='Headphone',cardindex=hw)
       except alsaaudio.ALSAAudioError as ex:
-        logger.error(f'Hardware \'{terrariumAudio.available_soundcards[hw]["name"]}\' is not correct, so we cannot set the player audio volume.')
+        logger.error(f'Hardware \'{terrariumAudio.available_soundcards[hw]["name"]}\' is not correct, so we cannot set the player audio volume.: {ex}')
         return None
 
     if value is None:

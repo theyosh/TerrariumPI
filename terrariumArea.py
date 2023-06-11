@@ -21,9 +21,7 @@ from terrariumDatabase import Sensor, Playlist, Relay, Button, Area
 from terrariumUtils import terrariumCache, terrariumUtils, classproperty
 
 class terrariumAreaException(TypeError):
-
   '''There is a problem with loading a hardware sensor.'''
-  pass
 
 class terrariumArea(object):
 
@@ -114,12 +112,12 @@ class terrariumArea(object):
 
     return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[area_type]['class']())
 
-  def __init__(self, area_id, enclosure, type, name, mode, setup):
+  def __init__(self, area_id, enclosure, area_type, name, mode, setup):
     if area_id is None:
       area_id = terrariumUtils.generate_uuid()
 
     self.id   = area_id
-    self.type = type
+    self.type = area_type
     self.name = name
     self.mode = mode
 
@@ -1097,9 +1095,9 @@ class terrariumAreaLights(terrariumArea):
 
 class terrariumAreaHeater(terrariumArea):
 
-  def __init__(self, id, enclosure, type, name, mode, setup):
+  def __init__(self, area_id, enclosure, type, name, mode, setup):
     self.__dimmers = {}
-    super().__init__(id, enclosure, type, name, mode, setup)
+    super().__init__(area_id, enclosure, type, name, mode, setup)
 
   @property
   def _powered(self):

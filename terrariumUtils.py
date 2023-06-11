@@ -373,7 +373,7 @@ class terrariumUtils():
             # Dirty hack to process array data....
             try:
               item = int(item)
-            except Exception as ex:
+            except Exception:
               item = str(item)
 
             data = data[item]

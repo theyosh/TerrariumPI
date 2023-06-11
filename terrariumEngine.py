@@ -448,35 +448,35 @@ class terrariumEngine(object):
     return update_ok
 
   # -= NEW =-
-  def delete(self, item, id, sub_id = None):
+  def delete(self, item, item_id, sub_id = None):
     delete_ok = False
 
     if issubclass(item, terrariumButton):
-      if id in self.buttons:
-        self.buttons[id].stop()
-        del(self.buttons[id])
+      if item_id in self.buttons:
+        self.buttons[item_id].stop()
+        del(self.buttons[item_id])
       delete_ok = True
 
     elif issubclass(item, terrariumRelay):
-      if id in self.relays:
-        self.relays[id].stop()
-        del(self.relays[id])
+      if item_id in self.relays:
+        self.relays[item_id].stop()
+        del(self.relays[item_id])
       delete_ok = True
 
     elif issubclass(item, terrariumSensor):
-      if id in self.sensors:
-        self.sensors[id].stop()
-        del(self.sensors[id])
+      if item_id in self.sensors:
+        self.sensors[item_id].stop()
+        del(self.sensors[item_id])
       delete_ok = True
 
     elif issubclass(item, terrariumWebcam):
-      if id in self.webcams:
-        self.webcams[id].stop()
-        del(self.webcams[id])
+      if item_id in self.webcams:
+        self.webcams[item_id].stop()
+        del(self.webcams[item_id])
       delete_ok = True
 
     elif issubclass(item, terrariumArea):
-      self.enclosures[sub_id].delete(id)
+      self.enclosures[sub_id].delete(item_id)
       delete_ok = True
 
     return delete_ok
@@ -1068,7 +1068,7 @@ class terrariumEngine(object):
   def _update_enclosures(self, read_only = False):
     with orm.db_session():
       for enclosure in Enclosure.select():
-        if str(enclosure.id) not in self.enclosures.keys() or str(enclosure.id) in self.settings['exclude_ids']:
+        if str(enclosure.id) not in self.enclosures or str(enclosure.id) in self.settings['exclude_ids']:
           continue
 
         start = time.time()
@@ -1223,7 +1223,7 @@ class terrariumEngine(object):
     tmp = self.sensor_averages
     averages = []
     if len(tmp) > 0:
-      for avg_type in self.sensor_averages.keys():
+      for avg_type in self.sensor_averages:
         motd_data[f'average_{avg_type}']       = tmp[avg_type]["value"]
         motd_data[f'average_{avg_type}_unit']  = self.units[avg_type]
         motd_data[f'average_{avg_type}_alarm'] = not tmp[avg_type]['alarm_min'] <= tmp[avg_type]['value'] <= tmp[avg_type]['alarm_max']

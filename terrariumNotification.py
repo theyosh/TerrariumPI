@@ -476,28 +476,28 @@ class terrariumNotificationService(object):
   @classproperty
   def available_services(__cls__):
     data = []
-    for (areatype, area) in terrariumNotificationService.__TYPES.items():
-      data.append({'type' : areatype, 'name' : area['name']})
+    for (service_type, notification) in terrariumNotificationService.__TYPES.items():
+      data.append({'type' : service_type, 'name' : notification['name']})
 
     return sorted(data, key=itemgetter('name'))
 
   # Return polymorph service....
-  def __new__(cls, _, type, name = '', enabled = True, setup = None):
-    if type not in [service['type'] for service in terrariumNotificationService.available_services]:
-      raise terrariumNotificationServiceException(f'Service of type {type} is unknown.')
+  def __new__(cls, _, service_type, name = '', enabled = True, setup = None):
+    if service_type not in [service['type'] for service in terrariumNotificationService.available_services]:
+      raise terrariumNotificationServiceException(f'Service of type {service_type} is unknown.')
 
-    return super(terrariumNotificationService, cls).__new__(terrariumNotificationService.__TYPES[type]['class']())
+    return super(terrariumNotificationService, cls).__new__(terrariumNotificationService.__TYPES[service_type]['class']())
 
-  def __init__(self, id, type, name, enabled, setup):
+  def __init__(self, service_id, service_type, name, enabled, setup):
     # Hacky to fix the logging in these classes...
     global logger
     logger = terrariumLogging.logging.getLogger(__name__)
 
-    if id is None:
-      id = terrariumUtils.generate_uuid()
+    if service_id is None:
+      service_id = terrariumUtils.generate_uuid()
 
-    self.id   = id
-    self.type = type
+    self.id   = service_id
+    self.type = service_type
     self.name = name
     self.enabled = enabled
 

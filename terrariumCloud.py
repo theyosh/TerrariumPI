@@ -77,14 +77,14 @@ class TerrariumMerossCloud(terrariumSingleton):
     for key in self._data:
       self.__engine['cache'].set_data(key, self._data[key],90)
 
-  def scan_hardware(self,type):
+  def scan_hardware(self, device_type):
 
-    async def _scan_hardware(type):
+    async def _scan_hardware(device_type):
       await self.manager.async_device_discovery()
       meross_devices = []
-      if 'sensors' == type:
+      if 'sensors' == device_type:
         meross_devices = self.manager.find_devices(device_type='ms100')
-      elif 'relays' == type:
+      elif 'relays' == device_type:
         meross_devices = self.manager.find_devices(device_class=ToggleXMixin)
 
       return meross_devices
@@ -92,7 +92,7 @@ class TerrariumMerossCloud(terrariumSingleton):
     if not self.__engine['running']:
       return []
 
-    data = asyncio.run_coroutine_threadsafe(_scan_hardware(type), self.__engine['asyncio'].async_loop)
+    data = asyncio.run_coroutine_threadsafe(_scan_hardware(device_type), self.__engine['asyncio'].async_loop)
     devices = data.result()
     return devices
 
