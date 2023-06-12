@@ -311,7 +311,7 @@
           false,
           (data) =>
             (sensors = data.map((item) => {
-              return { value: item.id, text: item.name, type: item.type };
+              return { value: item.id, text: item.name, type: item.type, calibration: item.calibration };
             }))
         ),
         fetchButtons(
@@ -522,7 +522,7 @@
             value="{$formData.setup?.light_sensors}"
             multiple="{true}"
             options="{[...sensors.filter((item) => {
-                             return item.type === 'light';
+                             return item.type === 'light' && item.calibration?.light_on_off_threshold > 0;
                           }),
                        ...buttons.filter((item) => {
                             return item.type === 'ldr';
