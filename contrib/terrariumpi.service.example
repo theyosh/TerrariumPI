@@ -14,7 +14,7 @@ RestartSec=5
 KillSignal=SIGINT
 # This big timeout is needed so the database upgrade will work during startups
 TimeoutStartSec=1800
-WatchdogSec=120
+WatchdogSec=180
 Type=notify
 
 # StartLimitInterval=370
