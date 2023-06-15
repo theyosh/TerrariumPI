@@ -44,24 +44,31 @@ class AM2320:
     # This write will fail as AM2320 won't ACK this write
     try:
       posix.write(fd, b'\0x00')
-    except:
+    except Exception:
       logger.debug(f'Woke up sensor {self}')
 
     sleep(0.002) #Wait at least 0.8ms, at most 3ms
     # write at addr 0x03, start reg = 0x00, num regs = 0x04 */
-    posix.write(fd, b'\x03\x00\x04')
-    sleep(0.0020) #Wait at least 1.5ms for result
+    data = []
+    try:
+      posix.write(fd, b'\x03\x00\x04')
 
-    # Read out 8 bytes of result data
-    # Byte 0: Should be Modbus function code 0x03
-    # Byte 1: Should be number of registers to read (0x04)
-    # Byte 2: Humidity msb
-    # Byte 3: Humidity lsb
-    # Byte 4: Temperature msb
-    # Byte 5: Temperature lsb
-    # Byte 6: CRC lsb byte
-    # Byte 7: CRC msb byte
-    data = bytearray(posix.read(fd, 8))
+      sleep(0.0020) #Wait at least 1.5ms for result
+
+      # Read out 8 bytes of result data
+      # Byte 0: Should be Modbus function code 0x03
+      # Byte 1: Should be number of registers to read (0x04)
+      # Byte 2: Humidity msb
+      # Byte 3: Humidity lsb
+      # Byte 4: Temperature msb
+      # Byte 5: Temperature lsb
+      # Byte 6: CRC lsb byte
+      # Byte 7: CRC msb byte
+      data = bytearray(posix.read(fd, 8))
+    except Exception:
+      pass
+    finally:
+      posix.close(fd)
 
     # Check data[0] and data[1]
     if data[0] != 0x03 or data[1] != 0x04:

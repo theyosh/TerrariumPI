@@ -52,8 +52,8 @@ class CCS811_RPi:
     CCS811_fw= io.open("/dev/i2c-"+str(twi), "wb", buffering=0)
 
     # set device address
-    fcntl.ioctl(CCS811_fr, I2C_SLAVE, CCS811_ADDRESS)
-    fcntl.ioctl(CCS811_fw, I2C_SLAVE, CCS811_ADDRESS)
+    fcntl.ioctl(CCS811_fr, I2C_SLAVE, addr)
+    fcntl.ioctl(CCS811_fw, I2C_SLAVE, addr)
     sleep(0.015)
 
   # public functions
