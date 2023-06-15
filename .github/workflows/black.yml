@@ -1,0 +1,22 @@
+# This is a basic workflow to help you get started with Actions
+name: Link with Black
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ "4.x.y.z"]
+    paths:
+      - '**.py'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: psf/black@stable
+        with:
+          options: "--check -l 120 -t py37"
