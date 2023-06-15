@@ -16,15 +16,20 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: psf/black@stable
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Lint code
+        uses: psf/black@stable
         with:
           options: "-l 120 -t py37"
 
 
       - name: Commit cleaned code
-      run: |
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-        git commit -am "Python code is blacked" --author="TheYOSH <theyosh@users.noreply.github.com>" || true
-        git push -f
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -am "Python code is blacked" --author="TheYOSH <theyosh@users.noreply.github.com>" || true
+          git push -f
