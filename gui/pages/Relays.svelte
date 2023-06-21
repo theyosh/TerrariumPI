@@ -6,16 +6,24 @@
   import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
   import { fetchRelays, deleteRelay, toggleRelay, dimRelay, manualRelay, updateSystemSettings } from '../providers/api';
   import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { isAuthenticated } from '../stores/authentication';
 
   import RelayCard from '../user-controls/RelayCard.svelte';
+  import EventModel from '../modals/EventFormModal.svelte';
+
 
   let relays = [];
+  let showModal;
 
   const { confirmModal } = getContext('confirm');
 
   const loadData = () => {
     fetchRelays(false, (data) => (relays = data));
   };
+
+  const loadCalendar = () => {
+    location.href = '/#/calendar';
+  }
 
   const deleteRelayAction = (relay) => {
     confirmModal(
@@ -71,7 +79,12 @@
     );
   };
 
-  const replaceHardware = (relay) => {};
+  const replaceHardware = (relay) => {
+
+    let eventData = {'mode': 'reminder', 'summary' : 'Replace hardware relay ' + relay.name};
+    showModal(eventData);
+
+  };
 
   const relayManualMode = (relay) => {
     confirmModal(
@@ -160,3 +173,6 @@
     {/if}
   </div>
 </div>
+{#if $isAuthenticated}
+  <EventModel bind:show="{showModal}" on:save="{loadCalendar}" />
+{/if}

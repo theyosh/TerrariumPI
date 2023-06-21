@@ -91,7 +91,7 @@
     deleteButton.innerHTML = '<i class="fas fa-trash-alt text-danger">';
     deleteButton.onclick = deleteCalendarEventCall;
 
-    // We use the AdminLTE compiled calendar version which has better themeing..
+    // We use the AdminLTE compiled calendar version which has better theming..
     calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
       initialView: 'dayGridMonth',
       locale: $locale.substring(0, 2),
@@ -149,12 +149,14 @@
           calendar.unselect();
         } else {
           // Open modal for adding event
+          data.mode = 'repeat';
           editCalendarEvent(data);
         }
       },
       eventClick: function (data) {
         if ($isAuthenticated) {
           // Open modal for adding event
+          data.event.mode = 'repeat';
           editCalendarEvent(data.event);
         }
       },

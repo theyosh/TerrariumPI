@@ -22,7 +22,7 @@
 
   let repeat = false;
   let formData = writable({});
-  let mode = 'repeat'; // TODO: Fix this. Need to work with the hardware reminder functionality
+  let mode = 'reminder';
 
   let editForm;
 
@@ -58,6 +58,7 @@
     dispatch('save');
   };
 
+  const uselessEnterEnd = /<br[^>]*><\/p>$/gm;
   const _processForm = async (values, context) => {
     validated = true;
 
@@ -71,6 +72,7 @@
         delete values.interval;
       }
 
+      values.description = values.description.replace(uselessEnterEnd, `<\/p>`);
       values.dtstart /= 1000;
       values.dtend /= 1000;
 
@@ -117,8 +119,8 @@
     // Anonymous (Async) functions always as first!!
     (async () => {
       // If ID is given, load existing data
-
       if (eventData.id) {
+        loading = true;
         await fetchCalendarEvents(eventData.id, (data) => {
           // Use miliseconds
           data.dtstart *= 1000;
@@ -128,25 +130,29 @@
         });
         setFields($formData);
         repeat = $formData.freq !== '_';
+        // Loading done
+        loading = false;
       }
-
-      // Loading done
-      loading = false;
     })();
 
-    // Toggle loading div
-    loading = eventData.id !== undefined && eventData.id !== null;
+    if (eventData.mode) {
+        mode = eventData.mode;
+    } else {
+        mode = 'reminder';
+    }
 
     repeat = false;
 
     // Reset form validation
     reset();
     validated = false;
+    let now = Date.now();
     $formData = {
-      dtstart: Date.parse(eventData.start),
-      dtend: Date.parse(eventData.end),
+      dtstart: eventData.start ? Date.parse(eventData.start) : now,
+      dtend:   eventData.end   ? Date.parse(eventData.end)   : now + 86400000,
       description: '',
       freq: '_',
+      ...eventData
     };
     setFields($formData);
 
@@ -178,6 +184,7 @@
 
   <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
     <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
+    <input type="hidden" name="mode" value="{mode}"/>
 
     <div class="row">
       <div class="col-12 col-sm-12 col-md-9 col-lg-9">
