@@ -378,6 +378,9 @@ class terrariumArea(object):
             variation_data = []
 
         for variation in variation_data:
+            if "" == variation.get("value", ""):
+                continue
+
             periods = len(self.state["variation"]["periods"])
 
             if "at" == variation.get("when"):
