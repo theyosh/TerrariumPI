@@ -36,7 +36,7 @@
 		favicon  : '{{ favicon }}',
 		logged_in : {% if authenticated %}true{% else %}false{% endif %},
 		{% if authenticated %}username: '{{ username }}', {% endif %}
-        docker: {{ docker }},
+		docker: {{ docker }},
 		gitversion: '{% if authenticated %}{{gitversion}}{% endif %}',
 		graph_show_min_max_gauge : {{ graph_show_min_max_gauge }},
 		graph_smooth_value : {{ graph_smooth_value }},
