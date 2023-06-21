@@ -1408,6 +1408,7 @@
                         $formData.setup.variation[index].when = value.detail;
                       }}"
                       options="{[
+                        { value: '', text: '' },
                         { value: 'after', text: $_('areas.settings.setup.variation.when.options.after', { default: 'After x minutes' }) },
                         { value: 'at', text: $_('areas.settings.setup.variation.when.options.at', { default: 'At time' }) },
                         {
