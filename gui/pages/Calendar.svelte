@@ -156,8 +156,11 @@
       eventClick: function (data) {
         if ($isAuthenticated) {
           // Open modal for adding event
-          data.event.mode = 'repeat';
-          editCalendarEvent(data.event);
+          data = {
+            'id' : data.event.id,
+            'mode' : 'repeat'
+          }
+          editCalendarEvent(data);
         }
       },
 

@@ -152,6 +152,7 @@
       dtend:   eventData.end   ? Date.parse(eventData.end)   : now + 86400000,
       description: '',
       freq: '_',
+      repeatend: 2,
       ...eventData
     };
     setFields($formData);
@@ -185,6 +186,7 @@
   <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
     <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
     <input type="hidden" name="mode" value="{mode}"/>
+    <input type="hidden" name="repeatend" value="2" disabled={'reminder' !== mode}/>
 
     <div class="row">
       <div class="col-12 col-sm-12 col-md-9 col-lg-9">
