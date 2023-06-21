@@ -114,7 +114,7 @@ class terrariumCalendar(object):
         if freq and interval and "_" != freq:
             rrule = {"freq": freq, "interval": interval}
             if repeat_end is not None:
-                rrule["count"] = repeat_end
+                rrule["count"] = int(repeat_end)
             event.add("rrule", rrule)
 
         if create:
