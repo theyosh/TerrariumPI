@@ -240,6 +240,7 @@
 
   const confirmModalWindow = (type) => {
     let message = '';
+    let callbackAction = () => menuAction(type);
 
     switch (type) {
       case 'scan_sensors':
@@ -252,14 +253,24 @@
         message = $_('modal.confirm.system.restart');
         break;
       case 'system_reboot':
-        message = $_('modal.confirm.system.reboot');
+        if (settings.docker) {
+            callbackAction = null;
+            message = $_('modal.confirm.docker.not_available', {default: 'This feature is not possible in a Docker setup.'});
+        } else {
+            message = $_('modal.confirm.system.reboot', {default: 'This will reboot the Raspberry PI. This can take up to 60 seconds.'});
+        }
         break;
       case 'system_shutdown':
-        message = $_('modal.confirm.system.shutdown');
+      if (settings.docker) {
+            callbackAction = null;
+            message = $_('modal.confirm.docker.not_available', {default: 'This feature is not possible in a Docker setup.'});
+        } else {
+            message = $_('modal.confirm.system.shutdown', {default: 'This will shutdown the Raspberry PI. Use with care!'});
+        }
         break;
     }
 
-    confirmModal(message, () => menuAction(type));
+    confirmModal(message, callbackAction);
   };
 
   // Update sensor sub menu sorting

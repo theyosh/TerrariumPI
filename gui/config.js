@@ -5,6 +5,7 @@ import { default as currentUserStore } from './stores/current-user';
 const custom = {
   ContactEmail: 'tp@theyosh.nl',
   logged_in: false,
+  docker: false,
 };
 
 export const getCustomConfig = (extra) => {

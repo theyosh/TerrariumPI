@@ -907,6 +907,9 @@
   },
   "modal": {
     "confirm": {
+      "docker": {
+        "not_available": "Esta característica no es posible en una configuración de Docker."
+      },
       "relays": {
         "scan": "Esto comenzará un nuevo escaneo para encontrar nuevos relés. Esto puede tomar hasta 30 segundos."
       },

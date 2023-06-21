@@ -956,6 +956,9 @@
   },
   "modal": {
     "confirm": {
+      "docker": {
+        "not_available": "Deze functie is niet mogelijk in een Docker-configuratie."
+      },
       "relays": {
         "scan": "Dit start een nieuwe scan om nieuwe schakelaar te vinden. Dit kan tot 30 seconden duren."
       },

@@ -956,6 +956,9 @@
   },
   "modal": {
     "confirm": {
+      "docker": {
+        "not_available": "Questa funzione non è possibile in una configurazione Docker."
+      },
       "relays": {
         "scan": "Questo avverrà una nuova scansione per trovare nuovi relè. Questo può richiedere fino a 30 secondi."
       },

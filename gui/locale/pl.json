@@ -956,6 +956,9 @@
   },
   "modal": {
     "confirm": {
+      "docker": {
+        "not_available": "Ta funkcja nie jest możliwa w konfiguracji platformy Docker."
+      },
       "relays": {
         "scan": "To rozpocznie nowy skan, aby znaleźć nowe przekaźniki. Może to potrwać do 30 sekund."
       },

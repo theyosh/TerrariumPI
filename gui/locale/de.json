@@ -956,6 +956,9 @@
   },
   "modal": {
     "confirm": {
+      "docker": {
+        "not_available": "Diese Funktion ist in einem Docker-Setup nicht möglich."
+      },
       "relays": {
         "scan": "Dies startet einen neuen Scan, um neue Relais zu finden. Dies kann bis zu 30 Sekunden dauern."
       },
