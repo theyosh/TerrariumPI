@@ -215,7 +215,10 @@
           delete values.setup.high;
         }
 
-        if (values.setup.variation.length === 1 && values.setup.variation[0].period === '' && values.setup.variation[0].value === '' && values.setup.variation[0].when === '') {
+        // Filter the variation data so that every item should be filled, else the variation is invalid and will be deleted
+        // This can also be used to clear the first line
+        values.setup.variation = values.setup.variation.filter((item) => Object.values(item).every(value => value && value !== ''));
+        if (values.setup.variation.length === 0) {
           delete values.setup.variation;
         }
 
@@ -1408,7 +1411,6 @@
                         $formData.setup.variation[index].when = value.detail;
                       }}"
                       options="{[
-                        { value: '', text: '' },
                         { value: 'after', text: $_('areas.settings.setup.variation.when.options.after', { default: 'After x minutes' }) },
                         { value: 'at', text: $_('areas.settings.setup.variation.when.options.at', { default: 'At time' }) },
                         {
