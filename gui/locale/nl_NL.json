@@ -911,7 +911,7 @@
         "placeholder": "Voer een bericht in"
       },
       "placeholders": {
-        "format": "Numberwaarden kunnen worden afgerond met de {link_start} `.: 2f` format {link_end}",
+        "format": "Gebruik {placeholder} opmaak om een variabele van de lijst hieronder te gebruiken.{new_line}Numberwaarden kunnen worden afgerond met de {link_start} `.: 2f` format {link_end}",
         "help": "Beschikbare plaatshouders.",
         "label": "Plaatshouders"
       },
@@ -1286,7 +1286,7 @@
     },
     "calibration": {
       "light_on_off_threshold": {
-        "light_bulb": ""
+        "light_bulb": "Licht aan/uit drempelwaarde: {threshold}"
       }
     },
     "co2": {
