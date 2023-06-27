@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2023-06-27 10:47+0000\n"
-"Last-Translator: Chris Hudlin <christopher.hudlin@atos.net>\n"
+"PO-Revision-Date: 2023-06-27 21:15+0000\n"
+"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: English (United States) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/backend/en_US/>\n"
 "Language: en_US\n"
@@ -448,7 +448,7 @@ msgstr "Current power state"
 
 #: terrariumNotification.py:225
 msgid "Sensor measure state"
-msgstr ""
+msgstr "Sensor measure state"
 
 #: terrariumNotification.py:226
 msgid "Enclosure name"
@@ -456,7 +456,7 @@ msgstr "Enclosure name"
 
 #: terrariumNotification.py:227
 msgid "Enclosure running mode"
-msgstr ""
+msgstr "Enclosure running mode"
 
 #: terrariumNotification.py:441
 msgid "Display"
