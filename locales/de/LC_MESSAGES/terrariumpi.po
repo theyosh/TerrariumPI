@@ -3,12 +3,13 @@
 # Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2021.
 # theyosh <github.com@theyosh.nl>, 2022.
 # Tobias Nitsch <info@sni-reptiles.com>, 2022.
+# Chris Hudlin <christopher.hudlin@atos.net>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2022-12-13 08:07+0000\n"
-"Last-Translator: Tobias Nitsch <info@sni-reptiles.com>\n"
+"PO-Revision-Date: 2023-06-27 10:47+0000\n"
+"Last-Translator: Chris Hudlin <christopher.hudlin@atos.net>\n"
 "Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/de/>\n"
 "Language: de\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 4.18.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -113,7 +114,7 @@ msgstr "UVI"
 
 #: terrariumEngine.py:66
 msgid "fertility"
-msgstr "Wahr, wenn Fehler vorhanden"
+msgstr "Fertilität"
 
 #: terrariumEngine.py:67
 msgid "co2"
@@ -411,7 +412,7 @@ msgstr "Wahr, wenn es ein Dimmer ist"
 
 #: terrariumNotification.py:166 terrariumNotification.py:193
 msgid "Current state"
-msgstr "Aktueller Modus"
+msgstr "Aktueller Zustand"
 
 #: terrariumNotification.py:173
 msgid "Relay change (only when value is changed)"
@@ -439,7 +440,7 @@ msgstr "Webcam-Archiv"
 
 #: terrariumNotification.py:222
 msgid "Lights area wrong state"
-msgstr ""
+msgstr "Lichtbereich falscher Zustand"
 
 #: terrariumNotification.py:224
 #, fuzzy
