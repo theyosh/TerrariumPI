@@ -8,7 +8,7 @@
   "areas": {
     "delete": {
       "confirm": {
-        "message": "Bist du sicher, dass du den Bereich ''{name}'' löschen möchtest?"
+        "message": "Sind Sie sicher, dass du den Bereich ''{name}'' löschen möchtest?"
       },
       "error": {
         "message": "Der Bereich ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
@@ -25,16 +25,16 @@
         "placeholder": "Wähle abhängige Bereiche"
       },
       "enclosure": {
-        "help": "Wähle das Terrarium aus, zu dem dieser Bereich gehört.",
+        "help": "Wählen Sie das Gehäuse, zu dem dieser Bereich gehört.",
         "invalid": "Bitte triff eine Wahl.",
-        "label": "Terrarium",
-        "placeholder": "Wähle ein Terrarium"
+        "label": "Gehäuse",
+        "placeholder": "Wähle ein Gehäuse"
       },
       "light_sensors": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Wählen Sie die Lichtsensoren, um zu erkennen, ob das Licht eingeschaltet ist.",
+        "invalid": "Bitte treffen Sie eine Wahl.",
+        "label": "Lichterkennungssensoren",
+        "placeholder": "Lichtsensoren auswählen"
       },
       "mode": {
         "help": "Wähle den Modus dieses Bereichs. Das ändert Schaltzeit- und dauer der Relais.",
@@ -911,7 +911,7 @@
         "placeholder": "Nachricht eingeben"
       },
       "placeholders": {
-        "format": "Zahlenwerte können mit dem Format {link_start}`.:2f` gerundet werden{link_end}",
+        "format": "Verwenden Sie das Format {placeholder}, um einen Platzhalter unten in Ihrer Nachricht zu verwenden.{new_line}Zahlenwerte können mit dem Format {link_start}`.:2f` gerundet werden{link_end}",
         "help": "Liste von verfügbaren Platzhaltern.",
         "label": "Platzhalter"
       },
@@ -1286,7 +1286,7 @@
     },
     "calibration": {
       "light_on_off_threshold": {
-        "light_bulb": ""
+        "light_bulb": "Einschalten des Schwellenwerts: {Schwellenwert}"
       }
     },
     "co2": {
@@ -1297,12 +1297,12 @@
     },
     "confirm": {
       "ignore": {
-        "message": "Bist du sicher, dass du den Sensor ''{name}'' ignorieren möchtest?"
+        "message": "Sind Sie sicher, dass du den Sensor ''{name}'' ignorieren möchtest?"
       }
     },
     "delete": {
       "confirm": {
-        "message": "Bist du sicher, dass du den Sensor ''{name}'' löschen möchtest?"
+        "message": "Sind Sie sicher, dass du den Sensor ''{name}'' löschen möchtest?"
       },
       "error": {
         "message": "Der Sensor ''{name}'' konnte nicht gelöscht werden!\nFehler: {error}"
@@ -1406,9 +1406,9 @@
           "label": "Mindestfeuchtewert"
         },
         "light_threshold": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Geben Sie den Wert ein, wenn die Lichter eingeschaltet sind.",
+          "invalid": "Der eingegebene Wert ist nicht gültig. Er muss eine höhere Zahl als {min} sein.",
+          "label": "Schwelle für \"Licht an\""
         },
         "offset": {
           "help": "Abweichung für diesen Sensor eingeben.",
