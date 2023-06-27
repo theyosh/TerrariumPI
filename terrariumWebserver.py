@@ -164,7 +164,7 @@ class terrariumWebserver(object):
             "profile_image": self.engine.settings["profile_image"].lstrip("/"),
             "favicon": self.engine.settings["favicon"].lstrip("/"),
             "gitversion": self.engine.settings["gitversion"],
-            "docker" : str(terrariumUtils.is_docker()).lower(),
+            "docker": str(terrariumUtils.is_docker()).lower(),
             # 'languages'     : self.engine.settings['languages'],	# Should be removed
             "units": unit_variables(),
             "available_sensor_types": list(map(lambda sensor: sensor["id"], self.engine.sensor_types_loaded)),
