@@ -911,7 +911,7 @@
         "placeholder": "Enter a message"
       },
       "placeholders": {
-        "format": "Number values can be rounded using the {link_start}`.:2f` format{link_end}",
+        "format": "Use {placeholder} format to use a placeholder below in your message.{new_line}Number values can be rounded using the {link_start}`.:2f` format{link_end}",
         "help": "List of available placeholders.",
         "label": "Place holders"
       },
@@ -956,6 +956,9 @@
   },
   "modal": {
     "confirm": {
+      "docker": {
+        "not_available": "This feature is not possible in a Docker setup."
+      },
       "relays": {
         "scan": "This will start a new scan to find new relays. This can take up to 30 seconds."
       },
@@ -981,6 +984,9 @@
     "general": {
       "close": "Close",
       "save": "Save"
+    },
+    "loading": {
+      "title": "Loading"
     },
     "login": {
       "error": "Invalid login",
@@ -1277,6 +1283,11 @@
       "uva": "Average UVA",
       "uvb": "Average UVB",
       "uvi": "Average UV Index"
+    },
+    "calibration": {
+      "light_on_off_threshold": {
+        "light_bulb": "Light on of threshold value: {threshold}"
+      }
     },
     "co2": {
       "menu": {
@@ -1911,6 +1922,7 @@
     "archive": {
       "modal": {
         "loading": {
+          "status": "Currently loaded {total} images ... ({percentage}%)",
           "title": "Starting loading webcam archive images ..."
         }
       },
