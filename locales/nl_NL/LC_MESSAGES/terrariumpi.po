@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2023-05-31 20:18+0000\n"
+"PO-Revision-Date: 2023-06-27 21:15+0000\n"
 "Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/nl/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 4.18.1\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -443,22 +443,20 @@ msgid "Lights area wrong state"
 msgstr "Verlichting in verkeerde status"
 
 #: terrariumNotification.py:224
-#, fuzzy
-#| msgid "Current power usage"
 msgid "Current power state"
-msgstr "Huidig stroomverbruik"
+msgstr "Huidige vermogen"
 
 #: terrariumNotification.py:225
 msgid "Sensor measure state"
-msgstr ""
+msgstr "Meetstatus sensor"
 
 #: terrariumNotification.py:226
 msgid "Enclosure name"
-msgstr ""
+msgstr "Naam verblijf"
 
 #: terrariumNotification.py:227
 msgid "Enclosure running mode"
-msgstr ""
+msgstr "Verblijf bedrijfsmodus"
 
 #: terrariumNotification.py:441
 msgid "Display"
