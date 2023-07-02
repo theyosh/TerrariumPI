@@ -24,7 +24,7 @@
     "leaflet": "^1.9.2",
     "postcss": "^8.4.14",
     "postcss-import": "^15.0.0",
-    "rollup": "^2.79.1",
+    "rollup": "^3.26.0",
     "rollup-plugin-bundle-inject": "^1.0.3",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-delete": "^2.0.0",
