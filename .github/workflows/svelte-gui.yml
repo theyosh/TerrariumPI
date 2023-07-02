@@ -36,7 +36,7 @@ jobs:
           node-version: lts/*
 
       - name: Install NPM Modules
-        run: npm install && ./gui/patch.sh
+        run: npm install --force && ./gui/patch.sh
 
       - name: Build Project
         run: npm run build
