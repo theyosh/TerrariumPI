@@ -86,7 +86,7 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
             self.device.hardware_PWM(
                 terrariumUtils.to_BCM_port_number(self.address),
                 self._DIMMER_FREQ,
-                int(dim_value) * self._DIMMER_DUTY_CYCLE,
+                max(0, min(1000000, int(dim_value) * self._DIMMER_DUTY_CYCLE)),
             )
             self._dimmer_state = state
 

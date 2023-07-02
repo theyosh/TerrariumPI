@@ -1,5 +1,5 @@
 pip==23.1.2
-setuptools==67.8.0
+setuptools==68.0.0
 wheel==0.40.0
 
 # Database
@@ -43,7 +43,7 @@ PyMLX90614==0.0.4
 pyownet==0.10.0.post1
 veml6075==0.0.2
 lib8relay==1.0.3
-pylibftdi==0.20.0
+pylibftdi==0.21.0
 asyncio==3.4.3
 python-kasa==0.5.1
 meross-iot==0.4.5.9
