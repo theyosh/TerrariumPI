@@ -39,12 +39,12 @@ class terrariumUSBLiveWebcam(terrariumWebcam):
         cmd = Path(__file__).parent / "usblive_webcam.sh"
 
         cmd = [
+            self.address,
             str(cmd),
             self.name,
             str(self.width),
             str(self.height),
             str(self.rotation),
-            self.awb,
             str(Path(self._STORE_LOCATION).joinpath(self.id)),
         ]
         self.__process = subprocess.Popen(

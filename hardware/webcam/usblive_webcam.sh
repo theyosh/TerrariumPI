@@ -1,17 +1,21 @@
 #!/bin/bash
 
 # Available parameters
-NAME=$1
-WIDTH=$2
-HEIGHT=$3
-ROTATION=$4
-AWB=$5
+DEVICE=$1
+NAME=$2
+WIDTH=$3
+HEIGHT=$4
+ROTATION=$5
 DIR=$6
 
 # Find the needed programs
 FFMPEG=$(which ffmpeg)
 
 # Defaults
+if [[ "${DEVICE}" == "" ]]; then
+  DEVICE="/dev/video0"
+fi
+
 if [[ "${NAME}" == "" ]]; then
   NAME="USB Live"
 fi
@@ -57,5 +61,5 @@ elif [[ "${ROTATION}" == "270" ]]; then
 fi
 
 # Start streaming
-"${FFMPEG}" -hide_banner -y -nostdin -f v4l2 -flags +global_header -pix_fmt yuv420p -framerate 30 -video_size "${WIDTH}x${HEIGHT}" -re -i /dev/video0 \
+"${FFMPEG}" -hide_banner -y -nostdin -f v4l2 -flags +global_header -pix_fmt yuv420p -framerate 30 -video_size "${WIDTH}x${HEIGHT}" -re -i "${DEVICE}" \
  -c:v h264_omx -profile:v 66 -flags:v +global_header -flags +cgop -g 6 -b:v 2000K -vf "${ROTATION_ACTION}format=yuv420p,drawtext=fontfile=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf:box=1:boxcolor=black:text='${NAME} %{localtime\:%a %d %b %Y @ %H\\\\\:%M\\\\\:%S}':fontsize=14:fontcolor=white@1:x=3:y=3" -f hls -hls_time 2 -hls_list_size 3 -hls_flags delete_segments+split_by_time -hls_segment_filename "${DIR}/chunk_%03d.ts" "${DIR}/stream.m3u8"
