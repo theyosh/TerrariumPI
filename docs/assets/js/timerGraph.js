@@ -16,7 +16,7 @@ function showTimerGraph() {
   today = `${today.getFullYear()}-${today.getMonth() < 9 ? '0' : ''}${today.getMonth()+1}-${today.getDate()}T`;
 
   const begin_time = Date.parse( today + jQuery('input#begin_time').val() + ':00');
-  const end_time   = Date.parse( today + jQuery('input#end_time').val() + ':00');
+  let end_time   = Date.parse( today + jQuery('input#end_time').val() + ':00');
 
   let on_duration  = jQuery('input#on_duration').val();
   let off_duration = jQuery('input#off_duration').val();
@@ -25,6 +25,10 @@ function showTimerGraph() {
   let settle_time  = jQuery('input#settle_time').val();
 
   if (begin_time && end_time) {
+
+    if (begin_time == end_time) {
+        end_time += 86400000;
+    }
 
     on_duration  = (on_duration  == '' || on_duration  == 0) ? (end_time - begin_time)/60000 : on_duration;
     off_duration = off_duration == '' ? 0 : off_duration;
