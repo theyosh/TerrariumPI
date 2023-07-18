@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2023-06-27 10:47+0000\n"
+"PO-Revision-Date: 2023-07-18 09:47+0000\n"
 "Last-Translator: Chris Hudlin <christopher.hudlin@atos.net>\n"
 "Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/de/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 4.18.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -194,11 +194,11 @@ msgstr "letztes Update"
 
 #: terrariumNotification.py:41
 msgid "Local date"
-msgstr "Datum"
+msgstr "Lokales Datum"
 
 #: terrariumNotification.py:42
 msgid "Local date, day and month"
-msgstr "Datum, Tag und Monat"
+msgstr "Lokales Datum, Tag und Monat"
 
 #: terrariumNotification.py:43
 msgid "Local time"
@@ -210,7 +210,7 @@ msgstr "Ortszeit, Stunden und Minuten"
 
 #: terrariumNotification.py:45
 msgid "Local date and time"
-msgstr "Datum und Uhrzeit"
+msgstr "Lokales Datum und Uhrzeit"
 
 #: terrariumNotification.py:53
 msgid "Authentication login error"
@@ -259,7 +259,7 @@ msgstr "Systemauslastung in der vergangenen Minute"
 #: terrariumNotification.py:83 terrariumNotification.py:85
 #: terrariumNotification.py:90 terrariumNotification.py:133
 msgid "True if there is an alarm"
-msgstr "Alarm vorhanden"
+msgstr "True, wenn ein Alarm vorliegt"
 
 #: terrariumNotification.py:84
 msgid "System CPU temperature"
@@ -443,22 +443,20 @@ msgid "Lights area wrong state"
 msgstr "Lichtbereich falscher Zustand"
 
 #: terrariumNotification.py:224
-#, fuzzy
-#| msgid "Current power usage"
 msgid "Current power state"
-msgstr "Aktueller Stromverbrauch"
+msgstr "Aktueller Stromzustand"
 
 #: terrariumNotification.py:225
 msgid "Sensor measure state"
-msgstr ""
+msgstr "Status der Sensormessung"
 
 #: terrariumNotification.py:226
 msgid "Enclosure name"
-msgstr ""
+msgstr "Gehäuse name"
 
 #: terrariumNotification.py:227
 msgid "Enclosure running mode"
-msgstr ""
+msgstr "Gehäuse-Betriebsmodus"
 
 #: terrariumNotification.py:441
 msgid "Display"
