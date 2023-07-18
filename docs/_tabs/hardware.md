@@ -17,7 +17,7 @@ All the hardware that is connected through GPIO pins needs to use the **physical
 
 Some GPIO sensors can benefit from using power saving. A good example is the analog/digital moisture sensor [YTXX]({% link _hardware/ytxx-digital_sensor.md %})
 
-Power management works that you connect the red (power) wire of the sensor to a GPIO pin, which will be put to high so that the sensor get powered. After 0.25 sec a measurement is taken, and afterwards the power to the sensor is shutdown.
+Power management works that you connect the red (power) wire of the sensor to a GPIO pin, which will be put to high so that the sensor get powered. After 1.0 sec a measurement is taken, and afterwards the power to the sensor is shutdown.
 
 When you want to enable power saving just enter an extra GPIO pin number, where the RED power cable is connected to, to the address separated by a comma.\
 Ex: `[GPIO Readout pin],[GPIO power saving pin]`

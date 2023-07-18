@@ -23,7 +23,7 @@ Types
 : {{types}}
 
 Address
-: {{ page.device_address }} {%if page.device_power_management %}This sensor does support ([power management]({% link _tabs/hardware.md %}#power-saving))
+: {{ page.device_address }} {%if page.device_power_management %}This sensor does support ([**power management**]({% link _tabs/hardware.md %}#power-saving))
  {% endif %}
 
 Other settings can be found at the [sensor setup]({% link _tabs/setup.md %}#sensors) information
