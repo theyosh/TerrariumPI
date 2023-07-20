@@ -365,7 +365,39 @@ export const fetchEnclosures = async (enclosure_id, cb) => {
   if (enclosure_id) {
     url += `${enclosure_id}/`;
   }
-  await _getData(url, cb);
+
+  // This callback will alter the start and end time for the enclosure areas which uses a timer mode.
+  const fixTimerModeStartAndEndTimesCb = (data) => {
+    data.forEach(enclosure => {
+        enclosure.areas.forEach(area => {
+            if (area.mode === 'timer') {
+                ['day', 'night', 'low', 'high'].forEach(period => {
+                    if (area.state[period]) {
+                        let startTime = area.setup[period].begin.split(':');
+                        let endTime = area.setup[period].end.split(':');
+
+                        area.state[period].begin = new Date();
+                        area.state[period].begin.setHours(startTime[0]);
+                        area.state[period].begin.setMinutes(startTime[1]);
+                        area.state[period].begin.setSeconds(0);
+
+                        area.state[period].end = new Date();
+                        area.state[period].end.setHours(endTime[0]);
+                        area.state[period].end.setMinutes(endTime[1]);
+                        area.state[period].end.setSeconds(0);
+
+                        area.state[period].begin = area.state[period].begin.getTime() / 1000;
+                        area.state[period].end = area.state[period].end.getTime() / 1000;
+                    }
+                });
+            }
+        });
+    });
+
+    cb(data);
+  };
+
+  await _getData(url, fixTimerModeStartAndEndTimesCb);
 };
 
 export const addEnclosure = async (data, cb) => {
