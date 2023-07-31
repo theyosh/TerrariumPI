@@ -90,13 +90,13 @@
         },
         "depend_on_relays_mode": {
           "all": {
-            "label": ""
+            "label": "Alles aan"
           },
           "none": {
-            "label": ""
+            "label": "Geen aan"
           },
           "one": {
-            "label": ""
+            "label": "Minstens een"
           }
         },
         "deviation_high_alarm": {
@@ -119,16 +119,16 @@
             "placeholder": "Voer de begintijd in"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Selecteer de relais waarvan deze relais afhankelijk zijn.",
+            "invalid": "Maak een keuze.",
+            "label": "Afhankelijk van relais",
+            "placeholder": "Selecteer schakelaars"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Selecteer afhankelijke modus",
+            "invalid": "Maak een keuze.",
+            "label": "Afhankelijks modus",
+            "placeholder": "Selecteer een modus"
           },
           "door_status": {
             "help": "Selecteer de deurstatus.",
@@ -237,16 +237,16 @@
             "placeholder": "Voer de begintijd in"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Selecteer de relais waarvan deze relais afhankelijk zijn.",
+            "invalid": "Maak een keuze.",
+            "label": "Afhankelijk van relais",
+            "placeholder": "Selecteer schakelaars"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Selecteer afhankelijke modus",
+            "invalid": "Maak een keuze.",
+            "label": "Afhankelijks modus",
+            "placeholder": "Selecteer een modus"
           },
           "door_status": {
             "help": "Selecteer de deurstatus.",
