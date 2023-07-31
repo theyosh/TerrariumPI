@@ -12,6 +12,7 @@ import json from "@rollup/plugin-json";
 import esbuild from "rollup-plugin-esbuild";
 import del from "rollup-plugin-delete";
 import template from "./html-template.js";
+import { spawn } from "child_process";
 
 const production = process.env.NODE_ENV === "prod";
 
@@ -25,7 +26,7 @@ function serve() {
   return {
     writeBundle() {
       if (server) return;
-      server = require("child_process").spawn("npm", ["run", "start"], {
+      server = spawn("npm", ["run", "start"], {
         stdio: ["ignore", "inherit", "inherit"],
         shell: true
       });
