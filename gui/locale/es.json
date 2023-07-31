@@ -87,12 +87,35 @@
           },
           "placeholder": "Seleccione una fuente de día/noche"
         },
+        "depend_on_relays_mode": {
+          "all": {
+            "label": ""
+          },
+          "none": {
+            "label": ""
+          },
+          "one": {
+            "label": ""
+          }
+        },
         "high": {
           "begin": {
             "help": "La hora del día en que los relés se alternan cada noche.",
             "invalid": "Ingrese un tiempo válido.",
             "label": "Comienza el tiempo",
             "placeholder": "Ingrese el tiempo de inicio"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Seleccione el estado de la puerta.",
@@ -199,6 +222,18 @@
             "invalid": "Ingrese un tiempo válido.",
             "label": "Comienza el tiempo",
             "placeholder": "Ingrese el tiempo de inicio"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Seleccione el estado de la puerta.",

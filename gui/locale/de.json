@@ -88,6 +88,17 @@
           },
           "placeholder": "Wähle eine Tag/Nacht-Quelle"
         },
+        "depend_on_relays_mode": {
+          "all": {
+            "label": ""
+          },
+          "none": {
+            "label": ""
+          },
+          "one": {
+            "label": ""
+          }
+        },
         "deviation_high_alarm": {
           "help": "Erhöhung des oberen Alarmwerts.",
           "invalid": "Gib eine gültige Zahl ein.",
@@ -106,6 +117,18 @@
             "invalid": "Gib eine gültige Zeit ein.",
             "label": "Start",
             "placeholder": "Gib eine Startzeit ein"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Wähle den Türstatus aus.",
@@ -212,6 +235,18 @@
             "invalid": "Gib eine gültige Zeit ein.",
             "label": "Start",
             "placeholder": "Gib eine Startzeit ein"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Wähle den Türstatus aus.",

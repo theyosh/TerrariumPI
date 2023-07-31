@@ -88,6 +88,17 @@
           },
           "placeholder": "Sorgente differenza giorno/notte"
         },
+        "depend_on_relays_mode": {
+          "all": {
+            "label": ""
+          },
+          "none": {
+            "label": ""
+          },
+          "one": {
+            "label": ""
+          }
+        },
         "deviation_high_alarm": {
           "help": "",
           "invalid": "Inserisci un numero valido.",
@@ -106,6 +117,18 @@
             "invalid": "Inserisci un'ora valida.",
             "label": "Data e ora",
             "placeholder": "Data e ora"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Seleziona lo stato della porta.",
@@ -212,6 +235,18 @@
             "invalid": "Inserisci un'ora valida.",
             "label": "Data e ora",
             "placeholder": "Data e ora"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Seleziona lo stato della porta.",

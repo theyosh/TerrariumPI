@@ -88,6 +88,17 @@
           },
           "placeholder": "Selecione a fonte de informações para determinar dia / noite"
         },
+        "depend_on_relays_mode": {
+          "all": {
+            "label": ""
+          },
+          "none": {
+            "label": ""
+          },
+          "one": {
+            "label": ""
+          }
+        },
         "deviation_high_alarm": {
           "help": "Aumentar ou diminuir valor máximo do alarme.",
           "invalid": "Insira um número válido.",
@@ -106,6 +117,18 @@
             "invalid": "Digite uma hora válida.",
             "label": "Hora de início",
             "placeholder": "Digite o horário de início"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Selecione o estado da porta para disparar a ação.",
@@ -212,6 +235,18 @@
             "invalid": "Digite uma hora válida.",
             "label": "Hora de início",
             "placeholder": "Digite o horário de início"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Selecione o estado da porta para disparar a ação.",

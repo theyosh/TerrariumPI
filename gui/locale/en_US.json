@@ -88,6 +88,17 @@
           },
           "placeholder": "Select a day/night source"
         },
+        "depend_on_relays_mode": {
+          "all": {
+            "label": "All on"
+          },
+          "none": {
+            "label": "None on"
+          },
+          "one": {
+            "label": "At least one on"
+          }
+        },
         "deviation_high_alarm": {
           "help": "Increase of decrease high alarm value.",
           "invalid": "Enter a valid number.",
@@ -106,6 +117,18 @@
             "invalid": "Enter a valid time.",
             "label": "Begin time",
             "placeholder": "Enter begin time"
+          },
+          "depend_on_relays": {
+            "help": "Select the relays of which these relays are depending on.",
+            "invalid": "Please make a choice.",
+            "label": "Depend on relays",
+            "placeholder": "Select relays"
+          },
+          "depend_on_relays_mode": {
+            "help": "Select depending mode",
+            "invalid": "Please make a choice.",
+            "label": "Depend mode",
+            "placeholder": "Select a mode"
           },
           "door_status": {
             "help": "Select the door status.",
@@ -212,6 +235,18 @@
             "invalid": "Enter a valid time.",
             "label": "Begin time",
             "placeholder": "Enter begin time"
+          },
+          "depend_on_relays": {
+            "help": "Select the relays of which these relays are depending on.",
+            "invalid": "Please make a choice.",
+            "label": "Depend on relays",
+            "placeholder": "Select relays"
+          },
+          "depend_on_relays_mode": {
+            "help": "Select depending mode",
+            "invalid": "Please make a choice.",
+            "label": "Depend mode",
+            "placeholder": "Select a mode"
           },
           "door_status": {
             "help": "Select the door status.",

@@ -88,6 +88,17 @@
           },
           "placeholder": "Seleccioneu una font de dia/nit"
         },
+        "depend_on_relays_mode": {
+          "all": {
+            "label": ""
+          },
+          "none": {
+            "label": ""
+          },
+          "one": {
+            "label": ""
+          }
+        },
         "deviation_high_alarm": {
           "help": "Augment de la disminució del valor d'alarma alt.",
           "invalid": "Introduïu un número vàlid.",
@@ -106,6 +117,18 @@
             "invalid": "Introduïu un temps vàlid.",
             "label": "Temps d’inici",
             "placeholder": "Introduïu el temps d’inici"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Seleccioneu l'estat de la porta.",
@@ -212,6 +235,18 @@
             "invalid": "Introduïu un temps vàlid.",
             "label": "Temps d’inici",
             "placeholder": "Introduïu el temps d’inici"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Seleccioneu l'estat de la porta.",

@@ -88,6 +88,17 @@
           },
           "placeholder": "Żródło dnia/nocy"
         },
+        "depend_on_relays_mode": {
+          "all": {
+            "label": ""
+          },
+          "none": {
+            "label": ""
+          },
+          "one": {
+            "label": ""
+          }
+        },
         "deviation_high_alarm": {
           "help": "",
           "invalid": "Wprowadź prawidłowy numer.",
@@ -106,6 +117,18 @@
             "invalid": "Wprowadź poprawny czas dnia.",
             "label": "Czas rozpoczęcia",
             "placeholder": "Wprowadź czas rozpoczęcia"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Status wszystkich drzwi.",
@@ -212,6 +235,18 @@
             "invalid": "Wprowadź poprawny czas dnia.",
             "label": "Czas rozpoczęcia",
             "placeholder": "Wprowadź czas rozpoczęcia"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Status wszystkich drzwi.",

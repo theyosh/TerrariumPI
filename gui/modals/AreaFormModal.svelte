@@ -984,7 +984,7 @@
                     invalid="{$_('areas.settings.setup.low.playlists.invalid', { default: 'Please make a choice.' })}" />
                 </div>
               {:else}
-                <div class="col-12">
+              <div class="col-6">
                   <Select
                     name="setup.low.relays"
                     value="{$formData.setup?.low.relays ?? null}"
@@ -1002,6 +1002,45 @@
                     placeholder="{$_('areas.settings.setup.low.relays.placeholder', { default: 'Select relays' })}"
                     help="{$_('areas.settings.setup.low.relays.help', { default: 'Select the relays to toggle.' })}"
                     invalid="{$_('areas.settings.setup.low.relays.invalid', { default: 'Please make a choice.' })}" />
+                </div>
+                <div class="col-4">
+                    <Select
+                      name="setup.low.depend_on_relays"
+                      value="{$formData.setup?.low.depend_on_relays ?? null}"
+                      multiple="{true}"
+                      sort="{true}"
+                      on:change="{(value) => $formData.setup.low.depend_on_relays = value.detail }"
+                      options="{relays.map((item) => {
+                        return { value: item.id, text: item.name, disabled: $formData.setup?.low.relays?.indexOf(item.id) !== -1 };
+                      })}"
+                      label="{$_('areas.settings.setup.low.depend_on_relays.label', { default: 'Depend on relays' })}"
+                      placeholder="{$_('areas.settings.setup.low.depend_on_relays.placeholder', { default: 'Select relays' })}"
+                      help="{$_('areas.settings.setup.low.depend_on_relays.help', { default: 'Select the relays of which these relays are depending on.' })}"
+                      invalid="{$_('areas.settings.setup.low.depend_on_relays.invalid', { default: 'Please make a choice.' })}" />
+                </div>
+                <div class="col-2">
+                    <Select
+                      name="setup.low.depend_on_relays_mode"
+                      value="{$formData.setup?.low.depend_on_relays_mode ?? null}"
+                      multiple="{false}"
+                      sort="{false}"
+                      required="{$formData.setup?.low?.depend_on_relays?.length > 0}"
+                      options="{[{
+                              value: 'all',
+                              text: $_('areas.settings.setup.depend_on_relays_mode.all.label', { default: 'All on' })
+                          },
+                          {
+                              value: 'one',
+                              text: $_('areas.settings.setup.depend_on_relays_mode.one.label', { default: 'At least one on' })
+                          },
+                          {
+                              value: 'none',
+                              text: $_('areas.settings.setup.depend_on_relays_mode.none.label', { default: 'None on' })
+                          }]}"
+                      label="{$_('areas.settings.setup.low.depend_on_relays_mode.label', { default: 'Depend mode' })}"
+                      placeholder="{$_('areas.settings.setup.low.depend_on_relays_mode.placeholder', { default: 'Select a mode' })}"
+                      help="{$_('areas.settings.setup.low.depend_on_relays_mode.help', { default: 'Select depending mode' })}"
+                      invalid="{$_('areas.settings.setup.low.depend_on_relays_mode.invalid', { default: 'Please make a choice.' })}" />
                 </div>
               {/if}
             </div>
@@ -1245,7 +1284,7 @@
                     invalid="{$_('areas.settings.setup.high.playlists.invalid', { default: 'Please make a choice.' })}" />
                 </div>
               {:else}
-                <div class="col-12">
+                <div class="col-6">
                   <Select
                     name="setup.high.relays"
                     value="{$formData.setup?.high.relays ?? null}"
@@ -1263,6 +1302,45 @@
                     placeholder="{$_('areas.settings.setup.high.relays.placeholder', { default: 'Select relays' })}"
                     help="{$_('areas.settings.setup.high.relays.help', { default: 'Select the relays to toggle.' })}"
                     invalid="{$_('areas.settings.setup.high.relays.invalid', { default: 'Please make a choice.' })}" />
+                </div>
+                <div class="col-4">
+                    <Select
+                      name="setup.high.depend_on_relays"
+                      value="{$formData.setup?.high.depend_on_relays ?? null}"
+                      multiple="{true}"
+                      sort="{true}"
+                      on:change="{(value) => $formData.setup.high.depend_on_relays = value.detail }"
+                      options="{relays.map((item) => {
+                        return { value: item.id, text: item.name, disabled: $formData.setup?.high.relays?.indexOf(item.id) !== -1 };
+                      })}"
+                      label="{$_('areas.settings.setup.high.depend_on_relays.label', { default: 'Depend on relays' })}"
+                      placeholder="{$_('areas.settings.setup.high.depend_on_relays.placeholder', { default: 'Select relays' })}"
+                      help="{$_('areas.settings.setup.high.depend_on_relays.help', { default: 'Select the relays of which these relays are depending on.' })}"
+                      invalid="{$_('areas.settings.setup.high.depend_on_relays.invalid', { default: 'Please make a choice.' })}" />
+                </div>
+                <div class="col-2">
+                    <Select
+                      name="setup.high.depend_on_relays_mode"
+                      value="{$formData.setup?.high.depend_on_relays_mode ?? null}"
+                      multiple="{false}"
+                      sort="{false}"
+                      required="{$formData.setup?.high?.depend_on_relays?.length > 0}"
+                      options="{[{
+                                value: 'all',
+                                text: $_('areas.settings.setup.depend_on_relays_mode.all.label', { default: 'All on' })
+                            },
+                            {
+                                value: 'one',
+                                text: $_('areas.settings.setup.depend_on_relays_mode.one.label', { default: 'At least one on' })
+                            },
+                            {
+                                value: 'none',
+                                text: $_('areas.settings.setup.depend_on_relays_mode.none.label', { default: 'None on' })
+                            }]}"
+                      label="{$_('areas.settings.setup.high.depend_on_relays_mode.label', { default: 'Depend mode' })}"
+                      placeholder="{$_('areas.settings.setup.high.depend_on_relays_mode.placeholder', { default: 'Select a mode' })}"
+                      help="{$_('areas.settings.setup.high.depend_on_relays_mode.help', { default: 'Select depending mode' })}"
+                      invalid="{$_('areas.settings.setup.high.depend_on_relays_mode.invalid', { default: 'Please make a choice.' })}" />
                 </div>
               {/if}
             </div>

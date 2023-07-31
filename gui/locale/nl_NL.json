@@ -88,6 +88,17 @@
           },
           "placeholder": "Selecteer een dag/nacht bron"
         },
+        "depend_on_relays_mode": {
+          "all": {
+            "label": ""
+          },
+          "none": {
+            "label": ""
+          },
+          "one": {
+            "label": ""
+          }
+        },
         "deviation_high_alarm": {
           "help": "Toename of afname hoge alarmwaarde.",
           "invalid": "Voer een geldig nummer in.",
@@ -106,6 +117,18 @@
             "invalid": "Voer een geldige tijd in.",
             "label": "Begintijd",
             "placeholder": "Voer de begintijd in"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Selecteer de deurstatus.",
@@ -212,6 +235,18 @@
             "invalid": "Voer een geldige tijd in.",
             "label": "Begintijd",
             "placeholder": "Voer de begintijd in"
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
           },
           "door_status": {
             "help": "Selecteer de deurstatus.",
