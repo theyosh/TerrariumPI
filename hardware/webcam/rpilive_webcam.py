@@ -7,6 +7,7 @@ from pathlib import Path
 
 from . import terrariumWebcamLive, terrariumWebcamLoadingException
 
+
 class terrariumRPILiveWebcam(terrariumWebcamLive):
     HARDWARE = "rpicam-live"
     NAME = "Live Raspberry PI camera"

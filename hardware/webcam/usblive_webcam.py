@@ -5,6 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 from . import terrariumWebcamLive
 
+
 class terrariumUSBLiveWebcam(terrariumWebcamLive):
     HARDWARE = "usb-live"
     NAME = "Live USB camera"

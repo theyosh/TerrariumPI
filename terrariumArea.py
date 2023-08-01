@@ -583,13 +583,12 @@ class terrariumArea(object):
         self.state["sensors"] = self.current_value(self.setup["sensors"])
 
     def depending_relays_ok(self, part):
-
-        depending_relays = self.setup[part].get('depend_on_relays',[])
+        depending_relays = self.setup[part].get("depend_on_relays", [])
 
         if len(depending_relays) == 0:
             return True
 
-        mode = self.setup[part].get('depend_on_relays_mode',None)
+        mode = self.setup[part].get("depend_on_relays_mode", None)
 
         if mode is None:
             return False
@@ -601,17 +600,16 @@ class terrariumArea(object):
             else:
                 relays_status.append(self.enclosure.engine.relays[relay].is_on())
 
-        if mode == 'all':
+        if mode == "all":
             return all(relays_status)
 
-        elif mode == 'one':
+        elif mode == "one":
             return True in relays_status
 
-        elif mode == 'none':
+        elif mode == "none":
             return not all(relays_status)
 
         return True
-
 
     @property
     def is_day(self):
@@ -805,7 +803,7 @@ class terrariumArea(object):
 
                 if not depending_relays_ok:
                     logger.info(
-                        f'Relays for {self} period {period} are not switched on because the depending relays are not in the correct state.'
+                        f"Relays for {self} period {period} are not switched on because the depending relays are not in the correct state."
                     )
                     continue
 

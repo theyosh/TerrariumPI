@@ -682,8 +682,8 @@ class terrariumWebcam(object):
     def stop(self):
         pass
 
-class terrariumWebcamLive(terrariumWebcam):
 
+class terrariumWebcamLive(terrariumWebcam):
     _HELPER_SCRIPT = None
     _FFMPEG = "/usr/bin/ffmpeg"
 

@@ -5,6 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 from . import terrariumWebcamLive
 
+
 class terrariumRTSPLiveWebcam(terrariumWebcamLive):
     HARDWARE = "rtsp-live"
     NAME = "Live RTSP camera"
