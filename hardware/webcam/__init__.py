@@ -101,6 +101,7 @@ class terrariumWebcam(object):
                     if (
                         inspect.isclass(attribute)
                         and attribute != terrariumWebcam
+                        and attribute != terrariumWebcamLive
                         and issubclass(attribute, terrariumWebcam)
                     ):
                         setattr(sys.modules[__name__], file.stem, attribute)
