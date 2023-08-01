@@ -582,6 +582,37 @@ class terrariumArea(object):
         # Reload the current sensor values after changing them
         self.state["sensors"] = self.current_value(self.setup["sensors"])
 
+    def depending_relays_ok(self, part):
+
+        depending_relays = self.setup[part].get('depend_on_relays',[])
+
+        if len(depending_relays) == 0:
+            return True
+
+        mode = self.setup[part].get('depend_on_relays_mode',None)
+
+        if mode is None:
+            return False
+
+        relays_status = []
+        for relay in depending_relays:
+            if relay not in self.enclosure.engine.relays:
+                relays_status.append(False)
+            else:
+                relays_status.append(self.enclosure.engine.relays[relay].is_on())
+
+        if mode == 'all':
+            return all(relays_status)
+
+        elif mode == 'one':
+            return True in relays_status
+
+        elif mode == 'none':
+            return not all(relays_status)
+
+        return True
+
+
     @property
     def is_day(self):
         light_mode = self.setup.get("day_night_source", "")
@@ -706,9 +737,12 @@ class terrariumArea(object):
                 # Change the doors state based on the current state and requested state. False when not equal
                 door_state_ok = self.setup[period]["door_status"] == door_state
 
+            # Set depending relays state
+            depending_relays_ok = self.depending_relays_ok(period)
+
             # First check: Shutdown power when power is on and either the lights or doors are in wrong state. Despite 'mode'
             if not self.relays_state(period, False) and not (
-                light_state_ok and door_state_ok and (not depends_on_alarm)
+                light_state_ok and door_state_ok and depending_relays_ok and (not depends_on_alarm)
             ):
                 # Power is on, but either the lights or doors are in wrong state. Power down now.
                 logger.info(
@@ -766,6 +800,12 @@ class terrariumArea(object):
                 if not door_state_ok:
                     logger.info(
                         f'Relays for {self} period {period} are not switched on because the door is {door_state} while {self.setup[period]["door_status"]} is requested.'
+                    )
+                    continue
+
+                if not depending_relays_ok:
+                    logger.info(
+                        f'Relays for {self} period {period} are not switched on because the depending relays are not in the correct state.'
                     )
                     continue
 
