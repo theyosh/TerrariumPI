@@ -59,7 +59,7 @@ And all this is controlled with a nice web interface with [AdminLTE 3](https://a
 - Support for [Meross MSS425E Power Switches](https://www.meross.com/product/16/article/) (Requires Python 3 setup)
 - Support for Sonoff remote power devices
   - [Tasmota](https://github.com/arendst/Sonoff-Tasmota)
-- Support for [multiple type of sensors](https://github.com/theyosh/TerrariumPI/wiki/Hardware#sensors)
+- Support for [multiple type of sensors](https://theyosh.github.io/TerrariumPI/hardware/#sensors)
   - Temperature
   - Humidity
   - Moisture
@@ -93,7 +93,7 @@ And all this is controlled with a nice web interface with [AdminLTE 3](https://a
   - Volume control in the web interface
   - Uploading audio files through web interface
   - Audio meta data support (mediainfo)
-- Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
+- Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://theyosh.github.io/TerrariumPI/faq/how-to-use-remote-data/).
 - Display support
   - LCD 16x2 or 20x4 screens either through I2C or [Serial](https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/)
   - OLED based on SSD1306
@@ -212,7 +212,7 @@ It is possible to use external sensor data that is available through HTTP(S) in 
 
 Currently it is READONLY. So you can read out remote sensors and switches but you cannot control the remote switches. But this way you can combine the power switches total costs and power usage.
 
-more information is here: [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data)
+more information is here: [Remote data wiki](https://theyosh.github.io/TerrariumPI/faq/how-to-use-remote-data/)
 
 ## Contributors
 
