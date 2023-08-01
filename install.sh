@@ -46,6 +46,7 @@ done < requirements.txt
 if [ "${PI_ZERO}" -eq 1 ]; then
   # Pi Zero needs some fixed python modules
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==21.8.0}"
+  PIP_MODULES="${PIP_MODULES//bcrypt==+([^ ])/bcrypt==3.2.2}"
 
   if [ "${BUSTER_OS}" -eq 1 ]; then
     PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.4.60}"
