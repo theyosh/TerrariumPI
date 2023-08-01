@@ -4,13 +4,18 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import inspect
-from importlib import import_module
 import sys
+import signal
+import os
+import subprocess
+import psutil
 
 from pathlib import Path
 from hashlib import md5
 from operator import itemgetter
 from datetime import datetime, timedelta
+from importlib import import_module
+from io import BytesIO
 from time import time
 from gevent import sleep
 from func_timeout import func_timeout, FunctionTimedOut
@@ -676,3 +681,62 @@ class terrariumWebcam(object):
     # TODO: What to stop....?
     def stop(self):
         pass
+
+class terrariumWebcamLive(terrariumWebcam):
+
+    _HELPER_SCRIPT = None
+    _FFMPEG = "/usr/bin/ffmpeg"
+
+    def _load_hardware(self):
+        if not Path(self._FFMPEG).exists():
+            raise terrariumWebcamLoadingException("Please install ffmpeg.")
+
+        self.stop()
+
+        cmd = Path(__file__).parent / self._HELPER_SCRIPT
+
+        cmd = [
+            str(cmd),
+            str(self.address),
+            str(self.name),
+            str(self.width),
+            str(self.height),
+            str(self.rotation),
+            str(self.awb),
+            str(Path(self._STORE_LOCATION).joinpath(self.id)),
+        ]
+
+        self.__process = subprocess.Popen(
+            cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, shell=False, start_new_session=True
+        )
+
+        logger.debug(f"Started {self} with process id: {self.__process.pid} exit code: {self.__process.returncode}")
+
+        # We need some time to wait so that the live stream has produced the first chunks
+        sleep(5)
+
+        return True
+
+    def _get_raw_data(self):
+        if not psutil.pid_exists(self.__process.pid):
+            # Should restart the bash script
+            logger.warning(f"Webcam {self} is crashed. Restarting the webcam.")
+            self._load_hardware()
+            return False
+
+        url = f"{Path(self._STORE_LOCATION).joinpath(self.id)}/stream.m3u8"
+        cmd = [self._FFMPEG, "-hide_banner", "-loglevel", "panic", "-i", url, "-vframes", "1", "-f", "image2", "-"]
+
+        with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False) as proc:
+            out, _ = proc.communicate()
+            return BytesIO(out)
+
+        return False
+
+    def stop(self):
+        try:
+            os.killpg(os.getpgid(self.__process.pid), signal.SIGTERM)
+        except Exception as ex:
+            logger.debug(f"Webcam {self} is not running: {ex}")
+
+        super().stop()

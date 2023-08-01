@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # Available parameters
-NAME=$1
-WIDTH=$2
-HEIGHT=$3
-ROTATION=$4
-AWB=$5
-DIR=$6
+DEVICE=$1
+NAME=$2
+WIDTH=$3
+HEIGHT=$4
+ROTATION=$5
+AWB=$6
+DIR=$7
 
 # Find the needed programs
 RASPIVID=$(which raspivid)
