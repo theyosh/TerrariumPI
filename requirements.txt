@@ -1,6 +1,6 @@
-pip==23.1.2
+pip==23.2.1
 setuptools==68.0.0
-wheel==0.40.0
+wheel==0.41.0
 
 # Database
 pony==0.7.16
