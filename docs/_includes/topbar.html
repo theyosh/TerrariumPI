@@ -1,121 +1,124 @@
-<!--
-  The Top Bar
--->
+<!-- The Top Bar -->
 
-<div id="topbar-wrapper" class="row justify-content-center topbar-down">
-  <div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between">
-    <span id="breadcrumb">
+<div id="topbar-wrapper">
+    <div
+      id="topbar"
+      class="container d-flex align-items-center justify-content-between h-100"
+    >
+      <span id="breadcrumb">
+        {% assign paths = page.url | split: '/' %}
 
-    {% assign paths = page.url | split: '/' %}
+        {% if paths.size == 0 or page.layout == 'home' %}
+          <!-- index page -->
+          <span>{{ site.data.locales[include.lang].tabs.home | capitalize }}</span>
 
-    {% if paths.size == 0 or page.layout == 'home' %}
-      <!-- index page -->
-      <span>{{ site.data.locales[lang].tabs.home | capitalize }}</span>
+        {% else %}
+          {% for item in paths %}
+            {% if forloop.first %}
+              <span>
+                <a href="{{ '/' | relative_url }}">
+                  {{ site.data.locales[include.lang].tabs.home | capitalize }}
+                </a>
+              </span>
 
-    {% else %}
+            {% elsif forloop.last %}
+              {% if page.collection == 'tabs' %}
+                <span>{{ site.data.locales[include.lang].tabs[item] | default: page.title }}</span>
+              {% else %}
+                <span>{{ page.title }}</span>
+              {% endif %}
 
-      {% for item in paths %}
-
-        {% if forloop.first %}
-          <span>
-            <a href="{{ '/' | relative_url }}">
-              {{ site.data.locales[lang].tabs.home | capitalize }}
-            </a>
-          </span>
-
-        {% elsif forloop.last %}
-
-          {% if page.collection == 'tabs' %}
-            <span>{{ site.data.locales[lang].tabs[item] | default: page.title }}</span>
-          {% else %}
-            <span>{{ page.title }}</span>
-          {% endif %}
-
-        {% elsif page.layout == 'category' or page.layout == 'tag' or page.layout == 'faq' %}
-          <span>
-            <a href="{{ item | relative_url }}">
-              {{ site.data.locales[lang].tabs[item] | default: item }}
-            </a>
-          </span>
+            {% elsif page.layout == 'category' or page.layout == 'tag' %}
+              <span>
+                <a href="{{ item | relative_url }}">
+                  {{ site.data.locales[include.lang].tabs[item] | default: page.title }}
+                </a>
+              </span>
+            {% endif %}
+          {% endfor %}
         {% endif %}
+      </span>
+      <!-- endof #breadcrumb -->
 
-      {% endfor %}
+      <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
 
-    {% endif %}
-    </span><!-- endof #breadcrumb -->
+      <div id="topbar-title">
+        {% if page.layout == 'home' %}
+          {{- site.data.locales[include.lang].title | default: site.title -}}
+        {% elsif page.collection == 'tabs' or page.layout == 'page' %}
+          {%- capture tab_key -%}{{ page.url | split: '/' }}{%- endcapture -%}
+          {{- site.data.locales[include.lang].tabs[tab_key] | default: page.title -}}
+        {% else %}
+          {{- site.data.locales[include.lang].layout[page.layout] | default: page.layout | capitalize -}}
+        {% endif %}
+      </div>
 
-    <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
+      <i id="search-trigger" class="fas fa-search fa-fw"></i>
+      <span id="search-wrapper" class="align-items-center">
+        <i class="fas fa-search fa-fw"></i>
+        <input
+          class="form-control"
+          id="search-input"
+          type="search"
+          aria-label="search"
+          autocomplete="off"
+          placeholder="{{ site.data.locales[include.lang].search.hint | capitalize }}..."
+        >
+      </span>
+      <span id="search-cancel">{{ site.data.locales[include.lang].search.cancel }}</span>
 
-    <div id="topbar-title">
-      {% if page.layout == 'home' %}
-        {{- site.data.locales[lang].title | default: site.title -}}
-      {% elsif page.collection == 'tabs' %}
-        {%- capture tab_key -%}{{ page.url | split: '/' }}{%- endcapture -%}
-        {{- site.data.locales[lang].tabs[tab_key] | default: page.title -}}
-      {% else %}
-        {{- site.data.locales[lang].layout[page.layout] | default: page.layout | capitalize -}}
-      {% endif %}
+      <span class="align-items-center" style="margin-left:0.2rem">
+        <select name="language">
+          <option value="">Select language</option>
+        </select>
+      </span>
+
     </div>
+</div>
 
-    <i id="search-trigger" class="fas fa-search fa-fw"></i>
-    <span id="search-wrapper" class="align-items-center">
-      <i class="fas fa-search fa-fw"></i>
-      <input class="form-control" id="search-input" type="search"
-        aria-label="search" autocomplete="off" placeholder="{{ site.data.locales[lang].search.hint | capitalize }}...">
-      <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i>
-    </span>
-    <span id="search-cancel" >{{ site.data.locales[lang].search.cancel }}</span>
+<script>
+    function getFlagEmoji(countryCode) {
+      const codePoints = countryCode
+        .toUpperCase()
+        .split('')
+        .map(char =>  127397 + char.charCodeAt());
+      return String.fromCodePoint(...codePoints);
+    }
 
-    <span class="align-items-center" style="margin-left:0.2rem">
-      <select name="language">
-        <option value="">Select language</option>
-      </select>
-    </span>
-    <script>
-      function getFlagEmoji(countryCode) {
-        const codePoints = countryCode
-          .toUpperCase()
-          .split('')
-          .map(char =>  127397 + char.charCodeAt());
-        return String.fromCodePoint(...codePoints);
+    jQuery(function() {
+
+      let languages = [
+        {'name' : 'Dutch', 'key' : 'NL'},
+        {'name' : 'German', 'key' : 'DE'},
+        {'name' : 'English', 'key' : 'GB'},
+        {'name' : 'French', 'key' : 'FR'},
+        {'name' : 'Italian', 'key' : 'IT'},
+        {'name' : 'Japanese', 'key' : 'JA', 'flag' : 'JP'},
+        {'name' : 'Norwegian', 'key' : 'NO'},
+        {'name' : 'Polish', 'key' : 'PL'},
+        {'name' : 'Portuguese', 'key' : 'PT'},
+        {'name' : 'Spanish', 'key' : 'ES'},
+      ];
+
+      let pulldown = jQuery('select[name="language"]');
+
+      jQuery.each(languages,function(counter, language){
+        pulldown.append(jQuery('<option>').val(language['key'].toLowerCase()).text(getFlagEmoji(language['flag'] || language['key']) + ' ' + language['name']));
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('_x_tr_tl')) {
+        pulldown.val(params.get('_x_tr_tl'));
       }
 
-      jQuery(function() {
-
-        let languages = [
-          {'name' : 'Dutch', 'key' : 'NL'},
-          {'name' : 'German', 'key' : 'DE'},
-          {'name' : 'English', 'key' : 'GB'},
-          {'name' : 'French', 'key' : 'FR'},
-          {'name' : 'Italian', 'key' : 'IT'},
-          {'name' : 'Japanese', 'key' : 'JA', 'flag' : 'JP'},
-          {'name' : 'Norwegian', 'key' : 'NO'},
-          {'name' : 'Polish', 'key' : 'PL'},
-          {'name' : 'Portuguese', 'key' : 'PT'},
-          {'name' : 'Spanish', 'key' : 'ES'},
-        ];
-
-        let pulldown = jQuery('select[name="language"]');
-
-        jQuery.each(languages,function(counter, language){
-          pulldown.append(jQuery('<option>').val(language['key'].toLowerCase()).text(getFlagEmoji(language['flag'] || language['key']) + ' ' + language['name']));
-        });
-
-        const params = new URLSearchParams(window.location.search);
-        if (params.has('_x_tr_tl')) {
-          pulldown.val(params.get('_x_tr_tl'));
-        }
-
-        pulldown.on('change',function(event){
-          if (this.value != '') {
-            if (this.value == 'gb') {
-              location.href='https://theyosh.github.io/TerrariumPI/';
-            } else {
-              location.href='https://translate.google.com/translate?hl=en&sl=en&tl=' + this.value + '&u=https%3A%2F%2Ftheyosh.github.io%2FTerrariumPI%2F'
-            }
+      pulldown.on('change',function(event){
+        if (this.value != '') {
+          if (this.value == 'gb') {
+            location.href='https://theyosh.github.io/TerrariumPI/';
+          } else {
+            location.href='https://translate.google.com/translate?hl=en&sl=en&tl=' + this.value + '&u=https%3A%2F%2Ftheyosh.github.io%2FTerrariumPI%2F'
           }
-        });
+        }
       });
-    </script>
-  </div>
-</div>
+    });
+</script>
