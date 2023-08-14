@@ -116,7 +116,7 @@
           if (this.value == 'gb') {
             location.href='https://theyosh.github.io/TerrariumPI/';
           } else {
-            location.href='https://translate.google.com/translate?hl=en&sl=en&tl=' + this.value + '&u=https%3A%2F%2Ftheyosh.github.io' + location.path.replace('/','%2F')          }
+            location.href='https://translate.google.com/translate?hl=en&sl=en&tl=' + this.value + '&u=https%3A%2F%2Ftheyosh.github.io' + location.pathname.replace('/','%2F')          }
         }
       });
     });
