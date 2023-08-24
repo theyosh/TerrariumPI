@@ -1,6 +1,6 @@
 pip==23.2.1
 setuptools==68.0.0
-wheel==0.41.0
+wheel==0.41.2
 
 # Database
 pony==0.7.16
@@ -79,6 +79,6 @@ ansi2html==1.8.0
 
 # Notification packages
 emails==0.6
-luma.oled==3.12.0
+luma.oled==3.13.0
 i2c_lcd==0.1.0
 paho-mqtt==1.6.1
