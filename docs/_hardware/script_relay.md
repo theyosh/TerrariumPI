@@ -13,9 +13,13 @@ device_address: /home/user/location/executable/script
 
 ## Information
 
-This is a script relay which can be used to support a not supported relay. TerrariumPI will execute this script with no parameters when it tries to read the current relay state. And when you change the dimmer, the script will get an extra parameter which is a int from 0 - 100. Where 0 is off and 100 is fully on.
+This is a script relay which can be used to support a not supported relay. TerrariumPI will execute this script with no parameters when it tries to read the current relay state. And when you change the dimmer in the GUI, the script will get an extra parameter which is a int from 0 - 100. Where 0 is off and 100 is fully on.
+
+A single on/off relay will get the value 100 for on and 0 for off.
 
 When for what reason the readout is not possible, return the value '-1' when requested. This will tell TerrariumPI to keep the last existing value.
+
+And make sure your script is [executable](https://linuxhandbook.com/make-file-executable/). You can use the same Python libraries that are installed. See the `requirements.txt` for instaled libraries.
 
 An example can be found in the [contrib](https://github.com/theyosh/TerrariumPI/blob/4.x.y.z/contrib/external_switch.py) folder.
 
