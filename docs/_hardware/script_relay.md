@@ -21,7 +21,7 @@ When for what reason the readout is not possible, return the value '-1' when req
 
 And make sure your script is [executable](https://linuxhandbook.com/make-file-executable/). You can use the same Python libraries that are installed. See the `requirements.txt` for instaled libraries.
 
-An example can be found in the [contrib](https://github.com/theyosh/TerrariumPI/blob/4.x.y.z/contrib/external_switch.py) folder.
+An example can be found in the [contrib](https://github.com/theyosh/TerrariumPI/blob/main/contrib/external_switch.py) folder.
 
 ### Docker
 
