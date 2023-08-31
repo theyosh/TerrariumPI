@@ -11,13 +11,13 @@ from datetime import datetime
 DEBUG = True
 
 # When there is no extra arguments, TerrariumPI expect a float value above 0.0 to return the current state.
-# Return -1.0 when not supported.
+# Return -1.0 when not supported, or want to duplicate an existing relay
 if len(sys.argv) == 1:
     # Call your readout or current state code here....
     # In this demo no read out option, return default value of -1.0
     print("-1.0")
 
-# Here we start to set the relay to the requested state: Off (=0) or On (>100)
+# Here we start to set the relay to the requested state: Off (=0) or On (>0)
 else:
     try:
         value = int(float(sys.argv[1]))
