@@ -764,9 +764,14 @@ class terrariumArea(object):
                     # We are in timer mode. But when there are sensors configured, they act as a second check
                     # If there is NOT an alarm with the period name, then skip the toggle action.
                     if self.state["sensors"][f"alarm_{period}"] is not True:
-                        logger.info(
-                            f'Relays for area {self} at period {period} are not switched because the additional sensors are at value: {self.state["sensors"]["current"]:.2f}{self.enclosure.engine.units[self.state["sensors"]["unit"]]}.'
-                        )
+                        try:
+                            logger.info(
+                                f'Relays for area {self} at period {period} are not switched because the additional sensors are at value: {self.state["sensors"]["current"]:.2f}{self.enclosure.engine.units[self.state["sensors"]["unit"]]}.'
+                            )
+                        except:
+                            # Some strange happens when data is deleted which should not be deleted #827
+                            pass
+
                         continue
             else:
                 if self.state["sensors"]["all_error"]:
