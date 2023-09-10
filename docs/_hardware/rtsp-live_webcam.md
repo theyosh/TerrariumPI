@@ -1,5 +1,5 @@
 ---
-title: RTSP Live camera
+title: Live RTSP camera
 categories: [Hardware, Webcam]
 tags: [webcam, live, streaming, rtsp]
 

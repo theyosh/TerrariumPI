@@ -74,7 +74,7 @@ Either use [pcf857**4**](/TerrariumPI/hardware/io-expander/) or [pcf857**5**](/T
 We currently support **{{ relays | size}}** types of relays. Relays which has a dial icon ![Dimmer icon](/assets/img/dimmer_icon.png){: style="height: 20px" .normal .is_dimmer} after their name are dimmers.
 
 {% for relay in relays %}
-  <h3>
+  <h3 id="{{ relay.title| slugify }}">
     <a href="{{ relay.url | relative_url }}">{{ relay.title }}</a>
   {% if relay.tags contains 'dimmer' %}
     <img src="/assets/img/dimmer_icon.png" title="Relay is a dimmer" alt="Relay is a dimmer" style="height: 20px" class="ml-xl-3 is_dimmer">
@@ -91,7 +91,7 @@ We currently support **{{ sensors | size}}** hardware types of sensors, measurin
 
 {% for sensor in sensors %}
 {% assign types = sensor.device_types | sort_natural | join: ", " %}
-  <h3 style="margin-bottom: 0px">
+  <h3 style="margin-bottom: 0px"  id="{{ sensor.title| slugify }}">
     <a href="{{ sensor.url | relative_url }}">{{ sensor.title }}</a>
   </h3>
   {{ types }}
@@ -105,7 +105,7 @@ We currently support **{{ sensors | size}}** hardware types of sensors, measurin
 We currently support **{{ buttons | size}}** types of buttons.
 
 {% for button in buttons %}
-  <h3>
+  <h3 id="{{ button.title| slugify }}">
     <a href="{{ button.url | relative_url }}">{{ button.title }}</a>
   </h3>
 {% endfor %}
@@ -117,7 +117,7 @@ We currently support **{{ buttons | size}}** types of buttons.
 We currently support **{{ webcams | size}}** types of webcams.
 
 {% for webcam in webcams %}
-  <h3 style="margin-bottom: 0px">
+  <h3 style="margin-bottom: 0px" id="{{ webcam.title| slugify }}">
     <a href="{{ webcam.url | relative_url }}">{{ webcam.title }}</a>
   </h3>
   {{ webcam.device_type }}

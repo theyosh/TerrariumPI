@@ -6,20 +6,38 @@ tags: [relay, duplicate]
 
 A much asked question is how can a relay used in 2 or more areas. By default this is not possible, due to the **a relay can only be used once** policy. This made it a bit easier to make sure that relays stays in the correct state. Even after power failures.
 
-But it is possible to make this possible by using [script relays]({% link _hardware/script_relay.md %}). You have to create a new script relay which controls the relay you want to duplicate. This means creating some small code. An example script relay can be found in the [contrib](https://github.com/theyosh/TerrariumPI/blob/main/contrib/external_switch.py) folder.
+But there is a solution. In this FAQ we explain how to setup a relay to used in multiple areas. This can either be a [relay]({% link _hardware/script_relay.md %}) or a [dimmer]({% link _hardware/script_dimmer.md %}). It should work for both.
 
-**Important**: The important thing here is that the return value (read out) of the script is always **-1**. This is very important. By returning a -1 as value, will instruct TerrariumPI to use the last state from the database. **Not** from the device.
+### Add original relay
 
-When you relay script is ready, you need to create a second script with a different name, with the same code. This can be done by creating a `symlink`:
+First add the original [relay]({% link _tabs/hardware.md %}#relays) to TerrariumPI and make sure it works. Enter the power usage and the water usage values. **But never use this original relay in any area**.
+
+### Create script relay code
+
+1. Create a scripts folder if not exists: `mkdir scripts`
+2. Copy `duplicate_switch.py` to the `scripts` folder: `cp contrib/duplicate_switch.py scripts/`
+3. Edit the new script to set some settings: `nano scripts/duplicate_switch.py`
+
+   - Edit the variables `RELAY_ID`, `USERNAME`, `PASSWORD`. The RELAY_ID can be found on the page: http://[TerrariumPI_IP]:8090/api/relays/
+
+When this is all done, you can test if it al works by running the command: `scripts/duplicate_switch.py 100` which should toggle on the original relay.
+
+### Duplicate the relay
+
+Now it is easy to duplicate this relay a couple of times. Make sure you are on the `scripts` folder where the file `duplicate_switch.py` is placed.
+
+Now by running the following command we will create a symlink to the original file. Now you will have 2 files with the same contents and will the same original relay.
 
 ```sh
-ln -s original_relay_script.py duplicate_relay_script.py
+ln -s duplicate_switch.py duplicate_switch_2.py
 ```
 
-Now you have 2 relay scripts with the same code and logic, but with different names. Create 2 `script relays` in TerrariumPI with the 2 scripts. And do **not** add the original relay to the TerrariumPI, or at least, do not use it in any areas.
+This can be done multiple times. Make sure you have a unique name for every new symlink.
 
-The two relay scripts can now be used in different areas and should not interfere with each other.
+### Adding the new relays to TerrariumPI
 
-You can use all the python [libraries](https://github.com/theyosh/TerrariumPI/blob/main/requirements.txt) that are installed by TerrariumPI.
+Now add the new scripts as new [script relay]({% link _hardware/script_relay.md %}) to TerrariumPI. Use as address `/home/pi/TerrariumPI/scripts/duplicate_switch.py`.
 
-Or you can create a bash script or any executable that toggles the relay, and returns -1 as readout.
+But here, do not enter the power and water flow values. Else the amount of used power and water will be counted **double**. Which is not correct.
+
+Now you can use the new script relay in an area.
