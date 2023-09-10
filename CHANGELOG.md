@@ -1,6 +1,205 @@
 Changelog
 =========
 
+
+4.7.0 (2023-09-10)
+------------------
+
+**New**
+------
+
+- Add better relay duplication. [TheYOSH]
+- Add extra documentation for script relays. [TheYOSH]
+- Add screenshot version 2.5. [TheYOSH]
+- Add early release version. [TheYOSH]
+- Added translation using Weblate (Swedish) [Tobbe987]
+- Add RTSP live streaming support. [#822](https://github.com/theyosh/TerrariumPI/issues/822). [TheYOSH]
+- Add relay dependency in areas. [#811](https://github.com/theyosh/TerrariumPI/issues/811). [TheYOSH]
+- Add relay dependencies in form [#811](https://github.com/theyosh/TerrariumPI/issues/811). [TheYOSH]
+- Add variable device address. [TheYOSH]
+- Add replace hardware modal form. [TheYOSH]
+- Add docker check. [TheYOSH]
+- Add Black linting workflow. [TheYOSH]
+- Add web cam archive loading modal. [TheYOSH]
+- Add light threshold indicator. [TheYOSH]
+
+**Fixes**
+------
+
+- Javascript code fix. [TheYOSH]
+- Fix missing callback when adding relays through GUI. [TheYOSH]
+- Fix internal link. [TheYOSH]
+- Return to normal language fix. [TheYOSH]
+- Fix2. [TheYOSH]
+- Code fix. [TheYOSH]
+- Fix version typo. [TheYOSH]
+- Fix webcam loading. [TheYOSH]
+- Fix Pi Zero installation by pinning bcrypt module. [#823](https://github.com/theyosh/TerrariumPI/issues/823). [TheYOSH]
+- Fix rollup require error. [TheYOSH]
+- Fix enclosure begin and end timer times. [#818](https://github.com/theyosh/TerrariumPI/issues/818). [TheYOSH]
+- Fix 1 day graph. [TheYOSH]
+- Fix variation form saving. [TheYOSH]
+- Fix docker check. [TheYOSH]
+- Fix calendar reminders. [TheYOSH]
+- Fix invalid variation data. [TheYOSH]
+- Fix warning icons. [TheYOSH]
+- Fix open i2c connection when there is an sensor error. [#802](https://github.com/theyosh/TerrariumPI/issues/802). [TheYOSH]
+- Fix dashboard sensors. Better check if calibration data is available
+  (3) [TheYOSH]
+- Fix dashboard sensors. Better check if calibration data is available
+  (2) [TheYOSH]
+- Fix dashboard sensors. Better check if calibration data is available.
+  [TheYOSH]
+
+**Updates**
+------
+
+- Update NodeJS libraries. [TheYOSH]
+- Update documentation. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update link. [TheYOSH]
+- Update external_switch.py. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update FUNDING.yml. [TheYOSH]
+- Update FUNDING.yml. [TheYOSH]
+- Updated external switch example. [#811](https://github.com/theyosh/TerrariumPI/issues/811). [TheYOSH]
+- Update python libraries. [TheYOSH]
+- Update publicatio pages. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update scenario doc: Add dependency documentation. [#811](https://github.com/theyosh/TerrariumPI/issues/811). [TheYOSH]
+- New template updates. [TheYOSH]
+- Update python libraries. [TheYOSH]
+- Update links. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Documentation update power management. [TheYOSH]
+- Update NodeJS libraries. [theyosh]
+- Update libraries. [theyosh]
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update to Svelte version 4. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Calendar updates. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update workflow. [TheYOSH]
+- Update workflow. [TheYOSH]
+- Update workflow. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Small updates. [TheYOSH]
+- Update alarm icon. [TheYOSH]
+
+**Other**
+------
+
+- New Svelte GUI build. [TheYOSH]
+- Continue startup (1) [#827](https://github.com/theyosh/TerrariumPI/issues/827). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Use relays multiple times. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Polish) [Rafal Zagawa]
+
+  Currently translated at 97.5% (117 of 120 strings)
+- Translated using Weblate (Polish) [Rafal Zagawa]
+
+  Currently translated at 100.0% (1069 of 1069 strings)
+- New Svelte GUI build. [TheYOSH]
+- Better translation support. [TheYOSH]
+- Use chirpy version 6. [TheYOSH]
+- Latest 5 version. [TheYOSH]
+- Rename file. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Refactor live cameras and add RTSP live cameras. [#822](https://github.com/theyosh/TerrariumPI/issues/822). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1069 of 1069 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1069 of 1069 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (German) [Chris Hudlin]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- New Svelte GUI build. [TheYOSH]
+- Downgrade felte. [theyosh]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Downgrade felte... :( [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1050 of 1050 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1050 of 1050 strings)
+- Translated using Weblate (English (United States)) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (German) [Chris Hudlin]
+
+  Currently translated at 98.3% (118 of 120 strings)
+- Translated using Weblate (German) [Chris Hudlin]
+
+  Currently translated at 100.0% (1050 of 1050 strings)
+- Translated using Weblate (English (United States)) [Chris Hudlin]
+
+  Currently translated at 98.3% (118 of 120 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Spacing. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Allow empty select value. [TheYOSH]
+- Disable reboot and restart when running in Docker. [TheYOSH]
+- Merge branch 'develop' into main. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into develop. [TheYOSH]
+- Create black.yml. [TheYOSH]
+- Increase watchdog timeout. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Change area icon when disabled. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Filter light sensors with threshold value only. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Codacy code improvements. [TheYOSH]
+- Codacy code improvements. [TheYOSH]
+- Codacy code improvements. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge pull request [#808](https://github.com/theyosh/TerrariumPI/issues/808) from esev/mac. [TheYOSH]
+
+  Remove deprecated mac argument for pywemo
+- Remove deprecated mac argument for pywemo. [Eric Severance]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+
+
 4.6.3 (2023-06-02)
 ------------------
 
@@ -54,6 +253,9 @@ Changelog
 **Updates**
 ------
 
+- Update 2023-06-02-release_4.6.3.md. [TheYOSH]
+
+  typo
 - Update translation files. [Weblate]
 
   Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
@@ -98,6 +300,8 @@ Changelog
 **Other**
 ------
 
+- Better docs. [TheYOSH]
+- New version 4.6.3. [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
 - Disable site building test.... it is broken... [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
@@ -788,8 +992,6 @@ Changelog
 - Fix (re)loading MQTT service (and probably others) [TheYOSH]
 - Fixed water calculation (2) [TheYOSH]
 - Fix total water usage on dashboard. [TheYOSH]
-- Fix docker ffmeg (3) [TheYOSH]
-- Final docker fix ffmpeg. [TheYOSH]
 
 **Updates**
 ------
@@ -808,13 +1010,6 @@ Changelog
 - Update install.sh. [TheYOSH]
 - Update install.sh. [TheYOSH]
 - Codacy updates. [TheYOSH]
-- Codacy updates. [TheYOSH]
-- Codacy updates. [TheYOSH]
-- Codacy updates. [TheYOSH]
-- Codacy updates. [TheYOSH]
-- Codacy updates. [TheYOSH]
-- Update Codacy issues. [TheYOSH]
-- Codacy code update. [TheYOSH]
 
 **Other**
 ------
@@ -829,10 +1024,6 @@ Changelog
 - Translated using Weblate (Italian) [Rob]
 
   Currently translated at 36.5% (278 of 761 strings)
-- Codacy code improvements. [TheYOSH]
-- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
-  [TheYOSH]
-- Remove debug. [TheYOSH]
 
 
 4.3.2 (2022-05-05)
@@ -841,15 +1032,32 @@ Changelog
 **Fixes**
 ------
 
+- Fix docker ffmeg (3) [TheYOSH]
+- Final docker fix ffmpeg. [TheYOSH]
 - Fix ffmpeg in docker. [TheYOSH]
 
 **Updates**
 ------
 
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Update Codacy issues. [TheYOSH]
+- Codacy code update. [TheYOSH]
 - Update version. [TheYOSH]
 - Update documentation (2) [TheYOSH]
 - Update documentation. [TheYOSH]
 - Update README.md. [TheYOSH]
+
+**Other**
+------
+
+- Codacy code improvements. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Remove debug. [TheYOSH]
 
 
 4.3.1 (2022-05-04)

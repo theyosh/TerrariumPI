@@ -1,10 +1,9 @@
-# TerrariumPI 4.6.3
+# TerrariumPI 4.7.0
 
 ![Latest release](https://img.shields.io/github/v/release/theyosh/terrariumpi?label=Latest%20release)
 ![GitHub Release Date](https://img.shields.io/github/release-date/theyosh/TerrariumPI)
 [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/theyosh/terrariumpi)](https://hub.docker.com/r/theyosh/terrariumpi)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dba4e25f9efe4197926dd03aa6925d0f)](https://app.codacy.com/gh/theyosh/TerrariumPI?utm_source=github.com&utm_medium=referral&utm_content=theyosh/TerrariumPI&utm_campaign=Badge_Grade_Settings)
 
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
@@ -26,7 +25,7 @@ Think off:
 - Tanks with animals or plants
 - Greenhouse
 
-And all this is controlled with a nice web interface with [AdminLTE 3](https://adminlte.io/) based on Bootstrap 4 made interactive with [Svelte](https://svelte.dev/).
+And all this is controlled with a nice web interface with [AdminLTE 3](https://adminlte.io/) based on Bootstrap 4 made interactive with [Svelte 4](https://svelte.dev/).
 
 ## Table of Contents
 
@@ -180,10 +179,11 @@ Now **clear your browser cache** and reload the web interface. A brand new versi
 This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimum and tested hardware is
 
 - Raspberry PI with at least **4GB SD card** running [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/).
-  - Pi 2 (At own risk/no support)
-  - Pi 3 (At own risk/limited support)
-  - Zero (At own risk/no support)
-  - Pi 4
+  - Zero (Should work/At own risk/limited support)
+  - [Zero 2W](https://github.com/theyosh/TerrariumPI/issues/823#issuecomment-1693236850) (Should work/At own risk/limited support)
+  - Pi 2 (Should work/At own risk/limited support)
+  - Pi 3 (Works/full support)
+  - Pi 4 (Works/full support)
 - Power relay board
   - USB versions (Serial and Bitbang)
   - GPIO versions
@@ -265,7 +265,3 @@ More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree
 ## About
 
 A live version is running at: <https://terrarium.theyosh.nl/index.html>. Go to 'Help' menu for more information about used hardware, software and how to setup.
-
-## License
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_large)
