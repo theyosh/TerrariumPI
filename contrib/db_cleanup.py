@@ -137,6 +137,15 @@ class HistoryCleanup:
         print("Analyzing total rows:      ", end="", flush=True)
         total_sensor_data = self.get_total_records(table)
         number_padding = len(str(total_sensor_data[0]))
+        if total_sensor_data[0] == 0:
+            print(
+                " {}. Took {:.2f} seconds".format(
+                    str(total_sensor_data[0]).rjust(number_padding),
+                    time.time() - start,
+                )
+            )
+            return
+
         print(
             " {} from {:%Y-%m-%d %H:%M} till {:%Y-%m-%d %H:%M}. Took {:.2f} seconds".format(
                 str(total_sensor_data[0]).rjust(number_padding),
@@ -199,6 +208,15 @@ class HistoryCleanup:
         print("Analyzing total rows:      ", end="", flush=True)
         total_sensor_data = self.get_total_records(table)
         number_padding = len(str(total_sensor_data[0]))
+        if total_sensor_data[0] == 0:
+            print(
+                " {}. Took {:.2f} seconds".format(
+                    str(total_sensor_data[0]).rjust(number_padding),
+                    time.time() - start,
+                )
+            )
+            return
+
         print(
             " {} from {:%Y-%m-%d %H:%M} till {:%Y-%m-%d %H:%M}. Took {:.2f} seconds".format(
                 str(total_sensor_data[0]).rjust(number_padding),
