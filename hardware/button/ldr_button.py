@@ -60,7 +60,8 @@ class terrariumLDRSensor(terrariumButton):
         sleep(0.25)
 
     def calibrate(self, calibration_data):
-        self.__CAPACITOR = int(calibration_data["ldr_capacitor"])
+        super().calibrate(calibration_data)
+        self.__CAPACITOR = int(calibration_data.get("ldr_capacitor", self.__CAPACITOR))
 
     def stop(self):
         self._checker["running"] = False

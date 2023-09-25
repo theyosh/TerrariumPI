@@ -20,8 +20,6 @@ class terrariumRemoteButton(terrariumButton):
         while self._checker["running"]:
             try:
                 value = 1 if int(terrariumUtils.get_remote_data(self._device["device"])) != 0 else 0
-                if self.__reverse:
-                    value = 1 if value == 0 else 0
                 self._device["internal_state"] = value
             except Exception as ex:
                 logger.warning(f"Could not update remote button: {ex}")
@@ -34,7 +32,6 @@ class terrariumRemoteButton(terrariumButton):
     def _load_hardware(self):
         self._device["internal_state"] = self.RELEASED
 
-        self.__reverse = False
         self.__thread = threading.Thread(target=self.__run)
         self.__thread.start()
 
@@ -42,8 +39,8 @@ class terrariumRemoteButton(terrariumButton):
         sleep(0.25)
 
     def calibrate(self, calibration_data):
+        super().calibrate(calibration_data)
         self.__TIMEOUT = int(calibration_data.get("timeout", self.__TIMEOUT))
-        self.__reverse = calibration_data.get("inverse", "off") == "on"
 
     def stop(self):
         self._checker["running"] = False
