@@ -97,6 +97,8 @@ class terrariumButton(object):
 
         self._checker = {"running": False, "thread": None}
 
+        self._inverse = False
+
         self.id = button_id
         self.name = name
         self.callback = callback
@@ -120,7 +122,7 @@ class terrariumButton(object):
             if new_state != self._device["state"]:
                 self._device["state"] = new_state
                 if self.callback is not None:
-                    self.callback(self.id, self._device["state"])
+                    self.callback(self.id, self.state)
 
             sleep(0.1)
 
@@ -205,14 +207,14 @@ class terrariumButton(object):
 
     @property
     def state(self):
-        return self._device["state"]
+        return self._device["state"] if not self._inverse else 1 - self._device["state"]
 
     @property
     def pressed(self):
-        return self._device["state"] == self.PRESSED
+        return self.state == self.PRESSED
 
     def calibrate(self, calibration_data):
-        pass
+        self._inverse = calibration_data.get("inverse", "off") == "on"
 
     def update(self):
         return self.state

@@ -20,7 +20,7 @@
   let validated = false;
 
   let hardware = [];
-  let calibration = false;
+  let calibration = true;
   let selected_hardware = null;
   let formData = writable({});
 
@@ -201,6 +201,16 @@
       </a>
       <div class="col">
         <div class="collapse row pt-3" id="button_callibration">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3">
+                <Switch
+                  name="calibration.inverse"
+                  value={$formData.calibration?.inverse}
+                  disabled={selected_hardware !== 'remote'}
+                  label="{$_('buttons.settings.calibration.inverse.label', { default: 'Inverse value' })}"
+                  help="{$_('buttons.settings.calibration.inverse.help', {
+                    default: 'Toggle to inverse the remote value.',
+                  })}" />
+            </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-3"  class:d-none={selected_hardware !== 'ldr'}>
               <Field
                 type="number"
@@ -234,16 +244,6 @@
                 invalid="{$_('buttons.settings.calibration.timeout.invalid', {
                   default: 'The entered timeout value is not valid. Enter a valid number between {min} and {max}.',
                   values: { min: 1, max: 100 },
-                })}" />
-            </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-3" class:d-none={selected_hardware !== 'remote'}>
-              <Switch
-                name="calibration.inverse"
-                value={$formData.calibration?.inverse}
-                disabled={selected_hardware !== 'remote'}
-                label="{$_('buttons.settings.calibration.inverse.label', { default: 'Inverse value' })}"
-                help="{$_('buttons.settings.calibration.inverse.help', {
-                  default: 'Toggle to inverse the remote value.',
                 })}" />
             </div>
         </div>
