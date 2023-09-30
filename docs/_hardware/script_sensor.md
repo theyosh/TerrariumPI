@@ -19,6 +19,16 @@ With a script sensor you can make your own script/program that does a measuremen
 
 For temperature, it needs to return the value in Celsius degrees.
 
+You can use decimal/float values. But make sure you have only a numeric value output. No '%' of 'C' indicators.
+
+### Python scripts
+
+In order to use the Python virtual environment with all its libraries, make sure you have the correct [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) line:
+
+```bash
+#!/usr/bin/env python
+```
+
 ### Docker
 
 When using docker, you can place them in the `scripts` volume that you have defined in the [docker-compose.yaml]({% link _tabs/install.md %}#docker) file. And then you can use the following address: `/TerrariumPI/scripts/[name_of_script].[extension]`
