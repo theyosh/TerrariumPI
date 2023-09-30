@@ -11,6 +11,7 @@ import subprocess
 import threading
 import bcrypt
 import os
+import sys
 import math
 import asyncio
 import base64
@@ -422,7 +423,8 @@ class terrariumUtils:
         data = None
         try:
             logger.debug("Running script: %s." % (script))
-            data = subprocess.check_output(script, shell=True)
+            # Add python virtual env to PATH to make sure that venv is being used for python
+            data = subprocess.check_output(script, shell=True, env={**os.environ, 'PATH': f'{sys.prefix}/bin:' + os.environ['PATH']})
             logger.debug("Output was: %s." % (data))
         except Exception as ex:
             logger.exception("Error parsing script data for script %s. Exception %s" % (script, ex))
