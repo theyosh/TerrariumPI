@@ -17,13 +17,13 @@ export const formToJSON = (form) => {
           value.push(item.value);
         }
       } else if (element.type === 'checkbox') {
-        value = element.checked && element.value ? (!isNaN(element.value) ? parseFloat(element.value) : element.value) : element.checked;
+        value = element.checked && element.value ? (!isNaN(parseFloat(element.value)) ? parseFloat(element.value) : element.value) : element.checked;
       } else if (element.type === 'number') {
-        value = parseFloat(element.value);
+        value = !isNaN(parseFloat(element.value)) ? parseFloat(element.value) : 0;
       } else if (element.value !== '' && (element.value[0] === '+' || element.value[0] === '-')) {
         value = element.value
       } else {
-        value = element.value !== '' && !element.value.startsWith('0x') && !isNaN(element.value) ? parseFloat(element.value) : element.value;
+        value = element.value !== '' && !element.value.startsWith('0x') && !isNaN(parseFloat(element.value)) ? parseFloat(element.value) : element.value;
       }
 
       if (value === 'true') {
