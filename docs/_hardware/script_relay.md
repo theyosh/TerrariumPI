@@ -19,9 +19,18 @@ A single on/off relay will get the value 100 for on and 0 for off.
 
 When for what reason the readout is not possible, return the value '-1' when requested. This will tell TerrariumPI to keep the last existing value.
 
-And make sure your script is [executable](https://linuxhandbook.com/make-file-executable/). You can use the same Python libraries that are installed. See the `requirements.txt` for instaled libraries.
+And make sure your script is [executable](https://linuxhandbook.com/make-file-executable/). You can use the same Python libraries that are installed. See the `requirements.txt` for installed libraries.
 
 An example can be found in the [contrib](https://github.com/theyosh/TerrariumPI/blob/main/contrib/external_switch.py) folder.
+
+### Python scripts
+
+In order to use the Python virtual environment with all its libraries, make sure you have the correct [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) line:
+
+```bash
+#!/usr/bin/env python
+```
+
 
 ### Docker
 

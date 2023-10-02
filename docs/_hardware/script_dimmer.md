@@ -19,6 +19,14 @@ When for what reason the readout is not possible, return the value '-1' when req
 
 An example can be found in the [contrib](https://github.com/theyosh/TerrariumPI/blob/4.x.y.z/contrib/external_switch.py) folder.
 
+### Python scripts
+
+In order to use the Python virtual environment with all its libraries, make sure you have the correct [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) line:
+
+```bash
+#!/usr/bin/env python
+```
+
 ### Docker
 
 When using docker, you can place them in the `scripts` volume that you have defined in the [docker-compose.yaml]({% link _tabs/install.md %}#docker) file. And then you can use the following address: `/TerrariumPI/scripts/[name_of_script].[extension]`

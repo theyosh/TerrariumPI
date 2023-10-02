@@ -1,12 +1,12 @@
 ---
-title: YT-69 sensor (digital)
+title: YL-69 sensor (digital)
 categories: [Hardware, Sensor]
 tags: [sensor, moisture]
 
 image:
-  path: /assets/img/YT-69.webp
-  src: /assets/img/YT-69.webp
-  alt: "YT-69 sensor (digital) header image"
+  path: /assets/img/YL-69.webp
+  src: /assets/img/YL-69.webp
+  alt: "YL-69 sensor (digital) header image"
 
 device_types: [moisture]
 device_address: "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the device is connected<br />Ex: `27`"

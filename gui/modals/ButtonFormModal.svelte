@@ -34,7 +34,6 @@
 
   const hardwareType = (hardware) => {
     selected_hardware = hardware;
-    calibration = ['ldr', 'remote'].indexOf(selected_hardware) !== -1;
   };
 
   const _processForm = async (values, context) => {
@@ -229,7 +228,7 @@
                   values: { min: 1, max: 100 },
                 })}" />
             </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-3" class:d-none={selected_hardware !== 'remote'}>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-4" class:d-none={selected_hardware !== 'remote'}>
               <Field
                 type="number"
                 name="calibration.timeout"
