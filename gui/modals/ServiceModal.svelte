@@ -505,28 +505,43 @@
       </div>
     {/if}
 
-    <!--
-    <div class="row telegram">
-      <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="form-group">
-          <label for="bot_token">{{ _('Bot Token') }}</label>
-          <input type="text" class="form-control" id="bot_token" name="bot_token" required="required" >
+    {#if $formData.type === 'telegram'}
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <Field
+            type="text"
+            name="setup.token"
+            required="{true}"
+            label="{$_('services.settings.setup.telegram.bot.label', { default: 'Bot token' })}"
+            placeholder="{$_('services.settings.setup.telegram.bot.placeholder', { default: 'Enter a bot token.' })}"
+            help="{$_('services.settings.setup.telegram.bot.help', { default: 'Enter a bot token.' })}"
+            invalid="{$_('services.settings.setup.telegram.bot.invalid', {
+              default: 'The entered bot token is not valid. It cannot be empty.',
+            })}" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <Field
+            type="text"
+            name="setup.allowed_users"
+            required="{true}"
+            label="{$_('services.settings.setup.telegram.allowed_users.label', { default: 'Allowed users' })}"
+            placeholder="{$_('services.settings.setup.telegram.allowed_users.placeholder', { default: 'Enter the allowed users.' })}"
+            help="{$_('services.settings.setup.telegram.allowed_users.help', { default: 'Enter the allowed users.' })}"
+            invalid="{$_('services.settings.setup.telegram.allowed_users.invalid', {
+              default: 'Enter at least one user. It cannot be empty.',
+            })}" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <Field
+            type="text"
+            name="setup.proxy"
+            label="{$_('services.settings.setup.telegram.proxy.label', { default: 'Proxy' })}"
+            placeholder="{$_('services.settings.setup.telegram.proxy.placeholder', { default: 'Enter a full proxy url.' })}"
+            help="{$_('services.settings.setup.telegram.proxy.help', { default: 'Enter a full proxy url.' })}" />
         </div>
       </div>
-      <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="form-group">
-          <label for="username">{{ _('Username') }}</label>
-          <input type="text" class="form-control" id="username" name="username" required="required" >
-        </div>
-      </div>
-      <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="form-group">
-          <label for="proxy">{{ _('HTTP Proxy') }}</label>
-          <input type="text" class="form-control" id="proxy" name="proxy" >
-        </div>
-      </div>
-    </div>
-    -->
+    {/if}
+
     <!--
     <div class="row twitter">
       <div class="col-12 col-sm-12 col-md-3 col-lg-3">

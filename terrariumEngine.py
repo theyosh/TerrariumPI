@@ -111,7 +111,7 @@ class terrariumEngine(object):
         self.load_settings()
 
         # Notification system
-        self.notification = terrariumNotification()
+        self.notification = terrariumNotification(self)
         self.notification.engine = self
         self.notification.load_services()
         self.notification.broadcast(startup_message, startup_message, self.settings["profile_image"])

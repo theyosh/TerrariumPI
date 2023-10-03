@@ -82,3 +82,4 @@ emails==0.6
 luma.oled==3.13.0
 i2c_lcd==0.1.0
 paho-mqtt==1.6.1
+python-telegram-bot[socks,http2]==20.3
