@@ -1485,7 +1485,13 @@ class terrariumAPI(object):
     def relay_add(self):
         try:
             new_relay = self.webserver.engine.add(
-                terrariumRelay(None, request.json["hardware"], request.json["address"], request.json["name"], callback=self.webserver.engine.callback_relay)
+                terrariumRelay(
+                    None,
+                    request.json["hardware"],
+                    request.json["address"],
+                    request.json["name"],
+                    callback=self.webserver.engine.callback_relay,
+                )
             )
             if new_relay.is_dimmer:
                 new_relay.calibrate(request.json["calibration"])

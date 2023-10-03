@@ -210,7 +210,7 @@ class terrariumNotification(terrariumSingleton):
 
         return sorted(data, key=itemgetter("name"))
 
-    def __init__(self, engine = None):
+    def __init__(self, engine=None):
         "Initialize empty notification system with system defaults"
 
         self.__rate_limiter_counter = {
@@ -258,7 +258,7 @@ class terrariumNotification(terrariumSingleton):
                 if service["id"] not in self.services:
                     setup = copy.deepcopy(service["setup"])
                     if self.engine:
-                        setup['engine'] = self.engine
+                        setup["engine"] = self.engine
                         setup["terrariumpi_name"] = self.engine.settings["title"]
                         setup["version"] = self.engine.settings["version"]
                         setup["profile_image"] = self.engine.settings["profile_image"]
@@ -447,7 +447,7 @@ class terrariumNotificationService(object):
         self.type = service_type
         self.name = name
         self.enabled = enabled
-        self.engine = setup['engine']
+        self.engine = setup["engine"]
 
         self.setup = {}
         self.load_setup(setup)
@@ -2389,77 +2389,76 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
 
 
 class terrariumNotificationServiceTelegram(terrariumNotificationService):
-
     # function to handle the /start command
     async def start(self, update, context):
         if self._authenticate(update.message):
-            if update.message.chat_id not in self.setup['chat_ids']:
-                self.setup['chat_ids'].append(update.message.chat_id)
+            if update.message.chat_id not in self.setup["chat_ids"]:
+                self.setup["chat_ids"].append(update.message.chat_id)
 
-            await update.message.reply_text('start command received, you are now getting updates...')
-
+            await update.message.reply_text("start command received, you are now getting updates...")
 
     async def webcam(self, update, context):
         if self._authenticate(update.message):
-            webcam_id = update.message.text.trim().split(' ')[0]
+            webcam_id = update.message.text.trim().split(" ")[0]
             if webcam_id in self.engine.webcams:
-                with open(self.engine.webcams[webcam_id].raw_image_path,"rb") as webcam_image:
+                with open(self.engine.webcams[webcam_id].raw_image_path, "rb") as webcam_image:
                     await update.message.reply_photo(webcam_image)
 
     async def sensor(self, update, context):
         if self._authenticate(update.message):
-            sensor_ids = update.message.text.trim().split(' ')[0]
+            sensor_ids = update.message.text.trim().split(" ")[0]
             sensor_ids = sensor_ids if sensor_ids and sensor_ids in self.engine.sensors else self.engine.sensors.keys()
 
-            message = 'Current sensor(s) status\n'
+            message = "Current sensor(s) status\n"
             with orm.db_session():
                 for sensor in Sensor.select(lambda s: s.id in sensor_ids).order_by(Sensor.name):
-                    message += f'Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}\n'
+                    message += f"Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}\n"
 
             message = message.trim()
             await update.message.reply_text(message)
 
     async def help(self, update, context):
         if self._authenticate(update.message):
-            await update.message.reply_text(f'''The following commands are supported:
+            await update.message.reply_text(
+                f"""The following commands are supported:
 
 /start : This will start listening for notifications.
 /webcam [webcam_id] : will show the latest image of the webcam ID.
 /sensor [sensor_id] : will show the current sensor state. Sensor id is optional.
 /relay [relay_id] : will show the current relay state. Relay id is optional.
-/status : will show the current system status.''')
-
+/status : will show the current system status."""
+            )
 
     # function to handle normal text
     async def text(self, update, context):
         if self._authenticate(update.message):
-            await update.message.reply_text(f'Sorry, no conversations...')
+            await update.message.reply_text(f"Sorry, no conversations...")
 
     # function to handle errors ocurred in the dispatcher
     async def error(self, update, context):
         if self._authenticate(update.message):
-            await update.message.reply_text('an error ocurred')
+            await update.message.reply_text("an error ocurred")
 
     async def _main_process(self):
         try:
             await self.telegram_bot.initialize()
             await self.telegram_bot.start()
-            logger.info(f'Connected to Telegram')
+            logger.info(f"Connected to Telegram")
             await self.telegram_bot.updater.start_polling()
             # run until it receives a stop signal
             await self.telegram_bot.updater.stop()
             await self.telegram_bot.stop()
         except InvalidToken as ex:
-            logger.error(f'Error starting Telegram bot: {ex}')
+            logger.error(f"Error starting Telegram bot: {ex}")
         finally:
             await self.telegram_bot.shutdown()
 
     async def _authenticate(self, message):
-        if str(message.from_user.username) in self.setup['allowed_users']:
+        if str(message.from_user.username) in self.setup["allowed_users"]:
             return True
 
-        await message.reply_text(f'User is not allowed: {message.from_user.username}')
-        logger.error(f'User is not allowed: {message.from_user.username}')
+        await message.reply_text(f"User is not allowed: {message.from_user.username}")
+        logger.error(f"User is not allowed: {message.from_user.username}")
 
     def load_setup(self, setup_data):
         def _run():
@@ -2473,7 +2472,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         self.setup = {
             "token": setup_data.get("token"),
             "allowed_users": setup_data.get("allowed_users"),
-            "chat_ids" : []
+            "chat_ids": [],
         }
 
         super().load_setup(setup_data)
@@ -2482,7 +2481,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         self.__thread = None
 
         if self.enabled:
-            self.telegram_bot = Application.builder().token(self.setup['token']).build()
+            self.telegram_bot = Application.builder().token(self.setup["token"]).build()
 
             # add handlers for start and help commands
             self.telegram_bot.add_handler(CommandHandler("start", self.start))
@@ -2515,7 +2514,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             if self.__thread is not None:
                 self.__thread.join()
 
-        logger.info(f'Disconnected from Telegram')
+        logger.info(f"Disconnected from Telegram")
 
     def send_message(self, type, subject, message, data=None, attachments=[]):
         async def _send_message(type, subject, message, data=None, attachments=[]):
@@ -2523,7 +2522,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
             text_mode = len(attachments) == 0
 
-            for chat_id in self.setup['chat_ids']:
+            for chat_id in self.setup["chat_ids"]:
                 if text_mode:
                     await self.telegram_bot.send_message(chat_id, message)
                 else:
@@ -2531,5 +2530,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                         with open(image, "rb") as image:
                             await self.telegram_bot.send_photo(chat_id, image)
 
-        data = run_coroutine_threadsafe(_send_message(type, subject, message, data, attachments), self._async.async_loop)
+        data = run_coroutine_threadsafe(
+            _send_message(type, subject, message, data, attachments), self._async.async_loop
+        )
         data = data.result()

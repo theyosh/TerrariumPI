@@ -9,16 +9,16 @@ import requests
 
 # Enter here the original relay ID from TP4.
 # Can be found at http://127.0.0.1:8090/api/relays/
-RELAY_ID="ebdf5ed1f4768d57c1bc999e410e6a33"
+RELAY_ID = "ebdf5ed1f4768d57c1bc999e410e6a33"
 # Enter the username and password. If you change this in the GUI, also update it here!!!
-USERNAME="admin"
-PASSWORD="password"
+USERNAME = "admin"
+PASSWORD = "password"
 
 # Should not be changed
-TP_SERVER="http://127.0.0.1"
+TP_SERVER = "http://127.0.0.1"
 
 # !! --- NO CHANGES BELOW THIS LINE ---- !!
-RELAY_URL=f'{TP_SERVER}/api/relays/{RELAY_ID}'
+RELAY_URL = f"{TP_SERVER}/api/relays/{RELAY_ID}"
 
 # For our purpose, we do not provide a readout. So always return -1.0
 if len(sys.argv) == 1:
@@ -35,7 +35,7 @@ else:
         raise ValueError("Invalid input value. Should be a number between 0 and 100 including")
 
     if value == 0:
-        requests.post(f'{RELAY_URL}/{value}/', data={}, auth=(USERNAME, PASSWORD))
+        requests.post(f"{RELAY_URL}/{value}/", data={}, auth=(USERNAME, PASSWORD))
 
     else:
-        requests.post(f'{RELAY_URL}/{value}/', data={}, auth=(USERNAME, PASSWORD))
+        requests.post(f"{RELAY_URL}/{value}/", data={}, auth=(USERNAME, PASSWORD))
