@@ -2391,21 +2391,21 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
     # function to handle the /start command
     async def start(self, update, context):
         if await self._authenticate(update.message):
-            if update.message.chat_id not in self.setup['chat_ids']:
-                self.setup['chat_ids'].append(update.message.chat_id)
+            if update.message.chat_id not in self.setup["chat_ids"]:
+                self.setup["chat_ids"].append(update.message.chat_id)
 
-            await update.message.reply_text('start command received, you are now getting updates...')
+            await update.message.reply_text("start command received, you are now getting updates...")
 
     async def webcam(self, update, context):
         if await self._authenticate(update.message):
-            webcam_id = update.message.text.trim().split(' ')[0]
+            webcam_id = update.message.text.trim().split(" ")[0]
             if webcam_id in self.engine.webcams:
                 with open(self.engine.webcams[webcam_id].raw_image_path, "rb") as webcam_image:
                     await update.message.reply_photo(webcam_image)
 
     async def sensor(self, update, context):
         if await self._authenticate(update.message):
-            sensor_ids = update.message.text.trim().split(' ')[0]
+            sensor_ids = update.message.text.trim().split(" ")[0]
             sensor_ids = sensor_ids if sensor_ids and sensor_ids in self.engine.sensors else self.engine.sensors.keys()
 
             message = "Current sensor(s) status\n"
@@ -2418,30 +2418,32 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
     async def help(self, update, context):
         if await self._authenticate(update.message):
-            await update.message.reply_text(f'''The following commands are supported:
+            await update.message.reply_text(
+                f"""The following commands are supported:
 
 /start : This will start listening for notifications.
 /webcam [webcam_id] : will show the latest image of the webcam ID.
 /sensor [sensor_id] : will show the current sensor state. Sensor id is optional.
 /relay [relay_id] : will show the current relay state. Relay id is optional.
-/status : will show the current system status.''')
+/status : will show the current system status."""
+            )
 
     # function to handle normal text
     async def text(self, update, context):
         if await self._authenticate(update.message):
-            await update.message.reply_text(f'Sorry, no conversations...')
+            await update.message.reply_text(f"Sorry, no conversations...")
 
     # function to handle errors ocurred in the dispatcher
     async def error(self, update, context):
         if await self._authenticate(update.message):
-            await update.message.reply_text('an error ocurred')
+            await update.message.reply_text("an error ocurred")
 
     async def _authenticate(self, message):
-        if str(message.from_user.username) in self.setup['allowed_users']:
+        if str(message.from_user.username) in self.setup["allowed_users"]:
             return True
 
-        await message.reply_text(f'User is not allowed: {message.from_user.username}')
-        logger.error(f'User is not allowed: {message.from_user.username}')
+        await message.reply_text(f"User is not allowed: {message.from_user.username}")
+        logger.error(f"User is not allowed: {message.from_user.username}")
 
     async def _connect(self):
         try:
@@ -2461,11 +2463,11 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         try:
             await self._connect()
         except TimedOut as ex:
-            logger.warning(f'Error connecting to Telegram. Just retry once more: {ex}')
+            logger.warning(f"Error connecting to Telegram. Just retry once more: {ex}")
             try:
                 await self._connect()
             except Exception as ex:
-                logger.error(f'Error connecting to Telegram: {ex}')
+                logger.error(f"Error connecting to Telegram: {ex}")
 
     def load_setup(self, setup_data):
         def _run():
