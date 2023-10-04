@@ -204,7 +204,6 @@
                 <Switch
                   name="calibration.inverse"
                   value={$formData.calibration?.inverse}
-                  disabled={selected_hardware !== 'remote'}
                   label="{$_('buttons.settings.calibration.inverse.label', { default: 'Inverse value' })}"
                   help="{$_('buttons.settings.calibration.inverse.help', {
                     default: 'Toggle to inverse the remote value.',
