@@ -20,8 +20,7 @@ import paho.mqtt.client as mqtt
 import json
 
 # Telegram
-from asyncio import run_coroutine_threadsafe
-from telegram.error import InvalidToken
+from telegram.error import InvalidToken, TimedOut
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 
 # Database
@@ -2391,22 +2390,22 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
 class terrariumNotificationServiceTelegram(terrariumNotificationService):
     # function to handle the /start command
     async def start(self, update, context):
-        if self._authenticate(update.message):
-            if update.message.chat_id not in self.setup["chat_ids"]:
-                self.setup["chat_ids"].append(update.message.chat_id)
+        if await self._authenticate(update.message):
+            if update.message.chat_id not in self.setup['chat_ids']:
+                self.setup['chat_ids'].append(update.message.chat_id)
 
-            await update.message.reply_text("start command received, you are now getting updates...")
+            await update.message.reply_text('start command received, you are now getting updates...')
 
     async def webcam(self, update, context):
-        if self._authenticate(update.message):
-            webcam_id = update.message.text.trim().split(" ")[0]
+        if await self._authenticate(update.message):
+            webcam_id = update.message.text.trim().split(' ')[0]
             if webcam_id in self.engine.webcams:
                 with open(self.engine.webcams[webcam_id].raw_image_path, "rb") as webcam_image:
                     await update.message.reply_photo(webcam_image)
 
     async def sensor(self, update, context):
-        if self._authenticate(update.message):
-            sensor_ids = update.message.text.trim().split(" ")[0]
+        if await self._authenticate(update.message):
+            sensor_ids = update.message.text.trim().split(' ')[0]
             sensor_ids = sensor_ids if sensor_ids and sensor_ids in self.engine.sensors else self.engine.sensors.keys()
 
             message = "Current sensor(s) status\n"
@@ -2418,28 +2417,33 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             await update.message.reply_text(message)
 
     async def help(self, update, context):
-        if self._authenticate(update.message):
-            await update.message.reply_text(
-                f"""The following commands are supported:
+        if await self._authenticate(update.message):
+            await update.message.reply_text(f'''The following commands are supported:
 
 /start : This will start listening for notifications.
 /webcam [webcam_id] : will show the latest image of the webcam ID.
 /sensor [sensor_id] : will show the current sensor state. Sensor id is optional.
 /relay [relay_id] : will show the current relay state. Relay id is optional.
-/status : will show the current system status."""
-            )
+/status : will show the current system status.''')
 
     # function to handle normal text
     async def text(self, update, context):
-        if self._authenticate(update.message):
-            await update.message.reply_text(f"Sorry, no conversations...")
+        if await self._authenticate(update.message):
+            await update.message.reply_text(f'Sorry, no conversations...')
 
     # function to handle errors ocurred in the dispatcher
     async def error(self, update, context):
-        if self._authenticate(update.message):
-            await update.message.reply_text("an error ocurred")
+        if await self._authenticate(update.message):
+            await update.message.reply_text('an error ocurred')
 
-    async def _main_process(self):
+    async def _authenticate(self, message):
+        if str(message.from_user.username) in self.setup['allowed_users']:
+            return True
+
+        await message.reply_text(f'User is not allowed: {message.from_user.username}')
+        logger.error(f'User is not allowed: {message.from_user.username}')
+
+    async def _connect(self):
         try:
             await self.telegram_bot.initialize()
             await self.telegram_bot.start()
@@ -2453,19 +2457,21 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         finally:
             await self.telegram_bot.shutdown()
 
-    async def _authenticate(self, message):
-        if str(message.from_user.username) in self.setup["allowed_users"]:
-            return True
-
-        await message.reply_text(f"User is not allowed: {message.from_user.username}")
-        logger.error(f"User is not allowed: {message.from_user.username}")
+    async def _main_process(self):
+        try:
+            await self._connect()
+        except TimedOut as ex:
+            logger.warning(f'Error connecting to Telegram. Just retry once more: {ex}')
+            try:
+                await self._connect()
+            except Exception as ex:
+                logger.error(f'Error connecting to Telegram: {ex}')
 
     def load_setup(self, setup_data):
         def _run():
             try:
-                self._asyncio = terrariumAsync()
-                data = run_coroutine_threadsafe(self._main_process(), self._asyncio.async_loop)
-                data.result()
+                self._async = terrariumAsync()
+                data = self._async.run(self._main_process())
             except Exception as ex:
                 logger.exception(f"Error in telegram service: {ex}")
 
@@ -2503,21 +2509,24 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                 logger.exception(f"Error in cloud run: {ex}")
 
     def stop(self):
-        if self.telegram_bot is not None:
-            try:
-                self.telegram_bot.stop()
-            except Exception as ex:
-                logger.error(f"Error stopping Telegram bot: {ex}")
+        async def _stop():
+            if self.telegram_bot is not None:
+                try:
+                    await self.telegram_bot.stop()
+                except Exception as ex:
+                    logger.error(f"Error stopping Telegram bot: {ex}")
 
-            self.telegram_bot = None
+                self.telegram_bot = None
 
-            if self.__thread is not None:
-                self.__thread.join()
+        data = self._async.run(_stop())
+
+        if self.__thread is not None:
+            self.__thread.join()
 
         logger.info(f"Disconnected from Telegram")
 
-    def send_message(self, type, subject, message, data=None, attachments=[]):
-        async def _send_message(type, subject, message, data=None, attachments=[]):
+    def send_message(self, _, subject, message, data=None, attachments=[]):
+        async def _send_message(subject, message, data=None, attachments=[]):
             message = subject + "\n" + message
 
             text_mode = len(attachments) == 0
@@ -2530,7 +2539,4 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                         with open(image, "rb") as image:
                             await self.telegram_bot.send_photo(chat_id, image)
 
-        data = run_coroutine_threadsafe(
-            _send_message(type, subject, message, data, attachments), self._async.async_loop
-        )
-        data = data.result()
+        data = self._async.run(_send_message(subject, message, data, attachments))

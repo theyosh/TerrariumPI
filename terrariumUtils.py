@@ -57,6 +57,10 @@ class terrariumAsync(terrariumSingleton):
         process = threading.Thread(target=__run)
         process.start()
 
+    def run(self, cmd):
+        data = asyncio.run_coroutine_threadsafe(cmd, self.async_loop)
+        return data.result()
+
     def stop(self):
         self.__running = False
 
