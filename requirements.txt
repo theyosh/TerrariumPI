@@ -57,7 +57,7 @@ bme680==1.1.1
 adafruit-circuitpython-sht31d==2.3.23
 
 # Webcam packages
-Pillow==9.5.0
+Pillow==10.0.1
 # !! Check first: https://piwheels.org/project/numpy/ !!
 numpy==1.24.3
 # !! Check first: https://piwheels.org/project/opencv-python-headless/ !!
