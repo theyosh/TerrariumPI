@@ -2,8 +2,6 @@ import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
 
-import asyncio
-
 from . import terrariumRelay
 from terrariumUtils import terrariumUtils, terrariumAsync, terrariumCache
 
@@ -23,7 +21,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
 
         # Use an internal caching for speeding things up.
         self.__state_cache = terrariumCache()
-        self._async = terrariumAsync()
+        self.__asyncio = terrariumAsync()
 
         address = self._address
         if len(address) == 1:
@@ -51,8 +49,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
         if data is not None and terrariumUtils.is_true(data[self._device["switch"]]) == (state != 0.0):
             return True
 
-        toggle = asyncio.run_coroutine_threadsafe(__set_hardware_state(state), self._async.async_loop)
-        data = toggle.result()
+        data = self.__asyncio.run(__set_hardware_state(state))
         return data == state
 
     def _get_hardware_value(self):
@@ -70,9 +67,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
             data = self.__state_cache.get_data(self._address[0])
 
             if data is None:
-                toggle = asyncio.run_coroutine_threadsafe(__get_hardware_state(), self._async.async_loop)
-                data = toggle.result()
-
+                data = self.__asyncio.run(__get_hardware_state())
                 self.__state_cache.set_data(self._address[0], data, cache_timeout=20)
 
             return (
@@ -124,9 +119,8 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
             return found_devices
 
         found_devices = []
-        _async_loop = terrariumAsync()
-        data = asyncio.run_coroutine_threadsafe(__scan(), _async_loop.async_loop)
-        found_devices = data.result()
+        __asyncio = terrariumAsync()
+        found_devices = __asyncio.run(__scan())
 
         for device in found_devices:
             yield device

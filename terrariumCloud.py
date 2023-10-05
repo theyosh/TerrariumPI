@@ -32,6 +32,8 @@ class TerrariumMerossCloud(terrariumSingleton):
         return EMAIL != "" and PASSWORD != ""
 
     def __init__(self, username, password):
+        self.__asyncio = terrariumAsync()
+
         self.__engine = {
             "cache": terrariumCache(),
             "running": False,
@@ -39,7 +41,6 @@ class TerrariumMerossCloud(terrariumSingleton):
             "restart_counter": 0,
             "error": False,
             "event": None,
-            "asyncio": terrariumAsync(),
         }
 
         self._data = {}
@@ -51,8 +52,7 @@ class TerrariumMerossCloud(terrariumSingleton):
     def start(self, reconnecting=False):
         def _run():
             try:
-                data = asyncio.run_coroutine_threadsafe(self._main_process(), self.__engine["asyncio"].async_loop)
-                data.result()
+                self.__asyncio.run(self._main_process())
             except Exception as ex:
                 logger.exception(f"Error in cloud run: {ex}")
                 self.reconnect()
@@ -99,8 +99,7 @@ class TerrariumMerossCloud(terrariumSingleton):
         if not self.__engine["running"]:
             return []
 
-        data = asyncio.run_coroutine_threadsafe(_scan_hardware(device_type), self.__engine["asyncio"].async_loop)
-        devices = data.result()
+        devices = self.__asyncio.run(_scan_hardware(device_type))
         return devices
 
     def toggle_relay(self, device, switch, state):
@@ -128,10 +127,7 @@ class TerrariumMerossCloud(terrariumSingleton):
         offline.start()
 
         # Start the toggle action
-        data = asyncio.run_coroutine_threadsafe(
-            _toggle_relay(device, switch, state), self.__engine["asyncio"].async_loop
-        )
-        result = data.result()
+        result = self.__asyncio.run(_toggle_relay(device, switch, state))
 
         # Stop the offline detection
         offline.cancel()
