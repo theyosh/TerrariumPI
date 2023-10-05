@@ -2451,9 +2451,6 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             await self.telegram_bot.start()
             logger.info(f"Connected to Telegram")
             await self.telegram_bot.updater.start_polling()
-            # run until it receives a stop signal
-            await self.telegram_bot.updater.stop()
-            await self.telegram_bot.stop()
         except InvalidToken as ex:
             logger.error(f"Error starting Telegram bot: {ex}")
         finally:
@@ -2506,17 +2503,19 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             try:
                 self.__thread = Thread(target=_run)
                 self.__thread.start()
-
             except Exception as ex:
-                logger.exception(f"Error in cloud run: {ex}")
+                logger.exception(f"Error in Telegram run: {ex}")
 
     def stop(self):
         async def _stop():
             if self.telegram_bot is not None:
                 try:
+                    await self.telegram_bot.updater.stop()
                     await self.telegram_bot.stop()
                 except Exception as ex:
                     logger.error(f"Error stopping Telegram bot: {ex}")
+                finally:
+                    await self.telegram_bot.shutdown()
 
                 self.telegram_bot = None
 
@@ -2529,7 +2528,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
     def send_message(self, _, subject, message, data=None, attachments=[]):
         async def _send_message(subject, message, data=None, attachments=[]):
-            message = subject + "\n" + message
+            message = f"{subject}\n{message}"
 
             text_mode = len(attachments) == 0
 
@@ -2541,4 +2540,4 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                         with open(image, "rb") as image:
                             await self.telegram_bot.send_photo(chat_id, image)
 
-        data = self._async.run(_send_message(subject, message, data, attachments))
+        result = self._async.run(_send_message(subject, message, data, attachments))

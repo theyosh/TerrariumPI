@@ -279,7 +279,7 @@ class NotificationService(db.Entity):
 
     def __encrypt_sensitive_fields(self):
         # Encrypt sensitive fields
-        for field in ["username", "password", "user_key", "access_secret"]:
+        for field in ["username", "password", "user_key", "access_secret", "token", "allowed_users"]:
             if field in self.setup:
                 self.setup[field] = terrariumUtils.encrypt(self.setup[field])
 
@@ -292,7 +292,7 @@ class NotificationService(db.Entity):
     def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         # Encrypt sensitive fields
-        for field in ["username", "password", "user_key", "access_secret"]:
+        for field in ["username", "password", "user_key", "access_secret", "token", "allowed_users"]:
             if field in data["setup"]:
                 data["setup"][field] = terrariumUtils.decrypt(data["setup"][field])
 
