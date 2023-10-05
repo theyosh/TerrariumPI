@@ -267,7 +267,6 @@ class NotificationMessage(db.Entity):
     enabled = orm.Required(bool, default=True)
     services = orm.Set(lambda: NotificationService)
 
-
 class NotificationService(db.Entity):
     id = orm.PrimaryKey(str, default=terrariumUtils.generate_uuid)
     type = orm.Required(str)
@@ -277,9 +276,11 @@ class NotificationService(db.Entity):
     setup = orm.Required(orm.Json)
     messages = orm.Set(lambda: NotificationMessage)
 
+    ENCRYPTED_FIELDS = ["username", "password", "user_key", "api_token", "access_secret", "token", "allowed_users"]
+
     def __encrypt_sensitive_fields(self):
         # Encrypt sensitive fields
-        for field in ["username", "password", "user_key", "access_secret", "token", "allowed_users"]:
+        for field in self.ENCRYPTED_FIELDS:
             if field in self.setup:
                 self.setup[field] = terrariumUtils.encrypt(self.setup[field])
 
@@ -292,7 +293,7 @@ class NotificationService(db.Entity):
     def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         # Encrypt sensitive fields
-        for field in ["username", "password", "user_key", "access_secret", "token", "allowed_users"]:
+        for field in self.ENCRYPTED_FIELDS:
             if field in data["setup"]:
                 data["setup"][field] = terrariumUtils.decrypt(data["setup"][field])
 
@@ -569,8 +570,10 @@ class Setting(db.Entity):
     id = orm.PrimaryKey(str)
     value = orm.Optional(str)
 
+    ENCRYPTED_FIELDS = ["meross_cloud_username", "meross_cloud_password"]
+
     def __encrypt_sensitive_fields(self):
-        if self.id in ["meross_cloud_username", "meross_cloud_password"] and "" != self.value:
+        if self.id in self.ENCRYPTED_FIELDS and "" != self.value:
             self.value = terrariumUtils.encrypt(self.value)
 
     def before_insert(self):
