@@ -267,6 +267,7 @@ class NotificationMessage(db.Entity):
     enabled = orm.Required(bool, default=True)
     services = orm.Set(lambda: NotificationService)
 
+
 class NotificationService(db.Entity):
     id = orm.PrimaryKey(str, default=terrariumUtils.generate_uuid)
     type = orm.Required(str)
