@@ -656,7 +656,7 @@ class terrariumArea(object):
         if "sensors" in self.setup and len(self.setup["sensors"]) > 0:
             # Change the sensor limits when changing from day to night and vs.
             if old_is_day != self.state["is_day"] and self.setup.get("day_night_difference", 0) != 0:
-                difference = float(self.setup["day_night_difference"]) * (-1.0 if self.state["is_day"] else 1.0)
+                difference = float(self.setup.get("day_night_difference", 0)) * (-1.0 if self.state["is_day"] else 1.0)
                 logger.info(
                     f'Adjusting the sensors based on day/night difference. Changing by {difference} going from {("day" if old_is_day else "night")} to {("day" if self.state["is_day"] else "night")}'
                 )
