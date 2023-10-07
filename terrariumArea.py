@@ -57,20 +57,28 @@ class terrariumArea(object):
 
     @classproperty
     def available_areas(__cls__):
-        data = []
-        for area_type, area in terrariumArea.__TYPES.items():
-            data.append({"type": area_type, "name": area["name"], "sensors": area["sensors"]})
+        return sorted([{"type": area_type, "name": area["name"], "sensors": area["sensors"]} for area_type, area in terrariumArea.__TYPES.items()], key=itemgetter("name"))
 
-        return sorted(data, key=itemgetter("name"))
+
+        # data = []
+        # for area_type, area in terrariumArea.__TYPES.items():
+        #     data.append({"type": area_type, "name": area["name"], "sensors": area["sensors"]})
+
+        # return sorted(data, key=itemgetter("name"))
 
     # Return polymorph area....
     def __new__(cls, area_id, enclosure, area_type, name="", mode=None, setup=None):
-        known_areas = terrariumArea.available_areas
-
-        if area_type not in [area["type"] for area in known_areas]:
+        try:
+            return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[area_type]["class"]())
+        except:
             raise terrariumAreaException(f"Area of type {area_type} is unknown.")
 
-        return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[area_type]["class"]())
+        # known_areas = terrariumArea.available_areas
+
+        # if area_type not in [area["type"] for area in known_areas]:
+        #     raise terrariumAreaException(f"Area of type {area_type} is unknown.")
+
+        # return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[area_type]["class"]())
 
     def __init__(self, area_id, enclosure, area_type, name, mode, setup):
         if area_id is None:
@@ -278,6 +286,7 @@ class terrariumArea(object):
 
     def load_setup(self, data):
         self.setup = copy.deepcopy(data)
+        self.setup['day_night_difference'] = 0.0 if not terrariumUtils.is_float(self.setup.get("day_night_difference")) else float(self.setup.get("day_night_difference"))
         if self.state.get("last_update", None) is None:
             self.state = {
                 "is_day": self.setup.get("is_day", None),
@@ -655,8 +664,8 @@ class terrariumArea(object):
 
         if "sensors" in self.setup and len(self.setup["sensors"]) > 0:
             # Change the sensor limits when changing from day to night and vs.
-            if old_is_day != self.state["is_day"] and self.setup.get("day_night_difference", 0) != 0:
-                difference = float(self.setup["day_night_difference"]) * (-1.0 if self.state["is_day"] else 1.0)
+            if old_is_day != self.state["is_day"] and self.setup["day_night_difference"] != 0.0:
+                difference = self.setup["day_night_difference"] * (-1.0 if self.state["is_day"] else 1.0)
                 logger.info(
                     f'Adjusting the sensors based on day/night difference. Changing by {difference} going from {("day" if old_is_day else "night")} to {("day" if self.state["is_day"] else "night")}'
                 )
