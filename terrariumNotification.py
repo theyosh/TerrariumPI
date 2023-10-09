@@ -20,8 +20,9 @@ import paho.mqtt.client as mqtt
 import json
 
 # Telegram
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
 from telegram.error import InvalidToken, TimedOut
-from telegram.ext import Application, CommandHandler, MessageHandler, filters
+from telegram.ext import Application, CommandHandler, MessageHandler, ConversationHandler, CallbackQueryHandler, filters
 
 # Database
 from pony import orm
@@ -2396,16 +2397,49 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
             await update.message.reply_text("start command received, you are now getting updates...")
 
-    async def webcam(self, update, context):
+    async def webcamSelect(self, update, context) -> int:
         if await self._authenticate(update.message):
-            webcam_id = update.message.text.trim().split(" ")[0]
-            if webcam_id in self.engine.webcams:
-                with open(self.engine.webcams[webcam_id].raw_image_path, "rb") as webcam_image:
-                    await update.message.reply_photo(webcam_image)
+            if not(update.message.parse_entities('bot_command')):
+                webcam_id = update.message.text.strip().split(" ")[0]
+                await update.message.reply_text(webcam_id)
+            else:
+                webcam_id = update.message.text.strip()[8:]
+                if (webcam_id):
+                    webcam_id = webcam_id.split(" ")[0]
+
+            if not(webcam_id):
+                webcam_list = []
+                for webcam in self.engine.webcams:
+                    webcam_list.append(InlineKeyboardButton(webcam, callback_data=str(webcam)))
+                if not(webcam_list):
+                    await update.message.reply_text("No WebCam configured")
+                else:
+                    await context.bot.send_message(
+                        chat_id=update.effective_chat.id,
+                        text="Select the WebCam from list:",
+                        reply_markup=InlineKeyboardMarkup([webcam_list])
+                    )
+                    return 0
+            elif webcam_id in self.engine.webcams:
+                await self.webcam(update, context, webcam_id)
+            else:
+                await update.message.reply_text("WebCam is not exist!!")
+        return ConversationHandler.END
+        
+    async def webcam(self, update, context, webcam_id = None):
+        if  webcam_id == None:
+            query = update.callback_query
+            await query.answer()
+            webcam_id = query.data
+            await query.edit_message_text(text=f"WebCam: {webcam_id}")
+        
+        with open(self.engine.webcams[webcam_id].raw_image_path, "rb") as webcam_image:
+            await context.bot.send_photo(update.effective_chat.id, webcam_image)
+        return ConversationHandler.END
 
     async def sensor(self, update, context):
         if await self._authenticate(update.message):
-            sensor_ids = update.message.text.trim().split(" ")[0]
+            sensor_ids = update.message.text.strip()[8:].split(" ")[0]
             sensor_ids = sensor_ids if sensor_ids and sensor_ids in self.engine.sensors else self.engine.sensors.keys()
 
             message = "Current sensor(s) status\n"
@@ -2413,7 +2447,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                 for sensor in Sensor.select(lambda s: s.id in sensor_ids).order_by(Sensor.name):
                     message += f"Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}\n"
 
-            message = message.trim()
+            message = message.strip()
             await update.message.reply_text(message)
 
     async def help(self, update, context):
@@ -2437,6 +2471,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
     async def error(self, update, context):
         if await self._authenticate(update.message):
             await update.message.reply_text("an error ocurred")
+        return ConversationHandler.END
 
     async def _authenticate(self, message):
         if str(message.from_user.username) in self.setup["allowed_users"]:
@@ -2453,8 +2488,6 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             await self.telegram_bot.updater.start_polling()
         except InvalidToken as ex:
             logger.error(f"Error starting Telegram bot: {ex}")
-        finally:
-            await self.telegram_bot.shutdown()
 
     async def _main_process(self):
         try:
@@ -2491,8 +2524,16 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             # add handlers for start and help commands
             self.telegram_bot.add_handler(CommandHandler("start", self.start))
             self.telegram_bot.add_handler(CommandHandler("help", self.help))
-            self.telegram_bot.add_handler(CommandHandler("webcam", self.webcam))
             self.telegram_bot.add_handler(CommandHandler("sensor", self.sensor))
+
+            # add handlers for select options
+            self.telegram_bot.add_handler(ConversationHandler(
+                entry_points=[CommandHandler("webcam", self.webcamSelect)],
+                states={
+                    0: [CallbackQueryHandler(self.webcam)]
+                },
+                fallbacks=[CommandHandler("webcam", self.webcamSelect)],
+            ))
 
             # add an handler for normal text (not commands)
             self.telegram_bot.add_handler(MessageHandler(filters.TEXT, self.text))
