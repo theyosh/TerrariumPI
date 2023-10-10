@@ -94,7 +94,7 @@ class terrariumEngine(object):
         self.update_available = False
         self.weather = None
         # Dirty hack... :(
-        self.device = re.search(r"Model\s+:\s+(?P<device>.*)", Path("/proc/cpuinfo").read_text()).group("device")
+        self.device = Path("/proc/device-tree/model").read_text().rstrip('\x00')
         init_db(self.version)
 
         # Send message that startup is ready..... else the startup will wait until done.... can take more then 1 minute
@@ -282,9 +282,7 @@ class terrariumEngine(object):
 
         # Load device information
         try:
-            settings["device"] = re.search(r"Model\s+:\s+(?P<device>.*)", Path("/proc/cpuinfo").read_text()).group(
-                "device"
-            )
+            settings["device"] = Path("/proc/device-tree/model").read_text().rstrip('\x00')
         except Exception as ex:
             logger.debug(f"Error getting Pi info: {ex}")
             settings["device"] = "Unknown"
