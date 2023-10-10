@@ -276,16 +276,11 @@ class terrariumEngine(object):
 
         # Add some extra non DB settings
         settings["version"] = self.version
+        # Load device information
+        settings["device"] = self.device
 
         # Load the languages. Make a copy of the original, so we can reuse this value easier.
         settings["languages"] = copy.copy(self.available_languages)
-
-        # Load device information
-        try:
-            settings["device"] = Path("/proc/device-tree/model").read_text().rstrip('\x00')
-        except Exception as ex:
-            logger.debug(f"Error getting Pi info: {ex}")
-            settings["device"] = "Unknown"
 
         # Custom favicon
         favicon = Path("media/favicon.ico")
