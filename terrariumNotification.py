@@ -2442,6 +2442,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
     async def sensor(self, update, context):
         if await self._authenticate(update.message):
+            query = await update.message.reply_text("Loading...")
             sensor_ids = update.message.text.strip()[8:].split(" ")[0]
             sensor_ids = sensor_ids if sensor_ids and sensor_ids in self.engine.sensors else self.engine.sensors.keys()
 
@@ -2451,10 +2452,11 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                     message += f"- Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}\n"
 
             message = message.strip()
-            await update.message.reply_text(message)
+            await query.edit_text(message)
 
     async def relay(self, update, context):
         if await self._authenticate(update.message):
+            query = await update.message.reply_text("Loading...")
             relay_ids = update.message.text.strip()[7:].split(" ")[0]
             relay_ids = relay_ids if relay_ids and relay_ids in self.engine.relays else self.engine.relays.keys()
 
@@ -2468,10 +2470,11 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                         message += f"- Relay {relay.name} is currently at {'ON' if bool(relay.value) else 'OFF'}\n"
 
             message = message.strip()
-            await update.message.reply_text(message)
+            await query.edit_text(message)
 
     async def button(self, update, context):
         if await self._authenticate(update.message):
+            query = await update.message.reply_text("Loading...")
             button_ids = update.message.text.strip()[7:].split(" ")[0]
             button_ids = button_ids if button_ids and button_ids in self.engine.buttons else self.engine.buttons.keys()
 
@@ -2482,7 +2485,22 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                     message += f"- button {button.name} is {'Close' if bool(button.value) else 'Open'}\n"
 
             message = message.strip()
-            await update.message.reply_text(message)
+            await query.edit_text(message)
+
+    async def status(self, update, context):
+        if await self._authenticate(update.message):
+            query = await update.message.reply_text("Loading...")
+            message = "System stats:\n"
+            
+            system_stats = self.engine.system_stats()
+            message += f"- Uptime: {datetime.timedelta(seconds=int(system_stats['uptime']))}\n"
+            message += f"- Load: {system_stats['load']['percentage'][0]} %\n"
+            message += f"- CPU temperature: {system_stats['cpu_temperature']:.2f} ºC\n"
+            message += f"- Memory: {(system_stats['memory']['used']/1048576):.2f} MB ({((system_stats['memory']['used']*100)/system_stats['memory']['total']):.2f}%)\n"
+            message += f"- Storage: {(system_stats['storage']['used']/1073741824):.2f} GB ({((system_stats['storage']['used']*100)/system_stats['storage']['total']):.2f}%)\n"
+            
+            message = message.strip()
+            await query.edit_text(message)
 
     async def help(self, update, context):
         if await self._authenticate(update.message):
@@ -2562,7 +2580,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             self.telegram_bot.add_handler(CommandHandler("sensor", self.sensor))
             self.telegram_bot.add_handler(CommandHandler("relay", self.relay))
             self.telegram_bot.add_handler(CommandHandler("button", self.button))
-            self.telegram_bot.add_handler(CommandHandler("status", self.help))
+            self.telegram_bot.add_handler(CommandHandler("status", self.status))
 
             # add handlers for select options
             self.telegram_bot.add_handler(ConversationHandler(
