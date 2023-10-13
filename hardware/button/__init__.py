@@ -75,7 +75,10 @@ class terrariumButton(object):
 
     @classproperty
     def available_buttons(__cls__):
-        return [{"hardware": hardware_type, "name": button.NAME} for hardware_type, button in __cls__.available_hardware.items()]
+        return [
+            {"hardware": hardware_type, "name": button.NAME}
+            for hardware_type, button in __cls__.available_hardware.items()
+        ]
 
     # Return polymorph relay....
     def __new__(cls, _, hardware_type, address, name="", callback=None):

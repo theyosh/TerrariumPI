@@ -94,7 +94,7 @@ class terrariumEngine(object):
         self.update_available = False
         self.weather = None
         # Dirty hack... :(
-        self.device = Path("/proc/device-tree/model").read_text().rstrip('\x00')
+        self.device = Path("/proc/device-tree/model").read_text().rstrip("\x00")
         init_db(self.version)
 
         # Send message that startup is ready..... else the startup will wait until done.... can take more then 1 minute

@@ -75,7 +75,11 @@ class terrariumRelay(object):
 
     @classproperty
     def available_relays(__cls__):
-        return [{"hardware": hardware_type, "name": relay.NAME} for hardware_type, relay in __cls__.available_hardware.items() if relay.NAME is not None]
+        return [
+            {"hardware": hardware_type, "name": relay.NAME}
+            for hardware_type, relay in __cls__.available_hardware.items()
+            if relay.NAME is not None
+        ]
 
     # Return polymorph relay....
     def __new__(cls, _, hardware_type, address, name="", prev_state=None, callback=None):
@@ -84,7 +88,6 @@ class terrariumRelay(object):
             return super(terrariumRelay, cls).__new__(known_relays[hardware_type])
         except:
             raise terrariumRelayException(f"Relay of hardware type {hardware_type} is unknown.")
-
 
     def __init__(self, device_id, _, address, name="", prev_state=None, callback=None):
         self._device = {

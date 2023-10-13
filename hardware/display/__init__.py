@@ -63,7 +63,10 @@ class terrariumDisplay(object):
 
     @classproperty
     def available_displays(__cls__):
-        return [{"hardware": hardware_type, "name": display.NAME} for hardware_type, display in __cls__.available_hardware.items()]
+        return [
+            {"hardware": hardware_type, "name": display.NAME}
+            for hardware_type, display in __cls__.available_hardware.items()
+        ]
 
     # Return polymorph relay....
     def __new__(cls, device_id, hardware_type, address, title=None, width=16, height=2):

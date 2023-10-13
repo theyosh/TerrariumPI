@@ -97,9 +97,13 @@ class terrariumSensor(object):
     # Return a list with type and names of supported switches
     @classproperty
     def available_sensors(__cls__):
-        data = [{"hardware": hardware_type, "name": sensor.NAME, "types": sensor.TYPES} for hardware_type, sensor in __cls__.available_hardware.items() if sensor.NAME is not None]
+        data = [
+            {"hardware": hardware_type, "name": sensor.NAME, "types": sensor.TYPES}
+            for hardware_type, sensor in __cls__.available_hardware.items()
+            if sensor.NAME is not None
+        ]
         # not sure why sum works here: https://stackoverflow.com/a/18114563
-        all_types = list(set(sum([sensor['types'] for sensor in data], []))) + ["conductivity"]
+        all_types = list(set(sum([sensor["types"] for sensor in data], []))) + ["conductivity"]
 
         # Remote and script sensors can handle all the known types
         for sensor in data:
@@ -110,7 +114,7 @@ class terrariumSensor(object):
 
     @classproperty
     def sensor_types(__cls__):
-        return list(set(sum([sensor['types'] for sensor in __cls__.available_sensors], [])))
+        return list(set(sum([sensor["types"] for sensor in __cls__.available_sensors], [])))
 
     # Return polymorph sensor....
     def __new__(cls, _, hardware_type, sensor_type, address, name="", unit_value_callback=None, trigger_callback=None):
@@ -142,8 +146,8 @@ class terrariumSensor(object):
         }
 
         self._sensor_cache = terrariumCache()
-#        self.__unit_value_callback = unit_value_callback
-#        self.__trigger_callback = trigger_callback
+        #        self.__unit_value_callback = unit_value_callback
+        #        self.__trigger_callback = trigger_callback
 
         # Set the properties
         self.id = sensor_id

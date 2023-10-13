@@ -111,7 +111,10 @@ class terrariumWebcam(object):
 
     @classproperty
     def available_webcams(__cls__):
-        return [{"hardware": hardware_type, "name": webcam.NAME} for hardware_type, webcam in __cls__.available_hardware.items()]
+        return [
+            {"hardware": hardware_type, "name": webcam.NAME}
+            for hardware_type, webcam in __cls__.available_hardware.items()
+        ]
 
     # Return polymorph webcam....
     def __new__(cls, _, hardware_type, address, name="", rotation="0", width=640, height=480, wb="auto"):
@@ -712,7 +715,7 @@ class terrariumWebcamLive(terrariumWebcam):
 
         return True
 
-    def _get_raw_data(self, url = None):
+    def _get_raw_data(self, url=None):
         if not psutil.pid_exists(self.__process.pid):
             # Should restart the bash script
             logger.warning(f"Webcam {self} is crashed. Restarting the webcam.")
