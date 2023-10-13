@@ -97,45 +97,35 @@ class terrariumSensor(object):
     # Return a list with type and names of supported switches
     @classproperty
     def available_sensors(__cls__):
-        data = []
-        all_types = ["conductivity"]  # For now 'conductivity' is only available through script or remote
-        for hardware_type, sensor in __cls__.available_hardware.items():
-            if sensor.NAME is not None:
-                data.append({"hardware": hardware_type, "name": sensor.NAME, "types": sensor.TYPES})
-                all_types += sensor.TYPES
+        data = [{"hardware": hardware_type, "name": sensor.NAME, "types": sensor.TYPES} for hardware_type, sensor in __cls__.available_hardware.items() if sensor.NAME is not None]
+        # not sure why sum works here: https://stackoverflow.com/a/18114563
+        all_types = list(set(sum([sensor['types'] for sensor in data], []))) + ["conductivity"]
 
         # Remote and script sensors can handle all the known types
-        all_types = list(set(all_types))
         for sensor in data:
             if len(sensor["types"]) == 0:
                 sensor["types"] = all_types
 
-        return sorted(data, key=itemgetter("name"))
+        return data
 
     @classproperty
     def sensor_types(__cls__):
-        sensor_types = []
-
-        for sensor in __cls__.available_sensors:
-            sensor_types += sensor["types"]
-
-        return sorted(list(set(sensor_types)))
+        return list(set(sum([sensor['types'] for sensor in __cls__.available_sensors], [])))
 
     # Return polymorph sensor....
     def __new__(cls, _, hardware_type, sensor_type, address, name="", unit_value_callback=None, trigger_callback=None):
-        known_sensors = terrariumSensor.available_hardware
-
-        if hardware_type not in known_sensors:
-            raise terrariumSensorUnknownHardwareException(
-                f"Trying to load an unknown hardware device {hardware_type} at address {address} with name {name}"
-            )
-
-        if sensor_type not in known_sensors[hardware_type].TYPES:
-            raise terrariumSensorInvalidSensorTypeException(
-                f"Hardware does not have a {sensor_type} sensor at address {address} with name {name}"
-            )
-
-        return super(terrariumSensor, cls).__new__(known_sensors[hardware_type])
+        try:
+            known_sensors = terrariumSensor.available_hardware
+            return super(terrariumSensor, cls).__new__(known_sensors[hardware_type])
+        except:
+            if hardware_type not in known_sensors:
+                raise terrariumSensorUnknownHardwareException(
+                    f"Trying to load an unknown hardware device {hardware_type} at address {address} with name {name}"
+                )
+            else:
+                raise terrariumSensorInvalidSensorTypeException(
+                    f"Hardware does not have a {sensor_type} sensor at address {address} with name {name}"
+                )
 
     def __init__(self, sensor_id, _, sensor_type, address, name="", unit_value_callback=None, trigger_callback=None):
         self._device = {
@@ -152,8 +142,8 @@ class terrariumSensor(object):
         }
 
         self._sensor_cache = terrariumCache()
-        self.__unit_value_callback = unit_value_callback
-        self.__trigger_callback = trigger_callback
+#        self.__unit_value_callback = unit_value_callback
+#        self.__trigger_callback = trigger_callback
 
         # Set the properties
         self.id = sensor_id
@@ -267,12 +257,12 @@ class terrariumSensor(object):
             # Could not find valid hardware cache. So create a new hardware device
             try:
                 hardware = func_timeout(self._UPDATE_TIME_OUT, self._load_hardware)
-                if hardware is not None:
-                    # Store the hardware in the cache for unlimited of time
-                    self._sensor_cache.set_data(hardware_cache_key, hardware, -1)
-                else:
+                if hardware is None:
                     # Raise error that hard is not loaded with an unknown message :(
                     raise terrariumSensorLoadingException(f"Unable to load sensor {self}: Did not return a device.")
+
+                # Store the hardware in the cache for unlimited of time
+                self._sensor_cache.set_data(hardware_cache_key, hardware, -1)
 
             except FunctionTimedOut:
                 # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
@@ -346,7 +336,7 @@ class terrariumSensor(object):
     # Auto discovery of known and connected sensors
     @staticmethod
     def scan_sensors(unit_value_callback=None, trigger_callback=None, **kwargs):
-        for _, sensor_device in terrariumSensor.available_hardware.items():
+        for sensor_device in terrariumSensor.available_hardware.values():
             try:
                 for sensor in sensor_device._scan_sensors(unit_value_callback, trigger_callback, **kwargs):
                     yield sensor

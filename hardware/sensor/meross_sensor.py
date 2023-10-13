@@ -43,11 +43,9 @@ class terrariumMS100Sensor(terrariumSensor):
     @staticmethod
     def _scan_sensors(unit_value_callback=None, trigger_callback=None):
         found_devices = []
-
-        EMAIL = terrariumUtils.decrypt(os.environ.get("MEROSS_EMAIL", ""))
-        PASSWORD = terrariumUtils.decrypt(os.environ.get("MEROSS_PASSWORD", ""))
-
-        if EMAIL != "" and PASSWORD != "":
+        if TerrariumMerossCloud.is_enabled:
+            EMAIL = terrariumUtils.decrypt(os.environ.get("MEROSS_EMAIL", ""))
+            PASSWORD = terrariumUtils.decrypt(os.environ.get("MEROSS_PASSWORD", ""))
             cloud = TerrariumMerossCloud(EMAIL, PASSWORD)
             devices = cloud.scan_hardware("sensors")
 

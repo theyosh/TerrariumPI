@@ -63,20 +63,15 @@ class terrariumDisplay(object):
 
     @classproperty
     def available_displays(__cls__):
-        data = []
-        for hardware_type, button in __cls__.available_hardware.items():
-            data.append({"hardware": hardware_type, "name": button.NAME})
-
-        return data
+        return [{"hardware": hardware_type, "name": display.NAME} for hardware_type, display in __cls__.available_hardware.items()]
 
     # Return polymorph relay....
     def __new__(cls, device_id, hardware_type, address, title=None, width=16, height=2):
-        known_displays = terrariumDisplay.available_hardware
-
-        if hardware_type not in known_displays:
-            raise terrariumDisplayException(f"Dislay of hardware type {hardware_type} is unknown.")
-
-        return super(terrariumDisplay, cls).__new__(known_displays[hardware_type])
+        try:
+            known_displays = terrariumDisplay.available_hardware
+            return super(terrariumDisplay, cls).__new__(known_displays[hardware_type])
+        except:
+            raise terrariumDisplayException(f"Display of hardware type {hardware_type} is unknown.")
 
     def __init__(self, device_id, _, address, title=None, width=16, height=2):
         self._device = {
@@ -118,7 +113,7 @@ class terrariumDisplay(object):
         if self._device["device"] is None:
             return
 
-        self._device["running"] = True
+        self._device["running"] = 1
         while self._device["running"] or not self._device["queue"].empty():
             try:
                 text = self._device["queue"].get(False)
@@ -209,7 +204,7 @@ class terrariumDisplay(object):
             self._device["queue"].put(text)
 
     def stop(self, wait=True):
-        self._device["running"] = False
+        self._device["running"] = 0
         if wait:
             self._device["queue"].join()
 
@@ -226,10 +221,7 @@ class terrariumDisplay(object):
         # print('Max chars on 1 line: {}'.format(max_chars_per_line))
         text = text.split("\n")
         if self.__MODE_TEXT_WRAP == self.mode:
-            temp_lines = []
-            for line in text:
-                temp_lines += textwrap.wrap(line, width=max_chars_per_line)
-            text = temp_lines
+            text = [textwrap.wrap(line, width=max_chars_per_line) for line in text]
 
         self.clear()
 
@@ -241,9 +233,6 @@ class terrariumDisplay(object):
             max_screen_lines -= 1
 
         line_animations = max(0, len(text) - max_screen_lines)
-
-        #   print(f'Line animation: {line_animations}, max lines: {max_screen_lines}')
-
         for animation_step in range(line_animations + 1):
             # Here we select the max amount of text we can display once (max height) starting with the animation step as start.
             # This will make the text shift up with one line each round

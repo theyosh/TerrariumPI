@@ -176,9 +176,8 @@ class Button(db.Entity):
 
     @property
     def value(self):
-        timestamp_limit = datetime.now() - timedelta(seconds=Button.__MAX_VALUE_AGE)
         value = (
-            self.history.filter(lambda h: h.timestamp >= timestamp_limit)
+            self.history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(seconds=Button.__MAX_VALUE_AGE))
             .order_by(orm.desc(ButtonHistory.timestamp))
             .first()
         )
