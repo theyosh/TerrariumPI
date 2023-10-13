@@ -57,8 +57,13 @@ class terrariumArea(object):
 
     @classproperty
     def available_areas(__cls__):
-        return sorted([{"type": area_type, "name": area["name"], "sensors": area["sensors"]} for area_type, area in terrariumArea.__TYPES.items()], key=itemgetter("name"))
-
+        return sorted(
+            [
+                {"type": area_type, "name": area["name"], "sensors": area["sensors"]}
+                for area_type, area in terrariumArea.__TYPES.items()
+            ],
+            key=itemgetter("name"),
+        )
 
         # data = []
         # for area_type, area in terrariumArea.__TYPES.items():
@@ -286,7 +291,11 @@ class terrariumArea(object):
 
     def load_setup(self, data):
         self.setup = copy.deepcopy(data)
-        self.setup['day_night_difference'] = 0.0 if not terrariumUtils.is_float(self.setup.get("day_night_difference")) else float(self.setup.get("day_night_difference"))
+        self.setup["day_night_difference"] = (
+            0.0
+            if not terrariumUtils.is_float(self.setup.get("day_night_difference"))
+            else float(self.setup.get("day_night_difference"))
+        )
         if self.state.get("last_update", None) is None:
             self.state = {
                 "is_day": self.setup.get("is_day", None),

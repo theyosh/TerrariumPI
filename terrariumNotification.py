@@ -2387,6 +2387,7 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
         if r.status_code != 200:
             logger.error(f"Error sending Pushover message '{subject}' with status code: {r.status_code}")
 
+
 class terrariumNotificationServiceTelegram(terrariumNotificationService):
     # function to handle the /start command
     async def start(self, update, context):
@@ -2399,18 +2400,21 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
     async def webcamSelect(self, update, context):
         if await self._authenticate(update.message):
             webcam_id = None
-            if update.message.parse_entities('bot_command'):
+            if update.message.parse_entities("bot_command"):
                 try:
                     webcam_id = update.message.text.strip().split(" ")[1]
                 except:
-                    logger.debug('No webcam ID given, will return the webcam list.')
+                    logger.debug("No webcam ID given, will return the webcam list.")
 
             else:
                 webcam_id = update.message.text.strip().split(" ")[0]
                 await update.message.reply_text(webcam_id)
 
             if webcam_id is None:
-                webcam_list = [InlineKeyboardButton(webcam.name, callback_data=f"{webcam.id},{webcam.name}") for webcam in self.engine.webcams.values()]
+                webcam_list = [
+                    InlineKeyboardButton(webcam.name, callback_data=f"{webcam.id},{webcam.name}")
+                    for webcam in self.engine.webcams.values()
+                ]
 
                 if len(webcam_list) == 0:
                     await update.message.reply_text("No webcams configured")
@@ -2419,7 +2423,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                     await context.bot.send_message(
                         chat_id=update.effective_chat.id,
                         text="Select a webcam from the list:",
-                        reply_markup=InlineKeyboardMarkup([webcam_list])
+                        reply_markup=InlineKeyboardMarkup([webcam_list]),
                     )
                     return 0
 
@@ -2435,8 +2439,8 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
         return ConversationHandler.END
 
-    async def webcam(self, update, context, webcam_id = None):
-        if  webcam_id is None:
+    async def webcam(self, update, context, webcam_id=None):
+        if webcam_id is None:
             query = update.callback_query
             await query.answer()
             webcam_id, webcam_name = query.data.split(",")
@@ -2454,14 +2458,18 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             try:
                 sensor_ids = update.message.text.strip().split(" ")[1]
             except:
-                logger.debug('No sensor ID given, will return all sensors.')
+                logger.debug("No sensor ID given, will return all sensors.")
 
-            sensor_ids = [sensor_ids] if sensor_ids and sensor_ids in self.engine.sensors else self.engine.sensors.keys()
+            sensor_ids = (
+                [sensor_ids] if sensor_ids and sensor_ids in self.engine.sensors else self.engine.sensors.keys()
+            )
 
             message = ["Current sensor(s) status:"]
             with orm.db_session():
                 for sensor in Sensor.select(lambda s: s.id in sensor_ids).order_by(Sensor.name):
-                    message.append(f"- Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}")
+                    message.append(
+                        f"- Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}"
+                    )
 
             await query.edit_text("\n".join(message))
 
@@ -2472,7 +2480,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             try:
                 relay_ids = update.message.text.strip().split(" ")[1]
             except:
-                logger.debug('No sensor ID given, will return all sensors.')
+                logger.debug("No sensor ID given, will return all sensors.")
 
             relay_ids = [relay_ids] if relay_ids and relay_ids in self.engine.relays else self.engine.relays.keys()
 
@@ -2493,9 +2501,11 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             try:
                 button_ids = update.message.text.strip().split(" ")[1]
             except:
-                logger.debug('No button ID given, will return all buttons.')
+                logger.debug("No button ID given, will return all buttons.")
 
-            button_ids = [button_ids] if button_ids and button_ids in self.engine.buttons else self.engine.buttons.keys()
+            button_ids = (
+                [button_ids] if button_ids and button_ids in self.engine.buttons else self.engine.buttons.keys()
+            )
 
             message = ["Current button(s) status:"]
             with orm.db_session():
@@ -2514,8 +2524,12 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             message.append(f"- Uptime: {datetime.timedelta(seconds=int(system_stats['uptime']))}")
             message.append(f"- Load: {system_stats['load']['percentage'][0]} %")
             message.append(f"- CPU temperature: {system_stats['cpu_temperature']:.2f} ºC")
-            message.append(f"- Memory: {(system_stats['memory']['used']/1048576):.2f} MB ({((system_stats['memory']['used']*100)/system_stats['memory']['total']):.2f}%)")
-            message.append(f"- Storage: {(system_stats['storage']['used']/1073741824):.2f} GB ({((system_stats['storage']['used']*100)/system_stats['storage']['total']):.2f}%)")
+            message.append(
+                f"- Memory: {(system_stats['memory']['used']/1048576):.2f} MB ({((system_stats['memory']['used']*100)/system_stats['memory']['total']):.2f}%)"
+            )
+            message.append(
+                f"- Storage: {(system_stats['storage']['used']/1073741824):.2f} GB ({((system_stats['storage']['used']*100)/system_stats['storage']['total']):.2f}%)"
+            )
 
             await query.edit_text("\n".join(message))
 
@@ -2601,13 +2615,13 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             self.telegram_bot.add_handler(CommandHandler("status", self.status))
 
             # add handlers for select options
-            self.telegram_bot.add_handler(ConversationHandler(
-                entry_points=[CommandHandler("webcam", self.webcamSelect)],
-                states={
-                    0: [CallbackQueryHandler(self.webcam)]
-                },
-                fallbacks=[CommandHandler("webcam", self.webcamSelect)],
-            ))
+            self.telegram_bot.add_handler(
+                ConversationHandler(
+                    entry_points=[CommandHandler("webcam", self.webcamSelect)],
+                    states={0: [CallbackQueryHandler(self.webcam)]},
+                    fallbacks=[CommandHandler("webcam", self.webcamSelect)],
+                )
+            )
 
             # add an handler for normal text (not commands)
             self.telegram_bot.add_handler(MessageHandler(filters.TEXT, self.text))
