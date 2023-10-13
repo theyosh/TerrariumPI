@@ -20,7 +20,7 @@ import paho.mqtt.client as mqtt
 import json
 
 # Telegram
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import InvalidToken, TimedOut
 from telegram.ext import Application, CommandHandler, MessageHandler, ConversationHandler, CallbackQueryHandler, filters
 
@@ -289,7 +289,7 @@ class terrariumNotification(terrariumSingleton):
         del self.services[service_id]
 
     def broadcast(self, subject, message, image):
-        for _, service in self.services.items():
+        for service in self.services.values():
             if service is not None and service.enabled:
                 try:
                     service.send_message("system_broadcast", subject, message, None, [image])
@@ -393,7 +393,7 @@ class terrariumNotification(terrariumSingleton):
                         logger.exception(f"Error sending notification message '{title}': {ex}")
 
     def stop(self):
-        for _, service in self.services.items():
+        for service in self.services.values():
             if service is not None:
                 service.stop()
 
@@ -2387,7 +2387,6 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
         if r.status_code != 200:
             logger.error(f"Error sending Pushover message '{subject}' with status code: {r.status_code}")
 
-
 class terrariumNotificationServiceTelegram(terrariumNotificationService):
     # function to handle the /start command
     async def start(self, update, context):
@@ -2397,110 +2396,128 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
             await update.message.reply_text("start command received, you are now getting updates...")
 
-    async def webcamSelect(self, update, context) -> int:
+    async def webcamSelect(self, update, context):
         if await self._authenticate(update.message):
-            if not(update.message.parse_entities('bot_command')):
+            webcam_id = None
+            if update.message.parse_entities('bot_command'):
+                try:
+                    webcam_id = update.message.text.strip().split(" ")[1]
+                except:
+                    logger.debug('No webcam ID given, will return the webcam list.')
+
+            else:
                 webcam_id = update.message.text.strip().split(" ")[0]
                 await update.message.reply_text(webcam_id)
-            else:
-                webcam_id = update.message.text.strip()[8:]
-                if (webcam_id):
-                    webcam_id = webcam_id.split(" ")[0]
 
-            if not(webcam_id):
-                webcam_list = []
-                for webcam in self.engine.webcams.values():
-                    webcam_list.append(InlineKeyboardButton(webcam.name, callback_data=f"{webcam.id},{webcam.name}"))
-                if not(webcam_list):
-                    await update.message.reply_text("No WebCam configured")
+            if webcam_id is None:
+                webcam_list = [InlineKeyboardButton(webcam.name, callback_data=f"{webcam.id},{webcam.name}") for webcam in self.engine.webcams.values()]
+
+                if len(webcam_list) == 0:
+                    await update.message.reply_text("No webcams configured")
+
                 else:
                     await context.bot.send_message(
                         chat_id=update.effective_chat.id,
-                        text="Select the WebCam from list:",
+                        text="Select a webcam from the list:",
                         reply_markup=InlineKeyboardMarkup([webcam_list])
                     )
                     return 0
+
             elif webcam_id in self.engine.webcams:
                 await self.webcam(update, context, webcam_id)
+
             else:
                 for webcam in self.engine.webcams.values():
                     if webcam_id == webcam.name:
                         return await self.webcam(update, context, webcam.id)
-                await update.message.reply_text(f"WebCam {webcam_id} is not exist!!")
+
+                await update.message.reply_text(f"Webcam {webcam_id} does not exist!")
+
         return ConversationHandler.END
-        
+
     async def webcam(self, update, context, webcam_id = None):
-        if  webcam_id == None:
+        if  webcam_id is None:
             query = update.callback_query
             await query.answer()
-            webcam_id, webcam_name= query.data.split(",")
-            await query.edit_message_text(text=f"WebCam: {webcam_name}")
-        
+            webcam_id, webcam_name = query.data.split(",")
+            await query.edit_message_text(text=f"Webcam: {webcam_name}")
+
         with open(self.engine.webcams[webcam_id].raw_image_path, "rb") as webcam_image:
             await context.bot.send_photo(update.effective_chat.id, webcam_image)
+
         return ConversationHandler.END
 
     async def sensor(self, update, context):
         if await self._authenticate(update.message):
-            query = await update.message.reply_text("Loading...")
-            sensor_ids = update.message.text.strip()[8:].split(" ")[0]
-            sensor_ids = sensor_ids if sensor_ids and sensor_ids in self.engine.sensors else self.engine.sensors.keys()
+            query = await update.message.reply_text("Loading sensor(s)...")
+            sensor_ids = None
+            try:
+                sensor_ids = update.message.text.strip().split(" ")[1]
+            except:
+                logger.debug('No sensor ID given, will return all sensors.')
 
-            message = "Current sensor(s) status:\n"
+            sensor_ids = [sensor_ids] if sensor_ids and sensor_ids in self.engine.sensors else self.engine.sensors.keys()
+
+            message = ["Current sensor(s) status:"]
             with orm.db_session():
                 for sensor in Sensor.select(lambda s: s.id in sensor_ids).order_by(Sensor.name):
-                    message += f"- Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}\n"
+                    message.append(f"- Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}")
 
-            message = message.strip()
-            await query.edit_text(message)
+            await query.edit_text("\n".join(message))
 
     async def relay(self, update, context):
         if await self._authenticate(update.message):
-            query = await update.message.reply_text("Loading...")
-            relay_ids = update.message.text.strip()[7:].split(" ")[0]
-            relay_ids = relay_ids if relay_ids and relay_ids in self.engine.relays else self.engine.relays.keys()
+            query = await update.message.reply_text("Loading relay(s)...")
+            relay_ids = None
+            try:
+                relay_ids = update.message.text.strip().split(" ")[1]
+            except:
+                logger.debug('No sensor ID given, will return all sensors.')
 
-            message = "Current relay(s) status:\n"
+            relay_ids = [relay_ids] if relay_ids and relay_ids in self.engine.relays else self.engine.relays.keys()
 
+            message = ["Current relay(s) status:"]
             with orm.db_session():
                 for relay in Relay.select(lambda r: r.id in relay_ids).order_by(Relay.name):
                     if "dimmer" in relay.hardware:
-                        message += f"- Relay {relay.name} is currently at {relay.value}%\n"
+                        message.append(f"- Relay {relay.name} is currently at {relay.value}%")
                     else:
-                        message += f"- Relay {relay.name} is currently at {'ON' if bool(relay.value) else 'OFF'}\n"
+                        message.append(f"- Relay {relay.name} is currently at {'ON' if bool(relay.value) else 'OFF'}")
 
-            message = message.strip()
-            await query.edit_text(message)
+            await query.edit_text("\n".join(message))
 
     async def button(self, update, context):
         if await self._authenticate(update.message):
-            query = await update.message.reply_text("Loading...")
-            button_ids = update.message.text.strip()[7:].split(" ")[0]
-            button_ids = button_ids if button_ids and button_ids in self.engine.buttons else self.engine.buttons.keys()
+            query = await update.message.reply_text("Loading button(s)...")
+            button_ids = None
+            try:
+                button_ids = update.message.text.strip().split(" ")[1]
+            except:
+                logger.debug('No button ID given, will return all buttons.')
 
-            message = "Current button(s) status:\n"
+            button_ids = [button_ids] if button_ids and button_ids in self.engine.buttons else self.engine.buttons.keys()
 
+            message = ["Current button(s) status:"]
             with orm.db_session():
                 for button in Button.select(lambda r: r.id in button_ids).order_by(Button.name):
-                    message += f"- button {button.name} is {'Close' if bool(button.value) else 'Open'}\n"
+                    # TODO: Change message based on button type. Movement, and light
+                    message.append(f"- button {button.name} is {'Close' if bool(button.value) else 'Open'}")
 
-            message = message.strip()
-            await query.edit_text(message)
+            await query.edit_text("\n".join(message))
 
     async def status(self, update, context):
         if await self._authenticate(update.message):
             query = await update.message.reply_text("Loading...")
-            message = "System stats:\n"
-            
             system_stats = self.engine.system_stats()
-            message += f"- Uptime: {datetime.timedelta(seconds=int(system_stats['uptime']))}\n"
-            message += f"- Load: {system_stats['load']['percentage'][0]} %\n"
-            message += f"- CPU temperature: {system_stats['cpu_temperature']:.2f} ºC\n"
-            message += f"- Memory: {(system_stats['memory']['used']/1048576):.2f} MB ({((system_stats['memory']['used']*100)/system_stats['memory']['total']):.2f}%)\n"
-            message += f"- Storage: {(system_stats['storage']['used']/1073741824):.2f} GB ({((system_stats['storage']['used']*100)/system_stats['storage']['total']):.2f}%)\n"
-            
-            message = message.strip()
-            await query.edit_text(message)
+
+            message = ["System stats:"]
+            message.append(f"- Uptime: {datetime.timedelta(seconds=int(system_stats['uptime']))}")
+            message.append(f"- Load: {system_stats['load']['percentage'][0]} %")
+            message.append(f"- CPU temperature: {system_stats['cpu_temperature']:.2f} ºC")
+            message.append(f"- Memory: {(system_stats['memory']['used']/1048576):.2f} MB ({((system_stats['memory']['used']*100)/system_stats['memory']['total']):.2f}%)")
+            message.append(f"- Storage: {(system_stats['storage']['used']/1073741824):.2f} GB ({((system_stats['storage']['used']*100)/system_stats['storage']['total']):.2f}%)")
+
+            await query.edit_text("\n".join(message))
 
     async def help(self, update, context):
         if await self._authenticate(update.message):
@@ -2524,6 +2541,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
     async def error(self, update, context):
         if await self._authenticate(update.message):
             await update.message.reply_text("an error ocurred")
+
         return ConversationHandler.END
 
     async def _authenticate(self, message):
@@ -2556,7 +2574,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         def _run():
             try:
                 self._async = terrariumAsync()
-                data = self._async.run(self._main_process())
+                self._async.run(self._main_process())
             except Exception as ex:
                 logger.exception(f"Error in telegram service: {ex}")
 
@@ -2616,7 +2634,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
                 self.telegram_bot = None
 
-        data = self._async.run(_stop())
+        self._async.run(_stop())
 
         if self.__thread is not None:
             self.__thread.join()
@@ -2637,4 +2655,4 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                         with open(image, "rb") as image:
                             await self.telegram_bot.send_photo(chat_id, image)
 
-        result = self._async.run(_send_message(subject, message, data, attachments))
+        self._async.run(_send_message(subject, message, data, attachments))
