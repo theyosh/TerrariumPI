@@ -655,11 +655,12 @@ class terrariumAPI(object):
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def area_list(self):
-        data = []
-        for area in Area.select(lambda r: not r.id in self.webserver.engine.settings["exclude_ids"]):
-            data.append(self.area_detail(area.id))
-
-        return {"data": data}
+        return {
+            "data": [
+                self.area_detail(area.id)
+                for area in Area.select(lambda r: not r.id in self.webserver.engine.settings["exclude_ids"])
+            ]
+        }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def area_detail(self, area):
@@ -777,11 +778,7 @@ class terrariumAPI(object):
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def audiofile_list(self):
-        data = []
-        for audiofile in Audiofile.select():
-            data.append(audiofile.to_dict())
-
-        return {"data": data}
+        return {"data": [audiofile.to_dict() for audiofile in Audiofile.select()]}
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def audiofile_detail(self, audiofile):
@@ -846,8 +843,6 @@ class terrariumAPI(object):
         try:
             button = Button[button]
 
-            data = []
-
             if "day" == period:
                 period = 1
             elif "week" == period:
@@ -859,28 +854,24 @@ class terrariumAPI(object):
             else:
                 period = 1
 
-            for item in button.history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(days=period)):
-                data.append(
-                    {
-                        "timestamp": item.timestamp.timestamp(),
-                        "value": item.value,
-                    }
-                )
+            history = [
+                {"timestamp": item.timestamp.timestamp(), "value": item.value}
+                for item in button.history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(days=period))
+            ]
 
             if "export" == action:
+                # CSV Headers
+                csv_data = [";".join(history[0].keys())]
+                # Data
+                for data_point in history:
+                    data_point["timestamp"] = datetime.fromtimestamp(data_point["timestamp"])
+                    csv_data.append(";".join([str(value) for value in data_point.values()]))
+
                 response.headers["Content-Type"] = "application/csv"
                 response.headers["Content-Disposition"] = f"attachment; filename={button.name}_{period}.csv"
+                return "\n".join(csv_data)
 
-                # CSV Headers
-                csv_data = ";".join(data[0].keys()) + "\n"
-                # Data
-                for data_point in data:
-                    data_point["timestamp"] = datetime.fromtimestamp(data_point["timestamp"])
-                    csv_data += ";".join([str(value) for value in data_point.values()]) + "\n"
-
-                return csv_data
-
-            return {"data": data}
+            return {"data": history}
 
         except orm.core.ObjectNotFound:
             raise HTTPError(status=404, body=f"Button with id {button} does not exists.")
@@ -889,11 +880,12 @@ class terrariumAPI(object):
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def button_list(self):
-        data = []
-        for button in Button.select(lambda r: not r.id in self.webserver.engine.settings["exclude_ids"]):
-            data.append(self.button_detail(button.id))
-
-        return {"data": data}
+        return {
+            "data": [
+                self.button_detail(button.id)
+                for button in Button.select(lambda r: not r.id in self.webserver.engine.settings["exclude_ids"])
+            ]
+        }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def button_detail(self, button):
@@ -1004,9 +996,10 @@ class terrariumAPI(object):
 
             end = datetime.fromisoformat(end)
 
-        output = []
-        for event in self.webserver.engine.calendar.get_events(start, end):
-            output.append(
+        # https://stackoverflow.com/a/12294213
+        response.content_type = "application/json"
+        return dumps(
+            [
                 {
                     "id": event["uid"],
                     "title": event["summary"],
@@ -1014,11 +1007,9 @@ class terrariumAPI(object):
                     "start": datetime.fromtimestamp(event["dtstart"], timezone.utc).strftime("%Y-%m-%d"),
                     "end": datetime.fromtimestamp(event["dtend"], timezone.utc).strftime("%Y-%m-%d"),
                 }
-            )
-
-        # https://stackoverflow.com/a/12294213
-        response.content_type = "application/json"
-        return dumps(output)
+                for event in self.webserver.engine.calendar.get_events(start, end)
+            ]
+        )
 
     def calendar_add(self):
         event = self.webserver.engine.calendar.create_event(
@@ -1049,11 +1040,12 @@ class terrariumAPI(object):
     # Enclosure
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def enclosure_list(self):
-        data = []
-        for enclosure in Enclosure.select(lambda e: not e.id in self.webserver.engine.settings["exclude_ids"]):
-            data.append(self.enclosure_detail(enclosure.id))
-
-        return {"data": data}
+        return {
+            "data": [
+                self.enclosure_detail(enclosure.id)
+                for enclosure in Enclosure.select(lambda e: not e.id in self.webserver.engine.settings["exclude_ids"])
+            ]
+        }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def enclosure_detail(self, enclosure):
@@ -1205,13 +1197,14 @@ class terrariumAPI(object):
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def notification_message_list(self):
-        data = []
-        for message in NotificationMessage.select(
-            lambda ns: not ns.id in self.webserver.engine.settings["exclude_ids"]
-        ):
-            data.append(self.notification_message_detail(message.id))
-
-        return {"data": data}
+        return {
+            "data": [
+                self.notification_message_detail(message.id)
+                for message in NotificationMessage.select(
+                    lambda ns: not ns.id in self.webserver.engine.settings["exclude_ids"]
+                )
+            ]
+        }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def notification_message_add(self):
@@ -1270,13 +1263,14 @@ class terrariumAPI(object):
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def notification_service_list(self):
-        data = []
-        for service in NotificationService.select(
-            lambda ns: not ns.id in self.webserver.engine.settings["exclude_ids"]
-        ):
-            data.append(self.notification_service_detail(service.id))
-
-        return {"data": data}
+        return {
+            "data": [
+                self.notification_service_detail(service.id)
+                for service in NotificationService.select(
+                    lambda ns: not ns.id in self.webserver.engine.settings["exclude_ids"]
+                )
+            ]
+        }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def notification_service_add(self):
@@ -1293,11 +1287,12 @@ class terrariumAPI(object):
     # Playlist
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def playlist_list(self):
-        data = []
-        for playlist in Playlist.select(lambda p: not p.id in self.webserver.engine.settings["exclude_ids"]):
-            data.append(self.playlist_detail(playlist.id))
-
-        return {"data": data}
+        return {
+            "data": [
+                self.playlist_detail(playlist.id)
+                for playlist in Playlist.select(lambda p: not p.id in self.webserver.engine.settings["exclude_ids"])
+            ]
+        }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def playlist_detail(self, playlist):
@@ -1409,8 +1404,6 @@ class terrariumAPI(object):
         try:
             relay = Relay[relay]
 
-            data = []
-
             if "day" == period:
                 period = 1
             elif "week" == period:
@@ -1425,30 +1418,29 @@ class terrariumAPI(object):
             else:
                 period = 1
 
-            for item in relay.history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(days=period)):
-                data.append(
-                    {
-                        "timestamp": item.timestamp.timestamp(),
-                        "value": item.value,
-                        "wattage": item.wattage,
-                        "flow": item.flow,
-                    }
-                )
+            history = [
+                {
+                    "timestamp": item.timestamp.timestamp(),
+                    "value": item.value,
+                    "wattage": item.wattage,
+                    "flow": item.flow,
+                }
+                for item in relay.history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(days=period))
+            ]
 
             if "export" == action:
+                # CSV Headers
+                csv_data = [";".join(history[0].keys())]
+                # Data
+                for data_point in history:
+                    data_point["timestamp"] = datetime.fromtimestamp(data_point["timestamp"])
+                    csv_data.append(";".join([str(value) for value in data_point.values()]))
+
                 response.headers["Content-Type"] = "application/csv"
                 response.headers["Content-Disposition"] = f"attachment; filename={relay.name}_{period}.csv"
+                return "\n".join(csv_data)
 
-                # CSV Headers
-                csv_data = ";".join(data[0].keys()) + "\n"
-                # Data
-                for data_point in data:
-                    data_point["timestamp"] = datetime.fromtimestamp(data_point["timestamp"])
-                    csv_data += ";".join([str(value) for value in data_point.values()]) + "\n"
-
-                return csv_data
-
-            return {"data": data}
+            return {"data": history}
 
         except orm.core.ObjectNotFound:
             raise HTTPError(status=404, body=f"Relay with id {relay} does not exists.")
@@ -1466,11 +1458,12 @@ class terrariumAPI(object):
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def relay_list(self):
-        data = []
-        for relay in Relay.select(lambda r: not r.id in self.webserver.engine.settings["exclude_ids"]):
-            data.append(self.relay_detail(relay.id))
-
-        return {"data": data}
+        return {
+            "data": [
+                self.relay_detail(relay.id)
+                for relay in Relay.select(lambda r: not r.id in self.webserver.engine.settings["exclude_ids"])
+            ]
+        }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def relay_detail(self, relay):
@@ -1537,8 +1530,6 @@ class terrariumAPI(object):
     # Sensors
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def sensor_history(self, filter=None, action="history", period="day"):
-        data = []
-
         if "day" == period:
             period = 1
         elif "week" == period:
@@ -1576,6 +1567,7 @@ class terrariumAPI(object):
                 if sh.sensor.id == filter and sh.timestamp >= datetime.now() - timedelta(days=period)
             )
 
+        data = []
         for item in query:
             data_point = {
                 "timestamp": item[0].timestamp(),
@@ -1592,17 +1584,16 @@ class terrariumAPI(object):
 
         if "export" == action:
             sensor = Sensor[filter]
-            response.headers["Content-Type"] = "application/csv"
-            response.headers["Content-Disposition"] = f"attachment; filename={sensor.name}_{period}.csv"
-
             # CSV Headers
-            csv_data = ";".join(data[0].keys()) + "\n"
+            csv_data = [";".join(data[0].keys())]
             # Data
             for data_point in data:
                 data_point["timestamp"] = datetime.fromtimestamp(data_point["timestamp"])
-                csv_data += ";".join([str(value) for value in data_point.values()]) + "\n"
+                csv_data.append(";".join([str(value) for value in data_point.values()]))
 
-            return csv_data
+            response.headers["Content-Type"] = "application/csv"
+            response.headers["Content-Disposition"] = f"attachment; filename={sensor.name}_{period}.csv"
+            return "\n".join(csv_data)
 
         else:
             return {"data": data}
@@ -1618,12 +1609,13 @@ class terrariumAPI(object):
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def sensor_list(self, filter=None):
-        data = []
-        for sensor in Sensor.select(lambda s: not s.id in self.webserver.engine.settings["exclude_ids"]):
-            if filter is None or filter == sensor.type:
-                data.append(self.sensor_detail(sensor.id))
-
-        return {"data": data}
+        return {
+            "data": [
+                self.sensor_detail(sensor.id)
+                for sensor in Sensor.select(lambda s: not s.id in self.webserver.engine.settings["exclude_ids"])
+                if filter is None or filter == sensor.type
+            ]
+        }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def sensor_detail(self, sensor):
@@ -1692,15 +1684,12 @@ class terrariumAPI(object):
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def setting_list(self):
-        settings = []
-        for setting in Setting.select():
-            # Never give out this value in a list
-            if setting.id in ["password", "encryption_salt"]:
-                continue
-
-            settings.append(self.setting_detail(setting.id))
-
-        return {"data": settings}
+        return {
+            "data": [
+                self.setting_detail(setting.id)
+                for setting in Setting.select(lambda s: not s.id in ["password", "encryption_salt"])
+            ]
+        }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def setting_detail(self, setting):
@@ -1847,15 +1836,15 @@ class terrariumAPI(object):
         forecast_data = []
 
         if self.webserver.engine.weather:
-            for forecast in self.webserver.engine.weather.forecast:
-                forecast_data.append(
-                    {
-                        "value": forecast["temperature"],
-                        "temperature": forecast["temperature"],
-                        "humidity": forecast["humidity"],
-                        "timestamp": forecast["timestamp"],
-                    }
-                )
+            forecast_data = [
+                {
+                    "value": forecast["temperature"],
+                    "temperature": forecast["temperature"],
+                    "humidity": forecast["humidity"],
+                    "timestamp": forecast["timestamp"],
+                }
+                for forecast in self.webserver.engine.weather.forecast
+            ]
 
         return {"data": forecast_data}
 
@@ -1885,11 +1874,12 @@ class terrariumAPI(object):
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def webcam_list(self):
-        data = []
-        for webcam in Webcam.select(lambda w: not w.id in self.webserver.engine.settings["exclude_ids"]):
-            data.append(self.webcam_detail(webcam.id))
-
-        return {"data": data}
+        return {
+            "data": [
+                self.webcam_detail(webcam.id)
+                for webcam in Webcam.select(lambda w: not w.id in self.webserver.engine.settings["exclude_ids"])
+            ]
+        }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def webcam_detail(self, webcam):

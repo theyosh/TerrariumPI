@@ -59,7 +59,7 @@ class terrariumAudioPlayer(object):
 
     def __init__(self, hw, playlists=[], shuffle=False, repeat=False):
         self.__hw = hw
-        self.__stop = False
+        self.__stop = 0
         self.__player = {"ffmpeg": None, "thread": None, "exit_status": None}
 
         self.playlists = playlists
@@ -67,7 +67,7 @@ class terrariumAudioPlayer(object):
         self.repeat = repeat
 
     def __run(self):
-        self.__stop = False
+        self.__stop = 0
         for playlist in self.playlists:
             if self.__stop:
                 break
@@ -80,9 +80,9 @@ class terrariumAudioPlayer(object):
             self.volume(playlist.get("volume", 80))
 
             repeat = playlist.get("repeat", False)
-            first_start = True
+            first_start = 1
             while not self.__stop and (repeat or first_start):
-                first_start = False
+                first_start = 0
 
                 playlist = [f"file '{audiofile}'" for audiofile in files]
 
@@ -110,7 +110,7 @@ class terrariumAudioPlayer(object):
             self.__player["thread"].start()
 
     def stop(self):
-        self.__stop = True
+        self.__stop = 1
         if self.running:
             self.__player["ffmpeg"].terminate()
             self.__player["thread"].join()

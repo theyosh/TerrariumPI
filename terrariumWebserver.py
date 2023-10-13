@@ -378,7 +378,7 @@ class terrariumWebsocket(object):
             self.clients.append(messages)
             logger.debug(f"Got a new websocket connection from {socket}")
 
-            while True:
+            while 1:
                 message = messages.get()
                 try:
                     socket.send(json.dumps(message))
@@ -404,7 +404,7 @@ class terrariumWebsocket(object):
         except Exception as ex:
             logger.debug(f"Invalid cookie data. Either wrong secret or strange auth. We can ignore this. {ex}")
 
-        while True:
+        while 1:
             try:
                 message = socket.receive()
             except Exception as ex:

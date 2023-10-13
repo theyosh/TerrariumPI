@@ -24,22 +24,4 @@ class terrariumHLSLiveWebcam(terrariumWebcam):
         return None
 
     def _get_raw_data(self):
-        cmd = [
-            self.__FFMPEG,
-            "-hide_banner",
-            "-loglevel",
-            "panic",
-            "-i",
-            self.address,
-            "-vframes",
-            "1",
-            "-f",
-            "image2",
-            "-",
-        ]
-
-        with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False) as proc:
-            out, _ = proc.communicate()
-            return BytesIO(out)
-
-        return False
+        return super()._get_raw_data(self.address)

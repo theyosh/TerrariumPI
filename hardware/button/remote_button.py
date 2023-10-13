@@ -16,7 +16,7 @@ class terrariumRemoteButton(terrariumButton):
     __TIMEOUT = 10
 
     def __run(self):
-        self._checker["running"] = True
+        self._checker["running"] = 1
         while self._checker["running"]:
             try:
                 value = 1 if int(terrariumUtils.get_remote_data(self._device["device"])) != 0 else 0
@@ -43,7 +43,7 @@ class terrariumRemoteButton(terrariumButton):
         self.__TIMEOUT = int(calibration_data.get("timeout", self.__TIMEOUT))
 
     def stop(self):
-        self._checker["running"] = False
+        self._checker["running"] = 0
         try:
             self.__thread.join()
         except Exception as ex:
