@@ -20,8 +20,9 @@ import paho.mqtt.client as mqtt
 import json
 
 # Telegram
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
 from telegram.error import InvalidToken, TimedOut
-from telegram.ext import Application, CommandHandler, MessageHandler, filters
+from telegram.ext import Application, CommandHandler, MessageHandler, ConversationHandler, CallbackQueryHandler, filters
 
 # Database
 from pony import orm
@@ -32,7 +33,7 @@ from threading import Thread, Timer
 from base64 import b64encode
 from pathlib import Path
 
-from terrariumDatabase import NotificationMessage, NotificationService, Sensor
+from terrariumDatabase import NotificationMessage, NotificationService, Sensor, Relay, Button
 from terrariumUtils import terrariumUtils, terrariumSingleton, classproperty, terrariumAsync
 
 # Display support
@@ -2396,25 +2397,110 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
             await update.message.reply_text("start command received, you are now getting updates...")
 
-    async def webcam(self, update, context):
+    async def webcamSelect(self, update, context) -> int:
         if await self._authenticate(update.message):
-            webcam_id = update.message.text.trim().split(" ")[0]
-            if webcam_id in self.engine.webcams:
-                with open(self.engine.webcams[webcam_id].raw_image_path, "rb") as webcam_image:
-                    await update.message.reply_photo(webcam_image)
+            if not(update.message.parse_entities('bot_command')):
+                webcam_id = update.message.text.strip().split(" ")[0]
+                await update.message.reply_text(webcam_id)
+            else:
+                webcam_id = update.message.text.strip()[8:]
+                if (webcam_id):
+                    webcam_id = webcam_id.split(" ")[0]
+
+            if not(webcam_id):
+                webcam_list = []
+                for webcam in self.engine.webcams.values():
+                    webcam_list.append(InlineKeyboardButton(webcam.name, callback_data=f"{webcam.id},{webcam.name}"))
+                if not(webcam_list):
+                    await update.message.reply_text("No WebCam configured")
+                else:
+                    await context.bot.send_message(
+                        chat_id=update.effective_chat.id,
+                        text="Select the WebCam from list:",
+                        reply_markup=InlineKeyboardMarkup([webcam_list])
+                    )
+                    return 0
+            elif webcam_id in self.engine.webcams:
+                await self.webcam(update, context, webcam_id)
+            else:
+                for webcam in self.engine.webcams.values():
+                    if webcam_id == webcam.name:
+                        return await self.webcam(update, context, webcam.id)
+                await update.message.reply_text(f"WebCam {webcam_id} is not exist!!")
+        return ConversationHandler.END
+        
+    async def webcam(self, update, context, webcam_id = None):
+        if  webcam_id == None:
+            query = update.callback_query
+            await query.answer()
+            webcam_id, webcam_name= query.data.split(",")
+            await query.edit_message_text(text=f"WebCam: {webcam_name}")
+        
+        with open(self.engine.webcams[webcam_id].raw_image_path, "rb") as webcam_image:
+            await context.bot.send_photo(update.effective_chat.id, webcam_image)
+        return ConversationHandler.END
 
     async def sensor(self, update, context):
         if await self._authenticate(update.message):
-            sensor_ids = update.message.text.trim().split(" ")[0]
+            query = await update.message.reply_text("Loading...")
+            sensor_ids = update.message.text.strip()[8:].split(" ")[0]
             sensor_ids = sensor_ids if sensor_ids and sensor_ids in self.engine.sensors else self.engine.sensors.keys()
 
-            message = "Current sensor(s) status\n"
+            message = "Current sensor(s) status:\n"
             with orm.db_session():
                 for sensor in Sensor.select(lambda s: s.id in sensor_ids).order_by(Sensor.name):
-                    message += f"Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}\n"
+                    message += f"- Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}\n"
 
-            message = message.trim()
-            await update.message.reply_text(message)
+            message = message.strip()
+            await query.edit_text(message)
+
+    async def relay(self, update, context):
+        if await self._authenticate(update.message):
+            query = await update.message.reply_text("Loading...")
+            relay_ids = update.message.text.strip()[7:].split(" ")[0]
+            relay_ids = relay_ids if relay_ids and relay_ids in self.engine.relays else self.engine.relays.keys()
+
+            message = "Current relay(s) status:\n"
+
+            with orm.db_session():
+                for relay in Relay.select(lambda r: r.id in relay_ids).order_by(Relay.name):
+                    if "dimmer" in relay.hardware:
+                        message += f"- Relay {relay.name} is currently at {relay.value}%\n"
+                    else:
+                        message += f"- Relay {relay.name} is currently at {'ON' if bool(relay.value) else 'OFF'}\n"
+
+            message = message.strip()
+            await query.edit_text(message)
+
+    async def button(self, update, context):
+        if await self._authenticate(update.message):
+            query = await update.message.reply_text("Loading...")
+            button_ids = update.message.text.strip()[7:].split(" ")[0]
+            button_ids = button_ids if button_ids and button_ids in self.engine.buttons else self.engine.buttons.keys()
+
+            message = "Current button(s) status:\n"
+
+            with orm.db_session():
+                for button in Button.select(lambda r: r.id in button_ids).order_by(Button.name):
+                    message += f"- button {button.name} is {'Close' if bool(button.value) else 'Open'}\n"
+
+            message = message.strip()
+            await query.edit_text(message)
+
+    async def status(self, update, context):
+        if await self._authenticate(update.message):
+            query = await update.message.reply_text("Loading...")
+            message = "System stats:\n"
+            
+            system_stats = self.engine.system_stats()
+            message += f"- Uptime: {datetime.timedelta(seconds=int(system_stats['uptime']))}\n"
+            message += f"- Load: {system_stats['load']['percentage'][0]} %\n"
+            message += f"- CPU temperature: {system_stats['cpu_temperature']:.2f} ºC\n"
+            message += f"- Memory: {(system_stats['memory']['used']/1048576):.2f} MB ({((system_stats['memory']['used']*100)/system_stats['memory']['total']):.2f}%)\n"
+            message += f"- Storage: {(system_stats['storage']['used']/1073741824):.2f} GB ({((system_stats['storage']['used']*100)/system_stats['storage']['total']):.2f}%)\n"
+            
+            message = message.strip()
+            await query.edit_text(message)
 
     async def help(self, update, context):
         if await self._authenticate(update.message):
@@ -2425,6 +2511,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 /webcam [webcam_id] : will show the latest image of the webcam ID.
 /sensor [sensor_id] : will show the current sensor state. Sensor id is optional.
 /relay [relay_id] : will show the current relay state. Relay id is optional.
+/button [button_id] : will show the current button state. button id is optional.
 /status : will show the current system status."""
             )
 
@@ -2437,6 +2524,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
     async def error(self, update, context):
         if await self._authenticate(update.message):
             await update.message.reply_text("an error ocurred")
+        return ConversationHandler.END
 
     async def _authenticate(self, message):
         if str(message.from_user.username) in self.setup["allowed_users"]:
@@ -2453,8 +2541,6 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             await self.telegram_bot.updater.start_polling()
         except InvalidToken as ex:
             logger.error(f"Error starting Telegram bot: {ex}")
-        finally:
-            await self.telegram_bot.shutdown()
 
     async def _main_process(self):
         try:
@@ -2491,8 +2577,19 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             # add handlers for start and help commands
             self.telegram_bot.add_handler(CommandHandler("start", self.start))
             self.telegram_bot.add_handler(CommandHandler("help", self.help))
-            self.telegram_bot.add_handler(CommandHandler("webcam", self.webcam))
             self.telegram_bot.add_handler(CommandHandler("sensor", self.sensor))
+            self.telegram_bot.add_handler(CommandHandler("relay", self.relay))
+            self.telegram_bot.add_handler(CommandHandler("button", self.button))
+            self.telegram_bot.add_handler(CommandHandler("status", self.status))
+
+            # add handlers for select options
+            self.telegram_bot.add_handler(ConversationHandler(
+                entry_points=[CommandHandler("webcam", self.webcamSelect)],
+                states={
+                    0: [CallbackQueryHandler(self.webcam)]
+                },
+                fallbacks=[CommandHandler("webcam", self.webcamSelect)],
+            ))
 
             # add an handler for normal text (not commands)
             self.telegram_bot.add_handler(MessageHandler(filters.TEXT, self.text))
