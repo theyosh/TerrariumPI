@@ -94,7 +94,7 @@ class terrariumEngine(object):
         self.update_available = False
         self.weather = None
         # Dirty hack... :(
-        self.device = re.search(r"Model\s+:\s+(?P<device>.*)", Path("/proc/cpuinfo").read_text()).group("device")
+        self.device = Path("/proc/device-tree/model").read_text().rstrip('\x00')
         init_db(self.version)
 
         # Send message that startup is ready..... else the startup will wait until done.... can take more then 1 minute
@@ -276,18 +276,11 @@ class terrariumEngine(object):
 
         # Add some extra non DB settings
         settings["version"] = self.version
+        # Load device information
+        settings["device"] = self.device
 
         # Load the languages. Make a copy of the original, so we can reuse this value easier.
         settings["languages"] = copy.copy(self.available_languages)
-
-        # Load device information
-        try:
-            settings["device"] = re.search(r"Model\s+:\s+(?P<device>.*)", Path("/proc/cpuinfo").read_text()).group(
-                "device"
-            )
-        except Exception as ex:
-            logger.debug(f"Error getting Pi info: {ex}")
-            settings["device"] = "Unknown"
 
         # Custom favicon
         favicon = Path("media/favicon.ico")

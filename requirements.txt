@@ -45,8 +45,6 @@ veml6075==0.0.2
 lib8relay==1.0.3
 pylibftdi==0.21.0
 asyncio==3.4.3
-# Do not update pydantic version, it will break python-kasa for python 3.7 https://github.com/python-kasa/python-kasa/issues/523
-pydantic==1.10.9
 python-kasa==0.5.1
 meross-iot==0.4.5.9
 PCA9685-driver==1.2.0
@@ -85,3 +83,7 @@ luma.oled==3.13.0
 i2c_lcd==0.1.0
 paho-mqtt==1.6.1
 python-telegram-bot[socks,http2]==20.3
+
+# Overrule versions
+# Do not update pydantic version, it will break python-kasa for python 3.7 https://github.com/python-kasa/python-kasa/issues/523
+pydantic==1.10.9
