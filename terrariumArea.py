@@ -264,7 +264,7 @@ class terrariumArea(object):
                 try:
                     end = datetime.time.fromisoformat(self.setup[period]["end"])
                 except Exception as ex:
-                    logger.exception(f'Error loading begin time: {self.setup[period]["end"]} - {ex}')
+                    logger.exception(f'Error loading end time: {self.setup[period]["end"]} - {ex}')
 
                 if begin is None or end is None:
                     logger.warning(f'Error generating timer periods. Either begin or end time is incorrect.')
