@@ -48,3 +48,11 @@ export const arrIdentical = (a1, a2) => {
   }
   return true;
 };
+
+export const isNumber = (number) => {
+    let floatNumber = parseFloat(number);
+
+    return String(floatNumber) === String(number);
+}
+
+// export const isNumeric = (num) => (typeof(num) === 'number' || typeof(num) === "string" && num.trim() !== '') && !isNaN(num);

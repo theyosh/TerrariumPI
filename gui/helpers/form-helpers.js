@@ -1,3 +1,5 @@
+import { isNumber } from "./number-helpers"
+
 // https://stackoverflow.com/a/2553032 (Slightly adjusted to support multiple select field names and values, and number/float values)
 export const formToJSON = (form) => {
   let rv, obj, elements, element, index, names, nameIndex, value;
@@ -17,15 +19,15 @@ export const formToJSON = (form) => {
           value.push(item.value);
         }
       } else if (element.type === 'checkbox') {
-        value = element.checked && element.value ? (!isNaN(parseFloat(element.value)) ? parseFloat(element.value) : element.value) : element.checked;
+        value = element.checked && element.value ? (isNumber(element.value) ? parseFloat(element.value) : element.value) : element.checked;
       } else if (element.type === 'number') {
         value = !isNaN(parseFloat(element.value)) ? parseFloat(element.value) : 0;
-      } else if (element.type === 'text') {
+      } else if (['select','text','time','date'].indexOf(element.type) !== -1) {
         value = element.value.trim()
       } else if (element.value !== '' && (element.value[0] === '+' || element.value[0] === '-')) {
         value = element.value
       } else {
-        value = element.value;
+        value = element.value !== '' && isNumber(element.value) ? parseFloat(element.value) : element.value;
       }
 
       if (value === 'true') {
