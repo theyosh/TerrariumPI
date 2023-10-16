@@ -25,7 +25,7 @@ export const formToJSON = (form) => {
       } else if (element.value !== '' && (element.value[0] === '+' || element.value[0] === '-')) {
         value = element.value
       } else {
-        value = element.value !== '' && !element.value.startsWith('0x') && !isNaN(parseFloat(element.value)) ? parseFloat(element.value) : element.value;
+        value = element.value;
       }
 
       if (value === 'true') {
