@@ -1732,8 +1732,15 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Bytt mørk modus når natten begynner.",
-        "label": "Automatisk mørk modus"
+        "help": "",
+        "invalid": "",
+        "label": "Automatisk mørk modus",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
       },
       "currency": {
         "help": "Velg grensesnittvalutaen.",

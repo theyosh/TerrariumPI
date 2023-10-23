@@ -1732,8 +1732,15 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Przełącz ciemny tryb, gdy zaczyna się noc.",
-        "label": "Auto Dark Tryb"
+        "help": "",
+        "invalid": "",
+        "label": "Auto Dark Tryb",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
       },
       "currency": {
         "help": "Wybierz walutę interfejsu.",

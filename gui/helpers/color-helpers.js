@@ -1,3 +1,6 @@
+import { getCustomConfig } from "../config";
+import { isDarkInterface } from "../stores/terrariumpi"
+
 export const get_template_color = (classname, transparency, hexformat) => {
   const hex = d => Number(d).toString(16).padStart(2, '0');
 
@@ -19,11 +22,32 @@ export const get_template_color = (classname, transparency, hexformat) => {
   return color;
 };
 
-export const autoDarkmode = (isDark) => {
+export const autoDarkMode = (isDay, isDarkDesktop) => {
+  const settings = getCustomConfig();
   const body = document.querySelector('body');
-  if (isDark && !body.classList.contains('dark-mode')) {
-    body.classList.add('dark-mode');
-  } else if (!isDark && body.classList.contains('dark-mode')) {
+  const currentDark = body.classList.contains('dark-mode');
+
+  if (settings.auto_dark_mode == 'off' && currentDark) {
     body.classList.remove('dark-mode');
+    isDarkInterface.set(false);
+  } else if (settings.auto_dark_mode == 'always' && !currentDark) {
+    body.classList.add('dark-mode');
+    isDarkInterface.set(true);
+  } else if (settings.auto_dark_mode == 'on') {
+    if (isDay && currentDark) {
+        body.classList.remove('dark-mode');
+        isDarkInterface.set(false);
+    } else if (!isDay && !currentDark) {
+        body.classList.add('dark-mode');
+        isDarkInterface.set(true);
+    }
+  } else if (settings.auto_dark_mode == 'desktop') {
+    if (isDarkDesktop && !currentDark) {
+        body.classList.add('dark-mode');
+        isDarkInterface.set(true);
+    } else if (!isDarkDesktop && currentDark) {
+        body.classList.remove('dark-mode');
+        isDarkInterface.set(false);
+    }
   }
 };

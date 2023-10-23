@@ -1732,8 +1732,15 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Basculez le mode sombre au début de la nuit.",
-        "label": "Mode réservoir d'eau"
+        "help": "",
+        "invalid": "",
+        "label": "Mode réservoir d'eau",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
       },
       "currency": {
         "help": "Sélectionnez la monnaie d'interface.",

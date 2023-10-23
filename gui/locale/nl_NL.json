@@ -1732,8 +1732,15 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Schakel de donkere modus in wanneer de nacht begint.",
-        "label": "Automatische donkere modus"
+        "help": "",
+        "invalid": "",
+        "label": "Automatische donkere modus",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
       },
       "currency": {
         "help": "Selecteer de interfacevaluta.",

@@ -1732,8 +1732,15 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Acionar modo noturno automaticamente ao iniciar a noite.",
-        "label": "Modo noturno automático"
+        "help": "",
+        "invalid": "",
+        "label": "Modo noturno automático",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
       },
       "currency": {
         "help": "Selecione a moeda da interface.",
