@@ -1732,8 +1732,15 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Commuta el mode fosc quan comenci la nit.",
-        "label": "Mode fosc automàtic"
+        "help": "",
+        "invalid": "",
+        "label": "Mode fosc automàtic",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
       },
       "currency": {
         "help": "Seleccioneu la moneda de la interfície.",

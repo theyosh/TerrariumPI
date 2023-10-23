@@ -254,8 +254,22 @@ class terrariumArea(object):
                 if period not in self.setup:
                     continue
 
-                begin = datetime.time.fromisoformat(self.setup[period]["begin"])
-                end = datetime.time.fromisoformat(self.setup[period]["end"])
+                begin = None
+                try:
+                    begin = datetime.time.fromisoformat(self.setup[period]["begin"])
+                except Exception as ex:
+                    logger.exception(f'Error loading begin time: {self.setup[period]["begin"]} - {ex}')
+
+                end = None
+                try:
+                    end = datetime.time.fromisoformat(self.setup[period]["end"])
+                except Exception as ex:
+                    logger.exception(f'Error loading end time: {self.setup[period]["end"]} - {ex}')
+
+                if begin is None or end is None:
+                    logger.warning(f'Error generating timer periods. Either begin or end time is incorrect.')
+                    continue
+
                 on_period = max(0.0, self.setup[period]["on_duration"]) * 60.0
                 off_period = max(0.0, self.setup[period]["off_duration"]) * 60.0
 

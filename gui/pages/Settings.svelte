@@ -8,10 +8,12 @@
 
   import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
   import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { autoDarkMode } from "../helpers/color-helpers";
   import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
   import { languageFlag } from '../helpers/string-helpers';
   import { fetchSystemSettings, updateSystemSettings, uploadFile } from '../providers/api';
   import { changeLang, languages, currencies, currency } from '../locale/i18n';
+  import { isDay, isDarkDesktop } from '../stores/terrariumpi';
 
   import Card from '../user-controls/Card.svelte';
   import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
@@ -97,6 +99,7 @@
           changeLang(values.language);
           currency.set(values.currency);
           setConfig(formToJSON(context.form));
+          autoDarkMode($isDay, $isDarkDesktop);
         } catch (error) {
           errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
         }
@@ -432,12 +435,20 @@
             help="{$_('system.settings.dashboard_mode.help', { default: 'Select how the dashboard looks like.' })}"
             invalid="{$_('system.settings.dashboard_mode.invalid', { default: 'Please make a choice.' })}" />
 
-          <Switch
+          <Select
             name="auto_dark_mode"
             value="{$formData.auto_dark_mode}"
+            required="{false}"
+            options="{[
+              { value: 'off', text: $_('system.settings.auto_dark_mode.options.off', { default: 'No dark mode' }) },
+              { value: 'on', text: $_('system.settings.auto_dark_mode.options.on', { default: 'Based on day/night' }) },
+              { value: 'desktop', text: $_('system.settings.auto_dark_mode.options.desktop', { default: 'Based on desktop' }) },
+              { value: 'always', text: $_('system.settings.auto_dark_mode.options.always', { default: 'Always dark mode' }) },
+            ]}"
             horizontal="{true}"
             label="{$_('system.settings.auto_dark_mode.label', { default: 'Auto dark mode' })}"
-            help="{$_('system.settings.auto_dark_mode.help', { default: 'Toggle dark mode when the night starts.' })}" />
+            help="{$_('system.settings.auto_dark_mode.help', { default: 'Set dark mode.' })}"
+            invalid="{$_('system.settings.auto_dark_mode.invalid', { default: 'Please make a choice.' })}" />
 
           <Switch
             name="show_min_max_gauge"

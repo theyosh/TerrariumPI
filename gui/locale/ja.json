@@ -1732,8 +1732,15 @@
         }
       },
       "auto_dark_mode": {
-        "help": "夜が始まるときにダークモードを切り替えます。.",
-        "label": "オートダークモード"
+        "help": "",
+        "invalid": "",
+        "label": "オートダークモード",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
       },
       "currency": {
         "help": "インターフェイス通貨を選択します。.",

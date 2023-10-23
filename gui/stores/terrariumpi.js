@@ -1,12 +1,14 @@
 import { writable, get, derived } from "svelte/store";
 import { _ } from "svelte-i18n";
 import { successNotification } from "../providers/notification-provider";
-import { getCustomConfig } from "../config";
 
 export const dynamic_settings = writable({});
 
 export const upcomingCalendarItems = writable([]);
 export const isDay = writable(true);
+export const isDarkDesktop = writable(false);
+export const isDarkInterface = writable(false)
+
 export const lastUpdate = writable(new Date());
 export const isOnline = writable({ status: null, last_action: null });
 
@@ -37,6 +39,13 @@ export const graphs = writable({});
 export const last_log_line = writable('');
 
 const $_ = get(_);
+
+// Set desktop dark theme listener
+const mql = window.matchMedia('(prefers-color-scheme: dark)');
+isDarkDesktop.set(mql.matches);
+mql.onchange = () => {
+    isDarkDesktop.set(mql.matches);
+};
 
 export const updateButton = (button) => {
   if (!button) return;
@@ -95,15 +104,6 @@ export const doors = derived(
       doors[button_id] = $buttons[button_id];
     });
     return { closed: Object.values(doors).every(door => door.closed), doors: doors, enclosures: enclosures };
-  }
-);
-
-export const isDarkInterface = derived(
-  isDay,
-  ($isDay) => {
-    const settings = getCustomConfig();
-    const isDark = settings.auto_dark_mode && !$isDay;
-    return isDark;
   }
 );
 
