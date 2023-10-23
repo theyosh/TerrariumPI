@@ -22,7 +22,7 @@ export const formToJSON = (form) => {
         value = element.checked && element.value ? (isNumber(element.value) ? parseFloat(element.value) : element.value) : element.checked;
       } else if (element.type === 'number' || (element.classList.contains('range_slider') && element.value.indexOf(',') === -1)) {
         value = isNumber(element.value) ? parseFloat(element.value) : 0;
-      } else if (['select','text','time','date'].indexOf(element.type) !== -1) {
+      } else if (['select','text','time','date','hidden'].indexOf(element.type) !== -1) {
         value = element.value.trim()
       } else if (element.value !== '' && (element.value[0] === '+' || element.value[0] === '-')) {
         value = element.value
