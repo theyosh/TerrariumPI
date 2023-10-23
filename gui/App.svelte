@@ -44,7 +44,7 @@
 
   import RoutePages, { onRouteLoaded, Pages, PageUrls } from './pages';
   import { listenPageTitleChanged, customPageTitleUsed } from './stores/page-title';
-  import { isDay, lastUpdate, isOnline, doors, isDarkInterface } from './stores/terrariumpi';
+  import { isDay, lastUpdate, isOnline, doors, isDarkDesktop } from './stores/terrariumpi';
   import { animate_footer_badge } from './helpers/animation-helpers';
   import { websocket } from './providers/websocket';
   import { fetchUpcomingEvents, scanSensors, scanRelays, systemRestart, systemReboot, systemShutdown } from './providers/api';
@@ -59,7 +59,7 @@
   import { getCustomConfig } from './config';
   import { default as UserPanel } from './components/common/UserPanel.svelte';
   import { template_sensor_type_icon } from './helpers/icon-helpers';
-  import { autoDarkmode } from './helpers/color-helpers';
+  import { autoDarkMode } from './helpers/color-helpers';
 
   import ConfirmModal from './modals/ConfirmModal.svelte';
   import LoginModal from './modals/LoginFormModal.svelte';
@@ -277,7 +277,7 @@
   sensor_submenu_sorting(Pages);
 
   // Auto 'magical' set/remove darkmode ONLY when isDay changed
-  $: autoDarkmode($isDarkInterface);
+  $: autoDarkMode($isDay, $isDarkDesktop);
 
   // Update disabled and enabled menu features
   $: toggleSidebarAdminActions($isAuthenticated);

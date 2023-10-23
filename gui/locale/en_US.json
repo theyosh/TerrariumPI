@@ -1732,8 +1732,15 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Toggle dark mode when the night starts.",
-        "label": "Auto dark mode"
+        "help": "Set dark mode.",
+        "invalid": "Please make a choice.",
+        "label": "Auto dark mode",
+        "options": {
+          "always": "Always dark mode",
+          "desktop": "Based on desktop",
+          "off": "No dark mode",
+          "on": "Based on day/night"
+        }
       },
       "currency": {
         "help": "Select the interface currency.",

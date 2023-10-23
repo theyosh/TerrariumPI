@@ -1646,7 +1646,7 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Alternar el modo oscuro cuando comience la noche.",
+        "help": "",
         "label": ""
       },
       "currency": {

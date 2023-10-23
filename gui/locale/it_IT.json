@@ -1732,8 +1732,15 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Abilitato con le luci accese.",
-        "label": "Modalità della riserva d'acqua"
+        "help": "",
+        "invalid": "",
+        "label": "Modalità della riserva d'acqua",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
       },
       "currency": {
         "help": "Seleziona la valuta dell'interfaccia.",
