@@ -2453,7 +2453,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
     async def sensor(self, update, context):
         if await self._authenticate(update.message):
-            query = await update.message.reply_text("Loading sensor(s)...")
+            query_message = await update.message.reply_text("Loading sensor(s)...")
             sensor_ids = None
             try:
                 sensor_ids = update.message.text.strip().split(" ")[1]
@@ -2471,11 +2471,11 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                         f"- Sensor {sensor.name} is currently at {sensor.value}{self.engine.units[sensor.type]}"
                     )
 
-            await query.edit_text("\n".join(message))
+            await query_message.edit_text("\n".join(message))
 
     async def relay(self, update, context):
         if await self._authenticate(update.message):
-            query = await update.message.reply_text("Loading relay(s)...")
+            query_message = await update.message.reply_text("Loading relay(s)...")
             relay_ids = None
             try:
                 relay_ids = update.message.text.strip().split(" ")[1]
@@ -2492,11 +2492,11 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                     else:
                         message.append(f"- Relay {relay.name} is currently at {'ON' if bool(relay.value) else 'OFF'}")
 
-            await query.edit_text("\n".join(message))
+            await query_message.edit_text("\n".join(message))
 
     async def button(self, update, context):
         if await self._authenticate(update.message):
-            query = await update.message.reply_text("Loading button(s)...")
+            query_message = await update.message.reply_text("Loading button(s)...")
             button_ids = None
             try:
                 button_ids = update.message.text.strip().split(" ")[1]
@@ -2513,11 +2513,11 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                     # TODO: Change message based on button type. Movement, and light
                     message.append(f"- button {button.name} is {'Close' if bool(button.value) else 'Open'}")
 
-            await query.edit_text("\n".join(message))
+            await query_message.edit_text("\n".join(message))
 
     async def status(self, update, context):
         if await self._authenticate(update.message):
-            query = await update.message.reply_text("Loading...")
+            query_message = await update.message.reply_text("Loading...")
             system_stats = self.engine.system_stats()
 
             message = ["System stats:"]
@@ -2530,8 +2530,68 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             message.append(
                 f"- Storage: {(system_stats['storage']['used']/1073741824):.2f} GB ({((system_stats['storage']['used']*100)/system_stats['storage']['total']):.2f}%)"
             )
+            
+            await query_message.edit_text("\n".join(message))
 
-            await query.edit_text("\n".join(message))
+    async def enclosure(self, update, context):
+        if await self._authenticate(update.message):
+            enclosure_id = None
+            if update.message.parse_entities("bot_command"):
+                try:
+                    enclosure_id = update.message.text.strip().split(" ")[1]
+                except:
+                    logger.debug("No enclosure ID given, will return the enclosure list.")
+
+            else:
+                enclosure_id = update.message.text.strip().split(" ")[0]
+                await update.message.reply_text(enclosure_id)
+
+            if enclosure_id is None:
+                enclosure_list = [
+                    InlineKeyboardButton(enclosure.name, callback_data=f"{enclosure.id},{enclosure.name}")
+                    for enclosure in self.engine.enclosures.values()
+                ]
+
+                if len(enclosure_list) == 0:
+                    await update.message.reply_text("No enclosure configured")
+
+                elif len(enclosure_list) == 1:
+                    await self.area(update, context, list(self.engine.enclosures.keys())[0])
+
+                else:
+                    await context.bot.send_message(
+                        chat_id=update.effective_chat.id,
+                        text="Select a enclosure from the list:",
+                        reply_markup=InlineKeyboardMarkup([enclosure_list]),
+                    )
+                    return 0
+
+            elif enclosure_id in self.engine.enclosure:
+                await self.area(update, context, enclosure_id)
+
+            else:
+                await update.message.reply_text(f"Enclosure {enclosure_id} does not exist!")
+
+        return ConversationHandler.END
+
+    async def area(self, update, context, enclosure_id=None):
+        if enclosure_id is None:
+            query = update.callback_query
+            await query.answer()
+            enclosure_id, enclosure_name = query.data.split(",")
+            query_message = query.message
+            await query_message.edit_text(f"Enclosure: {enclosure_name} \nLoading area(s)...")
+        else:
+            query_message = await update.message.reply_text("Loading area(s)...")
+            
+        message = [f"Enclosure {self.engine.enclosures[enclosure_id].name} current area(s) staus:"]
+
+        for area in self.engine.enclosures[enclosure_id].areas.values():
+            message.append(f"- Area {area.name} type {area.type} => {'ON' if area.state['powered'] else 'OFF'} ")
+
+        await query_message.edit_text("\n".join(message))
+
+        return ConversationHandler.END
 
     async def help(self, update, context):
         if await self._authenticate(update.message):
@@ -2543,6 +2603,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 /sensor [sensor_id] : will show the current sensor state. Sensor id is optional.
 /relay [relay_id] : will show the current relay state. Relay id is optional.
 /button [button_id] : will show the current button state. button id is optional.
+/enclosure [enclosure_id] : will show the current area state of the enclosure ID
 /status : will show the current system status."""
             )
 
@@ -2622,6 +2683,14 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                     fallbacks=[CommandHandler("webcam", self.webcamSelect)],
                 )
             )
+            self.telegram_bot.add_handler(
+                ConversationHandler(
+                    entry_points=[CommandHandler("enclosure", self.enclosure)],
+                    states={0: [CallbackQueryHandler(self.area)]},
+                    fallbacks=[CommandHandler("enclosure", self.enclosure)],
+                )
+            )
+
 
             # add an handler for normal text (not commands)
             self.telegram_bot.add_handler(MessageHandler(filters.TEXT, self.text))
