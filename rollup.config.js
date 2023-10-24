@@ -142,7 +142,6 @@ export default {
         dest: "./public/js",
         rename: 'responsive.bootstrap4.min.js'
       },
-
       {
         src: "node_modules/swagger-ui-dist/swagger-ui-bundle.js",
         dest: "./public/js",
@@ -158,7 +157,6 @@ export default {
         dest: "./public/css",
         rename: "swagger-ui.css"
       },
-
       {
         src: "node_modules/trumbowyg/dist/ui/icons.svg",
         dest: "./public/css",
@@ -168,7 +166,11 @@ export default {
         src: "node_modules/@fortawesome/fontawesome-free/webfonts",
         dest: "./public"
       },
-
+      {
+        src: "node_modules/redoc/bundles/redoc.standalone.js",
+        dest: "./public/js",
+        rename: "redoc.standalone.js"
+      },
       {
         src: "gui/assets/static/*",
         dest: "./public"

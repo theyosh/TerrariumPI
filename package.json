@@ -59,6 +59,7 @@
     "jquery": "^3.6.1",
     "leaflet-fullscreen": "^1.0.2",
     "phoenix": "^1.6.11",
+    "redoc": "^2.1.2",
     "svelte": "^4.0.1",
     "svelte-adminlte": "github:KeenMate/svelte-adminlte",
     "svelte-chartjs": "^3.0.1",
