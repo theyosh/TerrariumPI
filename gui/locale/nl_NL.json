@@ -1732,14 +1732,14 @@
         }
       },
       "auto_dark_mode": {
-        "help": "",
-        "invalid": "",
+        "help": "Stel de donkere modus in.",
+        "invalid": "Maak een keuze.",
         "label": "Automatische donkere modus",
         "options": {
-          "always": "",
-          "desktop": "",
-          "off": "",
-          "on": ""
+          "always": "Altijd donkere modus",
+          "desktop": "Gebaseerd op desktop",
+          "off": "Geen donkere modus",
+          "on": "Gebaseerd op dag/nacht"
         }
       },
       "currency": {
