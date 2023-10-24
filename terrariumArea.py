@@ -57,19 +57,10 @@ class terrariumArea(object):
 
     @classproperty
     def available_areas(__cls__):
-        return sorted(
-            [
-                {"type": area_type, "name": area["name"], "sensors": area["sensors"]}
-                for area_type, area in terrariumArea.__TYPES.items()
-            ],
-            key=itemgetter("name"),
-        )
-
-        # data = []
-        # for area_type, area in terrariumArea.__TYPES.items():
-        #     data.append({"type": area_type, "name": area["name"], "sensors": area["sensors"]})
-
-        # return sorted(data, key=itemgetter("name"))
+        return [
+            {"type": area_type, "name": area["name"], "sensors": area["sensors"]}
+            for area_type, area in terrariumArea.__TYPES.items()
+        ]
 
     # Return polymorph area....
     def __new__(cls, area_id, enclosure, area_type, name="", mode=None, setup=None):
@@ -77,13 +68,6 @@ class terrariumArea(object):
             return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[area_type]["class"]())
         except:
             raise terrariumAreaException(f"Area of type {area_type} is unknown.")
-
-        # known_areas = terrariumArea.available_areas
-
-        # if area_type not in [area["type"] for area in known_areas]:
-        #     raise terrariumAreaException(f"Area of type {area_type} is unknown.")
-
-        # return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[area_type]["class"]())
 
     def __init__(self, area_id, enclosure, area_type, name, mode, setup):
         if area_id is None:
@@ -270,8 +254,22 @@ class terrariumArea(object):
                 if period not in self.setup:
                     continue
 
-                begin = datetime.time.fromisoformat(self.setup[period]["begin"])
-                end = datetime.time.fromisoformat(self.setup[period]["end"])
+                begin = None
+                try:
+                    begin = datetime.time.fromisoformat(self.setup[period]["begin"])
+                except Exception as ex:
+                    logger.exception(f'Error loading begin time: {self.setup[period]["begin"]} - {ex}')
+
+                end = None
+                try:
+                    end = datetime.time.fromisoformat(self.setup[period]["end"])
+                except Exception as ex:
+                    logger.exception(f'Error loading end time: {self.setup[period]["end"]} - {ex}')
+
+                if begin is None or end is None:
+                    logger.warning(f'Error generating timer periods. Either begin or end time is incorrect.')
+                    continue
+
                 on_period = max(0.0, self.setup[period]["on_duration"]) * 60.0
                 off_period = max(0.0, self.setup[period]["off_duration"]) * 60.0
 

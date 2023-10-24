@@ -1668,7 +1668,7 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Dunkelmodus umschalten, wenn die Nacht beginnt.",
+        "help": "",
         "label": "Wassertank-Modus"
       },
       "currency": {

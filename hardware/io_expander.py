@@ -25,12 +25,11 @@ class terrariumIOExpander(object):
 
     # Return polymorph IO expander....
     def __new__(cls, hardware_type, address):
-        known_devices = terrariumIOExpander.available_hardware
-
-        if hardware_type not in known_devices:
+        try:
+            known_devices = terrariumIOExpander.available_hardware
+            return super(terrariumIOExpander, cls).__new__(known_devices[hardware_type]())
+        except:
             raise terrariumIOExpanderException(f"IO Expander of hardware type {hardware_type} is unknown.")
-
-        return super(terrariumIOExpander, cls).__new__(known_devices[hardware_type]())
 
     def __init__(self, _, address):
         self.port = None

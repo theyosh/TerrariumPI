@@ -17,7 +17,7 @@ class terrariumLDRSensor(terrariumButton):
     __CAPACITOR = 1  # in uF
 
     def __run(self):
-        self._checker["running"] = True
+        self._checker["running"] = 1
         while self._checker["running"]:
             count = 0
 
@@ -43,9 +43,9 @@ class terrariumLDRSensor(terrariumButton):
                 sleep(0.1)
 
             except KeyboardInterrupt as ex:
-                self._checker["running"] = False
-                print(f"Fetch CTRL-c... and now what..? For now.. press again Ctrl-C .. ({ex})")
                 self.stop()
+
+    #                print(f"Fetch CTRL-c... and now what..? For now.. press again Ctrl-C .. ({ex})")
 
     def _get_state(self):
         return self._device["internal_state"]
@@ -64,7 +64,7 @@ class terrariumLDRSensor(terrariumButton):
         self.__CAPACITOR = int(calibration_data.get("ldr_capacitor", self.__CAPACITOR))
 
     def stop(self):
-        self._checker["running"] = False
+        self._checker["running"] = 0
         try:
             self.__thread.join()
         except Exception as ex:

@@ -75,20 +75,18 @@ class terrariumButton(object):
 
     @classproperty
     def available_buttons(__cls__):
-        data = []
-        for hardware_type, button in __cls__.available_hardware.items():
-            data.append({"hardware": hardware_type, "name": button.NAME})
-
-        return data
+        return [
+            {"hardware": hardware_type, "name": button.NAME}
+            for hardware_type, button in __cls__.available_hardware.items()
+        ]
 
     # Return polymorph relay....
     def __new__(cls, _, hardware_type, address, name="", callback=None):
-        known_buttons = terrariumButton.available_hardware
-
-        if hardware_type not in known_buttons:
+        try:
+            known_buttons = terrariumButton.available_hardware
+            return super(terrariumButton, cls).__new__(known_buttons[hardware_type])
+        except:
             raise terrariumButtonException(f"Button of hardware type {hardware_type} is unknown.")
-
-        return super(terrariumButton, cls).__new__(known_buttons[hardware_type])
 
     def __init__(self, button_id, _, address, name="", callback=None):
         "Create a new button based on type"
@@ -116,7 +114,7 @@ class terrariumButton(object):
         return f"{self.NAME} named '{self.name}' at address '{self.address}'"
 
     def _run(self):
-        self._checker["running"] = True
+        self._checker["running"] = 1
         while self._checker["running"]:
             new_state = self._get_state()
             if new_state != self._device["state"]:
@@ -220,7 +218,7 @@ class terrariumButton(object):
         return self.state
 
     def stop(self):
-        self._checker["running"] = False
+        self._checker["running"] = 0
         self._checker["thread"].join()
 
         if not isinstance(self._device["device"], terrariumIOExpander):

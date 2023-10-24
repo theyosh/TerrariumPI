@@ -1678,7 +1678,14 @@
       },
       "auto_dark_mode": {
         "help": "Alternar el modo oscuro cuando comience la noche.",
-        "label": "Modo Auto Dark"
+        "invalid": "",
+        "label": "Modo Auto Dark",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
       },
       "currency": {
         "help": "Seleccione la moneda de interfaz.",

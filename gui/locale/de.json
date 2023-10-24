@@ -1732,8 +1732,15 @@
         }
       },
       "auto_dark_mode": {
-        "help": "Schalte den Dunkelmodus um, wenn die Nacht beginnt.",
-        "label": "Automatischer Dunkelmodus"
+        "help": "",
+        "invalid": "",
+        "label": "Automatischer Dunkelmodus",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
       },
       "currency": {
         "help": "Wähle die Währung.",

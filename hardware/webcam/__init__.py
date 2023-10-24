@@ -75,8 +75,6 @@ class terrariumWebcam(object):
     __TILE_SIZE = 256
     __JPEG_QUALITY = 95
     __FONT_SIZE = 10
-    __OFFLINE = "offline"
-    __ONLINE = "online"
     __UPDATE_TIMEOUT = 1
     __VALID_ROTATIONS = ["0", "90", "180", "270", "h", "v"]
 
@@ -113,20 +111,18 @@ class terrariumWebcam(object):
 
     @classproperty
     def available_webcams(__cls__):
-        data = []
-        for hardware_type, webcam in __cls__.available_hardware.items():
-            data.append({"hardware": hardware_type, "name": webcam.NAME})
-
-        return sorted(data, key=itemgetter("name"))
+        return [
+            {"hardware": hardware_type, "name": webcam.NAME}
+            for hardware_type, webcam in __cls__.available_hardware.items()
+        ]
 
     # Return polymorph webcam....
     def __new__(cls, _, hardware_type, address, name="", rotation="0", width=640, height=480, wb="auto"):
-        known_webcams = terrariumWebcam.available_hardware
-
-        if hardware_type not in known_webcams:
+        try:
+            known_webcams = terrariumWebcam.available_hardware
+            return super(terrariumWebcam, cls).__new__(known_webcams[hardware_type])
+        except:
             raise terrariumWebcamException(f"Webcam of hardware type {hardware_type} is unknown.")
-
-        return super(terrariumWebcam, cls).__new__(known_webcams[hardware_type])
 
     def __init__(self, device_id, _, address, name="", width=640, height=480, rotation="0", awb="auto"):
         """Create a new Webcam instance based on type"""
@@ -303,8 +299,10 @@ class terrariumWebcam(object):
                 )
             )
             start2 = time()
-            for row in range(0, int(math.ceil(canvas_height / self.__TILE_SIZE))):
-                for column in range(0, int(math.ceil(canvas_width / self.__TILE_SIZE))):
+            max_rows = int(math.ceil(canvas_height / self.__TILE_SIZE))
+            max_columns = int(math.ceil(canvas_width / self.__TILE_SIZE))
+            for row in range(0, max_rows):
+                for column in range(0, max_columns):
                     crop_size = (
                         int(row * self.__TILE_SIZE),
                         int(column * self.__TILE_SIZE),
@@ -410,10 +408,9 @@ class terrariumWebcam(object):
     @address.setter
     def address(self, value):
         value = terrariumUtils.clean_address(value)
-        if value is not None and "" != value:
-            if self.address != value:
-                self._device["address"] = value
-                self.load_hardware()
+        if value is not None and "" != value and self.address != value:
+            self._device["address"] = value
+            self.load_hardware()
 
     @property
     def awb(self):
@@ -520,8 +517,8 @@ class terrariumWebcam(object):
             for relay in relays:
                 relay.on()
 
-            sleep(1)
             logger.debug(f"Webcam {self.name}: Toggle on flash lights took {time()-start:.3f} seconds")
+            sleep(1)
 
         start = time()
         for x in range(3):
@@ -718,14 +715,14 @@ class terrariumWebcamLive(terrariumWebcam):
 
         return True
 
-    def _get_raw_data(self):
+    def _get_raw_data(self, url=None):
         if not psutil.pid_exists(self.__process.pid):
             # Should restart the bash script
             logger.warning(f"Webcam {self} is crashed. Restarting the webcam.")
             self._load_hardware()
             return False
 
-        url = f"{Path(self._STORE_LOCATION).joinpath(self.id)}/stream.m3u8"
+        url = f"{Path(self._STORE_LOCATION).joinpath(self.id)}/stream.m3u8" if url is None else url
         cmd = [self._FFMPEG, "-hide_banner", "-loglevel", "panic", "-i", url, "-vframes", "1", "-f", "image2", "-"]
 
         with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False) as proc:
