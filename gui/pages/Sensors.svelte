@@ -31,8 +31,11 @@
         try {
           await deleteSensor(sensor.id);
           successNotification(
-            $_('sensors.delete.ok.message', { default: "The sensor ''{name}'' is deleted.", values: { name: sensor.name } }),
-            $_('notification.delete.ok.title', { default: 'OK' })
+            $_('sensors.delete.ok.message', {
+              default: "The sensor ''{name}'' is deleted.",
+              values: { name: sensor.name },
+            }),
+            $_('notification.delete.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -41,10 +44,10 @@
               default: "The sensor ''{name}'' could not be deleted!\nError: {error}",
               values: { name: sensor.name, error: e.message },
             }),
-            $_('notification.delete.error.title', { default: 'ERROR' })
+            $_('notification.delete.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -58,8 +61,11 @@
         try {
           await updateSystemSettings({ exclude_ids: sensor.id });
           successNotification(
-            $_('sensors.exclude.ok.message', { default: "The sensor ''{name}'' is ignored.", values: { name: sensor.name } }),
-            $_('notification.exclude.ok.title', { default: 'OK' })
+            $_('sensors.exclude.ok.message', {
+              default: "The sensor ''{name}'' is ignored.",
+              values: { name: sensor.name },
+            }),
+            $_('notification.exclude.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -68,10 +74,10 @@
               default: "The sensor ''{name}'' could not be ignored!\nError: {error}",
               values: { name: sensor.name, error: e.message },
             }),
-            $_('notification.exclude.error.title', { default: 'ERROR' })
+            $_('notification.exclude.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -105,8 +111,8 @@
     {#if sensors.length > 0}
       <!-- Sort based on translated names -->
       {#each sensors.sort((a, b) => a.name.localeCompare(b.name)) as sensor}
-        <div class="col" class:col-12="{enableGraph}" class:col-3="{!enableGraph}">
-          <SensorCard sensor="{sensor}" enableGraph="{enableGraph}" removeParent="{true}" />
+        <div class="col" class:col-12={enableGraph} class:col-3={!enableGraph}>
+          <SensorCard {sensor} {enableGraph} removeParent={true} />
         </div>
       {/each}
     {/if}

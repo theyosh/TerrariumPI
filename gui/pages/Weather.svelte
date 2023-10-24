@@ -1,7 +1,16 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { Line } from 'svelte-chartjs';
-  import { Chart as ChartJS, Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement } from 'chart.js';
+  import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    TimeScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+  } from 'chart.js';
   ChartJS.register(Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement);
   import 'chartjs-adapter-dayjs-3';
   import { _ } from 'svelte-i18n';
@@ -130,14 +139,20 @@
     setCustomPageTitle($_('weather.title', { default: 'Weather' }));
 
     // Reload every 15 minutes
-    const intervalCurrent = setInterval(async () => {
-      loadCurrentData(false);
-    }, 15 * 60 * 1000);
+    const intervalCurrent = setInterval(
+      async () => {
+        loadCurrentData(false);
+      },
+      15 * 60 * 1000,
+    );
 
     // Reload every 60 minutes
-    const intervalForecast = setInterval(async () => {
-      loadForecastData(false);
-    }, 60 * 60 * 1000);
+    const intervalForecast = setInterval(
+      async () => {
+        loadForecastData(false);
+      },
+      60 * 60 * 1000,
+    );
 
     //If a function is returned from onMount, it will be called when the component is unmounted.
     return () => {
@@ -157,7 +172,7 @@
   <svelte:fragment slot="breadcrumbs">
     <BreadcrumbItem>
       {#if $isAuthenticated}
-        <a href="{'#'}" on:click|preventDefault="{() => showModal()}">
+        <a href={'#'} on:click|preventDefault={() => showModal()}>
           <i class="fas fa-wrench pt-1 mr-1"></i>{$_('general.settings.title', { default: 'Settings' })}
         </a>
       {:else}
@@ -166,7 +181,7 @@
     </BreadcrumbItem>
     {#if weatherData.location}
       <BreadcrumbItem>
-        <a href="{weatherData.credits.url}" target="_blank" rel="noopener noreferrer">{weatherData.credits.text}</a>
+        <a href={weatherData.credits.url} target="_blank" rel="noopener noreferrer">{weatherData.credits.text}</a>
       </BreadcrumbItem>
     {/if}
   </svelte:fragment>
@@ -175,16 +190,16 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-sm-12 col-md-5">
-      <Card loading="{loading_current}" removeParent="{true}" class="current">
+      <Card loading={loading_current} removeParent={true} class="current">
         <svelte:fragment slot="header">
-          <i class="fas mr-2" class:fa-cloud-sun="{$isDay}" class:fa-cloud-moon="{!$isDay}"></i>{$_('weather.current', {
+          <i class="fas mr-2" class:fa-cloud-sun={$isDay} class:fa-cloud-moon={!$isDay}></i>{$_('weather.current', {
             default: 'Current',
           })}
         </svelte:fragment>
         {#if !loading_current && !weatherData.location}
           <div class="row">
             <div class="col text-center">
-              <h1 class="m4">{$_('weather.no_data', { default: 'No weather data available'})}</h1>
+              <h1 class="m4">{$_('weather.no_data', { default: 'No weather data available' })}</h1>
             </div>
           </div>
         {:else if !loading_current && weatherData.location}
@@ -193,16 +208,24 @@
               <strong>{$date(new Date(weatherData.forecast[0].timestamp * 1000), { format: 'full' })}</strong>
             </div>
             <div class="col-3 text-right">
-              <i class="fas fa-location-arrow" style="transform: rotate({weatherData.forecast[0].wind.direction + 135}deg)"></i>
-              <span class="text-nowrap">{roundToPrecision(weatherData.forecast[0].wind.speed)} {weatherData.indicators.wind}</span>
+              <i
+                class="fas fa-location-arrow"
+                style="transform: rotate({weatherData.forecast[0].wind.direction + 135}deg)"
+              ></i>
+              <span class="text-nowrap"
+                >{roundToPrecision(weatherData.forecast[0].wind.speed)} {weatherData.indicators.wind}</span
+              >
             </div>
           </div>
           <div class="row">
             <div
               class="col-3 weather-icon"
-              style="background: url({get_weather_icon(weatherData.forecast[0].weather.icon, weatherData.is_day)}) no-repeat center"
-              title="{weatherData.forecast[0].weather.description}">
-            </div>
+              style="background: url({get_weather_icon(
+                weatherData.forecast[0].weather.icon,
+                weatherData.is_day,
+              )}) no-repeat center"
+              title={weatherData.forecast[0].weather.description}
+            ></div>
             <div class="col-7">
               <h3>{weatherData.location.city}</h3>
               <h4>{weatherData.forecast[0].weather.description}</h4>
@@ -212,20 +235,25 @@
               {$time(new Date(weatherData.sun.rise * 1000), { format: 'short' })}<br />
               <i class="fas fa-moon"></i>
               {$time(new Date(weatherData.sun.set * 1000), { format: 'short' })}
-              <h5 class="mt-4">{roundToPrecision(weatherData.forecast[0].temp)} {weatherData.indicators.temperature}</h5>
+              <h5 class="mt-4">
+                {roundToPrecision(weatherData.forecast[0].temp)}
+                {weatherData.indicators.temperature}
+              </h5>
             </div>
           </div>
           <div class="row">
             {#each weatherData.forecast.slice(1, 7) as day, counter}
-              <div class="col pr-0" class:d-none="{counter === 5}" class:d-sm-inline="{counter === 5}">
+              <div class="col pr-0" class:d-none={counter === 5} class:d-sm-inline={counter === 5}>
                 <div class="description-block">
                   <h5 class="description-header">{$date(new Date(day.timestamp * 1000), { weekday: 'short' })}</h5>
-                  <span class="description-text">{roundToPrecision(day.temp)} {weatherData.indicators.temperature}</span>
+                  <span class="description-text">{roundToPrecision(day.temp)} {weatherData.indicators.temperature}</span
+                  >
                   <img
                     class="weather-icon"
-                    src="{get_weather_icon(day.weather.icon, weatherData.is_day)}"
-                    alt="{day.weather.description}"
-                    title="{day.weather.description}" />
+                    src={get_weather_icon(day.weather.icon, weatherData.is_day)}
+                    alt={day.weather.description}
+                    title={day.weather.description}
+                  />
                   <i class="fas fa-location-arrow" style="transform: rotate({day.wind.direction + 135}deg)"></i><br />
                   <span class="text-nowrap">{roundToPrecision(day.wind.speed, 1)} {weatherData.indicators.wind}</span>
                 </div>
@@ -236,18 +264,18 @@
       </Card>
     </div>
     <div class="col col-md-7">
-      <Card loading="{loading_forecast}" class="forecast">
+      <Card loading={loading_forecast} class="forecast">
         <svelte:fragment slot="header">
-          <i class="fas mr-2" class:fa-cloud-sun="{$isDay}" class:fa-cloud-moon="{!$isDay}"></i>
-          {$_('weather.forecast', { default: 'Forecast'})}
+          <i class="fas mr-2" class:fa-cloud-sun={$isDay} class:fa-cloud-moon={!$isDay}></i>
+          {$_('weather.forecast', { default: 'Forecast' })}
         </svelte:fragment>
         {#if !loading_forecast}
           {#if graphData.datasets[0].data.length > 0}
-            <Line data="{graphData}" options="{graphOpts}" />
+            <Line data={graphData} options={graphOpts} />
           {:else}
             <div class="row">
               <div class="col text-center">
-                <h1 class="m4">{$_('weather.no_data', { default: 'No weather data available'})}</h1>
+                <h1 class="m4">{$_('weather.no_data', { default: 'No weather data available' })}</h1>
               </div>
             </div>
           {/if}
@@ -258,5 +286,5 @@
 </div>
 
 {#if $isAuthenticated}
-  <WeatherSettings bind:show="{showModal}" on:save="{loadData}" />
+  <WeatherSettings bind:show={showModal} on:save={loadData} />
 {/if}

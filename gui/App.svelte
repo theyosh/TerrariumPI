@@ -47,7 +47,14 @@
   import { isDay, lastUpdate, isOnline, doors, isDarkDesktop } from './stores/terrariumpi';
   import { animate_footer_badge } from './helpers/animation-helpers';
   import { websocket } from './providers/websocket';
-  import { fetchUpcomingEvents, scanSensors, scanRelays, systemRestart, systemReboot, systemShutdown } from './providers/api';
+  import {
+    fetchUpcomingEvents,
+    scanSensors,
+    scanRelays,
+    systemRestart,
+    systemReboot,
+    systemShutdown,
+  } from './providers/api';
   import { isAuthenticated, loginModal } from './stores/authentication';
 
   import SidebarNavTree from './user-controls/SidebarNavTree.svelte';
@@ -254,18 +261,26 @@
         break;
       case 'system_reboot':
         if (settings.docker) {
-            callbackAction = null;
-            message = $_('modal.confirm.docker.not_available', {default: 'This feature is not possible in a Docker setup.'});
+          callbackAction = null;
+          message = $_('modal.confirm.docker.not_available', {
+            default: 'This feature is not possible in a Docker setup.',
+          });
         } else {
-            message = $_('modal.confirm.system.reboot', {default: 'This will reboot the Raspberry PI. This can take up to 60 seconds.'});
+          message = $_('modal.confirm.system.reboot', {
+            default: 'This will reboot the Raspberry PI. This can take up to 60 seconds.',
+          });
         }
         break;
       case 'system_shutdown':
-      if (settings.docker) {
-            callbackAction = null;
-            message = $_('modal.confirm.docker.not_available', {default: 'This feature is not possible in a Docker setup.'});
+        if (settings.docker) {
+          callbackAction = null;
+          message = $_('modal.confirm.docker.not_available', {
+            default: 'This feature is not possible in a Docker setup.',
+          });
         } else {
-            message = $_('modal.confirm.system.shutdown', {default: 'This will shutdown the Raspberry PI. Use with care!'});
+          message = $_('modal.confirm.system.shutdown', {
+            default: 'This will shutdown the Raspberry PI. Use with care!',
+          });
         }
         break;
     }
@@ -313,12 +328,15 @@
     toggleSidebarAdminActions($isAuthenticated);
 
     // Reload every 15 minutes
-    const interval = setInterval(() => {
-      fetchUpcomingEvents((data) => {
-        upcomingEvents = data;
-      });
-      animate_footer_badge();
-    }, 15 * 60 * 1000);
+    const interval = setInterval(
+      () => {
+        fetchUpcomingEvents((data) => {
+          upcomingEvents = data;
+        });
+        animate_footer_badge();
+      },
+      15 * 60 * 1000,
+    );
 
     //If a function is returned from onMount, it will be called when the component is unmounted.
     return () => {
@@ -351,14 +369,15 @@
           <i class="fas fa-calendar-alt"></i>
           <span class="badge badge-primary navbar-badge">{upcomingEvents.length > 0 ? upcomingEvents.length : ''}</span>
         </DropdownButton>
-        <DropdownMenu right="{true}" large="{true}">
-          <DropdownItem disabled="{true}" style="text-align:center; font-weight: bold"
-            >{$_('topbar.upcoming_events', { values: { number: upcomingEvents.length } })}</DropdownItem>
+        <DropdownMenu right={true} large={true}>
+          <DropdownItem disabled={true} style="text-align:center; font-weight: bold"
+            >{$_('topbar.upcoming_events', { values: { number: upcomingEvents.length } })}</DropdownItem
+          >
           <DropdownDivider />
           {#each upcomingEvents as event}
             <DropdownItem href="#{PageUrls.Calendar}">
               <i class="fas fa-calendar-alt mr-2"></i>{event.title}
-              <span class="float-right text-muted text-sm"><Time relative timestamp="{event.start}" /></span>
+              <span class="float-right text-muted text-sm"><Time relative timestamp={event.start} /></span>
             </DropdownItem>
           {/each}
           <DropdownDivider />
@@ -369,25 +388,29 @@
         <DropdownButton>
           <i
             class="fas"
-            class:fa-lock="{$doors.closed === null || $doors.closed === true}"
-            class:fa-lock-open="{$doors.closed === false}"
-            class:text-danger="{$doors.closed === false}"></i>
+            class:fa-lock={$doors.closed === null || $doors.closed === true}
+            class:fa-lock-open={$doors.closed === false}
+            class:text-danger={$doors.closed === false}
+          ></i>
         </DropdownButton>
-        <DropdownMenu right="{true}" large="{true}">
-          <DropdownItem disabled="{true}" style="text-align:center; font-weight: bold">{$_('topbar.door_status')}</DropdownItem>
+        <DropdownMenu right={true} large={true}>
+          <DropdownItem disabled={true} style="text-align:center; font-weight: bold"
+            >{$_('topbar.door_status')}</DropdownItem
+          >
           <DropdownDivider />
           {#each Object.keys($doors.doors) as doorid}
-            <DropdownItem disabled="{true}">
+            <DropdownItem disabled={true}>
               <i
                 class="fas"
-                class:fa-lock="{$doors.doors[doorid].closed === true}"
-                class:fa-lock-open="{$doors.doors[doorid].closed === false}"
-                class:text-danger="{$doors.doors[doorid].closed === false}"></i>
+                class:fa-lock={$doors.doors[doorid].closed === true}
+                class:fa-lock-open={$doors.doors[doorid].closed === false}
+                class:text-danger={$doors.doors[doorid].closed === false}
+              ></i>
               <span class="ml-1">
                 {$doors.doors[doorid].name}
               </span>
               <span class="float-right text-muted text-sm">
-                <Time live relative timestamp="{$doors.doors[doorid].last_update}" />
+                <Time live relative timestamp={$doors.doors[doorid].last_update} />
               </span>
             </DropdownItem>
           {/each}
@@ -395,14 +418,22 @@
       </Dropdown>
       <Dropdown>
         <DropdownButton>
-          <i class="fas fa-check-circle" class:text-success="{$isOnline.status === true}" class:text-danger="{$isOnline.status === false}"
+          <i
+            class="fas fa-check-circle"
+            class:text-success={$isOnline.status === true}
+            class:text-danger={$isOnline.status === false}
           ></i>
         </DropdownButton>
-        <DropdownMenu right="{true}" large="{true}">
-          <DropdownItem disabled="{true}" style="text-align:center; font-weight: bold">{$_('topbar.current_status')}</DropdownItem>
+        <DropdownMenu right={true} large={true}>
+          <DropdownItem disabled={true} style="text-align:center; font-weight: bold"
+            >{$_('topbar.current_status')}</DropdownItem
+          >
           <DropdownDivider />
-          <DropdownItem disabled="{true}">
-            <i class="fas fa-check-circle" class:text-success="{$isOnline.status === true}" class:text-danger="{$isOnline.status === false}"
+          <DropdownItem disabled={true}>
+            <i
+              class="fas fa-check-circle"
+              class:text-success={$isOnline.status === true}
+              class:text-danger={$isOnline.status === false}
             ></i>
             {#if $isOnline.status !== null}
               <span class="ml-1">
@@ -410,13 +441,13 @@
                 {$time($isOnline.last_action, { format: 'short' })}
               </span>
               <span class="float-right text-muted text-sm">
-                <Time live relative timestamp="{$isOnline.last_action}" />
+                <Time live relative timestamp={$isOnline.last_action} />
               </span>
             {/if}
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
-      <span class="nav-link text-nowrap ml-1 pl-0 pr-0 ">
+      <span class="nav-link text-nowrap ml-1 pl-0 pr-0">
         <span class="fa-stack fa-1x mr-3">
           {#if $isDay}
             <i class="fas fa-sun mr-1 fa-stack-1x" transition:fade></i>
@@ -424,8 +455,12 @@
             <i class="fas fa-moon mr-1 fa-stack-1x" transition:fade></i>
           {/if}
         </span>
-        <span class="d-none d-sm-inline">{$date($lastUpdate, { format: 'full' })}, {$time($lastUpdate, { format: 'short' })}</span>
-        <span class="d-inline d-sm-none">{$date($lastUpdate, { format: 'medium' })}, {$time($lastUpdate, { format: 'short' })}</span>
+        <span class="d-none d-sm-inline"
+          >{$date($lastUpdate, { format: 'full' })}, {$time($lastUpdate, { format: 'short' })}</span
+        >
+        <span class="d-inline d-sm-none"
+          >{$date($lastUpdate, { format: 'medium' })}, {$time($lastUpdate, { format: 'short' })}</span
+        >
       </span>
     </svelte:fragment>
   </TopNavigation>
@@ -434,7 +469,7 @@
     {#each Pages as page}
       {#if !page.hide}
         {#if page.subroutes && page.subroutes.length > 0}
-          <SidebarNavTree icon="{page.icon}" href="#{page.url}">
+          <SidebarNavTree icon={page.icon} href="#{page.url}">
             {$_(page.title)}
             <svelte:fragment slot="children">
               {#each page.subroutes as sub}
@@ -442,28 +477,34 @@
                   {#if ['scan_sensors', 'scan_relays', 'system_restart', 'system_reboot', 'system_shutdown'].indexOf(sub.url) !== -1}
                     <li class="nav-item">
                       <a
-                        href="{'#'}"
+                        href={'#'}
                         class="nav-link"
-                        title="{$_(sub.title)}"
-                        on:click|preventDefault="{() => confirmModalWindow(`${sub.url}`)}">
+                        title={$_(sub.title)}
+                        on:click|preventDefault={() => confirmModalWindow(`${sub.url}`)}
+                      >
                         <i class="nav-icon fas {sub.icon}"></i>
                         <p>{$_(sub.title)}</p>
                       </a>
                     </li>
                   {:else if ['new_button', 'new_relay', 'new_sensor', 'new_webcam', 'new_playlist', 'new_enclosure', 'new_area'].indexOf(sub.url) !== -1}
                     <li class="nav-item">
-                      <a href="{'#'}" class="nav-link" title="{$_(sub.title)}" on:click|preventDefault="{() => newModal(`${sub.url}`)}">
+                      <a
+                        href={'#'}
+                        class="nav-link"
+                        title={$_(sub.title)}
+                        on:click|preventDefault={() => newModal(`${sub.url}`)}
+                      >
                         <i class="nav-icon fas {sub.icon}"></i>
                         <p>{$_(sub.title)}</p>
                       </a>
                     </li>
                   {:else if sub.subroutes && sub.subroutes.length > 0}
-                    <SidebarNavTree icon="{sub.icon}" href="#{sub.url}">
+                    <SidebarNavTree icon={sub.icon} href="#{sub.url}">
                       {$_(sub.title)}
                       <svelte:fragment slot="children">
                         {#each sub.subroutes as subsub}
                           {#if !subsub.hide}
-                            <SidebarNavItem icon="{subsub.icon}" href="#{subsub.url}">
+                            <SidebarNavItem icon={subsub.icon} href="#{subsub.url}">
                               <p>{$_(subsub.title)}</p>
                             </SidebarNavItem>
                           {/if}
@@ -471,7 +512,7 @@
                       </svelte:fragment>
                     </SidebarNavTree>
                   {:else}
-                    <SidebarNavItem icon="{sub.icon}" href="#{sub.url}">
+                    <SidebarNavItem icon={sub.icon} href="#{sub.url}">
                       <p>{$_(sub.title)}</p>
                     </SidebarNavItem>
                   {/if}
@@ -480,7 +521,7 @@
             </svelte:fragment>
           </SidebarNavTree>
         {:else}
-          <SidebarNavItem icon="{page.icon}" href="#{page.url}" title="{$_(page.title)}">
+          <SidebarNavItem icon={page.icon} href="#{page.url}" title={$_(page.title)}>
             <p>{$_(page.title)}</p>
           </SidebarNavItem>
         {/if}
@@ -489,7 +530,7 @@
 
     <li class="nav-header">&nbsp;</li>
     <li class="nav-item">
-      <a href="#/about/" class="nav-link" title="{$_('about.title', { default: 'About' })}">
+      <a href="#/about/" class="nav-link" title={$_('about.title', { default: 'About' })}>
         <i class="fas fa-info nav-icon"></i>
         <p>{$_('about.title', { default: 'About' })}</p>
       </a>
@@ -498,7 +539,7 @@
 
   <div class="content-wrapper">
     <div class="content">
-      <Router routes="{RoutePages}" on:routeLoaded="{routeLoaded}" on:routeLoaded="{updateSiteBar}" />
+      <Router routes={RoutePages} on:routeLoaded={routeLoaded} on:routeLoaded={updateSiteBar} />
     </div>
   </div>
   <footer class="main-footer p-2 text-sm">
@@ -508,12 +549,14 @@
       using <a target="_blank" rel="noopener noreferrer" href="https://adminlte.io">AdminLTE</a>,
       <a target="_blank" rel="noopener noreferrer" href="https://svelte.dev">Svelte</a>
       and
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/KeenMate/rollup-svelte-adminlte-template">KeenMate template</a>
+      <a target="_blank" rel="noopener noreferrer" href="https://github.com/KeenMate/rollup-svelte-adminlte-template"
+        >KeenMate template</a
+      >
     </small>
     <div class="float-right d-sm-inline-block">
-      <small class="badge badge-success opacity-1" title="{$_('footer.current_activity')}">&nbsp;&nbsp;</small>
-      <small class="badge badge-warning opacity-1 ml-1" title="{$_('footer.warning_messages')}">&nbsp;&nbsp;</small>
-      <small class="badge badge-danger  opacity-1 ml-1" title="{$_('footer.error_messages')}">&nbsp;&nbsp;</small>
+      <small class="badge badge-success opacity-1" title={$_('footer.current_activity')}>&nbsp;&nbsp;</small>
+      <small class="badge badge-warning opacity-1 ml-1" title={$_('footer.warning_messages')}>&nbsp;&nbsp;</small>
+      <small class="badge badge-danger opacity-1 ml-1" title={$_('footer.error_messages')}>&nbsp;&nbsp;</small>
       <span class="d-none d-sm-inline"
         >&nbsp;&nbsp; {settings.name}
         {settings.version} - <small>{settings.device}</small> -
@@ -522,28 +565,34 @@
             href="https://github.com/theyosh/TerrariumPI/commit/{settings.gitversion}"
             target="_blank"
             rel="noopener noreferrer"
-            title="Git commit">{settings.gitversion.substring(0, 8)}</a> -
+            title="Git commit">{settings.gitversion.substring(0, 8)}</a
+          > -
         {/if}
       </span>
       <small>
-        <a href="https://github.com/theyosh/TerrariumPI" target="_blank" rel="noopener noreferrer" title="Download TerrariumPI on Github"
-          >Terrarium home automation</a>
+        <a
+          href="https://github.com/theyosh/TerrariumPI"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Download TerrariumPI on Github">Terrarium home automation</a
+        >
       </small>
     </div>
   </footer>
 </div>
 
 {#if $isAuthenticated}
-  <svelte:component this="{editModelContent}" bind:this="{editModal}" />
+  <svelte:component this={editModelContent} bind:this={editModal} />
 
   <ConfirmModal
-    bind:show="{showConfirm}"
-    bind:hide="{hideConfirm}"
-    confirmMessage="{confirmMessage}"
-    on:confirm="{confirmAction}"
-    bind:this="{modalConfirm}" />
+    bind:show={showConfirm}
+    bind:hide={hideConfirm}
+    {confirmMessage}
+    on:confirm={confirmAction}
+    bind:this={modalConfirm}
+  />
 {:else}
-  <LoginModal bind:this="{$loginModal}" />
+  <LoginModal bind:this={$loginModal} />
 {/if}
 
 <style>

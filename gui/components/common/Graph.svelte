@@ -1,7 +1,17 @@
 <script>
   import { onMount } from 'svelte';
   import { Line } from 'svelte-chartjs';
-  import { Chart as ChartJS, Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement, Filler } from 'chart.js';
+  import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    TimeScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+  } from 'chart.js';
   ChartJS.register(Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement, Filler);
   import 'chartjs-adapter-dayjs-3';
   import { _ } from 'svelte-i18n';
@@ -62,7 +72,7 @@
         new_data.map((point) => {
           return point.value;
         }),
-        settings.graph_smooth_value
+        settings.graph_smooth_value,
       );
       for (let counter = 0; counter < new_data.length; counter++) {
         new_data[counter].value = smoothed_data[counter];
@@ -81,7 +91,8 @@
         }
 
         let dataset = {
-          graphType: ['sensors', 'buttons'].indexOf(mode) !== -1 ? type : graphValue === 'flow' ? 'water_flow' : graphValue, // TODO: Make the flow field to water_flow field in the API
+          graphType:
+            ['sensors', 'buttons'].indexOf(mode) !== -1 ? type : graphValue === 'flow' ? 'water_flow' : graphValue, // TODO: Make the flow field to water_flow field in the API
           label: $_(graphTypes[mode === 'buttons' ? type : graphValue].label),
           tension: mode === 'sensors' ? 0.4 : 0,
           data: new_data,
@@ -124,12 +135,12 @@
         measure_min: Math.min(
           ...new_data.map((point) => {
             return point.value;
-          })
+          }),
         ),
         measure_max: Math.max(
           ...new_data.map((point) => {
             return point.value;
-          })
+          }),
         ),
       });
     }
@@ -179,7 +190,7 @@
             (new_data = data.map((point) => {
               point.timestamp *= 1000;
               return point;
-            }))
+            })),
         );
         nodata = new_data.length === 0;
 
@@ -208,7 +219,7 @@
             (new_data = data.map((point) => {
               point.timestamp *= 1000;
               return point;
-            }))
+            })),
         );
         nodata = new_data.length === 0;
 
@@ -232,5 +243,5 @@
     <h1 class="mt-5">{$_('graph.no-data')}</h1>
   </div>
 {:else}
-  <Line data="{graphData}" options="{graphOpts}" />
+  <Line data={graphData} options={graphOpts} />
 {/if}

@@ -1,4 +1,4 @@
-import { countryCodeEmoji } from "country-code-emoji";
+import { countryCodeEmoji } from 'country-code-emoji';
 
 const _getRandomCharCode = () => {
   return 65 + Math.round(Math.random() * 25);
@@ -7,8 +7,7 @@ const _getRandomCharCode = () => {
 export const getRandomString = (length) => {
   let randomNumbers = [];
 
-  for (let i = 0; i < length; i++)
-    randomNumbers.push(_getRandomCharCode());
+  for (let i = 0; i < length; i++) randomNumbers.push(_getRandomCharCode());
 
   return String.fromCharCode(...randomNumbers);
 };
@@ -39,7 +38,7 @@ export const removeAllTrailingChars = (str, char = '/') => {
 export const externalLinks = (content) => {
   let container = document.createElement('div');
   container.innerHTML = content;
-  for (let links = container.getElementsByTagName('a'), i = 0, a; a = links[i]; i++) {
+  for (let links = container.getElementsByTagName('a'), i = 0, a; (a = links[i]); i++) {
     if (a.host !== location.host) {
       a.target = '_blank';
     }

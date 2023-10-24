@@ -13,9 +13,9 @@
 
 <div class="form-group row">
   {#if label}
-    <Label id="{id}" label="{label}" required="{required}" />
+    <Label {id} {label} {required} />
   {/if}
-  <div class="col {$$props.class || ''}" class:col-12="{!horizontal}">
+  <div class="col {$$props.class || ''}" class:col-12={!horizontal}>
     <slot />
     {#if help}
       <small class="text-muted d-none">{@html help}</small>

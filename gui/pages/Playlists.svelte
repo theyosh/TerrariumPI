@@ -49,8 +49,11 @@
         try {
           await deletePlaylist(playlist.id);
           successNotification(
-            $_('audio.playlists.delete.ok.message', { default: "The playlist ''{name}'' is deleted.", values: { name: playlist.name } }),
-            $_('notification.delete.ok.title')
+            $_('audio.playlists.delete.ok.message', {
+              default: "The playlist ''{name}'' is deleted.",
+              values: { name: playlist.name },
+            }),
+            $_('notification.delete.ok.title'),
           );
           loadData();
         } catch (e) {
@@ -59,10 +62,10 @@
               default: "The playlist ''{name}'' could not be deleted!\nError: {error}",
               values: { name: playlist.name, error: e.message },
             }),
-            $_('notification.delete.error.title')
+            $_('notification.delete.error.title'),
           );
         }
-      }
+      },
     );
   };
 
@@ -86,7 +89,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <Card loading="{loading}" noTools="{true}">
+      <Card {loading} noTools={true}>
         <table id="playlists" class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
@@ -105,27 +108,31 @@
             {#each playlists as playlist}
               <tr>
                 <td>{playlist.name}</td>
-                <td data-order="{playlist.duration}">{dayjs.duration(playlist.duration * 1000).humanize()}</td>
+                <td data-order={playlist.duration}>{dayjs.duration(playlist.duration * 1000).humanize()}</td>
                 <td>{playlist.length}</td>
                 <td>{playlist.volume}</td>
-                <td data-order="{playlist.shuffle ? 1 : 0}"
-                  ><i class="fas" class:fa-check="{playlist.shuffle}" class:fa-times="{!playlist.shuffle}"> </i></td>
-                <td data-order="{playlist.repeat ? 1 : 0}"
-                  ><i class="fas" class:fa-check="{playlist.repeat}" class:fa-times="{!playlist.repeat}"> </i></td>
+                <td data-order={playlist.shuffle ? 1 : 0}
+                  ><i class="fas" class:fa-check={playlist.shuffle} class:fa-times={!playlist.shuffle}> </i></td
+                >
+                <td data-order={playlist.repeat ? 1 : 0}
+                  ><i class="fas" class:fa-check={playlist.repeat} class:fa-times={!playlist.repeat}> </i></td
+                >
                 {#if $isAuthenticated}
                   <td class="d-flex justify-content-around">
                     <button
                       class="btn btn-sm"
-                      class:btn-light="{$isDay}"
-                      class:btn-dark="{!$isDay}"
-                      on:click="{() => editPlaylist(playlist)}">
+                      class:btn-light={$isDay}
+                      class:btn-dark={!$isDay}
+                      on:click={() => editPlaylist(playlist)}
+                    >
                       <i class="fas fa-wrench"></i>
                     </button>
                     <button
                       class="btn btn-sm"
-                      class:btn-light="{$isDay}"
-                      class:btn-dark="{!$isDay}"
-                      on:click="{() => deletePlaylistAction(playlist)}">
+                      class:btn-light={$isDay}
+                      class:btn-dark={!$isDay}
+                      on:click={() => deletePlaylistAction(playlist)}
+                    >
                       <i class="fas fa-trash-alt text-danger"></i>
                     </button>
                   </td>

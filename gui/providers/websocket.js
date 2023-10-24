@@ -1,34 +1,36 @@
-
-import websocketStore from "svelte-websocket-store";
-import { get } from "svelte/store";
+import websocketStore from 'svelte-websocket-store';
+import { get } from 'svelte/store';
 import { _ } from 'svelte-i18n';
 
 import {
-  isDay, lastUpdate, uptime, systemLoad, systemCPUTemp, systemMemory, systemDisk, isOnline,
-
+  isDay,
+  lastUpdate,
+  uptime,
+  systemLoad,
+  systemCPUTemp,
+  systemMemory,
+  systemDisk,
+  isOnline,
   currentPower,
   maxPower,
   totalPower,
   totalPowerCosts,
   totalPowerDuration,
-
   currentWater,
   maxWater,
   totalWater,
   totalWaterCosts,
   totalWaterDuration,
-
   updateSensor,
   updateButton,
   updateRelay,
-
-  last_log_line
-} from "../stores/terrariumpi";
-import { isAuthenticated } from "../stores/authentication";
-import { WebsocketUrl } from "../constants/urls";
-import { fireworks, christmas } from "../constants/easter-eggs";
-import { animate_footer_badge, animateHourglass } from "../helpers/animation-helpers";
-import { errorNotification, successNotification } from "../providers/notification-provider";
+  last_log_line,
+} from '../stores/terrariumpi';
+import { isAuthenticated } from '../stores/authentication';
+import { WebsocketUrl } from '../constants/urls';
+import { fireworks, christmas } from '../constants/easter-eggs';
+import { animate_footer_badge, animateHourglass } from '../helpers/animation-helpers';
+import { errorNotification, successNotification } from '../providers/notification-provider';
 
 export const websocket = websocketStore(`${WebsocketUrl}`, {});
 
@@ -64,23 +66,28 @@ const _reConnect = () => {
   try {
     websocket.set({ type: 'client_init', reconnect: true });
   } catch (e) {
-    setTimeout(() => { _reConnect(); }, 30 * 1000);
+    setTimeout(() => {
+      _reConnect();
+    }, 30 * 1000);
   }
 };
 
-websocket.subscribe(message => {
+websocket.subscribe((message) => {
   if (message.type === undefined) return;
 
   // let data = null
   let onlineUpdate = true;
 
   switch (message.type) {
-
     case 'systemstats':
       isDay.set(message.data.is_day);
       uptime.set(message.data.uptime);
       lastUpdate.set(new Date());
-      systemLoad.set([message.data.load.percentage[0], message.data.load.percentage[1], message.data.load.percentage[2]]);
+      systemLoad.set([
+        message.data.load.percentage[0],
+        message.data.load.percentage[1],
+        message.data.load.percentage[2],
+      ]);
       systemCPUTemp.set(message.data.cpu_temperature);
       systemMemory.set([message.data.memory.used, message.data.memory.total]);
       systemDisk.set([message.data.storage.used, message.data.storage.total]);
@@ -130,7 +137,11 @@ websocket.subscribe(message => {
       break;
 
     case 'softwareupdate':
-      successNotification(message.data.message, message.data.title, { closeButton: true, timeOut: 0, extendedTimeOut: 0 });
+      successNotification(message.data.message, message.data.title, {
+        closeButton: true,
+        timeOut: 0,
+        extendedTimeOut: 0,
+      });
       break;
 
     default:

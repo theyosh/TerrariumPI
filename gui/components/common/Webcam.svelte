@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script>
   import { onMount, onDestroy, getContext } from 'svelte';
   import { date, time, _ } from 'svelte-i18n';
@@ -162,7 +164,7 @@
             e.preventDefault();
             webcamArchive();
           },
-          this
+          this,
         );
         L.DomUtil.create('i', 'fas fa-archive', archive_link);
       }
@@ -181,7 +183,7 @@
             map._panes.markerPane.classList.toggle('d-none');
             map._panes.tooltipPane.classList.toggle('d-none');
           },
-          this
+          this,
         );
         L.DomUtil.create('i', 'fas fa-info', markers_link);
       }
@@ -198,7 +200,7 @@
             e.preventDefault();
             showMarkerModal();
           },
-          this
+          this,
         );
         L.DomUtil.create('i', 'fas fa-map-marker', marker_drop);
       }
@@ -220,7 +222,7 @@
               e.target.classList.add(videoplayer.muted ? 'fa-volume-up' : 'fa-volume-mute');
             }
           },
-          this
+          this,
         );
         L.DomUtil.create('i', 'fas fa-volume-up', toggle_audio);
       }
@@ -231,7 +233,9 @@
   if (webcam.markers && webcam.markers.length > 0) {
     let sensors_loaded = true;
     for (let x = 0; x < webcam.markers.length; x++) {
-      sensors_loaded = sensors_loaded && webcam.markers[x].sensors.some((sensor_id) => $sensors[sensor_id] && $sensors[sensor_id].type);
+      sensors_loaded =
+        sensors_loaded &&
+        webcam.markers[x].sensors.some((sensor_id) => $sensors[sensor_id] && $sensors[sensor_id].type);
       if (!sensors_loaded) {
         (async () => {
           fetchSensors(false, (data) => {
@@ -273,24 +277,31 @@
             }),
           ];
 
-          webcamArchiveLoadingModal.setMessage($_('webcams.archive.modal.loading.status', { default: 'Currently loaded {total} images ... ({percentage}%)', values: { total: image_archive.length, percentage: (counter/10)*100 } }));
+          webcamArchiveLoadingModal.setMessage(
+            $_('webcams.archive.modal.loading.status', {
+              default: 'Currently loaded {total} images ... ({percentage}%)',
+              values: { total: image_archive.length, percentage: (counter / 10) * 100 },
+            }),
+          );
 
           if (counter++ < 10) {
             loadImages(new Date(archive_date.getTime() - 24 * 60 * 60 * 1000));
           } else if (image_archive.length > 0) {
             new Fancybox(image_archive, {
-                 l10n: fancyAppsLanguage(),
+              l10n: fancyAppsLanguage(),
             });
             webcamArchiveLoadingModal.hide();
           } else {
             errorNotification($_('webcams.archive.no_images', { default: 'No archive images available' }));
           }
-        }
+        },
       );
     }
 
     // Open loading modal
-    webcamArchiveLoadingModal.setMessage($_('webcams.archive.modal.loading.title', { default: 'Starting loading webcam archive images ...' }));
+    webcamArchiveLoadingModal.setMessage(
+      $_('webcams.archive.modal.loading.title', { default: 'Starting loading webcam archive images ...' }),
+    );
     webcamArchiveLoadingModal.show();
     loadImages();
   };
@@ -299,7 +310,8 @@
     map.getMap().addControl(new ExtraWebcamControls());
 
     if (webcam.is_live) {
-      let hls_url = webcam.hardware.indexOf('remote') !== -1 ? webcam.address : `${ApiUrl}/webcam/${webcam.id}/stream.m3u8`;
+      let hls_url =
+        webcam.hardware.indexOf('remote') !== -1 ? webcam.address : `${ApiUrl}/webcam/${webcam.id}/stream.m3u8`;
       L.videoOverlay(
         hls_url,
         L.latLngBounds([
@@ -310,7 +322,7 @@
           autoplay: true,
           muted: true,
           keepAspectRatio: true,
-        }
+        },
       )
         .on('add', (event) => {
           videoplayer = event.sourceTarget._image;
@@ -356,25 +368,26 @@
   });
 </script>
 
-<LeafletMap bind:this="{map}" options="{mapOptions}">
+<LeafletMap bind:this={map} options={mapOptions}>
   {#if !webcam.is_live}
-    <TileLayer bind:this="{tileLayer}" url="{tileUrl}" options="{tileLayerOptions}" />
+    <TileLayer bind:this={tileLayer} url={tileUrl} options={tileLayerOptions} />
   {/if}
   {#if webcam.markers.length > 0}
     {#each webcam.markers as marker}
       <Marker
-        options="{{ ...markerOptions, ...{ sensors: marker.sensors } }}"
-        latLng="{[marker.lat, marker.long]}"
-        events="{['move', 'dblclick']}"
-        on:move="{(e) => updateMarkers()}"
-        on:dblclick="{(e) => showMarkerModal(e.detail)}">
-        <DivIcon options="{pulsatingIcon.options}" />
+        options={{ ...markerOptions, ...{ sensors: marker.sensors } }}
+        latLng={[marker.lat, marker.long]}
+        events={['move', 'dblclick']}
+        on:move={(e) => updateMarkers()}
+        on:dblclick={(e) => showMarkerModal(e.detail)}
+      >
+        <DivIcon options={pulsatingIcon.options} />
         {#if !marker.sensors.some((sensor_id) => $sensors[sensor_id] && $sensors[sensor_id].type)}
-          <Tooltip options="{{ ...toolTipOptions, ...{ direction: marker.long > 0 ? 'right' : 'left' } }}">
+          <Tooltip options={{ ...toolTipOptions, ...{ direction: marker.long > 0 ? 'right' : 'left' } }}>
             <strong>Loading</strong>
           </Tooltip>
         {:else}
-          <Tooltip options="{{ ...toolTipOptions, ...{ direction: marker.long > 0 ? 'right' : 'left' } }}">
+          <Tooltip options={{ ...toolTipOptions, ...{ direction: marker.long > 0 ? 'right' : 'left' } }}>
             {#each marker.sensors as sensor_id, counter}
               {#if counter === 0}
                 <strong>{$sensors[sensor_id].name}</strong>
@@ -392,8 +405,7 @@
   {/if}
 </LeafletMap>
 
-<svelte:options accessors/>
-<LoadingModal bind:this="{webcamArchiveLoadingModal}" />
+<LoadingModal bind:this={webcamArchiveLoadingModal} />
 
 <style>
   strong {

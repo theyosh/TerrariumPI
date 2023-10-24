@@ -18,32 +18,32 @@ export const leaveLoaderFor = 234;
 export const BaseHtmlTitle = process.env.BASE_HTML_TITLE;
 
 export const fancyAppsLanguage = () => {
-    let language = getCustomConfig().language.substring(0,2);
-    switch(language) {
-        case 'de':
-          language = de;
-          break;
-        case 'en':
-          language = en;
-          break;
-        case 'es':
-          language = es;
-          break;
-        case 'fr':
-          language = fr;
-          break;
-        case 'it':
-          language = it;
-          break;
-        case 'ja':
-          language = ja;
-          break;
-        case 'pl':
-          language = pl;
-          break;
-        default:
-          language = en;
-      }
+  let language = getCustomConfig().language.substring(0, 2);
+  switch (language) {
+    case 'de':
+      language = de;
+      break;
+    case 'en':
+      language = en;
+      break;
+    case 'es':
+      language = es;
+      break;
+    case 'fr':
+      language = fr;
+      break;
+    case 'it':
+      language = it;
+      break;
+    case 'ja':
+      language = ja;
+      break;
+    case 'pl':
+      language = pl;
+      break;
+    default:
+      language = en;
+  }
 
-    return language;
-}
+  return language;
+};

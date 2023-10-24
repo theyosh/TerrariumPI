@@ -4,7 +4,12 @@
   import { _ } from 'svelte-i18n';
   import { createForm } from 'felte';
 
-  import { fetchNotificationServiceTypes, fetchNotificationServices, updateNotificationService, fetchDisplayTypes } from '../providers/api';
+  import {
+    fetchNotificationServiceTypes,
+    fetchNotificationServices,
+    updateNotificationService,
+    fetchDisplayTypes,
+  } from '../providers/api';
   import { successNotification, errorNotification } from '../providers/notification-provider';
   import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
 
@@ -49,8 +54,11 @@
 
         // Notifify OK!
         successNotification(
-          $_('services.settings.save.ok.message', { default: "Service ''{name}'' is updated", values: { name: values.name } }),
-          $_('notification.form.save.ok.title', { default: 'Save OK' })
+          $_('services.settings.save.ok.message', {
+            default: "Service ''{name}'' is updated",
+            values: { name: values.name },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
         );
 
         // Done, close window
@@ -69,7 +77,9 @@
         validated = false;
       }
     } else {
-      let error_message = $_('services.settings.save.error.required_fields', { default: 'Not all required fields are entered correctly.' });
+      let error_message = $_('services.settings.save.error.required_fields', {
+        default: 'Not all required fields are entered correctly.',
+      });
       error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
       errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
     }
@@ -91,7 +101,7 @@
         (data) =>
           (service_types = data.map((item) => {
             return { value: item.type, text: item.name };
-          }))
+          })),
       );
 
       // Load display hardware
@@ -99,7 +109,7 @@
         (data) =>
           (display_types = data.map((item) => {
             return { value: item.hardware, text: item.name };
-          }))
+          })),
       );
 
       // If ID is given, load existing data
@@ -139,63 +149,69 @@
   });
 </script>
 
-<ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" loading="{loading}">
+<ModalForm bind:show={wrapper_show} bind:hide={wrapper_hide} {loading}>
   <svelte:fragment slot="header">
     <i class="fas fa-bell mr-2"></i>
     {$_('services.settings.title', { default: 'Notification service settings' })}
     <Helper />
   </svelte:fragment>
 
-  <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
+  <form class="needs-validation" class:was-validated={validated} use:form bind:this={editForm}>
+    <input type="hidden" name="id" disabled={$formData.id && $formData.id !== '' ? null : true} />
     <div class="row">
       <div class="col">
         <Select
           name="type"
-          value="{$formData.type}"
-          readonly="{$formData.id && $formData.id !== ''}"
-          required="{true}"
-          options="{service_types}"
-          on:change="{(value) => ($formData.type = value.detail)}"
-          label="{$_('services.settings.type.label', { default: 'Type' })}"
-          placeholder="{$_('services.settings.type.placeholder', { default: 'Select type' })}"
-          help="{$_('services.settings.type.help', { default: 'Select the notification service type.' })}"
-          invalid="{$_('services.settings.type.invalid', { default: 'Please make a choice.' })}" />
+          value={$formData.type}
+          readonly={$formData.id && $formData.id !== ''}
+          required={true}
+          options={service_types}
+          on:change={(value) => ($formData.type = value.detail)}
+          label={$_('services.settings.type.label', { default: 'Type' })}
+          placeholder={$_('services.settings.type.placeholder', { default: 'Select type' })}
+          help={$_('services.settings.type.help', { default: 'Select the notification service type.' })}
+          invalid={$_('services.settings.type.invalid', { default: 'Please make a choice.' })}
+        />
       </div>
       <div class="col">
         <Field
           type="text"
           name="name"
-          required="{true}"
-          label="{$_('services.settings.name.label', { default: 'Name' })}"
-          placeholder="{$_('services.settings.name.placeholder', { default: 'Enter a name' })}"
-          help="{$_('services.settings.name.help', { default: 'Enter an easy to remember name.' })}"
-          invalid="{$_('services.settings.name.invalid', { default: 'The entered name is not valid. It cannot be empty.' })}" />
+          required={true}
+          label={$_('services.settings.name.label', { default: 'Name' })}
+          placeholder={$_('services.settings.name.placeholder', { default: 'Enter a name' })}
+          help={$_('services.settings.name.help', { default: 'Enter an easy to remember name.' })}
+          invalid={$_('services.settings.name.invalid', {
+            default: 'The entered name is not valid. It cannot be empty.',
+          })}
+        />
       </div>
       <div class="col">
         <Field
           type="number"
           name="rate_limit"
           value="0"
-          required="{true}"
+          required={true}
           min="0"
           step="1"
-          label="{$_('services.settings.rate_limit.label', { default: 'Rate limit' })}"
-          placeholder="{$_('services.settings.rate_limit.placeholder', { default: 'Messages per minute' })}"
-          help="{$_('services.settings.rate_limit.help', {
+          label={$_('services.settings.rate_limit.label', { default: 'Rate limit' })}
+          placeholder={$_('services.settings.rate_limit.placeholder', { default: 'Messages per minute' })}
+          help={$_('services.settings.rate_limit.help', {
             default: 'Maximum number of messages per minute for this service. Use 0 for unlimited.',
-          })}"
-          invalid="{$_('services.settings.rate_limit.invalid', {
+          })}
+          invalid={$_('services.settings.rate_limit.invalid', {
             default: 'The entered value is not valid. Enter a valid number higher than {min}.',
             values: { min: 0 },
-          })}" />
+          })}
+        />
       </div>
       <div class="col">
         <Switch
           name="enabled"
-          value="{$formData.enabled || true}"
-          label="{$_('services.settings.enabled.label', { default: 'Enabled' })}"
-          help="{$_('services.settings.enabled.help', { default: 'Enable/disable this notification service.' })}" />
+          value={$formData.enabled || true}
+          label={$_('services.settings.enabled.label', { default: 'Enabled' })}
+          help={$_('services.settings.enabled.help', { default: 'Enable/disable this notification service.' })}
+        />
       </div>
     </div>
 
@@ -204,32 +220,39 @@
         <div class="col">
           <Select
             name="setup.hardware"
-            value="{$formData.setup?.hardware}"
-            required="{true}"
-            options="{display_types}"
-            label="{$_('services.settings.setup.hardware.label', { default: 'Hardware' })}"
-            placeholder="{$_('services.settings.setup.hardware.placeholder', { default: 'Select hardware' })}"
-            help="{$_('services.settings.setup.hardware.help', { default: 'Select the hardware type for this display.' })}"
-            invalid="{$_('services.settings.setup.hardware.invalid', { default: 'Please make a choice.' })}" />
+            value={$formData.setup?.hardware}
+            required={true}
+            options={display_types}
+            label={$_('services.settings.setup.hardware.label', { default: 'Hardware' })}
+            placeholder={$_('services.settings.setup.hardware.placeholder', { default: 'Select hardware' })}
+            help={$_('services.settings.setup.hardware.help', {
+              default: 'Select the hardware type for this display.',
+            })}
+            invalid={$_('services.settings.setup.hardware.invalid', { default: 'Please make a choice.' })}
+          />
         </div>
         <div class="col">
           <Field
             type="text"
             name="setup.address"
-            required="{true}"
-            label="{$_('services.settings.setup.address.label', { default: 'Address' })}"
-            placeholder="{$_('services.settings.setup.address.placeholder', { default: 'Enter an address' })}"
-            help="{$_('services.settings.setup.address.help', { default: 'Enter an address.' })}"
-            invalid="{$_('services.settings.setup.address.invalid', {
+            required={true}
+            label={$_('services.settings.setup.address.label', { default: 'Address' })}
+            placeholder={$_('services.settings.setup.address.placeholder', { default: 'Enter an address' })}
+            help={$_('services.settings.setup.address.help', { default: 'Enter an address.' })}
+            invalid={$_('services.settings.setup.address.invalid', {
               default: 'The entered address is not valid. It cannot be empty.',
-            })}" />
+            })}
+          />
         </div>
         <div class="col-3">
           <Switch
             name="setup.show_title"
-            value="{$formData.setup?.show_title || true}"
-            label="{$_('services.settings.setup.show_title.label', { default: 'Show title' })}"
-            help="{$_('services.settings.setup.show_title.help', { default: 'Show a name and version as title on the display.' })}" />
+            value={$formData.setup?.show_title || true}
+            label={$_('services.settings.setup.show_title.label', { default: 'Show title' })}
+            help={$_('services.settings.setup.show_title.help', {
+              default: 'Show a name and version as title on the display.',
+            })}
+          />
         </div>
       </div>
     {/if}
@@ -240,63 +263,68 @@
           <Field
             type="text"
             name="setup.receiver"
-            required="{true}"
-            label="{$_('services.settings.setup.receiver.label', { default: 'Receiver email' })}"
-            placeholder="{$_('services.settings.setup.receiver.placeholder', { default: 'Enter an email address' })}"
-            help="{$_('services.settings.setup.receiver.help', { default: 'Enter an email address.' })}"
-            invalid="{$_('services.settings.setup.receiver.invalid', { default: 'The address cannot be empty.' })}" />
+            required={true}
+            label={$_('services.settings.setup.receiver.label', { default: 'Receiver email' })}
+            placeholder={$_('services.settings.setup.receiver.placeholder', { default: 'Enter an email address' })}
+            help={$_('services.settings.setup.receiver.help', { default: 'Enter an email address.' })}
+            invalid={$_('services.settings.setup.receiver.invalid', { default: 'The address cannot be empty.' })}
+          />
         </div>
         <div class="col">
           <Field
             type="text"
             name="setup.address"
-            required="{true}"
-            label="{$_('services.settings.setup.address.email.label', { default: 'Server address' })}"
-            placeholder="{$_('services.settings.setup.address.placeholder', { default: 'Enter an address' })}"
-            help="{$_('services.settings.setup.address.help', { default: 'Enter an address.' })}"
-            invalid="{$_('services.settings.setup.address.invalid', {
+            required={true}
+            label={$_('services.settings.setup.address.email.label', { default: 'Server address' })}
+            placeholder={$_('services.settings.setup.address.placeholder', { default: 'Enter an address' })}
+            help={$_('services.settings.setup.address.help', { default: 'Enter an address.' })}
+            invalid={$_('services.settings.setup.address.invalid', {
               default: 'The entered address is not valid. It cannot be empty.',
-            })}" />
+            })}
+          />
         </div>
         <div class="col-2">
           <Field
             type="number"
             name="setup.port"
             value="25"
-            required="{true}"
+            required={true}
             min="0"
             step="1"
-            label="{$_('services.settings.setup.port.label', { default: 'SMTP Server port' })}"
-            placeholder="{$_('services.settings.setup.port.placeholder', { default: 'Enter a port number' })}"
-            help="{$_('services.settings.setup.port.help', { default: 'Enter the server port number.' })}"
-            invalid="{$_('services.settings.setup.port.invalid', {
+            label={$_('services.settings.setup.port.label', { default: 'SMTP Server port' })}
+            placeholder={$_('services.settings.setup.port.placeholder', { default: 'Enter a port number' })}
+            help={$_('services.settings.setup.port.help', { default: 'Enter the server port number.' })}
+            invalid={$_('services.settings.setup.port.invalid', {
               default: 'The entered port number is not valid. It cannot be empty.',
-            })}" />
+            })}
+          />
         </div>
         <div class="col">
           <Field
             type="text"
             name="setup.username"
-            label="{$_('services.settings.setup.username.label', { default: 'SMTP Server username' })}"
-            placeholder="{$_('services.settings.setup.username.placeholder', { default: 'Enter a username' })}"
-            help="{$_('services.settings.setup.username.help', { default: 'Enter the server username.' })}" />
+            label={$_('services.settings.setup.username.label', { default: 'SMTP Server username' })}
+            placeholder={$_('services.settings.setup.username.placeholder', { default: 'Enter a username' })}
+            help={$_('services.settings.setup.username.help', { default: 'Enter the server username.' })}
+          />
         </div>
         <div class="col">
           <Field
             type="text"
             name="setup.password"
-            label="{$_('services.settings.setup.password.label', { default: 'SMTP Server password' })}"
-            placeholder="{$_('services.settings.setup.password.placeholder', { default: 'Enter a username' })}"
-            help="{$_('services.settings.setup.password.help', { default: 'Enter the server password.' })}" />
+            label={$_('services.settings.setup.password.label', { default: 'SMTP Server password' })}
+            placeholder={$_('services.settings.setup.password.placeholder', { default: 'Enter a username' })}
+            help={$_('services.settings.setup.password.help', { default: 'Enter the server password.' })}
+          />
         </div>
       </div>
       <div class="row">
         <div class="col">
-            <small class="text-muted d-none ml-2 w-100 text-center">
-                {$_('services.settings.setup.ssl.email.label', {
-                  default: 'The email notification service will auto detect SSL/TLS connections.',
-                })}
-            </small>
+          <small class="text-muted d-none ml-2 w-100 text-center">
+            {$_('services.settings.setup.ssl.email.label', {
+              default: 'The email notification service will auto detect SSL/TLS connections.',
+            })}
+          </small>
         </div>
       </div>
     {/if}
@@ -307,35 +335,39 @@
           <Field
             type="text"
             name="setup.api_token"
-            required="{true}"
-            label="{$_('services.settings.setup.api_token.label', { default: 'API Token' })}"
-            placeholder="{$_('services.settings.setup.api_token.placeholder', { default: 'Enter the API Token' })}"
-            help="{$_('services.settings.setup.api_token.help', { default: 'Enter the Pushover API token.' })}"
-            invalid="{$_('services.settings.setup.api_token.invalid', {
+            required={true}
+            label={$_('services.settings.setup.api_token.label', { default: 'API Token' })}
+            placeholder={$_('services.settings.setup.api_token.placeholder', { default: 'Enter the API Token' })}
+            help={$_('services.settings.setup.api_token.help', { default: 'Enter the Pushover API token.' })}
+            invalid={$_('services.settings.setup.api_token.invalid', {
               default: 'The entered API token is not valid. It cannot be empty.',
-            })}" />
+            })}
+          />
         </div>
         <div class="col">
           <Field
             type="text"
             name="setup.user_key"
-            required="{true}"
-            label="{$_('services.settings.setup.user_key.label', { default: 'User key' })}"
-            placeholder="{$_('services.settings.setup.user_key.placeholder', { default: 'Enter the user key' })}"
-            help="{$_('services.settings.setup.user_key.help', { default: 'Enter the Pushover user key.' })}"
-            invalid="{$_('services.settings.setup.user_key.invalid', {
+            required={true}
+            label={$_('services.settings.setup.user_key.label', { default: 'User key' })}
+            placeholder={$_('services.settings.setup.user_key.placeholder', { default: 'Enter the user key' })}
+            help={$_('services.settings.setup.user_key.help', { default: 'Enter the Pushover user key.' })}
+            invalid={$_('services.settings.setup.user_key.invalid', {
               default: 'The entered user key is not valid. It cannot be empty.',
-            })}" />
+            })}
+          />
         </div>
       </div>
       <div class="row">
         <div class="col">
-            <small class="text-muted d-none ml-2 w-100 text-center">
-                {@html $_('services.settings.setup.pushover.label', {
-                    default: 'Create your tokens by registering TerrariumPI as an app {link}.',
-                    values: { link: '<a href="https://pushover.net/api" target="_blank" rel="noopener">https://pushover.net/api</a>' },
-                  })}
-            </small>
+          <small class="text-muted d-none ml-2 w-100 text-center">
+            {@html $_('services.settings.setup.pushover.label', {
+              default: 'Create your tokens by registering TerrariumPI as an app {link}.',
+              values: {
+                link: '<a href="https://pushover.net/api" target="_blank" rel="noopener">https://pushover.net/api</a>',
+              },
+            })}
+          </small>
         </div>
       </div>
     {/if}
@@ -349,13 +381,14 @@
             min="1"
             max="40"
             step="1"
-            label="{$_('services.settings.setup.red.label', { default: 'Red' })}"
-            placeholder="{$_('services.settings.setup.red.placeholder', { default: 'Enter red GPIO pin' })}"
-            help="{$_('services.settings.setup.red.help', { default: 'Enter GPIO pin for red light.' })}"
-            invalid="{$_('services.settings.setup.red.invalid', {
+            label={$_('services.settings.setup.red.label', { default: 'Red' })}
+            placeholder={$_('services.settings.setup.red.placeholder', { default: 'Enter red GPIO pin' })}
+            help={$_('services.settings.setup.red.help', { default: 'Enter GPIO pin for red light.' })}
+            invalid={$_('services.settings.setup.red.invalid', {
               default: 'The entered value is not valid. Enter a valid number between {min} and {max}.',
               values: { min: 1, max: 40 },
-            })}" />
+            })}
+          />
         </div>
         <div class="col">
           <Field
@@ -364,13 +397,14 @@
             min="1"
             max="40"
             step="1"
-            label="{$_('services.settings.setup.yellow.label', { default: 'Amber' })}"
-            placeholder="{$_('services.settings.setup.yellow.placeholder', { default: 'Enter amber GPIO pin' })}"
-            help="{$_('services.settings.setup.yellow.help', { default: 'Enter GPIO pin for amber light.' })}"
-            invalid="{$_('services.settings.setup.yellow.invalid', {
+            label={$_('services.settings.setup.yellow.label', { default: 'Amber' })}
+            placeholder={$_('services.settings.setup.yellow.placeholder', { default: 'Enter amber GPIO pin' })}
+            help={$_('services.settings.setup.yellow.help', { default: 'Enter GPIO pin for amber light.' })}
+            invalid={$_('services.settings.setup.yellow.invalid', {
               default: 'The entered value is not valid. Enter a valid number between {min} and {max}.',
               values: { min: 1, max: 40 },
-            })}" />
+            })}
+          />
         </div>
         <div class="col">
           <Field
@@ -379,13 +413,14 @@
             min="1"
             max="40"
             step="1"
-            label="{$_('services.settings.setup.green.label', { default: 'Green' })}"
-            placeholder="{$_('services.settings.setup.green.placeholder', { default: 'Enter green GPIO pin' })}"
-            help="{$_('services.settings.setup.green.help', { default: 'Enter GPIO pin for green light.' })}"
-            invalid="{$_('services.settings.setup.green.invalid', {
+            label={$_('services.settings.setup.green.label', { default: 'Green' })}
+            placeholder={$_('services.settings.setup.green.placeholder', { default: 'Enter green GPIO pin' })}
+            help={$_('services.settings.setup.green.help', { default: 'Enter GPIO pin for green light.' })}
+            invalid={$_('services.settings.setup.green.invalid', {
               default: 'The entered value is not valid. Enter a valid number between {min} and {max}.',
               values: { min: 1, max: 40 },
-            })}" />
+            })}
+          />
         </div>
       </div>
     {/if}
@@ -399,17 +434,20 @@
             min="1"
             max="40"
             step="1"
-            required="{true}"
-            label="{$_('services.settings.setup.address.label', { default: 'Address' })}"
-            placeholder="{$_('services.settings.setup.address.placeholder', { default: 'Enter an address' })}"
-            help="{$_('services.settings.setup.address.help', { default: 'Enter an address.' })}"
-            invalid="{$_('services.settings.setup.address.invalid', {
+            required={true}
+            label={$_('services.settings.setup.address.label', { default: 'Address' })}
+            placeholder={$_('services.settings.setup.address.placeholder', { default: 'Enter an address' })}
+            help={$_('services.settings.setup.address.help', { default: 'Enter an address.' })}
+            invalid={$_('services.settings.setup.address.invalid', {
               default: 'The entered address is not valid. It cannot be empty.',
-            })}" />
+            })}
+          />
         </div>
         <div class="col">
           <p>
-            The following songs are supported. Copy the name exactly as written in the list below in the <strong>message subject</strong>.
+            The following songs are supported. Copy the name exactly as written in the list below in the <strong
+              >message subject</strong
+            >.
           </p>
           <ul>
             <li>The Final Countdown</li>
@@ -426,10 +464,13 @@
           <p>
             Original found at:
             <a href="https://github.com/gumslone/raspi_buzzer_player" target="_blank" rel="noopener noreferrer"
-              >https://github.com/gumslone/raspi_buzzer_player</a>
+              >https://github.com/gumslone/raspi_buzzer_player</a
+            >
           </p>
           <small class="text-muted d-none">
-            {$_('services.settings.setup.buzzer.help', { default: 'List of available songs to use in the message subject.' })}
+            {$_('services.settings.setup.buzzer.help', {
+              default: 'List of available songs to use in the message subject.',
+            })}
           </small>
         </div>
       </div>
@@ -441,11 +482,14 @@
           <Field
             type="text"
             name="setup.url"
-            required="{true}"
-            label="{$_('services.settings.setup.url.label', { default: 'Full post url' })}"
-            placeholder="{$_('services.settings.setup.url.placeholder', { default: 'Enter the full post url' })}"
-            help="{$_('services.settings.setup.url.help', { default: 'Enter the full post url.' })}"
-            invalid="{$_('services.settings.setup.url.invalid', { default: 'The entered url is not valid. It cannot be empty.' })}" />
+            required={true}
+            label={$_('services.settings.setup.url.label', { default: 'Full post url' })}
+            placeholder={$_('services.settings.setup.url.placeholder', { default: 'Enter the full post url' })}
+            help={$_('services.settings.setup.url.help', { default: 'Enter the full post url.' })}
+            invalid={$_('services.settings.setup.url.invalid', {
+              default: 'The entered url is not valid. It cannot be empty.',
+            })}
+          />
         </div>
       </div>
     {/if}
@@ -456,51 +500,57 @@
           <Field
             type="text"
             name="setup.address"
-            required="{true}"
-            label="{$_('services.settings.setup.address.mqtt.label', { default: 'Server Address' })}"
-            placeholder="{$_('services.settings.setup.address.placeholder', { default: 'Enter an address' })}"
-            help="{$_('services.settings.setup.address.help', { default: 'Enter an address.' })}"
-            invalid="{$_('services.settings.setup.address.invalid', {
+            required={true}
+            label={$_('services.settings.setup.address.mqtt.label', { default: 'Server Address' })}
+            placeholder={$_('services.settings.setup.address.placeholder', { default: 'Enter an address' })}
+            help={$_('services.settings.setup.address.help', { default: 'Enter an address.' })}
+            invalid={$_('services.settings.setup.address.invalid', {
               default: 'The entered address is not valid. It cannot be empty.',
-            })}" />
+            })}
+          />
         </div>
         <div class="col-2">
           <Field
             type="number"
             name="setup.port"
             value="25"
-            required="{true}"
+            required={true}
             min="0"
             step="1"
-            label="{$_('services.settings.setup.port.label', { default: 'Server port' })}"
-            placeholder="{$_('services.settings.setup.port.placeholder', { default: 'Enter a port number' })}"
-            help="{$_('services.settings.setup.port.help', { default: 'Enter the server port number.' })}"
-            invalid="{$_('services.settings.setup.port.invalid', {
+            label={$_('services.settings.setup.port.label', { default: 'Server port' })}
+            placeholder={$_('services.settings.setup.port.placeholder', { default: 'Enter a port number' })}
+            help={$_('services.settings.setup.port.help', { default: 'Enter the server port number.' })}
+            invalid={$_('services.settings.setup.port.invalid', {
               default: 'The entered port number is not valid. It cannot be empty.',
-            })}" />
+            })}
+          />
         </div>
         <div class="col">
           <Field
             type="text"
             name="setup.username"
-            label="{$_('services.settings.setup.username.label', { default: 'Server username' })}"
-            placeholder="{$_('services.settings.setup.username.placeholder', { default: 'Enter a username' })}"
-            help="{$_('services.settings.setup.username.help', { default: 'Enter the server username.' })}" />
+            label={$_('services.settings.setup.username.label', { default: 'Server username' })}
+            placeholder={$_('services.settings.setup.username.placeholder', { default: 'Enter a username' })}
+            help={$_('services.settings.setup.username.help', { default: 'Enter the server username.' })}
+          />
         </div>
         <div class="col">
           <Field
             type="text"
             name="setup.password"
-            label="{$_('services.settings.setup.password.label', { default: 'Server password' })}"
-            placeholder="{$_('services.settings.setup.password.placeholder', { default: 'Enter a username' })}"
-            help="{$_('services.settings.setup.password.help', { default: 'Enter the server password.' })}" />
+            label={$_('services.settings.setup.password.label', { default: 'Server password' })}
+            placeholder={$_('services.settings.setup.password.placeholder', { default: 'Enter a username' })}
+            help={$_('services.settings.setup.password.help', { default: 'Enter the server password.' })}
+          />
         </div>
       </div>
       <div class="row">
         <div class="col">
-            <small class="text-muted d-none ml-2 w-100 text-center">
-                {$_('services.settings.setup.ssl.mqtt.label', { default: 'The MQTT notification service will auto detect SSL/TLS connections.' })}
-            </small>
+          <small class="text-muted d-none ml-2 w-100 text-center">
+            {$_('services.settings.setup.ssl.mqtt.label', {
+              default: 'The MQTT notification service will auto detect SSL/TLS connections.',
+            })}
+          </small>
         </div>
       </div>
     {/if}
@@ -511,33 +561,40 @@
           <Field
             type="text"
             name="setup.token"
-            required="{true}"
-            label="{$_('services.settings.setup.telegram.bot.label', { default: 'Bot token' })}"
-            placeholder="{$_('services.settings.setup.telegram.bot.placeholder', { default: 'Enter a bot token.' })}"
-            help="{$_('services.settings.setup.telegram.bot.help', { default: 'Enter a bot token.' })}"
-            invalid="{$_('services.settings.setup.telegram.bot.invalid', {
+            required={true}
+            label={$_('services.settings.setup.telegram.bot.label', { default: 'Bot token' })}
+            placeholder={$_('services.settings.setup.telegram.bot.placeholder', { default: 'Enter a bot token.' })}
+            help={$_('services.settings.setup.telegram.bot.help', { default: 'Enter a bot token.' })}
+            invalid={$_('services.settings.setup.telegram.bot.invalid', {
               default: 'The entered bot token is not valid. It cannot be empty.',
-            })}" />
+            })}
+          />
         </div>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
           <Field
             type="text"
             name="setup.allowed_users"
-            required="{true}"
-            label="{$_('services.settings.setup.telegram.allowed_users.label', { default: 'Allowed users' })}"
-            placeholder="{$_('services.settings.setup.telegram.allowed_users.placeholder', { default: 'Enter the allowed users.' })}"
-            help="{$_('services.settings.setup.telegram.allowed_users.help', { default: 'Enter the allowed users.' })}"
-            invalid="{$_('services.settings.setup.telegram.allowed_users.invalid', {
+            required={true}
+            label={$_('services.settings.setup.telegram.allowed_users.label', { default: 'Allowed users' })}
+            placeholder={$_('services.settings.setup.telegram.allowed_users.placeholder', {
+              default: 'Enter the allowed users.',
+            })}
+            help={$_('services.settings.setup.telegram.allowed_users.help', { default: 'Enter the allowed users.' })}
+            invalid={$_('services.settings.setup.telegram.allowed_users.invalid', {
               default: 'Enter at least one user. It cannot be empty.',
-            })}" />
+            })}
+          />
         </div>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
           <Field
             type="text"
             name="setup.proxy"
-            label="{$_('services.settings.setup.telegram.proxy.label', { default: 'Proxy' })}"
-            placeholder="{$_('services.settings.setup.telegram.proxy.placeholder', { default: 'Enter a full proxy url.' })}"
-            help="{$_('services.settings.setup.telegram.proxy.help', { default: 'Enter a full proxy url.' })}" />
+            label={$_('services.settings.setup.telegram.proxy.label', { default: 'Proxy' })}
+            placeholder={$_('services.settings.setup.telegram.proxy.placeholder', {
+              default: 'Enter a full proxy url.',
+            })}
+            help={$_('services.settings.setup.telegram.proxy.help', { default: 'Enter a full proxy url.' })}
+          />
         </div>
       </div>
     {/if}
@@ -576,8 +633,9 @@
   </form>
 
   <svelte:fragment slot="actions">
-    <button type="button" class="btn btn-primary" disabled="{loading || $isSubmitting}" on:click="{formSubmit}">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none="{!$isSubmitting}"></span>
+    <button type="button" class="btn btn-primary" disabled={loading || $isSubmitting} on:click={formSubmit}>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none={!$isSubmitting}
+      ></span>
       {$_('modal.general.save', { default: 'Save' })}
     </button>
   </svelte:fragment>

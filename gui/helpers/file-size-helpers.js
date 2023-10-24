@@ -1,10 +1,6 @@
-import { roundToPrecision } from "./number-helpers";
+import { roundToPrecision } from './number-helpers';
 
-export const Units = [
-  "kB",
-  "mB",
-  "gB"
-];
+export const Units = ['kB', 'mB', 'gB'];
 
 export const fileSizeToString = (fileSize) => {
   let divider = 1_000;
@@ -17,7 +13,7 @@ export const fileSizeToString = (fileSize) => {
 
   return {
     unit: Units[unitCount],
-    value: roundToPrecision(fileSize / divider)
+    value: roundToPrecision(fileSize / divider),
   };
 };
 
@@ -27,8 +23,7 @@ export const formatBytes = (fileSize) => {
 };
 
 export const toMegabytes = (fileSize) => {
-  if (!fileSize || isNaN(fileSize))
-    return "";
+  if (!fileSize || isNaN(fileSize)) return '';
 
-  return roundToPrecision((fileSize / 1_000_000));
+  return roundToPrecision(fileSize / 1_000_000);
 };

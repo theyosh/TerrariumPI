@@ -224,8 +224,11 @@
 
         // Notify OK!
         successNotification(
-          $_('webcams.settings.save.ok.message', { default: "Webcam ''{name}'' is updated", values: { name: values.name } }),
-          $_('notification.form.save.ok.title', { default: 'Save OK' })
+          $_('webcams.settings.save.ok.message', {
+            default: "Webcam ''{name}'' is updated",
+            values: { name: values.name },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
         );
 
         // Done, close window
@@ -242,7 +245,9 @@
         validated = false;
       }
     } else {
-      let error_message = $_('webcams.settings.save.error.required_fields', { default: 'Not all required fields are entered correctly.' });
+      let error_message = $_('webcams.settings.save.error.required_fields', {
+        default: 'Not all required fields are entered correctly.',
+      });
       error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
       errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
     }
@@ -264,14 +269,14 @@
         (data) =>
           (relays = data.map((item) => {
             return { value: item.hardware, text: item.name };
-          }))
+          })),
       );
       // Load all avaliable hardware
       await fetchWebcamsHardware(
         (data) =>
           (hardware = data.map((item) => {
             return { value: item.hardware, text: item.name };
-          }))
+          })),
       );
       // If ID is given, load existing data
       if (webcamId) {
@@ -305,15 +310,15 @@
   });
 </script>
 
-<ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" loading="{loading}">
+<ModalForm bind:show={wrapper_show} bind:hide={wrapper_hide} {loading}>
   <svelte:fragment slot="header">
     <i class="fas fa-tint mr-2"></i>
     {$_('webcams.settings.title', { default: 'Webcam settings' })}
     <Helper moreInfo="https://theyosh.github.io/TerrariumPI/setup/#webcams" />
   </svelte:fragment>
 
-  <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
+  <form class="needs-validation" class:was-validated={validated} use:form bind:this={editForm}>
+    <input type="hidden" name="id" disabled={$formData.id && $formData.id !== '' ? null : true} />
     <input type="hidden" name="markers" readonly="readonly" />
 
     <div class="row">
@@ -322,36 +327,43 @@
           <div class="col-12 col-sm-12 col-md-3 col-lg-4">
             <Select
               name="hardware"
-              value="{$formData.hardware}"
-              readonly="{$formData.id && $formData.id !== ''}"
-              on:change="{(value) => hardwareType(value.detail)}"
-              required="{true}"
-              options="{hardware}"
-              label="{$_('webcams.settings.hardware.label', { default: 'Hardware' })}"
-              placeholder="{$_('webcams.settings.hardware.placeholder', { default: 'Select hardware' })}"
-              help="{$_('webcams.settings.hardware.help', { default: 'Select the hardware type for this button.' })}"
-              invalid="{$_('webcams.settings.hardware.invalid', { default: 'Please select a hardware type.' })}" />
+              value={$formData.hardware}
+              readonly={$formData.id && $formData.id !== ''}
+              on:change={(value) => hardwareType(value.detail)}
+              required={true}
+              options={hardware}
+              label={$_('webcams.settings.hardware.label', { default: 'Hardware' })}
+              placeholder={$_('webcams.settings.hardware.placeholder', { default: 'Select hardware' })}
+              help={$_('webcams.settings.hardware.help', { default: 'Select the hardware type for this button.' })}
+              invalid={$_('webcams.settings.hardware.invalid', { default: 'Please select a hardware type.' })}
+            />
           </div>
           <div class="col-12 col-sm-12 col-md-5 col-lg-4">
             <Field
               type="text"
               name="address"
-              required="{true}"
-              readonly="{['rpicam', 'rpicam-live'].indexOf(hardware_type) !== -1}"
-              label="{$_('webcams.settings.address.label', { default: 'Address' })}"
-              placeholder="{$_('webcams.settings.address.placeholder', { default: 'Enter an address' })}"
-              help="{$_('webcams.settings.address.help', { default: 'For more information see online.' })}"
-              invalid="{$_('webcams.settings.address.invalid', { default: 'The entered address is not valid. It cannot be empty.' })}" />
+              required={true}
+              readonly={['rpicam', 'rpicam-live'].indexOf(hardware_type) !== -1}
+              label={$_('webcams.settings.address.label', { default: 'Address' })}
+              placeholder={$_('webcams.settings.address.placeholder', { default: 'Enter an address' })}
+              help={$_('webcams.settings.address.help', { default: 'For more information see online.' })}
+              invalid={$_('webcams.settings.address.invalid', {
+                default: 'The entered address is not valid. It cannot be empty.',
+              })}
+            />
           </div>
           <div class="col-12 col-sm-12 col-md-4 col-lg-4">
             <Field
               type="text"
               name="name"
-              required="{true}"
-              label="{$_('webcams.settings.name.label', { default: 'Name' })}"
-              placeholder="{$_('webcams.settings.name.placeholder', { default: 'Enter a name' })}"
-              help="{$_('webcams.settings.name.help', { default: 'Enter an easy to remember name.' })}"
-              invalid="{$_('webcams.settings.name.invalid', { default: 'The entered name is not valid. It cannot be empty.' })}" />
+              required={true}
+              label={$_('webcams.settings.name.label', { default: 'Name' })}
+              placeholder={$_('webcams.settings.name.placeholder', { default: 'Enter a name' })}
+              help={$_('webcams.settings.name.help', { default: 'Enter an easy to remember name.' })}
+              invalid={$_('webcams.settings.name.invalid', {
+                default: 'The entered name is not valid. It cannot be empty.',
+              })}
+            />
           </div>
         </div>
         <div class="row">
@@ -363,13 +375,14 @@
                   min="0"
                   step="1"
                   name="width"
-                  required="{true}"
-                  label="{$_('webcams.settings.width.label', { default: 'Width' })}"
-                  help="{$_('webcams.settings.width.help', { default: 'Enter the resolution width in pixels.' })}"
-                  invalid="{$_('webcams.settings.width.invalid', {
+                  required={true}
+                  label={$_('webcams.settings.width.label', { default: 'Width' })}
+                  help={$_('webcams.settings.width.help', { default: 'Enter the resolution width in pixels.' })}
+                  invalid={$_('webcams.settings.width.invalid', {
                     default: 'Please enter a minimum value of {value}.',
                     values: { value: 0 },
-                  })}" />
+                  })}
+                />
               </div>
               <div class="col-2 pt-5 text-center text-bold">X</div>
               <div class="col-5">
@@ -378,89 +391,102 @@
                   min="0"
                   step="1"
                   name="height"
-                  required="{true}"
-                  label="{$_('webcams.settings.height.label', { default: 'Height' })}"
-                  help="{$_('webcams.settings.height.help', { default: 'Enter the resolution height in pixels.' })}"
-                  invalid="{$_('webcams.settings.height.invalid', {
+                  required={true}
+                  label={$_('webcams.settings.height.label', { default: 'Height' })}
+                  help={$_('webcams.settings.height.help', { default: 'Enter the resolution height in pixels.' })}
+                  invalid={$_('webcams.settings.height.invalid', {
                     default: 'Please enter a minimum value of {value}.',
                     values: { value: 0 },
-                  })}" />
+                  })}
+                />
               </div>
             </div>
           </div>
           <div class="col-6 col-sm-6 col-md-3 col-lg-3">
             <Select
               name="rotation"
-              value="{$formData.rotation}"
-              required="{true}"
-              options="{rotations}"
-              label="{$_('webcams.settings.rotation.label', { default: 'Rotation' })}"
-              placeholder="{$_('webcams.settings.rotation.placeholder', { default: 'Select rotation' })}"
-              help="{$_('webcams.settings.rotation.help', { default: 'Select a rotation.' })}"
-              invalid="{$_('webcams.settings.rotation.invalid', { default: 'Please make a choice.' })}" />
+              value={$formData.rotation}
+              required={true}
+              options={rotations}
+              label={$_('webcams.settings.rotation.label', { default: 'Rotation' })}
+              placeholder={$_('webcams.settings.rotation.placeholder', { default: 'Select rotation' })}
+              help={$_('webcams.settings.rotation.help', { default: 'Select a rotation.' })}
+              invalid={$_('webcams.settings.rotation.invalid', { default: 'Please make a choice.' })}
+            />
           </div>
           <div class="col-6 col-sm-6 col-md-3 col-lg-3">
             <Select
               name="awb"
-              value="{$formData.awb}"
-              required="{true}"
-              options="{white_balances}"
-              label="{$_('webcams.settings.awb.label', { default: 'White balance' })}"
-              placeholder="{$_('webcams.settings.awb.placeholder', { default: 'Select white balance' })}"
-              help="{$_('webcams.settings.awb.help', { default: 'Select a white balance.' })}"
-              invalid="{$_('webcams.settings.awb.invalid', { default: 'Please make a choice.' })}" />
+              value={$formData.awb}
+              required={true}
+              options={white_balances}
+              label={$_('webcams.settings.awb.label', { default: 'White balance' })}
+              placeholder={$_('webcams.settings.awb.placeholder', { default: 'Select white balance' })}
+              help={$_('webcams.settings.awb.help', { default: 'Select a white balance.' })}
+              invalid={$_('webcams.settings.awb.invalid', { default: 'Please make a choice.' })}
+            />
           </div>
         </div>
         <div class="row">
           <div class="col-6 col-sm-6 col-md-3 col-lg-3">
             <Select
               name="archive.state"
-              value="{$formData.archive ? $formData.archive.state : null}"
-              on:change="{(value) => archivingCalibration(value.detail)}"
-              options="{archiving}"
-              label="{$_('webcams.settings.archive.state.label', { default: 'Archiving' })}"
-              placeholder="{$_('webcams.settings.archive.state.placeholder', { default: 'Select archiving' })}"
-              help="{$_('webcams.settings.archive.state.help', { default: 'Select the duration between archived images.' })}"
-              invalid="{$_('webcams.settings.archive.state.invalid', { default: 'Please make a choice.' })}" />
+              value={$formData.archive ? $formData.archive.state : null}
+              on:change={(value) => archivingCalibration(value.detail)}
+              options={archiving}
+              label={$_('webcams.settings.archive.state.label', { default: 'Archiving' })}
+              placeholder={$_('webcams.settings.archive.state.placeholder', { default: 'Select archiving' })}
+              help={$_('webcams.settings.archive.state.help', {
+                default: 'Select the duration between archived images.',
+              })}
+              invalid={$_('webcams.settings.archive.state.invalid', { default: 'Please make a choice.' })}
+            />
           </div>
           <div class="col-6 col-sm-6 col-md-3 col-lg-3">
             <Select
               name="archive.light"
-              value="{$formData.archive ? $formData.archive.light : ''}"
-              options="{[
+              value={$formData.archive ? $formData.archive.light : ''}
+              options={[
                 { value: 'ignore', text: $_('webcams.settings.archive.light.options.ignore', { default: 'Ignore' }) },
                 { value: 'on', text: $_('webcams.settings.archive.light.options.on', { default: 'When on' }) },
                 { value: 'off', text: $_('webcams.settings.archive.light.options.off', { default: 'When off' }) },
-              ]}"
-              label="{$_('webcams.settings.archive.light.label', { default: 'Archive light state' })}"
-              placeholder="{$_('webcams.settings.archive.light.placeholder', { default: 'Select archive light state' })}"
-              help="{$_('webcams.settings.archive.light.help', { default: 'Light status for taking an archive image.' })}"
-              invalid="{$_('webcams.settings.archive.light.invalid', { default: 'Please make a choice.' })}" />
+              ]}
+              label={$_('webcams.settings.archive.light.label', { default: 'Archive light state' })}
+              placeholder={$_('webcams.settings.archive.light.placeholder', { default: 'Select archive light state' })}
+              help={$_('webcams.settings.archive.light.help', { default: 'Light status for taking an archive image.' })}
+              invalid={$_('webcams.settings.archive.light.invalid', { default: 'Please make a choice.' })}
+            />
           </div>
           <div class="col-6 col-sm-6 col-md-3 col-lg-3">
             <Select
               name="archive.door"
-              value="{$formData.archive ? $formData.archive.door : ''}"
-              options="{[
+              value={$formData.archive ? $formData.archive.door : ''}
+              options={[
                 { value: 'ignore', text: $_('webcams.settings.archive.door.options.ignore', { default: 'Ignore' }) },
                 { value: 'close', text: $_('webcams.settings.archive.door.options.close', { default: 'Close' }) },
                 { value: 'open', text: $_('webcams.settings.archive.door.options.open', { default: 'Open' }) },
-              ]}"
-              label="{$_('webcams.settings.archive.door.label', { default: 'Archive door state' })}"
-              placeholder="{$_('webcams.settings.archive.door.placeholder', { default: 'Select archive door state' })}"
-              help="{$_('webcams.settings.archive.door.help', { default: 'Door status for taking an archive image.' })}"
-              invalid="{$_('webcams.settings.archive.door.invalid', { default: 'Please make a choice.' })}" />
+              ]}
+              label={$_('webcams.settings.archive.door.label', { default: 'Archive door state' })}
+              placeholder={$_('webcams.settings.archive.door.placeholder', { default: 'Select archive door state' })}
+              help={$_('webcams.settings.archive.door.help', { default: 'Door status for taking an archive image.' })}
+              invalid={$_('webcams.settings.archive.door.invalid', { default: 'Please make a choice.' })}
+            />
           </div>
           <div class="col-6 col-sm-6 col-md-3 col-lg-3">
             <Select
               name="flash"
-              value="{$formData.flash}"
-              multiple="{true}"
-              options="{relays}"
-              label="{$_('webcams.settings.archive.flash.label', { default: 'Flash' })}"
-              placeholder="{$_('webcams.settings.archive.flash.placeholder', { default: 'Select optional relay for flash' })}"
-              help="{$_('webcams.settings.archive.flash.help', { default: 'Select a relay that will act as a flasher.' })}"
-              invalid="{$_('webcams.settings.archive.flash.invalid', { default: 'Please make a choice.' })}" />
+              value={$formData.flash}
+              multiple={true}
+              options={relays}
+              label={$_('webcams.settings.archive.flash.label', { default: 'Flash' })}
+              placeholder={$_('webcams.settings.archive.flash.placeholder', {
+                default: 'Select optional relay for flash',
+              })}
+              help={$_('webcams.settings.archive.flash.help', {
+                default: 'Select a relay that will act as a flasher.',
+              })}
+              invalid={$_('webcams.settings.archive.flash.invalid', { default: 'Please make a choice.' })}
+            />
           </div>
         </div>
       </div>
@@ -469,13 +495,14 @@
           <label for="button_address">{$_('webcams.settings.preview.label', { default: 'Preview' })}</label>
           <div class="embed-responsive embed-responsive-16by9">
             <img
-              src="{$formData.raw_image ? `${ApiUrl}/${$formData.raw_image}` : 'img/webcam_offline.png'}"
+              src={$formData.raw_image ? `${ApiUrl}/${$formData.raw_image}` : 'img/webcam_offline.png'}
               class="img-fluid embed-responsive-item"
               style="position:absolute"
-              alt="Offline preview" />
+              alt="Offline preview"
+            />
             {#if $formData.id}
               <div class="embed-responsive-item">
-                <Webcam webcam="{$formData}" edit="{true}" bind:this="{webcamMap}" />
+                <Webcam webcam={$formData} edit={true} bind:this={webcamMap} />
               </div>
             {/if}
           </div>
@@ -487,18 +514,19 @@
         <div class="col-6 col-sm-6 col-md-3 col-lg-3">
           <Select
             name="motion.boxes"
-            value="{$formData.motion ? $formData.motion.boxes : ''}"
+            value={$formData.motion ? $formData.motion.boxes : ''}
             required={motion_settings}
-            options="{[
+            options={[
               { value: '-1', text: $_('webcams.settings.motion.boxes.options.none', { default: 'None' }) },
               { value: 'red', text: $_('webcams.settings.motion.boxes.options.red', { default: 'Red' }) },
               { value: 'green', text: $_('webcams.settings.motion.boxes.options.green', { default: 'Green' }) },
               { value: 'blue', text: $_('webcams.settings.motion.boxes.options.blue', { default: 'Blue' }) },
-            ]}"
-            label="{$_('webcams.settings.motion.boxes.label', { default: 'Show motion boxes' })}"
-            placeholder="{$_('webcams.settings.motion.boxes.placeholder', { default: 'Show the motion boxes' })}"
-            help="{$_('webcams.settings.motion.boxes.help', { default: 'Show motion boxes on the archived images.' })}"
-            invalid="{$_('webcams.settings.motion.boxes.invalid', { default: 'Please make a choice.' })}" />
+            ]}
+            label={$_('webcams.settings.motion.boxes.label', { default: 'Show motion boxes' })}
+            placeholder={$_('webcams.settings.motion.boxes.placeholder', { default: 'Show the motion boxes' })}
+            help={$_('webcams.settings.motion.boxes.help', { default: 'Show motion boxes on the archived images.' })}
+            invalid={$_('webcams.settings.motion.boxes.invalid', { default: 'Please make a choice.' })}
+          />
         </div>
         <div class="col-6 col-sm-6 col-md-3 col-lg-3">
           <Field
@@ -507,13 +535,14 @@
             step="1"
             min="0"
             required={motion_settings}
-            label="{$_('webcams.settings.motion.threshold.label', { default: 'Motion delta threshold' })}"
-            placeholder="{$_('webcams.settings.motion.threshold.placeholder', { default: 'Enter number' })}"
-            help="{$_('webcams.settings.motion.threshold.help', { default: 'Enter the motion threshold.' })}"
-            invalid="{$_('webcams.settings.motion.threshold.invalid', {
+            label={$_('webcams.settings.motion.threshold.label', { default: 'Motion delta threshold' })}
+            placeholder={$_('webcams.settings.motion.threshold.placeholder', { default: 'Enter number' })}
+            help={$_('webcams.settings.motion.threshold.help', { default: 'Enter the motion threshold.' })}
+            invalid={$_('webcams.settings.motion.threshold.invalid', {
               default: 'Please enter a minimum value of {value}.',
               values: { value: 0 },
-            })}" />
+            })}
+          />
         </div>
         <div class="col-6 col-sm-6 col-md-3 col-lg-3">
           <Field
@@ -521,27 +550,34 @@
             name="motion.area"
             min="0"
             required={motion_settings}
-            label="{$_('webcams.settings.motion.area.label', { default: 'Motion minimum area' })}"
-            placeholder="{$_('webcams.settings.motion.area.placeholder', { default: 'Enter number' })}"
-            help="{$_('webcams.settings.motion.area.help', { default: 'Enter an area size.' })}"
-            invalid="{$_('webcams.settings.motion.area.invalid', {
+            label={$_('webcams.settings.motion.area.label', { default: 'Motion minimum area' })}
+            placeholder={$_('webcams.settings.motion.area.placeholder', { default: 'Enter number' })}
+            help={$_('webcams.settings.motion.area.help', { default: 'Enter an area size.' })}
+            invalid={$_('webcams.settings.motion.area.invalid', {
               default: 'Please enter a minimum value of {value}.',
               values: { value: 0 },
-            })}" />
+            })}
+          />
         </div>
         <div class="col-6 col-sm-6 col-md-3 col-lg-3">
           <Select
             name="motion.frame"
-            value="{$formData.motion ? $formData.motion.frame : ''}"
+            value={$formData.motion ? $formData.motion.frame : ''}
             required={motion_settings}
-            options="{[
+            options={[
               { value: 'last', text: $_('webcams.settings.motion.frame.options.last', { default: 'Last frame' }) },
-              { value: 'archived', text: $_('webcams.settings.motion.frame.options.archived', { default: 'Last archived frame' }) },
-            ]}"
-            label="{$_('webcams.settings.motion.frame.label', { default: 'Motion comparison frame' })}"
-            placeholder="{$_('webcams.settings.motion.frame.placeholder', { default: 'Select which frame to comparison' })}"
-            help="{$_('webcams.settings.motion.frame.help', { default: 'Which frame to use for motion detection.' })}"
-            invalid="{$_('webcams.settings.motion.frame.invalid', { default: 'Please make a choice.' })}" />
+              {
+                value: 'archived',
+                text: $_('webcams.settings.motion.frame.options.archived', { default: 'Last archived frame' }),
+              },
+            ]}
+            label={$_('webcams.settings.motion.frame.label', { default: 'Motion comparison frame' })}
+            placeholder={$_('webcams.settings.motion.frame.placeholder', {
+              default: 'Select which frame to comparison',
+            })}
+            help={$_('webcams.settings.motion.frame.help', { default: 'Which frame to use for motion detection.' })}
+            invalid={$_('webcams.settings.motion.frame.invalid', { default: 'Please make a choice.' })}
+          />
         </div>
       </div>
     {/if}
@@ -551,10 +587,11 @@
   </form>
 
   <svelte:fragment slot="actions">
-    <button type="button" class="btn btn-primary" disabled="{loading || $isSubmitting}" on:click="{formSubmit}">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none="{!$isSubmitting}"></span>
+    <button type="button" class="btn btn-primary" disabled={loading || $isSubmitting} on:click={formSubmit}>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none={!$isSubmitting}
+      ></span>
       {$_('modal.general.save', { default: 'Save' })}
     </button>
   </svelte:fragment>
 </ModalForm>
-<WebcamMarkerModal bind:this="{markerModal}" />
+<WebcamMarkerModal bind:this={markerModal} />

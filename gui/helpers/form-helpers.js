@@ -1,4 +1,4 @@
-import { isNumber } from "./number-helpers"
+import { isNumber } from './number-helpers';
 
 // https://stackoverflow.com/a/2553032 (Slightly adjusted to support multiple select field names and values, and number/float values)
 export const formToJSON = (form) => {
@@ -19,15 +19,23 @@ export const formToJSON = (form) => {
           value.push(item.value);
         }
       } else if (element.type === 'checkbox') {
-        value = element.checked && element.value ? (isNumber(element.value) ? parseFloat(element.value) : element.value) : element.checked;
-      } else if (element.type === 'number' || (element.classList.contains('range_slider') && element.value.indexOf(',') === -1)) {
+        value =
+          element.checked && element.value
+            ? isNumber(element.value)
+              ? parseFloat(element.value)
+              : element.value
+            : element.checked;
+      } else if (
+        element.type === 'number' ||
+        (element.classList.contains('range_slider') && element.value.indexOf(',') === -1)
+      ) {
         value = isNumber(element.value) ? parseFloat(element.value) : 0;
-      } else if (['select','text','time','date','hidden'].indexOf(element.type) !== -1) {
-        value = element.value.trim()
+      } else if (['select', 'text', 'time', 'date', 'hidden'].indexOf(element.type) !== -1) {
+        value = element.value.trim();
       } else if (element.value !== '' && (element.value[0] === '+' || element.value[0] === '-')) {
-        value = element.value
+        value = element.value;
       } else if (element.type === 'text') {
-        value = element.value.trim()
+        value = element.value.trim();
       } else {
         value = element.value !== '' && isNumber(element.value) ? parseFloat(element.value) : element.value;
       }

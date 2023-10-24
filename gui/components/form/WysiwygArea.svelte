@@ -84,15 +84,8 @@
   }
 </script>
 
-<FormGroup
-  id="{id}"
-  label="{label}"
-  required="{required}"
-  help="{help}"
-  invalid="{invalid}"
-  horizontal="{horizontal}"
-  class="{$$props.class || ''}">
-  <div class:trumbowyg-dark="{!$isDay}">
-    <textarea id="{id}" name="{name}" placeholder="{placeholder}" readonly="{readonly}" bind:this="{wysiwyg}"></textarea>
+<FormGroup {id} {label} {required} {help} {invalid} {horizontal} class={$$props.class || ''}>
+  <div class:trumbowyg-dark={!$isDay}>
+    <textarea {id} {name} {placeholder} {readonly} bind:this={wysiwyg}></textarea>
   </div>
 </FormGroup>

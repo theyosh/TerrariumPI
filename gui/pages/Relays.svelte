@@ -11,7 +11,6 @@
   import RelayCard from '../user-controls/RelayCard.svelte';
   import EventModel from '../modals/EventFormModal.svelte';
 
-
   let relays = [];
   let showModal;
 
@@ -23,7 +22,7 @@
 
   const loadCalendar = () => {
     location.href = '/#/calendar';
-  }
+  };
 
   const deleteRelayAction = (relay) => {
     confirmModal(
@@ -35,8 +34,11 @@
         try {
           await deleteRelay(relay.id);
           successNotification(
-            $_('relays.delete.ok.message', { default: "The relay ''{name}'' is deleted.", values: { name: relay.name } }),
-            $_('notification.delete.ok.title', { default: 'OK' })
+            $_('relays.delete.ok.message', {
+              default: "The relay ''{name}'' is deleted.",
+              values: { name: relay.name },
+            }),
+            $_('notification.delete.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -45,10 +47,10 @@
               default: "The relay ''{name}'' could not be deleted!\nError: {error}",
               values: { name: relay.name, error: e.message },
             }),
-            $_('notification.delete.error.title', { default: 'ERROR' })
+            $_('notification.delete.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -62,8 +64,11 @@
         try {
           await updateSystemSettings({ exclude_ids: relay.id });
           successNotification(
-            $_('relays.exclude.ok.message', { default: "The relay ''{name}'' is ignored.", values: { name: relay.name } }),
-            $_('notification.exclude.ok.title', { default: 'OK' })
+            $_('relays.exclude.ok.message', {
+              default: "The relay ''{name}'' is ignored.",
+              values: { name: relay.name },
+            }),
+            $_('notification.exclude.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -72,23 +77,24 @@
               default: "The relay ''{name}'' could not be ignored!\nError: {error}",
               values: { name: relay.name, error: e.message },
             }),
-            $_('notification.exclude.error.title', { default: 'ERROR' })
+            $_('notification.exclude.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
   const replaceHardware = (relay) => {
-
-    let eventData = {'mode': 'reminder', 'summary' : 'Replace hardware relay ' + relay.name};
+    let eventData = { mode: 'reminder', summary: 'Replace hardware relay ' + relay.name };
     showModal(eventData);
-
   };
 
   const relayManualMode = (relay) => {
     confirmModal(
-      $_('relays.confirm.manual_mode.message', { default: "Toggle manual mode for relay ''{name}''?", values: { name: relay.name } }),
+      $_('relays.confirm.manual_mode.message', {
+        default: "Toggle manual mode for relay ''{name}''?",
+        values: { name: relay.name },
+      }),
       async () => {
         try {
           await manualRelay(relay.id);
@@ -97,7 +103,7 @@
               default: "The manual mode for relay ''{name}'' is changed.",
               values: { name: relay.name },
             }),
-            $_('notification.manual_mode.ok.title', { default: 'OK' })
+            $_('notification.manual_mode.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -106,10 +112,10 @@
               default: "Error changing manual mode for relay ''{name}''.\nError: {error}",
               values: { name: relay.name, error: e.message },
             }),
-            $_('notification.manual_mode.error.title', { default: 'ERROR' })
+            $_('notification.manual_mode.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -127,7 +133,7 @@
           default: "Toggled relay ''{name}'' to state {value}",
           values: { name: relay.name, value: result },
         }),
-        $_('notification.toggle.ok.title', { default: 'OK' })
+        $_('notification.toggle.ok.title', { default: 'OK' }),
       );
     } catch (e) {
       errorNotification(
@@ -135,7 +141,7 @@
           default: "Error toggling relay ''{name}''.\nError: {error}",
           values: { name: relay.name, error: e.message },
         }),
-        $_('notification.toggle.error.title', { default: 'ERROR' })
+        $_('notification.toggle.error.title', { default: 'ERROR' }),
       );
     }
   };
@@ -167,12 +173,12 @@
       <!-- Sort based on translated names -->
       {#each relays.sort((a, b) => a.name.localeCompare(b.name)) as relay}
         <div class="col-12">
-          <RelayCard relay="{relay}" />
+          <RelayCard {relay} />
         </div>
       {/each}
     {/if}
   </div>
 </div>
 {#if $isAuthenticated}
-  <EventModel bind:show="{showModal}" on:save="{loadCalendar}" />
+  <EventModel bind:show={showModal} on:save={loadCalendar} />
 {/if}

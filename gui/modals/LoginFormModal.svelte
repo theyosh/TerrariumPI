@@ -25,13 +25,13 @@
       if (login) {
         successNotification(
           $_('notification.login.message.ok', { default: 'You are successfully logged in.' }),
-          $_('notification.login.title', { default: 'Login' })
+          $_('notification.login.title', { default: 'Login' }),
         );
         hide();
       } else {
         errorNotification(
           $_('notification.login.message.error', { derfault: 'Sorry, but login is invalid' }),
-          $_('notification.login.title', { default: 'Login' })
+          $_('notification.login.title', { default: 'Login' }),
         );
         login_error = true;
       }
@@ -66,32 +66,42 @@
   });
 </script>
 
-<Modal center bind:show="{wrapper_show}" bind:hide="{wrapper_hide}">
+<Modal center bind:show={wrapper_show} bind:hide={wrapper_hide}>
   <svelte:fragment slot="header">
     <i class="fas fa-key mr-2"></i>
     {$_('modal.login.title', { default: 'Login' })}
     <Helper />
   </svelte:fragment>
-  <form id="loginForm" class="form-horizontal needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <h3 class="text-danger text-center mb-3" class:d-none="{!login_error}">{$_('modal.login.error', { default: 'Invalid login' })}</h3>
+  <form
+    id="loginForm"
+    class="form-horizontal needs-validation"
+    class:was-validated={validated}
+    use:form
+    bind:this={editForm}
+  >
+    <h3 class="text-danger text-center mb-3" class:d-none={!login_error}>
+      {$_('modal.login.error', { default: 'Invalid login' })}
+    </h3>
     <Field
       type="text"
       name="username"
       class="col-8"
-      required="{true}"
-      horizontal="{true}"
-      label="{$_('modal.login.form.username.label', { default: 'Username' })}"
-      help="{$_('modal.login.form.username.help', { default: 'Enter the username' })}"
-      invalid="{$_('modal.login.form.username.invalid', { default: 'Username cannot be empty' })}" />
+      required={true}
+      horizontal={true}
+      label={$_('modal.login.form.username.label', { default: 'Username' })}
+      help={$_('modal.login.form.username.help', { default: 'Enter the username' })}
+      invalid={$_('modal.login.form.username.invalid', { default: 'Username cannot be empty' })}
+    />
     <Field
       type="password"
       name="password"
       class="col-8"
-      required="{true}"
-      horizontal="{true}"
-      label="{$_('modal.login.form.password.label', { default: 'Password' })}"
-      help="{$_('modal.login.form.password.help', { default: 'Enter the password' })}"
-      invalid="{$_('modal.login.form.password.invalid', { default: 'Password cannot be empty' })}" />
+      required={true}
+      horizontal={true}
+      label={$_('modal.login.form.password.label', { default: 'Password' })}
+      help={$_('modal.login.form.password.help', { default: 'Enter the password' })}
+      invalid={$_('modal.login.form.password.invalid', { default: 'Password cannot be empty' })}
+    />
     <!-- We need this nasty hack to make submit with enter key to work -->
     <button type="submit" style="display:none"> </button>
   </form>
@@ -100,8 +110,9 @@
       <ModalCloseButton>
         {$_('modal.general.close', { default: 'Close' })}
       </ModalCloseButton>
-      <button type="button" class="btn btn-primary" disabled="{$isSubmitting}" on:click="{formSubmit}">
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none="{!$isSubmitting}"></span>
+      <button type="button" class="btn btn-primary" disabled={$isSubmitting} on:click={formSubmit}>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none={!$isSubmitting}
+        ></span>
         {$_('modal.login.form.submit', { default: 'Login' })}
       </button>
     </div>

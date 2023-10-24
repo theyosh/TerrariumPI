@@ -26,7 +26,10 @@
   let editForm;
 
   const formatter = (value) => {
-    return $_('audio.playlists.settings.volume.formatter', { default: "Volume level {value}", values: { value: value } });
+    return $_('audio.playlists.settings.volume.formatter', {
+      default: 'Volume level {value}',
+      values: { value: value },
+    });
   };
 
   const dispatch = createEventDispatcher();
@@ -51,8 +54,11 @@
         await updatePlaylist(values, (data) => (values = data));
         // Notifify OK!
         successNotification(
-          $_('audio.playlists.settings.save.ok.message', { default: "Playlist ''{name}'' is updated", values: { name: values.name } }),
-          $_('notification.form.save.ok.title', { default: 'Save OK' })
+          $_('audio.playlists.settings.save.ok.message', {
+            default: "Playlist ''{name}'' is updated",
+            values: { name: values.name },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
         );
 
         // Done, close window
@@ -95,7 +101,7 @@
         (data) =>
           (songs = data.map((item) => {
             return { value: item.id, text: item.name + '(' + item.filename.split('/').pop() + ')' };
-          }))
+          })),
       );
 
       // If ID is given, load existing data
@@ -135,61 +141,70 @@
   });
 </script>
 
-<ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" loading="{loading}">
+<ModalForm bind:show={wrapper_show} bind:hide={wrapper_hide} {loading}>
   <svelte:fragment slot="header">
     <i class="fas fa-play mr-2"></i>
     {$_('audio.playlists.settings.title', { default: 'Playlist settings' })}
     <Helper moreInfo="https://theyosh.github.io/TerrariumPI/setup/#playlists" />
   </svelte:fragment>
 
-  <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
+  <form class="needs-validation" class:was-validated={validated} use:form bind:this={editForm}>
+    <input type="hidden" name="id" disabled={$formData.id && $formData.id !== '' ? null : true} />
 
     <div class="row">
       <div class="col-10 col-sm-10 col-md-8 col-lg-4">
         <Field
           type="text"
           name="name"
-          required="{true}"
-          label="{$_('audio.playlists.settings.name.label', { default: 'Name' })}"
-          placeholder="{$_('audio.playlists.settings.name.placeholder', { default: 'Enter a name' })}"
-          help="{$_('audio.playlists.settings.name.help', { default: 'Enter an easy to remember name.' })}"
-          invalid="{$_('audio.playlists.settings.name.invalid', { default: 'The entered name is not valid. It cannot be empty.' })}" />
+          required={true}
+          label={$_('audio.playlists.settings.name.label', { default: 'Name' })}
+          placeholder={$_('audio.playlists.settings.name.placeholder', { default: 'Enter a name' })}
+          help={$_('audio.playlists.settings.name.help', { default: 'Enter an easy to remember name.' })}
+          invalid={$_('audio.playlists.settings.name.invalid', {
+            default: 'The entered name is not valid. It cannot be empty.',
+          })}
+        />
       </div>
       <div class="col-10 col-sm-10 col-md-8 col-lg-4">
         <Slider
           name="volume"
-          required="{true}"
-          value="{$formData.volume && $formData.volume !== '' ? $formData.volume : 0}"
-          formatter={formatter}
-          label="{$_('audio.playlists.settings.volume.label', { default: 'Audio volume' })}"
-          help="{$_('audio.playlists.settings.volume.help', { default: 'Select the volume for this playlist.' })}" />
+          required={true}
+          value={$formData.volume && $formData.volume !== '' ? $formData.volume : 0}
+          {formatter}
+          label={$_('audio.playlists.settings.volume.label', { default: 'Audio volume' })}
+          help={$_('audio.playlists.settings.volume.help', { default: 'Select the volume for this playlist.' })}
+        />
       </div>
       <div class="col-10 col-sm-10 col-md-8 col-lg-2">
         <Switch
           name="shuffle"
-          value="{$formData.shuffle}"
-          label="{$_('audio.playlists.settings.shuffle.label', { default: 'Shuffle' })}"
-          help="{$_('audio.playlists.settings.shuffle.help', { default: 'Shuffle this playlist every time it is played.' })}" />
+          value={$formData.shuffle}
+          label={$_('audio.playlists.settings.shuffle.label', { default: 'Shuffle' })}
+          help={$_('audio.playlists.settings.shuffle.help', {
+            default: 'Shuffle this playlist every time it is played.',
+          })}
+        />
       </div>
       <div class="col-10 col-sm-10 col-md-8 col-lg-2">
         <Switch
           name="repeat"
-          value="{$formData.repeat}"
-          label="{$_('audio.playlists.settings.repeat.label', { default: 'Repeat' })}"
-          help="{$_('audio.playlists.settings.repeat.help', { default: 'Play this playlist in repeat mode.' })}" />
+          value={$formData.repeat}
+          label={$_('audio.playlists.settings.repeat.label', { default: 'Repeat' })}
+          help={$_('audio.playlists.settings.repeat.help', { default: 'Play this playlist in repeat mode.' })}
+        />
       </div>
       <div class="col-12 col-sm-12 col-md-12 col-lg-12">
         <Select
           name="files"
-          value="{$formData.files}"
-          required="{true}"
-          multiple="{true}"
-          options="{songs}"
-          label="{$_('audio.playlists.settings.files.label', { default: 'Audio files' })}"
-          placeholder="{$_('audio.playlists.settings.files.placeholder', { default: 'Select audio files' })}"
-          help="{$_('audio.playlists.settings.files.help', { default: 'Select all audio files for this playlist.' })}"
-          invalid="{$_('audio.playlists.settings.files.invalid', { default: 'Select at least 1 audio file.' })}" />
+          value={$formData.files}
+          required={true}
+          multiple={true}
+          options={songs}
+          label={$_('audio.playlists.settings.files.label', { default: 'Audio files' })}
+          placeholder={$_('audio.playlists.settings.files.placeholder', { default: 'Select audio files' })}
+          help={$_('audio.playlists.settings.files.help', { default: 'Select all audio files for this playlist.' })}
+          invalid={$_('audio.playlists.settings.files.invalid', { default: 'Select at least 1 audio file.' })}
+        />
       </div>
     </div>
     <!-- We need this nasty hack to make submit with enter key to work -->
@@ -197,8 +212,9 @@
   </form>
 
   <svelte:fragment slot="actions">
-    <button type="button" class="btn btn-primary" disabled="{loading || $isSubmitting}" on:click="{formSubmit}">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none="{!$isSubmitting}"></span>
+    <button type="button" class="btn btn-primary" disabled={loading || $isSubmitting} on:click={formSubmit}>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none={!$isSubmitting}
+      ></span>
       {$_('modal.general.save', { default: 'Save' })}
     </button>
   </svelte:fragment>

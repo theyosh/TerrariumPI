@@ -39,40 +39,35 @@
   }
 </script>
 
-<FormGroup
-  id="{id}"
-  label="{label}"
-  required="{required}"
-  help="{help}"
-  invalid="{invalid}"
-  horizontal="{horizontal}"
-  class="{$$props.class || ''}">
+<FormGroup {id} {label} {required} {help} {invalid} {horizontal} class={$$props.class || ''}>
   <div class="input-group">
     <div class="custom-file">
-      <input type="hidden" name="{name}" />
-      <input type="checkbox" name="{`delete_${name}`}" value="true" checked="{deleteFile}" class="d-none" />
+      <input type="hidden" {name} />
+      <input type="checkbox" name={`delete_${name}`} value="true" checked={deleteFile} class="d-none" />
       <input
         type="file"
         name="file_{name}"
-        accept="{accept}"
-        id="{id}"
-        required="{required}"
-        readonly="{readonly}"
+        {accept}
+        {id}
+        {required}
+        {readonly}
         class="custom-file-input"
-        on:change="{() => {
+        on:change={() => {
           deleteFile = false;
-        }}" />
-      <label class="custom-file-label" for="{id}" bind:this="{filename_placeholder}">{value}</label>
+        }}
+      />
+      <label class="custom-file-label" for={id} bind:this={filename_placeholder}>{value}</label>
     </div>
     <div class="input-group-append">
       <span class="input-group-text">
         <button
           type="button"
           class="btn btn-sm"
-          on:click="{() => {
+          on:click={() => {
             deleteFile = !deleteFile;
-          }}">
-          <i class="fas fa-trash-alt" class:text-danger="{deleteFile}"></i>
+          }}
+        >
+          <i class="fas fa-trash-alt" class:text-danger={deleteFile}></i>
         </button>
       </span>
     </div>

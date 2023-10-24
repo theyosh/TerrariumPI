@@ -87,8 +87,11 @@
 
         // Notifify OK!
         successNotification(
-          $_('messages.settings.save.ok.message', { default: "Message ''{name}'' is updated", values: { name: values.name } }),
-          $_('notification.form.save.ok.title', { default: 'Save OK' })
+          $_('messages.settings.save.ok.message', {
+            default: "Message ''{name}'' is updated",
+            values: { name: values.name },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
         );
 
         // Done, close window
@@ -107,7 +110,9 @@
         validated = false;
       }
     } else {
-      let error_message = $_('messages.settings.save.error.required_fields', { default: 'Not all required fields are entered correctly.' });
+      let error_message = $_('messages.settings.save.error.required_fields', {
+        default: 'Not all required fields are entered correctly.',
+      });
       error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
       errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
     }
@@ -129,7 +134,7 @@
         (data) =>
           (message_types = data.map((item) => {
             return { value: item.type, text: item.name, placeholder: item.placeholders };
-          }))
+          })),
       );
 
       // Load all the services
@@ -178,89 +183,104 @@
   $: updatePlaceholders($formData.type);
 </script>
 
-<ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" loading="{loading}">
+<ModalForm bind:show={wrapper_show} bind:hide={wrapper_hide} {loading}>
   <svelte:fragment slot="header">
     <i class="fas fa-bell mr-2"></i>
     {$_('messages.settings.title', { default: 'Message settings' })}
     <Helper />
   </svelte:fragment>
 
-  <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
-    <input type="hidden" name="services" value="{enabled_services.join(',')}" />
+  <form class="needs-validation" class:was-validated={validated} use:form bind:this={editForm}>
+    <input type="hidden" name="id" disabled={$formData.id && $formData.id !== '' ? null : true} />
+    <input type="hidden" name="services" value={enabled_services.join(',')} />
     <div class="row">
       <div class="col">
         <Select
           name="type"
-          value="{$formData.type}"
-          readonly="{$formData.id && $formData.id !== ''}"
-          required="{true}"
-          options="{message_types}"
-          on:change="{(value) => ($formData.type = value.detail)}"
-          label="{$_('messages.settings.type.label', { default: 'Message type' })}"
-          placeholder="{$_('messages.settings.type.placeholder', { default: 'Select type' })}"
-          help="{$_('messages.settings.type.help', { default: 'Select the notification message type.' })}"
-          invalid="{$_('messages.settings.type.invalid', { default: 'Please make a choice.' })}" />
+          value={$formData.type}
+          readonly={$formData.id && $formData.id !== ''}
+          required={true}
+          options={message_types}
+          on:change={(value) => ($formData.type = value.detail)}
+          label={$_('messages.settings.type.label', { default: 'Message type' })}
+          placeholder={$_('messages.settings.type.placeholder', { default: 'Select type' })}
+          help={$_('messages.settings.type.help', { default: 'Select the notification message type.' })}
+          invalid={$_('messages.settings.type.invalid', { default: 'Please make a choice.' })}
+        />
       </div>
       <div class="col">
         <Field
           type="text"
           name="title"
-          required="{true}"
-          label="{$_('messages.settings.subject.label', { default: 'Subject' })}"
-          placeholder="{$_('messages.settings.subject.placeholder', { default: 'Enter a subject' })}"
-          help="{$_('messages.settings.subject.help', { default: 'Enter a short subject. You can use placeholder values here.' })}"
-          invalid="{$_('messages.settings.subject.invalid', { default: 'The subject cannot be empty.' })}" />
+          required={true}
+          label={$_('messages.settings.subject.label', { default: 'Subject' })}
+          placeholder={$_('messages.settings.subject.placeholder', { default: 'Enter a subject' })}
+          help={$_('messages.settings.subject.help', {
+            default: 'Enter a short subject. You can use placeholder values here.',
+          })}
+          invalid={$_('messages.settings.subject.invalid', { default: 'The subject cannot be empty.' })}
+        />
       </div>
       <div class="col-2">
         <Field
           type="number"
           name="rate_limit"
           value="0"
-          required="{true}"
+          required={true}
           min="0"
           step="1"
-          label="{$_('messages.settings.rate_limit.label', { default: 'Rate limit' })}"
-          placeholder="{$_('messages.settings.rate_limit.placeholder', { default: 'Messages per minute' })}"
-          help="{$_('messages.settings.rate_limit.help', {
+          label={$_('messages.settings.rate_limit.label', { default: 'Rate limit' })}
+          placeholder={$_('messages.settings.rate_limit.placeholder', { default: 'Messages per minute' })}
+          help={$_('messages.settings.rate_limit.help', {
             default: 'Maximum number of messages per minute for this message. Use 0 for unlimited.',
-          })}"
-          invalid="{$_('messages.settings.rate_limit.invalid', {
+          })}
+          invalid={$_('messages.settings.rate_limit.invalid', {
             default: 'The entered value is not valid. Enter a valid number higher than {min}.',
             values: { min: 0 },
-          })}" />
+          })}
+        />
       </div>
       <div class="col-1">
         <Switch
           name="enabled"
-          value="{$formData.enabled || true}"
-          label="{$_('messages.settings.enabled.label', { default: 'Enabled' })}"
-          help="{$_('messages.settings.enabled.help', { default: 'Enable/disable this notification message.' })}" />
+          value={$formData.enabled || true}
+          label={$_('messages.settings.enabled.label', { default: 'Enabled' })}
+          help={$_('messages.settings.enabled.help', { default: 'Enable/disable this notification message.' })}
+        />
       </div>
     </div>
     <div class="row">
       <div class="col-7">
         <TextArea
           name="message"
-          value="{$formData.message || null}"
+          value={$formData.message || null}
           rows="10"
-          label="{$_('messages.settings.message.label', { default: 'Message' })}"
-          placeholder="{$_('messages.settings.message.placeholder', { default: 'Enter a message' })}"
-          help="{$_('messages.settings.message.help', { default: 'Enter a message. You can use placeholder values here.' })}" />
+          label={$_('messages.settings.message.label', { default: 'Message' })}
+          placeholder={$_('messages.settings.message.placeholder', { default: 'Enter a message' })}
+          help={$_('messages.settings.message.help', {
+            default: 'Enter a message. You can use placeholder values here.',
+          })}
+        />
         <FormGroup
           id="available_services"
-          label="{$_('messages.settings.available_services.label', { default: 'Services' })}"
-          help="{$_('messages.settings.available_services.help', { default: 'Select the service to use for this notification message.' })}">
+          label={$_('messages.settings.available_services.label', { default: 'Services' })}
+          help={$_('messages.settings.available_services.help', {
+            default: 'Select the service to use for this notification message.',
+          })}
+        >
           {#each services as service, counter}
             <button
               type="button"
-              id="{service.id}"
-              title="{service.name}"
+              id={service.id}
+              title={service.name}
               class="btn btn-app"
-              class:ml-0="{counter === 0}"
-              disabled="{!service.enabled}"
-              on:click="{() => toggleService(service.id)}">
-              <i class="{`${template_sensor_type_icon(service.type)}`}" class:text-warning="{enabled_services.indexOf(service.id) !== -1}"
+              class:ml-0={counter === 0}
+              disabled={!service.enabled}
+              on:click={() => toggleService(service.id)}
+            >
+              <i
+                class={`${template_sensor_type_icon(service.type)}`}
+                class:text-warning={enabled_services.indexOf(service.id) !== -1}
               ></i>
             </button>
           {/each}
@@ -269,11 +289,13 @@
       <div class="col">
         <FormGroup
           id="placeholders"
-          label="{$_('messages.settings.placeholders.label', { default: 'Place holders' })}"
-          help="{$_('messages.settings.placeholders.help', { default: 'List of available placeholders.' })}">
+          label={$_('messages.settings.placeholders.label', { default: 'Place holders' })}
+          help={$_('messages.settings.placeholders.help', { default: 'List of available placeholders.' })}
+        >
           <small class="text-muted mb-2 d-block">
             {@html $_('messages.settings.placeholders.format', {
-              default: 'Use {placeholder} format to use a placeholder below in your message.{new_line}Number values can be rounded using the {link_start}`.:2f` format{link_end}',
+              default:
+                'Use {placeholder} format to use a placeholder below in your message.{new_line}Number values can be rounded using the {link_start}`.:2f` format{link_end}',
               values: {
                 placeholder: '<strong>${placeholder_name}</strong>',
                 new_line: '<br />',
@@ -295,8 +317,9 @@
   </form>
 
   <svelte:fragment slot="actions">
-    <button type="button" class="btn btn-primary" disabled="{loading || $isSubmitting}" on:click="{formSubmit}">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none="{!$isSubmitting}"></span>
+    <button type="button" class="btn btn-primary" disabled={loading || $isSubmitting} on:click={formSubmit}>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none={!$isSubmitting}
+      ></span>
       {$_('modal.general.save', { default: 'Save' })}
     </button>
   </svelte:fragment>

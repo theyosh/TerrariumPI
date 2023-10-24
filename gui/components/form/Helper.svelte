@@ -19,17 +19,20 @@
   <button
     type="button"
     class="btn btn-rounded text-secondary"
-    title="{$_('modal.form.toggle.info', { default: 'Show/hide help information' })}"
-    on:click|preventDefault="{toggleHelp}">
-    <i class="far fa-question-circle" class:font-weight-bold="{buttonBold}" aria-hidden="true"></i>
+    title={$_('modal.form.toggle.info', { default: 'Show/hide help information' })}
+    on:click|preventDefault={toggleHelp}
+  >
+    <i class="far fa-question-circle" class:font-weight-bold={buttonBold} aria-hidden="true"></i>
   </button>
   {#if moreInfo && buttonBold}
     <small class="text-muted">
-      <a href="{moreInfo}" target="_blank" rel="noopener noreferrer">{$_('about.online.help', { default: 'More help online' })}</a>
+      <a href={moreInfo} target="_blank" rel="noopener noreferrer"
+        >{$_('about.online.help', { default: 'More help online' })}</a
+      >
     </small>
   {/if}
 {:else}
-  <a href="{'#'}" on:click|preventDefault="{toggleHelp}">
+  <a href={'#'} on:click|preventDefault={toggleHelp}>
     <i class="fas fa-question-circle"></i>
     {#if showMessage}
       {$_('modal.form.toggle.info', { default: 'Show/hide help information' })}

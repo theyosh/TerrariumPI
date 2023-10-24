@@ -27,8 +27,11 @@
         try {
           await deleteEnclosure(enclosure.id);
           successNotification(
-            $_('enclosures.delete.ok.message', { default: "The enclosure ''{name}'' is deleted.", values: { name: enclosure.name } }),
-            $_('notification.delete.ok.title', { default: 'OK' })
+            $_('enclosures.delete.ok.message', {
+              default: "The enclosure ''{name}'' is deleted.",
+              values: { name: enclosure.name },
+            }),
+            $_('notification.delete.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -37,22 +40,25 @@
               default: "The enclosure ''{name}'' could not be deleted!\nError: {error}",
               values: { name: enclosure.name, error: e.message },
             }),
-            $_('notification.delete.error.title', { default: 'ERROR' })
+            $_('notification.delete.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
   const deleteAreaAction = (area) => {
     confirmModal(
-      $_('areas.delete.confirm.message', { default: "Are you sure you want to delete the area ''{name}''?", values: { name: area.name } }),
+      $_('areas.delete.confirm.message', {
+        default: "Are you sure you want to delete the area ''{name}''?",
+        values: { name: area.name },
+      }),
       async () => {
         try {
           await deleteArea(area.id);
           successNotification(
             $_('areas.delete.ok.message', { default: "The area ''{name}'' is deleted.", values: { name: area.name } }),
-            $_('notification.delete.ok.title', { default: 'OK' })
+            $_('notification.delete.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -61,10 +67,10 @@
               default: "The area ''{name}'' could not be deleted!\nError: {error}",
               values: { name: area.name, error: e.message },
             }),
-            $_('notification.delete.error.title', { default: 'ERROR' })
+            $_('notification.delete.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -101,7 +107,7 @@
       <!-- Sort based on enclosure names natural sorting -->
       {#each enclosures.sort((a, b) => a.name.localeCompare(b.name)) as enclosure}
         <div class="col-12">
-          <EnclosureCard enclosure="{enclosure}" />
+          <EnclosureCard {enclosure} />
         </div>
       {/each}
     {/if}

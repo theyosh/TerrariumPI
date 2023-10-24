@@ -81,8 +81,11 @@
         await updateCalendarEvent(values, (data) => (values = data));
         // Notifify OK!
         successNotification(
-          $_('calendar.event.settings.save.ok.message', { default: "Event ''{name}'' is updated", values: { name: values.summary } }),
-          $_('notification.form.save.ok.title', { default: 'Save OK' })
+          $_('calendar.event.settings.save.ok.message', {
+            default: "Event ''{name}'' is updated",
+            values: { name: values.summary },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
         );
 
         // Done, close window
@@ -136,9 +139,9 @@
     })();
 
     if (eventData.mode) {
-        mode = eventData.mode;
+      mode = eventData.mode;
     } else {
-        mode = 'reminder';
+      mode = 'reminder';
     }
 
     repeat = false;
@@ -149,11 +152,11 @@
     let now = Date.now();
     $formData = {
       dtstart: eventData.start ? Date.parse(eventData.start) : now,
-      dtend:   eventData.end   ? Date.parse(eventData.end)   : now + 86400000,
+      dtend: eventData.end ? Date.parse(eventData.end) : now + 86400000,
       description: '',
       freq: '_',
       repeatend: 2,
-      ...eventData
+      ...eventData,
     };
     setFields($formData);
 
@@ -176,41 +179,44 @@
   });
 </script>
 
-<ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" loading="{loading}">
+<ModalForm bind:show={wrapper_show} bind:hide={wrapper_hide} {loading}>
   <svelte:fragment slot="header">
     <i class="fas fa-calendar-alt mr-2"></i>
     {$_('calendar.event.settings.title', { default: 'Event' })}
     <Helper />
   </svelte:fragment>
 
-  <form class="needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="id" disabled="{$formData.id && $formData.id !== '' ? null : true}" />
-    <input type="hidden" name="mode" value="{mode}"/>
-    <input type="hidden" name="repeatend" value="2" disabled={'reminder' !== mode}/>
+  <form class="needs-validation" class:was-validated={validated} use:form bind:this={editForm}>
+    <input type="hidden" name="id" disabled={$formData.id && $formData.id !== '' ? null : true} />
+    <input type="hidden" name="mode" value={mode} />
+    <input type="hidden" name="repeatend" value="2" disabled={'reminder' !== mode} />
 
     <div class="row">
       <div class="col-12 col-sm-12 col-md-9 col-lg-9">
         <Field
           type="text"
           name="summary"
-          required="{true}"
-          label="{$_('calendar.event.settings.summary.label', { default: 'Enter a name' })}"
-          help="{$_('calendar.event.settings.summary.help', { default: 'Enter a name.' })}"
-          invalid="{$_('calendar.event.settings.summary.invalid', { default: 'The name cannot be empty.' })}" />
+          required={true}
+          label={$_('calendar.event.settings.summary.label', { default: 'Enter a name' })}
+          help={$_('calendar.event.settings.summary.help', { default: 'Enter a name.' })}
+          invalid={$_('calendar.event.settings.summary.invalid', { default: 'The name cannot be empty.' })}
+        />
         <WysiwygArea
           name="description"
-          value="{$formData.description}"
-          required="{false}"
-          label="{$_('calendar.event.settings.description.label', { default: 'Enter a description' })}"
-          help="{$_('calendar.event.settings.description.help', { default: 'Enter some information about this event.' })}" />
+          value={$formData.description}
+          required={false}
+          label={$_('calendar.event.settings.description.label', { default: 'Enter a description' })}
+          help={$_('calendar.event.settings.description.help', { default: 'Enter some information about this event.' })}
+        />
       </div>
       <div class="col-12 col-sm-12 col-md-3 col-lg-3">
         <FormGroup
           id="dtstart"
-          required="{true}"
-          horizontal="{false}"
-          label="{$_('calendar.event.settings.date.label', { default: 'Date' })}"
-          help="{$_('calendar.event.settings.date.help', { default: 'The date or period for this event.' })}">
+          required={true}
+          horizontal={false}
+          label={$_('calendar.event.settings.date.label', { default: 'Date' })}
+          help={$_('calendar.event.settings.date.help', { default: 'The date or period for this event.' })}
+        >
           <input type="hidden" id="dtstart" name="dtstart" />
           <input type="hidden" id="dtend" name="dtend" />
           <p class="p-1 pt-2 mb-0">
@@ -223,23 +229,27 @@
 
         <Select
           name="freq"
-          value="{$formData.freq}"
-          options="{event_periods}"
-          on:change="{(value) => {
+          value={$formData.freq}
+          options={event_periods}
+          on:change={(value) => {
             repeat = value.detail !== '_';
-          }}"
-          label="{mode === 'repeat'
+          }}
+          label={mode === 'repeat'
             ? $_('calendar.event.settings.repeat.label', { default: 'Repeat every' })
-            : $_('calendar.event.settings.remind.label', { default: 'Remind in' })}"
-          help="{$_('calendar.event.settings.repeat.help', { default: 'Select a repeat period and an amount.' })}"
-          invalid="{$_('calendar.event.settings.repeat.invalid', { default: 'Please enter a valid repeat period amount.' })}">
+            : $_('calendar.event.settings.remind.label', { default: 'Remind in' })}
+          help={$_('calendar.event.settings.repeat.help', { default: 'Select a repeat period and an amount.' })}
+          invalid={$_('calendar.event.settings.repeat.invalid', {
+            default: 'Please enter a valid repeat period amount.',
+          })}
+        >
           <input
             type="number"
             class="form-control mt-2"
             name="interval"
-            required="{repeat}"
-            disabled="{!repeat}"
-            placeholder="{$_('calendar.event.settings.repeat_amount.label', { default: 'Select amount' })}" />
+            required={repeat}
+            disabled={!repeat}
+            placeholder={$_('calendar.event.settings.repeat_amount.label', { default: 'Select amount' })}
+          />
         </Select>
       </div>
     </div>
@@ -248,8 +258,9 @@
   </form>
 
   <svelte:fragment slot="actions">
-    <button type="button" class="btn btn-primary" disabled="{loading || $isSubmitting}" on:click="{formSubmit}">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none="{!$isSubmitting}"></span>
+    <button type="button" class="btn btn-primary" disabled={loading || $isSubmitting} on:click={formSubmit}>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none={!$isSubmitting}
+      ></span>
       {$_('modal.general.save', { default: 'Save' })}
     </button>
   </svelte:fragment>

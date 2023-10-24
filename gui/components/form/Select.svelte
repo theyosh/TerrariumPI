@@ -81,7 +81,7 @@
         }),
         old_options.map((item) => {
           return item.value + item.disabled;
-        })
+        }),
       ) ||
         force)
     ) {
@@ -167,23 +167,8 @@
   $: readonly = readonly === true ? true : null;
 </script>
 
-<FormGroup
-  id="{id}"
-  label="{label}"
-  required="{required}"
-  help="{help}"
-  invalid="{invalid}"
-  horizontal="{horizontal}"
-  class="{$$props.class || ''}">
-  <select
-    id="{id}"
-    name="{name}"
-    required="{required}"
-    multiple="{multiple}"
-    readonly="{readonly}"
-    disabled="{disabled}"
-    class="custom-select select2"
-    bind:this="{select}">
+<FormGroup {id} {label} {required} {help} {invalid} {horizontal} class={$$props.class || ''}>
+  <select {id} {name} {required} {multiple} {readonly} {disabled} class="custom-select select2" bind:this={select}>
     <!-- generate the options with javascript else it cannot dynamically update -->
   </select>
   <slot />

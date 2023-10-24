@@ -4,7 +4,7 @@
 </script>
 
 <li class="nav-item">
-  <a href="{href}" class="nav-link">
+  <a {href} class="nav-link">
     {#if icon}
       <i class="nav-icon {icon}"></i>
     {/if}

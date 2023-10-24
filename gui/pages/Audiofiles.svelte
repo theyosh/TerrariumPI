@@ -56,8 +56,11 @@
         try {
           await deleteAudioFile(audiofile.id);
           successNotification(
-            $_('audio.files.delete.ok.message', { default: "The audio file ''{name}'' is deleted.", values: { name: audiofile.name } }),
-            $_('notification.delete.ok.title')
+            $_('audio.files.delete.ok.message', {
+              default: "The audio file ''{name}'' is deleted.",
+              values: { name: audiofile.name },
+            }),
+            $_('notification.delete.ok.title'),
           );
           loadData();
         } catch (e) {
@@ -66,10 +69,10 @@
               default: "The audio file ''{name}'' could not be deleted!\nError: {error}",
               values: { name: audiofile.name, error: e.message },
             }),
-            $_('notification.delete.error.title')
+            $_('notification.delete.error.title'),
           );
         }
-      }
+      },
     );
   };
 
@@ -110,7 +113,7 @@
               default: 'Uploaded {amount, plural, =1 {# audio file} other {# audio files}}',
               values: { amount: files.detail.length },
             }),
-            $_('notification.form.save.ok.title', { default: 'Save OK' })
+            $_('notification.form.save.ok.title', { default: 'Save OK' }),
           );
           percent_completed = 0;
           loadData();
@@ -141,7 +144,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <Card loading="{loading}" noTools="{true}">
+      <Card {loading} noTools={true}>
         <table id="audio_files" class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
@@ -156,18 +159,22 @@
             {#each audiofiles as audiofile}
               <tr>
                 <td>{audiofile.name}</td>
-                <td data-order="{audiofile.duration}"
-                  >{dayjs.duration(audiofile.duration * 1000).format(audiofile.duration > 3600 ? 'H:mm:ss' : 'm:ss')}</td>
+                <td data-order={audiofile.duration}
+                  >{dayjs
+                    .duration(audiofile.duration * 1000)
+                    .format(audiofile.duration > 3600 ? 'H:mm:ss' : 'm:ss')}</td
+                >
                 <td>{audiofile.filename.split('/').pop()}</td>
-                <td data-order="{audiofile.filesize}">{formatBytes(audiofile.filesize)}</td>
+                <td data-order={audiofile.filesize}>{formatBytes(audiofile.filesize)}</td>
                 <td class="d-flex justify-content-around">
                   <Player src="{ApiUrl}/media/{audiofile.filename.split('/').pop()}" />
                   {#if $isAuthenticated}
                     <button
                       class="btn btn-sm"
-                      class:btn-light="{$isDay}"
-                      class:btn-dark="{!$isDay}"
-                      on:click="{() => deleteAudiofileAction(audiofile)}">
+                      class:btn-light={$isDay}
+                      class:btn-dark={!$isDay}
+                      on:click={() => deleteAudiofileAction(audiofile)}
+                    >
                       <i class="fas fa-trash-alt text-danger"></i>
                     </button>
                   {/if}
@@ -185,30 +192,34 @@
             </tr>
           </tfoot>
         </table>
-        <div class:disabled="{!$isAuthenticated}">
+        <div class:disabled={!$isAuthenticated}>
           <div class="input-group mt-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="upload_new_file_label"
-                >{$_('audio.files.settings.audiofiles.label', { default: 'Upload new audio file' })}</span>
+                >{$_('audio.files.settings.audiofiles.label', { default: 'Upload new audio file' })}</span
+              >
             </div>
             <FileInput
-              on:input="{uploadFiles}"
-              bind:this="{fileUploader}"
-              readonly="{!$isAuthenticated}"
-              placeholder="{$_('audio.files.settings.audiofiles.placeholder', { default: 'Upload new audio file' })}"
+              on:input={uploadFiles}
+              bind:this={fileUploader}
+              readonly={!$isAuthenticated}
+              placeholder={$_('audio.files.settings.audiofiles.placeholder', { default: 'Upload new audio file' })}
               name="audiofiles"
               id="audiofiles"
               pattern="/.*\.(?:aac|mp3|ogg|wav|m4a|flac)$/i"
-              multiple>{$_('audio.files.settings.audiofiles.placeholder', { default: 'Upload new audio file' })}</FileInput>
+              multiple
+              >{$_('audio.files.settings.audiofiles.placeholder', { default: 'Upload new audio file' })}</FileInput
+            >
           </div>
           <div class="progress progress-xs active mt-2 upload_progress">
             <div
               class="progress-bar bg-success progress-bar-striped"
               role="progressbar"
-              aria-valuenow="{percent_completed}"
+              aria-valuenow={percent_completed}
               aria-valuemin="0"
               aria-valuemax="100"
-              style="width: {percent_completed}%">
+              style="width: {percent_completed}%"
+            >
               <span class="sr-only"></span>
             </div>
           </div>

@@ -14,7 +14,7 @@ export const getCustomConfig = (extra) => {
     ...custom,
     ...window.terrariumPI,
     ...getConfig(),
-    ...extra
+    ...extra,
   };
   setConfig(settings);
 

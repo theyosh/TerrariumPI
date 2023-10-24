@@ -18,13 +18,6 @@
   export let horizontal = null;
 </script>
 
-<FormGroup
-  id="{id}"
-  label="{label}"
-  required="{required}"
-  help="{help}"
-  invalid="{invalid}"
-  horizontal="{horizontal}"
-  class="{$$props.class || ''}">
-  <textarea id="{id}" name="{name}" placeholder="{placeholder}" rows="{rows}" readonly="{readonly}" class="form-control">{value}</textarea>
+<FormGroup {id} {label} {required} {help} {invalid} {horizontal} class={$$props.class || ''}>
+  <textarea {id} {name} {placeholder} {rows} {readonly} class="form-control">{value}</textarea>
 </FormGroup>

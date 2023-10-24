@@ -9,20 +9,27 @@ export const animate_footer_badge = (type, number) => {
 
   if ('success' !== type) {
     number = animation_badge.text().trim();
-    number = (number !== '' ? number : 0);
+    number = number !== '' ? number : 0;
     number++;
     animation_badge.text(number);
   }
 
   animation_badge.stop(true);
-  animation_badge.animate({
-    opacity: 1,
-  }, 50, function () {
-    // Animation complete.
-    animation_badge.animate({
-      opacity: (number < 10 ? number : 10) / 10
-    }, 150);
-  });
+  animation_badge.animate(
+    {
+      opacity: 1,
+    },
+    50,
+    function () {
+      // Animation complete.
+      animation_badge.animate(
+        {
+          opacity: (number < 10 ? number : 10) / 10,
+        },
+        150,
+      );
+    },
+  );
 };
 
 let hourGlassTimer = null;

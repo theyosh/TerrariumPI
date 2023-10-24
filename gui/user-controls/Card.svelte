@@ -20,19 +20,21 @@
     // Destroy the inner Svelte components as well.
     // This will stop the loaded setInterval timers and stop reloading not needed data...
     if (!noTools) {
-      document.querySelector(`div.card.${cardClassID} button[data-card-widget="remove"]`).addEventListener('click', (event) => {
-        let parent = null;
-        if (removeParent) {
-          parent = document.querySelector(`div.card.${cardClassID}`).parentElement;
-        }
-
-        setTimeout(() => {
-          if (parent !== null) {
-            parent.remove();
+      document
+        .querySelector(`div.card.${cardClassID} button[data-card-widget="remove"]`)
+        .addEventListener('click', (event) => {
+          let parent = null;
+          if (removeParent) {
+            parent = document.querySelector(`div.card.${cardClassID}`).parentElement;
           }
-          card.$destroy();
-        }, 550);
-      });
+
+          setTimeout(() => {
+            if (parent !== null) {
+              parent.remove();
+            }
+            card.$destroy();
+          }, 550);
+        });
     }
     if (!$$slots.header) {
       document.querySelector(`div.card.${cardClassID} div.card-header`).remove();
@@ -40,7 +42,7 @@
   });
 </script>
 
-<BaseCard noPadding="{noPadding}" class="{cardClassID} {$$props.class || ''}" bind:this="{card}">
+<BaseCard {noPadding} class="{cardClassID} {$$props.class || ''}" bind:this={card}>
   <svelte:fragment slot="header">
     <slot name="header" />
   </svelte:fragment>
@@ -54,7 +56,7 @@
 
   <slot />
 
-  <div class="overlay" class:d-none="{!loading}" bind:this="{loadingDiv}">
+  <div class="overlay" class:d-none={!loading} bind:this={loadingDiv}>
     <i class="fas fa-2x fa-sync-alt fa-spin"></i>
   </div>
 </BaseCard>

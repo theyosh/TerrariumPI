@@ -39,7 +39,7 @@
         .data('update', 1)
         .prop('readonly', true)
         .siblings('canvas')
-        .addClass((!$isAuthenticated ? ' disabled' : ''));
+        .addClass(!$isAuthenticated ? ' disabled' : '');
     }
     loaded = true;
   });
@@ -71,33 +71,35 @@
     {/if}
     <input
       type="text"
-      id="{relay.id}"
+      id={relay.id}
       class="dial"
-      class:disabled="{!$isAuthenticated}"
-      value="{relay.value}"
-      disabled="{!$isAuthenticated}"
+      class:disabled={!$isAuthenticated}
+      value={relay.value}
+      disabled={!$isAuthenticated}
       data-width="150"
       data-height="150"
       data-min="0"
       data-max="100"
       data-angleArc="290"
-      data-angleOffset="35" />
+      data-angleOffset="35"
+    />
   </div>
 {:else}
   <button
     type="button"
-    id="{relay.id}"
+    id={relay.id}
     class="btn btn-default mt-2 mb-2 text-secondary"
-    disabled="{!$isAuthenticated}"
-    on:click="{() => {
+    disabled={!$isAuthenticated}
+    on:click={() => {
       toggleAction(relay);
-    }}">
-    <i class="fas fa-power-off" class:text-success="{$relays[relay.id].value > 0}" style="font-size: 9rem;"></i>
+    }}
+  >
+    <i class="fas fa-power-off" class:text-success={$relays[relay.id].value > 0} style="font-size: 9rem;"></i>
   </button>
 {/if}
 
 <style>
- .dimmer {
+  .dimmer {
     position: relative;
   }
 

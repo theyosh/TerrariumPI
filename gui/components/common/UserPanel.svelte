@@ -18,15 +18,21 @@
 </a>
 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
   <div class="image pt-2 pl-1">
-    <img src="img/christmas_hat.png" class="christmashat d-none" title="!! Merry Christmas !!" alt="!! Merry Christmas !!" />
+    <img
+      src="img/christmas_hat.png"
+      class="christmashat d-none"
+      title="!! Merry Christmas !!"
+      alt="!! Merry Christmas !!"
+    />
     <img src="{ApiUrl}/{settings.profile}" class="img-circle elevation-2 img-thumbnail" alt="Profile" />
   </div>
   <div class="info">
     {#if $isAuthenticated}
       <a
         href="/logout/"
-        title="{$_('general.logout.title')}"
-        on:click|preventDefault="{() => confirmModal($_('modal.confirm.system.logout'), () => doLogout())}">
+        title={$_('general.logout.title')}
+        on:click|preventDefault={() => confirmModal($_('modal.confirm.system.logout'), () => doLogout())}
+      >
         {$_('userpanel.logout.text1', { values: { name: $currentUserStore } })}
         <br />
         {$_('userpanel.logout.text2')}

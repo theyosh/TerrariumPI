@@ -67,25 +67,26 @@
   });
 </script>
 
-<Modal bind:this="{modal}">
+<Modal bind:this={modal}>
   <svelte:fragment slot="header">
     <i class="fas fa-marker mr-2"></i>
     {$_('webcams.markers.settings.title', { default: 'Sensors' })}
     <Helper />
   </svelte:fragment>
 
-  <form class="form-horizontal needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
-    <input type="hidden" name="markerid" disabled="{!edit}" value="" />
+  <form class="form-horizontal needs-validation" class:was-validated={validated} use:form bind:this={editForm}>
+    <input type="hidden" name="markerid" disabled={!edit} value="" />
 
     <Select
       name="sensors"
-      value="{selected}"
-      multiple="{true}"
-      required="{true}"
-      options="{sensors}"
-      label="{$_('webcams.markers.settings.doors.label', { default: 'Sensors' })}"
-      help="{$_('webcams.markers.settings.doors.help', { default: 'Select the senors you want to show.' })}"
-      invalid="{$_('webcams.markers.settings.doors.invalid', { default: 'Make a choice.' })}" />
+      value={selected}
+      multiple={true}
+      required={true}
+      options={sensors}
+      label={$_('webcams.markers.settings.doors.label', { default: 'Sensors' })}
+      help={$_('webcams.markers.settings.doors.help', { default: 'Select the senors you want to show.' })}
+      invalid={$_('webcams.markers.settings.doors.invalid', { default: 'Make a choice.' })}
+    />
 
     <!-- We need this nasty hack to make submit with enter key to work -->
     <button type="submit" style="display:none"> </button>
@@ -93,18 +94,23 @@
 
   <svelte:fragment slot="actions">
     <div class="d-flex justify-content-between w-100">
-      <button type="button" class="btn btn-default" on:click="{hide}">
+      <button type="button" class="btn btn-default" on:click={hide}>
         {$_('modal.general.close', { default: 'Close ' })}
       </button>
 
       {#if edit}
-        <button type="button" class="btn btn-danger mr-5" on:click="{() => deleteMarker(editForm.elements['markerid'].value)}">
+        <button
+          type="button"
+          class="btn btn-danger mr-5"
+          on:click={() => deleteMarker(editForm.elements['markerid'].value)}
+        >
           {$_('webcams.markers.settings.delete', { default: 'Delete' })}
         </button>
       {/if}
 
-      <button type="button" class="btn btn-primary ml-3" disabled="{$isSubmitting}" on:click="{formSubmit}">
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none="{!$isSubmitting}"></span>
+      <button type="button" class="btn btn-primary ml-3" disabled={$isSubmitting} on:click={formSubmit}>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none={!$isSubmitting}
+        ></span>
         {$_('modal.general.save', { default: 'Save' })}
       </button>
     </div>

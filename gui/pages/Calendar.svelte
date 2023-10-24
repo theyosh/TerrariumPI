@@ -61,8 +61,11 @@
         try {
           await deleteCalendarEvent(data.id);
           successNotification(
-            $_('calendar.event.delete.ok.message', { default: "The event ''{name}'' is deleted.", values: { name: button.name } }),
-            $_('notification.delete.ok.title', { default: 'OK' })
+            $_('calendar.event.delete.ok.message', {
+              default: "The event ''{name}'' is deleted.",
+              values: { name: button.name },
+            }),
+            $_('notification.delete.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -71,10 +74,10 @@
               default: "The event ''{name}'' could not be deleted!\nError: {error}",
               values: { name: button.name, error: e.message },
             }),
-            $_('notification.delete.error.title', { default: 'ERROR' })
+            $_('notification.delete.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -87,7 +90,8 @@
 
     let deleteButton = document.createElement('button');
     deleteButton.type = 'button';
-    deleteButton.style = 'display:block; background-color: transparent; border: 0px; position: absolute; right:0px; top: 0px; z-index: 999';
+    deleteButton.style =
+      'display:block; background-color: transparent; border: 0px; position: absolute; right:0px; top: 0px; z-index: 999';
     deleteButton.innerHTML = '<i class="fas fa-trash-alt text-danger">';
     deleteButton.onclick = deleteCalendarEventCall;
 
@@ -157,9 +161,9 @@
         if ($isAuthenticated) {
           // Open modal for adding event
           data = {
-            'id' : data.event.id,
-            'mode' : 'repeat'
-          }
+            id: data.event.id,
+            mode: 'repeat',
+          };
           editCalendarEvent(data);
         }
       },
@@ -181,7 +185,7 @@
                     default: "The event ''{name}'' is updated.",
                     values: { name: item.summary },
                   }),
-                  $_('notification.delete.ok.title', { default: 'OK' })
+                  $_('notification.delete.ok.title', { default: 'OK' }),
                 );
                 loadData();
               } catch (e) {
@@ -190,7 +194,7 @@
                     default: "The event ''{name}'' could not be updated!\nError: {error}",
                     values: { name: item.summary, error: e.message },
                   }),
-                  $_('notification.delete.error.title', { default: 'ERROR' })
+                  $_('notification.delete.error.title', { default: 'ERROR' }),
                 );
               }
             }
@@ -218,7 +222,7 @@
                     default: "The event ''{name}'' is updated.",
                     values: { name: item.summary },
                   }),
-                  $_('notification.delete.ok.title', { default: 'OK' })
+                  $_('notification.delete.ok.title', { default: 'OK' }),
                 );
                 loadData();
               } catch (e) {
@@ -227,7 +231,7 @@
                     default: "The event ''{name}'' could not be updated!\nError: {error}",
                     values: { name: item.summary, error: e.message },
                   }),
-                  $_('notification.delete.error.title', { default: 'ERROR' })
+                  $_('notification.delete.error.title', { default: 'ERROR' }),
                 );
               }
             }
@@ -261,13 +265,15 @@
     {#if $isAuthenticated}
       <li class="breadcrumb-item">
         <a
-          href="{'#'}"
+          href={'#'}
           class="mt-1"
           target="_blank"
           rel="noopener noreferrer"
-          title="{$_('calendar.actions.download', { default: 'Download iCal' })}"
-          on:click|preventDefault="{download_calendar}">
-          <i class="fas" class:fa-download="{!downloading}" class:fa-spinner="{downloading}" class:fa-spin="{downloading}"></i>
+          title={$_('calendar.actions.download', { default: 'Download iCal' })}
+          on:click|preventDefault={download_calendar}
+        >
+          <i class="fas" class:fa-download={!downloading} class:fa-spinner={downloading} class:fa-spin={downloading}
+          ></i>
           {$_('calendar.actions.download', { default: 'Download iCal' })}
         </a>
       </li>
@@ -279,14 +285,14 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <Card loading="{loading}" noTools="{true}">
+      <Card {loading} noTools={true}>
         <div id="calendar"></div>
       </Card>
     </div>
   </div>
 </div>
 {#if $isAuthenticated}
-  <EventModel bind:show="{showModal}" on:save="{loadData}" />
+  <EventModel bind:show={showModal} on:save={loadData} />
 {/if}
 
 <style>

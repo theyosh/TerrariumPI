@@ -37,8 +37,11 @@
         try {
           await deleteNotificationService(service.id);
           successNotification(
-            $_('services.delete.ok.message', { default: "The service ''{name}'' is deleted.", values: { name: service.name } }),
-            $_('notification.delete.ok.title', { default: 'OK' })
+            $_('services.delete.ok.message', {
+              default: "The service ''{name}'' is deleted.",
+              values: { name: service.name },
+            }),
+            $_('notification.delete.ok.title', { default: 'OK' }),
           );
           loadServices();
         } catch (e) {
@@ -47,10 +50,10 @@
               default: "The service ''{name}'' could not be deleted!\nError: {error}",
               values: { name: service.name, error: e.message },
             }),
-            $_('notification.delete.error.title', { default: 'ERROR' })
+            $_('notification.delete.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -64,8 +67,11 @@
         try {
           await deleteNotificationMessage(message.id);
           successNotification(
-            $_('messages.delete.ok.message', { default: "The message ''{name}'' is deleted.", values: { name: message.title } }),
-            $_('notification.delete.ok.title', { default: 'OK' })
+            $_('messages.delete.ok.message', {
+              default: "The message ''{name}'' is deleted.",
+              values: { name: message.title },
+            }),
+            $_('notification.delete.ok.title', { default: 'OK' }),
           );
           loadMessages();
         } catch (e) {
@@ -74,10 +80,10 @@
               default: "The message ''{name}'' could not be deleted!\nError: {error}",
               values: { name: message.title, error: e.message },
             }),
-            $_('notification.delete.error.title', { default: 'ERROR' })
+            $_('notification.delete.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -110,14 +116,14 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <Card loading="{services_loading}">
+      <Card loading={services_loading}>
         <svelte:fragment slot="header">
           <i class="fas fa-bell mr-2"></i>{$_('services.title', { default: 'Notification services' })}
         </svelte:fragment>
 
         <svelte:fragment slot="tools">
           <CardSettingsTools>
-            <button class="dropdown-item" on:click="{() => editService()}">
+            <button class="dropdown-item" on:click={() => editService()}>
               <i class="fas fa-plus mr-2"></i>{$_('services.add', { default: 'Add service' })}
             </button>
           </CardSettingsTools>
@@ -130,13 +136,14 @@
               <div class="col-2">
                 <div class="info-box">
                   <a
-                    href="{'#'}"
+                    href={'#'}
                     class="info-box-icon"
-                    title="{$_('services.actions.edit', { default: 'Edit service' })}"
-                    class:bg-info="{service.enabled}"
-                    class:bg-gray="{!service.enabled}"
-                    on:click|preventDefault="{() => editService(service)}">
-                    <i class="{template_sensor_type_icon(service.type)}"></i>
+                    title={$_('services.actions.edit', { default: 'Edit service' })}
+                    class:bg-info={service.enabled}
+                    class:bg-gray={!service.enabled}
+                    on:click|preventDefault={() => editService(service)}
+                  >
+                    <i class={template_sensor_type_icon(service.type)}></i>
                   </a>
                   <div class="info-box-content">
                     <span class="info-box-text">{service.name}</span>
@@ -144,14 +151,17 @@
                       >{$_('services.ratelimit', {
                         default: '{number, plural, =0 {Unlimited messages} other {Max # per minute}}',
                         values: { number: service.rate_limit },
-                      })}</span>
+                      })}</span
+                    >
                     <span class="info-box-text"
                       >{$_('services.enabled', { default: 'Enabled' })}:
-                      <i class="fas" class:fa-check="{service.enabled}" class:fa-times="{!service.enabled}"> </i></span>
+                      <i class="fas" class:fa-check={service.enabled} class:fa-times={!service.enabled}> </i></span
+                    >
                     <button
                       class="btn btn-small text-danger"
-                      title="{$_('services.actions.delete', { default: 'Delete service' })}"
-                      on:click="{() => deleteServiceAction(service)}">
+                      title={$_('services.actions.delete', { default: 'Delete service' })}
+                      on:click={() => deleteServiceAction(service)}
+                    >
                       <i class="fas fa-trash-alt"></i>
                     </button>
                   </div>
@@ -166,14 +176,14 @@
 
   <div class="row">
     <div class="col">
-      <Card loading="{messages_loading}">
+      <Card loading={messages_loading}>
         <svelte:fragment slot="header">
           <i class="fas fa-envelope-open-text mr-2"></i>{$_('messages.title', { default: 'Notification messages' })}
         </svelte:fragment>
 
         <svelte:fragment slot="tools">
           <CardSettingsTools>
-            <button class="dropdown-item" on:click="{() => editMessage()}">
+            <button class="dropdown-item" on:click={() => editMessage()}>
               <i class="fas fa-plus mr-2"></i>{$_('messages.add', { default: 'Add message' })}
             </button>
           </CardSettingsTools>
@@ -204,28 +214,34 @@
                       >{$_('messages.ratelimit', {
                         default: '{number, plural, =0 {Unlimited messages} other {Max # per minute}}',
                         values: { number: message.rate_limit },
-                      })}</td>
-                    <td><i class="fas" class:fa-check="{message.enabled}" class:fa-times="{!message.enabled}"> </i></td>
+                      })}</td
+                    >
+                    <td><i class="fas" class:fa-check={message.enabled} class:fa-times={!message.enabled}> </i></td>
                     <td>
                       {#each message.services as message_service}
-                        <i class="{template_sensor_type_icon(message_service.type)}" class:text-info="{message_service.enabled}"></i>&nbsp;
+                        <i
+                          class={template_sensor_type_icon(message_service.type)}
+                          class:text-info={message_service.enabled}
+                        ></i>&nbsp;
                       {/each}
                     </td>
                     <td class="text-nowrap">
                       <button
                         class="btn btn-sm"
-                        title="{$_('messages.actions.edit', { default: 'Edit message' })}"
-                        class:btn-light="{!$isDarkInterface}"
-                        class:btn-dark="{$isDarkInterface}"
-                        on:click="{() => editMessage(message)}">
+                        title={$_('messages.actions.edit', { default: 'Edit message' })}
+                        class:btn-light={!$isDarkInterface}
+                        class:btn-dark={$isDarkInterface}
+                        on:click={() => editMessage(message)}
+                      >
                         <i class="fas fa-wrench"></i>
                       </button>
                       <button
                         class="btn btn-sm"
-                        title="{$_('messages.actions.delete', { default: 'Delete message' })}"
-                        class:btn-light="{!$isDarkInterface}"
-                        class:btn-dark="{$isDarkInterface}"
-                        on:click="{() => deleteMessageAction(message)}">
+                        title={$_('messages.actions.delete', { default: 'Delete message' })}
+                        class:btn-light={!$isDarkInterface}
+                        class:btn-dark={$isDarkInterface}
+                        on:click={() => deleteMessageAction(message)}
+                      >
                         <i class="fas fa-trash-alt text-danger"></i>
                       </button>
                     </td>

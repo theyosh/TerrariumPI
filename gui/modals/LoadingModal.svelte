@@ -17,16 +17,16 @@
 
   export const setMessage = (msg) => {
     message = msg;
-  }
+  };
 </script>
 
-<Modal center bind:show="{wrapper_show}" bind:hide="{wrapper_hide}">
+<Modal center bind:show={wrapper_show} bind:hide={wrapper_hide}>
   <svelte:fragment slot="header">
     <i class="fas fa-sync-alt fa-spin mr-2"></i>
     {$_('modal.loading.title', { default: 'Loading' })}
   </svelte:fragment>
   <p>{message}</p>
   <svelte:fragment slot="actions">
-    <div class="d-flex justify-content-between w-100"> </div>
+    <div class="d-flex justify-content-between w-100"></div>
   </svelte:fragment>
 </Modal>

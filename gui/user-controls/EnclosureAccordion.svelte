@@ -11,14 +11,16 @@
       <div class="card card-secondary">
         <div class="card-header">
           <h4 class="card-title w-100">
-            <a data-toggle="collapse" class="d-block" style="margin-bottom:-1.2rem" href="#enclosure_{enclosure.id}">{enclosure.name}</a>
+            <a data-toggle="collapse" class="d-block" style="margin-bottom:-1.2rem" href="#enclosure_{enclosure.id}"
+              >{enclosure.name}</a
+            >
             <span class="float-right">
-              <EnclosureDoorIcon enclosure_id="{enclosure.id}" />
+              <EnclosureDoorIcon enclosure_id={enclosure.id} />
             </span>
           </h4>
         </div>
-        <div id="enclosure_{enclosure.id}" class="collapse" class:show="{counter === 0}" data-parent="#accordion">
-          <Enclosure enclosure="{enclosure}" />
+        <div id="enclosure_{enclosure.id}" class="collapse" class:show={counter === 0} data-parent="#accordion">
+          <Enclosure {enclosure} />
         </div>
       </div>
     {/each}

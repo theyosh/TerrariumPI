@@ -41,7 +41,7 @@
         // Notifify OK!
         successNotification(
           $_('weather.settings.save.ok.message', { default: 'The weather setting is saved.' }),
-          $_('notification.form.save.ok.title', { default: 'Save OK' })
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
         );
 
         // Done, close window
@@ -59,7 +59,9 @@
         validated = false;
       }
     } else {
-      let error_message = $_('weather.settings.fields.error', { default: 'Not all required fields are entered correctly.' });
+      let error_message = $_('weather.settings.fields.error', {
+        default: 'Not all required fields are entered correctly.',
+      });
       error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
       errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
     }
@@ -107,16 +109,17 @@
   });
 </script>
 
-<ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" loading="{loading}">
+<ModalForm bind:show={wrapper_show} bind:hide={wrapper_hide} {loading}>
   <svelte:fragment slot="header">
-    <i class="fas mr-2" class:fa-cloud-sun="{$isDay}" class:fa-cloud-moon="{!$isDay}"></i>
+    <i class="fas mr-2" class:fa-cloud-sun={$isDay} class:fa-cloud-moon={!$isDay}></i>
     {$_('weather.settings.title', { default: 'Weather settings' })}
     <Helper moreInfo="https://theyosh.github.io/TerrariumPI/setup/#weather" />
   </svelte:fragment>
   <p>
     {@html $_('weather.settings.information', {
       values: {
-        source_link: '<a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer">OpenWeatherMap</a>',
+        source_link:
+          '<a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer">OpenWeatherMap</a>',
         more_info_link:
           '<a href="https://theyosh.github.io/TerrariumPI/setup/#weather" target="_blank" rel="noopener noreferrer">Github pages</a>',
       },
@@ -124,30 +127,32 @@
     })}
   </p>
 
-  <form class="form-horizontal needs-validation" class:was-validated="{validated}" use:form bind:this="{editForm}">
+  <form class="form-horizontal needs-validation" class:was-validated={validated} use:form bind:this={editForm}>
     <Field
       type="text"
       name="weather_source"
       class="col-9"
-      required="{true}"
-      horizontal="{true}"
-      label="{$_('weather.settings.weather_source.label', { default: 'Source url' })}"
-      help="{$_('weather.settings.weather_source.help', {
+      required={true}
+      horizontal={true}
+      label={$_('weather.settings.weather_source.label', { default: 'Source url' })}
+      help={$_('weather.settings.weather_source.help', {
         default: 'Enter the full OpenWeatherMap api url like: {api_url_example}',
         values: {
           api_url_example:
             '<a href="https://openweathermap.org/current" target="_blank" rel="noopener noreferrer">https://api.openweathermap.org/data/2.5/weather?q=[City],[Country]&appid=[API_KEY]</a>',
         },
-      })}"
-      invalid="{$_('weather.settings.weather_source.invalid', { default: 'The entered url is not valid.' })}" />
+      })}
+      invalid={$_('weather.settings.weather_source.invalid', { default: 'The entered url is not valid.' })}
+    />
 
     <!-- We need this nasty hack to make submit with enter key to work -->
     <button type="submit" style="display:none"> </button>
   </form>
 
   <svelte:fragment slot="actions">
-    <button type="button" class="btn btn-primary" disabled="{loading || $isSubmitting}" on:click="{formSubmit}">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none="{!$isSubmitting}"></span>
+    <button type="button" class="btn btn-primary" disabled={loading || $isSubmitting} on:click={formSubmit}>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none={!$isSubmitting}
+      ></span>
       {$_('modal.general.save')}
     </button>
   </svelte:fragment>

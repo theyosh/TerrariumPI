@@ -1,7 +1,6 @@
-import { graphs } from "../stores/terrariumpi";
+import { graphs } from '../stores/terrariumpi';
 import { get } from 'svelte/store';
-import { fetchExportData } from "../providers/api";
-
+import { fetchExportData } from '../providers/api';
 
 // https://stackoverflow.com/a/63348486
 export const smoothing = (array, countBefore, countAfter) => {
@@ -23,17 +22,17 @@ export const toggleGraphPeriod = (graph, period) => {
   store[graph].period = period;
   store[graph].changed = true;
   graphs.set(store);
-}
+};
 
 export const exportGraphPeriod = async (type, graph) => {
   const store = get(graphs);
   const filename = `terrariumpi_export_${type}_${graph}_${store[graph].period}.csv`;
 
   let export_data = '';
-  await fetchExportData(type, graph, store[graph].period, data => export_data = data);
+  await fetchExportData(type, graph, store[graph].period, (data) => (export_data = data));
 
   const link = document.createElement('a');
   link.href = window.URL.createObjectURL(new Blob([export_data]));
   link.download = filename;
   link.click();
-}
+};

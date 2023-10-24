@@ -1,9 +1,8 @@
-import { leaveLoaderFor, waitForLoader } from "../constants/ui";
-import { emptyPromise } from "./promise-helpers";
+import { leaveLoaderFor, waitForLoader } from '../constants/ui';
+import { emptyPromise } from './promise-helpers';
 
 export default function lazyLoader(resourceTask, showLoader, hideLoader) {
-  if (!(resourceTask instanceof Promise))
-    return emptyPromise;
+  if (!(resourceTask instanceof Promise)) return emptyPromise;
 
   let loaderShowed = false;
   const beforeShowTimer = setTimeout(() => {
@@ -12,7 +11,7 @@ export default function lazyLoader(resourceTask, showLoader, hideLoader) {
   }, waitForLoader);
 
   return resourceTask
-    .then(res => {
+    .then((res) => {
       if (!loaderShowed) {
         clearTimeout(beforeShowTimer);
         hideLoader();
@@ -25,14 +24,17 @@ export default function lazyLoader(resourceTask, showLoader, hideLoader) {
       }
 
       // this leaves the loader showed for additional time
-      return new Promise(resolve => {
-        setTimeout(() => {
-          hideLoader();
-          resolve(res);
-        }, leaveLoaderFor - (new Date() - loaderShowed));
+      return new Promise((resolve) => {
+        setTimeout(
+          () => {
+            hideLoader();
+            resolve(res);
+          },
+          leaveLoaderFor - (new Date() - loaderShowed),
+        );
       });
     })
-    .catch(err => {
+    .catch((err) => {
       hideLoader();
       throw err;
     });

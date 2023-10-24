@@ -29,7 +29,7 @@
   };
 </script>
 
-<Modal bind:show="{wrapper_show}" bind:hide="{wrapper_hide}">
+<Modal bind:show={wrapper_show} bind:hide={wrapper_hide}>
   <svelte:fragment slot="header">
     <i class="fas {icon}"></i>
     {confirmTitle}
@@ -42,8 +42,8 @@
       <ModalCloseButton>
         {$_('modal.general.close', { default: 'Close' })}
       </ModalCloseButton>
-      <button type="button" class="btn btn-danger" disabled="{running}" on:click="{confirmAction}">
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none="{!running}"></span>
+      <button type="button" class="btn btn-danger" disabled={running} on:click={confirmAction}>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" class:d-none={!running}></span>
         {$_('modal.confirm.submit.title', { default: 'Confirm' })}
       </button>
     </div>

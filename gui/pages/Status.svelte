@@ -110,21 +110,21 @@
   {#if systemStats}
     <div class="row">
       <div class="col">
-        <SensorCard sensor="{systemStats.load}" enableGraph="{false}" removeParent="{true}" />
+        <SensorCard sensor={systemStats.load} enableGraph={false} removeParent={true} />
       </div>
       <div class="col">
-        <SensorCard sensor="{systemStats.cpu_temp}" enableGraph="{false}" removeParent="{true}" />
+        <SensorCard sensor={systemStats.cpu_temp} enableGraph={false} removeParent={true} />
       </div>
       <div class="col">
-        <SensorCard sensor="{systemStats.memory}" enableGraph="{false}" removeParent="{true}" />
+        <SensorCard sensor={systemStats.memory} enableGraph={false} removeParent={true} />
       </div>
       <div class="col">
-        <SensorCard sensor="{systemStats.disk}" enableGraph="{false}" removeParent="{true}" />
+        <SensorCard sensor={systemStats.disk} enableGraph={false} removeParent={true} />
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <Card loading="{false}" noPadding="{false}">
+        <Card loading={false} noPadding={false}>
           <svelte:fragment slot="header">
             <i class="fas fa-microchip mr-2"></i>{$_('system.status.uptime.title', { default: 'System uptime' })}
           </svelte:fragment>
@@ -136,7 +136,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <Card loading="{false}" noPadding="{false}">
+        <Card loading={false} noPadding={false}>
           <svelte:fragment slot="header">
             <i class="fas fa-microchip mr-2"></i>{$_('system.status.summary.title', { default: 'System summary' })}
           </svelte:fragment>

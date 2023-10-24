@@ -26,16 +26,9 @@
   }
 </script>
 
-<FormGroup
-  id="{id}"
-  label="{label}"
-  required="{required}"
-  help="{help}"
-  invalid="{invalid}"
-  horizontal="{horizontal}"
-  class="{$$props.class || ''}">
+<FormGroup {id} {label} {required} {help} {invalid} {horizontal} class={$$props.class || ''}>
   <div class="switch">
-    <input type="checkbox" class="switch" id="{id}" name="{name}" {readonly} {disabled} checked="{value}" bind:this="{checkbox}" />
-    <label for="{id}" class="mt-1"></label>
+    <input type="checkbox" class="switch" {id} {name} {readonly} {disabled} checked={value} bind:this={checkbox} />
+    <label for={id} class="mt-1"></label>
   </div>
 </FormGroup>

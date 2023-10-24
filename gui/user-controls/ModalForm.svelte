@@ -33,7 +33,7 @@
   });
 </script>
 
-<Modal xlarge bind:show="{wrapper_show}" bind:hide="{wrapper_hide}">
+<Modal xlarge bind:show={wrapper_show} bind:hide={wrapper_hide}>
   <svelte:fragment slot="header">
     <slot name="header" />
   </svelte:fragment>
@@ -50,7 +50,7 @@
   </svelte:fragment>
 
   <!-- Hack using d-none class. Else can't move the div to a different location in the DOM -->
-  <div class="overlay" class:d-none="{!loading}" bind:this="{loadingDiv}">
+  <div class="overlay" class:d-none={!loading} bind:this={loadingDiv}>
     <i class="fas fa-2x fa-sync-alt fa-spin"></i>
   </div>
 </Modal>

@@ -46,7 +46,7 @@
   const updateEnclosureDoors = (buttons) => {
     Object.keys(enclosures_doors).map((enclosure_id) => {
       enclosures_doors[enclosure_id].closed = enclosures_doors[enclosure_id].doors.every(
-        (doorid) => !buttons[doorid] || buttons[doorid].value === 1
+        (doorid) => !buttons[doorid] || buttons[doorid].value === 1,
       );
     });
   };
@@ -112,7 +112,7 @@
         Object.keys(averages).map((sensor_type) => {
           if (averages[sensor_type]['value'].length === 0) {
             // All sensors are excluded from average. Ignore this sensor type
-            delete(averages[sensor_type]);
+            delete averages[sensor_type];
           } else {
             averages[sensor_type]['type'] = sensor_type;
             averages[sensor_type]['id'] = sensor_type;
@@ -216,7 +216,8 @@
               aria-valuenow="0"
               aria-valuemin="0"
               aria-valuemax="100"
-              style="height: {$systemLoad[0]}%">
+              style="height: {$systemLoad[0]}%"
+            >
               <span class="sr-only">{$systemLoad[0]}%</span>
             </div>
           </div>
@@ -227,7 +228,8 @@
               aria-valuenow="0"
               aria-valuemin="0"
               aria-valuemax="100"
-              style="height: {$systemLoad[1]}%">
+              style="height: {$systemLoad[1]}%"
+            >
               <span class="sr-only">{$systemLoad[1]}%</span>
             </div>
           </div>
@@ -238,7 +240,8 @@
               aria-valuenow="0"
               aria-valuemin="0"
               aria-valuemax="100"
-              style="height: {$systemLoad[2]}%">
+              style="height: {$systemLoad[2]}%"
+            >
               <span class="sr-only">{$systemLoad[2]}%</span>
             </div>
           </div>
@@ -274,7 +277,8 @@
           >{$_('dashboard.infobox.current_water_flow.title', {
             default: 'Water flow in {water_flow_indicator}',
             values: { water_flow_indicator: settings.units.water_flow.value },
-          })}</span>
+          })}</span
+        >
         <svelte:fragment slot="number">
           <span>{$number($currentWater)} / {$number($maxWater)}</span>
           <div class="progress" title="{($currentWater / $maxWater) * 100}%">
@@ -325,17 +329,17 @@
     </div>
   </div>
 
-  <div class="row" class:flex-row-reverse="{settings.dashboard_mode === 0}">
+  <div class="row" class:flex-row-reverse={settings.dashboard_mode === 0}>
     {#if settings.dashboard_mode === 0}
       <div class="col-12 col-md-4 col-lg-3">
-        <Card loading="{loading_enclosures}" removeParent="{true}">
+        <Card loading={loading_enclosures} removeParent={true}>
           <svelte:fragment slot="header">
             <i class="fas fa-globe mr-2"></i>{$_('dashboard.enclosures.title', { default: 'Enclosures' })}
           </svelte:fragment>
 
           <svelte:fragment slot="tools" />
 
-          <EnclosureAccordion enclosures="{enclosures}" />
+          <EnclosureAccordion {enclosures} />
         </Card>
       </div>
     {/if}
@@ -343,16 +347,16 @@
     {#if settings.dashboard_mode === 2 && enclosures}
       {#each enclosures.sort((a, b) => a.name.localeCompare(b.name)) as enclosure, counter}
         <div class="col-12 col-md-6 col-lg-3">
-          <Card loading="{loading_enclosures}">
+          <Card loading={loading_enclosures}>
             <svelte:fragment slot="header">
               <i class="fas fa-globe mr-2"></i>{enclosure.name}
             </svelte:fragment>
 
             <svelte:fragment slot="tools">
-              <EnclosureDoorIcon enclosure_id="{enclosure.id}" />
+              <EnclosureDoorIcon enclosure_id={enclosure.id} />
             </svelte:fragment>
 
-            <Enclosure enclosure="{enclosure}" />
+            <Enclosure {enclosure} />
           </Card>
         </div>
       {/each}
@@ -361,8 +365,8 @@
     {#if [0, 1].indexOf(settings.dashboard_mode) !== -1 && sensor_types && Object.keys(sensor_types).length > 0}
       <div class="col">
         <!-- Sort based on translated names -->
-        {#each Object.keys(sensor_types).sort( (a, b) => $_(`sensors.average.${a}`).localeCompare($_(`sensors.average.${b}`)) ) as sensor_type}
-          <SensorCard sensor="{sensor_types[sensor_type]}" enableSettings="{false}" />
+        {#each Object.keys(sensor_types).sort( (a, b) => $_(`sensors.average.${a}`).localeCompare($_(`sensors.average.${b}`)), ) as sensor_type}
+          <SensorCard sensor={sensor_types[sensor_type]} enableSettings={false} />
         {/each}
       </div>
     {/if}

@@ -1,7 +1,7 @@
-import { dayjs } from "svelte-time";
+import { dayjs } from 'svelte-time';
 import { get } from 'svelte/store';
 import { _ } from 'svelte-i18n';
-import duration from "dayjs/esm/plugin/duration";
+import duration from 'dayjs/esm/plugin/duration';
 dayjs.extend(duration);
 
 export const roundToPrecision = (number, precision = 2) => {
@@ -10,7 +10,7 @@ export const roundToPrecision = (number, precision = 2) => {
 };
 
 export const average = (numbers) => {
-  return numbers.length === 0 ? 0 : numbers.reduce((a, b) => (a + b)) / numbers.length;
+  return numbers.length === 0 ? 0 : numbers.reduce((a, b) => a + b) / numbers.length;
 };
 
 export const uptime_format = (duration) => {
@@ -50,9 +50,9 @@ export const arrIdentical = (a1, a2) => {
 };
 
 export const isNumber = (number) => {
-    let floatNumber = parseFloat(number);
+  let floatNumber = parseFloat(number);
 
-    return String(floatNumber) === String(number);
-}
+  return String(floatNumber) === String(number);
+};
 
 // export const isNumeric = (num) => (typeof(num) === 'number' || typeof(num) === "string" && num.trim() !== '') && !isNaN(num);

@@ -23,7 +23,7 @@
   export let horizontal = null;
 
   export let formatter = (value) => {
-   return value;
+    return value;
   };
 
   let slider;
@@ -58,37 +58,31 @@
   });
 
   $: if (slider) {
-      if (Array.isArray(value) && value.length === 1) {
-        value.push(0);
-      }
-      try {
-        slider.setValue(value);
-      } catch (e) {
-        // Just ignore
-      }
+    if (Array.isArray(value) && value.length === 1) {
+      value.push(0);
+    }
+    try {
+      slider.setValue(value);
+    } catch (e) {
+      // Just ignore
+    }
   }
 </script>
 
-<FormGroup
-  id="{id}"
-  label="{label}"
-  required="{required}"
-  help="{help}"
-  invalid="{invalid}"
-  horizontal="{horizontal}"
-  class="{$$props.class || ''}">
+<FormGroup {id} {label} {required} {help} {invalid} {horizontal} class={$$props.class || ''}>
   <input
     type="text"
     class="form-control range_slider"
-    id="{id}"
-    name="{name}"
-    data-value="{Array.isArray(value) ? `[${value[0]},${value[1]}]` : value}"
-    required="{required}"
-    readonly="{readonly}"
-    data-slider-min="{min}"
-    data-slider-max="{max}"
-    data-slider-step="{step}"
-    bind:this="{slider}" />
+    {id}
+    {name}
+    data-value={Array.isArray(value) ? `[${value[0]},${value[1]}]` : value}
+    {required}
+    {readonly}
+    data-slider-min={min}
+    data-slider-max={max}
+    data-slider-step={step}
+    bind:this={slider}
+  />
 </FormGroup>
 
 <style>

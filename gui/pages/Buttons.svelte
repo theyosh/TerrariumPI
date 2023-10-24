@@ -27,8 +27,11 @@
         try {
           await deleteButton(button.id);
           successNotification(
-            $_('buttons.delete.ok.message', { default: "The button ''{name}'' is deleted.", values: { name: button.name } }),
-            $_('notification.delete.ok.title', { default: 'OK' })
+            $_('buttons.delete.ok.message', {
+              default: "The button ''{name}'' is deleted.",
+              values: { name: button.name },
+            }),
+            $_('notification.delete.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -37,10 +40,10 @@
               default: "The button ''{name}'' could not be deleted!\nError: {error}",
               values: { name: button.name, error: e.message },
             }),
-            $_('notification.delete.error.title', { default: 'ERROR' })
+            $_('notification.delete.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -54,8 +57,11 @@
         try {
           await updateSystemSettings({ exclude_ids: button.id });
           successNotification(
-            $_('buttons.ignore.ok.message', { default: "The button ''{name}'' is ignored.", values: { name: button.name } }),
-            $_('notification.exclude.ok.title')
+            $_('buttons.ignore.ok.message', {
+              default: "The button ''{name}'' is ignored.",
+              values: { name: button.name },
+            }),
+            $_('notification.exclude.ok.title'),
           );
           loadData();
         } catch (e) {
@@ -64,10 +70,10 @@
               default: "The button ''{name}'' could not be ignored!\nError: {error}",
               values: { name: button.name, error: e.message },
             }),
-            $_('notification.exclude.error.title')
+            $_('notification.exclude.error.title'),
           );
         }
-      }
+      },
     );
   };
 
@@ -95,7 +101,7 @@
       <!-- Sort based on translated names -->
       {#each buttons.sort((a, b) => a.name.localeCompare(b.name)) as button}
         <div class="col-12">
-          <ButtonCard button="{button}" />
+          <ButtonCard {button} />
         </div>
       {/each}
     {/if}

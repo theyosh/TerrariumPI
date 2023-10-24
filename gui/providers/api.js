@@ -1,7 +1,7 @@
-import { get } from "svelte/store";
+import { get } from 'svelte/store';
 
-import { ApiUrl } from "../constants/urls";
-import { credentials } from "../stores/authentication";
+import { ApiUrl } from '../constants/urls';
+import { credentials } from '../stores/authentication';
 
 const apiHost = `${ApiUrl}/api`;
 
@@ -9,13 +9,14 @@ const headers = (extra_headers) => {
   let headers = {
     ...{
       'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
-    }, ...extra_headers
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+    ...extra_headers,
   };
 
   const creds = get(credentials);
   if (creds) {
-    headers['Authorization'] = 'Basic ' + window.btoa(creds.username + ":" + creds.password);
+    headers['Authorization'] = 'Basic ' + window.btoa(creds.username + ':' + creds.password);
   }
 
   return headers;
@@ -26,11 +27,12 @@ export const apiLogin = async (username, password) => {
     redirect: 'manual', // Only for dev??
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + window.btoa(username + ":" + password)
-    }
+      Authorization: 'Basic ' + window.btoa(username + ':' + password),
+    },
   })
-    .then(response => {
-      if ([200, 302, 303, 307].indexOf(response.status) !== -1 || response.type === 'opaqueredirect') { // Redirect only for dev??
+    .then((response) => {
+      if ([200, 302, 303, 307].indexOf(response.status) !== -1 || response.type === 'opaqueredirect') {
+        // Redirect only for dev??
         return true;
       }
       return false;
@@ -41,7 +43,6 @@ export const apiLogin = async (username, password) => {
 };
 
 const __processData = async (type, url, data, cb, extra_headers) => {
-
   extra_headers = extra_headers || {};
   let body = ['GET', 'HEAD'].indexOf(type) !== -1 ? null : data;
   let postheaders = headers(extra_headers);
@@ -49,7 +50,7 @@ const __processData = async (type, url, data, cb, extra_headers) => {
   if (type === 'UPLOAD') {
     type = 'POST';
     // Make the upload fix there own Content type headers for multipart boundary
-    delete (postheaders['Content-Type']);
+    delete postheaders['Content-Type'];
   } else if (['PUT', 'POST'].indexOf(type) !== -1) {
     body = JSON.stringify(body);
   }
@@ -105,7 +106,6 @@ const _uploadData = async (url, data, cb, extra_headers) => {
 };
 // End API Helpers
 
-
 // Upload helpers
 export const uploadFile = async (file) => {
   let data = new FormData();
@@ -120,7 +120,6 @@ export const uploadFile = async (file) => {
 };
 // End Upload helpers
 
-
 // Weather API
 export const fetchWeatherData = async (cb) => {
   await _getData(`${apiHost}/weather/`, cb);
@@ -130,7 +129,6 @@ export const fetchWeatherForecast = async (cb) => {
   await _getData(`${apiHost}/weather/forecast/`, cb);
 };
 // End Weather API
-
 
 // Calendar API
 export const fetchCalendarEvents = async (id, cb) => {
@@ -166,7 +164,6 @@ export const downloadCalendar = async (cb) => {
 };
 // End Calendar API
 
-
 // Sensors API
 export const fetchSensorsHardware = async (cb) => {
   await _getData(`${apiHost}/sensors/hardware/`, cb);
@@ -185,7 +182,7 @@ export const fetchSensors = async (sensor_id, cb) => {
 };
 
 export const addSensor = async (data, cb) => {
-  delete (data.id);
+  delete data.id;
   await _postData(`${apiHost}/sensors/`, data, cb);
 };
 
@@ -201,7 +198,6 @@ export const deleteSensor = async (id, cb) => {
   await _deleteData(`${apiHost}/sensors/${id}/`, {}, cb);
 };
 // End Sensors API
-
 
 // Relays API
 export const fetchRelaysHardware = async (cb) => {
@@ -233,7 +229,7 @@ export const fetchRelays = async (id, cb) => {
 };
 
 export const addRelay = async (data, cb) => {
-  delete (data.id);
+  delete data.id;
   await _postData(`${apiHost}/relays/`, data, cb);
 };
 
@@ -250,7 +246,6 @@ export const deleteRelay = async (id, cb) => {
 };
 // End Relays API
 
-
 // Buttons API
 export const fetchButtonsHardware = async (cb) => {
   await _getData(`${apiHost}/buttons/hardware/`, cb);
@@ -265,7 +260,7 @@ export const fetchButtons = async (id, cb) => {
 };
 
 export const addButton = async (data, cb) => {
-  delete (data.id);
+  delete data.id;
   await _postData(`${apiHost}/buttons/`, data, cb);
 };
 
@@ -281,7 +276,6 @@ export const deleteButton = async (id, cb) => {
   await _deleteData(`${apiHost}/buttons/${id}/`, {}, cb);
 };
 // End Buttons API
-
 
 // Webcam API
 export const fetchWebcamsHardware = async (cb) => {
@@ -301,7 +295,7 @@ export const fetchWebcams = async (id, cb) => {
 };
 
 export const addWebcam = async (data, cb) => {
-  delete (data.id);
+  delete data.id;
   await _postData(`${apiHost}/webcams/`, data, cb);
 };
 
@@ -317,7 +311,6 @@ export const deleteWebcam = async (id, cb) => {
   await _deleteData(`${apiHost}/webcams/${id}/`, {}, cb);
 };
 // End Webcam API
-
 
 // Audio API
 export const fetchSoundcards = async (cb) => {
@@ -341,7 +334,7 @@ export const fetchPlaylists = async (id, cb) => {
 };
 
 export const addPlaylist = async (data, cb) => {
-  delete (data.id);
+  delete data.id;
   await _postData(`${apiHost}/playlists/`, data, cb);
 };
 
@@ -358,7 +351,6 @@ export const deletePlaylist = async (playlist, cb) => {
 };
 // End Audio API
 
-
 // Enclosure API
 export const fetchEnclosures = async (enclosure_id, cb) => {
   let url = `${apiHost}/enclosures/`;
@@ -368,30 +360,30 @@ export const fetchEnclosures = async (enclosure_id, cb) => {
 
   // This callback will alter the start and end time for the enclosure areas which uses a timer mode.
   const fixTimerModeStartAndEndTimesCb = (data) => {
-    data.forEach(enclosure => {
-        enclosure.areas.forEach(area => {
-            if (area.mode === 'timer') {
-                ['day', 'night', 'low', 'high'].forEach(period => {
-                    if (area.state[period]) {
-                        let startTime = area.setup[period].begin.split(':');
-                        let endTime = area.setup[period].end.split(':');
+    data.forEach((enclosure) => {
+      enclosure.areas.forEach((area) => {
+        if (area.mode === 'timer') {
+          ['day', 'night', 'low', 'high'].forEach((period) => {
+            if (area.state[period]) {
+              let startTime = area.setup[period].begin.split(':');
+              let endTime = area.setup[period].end.split(':');
 
-                        area.state[period].begin = new Date();
-                        area.state[period].begin.setHours(startTime[0]);
-                        area.state[period].begin.setMinutes(startTime[1]);
-                        area.state[period].begin.setSeconds(0);
+              area.state[period].begin = new Date();
+              area.state[period].begin.setHours(startTime[0]);
+              area.state[period].begin.setMinutes(startTime[1]);
+              area.state[period].begin.setSeconds(0);
 
-                        area.state[period].end = new Date();
-                        area.state[period].end.setHours(endTime[0]);
-                        area.state[period].end.setMinutes(endTime[1]);
-                        area.state[period].end.setSeconds(0);
+              area.state[period].end = new Date();
+              area.state[period].end.setHours(endTime[0]);
+              area.state[period].end.setMinutes(endTime[1]);
+              area.state[period].end.setSeconds(0);
 
-                        area.state[period].begin = area.state[period].begin.getTime() / 1000;
-                        area.state[period].end = area.state[period].end.getTime() / 1000;
-                    }
-                });
+              area.state[period].begin = area.state[period].begin.getTime() / 1000;
+              area.state[period].end = area.state[period].end.getTime() / 1000;
             }
-        });
+          });
+        }
+      });
     });
 
     cb(data);
@@ -401,7 +393,7 @@ export const fetchEnclosures = async (enclosure_id, cb) => {
 };
 
 export const addEnclosure = async (data, cb) => {
-  delete (data.id);
+  delete data.id;
   await _postData(`${apiHost}/enclosures/`, data, cb);
 };
 
@@ -418,7 +410,6 @@ export const deleteEnclosure = async (playlist, cb) => {
 };
 // End Enclosure API
 
-
 // Area API
 export const fetchAreaTypes = async (cb) => {
   await _getData(`${apiHost}/areas/types/`, cb);
@@ -433,7 +424,7 @@ export const fetchAreas = async (area_id, cb) => {
 };
 
 export const addArea = async (data, cb) => {
-  delete (data.id);
+  delete data.id;
   await _postData(`${apiHost}/areas/`, data, cb);
 };
 
@@ -450,14 +441,12 @@ export const deleteArea = async (playlist, cb) => {
 };
 // End Area API
 
-
-
 export const fetchSystemstats = async (cb) => {
   await _getData(`${apiHost}/system_status/`, cb);
 };
 
 export const fetchSystemSettings = async (settingid, cb) => {
-  let url = `${apiHost}/settings/${(settingid ? settingid + "/" : '')}`;
+  let url = `${apiHost}/settings/${settingid ? settingid + '/' : ''}`;
   await _getData(url, cb);
 };
 
@@ -485,7 +474,7 @@ export const systemShutdown = async (cb) => {
 
 export const fetchLoglines = async (cb, preview) => {
   preview = preview || false;
-  let range_request = preview ? { 'Range': 'bytes=-102300' } : {};
+  let range_request = preview ? { Range: 'bytes=-102300' } : {};
   await _getData(`${apiHost}/logfile/download/`, cb, range_request);
 };
 
@@ -498,7 +487,6 @@ export const fetchExportData = async (type, id, period, cb) => {
   period = period || 'day';
   await _getData(`${apiHost}/${type}/${id}/export/${period}/`, cb);
 };
-
 
 // Notification services API
 export const fetchDisplayTypes = async (cb) => {
@@ -518,7 +506,7 @@ export const fetchNotificationServices = async (service_id, cb) => {
 };
 
 export const addNotificationService = async (data, cb) => {
-  delete (data.id);
+  delete data.id;
   await _postData(`${apiHost}/notification/services/`, data, cb);
 };
 
@@ -535,7 +523,6 @@ export const deleteNotificationService = async (service_id, cb) => {
 };
 // End notification services API
 
-
 // Notification messages API
 export const fetchNotificationMessageTypes = async (cb) => {
   await _getData(`${apiHost}/notification/messages/types/`, cb);
@@ -550,7 +537,7 @@ export const fetchNotificationMessages = async (message_id, cb) => {
 };
 
 export const addNotificationMessage = async (data, cb) => {
-  delete (data.id);
+  delete data.id;
   await _postData(`${apiHost}/notification/messages/`, data, cb);
 };
 

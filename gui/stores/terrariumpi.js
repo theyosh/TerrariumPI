@@ -1,13 +1,13 @@
-import { writable, get, derived } from "svelte/store";
-import { _ } from "svelte-i18n";
-import { successNotification } from "../providers/notification-provider";
+import { writable, get, derived } from 'svelte/store';
+import { _ } from 'svelte-i18n';
+import { successNotification } from '../providers/notification-provider';
 
 export const dynamic_settings = writable({});
 
 export const upcomingCalendarItems = writable([]);
 export const isDay = writable(true);
 export const isDarkDesktop = writable(false);
-export const isDarkInterface = writable(false)
+export const isDarkInterface = writable(false);
 
 export const lastUpdate = writable(new Date());
 export const isOnline = writable({ status: null, last_action: null });
@@ -44,7 +44,7 @@ const $_ = get(_);
 const mql = window.matchMedia('(prefers-color-scheme: dark)');
 isDarkDesktop.set(mql.matches);
 mql.onchange = () => {
-    isDarkDesktop.set(mql.matches);
+  isDarkDesktop.set(mql.matches);
 };
 
 export const updateButton = (button) => {
@@ -68,8 +68,10 @@ export const updateButton = (button) => {
     if ((old_state !== null || button.value === (inverse ? 1 : 0)) && old_state !== button.value) {
       // Door notification
       successNotification(
-        $_(loaded_buttons[button.id].closed ? 'notification.door.status.closed' : 'notification.door.status.opened', { values: { name: loaded_buttons[button.id].name } }),
-        $_('notification.door.status.title')
+        $_(loaded_buttons[button.id].closed ? 'notification.door.status.closed' : 'notification.door.status.opened', {
+          values: { name: loaded_buttons[button.id].name },
+        }),
+        $_('notification.door.status.title'),
       );
     }
   }
@@ -91,21 +93,21 @@ export const updateRelay = (relay) => {
   relays.set(loaded_relays);
 };
 
-export const doors = derived(
-  buttons,
-  ($buttons) => {
-    let doors = {};
-    let enclosures = {};
-    Object.keys($buttons).filter(button_id => $buttons[button_id].door).map(button_id => {
+export const doors = derived(buttons, ($buttons) => {
+  let doors = {};
+  let enclosures = {};
+  Object.keys($buttons)
+    .filter((button_id) => $buttons[button_id].door)
+    .map((button_id) => {
       if (!enclosures[$buttons[button_id].enclosure]) {
         enclosures[$buttons[button_id].enclosure] = { closed: true };
       }
-      enclosures[$buttons[button_id].enclosure].closed = enclosures[$buttons[button_id].enclosure].closed && $buttons[button_id].closed;
+      enclosures[$buttons[button_id].enclosure].closed =
+        enclosures[$buttons[button_id].enclosure].closed && $buttons[button_id].closed;
       doors[button_id] = $buttons[button_id];
     });
-    return { closed: Object.values(doors).every(door => door.closed), doors: doors, enclosures: enclosures };
-  }
-);
+  return { closed: Object.values(doors).every((door) => door.closed), doors: doors, enclosures: enclosures };
+});
 
 export const updateSensor = (gauge) => {
   if (!gauge) return;
@@ -114,10 +116,16 @@ export const updateSensor = (gauge) => {
 
   loaded_gauges[gauge.id] = { ...loaded_gauges[gauge.id], ...gauge };
 
-  loaded_gauges[gauge.id].measure_min = !loaded_gauges[gauge.id].measure_min ? loaded_gauges[gauge.id].value : Math.min(loaded_gauges[gauge.id].measure_min, loaded_gauges[gauge.id].value);
-  loaded_gauges[gauge.id].measure_max = !loaded_gauges[gauge.id].measure_max ? loaded_gauges[gauge.id].value : Math.max(loaded_gauges[gauge.id].measure_max, loaded_gauges[gauge.id].value);
+  loaded_gauges[gauge.id].measure_min = !loaded_gauges[gauge.id].measure_min
+    ? loaded_gauges[gauge.id].value
+    : Math.min(loaded_gauges[gauge.id].measure_min, loaded_gauges[gauge.id].value);
+  loaded_gauges[gauge.id].measure_max = !loaded_gauges[gauge.id].measure_max
+    ? loaded_gauges[gauge.id].value
+    : Math.max(loaded_gauges[gauge.id].measure_max, loaded_gauges[gauge.id].value);
 
-  loaded_gauges[gauge.id].alarm = loaded_gauges[gauge.id].value < loaded_gauges[gauge.id].alarm_min || loaded_gauges[gauge.id].value > loaded_gauges[gauge.id].alarm_max;
+  loaded_gauges[gauge.id].alarm =
+    loaded_gauges[gauge.id].value < loaded_gauges[gauge.id].alarm_min ||
+    loaded_gauges[gauge.id].value > loaded_gauges[gauge.id].alarm_max;
 
   loaded_gauges[gauge.id].changed = true;
   loaded_gauges[gauge.id].last_update = new Date();
@@ -125,7 +133,7 @@ export const updateSensor = (gauge) => {
   sensors.set(loaded_gauges);
 };
 
-systemLoad.subscribe(store => {
+systemLoad.subscribe((store) => {
   let known_gauges = get(sensors);
   if (known_gauges['system_load']) {
     known_gauges.system_load.value = store[0];
@@ -134,7 +142,7 @@ systemLoad.subscribe(store => {
   }
 });
 
-systemCPUTemp.subscribe(store => {
+systemCPUTemp.subscribe((store) => {
   let known_gauges = get(sensors);
   if (known_gauges['cpu_temp']) {
     known_gauges.cpu_temp.value = store;
@@ -143,7 +151,7 @@ systemCPUTemp.subscribe(store => {
   }
 });
 
-systemMemory.subscribe(store => {
+systemMemory.subscribe((store) => {
   let known_gauges = get(sensors);
   if (known_gauges['memory']) {
     known_gauges.memory.value = store[0];
@@ -152,7 +160,7 @@ systemMemory.subscribe(store => {
   }
 });
 
-systemDisk.subscribe(store => {
+systemDisk.subscribe((store) => {
   let known_gauges = get(sensors);
   if (known_gauges['disk']) {
     known_gauges.disk.value = store[0];

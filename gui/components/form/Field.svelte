@@ -23,25 +23,19 @@
   export let horizontal = null;
 </script>
 
-<FormGroup
-  id="{id}"
-  label="{label}"
-  required="{required}"
-  help="{help}"
-  invalid="{invalid}"
-  horizontal="{horizontal}"
-  class="{$$props.class || ''}">
+<FormGroup {id} {label} {required} {help} {invalid} {horizontal} class={$$props.class || ''}>
   <input
-    type="{type}"
-    id="{id}"
-    name="{name}"
-    placeholder="{placeholder}"
-    value="{value}"
+    {type}
+    {id}
+    {name}
+    {placeholder}
+    {value}
     {required}
     {readonly}
     {disabled}
-    min="{min}"
-    max="{max}"
-    step="{step}"
-    class="form-control" />
+    {min}
+    {max}
+    {step}
+    class="form-control"
+  />
 </FormGroup>

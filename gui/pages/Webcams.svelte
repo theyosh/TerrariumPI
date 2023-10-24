@@ -27,8 +27,11 @@
         try {
           await deleteWebcam(webcam.id);
           successNotification(
-            $_('webcams.delete.ok.message', { default: "The webcam ''{name}'' is deleted.", values: { name: webcam.name } }),
-            $_('notification.delete.ok.title', { default: 'OK' })
+            $_('webcams.delete.ok.message', {
+              default: "The webcam ''{name}'' is deleted.",
+              values: { name: webcam.name },
+            }),
+            $_('notification.delete.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -37,10 +40,10 @@
               default: "The webcam ''{name}'' could not be deleted!\nError: {error}",
               values: { name: webcam.name, error: e.message },
             }),
-            $_('notification.delete.error.title', { default: 'ERROR' })
+            $_('notification.delete.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -54,8 +57,11 @@
         try {
           await updateSystemSettings({ exclude_ids: webcam.id });
           successNotification(
-            $_('webcams.exclude.ok.message', { default: "The webcam ''{name}'' is ignored.", values: { name: webcam.name } }),
-            $_('notification.exclude.ok.title', { default: 'OK' })
+            $_('webcams.exclude.ok.message', {
+              default: "The webcam ''{name}'' is ignored.",
+              values: { name: webcam.name },
+            }),
+            $_('notification.exclude.ok.title', { default: 'OK' }),
           );
           loadData();
         } catch (e) {
@@ -64,10 +70,10 @@
               default: "The webcam ''{name}'' could not be ignored!\nError: {error}",
               values: { name: webcam.name, error: e.message },
             }),
-            $_('notification.exclude.error.title', { default: 'ERROR' })
+            $_('notification.exclude.error.title', { default: 'ERROR' }),
           );
         }
-      }
+      },
     );
   };
 
@@ -95,7 +101,7 @@
       <!-- Sort based on translated names -->
       {#each webcams.sort((a, b) => a.name.localeCompare(b.name)) as webcam}
         <div class="col-12 col-md-12 col-lg-6 col-xl-4">
-          <WebcamCard webcam="{webcam}" />
+          <WebcamCard {webcam} />
         </div>
       {/each}
     {/if}

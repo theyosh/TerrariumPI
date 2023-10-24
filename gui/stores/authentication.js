@@ -1,7 +1,7 @@
-import { writable, get } from "svelte/store";
-import { apiLogin } from "../providers/api";
-import { websocket } from "../providers/websocket";
-import { default as currentUserStore } from "./current-user";
+import { writable, get } from 'svelte/store';
+import { apiLogin } from '../providers/api';
+import { websocket } from '../providers/websocket';
+import { default as currentUserStore } from './current-user';
 
 export const isAuthenticated = writable(false);
 export const loginModal = writable(null);

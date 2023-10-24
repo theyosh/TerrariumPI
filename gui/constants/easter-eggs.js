@@ -1,6 +1,7 @@
 export const fireworks = () => {
   const today = new Date();
-  const newyear = (today.getMonth() === 11 && today.getDate() >= 31) || (today.getMonth() === 0 && today.getDate() <= 1);
+  const newyear =
+    (today.getMonth() === 11 && today.getDate() >= 31) || (today.getMonth() === 0 && today.getDate() <= 1);
   let fireworksCanvas = document.querySelector('canvas#fireworks');
 
   if (newyear) {
@@ -22,7 +23,8 @@ export const fireworks = () => {
 
 export const christmas = () => {
   const today = new Date();
-  const christmas = (today.getMonth() === 11 && today.getDate() >= 18) || (today.getMonth() === 0 && today.getDate() <= 3);
+  const christmas =
+    (today.getMonth() === 11 && today.getDate() >= 18) || (today.getMonth() === 0 && today.getDate() <= 3);
   const hat = document.querySelector('img.christmashat');
 
   if (christmas) {
