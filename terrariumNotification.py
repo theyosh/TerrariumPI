@@ -2530,7 +2530,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             message.append(
                 f"- Storage: {(system_stats['storage']['used']/1073741824):.2f} GB ({((system_stats['storage']['used']*100)/system_stats['storage']['total']):.2f}%)"
             )
-            
+
             await query_message.edit_text("\n".join(message))
 
     async def enclosure(self, update, context):
@@ -2583,8 +2583,8 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             await query_message.edit_text(f"Enclosure: {enclosure_name} \nLoading area(s)...")
         else:
             query_message = await update.message.reply_text("Loading area(s)...")
-            
-        message = [f"Enclosure {self.engine.enclosures[enclosure_id].name} current area(s) staus:"]
+
+        message = [f"Enclosure {self.engine.enclosures[enclosure_id].name} current area(s) status:"]
 
         for area in self.engine.enclosures[enclosure_id].areas.values():
             message.append(f"- Area {area.name} type {area.type} => {'ON' if area.state['powered'] else 'OFF'} ")
