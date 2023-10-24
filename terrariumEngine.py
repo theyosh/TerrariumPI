@@ -342,9 +342,9 @@ class terrariumEngine(object):
         self.settings["gitversion"] = gitversion
 
         # Old dark mode conversion #852
-        if str(self.settings["auto_dark_mode"]).lower() == 'true':
+        if str(self.settings["auto_dark_mode"]).lower() == "true":
             self.settings["auto_dark_mode"] = "on"
-        elif str(self.settings["auto_dark_mode"]).lower() == 'false':
+        elif str(self.settings["auto_dark_mode"]).lower() == "false":
             self.settings["auto_dark_mode"] = "off"
 
         # Loading weather

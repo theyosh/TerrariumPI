@@ -2691,7 +2691,6 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                 )
             )
 
-
             # add an handler for normal text (not commands)
             self.telegram_bot.add_handler(MessageHandler(filters.TEXT, self.text))
 

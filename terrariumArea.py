@@ -267,7 +267,7 @@ class terrariumArea(object):
                     logger.exception(f'Error loading end time: {self.setup[period]["end"]} - {ex}')
 
                 if begin is None or end is None:
-                    logger.warning('Error generating timer periods. Either begin or end time is incorrect.')
+                    logger.warning("Error generating timer periods. Either begin or end time is incorrect.")
                     continue
 
                 on_period = max(0.0, self.setup[period]["on_duration"]) * 60.0
