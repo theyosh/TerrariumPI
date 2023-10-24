@@ -6,7 +6,8 @@
     "build": "MIX_ENV=prod NODE_ENV=prod NODE_OPTIONS=--max-old-space-size=1536 cross-env-file -p ./.env.prod.json npx rollup -c",
     "build:dev": "cross-env-file -p ./.env.dev.json npx rollup -c",
     "dev": "cross-env-file -p ./.env.dev.json npx rollup -c -w",
-    "start": "npx serve -n -l 5000 public"
+    "start": "npx serve -n -l 5000 public",
+    "format": "prettier --write  --plugin prettier-plugin-svelte ./gui"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.10",
@@ -24,6 +25,8 @@
     "leaflet": "^1.9.2",
     "postcss": "^8.4.14",
     "postcss-import": "^15.0.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-svelte": "^3.0.3",
     "rollup": "^3.26.0",
     "rollup-plugin-bundle-inject": "^1.0.3",
     "rollup-plugin-copy": "^3.4.0",
