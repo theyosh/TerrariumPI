@@ -1,54 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html __HTML_ATTRS__>
-<head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<meta name="description" content="Software for automating your reptile enclosure or any other area. Using sensors and relays to keep your environment at a controlled state. All with a nice web interface.">
-	<!-- __METAS__ -->
-	<title>TerrariumPI</title>
-	<!-- Google Font: Source Sans Pro -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-	<!-- __LINKS__ -->
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <meta
+      name="description"
+      content="Software for automating your reptile enclosure or any other area. Using sensors and relays to keep your environment at a controlled state. All with a nice web interface."
+    />
+    <!-- __METAS__ -->
+    <title>TerrariumPI</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- __LINKS__ -->
 
-	<script defer src="js/jquery.min.js"></script>
-	<script defer src="js/select2.min.js"></script>
+    <script defer src="js/jquery.min.js"></script>
+    <script defer src="js/select2.min.js"></script>
 
-	<script defer src="js/fullcalendar.min.js"></script>
-	<script defer src="js/fullcalendar-locales.min.js"></script>
+    <script defer src="js/fullcalendar.min.js"></script>
+    <script defer src="js/fullcalendar-locales.min.js"></script>
 
-	<script defer src="js/jquery.knob.min.js"></script>
+    <script defer src="js/jquery.knob.min.js"></script>
 
-	<script defer src="js/jquery.dataTables.min.js"></script>
-	<script defer src="js/dataTables.bootstrap4.min.js"></script>
-	<script defer src="js/dataTables.responsive.min.js"></script>
-	<script defer src="js/responsive.bootstrap4.min.js"></script>
-	<!-- __SCRIPTS__ -->
-	<script>
-    window.terrariumPI = {
-      language  : 'nl-NL',
-      currency  : 'eur',
-      name      : 'TerrariumPIDev',
-      version   : '4.6.1',
-      device    : 'Raspberry Pi 4 Model B Rev 1.1',
-      profile   : 'public/img/terrariumpi.jpg',
-      favicon   : 'media/favicon.ico',
-      logged_in : false,
-      gitversion: '',
-      docker: true,
-      graph_show_min_max_gauge : true,
-      graph_smooth_value : 5.0,
-      show_gauge_overview: true,
-      auto_dark_mode : 'desktop',
-      is_night : false,
-      dashboard_mode : 0.0,
-      units: {'temperature': {'name': 'temperatuur', 'value': 'C'}, 'distance': {'name': 'afstand', 'value': 'cm'}, 'altitude': {'name': 'hoogte', 'value': 'cm'}, 'pressure': {'name': 'luchtdruk', 'value': 'hPa'}, 'humidity': {'name': 'luchtvochtigheid', 'value': '%'}, 'moisture': {'name': 'vochtigheid', 'value': '%'}, 'conductivity': {'name': 'geleidbaarheid', 'value': 'mS'}, 'ph': {'name': 'ph', 'value': 'pH'}, 'light': {'name': 'licht', 'value': 'lux'}, 'uva': {'name': 'uva', 'value': 'µW/cm²'}, 'uvb': {'name': 'uvb', 'value': 'µW/cm²'}, 'uvi': {'name': 'uvi', 'value': ''}, 'fertility': {'name': 'vruchtbaarheid', 'value': 'µS/cm'}, 'co2': {'name': 'co2', 'value': 'ppm'}, 'volume': {'name': 'volume', 'value': 'L'}, 'water_volume': {'name': 'Watervolume', 'value': 'L'}, 'watertank': {'name': 'watertank', 'value': 'L'}, 'windspeed': {'name': 'windsnelheid', 'value': 'km/h'}, 'water_flow': {'name': 'waterstroom', 'value': 'L/m'}, 'wattage': {'name': 'wattage', 'value': 'W'}, 'powerusage': {'name': 'Pi stroomverbruik', 'value': 'kWh'}, 'heating': {'name': 'heating', 'value': 'C'}, 'cooling': {'name': 'cooling', 'value': 'C'}},
-      available_sensor_types : ['temperature', 'humidity', 'light', 'fertility', 'uvb', 'moisture', 'co2', 'pressure', 'altitude', 'distance', 'uva', 'uvi']
-    };
-  </script>
-</head>
-<body class="sidebar-mini layout-fixed layout-navbar-fixed">
-	<div id="app"></div>
-</body>
+    <script defer src="js/jquery.dataTables.min.js"></script>
+    <script defer src="js/dataTables.bootstrap4.min.js"></script>
+    <script defer src="js/dataTables.responsive.min.js"></script>
+    <script defer src="js/responsive.bootstrap4.min.js"></script>
+    <!-- __SCRIPTS__ -->
+    <script>
+      window.terrariumPI = {
+      	language : '{{ lang }}',
+      	currency : '{{ currency }}',
+      	name     : '{{ title.replace("\'","\\'") }}',
+      	version  : '{{ version }}',
+      	device   : '{{ device }}',
+      	profile  : '{{ profile_image }}',
+      	favicon  : '{{ favicon }}',
+      	logged_in : {% if authenticated %}true{% else %}false{% endif %},
+      	{% if authenticated %}username: '{{ username }}', {% endif %}
+      	docker: {{ docker }},
+      	gitversion: '{% if authenticated %}{{gitversion}}{% endif %}',
+      	graph_show_min_max_gauge : {{ graph_show_min_max_gauge }},
+      	graph_smooth_value : {{ graph_smooth_value }},
+      	show_gauge_overview: {{ show_gauge_overview }},
+      	auto_dark_mode : '{{ auto_dark_mode }}',
+      	is_night : {{ is_night }},
+      	dashboard_mode : {{ dashboard_mode }},
+      	units: {{ units }},
+      	available_sensor_types : {{available_sensor_types}}
+      };
+    </script>
+  </head>
+  <body class="sidebar-mini layout-fixed layout-navbar-fixed">
+    <div id="app"></div>
+  </body>
 </html>
