@@ -88,15 +88,15 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
                 self._DIMMER_FREQ,
                 max(0, min(1000000, int(dim_value) * self._DIMMER_DUTY_CYCLE)),
             )
-            self._dimmer_state = state
 
+        self._dimmer_state = state
         return True
 
     def _get_hardware_value(self):
-        if not self._legacy:
-            return round(max(0.0, min(100.0, (self.device.value * 100.0) - float(self._dimmer_offset))))
+        # if not self._legacy:
+        #     return round(max(0.0, min(100.0, (self.device.value * 100.0) - float(self._dimmer_offset))))
 
-        return self._dimmer_state - self._dimmer_offset
+        return self._dimmer_state
 
     def stop(self):
         if not self._legacy:
