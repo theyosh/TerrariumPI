@@ -75,7 +75,7 @@ def create_defaults(version):
         {"id": "dashboard_mode", "value": "0"},
         {"id": "all_gauges_on_single_page", "value": "false"},
         {"id": "graph_smooth_value", "value": "0"},
-        {"id": "auto_dark_mode", "value": "0"},
+        {"id": "auto_dark_mode", "value": "false"},
     ]
 
     for setting in setting_defaults:
