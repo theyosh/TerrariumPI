@@ -6,7 +6,8 @@
 */
 $tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
 
-@import "{{ site.theme }}";
+/* Chirpy main scss */
+@import "main";
 
 @import "swagger";
 
@@ -29,11 +30,18 @@ div.post-content .share-icons a.external::after {
 }
 
 /* Social media icons left bottom menu */
-
 #sidebar .sidebar-bottom a:not(:last-child) {
   margin-right: 0.6rem !important;
+  border: solid 1px red;
 }
 
+#search-wrapper {
+    white-space: nowrap;
+}
+
+#search-wrapper #search-input {
+    display: inline !important;
+}
 
 /*
 html[mode="dark"] img.is_dimmer,
