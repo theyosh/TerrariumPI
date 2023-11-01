@@ -175,6 +175,7 @@ class terrariumNotification(terrariumSingleton):
         },
         "button_action": {"name": N_("Button action"), "placeholders": {**__DEFAULT_PLACEHOLDERS}},
         "webcam_archive": {"name": N_("Webcam archive"), "placeholders": {**__DEFAULT_PLACEHOLDERS}},
+        "webcam_motion": {"name": N_("Webcam motion"), "placeholders": {**__DEFAULT_PLACEHOLDERS}},
         "area_lights_incorrect": {
             "name": N_("Lights area wrong state"),
             "placeholders": {
@@ -319,6 +320,10 @@ class terrariumNotification(terrariumSingleton):
 
         if data is None:
             data = {}
+
+        # Ignore disabled sensor, relay, button or webcam notification. Default is enabled
+        if data.get("notification", True) == False:
+            return
 
         with orm.db_session():
             for message in NotificationMessage.select(lambda nm: nm.type == message_type):

@@ -499,6 +499,10 @@ class terrariumWebcam(object):
             self.id, datetime.now().strftime("%Y/%m/%d"), f"{self.id}_archive_{int(time())}.jpg"
         )
 
+    @property
+    def last_archived_image(self):
+        return self.__last_archive_image
+
     def update(self, relays=None):
         # Readonly call
         if relays is None:
@@ -589,7 +593,7 @@ class terrariumWebcam(object):
 
     def archive(self, timeout):
         if not self.state:
-            return
+            return False
 
         archive = (
             self.__last_archive_image is None or int(time() - self.__last_archive_image.stat().st_mtime) >= timeout
@@ -599,12 +603,13 @@ class terrariumWebcam(object):
             self.__last_archive_image = self.raw_archive_path
             self.__last_archive_image.parent.mkdir(parents=True, exist_ok=True)
             self.__raw_image.save(self.__last_archive_image, "jpeg", quality=self.__JPEG_QUALITY, exif=self.__exit_data)
-            # self.__environment.notification.message('webcam_archive',self.get_data(),[archive_image])
             logger.debug(f"Webcam {self.name}: Archiving image to disk took: {time()-start:.3f} seconds")
+
+        return archive
 
     def motion_capture(self, motion_frame="last", motion_threshold=25, motion_area=500, motion_boxes="green"):
         if not self.state:
-            return
+            return False
 
         start = time()
 
@@ -668,13 +673,14 @@ class terrariumWebcam(object):
             # Store the current image for next comparison round.
             self.__compare_image = current_image
             logger.info(f"Saved webcam {self} image for archive due to motion detection")
-            # self.__environment.notification.message('webcam_motion',self.get_data(),[archive_image])
 
         elif "last" == motion_frame:
             # Only store the current frame when we use the 'last' frame option
             self.__compare_image = current_image
 
         logger.debug(f"Webcam {self.name}: Motion detection image took: {time()-start:.3f} seconds")
+
+        return motion_detected
 
     # TODO: What to stop....?
     def stop(self):

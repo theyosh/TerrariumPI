@@ -168,6 +168,8 @@ class Button(db.Entity):
     name = orm.Required(str)
     address = orm.Required(str)
 
+    notification = orm.Optional(bool, default=True)
+
     calibration = orm.Optional(orm.Json)
 
     history = orm.Set("ButtonHistory")
@@ -337,6 +339,8 @@ class Relay(db.Entity):
     wattage = orm.Optional(float, default=0)
     flow = orm.Optional(float, default=0)
 
+    notification = orm.Optional(bool, default=True)
+
     manual_mode = orm.Optional(bool, default=False)
     replacement = orm.Optional(datetime, default=datetime.fromtimestamp(0))
 
@@ -447,6 +451,8 @@ class Sensor(db.Entity):
     alarm_min = orm.Optional(float, default=0)
     alarm_max = orm.Optional(float, default=100)
     max_diff = orm.Optional(float, default=0)
+
+    notification = orm.Optional(bool, default=True)
 
     exclude_avg = orm.Required(bool, default=False)
 
@@ -602,6 +608,8 @@ class Webcam(db.Entity):
 
     archive = orm.Optional(orm.Json)
     motion = orm.Optional(orm.Json)
+
+    notification = orm.Optional(bool, default=True)
 
     markers = orm.Optional(orm.Json, default=[])
 
