@@ -71,6 +71,26 @@ It will not send files, as that will make the messages to big.
 You can then receive messages with the subject and message you entered in a notification message.
 When you selected the `system_error` message type, you should get a siren sound when you receive a system error message for extra attention.
 
+### Telegram
+
+![Telegram icon](/assets/img/telegram-logo.webp){: .right .invert width="150" } For Telegram you need to enter the **Bot token** and **username** in order to make a connection. A Telegram Bot can be created [here](https://core.telegram.org/bots#how-do-i-create-a-bot). Your username(s) should start with an `@` and space separated. Only entered usernames can receive messages and send commands. The bot token is stored encrypted in the database.
+
+In order to receive messages, you need to start talking to your Telegram bot through your telegram app. This is done by sending a telegram command `/start`. You should get a response like `start command received, you are now getting updates...`.
+
+#### Commands
+
+With the command `/help` you get some more options you can do with the Telegram service. Those are for now:
+
+```console
+/start : This will start listening for notifications.
+/webcam [webcam_id] : will show the latest image of the webcam ID.
+/sensor [sensor_id] : will show the current sensor state. Sensor id is optional.
+/relay [relay_id] : will show the current relay state. Relay id is optional.
+/button [button_id] : will show the current button state. button id is optional.
+/enclosure [enclosure_id] : will show the current area state of the enclosure ID
+/status : will show the current system status.
+```
+
 ### Traffic light
 
 ![General GPIO traffic light](/assets/img/traffic_light.webp){: .left style="height: 150px" }![Pi-Stop traffic light](/assets/img/pistop.webp){: .right style="height: 150px" }The traffic light works a bit different. It will only work on system warnings and errors. So if you select this for a different message type, it will not react.
