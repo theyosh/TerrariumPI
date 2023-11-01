@@ -9,7 +9,7 @@ In order to cleanup the database, make sure that TerrariumPI is **stopped**! Els
 
 When you cleanup the database, we need at least the same amount of free space as the size of the database. The script will check this. Make sure you have enough free diskspace. If this is a problem, you can also try to download the database and run this on a desktop/laptop.
 
-The cleanup can take up to **10 hours**!. So make sure your environment is stable and can survive for that period.
+The cleanup can take up to **4 hours**!. So make sure your environment is stable and can survive for that period.
 
 1. Enter the TerrariumPI folder: `cd /home/pi/TerrariumPI/`
 2. Enable Python3 virtual environment: `source venv/bin/activate`
