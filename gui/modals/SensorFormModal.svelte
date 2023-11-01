@@ -227,7 +227,17 @@
           })}
         />
       </div>
-      <div class="col-2 col-sm-2 col-md-4 col-lg-2">
+      <div class="col-6 col-sm-6 col-md-6 col-lg-1">
+        <Switch
+            name="notification"
+            value={$formData.notification}
+            label={$_('sensors.settings.notification.label', { default: 'Notification' })}
+            help={$_('sensors.settings.notification.help', {
+            default: 'Toggle to enable notification messages.',
+            })}
+        />
+      </div>
+      <div class="col-6 col-sm-6 col-md-6 col-lg-1">
         <Field
           type="text"
           name="value"

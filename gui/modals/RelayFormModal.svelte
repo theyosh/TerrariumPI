@@ -12,6 +12,7 @@
   import Field from '../components/form/Field.svelte';
   import Helper from '../components/form/Helper.svelte';
   import Select from '../components/form/Select.svelte';
+  import Switch from '../components/form/Switch.svelte';
 
   let wrapper_show;
   let wrapper_hide;
@@ -173,7 +174,7 @@
           invalid={$_('relays.settings.hardware.invalid', { default: 'Please select a hardware type.' })}
         />
       </div>
-      <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-2">
         <Field
           type="text"
           name="address"
@@ -237,7 +238,17 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-sm-12 col-md-12 col-lg-1">
+      <div class="col-6 col-sm-6 col-md-6 col-lg-1">
+        <Switch
+            name="notification"
+            value={$formData.notification}
+            label={$_('relays.settings.notification.label', { default: 'Notification' })}
+            help={$_('relays.settings.notification.help', {
+            default: 'Toggle to enable notification messages.',
+            })}
+        />
+      </div>
+      <div class="col-6 col-sm-6 col-md-6 col-lg-1">
         <Field
           type="text"
           name="value"

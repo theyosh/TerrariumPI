@@ -147,7 +147,7 @@
     <input type="hidden" name="id" disabled={$formData.id && $formData.id !== '' ? null : true} />
 
     <div class="row">
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-3">
         <Select
           name="hardware"
           value={$formData.hardware}
@@ -161,7 +161,7 @@
           invalid={$_('buttons.settings.hardware.invalid', { default: 'Please select a hardware type.' })}
         />
       </div>
-      <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4">
         <Field
           type="text"
           name="address"
@@ -175,7 +175,7 @@
           })}
         />
       </div>
-      <div class="col-10 col-sm-10 col-md-8 col-lg-3">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-3">
         <Field
           type="text"
           name="name"
@@ -188,7 +188,17 @@
           })}
         />
       </div>
-      <div class="col-2 col-sm-2 col-md-4 col-lg-2">
+      <div class="col-6 col-sm-6 col-md-6 col-lg-1">
+        <Switch
+            name="notification"
+            value={$formData.notification}
+            label={$_('buttons.settings.notification.label', { default: 'Notification' })}
+            help={$_('buttons.settings.notification.help', {
+            default: 'Toggle to enable notification messages.',
+            })}
+        />
+      </div>
+      <div class="col-6 col-sm-6 col-md-6 col-lg-1">
         <Field
           type="text"
           name="value"
@@ -222,7 +232,7 @@
               })}
             />
           </div>
-          <div class="col-6 col-sm-6 col-md-6 col-lg-3" class:d-none={selected_hardware !== 'ldr'}>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-4" class:d-none={selected_hardware !== 'ldr'}>
             <Field
               type="number"
               name="calibration.ldr_capacitor"
