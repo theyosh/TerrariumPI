@@ -16,7 +16,8 @@ h1.dynamic-title {
     display: none;
 }
 
-div.post-content a.external::after,
+div.license-wrapper a.external::after,
+div.content a.external::after,
 footer a.external::after {
   content: "\f35d";
   padding-left: 0.2rem;
@@ -25,7 +26,7 @@ footer a.external::after {
   font-size: 0.75rem;
 }
 
-div.post-content .share-icons a.external::after {
+div.content .share-icons a.external::after {
     content: none;
 }
 
