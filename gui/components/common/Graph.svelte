@@ -84,6 +84,11 @@
         labels: null,
         datasets: [],
       };
+      if (mode === 'sensors') {
+        graphOpts.scales.y.min = new_data[0].alarm_min - 10;
+        graphOpts.scales.y.max = new_data[0].alarm_max + 10;
+        graphOpts.scales.y.ticks.includeBounds = false;
+      }
 
       for (let graphValue in new_data[0]) {
         if (graphValue === 'timestamp' || (graphValue === 'value' && ['sensors', 'buttons'].indexOf(mode) === -1)) {

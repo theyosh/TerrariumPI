@@ -3,7 +3,7 @@
 </script>
 
 <script>
-  import { isDay } from '../../stores/terrariumpi';
+  import { isDarkInterface } from '../../stores/terrariumpi';
 
   export let src;
 
@@ -19,8 +19,8 @@
 <audio bind:this={audio} bind:paused on:play={stopOthers} controls preload="none" class="d-none" {src}></audio>
 <button
   class="btn btn-sm"
-  class:btn-light={$isDay}
-  class:btn-dark={!$isDay}
+  class:btn-light={!$isDarkInterface}
+  class:btn-dark={$isDarkInterface}
   on:click={paused ? audio.play() : audio.pause()}
 >
   <i

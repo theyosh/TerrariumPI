@@ -7,7 +7,7 @@
   import { roundToPrecision } from '../../helpers/number-helpers';
   import { formatBytes } from '../../helpers/file-size-helpers';
   import { getCustomConfig } from '../../config';
-  import { isDay } from '../../stores/terrariumpi';
+  import { isDarkInterface } from '../../stores/terrariumpi';
 
   let settings = getCustomConfig();
 
@@ -67,7 +67,7 @@
     opts.staticLabels = {
       labels: [$sensors[id]['measure_min'], $sensors[id]['measure_max']],
       font: '10px Helvetica Neue,sans-serif',
-      color: $isDay ? '#6c757d' : '#adb5bd',
+      color: $isDarkInterface ? '#adb5bd' : '#6c757d',
       fractionDigits: 2,
     };
   }
@@ -88,7 +88,7 @@
         gauge.options.staticLabels = {
           labels: [$sensors[id].measure_min, $sensors[id].measure_max],
           font: '10px Helvetica Neue,sans-serif',
-          color: $isDay ? '#6c757d' : '#adb5bd',
+          color: $isDarkInterface ? '#adb5bd' : '#6c757d',
           fractionDigits: 2,
         };
       }
