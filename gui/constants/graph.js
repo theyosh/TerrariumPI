@@ -3,7 +3,7 @@ import { get } from 'svelte/store';
 import { get_template_color } from '../helpers/color-helpers';
 import { getCustomConfig } from '../config';
 import { locale } from '../locale/i18n';
-import { isDay } from '../stores/terrariumpi';
+import { isDarkDesktop } from '../stores/terrariumpi';
 
 const settings = getCustomConfig();
 
@@ -28,7 +28,7 @@ export const graphDefaultOpts = {
       },
       ticks: {
         color: function () {
-          return get(isDay) ? '#6c757d' : '#adb5bd';
+          return get(isDarkDesktop) ? '#adb5bd' : '#6c757d';
         },
       },
     },
@@ -41,7 +41,7 @@ export const graphDefaultOpts = {
       },
       ticks: {
         color: function () {
-          return get(isDay) ? '#6c757d' : '#adb5bd';
+          return get(isDarkDesktop) ? '#adb5bd' : '#6c757d';
         },
         callback: function (value, index, ticks) {
           let unit = null;
@@ -80,7 +80,7 @@ export const graphDefaultOpts = {
       },
       ticks: {
         color: function () {
-          return get(isDay) ? '#6c757d' : '#adb5bd';
+          return get(isDarkDesktop) ? '#adb5bd' : '#6c757d';
         },
         callback: function (value, index, ticks) {
           index = null;
@@ -121,7 +121,7 @@ export const graphDefaultOpts = {
       },
       labels: {
         color: function () {
-          return get(isDay) ? '#6c757d' : '#adb5bd';
+          return get(isDarkDesktop) ? '#adb5bd' : '#6c757d';
         },
       },
     },
