@@ -743,7 +743,7 @@ class terrariumEngine(object):
                         "limit_max": 0.0,
                     }
 
-                if sensor.error:
+                if sensor.error or sensor.value is None:
                     data[sensor.type]["error"] += 1
                     continue
 
