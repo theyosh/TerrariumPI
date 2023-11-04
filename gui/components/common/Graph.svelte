@@ -130,24 +130,25 @@
     }
 
     if (mode === 'sensors') {
-        if (settings.graph_limit_min_max) {
-            let last = new_data.length - 1;
-            graphOpts.scales.y.min = new_data[last].alarm_min - Math.abs(new_data[last].alarm_min === 0 ? 20 : new_data[last].alarm_min * 0.2);
-            graphOpts.scales.y.max = new_data[last].alarm_max + Math.abs(new_data[last].alarm_max === 0 ? 20 : new_data[last].alarm_max * 0.2);
-            graphOpts.scales.y.ticks.includeBounds = false;
-        }
-        if (settings.graph_show_min_max_gauge) {
-            let values = new_data.map((point) => {
-                return point.value;
-            });
-            updateSensor({
-                id: id,
-                measure_min: Math.min(...values),
-                measure_max: Math.max(...values),
-            });
-        }
+      if (settings.graph_limit_min_max) {
+        let last = new_data.length - 1;
+        graphOpts.scales.y.min =
+          new_data[last].alarm_min - Math.abs(new_data[last].alarm_min === 0 ? 20 : new_data[last].alarm_min * 0.2);
+        graphOpts.scales.y.max =
+          new_data[last].alarm_max + Math.abs(new_data[last].alarm_max === 0 ? 20 : new_data[last].alarm_max * 0.2);
+        graphOpts.scales.y.ticks.includeBounds = false;
+      }
+      if (settings.graph_show_min_max_gauge) {
+        let values = new_data.map((point) => {
+          return point.value;
+        });
+        updateSensor({
+          id: id,
+          measure_min: Math.min(...values),
+          measure_max: Math.max(...values),
+        });
+      }
     }
-
 
     if ($graphs[id].period === 'day') {
       graphOpts.scales.x.time.unit = 'minute';
