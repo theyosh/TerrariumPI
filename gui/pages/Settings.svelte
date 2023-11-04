@@ -513,6 +513,18 @@
           />
 
           <Switch
+            name="graph_limit_min_max"
+            value={$formData.graph_limit_min_max}
+            horizontal={true}
+            label={$_('system.settings.graph_limit_min_max.label', {
+              default: 'Limit graph values',
+            })}
+            help={$_('system.settings.graph_limit_min_max.help', {
+              default: 'Limit graph values to 20% of the alarm values.',
+            })}
+          />
+
+          <Switch
             name="all_gauges_on_single_page"
             value={$formData.all_gauges_on_single_page}
             horizontal={true}

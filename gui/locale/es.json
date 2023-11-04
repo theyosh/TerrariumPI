@@ -1701,6 +1701,10 @@
         "help": "IDS que están excluidos.",
         "label": "IDS excluidos"
       },
+      "graph_limit_min_max": {
+        "help": "",
+        "label": ""
+      },
       "graph_smooth_value": {
         "help": "Ingrese la cantidad de puntos de datos al promedio. 0 deshabilitará esta característica.",
         "invalid": "Ingrese un valor mínimo de {value}.",

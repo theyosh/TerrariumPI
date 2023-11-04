@@ -1766,6 +1766,10 @@
         "help": "Ausgeschlossene IDs.",
         "label": "Ausgeschlossene IDs"
       },
+      "graph_limit_min_max": {
+        "help": "",
+        "label": ""
+      },
       "graph_smooth_value": {
         "help": "Gib die Anzahl der Datenpunkte zum Durchschnitt ein. '0' zum deaktivieren.",
         "invalid": "Bitte gib einen Mindestwert von {value} ein.",

@@ -1766,6 +1766,10 @@
         "help": "IDs that are excluded.",
         "label": "Excluded ids"
       },
+      "graph_limit_min_max": {
+        "help": "Limit graph values to 20% of the alarm values.",
+        "label": "Limit graph values"
+      },
       "graph_smooth_value": {
         "help": "Enter the amount of data points to average. 0 will disable this feature.",
         "invalid": "Please enter a minimum value of {value}.",

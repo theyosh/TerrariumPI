@@ -1766,6 +1766,10 @@
         "help": "ID's die zijn uitgesloten.",
         "label": "Uitgesloten ID's"
       },
+      "graph_limit_min_max": {
+        "help": "",
+        "label": ""
+      },
       "graph_smooth_value": {
         "help": "Voer het aantal gegevenspunten in dat moet worden gemiddeld. 0 schakelt deze functie uit.",
         "invalid": "Voer een minimale waarde in van {value}.",

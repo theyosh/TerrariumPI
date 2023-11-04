@@ -84,11 +84,6 @@
         labels: null,
         datasets: [],
       };
-      if (mode === 'sensors') {
-        graphOpts.scales.y.min = new_data[0].alarm_min - 10;
-        graphOpts.scales.y.max = new_data[0].alarm_max + 10;
-        graphOpts.scales.y.ticks.includeBounds = false;
-      }
 
       for (let graphValue in new_data[0]) {
         if (graphValue === 'timestamp' || (graphValue === 'value' && ['sensors', 'buttons'].indexOf(mode) === -1)) {
@@ -134,21 +129,25 @@
       });
     }
 
-    if (mode === 'sensors' && settings.graph_show_min_max_gauge) {
-      updateSensor({
-        id: id,
-        measure_min: Math.min(
-          ...new_data.map((point) => {
-            return point.value;
-          }),
-        ),
-        measure_max: Math.max(
-          ...new_data.map((point) => {
-            return point.value;
-          }),
-        ),
-      });
+    if (mode === 'sensors') {
+        if (settings.graph_limit_min_max) {
+            let last = new_data.length - 1;
+            graphOpts.scales.y.min = new_data[last].alarm_min - Math.abs(new_data[last].alarm_min === 0 ? 20 : new_data[last].alarm_min * 0.2);
+            graphOpts.scales.y.max = new_data[last].alarm_max + Math.abs(new_data[last].alarm_max === 0 ? 20 : new_data[last].alarm_max * 0.2);
+            graphOpts.scales.y.ticks.includeBounds = false;
+        }
+        if (settings.graph_show_min_max_gauge) {
+            let values = new_data.map((point) => {
+                return point.value;
+            });
+            updateSensor({
+                id: id,
+                measure_min: Math.min(...values),
+                measure_max: Math.max(...values),
+            });
+        }
     }
+
 
     if ($graphs[id].period === 'day') {
       graphOpts.scales.x.time.unit = 'minute';
@@ -171,7 +170,7 @@
     changed: true, // This will trigger the initial loading when the page loads :)
   };
 
-  // Make a clone of the general graph settings ??? Not realy working :(
+  // Make a clone of the general graph settings ??? Not really working :(
   let graphOpts = { ...graphDefaultOpts };
   graphOpts.scales.y2.display = ['relays'].indexOf(mode) !== -1;
   graphOpts.scales.y.ticks.stepSize = ['buttons'].indexOf(mode) !== -1 ? 1 : null;

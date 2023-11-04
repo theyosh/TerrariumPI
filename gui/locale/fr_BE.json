@@ -1766,6 +1766,10 @@
         "help": "IDS exclus.",
         "label": "IDS exclus"
       },
+      "graph_limit_min_max": {
+        "help": "",
+        "label": ""
+      },
       "graph_smooth_value": {
         "help": "Entrez la quantité de points de données en moyenne. 0 désactivera cette fonctionnalité.",
         "invalid": "Contient le nom du capteur.",
