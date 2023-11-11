@@ -2,6 +2,184 @@ Changelog
 =========
 
 
+4.8.0 (2023-11-11)
+------------------
+
+**New**
+------
+
+- Add graph max value setting [#848](https://github.com/theyosh/TerrariumPI/issues/848). [TheYOSH]
+- Add new graph setting. [#848](https://github.com/theyosh/TerrariumPI/issues/848). [TheYOSH]
+- Add error example. [TheYOSH]
+- Add Telegram notification service documentation. [TheYOSH]
+- Add edit notification setting in the modals. [#842](https://github.com/theyosh/TerrariumPI/issues/842). [TheYOSH]
+- Add new FAQ [#855](https://github.com/theyosh/TerrariumPI/issues/855). [TheYOSH]
+- Add prettier javascript formatter. [TheYOSH]
+- Add old dark mode conversion, [#852](https://github.com/theyosh/TerrariumPI/issues/852). [TheYOSH]
+- Add new FAQ [#840](https://github.com/theyosh/TerrariumPI/issues/840). [TheYOSH]
+- Add Telegram bot first attempt. [#828](https://github.com/theyosh/TerrariumPI/issues/828). [TheYOSH]
+- Add inverse calibrarion to all buttons. [#831](https://github.com/theyosh/TerrariumPI/issues/831). [TheYOSH]
+- Add inverse calibrarion to all buttons. [#831](https://github.com/theyosh/TerrariumPI/issues/831). [TheYOSH]
+
+**Fixes**
+------
+
+- Fix dark interface colors. [TheYOSH]
+- Fix graph ticks color based on dark desktop. [TheYOSH]
+- Fix some css. [TheYOSH]
+- Fix version number. [TheYOSH]
+- Fix auto dark mode default setting. [TheYOSH]
+- Fix dimmer offset. [TheYOSH]
+- Codacy fix. [TheYOSH]
+- Fix parsing hidden form fields. [TheYOSH]
+- Finale fix form posting....? [TheYOSH]
+- Fix form submitting. [TheYOSH]
+- Fix form posting. [TheYOSH]
+- Fix form parsing. [TheYOSH]
+- Fix showing all sensors menu. [#845](https://github.com/theyosh/TerrariumPI/issues/845). [TheYOSH]
+- Fix docker check. [#840](https://github.com/theyosh/TerrariumPI/issues/840). [TheYOSH]
+- Fix showing all sensors menu. [#845](https://github.com/theyosh/TerrariumPI/issues/845). [TheYOSH]
+- Fix kasa loading in Docker. [theyosh]
+- Fix kasa loading in Docker. [theyosh]
+- Fix number error(2). [#838](https://github.com/theyosh/TerrariumPI/issues/838). [TheYOSH]
+- Fix number error. [#838](https://github.com/theyosh/TerrariumPI/issues/838). [TheYOSH]
+- Fix form parsing. [TheYOSH]
+- Fixed disabled reverse for buttons. [#831](https://github.com/theyosh/TerrariumPI/issues/831). [TheYOSH]
+- Fixed disabled reverse for buttons. [#831](https://github.com/theyosh/TerrariumPI/issues/831). [TheYOSH]
+- Fix empty number fields by setting to 0 default. [TheYOSH]
+- Fix button calibration. [TheYOSH]
+- Fix python environment for script sensors and relays. [TheYOSH]
+- Update documentation. Fix sensor type. [TheYOSH]
+- Fix zero records history tables. [#829](https://github.com/theyosh/TerrariumPI/issues/829). [theyosh]
+
+**Updates**
+------
+
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update Chirpy template. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update Python libraries. [TheYOSH]
+- Update dark mode settings (GUI part). [#852](https://github.com/theyosh/TerrariumPI/issues/852). [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Code performance updates. [TheYOSH]
+- Update Telegram code. add enclosure status. [#828](https://github.com/theyosh/TerrariumPI/issues/828). [cmonicob]
+- Update requirements.txt. [TheYOSH]
+- Update Telegram code. system status [#828](https://github.com/theyosh/TerrariumPI/issues/828). [cmonicob]
+- Update Telegram code. [#828](https://github.com/theyosh/TerrariumPI/issues/828). [cmonicob]
+- Update telegram Bot. [cmonicob]
+- Update NodeJS libraries. [TheYOSH]
+- Update Telegram code. [#828](https://github.com/theyosh/TerrariumPI/issues/828). [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update Telegram code. [#828](https://github.com/theyosh/TerrariumPI/issues/828). [TheYOSH]
+- Update python libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update documentation for scripts using Python virtual environment.
+  [TheYOSH]
+- Update documentation (2) [TheYOSH]
+
+**Other**
+------
+
+- New release 4.8.0. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1076 of 1076 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1076 of 1076 strings)
+- Deleted translation using Weblate (Swedish) [TheYOSH]
+- Javascript formatting. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- REmove debug css. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [TheYOSH]
+- Enable disable notification for sensor,relay,button or webcam. [#842](https://github.com/theyosh/TerrariumPI/issues/842).
+  [TheYOSH]
+- Change build step name. [TheYOSH]
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1074 of 1074 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1074 of 1074 strings)
+- New Svelte GUI build. [TheYOSH]
+- Use redoc npm package. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Revert back. [TheYOSH]
+- Formatted code with prettier. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Typo. [TheYOSH]
+- Merge pull request [#853](https://github.com/theyosh/TerrariumPI/issues/853) from cmonicob/develop. [TheYOSH]
+
+  Second part of Telegram notifications
+- Merge branch 'theyosh:develop' into develop. [cmonicob]
+- Gui build. [TheYOSH]
+- Merge branch 'main' into develop. [TheYOSH]
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Typo. [#847](https://github.com/theyosh/TerrariumPI/issues/847). [TheYOSH]
+- Better timer calculation. [#847](https://github.com/theyosh/TerrariumPI/issues/847). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into develop. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Merge branch 'main' into develop. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Resuse Pi device type. [TheYOSH]
+- Merge pull request [#841](https://github.com/theyosh/TerrariumPI/issues/841) from theophile/theophile. [TheYOSH]
+
+  Change method of SBC model detection
+- Change method of SBC model detection. [theophile]
+- Optimized code. [TheYOSH]
+- Merge pull request [#843](https://github.com/theyosh/TerrariumPI/issues/843) from cmonicob/develop. [TheYOSH]
+
+  update telegram Bot [#828](https://github.com/theyosh/TerrariumPI/issues/828)
+- Merge branch 'main' into develop. [TheYOSH]
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Better form parsing. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Refactor asyncio logic. [TheYOSH]
+- Refactored sensitive data encryption. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into develop. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into develop. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'develop' of github.com:theyosh/TerrariumPI into develop.
+  [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+
+
 4.7.0 (2023-09-10)
 ------------------
 
@@ -26,6 +204,7 @@ Changelog
 **Fixes**
 ------
 
+- Fix Chirpy template. [TheYOSH]
 - Javascript code fix. [TheYOSH]
 - Fix missing callback when adding relays through GUI. [TheYOSH]
 - Fix internal link. [TheYOSH]
@@ -95,6 +274,7 @@ Changelog
 **Other**
 ------
 
+- New release 4.7.0. [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
 - Continue startup (1) [#827](https://github.com/theyosh/TerrariumPI/issues/827). [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
