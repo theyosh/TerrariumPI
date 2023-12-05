@@ -1373,9 +1373,10 @@ class terrariumAreaPH(terrariumAreaHeater):
 class terrariumAreaWatertank(terrariumArea):
     def current_value(self, sensors):
         # TODO: Check if use of gall and inch does influence this...
-        volume_per_distance = self.setup["watertank_volume"] / (
-            self.setup["watertank_height"] - self.setup["watertank_offset"]
-        )
+        distance = float(self.setup["watertank_height"] - self.setup["watertank_offset"])
+        if distance <= 0.0:
+            distance = 1.0
+        volume_per_distance = self.setup["watertank_volume"] / distance
 
         sensor_values = {"current": [], "alarm_max": [], "alarm_min": [], "unit": "watertank"}
         for sensor in Sensor.select(lambda s: s.id in sensors):
