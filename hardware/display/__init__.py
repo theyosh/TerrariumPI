@@ -222,9 +222,12 @@ class terrariumDisplay(object):
 
         # print('Font width: {} -> {} / {} = {}'.format(self._device['fontwidth'], self.width, self._device['fontwidth'], self.width / self._device['fontwidth']))
         # print('Max chars on 1 line: {}'.format(max_chars_per_line))
-        text = text.split("\n")
+        text = text.strip().split("\n")
         if self.__MODE_TEXT_WRAP == self.mode:
-            text = [textwrap.wrap(line, width=max_chars_per_line) for line in text]
+            temp_lines = []
+            for line in text:
+                temp_lines += textwrap.wrap(line, width=max_chars_per_line)
+            text = temp_lines
 
         self.clear()
 
