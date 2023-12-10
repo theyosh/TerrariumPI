@@ -360,6 +360,9 @@ export const fetchEnclosures = async (enclosure_id, cb) => {
 
   // This callback will alter the start and end time for the enclosure areas which uses a timer mode.
   const fixTimerModeStartAndEndTimesCb = (data) => {
+    if (!Array.isArray(data)) {
+        data = [data];
+    }
     data.forEach((enclosure) => {
       enclosure.areas.forEach((area) => {
         if (area.mode === 'timer') {
@@ -386,7 +389,8 @@ export const fetchEnclosures = async (enclosure_id, cb) => {
       });
     });
 
-    cb(data);
+    // Return single object when enclosure_id is set
+    cb((enclosure_id ? data[0] : data));
   };
 
   await _getData(url, fixTimerModeStartAndEndTimesCb);
