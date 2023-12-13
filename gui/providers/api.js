@@ -361,7 +361,7 @@ export const fetchEnclosures = async (enclosure_id, cb) => {
   // This callback will alter the start and end time for the enclosure areas which uses a timer mode.
   const fixTimerModeStartAndEndTimesCb = (data) => {
     if (!Array.isArray(data)) {
-        data = [data];
+      data = [data];
     }
     data.forEach((enclosure) => {
       enclosure.areas.forEach((area) => {
@@ -390,7 +390,7 @@ export const fetchEnclosures = async (enclosure_id, cb) => {
     });
 
     // Return single object when enclosure_id is set
-    cb((enclosure_id ? data[0] : data));
+    cb(enclosure_id ? data[0] : data);
   };
 
   await _getData(url, fixTimerModeStartAndEndTimesCb);
@@ -425,11 +425,10 @@ export const fetchAreas = async (area_id, cb) => {
     url += `${area_id}/`;
   }
 
-
   // This callback will alter the start and end time for the enclosure areas which uses a timer mode.
   const fixAreaDataCb = (data) => {
     if (!Array.isArray(data)) {
-        data = [data];
+      data = [data];
     }
 
     // Legacy tweaks, convert to new values
@@ -488,49 +487,47 @@ export const fetchAreas = async (area_id, cb) => {
     const tweak_regex = /(?:dimmer|relay)_(?:duration|delay)_(on|off)_([a-z0-9]+)/i;
 
     data.forEach((area) => {
-        area.setup.variation = [...(area.setup.variation ?? []), ...[{ when: '', period: '', value: null }]];
+      area.setup.variation = [...(area.setup.variation ?? []), ...[{ when: '', period: '', value: null }]];
 
-        // Convert tweaks per period
-        for (let period of ['low', 'high', 'day', 'night']) {
-            if (!area.setup[period]) {
-                continue;
-            }
-
-            if (area.setup[period]['tweaks']) {
-                // Convert existing and correct tweaks to integer values or leave them as strings
-                area.setup[period]['tweaks'].forEach(tweak => {
-                   if (`${tweak.on}`.indexOf(',') === -1) {
-                    // Relay is NOT a dimmer
-                    tweak.on = tweak.on * 1;
-                    tweak.off = tweak.off * 1;
-                   }
-                });
-              continue;
-            }
-
-            // Convert legacy tweaks JSON data
-            for (let field of Object.keys(area.setup[period])) {
-                const tweaks = field.match(tweak_regex);
-                if (tweaks) {
-                  if (!tweak_settings[period][tweaks[2]]) {
-                    tweak_settings[period][tweaks[2]] = {
-                      id: tweaks[2],
-                      on: 0,
-                      off: 0,
-                    };
-                  }
-                  tweak_settings[period][tweaks[2]][tweaks[1]] =
-                  area.setup[period][field].indexOf(',') === -1
-                      ? area.setup[period][field] * 1
-                      : area.setup[period][field];
-                  delete area.setup[period][field];
-                }
-              }
+      // Convert tweaks per period
+      for (let period of ['low', 'high', 'day', 'night']) {
+        if (!area.setup[period]) {
+          continue;
         }
+
+        if (area.setup[period]['tweaks']) {
+          // Convert existing and correct tweaks to integer values or leave them as strings
+          area.setup[period]['tweaks'].forEach((tweak) => {
+            if (`${tweak.on}`.indexOf(',') === -1) {
+              // Relay is NOT a dimmer
+              tweak.on = tweak.on * 1;
+              tweak.off = tweak.off * 1;
+            }
+          });
+          continue;
+        }
+
+        // Convert legacy tweaks JSON data
+        for (let field of Object.keys(area.setup[period])) {
+          const tweaks = field.match(tweak_regex);
+          if (tweaks) {
+            if (!tweak_settings[period][tweaks[2]]) {
+              tweak_settings[period][tweaks[2]] = {
+                id: tweaks[2],
+                on: 0,
+                off: 0,
+              };
+            }
+            tweak_settings[period][tweaks[2]][tweaks[1]] =
+              area.setup[period][field].indexOf(',') === -1 ? area.setup[period][field] * 1 : area.setup[period][field];
+            delete area.setup[period][field];
+          }
+        }
+      }
     });
 
     // Return single object when enclosure_id is set
-    cb((area_id ? data[0] : data));
+    cb(area_id ? data[0] : data);
   };
 
   await _getData(url, fixAreaDataCb);
