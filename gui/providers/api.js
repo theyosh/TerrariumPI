@@ -424,7 +424,116 @@ export const fetchAreas = async (area_id, cb) => {
   if (area_id) {
     url += `${area_id}/`;
   }
-  await _getData(url, cb);
+
+
+  // This callback will alter the start and end time for the enclosure areas which uses a timer mode.
+  const fixAreaDataCb = (data) => {
+    if (!Array.isArray(data)) {
+        data = [data];
+    }
+
+    // Legacy tweaks, convert to new values
+    /* Old data
+    {
+    "id": "a8e5190f-1913-4da7-8aa1-e34655c3e76d",
+    "name": "Day light",
+    "type": "lights",
+    "mode": "weather",
+    "setup": {
+        "day": {
+        "begin": "06:19",
+        "dimmer_duration_off_0e0cf978ca6bdb8eb994c186434a628e": "0,30",
+        "dimmer_duration_on_0e0cf978ca6bdb8eb994c186434a628e": "0,45",
+        "end": "20:43",
+        "off_duration": 0,
+        "on_duration": 863.3,
+        "relay_delay_off_97c45c98476b1807a4bfa7bb4d249b14": "0",
+        "relay_delay_on_97c45c98476b1807a4bfa7bb4d249b14": "40",
+        "relays": [
+            "97c45c98476b1807a4bfa7bb4d249b14",
+            "0e0cf978ca6bdb8eb994c186434a628e"
+        ]
+        },
+        "main_lights": true,
+        "max_day_hours": 16,
+        "min_day_hours": 10,
+        "night": {
+        "begin": "20:43",
+        "end": "06:19",
+        "off_duration": 0,
+        "on_duration": 576.7,
+        "relays": []
+        },
+        "shift_day_hours": 0
+    },
+    "state": {
+        "day": {
+        "alarm_count": 0,
+        "begin": 1667542592,
+        "duration": 36000,
+        "end": 1667578592
+        "last_powered_on": 1667456201,
+        "powered": false,
+        "timer_on": false
+        },
+        "is_day": false,
+        "last_update": 1667505376,
+        "powered": false
+    },
+    "enclosure": "daa150fc-dd48-4b96-991c-eb27cb6de596"
+    }
+    */
+
+    let tweak_settings = { low: {}, high: {} };
+    const tweak_regex = /(?:dimmer|relay)_(?:duration|delay)_(on|off)_([a-z0-9]+)/i;
+
+    data.forEach((area) => {
+        area.setup.variation = [...(area.setup.variation ?? []), ...[{ when: '', period: '', value: null }]];
+
+        // Convert tweaks per period
+        for (let period of ['low', 'high', 'day', 'night']) {
+            if (!area.setup[period]) {
+                continue;
+            }
+
+            if (area.setup[period]['tweaks']) {
+                // Convert existing and correct tweaks to integer values or leave them as strings
+                area.setup[period]['tweaks'].forEach(tweak => {
+                   if (`${tweak.on}`.indexOf(',') === -1) {
+                    // Relay is NOT a dimmer
+                    tweak.on = tweak.on * 1;
+                    tweak.off = tweak.off * 1;
+                   }
+                });
+              continue;
+            }
+
+            // Convert legacy tweaks JSON data
+            for (let field of Object.keys(area.setup[period])) {
+                const tweaks = field.match(tweak_regex);
+                if (tweaks) {
+                  if (!tweak_settings[period][tweaks[2]]) {
+                    tweak_settings[period][tweaks[2]] = {
+                      id: tweaks[2],
+                      on: 0,
+                      off: 0,
+                    };
+                  }
+                  tweak_settings[period][tweaks[2]][tweaks[1]] =
+                  area.setup[period][field].indexOf(',') === -1
+                      ? area.setup[period][field] * 1
+                      : area.setup[period][field];
+                  delete area.setup[period][field];
+                }
+              }
+        }
+    });
+
+    // Return single object when enclosure_id is set
+    cb((area_id ? data[0] : data));
+  };
+
+  await _getData(url, fixAreaDataCb);
 };
 
 export const addArea = async (data, cb) => {
