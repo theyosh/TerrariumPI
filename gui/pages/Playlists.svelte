@@ -12,6 +12,7 @@
   import { fetchPlaylists, deletePlaylist } from '../providers/api';
   import { successNotification, errorNotification } from '../providers/notification-provider';
   import { isDay } from '../stores/terrariumpi';
+  import { DataTablesLanguageUrl } from '../constants/urls'
 
   import Card from '../user-controls/Card.svelte';
 
@@ -25,7 +26,7 @@
     await fetchPlaylists(false, (data) => (playlists = data));
     dataTable = jQuery('#playlists').DataTable({
       language: {
-        url: `//cdn.datatables.net/plug-ins/1.12.1/i18n/${$locale}.json`,
+        url: `${DataTablesLanguageUrl}/${$locale}.json`,
       },
       columnDefs: [
         {

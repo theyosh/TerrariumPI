@@ -14,6 +14,7 @@
   import { formatBytes } from '../helpers/file-size-helpers';
   import { errorNotification, successNotification } from '../providers/notification-provider';
   import { isDay } from '../stores/terrariumpi';
+  import { DataTablesLanguageUrl } from '../constants/urls'
 
   import Card from '../user-controls/Card.svelte';
   import Player from '../components/common/Player.svelte';
@@ -34,7 +35,7 @@
     await fetchAudiofiles((data) => (audiofiles = data));
     dataTable = jQuery('#audio_files').DataTable({
       language: {
-        url: `//cdn.datatables.net/plug-ins/1.12.1/i18n/${$locale}.json`,
+        url: `${DataTablesLanguageUrl}/${$locale}.json`,
       },
       columnDefs: [
         {
