@@ -356,6 +356,14 @@ class terrariumNotification(terrariumSingleton):
                 try:
                     # Legacy text formatting using '$' sign
                     text = message.message.replace("${", "{").format(**data)
+                    codelist = re.findall("{.*}",text)
+
+                    logger.info(f"codelist {codelist}")
+
+                    for code in codelist:
+                        resutl = eval(code[1:-1])
+                        text = text.replace(code,resutl)
+                    
                 except Exception as ex:
                     logger.error(f"Wrong message formatting {ex}")
 
@@ -2399,8 +2407,9 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         if await self._authenticate(update.message):
             if update.message.chat_id not in self.setup["chat_ids"]:
                 self.setup["chat_ids"].append(update.message.chat_id)
-
-            await update.message.reply_text("start command received, you are now getting updates...")
+                await update.message.reply_text("start command received, you are now getting updates...")
+            else:
+                await update.message.reply_text("runing...")
 
     async def webcamSelect(self, update, context):
         if await self._authenticate(update.message):
@@ -2660,7 +2669,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
         self.setup = {
             "token": setup_data.get("token"),
-            "allowed_users": setup_data.get("allowed_users"),
+            "allowed_users": setup_data.get("allowed_users").split(","),
             "chat_ids": [],
         }
 
@@ -2730,16 +2739,16 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
     def send_message(self, _, subject, message, data=None, attachments=[]):
         async def _send_message(subject, message, data=None, attachments=[]):
-            message = f"{subject}\n{message}"
+            message = f"<b><u>{subject}</u></b>\n{message}"
 
             text_mode = len(attachments) == 0
 
             for chat_id in self.setup["chat_ids"]:
                 if text_mode:
-                    await self.telegram_bot.send_message(chat_id, message)
+                    await self.telegram_bot.bot.send_message(chat_id, message, parse_mode='HTML' )
                 else:
                     for image in attachments:
                         with open(image, "rb") as image:
-                            await self.telegram_bot.send_photo(chat_id, image)
+                            await self.telegram_bot.bot.send_photo(chat_id, image)
 
         self._async.run(_send_message(subject, message, data, attachments))
