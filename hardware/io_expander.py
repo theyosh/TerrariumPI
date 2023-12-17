@@ -72,7 +72,7 @@ class terrariumIOExpander(object):
             loaded_hardware = self._load_device(address)
             if loaded_hardware is not None:
                 # All off is all True
-                loaded_hardware.states = self.INITIAL_STATE
+                loaded_hardware.port = self.INITIAL_STATE
                 self.__hardware_cache.set_data(hardware_key, loaded_hardware, -1)
 
         return loaded_hardware
@@ -83,7 +83,7 @@ class terrariumIOExpander(object):
     @property
     def state(self):
         try:
-            return not self.__device.states[self.port] if self.active_high else self.__device.states[self.port]
+            return not self.__device.port[self.port] if self.active_high else self.__device.port[self.port]
         except Exception as ex:
             logger.error(f"Got an error reading {self}: {ex}")
             return None
@@ -93,8 +93,7 @@ class terrariumIOExpander(object):
         try:
             state = terrariumUtils.is_true(state)
             state = not state if self.active_high else state
-            self.__device.states[self.port] = state
-            self.__device.port = self.__device.states
+            self.__device.port[self.port] = state
 
             return True
         except Exception as ex:
