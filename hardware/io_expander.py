@@ -18,6 +18,7 @@ class terrariumIOExpanderException(TypeError):
 class terrariumIOExpander(object):
     HARDWARE = None
     NAME = None
+    INITIAL_STATE = []
 
     @classproperty
     def available_hardware(__cls__):
@@ -71,7 +72,7 @@ class terrariumIOExpander(object):
             loaded_hardware = self._load_device(address)
             if loaded_hardware is not None:
                 # All off is all True
-                loaded_hardware.states = [True, True, True, True, True, True, True, True]
+                loaded_hardware.states = self.INITIAL_STATE
                 self.__hardware_cache.set_data(hardware_key, loaded_hardware, -1)
 
         return loaded_hardware
@@ -104,6 +105,7 @@ class terrariumIOExpander(object):
 class terrariumPCF8574IOExpander(terrariumIOExpander):
     HARDWARE = "PCF8574"
     NAME = "PCF8574 Expander (8 ports)"
+    INITIAL_STATE = [True, True, True, True, True, True, True, True]
 
     def _load_device(self, address):
         return PCF8574(address[1], address[0])
@@ -112,6 +114,7 @@ class terrariumPCF8574IOExpander(terrariumIOExpander):
 class terrariumPCF8575IOExpander(terrariumIOExpander):
     HARDWARE = "PCF8575"
     NAME = "PCF8575 Expander (16 ports)"
+    INITIAL_STATE = [True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True]
 
     def _load_device(self, address):
         return PCF8575(address[1], address[0])
