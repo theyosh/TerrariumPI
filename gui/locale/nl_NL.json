@@ -1676,18 +1676,18 @@
   },
   "settings": {
     "units": {
-      "beaufort": "",
-      "celsius": "",
-      "cm": "",
-      "fahrenheit": "",
-      "inch": "",
-      "kelvin": "",
-      "km_h": "",
-      "l": "",
-      "m_h": "",
-      "m_s": "",
-      "ukgall": "",
-      "usgall": ""
+      "beaufort": "Beaufort",
+      "celsius": "Celsius",
+      "cm": "Centimeter",
+      "fahrenheit": "Fahrenheit",
+      "inch": "Inch",
+      "kelvin": "Kelvin",
+      "km_h": "Kilometer per uur",
+      "l": "Liter",
+      "m_h": "Mijl per uur",
+      "m_s": "Meter per seconde",
+      "ukgall": "Britse gallons",
+      "usgall": "Amerikaanse gallons"
     }
   },
   "system": {
