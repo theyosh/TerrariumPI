@@ -1,10 +1,10 @@
 import { getCustomConfig } from '../config';
 import { de } from '@fancyapps/ui/dist/fancybox/l10n/de.esm.js';
 import { en } from '@fancyapps/ui/dist/fancybox/l10n/en.esm.js';
-import { en as es } from '@fancyapps/ui/dist/fancybox/l10n/es.esm.js';
+import { es } from '@fancyapps/ui/dist/fancybox/l10n/es.esm.js';
 import { fr } from '@fancyapps/ui/dist/fancybox/l10n/fr.esm.js';
 import { it } from '@fancyapps/ui/dist/fancybox/l10n/it.esm.js';
-import { js as ja } from '@fancyapps/ui/dist/fancybox/l10n/ja.esm.js';
+import { ja } from '@fancyapps/ui/dist/fancybox/l10n/ja.esm.js';
 import { pl } from '@fancyapps/ui/dist/fancybox/l10n/pl.esm.js';
 
 export const TypingDebounceDelay = 300;
