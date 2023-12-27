@@ -17,7 +17,7 @@ group :jekyll_plugins do
   gem "jemoji"
   gem "jekyll-minifier"
   gem "jekyll-analytics"
-  gem "jekyll-liquify"
+  gem "jekyll-liquify", "= 0.0.2"
 end
 
 group :test do
