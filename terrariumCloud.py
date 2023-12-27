@@ -7,7 +7,7 @@ import asyncio
 import contextlib
 import threading
 import socket
-import requests
+from pathlib import Path
 
 from time import sleep, time
 
@@ -185,8 +185,7 @@ class TerrariumMerossCloud(terrariumSingleton):
         try:
             # Setup the HTTP client API from user-password
             # We need to know where in the world we are....
-            continent = requests.get('https://ipapi.co/json/').json()["continent_code"].lower()
-            continent = 'eu' if 'eu' == continent else 'us'
+            continent = 'eu' if Path('/etc/timezone').read_text().startswith('Europe/') else 'us'
             meross_url = f'https://iotx-{continent}.meross.com'
 
             http_api_client = await MerossHttpClient.async_from_user_password(
