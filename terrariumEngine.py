@@ -307,18 +307,20 @@ class terrariumEngine(object):
         self.units["water_flow"] = self.units["volume"] + "/m"
         self.units["watertank"] = self.units["volume"]
 
-        self.units["windspeed"] = settings["wind_speed_indicator"]
         if "km/h" == settings["wind_speed_indicator"]:
             if "cm" == settings["distance_indicator"]:
                 self.units["windspeed"] = "km/h"
             elif "inch" == settings["distance_indicator"]:
-                self.units["windspeed"] = "m/h"
+                self.units["windspeed"] = "mph"
 
         elif "m/s" == settings["wind_speed_indicator"]:
             if "cm" == settings["distance_indicator"]:
                 self.units["windspeed"] = "m/s"
             elif "inch" == settings["distance_indicator"]:
                 self.units["windspeed"] = "f/s"
+
+        elif "m/h" == settings["wind_speed_indicator"]:
+            self.units["windspeed"] = "mph"
 
         elif "beaufort" == settings["wind_speed_indicator"]:
             self.units["windspeed"] = "Bf"

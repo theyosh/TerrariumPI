@@ -219,6 +219,8 @@ class terrariumUtils:
             current = terrariumUtils.to_kmh(current)
         elif "m/h" == indicator:
             current = terrariumUtils.to_mph(current)
+        elif "mph" == indicator:
+            current = terrariumUtils.to_mph(current)
         elif "f/s" == indicator:
             current = terrariumUtils.to_fs(current)
         elif "bf" == indicator:
