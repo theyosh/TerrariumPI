@@ -60,7 +60,9 @@ class terrariumAudio(object):
                     value = int(max(0, min(100, value)))
                     mixer.setvolume(value, alsaaudio.MIXER_CHANNEL_ALL)
                 except alsaaudio.ALSAAudioError as ex:
-                    logger.error(f'Error setting sound card \'{terrariumAudio.available_soundcards[hw]["name"]}\' to volume {value} : {ex}')
+                    logger.error(
+                        f'Error setting sound card \'{terrariumAudio.available_soundcards[hw]["name"]}\' to volume {value} : {ex}'
+                    )
 
 
 class terrariumAudioPlayer(object):

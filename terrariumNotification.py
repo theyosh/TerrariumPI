@@ -356,11 +356,11 @@ class terrariumNotification(terrariumSingleton):
                 try:
                     # Legacy text formatting using '$' sign
                     text = message.message.replace("${", "{").format(**data)
-                    codelist = re.findall("{.*}",text)
+                    codelist = re.findall("{.*}", text)
 
                     for code in codelist:
-                        result = eval(code[1:-1],{"__builtins__": {}}, {})
-                        text = text.replace(code,result)
+                        result = eval(code[1:-1], {"__builtins__": {}}, {})
+                        text = text.replace(code, result)
 
                 except Exception as ex:
                     logger.error(f"Wrong message formatting {ex}")
@@ -2743,7 +2743,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
             for chat_id in self.setup["chat_ids"]:
                 if text_mode:
-                    await self.telegram_bot.bot.send_message(chat_id, message, parse_mode='HTML' )
+                    await self.telegram_bot.bot.send_message(chat_id, message, parse_mode="HTML")
                 else:
                     for image in attachments:
                         with open(image, "rb") as image:
