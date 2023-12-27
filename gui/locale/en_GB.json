@@ -1674,6 +1674,12 @@
     },
     "title": "Notification services"
   },
+  "settings": {
+    "units": {
+      "kelvin": "Kelvin",
+      "ukgall": "UK Gallons"
+    }
+  },
   "system": {
     "log": {
       "download": {

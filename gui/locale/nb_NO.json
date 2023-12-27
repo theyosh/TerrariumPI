@@ -1674,6 +1674,22 @@
     },
     "title": "Varsler"
   },
+  "settings": {
+    "units": {
+      "beaufort": "",
+      "celsius": "",
+      "cm": "",
+      "fahrenheit": "",
+      "inch": "",
+      "kelvin": "",
+      "km_h": "",
+      "l": "",
+      "m_h": "",
+      "m_s": "",
+      "ukgall": "",
+      "usgall": ""
+    }
+  },
   "system": {
     "log": {
       "download": {

@@ -1674,6 +1674,22 @@
     },
     "title": "Notification services"
   },
+  "settings": {
+    "units": {
+      "beaufort": "Beaufort",
+      "celsius": "Celsius",
+      "cm": "Centimeter",
+      "fahrenheit": "Fahrenheit",
+      "inch": "Inch",
+      "kelvin": "Kelvin",
+      "km_h": "Kilometer per hour",
+      "l": "Liter",
+      "m_h": "Miles per hour",
+      "m_s": "Meter per second",
+      "ukgall": "UK Gallons",
+      "usgall": "US Gallons"
+    }
+  },
   "system": {
     "log": {
       "download": {
