@@ -361,9 +361,9 @@ class terrariumNotification(terrariumSingleton):
                     logger.info(f"codelist {codelist}")
 
                     for code in codelist:
-                        resutl = eval(code[1:-1])
-                        text = text.replace(code,resutl)
-                    
+                        result = eval(code[1:-1],{"__builtins__": {}}, {})
+                        text = text.replace(code,result)
+
                 except Exception as ex:
                     logger.error(f"Wrong message formatting {ex}")
 
