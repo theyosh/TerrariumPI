@@ -483,10 +483,10 @@ export const fetchAreas = async (area_id, cb) => {
     }
     */
 
-    let tweak_settings = { low: {}, high: {} };
     const tweak_regex = /(?:dimmer|relay)_(?:duration|delay)_(on|off)_([a-z0-9]+)/i;
 
     data.forEach((area) => {
+      let tweak_settings = { low: {}, high: {}, day: {}, night: {} };
       area.setup.variation = [...(area.setup.variation ?? []), ...[{ when: '', period: '', value: null }]];
 
       // Convert tweaks per period
@@ -509,7 +509,7 @@ export const fetchAreas = async (area_id, cb) => {
 
         // Convert legacy tweaks JSON data
         for (let field of Object.keys(area.setup[period])) {
-          const tweaks = field.match(tweak_regex);
+          let tweaks = field.match(tweak_regex);
           if (tweaks) {
             if (!tweak_settings[period][tweaks[2]]) {
               tweak_settings[period][tweaks[2]] = {
@@ -523,6 +523,9 @@ export const fetchAreas = async (area_id, cb) => {
             delete area.setup[period][field];
           }
         }
+        area.setup[period]['tweaks'] = Object.keys(tweak_settings[period]).map((item) => {
+          return tweak_settings[period][item];
+        });
       }
     });
 
