@@ -2,6 +2,76 @@ Changelog
 =========
 
 
+4.8.1 (2023-12-28)
+------------
+
+**New**
+------
+
+- Add indicator mph for wind speed. [TheYOSH]
+- Add miles per hour for weather speeds. [#866](https://github.com/theyosh/TerrariumPI/issues/866). [TheYOSH]
+- Add function eval() conde in notifications Fix Telegram notification.
+  [cmonicob]
+
+**Fixes**
+------
+
+- Fix bug. [cmonicob]
+- Fix bug initial state IO_Expander. [cmonicob]
+- Fix missing new line. [TheYOSH]
+- Fix legacy tweaks loading. [TheYOSH]
+- Fix relay tweaks in Area modal form. [TheYOSH]
+- Fix DataTables Language plugin url. [TheYOSH]
+- Fix max volume and add some error messaging when volume is to high.
+  [#864](https://github.com/theyosh/TerrariumPI/issues/864). [TheYOSH]
+- Fix display notification. [#859](https://github.com/theyosh/TerrariumPI/issues/859). [TheYOSH]
+- Fix editing Enclosures. [#862](https://github.com/theyosh/TerrariumPI/issues/862). [TheYOSH]
+- Fix division by zero. [#861](https://github.com/theyosh/TerrariumPI/issues/861). [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update python libraries, and use new Meross API. [TheYOSH]
+- Update pages-deploy.yml. [TheYOSH]
+- Update wind speed [#866](https://github.com/theyosh/TerrariumPI/issues/866). [TheYOSH]
+- Update typo and more secure eval usage. [TheYOSH]
+- Update pages-deploy.yml. [TheYOSH]
+- Update pages-deploy.yml. [TheYOSH]
+- Update pages-deploy.yml. [TheYOSH]
+- Update pages-deploy.yml. [TheYOSH]
+- Update pages-deploy.yml. [TheYOSH]
+- Update pages-deploy.yml. [TheYOSH]
+- Documentation deployment updates. [TheYOSH]
+- Update documentation. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [theyosh]
+- Update documentation libraires. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+
+**Other**
+------
+
+- Use timezone data for continent determination. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge pull request [#865](https://github.com/theyosh/TerrariumPI/issues/865) from cmonicob/main. [TheYOSH]
+
+  Add function eval() code in Notifications and Fix Telegram Notifications
+- Fig bug on io_expander button use. [cmonicob]
+- Pin version. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Code formatting. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Javascript made prettier. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+
+
 4.8.0 (2023-11-11)
 ------------------
 
@@ -55,6 +125,7 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Update NodeJS libraries. [TheYOSH]
 - Update NodeJS libraries. [TheYOSH]
 - Update NodeJS libraries. [TheYOSH]
@@ -1172,6 +1243,8 @@ Changelog
 - Fix (re)loading MQTT service (and probably others) [TheYOSH]
 - Fixed water calculation (2) [TheYOSH]
 - Fix total water usage on dashboard. [TheYOSH]
+- Fix docker ffmeg (3) [TheYOSH]
+- Final docker fix ffmpeg. [TheYOSH]
 
 **Updates**
 ------
@@ -1190,6 +1263,13 @@ Changelog
 - Update install.sh. [TheYOSH]
 - Update install.sh. [TheYOSH]
 - Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Codacy updates. [TheYOSH]
+- Update Codacy issues. [TheYOSH]
+- Codacy code update. [TheYOSH]
 
 **Other**
 ------
@@ -1204,6 +1284,10 @@ Changelog
 - Translated using Weblate (Italian) [Rob]
 
   Currently translated at 36.5% (278 of 761 strings)
+- Codacy code improvements. [TheYOSH]
+- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
+  [TheYOSH]
+- Remove debug. [TheYOSH]
 
 
 4.3.2 (2022-05-05)
@@ -1212,32 +1296,15 @@ Changelog
 **Fixes**
 ------
 
-- Fix docker ffmeg (3) [TheYOSH]
-- Final docker fix ffmpeg. [TheYOSH]
 - Fix ffmpeg in docker. [TheYOSH]
 
 **Updates**
 ------
 
-- Codacy updates. [TheYOSH]
-- Codacy updates. [TheYOSH]
-- Codacy updates. [TheYOSH]
-- Codacy updates. [TheYOSH]
-- Codacy updates. [TheYOSH]
-- Update Codacy issues. [TheYOSH]
-- Codacy code update. [TheYOSH]
 - Update version. [TheYOSH]
 - Update documentation (2) [TheYOSH]
 - Update documentation. [TheYOSH]
 - Update README.md. [TheYOSH]
-
-**Other**
-------
-
-- Codacy code improvements. [TheYOSH]
-- Merge branch '4.x.y.z' of github.com:theyosh/TerrariumPI into 4.x.y.z.
-  [TheYOSH]
-- Remove debug. [TheYOSH]
 
 
 4.3.1 (2022-05-04)
