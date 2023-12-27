@@ -1647,6 +1647,7 @@ class terrariumEngine(object):
             motd_relays += (2 * padding) + pyfancy().red(
                 f'Engine can\'t keep up! For {self.__engine["too_late"]} times it could not finish in {terrariumEngine.__ENGINE_LOOP_TIMEOUT} seconds.'
             ).get()
+            motd_relays += "\n"
             motd_relays += (3 * padding) + pyfancy().red("Please check your setup and hardware!").get()
             motd_relays += "\n"
 
