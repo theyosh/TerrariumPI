@@ -21,7 +21,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PATH="/opt/venv/bin:$PATH"
 RUN python -m venv /opt/venv
-RUN pip install --upgrade pip==23.3.1 && pip install --upgrade wheel==0.41.3
+RUN pip install --upgrade pip==23.3.2 && pip install --upgrade wheel==0.42.0
 COPY requirements.txt .
 # requirements are slightly different for docker
 RUN sed -i 's/numpy==.*/numpy==1.21.4/g' requirements.txt \

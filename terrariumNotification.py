@@ -358,8 +358,6 @@ class terrariumNotification(terrariumSingleton):
                     text = message.message.replace("${", "{").format(**data)
                     codelist = re.findall("{.*}",text)
 
-                    logger.info(f"codelist {codelist}")
-
                     for code in codelist:
                         result = eval(code[1:-1],{"__builtins__": {}}, {})
                         text = text.replace(code,result)
