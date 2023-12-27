@@ -53,7 +53,38 @@ On this page you can find various information on how to setup areas and create s
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.2.0/dist/chartjs-plugin-zoom.min.js" integrity="sha256-23gWVYds+PNFbnldeTaY5stxoJ6j+5QmR/vGLWpNcOg=" crossorigin="anonymous"></script>
 <script defer src="/TerrariumPI/assets/js/timerGraph.js" ></script>
 
+<h2 id="sensor-based-control">Sensor based control</h2>
+<p>It is possible to control an area based on one or more sensors (of the same type). This way you can create an area where it will stay withing a certain operating temperature or humidity. In the example below we try to keep a part of the terrarium at around 23 degrees celsius during the night.</p>
 
+<img src="/assets/img/Heating_mat_sensor.webp" alt="Temperature sensor graph controlling heater map">
+
+<img src="/assets/img/Heater_map_relay_graph.webp" alt="Relay graph controlling heater map">
+
+<h3 id="configure-a-relay">Configure a relay</h3>
+<p>Make sure you have created a relay that is controlling the heating device. This can be a normal on/off relay or a dimmer. In the example here we us a on/off relay. For setting up a relay look at the relay <a href="/TerrariumPI/hardware/#relays" title="TerrariumPI supported relays and setup">hardware page</a></p>
+
+<h3 id="configure-sensors">Configure sensors</h3>
+<p>First make sure you have all the sensors you want to use configured correctly. This means setting the wanted <strong>min</strong> and <strong>max</strong> alarm values to the range you want to create. With multiple sensors, the average will be used of all the selected sensors.</p>
+
+<img src="/assets/img/Heater_map_sensor_setup.webp" alt="Temperature sensor setup">
+
+<p>The <strong>min</strong> and <strong>max</strong> alarm values will become the triggers for the relay that is controlling a heater device like a lamp or heating mat. In the above example the relay will go on when the temperature is below 21 degrees celsius and will shutdown when the temperature is above 25 degrees celsius</p>
+
+<p>For more about setting up sensors look at the <a href="/TerrariumPI/hardware/#sensors" title="TerrariumPI supported sensors and setup">hardware page</a></p>
+
+<h3 id="configure-area">Configure area</h3>
+<p>The final step is to add an area to an existing enclosure. This will combine the sensors and relays you want to use. There are a lot of options to setup, but we are now looking at the red underlined fields: <strong>Mode</strong>, <strong>Sensors</strong>, <strong>Relays</strong> and <strong>Light status</strong>.</p>
+
+<p>Start by creating a <strong>heating type</strong> area and give it a name.</p>
+
+<img src="/assets/img/Heater_area.webp" alt="Heating area setup">
+
+<p>Set the area mode to sensors. This will make the area trigger the relays based on sensor values. Next to it, select the sensors you want to use. You can only select sensors of the same type as the area type.</p>
+
+<p>Next select the relays that control the heater device at the <strong>low alarm</strong> tab. When a relay is selected, you can adjust the toggle on with some delay it needed. For now, keep it all at zero, so the relay will toggle when the alarm is triggered.<br />
+And in this example, the relay should only toggle on, when the lights are off. Because during the day it is warm enough, so this heater should only run when the lights are off.</p>
+
+<p>In case you have also a cooling device, you can also add relays at the <strong>high alarm</strong> tab. This will trigger the cooler to run when it is getting to hot. But this is optional.</p>
 
 <h2 id="dependencies">Dependencies</h2>
 <p>There are multiple dependencies levels. Here we describe all the different dependencies that are possible to use.</p>
