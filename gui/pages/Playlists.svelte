@@ -12,7 +12,7 @@
   import { fetchPlaylists, deletePlaylist } from '../providers/api';
   import { successNotification, errorNotification } from '../providers/notification-provider';
   import { isDay } from '../stores/terrariumpi';
-  import { DataTablesLanguageUrl } from '../constants/urls'
+  import { DataTablesLanguageUrl } from '../constants/urls';
 
   import Card from '../user-controls/Card.svelte';
 

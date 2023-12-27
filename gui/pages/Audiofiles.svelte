@@ -14,7 +14,7 @@
   import { formatBytes } from '../helpers/file-size-helpers';
   import { errorNotification, successNotification } from '../providers/notification-provider';
   import { isDay } from '../stores/terrariumpi';
-  import { DataTablesLanguageUrl } from '../constants/urls'
+  import { DataTablesLanguageUrl } from '../constants/urls';
 
   import Card from '../user-controls/Card.svelte';
   import Player from '../components/common/Player.svelte';
