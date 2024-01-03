@@ -356,12 +356,12 @@ class terrariumNotification(terrariumSingleton):
                 try:
                     # Legacy text formatting using '$' sign
                     text = message.message.replace("${", "{").format(**data)
-                    codelist = re.findall("{.*?}",text)
+                    codelist = re.findall("{.*?}", text)
 
                     for code in codelist:
-                        result = eval(code[1:-1],{"__builtins__": {}}, {})
-                        text = text.replace(code,result)
-                    
+                        result = eval(code[1:-1], {"__builtins__": {}}, {})
+                        text = text.replace(code, result)
+
                 except Exception as ex:
                     logger.error(f"Wrong message formatting {ex}")
 
@@ -2601,18 +2601,21 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         for area in self.engine.enclosures[enclosure_id].areas.values():
             if area.mode == "sensors":
                 message.append(f"- Area {area.name} type {area.type} => {'ON' if area.state['powered'] else 'OFF'}")
-                message.append(f"\t\tcurrent: \t{area.state['sensors']['current']:.2f} ({area.state['sensors']['alarm_min']:.2f} - {area.state['sensors']['alarm_max']:.2f})")
+                message.append(
+                    f"\t\tcurrent: \t{area.state['sensors']['current']:.2f} ({area.state['sensors']['alarm_min']:.2f} - {area.state['sensors']['alarm_max']:.2f})"
+                )
             elif area.mode == "weather":
                 message.append(f"- Area {area.name} type {area.type}")
-                for period in ['day', 'night', 'low', 'high']:
+                for period in ["day", "night", "low", "high"]:
                     try:
-                        if area.state[period] and area.state[period]['begin']:
-                            message.append(f"\t\t{period}: \t{datetime.datetime.fromtimestamp(area.state[period]['begin']):%H:%M} - {datetime.datetime.fromtimestamp(area.state[period]['end']):%H:%M} ({datetime.datetime.fromtimestamp(area.state[period]['duration']):%H} hours) => {'ON' if area.state[period]['powered'] else 'OFF'}")
+                        if area.state[period] and area.state[period]["begin"]:
+                            message.append(
+                                f"\t\t{period}: \t{datetime.datetime.fromtimestamp(area.state[period]['begin']):%H:%M} - {datetime.datetime.fromtimestamp(area.state[period]['end']):%H:%M} ({datetime.datetime.fromtimestamp(area.state[period]['duration']):%H} hours) => {'ON' if area.state[period]['powered'] else 'OFF'}"
+                            )
                     except:
                         pass
             else:
                 message.append(f"- Area {area.name} type {area.type} => {'ON' if area.state['powered'] else 'OFF'}")
-
 
         await query_message.edit_text("\n".join(message))
 
