@@ -24,4 +24,8 @@ Qwiic Relays are available in different configurations:
 These relays are addressable through I2C and can be controlled by any micro-controller with I2C support.
 This allows to control various appliances.
 
+### Power issues
+
+There are some reports that the Qwiic relays only works with a 5volt power despite it should be able to run on 7-12 volt. So if the device is not working, try switching to 5 volts.
+
 {% include_relative _relay_detail.md %}
