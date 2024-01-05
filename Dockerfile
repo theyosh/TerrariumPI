@@ -32,13 +32,9 @@ RUN sed -i 's/numpy==.*/numpy==1.21.4/g' requirements.txt \
 
 WORKDIR /TerrariumPI
 # Just clone the libraries, ignore docker cache...
-RUN git clone https://github.com/SequentMicrosystems/4relay-rpi.git --depth 1 "3rdparty/4relay-rpi" \
-  && git clone https://github.com/PiSupply/Bright-Pi.git --depth 1 "3rdparty/Bright-Pi" \
-  && git clone https://github.com/ageir/chirp-rpi.git --depth 1 "3rdparty/chirp-rpi" \
+RUN git clone https://github.com/ageir/chirp-rpi.git --depth 1 "3rdparty/chirp-rpi" \
   && git clone https://github.com/perryflynn/energenie-connect0r.git --depth 1 "3rdparty/energenie-connect0r" \
   && git clone https://github.com/SequentMicrosystems/relay8-rpi.git --depth 1 "3rdparty/relay8-rpi" \
-  && git clone https://github.com/SequentMicrosystems/4relind-rpi.git --depth 1 "3rdparty/4relind-rpi" \
-  && git clone https://github.com/SequentMicrosystems/8relind-rpi.git --depth 1 "3rdparty/8relind-rpi" \
   && git clone https://github.com/AtlasScientific/Raspberry-Pi-sample-code.git --depth 1 "3rdparty/AtlasScientific" \
   && git clone https://github.com/moormaster/python3-voltcraft-sem6000.git --depth 1 "3rdparty/python3-voltcraft-sem6000" \
   && rm -Rf 3rdparty/Bright-Pi/Documents \
