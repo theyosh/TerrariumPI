@@ -40,6 +40,7 @@ RUN git clone https://github.com/SequentMicrosystems/4relay-rpi.git --depth 1 "3
   && git clone https://github.com/SequentMicrosystems/4relind-rpi.git --depth 1 "3rdparty/4relind-rpi" \
   && git clone https://github.com/SequentMicrosystems/8relind-rpi.git --depth 1 "3rdparty/8relind-rpi" \
   && git clone https://github.com/AtlasScientific/Raspberry-Pi-sample-code.git --depth 1 "3rdparty/AtlasScientific" \
+  && git clone https://github.com/moormaster/python3-voltcraft-sem6000.git --depth 1 "3rdparty/python3-voltcraft-sem6000" \
   && rm -Rf 3rdparty/Bright-Pi/Documents \
   && find . -type d -name  "__pycache__" -exec rm -r {} + \
   && find . -type f -name "*.pyc" -delete \
