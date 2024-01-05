@@ -1,6 +1,3 @@
-[submodule "3rdparty/Bright-Pi"]
-	path = 3rdparty/Bright-Pi
-	url = https://github.com/PiSupply/Bright-Pi
 [submodule "3rdparty/relay8-rpi"]
 	path = 3rdparty/relay8-rpi
 	url = https://github.com/SequentMicrosystems/relay8-rpi

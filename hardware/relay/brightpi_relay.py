@@ -1,14 +1,8 @@
 from . import terrariumRelayDimmer
 
 import statistics
-import sys
-from pathlib import Path
 
-# https://github.com/PiSupply/Bright-Pi
-# Dirty hack to include someone his code... to lazy to make it myself :)
-# Also, do not want to compile stuff....
-sys.path.insert(0, str((Path(__file__).parent / Path("../../3rdparty/Bright-Pi/brightpi")).resolve()))
-import brightpilib as brightpi
+import brightpi
 
 
 class terrariumRelayDimmerBrightPi(terrariumRelayDimmer):
