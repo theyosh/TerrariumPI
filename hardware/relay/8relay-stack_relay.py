@@ -12,8 +12,6 @@ import sys
 # For the old version (V1). New version (V3) will be installed as package
 sys.path.insert(0, str((Path(__file__).parent / Path("../../3rdparty/relay8-rpi/python")).resolve()))
 sys.path.insert(0, str((Path(__file__).parent / Path("../../3rdparty/4relay-rpi/python/4relay")).resolve()))
-# Version 4.X
-sys.path.insert(0, str((Path(__file__).parent / Path("../../3rdparty/4relind-rpi/python/4relind")).resolve()))
 
 from relay8 import set as relay8SetV1
 from relay8 import get as relay8GetV1
