@@ -54,7 +54,7 @@ sensirion-i2c-driver==1.0.0
 sensirion-i2c-sht==0.4.0
 bme680==1.1.1
 adafruit-circuitpython-sht31d==2.3.24
-SM8relind==0.4.3
+SM8relind==1.0.2
 
 # Webcam packages
 Pillow==9.5.0
