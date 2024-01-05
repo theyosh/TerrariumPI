@@ -35,6 +35,7 @@ class terrariumRelayVoltcraftSEM6000(terrariumRelay):
         data = terrariumUtils.get_script_data(
             f"python 3rdparty/python3-voltcraft-sem6000/sem6000-cli-demo.py {self.address} 0000 request_measurement"
         )
+        state = False
         if data:
             state = re.search(terrariumRelayVoltcraftSEM6000.POWER_STATE_REGEX, data.decode("utf-8"))
             if state:
@@ -48,14 +49,14 @@ class terrariumRelayVoltcraftSEM6000(terrariumRelay):
             terrariumUtils.get_script_data(f"python 3rdparty/python3-voltcraft-sem6000/sem6000-cli-demo.py discover")
             .decode("utf-8")
             .strip()
-            .split("\n")
         )
-        for device in devices:
-            device = device.split("\t")
-            yield terrariumRelay(
-                None,
-                terrariumRelayVoltcraftSEM6000.HARDWARE,
-                device[1],
-                f"{terrariumRelayVoltcraftSEM6000.NAME} {device[0]} device mac: {device[1]}",
-                callback=callback,
-            )
+        if devices:
+            for device in devices.split("\n"):
+                device = device.split("\t")
+                yield terrariumRelay(
+                    None,
+                    terrariumRelayVoltcraftSEM6000.HARDWARE,
+                    device[1],
+                    f"{terrariumRelayVoltcraftSEM6000.NAME} {device[0]} device mac: {device[1]}",
+                    callback=callback,
+                )
