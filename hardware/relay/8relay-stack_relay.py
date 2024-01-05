@@ -13,7 +13,6 @@ import sys
 sys.path.insert(0, str((Path(__file__).parent / Path("../../3rdparty/relay8-rpi/python")).resolve()))
 sys.path.insert(0, str((Path(__file__).parent / Path("../../3rdparty/4relay-rpi/python/4relay")).resolve()))
 # Version 4.X
-sys.path.insert(0, str((Path(__file__).parent / Path("../../3rdparty/8relind-rpi/python/8relind")).resolve()))
 sys.path.insert(0, str((Path(__file__).parent / Path("../../3rdparty/4relind-rpi/python/4relind")).resolve()))
 
 from relay8 import set as relay8SetV1
