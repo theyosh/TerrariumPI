@@ -22,3 +22,6 @@
 [submodule "3rdparty/AtlasScientific"]
 	path = 3rdparty/AtlasScientific
 	url = https://github.com/AtlasScientific/Raspberry-Pi-sample-code.git
+[submodule "3rdparty/python3-voltcraft-sem6000"]
+	path = 3rdparty/python3-voltcraft-sem6000
+	url = https://github.com/moormaster/python3-voltcraft-sem6000.git
