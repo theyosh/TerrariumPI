@@ -4,14 +4,10 @@ from terrariumUtils import terrariumUtils
 from pathlib import Path
 
 # https://github.com/SequentMicrosystems/relay8-rpi
-# https://github.com/SequentMicrosystems/8relay-rpi
-# https://github.com/SequentMicrosystems/4relind-rpi
-# https://github.com/SequentMicrosystems/8relind-rpi
 import sys
 
-# For the old version (V1). New version (V3) will be installed as package
+# For the old version (V1). Newer versions will be installed as package
 sys.path.insert(0, str((Path(__file__).parent / Path("../../3rdparty/relay8-rpi/python")).resolve()))
-sys.path.insert(0, str((Path(__file__).parent / Path("../../3rdparty/4relay-rpi/python/4relay")).resolve()))
 
 from relay8 import set as relay8SetV1
 from relay8 import get as relay8GetV1

@@ -56,6 +56,7 @@ bme680==1.1.1
 adafruit-circuitpython-sht31d==2.3.24
 SM8relind==1.0.2
 git+https://github.com/SequentMicrosystems/4relind-rpi.git#subdirectory=python/4relind
+git+https://github.com/SequentMicrosystems/4relay-rpi.git#subdirectory=python/4relay
 
 # Webcam packages
 Pillow==9.5.0
