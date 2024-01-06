@@ -25,10 +25,12 @@ RUN pip install --upgrade pip==23.3.2 && pip install --upgrade wheel==0.42.0
 COPY requirements.txt .
 # requirements are slightly different for docker
 RUN sed -i 's/numpy==.*/numpy==1.21.4/g' requirements.txt \
+  && pip install smbus==1.1.post2 \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
-  && find /opt/venv -type d -name  "__pycache__" -exec rm -r {} + \
-  && find /opt/venv -type f -name "*.pyc" -delete \
-  && find /opt/venv -type d -name ".git" -exec rm -r {} +
+  && find /opt/venv -type d -name "test*" | xargs rm -rf  \
+  && find /opt/venv -type d -name "__pycache__" | xargs rm -rf \
+  && find /opt/venv -type d -name ".git" | xargs rm -rf \
+  && find /opt/venv -type f -name "*.pyc" -delete
 
 WORKDIR /TerrariumPI
 # Just clone the libraries, ignore docker cache...
