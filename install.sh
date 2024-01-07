@@ -234,7 +234,7 @@ $PROGRESS
 Install required software\n\nUpdating sub modules ...
 XXX
 EOF
-git submodule update 2> /dev/null
+git submodule update 2> /dev/null && rm -rf 3rdparty/4relay-rpi && rm -rf 3rdparty/4relind-rpi && rm -rf 3rdparty/8relind-rpi && rm -rf 3rdparty/Bright-Pi
 
 PROGRESS=$((PROGRESS + 1))
 cat <<EOF
