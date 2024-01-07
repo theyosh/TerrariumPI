@@ -33,19 +33,19 @@
       { value: 'kelvin', text: $_('settings.units.kelvin', { default: 'Kelvin' }) },
     ],
     distance: [
-      { value: 'cm', text: $_('settings.units.cm', { default: 'Centimeter' })},
-      { value: 'inch', text: $_('settings.units.inch', { default: 'Inch' })},
+      { value: 'cm', text: $_('settings.units.cm', { default: 'Centimeter' }) },
+      { value: 'inch', text: $_('settings.units.inch', { default: 'Inch' }) },
     ],
     liquid_volume: [
-      { value: 'l', text: $_('settings.units.l', { default: 'Liter' })},
-      { value: 'ukgall', text: $_('settings.units.ukgall', { default: 'UK Gallons' })},
-      { value: 'usgall', text: $_('settings.units.usgall', { default: 'US Gallons' })},
+      { value: 'l', text: $_('settings.units.l', { default: 'Liter' }) },
+      { value: 'ukgall', text: $_('settings.units.ukgall', { default: 'UK Gallons' }) },
+      { value: 'usgall', text: $_('settings.units.usgall', { default: 'US Gallons' }) },
     ],
     wind_speed: [
-      { value: 'm/s', text: $_('settings.units.m_s', { default: 'Meter per second' })},
-      { value: 'km/h', text: $_('settings.units.km_h', { default: 'Kilometer per hour' })},
-      { value: 'm/h', text: $_('settings.units.m_h', { default: 'Miles per hour' })},
-      { value: 'beaufort', text: $_('settings.units.beaufort', { default: 'Beaufort' })},
+      { value: 'm/s', text: $_('settings.units.m_s', { default: 'Meter per second' }) },
+      { value: 'km/h', text: $_('settings.units.km_h', { default: 'Kilometer per hour' }) },
+      { value: 'm/h', text: $_('settings.units.m_h', { default: 'Miles per hour' }) },
+      { value: 'beaufort', text: $_('settings.units.beaufort', { default: 'Beaufort' }) },
     ],
   };
 
