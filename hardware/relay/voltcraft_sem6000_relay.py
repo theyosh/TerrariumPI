@@ -11,21 +11,22 @@ class terrariumRelayVoltcraftSEM6000(terrariumRelay):
     DEFAULT_PIN = "0000"
 
     POWER_STATE_REGEX = r"Power:\s*(?P<state>On|Off)"
+    CMD = "python 3rdparty/python3-voltcraft-sem6000/sem6000-cli-demo.py"
 
     def _load_hardware(self):
         terrariumUtils.get_script_data(
-            f"python 3rdparty/python3-voltcraft-sem6000/sem6000-cli-demo.py {self.address} 0000 synchronize_date_and_time"
+            f"{terrariumRelayVoltcraftSEM6000.CMD} {self.address} 0000 synchronize_date_and_time 2>/dev/null"
         )
         return self.address
 
     def _set_hardware_value(self, state):
         if state == self.ON:
             terrariumUtils.get_script_data(
-                f"python 3rdparty/python3-voltcraft-sem6000/sem6000-cli-demo.py {self.address} 0000 power_on"
+                f"{terrariumRelayVoltcraftSEM6000.CMD} {self.address} 0000 power_on 2>/dev/null"
             )
         else:
             terrariumUtils.get_script_data(
-                f"python 3rdparty/python3-voltcraft-sem6000/sem6000-cli-demo.py {self.address} 0000 power_off"
+                f"{terrariumRelayVoltcraftSEM6000.CMD} {self.address} 0000 power_off 2>/dev/null"
             )
 
         # Always return True here, as this should indicate the toggle changed succeeded
@@ -33,7 +34,7 @@ class terrariumRelayVoltcraftSEM6000(terrariumRelay):
 
     def _get_hardware_value(self):
         data = terrariumUtils.get_script_data(
-            f"python 3rdparty/python3-voltcraft-sem6000/sem6000-cli-demo.py {self.address} 0000 request_measurement"
+            f"{terrariumRelayVoltcraftSEM6000.CMD} {self.address} 0000 request_measurement 2>/dev/null"
         )
         state = False
         if data:
@@ -46,7 +47,7 @@ class terrariumRelayVoltcraftSEM6000(terrariumRelay):
     @staticmethod
     def _scan_relays(callback=None, **kwargs):
         devices = (
-            terrariumUtils.get_script_data(f"python 3rdparty/python3-voltcraft-sem6000/sem6000-cli-demo.py discover")
+            terrariumUtils.get_script_data(f"{terrariumRelayVoltcraftSEM6000.CMD} discover 2>/dev/null")
             .decode("utf-8")
             .strip()
         )
