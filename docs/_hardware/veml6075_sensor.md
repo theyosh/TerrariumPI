@@ -21,6 +21,10 @@ VEML6075 UV sensor can give a reliable performance of UV radiation measurement u
 
 Compatible with Arduino and Raspberry Pi, this sensor can be used in portable electronic product, wearable device, weather station, flame detecting and so on.
 
+### Disclaimer
+
+This sensor will **not** work well with UVB lights. This sensor needs IR light and UV light to work. UVB lights do not emit IR light. So this sensor can only be used to measure (direct) sunlight. [Source](https://github.com/theyosh/TerrariumPI/issues/875#issuecomment-1893449766)
+
 ### Features
 
 - Operating Voltage: 3.3V~5V
@@ -35,7 +39,5 @@ Compatible with Arduino and Raspberry Pi, this sensor can be used in portable el
 - Mount Hole Size: 3mm
 - Mount Hole Pitch: 15mm
 - Operating Temperature: -40℃~+85℃
-
-**to get more accurate measurement, the sensor should direct to ultraviolet light source.**
 
 {% include_relative _sensor_detail.md %}
