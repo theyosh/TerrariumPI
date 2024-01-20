@@ -258,6 +258,10 @@ class terrariumNotification(terrariumSingleton):
                 service = service.to_dict()
                 if service["id"] not in self.services:
                     setup = copy.deepcopy(service["setup"])
+
+                    # Notification states from previous run
+                    setup['state'] = copy.deepcopy(service["state"])
+
                     if self.engine:
                         setup["engine"] = self.engine
                         setup["terrariumpi_name"] = self.engine.settings["title"]
@@ -2405,9 +2409,18 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         if await self._authenticate(update.message):
             if update.message.chat_id not in self.setup["chat_ids"]:
                 self.setup["chat_ids"].append(update.message.chat_id)
+
+                # Store chat id in database for reconnecting after a restart
+                with orm.db_session():
+                    service = NotificationService[self.id]
+                    if not service.state:
+                        service.state = {}
+
+                    service.state['chat_ids'] = self.setup["chat_ids"]
+
                 await update.message.reply_text("start command received, you are now getting updates...")
             else:
-                await update.message.reply_text("runing...")
+                await update.message.reply_text("running...")
 
     async def webcamSelect(self, update, context):
         if await self._authenticate(update.message):
@@ -2681,10 +2694,14 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             except Exception as ex:
                 logger.exception(f"Error in telegram service: {ex}")
 
+        old_chat_ids = []
+        if setup_data['state'] and setup_data['state']['chat_ids']:
+            old_chat_ids = setup_data['state']['chat_ids']
+
         self.setup = {
             "token": setup_data.get("token"),
             "allowed_users": setup_data.get("allowed_users").split(","),
-            "chat_ids": [],
+            "chat_ids": old_chat_ids,
         }
 
         super().load_setup(setup_data)
@@ -2730,6 +2747,9 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                 self.__thread.start()
             except Exception as ex:
                 logger.exception(f"Error in Telegram run: {ex}")
+
+            if len(old_chat_ids) > 0:
+                self.send_message(None, 'Reconnected', 'TerrariumPI just restarted...')
 
     def stop(self):
         async def _stop():

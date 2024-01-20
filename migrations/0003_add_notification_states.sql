@@ -1,0 +1,1 @@
+ALTER TABLE "NotificationService" ADD COLUMN "state" JSON NULL;
