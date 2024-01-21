@@ -278,6 +278,7 @@ class NotificationService(db.Entity):
     enabled = orm.Required(bool, default=True)
     setup = orm.Required(orm.Json)
     messages = orm.Set(lambda: NotificationMessage)
+    state = orm.Optional(orm.Json)
 
     ENCRYPTED_FIELDS = ["username", "password", "user_key", "api_token", "access_secret", "token", "allowed_users"]
 
