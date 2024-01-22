@@ -4,7 +4,7 @@
   dayjs.extend(duration);
   import { onDestroy, onMount, getContext } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import { PageHeader } from 'svelte-adminlte';
+  import { PageHeader } from '@keenmate/svelte-adminlte';
   import tippy from 'sveltejs-tippy';
   import { followCursor } from 'tippy.js';
 

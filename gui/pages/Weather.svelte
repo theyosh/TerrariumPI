@@ -14,7 +14,7 @@
   ChartJS.register(Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement);
   import 'chartjs-adapter-dayjs-3';
   import { _ } from 'svelte-i18n';
-  import { PageHeader, BreadcrumbItem } from 'svelte-adminlte';
+  import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
   import { date, time } from 'svelte-i18n';
 
   import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';

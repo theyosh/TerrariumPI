@@ -1,5 +1,5 @@
 <script>
-  import { Modal } from 'svelte-adminlte';
+  import { Modal } from '@keenmate/svelte-adminlte';
 
   import { _ } from 'svelte-i18n';
 

@@ -4,7 +4,7 @@
   dayjs.extend(duration);
   import { onMount, onDestroy, getContext } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import { PageHeader, FileInput } from 'svelte-adminlte';
+  import { PageHeader, FileInput } from '@keenmate/svelte-adminlte';
 
   import { locale } from '../locale/i18n';
   import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';

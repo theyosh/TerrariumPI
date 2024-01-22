@@ -2,9 +2,9 @@
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
   import { _, number } from 'svelte-i18n';
-  import { PageHeader, BreadcrumbItem } from 'svelte-adminlte';
+  import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
   import { createForm } from 'felte';
-  import { setConfig } from 'svelte-adminlte/src/config.js';
+  import { Config } from '@keenmate/svelte-adminlte';
 
   import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
   import { successNotification, errorNotification } from '../providers/notification-provider';
@@ -99,7 +99,7 @@
 
           changeLang(values.language);
           currency.set(values.currency);
-          setConfig(formToJSON(context.form));
+          Config.set(formToJSON(context.form));
           autoDarkMode($isDay, $isDarkDesktop);
         } catch (error) {
           errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));

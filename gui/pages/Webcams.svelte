@@ -1,5 +1,5 @@
 <script>
-  import { PageHeader } from 'svelte-adminlte';
+  import { PageHeader } from '@keenmate/svelte-adminlte';
   import { _ } from 'svelte-i18n';
   import { onMount, onDestroy, getContext, setContext } from 'svelte';
 

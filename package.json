@@ -47,6 +47,7 @@
   "dependencies": {
     "@fancyapps/ui": "^5.0.17",
     "@fortawesome/fontawesome-free": "^6.1.2",
+    "@keenmate/svelte-adminlte": "^1.1.4",
     "admin-lte": "^3.2.0",
     "bootstrap": "^4.6.1",
     "chart.js": "^4.0.1",
@@ -61,7 +62,6 @@
     "phoenix": "^1.6.11",
     "redoc": "^2.1.2",
     "svelte": "^4.2.9",
-    "svelte-adminlte": "github:KeenMate/svelte-adminlte",
     "svelte-chartjs": "^3.0.1",
     "svelte-i18n": "^4.0.0",
     "svelte-spa-router": "^4.0.0",

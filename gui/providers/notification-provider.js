@@ -1,4 +1,4 @@
-import { Toastr } from 'svelte-adminlte';
+import { Toastr } from '@keenmate/svelte-adminlte';
 
 import { nl2br } from '../helpers/string-helpers';
 

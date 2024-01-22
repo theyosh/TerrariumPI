@@ -1,5 +1,5 @@
 <script>
-  import { Modal, ModalCloseButton } from 'svelte-adminlte';
+  import { Modal, ModalCloseButton } from '@keenmate/svelte-adminlte';
   import { onMount } from 'svelte';
   import { successNotification, errorNotification } from '../providers/notification-provider';
 

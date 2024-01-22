@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { Card as BaseCard } from 'svelte-adminlte';
+  import { Card as BaseCard } from '@keenmate/svelte-adminlte';
 
   import CardDefaultTools from '../components/common/CardDefaultTools.svelte';
   import { getRandomString } from '../helpers/string-helpers';

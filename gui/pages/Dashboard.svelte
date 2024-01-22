@@ -1,5 +1,5 @@
 <script>
-  import { PageHeader, InfoBox } from 'svelte-adminlte';
+  import { PageHeader, InfoBox } from '@keenmate/svelte-adminlte';
   import { _, number } from 'svelte-i18n';
   import { onMount, onDestroy, setContext } from 'svelte';
   import { dayjs } from 'svelte-time';
