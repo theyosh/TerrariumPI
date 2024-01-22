@@ -69,7 +69,6 @@
     "svelte-websocket-store": "^1.1.33",
     "sveltejs-tippy": "^3.0.0",
     "swagger-ui-dist": "^5.1.0",
-    "sweetalert2": "^11.7.12",
     "tippy.js": "^6.3.7",
     "toastr": "^2.1.4",
     "trumbowyg": "^2.25.2"
