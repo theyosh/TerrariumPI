@@ -260,7 +260,7 @@ class terrariumNotification(terrariumSingleton):
                     setup = copy.deepcopy(service["setup"])
 
                     # Notification states from previous run
-                    setup['state'] = copy.deepcopy(service["state"])
+                    setup["state"] = copy.deepcopy(service["state"])
 
                     if self.engine:
                         setup["engine"] = self.engine
@@ -2416,7 +2416,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                     if not service.state:
                         service.state = {}
 
-                    service.state['chat_ids'] = self.setup["chat_ids"]
+                    service.state["chat_ids"] = self.setup["chat_ids"]
 
                 await update.message.reply_text("start command received, you are now getting updates...")
             else:
@@ -2695,8 +2695,8 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                 logger.exception(f"Error in telegram service: {ex}")
 
         old_chat_ids = []
-        if setup_data['state'] and setup_data['state']['chat_ids']:
-            old_chat_ids = setup_data['state']['chat_ids']
+        if setup_data["state"] and setup_data["state"]["chat_ids"]:
+            old_chat_ids = setup_data["state"]["chat_ids"]
 
         self.setup = {
             "token": setup_data.get("token"),
@@ -2749,7 +2749,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                 logger.exception(f"Error in Telegram run: {ex}")
 
             if len(old_chat_ids) > 0:
-                self.send_message(None, 'Reconnected', 'TerrariumPI just restarted...')
+                self.send_message(None, "Reconnected", "TerrariumPI just restarted...")
 
     def stop(self):
         async def _stop():
