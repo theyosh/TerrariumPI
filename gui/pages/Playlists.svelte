@@ -1,7 +1,7 @@
 <script>
   import { onDestroy, onMount, getContext } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import { PageHeader } from 'svelte-adminlte';
+  import { PageHeader } from '@keenmate/svelte-adminlte';
   import { dayjs } from 'svelte-time';
   import duration from 'dayjs/esm/plugin/duration';
   dayjs.extend(duration);

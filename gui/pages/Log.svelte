@@ -1,7 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { onMount, onDestroy } from 'svelte';
-  import { PageHeader, BreadcrumbItem } from 'svelte-adminlte';
+  import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
   import { date, time } from 'svelte-i18n';
 
   import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';

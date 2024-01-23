@@ -1,6 +1,6 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { PageHeader } from 'svelte-adminlte';
+  import { PageHeader } from '@keenmate/svelte-adminlte';
   import { _ } from 'svelte-i18n';
 
   import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
@@ -86,7 +86,7 @@
           <a href="api/swagger/" target="_blank">Swagger</a>
         </p>
         <p>
-          <br />&copy; Copyright 2015 - 2023<br /><a href="https://theyosh.nl" target="_blank" rel="noopener noreferrer"
+          <br />&copy; Copyright 2015 - 2024<br /><a href="https://theyosh.nl" target="_blank" rel="noopener noreferrer"
             >TheYOSH</a
           >
         </p>

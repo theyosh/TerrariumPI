@@ -1,4 +1,5 @@
-import { getConfig, setConfig } from 'svelte-adminlte/src/config.js';
+import { get } from 'svelte/store';
+import { Config } from '@keenmate/svelte-adminlte';
 import { isAuthenticated } from './stores/authentication';
 import { default as currentUserStore } from './stores/current-user';
 
@@ -13,15 +14,15 @@ export const getCustomConfig = (extra) => {
   const settings = {
     ...custom,
     ...window.terrariumPI,
-    ...getConfig(),
+    ...get(Config),
     ...extra,
   };
-  setConfig(settings);
+  Config.set(settings);
 
   if (settings.logged_in && settings.username) {
     isAuthenticated.set(true);
     currentUserStore.set(settings.username);
   }
 
-  return getConfig();
+  return get(Config);
 };

@@ -1,7 +1,7 @@
 ---
 title: Live HLS Stream
 categories: [Hardware, Webcam]
-tags: [webcam, live, remote, streaming]
+tags: [webcam, live, streaming]
 
 image:
   path: /assets/img/HLS_Livestream.webp

@@ -40,7 +40,7 @@
     DropdownButton,
     DropdownMenu,
     DropdownDivider,
-  } from 'svelte-adminlte';
+  } from '@keenmate/svelte-adminlte';
 
   import RoutePages, { onRouteLoaded, Pages, PageUrls } from './pages';
   import { listenPageTitleChanged, customPageTitleUsed } from './stores/page-title';
@@ -543,7 +543,7 @@
     </div>
   </div>
   <footer class="main-footer p-2 text-sm">
-    &copy; 2015 - 2023 <a target="_blank" rel="noopener noreferrer" href="https://theyosh.nl">TheYOSH</a>
+    &copy; 2015 - 2024 <a target="_blank" rel="noopener noreferrer" href="https://theyosh.nl">TheYOSH</a>
     <!-- Credits to the original builders. The least I can do -->
     <small>
       using <a target="_blank" rel="noopener noreferrer" href="https://adminlte.io">AdminLTE</a>,
