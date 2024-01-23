@@ -23,6 +23,8 @@ install.sh
 Makefile
 .vscode
 .mypy_cache
+.prettierrc
+postcss.config.cjs
 
 # Gui parts
 .env.dev.json
