@@ -1,7 +1,7 @@
 ---
 title: Remote Button
 categories: [Hardware, Button]
-tags: [button, remote, json, temperature, humidity,fertility,ph,uva,moisture,uvb,altitude,co2,distance,uvi,pressure,light]
+tags: [button, remote]
 
 image:
   path: /assets/img/remote_sensor.webp
