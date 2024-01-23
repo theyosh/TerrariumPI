@@ -59,7 +59,6 @@ jobs:
 
       -
           name: Build and push
-          if: steps.Dockerfile.outputs.files_exists == 'true'
           uses: docker/build-push-action@v5
           with:
               context: .
