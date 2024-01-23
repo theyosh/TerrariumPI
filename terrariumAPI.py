@@ -1235,7 +1235,7 @@ class terrariumAPI(object):
     def notification_service_update(self, service):
         try:
             service = NotificationService[service]
-            request.json['state'] = service.state or {}
+            request.json["state"] = service.state or {}
             service.set(**request.json)
             orm.commit()
 
@@ -1686,10 +1686,7 @@ class terrariumAPI(object):
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def setting_list(self):
         return {
-            "data": [
-                self.setting_detail(setting.id)
-                for setting in Setting.select(lambda s: not s.id in ["password"])
-            ]
+            "data": [self.setting_detail(setting.id) for setting in Setting.select(lambda s: not s.id in ["password"])]
         }
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)

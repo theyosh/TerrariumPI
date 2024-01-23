@@ -89,7 +89,7 @@ def create_defaults(version):
                 Setting[setting["id"]].value = setting["value"]
 
     # Clear old obsolete settings
-    settings = [setting['id'] for setting in setting_defaults]
+    settings = [setting["id"] for setting in setting_defaults]
     Setting.select(lambda p: p.id not in settings).delete(bulk=True)
 
 
@@ -292,7 +292,11 @@ class NotificationService(db.Entity):
         for field in self.ENCRYPTED_FIELDS:
             # Only update when the data was decrypted.
             # If decrypted value is the same as original value, the value was NOT encrypted and needs to be encrypted
-            if field in self.setup and "" != self.setup[field] and self.setup[field] == terrariumUtils.decrypt(self.setup[field]):
+            if (
+                field in self.setup
+                and "" != self.setup[field]
+                and self.setup[field] == terrariumUtils.decrypt(self.setup[field])
+            ):
                 self.setup[field] = terrariumUtils.encrypt(self.setup[field])
 
     def _decrypt_sensitive_fields(self, data):
@@ -597,8 +601,8 @@ class Setting(db.Entity):
 
     def _decrypt_sensitive_fields(self, data):
         # Decrypt sensitive fields
-        if "" != data['value'] and data['id'] in self.ENCRYPTED_FIELDS:
-            data['value'] = terrariumUtils.decrypt(data['value'])
+        if "" != data["value"] and data["id"] in self.ENCRYPTED_FIELDS:
+            data["value"] = terrariumUtils.decrypt(data["value"])
 
     def before_insert(self):
         self._encrypt_sensitive_fields()

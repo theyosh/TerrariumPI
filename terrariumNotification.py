@@ -2693,8 +2693,8 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                 logger.exception(f"Error in telegram service: {ex}")
 
         old_chat_ids = []
-        if setup_data['state'] and 'chat_ids' in setup_data['state']:
-            old_chat_ids = setup_data['state']['chat_ids']
+        if setup_data["state"] and "chat_ids" in setup_data["state"]:
+            old_chat_ids = setup_data["state"]["chat_ids"]
 
         self.setup = {
             "token": setup_data.get("token"),
