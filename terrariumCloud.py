@@ -11,7 +11,7 @@ from pathlib import Path
 
 from time import sleep, time
 
-from terrariumUtils import classproperty, terrariumCache, terrariumSingleton, terrariumAsync, terrariumUtils
+from terrariumUtils import classproperty, terrariumCache, terrariumSingleton, terrariumAsync
 import os
 
 # pip install meross-iot
@@ -27,8 +27,8 @@ from meross_iot.model.enums import Namespace
 class TerrariumMerossCloud(terrariumSingleton):
     @classproperty
     def is_enabled(__cls__):
-        EMAIL = terrariumUtils.decrypt(os.environ.get("MEROSS_EMAIL", ""))
-        PASSWORD = terrariumUtils.decrypt(os.environ.get("MEROSS_PASSWORD", ""))
+        EMAIL = os.environ.get("MEROSS_EMAIL", "")
+        PASSWORD = os.environ.get("MEROSS_PASSWORD", "")
 
         return EMAIL != "" and PASSWORD != ""
 

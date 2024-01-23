@@ -84,8 +84,13 @@ def create_defaults(version):
             Setting(**setting)
             orm.commit()
         except orm.core.TransactionIntegrityError:
-            # Setting is already in the database. Ignore
-            pass
+            # Setting is already in the database. Ignore except version. Update that.
+            if "version" == setting["id"]:
+                Setting[setting["id"]].value = setting["value"]
+
+    # Clear old obsolete settings
+    settings = [setting['id'] for setting in setting_defaults]
+    Setting.select(lambda p: p.id not in settings).delete(bulk=True)
 
 
 def load_advanced_settings():
@@ -282,24 +287,29 @@ class NotificationService(db.Entity):
 
     ENCRYPTED_FIELDS = ["username", "password", "user_key", "api_token", "access_secret", "token", "allowed_users"]
 
-    def __encrypt_sensitive_fields(self):
+    def _encrypt_sensitive_fields(self):
         # Encrypt sensitive fields
         for field in self.ENCRYPTED_FIELDS:
-            if field in self.setup:
+            # Only update when the data was decrypted.
+            # If decrypted value is the same as original value, the value was NOT encrypted and needs to be encrypted
+            if field in self.setup and "" != self.setup[field] and self.setup[field] == terrariumUtils.decrypt(self.setup[field]):
                 self.setup[field] = terrariumUtils.encrypt(self.setup[field])
 
-    def before_insert(self):
-        self.__encrypt_sensitive_fields()
-
-    def before_update(self):
-        self.__encrypt_sensitive_fields()
-
-    def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
-        data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
-        # Encrypt sensitive fields
+    def _decrypt_sensitive_fields(self, data):
+        # Decrypt sensitive fields
         for field in self.ENCRYPTED_FIELDS:
             if field in data["setup"]:
                 data["setup"][field] = terrariumUtils.decrypt(data["setup"][field])
+
+    def before_insert(self):
+        self._encrypt_sensitive_fields()
+
+    def before_update(self):
+        self._encrypt_sensitive_fields()
+
+    def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+        data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+        self._decrypt_sensitive_fields(data)
 
         return data
 
@@ -578,20 +588,29 @@ class Setting(db.Entity):
     id = orm.PrimaryKey(str)
     value = orm.Optional(str)
 
-    ENCRYPTED_FIELDS = ["meross_cloud_username", "meross_cloud_password"]
+    ENCRYPTED_FIELDS = ["weather_source", "meross_cloud_username", "meross_cloud_password"]
 
-    def __encrypt_sensitive_fields(self):
-        if self.id in self.ENCRYPTED_FIELDS and "" != self.value:
+    def _encrypt_sensitive_fields(self):
+        # Encrypt sensitive fields
+        if "" != self.value and self.id in self.ENCRYPTED_FIELDS and self.value == terrariumUtils.decrypt(self.value):
             self.value = terrariumUtils.encrypt(self.value)
 
+    def _decrypt_sensitive_fields(self, data):
+        # Decrypt sensitive fields
+        if "" != data['value'] and data['id'] in self.ENCRYPTED_FIELDS:
+            data['value'] = terrariumUtils.decrypt(data['value'])
+
     def before_insert(self):
-        self.__encrypt_sensitive_fields()
+        self._encrypt_sensitive_fields()
 
     def before_update(self):
-        self.__encrypt_sensitive_fields()
+        self._encrypt_sensitive_fields()
 
     def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
-        return copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+        data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
+        self._decrypt_sensitive_fields(data)
+
+        return data
 
 
 class Webcam(db.Entity):

@@ -87,6 +87,11 @@ class terrariumEngine(object):
             "asyncio": terrariumAsync(),
         }
 
+        # Create a salt for encryption. And set it as environment variable
+        salt = terrariumUtils.get_script_data("grep -i serial /proc/cpuinfo").decode().strip()
+        salt = salt.split(":")[1].strip()
+        os.environ["SALT"] = salt
+
         self.meross_cloud = None
 
         self.version = version
@@ -241,26 +246,22 @@ class terrariumEngine(object):
         settings = {}
         with orm.db_session():
             for setting in Setting.select():
-                if terrariumUtils.is_float(setting.value):
-                    settings[setting.id] = float(setting.value)
-                elif setting.value.lower() in ["true", "false", "on", "off", "1", "0"]:
-                    settings[setting.id] = terrariumUtils.is_true(setting.value)
-                elif setting.id.lower() in ["power_price", "water_price"]:
-                    settings[setting.id] = float(setting.value) if terrariumUtils.is_float(setting.value) else 0.0
-                else:
-                    settings[setting.id] = setting.value
+                setting = setting.to_dict()
 
-                logger.debug(f"Loaded setting: {setting.id} with value: {setting.value}")
+                if terrariumUtils.is_float(setting['value']):
+                    settings[setting['id']] = float(setting['value'])
+                elif setting['value'].lower() in ["true", "false", "on", "off", "1", "0"]:
+                    settings[setting['id']] = terrariumUtils.is_true(setting['value'])
+                elif setting['id'].lower() in ["power_price", "water_price"]:
+                    settings[setting['id']] = float(setting['value']) if terrariumUtils.is_float(setting['value']) else 0.0
+                else:
+                    settings[setting['id']] = setting['value']
+
+                logger.debug(f"Loaded setting: {setting['id']} with value: {setting['value']}")
 
         settings["exclude_ids"] = [] if "" == settings["exclude_ids"] else settings["exclude_ids"].split(",")
         # Force port number to an int.....
         settings["port"] = int(settings["port"])
-
-        # Create a salt for encryption. And set it as environment variable
-        cmd = "grep -i serial /proc/cpuinfo"
-        salt = terrariumUtils.get_script_data(cmd).decode().strip()
-        salt = salt.split(":")[1].strip()
-        os.environ["SALT"] = salt
 
         # Set meross login into the current bash environment
         # But first check if the credentials have changed.
@@ -372,8 +373,8 @@ class terrariumEngine(object):
                 self.meross_cloud.stop()
 
             self.meross_cloud = TerrariumMerossCloud(
-                terrariumUtils.decrypt(settings["meross_cloud_username"]),
-                terrariumUtils.decrypt(settings["meross_cloud_password"]),
+                settings["meross_cloud_username"],
+                settings["meross_cloud_password"],
             )
 
     # -=NEW=-

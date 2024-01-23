@@ -576,8 +576,8 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
                     smtp_settings[smtp_security] = True
 
                 if "" != self.setup["username"]:
-                    smtp_settings["user"] = terrariumUtils.decrypt(self.setup["username"])
-                    smtp_settings["password"] = terrariumUtils.decrypt(self.setup["password"])
+                    smtp_settings["user"] = self.setup["username"]
+                    smtp_settings["password"] = self.setup["password"]
 
                 response = email_message.send(to=(receiver, receiver), smtp=smtp_settings)
 
@@ -2317,9 +2317,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
                 self.connection.on_connect = self.on_connect
                 if self.setup["ssl"]:
                     self.connection.tls_set(tls_version=mqtt.ssl.PROTOCOL_TLS)
-                self.connection.username_pw_set(
-                    terrariumUtils.decrypt(self.setup["username"]), terrariumUtils.decrypt(self.setup["password"])
-                )
+                self.connection.username_pw_set(self.setup["username"], self.setup["password"])
                 self.connection.connect(self.setup["address"], self.setup["port"], 30)
                 self.connection.loop_start()
                 logger.info(f'Connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]} ...')
@@ -2695,7 +2693,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
                 logger.exception(f"Error in telegram service: {ex}")
 
         old_chat_ids = []
-        if setup_data['state'] and setup_data['state']['chat_ids']:
+        if setup_data['state'] and 'chat_ids' in setup_data['state']:
             old_chat_ids = setup_data['state']['chat_ids']
 
         self.setup = {

@@ -1235,6 +1235,7 @@ class terrariumAPI(object):
     def notification_service_update(self, service):
         try:
             service = NotificationService[service]
+            request.json['state'] = service.state or {}
             service.set(**request.json)
             orm.commit()
 
@@ -1687,7 +1688,7 @@ class terrariumAPI(object):
         return {
             "data": [
                 self.setting_detail(setting.id)
-                for setting in Setting.select(lambda s: not s.id in ["password", "encryption_salt"])
+                for setting in Setting.select(lambda s: not s.id in ["password"])
             ]
         }
 
@@ -1698,9 +1699,7 @@ class terrariumAPI(object):
 
         try:
             data = Setting[setting].to_dict()
-            if data["id"] in ["meross_cloud_username", "meross_cloud_password"]:
-                data["value"] = terrariumUtils.decrypt(data["value"])
-            elif "exclude_ids" == data["id"]:
+            if "exclude_ids" == data["id"]:
                 ids = data["value"].split(",")
                 data["value"] = []
 
