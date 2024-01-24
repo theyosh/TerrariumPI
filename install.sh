@@ -351,7 +351,7 @@ EOF
 sed -e "s@^User=.*@User=${SCRIPT_USER}@" -e "s@^Group=.*@Group=${SCRIPT_GROUP}@" -e "s@^WorkingDirectory=.*@WorkingDirectory=${BASEDIR}@" -e "s@^ExecStart=.*@ExecStart=${BASEDIR}/venv/bin/python ${BASEDIR}/terrariumPI.py@" "${BASEDIR}/contrib/terrariumpi.service.example" > /etc/systemd/system/terrariumpi.service
 sed -ie "s@.*RemoveIPC=.*@RemoveIPC=false@" /etc/systemd/logind.conf
 systemctl daemon-reload
-systemctl enable terrariumpi
+systemctl enable terrariumpi > /dev/null
 
 
 PROGRESS=$((PROGRESS + 2))
