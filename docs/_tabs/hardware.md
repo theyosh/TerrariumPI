@@ -8,6 +8,15 @@ image:
   src: /assets/img/Hardware.webp
   alt: Hardware header image
 ---
+
+## Raspberry PI
+
+The software is actively tested and fully supported on a Raspberry PI 3 or 4. Other Raspberry PIs could work, as testing on more devices is not doable. So there are messages that Pi Zeros should work. But I cannot test it, and therefore offer limit support.
+
+### Bluetooth
+
+With the new installers, it looks like that Wifi is disabled after installation. This will also block the bluetooth functionality. So make sure you have enabled Wifi by using the `raspi-config` tool and configure your Wifi setup. This will activate the Wifi and bluetooth chip.
+
 ## GPIO
 
 ![Raspberry PI GPIO pins layout](/assets/img/GPIO-Pinout-Diagram.webp){: style="max-width: 200px" .right}
