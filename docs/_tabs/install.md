@@ -94,7 +94,7 @@ then you can run `docker compose up -d` to start the docker image. It could be t
 First we need to install Git. This is used to download the software from Github.com
 
 ```console
-sudo apt -y install git
+sudo apt update && sudo apt -y install git
 ```
 
 ### Download
