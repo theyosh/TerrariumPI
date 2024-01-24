@@ -89,6 +89,8 @@ then you can run `docker compose up -d` to start the docker image. It could be t
 
 ## Manual
 
+All the commands below needs to executed as **normal user**. This can be the default user `pi` or any other user you have created. This is imported due to security and manual debugging when there are problems.
+
 ### Prerequisites
 
 First we need to install Git. This is used to download the software from Github.com
