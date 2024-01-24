@@ -11,7 +11,7 @@ image:
 
 Here we will install Raspberry PI and TerrariumPI software step by step.
 
-# Raspberry PI
+## Raspberry PI
 
 ![Raspberry PI Logo](/assets/img/RaspberryPI_Logo.webp){: .right width="100" }
 In order to run TerrariumPI you first need a working Raspberry PI with the '[Raspberry Pi OS Lite (Legacy)](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy)' image. Make sure you are using the **Legacy** version! This is Debian Buster.
@@ -19,14 +19,14 @@ This is very important, as the Desktop and/or the new OS version will not work w
 
 Also **64bit is not supported** due to missing mmal code which is needed for the webcams.
 
-## Creating SD Card
+### Creating SD Card
 
 ![Raspberry PI Imager](/assets/img/RPI_Imager.webp){: .right width="200" }
 Download and instal the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to prepare your SD card. Make sure you have a SD card of at least 4GB of size. Bigger is better :) Make sure you select **Raspberry Pi OS Lite (legacy)** from the other Raspberry Pi OS images.
 
 ![Raspberry PI Imager settings icon](/assets/img/RPI_Imager_settings.webp){: .left width="50"}In order to enable SSH, Wifi and other settings, click on the settings icon in the lower right corner. Here you enter your Wifi settings, pi password etc. Use this to install the Raspberry PI headless. Add the SD card in the Raspberry PI and withing a minute you should have a running Raspberry PI.
 
-# TerrariumPI
+## TerrariumPI
 
 When the Raspberry PI is up and running, you should be able to SSH to it. On Linux and Mac you can use the terminal. For Windows, you can use Putty.
 
@@ -36,7 +36,7 @@ ssh pi@[raspberrypi]
 
 **Disclaimer:** If you have TerrariumPI 3 running on this Raspberry PI, then you can [read here](#backup) how to stop and make a backup.
 
-## Docker
+### Docker
 
 ![Docker Logo](/assets/img/DockerLogo.webp){: .right width="200" }
 As from version 4.1 there is a [Docker image](https://hub.docker.com/r/theyosh/terrariumpi) that can be used to run TerrariumPI. When you run it in Docker, you can skip the rest of the page. Only the migration could be followed if you want to restore your current relay history.
@@ -87,11 +87,11 @@ The network mode needs to be at `host`. Else bluetooth with not work, and you ca
 
 then you can run `docker compose up -d` to start the docker image. It could be that it needs a reboot. After that, you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
-## Manual
+### Manual
 
 All the commands below needs to executed as **normal user**. This can be the default user `pi` or any other user you have created. This is imported due to security and manual debugging when there are problems.
 
-### Prerequisites
+#### Prerequisites
 
 First we need to install Git. This is used to download the software from Github.com
 
@@ -99,7 +99,7 @@ First we need to install Git. This is used to download the software from Github.
 sudo apt update && sudo apt -y install git
 ```
 
-### Download
+#### Download
 
 After Git is installed, we can download the TerrariumPI source code. We will only download the latest version.
 
@@ -109,7 +109,7 @@ If you want to do some development or testing, omit the part `--depth 1`. Then y
 git clone --branch main --depth 1 https://github.com/theyosh/TerrariumPI.git
 ```
 
-### Installation
+#### Installation
 
 And the final step is to start the installer. This will guide you through the installation process.
 
@@ -128,13 +128,13 @@ sudo ./install.sh
 
 After the installation is done, reboot once and you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
-# Migration from V3 to V4
+## Migration from V3 to V4
 
 There is **no real migration** from version 3 to version 4. The changes are to big. So that means you have to install TerrariumPI v4 as it was a new PI. These migrations steps will only copy the *existing relay history data* from V3 to V4 so that the total power and water usages is still there. And the total costs are still correct. This is all what will be migrated.
 
 If you do **not care** about your relay history, you can just skip this migration. This is the **only** data that will be migrated!
 
-## Backup
+### Backup
 
 So make sure you have **stopped** the old TerrariumPI. And rename the folder `TerrariumPI` to `TerrariumPI.old`. This way you have a backup of your existing working setup.
 
@@ -142,11 +142,11 @@ So make sure you have **stopped** the old TerrariumPI. And rename the folder `Te
 
 2. Make a backup of existing version. `mv /home/pi/TerrariumPI /home/pi/TerrariumPI.old`
 
-## First setup
+### First setup
 
 Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need to set it up as you want. So that means adding at least all the relays you want to use/migrate. When that is done, shutdown TerrariumPI 4 and continue with the last migrations step.
 
-## Migrate
+### Migrate
 
 1. First make sure you have an backup of files of the old V3 version:
   - settings.cfg
