@@ -7,11 +7,12 @@ VERSION=$(grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3)
 VERSION="${VERSION//\'/}"
 INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python 3)"
 PI_ZERO=$(grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo)
-BUSTER_OS=$(grep -ic "^VERSION_CODENAME=buster" /etc/os-release)
+#BUSTER_OS=$(grep -ic "^VERSION_CODENAME=buster" /etc/os-release)
+OS=$(grep -ioP '^VERSION_CODENAME=(\K.*)' /etc/os-release)
 
 WHOAMI=$(whoami)
 if [ "${WHOAMI}" != "root" ]; then
-  echo "Start TerrariumPI installation as user root"
+  echo "Start TerrariumPI installation with sudo command"
   echo "sudo ./install.sh"
   exit 0
 fi
@@ -32,7 +33,8 @@ CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered chromium-browser desktop-base
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
 OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
 # For Bullseye we need libopenexr25 and libilmbase25
-if [ "${BUSTER_OS}" -eq 0 ]; then
+#if [ "${BUSTER_OS}" -eq 0 ]; then
+if [ "${OS}" == "bullseye" ]; then
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
 fi
 APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev libopenblas-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
@@ -48,9 +50,12 @@ if [ "${PI_ZERO}" -eq 1 ]; then
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==21.8.0}"
   PIP_MODULES="${PIP_MODULES//bcrypt==+([^ ])/bcrypt==3.2.2}"
 
-  if [ "${BUSTER_OS}" -eq 1 ]; then
+#  if [ "${BUSTER_OS}" -eq 1 ]; then
+  if [ "${OS}" == "buster" ]; then
     PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.4.60}"
     PIP_MODULES="${PIP_MODULES//cryptography==+([^ ])/cryptography==37.0.4}"
+  elif [ "${OS}" == "bullseye" ]; then
+    PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.3.56}"
   else
     PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.3.56}"
   fi
@@ -59,8 +64,9 @@ if [ "${PI_ZERO}" -eq 1 ]; then
   PIP_MODULES="${PIP_MODULES} lxml==4.6.4"
 fi
 
-# Debian buster does not like numpy or cryptography .... :(
-if [ "${BUSTER_OS}" -eq 1 ]; then
+# Debian buster does not like numpy .... :(
+if [ "${OS}" == "buster" ]; then
+#if [ "${BUSTER_OS}" -eq 1 ]; then
   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
 fi
 
@@ -95,6 +101,9 @@ case $? in
   ;;
 esac
 
+# Set the timezone
+dpkg-reconfigure tzdata
+
 # Clean up first
 whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to remove not needed programs in order to free up disk space and make future updates faster. All desktop software will be removed.\n\nDo you want to remove not needed programs?" 0 0
 
@@ -111,15 +120,13 @@ case $? in
   ;;
 esac
 
-# Install required packages to get the terrarium software running
+whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI will now start the installation..." 0 60
 
+# Install required packages to get the terrarium software running
 debconf-apt-progress -- apt-get -y autoremove
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
 debconf-apt-progress -- apt-get -y install ${APT_PACKAGES}
-
-# Set the timezone
-dpkg-reconfigure tzdata
 
 # Basic config:
 # Enable 1Wire en I2C during boot
@@ -325,8 +332,8 @@ if [ -f terrariumpi.db ]; then
 fi
 
 # Set file owner rights
-chown "${SCRIPT_USER}". .
-chown "${SCRIPT_USER}". * -Rf
+chown "${SCRIPT_USER}": .
+chown "${SCRIPT_USER}": * -Rf
 
 sync
 
