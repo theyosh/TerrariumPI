@@ -9,6 +9,7 @@ image:
   alt: "Voltcraft SEM6000 header image"
 
 device_address: "Bluetooth MAC address. Ex: `c2:7c:9e:66:e3:52`"
+device_url : https://www.conrad.com/en/p/voltcraft-sem6000-energy-consumption-meter-bluetooth-interface-data-export-mode-data-logger-trms-selectable-energy-t-1558906.html
 device_auto_detect: true
 ---
 
@@ -21,8 +22,5 @@ Highlights & Details
 - LED ring changes the color depending on the measured performance
 - Comfortable control of timer and schedule functions using the free iOS and Android App
 - Additional features such as programmable on and off, timer, remote control via your mobile device and anti-burglary- Mode
-
-[More information ...](https://www.conrad.com/en/p/voltcraft-sem6000-energy-consumption-meter-bluetooth-interface-data-export-mode-data-logger-trms-selectable-energy-t-1558906.html)
-
 
 {% include_relative _relay_detail.md %}

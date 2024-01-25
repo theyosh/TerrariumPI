@@ -10,6 +10,8 @@ image:
 
 device_address: "Enter the hostname or IP address"
 device_url : https://www.wemo.com/
+device_auto_detect: true
+
 ---
 
 ## Information
