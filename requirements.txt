@@ -55,7 +55,7 @@ sensirion-i2c-sht==0.4.0
 bme680==1.1.1
 adafruit-circuitpython-sht31d==2.3.24
 SM8relind==1.0.2
-PyP100==0.1.2
+git+https://github.com/almottier/TapoP100.git
 git+https://github.com/SequentMicrosystems/4relind-rpi.git#subdirectory=python/4relind
 git+https://github.com/SequentMicrosystems/4relay-rpi.git#subdirectory=python/4relay
 git+https://github.com/PiSupply/Bright-Pi
