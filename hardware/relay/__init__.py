@@ -60,14 +60,17 @@ class terrariumRelay(object):
             data = {}
             # Start dynamically loading sensors (based on: https://www.bnmetrics.com/blog/dynamic-import-in-python3)
             for file in sorted(Path(__file__).parent.glob("*_relay.py")):
-                imported_module = import_module("." + file.stem, package="{}".format(__name__))
+                try:
+                    imported_module = import_module("." + file.stem, package="{}".format(__name__))
 
-                for i in dir(imported_module):
-                    attribute = getattr(imported_module, i)
+                    for i in dir(imported_module):
+                        attribute = getattr(imported_module, i)
 
-                    if inspect.isclass(attribute) and attribute != __cls__ and issubclass(attribute, __cls__):
-                        setattr(sys.modules[__name__], file.stem, attribute)
-                        data[attribute.HARDWARE] = attribute
+                        if inspect.isclass(attribute) and attribute != __cls__ and issubclass(attribute, __cls__):
+                            setattr(sys.modules[__name__], file.stem, attribute)
+                            data[attribute.HARDWARE] = attribute
+                except Exception as ex:
+                    logger.warning(f'Error loading {file}: {ex}')
 
             cache.set_data(__CACHE_KEY, data, -1)
 
