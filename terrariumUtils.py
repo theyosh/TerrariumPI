@@ -438,7 +438,6 @@ class terrariumUtils:
             logger.debug("Output was: %s." % (data))
         except Exception as ex:
             logger.exception("Error parsing script data for script %s. Exception %s" % (script, ex))
-        #            raise ex
 
         return data
 
