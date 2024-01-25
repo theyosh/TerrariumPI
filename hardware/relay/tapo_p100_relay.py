@@ -11,22 +11,11 @@ class terrariumRelayTAPOP100(terrariumRelay):
 
     def _load_hardware(self):
         address = self.address.split(",")
-        print('Parsed address')
-        print(address)
 
-        print('Loading TAPO device')
-        try:
-            # address: [IP],[EMAIL],[PASSWORD]
-            device = PyP100.P100(address[0].strip(), address[1].strip(), address[2].strip())
-            print('Start handshaking')
-            device.handshake()
-            print('Login to device')
-            device.login()
-            print('All good, return device')
-        except Exception as ex:
-            print('Something went wrong..??')
-            print(ex)
-            return None
+        # address: [IP],[EMAIL],[PASSWORD]
+        device = PyP100.P100(address[0].strip(), address[1].strip(), address[2].strip())
+        device.handshake()
+        device.login()
 
         return device
 
@@ -41,8 +30,6 @@ class terrariumRelayTAPOP100(terrariumRelay):
 
     def _get_hardware_value(self):
         data = self.device.getDeviceInfo()
-        print("Get current state:")
-        print(data)
 
         # In testing mode, we just return the current state
-        return self.ON if terrariumUtils.is_true(self.state) else self.OFF
+        return self.ON if terrariumUtils.is_true(data['device_on']) else self.OFF
