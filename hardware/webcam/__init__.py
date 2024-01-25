@@ -91,19 +91,22 @@ class terrariumWebcam(object):
             data = {}
             # Start dynamically loading sensors (based on: https://www.bnmetrics.com/blog/dynamic-import-in-python3)
             for file in sorted(Path(__file__).parent.glob("*_webcam.py")):
-                imported_module = import_module("." + file.stem, package="{}".format(__name__))
+                try:
+                    imported_module = import_module("." + file.stem, package="{}".format(__name__))
 
-                for i in dir(imported_module):
-                    attribute = getattr(imported_module, i)
+                    for i in dir(imported_module):
+                        attribute = getattr(imported_module, i)
 
-                    if (
-                        inspect.isclass(attribute)
-                        and attribute != terrariumWebcam
-                        and attribute != terrariumWebcamLive
-                        and issubclass(attribute, terrariumWebcam)
-                    ):
-                        setattr(sys.modules[__name__], file.stem, attribute)
-                        data[attribute.HARDWARE] = attribute
+                        if (
+                            inspect.isclass(attribute)
+                            and attribute != terrariumWebcam
+                            and attribute != terrariumWebcamLive
+                            and issubclass(attribute, terrariumWebcam)
+                        ):
+                            setattr(sys.modules[__name__], file.stem, attribute)
+                            data[attribute.HARDWARE] = attribute
+                except Exception as ex:
+                    logger.warning(f"Error loading {file}: {ex}")
 
             cache.set_data(__CACHE_KEY, data, -1)
 
