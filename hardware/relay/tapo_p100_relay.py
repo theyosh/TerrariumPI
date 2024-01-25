@@ -26,6 +26,7 @@ class terrariumRelayTAPOP100(terrariumRelay):
         except Exception as ex:
             print('Something went wrong..??')
             print(ex)
+            return None
 
         return device
 
