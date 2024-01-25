@@ -32,4 +32,4 @@ class terrariumRelayTAPOP100(terrariumRelay):
         data = self.device.getDeviceInfo()
 
         # In testing mode, we just return the current state
-        return self.ON if terrariumUtils.is_true(data['device_on']) else self.OFF
+        return self.ON if terrariumUtils.is_true(data["device_on"]) else self.OFF
