@@ -11,11 +11,21 @@ class terrariumRelayTAPOP100(terrariumRelay):
 
     def _load_hardware(self):
         address = self.address.split(",")
+        print('Parsed address')
+        print(address)
 
-        # address: [IP],[EMAIL],[PASSWORD]
-        device = PyP100.P100(address[0].strip(), address[1].strip(), address[2].strip())
-        device.handshake()
-        device.login()
+        print('Loading TAPO device')
+        try:
+            # address: [IP],[EMAIL],[PASSWORD]
+            device = PyP100.P100(address[0].strip(), address[1].strip(), address[2].strip())
+            print('Start handshaking')
+            device.handshake()
+            print('Login to device')
+            device.login()
+            print('All good, return device')
+        except Exception as ex:
+            print('Something went wrong..??')
+            print(ex)
 
         return device
 
