@@ -128,6 +128,31 @@ sudo ./install.sh
 
 After the installation is done, reboot once and you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
+## Upgrading
+
+Upgrading between minor versions is mostly running a few commands. Depending on a docker or manual installation, follow the steps below. After the upgrade is done, make sure you clear your browser cache. Else you can get the old interface or a broken interface.
+
+### Docker
+
+We assume you are use docker compose and at the folder where the `docker-compose.yaml` file is.
+
+1. Stop the docker container: `docker compose stop`
+2. Change the version number in `docker-compose.yaml` and run `docker compose pull`
+3. Start the docker container: `docker compose up -d`
+
+And a new version should be running. A reboot is not needed.
+
+### Manual
+
+We assume you are at the folder where TerrariumPI is installed with git.
+
+1. Stop TerrariumPI: `sudo service terrariumpi stop`
+2. Update the code: `git pull`
+3. Rerun the installer: `sudo ./install`
+4. Start TerrariumPI: `sudo service terrariumpi start`
+
+And a new version should be running. A reboot is not needed.
+
 ## Migration from V3 to V4
 
 There is **no real migration** from version 3 to version 4. The changes are to big. So that means you have to install TerrariumPI v4 as it was a new PI. These migrations steps will only copy the *existing relay history data* from V3 to V4 so that the total power and water usages is still there. And the total costs are still correct. This is all what will be migrated.
