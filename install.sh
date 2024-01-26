@@ -260,7 +260,7 @@ NUMBER_OF_MODULES=($PIP_MODULES)
 NUMBER_OF_MODULES=${#NUMBER_OF_MODULES[@]}
 MODULE_COUNTER=1
 MODULE_OFFSET=${PROGRESS}
-MODULE_MAX=86
+MODULE_MAX=92
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$(printf '%.*f\n' 0 $(echo "scale=2; ( ${MODULE_COUNTER} * ((${MODULE_MAX} - ${MODULE_OFFSET}) / ${NUMBER_OF_MODULES}) ) + ${MODULE_OFFSET}" | bc -l))
@@ -337,7 +337,7 @@ chown "${SCRIPT_USER}": * -Rf
 sync
 
 
-PROGRESS=$((PROGRESS + 2))
+PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
@@ -353,7 +353,7 @@ systemctl daemon-reload
 systemctl enable terrariumpi > /dev/null
 
 
-PROGRESS=$((PROGRESS + 2))
+PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
@@ -369,7 +369,7 @@ for BLUETOOTH_HELPER in $(ls venv/lib/python*/*-packages/bluepy/bluepy-helper); 
 done
 
 
-PROGRESS=$((PROGRESS + 2))
+PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
@@ -382,7 +382,7 @@ EOF
 # Enable MOTD
 ln -s "${BASEDIR}/motd.sh" /etc/update-motd.d/05-terrariumpi 2>/dev/null
 
-PROGRESS=$((PROGRESS + 2))
+PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
