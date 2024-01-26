@@ -7,7 +7,6 @@ VERSION=$(grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3)
 VERSION="${VERSION//\'/}"
 INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python 3)"
 PI_ZERO=$(grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo)
-#BUSTER_OS=$(grep -ic "^VERSION_CODENAME=buster" /etc/os-release)
 OS=$(grep -ioP '^VERSION_CODENAME=(\K.*)' /etc/os-release)
 
 WHOAMI=$(whoami)
@@ -120,7 +119,7 @@ case $? in
   ;;
 esac
 
-whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI will now start the installation..." 0 60
+whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI will now start the installation... Have a coffee" 0 60
 
 # Install required packages to get the terrarium software running
 debconf-apt-progress -- apt-get -y autoremove
@@ -381,9 +380,7 @@ XXX
 EOF
 
 # Enable MOTD
-if [ ! -h /etc/update-motd.d/05-terrariumpi ]; then
-  ln -s "${BASEDIR}/motd.sh" /etc/update-motd.d/05-terrariumpi
-fi
+ln -s "${BASEDIR}/motd.sh" /etc/update-motd.d/05-terrariumpi 2>/dev/null
 
 PROGRESS=$((PROGRESS + 2))
 cat <<EOF
@@ -397,10 +394,10 @@ EOF
 
 # Setup logging symlinks
 if [ ! -h log/terrariumpi.log ]; then
-  su -c 'ln -s /dev/shm/terrariumpi.log log/terrariumpi.log' -s /bin/bash "${SCRIPT_USER}"
+  su -c 'ln -s /dev/shm/terrariumpi.log log/terrariumpi.log' -s /bin/bash "${SCRIPT_USER}" 2>/dev/null
 fi
 if [ ! -h log/terrariumpi.access.log ]; then
-  su -c 'ln -s /dev/shm/terrariumpi.access.log log/terrariumpi.access.log' -s /bin/bash "${SCRIPT_USER}"
+  su -c 'ln -s /dev/shm/terrariumpi.access.log log/terrariumpi.access.log' -s /bin/bash "${SCRIPT_USER}" 2>/dev/null
 fi
 
 PROGRESS=100
@@ -427,6 +424,7 @@ case $? in
     sleep 1
   done
   sync
+  echo "TerrariumPI installation is rebooting the Raspberry PI now!"
   reboot
   ;;
 esac
