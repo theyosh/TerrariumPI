@@ -38,7 +38,6 @@ from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 
 class terrariumWebcamException(TypeError):
-
     """There is a problem with loading a hardware switch. Invalid power switch action."""
 
     def __init__(self, message, *args):

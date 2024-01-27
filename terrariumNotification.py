@@ -500,9 +500,11 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
             None,
             setup_data["hardware"],
             setup_data["address"],
-            None
-            if not terrariumUtils.is_true(setup_data["show_title"])
-            else f'{setup_data["terrariumpi_name"]} {self.setup["version"]}',
+            (
+                None
+                if not terrariumUtils.is_true(setup_data["show_title"])
+                else f'{setup_data["terrariumpi_name"]} {self.setup["version"]}'
+            ),
         )
 
     def send_message(self, msg_type, subject, message, data=None, attachments=[]):
@@ -630,12 +632,14 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
     def load_setup(self, setup_data):
         self.setup = {
             "red": None if setup_data.get("red") is None else terrariumUtils.to_BCM_port_number(setup_data.get("red")),
-            "yellow": None
-            if setup_data.get("yellow") is None
-            else terrariumUtils.to_BCM_port_number(setup_data.get("yellow")),
-            "green": None
-            if setup_data.get("green") is None
-            else terrariumUtils.to_BCM_port_number(setup_data.get("green")),
+            "yellow": (
+                None
+                if setup_data.get("yellow") is None
+                else terrariumUtils.to_BCM_port_number(setup_data.get("yellow"))
+            ),
+            "green": (
+                None if setup_data.get("green") is None else terrariumUtils.to_BCM_port_number(setup_data.get("green"))
+            ),
             "red_timer": None,
             "yellow_timer": None,
         }

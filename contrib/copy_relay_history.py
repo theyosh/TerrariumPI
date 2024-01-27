@@ -20,10 +20,12 @@ def read_sensor_settings(config_file):
                 "type": settings[section]["hardwaretype"],
                 "name": settings[section]["name"],
                 "address": settings[section]["address"],
-                "replacement": None
-                if "last_replacement_date" not in settings[section]
-                or "2019-01-01" == settings[section]["last_replacement_date"]
-                else settings[section]["last_replacement_date"],
+                "replacement": (
+                    None
+                    if "last_replacement_date" not in settings[section]
+                    or "2019-01-01" == settings[section]["last_replacement_date"]
+                    else settings[section]["last_replacement_date"]
+                ),
             }
         )
 

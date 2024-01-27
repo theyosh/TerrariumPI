@@ -31,9 +31,11 @@ class terrariumCalendar(object):
         self.__ical = Calendar.from_ical(self.__ICS_FILE.read_bytes())
 
         # Clear old wrong events
-        for event in self.get_events(datetime(2020,1,1,0,0,0,0, timezone.utc),datetime(2030,1,1,0,0,0,0, timezone.utc)):
-            if event['summary'] == 'TerrariumPI 10 year celebration':
-                self.delete_event(event['uid'])
+        for event in self.get_events(
+            datetime(2020, 1, 1, 0, 0, 0, 0, timezone.utc), datetime(2030, 1, 1, 0, 0, 0, 0, timezone.utc)
+        ):
+            if event["summary"] == "TerrariumPI 10 year celebration":
+                self.delete_event(event["uid"])
 
         if self.get_event("10-years-celebration") == False:
             self.create_event(

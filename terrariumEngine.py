@@ -1344,12 +1344,12 @@ class terrariumEngine(object):
         motd_data["cpu_temperature"] = f'{tmp["cpu_temperature"]} {self.units["temperature"]}'
         motd_data["cpu_temperature_alarm"] = tmp["cpu_temperature"] > 50
 
-        motd_data[
-            "storage"
-        ] = f'{terrariumUtils.format_filesize(tmp["storage"]["used"])}({ tmp["storage"]["used"] / tmp["storage"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["storage"]["total"])}'
-        motd_data[
-            "memory"
-        ] = f'{terrariumUtils.format_filesize(tmp["memory"]["used"])}({ tmp["memory"]["used"] / tmp["memory"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["memory"]["total"])}'
+        motd_data["storage"] = (
+            f'{terrariumUtils.format_filesize(tmp["storage"]["used"])}({ tmp["storage"]["used"] / tmp["storage"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["storage"]["total"])}'
+        )
+        motd_data["memory"] = (
+            f'{terrariumUtils.format_filesize(tmp["memory"]["used"])}({ tmp["memory"]["used"] / tmp["memory"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["memory"]["total"])}'
+        )
 
         system_stats = []
         system_stats.append({"title": _("Up time") + ":", "value": motd_data["uptime"], "alarm": False})

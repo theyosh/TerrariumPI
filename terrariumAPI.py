@@ -1018,9 +1018,11 @@ class terrariumAPI(object):
             request.json["description"],
             request.json.get("location"),
             datetime.fromtimestamp(int(request.json["dtstart"])).replace(tzinfo=timezone.utc),
-            None
-            if request.json["dtend"] is None
-            else datetime.fromtimestamp(int(request.json["dtend"])).replace(tzinfo=timezone.utc),
+            (
+                None
+                if request.json["dtend"] is None
+                else datetime.fromtimestamp(int(request.json["dtend"])).replace(tzinfo=timezone.utc)
+            ),
             request.json.get("freq"),
             request.json.get("interval"),
             request.json.get("repeatend"),

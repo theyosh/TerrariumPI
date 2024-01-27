@@ -7,6 +7,7 @@ Raises:
 Returns:
     terrariumButton: A working button of specified type
 """
+
 # -*- coding: utf-8 -*-
 import terrariumLogging
 
