@@ -30,13 +30,19 @@ class terrariumCalendar(object):
 
         self.__ical = Calendar.from_ical(self.__ICS_FILE.read_bytes())
 
+        # Clear old wrong events
+        for event in self.get_events(datetime(2020,1,1,0,0,0),datetime(2030,1,1,0,0,0)):
+            if event['summary'] == 'TerrariumPI 10 year celebration':
+                self.delete_event(event['uid'])
+
         if self.get_event("10-years-celebration") == False:
             self.create_event(
                 "10-years-celebration",
                 "TerrariumPI 10 year celebration",
-                "<p>Software is 10 years on Github!</p>",
-                "https://github.com/theyosh/TerrariumPI/",
-                datetime(2026, 1, 14, 0, 0, 0, 0, timezone.utc),
+                "<p>TerrariumPI is 10 years old!</p>",
+                "https://theyosh.github.io/TerrariumPI/",
+                datetime(2024, 8, 1, 0, 0, 0, 0, timezone.utc),
+                datetime(2024, 8, 30, 0, 0, 0, 0, timezone.utc),
             )
 
     def __event_schema(self, item):
@@ -97,7 +103,7 @@ class terrariumCalendar(object):
             dtend = dtstart + timedelta(days=1)
 
         event = Event()
-        if create:
+        if not uid:
             uid = str(datetime.now(timezone.utc).timestamp())
         event.add("uid", uid)
 

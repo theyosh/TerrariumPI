@@ -1,10 +1,13 @@
 export const fireworks = () => {
   const today = new Date();
-  const newyear =
-    (today.getMonth() === 11 && today.getDate() >= 31) || (today.getMonth() === 0 && today.getDate() <= 1);
+  const fireworks =
+    (today.getMonth() === 11 && today.getDate() >= 31) ||
+    (today.getMonth() === 0 && today.getDate() <= 1) ||
+    (today.getMonth() === 7 && today.getDate() >= 1 && today.getFullYear() == 2024) ||
+    (today.getMonth() === 7 && today.getDate() <= 30 && today.getFullYear() == 2024);
   let fireworksCanvas = document.querySelector('canvas#fireworks');
 
-  if (newyear) {
+  if (fireworks) {
     if (!fireworksCanvas) {
       fireworksCanvas = document.createElement('canvas');
       fireworksCanvas.id = 'fireworks';
@@ -18,6 +21,7 @@ export const fireworks = () => {
     }
   } else if (fireworksCanvas) {
     fireworksCanvas.remove();
+    fireworksCanvas = null;
   }
 };
 
