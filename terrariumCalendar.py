@@ -79,7 +79,7 @@ class terrariumCalendar(object):
 
             return_data.append(item)
 
-        return sorted(return_data, key=lambda event: event['dtstart'])
+        return sorted(return_data, key=lambda event: event["dtstart"])
 
     def create_event(
         self,
