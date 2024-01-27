@@ -3,8 +3,8 @@ export const fireworks = () => {
   const fireworks =
     (today.getMonth() === 11 && today.getDate() >= 31) ||
     (today.getMonth() === 0 && today.getDate() <= 1) ||
-    (today.getMonth() === 7 && today.getDate() >= 1 && today.getFullYear() == 2024) ||
-    (today.getMonth() === 7 && today.getDate() <= 30 && today.getFullYear() == 2024);
+    (today.getMonth() === 7 && today.getDate() >= 1 && today.getFullYear() === 2024) ||
+    (today.getMonth() === 7 && today.getDate() <= 30 && today.getFullYear() === 2024);
   let fireworksCanvas = document.querySelector('canvas#fireworks');
 
   if (fireworks) {
