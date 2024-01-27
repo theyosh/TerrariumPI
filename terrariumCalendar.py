@@ -4,7 +4,7 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 from datetime import datetime, timedelta, timezone
-from operator import attrgetter
+from time import mktime
 from icalendar import Calendar, Event
 from icalevents.icalevents import events
 from pathlib import Path
@@ -54,8 +54,8 @@ class terrariumCalendar(object):
             "description": str(item.get("description")),
         }
 
-        event["dtstart"] = item.get("dtstart").dt.timestamp()
-        event["dtend"] = item.get("dtend").dt.timestamp()
+        event["dtstart"] = int(mktime(item.get("dtstart").dt.timetuple()))
+        event["dtend"] = int(mktime(item.get("dtend").dt.timetuple()))
         event["all_day"] = event["dtstart"] == event["dtend"]
 
         if item.has_key("rrule"):
@@ -71,17 +71,15 @@ class terrariumCalendar(object):
         if end is None:
             end = start + timedelta(days=30)
 
-        data = sorted(events(string_content=self.__ical.to_ical(), start=start, end=end), key=attrgetter("start"))
-
         return_data = []
-        for event_data in data:
+        for event_data in events(string_content=self.__ical.to_ical(), start=start, end=end):
             item = self.get_event(event_data.uid)
-            item["dtstart"] = event_data.start.timestamp()
-            item["dtend"] = event_data.end.timestamp()
+            item["dtstart"] = int(event_data.start.timestamp())
+            item["dtend"] = int(event_data.end.timestamp())
 
             return_data.append(item)
 
-        return return_data
+        return sorted(return_data, key=lambda event: event['dtstart'])
 
     def create_event(
         self,
