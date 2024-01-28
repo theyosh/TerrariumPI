@@ -1,0 +1,31 @@
+diff --git a/sem6000/repeat_on_failure_decorator.py b/sem6000/repeat_on_failure_decorator.py
+index e1458ed..73dacf6 100644
+--- a/sem6000/repeat_on_failure_decorator.py
++++ b/sem6000/repeat_on_failure_decorator.py
+@@ -8,14 +8,19 @@ def RepeatOnFailureDecorator(delays_in_seconds=None):
+     def Decorator(function):
+         def decorated_function(*s, **d):
+             def reconnect():
+-                reconnectable = s[0]
+-                reconnectable._reconnect()
++                try:
++                    s[0]._reconnect()
++                except Exception:
++                    # Not a sem6000 object
++                    pass
+ 
+             def debug(msg):
+-                debuggable = s[0]
+-
+-                if debuggable.debug:
+-                    print(msg, file=sys.stderr)
++                try:
++                    if s[0].debug:
++                        print(msg, file=sys.stderr)
++                except Exception:
++                    # Not a sem6000 object
++                    pass
+ 
+             tries = 0
+             for delay_in_seconds in delays_in_seconds:
+

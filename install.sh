@@ -4,10 +4,13 @@ shopt -s extglob
 
 BASEDIR=$(dirname $(readlink -nf "$0"))
 VERSION=$(grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3)
-VERSION="${VERSION//\'/}"
-INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python 3)"
+VERSION="${VERSION//\"/}"
 PI_ZERO=$(grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo)
 OS=$(grep -ioP '^VERSION_CODENAME=(\K.*)' /etc/os-release)
+INSTALLER_TITLE="TerrariumPI v. ${VERSION}, Python 3, OS ${OS}"
+if [ "${PI_ZERO}" -eq 1 ]; then
+    INSTALLER_TITLE="${INSTALLER_TITLE}, Pi Zero"
+fi
 
 WHOAMI=$(whoami)
 if [ "${WHOAMI}" != "root" ]; then
@@ -241,6 +244,7 @@ Install required software\n\nUpdating sub modules ...
 XXX
 EOF
 git submodule update 2> /dev/null && rm -rf 3rdparty/4relay-rpi && rm -rf 3rdparty/4relind-rpi && rm -rf 3rdparty/8relind-rpi && rm -rf 3rdparty/Bright-Pi
+patch -N -s -r /dev/null 3rdparty/python3-voltcraft-sem6000/sem6000/repeat_on_failure_decorator.py < contrib/python3-voltcraft-sem6000.patch.diff >/dev/null
 
 PROGRESS=$((PROGRESS + 1))
 cat <<EOF
