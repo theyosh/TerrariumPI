@@ -56,18 +56,3 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             GITHUB_SHA=${{ github.sha }}
-
-      -
-          name: Build and push
-          uses: docker/build-push-action@v5
-          with:
-              context: .
-              push: true
-              target: finalimage-java
-              tags: ${{ steps.meta.outputs.tags }}
-              labels: ${{ steps.meta.outputs.labels }}
-              platforms: linux/arm/v7
-              cache-from: type=gha
-              cache-to: type=gha,mode=max
-              build-args: |
-                GITHUB_SHA=${{ github.sha }}
