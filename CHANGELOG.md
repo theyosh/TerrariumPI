@@ -2,6 +2,109 @@ Changelog
 =========
 
 
+4.8.3 (2024-02-03)
+------------------
+
+**New**
+------
+
+- Add python patch. [TheYOSH]
+- Add upgrade steps. [TheYOSH]
+- Add some debug. [#888](https://github.com/theyosh/TerrariumPI/issues/888). [TheYOSH]
+- Add some debug. [#888](https://github.com/theyosh/TerrariumPI/issues/888). [TheYOSH]
+- Add TAPO P100 smart relay support. [#888](https://github.com/theyosh/TerrariumPI/issues/888). [TheYOSH]
+- Add new publication. [TheYOSH]
+- Add field to ORM. [#882](https://github.com/theyosh/TerrariumPI/issues/882). [TheYOSH]
+
+**Fixes**
+------
+
+- Fix calendar timezone issues. [TheYOSH]
+- Fix calendar timezone. [TheYOSH]
+- JS fix. [TheYOSH]
+- Fix headers. [TheYOSH]
+- Fix broken voltcraft broken debug :( [TheYOSH]
+- Fix docker. [TheYOSH]
+- Fix docker workflow. [TheYOSH]
+- Fix tags. [TheYOSH]
+- Fix copy right year. [TheYOSH]
+- Remove sweetalert2 as it is not used. Fix 2 security issues. [TheYOSH]
+- Refactor sensitive data encryption and fixed updating Telegram service
+  [#882](https://github.com/theyosh/TerrariumPI/issues/882). [TheYOSH]
+
+**Updates**
+------
+
+- Documentation update. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Small calendar updates. [TheYOSH]
+- Progress counter update. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update Python libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update documentation. [TheYOSH]
+- Update apt first. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update submodules. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Tags update. [TheYOSH]
+- Update workflows. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update VEML6075 sensor information about UV measurement. [TheYOSH]
+- Update NodeJs libraries. [TheYOSH]
+
+**Other**
+------
+
+- New release message. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Refactor TAPO P100 relay to use mac address for ID. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Small installation tweaks. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Newer TAPO P100 library. [TheYOSH]
+- Remove debug. [TheYOSH]
+- Keep running when a program crashes. [TheYOSH]
+- Make loading hardware more robust. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Enable bluetooth and Pi support. [TheYOSH]
+- Hide some output. [TheYOSH]
+- Explicit normal user usage for installation. [TheYOSH]
+- Reordered some actions. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Ignore some more. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [TheYOSH]
+- Enable comments. [TheYOSH]
+- Move image. [TheYOSH]
+- TerrariumPI on Pascal's Hideout website. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Switch to svelte-adminlte template from NPM. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Bump jinja2 from 3.1.2 to 3.1.3. [dependabot[bot]]
+
+  Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.2 to 3.1.3.
+  - [Release notes](https://github.com/pallets/jinja/releases)
+  - [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst)
+  - [Commits](https://github.com/pallets/jinja/compare/3.1.2...3.1.3)
+
+  ---
+  updated-dependencies:
+  - dependency-name: jinja2
+    dependency-type: direct:production
+  ...
+- Restore telegram chats after a restart. [#882](https://github.com/theyosh/TerrariumPI/issues/882). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+
+
 4.8.2 (2024-01-07)
 ------------------
 
@@ -23,6 +126,8 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
+- Update installer to clear old 3rdparty pacakges. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update python libraries. [TheYOSH]
 - Update NodeJS libraries. [TheYOSH]
@@ -34,6 +139,8 @@ Changelog
 **Other**
 ------
 
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [TheYOSH]
 - Format Svelte code. [TheYOSH]
 - Refactor Voltcraft SEM6000 relay. [TheYOSH]
 - Remove test code from docker image. [theyosh]
