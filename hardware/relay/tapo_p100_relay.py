@@ -5,6 +5,7 @@ from terrariumUtils import terrariumUtils
 from PyP100 import PyP100
 from hashlib import md5
 
+
 class terrariumRelayTAPOP100(terrariumRelay):
     HARDWARE = "tapop100"
     NAME = "TAPO P100/5"
