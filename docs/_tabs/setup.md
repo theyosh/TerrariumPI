@@ -150,6 +150,8 @@ The url format needs to be `https://api.openweathermap.org/data/2.5/weather?q=[C
 
 TerrariumPI does about 6-10 calls on the One call API per day, what would result in 300 calls max per month. And it can detect which API is available with your OpenWeatherMap account.
 
+**important** This openweathermap url will be encrypted in the database. So the API_KEY value cannot be read out of the database directly.
+
 ## Relays
 
 ![Relay form](/assets/img/Add_Relay_Form.webp)
