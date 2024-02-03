@@ -23,6 +23,8 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN python -m venv /opt/venv
 RUN pip install --upgrade pip==23.3.2 && pip install --upgrade wheel==0.42.0
 COPY requirements.txt .
+COPY contrib/python3-voltcraft-sem6000.patch.diff .
+
 # requirements are slightly different for docker
 RUN sed -i 's/numpy==.*/numpy==1.21.4/g' requirements.txt \
   && pip install smbus==1.1.post2 \
@@ -39,7 +41,7 @@ RUN git clone https://github.com/ageir/chirp-rpi.git --depth 1 "3rdparty/chirp-r
   && git clone https://github.com/SequentMicrosystems/relay8-rpi.git --depth 1 "3rdparty/relay8-rpi" \
   && git clone https://github.com/AtlasScientific/Raspberry-Pi-sample-code.git --depth 1 "3rdparty/AtlasScientific" \
   && git clone https://github.com/moormaster/python3-voltcraft-sem6000.git --depth 1 "3rdparty/python3-voltcraft-sem6000" \
-  && patch -N -s -r /dev/null 3rdparty/python3-voltcraft-sem6000/sem6000/repeat_on_failure_decorator.py < contrib/python3-voltcraft-sem6000.patch.diff >/dev/null \
+  && patch -N -s -r /dev/null 3rdparty/python3-voltcraft-sem6000/sem6000/repeat_on_failure_decorator.py < /python3-voltcraft-sem6000.patch.diff >/dev/null \
   && rm -Rf 3rdparty/Bright-Pi/Documents \
   && find . -type d -name  "__pycache__" -exec rm -r {} + \
   && find . -type f -name "*.pyc" -delete \
