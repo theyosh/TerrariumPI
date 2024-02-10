@@ -6,9 +6,10 @@ logger = terrariumLogging.logging.getLogger(__name__)
 from . import terrariumBluetoothSensor
 
 # apt install libglib2.0-dev
-# pip install bluepy
+# pip install bluepy (buster, bullseye)
+# pip install git+https://github.com/Mausy5043/bluepy3 (bookworm)
 from struct import unpack
-from bluepy.btle import Peripheral, BTLEDisconnectError
+from bluepy.btle import Peripheral, BTLEException
 
 
 class terrariumMiFloraSensor(terrariumBluetoothSensor):
@@ -20,6 +21,18 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
     __MIFLORA_REALTIME_DATA_TRIGGER = 51
     __MIFLORA_GET_DATA = 53
     __MIFLORA_TIMEOUT = 10
+
+    __POWER_STATE = 100
+
+    # Overrule the update function to update the current battery state
+    def update(self, force=False):
+        value = super().update(force)
+        data = self._sensor_cache.get_data(self._sensor_cache_key)
+        self.__POWER_STATE = data['battery']
+        return value
+
+    def __repr__(self):
+        return f"{super().__repr__()} battery {self.__POWER_STATE}%"
 
     def _load_hardware(self):
         address = self._address
@@ -59,14 +72,14 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
 
             return data
 
-        except BTLEDisconnectError as ex:
+        except BTLEException as ex:
             # Lost connection.... retry getting a 'new' device. The data will be red the next round
-            logger.debug(f"Lost connection with sensor {self}. Reconnecting... (BTLEDisconnectError): {ex}")
+            logger.warning(f"Lost connection with sensor {self}. Reconnecting... (BTLEException): {ex}")
             self.load_hardware(True)
 
         except BrokenPipeError as ex:
             # Lost connection.... retry getting a 'new' device. The data will be red the next round
-            logger.debug(f"Lost connection with sensor {self}. Reconnecting... (BrokenPipeError): {ex}")
+            logger.warning(f"Lost connection with sensor {self}. Reconnecting... (BrokenPipeError): {ex}")
             self.load_hardware(True)
 
         logger.warning(f"Reconnecting sensor {self} hardware. (No data)")

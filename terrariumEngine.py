@@ -540,7 +540,7 @@ class terrariumEngine(object):
                         continue
 
                 else:
-                    logger.debug(f"Updated already loaded {sensor}.")
+                    logger.debug(f"Updated already loaded {self.sensors[sensor.id]}.")
                     # Update existing sensor with new address
                     self.sensors[sensor.id].address = sensor.address
 
@@ -548,19 +548,19 @@ class terrariumEngine(object):
                 value = self.sensors[sensor.id].update()
                 if value is None:
                     logger.warning(
-                        f"{sensor} had problems reading a new value during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
+                        f"{self.sensors[sensor.id]} had problems reading a new value during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
                     )
 
                 elif not sensor.limit_min <= value <= sensor.limit_max:
                     logger.warning(
-                        f"Measurement for sensor {sensor} of {value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]} during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
+                        f"Measurement for sensor {self.sensors[sensor.id]} of {value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]} during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
                     )
 
                 else:
                     # Store the new measurement value in the database
                     sensor.update(value)
                     logger.info(
-                        f"Loaded sensor {sensor} with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds."
+                        f"Loaded sensor {self.sensors[sensor.id]} with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds."
                     )
 
     # -=NEW=-
@@ -638,7 +638,7 @@ class terrariumEngine(object):
             measurement_time = time.time() - start
             if new_value is None:
                 logger.warning(
-                    f"Could not take a new measurement from sensor {sensor}. Tried for {measurement_time:.2f} seconds. Skipping this update."
+                    f"Could not take a new measurement from sensor {self.sensors[sensor.id]}. Tried for {measurement_time:.2f} seconds. Skipping this update."
                 )
                 continue
 
@@ -658,7 +658,7 @@ class terrariumEngine(object):
 
             if not sensor.limit_min <= new_value <= sensor.limit_max:
                 logger.error(
-                    f"Measurement for sensor {sensor} of {new_value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]}. Skipping this update."
+                    f"Measurement for sensor {self.sensors[sensor.id]} of {new_value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]}. Skipping this update."
                 )
                 continue
 
@@ -666,7 +666,7 @@ class terrariumEngine(object):
                 self.sensors[sensor.id].erratic += 1
                 if self.sensors[sensor.id].erratic < 5:
                     logger.warning(
-                        f"Sensor {sensor} has an erratic({self.sensors[sensor.id].erratic}) measurement of value {new_value:.2f}{self.units[sensor.type]} compared to old value {current_value:.2f}{self.units[sensor.type]}. The difference of {abs(current_value - new_value):.2f}{self.units[sensor.type]} is more than max allowed difference of {sensor.max_diff:.2f}{self.units[sensor.type]} and will be ignored."
+                        f"Sensor {self.sensors[sensor.id]} has an erratic({self.sensors[sensor.id].erratic}) measurement of value {new_value:.2f}{self.units[sensor.type]} compared to old value {current_value:.2f}{self.units[sensor.type]}. The difference of {abs(current_value - new_value):.2f}{self.units[sensor.type]} is more than max allowed difference of {sensor.max_diff:.2f}{self.units[sensor.type]} and will be ignored."
                     )
                     new_value = current_value
                 else:
@@ -716,10 +716,10 @@ class terrariumEngine(object):
                     self.notification.message("sensor_alarm", sensor_data)
 
                 logger.info(
-                    f"Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]} in {measurement_time+db_time:.2f} seconds."
+                    f"Updated sensor {self.sensors[sensor.id]} with new value {new_value:.2f}{self.units[sensor.type]} in {measurement_time+db_time:.2f} seconds."
                 )
                 logger.debug(
-                    f"Updated sensor {sensor} with new value {new_value:.2f}{self.units[sensor.type]}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
+                    f"Updated sensor {self.sensors[sensor.id]} with new value {new_value:.2f}{self.units[sensor.type]}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
                 )
 
             # A small sleep between sensor measurement to get a bit more responsiveness of the system
