@@ -2,12 +2,17 @@
 # https://wiki.bash-hackers.org/syntax/pattern#extended_pattern_language
 shopt -s extglob
 
+#set -x
+
 BASEDIR=$(dirname $(readlink -nf "$0"))
 VERSION=$(grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3)
 VERSION="${VERSION//\"/}"
+PYTHON=$(python3 -V)
 PI_ZERO=$(grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo)
-OS=$(grep -ioP '^VERSION_CODENAME=(\K.*)' /etc/os-release)
-INSTALLER_TITLE="TerrariumPI v. ${VERSION}, Python 3, OS ${OS}"
+RUNNING_OS=$(grep -ioP '^VERSION_CODENAME=(\K.*)' /etc/os-release)
+OS="${OS:-${RUNNING_OS}}"
+
+INSTALLER_TITLE="TerrariumPI ${VERSION}, ${PYTHON}, OS ${OS^}"
 if [ "${PI_ZERO}" -eq 1 ]; then
     INSTALLER_TITLE="${INSTALLER_TITLE}, Pi Zero"
 fi
@@ -33,12 +38,16 @@ SCRIPT_GROUP="$(id -gn ${SCRIPT_USER})"
 
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
+# Buster defaults for openCV
 OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
 # For Bullseye we need libopenexr25 and libilmbase25
-#if [ "${BUSTER_OS}" -eq 0 ]; then
 if [ "${OS}" == "bullseye" ]; then
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
+elif [ "${OS}" == "bookworm" ]; then
+  # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
+  OPENCV_PACKAGES="libopenexr-3-1-30 libilmbase25 liblapack3 libatlas3-base python3-opencv"
 fi
+
 APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev libopenblas-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
 
 PIP_MODULES=""
@@ -51,28 +60,27 @@ if [ "${PI_ZERO}" -eq 1 ]; then
   # Pi Zero needs some fixed python modules
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==21.8.0}"
   PIP_MODULES="${PIP_MODULES//bcrypt==+([^ ])/bcrypt==3.2.2}"
+  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
+  PIP_MODULES="${PIP_MODULES} lxml==4.6.4"
 
-#  if [ "${BUSTER_OS}" -eq 1 ]; then
   if [ "${OS}" == "buster" ]; then
     PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.4.60}"
     PIP_MODULES="${PIP_MODULES//cryptography==+([^ ])/cryptography==37.0.4}"
   elif [ "${OS}" == "bullseye" ]; then
     PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.3.56}"
-  else
-    PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.3.56}"
   fi
-
-  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
-  PIP_MODULES="${PIP_MODULES} lxml==4.6.4"
 fi
 
 # Debian buster does not like numpy .... :(
 if [ "${OS}" == "buster" ]; then
-#if [ "${BUSTER_OS}" -eq 1 ]; then
   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
+elif [ "${OS}" == "bookworm" ]; then
+  # On bookworm we use the OS package versions
+  PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/}"
+#  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/}"
+  # Need a upgraded bluepy library
+  PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
 fi
-
-#set -ex
 
 # Install dialog for further installation
 if ! hash whiptail 2>/dev/null; then
@@ -103,24 +111,17 @@ case $? in
   ;;
 esac
 
-# Set the timezone
-dpkg-reconfigure tzdata
-
 # Clean up first
 whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to remove not needed programs in order to free up disk space and make future updates faster. All desktop software will be removed.\n\nDo you want to remove not needed programs?" 0 0
 
 case $? in
   0) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --infobox "TerrariumPI is removing not needed programs" 0 0
-
-    CLEANUP=""
-    for PACKAGE in ${CLEANUP_PACKAGES}
-    do
-      CLEANUP="${CLEANUP} \"*${PACKAGE}*\""
-    done
-
-    debconf-apt-progress -- apt-get -y remove ${CLEANUP}
+    debconf-apt-progress -- apt-get -y remove *${CLEANUP_PACKAGES// /* *}*
   ;;
 esac
+
+# Set the timezone
+dpkg-reconfigure tzdata
 
 whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI will now start the installation... Have a coffee" 0 60
 
@@ -132,51 +133,61 @@ debconf-apt-progress -- apt-get -y install ${APT_PACKAGES}
 
 # Basic config:
 # Enable 1Wire en I2C during boot
-if [ -f /boot/config.txt ]; then
+if [ -f /etc/modules ]; then
+  if [ $(grep -ic "i2c-dev" /etc/modules) -eq 0 ]; then
+    echo "i2c-dev" >> /etc/modules
+  fi
+fi
+
+BOOTCONFIG="/boot/config.txt"
+if [ "${OS}" == "bookworm" ]; then
+  BOOTCONFIG="/boot/firmware/config.txt"
+fi
+
+if [ -f "${BOOTCONFIG}" ]; then
 
   # Enable I2C
-  if [ $(grep -ic "^dtparam=i2c_arm=on" /boot/config.txt) -eq 0 ]; then
-    echo "dtparam=i2c_arm=on" >> /boot/config.txt
-  fi
-
-  if [ -f /etc/modules ]; then
-    if [ $(grep -ic "i2c-dev" /etc/modules) -eq 0 ]; then
-      echo "i2c-dev" >> /etc/modules
-    fi
+  if [ $(grep -ic "^dtparam=i2c_arm=on" "${BOOTCONFIG}") -eq 0 ]; then
+    echo "dtparam=i2c_arm=on" >> "${BOOTCONFIG}"
   fi
 
   # Enable 1-Wire
-  if [ $(grep -ic "^dtoverlay=w1-gpio" /boot/config.txt) -eq 0 ]; then
-    echo "dtoverlay=w1-gpio" >> /boot/config.txt
+  if [ $(grep -ic "^dtoverlay=w1-gpio" "${BOOTCONFIG}") -eq 0 ]; then
+    echo "dtoverlay=w1-gpio" >> "${BOOTCONFIG}"
   fi
 
   # Enable camera
-  if [ $(grep -ic "^gpu_mem=" /boot/config.txt) -eq 0 ]; then
-    echo "gpu_mem=128" >> /boot/config.txt
+  if [ $(grep -ic "^gpu_mem=" "${BOOTCONFIG}") -eq 0 ]; then
+    echo "gpu_mem=128" >> "${BOOTCONFIG}"
   fi
 
-  if [ $(grep -ic "^start_x=1" /boot/config.txt) -eq 0 ]; then
-    echo "start_x=1" >> /boot/config.txt
+  if [ $(grep -ic "^start_x=1" "${BOOTCONFIG}") -eq 0 ]; then
+    echo "start_x=1" >> "${BOOTCONFIG}"
   fi
 
   # Bullseye legacy camera
-  sed -i "/boot/config.txt" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@"
-  sed -i "/boot/config.txt" -e "s@^[ ]*camera_auto_detect=.*@@"
+  sed -i "${BOOTCONFIG}" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@"
+  sed -i "${BOOTCONFIG}" -e "s@^[ ]*camera_auto_detect=.*@@"
 
-  if [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" /boot/config.txt) -eq 0 ]; then
-    sed -i "/boot/config.txt" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
+  if [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" "${BOOTCONFIG}") -eq 0 ]; then
+    sed -i "${BOOTCONFIG}" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
   fi
 
   # Enable serial
-  if [ $(grep -ic "^enable_uart=1" /boot/config.txt) -eq 0 ]; then
-    echo "enable_uart=1" >> /boot/config.txt
+  if [ $(grep -ic "^enable_uart=1" "${BOOTCONFIG}") -eq 0 ]; then
+    echo "enable_uart=1" >> "${BOOTCONFIG}"
   fi
 fi
 
 # Disable serial debug to enable CO2 sensors
-if [ -f /boot/cmdline.txt ]; then
-  sed -i "/boot/cmdline.txt" -e "s@console=ttyAMA0,[0-9]\+ @@"
-  sed -i "/boot/cmdline.txt" -e "s@console=serial0,[0-9]\+ @@"
+CMDLINE="/boot/cmdline.txt"
+if [ "${OS}" == "bookworm" ]; then
+  CMDLINE="/boot/firmware/cmdline.txt"
+fi
+
+if [ -f "${CMDLINE}" ]; then
+  sed -i "${CMDLINE}" -e "s@console=ttyAMA0,[0-9]\+ @@"
+  sed -i "${CMDLINE}" -e "s@console=serial0,[0-9]\+ @@"
 fi
 
 # Create needed groups
@@ -184,7 +195,7 @@ groupadd -f dialout 2> /dev/null
 groupadd -f sispmctl 2> /dev/null
 groupadd -f gpio 2> /dev/null
 # Add user to all groupds
-usermod -a -G dialout,sispmctl,gpio "${SCRIPT_USER}" 2> /dev/null
+usermod -a -G dialout,sispmctl,gpio,bluetooth "${SCRIPT_USER}" 2> /dev/null
 
 # Docu https://pylibftdi.readthedocs.io/
 # Make sure that the normal Pi user can read and write to the usb driver
@@ -250,13 +261,13 @@ PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
-Install required software\n\nSetting up Python 3 environment ...
+Install required software\n\nSetting up Python environment ...
 XXX
 EOF
 
 # Create Python environment
 cd "${BASEDIR}/"
-python3 -m venv venv
+python3 -m venv --system-site-packages venv
 source venv/bin/activate
 
 # Install python modules inside the virtual env of Python
@@ -283,13 +294,19 @@ XXX
 $PROGRESS
 Install required software
 
-Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${MODULE_NAME} (attempt ${ATTEMPT}) ...
+Installing python module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${MODULE_NAME} (attempt ${ATTEMPT}) ...
 XXX
 EOF
     pip install --upgrade "${PIP_MODULE}" 2> /dev/null
 
     if [ $? -eq 0 ]; then
       # PIP install succeeded normally
+
+      if [ "${PIP_MODULE}" == "bluepy3" ]; then
+        # Need to compile a binary: https://github.com/Mausy5043/bluepy3?tab=readme-ov-file#installation
+        python -c "import bluepy3.btle"
+      fi
+
       ATTEMPT=$((ATTEMPT + 99))
     else
       # PIP install failure... retry..
@@ -354,7 +371,7 @@ EOF
 sed -e "s@^User=.*@User=${SCRIPT_USER}@" -e "s@^Group=.*@Group=${SCRIPT_GROUP}@" -e "s@^WorkingDirectory=.*@WorkingDirectory=${BASEDIR}@" -e "s@^ExecStart=.*@ExecStart=${BASEDIR}/venv/bin/python ${BASEDIR}/terrariumPI.py@" "${BASEDIR}/contrib/terrariumpi.service.example" > /etc/systemd/system/terrariumpi.service
 sed -ie "s@.*RemoveIPC=.*@RemoveIPC=false@" /etc/systemd/logind.conf
 systemctl daemon-reload
-systemctl enable terrariumpi > /dev/null
+systemctl enable terrariumpi 2> /dev/null
 
 
 PROGRESS=$((PROGRESS + 1))
@@ -367,11 +384,11 @@ Enable bluetooth for ${SCRIPT_USER} user ...
 XXX
 EOF
 
-# To run this as non-root run the following, https://github.com/marcelrv/miflora, https://github.com/IanHarvey/bluepy/issues/218
-for BLUETOOTH_HELPER in $(ls venv/lib/python*/*-packages/bluepy/bluepy-helper); do
-  setcap 'cap_net_raw,cap_net_admin+eip' "${BLUETOOTH_HELPER}"
-done
-
+# To run this as non-root run the following,
+# https://github.com/marcelrv/miflora,
+# https://github.com/IanHarvey/bluepy/issues/218,
+# https://github.com/Mausy5043/bluepy3?tab=readme-ov-file#installation
+find . -name "bluepy*-helper" -exec setcap 'cap_net_raw,cap_net_admin+eip' {} \;
 
 PROGRESS=$((PROGRESS + 1))
 cat <<EOF
