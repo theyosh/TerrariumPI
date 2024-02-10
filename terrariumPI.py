@@ -6,11 +6,12 @@ from gevent import monkey
 monkey.patch_all()
 
 import sys
+
 try:
-  sys.modules['bluepy'] = __import__('bluepy3')
+    sys.modules["bluepy"] = __import__("bluepy3")
 except Exception:
-  # Import should only be working on a Bookworm OS
-  pass
+    # Import should only be working on a Bookworm OS
+    pass
 
 import gettext
 

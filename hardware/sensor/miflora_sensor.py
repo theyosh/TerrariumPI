@@ -28,7 +28,7 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
     def update(self, force=False):
         value = super().update(force)
         data = self._sensor_cache.get_data(self._sensor_cache_key)
-        self.__POWER_STATE = data['battery']
+        self.__POWER_STATE = data["battery"]
         return value
 
     def __repr__(self):
