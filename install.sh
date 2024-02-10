@@ -302,7 +302,7 @@ EOF
     if [ $? -eq 0 ]; then
       # PIP install succeeded normally
 
-      if [ "${PIP_MODULE}" == "bluepy3" ]; then
+      if [ "${MODULE_NAME}" == "bluepy3" ]; then
         # Need to compile a binary: https://github.com/Mausy5043/bluepy3?tab=readme-ov-file#installation
         python -c "import bluepy3.btle"
       fi
