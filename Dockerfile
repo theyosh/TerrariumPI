@@ -21,7 +21,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PATH="/opt/venv/bin:$PATH"
 RUN python -m venv /opt/venv
-RUN pip install --upgrade pip==23.3.2 && pip install --upgrade wheel==0.42.0
+RUN pip install --upgrade pip==24.0 && pip install --upgrade wheel==0.42.0
 COPY requirements.txt .
 COPY contrib/python3-voltcraft-sem6000.patch.diff .
 
