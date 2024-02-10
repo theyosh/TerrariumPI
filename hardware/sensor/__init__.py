@@ -174,7 +174,7 @@ class terrariumSensor(object):
                 GPIO.output(self._device["power_mngt"], GPIO.LOW)
 
     @property
-    def __sensor_cache_key(self):
+    def _sensor_cache_key(self):
         if self._device["cache_key"] is None:
             self._device["cache_key"] = md5(f"{self.HARDWARE}{self.address}".encode()).hexdigest()
 
@@ -311,22 +311,22 @@ class terrariumSensor(object):
             raise terrariumSensorLoadingException(f"Sensor {self} is not loaded! Can not update!")
 
         starttime = time()
-        data = self._sensor_cache.get_data(self.__sensor_cache_key)
+        data = self._sensor_cache.get_data(self._sensor_cache_key)
 
-        if (data is None or force) and self._sensor_cache.set_running(self.__sensor_cache_key):
+        if (data is None or force) and self._sensor_cache.set_running(self._sensor_cache_key):
             logger.debug(f"Start getting new data from  sensor {self}")
             try:
                 data = self.get_data()
-                self._sensor_cache.set_data(self.__sensor_cache_key, data, self._CACHE_TIMEOUT)
+                self._sensor_cache.set_data(self._sensor_cache_key, data, self._CACHE_TIMEOUT)
             except Exception as ex:
                 logger.error(f"Error updating sensor {self}. Check your hardware! {ex}")
 
-            self._sensor_cache.clear_running(self.__sensor_cache_key)
+            self._sensor_cache.clear_running(self._sensor_cache_key)
 
         current = None if data is None or self.sensor_type not in data else data[self.sensor_type]
 
         if current is None:
-            self._sensor_cache.clear_data(self.__sensor_cache_key)
+            self._sensor_cache.clear_data(self._sensor_cache_key)
 
         else:
             self._device["last_update"] = int(starttime)
@@ -547,7 +547,7 @@ class terrariumBluetoothSensor(terrariumSensor):
         return address
 
     @staticmethod
-    def _scan_bt_sensors(sensorclass, ids=[], unit_value_callback=None, trigger_callback=None):
+    def _scan_bt_sensors(sensor_class, ids=[], unit_value_callback=None, trigger_callback=None):
         # Due to multiple bluetooth dongles, we are looping 10 times to see which devices can scan. Exit after first success
         ok = True
         for counter in range(10):
@@ -559,13 +559,13 @@ class terrariumBluetoothSensor(terrariumSensor):
                         and device.getValueText(9) is not None
                         and device.getValueText(9).lower() in ids
                     ):
-                        for sensor_type in sensorclass.TYPES:
+                        for sensor_type in sensor_class.TYPES:
                             yield terrariumSensor(
                                 None,
-                                sensorclass.HARDWARE,
+                                sensor_class.HARDWARE,
                                 sensor_type,
                                 device.addr + ("" if counter == 0 else f",{counter}"),
-                                f"{sensorclass.NAME} measuring {sensor_type}",
+                                f"{sensor_class.NAME} measuring {sensor_type}",
                                 unit_value_callback=unit_value_callback,
                                 trigger_callback=trigger_callback,
                             )
@@ -574,7 +574,7 @@ class terrariumBluetoothSensor(terrariumSensor):
                 break
 
             except Exception as ex:
-                logger.debug(f"Error during scanning: {ex}")
+                logger.warning(f"Error during scanning {sensor_class.NAME}: {ex}")
                 ok = False
 
         if not ok:
