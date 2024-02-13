@@ -93,3 +93,5 @@ python-telegram-bot[socks,http2]==20.3
 pydantic==1.10.9
 # Do not upgrade anymore. Not supported on Python 3.7
 gpiozero==1.6.2
+# Do not upgrade anymore. Not supported on Python 3.7
+adafruit-circuitpython-typing==1.10.2
