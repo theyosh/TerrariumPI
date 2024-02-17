@@ -16,10 +16,9 @@ class terrariumRPILiveWebcam(terrariumWebcamLive):
 
     _HELPER_SCRIPT = "rpilive_webcam.sh"
 
-    __RASPIVID = "/usr/bin/raspivid"
-
     def _load_hardware(self):
-        if not Path(self.__RASPIVID).exists():
-            raise terrariumWebcamLoadingException("Please install raspivid.")
+        if not Path("/usr/bin/raspivid").exists():
+            if not Path("/usr/bin/rpicam-vid").exists():
+                raise terrariumWebcamLoadingException("Raspicam is not enabled")
 
         return super()._load_hardware()
