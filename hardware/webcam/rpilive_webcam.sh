@@ -10,8 +10,11 @@ AWB=$6
 DIR=$7
 
 # Find the needed programs
-RASPIVID=$(which raspivid)
-FFMPEG=$(which ffmpeg)
+RASPIVID=$(type -p raspivid)
+if [ $? -ne 0 ]; then
+    RASPIVID=$(type -p rpicam-vid)
+fi
+FFMPEG=$(type -p ffmpeg)
 
 # Defaults
 if [[ "${NAME}" == "" ]]; then
@@ -54,5 +57,6 @@ else
 fi
 
 # Start streaming
-"${RASPIVID}" --output - --bitrate 2000000 --timeout 0 --width "${WIDTH}" --height "${HEIGHT}" "${ROTATION_ACTION}" "${ROTATION}" --awb "${AWB}" --framerate 30 --intra 30 --profile high --level 4.2 -ae 16,0xff,0x808000 -a 8 -a " ${NAME} @ %d/%m/%Y %X " -a 1024 | \
+# -ae 16,0xff,0x808000 -a 8 -a " ${NAME} @ %d/%m/%Y %X " -a 1024
+"${RASPIVID}" -v 0 --output - --bitrate 2000000 --timeout 0 --width "${WIDTH}" --height "${HEIGHT}" "${ROTATION_ACTION}" "${ROTATION}" --awb "${AWB}" --framerate 30 --intra 30 --profile high --level 4.2 | \
  "${FFMPEG}" -hide_banner -nostdin -re -i - -c:v copy -f hls -hls_time 2 -hls_list_size 3 -hls_flags delete_segments+split_by_time -hls_segment_filename "${DIR}/chunk_%03d.ts" "${DIR}/stream.m3u8"

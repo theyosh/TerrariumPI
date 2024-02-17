@@ -10,7 +10,7 @@ AWB=$6
 DIR=$7
 
 # Find the needed programs
-FFMPEG=$(which ffmpeg)
+FFMPEG=$(type -p ffmpeg)
 
 # Defaults
 if [[ "${DEVICE}" == "" ]]; then
