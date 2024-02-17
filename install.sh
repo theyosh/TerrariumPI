@@ -40,21 +40,60 @@ CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered chromium-browser desktop-base
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
 # Buster defaults for openCV
 OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
-# For Bullseye we need libopenexr25 and libilmbase25
-if [ "${OS}" == "bullseye" ]; then
-  OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
-elif [ "${OS}" == "bookworm" ]; then
-  # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
-  OPENCV_PACKAGES="libopenexr-3-1-30 libilmbase25 liblapack3 libatlas3-base python3-opencv"
-fi
-
-APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev libopenblas-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
 
 PIP_MODULES=""
 while IFS= read -r line; do
   [[ $line =~ ^#.* ]] && continue
   PIP_MODULES="${PIP_MODULES} ${line}"
 done < requirements.txt
+
+if [ "${OS}" == "buster" ]; then
+  # Python package version difference per OS
+  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
+
+  PIP_MODULES="${PIP_MODULES//setuptools==+([^ ])/setuptools==68.0.0}"
+  PIP_MODULES="${PIP_MODULES//python-dotenv==+([^ ])/python-dotenv==0.21.1}"
+  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==22.10.2}"
+  PIP_MODULES="${PIP_MODULES//python-kasa==+([^ ])/python-kasa==0.5.1}"
+  PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==0.9.2}"
+  PIP_MODULES="${PIP_MODULES//Pillow==+([^ ])/Pillow==9.5.0}"
+  PIP_MODULES="${PIP_MODULES//icalevents==+([^ ])/icalevents==0.1.25}"
+  PIP_MODULES="${PIP_MODULES//pyfiglet==+([^ ])/pyfiglet==0.8.post1}"
+  PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==20.3}"
+  PIP_MODULES="${PIP_MODULES//pydantic==+([^ ])/pydantic==1.10.9}"
+  PIP_MODULES="${PIP_MODULES//gpiozero==+([^ ])/gpiozero==1.6.2}"
+  PIP_MODULES="${PIP_MODULES//adafruit-circuitpython-typing==+([^ ])/adafruit-circuitpython-typing==1.10.1}"
+
+elif [ "${OS}" == "bullseye" ]; then
+  # Python package version difference per OS
+
+  PIP_MODULES="${PIP_MODULES//setuptools==+([^ ])/setuptools==68.0.0}"
+  PIP_MODULES="${PIP_MODULES//python-dotenv==+([^ ])/python-dotenv==0.21.1}"
+  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==22.10.2}"
+  PIP_MODULES="${PIP_MODULES//python-kasa==+([^ ])/python-kasa==0.5.1}"
+  PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==0.9.2}"
+  PIP_MODULES="${PIP_MODULES//Pillow==+([^ ])/Pillow==9.5.0}"
+  PIP_MODULES="${PIP_MODULES//icalevents==+([^ ])/icalevents==0.1.25}"
+  PIP_MODULES="${PIP_MODULES//pyfiglet==+([^ ])/pyfiglet==0.8.post1}"
+  PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==20.3}"
+  PIP_MODULES="${PIP_MODULES//pydantic==+([^ ])/pydantic==1.10.9}"
+  PIP_MODULES="${PIP_MODULES//gpiozero==+([^ ])/gpiozero==1.6.2}"
+  PIP_MODULES="${PIP_MODULES//adafruit-circuitpython-typing==+([^ ])/adafruit-circuitpython-typing==1.10.1}"
+
+  # For Bullseye we need libopenexr25 and libilmbase25
+  OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
+
+elif [ "${OS}" == "bookworm" ]; then
+  # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
+  OPENCV_PACKAGES="libopenexr-3-1-30 libilmbase25 liblapack3 libatlas3-base python3-opencv"
+
+  # Python package version difference per OS
+  # On bookworm we use the OS package versions
+  PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/}"
+  # Need a upgraded bluepy library
+  PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
+
+fi
 
 if [ "${PI_ZERO}" -eq 1 ]; then
   # Pi Zero needs some fixed python modules
@@ -71,16 +110,7 @@ if [ "${PI_ZERO}" -eq 1 ]; then
   fi
 fi
 
-# Debian buster does not like numpy .... :(
-if [ "${OS}" == "buster" ]; then
-  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
-elif [ "${OS}" == "bookworm" ]; then
-  # On bookworm we use the OS package versions
-  PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/}"
-#  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/}"
-  # Need a upgraded bluepy library
-  PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
-fi
+APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev libopenblas-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
 
 # Install dialog for further installation
 if ! hash whiptail 2>/dev/null; then
@@ -111,19 +141,24 @@ case $? in
   ;;
 esac
 
-# Clean up first
-whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to remove not needed programs in order to free up disk space and make future updates faster. All desktop software will be removed.\n\nDo you want to remove not needed programs?" 0 0
-
-case $? in
-  0) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --infobox "TerrariumPI is removing not needed programs" 0 0
-    debconf-apt-progress -- apt-get -y remove *${CLEANUP_PACKAGES// /* *}*
-  ;;
-esac
-
 # Set the timezone
 dpkg-reconfigure tzdata
 
+# Clean up first
+whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to remove not needed programs in order to free up disk space and make future updates faster. All desktop software will be removed.\n\nDo you want to remove not needed programs?" 0 0
+
+CLEANUP=0
+case $? in
+  0)
+    CLEANUP=1
+  ;;
+esac
+
 whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI will now start the installation... Have a coffee" 0 60
+
+if [ "${CLEANUP}" -eq 1 ]; then
+  debconf-apt-progress -- apt-get -y remove *${CLEANUP_PACKAGES// /* *}*
+fi
 
 # Install required packages to get the terrarium software running
 debconf-apt-progress -- apt-get -y autoremove
@@ -156,21 +191,24 @@ if [ -f "${BOOTCONFIG}" ]; then
     echo "dtoverlay=w1-gpio" >> "${BOOTCONFIG}"
   fi
 
-  # Enable camera
-  if [ $(grep -ic "^gpu_mem=" "${BOOTCONFIG}") -eq 0 ]; then
-    echo "gpu_mem=128" >> "${BOOTCONFIG}"
-  fi
+  if [ "${OS}" != "bookworm" ]; then
 
-  if [ $(grep -ic "^start_x=1" "${BOOTCONFIG}") -eq 0 ]; then
-    echo "start_x=1" >> "${BOOTCONFIG}"
-  fi
+    # Enable camera
+    if [ $(grep -ic "^gpu_mem=" "${BOOTCONFIG}") -eq 0 ]; then
+        echo "gpu_mem=128" >> "${BOOTCONFIG}"
+    fi
 
-  # Bullseye legacy camera
-  sed -i "${BOOTCONFIG}" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@"
-  sed -i "${BOOTCONFIG}" -e "s@^[ ]*camera_auto_detect=.*@@"
+    if [ $(grep -ic "^start_x=1" "${BOOTCONFIG}") -eq 0 ]; then
+        echo "start_x=1" >> "${BOOTCONFIG}"
+    fi
 
-  if [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" "${BOOTCONFIG}") -eq 0 ]; then
-    sed -i "${BOOTCONFIG}" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
+    # Bullseye legacy camera
+    sed -i "${BOOTCONFIG}" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@"
+    sed -i "${BOOTCONFIG}" -e "s@^[ ]*camera_auto_detect=.*@@"
+
+    if [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" "${BOOTCONFIG}") -eq 0 ]; then
+      sed -i "${BOOTCONFIG}" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
+    fi
   fi
 
   # Enable serial

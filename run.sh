@@ -10,11 +10,11 @@ AUTO_REBOOT=${AUTO_REBOOT:-'true'}
 
 REBOOT_REQUIRED=0
 
-if [ -f /boot/config.txt ]; then
+if [ -f /boot/firmware/config.txt ]; then
 
   # Enable I2C
-  if [[ $ENABLE_I2C == "true" ]] && [ $(grep -ic "^dtparam=i2c_arm=on" /boot/config.txt) -eq 0 ]; then
-    echo "dtparam=i2c_arm=on" >> /boot/config.txt
+  if [[ $ENABLE_I2C == "true" ]] && [ $(grep -ic "^dtparam=i2c_arm=on" /boot/firmware/config.txt) -eq 0 ]; then
+    echo "dtparam=i2c_arm=on" >> /boot/firmware/config.txt
     echo "Enabled I2C in boot config"
     REBOOT_REQUIRED=1
   fi
@@ -28,59 +28,59 @@ if [ -f /boot/config.txt ]; then
   fi
 
   # Enable 1-Wire
-  if [[ $ENABLE_1_WIRE == "true" ]] && [ $(grep -ic "^dtoverlay=w1-gpio" /boot/config.txt) -eq 0 ]; then
-    echo "dtoverlay=w1-gpio" >> /boot/config.txt
+  if [[ $ENABLE_1_WIRE == "true" ]] && [ $(grep -ic "^dtoverlay=w1-gpio" /boot/firmware/config.txt) -eq 0 ]; then
+    echo "dtoverlay=w1-gpio" >> /boot/firmware/config.txt
     echo "Enabled 1 Wire in boot config"
     REBOOT_REQUIRED=1
   fi
 
   # Enable camera
-  if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^gpu_mem=" /boot/config.txt) -eq 0 ]; then
-    echo "gpu_mem=128" >> /boot/config.txt
-    echo "Enabled Camera in boot config (1)"
-    REBOOT_REQUIRED=1
-  fi
+#   if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^gpu_mem=" /boot/firmware/config.txt) -eq 0 ]; then
+#     echo "gpu_mem=128" >> /boot/firmware/config.txt
+#     echo "Enabled Camera in boot config (1)"
+#     REBOOT_REQUIRED=1
+#   fi
 
-  if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^start_x=1" /boot/config.txt) -eq 0 ]; then
-    echo "start_x=1" >> /boot/config.txt
-    echo "Enabled Camera in boot config (2)"
-    REBOOT_REQUIRED=1
-  fi
+#   if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^start_x=1" /boot/firmware/config.txt) -eq 0 ]; then
+#     echo "start_x=1" >> /boot/firmware/config.txt
+#     echo "Enabled Camera in boot config (2)"
+#     REBOOT_REQUIRED=1
+#   fi
 
-  # Bullseye legacy camera support
-  if [[ $ENABLE_CAMERA == "true" ]] && [ ! $(grep -ic "^dtoverlay=vc4-kms-v3d" /boot/config.txt) -eq 0 ]; then
-    # can't inline sed due to docker mount
-    cp /boot/config.txt /config.tmp
-    sed -i "/config.tmp" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@g"
-    cat /config.tmp > /boot/config.txt
-    rm /config.tmp
-    echo "Enabled Bullseye legacy Camera mode in boot config (1)"
-    REBOOT_REQUIRED=1
-  fi
+#   # Bullseye legacy camera support
+#   if [[ $ENABLE_CAMERA == "true" ]] && [ ! $(grep -ic "^dtoverlay=vc4-kms-v3d" /boot/firmware/config.txt) -eq 0 ]; then
+#     # can't inline sed due to docker mount
+#     cp /boot/firmware/config.txt /config.tmp
+#     sed -i "/config.tmp" -e "s@^[ ]*dtoverlay=vc4-kms-v3d@#dtoverlay=vc4-kms-v3d@g"
+#     cat /config.tmp > /boot/firmware/config.txt
+#     rm /config.tmp
+#     echo "Enabled Bullseye legacy Camera mode in boot config (1)"
+#     REBOOT_REQUIRED=1
+#   fi
 
-  if [[ $ENABLE_CAMERA == "true" ]] && [ ! $(grep -ic "^camera_auto_detect=.*" /boot/config.txt) -eq 0 ]; then
-    # can't inline sed due to docker mount
-    cp /boot/config.txt /config.tmp
-    sed -i "/config.tmp" -e "s@^[ ]*camera_auto_detect=.*@@g"
-    cat /config.tmp > /boot/config.txt
-    rm /config.tmp
-    echo "Enabled Bullseye legacy Camera mode in boot config (2)"
-    REBOOT_REQUIRED=1
-  fi
+#   if [[ $ENABLE_CAMERA == "true" ]] && [ ! $(grep -ic "^camera_auto_detect=.*" /boot/firmware/config.txt) -eq 0 ]; then
+#     # can't inline sed due to docker mount
+#     cp /boot/firmware/config.txt /config.tmp
+#     sed -i "/config.tmp" -e "s@^[ ]*camera_auto_detect=.*@@g"
+#     cat /config.tmp > /boot/firmware/config.txt
+#     rm /config.tmp
+#     echo "Enabled Bullseye legacy Camera mode in boot config (2)"
+#     REBOOT_REQUIRED=1
+#   fi
 
-  if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" /boot/config.txt) -eq 0 ] && [ $(grep -ic "^\[pi4\]" /boot/config.txt) -eq 1 ]; then
-    # can't inline sed due to docker mount
-    cp /boot/config.txt /config.tmp
-    sed -i "/config.tmp" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
-    cat /config.tmp > /boot/config.txt
-    rm /config.tmp
-    echo "Enabled Bullseye legacy Camera mode in boot config (3)"
-    REBOOT_REQUIRED=1
-  fi
+#   if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^dtoverlay=vc4-fkms-v3d" /boot/firmware/config.txt) -eq 0 ] && [ $(grep -ic "^\[pi4\]" /boot/firmware/config.txt) -eq 1 ]; then
+#     # can't inline sed due to docker mount
+#     cp /boot/firmware/config.txt /config.tmp
+#     sed -i "/config.tmp" -e "s@^\[pi4\]@\[pi4\]\ndtoverlay=vc4-fkms-v3d@"
+#     cat /config.tmp > /boot/firmware/config.txt
+#     rm /config.tmp
+#     echo "Enabled Bullseye legacy Camera mode in boot config (3)"
+#     REBOOT_REQUIRED=1
+#   fi
 
   # Enable serial
-  if [[ $ENABLE_SERIAL == "true" ]] && [ $(grep -ic "^enable_uart=1" /boot/config.txt) -eq 0 ]; then
-    echo "enable_uart=1" >> /boot/config.txt
+  if [[ $ENABLE_SERIAL == "true" ]] && [ $(grep -ic "^enable_uart=1" /boot/firmware/config.txt) -eq 0 ]; then
+    echo "enable_uart=1" >> /boot/firmware/config.txt
     echo "Enabled Serial in boot config"
     REBOOT_REQUIRED=1
   fi
@@ -88,23 +88,23 @@ if [ -f /boot/config.txt ]; then
 fi
 
 # Disable serial debug to enable CO2 sensors
-if [ -f /boot/cmdline.txt ]; then
+if [ -f /boot/firmware/cmdline.txt ]; then
 
-  if [[ $ENABLE_CO2_SENSORS == "true" ]] && [ $(grep -ic "console=ttyAMA0,[0-9]\+ " /boot/cmdline.txt) -eq 1 ]; then
+  if [[ $ENABLE_CO2_SENSORS == "true" ]] && [ $(grep -ic "console=ttyAMA0,[0-9]\+ " /boot/firmware/cmdline.txt) -eq 1 ]; then
     # can't inline sed due to docker mount
-    cp /boot/cmdline.txt /boot-cmdline.tmp
+    cp /boot/firmware/cmdline.txt /boot-cmdline.tmp
     sed -i "/boot-cmdline.tmp" -e "s@console=ttyAMA0,[0-9]\+ @@"
-    cat /boot-cmdline.tmp > /boot/cmdline.txt
+    cat /boot-cmdline.tmp > /boot/firmware/cmdline.txt
     rm /boot-cmdline.tmp
     echo "Enabled CO2 sensors in boot config (1)"
     REBOOT_REQUIRED=1
   fi
 
-  if [[ $ENABLE_CO2_SENSORS == "true" ]] && [ $(grep -ic "console=serial0,[0-9]\+ " /boot/cmdline.txt) -eq 1 ]; then
+  if [[ $ENABLE_CO2_SENSORS == "true" ]] && [ $(grep -ic "console=serial0,[0-9]\+ " /boot/firmware/cmdline.txt) -eq 1 ]; then
     # can't inline sed due to docker mount
-    cp /boot/cmdline.txt /boot-cmdline.tmp
+    cp /boot/firmware/cmdline.txt /boot-cmdline.tmp
     sed -i "/boot-cmdline.tmp" -e "s@console=serial0,[0-9]\+ @@"
-    cat /boot-cmdline.tmp > /boot/cmdline.txt
+    cat /boot-cmdline.tmp > /boot/firmware/cmdline.txt
     rm /boot-cmdline.tmp
     echo "Enabled CO2 sensors in boot config (2)"
     REBOOT_REQUIRED=1
@@ -121,7 +121,7 @@ if [ ! -h log/terrariumpi.access.log ]; then
 fi
 
 # Add some pi camera symbolic links
-ln -s /opt/vc/bin/raspi* /usr/bin/ 2>/dev/null
+#ln -s /opt/vc/bin/raspi* /usr/bin/ 2>/dev/null
 
 if [[ $REBOOT_REQUIRED == 1 ]]; then
   if [[ $AUTO_REBOOT == true ]]; then
