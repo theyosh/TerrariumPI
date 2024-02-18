@@ -3,6 +3,7 @@ venv
 __pycache__
 docker-compose.yaml
 docker-compose.yml
+!contrib/docker-compose.yaml
 calendar.ics
 terrariumpi.db*
 webcam
