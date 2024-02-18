@@ -1850,7 +1850,7 @@ class terrariumEngine(object):
         data = {
             "uptime": (datetime.datetime.now() - datetime.datetime.fromtimestamp(psutil.boot_time())).total_seconds(),
             "load": {
-                "percentage": [x / psutil.cpu_count() * 100 for x in psutil.getloadavg()],
+                "percentage": [round(x / psutil.cpu_count() * 100, 2) for x in psutil.getloadavg()],
                 "absolute": psutil.getloadavg(),
             },
             "cpu_temperature": cpu_temp,

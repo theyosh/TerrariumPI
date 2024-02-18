@@ -85,10 +85,10 @@ ansi2html==1.9.1
 emails==0.6
 luma.oled==3.13.0
 i2c_lcd==0.1.0
-paho-mqtt==2.0.0
 python-telegram-bot[socks,http2]==20.8
 
 # Overrule versions
 # Force to latest version
+paho-mqtt==2.0.0
 icalendar==5.0.11
 adafruit-circuitpython-typing==1.10.2

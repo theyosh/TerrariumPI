@@ -8,7 +8,7 @@ GITHUB_SHA ?= $(shell git rev-parse HEAD)
 all: build push
 
 build:
-	docker run --privileged docker/binfmt:a7996909642ee92942dcd6cff44b9b95f08dad64
+	docker run --privileged tonistiigi/binfmt --install arm
 	docker buildx build \
 		--progress=plain \
 		--platform linux/arm/v7 \
@@ -18,7 +18,7 @@ build:
 		.
 
 push:
-	docker run --privileged docker/binfmt:a7996909642ee92942dcd6cff44b9b95f08dad64
+	docker run --privileged tonistiigi/binfmt --install arm
 	GITHUB_SHA=${GITHUB_SHA} docker buildx build \
 		--progress=plain \
 		--platform linux/arm/v7 \
