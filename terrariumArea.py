@@ -863,7 +863,6 @@ class terrariumArea(object):
 
                 self.relays_toggle(period, True)
                 self.state[period]["alarm_count"] = 0
-                self.state[period]["last_powered_on"] = int(datetime.datetime.now().timestamp())
 
                 if self.setup[period]["power_on_time"] > 0.0:
                     self.state[period]["timer_on"] = True
@@ -875,6 +874,7 @@ class terrariumArea(object):
                 and not self.state[period].get("timer_on", False)
             ):
                 self.relays_toggle(period, False)
+                self.state[period]["last_powered_on"] = int(datetime.datetime.now().timestamp())
 
             self.state[period]["powered"] = self.relays_state(period)
 
