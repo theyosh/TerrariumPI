@@ -922,7 +922,7 @@ class terrariumArea(object):
         return sensor_values
 
     def relays_state(self, part, state=True):
-        old_state = self.state[part]["powered"]
+        old_state = self.state[part].get("powered", None)
 
         relay_states = []
         for relay in self.setup[part]["relays"]:
