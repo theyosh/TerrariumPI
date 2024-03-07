@@ -13,7 +13,7 @@
     Filler,
   } from 'chart.js';
   ChartJS.register(Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement, Filler);
-  import 'chartjs-adapter-dayjs-3';
+  import 'chartjs-adapter-dayjs-4';
   import { _ } from 'svelte-i18n';
 
   import { smoothing } from '../../helpers/graph-helpers';

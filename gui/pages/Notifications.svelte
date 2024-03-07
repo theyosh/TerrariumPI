@@ -133,7 +133,7 @@
           <div class="row">
             <!-- Sort based on translated names -->
             {#each services.sort((a, b) => a.name.localeCompare(b.name)) as service}
-              <div class="col-2">
+              <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-3">
                 <div class="info-box">
                   <a
                     href={'#'}

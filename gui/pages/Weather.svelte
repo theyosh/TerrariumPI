@@ -12,7 +12,7 @@
     LineElement,
   } from 'chart.js';
   ChartJS.register(Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement);
-  import 'chartjs-adapter-dayjs-3';
+  import 'chartjs-adapter-dayjs-4';
   import { _ } from 'svelte-i18n';
   import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
   import { date, time } from 'svelte-i18n';
