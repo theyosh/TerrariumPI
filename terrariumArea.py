@@ -935,7 +935,9 @@ class terrariumArea(object):
                 relay_states.append(self.enclosure.relays[relay].is_off())
 
         new_state = all(relay_states)
-        if (state is False and old_state is True and new_state is True) or (state is True and old_state is True and new_state is False):
+        if (state is False and old_state is True and new_state is True) or (
+            state is True and old_state is True and new_state is False
+        ):
             # Somewhere the power is turned off. Store the time for settle calculation
             self.state[part]["last_powered_on"] = int(datetime.datetime.now().timestamp())
 
