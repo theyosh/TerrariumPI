@@ -142,10 +142,6 @@
 {/if}
 
 <style>
-  .row {
-    max-height: 180px;
-  }
-
   .light_on_off_threshold {
     position: absolute;
     top: 1.2rem;

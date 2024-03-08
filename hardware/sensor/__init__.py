@@ -288,21 +288,22 @@ class terrariumSensor(object):
     # When we get Runtime errors retry up to 3 times
     @retry(terrariumSensorUpdateException, tries=3, delay=0.5, max_delay=2, logger=logger)
     def get_data(self):
+        error_message = f"Error getting new data from sensor {self}"
         data = None
-        self.__power_management(True)
 
         try:
+            self.__power_management(True)
             data = func_timeout(self._UPDATE_TIME_OUT, self._get_data)
-        except FunctionTimedOut:
-            # What ever fails... does not matter, as the data is still None and will raise a terrariumSensorUpdateException and trigger the retry
-            logger.error(f"Sensor {self} timed out after {self._UPDATE_TIME_OUT} seconds during updating...")
-        except Exception as ex:
-            logger.error(f"Sensor {self} has exception: {ex}")
 
-        self.__power_management(False)
+        except FunctionTimedOut:
+            raise terrariumSensorUpdateException(f"{error_message}: Timed out after {self._UPDATE_TIME_OUT} seconds")
+        except Exception as ex:
+            raise terrariumSensorUpdateException(f"{error_message}: {ex}")
+        finally:
+            self.__power_management(False)
 
         if data is None:
-            raise terrariumSensorUpdateException(f"Invalid reading from sensor {self}")
+            raise terrariumSensorUpdateException(f"{error_message}: no data")
 
         return data
 

@@ -748,38 +748,36 @@
       {/if}
       <!-- End Watertank -->
     </div>
-    {#if showSensorDeviation}
-      <div class="row">
-        <div class="col">
-          <Field
-            type="number"
-            name="setup.deviation_low_alarm"
-            step="0.1"
-            label={$_('areas.settings.setup.deviation_low_alarm.label', { default: 'Low alarm deviation' })}
-            placeholder={$_('areas.settings.setup.deviation_low_alarm.placeholder', { default: 'Low alarm deviation' })}
-            help={$_('areas.settings.setup.deviation_low_alarm.help', {
-              default: 'Increase of decrease low alarm value.',
-            })}
-            invalid={$_('areas.settings.setup.deviation_low_alarm.invalid', { default: 'Enter a valid number.' })}
-          />
-        </div>
-        <div class="col">
-          <Field
-            type="number"
-            name="setup.deviation_high_alarm"
-            step="0.1"
-            label={$_('areas.settings.setup.deviation_high_alarm.label', { default: 'High alarm deviation' })}
-            placeholder={$_('areas.settings.setup.deviation_high_alarm.placeholder', {
-              default: 'High alarm deviation',
-            })}
-            help={$_('areas.settings.setup.deviation_high_alarm.help', {
-              default: 'Increase of decrease high alarm value.',
-            })}
-            invalid={$_('areas.settings.setup.deviation_high_alarm.invalid', { default: 'Enter a valid number.' })}
-          />
-        </div>
+    <div class="row" class:d-none={!showSensorDeviation}>
+      <div class="col">
+        <Field
+          type="number"
+          name="setup.deviation_low_alarm"
+          step="0.1"
+          label={$_('areas.settings.setup.deviation_low_alarm.label', { default: 'Low alarm deviation' })}
+          placeholder={$_('areas.settings.setup.deviation_low_alarm.placeholder', { default: 'Low alarm deviation' })}
+          help={$_('areas.settings.setup.deviation_low_alarm.help', {
+            default: 'Increase of decrease low alarm value.',
+          })}
+          invalid={$_('areas.settings.setup.deviation_low_alarm.invalid', { default: 'Enter a valid number.' })}
+        />
       </div>
-    {/if}
+      <div class="col">
+        <Field
+          type="number"
+          name="setup.deviation_high_alarm"
+          step="0.1"
+          label={$_('areas.settings.setup.deviation_high_alarm.label', { default: 'High alarm deviation' })}
+          placeholder={$_('areas.settings.setup.deviation_high_alarm.placeholder', {
+            default: 'High alarm deviation',
+          })}
+          help={$_('areas.settings.setup.deviation_high_alarm.help', {
+            default: 'Increase of decrease high alarm value.',
+          })}
+          invalid={$_('areas.settings.setup.deviation_high_alarm.invalid', { default: 'Enter a valid number.' })}
+        />
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         <span class="text-muted">

@@ -312,6 +312,7 @@
     /* GUI Hacks */
     setFavicon(ApiUrl + '/' + settings.favicon);
     document.querySelector('nav.main-header').classList.add('text-sm');
+    document.querySelector('nav.main-header .d-none.d-sm-inline-block').classList.remove('d-none', 'd-sm-inline-block');
     document.querySelector('aside.main-sidebar').prepend(document.querySelector('a.brand-link'));
     document.querySelector('div.sidebar').prepend(document.querySelector('div.user-panel'));
 

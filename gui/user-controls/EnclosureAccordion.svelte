@@ -1,13 +1,14 @@
 <script>
   import EnclosureDoorIcon from '../components/enclosure/EnclosureDoorIcon.svelte';
   import Enclosure from '../components/enclosure/Enclosure.svelte';
+  import { enclosureNameSort } from '../helpers/string-helpers';
 
   export let enclosures = [];
 </script>
 
 {#if enclosures.length > 0}
   <div id="accordion">
-    {#each enclosures.sort((a, b) => a.name.localeCompare(b.name)) as enclosure, counter}
+    {#each enclosures.sort((a, b) => enclosureNameSort(a.name, b.name)) as enclosure, counter}
       <div class="card card-secondary">
         <div class="card-header">
           <h4 class="card-title w-100">

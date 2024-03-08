@@ -30,6 +30,7 @@
   import { getCustomConfig } from '../config';
   import { websocket } from '../providers/websocket';
   import { currency } from '../locale/i18n';
+  import { enclosureNameSort } from '../helpers/string-helpers';
 
   import Card from '../user-controls/Card.svelte';
   import Enclosure from '../components/enclosure/Enclosure.svelte';
@@ -201,7 +202,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-xl-4">
       <InfoBox>
         <svelte:fragment slot="image">
           <i class="fas fa-hourglass-end hourglass-animation animate"></i>
@@ -253,7 +254,7 @@
       </InfoBox>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="col-12 col-sm-6 col-md-3 col-xl-2">
       <InfoBox>
         <svelte:fragment slot="image">
           <i class="fas fa-bolt"></i>
@@ -268,7 +269,7 @@
       </InfoBox>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="col-12 col-sm-6 col-md-3 col-xl-2">
       <InfoBox>
         <svelte:fragment slot="image">
           <i class="fas fa-tint"></i>
@@ -288,7 +289,7 @@
       </InfoBox>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="col-12 col-sm-6 col-md-3 col-xl-2">
       <InfoBox>
         <svelte:fragment slot="image">
           <i class="fas fa-bolt"></i>
@@ -308,7 +309,7 @@
       </InfoBox>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="col-12 col-sm-6 col-md-3 col-xl-2">
       <InfoBox>
         <svelte:fragment slot="image">
           <i class="fas fa-tint"></i>
@@ -331,10 +332,11 @@
 
   <div class="row" class:flex-row-reverse={settings.dashboard_mode === 0}>
     {#if settings.dashboard_mode === 0}
-      <div class="col-12 col-md-4 col-lg-3">
+      <div class="col-12 col-lg-4 col-xl-3">
         <Card loading={loading_enclosures} removeParent={true}>
           <svelte:fragment slot="header">
-            <i class="fas fa-globe mr-2"></i>{$_('dashboard.enclosures.title', { default: 'Enclosures' })}
+            <i class="fas fa-globe mr-2"></i>
+            {$_('dashboard.enclosures.title', { default: 'Enclosures' })}
           </svelte:fragment>
 
           <svelte:fragment slot="tools" />
@@ -345,11 +347,12 @@
     {/if}
 
     {#if settings.dashboard_mode === 2 && enclosures}
-      {#each enclosures.sort((a, b) => a.name.localeCompare(b.name)) as enclosure, counter}
-        <div class="col-12 col-md-6 col-lg-3">
+      {#each enclosures.sort((a, b) => enclosureNameSort(a.name, b.name)) as enclosure}
+        <div class="col-12 col-lg-6 col-xl-3">
           <Card loading={loading_enclosures}>
             <svelte:fragment slot="header">
-              <i class="fas fa-globe mr-2"></i>{enclosure.name}
+              <i class="fas fa-globe mr-2"></i>
+              {enclosure.name}
             </svelte:fragment>
 
             <svelte:fragment slot="tools">

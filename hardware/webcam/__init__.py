@@ -527,6 +527,7 @@ class terrariumWebcam(object):
             sleep(1)
 
         start = time()
+        error_message = f"Error getting new image from webcam {self}"
         for x in range(3):
             try:
                 image = func_timeout(15, self._get_raw_data)
@@ -538,21 +539,17 @@ class terrariumWebcam(object):
                         logger.debug(f"Webcam {self.name}: Loaded image in memory took: {time()-start2:.3f} seconds")
                         break
                     except Exception as ex:
-                        logger.error(f"Could not process webcam image {self}: {ex}")
+                        logger.warning(f"{error_message}: {ex}, retrying in 0.5 seconds...")
                         image = False
 
             except FunctionTimedOut:
-                logger.error(f"Webcam {self} timed out after 15 seconds during updating...")
+                logger.warning(f"{error_message}: Timed out after 15 seconds, retrying in 0.5 seconds...")
                 image = False
 
             if x < 3:
-                sleep(1)
+                sleep(0.5)
 
         logger.debug(f"Webcam {self.name}: Getting a new image took: {time()-start:.3f} seconds")
-
-        # except Exception as ex:
-        #   logger.error(f'Webcam {self} has exception: {ex}')
-        #   image = False
 
         if len(relays) > 0:
             start = time()
@@ -566,7 +563,7 @@ class terrariumWebcam(object):
             #      logger.warning('Webcam {} has errors!'.format(self.name))
             if self.state:
                 self._device["state"] = False
-                logger.error("Webcam {} has gone offline! Please check your webcam connections.".format(self.name))
+                logger.error(f"Webcam {self} has gone offline! Please check your webcam connections.")
                 self.__raw_image = self.__set_offline_image()
                 self.__tile_image()
                 self.__raw_image.save(self.raw_image_path, "jpeg", quality=self.__JPEG_QUALITY)

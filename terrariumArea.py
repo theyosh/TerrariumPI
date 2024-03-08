@@ -92,7 +92,7 @@ class terrariumArea(object):
         Returns:
             string: Area with area type
         """
-        return f'{terrariumArea.__TYPES[self.type]["name"]} named {self.name}'
+        return f'{terrariumArea.__TYPES[self.type]["name"]} named \'{self.name}\''
 
     @property
     def _powered(self):
@@ -861,13 +861,8 @@ class terrariumArea(object):
                     self.state[period]["alarm_count"] += 1
                     continue
 
-                self.relays_toggle(period, True)
                 self.state[period]["alarm_count"] = 0
-                self.state[period]["last_powered_on"] = int(datetime.datetime.now().timestamp())
-
-                if self.setup[period]["power_on_time"] > 0.0:
-                    self.state[period]["timer_on"] = True
-                    threading.Timer(self.setup[period]["power_on_time"], self.relays_toggle, [period, False]).start()
+                self.relays_toggle(period, True)
 
             elif (
                 toggle_relay is False
@@ -882,7 +877,7 @@ class terrariumArea(object):
         self.state["last_update"] = int(datetime.datetime.now().timestamp())
 
         logger.info(
-            f"Updated area {self} in {self.mode} mode at enclosure {self.enclosure.name} in {time.time()-start:.2f} seconds."
+            f"Updated area {self} in '{self.mode}' mode at enclosure {self.enclosure.name} in {time.time()-start:.2f} seconds."
         )
         return self.state
 
@@ -923,6 +918,8 @@ class terrariumArea(object):
         return sensor_values
 
     def relays_state(self, part, state=True):
+        old_state = self.state[part].get("powered", None)
+
         relay_states = []
         for relay in self.setup[part]["relays"]:
             if relay not in self.enclosure.relays:
@@ -933,10 +930,24 @@ class terrariumArea(object):
             else:
                 relay_states.append(self.enclosure.relays[relay].is_off())
 
-        return all(relay_states)
+        new_state = all(relay_states)
+        if (state is False and old_state is True and new_state is True) or (
+            state is True and old_state is True and new_state is False
+        ):
+            # Somewhere the power is turned off. Store the time for settle calculation
+            self.state[part]["last_powered_on"] = int(datetime.datetime.now().timestamp())
+
+        return new_state
 
     def relays_toggle(self, part, on):
-        logger.info(f'Toggle the relays for area {self} part {part} to state {("on" if on else "off")}.')
+        log_line = f'Toggle the relays for area {self} part {part} to state {("on" if on else "off")}'
+        power_on_time = self.setup[part].get("power_on_time", 0.0)
+        if on and power_on_time > 0.0:
+            log_line += f" and switch back to state off after {power_on_time} seconds"
+            self.state[part]["timer_on"] = True
+            threading.Timer(power_on_time, self.relays_toggle, [part, False]).start()
+
+        logger.info(f"{log_line}.")
 
         relays = []
         with orm.db_session():
@@ -949,9 +960,8 @@ class terrariumArea(object):
             relay = self.enclosure.relays[relay]
             self._relay_action(part, relay, on)
 
-        if on:
+        if not on:
             self.state[part]["last_powered_on"] = int(datetime.datetime.now().timestamp())
-        else:
             self.state[part]["timer_on"] = False
 
         self.state[part]["powered"] = on

@@ -160,17 +160,18 @@ class terrariumRelay(object):
 
     @retry(terrariumRelayUpdateException, tries=3, delay=0.5, max_delay=2, logger=logger)
     def __get_hardware_value(self):
+        error_message = f"Error getting new data from relay {self}"
         data = None
         try:
             data = func_timeout(self._UPDATE_TIME_OUT, self._get_hardware_value)
 
         except FunctionTimedOut:
-            logger.error(f"Error getting new data from relay {self}: Timed out after {self._UPDATE_TIME_OUT} seconds.")
+            raise terrariumRelayUpdateException(f"{error_message}: Timed out after {self._UPDATE_TIME_OUT} seconds")
         except Exception as ex:
-            logger.error(f"Error getting new data from relay {self}. Error: {ex}")
+            raise terrariumRelayUpdateException(f"{error_message}: {ex}")
 
         if data is None:
-            raise terrariumRelayUpdateException(f"Error getting new data from relay {self}. Error: unknown")
+            raise terrariumRelayUpdateException(f"{error_message}: no data")
 
         return data
 

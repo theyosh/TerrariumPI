@@ -509,79 +509,76 @@
         </div>
       </div>
     </div>
-    {#if motion_settings}
-      <div class="row">
-        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-          <Select
-            name="motion.boxes"
-            value={$formData.motion ? $formData.motion.boxes : ''}
-            required={motion_settings}
-            options={[
-              { value: '-1', text: $_('webcams.settings.motion.boxes.options.none', { default: 'None' }) },
-              { value: 'red', text: $_('webcams.settings.motion.boxes.options.red', { default: 'Red' }) },
-              { value: 'green', text: $_('webcams.settings.motion.boxes.options.green', { default: 'Green' }) },
-              { value: 'blue', text: $_('webcams.settings.motion.boxes.options.blue', { default: 'Blue' }) },
-            ]}
-            label={$_('webcams.settings.motion.boxes.label', { default: 'Show motion boxes' })}
-            placeholder={$_('webcams.settings.motion.boxes.placeholder', { default: 'Show the motion boxes' })}
-            help={$_('webcams.settings.motion.boxes.help', { default: 'Show motion boxes on the archived images.' })}
-            invalid={$_('webcams.settings.motion.boxes.invalid', { default: 'Please make a choice.' })}
-          />
-        </div>
-        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-          <Field
-            type="number"
-            name="motion.threshold"
-            step="1"
-            min="0"
-            required={motion_settings}
-            label={$_('webcams.settings.motion.threshold.label', { default: 'Motion delta threshold' })}
-            placeholder={$_('webcams.settings.motion.threshold.placeholder', { default: 'Enter number' })}
-            help={$_('webcams.settings.motion.threshold.help', { default: 'Enter the motion threshold.' })}
-            invalid={$_('webcams.settings.motion.threshold.invalid', {
-              default: 'Please enter a minimum value of {value}.',
-              values: { value: 0 },
-            })}
-          />
-        </div>
-        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-          <Field
-            type="number"
-            name="motion.area"
-            min="0"
-            required={motion_settings}
-            label={$_('webcams.settings.motion.area.label', { default: 'Motion minimum area' })}
-            placeholder={$_('webcams.settings.motion.area.placeholder', { default: 'Enter number' })}
-            help={$_('webcams.settings.motion.area.help', { default: 'Enter an area size.' })}
-            invalid={$_('webcams.settings.motion.area.invalid', {
-              default: 'Please enter a minimum value of {value}.',
-              values: { value: 0 },
-            })}
-          />
-        </div>
-        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-          <Select
-            name="motion.frame"
-            value={$formData.motion ? $formData.motion.frame : ''}
-            required={motion_settings}
-            options={[
-              { value: 'last', text: $_('webcams.settings.motion.frame.options.last', { default: 'Last frame' }) },
-              {
-                value: 'archived',
-                text: $_('webcams.settings.motion.frame.options.archived', { default: 'Last archived frame' }),
-              },
-            ]}
-            label={$_('webcams.settings.motion.frame.label', { default: 'Motion comparison frame' })}
-            placeholder={$_('webcams.settings.motion.frame.placeholder', {
-              default: 'Select which frame to comparison',
-            })}
-            help={$_('webcams.settings.motion.frame.help', { default: 'Which frame to use for motion detection.' })}
-            invalid={$_('webcams.settings.motion.frame.invalid', { default: 'Please make a choice.' })}
-          />
-        </div>
+    <div class="row" class:d-none={!motion_settings}>
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+        <Select
+          name="motion.boxes"
+          value={$formData.motion ? $formData.motion.boxes : ''}
+          required={motion_settings}
+          options={[
+            { value: '-1', text: $_('webcams.settings.motion.boxes.options.none', { default: 'None' }) },
+            { value: 'red', text: $_('webcams.settings.motion.boxes.options.red', { default: 'Red' }) },
+            { value: 'green', text: $_('webcams.settings.motion.boxes.options.green', { default: 'Green' }) },
+            { value: 'blue', text: $_('webcams.settings.motion.boxes.options.blue', { default: 'Blue' }) },
+          ]}
+          label={$_('webcams.settings.motion.boxes.label', { default: 'Show motion boxes' })}
+          placeholder={$_('webcams.settings.motion.boxes.placeholder', { default: 'Show the motion boxes' })}
+          help={$_('webcams.settings.motion.boxes.help', { default: 'Show motion boxes on the archived images.' })}
+          invalid={$_('webcams.settings.motion.boxes.invalid', { default: 'Please make a choice.' })}
+        />
       </div>
-    {/if}
-
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+        <Field
+          type="number"
+          name="motion.threshold"
+          step="1"
+          min="0"
+          required={motion_settings}
+          label={$_('webcams.settings.motion.threshold.label', { default: 'Motion delta threshold' })}
+          placeholder={$_('webcams.settings.motion.threshold.placeholder', { default: 'Enter number' })}
+          help={$_('webcams.settings.motion.threshold.help', { default: 'Enter the motion threshold.' })}
+          invalid={$_('webcams.settings.motion.threshold.invalid', {
+            default: 'Please enter a minimum value of {value}.',
+            values: { value: 0 },
+          })}
+        />
+      </div>
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+        <Field
+          type="number"
+          name="motion.area"
+          min="0"
+          required={motion_settings}
+          label={$_('webcams.settings.motion.area.label', { default: 'Motion minimum area' })}
+          placeholder={$_('webcams.settings.motion.area.placeholder', { default: 'Enter number' })}
+          help={$_('webcams.settings.motion.area.help', { default: 'Enter an area size.' })}
+          invalid={$_('webcams.settings.motion.area.invalid', {
+            default: 'Please enter a minimum value of {value}.',
+            values: { value: 0 },
+          })}
+        />
+      </div>
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+        <Select
+          name="motion.frame"
+          value={$formData.motion ? $formData.motion.frame : ''}
+          required={motion_settings}
+          options={[
+            { value: 'last', text: $_('webcams.settings.motion.frame.options.last', { default: 'Last frame' }) },
+            {
+              value: 'archived',
+              text: $_('webcams.settings.motion.frame.options.archived', { default: 'Last archived frame' }),
+            },
+          ]}
+          label={$_('webcams.settings.motion.frame.label', { default: 'Motion comparison frame' })}
+          placeholder={$_('webcams.settings.motion.frame.placeholder', {
+            default: 'Select which frame to comparison',
+          })}
+          help={$_('webcams.settings.motion.frame.help', { default: 'Which frame to use for motion detection.' })}
+          invalid={$_('webcams.settings.motion.frame.invalid', { default: 'Please make a choice.' })}
+        />
+      </div>
+    </div>
     <!-- We need this nasty hack to make submit with enter key to work -->
     <button type="submit" style="display:none"> </button>
   </form>
