@@ -15,6 +15,7 @@ services:
 
       - /boot/firmware/config.txt:/boot/firmware/config.txt # For Bookworm
       - /boot/firmware/cmdline.txt:/boot/firmware/cmdline.txt # For Bookworm
+      - /run/udev:/run/udev # For Bookworm
 
       - /etc/modules:/etc/modules
       - /dev:/dev
