@@ -861,12 +861,8 @@ class terrariumArea(object):
                     self.state[period]["alarm_count"] += 1
                     continue
 
-                self.relays_toggle(period, True)
                 self.state[period]["alarm_count"] = 0
-
-                if self.setup[period]["power_on_time"] > 0.0:
-                    self.state[period]["timer_on"] = True
-                    threading.Timer(self.setup[period]["power_on_time"], self.relays_toggle, [period, False]).start()
+                self.relays_toggle(period, True)
 
             elif (
                 toggle_relay is False
@@ -944,7 +940,14 @@ class terrariumArea(object):
         return new_state
 
     def relays_toggle(self, part, on):
-        logger.info(f'Toggle the relays for area {self} part {part} to state {("on" if on else "off")}.')
+        log_line = f'Toggle the relays for area {self} part {part} to state {("on" if on else "off")}'
+        power_on_time = self.setup[part].get("power_on_time", 0.0)
+        if on and power_on_time > 0.0:
+            log_line += f' and switch back after {power_on_time} seconds'
+            self.state[part]["timer_on"] = True
+            threading.Timer(power_on_time, self.relays_toggle, [part, False]).start()
+
+        logger.info(f'{log_line}.')
 
         relays = []
         with orm.db_session():
