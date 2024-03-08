@@ -63,3 +63,20 @@ export const languageFlag = (language) => {
   }
   return countryCodeEmoji(flag);
 };
+
+export const enclosureNameSort = (a, b) => {
+  const startWithNumber = /^\d+/;
+
+  let numberA = a.match(startWithNumber);
+  let numberB = b.match(startWithNumber);
+
+  if (numberA && numberB) {
+    // Sorting based on integers
+    numberA = parseInt(numberA[0]);
+    numberB = parseInt(numberB[0]);
+    return numberA > numberB;
+  }
+
+  // Normal text compare
+  return a.localeCompare(b);
+};

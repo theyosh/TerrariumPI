@@ -30,6 +30,7 @@
   import { getCustomConfig } from '../config';
   import { websocket } from '../providers/websocket';
   import { currency } from '../locale/i18n';
+  import { enclosureNameSort } from '../helpers/string-helpers';
 
   import Card from '../user-controls/Card.svelte';
   import Enclosure from '../components/enclosure/Enclosure.svelte';
@@ -346,7 +347,7 @@
     {/if}
 
     {#if settings.dashboard_mode === 2 && enclosures}
-      {#each enclosures.sort((a, b) => a.name.localeCompare(b.name)) as enclosure}
+      {#each enclosures.sort((a, b) => enclosureNameSort(a.name, b.name)) as enclosure}
         <div class="col-12 col-lg-6 col-xl-3">
           <Card loading={loading_enclosures}>
             <svelte:fragment slot="header">

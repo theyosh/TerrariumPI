@@ -6,6 +6,7 @@
   import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
   import { fetchEnclosures, deleteEnclosure, deleteArea } from '../providers/api';
   import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { enclosureNameSort } from '../helpers/string-helpers';
 
   import EnclosureCard from '../user-controls/EnclosureCard.svelte';
 
@@ -105,7 +106,7 @@
   <div class="row">
     {#if enclosures.length > 0}
       <!-- Sort based on enclosure names natural sorting -->
-      {#each enclosures.sort((a, b) => a.name.localeCompare(b.name)) as enclosure}
+      {#each enclosures.sort((a, b) => enclosureNameSort(a.name, b.name)) as enclosure}
         <div class="col-12">
           <EnclosureCard {enclosure} />
         </div>
