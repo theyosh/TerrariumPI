@@ -943,7 +943,7 @@ class terrariumArea(object):
         log_line = f'Toggle the relays for area {self} part {part} to state {("on" if on else "off")}'
         power_on_time = self.setup[part].get("power_on_time", 0.0)
         if on and power_on_time > 0.0:
-            log_line += f' and switch back after {power_on_time} seconds'
+            log_line += f' and switch back to state off after {power_on_time} seconds'
             self.state[part]["timer_on"] = True
             threading.Timer(power_on_time, self.relays_toggle, [part, False]).start()
 
