@@ -153,8 +153,12 @@ fi
 if [ -f /var/run/pigpio.pid ]; then
   rm /var/run/pigpio.pid
 fi
-# run localhost socket only
-pigpiod -l
+
+nc -z localhost 8888
+if [ $? -eq 1 ]; then
+  # run localhost socket only
+  pigpiod -l
+fi
 
 # Remove the restart file from last unhealty status
 if [ -f .restart ]; then
