@@ -296,14 +296,14 @@ class terrariumSensor(object):
             data = func_timeout(self._UPDATE_TIME_OUT, self._get_data)
 
         except FunctionTimedOut:
-            raise terrariumSensorUpdateException(f"{error_message}: Timed out after {self._UPDATE_TIME_OUT} seconds.")
+            raise terrariumSensorUpdateException(f"{error_message}: Timed out after {self._UPDATE_TIME_OUT} seconds")
         except Exception as ex:
-            raise terrariumSensorUpdateException(f"{error_message}: {ex}.")
+            raise terrariumSensorUpdateException(f"{error_message}: {ex}")
         finally:
             self.__power_management(False)
 
         if data is None:
-            raise terrariumSensorUpdateException(f"{error_message}: no data.")
+            raise terrariumSensorUpdateException(f"{error_message}: no data")
 
         return data
 

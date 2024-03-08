@@ -92,7 +92,7 @@ class terrariumArea(object):
         Returns:
             string: Area with area type
         """
-        return f'{terrariumArea.__TYPES[self.type]["name"]} named {self.name}'
+        return f'{terrariumArea.__TYPES[self.type]["name"]} named \'{self.name}\''
 
     @property
     def _powered(self):
@@ -877,7 +877,7 @@ class terrariumArea(object):
         self.state["last_update"] = int(datetime.datetime.now().timestamp())
 
         logger.info(
-            f"Updated area {self} in {self.mode} mode at enclosure {self.enclosure.name} in {time.time()-start:.2f} seconds."
+            f"Updated area {self} in '{self.mode}' mode at enclosure {self.enclosure.name} in {time.time()-start:.2f} seconds."
         )
         return self.state
 

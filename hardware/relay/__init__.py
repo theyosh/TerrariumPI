@@ -166,12 +166,12 @@ class terrariumRelay(object):
             data = func_timeout(self._UPDATE_TIME_OUT, self._get_hardware_value)
 
         except FunctionTimedOut:
-            raise terrariumRelayUpdateException(f"{error_message}: Timed out after {self._UPDATE_TIME_OUT} seconds.")
+            raise terrariumRelayUpdateException(f"{error_message}: Timed out after {self._UPDATE_TIME_OUT} seconds")
         except Exception as ex:
-            raise terrariumRelayUpdateException(f"{error_message}: {ex}.")
+            raise terrariumRelayUpdateException(f"{error_message}: {ex}")
 
         if data is None:
-            raise terrariumRelayUpdateException(f"{error_message}: no data.")
+            raise terrariumRelayUpdateException(f"{error_message}: no data")
 
         return data
 
