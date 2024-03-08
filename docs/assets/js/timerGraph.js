@@ -13,7 +13,7 @@ function showTimerGraph() {
   };
 
   let today = new Date();
-  today = `${today.getFullYear()}-${today.getMonth() < 9 ? '0' : ''}${today.getMonth()+1}-${today.getDate()}T`;
+  today = `${today.getFullYear()}-${today.getMonth() < 9 ? '0' : ''}${today.getMonth()+1}-${today.getDate() < 9 ? '0' : ''}${today.getDate()}T`;
 
   const begin_time = Date.parse( today + jQuery('input#begin_time').val() + ':00');
   let end_time   = Date.parse( today + jQuery('input#end_time').val() + ':00');
