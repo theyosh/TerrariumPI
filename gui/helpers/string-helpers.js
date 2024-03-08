@@ -72,8 +72,8 @@ export const enclosureNameSort = (a, b) => {
 
   if (numberA && numberB) {
     // Sorting based on integers
-    numberA = parseInt(numberA[0]);
-    numberB = parseInt(numberB[0]);
+    numberA = 1 * numberA[0];
+    numberB = 1 * numberB[0];
     return numberA > numberB;
   }
 
