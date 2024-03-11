@@ -105,7 +105,7 @@ class terrariumWebcam(object):
                             setattr(sys.modules[__name__], file.stem, attribute)
                             data[attribute.HARDWARE] = attribute
                 except Exception as ex:
-                    logger.warning(f"Error loading {file}: {ex}")
+                    logger.error(f"Error loading {file}: {ex}")
 
             cache.set_data(__CACHE_KEY, data, -1)
 
