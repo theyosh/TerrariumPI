@@ -75,14 +75,13 @@ export const enclosureNameSort = (a, b) => {
     numberA = 1 * numberA[0];
     numberB = 1 * numberB[0];
 
-    if (numberA > numberB ) {
-        return 1;
-    } else if(numberA < numberB) {
-        return -1;
+    if (numberA > numberB) {
+      return 1;
+    } else if (numberA < numberB) {
+      return -1;
     } else {
-        return 0;
+      return 0;
     }
-
   }
 
   // Normal text compare
