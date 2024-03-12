@@ -74,7 +74,15 @@ export const enclosureNameSort = (a, b) => {
     // Sorting based on integers
     numberA = 1 * numberA[0];
     numberB = 1 * numberB[0];
-    return numberA > numberB;
+
+    if (numberA > numberB ) {
+        return 1;
+    } else if(numberA < numberB) {
+        return -1;
+    } else {
+        return 0;
+    }
+
   }
 
   // Normal text compare
