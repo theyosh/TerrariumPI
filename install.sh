@@ -74,6 +74,8 @@ fi
 # Debian buster does not like numpy .... :(
 if [ "${OS}" == "buster" ]; then
   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
+  # Force downgrading to specified version
+  PIP_MODULES="${PIP_MODULES} adafruit-circuitpython-typing==1.10.1"
 elif [ "${OS}" == "bookworm" ]; then
   # On bookworm we use the OS package versions
   PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/}"
