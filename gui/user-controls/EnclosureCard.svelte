@@ -15,7 +15,7 @@
   import { fancyAppsLanguage } from '../constants/ui';
   import { updateButton, isDarkInterface } from '../stores/terrariumpi';
   import { isAuthenticated } from '../stores/authentication';
-  import { externalLinks } from '../helpers/string-helpers';
+  import { externalLinks, areaObjectSort } from '../helpers/string-helpers';
 
   import Card from '../user-controls/Card.svelte';
   import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
@@ -92,7 +92,7 @@
             </tr>
           </thead>
           <tbody>
-            {#each enclosure.areas.sort((a, b) => a.name.localeCompare(b.name)) as area}
+            {#each enclosure.areas.sort((a, b) => areaObjectSort(a,b)) as area}
               <tr>
                 <td>
                   {area.name}

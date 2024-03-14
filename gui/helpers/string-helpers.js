@@ -87,3 +87,15 @@ export const enclosureNameSort = (a, b) => {
   // Normal text compare
   return a.localeCompare(b);
 };
+
+export const areaObjectSort = (a, b) => {
+    // Main lights area always first
+    if (a.type === 'lights' && a.setup.main_lights) {
+        return -1;
+    } else if (b.type === 'lights' && a.setup.main_lights) {
+        return 1;
+    }
+
+    // Normal text compare
+    return enclosureNameSort(a.name, b.name);
+}
