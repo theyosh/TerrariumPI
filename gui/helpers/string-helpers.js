@@ -89,13 +89,13 @@ export const enclosureNameSort = (a, b) => {
 };
 
 export const areaObjectSort = (a, b) => {
-    // Main lights area always first
-    if (a.type === 'lights' && a.setup.main_lights) {
-        return -1;
-    } else if (b.type === 'lights' && a.setup.main_lights) {
-        return 1;
-    }
+  // Main lights area always first
+  if (a.type === 'lights' && a.setup.main_lights) {
+    return -1;
+  } else if (b.type === 'lights' && a.setup.main_lights) {
+    return 1;
+  }
 
-    // Normal text compare
-    return enclosureNameSort(a.name, b.name);
-}
+  // Normal text compare
+  return enclosureNameSort(a.name, b.name);
+};

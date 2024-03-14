@@ -92,7 +92,7 @@
             </tr>
           </thead>
           <tbody>
-            {#each enclosure.areas.sort((a, b) => areaObjectSort(a,b)) as area}
+            {#each enclosure.areas.sort((a, b) => areaObjectSort(a, b)) as area}
               <tr>
                 <td>
                   {area.name}
