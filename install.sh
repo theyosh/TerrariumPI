@@ -10,12 +10,10 @@ VERSION="${VERSION//\"/}"
 PYTHON=$(python3 -V)
 PI_ZERO=$(grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo)
 RUNNING_OS=$(grep -ioP '^VERSION_CODENAME=(\K.*)' /etc/os-release)
+PI_HARDWARE=$(grep -ioP '^Model\s*: (\K.*)' /proc/cpuinfo)
 OS="${OS:-${RUNNING_OS}}"
 
-INSTALLER_TITLE="TerrariumPI ${VERSION}, ${PYTHON}, OS ${OS^}"
-if [ "${PI_ZERO}" -eq 1 ]; then
-    INSTALLER_TITLE="${INSTALLER_TITLE}, Pi Zero"
-fi
+INSTALLER_TITLE="TerrariumPI ${VERSION}, ${PYTHON}, OS ${OS}, ${PI_HARDWARE}"
 
 WHOAMI=$(whoami)
 if [ "${WHOAMI}" != "root" ]; then
