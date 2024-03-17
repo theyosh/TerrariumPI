@@ -14,7 +14,6 @@ RUN apt-get update \
   && make install
 
 # python builder, help keep image small
-# Keep at 3.7-buster to use piwheels files for installation in stead of compiling them all manually. Saves about 2 hours of building :)
 FROM python:3.7-buster as python_builder
 # These two environment variables prevent __pycache__/ files.
 ENV PYTHONUNBUFFERED=1
