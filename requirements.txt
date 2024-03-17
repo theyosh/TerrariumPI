@@ -1,6 +1,6 @@
 pip==24.0
-setuptools==69.1.0
-wheel==0.42.0
+setuptools==69.2.0
+wheel==0.43.0
 
 # Database
 pony==0.7.17
@@ -12,7 +12,7 @@ git+https://github.com/gbstack/ffprobe-python
 pyalsaaudio==0.10.0
 
 # Webserver packages
-gevent==23.9.1
+gevent==24.2.1
 bottle==0.12.25
 bottle_websocket==0.2.9
 jinja2==3.1.3
@@ -23,7 +23,7 @@ bcrypt==4.1.2
 cryptography==42.0.5
 
 # Hardware / sensors packages
-gpiozero==2.0
+gpiozero==2.0.1
 pcf8574==0.1.3
 pcf8575==0.3
 smbus2==0.4.3
@@ -78,17 +78,17 @@ sdnotify==0.3.2
 
 # MOTD packages
 pyfancy==2.4.5
-pyfiglet==0.8.post1
+pyfiglet==1.0.2
 ansi2html==1.9.1
 
 # Notification packages
 emails==0.6
 luma.oled==3.13.0
 i2c_lcd==0.1.0
-python-telegram-bot[socks,http2]==20.8
+python-telegram-bot[socks,http2]==21.0.1
 
 # Overrule versions
 # Force to latest version
 paho-mqtt==2.0.0
 icalendar==5.0.11
-adafruit-circuitpython-typing==1.10.2
+adafruit-circuitpython-typing==1.10.3
