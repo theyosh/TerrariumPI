@@ -50,7 +50,6 @@ done < requirements.txt
 if [ "${OS}" == "buster" ]; then
   # Python package version difference per OS
   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
-
   PIP_MODULES="${PIP_MODULES//setuptools==+([^ ])/setuptools==68.0.0}"
   PIP_MODULES="${PIP_MODULES//python-dotenv==+([^ ])/python-dotenv==0.21.1}"
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==22.10.2}"
@@ -66,7 +65,6 @@ if [ "${OS}" == "buster" ]; then
 
 elif [ "${OS}" == "bullseye" ]; then
   # Python package version difference per OS
-
   PIP_MODULES="${PIP_MODULES//setuptools==+([^ ])/setuptools==68.0.0}"
   PIP_MODULES="${PIP_MODULES//python-dotenv==+([^ ])/python-dotenv==0.21.1}"
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==22.10.2}"

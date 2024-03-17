@@ -67,6 +67,8 @@ class terrariumSensor(object):
         __CACHE_KEY = "known_sensors"
         cache = terrariumCache()
 
+        bluetooth_available = terrariumUtils.bluetooth_available()
+
         known_sensors = cache.get_data(__CACHE_KEY)
         if known_sensors is None:
             known_sensors = {}
@@ -79,13 +81,16 @@ class terrariumSensor(object):
                     for i in dir(imported_module):
                         attribute = getattr(imported_module, i)
 
-                        if inspect.isclass(attribute) and attribute != __cls__ and issubclass(attribute, __cls__):
+                        if inspect.isclass(attribute) and attribute != __cls__ and issubclass(attribute, __cls__) and attribute.HARDWARE is not None:
+                            if not bluetooth_available and issubclass(attribute, terrariumBluetoothSensor):
+                                logger.info(f"Skip sensor hardware '{attribute.NAME}' because no bluetooth available.")
+                                continue
+
                             setattr(sys.modules[__name__], file.stem, attribute)
-                            if attribute.HARDWARE is not None:
-                                known_sensors[attribute.HARDWARE] = attribute
-                                all_types += attribute.TYPES
+                            known_sensors[attribute.HARDWARE] = attribute
+                            all_types += attribute.TYPES
                 except Exception as ex:
-                    logger.warning(f"Error loading {file}: {ex}")
+                    logger.error(f"Error loading {file}: {ex}")
 
             # Update sensors that do not have a known type. Those are remote and scripts sensors
             all_types = list(set(all_types))

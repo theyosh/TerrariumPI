@@ -508,3 +508,9 @@ class terrariumUtils:
             return "docker" in contents
 
         return False
+
+    @staticmethod
+    def bluetooth_available():
+        cmd = "/usr/bin/hcitool dev"
+        data = terrariumUtils.get_script_data(cmd).decode().strip().split("\n")
+        return len(data) > 1
