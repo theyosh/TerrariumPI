@@ -85,7 +85,7 @@ class terrariumSensor(object):
                                 known_sensors[attribute.HARDWARE] = attribute
                                 all_types += attribute.TYPES
                 except Exception as ex:
-                    logger.warning(f"Error loading {file}: {ex}")
+                    logger.error(f"Error loading {file}: {ex}")
 
             # Update sensors that do not have a known type. Those are remote and scripts sensors
             all_types = list(set(all_types))

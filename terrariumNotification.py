@@ -290,7 +290,11 @@ class terrariumNotification(terrariumSingleton):
         if service_id not in self.services:
             return
 
-        self.services[service_id].stop()
+        try:
+            self.services[service_id].stop()
+        except Exception as ex:
+            logger.debug(f"Service {self} has not stop action: {ex}")
+
         del self.services[service_id]
 
     def broadcast(self, subject, message, image):
