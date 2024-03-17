@@ -25,7 +25,7 @@ class terrariumRPIWebcam(terrariumWebcam):
             if not raspistill.exists():
                 return None
 
-        return [str(raspistill), "-v", "0", "--quality", "95", "--timeout", str(self._WARM_UP * 1000), "--encoding", "jpg"]
+        return [str(raspistill), "--quality", "95", "--timeout", str(self._WARM_UP * 1000), "--encoding", "jpg"]
 
     def _get_raw_data(self):
         if self._device["device"] is None:
