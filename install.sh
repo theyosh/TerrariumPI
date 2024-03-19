@@ -7,11 +7,13 @@ shopt -s extglob
 BASEDIR=$(dirname $(readlink -nf "$0"))
 VERSION=$(grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3)
 VERSION="${VERSION//\"/}"
+OS=$(grep -ioP '^VERSION_CODENAME=(\K.*)' /etc/os-release)
 PYTHON=$(python3 -V)
-PI_ZERO=$(grep -iEc "model\s+: .*Pi Zero" /proc/cpuinfo)
-RUNNING_OS=$(grep -ioP '^VERSION_CODENAME=(\K.*)' /etc/os-release)
 PI_HARDWARE=$(grep -ioP '^Model\s*: (\K.*)' /proc/cpuinfo)
-OS="${OS:-${RUNNING_OS}}"
+PI_ZERO=0
+if [[ $PI_HARDWARE == *"Pi Zero"* ]]; then
+  PI_ZERO=1
+fi
 
 INSTALLER_TITLE="TerrariumPI ${VERSION}, ${PYTHON}, OS ${OS}, ${PI_HARDWARE}"
 
@@ -36,8 +38,6 @@ SCRIPT_GROUP="$(id -gn ${SCRIPT_USER})"
 
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
-# Buster defaults for openCV
-OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
 
 PIP_MODULES=""
 while IFS= read -r line; do
@@ -46,7 +46,6 @@ while IFS= read -r line; do
 done < requirements.txt
 
 if [ "${OS}" == "buster" ]; then
-  # Python package version difference per OS
   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
   PIP_MODULES="${PIP_MODULES//wheel==+([^ ])/wheel==0.42.0}"
   PIP_MODULES="${PIP_MODULES//setuptools==+([^ ])/setuptools==68.0.0}"
@@ -62,10 +61,9 @@ if [ "${OS}" == "buster" ]; then
   PIP_MODULES="${PIP_MODULES//gpiozero==+([^ ])/gpiozero==1.6.2}"
   PIP_MODULES="${PIP_MODULES//adafruit-circuitpython-typing==+([^ ])/adafruit-circuitpython-typing==1.10.1}"
 
-elif [ "${OS}" == "bullseye" ]; then
-  # Python package version difference per OS
+  OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
 
-  # For Bullseye we need libopenexr25 and libilmbase25
+elif [ "${OS}" == "bullseye" ]; then
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
 
 elif [ "${OS}" == "bookworm" ]; then
@@ -80,20 +78,20 @@ elif [ "${OS}" == "bookworm" ]; then
 
 fi
 
-if [ "${PI_ZERO}" -eq 1 ]; then
-  # Pi Zero needs some fixed python modules
-  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==21.8.0}"
-  PIP_MODULES="${PIP_MODULES//bcrypt==+([^ ])/bcrypt==3.2.2}"
-  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
-  PIP_MODULES="${PIP_MODULES} lxml==4.6.4"
+# if [ "${PI_ZERO}" -eq 1 ]; then
+#   # Pi Zero needs some fixed python modules
+#   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==21.8.0}"
+#   PIP_MODULES="${PIP_MODULES//bcrypt==+([^ ])/bcrypt==3.2.2}"
+#   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
+#   PIP_MODULES="${PIP_MODULES} lxml==4.6.4"
 
-  if [ "${OS}" == "buster" ]; then
-    PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.4.60}"
-    PIP_MODULES="${PIP_MODULES//cryptography==+([^ ])/cryptography==37.0.4}"
-  elif [ "${OS}" == "bullseye" ]; then
-    PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.3.56}"
-  fi
-fi
+#   if [ "${OS}" == "buster" ]; then
+#     PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.4.60}"
+#     PIP_MODULES="${PIP_MODULES//cryptography==+([^ ])/cryptography==37.0.4}"
+#   elif [ "${OS}" == "bullseye" ]; then
+#     PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.3.56}"
+#   fi
+# fi
 
 APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg sispmctl ntp libxslt1.1 libglib2.0-dev libopenblas-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
 
@@ -106,17 +104,17 @@ clear
 
 # OS version check
 
-# if [ ${BUSTER_OS} -eq 0 ]; then
-#   whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is not Raspbian Bullseye OS compatible. You can install it, but the Raspberry PI cameras are not working.\nDownload the old Legacy OS Raspbian Buster\n\nDo you want to continue?" 0 60
+if [ "${OS}" == "bookworm" ]; then
+  whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is not Raspbian Bookworm OS compatible. Use at own risk.\n\nDo you want to continue?" 0 60
 
-#   case $? in
-#     1|255) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
-#       echo "TerrariumPI ${VERSION} is supported on Buster OS (Legacy OS)"
-#       echo "Download from: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy"
-#       exit 0
-#     ;;
-#   esac
-# fi
+  case $? in
+    1|255) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
+      echo "TerrariumPI ${VERSION} is supported on Buster/Bullseye OS (Legacy OS)"
+      echo "Download from: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy"
+      exit 0
+    ;;
+  esac
+fi
 
 whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'. If this is not the right user stop the installation now!\n\nDo you want to continue?" 0 60
 
