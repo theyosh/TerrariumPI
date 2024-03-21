@@ -15,7 +15,7 @@ USERNAME = "admin"
 PASSWORD = "password"
 
 # Should not be changed
-TP_SERVER = "http://127.0.0.1"
+TP_SERVER = "http://127.0.0.1:8090"
 
 # !! --- NO CHANGES BELOW THIS LINE ---- !!
 RELAY_URL = f"{TP_SERVER}/api/relays/{RELAY_ID}"

@@ -2,6 +2,93 @@ Changelog
 =========
 
 
+4.8.4 (2024-03-22)
+------------------
+
+**New**
+------
+
+- Add new release post. [TheYOSH]
+
+**Fixes**
+------
+
+- Fix deleting non working notification services. [#878](https://github.com/theyosh/TerrariumPI/issues/878). [TheYOSH]
+- Fix broken library for Python 3.7 [#902](https://github.com/theyosh/TerrariumPI/issues/902). [TheYOSH]
+- Fix sorting in Chromium based browser. [#892](https://github.com/theyosh/TerrariumPI/issues/892). [TheYOSH]
+- Fix scenario graph. [TheYOSH]
+- Better fix for settle time calculation. Now also support manual relay
+  shutdown. [#900](https://github.com/theyosh/TerrariumPI/issues/900) [#898](https://github.com/theyosh/TerrariumPI/issues/898) (2) [TheYOSH]
+- Better fix for settle time calculation. Now also support manual relay
+  shutdown. [#900](https://github.com/theyosh/TerrariumPI/issues/900) [#898](https://github.com/theyosh/TerrariumPI/issues/898). [TheYOSH]
+- Fix settle time bug for long running relays. [#900](https://github.com/theyosh/TerrariumPI/issues/900). [TheYOSH]
+- Fix bluepy3 helper compiling. [TheYOSH]
+- Fix docker build. [TheYOSH]
+
+**Updates**
+------
+
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update enclosure sorting. Now it detects numbers to sort with. [#892](https://github.com/theyosh/TerrariumPI/issues/892).
+  [TheYOSH]
+- Update python library. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update cryptography. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update requirements.txt. [TheYOSH]
+
+  Force lower version
+- Update NodeJS libraries. [TheYOSH]
+- Update python libraries. [TheYOSH]
+- Update 2024-02-03-release_4.8.3.md. [TheYOSH]
+
+**Other**
+------
+
+- New Svelte GUI build. [TheYOSH]
+- Updae NodeJS libraries. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Prettier. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Sort area names based on numbers when starting with a number. But main
+  lights are always first. [#892](https://github.com/theyosh/TerrariumPI/issues/892). [TheYOSH]
+- Prettier formatting. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' of github.com:theyosh/TerrariumPI. [TheYOSH]
+- Change logging type. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Convert to integer. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- FIx not loading form fields. [#895](https://github.com/theyosh/TerrariumPI/issues/895). [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge pull request [#901](https://github.com/theyosh/TerrariumPI/issues/901) from manolof/main. [TheYOSH]
+
+  feat: improve GUI charts and responsive views
+- Chore: downgrade felte. [manolof]
+- Feat: improve GUI charts and responsive views. [manolof]
+- Fine tune some logging (2) [TheYOSH]
+- Fine tune some logging. [TheYOSH]
+- Fine tune some logging. [TheYOSH]
+- Refactor relay timer on logic and logging(2) [TheYOSH]
+- Refactor relay timer on logic and logging. [TheYOSH]
+- Better test code first... [#900](https://github.com/theyosh/TerrariumPI/issues/900) [#898](https://github.com/theyosh/TerrariumPI/issues/898). [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- First attempt to make the installtion work on Raspbian bookworm.
+  [TheYOSH]
+- Better bluetooth scanning message. [TheYOSH]
+- Log miflora battery status. [TheYOSH]
+- Apply python patch. [theyosh]
+- Apply patch also in docker. [TheYOSH]
+
+
 4.8.3 (2024-02-03)
 ------------------
 
@@ -35,6 +122,7 @@ Changelog
 **Updates**
 ------
 
+- Update version. [TheYOSH]
 - Documentation update. [TheYOSH]
 - Update NodeJS libraries. [TheYOSH]
 - Small calendar updates. [TheYOSH]
@@ -56,6 +144,7 @@ Changelog
 **Other**
 ------
 
+- Python code is blacked. [TheYOSH]
 - New release message. [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
 - Refactor TAPO P100 relay to use mac address for ID. [TheYOSH]
