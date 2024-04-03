@@ -61,7 +61,7 @@ git+https://github.com/SequentMicrosystems/4relay-rpi.git#subdirectory=python/4r
 git+https://github.com/PiSupply/Bright-Pi
 
 # Webcam packages
-Pillow==9.5.0
+Pillow==10.3.0
 # !! Check first: https://piwheels.org/project/numpy/ !!
 numpy==1.26.4
 # !! Check first: https://piwheels.org/project/opencv-python-headless/ !!
