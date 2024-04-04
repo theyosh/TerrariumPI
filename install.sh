@@ -287,8 +287,13 @@ XXX
 EOF
 
 # Create Python environment
+SITE_PACKAGES=""
+if [ "${OS}" == "bookworm" ]; then
+    SITE_PACKAGES="--system-site-packages"
+fi
+
 cd "${BASEDIR}/"
-python3 -m venv --system-site-packages venv
+python3 -m venv ${SITE_PACKAGES} venv
 source venv/bin/activate
 
 # Install python modules inside the virtual env of Python
