@@ -1,23 +1,23 @@
 <script>
-import { Modal } from '@keenmate/svelte-adminlte';
+  import { Modal } from '@keenmate/svelte-adminlte';
 
-import { _ } from 'svelte-i18n';
+  import { _ } from 'svelte-i18n';
 
-let wrapper_show;
-let wrapper_hide;
-let message;
+  let wrapper_show;
+  let wrapper_hide;
+  let message;
 
-export const show = () => {
-  wrapper_show();
-};
+  export const show = () => {
+    wrapper_show();
+  };
 
-export const hide = () => {
-  wrapper_hide();
-};
+  export const hide = () => {
+    wrapper_hide();
+  };
 
-export const setMessage = (msg) => {
-  message = msg;
-};
+  export const setMessage = (msg) => {
+    message = msg;
+  };
 </script>
 
 <Modal center bind:show="{wrapper_show}" bind:hide="{wrapper_hide}">

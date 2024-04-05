@@ -1,50 +1,50 @@
 <style>
-.profile_image {
-  width: 200px;
-}
+  .profile_image {
+    width: 200px;
+  }
 </style>
 
 <script>
-import { dayjs } from 'svelte-time';
-import duration from 'dayjs/esm/plugin/duration';
-dayjs.extend(duration);
-import { onMount, getContext } from 'svelte';
-import { _, time, date } from 'svelte-i18n';
+  import { dayjs } from 'svelte-time';
+  import duration from 'dayjs/esm/plugin/duration';
+  dayjs.extend(duration);
+  import { onMount, getContext } from 'svelte';
+  import { _, time, date } from 'svelte-i18n';
 
-import { Fancybox } from '@fancyapps/ui';
-import '@fancyapps/ui/dist/fancybox/fancybox.css';
+  import { Fancybox } from '@fancyapps/ui';
+  import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
-import { template_sensor_type_color, template_sensor_type_icon } from '../helpers/icon-helpers';
-import { roundToPrecision } from '../helpers/number-helpers';
-import { getCustomConfig } from '../config';
-import { ApiUrl } from '../constants/urls';
-import { fancyAppsLanguage } from '../constants/ui';
-import { updateButton, isDarkInterface } from '../stores/terrariumpi';
-import { isAuthenticated } from '../stores/authentication';
-import { externalLinks, areaObjectSort } from '../helpers/string-helpers';
+  import { template_sensor_type_color, template_sensor_type_icon } from '../helpers/icon-helpers';
+  import { roundToPrecision } from '../helpers/number-helpers';
+  import { getCustomConfig } from '../config';
+  import { ApiUrl } from '../constants/urls';
+  import { fancyAppsLanguage } from '../constants/ui';
+  import { updateButton, isDarkInterface } from '../stores/terrariumpi';
+  import { isAuthenticated } from '../stores/authentication';
+  import { externalLinks, areaObjectSort } from '../helpers/string-helpers';
 
-import Card from '../user-controls/Card.svelte';
-import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
-import DoorIcon from '../components/common/DoorIcon.svelte';
+  import Card from '../user-controls/Card.svelte';
+  import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
+  import DoorIcon from '../components/common/DoorIcon.svelte';
 
-export let enclosure;
+  export let enclosure;
 
-const settings = getCustomConfig();
-const { editEnclosure, editArea } = getContext('modals');
-const { deleteAction, deleteArea } = getContext('enclosureActions');
+  const settings = getCustomConfig();
+  const { editEnclosure, editArea } = getContext('modals');
+  const { deleteAction, deleteArea } = getContext('enclosureActions');
 
-let last_update = null;
+  let last_update = null;
 
-onMount(() => {
-  Fancybox.bind('[data-fancybox]', {
-    l10n: fancyAppsLanguage(),
+  onMount(() => {
+    Fancybox.bind('[data-fancybox]', {
+      l10n: fancyAppsLanguage(),
+    });
   });
-});
 
-$: if (enclosure.doors) {
-  enclosure.doors.map((door) => updateButton({ ...door, ...{ enclosure: enclosure.id } }));
-}
-$: last_update = enclosure ? new Date() : null;
+  $: if (enclosure.doors) {
+    enclosure.doors.map((door) => updateButton({ ...door, ...{ enclosure: enclosure.id } }));
+  }
+  $: last_update = enclosure ? new Date() : null;
 </script>
 
 {#if enclosure}

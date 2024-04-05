@@ -1,14 +1,14 @@
 <script>
-import Label from './Label.svelte';
+  import Label from './Label.svelte';
 
-export let id;
-export let label = null;
-export let required = null;
+  export let id;
+  export let label = null;
+  export let required = null;
 
-export let help = null;
-export let invalid = null;
+  export let help = null;
+  export let invalid = null;
 
-export let horizontal = false;
+  export let horizontal = false;
 </script>
 
 <div class="form-group row">

@@ -1,24 +1,24 @@
 <script>
-import { setContext, getContext } from 'svelte';
-import { _ } from 'svelte-i18n';
+  import { setContext, getContext } from 'svelte';
+  import { _ } from 'svelte-i18n';
 
-import Card from '../user-controls/Card.svelte';
-import Webcam from '../components/common/Webcam.svelte';
-import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
+  import Card from '../user-controls/Card.svelte';
+  import Webcam from '../components/common/Webcam.svelte';
+  import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
 
-export let webcam;
+  export let webcam;
 
-const { editWebcam } = getContext('modals');
-const { deleteAction, ignoreAction } = getContext('webcamActions');
+  const { editWebcam } = getContext('modals');
+  const { deleteAction, ignoreAction } = getContext('webcamActions');
 
-let loading = true;
-function setLoading(state) {
-  loading = state;
-}
+  let loading = true;
+  function setLoading(state) {
+    loading = state;
+  }
 
-setContext('loading', {
-  setLoading,
-});
+  setContext('loading', {
+    setLoading,
+  });
 </script>
 
 {#if webcam}

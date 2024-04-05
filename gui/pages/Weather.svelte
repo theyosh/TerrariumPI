@@ -1,160 +1,169 @@
 <script>
-import { onMount, onDestroy } from 'svelte';
-import { Line } from 'svelte-chartjs';
-import { Chart as ChartJS, Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement } from 'chart.js';
-ChartJS.register(Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement);
-import 'chartjs-adapter-dayjs-4';
-import { _ } from 'svelte-i18n';
-import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
-import { date, time } from 'svelte-i18n';
+  import { onMount, onDestroy } from 'svelte';
+  import { Line } from 'svelte-chartjs';
+  import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    TimeScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+  } from 'chart.js';
+  ChartJS.register(Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement);
+  import 'chartjs-adapter-dayjs-4';
+  import { _ } from 'svelte-i18n';
+  import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
+  import { date, time } from 'svelte-i18n';
 
-import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
-import { roundToPrecision } from '../helpers/number-helpers';
-import { get_weather_icon } from '../helpers/icon-helpers';
-import { isAuthenticated } from '../stores/authentication';
-import { fetchWeatherData, fetchWeatherForecast } from '../providers/api';
-import { graphDefaultOpts, graphTypes } from '../constants/graph';
-import { get_template_color } from '../helpers/color-helpers';
-import { isDay } from '../stores/terrariumpi';
+  import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
+  import { roundToPrecision } from '../helpers/number-helpers';
+  import { get_weather_icon } from '../helpers/icon-helpers';
+  import { isAuthenticated } from '../stores/authentication';
+  import { fetchWeatherData, fetchWeatherForecast } from '../providers/api';
+  import { graphDefaultOpts, graphTypes } from '../constants/graph';
+  import { get_template_color } from '../helpers/color-helpers';
+  import { isDay } from '../stores/terrariumpi';
 
-import Card from '../user-controls/Card.svelte';
-import LoginLink from '../components/common/LoginLink.svelte';
-import WeatherSettings from '../modals/WeatherFormModal.svelte';
+  import Card from '../user-controls/Card.svelte';
+  import LoginLink from '../components/common/LoginLink.svelte';
+  import WeatherSettings from '../modals/WeatherFormModal.svelte';
 
-let weatherData = {};
-let graphData = [];
-let loading_current = true;
-let loading_forecast = true;
-let showModal;
+  let weatherData = {};
+  let graphData = [];
+  let loading_current = true;
+  let loading_forecast = true;
+  let showModal;
 
-let graphOpts = { ...graphDefaultOpts };
+  let graphOpts = { ...graphDefaultOpts };
 
-const loadData = () => {
-  loadCurrentData(true);
-  loadForecastData(true);
-};
+  const loadData = () => {
+    loadCurrentData(true);
+    loadForecastData(true);
+  };
 
-const fixCardHeight = () => {
-  let cards = document.querySelectorAll('div.card div.card-body');
-  cards[1].style.height = cards[0].clientHeight + 'px';
-};
+  const fixCardHeight = () => {
+    let cards = document.querySelectorAll('div.card div.card-body');
+    cards[1].style.height = cards[0].clientHeight + 'px';
+  };
 
-const loadCurrentData = async (loading) => {
-  loading = loading || false;
-  loading_current = loading === true;
+  const loadCurrentData = async (loading) => {
+    loading = loading || false;
+    loading_current = loading === true;
 
-  if (loading === true) {
-    await fetchWeatherData((data) => (weatherData = data));
-  } else {
-    fetchWeatherData((data) => (weatherData = data));
-  }
-  loading_current = false;
-};
+    if (loading === true) {
+      await fetchWeatherData((data) => (weatherData = data));
+    } else {
+      fetchWeatherData((data) => (weatherData = data));
+    }
+    loading_current = false;
+  };
 
-const loadForecastData = async (loading) => {
-  loading = loading || false;
-  loading_forecast = loading === true;
+  const loadForecastData = async (loading) => {
+    loading = loading || false;
+    loading_forecast = loading === true;
 
-  let new_data;
-  await fetchWeatherForecast((data) => {
-    new_data = data.map((point) => {
-      point.timestamp *= 1000;
-      return point;
+    let new_data;
+    await fetchWeatherForecast((data) => {
+      new_data = data.map((point) => {
+        point.timestamp *= 1000;
+        return point;
+      });
     });
+
+    if (loading === true) {
+      graphData = {
+        labels: null,
+        datasets: [
+          {
+            label: $_('general.temperature', { default: 'Temperature' }),
+            graphType: 'temperature',
+            lineTension: 0.5,
+            data: new_data,
+            parsing: {
+              xAxisKey: 'timestamp',
+              yAxisKey: 'temperature',
+            },
+            yAxisID: 'y',
+            fill: false,
+            borderColor: graphTypes['value'].colors.line,
+            backgroundColor: graphTypes['value'].colors.background,
+          },
+          {
+            label: $_('general.humidity', { default: 'Humdity' }),
+            graphType: 'humidity',
+            lineTension: 0.5,
+            data: new_data,
+            parsing: {
+              xAxisKey: 'timestamp',
+              yAxisKey: 'humidity',
+            },
+            yAxisID: 'y2',
+            fill: false,
+            borderColor: get_template_color('text-primary'),
+            backgroundColor: get_template_color('text-primary', 0.7),
+          },
+        ],
+      };
+    } else {
+      graphOpts.animation = { duration: 0 };
+      graphData.datasets[0].data = new_data;
+      graphData.datasets[1].data = new_data;
+      graphData.labels = new_data.map((point) => {
+        return point.timestamp;
+      });
+    }
+
+    fixCardHeight();
+    setTimeout(() => {
+      fixCardHeight();
+    }, 0.25);
+
+    loading_forecast = false;
+  };
+
+  onMount(() => {
+    (async () => {
+      // Get initial data
+      await loadCurrentData(true);
+      loadForecastData(true);
+    })();
+
+    graphOpts.scales.x.time.unit = 'hour';
+    graphOpts.scales.x.time.displayFormats.hour = 'dd LT';
+    graphOpts.scales.y2.display = true;
+    graphOpts.scales.y.min = null;
+    graphOpts.scales.y2.min = null;
+
+    setCustomPageTitle($_('weather.title', { default: 'Weather' }));
+
+    // Reload every 15 minutes
+    const intervalCurrent = setInterval(
+      async () => {
+        loadCurrentData(false);
+      },
+      15 * 60 * 1000,
+    );
+
+    // Reload every 60 minutes
+    const intervalForecast = setInterval(
+      async () => {
+        loadForecastData(false);
+      },
+      60 * 60 * 1000,
+    );
+
+    //If a function is returned from onMount, it will be called when the component is unmounted.
+    return () => {
+      clearInterval(intervalCurrent);
+      clearInterval(intervalForecast);
+    };
   });
 
-  if (loading === true) {
-    graphData = {
-      labels: null,
-      datasets: [
-        {
-          label: $_('general.temperature', { default: 'Temperature' }),
-          graphType: 'temperature',
-          lineTension: 0.5,
-          data: new_data,
-          parsing: {
-            xAxisKey: 'timestamp',
-            yAxisKey: 'temperature',
-          },
-          yAxisID: 'y',
-          fill: false,
-          borderColor: graphTypes['value'].colors.line,
-          backgroundColor: graphTypes['value'].colors.background,
-        },
-        {
-          label: $_('general.humidity', { default: 'Humdity' }),
-          graphType: 'humidity',
-          lineTension: 0.5,
-          data: new_data,
-          parsing: {
-            xAxisKey: 'timestamp',
-            yAxisKey: 'humidity',
-          },
-          yAxisID: 'y2',
-          fill: false,
-          borderColor: get_template_color('text-primary'),
-          backgroundColor: get_template_color('text-primary', 0.7),
-        },
-      ],
-    };
-  } else {
-    graphOpts.animation = { duration: 0 };
-    graphData.datasets[0].data = new_data;
-    graphData.datasets[1].data = new_data;
-    graphData.labels = new_data.map((point) => {
-      return point.timestamp;
-    });
-  }
-
-  fixCardHeight();
-  setTimeout(() => {
-    fixCardHeight();
-  }, 0.25);
-
-  loading_forecast = false;
-};
-
-onMount(() => {
-  (async () => {
-    // Get initial data
-    await loadCurrentData(true);
-    loadForecastData(true);
-  })();
-
-  graphOpts.scales.x.time.unit = 'hour';
-  graphOpts.scales.x.time.displayFormats.hour = 'dd LT';
-  graphOpts.scales.y2.display = true;
-  graphOpts.scales.y.min = null;
-  graphOpts.scales.y2.min = null;
-
-  setCustomPageTitle($_('weather.title', { default: 'Weather' }));
-
-  // Reload every 15 minutes
-  const intervalCurrent = setInterval(
-    async () => {
-      loadCurrentData(false);
-    },
-    15 * 60 * 1000,
-  );
-
-  // Reload every 60 minutes
-  const intervalForecast = setInterval(
-    async () => {
-      loadForecastData(false);
-    },
-    60 * 60 * 1000,
-  );
-
-  //If a function is returned from onMount, it will be called when the component is unmounted.
-  return () => {
-    clearInterval(intervalCurrent);
-    clearInterval(intervalForecast);
-  };
-});
-
-onDestroy(() => {
-  customPageTitleUsed.set(false);
-});
+  onDestroy(() => {
+    customPageTitleUsed.set(false);
+  });
 </script>
 
 <PageHeader>

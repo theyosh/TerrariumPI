@@ -1,152 +1,152 @@
 <script>
-import { onMount, createEventDispatcher } from 'svelte';
-import { writable } from 'svelte/store';
-import { _ } from 'svelte-i18n';
-import { createForm } from 'felte';
+  import { onMount, createEventDispatcher } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { _ } from 'svelte-i18n';
+  import { createForm } from 'felte';
 
-import { fetchRelays, fetchRelaysHardware, updateRelay } from '../providers/api';
-import { successNotification, errorNotification } from '../providers/notification-provider';
-import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
+  import { fetchRelays, fetchRelaysHardware, updateRelay } from '../providers/api';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
 
-import ModalForm from '../user-controls/ModalForm.svelte';
-import Field from '../components/form/Field.svelte';
-import Helper from '../components/form/Helper.svelte';
-import Select from '../components/form/Select.svelte';
-import Switch from '../components/form/Switch.svelte';
+  import ModalForm from '../user-controls/ModalForm.svelte';
+  import Field from '../components/form/Field.svelte';
+  import Helper from '../components/form/Helper.svelte';
+  import Select from '../components/form/Select.svelte';
+  import Switch from '../components/form/Switch.svelte';
 
-let wrapper_show;
-let wrapper_hide;
-let loading = false;
-let validated = false;
+  let wrapper_show;
+  let wrapper_hide;
+  let loading = false;
+  let validated = false;
 
-let hardware = [];
+  let hardware = [];
 
-let calibration = false;
-let hardware_type = null;
-let formData = writable({});
+  let calibration = false;
+  let hardware_type = null;
+  let formData = writable({});
 
-let editForm;
+  let editForm;
 
-const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-const successAction = () => {
-  dispatch('save');
-};
+  const successAction = () => {
+    dispatch('save');
+  };
 
-const hardwareType = (hardware) => {
-  hardware_type = hardware;
-  if (hardware_type === 'brightpi-dimmer') {
-    // Change to a fixed default value
-    editForm.elements['address'].value = 'fixed';
-  }
-  calibration = hardware_type.endsWith('-dimmer');
-};
-
-const _processForm = async (values, context) => {
-  validated = true;
-
-  if (context.form.checkValidity()) {
-    loading = true;
-    values = formToJSON(editForm);
-    values.address += '';
-
-    delete values.value;
-    delete values.dimmer;
-
-    // If all items of the calibration object are empty, then reset the complete calibration object.
-    if (!Object.values(values.calibration).some(Boolean)) {
-      values.calibration = {};
+  const hardwareType = (hardware) => {
+    hardware_type = hardware;
+    if (hardware_type === 'brightpi-dimmer') {
+      // Change to a fixed default value
+      editForm.elements['address'].value = 'fixed';
     }
+    calibration = hardware_type.endsWith('-dimmer');
+  };
 
-    try {
-      // Post data
-      await updateRelay(values, (data) => (values = data));
-      // Notifify OK!
-      successNotification(
-        $_('relays.settings.save.ok.message', {
-          default: "Relay ''{name}'' is updated",
-          values: { name: values.name },
-        }),
-        $_('notification.form.save.ok.title', { default: 'Save OK' }),
+  const _processForm = async (values, context) => {
+    validated = true;
+
+    if (context.form.checkValidity()) {
+      loading = true;
+      values = formToJSON(editForm);
+      values.address += '';
+
+      delete values.value;
+      delete values.dimmer;
+
+      // If all items of the calibration object are empty, then reset the complete calibration object.
+      if (!Object.values(values.calibration).some(Boolean)) {
+        values.calibration = {};
+      }
+
+      try {
+        // Post data
+        await updateRelay(values, (data) => (values = data));
+        // Notifify OK!
+        successNotification(
+          $_('relays.settings.save.ok.message', {
+            default: "Relay ''{name}'' is updated",
+            values: { name: values.name },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
+        );
+
+        // Done, close window
+        hide();
+
+        // Signal the save callback
+        successAction();
+
+        // TODO: Somehow, either the save signal callback or here, we have to reload the buttons
+      } catch (error) {
+        // Some kind of an error
+        loading = false;
+        errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+      } finally {
+        validated = false;
+      }
+    } else {
+      let error_message = $_('relays.settings.save.error.required_fields', {
+        default: 'Not all required fields are entered correctly.',
+      });
+      error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
+      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+    }
+  };
+
+  const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
+    onSubmit: _processForm,
+  });
+
+  const formSubmit = createSubmitHandler({
+    onSubmit: _processForm,
+  });
+
+  export const show = (relayId, cb) => {
+    // Anonymous (Async) functions always as first!!
+    (async () => {
+      // Load all avaliable hardware
+      await fetchRelaysHardware(
+        (data) =>
+          (hardware = data.map((item) => {
+            return { value: item.hardware, text: item.name };
+          })),
       );
 
-      // Done, close window
-      hide();
+      // If ID is given, load existing data
+      if (relayId) {
+        await fetchRelays(relayId, (data) => ($formData = data));
+        setFields($formData);
+      }
 
-      // Signal the save callback
-      successAction();
-
-      // TODO: Somehow, either the save signal callback or here, we have to reload the buttons
-    } catch (error) {
-      // Some kind of an error
+      // Loading done
       loading = false;
-      errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-    } finally {
-      validated = false;
-    }
-  } else {
-    let error_message = $_('relays.settings.save.error.required_fields', {
-      default: 'Not all required fields are entered correctly.',
-    });
-    error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
-    errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-  }
-};
+    })();
 
-const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
-  onSubmit: _processForm,
-});
+    // Reset form validation
+    reset();
+    $formData = formToJSON(editForm);
+    validated = false;
 
-const formSubmit = createSubmitHandler({
-  onSubmit: _processForm,
-});
+    // Toggle loading div
+    loading = true;
 
-export const show = (relayId, cb) => {
-  // Anonymous (Async) functions always as first!!
-  (async () => {
-    // Load all avaliable hardware
-    await fetchRelaysHardware(
-      (data) =>
-        (hardware = data.map((item) => {
-          return { value: item.hardware, text: item.name };
-        })),
-    );
+    // Show the modal
+    wrapper_show();
+  };
 
-    // If ID is given, load existing data
-    if (relayId) {
-      await fetchRelays(relayId, (data) => ($formData = data));
-      setFields($formData);
-    }
+  export const hide = () => {
+    // Delay the loading div
+    setTimeout(() => {
+      loading = false;
+    }, 1000);
 
-    // Loading done
-    loading = false;
-  })();
+    // Hide modal
+    wrapper_hide();
+  };
 
-  // Reset form validation
-  reset();
-  $formData = formToJSON(editForm);
-  validated = false;
-
-  // Toggle loading div
-  loading = true;
-
-  // Show the modal
-  wrapper_show();
-};
-
-export const hide = () => {
-  // Delay the loading div
-  setTimeout(() => {
-    loading = false;
-  }, 1000);
-
-  // Hide modal
-  wrapper_hide();
-};
-
-onMount(() => {
-  editForm.setAttribute('novalidate', 'novalidate');
-});
+  onMount(() => {
+    editForm.setAttribute('novalidate', 'novalidate');
+  });
 </script>
 
 <ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" {loading}>

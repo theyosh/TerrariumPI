@@ -1,32 +1,32 @@
 <style>
-div.user-panel {
-  overflow: visible;
-}
-div.image img.img-thumbnail {
-  width: 3rem;
-  max-width: none;
-}
-div.image img.christmashat {
-  position: absolute;
-  z-index: 1039;
-  width: 3rem;
-  left: 1rem;
-  top: -1rem;
-}
+  div.user-panel {
+    overflow: visible;
+  }
+  div.image img.img-thumbnail {
+    width: 3rem;
+    max-width: none;
+  }
+  div.image img.christmashat {
+    position: absolute;
+    z-index: 1039;
+    width: 3rem;
+    left: 1rem;
+    top: -1rem;
+  }
 </style>
 
 <script>
-import { _ } from 'svelte-i18n';
-import { getContext } from 'svelte';
+  import { _ } from 'svelte-i18n';
+  import { getContext } from 'svelte';
 
-import { isAuthenticated, doLogout } from '../../stores/authentication';
-import { default as currentUserStore } from '../../stores/current-user';
-import { getCustomConfig } from '../../config';
-import { ApiUrl } from '../../constants/urls';
-import LoginLink from '../common/LoginLink.svelte';
+  import { isAuthenticated, doLogout } from '../../stores/authentication';
+  import { default as currentUserStore } from '../../stores/current-user';
+  import { getCustomConfig } from '../../config';
+  import { ApiUrl } from '../../constants/urls';
+  import LoginLink from '../common/LoginLink.svelte';
 
-let settings = getCustomConfig();
-const { confirmModal } = getContext('confirm');
+  let settings = getCustomConfig();
+  const { confirmModal } = getContext('confirm');
 </script>
 
 <a href="/" class="brand-link">

@@ -1,30 +1,30 @@
 <script>
-import { getContext } from 'svelte';
-import { _, date, time } from 'svelte-i18n';
+  import { getContext } from 'svelte';
+  import { _, date, time } from 'svelte-i18n';
 
-import Card from '../user-controls/Card.svelte';
-import Button from '../components/common/Button.svelte';
-import Graph from '../components/common/Graph.svelte';
-import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
-import CardGraphPeriodTools from '../components/common/CardGraphPeriodTools.svelte';
+  import Card from '../user-controls/Card.svelte';
+  import Button from '../components/common/Button.svelte';
+  import Graph from '../components/common/Graph.svelte';
+  import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
+  import CardGraphPeriodTools from '../components/common/CardGraphPeriodTools.svelte';
 
-import { buttons } from '../stores/terrariumpi';
-import { exportGraphPeriod } from '../helpers/graph-helpers';
+  import { buttons } from '../stores/terrariumpi';
+  import { exportGraphPeriod } from '../helpers/graph-helpers';
 
-export let enableGraph = true;
-export let button;
+  export let enableGraph = true;
+  export let button;
 
-const { editButton } = getContext('modals');
-const { deleteAction, ignoreAction } = getContext('buttonActions');
+  const { editButton } = getContext('modals');
+  const { deleteAction, ignoreAction } = getContext('buttonActions');
 
-let exporting = false;
-const exportAction = async () => {
-  exporting = true;
-  await exportGraphPeriod('buttons', button.id);
-  exporting = false;
-};
+  let exporting = false;
+  const exportAction = async () => {
+    exporting = true;
+    await exportGraphPeriod('buttons', button.id);
+    exporting = false;
+  };
 
-$buttons[button.id] = button;
+  $buttons[button.id] = button;
 </script>
 
 {#if button}

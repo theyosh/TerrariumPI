@@ -1,313 +1,313 @@
 <script>
-import { onMount, createEventDispatcher, setContext, getContext } from 'svelte';
-import { writable } from 'svelte/store';
-import { _ } from 'svelte-i18n';
-import { createForm } from 'felte';
-import L from 'leaflet';
+  import { onMount, createEventDispatcher, setContext, getContext } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { _ } from 'svelte-i18n';
+  import { createForm } from 'felte';
+  import L from 'leaflet';
 
-import { sensors } from '../stores/terrariumpi';
-import { fetchRelays, fetchWebcams, fetchWebcamsHardware, updateWebcam } from '../providers/api';
-import { successNotification, errorNotification } from '../providers/notification-provider';
-import { getCustomConfig } from '../config';
-import { roundToPrecision } from '../helpers/number-helpers';
-import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
-import { ApiUrl } from '../constants/urls';
+  import { sensors } from '../stores/terrariumpi';
+  import { fetchRelays, fetchWebcams, fetchWebcamsHardware, updateWebcam } from '../providers/api';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { getCustomConfig } from '../config';
+  import { roundToPrecision } from '../helpers/number-helpers';
+  import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
+  import { ApiUrl } from '../constants/urls';
 
-import WebcamMarkerModal from '../modals/WebcamMarkerModal.svelte';
-import ModalForm from '../user-controls/ModalForm.svelte';
-import Webcam from '../components/common/Webcam.svelte';
-import Field from '../components/form/Field.svelte';
-import Helper from '../components/form/Helper.svelte';
-import Select from '../components/form/Select.svelte';
+  import WebcamMarkerModal from '../modals/WebcamMarkerModal.svelte';
+  import ModalForm from '../user-controls/ModalForm.svelte';
+  import Webcam from '../components/common/Webcam.svelte';
+  import Field from '../components/form/Field.svelte';
+  import Helper from '../components/form/Helper.svelte';
+  import Select from '../components/form/Select.svelte';
 
-const settings = getCustomConfig();
+  const settings = getCustomConfig();
 
-let wrapper_show;
-let wrapper_hide;
-let loading = false;
-let validated = false;
+  let wrapper_show;
+  let wrapper_hide;
+  let loading = false;
+  let validated = false;
 
-let hardware = [];
-let relays = [];
-let webcamMap = null;
+  let hardware = [];
+  let relays = [];
+  let webcamMap = null;
 
-let motion_settings = false; // Calibration is always enabled due to offset setting
-let hardware_type = null;
-let formData = writable({});
+  let motion_settings = false; // Calibration is always enabled due to offset setting
+  let hardware_type = null;
+  let formData = writable({});
 
-let markerModal;
-let editForm;
+  let markerModal;
+  let editForm;
 
-const rotations = [
-  { value: '0', text: $_('webcams.settings.rotation.options.degrees_0', { default: '0 degrees' }) },
-  { value: '90', text: $_('webcams.settings.rotation.options.degrees_90', { default: '90 degrees' }) },
-  { value: '180', text: $_('webcams.settings.rotation.options.degrees_180', { default: '180 degrees' }) },
-  { value: '270', text: $_('webcams.settings.rotation.options.degrees_270', { default: '270 degrees' }) },
-  { value: 'H', text: $_('webcams.settings.rotation.options.flip_h', { default: 'Flip horizontal' }) },
-  { value: 'V', text: $_('webcams.settings.rotation.options.flip_v', { default: 'Flip vertical' }) },
-];
+  const rotations = [
+    { value: '0', text: $_('webcams.settings.rotation.options.degrees_0', { default: '0 degrees' }) },
+    { value: '90', text: $_('webcams.settings.rotation.options.degrees_90', { default: '90 degrees' }) },
+    { value: '180', text: $_('webcams.settings.rotation.options.degrees_180', { default: '180 degrees' }) },
+    { value: '270', text: $_('webcams.settings.rotation.options.degrees_270', { default: '270 degrees' }) },
+    { value: 'H', text: $_('webcams.settings.rotation.options.flip_h', { default: 'Flip horizontal' }) },
+    { value: 'V', text: $_('webcams.settings.rotation.options.flip_v', { default: 'Flip vertical' }) },
+  ];
 
-const white_balances = [
-  { value: 'off', text: $_('webcams.settings.awb.options.off', { default: 'Off' }) },
-  { value: 'auto', text: $_('webcams.settings.awb.options.auto', { default: 'Off' }) },
-  { value: 'sunlight', text: $_('webcams.settings.awb.options.sunlight', { default: 'Sunlight' }) },
-  { value: 'cloudy', text: $_('webcams.settings.awb.options.cloudy', { default: 'Cloudy' }) },
-  { value: 'shade', text: $_('webcams.settings.awb.options.shade', { default: 'Shade' }) },
-  { value: 'tungsten', text: $_('webcams.settings.awb.options.tungsten', { default: 'Tungsten' }) },
-  { value: 'fluorescent', text: $_('webcams.settings.awb.options.fluorescent', { default: 'Fluorescent' }) },
-  { value: 'incandescent', text: $_('webcams.settings.awb.options.incandescent', { default: 'Incandescent' }) },
-  { value: 'flash', text: $_('webcams.settings.awb.options.flash', { default: 'Flash' }) },
-  { value: 'horizon', text: $_('webcams.settings.awb.options.horizon', { default: 'Horizon' }) },
-  { value: 'greyworld', text: $_('webcams.settings.awb.options.greyworld', { default: 'Greyworld' }) },
-];
+  const white_balances = [
+    { value: 'off', text: $_('webcams.settings.awb.options.off', { default: 'Off' }) },
+    { value: 'auto', text: $_('webcams.settings.awb.options.auto', { default: 'Off' }) },
+    { value: 'sunlight', text: $_('webcams.settings.awb.options.sunlight', { default: 'Sunlight' }) },
+    { value: 'cloudy', text: $_('webcams.settings.awb.options.cloudy', { default: 'Cloudy' }) },
+    { value: 'shade', text: $_('webcams.settings.awb.options.shade', { default: 'Shade' }) },
+    { value: 'tungsten', text: $_('webcams.settings.awb.options.tungsten', { default: 'Tungsten' }) },
+    { value: 'fluorescent', text: $_('webcams.settings.awb.options.fluorescent', { default: 'Fluorescent' }) },
+    { value: 'incandescent', text: $_('webcams.settings.awb.options.incandescent', { default: 'Incandescent' }) },
+    { value: 'flash', text: $_('webcams.settings.awb.options.flash', { default: 'Flash' }) },
+    { value: 'horizon', text: $_('webcams.settings.awb.options.horizon', { default: 'Horizon' }) },
+    { value: 'greyworld', text: $_('webcams.settings.awb.options.greyworld', { default: 'Greyworld' }) },
+  ];
 
-const archiving = [
-  { value: 'disabled', text: $_('webcams.settings.archive.options.disabled', { default: 'Disabled' }) },
-  { value: 'motion', text: $_('webcams.settings.archive.options.motion', { default: 'Motion' }) },
-  { value: '60', text: $_('webcams.settings.archive.options.minute_1', { default: '1 Minute' }) },
-  { value: '300', text: $_('webcams.settings.archive.options.minute_5', { default: '5 Minutes' }) },
-  { value: '900', text: $_('webcams.settings.archive.options.minute_15', { default: '15 Minutes' }) },
-  { value: '1800', text: $_('webcams.settings.archive.options.minute_30', { default: '30 Minutes' }) },
-  { value: '3600', text: $_('webcams.settings.archive.options.hour_1', { default: 'Disabled' }) },
-  { value: '10800', text: $_('webcams.settings.archive.options.hour_3', { default: '3 Hours' }) },
-  { value: '21600', text: $_('webcams.settings.archive.options.hour_6', { default: '6 Hours' }) },
-  { value: '43200', text: $_('webcams.settings.archive.options.hour_12', { default: '12 Hours' }) },
-  { value: '86400', text: $_('webcams.settings.archive.options.day_1', { default: '1 Day' }) },
-];
+  const archiving = [
+    { value: 'disabled', text: $_('webcams.settings.archive.options.disabled', { default: 'Disabled' }) },
+    { value: 'motion', text: $_('webcams.settings.archive.options.motion', { default: 'Motion' }) },
+    { value: '60', text: $_('webcams.settings.archive.options.minute_1', { default: '1 Minute' }) },
+    { value: '300', text: $_('webcams.settings.archive.options.minute_5', { default: '5 Minutes' }) },
+    { value: '900', text: $_('webcams.settings.archive.options.minute_15', { default: '15 Minutes' }) },
+    { value: '1800', text: $_('webcams.settings.archive.options.minute_30', { default: '30 Minutes' }) },
+    { value: '3600', text: $_('webcams.settings.archive.options.hour_1', { default: 'Disabled' }) },
+    { value: '10800', text: $_('webcams.settings.archive.options.hour_3', { default: '3 Hours' }) },
+    { value: '21600', text: $_('webcams.settings.archive.options.hour_6', { default: '6 Hours' }) },
+    { value: '43200', text: $_('webcams.settings.archive.options.hour_12', { default: '12 Hours' }) },
+    { value: '86400', text: $_('webcams.settings.archive.options.day_1', { default: '1 Day' }) },
+  ];
 
-const { confirmModal } = getContext('confirm');
-const dispatch = createEventDispatcher();
+  const { confirmModal } = getContext('confirm');
+  const dispatch = createEventDispatcher();
 
-const successAction = () => {
-  dispatch('save');
-};
+  const successAction = () => {
+    dispatch('save');
+  };
 
-// Dummy needed for Webcam.svelte
-setContext('loading', {
-  setLoading: (state) => {},
-});
+  // Dummy needed for Webcam.svelte
+  setContext('loading', {
+    setLoading: (state) => {},
+  });
 
-const setMarker = (data) => {
-  if (data.markerid) {
-    // Update
-    let marker = _get_marker(data.markerid);
-    marker.options.sensors = data.sensors;
-    marker._tooltip.setContent(_update_marker_tooltip(data.sensors));
-  } else {
-    // add
-    L.marker([0, 0], {
-      draggable: true,
-      icon: L.icon(webcamMap.iconOptions),
-      sensors: data.sensors,
-    })
-      .on('move', markerLocations)
-      .on('dblclick', markerModal.show)
-      .bindTooltip(_update_marker_tooltip(data.sensors), webcamMap.toolTipOptions)
-      .addTo(webcamMap.getWebcamMap());
-  }
-  markerLocations();
-};
-
-const deleteMarker = (id) => {
-  let marker = _get_marker(id);
-  if (marker) {
-    confirmModal($_('webcams.marker.delete.confirm.message'), async () => {
-      try {
-        webcamMap.getWebcamMap().removeLayer(marker);
-        markerModal.hide();
-        markerLocations();
-      } catch (e) {
-        errorNotification($_('webcams.marker.delete.error.message'), $_('notification.delete.error.title'));
-      }
-    });
-  } else {
-    errorNotification($_('webcams.marker.delete.invalid.message'), $_('notification.delete.invalid.title'));
-  }
-};
-
-const _update_marker_tooltip = (all_sensors) => {
-  return (
-    `<div><strong>${$sensors[all_sensors[0]].name}</strong><br />` +
-    all_sensors
-      .map((item) => {
-        return (
-          `${settings.units[$sensors[item].type].name.toLowerCase().slice(0, 4)} ` +
-          `${roundToPrecision($sensors[item].value)} ` +
-          `${settings.units[$sensors[item].type].value}`
-        );
+  const setMarker = (data) => {
+    if (data.markerid) {
+      // Update
+      let marker = _get_marker(data.markerid);
+      marker.options.sensors = data.sensors;
+      marker._tooltip.setContent(_update_marker_tooltip(data.sensors));
+    } else {
+      // add
+      L.marker([0, 0], {
+        draggable: true,
+        icon: L.icon(webcamMap.iconOptions),
+        sensors: data.sensors,
       })
-      .join('<br />') +
-    '</div>'
-  );
-};
-
-const _get_marker = (id) => {
-  let item = null;
-  webcamMap.getWebcamMap().eachLayer((layer) => {
-    if (item === null && layer instanceof L.Marker) {
-      if (id === layer._leaflet_id) {
-        item = layer;
-      }
+        .on('move', markerLocations)
+        .on('dblclick', markerModal.show)
+        .bindTooltip(_update_marker_tooltip(data.sensors), webcamMap.toolTipOptions)
+        .addTo(webcamMap.getWebcamMap());
     }
-  });
-  return item;
-};
+    markerLocations();
+  };
 
-const markerLocations = () => {
-  let markers = [];
-  webcamMap.getWebcamMap().eachLayer((layer) => {
-    if (layer instanceof L.Marker) {
-      markers.push({
-        lat: layer.getLatLng().lat,
-        long: layer.getLatLng().lng,
-        sensors: layer.options.sensors,
+  const deleteMarker = (id) => {
+    let marker = _get_marker(id);
+    if (marker) {
+      confirmModal($_('webcams.marker.delete.confirm.message'), async () => {
+        try {
+          webcamMap.getWebcamMap().removeLayer(marker);
+          markerModal.hide();
+          markerLocations();
+        } catch (e) {
+          errorNotification($_('webcams.marker.delete.error.message'), $_('notification.delete.error.title'));
+        }
       });
+    } else {
+      errorNotification($_('webcams.marker.delete.invalid.message'), $_('notification.delete.invalid.title'));
     }
-  });
-  editForm.elements['markers'].value = JSON.stringify(markers);
-};
+  };
 
-setContext('webcamMarker', {
-  showModal: (marker) => markerModal.show(marker),
-  setMarker: (marker) => setMarker(marker),
-  deleteMarker: (marker) => deleteMarker(marker),
-  markerLocations: () => markerLocations(),
-});
+  const _update_marker_tooltip = (all_sensors) => {
+    return (
+      `<div><strong>${$sensors[all_sensors[0]].name}</strong><br />` +
+      all_sensors
+        .map((item) => {
+          return (
+            `${settings.units[$sensors[item].type].name.toLowerCase().slice(0, 4)} ` +
+            `${roundToPrecision($sensors[item].value)} ` +
+            `${settings.units[$sensors[item].type].value}`
+          );
+        })
+        .join('<br />') +
+      '</div>'
+    );
+  };
 
-const hardwareType = (device) => {
-  hardware_type = device;
-
-  if (!editForm.elements) {
-    return;
-  }
-
-  switch (device) {
-    case 'rpicam':
-      editForm.elements['address'].value = 'rpicam';
-      editForm.elements['width'].value = 3280;
-      editForm.elements['height'].value = 2464;
-      break;
-    case 'rpicam-live':
-      editForm.elements['address'].value = 'rpicam_live';
-      editForm.elements['width'].value = 1920;
-      editForm.elements['height'].value = 1080;
-      break;
-  }
-};
-
-const archivingCalibration = (state) => {
-  motion_settings = state === 'motion';
-};
-
-const _processForm = async (values, context) => {
-  validated = true;
-
-  if (context.form.checkValidity()) {
-    loading = true;
-    values = formToJSON(editForm);
-
-    // Make some fields exclusive string values
-    values.address += '';
-    values.rotation += '';
-
-    delete values.value;
-
-    try {
-      values.markers = JSON.parse(values.markers);
-    } catch (error) {
-      values.markers = [];
-    }
-
-    try {
-      // Post data
-      await updateWebcam(values, (data) => (values = data));
-
-      // Notify OK!
-      successNotification(
-        $_('webcams.settings.save.ok.message', {
-          default: "Webcam ''{name}'' is updated",
-          values: { name: values.name },
-        }),
-        $_('notification.form.save.ok.title', { default: 'Save OK' }),
-      );
-
-      // Done, close window
-      hide();
-
-      // Signal the save callback
-      successAction();
-    } catch (error) {
-      // Some kind of an error
-      loading = false;
-      errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-    } finally {
-      // Cleanup
-      validated = false;
-    }
-  } else {
-    let error_message = $_('webcams.settings.save.error.required_fields', {
-      default: 'Not all required fields are entered correctly.',
+  const _get_marker = (id) => {
+    let item = null;
+    webcamMap.getWebcamMap().eachLayer((layer) => {
+      if (item === null && layer instanceof L.Marker) {
+        if (id === layer._leaflet_id) {
+          item = layer;
+        }
+      }
     });
-    error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
-    errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-  }
-};
+    return item;
+  };
 
-const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
-  onSubmit: _processForm,
-});
+  const markerLocations = () => {
+    let markers = [];
+    webcamMap.getWebcamMap().eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        markers.push({
+          lat: layer.getLatLng().lat,
+          long: layer.getLatLng().lng,
+          sensors: layer.options.sensors,
+        });
+      }
+    });
+    editForm.elements['markers'].value = JSON.stringify(markers);
+  };
 
-const formSubmit = createSubmitHandler({
-  onSubmit: _processForm,
-});
+  setContext('webcamMarker', {
+    showModal: (marker) => markerModal.show(marker),
+    setMarker: (marker) => setMarker(marker),
+    deleteMarker: (marker) => deleteMarker(marker),
+    markerLocations: () => markerLocations(),
+  });
 
-export const show = (webcamId, cb) => {
-  // Anonymous (Async) functions always as first!!
-  (async () => {
-    await fetchRelays(
-      false,
-      (data) =>
-        (relays = data.map((item) => {
-          return { value: item.hardware, text: item.name };
-        })),
-    );
-    // Load all avaliable hardware
-    await fetchWebcamsHardware(
-      (data) =>
-        (hardware = data.map((item) => {
-          return { value: item.hardware, text: item.name };
-        })),
-    );
-    // If ID is given, load existing data
-    if (webcamId) {
-      await fetchWebcams(webcamId, (data) => ($formData = data));
-      setFields($formData);
+  const hardwareType = (device) => {
+    hardware_type = device;
+
+    if (!editForm.elements) {
+      return;
     }
 
-    // Loading done
-    loading = false;
-  })();
+    switch (device) {
+      case 'rpicam':
+        editForm.elements['address'].value = 'rpicam';
+        editForm.elements['width'].value = 3280;
+        editForm.elements['height'].value = 2464;
+        break;
+      case 'rpicam-live':
+        editForm.elements['address'].value = 'rpicam_live';
+        editForm.elements['width'].value = 1920;
+        editForm.elements['height'].value = 1080;
+        break;
+    }
+  };
 
-  // Reset form validation
-  reset();
-  $formData = formToJSON(editForm);
-  validated = false;
+  const archivingCalibration = (state) => {
+    motion_settings = state === 'motion';
+  };
 
-  // Toggle loading div
-  loading = true;
+  const _processForm = async (values, context) => {
+    validated = true;
 
-  // Show the modal
-  wrapper_show();
-};
+    if (context.form.checkValidity()) {
+      loading = true;
+      values = formToJSON(editForm);
 
-export const hide = () => {
-  // Hide modal
-  wrapper_hide();
-};
+      // Make some fields exclusive string values
+      values.address += '';
+      values.rotation += '';
 
-onMount(() => {
-  editForm.setAttribute('novalidate', 'novalidate');
-});
+      delete values.value;
+
+      try {
+        values.markers = JSON.parse(values.markers);
+      } catch (error) {
+        values.markers = [];
+      }
+
+      try {
+        // Post data
+        await updateWebcam(values, (data) => (values = data));
+
+        // Notify OK!
+        successNotification(
+          $_('webcams.settings.save.ok.message', {
+            default: "Webcam ''{name}'' is updated",
+            values: { name: values.name },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
+        );
+
+        // Done, close window
+        hide();
+
+        // Signal the save callback
+        successAction();
+      } catch (error) {
+        // Some kind of an error
+        loading = false;
+        errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+      } finally {
+        // Cleanup
+        validated = false;
+      }
+    } else {
+      let error_message = $_('webcams.settings.save.error.required_fields', {
+        default: 'Not all required fields are entered correctly.',
+      });
+      error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
+      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+    }
+  };
+
+  const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
+    onSubmit: _processForm,
+  });
+
+  const formSubmit = createSubmitHandler({
+    onSubmit: _processForm,
+  });
+
+  export const show = (webcamId, cb) => {
+    // Anonymous (Async) functions always as first!!
+    (async () => {
+      await fetchRelays(
+        false,
+        (data) =>
+          (relays = data.map((item) => {
+            return { value: item.hardware, text: item.name };
+          })),
+      );
+      // Load all avaliable hardware
+      await fetchWebcamsHardware(
+        (data) =>
+          (hardware = data.map((item) => {
+            return { value: item.hardware, text: item.name };
+          })),
+      );
+      // If ID is given, load existing data
+      if (webcamId) {
+        await fetchWebcams(webcamId, (data) => ($formData = data));
+        setFields($formData);
+      }
+
+      // Loading done
+      loading = false;
+    })();
+
+    // Reset form validation
+    reset();
+    $formData = formToJSON(editForm);
+    validated = false;
+
+    // Toggle loading div
+    loading = true;
+
+    // Show the modal
+    wrapper_show();
+  };
+
+  export const hide = () => {
+    // Hide modal
+    wrapper_hide();
+  };
+
+  onMount(() => {
+    editForm.setAttribute('novalidate', 'novalidate');
+  });
 </script>
 
 <ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" {loading}>

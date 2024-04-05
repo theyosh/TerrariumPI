@@ -1,70 +1,70 @@
 <script>
-import { Modal } from '@keenmate/svelte-adminlte';
-import { onMount, getContext } from 'svelte';
-import { _ } from 'svelte-i18n';
-import { createForm } from 'felte';
+  import { Modal } from '@keenmate/svelte-adminlte';
+  import { onMount, getContext } from 'svelte';
+  import { _ } from 'svelte-i18n';
+  import { createForm } from 'felte';
 
-import { errorNotification } from '../providers/notification-provider';
-import { updateSensor } from '../stores/terrariumpi';
-import { fetchSensors } from '../providers/api';
-import { formToJSON } from '../helpers/form-helpers';
+  import { errorNotification } from '../providers/notification-provider';
+  import { updateSensor } from '../stores/terrariumpi';
+  import { fetchSensors } from '../providers/api';
+  import { formToJSON } from '../helpers/form-helpers';
 
-import Helper from '../components/form/Helper.svelte';
-import Select from '../components/form/Select.svelte';
+  import Helper from '../components/form/Helper.svelte';
+  import Select from '../components/form/Select.svelte';
 
-let modal;
-let editForm;
+  let modal;
+  let editForm;
 
-let validated = false;
-let sensors = [];
-let selected = [];
+  let validated = false;
+  let sensors = [];
+  let selected = [];
 
-let edit = false;
+  let edit = false;
 
-const { setMarker, deleteMarker } = getContext('webcamMarker');
+  const { setMarker, deleteMarker } = getContext('webcamMarker');
 
-const _processForm = async (values, context) => {
-  validated = true;
-  if (context.form.checkValidity()) {
-    values = formToJSON(editForm);
-    setMarker(values);
-    hide();
-  } else {
-    errorNotification('Error saving markers', 'ERROR');
-  }
-};
+  const _processForm = async (values, context) => {
+    validated = true;
+    if (context.form.checkValidity()) {
+      values = formToJSON(editForm);
+      setMarker(values);
+      hide();
+    } else {
+      errorNotification('Error saving markers', 'ERROR');
+    }
+  };
 
-const { form, isSubmitting, createSubmitHandler } = createForm({
-  onSubmit: _processForm,
-});
-
-const formSubmit = createSubmitHandler({
-  onSubmit: _processForm,
-});
-
-export const show = (marker) => {
-  edit = marker ? true : false;
-  selected = edit ? marker.target.options.sensors : [];
-  editForm.elements['markerid'].value = edit ? marker.target._leaflet_id : '';
-
-  fetchSensors(false, (data) => {
-    sensors = data.map((item) => {
-      updateSensor(item);
-      return { value: item.id, text: item.name };
-    });
+  const { form, isSubmitting, createSubmitHandler } = createForm({
+    onSubmit: _processForm,
   });
 
-  validated = false;
-  modal.show();
-};
+  const formSubmit = createSubmitHandler({
+    onSubmit: _processForm,
+  });
 
-export const hide = () => {
-  modal.hide();
-};
+  export const show = (marker) => {
+    edit = marker ? true : false;
+    selected = edit ? marker.target.options.sensors : [];
+    editForm.elements['markerid'].value = edit ? marker.target._leaflet_id : '';
 
-onMount(() => {
-  editForm.setAttribute('novalidate', 'novalidate');
-});
+    fetchSensors(false, (data) => {
+      sensors = data.map((item) => {
+        updateSensor(item);
+        return { value: item.id, text: item.name };
+      });
+    });
+
+    validated = false;
+    modal.show();
+  };
+
+  export const hide = () => {
+    modal.hide();
+  };
+
+  onMount(() => {
+    editForm.setAttribute('novalidate', 'novalidate');
+  });
 </script>
 
 <Modal bind:this="{modal}">

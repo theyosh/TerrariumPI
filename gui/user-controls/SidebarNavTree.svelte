@@ -1,6 +1,6 @@
 <script>
-export let href = '#';
-export let icon;
+  export let href = '#';
+  export let icon;
 </script>
 
 <li class="nav-item">

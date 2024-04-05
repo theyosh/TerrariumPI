@@ -1,87 +1,87 @@
 <script>
-import { onDestroy, onMount, getContext } from 'svelte';
-import { _ } from 'svelte-i18n';
-import { PageHeader } from '@keenmate/svelte-adminlte';
-import { dayjs } from 'svelte-time';
-import duration from 'dayjs/esm/plugin/duration';
-dayjs.extend(duration);
+  import { onDestroy, onMount, getContext } from 'svelte';
+  import { _ } from 'svelte-i18n';
+  import { PageHeader } from '@keenmate/svelte-adminlte';
+  import { dayjs } from 'svelte-time';
+  import duration from 'dayjs/esm/plugin/duration';
+  dayjs.extend(duration);
 
-import { locale } from '../locale/i18n';
-import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
-import { isAuthenticated } from '../stores/authentication';
-import { fetchPlaylists, deletePlaylist } from '../providers/api';
-import { successNotification, errorNotification } from '../providers/notification-provider';
-import { isDay } from '../stores/terrariumpi';
-import { DataTablesLanguageUrl } from '../constants/urls';
+  import { locale } from '../locale/i18n';
+  import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
+  import { isAuthenticated } from '../stores/authentication';
+  import { fetchPlaylists, deletePlaylist } from '../providers/api';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { isDay } from '../stores/terrariumpi';
+  import { DataTablesLanguageUrl } from '../constants/urls';
 
-import Card from '../user-controls/Card.svelte';
+  import Card from '../user-controls/Card.svelte';
 
-const { editPlaylist } = getContext('modals');
+  const { editPlaylist } = getContext('modals');
 
-const loadData = async () => {
-  loading = true;
-  if (dataTable) {
-    dataTable.destroy();
-  }
-  await fetchPlaylists(false, (data) => (playlists = data));
-  dataTable = jQuery('#playlists').DataTable({
-    language: {
-      url: `${DataTablesLanguageUrl}/${$locale}.json`,
-    },
-    columnDefs: [
-      {
-        targets: 'no-sort',
-        orderable: false,
+  const loadData = async () => {
+    loading = true;
+    if (dataTable) {
+      dataTable.destroy();
+    }
+    await fetchPlaylists(false, (data) => (playlists = data));
+    dataTable = jQuery('#playlists').DataTable({
+      language: {
+        url: `${DataTablesLanguageUrl}/${$locale}.json`,
       },
-    ],
+      columnDefs: [
+        {
+          targets: 'no-sort',
+          orderable: false,
+        },
+      ],
+    });
+    loading = false;
+  };
+
+  const { confirmModal } = getContext('confirm');
+
+  const deletePlaylistAction = (playlist) => {
+    confirmModal(
+      $_('audio.playlists.delete.confirm.message', {
+        default: "Are you sure to delete the playlist ''{name}'' with {length} numbers?",
+        values: { name: playlist.name, length: playlist.length },
+      }),
+      async () => {
+        try {
+          await deletePlaylist(playlist.id);
+          successNotification(
+            $_('audio.playlists.delete.ok.message', {
+              default: "The playlist ''{name}'' is deleted.",
+              values: { name: playlist.name },
+            }),
+            $_('notification.delete.ok.title'),
+          );
+          loadData();
+        } catch (e) {
+          errorNotification(
+            $_('audio.playlists.delete.error.message', {
+              default: "The playlist ''{name}'' could not be deleted!\nError: {error}",
+              values: { name: playlist.name, error: e.message },
+            }),
+            $_('notification.delete.error.title'),
+          );
+        }
+      },
+    );
+  };
+
+  let playlists = [];
+  let loading = true;
+  let dataTable;
+
+  onMount(() => {
+    setCustomPageTitle($_('audio.playlists.title', { default: 'Playlists' }));
+    loadData();
   });
-  loading = false;
-};
 
-const { confirmModal } = getContext('confirm');
-
-const deletePlaylistAction = (playlist) => {
-  confirmModal(
-    $_('audio.playlists.delete.confirm.message', {
-      default: "Are you sure to delete the playlist ''{name}'' with {length} numbers?",
-      values: { name: playlist.name, length: playlist.length },
-    }),
-    async () => {
-      try {
-        await deletePlaylist(playlist.id);
-        successNotification(
-          $_('audio.playlists.delete.ok.message', {
-            default: "The playlist ''{name}'' is deleted.",
-            values: { name: playlist.name },
-          }),
-          $_('notification.delete.ok.title'),
-        );
-        loadData();
-      } catch (e) {
-        errorNotification(
-          $_('audio.playlists.delete.error.message', {
-            default: "The playlist ''{name}'' could not be deleted!\nError: {error}",
-            values: { name: playlist.name, error: e.message },
-          }),
-          $_('notification.delete.error.title'),
-        );
-      }
-    },
-  );
-};
-
-let playlists = [];
-let loading = true;
-let dataTable;
-
-onMount(() => {
-  setCustomPageTitle($_('audio.playlists.title', { default: 'Playlists' }));
-  loadData();
-});
-
-onDestroy(() => {
-  customPageTitleUsed.set(false);
-});
+  onDestroy(() => {
+    customPageTitleUsed.set(false);
+  });
 </script>
 
 <PageHeader>

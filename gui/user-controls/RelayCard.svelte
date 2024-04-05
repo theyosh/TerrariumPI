@@ -1,31 +1,31 @@
 <script>
-import { getContext } from 'svelte';
-import { _, date, time } from 'svelte-i18n';
+  import { getContext } from 'svelte';
+  import { _, date, time } from 'svelte-i18n';
 
-import { template_sensor_type_icon } from '../helpers/icon-helpers';
-import { relays, updateRelay } from '../stores/terrariumpi';
-import { exportGraphPeriod } from '../helpers/graph-helpers';
+  import { template_sensor_type_icon } from '../helpers/icon-helpers';
+  import { relays, updateRelay } from '../stores/terrariumpi';
+  import { exportGraphPeriod } from '../helpers/graph-helpers';
 
-import Card from '../user-controls/Card.svelte';
-import Relay from '../components/common/Relay.svelte';
-import Graph from '../components/common/Graph.svelte';
-import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
-import CardGraphPeriodTools from '../components/common/CardGraphPeriodTools.svelte';
+  import Card from '../user-controls/Card.svelte';
+  import Relay from '../components/common/Relay.svelte';
+  import Graph from '../components/common/Graph.svelte';
+  import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
+  import CardGraphPeriodTools from '../components/common/CardGraphPeriodTools.svelte';
 
-export let enableGraph = true;
-export let relay;
+  export let enableGraph = true;
+  export let relay;
 
-const { editRelay } = getContext('modals');
-const { deleteAction, ignoreAction, replaceAction, manualAction } = getContext('relayActions');
+  const { editRelay } = getContext('modals');
+  const { deleteAction, ignoreAction, replaceAction, manualAction } = getContext('relayActions');
 
-let exporting = false;
-const exportAction = async () => {
-  exporting = true;
-  await exportGraphPeriod('relays', relay.id);
-  exporting = false;
-};
+  let exporting = false;
+  const exportAction = async () => {
+    exporting = true;
+    await exportGraphPeriod('relays', relay.id);
+    exporting = false;
+  };
 
-$: updateRelay(relay);
+  $: updateRelay(relay);
 </script>
 
 {#if relay}

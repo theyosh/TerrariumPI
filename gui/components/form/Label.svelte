@@ -1,7 +1,7 @@
 <script>
-export let id;
-export let label = null;
-export let required = false;
+  export let id;
+  export let label = null;
+  export let required = false;
 </script>
 
 <label for="{id}" class="col col-form-label text-truncate"

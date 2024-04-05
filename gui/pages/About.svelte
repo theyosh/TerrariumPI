@@ -1,22 +1,22 @@
 <script>
-import { onMount, onDestroy } from 'svelte';
-import { PageHeader } from '@keenmate/svelte-adminlte';
-import { _ } from 'svelte-i18n';
+  import { onMount, onDestroy } from 'svelte';
+  import { PageHeader } from '@keenmate/svelte-adminlte';
+  import { _ } from 'svelte-i18n';
 
-import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
-import { getCustomConfig } from '../config';
+  import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
+  import { getCustomConfig } from '../config';
 
-import Card from '../user-controls/Card.svelte';
+  import Card from '../user-controls/Card.svelte';
 
-let settings = getCustomConfig();
+  let settings = getCustomConfig();
 
-onMount(() => {
-  setCustomPageTitle($_('about.title', { default: 'About' }));
-});
+  onMount(() => {
+    setCustomPageTitle($_('about.title', { default: 'About' }));
+  });
 
-onDestroy(() => {
-  customPageTitleUsed.set(false);
-});
+  onDestroy(() => {
+    customPageTitleUsed.set(false);
+  });
 </script>
 
 <PageHeader>

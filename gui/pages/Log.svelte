@@ -1,109 +1,109 @@
 <style>
-textarea {
-  font-size: 0.8rem;
-}
+  textarea {
+    font-size: 0.8rem;
+  }
 </style>
 
 <script>
-import { _ } from 'svelte-i18n';
-import { onMount, onDestroy } from 'svelte';
-import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
-import { date, time } from 'svelte-i18n';
+  import { _ } from 'svelte-i18n';
+  import { onMount, onDestroy } from 'svelte';
+  import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
+  import { date, time } from 'svelte-i18n';
 
-import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
-import { last_log_line } from '../stores/terrariumpi';
-import { fetchLoglines } from '../providers/api';
-import { isAuthenticated } from '../stores/authentication';
+  import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
+  import { last_log_line } from '../stores/terrariumpi';
+  import { fetchLoglines } from '../providers/api';
+  import { isAuthenticated } from '../stores/authentication';
 
-let text_filter,
-  error_filter,
-  warning_filter = null;
-let logdata,
-  filtered_logdata = '';
-let last_change = new Date();
-let lines_counter = 0;
-let downloading = false;
+  let text_filter,
+    error_filter,
+    warning_filter = null;
+  let logdata,
+    filtered_logdata = '';
+  let last_change = new Date();
+  let lines_counter = 0;
+  let downloading = false;
 
-const show_log_lines = (new_line, text_filter, error_filter, warning_filter) => {
-  if (!logdata || logdata === undefined || logdata === '') {
-    return;
-  }
-
-  if (new_line) {
-    logdata = new_line + '\n' + logdata;
-    last_log_line.set('');
-  }
-
-  text_filter = text_filter || '';
-
-  let filters = [];
-  if (error_filter) {
-    filters.push('ERROR');
-  }
-  if (warning_filter) {
-    filters.push('WARNING');
-  }
-
-  if (text_filter !== '' || filters.length > 0) {
-    if (text_filter !== '' && filters.length > 0) {
-      text_filter =
-        '(.*' +
-        text_filter +
-        '.*\\s+-\\s+(' +
-        filters.join('|') +
-        ')\\s+-\\s+' +
-        ')|(.*\\s+-\\s+(' +
-        filters.join('|') +
-        ')\\s+-\\s+.*' +
-        text_filter +
-        '.*)';
-    } else if (text_filter === '' || filters.length > 0) {
-      text_filter = '\\s+-\\s+(' + filters.join('|') + ')\\s+-';
+  const show_log_lines = (new_line, text_filter, error_filter, warning_filter) => {
+    if (!logdata || logdata === undefined || logdata === '') {
+      return;
     }
 
-    text_filter = new RegExp('^.*' + text_filter + '.*', 'img');
-    filtered_logdata = logdata.match(text_filter);
+    if (new_line) {
+      logdata = new_line + '\n' + logdata;
+      last_log_line.set('');
+    }
 
-    if (filtered_logdata !== null) {
-      filtered_logdata = filtered_logdata.join('\n').trim();
+    text_filter = text_filter || '';
+
+    let filters = [];
+    if (error_filter) {
+      filters.push('ERROR');
+    }
+    if (warning_filter) {
+      filters.push('WARNING');
+    }
+
+    if (text_filter !== '' || filters.length > 0) {
+      if (text_filter !== '' && filters.length > 0) {
+        text_filter =
+          '(.*' +
+          text_filter +
+          '.*\\s+-\\s+(' +
+          filters.join('|') +
+          ')\\s+-\\s+' +
+          ')|(.*\\s+-\\s+(' +
+          filters.join('|') +
+          ')\\s+-\\s+.*' +
+          text_filter +
+          '.*)';
+      } else if (text_filter === '' || filters.length > 0) {
+        text_filter = '\\s+-\\s+(' + filters.join('|') + ')\\s+-';
+      }
+
+      text_filter = new RegExp('^.*' + text_filter + '.*', 'img');
+      filtered_logdata = logdata.match(text_filter);
+
+      if (filtered_logdata !== null) {
+        filtered_logdata = filtered_logdata.join('\n').trim();
+      } else {
+        filtered_logdata = '';
+      }
     } else {
-      filtered_logdata = '';
+      text_filter = false;
+      filtered_logdata = logdata;
     }
-  } else {
-    text_filter = false;
-    filtered_logdata = logdata;
-  }
 
-  lines_counter = (filtered_logdata.match(/\n/g) || []).length;
-  lines_counter = lines_counter > 0 ? lines_counter++ : lines_counter; // Add extra lastline if there are more then 0 lines
-  last_change = new Date();
-};
+    lines_counter = (filtered_logdata.match(/\n/g) || []).length;
+    lines_counter = lines_counter > 0 ? lines_counter++ : lines_counter; // Add extra lastline if there are more then 0 lines
+    last_change = new Date();
+  };
 
-const download_logfile = async () => {
-  downloading = true;
+  const download_logfile = async () => {
+    downloading = true;
 
-  const filename = 'terrariumpi_logfile.txt';
-  let loglines = '';
-  await fetchLoglines((data) => (loglines = data));
+    const filename = 'terrariumpi_logfile.txt';
+    let loglines = '';
+    await fetchLoglines((data) => (loglines = data));
 
-  const link = document.createElement('a');
-  link.href = window.URL.createObjectURL(new Blob([loglines]));
-  link.download = filename;
-  link.click();
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(new Blob([loglines]));
+    link.download = filename;
+    link.click();
 
-  downloading = false;
-};
+    downloading = false;
+  };
 
-onMount(() => {
-  setCustomPageTitle($_('system.log.title', { default: 'System logging' }));
-  fetchLoglines((data) => (logdata = data.split('\n').reverse().join('\n').trim()), true);
-});
+  onMount(() => {
+    setCustomPageTitle($_('system.log.title', { default: 'System logging' }));
+    fetchLoglines((data) => (logdata = data.split('\n').reverse().join('\n').trim()), true);
+  });
 
-onDestroy(() => {
-  customPageTitleUsed.set(false);
-});
+  onDestroy(() => {
+    customPageTitleUsed.set(false);
+  });
 
-$: show_log_lines($last_log_line, text_filter, error_filter, warning_filter);
+  $: show_log_lines($last_log_line, text_filter, error_filter, warning_filter);
 </script>
 
 <PageHeader>

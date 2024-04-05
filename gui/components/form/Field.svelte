@@ -1,26 +1,26 @@
 <script>
-import FormGroup from './FormGroup.svelte';
-import { getRandomString } from '../../helpers/string-helpers';
+  import FormGroup from './FormGroup.svelte';
+  import { getRandomString } from '../../helpers/string-helpers';
 
-export let type;
+  export let type;
 
-export let name;
-export let id = name + getRandomString(6); // Create a unique ID
-export let label = null;
-export let placeholder = label;
+  export let name;
+  export let id = name + getRandomString(6); // Create a unique ID
+  export let label = null;
+  export let placeholder = label;
 
-export let value = null;
-export let min = null;
-export let max = null;
-export let step = null;
+  export let value = null;
+  export let min = null;
+  export let max = null;
+  export let step = null;
 
-export let required = null;
-export let readonly = false;
-export let help = null;
-export let invalid = null;
-export let disabled = false;
+  export let required = null;
+  export let readonly = false;
+  export let help = null;
+  export let invalid = null;
+  export let disabled = false;
 
-export let horizontal = null;
+  export let horizontal = null;
 </script>
 
 <FormGroup {id} {label} {required} {help} {invalid} {horizontal} class="{$$props.class || ''}">

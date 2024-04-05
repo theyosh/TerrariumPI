@@ -1,403 +1,403 @@
 <script>
-import { onMount, createEventDispatcher } from 'svelte';
-import { writable } from 'svelte/store';
-import { _ } from 'svelte-i18n';
-import { createForm } from 'felte';
-import { dayjs } from 'svelte-time';
+  import { onMount, createEventDispatcher } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { _ } from 'svelte-i18n';
+  import { createForm } from 'felte';
+  import { dayjs } from 'svelte-time';
 
-import {
-  fetchEnclosures,
-  fetchAreaTypes,
-  fetchButtons,
-  fetchRelays,
-  fetchSoundcards,
-  fetchPlaylists,
-  fetchSensors,
-  fetchAreas,
-  fetchWeatherData,
-  updateArea,
-} from '../providers/api';
-import { successNotification, errorNotification } from '../providers/notification-provider';
-import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
-import { arrIdentical } from '../helpers/number-helpers';
+  import {
+    fetchEnclosures,
+    fetchAreaTypes,
+    fetchButtons,
+    fetchRelays,
+    fetchSoundcards,
+    fetchPlaylists,
+    fetchSensors,
+    fetchAreas,
+    fetchWeatherData,
+    updateArea,
+  } from '../providers/api';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
+  import { arrIdentical } from '../helpers/number-helpers';
 
-import ModalForm from '../user-controls/ModalForm.svelte';
-import Field from '../components/form/Field.svelte';
-import Helper from '../components/form/Helper.svelte';
-import Select from '../components/form/Select.svelte';
-import Switch from '../components/form/Switch.svelte';
-import Slider from '../components/form/Slider.svelte';
+  import ModalForm from '../user-controls/ModalForm.svelte';
+  import Field from '../components/form/Field.svelte';
+  import Helper from '../components/form/Helper.svelte';
+  import Select from '../components/form/Select.svelte';
+  import Switch from '../components/form/Switch.svelte';
+  import Slider from '../components/form/Slider.svelte';
 
-let wrapper_show;
-let wrapper_hide;
-let loading = false;
-let validated = false;
+  let wrapper_show;
+  let wrapper_hide;
+  let loading = false;
+  let validated = false;
 
-let enclosures = [];
-let area_types = [];
-let relays = [];
-let soundcards = [];
-let playlists = [];
-let sensors = [];
-let areas = [];
-let buttons = [];
+  let enclosures = [];
+  let area_types = [];
+  let relays = [];
+  let soundcards = [];
+  let playlists = [];
+  let sensors = [];
+  let areas = [];
+  let buttons = [];
 
-let sensor_filter = [];
-let showSensorDeviation = false;
-let weather = null;
+  let sensor_filter = [];
+  let showSensorDeviation = false;
+  let weather = null;
 
-let formData = writable({});
+  let formData = writable({});
 
-let editForm;
+  let editForm;
 
-const formatter = (value) => {
-  if (undefined !== value.length && 2 === value.length) {
-    return $_('areas.settings.relay.slider.duration', {
-      default: 'Delay: {delay} minutes. Duration: {duration} minutes',
-      values: { delay: value[0], duration: value[1] - value[0] },
-    });
-  }
-  return $_('areas.settings.relay.slider.delay', { default: 'Delay: {delay} minutes.', values: { delay: value } });
-};
-
-const dispatch = createEventDispatcher();
-
-const successAction = () => {
-  dispatch('save');
-};
-
-const relayName = (id) => {
-  let relay = relays.filter((item) => {
-    return item.id === id;
-  });
-  return relay.length === 1 ? relay[0].name : '';
-};
-
-const relayDimmer = (id) => {
-  let relay = relays.filter((item) => {
-    return item.id === id;
-  });
-  return relay.length === 1 ? relay[0].dimmer : false;
-};
-
-const tweakValue = (value, defaultValue) => {
-  if (value === undefined) {
-    return defaultValue;
-  }
-
-  try {
-    return value.split(',').map((item) => {
-      return item * 1.0;
-    });
-  } catch (e) {
-    return value;
-  }
-};
-
-const updateTweakRelays = (part, new_relays) => {
-  let tweaks = $formData.setup && $formData.setup[part].tweaks ? $formData.setup[part].tweaks : [];
-  let existing_relays = tweaks.map((item) => {
-    return item.id;
-  });
-
-  if (!arrIdentical(new_relays, existing_relays)) {
-    // Cleanup deleted relays (filter out non selected relays)
-    if (tweaks.length > 0) {
-      tweaks = tweaks.filter((relay) => {
-        return new_relays.indexOf(relay.id) !== -1;
+  const formatter = (value) => {
+    if (undefined !== value.length && 2 === value.length) {
+      return $_('areas.settings.relay.slider.duration', {
+        default: 'Delay: {delay} minutes. Duration: {duration} minutes',
+        values: { delay: value[0], duration: value[1] - value[0] },
       });
     }
-    // Add new relays (filter out non existing relays and add them)
-    new_relays
-      .filter((relay_id) => {
-        return existing_relays.length === 0 || existing_relays.indexOf(relay_id) === -1;
-      })
+    return $_('areas.settings.relay.slider.delay', { default: 'Delay: {delay} minutes.', values: { delay: value } });
+  };
+
+  const dispatch = createEventDispatcher();
+
+  const successAction = () => {
+    dispatch('save');
+  };
+
+  const relayName = (id) => {
+    let relay = relays.filter((item) => {
+      return item.id === id;
+    });
+    return relay.length === 1 ? relay[0].name : '';
+  };
+
+  const relayDimmer = (id) => {
+    let relay = relays.filter((item) => {
+      return item.id === id;
+    });
+    return relay.length === 1 ? relay[0].dimmer : false;
+  };
+
+  const tweakValue = (value, defaultValue) => {
+    if (value === undefined) {
+      return defaultValue;
+    }
+
+    try {
+      return value.split(',').map((item) => {
+        return item * 1.0;
+      });
+    } catch (e) {
+      return value;
+    }
+  };
+
+  const updateTweakRelays = (part, new_relays) => {
+    let tweaks = $formData.setup && $formData.setup[part].tweaks ? $formData.setup[part].tweaks : [];
+    let existing_relays = tweaks.map((item) => {
+      return item.id;
+    });
+
+    if (!arrIdentical(new_relays, existing_relays)) {
+      // Cleanup deleted relays (filter out non selected relays)
+      if (tweaks.length > 0) {
+        tweaks = tweaks.filter((relay) => {
+          return new_relays.indexOf(relay.id) !== -1;
+        });
+      }
+      // Add new relays (filter out non existing relays and add them)
+      new_relays
+        .filter((relay_id) => {
+          return existing_relays.length === 0 || existing_relays.indexOf(relay_id) === -1;
+        })
+        .map((item) => {
+          tweaks.push({ id: item });
+        });
+      $formData.setup[part].relays = new_relays;
+      $formData.setup[part].tweaks = tweaks;
+    }
+  };
+
+  const updateTweakSliders = () => {
+    // Store form data in store. Need to get the slider values
+    let form = formToJSON(editForm);
+
+    $formData.setup.low.tweaks = form.setup.low.tweaks;
+    $formData.setup.high.tweaks = form.setup.high.tweaks;
+  };
+
+  const addVariation = () => {
+    $formData.setup.variation = [
+      ...(formToJSON(editForm).setup.variation ?? null),
+      ...[{ when: '', period: '', value: null }],
+    ];
+  };
+
+  const removeVariation = (index) => {
+    // Remove row
+    $formData.setup.variation.splice(index, 1);
+    // This is needed in order to Svelte to update the arrays in the template https://svelte.dev/tutorial/updating-arrays-and-objects
+    $formData.setup.variation = $formData.setup.variation;
+  };
+
+  const areaType = (area) => {
+    $formData.type = area;
+    sensor_filter = [];
+    area_types
+      .filter((item) => item.value === area)
       .map((item) => {
-        tweaks.push({ id: item });
+        sensor_filter = [...sensor_filter, ...item.sensors];
       });
-    $formData.setup[part].relays = new_relays;
-    $formData.setup[part].tweaks = tweaks;
-  }
-};
+  };
 
-const updateTweakSliders = () => {
-  // Store form data in store. Need to get the slider values
-  let form = formToJSON(editForm);
+  const areaMode = (mode) => {
+    $formData.mode = mode;
+    let on_duration = 0;
+    let off_duration = 0;
 
-  $formData.setup.low.tweaks = form.setup.low.tweaks;
-  $formData.setup.high.tweaks = form.setup.high.tweaks;
-};
+    switch ($formData.mode) {
+      case 'weather':
+        on_duration = (weather.sun.set - weather.sun.rise) / 60;
+        off_duration = 24 * 60 - on_duration;
 
-const addVariation = () => {
-  $formData.setup.variation = [
-    ...(formToJSON(editForm).setup.variation ?? null),
-    ...[{ when: '', period: '', value: null }],
-  ];
-};
+        editForm.elements['setup.low.begin'].value = dayjs.unix(weather.sun.rise).format('HH:mm');
+        editForm.elements['setup.low.end'].value = dayjs.unix(weather.sun.set).format('HH:mm');
+        editForm.elements['setup.low.on_duration'].value = on_duration;
+        editForm.elements['setup.low.off_duration'].value = off_duration;
 
-const removeVariation = (index) => {
-  // Remove row
-  $formData.setup.variation.splice(index, 1);
-  // This is needed in order to Svelte to update the arrays in the template https://svelte.dev/tutorial/updating-arrays-and-objects
-  $formData.setup.variation = $formData.setup.variation;
-};
+        editForm.elements['setup.high.begin'].value = dayjs.unix(weather.sun.set).format('HH:mm');
+        editForm.elements['setup.high.end'].value = dayjs.unix(weather.sun.rise).format('HH:mm');
+        editForm.elements['setup.high.on_duration'].value = off_duration;
+        editForm.elements['setup.high.off_duration'].value = on_duration;
+        break;
+      case 'weather_inverse':
+        off_duration = (weather.sun.set - weather.sun.rise) / 60;
+        on_duration = 24 * 60 - off_duration;
 
-const areaType = (area) => {
-  $formData.type = area;
-  sensor_filter = [];
-  area_types
-    .filter((item) => item.value === area)
-    .map((item) => {
-      sensor_filter = [...sensor_filter, ...item.sensors];
-    });
-};
+        editForm.elements['setup.low.begin'].value = dayjs.unix(weather.sun.set).format('HH:mm');
+        editForm.elements['setup.low.end'].value = dayjs.unix(weather.sun.rise).format('HH:mm');
+        editForm.elements['setup.low.on_duration'].value = on_duration;
+        editForm.elements['setup.low.off_duration'].value = off_duration;
 
-const areaMode = (mode) => {
-  $formData.mode = mode;
-  let on_duration = 0;
-  let off_duration = 0;
+        editForm.elements['setup.high.begin'].value = dayjs.unix(weather.sun.rise).format('HH:mm');
+        editForm.elements['setup.high.end'].value = dayjs.unix(weather.sun.set).format('HH:mm');
+        editForm.elements['setup.high.on_duration'].value = off_duration;
+        editForm.elements['setup.high.off_duration'].value = on_duration;
+        break;
+    }
+  };
 
-  switch ($formData.mode) {
-    case 'weather':
-      on_duration = (weather.sun.set - weather.sun.rise) / 60;
-      off_duration = 24 * 60 - on_duration;
+  const _processForm = async (values, context) => {
+    validated = true;
 
-      editForm.elements['setup.low.begin'].value = dayjs.unix(weather.sun.rise).format('HH:mm');
-      editForm.elements['setup.low.end'].value = dayjs.unix(weather.sun.set).format('HH:mm');
-      editForm.elements['setup.low.on_duration'].value = on_duration;
-      editForm.elements['setup.low.off_duration'].value = off_duration;
-
-      editForm.elements['setup.high.begin'].value = dayjs.unix(weather.sun.set).format('HH:mm');
-      editForm.elements['setup.high.end'].value = dayjs.unix(weather.sun.rise).format('HH:mm');
-      editForm.elements['setup.high.on_duration'].value = off_duration;
-      editForm.elements['setup.high.off_duration'].value = on_duration;
-      break;
-    case 'weather_inverse':
-      off_duration = (weather.sun.set - weather.sun.rise) / 60;
-      on_duration = 24 * 60 - off_duration;
-
-      editForm.elements['setup.low.begin'].value = dayjs.unix(weather.sun.set).format('HH:mm');
-      editForm.elements['setup.low.end'].value = dayjs.unix(weather.sun.rise).format('HH:mm');
-      editForm.elements['setup.low.on_duration'].value = on_duration;
-      editForm.elements['setup.low.off_duration'].value = off_duration;
-
-      editForm.elements['setup.high.begin'].value = dayjs.unix(weather.sun.rise).format('HH:mm');
-      editForm.elements['setup.high.end'].value = dayjs.unix(weather.sun.set).format('HH:mm');
-      editForm.elements['setup.high.on_duration'].value = off_duration;
-      editForm.elements['setup.high.off_duration'].value = on_duration;
-      break;
-  }
-};
-
-const _processForm = async (values, context) => {
-  validated = true;
-
-  // Reset custom error trigger
-  try {
-    editForm.elements['setup.low.relays[]'].setCustomValidity('');
-    editForm.elements['setup.high.relays[]'].setCustomValidity('');
-  } catch (e) {
-    editForm.elements['setup.low.playlists[]'].setCustomValidity('');
-    editForm.elements['setup.high.playlists[]'].setCustomValidity('');
-  }
-
-  if (editForm.checkValidity()) {
-    let formOk = true;
-    values = formToJSON(editForm);
-
-    // Check if we have selected relays multiple times in the low and high alarm parts
-    if (values.setup.low.relays) {
-      formOk = !values.setup.low.relays.some((item) => values.setup.high.relays.includes(item));
+    // Reset custom error trigger
+    try {
+      editForm.elements['setup.low.relays[]'].setCustomValidity('');
+      editForm.elements['setup.high.relays[]'].setCustomValidity('');
+    } catch (e) {
+      editForm.elements['setup.low.playlists[]'].setCustomValidity('');
+      editForm.elements['setup.high.playlists[]'].setCustomValidity('');
     }
 
-    if (formOk) {
-      loading = true;
+    if (editForm.checkValidity()) {
+      let formOk = true;
+      values = formToJSON(editForm);
 
-      if (values.type === 'lights' || values.type === 'audio') {
-        values.setup.day = { ...values.setup.low };
-        values.setup.night = { ...values.setup.high };
-
-        delete values.setup.low;
-        delete values.setup.high;
+      // Check if we have selected relays multiple times in the low and high alarm parts
+      if (values.setup.low.relays) {
+        formOk = !values.setup.low.relays.some((item) => values.setup.high.relays.includes(item));
       }
 
-      // Filter the variation data so that every item should be filled, else the variation is invalid and will be deleted
-      // This can also be used to clear the first line
-      values.setup.variation = values.setup.variation.filter((item) =>
-        Object.values(item).every((value) => value && value !== ''),
-      );
-      if (values.setup.variation.length === 0) {
-        delete values.setup.variation;
-      }
+      if (formOk) {
+        loading = true;
 
-      try {
-        // Post data
-        await updateArea(values, (data) => (values = data));
-        // Notifify OK!
-        successNotification(
-          $_('areas.settings.save.ok.message', {
-            default: "Area ''{name}'' is updated",
-            values: { name: values.name },
-          }),
-          $_('notification.form.save.ok.title', { default: 'Save OK' }),
-        );
+        if (values.type === 'lights' || values.type === 'audio') {
+          values.setup.day = { ...values.setup.low };
+          values.setup.night = { ...values.setup.high };
 
-        // Done, close window
-        hide();
-        // Signal the save callback
-        successAction();
-
-        // TODO: Somehow, either the save signal callback or here, we have to reload the buttons
-      } catch (error) {
-        // Some kind of an error
-        loading = false;
-        errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-      } finally {
-        validated = false;
-      }
-    } else {
-      // A relay is used in both low and high alarm
-      loading = false;
-
-      try {
-        editForm.elements['setup.low.relays[]'].setCustomValidity('Not valid');
-        editForm.elements['setup.high.relays[]'].setCustomValidity('Not valid');
-      } catch (e) {
-        editForm.elements['setup.low.playlists[]'].setCustomValidity('Not valid');
-        editForm.elements['setup.high.playlists[]'].setCustomValidity('Not valid');
-      }
-
-      editForm.checkValidity();
-
-      let error_message = $_('areas.settings.save.error.duplicate_relays', {
-        default: 'You have selected the same relay(s) in both the low and high alarm. This is not valid.',
-      });
-      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-    }
-  } else {
-    let error_message = $_('areas.settings.save.error.required_fields', {
-      default: 'Not all required fields are entered correctly.',
-    });
-    error_message += "\n'" + [...new Set(invalid_form_fields(editForm))].join("'\n'") + "'";
-    errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-  }
-};
-
-const { form, setFields, isSubmitting, createSubmitHandler, reset, data } = createForm({
-  onSubmit: _processForm,
-});
-
-const formSubmit = createSubmitHandler({
-  onSubmit: _processForm,
-});
-
-export const show = async (areaId, cb) => {
-  // Anonymous (Async) functions always as first!!
-  (async () => {
-    // Load all available enclosures, area types, relays, sensors and more
-    await Promise.all([
-      fetchEnclosures(
-        false,
-        (data) =>
-          (enclosures = data.map((item) => {
-            return { value: item.id, text: item.name };
-          })),
-      ),
-      fetchAreaTypes(
-        (data) =>
-          (area_types = data.map((item) => {
-            return { value: item.type, text: item.name, sensors: item.sensors };
-          })),
-      ),
-      fetchRelays(false, (data) => (relays = data)),
-      fetchSoundcards(
-        (data) =>
-          (soundcards = data.map((item) => {
-            return { value: item.index, text: item.name };
-          })),
-      ),
-      fetchPlaylists(
-        false,
-        (data) =>
-          (playlists = data.map((item) => {
-            return { value: item.id, text: item.name };
-          })),
-      ),
-      fetchSensors(
-        false,
-        (data) =>
-          (sensors = data.map((item) => {
-            return { value: item.id, text: item.name, type: item.type, calibration: item.calibration };
-          })),
-      ),
-      fetchButtons(
-        false,
-        (data) =>
-          (buttons = data.map((item) => {
-            return { value: item.id, text: item.name, type: item.hardware };
-          })),
-      ),
-      fetchAreas(
-        false,
-        (data) =>
-          (areas = data.map((item) => {
-            return { value: item.id, text: item.name };
-          })),
-      ),
-      fetchWeatherData((data) => (weather = data)),
-    ]);
-
-    // If ID is given, load existing data
-    if (areaId) {
-      await fetchAreas(areaId, (data) => {
-        // If we have lights or audio type, we need to translate day to low, and night to high
-        // Do it also here, before assigning to `$formData`. Else you will get errors... :(
-        if (data.type === 'lights' || data.type === 'audio') {
-          data.setup.low = { ...data.setup.day };
-          data.setup.high = { ...data.setup.night };
-
-          delete data.setup.day;
-          delete data.setup.night;
+          delete values.setup.low;
+          delete values.setup.high;
         }
 
-        // We do not care about the actual area state, so delete it
-        delete data.state;
+        // Filter the variation data so that every item should be filled, else the variation is invalid and will be deleted
+        // This can also be used to clear the first line
+        values.setup.variation = values.setup.variation.filter((item) =>
+          Object.values(item).every((value) => value && value !== ''),
+        );
+        if (values.setup.variation.length === 0) {
+          delete values.setup.variation;
+        }
 
-        // First set formdata which will trigger if statements to show fields
-        $formData = data;
+        try {
+          // Post data
+          await updateArea(values, (data) => (values = data));
+          // Notifify OK!
+          successNotification(
+            $_('areas.settings.save.ok.message', {
+              default: "Area ''{name}'' is updated",
+              values: { name: values.name },
+            }),
+            $_('notification.form.save.ok.title', { default: 'Save OK' }),
+          );
+
+          // Done, close window
+          hide();
+          // Signal the save callback
+          successAction();
+
+          // TODO: Somehow, either the save signal callback or here, we have to reload the buttons
+        } catch (error) {
+          // Some kind of an error
+          loading = false;
+          errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+        } finally {
+          validated = false;
+        }
+      } else {
+        // A relay is used in both low and high alarm
+        loading = false;
+
+        try {
+          editForm.elements['setup.low.relays[]'].setCustomValidity('Not valid');
+          editForm.elements['setup.high.relays[]'].setCustomValidity('Not valid');
+        } catch (e) {
+          editForm.elements['setup.low.playlists[]'].setCustomValidity('Not valid');
+          editForm.elements['setup.high.playlists[]'].setCustomValidity('Not valid');
+        }
+
+        editForm.checkValidity();
+
+        let error_message = $_('areas.settings.save.error.duplicate_relays', {
+          default: 'You have selected the same relay(s) in both the low and high alarm. This is not valid.',
+        });
+        errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+      }
+    } else {
+      let error_message = $_('areas.settings.save.error.required_fields', {
+        default: 'Not all required fields are entered correctly.',
       });
-      setFields($formData);
+      error_message += "\n'" + [...new Set(invalid_form_fields(editForm))].join("'\n'") + "'";
+      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
     }
-    // Loading done
-    loading = false;
-  })();
+  };
 
-  // Reset form validation
-  reset();
-  $formData = formToJSON(editForm);
-  $formData.setup.variation = [{ when: '', period: '', value: null }];
-  validated = false;
+  const { form, setFields, isSubmitting, createSubmitHandler, reset, data } = createForm({
+    onSubmit: _processForm,
+  });
 
-  // Toggle loading div
-  loading = true;
+  const formSubmit = createSubmitHandler({
+    onSubmit: _processForm,
+  });
 
-  // Show the modal
-  wrapper_show();
-};
+  export const show = async (areaId, cb) => {
+    // Anonymous (Async) functions always as first!!
+    (async () => {
+      // Load all available enclosures, area types, relays, sensors and more
+      await Promise.all([
+        fetchEnclosures(
+          false,
+          (data) =>
+            (enclosures = data.map((item) => {
+              return { value: item.id, text: item.name };
+            })),
+        ),
+        fetchAreaTypes(
+          (data) =>
+            (area_types = data.map((item) => {
+              return { value: item.type, text: item.name, sensors: item.sensors };
+            })),
+        ),
+        fetchRelays(false, (data) => (relays = data)),
+        fetchSoundcards(
+          (data) =>
+            (soundcards = data.map((item) => {
+              return { value: item.index, text: item.name };
+            })),
+        ),
+        fetchPlaylists(
+          false,
+          (data) =>
+            (playlists = data.map((item) => {
+              return { value: item.id, text: item.name };
+            })),
+        ),
+        fetchSensors(
+          false,
+          (data) =>
+            (sensors = data.map((item) => {
+              return { value: item.id, text: item.name, type: item.type, calibration: item.calibration };
+            })),
+        ),
+        fetchButtons(
+          false,
+          (data) =>
+            (buttons = data.map((item) => {
+              return { value: item.id, text: item.name, type: item.hardware };
+            })),
+        ),
+        fetchAreas(
+          false,
+          (data) =>
+            (areas = data.map((item) => {
+              return { value: item.id, text: item.name };
+            })),
+        ),
+        fetchWeatherData((data) => (weather = data)),
+      ]);
 
-export const hide = () => {
-  // Delay the loading div
-  setTimeout(() => {
-    loading = false;
-  }, 1000);
+      // If ID is given, load existing data
+      if (areaId) {
+        await fetchAreas(areaId, (data) => {
+          // If we have lights or audio type, we need to translate day to low, and night to high
+          // Do it also here, before assigning to `$formData`. Else you will get errors... :(
+          if (data.type === 'lights' || data.type === 'audio') {
+            data.setup.low = { ...data.setup.day };
+            data.setup.high = { ...data.setup.night };
 
-  // Hide modal
-  wrapper_hide();
-};
+            delete data.setup.day;
+            delete data.setup.night;
+          }
 
-onMount(() => {
-  editForm.setAttribute('novalidate', 'novalidate');
-});
+          // We do not care about the actual area state, so delete it
+          delete data.state;
+
+          // First set formdata which will trigger if statements to show fields
+          $formData = data;
+        });
+        setFields($formData);
+      }
+      // Loading done
+      loading = false;
+    })();
+
+    // Reset form validation
+    reset();
+    $formData = formToJSON(editForm);
+    $formData.setup.variation = [{ when: '', period: '', value: null }];
+    validated = false;
+
+    // Toggle loading div
+    loading = true;
+
+    // Show the modal
+    wrapper_show();
+  };
+
+  export const hide = () => {
+    // Delay the loading div
+    setTimeout(() => {
+      loading = false;
+    }, 1000);
+
+    // Hide modal
+    wrapper_hide();
+  };
+
+  onMount(() => {
+    editForm.setAttribute('novalidate', 'novalidate');
+  });
 </script>
 
 <ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" {loading}>

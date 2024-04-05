@@ -1,172 +1,172 @@
 <script>
-import { onMount, onDestroy } from 'svelte';
-import { writable } from 'svelte/store';
-import { _, number } from 'svelte-i18n';
-import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
-import { createForm } from 'felte';
-import { Config } from '@keenmate/svelte-adminlte';
+  import { onMount, onDestroy } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { _, number } from 'svelte-i18n';
+  import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
+  import { createForm } from 'felte';
+  import { Config } from '@keenmate/svelte-adminlte';
 
-import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
-import { successNotification, errorNotification } from '../providers/notification-provider';
-import { autoDarkMode } from '../helpers/color-helpers';
-import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
-import { languageFlag } from '../helpers/string-helpers';
-import { fetchSystemSettings, updateSystemSettings, uploadFile } from '../providers/api';
-import { changeLang, languages, currencies, currency } from '../locale/i18n';
-import { isDay, isDarkDesktop } from '../stores/terrariumpi';
+  import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { autoDarkMode } from '../helpers/color-helpers';
+  import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
+  import { languageFlag } from '../helpers/string-helpers';
+  import { fetchSystemSettings, updateSystemSettings, uploadFile } from '../providers/api';
+  import { changeLang, languages, currencies, currency } from '../locale/i18n';
+  import { isDay, isDarkDesktop } from '../stores/terrariumpi';
 
-import Card from '../user-controls/Card.svelte';
-import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
-import Field from '../components/form/Field.svelte';
-import FileUpload from '../components/form/FileUpload.svelte';
-import Select from '../components/form/Select.svelte';
-import Switch from '../components/form/Switch.svelte';
-import Helper from '../components/form/Helper.svelte';
+  import Card from '../user-controls/Card.svelte';
+  import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
+  import Field from '../components/form/Field.svelte';
+  import FileUpload from '../components/form/FileUpload.svelte';
+  import Select from '../components/form/Select.svelte';
+  import Switch from '../components/form/Switch.svelte';
+  import Helper from '../components/form/Helper.svelte';
 
-let formData = writable({});
-let editForm = null;
+  let formData = writable({});
+  let editForm = null;
 
-const units = {
-  temperature: [
-    { value: 'celsius', text: $_('settings.units.celsius', { default: 'Celsius' }) },
-    { value: 'fahrenheit', text: $_('settings.units.fahrenheit', { default: 'Fahrenheit' }) },
-    { value: 'kelvin', text: $_('settings.units.kelvin', { default: 'Kelvin' }) },
-  ],
-  distance: [
-    { value: 'cm', text: $_('settings.units.cm', { default: 'Centimeter' }) },
-    { value: 'inch', text: $_('settings.units.inch', { default: 'Inch' }) },
-  ],
-  liquid_volume: [
-    { value: 'l', text: $_('settings.units.l', { default: 'Liter' }) },
-    { value: 'ukgall', text: $_('settings.units.ukgall', { default: 'UK Gallons' }) },
-    { value: 'usgall', text: $_('settings.units.usgall', { default: 'US Gallons' }) },
-  ],
-  wind_speed: [
-    { value: 'm/s', text: $_('settings.units.m_s', { default: 'Meter per second' }) },
-    { value: 'km/h', text: $_('settings.units.km_h', { default: 'Kilometer per hour' }) },
-    { value: 'm/h', text: $_('settings.units.m_h', { default: 'Miles per hour' }) },
-    { value: 'beaufort', text: $_('settings.units.beaufort', { default: 'Beaufort' }) },
-  ],
-};
+  const units = {
+    temperature: [
+      { value: 'celsius', text: $_('settings.units.celsius', { default: 'Celsius' }) },
+      { value: 'fahrenheit', text: $_('settings.units.fahrenheit', { default: 'Fahrenheit' }) },
+      { value: 'kelvin', text: $_('settings.units.kelvin', { default: 'Kelvin' }) },
+    ],
+    distance: [
+      { value: 'cm', text: $_('settings.units.cm', { default: 'Centimeter' }) },
+      { value: 'inch', text: $_('settings.units.inch', { default: 'Inch' }) },
+    ],
+    liquid_volume: [
+      { value: 'l', text: $_('settings.units.l', { default: 'Liter' }) },
+      { value: 'ukgall', text: $_('settings.units.ukgall', { default: 'UK Gallons' }) },
+      { value: 'usgall', text: $_('settings.units.usgall', { default: 'US Gallons' }) },
+    ],
+    wind_speed: [
+      { value: 'm/s', text: $_('settings.units.m_s', { default: 'Meter per second' }) },
+      { value: 'km/h', text: $_('settings.units.km_h', { default: 'Kilometer per hour' }) },
+      { value: 'm/h', text: $_('settings.units.m_h', { default: 'Miles per hour' }) },
+      { value: 'beaufort', text: $_('settings.units.beaufort', { default: 'Beaufort' }) },
+    ],
+  };
 
-const { form, setFields, isSubmitting, reset } = createForm({
-  onSubmit: async (values, context) => {
-    // Extra check on the password
-    if (values.password !== '' && values.password2 !== '' && values.password !== values.password2) {
-      context.form.elements['password2'].setCustomValidity('dummy');
-    } else {
-      // Reset error
-      context.form.elements['password2'].setCustomValidity('');
-    }
+  const { form, setFields, isSubmitting, reset } = createForm({
+    onSubmit: async (values, context) => {
+      // Extra check on the password
+      if (values.password !== '' && values.password2 !== '' && values.password !== values.password2) {
+        context.form.elements['password2'].setCustomValidity('dummy');
+      } else {
+        // Reset error
+        context.form.elements['password2'].setCustomValidity('');
+      }
 
-    validated = true;
-    if (context.form.checkValidity()) {
-      loading = true;
-      values = formToJSON(context.form);
+      validated = true;
+      if (context.form.checkValidity()) {
+        loading = true;
+        values = formToJSON(context.form);
 
-      if (values.file_profile_image) {
-        // Upload first image to make sure it is valid
+        if (values.file_profile_image) {
+          // Upload first image to make sure it is valid
+          try {
+            values.profile_image = await uploadFile(context.form.file_profile_image);
+            values.delete_image = false;
+          } catch (error) {
+            errorNotification(error.message, $_('notification.form.upload.error.title', { default: 'Upload error' }));
+
+            loading = false;
+            validated = false;
+
+            // Return to current form
+            return;
+          }
+        }
+
+        delete values.file_profile_image;
+        // TODO: Fix this. We need to convert to string, so that backend settings will work.... not handy or nice
+        Object.keys(values).forEach((key) => {
+          if (key === 'exclude_ids') {
+            values[key] = values[key].join(',');
+          } else {
+            values[key] = values[key] + '';
+          }
+        });
+
         try {
-          values.profile_image = await uploadFile(context.form.file_profile_image);
-          values.delete_image = false;
+          await updateSystemSettings(values);
+          successNotification(
+            $_('system.settings.save.ok.message', { default: 'Settings are updated.' }),
+            $_('notification.form.save.ok.title', { default: 'Update OK' }),
+          );
+
+          changeLang(values.language);
+          currency.set(values.currency);
+          Config.set(formToJSON(context.form));
+          autoDarkMode($isDay, $isDarkDesktop);
         } catch (error) {
-          errorNotification(error.message, $_('notification.form.upload.error.title', { default: 'Upload error' }));
-
-          loading = false;
-          validated = false;
-
-          // Return to current form
-          return;
+          errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
         }
+        loading = false;
+        validated = false;
+      } else {
+        let error_message = $_('webcams.settings.save.error.required_fields', {
+          default: 'Not all required fields are entered correctly.',
+        });
+        error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
+        errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
       }
+    },
+  });
 
-      delete values.file_profile_image;
-      // TODO: Fix this. We need to convert to string, so that backend settings will work.... not handy or nice
-      Object.keys(values).forEach((key) => {
-        if (key === 'exclude_ids') {
-          values[key] = values[key].join(',');
-        } else {
-          values[key] = values[key] + '';
+  //let languages    = []
+  let loading = true;
+  let validated = false;
+  let excluded_ids = [];
+
+  onMount(() => {
+    (async () => {
+      await fetchSystemSettings(null, (settings) => {
+        for (let field of settings) {
+          $formData[field.id] = field.value;
+
+          // TODO: Fix json data to real true and false values
+          $formData[field.id] =
+            $formData[field.id] === 'true' ? true : $formData[field.id] === 'false' ? false : $formData[field.id];
+
+          if (field.id === 'exclude_ids') {
+            excluded_ids = $formData[field.id].map((item) => {
+              return { value: item.id, text: item.name };
+            });
+            $formData[field.id] = $formData[field.id].map((item) => {
+              return item.id;
+            });
+          } else if (field.id === 'language') {
+            $formData[field.id] = $formData[field.id].replace(/_/gm, '-');
+          } else if (
+            field.id === 'always_authenticate' &&
+            ($formData[field.id] === true || $formData[field.id] === false)
+          ) {
+            $formData[field.id] = $formData[field.id] ? 1 : 0;
+          }
         }
+        setFields($formData);
+        loading = false;
       });
+    })();
 
-      try {
-        await updateSystemSettings(values);
-        successNotification(
-          $_('system.settings.save.ok.message', { default: 'Settings are updated.' }),
-          $_('notification.form.save.ok.title', { default: 'Update OK' }),
-        );
+    // Reset form validation
+    reset();
+    $formData = formToJSON(editForm);
+    validated = false;
 
-        changeLang(values.language);
-        currency.set(values.currency);
-        Config.set(formToJSON(context.form));
-        autoDarkMode($isDay, $isDarkDesktop);
-      } catch (error) {
-        errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-      }
-      loading = false;
-      validated = false;
-    } else {
-      let error_message = $_('webcams.settings.save.error.required_fields', {
-        default: 'Not all required fields are entered correctly.',
-      });
-      error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
-      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-    }
-  },
-});
+    // Toggle loading div
+    loading = true;
 
-//let languages    = []
-let loading = true;
-let validated = false;
-let excluded_ids = [];
+    setCustomPageTitle($_('system.settings.page.title', { default: 'System settings' }));
+    editForm.setAttribute('novalidate', 'novalidate');
+  });
 
-onMount(() => {
-  (async () => {
-    await fetchSystemSettings(null, (settings) => {
-      for (let field of settings) {
-        $formData[field.id] = field.value;
-
-        // TODO: Fix json data to real true and false values
-        $formData[field.id] =
-          $formData[field.id] === 'true' ? true : $formData[field.id] === 'false' ? false : $formData[field.id];
-
-        if (field.id === 'exclude_ids') {
-          excluded_ids = $formData[field.id].map((item) => {
-            return { value: item.id, text: item.name };
-          });
-          $formData[field.id] = $formData[field.id].map((item) => {
-            return item.id;
-          });
-        } else if (field.id === 'language') {
-          $formData[field.id] = $formData[field.id].replace(/_/gm, '-');
-        } else if (
-          field.id === 'always_authenticate' &&
-          ($formData[field.id] === true || $formData[field.id] === false)
-        ) {
-          $formData[field.id] = $formData[field.id] ? 1 : 0;
-        }
-      }
-      setFields($formData);
-      loading = false;
-    });
-  })();
-
-  // Reset form validation
-  reset();
-  $formData = formToJSON(editForm);
-  validated = false;
-
-  // Toggle loading div
-  loading = true;
-
-  setCustomPageTitle($_('system.settings.page.title', { default: 'System settings' }));
-  editForm.setAttribute('novalidate', 'novalidate');
-});
-
-onDestroy(() => {
-  customPageTitleUsed.set(false);
-});
+  onDestroy(() => {
+    customPageTitleUsed.set(false);
+  });
 </script>
 
 <PageHeader>

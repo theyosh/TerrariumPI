@@ -1,186 +1,186 @@
 <script>
-import { onMount, createEventDispatcher } from 'svelte';
-import { writable } from 'svelte/store';
-import { _ } from 'svelte-i18n';
-import { createForm } from 'felte';
+  import { onMount, createEventDispatcher } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { _ } from 'svelte-i18n';
+  import { createForm } from 'felte';
 
-import {
-  fetchNotificationMessageTypes,
-  fetchNotificationMessages,
-  updateNotificationMessage,
-  fetchNotificationServices,
-} from '../providers/api';
-import { template_sensor_type_icon } from '../helpers/icon-helpers';
-import { successNotification, errorNotification } from '../providers/notification-provider';
-import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
+  import {
+    fetchNotificationMessageTypes,
+    fetchNotificationMessages,
+    updateNotificationMessage,
+    fetchNotificationServices,
+  } from '../providers/api';
+  import { template_sensor_type_icon } from '../helpers/icon-helpers';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
 
-import ModalForm from '../user-controls/ModalForm.svelte';
-import Field from '../components/form/Field.svelte';
-import Helper from '../components/form/Helper.svelte';
-import Select from '../components/form/Select.svelte';
-import Switch from '../components/form/Switch.svelte';
-import TextArea from '../components/form/TextArea.svelte';
-import FormGroup from '../components/form/FormGroup.svelte';
+  import ModalForm from '../user-controls/ModalForm.svelte';
+  import Field from '../components/form/Field.svelte';
+  import Helper from '../components/form/Helper.svelte';
+  import Select from '../components/form/Select.svelte';
+  import Switch from '../components/form/Switch.svelte';
+  import TextArea from '../components/form/TextArea.svelte';
+  import FormGroup from '../components/form/FormGroup.svelte';
 
-let wrapper_show;
-let wrapper_hide;
-let loading = false;
-let validated = false;
+  let wrapper_show;
+  let wrapper_hide;
+  let loading = false;
+  let validated = false;
 
-let message_types = [];
-let services = [];
-let placeholders = [];
+  let message_types = [];
+  let services = [];
+  let placeholders = [];
 
-let formData = writable({});
+  let formData = writable({});
 
-let editForm;
+  let editForm;
 
-let enabled_services = [];
+  let enabled_services = [];
 
-const updatePlaceholders = (message_type) => {
-  let message = message_types.filter((item) => {
-    return item.value === message_type;
+  const updatePlaceholders = (message_type) => {
+    let message = message_types.filter((item) => {
+      return item.value === message_type;
+    });
+
+    if (message && message.length === 1) {
+      placeholders = Object.keys(message[0].placeholder)
+        .sort()
+        .map((item) => {
+          return { key: item, value: message[0].placeholder[item] };
+        });
+    } else {
+      placeholders = [];
+    }
+  };
+
+  const toggleService = (service_id) => {
+    if (enabled_services.indexOf(service_id) === -1) {
+      // Enable
+      enabled_services.push(service_id);
+    } else {
+      // Disable
+      enabled_services.splice(enabled_services.indexOf(service_id), 1);
+    }
+    enabled_services = enabled_services; // This is needed to make Svelte aware of new data and reactively update it
+  };
+
+  const dispatch = createEventDispatcher();
+
+  const successAction = () => {
+    dispatch('save');
+  };
+
+  const _processForm = async (values, context) => {
+    validated = true;
+
+    if (context.form.checkValidity()) {
+      loading = true;
+      values = formToJSON(editForm);
+
+      // Delete generated attributes from object
+      delete values.duration;
+      delete values.length;
+
+      try {
+        // Post data
+        await updateNotificationMessage(values, (data) => (values = data));
+
+        // Notifify OK!
+        successNotification(
+          $_('messages.settings.save.ok.message', {
+            default: "Message ''{name}'' is updated",
+            values: { name: values.name },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
+        );
+
+        // Done, close window
+        hide();
+
+        // Signal the save callback
+        successAction();
+
+        // TODO: Somehow, either the save signal callback or here, we have to reload the buttons
+      } catch (error) {
+        // Some kind of an error
+        loading = false;
+        errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+      } finally {
+        // Cleanup
+        validated = false;
+      }
+    } else {
+      let error_message = $_('messages.settings.save.error.required_fields', {
+        default: 'Not all required fields are entered correctly.',
+      });
+      error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
+      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+    }
+  };
+
+  const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
+    onSubmit: _processForm,
   });
 
-  if (message && message.length === 1) {
-    placeholders = Object.keys(message[0].placeholder)
-      .sort()
-      .map((item) => {
-        return { key: item, value: message[0].placeholder[item] };
-      });
-  } else {
-    placeholders = [];
-  }
-};
+  const formSubmit = createSubmitHandler({
+    onSubmit: _processForm,
+  });
 
-const toggleService = (service_id) => {
-  if (enabled_services.indexOf(service_id) === -1) {
-    // Enable
-    enabled_services.push(service_id);
-  } else {
-    // Disable
-    enabled_services.splice(enabled_services.indexOf(service_id), 1);
-  }
-  enabled_services = enabled_services; // This is needed to make Svelte aware of new data and reactively update it
-};
-
-const dispatch = createEventDispatcher();
-
-const successAction = () => {
-  dispatch('save');
-};
-
-const _processForm = async (values, context) => {
-  validated = true;
-
-  if (context.form.checkValidity()) {
-    loading = true;
-    values = formToJSON(editForm);
-
-    // Delete generated attributes from object
-    delete values.duration;
-    delete values.length;
-
-    try {
-      // Post data
-      await updateNotificationMessage(values, (data) => (values = data));
-
-      // Notifify OK!
-      successNotification(
-        $_('messages.settings.save.ok.message', {
-          default: "Message ''{name}'' is updated",
-          values: { name: values.name },
-        }),
-        $_('notification.form.save.ok.title', { default: 'Save OK' }),
+  export const show = (messageId, cb) => {
+    // Anonymous (Async) functions always as first!!
+    (async () => {
+      // Load all avaliable hardware
+      await fetchNotificationMessageTypes(
+        (data) =>
+          (message_types = data.map((item) => {
+            return { value: item.type, text: item.name, placeholder: item.placeholders };
+          })),
       );
 
-      // Done, close window
-      hide();
+      // Load all the services
+      await fetchNotificationServices(null, (data) => (services = data));
 
-      // Signal the save callback
-      successAction();
+      // If ID is given, load existing data
+      if (messageId) {
+        await fetchNotificationMessages(messageId, (data) => ($formData = data));
+        setFields($formData);
+        enabled_services = $formData.services.map((item) => {
+          return item.id;
+        });
+      }
 
-      // TODO: Somehow, either the save signal callback or here, we have to reload the buttons
-    } catch (error) {
-      // Some kind of an error
+      // Loading done
       loading = false;
-      errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-    } finally {
-      // Cleanup
-      validated = false;
-    }
-  } else {
-    let error_message = $_('messages.settings.save.error.required_fields', {
-      default: 'Not all required fields are entered correctly.',
-    });
-    error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
-    errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-  }
-};
+    })();
 
-const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
-  onSubmit: _processForm,
-});
+    // Reset form validation
+    reset();
+    enabled_services = [];
+    $formData = formToJSON(editForm);
+    validated = false;
 
-const formSubmit = createSubmitHandler({
-  onSubmit: _processForm,
-});
+    // Toggle loading div
+    loading = true;
 
-export const show = (messageId, cb) => {
-  // Anonymous (Async) functions always as first!!
-  (async () => {
-    // Load all avaliable hardware
-    await fetchNotificationMessageTypes(
-      (data) =>
-        (message_types = data.map((item) => {
-          return { value: item.type, text: item.name, placeholder: item.placeholders };
-        })),
-    );
+    // Show the modal
+    wrapper_show();
+  };
 
-    // Load all the services
-    await fetchNotificationServices(null, (data) => (services = data));
+  export const hide = () => {
+    // Delay the loading div
+    setTimeout(() => {
+      loading = false;
+    }, 1000);
 
-    // If ID is given, load existing data
-    if (messageId) {
-      await fetchNotificationMessages(messageId, (data) => ($formData = data));
-      setFields($formData);
-      enabled_services = $formData.services.map((item) => {
-        return item.id;
-      });
-    }
+    // Hide modal
+    wrapper_hide();
+  };
 
-    // Loading done
-    loading = false;
-  })();
+  onMount(() => {
+    editForm.setAttribute('novalidate', 'novalidate');
+  });
 
-  // Reset form validation
-  reset();
-  enabled_services = [];
-  $formData = formToJSON(editForm);
-  validated = false;
-
-  // Toggle loading div
-  loading = true;
-
-  // Show the modal
-  wrapper_show();
-};
-
-export const hide = () => {
-  // Delay the loading div
-  setTimeout(() => {
-    loading = false;
-  }, 1000);
-
-  // Hide modal
-  wrapper_hide();
-};
-
-onMount(() => {
-  editForm.setAttribute('novalidate', 'novalidate');
-});
-
-$: updatePlaceholders($formData.type);
+  $: updatePlaceholders($formData.type);
 </script>
 
 <ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" {loading}>

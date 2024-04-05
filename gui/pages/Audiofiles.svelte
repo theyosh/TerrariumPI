@@ -1,142 +1,142 @@
 <script>
-import { dayjs } from 'svelte-time';
-import duration from 'dayjs/esm/plugin/duration';
-dayjs.extend(duration);
-import { onMount, onDestroy, getContext } from 'svelte';
-import { _ } from 'svelte-i18n';
-import { PageHeader, FileInput } from '@keenmate/svelte-adminlte';
+  import { dayjs } from 'svelte-time';
+  import duration from 'dayjs/esm/plugin/duration';
+  dayjs.extend(duration);
+  import { onMount, onDestroy, getContext } from 'svelte';
+  import { _ } from 'svelte-i18n';
+  import { PageHeader, FileInput } from '@keenmate/svelte-adminlte';
 
-import { locale } from '../locale/i18n';
-import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
-import { isAuthenticated } from '../stores/authentication';
-import { ApiUrl } from '../constants/urls';
-import { fetchAudiofiles, deleteAudioFile } from '../providers/api';
-import { formatBytes } from '../helpers/file-size-helpers';
-import { errorNotification, successNotification } from '../providers/notification-provider';
-import { isDay } from '../stores/terrariumpi';
-import { DataTablesLanguageUrl } from '../constants/urls';
+  import { locale } from '../locale/i18n';
+  import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
+  import { isAuthenticated } from '../stores/authentication';
+  import { ApiUrl } from '../constants/urls';
+  import { fetchAudiofiles, deleteAudioFile } from '../providers/api';
+  import { formatBytes } from '../helpers/file-size-helpers';
+  import { errorNotification, successNotification } from '../providers/notification-provider';
+  import { isDay } from '../stores/terrariumpi';
+  import { DataTablesLanguageUrl } from '../constants/urls';
 
-import Card from '../user-controls/Card.svelte';
-import Player from '../components/common/Player.svelte';
+  import Card from '../user-controls/Card.svelte';
+  import Player from '../components/common/Player.svelte';
 
-let audiofiles = [];
-let loading = true;
-let dataTable;
-let fileUploader;
-let percent_completed = 0;
+  let audiofiles = [];
+  let loading = true;
+  let dataTable;
+  let fileUploader;
+  let percent_completed = 0;
 
-const { confirmModal } = getContext('confirm');
+  const { confirmModal } = getContext('confirm');
 
-const loadData = async () => {
-  loading = true;
-  if (dataTable) {
-    dataTable.destroy();
-  }
-  await fetchAudiofiles((data) => (audiofiles = data));
-  dataTable = jQuery('#audio_files').DataTable({
-    language: {
-      url: `${DataTablesLanguageUrl}/${$locale}.json`,
-    },
-    columnDefs: [
-      {
-        targets: 'no-sort',
-        orderable: false,
-      },
-    ],
-  });
-  loading = false;
-};
-
-const deleteAudiofileAction = (audiofile) => {
-  confirmModal(
-    $_('audio.files.delete.confirm.message', {
-      default: "Are you sure to delete audio file ''{name}'' ({filename})?",
-      values: { name: audiofile.name, filename: audiofile.filename },
-    }),
-    async () => {
-      try {
-        await deleteAudioFile(audiofile.id);
-        successNotification(
-          $_('audio.files.delete.ok.message', {
-            default: "The audio file ''{name}'' is deleted.",
-            values: { name: audiofile.name },
-          }),
-          $_('notification.delete.ok.title'),
-        );
-        loadData();
-      } catch (e) {
-        errorNotification(
-          $_('audio.files.delete.error.message', {
-            default: "The audio file ''{name}'' could not be deleted!\nError: {error}",
-            values: { name: audiofile.name, error: e.message },
-          }),
-          $_('notification.delete.error.title'),
-        );
-      }
-    },
-  );
-};
-
-const uploadFiles = async (files) => {
-  if (!$isAuthenticated) {
-    let error_message = $_('audio.files.settings.upload.error.nologin', { default: 'Please login to upload files.' });
-    errorNotification(error_message, $_('notification.form.upload.error.title', { default: 'Upload Error' }));
-    return;
-  }
-
-  if (!fileUploader.isValid()) {
-    let error_message = $_('audio.files.settings.save.error.invalid_file', { default: 'Invalid audio file(s)' });
-    errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-    return;
-  }
-
-  let formData = new FormData();
-  for (let i = 0; i < files.detail.length; i++) {
-    formData.append('audiofiles', files.detail[i]);
-  }
-
-  let request = new XMLHttpRequest();
-  request.open('POST', `${ApiUrl}/api/audio/files/`);
-  request.withCredentials = true;
-
-  // upload progress event
-  request.upload.addEventListener('progress', function (e) {
-    // upload progress as percentage
-    percent_completed = (e.loaded / e.total) * 100;
-  });
-
-  // request finished event
-  request.addEventListener('load', (e) => {
-    switch (request.status) {
-      case 200:
-        successNotification(
-          $_('audio.files.settings.save.ok.message', {
-            default: 'Uploaded {amount, plural, =1 {# audio file} other {# audio files}}',
-            values: { amount: files.detail.length },
-          }),
-          $_('notification.form.save.ok.title', { default: 'Save OK' }),
-        );
-        percent_completed = 0;
-        loadData();
-        break;
-      default:
-        errorNotification(request.response, $_('notification.form.save.error.title', { default: 'Save Error' }));
-        break;
+  const loadData = async () => {
+    loading = true;
+    if (dataTable) {
+      dataTable.destroy();
     }
+    await fetchAudiofiles((data) => (audiofiles = data));
+    dataTable = jQuery('#audio_files').DataTable({
+      language: {
+        url: `${DataTablesLanguageUrl}/${$locale}.json`,
+      },
+      columnDefs: [
+        {
+          targets: 'no-sort',
+          orderable: false,
+        },
+      ],
+    });
+    loading = false;
+  };
+
+  const deleteAudiofileAction = (audiofile) => {
+    confirmModal(
+      $_('audio.files.delete.confirm.message', {
+        default: "Are you sure to delete audio file ''{name}'' ({filename})?",
+        values: { name: audiofile.name, filename: audiofile.filename },
+      }),
+      async () => {
+        try {
+          await deleteAudioFile(audiofile.id);
+          successNotification(
+            $_('audio.files.delete.ok.message', {
+              default: "The audio file ''{name}'' is deleted.",
+              values: { name: audiofile.name },
+            }),
+            $_('notification.delete.ok.title'),
+          );
+          loadData();
+        } catch (e) {
+          errorNotification(
+            $_('audio.files.delete.error.message', {
+              default: "The audio file ''{name}'' could not be deleted!\nError: {error}",
+              values: { name: audiofile.name, error: e.message },
+            }),
+            $_('notification.delete.error.title'),
+          );
+        }
+      },
+    );
+  };
+
+  const uploadFiles = async (files) => {
+    if (!$isAuthenticated) {
+      let error_message = $_('audio.files.settings.upload.error.nologin', { default: 'Please login to upload files.' });
+      errorNotification(error_message, $_('notification.form.upload.error.title', { default: 'Upload Error' }));
+      return;
+    }
+
+    if (!fileUploader.isValid()) {
+      let error_message = $_('audio.files.settings.save.error.invalid_file', { default: 'Invalid audio file(s)' });
+      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+      return;
+    }
+
+    let formData = new FormData();
+    for (let i = 0; i < files.detail.length; i++) {
+      formData.append('audiofiles', files.detail[i]);
+    }
+
+    let request = new XMLHttpRequest();
+    request.open('POST', `${ApiUrl}/api/audio/files/`);
+    request.withCredentials = true;
+
+    // upload progress event
+    request.upload.addEventListener('progress', function (e) {
+      // upload progress as percentage
+      percent_completed = (e.loaded / e.total) * 100;
+    });
+
+    // request finished event
+    request.addEventListener('load', (e) => {
+      switch (request.status) {
+        case 200:
+          successNotification(
+            $_('audio.files.settings.save.ok.message', {
+              default: 'Uploaded {amount, plural, =1 {# audio file} other {# audio files}}',
+              values: { amount: files.detail.length },
+            }),
+            $_('notification.form.save.ok.title', { default: 'Save OK' }),
+          );
+          percent_completed = 0;
+          loadData();
+          break;
+        default:
+          errorNotification(request.response, $_('notification.form.save.error.title', { default: 'Save Error' }));
+          break;
+      }
+    });
+
+    // send POST request to server
+    request.send(formData);
+  };
+
+  onMount(() => {
+    setCustomPageTitle($_('audio.files.title', { default: 'Audio files' }));
+    loadData();
   });
 
-  // send POST request to server
-  request.send(formData);
-};
-
-onMount(() => {
-  setCustomPageTitle($_('audio.files.title', { default: 'Audio files' }));
-  loadData();
-});
-
-onDestroy(() => {
-  customPageTitleUsed.set(false);
-});
+  onDestroy(() => {
+    customPageTitleUsed.set(false);
+  });
 </script>
 
 <PageHeader>

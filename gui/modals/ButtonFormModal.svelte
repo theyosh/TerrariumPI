@@ -1,139 +1,139 @@
 <script>
-import { onMount, createEventDispatcher } from 'svelte';
-import { writable } from 'svelte/store';
-import { _ } from 'svelte-i18n';
-import { createForm } from 'felte';
+  import { onMount, createEventDispatcher } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { _ } from 'svelte-i18n';
+  import { createForm } from 'felte';
 
-import { fetchButtons, fetchButtonsHardware, updateButton } from '../providers/api';
-import { successNotification, errorNotification } from '../providers/notification-provider';
-import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
+  import { fetchButtons, fetchButtonsHardware, updateButton } from '../providers/api';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
 
-import ModalForm from '../user-controls/ModalForm.svelte';
-import Field from '../components/form/Field.svelte';
-import Helper from '../components/form/Helper.svelte';
-import Select from '../components/form/Select.svelte';
-import Switch from '../components/form/Switch.svelte';
+  import ModalForm from '../user-controls/ModalForm.svelte';
+  import Field from '../components/form/Field.svelte';
+  import Helper from '../components/form/Helper.svelte';
+  import Select from '../components/form/Select.svelte';
+  import Switch from '../components/form/Switch.svelte';
 
-let wrapper_show;
-let wrapper_hide;
-let loading = null;
-let validated = false;
+  let wrapper_show;
+  let wrapper_hide;
+  let loading = null;
+  let validated = false;
 
-let hardware = [];
-let calibration = true;
-let selected_hardware = null;
-let formData = writable({});
+  let hardware = [];
+  let calibration = true;
+  let selected_hardware = null;
+  let formData = writable({});
 
-let editForm;
+  let editForm;
 
-const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-const successAction = () => {
-  dispatch('save');
-};
+  const successAction = () => {
+    dispatch('save');
+  };
 
-const hardwareType = (hardware) => {
-  selected_hardware = hardware;
-};
+  const hardwareType = (hardware) => {
+    selected_hardware = hardware;
+  };
 
-const _processForm = async (values, context) => {
-  validated = true;
+  const _processForm = async (values, context) => {
+    validated = true;
 
-  if (context.form.checkValidity()) {
-    loading = true;
-    values = formToJSON(editForm);
-    values.address += '';
-    delete values.value;
+    if (context.form.checkValidity()) {
+      loading = true;
+      values = formToJSON(editForm);
+      values.address += '';
+      delete values.value;
 
-    try {
-      // Post data
-      await updateButton(values, (data) => (values = data));
-      // Notifify OK!
-      successNotification(
-        $_('buttons.settings.save.ok.message', {
-          default: "Button ''{name}'' is updated",
-          values: { name: values.name },
-        }),
-        $_('notification.form.save.ok.title', { default: 'Save OK' }),
+      try {
+        // Post data
+        await updateButton(values, (data) => (values = data));
+        // Notifify OK!
+        successNotification(
+          $_('buttons.settings.save.ok.message', {
+            default: "Button ''{name}'' is updated",
+            values: { name: values.name },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
+        );
+
+        // Done, close window
+        hide();
+
+        // Signal the save callback
+        successAction();
+      } catch (error) {
+        // Some kind of an error
+        loading = false;
+        errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+      } finally {
+        // Cleanup
+        validated = false;
+      }
+    } else {
+      let error_message = $_('buttons.settings.save.error.required_fields', {
+        default: 'Not all required fields are entered correctly.',
+      });
+      error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
+      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+    }
+  };
+
+  const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
+    onSubmit: _processForm,
+  });
+
+  const formSubmit = createSubmitHandler({
+    onSubmit: _processForm,
+  });
+
+  export const show = async (buttonId, cb) => {
+    // Anonymous (Async) functions always as first!!
+    (async () => {
+      // Load all avaliable hardware
+      await fetchButtonsHardware(
+        (data) =>
+          (hardware = data.map((item) => {
+            return { value: item.hardware, text: item.name };
+          })),
       );
 
-      // Done, close window
-      hide();
+      // If ID is given, load existing data
+      if (buttonId) {
+        // Load existing button data and fill form data
+        await fetchButtons(buttonId, (data) => ($formData = data));
+        setFields($formData);
+      }
 
-      // Signal the save callback
-      successAction();
-    } catch (error) {
-      // Some kind of an error
+      // Loading done
       loading = false;
-      errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-    } finally {
-      // Cleanup
-      validated = false;
-    }
-  } else {
-    let error_message = $_('buttons.settings.save.error.required_fields', {
-      default: 'Not all required fields are entered correctly.',
-    });
-    error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
-    errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-  }
-};
+    })();
 
-const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
-  onSubmit: _processForm,
-});
+    // Reset form validation
+    reset();
+    $formData = formToJSON(editForm);
+    validated = false;
 
-const formSubmit = createSubmitHandler({
-  onSubmit: _processForm,
-});
+    // Toggle loading div
+    loading = true;
 
-export const show = async (buttonId, cb) => {
-  // Anonymous (Async) functions always as first!!
-  (async () => {
-    // Load all avaliable hardware
-    await fetchButtonsHardware(
-      (data) =>
-        (hardware = data.map((item) => {
-          return { value: item.hardware, text: item.name };
-        })),
-    );
+    // Show the modal
+    wrapper_show();
+  };
 
-    // If ID is given, load existing data
-    if (buttonId) {
-      // Load existing button data and fill form data
-      await fetchButtons(buttonId, (data) => ($formData = data));
-      setFields($formData);
-    }
+  export const hide = () => {
+    // Delay the loading div
+    setTimeout(() => {
+      loading = false;
+    }, 1000);
 
-    // Loading done
-    loading = false;
-  })();
+    // Hide modal
+    wrapper_hide();
+  };
 
-  // Reset form validation
-  reset();
-  $formData = formToJSON(editForm);
-  validated = false;
-
-  // Toggle loading div
-  loading = true;
-
-  // Show the modal
-  wrapper_show();
-};
-
-export const hide = () => {
-  // Delay the loading div
-  setTimeout(() => {
-    loading = false;
-  }, 1000);
-
-  // Hide modal
-  wrapper_hide();
-};
-
-onMount(() => {
-  editForm.setAttribute('novalidate', 'novalidate');
-});
+  onMount(() => {
+    editForm.setAttribute('novalidate', 'novalidate');
+  });
 </script>
 
 <ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" {loading}>

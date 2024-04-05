@@ -1,32 +1,32 @@
 <script>
-import { Modal, ModalCloseButton } from '@keenmate/svelte-adminlte';
-import { createEventDispatcher } from 'svelte';
-import { _ } from 'svelte-i18n';
+  import { Modal, ModalCloseButton } from '@keenmate/svelte-adminlte';
+  import { createEventDispatcher } from 'svelte';
+  import { _ } from 'svelte-i18n';
 
-export let confirmTitle = $_('modal.confirm.title', { default: 'Are you sure?' });
-export let confirmMessage = '';
-export let icon = 'fa-exclamation';
+  export let confirmTitle = $_('modal.confirm.title', { default: 'Are you sure?' });
+  export let confirmMessage = '';
+  export let icon = 'fa-exclamation';
 
-let running = false;
-let wrapper_show;
-let wrapper_hide;
+  let running = false;
+  let wrapper_show;
+  let wrapper_hide;
 
-const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-const confirmAction = () => {
-  running = true;
-  dispatch('confirm');
-};
+  const confirmAction = () => {
+    running = true;
+    dispatch('confirm');
+  };
 
-export const show = async () => {
-  running = false;
-  wrapper_show();
-};
+  export const show = async () => {
+    running = false;
+    wrapper_show();
+  };
 
-export const hide = () => {
-  wrapper_hide();
-  running = false;
-};
+  export const hide = () => {
+    wrapper_hide();
+    running = false;
+  };
 </script>
 
 <Modal bind:show="{wrapper_show}" bind:hide="{wrapper_hide}">
