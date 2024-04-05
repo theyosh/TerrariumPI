@@ -1,103 +1,109 @@
+<style>
+textarea {
+  font-size: 0.8rem;
+}
+</style>
+
 <script>
-  import { _ } from 'svelte-i18n';
-  import { onMount, onDestroy } from 'svelte';
-  import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
-  import { date, time } from 'svelte-i18n';
+import { _ } from 'svelte-i18n';
+import { onMount, onDestroy } from 'svelte';
+import { PageHeader, BreadcrumbItem } from '@keenmate/svelte-adminlte';
+import { date, time } from 'svelte-i18n';
 
-  import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
-  import { last_log_line } from '../stores/terrariumpi';
-  import { fetchLoglines } from '../providers/api';
-  import { isAuthenticated } from '../stores/authentication';
+import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
+import { last_log_line } from '../stores/terrariumpi';
+import { fetchLoglines } from '../providers/api';
+import { isAuthenticated } from '../stores/authentication';
 
-  let text_filter,
-    error_filter,
-    warning_filter = null;
-  let logdata,
-    filtered_logdata = '';
-  let last_change = new Date();
-  let lines_counter = 0;
-  let downloading = false;
+let text_filter,
+  error_filter,
+  warning_filter = null;
+let logdata,
+  filtered_logdata = '';
+let last_change = new Date();
+let lines_counter = 0;
+let downloading = false;
 
-  const show_log_lines = (new_line, text_filter, error_filter, warning_filter) => {
-    if (!logdata || logdata === undefined || logdata === '') {
-      return;
+const show_log_lines = (new_line, text_filter, error_filter, warning_filter) => {
+  if (!logdata || logdata === undefined || logdata === '') {
+    return;
+  }
+
+  if (new_line) {
+    logdata = new_line + '\n' + logdata;
+    last_log_line.set('');
+  }
+
+  text_filter = text_filter || '';
+
+  let filters = [];
+  if (error_filter) {
+    filters.push('ERROR');
+  }
+  if (warning_filter) {
+    filters.push('WARNING');
+  }
+
+  if (text_filter !== '' || filters.length > 0) {
+    if (text_filter !== '' && filters.length > 0) {
+      text_filter =
+        '(.*' +
+        text_filter +
+        '.*\\s+-\\s+(' +
+        filters.join('|') +
+        ')\\s+-\\s+' +
+        ')|(.*\\s+-\\s+(' +
+        filters.join('|') +
+        ')\\s+-\\s+.*' +
+        text_filter +
+        '.*)';
+    } else if (text_filter === '' || filters.length > 0) {
+      text_filter = '\\s+-\\s+(' + filters.join('|') + ')\\s+-';
     }
 
-    if (new_line) {
-      logdata = new_line + '\n' + logdata;
-      last_log_line.set('');
-    }
+    text_filter = new RegExp('^.*' + text_filter + '.*', 'img');
+    filtered_logdata = logdata.match(text_filter);
 
-    text_filter = text_filter || '';
-
-    let filters = [];
-    if (error_filter) {
-      filters.push('ERROR');
-    }
-    if (warning_filter) {
-      filters.push('WARNING');
-    }
-
-    if (text_filter !== '' || filters.length > 0) {
-      if (text_filter !== '' && filters.length > 0) {
-        text_filter =
-          '(.*' +
-          text_filter +
-          '.*\\s+-\\s+(' +
-          filters.join('|') +
-          ')\\s+-\\s+' +
-          ')|(.*\\s+-\\s+(' +
-          filters.join('|') +
-          ')\\s+-\\s+.*' +
-          text_filter +
-          '.*)';
-      } else if (text_filter === '' || filters.length > 0) {
-        text_filter = '\\s+-\\s+(' + filters.join('|') + ')\\s+-';
-      }
-
-      text_filter = new RegExp('^.*' + text_filter + '.*', 'img');
-      filtered_logdata = logdata.match(text_filter);
-
-      if (filtered_logdata !== null) {
-        filtered_logdata = filtered_logdata.join('\n').trim();
-      } else {
-        filtered_logdata = '';
-      }
+    if (filtered_logdata !== null) {
+      filtered_logdata = filtered_logdata.join('\n').trim();
     } else {
-      text_filter = false;
-      filtered_logdata = logdata;
+      filtered_logdata = '';
     }
+  } else {
+    text_filter = false;
+    filtered_logdata = logdata;
+  }
 
-    lines_counter = (filtered_logdata.match(/\n/g) || []).length;
-    lines_counter = lines_counter > 0 ? lines_counter++ : lines_counter; // Add extra lastline if there are more then 0 lines
-    last_change = new Date();
-  };
+  lines_counter = (filtered_logdata.match(/\n/g) || []).length;
+  lines_counter = lines_counter > 0 ? lines_counter++ : lines_counter; // Add extra lastline if there are more then 0 lines
+  last_change = new Date();
+};
 
-  const download_logfile = async () => {
-    downloading = true;
+const download_logfile = async () => {
+  downloading = true;
 
-    const filename = 'terrariumpi_logfile.txt';
-    let loglines = '';
-    await fetchLoglines((data) => (loglines = data));
+  const filename = 'terrariumpi_logfile.txt';
+  let loglines = '';
+  await fetchLoglines((data) => (loglines = data));
 
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(new Blob([loglines]));
-    link.download = filename;
-    link.click();
+  const link = document.createElement('a');
+  link.href = window.URL.createObjectURL(new Blob([loglines]));
+  link.download = filename;
+  link.click();
 
-    downloading = false;
-  };
+  downloading = false;
+};
 
-  onMount(() => {
-    setCustomPageTitle($_('system.log.title', { default: 'System logging' }));
-    fetchLoglines((data) => (logdata = data.split('\n').reverse().join('\n').trim()), true);
-  });
+onMount(() => {
+  setCustomPageTitle($_('system.log.title', { default: 'System logging' }));
+  fetchLoglines((data) => (logdata = data.split('\n').reverse().join('\n').trim()), true);
+});
 
-  onDestroy(() => {
-    customPageTitleUsed.set(false);
-  });
+onDestroy(() => {
+  customPageTitleUsed.set(false);
+});
 
-  $: show_log_lines($last_log_line, text_filter, error_filter, warning_filter);
+$: show_log_lines($last_log_line, text_filter, error_filter, warning_filter);
 </script>
 
 <PageHeader>
@@ -107,14 +113,18 @@
     {#if $isAuthenticated}
       <BreadcrumbItem>
         <a
-          href={'#'}
+          href="{'#'}"
           class="mt-1"
           target="_blank"
           rel="noopener noreferrer"
-          title={$_('system.log.download.title', { default: 'Download log file' })}
-          on:click|preventDefault={download_logfile}
+          title="{$_('system.log.download.title', { default: 'Download log file' })}"
+          on:click|preventDefault="{download_logfile}"
         >
-          <i class="fas" class:fa-download={!downloading} class:fa-spinner={downloading} class:fa-spin={downloading}
+          <i
+            class="fas"
+            class:fa-download="{!downloading}"
+            class:fa-spinner="{downloading}"
+            class:fa-spin="{downloading}"
           ></i>
           {$_('system.log.download.title', { default: 'Download log file' })}
         </a>
@@ -146,14 +156,14 @@
                   id="filerfield"
                   type="text"
                   class="form-control form-control-sm"
-                  placeholder={$_('system.log.filters.search', { default: 'Enter search terms' })}
-                  bind:value={text_filter}
+                  placeholder="{$_('system.log.filters.search', { default: 'Enter search terms' })}"
+                  bind:value="{text_filter}"
                 />
                 {#if text_filter}
                   <button
                     type="button"
                     class="btn btn-tool"
-                    on:click={() => (text_filter = null)}
+                    on:click="{() => (text_filter = null)}"
                     style="margin-left: -30px"
                   >
                     <i class="form-control-clear fas fa-times"></i>
@@ -162,13 +172,13 @@
               </div>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="error" bind:checked={error_filter} />
+              <input class="form-check-input" type="checkbox" value="error" bind:checked="{error_filter}" />
               <label class="form-check-label" for="error_filter"
                 >{$_('system.log.filters.errors', { default: 'errors' })}</label
               >
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="warning" bind:checked={warning_filter} />
+              <input class="form-check-input" type="checkbox" value="warning" bind:checked="{warning_filter}" />
               <label class="form-check-label" for="warning_filter"
                 >{$_('system.log.filters.warnings', { default: 'warnings' })}</label
               >
@@ -178,18 +188,12 @@
         <div class="card-body">
           <textarea
             class="form-control text-monospace h-100"
-            placeholder={$_('system.log.loading', { default: 'Loading data' })}
+            placeholder="{$_('system.log.loading', { default: 'Loading data' })}"
             readonly="readonly"
-            bind:value={filtered_logdata}
+            bind:value="{filtered_logdata}"
           ></textarea>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<style>
-  textarea {
-    font-size: 0.8rem;
-  }
-</style>

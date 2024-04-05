@@ -1,14 +1,23 @@
-<script>
-  import { capitalizeFirstLetter } from '../../helpers/string-helpers';
-  import { template_sensor_type_color, template_sensor_type_icon } from '../../helpers/icon-helpers';
-  import { roundToPrecision } from '../../helpers/number-helpers';
-  import { _, time } from 'svelte-i18n';
-  import { dayjs } from 'svelte-time';
-  import { getCustomConfig } from '../../config';
-  import { ApiUrl } from '../../constants/urls';
+<style>
+table.table-sm td:last-child {
+  width: 1.5rem;
+  position: absolute;
+  right: 0px;
+  margin-right: 1.25rem;
+}
+</style>
 
-  let settings = getCustomConfig();
-  export let enclosure = { areas: [] };
+<script>
+import { capitalizeFirstLetter } from '../../helpers/string-helpers';
+import { template_sensor_type_color, template_sensor_type_icon } from '../../helpers/icon-helpers';
+import { roundToPrecision } from '../../helpers/number-helpers';
+import { _, time } from 'svelte-i18n';
+import { dayjs } from 'svelte-time';
+import { getCustomConfig } from '../../config';
+import { ApiUrl } from '../../constants/urls';
+
+let settings = getCustomConfig();
+export let enclosure = { areas: [] };
 </script>
 
 <div style="background : url({ApiUrl}/{enclosure.image}); background-size : cover">
@@ -19,11 +28,11 @@
           <tr>
             <td colspan="2">
               <i
-                title={capitalizeFirstLetter((area.setup.main_lights ? 'main ' : '') + area.type)}
+                title="{capitalizeFirstLetter((area.setup.main_lights ? 'main ' : '') + area.type)}"
                 class="mr-1 fas {template_sensor_type_icon(
                   (area.setup.main_lights ? 'main ' : '') + area.type,
                 )} {template_sensor_type_color((area.setup.main_lights ? 'main ' : '') + area.type)}"
-                class:text-secondary={area.mode === 'disabled'}
+                class:text-secondary="{area.mode === 'disabled'}"
               >
               </i>
               {area.name}
@@ -37,9 +46,9 @@
               {#if area.mode === 'sensors'}
                 <small
                   class="badge mt-1"
-                  class:badge-success={area.state.powered === true}
-                  class:badge-secondary={area.state.powered === false}
-                  title={$_('enclosures.area.current_status', { default: 'Current status' })}>&nbsp;&nbsp;</small
+                  class:badge-success="{area.state.powered === true}"
+                  class:badge-secondary="{area.state.powered === false}"
+                  title="{$_('enclosures.area.current_status', { default: 'Current status' })}">&nbsp;&nbsp;</small
                 >
               {/if}
             </td>
@@ -56,9 +65,9 @@
                 <td>
                   <small
                     class="badge mt-1"
-                    class:badge-success={area.state[period].powered === true}
-                    class:badge-secondary={area.state[period].powered === false}
-                    title={$_('enclosures.area.current_status', { default: 'Current status' })}>&nbsp;&nbsp;</small
+                    class:badge-success="{area.state[period].powered === true}"
+                    class:badge-secondary="{area.state[period].powered === false}"
+                    title="{$_('enclosures.area.current_status', { default: 'Current status' })}">&nbsp;&nbsp;</small
                   >
                 </td>
               </tr>
@@ -77,8 +86,8 @@
                 {#if area.state.sensors.alarm}
                   <i
                     class="fas fa-exclamation-triangle text-secondary mt-1"
-                    class:text-danger={(area.state.sensors?.alarm_low && area.setup.low.relays.length > 0) ||
-                      (area.state.sensors?.alarm_high && area.setup.high.relays.length > 0)}
+                    class:text-danger="{(area.state.sensors?.alarm_low && area.setup.low.relays.length > 0) ||
+                      (area.state.sensors?.alarm_high && area.setup.high.relays.length > 0)}"
                   >
                   </i>
                 {/if}
@@ -90,12 +99,3 @@
     </table>
   </div>
 </div>
-
-<style>
-  table.table-sm td:last-child {
-    width: 1.5rem;
-    position: absolute;
-    right: 0px;
-    margin-right: 1.25rem;
-  }
-</style>

@@ -1,9 +1,9 @@
 <script>
-  import EnclosureDoorIcon from '../components/enclosure/EnclosureDoorIcon.svelte';
-  import Enclosure from '../components/enclosure/Enclosure.svelte';
-  import { enclosureNameSort } from '../helpers/string-helpers';
+import EnclosureDoorIcon from '../components/enclosure/EnclosureDoorIcon.svelte';
+import Enclosure from '../components/enclosure/Enclosure.svelte';
+import { enclosureNameSort } from '../helpers/string-helpers';
 
-  export let enclosures = [];
+export let enclosures = [];
 </script>
 
 {#if enclosures.length > 0}
@@ -16,11 +16,11 @@
               >{enclosure.name}</a
             >
             <span class="float-right">
-              <EnclosureDoorIcon enclosure_id={enclosure.id} />
+              <EnclosureDoorIcon enclosure_id="{enclosure.id}" />
             </span>
           </h4>
         </div>
-        <div id="enclosure_{enclosure.id}" class="collapse" class:show={counter === 0} data-parent="#accordion">
+        <div id="enclosure_{enclosure.id}" class="collapse" class:show="{counter === 0}" data-parent="#accordion">
           <Enclosure {enclosure} />
         </div>
       </div>
