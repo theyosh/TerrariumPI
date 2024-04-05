@@ -3,5 +3,12 @@
   "singleQuote": true,
   "printWidth": 120,
   "tabWidth": 2,
-  "useTabs": false
+  "useTabs": false,
+  "plugins": ["prettier-plugin-svelte"],
+  "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }],
+  "svelteSortOrder": "options-styles-scripts-markup",
+  "svelteStrictMode": true,
+  "svelteAllowShorthand" : true,
+  "bracketSameLine": false,
+  "svelteIndentScriptAndStyle": false
 }

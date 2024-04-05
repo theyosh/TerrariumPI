@@ -7,7 +7,7 @@
     "build:dev": "cross-env-file -p ./.env.dev.json npx rollup -c",
     "dev": "cross-env-file -p ./.env.dev.json npx rollup -c -w",
     "start": "npx serve -n -l 5000 public",
-    "format": "prettier --write  --plugin prettier-plugin-svelte ./gui"
+    "format": "prettier --write ./gui"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.10",
@@ -27,7 +27,7 @@
     "postcss": "^8.4.14",
     "postcss-import": "^16.0.0",
     "prettier": "^3.2.4",
-    "prettier-plugin-svelte": "^3.0.3",
+    "prettier-plugin-svelte": "^3.1.0",
     "rollup": "^4.9.6",
     "rollup-plugin-bundle-inject": "^1.0.3",
     "rollup-plugin-copy": "^3.4.0",

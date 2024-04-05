@@ -1,39 +1,39 @@
 <script>
-  import { Modal, ModalCloseButton } from '@keenmate/svelte-adminlte';
-  import { onMount } from 'svelte';
-  import { _ } from 'svelte-i18n';
+import { Modal, ModalCloseButton } from '@keenmate/svelte-adminlte';
+import { onMount } from 'svelte';
+import { _ } from 'svelte-i18n';
 
-  export let loading = false;
+export let loading = false;
 
-  let wrapper_show;
-  let wrapper_hide;
-  let loadingDiv = null;
+let wrapper_show;
+let wrapper_hide;
+let loadingDiv = null;
 
-  export const show = () => {
-    // Toggle loading div
-    // loading = true
+export const show = () => {
+  // Toggle loading div
+  // loading = true
 
-    // Show the modal
-    wrapper_show();
-  };
+  // Show the modal
+  wrapper_show();
+};
 
-  export const hide = () => {
-    // Delay the loading div
-    // setTimeout(() => {
-    //   loading = false
-    // }, 1000)
+export const hide = () => {
+  // Delay the loading div
+  // setTimeout(() => {
+  //   loading = false
+  // }, 1000)
 
-    // Hide modal
-    wrapper_hide();
-  };
+  // Hide modal
+  wrapper_hide();
+};
 
-  onMount(() => {
-    // GUI hack: Move loading div after model content div, so we get a full modal loading div
-    loadingDiv.parentElement.parentElement.parentElement.appendChild(loadingDiv);
-  });
+onMount(() => {
+  // GUI hack: Move loading div after model content div, so we get a full modal loading div
+  loadingDiv.parentElement.parentElement.parentElement.appendChild(loadingDiv);
+});
 </script>
 
-<Modal xlarge bind:show={wrapper_show} bind:hide={wrapper_hide}>
+<Modal xlarge bind:show="{wrapper_show}" bind:hide="{wrapper_hide}">
   <svelte:fragment slot="header">
     <slot name="header" />
   </svelte:fragment>
@@ -50,7 +50,7 @@
   </svelte:fragment>
 
   <!-- Hack using d-none class. Else can't move the div to a different location in the DOM -->
-  <div class="overlay" class:d-none={!loading} bind:this={loadingDiv}>
+  <div class="overlay" class:d-none="{!loading}" bind:this="{loadingDiv}">
     <i class="fas fa-2x fa-sync-alt fa-spin"></i>
   </div>
 </Modal>

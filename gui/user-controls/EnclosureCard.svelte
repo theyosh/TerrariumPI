@@ -1,48 +1,54 @@
+<style>
+.profile_image {
+  width: 200px;
+}
+</style>
+
 <script>
-  import { dayjs } from 'svelte-time';
-  import duration from 'dayjs/esm/plugin/duration';
-  dayjs.extend(duration);
-  import { onMount, getContext } from 'svelte';
-  import { _, time, date } from 'svelte-i18n';
+import { dayjs } from 'svelte-time';
+import duration from 'dayjs/esm/plugin/duration';
+dayjs.extend(duration);
+import { onMount, getContext } from 'svelte';
+import { _, time, date } from 'svelte-i18n';
 
-  import { Fancybox } from '@fancyapps/ui';
-  import '@fancyapps/ui/dist/fancybox/fancybox.css';
+import { Fancybox } from '@fancyapps/ui';
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
-  import { template_sensor_type_color, template_sensor_type_icon } from '../helpers/icon-helpers';
-  import { roundToPrecision } from '../helpers/number-helpers';
-  import { getCustomConfig } from '../config';
-  import { ApiUrl } from '../constants/urls';
-  import { fancyAppsLanguage } from '../constants/ui';
-  import { updateButton, isDarkInterface } from '../stores/terrariumpi';
-  import { isAuthenticated } from '../stores/authentication';
-  import { externalLinks, areaObjectSort } from '../helpers/string-helpers';
+import { template_sensor_type_color, template_sensor_type_icon } from '../helpers/icon-helpers';
+import { roundToPrecision } from '../helpers/number-helpers';
+import { getCustomConfig } from '../config';
+import { ApiUrl } from '../constants/urls';
+import { fancyAppsLanguage } from '../constants/ui';
+import { updateButton, isDarkInterface } from '../stores/terrariumpi';
+import { isAuthenticated } from '../stores/authentication';
+import { externalLinks, areaObjectSort } from '../helpers/string-helpers';
 
-  import Card from '../user-controls/Card.svelte';
-  import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
-  import DoorIcon from '../components/common/DoorIcon.svelte';
+import Card from '../user-controls/Card.svelte';
+import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
+import DoorIcon from '../components/common/DoorIcon.svelte';
 
-  export let enclosure;
+export let enclosure;
 
-  const settings = getCustomConfig();
-  const { editEnclosure, editArea } = getContext('modals');
-  const { deleteAction, deleteArea } = getContext('enclosureActions');
+const settings = getCustomConfig();
+const { editEnclosure, editArea } = getContext('modals');
+const { deleteAction, deleteArea } = getContext('enclosureActions');
 
-  let last_update = null;
+let last_update = null;
 
-  onMount(() => {
-    Fancybox.bind('[data-fancybox]', {
-      l10n: fancyAppsLanguage(),
-    });
+onMount(() => {
+  Fancybox.bind('[data-fancybox]', {
+    l10n: fancyAppsLanguage(),
   });
+});
 
-  $: if (enclosure.doors) {
-    enclosure.doors.map((door) => updateButton({ ...door, ...{ enclosure: enclosure.id } }));
-  }
-  $: last_update = enclosure ? new Date() : null;
+$: if (enclosure.doors) {
+  enclosure.doors.map((door) => updateButton({ ...door, ...{ enclosure: enclosure.id } }));
+}
+$: last_update = enclosure ? new Date() : null;
 </script>
 
 {#if enclosure}
-  <Card loading={false} noPadding={false} class={enclosure.id}>
+  <Card loading="{false}" noPadding="{false}" class="{enclosure.id}">
     <svelte:fragment slot="header">
       <i class="fas fa-globe mr-2"></i>{enclosure.name}
       <small class="ml-2 text-muted"
@@ -53,11 +59,11 @@
 
     <svelte:fragment slot="tools">
       <CardSettingsTools>
-        <button class="dropdown-item" on:click={() => editEnclosure(enclosure)}>
+        <button class="dropdown-item" on:click="{() => editEnclosure(enclosure)}">
           <i class="fas fa-wrench mr-2"></i>{$_('enclosures.actions.settings', { default: 'Edit enclosure' })}
         </button>
 
-        <button class="dropdown-item text-danger" on:click={() => deleteAction(enclosure)}>
+        <button class="dropdown-item text-danger" on:click="{() => deleteAction(enclosure)}">
           <i class="fas fa-trash-alt mr-2"></i>{$_('enclosures.actions.delete', { default: 'Delete enclosure' })}
         </button>
       </CardSettingsTools>
@@ -70,9 +76,9 @@
             src="{ApiUrl}/{enclosure.image}"
             role="button"
             class="rounded float-left img-thumbnail mt-1 mr-2 profile_image"
-            alt={$_('enclosures.settings.image.label', { default: 'Image' })}
+            alt="{$_('enclosures.settings.image.label', { default: 'Image' })}"
             data-fancybox
-            data-caption={enclosure.name}
+            data-caption="{enclosure.name}"
           />
         {/if}
         {@html externalLinks(enclosure.description)}
@@ -124,9 +130,9 @@
                     {settings.units[area.type].value}
                     <i
                       class="fas fa-exclamation-triangle text-secondary mt-1 ml-2"
-                      class:text-danger={(area.state.sensors?.alarm_low && area.setup.low.relays.length > 0) ||
-                        (area.state.sensors?.alarm_high && area.setup.high.relays.length > 0)}
-                      class:d-none={!area.state.sensors.alarm}
+                      class:text-danger="{(area.state.sensors?.alarm_low && area.setup.low.relays.length > 0) ||
+                        (area.state.sensors?.alarm_high && area.setup.high.relays.length > 0)}"
+                      class:d-none="{!area.state.sensors.alarm}"
                     >
                     </i>
                   {:else}
@@ -146,20 +152,20 @@
                   {#if area.state.sensors}
                     <small
                       class="badge right mt-1"
-                      class:mr-4={!$isAuthenticated}
-                      class:badge-success={area.state.powered === true}
-                      class:badge-secondary={area.state.powered === false}
-                      title={$_('enclosures.area.current_status', { default: 'Current status' })}>&nbsp;&nbsp;</small
+                      class:mr-4="{!$isAuthenticated}"
+                      class:badge-success="{area.state.powered === true}"
+                      class:badge-secondary="{area.state.powered === false}"
+                      title="{$_('enclosures.area.current_status', { default: 'Current status' })}">&nbsp;&nbsp;</small
                     >
                   {:else}
                     {#each ['day', 'night', 'low', 'high'] as period}
                       {#if area.state[period] && area.state[period].begin}
                         <small
                           class="badge right mt-1"
-                          class:mr-4={!$isAuthenticated}
-                          class:badge-success={area.state[period].powered === true}
-                          class:badge-secondary={area.state[period].powered === false}
-                          title={$_('enclosures.area.current_status', { default: 'Current status' })}
+                          class:mr-4="{!$isAuthenticated}"
+                          class:badge-success="{area.state[period].powered === true}"
+                          class:badge-secondary="{area.state[period].powered === false}"
+                          title="{$_('enclosures.area.current_status', { default: 'Current status' })}"
                           >&nbsp;&nbsp;</small
                         ><br />
                       {/if}
@@ -170,19 +176,19 @@
                   <td class="text-right text-nowrap">
                     <button
                       class="btn btn-sm"
-                      title={$_('enclosures.area.edit.title', { default: 'Edit area' })}
-                      class:btn-light={!$isDarkInterface}
-                      class:btn-dark={$isDarkInterface}
-                      on:click={() => editArea(area)}
+                      title="{$_('enclosures.area.edit.title', { default: 'Edit area' })}"
+                      class:btn-light="{!$isDarkInterface}"
+                      class:btn-dark="{$isDarkInterface}"
+                      on:click="{() => editArea(area)}"
                     >
                       <i class="fas fa-wrench"></i>
                     </button>
                     <button
                       class="btn btn-sm"
-                      title={$_('enclosures.area.delete.title', { default: 'Delete area' })}
-                      class:btn-light={!$isDarkInterface}
-                      class:btn-dark={$isDarkInterface}
-                      on:click={() => deleteArea(area)}
+                      title="{$_('enclosures.area.delete.title', { default: 'Delete area' })}"
+                      class:btn-light="{!$isDarkInterface}"
+                      class:btn-dark="{$isDarkInterface}"
+                      on:click="{() => deleteArea(area)}"
                     >
                       <i class="fas fa-trash-alt text-danger"></i>
                     </button>
@@ -204,7 +210,7 @@
               <tr>
                 <td>{door.name}</td>
                 <td class="text-center">
-                  <DoorIcon door_id={door.id} />
+                  <DoorIcon door_id="{door.id}" />
                 </td>
               </tr>
             {/each}
@@ -217,12 +223,12 @@
             <div class="col-4">
               <strong>{webcam.name}</strong>
               <img
-                src={`${ApiUrl}/${webcam.raw_image}?_t=${new Date().getTime()}`}
+                src="{`${ApiUrl}/${webcam.raw_image}?_t=${new Date().getTime()}`}"
                 role="button"
                 class="rounded img-thumbnail"
-                alt={`${webcam.name}, ${$date(new Date())} ${$time(new Date())}`}
+                alt="{`${webcam.name}, ${$date(new Date())} ${$time(new Date())}`}"
                 data-fancybox
-                data-caption={`${webcam.name}, ${$date(new Date())} ${$time(new Date())}`}
+                data-caption="{`${webcam.name}, ${$date(new Date())} ${$time(new Date())}`}"
               />
             </div>
           {/each}
@@ -231,9 +237,3 @@
     </div>
   </Card>
 {/if}
-
-<style>
-  .profile_image {
-    width: 200px;
-  }
-</style>

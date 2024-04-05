@@ -1,18 +1,18 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import { PageHeader } from '@keenmate/svelte-adminlte';
-  import { _ } from 'svelte-i18n';
+import { onMount, onDestroy } from 'svelte';
+import { PageHeader } from '@keenmate/svelte-adminlte';
+import { _ } from 'svelte-i18n';
 
-  import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
+import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
 
-  onMount(() => {
-    setCustomPageTitle('404 ' + $_('not-found.title', { default: 'Page not found' }));
-    console.log('Location href', document.location);
-  });
+onMount(() => {
+  setCustomPageTitle('404 ' + $_('not-found.title', { default: 'Page not found' }));
+  console.log('Location href', document.location);
+});
 
-  onDestroy(() => {
-    customPageTitleUsed.set(false);
-  });
+onDestroy(() => {
+  customPageTitleUsed.set(false);
+});
 </script>
 
 <PageHeader>

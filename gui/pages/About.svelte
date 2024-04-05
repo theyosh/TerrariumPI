@@ -1,22 +1,22 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import { PageHeader } from '@keenmate/svelte-adminlte';
-  import { _ } from 'svelte-i18n';
+import { onMount, onDestroy } from 'svelte';
+import { PageHeader } from '@keenmate/svelte-adminlte';
+import { _ } from 'svelte-i18n';
 
-  import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
-  import { getCustomConfig } from '../config';
+import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
+import { getCustomConfig } from '../config';
 
-  import Card from '../user-controls/Card.svelte';
+import Card from '../user-controls/Card.svelte';
 
-  let settings = getCustomConfig();
+let settings = getCustomConfig();
 
-  onMount(() => {
-    setCustomPageTitle($_('about.title', { default: 'About' }));
-  });
+onMount(() => {
+  setCustomPageTitle($_('about.title', { default: 'About' }));
+});
 
-  onDestroy(() => {
-    customPageTitleUsed.set(false);
-  });
+onDestroy(() => {
+  customPageTitleUsed.set(false);
+});
 </script>
 
 <PageHeader>
@@ -25,7 +25,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <Card loading={false} noPadding={false}>
+      <Card loading="{false}" noPadding="{false}">
         <svelte:fragment slot="header">
           <i class="fas fa-info mr-2"></i>TerrariumPI v {settings.version}
         </svelte:fragment>
@@ -82,13 +82,18 @@
           >'
         </p>
         <p>
-          API Documentation: <a href="api/redoc/" target="_blank">ReDoc</a> /
+          API Documentation:
+          <a href="api/redoc/" target="_blank">ReDoc</a> /
           <a href="api/swagger/" target="_blank">Swagger</a>
         </p>
         <p>
-          <br />&copy; Copyright 2015 - 2024<br /><a href="https://theyosh.nl" target="_blank" rel="noopener noreferrer"
-            >TheYOSH</a
+          <br />&copy; Copyright
+          <a
+            href="https://theyosh.github.io/TerrariumPI/posts/2014/08/28/early-terrariumpi-version/"
+            target="_blank"
+            rel="noopener noreferrer">2014</a
           >
+          - 2024<br /><a href="https://theyosh.nl" target="_blank" rel="noopener noreferrer">TheYOSH</a>
         </p>
       </Card>
     </div>
