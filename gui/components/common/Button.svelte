@@ -1,27 +1,27 @@
 <style>
-h1.button {
-  font-size: 8rem;
-}
+  h1.button {
+    font-size: 8rem;
+  }
 </style>
 
 <script>
-import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
 
-import { buttons } from '../../stores/terrariumpi';
+  import { buttons } from '../../stores/terrariumpi';
 
-export let button;
+  export let button;
 
-// Set the initial relay value
-$buttons[button.id] = {
-  value: button.value,
-  error: button.error,
-  last_update: new Date(),
-  changed: true,
-};
+  // Set the initial relay value
+  $buttons[button.id] = {
+    value: button.value,
+    error: button.error,
+    last_update: new Date(),
+    changed: true,
+  };
 
-onMount(() => {
-  $buttons[button.id].last_update = new Date();
-});
+  onMount(() => {
+    $buttons[button.id].last_update = new Date();
+  });
 </script>
 
 <h1 class="pt-3 button">

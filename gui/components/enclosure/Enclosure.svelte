@@ -1,23 +1,23 @@
 <style>
-table.table-sm td:last-child {
-  width: 1.5rem;
-  position: absolute;
-  right: 0px;
-  margin-right: 1.25rem;
-}
+  table.table-sm td:last-child {
+    width: 1.5rem;
+    position: absolute;
+    right: 0px;
+    margin-right: 1.25rem;
+  }
 </style>
 
 <script>
-import { capitalizeFirstLetter } from '../../helpers/string-helpers';
-import { template_sensor_type_color, template_sensor_type_icon } from '../../helpers/icon-helpers';
-import { roundToPrecision } from '../../helpers/number-helpers';
-import { _, time } from 'svelte-i18n';
-import { dayjs } from 'svelte-time';
-import { getCustomConfig } from '../../config';
-import { ApiUrl } from '../../constants/urls';
+  import { capitalizeFirstLetter } from '../../helpers/string-helpers';
+  import { template_sensor_type_color, template_sensor_type_icon } from '../../helpers/icon-helpers';
+  import { roundToPrecision } from '../../helpers/number-helpers';
+  import { _, time } from 'svelte-i18n';
+  import { dayjs } from 'svelte-time';
+  import { getCustomConfig } from '../../config';
+  import { ApiUrl } from '../../constants/urls';
 
-let settings = getCustomConfig();
-export let enclosure = { areas: [] };
+  let settings = getCustomConfig();
+  export let enclosure = { areas: [] };
 </script>
 
 <div style="background : url({ApiUrl}/{enclosure.image}); background-size : cover">

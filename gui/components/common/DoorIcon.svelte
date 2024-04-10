@@ -1,6 +1,6 @@
 <script>
-import { doors } from '../../stores/terrariumpi';
-export let door_id;
+  import { doors } from '../../stores/terrariumpi';
+  export let door_id;
 </script>
 
 {#if !door_id || !$doors.doors[door_id] || ($doors.doors[door_id] && $doors.doors[door_id].closed)}

@@ -1,112 +1,112 @@
 <script>
-import { onMount, createEventDispatcher } from 'svelte';
-import { writable } from 'svelte/store';
-import { _ } from 'svelte-i18n';
-import { createForm } from 'felte';
+  import { onMount, createEventDispatcher } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { _ } from 'svelte-i18n';
+  import { createForm } from 'felte';
 
-import { isDay } from '../stores/terrariumpi';
-import { fetchSystemSettings, updateSystemSettings } from '../providers/api';
-import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
-import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { isDay } from '../stores/terrariumpi';
+  import { fetchSystemSettings, updateSystemSettings } from '../providers/api';
+  import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
 
-import ModalForm from '../user-controls/ModalForm.svelte';
-import Field from '../components/form/Field.svelte';
-import Helper from '../components/form/Helper.svelte';
+  import ModalForm from '../user-controls/ModalForm.svelte';
+  import Field from '../components/form/Field.svelte';
+  import Helper from '../components/form/Helper.svelte';
 
-let wrapper_show;
-let wrapper_hide;
-let loading = false;
-let validated = false;
+  let wrapper_show;
+  let wrapper_hide;
+  let loading = false;
+  let validated = false;
 
-let formData = writable({});
+  let formData = writable({});
 
-let editForm;
+  let editForm;
 
-const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-const successAction = () => {
-  dispatch('save');
-};
+  const successAction = () => {
+    dispatch('save');
+  };
 
-const _processForm = async (values, context) => {
-  validated = true;
+  const _processForm = async (values, context) => {
+    validated = true;
 
-  if (context.form.checkValidity()) {
-    loading = true;
-    values = formToJSON(editForm);
+    if (context.form.checkValidity()) {
+      loading = true;
+      values = formToJSON(editForm);
 
-    try {
-      // Post data
-      await updateSystemSettings(values);
-      // Notifify OK!
-      successNotification(
-        $_('weather.settings.save.ok.message', { default: 'The weather setting is saved.' }),
-        $_('notification.form.save.ok.title', { default: 'Save OK' }),
-      );
+      try {
+        // Post data
+        await updateSystemSettings(values);
+        // Notifify OK!
+        successNotification(
+          $_('weather.settings.save.ok.message', { default: 'The weather setting is saved.' }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
+        );
 
-      // Done, close window
-      hide();
+        // Done, close window
+        hide();
 
-      // Signal the save callback
-      successAction();
+        // Signal the save callback
+        successAction();
 
-      // TODO: Somehow, either the save signal callback or here, we have to reload the buttons
-    } catch (error) {
-      // Some kind of an error
-      loading = false;
-      errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-    } finally {
-      validated = false;
+        // TODO: Somehow, either the save signal callback or here, we have to reload the buttons
+      } catch (error) {
+        // Some kind of an error
+        loading = false;
+        errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+      } finally {
+        validated = false;
+      }
+    } else {
+      let error_message = $_('weather.settings.fields.error', {
+        default: 'Not all required fields are entered correctly.',
+      });
+      error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
+      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
     }
-  } else {
-    let error_message = $_('weather.settings.fields.error', {
-      default: 'Not all required fields are entered correctly.',
-    });
-    error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
-    errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-  }
-};
+  };
 
-const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
-  onSubmit: _processForm,
-});
+  const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
+    onSubmit: _processForm,
+  });
 
-const formSubmit = createSubmitHandler({
-  onSubmit: _processForm,
-});
+  const formSubmit = createSubmitHandler({
+    onSubmit: _processForm,
+  });
 
-export const show = () => {
-  // Anonymous (Async) functions always as first!!
-  (async () => {
-    await fetchSystemSettings('weather_source', (data) => ($formData = { weather_source: data.value }));
-    setFields($formData);
+  export const show = () => {
+    // Anonymous (Async) functions always as first!!
+    (async () => {
+      await fetchSystemSettings('weather_source', (data) => ($formData = { weather_source: data.value }));
+      setFields($formData);
 
-    // Loading done
-    loading = false;
-  })();
+      // Loading done
+      loading = false;
+    })();
 
-  // Reset form validation
-  reset();
-  $formData = formToJSON(editForm);
-  validated = false;
+    // Reset form validation
+    reset();
+    $formData = formToJSON(editForm);
+    validated = false;
 
-  // Toggle loading div
-  loading = true;
+    // Toggle loading div
+    loading = true;
 
-  // Show the modal
-  wrapper_show();
-};
+    // Show the modal
+    wrapper_show();
+  };
 
-export const hide = () => {
-  setTimeout(() => {
-    loading = false;
-  }, 1000);
-  wrapper_hide();
-};
+  export const hide = () => {
+    setTimeout(() => {
+      loading = false;
+    }, 1000);
+    wrapper_hide();
+  };
 
-onMount(() => {
-  editForm.setAttribute('novalidate', 'novalidate');
-});
+  onMount(() => {
+    editForm.setAttribute('novalidate', 'novalidate');
+  });
 </script>
 
 <ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" {loading}>

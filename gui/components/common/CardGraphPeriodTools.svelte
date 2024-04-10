@@ -1,11 +1,11 @@
 <script>
-import { _ } from 'svelte-i18n';
+  import { _ } from 'svelte-i18n';
 
-import { graphs } from '../../stores/terrariumpi';
-import { toggleGraphPeriod } from '../../helpers/graph-helpers';
+  import { graphs } from '../../stores/terrariumpi';
+  import { toggleGraphPeriod } from '../../helpers/graph-helpers';
 
-export let id;
-export let replaced = false;
+  export let id;
+  export let replaced = false;
 </script>
 
 <div class="btn-group">

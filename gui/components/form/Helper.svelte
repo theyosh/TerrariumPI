@@ -1,24 +1,24 @@
 <style>
-.text-muted {
-  font-size: 50% !important;
-}
+  .text-muted {
+    font-size: 50% !important;
+  }
 </style>
 
 <script>
-import { _ } from 'svelte-i18n';
+  import { _ } from 'svelte-i18n';
 
-export let showMessage = false;
-export let button = true;
-export let moreInfo = null;
+  export let showMessage = false;
+  export let button = true;
+  export let moreInfo = null;
 
-let buttonBold = false;
+  let buttonBold = false;
 
-const toggleHelp = () => {
-  for (let helptext of document.querySelectorAll('form small.text-muted')) {
-    helptext.classList.toggle('d-none');
-  }
-  buttonBold = !buttonBold;
-};
+  const toggleHelp = () => {
+    for (let helptext of document.querySelectorAll('form small.text-muted')) {
+      helptext.classList.toggle('d-none');
+    }
+    buttonBold = !buttonBold;
+  };
 </script>
 
 {#if button}

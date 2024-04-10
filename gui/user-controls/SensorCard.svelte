@@ -1,51 +1,51 @@
 <style>
-.light_on_off_threshold {
-  position: absolute;
-  top: 1.2rem;
-  right: 5rem;
-  font-size: 1.8rem;
-  color: gray;
-}
+  .light_on_off_threshold {
+    position: absolute;
+    top: 1.2rem;
+    right: 5rem;
+    font-size: 1.8rem;
+    color: gray;
+  }
 
-.light_on_off_threshold.on {
-  color: yellow;
-  text-shadow:
-    1px 1px 1px lightgray,
-    0 0 1em yellow,
-    0 0 0.2em orange;
-}
+  .light_on_off_threshold.on {
+    color: yellow;
+    text-shadow:
+      1px 1px 1px lightgray,
+      0 0 1em yellow,
+      0 0 0.2em orange;
+  }
 </style>
 
 <script>
-import { getContext } from 'svelte';
-import { _, date, time } from 'svelte-i18n';
+  import { getContext } from 'svelte';
+  import { _, date, time } from 'svelte-i18n';
 
-import { template_sensor_type_icon } from '../helpers/icon-helpers';
-import { exportGraphPeriod } from '../helpers/graph-helpers';
-import { sensors } from '../stores/terrariumpi';
+  import { template_sensor_type_icon } from '../helpers/icon-helpers';
+  import { exportGraphPeriod } from '../helpers/graph-helpers';
+  import { sensors } from '../stores/terrariumpi';
 
-import Card from '../user-controls/Card.svelte';
-import Gauge from '../components/common/Gauge.svelte';
-import Graph from '../components/common/Graph.svelte';
-import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
-import CardGraphPeriodTools from '../components/common/CardGraphPeriodTools.svelte';
+  import Card from '../user-controls/Card.svelte';
+  import Gauge from '../components/common/Gauge.svelte';
+  import Graph from '../components/common/Graph.svelte';
+  import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
+  import CardGraphPeriodTools from '../components/common/CardGraphPeriodTools.svelte';
 
-export let enableGraph = true;
-export let enableSettings = true;
-export let removeParent = false;
-export let sensor;
+  export let enableGraph = true;
+  export let enableSettings = true;
+  export let removeParent = false;
+  export let sensor;
 
-const { editSensor } = getContext('modals');
-const { deleteAction, ignoreAction } = getContext('sensorActions');
+  const { editSensor } = getContext('modals');
+  const { deleteAction, ignoreAction } = getContext('sensorActions');
 
-let exporting = false;
-const exportAction = async () => {
-  exporting = true;
-  await exportGraphPeriod('sensors', sensor.id);
-  exporting = false;
-};
+  let exporting = false;
+  const exportAction = async () => {
+    exporting = true;
+    await exportGraphPeriod('sensors', sensor.id);
+    exporting = false;
+  };
 
-$sensors[sensor.id] = sensor;
+  $sensors[sensor.id] = sensor;
 </script>
 
 {#if sensor}

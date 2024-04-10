@@ -1,52 +1,52 @@
 <style>
-.input-group-text {
-  padding: 0px;
-}
+  .input-group-text {
+    padding: 0px;
+  }
 
-:global(.dark-mode .input-group-text i.fas) {
-  color: white;
-}
+  :global(.dark-mode .input-group-text i.fas) {
+    color: white;
+  }
 </style>
 
 <script>
-import bsCustomFileInput from 'bs-custom-file-input';
-import { onMount } from 'svelte';
-import { _ } from 'svelte-i18n';
+  import bsCustomFileInput from 'bs-custom-file-input';
+  import { onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
 
-import FormGroup from './FormGroup.svelte';
-import { getRandomString } from '../../helpers/string-helpers';
+  import FormGroup from './FormGroup.svelte';
+  import { getRandomString } from '../../helpers/string-helpers';
 
-export let name;
-export let label;
+  export let name;
+  export let label;
 
-export let id = name + getRandomString(6); // Create a unique ID when not entered manual
-export let placeholder = null;
-export let value;
+  export let id = name + getRandomString(6); // Create a unique ID when not entered manual
+  export let placeholder = null;
+  export let value;
 
-export let required = null;
-export let readonly = null;
+  export let required = null;
+  export let readonly = null;
 
-export let help = null;
-export let invalid = null;
-export let accept = null;
-export let horizontal = null;
+  export let help = null;
+  export let invalid = null;
+  export let accept = null;
+  export let horizontal = null;
 
-let filename_placeholder;
-let deleteFile = false;
+  let filename_placeholder;
+  let deleteFile = false;
 
-value = value || placeholder;
-onMount(() => {
-  bsCustomFileInput.init();
-  return () => {
-    bsCustomFileInput.destroy();
-  };
-});
+  value = value || placeholder;
+  onMount(() => {
+    bsCustomFileInput.init();
+    return () => {
+      bsCustomFileInput.destroy();
+    };
+  });
 
-$: {
-  if (filename_placeholder && value) {
-    filename_placeholder.textContent = value;
+  $: {
+    if (filename_placeholder && value) {
+      filename_placeholder.textContent = value;
+    }
   }
-}
 </script>
 
 <FormGroup {id} {label} {required} {help} {invalid} {horizontal} class="{$$props.class || ''}">

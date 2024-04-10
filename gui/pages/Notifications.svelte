@@ -1,130 +1,130 @@
 <style>
-div.info-box:hover div.info-box-content button.text-danger {
-  display: block !important;
-}
+  div.info-box:hover div.info-box-content button.text-danger {
+    display: block !important;
+  }
 
-.info-box-content {
-  line-height: 120% !important;
-}
+  .info-box-content {
+    line-height: 120% !important;
+  }
 
-button.text-danger {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  display: none;
-}
+  button.text-danger {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: none;
+  }
 </style>
 
 <script>
-import { onMount, onDestroy, getContext } from 'svelte';
-import { PageHeader } from '@keenmate/svelte-adminlte';
-import { _ } from 'svelte-i18n';
+  import { onMount, onDestroy, getContext } from 'svelte';
+  import { PageHeader } from '@keenmate/svelte-adminlte';
+  import { _ } from 'svelte-i18n';
 
-import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
-import {
-  fetchNotificationServices,
-  deleteNotificationService,
-  fetchNotificationMessages,
-  deleteNotificationMessage,
-} from '../providers/api';
-import { successNotification, errorNotification } from '../providers/notification-provider';
-import { template_sensor_type_icon } from '../helpers/icon-helpers';
-import { isDarkInterface } from '../stores/terrariumpi';
-import { nl2br } from '../helpers/string-helpers';
+  import { setCustomPageTitle, customPageTitleUsed } from '../stores/page-title';
+  import {
+    fetchNotificationServices,
+    deleteNotificationService,
+    fetchNotificationMessages,
+    deleteNotificationMessage,
+  } from '../providers/api';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { template_sensor_type_icon } from '../helpers/icon-helpers';
+  import { isDarkInterface } from '../stores/terrariumpi';
+  import { nl2br } from '../helpers/string-helpers';
 
-import Card from '../user-controls/Card.svelte';
-import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
+  import Card from '../user-controls/Card.svelte';
+  import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
 
-let services_loading = false;
-let services = [];
+  let services_loading = false;
+  let services = [];
 
-let messages_loading = false;
-let messages = [];
+  let messages_loading = false;
+  let messages = [];
 
-const { confirmModal } = getContext('confirm');
-const { editService, editMessage } = getContext('modals');
+  const { confirmModal } = getContext('confirm');
+  const { editService, editMessage } = getContext('modals');
 
-const deleteServiceAction = (service) => {
-  confirmModal(
-    $_('services.delete.confirm.message', {
-      default: "Are you sure you want to delete the service ''{name}''?",
-      values: { name: service.name },
-    }),
-    async () => {
-      try {
-        await deleteNotificationService(service.id);
-        successNotification(
-          $_('services.delete.ok.message', {
-            default: "The service ''{name}'' is deleted.",
-            values: { name: service.name },
-          }),
-          $_('notification.delete.ok.title', { default: 'OK' }),
-        );
-        loadServices();
-      } catch (e) {
-        errorNotification(
-          $_('services.delete.error.message', {
-            default: "The service ''{name}'' could not be deleted!\nError: {error}",
-            values: { name: service.name, error: e.message },
-          }),
-          $_('notification.delete.error.title', { default: 'ERROR' }),
-        );
-      }
-    },
-  );
-};
+  const deleteServiceAction = (service) => {
+    confirmModal(
+      $_('services.delete.confirm.message', {
+        default: "Are you sure you want to delete the service ''{name}''?",
+        values: { name: service.name },
+      }),
+      async () => {
+        try {
+          await deleteNotificationService(service.id);
+          successNotification(
+            $_('services.delete.ok.message', {
+              default: "The service ''{name}'' is deleted.",
+              values: { name: service.name },
+            }),
+            $_('notification.delete.ok.title', { default: 'OK' }),
+          );
+          loadServices();
+        } catch (e) {
+          errorNotification(
+            $_('services.delete.error.message', {
+              default: "The service ''{name}'' could not be deleted!\nError: {error}",
+              values: { name: service.name, error: e.message },
+            }),
+            $_('notification.delete.error.title', { default: 'ERROR' }),
+          );
+        }
+      },
+    );
+  };
 
-const deleteMessageAction = (message) => {
-  confirmModal(
-    $_('messages.delete.confirm.message', {
-      default: "Are you sure you want to delete the message ''{name}''?",
-      values: { name: message.title },
-    }),
-    async () => {
-      try {
-        await deleteNotificationMessage(message.id);
-        successNotification(
-          $_('messages.delete.ok.message', {
-            default: "The message ''{name}'' is deleted.",
-            values: { name: message.title },
-          }),
-          $_('notification.delete.ok.title', { default: 'OK' }),
-        );
-        loadMessages();
-      } catch (e) {
-        errorNotification(
-          $_('messages.delete.error.message', {
-            default: "The message ''{name}'' could not be deleted!\nError: {error}",
-            values: { name: message.title, error: e.message },
-          }),
-          $_('notification.delete.error.title', { default: 'ERROR' }),
-        );
-      }
-    },
-  );
-};
+  const deleteMessageAction = (message) => {
+    confirmModal(
+      $_('messages.delete.confirm.message', {
+        default: "Are you sure you want to delete the message ''{name}''?",
+        values: { name: message.title },
+      }),
+      async () => {
+        try {
+          await deleteNotificationMessage(message.id);
+          successNotification(
+            $_('messages.delete.ok.message', {
+              default: "The message ''{name}'' is deleted.",
+              values: { name: message.title },
+            }),
+            $_('notification.delete.ok.title', { default: 'OK' }),
+          );
+          loadMessages();
+        } catch (e) {
+          errorNotification(
+            $_('messages.delete.error.message', {
+              default: "The message ''{name}'' could not be deleted!\nError: {error}",
+              values: { name: message.title, error: e.message },
+            }),
+            $_('notification.delete.error.title', { default: 'ERROR' }),
+          );
+        }
+      },
+    );
+  };
 
-const loadServices = async () => {
-  services_loading = true;
-  await fetchNotificationServices(null, (data) => (services = data));
-  services_loading = false;
-};
+  const loadServices = async () => {
+    services_loading = true;
+    await fetchNotificationServices(null, (data) => (services = data));
+    services_loading = false;
+  };
 
-const loadMessages = async () => {
-  messages_loading = true;
-  await fetchNotificationMessages(null, (data) => (messages = data));
-  messages_loading = false;
-};
+  const loadMessages = async () => {
+    messages_loading = true;
+    await fetchNotificationMessages(null, (data) => (messages = data));
+    messages_loading = false;
+  };
 
-onMount(() => {
-  loadServices();
-  loadMessages();
-  setCustomPageTitle($_('system.notifications.title', { default: 'Notifications' }));
-});
+  onMount(() => {
+    loadServices();
+    loadMessages();
+    setCustomPageTitle($_('system.notifications.title', { default: 'Notifications' }));
+  });
 
-onDestroy(() => {
-  customPageTitleUsed.set(false);
-});
+  onDestroy(() => {
+    customPageTitleUsed.set(false);
+  });
 </script>
 
 <PageHeader>

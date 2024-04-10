@@ -1,7 +1,7 @@
 <script>
-import { _ } from 'svelte-i18n';
+  import { _ } from 'svelte-i18n';
 
-import { showLogin } from '../../stores/authentication';
+  import { showLogin } from '../../stores/authentication';
 </script>
 
 <a

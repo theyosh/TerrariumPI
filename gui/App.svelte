@@ -1,368 +1,368 @@
 <style>
-.fa-stack {
-  width: auto;
-  top: -0.2rem;
-  left: 0rem;
-}
+  .fa-stack {
+    width: auto;
+    top: -0.2rem;
+    left: 0rem;
+  }
 </style>
 
 <script context="module">
-import { locale } from './locale/i18n';
+  import { locale } from './locale/i18n';
 
-import { dayjs } from 'svelte-time';
-import duration from 'dayjs/esm/plugin/duration';
-dayjs.extend(duration);
+  import { dayjs } from 'svelte-time';
+  import duration from 'dayjs/esm/plugin/duration';
+  dayjs.extend(duration);
 
-// Import Dayjs locales
-import 'dayjs/locale/de';
-import 'dayjs/locale/de-at';
-import 'dayjs/locale/en';
-import 'dayjs/locale/en-gb';
-import 'dayjs/locale/es';
-import 'dayjs/locale/fr';
-import 'dayjs/locale/it';
-import 'dayjs/locale/ja';
-import 'dayjs/locale/nb';
-import 'dayjs/locale/nl';
-import 'dayjs/locale/pl';
-import 'dayjs/locale/pt';
+  // Import Dayjs locales
+  import 'dayjs/locale/de';
+  import 'dayjs/locale/de-at';
+  import 'dayjs/locale/en';
+  import 'dayjs/locale/en-gb';
+  import 'dayjs/locale/es';
+  import 'dayjs/locale/fr';
+  import 'dayjs/locale/it';
+  import 'dayjs/locale/ja';
+  import 'dayjs/locale/nb';
+  import 'dayjs/locale/nl';
+  import 'dayjs/locale/pl';
+  import 'dayjs/locale/pt';
 
-// Reload when language changes.....?
-locale.subscribe((x) => {
-  dayjs.locale(x);
-});
+  // Reload when language changes.....?
+  locale.subscribe((x) => {
+    dayjs.locale(x);
+  });
 </script>
 
 <script>
-import { onDestroy, onMount, setContext } from 'svelte';
-import { fade } from 'svelte/transition';
-import { get } from 'svelte/store';
-import Router from 'svelte-spa-router';
-import { _, date, time } from 'svelte-i18n';
-import {
-  TopNavigation,
-  Sidebar,
-  SidebarNavItem,
-  Dropdown,
-  DropdownItem,
-  DropdownButton,
-  DropdownMenu,
-  DropdownDivider,
-} from '@keenmate/svelte-adminlte';
+  import { onDestroy, onMount, setContext } from 'svelte';
+  import { fade } from 'svelte/transition';
+  import { get } from 'svelte/store';
+  import Router from 'svelte-spa-router';
+  import { _, date, time } from 'svelte-i18n';
+  import {
+    TopNavigation,
+    Sidebar,
+    SidebarNavItem,
+    Dropdown,
+    DropdownItem,
+    DropdownButton,
+    DropdownMenu,
+    DropdownDivider,
+  } from '@keenmate/svelte-adminlte';
 
-import RoutePages, { onRouteLoaded, Pages, PageUrls } from './pages';
-import { listenPageTitleChanged, customPageTitleUsed } from './stores/page-title';
-import { isDay, lastUpdate, isOnline, doors, isDarkDesktop } from './stores/terrariumpi';
-import { animate_footer_badge } from './helpers/animation-helpers';
-import { websocket } from './providers/websocket';
-import {
-  fetchUpcomingEvents,
-  scanSensors,
-  scanRelays,
-  systemRestart,
-  systemReboot,
-  systemShutdown,
-} from './providers/api';
-import { isAuthenticated, loginModal } from './stores/authentication';
+  import RoutePages, { onRouteLoaded, Pages, PageUrls } from './pages';
+  import { listenPageTitleChanged, customPageTitleUsed } from './stores/page-title';
+  import { isDay, lastUpdate, isOnline, doors, isDarkDesktop } from './stores/terrariumpi';
+  import { animate_footer_badge } from './helpers/animation-helpers';
+  import { websocket } from './providers/websocket';
+  import {
+    fetchUpcomingEvents,
+    scanSensors,
+    scanRelays,
+    systemRestart,
+    systemReboot,
+    systemShutdown,
+  } from './providers/api';
+  import { isAuthenticated, loginModal } from './stores/authentication';
 
-import SidebarNavTree from './user-controls/SidebarNavTree.svelte';
-import { updateSiteBar, toggleSidebarAdminActions } from './helpers/sidebar';
-import { setFavicon } from './helpers/icon-helpers';
-import Time from 'svelte-time';
-import { ApiUrl } from './constants/urls';
+  import SidebarNavTree from './user-controls/SidebarNavTree.svelte';
+  import { updateSiteBar, toggleSidebarAdminActions } from './helpers/sidebar';
+  import { setFavicon } from './helpers/icon-helpers';
+  import Time from 'svelte-time';
+  import { ApiUrl } from './constants/urls';
 
-import { getCustomConfig } from './config';
-import { default as UserPanel } from './components/common/UserPanel.svelte';
-import { template_sensor_type_icon } from './helpers/icon-helpers';
-import { autoDarkMode } from './helpers/color-helpers';
+  import { getCustomConfig } from './config';
+  import { default as UserPanel } from './components/common/UserPanel.svelte';
+  import { template_sensor_type_icon } from './helpers/icon-helpers';
+  import { autoDarkMode } from './helpers/color-helpers';
 
-import ConfirmModal from './modals/ConfirmModal.svelte';
-import LoginModal from './modals/LoginFormModal.svelte';
-import ButtonFormModal from './modals/ButtonFormModal.svelte';
-import RelayFormModal from './modals/RelayFormModal.svelte';
-import SensorFormModal from './modals/SensorFormModal.svelte';
-import WebcamFormModal from './modals/WebcamFormModal.svelte';
-import EnclosureFormModal from './modals/EnclosureFormModal.svelte';
-import PlaylistFormModal from './modals/PlaylistFormModal.svelte';
-import AreaModal from './modals/AreaFormModal.svelte';
+  import ConfirmModal from './modals/ConfirmModal.svelte';
+  import LoginModal from './modals/LoginFormModal.svelte';
+  import ButtonFormModal from './modals/ButtonFormModal.svelte';
+  import RelayFormModal from './modals/RelayFormModal.svelte';
+  import SensorFormModal from './modals/SensorFormModal.svelte';
+  import WebcamFormModal from './modals/WebcamFormModal.svelte';
+  import EnclosureFormModal from './modals/EnclosureFormModal.svelte';
+  import PlaylistFormModal from './modals/PlaylistFormModal.svelte';
+  import AreaModal from './modals/AreaFormModal.svelte';
 
-import ServiceModal from './modals/ServiceModal.svelte';
-import MessageModal from './modals/MessageModal.svelte';
+  import ServiceModal from './modals/ServiceModal.svelte';
+  import MessageModal from './modals/MessageModal.svelte';
 
-import { successNotification } from './providers/notification-provider';
+  import { successNotification } from './providers/notification-provider';
 
-let localeLanguage = '';
-let settings = getCustomConfig();
-let pageTitleSubscription;
-let localeSubscription;
-let upcomingEvents = [];
+  let localeLanguage = '';
+  let settings = getCustomConfig();
+  let pageTitleSubscription;
+  let localeSubscription;
+  let upcomingEvents = [];
 
-let modalConfirm;
-let showConfirm;
-let hideConfirm;
-let confirmMessage = '';
-let confirmCallback;
+  let modalConfirm;
+  let showConfirm;
+  let hideConfirm;
+  let confirmMessage = '';
+  let confirmCallback;
 
-let editModal;
-let editModelContent;
+  let editModal;
+  let editModelContent;
 
-$isDay = !settings.is_night;
-$isAuthenticated = settings.logged_in;
+  $isDay = !settings.is_night;
+  $isAuthenticated = settings.logged_in;
 
-const sensor_submenu_sorting = (data) => {
-  data.forEach((menu) => {
-    if (menu.name === 'Sensors') {
-      let light_submenu = menu.subroutes
-        .filter((submenu) => {
-          return ['sensors_light', 'sensors_uva', 'sensors_uvb', 'sensors_uvi'].indexOf(submenu.name) !== -1;
-        })
-        .sort((a, b) => $_(`${a.title}`).localeCompare($_(`${b.title}`)));
+  const sensor_submenu_sorting = (data) => {
+    data.forEach((menu) => {
+      if (menu.name === 'Sensors') {
+        let light_submenu = menu.subroutes
+          .filter((submenu) => {
+            return ['sensors_light', 'sensors_uva', 'sensors_uvb', 'sensors_uvi'].indexOf(submenu.name) !== -1;
+          })
+          .sort((a, b) => $_(`${a.title}`).localeCompare($_(`${b.title}`)));
 
-      if (light_submenu.length > 0) {
-        let other_menu = menu.subroutes.filter((submenu) => {
-          return ['sensors_light', 'sensors_uva', 'sensors_uvb', 'sensors_uvi'].indexOf(submenu.name) === -1;
-        });
+        if (light_submenu.length > 0) {
+          let other_menu = menu.subroutes.filter((submenu) => {
+            return ['sensors_light', 'sensors_uva', 'sensors_uvb', 'sensors_uvi'].indexOf(submenu.name) === -1;
+          });
+          menu.subroutes = [
+            {
+              name: 'sensors_light',
+              title: 'sensors.light.menu.title',
+              url: '',
+              breadcrumb: ['Home', 'Sensors'],
+              icon: 'fas ' + template_sensor_type_icon('light'),
+              hide: false,
+              subroutes: light_submenu,
+            },
+            ...other_menu,
+          ];
+        }
         menu.subroutes = [
-          {
-            name: 'sensors_light',
-            title: 'sensors.light.menu.title',
-            url: '',
-            breadcrumb: ['Home', 'Sensors'],
-            icon: 'fas ' + template_sensor_type_icon('light'),
-            hide: false,
-            subroutes: light_submenu,
-          },
-          ...other_menu,
+          ...menu.subroutes.slice(0, -2).sort((a, b) => $_(`${a.title}`).localeCompare($_(`${b.title}`))),
+          ...menu.subroutes.slice(-2),
         ];
       }
-      menu.subroutes = [
-        ...menu.subroutes.slice(0, -2).sort((a, b) => $_(`${a.title}`).localeCompare($_(`${b.title}`))),
-        ...menu.subroutes.slice(-2),
-      ];
-    }
-  });
-};
-
-const confirmModal = (message, callback) => {
-  confirmMessage = message;
-  confirmCallback = callback;
-  modalConfirm.show();
-};
-
-setContext('confirm', {
-  confirmModal,
-});
-
-setContext('modals', {
-  editArea: (item, cb) => newModal('new_area', item, cb),
-  editButton: (item, cb) => newModal('new_button', item, cb),
-  editEnclosure: (item, cb) => newModal('new_enclosure', item, cb),
-  editPlaylist: (item, cb) => newModal('new_playlist', item, cb),
-  editRelay: (item, cb) => newModal('new_relay', item, cb),
-  editSensor: (item, cb) => newModal('new_sensor', item, cb),
-  editWebcam: (item, cb) => newModal('new_webcam', item, cb),
-  editService: (item, cb) => newModal('new_service', item, cb),
-  editMessage: (item, cb) => newModal('new_message', item, cb),
-});
-
-const newModal = (type, item, cb) => {
-  editModelContent = null;
-
-  switch (type) {
-    case 'new_area':
-      editModelContent = AreaModal;
-      break;
-
-    case 'new_button':
-      editModelContent = ButtonFormModal;
-      break;
-
-    case 'new_enclosure':
-      editModelContent = EnclosureFormModal;
-      break;
-
-    case 'new_playlist':
-      editModelContent = PlaylistFormModal;
-      break;
-
-    case 'new_relay':
-      editModelContent = RelayFormModal;
-      break;
-
-    case 'new_sensor':
-      editModelContent = SensorFormModal;
-      break;
-
-    case 'new_webcam':
-      editModelContent = WebcamFormModal;
-      break;
-
-    case 'new_service':
-      editModelContent = ServiceModal;
-      break;
-
-    case 'new_message':
-      editModelContent = MessageModal;
-      break;
-  }
-
-  if (editModelContent) {
-    setTimeout(() => {
-      editModal.show(item ? item.id : null, cb);
-    }, 150);
-  }
-};
-
-const confirmAction = async () => {
-  try {
-    await confirmCallback();
-    confirmCallback = null;
-  } catch {}
-  hideConfirm();
-};
-
-const menuAction = async (action) => {
-  let title = null;
-  let message = null;
-
-  switch (action) {
-    case 'scan_sensors':
-      await scanSensors((data) => (message = data.message));
-      title = $_('notification.scanning.ok.title');
-      break;
-    case 'scan_relays':
-      await scanRelays((data) => (message = data.message));
-      title = $_('notification.scanning.ok.title');
-      break;
-    case 'system_restart':
-      await systemRestart((data) => (message = data.message));
-      title = $_('notification.restart.ok.title');
-      break;
-    case 'system_reboot':
-      await systemReboot((data) => (message = data.message));
-      title = $_('notification.reboot.ok.title');
-      break;
-    case 'system_shutdown':
-      await systemShutdown((data) => (message = data.message));
-      title = $_('notification.shutdown.ok.title');
-      break;
-  }
-  successNotification(message, title);
-
-  title = null;
-  message = null;
-};
-
-const confirmModalWindow = (type) => {
-  let message = '';
-  let callbackAction = () => menuAction(type);
-
-  switch (type) {
-    case 'scan_sensors':
-      message = $_('modal.confirm.sensors.scan');
-      break;
-    case 'scan_relays':
-      message = $_('modal.confirm.relays.scan');
-      break;
-    case 'system_restart':
-      message = $_('modal.confirm.system.restart');
-      break;
-    case 'system_reboot':
-      if (settings.docker) {
-        callbackAction = null;
-        message = $_('modal.confirm.docker.not_available', {
-          default: 'This feature is not possible in a Docker setup.',
-        });
-      } else {
-        message = $_('modal.confirm.system.reboot', {
-          default: 'This will reboot the Raspberry PI. This can take up to 60 seconds.',
-        });
-      }
-      break;
-    case 'system_shutdown':
-      if (settings.docker) {
-        callbackAction = null;
-        message = $_('modal.confirm.docker.not_available', {
-          default: 'This feature is not possible in a Docker setup.',
-        });
-      } else {
-        message = $_('modal.confirm.system.shutdown', {
-          default: 'This will shutdown the Raspberry PI. Use with care!',
-        });
-      }
-      break;
-  }
-
-  confirmModal(message, callbackAction);
-};
-
-// Update sensor sub menu sorting
-sensor_submenu_sorting(Pages);
-
-// Auto 'magical' set/remove darkmode ONLY when isDay changed
-$: autoDarkMode($isDay, $isDarkDesktop);
-
-// Update disabled and enabled menu features
-$: toggleSidebarAdminActions($isAuthenticated);
-
-onMount(() => {
-  try {
-    $websocket = { type: 'client_init' };
-  } catch (e) {
-    console.log('Websocket reconnecting ex', e);
-  }
-
-  // Get initial data
-  fetchUpcomingEvents((data) => {
-    upcomingEvents = data;
-  });
-
-  /* GUI Hacks */
-  setFavicon(ApiUrl + '/' + settings.favicon);
-  document.querySelector('nav.main-header').classList.add('text-sm');
-  document.querySelector('nav.main-header .d-none.d-sm-inline-block').classList.remove('d-none', 'd-sm-inline-block');
-  document.querySelector('aside.main-sidebar').prepend(document.querySelector('a.brand-link'));
-  document.querySelector('div.sidebar').prepend(document.querySelector('div.user-panel'));
-
-  const sidebar = jQuery('div.sidebar nav.mt-2 ul.nav-sidebar');
-  sidebar.addClass('nav-child-indent nav-flat');
-  sidebar.find('i.disabled').removeClass('disabled').parent().parent().addClass('disabled');
-  sidebar.find('i.fa-sync-alt').slice(2, 3).parent().addClass('text-info');
-  sidebar.find('i.fa-sync-alt').last().parent().addClass('text-warning');
-  sidebar.find('i.fa-power-off:last').parent().addClass('text-danger');
-
-  localeSubscription = locale.subscribe((x) => (localeLanguage = x));
-  pageTitleSubscription = listenPageTitleChanged();
-
-  toggleSidebarAdminActions($isAuthenticated);
-
-  // Reload every 15 minutes
-  const interval = setInterval(
-    () => {
-      fetchUpcomingEvents((data) => {
-        upcomingEvents = data;
-      });
-      animate_footer_badge();
-    },
-    15 * 60 * 1000,
-  );
-
-  //If a function is returned from onMount, it will be called when the component is unmounted.
-  return () => {
-    clearInterval(interval);
+    });
   };
-});
 
-onDestroy(() => {
-  if (localeSubscription) localeSubscription();
-  if (pageTitleSubscription) pageTitleSubscription();
-});
+  const confirmModal = (message, callback) => {
+    confirmMessage = message;
+    confirmCallback = callback;
+    modalConfirm.show();
+  };
 
-function routeLoaded({ detail: route }) {
-  if (get(customPageTitleUsed)) return;
+  setContext('confirm', {
+    confirmModal,
+  });
 
-  return onRouteLoaded(route);
-}
+  setContext('modals', {
+    editArea: (item, cb) => newModal('new_area', item, cb),
+    editButton: (item, cb) => newModal('new_button', item, cb),
+    editEnclosure: (item, cb) => newModal('new_enclosure', item, cb),
+    editPlaylist: (item, cb) => newModal('new_playlist', item, cb),
+    editRelay: (item, cb) => newModal('new_relay', item, cb),
+    editSensor: (item, cb) => newModal('new_sensor', item, cb),
+    editWebcam: (item, cb) => newModal('new_webcam', item, cb),
+    editService: (item, cb) => newModal('new_service', item, cb),
+    editMessage: (item, cb) => newModal('new_message', item, cb),
+  });
+
+  const newModal = (type, item, cb) => {
+    editModelContent = null;
+
+    switch (type) {
+      case 'new_area':
+        editModelContent = AreaModal;
+        break;
+
+      case 'new_button':
+        editModelContent = ButtonFormModal;
+        break;
+
+      case 'new_enclosure':
+        editModelContent = EnclosureFormModal;
+        break;
+
+      case 'new_playlist':
+        editModelContent = PlaylistFormModal;
+        break;
+
+      case 'new_relay':
+        editModelContent = RelayFormModal;
+        break;
+
+      case 'new_sensor':
+        editModelContent = SensorFormModal;
+        break;
+
+      case 'new_webcam':
+        editModelContent = WebcamFormModal;
+        break;
+
+      case 'new_service':
+        editModelContent = ServiceModal;
+        break;
+
+      case 'new_message':
+        editModelContent = MessageModal;
+        break;
+    }
+
+    if (editModelContent) {
+      setTimeout(() => {
+        editModal.show(item ? item.id : null, cb);
+      }, 150);
+    }
+  };
+
+  const confirmAction = async () => {
+    try {
+      await confirmCallback();
+      confirmCallback = null;
+    } catch {}
+    hideConfirm();
+  };
+
+  const menuAction = async (action) => {
+    let title = null;
+    let message = null;
+
+    switch (action) {
+      case 'scan_sensors':
+        await scanSensors((data) => (message = data.message));
+        title = $_('notification.scanning.ok.title');
+        break;
+      case 'scan_relays':
+        await scanRelays((data) => (message = data.message));
+        title = $_('notification.scanning.ok.title');
+        break;
+      case 'system_restart':
+        await systemRestart((data) => (message = data.message));
+        title = $_('notification.restart.ok.title');
+        break;
+      case 'system_reboot':
+        await systemReboot((data) => (message = data.message));
+        title = $_('notification.reboot.ok.title');
+        break;
+      case 'system_shutdown':
+        await systemShutdown((data) => (message = data.message));
+        title = $_('notification.shutdown.ok.title');
+        break;
+    }
+    successNotification(message, title);
+
+    title = null;
+    message = null;
+  };
+
+  const confirmModalWindow = (type) => {
+    let message = '';
+    let callbackAction = () => menuAction(type);
+
+    switch (type) {
+      case 'scan_sensors':
+        message = $_('modal.confirm.sensors.scan');
+        break;
+      case 'scan_relays':
+        message = $_('modal.confirm.relays.scan');
+        break;
+      case 'system_restart':
+        message = $_('modal.confirm.system.restart');
+        break;
+      case 'system_reboot':
+        if (settings.docker) {
+          callbackAction = null;
+          message = $_('modal.confirm.docker.not_available', {
+            default: 'This feature is not possible in a Docker setup.',
+          });
+        } else {
+          message = $_('modal.confirm.system.reboot', {
+            default: 'This will reboot the Raspberry PI. This can take up to 60 seconds.',
+          });
+        }
+        break;
+      case 'system_shutdown':
+        if (settings.docker) {
+          callbackAction = null;
+          message = $_('modal.confirm.docker.not_available', {
+            default: 'This feature is not possible in a Docker setup.',
+          });
+        } else {
+          message = $_('modal.confirm.system.shutdown', {
+            default: 'This will shutdown the Raspberry PI. Use with care!',
+          });
+        }
+        break;
+    }
+
+    confirmModal(message, callbackAction);
+  };
+
+  // Update sensor sub menu sorting
+  sensor_submenu_sorting(Pages);
+
+  // Auto 'magical' set/remove darkmode ONLY when isDay changed
+  $: autoDarkMode($isDay, $isDarkDesktop);
+
+  // Update disabled and enabled menu features
+  $: toggleSidebarAdminActions($isAuthenticated);
+
+  onMount(() => {
+    try {
+      $websocket = { type: 'client_init' };
+    } catch (e) {
+      console.log('Websocket reconnecting ex', e);
+    }
+
+    // Get initial data
+    fetchUpcomingEvents((data) => {
+      upcomingEvents = data;
+    });
+
+    /* GUI Hacks */
+    setFavicon(ApiUrl + '/' + settings.favicon);
+    document.querySelector('nav.main-header').classList.add('text-sm');
+    document.querySelector('nav.main-header .d-none.d-sm-inline-block').classList.remove('d-none', 'd-sm-inline-block');
+    document.querySelector('aside.main-sidebar').prepend(document.querySelector('a.brand-link'));
+    document.querySelector('div.sidebar').prepend(document.querySelector('div.user-panel'));
+
+    const sidebar = jQuery('div.sidebar nav.mt-2 ul.nav-sidebar');
+    sidebar.addClass('nav-child-indent nav-flat');
+    sidebar.find('i.disabled').removeClass('disabled').parent().parent().addClass('disabled');
+    sidebar.find('i.fa-sync-alt').slice(2, 3).parent().addClass('text-info');
+    sidebar.find('i.fa-sync-alt').last().parent().addClass('text-warning');
+    sidebar.find('i.fa-power-off:last').parent().addClass('text-danger');
+
+    localeSubscription = locale.subscribe((x) => (localeLanguage = x));
+    pageTitleSubscription = listenPageTitleChanged();
+
+    toggleSidebarAdminActions($isAuthenticated);
+
+    // Reload every 15 minutes
+    const interval = setInterval(
+      () => {
+        fetchUpcomingEvents((data) => {
+          upcomingEvents = data;
+        });
+        animate_footer_badge();
+      },
+      15 * 60 * 1000,
+    );
+
+    //If a function is returned from onMount, it will be called when the component is unmounted.
+    return () => {
+      clearInterval(interval);
+    };
+  });
+
+  onDestroy(() => {
+    if (localeSubscription) localeSubscription();
+    if (pageTitleSubscription) pageTitleSubscription();
+  });
+
+  function routeLoaded({ detail: route }) {
+    if (get(customPageTitleUsed)) return;
+
+    return onRouteLoaded(route);
+  }
 </script>
 
 <div class="wrapper">

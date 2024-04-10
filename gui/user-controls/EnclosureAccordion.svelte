@@ -1,9 +1,9 @@
 <script>
-import EnclosureDoorIcon from '../components/enclosure/EnclosureDoorIcon.svelte';
-import Enclosure from '../components/enclosure/Enclosure.svelte';
-import { enclosureNameSort } from '../helpers/string-helpers';
+  import EnclosureDoorIcon from '../components/enclosure/EnclosureDoorIcon.svelte';
+  import Enclosure from '../components/enclosure/Enclosure.svelte';
+  import { enclosureNameSort } from '../helpers/string-helpers';
 
-export let enclosures = [];
+  export let enclosures = [];
 </script>
 
 {#if enclosures.length > 0}

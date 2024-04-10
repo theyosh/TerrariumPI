@@ -10,5 +10,5 @@
   "svelteStrictMode": true,
   "svelteAllowShorthand" : true,
   "bracketSameLine": false,
-  "svelteIndentScriptAndStyle": false
+  "svelteIndentScriptAndStyle": true
 }

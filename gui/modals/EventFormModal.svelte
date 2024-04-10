@@ -1,182 +1,182 @@
 <script>
-import { onMount, createEventDispatcher } from 'svelte';
-import { writable } from 'svelte/store';
-import { _, date } from 'svelte-i18n';
-import { createForm } from 'felte';
+  import { onMount, createEventDispatcher } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { _, date } from 'svelte-i18n';
+  import { createForm } from 'felte';
 
-import { fetchCalendarEvents, updateCalendarEvent } from '../providers/api';
-import { successNotification, errorNotification } from '../providers/notification-provider';
-import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
+  import { fetchCalendarEvents, updateCalendarEvent } from '../providers/api';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
 
-import ModalForm from '../user-controls/ModalForm.svelte';
-import FormGroup from '../components/form/FormGroup.svelte';
-import Field from '../components/form/Field.svelte';
-import Helper from '../components/form/Helper.svelte';
-import Select from '../components/form/Select.svelte';
-import WysiwygArea from '../components/form/WysiwygArea.svelte';
+  import ModalForm from '../user-controls/ModalForm.svelte';
+  import FormGroup from '../components/form/FormGroup.svelte';
+  import Field from '../components/form/Field.svelte';
+  import Helper from '../components/form/Helper.svelte';
+  import Select from '../components/form/Select.svelte';
+  import WysiwygArea from '../components/form/WysiwygArea.svelte';
 
-let wrapper_show;
-let wrapper_hide;
-let loading = false;
-let validated = false;
+  let wrapper_show;
+  let wrapper_hide;
+  let loading = false;
+  let validated = false;
 
-let repeat = false;
-let formData = writable({});
-let mode = 'reminder';
+  let repeat = false;
+  let formData = writable({});
+  let mode = 'reminder';
 
-let editForm;
+  let editForm;
 
-const event_periods = [
-  {
-    text:
-      mode === 'repeat'
-        ? $_('calendar.event.periods.no_repeat', { default: 'No repeat' })
-        : $_('calendar.event.periods.no_reminder', { default: 'No reminder' }),
-    value: '_',
-  },
-  {
-    text: $_('calendar.event.periods.days', { default: 'Days' }),
-    value: 'daily',
-  },
-  {
-    text: $_('calendar.event.periods.weeks', { default: 'Weeks' }),
-    value: 'weekly',
-  },
-  {
-    text: $_('calendar.event.periods.months', { default: 'Months' }),
-    value: 'monthly',
-  },
-  {
-    text: $_('calendar.event.periods.years', { default: 'Years' }),
-    value: 'yearly',
-  },
-];
+  const event_periods = [
+    {
+      text:
+        mode === 'repeat'
+          ? $_('calendar.event.periods.no_repeat', { default: 'No repeat' })
+          : $_('calendar.event.periods.no_reminder', { default: 'No reminder' }),
+      value: '_',
+    },
+    {
+      text: $_('calendar.event.periods.days', { default: 'Days' }),
+      value: 'daily',
+    },
+    {
+      text: $_('calendar.event.periods.weeks', { default: 'Weeks' }),
+      value: 'weekly',
+    },
+    {
+      text: $_('calendar.event.periods.months', { default: 'Months' }),
+      value: 'monthly',
+    },
+    {
+      text: $_('calendar.event.periods.years', { default: 'Years' }),
+      value: 'yearly',
+    },
+  ];
 
-const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-const successAction = () => {
-  dispatch('save');
-};
-
-const uselessEnterEnd = /<br[^>]*><\/p>$/gm;
-const _processForm = async (values, context) => {
-  validated = true;
-
-  if (context.form.checkValidity()) {
-    loading = true;
-    values = formToJSON(editForm);
-
-    delete values.value;
-
-    if (!repeat) {
-      delete values.interval;
-    }
-
-    values.description = values.description.replace(uselessEnterEnd, `<\/p>`);
-    values.dtstart /= 1000;
-    values.dtend /= 1000;
-
-    try {
-      // Post data
-      await updateCalendarEvent(values, (data) => (values = data));
-      // Notifify OK!
-      successNotification(
-        $_('calendar.event.settings.save.ok.message', {
-          default: "Event ''{name}'' is updated",
-          values: { name: values.summary },
-        }),
-        $_('notification.form.save.ok.title', { default: 'Save OK' }),
-      );
-
-      // Done, close window
-      hide();
-
-      // Signal the save callback. This will relead the calendar
-      successAction();
-    } catch (error) {
-      // Some kind of an error
-      loading = false;
-      errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-    } finally {
-      // Cleanup
-      validated = false;
-    }
-  } else {
-    let error_message = $_('calendar.event.settings.save.error.required_fields', {
-      default: 'Not all required fields are entered correctly.',
-    });
-    error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
-    errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-  }
-};
-
-const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
-  onSubmit: _processForm,
-});
-
-const formSubmit = createSubmitHandler({
-  onSubmit: _processForm,
-});
-
-export const show = (eventData, cb) => {
-  // Anonymous (Async) functions always as first!!
-  (async () => {
-    // If ID is given, load existing data
-    if (eventData.id) {
-      loading = true;
-      await fetchCalendarEvents(eventData.id, (data) => {
-        // Use miliseconds
-        data.dtstart *= 1000;
-        data.dtend *= 1000;
-        data.freq = data.freq ? data.freq : '_';
-        $formData = data;
-      });
-      setFields($formData);
-      repeat = $formData.freq !== '_';
-      // Loading done
-      loading = false;
-    }
-  })();
-
-  if (eventData.mode) {
-    mode = eventData.mode;
-  } else {
-    mode = 'reminder';
-  }
-
-  repeat = false;
-
-  // Reset form validation
-  reset();
-  validated = false;
-  let now = Date.now();
-  $formData = {
-    dtstart: eventData.start ? Date.parse(eventData.start) : now,
-    dtend: eventData.end ? Date.parse(eventData.end) : now + 86400000,
-    description: '',
-    freq: '_',
-    repeatend: 2,
-    ...eventData,
+  const successAction = () => {
+    dispatch('save');
   };
-  setFields($formData);
 
-  // Show the modal
-  wrapper_show();
-};
+  const uselessEnterEnd = /<br[^>]*><\/p>$/gm;
+  const _processForm = async (values, context) => {
+    validated = true;
 
-export const hide = () => {
-  // Delay the loading div
-  setTimeout(() => {
-    loading = false;
-  }, 1000);
+    if (context.form.checkValidity()) {
+      loading = true;
+      values = formToJSON(editForm);
 
-  // Hide modal
-  wrapper_hide();
-};
+      delete values.value;
 
-onMount(() => {
-  editForm.setAttribute('novalidate', 'novalidate');
-});
+      if (!repeat) {
+        delete values.interval;
+      }
+
+      values.description = values.description.replace(uselessEnterEnd, `<\/p>`);
+      values.dtstart /= 1000;
+      values.dtend /= 1000;
+
+      try {
+        // Post data
+        await updateCalendarEvent(values, (data) => (values = data));
+        // Notifify OK!
+        successNotification(
+          $_('calendar.event.settings.save.ok.message', {
+            default: "Event ''{name}'' is updated",
+            values: { name: values.summary },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
+        );
+
+        // Done, close window
+        hide();
+
+        // Signal the save callback. This will relead the calendar
+        successAction();
+      } catch (error) {
+        // Some kind of an error
+        loading = false;
+        errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+      } finally {
+        // Cleanup
+        validated = false;
+      }
+    } else {
+      let error_message = $_('calendar.event.settings.save.error.required_fields', {
+        default: 'Not all required fields are entered correctly.',
+      });
+      error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
+      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+    }
+  };
+
+  const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
+    onSubmit: _processForm,
+  });
+
+  const formSubmit = createSubmitHandler({
+    onSubmit: _processForm,
+  });
+
+  export const show = (eventData, cb) => {
+    // Anonymous (Async) functions always as first!!
+    (async () => {
+      // If ID is given, load existing data
+      if (eventData.id) {
+        loading = true;
+        await fetchCalendarEvents(eventData.id, (data) => {
+          // Use miliseconds
+          data.dtstart *= 1000;
+          data.dtend *= 1000;
+          data.freq = data.freq ? data.freq : '_';
+          $formData = data;
+        });
+        setFields($formData);
+        repeat = $formData.freq !== '_';
+        // Loading done
+        loading = false;
+      }
+    })();
+
+    if (eventData.mode) {
+      mode = eventData.mode;
+    } else {
+      mode = 'reminder';
+    }
+
+    repeat = false;
+
+    // Reset form validation
+    reset();
+    validated = false;
+    let now = Date.now();
+    $formData = {
+      dtstart: eventData.start ? Date.parse(eventData.start) : now,
+      dtend: eventData.end ? Date.parse(eventData.end) : now + 86400000,
+      description: '',
+      freq: '_',
+      repeatend: 2,
+      ...eventData,
+    };
+    setFields($formData);
+
+    // Show the modal
+    wrapper_show();
+  };
+
+  export const hide = () => {
+    // Delay the loading div
+    setTimeout(() => {
+      loading = false;
+    }, 1000);
+
+    // Hide modal
+    wrapper_hide();
+  };
+
+  onMount(() => {
+    editForm.setAttribute('novalidate', 'novalidate');
+  });
 </script>
 
 <ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" {loading}>

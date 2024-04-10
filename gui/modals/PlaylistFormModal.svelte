@@ -1,144 +1,144 @@
 <script>
-import { onMount, createEventDispatcher } from 'svelte';
-import { writable } from 'svelte/store';
-import { _ } from 'svelte-i18n';
-import { createForm } from 'felte';
+  import { onMount, createEventDispatcher } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { _ } from 'svelte-i18n';
+  import { createForm } from 'felte';
 
-import { fetchAudiofiles, fetchPlaylists, updatePlaylist } from '../providers/api';
-import { successNotification, errorNotification } from '../providers/notification-provider';
-import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
+  import { fetchAudiofiles, fetchPlaylists, updatePlaylist } from '../providers/api';
+  import { successNotification, errorNotification } from '../providers/notification-provider';
+  import { formToJSON, invalid_form_fields } from '../helpers/form-helpers';
 
-import ModalForm from '../user-controls/ModalForm.svelte';
-import Field from '../components/form/Field.svelte';
-import Helper from '../components/form/Helper.svelte';
-import Select from '../components/form/Select.svelte';
-import Switch from '../components/form/Switch.svelte';
-import Slider from '../components/form/Slider.svelte';
+  import ModalForm from '../user-controls/ModalForm.svelte';
+  import Field from '../components/form/Field.svelte';
+  import Helper from '../components/form/Helper.svelte';
+  import Select from '../components/form/Select.svelte';
+  import Switch from '../components/form/Switch.svelte';
+  import Slider from '../components/form/Slider.svelte';
 
-let wrapper_show;
-let wrapper_hide;
-let loading = false;
-let validated = false;
+  let wrapper_show;
+  let wrapper_hide;
+  let loading = false;
+  let validated = false;
 
-let songs = [];
-let formData = writable({});
+  let songs = [];
+  let formData = writable({});
 
-let editForm;
+  let editForm;
 
-const formatter = (value) => {
-  return $_('audio.playlists.settings.volume.formatter', {
-    default: 'Volume level {value}',
-    values: { value: value },
+  const formatter = (value) => {
+    return $_('audio.playlists.settings.volume.formatter', {
+      default: 'Volume level {value}',
+      values: { value: value },
+    });
+  };
+
+  const dispatch = createEventDispatcher();
+
+  const successAction = () => {
+    dispatch('save');
+  };
+
+  const _processForm = async (values, context) => {
+    validated = true;
+
+    if (context.form.checkValidity()) {
+      loading = true;
+      values = formToJSON(editForm);
+
+      // Delete generated attributes from object
+      delete values.duration;
+      delete values.length;
+
+      try {
+        // Post data
+        await updatePlaylist(values, (data) => (values = data));
+        // Notifify OK!
+        successNotification(
+          $_('audio.playlists.settings.save.ok.message', {
+            default: "Playlist ''{name}'' is updated",
+            values: { name: values.name },
+          }),
+          $_('notification.form.save.ok.title', { default: 'Save OK' }),
+        );
+
+        // Done, close window
+        hide();
+
+        // Signal the save callback
+        successAction();
+
+        // TODO: Somehow, either the save signal callback or here, we have to reload the buttons
+      } catch (error) {
+        // Some kind of an error
+        loading = false;
+        errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+      } finally {
+        // Cleanup
+        validated = false;
+      }
+    } else {
+      let error_message = $_('audio.playlists.settings.save.error.required_fields', {
+        default: 'Not all required fields are entered correctly.',
+      });
+      error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
+      errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
+    }
+  };
+
+  const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
+    onSubmit: _processForm,
   });
-};
 
-const dispatch = createEventDispatcher();
+  const formSubmit = createSubmitHandler({
+    onSubmit: _processForm,
+  });
 
-const successAction = () => {
-  dispatch('save');
-};
-
-const _processForm = async (values, context) => {
-  validated = true;
-
-  if (context.form.checkValidity()) {
-    loading = true;
-    values = formToJSON(editForm);
-
-    // Delete generated attributes from object
-    delete values.duration;
-    delete values.length;
-
-    try {
-      // Post data
-      await updatePlaylist(values, (data) => (values = data));
-      // Notifify OK!
-      successNotification(
-        $_('audio.playlists.settings.save.ok.message', {
-          default: "Playlist ''{name}'' is updated",
-          values: { name: values.name },
-        }),
-        $_('notification.form.save.ok.title', { default: 'Save OK' }),
+  export const show = (playlistId, cb) => {
+    // Anonymous (Async) functions always as first!!
+    (async () => {
+      // Load all avaliable hardware
+      await fetchAudiofiles(
+        (data) =>
+          (songs = data.map((item) => {
+            return { value: item.id, text: item.name + '(' + item.filename.split('/').pop() + ')' };
+          })),
       );
 
-      // Done, close window
-      hide();
+      // If ID is given, load existing data
+      if (playlistId) {
+        await fetchPlaylists(playlistId, (data) => ($formData = data));
+        setFields($formData);
+      }
 
-      // Signal the save callback
-      successAction();
-
-      // TODO: Somehow, either the save signal callback or here, we have to reload the buttons
-    } catch (error) {
-      // Some kind of an error
+      // Loading done
       loading = false;
-      errorNotification(error.message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-    } finally {
-      // Cleanup
-      validated = false;
-    }
-  } else {
-    let error_message = $_('audio.playlists.settings.save.error.required_fields', {
-      default: 'Not all required fields are entered correctly.',
-    });
-    error_message += "\n'" + invalid_form_fields(editForm).join("'\n'") + "'";
-    errorNotification(error_message, $_('notification.form.save.error.title', { default: 'Save Error' }));
-  }
-};
+    })();
 
-const { form, setFields, isSubmitting, createSubmitHandler, reset } = createForm({
-  onSubmit: _processForm,
-});
+    // Reset form validation
+    reset();
+    $formData = formToJSON(editForm);
+    validated = false;
 
-const formSubmit = createSubmitHandler({
-  onSubmit: _processForm,
-});
+    // Toggle loading div
+    loading = true;
 
-export const show = (playlistId, cb) => {
-  // Anonymous (Async) functions always as first!!
-  (async () => {
-    // Load all avaliable hardware
-    await fetchAudiofiles(
-      (data) =>
-        (songs = data.map((item) => {
-          return { value: item.id, text: item.name + '(' + item.filename.split('/').pop() + ')' };
-        })),
-    );
+    // Show the modal
+    wrapper_show();
+  };
 
-    // If ID is given, load existing data
-    if (playlistId) {
-      await fetchPlaylists(playlistId, (data) => ($formData = data));
-      setFields($formData);
-    }
+  export const hide = () => {
+    // Delay the loading div
+    setTimeout(() => {
+      loading = false;
+    }, 1000);
 
-    // Loading done
-    loading = false;
-  })();
+    // Hide modal
+    wrapper_hide();
+  };
 
-  // Reset form validation
-  reset();
-  $formData = formToJSON(editForm);
-  validated = false;
-
-  // Toggle loading div
-  loading = true;
-
-  // Show the modal
-  wrapper_show();
-};
-
-export const hide = () => {
-  // Delay the loading div
-  setTimeout(() => {
-    loading = false;
-  }, 1000);
-
-  // Hide modal
-  wrapper_hide();
-};
-
-onMount(() => {
-  editForm.setAttribute('novalidate', 'novalidate');
-});
+  onMount(() => {
+    editForm.setAttribute('novalidate', 'novalidate');
+  });
 </script>
 
 <ModalForm bind:show="{wrapper_show}" bind:hide="{wrapper_hide}" {loading}>

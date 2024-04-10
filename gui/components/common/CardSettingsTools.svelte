@@ -1,6 +1,6 @@
 <script>
-import { isAuthenticated } from '../../stores/authentication';
-import LoginLink from './LoginLink.svelte';
+  import { isAuthenticated } from '../../stores/authentication';
+  import LoginLink from './LoginLink.svelte';
 </script>
 
 <div class="btn-group" class:d-none="{$isAuthenticated && $$slots.default === undefined}">

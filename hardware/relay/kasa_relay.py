@@ -45,14 +45,14 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
 
             return state
 
-        data = self.__state_cache.get_data(self._address[0])
-        if data is not None and terrariumUtils.is_true(data[self._device["switch"]]) == (state != 0.0):
-            return True
-
         data = self.__asyncio.run(__set_hardware_state(state))
+
+        # Update the cache after relay change
+        self._get_hardware_value(True)
+
         return data == state
 
-    def _get_hardware_value(self):
+    def _get_hardware_value(self, force = False):
         async def __get_hardware_state():
             data = []
             await self.device.update()
@@ -66,7 +66,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
         try:
             data = self.__state_cache.get_data(self._address[0])
 
-            if data is None:
+            if data is None or force:
                 data = self.__asyncio.run(__get_hardware_state())
                 self.__state_cache.set_data(self._address[0], data, cache_timeout=20)
 
