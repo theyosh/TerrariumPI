@@ -43,7 +43,7 @@ PyMLX90614==0.0.4
 pyownet==0.10.0.post1
 veml6075==0.0.2
 lib8relay==1.0.3
-pylibftdi==0.21.0
+pylibftdi==0.22.0
 asyncio==3.4.3
 python-kasa==0.6.2.1
 meross-iot==0.4.6.2
@@ -90,5 +90,5 @@ python-telegram-bot[socks,http2]==21.0.1
 # Overrule versions
 # Force to latest version
 paho-mqtt==2.0.0
-icalendar==5.0.11
+icalendar==5.0.12
 adafruit-circuitpython-typing==1.10.3
