@@ -25,6 +25,7 @@ COPY requirements.txt .
 COPY contrib/python3-voltcraft-sem6000.patch.diff .
 
 # requirements are slightly different for docker
+# overruling does not work here, pip will exit with non 0 which will stop the build
 RUN sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/icalendar==.*//g' requirements.txt \
   && pip install smbus==1.1.post2 \
