@@ -30,6 +30,12 @@
         "label": "Anlage",
         "placeholder": "Wählen Sie Gehege"
       },
+      "light_sensors": {
+        "help": "Wählen Sie die Lichtsensoren, um zu erkennen, ob das Licht eingeschaltet ist.",
+        "invalid": "Bitte wählen Sie.",
+        "label": "Lichterkennungssensoren",
+        "placeholder": "Wähle Lichterkennungssensoren"
+      },
       "mode": {
         "help": "Wähle Modus dieses Bereichs. Dies wird das Timing und Dauer der Relais beeinflussen.",
         "invalid": "Bitte treffen Sie eine Wahl.",
@@ -82,6 +88,17 @@
           },
           "placeholder": "Tag / Nacht Quelle"
         },
+        "depend_on_relays_mode": {
+          "all": {
+            "label": "Alle ein"
+          },
+          "none": {
+            "label": "Keiner ein"
+          },
+          "one": {
+            "label": "Mindestens einer ein"
+          }
+        },
         "deviation_high_alarm": {
           "help": "Erhöhung des hohen Alarmwerts.",
           "invalid": "Geben Sie eine gültige Nummer ein.",
@@ -100,6 +117,10 @@
             "invalid": "Gebe eine gültige Zeit ein.",
             "label": "Startzeit",
             "placeholder": "Startzeit eingeben"
+          },
+          "depend_on_relays": {
+            "help": "Wählen Sie die Relais aus, von denen diese Relais abhängig sind.",
+            "invalid": "Bitte treffen Sie eine Auswahl."
           },
           "door_status": {
             "help": "Zustand der archivierten Tür auswählen.",
