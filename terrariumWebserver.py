@@ -90,6 +90,7 @@ class terrariumWebserver(object):
                             self.engine.notification.message(
                                 "authentication_error", {"ip": ip, "username": user, "password": password}, []
                             )
+                            password = len(password) * "*"
                             logger.warning(
                                 f"Incorrect login detected using username '{user}' and password '{password}' from ip {ip}"
                             )
