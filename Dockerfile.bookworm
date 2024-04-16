@@ -39,7 +39,7 @@ RUN sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/icalendar==.*//g' requirements.txt \
   && sed -i 's/opencv-python-headless==.*//g' requirements.txt \
   && sed -i 's/git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3/g' requirements.txt \
-  && pip install smbus==1.1.post2 \
+  && pip install smbus==1.1.post2 --extra-index-url https://www.piwheels.org/simple \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
   && python -c "import bluepy3.btle" \
   && find /opt/venv -type d -name "test*" | xargs rm -rf  \
@@ -83,7 +83,7 @@ RUN apt-get update \
   && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9165938D90FDDD2E 82B129927FA3303E \
   && apt-get update \
   && apt-get full-upgrade -y --no-install-recommends \
-  && apt-get install -y --no-install-recommends sudo pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin openjdk-11-jre-headless python3-opencv \
+  && apt-get install -y --no-install-recommends sudo pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin default-jre-headless python3-opencv \
   && apt-get --purge autoremove -y \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
@@ -93,9 +93,7 @@ RUN apt-get update \
 COPY --from=sispmctl_builder /usr/local/lib/libsispmctl* /usr/local/lib/.
 COPY --from=sispmctl_builder /usr/local/bin/sispmctl /usr/local/bin/sispmctl
 
-RUN ln -s /usr/lib/python3/dist-packages/cv2.*.so /opt/venv/lib/python3.11/site-packages \
-  && ln -s /usr/lib/python3/dist-packages/numpy* /opt/venv/lib/python3.11/site-packages \
-  && rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
+RUN rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
   && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so \
   && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so.0 \
   && ldconfig
