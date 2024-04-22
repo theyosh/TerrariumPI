@@ -103,18 +103,17 @@ fi
 clear
 
 # OS version check
+# if [ "${OS}" == "bookworm" ]; then
+#   whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is not Raspbian Bookworm OS compatible. Use at own risk.\n\nDo you want to continue?" 0 60
 
-if [ "${OS}" == "bookworm" ]; then
-  whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is not Raspbian Bookworm OS compatible. Use at own risk.\n\nDo you want to continue?" 0 60
-
-  case $? in
-    1|255) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
-      echo "TerrariumPI ${VERSION} is supported on Buster/Bullseye OS (Legacy OS)"
-      echo "Download from: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy"
-      exit 0
-    ;;
-  esac
-fi
+#   case $? in
+#     1|255) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
+#       echo "TerrariumPI ${VERSION} is supported on Buster/Bullseye OS (Legacy OS)"
+#       echo "Download from: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy"
+#       exit 0
+#     ;;
+#   esac
+# fi
 
 whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'. If this is not the right user stop the installation now!\n\nDo you want to continue?" 0 60
 
@@ -174,6 +173,11 @@ if [ -f "${BOOTCONFIG}" ]; then
     echo "dtoverlay=w1-gpio" >> "${BOOTCONFIG}"
   fi
 
+  # Enable serial
+  if [ $(grep -ic "^enable_uart=1" "${BOOTCONFIG}") -eq 0 ]; then
+    echo "enable_uart=1" >> "${BOOTCONFIG}"
+  fi
+
   if [ "${OS}" != "bookworm" ]; then
 
     # Enable camera
@@ -194,10 +198,6 @@ if [ -f "${BOOTCONFIG}" ]; then
     fi
   fi
 
-  # Enable serial
-  if [ $(grep -ic "^enable_uart=1" "${BOOTCONFIG}") -eq 0 ]; then
-    echo "enable_uart=1" >> "${BOOTCONFIG}"
-  fi
 fi
 
 # Disable serial debug to enable CO2 sensors
@@ -287,13 +287,8 @@ XXX
 EOF
 
 # Create Python environment
-SITE_PACKAGES=""
-if [ "${OS}" == "bookworm" ]; then
-    SITE_PACKAGES="--system-site-packages"
-fi
-
 cd "${BASEDIR}/"
-python3 -m venv ${SITE_PACKAGES} venv
+python3 -m venv venv
 source venv/bin/activate
 
 # Install python modules inside the virtual env of Python
@@ -344,6 +339,10 @@ EOF
   MODULE_COUNTER=$((MODULE_COUNTER + 1))
 
 done
+
+if [ "${OS}" == "bookworm" ]; then
+  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
+fi
 
 PROGRESS=$((MODULE_MAX + 3))
 cat <<EOF

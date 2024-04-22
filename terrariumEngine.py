@@ -657,7 +657,7 @@ class terrariumEngine(object):
             new_value += sensor.offset
 
             if not sensor.limit_min <= new_value <= sensor.limit_max:
-                logger.error(
+                logger.warning(
                     f"Measurement for sensor {self.sensors[sensor.id]} of {new_value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]}. Skipping this update."
                 )
                 continue
