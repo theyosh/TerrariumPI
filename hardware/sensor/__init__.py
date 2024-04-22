@@ -81,7 +81,12 @@ class terrariumSensor(object):
                     for i in dir(imported_module):
                         attribute = getattr(imported_module, i)
 
-                        if inspect.isclass(attribute) and attribute != __cls__ and issubclass(attribute, __cls__) and attribute.HARDWARE is not None:
+                        if (
+                            inspect.isclass(attribute)
+                            and attribute != __cls__
+                            and issubclass(attribute, __cls__)
+                            and attribute.HARDWARE is not None
+                        ):
                             if not bluetooth_available and issubclass(attribute, terrariumBluetoothSensor):
                                 logger.info(f"Skip sensor hardware '{attribute.NAME}' because no bluetooth available.")
                                 continue

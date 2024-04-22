@@ -21,7 +21,7 @@ class terrariumRPIWebcam(terrariumWebcam):
         raspistill = Path("/usr/bin/raspistill")
         if not raspistill.exists():
             # New RPI Camera app
-            raspistill = Path('/usr/bin/rpicam-still')
+            raspistill = Path("/usr/bin/rpicam-still")
             if not raspistill.exists():
                 return None
 
