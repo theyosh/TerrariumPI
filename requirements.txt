@@ -1,5 +1,5 @@
 pip==24.0
-setuptools==69.2.0
+setuptools==69.5.1
 wheel==0.43.0
 
 # Database
@@ -38,7 +38,7 @@ pyserial==3.5
 pigpio_dht==0.3.6
 pigpio==1.78
 mitemp_bt==0.0.5
-lywsd03mmc==0.1.0
+git+https://github.com/afer92/lywsd03mmc.git
 PyMLX90614==0.0.4
 pyownet==0.10.0.post1
 veml6075==0.0.2
@@ -85,7 +85,7 @@ ansi2html==1.9.1
 emails==0.6
 luma.oled==3.13.0
 i2c_lcd==0.1.0
-python-telegram-bot[socks,http2]==21.0.1
+python-telegram-bot[socks,http2]==21.1.1
 
 # Overrule versions
 # Force to latest version
