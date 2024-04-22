@@ -10,7 +10,6 @@ import sys
 
 from pathlib import Path
 from hashlib import md5
-from operator import itemgetter
 from func_timeout import func_timeout, FunctionTimedOut
 
 # pip install retry
