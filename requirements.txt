@@ -90,7 +90,7 @@ python-telegram-bot[socks,http2]==20.3
 
 # Overrule versions
 # Do not update pydantic version, it will break python-kasa for python 3.7 https://github.com/python-kasa/python-kasa/issues/523
-pydantic==1.10.9
+pydantic==1.10.13
 # Do not upgrade anymore. Not supported on Python 3.7
 gpiozero==1.6.2
 # Do not upgrade anymore. Not supported on Python 3.7
