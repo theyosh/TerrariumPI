@@ -92,3 +92,4 @@ python-telegram-bot[socks,http2]==21.1.1
 paho-mqtt==2.0.0
 icalendar==5.0.12
 adafruit-circuitpython-typing==1.10.3
+pydantic==1.10.15
