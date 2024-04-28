@@ -288,6 +288,9 @@ EOF
 
 # Create Python environment
 cd "${BASEDIR}/"
+if [ -f venv/pyvenv.cfg ]; then
+    sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = false@"
+fi
 python3 -m venv venv
 source venv/bin/activate
 
