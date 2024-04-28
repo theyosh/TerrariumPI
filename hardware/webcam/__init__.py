@@ -264,6 +264,8 @@ class terrariumWebcam(object):
 
         self.raw_image_path.parent.joinpath(self._TILE_LOCATION).mkdir(parents=True, exist_ok=True)
 
+        source = self.__raw_image.resize((int(round(source_width)), int(round(source_height))))
+
         # as long as there is a new layer, continue
         while zoom_factor >= 0:
             # Create black canvas on zoom factor dimensions
@@ -272,7 +274,10 @@ class terrariumWebcam(object):
             # Scale the raw image to the zoom factor dimensions
             logger.debug("Scale raw image to new canvas size (%sx%s)" % (canvas_width, canvas_height))
             start = time()
-            source = self.__raw_image.resize((int(round(source_width)), int(round(source_height))))
+
+            if source.width != source_width:
+                source = source.resize((int(round(source_width)), int(round(source_height))))
+
             logger.debug(
                 f"Resizing {self.name} image to {source_width}x{source_height} for tiling took: {time()-start:.2f} seconds"
             )
