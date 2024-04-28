@@ -27,7 +27,7 @@ from pony import orm
 from terrariumDatabase import init as init_db, db, Setting, Sensor, Relay, Button, Webcam, Enclosure
 from terrariumWebserver import terrariumWebserver
 from terrariumCalendar import terrariumCalendar
-from terrariumUtils import terrariumUtils, terrariumAsync
+from terrariumUtils import terrariumUtils, terrariumAsync, terrariumCache
 from terrariumEnclosure import terrariumEnclosure
 from terrariumArea import terrariumArea
 from terrariumCloud import TerrariumMerossCloud
@@ -85,6 +85,7 @@ class terrariumEngine(object):
             "too_late": 0,
             "systemd": sdnotify.SystemdNotifier(),
             "asyncio": terrariumAsync(),
+            "cache" : terrariumCache(),
         }
 
         # Create a salt for encryption. And set it as environment variable
@@ -958,6 +959,9 @@ class terrariumEngine(object):
             relay = Relay[relay]
             relay.update(state)
             relay_data = relay.to_dict()
+
+        # Clear totals cache
+        self.__engine["cache"].clear_data("total_power_water")
 
         # Update totals through websocket
         self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow)
@@ -1903,6 +1907,11 @@ class terrariumEngine(object):
     # -= NEW =-
     @property
     def total_power_and_water_usage(self):
+        cacheKey = "total_power_water"
+        data = self.__engine['cache'].get_data(cacheKey)
+        if data is not None:
+            return data
+
         # We are using total() vs sum() as total() will always return a number. https://sqlite.org/lang_aggfunc.html#sumunc
         with orm.db_session():
             data = db.select(
@@ -1926,4 +1935,7 @@ class terrariumEngine(object):
                  WHERE RH1.value > 0)"""
             )
 
-            return {"total_watt": data[0][1], "total_flow": data[0][2], "duration": data[0][3]}
+            result = {"total_watt": data[0][1], "total_flow": data[0][2], "duration": data[0][3]}
+            self.__engine['cache'].set_data(cacheKey, result, -1)
+
+            return result
