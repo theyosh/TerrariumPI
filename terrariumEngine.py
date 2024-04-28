@@ -877,8 +877,8 @@ class terrariumEngine(object):
 
     # -= NEW =-
     def _update_relays(self):
-        # Force an update every 15 minutes. This will make the graphs work better...
-        force_update = int(time.time()) % (15 * 60) <= terrariumEngine.__ENGINE_LOOP_TIMEOUT
+        # Force an update every 60 minutes. This will make the graphs work better...
+        force_update = int(time.time()) % (60 * 60) <= terrariumEngine.__ENGINE_LOOP_TIMEOUT
 
         relays = []
         with orm.db_session():
@@ -1936,6 +1936,7 @@ class terrariumEngine(object):
             )
 
             result = {"total_watt": data[0][1], "total_flow": data[0][2], "duration": data[0][3]}
-            self.__engine['cache'].set_data(cacheKey, result, -1)
+            # Cache for 1 hour, which is the same amount of forcing new relay data to the database
+            self.__engine['cache'].set_data(cacheKey, result, 3600)
 
             return result
