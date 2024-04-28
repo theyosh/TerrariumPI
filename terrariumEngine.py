@@ -85,7 +85,7 @@ class terrariumEngine(object):
             "too_late": 0,
             "systemd": sdnotify.SystemdNotifier(),
             "asyncio": terrariumAsync(),
-            "cache" : terrariumCache(),
+            "cache": terrariumCache(),
         }
 
         # Create a salt for encryption. And set it as environment variable
@@ -1908,7 +1908,7 @@ class terrariumEngine(object):
     @property
     def total_power_and_water_usage(self):
         cacheKey = "total_power_water"
-        data = self.__engine['cache'].get_data(cacheKey)
+        data = self.__engine["cache"].get_data(cacheKey)
         if data is not None:
             return data
 
@@ -1937,6 +1937,6 @@ class terrariumEngine(object):
 
             result = {"total_watt": data[0][1], "total_flow": data[0][2], "duration": data[0][3]}
             # Cache for 1 hour, which is the same amount of forcing new relay data to the database
-            self.__engine['cache'].set_data(cacheKey, result, 3600)
+            self.__engine["cache"].set_data(cacheKey, result, 3600)
 
             return result
