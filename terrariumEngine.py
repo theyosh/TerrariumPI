@@ -1177,7 +1177,7 @@ class terrariumEngine(object):
                             "webcam_archive", webcam.to_dict(), [self.webcams[webcam.id].last_archived_image]
                         )
 
-            logger.info(f"Updated {webcam} in {time.time()-start:.2f} seconds.")
+            logger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
 
         with futures.ThreadPoolExecutor() as pool:
             with orm.db_session():
