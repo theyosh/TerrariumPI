@@ -136,7 +136,7 @@ GEM
     rexml (3.2.6)
     rouge (4.2.1)
     safe_yaml (1.0.5)
-    sass-embedded (1.74.1-x86_64-linux-gnu)
+    sass-embedded (1.75.0-x86_64-linux-gnu)
       google-protobuf (>= 3.25, < 5.0)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
