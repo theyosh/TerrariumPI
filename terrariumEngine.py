@@ -960,15 +960,18 @@ class terrariumEngine(object):
             relay.update(state)
             relay_data = relay.to_dict()
 
-        # Update totals through websocket
-        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(True))
+        # Update enclosure states to reflect the new relay states
+        if self.__engine["thread"] is not None and self.__engine["thread"].is_alive() and hasattr(self, "enclosures"):
+            self._update_enclosures(True)
+
+        # Update totals through websocket (cached)
+        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow())
 
         # Notification message
         self.notification.message("relay_toggle", relay_data)
 
-        # Update enclosure states to reflect the new relay states
-        if self.__engine["thread"] is not None and self.__engine["thread"].is_alive() and hasattr(self, "enclosures"):
-            self._update_enclosures(True)
+        # Update totals through websocket (force update)
+        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(True))
 
     # -= NEW =-
     def __load_existing_buttons(self):
