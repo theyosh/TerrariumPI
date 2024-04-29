@@ -880,6 +880,8 @@ class terrariumEngine(object):
         # Force an update every 60 minutes. This will make the graphs work better...
         force_update = int(time.time()) % (60 * 60) <= terrariumEngine.__ENGINE_LOOP_TIMEOUT
 
+        force_totals = False
+
         relays = []
         with orm.db_session():
             # Get all loaded relays ordered by hardware address
@@ -925,11 +927,12 @@ class terrariumEngine(object):
 
             if new_value != current_value:
                 self.notification.message("relay_change", relay_data)
+                force_totals = True
 
             # A small sleep between sensor measurement to get a bit more responsiveness of the system
             sleep(0.1)
 
-        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow())
+        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(force_totals))
 
     # -= NEW =-
     def toggle_relay(self, relay, action="toggle", duration=0):
