@@ -1288,8 +1288,8 @@ class terrariumEngine(object):
             current_process = psutil.Process()
             for process in current_process.children(recursive=True):
                 if "bluepy-helper" in " ".join(process.cmdline()):
+                    logger.warning("Killing hanging bluetooth helper process")
                     try:
-                        logger.warning("Killing hanging bluetooth helper process")
                         process.kill()
                     except Exception as ex:
                         logger.error(f"Error killing hanging bluetooth helper process: {ex}")
@@ -1331,6 +1331,7 @@ class terrariumEngine(object):
         logger.info("Stopped main engine thread")
 
     def motd(self):
+        start = time.time()
         # Enable translations
         _ = terrariumUtils.get_translator(self.active_language)
 
@@ -1679,6 +1680,8 @@ class terrariumEngine(object):
             motdfile.write('"')
 
         motd_file.chmod(0o755)
+
+        logger.info(f"Message of the Day generated in {time.time()-start:.2f} seconds")
 
         # Send notification message
         self.notification.message("system_summary", motd_data)
