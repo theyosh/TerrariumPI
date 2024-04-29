@@ -929,7 +929,7 @@ class terrariumEngine(object):
             # A small sleep between sensor measurement to get a bit more responsiveness of the system
             sleep(0.1)
 
-        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow)
+        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow())
 
     # -= NEW =-
     def toggle_relay(self, relay, action="toggle", duration=0):
@@ -960,11 +960,8 @@ class terrariumEngine(object):
             relay.update(state)
             relay_data = relay.to_dict()
 
-        # Clear totals cache
-        self.__engine["cache"].clear_data("total_power_water")
-
         # Update totals through websocket
-        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow)
+        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(True))
 
         # Notification message
         self.notification.message("relay_toggle", relay_data)
@@ -1867,8 +1864,7 @@ class terrariumEngine(object):
         return data
 
     # -= NEW =-
-    @property
-    def get_power_usage_water_flow(self):
+    def get_power_usage_water_flow(self, force=False):
         data = {
             "power": {
                 "current": float(self.settings["pi_wattage"]),
@@ -1890,7 +1886,21 @@ class terrariumEngine(object):
                 data["flow"]["current"] += relay.current_flow
                 data["flow"]["max"] += relay.flow
 
-        total = self.total_power_and_water_usage
+        cacheKey = "total_power_water"
+        total = self.__engine["cache"].get_data(cacheKey)
+        if total is None or force:
+            if force:
+                # Here we should check if the last update is less then 1 minute.
+                total = None
+
+            while total is None:
+                if self.__engine["cache"].set_running(cacheKey):
+                    total = self.total_power_and_water_usage
+                    self.__engine["cache"].set_data(cacheKey, total, 3600)
+                    self.__engine["cache"].clear_running(cacheKey)
+                else:
+                    sleep(1)
+                    total = self.__engine["cache"].get_data(cacheKey)
 
         data["power"]["duration"] = total["duration"]
         # Total power is converted from watt/s in kWh
@@ -1908,11 +1918,6 @@ class terrariumEngine(object):
     # -= NEW =-
     @property
     def total_power_and_water_usage(self):
-        cacheKey = "total_power_water"
-        data = self.__engine["cache"].get_data(cacheKey)
-        if data is not None:
-            return data
-
         # We are using total() vs sum() as total() will always return a number. https://sqlite.org/lang_aggfunc.html#sumunc
         with orm.db_session():
             data = db.select(
@@ -1936,8 +1941,4 @@ class terrariumEngine(object):
                  WHERE RH1.value > 0)"""
             )
 
-            result = {"total_watt": data[0][1], "total_flow": data[0][2], "duration": data[0][3]}
-            # Cache for 1 hour, which is the same amount of forcing new relay data to the database
-            self.__engine["cache"].set_data(cacheKey, result, 3600)
-
-            return result
+            return {"total_watt": data[0][1], "total_flow": data[0][2], "duration": data[0][3]}

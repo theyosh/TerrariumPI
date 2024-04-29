@@ -469,7 +469,7 @@ class terrariumWebsocket(object):
                 elif "load_dashboard" == message["type"]:
                     self.send_message({"type": "systemstats", "data": self.webserver.engine.system_stats()}, messages)
                     self.send_message(
-                        {"type": "power_usage_water_flow", "data": self.webserver.engine.get_power_usage_water_flow},
+                        {"type": "power_usage_water_flow", "data": self.webserver.engine.get_power_usage_water_flow()},
                         messages,
                     )
 
