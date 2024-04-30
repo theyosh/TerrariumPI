@@ -1050,7 +1050,9 @@ class terrariumEngine(object):
 
             db_time = (time.time() - start) - measurement_time
 
-            buttonLogger.info(f"Updated {button} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds.")
+            buttonLogger.info(
+                f"Updated {button} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds."
+            )
             buttonLogger.debug(
                 f"Updated {button} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
             )
