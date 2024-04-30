@@ -3,7 +3,11 @@ from hardware.webcam.rpilive_webcam import terrariumRPILiveWebcam
 import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
-sensorlogger = terrariumLogging.logging.getLogger("terrariumSensor")
+sensorLogger = terrariumLogging.logging.getLogger("terrariumSensor")
+relayLogger = terrariumLogging.logging.getLogger("terrariumRelay")
+buttonLogger = terrariumLogging.logging.getLogger("terrariumButton")
+webcamLogger = terrariumLogging.logging.getLogger("terrariumWebcam")
+enclosureLogger = terrariumLogging.logging.getLogger("terrariumEnclosure")
 
 import threading
 import time
@@ -530,7 +534,7 @@ class terrariumEngine(object):
             for sensor in Sensor.select(lambda s: s.id not in self.settings["exclude_ids"]).order_by(Sensor.address):
                 start = time.time()
                 if sensor.id not in self.sensors:
-                    sensorlogger.debug(f"Loading {sensor}.")
+                    sensorLogger.debug(f"Loading {sensor}.")
                     try:
                         self.add(terrariumSensor(sensor.id, sensor.hardware, sensor.type, sensor.address, sensor.name))
                         if "chirp" == sensor.hardware.lower():
@@ -538,11 +542,11 @@ class terrariumEngine(object):
                             self.sensors[sensor.id].calibrate(sensor.calibration)
 
                     except terrariumSensorLoadingException as ex:
-                        sensorlogger.error(f"Error loading {sensor} with error: {ex}.")
+                        sensorLogger.error(f"Error loading {sensor} with error: {ex}.")
                         continue
 
                 else:
-                    sensorlogger.debug(f"Updated already loaded {self.sensors[sensor.id]}.")
+                    sensorLogger.debug(f"Updated already loaded {self.sensors[sensor.id]}.")
                     # Update existing sensor with new address
                     self.sensors[sensor.id].address = sensor.address
 
@@ -554,14 +558,14 @@ class terrariumEngine(object):
                     )
 
                 elif not sensor.limit_min <= value <= sensor.limit_max:
-                    sensorlogger.warning(
+                    sensorLogger.warning(
                         f"Measurement for sensor {self.sensors[sensor.id]} of {value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]} during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
                     )
 
                 else:
                     # Store the new measurement value in the database
                     sensor.update(value)
-                    sensorlogger.info(
+                    sensorLogger.info(
                         f"Loaded sensor {self.sensors[sensor.id]} with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds."
                     )
 
@@ -570,7 +574,7 @@ class terrariumEngine(object):
         for sensor in terrariumSensor.scan_sensors():
             if sensor.id not in self.settings["exclude_ids"] and sensor.id not in self.sensors:
                 start = time.time()
-                sensorlogger.debug(f"Found new sensor {sensor}")
+                sensorLogger.debug(f"Found new sensor {sensor}")
                 action = "Added new"
                 value = sensor.update()
 
@@ -596,12 +600,12 @@ class terrariumEngine(object):
                 # Store the hardware sensor in memory, so we can benefit from the shared cached data for sensors with multiple sensor types
                 self.add(sensor)
 
-                sensorlogger.info(
+                sensorLogger.info(
                     f"{action} new sensor {new_sensor} to database with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds."
                 )
             else:
                 reason = "excluded" if sensor.id in self.settings["exclude_ids"] else "already loaded"
-                sensorlogger.debug(f"Ignored sensor {sensor} because it is {reason}.")
+                sensorLogger.debug(f"Ignored sensor {sensor} because it is {reason}.")
 
     # -= NEW =-
     def _update_sensors(self):
@@ -639,7 +643,7 @@ class terrariumEngine(object):
             new_value = self.sensors[sensor.id].update(self.sensors[sensor.id].erratic > 0)
             measurement_time = time.time() - start
             if new_value is None:
-                sensorlogger.warning(
+                sensorLogger.warning(
                     f"Could not take a new measurement from sensor {self.sensors[sensor.id]}. Tried for {measurement_time:.2f} seconds. Skipping this update."
                 )
                 continue
@@ -659,7 +663,7 @@ class terrariumEngine(object):
             new_value += sensor.offset
 
             if not sensor.limit_min <= new_value <= sensor.limit_max:
-                sensorlogger.warning(
+                sensorLogger.warning(
                     f"Measurement for sensor {self.sensors[sensor.id]} of {new_value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]}. Skipping this update."
                 )
                 continue
@@ -667,12 +671,12 @@ class terrariumEngine(object):
             if current_value is not None and sensor.max_diff != 0 and abs(current_value - new_value) > sensor.max_diff:
                 self.sensors[sensor.id].erratic += 1
                 if self.sensors[sensor.id].erratic < 5:
-                    sensorlogger.warning(
+                    sensorLogger.warning(
                         f"Sensor {self.sensors[sensor.id]} has an erratic({self.sensors[sensor.id].erratic}) measurement of value {new_value:.2f}{self.units[sensor.type]} compared to old value {current_value:.2f}{self.units[sensor.type]}. The difference of {abs(current_value - new_value):.2f}{self.units[sensor.type]} is more than max allowed difference of {sensor.max_diff:.2f}{self.units[sensor.type]} and will be ignored."
                     )
                     new_value = current_value
                 else:
-                    sensorlogger.warning(
+                    sensorLogger.warning(
                         f"After {self.sensors[sensor.id].erratic} erratic measurements the new value {new_value:.2f}{self.units[sensor.type]} is promoted to the current value for sensor {sensor}."
                     )
                     self.sensors[sensor.id].erratic = 0
@@ -717,10 +721,10 @@ class terrariumEngine(object):
                 if sensor_data["alarm"]:
                     self.notification.message("sensor_alarm", sensor_data)
 
-                sensorlogger.info(
+                sensorLogger.info(
                     f"Updated sensor {self.sensors[sensor.id]} with new value {new_value:.2f}{self.units[sensor.type]} in {measurement_time+db_time:.2f} seconds."
                 )
-                sensorlogger.debug(
+                sensorLogger.debug(
                     f"Updated sensor {self.sensors[sensor.id]} with new value {new_value:.2f}{self.units[sensor.type]}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
                 )
 
@@ -811,7 +815,7 @@ class terrariumEngine(object):
             for relay in Relay.select(lambda r: r.id not in self.settings["exclude_ids"]).order_by(Relay.address):
                 start = time.time()
                 if relay.id not in self.relays:
-                    logger.debug(f"Loading {relay}.")
+                    relayLogger.debug(f"Loading {relay}.")
                     try:
                         new_relay = self.add(
                             terrariumRelay(
@@ -831,25 +835,25 @@ class terrariumEngine(object):
                         # Restore the state of the relay
                         self.relays[relay.id].set_state(last_value, True)
                     except terrariumRelayLoadingException as ex:
-                        logger.error(f"Error loading relay {relay} with error: {ex.message}.")
+                        relayLogger.error(f"Error loading relay {relay} with error: {ex.message}.")
                         continue
 
                 # Take a measurement from the relay
                 value = self.relays[relay.id].update()
                 if value is None:
-                    logger.warning(
+                    relayLogger.warning(
                         f"Relay {relay} had problems reading a new value during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
                     )
                 else:
                     # Force a the new measurement value in the database
                     relay.update(value, True)
-                    logger.info(f"Loaded relay {relay} value {value:.2f} in {time.time()-start:.2f} seconds.")
+                    relayLogger.info(f"Loaded relay {relay} value {value:.2f} in {time.time()-start:.2f} seconds.")
 
     # -= NEW =-
     def scan_new_relays(self):
         for relay in terrariumRelay.scan_relays(callback=self.callback_relay):
             if relay.id not in self.settings["exclude_ids"] and relay.id not in self.relays:
-                logger.debug(f"Found new relay {relay}")
+                relayLogger.debug(f"Found new relay {relay}")
                 action = "Added new"
                 value = relay.update()
 
@@ -868,9 +872,9 @@ class terrariumEngine(object):
 
                 # Store the hardware relay in memory, so we can benefit from the shared cached data for relays with multiple relay types
                 self.add(relay)
-                logger.info(f"{action} relay {new_relay} to database with current value {value:.2f}.")
+                relayLogger.info(f"{action} relay {new_relay} to database with current value {value:.2f}.")
             else:
-                logger.debug(
+                relayLogger.debug(
                     "Ignored relay {} because it is {}.".format(
                         relay, "excluded" if relay.id in self.settings["exclude_ids"] else "already loaded"
                     )
@@ -904,7 +908,7 @@ class terrariumEngine(object):
             measurement_time = time.time() - start
 
             if new_value is None:
-                sensorlogger.warning(
+                relayLogger.warning(
                     f"Could not take a new measurement from relay {relay}. Tried for {measurement_time:.2f} seconds. Skipping this update."
                 )
                 continue
@@ -916,10 +920,10 @@ class terrariumEngine(object):
             db_time = (time.time() - start) - measurement_time
             self.webserver.websocket_message("relay", {"id": relay.id, "value": new_value})
 
-            sensorlogger.info(
+            relayLogger.info(
                 f"Updated relay {relay} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds."
             )
-            sensorlogger.debug(
+            relayLogger.debug(
                 f"Updated relay {relay} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
             )
 
@@ -985,7 +989,7 @@ class terrariumEngine(object):
             for button in Button.select(lambda b: b.id not in self.settings["exclude_ids"]).order_by(Button.address):
                 start = time.time()
                 if button.id not in self.buttons:
-                    logger.debug(f"Loading {button}.")
+                    buttonLogger.debug(f"Loading {button}.")
                     try:
                         new_button = self.add(
                             terrariumButton(button.id, button.hardware, button.address, button.name, self.button_action)
@@ -994,24 +998,24 @@ class terrariumEngine(object):
                             new_button.calibrate(button.calibration)
 
                     except terrariumButtonLoadingException as ex:
-                        logger.error(f"Error loading {button} with error: {ex.message}.")
+                        buttonLogger.error(f"Error loading {button} with error: {ex.message}.")
                         continue
 
                 else:
-                    logger.debug(f"Updated already loaded {button}.")
+                    buttonLogger.debug(f"Updated already loaded {button}.")
                     # Update existing button with new address
                     self.buttons[button.id].address = button.address
 
                 # Take a measurement from the button
                 value = self.buttons[button.id].update()
                 if value is None:
-                    logger.warning(
+                    buttonLogger.warning(
                         f"{button} had problems reading a new value during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
                     )
                 else:
                     # Store the new measurement value in the database
                     button.update(value)
-                    logger.info(f"Loaded {button} value {value:.2f} in {time.time()-start:.2f} seconds.")
+                    buttonLogger.info(f"Loaded {button} value {value:.2f} in {time.time()-start:.2f} seconds.")
 
     # -= NEW =-
     def _update_buttons(self):
@@ -1035,7 +1039,7 @@ class terrariumEngine(object):
             measurement_time = time.time() - start
 
             if new_value is None:
-                logger.warning(
+                buttonLogger.warning(
                     f"Could not take a new measurement from {button}. Tried for {measurement_time:.2f} seconds. Skipping this update."
                 )
                 continue
@@ -1046,8 +1050,8 @@ class terrariumEngine(object):
 
             db_time = (time.time() - start) - measurement_time
 
-            logger.info(f"Updated {button} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds.")
-            logger.debug(
+            buttonLogger.info(f"Updated {button} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds.")
+            buttonLogger.debug(
                 f"Updated {button} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
             )
 
@@ -1096,7 +1100,7 @@ class terrariumEngine(object):
             for webcam in Webcam.select(lambda w: w.id not in self.settings["exclude_ids"]).order_by(Webcam.address):
                 start = time.time()
                 if webcam.id not in self.webcams:
-                    logger.debug(f"Loading {webcam}.")
+                    webcamLogger.debug(f"Loading {webcam}.")
                     try:
                         self.add(
                             terrariumWebcam(
@@ -1112,11 +1116,11 @@ class terrariumEngine(object):
                         )
 
                     except terrariumWebcamLoadingException as ex:
-                        logger.error(f"Error loading {webcam} with error: {ex.message}.")
+                        webcamLogger.error(f"Error loading {webcam} with error: {ex.message}.")
                         continue
 
                 else:
-                    logger.debug(f"Updated already loaded {webcam}.")
+                    webcamLogger.debug(f"Updated already loaded {webcam}.")
                     # Update existing webcam with new address
                     self.webcams[webcam.id].address = webcam.address
 
@@ -1128,7 +1132,7 @@ class terrariumEngine(object):
                 )
                 self.webcams[webcam.id].update(relays)
 
-                logger.info(f"Loaded {webcam} in {time.time()-start:.2f} seconds.")
+                webcamLogger.info(f"Loaded {webcam} in {time.time()-start:.2f} seconds.")
 
     # -= NEW =-
     def _update_webcams(self):
@@ -1142,10 +1146,10 @@ class terrariumEngine(object):
             if webcam.archive["state"] not in ["disabled", ""]:
                 # Check light status
                 if webcam.archive["light"] not in ["ignore", ""] and current_state != webcam.archive["light"]:
-                    logger.debug(
+                    webcamLogger.debug(
                         f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}'
                     )
-                    logger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
+                    webcamLogger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
                     return
 
                 # Check door status
@@ -1158,10 +1162,10 @@ class terrariumEngine(object):
                     )
 
                     if webcam.archive["door"] != current_state:
-                        logger.debug(
+                        webcamLogger.debug(
                             f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}'
                         )
-                        logger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
+                        webcamLogger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
                         return
 
                 if "motion" == webcam.archive["state"]:
@@ -1183,7 +1187,7 @@ class terrariumEngine(object):
                             "webcam_archive", webcam.to_dict(), [self.webcams[webcam.id].last_archived_image]
                         )
 
-            logger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
+            webcamLogger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
 
         with futures.ThreadPoolExecutor() as pool:
             with orm.db_session():
@@ -1216,7 +1220,7 @@ class terrariumEngine(object):
             for enclosure in Enclosure.select(lambda e: e.id not in self.settings["exclude_ids"]):
                 start = time.time()
                 if enclosure.id not in self.enclosures:
-                    logger.debug(f"Loading {enclosure}.")
+                    enclosureLogger.debug(f"Loading {enclosure}.")
 
                     # TODO: Sensors should be database entities... so query them when needed in the area it selfs
                     new_enclosure = self.add(
@@ -1230,11 +1234,11 @@ class terrariumEngine(object):
                     )
 
                 else:
-                    logger.debug(f"Updated already loaded {enclosure}.")
+                    enclosureLogger.debug(f"Updated already loaded {enclosure}.")
                     # Update existing enclosure with new setup....?
 
                 new_enclosure.update()
-                logger.info(f"Loaded {enclosure} in {time.time()-start:.2f} seconds.")
+                enclosureLogger.info(f"Loaded {enclosure} in {time.time()-start:.2f} seconds.")
 
     # -= NEW =-
     def _update_enclosures(self, read_only=False):
@@ -1252,8 +1256,8 @@ class terrariumEngine(object):
 
                 measurement_time = time.time() - start
 
-                logger.info(f"Updated {enclosure} in {measurement_time:.2f} seconds.")
-                logger.debug(f"Updated {enclosure}. M: {measurement_time:.2f} sec.")
+                enclosureLogger.info(f"Updated {enclosure} in {measurement_time:.2f} seconds.")
+                enclosureLogger.debug(f"Updated {enclosure}. M: {measurement_time:.2f} sec.")
 
     # -= NEW =-
     def __engine_loop(self):
