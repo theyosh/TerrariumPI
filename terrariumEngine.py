@@ -3,6 +3,7 @@ from hardware.webcam.rpilive_webcam import terrariumRPILiveWebcam
 import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
+sensorlogger = terrariumLogging.logging.getLogger('terrariumSensor')
 
 import threading
 import time
@@ -903,7 +904,7 @@ class terrariumEngine(object):
             measurement_time = time.time() - start
 
             if new_value is None:
-                logger.warning(
+                sensorlogger.warning(
                     f"Could not take a new measurement from relay {relay}. Tried for {measurement_time:.2f} seconds. Skipping this update."
                 )
                 continue
@@ -915,10 +916,10 @@ class terrariumEngine(object):
             db_time = (time.time() - start) - measurement_time
             self.webserver.websocket_message("relay", {"id": relay.id, "value": new_value})
 
-            logger.info(
+            sensorlogger.info(
                 f"Updated relay {relay} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds."
             )
-            logger.debug(
+            sensorlogger.debug(
                 f"Updated relay {relay} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
             )
 
@@ -1144,9 +1145,11 @@ class terrariumEngine(object):
                     logger.debug(
                         f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}'
                     )
+                    logger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
+                    return
 
                 # Check door status
-                elif webcam.archive["door"] not in ["ignore", ""]:
+                if webcam.archive["door"] not in ["ignore", ""]:
                     # Default state is that the doors are closed....
                     current_state = (
                         "close"
@@ -1158,8 +1161,10 @@ class terrariumEngine(object):
                         logger.debug(
                             f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}'
                         )
+                        logger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
+                        return
 
-                elif "motion" == webcam.archive["state"]:
+                if "motion" == webcam.archive["state"]:
                     newImage = self.webcams[webcam.id].motion_capture(
                         webcam.motion["frame"],
                         int(webcam.motion["threshold"]),
@@ -1700,6 +1705,8 @@ class terrariumEngine(object):
                 self.webserver.websocket_message("logline", line.strip())
 
         logger.info("Stopped log tailing.")
+        if self.running:
+            self.stop()
 
     # -= NEW =-
     def stop(self):
