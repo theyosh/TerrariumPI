@@ -530,7 +530,7 @@ class terrariumEngine(object):
             for sensor in Sensor.select(lambda s: s.id not in self.settings["exclude_ids"]).order_by(Sensor.address):
                 start = time.time()
                 if sensor.id not in self.sensors:
-                    logger.debug(f"Loading {sensor}.")
+                    sensorlogger.debug(f"Loading {sensor}.")
                     try:
                         self.add(terrariumSensor(sensor.id, sensor.hardware, sensor.type, sensor.address, sensor.name))
                         if "chirp" == sensor.hardware.lower():
@@ -538,11 +538,11 @@ class terrariumEngine(object):
                             self.sensors[sensor.id].calibrate(sensor.calibration)
 
                     except terrariumSensorLoadingException as ex:
-                        logger.error(f"Error loading {sensor} with error: {ex}.")
+                        sensorlogger.error(f"Error loading {sensor} with error: {ex}.")
                         continue
 
                 else:
-                    logger.debug(f"Updated already loaded {self.sensors[sensor.id]}.")
+                    sensorlogger.debug(f"Updated already loaded {self.sensors[sensor.id]}.")
                     # Update existing sensor with new address
                     self.sensors[sensor.id].address = sensor.address
 
@@ -554,14 +554,14 @@ class terrariumEngine(object):
                     )
 
                 elif not sensor.limit_min <= value <= sensor.limit_max:
-                    logger.warning(
+                    sensorlogger.warning(
                         f"Measurement for sensor {self.sensors[sensor.id]} of {value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]} during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
                     )
 
                 else:
                     # Store the new measurement value in the database
                     sensor.update(value)
-                    logger.info(
+                    sensorlogger.info(
                         f"Loaded sensor {self.sensors[sensor.id]} with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds."
                     )
 
@@ -570,7 +570,7 @@ class terrariumEngine(object):
         for sensor in terrariumSensor.scan_sensors():
             if sensor.id not in self.settings["exclude_ids"] and sensor.id not in self.sensors:
                 start = time.time()
-                logger.debug(f"Found new sensor {sensor}")
+                sensorlogger.debug(f"Found new sensor {sensor}")
                 action = "Added new"
                 value = sensor.update()
 
@@ -596,12 +596,12 @@ class terrariumEngine(object):
                 # Store the hardware sensor in memory, so we can benefit from the shared cached data for sensors with multiple sensor types
                 self.add(sensor)
 
-                logger.info(
+                sensorlogger.info(
                     f"{action} new sensor {new_sensor} to database with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds."
                 )
             else:
                 reason = "excluded" if sensor.id in self.settings["exclude_ids"] else "already loaded"
-                logger.debug(f"Ignored sensor {sensor} because it is {reason}.")
+                sensorlogger.debug(f"Ignored sensor {sensor} because it is {reason}.")
 
     # -= NEW =-
     def _update_sensors(self):
@@ -639,7 +639,7 @@ class terrariumEngine(object):
             new_value = self.sensors[sensor.id].update(self.sensors[sensor.id].erratic > 0)
             measurement_time = time.time() - start
             if new_value is None:
-                logger.warning(
+                sensorlogger.warning(
                     f"Could not take a new measurement from sensor {self.sensors[sensor.id]}. Tried for {measurement_time:.2f} seconds. Skipping this update."
                 )
                 continue
@@ -659,7 +659,7 @@ class terrariumEngine(object):
             new_value += sensor.offset
 
             if not sensor.limit_min <= new_value <= sensor.limit_max:
-                logger.warning(
+                sensorlogger.warning(
                     f"Measurement for sensor {self.sensors[sensor.id]} of {new_value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]}. Skipping this update."
                 )
                 continue
@@ -667,12 +667,12 @@ class terrariumEngine(object):
             if current_value is not None and sensor.max_diff != 0 and abs(current_value - new_value) > sensor.max_diff:
                 self.sensors[sensor.id].erratic += 1
                 if self.sensors[sensor.id].erratic < 5:
-                    logger.warning(
+                    sensorlogger.warning(
                         f"Sensor {self.sensors[sensor.id]} has an erratic({self.sensors[sensor.id].erratic}) measurement of value {new_value:.2f}{self.units[sensor.type]} compared to old value {current_value:.2f}{self.units[sensor.type]}. The difference of {abs(current_value - new_value):.2f}{self.units[sensor.type]} is more than max allowed difference of {sensor.max_diff:.2f}{self.units[sensor.type]} and will be ignored."
                     )
                     new_value = current_value
                 else:
-                    logger.warning(
+                    sensorlogger.warning(
                         f"After {self.sensors[sensor.id].erratic} erratic measurements the new value {new_value:.2f}{self.units[sensor.type]} is promoted to the current value for sensor {sensor}."
                     )
                     self.sensors[sensor.id].erratic = 0
@@ -717,10 +717,10 @@ class terrariumEngine(object):
                 if sensor_data["alarm"]:
                     self.notification.message("sensor_alarm", sensor_data)
 
-                logger.info(
+                sensorlogger.info(
                     f"Updated sensor {self.sensors[sensor.id]} with new value {new_value:.2f}{self.units[sensor.type]} in {measurement_time+db_time:.2f} seconds."
                 )
-                logger.debug(
+                sensorlogger.debug(
                     f"Updated sensor {self.sensors[sensor.id]} with new value {new_value:.2f}{self.units[sensor.type]}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
                 )
 
