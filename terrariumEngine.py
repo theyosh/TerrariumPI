@@ -3,7 +3,7 @@ from hardware.webcam.rpilive_webcam import terrariumRPILiveWebcam
 import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
-sensorlogger = terrariumLogging.logging.getLogger('terrariumSensor')
+sensorlogger = terrariumLogging.logging.getLogger("terrariumSensor")
 
 import threading
 import time
