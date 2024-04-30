@@ -134,6 +134,7 @@ class terrariumEngine(object):
         self.calendar = terrariumCalendar()
 
         # Caching total power and water usage
+        self.relays = {}
         self.get_power_usage_water_flow(True)
 
         # Loading the sensors
