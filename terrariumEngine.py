@@ -138,9 +138,7 @@ class terrariumEngine(object):
         start = time.time()
         self.relays = {}
         self.get_power_usage_water_flow(True)
-        logger.info(
-            f"Loaded total power and water usage in {time.time()-start:.2f} seconds."
-        )
+        logger.info(f"Loaded total power and water usage in {time.time()-start:.2f} seconds.")
 
         # Loading the sensors
         start = time.time()
@@ -374,7 +372,9 @@ class terrariumEngine(object):
                 try:
                     start = time.time()
                     self.weather = terrariumWeather(self.settings["weather_source"], self.units, self.active_language)
-                    weatherLogger.info(f'Loaded weather data from source {self.settings["weather_source"]} in {time.time()-start:.2f} seconds')
+                    weatherLogger.info(
+                        f'Loaded weather data from source {self.settings["weather_source"]} in {time.time()-start:.2f} seconds'
+                    )
                 except Exception as ex:
                     weatherLogger.error(f"Loading exception: {ex}")
 
@@ -383,7 +383,9 @@ class terrariumEngine(object):
                 self.weather.address = self.settings["weather_source"]
                 # Force an update, due to maybe changing speed units or temperature.... lazy fix... :(
                 self.weather.update()
-                weatherLogger.info(f'Updated weather source data to {self.settings["weather_source"]} in {time.time()-start:.2f} seconds')
+                weatherLogger.info(
+                    f'Updated weather source data to {self.settings["weather_source"]} in {time.time()-start:.2f} seconds'
+                )
 
         # Loading Meross cloud
         if "" != settings["meross_cloud_username"] and "" != settings["meross_cloud_password"] and meross_login:

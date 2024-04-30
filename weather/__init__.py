@@ -82,9 +82,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
 
                 self._device["last_update"] = datetime.now()
             else:
-                logger.error(
-                        f"Error loading online weather data! Please check your source address: {self.address}."
-                )
+                logger.error(f"Error loading online weather data! Please check your source address: {self.address}.")
 
     def __get_today_data(self, offset=0):
         now = datetime.now()
