@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
 
-logger = terrariumLogging.logging.getLogger(__name__)
+logger = terrariumLogging.logging.getLogger("OpenWeatherMap")
 
 from datetime import datetime
 from time import time
@@ -39,7 +39,6 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
             return True
 
-        logger.warning("Error loading online weather data from source {} !".format(address))
         return False
 
     def __load_minimal_forecast_data(self):

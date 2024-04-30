@@ -81,14 +81,9 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
                     )
 
                 self._device["last_update"] = datetime.now()
-                logger.info(
-                    terrariumUtils.clean_log_line(f"Loaded new weather data in {time.time()-start:.3f} seconds.")
-                )
             else:
                 logger.error(
-                    terrariumUtils.clean_log_line(
                         f"Error loading online weather data! Please check your source address: {self.address}."
-                    )
                 )
 
     def __get_today_data(self, offset=0):

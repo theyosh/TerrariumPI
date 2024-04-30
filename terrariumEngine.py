@@ -8,6 +8,7 @@ relayLogger = terrariumLogging.logging.getLogger("terrariumRelay")
 buttonLogger = terrariumLogging.logging.getLogger("terrariumButton")
 webcamLogger = terrariumLogging.logging.getLogger("terrariumWebcam")
 enclosureLogger = terrariumLogging.logging.getLogger("terrariumEnclosure")
+weatherLogger = terrariumLogging.logging.getLogger("terrariumWeather")
 
 import threading
 import time
@@ -134,8 +135,12 @@ class terrariumEngine(object):
         self.calendar = terrariumCalendar()
 
         # Caching total power and water usage
+        start = time.time()
         self.relays = {}
         self.get_power_usage_water_flow(True)
+        logger.info(
+            f"Loaded total power and water usage in {time.time()-start:.2f} seconds."
+        )
 
         # Loading the sensors
         start = time.time()
@@ -366,16 +371,19 @@ class terrariumEngine(object):
         # Loading weather
         if "weather_source" in self.settings:
             if "" != self.settings["weather_source"]:
-                logger.info(f'Loading weather data from source {self.settings["weather_source"]}')
                 try:
+                    start = time.time()
                     self.weather = terrariumWeather(self.settings["weather_source"], self.units, self.active_language)
+                    weatherLogger.info(f'Loaded weather data from source {self.settings["weather_source"]} in {time.time()-start:.2f} seconds')
                 except Exception as ex:
-                    logger.error(f"Loading weather exception: {ex}")
+                    weatherLogger.error(f"Loading exception: {ex}")
+
             elif self.weather is not None:
-                logger.info(f'Updating weather source data to {self.settings["weather_source"]}')
+                start = time.time()
                 self.weather.address = self.settings["weather_source"]
                 # Force an update, due to maybe changing speed units or temperature.... lazy fix... :(
                 self.weather.update()
+                weatherLogger.info(f'Updated weather source data to {self.settings["weather_source"]} in {time.time()-start:.2f} seconds')
 
         # Loading Meross cloud
         if "" != settings["meross_cloud_username"] and "" != settings["meross_cloud_password"] and meross_login:
