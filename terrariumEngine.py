@@ -1914,21 +1914,7 @@ class terrariumEngine(object):
                 data["flow"]["current"] += relay.current_flow
                 data["flow"]["max"] += relay.flow
 
-        cacheKey = "total_power_water"
-        total = self.__engine["cache"].get_data(cacheKey)
-        if total is None or force:
-            if force:
-                # Here we should check if the last update is less then 1 minute.
-                total = None
-
-            while total is None:
-                if self.__engine["cache"].set_running(cacheKey):
-                    total = self.total_power_and_water_usage
-                    self.__engine["cache"].set_data(cacheKey, total, 3600)
-                    self.__engine["cache"].clear_running(cacheKey)
-                else:
-                    sleep(1)
-                    total = self.__engine["cache"].get_data(cacheKey)
+        total = self.total_power_and_water_usage(force)
 
         data["power"]["duration"] = total["duration"]
         # Total power is converted from watt/s in kWh
@@ -1944,29 +1930,57 @@ class terrariumEngine(object):
         return data
 
     # -= NEW =-
-    @property
-    def total_power_and_water_usage(self):
-        # We are using total() vs sum() as total() will always return a number. https://sqlite.org/lang_aggfunc.html#sumunc
-        with orm.db_session():
-            data = db.select(
-                """SELECT
-             DISTINCT relay,
-             TOTAL(total_wattage) AS wattage,
-             TOTAL(total_flow)    AS flow,
-             IFNULL((JulianDay(MAX(timestamp2)) - JulianDay(MIN(timestamp))) * 24 * 60 * 60,0) AS timestamp
-           FROM (
-             SELECT
-               RH1.relay     as relay,
-               RH1.timestamp as timestamp,
-               RH2.timestamp as timestamp2,
-                 (JulianDay(RH2.timestamp)-JulianDay(RH1.timestamp))* 24 * 60 * 60                        AS duration_in_seconds,
-                ((JulianDay(RH2.timestamp)-JulianDay(RH1.timestamp))* 24 * 60 * 60)         * RH1.wattage AS total_wattage,
-               (((JulianDay(RH2.timestamp)-JulianDay(RH1.timestamp))* 24 * 60 * 60) / 60.0) * RH1.flow    AS total_flow
-             FROM RelayHistory AS RH1
-               LEFT JOIN RelayHistory AS RH2
-                 ON RH2.relay = RH1.relay
-                 AND RH2.timestamp = (SELECT MIN(timestamp) FROM RelayHistory WHERE timestamp > RH1.timestamp AND relay = RH1.relay)
-                 WHERE RH1.value > 0)"""
-            )
+    def total_power_and_water_usage(self, force = False, background = False, thread_return = None):
+        cacheKey = "total_power_water"
+        totals = self.__engine["cache"].get_data(cacheKey, max_age=60 if force else None)
 
-            return {"total_watt": data[0][1], "total_flow": data[0][2], "duration": data[0][3]}
+        if background is False:
+
+            if totals is None or force:
+                new_data = [None]
+                totals_thread = threading.Thread(target=self.total_power_and_water_usage, args=(force, True, new_data))
+
+                if self.__engine["cache"].set_running(cacheKey):
+                    totals_thread.start()
+
+                    if totals is None:
+                        totals_thread.join()
+                        totals = new_data[0]
+
+                elif totals is None:
+                    # Thread is already running, but we have no data... we have to wait ...
+                    while totals is None:
+                        sleep(1)
+                        totals = self.__engine["cache"].get_data(cacheKey, max_age=60 if force else None)
+
+        else:
+            # We are using total() vs sum() as total() will always return a number. https://sqlite.org/lang_aggfunc.html#sumunc
+            with orm.db_session():
+                data = db.select(
+                    """SELECT
+                        DISTINCT relay,
+                        TOTAL(total_wattage) AS wattage,
+                        TOTAL(total_flow)    AS flow,
+                        IFNULL((JulianDay(MAX(timestamp2)) - JulianDay(MIN(timestamp))) * 24 * 60 * 60,0) AS duration
+                        FROM (
+                            SELECT
+                            RH1.relay     as relay,
+                            RH1.timestamp as timestamp,
+                            RH2.timestamp as timestamp2,
+                            (JulianDay(RH2.timestamp)-JulianDay(RH1.timestamp))   * 24 * 60 * 60                        AS duration_in_seconds,
+                            ((JulianDay(RH2.timestamp)-JulianDay(RH1.timestamp))  * 24 * 60 * 60)         * RH1.wattage AS total_wattage,
+                            (((JulianDay(RH2.timestamp)-JulianDay(RH1.timestamp)) * 24 * 60 * 60) / 60.0) * RH1.flow    AS total_flow
+                            FROM RelayHistory AS RH1
+                            LEFT JOIN RelayHistory AS RH2
+                                ON RH2.relay = RH1.relay
+                                AND RH2.timestamp = (SELECT MIN(timestamp) FROM RelayHistory WHERE timestamp > RH1.timestamp AND relay = RH1.relay)
+                                WHERE RH1.value > 0
+                        )"""
+                )
+
+                totals = {"total_watt": data[0][1], "total_flow": data[0][2], "duration": data[0][3]}
+                thread_return[0] = totals
+                self.__engine["cache"].set_data(cacheKey, totals, 3600)
+                self.__engine["cache"].clear_running(cacheKey)
+
+        return totals
