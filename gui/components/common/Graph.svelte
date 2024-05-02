@@ -16,7 +16,7 @@
   import 'chartjs-adapter-dayjs-4';
   import { _ } from 'svelte-i18n';
 
-  import { smoothing } from '../../helpers/graph-helpers';
+  import { smoothing, extendGraphData, convertTimestamps } from '../../helpers/graph-helpers';
   import { graphDefaultOpts, graphTypes } from '../../constants/graph';
   import { fetchGraphData } from '../../providers/api';
   import { graphs, updateSensor } from '../../stores/terrariumpi';
@@ -61,22 +61,15 @@
     }
 
     if (['wattage', 'magnetic', 'motion', 'ldr', 'remote'].indexOf(type) !== -1) {
-      // Add a duplicate record on the 'end' with the current time stamp. This will keep the graph updating at every refresh
-      let last_item = new_data[new_data.length - 1];
-      last_item.timestamp = new Date();
-      new_data.push(last_item);
+        new_data = extendGraphData(new_data);
     }
 
+    // if (['relays', 'buttons'].indexOf(mode) !== -1) {
+    //     new_data = extendGraphData(new_data);
+    // }
+
     if (mode === 'sensors' && settings.graph_smooth_value > 0) {
-      let smoothed_data = smoothing(
-        new_data.map((point) => {
-          return point.value;
-        }),
-        settings.graph_smooth_value,
-      );
-      for (let counter = 0; counter < new_data.length; counter++) {
-        new_data[counter].value = smoothed_data[counter];
-      }
+      new_data = smoothing(new_data, settings.graph_smooth_value);
     }
 
     if (init) {
@@ -192,10 +185,7 @@
           id,
           $graphs[id].period,
           (data) =>
-            (new_data = data.map((point) => {
-              point.timestamp *= 1000;
-              return point;
-            })),
+            (new_data = convertTimestamps(data)),
         );
         nodata = new_data.length === 0;
 
@@ -221,10 +211,7 @@
           id,
           $graphs[id].period,
           (data) =>
-            (new_data = data.map((point) => {
-              point.timestamp *= 1000;
-              return point;
-            })),
+            (new_data = convertTimestamps(data)),
         );
         nodata = new_data.length === 0;
 
