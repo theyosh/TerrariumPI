@@ -112,7 +112,9 @@ export const graphDefaultOpts = {
     },
   },
   interaction: {
+    intersect: false,
     mode: 'nearest',
+    axis: 'xy'
   },
   plugins: {
     legend: {
