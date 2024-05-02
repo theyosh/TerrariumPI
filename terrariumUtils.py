@@ -92,7 +92,11 @@ class terrariumCache(terrariumSingleton):
     def set_data(self, hash_key, data, cache_timeout=30):
         # When cache value is negative, cache it for one year.... should be long enough.. ;)
         cache_timeout = cache_timeout if cache_timeout > 0 else int(datetime.timedelta(days=365).total_seconds())
-        self.__cache[hash_key] = {"data": data, "expire": int(time.time()) + cache_timeout, 'timestamp' : int(time.time())}
+        self.__cache[hash_key] = {
+            "data": data,
+            "expire": int(time.time()) + cache_timeout,
+            "timestamp": int(time.time()),
+        }
         logger.debug("Added new cache data with hash: {}. Total in cache: {}".format(hash_key, len(self.__cache)))
         self.__cleanup()
 
