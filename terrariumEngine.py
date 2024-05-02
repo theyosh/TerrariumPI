@@ -1930,7 +1930,7 @@ class terrariumEngine(object):
         return data
 
     # -= NEW =-
-    def total_power_and_water_usage(self, force = False, background = False, thread_return = None):
+    def total_power_and_water_usage(self, force=False, background=False, thread_return=None):
         cacheKey = "total_power_water"
         totals = self.__engine["cache"].get_data(cacheKey, max_age=60 if force else None)
 
