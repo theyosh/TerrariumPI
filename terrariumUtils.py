@@ -523,7 +523,11 @@ class terrariumUtils:
     @staticmethod
     def kill_bluetooth_helper_processes():
         cmd = "pgrep bluepy"
-        data = terrariumUtils.get_script_data(cmd).decode().strip().split("\n")
+        data = terrariumUtils.get_script_data(cmd)
+        if data is None:
+            return
+
+        data = data.decode().strip().split("\n")
         for process in data:
             logger.warning("Killing hanging bluetooth helper process")
             try:

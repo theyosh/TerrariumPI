@@ -137,6 +137,7 @@ class terrariumEngine(object):
         # Caching total power and water usage
         start = time.time()
         self.relays = {}
+        logger.info(f"Start loading total power and water usage")
         self.get_power_usage_water_flow(True)
         logger.info(f"Loaded total power and water usage in {time.time()-start:.2f} seconds.")
 
