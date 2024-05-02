@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
 
-logger = terrariumLogging.logging.getLogger(__name__)
+logger = terrariumLogging.logging.getLogger("terrariumUtils")
 
 import gettext
 import re
@@ -71,6 +71,8 @@ class terrariumAsync(terrariumSingleton):
 
 
 class terrariumCache(terrariumSingleton):
+    logger = terrariumLogging.logging.getLogger("terrariumCache")
+
     def __init__(self):
         self.__cache = {}
         self.__running = {}
@@ -90,13 +92,16 @@ class terrariumCache(terrariumSingleton):
     def set_data(self, hash_key, data, cache_timeout=30):
         # When cache value is negative, cache it for one year.... should be long enough.. ;)
         cache_timeout = cache_timeout if cache_timeout > 0 else int(datetime.timedelta(days=365).total_seconds())
-        self.__cache[hash_key] = {"data": data, "expire": int(time.time()) + cache_timeout}
+        self.__cache[hash_key] = {"data": data, "expire": int(time.time()) + cache_timeout, 'timestamp' : int(time.time())}
         logger.debug("Added new cache data with hash: {}. Total in cache: {}".format(hash_key, len(self.__cache)))
         self.__cleanup()
 
-    def get_data(self, hash_key, default=None):
+    def get_data(self, hash_key, default=None, max_age=None):
         if hash_key in self.__cache and self.__cache[hash_key]["expire"] > int(time.time()):
-            return self.__cache[hash_key]["data"]
+            if max_age is None:
+                return self.__cache[hash_key]["data"]
+            elif self.__cache[hash_key]["timestamp"] > int(time.time()) - max_age:
+                return self.__cache[hash_key]["data"]
 
         return default
 
@@ -514,3 +519,14 @@ class terrariumUtils:
         cmd = "/usr/bin/hcitool dev"
         data = terrariumUtils.get_script_data(cmd).decode().strip().split("\n")
         return len(data) > 1
+
+    @staticmethod
+    def kill_bluetooth_helper_processes():
+        cmd = "pgrep bluepy"
+        data = terrariumUtils.get_script_data(cmd).decode().strip().split("\n")
+        for process in data:
+            logger.warning("Killing hanging bluetooth helper process")
+            try:
+                terrariumUtils.get_script_data(f"kill -9 {process}")
+            except Exception as ex:
+                logger.error(f"Error killing hanging bluetooth helper process: {ex}")

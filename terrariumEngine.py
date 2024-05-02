@@ -1311,14 +1311,7 @@ class terrariumEngine(object):
             self.motd()
 
             # Cleanup hanging bluetooth helper scripts....
-            current_process = psutil.Process()
-            for process in current_process.children(recursive=True):
-                if "bluepy-helper" in " ".join(process.cmdline()):
-                    logger.warning("Killing hanging bluetooth helper process")
-                    try:
-                        process.kill()
-                    except Exception as ex:
-                        logger.error(f"Error killing hanging bluetooth helper process: {ex}")
+            terrariumUtils.kill_bluetooth_helper_processes()
 
             duration = time.time() - start
             time_left = terrariumEngine.__ENGINE_LOOP_TIMEOUT - duration
@@ -1338,6 +1331,8 @@ class terrariumEngine(object):
                 self.__engine["too_late"] += 1
                 prev_delay = abs(time_left)
                 message = f"Engine update took {duration:.2f} seconds. That is {prev_delay:.2f} seconds short."
+                logger.warning(message)
+
                 message_data = {
                     "message": message,
                     "time_short": prev_delay,
@@ -1346,13 +1341,12 @@ class terrariumEngine(object):
                     "times_late": self.__engine["too_late"],
                 }
                 self.notification.message("system_update_warning", message_data)
-                logger.warning(message)
 
                 if self.__engine["too_late"] > 30:
                     message = f'Engine can\'t keep up. For {self.__engine["too_late"]} times it could not finish in {terrariumEngine.__ENGINE_LOOP_TIMEOUT} seconds.'
+                    logger.error(message)
                     message_data["message"] = message
                     self.notification.message("system_update_error", message_data)
-                    logger.error(message)
 
         logger.info("Stopped main engine thread")
 
