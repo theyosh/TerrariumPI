@@ -517,8 +517,11 @@ class terrariumUtils:
     @staticmethod
     def bluetooth_available():
         cmd = "/usr/bin/hcitool dev"
-        data = terrariumUtils.get_script_data(cmd).decode().strip().split("\n")
-        return len(data) > 1
+        data = terrariumUtils.get_script_data(cmd)
+        if data is None:
+            return False
+
+        return len(data.decode().strip().split("\n")) > 1
 
     @staticmethod
     def kill_bluetooth_helper_processes():

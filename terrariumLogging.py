@@ -84,6 +84,7 @@ class NotificationLogger(logging.StreamHandler):
         # Do not send messages from terrariumNotification logging, as that will trigger a recursing error.
         if "terrariumNotification" != data.name and str(data.levelname.lower()) in ["warning", "error"]:
             self.notification.message(f"system_{data.levelname.lower()}", {"message": data.getMessage()})
+        super().emit(data)
 
 
 if os.path.isfile("log/logging.custom.cfg"):
