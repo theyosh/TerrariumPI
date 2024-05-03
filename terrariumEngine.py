@@ -1733,8 +1733,16 @@ class terrariumEngine(object):
 
         # Wait till the engine is done, when it was updating the sensors
         self.__logtail_process.terminate()
-        self.__engine["thread"].join()
-        self.__engine["logtail"].join()
+
+        try:
+            self.__engine["thread"].join()
+        except Exception:
+            pass
+
+        try:
+            self.__engine["logtail"].join()
+        except Exception:
+            pass
 
         for enclosure in self.enclosures:
             self.enclosures[enclosure].stop()
