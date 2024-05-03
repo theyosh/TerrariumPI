@@ -114,7 +114,7 @@ export const graphDefaultOpts = {
   interaction: {
     intersect: false,
     mode: 'nearest',
-    axis: 'xy'
+    axis: 'xy',
   },
   plugins: {
     legend: {

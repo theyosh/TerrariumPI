@@ -61,7 +61,7 @@
     }
 
     if (['relays', 'buttons'].indexOf(mode) !== -1) {
-        new_data = extendGraphData(new_data);
+      new_data = extendGraphData(new_data);
     }
 
     if (mode === 'sensors' && settings.graph_smooth_value > 0) {
@@ -176,13 +176,7 @@
     const interval = setInterval(async () => {
       if (!loading) {
         let new_data;
-        await fetchGraphData(
-          mode,
-          id,
-          $graphs[id].period,
-          (data) =>
-            (new_data = convertTimestamps(data)),
-        );
+        await fetchGraphData(mode, id, $graphs[id].period, (data) => (new_data = convertTimestamps(data)));
         nodata = new_data.length === 0;
 
         if (!nodata) {
@@ -202,13 +196,7 @@
         $graphs[id].changed = false;
         loading = true;
         let new_data;
-        await fetchGraphData(
-          mode,
-          id,
-          $graphs[id].period,
-          (data) =>
-            (new_data = convertTimestamps(data)),
-        );
+        await fetchGraphData(mode, id, $graphs[id].period, (data) => (new_data = convertTimestamps(data)));
         nodata = new_data.length === 0;
 
         if (!nodata) {
