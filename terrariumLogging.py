@@ -15,6 +15,7 @@ import threading
 from terrariumNotification import terrariumNotification
 from terrariumUtils import terrariumUtils
 
+
 class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandler):
     """
     Extended version of TimedRotatingFileHandler that compress logs on rollover.
@@ -76,6 +77,7 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
 
         compress = threading.Thread(target=zipAction)
         compress.start()
+
 
 class NotificationLogger(logging.StreamHandler):
     def __init__(self, *args, **kwargs):

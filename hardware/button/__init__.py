@@ -30,11 +30,14 @@ from hardware.io_expander import terrariumIOExpander
 class terrariumButtonException(Exception):
     pass
 
+
 class terrariumButtonLoadingException(terrariumButtonException):
     pass
 
+
 class terrariumButtonUpdateException(terrariumButtonException):
     pass
+
 
 # Factory class
 class terrariumButton(object):

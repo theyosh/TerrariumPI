@@ -39,6 +39,7 @@ from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 class terrariumWebcamException(Exception):
     pass
 
+
 class terrariumWebcamLoadingException(terrariumWebcamException):
     pass
 
