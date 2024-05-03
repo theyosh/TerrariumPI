@@ -46,11 +46,11 @@ export const extendGraphData = (data) => {
     let now = new Date();
 
     let end = structuredClone(data[data.length-1]);
-    end.timestamp = Math.round(now.getTime() / 1000000);
+    end.timestamp = Math.round(now.getTime());
 
     now.setDate(now.getDate() - 1);
     let start = structuredClone(data[0]);
-    start.timestamp = Math.round(now.getTime() / 1000000);
+    start.timestamp = Math.round(now.getTime());
 
     return [start,...data,end]
 }
