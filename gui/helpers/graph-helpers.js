@@ -11,14 +11,15 @@ export const smoothing = (data, smoothingValue) => {
   const countBefore = Math.round(smoothingValue/2);
   const countAfter = smoothingValue - countBefore;
   const new_data = [];
+  const max_items = data.length;
 
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < max_items; i++) {
 
-    const range = data.slice(Math.max(i - countBefore, 0), Math.min(i + countAfter + 1, data.length));
+    const range = data.slice(Math.max(i - countBefore, 0), Math.min(i + countAfter + 1, max_items));
     const new_data_point = structuredClone(data[i]);
 
-    new_data_point.value = range.reduce((a, b) => a.value + (isNaN(b) ? a.value : b.value), 0) / range.length;
-    new_data.push(structuredClone(new_data_point));
+    new_data_point.value = range.reduce((accumulator, point) => accumulator + (isNaN(point.value) ? 0 : point.value), 0) / range.length;
+    new_data.push(new_data_point);
 
   }
 
