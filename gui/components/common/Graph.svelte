@@ -60,13 +60,13 @@
       });
     }
 
-    if (['wattage', 'magnetic', 'motion', 'ldr', 'remote'].indexOf(type) !== -1) {
-        new_data = extendGraphData(new_data);
-    }
-
-    // if (['relays', 'buttons'].indexOf(mode) !== -1) {
+    // if (['wattage', 'magnetic', 'motion', 'ldr', 'remote'].indexOf(type) !== -1) {
     //     new_data = extendGraphData(new_data);
     // }
+
+    if (['relays', 'buttons'].indexOf(mode) !== -1) {
+        new_data = extendGraphData(new_data);
+    }
 
     if (mode === 'sensors' && settings.graph_smooth_value > 0) {
       new_data = smoothing(new_data, settings.graph_smooth_value);
