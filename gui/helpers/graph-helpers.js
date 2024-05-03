@@ -41,6 +41,7 @@ export const convertTimestamps = (data) => {
       });
 }
 
+
 export const extendGraphData = (data) => {
     let now = new Date();
 
@@ -51,7 +52,7 @@ export const extendGraphData = (data) => {
     let start = structuredClone(data[0]);
     start.timestamp = Math.round(now.getTime() / 1000);
 
-    return [start,...data,end]
+    return [end,...data,start]
 }
 
 export const exportGraphPeriod = async (type, graph) => {
