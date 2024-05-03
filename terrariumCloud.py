@@ -232,7 +232,7 @@ class TerrariumMerossCloud(terrariumSingleton):
             logger.error("Wrong login credentials for Meross. Please check your settings!")
 
         except TooManyTokensException as ex:
-            logger.error(ex)
+            logger.error(f"{ex}")
             self.stop()
 
         except socket.timeout:

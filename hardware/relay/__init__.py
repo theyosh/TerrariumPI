@@ -244,7 +244,7 @@ class terrariumRelay(object):
         try:
             new_data = self.__get_hardware_value()
         except Exception as ex:
-            logger.error(ex)
+            logger.error(f"{ex}")
 
         self._device["value"] = new_data
         return self._device["value"]
