@@ -61,7 +61,16 @@
     }
 
     if (['relays', 'buttons'].indexOf(mode) !== -1) {
-      new_data = extendGraphData(new_data);
+      let period = 1;
+      if ($graphs[id].period === 'week') {
+        period = 7;
+      } else if ($graphs[id].period === 'month') {
+        period = 30
+      } else if ($graphs[id].period === 'year') {
+        period = 365;
+      }
+
+      new_data = extendGraphData(new_data, period);
     }
 
     if (mode === 'sensors' && settings.graph_smooth_value > 0) {

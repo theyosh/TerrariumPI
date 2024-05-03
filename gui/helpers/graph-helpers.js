@@ -41,14 +41,16 @@ export const convertTimestamps = (data) => {
   });
 };
 
-export const extendGraphData = (data) => {
-  let now = new Date();
+export const extendGraphData = (data, period) => {
+  const now = new Date();
 
-  let end = structuredClone(data[data.length - 1]);
+  const start = structuredClone(data[0]);
+  const end = structuredClone(data[data.length - 1]);
+
   end.timestamp = Math.round(now.getTime());
 
-  now.setDate(now.getDate() - 1);
-  let start = structuredClone(data[0]);
+  now.setDate(now.getDate() - period);
+
   start.timestamp = Math.round(now.getTime());
 
   return [start, ...data, end];
