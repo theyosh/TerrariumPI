@@ -17,12 +17,12 @@ from retry import retry
 from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 
-class terrariumDisplayLoadingException(TypeError):
-    """There is a problem with loading a hardware display."""
+class terrariumDisplayLoadingException(Exception):
+    pass
 
 
-class terrariumDisplayException(TypeError):
-    """There is a general problem with the display."""
+class terrariumDisplayException(Exception):
+    pass
 
 
 # Factory class

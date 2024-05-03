@@ -27,17 +27,14 @@ from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 from hardware.io_expander import terrariumIOExpander
 
 
-class terrariumButtonException(TypeError):
-    "There is a general problem with a hardware button."
-
+class terrariumButtonException(Exception):
+    pass
 
 class terrariumButtonLoadingException(terrariumButtonException):
-    "There is a problem with loading a hardware button."
-
+    pass
 
 class terrariumButtonUpdateException(terrariumButtonException):
-    "There is a problem with updating a hardware button."
-
+    pass
 
 # Factory class
 class terrariumButton(object):

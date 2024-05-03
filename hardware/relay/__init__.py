@@ -18,13 +18,8 @@ from retry import retry
 from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 
-class terrariumRelayException(TypeError):
-    """There is a problem with loading a hardware switch. Invalid power switch action."""
-
-    def __init__(self, message, *args):
-        self.message = message
-        super().__init__(message, *args)
-
+class terrariumRelayException(Exception):
+    pass
 
 class terrariumRelayLoadingException(terrariumRelayException):
     pass

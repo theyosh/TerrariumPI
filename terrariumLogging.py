@@ -15,15 +15,19 @@ import threading
 from terrariumNotification import terrariumNotification
 from terrariumUtils import terrariumUtils
 
-
 class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandler):
     """
     Extended version of TimedRotatingFileHandler that compress logs on rollover.
     """
 
-    def emit(self, data):
-        data.msg = terrariumUtils.clean_log_line(data.msg)
-        super().emit(data)
+    def emit(self, record):
+        if len(record.args):
+            record.msg = terrariumUtils.clean_log_line(record.msg % record.args)
+            record.args = ()
+        else:
+            record.msg = terrariumUtils.clean_log_line(record.msg)
+
+        super().emit(record)
 
     def doRollover(self):
         """
@@ -73,18 +77,17 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
         compress = threading.Thread(target=zipAction)
         compress.start()
 
-
 class NotificationLogger(logging.StreamHandler):
     def __init__(self, *args, **kwargs):
-        super(NotificationLogger, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+
         # The notification will later on get a reference to the terrariumEngine for version and profile information
         self.notification = terrariumNotification()
 
-    def emit(self, data):
+    def emit(self, record):
         # Do not send messages from terrariumNotification logging, as that will trigger a recursing error.
-        if "terrariumNotification" != data.name and str(data.levelname.lower()) in ["warning", "error"]:
-            self.notification.message(f"system_{data.levelname.lower()}", {"message": data.getMessage()})
-        super().emit(data)
+        if "terrariumNotification" != record.name and str(record.levelname.lower()) in ["warning", "error"]:
+            self.notification.message(f"system_{record.levelname.lower()}", {"message": record.getMessage()})
 
 
 if os.path.isfile("log/logging.custom.cfg"):

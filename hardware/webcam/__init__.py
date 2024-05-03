@@ -12,7 +12,6 @@ import psutil
 
 from pathlib import Path
 from hashlib import md5
-from operator import itemgetter
 from datetime import datetime, timedelta
 from importlib import import_module
 from io import BytesIO
@@ -37,13 +36,8 @@ import piexif
 from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 
-class terrariumWebcamException(TypeError):
-    """There is a problem with loading a hardware switch. Invalid power switch action."""
-
-    def __init__(self, message, *args):
-        self.message = message
-        super().__init__(message, *args)
-
+class terrariumWebcamException(Exception):
+    pass
 
 class terrariumWebcamLoadingException(terrariumWebcamException):
     pass

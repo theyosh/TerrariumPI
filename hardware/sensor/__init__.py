@@ -10,7 +10,6 @@ import sys
 import statistics
 from hashlib import md5
 from time import time, sleep
-from operator import itemgetter
 from func_timeout import func_timeout, FunctionTimedOut
 
 import RPi.GPIO as GPIO
@@ -30,12 +29,8 @@ from bluepy.btle import Scanner
 from terrariumUtils import terrariumUtils, terrariumCache, classproperty
 
 
-class terrariumSensorException(TypeError):
-    """There is a problem with loading a hardware sensor."""
-
-    def __init__(self, message, *args):
-        self.message = message
-        super().__init__(message, *args)
+class terrariumSensorException(Exception):
+    pass
 
 
 class terrariumSensorUnknownHardwareException(terrariumSensorException):
