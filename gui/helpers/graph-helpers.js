@@ -18,7 +18,7 @@ export const smoothing = (data, smoothingValue) => {
     const new_data_point = structuredClone(data[i]);
 
     new_data_point.value = range.reduce((a, b) => a.value + (isNaN(b) ? a.value : b.value), 0) / range.length;
-    new_data.push(new_data_point);
+    new_data.push(structuredClone(new_data_point));
 
   }
 

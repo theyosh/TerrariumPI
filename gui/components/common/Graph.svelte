@@ -60,10 +60,6 @@
       });
     }
 
-    // if (['wattage', 'magnetic', 'motion', 'ldr', 'remote'].indexOf(type) !== -1) {
-    //     new_data = extendGraphData(new_data);
-    // }
-
     if (['relays', 'buttons'].indexOf(mode) !== -1) {
         new_data = extendGraphData(new_data);
     }
