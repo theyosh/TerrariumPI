@@ -218,17 +218,13 @@
   }
 </script>
 
-{#if loading}
-  <div class="d-block w-100 h-100 text-center">
+<div class="d-block w-100 h-100 text-center" style="min-height:140px">
+  {#if loading}
     <br />
     <i class="fas fa-2x fa-sync-alt fa-spin mt-5"></i>
-  </div>
-{:else if nodata}
-  <div class="d-block w-100 h-100 text-center">
+  {:else if nodata}
     <h1 class="mt-5">{$_('graph.no-data')}</h1>
-  </div>
-{:else}
-  <div style="min-height:140px">
+  {:else}
     <Line data="{graphData}" options="{graphOpts}" />
-  </div>
-{/if}
+  {/if}
+</div>
