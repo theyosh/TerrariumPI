@@ -31,9 +31,8 @@ from bottle import (
 # Increase bottle memory to max 5MB to process images in WYSIWYG editor
 BaseRequest.MEMFILE_MAX = 5 * 1024 * 1024
 
-from bottle.ext.websocket import GeventWebSocketServer
-from bottle.ext.websocket import websocket
-from queue import Queue
+from bottle.ext.websocket import GeventWebSocketServer, websocket
+from queue import Queue, Empty
 
 from terrariumUtils import terrariumUtils
 from terrariumAPI import terrariumAPI
@@ -380,11 +379,14 @@ class terrariumWebsocket(object):
             self.clients.append(messages)
             logger.debug(f"Got a new websocket connection from {socket}")
 
-            while 1:
-                message = messages.get()
+            while self.webserver.engine.running:
                 try:
+                    message = messages.get(timeout=5)
                     socket.send(json.dumps(message))
                     messages.task_done()
+                except Empty:
+                    continue
+
                 except Exception as ex:
                     # Socket connection is lost/closed, stop looping....
                     logger.debug(f"Disconnected {socket}. Stop listening and remove queue... {ex}")
@@ -406,7 +408,7 @@ class terrariumWebsocket(object):
         except Exception as ex:
             logger.debug(f"Invalid cookie data. Either wrong secret or strange auth. We can ignore this. {ex}")
 
-        while 1:
+        while self.webserver.engine.running:
             try:
                 message = socket.receive()
             except Exception as ex:
@@ -489,7 +491,7 @@ class terrariumWebsocket(object):
 
                 client.put(message)
             # If more then 50 messages in queue, looks like connection is gone and remove the queue from the list
-            if client.qsize() > 50:
+            if client.qsize() > 20:
                 logger.debug(
                     f"Lost connection.... should not happen anymore. {len(self.clients)} - {client.qsize()} - {client}"
                 )
