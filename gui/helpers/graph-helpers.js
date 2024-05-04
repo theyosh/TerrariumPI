@@ -15,7 +15,7 @@ export const smoothing = (data, smoothingValue) => {
 
   for (let i = 0; i < max_items; i++) {
     const range = data.slice(Math.max(i - countBefore, 0), Math.min(i + countAfter + 1, max_items));
-    const new_data_point = structuredClone(data[i]);
+    const new_data_point = JSON.parse(JSON.stringify(data[i]));
 
     new_data_point.value =
       range.reduce((accumulator, point) => accumulator + (isNaN(point.value) ? 0 : point.value), 0) / range.length;
@@ -44,8 +44,8 @@ export const convertTimestamps = (data) => {
 export const extendGraphData = (data, period) => {
   const now = new Date();
 
-  const start = structuredClone(data[0]);
-  const end = structuredClone(data[data.length - 1]);
+  const start = JSON.parse(JSON.stringify(data[0]));
+  const end = JSON.parse(JSON.stringify(data[data.length - 1]));
 
   end.timestamp = Math.round(now.getTime());
 
