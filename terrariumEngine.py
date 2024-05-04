@@ -1527,7 +1527,7 @@ class terrariumEngine(object):
         title_padding = int((max_line_length - max_title_length) / 3) * " "
 
         motd_title = ""
-        for counter, _ in enumerate(title_part2):
+        for counter, _dummy in enumerate(title_part2):
             if (
                 "" == title_part1[counter].strip()
                 and "" == title_part2[counter].strip()
