@@ -228,5 +228,7 @@
     <h1 class="mt-5">{$_('graph.no-data')}</h1>
   </div>
 {:else}
-  <Line data="{graphData}" options="{graphOpts}" />
+  <div style="min-height:200px">
+    <Line data="{graphData}" options="{graphOpts}" />
+  </div>
 {/if}
