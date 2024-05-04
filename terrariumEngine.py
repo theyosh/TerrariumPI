@@ -946,7 +946,7 @@ class terrariumEngine(object):
             # A small sleep between sensor measurement to get a bit more responsiveness of the system
             sleep(0.1)
 
-        threading.Thread(target=self.send_websocket_totals, args=(force_totals)).start()
+        threading.Thread(target=self.send_websocket_totals, args=(force_totals,)).start()
 
     def toggle_relay(self, relay, action="toggle", duration=0):
         ok = False
@@ -979,15 +979,11 @@ class terrariumEngine(object):
         if self.__engine["thread"] is not None and self.__engine["thread"].is_alive() and hasattr(self, "enclosures"):
             self._update_enclosures(True)
 
-        # Update totals through websocket (cached)
-        threading.Thread(target=self.send_websocket_totals).start()
-
         # Notification message
         self.notification.message("relay_toggle", relay_data)
 
         # Forcing new update when relay goes off. New on period can be calculated
-        if int(state) == 0:
-            threading.Thread(target=self.send_websocket_totals, args=(True)).start()
+        threading.Thread(target=self.send_websocket_totals, args=(int(state) == 0,)).start()
 
     def __load_existing_buttons(self):
         self.buttons = {}
@@ -1858,7 +1854,7 @@ class terrariumEngine(object):
             password, self.settings.get("password", None)
         )
 
-    def send_websocket_totals(self, force):
+    def send_websocket_totals(self, force = False):
         self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(force))
 
     def system_stats(self):
