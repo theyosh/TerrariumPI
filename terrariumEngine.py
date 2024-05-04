@@ -952,7 +952,7 @@ class terrariumEngine(object):
             # A small sleep between sensor measurement to get a bit more responsiveness of the system
             sleep(0.1)
 
-        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(force_totals))
+        threading.Thread(target=(lambda: self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(force_totals)))).start()
 
     # -= NEW =-
     def toggle_relay(self, relay, action="toggle", duration=0):
@@ -994,7 +994,7 @@ class terrariumEngine(object):
         self.notification.message("relay_toggle", relay_data)
 
         # Update totals through websocket (force update)
-        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(True))
+        threading.Thread(target=(lambda: self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(True)))).start()
 
     # -= NEW =-
     def __load_existing_buttons(self):
@@ -1527,7 +1527,7 @@ class terrariumEngine(object):
         title_padding = int((max_line_length - max_title_length) / 3) * " "
 
         motd_title = ""
-        for counter, _dummy in enumerate(title_part2):
+        for counter, _ in enumerate(title_part2):
             if (
                 "" == title_part1[counter].strip()
                 and "" == title_part2[counter].strip()
@@ -1600,8 +1600,8 @@ class terrariumEngine(object):
 
         # TODO: Optimize variable usage here
 
-        motd_data["current_watt"] = relay_averages["power"]["current"]
-        motd_data["max_watt"] = relay_averages["power"]["max"]
+        motd_data["current_watt"] = relay_averages["power"]["current"] + float(self.settings["pi_wattage"])
+        motd_data["max_watt"] = relay_averages["power"]["max"] + float(self.settings["pi_wattage"])
         motd_data["current_flow"] = relay_averages["flow"]["current"]
         motd_data["max_flow"] = relay_averages["flow"]["max"]
         motd_data["relays_active"] = len(relays)
