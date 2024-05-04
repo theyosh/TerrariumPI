@@ -986,7 +986,7 @@ class terrariumEngine(object):
         self.notification.message("relay_toggle", relay_data)
 
         # Forcing new update when relay goes off. New on period can be calculated
-        if not state:
+        if int(state) == 0:
             threading.Thread(target=self.send_websocket_totals, args=(True)).start()
 
     def __load_existing_buttons(self):
