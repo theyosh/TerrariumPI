@@ -1796,6 +1796,7 @@ class terrariumEngine(object):
                 None,
                 current_time,
             )
+
     # End Calendar part
 
     def get_audio_playing(self, socket=False):
@@ -1805,6 +1806,7 @@ class terrariumEngine(object):
             self.__send_message({"type": "player_indicator", "data": data})
         else:
             return data
+
     # End audio part
 
     # Environment part
@@ -1829,6 +1831,7 @@ class terrariumEngine(object):
     def set_environment_config(self, data):
         self.environment.load_environment(data)
         return self.config.save_environment(self.environment.get_config())
+
     # End Environment part
 
     # Profile part
