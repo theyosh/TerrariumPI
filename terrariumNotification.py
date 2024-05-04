@@ -556,8 +556,9 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
                     mail_from=("TerrariumPI", re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE)),
                 )
 
+                profile_image_path = ("public/" if self.setup["profile_image"].startswith("img/") else "" ) + self.setup["profile_image"]
                 try:
-                    with open(self.setup["profile_image"], "rb") as fp:
+                    with open(profile_image_path, "rb") as fp:
                         profile_image = fp.read()
                         email_message.attach(
                             filename=os.path.basename(self.setup["profile_image"]),
@@ -565,7 +566,7 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
                             data=profile_image,
                         )
                 except FileNotFoundError:
-                    pass
+                    logger.warning(f"Profile image at location {profile_image_path} does not exists.")
 
                 for attachment in attachments:
                     try:
