@@ -449,7 +449,6 @@ class terrariumEngine(object):
 
         return item
 
-    # -= NEW =-
     def update(self, item, **data):
         update_ok = False
 
@@ -507,7 +506,6 @@ class terrariumEngine(object):
 
         return update_ok
 
-    # -= NEW =-
     def delete(self, item, item_id, sub_id=None):
         delete_ok = False
 
@@ -622,7 +620,6 @@ class terrariumEngine(object):
                 reason = "excluded" if sensor.id in self.settings["exclude_ids"] else "already loaded"
                 sensorLogger.debug(f"Ignored sensor {sensor} because it is {reason}.")
 
-    # -= NEW =-
     def _update_sensors(self):
         sensors = []
         with orm.db_session():
@@ -821,7 +818,6 @@ class terrariumEngine(object):
         data = [{"id": sensor_type, "value": sensor_type} for sensor_type in data]
         return data
 
-    # -= NEW =-
     def __load_existing_relays(self):
         self.relays = {}
 
@@ -864,7 +860,6 @@ class terrariumEngine(object):
                     relay.update(value, True)
                     relayLogger.info(f"Loaded relay {relay} value {value:.2f} in {time.time()-start:.2f} seconds.")
 
-    # -= NEW =-
     def scan_new_relays(self):
         for relay in terrariumRelay.scan_relays(callback=self.callback_relay):
             if relay.id not in self.settings["exclude_ids"] and relay.id not in self.relays:
@@ -895,7 +890,6 @@ class terrariumEngine(object):
                     )
                 )
 
-    # -= NEW =-
     def _update_relays(self):
         # Force an update every 60 minutes. This will make the graphs work better...
         force_update = int(time.time()) % (60 * 60) <= terrariumEngine.__ENGINE_LOOP_TIMEOUT
@@ -952,15 +946,8 @@ class terrariumEngine(object):
             # A small sleep between sensor measurement to get a bit more responsiveness of the system
             sleep(0.1)
 
-        threading.Thread(
-            target=(
-                lambda: self.webserver.websocket_message(
-                    "power_usage_water_flow", self.get_power_usage_water_flow(force_totals)
-                )
-            )
-        ).start()
+        threading.Thread(target=self.send_websocket_totals, args=(force_totals)).start()
 
-    # -= NEW =-
     def toggle_relay(self, relay, action="toggle", duration=0):
         ok = False
 
@@ -978,7 +965,6 @@ class terrariumEngine(object):
         ok = self.relays[relay.id].set_state(action)
         return ok
 
-    # -= NEW =-
     def callback_relay(self, relay, state):
         # First send websocket message before updating database
         self.webserver.websocket_message("relay", {"id": relay, "value": state})
@@ -994,21 +980,15 @@ class terrariumEngine(object):
             self._update_enclosures(True)
 
         # Update totals through websocket (cached)
-        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow())
+        threading.Thread(target=self.send_websocket_totals).start()
 
         # Notification message
         self.notification.message("relay_toggle", relay_data)
 
-        # Update totals through websocket (force update)
-        threading.Thread(
-            target=(
-                lambda: self.webserver.websocket_message(
-                    "power_usage_water_flow", self.get_power_usage_water_flow(True)
-                )
-            )
-        ).start()
+        # Forcing new update when relay goes off. New on period can be calculated
+        if not state:
+            threading.Thread(target=self.send_websocket_totals, args=(True)).start()
 
-    # -= NEW =-
     def __load_existing_buttons(self):
         self.buttons = {}
 
@@ -1044,7 +1024,6 @@ class terrariumEngine(object):
                     button.update(value)
                     buttonLogger.info(f"Loaded {button} value {value:.2f} in {time.time()-start:.2f} seconds.")
 
-    # -= NEW =-
     def _update_buttons(self):
         # Force an update every hour. This will make the graphs work better...
         force_update = int(time.time()) % (60 * 60) <= terrariumEngine.__ENGINE_LOOP_TIMEOUT
@@ -1093,7 +1072,6 @@ class terrariumEngine(object):
             # A small sleep between sensor measurement to get a bit more responsiveness of the system
             sleep(0.1)
 
-    # -= NEW =-
     def load_doors(self):
         doors = []
         with orm.db_session():
@@ -1107,7 +1085,6 @@ class terrariumEngine(object):
 
         return doors
 
-    # -= NEW =-
     # TODO: DB Optimization
     def button_action(self, button, state):
         with orm.db_session():
@@ -1121,7 +1098,6 @@ class terrariumEngine(object):
         # Notification message
         self.notification.message("button_action", button_data)
 
-    # -= NEW =-
     def __load_existing_webcams(self):
         self.webcams = {}
 
@@ -1163,7 +1139,6 @@ class terrariumEngine(object):
 
                 webcamLogger.info(f"Loaded {webcam} in {time.time()-start:.2f} seconds.")
 
-    # -= NEW =-
     def _update_webcams(self):
         def __process_webcam(self, webcam, current_state, relays):
             start = time.time()
@@ -1241,7 +1216,6 @@ class terrariumEngine(object):
                     # Start update in parallel
                     pool.submit(__process_webcam, self, webcam, current_state, relays)
 
-    # -= NEW =-
     def __load_existing_enclosures(self):
         self.enclosures = {}
 
@@ -1269,7 +1243,6 @@ class terrariumEngine(object):
                 new_enclosure.update()
                 enclosureLogger.info(f"Loaded {enclosure} in {time.time()-start:.2f} seconds.")
 
-    # -= NEW =-
     def _update_enclosures(self, read_only=False):
         with orm.db_session():
             for enclosure in Enclosure.select():
@@ -1288,7 +1261,6 @@ class terrariumEngine(object):
                 enclosureLogger.info(f"Updated {enclosure} in {measurement_time:.2f} seconds.")
                 enclosureLogger.debug(f"Updated {enclosure}. M: {measurement_time:.2f} sec.")
 
-    # -= NEW =-
     def __engine_loop(self):
         logger.info(f"Starting engine updater with {terrariumEngine.__ENGINE_LOOP_TIMEOUT:.2f} seconds interval.")
         # A small sleep here, will make the webinterface start directly. Else we have to wait till the first update run is done :(
@@ -1719,7 +1691,6 @@ class terrariumEngine(object):
         # Send notification message
         self.notification.message("system_summary", motd_data)
 
-    # -= NEW =-
     def __log_tailing(self):
         logger.info("Starting log tailing.")
         with subprocess.Popen(
@@ -1735,7 +1706,6 @@ class terrariumEngine(object):
         if self.running:
             self.stop()
 
-    # -= NEW =-
     def stop(self):
         terrariumLogging.logging.getLogger().handlers[0].setLevel(terrariumLogging.logging.INFO)
         logger.info(f"Stopping TerrariumPI {self.version} ...")
@@ -1826,7 +1796,6 @@ class terrariumEngine(object):
                 None,
                 current_time,
             )
-
     # End Calendar part
 
     def get_audio_playing(self, socket=False):
@@ -1836,7 +1805,6 @@ class terrariumEngine(object):
             self.__send_message({"type": "player_indicator", "data": data})
         else:
             return data
-
     # End audio part
 
     # Environment part
@@ -1861,7 +1829,6 @@ class terrariumEngine(object):
     def set_environment_config(self, data):
         self.environment.load_environment(data)
         return self.config.save_environment(self.environment.get_config())
-
     # End Environment part
 
     # Profile part
@@ -1883,13 +1850,14 @@ class terrariumEngine(object):
     # End notifications part
 
     # System functions part
-    # -= NEW =-
     def authenticate(self, username, password):
         return username == self.settings.get("username", None) and terrariumUtils.check_password(
             password, self.settings.get("password", None)
         )
 
-    # -= NEW =-
+    def send_websocket_totals(self, force):
+        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(force))
+
     def system_stats(self):
         start = time.time()
         storage = psutil.disk_usage("/")
@@ -1911,7 +1879,6 @@ class terrariumEngine(object):
         logger.debug("Loaded system stats {} seconds.".format(time.time() - start))
         return data
 
-    # -= NEW =-
     def get_power_usage_water_flow(self, force=False):
         data = {
             "power": {
@@ -1949,7 +1916,6 @@ class terrariumEngine(object):
 
         return data
 
-    # -= NEW =-
     def total_power_and_water_usage(self, force=False, background=False, thread_return=None):
         cacheKey = "total_power_water"
         totals = self.__engine["cache"].get_data(cacheKey, max_age=60 if force else None)
