@@ -952,7 +952,13 @@ class terrariumEngine(object):
             # A small sleep between sensor measurement to get a bit more responsiveness of the system
             sleep(0.1)
 
-        threading.Thread(target=(lambda: self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(force_totals)))).start()
+        threading.Thread(
+            target=(
+                lambda: self.webserver.websocket_message(
+                    "power_usage_water_flow", self.get_power_usage_water_flow(force_totals)
+                )
+            )
+        ).start()
 
     # -= NEW =-
     def toggle_relay(self, relay, action="toggle", duration=0):
@@ -994,7 +1000,13 @@ class terrariumEngine(object):
         self.notification.message("relay_toggle", relay_data)
 
         # Update totals through websocket (force update)
-        threading.Thread(target=(lambda: self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(True)))).start()
+        threading.Thread(
+            target=(
+                lambda: self.webserver.websocket_message(
+                    "power_usage_water_flow", self.get_power_usage_water_flow(True)
+                )
+            )
+        ).start()
 
     # -= NEW =-
     def __load_existing_buttons(self):
