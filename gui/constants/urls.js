@@ -4,6 +4,3 @@ export const AppUrl = removeAllTrailingChars(process.env.APP_URL || window.locat
 export const ApiUrl = removeAllTrailingChars(process.env.API_URL || AppUrl);
 
 export const WebsocketUrl = `${ApiUrl}/live/`.replace(/http/gm, 'ws');
-
-// https://datatables.net/plug-ins/i18n/
-export const DataTablesLanguageUrl = 'https://cdn.datatables.net/plug-ins/2.0.6/i18n';

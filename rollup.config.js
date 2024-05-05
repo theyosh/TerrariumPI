@@ -104,7 +104,6 @@ export default {
         dest: "./public/js",
         rename: 'jquery.knob.min.js'
       },
-
       {
         src: "node_modules/fullcalendar/main.min.js",
         dest: "./public/js",
@@ -115,13 +114,11 @@ export default {
         dest: "./public/js",
         rename: "fullcalendar-locales.min.js"
       },
-
       {
         src: "node_modules/admin-lte/plugins/select2/js/select2.min.js",
         dest: "./public/js",
         rename: 'select2.min.js'
       },
-
       {
         src: "node_modules/admin-lte/plugins/datatables/jquery.dataTables.min.js",
         dest: "./public/js",
@@ -175,6 +172,76 @@ export default {
         src: "gui/assets/static/*",
         dest: "./public"
       },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/ca.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'ca.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/de-DE.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'de-AT.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/de-DE.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'de.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/en-GB.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'en-GB.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/en-GB.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'en-US.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/es-AR.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'es-AR.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/es-ES.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'es.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/fr-FR.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'fr-BE.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/it-IT.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'it-IT.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/ja.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'ja.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/no-NB.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'nb-NO.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/nl-NL.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'nl-NL.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/pl.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'pl.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/pt-BR.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'pt-BR.json'
+      },
       ]
     }),
     production && gzipPlugin({
@@ -193,6 +260,21 @@ export default {
         'public/js/swagger-ui-bundle.js',
         'public/js/swagger-ui-standalone-preset.js',
         'public/js/redoc.standalone.js',
+
+        'public/js/datatables.net/i18n/ca.json',
+        'public/js/datatables.net/i18n/de-AT.json',
+        'public/js/datatables.net/i18n/de.json',
+        'public/js/datatables.net/i18n/en-GB.json',
+        'public/js/datatables.net/i18n/en-US.json',
+        'public/js/datatables.net/i18n/es-AR.json',
+        'public/js/datatables.net/i18n/es.json',
+        'public/js/datatables.net/i18n/fr-BE.json',
+        'public/js/datatables.net/i18n/it-IT.json',
+        'public/js/datatables.net/i18n/ja.json',
+        'public/js/datatables.net/i18n/nb-NO.json',
+        'public/js/datatables.net/i18n/nl-NL.json',
+        'public/js/datatables.net/i18n/pl.json',
+        'public/js/datatables.net/i18n/pt-BR.json',
 
         'public/css/swagger-ui.css',
 
