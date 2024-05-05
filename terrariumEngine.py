@@ -941,12 +941,12 @@ class terrariumEngine(object):
 
             if new_value != current_value:
                 self.notification.message("relay_change", relay_data)
-                force_totals = True
+                force_totals = new_value == 0
 
             # A small sleep between sensor measurement to get a bit more responsiveness of the system
             sleep(0.1)
 
-        threading.Thread(target=self.send_websocket_totals, args=(force_totals,)).start()
+        self.send_websocket_totals(force_totals)
 
     def toggle_relay(self, relay, action="toggle", duration=0):
         ok = False
@@ -982,8 +982,8 @@ class terrariumEngine(object):
         # Notification message
         self.notification.message("relay_toggle", relay_data)
 
-        # Forcing new update when relay goes off. New on period can be calculated
-        threading.Thread(target=self.send_websocket_totals, args=(int(state) == 0,)).start()
+        # Forcing new update when relay goes off. New 'on' period can be calculated
+        self.send_websocket_totals(int(state) == 0)
 
     def __load_existing_buttons(self):
         self.buttons = {}
@@ -1854,8 +1854,12 @@ class terrariumEngine(object):
             password, self.settings.get("password", None)
         )
 
-    def send_websocket_totals(self, force = False):
-        self.webserver.websocket_message("power_usage_water_flow", self.get_power_usage_water_flow(force))
+    def send_websocket_totals(self, force = False, background = False):
+        if not background:
+          threading.Thread(target=self.send_websocket_totals, args=(force,)).start()
+        else:
+          data = self.get_power_usage_water_flow(force)
+          self.webserver.websocket_message("power_usage_water_flow", data)
 
     def system_stats(self):
         start = time.time()
@@ -1919,7 +1923,7 @@ class terrariumEngine(object):
         cacheKey = "total_power_water"
         totals = self.__engine["cache"].get_data(cacheKey, max_age=60 if force else None)
 
-        if background is False:
+        if not background:
 
             if totals is None or force:
                 new_data = [None]
