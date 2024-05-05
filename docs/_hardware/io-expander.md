@@ -20,7 +20,7 @@ In order to use this IO expander, enter the following address in the GPIO relay 
 
 Either use pcf857**4** or pcf857**5** to select the used IO expander.
 
-`<IO expander port>` is mandatory and is a number from 0 till max ports - 1.
+`<IO expander port>` is mandatory and is a number from 1 till max ports.
 
 `<I2C Address>` is mandatory and specified [here](/TerrariumPI/hardware/#i2c-bus).
 
