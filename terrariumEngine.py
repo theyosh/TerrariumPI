@@ -941,7 +941,8 @@ class terrariumEngine(object):
 
             if new_value != current_value:
                 self.notification.message("relay_change", relay_data)
-                force_totals = new_value == 0
+                if not force_totals:
+                    force_totals = new_value == 0
 
             # A small sleep between sensor measurement to get a bit more responsiveness of the system
             sleep(0.1)
@@ -1856,7 +1857,7 @@ class terrariumEngine(object):
 
     def send_websocket_totals(self, force=False, background=False):
         if not background:
-            threading.Thread(target=self.send_websocket_totals, args=(force,)).start()
+            threading.Thread(target=self.send_websocket_totals, args=(force, True)).start()
         else:
             data = self.get_power_usage_water_flow(force)
             self.webserver.websocket_message("power_usage_water_flow", data)
