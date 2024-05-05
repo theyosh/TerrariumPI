@@ -65,7 +65,7 @@
       if ($graphs[id].period === 'week') {
         period = 7;
       } else if ($graphs[id].period === 'month') {
-        period = 30
+        period = 30;
       } else if ($graphs[id].period === 'year') {
         period = 365;
       }
