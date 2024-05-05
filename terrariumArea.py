@@ -776,7 +776,7 @@ class terrariumArea(object):
                     self._time_table()
                     toggle_relay = False
 
-                if toggle_relay is True and len(self.setup.get("sensors",[])) > 0:
+                if toggle_relay is True and len(self.setup.get("sensors", [])) > 0:
                     # We are in timer mode. But when there are sensors configured, they act as a second check
                     # If there is NOT an alarm with the period name, then skip the toggle action.
                     if self.state["sensors"][f"alarm_{period}"] is not True:
@@ -836,9 +836,9 @@ class terrariumArea(object):
 
                 time_elapsed = abs(int(datetime.datetime.now().timestamp()) - self.state[period]["last_powered_on"])
                 # Extra weather check / backup
-                if self.mode in ['weather','weather_inverse'] and time_elapsed < (15 * 60):
-                # Not allowed to toggle for 15 minutes after shutting down based on weather(inverse) mode
-                # This is a poor fix for wrongly recalculating time tables based on weather data
+                if self.mode in ["weather", "weather_inverse"] and time_elapsed < (15 * 60):
+                    # Not allowed to toggle for 15 minutes after shutting down based on weather(inverse) mode
+                    # This is a poor fix for wrongly recalculating time tables based on weather data
                     continue
 
                 if time_elapsed <= self.setup[period]["settle_time"]:

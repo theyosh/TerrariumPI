@@ -1854,12 +1854,12 @@ class terrariumEngine(object):
             password, self.settings.get("password", None)
         )
 
-    def send_websocket_totals(self, force = False, background = False):
+    def send_websocket_totals(self, force=False, background=False):
         if not background:
-          threading.Thread(target=self.send_websocket_totals, args=(force,)).start()
+            threading.Thread(target=self.send_websocket_totals, args=(force,)).start()
         else:
-          data = self.get_power_usage_water_flow(force)
-          self.webserver.websocket_message("power_usage_water_flow", data)
+            data = self.get_power_usage_water_flow(force)
+            self.webserver.websocket_message("power_usage_water_flow", data)
 
     def system_stats(self):
         start = time.time()
