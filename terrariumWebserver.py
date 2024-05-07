@@ -212,19 +212,20 @@ class terrariumWebserver(object):
         return jinja2_template(f"{page}", **variables)
 
     def unsplash_background(self):
-        access_key = self.engine.settings.get('unsplash_access_key')
+        access_key = self.engine.settings.get("unsplash_access_key")
         if access_key is None:
             return {}
 
-        headers = {'Authorization': f"Client-ID {access_key}"}
-        query_params = {"query" : "forrest", "orientation" : "landscape"}
-        background_image = requests.get(f"https://api.unsplash.com/photos/random/", params=query_params, headers=headers)
+        headers = {"Authorization": f"Client-ID {access_key}"}
+        query_params = {"query": "forrest", "orientation": "landscape"}
+        background_image = requests.get(
+            f"https://api.unsplash.com/photos/random/", params=query_params, headers=headers
+        )
 
         if not background_image.ok:
             return {}
 
         return background_image.json()
-
 
     def _static_file_gui(self, filename, root=""):
         return self._static_file(filename, f"public/{root}")
