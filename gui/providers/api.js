@@ -108,7 +108,6 @@ const _uploadData = async (url, data, cb, extra_headers) => {
 
 export const fetchBackground = async (cb) => {
   let url = `${ApiUrl}/background`;
-  console.log('Load url', url);
   await _getData(url, cb);
 };
 
