@@ -77,6 +77,8 @@ def create_defaults(version):
         {"id": "graph_smooth_value", "value": "0"},
         {"id": "auto_dark_mode", "value": "false"},
         {"id": "graph_limit_min_max", "value": "false"},
+        {"id": "unsplash_access_key", "value": ""},
+
     ]
 
     for setting in setting_defaults:
@@ -592,7 +594,7 @@ class Setting(db.Entity):
     id = orm.PrimaryKey(str)
     value = orm.Optional(str)
 
-    ENCRYPTED_FIELDS = ["weather_source", "meross_cloud_username", "meross_cloud_password"]
+    ENCRYPTED_FIELDS = ["weather_source", "meross_cloud_username", "meross_cloud_password", "unsplash_access_key"]
 
     def _encrypt_sensitive_fields(self):
         # Encrypt sensitive fields

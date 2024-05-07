@@ -9,8 +9,9 @@ import json
 import datetime
 import functools
 import re
-from PIL import Image
 import base64
+import requests
+from PIL import Image
 from uuid import uuid4
 from pathlib import Path
 from hashlib import md5
@@ -209,6 +210,21 @@ class terrariumWebserver(object):
 
         return jinja2_template(f"{page}", **variables)
 
+    def unsplash_background(self):
+        access_key = self.engine.settings.get('unsplash_access_key')
+        if access_key is None:
+            return {}
+
+        headers = {'Authorization': f"Client-ID {access_key}"}
+        query_params = {"query" : "forrest", "orientation" : "landscape"}
+        background_image = requests.get(f"https://api.unsplash.com/photos/random/", params=query_params, headers=headers)
+
+        if not background_image.ok:
+            return {}
+
+        return background_image.json()
+
+
     def _static_file_gui(self, filename, root=""):
         return self._static_file(filename, f"public/{root}")
 
@@ -292,10 +308,12 @@ class terrariumWebserver(object):
         # Index page
         self.bottle.route("/", method="GET", callback=self.render_page, apply=self.authenticate(), name="home")
 
-        # Template pages
-        self.bottle.route(
-            "/<page:re:[^/]+>.html", method="GET", callback=self.render_page, apply=self.authenticate(), name="page"
-        )
+        self.bottle.route("/background", method="GET", callback=self.unsplash_background)
+
+        # # Template pages
+        # self.bottle.route(
+        #     "/<page:re:[^/]+>.html", method="GET", callback=self.render_page, apply=self.authenticate(), name="page"
+        # )
 
         # Special case: Svelte main.js|css and robots.txt and favicon.ico
         self.bottle.route(
