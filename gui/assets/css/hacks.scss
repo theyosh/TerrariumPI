@@ -378,3 +378,12 @@ div#accordion table.table-sm td:last-child {
 a.brand-link {
   background-color: transparent !important;
 }
+
+.unsplash-background div.card,
+.unsplash-background div.info-box {
+  opacity: 0.8;
+}
+
+.unsplash-background div.card div.card {
+  opacity: 1;
+}

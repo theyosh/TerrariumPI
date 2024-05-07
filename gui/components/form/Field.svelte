@@ -1,3 +1,12 @@
+<style>
+  i.password-eye {
+    cursor: pointer;
+    float: right;
+    margin: -1.7rem 0.5rem auto auto;
+    position: relative;
+  }
+</style>
+
 <script>
   import FormGroup from './FormGroup.svelte';
   import { getRandomString } from '../../helpers/string-helpers';
@@ -21,6 +30,8 @@
   export let disabled = false;
 
   export let horizontal = null;
+
+  const originalType = type;
 </script>
 
 <FormGroup {id} {label} {required} {help} {invalid} {horizontal} class="{$$props.class || ''}">
@@ -38,4 +49,13 @@
     {step}
     class="form-control"
   />
+  {#if originalType == 'password'}
+    <i
+      class="password-eye far"
+      aria-hidden="true"
+      class:fa-eye-slash="{type == 'password'}"
+      class:fa-eye="{type == 'text'}"
+      on:click="{() => (type = type === 'password' ? 'text' : 'password')}"
+    ></i>
+  {/if}
 </FormGroup>

@@ -218,7 +218,7 @@
   }
 </script>
 
-<div class="d-block w-100 h-100 text-center" style="min-height:140px">
+<div class="d-block w-100 h-100 text-center" style="min-height:150px">
   {#if loading}
     <br />
     <i class="fas fa-2x fa-sync-alt fa-spin mt-5"></i>

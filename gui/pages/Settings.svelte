@@ -567,6 +567,16 @@
               default: 'Enter the password to login into Meross cloud.',
             })}"
           />
+
+          <Field
+            type="password"
+            name="unsplash_access_key"
+            horizontal="{true}"
+            label="{$_('system.settings.unsplash_access_key.label', { default: 'Unsplash Access Key' })}"
+            help="{$_('system.settings.unsplash_access_key.help', {
+              default: 'Enter the access key of your created Unsplash app.',
+            })}"
+          />
         </Card>
       </div>
     </div>
