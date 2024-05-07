@@ -1872,6 +1872,10 @@
         "invalid": "The title cannot be empty.",
         "label": "Title"
       },
+      "unsplash_access_key": {
+        "help": "Enter the access key of your created Unsplash app.",
+        "label": "Unsplash Access Key"
+      },
       "username": {
         "help": "Enter the username for authentication.",
         "invalid": "The username cannot be empty.",

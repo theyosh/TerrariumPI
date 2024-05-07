@@ -1872,6 +1872,10 @@
         "invalid": "Le titre ne peut pas être vide.",
         "label": "Titre"
       },
+      "unsplash_access_key": {
+        "help": "",
+        "label": ""
+      },
       "username": {
         "help": "Entrez le nom d'utilisateur pour l'authentification.",
         "invalid": "Le nom d'utilisateur ne peut pas être vide.",

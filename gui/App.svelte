@@ -4,6 +4,21 @@
     top: -0.2rem;
     left: 0rem;
   }
+
+  .unsplash-credits {
+    text-shadow: black 0.1em 0.1em 0.2em;
+  }
+
+  .unsplash-credits a,
+  .unsplash-credits a:hover {
+    color: white;
+  }
+
+  .unsplash-background {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
 </style>
 
 <script context="module">
@@ -52,11 +67,12 @@
 
   import RoutePages, { onRouteLoaded, Pages, PageUrls } from './pages';
   import { listenPageTitleChanged, customPageTitleUsed } from './stores/page-title';
-  import { isDay, lastUpdate, isOnline, doors, isDarkDesktop } from './stores/terrariumpi';
+  import { isDay, lastUpdate, isOnline, doors, isDarkDesktop, unsplash } from './stores/terrariumpi';
   import { animate_footer_badge } from './helpers/animation-helpers';
   import { websocket } from './providers/websocket';
   import {
     fetchUpcomingEvents,
+    fetchBackground,
     scanSensors,
     scanRelays,
     systemRestart,
@@ -295,6 +311,8 @@
 
     confirmModal(message, callbackAction);
   };
+
+  fetchBackground((data) => unsplash.set(data));
 
   // Update sensor sub menu sorting
   sensor_submenu_sorting(Pages);
@@ -546,10 +564,26 @@
     </li>
   </Sidebar>
 
-  <div class="content-wrapper">
+  <div
+    class="content-wrapper"
+    class:unsplash-background="{$unsplash.urls?.full}"
+    style="background-image: url('{$unsplash.urls?.full || ''}')"
+  >
     <div class="content">
       <Router routes="{RoutePages}" on:routeLoaded="{routeLoaded}" on:routeLoaded="{updateSiteBar}" />
     </div>
+    {#if $unsplash.user?.name}
+      <div class="row">
+        <div class="col text-right text-sm text-white pr-3 unsplash-credits">
+          <a href="{$unsplash.links?.html}" target="_blank"
+            >{$unsplash.user?.name}
+            {#if $unsplash.description || $unsplash.alt_description}
+              <br />{$unsplash.description || $unsplash.alt_description}
+            {/if}
+          </a>
+        </div>
+      </div>
+    {/if}
   </div>
   <footer class="main-footer p-2 text-sm">
     &copy; <a

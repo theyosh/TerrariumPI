@@ -1872,6 +1872,10 @@
         "invalid": "Tittelen kan ikke være tom.",
         "label": "Tittel"
       },
+      "unsplash_access_key": {
+        "help": "",
+        "label": ""
+      },
       "username": {
         "help": "Skriv inn brukernavnet for autentisering.",
         "invalid": "Brukernavnet kan ikke være tomt.",

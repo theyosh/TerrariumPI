@@ -208,6 +208,7 @@ class terrariumWebserver(object):
         variables = self.__template_variables(page_name)
         variables["ajax"] = request.is_ajax
 
+        response.content_type = "text/html; charset=UTF-8"
         return jinja2_template(f"{page}", **variables)
 
     def unsplash_background(self):

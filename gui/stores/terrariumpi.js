@@ -38,6 +38,8 @@ export const graphs = writable({});
 
 export const last_log_line = writable('');
 
+export const unsplash = writable({});
+
 const $_ = get(_);
 
 // Set desktop dark theme listener

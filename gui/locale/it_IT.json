@@ -1872,6 +1872,10 @@
         "invalid": "Il titolo non può essere vuoto.",
         "label": "Titolo"
       },
+      "unsplash_access_key": {
+        "help": "",
+        "label": ""
+      },
       "username": {
         "help": "Immettere il nome utente per l'autenticazione.",
         "invalid": "Il nome utente non può essere vuoto.",

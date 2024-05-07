@@ -1872,6 +1872,10 @@
         "invalid": "El títol no pot estar buit.",
         "label": "Títol"
       },
+      "unsplash_access_key": {
+        "help": "",
+        "label": ""
+      },
       "username": {
         "help": "Introduïu el nom d'usuari per a l'autenticació.",
         "invalid": "El nom d'usuari no pot estar buit.",
