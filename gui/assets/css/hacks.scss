@@ -384,6 +384,11 @@ a.brand-link {
   opacity: 0.8;
 }
 
+body.dark-mode .unsplash-background div.card,
+body.dark-mode .unsplash-background div.info-box {
+  opacity: 0.9;
+}
+
 .unsplash-background div.card div.card {
   opacity: 1;
 }
