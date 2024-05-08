@@ -221,7 +221,7 @@ class terrariumWebserver(object):
             query_string = "green forrest"
 
         headers = {"Authorization": f"Client-ID {access_key}"}
-        query_params = {"query":  query_string, "orientation": "landscape"}
+        query_params = {"query": query_string, "orientation": "landscape"}
         background_image = requests.get(
             f"https://api.unsplash.com/photos/random/", params=query_params, headers=headers
         )
