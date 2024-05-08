@@ -27,7 +27,7 @@
       "enclosure": {
         "help": "Wählen Sie das Gehäuse, zu dem dieser Bereich gehört.",
         "invalid": "Bitte triff eine Wahl.",
-        "label": "Gehäuse",
+        "label": "Anlage",
         "placeholder": "Wähle ein Gehäuse"
       },
       "light_sensors": {
@@ -90,13 +90,13 @@
         },
         "depend_on_relays_mode": {
           "all": {
-            "label": ""
+            "label": "Alles einschalten"
           },
           "none": {
-            "label": ""
+            "label": "Keiner an"
           },
           "one": {
-            "label": ""
+            "label": "Mindestens eine an"
           }
         },
         "deviation_high_alarm": {
@@ -119,16 +119,16 @@
             "placeholder": "Gib eine Startzeit ein"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Wähle ein die Relais aus, von denen diese Relais abhängig sind.",
+            "invalid": "Bitte treffe eine Auswahl.",
+            "label": "Abhängig von Relais",
+            "placeholder": "Wähle Relais aus"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Wähle den Abhängigkeitsmodus aus",
+            "invalid": "Bitte triff eine Wahl.",
+            "label": "Abhängigkeitsmodus",
+            "placeholder": "Wähle einen Modus"
           },
           "door_status": {
             "help": "Wähle den Türstatus aus.",
@@ -237,16 +237,16 @@
             "placeholder": "Gib eine Startzeit ein"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Wähle die Relais aus, von denen diese Relais abhängig sind.",
+            "invalid": "Bitte treffe eine Wahl.",
+            "label": "Abhängig von Relais",
+            "placeholder": "Relais auswählen"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Wähle den Abhängigkeitsmodus aus",
+            "invalid": "Bitte triff eine Wahl.",
+            "label": "Abhängigkeitsmodus",
+            "placeholder": "Wähle einen Modus"
           },
           "door_status": {
             "help": "Wähle den Türstatus aus.",
@@ -1676,18 +1676,18 @@
   },
   "settings": {
     "units": {
-      "beaufort": "",
-      "celsius": "",
-      "cm": "",
-      "fahrenheit": "",
-      "inch": "",
-      "kelvin": "",
-      "km_h": "",
-      "l": "",
-      "m_h": "",
-      "m_s": "",
-      "ukgall": "",
-      "usgall": ""
+      "beaufort": "Beaufort",
+      "celsius": "Celsius",
+      "cm": "Centimeter",
+      "fahrenheit": "Fahrenheit",
+      "inch": "Inch",
+      "kelvin": "Kelvin",
+      "km_h": "Kilometer pro Stunde",
+      "l": "Liter",
+      "m_h": "Meilen pro Stunde",
+      "m_s": "Meter pro Sekunde",
+      "ukgall": "VK Gallonen",
+      "usgall": "US Gallonen"
     }
   },
   "system": {
@@ -1748,14 +1748,14 @@
         }
       },
       "auto_dark_mode": {
-        "help": "",
-        "invalid": "",
+        "help": "Dark Mode verwenden.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Automatischer Dunkelmodus",
         "options": {
-          "always": "",
-          "desktop": "",
-          "off": "",
-          "on": ""
+          "always": "Immer Dark Mode verwenden",
+          "desktop": "Desktop-Einstellungen verwenden",
+          "off": "Kein Dark Modus verwenden",
+          "on": "Tag/Nacht abhängig"
         }
       },
       "currency": {
@@ -1783,8 +1783,8 @@
         "label": "Ausgeschlossene IDs"
       },
       "graph_limit_min_max": {
-        "help": "",
-        "label": ""
+        "help": "Begrenzt die Diagrammwerte auf 20 % der Alarmwerte.",
+        "label": "Begrenze die Diagrammwerte"
       },
       "graph_smooth_value": {
         "help": "Gib die Anzahl der Datenpunkte zum Durchschnitt ein. '0' zum deaktivieren.",
