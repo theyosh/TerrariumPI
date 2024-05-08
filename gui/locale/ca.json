@@ -1876,6 +1876,10 @@
         "help": "",
         "label": ""
       },
+      "unsplash_query": {
+        "help": "",
+        "label": ""
+      },
       "username": {
         "help": "Introduïu el nom d'usuari per a l'autenticació.",
         "invalid": "El nom d'usuari no pot estar buit.",

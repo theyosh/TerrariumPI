@@ -213,19 +213,23 @@ class terrariumWebserver(object):
 
     def unsplash_background(self):
         access_key = self.engine.settings.get("unsplash_access_key")
-        if access_key is None:
+        if access_key is None or "" == access_key:
             return {}
 
+        query_string = self.engine.settings.get("unsplash_query", "green forrest")
+        if "" == query_string:
+            query_string = "green forrest"
+
         headers = {"Authorization": f"Client-ID {access_key}"}
-        query_params = {"query": "forrest", "orientation": "landscape"}
+        query_params = {"query":  query_string, "orientation": "landscape"}
         background_image = requests.get(
             f"https://api.unsplash.com/photos/random/", params=query_params, headers=headers
         )
 
-        if not background_image.ok:
-            return {}
+        if background_image.ok:
+            return background_image.json()
 
-        return background_image.json()
+        return {}
 
     def _static_file_gui(self, filename, root=""):
         return self._static_file(filename, f"public/{root}")

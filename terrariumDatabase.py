@@ -78,6 +78,7 @@ def create_defaults(version):
         {"id": "auto_dark_mode", "value": "false"},
         {"id": "graph_limit_min_max", "value": "false"},
         {"id": "unsplash_access_key", "value": ""},
+        {"id": "unsplash_query", "value": ""},
     ]
 
     for setting in setting_defaults:

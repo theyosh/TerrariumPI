@@ -1876,6 +1876,10 @@
         "help": "",
         "label": ""
       },
+      "unsplash_query": {
+        "help": "",
+        "label": ""
+      },
       "username": {
         "help": "Skriv inn brukernavnet for autentisering.",
         "invalid": "Brukernavnet kan ikke være tomt.",

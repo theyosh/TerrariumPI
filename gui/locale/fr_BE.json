@@ -1876,6 +1876,10 @@
         "help": "",
         "label": ""
       },
+      "unsplash_query": {
+        "help": "",
+        "label": ""
+      },
       "username": {
         "help": "Entrez le nom d'utilisateur pour l'authentification.",
         "invalid": "Le nom d'utilisateur ne peut pas être vide.",

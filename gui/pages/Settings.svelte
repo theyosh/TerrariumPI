@@ -577,6 +577,16 @@
               default: 'Enter the access key of your created Unsplash app.',
             })}"
           />
+
+          <Field
+            type="text"
+            name="unsplash_query"
+            horizontal="{true}"
+            label="{$_('system.settings.unsplash_query.label', { default: 'Unsplash key words' })}"
+            help="{$_('system.settings.unsplash_query.help', {
+              default: 'Enter the key words for selecting background images.',
+            })}"
+          />
         </Card>
       </div>
     </div>

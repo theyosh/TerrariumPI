@@ -1876,6 +1876,10 @@
         "help": "Enter the access key of your created Unsplash app.",
         "label": "Unsplash Access Key"
       },
+      "unsplash_query": {
+        "help": "Enter the key words for selecting background images.",
+        "label": "Unsplash key words"
+      },
       "username": {
         "help": "Enter the username for authentication.",
         "invalid": "The username cannot be empty.",

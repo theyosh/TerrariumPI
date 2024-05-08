@@ -1876,6 +1876,10 @@
         "help": "",
         "label": ""
       },
+      "unsplash_query": {
+        "help": "",
+        "label": ""
+      },
       "username": {
         "help": "認証用のユーザー名を入力します。.",
         "invalid": "ユーザー名を空にすることはできません。.",
