@@ -157,7 +157,7 @@ fi
 nc -z localhost 8888
 if [ $? -eq 1 ]; then
   # run localhost socket only
-  pigpiod -l
+  pigpiod -l || true
 fi
 
 # Remove the restart file from last unhealty status
