@@ -573,18 +573,18 @@
   >
     <div class="content">
       <Router routes="{RoutePages}" on:routeLoaded="{routeLoaded}" on:routeLoaded="{updateSiteBar}" />
-        {#if $unsplash.user?.name}
+      {#if $unsplash.user?.name}
         <div class="row">
-            <div class="col text-right text-sm text-white pr-3 unsplash-credits">
+          <div class="col text-right text-sm text-white pr-3 unsplash-credits">
             <a href="{$unsplash.links?.html}" target="_blank"
-                >{$unsplash.user?.name}
-                {#if $unsplash.description || $unsplash.alt_description}
+              >{$unsplash.user?.name}
+              {#if $unsplash.description || $unsplash.alt_description}
                 <br />{$unsplash.description || $unsplash.alt_description}
-                {/if}
+              {/if}
             </a>
-            </div>
+          </div>
         </div>
-        {/if}
+      {/if}
     </div>
   </div>
   <footer class="main-footer p-2 text-sm">
