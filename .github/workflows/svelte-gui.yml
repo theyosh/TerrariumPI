@@ -38,6 +38,9 @@ jobs:
       - name: Install NPM Modules
         run: npm install --force && ./gui/patch.sh
 
+      - name: Format source code
+        run: npm run format
+
       - name: Build Project
         run: npm run build
 
