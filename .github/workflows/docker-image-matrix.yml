@@ -1,5 +1,5 @@
 # Runs on PR or Release and only if Dockerfile exists and not docs being updated
-name: Docker build & publish
+name: Docker matrix build & publish
 
 on:
   release:
@@ -40,8 +40,8 @@ jobs:
         with:
           images: theyosh/terrariumpi
           flavor: |
-            latest=false
-            suffix=-${{ matrix.os }},onlatest=false
+            latest=${{ matrix.os == 'buster' }}
+            suffix=-${{ matrix.os }},onlatest=true
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
@@ -54,12 +54,15 @@ jobs:
         with:
           context: .
           file: ./Dockerfile.${{ matrix.os }}
-          push: false
-#          target: finalimage
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/arm/v7
           cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            GITHUB_SHA=${{ github.sha }}
+
           cache-to: type=gha,mode=max
           build-args: |
             GITHUB_SHA=${{ github.sha }}
