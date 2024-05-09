@@ -216,7 +216,7 @@ class terrariumWebserver(object):
         if access_key is None or "" == access_key:
             return {}
 
-        query_string = self.engine.settings.get("unsplash_query", "green forrest")
+        query_string = self.engine.settings.get("unsplash_query", "green forest")
         if "" == query_string:
             query_string = "green forrest"
 
