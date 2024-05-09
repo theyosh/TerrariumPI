@@ -379,6 +379,13 @@ a.brand-link {
   background-color: transparent !important;
 }
 
+.unsplash-background .content-header h1 {
+    text-shadow: -1px  1px 0 #f4f6f9,
+				  1px  1px 0 #f4f6f9,
+				  1px -1px 0 #f4f6f9,
+			     -1px -1px 0 #f4f6f9;
+}
+
 .unsplash-background div.card,
 .unsplash-background div.info-box {
   opacity: 0.9;
