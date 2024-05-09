@@ -19,6 +19,7 @@
   import CardSettingsTools from '../components/common/CardSettingsTools.svelte';
   import Field from '../components/form/Field.svelte';
   import FileUpload from '../components/form/FileUpload.svelte';
+  import PasswordField from '../components/form/PasswordField.svelte';
   import Select from '../components/form/Select.svelte';
   import Switch from '../components/form/Switch.svelte';
   import Helper from '../components/form/Helper.svelte';
@@ -266,8 +267,7 @@
             invalid="{$_('system.settings.username.invalid', { default: 'The username cannot be empty.' })}"
           />
 
-          <Field
-            type="password"
+          <PasswordField
             name="password"
             horizontal="{true}"
             label="{$_('system.settings.password.label', { default: 'New password' })}"
@@ -275,8 +275,7 @@
             invalid="{$_('system.settings.password.invalid', { default: 'The password cannot be empty.' })}"
           />
 
-          <Field
-            type="password"
+          <PasswordField
             name="password2"
             horizontal="{true}"
             label="{$_('system.settings.password2.label', { default: 'Confirm new password' })}"
@@ -558,8 +557,7 @@
             })}"
           />
 
-          <Field
-            type="password"
+          <PasswordField
             name="meross_cloud_password"
             horizontal="{true}"
             label="{$_('system.settings.meross_cloud_password.label', { default: 'Meross password' })}"
@@ -568,8 +566,7 @@
             })}"
           />
 
-          <Field
-            type="password"
+          <PasswordField
             name="unsplash_access_key"
             horizontal="{true}"
             label="{$_('system.settings.unsplash_access_key.label', { default: 'Unsplash Access Key' })}"

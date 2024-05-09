@@ -15,6 +15,7 @@
 
   import ModalForm from '../user-controls/ModalForm.svelte';
   import Field from '../components/form/Field.svelte';
+  import PasswordField from '../components/form/PasswordField.svelte';
   import Helper from '../components/form/Helper.svelte';
   import Select from '../components/form/Select.svelte';
   import Switch from '../components/form/Switch.svelte';
@@ -309,8 +310,7 @@
           />
         </div>
         <div class="col">
-          <Field
-            type="text"
+          <PasswordField
             name="setup.password"
             label="{$_('services.settings.setup.password.label', { default: 'SMTP Server password' })}"
             placeholder="{$_('services.settings.setup.password.placeholder', { default: 'Enter a username' })}"
@@ -535,8 +535,7 @@
           />
         </div>
         <div class="col">
-          <Field
-            type="text"
+          <PasswordField
             name="setup.password"
             label="{$_('services.settings.setup.password.label', { default: 'Server password' })}"
             placeholder="{$_('services.settings.setup.password.placeholder', { default: 'Enter a username' })}"

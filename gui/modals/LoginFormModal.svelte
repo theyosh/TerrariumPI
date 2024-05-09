@@ -7,6 +7,7 @@
   import { createForm } from 'felte';
 
   import Field from '../components/form/Field.svelte';
+  import PasswordField from '../components/form/PasswordField.svelte';
   import Helper from '../components/form/Helper.svelte';
   import { doLogin } from '../stores/authentication';
 
@@ -92,8 +93,7 @@
       help="{$_('modal.login.form.username.help', { default: 'Enter the username' })}"
       invalid="{$_('modal.login.form.username.invalid', { default: 'Username cannot be empty' })}"
     />
-    <Field
-      type="password"
+    <PasswordField
       name="password"
       class="col-8"
       required="{true}"

@@ -30,8 +30,6 @@
   export let disabled = false;
 
   export let horizontal = null;
-
-  const originalType = type;
 </script>
 
 <FormGroup {id} {label} {required} {help} {invalid} {horizontal} class="{$$props.class || ''}">
@@ -49,13 +47,4 @@
     {step}
     class="form-control"
   />
-  {#if originalType == 'password'}
-    <i
-      class="password-eye far"
-      aria-hidden="true"
-      class:fa-eye-slash="{type == 'password'}"
-      class:fa-eye="{type == 'text'}"
-      on:click="{() => (type = type === 'password' ? 'text' : 'password')}"
-    ></i>
-  {/if}
 </FormGroup>
