@@ -569,7 +569,7 @@
   <div
     class="content-wrapper"
     class:unsplash-background="{$unsplash.urls?.full}"
-    style:background-image={$unsplash.urls?.full ? $unsplash.urls?.full + '&w=1920' : null}
+    style="background-image: url('{$unsplash.urls?.full || ''}')"
   >
     <div class="content">
       <Router routes="{RoutePages}" on:routeLoaded="{routeLoaded}" on:routeLoaded="{updateSiteBar}" />
