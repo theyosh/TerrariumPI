@@ -7,6 +7,7 @@
 
   .unsplash-credits {
     text-shadow: black 0.1em 0.1em 0.2em;
+    line-height: 1.1rem;
   }
 
   .unsplash-credits a,
@@ -567,23 +568,23 @@
   <div
     class="content-wrapper"
     class:unsplash-background="{$unsplash.urls?.full}"
-    style="background-image: url('{$unsplash.urls?.full || ''}')"
+    style:background-image={$unsplash.urls?.full ? $unsplash.urls?.full + '&w=1920' : null}
   >
     <div class="content">
       <Router routes="{RoutePages}" on:routeLoaded="{routeLoaded}" on:routeLoaded="{updateSiteBar}" />
-    </div>
-    {#if $unsplash.user?.name}
-      <div class="row">
-        <div class="col text-right text-sm text-white pr-3 unsplash-credits">
-          <a href="{$unsplash.links?.html}" target="_blank"
-            >{$unsplash.user?.name}
-            {#if $unsplash.description || $unsplash.alt_description}
-              <br />{$unsplash.description || $unsplash.alt_description}
-            {/if}
-          </a>
+        {#if $unsplash.user?.name}
+        <div class="row">
+            <div class="col text-right text-sm text-white pr-3 unsplash-credits">
+            <a href="{$unsplash.links?.html}" target="_blank"
+                >{$unsplash.user?.name}
+                {#if $unsplash.description || $unsplash.alt_description}
+                <br />{$unsplash.description || $unsplash.alt_description}
+                {/if}
+            </a>
+            </div>
         </div>
-      </div>
-    {/if}
+        {/if}
+    </div>
   </div>
   <footer class="main-footer p-2 text-sm">
     &copy; <a
