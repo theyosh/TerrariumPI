@@ -40,7 +40,10 @@ export default async function (data) {
   const links = toLinkTags(files.css || [], publicPath, attributes);
   const metas = toMetaTags(meta);
 
-  const indexFileHtml = await readFile('./gui/assets/index.template.html', 'utf8');
+
+  const dev = data.title.toLowerCase().endsWith(' -dev-');
+
+  const indexFileHtml = await readFile('./gui/assets/index.template' + (dev ? '.dev' : '') + '.html', 'utf8');
 
   return indexFileHtml
     .replace('__HTML_ATTRS__', makeHtmlAttributes(attributes.html))

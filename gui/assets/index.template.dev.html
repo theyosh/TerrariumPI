@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <meta name="description" content="Software for automating your reptile enclosure or any other area. Using sensors and relays to keep your environment at a controlled state. All with a nice web interface." />
+    <meta charset="utf-8">
+    <title>TerrariumPI</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    <link href="main.css" rel="stylesheet">
+
+    <script defer src="js/jquery.min.js"></script>
+    <script defer src="js/select2.min.js"></script>
+
+    <script defer src="js/fullcalendar.min.js"></script>
+    <script defer src="js/fullcalendar-locales.min.js"></script>
+
+    <script defer src="js/jquery.knob.min.js"></script>
+
+    <script defer src="js/jquery.dataTables.min.js"></script>
+    <script defer src="js/dataTables.bootstrap4.min.js"></script>
+    <script defer src="js/dataTables.responsive.min.js"></script>
+    <script defer src="js/responsive.bootstrap4.min.js"></script>
+    <script defer src="main.js"></script>
+    <script>
+        window.terrariumPI = {
+          	language : 'en-US',
+          	currency : 'eur',
+          	name     : 'TerrariumPI',
+          	version  : '4.8.4',
+          	device   : 'Raspberry Pi 3 Model B Rev 1.2',
+          	profile  : 'img/terrariumpi.jpg',
+          	favicon  : 'favicon.ico',
+          	docker: false,
+          	graph_show_min_max_gauge : false,
+          	graph_smooth_value : 3.0,
+            graph_limit_min_max : false,
+          	show_gauge_overview: false,
+          	auto_dark_mode : 'on',
+          	is_night : false,
+          	dashboard_mode : 0.0,
+          	units: {'temperature': {'name': 'temperature', 'value': 'C'}, 'distance': {'name': 'distance', 'value': 'cm'}, 'altitude': {'name': 'altitude', 'value': 'cm'}, 'pressure': {'name': 'pressure', 'value': 'hPa'}, 'humidity': {'name': 'humidity', 'value': '%'}, 'moisture': {'name': 'moisture', 'value': '%'}, 'conductivity': {'name': 'conductivity', 'value': 'mS'}, 'ph': {'name': 'ph', 'value': 'pH'}, 'light': {'name': 'light', 'value': 'lux'}, 'uva': {'name': 'uva', 'value': 'µW/cm²'}, 'uvb': {'name': 'uvb', 'value': 'µW/cm²'}, 'uvi': {'name': 'uvi', 'value': ''}, 'fertility': {'name': 'fertility', 'value': 'µS/cm'}, 'co2': {'name': 'co2', 'value': 'ppm'}, 'volume': {'name': 'volume', 'value': 'L'}, 'water_volume': {'name': 'Water volume', 'value': 'L'}, 'watertank': {'name': 'watertank', 'value': 'L'}, 'windspeed': {'name': 'windspeed', 'value': 'km/h'}, 'water_flow': {'name': 'water_flow', 'value': 'L/m'}, 'wattage': {'name': 'wattage', 'value': 'W'}, 'powerusage': {'name': 'Pi power usage', 'value': 'kWh'}, 'heating': {'name': 'heating', 'value': 'C'}, 'cooling': {'name': 'cooling', 'value': 'C'}},
+          	available_sensor_types : ['temperature', 'humidity', 'light', 'moisture', 'uvi', 'uva', 'fertility', 'uvb']
+          };
+    </script>
+</head>
+
+<body class="sidebar-mini layout-fixed layout-navbar-fixed">
+    <div id="app"></div>
+</body>
+
+</html>
