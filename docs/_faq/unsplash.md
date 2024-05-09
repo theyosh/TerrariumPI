@@ -18,7 +18,7 @@ On the next page you will see your created application. Scroll down to the secti
 
 Copy the value of the **Access Key** field. This value is needed at the settings page.
 
-Now go to your TerrariumPI [settings]({% link _tabs/setup.md %}#Unsplash) page, and enter the Access Key value here at the Cloud part of the settings screen.
+Now go to your TerrariumPI [settings]({% link _tabs/setup.md %}#unsplash) page, and enter the Access Key value here at the Cloud part of the settings screen.
 The access will be stored encrypted in the database.
 
 The second field at the settings page allows to specify the keyword(s) to use to get a new background image.

@@ -134,7 +134,7 @@ Meross password
 With Unsplash you can get a nice image background in the web GUI.
 
 Unsplash access key
-: This is the access key of your application at Unsplash. [Encrypted]({% link _tabs/features.md %}#other-sensitive-data)
+: This is the access key of your [application]({% link _faq/unsplash.md %}) at Unsplash. [Encrypted]({% link _tabs/features.md %}#other-sensitive-data)
 
 Unsplash key words
 : Here you can enter key words to use for picking a random background image.
