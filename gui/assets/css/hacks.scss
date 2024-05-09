@@ -12,7 +12,7 @@
 
 @for $o from 0 through 10 {
   .opacity-#{$o} {
-    opacity: calc($o / 10);
+    opacity: calc($o / 10) !important;
   }
 }
 
