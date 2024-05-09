@@ -22,7 +22,7 @@
 </script>
 
 {#if webcam}
-  <Card {loading} noPadding="{false}" removeParent="{true}" class="{webcam.id} {$$props.class ? $$props.class : ''}">
+  <Card {loading} noPadding="{false}" removeParent="{true}" class="{webcam.id} {$$props.class ? $$props.class : ''} opacity-10">
     <svelte:fragment slot="header">
       <i class="fas fa-fw fa-video mr-2"></i>{webcam.name}
       <small class="ml-2 text-muted">{$_('gauge.last_update', { default: 'Last update' })}: <span></span></small>
