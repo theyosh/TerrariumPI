@@ -1,4 +1,4 @@
-# TerrariumPI 4.8.4
+# TerrariumPI 4.9.0
 
 ![Latest release](https://img.shields.io/github/v/release/theyosh/terrariumpi?label=Latest%20release)
 ![GitHub Release Date](https://img.shields.io/github/release-date/theyosh/TerrariumPI)
@@ -186,6 +186,7 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
   - Pi 2 (Should work/At own risk/limited support)
   - Pi 3 (Works/full support)
   - Pi 4 (Works/full support)
+  - Pi 5 **does NOT work** (Due to changes in the hardware on the Pi)
 - Power relay board
   - USB versions (Serial and Bitbang)
   - GPIO versions

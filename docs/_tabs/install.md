@@ -22,7 +22,7 @@ Also **64bit is not supported** due to missing mmal code which is needed for the
 ### Creating SD Card
 
 ![Raspberry PI Imager](/assets/img/RPI_Imager.webp){: .right width="200" }
-Download and instal the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to prepare your SD card. Make sure you have a SD card of at least 4GB of size. Bigger is better :) Make sure you select **Raspberry Pi OS Lite (legacy)** from the other Raspberry Pi OS images.
+Download and instal the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to prepare your SD card. Make sure you have a SD card of at least 4GB of size. Bigger is better :smile: Make sure you select **Raspberry Pi OS Lite (legacy)** from the other Raspberry Pi OS images.
 
 ![Raspberry PI Imager settings icon](/assets/img/RPI_Imager_settings.webp){: .left width="50"}In order to enable SSH, Wifi and other settings, click on the settings icon in the lower right corner. Here you enter your Wifi settings, pi password etc. Use this to install the Raspberry PI headless. Add the SD card in the Raspberry PI and withing a minute you should have a running Raspberry PI.
 

@@ -14,7 +14,7 @@ build:
 		--platform linux/arm/v7 \
 		-t $(IMAGE):$(VERSION) \
 		--build-arg GITHUB_SHA=${GITHUB_SHA} \
-		-f Dockerfile \
+		-f Dockerfile.buster \
 		.
 
 push:
@@ -24,7 +24,7 @@ push:
 		--platform linux/arm/v7 \
 		-t $(IMAGE):$(VERSION) \
 		--build-arg GITHUB_SHA=${GITHUB_SHA} \
-		-f Dockerfile \
+		-f Dockerfile.buster \
 		--push \
 		.
 
