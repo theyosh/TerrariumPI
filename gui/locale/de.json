@@ -1873,12 +1873,12 @@
         "label": "Titel"
       },
       "unsplash_access_key": {
-        "help": "",
-        "label": ""
+        "help": "Geben Sie den Zugriffsschlüssel Ihrer erstellten Unsplash-App ein.",
+        "label": "Unsplash-Zugriffsschlüssel"
       },
       "unsplash_query": {
-        "help": "",
-        "label": ""
+        "help": "Geben Sie die Schlüsselwörter für die Auswahl von Hintergrundbildern ein.",
+        "label": "Unsplash-Schlüsselwörter"
       },
       "username": {
         "help": "Gib den Benutzernamen zur Authentifizierung ein.",
