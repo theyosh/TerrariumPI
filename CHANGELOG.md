@@ -2,7 +2,280 @@ Changelog
 =========
 
 
-4.8.4 (2024-03-22)
+4.9.0 (2024-05-11)
+------------------
+
+**New**
+------
+
+- Add custom background key words. [TheYOSH]
+- Add Unsplash background support and toggle password fields. [TheYOSH]
+- Add Unsplash support. [TheYOSH]
+- Add full camera support. [TheYOSH]
+- Add test file. [TheYOSH]
+
+**Fixes**
+------
+
+- Fix status indicators. [TheYOSH]
+- Fix template. [TheYOSH]
+- Header fix. [TheYOSH]
+- Opacity fix. [TheYOSH]
+- Fix background. [TheYOSH]
+- Fix Datatables.net languages. [TheYOSH]
+- Fix thread bug. [TheYOSH]
+- Fix weather time table issue [#911](https://github.com/theyosh/TerrariumPI/issues/911). [TheYOSH]
+- Fix 2. [TheYOSH]
+- Fix background threading totals. [TheYOSH]
+- Fix. [TheYOSH]
+- Fix missing profile image in email. [TheYOSH]
+- Fix translation. [TheYOSH]
+- Fix some error logging. [TheYOSH]
+- Fix threads. [TheYOSH]
+- Fix 3. [TheYOSH]
+- Fix. [TheYOSH]
+- Fixes. [TheYOSH]
+- Code fix. [TheYOSH]
+- Fix cache warmup. [TheYOSH]
+- Fix webcam archiving. [TheYOSH]
+- Fix webcam logging. [TheYOSH]
+- Fix python virtual env during instalation. [TheYOSH]
+- Fix kasa relay caching [#898](https://github.com/theyosh/TerrariumPI/issues/898). [TheYOSH]
+- Fix Python Pillow. [#906](https://github.com/theyosh/TerrariumPI/issues/906). [TheYOSH]
+- Fix bullseye docker image. [theyosh]
+- Fix python conflict. [theyosh]
+- First part of fixes for Bookworm. [TheYOSH]
+- Fix package per OS version. [TheYOSH]
+- First part of fixes for Bookworm. [TheYOSH]
+- Fix package per OS version. [TheYOSH]
+
+**Updates**
+------
+
+- Update version. [TheYOSH]
+- Documentation updates. [TheYOSH]
+- Update docker-image-matrix.yml. [TheYOSH]
+- Update docker-image-matrix.yml. [TheYOSH]
+- Update docker-image-matrix.yml. [TheYOSH]
+- Update docker-image-matrix.yml. [TheYOSH]
+- Update dev HTML rendering. [TheYOSH]
+- Update release documentation. [TheYOSH]
+- Documentation updates. [TheYOSH]
+- Updates. [TheYOSH]
+- Background image updates. [TheYOSH]
+- Update python librarie. [TheYOSH]
+- Update NodeJs Libraries. [TheYOSH]
+- Update translation url. [TheYOSH]
+- Documentation updates. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- NodeJS updates. [TheYOSH]
+- Update error logging. [TheYOSH]
+- Update graph smoothing. [TheYOSH]
+- Update graphing code. [TheYOSH]
+- Update graphs. [TheYOSH]
+- Update logging. [TheYOSH]
+- Update loggers. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update logging. [TheYOSH]
+- Update Ruby gems. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update requirements.txt. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update Python libraries. [TheYOSH]
+- Docker update. [TheYOSH]
+- Update docker builds. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+
+  Add badge
+- Update NodeJS libraries. [TheYOSH]
+- Update Jekyll libraries. [TheYOSH]
+- Update Python libraries. [TheYOSH]
+- Update prettier formatting. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update 2024-03-21-release_4.8.4.md. [TheYOSH]
+- Update requirements.txt. [TheYOSH]
+- Update installer title. [TheYOSH]
+- Update python librarie version. [TheYOSH]
+- Update bullseye docker image. [TheYOSH]
+- Bullseye updates. [TheYOSH]
+- Bullseye updates. [TheYOSH]
+- Update python libraries for Python 3.7.3. [TheYOSH]
+- Bookworm updates. [theyosh]
+- Bookworm updates. [theyosh]
+
+**Other**
+------
+
+- Remove wrong release date. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1092 of 1092 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1092 of 1092 strings)
+- Translated using Weblate (German) [TheYOSH]
+
+  Currently translated at 99.7% (1089 of 1092 strings)
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- Docker multi build. [TheYOSH]
+- Docker multi build. [TheYOSH]
+- Continue startup. [theyosh]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- Run prettier code formatter before build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Run prettier code formatter before build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Less bright. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'bookworm' of github.com:theyosh/TerrariumPI into
+  bookworm. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Smaller background. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New password field. [TheYOSH]
+- Unsplash integration. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (German) [Pascal]
+
+  Currently translated at 99.2% (1080 of 1088 strings)
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Less bright in dark mode. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Merge branch 'bookworm' of github.com:theyosh/TerrariumPI into
+  bookworm. [TheYOSH]
+- Cleanup. [TheYOSH]
+- Clean HTML. [TheYOSH]
+- Set HTTP content header. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Prettier code. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Wrong number in documentation. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Refactor threading. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Test 2. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Min graph height. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Support older browsers. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- More threading. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Stop queues earlier. [TheYOSH]
+- More threading. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Better relay graphs for other periods. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Prettier code. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Smooth test. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Bla3. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Bla. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Bla. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Improve totals caching. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Refactor bluetooth helpers kill. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Cache warmup totals. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Sensor logging test. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Force totals when a relay change from state. [TheYOSH]
+- Improve relay callback. [TheYOSH]
+- Only one sql process allowed. [TheYOSH]
+- Remove make. [TheYOSH]
+- Change some logging. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Finetune total power caching. [TheYOSH]
+- Try to speed up webcam tiling. [TheYOSH]
+- Cache total power and water usage. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Code cleanup. [TheYOSH]
+- Bookworm fine tuning. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- Do not log wrong password to log file [#909](https://github.com/theyosh/TerrariumPI/issues/909). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (German (Austria)) [Thomas Leiter]
+
+  Currently translated at 95.2% (1036 of 1088 strings)
+- Merge branch 'main' into bookworm. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Prettier whitespace. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Downgrade Pillow for older systems. [TheYOSH]
+- Merge pull request [#906](https://github.com/theyosh/TerrariumPI/issues/906) from theyosh/dependabot/pip/pillow-10.3.0.
+  [TheYOSH]
+
+  Bump pillow from 9.5.0 to 10.3.0
+- Bump pillow from 9.5.0 to 10.3.0. [dependabot[bot]]
+
+  Bumps [pillow](https://github.com/python-pillow/Pillow) from 9.5.0 to 10.3.0.
+  - [Release notes](https://github.com/python-pillow/Pillow/releases)
+  - [Changelog](https://github.com/python-pillow/Pillow/blob/main/CHANGES.rst)
+  - [Commits](https://github.com/python-pillow/Pillow/compare/9.5.0...10.3.0)
+
+  ---
+  updated-dependencies:
+  - dependency-name: pillow
+    dependency-type: direct:production
+  ...
+- Bookworm does not support hardware encoded ffmpeg anymore.... :(
+  [TheYOSH]
+- Only use site wide packages on Bookworm. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- Merge branch 'bookworm' of github.com:theyosh/TerrariumPI into
+  bookworm. [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- PiZero changes. [TheYOSH]
+- Make webcam work again. [TheYOSH]
+- Merge branch 'bookworm' of github.com:theyosh/TerrariumPI into
+  bookworm. [TheYOSH]
+- Disable loading bluetooth sensors when there is no hardware available.
+  [TheYOSH]
+- Merge branch 'main' into bookworm. [TheYOSH]
+- Merge branch 'bookworm' of github.com:theyosh/TerrariumPI into
+  bookworm. [TheYOSH]
+- Share pigpod on host. [theyosh]
+- Make webcams bookworm compatible. [TheYOSH]
+- Share pigpod on host. [theyosh]
+- Make webcams bookworm compatible. [TheYOSH]
+
+
+4.8.4 (2024-03-21)
 ------------------
 
 **New**
@@ -28,6 +301,9 @@ Changelog
 **Updates**
 ------
 
+- Update duplicate_switch.py. [TheYOSH]
+
+  Add default port number
 - Update NodeJS libraries. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Update enclosure sorting. Now it detects numbers to sort with. [#892](https://github.com/theyosh/TerrariumPI/issues/892).
@@ -46,6 +322,7 @@ Changelog
 **Other**
 ------
 
+- New release 4.8.4. [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
 - Updae NodeJS libraries. [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
