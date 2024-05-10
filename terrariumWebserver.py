@@ -229,16 +229,10 @@ class terrariumWebserver(object):
         if background_image.ok:
             background_image = background_image.json()
             data = {
-                'description' : background_image['description'] or background_image['alt_description'],
-                'links' : {
-                    'html' : background_image['links']['html']
-                },
-                'urls' : {
-                    'full' : background_image['urls']['full'] + '&w=1920'
-                },
-                'user' : {
-                    'name' : background_image['user']['name']
-                },
+                "description": background_image["description"] or background_image["alt_description"],
+                "links": {"html": background_image["links"]["html"]},
+                "urls": {"full": background_image["urls"]["full"] + "&w=1920"},
+                "user": {"name": background_image["user"]["name"]},
             }
 
             return data
