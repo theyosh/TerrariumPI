@@ -41,7 +41,7 @@ jobs:
           images: theyosh/terrariumpi
           flavor: |
             latest=${{ matrix.os == 'buster' }}
-            suffix=-${{ matrix.os }},onlatest=true
+            suffix=-${{ matrix.os }},onlatest=false
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
