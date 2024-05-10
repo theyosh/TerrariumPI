@@ -604,9 +604,9 @@
       >
     </small>
     <div class="float-right d-sm-inline-block">
-      <small class="badge badge-success opacity-1" title="{$_('footer.current_activity')}">&nbsp;&nbsp;</small>
-      <small class="badge badge-warning opacity-1 ml-1" title="{$_('footer.warning_messages')}">&nbsp;&nbsp;</small>
-      <small class="badge badge-danger opacity-1 ml-1" title="{$_('footer.error_messages')}">&nbsp;&nbsp;</small>
+      <small class="badge badge-success" style="opacity: 0.1" title="{$_('footer.current_activity')}">&nbsp;&nbsp;</small>
+      <small class="badge badge-warning ml-1" style="opacity: 0.1" title="{$_('footer.warning_messages')}">&nbsp;&nbsp;</small>
+      <small class="badge badge-danger ml-1" style="opacity: 0.1" title="{$_('footer.error_messages')}">&nbsp;&nbsp;</small>
       <span class="d-none d-sm-inline"
         >&nbsp;&nbsp; {settings.name}
         {settings.version} - <small>{settings.device}</small> -
