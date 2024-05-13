@@ -100,15 +100,17 @@ websocket.subscribe((message) => {
     case 'power_usage_water_flow':
       currentPower.set(message.data.power.current);
       maxPower.set(message.data.power.max);
-      totalPower.set(message.data.power.total);
-      totalPowerCosts.set(message.data.power.costs);
-      totalPowerDuration.set(message.data.power.duration);
+
+      totalPower.set(message.data.power.total ?? get(totalPower));
+      totalPowerCosts.set(message.data.power.costs ?? get(totalPowerCosts));
+      totalPowerDuration.set(message.data.power.duration ?? get(totalPowerDuration));
 
       currentWater.set(message.data.flow.current);
       maxWater.set(message.data.flow.max);
-      totalWater.set(message.data.flow.total);
-      totalWaterCosts.set(message.data.flow.costs);
-      totalWaterDuration.set(message.data.flow.duration);
+
+      totalWater.set(message.data.flow.total ?? get(totalWater));
+      totalWaterCosts.set(message.data.flow.costs ?? get(totalWaterCosts));
+      totalWaterDuration.set(message.data.flow.duration ?? get(totalWaterDuration));
       break;
 
     case 'sensor':
