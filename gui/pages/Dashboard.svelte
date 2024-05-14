@@ -79,9 +79,9 @@
 
     // when a relay is toggled, update the current enclosures
     const stopEnclosureUpdater = currentPower.subscribe(async (currentValue) => {
-        if (settings.dashboard_mode !== 1) {
-            fetchEnclosures(false, (data) => (enclosures = data));
-        }
+      if (settings.dashboard_mode !== 1) {
+        fetchEnclosures(false, (data) => (enclosures = data));
+      }
     });
 
     // Load REST API data async
