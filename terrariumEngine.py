@@ -1859,6 +1859,12 @@ class terrariumEngine(object):
         if not background:
             threading.Thread(target=self.send_websocket_totals, args=(force, True)).start()
         else:
+            if force:
+                # Only send relay changes first
+                data = self.get_power_usage_water_flow(False, False)
+                self.webserver.websocket_message("power_usage_water_flow", data)
+
+            # Get all data, probably have to refresh cache
             data = self.get_power_usage_water_flow(force)
             self.webserver.websocket_message("power_usage_water_flow", data)
 
@@ -1883,16 +1889,16 @@ class terrariumEngine(object):
         logger.debug("Loaded system stats {} seconds.".format(time.time() - start))
         return data
 
-    def get_power_usage_water_flow(self, force=False):
+    def get_power_usage_water_flow(self, force=False, totals = True):
         data = {
             "power": {
                 "current": float(self.settings["pi_wattage"]),
                 "max": float(self.settings["pi_wattage"]),
-                "total": 0,
-                "costs": 0,
-                "duration": 0,
             },
-            "flow": {"current": 0.0, "max": 0.0, "total": 0, "costs": 0, "duration": 0},
+            "flow": {
+                "current": 0.0,
+                "max": 0.0,
+            },
         }
 
         with orm.db_session():
@@ -1905,18 +1911,19 @@ class terrariumEngine(object):
                 data["flow"]["current"] += relay.current_flow
                 data["flow"]["max"] += relay.flow
 
-        total = self.total_power_and_water_usage(force)
+        if totals:
+            total = self.total_power_and_water_usage(force)
 
-        data["power"]["duration"] = total["duration"]
-        # Total power is converted from watt/s in kWh
-        data["power"]["total"] = total["total_watt"] / 3600.0 / 1000.0
-        # Price is entered as cents per kWh
-        data["power"]["costs"] = data["power"]["total"] * self.settings["power_price"]
+            data["power"]["duration"] = total["duration"]
+            # Total power is converted from watt/s in kWh
+            data["power"]["total"] = total["total_watt"] / 3600.0 / 1000.0
+            # Price is entered as cents per kWh
+            data["power"]["costs"] = data["power"]["total"] * self.settings["power_price"]
 
-        data["flow"]["duration"] = total["duration"]
-        data["flow"]["total"] = total["total_flow"]
-        # Total water costs is in L
-        data["flow"]["costs"] = data["flow"]["total"] * self.settings["water_price"]
+            data["flow"]["duration"] = total["duration"]
+            data["flow"]["total"] = total["total_flow"]
+            # Total water costs is in L
+            data["flow"]["costs"] = data["flow"]["total"] * self.settings["water_price"]
 
         return data
 
@@ -1931,6 +1938,8 @@ class terrariumEngine(object):
                 totals_thread = threading.Thread(target=self.total_power_and_water_usage, args=(force, True, new_data))
 
                 if self.__engine["cache"].set_running(cacheKey):
+                    # Give other relays some time to toggle
+                    sleep(1)
                     totals_thread.start()
 
                     if totals is None:
