@@ -1889,7 +1889,7 @@ class terrariumEngine(object):
         logger.debug("Loaded system stats {} seconds.".format(time.time() - start))
         return data
 
-    def get_power_usage_water_flow(self, force=False, totals = True):
+    def get_power_usage_water_flow(self, force=False, totals=True):
         data = {
             "power": {
                 "current": float(self.settings["pi_wattage"]),

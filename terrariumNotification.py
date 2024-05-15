@@ -2324,7 +2324,9 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
 
         if self.enabled:
             try:
-                self.connection = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1, client_id=f"TerrariumPI {self.setup['version']}")
+                self.connection = mqtt.Client(
+                    mqtt.CallbackAPIVersion.VERSION1, client_id=f"TerrariumPI {self.setup['version']}"
+                )
                 self.connection.on_connect = self.on_connect
                 if self.setup["ssl"]:
                     self.connection.tls_set(tls_version=mqtt.ssl.PROTOCOL_TLS)
