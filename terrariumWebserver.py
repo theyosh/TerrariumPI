@@ -414,9 +414,7 @@ class terrariumWebsocket(object):
                     authenticated = self.webserver.engine.authenticate(auth[0], auth[1])
 
                 except Exception as ex:
-                    logger.debug(
-                        f"Invalid auth data. Either wrong base64 or strange auth. We can ignore this.: {ex}"
-                    )
+                    logger.debug(f"Invalid auth data. Either wrong base64 or strange auth. We can ignore this.: {ex}")
 
         return authenticated
 
@@ -539,4 +537,4 @@ class terrariumWebsocket(object):
         logger.debug(f"Websocket message {message} is send to {len(self.clients)} clients")
 
     def stop(self):
-        self.send_message({"type": "shutdown", "data" : True})
+        self.send_message({"type": "shutdown", "data": True})

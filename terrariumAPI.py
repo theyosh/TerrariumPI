@@ -1547,7 +1547,14 @@ class terrariumAPI(object):
         if isinstance(filter, list):
             # Get history based on selected sensor IDs
             query = orm.select(
-                (sh.timestamp, orm.avg(sh.value), orm.avg(sh.alarm_min), orm.avg(sh.alarm_max), orm.avg(sh.limit_min), orm.avg(sh.limit_max))
+                (
+                    sh.timestamp,
+                    orm.avg(sh.value),
+                    orm.avg(sh.alarm_min),
+                    orm.avg(sh.alarm_max),
+                    orm.avg(sh.limit_min),
+                    orm.avg(sh.limit_max),
+                )
                 for sh in SensorHistory
                 if sh.sensor.id in filter
                 and sh.exclude_avg == False
@@ -1556,7 +1563,14 @@ class terrariumAPI(object):
 
         elif filter in terrariumSensor.sensor_types:
             query = orm.select(
-                (sh.timestamp, orm.avg(sh.value), orm.avg(sh.alarm_min), orm.avg(sh.alarm_max), orm.avg(sh.limit_min), orm.avg(sh.limit_max))
+                (
+                    sh.timestamp,
+                    orm.avg(sh.value),
+                    orm.avg(sh.alarm_min),
+                    orm.avg(sh.alarm_max),
+                    orm.avg(sh.limit_min),
+                    orm.avg(sh.limit_max),
+                )
                 for sh in SensorHistory
                 if sh.sensor.type == filter
                 and sh.exclude_avg == False
