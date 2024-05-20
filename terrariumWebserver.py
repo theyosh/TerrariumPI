@@ -324,11 +324,6 @@ class terrariumWebserver(object):
 
         self.bottle.route("/background", method="GET", callback=self.unsplash_background)
 
-        # # Template pages
-        # self.bottle.route(
-        #     "/<page:re:[^/]+>.html", method="GET", callback=self.render_page, apply=self.authenticate(), name="page"
-        # )
-
         # Special case: Svelte main.js|css and robots.txt and favicon.ico
         self.bottle.route(
             "/<filename:re:(robots\.txt|favicon\.ico|main\.css|main\.js)>", method="GET", callback=self._static_file_gui
@@ -395,11 +390,35 @@ class terrariumWebserver(object):
             quiet=True,
         )
 
+        self.websocket.stop()
+
 
 class terrariumWebsocket(object):
     def __init__(self, terrariumWebserver):
         self.webserver = terrariumWebserver
         self.clients = []
+
+    def __authenticated(self, message):
+        authenticated = False
+
+        socket_auth = message.get("auth", None)
+        if socket_auth != None:
+            # Either do a login, or a logout
+            if socket_auth == "":
+                # Logout!
+                authenticated = False
+
+            else:
+                try:
+                    auth = base64.b64decode(message["auth"]).decode("utf-8").split(":")
+                    authenticated = self.webserver.engine.authenticate(auth[0], auth[1])
+
+                except Exception as ex:
+                    logger.debug(
+                        f"Invalid auth data. Either wrong base64 or strange auth. We can ignore this.: {ex}"
+                    )
+
+        return authenticated
 
     def connect(self, socket):
         def listen_for_messages(messages, socket):
@@ -457,22 +476,7 @@ class terrariumWebsocket(object):
                 message = json.loads(message)
 
                 if "client_init" == message["type"]:
-                    socket_auth = message.get("auth", None)
-                    if socket_auth != None:
-                        # Either do a login, or a logout
-                        if socket_auth == "":
-                            # Logout!
-                            authenticated = False
-
-                        else:
-                            try:
-                                auth = base64.b64decode(message["auth"]).decode("utf-8").split(":")
-                                authenticated = self.webserver.engine.authenticate(auth[0], auth[1])
-
-                            except Exception as ex:
-                                logger.debug(
-                                    f"Invalid auth data. Either wrong base64 or strange auth. We can ignore this.: {ex}"
-                                )
+                    authenticated = self.__authenticated(message)
 
                     if not messages in self.clients:
                         messages.authenticated = authenticated
@@ -533,3 +537,6 @@ class terrariumWebsocket(object):
                     logger.debug(f"Client {client} was not on the client list anymore: {ex}")
 
         logger.debug(f"Websocket message {message} is send to {len(self.clients)} clients")
+
+    def stop(self):
+        self.send_message({"type": "shutdown", "data" : True})
