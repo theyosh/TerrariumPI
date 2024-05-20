@@ -1547,7 +1547,7 @@ class terrariumAPI(object):
         if isinstance(filter, list):
             # Get history based on selected sensor IDs
             query = orm.select(
-                (sh.timestamp, orm.avg(sh.value), orm.avg(sh.alarm_min), orm.avg(sh.alarm_max))
+                (sh.timestamp, orm.avg(sh.value), orm.avg(sh.alarm_min), orm.avg(sh.alarm_max), orm.avg(sh.limit_min), orm.avg(sh.limit_max))
                 for sh in SensorHistory
                 if sh.sensor.id in filter
                 and sh.exclude_avg == False
@@ -1556,7 +1556,7 @@ class terrariumAPI(object):
 
         elif filter in terrariumSensor.sensor_types:
             query = orm.select(
-                (sh.timestamp, orm.avg(sh.value), orm.avg(sh.alarm_min), orm.avg(sh.alarm_max))
+                (sh.timestamp, orm.avg(sh.value), orm.avg(sh.alarm_min), orm.avg(sh.alarm_max), orm.avg(sh.limit_min), orm.avg(sh.limit_max))
                 for sh in SensorHistory
                 if sh.sensor.type == filter
                 and sh.exclude_avg == False
@@ -1586,7 +1586,13 @@ class terrariumAPI(object):
             data.append(data_point)
 
         if "export" == action:
-            sensor = Sensor[filter]
+            export_file = "export"
+            if filter in terrariumSensor.sensor_types:
+                export_file = f"average_{filter}"
+            else:
+                sensor = Sensor[filter]
+                export_file = sensor.name
+
             # CSV Headers
             csv_data = [";".join(data[0].keys())]
             # Data
@@ -1595,7 +1601,7 @@ class terrariumAPI(object):
                 csv_data.append(";".join([str(value) for value in data_point.values()]))
 
             response.headers["Content-Type"] = "application/csv"
-            response.headers["Content-Disposition"] = f"attachment; filename={sensor.name}_{period}.csv"
+            response.headers["Content-Disposition"] = f"attachment; filename={export_file}_{period}.csv"
             return "\n".join(csv_data)
 
         else:
