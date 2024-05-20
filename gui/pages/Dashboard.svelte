@@ -78,8 +78,8 @@
     $websocket = { type: 'load_dashboard' };
 
     // when a relay is toggled, update the current enclosures
-    const stopEnclosureUpdater = currentPower.subscribe(async (currentValue) => {
-      if (settings.dashboard_mode !== 1) {
+    const stopEnclosureSync = currentPower.subscribe(async (currentValue) => {
+      if (settings.dashboard_mode !== 1 && enclosures.length > 0) {
         fetchEnclosures(false, (data) => (enclosures = data));
       }
     });
@@ -210,7 +210,7 @@
     //If a function is returned from onMount, it will be called when the component is unmounted.
     return () => {
       clearInterval(interval);
-      stopEnclosureUpdater();
+      stopEnclosureSync();
     };
   });
 
