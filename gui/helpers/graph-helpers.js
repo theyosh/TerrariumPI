@@ -14,15 +14,14 @@ export const smoothing = (data, smoothingValue) => {
   const max_items = data.length;
 
   for (let i = 0; i < max_items; i++) {
-
     // Remove spikes in alarm values
-    if (i > 0 && i < max_items-1) {
-        if (data[i-1].alarm_min == data[i+1].alarm_min && data[i-1].alarm_min !== data[i].alarm_min) {
-            data[i].alarm_min = data[i-1].alarm_min;
-        }
-        if (data[i-1].alarm_max == data[i+1].alarm_max && data[i-1].alarm_max !== data[i].alarm_max) {
-            data[i].alarm_max = data[i-1].alarm_max;
-        }
+    if (i > 0 && i < max_items - 1) {
+      if (data[i - 1].alarm_min == data[i + 1].alarm_min && data[i - 1].alarm_min !== data[i].alarm_min) {
+        data[i].alarm_min = data[i - 1].alarm_min;
+      }
+      if (data[i - 1].alarm_max == data[i + 1].alarm_max && data[i - 1].alarm_max !== data[i].alarm_max) {
+        data[i].alarm_max = data[i - 1].alarm_max;
+      }
     }
 
     // Smoothing value
