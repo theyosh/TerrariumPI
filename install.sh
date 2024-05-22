@@ -46,6 +46,8 @@ while IFS= read -r line; do
 done < requirements.txt
 
 if [ "${OS}" == "buster" ]; then
+  # Python 3.7 (EOL)
+  PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.31.0}"
   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
   PIP_MODULES="${PIP_MODULES//wheel==+([^ ])/wheel==0.42.0}"
   PIP_MODULES="${PIP_MODULES//setuptools==+([^ ])/setuptools==68.0.0}"
@@ -64,9 +66,11 @@ if [ "${OS}" == "buster" ]; then
   OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
 
 elif [ "${OS}" == "bullseye" ]; then
+  # Python 3.9
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
 
 elif [ "${OS}" == "bookworm" ]; then
+  # Python 3.11
   # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
   OPENCV_PACKAGES="libopenexr-3-1-30 libilmbase25 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev rpicam-apps"
 
