@@ -181,7 +181,7 @@ class terrariumEngine(object):
 
         self.motd()
 
-        startup_message = f'TerrariumPI is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-self.starttime:.2f} seconds.'
+        startup_message = f'TerrariumPI {self.version} is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-self.starttime:.2f} seconds.'
         logger.info(startup_message)
         self.notification.broadcast(startup_message, startup_message, self.settings["profile_image"])
 
@@ -195,6 +195,10 @@ class terrariumEngine(object):
 
         # Start the web server. This will be ending by pressing Ctrl-C or sending kill -INT {PID}
         self.webserver.start()
+
+        # Stop Terrarium engine
+        if self.running:
+            self.stop()
 
     def restart(self):
         def sigint_process():
@@ -1704,6 +1708,9 @@ class terrariumEngine(object):
             self.stop()
 
     def stop(self):
+        if not self.running:
+            return
+
         terrariumLogging.logging.getLogger().handlers[0].setLevel(terrariumLogging.logging.INFO)
         logger.info(f"Stopping TerrariumPI {self.version} ...")
 
@@ -1957,15 +1964,14 @@ class terrariumEngine(object):
             with orm.db_session():
                 data = db.select(
                     """SELECT
-                        DISTINCT relay,
                         TOTAL(total_wattage) AS wattage,
                         TOTAL(total_flow)    AS flow,
-                        IFNULL((JulianDay(MAX(timestamp2)) - JulianDay(MIN(timestamp))) * 24 * 60 * 60,0) AS duration
+                        IFNULL((JulianDay(MAX(off)) - JulianDay(MIN(`on`))) * 24 * 60 * 60,0) AS duration
                         FROM (
                             SELECT
                             RH1.relay     as relay,
-                            RH1.timestamp as timestamp,
-                            RH2.timestamp as timestamp2,
+                            RH1.timestamp as `on`,
+                            RH2.timestamp as off,
                             (JulianDay(RH2.timestamp)-JulianDay(RH1.timestamp))   * 24 * 60 * 60                        AS duration_in_seconds,
                             ((JulianDay(RH2.timestamp)-JulianDay(RH1.timestamp))  * 24 * 60 * 60)         * RH1.wattage AS total_wattage,
                             (((JulianDay(RH2.timestamp)-JulianDay(RH1.timestamp)) * 24 * 60 * 60) / 60.0) * RH1.flow    AS total_flow
@@ -1973,11 +1979,11 @@ class terrariumEngine(object):
                             LEFT JOIN RelayHistory AS RH2
                                 ON RH2.relay = RH1.relay
                                 AND RH2.timestamp = (SELECT MIN(timestamp) FROM RelayHistory WHERE timestamp > RH1.timestamp AND relay = RH1.relay)
-                                WHERE RH1.value > 0
+                            WHERE RH1.value > 0
                         )"""
                 )
 
-                totals = {"total_watt": data[0][1], "total_flow": data[0][2], "duration": data[0][3]}
+                totals = {"total_watt": data[0][0], "total_flow": data[0][1], "duration": data[0][2]}
                 thread_return[0] = totals
                 self.__engine["cache"].set_data(cacheKey, totals, 3600)
                 self.__engine["cache"].clear_running(cacheKey)

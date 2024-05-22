@@ -525,7 +525,7 @@ class terrariumWebsocket(object):
 
                 client.put(message)
             # If more then 50 messages in queue, looks like connection is gone and remove the queue from the list
-            if client.qsize() > 20:
+            if client.qsize() > 50:
                 logger.debug(
                     f"Lost connection.... should not happen anymore. {len(self.clients)} - {client.qsize()} - {client}"
                 )
