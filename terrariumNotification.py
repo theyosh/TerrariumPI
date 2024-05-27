@@ -2331,9 +2331,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
                     )
                 except Exception as ex:
                     # Old version
-                    self.connection = mqtt.Client(
-                        client_id=f"TerrariumPI {self.setup['version']}"
-                    )
+                    self.connection = mqtt.Client(client_id=f"TerrariumPI {self.setup['version']}")
 
                 self.connection.on_connect = self.on_connect
                 if self.setup["ssl"]:
