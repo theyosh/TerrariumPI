@@ -1,9 +1,9 @@
 # Build for raspberry pi
 # docker buildx build --platform linux/arm/v7 --progress=plain -t theyosh/terrariumpi:4.0.0 -f Dockerfile --push .
 
-# build sispmctl 4.9
-FROM gcc:10-buster as sispmctl_builder
-ARG SISPMCTL_VERSION="4.9"
+# build sispmctl 4.11
+FROM gcc:12-bookworm as sispmctl_builder
+ARG SISPMCTL_VERSION="4.11"
 WORKDIR /sispmctl
 RUN apt-get update \
   && apt-get install -y --no-install-recommends libusb-dev \
@@ -14,21 +14,35 @@ RUN apt-get update \
   && make install
 
 # python builder, help keep image small
-# Keep at 3.7-buster to use piwheels files for installation in stead of compiling them all manually. Saves about 2 hours of building :)
-FROM python:3.7-buster as python_builder
+FROM python:3.11-bookworm as python_builder
 # These two environment variables prevent __pycache__/ files.
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PATH="/opt/venv/bin:$PATH"
 RUN python -m venv /opt/venv
-RUN pip install --upgrade pip==24.0 && pip install --upgrade wheel==0.42.0
+RUN pip install --upgrade pip==24.0 && pip install --upgrade wheel==0.43.0
 COPY requirements.txt .
 COPY contrib/python3-voltcraft-sem6000.patch.diff .
 
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends gnupg \
+  && echo "deb http://raspbian.raspberrypi.org/raspbian/ bookworm main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list \
+  && echo "deb http://archive.raspberrypi.org/debian/ bookworm main" >> /etc/apt/sources.list.d/raspberrypi.list \
+  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9165938D90FDDD2E 82B129927FA3303E \
+  && apt-get update \
+  && apt-get full-upgrade -y --no-install-recommends \
+  && apt-get install -y --no-install-recommends pi-bluetooth libglib2.0-dev libbluetooth-dev make
+
 # requirements are slightly different for docker
-RUN sed -i 's/numpy==.*/numpy==1.21.4/g' requirements.txt \
-  && pip install smbus==1.1.post2 \
+# overruling does not work here, pip will exit with non 0 which will stop the build
+RUN sed -i 's/paho-mqtt==.*//g' requirements.txt \
+  && sed -i 's/icalendar==.*//g' requirements.txt \
+  && sed -i 's/opencv-python-headless==.*//g' requirements.txt \
+  && sed -i 's/git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3/g' requirements.txt \
+  && pip install smbus==1.1.post2 --extra-index-url https://www.piwheels.org/simple \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
+  && sed -i "/opt/venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@" \
+  && python -c "import bluepy3.btle" \
   && find /opt/venv -type d -name "test*" | xargs rm -rf  \
   && find /opt/venv -type d -name "__pycache__" | xargs rm -rf \
   && find /opt/venv -type d -name ".git" | xargs rm -rf \
@@ -48,7 +62,7 @@ RUN git clone https://github.com/ageir/chirp-rpi.git --depth 1 "3rdparty/chirp-r
   && find . -type d -name ".git" -exec rm -r {} +
 
 # Sourcecode cleanup and pre-prep
-FROM python:3.7-buster as sourcecode
+FROM python:3.11-bookworm as sourcecode
 WORKDIR /TerrariumPI
 COPY . .
 # remove git and 3rdparty dir from code copy to help keep image smaller
@@ -56,7 +70,7 @@ COPY . .
 RUN rm -Rf .git 3rdparty gui package*.json postcss.config.js rollup.config.js .env.* html-template.js requirements.txt yarn.lock
 
 # actual image
-FROM python:3.7-slim-buster as finalimage
+FROM python:3.11-slim-bookworm as finalimage
 ARG GITHUB_SHA
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -65,12 +79,12 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends gnupg \
-  && echo "deb http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list \
-  && echo "deb http://archive.raspberrypi.org/debian/ buster main" >> /etc/apt/sources.list.d/raspberrypi.list \
+  && echo "deb http://raspbian.raspberrypi.org/raspbian/ bookworm main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list \
+  && echo "deb http://archive.raspberrypi.org/debian/ bookworm main" >> /etc/apt/sources.list.d/raspberrypi.list \
   && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9165938D90FDDD2E 82B129927FA3303E \
   && apt-get update \
   && apt-get full-upgrade -y --no-install-recommends \
-  && apt-get install -y --no-install-recommends sudo pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin openjdk-11-jre-headless \
+  && apt-get install -y --no-install-recommends sudo ncat pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin default-jre-headless python3-opencv \
   && apt-get --purge autoremove -y \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
@@ -81,9 +95,8 @@ COPY --from=sispmctl_builder /usr/local/lib/libsispmctl* /usr/local/lib/.
 COPY --from=sispmctl_builder /usr/local/bin/sispmctl /usr/local/bin/sispmctl
 
 RUN rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
-  && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so \
-  && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so.0 \
-  && echo "/opt/vc/lib" > /etc/ld.so.conf.d/00-vmcs.conf \
+  && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so \
+  && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so.0 \
   && ldconfig
 
 COPY --from=python_builder /opt/venv /opt/venv
@@ -97,3 +110,4 @@ RUN echo "${GITHUB_SHA}" > .gitversion && echo '[ ! -z "$TERM" -a -r /TerrariumP
 HEALTHCHECK --interval=180s --timeout=5s --start-period=120s CMD python contrib/docker_health.py
 
 ENTRYPOINT ["/bin/bash", "/TerrariumPI/run.sh"]
+CMD [ "sleep", "6000" ]

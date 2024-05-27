@@ -17,7 +17,7 @@ jobs:
   docker:
     strategy:
         matrix:
-          os: [buster, bullseye]
+          os: [buster, bullseye, bookworm]
 
     runs-on: ubuntu-latest
     steps:
