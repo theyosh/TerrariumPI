@@ -1,5 +1,5 @@
 pip==24.0
-setuptools==69.5.1
+setuptools==70.0.0
 wheel==0.43.0
 
 # Database
@@ -85,7 +85,7 @@ ansi2html==1.9.1
 emails==0.6
 luma.oled==3.13.0
 i2c_lcd==0.1.0
-python-telegram-bot[socks,http2]==21.1.1
+python-telegram-bot[socks,http2]==21.2
 
 # Overrule versions
 # Force to latest version
@@ -93,4 +93,4 @@ python-telegram-bot[socks,http2]==21.1.1
 #paho-mqtt==2.0.0
 icalendar==5.0.12
 adafruit-circuitpython-typing==1.10.3
-pydantic==1.10.15
+pydantic==2.7.1
