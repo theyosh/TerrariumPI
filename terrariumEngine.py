@@ -980,6 +980,8 @@ class terrariumEngine(object):
             relay.update(state)
             relay_data = relay.to_dict()
 
+        orm.commit()
+
         # Update enclosure states to reflect the new relay states
         if self.__engine["thread"] is not None and self.__engine["thread"].is_alive() and hasattr(self, "enclosures"):
             self._update_enclosures(True)
@@ -1908,16 +1910,6 @@ class terrariumEngine(object):
             },
         }
 
-        with orm.db_session():
-            for relay in Relay.select(
-                lambda r: r.id in self.relays.keys() and not r.id in self.settings["exclude_ids"]
-            ):
-                data["power"]["current"] += relay.current_wattage
-                data["power"]["max"] += relay.wattage
-
-                data["flow"]["current"] += relay.current_flow
-                data["flow"]["max"] += relay.flow
-
         if totals:
             total = self.total_power_and_water_usage(force)
 
@@ -1931,6 +1923,16 @@ class terrariumEngine(object):
             data["flow"]["total"] = total["total_flow"]
             # Total water costs is in L
             data["flow"]["costs"] = data["flow"]["total"] * self.settings["water_price"]
+
+        with orm.db_session():
+            for relay in Relay.select(
+                lambda r: r.id in self.relays.keys() and not r.id in self.settings["exclude_ids"]
+            ):
+                data["power"]["current"] += relay.current_wattage
+                data["power"]["max"] += relay.wattage
+
+                data["flow"]["current"] += relay.current_flow
+                data["flow"]["max"] += relay.flow
 
         return data
 
