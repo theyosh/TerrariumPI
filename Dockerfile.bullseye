@@ -58,7 +58,8 @@ RUN rm -Rf .git 3rdparty gui package*.json postcss.config.js rollup.config.js .e
 
 # actual image
 FROM python:3.9-slim-bullseye as finalimage
-ARG GITHUB_SHA
+ARG GITHUB_SHA="development"
+ARG JAVA=""
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV DEBIAN_FRONTEND=noninteractive
@@ -71,7 +72,7 @@ RUN apt-get update \
   && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9165938D90FDDD2E 82B129927FA3303E \
   && apt-get update \
   && apt-get full-upgrade -y --no-install-recommends \
-  && apt-get install -y --no-install-recommends sudo pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin openjdk-11-jre-headless \
+  && apt-get install -y --no-install-recommends sudo pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin ${JAVA} \
   && apt-get --purge autoremove -y \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
