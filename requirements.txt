@@ -90,7 +90,7 @@ python-telegram-bot[socks,http2]==21.2
 # Overrule versions
 # Force to latest version
 # Version 2 will brake meross-iot package
-#paho-mqtt==2.0.0
+paho-mqtt==1.6.1
 icalendar==5.0.12
 adafruit-circuitpython-typing==1.10.3
 pydantic==2.7.1
