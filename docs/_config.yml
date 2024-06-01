@@ -159,6 +159,7 @@ plugins:
   - jekyll-target-blank
   - jemoji
   - jekyll-minifier
+  - jekyll-liquify
 
 # ------------ The following options are not recommended to be modified ------------------
 

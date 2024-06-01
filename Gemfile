@@ -18,7 +18,7 @@ group :jekyll_plugins do
 #  gem "jekyll-archives"
 #  gem "jekyll-sitemap"
 #  gem "jekyll-analytics"
-#  gem "jekyll-liquify", "= 0.0.2"
+  gem "jekyll-liquify", "= 0.0.2"
 end
 
 group :test do
