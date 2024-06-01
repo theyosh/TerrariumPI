@@ -1,14 +1,13 @@
 ---
 ---
-/*
-  If the number of TAB files has changed, the following variable is required.
-  And it must be defined before `@import`.
-*/
-$tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
 
-/* Chirpy main scss */
-@import "main";
+@import 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
 
+/* append your custom style below */
 @import "swagger";
 
 /* Hide duplicate title ?? */

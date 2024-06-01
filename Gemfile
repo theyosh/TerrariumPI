@@ -2,22 +2,23 @@
 
 source "https://rubygems.org"
 
-gem "jekyll-theme-chirpy", ">= 6.3.1"
+gem "jekyll-theme-chirpy", ">= 7.0.0"
 
 group :jekyll_plugins do
   # If you have any plugins, put them here!
   # gem "jekyll-xxx", "~> x.y"
   gem "jekyll-feed"
-  gem "jekyll-paginate"
-  gem "jekyll-redirect-from"
-  gem "jekyll-seo-tag"
-  gem "jekyll-archives"
-  gem "jekyll-sitemap"
   gem "jekyll-target-blank"
-  gem "jemoji"
   gem "jekyll-minifier"
-  gem "jekyll-analytics"
-  gem "jekyll-liquify", "= 0.0.2"
+  gem "jemoji"
+
+#  gem "jekyll-paginate"
+#  gem "jekyll-redirect-from"
+#  gem "jekyll-seo-tag"
+#  gem "jekyll-archives"
+#  gem "jekyll-sitemap"
+#  gem "jekyll-analytics"
+#  gem "jekyll-liquify", "= 0.0.2"
 end
 
 group :test do
