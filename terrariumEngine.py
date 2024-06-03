@@ -986,6 +986,8 @@ class terrariumEngine(object):
         if self.__engine["thread"] is not None and self.__engine["thread"].is_alive() and hasattr(self, "enclosures"):
             self._update_enclosures(True)
 
+        orm.commit()
+
         # Notification message
         self.notification.message("relay_toggle", relay_data)
 
