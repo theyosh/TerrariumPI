@@ -15,6 +15,7 @@ Or search in the [closed tickets](https://github.com/theyosh/TerrariumPI/issues?
  - TerrariumPI version: 4.[x].[y]
  - Install: [Manual] / [Docker]
  - Raspberry PI: [e.g. 3B or 4]
+ - OS: [Buster, Bullseye, Bookworm]
 
 **Describe the bug**
 A clear and concise description of what the bug is.
@@ -27,6 +28,9 @@ A clear and concise description of what you expected to happen.
 
 **Screenshots**
 Please add screenshots of the [debug screens](https://theyosh.github.io/TerrariumPI/faq/how-to-debug-terrariumpi/):
+
+**Logfiles**
+Please add the log file found in the log folder: `log/terrariumpi.log`. All sensitive information should be stripped, and save to upload.
 
 **Additional context**
 Add any other context about the problem here.
