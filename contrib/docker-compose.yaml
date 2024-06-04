@@ -1,4 +1,3 @@
-version: "3.7"
 services:
   terrariumpi:
     image: theyosh/terrariumpi:latest # Or use a specific version

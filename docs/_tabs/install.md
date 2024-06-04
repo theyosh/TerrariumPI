@@ -34,7 +34,7 @@ When the Raspberry PI is up and running, you should be able to SSH to it. On Lin
 ssh pi@[raspberrypi]
 ```
 
-**Disclaimer:** If you have TerrariumPI 3 running on this Raspberry PI, then you can [read here](#backup) how to stop and make a backup.
+**Disclaimer:** If you have TerrariumPI running on this Raspberry PI, then you can [read here](#backup) how to stop and make a backup.
 
 ### Docker
 
@@ -46,7 +46,6 @@ Install docker according to: [https://docs.docker.com/engine/install/debian/](ht
 Then you need to setup a `docker-compose.yaml` file. There is an example `docker-compose.yaml.example` in the `contrib` folder which can be used as a starting point:
 
 ```yaml
-version: "3.7"
 services:
   terrariumpi:
     image: theyosh/terrariumpi:latest # Or use a specific version
@@ -57,8 +56,14 @@ services:
       - /opt/terrariumpi/scripts:/TerrariumPI/scripts
       - /opt/terrariumpi/webcam-archive:/TerrariumPI/webcam/archive
       - /opt/terrariumpi/DenkoviRelayCommandLineTool:/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool
-      - /boot/config.txt:/boot/config.txt
-      - /boot/cmdline.txt:/boot/cmdline.txt
+
+      - /boot/config.txt:/boot/config.txt # For Buster and Bullseye
+      - /boot/cmdline.txt:/boot/cmdline.txt # For Buster and Bullseye
+
+      - /boot/firmware/config.txt:/boot/firmware/config.txt # For Bookworm
+      - /boot/firmware/cmdline.txt:/boot/firmware/cmdline.txt # For Bookworm
+      - /run/udev:/run/udev # For Bookworm
+
       - /etc/modules:/etc/modules
       - /dev:/dev
     network_mode: host
@@ -79,6 +84,8 @@ services:
       AUTO_REBOOT: "true"
 ```
 
+**Remark:** Remove the lines which are not for your host OS.
+
 The only real setting is the `TZ` value. Make sure it is set to your local/home time zone. [A valid list can be found here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
 We run the container with **[privileged](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)** enabled. This is less secure, but needed in order to be able to handle all the hardware that is connected to the Raspberry PI.
@@ -86,6 +93,8 @@ We run the container with **[privileged](https://docs.docker.com/engine/referenc
 The network mode needs to be at `host`. Else bluetooth with not work, and you can't use bluetooth sensors.
 
 then you can run `docker compose up -d` to start the docker image. It could be that it needs a reboot. After that, you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
+
+[All docker images](https://hub.docker.com/r/theyosh/terrariumpi/) can be found at Docker Hub.
 
 ### Manual
 
