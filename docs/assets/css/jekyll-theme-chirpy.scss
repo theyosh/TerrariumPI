@@ -42,17 +42,23 @@ div.content .share-icons a.external::after {
     display: inline !important;
 }
 
-/*
-html[mode="dark"] img.is_dimmer,
-html[mode="dark"] a.invert img {
-  filter: invert(100%);
+@media (prefers-color-scheme: dark) {
+    html:not([data-mode]), html[data-mode="dark"] {
+        img.is_dimmer,
+        a.invert img {
+            filter: invert(100%);
+          }
+    }
 }
 
-html[data-mode="dark"] img.is_dimmer,
-html[data-mode="dark"] a.invert img {
-  filter: invert(100%);
-}
-*/
+// html[mode="dark"]
+// html[mode="dark"]
+
+// html[data-mode="dark"] img.is_dimmer,
+// html[data-mode="dark"] a.invert img {
+//   filter: invert(100%);
+// }
+
 
 /* Overrule aspect ration header image */
 div.post-meta .preview-img {

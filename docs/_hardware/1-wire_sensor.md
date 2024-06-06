@@ -11,7 +11,7 @@ image:
 device_types: [temperature,humidity]
 device_address: "Enter the symlink folder name that are available at `/sys/bus/w1/devices/`<br />Ex: `28-0115b231f3ff`"
 device_auto_detect: true
-device_url: https://pinout.xyz/pinout/1_wire#
+device_url: https://pinout.xyz/pinout/1_wire
 ---
 
 ## Information

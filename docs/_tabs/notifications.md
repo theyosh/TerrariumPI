@@ -46,7 +46,7 @@ The receiver email address does not has to be te same as the used account for se
 
 ### MQTT
 
-![MQTT icon](/assets/img/MQTT_Cloud.webp){: .right .invert width="150" }You can use a MQTT service to send messages and act on based on the content or topic with other clients. It will auto detect TLS/SSL connection options to use.
+![MQTT icon](/assets/img/MQTT_Cloud.webp){: .right width="150" }You can use a MQTT service to send messages and act on based on the content or topic with other clients. It will auto detect TLS/SSL connection options to use.
 Enter the server address, port number, username and password in the form to connect to a MQTT server. It will connect with a client id: `TerrariumPI {version}`. It will start the full topic location with `terrariumpi`. From there you will get sub topics based on the message type. If there is an ID in the data (from a sensor), than this ID will also used as a subtopic. This way you can subscribe to sensor warnings for a single sensor.
 
 Subscribe, for example, for a topic: `terrariumpi/sensor/warning/1234567/` to get only sensor warnings for sensor id 1234567. You can use wildcards **\*** in the topic path.
@@ -67,13 +67,13 @@ It will not send files, as that will make the messages to big.
 
 ### Pushover
 
-![Pushover icon](/assets/img/pushover-logo.webp){: .right .invert width="150" } For push over you need to enter the **API token** and **user key** in order to make a connection. These can be found/created in your account at [Pushover](https://support.pushover.net/i175-how-do-i-get-an-api-or-application-token).
+![Pushover icon](/assets/img/pushover-logo.webp){: .right width="150" } For push over you need to enter the **API token** and **user key** in order to make a connection. These can be found/created in your account at [Pushover](https://support.pushover.net/i175-how-do-i-get-an-api-or-application-token).
 You can then receive messages with the subject and message you entered in a notification message.
 When you selected the `system_error` message type, you should get a siren sound when you receive a system error message for extra attention.
 
 ### Telegram
 
-![Telegram icon](/assets/img/telegram-logo.webp){: .right .invert width="150" } For Telegram you need to enter the **Bot token** and **username** in order to make a connection. A Telegram Bot can be created [here](https://core.telegram.org/bots#how-do-i-create-a-bot). Your username(s) should start with an `@` and space separated. Only entered usernames can receive messages and send commands. The bot token is stored encrypted in the database.
+![Telegram icon](/assets/img/telegram-logo.webp){: .right width="150" } For Telegram you need to enter the **Bot token** and **username** in order to make a connection. A Telegram Bot can be created [here](https://core.telegram.org/bots#how-do-i-create-a-bot). Your username(s) should start with an `@` and space separated. Only entered usernames can receive messages and send commands. The bot token is stored encrypted in the database.
 
 In order to receive messages, you need to start talking to your Telegram bot through your telegram app. This is done by sending a telegram command `/start`. You should get a response like `start command received, you are now getting updates...`.
 

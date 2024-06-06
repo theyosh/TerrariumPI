@@ -80,13 +80,13 @@ Either use [pcf857**4**](/TerrariumPI/hardware/io-expander/) or [pcf857**5**](/T
 
 ## Relays
 
-We currently support **{{ relays | size}}** types of relays. Relays which has a dial icon ![Dimmer icon](/assets/img/dimmer_icon.png){: style="height: 20px" .normal .is_dimmer} after their name are dimmers.
+We currently support **{{ relays | size}}** types of relays. Relays which has a dial icon ![Dimmer icon](/assets/img/dimmer_icon.png){: style="height: 20px" .normal .invert} after their name are dimmers.
 
 {% for relay in relays %}
   <h3 id="{{ relay.title| slugify }}">
     <a href="{{ relay.url | relative_url }}">{{ relay.title }}</a>
   {% if relay.tags contains 'dimmer' %}
-    <img src="/assets/img/dimmer_icon.png" title="Relay is a dimmer" alt="Relay is a dimmer" style="height: 20px" class="ml-xl-3 is_dimmer">
+    <img src="/assets/img/dimmer_icon.png" title="Relay is a dimmer" alt="Relay is a dimmer" style="height: 20px" class="ml-xl-3 invert">
   {% endif %}
   </h3>
 {% endfor %}
