@@ -47,18 +47,9 @@ div.content .share-icons a.external::after {
         img.is_dimmer,
         a.invert img {
             filter: invert(100%);
-          }
+        }
     }
 }
-
-// html[mode="dark"]
-// html[mode="dark"]
-
-// html[data-mode="dark"] img.is_dimmer,
-// html[data-mode="dark"] a.invert img {
-//   filter: invert(100%);
-// }
-
 
 /* Overrule aspect ration header image */
 div.post-meta .preview-img {
