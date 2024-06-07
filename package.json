@@ -13,7 +13,7 @@
     "@babel/preset-env": "^7.18.10",
     "@gen/rollup-plugin-generate-html": "^0.1.1",
     "@rollup/plugin-babel": "^6.0.2",
-    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-html": "^1.0.1",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.2",
