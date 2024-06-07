@@ -2,7 +2,111 @@ Changelog
 =========
 
 
-4.9.0 (2024-05-11)
+4.9.1 (2024-06-08)
+------------------
+
+**Fixes**
+------
+
+- Fix python library. [TheYOSH]
+- Fix doc builder. [TheYOSH]
+- Docs fix (2) [TheYOSH]
+- Docs fix. [TheYOSH]
+- Final fix current power update through websocket. [TheYOSH]
+- Revert back queue size and small engine fixes. [TheYOSH]
+- Fix export average sensor data. [TheYOSH]
+- Fix legacy paho MQTT client. [TheYOSH]
+
+**Updates**
+------
+
+- Update libraries. [TheYOSH]
+- Small documentation update. [TheYOSH]
+- More documentation updates. [TheYOSH]
+- Small updates documentation. [TheYOSH]
+- Update issue template. [TheYOSH]
+- Update Docker documentation. [TheYOSH]
+- Update version number. [TheYOSH]
+- Emoji updates. [TheYOSH]
+- Update pages-deploy.yml. [TheYOSH]
+- Documentation updates. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update Python libraries bullseye. [TheYOSH]
+- Update Python libraries (buster) [TheYOSH]
+- Update Docker builds. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update python package requests. [TheYOSH]
+- --- updated-dependencies: - dependency-name: requests   dependency-
+  type: direct:production ... [dependabot[bot]]
+- Update packages. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update enclosures when total power changes. [TheYOSH]
+- Update enclosures when a relay is toggled. [TheYOSH]
+
+**Other**
+------
+
+- New Svelte GUI build. [TheYOSH]
+- Commit some more. [TheYOSH]
+- Java builds are latest. [TheYOSH]
+- Doc tests. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Split docker builds with/without java. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Cleanup. [theyosh]
+- New Svelte GUI build. [TheYOSH]
+- Support both paho-mqtt libraries. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge pull request [#918](https://github.com/theyosh/TerrariumPI/issues/918) from theyosh/dependabot/pip/requests-2.32.0.
+  [TheYOSH]
+
+  Bump requests from 2.31.0 to 2.32.0
+- Merge pull request [#917](https://github.com/theyosh/TerrariumPI/issues/917) from theyosh/dependabot/bundler/rexml-3.2.8.
+  [TheYOSH]
+
+  Bump rexml from 3.2.6 to 3.2.8
+- Bump rexml from 3.2.6 to 3.2.8. [dependabot[bot]]
+
+  Bumps [rexml](https://github.com/ruby/rexml) from 3.2.6 to 3.2.8.
+  - [Release notes](https://github.com/ruby/rexml/releases)
+  - [Changelog](https://github.com/ruby/rexml/blob/master/NEWS.md)
+  - [Commits](https://github.com/ruby/rexml/compare/v3.2.6...v3.2.8)
+
+  ---
+  updated-dependencies:
+  - dependency-name: rexml
+    dependency-type: indirect
+  ...
+- Merge pull request [#915](https://github.com/theyosh/TerrariumPI/issues/915) from
+  theyosh/dependabot/bundler/nokogiri-1.16.5. [TheYOSH]
+
+  Bump nokogiri from 1.16.4 to 1.16.5
+- Bump nokogiri from 1.16.4 to 1.16.5. [dependabot[bot]]
+
+  Bumps [nokogiri](https://github.com/sparklemotion/nokogiri) from 1.16.4 to 1.16.5.
+  - [Release notes](https://github.com/sparklemotion/nokogiri/releases)
+  - [Changelog](https://github.com/sparklemotion/nokogiri/blob/main/CHANGELOG.md)
+  - [Commits](https://github.com/sparklemotion/nokogiri/compare/v1.16.4...v1.16.5)
+
+  ---
+  updated-dependencies:
+  - dependency-name: nokogiri
+    dependency-type: indirect
+  ...
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Remove graph spikes. [TheYOSH]
+- Simply code and add stop function. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Different totals logic. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Split power and water totals from current usage. [TheYOSH]
+
+
+4.9.0 (2024-05-10)
 ------------------
 
 **New**
@@ -52,6 +156,9 @@ Changelog
 **Updates**
 ------
 
+- Update NodeJS libraries. [TheYOSH]
+- Documentation date update. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update version. [TheYOSH]
 - Documentation updates. [TheYOSH]
 - Update docker-image-matrix.yml. [TheYOSH]
@@ -107,6 +214,7 @@ Changelog
 **Other**
 ------
 
+- New Svelte GUI build. [TheYOSH]
 - Remove wrong release date. [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
 - Translated using Weblate (Dutch) [TheYOSH]
