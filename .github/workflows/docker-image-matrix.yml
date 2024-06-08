@@ -42,6 +42,7 @@ jobs:
         with:
           images: theyosh/terrariumpi
           flavor: |
+            latest=false
             suffix=-${{ matrix.os }},onlatest=false
 
       - name: Docker meta - Java
