@@ -72,12 +72,16 @@ class terrariumCalendar(object):
             end = start + timedelta(days=30)
 
         return_data = []
-        for event_data in events(string_content=self.__ical.to_ical(), start=start, end=end):
-            item = self.get_event(event_data.uid)
-            item["dtstart"] = int(event_data.start.timestamp())
-            item["dtend"] = int(event_data.end.timestamp())
 
-            return_data.append(item)
+        try:
+            for event_data in events(string_content=self.__ical.to_ical(), start=start, end=end):
+                item = self.get_event(event_data.uid)
+                item["dtstart"] = int(event_data.start.timestamp())
+                item["dtend"] = int(event_data.end.timestamp())
+
+                return_data.append(item)
+        except Exception as ex:
+            logger.error(f"Error loading calendar data: {ex}")
 
         return sorted(return_data, key=lambda event: event["dtstart"])
 
