@@ -306,7 +306,7 @@ MODULE_OFFSET=${PROGRESS}
 MODULE_MAX=92
 for PIP_MODULE in ${PIP_MODULES}
 do
-  PROGRESS=$(printf '%.*f\n' 0 $(echo "scale=2; ( ${MODULE_COUNTER} * ((${MODULE_MAX} - ${MODULE_OFFSET}) / ${NUMBER_OF_MODULES}) ) + ${MODULE_OFFSET}" | bc -l))
+  PROGRESS=$(printf "%'.*f\n" 0 $(echo "scale=2; ( ${MODULE_COUNTER} * ((${MODULE_MAX} - ${MODULE_OFFSET}) / ${NUMBER_OF_MODULES}) ) + ${MODULE_OFFSET}" | bc -l))
   ATTEMPT=1
   MAX_ATTEMPTS=5
   IFS='/' read -ra MODULE_NAME <<< "${PIP_MODULE}"
