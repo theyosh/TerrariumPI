@@ -2,8 +2,42 @@ Changelog
 =========
 
 
+4.9.2 (2024-06-12)
+------------------
+
+**New**
+------
+
+- Add new release post. [TheYOSH]
+
+**Fixes**
+------
+
+- More docker fixes. [TheYOSH]
+- Fix docker builds (2) [#911](https://github.com/theyosh/TerrariumPI/issues/911). [TheYOSH]
+- Fix docker builds. [TheYOSH]
+- Fix locale formatting [#922](https://github.com/theyosh/TerrariumPI/issues/922). [TheYOSH]
+- Fix docker builds. [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+
+**Other**
+------
+
+- Spacing. [theyosh]
+- Make sure the calendar will load when file got corrupted. [TheYOSH]
+
+
 4.9.1 (2024-06-08)
 ------------------
+
+**New**
+------
+
+- Add missing images. [TheYOSH]
 
 **Fixes**
 ------
@@ -20,6 +54,9 @@ Changelog
 **Updates**
 ------
 
+- Alt tag update. [TheYOSH]
+- Library update. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Small documentation update. [TheYOSH]
 - More documentation updates. [TheYOSH]
@@ -47,6 +84,7 @@ Changelog
 **Other**
 ------
 
+- Change release time. [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
 - Commit some more. [TheYOSH]
 - Java builds are latest. [TheYOSH]
