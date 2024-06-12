@@ -2,6 +2,25 @@ Changelog
 =========
 
 
+4.9.3 (2024-06-12)
+------------------
+
+**Fixes**
+------
+
+- More docker fixes :( [TheYOSH]
+
+**Updates**
+------
+
+- Update changelog. [TheYOSH]
+
+**Other**
+------
+
+- New version. [TheYOSH]
+
+
 4.9.2 (2024-06-12)
 ------------------
 
