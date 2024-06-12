@@ -85,7 +85,7 @@ RUN apt-get update \
   && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9165938D90FDDD2E 82B129927FA3303E \
   && apt-get update \
   && apt-get full-upgrade -y --no-install-recommends \
-  && apt-get install -y --no-install-recommends sudo netcat pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin ${JAVA} python3-opencv \
+  && apt-get install -y --no-install-recommends sudo netcat-openbsd pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin ${JAVA} python3-opencv \
   && apt-get --purge autoremove -y \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
