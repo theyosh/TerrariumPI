@@ -9,11 +9,11 @@ all: build push
 
 build:
 	docker run --privileged tonistiigi/binfmt --install arm
-	$(foreach var,$(OS),docker buildx build --progress=plain --platform linux/arm/v7 -t $(IMAGE):$(VERSION)-${var}-java --build-arg GITHUB_SHA=${GITHUB_SHA} -f Dockerfile.${var} .;)
+	$(foreach var,$(OS),docker buildx build --progress=plain --platform linux/arm/v7 -t $(IMAGE):$(VERSION)-${var}      --build-arg GITHUB_SHA=${GITHUB_SHA} -f Dockerfile.${var} .;)
 
 push:
 	docker run --privileged tonistiigi/binfmt --install arm
-	$(foreach var,$(OS),docker buildx build --progress=plain --platform linux/arm/v7 -t $(IMAGE):$(VERSION)-${var} --build-arg GITHUB_SHA=${GITHUB_SHA} --build-arg JAVA=default-jre-headless -f Dockerfile.${var} --push .;)
+	$(foreach var,$(OS),docker buildx build --progress=plain --platform linux/arm/v7 -t $(IMAGE):$(VERSION)-${var}      --build-arg GITHUB_SHA=${GITHUB_SHA}                                       -f Dockerfile.${var} --push .;)
 	$(foreach var,$(OS),docker buildx build --progress=plain --platform linux/arm/v7 -t $(IMAGE):$(VERSION)-${var}-java --build-arg GITHUB_SHA=${GITHUB_SHA} --build-arg JAVA=default-jre-headless -f Dockerfile.${var} --push .;)
 
 
