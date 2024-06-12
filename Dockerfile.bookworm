@@ -78,6 +78,18 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/opt/venv/bin:$PATH"
 
+COPY --from=sispmctl_builder /usr/local/lib/libsispmctl* /usr/local/lib/.
+COPY --from=sispmctl_builder /usr/local/bin/sispmctl /usr/local/bin/sispmctl
+
+COPY --from=python_builder /opt/venv /opt/venv
+COPY --from=python_builder /TerrariumPI/3rdparty /TerrariumPI/3rdparty
+COPY --from=sourcecode /TerrariumPI /TerrariumPI
+
+RUN rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
+  && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so \
+  && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so.0 \
+  && ldconfig
+
 RUN apt-get update \
   && apt-get install -y --no-install-recommends gnupg \
   && echo "deb http://raspbian.raspberrypi.org/raspbian/ bookworm main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list \
@@ -85,24 +97,12 @@ RUN apt-get update \
   && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9165938D90FDDD2E 82B129927FA3303E \
   && apt-get update \
   && apt-get full-upgrade -y --no-install-recommends \
-  && apt-get install -y --no-install-recommends sudo netcat-openbsd pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin ${JAVA} python3-opencv \
+  && apt-get install -y --no-install-recommends sudo netcat-openbsd bluez pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin ${JAVA} python3-opencv \
   && apt-get --purge autoremove -y \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
   && find /var/log/ -type f -delete \
   && find /var/cache/ -type f -delete
-
-COPY --from=sispmctl_builder /usr/local/lib/libsispmctl* /usr/local/lib/.
-COPY --from=sispmctl_builder /usr/local/bin/sispmctl /usr/local/bin/sispmctl
-
-RUN rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
-  && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so \
-  && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so.0 \
-  && ldconfig
-
-COPY --from=python_builder /opt/venv /opt/venv
-COPY --from=python_builder /TerrariumPI/3rdparty /TerrariumPI/3rdparty
-COPY --from=sourcecode /TerrariumPI /TerrariumPI
 
 WORKDIR /TerrariumPI
 # Set git version in a temp file
@@ -111,3 +111,4 @@ RUN echo "${GITHUB_SHA}" > .gitversion && echo '[ ! -z "$TERM" -a -r /TerrariumP
 HEALTHCHECK --interval=180s --timeout=5s --start-period=120s CMD python contrib/docker_health.py
 
 ENTRYPOINT ["/bin/bash", "/TerrariumPI/run.sh"]
+CMD ["/opt/venv/bin/python", "/TerrariumPI/terrariumPI.py"]
