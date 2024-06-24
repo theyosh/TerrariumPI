@@ -31,10 +31,10 @@
         "placeholder": "Sélectionner un boîtier"
       },
       "light_sensors": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Sélectionnez les capteurs d'éclairage pour détecter si les lumières sont allumées.",
+        "invalid": "Veuillez faire un choix.",
+        "label": "Capteurs de lumière",
+        "placeholder": "Sélectionner les capteurs de lumière"
       },
       "mode": {
         "help": "Sélectionnez le mode de cette zone. Cela modifiera le timing et la durée des relais.",
@@ -86,21 +86,21 @@
             "lights": "Eclairage",
             "weather": "Météo"
           },
-          "placeholder": "Différence jour/nuit"
+          "placeholder": "Sélectionner une source jour/nuit"
         },
         "depend_on_relays_mode": {
           "all": {
-            "label": ""
+            "label": "Tout activer"
           },
           "none": {
-            "label": ""
+            "label": "Rien d'activé"
           },
           "one": {
-            "label": ""
+            "label": "Au moins un actif"
           }
         },
         "deviation_high_alarm": {
-          "help": "",
+          "help": "Augmentation ou diminution de la valeur de l'alarme haute.",
           "invalid": "Saisissez un numéro valide.",
           "label": "Écart d'alarme élevé",
           "placeholder": "Écart d'alarme élevé"
@@ -114,21 +114,21 @@
         "high": {
           "begin": {
             "help": "L'heure de la journée où les relais sont basculés chaque nuit.",
-            "invalid": "Date et heure.",
-            "label": "Date et heure",
-            "placeholder": "Date et heure"
+            "invalid": "Saisir une heure valide.",
+            "label": "Heure de début",
+            "placeholder": "Saisir l'heure de début"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Sélectionnez les relais dont dépendent ces relais.",
+            "invalid": "Veuillez faire un choix.",
+            "label": "Dépendre des relais",
+            "placeholder": "Sélectionner les relais"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Sélectionner le mode dépendant",
+            "invalid": "Veuillez faire un choix.",
+            "label": "Mode dépendance",
+            "placeholder": "Sélectionner un mode"
           },
           "door_status": {
             "help": "Choisir une option.",
@@ -237,16 +237,16 @@
             "placeholder": "Date et heure"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Sélectionnez les relais dont dépendent ces relais.",
+            "invalid": "Veuillez faire un choix.",
+            "label": "Dépendre des relais",
+            "placeholder": "Sélectionner les relais"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Sélectionner le mode dépendant",
+            "invalid": "Veuillez faire un choix.",
+            "label": "Mode dépendance",
+            "placeholder": "Sélectionner un mode"
           },
           "door_status": {
             "help": "Choisir une option.",
@@ -471,7 +471,7 @@
         },
         "upload": {
           "error": {
-            "nologin": ""
+            "nologin": "Veuillez vous connecter pour télécharger des fichiers."
           }
         }
       },
@@ -587,8 +587,8 @@
       },
       "calibration": {
         "inverse": {
-          "help": "",
-          "label": ""
+          "help": "Basculez pour inverser la valeur de la télécommande.",
+          "label": "Valeur inverse"
         },
         "ldr_capacitor": {
           "help": "Entrez la valeur du condensateur en µF car cela influencera le calcul de la lumière.",
