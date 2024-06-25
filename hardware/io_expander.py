@@ -4,8 +4,9 @@ from terrariumUtils import classproperty, terrariumCache, terrariumUtils
 
 logger = terrariumLogging.logging.getLogger(__name__)
 
-#pip install i2crelay (git)
+# pip install i2crelay (git)
 from i2crelay import I2CRelayBoard
+
 
 class terrariumIOExpanderException(TypeError):
     """There is a problem with loading a hardware IO expander."""

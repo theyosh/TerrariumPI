@@ -14,7 +14,7 @@ class terrariumRelayGPIO(terrariumRelay):
 
     def _load_hardware(self):
         address = self._address
-        self.INVERSE = terrariumUtils.is_true(self.calibration.get('inverse',False))
+        self.INVERSE = terrariumUtils.is_true(self.calibration.get("inverse", False))
 
         if len(address) >= 2:
             # IO Expander in use...
@@ -65,10 +65,9 @@ class terrariumRelayGPIO(terrariumRelay):
 
         return state
 
-
     def calibrate(self, data):
         self.calibration = data
-        self.INVERSE = terrariumUtils.is_true(self.calibration.get('inverse',False))
+        self.INVERSE = terrariumUtils.is_true(self.calibration.get("inverse", False))
 
     def stop(self):
         # TODO: This will toggle down the relay while restarting TP. Not sure if we want to change that and keep relay on while restarting

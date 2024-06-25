@@ -470,7 +470,7 @@ class terrariumEngine(object):
 
             self.relays[data["id"]].address = data["address"]
             self.relays[data["id"]].name = data["name"]
-            self.relays[data["id"]].calibrate(data.get("calibration",{}))
+            self.relays[data["id"]].calibrate(data.get("calibration", {}))
 
             update_ok = True
 
@@ -832,7 +832,12 @@ class terrariumEngine(object):
                     try:
                         self.add(
                             terrariumRelay(
-                                relay.id, relay.hardware, relay.address, relay.name, relay.calibration, callback=self.callback_relay
+                                relay.id,
+                                relay.hardware,
+                                relay.address,
+                                relay.name,
+                                relay.calibration,
+                                callback=self.callback_relay,
                             )
                         )
 
