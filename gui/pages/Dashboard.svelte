@@ -1,16 +1,20 @@
-<style lang="sass">
-	.right
-		right: 0.5rem
+<style lang="css">
+  .right {
+    right: 0.5rem;
+  }
 
-	.top
-		top: 0.5rem
+  .top {
+    top: 0.5rem;
+  }
 
-	.text-truncate
-		max-width: 95%
+  .text-truncate {
+    max-width: 95%;
+  }
 
-	.animate
-		transition: 1s linear
-		transform: rotate(180deg)
+  :global(.animate) {
+    transition: 1s linear;
+    transform: rotate(180deg);
+  }
 </style>
 
 <script>
@@ -169,26 +173,17 @@
 
     // TODO: Make a PR for info box icon color
     document.querySelectorAll('div.info-box span.info-box-icon').forEach((item, counter) => {
-      item.classList.remove('bg-transparent');
-      item.classList.add('elevation-1');
-      item.classList.add('float');
       switch (counter) {
         case 0:
           item.classList.add('bg-secondary');
           break;
 
         case 1:
-          item.classList.add('bg-danger');
-          break;
-
-        case 2:
-          item.classList.add('bg-info');
-          break;
-
         case 3:
           item.classList.add('bg-danger');
           break;
 
+        case 2:
         case 4:
           item.classList.add('bg-info');
           break;
@@ -226,98 +221,94 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-xl-4">
-      <InfoBox>
-        <svelte:fragment slot="image">
-          <i class="fas fa-hourglass-end hourglass-animation animate"></i>
-        </svelte:fragment>
-        {$_('dashboard.infobox.uptime.title', { default: 'Up time' })}
-
-        <div class="position-absolute right top">
-          <div class="progress vertical progress-sm" title="{$systemLoad[0]}%" style="height: 55px">
-            <div
-              class="progress-bar bg-success progress-bar-striped"
-              role="progressbar"
-              aria-valuenow="0"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="height: {$systemLoad[0]}%"
-            >
-              <span class="sr-only">{$systemLoad[0]}%</span>
-            </div>
-          </div>
-          <div class="progress vertical progress-sm" title="{$systemLoad[1]}%" style="height: 55px">
-            <div
-              class="progress-bar bg-warning progress-bar-striped"
-              role="progressbar"
-              aria-valuenow="0"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="height: {$systemLoad[1]}%"
-            >
-              <span class="sr-only">{$systemLoad[1]}%</span>
-            </div>
-          </div>
-          <div class="progress vertical progress-sm" title="{$systemLoad[2]}%" style="height: 55px">
-            <div
-              class="progress-bar bg-danger progress-bar-striped"
-              role="progressbar"
-              aria-valuenow="0"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="height: {$systemLoad[2]}%"
-            >
-              <span class="sr-only">{$systemLoad[2]}%</span>
-            </div>
-          </div>
-        </div>
-
+      <InfoBox
+        shadow="small"
+        icon="fas fa-hourglass-end hourglass-animation animate"
+        text="{$_('dashboard.infobox.uptime.title', { default: 'Up time' })}"
+      >
         <svelte:fragment slot="number">
+          <div class="position-absolute right top">
+            <div class="progress vertical progress-sm" title="{$systemLoad[0]}%" style="height: 55px">
+              <div
+                class="progress-bar bg-success progress-bar-striped"
+                role="progressbar"
+                aria-valuenow="0"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="height: {$systemLoad[0]}%"
+              >
+                <span class="sr-only">{$systemLoad[0]}%</span>
+              </div>
+            </div>
+            <div class="progress vertical progress-sm" title="{$systemLoad[1]}%" style="height: 55px">
+              <div
+                class="progress-bar bg-warning progress-bar-striped"
+                role="progressbar"
+                aria-valuenow="0"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="height: {$systemLoad[1]}%"
+              >
+                <span class="sr-only">{$systemLoad[1]}%</span>
+              </div>
+            </div>
+            <div class="progress vertical progress-sm" title="{$systemLoad[2]}%" style="height: 55px">
+              <div
+                class="progress-bar bg-danger progress-bar-striped"
+                role="progressbar"
+                aria-valuenow="0"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="height: {$systemLoad[2]}%"
+              >
+                <span class="sr-only">{$systemLoad[2]}%</span>
+              </div>
+            </div>
+          </div>
           {uptime_format($uptime)}
         </svelte:fragment>
       </InfoBox>
     </div>
 
     <div class="col-12 col-sm-6 col-md-3 col-xl-2">
-      <InfoBox>
-        <svelte:fragment slot="image">
-          <i class="fas fa-bolt"></i>
-        </svelte:fragment>
-        <span>{$_('dashboard.infobox.current_power_usage.title', { default: 'Power usage in Watt' })}</span>
+      <InfoBox
+        shadow="small"
+        icon="fas fa-bolt"
+        text="{$_('dashboard.infobox.current_power_usage.title', { default: 'Power usage in Watt' })}"
+        progressBar="{true}"
+        progressBarWidth="{($currentPower / $maxPower) * 100}%"
+        progressBarAccent="danger"
+      >
         <svelte:fragment slot="number">
           <span>{$number($currentPower)} / {$number($maxPower)}</span>
-          <div class="progress" title="{($currentPower / $maxPower) * 100}%">
-            <div class="progress-xxs bg-danger" style="width: {($currentPower / $maxPower) * 100}%"></div>
-          </div>
         </svelte:fragment>
       </InfoBox>
     </div>
 
     <div class="col-12 col-sm-6 col-md-3 col-xl-2">
-      <InfoBox>
-        <svelte:fragment slot="image">
-          <i class="fas fa-tint"></i>
-        </svelte:fragment>
-        <span
-          >{$_('dashboard.infobox.current_water_flow.title', {
-            default: 'Water flow in {water_flow_indicator}',
-            values: { water_flow_indicator: settings.units.water_flow.value },
-          })}</span
-        >
+      <InfoBox
+        shadow="small"
+        icon="fas fa-tint"
+        text="{$_('dashboard.infobox.current_water_flow.title', {
+          default: 'Water flow in {water_flow_indicator}',
+          values: { water_flow_indicator: settings.units.water_flow.value },
+        })}"
+        progressBar="{true}"
+        progressBarWidth="{($currentWater / $maxWater) * 100}%"
+        progressBarAccent="info"
+      >
         <svelte:fragment slot="number">
           <span>{$number($currentWater)} / {$number($maxWater)}</span>
-          <div class="progress" title="{($currentWater / $maxWater) * 100}%">
-            <div class="progress-xxs bg-info" style="width: {($currentWater / $maxWater) * 100}%"></div>
-          </div>
         </svelte:fragment>
       </InfoBox>
     </div>
 
     <div class="col-12 col-sm-6 col-md-3 col-xl-2">
-      <InfoBox>
-        <svelte:fragment slot="image">
-          <i class="fas fa-bolt"></i>
-        </svelte:fragment>
-        <span>{$_('dashboard.infobox.total_power_usage.title', { default: 'Total power usage' })}</span>
+      <InfoBox
+        shadow="small"
+        icon="fas fa-bolt"
+        text="{$_('dashboard.infobox.total_power_usage.title', { default: 'Total power usage' })}"
+      >
         <svelte:fragment slot="number">
           <span>{$number($totalPower)} {settings.units.powerusage.value}</span>
           <div class="text-nowrap text-truncate">
@@ -333,11 +324,11 @@
     </div>
 
     <div class="col-12 col-sm-6 col-md-3 col-xl-2">
-      <InfoBox>
-        <svelte:fragment slot="image">
-          <i class="fas fa-tint"></i>
-        </svelte:fragment>
-        <span>{$_('dashboard.infobox.total_water_usage.title', { default: 'Total water usage' })}</span>
+      <InfoBox
+        shadow="small"
+        icon="fas fa-tint"
+        text="{$_('dashboard.infobox.total_water_usage.title', { default: 'Total water usage' })}"
+      >
         <svelte:fragment slot="number">
           <span>{$number($totalWater)} {settings.units.water_volume.value}</span>
           <div class="text-nowrap text-truncate">

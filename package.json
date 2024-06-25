@@ -41,13 +41,13 @@
     "sass": "^1.70.0",
     "serve": "^14.0.1",
     "svelte-leafletjs": "^1.0.0-alpha.4",
-    "svelte-preprocess": "^5.0.3",
+    "svelte-preprocess": "^6.0.1",
     "typescript": "^5.0.4"
   },
   "dependencies": {
     "@fancyapps/ui": "^5.0.17",
     "@fortawesome/fontawesome-free": "^6.1.2",
-    "@keenmate/svelte-adminlte": "^2.0.0",
+    "@keenmate/svelte-adminlte": "^4.1.7",
     "admin-lte": "^3.2.0",
     "bootstrap": "^4.6.1",
     "chart.js": "^4.0.1",
