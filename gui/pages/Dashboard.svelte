@@ -1,13 +1,13 @@
 <style lang="css">
-  .right {
+  :global(.right) {
     right: 0.5rem;
   }
 
-  .top {
+  :global(.top) {
     top: 0.5rem;
   }
 
-  .text-truncate {
+  :global(.text-truncate) {
     max-width: 95%;
   }
 
