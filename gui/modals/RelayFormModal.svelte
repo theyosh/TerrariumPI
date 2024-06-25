@@ -39,7 +39,7 @@
       // Change to a fixed default value
       editForm.elements['address'].value = 'fixed';
     }
-    calibration = hardware_type.endsWith('-dimmer');
+    calibration = hardware_type == 'gpio' || hardware_type.endsWith('-dimmer');
   };
 
   const _processForm = async (values, context) => {
@@ -273,18 +273,31 @@
       </a>
       <div class="col">
         <div class="collapse row pt-3" id="callibration">
+          <div class="col-6 col-sm-6 col-md-6 col-lg-3" class:d-none="{hardware_type !== 'gpio'}">
+            <Switch
+              name="calibration.inverse"
+              value="{$formData.calibration?.inverse}"
+              label="{$_('relays.settings.calibration.inverse.label', { default: 'Inverse' })}"
+              help="{$_('relays.settings.calibration.inverse.help', {
+                default: 'Inverse GPIO relay function.',
+              })}"
+            />
+          </div>
+
           <div
             class="col-6 col-sm-6 col-md-6 col-lg-3"
             class:d-none="{['brightpi-dimmer', 'remote-dimmer', 'script-dimmer', 'sonoff_d1-dimmer'].indexOf(
               hardware_type,
-            ) !== -1}"
+            ) !== -1 || hardware_type === 'gpio'}"
           >
             <Field
               type="number"
               name="calibration.dimmer_frequency"
               step="1"
               min="1"
-              label="{$_('relays.settings.calibration.dimmer_frequency.label', { default: 'Dimmer frequency in Hz' })}"
+              label="{$_('relays.settings.calibration.dimmer_frequency.label', {
+                default: 'Dimmer frequency in Hz',
+              })}"
               help="{$_('relays.settings.calibration.dimmer_frequency.help', {
                 default: 'The frequency on which the dimmer operates.',
               })}"
@@ -294,7 +307,7 @@
               })}"
             />
           </div>
-          <div class="col-6 col-sm-6 col-md-6 col-lg-3">
+          <div class="col-6 col-sm-6 col-md-6 col-lg-3" class:d-none="{hardware_type === 'gpio'}">
             <Field
               type="number"
               name="calibration.dimmer_max_power"
@@ -311,7 +324,7 @@
               })}"
             />
           </div>
-          <div class="col-6 col-sm-6 col-md-6 col-lg-3">
+          <div class="col-6 col-sm-6 col-md-6 col-lg-3" class:d-none="{hardware_type === 'gpio'}">
             <Field
               type="number"
               name="calibration.dimmer_offset"
@@ -326,24 +339,31 @@
               })}"
             />
           </div>
-          {#if ['brightpi-dimmer', 'PCA9685-dimmer', 'remote-dimmer', 'script-dimmer', 'sonoff_d1-dimmer'].indexOf(hardware_type) === -1}
-            <div class="col-6 col-sm-6 col-md-6 col-lg-3">
-              <Field
-                type="number"
-                name="calibration.dimmer_max_dim"
-                step="1"
-                min="0"
-                label="{$_('relays.settings.calibration.dimmer_max_dim.label', { default: 'Maximum dimmer value' })}"
-                help="{$_('relays.settings.calibration.dimmer_max_dim.help', {
-                  default: 'Maximum dimmer value (Legacy).',
-                })}"
-                invalid="{$_('relays.settings.calibration.dimmer_max_dim.invalid', {
-                  default: 'Please enter a minimum value of {value}.',
-                  values: { value: 0 },
-                })}"
-              />
-            </div>
-          {/if}
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-3"
+            class:d-none="{[
+              'brightpi-dimmer',
+              'PCA9685-dimmer',
+              'remote-dimmer',
+              'script-dimmer',
+              'sonoff_d1-dimmer',
+            ].indexOf(hardware_type) === -1 || hardware_type === 'gpio'}"
+          >
+            <Field
+              type="number"
+              name="calibration.dimmer_max_dim"
+              step="1"
+              min="0"
+              label="{$_('relays.settings.calibration.dimmer_max_dim.label', { default: 'Maximum dimmer value' })}"
+              help="{$_('relays.settings.calibration.dimmer_max_dim.help', {
+                default: 'Maximum dimmer value (Legacy).',
+              })}"
+              invalid="{$_('relays.settings.calibration.dimmer_max_dim.invalid', {
+                default: 'Please enter a minimum value of {value}.',
+                values: { value: 0 },
+              })}"
+            />
+          </div>
         </div>
       </div>
     </div>
