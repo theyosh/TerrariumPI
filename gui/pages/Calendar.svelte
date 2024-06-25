@@ -144,6 +144,7 @@
             data.event.title +
             '</h6>' +
             data.event.extendedProps.description +
+            (data.event.url ? 'Click for more information<br />' : '') +
             '<strong>' +
             $_('calendar.event.duration', { default: 'Duration' }) +
             ':' +
@@ -162,6 +163,7 @@
         }
       },
       eventClick: function (data) {
+        data.jsEvent.preventDefault(); // don't let the browser navigate
         if ($isAuthenticated) {
           // Open modal for adding event
           data = {
@@ -169,6 +171,8 @@
             mode: 'repeat',
           };
           editCalendarEvent(data);
+        } else if (data.event.url) {
+          window.open(data.event.url);
         }
       },
 
