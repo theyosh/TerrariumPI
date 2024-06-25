@@ -52,6 +52,7 @@ class terrariumCalendar(object):
             "uid": str(item.get("uid")),
             "summary": str(item.get("summary")),
             "description": str(item.get("description")),
+            "location": str(item.get("location")),
         }
 
         event["dtstart"] = int(mktime(item.get("dtstart").dt.timetuple()))

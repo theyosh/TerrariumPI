@@ -54,7 +54,7 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
             open(self.baseFilename, "w").close()
 
             if self.encoding:
-                self.stream = codecs.open(self.baseFilename, "w", self.encoding)
+                self.stream = codecs.open(self.baseFilename, "w", "utf-8")
             else:
                 self.stream = open(self.baseFilename, "w")
 

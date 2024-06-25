@@ -122,6 +122,7 @@ class terrariumRelayEnergenieUSB(terrariumRelay):
                         terrariumRelayEnergenieUSB.HARDWARE,
                         f"{x+1},{serial}",
                         f"{terrariumRelayEnergenieUSB.NAME} device nr: {device_nr}({serial}), Socket: {x+1}",
+                        {},
                         callback=callback,
                     )
 

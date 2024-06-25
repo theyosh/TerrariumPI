@@ -80,14 +80,14 @@ class terrariumRelay(object):
         ]
 
     # Return polymorph relay....
-    def __new__(cls, _, hardware_type, address, name="", prev_state=None, callback=None):
+    def __new__(cls, _, hardware_type, address, name="", calibration={}, prev_state=None, callback=None):
         try:
             known_relays = terrariumRelay.available_hardware
             return super(terrariumRelay, cls).__new__(known_relays[hardware_type])
         except:
             raise terrariumRelayException(f"Relay of hardware type {hardware_type} is unknown.")
 
-    def __init__(self, device_id, _, address, name="", prev_state=None, callback=None):
+    def __init__(self, device_id, _, address, name="", calibration={}, prev_state=None, callback=None):
         self._device = {
             "device": None,
             "address": None,
@@ -108,12 +108,16 @@ class terrariumRelay(object):
         self.id = device_id
         self.name = name
         self.address = address
+        self.calibration = calibration
         self.callback = callback
 
         self.load_hardware()
 
     def __repr__(self):
         return f"{self.NAME} {self.type} named '{self.name}' at address '{self.address}'"
+
+    def calibrate(self, data):
+        pass
 
     @retry(terrariumRelayLoadingException, tries=3, delay=0.5, max_delay=2, logger=logger)
     def load_hardware(self):
@@ -314,7 +318,7 @@ class terrariumRelayDimmer(terrariumRelay):
     TYPE = None
     _DIMMER_MAXDIM = None
 
-    def __init__(self, relay_id, _, address, name="", prev_state=None, callback=None):
+    def __init__(self, relay_id, _, address, calibration={}, name="", prev_state=None, callback=None):
         self._dimmer_offset = 0
         self._dimmer_state = 0
         self._legacy = False
@@ -323,6 +327,7 @@ class terrariumRelayDimmer(terrariumRelay):
         self.__running = threading.Event()
         self.__thread = None
         super().__init__(relay_id, _, address, name, prev_state, callback)
+        self.calibrate(calibration)
 
     def __run(self, to, duration):
         self.running = True

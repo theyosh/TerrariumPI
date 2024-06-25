@@ -998,18 +998,23 @@ class terrariumAPI(object):
 
         # https://stackoverflow.com/a/12294213
         response.content_type = "application/json"
-        return dumps(
-            [
+        events = [
                 {
                     "id": event["uid"],
                     "title": event["summary"],
                     "description": event["description"],
+                    "url": event.get("location",None),
                     "start": datetime.fromtimestamp(event["dtstart"], timezone.utc).strftime("%Y-%m-%d"),
                     "end": datetime.fromtimestamp(event["dtend"], timezone.utc).strftime("%Y-%m-%d"),
                 }
                 for event in self.webserver.engine.calendar.get_events(start, end)
             ]
-        )
+
+        for event in events:
+            if event['url'] is None or event['url'] == "":
+                del(event['url'])
+
+        return dumps(events)
 
     def calendar_add(self):
         event = self.webserver.engine.calendar.create_event(
@@ -1486,11 +1491,10 @@ class terrariumAPI(object):
                     request.json["hardware"],
                     request.json["address"],
                     request.json["name"],
+                    request.json.get("calibration"),
                     callback=self.webserver.engine.callback_relay,
                 )
             )
-            if new_relay.is_dimmer:
-                new_relay.calibrate(request.json["calibration"])
 
             request.json["id"] = new_relay.id
             request.json["address"] = new_relay.address

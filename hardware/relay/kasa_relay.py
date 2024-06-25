@@ -99,8 +99,8 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
                                 terrariumRelayTPLinkKasa.HARDWARE,
                                 "{},{}".format(device.host, counter),
                                 f"Channel {device.children[counter-1].alias}",
-                                None,
-                                callback,
+                                {},
+                                callback=callback,
                             )
                         )
 
@@ -111,8 +111,8 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
                             terrariumRelayTPLinkKasa.HARDWARE,
                             f"{device.host}",
                             f"Channel {device.alias}",
-                            None,
-                            callback,
+                            {},
+                            callback=callback,
                         )
                     )
 

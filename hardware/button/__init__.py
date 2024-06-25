@@ -150,9 +150,7 @@ class terrariumButton(object):
 
         elif len(address) >= 2:
             # IO Expander in use... Only valid for motion and magnetic... LDR seems not suitable at the moment
-            if address[0].lower().startswith("pcf8575-"):
-                self._device["device"] = terrariumIOExpander("PCF8575", ",".join(address[1:]))
-            elif address[0].lower().startswith("pcf8574-"):
+            if address[0].lower().startswith("pcf8574-"):
                 self._device["device"] = terrariumIOExpander("PCF8574", ",".join(address[1:]))
 
             self._device["device"].set_port(int(address[0].split("-")[1]))

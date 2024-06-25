@@ -49,5 +49,6 @@ class terrariumRelayWeMo(terrariumRelay):
                 terrariumRelayWeMo.HARDWARE,
                 device.host,
                 f"{terrariumRelayWeMo.NAME} {device.name} device ip: {device.host}({device.mac})",
+                {},
                 callback=callback,
             )

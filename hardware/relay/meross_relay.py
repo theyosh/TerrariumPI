@@ -84,8 +84,8 @@ class terrariumRelayMeross(terrariumRelay):
                                 terrariumRelayMeross.HARDWARE,
                                 "{},{}".format(device.uuid, channel.index),
                                 "Channel {}".format(channel.name),
-                                None,
-                                callback,
+                                {},
+                                callback=callback,
                             )
                         )
 

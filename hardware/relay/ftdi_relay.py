@@ -129,5 +129,6 @@ class terrariumRelayFTDI(terrariumRelay):
                     terrariumRelayFTDI.HARDWARE,
                     f"{x+1},{serial}",
                     f"{terrariumRelayFTDI.NAME} device nr: {device_nr}({serial}) socket: {x+1}",
+                    {},
                     callback=callback,
                 )

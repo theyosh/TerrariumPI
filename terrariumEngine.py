@@ -470,9 +470,7 @@ class terrariumEngine(object):
 
             self.relays[data["id"]].address = data["address"]
             self.relays[data["id"]].name = data["name"]
-
-            if self.relays[data["id"]].is_dimmer:
-                self.relays[data["id"]].calibrate(data["calibration"])
+            self.relays[data["id"]].calibrate(data.get("calibration",{}))
 
             update_ok = True
 
@@ -832,13 +830,11 @@ class terrariumEngine(object):
                 if relay.id not in self.relays:
                     relayLogger.debug(f"Loading {relay}.")
                     try:
-                        new_relay = self.add(
+                        self.add(
                             terrariumRelay(
-                                relay.id, relay.hardware, relay.address, relay.name, callback=self.callback_relay
+                                relay.id, relay.hardware, relay.address, relay.name, relay.calibration, callback=self.callback_relay
                             )
                         )
-                        if relay.is_dimmer and relay.calibration is not None:
-                            new_relay.calibrate(relay.calibration)
 
                         # Set the relay back to the old state
                         last_value = relay.value
