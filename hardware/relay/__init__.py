@@ -318,7 +318,7 @@ class terrariumRelayDimmer(terrariumRelay):
     TYPE = None
     _DIMMER_MAXDIM = None
 
-    def __init__(self, relay_id, _, address, calibration={}, name="", prev_state=None, callback=None):
+    def __init__(self, relay_id, _, address, name="", calibration={}, prev_state=None, callback=None):
         self._dimmer_offset = 0
         self._dimmer_state = 0
         self._legacy = False
@@ -326,7 +326,7 @@ class terrariumRelayDimmer(terrariumRelay):
         self.running = False
         self.__running = threading.Event()
         self.__thread = None
-        super().__init__(relay_id, _, address, name, prev_state, callback)
+        super().__init__(relay_id, _, address, name, calibration, prev_state, callback)
         self.calibrate(calibration)
 
     def __run(self, to, duration):
