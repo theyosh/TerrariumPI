@@ -293,6 +293,7 @@
             <Field
               type="number"
               name="calibration.dimmer_frequency"
+              disabled={hardware_type === 'gpio'}
               step="1"
               min="1"
               label="{$_('relays.settings.calibration.dimmer_frequency.label', {
@@ -311,6 +312,7 @@
             <Field
               type="number"
               name="calibration.dimmer_max_power"
+              disabled={hardware_type === 'gpio'}
               step="1"
               min="1"
               max="100"
@@ -328,6 +330,7 @@
             <Field
               type="number"
               name="calibration.dimmer_offset"
+              disabled={hardware_type === 'gpio'}
               step="0.1"
               min="0"
               max="100"
@@ -352,6 +355,7 @@
             <Field
               type="number"
               name="calibration.dimmer_max_dim"
+              disabled={hardware_type === 'gpio'}
               step="1"
               min="0"
               label="{$_('relays.settings.calibration.dimmer_max_dim.label', { default: 'Maximum dimmer value' })}"
