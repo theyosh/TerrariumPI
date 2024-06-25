@@ -42,7 +42,7 @@
   });
 </script>
 
-<BaseCard {noPadding} class="{cardClassID} {$$props.class || ''}" bind:this="{card}">
+<BaseCard {noPadding} class="{cardClassID} {$$props.class || ''}" bind:this="{card}" headerBackgroundColor="{null}" titleColor="{null}">
   <svelte:fragment slot="header">
     <slot name="header" />
   </svelte:fragment>
