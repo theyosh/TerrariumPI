@@ -2,12 +2,13 @@
 # Copyright (C) 2016 TheYOSH
 # Joshua (TheYOSH) Rubingh, <theyosh@theyosh.nl>, 2016.
 # theyosh <github.com@theyosh.nl>, 2022.
+# TheYOSH <github.com@theyosh.nl>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2022-08-22 11:42+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2024-06-26 10:02+0000\n"
+"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/it/>\n"
 "Language: it_IT\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 5.6.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -116,7 +117,7 @@ msgstr "fertilizzante"
 
 #: terrariumEngine.py:67
 msgid "co2"
-msgstr "CO2"
+msgstr "co2"
 
 #: terrariumEngine.py:68
 msgid "volume"
@@ -438,25 +439,23 @@ msgstr "Archivio webcam"
 
 #: terrariumNotification.py:222
 msgid "Lights area wrong state"
-msgstr ""
+msgstr "Area luci stato errato"
 
 #: terrariumNotification.py:224
-#, fuzzy
-#| msgid "Current power usage"
 msgid "Current power state"
-msgstr "Potenza utilizzata al momento"
+msgstr "Potenza Attuale"
 
 #: terrariumNotification.py:225
 msgid "Sensor measure state"
-msgstr ""
+msgstr "Stato misura sensore"
 
 #: terrariumNotification.py:226
 msgid "Enclosure name"
-msgstr ""
+msgstr "Nome allegato"
 
 #: terrariumNotification.py:227
 msgid "Enclosure running mode"
-msgstr ""
+msgstr "Modalità di funzionamento dell'involucro"
 
 #: terrariumNotification.py:441
 msgid "Display"
