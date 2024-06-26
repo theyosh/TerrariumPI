@@ -31,7 +31,7 @@
 {#if relay}
   <Card loading="{false}" noPadding="{true}" class="{relay.id}">
     <svelte:fragment slot="header">
-      <i class="fas {template_sensor_type_icon(relay.type)} mr-2"></i>{relay.name}
+      <i class="fa-solid fa-power-off mr-2"></i>{relay.name}
       {#if $relays[relay.id]}
         <small class="ml-2 text-muted"
           >{$_('gauge.last_update', { default: 'Last update' })}: {$date($relays[relay.id].last_update, {

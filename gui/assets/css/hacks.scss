@@ -26,9 +26,16 @@
 }
 
 .card-header .card-title {
+  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 84%;
+}
+
+.card-header .card-title div {
+  text-overflow: ellipsis;
+  overflow: hidden;
   max-width: 100%;
 }
 

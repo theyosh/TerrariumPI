@@ -51,7 +51,7 @@
           memory: {
             id: 'memory',
             name: $_('system.status.memory.title', { default: 'Memory usage' }),
-            type: 'filesize',
+            type: 'memory',
             error: false,
             value: data.memory.used,
             alarm_min: 0,

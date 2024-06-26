@@ -79,7 +79,8 @@
   }
 
   let gauge;
-  let gauge_value = 'filesize' ? formatBytes(0) : roundToPrecision(0) + ' ' + settings.units[type].value;
+  let gauge_value =
+    type === 'filesize' || type === 'memory' ? formatBytes(0) : roundToPrecision(0) + ' ' + settings.units[type].value;
 
   onMount(() => {
     gauge = new Gauge.Gauge(document.getElementById(`gauge_${id}`)).setOptions(opts); // create sexy gauge!
@@ -100,7 +101,7 @@
       }
       gauge.set($sensors[id].value); // set actual value
       gauge_value =
-        type === 'filesize'
+        type === 'filesize' || type === 'memory'
           ? formatBytes($sensors[id].value)
           : roundToPrecision($sensors[id].value) + ' ' + settings.units[type].value;
       $sensors[id].changed = false;

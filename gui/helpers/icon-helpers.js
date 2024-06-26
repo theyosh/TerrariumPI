@@ -159,6 +159,12 @@ export const template_sensor_type_icon = (type) => {
 
     case 'remote':
       return 'fas fa-wifi';
+
+    case 'memory':
+      return 'fa-solid fa-memory';
+
+    case 'filesize':
+      return 'fa-solid fa-sd-card';
   }
 };
 
