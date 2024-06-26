@@ -4,12 +4,13 @@
 # theyosh <github.com@theyosh.nl>, 2022.
 # kwiatekp <kwiatekp@gmail.com>, 2022.
 # Rafal Zagawa <tasdefleja@gmail.com>, 2023.
+# TheYOSH <github.com@theyosh.nl>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2023-08-29 16:19+0000\n"
-"Last-Translator: Rafal Zagawa <tasdefleja@gmail.com>\n"
+"PO-Revision-Date: 2024-06-26 10:02+0000\n"
+"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Polish <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/pl/>\n"
 "Language: pl\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.0\n"
+"X-Generator: Weblate 5.6.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -119,7 +120,7 @@ msgstr "Żyzność"
 
 #: terrariumEngine.py:67
 msgid "co2"
-msgstr "CO2"
+msgstr "co2"
 
 #: terrariumEngine.py:68
 msgid "volume"
@@ -444,10 +445,8 @@ msgid "Lights area wrong state"
 msgstr "Nieprawidłowy stan obszaru świateł"
 
 #: terrariumNotification.py:224
-#, fuzzy
-#| msgid "Current power usage"
 msgid "Current power state"
-msgstr "Obecne zużycie energii"
+msgstr "Aktualny stan zasilania"
 
 #: terrariumNotification.py:225
 msgid "Sensor measure state"
@@ -455,11 +454,11 @@ msgstr "Stan pomiaru czujnika"
 
 #: terrariumNotification.py:226
 msgid "Enclosure name"
-msgstr ""
+msgstr "Nazwa załącznika"
 
 #: terrariumNotification.py:227
 msgid "Enclosure running mode"
-msgstr ""
+msgstr "Tryb pracy obudowy"
 
 #: terrariumNotification.py:441
 msgid "Display"
