@@ -11,7 +11,7 @@
     {#each enclosures.sort((a, b) => enclosureNameSort(a.name, b.name)) as enclosure, counter}
       <div class="card card-secondary">
         <div class="card-header">
-          <h4 class="card-title w-100">
+          <h4 class="card-title w-100" style="max-width:100% !important">
             <a data-toggle="collapse" class="d-block" style="margin-bottom:-1.2rem" href="#enclosure_{enclosure.id}"
               >{enclosure.name}</a
             >
