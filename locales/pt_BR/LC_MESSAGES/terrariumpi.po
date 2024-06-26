@@ -1,10 +1,11 @@
 # theyosh <github.com@theyosh.nl>, 2022.
+# TheYOSH <github.com@theyosh.nl>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2022-08-22 11:43+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2024-06-26 10:02+0000\n"
+"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/backend/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -12,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 5.6.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -113,7 +114,7 @@ msgstr "fertilidade"
 
 #: terrariumEngine.py:67
 msgid "co2"
-msgstr "CO2"
+msgstr "co2"
 
 #: terrariumEngine.py:68
 msgid "volume"
@@ -435,25 +436,23 @@ msgstr "Arquivo da webcam"
 
 #: terrariumNotification.py:222
 msgid "Lights area wrong state"
-msgstr ""
+msgstr "Estado errado da área das luzes"
 
 #: terrariumNotification.py:224
-#, fuzzy
-#| msgid "Current power usage"
 msgid "Current power state"
-msgstr "Uso de energia atual"
+msgstr "Estado de energia atual"
 
 #: terrariumNotification.py:225
 msgid "Sensor measure state"
-msgstr ""
+msgstr "Estado de medição do sensor"
 
 #: terrariumNotification.py:226
 msgid "Enclosure name"
-msgstr ""
+msgstr "Nome do anexo"
 
 #: terrariumNotification.py:227
 msgid "Enclosure running mode"
-msgstr ""
+msgstr "Modo de execução do gabinete"
 
 #: terrariumNotification.py:441
 msgid "Display"
