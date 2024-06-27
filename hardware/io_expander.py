@@ -77,8 +77,6 @@ class terrariumIOExpander(object):
 
     @state.setter
     def state(self, state):
-        print(f"Set expander state: {state} for port {self.port}")
-
         state = terrariumUtils.is_true(state)
         try:
             if state:
