@@ -22,6 +22,14 @@ bcrypt==4.1.3
 # !! Check first: https://piwheels.org/project/cryptography/ !!
 cryptography==42.0.8
 
+# Webcam packages
+Pillow==10.3.0
+# !! Check first: https://piwheels.org/project/numpy/ !!
+numpy==2.0.0
+# !! Check first: https://piwheels.org/project/opencv-python-headless/ !!
+opencv-python-headless==4.6.0.66
+piexif==1.1.3
+
 # Hardware / sensors packages
 gpiozero==2.0.1
 # Github version is more updated
@@ -55,20 +63,13 @@ sparkfun-qwiic-relay==0.0.2
 sensirion-i2c-driver==1.0.0
 sensirion-i2c-sht==0.4.0
 bme680==2.0.0
+Adafruit-Blinka==8.45.0
 adafruit-circuitpython-sht31d==2.3.24
 SM8relind==1.0.2
 git+https://github.com/almottier/TapoP100.git
 git+https://github.com/SequentMicrosystems/4relind-rpi.git#subdirectory=python/4relind
 git+https://github.com/SequentMicrosystems/4relay-rpi.git#subdirectory=python/4relay
 git+https://github.com/PiSupply/Bright-Pi
-
-# Webcam packages
-Pillow==10.3.0
-# !! Check first: https://piwheels.org/project/numpy/ !!
-numpy==2.0.0
-# !! Check first: https://piwheels.org/project/opencv-python-headless/ !!
-opencv-python-headless==4.6.0.66
-piexif==1.1.3
 
 # Calendar and utils
 icalevents==0.1.27

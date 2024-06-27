@@ -55,6 +55,7 @@ if [ "${OS}" == "buster" ]; then
   PIP_MODULES="${PIP_MODULES//gpiozero==+([^ ])/gpiozero==1.6.2}"
   PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.31.0}"
   PIP_MODULES="${PIP_MODULES//python-kasa==+([^ ])/python-kasa==0.5.1}"
+  PIP_MODULES="${PIP_MODULES//Adafruit-Blinka==+([^ ])/Adafruit-Blinka==8.43.0}"
   PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==0.9.2}"
   PIP_MODULES="${PIP_MODULES//Pillow==+([^ ])/Pillow==9.5.0}"
   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
