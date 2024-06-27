@@ -47,20 +47,22 @@ done < requirements.txt
 
 if [ "${OS}" == "buster" ]; then
   # Python 3.7 (EOL)
-  PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.31.0}"
-  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
-  PIP_MODULES="${PIP_MODULES//wheel==+([^ ])/wheel==0.42.0}"
+  PIP_MODULES="${PIP_MODULES//pip==+([^ ])/pip==24.0}"
   PIP_MODULES="${PIP_MODULES//setuptools==+([^ ])/setuptools==68.0.0}"
+  PIP_MODULES="${PIP_MODULES//wheel==+([^ ])/wheel==0.42.0}"
   PIP_MODULES="${PIP_MODULES//python-dotenv==+([^ ])/python-dotenv==0.21.1}"
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==22.10.2}"
+  PIP_MODULES="${PIP_MODULES//gpiozero==+([^ ])/gpiozero==1.6.2}"
+  PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.31.0}"
   PIP_MODULES="${PIP_MODULES//python-kasa==+([^ ])/python-kasa==0.5.1}"
   PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==0.9.2}"
   PIP_MODULES="${PIP_MODULES//Pillow==+([^ ])/Pillow==9.5.0}"
+  PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
   PIP_MODULES="${PIP_MODULES//icalevents==+([^ ])/icalevents==0.1.25}"
+  PIP_MODULES="${PIP_MODULES//packaging==+([^ ])/packaging==24.0}"
   PIP_MODULES="${PIP_MODULES//pyfiglet==+([^ ])/pyfiglet==0.8.post1}"
   PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==20.3}"
   PIP_MODULES="${PIP_MODULES//pydantic==+([^ ])/pydantic==1.10.9}"
-  PIP_MODULES="${PIP_MODULES//gpiozero==+([^ ])/gpiozero==1.6.2}"
   PIP_MODULES="${PIP_MODULES//adafruit-circuitpython-typing==+([^ ])/adafruit-circuitpython-typing==1.10.1}"
 
   OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"

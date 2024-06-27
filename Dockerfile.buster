@@ -31,6 +31,7 @@ RUN sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/requests==.*/requests==2.31.0/g' requirements.txt \
   && sed -i 's/numpy==.*/numpy==1.21.4/g' requirements.txt \
   && sed -i 's/wheel==.*/wheel==0.42.0/g' requirements.txt \
+  && sed -i 's/pip==.*/pip==24.0/g' requirements.txt \
   && sed -i 's/setuptools==.*/setuptools==68.0.0/g' requirements.txt \
   && sed -i 's/python-dotenv==.*/python-dotenv==0.21.1/g' requirements.txt \
   && sed -i 's/gevent==.*/gevent==22.10.2/g' requirements.txt \
@@ -38,6 +39,7 @@ RUN sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/pywemo==.*/pywemo==0.9.2/g' requirements.txt \
   && sed -i 's/Pillow==.*/Pillow==9.5.0/g' requirements.txt \
   && sed -i 's/icalevents==.*/icalevents==0.1.25/g' requirements.txt \
+  && sed -i 's/packaging==.*/packaging==24.0/g' requirements.txt \
   && sed -i 's/pyfiglet==.*/pyfiglet==0.8.post1/g' requirements.txt \
   && sed -i 's/python-telegram-bot\[socks,http2\]==.*/python-telegram-bot\[socks,http2\]==20.3/g' requirements.txt \
   && sed -i 's/pydantic==.*/pydantic==1.10.9/g' requirements.txt \
