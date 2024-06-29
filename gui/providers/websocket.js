@@ -28,7 +28,6 @@ import {
 } from '../stores/terrariumpi';
 import { isAuthenticated } from '../stores/authentication';
 import { WebsocketUrl } from '../constants/urls';
-import { fireworks, christmas } from '../constants/easter-eggs';
 import { animate_footer_badge, animateHourglass } from '../helpers/animation-helpers';
 import { errorNotification, successNotification } from '../providers/notification-provider';
 
@@ -92,9 +91,6 @@ websocket.subscribe((message) => {
       systemMemory.set([message.data.memory.used, message.data.memory.total]);
       systemDisk.set([message.data.storage.used, message.data.storage.total]);
       animateHourglass();
-      // Some easter eggs.... :P
-      fireworks();
-      christmas();
       break;
 
     case 'power_usage_water_flow':
@@ -147,8 +143,6 @@ websocket.subscribe((message) => {
       break;
 
     default:
-      // eslint-disable-line no-console
-      // console.log('Websocket messages left', message.type, message)
       onlineUpdate = false;
       break;
   }

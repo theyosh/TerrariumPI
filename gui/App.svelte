@@ -82,6 +82,7 @@
     systemShutdown,
   } from './providers/api';
   import { isAuthenticated, loginModal } from './stores/authentication';
+  import { timer } from './stores/timer';
 
   import SidebarNavTree from './user-controls/SidebarNavTree.svelte';
   import { updateSiteBar, toggleSidebarAdminActions } from './helpers/sidebar';
@@ -109,6 +110,8 @@
 
   import { successNotification } from './providers/notification-provider';
 
+  import { fireworks, showBirthdayCake } from './constants/easter-eggs';
+
   let localeLanguage = '';
   let settings = getCustomConfig();
   let pageTitleSubscription;
@@ -123,9 +126,63 @@
 
   let editModal;
   let editModelContent;
+  let showAnniversary = false;
 
   $isDay = !settings.is_night;
   $isAuthenticated = settings.logged_in;
+
+  const anniversary = () => {
+    const count = 500,
+      defaults = {
+        origin: { y: 0.9 },
+      };
+
+    function fire(particleRatio, opts) {
+      confetti(
+        Object.assign({}, defaults, opts, {
+          particleCount: Math.floor(count * particleRatio),
+        }),
+      );
+    }
+
+    function shoot() {
+      fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+      });
+
+      fire(0.2, {
+        spread: 60,
+      });
+
+      fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8,
+      });
+
+      fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2,
+      });
+
+      fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+      });
+    }
+
+    shoot();
+    for (let x = 0; x < 5; x++) {
+      setTimeout(() => shoot(), Math.random() * 500 + 1000 * (x + 1));
+    }
+
+    setTimeout(() => {
+      showAnniversary = true;
+    }, 5 * 1000);
+  };
 
   const sensor_submenu_sorting = (data) => {
     data.forEach((menu) => {
@@ -325,6 +382,8 @@
   // Update disabled and enabled menu features
   $: toggleSidebarAdminActions($isAuthenticated);
 
+  $: fireworks($timer);
+
   onMount(() => {
     try {
       $websocket = { type: 'client_init' };
@@ -388,6 +447,19 @@
 <div class="wrapper">
   <TopNavigation>
     <svelte:fragment slot="right">
+      {#if showBirthdayCake($timer)}
+        {#if showAnniversary}
+          <div in:fade="{{ delay: 0, duration: 1000 }}" class="lead">
+            🎉 <a href="https://theyosh.github.io/TerrariumPI/" target="_blank"><strong>10 year anniversary</strong></a>
+            🥳&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+        {/if}
+        <Dropdown>
+          <DropdownButton on:click="{() => anniversary()}">
+            <i class="fa-solid fa-cake-candles" style="color: #007bff;"></i>
+          </DropdownButton>
+        </Dropdown>
+      {/if}
       <Dropdown>
         <DropdownButton data-widget="fullscreen">
           <i class="fas fa-expand-arrows-alt"></i>

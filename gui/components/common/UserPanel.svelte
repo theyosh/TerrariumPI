@@ -18,11 +18,14 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { getContext } from 'svelte';
+  import { fade } from 'svelte/transition';
 
   import { isAuthenticated, doLogout } from '../../stores/authentication';
   import { default as currentUserStore } from '../../stores/current-user';
+  import { timer } from '../../stores/timer';
   import { getCustomConfig } from '../../config';
   import { ApiUrl } from '../../constants/urls';
+  import { christmas } from '../../constants/easter-eggs';
   import LoginLink from '../common/LoginLink.svelte';
 
   let settings = getCustomConfig();
@@ -35,12 +38,15 @@
 </a>
 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
   <div class="image pt-2 pl-1">
-    <img
-      src="img/christmas_hat.png"
-      class="christmashat d-none"
-      title="!! Merry Christmas !!"
-      alt="!! Merry Christmas !!"
-    />
+    {#if christmas($timer)}
+      <img
+        transition:fade="{{ delay: 250, duration: 500 }}"
+        src="img/christmas_hat.png"
+        class="christmashat"
+        title="!! Merry Christmas !!"
+        alt="!! Merry Christmas !!"
+      />
+    {/if}
     <img src="{ApiUrl}/{settings.profile}" class="img-circle elevation-2 img-thumbnail" alt="Profile" />
   </div>
   <div class="info">
