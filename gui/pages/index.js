@@ -121,7 +121,7 @@ export const Pages = [
     title: 'relays.menu.title',
     url: '/relays/',
     breadcrumb: [],
-    icon: 'fas fa-bolt',
+    icon: 'fas fa-bolt-lightning',
     hide: false,
     nesting: true,
     subroutes: [

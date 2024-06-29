@@ -273,7 +273,7 @@
     <div class="col-12 col-sm-6 col-md-3 col-xl-2">
       <InfoBox
         shadow="small"
-        icon="fas fa-bolt"
+        icon="fas fa-bolt-lightning"
         text="{$_('dashboard.infobox.current_power_usage.title', { default: 'Power usage in Watt' })}"
         progressBar="{true}"
         progressBarWidth="{($currentPower / $maxPower) * 100}%"
@@ -306,7 +306,7 @@
     <div class="col-12 col-sm-6 col-md-3 col-xl-2">
       <InfoBox
         shadow="small"
-        icon="fas fa-bolt"
+        icon="fas fa-bolt-lightning"
         text="{$_('dashboard.infobox.total_power_usage.title', { default: 'Total power usage' })}"
       >
         <svelte:fragment slot="number">
