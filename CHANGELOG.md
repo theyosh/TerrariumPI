@@ -2,6 +2,81 @@ Changelog
 =========
 
 
+4.10.0 (2024-06-30)
+------------------
+
+**Fixes**
+------
+
+- Fix power icon. [TheYOSH]
+- Fix power icon. [TheYOSH]
+- Fix buster build. [theyosh]
+- Fix legacy python libraries. [TheYOSH]
+- Fix security warning. [TheYOSH]
+- More gui fixes. [TheYOSH]
+- Fix gui. [TheYOSH]
+- Fix dimmer loading. [theyosh]
+- Refactor GPIO relays and IO expanderboard. And calendar fixes.
+  [theyosh]
+- Fix GPIO relays (GUI part) [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update Ruby libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Small gui updates. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update load average rounding. [theyosh]
+- Update libraries. [TheYOSH]
+- Update relay form. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update changelog. [TheYOSH]
+
+**Other**
+------
+
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New release prep. [TheYOSH]
+- Lower numpy. [TheYOSH]
+- Remove last debug. [theyosh]
+- Merge branch 'main' into develop. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese (Brazil)) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Polish) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Italian) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (French (Belgium)) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (German) [TheYOSH]
+
+  Currently translated at 100.0% (1092 of 1092 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Disable header colors. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Code prettier. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Enable calendar links. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (French (Belgium)) [CleaverEFREI]
+
+  Currently translated at 96.6% (1055 of 1092 strings)
+- New Svelte GUI build. [TheYOSH]
+
+
 4.9.3 (2024-06-12)
 ------------------
 
