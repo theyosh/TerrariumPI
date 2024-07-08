@@ -7,8 +7,9 @@ from pathlib import Path
 from datetime import datetime
 import os
 
-TIMEOUT = 120
+TIMEOUT = 180
 FILE_TO_CHECK = "motd.sh"
+STARTUP_FILE=".startup"
 
 
 def restart_docker():
@@ -18,10 +19,14 @@ def restart_docker():
         print(f"Restarting unhealty docker {datetime.now()}")
         os.system("bash -c 'kill -s 2 -1 && (sleep 60; kill -s 9 -1)'")
 
-
 health_file = Path(FILE_TO_CHECK)
-
 if not health_file.exists():
+    startup_file = Path(STARTUP_FILE)
+    timeout = (datetime.now() - datetime.fromtimestamp(startup_file.stat().st_mtime)).total_seconds()
+    if timeout < TIMEOUT:
+        print(f"In startup mode {datetime.now()}")
+        exit(1)
+
     restart_docker()
     exit(1)
 

@@ -170,6 +170,8 @@ if [ -f motd.sh ]; then
   rm motd.sh
 fi
 
+touch .startup
+
 # We need to update the libraries with the mounted /opt/vc/lib/ :(
 ldconfig
 
