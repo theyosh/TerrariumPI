@@ -851,7 +851,7 @@ class terrariumEngine(object):
                         # Restore the state of the relay
                         self.relays[relay.id].set_state(last_value, True)
                     except terrariumRelayLoadingException as ex:
-                        relayLogger.error(f"Error loading relay {relay} with error: {ex.message}.")
+                        relayLogger.error(f"Error loading relay {relay} with error: {ex}.")
                         continue
 
                 # Take a measurement from the relay
@@ -871,6 +871,9 @@ class terrariumEngine(object):
                 relayLogger.debug(f"Found new relay {relay}")
                 action = "Added new"
                 value = relay.update()
+                if value is None:
+                    # Not able to make a readout
+                    continue
 
                 with orm.db_session():
                     try:
