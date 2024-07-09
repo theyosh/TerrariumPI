@@ -2,8 +2,39 @@ Changelog
 =========
 
 
+4.10.1 (2024-07-09)
+-------------------
+
+**New**
+------
+
+- Add package. [TheYOSH]
+- Add some more fotos. [TheYOSH]
+
+**Fixes**
+------
+
+- Fix error messages. [TheYOSH]
+- Fix missing package. [TheYOSH]
+
+**Updates**
+------
+
+- Version update. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update docker health check. [TheYOSH]
+
+**Other**
+------
+
+- New release post. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+
+
 4.10.0 (2024-06-30)
-------------------
+-------------------
 
 **Fixes**
 ------
@@ -23,6 +54,7 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Update Ruby libraries. [TheYOSH]
