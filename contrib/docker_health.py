@@ -9,7 +9,7 @@ import os
 
 TIMEOUT = 180
 FILE_TO_CHECK = "motd.sh"
-STARTUP_FILE=".startup"
+STARTUP_FILE = ".startup"
 
 
 def restart_docker():
@@ -18,6 +18,7 @@ def restart_docker():
         restart.write_text("restart")
         print(f"Restarting unhealty docker {datetime.now()}")
         os.system("bash -c 'kill -s 2 -1 && (sleep 60; kill -s 9 -1)'")
+
 
 health_file = Path(FILE_TO_CHECK)
 if not health_file.exists():
