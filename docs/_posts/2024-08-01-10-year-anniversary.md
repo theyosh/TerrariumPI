@@ -1,6 +1,6 @@
 ---
 title: 🎉 10 Year Anniversary 🥳
-date: 2024-08-01 12:00:00 +0000
+date: 2024-08-01 00:00:00 +0000
 categories: [Website, News]
 tags: [anniversary, 10-year]
 pin: true
@@ -33,14 +33,11 @@ And all was made in [Python](https://www.python.org/) in order to learn a new la
 After a while I added 'realtime' weather information through 3rd party APIs. And the webcam was already supported by making a JPEG image every X seconds. No live streaming, but almost 'live' image.
 
 ![TerrariumPI Version 0.3 August 2014](/assets/img/TerrariumPI_v0.3_2014-08-28.webp)
+_TerrariumPI Version 0.3 August 2014_
 
 ## Early version
 
 So when the basic setup was running, it would be nice to have at least a nice status web page which give the current state. As I was making websites since 1998, it should be possible to make a web gui. But one thing I cannot do... is making a design. As you can see above. :point_up: :smiley:
-
-Then I found some people making administration GUI frameworks. First I used [Gentelella Dashboard template](https://colorlib.com/polygon/gentelella/index.html). And this produced version 2.X.
-
-![TerrariumPI Version 2.5 July 2017](/assets/img/TerrariumPI_2.5_2017.webp)
 
 This is still a simple version with only temperature and humidity sensor support.
 
@@ -50,13 +47,17 @@ And this version already supported magnetic sensors so you can make door sensors
 
 ![GitHub Logo](/assets/img/GitHub-Logo.webp){: .right .invert width="150" }In order to keep the code save and backup-ed, I started to put the code on Github in [january 2016](https://github.com/theyosh/TerrariumPI/commit/2ca75beac3adb1a50107412442c9427fa1ea4ebf). Also I needed to learn a bit more about git and using branches, code fixes and creating new features. So again, original goal was to learn more about working with git.
 
+At this point, we are at version 0.9.
+
 And after that, I just start committing new code. Never thought that the code would ever be used by somebody else...
+
+In 2020 it was archived by Github for the [Arctic Code Vault](https://archiveprogram.github.com/arctic-vault/) project.
 
 ## First issues and requests
 
 It took more than 1 year, but there it was. The [first issue](https://github.com/theyosh/TerrariumPI/issues/1). I was bit stunned, because somebody was using this software. Never thought this would happen. :smiley:
 
-This resulted in the first requests for new hardware. And that forced me to think about a more plug-able system where you can easy add new hardware. As a relay has always the same functions, you only have to create code for the actual low level control. Logic should not depend on a relay.
+This resulted in the first requests for new hardware. And that forced me to think about a more plug-able system where you can easy add new hardware. As a relay has always the same functions, you only have to create code for the actual low level control. Logic should not depend on a single relay.
 
 And that was the first feature request in july 2017. It took more than a year, but never knowing that the issue counter will reach **900+** [issues](https://github.com/theyosh/TerrariumPI/issues) after 10 years.
 
@@ -71,6 +72,7 @@ And the GUI just kept running. :wink:
 ## New hardware
 
 ![Hardware overview](https://raw.githubusercontent.com/theyosh/TerrariumPI/3.4.2/static/images/documentation/hardware_overview.jpg)
+_Hardware overview when started back in 2014_
 
 So, it started with just a few sensors and relays, and now it has support for:
 
@@ -86,6 +88,7 @@ From version [TerrariumPI 3.0](https://github.com/theyosh/TerrariumPI/releases/t
 But after a few years, more and more hardware was requested by other people. And by adding support for those requests, my software grow. This is a nice thing, as more and more people can use it. But supporting more and more hardware, cost my time. So I thought, there should be a kind of 'payment' for supporting new hardware. So I asked pictures of running setups in return. And that made a rather big issue with a [lot of pictures](https://github.com/theyosh/TerrariumPI/issues/210). It is just nice to look at to get some inspiration.
 
 ![Hardware overview](/assets/img/hardware_testing_2024.webp)
+_Hardware overview in 2024_
 
 And as far as I know, I was able to support 90% of the requests for new hardware. Which I think is pretty neat.
 
@@ -133,9 +136,15 @@ But I am not a GUI developer so it looked not that good, and it has a very high 
 
 Then I found [Gentelella admin template](https://colorlib.com/polygon/gentelella/) which gave it a bit more professional look. This has been the gui for more than 3 years. It did upgrade the look from time to time. But it was a nice admin gui which I could use for TerrariumPI. It saved a lot of CSS hassling.
 
+![TerrariumPI Version 2.5 July 2017](/assets/img/TerrariumPI_2.5_2017.webp)
+_TerrariumPI Version 2.5 July 2017_
+
 A vew years later I found [AdminLTE](https://adminlte.io/themes/v3/). A more up to date GUI with the same functionality as Gentelella. But it looked a bit fresher. So we shifted to AdminLTE about 4 years ago. But still it was a lot of jQuery and a lot of vanilla java scripting.
 
 ![Svelte Logo](/assets/img/SvelteLogo.png){: .right width="150" }This could done better, and than I found [Svelte](https://svelte.dev). Which looked nice to work with. And it was pretty easy to learn. And the best thing is that I could drop a lot of custom/vanilla javascript that used jQuery. With svelte, you just program in a single file you CSS, JavaScript and HTML code. And the javascript code will be compiled and optimized during building the GUI. This produced the fasted GUI at the moment.
+
+![TerrariumPI Version 4.10.1 July 2024](/assets/img/TerrariumPI_4.10.1_2024.webp)
+_TerrariumPI Version 4.10.1 July 2024_
 
 ## Stability
 
@@ -145,11 +154,12 @@ When I started the automate my terrarium, a question that popped up pretty quick
 
 I was using a wet based terrarium. The humidity is always above 60%. And electronics and water do not work that well together. So I looked for some water resistant sensors which could handle some moist air. For temperature sensors, there are shielded DS18B20 sensors, which can even be submerged in water. For humidity I just picked some hardware and placed it in an enclosed box with some holes in it. So direct water could hardly get in, but the humid air will, and can be measured.
 
-But also, how long with the Raspberry PI stay working? How long with the SD card stay alive? SD cards will wear down when being used.
+But also, how long with the Raspberry PI stay working? How long with the SD card stay alive? All kind of questions of which there is basically one way of find out. Just by starting and see how long it all lasts...
 
 ### Hardware
 
-For the hardware part, I am pretty amazed how long it will last. My temperature and humidity senors are now working for more than 7 years in the current terrarium. And they do not show any problems. I am so crossing my fingers (:crossed_fingers:) that is stays that way. Because I cannot change them :smile:. They are all placed in hidden spots, so you cannot see the sensors unless you know where they are. But also hard to replace when needed. Until now, only one sensor has been broken. Lucky we can (ignore sensors)[], and TerrariumPI will just keep running.
+For the hardware part, I am pretty amazed how long it will last. My temperature and humidity senors are now working for more than 7 years in the current terrarium. And they do not show any problems. I am so crossing my fingers (:crossed_fingers:) that is stays that way. Because I cannot change them :smile:. They are all placed in hidden spots, so you cannot see the sensors unless you know where they are. But also hard to replace when needed. \
+Until now, only one sensor has been broken. Lucky we can (ignore sensors)[], and TerrariumPI will just keep running.
 
 But also the relays I use, are now 10+ years old. I still use the first relay board I bought when I started TerrariumPI. And it still working like a charm. Heavily covered under dust, but still going strong.
 
@@ -191,7 +201,15 @@ Maybe I had to do some calculation up front :rofl:
 
 So we created a [clean up script](https://github.com/theyosh/TerrariumPI/blob/main/contrib/db_cleanup.py), which will delete all data older than 60 weeks. As the graphs can only show data for maximal 1 year. So sensor data older than 60 week can safely be removed. But this has to be done manually. It will takes at least an hour to do.
 
+### Relay data
+
 This also made the logging for relays change a bit. Storing every minute that a relay is on, is not handy. So for relays we only write to the database when the relay changes state. And at least once an hour. This to make the graphs easier to make. But relay data will NOT be cleaned, as we want to be able to calculate the total power and water usage.
+
+But again, after many years of data, the total power and water usage calculation took about 15 seconds. This is just due to the amount of data. We could optimize this by storing calculated totals per year or per month. But that was a bit more work to fix, than the final solution. And the real problem was that these totals where calculated every time a relay changed, or at the end of every 30 seconds run. \
+But this is not smart, as the totals only change when the relay goes off. Than we know the last powered on period, and can we calculate new power and water totals. Together with a caching mechanism, this data will only updated when a relay goes off, or once an hour at maximum. This was a big CPU saver, as we can see in the graph above with the CPU usage drop.
+
+![Total power and water usage info boxes](/assets/img/Totals_power_water.webp)
+_Total power and water usage info boxes_
 
 All this data will result in a **2.1GB** SQLite database to work with. And this proves that SQLite is pretty fast on low level hardware.
 
@@ -226,9 +244,9 @@ And here is a list of persons that added some code or translations to TerrariumP
 
 ## 10 years later
 
-And now, 10 years later, the software is running stable and reliable. Which was the goal in the beginning. It took some more years, and a lot of extra features, but we made it. 10 years old!
+And now, 10 years later, the software is running stable and reliable. Which was the goal in the beginning. It took some more years, and a lot of extra features, but we made it. **10 years old!**
 
-## Build pictures 2017
+## Historical pictures
 
 {% include image-gallery.html folder="/assets/img/photos" %}
 
