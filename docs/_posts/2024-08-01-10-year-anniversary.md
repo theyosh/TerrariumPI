@@ -244,7 +244,9 @@ And here is a list of persons that added some code or translations to TerrariumP
 
 ## 10 years later
 
-And now, 10 years later, the software is running stable and reliable. Which was the goal in the beginning. It took some more years, and a lot of extra features, but we made it. **10 years old!**
+And now, 10 years later, the software is running stable and reliable. Which was the goal in the beginning. It took some more years, and a lot of extra features, but we made it. **10 years old! !! PAAARTEEEEYYY !!**
+
+<div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/ZJB5EPInvETQY" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/disco-ZJB5EPInvETQY">via GIPHY</a></p>
 
 ## Historical pictures
 
