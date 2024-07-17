@@ -2,6 +2,30 @@ Changelog
 =========
 
 
+4.10.2 (2024-07-17)
+-------------------
+
+**Fixes**
+------
+
+- Fix live webcam streaming. [TheYOSH]
+
+**Updates**
+------
+
+- Documentation updates. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update screenshots. [TheYOSH]
+- Documentation updates. [TheYOSH]
+
+**Other**
+------
+
+- New release. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+
+
 4.10.1 (2024-07-09)
 -------------------
 
@@ -20,6 +44,7 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Version update. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Update libraries. [TheYOSH]
