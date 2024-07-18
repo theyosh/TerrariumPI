@@ -73,7 +73,8 @@ When you selected the `system_error` message type, you should get a siren sound 
 
 ### Telegram
 
-![Telegram icon](/assets/img/telegram-logo.webp){: .right width="150" } For Telegram you need to enter the **Bot token** and **username** in order to make a connection. A Telegram Bot can be created [here](https://core.telegram.org/bots#how-do-i-create-a-bot). Your username(s) should start with an `@` and space separated. Only entered usernames can receive messages and send commands. The bot token is stored encrypted in the database.
+![Telegram icon](/assets/img/telegram-logo.webp){: .right width="150" } For Telegram you need to enter the **Bot token** and **username** in order to make a connection. A Telegram Bot can be created [here](https://core.telegram.org/bots#how-do-i-create-a-bot). \
+Enter your username(s) **without** the `@` sign and separate them with a space. Only entered usernames can receive messages and send commands. The bot token is stored encrypted in the database.
 
 In order to receive messages, you need to start talking to your Telegram bot through your telegram app. This is done by sending a telegram command `/start`. You should get a response like `start command received, you are now getting updates...`.
 
