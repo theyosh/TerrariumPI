@@ -7,7 +7,7 @@
     "build:dev": "cross-env-file -p ./.env.dev.json npx rollup -c",
     "dev": "cross-env-file -p ./.env.dev.json npx rollup -c -w",
     "start": "npx serve -n -l 5000 public",
-    "format": "prettier --write ./gui"
+    "format": "prettier --write ./docs ./gui *.md"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.10",

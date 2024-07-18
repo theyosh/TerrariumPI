@@ -6,10 +6,10 @@ tags: [sensor, temperature, humidity]
 image:
   path: /assets/img/lywsd03mmc.webp
   src: /assets/img/lywsd03mmc.webp
-  alt: "LYWSD03MMC bluetooth sensor header image"
+  alt: 'LYWSD03MMC bluetooth sensor header image'
 
 device_types: [temperature, humidity]
-device_address: "Bluetooth MAC address. Ex: `a4:c1:38:66:e3:52`"
+device_address: 'Bluetooth MAC address. Ex: `a4:c1:38:66:e3:52`'
 device_auto_detect: true
 device_url: https://www.adafruit.com/product/4881
 ---

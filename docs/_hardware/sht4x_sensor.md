@@ -6,10 +6,10 @@ tags: [sensor, temperature, humidity]
 image:
   path: /assets/img/SHT4X.webp
   src: /assets/img/SHT4X.webp
-  alt: "Sensirion SHT4X sensor header image"
+  alt: 'Sensirion SHT4X sensor header image'
 
 device_types: [temperature, humidity]
-device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x44`"
+device_address: '&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x44`'
 device_url: https://www.pibits.net/code/raspberry-pi-sht31-sensor-example.php
 ---
 

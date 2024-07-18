@@ -6,9 +6,9 @@ tags: [relay, remote]
 image:
   path: /assets/img/REST_API.webp
   src: /assets/img/REST_API.webp
-  alt: "Remote relay (API)"
+  alt: 'Remote relay (API)'
 
-device_hardware : Remote power switch (API)
+device_hardware: Remote power switch (API)
 device_address: http(s)://some.domain.com/path/location/script.php
 ---
 

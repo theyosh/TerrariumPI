@@ -6,10 +6,10 @@ tags: [relay, denkovi]
 image:
   path: /assets/img/Denkovi_V2_X_sockets.webp
   src: /assets/img/Denkovi_V2_X_sockets.webp
-  alt: "Denkovi V2 Relay header image"
+  alt: 'Denkovi V2 Relay header image'
 
-device_hardware : Denkovi Relay v2 (X sockets)
-device_address: "Enter the relay number 1 - X. Optional you can enter the Serial address of the board if you have multiple relay boards like: `1,0035685`"
+device_hardware: Denkovi Relay v2 (X sockets)
+device_address: 'Enter the relay number 1 - X. Optional you can enter the Serial address of the board if you have multiple relay boards like: `1,0035685`'
 ---
 
 ## Information

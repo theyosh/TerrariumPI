@@ -6,10 +6,10 @@ tags: [sensor, uva, uvb, uvi]
 image:
   path: /assets/img/VEML6075.webp
   src: /assets/img/VEML6075.webp
-  alt: "VEML6075 UVA and UVB light sensor header image"
+  alt: 'VEML6075 UVA and UVB light sensor header image'
 
-device_types: [uva, uvb,uvi]
-device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x44`"
+device_types: [uva, uvb, uvi]
+device_address: '&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x44`'
 device_url: https://pimylifeup.com/raspberry-pi-uv-sensor-veml6075/
 ---
 

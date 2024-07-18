@@ -8,6 +8,7 @@ image:
   src: /assets/img/options.webp
   alt: Feature header image
 ---
+
 Here are some features that TerrariumPI has.
 
 ## Local weather and climate mirroring

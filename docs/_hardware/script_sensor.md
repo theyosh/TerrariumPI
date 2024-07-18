@@ -1,15 +1,32 @@
 ---
 title: Script Sensor
 categories: [Hardware, Sensor]
-tags: [sensor, script, temperature, humidity,fertility,ph,uva,moisture,uvb,altitude,co2,distance,uvi,pressure,light]
+tags:
+  [
+    sensor,
+    script,
+    temperature,
+    humidity,
+    fertility,
+    ph,
+    uva,
+    moisture,
+    uvb,
+    altitude,
+    co2,
+    distance,
+    uvi,
+    pressure,
+    light,
+  ]
 
 image:
   path: /assets/img/script_sensor.webp
   src: /assets/img/script_sensor.webp
-  alt: "Script sensor header image"
+  alt: 'Script sensor header image'
 
-device_types: [temperature, humidity,fertility,ph,uva,moisture,uvb,altitude,co2,distance,uvi,pressure,light]
-device_address: "Enter the full path to the script."
+device_types: [temperature, humidity, fertility, ph, uva, moisture, uvb, altitude, co2, distance, uvi, pressure, light]
+device_address: 'Enter the full path to the script.'
 device_url: https://github.com/theyosh/TerrariumPI/blob/4.x.y.z/contrib/script_sensor.py
 ---
 
@@ -23,7 +40,7 @@ You can use decimal/float values. But make sure you have only a numeric value ou
 
 ### Python scripts
 
-In order to use the Python virtual environment with all its libraries, make sure you have the correct [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) line:
+In order to use the Python virtual environment with all its libraries, make sure you have the correct [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) line:
 
 ```bash
 #!/usr/bin/env python

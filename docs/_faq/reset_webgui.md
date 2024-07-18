@@ -1,8 +1,9 @@
 ---
 title: Reset webgui address
 categories: [Website, FAQ]
-tags: [database,gui,address,port,listening]
+tags: [database, gui, address, port, listening]
 ---
+
 If you have configured a fixed IP as address and your PI has changed the IP due to a network change, the TerrariumPI software will not load the web gui. The system is still running, but you are unable to access the webgui.
 
 An error could look like:

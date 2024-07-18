@@ -8,6 +8,7 @@ image:
   src: /assets/img/notifications.webp
   alt: Notifications header image
 ---
+
 The notification system is divided in two parts. There is a notification system service which can be email, push over, or http API calls. And there are notification actions. Like sensor alarms, door openings.
 
 ## Rate limits
@@ -55,10 +56,10 @@ The contents is in JSON and contains all the data that is available as a place h
 
 ```json
 {
-    "uuid" : "",
-    "topic" : "",
-    "subject" : "",
-    "message" : ""
+  "uuid": "",
+  "topic": "",
+  "subject": "",
+  "message": ""
 }
 ```
 
@@ -106,16 +107,16 @@ Enter a full url where the data is posted to. The data is in JSON format. The wi
 
 ```json
 {
-    "message" : "",
-    "subject" : "",
-    "uuid" : "",
-    "type" : "",
-    "files" : [
-        {
-            "name" : "",
-            "data" : ""
-        }
-    ]
+  "message": "",
+  "subject": "",
+  "uuid": "",
+  "type": "",
+  "files": [
+    {
+      "name": "",
+      "data": ""
+    }
+  ]
 }
 ```
 

@@ -8,6 +8,7 @@ image:
   src: /assets/img/Scenery.webp
   alt: Scenery header image
 ---
+
 On this page you can find various information on how to setup areas and create scenarios.
 
 <h2 id="timer-wizard">Timer wizard</h2>

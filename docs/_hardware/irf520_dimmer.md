@@ -6,11 +6,11 @@ tags: [relay, dimmer, irf520, mosfet]
 image:
   path: /assets/img/Mosfet_Dimmer.webp
   src: /assets/img/Mosfet_Dimmer.webp
-  alt: "IRF520 dimmer header image"
+  alt: 'IRF520 dimmer header image'
 
 device_address: Physical GPIO pin number 1 - 40
 dimmer_frequency: 1000
-device_url : https://hobbycomponents.com/motor-drivers/661-irf520-mosfet-driver-module
+device_url: https://hobbycomponents.com/motor-drivers/661-irf520-mosfet-driver-module
 ---
 
 ## Information

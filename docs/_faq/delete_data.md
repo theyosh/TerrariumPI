@@ -1,7 +1,7 @@
 ---
 title: How to delete a sensor/relay/button TerrariumPI
 categories: [Website, FAQ]
-tags: [delete,manual]
+tags: [delete, manual]
 ---
 
 When you want to delete a sensor/relay/button that has been used for more than 3 months, you should use the manual/debug way to delete the sensor through the GUI. This is due to the time it takes to delete the data from the Sqlite database. If this takes more then 2 minutes, the systemd watchdog will restart TerrariumPI and the delete will not succeed.

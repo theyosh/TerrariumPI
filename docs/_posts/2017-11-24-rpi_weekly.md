@@ -9,5 +9,6 @@ image:
   src: /assets/img/publications/Publication_Raspberry_PI_Weekly-Issue_231-24-11-2017.webp
   alt: TerrariumPI on Raspberry PI Weekly Newsletter
 ---
+
 Website: [Raspberrypi.org](https://www.raspberrypi.org/weekly/hackspace/)\
 Publication date: 24 november 2017

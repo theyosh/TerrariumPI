@@ -11,7 +11,7 @@ image:
 
 Here you can find how you can setup various parts that works together as a single enclosure. You can even setup multiple enclosures. But make sure that relays and areas are not shared in multiple enclosures or areas.
 
-A simple rule to remember: *A relay can only be used once*.
+A simple rule to remember: _A relay can only be used once_.
 
 ## Login
 
@@ -24,7 +24,7 @@ On every form popup you have a small question mark <i class="far fa-question-cir
 
 ## Required fields
 
-All fields with a red star (<span style="color:red;font-weight:bold">*</span>) are required to fill out. Some fields can be come required based on selected options.
+All fields with a red star (<span style="color:red;font-weight:bold">\*</span>) are required to fill out. Some fields can be come required based on selected options.
 
 ## Settings
 
@@ -54,10 +54,10 @@ Authentication mode
 - No authentication: No authentication at all. **Be very careful with this!**
 
 User name
-:  Enter the user name for authentication. Default admin
+: Enter the user name for authentication. Default admin
 
 New password
-:  Enter a new password for authentication. [Encrypted]({% link _tabs/features.md %}#admin-password)
+: Enter a new password for authentication. [Encrypted]({% link _tabs/features.md %}#admin-password)
 
 Confirm new password
 : Confirm the new password for authentication.
@@ -70,25 +70,25 @@ Excluded ids
 In the locale group you can setup your locales that are custom to.
 
 Language
-:  Select the interface language. This will also change number and currency formatting.
+: Select the interface language. This will also change number and currency formatting.
 
 Temperature type
-:  Select the temperature indicator. Only affects the current values.
+: Select the temperature indicator. Only affects the current values.
 
 Distance type
-:  Select the distance indicator. Only affects the current values.
+: Select the distance indicator. Only affects the current values.
 
 Liquid volume type
-:  Select the water volume indicator. Only affects the current values.
+: Select the water volume indicator. Only affects the current values.
 
 Wind speed type
-:  Select the wind speed indicator. Only affects the current values.
+: Select the wind speed indicator. Only affects the current values.
 
 Power price
-:  Enter the price per kWh.
+: Enter the price per kWh.
 
 Water price
-:  Enter the price per L/Gallon.
+: Enter the price per L/Gallon.
 
 ### Gui
 
@@ -374,7 +374,7 @@ Doors
 : The door sensors that are used for this enclosure. [Magnetic sensors]({% link _tabs/hardware.md %}#buttons).
 
 Webcams
-: One or more webcams that are used in this enclosure. Webcams selected here can use the `archive light state`  and `archive door state` option at the [webcam settings](#webcams).
+: One or more webcams that are used in this enclosure. Webcams selected here can use the `archive light state` and `archive door state` option at the [webcam settings](#webcams).
 
 ## Areas
 

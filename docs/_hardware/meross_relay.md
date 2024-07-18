@@ -6,11 +6,11 @@ tags: [relay, meross]
 image:
   path: /assets/img/Meross.webp
   src: /assets/img/Meross.webp
-  alt: "Meross header image"
+  alt: 'Meross header image'
 
-device_address: "Need Meross Cloud account credentials"
+device_address: 'Need Meross Cloud account credentials'
 device_auto_detect: true
-device_url : https://shop.meross.com/collections/smart-power-strip
+device_url: https://shop.meross.com/collections/smart-power-strip
 ---
 
 ## Information

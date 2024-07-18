@@ -6,10 +6,10 @@ tags: [sensor, light]
 image:
   path: /assets/img/bh1750.webp
   src: /assets/img/bh1750.webp
-  alt: "BH1750 LUX light sensor header image"
+  alt: 'BH1750 LUX light sensor header image'
 
 device_types: [light]
-device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`"
+device_address: '&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`'
 device_url: https://components101.com/sensors/bh1750-ambient-light-sensor
 ---
 

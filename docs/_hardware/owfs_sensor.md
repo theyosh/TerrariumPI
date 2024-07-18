@@ -6,10 +6,10 @@ tags: [sensor, 1-wire, temperature, humidity]
 image:
   path: /assets/img/owfs.webp
   src: /assets/img/owfs.webp
-  alt: "One-Wire File System (OWFS) header image"
+  alt: 'One-Wire File System (OWFS) header image'
 
-device_types: [temperature,humidity]
-device_address: "Enter the sensors address <br />Ex: `280115b231f3ff`"
+device_types: [temperature, humidity]
+device_address: 'Enter the sensors address <br />Ex: `280115b231f3ff`'
 device_auto_detect: true
 device_url: https://www.sheepwalkelectronics.co.uk/product_info.php?cPath=22&products_id=30
 ---

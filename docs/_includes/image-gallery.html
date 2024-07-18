@@ -1,30 +1,40 @@
 <style>
-    .image-gallery {overflow: auto; margin-left: -1%!important;}
-    .image-gallery li {float: left; display: block; margin: 0 0 1% 1%; width: 19%;}
+  .image-gallery {
+    overflow: auto;
+    margin-left: -1% !important;
+  }
+  .image-gallery li {
+    float: left;
+    display: block;
+    margin: 0 0 1% 1%;
+    width: 19%;
+  }
 </style>
 <ul class="image-gallery">
-  {% for file in site.static_files %}
-    {% if file.path contains include.folder %}
-      {% if file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.JPG' or file.extname == '.JPEG' %}
-        {% assign filenameparts = file.path | split: "/" %}
-        {% assign filename = filenameparts | last | replace: file.extname,"" %}
-        <li><img src="{{ file.path | relative_url | replace: site.baseurl,'' }}" alt="{{ filename }}" title="{{ filename }}" /></li>
-      {% endif %}
-    {% endif %}
-  {% endfor %}
+  {% for file in site.static_files %} {% if file.path contains include.folder %} {% if file.extname == '.jpg' or
+  file.extname == '.jpeg' or file.extname == '.JPG' or file.extname == '.JPEG' %} {% assign filenameparts = file.path |
+  split: "/" %} {% assign filename = filenameparts | last | replace: file.extname,"" %}
+  <li>
+    <img src="{{ file.path | relative_url | replace: site.baseurl,'' }}" alt="{{ filename }}" title="{{ filename }}" />
+  </li>
+  {% endif %} {% endif %} {% endfor %}
 </ul>
 <script>
-$.fn.randomize = function(selector) {
+  $.fn.randomize = function (selector) {
     var $elems = selector ? $(this).find(selector) : $(this).children(),
-        $parents = $elems.parent();
+      $parents = $elems.parent();
 
-    $parents.each(function(){
-        $(this).children(selector).sort(function(){
-            return Math.round(Math.random()) - 0.5;
-        }).detach().appendTo(this);
+    $parents.each(function () {
+      $(this)
+        .children(selector)
+        .sort(function () {
+          return Math.round(Math.random()) - 0.5;
+        })
+        .detach()
+        .appendTo(this);
     });
 
     return this;
-};
-$('ul.image-gallery').randomize();
+  };
+  $('ul.image-gallery').randomize();
 </script>

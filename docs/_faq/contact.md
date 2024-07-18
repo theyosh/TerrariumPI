@@ -1,8 +1,9 @@
 ---
 title: How to contact
 categories: [Website, FAQ]
-tags: [contact,bugs,features,chat]
+tags: [contact, bugs, features, chat]
 ---
+
 There are several ways to contact the developers of TerrariumPI. Here you can see how:
 
 - <a href="https://github.com/theyosh/TerrariumPI" target="_blank" rel="noopener" title="Github for feature requests and bugs">Github for feature requests and bugs</a>

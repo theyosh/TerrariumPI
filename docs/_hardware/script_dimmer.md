@@ -6,7 +6,7 @@ tags: [relay, dimmer, script]
 image:
   path: /assets/img/Code.webp
   src: /assets/img/Code.webp
-  alt: "Script dimmer (API)"
+  alt: 'Script dimmer (API)'
 
 device_address: /home/user/location/executable/script
 ---
@@ -21,7 +21,7 @@ An example can be found in the [contrib](https://github.com/theyosh/TerrariumPI/
 
 ### Python scripts
 
-In order to use the Python virtual environment with all its libraries, make sure you have the correct [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) line:
+In order to use the Python virtual environment with all its libraries, make sure you have the correct [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) line:
 
 ```bash
 #!/usr/bin/env python

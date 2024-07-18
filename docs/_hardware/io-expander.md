@@ -1,14 +1,13 @@
 ---
 title: IO Expander
 categories: [Hardware, Button, I2C]
-tags: [button, expander,pcf8574]
+tags: [button, expander, pcf8574]
 permalink: /hardware/io-expander/
 
 image:
   path: /assets/img/pcf8574_IO_expander.webp
   src: /assets/img/pcf8574_IO_expander.webp
-  alt: "PCF8574 IO Expander"
-
+  alt: 'PCF8574 IO Expander'
 ---
 
 With the IO expander pcf8574 you can add more GPIO [relays](/TerrariumPI/hardware/#relays) and [buttons](/TerrariumPI/hardware/#buttons) to TerrariumPI. This IO expander does only support on/off actions. So it is not possible to use this IO expander with a DHT sensor. You cannot read out the extra GPIO ports.

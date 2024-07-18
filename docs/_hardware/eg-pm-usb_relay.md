@@ -1,14 +1,14 @@
 ---
-title: "Energenie USB"
+title: 'Energenie USB'
 categories: [Hardware, Relay]
 tags: [relay, energenie]
 
 image:
   path: /assets/img/Energenie_USB.webp
   src: /assets/img/Energenie_USB.webp
-  alt: "Energenie USB header image"
+  alt: 'Energenie USB header image'
 
-device_address: "Enter the relay number from 1 - 4. Optional you can enter the Serial address of the board if you have multiple relay boards like: `1,0035685`"
+device_address: 'Enter the relay number from 1 - 4. Optional you can enter the Serial address of the board if you have multiple relay boards like: `1,0035685`'
 device_auto_detect: true
 ---
 
@@ -28,6 +28,7 @@ Go to [https://sourceforge.net/projects/sispmctl/files/sispmctl/](https://source
 
 1. Install needed libraries: `sudo apt install libusb-dev`
 2. Install sispmctl:
+
 ```console
 wget https://sourceforge.net/projects/sispmctl/files/sispmctl/sispmctl-4.9/sispmctl-4.9.tar.gz/download -O sispmctl-4.9.tar.gz
 tar zxvf sispmctl-4.9.tar.gz
@@ -37,6 +38,7 @@ make
 sudo make install
 sudo ldconfig
 ```
+
 3. Restart TerrariumPI service ([FAQ]({% link _faq/systemd.md %}#restart))
 
 The needed permissions to connect to the device through USB are already set.

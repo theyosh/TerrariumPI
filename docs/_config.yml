@@ -24,7 +24,7 @@ description: >- # used by seo meta and the atom feed
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://theyosh.github.io"
+url: 'https://theyosh.github.io'
 
 feed:
   disable_in_development: true
@@ -154,10 +154,10 @@ pwa:
 paginate: 6
 
 # The base URL of your site
-baseurl: "/TerrariumPI"
+baseurl: '/TerrariumPI'
 
 target-blank:
-    add_css_classes: external
+  add_css_classes: external
 
 plugins:
   - jekyll-feed
@@ -169,7 +169,7 @@ plugins:
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
-  footnote_backlink: "&#8617;&#xfe0e;"
+  footnote_backlink: '&#8617;&#xfe0e;'
   syntax_highlighter: rouge
   syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
     css_class: highlight
@@ -194,7 +194,7 @@ collections:
 
 defaults:
   - scope:
-      path: "" # An empty string here means all files in the project
+      path: '' # An empty string here means all files in the project
       type: posts
     values:
       layout: post
@@ -210,7 +210,7 @@ defaults:
     values:
       comments: false
   - scope:
-      path: ""
+      path: ''
       type: tabs # see `site.collections`
     values:
       layout: post
@@ -239,13 +239,13 @@ defaults:
       dynamic_title: true
       permalink: /faq/:title/
   - scope:
-      type: categories  # Used in _plugins/all_tags_and_categories.rb
+      type: categories # Used in _plugins/all_tags_and_categories.rb
     values:
       layout: category
       permalink: /categories/:name/
       dynamic_title: true
   - scope:
-      type: tags  # Used in _plugins/all_tags_and_categories.rb
+      type: tags # Used in _plugins/all_tags_and_categories.rb
     values:
       layout: tag
       permalink: /tags/:name/
@@ -277,13 +277,13 @@ compress_html:
     envs: [development]
 
 exclude:
-  - "*.gem"
-  - "*.gemspec"
+  - '*.gem'
+  - '*.gemspec'
   - docs
   - tools
   - README.md
   - LICENSE
-  - "*.config.js"
+  - '*.config.js'
   - package*.json
 
 jekyll-archives:

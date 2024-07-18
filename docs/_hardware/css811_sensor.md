@@ -6,10 +6,10 @@ tags: [sensor, co2]
 image:
   path: /assets/img/ccs-811.webp
   src: /assets/img/ccs-811.webp
-  alt: "CCS811 Air Quality sensor header image"
+  alt: 'CCS811 Air Quality sensor header image'
 
 device_types: [co2]
-device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`"
+device_address: '&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`'
 device_url: https://www.probots.co.in/carbon-dioxide-gas-detection-sensor-module-ccs811.html
 ---
 

@@ -9,5 +9,6 @@ image:
   src: /assets/img/publications/TerrariumPI_on_Pascals_Hideout.webp
   alt: TerrariumPI on Pascal's Hideout
 ---
+
 Website: [Pascal's Hideout](https://pascal.kolyn.nl/raspberry-pi/)\
 Publication date: 28 november 2018

@@ -75,13 +75,13 @@ services:
     stop_signal: SIGINT
     init: true
     environment:
-      TZ: "Europe/Amsterdam" # timezone list can be found here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-      ENABLE_I2C: "true"
-      ENABLE_1_WIRE: "true"
-      ENABLE_CAMERA: "true"
-      ENABLE_SERIAL: "true"
-      ENABLE_CO2_SENSORS: "true"
-      AUTO_REBOOT: "true"
+      TZ: 'Europe/Amsterdam' # timezone list can be found here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      ENABLE_I2C: 'true'
+      ENABLE_1_WIRE: 'true'
+      ENABLE_CAMERA: 'true'
+      ENABLE_SERIAL: 'true'
+      ENABLE_CO2_SENSORS: 'true'
+      AUTO_REBOOT: 'true'
 ```
 
 **Remark:** Remove the lines which are not for your host OS.
@@ -164,7 +164,7 @@ And a new version should be running. A reboot is not needed.
 
 ## Migration from V3 to V4
 
-There is **no real migration** from version 3 to version 4. The changes are to big. So that means you have to install TerrariumPI v4 as it was a new PI. These migrations steps will only copy the *existing relay history data* from V3 to V4 so that the total power and water usages is still there. And the total costs are still correct. This is all what will be migrated.
+There is **no real migration** from version 3 to version 4. The changes are to big. So that means you have to install TerrariumPI v4 as it was a new PI. These migrations steps will only copy the _existing relay history data_ from V3 to V4 so that the total power and water usages is still there. And the total costs are still correct. This is all what will be migrated.
 
 If you do **not care** about your relay history, you can just skip this migration. This is the **only** data that will be migrated!
 
@@ -183,8 +183,9 @@ Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need
 ### Migrate
 
 1. First make sure you have an backup of files of the old V3 version:
-  - settings.cfg
-  - history.db
+
+- settings.cfg
+- history.db
 
 2. Stop the TerrariumPI service before start migrating. `sudo service terrariumpi stop`
 
@@ -195,9 +196,10 @@ Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need
 5. Enter the `contrib` folder where the file `copy_relay_history.py` is located.
 
 6. Run the script `copy_relay_history.py` with the following parameters in this order:
-  - full path to OLD config (`settings.cfg`)
-  - full path to OLD database (`history.db`)
-  - full path to NEW database (`terrariumpi.db`)
+
+- full path to OLD config (`settings.cfg`)
+- full path to OLD database (`history.db`)
+- full path to NEW database (`terrariumpi.db`)
 
 7. Answer the questions asked by the script. This should match your old and new relays, in order to copy the historical data.
 

@@ -6,11 +6,13 @@ order: 11
 image:
   path: /assets/img/FAQ.webp
   src: /assets/img/FAQ.webp
-  alt: "FAQ header image"
+  alt: 'FAQ header image'
 ---
+
 Here you can find the most frequently asked question.
 
 {% assign faqs = site.faq | sort_natural: "title" %}
+
 <ul class="jekyllcodex_accordion">
 {% for faq in faqs %}
   <li>

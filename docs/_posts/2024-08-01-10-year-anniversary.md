@@ -10,6 +10,7 @@ image:
   src: /assets/img/10-year-party-ballons.webp
   alt: 10 year anniversary header image
 ---
+
 ![10 year anniversary](/assets/img/10-year-party-ballons.webp){: .left width="150" }It has ben 10 years now when this project started. It started all to learn a new programming language Python, and as a lazy programmer does, to automate stuff.
 
 ![Raspberry PI Logo](/assets/img/RaspberryPI_Logo.webp){: .right width="150" }And the [Raspberry PI](https://en.wikipedia.org/wiki/Raspberry_Pi) was about 2 years old, and that gave me the idea to combine the three things. Automate my terrarium with a Raspberry PI and Python code.
@@ -98,7 +99,7 @@ A lot of hardware support has been added. And during those years I learned that 
 Therefore my advise is always:
 
 > Buy at least 1 backup device when you order new hardware
-{: .prompt-tip }
+> {: .prompt-tip }
 
 ### Raspberry PI versions
 
@@ -187,16 +188,16 @@ It started just to saving historical sensor data for showing nice graphs on the 
 
 We update every 30 seconds, which will result in new data. But here already, we only store the sensor data once a minute. So effectively we have 1 data entry per minute per sensor in the database:
 
-- 24 * 60 = 1440 entries per day
-- 7 * 1440 = 10080 entries per week
-- 30 * 1440 = 43200 entries per month
-- 12 * 43200 = 518400 entries per year
+- 24 \* 60 = 1440 entries per day
+- 7 \* 1440 = 10080 entries per week
+- 30 \* 1440 = 43200 entries per month
+- 12 \* 43200 = 518400 entries per year
 
 So that is more than **half a million** entries a year per sensor[^footnote_total_records] :stuck_out_tongue_winking_eye: An average record looks like this:
 
 `e4ab8fe88aee2b16c749c4f1c38d4a6d|2023-03-10 14:22:00.000000|804.0|0.0|1500.0|300.0|1200.0|0`
 
-![Graph up](/assets/img/graph-up.webp){: .right width="150" }And lets say it takes about 90 bytes to store a record. So 90 * 518400 = 46656000 bytes, roughly 47MB per year per sensor. I use about 30 sensors, so that will take about 1400MB or 1,4GB a year! Which also means 155.520.00 records in the database. That is **150 million** records. As you can see this is not just a few records... \
+![Graph up](/assets/img/graph-up.webp){: .right width="150" }And lets say it takes about 90 bytes to store a record. So 90 \* 518400 = 46656000 bytes, roughly 47MB per year per sensor. I use about 30 sensors, so that will take about 1400MB or 1,4GB a year! Which also means 155.520.00 records in the database. That is **150 million** records. As you can see this is not just a few records... \
 Maybe I had to do some calculation up front :rofl:
 
 So we created a [clean up script](https://github.com/theyosh/TerrariumPI/blob/main/contrib/db_cleanup.py), which will delete all data older than 60 weeks. As the graphs can only show data for maximal 1 year. So sensor data older than 60 week can safely be removed. But this has to be done manually. It will takes at least an hour to do.

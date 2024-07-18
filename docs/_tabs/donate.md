@@ -8,10 +8,10 @@ image:
   src: /assets/img/Donations.webp
   alt: Donations header image
 ---
+
 If you like to donate me for developing this software, you are free to do so and is highly appreciated.
 
 You can donate through:
-
 
 - <a href="https://www.buymeacoffee.com/theyosh"><img src="https://img.buymeacoffee.com/button-api/?text=Donate&emoji=%F0%9F%A6%8E&slug=theyosh&button_colour=40DCA5&font_colour=ffffff&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00" alt="Buy Me A Coffee" style="height: 50px"></a>
 - [![Buy Me A Coffee](https://storage.ko-fi.com/cdn/brandasset/kofi_button_stroke.png){: style="max-height: 50px"}](https://ko-fi.com/theyosh)

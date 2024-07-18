@@ -1,8 +1,9 @@
 ---
 title: Tune database settings
 categories: [Website, FAQ]
-tags: [database,stability]
+tags: [database, stability]
 ---
+
 Currently the database SQLITE3 settings are setup for speed. And therefore it cannot handle power outages well. If you need for what ever reason a different SQLITE3 setup, you can create a file called `data/.database-env` with the following contents:
 
 ```

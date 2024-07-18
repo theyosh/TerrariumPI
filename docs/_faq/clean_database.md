@@ -1,8 +1,9 @@
 ---
 title: Cleanup database
 categories: [Website, FAQ]
-tags: [database,cleanup,space]
+tags: [database, cleanup, space]
 ---
+
 If TerrariumPI is running for years it happens that the database get rather big and therefore slowing down the system. Also deleting the data will not give back the disk space. So there is a script which can cleanup the database and reclaim disk space by reducing the database.
 
 In order to cleanup the database, make sure that TerrariumPI is **stopped**! Else there is a possibility on database corruption.

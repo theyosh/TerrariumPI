@@ -6,10 +6,10 @@ tags: [sensor, temperature, humidity]
 image:
   path: /assets/img/SHT3X.webp
   src: /assets/img/SHT3X.webp
-  alt: "Sensirion SHT3XD sensor header image"
+  alt: 'Sensirion SHT3XD sensor header image'
 
 device_types: [temperature, humidity]
-device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x44`"
+device_address: '&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x44`'
 ---
 
 ## Information
