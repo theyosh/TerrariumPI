@@ -14,36 +14,60 @@ Here we will install Raspberry PI and TerrariumPI software step by step.
 ## Raspberry PI
 
 ![Raspberry PI Logo](/assets/img/RaspberryPI_Logo.webp){: .right width="100" }
-In order to run TerrariumPI you first need a working Raspberry PI with the '[Raspberry Pi OS Lite (Legacy)](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy)' image. Make sure you are using the **Legacy** version! This is Debian Buster.
-This is very important, as the Desktop and/or the new OS version will not work well with the GPIO pins and Raspberry PI cameras.
+In order to run TerrariumPI you first need a working Raspberry PI with the
+'[Raspberry Pi OS Lite (Legacy)](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy)'
+image. Make sure you are using the **Legacy** version! This is Debian Buster.
+This is very important, as the Desktop and/or the new OS version will not work
+well with the GPIO pins and Raspberry PI cameras.
 
-Also **64bit is not supported** due to missing mmal code which is needed for the webcams.
+Also **64bit is not supported** due to missing mmal code which is needed for the
+webcams.
 
 ### Creating SD Card
 
 ![Raspberry PI Imager](/assets/img/RPI_Imager.webp){: .right width="200" }
-Download and instal the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to prepare your SD card. Make sure you have a SD card of at least 4GB of size. Bigger is better :smile: Make sure you select **Raspberry Pi OS Lite (legacy)** from the other Raspberry Pi OS images.
+Download and instal the
+[Raspberry Pi Imager](https://www.raspberrypi.org/software/) to prepare your SD
+card. Make sure you have a SD card of at least 4GB of size. Bigger is better
+:smile: Make sure you select **Raspberry Pi OS Lite (legacy)** from the other
+Raspberry Pi OS images.
 
-![Raspberry PI Imager settings icon](/assets/img/RPI_Imager_settings.webp){: .left width="50"}In order to enable SSH, Wifi and other settings, click on the settings icon in the lower right corner. Here you enter your Wifi settings, pi password etc. Use this to install the Raspberry PI headless. Add the SD card in the Raspberry PI and withing a minute you should have a running Raspberry PI.
+![Raspberry PI Imager settings icon](/assets/img/RPI_Imager_settings.webp){:
+.left width="50"}In order to enable SSH, Wifi and other settings, click on the
+settings icon in the lower right corner. Here you enter your Wifi settings, pi
+password etc. Use this to install the Raspberry PI headless. Add the SD card in
+the Raspberry PI and withing a minute you should have a running Raspberry PI.
 
 ## TerrariumPI
 
-When the Raspberry PI is up and running, you should be able to SSH to it. On Linux and Mac you can use the terminal. For Windows, you can use Putty.
+When the Raspberry PI is up and running, you should be able to SSH to it. On
+Linux and Mac you can use the terminal. For Windows, you can use Putty.
 
 ```console
 ssh pi@[raspberrypi]
 ```
 
-**Disclaimer:** If you have TerrariumPI running on this Raspberry PI, then you can [read here](#backup) how to stop and make a backup.
+**Disclaimer:** If you have TerrariumPI running on this Raspberry PI, then you
+can [read here](#backup) how to stop and make a backup.
 
 ### Docker
 
-![Docker Logo](/assets/img/DockerLogo.webp){: .right width="200" }
-As from version 4.1 there is a [Docker image](https://hub.docker.com/r/theyosh/terrariumpi) that can be used to run TerrariumPI. When you run it in Docker, you can skip the rest of the page. Only the migration could be followed if you want to restore your current relay history.
+![Docker Logo](/assets/img/DockerLogo.webp){: .right width="200" } As from
+version 4.1 there is a
+[Docker image](https://hub.docker.com/r/theyosh/terrariumpi) that can be used to
+run TerrariumPI. When you run it in Docker, you can skip the rest of the page.
+Only the migration could be followed if you want to restore your current relay
+history.
 
-Install docker according to: [https://docs.docker.com/engine/install/debian/](https://docs.docker.com/engine/install/debian/) Just follow the installation steps. And to run the docker commands as a normal user, [follow these steps](https://docs.docker.com/engine/install/linux-postinstall/)
+Install docker according to:
+[https://docs.docker.com/engine/install/debian/](https://docs.docker.com/engine/install/debian/)
+Just follow the installation steps. And to run the docker commands as a normal
+user,
+[follow these steps](https://docs.docker.com/engine/install/linux-postinstall/)
 
-Then you need to setup a `docker-compose.yaml` file. There is an example `docker-compose.yaml.example` in the `contrib` folder which can be used as a starting point:
+Then you need to setup a `docker-compose.yaml` file. There is an example
+`docker-compose.yaml.example` in the `contrib` folder which can be used as a
+starting point:
 
 ```yaml
 services:
@@ -86,23 +110,35 @@ services:
 
 **Remark:** Remove the lines which are not for your host OS.
 
-The only real setting is the `TZ` value. Make sure it is set to your local/home time zone. [A valid list can be found here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+The only real setting is the `TZ` value. Make sure it is set to your local/home
+time zone.
+[A valid list can be found here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
-We run the container with **[privileged](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)** enabled. This is less secure, but needed in order to be able to handle all the hardware that is connected to the Raspberry PI.
+We run the container with
+**[privileged](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)**
+enabled. This is less secure, but needed in order to be able to handle all the
+hardware that is connected to the Raspberry PI.
 
-The network mode needs to be at `host`. Else bluetooth with not work, and you can't use bluetooth sensors.
+The network mode needs to be at `host`. Else bluetooth with not work, and you
+can't use bluetooth sensors.
 
-then you can run `docker compose up -d` to start the docker image. It could be that it needs a reboot. After that, you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
+then you can run `docker compose up -d` to start the docker image. It could be
+that it needs a reboot. After that, you should be able to access TerrariumPI on
+the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
-[All docker images](https://hub.docker.com/r/theyosh/terrariumpi/) can be found at Docker Hub.
+[All docker images](https://hub.docker.com/r/theyosh/terrariumpi/) can be found
+at Docker Hub.
 
 ### Manual
 
-All the commands below needs to executed as **normal user**. This can be the default user `pi` or any other user you have created. This is imported due to security and manual debugging when there are problems.
+All the commands below needs to executed as **normal user**. This can be the
+default user `pi` or any other user you have created. This is imported due to
+security and manual debugging when there are problems.
 
 #### Prerequisites
 
-First we need to install Git. This is used to download the software from Github.com
+First we need to install Git. This is used to download the software from
+Github.com
 
 ```console
 sudo apt update && sudo apt -y install git
@@ -110,9 +146,11 @@ sudo apt update && sudo apt -y install git
 
 #### Download
 
-After Git is installed, we can download the TerrariumPI source code. We will only download the latest version.
+After Git is installed, we can download the TerrariumPI source code. We will
+only download the latest version.
 
-If you want to do some development or testing, omit the part `--depth 1`. Then you will get the full repository with all the branches.
+If you want to do some development or testing, omit the part `--depth 1`. Then
+you will get the full repository with all the branches.
 
 ```console
 git clone --branch main --depth 1 https://github.com/theyosh/TerrariumPI.git
@@ -120,11 +158,15 @@ git clone --branch main --depth 1 https://github.com/theyosh/TerrariumPI.git
 
 #### Installation
 
-And the final step is to start the installer. This will guide you through the installation process.
+And the final step is to start the installer. This will guide you through the
+installation process.
 
-The first time you run the installer, it will also update the Raspberry PI OS to the latest version. This can take some more time.
+The first time you run the installer, it will also update the Raspberry PI OS to
+the latest version. This can take some more time.
 
-Make sure you select the **correct timezone**. This is your home timezone. If you do not select the correct timezone during installation, you could get strange time schedules when running TerrariumPI.
+Make sure you select the **correct timezone**. This is your home timezone. If
+you do not select the correct timezone during installation, you could get
+strange time schedules when running TerrariumPI.
 
 ```console
 cd TerrariumPI
@@ -135,18 +177,24 @@ sudo ./install.sh
   <source src="/TerrariumPI/assets/video/TerrariumPI_Install.mp4" type="video/mp4">
 </video>
 
-After the installation is done, reboot once and you should be able to access TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
+After the installation is done, reboot once and you should be able to access
+TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
 
 ## Upgrading
 
-Upgrading between minor versions is mostly running a few commands. Depending on a docker or manual installation, follow the steps below. After the upgrade is done, make sure you clear your browser cache. Else you can get the old interface or a broken interface.
+Upgrading between minor versions is mostly running a few commands. Depending on
+a docker or manual installation, follow the steps below. After the upgrade is
+done, make sure you clear your browser cache. Else you can get the old interface
+or a broken interface.
 
 ### Docker
 
-We assume you are use docker compose and at the folder where the `docker-compose.yaml` file is.
+We assume you are use docker compose and at the folder where the
+`docker-compose.yaml` file is.
 
 1. Stop the docker container: `docker compose stop`
-2. Change the version number in `docker-compose.yaml` and run `docker compose pull`
+2. Change the version number in `docker-compose.yaml` and run
+   `docker compose pull`
 3. Start the docker container: `docker compose up -d`
 
 And a new version should be running. A reboot is not needed.
@@ -164,21 +212,33 @@ And a new version should be running. A reboot is not needed.
 
 ## Migration from V3 to V4
 
-There is **no real migration** from version 3 to version 4. The changes are to big. So that means you have to install TerrariumPI v4 as it was a new PI. These migrations steps will only copy the _existing relay history data_ from V3 to V4 so that the total power and water usages is still there. And the total costs are still correct. This is all what will be migrated.
+There is **no real migration** from version 3 to version 4. The changes are to
+big. So that means you have to install TerrariumPI v4 as it was a new PI. These
+migrations steps will only copy the _existing relay history data_ from V3 to V4
+so that the total power and water usages is still there. And the total costs are
+still correct. This is all what will be migrated.
 
-If you do **not care** about your relay history, you can just skip this migration. This is the **only** data that will be migrated!
+If you do **not care** about your relay history, you can just skip this
+migration. This is the **only** data that will be migrated!
 
 ### Backup
 
-So make sure you have **stopped** the old TerrariumPI. And rename the folder `TerrariumPI` to `TerrariumPI.old`. This way you have a backup of your existing working setup.
+So make sure you have **stopped** the old TerrariumPI. And rename the folder
+`TerrariumPI` to `TerrariumPI.old`. This way you have a backup of your existing
+working setup.
 
-1. Stop TerrariumPI 3. [Wiki](https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-stop-terrariumpi)
+1. Stop TerrariumPI 3.
+   [Wiki](https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-stop-terrariumpi)
 
-2. Make a backup of existing version. `mv /home/pi/TerrariumPI /home/pi/TerrariumPI.old`
+2. Make a backup of existing version.
+   `mv /home/pi/TerrariumPI /home/pi/TerrariumPI.old`
 
 ### First setup
 
-Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need to set it up as you want. So that means adding at least all the relays you want to use/migrate. When that is done, shutdown TerrariumPI 4 and continue with the last migrations step.
+Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need
+to set it up as you want. So that means adding at least all the relays you want
+to use/migrate. When that is done, shutdown TerrariumPI 4 and continue with the
+last migrations step.
 
 ### Migrate
 
@@ -187,7 +247,8 @@ Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need
 - settings.cfg
 - history.db
 
-2. Stop the TerrariumPI service before start migrating. `sudo service terrariumpi stop`
+2. Stop the TerrariumPI service before start migrating.
+   `sudo service terrariumpi stop`
 
 3. Enter the new TerrariumPI V4 directory. `cd /home/pi/TerrariumPI`
 
@@ -195,13 +256,15 @@ Now, install TerrariumPI v4 as [described here](#terrariumpi). And then you need
 
 5. Enter the `contrib` folder where the file `copy_relay_history.py` is located.
 
-6. Run the script `copy_relay_history.py` with the following parameters in this order:
+6. Run the script `copy_relay_history.py` with the following parameters in this
+   order:
 
 - full path to OLD config (`settings.cfg`)
 - full path to OLD database (`history.db`)
 - full path to NEW database (`terrariumpi.db`)
 
-7. Answer the questions asked by the script. This should match your old and new relays, in order to copy the historical data.
+7. Answer the questions asked by the script. This should match your old and new
+   relays, in order to copy the historical data.
 
 ```console
 Found 7 out of 8 are found. Below is a summary of the founded relays that can converted.
@@ -221,4 +284,5 @@ If you are happy with this setup, you can continue with the conversion. This wil
 Enter 'yes' to continue. Anything else will abort.:
 ```
 
-Enter yes and wait. After the migration is done, you will see a message and you can then start the TerrariumPI service. `sudo service terrariumpi start`
+Enter yes and wait. After the migration is done, you will see a message and you
+can then start the TerrariumPI service. `sudo service terrariumpi start`

@@ -9,13 +9,27 @@ image:
   alt: 'MLX90614 IR Thermometer sensor header image'
 
 device_types: [temperature]
-device_address: '&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional, followed by either `,o` for object or `,a` for ambient temperature<br />Ex: `0x3f,1,o`'
+device_address:
+  '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
+  bus](/TerrariumPI/hardware#i2c-bus) is optional, followed by either `,o` for
+  object or `,a` for ambient temperature<br />Ex: `0x3f,1,o`'
 device_url: https://www.sparkfun.com/products/9570
 ---
 
 ## Information
 
-MLX90614 sensor is manufactured by Melexis Microelectronics Integrated system, it has two devices embedded in it, one is the infrared thermopile detector (sensing unit) and the other is a signal conditioning DSP device (computational unit). It works based on Stefan-Boltzmann law which states that all objects emits IR energy and the intensity of this energy will be directly proportional to the temperature of that object. The sensing unit in the sensor measures how much IR energy is emitted by a targeted object and the computational unit converts it into temperature value using a 17-bit in-built ADC and outputs the data through I2C communication protocol. The sensor measures both the object temperature and ambient temperature to calibrate the object temperature value. The features of MLX90614 sensor is given below, for more details refer the MLX90614 data-sheet.
+MLX90614 sensor is manufactured by Melexis Microelectronics Integrated system,
+it has two devices embedded in it, one is the infrared thermopile detector
+(sensing unit) and the other is a signal conditioning DSP device (computational
+unit). It works based on Stefan-Boltzmann law which states that all objects
+emits IR energy and the intensity of this energy will be directly proportional
+to the temperature of that object. The sensing unit in the sensor measures how
+much IR energy is emitted by a targeted object and the computational unit
+converts it into temperature value using a 17-bit in-built ADC and outputs the
+data through I2C communication protocol. The sensor measures both the object
+temperature and ambient temperature to calibrate the object temperature value.
+The features of MLX90614 sensor is given below, for more details refer the
+MLX90614 data-sheet.
 
 ### Features
 

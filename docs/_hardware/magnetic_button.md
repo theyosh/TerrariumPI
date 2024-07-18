@@ -8,17 +8,29 @@ image:
   src: /assets/img/Magnetic.webp
   alt: 'Magnetic (door) button header image'
 
-device_address: 'Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the device is connected<br />Ex: `27`<br />Or when used with an [IO expander](/TerrariumPI/hardware/io-expander/) use format: pcf857[4/5]-[IO-expander-port],[I2C_address],[I2C_buss] where I2C_buss is optional<br />Ex:`pcf8575-9,0x4c,3`'
+device_address:
+  'Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the
+  device is connected<br />Ex: `27`<br />Or when used with an [IO
+  expander](/TerrariumPI/hardware/io-expander/) use format:
+  pcf857[4/5]-[IO-expander-port],[I2C_address],[I2C_buss] where I2C_buss is
+  optional<br />Ex:`pcf8575-9,0x4c,3`'
 device_url: https://www.ryansouthgate.com/2015/08/10/raspberry-pi-door-sensor/
 ---
 
 ## Information
 
-This simple door switch is based on a magnet and a reed switch. The magnet and the reed switch are both encased in ABS plastic with handy mounting holes. These sensors are commonly seen in consumer alarm systems and make an ideal addition to any Arduino or Raspberry Pi based alarm system.
+This simple door switch is based on a magnet and a reed switch. The magnet and
+the reed switch are both encased in ABS plastic with handy mounting holes. These
+sensors are commonly seen in consumer alarm systems and make an ideal addition
+to any Arduino or Raspberry Pi based alarm system.
 
-The reed switch is simply a magnetic activated switch, as long as a magnet is close to it the reed switch will remain closed. Once the magnet is removed, the switch opens, breaking the circuit. The reed switch can handle a maximum of 100mA and a maximum of 200VDC.
+The reed switch is simply a magnetic activated switch, as long as a magnet is
+close to it the reed switch will remain closed. Once the magnet is removed, the
+switch opens, breaking the circuit. The reed switch can handle a maximum of
+100mA and a maximum of 200VDC.
 
-Each half of the sensor can be mounted with screws or the included adhesive backing.
+Each half of the sensor can be mounted with screws or the included adhesive
+backing.
 
 ### Features
 

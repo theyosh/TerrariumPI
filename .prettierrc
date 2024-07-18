@@ -5,10 +5,24 @@
   "tabWidth": 2,
   "useTabs": false,
   "plugins": ["prettier-plugin-svelte"],
-  "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }],
   "svelteSortOrder": "options-styles-scripts-markup",
   "svelteStrictMode": true,
-  "svelteAllowShorthand" : true,
+  "svelteAllowShorthand": true,
   "bracketSameLine": false,
-  "svelteIndentScriptAndStyle": true
+  "svelteIndentScriptAndStyle": true,
+  "overrides": [
+    {
+      "files": "*.svelte",
+      "options": {
+        "parser": "svelte"
+      }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "printWidth": 80,
+        "proseWrap": "always"
+      }
+    }
+  ]
 }

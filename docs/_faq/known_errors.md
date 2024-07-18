@@ -4,7 +4,8 @@ categories: [Website, FAQ]
 tags: [errors]
 ---
 
-The software can produce some warning and deprecation messages. And here is a list of known messages which you can ignore.
+The software can produce some warning and deprecation messages. And here is a
+list of known messages which you can ignore.
 
 ## Bottle
 
@@ -13,4 +14,5 @@ The software can produce some warning and deprecation messages. And here is a li
   fname = self.search(name, self.lookup)
 ```
 
-This message is very old, and TerrariumPI does not use bottle template engines. So this message can be ignored.
+This message is very old, and TerrariumPI does not use bottle template engines.
+So this message can be ignored.

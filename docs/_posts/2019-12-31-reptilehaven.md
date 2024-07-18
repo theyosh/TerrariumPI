@@ -10,5 +10,7 @@ image:
   alt: TerrariumPI on Reptile Haven
 ---
 
-Website: [Reptile Haven](https://reptilehaven.org/index.php/2020/03/01/terrariumpi-tutorial/)\
-Publication date: 31 december 2019
+Website:
+[Reptile Haven](https://reptilehaven.org/index.php/2020/03/01/terrariumpi-tutorial/)\
+Publication
+date: 31 december 2019

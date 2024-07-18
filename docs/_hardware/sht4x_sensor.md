@@ -9,15 +9,26 @@ image:
   alt: 'Sensirion SHT4X sensor header image'
 
 device_types: [temperature, humidity]
-device_address: '&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x44`'
+device_address:
+  '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
+  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x44`'
 device_url: https://www.pibits.net/code/raspberry-pi-sht31-sensor-example.php
 ---
 
 ## Information
 
-Sensirion Temperature/Humidity sensors are some of the finest & highest-accuracy devices you can get. And finally, we have some that have a true I2C interface for easy reading. The SHT40 sensor is the fourth generation (started at the SHT10 and worked its way up to the top!). The SHT40 has an excellent ±1.8% typical relative humidity accuracy from 25 to 75% and ±0.2 °C typical accuracy from 0 to 75 °C.
+Sensirion Temperature/Humidity sensors are some of the finest & highest-accuracy
+devices you can get. And finally, we have some that have a true I2C interface
+for easy reading. The SHT40 sensor is the fourth generation (started at the
+SHT10 and worked its way up to the top!). The SHT40 has an excellent ±1.8%
+typical relative humidity accuracy from 25 to 75% and ±0.2 °C typical accuracy
+from 0 to 75 °C.
 
-Unlike some earlier SHT sensors, this sensor has a true I2C interface for easy interfacing with only two wires (plus power and ground!). Thanks to the voltage regulator and level shifting circuitry we've included on the breakout It is also is 3V or 5V compliant, so you can power and communicate with it using any micro controller or microcomputer.
+Unlike some earlier SHT sensors, this sensor has a true I2C interface for easy
+interfacing with only two wires (plus power and ground!). Thanks to the voltage
+regulator and level shifting circuitry we've included on the breakout It is also
+is 3V or 5V compliant, so you can power and communicate with it using any micro
+controller or microcomputer.
 
 ### Features
 

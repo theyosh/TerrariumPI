@@ -9,7 +9,8 @@ image:
   alt: Scenery header image
 ---
 
-On this page you can find various information on how to setup areas and create scenarios.
+On this page you can find various information on how to setup areas and create
+scenarios.
 
 <h2 id="timer-wizard">Timer wizard</h2>
 <p>Using the <code class="language-plaintext highlighter-rouge">weather</code> or <code class="language-plaintext highlighter-rouge">timer</code> mode in an area, you can set the following 6 fields. The minimal fields that needs to be entered are the <code class="language-plaintext highlighter-rouge">begin</code> and <code class="language-plaintext highlighter-rouge">end</code> time field. All other fields are optional. Using a value of '' or 0 will ignore the setting. Change some values in the form to see the outcome of the timer schedule.<p>

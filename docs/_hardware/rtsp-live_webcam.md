@@ -14,6 +14,7 @@ device_address: 'Enter the device rtsp url<br />Ex: `rtsp://server.lan/stream`'
 
 ## Information
 
-Any RTSP camera can be used. It will try to transcode through the video GPU to a HLS live stream
+Any RTSP camera can be used. It will try to transcode through the video GPU to a
+HLS live stream
 
 {% include_relative _webcam_detail.md %}

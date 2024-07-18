@@ -8,7 +8,9 @@ image:
   src: /assets/img/i2c_4ch-dimmer.webp
   alt: 'I2C 4Channels LED AC Dimmer header image'
 
-device_address: '&lt;relay_number&gt;,&lt;I2C Address&gt;,[I2C Bus] where the [I2C bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `1,0x70`'
+device_address:
+  '&lt;relay_number&gt;,&lt;I2C Address&gt;,[I2C Bus] where the [I2C
+  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `1,0x70`'
 device_url: https://www.tindie.com/products/bugrovs2012/i2c-4ch-ac-led-dimmer-module/
 ---
 
@@ -16,7 +18,9 @@ device_url: https://www.tindie.com/products/bugrovs2012/i2c-4ch-ac-led-dimmer-mo
 
 Only 4 wires are needed to control this board !
 
-With this module, you can control the intensity of incandescent lamps, LED dimmable bulbs, power heating elements or fan speed controlled through a micro controller or Arduino/Raspberry boards.
+With this module, you can control the intensity of incandescent lamps, LED
+dimmable bulbs, power heating elements or fan speed controlled through a micro
+controller or Arduino/Raspberry boards.
 
 Compatible with any Arduino, Raspberry or micro controller.
 

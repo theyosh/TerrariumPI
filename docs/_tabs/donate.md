@@ -9,7 +9,8 @@ image:
   alt: Donations header image
 ---
 
-If you like to donate me for developing this software, you are free to do so and is highly appreciated.
+If you like to donate me for developing this software, you are free to do so and
+is highly appreciated.
 
 You can donate through:
 
@@ -24,8 +25,8 @@ You can donate through:
   <input type="image" src="https://www.paypalobjects.com/en_US/NL/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
   </form>
 
-- Monero: 42wnSZopYj52kwQFM9sNaZRaCmoT3Q9MEFKKsbbgqfD6CpwQM3RwLTp2jLPiB35EX7NEZLSvk2TrMi7WTcxvGps4LrtPPj5
-- Ether:
-  0x2Fcb59770A31611aad9C25E04a6bA52E7b8E8437
+- Monero:
+  42wnSZopYj52kwQFM9sNaZRaCmoT3Q9MEFKKsbbgqfD6CpwQM3RwLTp2jLPiB35EX7NEZLSvk2TrMi7WTcxvGps4LrtPPj5
+- Ether: 0x2Fcb59770A31611aad9C25E04a6bA52E7b8E8437
 
 Thanks!

@@ -8,15 +8,27 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
+Software for cheap home automation of your reptile terrarium or any other
+enclosed environment. With this software you are able to control for example a
+terrarium so that the temperature and humidity is of a constant value.
+Controlling the temperature can be done with heat lights, external heating or
+cooling system. As long as there is one temperature sensor available the
+software is able to keep a constant temperature.
 
-For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minimal period between two spray actions. Use at least one humidity sensors to get a constant humidity value. In order to lower the humidity you can add a dehumidifier.
+For humidity control there is support for a spraying system. The sprayer can be
+configured to spray for an X amount of seconds and there is a minimal period
+between two spray actions. Use at least one humidity sensors to get a constant
+humidity value. In order to lower the humidity you can add a dehumidifier.
 
-The software is that flexible that there is no limit in amount of sensors, relay boards or door sensors. The usage can be endless. All power switches have support for timers to trigger based on a time pattern.
+The software is that flexible that there is no limit in amount of sensors, relay
+boards or door sensors. The usage can be endless. All power switches have
+support for timers to trigger based on a time pattern.
 
-If you are using this software for your animals or plants, **[please post some pictures](https://github.com/theyosh/TerrariumPI/issues/210)**
+If you are using this software for your animals or plants,
+**[please post some pictures](https://github.com/theyosh/TerrariumPI/issues/210)**
 
-**Full documentation** can be found at [https://theyosh.github.io/TerrariumPI/](https://theyosh.github.io/TerrariumPI/)
+**Full documentation** can be found at
+[https://theyosh.github.io/TerrariumPI/](https://theyosh.github.io/TerrariumPI/)
 
 **Contact** https://matrix.to/#/#terrariumpi:theyosh.nl
 
@@ -27,7 +39,9 @@ Think off:
 - Tanks with animals or plants
 - Greenhouse
 
-And all this is controlled with a nice web interface with [AdminLTE 3](https://adminlte.io/) based on Bootstrap 4 made interactive with [Svelte 4](https://svelte.dev/).
+And all this is controlled with a nice web interface with
+[AdminLTE 3](https://adminlte.io/) based on Bootstrap 4 made interactive with
+[Svelte 4](https://svelte.dev/).
 
 ## Table of Contents
 
@@ -46,21 +60,27 @@ And all this is controlled with a nice web interface with [AdminLTE 3](https://a
 
 ## Features
 
-- Controlling electronic devices like lights, sprayers, heating, cooling, water pump equipment etc
+- Controlling electronic devices like lights, sprayers, heating, cooling, water
+  pump equipment etc
 - Support for dimming electronic devices
   - Manual dimming through web interface
   - Predefined on and off dimming durations
   - Predefined on and off dimming percentages
   - Predefined dimming steps for environment system (heater and cooler)
-- Support for timers in power switches and environment [#72](https://github.com/theyosh/TerrariumPI/issues/72)
+- Support for timers in power switches and environment
+  [#72](https://github.com/theyosh/TerrariumPI/issues/72)
   - Predefined start and stop times based on timer or weather
   - Predefined on and off durations in minutes
-- Support for Energenie USB, LAN and RF power switches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
+- Support for Energenie USB, LAN and RF power switches
+  [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
 - Support for WeMo Wifi power switches
-- Support for [Meross MSS425E Power Switches](https://www.meross.com/product/16/article/) (Requires Python 3 setup)
+- Support for
+  [Meross MSS425E Power Switches](https://www.meross.com/product/16/article/)
+  (Requires Python 3 setup)
 - Support for Sonoff remote power devices
   - [Tasmota](https://github.com/arendst/Sonoff-Tasmota)
-- Support for [multiple type of sensors](https://theyosh.github.io/TerrariumPI/hardware/#sensors)
+- Support for
+  [multiple type of sensors](https://theyosh.github.io/TerrariumPI/hardware/#sensors)
   - Temperature
   - Humidity
   - Moisture
@@ -83,23 +103,30 @@ And all this is controlled with a nice web interface with [AdminLTE 3](https://a
 - Rain control based on humidity sensors and timers
 - Temperature control based on temperature sensors or timers
   - Variable day and night difference for min and max temperature
-- Water tank level control based on ultrasonic sound range sensors or volume sensors
+- Water tank level control based on ultrasonic sound range sensors or volume
+  sensors
 - Weather forecast from external source for lighting schema
   - Supports <https://openweathermap.org>
 - Temperatures in Celsius or Fahrenheit
 - Distances in centimeters or inches
 - Alarm detections
-- Audio support through internal audio jack or USB sound cards [#42](https://github.com/theyosh/TerrariumPI/issues/42)
+- Audio support through internal audio jack or USB sound cards
+  [#42](https://github.com/theyosh/TerrariumPI/issues/42)
   - Create playlists (loop and repeat)
   - Volume control in the web interface
   - Uploading audio files through web interface
   - Audio meta data support (mediainfo)
-- Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://theyosh.github.io/TerrariumPI/faq/how-to-use-remote-data/).
+- Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data
+  format can be found on
+  [Remote data wiki](https://theyosh.github.io/TerrariumPI/faq/how-to-use-remote-data/).
 - Display support
-  - LCD 16x2 or 20x4 screens either through I2C or [Serial](https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/)
+  - LCD 16x2 or 20x4 screens either through I2C or
+    [Serial](https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/)
   - OLED based on SSD1306
-- Calendar system when hardware is replacement and when new hardware needs to be installed
-- Notifications system. Custom messages for custom actions with use of variables in the messages
+- Calendar system when hardware is replacement and when new hardware needs to be
+  installed
+- Notifications system. Custom messages for custom actions with use of variables
+  in the messages
   - Get notifications through
     - Email
     - Display
@@ -111,7 +138,8 @@ And all this is controlled with a nice web interface with [AdminLTE 3](https://a
     - Open and close doors
     - System error and warning messages
 
-It is currently controling my reptile terrarium since **2015**! And my Madagascar Day Gecko is very happy with it!
+It is currently controling my reptile terrarium since **2015**! And my
+Madagascar Day Gecko is very happy with it!
 
 ## Translations
 
@@ -119,18 +147,26 @@ The software has support for the following languages:
 
 [![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/multi-auto.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
 
-Your language not in the list or not up to date? [Create your own language translation](https://theyosh.github.io/TerrariumPI/translations/)
+Your language not in the list or not up to date?
+[Create your own language translation](https://theyosh.github.io/TerrariumPI/translations/)
 
 ## Installation
 
 ### Base
 
-The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite **Legacy**](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy). Desktop images will not work. Installation seems to work, but it will not work stable. So make sure you download the correct image for the Pi.
-It is possible to use USB or SSD drives to speed things up: <https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb>
+The installation expects a Pi with working network and ssh. It is tested with
+[Raspberry Pi OS Lite **Legacy**](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy).
+Desktop images will not work. Installation seems to work, but it will not work
+stable. So make sure you download the correct image for the Pi. It is possible
+to use USB or SSD drives to speed things up:
+<https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb>
 
 ### Docker
 
-There is a Docker image which can be used instead of the source code. This should make the installation a bit more easier. More information can be found at: [https://theyosh.github.io/TerrariumPI/install/#docker](https://theyosh.github.io/TerrariumPI/install/#docker)
+There is a Docker image which can be used instead of the source code. This
+should make the installation a bit more easier. More information can be found
+at:
+[https://theyosh.github.io/TerrariumPI/install/#docker](https://theyosh.github.io/TerrariumPI/install/#docker)
 
 You can skip the manual installation part.
 
@@ -148,19 +184,27 @@ You can skip the manual installation part.
    `sudo ./install.sh`
 6. Reboot Raspberry PI to get all the needed modules loaded \
    `sudo reboot` (if done manual)
-7. Go to the web interface at <http://[raspberry_ip>]:8090 (login: **admin/password**)
+7. Go to the web interface at <http://[raspberry_ip>]:8090 (login:
+   **admin/password**)
 
-All needed options and modules are setup by the installer script. This means that I2C and 1Wire overlay are enabled by default.
+All needed options and modules are setup by the installer script. This means
+that I2C and 1Wire overlay are enabled by default.
 
-Make sure that your Pi is secured when you put it to the Internet. Would be a shame if TerrariumPI gets next victim of '[A smart fish tank left a casino vulnerable to hackers](http://money.cnn.com/2017/07/19/technology/fish-tank-hack-darktrace/index.html)' :P
+Make sure that your Pi is secured when you put it to the Internet. Would be a
+shame if TerrariumPI gets next victim of
+'[A smart fish tank left a casino vulnerable to hackers](http://money.cnn.com/2017/07/19/technology/fish-tank-hack-darktrace/index.html)'
+:P
 
 ## Updating
 
-This updating is based on that the software is installed with the steps in the Installation above. When updating between release versions it will take more time due to database updates and cleanups. This can be seen in the log file.
+This updating is based on that the software is installed with the steps in the
+Installation above. When updating between release versions it will take more
+time due to database updates and cleanups. This can be seen in the log file.
 
 ### Docker
 
-Stop the running container and pull the new image. Then you can start the container again.
+Stop the running container and pull the new image. Then you can start the
+container again.
 
 ### Manual
 
@@ -174,15 +218,19 @@ Stop the running container and pull the new image. Then you can start the contai
    `sudo ./install.sh`
 5. Restart TerrariumPI: `sudo service terrariumpi restart`
 
-Now **clear your browser cache** and reload the web interface. A brand new version should be running.
+Now **clear your browser cache** and reload the web interface. A brand new
+version should be running.
 
 ## Hardware
 
-This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimum and tested hardware is
+This software requires a Raspberry Pi and some extra hardware in order to run
+and work. The bare minimum and tested hardware is
 
-- Raspberry PI with at least **4GB SD card** running [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/).
+- Raspberry PI with at least **4GB SD card** running
+  [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/).
   - Zero (Should work/At own risk/limited support)
-  - [Zero 2W](https://github.com/theyosh/TerrariumPI/issues/823#issuecomment-1693236850) (Should work/At own risk/limited support)
+  - [Zero 2W](https://github.com/theyosh/TerrariumPI/issues/823#issuecomment-1693236850)
+    (Should work/At own risk/limited support)
   - Pi 2 (Should work/At own risk/limited support)
   - Pi 3 (Works/full support)
   - Pi 4 (Works/full support)
@@ -191,7 +239,8 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
   - USB versions (Serial and Bitbang)
   - GPIO versions
   - PWM Dimmer versions
-- Temperature/humidity/ultrasonic/PH sensors DHT11, DHT22, AM2303, DS1820, HIH4000, HC-SR04, SEN0161, etc through
+- Temperature/humidity/ultrasonic/PH sensors DHT11, DHT22, AM2303, DS1820,
+  HIH4000, HC-SR04, SEN0161, etc through
   - OWFS
   - GPIO
   - 1 Wire interface
@@ -201,21 +250,34 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
 
 ### GPIO numbering
 
-All hardware that connects to the GPIO pins use **Physical GPIO numbering** (1 - 40). The software will translate it to BCM if needed for a supported device or sensor. [More information about GPIO pin numbering](https://pinout.xyz/)
+All hardware that connects to the GPIO pins use **Physical GPIO numbering** (1 -
+40). The software will translate it to BCM if needed for a supported device or
+sensor. [More information about GPIO pin numbering](https://pinout.xyz/)
 
-For the analog devices use numbers of the channel on the analog device which is from 0 to 7 (8 channels). Also the software expect the analog MCP3008 on GPIO ports 19,21,23,24 physical (default). [More information about GPIO pin numbering](https://pinout.xyz/)
+For the analog devices use numbers of the channel on the analog device which is
+from 0 to 7 (8 channels). Also the software expect the analog MCP3008 on GPIO
+ports 19,21,23,24 physical (default).
+[More information about GPIO pin numbering](https://pinout.xyz/)
 
 ### New hardware
 
-If there is some other hardware which is not working with TerrariumPI, open an issue on [Github](https://github.com/theyosh/TerrariumPI/issues) and we will try to support it. We can only test it on a Raspberry PI 4.
+If there is some other hardware which is not working with TerrariumPI, open an
+issue on [Github](https://github.com/theyosh/TerrariumPI/issues) and we will try
+to support it. We can only test it on a Raspberry PI 4.
 
 ## Remote data
 
-It is possible to use external sensor data that is available through HTTP(S) in JSON format. This way you can combine multiple Raspberry Pi's with TerrariumPI running to one single system. By using multiple Raspberry PI's you can cover a bigger area. But there are limitations.
+It is possible to use external sensor data that is available through HTTP(S) in
+JSON format. This way you can combine multiple Raspberry Pi's with TerrariumPI
+running to one single system. By using multiple Raspberry PI's you can cover a
+bigger area. But there are limitations.
 
-Currently it is READONLY. So you can read out remote sensors and switches but you cannot control the remote switches. But this way you can combine the power switches total costs and power usage.
+Currently it is READONLY. So you can read out remote sensors and switches but
+you cannot control the remote switches. But this way you can combine the power
+switches total costs and power usage.
 
-more information is here: [Remote data wiki](https://theyosh.github.io/TerrariumPI/faq/how-to-use-remote-data/)
+more information is here:
+[Remote data wiki](https://theyosh.github.io/TerrariumPI/faq/how-to-use-remote-data/)
 
 ## Contributors
 
@@ -258,7 +320,8 @@ more information is here: [Remote data wiki](https://theyosh.github.io/Terrarium
 
 ![TerrariumPI 4.0 MOTD screenshot](screenshots/terrariumpi-motd.webp)
 
-More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/main/screenshots)
+More screenshots can be found
+[here](https://github.com/theyosh/TerrariumPI/tree/main/screenshots)
 
 ## Testing
 
@@ -267,4 +330,5 @@ More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree
 
 ## About
 
-A live version is running at: <https://terrarium.theyosh.nl/index.html>. Go to 'Help' menu for more information about used hardware, software and how to setup.
+A live version is running at: <https://terrarium.theyosh.nl/index.html>. Go to
+'Help' menu for more information about used hardware, software and how to setup.

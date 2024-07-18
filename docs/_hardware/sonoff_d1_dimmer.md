@@ -14,7 +14,9 @@ device_url: https://tasmota.github.io/docs/
 
 ## Information
 
-Total local control with quick setup and updates. Control using MQTT, Web UI, HTTP or serial. Automate using timers, rules or scripts. Integration with home automation solutions. Incredibly expandable and flexible.
+Total local control with quick setup and updates. Control using MQTT, Web UI,
+HTTP or serial. Automate using timers, rules or scripts. Integration with home
+automation solutions. Incredibly expandable and flexible.
 
 **[It needs to be flashed with Tasmota firmware!](https://notenoughtech.com/home-automation/tasmotizer/)**
 

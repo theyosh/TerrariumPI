@@ -4,7 +4,9 @@ categories: [Website, FAQ]
 tags: [database, gui, address, port, listening]
 ---
 
-If you have configured a fixed IP as address and your PI has changed the IP due to a network change, the TerrariumPI software will not load the web gui. The system is still running, but you are unable to access the webgui.
+If you have configured a fixed IP as address and your PI has changed the IP due
+to a network change, the TerrariumPI software will not load the web gui. The
+system is still running, but you are unable to access the webgui.
 
 An error could look like:
 
@@ -40,7 +42,8 @@ Traceback (most recent call last):
 OSError: [Errno 99] Cannot assign requested address: ('192.168.1.2', 8090)
 ```
 
-The solution for this is to reset the IP address that was entered. Here are the steps to fix it.
+The solution for this is to reset the IP address that was entered. Here are the
+steps to fix it.
 
 1. Stop TerrariumPI: `sudo service terrariumpi stop`
 2. Enter the TerrariumPI folder: `cd /home/pi/TerrariumPI/`
@@ -61,4 +64,5 @@ sqlite> DELETE FROM Setting WHERE id = 'port';
 sqlite>
 ```
 
-When TerrariumPI is started up, you should be able to access the web gui again on the new IP of the Raspberry PI
+When TerrariumPI is started up, you should be able to access the web gui again
+on the new IP of the Raspberry PI

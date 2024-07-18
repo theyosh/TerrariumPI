@@ -17,6 +17,7 @@ device_url: https://projects.raspberrypi.org/en/projects/getting-started-with-pi
 
 You can use the official Raspberry PI camera module to setup a webcam.
 
-Using as a still picture webcam, the maximum resolution is: **3280** x **2464** pixels
+Using as a still picture webcam, the maximum resolution is: **3280** x **2464**
+pixels
 
 {% include_relative _webcam_detail.md %}

@@ -4,7 +4,9 @@ categories: [Website, FAQ]
 tags: [backup]
 ---
 
-If you have made regular backups, than you can restore it with the following steps. If the backup has become corrupted, follow [these]({% link _faq/malformed_database.md %}) steps first.
+If you have made regular backups, than you can restore it with the following
+steps. If the backup has become corrupted, follow
+[these]({% link _faq/malformed_database.md %}) steps first.
 
 - [Shutdown]({% link _faq/systemd.md %}#stop) TerrariumPI
 - Remove the old files in `data` if there are any. `rm data/*`

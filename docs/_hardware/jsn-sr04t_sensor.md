@@ -9,13 +9,16 @@ image:
   alt: 'JSN-SR04T ultrasonic ranging sensor header image'
 
 device_types: [distance]
-device_address: 'Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the `trigger` and `echo` pins are connected in that order<br />Ex: `27,23`'
+device_address:
+  'Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the
+  `trigger` and `echo` pins are connected in that order<br />Ex: `27,23`'
 device_url: https://raspberrypi.stackexchange.com/a/81793
 ---
 
 ## Information
 
-This water proof ultrasonic sensor has good performance with almost the same usage as the HC-S04 module.
+This water proof ultrasonic sensor has good performance with almost the same
+usage as the HC-S04 module.
 
 Features
 
@@ -23,7 +26,8 @@ Features
 - Low voltage, low power consumption
 - High accuracy
 - Strong anti-jamming
-- Integrated with wire enclosed waterproof probe, suitable for wet, harsh measurement environments
+- Integrated with wire enclosed waterproof probe, suitable for wet, harsh
+  measurement environments
 
 ![SR04 Connect diagram](/assets/img/SR04-connect.webp){: .right width="200" }
 

@@ -15,12 +15,14 @@ device_auto_detect: true
 
 ## Information
 
-Bluetooth ® Energy Cost-Meter SEM 6000
-Highlights & Details
+Bluetooth ® Energy Cost-Meter SEM 6000 Highlights & Details
 
-- Precise measurement and display of power consumption and power factor of up to 3 decimal places
+- Precise measurement and display of power consumption and power factor of up to
+  3 decimal places
 - LED ring changes the color depending on the measured performance
-- Comfortable control of timer and schedule functions using the free iOS and Android App
-- Additional features such as programmable on and off, timer, remote control via your mobile device and anti-burglary- Mode
+- Comfortable control of timer and schedule functions using the free iOS and
+  Android App
+- Additional features such as programmable on and off, timer, remote control via
+  your mobile device and anti-burglary- Mode
 
 {% include_relative _relay_detail.md %}
