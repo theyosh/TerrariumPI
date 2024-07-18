@@ -222,9 +222,7 @@ class terrariumWebserver(object):
 
         headers = {"Authorization": f"Client-ID {access_key}"}
         query_params = {"query": query_string, "orientation": "landscape"}
-        background_image = requests.get(
-            "https://api.unsplash.com/photos/random/", params=query_params, headers=headers
-        )
+        background_image = requests.get("https://api.unsplash.com/photos/random/", params=query_params, headers=headers)
 
         if background_image.ok:
             background_image = background_image.json()
