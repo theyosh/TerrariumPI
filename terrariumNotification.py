@@ -2654,7 +2654,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
     async def help(self, update, context):
         if await self._authenticate(update.message):
             await update.message.reply_text(
-                f"""The following commands are supported:
+                """The following commands are supported:
 
 /start : This will start listening for notifications.
 /webcam [webcam_id] : will show the latest image of the webcam ID.
@@ -2668,7 +2668,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
     # function to handle normal text
     async def text(self, update, context):
         if await self._authenticate(update.message):
-            await update.message.reply_text(f"Sorry, no conversations...")
+            await update.message.reply_text("Sorry, no conversations...")
 
     # function to handle errors ocurred in the dispatcher
     async def error(self, update, context):
@@ -2688,7 +2688,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         try:
             await self.telegram_bot.initialize()
             await self.telegram_bot.start()
-            logger.info(f"Connected to Telegram")
+            logger.info("Connected to Telegram")
             await self.telegram_bot.updater.start_polling()
         except InvalidToken as ex:
             logger.error(f"Error starting Telegram bot: {ex}")
@@ -2786,7 +2786,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         if self.__thread is not None:
             self.__thread.join()
 
-        logger.info(f"Disconnected from Telegram")
+        logger.info("Disconnected from Telegram")
 
     def send_message(self, _, subject, message, data=None, attachments=[]):
         async def _send_message(subject, message, data=None, attachments=[]):
