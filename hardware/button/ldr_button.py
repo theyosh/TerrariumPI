@@ -42,7 +42,7 @@ class terrariumLDRSensor(terrariumButton):
                 self._device["internal_state"] = self.PRESSED if count <= (self.__CAPACITOR * 10000) else self.RELEASED
                 sleep(0.1)
 
-            except KeyboardInterrupt as ex:
+            except KeyboardInterrupt:
                 self.stop()
 
     #                print(f"Fetch CTRL-c... and now what..? For now.. press again Ctrl-C .. ({ex})")

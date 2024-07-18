@@ -2329,7 +2329,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
                     self.connection = mqtt.Client(
                         mqtt.CallbackAPIVersion.VERSION1, client_id=f"TerrariumPI {self.setup['version']}"
                     )
-                except Exception as ex:
+                except Exception:
                     # Old version
                     self.connection = mqtt.Client(client_id=f"TerrariumPI {self.setup['version']}")
 

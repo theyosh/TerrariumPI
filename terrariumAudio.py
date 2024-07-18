@@ -54,7 +54,7 @@ class terrariumAudio(object):
                 # Try to 'overload' the volume by 20%. Can work for some sound cards
                 value = int(max(0, min(120, 120 * (value / 100))))
                 mixer.setvolume(value, alsaaudio.MIXER_CHANNEL_ALL)
-            except alsaaudio.ALSAAudioError as ex:
+            except alsaaudio.ALSAAudioError:
                 try:
                     # When the 'overloaded' value is to high, fall back to normal max volume
                     value = int(max(0, min(100, value)))

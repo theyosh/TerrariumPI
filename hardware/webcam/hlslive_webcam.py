@@ -3,9 +3,6 @@ import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from io import BytesIO
-import subprocess
-
 from . import terrariumWebcam
 from terrariumUtils import terrariumUtils
 

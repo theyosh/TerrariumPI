@@ -3,7 +3,6 @@ import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from operator import itemgetter
 import copy
 import datetime
 import time

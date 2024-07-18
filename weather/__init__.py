@@ -56,7 +56,6 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
             self._device["last_update"] is None
             or (datetime.now() - self._device["last_update"]).total_seconds() > self.__UPDATE_TIMEOUT
         ):
-            start = time.time()
             logger.debug(f"Loading online weather data from source: {self.address}")
 
             if self._load_data():
