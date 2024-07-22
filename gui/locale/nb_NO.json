@@ -1628,6 +1628,11 @@
           "label": "Ons",
           "placeholder": "Dato og tid"
         },
+        "sender": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
         "show_title": {
           "help": "Vis navn og versjon som tittel på skjermen.",
           "label": "Vis tittel"

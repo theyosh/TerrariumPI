@@ -1573,6 +1573,11 @@
           "label": "Rojo",
           "placeholder": "Ingrese el pin Red GPIO"
         },
+        "sender": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
         "show_title": {
           "help": "Muestre un nombre y versión como título en la pantalla.",
           "label": "Mostrar título"

@@ -1628,6 +1628,11 @@
           "label": "Rood",
           "placeholder": "Voer de rode GPIO pin nummer in"
         },
+        "sender": {
+          "help": "",
+          "label": "Afzender adres",
+          "placeholder": ""
+        },
         "show_title": {
           "help": "Toon een naam en versie als titel op het display.",
           "label": "Titel weergeven"

@@ -1628,6 +1628,11 @@
           "label": "Vermell",
           "placeholder": "Introduïu el pin GPIO vermell"
         },
+        "sender": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
         "show_title": {
           "help": "Mostra un nom i una versió com a títol a la pantalla.",
           "label": "Títol de l'espectacle"

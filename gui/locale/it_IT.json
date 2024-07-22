@@ -1628,6 +1628,11 @@
           "label": "Mer",
           "placeholder": "Data e ora"
         },
+        "sender": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
         "show_title": {
           "help": "Mostra il nome e la versione come titolo sul display.",
           "label": "Mostra il titolo"

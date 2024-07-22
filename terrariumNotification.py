@@ -530,10 +530,15 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
         self.setup = {
             "address": setup_data.get("address"),
             "port": int(setup_data.get("port", 25)),
-            "receiver": setup_data.get("receiver", "").split(","),
             "username": setup_data.get("username"),
             "password": setup_data.get("password"),
+            "sender"  : setup_data.get("sender"),
+            "receiver": setup_data.get("receiver", "").split(","),
         }
+
+        if self.setup['sender'] is None:
+            self.setup['sender'] = re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", self.setup['receiver'][0], 0, re.MULTILINE)
+
         super().load_setup(setup_data)
 
     def send_message(self, msg_type, subject, message, data=None, attachments=[]):
@@ -544,39 +549,41 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
         htmlbody = '<html><head><title>{}</title></head><body><img src="cid:{}" alt="Profile image" title="Profile image" align="right" style="max-width:300px;border-radius:25%;">{}</body></html>'
 
         for receiver in self.setup["receiver"]:
+            email_message = emails.Message(
+                headers={"X-Mailer": "TerrariumPI version {}".format(self.setup["version"])},
+                html=htmlbody.format(
+                    subject, os.path.basename(self.setup["profile_image"]), message.replace("\n", "<br />")
+                ),
+                text=message,
+                subject=subject,
+                mail_from=("TerrariumPI", self.setup['sender']),
+            )
+
+            profile_image_path = ("public/" if self.setup["profile_image"].startswith("img/") else "") + self.setup[
+                "profile_image"
+            ]
+            try:
+                with open(profile_image_path, "rb") as fp:
+                    profile_image = fp.read()
+                    email_message.attach(
+                        filename=os.path.basename(self.setup["profile_image"]),
+                        content_disposition="inline",
+                        data=profile_image,
+                    )
+            except FileNotFoundError:
+                logger.warning(f"Profile image at location {profile_image_path} does not exists.")
+
+            for attachment in attachments:
+                try:
+                    with open(attachment, "rb") as fp:
+                        attachment_data = fp.read()
+                        email_message.attach(filename=os.path.basename(attachment), data=attachment_data)
+                except FileNotFoundError:
+                    pass
+
+
             mail_tls_ssl = ["tls", "ssl", None]
             while not len(mail_tls_ssl) == 0:
-                email_message = emails.Message(
-                    headers={"X-Mailer": "TerrariumPI version {}".format(self.setup["version"])},
-                    html=htmlbody.format(
-                        subject, os.path.basename(self.setup["profile_image"]), message.replace("\n", "<br />")
-                    ),
-                    text=message,
-                    subject=subject,
-                    mail_from=("TerrariumPI", re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE)),
-                )
-
-                profile_image_path = ("public/" if self.setup["profile_image"].startswith("img/") else "") + self.setup[
-                    "profile_image"
-                ]
-                try:
-                    with open(profile_image_path, "rb") as fp:
-                        profile_image = fp.read()
-                        email_message.attach(
-                            filename=os.path.basename(self.setup["profile_image"]),
-                            content_disposition="inline",
-                            data=profile_image,
-                        )
-                except FileNotFoundError:
-                    logger.warning(f"Profile image at location {profile_image_path} does not exists.")
-
-                for attachment in attachments:
-                    try:
-                        with open(attachment, "rb") as fp:
-                            attachment_data = fp.read()
-                            email_message.attach(filename=os.path.basename(attachment), data=attachment_data)
-                    except FileNotFoundError:
-                        pass
 
                 smtp_settings = {"host": self.setup["address"], "port": self.setup["port"]}
 

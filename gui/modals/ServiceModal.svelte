@@ -272,11 +272,21 @@
           />
         </div>
         <div class="col">
+            <Field
+              type="text"
+              name="setup.sender"
+              required="{false}"
+              label="{$_('services.settings.setup.sender.label', { default: 'From address' })}"
+              placeholder="{$_('services.settings.setup.sender.placeholder', { default: 'Enter a from address' })}"
+              help="{$_('services.settings.setup.sender.help', { default: 'Enter the sender email.' })}"
+            />
+          </div>
+        <div class="col">
           <Field
             type="text"
             name="setup.address"
             required="{true}"
-            label="{$_('services.settings.setup.address.email.label', { default: 'Server address' })}"
+            label="{$_('services.settings.setup.address.label', { default: 'Server address' })}"
             placeholder="{$_('services.settings.setup.address.placeholder', { default: 'Enter an address' })}"
             help="{$_('services.settings.setup.address.help', { default: 'Enter an address.' })}"
             invalid="{$_('services.settings.setup.address.invalid', {
@@ -284,7 +294,7 @@
             })}"
           />
         </div>
-        <div class="col-2">
+        <div class="col-1">
           <Field
             type="number"
             name="setup.port"

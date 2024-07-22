@@ -1628,6 +1628,9 @@
           "label": "Rot",
           "placeholder": "Gib den roten GPIO-Pin ein"
         },
+        "sender": {
+          "label": ""
+        },
         "show_title": {
           "help": "Titel und Version auf dem Display anzeigen.",
           "label": "Titel anzeigen"

@@ -1628,6 +1628,11 @@
           "label": "赤",
           "placeholder": "赤いgpioピンを入力します"
         },
+        "sender": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
         "show_title": {
           "help": "表示器にタイトルを表示します。.",
           "label": "タイトルを表示"

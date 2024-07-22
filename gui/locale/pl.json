@@ -1628,6 +1628,11 @@
           "label": "Czerwony",
           "placeholder": "Wprowadź czerwony pin GPIO"
         },
+        "sender": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
         "show_title": {
           "help": "Pokaż nazwę i wersję jako tytuł na wyświetlaczu.",
           "label": "Pokaż Tytuł"

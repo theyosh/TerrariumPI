@@ -1628,6 +1628,11 @@
           "label": "Vermelho",
           "placeholder": "Insira o pino GPIO para o vermelho"
         },
+        "sender": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
         "show_title": {
           "help": "Mostrar nome e versão como título no display.",
           "label": "Exibir nome"
