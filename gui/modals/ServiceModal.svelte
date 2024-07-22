@@ -272,15 +272,15 @@
           />
         </div>
         <div class="col">
-            <Field
-              type="text"
-              name="setup.sender"
-              required="{false}"
-              label="{$_('services.settings.setup.sender.label', { default: 'From address' })}"
-              placeholder="{$_('services.settings.setup.sender.placeholder', { default: 'Enter a from address' })}"
-              help="{$_('services.settings.setup.sender.help', { default: 'Enter the sender email.' })}"
-            />
-          </div>
+          <Field
+            type="text"
+            name="setup.sender"
+            required="{false}"
+            label="{$_('services.settings.setup.sender.label', { default: 'From address' })}"
+            placeholder="{$_('services.settings.setup.sender.placeholder', { default: 'Enter a from address' })}"
+            help="{$_('services.settings.setup.sender.help', { default: 'Enter the sender email.' })}"
+          />
+        </div>
         <div class="col">
           <Field
             type="text"
