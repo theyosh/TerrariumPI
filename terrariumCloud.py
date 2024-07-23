@@ -19,6 +19,7 @@ import os
 from meross_iot.http_api import MerossHttpClient
 from meross_iot.manager import MerossManager
 from meross_iot.controller.mixins.toggle import ToggleXMixin
+from meross_iot.controller.subdevice import Ms100Sensor
 from meross_iot.model.http.exception import BadLoginException, TooManyTokensException
 from meross_iot.model.exception import CommandTimeoutError
 from meross_iot.model.enums import Namespace
@@ -91,7 +92,8 @@ class TerrariumMerossCloud(terrariumSingleton):
             await self.manager.async_device_discovery()
             meross_devices = []
             if "sensors" == device_type:
-                meross_devices = self.manager.find_devices(device_type="ms100")
+                meross_devices = self.manager.find_devices(device_class=Ms100Sensor)
+
             elif "relays" == device_type:
                 meross_devices = self.manager.find_devices(device_class=ToggleXMixin)
 
