@@ -1578,7 +1578,7 @@
         "address": {
           "help": "Enter an address.",
           "invalid": "The entered address is not valid. It cannot be empty.",
-          "label": "Address",
+          "label": "Server address",
           "placeholder": "Enter an address"
         },
         "api_token": {
@@ -1627,6 +1627,11 @@
           "invalid": "The entered value is not valid. Enter a valid number between {min} and {max}.",
           "label": "Red",
           "placeholder": "Enter red GPIO pin"
+        },
+        "sender": {
+          "help": "Enter the sender email.",
+          "label": "From address",
+          "placeholder": "Enter a from address"
         },
         "show_title": {
           "help": "Show a name and version as title on the display.",
