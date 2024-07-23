@@ -532,12 +532,14 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
             "port": int(setup_data.get("port", 25)),
             "username": setup_data.get("username"),
             "password": setup_data.get("password"),
-            "sender"  : setup_data.get("sender"),
+            "sender": setup_data.get("sender"),
             "receiver": setup_data.get("receiver", "").split(","),
         }
 
-        if self.setup['sender'] is None:
-            self.setup['sender'] = re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", self.setup['receiver'][0], 0, re.MULTILINE)
+        if self.setup["sender"] is None:
+            self.setup["sender"] = re.sub(
+                r"(.*)@(.*)", "\\1+terrariumpi@\\2", self.setup["receiver"][0], 0, re.MULTILINE
+            )
 
         super().load_setup(setup_data)
 
@@ -556,7 +558,7 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
                 ),
                 text=message,
                 subject=subject,
-                mail_from=("TerrariumPI", self.setup['sender']),
+                mail_from=("TerrariumPI", self.setup["sender"]),
             )
 
             profile_image_path = ("public/" if self.setup["profile_image"].startswith("img/") else "") + self.setup[
@@ -580,7 +582,6 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
                         email_message.attach(filename=os.path.basename(attachment), data=attachment_data)
                 except FileNotFoundError:
                     pass
-
 
             mail_tls_ssl = ["tls", "ssl", None]
             while not len(mail_tls_ssl) == 0:
