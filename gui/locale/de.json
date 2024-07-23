@@ -1578,7 +1578,7 @@
         "address": {
           "help": "Gib eine Adresse ein.",
           "invalid": "Die eingegebene Adresse ist nicht gültig. Sie kann nicht leer sein.",
-          "label": "Adresse",
+          "label": "Server address",
           "placeholder": "Gib eine Adresse ein"
         },
         "api_token": {
@@ -1629,7 +1629,9 @@
           "placeholder": "Gib den roten GPIO-Pin ein"
         },
         "sender": {
-          "label": ""
+          "help": "Geben Sie die Absender E-Mail ein.",
+          "label": "Absenderadresse",
+          "placeholder": "Geben Sie eine Absenderadresse ein"
         },
         "show_title": {
           "help": "Titel und Version auf dem Display anzeigen.",
