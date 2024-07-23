@@ -7,7 +7,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dba4e25f9efe4197926dd03aa6925d0f)](https://app.codacy.com/gh/theyosh/TerrariumPI?utm_source=github.com&utm_medium=referral&utm_content=theyosh/TerrariumPI&utm_campaign=Badge_Grade_Settings)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![Matrix](https://img.shields.io/badge/matrix.org-%23terrariumpi-blue)](https://matrix.to/#/#terrariumpi)
+[![Matrix](https://img.shields.io/badge/matrix.org-%23terrariumpi-blue)](https://matrix.to/#/#terrariumpi:theyosh.nl)
 
 Software for cheap home automation of your reptile terrarium or any other
 enclosed environment. With this software you are able to control for example a
