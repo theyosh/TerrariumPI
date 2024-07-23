@@ -1578,7 +1578,7 @@
         "address": {
           "help": "Vul een adres in.",
           "invalid": "Het ingevoerde adres is niet geldig. Het kan niet leeg zijn.",
-          "label": "Adres",
+          "label": "Server Adres",
           "placeholder": "Vul een adres in"
         },
         "api_token": {
@@ -1629,9 +1629,9 @@
           "placeholder": "Voer de rode GPIO pin nummer in"
         },
         "sender": {
-          "help": "",
+          "help": "Vul de zender email adres in.",
           "label": "Afzender adres",
-          "placeholder": ""
+          "placeholder": "Vul een zender adres in"
         },
         "show_title": {
           "help": "Toon een naam en versie als titel op het display.",
