@@ -511,11 +511,16 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
             ),
         )
 
+        self.show_picture(setup_data["profile_image"])
+
     def send_message(self, msg_type, subject, message, data=None, attachments=[]):
         self.setup["device"].message(message)
 
     def show_picture(self, picture):
-        self.setup["device"].write_image(picture)
+        try:
+            self.setup["device"].write_image(picture)
+        except Exception:
+            pass
 
     def stop(self):
         try:

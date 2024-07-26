@@ -18,22 +18,11 @@ class terrariumDisplayLCDI2CMixin:
         self._device["device"].lcd_device.bus.close()
         self._device["device"].lcd_device.bus = smbus2.SMBus(1 if len(address) == 1 else int(address[1]))
 
-        self.width = self.WIDTH
-        self.height = self.HEIGHT
-
     def _unload_hardware(self):
         self._device["device"].lcd_device.bus.close()
 
     def _write_line(self, text, line_nr):
-        self._device["device"].lcd_display_string(text, line_nr)
-
-    def _write_title(self):
-        self._write_line(self.title[: self.width].ljust(self.width), 1)
-
-    def clear(self):
-        self._device["device"].lcd_clear()
-        super().clear()
-
+        self._device["device"].lcd_display_string(text[: self.width].ljust(self.width), line_nr)
 
 class terrariumDisplayLCDSerialMixin:
     def _load_hardware(self):
@@ -47,14 +36,7 @@ class terrariumDisplayLCDSerialMixin:
 
     def _write_line(self, text, line_nr):
         with self._device["device"] as device:
-            device.write(f"0{line_nr-1}{text}")
-
-    def clear(self):
-        for i in range(1, self.height + 1):
-            self._write_line("".ljust(self.width), i)
-
-        super().clear()
-
+            device.write(f"0{line_nr-1}{text[: self.width].ljust(self.width)}")
 
 class terrariumLCD16x2(terrariumDisplay, terrariumDisplayLCDI2CMixin):
     HARDWARE = "LCD16x2I2C"

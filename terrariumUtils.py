@@ -16,6 +16,9 @@ import math
 import asyncio
 import base64
 import collections
+from importlib import import_module
+from pathlib import Path
+import inspect
 
 from cryptography.fernet import Fernet
 
@@ -541,3 +544,44 @@ class terrariumUtils:
                 terrariumUtils.get_script_data(f"kill -9 {process}")
             except Exception as ex:
                 logger.error(f"Error killing hanging bluetooth helper process: {ex}")
+
+
+    @staticmethod
+    def loadHardwareDrivers(classType, className, path, pattern):
+        cache = terrariumCache()
+
+        data = cache.get_data(path)
+        if data is None:
+            data = {}
+            # Start dynamically loading sensors (based on: https://www.bnmetrics.com/blog/dynamic-import-in-python3)
+            for file in sorted(Path(path).parent.glob(pattern)):
+                try:
+                    imported_module = import_module("." + file.stem, package="{}".format(className))
+
+                    for i in dir(imported_module):
+                        attribute = getattr(imported_module, i)
+
+                        if (
+                            inspect.isclass(attribute)
+                            and attribute != classType
+                            and issubclass(attribute, classType)
+                        ):
+                            setattr(sys.modules[__name__], file.stem, attribute)
+                            data[attribute.HARDWARE] = attribute
+                except Exception as ex:
+                    logger.error(f"Error loading hardware driver file {file}: {ex}")
+
+            cache.set_data(path, data, -1)
+
+        return data
+
+
+    @staticmethod
+    def getI2CAddress(address):
+        address = [part.strip() for part in address.split(",")]
+        if isinstance(address[0], str):
+            if not address[0].startswith("0x"):
+                address[0] = "0x" + address[0]
+            address[0] = int(address[0], 16)
+
+        return address

@@ -126,13 +126,13 @@ class terrariumSensor(object):
 
     # Return polymorph sensor....
     def __new__(cls, _, hardware_type, sensor_type, address, name="", unit_value_callback=None, trigger_callback=None):
+        known_sensors = terrariumSensor.available_hardware
         try:
-            known_sensors = terrariumSensor.available_hardware
             return super(terrariumSensor, cls).__new__(known_sensors[hardware_type])
         except:
             if hardware_type not in known_sensors:
                 raise terrariumSensorUnknownHardwareException(
-                    f"Trying to load an unknown hardware device {hardware_type} at address {address} with name {name}"
+                    f"Trying to load an unknown sensor device {hardware_type} at address {address} with name {name}"
                 )
             else:
                 raise terrariumSensorInvalidSensorTypeException(

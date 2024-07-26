@@ -3,25 +3,34 @@ import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from pathlib import Path
-import inspect
-from importlib import import_module
-import sys
 from hashlib import md5
 import threading
 from gevent import sleep
 import queue
 import textwrap
 from retry import retry
+from collections import deque
 
-from terrariumUtils import terrariumUtils, terrariumCache, classproperty
-
-
-class terrariumDisplayLoadingException(Exception):
-    pass
+from terrariumUtils import terrariumUtils, classproperty
 
 
 class terrariumDisplayException(Exception):
+    pass
+
+
+class terrariumDisplayUnknownHardwareException(terrariumDisplayException):
+    pass
+
+
+class terrariumDisplayInvalidSensorTypeException(terrariumDisplayException):
+    pass
+
+
+class terrariumDisplayLoadingException(terrariumDisplayException):
+    pass
+
+
+class terrariumDisplayUpdateException(terrariumDisplayException):
     pass
 
 
@@ -30,39 +39,21 @@ class terrariumDisplay(object):
     HARDWARE = None
     NAME = None
 
+    WIDTH = 0
+    HEIGHT = 0
+    FONT_SIZE = 1
+    FONT_WIDTH = 1
+
     __MODE_TEXT_WRAP = 1
     __MODE_TEXT_H_SCROLL = 2
     __MODE_TEXT_H_SCROLL_ONCE = 3
 
+    # Buffer => True will never clear screen, and always append new lines to the bottom of the display
+    BUFFER = True
+
     @classproperty
     def available_hardware(__cls__):
-        __CACHE_KEY = "known_displays"
-        cache = terrariumCache()
-
-        data = cache.get_data(__CACHE_KEY)
-        if data is None:
-            data = {}
-            # Start dynamically loading sensors (based on: https://www.bnmetrics.com/blog/dynamic-import-in-python3)
-            for file in sorted(Path(__file__).parent.glob("*_display.py")):
-                try:
-                    imported_module = import_module("." + file.stem, package="{}".format(__name__))
-
-                    for i in dir(imported_module):
-                        attribute = getattr(imported_module, i)
-
-                        if (
-                            inspect.isclass(attribute)
-                            and attribute != terrariumDisplay
-                            and issubclass(attribute, terrariumDisplay)
-                        ):
-                            setattr(sys.modules[__name__], file.stem, attribute)
-                            data[attribute.HARDWARE] = attribute
-                except Exception as ex:
-                    logger.error(f"Error loading {file}: {ex}")
-
-            cache.set_data(__CACHE_KEY, data, -1)
-
-        return data
+        return terrariumUtils.loadHardwareDrivers( __cls__,__name__,__file__,"*_display.py")
 
     @classproperty
     def available_displays(__cls__):
@@ -72,45 +63,49 @@ class terrariumDisplay(object):
         ]
 
     # Return polymorph relay....
-    def __new__(cls, device_id, hardware_type, address, title=None, width=16, height=2):
+    def __new__(cls, device_id, hardware_type, address, title=None):
+        known_displays = terrariumDisplay.available_hardware
         try:
-            known_displays = terrariumDisplay.available_hardware
             return super(terrariumDisplay, cls).__new__(known_displays[hardware_type])
-        except:
-            raise terrariumDisplayException(f"Display of hardware type {hardware_type} is unknown.")
+        except Exception as ex:
+            raise terrariumDisplayLoadingException(
+                f"Error loading display device {hardware_type} at address {address}: {ex}"
+            )
 
-    def __init__(self, device_id, _, address, title=None, width=16, height=2):
+    def __init__(self, device_id, _, address, title=None):
         self._device = {
             "device": None,
             "address": None,
             "id": None,
             "title": None,
-            "width": None,
-            "height": None,
             "mode": None,
-            "fontsize": 1,
-            "fontwidth": 1,
-            "font": None,
-            "queue": None,
+            "message_queue": None,
             "thread": None,
             "running": False,
+            "display_buffer": None
         }
 
         self.id = device_id
         self.title = title
-        self.width = width
-        self.height = height
-
-        self.mode = self.__MODE_TEXT_WRAP
 
         # By setting the address, we will load the hardware.
         self.address = address
+        # Initialize screen buffer lines
+        self._device['display_buffer'] = deque(maxlen=int((float(self.HEIGHT) / float(self.FONT_SIZE)) - (0 if title is None else 1)))
 
-        self._device["queue"] = queue.Queue(maxsize=3 * self.height)
+        # Best working options: __MODE_TEXT_WRAP or __MODE_TEXT_H_SCROLL
+        self.mode = self.__MODE_TEXT_H_SCROLL
+        if self._device['display_buffer'].maxlen == 1:
+            self.mode = self.__MODE_TEXT_H_SCROLL
+            self.BUFFER = False
+
+        self._device["message_queue"] = queue.Queue()
         self._device["thread"] = threading.Thread(target=self.__run)
         self._device["thread"].start()
 
         self.clear()
+        self.write_title()
+
 
     def __repr__(self):
         return f"{self.NAME} at address '{self.address}' ({self.width}x{self.height})"
@@ -119,14 +114,20 @@ class terrariumDisplay(object):
         if self._device["device"] is None:
             return
 
-        self._device["running"] = 1
-        while self._device["running"] or not self._device["queue"].empty():
+        self._device["running"] = True
+        while self._device["running"]: # When stopped,
             try:
-                text = self._device["queue"].get(False)
+                text = self._device["message_queue"].get(False)
+                # This is a single new message of X length
                 self.write_text(text)
-                self._device["queue"].task_done()
+                self._device["message_queue"].task_done()
             except queue.Empty:
                 sleep(0.1)
+
+        # Flush the queue if not empty
+        while not self._device["message_queue"].empty():
+            self._device["message_queue"].get(False)
+            self._device["message_queue"].task_done()
 
     @property
     def id(self):
@@ -145,13 +146,7 @@ class terrariumDisplay(object):
 
     @property
     def _address(self):
-        address = [part.strip() for part in self.address.split(",")]
-        if isinstance(address[0], str):
-            if not address[0].startswith("0x"):
-                address[0] = "0x" + address[0]
-            address[0] = int(address[0], 16)
-
-        return address
+        return terrariumUtils.getI2CAddress(self.address)
 
     @address.setter
     def address(self, value):
@@ -169,24 +164,15 @@ class terrariumDisplay(object):
 
     @title.setter
     def title(self, value):
-        if value is not None and not "" == value.strip():
-            self._device["title"] = value.strip()
+        self._device["title"] = None if value is None else value.strip()
 
     @property
     def width(self):
-        return self._device["width"]
-
-    @width.setter
-    def width(self, value):
-        self._device["width"] = value
+        return self.WIDTH
 
     @property
     def height(self):
-        return self._device["height"]
-
-    @height.setter
-    def height(self, value):
-        self._device["height"] = value
+        return self.HEIGHT
 
     @property
     def mode(self):
@@ -197,100 +183,87 @@ class terrariumDisplay(object):
         if value in [self.__MODE_TEXT_WRAP, self.__MODE_TEXT_H_SCROLL, self.__MODE_TEXT_H_SCROLL_ONCE]:
             self._device["mode"] = value
 
-    @property
-    def fontsize(self):
-        return self._device["fontsize"]
-
-    @property
-    def font(self):
-        return self._device["font"]
-
     def message(self, text):
         if self._device["running"]:
-            self._device["queue"].put(text)
+            self._device["message_queue"].put(text)
 
-    def stop(self, wait=True):
-        self._device["running"] = 0
-        if wait:
-            self._device["queue"].join()
+    def clear(self):
+        title_offset = 0 if self.title is None else 1
+        for line_nr in range(title_offset, int(self.HEIGHT/ self.FONT_SIZE)):
+            self.write_line("", line_nr)
 
-    def write_text(self, text="", line=1):
-        if self._device["device"] is None:
+    def write_title(self):
+        if self.title is not None:
+            self.write_line(self.title)
+
+    def write_lines(self, lines):
+        title_offset = 0 if self.title is None else 1
+        max_lines = int((self.HEIGHT / self.FONT_SIZE) - title_offset)
+        for line_nr, line in enumerate(lines):
+            if not self._device["running"]:
+                break
+
+            if line_nr >= max_lines:
+                continue
+
+            self.write_line(line, line_nr + title_offset, self.mode != self.__MODE_TEXT_WRAP and line_nr == len(lines)-1)
+
+    def write_line(self, line, line_nr = 0, scroll = False):
+        line_nr += 1
+        max_chars = int(float(self.WIDTH) / float(self.FONT_WIDTH))
+
+        self._write_line(line, line_nr)
+
+        if scroll and len(line) > max_chars:
+            sleep(0.25)
+            for i in range(1,len(line) - max_chars):
+                if not self._device["running"]:
+                    break
+
+                self._write_line(line[i:], line_nr)
+                sleep(0.01)
+
+            if self.mode != self.__MODE_TEXT_H_SCROLL_ONCE:
+                sleep(0.01)
+                for i in range(len(line) - max_chars, 1, -1):
+                    if not self._device["running"]:
+                        break
+                    self._write_line(line[i:], line_nr)
+                    sleep(0.01)
+
+            self._write_line(line, line_nr)
+
+        sleep(0.25)
+
+
+    def write_text(self, text):
+        if self._device["device"] is None or "" == text:
             return
 
-        max_screen_lines = int(self.height / self.fontsize)
-        max_chars_per_line = int(float(self.width) / self._device["fontwidth"])
-
-        # print(f'Max chars: {max_chars_per_line} -> Width: {self.width} , font size: {self._device["fontwidth"]}')
-
-        # print('Font width: {} -> {} / {} = {}'.format(self._device['fontwidth'], self.width, self._device['fontwidth'], self.width / self._device['fontwidth']))
-        # print('Max chars on 1 line: {}'.format(max_chars_per_line))
+        # First make sure new lines are kept.
         text = text.strip().split("\n")
-        if self.__MODE_TEXT_WRAP == self.mode:
+        if self.mode in [self.__MODE_TEXT_WRAP]:
+            # Reformat all text lines to max screen width and add more lines when needed
             temp_lines = []
             for line in text:
-                temp_lines += textwrap.wrap(line, width=max_chars_per_line)
+                temp_lines += textwrap.wrap(line, width=int(float(self.WIDTH) / float(self.FONT_WIDTH)))
             text = temp_lines
 
-        self.clear()
+        if self.BUFFER:
+            for line in text:
+                self._device['display_buffer'].append(line)
+                self.write_lines(self._device['display_buffer'])
+        else:
+            self.clear()
+            self.write_lines(text)
 
-        #    print(text)
-        # How many extra lines do we have more then the max height
-        # This means that many extra row up animations
-
-        if self.title is not None:
-            max_screen_lines -= 1
-
-        line_animations = max(0, len(text) - max_screen_lines)
-        for animation_step in range(line_animations + 1):
-            # Here we select the max amount of text we can display once (max height) starting with the animation step as start.
-            # This will make the text shift up with one line each round
-            for line_nr, line in enumerate(text[animation_step : (animation_step + max_screen_lines)]):
-                screen_line_number_offset = 1
-                if self.title is not None:
-                    screen_line_number_offset += 1
-                # Here we check if there what the max length of the line is. If it is more then the max width, we need to animate horizontal
-                # But we only animate horizontal the first time we show the line. Not when it shifts up... (takes so much more time)
-                # That means after animation step, only the last line will scroll
-                extra_chars = 0
-                if 0 == animation_step or max_screen_lines - screen_line_number_offset == line_nr:
-                    extra_chars = max(0, len(line) - max_chars_per_line)
-
-                # Here we animate horizontal one single line. Only when extra_chars is higher then 0
-                for char_step in range(extra_chars + 1):
-                    # Show the text line. This is a substring of max width characters, starting at char_step
-                    self._write_line(
-                        line[char_step : (char_step + max_chars_per_line)].ljust(max_chars_per_line),
-                        line_nr + screen_line_number_offset,
-                    )
-                    if extra_chars > 0:
-                        # If we have extra chars, we pause and show the same line again, but then 1 character shifted to the left
-                        sleep(0.1)
-
-                # If we have normal horizontal scrolling, we will scroll backwards.
-                if self.__MODE_TEXT_H_SCROLL == self.mode:
-                    sleep(0.25)
-                    if extra_chars > 0:
-                        for char_step in range(extra_chars + 1, 0, -1):
-                            self._write_line(
-                                line[char_step : (char_step + max_chars_per_line)].ljust(max_chars_per_line),
-                                line_nr + screen_line_number_offset,
-                            )
-                            sleep(0.1)
-                # Else we just revert the text back to show only the first max width characters
-                elif self.__MODE_TEXT_H_SCROLL_ONCE == self.mode:
-                    sleep(0.25)
-                    self._write_line(
-                        line[:max_chars_per_line].ljust(max_chars_per_line), line_nr + screen_line_number_offset
-                    )
-
-            if line_animations > 0:
-                sleep(0.75)
-
-        sleep(1)
+    def stop(self):
+        self._device["running"] = False
+        self._device["thread"].join()
+        self.unload_hardware()
 
     @retry(terrariumDisplayLoadingException, tries=3, delay=0.5, max_delay=2, logger=logger)
-    def load_hardware(self, reload=False):
+    def load_hardware(self):
         try:
             self._load_hardware()
         except Exception as ex:
@@ -298,12 +271,13 @@ class terrariumDisplay(object):
 
     def unload_hardware(self):
         if self._device["device"] is not None:
+            # Clear title
+            self.title = None
+            # Clear screen
+            self.clear()
             try:
                 self._unload_hardware()
                 del self._device["device"]
             except Exception as ex:
                 logger.warning(f"Unable to unload hardware: {ex}")
 
-    def clear(self):
-        if self.title is not None:
-            self._write_title()
