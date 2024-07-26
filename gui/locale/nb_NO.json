@@ -1596,6 +1596,10 @@
           "label": "Grønn",
           "placeholder": "Skriv inn grønn GPIO-pin"
         },
+        "h_scroll": {
+          "help": "",
+          "label": ""
+        },
         "hardware": {
           "help": "Viser lydkortet som brukes til å spille av lyd.",
           "invalid": "Vennligst ta et valg.",

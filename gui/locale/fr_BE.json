@@ -1596,6 +1596,10 @@
           "label": "Vert",
           "placeholder": "Entrez la broche GPIO verte"
         },
+        "h_scroll": {
+          "help": "",
+          "label": ""
+        },
         "hardware": {
           "help": "Contient la carte son utilisée pour la lecture audio.",
           "invalid": "Veuillez faire un choix.",

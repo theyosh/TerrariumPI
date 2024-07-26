@@ -1596,6 +1596,10 @@
           "label": "Groen",
           "placeholder": "Voer de groene GPIO pin nummer in"
         },
+        "h_scroll": {
+          "help": "",
+          "label": ""
+        },
         "hardware": {
           "help": "Selecteer het hardwaretype voor dit beeldscherm.",
           "invalid": "Maak een keuze.",

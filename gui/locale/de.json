@@ -1596,6 +1596,10 @@
           "label": "Grün",
           "placeholder": "Gib den grünen GPIO-Pin ein"
         },
+        "h_scroll": {
+          "help": "",
+          "label": ""
+        },
         "hardware": {
           "help": "Wähle den Hardwaretyp für diese Anzeige aus.",
           "invalid": "Bitte triff eine Wahl.",

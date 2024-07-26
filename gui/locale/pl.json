@@ -1596,6 +1596,10 @@
           "label": "Zielony",
           "placeholder": "Wprowadź zielony pin GPIO"
         },
+        "h_scroll": {
+          "help": "",
+          "label": ""
+        },
         "hardware": {
           "help": "Wybierz urządzenie dla tego rodzaju przycisku.",
           "invalid": "Dokonaj wyboru.",

@@ -1596,6 +1596,10 @@
           "label": "Verde",
           "placeholder": "Immettere il pin Green GPIO"
         },
+        "h_scroll": {
+          "help": "",
+          "label": ""
+        },
         "hardware": {
           "help": "Seleziona il tipo di hardware per questo display.",
           "invalid": "Si prega di fare una scelta.",

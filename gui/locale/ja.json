@@ -1596,6 +1596,10 @@
           "label": "青",
           "placeholder": "グリーンGPIOピンを入力します"
         },
+        "h_scroll": {
+          "help": "",
+          "label": ""
+        },
         "hardware": {
           "help": "このリレーの種類を選択してください。.",
           "invalid": "選択してください。.",

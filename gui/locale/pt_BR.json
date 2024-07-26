@@ -1596,6 +1596,10 @@
           "label": "Verde",
           "placeholder": "Insira o pino GPIO para o verde"
         },
+        "h_scroll": {
+          "help": "",
+          "label": ""
+        },
         "hardware": {
           "help": "Selecione o tipo de hardware usado para este display.",
           "invalid": "Por favor, faça uma escolha.",

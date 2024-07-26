@@ -1596,6 +1596,10 @@
           "label": "Verd",
           "placeholder": "Introduïu el pin GPIO verd"
         },
+        "h_scroll": {
+          "help": "",
+          "label": ""
+        },
         "hardware": {
           "help": "Seleccioneu el tipus de maquinari per a aquesta pantalla.",
           "invalid": "Feu una tria.",
