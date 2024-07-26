@@ -1,5 +1,5 @@
 ---
-title: Meross MS100
+title: Meross MS100(F)
 categories: [Hardware, Sensor]
 tags: [sensor, temperature, humidity]
 
@@ -13,6 +13,12 @@ device_address: 'Need Meross Cloud account credentials'
 device_auto_detect: true
 device_url: https://www.meross.com/mTerminal/product?type=0&category_id=29
 ---
+
+Both MS100 and MS100F are supported. Both should be auto discovered during
+startup.
+
+- [MS100](https://www.meross.com/en-gc/smart-sensor/wifi-temperature-sensor/51)
+- [MS100F](https://www.meross.com/en-gc/smart-sensor/smart-humidity-sensor/143)
 
 ## Information
 

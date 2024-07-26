@@ -13,7 +13,7 @@ from terrariumCloud import TerrariumMerossCloud
 class terrariumMS100Sensor(terrariumSensor):
     HARDWARE = "ms100"
     TYPES = ["temperature", "humidity"]
-    NAME = "Meross MS100(f)"
+    NAME = "Meross MS100(F)"
 
     def _load_hardware(self):
         if TerrariumMerossCloud.is_enabled:

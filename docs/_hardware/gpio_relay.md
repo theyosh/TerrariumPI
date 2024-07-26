@@ -26,4 +26,7 @@ micro-controller.
 When the relay is working in **reverse** order, you can change this by toggling
 the `inverse` toggle in the `calibration` tab.
 
+![GPIO Relay calibration inverse mode](/assets/img/GPIO_relay_calibration_inverse_mode.webp){: .shadow style="max-width:
+90%" } _GPIO Relay calibration inverse mode_
+
 {% include_relative _relay_detail.md %}
