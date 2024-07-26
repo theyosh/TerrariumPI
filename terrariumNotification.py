@@ -509,9 +509,10 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
                 if not terrariumUtils.is_true(setup_data["show_title"])
                 else f'{setup_data["terrariumpi_name"]} {self.setup["version"]}'
             ),
+            setup_data.get("h_scroll", False)
         )
 
-        self.show_picture(setup_data["profile_image"])
+#        self.show_picture(setup_data["profile_image"])
 
     def send_message(self, msg_type, subject, message, data=None, attachments=[]):
         self.setup["device"].message(message)
