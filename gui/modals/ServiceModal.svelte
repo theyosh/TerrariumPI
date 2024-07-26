@@ -256,15 +256,15 @@
           />
         </div>
         <div class="col-2">
-            <Switch
-              name="setup.h_scroll"
-              value="{$formData.setup?.h_scroll || true}"
-              label="{$_('services.settings.setup.h_scroll.label', { default: 'Scroll horizontal' })}"
-              help="{$_('services.settings.setup.h_scroll.help', {
-                default: 'Toggle on to enable horizontal scrolling.',
-              })}"
-            />
-          </div>
+          <Switch
+            name="setup.h_scroll"
+            value="{$formData.setup?.h_scroll || true}"
+            label="{$_('services.settings.setup.h_scroll.label', { default: 'Scroll horizontal' })}"
+            help="{$_('services.settings.setup.h_scroll.help', {
+              default: 'Toggle on to enable horizontal scrolling.',
+            })}"
+          />
+        </div>
       </div>
     {/if}
 
