@@ -18,9 +18,9 @@ class terrariumDisplayOLED(terrariumDisplay):
         address = self._address
         self._device["device"] = oled(i2c(port=1 if len(address) == 1 else int(address[1]), address=address[0]))
         self._device["font"] = ImageFont.truetype("fonts/DejaVuSans.ttf", self.FONT_SIZE)
-        self.FONT_WIDTH = float(self._device["font"].getlength(
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        )) / float(2 * 26)
+        self.FONT_WIDTH = float(
+            self._device["font"].getlength("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
+        ) / float(2 * 26)
 
         # Update the resolutions based on device
         self.WIDTH = self._device["device"].width
@@ -39,7 +39,7 @@ class terrariumDisplayOLED(terrariumDisplay):
 
             if single_line != "":
                 line_nr -= 1 + (0 if self.title is None else 1)
-                for nr, line in enumerate(self._device['display_buffer']):
+                for nr, line in enumerate(self._device["display_buffer"]):
                     if line is None:
                         continue
 
@@ -71,6 +71,7 @@ class terrariumDisplayOLED(terrariumDisplay):
         else:
             print("Image {} does not exists".format(image))
 
+
 class terrariumOLEDSSD1306(terrariumDisplayOLED):
     HARDWARE = "SSD1306"
     NAME = "OLED SSD1306 (I2C)"
@@ -78,12 +79,14 @@ class terrariumOLEDSSD1306(terrariumDisplayOLED):
     def _load_hardware(self):
         self._load_oled_hardware(ssd1306)
 
+
 class terrariumOLEDSSD1309(terrariumDisplayOLED):
     HARDWARE = "SSD1309"
     NAME = "OLED SSD1309 (I2C)"
 
     def _load_hardware(self):
         self._load_oled_hardware(ssd1309)
+
 
 class terrariumOLEDSSD1322(terrariumDisplayOLED):
     HARDWARE = "SSD1322"

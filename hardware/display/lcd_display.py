@@ -24,6 +24,7 @@ class terrariumDisplayLCDI2CMixin:
     def _write_line(self, text, line_nr):
         self._device["device"].lcd_display_string(text[: self.width].ljust(self.width), line_nr)
 
+
 class terrariumDisplayLCDSerialMixin:
     def _load_hardware(self):
         address = self._address
@@ -37,6 +38,7 @@ class terrariumDisplayLCDSerialMixin:
     def _write_line(self, text, line_nr):
         with self._device["device"] as device:
             device.write(f"0{line_nr-1}{text[: self.width].ljust(self.width)}")
+
 
 class terrariumLCD16x2(terrariumDisplay, terrariumDisplayLCDI2CMixin):
     HARDWARE = "LCD16x2I2C"

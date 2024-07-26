@@ -53,7 +53,7 @@ class terrariumDisplay(object):
 
     @classproperty
     def available_hardware(__cls__):
-        return terrariumUtils.loadHardwareDrivers( __cls__,__name__,__file__,"*_display.py")
+        return terrariumUtils.loadHardwareDrivers(__cls__, __name__, __file__, "*_display.py")
 
     @classproperty
     def available_displays(__cls__):
@@ -82,7 +82,7 @@ class terrariumDisplay(object):
             "message_queue": None,
             "thread": None,
             "running": False,
-            "display_buffer": None
+            "display_buffer": None,
         }
 
         self.id = device_id
@@ -91,11 +91,13 @@ class terrariumDisplay(object):
         # By setting the address, we will load the hardware.
         self.address = address
         # Initialize screen buffer lines
-        self._device['display_buffer'] = deque(maxlen=int((float(self.HEIGHT) / float(self.FONT_SIZE)) - (0 if title is None else 1)))
+        self._device["display_buffer"] = deque(
+            maxlen=int((float(self.HEIGHT) / float(self.FONT_SIZE)) - (0 if title is None else 1))
+        )
 
         # Best working options: __MODE_TEXT_WRAP or __MODE_TEXT_H_SCROLL
         self.mode = self.__MODE_TEXT_H_SCROLL
-        if self._device['display_buffer'].maxlen == 1:
+        if self._device["display_buffer"].maxlen == 1:
             self.mode = self.__MODE_TEXT_H_SCROLL
             self.BUFFER = False
 
@@ -106,7 +108,6 @@ class terrariumDisplay(object):
         self.clear()
         self.write_title()
 
-
     def __repr__(self):
         return f"{self.NAME} at address '{self.address}' ({self.width}x{self.height})"
 
@@ -115,7 +116,7 @@ class terrariumDisplay(object):
             return
 
         self._device["running"] = True
-        while self._device["running"]: # When stopped,
+        while self._device["running"]:  # When stopped,
             try:
                 text = self._device["message_queue"].get(False)
                 # This is a single new message of X length
@@ -189,7 +190,7 @@ class terrariumDisplay(object):
 
     def clear(self):
         title_offset = 0 if self.title is None else 1
-        for line_nr in range(title_offset, int(self.HEIGHT/ self.FONT_SIZE)):
+        for line_nr in range(title_offset, int(self.HEIGHT / self.FONT_SIZE)):
             self.write_line("", line_nr)
 
     def write_title(self):
@@ -206,9 +207,11 @@ class terrariumDisplay(object):
             if line_nr >= max_lines:
                 continue
 
-            self.write_line(line, line_nr + title_offset, self.mode != self.__MODE_TEXT_WRAP and line_nr == len(lines)-1)
+            self.write_line(
+                line, line_nr + title_offset, self.mode != self.__MODE_TEXT_WRAP and line_nr == len(lines) - 1
+            )
 
-    def write_line(self, line, line_nr = 0, scroll = False):
+    def write_line(self, line, line_nr=0, scroll=False):
         line_nr += 1
         max_chars = int(float(self.WIDTH) / float(self.FONT_WIDTH))
 
@@ -216,7 +219,7 @@ class terrariumDisplay(object):
 
         if scroll and len(line) > max_chars:
             sleep(0.25)
-            for i in range(1,len(line) - max_chars):
+            for i in range(1, len(line) - max_chars):
                 if not self._device["running"]:
                     break
 
@@ -235,7 +238,6 @@ class terrariumDisplay(object):
 
         sleep(0.25)
 
-
     def write_text(self, text):
         if self._device["device"] is None or "" == text:
             return
@@ -251,8 +253,8 @@ class terrariumDisplay(object):
 
         if self.BUFFER:
             for line in text:
-                self._device['display_buffer'].append(line)
-                self.write_lines(self._device['display_buffer'])
+                self._device["display_buffer"].append(line)
+                self.write_lines(self._device["display_buffer"])
         else:
             self.clear()
             self.write_lines(text)
@@ -280,4 +282,3 @@ class terrariumDisplay(object):
                 del self._device["device"]
             except Exception as ex:
                 logger.warning(f"Unable to unload hardware: {ex}")
-

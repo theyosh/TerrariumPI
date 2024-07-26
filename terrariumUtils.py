@@ -545,7 +545,6 @@ class terrariumUtils:
             except Exception as ex:
                 logger.error(f"Error killing hanging bluetooth helper process: {ex}")
 
-
     @staticmethod
     def loadHardwareDrivers(classType, className, path, pattern):
         cache = terrariumCache()
@@ -561,11 +560,7 @@ class terrariumUtils:
                     for i in dir(imported_module):
                         attribute = getattr(imported_module, i)
 
-                        if (
-                            inspect.isclass(attribute)
-                            and attribute != classType
-                            and issubclass(attribute, classType)
-                        ):
+                        if inspect.isclass(attribute) and attribute != classType and issubclass(attribute, classType):
                             setattr(sys.modules[__name__], file.stem, attribute)
                             data[attribute.HARDWARE] = attribute
                 except Exception as ex:
@@ -574,7 +569,6 @@ class terrariumUtils:
             cache.set_data(path, data, -1)
 
         return data
-
 
     @staticmethod
     def getI2CAddress(address):
