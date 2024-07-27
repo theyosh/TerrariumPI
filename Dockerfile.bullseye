@@ -1,9 +1,9 @@
 # Build for raspberry pi
 # docker buildx build --platform linux/arm/v7 --progress=plain -t theyosh/terrariumpi:4.0.0 -f Dockerfile --push .
 
-# build sispmctl 4.11
+# build sispmctl 4.12
 FROM gcc:10-bullseye as sispmctl_builder
-ARG SISPMCTL_VERSION="4.11"
+ARG SISPMCTL_VERSION="4.12"
 WORKDIR /sispmctl
 RUN apt-get update \
   && apt-get install -y --no-install-recommends libusb-dev \
