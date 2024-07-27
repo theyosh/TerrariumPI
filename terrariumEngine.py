@@ -1151,7 +1151,8 @@ class terrariumEngine(object):
     def _update_webcams(self):
         def __process_webcam(self, webcam, current_state, relays):
             start = time.time()
-            self.webcams[webcam.id].update(relays)
+            if self.webcams[webcam.id].update(relays) == False:
+                return
 
             # TODO: Move this code to the webcam itself and pass through variable 'current_state'
 

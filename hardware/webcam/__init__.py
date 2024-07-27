@@ -531,9 +531,10 @@ class terrariumWebcam(object):
         if image is False:
             # Camera is offline!!
             #      logger.warning('Webcam {} has errors!'.format(self.name))
+            logger.error(f"Webcam {self} could not be updated after {time()-start:.3f} seconds! Please check your webcam connection.")
             if self.state:
                 self._device["state"] = False
-                logger.error(f"Webcam {self} has gone offline! Please check your webcam connections.")
+                logger.error(f"Webcam {self} has gone offline! Please check your webcam connection.")
                 self.__raw_image = self.__set_offline_image()
                 self.__tile_image()
                 self.__raw_image.save(self.raw_image_path, "jpeg", quality=self.__JPEG_QUALITY)
