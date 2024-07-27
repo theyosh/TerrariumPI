@@ -4,10 +4,6 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 from abc import ABCMeta, abstractmethod
-from pathlib import Path
-import inspect
-from importlib import import_module
-import sys
 import copy
 
 # pip install retry
@@ -19,12 +15,8 @@ import re
 from terrariumUtils import terrariumUtils
 
 
-class terrariumWeatherException(TypeError):
-    """There is a problem with loading a hardware switch. Invalid power switch action."""
-
-    def __init__(self, message, *args):
-        self.message = message
-        super().__init__(message, *args)
+class terrariumWeatherException(Exception):
+    pass
 
 
 # https://www.bnmetrics.com/blog/factory-pattern-in-python3-simple-version
@@ -205,25 +197,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
 
 # Factory class
 class terrariumWeather(object):
-    SOURCES = {}
-
-    # Start dynamically loading switches (based on: https://www.bnmetrics.com/blog/dynamic-import-in-python3)
-    for file in sorted(Path(__file__).parent.glob("*_weather.py")):
-        try:
-            imported_module = import_module("." + file.stem, package="{}".format(__name__))
-
-            for i in dir(imported_module):
-                attribute = getattr(imported_module, i)
-
-                if (
-                    inspect.isclass(attribute)
-                    and attribute != terrariumWeatherAbstract
-                    and issubclass(attribute, terrariumWeatherAbstract)
-                ):
-                    setattr(sys.modules[__name__], file.stem, attribute)
-                    SOURCES[attribute.HARDWARE] = attribute
-        except Exception as ex:
-            logger.warning(f"Error loading {file}: {ex}")
+    SOURCES = terrariumUtils.loadHardwareDrivers(terrariumWeatherAbstract, __name__, __file__, "*_weather.py")
 
     # Return polymorph weather....
     def __new__(self, address, unit_values, language):

@@ -560,7 +560,7 @@ class terrariumUtils:
                     for i in dir(imported_module):
                         attribute = getattr(imported_module, i)
 
-                        if inspect.isclass(attribute) and attribute != classType and issubclass(attribute, classType):
+                        if inspect.isclass(attribute) and attribute != classType and issubclass(attribute, classType) and attribute.HARDWARE is not None:
                             setattr(sys.modules[__name__], file.stem, attribute)
                             data[attribute.HARDWARE] = attribute
                 except Exception as ex:
@@ -572,10 +572,20 @@ class terrariumUtils:
 
     @staticmethod
     def getI2CAddress(address):
-        address = [part.strip() for part in address.split(",")]
+        address = [part.strip() for part in address.strip().split(",") if part.strip()]
+
         if isinstance(address[0], str):
             if not address[0].startswith("0x"):
                 address[0] = "0x" + address[0]
             address[0] = int(address[0], 16)
+
+        # Default bus is 1
+        if len(address) == 1:
+            address.append(1)
+        else:
+            address[1] = int(address[1])
+
+        if address[1] < 0:
+            address[1] = 1
 
         return address

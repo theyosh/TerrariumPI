@@ -3,10 +3,6 @@ import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from pathlib import Path
-import inspect
-from importlib import import_module
-import sys
 import statistics
 from hashlib import md5
 from time import time, sleep
@@ -59,46 +55,18 @@ class terrariumSensor(object):
 
     @classproperty
     def available_hardware(__cls__):
-        __CACHE_KEY = "known_sensors"
-        cache = terrariumCache()
+        known_sensors = terrariumUtils.loadHardwareDrivers(__cls__, __name__, __file__, "*_sensor.py")
 
-        bluetooth_available = terrariumUtils.bluetooth_available()
+        # Filter out bluetooth sensors if bluetooth is disabled
+        if not terrariumUtils.bluetooth_available():
+            known_sensors = dict(filter(lambda key: not issubclass(key[1], terrariumBluetoothSensor), known_sensors.items()))
 
-        known_sensors = cache.get_data(__CACHE_KEY)
-        if known_sensors is None:
-            known_sensors = {}
-            all_types = []
-            # Start dynamically loading sensors (based on: https://www.bnmetrics.com/blog/dynamic-import-in-python3)
-            for file in sorted(Path(__file__).parent.glob("*_sensor.py")):
-                try:
-                    imported_module = import_module("." + file.stem, package="{}".format(__name__))
-
-                    for i in dir(imported_module):
-                        attribute = getattr(imported_module, i)
-
-                        if (
-                            inspect.isclass(attribute)
-                            and attribute != __cls__
-                            and issubclass(attribute, __cls__)
-                            and attribute.HARDWARE is not None
-                        ):
-                            if not bluetooth_available and issubclass(attribute, terrariumBluetoothSensor):
-                                logger.info(f"Skip sensor hardware '{attribute.NAME}' because no bluetooth available.")
-                                continue
-
-                            setattr(sys.modules[__name__], file.stem, attribute)
-                            known_sensors[attribute.HARDWARE] = attribute
-                            all_types += attribute.TYPES
-                except Exception as ex:
-                    logger.error(f"Error loading {file}: {ex}")
-
-            # Update sensors that do not have a known type. Those are remote and scripts sensors
-            all_types = list(set(all_types))
-            for hardware in known_sensors:
-                if len(known_sensors[hardware].TYPES) == 0:
-                    known_sensors[hardware].TYPES = all_types
-
-            cache.set_data(__CACHE_KEY, known_sensors, -1)
+        # Update sensors that do not have a known type. Those are remote and scripts sensors
+        # Using sum() for fastest way of flatten a list https://stackoverflow.com/a/716489
+        all_types = list(set(sum([known_sensors[sensor].TYPES for sensor in known_sensors],[])))
+        for hardware in known_sensors:
+            if len(known_sensors[hardware].TYPES) == 0:
+                known_sensors[hardware].TYPES = all_types
 
         return known_sensors
 
@@ -391,21 +359,7 @@ class terrariumAnalogSensor(terrariumSensor):
 class terrariumI2CSensor(terrariumSensor):
     @property
     def _address(self):
-        address = super()._address
-        if isinstance(address[0], str):
-            if not address[0].startswith("0x"):
-                address[0] = "0x" + address[0]
-            address[0] = int(address[0], 16)
-
-        if len(address) == 1:
-            address.append(1)
-        else:
-            address[1] = int(address[1])
-
-        if address[1] < 1:
-            address[1] = 1
-
-        return address
+        return terrariumUtils.getI2CAddress(self.address)
 
     def _open_hardware(self):
         return smbus2.SMBus(self._address[1])

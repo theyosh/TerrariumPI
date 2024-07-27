@@ -22,8 +22,8 @@ class terrariumIOExpander(object):
 
     # Return polymorph IO expander....
     def __new__(cls, hardware_type, address):
+        known_devices = terrariumIOExpander.available_hardware
         try:
-            known_devices = terrariumIOExpander.available_hardware
             return super(terrariumIOExpander, cls).__new__(known_devices[hardware_type]())
         except:
             raise terrariumIOExpanderException(f"IO Expander of hardware type {hardware_type} is unknown.")
@@ -42,19 +42,7 @@ class terrariumIOExpander(object):
 
     @property
     def _address(self):
-        address = self.address.split(",")
-
-        if isinstance(address[0], str):
-            if not address[0].startswith("0x"):
-                address[0] = "0x" + address[0]
-            address[0] = int(address[0], 16)
-
-        if len(address) == 1:
-            address.append(1)
-        else:
-            address[1] = int(address[1])
-
-        return address
+        return terrariumUtils.getI2CAddress(self.address)
 
     def load_hardware(self):
         hardware_key = f"IO_{self.HARDWARE}_{self.address}"

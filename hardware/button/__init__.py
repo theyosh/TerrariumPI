@@ -13,16 +13,12 @@ import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from pathlib import Path
-import inspect
-from importlib import import_module
-import sys
 from hashlib import md5
 import RPi.GPIO as GPIO
 import threading
 from gevent import sleep
 
-from terrariumUtils import terrariumUtils, terrariumCache, classproperty
+from terrariumUtils import terrariumUtils, classproperty
 
 from hardware.io_expander import terrariumIOExpander
 
@@ -49,33 +45,7 @@ class terrariumButton(object):
 
     @classproperty
     def available_hardware(__cls__):
-        __CACHE_KEY = "known_buttons"
-        cache = terrariumCache()
-
-        data = cache.get_data(__CACHE_KEY)
-        if data is None:
-            data = {}
-            # Start dynamically loading sensors (based on: https://www.bnmetrics.com/blog/dynamic-import-in-python3)
-            for file in sorted(Path(__file__).parent.glob("*_button.py")):
-                try:
-                    imported_module = import_module("." + file.stem, package="{}".format(__name__))
-
-                    for i in dir(imported_module):
-                        attribute = getattr(imported_module, i)
-
-                        if (
-                            inspect.isclass(attribute)
-                            and attribute != terrariumButton
-                            and issubclass(attribute, terrariumButton)
-                        ):
-                            setattr(sys.modules[__name__], file.stem, attribute)
-                            data[attribute.HARDWARE] = attribute
-                except Exception as ex:
-                    logger.error(f"Error loading {file}: {ex}")
-
-            cache.set_data(__CACHE_KEY, data, -1)
-
-        return data
+        return terrariumUtils.loadHardwareDrivers(__cls__, __name__, __file__, "*_button.py")
 
     @classproperty
     def available_buttons(__cls__):

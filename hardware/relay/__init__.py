@@ -4,11 +4,7 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import threading
-import inspect
-from importlib import import_module
-import sys
 
-from pathlib import Path
 from hashlib import md5
 from func_timeout import func_timeout, FunctionTimedOut
 
@@ -47,29 +43,7 @@ class terrariumRelay(object):
 
     @classproperty
     def available_hardware(__cls__):
-        __CACHE_KEY = "known_relays"
-        cache = terrariumCache()
-
-        data = cache.get_data(__CACHE_KEY)
-        if data is None:
-            data = {}
-            # Start dynamically loading sensors (based on: https://www.bnmetrics.com/blog/dynamic-import-in-python3)
-            for file in sorted(Path(__file__).parent.glob("*_relay.py")):
-                try:
-                    imported_module = import_module("." + file.stem, package="{}".format(__name__))
-
-                    for i in dir(imported_module):
-                        attribute = getattr(imported_module, i)
-
-                        if inspect.isclass(attribute) and attribute != __cls__ and issubclass(attribute, __cls__):
-                            setattr(sys.modules[__name__], file.stem, attribute)
-                            data[attribute.HARDWARE] = attribute
-                except Exception as ex:
-                    logger.error(f"Error loading {file}: {ex}")
-
-            cache.set_data(__CACHE_KEY, data, -1)
-
-        return data
+        return terrariumUtils.loadHardwareDrivers(__cls__, __name__, __file__, "*_relay.py")
 
     @classproperty
     def available_relays(__cls__):
@@ -81,8 +55,8 @@ class terrariumRelay(object):
 
     # Return polymorph relay....
     def __new__(cls, _, hardware_type, address, name="", calibration={}, prev_state=None, callback=None):
+        known_relays = terrariumRelay.available_hardware
         try:
-            known_relays = terrariumRelay.available_hardware
             return super(terrariumRelay, cls).__new__(known_relays[hardware_type])
         except:
             raise terrariumRelayException(f"Relay of hardware type {hardware_type} is unknown.")
