@@ -560,7 +560,12 @@ class terrariumUtils:
                     for i in dir(imported_module):
                         attribute = getattr(imported_module, i)
 
-                        if inspect.isclass(attribute) and attribute != classType and issubclass(attribute, classType) and attribute.HARDWARE is not None:
+                        if (
+                            inspect.isclass(attribute)
+                            and attribute != classType
+                            and issubclass(attribute, classType)
+                            and attribute.HARDWARE is not None
+                        ):
                             setattr(sys.modules[__name__], file.stem, attribute)
                             data[attribute.HARDWARE] = attribute
                 except Exception as ex:

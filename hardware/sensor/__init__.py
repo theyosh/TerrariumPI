@@ -59,11 +59,13 @@ class terrariumSensor(object):
 
         # Filter out bluetooth sensors if bluetooth is disabled
         if not terrariumUtils.bluetooth_available():
-            known_sensors = dict(filter(lambda key: not issubclass(key[1], terrariumBluetoothSensor), known_sensors.items()))
+            known_sensors = dict(
+                filter(lambda key: not issubclass(key[1], terrariumBluetoothSensor), known_sensors.items())
+            )
 
         # Update sensors that do not have a known type. Those are remote and scripts sensors
         # Using sum() for fastest way of flatten a list https://stackoverflow.com/a/716489
-        all_types = list(set(sum([known_sensors[sensor].TYPES for sensor in known_sensors],[])))
+        all_types = list(set(sum([known_sensors[sensor].TYPES for sensor in known_sensors], [])))
         for hardware in known_sensors:
             if len(known_sensors[hardware].TYPES) == 0:
                 known_sensors[hardware].TYPES = all_types
