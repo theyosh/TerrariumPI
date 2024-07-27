@@ -25,6 +25,14 @@ class terrariumRPIWebcam(terrariumWebcam):
             if not raspistill.exists():
                 return None
 
+            # Fix changed AWB values
+            valid_awb = ['auto','incandescent','tungsten','fluorescent','indoor','daylight','cloudy']
+
+            if self.awb == 'sunlight':
+                self.awb = 'daylight'
+
+            self.awb = 'auto' if self.awb not in valid_awb else self.awb
+
         return [str(raspistill), "--quality", "95", "--timeout", str(self._WARM_UP * 1000), "--encoding", "jpg"]
 
     def _get_raw_data(self):

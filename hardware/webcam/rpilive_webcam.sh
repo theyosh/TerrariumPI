@@ -67,7 +67,7 @@ function streamOld() {
 }
 
 # Start streaming
-if [[ "${RASPIVID}" == "rpicam-vid" ]]
+if [[ "${RASPIVID}" == *"rpicam-vid" ]]
 then
   streamNew
 else
