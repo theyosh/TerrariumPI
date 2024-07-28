@@ -531,7 +531,9 @@ class terrariumWebcam(object):
         if image is False:
             # Camera is offline!!
             #      logger.warning('Webcam {} has errors!'.format(self.name))
-            logger.error(f"Webcam {self} could not be updated after {time()-start:.3f} seconds! Please check your webcam connection.")
+            logger.error(
+                f"Webcam {self} could not be updated after {time()-start:.3f} seconds! Please check your webcam connection."
+            )
             if self.state:
                 self._device["state"] = False
                 logger.error(f"Webcam {self} has gone offline! Please check your webcam connection.")

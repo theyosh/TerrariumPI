@@ -22,11 +22,11 @@ class terrariumRPILiveWebcam(terrariumWebcamLive):
                 raise terrariumWebcamLoadingException("Raspicam is not enabled")
 
             # Fix changed AWB values
-            valid_awb = ['auto','incandescent','tungsten','fluorescent','indoor','daylight','cloudy']
+            valid_awb = ["auto", "incandescent", "tungsten", "fluorescent", "indoor", "daylight", "cloudy"]
 
-            if self.awb == 'sunlight':
-                self.awb = 'daylight'
+            if self.awb == "sunlight":
+                self.awb = "daylight"
 
-            self.awb = 'auto' if self.awb not in valid_awb else self.awb
+            self.awb = "auto" if self.awb not in valid_awb else self.awb
 
         return super()._load_hardware()
