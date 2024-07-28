@@ -1597,8 +1597,8 @@
           "placeholder": "Voer de groene GPIO pin nummer in"
         },
         "h_scroll": {
-          "help": "",
-          "label": ""
+          "help": "Schakel horizontaal scrollen in.",
+          "label": "Horizontaal scrollen"
         },
         "hardware": {
           "help": "Selecteer het hardwaretype voor dit beeldscherm.",
