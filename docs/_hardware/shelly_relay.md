@@ -14,6 +14,12 @@ device_address:
 device_url: https://www.shelly.cloud/en-de/products/switching-and-triggering
 ---
 
+## Supported devices
+
+- Shelly 1
+- [Shelly Plug S](https://github.com/theyosh/TerrariumPI/discussions/929)
+- Shelly Plus Plug S
+
 ## Information
 
 WiFi-operated smart relay, 1 channel 16A

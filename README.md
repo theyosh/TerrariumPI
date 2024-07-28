@@ -31,7 +31,7 @@ If you are using this software for your animals or plants,
 **Full documentation** can be found at
 [https://theyosh.github.io/TerrariumPI/](https://theyosh.github.io/TerrariumPI/)
 
-**Contact** https://matrix.to/#/#terrariumpi:theyosh.nl
+**Contact** <https://matrix.to/#/#terrariumpi:theyosh.nl>
 
 Think off:
 
@@ -185,7 +185,7 @@ You can skip the manual installation part.
    `sudo ./install.sh`
 6. Reboot Raspberry PI to get all the needed modules loaded \
    `sudo reboot` (if done manual)
-7. Go to the web interface at <http://[raspberry_ip>]:8090 (login:
+7. Go to the web interface at <http://[raspberry_ip]>:8090 (login:
    **admin/password**)
 
 All needed options and modules are setup by the installer script. This means
@@ -332,4 +332,4 @@ More screenshots can be found
 ## About
 
 A live version is running at: <https://terrarium.theyosh.nl/index.html>. Go to
-'Help' menu for more information about used hardware, software and how to setup.
+'About' menu for more information about used hardware, software and how to setup.
