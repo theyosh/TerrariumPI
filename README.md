@@ -332,4 +332,5 @@ More screenshots can be found
 ## About
 
 A live version is running at: <https://terrarium.theyosh.nl/index.html>. Go to
-'About' menu for more information about used hardware, software and how to setup.
+'About' menu for more information about used hardware, software and how to
+setup.
