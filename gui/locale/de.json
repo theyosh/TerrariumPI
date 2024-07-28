@@ -1597,8 +1597,8 @@
           "placeholder": "Gib den grünen GPIO-Pin ein"
         },
         "h_scroll": {
-          "help": "",
-          "label": ""
+          "help": "Aktivieren Sie diese Option, um das horizontale Scrollen zu aktivieren.",
+          "label": "Horizontal scrollen"
         },
         "hardware": {
           "help": "Wähle den Hardwaretyp für diese Anzeige aus.",
