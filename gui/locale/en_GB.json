@@ -1596,6 +1596,10 @@
           "label": "Green",
           "placeholder": "Enter green GPIO pin"
         },
+        "h_scroll": {
+          "help": "Toggle on to enable horizontal scrolling.",
+          "label": "Scroll horizontal"
+        },
         "hardware": {
           "help": "Select the hardware type for this display.",
           "invalid": "Please make a choice.",
