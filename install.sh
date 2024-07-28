@@ -75,7 +75,7 @@ elif [ "${OS}" == "bullseye" ]; then
 elif [ "${OS}" == "bookworm" ]; then
   # Python 3.11
   # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
-  OPENCV_PACKAGES="libopenexr-3-1-30 libilmbase25 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev rpicam-apps"
+  OPENCV_PACKAGES="libopenexr-3-1-30 libilmbase25 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev rpicam-apps-lite"
 
   # Python package version difference per OS
   # On bookworm we use the OS package versions
