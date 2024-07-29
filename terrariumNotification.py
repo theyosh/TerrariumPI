@@ -10,7 +10,7 @@ import requests
 import copy
 
 # Traffic light Support
-import RPi.GPIO as GPIO
+from gpiozero import LED
 
 # Email support
 import emails
@@ -652,26 +652,28 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
 
     def load_setup(self, setup_data):
         self.setup = {
-            "red": None if setup_data.get("red") is None else terrariumUtils.to_BCM_port_number(setup_data.get("red")),
+            "red": None if setup_data.get("red") is None else LED(terrariumUtils.to_BCM_port_number(setup_data.get("red"))),
             "yellow": (
                 None
                 if setup_data.get("yellow") is None
-                else terrariumUtils.to_BCM_port_number(setup_data.get("yellow"))
+                else LED(terrariumUtils.to_BCM_port_number(setup_data.get("yellow")))
             ),
             "green": (
-                None if setup_data.get("green") is None else terrariumUtils.to_BCM_port_number(setup_data.get("green"))
+                None
+                if setup_data.get("green") is None
+                else LED(terrariumUtils.to_BCM_port_number(setup_data.get("green")))
             ),
             "red_timer": None,
             "yellow_timer": None,
         }
 
+        # Animate once, leave green on
         for led in ["red", "yellow", "green"]:
-            if self.setup[led]:
-                GPIO.setup(self.setup[led], GPIO.OUT)
-                GPIO.output(self.setup[led], True)
+            if self.setup[led] is not None:
+                self.setup[led].on()
                 if led != "green":
                     sleep(1)
-                    GPIO.output(self.setup[led], False)
+                    self.setup[led].off()
 
         super().load_setup(setup_data)
 
@@ -688,8 +690,8 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
         else:
             return
 
-        if led is not None:
-            GPIO.output(self.setup[led], True)
+        if led is not None and self.setup[led] is not None:
+            self.setup[led].on()
             if self.setup[f"{led}_timer"] is not None:
                 try:
                     self.setup[f"{led}_timer"].cancel()
@@ -697,13 +699,12 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
                     print(f"Traffic {led} exception")
                     print(ex)
 
-            self.setup[f"{led}_timer"] = Timer(timeout, lambda: GPIO.output(self.setup[f"{led}"], False))
+            self.setup[f"{led}_timer"] = Timer(timeout, lambda: self.setup[f"{led}"].off())
 
     def stop(self):
         for led in ["red", "yellow", "green"]:
-            if self.setup[led]:
-                GPIO.output(self.setup[led], False)
-                GPIO.cleanup(self.setup[led])
+            if self.setup[led] is not None:
+                self.setup[led].off()
                 if self.setup.get(f"{led}_timer"):
                     try:
                         self.setup[f"{led}_timer"].cancel()
@@ -2261,9 +2262,9 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
             numCycles = int(length * frequency)  # the number of waves to produce is the duration times the frequency
 
             for _ in range(numCycles):  # start a loop from 0 to the variable "cycles" calculated above
-                GPIO.output(self.setup["address"], True)  # set pin 27 to high
+                self.setup["buzzer"].on()
                 sleep(delayValue)  # wait with pin 27 high
-                GPIO.output(self.setup["address"], False)  # set pin 27 to low
+                self.setup["buzzer"].off()
                 sleep(delayValue)  # wait with pin 27 low
 
         if self._playing or song not in self.__SONGS:
@@ -2285,15 +2286,14 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
     def load_setup(self, setup_data):
         self._playing = False
         self._player = None
-        self.setup = {"address": terrariumUtils.to_BCM_port_number(setup_data.get("address"))}
+        self.setup = {"buzzer": None if setup_data.get("address") is None else LED(terrariumUtils.to_BCM_port_number(setup_data.get("address")))}
 
-        GPIO.setup(self.setup["address"], GPIO.OUT)
         super().load_setup(setup_data)
         # Startup song :P
         # self.send_message(None, 'Popcorn', None)
 
     def send_message(self, type, subject, message, data=None, attachments=[]):
-        if self._playing:
+        if self._playing or self.setup["buzzer"] is None:
             return
 
         for song in self.__SONGS:
@@ -2307,9 +2307,8 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
         if self._player is not None:
             self._player.join()
 
-        GPIO.output(self.setup["address"], False)
-        GPIO.cleanup(self.setup["address"])
-
+        if self.setup["buzzer"] is not None:
+            self.setup["buzzer"].off()
 
 class terrariumNotificationServiceMQTT(terrariumNotificationService):
     # The callback for when the client receives a CONNACK response from the server.

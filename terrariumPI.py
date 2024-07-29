@@ -17,10 +17,6 @@ import gettext
 
 gettext.install("terrariumpi", "locales/")
 
-import RPi.GPIO as GPIO
-
-GPIO.setmode(GPIO.BCM)
-
 from terrariumEngine import terrariumEngine
 
 if __name__ == "__main__":

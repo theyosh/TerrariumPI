@@ -14,7 +14,7 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 from hashlib import md5
-import RPi.GPIO as GPIO
+from gpiozero import Button
 import threading
 from gevent import sleep
 
@@ -109,7 +109,7 @@ class terrariumButton(object):
                 return self.PRESSED if state else self.RELEASED
 
         else:
-            return self.PRESSED if GPIO.input(self._device["device"]) else self.RELEASED
+           return self.PRESSED if not self._device["device"].is_pressed else self.RELEASED
 
     def load_hardware(self):
         address = self._address
@@ -126,8 +126,7 @@ class terrariumButton(object):
             self._device["device"].set_port(int(address[0].split("-")[1]))
 
         else:
-            self._device["device"] = terrariumUtils.to_BCM_port_number(address[0])
-            GPIO.setup(self._device["device"], GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Data in
+            self._device["device"] = Button(terrariumUtils.to_BCM_port_number(address[0]))
 
         self._load_hardware()
 
@@ -192,9 +191,3 @@ class terrariumButton(object):
     def stop(self):
         self._checker["running"] = 0
         self._checker["thread"].join()
-
-        if not isinstance(self._device["device"], terrariumIOExpander):
-            try:
-                GPIO.cleanup(self._device["device"])
-            except Exception:
-                logger.debug(f"Button {self} is already stopped.")
