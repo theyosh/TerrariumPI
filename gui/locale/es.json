@@ -1020,6 +1020,8 @@
     },
     "door": {
       "status": {
+        "closed": "",
+        "open": "",
         "title": "Actualización del estado de la puerta"
       }
     },

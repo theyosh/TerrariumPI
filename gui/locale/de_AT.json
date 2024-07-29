@@ -1042,6 +1042,8 @@
     },
     "door": {
       "status": {
+        "closed": "",
+        "open": "",
         "title": "Türstatus -Update"
       }
     },

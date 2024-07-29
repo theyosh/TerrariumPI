@@ -70,7 +70,7 @@ export const updateButton = (button) => {
     if ((old_state !== null || button.value === (inverse ? 1 : 0)) && old_state !== button.value) {
       // Door notification
       successNotification(
-        $_(loaded_buttons[button.id].closed ? 'notification.door.status.closed' : 'notification.door.status.opened', {
+        $_(loaded_buttons[button.id].closed ? 'notification.door.status.closed' : 'notification.door.status.open', {
           values: { name: loaded_buttons[button.id].name },
         }),
         $_('notification.door.status.title'),
