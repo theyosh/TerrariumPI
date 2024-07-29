@@ -34,7 +34,7 @@
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-esbuild": "^6.1.0",
     "rollup-plugin-generate-html-template": "^1.7.0",
-    "rollup-plugin-gzip": "^3.1.0",
+    "rollup-plugin-gzip": "^4.0.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-svelte": "^7.1.0",
