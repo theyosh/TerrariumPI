@@ -652,7 +652,9 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
 
     def load_setup(self, setup_data):
         self.setup = {
-            "red": None if setup_data.get("red") is None else LED(terrariumUtils.to_BCM_port_number(setup_data.get("red"))),
+            "red": (
+                None if setup_data.get("red") is None else LED(terrariumUtils.to_BCM_port_number(setup_data.get("red")))
+            ),
             "yellow": (
                 None
                 if setup_data.get("yellow") is None
@@ -2286,7 +2288,13 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
     def load_setup(self, setup_data):
         self._playing = False
         self._player = None
-        self.setup = {"buzzer": None if setup_data.get("address") is None else LED(terrariumUtils.to_BCM_port_number(setup_data.get("address")))}
+        self.setup = {
+            "buzzer": (
+                None
+                if setup_data.get("address") is None
+                else LED(terrariumUtils.to_BCM_port_number(setup_data.get("address")))
+            )
+        }
 
         super().load_setup(setup_data)
         # Startup song :P
@@ -2309,6 +2317,7 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
 
         if self.setup["buzzer"] is not None:
             self.setup["buzzer"].off()
+
 
 class terrariumNotificationServiceMQTT(terrariumNotificationService):
     # The callback for when the client receives a CONNACK response from the server.

@@ -109,7 +109,7 @@ class terrariumButton(object):
                 return self.PRESSED if state else self.RELEASED
 
         else:
-           return self.PRESSED if not self._device["device"].is_pressed else self.RELEASED
+            return self.PRESSED if not self._device["device"].is_pressed else self.RELEASED
 
     def load_hardware(self):
         address = self._address

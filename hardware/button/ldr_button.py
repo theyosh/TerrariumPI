@@ -4,6 +4,7 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import RPi.GPIO as GPIO
+
 GPIO.setmode(GPIO.BCM)
 from gevent import sleep
 import threading
