@@ -132,6 +132,7 @@ class terrariumButton(object):
 
         self._checker["thread"] = threading.Thread(target=self._run)
         self._checker["thread"].start()
+        sleep(0.2)
 
     @property
     def id(self):
