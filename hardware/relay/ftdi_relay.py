@@ -1,7 +1,7 @@
 from . import terrariumRelay
 from terrariumUtils import terrariumUtils
 
-# pip install pylibftdi==0.19.0
+# pip install pylibftdi
 # https://pylibftdi.readthedocs.io/en/latest/
 from pylibftdi import Driver, BitBangDevice, SerialDevice
 
@@ -43,31 +43,30 @@ class terrariumRelayFTDI(terrariumRelay):
         number_mode = terrariumUtils.is_float(address[1])
         counter = 1
         for _, device_type, serial in Driver().list_devices():
-            # Loop until we reatch the number (amount) or serial that is entered
+            # Loop until we reach the number (amount) or serial that is entered
             if (number_mode and counter != address[1]) or (not number_mode and address[1] != serial):
                 counter += 1
                 continue
 
-            device = serial
             device_type = (
                 terrariumRelayFTDI.SERIAL if device_type.lower().endswith("uart") else terrariumRelayFTDI.BITBANG
             )
 
-            self.address = f"{address[0]},{device}"
+            self.address = f"{address[0]},{serial}"
 
             return (serial, device_type)
 
     def _set_hardware_value(self, state):
-        (device, device_type) = self.device
+        (serial, device_type) = self.device
 
         if device_type == terrariumRelayFTDI.SERIAL:
-            with SerialDevice(device) as device:
+            with SerialDevice(serial) as device:
                 device.baudrate = 9600
                 cmd = chr(0xFF) + chr(0x0 + self._address[0]) + chr(0x0 + (1 if state == self.ON else 0))
                 device.write(cmd)
 
         elif device_type == terrariumRelayFTDI.BITBANG:
-            with BitBangDevice(device) as device:
+            with BitBangDevice(serial) as device:
                 device.baudrate = 9600
                 if state == self.ON:
                     device.port |= int(terrariumRelayFTDI.BITBANG_ADDRESSES[str(self._address[0])], 16)
@@ -100,13 +99,13 @@ class terrariumRelayFTDI(terrariumRelay):
                 return testBit(data, 8)
 
         data = None
-        (device, device_type) = self.device
+        (serial, device_type) = self.device
         if device_type == terrariumRelayFTDI.SERIAL:
             # As we cannot read out this device, we borrow the current state as the new state....
             data = 1 if self.state == self.ON else 0
 
         elif device_type == terrariumRelayFTDI.BITBANG:
-            with BitBangDevice(device) as device:
+            with BitBangDevice(serial) as device:
                 device.baudrate = 9600
                 data = int(get_relay_state(device.port, str(self._address[0])))
 
