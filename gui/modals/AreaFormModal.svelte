@@ -765,7 +765,7 @@
           label="{$_('areas.settings.setup.deviation_low_alarm.label', { default: 'Low alarm deviation' })}"
           placeholder="{$_('areas.settings.setup.deviation_low_alarm.placeholder', { default: 'Low alarm deviation' })}"
           help="{$_('areas.settings.setup.deviation_low_alarm.help', {
-            default: 'Increase of decrease low alarm value.',
+            default: 'Increase or decrease low alarm value.',
           })}"
           invalid="{$_('areas.settings.setup.deviation_low_alarm.invalid', { default: 'Enter a valid number.' })}"
         />
@@ -780,7 +780,7 @@
             default: 'High alarm deviation',
           })}"
           help="{$_('areas.settings.setup.deviation_high_alarm.help', {
-            default: 'Increase of decrease high alarm value.',
+            default: 'Increase or decrease high alarm value.',
           })}"
           invalid="{$_('areas.settings.setup.deviation_high_alarm.invalid', { default: 'Enter a valid number.' })}"
         />

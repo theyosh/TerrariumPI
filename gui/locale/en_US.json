@@ -100,13 +100,13 @@
           }
         },
         "deviation_high_alarm": {
-          "help": "Increase of decrease high alarm value.",
+          "help": "Increase or decrease high alarm value.",
           "invalid": "Enter a valid number.",
           "label": "High alarm deviation",
           "placeholder": "High alarm deviation"
         },
         "deviation_low_alarm": {
-          "help": "Increase of decrease low alarm value.",
+          "help": "Increase or decrease low alarm value.",
           "invalid": "Enter a valid number.",
           "label": "Low alarm deviation",
           "placeholder": "Low alarm deviation"
