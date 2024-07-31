@@ -27,7 +27,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, Conversati
 # Database
 from pony import orm
 
-from gevent import sleep
+from time import sleep
 from operator import itemgetter
 from threading import Thread, Timer
 from base64 import b64encode
@@ -554,54 +554,54 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
             # Configuration is not loaded, or no receivers, ignore sending emails
             return
 
-        htmlbody = '<html><head><title>{}</title></head><body><img src="cid:{}" alt="Profile image" title="Profile image" align="right" style="max-width:300px;border-radius:25%;">{}</body></html>'
+        html_body = '<html><head><title>{}</title></head><body><img src="cid:{}" alt="Profile image" title="Profile image" align="right" style="max-width:300px;border-radius:25%;">{}</body></html>'
 
-        for receiver in self.setup["receiver"]:
-            email_message = emails.Message(
-                headers={"X-Mailer": "TerrariumPI version {}".format(self.setup["version"])},
-                html=htmlbody.format(
-                    subject, os.path.basename(self.setup["profile_image"]), message.replace("\n", "<br />")
-                ),
-                text=message,
-                subject=subject,
-                mail_from=("TerrariumPI", self.setup["sender"]),
-            )
+        email_message = emails.Message(
+            headers={"X-Mailer": "TerrariumPI version {}".format(self.setup["version"])},
+            html=html_body.format(
+                subject, os.path.basename(self.setup["profile_image"]), message.replace("\n", "<br />")
+            ),
+            text=message,
+            subject=subject,
+            mail_from=("TerrariumPI", self.setup["sender"]),
+        )
 
-            profile_image_path = ("public/" if self.setup["profile_image"].startswith("img/") else "") + self.setup[
-                "profile_image"
-            ]
+        profile_image_path = ("public/" if self.setup["profile_image"].startswith("img/") else "") + self.setup[
+            "profile_image"
+        ]
+        try:
+            with open(profile_image_path, "rb") as fp:
+                profile_image = fp.read()
+                email_message.attach(
+                    filename=os.path.basename(self.setup["profile_image"]),
+                    content_disposition="inline",
+                    data=profile_image,
+                )
+        except FileNotFoundError:
+            logger.warning(f"Profile image at location {profile_image_path} does not exists.")
+
+        for attachment in attachments:
             try:
-                with open(profile_image_path, "rb") as fp:
-                    profile_image = fp.read()
-                    email_message.attach(
-                        filename=os.path.basename(self.setup["profile_image"]),
-                        content_disposition="inline",
-                        data=profile_image,
-                    )
+                with open(attachment, "rb") as fp:
+                    attachment_data = fp.read()
+                    email_message.attach(filename=os.path.basename(attachment), data=attachment_data)
             except FileNotFoundError:
-                logger.warning(f"Profile image at location {profile_image_path} does not exists.")
+                pass
 
-            for attachment in attachments:
-                try:
-                    with open(attachment, "rb") as fp:
-                        attachment_data = fp.read()
-                        email_message.attach(filename=os.path.basename(attachment), data=attachment_data)
-                except FileNotFoundError:
-                    pass
+        mail_tls_ssl = ["tls", "ssl", None]
+        while not len(mail_tls_ssl) == 0:
 
-            mail_tls_ssl = ["tls", "ssl", None]
-            while not len(mail_tls_ssl) == 0:
+            smtp_settings = {"host": self.setup["address"], "port": self.setup["port"]}
 
-                smtp_settings = {"host": self.setup["address"], "port": self.setup["port"]}
+            smtp_security = mail_tls_ssl.pop(0)
+            if smtp_security is not None:
+                smtp_settings[smtp_security] = True
 
-                smtp_security = mail_tls_ssl.pop(0)
-                if smtp_security is not None:
-                    smtp_settings[smtp_security] = True
+            if "" != self.setup["username"]:
+                smtp_settings["user"] = self.setup["username"]
+                smtp_settings["password"] = self.setup["password"]
 
-                if "" != self.setup["username"]:
-                    smtp_settings["user"] = self.setup["username"]
-                    smtp_settings["password"] = self.setup["password"]
-
+            for receiver in self.setup["receiver"]:
                 response = email_message.send(to=(receiver, receiver), smtp=smtp_settings)
 
                 if response.status_code == 250:

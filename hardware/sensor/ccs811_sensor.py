@@ -14,7 +14,7 @@ from . import terrariumI2CSensor, terrariumSensorUpdateException
 #
 # Version 1.0
 
-from gevent import sleep
+from time import sleep
 import struct, array, io, fcntl
 
 # I2C Address

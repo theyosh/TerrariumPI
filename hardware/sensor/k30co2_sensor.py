@@ -2,7 +2,7 @@
 from . import terrariumSensor
 
 import serial
-from gevent import sleep
+from time import sleep
 
 # https://computenodes.net/2017/08/18/__trashed-4/ , https://github.com/theyosh/TerrariumPI/issues/177
 # pip install pyserial

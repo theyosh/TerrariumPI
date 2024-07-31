@@ -12,7 +12,7 @@ from PIL import Image
 from pathlib import Path
 from io import BytesIO
 
-from gevent import sleep
+from time import sleep
 
 
 class terrariumUSBWebcam(terrariumWebcam):

@@ -4,9 +4,7 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import RPi.GPIO as GPIO
-
-GPIO.setmode(GPIO.BCM)
-from gevent import sleep
+from time import sleep
 import threading
 
 from . import terrariumButton
@@ -53,6 +51,7 @@ class terrariumLDRSensor(terrariumButton):
         return self._device["internal_state"]
 
     def _load_hardware(self):
+        GPIO.setmode(GPIO.BCM)
         self._device["internal_state"] = self.RELEASED
 
         self.__thread = threading.Thread(target=self.__run)

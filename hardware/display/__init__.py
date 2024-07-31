@@ -5,7 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 from hashlib import md5
 import threading
-from gevent import sleep
+from time import sleep
 import queue
 import textwrap
 from retry import retry

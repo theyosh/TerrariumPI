@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from . import terrariumI2CSensor
 
-from gevent import sleep
+from time import sleep
 
 
 class terrariumHIH8000Sensor(terrariumI2CSensor):

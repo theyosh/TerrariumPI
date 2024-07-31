@@ -13,7 +13,7 @@ from hashlib import md5
 from datetime import datetime, timedelta
 from io import BytesIO
 from time import time
-from gevent import sleep
+from time import sleep
 from func_timeout import func_timeout, FunctionTimedOut
 
 import math
