@@ -30,7 +30,8 @@ idea of making my own controlling software for controlling the relays based on
 time or sensors. And would make sure that the humidity is always at the correct
 value.
 
-> **TerrariumPI was born!**
+> **TerrariumPI was born!** \
+{: .prompt-info }
 
 ## Basic setup
 
