@@ -33,6 +33,10 @@ own data pin.
 **There is a 5.1K resistor inside the sensor connecting VCC and DATA so you do
 not need any additional pull-up resistors**
 
-**remark:** From experience, this sensor is not very stable after a few days.
+## Warning
+
+As these sensors are cheap, they are [not stable for 24/7 duty](https://learn.adafruit.com/modern-replacements-for-dht11-dht22-sensors/). After a few days
+they tend to give problems. Use at your own risk!
+[Using DHT11 / DHT11 on Raspberry Pi 4b #470](https://github.com/theyosh/TerrariumPI/issues/470)
 
 {% include_relative _sensor_detail.md %}
