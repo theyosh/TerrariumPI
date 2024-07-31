@@ -171,7 +171,8 @@ you always have to by more hardware than needed. Because hardware will always
 break down in a weekend. Or the hardware is not available anymore as it was to
 old. Therefore my advise is always:
 
-> Buy at least 1 backup device when you order new hardware {: .prompt-tip }
+> Buy at least 1 backup device when you order new hardware
+{: .prompt-tip }
 
 ### Raspberry PI versions
 
