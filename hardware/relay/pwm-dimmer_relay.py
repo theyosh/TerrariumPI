@@ -10,6 +10,7 @@ from terrariumUtils import terrariumUtils
 from gpiozero import PWMOutputDevice
 
 # pip install pigpio (Legacy method)
+# TODO: This will not work on a Raspberry PI 5
 import pigpio
 
 
@@ -93,9 +94,6 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
         return True
 
     def _get_hardware_value(self):
-        # if not self._legacy:
-        #     return round(max(0.0, min(100.0, (self.device.value * 100.0) - float(self._dimmer_offset))))
-
         return self._dimmer_state
 
     def stop(self):

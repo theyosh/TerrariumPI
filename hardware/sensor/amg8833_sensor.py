@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from . import terrariumI2CSensor
 
-from gevent import sleep
+from time import sleep
 
 # pip install melopero-amg8833
 import melopero_amg8833

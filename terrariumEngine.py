@@ -25,7 +25,7 @@ import gettext
 
 from concurrent import futures
 from pathlib import Path
-from gevent import sleep
+from time import sleep
 from packaging.version import Version
 from pyfancy.pyfancy import pyfancy
 
@@ -293,7 +293,8 @@ class terrariumEngine(object):
         os.environ["MEROSS_PASSWORD"] = settings["meross_cloud_password"]
 
         # Make sure we use PiGPIO daemon for PWM
-        os.environ["GPIOZERO_PIN_FACTORY"] = "pigpio"
+        # TODO: Does not work in Raspberry PI 5
+        # os.environ["GPIOZERO_PIN_FACTORY"] = "pigpio"
 
         # Add some extra non DB settings
         settings["version"] = self.version

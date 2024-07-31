@@ -2,7 +2,7 @@
 from . import terrariumSensor
 
 import serial
-from gevent import sleep
+from time import sleep
 
 # https://github.com/UedaTakeyuki/mh-z19/blob/master/pypi/mh_z19/__init__.py
 # https://www.circuits.dk/testing-mh-z19-ndir-co2-sensor-module/

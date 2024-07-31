@@ -3,7 +3,7 @@ import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
 from terrariumUtils import terrariumUtils
-from gevent import sleep
+from time import sleep
 import threading
 
 from . import terrariumButton

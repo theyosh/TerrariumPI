@@ -16,7 +16,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 from hashlib import md5
 from gpiozero import Button
 import threading
-from gevent import sleep
+from time import sleep
 
 from terrariumUtils import terrariumUtils, classproperty
 

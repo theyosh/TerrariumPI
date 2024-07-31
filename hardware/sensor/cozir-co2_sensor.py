@@ -3,7 +3,7 @@ from . import terrariumSensor
 
 import serial
 
-from gevent import sleep
+from time import sleep
 
 # http://www.co2meters.com/Documentation/AppNotes/AN127-COZIR-sensor-raspberry-pi-uart.pdf
 # pip install pyserial
