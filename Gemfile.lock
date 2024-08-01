@@ -162,6 +162,7 @@ DEPENDENCIES
   jekyll-feed
   jekyll-liquify (= 0.0.2)
   jekyll-minifier
+  jekyll-redirect-from
   jekyll-target-blank
   jekyll-theme-chirpy (>= 7.0.0)
   jemoji

@@ -1,9 +1,12 @@
 ---
 title: 🎉 10 Year Anniversary 🥳
-date: 2024-07-31 12:00:00 +0000
+date: 2024-08-01 00:00:00 +0000
 categories: [Website, News]
 tags: [anniversary, 10-year]
 pin: true
+
+redirect_from:
+  - /posts/2024/07/31/10-year-anniversary/
 
 image:
   path: /assets/img/10-year-party-ballons.webp

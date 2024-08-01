@@ -12,6 +12,7 @@ group :jekyll_plugins do
   gem "jekyll-minifier"
   gem "jemoji"
   gem "jekyll-liquify", "= 0.0.2"
+  gem "jekyll-redirect-from"
 end
 
 group :test do
