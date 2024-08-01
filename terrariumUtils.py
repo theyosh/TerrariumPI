@@ -594,3 +594,10 @@ class terrariumUtils:
             address[1] = 1
 
         return address
+
+    @staticmethod
+    def isRaspberryPI5():
+        with open('/proc/device-tree/model') as fp:
+            model = fp.read()
+
+        return "Raspberry Pi 4" in model

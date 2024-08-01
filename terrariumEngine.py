@@ -293,8 +293,9 @@ class terrariumEngine(object):
         os.environ["MEROSS_PASSWORD"] = settings["meross_cloud_password"]
 
         # Make sure we use PiGPIO daemon for PWM
-        # TODO: Does not work in Raspberry PI 5
-        # os.environ["GPIOZERO_PIN_FACTORY"] = "pigpio"
+        # Pin factories: https://gpiozero.readthedocs.io/en/latest/api_pins.html
+        # rgpio should be the coming factory for Raspberry PI 5 https://github.com/gpiozero/gpiozero/pull/1129
+        os.environ["GPIOZERO_PIN_FACTORY"] = "rgpio" if terrariumUtils.isRaspberryPI5() else "pigpio"
 
         # Add some extra non DB settings
         settings["version"] = self.version
