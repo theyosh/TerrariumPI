@@ -597,7 +597,4 @@ class terrariumUtils:
 
     @staticmethod
     def isRaspberryPI5():
-        with open('/proc/device-tree/model') as fp:
-            model = fp.read()
-
-        return "Raspberry Pi 4" in model
+        return "Raspberry Pi 5" in Path("/proc/device-tree/model").read_text()
