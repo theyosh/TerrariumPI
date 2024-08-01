@@ -6,8 +6,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 from . import terrariumSensor
 from terrariumUtils import terrariumUtils
 
-from gevent import sleep
-from time import time
+from time import time, sleep
 import pigpio
 
 # http://abyz.me.uk/rpi/pigpio/code/sonar_trigger_echo_py.zip
