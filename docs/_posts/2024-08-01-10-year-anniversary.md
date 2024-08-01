@@ -5,6 +5,9 @@ categories: [Website, News]
 tags: [anniversary, 10-year]
 pin: true
 
+redirect_from:
+  - /posts/2024/07/31/10-year-anniversary/
+
 image:
   path: /assets/img/10-year-party-ballons.webp
   src: /assets/img/10-year-party-ballons.webp
@@ -30,7 +33,10 @@ idea of making my own controlling software for controlling the relays based on
 time or sensors. And would make sure that the humidity is always at the correct
 value.
 
+<!-- prettier-ignore-start -->
 > **TerrariumPI was born!**
+{: .prompt-info }
+<!-- prettier-ignore-end -->
 
 ## Basic setup
 
@@ -171,7 +177,10 @@ you always have to by more hardware than needed. Because hardware will always
 break down in a weekend. Or the hardware is not available anymore as it was to
 old. Therefore my advise is always:
 
-> Buy at least 1 backup device when you order new hardware {: .prompt-tip }
+<!-- prettier-ignore-start -->
+> Buy at least 1 backup device when you order new hardware
+{: .prompt-tip }
+<!-- prettier-ignore-end -->
 
 ### Raspberry PI versions
 
@@ -473,7 +482,12 @@ TerrariumPI. Of which I am very thank full.
 
 And now, 10 years later, the software is running stable and reliable. Which was
 the goal in the beginning. It took some more years, and a lot of extra features,
-but we made it. **10 years old! !! PAAARTEEEEYYY !!**
+but we made it.
+
+<!-- prettier-ignore-start -->
+> **10 years old! !! PAAARTEEEEYYY !!**
+{: .prompt-tip }
+<!-- prettier-ignore-end -->
 
 <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/ZJB5EPInvETQY" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/disco-ZJB5EPInvETQY">via GIPHY</a></p>
 
