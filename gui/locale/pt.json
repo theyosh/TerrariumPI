@@ -353,13 +353,13 @@
         },
         "max_day_hours": {
           "help": "O número máximo de horas que as luzes estão ligadas. Apenas válido no modo de meteorologia. Quando o período diurno é maior então este valor é o máximo, o dia será reduzido a este valor máximo.",
-          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
+          "invalid": "O valor inserido não é válido. Insira um número válido entre {min} e {max}.",
           "label": "Máximo de horas",
           "placeholder": "Insira um número"
         },
         "min_day_hours": {
           "help": "O número mínimo de horas que as luzes estão ligadas. Apenas válido no modo de meteorologia. Quando o período diurno é menor então este valor é o mínimo, o dia será extendido a este valor mínimo.",
-          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
+          "invalid": "O valor inserido não é válido. Insira um número válido entre {min} e {max}.",
           "label": "Mínimo de horas",
           "placeholder": "Insira um número"
         },
@@ -379,7 +379,7 @@
         },
         "shift_day_hours": {
           "help": "O número de horas para ajustar ao nascer do Sol. Valores negativos irão fazer iniciar o período diurno mais cedo.",
-          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
+          "invalid": "O valor inserido não é válido. Insira um número válido entre {min} e {max}.",
           "label": "Ajuste de horas",
           "placeholder": "Insira um número"
         },
@@ -582,8 +582,8 @@
       "address": {
         "help": "",
         "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "label": "Endereço",
+        "placeholder": "Insira um endereço"
       },
       "calibration": {
         "inverse": {
@@ -610,7 +610,7 @@
       },
       "hardware": {
         "help": "Seleccione o tipo de hardware para este bottão.",
-        "invalid": "",
+        "invalid": "Por favor seleccione um tipo de hardware.",
         "label": "",
         "placeholder": ""
       },
@@ -905,7 +905,7 @@
     "settings": {
       "export": "Exportar"
     },
-    "wattage": "Energia"
+    "wattage": "Potência"
   },
   "home": {
     "menu": {
@@ -952,7 +952,7 @@
       },
       "rate_limit": {
         "help": "Número máximo de mensagens por minuto para esta mensage. Utilize 0 para ilimatado.",
-        "invalid": "O valor inserido não é válido. Insira um valor válido superior a {min}.",
+        "invalid": "O valor inserido não é valido. Deverá ser um número superior a {min}.",
         "label": "Taxa limite",
         "placeholder": "Mensagens por minuto"
       },
@@ -1007,7 +1007,7 @@
         "logout": "Tem a certeza que quer efectuar logout?",
         "reboot": "Irá reiniciar o Raspberry PI. Poderá demorar até 60 segundos.",
         "restart": "Irá reiniciar o TerrariumPI. Poderá demorar até 30 segundos.",
-        "shutdown": "Irá desligar o Raspberry PI. Utilizar com cuidado!"
+        "shutdown": "Irá encerrar o Raspberry PI. Utilizar com cuidado!"
       },
       "title": "Tem a certeza?"
     },
@@ -1118,30 +1118,30 @@
     },
     "offline": {
       "message": "A conexão foi perdida",
-      "title": ""
+      "title": "Desconectado"
     },
     "online": {
-      "message": "",
-      "title": ""
+      "message": "Conectados",
+      "title": "Conectado"
     },
     "reboot": {
       "ok": {
-        "title": ""
+        "title": "Rearranque de sistema ok"
       }
     },
     "restart": {
       "ok": {
-        "title": ""
+        "title": "Reinício de sistema ok"
       }
     },
     "scanning": {
       "ok": {
-        "title": ""
+        "title": "Detecção finalizada"
       }
     },
     "shutdown": {
       "ok": {
-        "title": ""
+        "title": "Encerramento de sistema ok"
       }
     },
     "toggle": {
@@ -1155,55 +1155,55 @@
   },
   "relays": {
     "actions": {
-      "delete": "",
-      "export": "",
-      "ignore": "",
-      "manual_mode": "",
-      "replace_hardware": "",
-      "settings": ""
+      "delete": "Eliminar relé",
+      "export": "Exportar relé",
+      "ignore": "Ignorar relé",
+      "manual_mode": "Modo manual de relé",
+      "replace_hardware": "Substituir hardware",
+      "settings": "Editar relé"
     },
     "confirm": {
       "ignore": {
-        "message": ""
+        "message": "Tem a certeza que quer ignorar o relé ''{name}''?"
       },
       "manual_mode": {
-        "message": ""
+        "message": "Habilitar modo manual para o relé ''{name}''?"
       }
     },
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Tem a certeza que quer eliminar o relé ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Não foi possível eliminar o relé ''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "O relé ''{name}'' foi eliminado."
       }
     },
     "exclude": {
       "error": {
-        "message": ""
+        "message": "Não foi possível ignorar o relé ''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "O relé ''{name}'' foi ignorado."
       }
     },
-    "manual-mode": "",
+    "manual-mode": "Modo manual",
     "manual_mode": {
       "error": {
-        "message": ""
+        "message": "Erro ao mudar o modo manual para o relé ''{name}''.\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "O modo manual do relé ''{name}'' foi alterado."
       }
     },
     "menu": {
       "new": {
-        "title": ""
+        "title": "Novo relé"
       },
       "scan": {
-        "title": ""
+        "title": "Detectar relés"
       },
       "status": {
         "title": "Estado"
@@ -1212,48 +1212,48 @@
     },
     "settings": {
       "address": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Para mais informações consulte online.",
+        "invalid": "O endereço inserido não é válido. Não pode estar vazio.",
+        "label": "Endereço",
+        "placeholder": "Insira um endereço"
       },
       "calibration": {
         "dimmer_frequency": {
-          "help": "",
+          "help": "A frequência na qual o dimmer opera.",
           "invalid": "Por favor insira um valor mínimo de {value}.",
-          "label": ""
+          "label": "Frequência do dimmer em Hz"
         },
         "dimmer_max_dim": {
-          "help": "",
+          "help": "Valor máximo para o dimmer (legado).",
           "invalid": "Por favor insira um valor mínimo de {value}.",
-          "label": ""
+          "label": "Valor máximo do dimmer"
         },
         "dimmer_max_power": {
-          "help": "",
-          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
-          "label": ""
+          "help": "Potência máxima para este dimmer.",
+          "invalid": "O valor inserido não é válido. Insira um número válido entre {min} e {max}.",
+          "label": "Potência máx em %"
         },
         "dimmer_offset": {
-          "help": "",
+          "help": "Compensação do dimmer.",
           "invalid": "Por favor insira um valor mínimo de {value}.",
-          "label": ""
+          "label": "Compensação do dimmer em %"
         }
       },
       "current": {
-        "help": "",
+        "help": "O estado actual do relé.",
         "label": "Actual",
-        "placeholder": ""
+        "placeholder": "Valor actual"
       },
       "flow": {
-        "help": "",
+        "help": "Insira o valor (máximo) de fluxo de água quando ligado.",
         "invalid": "Por favor insira um valor mínimo de {value}.",
         "label": "Fluxo de água"
       },
       "hardware": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Seleccione o tipo de hardware para este relé.",
+        "invalid": "Por favor seleccione um tipo de hardware.",
+        "label": "Hardware",
+        "placeholder": "Seleccione o hardware"
       },
       "name": {
         "help": "Insira um nome fácil de recordar.",
@@ -1266,224 +1266,224 @@
           "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
-          "message": ""
+          "message": "Relé ''{name}'' actualizado."
         }
       },
-      "title": "",
+      "title": "Configurações de relé",
       "wattage": {
-        "help": "",
+        "help": "Insira a potência (máx) quando ligado.",
         "invalid": "Por favor insira um valor mínimo de {value}.",
-        "label": ""
+        "label": "Potência"
       }
     },
     "title": "Relés",
     "toggle": {
       "error": {
-        "message": ""
+        "message": "Erro ao alterar relé ''{name}''.\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "Alterado o relé ''{name}'' para o estado {value}"
       }
     }
   },
   "sensors": {
     "actions": {
-      "delete": "",
-      "export": "",
-      "ignore": "",
-      "settings": ""
+      "delete": "Eliminar sensor",
+      "export": "Exportar sensor",
+      "ignore": "Ignorar sensor",
+      "settings": "Editar sensor"
     },
     "all": {
       "menu": {
-        "title": ""
+        "title": "Todos os sensores"
       },
-      "title": ""
+      "title": "Todos os sensores"
     },
     "altitude": {
       "menu": {
-        "title": ""
+        "title": "Altitude"
       },
-      "title": ""
+      "title": "Sensores de altitude"
     },
     "average": {
-      "altitude": "",
-      "co2": "",
-      "distance": "",
-      "fertility": "",
-      "humidity": "",
-      "light": "",
-      "moisture": "",
-      "pressure": "",
-      "temperature": "",
-      "uva": "",
-      "uvb": "",
-      "uvi": ""
+      "altitude": "Altitude média",
+      "co2": "CO2 médio",
+      "distance": "Distância média",
+      "fertility": "Fertilidade média",
+      "humidity": "Humidade média",
+      "light": "Luz média",
+      "moisture": "Humidade média",
+      "pressure": "Pressão média",
+      "temperature": "Temperatura média",
+      "uva": "UVA médio",
+      "uvb": "UVB médio",
+      "uvi": "Índice UV médio"
     },
     "calibration": {
       "light_on_off_threshold": {
-        "light_bulb": ""
+        "light_bulb": "Luzes ligadas do valor limite: {threshold}"
       }
     },
     "co2": {
       "menu": {
-        "title": ""
+        "title": "CO2"
       },
-      "title": ""
+      "title": "Sensores de CO2"
     },
     "confirm": {
       "ignore": {
-        "message": ""
+        "message": "Tem a certeza que quer ignorar o sensor ''{name}''?"
       }
     },
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Tem a certeza que quer eliminar o sensor ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Não foi possível eliminar o sensor ''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "O sensor ''{name}'' foi eliminado."
       }
     },
     "distance": {
       "menu": {
-        "title": ""
+        "title": "Distância"
       },
-      "title": ""
+      "title": "Sensores de distância"
     },
     "exclude": {
       "error": {
-        "message": ""
+        "message": "Não foi possível ignorar o sensor ''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "O sensor ''{name}'' foi ignorado."
       }
     },
     "fertility": {
       "menu": {
-        "title": ""
+        "title": "Fertilidade"
       },
-      "title": ""
+      "title": "Sensores de fertilidade"
     },
     "humidity": {
       "menu": {
         "title": "Humidade"
       },
-      "title": ""
+      "title": "Sensores de humidade"
     },
     "light": {
       "menu": {
-        "title": ""
+        "title": "luzes"
       },
-      "title": ""
+      "title": "Sensores de luzes"
     },
     "menu": {
       "new": {
-        "title": ""
+        "title": "Novo sensor"
       },
       "scan": {
-        "title": ""
+        "title": "Detectar sensores"
       },
       "title": "Sensores"
     },
     "moisture": {
       "menu": {
-        "title": ""
+        "title": "Hidratação"
       },
-      "title": ""
+      "title": "Sensores de hidratação"
     },
     "ph": {
       "menu": {
-        "title": ""
+        "title": "pH"
       },
-      "title": ""
+      "title": "Sensores de pH"
     },
     "pressure": {
       "menu": {
-        "title": ""
+        "title": "pressão"
       },
-      "title": ""
+      "title": "Sensores de pressão"
     },
     "settings": {
       "address": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira um endereço.",
+        "invalid": "O endereço inserido não é válido. Não pode estar vazio.",
+        "label": "Endereço",
+        "placeholder": "Insira um endereço"
       },
       "alarm_max": {
-        "help": "",
-        "invalid": "",
+        "help": "Insira o limite máximo para o alarme.",
+        "invalid": "O valor inserido não é válido. Deve ser um número.",
         "label": "Alarme máx",
         "placeholder": "Alarme máx"
       },
       "alarm_min": {
-        "help": "",
-        "invalid": "",
+        "help": "Insira o limite mínimo do alarme.",
+        "invalid": "O valor inserido não é válido. Deve ser um número.",
         "label": "Alarme min",
         "placeholder": "Alarme min"
       },
       "calibration": {
         "ccs811_compensation_sensors": {
-          "help": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Seleccione os sensores para cálculo de compensação.",
+          "label": "Sensores de compensação",
+          "placeholder": "Seleccione os sensores de compensação"
         },
         "chirp_max_moist": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Insira o valor máximo de hidratação.",
+          "invalid": "O valor não é válido. Deve ser um número superior a {min}.",
+          "label": "Valor máximo de hidratação"
         },
         "chirp_min_moist": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Insira um valor mínimo de hidratação.",
+          "invalid": "O valor não é válido. Deve ser um número superior a {min}.",
+          "label": "Valor mínimo de hidratação"
         },
         "light_threshold": {
           "help": "",
-          "invalid": "",
-          "label": ""
+          "invalid": "O valor não é válido. Deve ser um número superior a {min}.",
+          "label": "Limite para luzes ligadas"
         },
         "offset": {
-          "help": "",
-          "invalid": "",
+          "help": "Insira a compensação para este sensor.",
+          "invalid": "O valor inserido não é válido. Deve ser um número.",
           "label": "Valor de desvio"
         }
       },
       "current": {
-        "help": "",
+        "help": "O estado actual do sensor",
         "label": "Actual",
-        "placeholder": ""
+        "placeholder": "Valor actual"
       },
       "exclude_avg": {
-        "help": "",
-        "label": ""
+        "help": "Excluir estes sensores do cálculo de média.",
+        "label": "Excl. méd"
       },
       "fields": {
         "error": "Nem todos os campos obrigatórios estão preenchidos correctamente."
       },
       "hardware": {
         "help": "Seleccione o tipo de hardware para este bottão.",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "invalid": "Por favor seleccione um tipo de hardware.",
+        "label": "Hardware",
+        "placeholder": "Seleccione o hardware"
       },
       "limit_max": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Insira o valor máximo válido.",
+        "invalid": "O valor inserido não é válido. Deve ser um número.",
+        "label": "Limite max"
       },
       "limit_min": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Insira o valor mínimo válido.",
+        "invalid": "O valor inserido não é válido. Deve ser um número.",
+        "label": "Limite min"
       },
       "max_diff": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira a diferença máxima válida entre duas leituras. Insira '0' para desabilitar.",
+        "invalid": "O valor não é válido. Deve ser um número superior a {min}.",
+        "label": "Dif máx",
+        "placeholder": "Diferença máx"
       },
       "name": {
         "help": "Insira um nome fácil de recordar.",
@@ -1493,13 +1493,13 @@
       },
       "save": {
         "ok": {
-          "message": ""
+          "message": "Sensor ''{name}'' actualizado."
         }
       },
-      "title": "",
+      "title": "Configurações de sensor",
       "type": {
-        "help": "",
-        "invalid": "",
+        "help": "Seleccione o tipo de leitura para este sensor.",
+        "invalid": "Por favor seleccione o tipo de leitura.",
         "label": "Tipo",
         "placeholder": "Seleccione o tipo"
       }
@@ -1508,50 +1508,50 @@
       "menu": {
         "title": "temperatura"
       },
-      "title": ""
+      "title": "Sensores de temperatura"
     },
     "title": "Sensores",
     "uva": {
       "menu": {
-        "title": ""
+        "title": "uva"
       },
-      "title": ""
+      "title": "Sensores de UVA"
     },
     "uvb": {
       "menu": {
-        "title": ""
+        "title": "uvb"
       },
-      "title": ""
+      "title": "Sensores de UVB"
     },
     "uvi": {
       "menu": {
-        "title": ""
+        "title": "uvi"
       },
-      "title": ""
+      "title": "Sensores de UVI"
     }
   },
   "services": {
     "actions": {
-      "delete": "",
-      "edit": ""
+      "delete": "Eliminar serviço",
+      "edit": "Editar serviço"
     },
-    "add": "",
+    "add": "Adiccionar serviço",
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Tem a certeza que quer eliminar o serviço ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Não foi possível eliminar o serviço ''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "O serviço ''{name}'' foi eliminado."
       }
     },
     "enabled": "Habilitado",
-    "ratelimit": "",
+    "ratelimit": "{number, plural, =0 {Mensagens ilimitadas} other {Max # por minuto}}",
     "settings": {
       "enabled": {
-        "help": "",
+        "help": "Habilitar/desabilitar este serviço de notificações.",
         "label": "Habilitado"
       },
       "name": {
@@ -1561,8 +1561,8 @@
         "placeholder": "Insira um nome"
       },
       "rate_limit": {
-        "help": "",
-        "invalid": "",
+        "help": "Número máximo de mensagens por minuto para este serviço. 0 para ilimitado.",
+        "invalid": "O valor inserido não é valido. Deverá ser um número superior a {min}.",
         "label": "Taxa limite",
         "placeholder": "Mensagens por minuto"
       },
@@ -1571,215 +1571,215 @@
           "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
-          "message": ""
+          "message": "Serviço ''{name}'' actualizado."
         }
       },
       "setup": {
         "address": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira um endereço.",
+          "invalid": "O endereço inserido não é válido. Não pode estar vazio.",
+          "label": "Endereço do servidor",
+          "placeholder": "Insira um endereço"
         },
         "api_token": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o Pushover API token.",
+          "invalid": "O API token inserido não é válido. Não pode ser vazio.",
+          "label": "API Token",
+          "placeholder": "Insira o API Token"
         },
         "buzzer": {
-          "help": ""
+          "help": "Lista de músicas disponíveis para utilizar no assunto da mensagem."
         },
         "green": {
-          "help": "",
-          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o pin GPIO para a luz verde.",
+          "invalid": "O valor inserido não é válido. Insira um número válido entre {min} e {max}.",
+          "label": "Verde",
+          "placeholder": "Insira o pin GPIO verde"
         },
         "h_scroll": {
-          "help": "",
-          "label": ""
+          "help": "Activar para habilitar o scroll horizontal.",
+          "label": "Scroll horizontal"
         },
         "hardware": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Seleccione o tipo de hardware para este ecrã.",
+          "invalid": "Por favor seleccione uma opção.",
+          "label": "Hardware",
+          "placeholder": "Seleccione o hardware"
         },
         "password": {
-          "help": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira a password do servidor.",
+          "label": "Password do servidor",
+          "placeholder": "Insira o username"
         },
         "port": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira a porta do servidor.",
+          "invalid": "A porta inserida não é válida. Não pode estar vazia.",
+          "label": "Porta do servidor",
+          "placeholder": "Insira um número de porta"
         },
         "pushover": {
-          "label": ""
+          "label": "Crie os seus tokens registando o TerrariumPI como uma aplicação {link}."
         },
         "receiver": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o endereço de email.",
+          "invalid": "O endereço não pode estar vazio.",
+          "label": "Email do destinatário",
+          "placeholder": "Insira um endereços de email"
         },
         "red": {
-          "help": "",
-          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o pin GPIO para a luz vermelha.",
+          "invalid": "O valor inserido não é válido. Insira um número válido entre {min} e {max}.",
+          "label": "Vermelho",
+          "placeholder": "Insira o pin GPIO vermelho"
         },
         "sender": {
-          "help": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o email do remetente.",
+          "label": "Endereço do remetente",
+          "placeholder": "Insira o endereço do remetente"
         },
         "show_title": {
-          "help": "",
-          "label": ""
+          "help": "Mostrar um nome e versão como título no ecrã.",
+          "label": "Mostrar título"
         },
         "ssl": {
           "email": {
-            "label": ""
+            "label": "O serviço de notificação de email auto detectará conexões SSL/TLS."
           },
           "mqtt": {
-            "label": ""
+            "label": "O serviço de notificação MQTT auto detectará conexões SSL/TLS."
           }
         },
         "url": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o url comleto de post.",
+          "invalid": "O url inserido não é válido. Não pode ser vazio.",
+          "label": "Url completo de post",
+          "placeholder": "Insira o url completo de post"
         },
         "user_key": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira a Pushover user key.",
+          "invalid": "A user key inserida não é válida. Não pode ser vazia.",
+          "label": "User key",
+          "placeholder": "Insira a user key"
         },
         "username": {
-          "help": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o username do servidor.",
+          "label": "Username do servidor",
+          "placeholder": "Insira o username"
         },
         "yellow": {
-          "help": "",
-          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o pin GPIO para a luz âmbar.",
+          "invalid": "O valor inserido não é válido. Insira um número válido entre {min} e {max}.",
+          "label": "Âmbar",
+          "placeholder": "Insira o pin GPIO âmbar"
         }
       },
-      "title": "",
+      "title": "Configurações de serviço de notificações",
       "type": {
-        "help": "",
-        "invalid": "",
+        "help": "Seleccione o tipo de serviço de notificações.",
+        "invalid": "Por favor seleccione uma opção.",
         "label": "Tipo",
         "placeholder": "Seleccione o tipo"
       }
     },
-    "title": ""
+    "title": "Serviços de notificações"
   },
   "settings": {
     "units": {
-      "beaufort": "",
-      "celsius": "",
-      "cm": "",
-      "fahrenheit": "",
-      "inch": "",
-      "kelvin": "",
-      "km_h": "",
-      "l": "",
-      "m_h": "",
-      "m_s": "",
-      "ukgall": "",
-      "usgall": ""
+      "beaufort": "Beaufort",
+      "celsius": "Celsius",
+      "cm": "Centímetro",
+      "fahrenheit": "Fahrenheit",
+      "inch": "Polegada",
+      "kelvin": "Kelvin",
+      "km_h": "Quilómetro por hora",
+      "l": "Litro",
+      "m_h": "Milhas por hora",
+      "m_s": "Metros por segundo",
+      "ukgall": "Galões imperiais",
+      "usgall": "Galões americanos"
     }
   },
   "system": {
     "log": {
       "download": {
-        "title": ""
+        "title": "Descarregar o ficheiro de log"
       },
       "filters": {
-        "errors": "",
-        "search": "",
-        "title": "",
-        "warnings": ""
+        "errors": "erros",
+        "search": "Insira os termos de pesquisa",
+        "title": "Filtros",
+        "warnings": "alertas"
       },
-      "lines": "",
-      "loading": "",
-      "title": ""
+      "lines": "{lines} linhas",
+      "loading": "A carregar dados",
+      "title": "Logging do sistema"
     },
     "menu": {
       "log": {
-        "title": ""
+        "title": "Log"
       },
       "notifications": {
-        "title": ""
+        "title": "Notificações"
       },
       "reboot": {
-        "title": ""
+        "title": "Reiniciar Raspberry"
       },
       "restart": {
-        "title": ""
+        "title": "Reiniciar TerrariumPI"
       },
       "settings": {
         "title": "Configurações"
       },
       "shutdown": {
-        "title": ""
+        "title": "Encerrar Raspberry"
       },
       "status": {
         "title": "Estado"
       },
-      "title": ""
+      "title": "Sistema"
     },
     "notifications": {
-      "title": ""
+      "title": "Notificações"
     },
     "settings": {
       "all_gauges_on_single_page": {
-        "help": "",
-        "label": ""
+        "help": "Adiccionar opções de menu extra para todos os sensores numa página única.",
+        "label": "Todos os mostradores numa página única"
       },
       "authenticate": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Autenticar sempre ou apenas quando alterações são feitas.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Modo de autenticação",
         "options": {
-          "changes": "",
-          "full": "",
-          "no_authentication": ""
+          "changes": "Apenas para alterações",
+          "full": "Autenticação completa",
+          "no_authentication": "Sem autenticação"
         }
       },
       "auto_dark_mode": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Definir tema escuro.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Tema escuro automático",
         "options": {
-          "always": "",
-          "desktop": "",
-          "off": "",
-          "on": ""
+          "always": "Sempre tema escuro",
+          "desktop": "Com base no computador",
+          "off": "Sem tema escuro",
+          "on": "Com base no dia/noite"
         }
       },
       "currency": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Seleccione o moeda.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Moeda"
       },
       "dashboard_mode": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Seleccione a aparência do painel.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Modo do painel",
         "options": {
-          "normal": "",
-          "only_enclosures": "",
-          "only_graphs": ""
+          "normal": "Gráficos para compartimentos",
+          "only_enclosures": "Apenas compartimentos",
+          "only_graphs": "Apenas gráficos"
         }
       },
       "distance_indicator": {
@@ -1804,7 +1804,7 @@
         "cloud": "",
         "gui": "",
         "locale": "",
-        "system": ""
+        "system": "Sistema"
       },
       "hide_environment_dashboard": {
         "help": "",
@@ -2073,10 +2073,10 @@
     },
     "settings": {
       "address": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Para mais informações consulte online.",
+        "invalid": "O endereço inserido não é válido. Não pode estar vazio.",
+        "label": "Endereço",
+        "placeholder": "Insira um endereço"
       },
       "archive": {
         "door": {
@@ -2148,7 +2148,7 @@
       },
       "hardware": {
         "help": "Seleccione o tipo de hardware para este bottão.",
-        "invalid": "",
+        "invalid": "Por favor seleccione um tipo de hardware.",
         "label": "",
         "placeholder": ""
       },
@@ -2170,7 +2170,7 @@
           "label": "",
           "options": {
             "blue": "",
-            "green": "",
+            "green": "Verde",
             "none": "",
             "red": ""
           },
