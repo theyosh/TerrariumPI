@@ -1783,167 +1783,167 @@
         }
       },
       "distance_indicator": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Seleccione o indicador de distância. Apenas afecta os valores actuais.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Tipo de distância"
       },
       "exclude-ids": {
-        "help": "",
-        "label": ""
+        "help": "IDs que estão excluídos.",
+        "label": "IDs excluídos"
       },
       "graph_limit_min_max": {
-        "help": "",
-        "label": ""
+        "help": "Limitar valores dos gráficos a 20% dos limites de alarme.",
+        "label": "Valor limite dos gráficos"
       },
       "graph_smooth_value": {
-        "help": "",
+        "help": "Insira o número de pontos de dados para a média. 0 desabilita esta funcionalidade.",
         "invalid": "Por favor insira um valor mínimo de {value}.",
-        "label": ""
+        "label": "Suavização de gráfico"
       },
       "header": {
-        "cloud": "",
-        "gui": "",
-        "locale": "",
+        "cloud": "Cloud",
+        "gui": "GUI",
+        "locale": "Localização",
         "system": "Sistema"
       },
       "hide_environment_dashboard": {
-        "help": "",
-        "label": ""
+        "help": "Esconder os dados do compartimento no painel.",
+        "label": "Esconder compartimentos no painel"
       },
       "host": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Insira o IP para aguardar por conexões. Por defeito 0.0.0.0.",
+        "invalid": "Por favor insira o endereço IP válido.",
+        "label": "Número de IP"
       },
       "language": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Seleccione o idioma. Poderá afectar os formatos numéricos e de moeda.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Idioma"
       },
       "meross_cloud_password": {
-        "help": "",
-        "label": ""
+        "help": "Insira a password para login na Meross cloud.",
+        "label": "Password Meross"
       },
       "meross_cloud_username": {
-        "help": "",
-        "label": ""
+        "help": "Insira o username para login na Meross cloud.",
+        "label": "Username Meross"
       },
       "page": {
-        "title": ""
+        "title": "Configurações de sistema"
       },
       "password": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Insira a password para autenticação.",
+        "invalid": "A password não pode ser vazia.",
+        "label": "Nova password"
       },
       "password2": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Insira a nova password novamente.",
+        "invalid": "As passwords não coincidem.",
+        "label": "Confirmar nova password"
       },
       "pi-wattage": {
-        "help": "",
+        "help": "Insira a energia total utilizada pelo Pi com todos os dispositivos USB ligados.",
         "invalid": "Por favor insira um valor mínimo de {value}.",
-        "label": ""
+        "label": "Potência utilizada pelo Pi"
       },
       "port": {
-        "help": "",
+        "help": "Insira a porta para aguardar conexões. Por defeito 8090.",
         "invalid": "Por favor insira um valor mínimo de {value}.",
-        "label": ""
+        "label": "Número de porta"
       },
       "power_price": {
-        "help": "",
+        "help": "Insira o valor do kWh.",
         "invalid": "Por favor insira um valor mínimo de {value}.",
-        "label": ""
+        "label": "Custo de energia"
       },
       "profile_image": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Actualizar imagem personalizada utilizada no menu.",
+        "invalid": "Formato de imagem de perfil não válida.",
+        "label": "Imagem de perfil"
       },
       "save": {
         "ok": {
-          "message": "",
-          "title": ""
+          "message": "Configurações actualizadas.",
+          "title": "Actualização OK"
         }
       },
       "show_min_max_gauge": {
-        "help": "",
-        "label": ""
+        "help": "Apresentar os valores mín e máx nos mostradores.",
+        "label": "Apresentar o mín e máx nos gráficos dos mostradores"
       },
       "temperature_indicator": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Seleccionar o indicador de temperatura. Apenas afecta valores actuais.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Tipo de temperatura"
       },
       "title": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Insira um título personalizado.",
+        "invalid": "O título não pode ser vazio.",
+        "label": "Título"
       },
       "unsplash_access_key": {
-        "help": "",
-        "label": ""
+        "help": "Insira a chave de acesso da sua aplicação Unsplash criada.",
+        "label": "Chave de acesso Unsplash"
       },
       "unsplash_query": {
-        "help": "",
-        "label": ""
+        "help": "Insira as palavras chaves para seleccionar imagens de fundo.",
+        "label": "Palavras chave Unsplash"
       },
       "username": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Insira o username e autenticação.",
+        "invalid": "O username não pode ser vazio.",
+        "label": "Username"
       },
       "water_price": {
-        "help": "",
+        "help": "Insira o preço por L/Galão.",
         "invalid": "Por favor insira um valor mínimo de {value}.",
-        "label": ""
+        "label": "Preço da água"
       },
       "water_volume_indicator": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Seleccione o indicador de volume de água. Apenas afecta valores actuais.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Tipo de volume de líquido"
       },
       "wind_speed_indicator": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Seleccione o indicador de velocidade do vento. Apenas afecta valores actuais.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Tipo de velocidade de vento"
       }
     },
     "status": {
       "cpu_temp": {
-        "title": ""
+        "title": "Temperatura do CPU"
       },
       "disk": {
-        "title": ""
+        "title": "Utilização do disco"
       },
       "load": {
-        "title": ""
+        "title": "Carga do sistema"
       },
       "memory": {
-        "title": ""
+        "title": "Utilização de memória"
       },
       "summary": {
-        "title": ""
+        "title": "Sumário de sistema"
       },
-      "title": "",
+      "title": "Estado do sistema",
       "uptime": {
-        "title": ""
+        "title": "Actividade do sistema"
       }
     }
   },
   "table": {
     "field": {
-      "range": ""
+      "range": "intervalo"
     },
     "header": {
       "actions": "Acções",
       "duration": "Duração",
-      "filename": "",
-      "filesize": "",
+      "filename": "Nome de ficheiro",
+      "filesize": "Tamanho de ficheiro",
       "mode": "Modo",
       "name": "Nome",
-      "number_files": "",
+      "number_files": "# Ficheiros",
       "repeat": "Repetir",
       "shuffle": "Embaralhar",
       "status": "Estado",
@@ -1952,111 +1952,111 @@
     }
   },
   "topbar": {
-    "current_status": "",
+    "current_status": "Estado actual",
     "door_status": "Estado da porta",
-    "upcoming_events": ""
+    "upcoming_events": "{number, plural, =0 {sem eventos} =1 {um evento} other {# eventos}}"
   },
   "userpanel": {
     "login": {
-      "text1": "",
+      "text1": "Modo de leitura",
       "text2": "Login"
     },
     "logout": {
-      "text1": "",
-      "text2": ""
+      "text1": "Olá {name}",
+      "text2": "Logout"
     }
   },
   "weather": {
     "current": "Actual",
-    "forecast": "",
+    "forecast": "Previsão",
     "menu": {
       "title": "Meteorologia"
     },
-    "no_data": "",
+    "no_data": "Sem dados disponíveis de meteorologia",
     "settings": {
       "fields": {
         "error": "Nem todos os campos obrigatórios estão preenchidos correctamente."
       },
-      "information": "",
+      "information": "Para utilizar a meteorologia, necessita criar uma conta gratuita em {source_link}.",
       "save": {
         "ok": {
-          "message": ""
+          "message": "As configurações de meteorologia estão actualizadas."
         }
       },
-      "title": "",
+      "title": "Configurações de meteorologia",
       "weather_source": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Insira o api url completo do OpenWeatherMap como por exemplo: {api_url_example}.",
+        "invalid": "O url inserido não é válido.",
+        "label": "Url fonte"
       }
     },
     "title": "Meteorologia"
   },
   "webcams": {
     "actions": {
-      "delete": "",
-      "ignore": "",
-      "settings": ""
+      "delete": "Eliminar câmera",
+      "ignore": "Ignorar câmera",
+      "settings": "Editar câmera"
     },
     "archive": {
       "modal": {
         "loading": {
-          "status": "",
-          "title": ""
+          "status": "{total} imagens carregadas.. ({percentage}%)",
+          "title": "A iniciar carregamento de imagens da câmera no arquivo ..."
         }
       },
-      "no_images": ""
+      "no_images": "Nenhuma imagem no arquivo disponível"
     },
     "confirm": {
       "ignore": {
-        "message": ""
+        "message": "Tem a certeza que quer eliminar a câmera''{name}''?"
       }
     },
     "controls": {
-      "archive": "",
-      "new_marker": "",
-      "save_raw_image": "",
-      "show_markers": "",
-      "toggle_volume": ""
+      "archive": "Arquivo",
+      "new_marker": "Adiccionar marcador",
+      "save_raw_image": "Gravar imagem RAW",
+      "show_markers": "Apresentar marcadores",
+      "toggle_volume": "Alternar volume"
     },
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Tem a certeza que quer eliminar a câmera ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Não foi possível eliminar a câmera ''{name}''\"\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "A câmera ''{name}'' foi eliminada."
       }
     },
     "exclude": {
       "error": {
-        "message": ""
+        "message": "Não foi possível ignorar a câmera ''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "A câmera ''{name}'' foi ignorada."
       }
     },
     "marker": {
       "delete": {
         "confirm": {
-          "message": ""
+          "message": "Tem a certeza que quer eliminar o marcador?"
         },
         "error": {
-          "message": ""
+          "message": "Não foi possível eliminar o marcador"
         },
         "invalid": {
-          "message": ""
+          "message": "Marcador não válido"
         }
       }
     },
     "markers": {
       "settings": {
-        "delete": "",
+        "delete": "Eliminar",
         "doors": {
-          "help": "",
-          "invalid": "",
+          "help": "Seleccione os sensores que quer apresentar.",
+          "invalid": "Por favor seleccione uma opção.",
           "label": "Sensores"
         },
         "title": "Sensores"
@@ -2064,7 +2064,7 @@
     },
     "menu": {
       "new": {
-        "title": ""
+        "title": "Nova câmera"
       },
       "status": {
         "title": "Estado"
@@ -2080,45 +2080,45 @@
       },
       "archive": {
         "door": {
-          "help": "",
-          "invalid": "",
-          "label": "",
+          "help": "Estado da porta para guardar uma imagem no arquivo.",
+          "invalid": "Por favor seleccione uma opção.",
+          "label": "Estado da porta do arquivo",
           "options": {
             "close": "Fechar",
-            "ignore": "",
-            "open": ""
+            "ignore": "Ignorar",
+            "open": "Aberta"
           },
-          "placeholder": ""
+          "placeholder": "Seleccione o estado da porta do arquivo"
         },
         "flash": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Seleccione o relé que agirá como flash.",
+          "invalid": "Por favor seleccione uma opção.",
+          "label": "Flash",
+          "placeholder": "Seleccione o relé opcional para flash"
         },
         "light": {
-          "help": "",
-          "invalid": "",
-          "label": "",
+          "help": "Estado das luzes para guardar uma imagem no arquivo.",
+          "invalid": "Por favor seleccione uma opção.",
+          "label": "Estado das luzes do arquivo",
           "options": {
-            "ignore": "",
-            "off": "",
-            "on": ""
+            "ignore": "Ignorar",
+            "off": "Quando desligadas",
+            "on": "Quando ligadas"
           },
-          "placeholder": ""
+          "placeholder": "Seleccione o estado das luzes do arquivo"
         },
         "options": {
-          "day_1": "",
+          "day_1": "1 Dia",
           "disabled": "Desabilitado",
-          "hour_1": "",
-          "hour_12": "",
-          "hour_3": "",
-          "hour_6": "",
-          "minute_1": "",
-          "minute_15": "",
-          "minute_30": "",
-          "minute_5": "",
-          "motion": ""
+          "hour_1": "30 Minutos",
+          "hour_12": "12 Horas",
+          "hour_3": "3 Horas",
+          "hour_6": "6 Horas",
+          "minute_1": "1 Minuto",
+          "minute_15": "15 Minutos",
+          "minute_30": "30 Minutos",
+          "minute_5": "5 Minutos",
+          "motion": "Movimento"
         },
         "state": {
           "help": "",
@@ -2134,7 +2134,7 @@
         "options": {
           "auto": "",
           "cloudy": "",
-          "flash": "",
+          "flash": "Flash",
           "fluorescent": "",
           "greyworld": "",
           "horizon": "",
