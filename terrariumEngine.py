@@ -356,7 +356,7 @@ class terrariumEngine(object):
         # Loading active language
         try:
             gettext.translation("terrariumpi", "locales/", languages=[self.active_language]).install()
-            logger.info(f"Loaded language '{self.active_language}'")
+            logger.info(f"Loaded language '{self.active_language}'.")
         except:
             logger.warning(f"Translation '{self.active_language}' does not exists! Falling back on English (US).")
             gettext.translation("terrariumpi", "locales/", languages=["en_US"]).install()
