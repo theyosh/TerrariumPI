@@ -36,7 +36,7 @@ const locales = {
   'nl-NL': nl_NL,
   pl: pl,
   'pt-BR': pt_BR,
-  pt:pt,
+  pt: pt,
 };
 
 const langs = [
