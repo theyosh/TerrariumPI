@@ -1,237 +1,237 @@
 {
   "about": {
     "online": {
-      "help": ""
+      "help": "Mais ajuda online."
     },
-    "title": ""
+    "title": "Sobre"
   },
   "areas": {
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Tem a certeza que quer eliminar a área ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Não foi possível eliminar a área ''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "A área ''{name}'' foi eliminada."
       }
     },
     "settings": {
       "depends_on": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Seleccione as áreas de que esta área depende.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Depende de",
+        "placeholder": "Seleccione as áreas dependentes"
       },
       "enclosure": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Seleccione o compartimento ao qual a área corresponde.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Compartimento",
+        "placeholder": "Seleccione o compartimento"
       },
       "light_sensors": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Seleccione os sensores de luminosidade para detectar se as luzes estão acesas.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Sensores de luminosidade",
+        "placeholder": "Seleccione os sensores de luminosidade"
       },
       "mode": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Seleccione o modo desta área. Tal irá modificar os tempos e durações dos relés.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Modo",
         "options": {
-          "disabled": "",
-          "main_lights": "",
-          "sensors": "",
-          "timer": "",
-          "weather": "",
-          "weather_inverse": ""
+          "disabled": "Desabilitado",
+          "main_lights": "Luzes principais",
+          "sensors": "Sensores",
+          "timer": "Temporizador",
+          "weather": "Dia/noite meteorológico",
+          "weather_inverse": "Noite/dia meteorológico"
         },
-        "placeholder": ""
+        "placeholder": "Seleccione o modo"
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira um nome fácil de recordar.",
+        "invalid": "O nome inserido não é válido. Não pode ser vazio.",
+        "label": "Nome",
+        "placeholder": "Insira um nome"
       },
       "relay": {
         "slider": {
-          "delay": "",
-          "duration": ""
+          "delay": "Atraso: {delay} minutos.",
+          "duration": "Atraso: {delay} minutos. Duração: {duration} minutos"
         }
       },
       "save": {
         "error": {
-          "duplicate_relays": "",
-          "required_fields": ""
+          "duplicate_relays": "Seleccionou o mesmo relé para ambos os limites mínímos e máximos do alarme. Não é permitido.",
+          "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
-          "message": ""
+          "message": "Área ''{name}'' actualizada."
         }
       },
       "setup": {
         "day_night_difference": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Valor de ajuste entre dia e noite.",
+          "invalid": "Insira um número válido.",
+          "label": "Diferença dia/noite",
+          "placeholder": "Insira um número"
         },
         "day_night_source": {
-          "help": "",
-          "invalid": "",
-          "label": "",
+          "help": "Seleccione a origem para o 'dia'.",
+          "invalid": "Por favor seleccione uma opção.",
+          "label": "Origem dia/noite",
           "options": {
-            "lights": "",
-            "weather": ""
+            "lights": "Luzes",
+            "weather": "Meteorologia"
           },
-          "placeholder": ""
+          "placeholder": "Seleccione uma origem dia/noite"
         },
         "depend_on_relays_mode": {
           "all": {
-            "label": ""
+            "label": "Tudo ligado"
           },
           "none": {
-            "label": ""
+            "label": "Tudo desligado"
           },
           "one": {
-            "label": ""
+            "label": "Pelo menos um ligado"
           }
         },
         "deviation_high_alarm": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Incremente ou decremente o valor limite máximo para o alarme.",
+          "invalid": "Insira um número válido.",
+          "label": "Desvio limite máximo do alarme",
+          "placeholder": "Desvio limite máximo do alarme"
         },
         "deviation_low_alarm": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Incremente ou decremente o valor limite mínimo para o alarme.",
+          "invalid": "Insira um número válido.",
+          "label": "Desvio limite mínimo do alarme",
+          "placeholder": "Desvio limite mínimo do alarme"
         },
         "high": {
           "begin": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "A hora do dia quando os relés estão ligados para cada noite.",
+            "invalid": "Insira uma hora válida.",
+            "label": "Hora de início",
+            "placeholder": "Insira hora de início"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Seleccione os relés de que estes relés dependem.",
+            "invalid": "Por favor seleccione uma opção.",
+            "label": "Depende dos relés",
+            "placeholder": "Seleccione os relés"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Seleccione o modo de dependência",
+            "invalid": "Por favor seleccione uma opção.",
+            "label": "Modo de dependência",
+            "placeholder": "Seleccione um modo"
           },
           "door_status": {
-            "help": "",
-            "invalid": "",
-            "label": "",
+            "help": "Seleccione o estado da porta.",
+            "invalid": "Por favor seleccione uma opção.",
+            "label": "Estado da porta",
             "options": {
-              "closed": "",
-              "ignore": "",
-              "open": ""
+              "closed": "Fechada",
+              "ignore": "Ignorada",
+              "open": "Aberta"
             },
-            "placeholder": ""
+            "placeholder": "Seleccione uma data"
           },
           "end": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "A hora do dia quando os relés estão desligados para cada noite.",
+            "invalid": "Insira uma hora válida.",
+            "label": "Hora de fim",
+            "placeholder": "Insira uma hora de fim"
           },
           "ignore_high": {
-            "help": "",
-            "label": ""
+            "help": "Ligue para ignorar o limite máximo do alarme dos sensores, e apenas utilizar o limite mínimo do alarme.",
+            "label": "Ignorar limite máximo do alarme"
           },
           "light_status": {
-            "help": "",
-            "invalid": "",
-            "label": "",
+            "help": "Seleccione o estado das luzes.",
+            "invalid": "Por favor seleccione uma opção.",
+            "label": "Estado das luzes",
             "options": {
-              "ignore": "",
-              "off": "",
-              "on": ""
+              "ignore": "Ignoradas",
+              "off": "Desligadas",
+              "on": "Ligadas"
             },
-            "placeholder": ""
+            "placeholder": "Seleccione um estado"
           },
           "off_duration": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "A duração dos relés para estarem desligados quando desligados. Insira '0' para desabilitar.",
+            "invalid": "Insira uma duração válida em minutos.",
+            "label": "Duração desligado",
+            "placeholder": "Duração desligado"
           },
           "on_duration": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "A duração dos relés para estarem ligados. Se inferior ao dia, será uma funcionalidade de temporizador. Insira '0' para a noite inteira.",
+            "invalid": "Insira uma duração válida em minutos.",
+            "label": "Duração ligado",
+            "placeholder": "Duração ligado"
           },
           "playlists": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Seleccione a lista de reprodução a ser reproduzida.",
+            "invalid": "Por favor seleccione uma opção.",
+            "label": "Listas de reprodução",
+            "placeholder": "Seleccione uma lista de reprodução"
           },
           "power_on_time": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "A duração em segundos para ligar o relé.",
+            "invalid": "Insira um número válido.",
+            "label": "Tempo ligado",
+            "placeholder": "Tempo ligado"
           },
           "relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Seleccione os relés a utilizar.",
+            "invalid": "Por favor seleccione uma opção.",
+            "label": "Relés",
+            "placeholder": "Seleccione os relés"
           },
           "settle_time": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "A duração em segundos entre duas acções.",
+            "invalid": "Insira um número válido.",
+            "label": "Tempo de espera",
+            "placeholder": "Tempo de espera"
           },
           "trigger_threshold": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Insira o valor dos alarmes antes de executar a acção.",
+            "invalid": "Insira um número válido.",
+            "label": "Limite do alarme",
+            "placeholder": "Limite"
           },
           "tweaks": {
             "dimmer": {
-              "info": ""
+              "info": "Seleccione o atraso e duração do dimmer para ligar e desligar em minutos. Duração máxima de 180 minutos."
             },
             "off": {
               "dimmer": {
-                "label": ""
+                "label": "Duração do dimmer para desligar"
               },
               "relay": {
-                "label": ""
+                "label": "Atraso do relé para desligar"
               }
             },
             "on": {
               "dimmer": {
-                "label": ""
+                "label": "Duração do dimmer para ligar"
               },
               "relay": {
-                "label": ""
+                "label": "Atraso do relé para ligar"
               }
             },
             "relay": {
-              "info": ""
+              "info": "Seleccione o atraso em mintutos para o relé aguardar antes de ligar. Atraso máximo de 180 minutos."
             }
           }
         },
         "low": {
           "begin": {
-            "help": "",
+            "help": "A hora do dia quando os relés são ligados em cada noite.",
             "invalid": "",
             "label": "",
             "placeholder": ""
