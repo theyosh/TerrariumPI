@@ -352,42 +352,42 @@
           "label": "Luzes principais"
         },
         "max_day_hours": {
-          "help": "O número máximo de horas que as luzes estão ligadas. Apenas válido no modo de meteorologia. Qaundo o período diurno é maior então este valor é o máximo, o dia será reduzido a este valor máximo.",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "O número máximo de horas que as luzes estão ligadas. Apenas válido no modo de meteorologia. Quando o período diurno é maior então este valor é o máximo, o dia será reduzido a este valor máximo.",
+          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
+          "label": "Máximo de horas",
+          "placeholder": "Insira um número"
         },
         "min_day_hours": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "O número mínimo de horas que as luzes estão ligadas. Apenas válido no modo de meteorologia. Quando o período diurno é menor então este valor é o mínimo, o dia será extendido a este valor mínimo.",
+          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
+          "label": "Mínimo de horas",
+          "placeholder": "Insira um número"
         },
         "periods": {
-          "day": "",
-          "high": "",
-          "info": "",
-          "low": "",
-          "night": "",
-          "varation": ""
+          "day": "Configurações diurnas",
+          "high": "Limite máximo de alarme",
+          "info": "Abaixo pode seleccionar os relés e opções de temporizador por período diurno e nocturno.",
+          "low": "Limite mínimo de alarme",
+          "night": "Configurações nocturnas",
+          "varation": "Variação"
         },
         "sensors": {
-          "help": "",
+          "help": "Seleccione os sensores para utilizar em modo baseado nos sensores.",
           "invalid": "Por favor seleccione uma opção.",
-          "label": "",
-          "placeholder": ""
+          "label": "Sensores",
+          "placeholder": "Seleccione os sensores"
         },
         "shift_day_hours": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "O número de horas para ajustar ao nascer do Sol. Valores negativos irão fazer iniciar o período diurno mais cedo.",
+          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
+          "label": "Ajuste de horas",
+          "placeholder": "Insira um número"
         },
         "soundcard": {
-          "help": "",
+          "help": "Seleccione a placa de som utilizada para esta área.",
           "invalid": "Por favor seleccione uma opção.",
-          "label": "",
-          "placeholder": ""
+          "label": "Placa de som",
+          "placeholder": "Seleccione uma placa de som"
         },
         "variation": {
           "offset": {
@@ -395,51 +395,51 @@
           },
           "period": {
             "invalid": "Insira um número válido.",
-            "offset": "",
-            "placeholder": "",
-            "source": ""
+            "offset": "Valor de desvio",
+            "placeholder": "Limite",
+            "source": "Insira um url completo, um ficheiro JSON local ou um ficheiro de script"
           },
           "value": {
             "invalid": "Insira um número válido.",
-            "placeholder": ""
+            "placeholder": "Diferença"
           },
           "when": {
             "invalid": "Por favor seleccione uma opção.",
             "options": {
-              "after": "",
-              "at": "",
-              "external": "",
-              "script": "",
-              "weather": ""
+              "after": "Depois de x minutos",
+              "at": "À hora",
+              "external": "Utilizar JSON",
+              "script": "Utilizar script",
+              "weather": "Utilizar meteorologia actual"
             },
-            "placeholder": ""
+            "placeholder": "Seleccione acção"
           }
         },
         "watertank_height": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira a altura do depósito de água.",
+          "invalid": "Por favor insira um valor mínimo de {value}.",
+          "label": "Altura",
+          "placeholder": "Insira um número"
         },
         "watertank_offset": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o valor de desvio entre o sensor e a altura da água.",
+          "invalid": "Por favor insira um valor mínimo de {value}.",
+          "label": "Valor de desvio",
+          "placeholder": "Insira um número"
         },
         "watertank_volume": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o volume do depósito de água.",
+          "invalid": "Por favor insira um valor mínimo de {value}.",
+          "label": "Volume de água",
+          "placeholder": "Insira um número"
         }
       },
-      "title": "",
+      "title": "Configurações de área",
       "type": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Seleccione o tipo de área. Cada tipo tem as sua opções adiccionais e lógica.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Tipo",
+        "placeholder": "Seleccione o tipo"
       }
     }
   },
@@ -447,94 +447,94 @@
     "files": {
       "delete": {
         "confirm": {
-          "message": ""
+          "message": "Tem a certeza que quer eliminar o ficheiro de áudio ''{name}'' ({filename})?"
         },
         "error": {
-          "message": ""
+          "message": "Não foi possível eliminar o ficheiro de áudio ''{name}''!\nErro: {error}"
         },
         "ok": {
-          "message": ""
+          "message": "O ficheiro de áudio ''{name}''foi eliminado."
         }
       },
       "settings": {
         "audiofiles": {
-          "label": "",
-          "placeholder": ""
+          "label": "Carregar novo ficheiro de áudio",
+          "placeholder": "Carregar novo ficheiro de áudio"
         },
         "save": {
           "error": {
-            "invalid_file": ""
+            "invalid_file": "Ficheiro(s) de áudio inválido(s)"
           },
           "ok": {
-            "message": ""
+            "message": "Carregado {amount, plural, =1 {# audio file} other {# audio files}}"
           }
         },
         "upload": {
           "error": {
-            "nologin": ""
+            "nologin": "Por favor efectue login para carregar ficheiros."
           }
         }
       },
-      "title": ""
+      "title": "Ficheiros de áudio"
     },
     "menu": {
       "files": {
-        "title": ""
+        "title": "Ficheiros"
       },
       "new_playlist": {
-        "title": ""
+        "title": "Nova lista de reprodução"
       },
       "playlists": {
         "title": "Listas de reprodução"
       },
-      "title": ""
+      "title": "Áudio"
     },
     "playlists": {
       "delete": {
         "confirm": {
-          "message": ""
+          "message": "Tem a certeza que quer eliminar a lista de reprodução ''{name}'' com {length} números?"
         },
         "error": {
-          "message": ""
+          "message": "Não foi possível eliminar a lista de reprodução ''{name}''!\nErro: {error}"
         },
         "ok": {
-          "message": ""
+          "message": "A lista de reprodução ''{name}'' foi eliminada."
         }
       },
       "settings": {
         "files": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Seleccione todos os ficheiros de áudio para esta lista de reprodução.",
+          "invalid": "Seleccione pelo menos 1 ficheiro de áudio.",
+          "label": "Ficheiros de áudio",
+          "placeholder": "Seleccione ficheiros de áudio"
         },
         "name": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira um nome fácil de recordar.",
+          "invalid": "O nome inserido não é válido. Não pode ser vazio.",
+          "label": "Nome",
+          "placeholder": "Insira um nome"
         },
         "repeat": {
-          "help": "",
-          "label": ""
+          "help": "Reproduzir esta lista de reprodução em modo de repetição.",
+          "label": "Repetir"
         },
         "save": {
           "error": {
-            "required_fields": ""
+            "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
           },
           "ok": {
-            "message": ""
+            "message": "Lista de reprodução ''{name}'' actualizada."
           }
         },
         "shuffle": {
-          "help": "",
-          "label": ""
+          "help": "Embaralhar a lista de reprodução cada vez que é reproduzida.",
+          "label": "Embaralhar"
         },
-        "title": "",
+        "title": "Configurações de listas de reprodução",
         "volume": {
-          "formatter": "",
-          "help": "",
-          "label": ""
+          "formatter": "Volume de áudio: {value}",
+          "help": "Seleccione o volume para esta lista de reprodução.",
+          "label": "Volume de áudio"
         }
       },
       "title": "Listas de reprodução"
@@ -542,41 +542,41 @@
   },
   "buttons": {
     "actions": {
-      "delete": "",
-      "export": "",
-      "ignore": "",
-      "settings": ""
+      "delete": "Botão de eliminar",
+      "export": "Botão de exportar",
+      "ignore": "Botão de ignorar",
+      "settings": "Botão de editar"
     },
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Tem a certeza que quer eliminar o botão ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Não foi possível eliminar o botão ''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "O botão ''{name}'' foi eliminado."
       }
     },
     "ignore": {
       "confirm": {
-        "message": ""
+        "message": "Tem a certeza que quer ignorar o botão ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Não foi possível ignorar o botão ''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "O botão ''{name}'' foi ignorado."
       }
     },
     "menu": {
       "new": {
-        "title": ""
+        "title": "Novo botão"
       },
       "status": {
-        "title": ""
+        "title": "Estado"
       },
-      "title": ""
+      "title": "Botões"
     },
     "settings": {
       "address": {
@@ -605,7 +605,7 @@
       },
       "current": {
         "help": "",
-        "label": "",
+        "label": "Actual",
         "placeholder": ""
       },
       "hardware": {
@@ -615,14 +615,14 @@
         "placeholder": ""
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira um nome fácil de recordar.",
+        "invalid": "O nome inserido não é válido. Não pode ser vazio.",
+        "label": "Nome",
+        "placeholder": "Insira um nome"
       },
       "save": {
         "error": {
-          "required_fields": ""
+          "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
           "message": ""
@@ -630,415 +630,415 @@
       },
       "title": ""
     },
-    "title": ""
+    "title": "Botões"
   },
   "calendar": {
     "actions": {
-      "download": ""
+      "download": "Descarregar iCal"
     },
     "event": {
       "delete": {
         "confirm": {
-          "message": ""
+          "message": "Tem a certeza que quer eliminar o evento ''{name}''?"
         },
         "error": {
-          "message": ""
+          "message": "Não foi possível eliminar o evento ''{name}''!\nErro: {error}"
         },
         "ok": {
-          "message": ""
+          "message": "O evento ''{name}'' foi eliminado."
         }
       },
-      "duration": "",
+      "duration": "Duração",
       "periods": {
-        "days": "",
-        "months": "",
-        "no_reminder": "",
-        "no_repeat": "",
-        "weeks": "",
-        "years": ""
+        "days": "Dias",
+        "months": "Meses",
+        "no_reminder": "Sem lembrete",
+        "no_repeat": "Sem repetição",
+        "weeks": "Semanas",
+        "years": "Anos"
       },
       "settings": {
         "date": {
-          "help": "",
-          "label": ""
+          "help": "A data ou período para este evento.",
+          "label": "Data"
         },
         "description": {
-          "help": "",
-          "label": ""
+          "help": "Insira alguma informação sobre este evento.",
+          "label": "Insira uma descrição"
         },
         "remind": {
-          "label": ""
+          "label": "Lembrete em"
         },
         "repeat": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Seleccione um período de repetição e um valor.",
+          "invalid": "Por favor insira um valor de repetição válido.",
+          "label": "Repetir a cada"
         },
         "repeat_amount": {
-          "label": ""
+          "label": "Seleccione um valor"
         },
         "save": {
           "error": {
-            "required_fields": ""
+            "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
           },
           "ok": {
-            "message": ""
+            "message": "Evento ''{name}'' actualizado."
           }
         },
         "summary": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Insira um nome.",
+          "invalid": "O não nome não pode estar vazio.",
+          "label": "Insira um nome"
         },
-        "title": "",
+        "title": "Evento",
         "update": {
           "error": {
-            "message": ""
+            "message": "Não foi possível actualizar o evento ''{name}''!\nErro: {error}"
           },
           "ok": {
-            "message": ""
+            "message": "O evento ''{name}'' foi actualizado."
           }
         }
       }
     },
     "menu": {
-      "title": ""
+      "title": "Calendário"
     },
-    "title": ""
+    "title": "Calendário"
   },
   "dashboard": {
     "enclosures": {
       "menu": {
-        "title": ""
+        "title": "Compartimentos"
       },
-      "mode": "",
-      "title": ""
+      "mode": "Modo",
+      "title": "Compartimentos"
     },
     "infobox": {
       "current_power_usage": {
-        "title": ""
+        "title": "Energia gasta em Watt"
       },
       "current_water_flow": {
-        "title": ""
+        "title": "Fluxo de água em {water_flow_indicator}"
       },
       "total_power_usage": {
-        "duration": "",
-        "title": ""
+        "duration": "em {duration}",
+        "title": "Energia total"
       },
       "total_water_usage": {
-        "duration": "",
-        "title": ""
+        "duration": "em {duration}",
+        "title": "Total de água utilizada"
       },
       "uptime": {
-        "title": ""
+        "title": "Tempo de actividade"
       }
     },
     "menu": {
-      "title": ""
+      "title": "Painel"
     },
-    "title": ""
+    "title": "Painel"
   },
   "enclosures": {
     "actions": {
-      "delete": "",
-      "settings": ""
+      "delete": "Eliminar compartimento",
+      "settings": "Editar compartimento"
     },
     "area": {
-      "current": "",
-      "current_status": "",
+      "current": "actual",
+      "current_status": "Estado actual",
       "delete": {
-        "title": ""
+        "title": "Eliminar área"
       },
       "edit": {
-        "title": ""
+        "title": "Editar área"
       },
       "mode": {
-        "disabled": "",
-        "sensors": "",
-        "timer": "",
-        "title": "",
-        "weather": ""
+        "disabled": "Desabilitada",
+        "sensors": "Sensores",
+        "timer": "Temporizador",
+        "title": "Modo",
+        "weather": "Meteorologia"
       },
-      "now": "",
+      "now": "agora",
       "period": {
-        "day": "",
-        "high": "",
-        "low": "",
-        "night": ""
+        "day": "Dia",
+        "high": "Alto",
+        "low": "Baixo",
+        "night": "Noite"
       },
-      "range": "",
+      "range": "Intervalo",
       "type": {
-        "audio": "",
-        "cooling": "",
-        "heating": "",
-        "humidity": "",
-        "lights": "",
-        "main_lights": "",
-        "watertank": ""
+        "audio": "Áudio",
+        "cooling": "Refrigeração",
+        "heating": "Aquecimento",
+        "humidity": "Humidade",
+        "lights": "Luzes",
+        "main_lights": "Luzes principais",
+        "watertank": "Depósito de água"
       }
     },
     "areas": {
-      "title": ""
+      "title": "Áreas"
     },
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Tem a certeza que quer eliminar o comprtimento ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Não foi possível eliminar o compartimento ''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "O compartimento ''{name}'' foi eliminado."
       }
     },
     "doors": {
-      "title": ""
+      "title": "Portas"
     },
     "menu": {
       "list": {
-        "title": ""
+        "title": "Lista"
       },
       "new_area": {
-        "title": ""
+        "title": "Nova área"
       },
       "new_enclosure": {
-        "title": ""
+        "title": "Novo compartimento"
       },
-      "title": ""
+      "title": "Compartimentos"
     },
     "settings": {
       "description": {
-        "help": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira alguma descrição para este compartimento.",
+        "label": "Descrição",
+        "placeholder": "Insira uma descrição"
       },
       "doors": {
-        "help": "",
-        "label": ""
+        "help": "Seleccione a(s) porta(s) para este compartimento.",
+        "label": "Portas"
       },
       "image": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Carregar um JPG ou PNG.",
+        "invalid": "O ficheiro seleccionado não é válido. Não é um ficheiro de imagem.",
+        "label": "Imagem",
+        "placeholder": "Seleccione um ficheiro de imagem"
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira um nome fácil de recordar.",
+        "invalid": "O nome inserido não é válido. Não pode ser vazio.",
+        "label": "Nome",
+        "placeholder": "Insira um nome"
       },
       "save": {
         "error": {
-          "required_fields": ""
+          "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
-          "message": ""
+          "message": "Compartimento ''{name}'' actualizado."
         }
       },
-      "title": "",
+      "title": "Configurações de compartimento",
       "webcams": {
-        "help": "",
-        "label": ""
+        "help": "Seleccione a(s) câmera(s) para este compartimento.",
+        "label": "Câmeras"
       }
     },
-    "title": "",
+    "title": "Compartimentos",
     "webcams": {
-      "title": ""
+      "title": "Câmeras"
     }
   },
   "footer": {
-    "current_activity": "",
-    "error_messages": "",
-    "warning_messages": ""
+    "current_activity": "Actividade",
+    "error_messages": "Mensagens de erro",
+    "warning_messages": "Mensagens de aviso"
   },
   "gauge": {
-    "error": "",
-    "last_update": "",
-    "warning": ""
+    "error": "erro",
+    "last_update": "Última actualização",
+    "warning": "aviso"
   },
   "general": {
     "download": {
-      "title": ""
+      "title": "Descarregar"
     },
     "exclude": {
-      "average": ""
+      "average": "Excl. méd."
     },
-    "humidity": "",
+    "humidity": "Humidade",
     "login": {
-      "title": ""
+      "title": "Efectue login para fazer alterações"
     },
     "logout": {
-      "title": ""
+      "title": "Logout"
     },
     "settings": {
-      "title": ""
+      "title": "Configurações"
     },
-    "temperature": "",
+    "temperature": "temperatura",
     "uptime_format": {
-      "days": "",
-      "hours": "",
-      "minutes": "",
-      "months": "",
-      "seconds": "",
-      "years": ""
+      "days": "{number, plural, =1 {# dia} other {# dias}}",
+      "hours": "{number, plural, =1 {# hora} other {# horas}}",
+      "minutes": "{number, plural, =1 {# minuto} other {# minutos}}",
+      "months": "{number, plural, =1 {# mês} other {# meses}}",
+      "seconds": "{number, plural, =1 {# segundo} other {# segundos}}",
+      "years": "{number, plural, =1 {# ano} other {# anos}}"
     }
   },
   "graph": {
     "alarm": {
-      "max": "",
-      "min": ""
+      "max": "Alarme máx",
+      "min": "Alarme min"
     },
-    "current": "",
-    "flow": "",
+    "current": "Actual",
+    "flow": "Fluxo de água",
     "ldr": "Estado das luzes",
     "magnetic": "Estado da porta",
-    "motion": "",
-    "no-data": "",
+    "motion": "Movimento",
+    "no-data": "Sem dados ...",
     "period": {
-      "day": "",
-      "month": "",
-      "replaced": "",
-      "week": "",
-      "year": ""
+      "day": "Dia",
+      "month": "Mês",
+      "replaced": "Substituído",
+      "week": "Semana",
+      "year": "Ano"
     },
     "settings": {
-      "export": ""
+      "export": "Exportar"
     },
-    "wattage": ""
+    "wattage": "Energia"
   },
   "home": {
     "menu": {
-      "title": ""
+      "title": "Início"
     },
-    "title": ""
+    "title": "Início"
   },
   "messages": {
     "actions": {
-      "delete": "",
-      "edit": ""
+      "delete": "Eliminar mensagem",
+      "edit": "Editar mensagem"
     },
-    "add": "",
+    "add": "Adiccionar mensagem",
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Tem a certeza que quer eliminar a mensagem ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Não foi possível eliminar a mensage''{name}''!\nErro: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "A mensagem ''{name}'' foi eliminada."
       }
     },
-    "ratelimit": "",
+    "ratelimit": "{number, plural, =0 {Mensagem ilimitadasa} other {Max # por minuto}}",
     "settings": {
       "available_services": {
-        "help": "",
-        "label": ""
+        "help": "Seleccione o serviço a utilizar para esta mensagem de notificação.",
+        "label": "Serviços"
       },
       "enabled": {
-        "help": "",
-        "label": ""
+        "help": "Habilitar/desabilitar esta mensagem de notificação.",
+        "label": "Habilitada"
       },
       "message": {
-        "help": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira a mensagem. Podem ser utilizados marcadores aqui.",
+        "label": "Mensagem",
+        "placeholder": "Insira uma mensagem"
       },
       "placeholders": {
-        "format": "",
-        "help": "",
-        "label": ""
+        "format": "Utilize o formato {marcador} para utilizar um marcador na sua mensagem.{new_line}Valores numérios podem ser arredondados utilizando o {link_start}formato `.:2f`{link_end}",
+        "help": "Lista de marcadores disponíveis.",
+        "label": "Marcadores"
       },
       "rate_limit": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Número máximo de mensagens por minuto para esta mensage. Utilize 0 para ilimatado.",
+        "invalid": "O valor inserido não é válido. Insira um valor válido superior a {min}.",
+        "label": "Taxa limite",
+        "placeholder": "Mensagens por minuto"
       },
       "save": {
         "error": {
-          "required_fields": ""
+          "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
-          "message": ""
+          "message": "Mensagem ''{name}'' actualizada."
         }
       },
       "subject": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira um assunto curto. Pode utilizar marcadores aqui.",
+        "invalid": "O assunto não pode estar vazio.",
+        "label": "Assunto",
+        "placeholder": "Insira um assunto"
       },
-      "title": "",
+      "title": "Configurações de mensagem",
       "type": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Seleccione o tipo de mensagem de notificação.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Tipo de mensagem",
+        "placeholder": "Seleccione o tipo"
       }
     },
     "table": {
-      "actions": "",
-      "enabled": "",
-      "message": "",
-      "rate_limit": "",
-      "services": "",
-      "subject": "",
-      "type": ""
+      "actions": "Acções",
+      "enabled": "Habilitada",
+      "message": "Mensagem",
+      "rate_limit": "Taxa limite",
+      "services": "Serviços",
+      "subject": "Assunto",
+      "type": "Tipo"
     },
-    "title": ""
+    "title": "Mensagens de notificação"
   },
   "modal": {
     "confirm": {
       "docker": {
-        "not_available": ""
+        "not_available": "Esta funcionalidade não é possível numa configuração de Docker."
       },
       "relays": {
-        "scan": ""
+        "scan": "Irá iniciar um processo de detecção de novos relés. Poderá demorar até 30 segundos."
       },
       "sensors": {
-        "scan": ""
+        "scan": "Irá iniciar um processo de detecção de novos sensores. Poderá demorar até 30 segundos."
       },
       "submit": {
-        "title": ""
+        "title": "Confirmar"
       },
       "system": {
-        "logout": "",
-        "reboot": "",
-        "restart": "",
-        "shutdown": ""
+        "logout": "Tem a certeza que quer efectuar logout?",
+        "reboot": "Irá reiniciar o Raspberry PI. Poderá demorar até 60 segundos.",
+        "restart": "Irá reiniciar o TerrariumPI. Poderá demorar até 30 segundos.",
+        "shutdown": "Irá desligar o Raspberry PI. Utilizar com cuidado!"
       },
-      "title": ""
+      "title": "Tem a certeza?"
     },
     "form": {
       "toggle": {
-        "info": ""
+        "info": "Apresentar/esconder informação de ajuda"
       }
     },
     "general": {
-      "close": "",
-      "save": ""
+      "close": "Fechar",
+      "save": "Guardar"
     },
     "loading": {
-      "title": ""
+      "title": "Em carregamento"
     },
     "login": {
-      "error": "",
+      "error": "Login não válido",
       "form": {
         "password": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Insira a password.",
+          "invalid": "Password não pode estar vazia.",
+          "label": "Password"
         },
-        "submit": "",
+        "submit": "Login",
         "username": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Insira o username.",
+          "invalid": "Username não pode estar vazio.",
+          "label": "Username"
         }
       },
-      "title": ""
+      "title": "Login"
     },
     "notification": {
       "service": {
@@ -1046,7 +1046,7 @@
           "field": {
             "setup": {
               "address": {
-                "label": ""
+                "label": "Insira um endereço"
               }
             }
           }
@@ -1055,69 +1055,69 @@
     }
   },
   "not-found": {
-    "header": "",
-    "link": "",
-    "title": ""
+    "header": "Página não encontrada",
+    "link": "Voltar à página inicial",
+    "title": "Página não encontrada"
   },
   "notification": {
     "delete": {
       "error": {
-        "title": ""
+        "title": "ERRO"
       },
       "invalid": {
-        "title": ""
+        "title": "ERRO"
       },
       "ok": {
-        "title": ""
+        "title": "OK"
       }
     },
     "door": {
       "status": {
-        "closed": "",
-        "open": "",
-        "title": ""
+        "closed": "Porta ''{name}'' fechaa",
+        "open": "Porta ''{name}'' aberta",
+        "title": "Actualização do estado da porta"
       }
     },
     "exclude": {
       "error": {
-        "title": ""
+        "title": "ERRO"
       },
       "ok": {
-        "title": ""
+        "title": "OK"
       }
     },
     "form": {
       "save": {
         "error": {
-          "title": ""
+          "title": "Erro ao Guardar"
         },
         "ok": {
-          "title": ""
+          "title": "Guardar OK"
         }
       },
       "upload": {
         "error": {
-          "title": ""
+          "title": "Erro ao carregar"
         }
       }
     },
     "login": {
       "message": {
-        "error": "",
-        "ok": ""
+        "error": "Desculpe, mas o login não válido",
+        "ok": "Login bem sucedido."
       },
-      "title": ""
+      "title": "Login"
     },
     "manual_mode": {
       "error": {
-        "title": ""
+        "title": "ERRO"
       },
       "ok": {
-        "title": ""
+        "title": "OK"
       }
     },
     "offline": {
-      "message": "",
+      "message": "A conexão foi perdida",
       "title": ""
     },
     "online": {
@@ -1146,10 +1146,10 @@
     },
     "toggle": {
       "error": {
-        "title": ""
+        "title": "ERRO"
       },
       "ok": {
-        "title": ""
+        "title": "OK"
       }
     }
   },
@@ -1206,7 +1206,7 @@
         "title": ""
       },
       "status": {
-        "title": ""
+        "title": "Estado"
       },
       "title": "Relés"
     },
@@ -1220,34 +1220,34 @@
       "calibration": {
         "dimmer_frequency": {
           "help": "",
-          "invalid": "",
+          "invalid": "Por favor insira um valor mínimo de {value}.",
           "label": ""
         },
         "dimmer_max_dim": {
           "help": "",
-          "invalid": "",
+          "invalid": "Por favor insira um valor mínimo de {value}.",
           "label": ""
         },
         "dimmer_max_power": {
           "help": "",
-          "invalid": "",
+          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
           "label": ""
         },
         "dimmer_offset": {
           "help": "",
-          "invalid": "",
+          "invalid": "Por favor insira um valor mínimo de {value}.",
           "label": ""
         }
       },
       "current": {
         "help": "",
-        "label": "",
+        "label": "Actual",
         "placeholder": ""
       },
       "flow": {
         "help": "",
-        "invalid": "",
-        "label": ""
+        "invalid": "Por favor insira um valor mínimo de {value}.",
+        "label": "Fluxo de água"
       },
       "hardware": {
         "help": "",
@@ -1256,14 +1256,14 @@
         "placeholder": ""
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira um nome fácil de recordar.",
+        "invalid": "O nome inserido não é válido. Não pode ser vazio.",
+        "label": "Nome",
+        "placeholder": "Insira um nome"
       },
       "save": {
         "error": {
-          "required_fields": ""
+          "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
           "message": ""
@@ -1272,7 +1272,7 @@
       "title": "",
       "wattage": {
         "help": "",
-        "invalid": "",
+        "invalid": "Por favor insira um valor mínimo de {value}.",
         "label": ""
       }
     },
@@ -1368,7 +1368,7 @@
     },
     "humidity": {
       "menu": {
-        "title": ""
+        "title": "Humidade"
       },
       "title": ""
     },
@@ -1385,7 +1385,7 @@
       "scan": {
         "title": ""
       },
-      "title": ""
+      "title": "Sensores"
     },
     "moisture": {
       "menu": {
@@ -1415,14 +1415,14 @@
       "alarm_max": {
         "help": "",
         "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "label": "Alarme máx",
+        "placeholder": "Alarme máx"
       },
       "alarm_min": {
         "help": "",
         "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "label": "Alarme min",
+        "placeholder": "Alarme min"
       },
       "calibration": {
         "ccs811_compensation_sensors": {
@@ -1448,12 +1448,12 @@
         "offset": {
           "help": "",
           "invalid": "",
-          "label": ""
+          "label": "Valor de desvio"
         }
       },
       "current": {
         "help": "",
-        "label": "",
+        "label": "Actual",
         "placeholder": ""
       },
       "exclude_avg": {
@@ -1461,7 +1461,7 @@
         "label": ""
       },
       "fields": {
-        "error": ""
+        "error": "Nem todos os campos obrigatórios estão preenchidos correctamente."
       },
       "hardware": {
         "help": "Seleccione o tipo de hardware para este bottão.",
@@ -1486,10 +1486,10 @@
         "placeholder": ""
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira um nome fácil de recordar.",
+        "invalid": "O nome inserido não é válido. Não pode ser vazio.",
+        "label": "Nome",
+        "placeholder": "Insira um nome"
       },
       "save": {
         "ok": {
@@ -1500,17 +1500,17 @@
       "type": {
         "help": "",
         "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "label": "Tipo",
+        "placeholder": "Seleccione o tipo"
       }
     },
     "temperature": {
       "menu": {
-        "title": ""
+        "title": "temperatura"
       },
       "title": ""
     },
-    "title": "",
+    "title": "Sensores",
     "uva": {
       "menu": {
         "title": ""
@@ -1547,28 +1547,28 @@
         "message": ""
       }
     },
-    "enabled": "",
+    "enabled": "Habilitado",
     "ratelimit": "",
     "settings": {
       "enabled": {
         "help": "",
-        "label": ""
+        "label": "Habilitado"
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira um nome fácil de recordar.",
+        "invalid": "O nome inserido não é válido. Não pode ser vazio.",
+        "label": "Nome",
+        "placeholder": "Insira um nome"
       },
       "rate_limit": {
         "help": "",
         "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "label": "Taxa limite",
+        "placeholder": "Mensagens por minuto"
       },
       "save": {
         "error": {
-          "required_fields": ""
+          "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
           "message": ""
@@ -1592,7 +1592,7 @@
         },
         "green": {
           "help": "",
-          "invalid": "",
+          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
           "label": "",
           "placeholder": ""
         },
@@ -1628,7 +1628,7 @@
         },
         "red": {
           "help": "",
-          "invalid": "",
+          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
           "label": "",
           "placeholder": ""
         },
@@ -1668,7 +1668,7 @@
         },
         "yellow": {
           "help": "",
-          "invalid": "",
+          "invalid": "O valor inserido não é válido. Insira um numero válido entre {min} e {max}.",
           "label": "",
           "placeholder": ""
         }
@@ -1677,8 +1677,8 @@
       "type": {
         "help": "",
         "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "label": "Tipo",
+        "placeholder": "Seleccione o tipo"
       }
     },
     "title": ""
@@ -1728,13 +1728,13 @@
         "title": ""
       },
       "settings": {
-        "title": ""
+        "title": "Configurações"
       },
       "shutdown": {
         "title": ""
       },
       "status": {
-        "title": ""
+        "title": "Estado"
       },
       "title": ""
     },
@@ -1797,7 +1797,7 @@
       },
       "graph_smooth_value": {
         "help": "",
-        "invalid": "",
+        "invalid": "Por favor insira um valor mínimo de {value}.",
         "label": ""
       },
       "header": {
@@ -1843,17 +1843,17 @@
       },
       "pi-wattage": {
         "help": "",
-        "invalid": "",
+        "invalid": "Por favor insira um valor mínimo de {value}.",
         "label": ""
       },
       "port": {
         "help": "",
-        "invalid": "",
+        "invalid": "Por favor insira um valor mínimo de {value}.",
         "label": ""
       },
       "power_price": {
         "help": "",
-        "invalid": "",
+        "invalid": "Por favor insira um valor mínimo de {value}.",
         "label": ""
       },
       "profile_image": {
@@ -1896,7 +1896,7 @@
       },
       "water_price": {
         "help": "",
-        "invalid": "",
+        "invalid": "Por favor insira um valor mínimo de {value}.",
         "label": ""
       },
       "water_volume_indicator": {
@@ -1937,29 +1937,29 @@
       "range": ""
     },
     "header": {
-      "actions": "",
-      "duration": "",
+      "actions": "Acções",
+      "duration": "Duração",
       "filename": "",
       "filesize": "",
-      "mode": "",
-      "name": "",
+      "mode": "Modo",
+      "name": "Nome",
       "number_files": "",
-      "repeat": "",
-      "shuffle": "",
-      "status": "",
-      "type": "",
-      "volume": ""
+      "repeat": "Repetir",
+      "shuffle": "Embaralhar",
+      "status": "Estado",
+      "type": "Tipo",
+      "volume": "Volume de áudio"
     }
   },
   "topbar": {
     "current_status": "",
-    "door_status": "",
+    "door_status": "Estado da porta",
     "upcoming_events": ""
   },
   "userpanel": {
     "login": {
       "text1": "",
-      "text2": ""
+      "text2": "Login"
     },
     "logout": {
       "text1": "",
@@ -1967,15 +1967,15 @@
     }
   },
   "weather": {
-    "current": "",
+    "current": "Actual",
     "forecast": "",
     "menu": {
-      "title": ""
+      "title": "Meteorologia"
     },
     "no_data": "",
     "settings": {
       "fields": {
-        "error": ""
+        "error": "Nem todos os campos obrigatórios estão preenchidos correctamente."
       },
       "information": "",
       "save": {
@@ -1990,7 +1990,7 @@
         "label": ""
       }
     },
-    "title": ""
+    "title": "Meteorologia"
   },
   "webcams": {
     "actions": {
@@ -2057,9 +2057,9 @@
         "doors": {
           "help": "",
           "invalid": "",
-          "label": ""
+          "label": "Sensores"
         },
-        "title": ""
+        "title": "Sensores"
       }
     },
     "menu": {
@@ -2067,9 +2067,9 @@
         "title": ""
       },
       "status": {
-        "title": ""
+        "title": "Estado"
       },
-      "title": ""
+      "title": "Câmeras"
     },
     "settings": {
       "address": {
@@ -2084,7 +2084,7 @@
           "invalid": "",
           "label": "",
           "options": {
-            "close": "",
+            "close": "Fechar",
             "ignore": "",
             "open": ""
           },
@@ -2109,7 +2109,7 @@
         },
         "options": {
           "day_1": "",
-          "disabled": "",
+          "disabled": "Desabilitado",
           "hour_1": "",
           "hour_12": "",
           "hour_3": "",
@@ -2154,15 +2154,15 @@
       },
       "height": {
         "help": "",
-        "invalid": "",
-        "label": ""
+        "invalid": "Por favor insira um valor mínimo de {value}.",
+        "label": "Altura"
       },
       "motion": {
         "area": {
           "help": "",
-          "invalid": "",
+          "invalid": "Por favor insira um valor mínimo de {value}.",
           "label": "",
-          "placeholder": ""
+          "placeholder": "Insira um número"
         },
         "boxes": {
           "help": "",
@@ -2188,16 +2188,16 @@
         },
         "threshold": {
           "help": "",
-          "invalid": "",
+          "invalid": "Por favor insira um valor mínimo de {value}.",
           "label": "",
-          "placeholder": ""
+          "placeholder": "Insira um número"
         }
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Insira um nome fácil de recordar.",
+        "invalid": "O nome inserido não é válido. Não pode ser vazio.",
+        "label": "Nome",
+        "placeholder": "Insira um nome"
       },
       "preview": {
         "label": ""
@@ -2219,7 +2219,7 @@
       },
       "save": {
         "error": {
-          "required_fields": ""
+          "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
           "message": ""
@@ -2228,10 +2228,10 @@
       "title": "",
       "width": {
         "help": "",
-        "invalid": "",
+        "invalid": "Por favor insira um valor mínimo de {value}.",
         "label": ""
       }
     },
-    "title": ""
+    "title": "Câmeras"
   }
 }
