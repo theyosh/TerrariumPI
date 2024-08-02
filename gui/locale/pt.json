@@ -1,0 +1,2237 @@
+{
+  "about": {
+    "online": {
+      "help": ""
+    },
+    "title": ""
+  },
+  "areas": {
+    "delete": {
+      "confirm": {
+        "message": ""
+      },
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "settings": {
+      "depends_on": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "enclosure": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "light_sensors": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "mode": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "options": {
+          "disabled": "",
+          "main_lights": "",
+          "sensors": "",
+          "timer": "",
+          "weather": "",
+          "weather_inverse": ""
+        },
+        "placeholder": ""
+      },
+      "name": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "relay": {
+        "slider": {
+          "delay": "",
+          "duration": ""
+        }
+      },
+      "save": {
+        "error": {
+          "duplicate_relays": "",
+          "required_fields": ""
+        },
+        "ok": {
+          "message": ""
+        }
+      },
+      "setup": {
+        "day_night_difference": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "day_night_source": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "options": {
+            "lights": "",
+            "weather": ""
+          },
+          "placeholder": ""
+        },
+        "depend_on_relays_mode": {
+          "all": {
+            "label": ""
+          },
+          "none": {
+            "label": ""
+          },
+          "one": {
+            "label": ""
+          }
+        },
+        "deviation_high_alarm": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "deviation_low_alarm": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "high": {
+          "begin": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "door_status": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "options": {
+              "closed": "",
+              "ignore": "",
+              "open": ""
+            },
+            "placeholder": ""
+          },
+          "end": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "ignore_high": {
+            "help": "",
+            "label": ""
+          },
+          "light_status": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "options": {
+              "ignore": "",
+              "off": "",
+              "on": ""
+            },
+            "placeholder": ""
+          },
+          "off_duration": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "on_duration": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "playlists": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "power_on_time": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "settle_time": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "trigger_threshold": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": ""
+            },
+            "off": {
+              "dimmer": {
+                "label": ""
+              },
+              "relay": {
+                "label": ""
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": ""
+              },
+              "relay": {
+                "label": ""
+              }
+            },
+            "relay": {
+              "info": ""
+            }
+          }
+        },
+        "low": {
+          "begin": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "depend_on_relays_mode": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "door_status": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "options": {
+              "closed": "",
+              "ignore": "",
+              "open": ""
+            },
+            "placeholder": ""
+          },
+          "end": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "ignore_low": {
+            "help": "",
+            "label": ""
+          },
+          "light_status": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "options": {
+              "ignore": "",
+              "off": "",
+              "on": ""
+            },
+            "placeholder": ""
+          },
+          "off_duration": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "on_duration": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "playlists": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "power_on_time": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "relays": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "settle_time": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "trigger_threshold": {
+            "help": "",
+            "invalid": "",
+            "label": "",
+            "placeholder": ""
+          },
+          "tweaks": {
+            "dimmer": {
+              "info": ""
+            },
+            "off": {
+              "dimmer": {
+                "label": ""
+              },
+              "relay": {
+                "label": ""
+              }
+            },
+            "on": {
+              "dimmer": {
+                "label": ""
+              },
+              "relay": {
+                "label": ""
+              }
+            },
+            "relay": {
+              "info": ""
+            }
+          }
+        },
+        "main_lights": {
+          "help": "",
+          "label": ""
+        },
+        "max_day_hours": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "min_day_hours": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "periods": {
+          "day": "",
+          "high": "",
+          "info": "",
+          "low": "",
+          "night": "",
+          "varation": ""
+        },
+        "sensors": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "shift_day_hours": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "soundcard": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "variation": {
+          "offset": {
+            "invalid": ""
+          },
+          "period": {
+            "invalid": "",
+            "offset": "",
+            "placeholder": "",
+            "source": ""
+          },
+          "value": {
+            "invalid": "",
+            "placeholder": ""
+          },
+          "when": {
+            "invalid": "",
+            "options": {
+              "after": "",
+              "at": "",
+              "external": "",
+              "script": "",
+              "weather": ""
+            },
+            "placeholder": ""
+          }
+        },
+        "watertank_height": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "watertank_offset": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "watertank_volume": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "title": "",
+      "type": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      }
+    }
+  },
+  "audio": {
+    "files": {
+      "delete": {
+        "confirm": {
+          "message": ""
+        },
+        "error": {
+          "message": ""
+        },
+        "ok": {
+          "message": ""
+        }
+      },
+      "settings": {
+        "audiofiles": {
+          "label": "",
+          "placeholder": ""
+        },
+        "save": {
+          "error": {
+            "invalid_file": ""
+          },
+          "ok": {
+            "message": ""
+          }
+        },
+        "upload": {
+          "error": {
+            "nologin": ""
+          }
+        }
+      },
+      "title": ""
+    },
+    "menu": {
+      "files": {
+        "title": ""
+      },
+      "new_playlist": {
+        "title": ""
+      },
+      "playlists": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "playlists": {
+      "delete": {
+        "confirm": {
+          "message": ""
+        },
+        "error": {
+          "message": ""
+        },
+        "ok": {
+          "message": ""
+        }
+      },
+      "settings": {
+        "files": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "name": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "repeat": {
+          "help": "",
+          "label": ""
+        },
+        "save": {
+          "error": {
+            "required_fields": ""
+          },
+          "ok": {
+            "message": ""
+          }
+        },
+        "shuffle": {
+          "help": "",
+          "label": ""
+        },
+        "title": "",
+        "volume": {
+          "formatter": "",
+          "help": "",
+          "label": ""
+        }
+      },
+      "title": ""
+    }
+  },
+  "buttons": {
+    "actions": {
+      "delete": "",
+      "export": "",
+      "ignore": "",
+      "settings": ""
+    },
+    "delete": {
+      "confirm": {
+        "message": ""
+      },
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "ignore": {
+      "confirm": {
+        "message": ""
+      },
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "menu": {
+      "new": {
+        "title": ""
+      },
+      "status": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "settings": {
+      "address": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "calibration": {
+        "inverse": {
+          "help": "",
+          "label": ""
+        },
+        "ldr_capacitor": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "timeout": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "current": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "hardware": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "name": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "save": {
+        "error": {
+          "required_fields": ""
+        },
+        "ok": {
+          "message": ""
+        }
+      },
+      "title": ""
+    },
+    "title": ""
+  },
+  "calendar": {
+    "actions": {
+      "download": ""
+    },
+    "event": {
+      "delete": {
+        "confirm": {
+          "message": ""
+        },
+        "error": {
+          "message": ""
+        },
+        "ok": {
+          "message": ""
+        }
+      },
+      "duration": "",
+      "periods": {
+        "days": "",
+        "months": "",
+        "no_reminder": "",
+        "no_repeat": "",
+        "weeks": "",
+        "years": ""
+      },
+      "settings": {
+        "date": {
+          "help": "",
+          "label": ""
+        },
+        "description": {
+          "help": "",
+          "label": ""
+        },
+        "remind": {
+          "label": ""
+        },
+        "repeat": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        },
+        "repeat_amount": {
+          "label": ""
+        },
+        "save": {
+          "error": {
+            "required_fields": ""
+          },
+          "ok": {
+            "message": ""
+          }
+        },
+        "summary": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        },
+        "title": "",
+        "update": {
+          "error": {
+            "message": ""
+          },
+          "ok": {
+            "message": ""
+          }
+        }
+      }
+    },
+    "menu": {
+      "title": ""
+    },
+    "title": ""
+  },
+  "dashboard": {
+    "enclosures": {
+      "menu": {
+        "title": ""
+      },
+      "mode": "",
+      "title": ""
+    },
+    "infobox": {
+      "current_power_usage": {
+        "title": ""
+      },
+      "current_water_flow": {
+        "title": ""
+      },
+      "total_power_usage": {
+        "duration": "",
+        "title": ""
+      },
+      "total_water_usage": {
+        "duration": "",
+        "title": ""
+      },
+      "uptime": {
+        "title": ""
+      }
+    },
+    "menu": {
+      "title": ""
+    },
+    "title": ""
+  },
+  "enclosures": {
+    "actions": {
+      "delete": "",
+      "settings": ""
+    },
+    "area": {
+      "current": "",
+      "current_status": "",
+      "delete": {
+        "title": ""
+      },
+      "edit": {
+        "title": ""
+      },
+      "mode": {
+        "disabled": "",
+        "sensors": "",
+        "timer": "",
+        "title": "",
+        "weather": ""
+      },
+      "now": "",
+      "period": {
+        "day": "",
+        "high": "",
+        "low": "",
+        "night": ""
+      },
+      "range": "",
+      "type": {
+        "audio": "",
+        "cooling": "",
+        "heating": "",
+        "humidity": "",
+        "lights": "",
+        "main_lights": "",
+        "watertank": ""
+      }
+    },
+    "areas": {
+      "title": ""
+    },
+    "delete": {
+      "confirm": {
+        "message": ""
+      },
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "doors": {
+      "title": ""
+    },
+    "menu": {
+      "list": {
+        "title": ""
+      },
+      "new_area": {
+        "title": ""
+      },
+      "new_enclosure": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "settings": {
+      "description": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "doors": {
+        "help": "",
+        "label": ""
+      },
+      "image": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "name": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "save": {
+        "error": {
+          "required_fields": ""
+        },
+        "ok": {
+          "message": ""
+        }
+      },
+      "title": "",
+      "webcams": {
+        "help": "",
+        "label": ""
+      }
+    },
+    "title": "",
+    "webcams": {
+      "title": ""
+    }
+  },
+  "footer": {
+    "current_activity": "",
+    "error_messages": "",
+    "warning_messages": ""
+  },
+  "gauge": {
+    "error": "",
+    "last_update": "",
+    "warning": ""
+  },
+  "general": {
+    "download": {
+      "title": ""
+    },
+    "exclude": {
+      "average": ""
+    },
+    "humidity": "",
+    "login": {
+      "title": ""
+    },
+    "logout": {
+      "title": ""
+    },
+    "settings": {
+      "title": ""
+    },
+    "temperature": "",
+    "uptime_format": {
+      "days": "",
+      "hours": "",
+      "minutes": "",
+      "months": "",
+      "seconds": "",
+      "years": ""
+    }
+  },
+  "graph": {
+    "alarm": {
+      "max": "",
+      "min": ""
+    },
+    "current": "",
+    "flow": "",
+    "ldr": "",
+    "magnetic": "",
+    "motion": "",
+    "no-data": "",
+    "period": {
+      "day": "",
+      "month": "",
+      "replaced": "",
+      "week": "",
+      "year": ""
+    },
+    "settings": {
+      "export": ""
+    },
+    "wattage": ""
+  },
+  "home": {
+    "menu": {
+      "title": ""
+    },
+    "title": ""
+  },
+  "messages": {
+    "actions": {
+      "delete": "",
+      "edit": ""
+    },
+    "add": "",
+    "delete": {
+      "confirm": {
+        "message": ""
+      },
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "ratelimit": "",
+    "settings": {
+      "available_services": {
+        "help": "",
+        "label": ""
+      },
+      "enabled": {
+        "help": "",
+        "label": ""
+      },
+      "message": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "placeholders": {
+        "format": "",
+        "help": "",
+        "label": ""
+      },
+      "rate_limit": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "save": {
+        "error": {
+          "required_fields": ""
+        },
+        "ok": {
+          "message": ""
+        }
+      },
+      "subject": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "title": "",
+      "type": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      }
+    },
+    "table": {
+      "actions": "",
+      "enabled": "",
+      "message": "",
+      "rate_limit": "",
+      "services": "",
+      "subject": "",
+      "type": ""
+    },
+    "title": ""
+  },
+  "modal": {
+    "confirm": {
+      "docker": {
+        "not_available": ""
+      },
+      "relays": {
+        "scan": ""
+      },
+      "sensors": {
+        "scan": ""
+      },
+      "submit": {
+        "title": ""
+      },
+      "system": {
+        "logout": "",
+        "reboot": "",
+        "restart": "",
+        "shutdown": ""
+      },
+      "title": ""
+    },
+    "form": {
+      "toggle": {
+        "info": ""
+      }
+    },
+    "general": {
+      "close": "",
+      "save": ""
+    },
+    "loading": {
+      "title": ""
+    },
+    "login": {
+      "error": "",
+      "form": {
+        "password": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        },
+        "submit": "",
+        "username": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        }
+      },
+      "title": ""
+    },
+    "notification": {
+      "service": {
+        "form": {
+          "field": {
+            "setup": {
+              "address": {
+                "label": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "not-found": {
+    "header": "",
+    "link": "",
+    "title": ""
+  },
+  "notification": {
+    "delete": {
+      "error": {
+        "title": ""
+      },
+      "invalid": {
+        "title": ""
+      },
+      "ok": {
+        "title": ""
+      }
+    },
+    "door": {
+      "status": {
+        "closed": "",
+        "open": "",
+        "title": ""
+      }
+    },
+    "exclude": {
+      "error": {
+        "title": ""
+      },
+      "ok": {
+        "title": ""
+      }
+    },
+    "form": {
+      "save": {
+        "error": {
+          "title": ""
+        },
+        "ok": {
+          "title": ""
+        }
+      },
+      "upload": {
+        "error": {
+          "title": ""
+        }
+      }
+    },
+    "login": {
+      "message": {
+        "error": "",
+        "ok": ""
+      },
+      "title": ""
+    },
+    "manual_mode": {
+      "error": {
+        "title": ""
+      },
+      "ok": {
+        "title": ""
+      }
+    },
+    "offline": {
+      "message": "",
+      "title": ""
+    },
+    "online": {
+      "message": "",
+      "title": ""
+    },
+    "reboot": {
+      "ok": {
+        "title": ""
+      }
+    },
+    "restart": {
+      "ok": {
+        "title": ""
+      }
+    },
+    "scanning": {
+      "ok": {
+        "title": ""
+      }
+    },
+    "shutdown": {
+      "ok": {
+        "title": ""
+      }
+    },
+    "toggle": {
+      "error": {
+        "title": ""
+      },
+      "ok": {
+        "title": ""
+      }
+    }
+  },
+  "relays": {
+    "actions": {
+      "delete": "",
+      "export": "",
+      "ignore": "",
+      "manual_mode": "",
+      "replace_hardware": "",
+      "settings": ""
+    },
+    "confirm": {
+      "ignore": {
+        "message": ""
+      },
+      "manual_mode": {
+        "message": ""
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": ""
+      },
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "manual-mode": "",
+    "manual_mode": {
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "menu": {
+      "new": {
+        "title": ""
+      },
+      "scan": {
+        "title": ""
+      },
+      "status": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "settings": {
+      "address": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "calibration": {
+        "dimmer_frequency": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        },
+        "dimmer_max_dim": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        },
+        "dimmer_max_power": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        },
+        "dimmer_offset": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        }
+      },
+      "current": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "flow": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "hardware": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "name": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "save": {
+        "error": {
+          "required_fields": ""
+        },
+        "ok": {
+          "message": ""
+        }
+      },
+      "title": "",
+      "wattage": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      }
+    },
+    "title": "",
+    "toggle": {
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    }
+  },
+  "sensors": {
+    "actions": {
+      "delete": "",
+      "export": "",
+      "ignore": "",
+      "settings": ""
+    },
+    "all": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "altitude": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "average": {
+      "altitude": "",
+      "co2": "",
+      "distance": "",
+      "fertility": "",
+      "humidity": "",
+      "light": "",
+      "moisture": "",
+      "pressure": "",
+      "temperature": "",
+      "uva": "",
+      "uvb": "",
+      "uvi": ""
+    },
+    "calibration": {
+      "light_on_off_threshold": {
+        "light_bulb": ""
+      }
+    },
+    "co2": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "confirm": {
+      "ignore": {
+        "message": ""
+      }
+    },
+    "delete": {
+      "confirm": {
+        "message": ""
+      },
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "distance": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "exclude": {
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "fertility": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "humidity": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "light": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "menu": {
+      "new": {
+        "title": ""
+      },
+      "scan": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "moisture": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "ph": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "pressure": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "settings": {
+      "address": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "alarm_max": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "alarm_min": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "calibration": {
+        "ccs811_compensation_sensors": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "chirp_max_moist": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        },
+        "chirp_min_moist": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        },
+        "light_threshold": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        },
+        "offset": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        }
+      },
+      "current": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "exclude_avg": {
+        "help": "",
+        "label": ""
+      },
+      "fields": {
+        "error": ""
+      },
+      "hardware": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "limit_max": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "limit_min": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "max_diff": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "name": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "save": {
+        "ok": {
+          "message": ""
+        }
+      },
+      "title": "",
+      "type": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      }
+    },
+    "temperature": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "title": "",
+    "uva": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "uvb": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "uvi": {
+      "menu": {
+        "title": ""
+      },
+      "title": ""
+    }
+  },
+  "services": {
+    "actions": {
+      "delete": "",
+      "edit": ""
+    },
+    "add": "",
+    "delete": {
+      "confirm": {
+        "message": ""
+      },
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "enabled": "",
+    "ratelimit": "",
+    "settings": {
+      "enabled": {
+        "help": "",
+        "label": ""
+      },
+      "name": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "rate_limit": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "save": {
+        "error": {
+          "required_fields": ""
+        },
+        "ok": {
+          "message": ""
+        }
+      },
+      "setup": {
+        "address": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "api_token": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "buzzer": {
+          "help": ""
+        },
+        "green": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "h_scroll": {
+          "help": "",
+          "label": ""
+        },
+        "hardware": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "password": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "port": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "pushover": {
+          "label": ""
+        },
+        "receiver": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "red": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "sender": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "show_title": {
+          "help": "",
+          "label": ""
+        },
+        "ssl": {
+          "email": {
+            "label": ""
+          },
+          "mqtt": {
+            "label": ""
+          }
+        },
+        "url": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "user_key": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "username": {
+          "help": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "yellow": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "title": "",
+      "type": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      }
+    },
+    "title": ""
+  },
+  "settings": {
+    "units": {
+      "beaufort": "",
+      "celsius": "",
+      "cm": "",
+      "fahrenheit": "",
+      "inch": "",
+      "kelvin": "",
+      "km_h": "",
+      "l": "",
+      "m_h": "",
+      "m_s": "",
+      "ukgall": "",
+      "usgall": ""
+    }
+  },
+  "system": {
+    "log": {
+      "download": {
+        "title": ""
+      },
+      "filters": {
+        "errors": "",
+        "search": "",
+        "title": "",
+        "warnings": ""
+      },
+      "lines": "",
+      "loading": "",
+      "title": ""
+    },
+    "menu": {
+      "log": {
+        "title": ""
+      },
+      "notifications": {
+        "title": ""
+      },
+      "reboot": {
+        "title": ""
+      },
+      "restart": {
+        "title": ""
+      },
+      "settings": {
+        "title": ""
+      },
+      "shutdown": {
+        "title": ""
+      },
+      "status": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "notifications": {
+      "title": ""
+    },
+    "settings": {
+      "all_gauges_on_single_page": {
+        "help": "",
+        "label": ""
+      },
+      "authenticate": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "options": {
+          "changes": "",
+          "full": "",
+          "no_authentication": ""
+        }
+      },
+      "auto_dark_mode": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "options": {
+          "always": "",
+          "desktop": "",
+          "off": "",
+          "on": ""
+        }
+      },
+      "currency": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "dashboard_mode": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "options": {
+          "normal": "",
+          "only_enclosures": "",
+          "only_graphs": ""
+        }
+      },
+      "distance_indicator": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "exclude-ids": {
+        "help": "",
+        "label": ""
+      },
+      "graph_limit_min_max": {
+        "help": "",
+        "label": ""
+      },
+      "graph_smooth_value": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "header": {
+        "cloud": "",
+        "gui": "",
+        "locale": "",
+        "system": ""
+      },
+      "hide_environment_dashboard": {
+        "help": "",
+        "label": ""
+      },
+      "host": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "language": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "meross_cloud_password": {
+        "help": "",
+        "label": ""
+      },
+      "meross_cloud_username": {
+        "help": "",
+        "label": ""
+      },
+      "page": {
+        "title": ""
+      },
+      "password": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "password2": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "pi-wattage": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "port": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "power_price": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "profile_image": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "save": {
+        "ok": {
+          "message": "",
+          "title": ""
+        }
+      },
+      "show_min_max_gauge": {
+        "help": "",
+        "label": ""
+      },
+      "temperature_indicator": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "title": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "unsplash_access_key": {
+        "help": "",
+        "label": ""
+      },
+      "unsplash_query": {
+        "help": "",
+        "label": ""
+      },
+      "username": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "water_price": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "water_volume_indicator": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "wind_speed_indicator": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      }
+    },
+    "status": {
+      "cpu_temp": {
+        "title": ""
+      },
+      "disk": {
+        "title": ""
+      },
+      "load": {
+        "title": ""
+      },
+      "memory": {
+        "title": ""
+      },
+      "summary": {
+        "title": ""
+      },
+      "title": "",
+      "uptime": {
+        "title": ""
+      }
+    }
+  },
+  "table": {
+    "field": {
+      "range": ""
+    },
+    "header": {
+      "actions": "",
+      "duration": "",
+      "filename": "",
+      "filesize": "",
+      "mode": "",
+      "name": "",
+      "number_files": "",
+      "repeat": "",
+      "shuffle": "",
+      "status": "",
+      "type": "",
+      "volume": ""
+    }
+  },
+  "topbar": {
+    "current_status": "",
+    "door_status": "",
+    "upcoming_events": ""
+  },
+  "userpanel": {
+    "login": {
+      "text1": "",
+      "text2": ""
+    },
+    "logout": {
+      "text1": "",
+      "text2": ""
+    }
+  },
+  "weather": {
+    "current": "",
+    "forecast": "",
+    "menu": {
+      "title": ""
+    },
+    "no_data": "",
+    "settings": {
+      "fields": {
+        "error": ""
+      },
+      "information": "",
+      "save": {
+        "ok": {
+          "message": ""
+        }
+      },
+      "title": "",
+      "weather_source": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      }
+    },
+    "title": ""
+  },
+  "webcams": {
+    "actions": {
+      "delete": "",
+      "ignore": "",
+      "settings": ""
+    },
+    "archive": {
+      "modal": {
+        "loading": {
+          "status": "",
+          "title": ""
+        }
+      },
+      "no_images": ""
+    },
+    "confirm": {
+      "ignore": {
+        "message": ""
+      }
+    },
+    "controls": {
+      "archive": "",
+      "new_marker": "",
+      "save_raw_image": "",
+      "show_markers": "",
+      "toggle_volume": ""
+    },
+    "delete": {
+      "confirm": {
+        "message": ""
+      },
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "exclude": {
+      "error": {
+        "message": ""
+      },
+      "ok": {
+        "message": ""
+      }
+    },
+    "marker": {
+      "delete": {
+        "confirm": {
+          "message": ""
+        },
+        "error": {
+          "message": ""
+        },
+        "invalid": {
+          "message": ""
+        }
+      }
+    },
+    "markers": {
+      "settings": {
+        "delete": "",
+        "doors": {
+          "help": "",
+          "invalid": "",
+          "label": ""
+        },
+        "title": ""
+      }
+    },
+    "menu": {
+      "new": {
+        "title": ""
+      },
+      "status": {
+        "title": ""
+      },
+      "title": ""
+    },
+    "settings": {
+      "address": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "archive": {
+        "door": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "options": {
+            "close": "",
+            "ignore": "",
+            "open": ""
+          },
+          "placeholder": ""
+        },
+        "flash": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "light": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "options": {
+            "ignore": "",
+            "off": "",
+            "on": ""
+          },
+          "placeholder": ""
+        },
+        "options": {
+          "day_1": "",
+          "disabled": "",
+          "hour_1": "",
+          "hour_12": "",
+          "hour_3": "",
+          "hour_6": "",
+          "minute_1": "",
+          "minute_15": "",
+          "minute_30": "",
+          "minute_5": "",
+          "motion": ""
+        },
+        "state": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "awb": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "options": {
+          "auto": "",
+          "cloudy": "",
+          "flash": "",
+          "fluorescent": "",
+          "greyworld": "",
+          "horizon": "",
+          "incandescent": "",
+          "off": "",
+          "shade": "",
+          "sunlight": "",
+          "tungsten": ""
+        },
+        "placeholder": ""
+      },
+      "hardware": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "height": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
+      "motion": {
+        "area": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        },
+        "boxes": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "options": {
+            "blue": "",
+            "green": "",
+            "none": "",
+            "red": ""
+          },
+          "placeholder": ""
+        },
+        "frame": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "options": {
+            "archived": "",
+            "last": ""
+          },
+          "placeholder": ""
+        },
+        "threshold": {
+          "help": "",
+          "invalid": "",
+          "label": "",
+          "placeholder": ""
+        }
+      },
+      "name": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "placeholder": ""
+      },
+      "preview": {
+        "label": ""
+      },
+      "rotation": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "options": {
+          "degrees_0": "",
+          "degrees_180": "",
+          "degrees_270": "",
+          "degrees_90": "",
+          "flip_h": "",
+          "flip_v": "",
+          "zero_degrees": ""
+        },
+        "placeholder": ""
+      },
+      "save": {
+        "error": {
+          "required_fields": ""
+        },
+        "ok": {
+          "message": ""
+        }
+      },
+      "title": "",
+      "width": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      }
+    },
+    "title": ""
+  }
+}
