@@ -504,7 +504,11 @@ class terrariumUtils:
     @staticmethod
     def get_translator(lang="en-US"):
         # Load language
-        trans = gettext.translation("terrariumpi", "locales/", languages=(lang.replace("-", "_"),))
+        try:
+            trans = gettext.translation("terrariumpi", "locales/", languages=(lang.replace("-", "_"),))
+        except:
+            trans = gettext.translation("terrariumpi", "locales/", languages=('en_US',))
+
         return trans.gettext
 
     @staticmethod

@@ -17,6 +17,7 @@ import nb_NO from './nb_NO.json';
 import nl_NL from './nl_NL.json';
 import pl from './pl.json';
 import pt_BR from './pt_BR.json';
+import pt from './pt.json';
 
 let settings = getCustomConfig();
 
@@ -35,6 +36,7 @@ const locales = {
   'nl-NL': nl_NL,
   pl: pl,
   'pt-BR': pt_BR,
+  pt:pt,
 };
 
 const langs = [
@@ -107,6 +109,11 @@ const langs = [
     code: 'pt-BR',
     title: 'Português (BR)',
     currency: ['eur', 'brl'],
+  },
+  {
+    code: 'pt',
+    title: 'Português',
+    currency: ['eur'],
   },
 ];
 

@@ -354,7 +354,12 @@ class terrariumEngine(object):
         logger.info(f"Loaded {len(settings)} settings in {time.time()-start:.2f} seconds.")
 
         # Loading active language
-        gettext.translation("terrariumpi", "locales/", languages=[self.active_language]).install()
+        try:
+            gettext.translation("terrariumpi", "locales/", languages=[self.active_language]).install()
+            logger.info(f"Loaded language '{self.active_language}'")
+        except:
+            logger.warning(f"Translation '{self.active_language}' does not exists! Falling back on English (US).")
+            gettext.translation("terrariumpi", "locales/", languages=["en_US"]).install()
 
         # Loading git data
         gitversion = None

@@ -59,7 +59,10 @@ class terrariumWebserver(object):
         self.api = terrariumAPI(self)
 
         # Load language
-        gettext.translation("terrariumpi", "locales/", languages=[self.engine.active_language]).install()
+        try:
+            gettext.translation("terrariumpi", "locales/", languages=[self.active_language]).install()
+        except:
+            gettext.translation("terrariumpi", "locales/", languages=["en_US"]).install()
 
         # Load the routes
         self.__routes()
