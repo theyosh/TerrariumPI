@@ -507,7 +507,7 @@ class terrariumUtils:
         try:
             trans = gettext.translation("terrariumpi", "locales/", languages=(lang.replace("-", "_"),))
         except:
-            trans = gettext.translation("terrariumpi", "locales/", languages=('en_US',))
+            trans = gettext.translation("terrariumpi", "locales/", languages=("en_US",))
 
         return trans.gettext
 
