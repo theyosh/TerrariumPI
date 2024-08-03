@@ -6,174 +6,178 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.6.3\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-08-03 01:24+0000\n"
+"Last-Translator: Daniel Santos <dgms@sapo.pt>\n"
+"Language-Team: Portuguese <https://weblate.theyosh.nl/projects/terrariumpi/"
+"backend/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
 msgid "Lighting"
-msgstr ""
+msgstr "Iluminação"
 
 #: terrariumArea.py:38
 msgid "Heating"
-msgstr ""
+msgstr "Aquecimento"
 
 #: terrariumArea.py:44
 msgid "Cooling"
-msgstr ""
+msgstr "Refrigeração"
 
 #: terrariumArea.py:50
 msgid "Humidity"
-msgstr ""
+msgstr "Humidade"
 
 #: terrariumArea.py:56
 msgid "Water tank"
-msgstr ""
+msgstr "Depósito de água"
 
 #: terrariumArea.py:62
 msgid "Audio"
-msgstr ""
+msgstr "Áudio"
 
 #: terrariumArea.py:68
 msgid "CO2"
-msgstr ""
+msgstr "CO2"
 
 #: terrariumArea.py:74
 msgid "Conductivity"
-msgstr ""
+msgstr "Conductividade"
 
 #: terrariumArea.py:80
 msgid "Fertility"
-msgstr ""
+msgstr "Fertilidade"
 
 #: terrariumArea.py:86
+#, fuzzy
 msgid "Moisture"
-msgstr ""
+msgstr "Hidratação"
 
 #: terrariumArea.py:92
 msgid "pH"
-msgstr ""
+msgstr "pH"
 
 #: terrariumEngine.py:54
 msgid "temperature"
-msgstr ""
+msgstr "temperatura"
 
 #: terrariumEngine.py:55
 msgid "distance"
-msgstr ""
+msgstr "distância"
 
 #: terrariumEngine.py:56
 msgid "altitude"
-msgstr ""
+msgstr "altitude"
 
 #: terrariumEngine.py:57
 msgid "pressure"
-msgstr ""
+msgstr "pressão"
 
 #: terrariumEngine.py:58
 msgid "humidity"
-msgstr ""
+msgstr "humidade"
 
 #: terrariumEngine.py:59
 msgid "moisture"
-msgstr ""
+msgstr "hidratação"
 
 #: terrariumEngine.py:60
 msgid "conductivity"
-msgstr ""
+msgstr "conductividade"
 
 #: terrariumEngine.py:61
 msgid "ph"
-msgstr ""
+msgstr "ph"
 
 #: terrariumEngine.py:62
 msgid "light"
-msgstr ""
+msgstr "luzes"
 
 #: terrariumEngine.py:63
 msgid "uva"
-msgstr ""
+msgstr "uva"
 
 #: terrariumEngine.py:64
 msgid "uvb"
-msgstr ""
+msgstr "uvb"
 
 #: terrariumEngine.py:65
 msgid "uvi"
-msgstr ""
+msgstr "uvi"
 
 #: terrariumEngine.py:66
 msgid "fertility"
-msgstr ""
+msgstr "fertilidade"
 
 #: terrariumEngine.py:67
 msgid "co2"
-msgstr ""
+msgstr "co2"
 
 #: terrariumEngine.py:68
 msgid "volume"
-msgstr ""
+msgstr "volume"
 
 #: terrariumEngine.py:71
 msgid "water_volume"
-msgstr ""
+msgstr "Volume de água"
 
 #: terrariumEngine.py:73
 msgid "watertank"
-msgstr ""
+msgstr "depósito de água"
 
 #: terrariumEngine.py:74
 msgid "windspeed"
-msgstr ""
+msgstr "velocidade do vento"
 
 #: terrariumEngine.py:75
 msgid "water_flow"
-msgstr ""
+msgstr "fluxo_de_agua"
 
 #: terrariumEngine.py:76
 msgid "wattage"
-msgstr ""
+msgstr "potência"
 
 #: terrariumEngine.py:77
 msgid "powerusage"
-msgstr ""
+msgstr "Potência utilizada pelo Pi"
 
 #: terrariumEngine.py:1187
 msgid "Up time"
-msgstr ""
+msgstr "Tempo de actividade"
 
 #: terrariumEngine.py:1193
 msgid "System load"
-msgstr ""
+msgstr "Carga do sistema"
 
 #: terrariumEngine.py:1199
 msgid "CPU Temperature"
-msgstr ""
+msgstr "Temperatura do CPU"
 
 #: terrariumEngine.py:1205
 msgid "Storage"
-msgstr ""
+msgstr "Armazenamento"
 
 #: terrariumEngine.py:1211
 msgid "Memory"
-msgstr ""
+msgstr "Memória"
 
 #: terrariumEngine.py:1232
 msgid "average {sensor_type}"
-msgstr ""
+msgstr "média {sensor_type}"
 
 #: terrariumEngine.py:1316
 msgid "Version"
-msgstr ""
+msgstr "Versão"
 
 #: terrariumEngine.py:1326 terrariumWebserver.py:393
 msgid "A new version ({version}) is available!"
-msgstr ""
+msgstr "Nova versão ({version}) disponível!"
 
 #: terrariumEngine.py:1370 terrariumEngine.py:1400
 msgid "Current active relays"
