@@ -100,13 +100,13 @@
           }
         },
         "deviation_high_alarm": {
-          "help": "Erhöhung des oberen Alarmwerts.",
+          "help": "Erhöhen oder verringern Sie den hohen Alarmwert.",
           "invalid": "Gib eine gültige Zahl ein.",
           "label": "Max Alarm Abweichung",
           "placeholder": "Max Alarm Abweichung"
         },
         "deviation_low_alarm": {
-          "help": "Erhöhung des unteren Alarmwerts.",
+          "help": "Erhöhen oder verringern Sie den niedrigen Alarmwert.",
           "invalid": "Gib eine gültige Zahl ein.",
           "label": "Unterer Alarm Abweichung",
           "placeholder": "Unterer Alarm Abweichung"
