@@ -587,29 +587,29 @@
       },
       "calibration": {
         "inverse": {
-          "help": "",
-          "label": ""
+          "help": "Activar para inverter o valor remoto.",
+          "label": "Valor inverso"
         },
         "ldr_capacitor": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o valor do condensador em µF, tal irá influenciar o cálculo de iluminação.",
+          "invalid": "O valor do condensador não é válido. Insira um número entre {min} e {max}.",
+          "label": "Valor do condensador em µF",
+          "placeholder": "Insira o valor do condensdor em µF"
         },
         "timeout": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Insira o tempo máximo em segundos entre verificações remotas.",
+          "invalid": "O tempo máximo não é válido. Insira um número entre {min} e {max}.",
+          "label": "Tempo máximo em segundos",
+          "placeholder": "Insira o tempo máximo em segundos"
         }
       },
       "current": {
-        "help": "",
+        "help": "O estado actual do botão.",
         "label": "Actual",
-        "placeholder": ""
+        "placeholder": "Valor actual"
       },
       "hardware": {
-        "help": "Seleccione o tipo de hardware para este bottão.",
+        "help": "Seleccione o tipo de hardware para este botão.",
         "invalid": "Por favor seleccione um tipo de hardware.",
         "label": "",
         "placeholder": ""
@@ -1464,7 +1464,7 @@
         "error": "Nem todos os campos obrigatórios estão preenchidos correctamente."
       },
       "hardware": {
-        "help": "Seleccione o tipo de hardware para este bottão.",
+        "help": "Seleccione o tipo de hardware para este botão.",
         "invalid": "Por favor seleccione um tipo de hardware.",
         "label": "Hardware",
         "placeholder": "Seleccione o hardware"
@@ -1924,7 +1924,7 @@
         "title": "Utilização de memória"
       },
       "summary": {
-        "title": "Sumário de sistema"
+        "title": "Resumo de sistema"
       },
       "title": "Estado do sistema",
       "uptime": {
@@ -2147,49 +2147,49 @@
         "placeholder": "Seleccione o equlíbrio de brancos"
       },
       "hardware": {
-        "help": "Seleccione o tipo de hardware para este bottão.",
+        "help": "Seleccione o tipo de hardware para este botão.",
         "invalid": "Por favor seleccione um tipo de hardware.",
-        "label": "",
-        "placeholder": ""
+        "label": "Hardware",
+        "placeholder": "Seleccione o hardware"
       },
       "height": {
-        "help": "",
+        "help": "Insira a altura da resolução em pixels.",
         "invalid": "Por favor insira um valor mínimo de {value}.",
         "label": "Altura"
       },
       "motion": {
         "area": {
-          "help": "",
+          "help": "Insira o tamanho da área.",
           "invalid": "Por favor insira um valor mínimo de {value}.",
-          "label": "",
+          "label": "Área mínima de movimento",
           "placeholder": "Insira um número"
         },
         "boxes": {
-          "help": "",
-          "invalid": "",
-          "label": "",
+          "help": "Apresentar caixas de movimento nas imagens de arquivo.",
+          "invalid": "Por favor seleccione uma opção.",
+          "label": "Apresentar caixas de movimento",
           "options": {
-            "blue": "",
+            "blue": "Azul",
             "green": "Verde",
-            "none": "",
-            "red": ""
+            "none": "Nenhuma",
+            "red": "Vermelho"
           },
-          "placeholder": ""
+          "placeholder": "Apresentar as caixas de movimento"
         },
         "frame": {
-          "help": "",
-          "invalid": "",
-          "label": "",
+          "help": "Qual a frame a utilizar para detecção de movimento.",
+          "invalid": "Por favor seleccione uma opção.",
+          "label": "Frame de comparação de movimento",
           "options": {
-            "archived": "",
-            "last": ""
+            "archived": "Última frame arquivada",
+            "last": "Última frame"
           },
-          "placeholder": ""
+          "placeholder": "Seleccione a frame para comparação"
         },
         "threshold": {
-          "help": "",
+          "help": "Insira o limite de movimento.",
           "invalid": "Por favor insira um valor mínimo de {value}.",
-          "label": "",
+          "label": "Limite de delta de movimento",
           "placeholder": "Insira um número"
         }
       },
@@ -2200,36 +2200,36 @@
         "placeholder": "Insira um nome"
       },
       "preview": {
-        "label": ""
+        "label": "Antevisão"
       },
       "rotation": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Seleccione uma rotação.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Rotação",
         "options": {
-          "degrees_0": "",
-          "degrees_180": "",
-          "degrees_270": "",
-          "degrees_90": "",
-          "flip_h": "",
-          "flip_v": "",
-          "zero_degrees": ""
+          "degrees_0": "0 degraus",
+          "degrees_180": "180 degraus",
+          "degrees_270": "270 degraus",
+          "degrees_90": "90 degraus",
+          "flip_h": "Virar na horizontal",
+          "flip_v": "Virar na vertical",
+          "zero_degrees": "0 degraus"
         },
-        "placeholder": ""
+        "placeholder": "Seleccione uma rotação"
       },
       "save": {
         "error": {
           "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
-          "message": ""
+          "message": "Câmera ''{name}'' actualizada."
         }
       },
-      "title": "",
+      "title": "Configurações de câmera",
       "width": {
-        "help": "",
+        "help": "Insira a resolução de largura em pixels.",
         "invalid": "Por favor insira um valor mínimo de {value}.",
-        "label": ""
+        "label": "Largura"
       }
     },
     "title": "Câmeras"
