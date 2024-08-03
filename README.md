@@ -139,7 +139,7 @@ And all this is controlled with a nice web interface with
     - Open and close doors
     - System error and warning messages
 
-It is currently controling my reptile terrarium since **2015**! And my
+It is currently controling my reptile terrarium since **2014**! And my
 Madagascar Day Gecko is very happy with it!
 
 ## Translations
