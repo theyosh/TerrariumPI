@@ -15,7 +15,7 @@ image:
 ---
 
 ![10 year anniversary](/assets/img/10-year-party-ballons.webp){: .left
-width="150" }It has ben 10 years now when this project started. It started all
+width="150" }It has been 10 years now when this project started. It started all
 to learn a new programming language Python, and as a lazy programmer does, to
 automate stuff.
 
