@@ -449,12 +449,13 @@ class terrariumWebsocket(object):
 
         messages = Queue()
         authenticated = False
+        cookie_authenticated = False
 
         # First try (existing) cookie login
         try:
             cookie_data = request.get_cookie("auth", secret=self.webserver.cookie_secret)
             if cookie_data is not None:
-                authenticated = self.webserver.engine.authenticate(cookie_data[0], cookie_data[1])
+                cookie_authenticated = self.webserver.engine.authenticate(cookie_data[0], cookie_data[1])
         except Exception as ex:
             logger.debug(f"Invalid cookie data. Either wrong secret or strange auth. We can ignore this. {ex}")
 
@@ -475,7 +476,10 @@ class terrariumWebsocket(object):
                 message = json.loads(message)
 
                 if "client_init" == message["type"]:
-                    authenticated = self.__authenticated(message)
+                    authenticated = cookie_authenticated or self.__authenticated(message)
+                    if cookie_authenticated:
+                        # Reset Cookie login, as it is only valid for first onConnect
+                        cookie_authenticated = False
 
                     if not messages in self.clients:
                         messages.authenticated = authenticated
