@@ -50,6 +50,7 @@ if [ "${OS}" == "buster" ]; then
   PIP_MODULES="${PIP_MODULES//pip==+([^ ])/pip==24.0}"
   PIP_MODULES="${PIP_MODULES//setuptools==+([^ ])/setuptools==68.0.0}"
   PIP_MODULES="${PIP_MODULES//wheel==+([^ ])/wheel==0.42.0}"
+  PIP_MODULES="${PIP_MODULES//yoyo-migrations===+([^ ])/yoyo-migrations===8.2.0}"
   PIP_MODULES="${PIP_MODULES//python-dotenv==+([^ ])/python-dotenv==0.21.1}"
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==22.10.2}"
   PIP_MODULES="${PIP_MODULES//gpiozero==+([^ ])/gpiozero==1.6.2}"
