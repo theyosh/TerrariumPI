@@ -22,6 +22,7 @@ screenlog.*
 *.swp
 .jekyll-cache
 docs/_site/
+scripts/
 
 # Logs
 logs
