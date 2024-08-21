@@ -491,6 +491,8 @@ but we made it.
 
 <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/ZJB5EPInvETQY" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/disco-ZJB5EPInvETQY">via GIPHY</a></p>
 
+![Gecko Infographic](/assets/img/InfoGraphGecko.webp)
+
 ## Historical pictures
 
 {% include image-gallery.html folder="/assets/img/photos" %}
