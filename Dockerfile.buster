@@ -46,6 +46,7 @@ RUN sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/gpiozero==.*/gpiozero==1.6.2/g' requirements.txt \
   && sed -i 's/Adafruit-Blinka==.*/Adafruit-Blinka==8.43.0/g' requirements.txt \
   && sed -i 's/adafruit-circuitpython-typing==.*/adafruit-circuitpython-typing==1.10.1/g' requirements.txt \
+  && sed -i 's/yoyo-migrations==.*/yoyo-migrations==8.2.0/g' requirements.txt \
   && pip install smbus==1.1.post2 --extra-index-url https://www.piwheels.org/simple \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
   && find /opt/venv -type d -name "test*" | xargs rm -rf  \
