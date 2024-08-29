@@ -580,8 +580,8 @@
     },
     "settings": {
       "address": {
-        "help": "",
-        "invalid": "",
+        "help": "Insira o número físico do pin GPIO.",
+        "invalid": "O endereço inserido não é válido. Insira um número válido entre {min} and {max}.",
         "label": "Endereço",
         "placeholder": "Insira um endereço"
       },
@@ -611,8 +611,8 @@
       "hardware": {
         "help": "Seleccione o tipo de hardware para este botão.",
         "invalid": "Por favor seleccione um tipo de hardware.",
-        "label": "",
-        "placeholder": ""
+        "label": "Hardware",
+        "placeholder": "Seleccione o hardware"
       },
       "name": {
         "help": "Insira um nome fácil de recordar.",
@@ -625,10 +625,10 @@
           "required_fields": "Nem todos os campos obrigatórios estão preenchidos correctamente."
         },
         "ok": {
-          "message": ""
+          "message": "Botão ''{name}'' actualizado."
         }
       },
-      "title": ""
+      "title": "Definições do Botão"
     },
     "title": "Botões"
   },
@@ -1027,15 +1027,15 @@
       "error": "Login não válido",
       "form": {
         "password": {
-          "help": "Insira a password.",
-          "invalid": "Password não pode estar vazia.",
-          "label": "Password"
+          "help": "Insira a senha.",
+          "invalid": "A senha não pode estar vazia.",
+          "label": "Senha"
         },
         "submit": "Login",
         "username": {
-          "help": "Insira o username.",
-          "invalid": "Username não pode estar vazio.",
-          "label": "Username"
+          "help": "Insira o utilizador.",
+          "invalid": "O utilizador não pode estar vazio.",
+          "label": "Utilizador"
         }
       },
       "title": "Login"
@@ -1312,7 +1312,7 @@
       "fertility": "Fertilidade média",
       "humidity": "Humidade média",
       "light": "Luz média",
-      "moisture": "Humidade média",
+      "moisture": "Hidratação média",
       "pressure": "Pressão média",
       "temperature": "Temperatura média",
       "uva": "UVA médio",
@@ -1441,7 +1441,7 @@
           "label": "Valor mínimo de hidratação"
         },
         "light_threshold": {
-          "help": "",
+          "help": "Insira o valor considerado quando as luzes estão ligadas.",
           "invalid": "O valor não é válido. Deve ser um número superior a {min}.",
           "label": "Limite para luzes ligadas"
         },
@@ -1452,7 +1452,7 @@
         }
       },
       "current": {
-        "help": "O estado actual do sensor",
+        "help": "O estado actual do sensor.",
         "label": "Actual",
         "placeholder": "Valor actual"
       },
@@ -1892,7 +1892,7 @@
       "username": {
         "help": "Insira o username e autenticação.",
         "invalid": "O username não pode ser vazio.",
-        "label": "Username"
+        "label": "Utilizador"
       },
       "water_price": {
         "help": "Insira o preço por L/Galão.",
@@ -2121,27 +2121,27 @@
           "motion": "Movimento"
         },
         "state": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Seleccione a duração entres imagens arquivadas.",
+          "invalid": "Por favor seleccione uma opção.",
+          "label": "Arquivando",
+          "placeholder": "Seleccione arquivando"
         }
       },
       "awb": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Seleccione um equilíbrio de brancos.",
+        "invalid": "Por favor seleccione uma opção.",
+        "label": "Equilíbrio de brancos",
         "options": {
-          "auto": "",
-          "cloudy": "",
+          "auto": "Auto",
+          "cloudy": "Nublado",
           "flash": "Flash",
-          "fluorescent": "",
-          "greyworld": "",
-          "horizon": "",
-          "incandescent": "",
-          "off": "",
-          "shade": "",
-          "sunlight": "",
+          "fluorescent": "Fluorescente",
+          "greyworld": "Cinzento",
+          "horizon": "Horizonte",
+          "incandescent": "Incandescente",
+          "off": "Desligado",
+          "shade": "Sombra",
+          "sunlight": "Luz do Sol",
           "tungsten": "Tungsten"
         },
         "placeholder": "Seleccione o equlíbrio de brancos"
