@@ -2136,13 +2136,13 @@
           "cloudy": "Nublado",
           "flash": "Flash",
           "fluorescent": "Fluorescente",
-          "greyworld": "Cinzento",
+          "greyworld": "Greyworld",
           "horizon": "Horizonte",
           "incandescent": "Incandescente",
           "off": "Desligado",
           "shade": "Sombra",
-          "sunlight": "Luz do Sol",
-          "tungsten": "Tungsten"
+          "sunlight": "Luz solar",
+          "tungsten": "Tungstênio"
         },
         "placeholder": "Seleccione o equlíbrio de brancos"
       },
