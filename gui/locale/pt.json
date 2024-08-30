@@ -2123,8 +2123,8 @@
         "state": {
           "help": "Seleccione a duração entres imagens arquivadas.",
           "invalid": "Por favor seleccione uma opção.",
-          "label": "Arquivando",
-          "placeholder": "Seleccione arquivando"
+          "label": "A arquivar",
+          "placeholder": "Seleccione a arquivar"
         }
       },
       "awb": {
