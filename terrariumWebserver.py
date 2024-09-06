@@ -11,6 +11,7 @@ import functools
 import re
 import base64
 import requests
+import mimetypes
 from PIL import Image
 from uuid import uuid4
 from pathlib import Path
@@ -47,6 +48,7 @@ class terrariumWebserver(object):
             {"path": re.compile(r"^/webcam/.*\.ts$", re.I), "timeout": 10},  # 10 Seconds
             {"path": re.compile(r"^/webcam/.*\.jpg$", re.I), "timeout": 30},  # 30 Seconds
             {"path": re.compile(r"^/api/", re.I), "timeout": 60},  #  1 Minute
+            {"path": re.compile(r"^/background", re.I), "timeout": 60 * 60},  #  1 Hour
             {"path": re.compile(r"^/(media|css|img|js|webfonts)/", re.I), "timeout": 1 * 24 * 60 * 60},  # 1 Day
             {"path": re.compile(r"^/(main\..*)", re.I), "timeout": 1 * 24 * 60 * 60},  # 1 Day
         ]
@@ -125,9 +127,6 @@ class terrariumWebserver(object):
 
     def __add_caching_headers(self, response, fullpath):
         if 200 == response.status_code:
-            response.content_type = response.content_type.replace(
-                "application/javascript", "application/javascript; charset=UTF-8"
-            )
             # Add the caching headers
             for caching in self.__caching_timeouts:
                 if caching["path"].search(request.fullpath):
@@ -252,9 +251,10 @@ class terrariumWebserver(object):
 
         # Load the static file
         if request.headers.get("Accept-Encoding") and "gzip" in request.headers.get("Accept-Encoding"):
-            staticfile = static_file(filename + ".gz", root=root)
+            mimetype, _ = mimetypes.guess_type(filename)
+            staticfile = static_file(filename + ".gz", root=root, mimetype=mimetype)
             if not isinstance(staticfile, HTTPError):
-                staticfile.set_header("Content-Disposition", f'inline; filename="{Path(filename).name}"')
+                staticfile.set_header("content-encoding", "gzip")
                 self.__add_caching_headers(staticfile, f"{root}/{filename}")
                 return staticfile
 
@@ -323,7 +323,7 @@ class terrariumWebserver(object):
         # Index page
         self.bottle.route("/", method="GET", callback=self.render_page, apply=self.authenticate(), name="home")
 
-        self.bottle.route("/background", method="GET", callback=self.unsplash_background)
+        self.bottle.route("/background", method="GET", callback=self.unsplash_background, apply=self.authenticate())
 
         # Special case: Svelte main.js|css and robots.txt and favicon.ico
         self.bottle.route(
