@@ -15,12 +15,25 @@ RUN apt-get update \
 
 # python builder, help keep image small
 FROM python:3.7-buster as python_builder
-# These two environment variables prevent __pycache__/ files.
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
+ENV PIP_DEFAULT_TIMEOUT=100 \
+    # Allow statements and log messages to immediately appear
+    PYTHONUNBUFFERED=1 \
+    # disable a pip version check to reduce run-time & log-spam
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    # cache is useless in docker image, so disable to reduce image size
+    PIP_NO_CACHE_DIR=1 \
+    # do not create __pycache__/ files
+    PYTHONDONTWRITEBYTECODE=1
 ENV PATH="/opt/venv/bin:$PATH"
+
+RUN apt-get install -y --no-install-recommends gnupg \
+  && echo "deb http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list \
+  && echo "deb http://archive.raspberrypi.org/debian/ buster main" >> /etc/apt/sources.list.d/raspberrypi.list \
+  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9165938D90FDDD2E 82B129927FA3303E
+
 RUN python -m venv /opt/venv
 RUN pip install --upgrade pip==24.0 && pip install --upgrade wheel==0.42.0
+
 COPY requirements.txt .
 COPY contrib/python3-voltcraft-sem6000.patch.diff .
 
@@ -33,6 +46,7 @@ RUN sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/wheel==.*/wheel==0.42.0/g' requirements.txt \
   && sed -i 's/pip==.*/pip==24.0/g' requirements.txt \
   && sed -i 's/setuptools==.*/setuptools==68.0.0/g' requirements.txt \
+  && sed -i 's/bcrypt==.*/bcrypt==4.1.3/g' requirements.txt \
   && sed -i 's/python-dotenv==.*/python-dotenv==0.21.1/g' requirements.txt \
   && sed -i 's/gevent==.*/gevent==22.10.2/g' requirements.txt \
   && sed -i 's/python-kasa==.*/python-kasa==0.5.1/g' requirements.txt \
@@ -79,14 +93,22 @@ RUN rm -Rf .git 3rdparty gui package*.json postcss.config.js rollup.config.js .e
 FROM python:3.7-slim-buster as finalimage
 ARG GITHUB_SHA="development"
 ARG JAVA=""
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
+ENV PIP_DEFAULT_TIMEOUT=100 \
+    # Allow statements and log messages to immediately appear
+    PYTHONUNBUFFERED=1 \
+    # disable a pip version check to reduce run-time & log-spam
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    # cache is useless in docker image, so disable to reduce image size
+    PIP_NO_CACHE_DIR=1 \
+    # do not create __pycache__/ files
+    PYTHONDONTWRITEBYTECODE=1
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY --from=sispmctl_builder /usr/local/lib/libsispmctl* /usr/local/lib/.
 COPY --from=sispmctl_builder /usr/local/bin/sispmctl /usr/local/bin/sispmctl
 
+COPY --from=python_builder /etc/apt /etc/apt
 COPY --from=python_builder /opt/venv /opt/venv
 COPY --from=python_builder /TerrariumPI/3rdparty /TerrariumPI/3rdparty
 COPY --from=sourcecode /TerrariumPI /TerrariumPI
@@ -98,11 +120,6 @@ RUN rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
   && ldconfig
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends gnupg \
-  && echo "deb http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list \
-  && echo "deb http://archive.raspberrypi.org/debian/ buster main" >> /etc/apt/sources.list.d/raspberrypi.list \
-  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9165938D90FDDD2E 82B129927FA3303E \
-  && apt-get update \
   && apt-get full-upgrade -y --no-install-recommends \
   && apt-get install -y --no-install-recommends sudo netcat-openbsd procps bluez pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin ${JAVA} \
   && apt-get --purge autoremove -y \
