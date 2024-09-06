@@ -26,11 +26,12 @@ ENV PIP_DEFAULT_TIMEOUT=100 \
     PYTHONDONTWRITEBYTECODE=1
 ENV PATH="/opt/venv/bin:$PATH"
 
+# Some strange DNS issues with installing PGP keys. keyserver.ubuntu.com => 185.125.188.26
 RUN apt-get update \
   && apt-get install -y --no-install-recommends gnupg \
   && echo "deb http://raspbian.raspberrypi.org/raspbian/ bullseye main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list \
   && echo "deb http://archive.raspberrypi.org/debian/ bullseye main" >> /etc/apt/sources.list.d/raspberrypi.list \
-  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9165938D90FDDD2E 82B129927FA3303E
+  && apt-key adv --keyserver 185.125.188.26 --recv-keys 9165938D90FDDD2E 82B129927FA3303E
 
 RUN python -m venv /opt/venv
 RUN pip install --upgrade pip==24.1.2 && pip install --upgrade wheel==0.43.0
