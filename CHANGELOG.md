@@ -2,6 +2,123 @@ Changelog
 =========
 
 
+4.11.1 (2024-09-07)
+-------------------
+
+**New**
+------
+
+- Add image. [TheYOSH]
+- Added translation using Weblate (Portuguese) [Daniel Santos]
+- Added translation using Weblate (Portuguese) [Daniel Santos]
+
+**Fixes**
+------
+
+- Fix PGP keys. [TheYOSH]
+- Fix static file handling with compression. [TheYOSH]
+- Fix installer for old buster. [TheYOSH]
+- Fix cookie login and full loglines. [#939](https://github.com/theyosh/TerrariumPI/issues/939). [TheYOSH]
+- Fix typo. [TheYOSH]
+- Fix typo. [TheYOSH]
+- Use normal sleep and use monkey patch to fix it. [TheYOSH]
+- Final content fix. [TheYOSH]
+- More content fix. [TheYOSH]
+- Content fix. [TheYOSH]
+- Use normal sleep and use monkey patch to fix it. [TheYOSH]
+- Fix typo [#930](https://github.com/theyosh/TerrariumPI/issues/930). [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update Python libraries. [TheYOSH]
+- Update documentation libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update documentation libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update Dockerfile.buster. [TheYOSH]
+
+  Fix libraries
+- Update install.sh. [TheYOSH]
+
+  fix typo
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update content. [TheYOSH]
+- GUI library updates. [TheYOSH]
+- Update documentation for DHT like sensors with an warning. [TheYOSH]
+
+**Other**
+------
+
+- New release post. [TheYOSH]
+- Documentation build trigger. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 99.9% (1096 of 1097 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 99.9% (1096 of 1097 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 99.8% (1095 of 1097 strings)
+- New Svelte GUI build. [TheYOSH]
+- Ignore custom scripts. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (German) [TheYOSH]
+
+  Currently translated at 100.0% (1097 of 1097 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 97.4% (1069 of 1097 strings)
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 99.1% (119 of 120 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 93.0% (1021 of 1097 strings)
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 32.5% (39 of 120 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 80.2% (880 of 1097 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 55.7% (612 of 1097 strings)
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 19.0% (209 of 1097 strings)
+- New Svelte GUI build. [TheYOSH]
+- Enable Portuguese language in GUI. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 11.3% (124 of 1097 strings)
+- Better PI5 check. [TheYOSH]
+- RPI 5 detection. [TheYOSH]
+- Merge branch 'main' into develop. [TheYOSH]
+- Sleep change. [TheYOSH]
+- Cleanpup. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Birthday party. [TheYOSH]
+- Cleanpup. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+
+
 4.11.0 (2024-07-29)
 -------------------
 
@@ -32,6 +149,7 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Update documentation. [TheYOSH]
 - Update sispmctl version to 4.12. [TheYOSH]
