@@ -9,9 +9,11 @@ case of SD card corruption or any other reason that you have to reinstall the
 software. So here is a list of files that should be saved at a regular basis:
 
 - data/\* - Here is the database and calendar data stored
-- log/logging.custom.cfg (optional)
+- media/\* - Here are all the uploaded files like enclosure images or audio
+  files stored
 - webcam/archive/\* (optional) - Here you can find all the archived images of
   the used webcams
+- log/logging.custom.cfg (optional)
 
 ### Warning
 

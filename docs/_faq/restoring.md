@@ -11,6 +11,8 @@ steps. If the backup has become corrupted, follow
 - [Shutdown]({% link _faq/systemd.md %}#stop) TerrariumPI
 - Remove the old files in `data` if there are any. `rm data/*`
 - Place the backup files in the `data` folder.
+- Remove the old files in `media` if there are any. `rm media/*`
+- Place the backup files in the `media` folder.
 - Place custom logging or webcam archives back in place if needed.
 - [Start]({% link _faq/systemd.md %}#start) TerrariumPI
 
