@@ -78,7 +78,7 @@ class terrariumWebserver(object):
             @functools.wraps(func)
             def wrapper(*a, **ka):
                 # Get user info from auth request, then from cookie or else nothing
-                user, password = request.auth or request.get_cookie("auth", secret=self.cookie_secret) or (None, None)
+                user, password = request.auth or json.loads(request.get_cookie("auth", secret=self.cookie_secret) or "[null, null]")
 
                 if int(self.engine.settings["always_authenticate"]) != -1 and (
                     required or terrariumUtils.is_true(self.engine.settings["always_authenticate"])
@@ -107,7 +107,7 @@ class terrariumWebserver(object):
                         # Update the cookie timeout so that we are staying logged in as long as we are working on the interface
                         response.set_cookie(
                             "auth",
-                            request.get_cookie("auth", secret=self.cookie_secret),
+                            request.get_cookie("auth", secret=self.cookie_secret) or "[null,null]",
                             secret=self.cookie_secret,
                             **{"max_age": 3600, "path": "/"},
                         )
@@ -147,7 +147,7 @@ class terrariumWebserver(object):
 
         authenticated = False
         try:
-            cookie_data = request.get_cookie("auth", secret=self.cookie_secret)
+            cookie_data = json.loads(request.get_cookie("auth", secret=self.cookie_secret) or "[null, null]")
             if cookie_data is not None:
                 authenticated = self.engine.authenticate(cookie_data[0], cookie_data[1])
         except Exception as ex:
@@ -359,14 +359,14 @@ class terrariumWebserver(object):
         return url
 
     def __login(self):
-        response.set_cookie("auth", request.auth, secret=self.cookie_secret, **{"max_age": 3600, "path": "/"})
+        response.set_cookie("auth", json.dumps(request.auth), secret=self.cookie_secret, **{"max_age": 3600, "path": "/"})
         if request.is_ajax:
             return {"location": self.url_for("home"), "message": "User logged in."}
 
         redirect(self.url_for("home"))
 
     def __logout(self):
-        response.set_cookie("auth", None, secret=self.cookie_secret, **{"max_age": 3600, "path": "/"})
+        response.set_cookie("auth", "[null,null]", secret=self.cookie_secret, **{"max_age": 3600, "path": "/"})
         if request.is_ajax:
             return {"location": self.url_for("home"), "message": "User logged out."}
 
@@ -453,7 +453,7 @@ class terrariumWebsocket(object):
 
         # First try (existing) cookie login
         try:
-            cookie_data = request.get_cookie("auth", secret=self.webserver.cookie_secret)
+            cookie_data = json.loads(request.get_cookie("auth", secret=self.webserver.cookie_secret) or "[null, null]")
             if cookie_data is not None:
                 cookie_authenticated = self.webserver.engine.authenticate(cookie_data[0], cookie_data[1])
         except Exception as ex:
