@@ -107,7 +107,7 @@ RUN rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
 
 RUN apt-get update \
   && apt-get full-upgrade -y --no-install-recommends \
-  && apt-get install -y --no-install-recommends sudo netcat-openbsd procps bluez pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libopenblas0 libgfortran5 libraspberrypi-bin rpicam-apps ${JAVA} python3-opencv \
+  && apt-get install -y --no-install-recommends sudo netcat-openbsd procps bluez pigpio ffmpeg libssl1.1 libxslt1.1 libftdi1 libatlas3-base libopenblas0 libgfortran5 libraspberrypi-bin rpicam-apps ${JAVA} python3-opencv \
   && apt-get --purge autoremove -y \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
