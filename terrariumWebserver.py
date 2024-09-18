@@ -78,7 +78,9 @@ class terrariumWebserver(object):
             @functools.wraps(func)
             def wrapper(*a, **ka):
                 # Get user info from auth request, then from cookie or else nothing
-                user, password = request.auth or json.loads(request.get_cookie("auth", secret=self.cookie_secret) or "[null, null]")
+                user, password = request.auth or json.loads(
+                    request.get_cookie("auth", secret=self.cookie_secret) or "[null, null]"
+                )
 
                 if int(self.engine.settings["always_authenticate"]) != -1 and (
                     required or terrariumUtils.is_true(self.engine.settings["always_authenticate"])
@@ -359,7 +361,9 @@ class terrariumWebserver(object):
         return url
 
     def __login(self):
-        response.set_cookie("auth", json.dumps(request.auth), secret=self.cookie_secret, **{"max_age": 3600, "path": "/"})
+        response.set_cookie(
+            "auth", json.dumps(request.auth), secret=self.cookie_secret, **{"max_age": 3600, "path": "/"}
+        )
         if request.is_ajax:
             return {"location": self.url_for("home"), "message": "User logged in."}
 

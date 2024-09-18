@@ -125,7 +125,7 @@ class terrariumArea(object):
                 logger.debug(f"Begin time is bigger then end time (swap). Add 24 hours to end time (next day) {self}")
                 end += datetime.timedelta(hours=24)
                 if begin <= now + datetime.timedelta(hours=24) < end:
-                    #Calculating this at a timestamp before the begin time, can case a power down, while the end time has not passed (previous day on)
+                    # Calculating this at a timestamp before the begin time, can case a power down, while the end time has not passed (previous day on)
                     begin -= datetime.timedelta(hours=24)
                     end -= datetime.timedelta(hours=24)
 
