@@ -1,6 +1,7 @@
 export const fireworks = (time) => {
   const start = new Date(time.getFullYear() - (time.getMonth() === 0 ? 1 : 0) + '-12-30 00:00:00');
-  const end = new Date(start.getTime() + 3 * 86400000); // + days in ms
+  const end = new Date(start.getTime());
+  end.setDate(end.getDate() + 3);
 
   const documentBody = document.querySelector('aside.main-sidebar');
   const fireworks = documentBody !== null && start <= time && time <= end;
@@ -26,14 +27,16 @@ export const fireworks = (time) => {
 
 export const christmas = (time) => {
   const start = new Date(time.getFullYear() - (time.getMonth() === 0 ? 1 : 0) + '-12-20 00:00:00');
-  const end = new Date(start.getTime() + 14 * 86400000); // + days in ms
+  const end = new Date(start.getTime());
+  end.setDate(end.getDate() + 14);
 
   return start <= time && time <= end;
 };
 
 export const showBirthdayCake = (time) => {
   const start = new Date('2024-08-01 00:00:00');
-  const end = new Date(start.getTime() + 31 * 86400000); // + days in ms
+  const end = new Date(start.getTime());
+  end.setDate(end.getDate() + 31);
 
   const itIsTime = start <= time && time <= end;
 
