@@ -31,10 +31,10 @@
         "placeholder": "Seleccionar el recinto"
       },
       "light_sensors": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Selecciona el sensor luminico para detectar si las luces estan encendidas.",
+        "invalid": "Por favor, haga una eleccion.",
+        "label": "Sensores de deteccion luminica",
+        "placeholder": "Seleccionar sensores luminicos"
       },
       "mode": {
         "help": "Seleccione el modo de esta área. Esto cambiará el momento y la duración de los relés.",
@@ -58,6 +58,7 @@
       },
       "relay": {
         "slider": {
+          "delay": "Demora:{demora} minutos.",
           "duration": "Retraso: {delay} minutos. Duración: {duración} minutos"
         }
       },
@@ -89,14 +90,26 @@
         },
         "depend_on_relays_mode": {
           "all": {
-            "label": ""
+            "label": "Todos"
           },
           "none": {
-            "label": ""
+            "label": "Nada"
           },
           "one": {
-            "label": ""
+            "label": "Al menos uno encendido"
           }
+        },
+        "deviation_high_alarm": {
+          "help": "Aumenta o disminuye el valor de la alarma alta.",
+          "invalid": "Introduce un valor numerico valido.",
+          "label": "Desviación de alarma alta",
+          "placeholder": "Desviación de alarma alta"
+        },
+        "deviation_low_alarm": {
+          "help": "Aumenta o disminuye el valor de la alarma baja.",
+          "invalid": "Introduce un numero valido.",
+          "label": "Desviación de alarma baja",
+          "placeholder": "Desviación de alarma baja"
         },
         "high": {
           "begin": {
@@ -106,14 +119,14 @@
             "placeholder": "Ingrese el tiempo de inicio"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Seleccione los relés de los que dependen estos relés.",
+            "invalid": "Por favor, elige.",
+            "label": "Depende de los relés",
+            "placeholder": "Selecciona los relés"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
+            "help": "Selecciona el modo dependiente",
+            "invalid": "Por favor tome una decisión.",
             "label": "",
             "placeholder": ""
           },
