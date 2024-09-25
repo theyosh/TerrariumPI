@@ -147,7 +147,7 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
         # http://sonoff:8081/zeroconf
         # https://sonoff.tech/sonoff-diy-developer-documentation-d1-http-api/#9
         device = f'{address["protocol"]}://{address["host"]}/zeroconf'
-        state = terrariumUtils.get_remote_data(f"{device}/info", json=True, post={ 'deviceid': '', 'data': { } })
+        state = terrariumUtils.get_remote_data(f"{device}/info", json=True, post={"deviceid": "", "data": {}})
 
         if state is not None:
             self.MODE = "DIY"
@@ -163,11 +163,20 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
             data = terrariumUtils.get_remote_data(f"{self.device}Dimmer%20{state}")
         elif self.MODE == "DIY":
             if state == 0:
-                data = terrariumUtils.get_remote_data(f"{self.device}/switch", json=True, post={ "deviceid": "", "data": { "switch": "off" } })
+                data = terrariumUtils.get_remote_data(
+                    f"{self.device}/switch", json=True, post={"deviceid": "", "data": {"switch": "off"}}
+                )
             else:
                 # request switch on and specified brightness
-    			# switch must be on, mode 0, brightness between brightmin and brightmax
-                data = terrariumUtils.get_remote_data(f"{self.device}/switch", json=True, post={ "deviceid": "", "data": { "switch": "on", "brightness": state, "mode": 0, "brightmin": 0, "brightmax": 100 } })
+                # switch must be on, mode 0, brightness between brightmin and brightmax
+                data = terrariumUtils.get_remote_data(
+                    f"{self.device}/switch",
+                    json=True,
+                    post={
+                        "deviceid": "",
+                        "data": {"switch": "on", "brightness": state, "mode": 0, "brightmin": 0, "brightmax": 100},
+                    },
+                )
 
         if data is None:
             return False
@@ -181,7 +190,7 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
                 return int(data["Dimmer"])
 
         elif self.MODE == "DIY":
-            data = terrariumUtils.get_remote_data(f"{self.device}/info", json=True, post={ 'deviceid': '', 'data': { } })
+            data = terrariumUtils.get_remote_data(f"{self.device}/info", json=True, post={"deviceid": "", "data": {}})
             if data is not None and "data" in data:
                 return int(data["data"]["brightness"])
 
