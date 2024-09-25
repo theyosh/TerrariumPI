@@ -374,26 +374,20 @@ class terrariumUtils:
         return time
 
     @staticmethod
-    def get_remote_data(url, timeout=3, proxy=None, json=False):
+    def get_remote_data(url, timeout=3, proxy=None, json=False, post=None):
         data = None
         try:
             url_data = terrariumUtils.parse_url(url)
+            auth = None if url_data["username"] is None else (url_data["username"], url_data["password"])
             proxies = {"http": proxy, "https": proxy}
             headers = {}
             if json:
                 headers["Accept"] = "application/json"
 
-            if url_data["username"] is None:
-                response = requests.get(url, headers=headers, timeout=timeout, proxies=proxies, stream=True)
+            if post is None:
+                response = requests.get(url, auth=auth, headers=headers, timeout=timeout, proxies=proxies, stream=True)
             else:
-                response = requests.get(
-                    url,
-                    auth=(url_data["username"], url_data["password"]),
-                    headers=headers,
-                    timeout=timeout,
-                    proxies=proxies,
-                    stream=True,
-                )
+                response = requests.post(url, auth=auth, headers=headers, timeout=timeout, proxies=proxies, json=post)
 
             if response.status_code == 200:
                 if "multipart/x-mixed-replace" in response.headers["content-type"]:

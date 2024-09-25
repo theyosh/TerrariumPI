@@ -14,6 +14,12 @@ class terrariumRelaySonoff(terrariumRelay):
         re.IGNORECASE,
     )
 
+    # Input format should be either:
+    # - http://[HOST]
+    # - http://[HOST]#[POWER_SWITCH_NR]
+    # - http://[HOST]/#[POWER_SWITCH_NR]
+    # - http://[PASSWORD]@[HOST]#[POWER_SWITCH_NR]
+    # - http://[PASSWORD]@[HOST]/#[POWER_SWITCH_NR]
     @property
     def _address(self):
         address = None
@@ -30,12 +36,6 @@ class terrariumRelaySonoff(terrariumRelay):
         return address
 
     def _load_hardware(self):
-        # Input format should be either:
-        # - http://[HOST]#[POWER_SWITCH_NR]
-        # - http://[HOST]/#[POWER_SWITCH_NR]
-        # - http://[PASSWORD]@[HOST]#[POWER_SWITCH_NR]
-        # - http://[PASSWORD]@[HOST]/#[POWER_SWITCH_NR]
-
         address = self._address
 
         # Try Tasmota
@@ -100,7 +100,8 @@ class terrariumRelaySonoff(terrariumRelay):
 
 class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
     HARDWARE = "sonoff_d1-dimmer"
-    NAME = "Sonoff D1 Dimmer (Tasmota)"
+    NAME = "Sonoff D1 Dimmer (Tasmota/DIY)"
+    MODE = None
 
     __URL_REGEX = re.compile(
         r"^(?P<protocol>https?):\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$",
@@ -123,19 +124,12 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
         return address
 
     def _load_hardware(self):
-        # Input format should be either:
-        # - http://[HOST]#[POWER_SWITCH_NR]
-        # - http://[HOST]/#[POWER_SWITCH_NR]
-        # - http://[PASSWORD]@[HOST]#[POWER_SWITCH_NR]
-        # - http://[PASSWORD]@[HOST]/#[POWER_SWITCH_NR]
-
         address = self._address
 
         # Try Tasmota
-        # http://sonoff/cm?cmnd=Power[POWER_SWITCH_NR]%201
-        # http://sonoff/cm?cmnd=Power[POWER_SWITCH_NR]%200
-        # http://sonoff/cm?user=admin&password=joker&cmnd=Power[POWER_SWITCH_NR]%201
+        # http://sonoff/cm?cmnd=Dimmer%20[STATE]
 
+        # Tasmota test
         device = f'{address["protocol"]}://{address["host"]}/cm?'
 
         if "user" in address and "password" in address:
@@ -144,27 +138,51 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
         device += "cmnd="
         state = terrariumUtils.get_remote_data(f"{device}Status%200")
 
-        if state is None:
-            return None
+        if state is not None:
+            self.MODE = "tasmota"
 
-        return device
+            return device
+
+        # DIY test
+        # http://sonoff:8081/zeroconf
+        # https://sonoff.tech/sonoff-diy-developer-documentation-d1-http-api/#9
+        device = f'{address["protocol"]}://{address["host"]}/zeroconf'
+        state = terrariumUtils.get_remote_data(f"{device}/info", json=True, post={ 'deviceid': '', 'data': { } })
+
+        if state is not None:
+            self.MODE = "DIY"
+
+            return device
+
+        return None
 
     def _set_hardware_value(self, state):
         state = int(max(0.0, min(100.0, float(state + self._dimmer_offset))))
 
-        url = f"{self.device}Dimmer%20{state}"
-        data = terrariumUtils.get_remote_data(url)
+        if self.MODE == "tasmota":
+            data = terrariumUtils.get_remote_data(f"{self.device}Dimmer%20{state}")
+        elif self.MODE == "DIY":
+            if state == 0:
+                data = terrariumUtils.get_remote_data(f"{self.device}/switch", json=True, post={ "deviceid": "", "data": { "switch": "off" } })
+            else:
+                # request switch on and specified brightness
+    			# switch must be on, mode 0, brightness between brightmin and brightmax
+                data = terrariumUtils.get_remote_data(f"{self.device}/switch", json=True, post={ "deviceid": "", "data": { "switch": "on", "brightness": state, "mode": 0, "brightmin": 0, "brightmax": 100 } })
 
         if data is None:
             return False
 
-        return state == int(data["Dimmer"])
+        return True
 
     def _get_hardware_value(self):
-        url = f"{self.device}Dimmer"
-        data = terrariumUtils.get_remote_data(url)
+        if self.MODE == "tasmota":
+            data = terrariumUtils.get_remote_data(f"{self.device}Dimmer")
+            if data is not None and "Dimmer" in data:
+                return int(data["Dimmer"])
 
-        if data is not None and "Dimmer" in data:
-            return int(data["Dimmer"])
+        elif self.MODE == "DIY":
+            data = terrariumUtils.get_remote_data(f"{self.device}/info", json=True, post={ 'deviceid': '', 'data': { } })
+            if data is not None and "data" in data:
+                return int(data["data"]["brightness"])
 
         return None
