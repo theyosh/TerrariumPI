@@ -18,7 +18,7 @@ This is a dimmer device which can be controlled through Wifi. It can dim normal
 as led lights at 100-240 Volt.
 
 The device needs either to be flashed with [Tasmota](#tasmota), or you need it
-yo put in [DIY](#diymode) mode.
+yo put in [DIY](#diy-mode) mode.
 
 ### Tasmota
 
