@@ -870,7 +870,9 @@ class terrariumEngine(object):
                 else:
                     # Force a the new measurement value in the database
                     relay.update(value, True)
-                    relayLogger.info(f"Loaded relay {self.relays[relay.id]} value {value:.2f} in {time.time()-start:.2f} seconds.")
+                    relayLogger.info(
+                        f"Loaded relay {self.relays[relay.id]} value {value:.2f} in {time.time()-start:.2f} seconds."
+                    )
 
     def scan_new_relays(self):
         for relay in terrariumRelay.scan_relays(callback=self.callback_relay):
@@ -1038,7 +1040,9 @@ class terrariumEngine(object):
                 else:
                     # Store the new measurement value in the database
                     button.update(value)
-                    buttonLogger.info(f"Loaded {self.buttons[button.id]} value {value:.2f} in {time.time()-start:.2f} seconds.")
+                    buttonLogger.info(
+                        f"Loaded {self.buttons[button.id]} value {value:.2f} in {time.time()-start:.2f} seconds."
+                    )
 
     def _update_buttons(self):
         # Force an update every hour. This will make the graphs work better...
