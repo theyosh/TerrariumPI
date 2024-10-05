@@ -33,8 +33,9 @@ automation solutions. Incredibly expandable and flexible.
 With the D1 Dimmer it is also possible to use the
 [DIY mode](https://sonoff.tech/sonoff-diy-developer-documentation-d1-http-api/)
 so you do not need to flash your device. This can be done with the original
-software on the hardware device. But you need a 433Mhz remote controller to put
-the device in AP mode to setup your wifi.
+software on the hardware device. But you need a
+[433Mhz remote controller](https://sonoff.tech/product/accessories/rm433/) to
+put the device in AP mode to setup your wifi.
 
 [Follow these steps to setup your Sonoff D1 Dimmer in DIY mode](https://theroamingworkshop.cloud/b/en/1989/sonoff-d1-dimmer/#internet-connection)
 
