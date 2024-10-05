@@ -170,7 +170,7 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
                 # request switch on and specified brightness
                 # switch must be on, mode 0, brightness between brightmin and brightmax
                 data = terrariumUtils.get_remote_data(
-                    f"{self.device}/switch",
+                    f"{self.device}/dimmable",
                     json=True,
                     post={
                         "deviceid": "",
