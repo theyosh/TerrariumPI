@@ -623,7 +623,7 @@ class terrariumEngine(object):
                 self.add(sensor)
 
                 sensorLogger.info(
-                    f"{action} new sensor {new_sensor} to database with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds."
+                    f"{action} new sensor {sensor} to database with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds."
                 )
             else:
                 reason = "excluded" if sensor.id in self.settings["exclude_ids"] else "already loaded"
@@ -865,12 +865,12 @@ class terrariumEngine(object):
                 value = self.relays[relay.id].update()
                 if value is None:
                     relayLogger.warning(
-                        f"Relay {relay} had problems reading a new value during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
+                        f"Relay {self.relays[relay.id]} had problems reading a new value during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
                     )
                 else:
                     # Force a the new measurement value in the database
                     relay.update(value, True)
-                    relayLogger.info(f"Loaded relay {relay} value {value:.2f} in {time.time()-start:.2f} seconds.")
+                    relayLogger.info(f"Loaded relay {self.relays[relay.id]} value {value:.2f} in {time.time()-start:.2f} seconds.")
 
     def scan_new_relays(self):
         for relay in terrariumRelay.scan_relays(callback=self.callback_relay):
@@ -897,7 +897,7 @@ class terrariumEngine(object):
 
                 # Store the hardware relay in memory, so we can benefit from the shared cached data for relays with multiple relay types
                 self.add(relay)
-                relayLogger.info(f"{action} relay {new_relay} to database with current value {value:.2f}.")
+                relayLogger.info(f"{action} relay {relay} to database with current value {value:.2f}.")
             else:
                 relayLogger.debug(
                     "Ignored relay {} because it is {}.".format(
@@ -933,7 +933,7 @@ class terrariumEngine(object):
 
             if new_value is None:
                 relayLogger.warning(
-                    f"Could not take a new measurement from relay {relay}. Tried for {measurement_time:.2f} seconds. Skipping this update."
+                    f"Could not take a new measurement from relay {self.relays[relay.id]}. Tried for {measurement_time:.2f} seconds. Skipping this update."
                 )
                 continue
 
@@ -945,10 +945,10 @@ class terrariumEngine(object):
             self.webserver.websocket_message("relay", {"id": relay.id, "value": new_value})
 
             relayLogger.info(
-                f"Updated relay {relay} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds."
+                f"Updated relay {self.relays[relay.id]} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds."
             )
             relayLogger.debug(
-                f"Updated relay {relay} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
+                f"Updated relay {self.relays[relay.id]} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
             )
 
             # Notification message
@@ -1025,7 +1025,7 @@ class terrariumEngine(object):
                         continue
 
                 else:
-                    buttonLogger.debug(f"Updated already loaded {button}.")
+                    buttonLogger.debug(f"Updated already loaded {self.buttons[button.id]}.")
                     # Update existing button with new address
                     self.buttons[button.id].address = button.address
 
@@ -1033,12 +1033,12 @@ class terrariumEngine(object):
                 value = self.buttons[button.id].update()
                 if value is None:
                     buttonLogger.warning(
-                        f"{button} had problems reading a new value during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
+                        f"{self.buttons[button.id]} had problems reading a new value during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
                     )
                 else:
                     # Store the new measurement value in the database
                     button.update(value)
-                    buttonLogger.info(f"Loaded {button} value {value:.2f} in {time.time()-start:.2f} seconds.")
+                    buttonLogger.info(f"Loaded {self.buttons[button.id]} value {value:.2f} in {time.time()-start:.2f} seconds.")
 
     def _update_buttons(self):
         # Force an update every hour. This will make the graphs work better...
@@ -1062,7 +1062,7 @@ class terrariumEngine(object):
 
             if new_value is None:
                 buttonLogger.warning(
-                    f"Could not take a new measurement from {button}. Tried for {measurement_time:.2f} seconds. Skipping this update."
+                    f"Could not take a new measurement from {self.buttons[button.id]}. Tried for {measurement_time:.2f} seconds. Skipping this update."
                 )
                 continue
 
@@ -1073,10 +1073,10 @@ class terrariumEngine(object):
             db_time = (time.time() - start) - measurement_time
 
             buttonLogger.info(
-                f"Updated {button} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds."
+                f"Updated {self.buttons[button.id]} with new value {new_value:.2f} in {measurement_time+db_time:.2f} seconds."
             )
             buttonLogger.debug(
-                f"Updated {button} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
+                f"Updated {self.buttons[button.id]} with new value {new_value:.2f}. M: {measurement_time:.2f} sec, DB:{db_time:.2f} sec."
             )
 
             # Notification message
@@ -1141,7 +1141,7 @@ class terrariumEngine(object):
                         continue
 
                 else:
-                    webcamLogger.debug(f"Updated already loaded {webcam}.")
+                    webcamLogger.debug(f"Updated already loaded {self.webcams[webcam.id]}.")
                     # Update existing webcam with new address
                     self.webcams[webcam.id].address = webcam.address
 
@@ -1153,7 +1153,7 @@ class terrariumEngine(object):
                 )
                 self.webcams[webcam.id].update(relays)
 
-                webcamLogger.info(f"Loaded {webcam} in {time.time()-start:.2f} seconds.")
+                webcamLogger.info(f"Loaded {self.webcams[webcam.id]} in {time.time()-start:.2f} seconds.")
 
     def _update_webcams(self):
         def __process_webcam(self, webcam, current_state, relays):
@@ -1275,8 +1275,8 @@ class terrariumEngine(object):
 
                 measurement_time = time.time() - start
 
-                enclosureLogger.info(f"Updated {enclosure} in {measurement_time:.2f} seconds.")
-                enclosureLogger.debug(f"Updated {enclosure}. M: {measurement_time:.2f} sec.")
+                enclosureLogger.info(f"Updated {self.enclosures[str(enclosure.id)]} in {measurement_time:.2f} seconds.")
+                enclosureLogger.debug(f"Updated {self.enclosures[str(enclosure.id)]}. M: {measurement_time:.2f} sec.")
 
     def __engine_loop(self):
         logger.info(f"Starting engine updater with {terrariumEngine.__ENGINE_LOOP_TIMEOUT:.2f} seconds interval.")
