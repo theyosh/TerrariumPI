@@ -1,0 +1,581 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2020 TheYOSH
+# Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2020.
+# theyosh <github.com@theyosh.nl>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: TerrariumPI 3.9.8\n"
+"POT-Creation-Date: 2023-06-02 22:35+CEST\n"
+"PO-Revision-Date: 2022-09-11 11:04+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"Language-Team: Spanish <https://weblate.theyosh.nl/projects/"
+"terrariumpi/backend/es_AR/>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.10.1\n"
+"Generated-By: pygettext.py 1.5\n"
+
+#: terrariumArea.py:32
+msgid "Lighting"
+msgstr "Iluminación"
+
+#: terrariumArea.py:38
+msgid "Heating"
+msgstr "Calentamiento"
+
+#: terrariumArea.py:44
+msgid "Cooling"
+msgstr "Refrigeración"
+
+#: terrariumArea.py:50
+msgid "Humidity"
+msgstr "Humedad relativa"
+
+#: terrariumArea.py:56
+msgid "Water tank"
+msgstr "Tanque de agua"
+
+#: terrariumArea.py:62
+msgid "Audio"
+msgstr "Audio"
+
+#: terrariumArea.py:68
+msgid "CO2"
+msgstr "CO2"
+
+#: terrariumArea.py:74
+msgid "Conductivity"
+msgstr "Conductividad"
+
+#: terrariumArea.py:80
+msgid "Fertility"
+msgstr "Fertilidad"
+
+#: terrariumArea.py:86
+msgid "Moisture"
+msgstr "Humedad"
+
+#: terrariumArea.py:92
+msgid "pH"
+msgstr "pH"
+
+#: terrariumEngine.py:54
+msgid "temperature"
+msgstr "temperatura"
+
+#: terrariumEngine.py:55
+msgid "distance"
+msgstr "distancia"
+
+#: terrariumEngine.py:56
+msgid "altitude"
+msgstr "altitud"
+
+#: terrariumEngine.py:57
+msgid "pressure"
+msgstr "presión"
+
+#: terrariumEngine.py:58
+msgid "humidity"
+msgstr "humedad relativa"
+
+#: terrariumEngine.py:59
+msgid "moisture"
+msgstr "humedad"
+
+#: terrariumEngine.py:60
+msgid "conductivity"
+msgstr "conductividad"
+
+#: terrariumEngine.py:61
+msgid "ph"
+msgstr "pH"
+
+#: terrariumEngine.py:62
+msgid "light"
+msgstr "claro"
+
+#: terrariumEngine.py:63
+msgid "uva"
+msgstr "uva"
+
+#: terrariumEngine.py:64
+msgid "uvb"
+msgstr "uvb"
+
+#: terrariumEngine.py:65
+msgid "uvi"
+msgstr "uvi"
+
+#: terrariumEngine.py:66
+msgid "fertility"
+msgstr "Fertilidad"
+
+#: terrariumEngine.py:67
+msgid "co2"
+msgstr "CO2"
+
+#: terrariumEngine.py:68
+msgid "volume"
+msgstr "volumen"
+
+#: terrariumEngine.py:71
+#, fuzzy
+#| msgid "volume"
+msgid "water_volume"
+msgstr "volumen"
+
+#: terrariumEngine.py:73
+msgid "watertank"
+msgstr "tanque de agua"
+
+#: terrariumEngine.py:74
+msgid "windspeed"
+msgstr "velocidad del viento"
+
+#: terrariumEngine.py:75
+msgid "water_flow"
+msgstr ""
+
+#: terrariumEngine.py:76
+msgid "wattage"
+msgstr "Vataje"
+
+#: terrariumEngine.py:77
+#, fuzzy
+#| msgid "Pi power usage in W"
+msgid "powerusage"
+msgstr "Consumo PI en W"
+
+#: terrariumEngine.py:1187
+msgid "Up time"
+msgstr "Tiempo de actividad"
+
+#: terrariumEngine.py:1193
+msgid "System load"
+msgstr "Carga del sistema"
+
+#: terrariumEngine.py:1199
+msgid "CPU Temperature"
+msgstr "Temperatura CPU"
+
+#: terrariumEngine.py:1205
+msgid "Storage"
+msgstr "Almacenamiento"
+
+#: terrariumEngine.py:1211
+msgid "Memory"
+msgstr "memoria"
+
+#: terrariumEngine.py:1232
+#, fuzzy
+#| msgid "The sensor type"
+msgid "average {sensor_type}"
+msgstr "El tipo de sensor"
+
+#: terrariumEngine.py:1316
+msgid "Version"
+msgstr "Version"
+
+#: terrariumEngine.py:1326 terrariumWebserver.py:393
+msgid "A new version ({version}) is available!"
+msgstr ""
+
+#: terrariumEngine.py:1370 terrariumEngine.py:1400
+#, fuzzy
+#| msgid "Conductivity"
+msgid "Current active relays"
+msgstr "Conductividad"
+
+#: terrariumEngine.py:1371
+msgid "Watt"
+msgstr ""
+
+#: terrariumEngine.py:1409
+msgid "last update"
+msgstr "última actualización"
+
+#: terrariumNotification.py:41
+#, fuzzy
+#| msgid "Local source"
+msgid "Local date"
+msgstr "Fuente local"
+
+#: terrariumNotification.py:42
+#, fuzzy
+#| msgid "Date and time"
+msgid "Local date, day and month"
+msgstr "Fecha y hora"
+
+#: terrariumNotification.py:43
+#, fuzzy
+#| msgid "Local source"
+msgid "Local time"
+msgstr "Fuente local"
+
+#: terrariumNotification.py:44
+#, fuzzy
+#| msgid "Date and time"
+msgid "Local time, hours and minutes"
+msgstr "Fecha y hora"
+
+#: terrariumNotification.py:45
+#, fuzzy
+#| msgid "Date and time"
+msgid "Local date and time"
+msgstr "Fecha y hora"
+
+#: terrariumNotification.py:53
+#, fuzzy
+#| msgid "Authentication"
+msgid "Authentication login error"
+msgstr "Autenticación"
+
+#: terrariumNotification.py:55
+msgid "IP of the wrong login attempt"
+msgstr ""
+
+#: terrariumNotification.py:56
+#, fuzzy
+#| msgid "Username"
+msgid "Used username"
+msgstr "Nombre de usuario"
+
+#: terrariumNotification.py:57
+#, fuzzy
+#| msgid "New admin password"
+msgid "Used password"
+msgstr "Nueva contraseña de administrador"
+
+#: terrariumNotification.py:63
+#, fuzzy
+#| msgid "System log"
+msgid "System warning"
+msgstr "Registro del sistema"
+
+#: terrariumNotification.py:65
+#, fuzzy
+#| msgid "No warning messages"
+msgid "Warning message"
+msgstr "Sin mensajes de advertencia"
+
+#: terrariumNotification.py:71
+#, fuzzy
+#| msgid "System log"
+msgid "System error"
+msgstr "Registro del sistema"
+
+#: terrariumNotification.py:73 terrariumNotification.py:103
+#, fuzzy
+#| msgid "No error messages"
+msgid "Error message"
+msgstr "Ningún mensaje de error"
+
+#: terrariumNotification.py:79
+#, fuzzy
+#| msgid "System status"
+msgid "System summary"
+msgstr "Estado del sistema"
+
+#: terrariumNotification.py:81
+msgid "System uptime in human readable format"
+msgstr ""
+
+#: terrariumNotification.py:82
+#, fuzzy
+#| msgid "System load"
+msgid "System load last minute"
+msgstr "Carga del sistema"
+
+#: terrariumNotification.py:83 terrariumNotification.py:85
+#: terrariumNotification.py:90 terrariumNotification.py:133
+msgid "True if there is an alarm"
+msgstr ""
+
+#: terrariumNotification.py:84
+#, fuzzy
+#| msgid "CPU Temperature"
+msgid "System CPU temperature"
+msgstr "Temperatura CPU"
+
+#: terrariumNotification.py:86
+#, fuzzy
+#| msgid "Storage"
+msgid "Storage usage"
+msgstr "Almacenamiento"
+
+#: terrariumNotification.py:87
+msgid "Memory usage"
+msgstr "Uso de la memoria"
+
+#: terrariumNotification.py:88
+msgid "Average of [sensor type] (ex. temperature)"
+msgstr ""
+
+#: terrariumNotification.py:89 terrariumNotification.py:136
+#, fuzzy
+#| msgid "Sensor temperature"
+msgid "Sensor type unit value"
+msgstr "Sensor de temperatura"
+
+#: terrariumNotification.py:91
+#, fuzzy
+#| msgid "Pi power usage in W"
+msgid "Current power usage"
+msgstr "Consumo PI en W"
+
+#: terrariumNotification.py:92
+#, fuzzy
+#| msgid "Pi power usage in W"
+msgid "Max power usage"
+msgstr "Consumo PI en W"
+
+#: terrariumNotification.py:93
+#, fuzzy
+#| msgid "Current value"
+msgid "Current water flow"
+msgstr "Valor actual"
+
+#: terrariumNotification.py:94 terrariumNotification.py:163
+#, fuzzy
+#| msgid "Water flow in L/m"
+msgid "Max water flow"
+msgstr "Flujo de agua en L/m"
+
+#: terrariumNotification.py:95
+msgid "Number of relays active"
+msgstr ""
+
+#: terrariumNotification.py:101
+msgid "System to slow with updates (warning)"
+msgstr ""
+
+#: terrariumNotification.py:104
+msgid "Duration in seconds that are short"
+msgstr "Duración en segundos que son cortos"
+
+#: terrariumNotification.py:105
+msgid "The update duration in seconds"
+msgstr "La duración de la actualización en segundos"
+
+#: terrariumNotification.py:106
+msgid "The max update duration"
+msgstr ""
+
+#: terrariumNotification.py:107
+msgid "Amount of times to late with updates"
+msgstr ""
+
+#: terrariumNotification.py:113
+msgid "System to slow with updates more then 30 times"
+msgstr ""
+
+#: terrariumNotification.py:120
+msgid "Sensor update (every 30 seconds)"
+msgstr ""
+
+#: terrariumNotification.py:122 terrariumNotification.py:158
+#: terrariumNotification.py:189
+msgid "ID"
+msgstr "ID"
+
+#: terrariumNotification.py:123 terrariumNotification.py:159
+#: terrariumNotification.py:190
+#, fuzzy
+#| msgid "Hardware"
+msgid "Hardware type"
+msgstr "Hardware"
+
+#: terrariumNotification.py:124
+#, fuzzy
+#| msgid "Sensor ph"
+msgid "Sensor type"
+msgstr "Sensor de pH"
+
+#: terrariumNotification.py:125 terrariumNotification.py:160
+#: terrariumNotification.py:191
+msgid "Name"
+msgstr "Nombre"
+
+#: terrariumNotification.py:126 terrariumNotification.py:161
+#: terrariumNotification.py:192
+msgid "Address"
+msgstr "Dirección"
+
+#: terrariumNotification.py:127
+msgid "Limit min"
+msgstr "Limite mínimo"
+
+#: terrariumNotification.py:128
+msgid "Limit max"
+msgstr "Limite máximo"
+
+#: terrariumNotification.py:129
+msgid "Alarm min"
+msgstr "Alarma mínimo"
+
+#: terrariumNotification.py:130
+msgid "Alarm max"
+msgstr "Alarma máximo"
+
+#: terrariumNotification.py:131
+#, fuzzy
+#| msgid "Max diff"
+msgid "Max difference"
+msgstr "Diferencia máxima"
+
+#: terrariumNotification.py:132
+msgid "Exclude from average"
+msgstr ""
+
+#: terrariumNotification.py:134
+msgid "Current value"
+msgstr "Valor actual"
+
+#: terrariumNotification.py:135 terrariumNotification.py:167
+#: terrariumNotification.py:194
+msgid "True if there is an error"
+msgstr ""
+
+#: terrariumNotification.py:142
+msgid "Sensor change (only when value is changed)"
+msgstr ""
+
+#: terrariumNotification.py:149
+#, fuzzy
+#| msgid "Sensor ph"
+msgid "Sensor alarm"
+msgstr "Sensor de pH"
+
+#: terrariumNotification.py:156
+msgid "Relay update (every 30 seconds)"
+msgstr ""
+
+#: terrariumNotification.py:162
+#, fuzzy
+#| msgid "wattage"
+msgid "Max wattage"
+msgstr "Vataje"
+
+#: terrariumNotification.py:164
+#, fuzzy
+#| msgid "in manual mode"
+msgid "True if in manual mode"
+msgstr "en modo manual"
+
+#: terrariumNotification.py:165
+msgid "True if it is a dimmer"
+msgstr ""
+
+#: terrariumNotification.py:166 terrariumNotification.py:193
+#, fuzzy
+#| msgid "Current value"
+msgid "Current state"
+msgstr "Valor actual"
+
+#: terrariumNotification.py:173
+msgid "Relay change (only when value is changed)"
+msgstr ""
+
+#: terrariumNotification.py:180
+#, fuzzy
+#| msgid "Webcam settings"
+msgid "Relay toggle"
+msgstr "Configuraciones de la webcam"
+
+#: terrariumNotification.py:187
+msgid "Button update (every 30 seconds)"
+msgstr ""
+
+#: terrariumNotification.py:200
+msgid "Button change (only when value is changed)"
+msgstr ""
+
+#: terrariumNotification.py:207
+#, fuzzy
+#| msgid "Door settings"
+msgid "Button action"
+msgstr "Configuraciones de puerta"
+
+#: terrariumNotification.py:215
+#, fuzzy
+#| msgid "Language"
+msgid "Webcam archive"
+msgstr "Idioma"
+
+#: terrariumNotification.py:222
+msgid "Lights area wrong state"
+msgstr ""
+
+#: terrariumNotification.py:224
+#, fuzzy
+#| msgid "Pi power usage in W"
+msgid "Current power state"
+msgstr "Consumo PI en W"
+
+#: terrariumNotification.py:225
+msgid "Sensor measure state"
+msgstr ""
+
+#: terrariumNotification.py:226
+msgid "Enclosure name"
+msgstr ""
+
+#: terrariumNotification.py:227
+msgid "Enclosure running mode"
+msgstr ""
+
+#: terrariumNotification.py:441
+msgid "Display"
+msgstr "Monitor"
+
+#: terrariumNotification.py:445
+msgid "Email"
+msgstr "Email"
+
+#: terrariumNotification.py:455
+#, fuzzy
+#| msgid "Minimum light hours"
+msgid "Traffic light"
+msgstr "Mínimo de horas de luz"
+
+#: terrariumNotification.py:459
+msgid "Web-hook"
+msgstr "Web-hook"
+
+#: terrariumNotification.py:463
+msgid "MQTT"
+msgstr "MQTT"
+
+#: terrariumNotification.py:467
+msgid "Pushover"
+msgstr "Pushover"
+
+#: terrariumNotification.py:471
+msgid "Buzzer"
+msgstr ""
+
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
+msgid "Authenticate to make any changes"
+msgstr "Autenticarse para realizar modificaciones"
+
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
+msgid "Authentication"
+msgstr "Autenticación"
+
+#: terrariumWebserver.py:165 terrariumWebserver.py:253
+msgid "TerrariumPI"
+msgstr "TerrariumPI"
+
+#: terrariumWebserver.py:393
+#, fuzzy
+#| msgid "Sensor ph"
+msgid "Software Update"
+msgstr "Sensor de pH"
+
+#: terrariumNotification.py:450
+msgid "Telegram"
+msgstr "Telegram"
