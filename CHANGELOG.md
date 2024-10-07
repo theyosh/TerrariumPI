@@ -2,6 +2,84 @@ Changelog
 =========
 
 
+4.12.0 (2024-10-07)
+-------------------
+
+**New**
+------
+
+- Add missing PO file. [TheYOSH]
+- Add link to remote. [TheYOSH]
+
+**Fixes**
+------
+
+- Fix. [TheYOSH]
+- Fix typo. [TheYOSH]
+- Fix some Codacy issues. [TheYOSH]
+- Fix deprecated cookie message. [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update libraries. [TheYOSH]
+- More librarie updates. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update documentation supporting DIY mode. [TheYOSH]
+- Update logging. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update install.sh. [TheYOSH]
+
+  Fix missing libssl1.1 on Bookworm
+
+**Other**
+------
+
+- New release post. [TheYOSH]
+- More info. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Another typo. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Make DIY mode work for dimmer. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Extra debug information. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- First attempt support Sonoff DIY. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Spanish) [Alvaro Alonso]
+
+  Currently translated at 92.7% (1018 of 1097 strings)
+- Merge pull request [#951](https://github.com/theyosh/TerrariumPI/issues/951) from theyosh/dependabot/bundler/google-
+  protobuf-4.28.2. [TheYOSH]
+
+  Bump google-protobuf from 4.28.1 to 4.28.2
+- Bump google-protobuf from 4.28.1 to 4.28.2. [dependabot[bot]]
+
+  Bumps [google-protobuf](https://github.com/protocolbuffers/protobuf) from 4.28.1 to 4.28.2.
+  - [Release notes](https://github.com/protocolbuffers/protobuf/releases)
+  - [Changelog](https://github.com/protocolbuffers/protobuf/blob/main/protobuf_release.bzl)
+  - [Commits](https://github.com/protocolbuffers/protobuf/commits)
+
+  ---
+  updated-dependencies:
+  - dependency-name: google-protobuf
+    dependency-type: indirect
+  ...
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Make sure libssl is installed. [TheYOSH]
+- Backup some more. [TheYOSH]
+- Better timer support when lights are on during 00:00 [#948](https://github.com/theyosh/TerrariumPI/issues/948). [TheYOSH]
+
+
 4.11.1 (2024-09-07)
 -------------------
 
@@ -31,6 +109,7 @@ Changelog
 **Updates**
 ------
 
+- Update CHANGELOG. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update Python libraries. [TheYOSH]
 - Update documentation libraries. [TheYOSH]
@@ -54,6 +133,7 @@ Changelog
 **Other**
 ------
 
+- Typo. [TheYOSH]
 - New release post. [TheYOSH]
 - Documentation build trigger. [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
