@@ -1,4 +1,4 @@
-# TerrariumPI 4.11.1
+# TerrariumPI 4.12.0
 
 ![Latest release](https://img.shields.io/github/v/release/theyosh/terrariumpi?label=Latest%20release)
 ![GitHub Release Date](https://img.shields.io/github/release-date/theyosh/TerrariumPI)
@@ -24,6 +24,9 @@ humidity value. In order to lower the humidity you can add a dehumidifier.
 The software is that flexible that there is no limit in amount of sensors, relay
 boards or door sensors. The usage can be endless. All power switches have
 support for timers to trigger based on a time pattern.
+
+Running now stable for more than
+[10 years](https://theyosh.github.io/TerrariumPI/posts/2024/08/01/10-year-anniversary/)!!!
 
 If you are using this software for your animals or plants,
 **[please post some pictures](https://github.com/theyosh/TerrariumPI/issues/210)**
