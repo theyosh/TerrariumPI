@@ -52,6 +52,7 @@
     "bootstrap": "^4.6.1",
     "chart.js": "^4.0.1",
     "chartjs-adapter-dayjs-4": "^1.0.4",
+    "cookie": "^1.0.1",
     "country-code-emoji": "^2.3.0",
     "datatables.net-plugins": "^2.0.5",
     "dayjs": "^1.11.6",
