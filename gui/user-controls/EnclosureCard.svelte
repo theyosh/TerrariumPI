@@ -202,8 +202,10 @@
         <h4>{$_('enclosures.doors.title', { default: 'Doors' })}</h4>
         <table class="table table-sm">
           <thead>
-            <th style="width: 90%">{$_('table.header.name', { default: 'Name' })}</th>
-            <th class="text-center">{$_('table.header.status', { default: 'Status' })}</th>
+            <tr>
+              <th style="width: 90%">{$_('table.header.name', { default: 'Name' })}</th>
+              <th class="text-center">{$_('table.header.status', { default: 'Status' })}</th>
+            </tr>
           </thead>
           <tbody>
             {#each enclosure.doors.sort((a, b) => a.name.localeCompare(b.name)) as door}
