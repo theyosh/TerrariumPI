@@ -946,7 +946,7 @@
         "placeholder": "Insira uma mensagem"
       },
       "placeholders": {
-        "format": "Utilize o formato {marcador} para utilizar um marcador na sua mensagem.{new_line}Valores numérios podem ser arredondados utilizando o {link_start}formato `.:2f`{link_end}",
+        "format": "Utilize o formato {placeholder} para utilizar um marcador na sua mensagem.{new_line}Valores numérios podem ser arredondados utilizando o {link_start}formato `.:2f`{link_end}",
         "help": "Lista de marcadores disponíveis.",
         "label": "Marcadores"
       },
