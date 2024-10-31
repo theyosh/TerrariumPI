@@ -2099,6 +2099,7 @@
         "history": {
           "help": "Insira a quantidade de dias a serem mantidos no histórico.",
           "invalid": "Insira um valor mínimo de {value}.",
+          "label": "Histórico de arquivos em dias",
           "placeholder": "Digite o número"
         },
         "light": {
@@ -2115,7 +2116,7 @@
         "options": {
           "day_1": "1 Dia",
           "disabled": "Desabilitado",
-          "hour_1": "30 Minutos",
+          "hour_1": "1 hora",
           "hour_12": "12 Horas",
           "hour_3": "3 Horas",
           "hour_6": "6 Horas",
