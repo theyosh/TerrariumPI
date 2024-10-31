@@ -3,12 +3,13 @@
 # Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2022.
 # theyosh <github.com@theyosh.nl>, 2022.
 # cmonicob <cmonicob@gmail.com>, 2022.
+# TheYOSH <github.com@theyosh.nl>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.3.3\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2022-12-29 22:03+0000\n"
-"Last-Translator: cmonicob <cmonicob@gmail.com>\n"
+"PO-Revision-Date: 2024-10-31 21:05+0000\n"
+"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Catalan <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/ca/>\n"
 "Language: ca\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.15\n"
+"X-Generator: Weblate 5.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -439,25 +440,23 @@ msgstr "Arxiu de la càmera web"
 
 #: terrariumNotification.py:222
 msgid "Lights area wrong state"
-msgstr ""
+msgstr "Estat incorrecte de l'àrea de llums"
 
 #: terrariumNotification.py:224
-#, fuzzy
-#| msgid "Current power usage"
 msgid "Current power state"
-msgstr "Ús d'energia actual"
+msgstr "Estat actual de l'alimentació"
 
 #: terrariumNotification.py:225
 msgid "Sensor measure state"
-msgstr ""
+msgstr "Estat de mesura del sensor"
 
 #: terrariumNotification.py:226
 msgid "Enclosure name"
-msgstr ""
+msgstr "Nom del recinte"
 
 #: terrariumNotification.py:227
 msgid "Enclosure running mode"
-msgstr ""
+msgstr "Mode d'execució del recinte"
 
 #: terrariumNotification.py:441
 msgid "Display"
