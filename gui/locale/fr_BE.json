@@ -2096,6 +2096,12 @@
           "label": "Éclat",
           "placeholder": "Sélectionnez le relais optionnel pour le flash"
         },
+        "history": {
+          "help": "Entrez le nombre de jours à conserver pour l'historique.",
+          "invalid": "Veuillez saisir une valeur minimale de {value}.",
+          "label": "Historique des archives en jours",
+          "placeholder": "Entrez le numéro"
+        },
         "light": {
           "help": "État lumineux pour prendre une image d'archive.",
           "invalid": "Veuillez faire un choix.",
@@ -2110,7 +2116,7 @@
         "options": {
           "day_1": "1 jour",
           "disabled": "Désactivé",
-          "hour_1": "30 minutes",
+          "hour_1": "1 heure",
           "hour_12": "12 heures",
           "hour_3": "Heures maximales de lumières",
           "hour_6": "Heures maximales de lumières",

@@ -2096,6 +2096,12 @@
           "label": "Flash",
           "placeholder": "Select optional relay for flash"
         },
+        "history": {
+          "help": "Enter the amount of days to keep for history.",
+          "invalid": "Please enter a minimum value of {value}.",
+          "label": "Archive history in days",
+          "placeholder": "Enter number"
+        },
         "light": {
           "help": "Light status for taking an archive image.",
           "invalid": "Please make a choice.",
@@ -2110,7 +2116,7 @@
         "options": {
           "day_1": "1 Day",
           "disabled": "Disabled",
-          "hour_1": "30 Minutes",
+          "hour_1": "1 Hour",
           "hour_12": "12 Hours",
           "hour_3": "3 Hours",
           "hour_6": "6 Hours",

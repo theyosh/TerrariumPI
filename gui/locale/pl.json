@@ -2096,6 +2096,12 @@
           "label": "Błysk",
           "placeholder": "Wybierz opcjonalny przekaźnik Flash"
         },
+        "history": {
+          "help": "Wprowadź liczbę dni, które mają być przechowywane w historii.",
+          "invalid": "Proszę wprowadzić minimalną wartość {value}.",
+          "label": "Archiwizuj historię w dniach",
+          "placeholder": "Wpisz numer"
+        },
         "light": {
           "help": "Status światła do wykonania obrazu archiwum.",
           "invalid": "Dokonaj wyboru.",
@@ -2110,7 +2116,7 @@
         "options": {
           "day_1": "1 dzień",
           "disabled": "Wyłączony",
-          "hour_1": "30 minut",
+          "hour_1": "1 godzina",
           "hour_12": "12 godzin",
           "hour_3": "3 godziny",
           "hour_6": "6 godzin",

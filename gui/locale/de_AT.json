@@ -2005,6 +2005,11 @@
           "label": "Blitz",
           "placeholder": "Optionales Relais für Blitz auswählen"
         },
+        "history": {
+          "help": "Geben Sie die Anzahl der Tage ein, die für den Verlauf aufbewahrt werden sollen.",
+          "label": "Archivverlauf in Tagen",
+          "placeholder": "Nummer eingeben"
+        },
         "light": {
           "help": "Lichtstatus für die Aufnahme eines Archivbildes.",
           "invalid": "Bitte treffen Sie eine Wahl.",
@@ -2019,7 +2024,7 @@
         "options": {
           "day_1": "1 Tag",
           "disabled": "Aus",
-          "hour_1": "30 Minuten",
+          "hour_1": "1 Stunde",
           "hour_12": "12 Stunden",
           "hour_3": "3 Stunden",
           "hour_6": "6 Stunden",

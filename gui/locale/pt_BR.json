@@ -2096,6 +2096,9 @@
           "label": "Flash",
           "placeholder": "Selecione o relé opcional para o flash"
         },
+        "history": {
+          "label": "Arquivar histórico em dias"
+        },
         "light": {
           "help": "Estado das luzes para salvar uma imagem em arquivo.",
           "invalid": "Por favor, faça uma escolha.",
@@ -2110,7 +2113,7 @@
         "options": {
           "day_1": "1 dia",
           "disabled": "Desativado",
-          "hour_1": "30 minutos",
+          "hour_1": "1 hora",
           "hour_12": "12 horas",
           "hour_3": "3 horas",
           "hour_6": "6 horas",

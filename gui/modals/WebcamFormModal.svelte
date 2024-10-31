@@ -32,6 +32,7 @@
   let webcamMap = null;
 
   let motion_settings = false; // Calibration is always enabled due to offset setting
+  let archive_settings = false;
   let hardware_type = null;
   let formData = writable({});
 
@@ -68,7 +69,7 @@
     { value: '300', text: $_('webcams.settings.archive.options.minute_5', { default: '5 Minutes' }) },
     { value: '900', text: $_('webcams.settings.archive.options.minute_15', { default: '15 Minutes' }) },
     { value: '1800', text: $_('webcams.settings.archive.options.minute_30', { default: '30 Minutes' }) },
-    { value: '3600', text: $_('webcams.settings.archive.options.hour_1', { default: 'Disabled' }) },
+    { value: '3600', text: $_('webcams.settings.archive.options.hour_1', { default: '1 Hour' }) },
     { value: '10800', text: $_('webcams.settings.archive.options.hour_3', { default: '3 Hours' }) },
     { value: '21600', text: $_('webcams.settings.archive.options.hour_6', { default: '6 Hours' }) },
     { value: '43200', text: $_('webcams.settings.archive.options.hour_12', { default: '12 Hours' }) },
@@ -197,6 +198,7 @@
 
   const archivingCalibration = (state) => {
     motion_settings = state === 'motion';
+    archive_settings = motion_settings || (state && state !== 'disabled');
   };
 
   const _processForm = async (values, context) => {
@@ -428,7 +430,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6">
             <Select
               name="archive.state"
               value="{$formData.archive ? $formData.archive.state : null}"
@@ -442,41 +444,7 @@
               invalid="{$_('webcams.settings.archive.state.invalid', { default: 'Please make a choice.' })}"
             />
           </div>
-          <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-            <Select
-              name="archive.light"
-              value="{$formData.archive ? $formData.archive.light : ''}"
-              options="{[
-                { value: 'ignore', text: $_('webcams.settings.archive.light.options.ignore', { default: 'Ignore' }) },
-                { value: 'on', text: $_('webcams.settings.archive.light.options.on', { default: 'When on' }) },
-                { value: 'off', text: $_('webcams.settings.archive.light.options.off', { default: 'When off' }) },
-              ]}"
-              label="{$_('webcams.settings.archive.light.label', { default: 'Archive light state' })}"
-              placeholder="{$_('webcams.settings.archive.light.placeholder', {
-                default: 'Select archive light state',
-              })}"
-              help="{$_('webcams.settings.archive.light.help', {
-                default: 'Light status for taking an archive image.',
-              })}"
-              invalid="{$_('webcams.settings.archive.light.invalid', { default: 'Please make a choice.' })}"
-            />
-          </div>
-          <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-            <Select
-              name="archive.door"
-              value="{$formData.archive ? $formData.archive.door : ''}"
-              options="{[
-                { value: 'ignore', text: $_('webcams.settings.archive.door.options.ignore', { default: 'Ignore' }) },
-                { value: 'close', text: $_('webcams.settings.archive.door.options.close', { default: 'Close' }) },
-                { value: 'open', text: $_('webcams.settings.archive.door.options.open', { default: 'Open' }) },
-              ]}"
-              label="{$_('webcams.settings.archive.door.label', { default: 'Archive door state' })}"
-              placeholder="{$_('webcams.settings.archive.door.placeholder', { default: 'Select archive door state' })}"
-              help="{$_('webcams.settings.archive.door.help', { default: 'Door status for taking an archive image.' })}"
-              invalid="{$_('webcams.settings.archive.door.invalid', { default: 'Please make a choice.' })}"
-            />
-          </div>
-          <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6">
             <Select
               name="flash"
               value="{$formData.flash}"
@@ -511,6 +479,59 @@
             {/if}
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row" class:d-none="{!archive_settings}">
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+        <Select
+          name="archive.light"
+          value="{$formData.archive ? $formData.archive.light : ''}"
+          options="{[
+            { value: 'ignore', text: $_('webcams.settings.archive.light.options.ignore', { default: 'Ignore' }) },
+            { value: 'on', text: $_('webcams.settings.archive.light.options.on', { default: 'When on' }) },
+            { value: 'off', text: $_('webcams.settings.archive.light.options.off', { default: 'When off' }) },
+          ]}"
+          label="{$_('webcams.settings.archive.light.label', { default: 'Archive light state' })}"
+          placeholder="{$_('webcams.settings.archive.light.placeholder', {
+            default: 'Select archive light state',
+          })}"
+          help="{$_('webcams.settings.archive.light.help', {
+            default: 'Light status for taking an archive image.',
+          })}"
+          invalid="{$_('webcams.settings.archive.light.invalid', { default: 'Please make a choice.' })}"
+        />
+      </div>
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+        <Select
+          name="archive.door"
+          value="{$formData.archive ? $formData.archive.door : ''}"
+          options="{[
+            { value: 'ignore', text: $_('webcams.settings.archive.door.options.ignore', { default: 'Ignore' }) },
+            { value: 'close', text: $_('webcams.settings.archive.door.options.close', { default: 'Close' }) },
+            { value: 'open', text: $_('webcams.settings.archive.door.options.open', { default: 'Open' }) },
+          ]}"
+          label="{$_('webcams.settings.archive.door.label', { default: 'Archive door state' })}"
+          placeholder="{$_('webcams.settings.archive.door.placeholder', { default: 'Select archive door state' })}"
+          help="{$_('webcams.settings.archive.door.help', { default: 'Door status for taking an archive image.' })}"
+          invalid="{$_('webcams.settings.archive.door.invalid', { default: 'Please make a choice.' })}"
+        />
+      </div>
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+        <Field
+          type="number"
+          name="archive.history"
+          step="1"
+          min="0"
+          label="{$_('webcams.settings.archive.history.label', { default: 'Archive history in days' })}"
+          placeholder="{$_('webcams.settings.archive.history.placeholder', { default: 'Enter number' })}"
+          help="{$_('webcams.settings.archive.history.help', {
+            default: 'Enter the amount of days to keep for history.',
+          })}"
+          invalid="{$_('webcams.settings.archive.history.invalid', {
+            default: 'Please enter a minimum value of {value}.',
+            values: { value: 0 },
+          })}"
+        />
       </div>
     </div>
     <div class="row" class:d-none="{!motion_settings}">

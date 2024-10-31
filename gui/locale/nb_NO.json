@@ -2096,6 +2096,12 @@
           "label": "Blits",
           "placeholder": "Velg valgfritt relé for blits"
         },
+        "history": {
+          "help": "Angi antall dager som skal lagres for historikk.",
+          "invalid": "Angi en minimumsverdi på {value}.",
+          "label": "Arkivhistorie i dager",
+          "placeholder": "Skriv inn nummer"
+        },
         "light": {
           "help": "Lysstatus for å ta et arkivbilde.",
           "invalid": "Vennligst ta et valg.",
@@ -2110,7 +2116,7 @@
         "options": {
           "day_1": "1 dag",
           "disabled": "Deaktivert",
-          "hour_1": "30 minutter",
+          "hour_1": "1 time",
           "hour_12": "12 timer",
           "hour_3": "3 timer",
           "hour_6": "6 timer",

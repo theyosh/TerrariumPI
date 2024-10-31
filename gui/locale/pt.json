@@ -2096,6 +2096,11 @@
           "label": "Flash",
           "placeholder": "Seleccione o relé opcional para flash"
         },
+        "history": {
+          "help": "Insira a quantidade de dias a serem mantidos no histórico.",
+          "invalid": "Insira um valor mínimo de {value}.",
+          "placeholder": "Digite o número"
+        },
         "light": {
           "help": "Estado das luzes para guardar uma imagem no arquivo.",
           "invalid": "Por favor seleccione uma opção.",

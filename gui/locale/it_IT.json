@@ -2096,6 +2096,12 @@
           "label": "flash",
           "placeholder": "Seleziona il relè opzionale per il flash"
         },
+        "history": {
+          "help": "Inserisci il numero di giorni da conservare per la cronologia.",
+          "invalid": "Inserisci un valore minimo di {value}.",
+          "label": "Archivia la cronologia in giorni",
+          "placeholder": "Inserisci il numero"
+        },
         "light": {
           "help": "Stato della luce per acquisire un'immagine di archivio.",
           "invalid": "Per favore, fai una scelta.",
@@ -2110,7 +2116,7 @@
         "options": {
           "day_1": "1 giorno",
           "disabled": "Disabilitato",
-          "hour_1": "30 minuti",
+          "hour_1": "1 ora",
           "hour_12": "12 ore",
           "hour_3": "3 ore",
           "hour_6": "6 ore",

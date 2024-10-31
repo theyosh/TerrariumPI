@@ -2096,6 +2096,12 @@
           "label": "Ràfega",
           "placeholder": "Seleccioneu el relé opcional per a Flash"
         },
+        "history": {
+          "help": "Introduïu la quantitat de dies que voleu conservar per a l'historial.",
+          "invalid": "Introduïu un valor mínim de {value}.",
+          "label": "Arxiu històric en dies",
+          "placeholder": "Introduïu el número"
+        },
         "light": {
           "help": "Estat de llum per prendre una imatge d’arxiu.",
           "invalid": "Feu una tria.",
@@ -2110,7 +2116,7 @@
         "options": {
           "day_1": "1 dia",
           "disabled": "Inhabilitat",
-          "hour_1": "30 minuts",
+          "hour_1": "1 hora",
           "hour_12": "12 hores",
           "hour_3": "3 hores",
           "hour_6": "6 hores",

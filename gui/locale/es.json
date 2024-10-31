@@ -2032,6 +2032,12 @@
           "label": "Destello",
           "placeholder": "Seleccione Relé opcional para Flash"
         },
+        "history": {
+          "help": "Ingrese la cantidad de días que se guardarán en el historial.",
+          "invalid": "Introduzca un valor mínimo de {value}.",
+          "label": "Historial de archivos en días",
+          "placeholder": "Introduzca el número"
+        },
         "light": {
           "help": "Estado de luz para tomar una imagen de archivo.",
           "invalid": "Por favor tome una decisión.",

@@ -2096,6 +2096,12 @@
           "label": "Blitzlicht",
           "placeholder": "Optionales Relais für Blitz auswählen"
         },
+        "history": {
+          "help": "",
+          "invalid": "Bitte geben Sie einen Mindestwert von {value} ein.",
+          "label": "Archivverlauf in Tagen",
+          "placeholder": ""
+        },
         "light": {
           "help": "Lichtstatus zum Aufnehmen eines Archivbildes.",
           "invalid": "Bitte triff eine Wahl.",

@@ -2096,6 +2096,12 @@
           "label": "Flits",
           "placeholder": "Selecteer optionele schakelaar voor flits"
         },
+        "history": {
+          "help": "Voer het aantal dagen in dat u wilt bewaren voor de geschiedenis.",
+          "invalid": "Voer een minimumwaarde van {value} in.",
+          "label": "Archiefgeschiedenis in dagen",
+          "placeholder": "Voer nummer in"
+        },
         "light": {
           "help": "Lichtstatus voor het maken van een archiefbeeld.",
           "invalid": "Maak een keuze.",
@@ -2110,7 +2116,7 @@
         "options": {
           "day_1": "1 dag",
           "disabled": "Gedeactiveerd",
-          "hour_1": "30 minuten",
+          "hour_1": "1 uur",
           "hour_12": "12 uren",
           "hour_3": "3 uren",
           "hour_6": "6 uren",
