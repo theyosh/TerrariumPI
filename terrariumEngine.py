@@ -1201,16 +1201,19 @@ class terrariumEngine(object):
                         webcam.motion["boxes"],
                     )
                     if newImage:
-                        self.__environment.notification.message(
+                        self.notification.message(
                             "webcam_motion", webcam.to_dict(), [self.webcams[webcam.id].last_archived_image]
                         )
 
                 else:
                     newImage = self.webcams[webcam.id].archive(int(webcam.archive["state"]))
                     if newImage:
-                        self.__environment.notification.message(
+                        self.notification.message(
                             "webcam_archive", webcam.to_dict(), [self.webcams[webcam.id].last_archived_image]
                         )
+
+                if newImage and int(webcam.archive["history"] or 0) > 0:
+                    self.webcams[webcam.id].clear_archive(int(webcam.archive["history"]))
 
             webcamLogger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
 

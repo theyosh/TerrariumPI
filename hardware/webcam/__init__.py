@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 from io import BytesIO
 from time import time
 from time import sleep
+from shutil import rmtree
 from func_timeout import func_timeout, FunctionTimedOut
 
 import math
@@ -570,14 +571,18 @@ class terrariumWebcam(object):
         archive = (
             self.__last_archive_image is None or int(time() - self.__last_archive_image.stat().st_mtime) >= timeout
         )
-        if archive:
-            start = time()
-            self.__last_archive_image = self.raw_archive_path
-            self.__last_archive_image.parent.mkdir(parents=True, exist_ok=True)
-            self.__raw_image.save(self.__last_archive_image, "jpeg", quality=self.__JPEG_QUALITY, exif=self.__exit_data)
-            logger.debug(f"Webcam {self.name}: Archiving image to disk took: {time()-start:.3f} seconds")
 
-        return archive
+        if not archive:
+            return False
+
+        start = time()
+        self.__last_archive_image = self.raw_archive_path
+        self.__last_archive_image.parent.mkdir(parents=True, exist_ok=True)
+        self.__raw_image.save(self.__last_archive_image, "jpeg", quality=self.__JPEG_QUALITY, exif=self.__exit_data)
+        logger.debug(f"Webcam {self.name}: Archiving image to disk took: {time()-start:.3f} seconds")
+        print(f"Webcam {self.name}: Archiving image to disk took: {time()-start:.3f} seconds")
+
+        return True
 
     def motion_capture(self, motion_frame="last", motion_threshold=25, motion_area=500, motion_boxes="green"):
         if not self.state:
@@ -653,6 +658,20 @@ class terrariumWebcam(object):
         logger.debug(f"Webcam {self.name}: Motion detection image took: {time()-start:.3f} seconds")
 
         return motion_detected
+
+    def clear_archive(self, period=365):
+        startDate = datetime.now() - timedelta(days=period)
+        logger.debug(f"Webcam {self.name}: Start clearing archive older than {startDate}")
+        for counter in range(10):
+            while Path.exists(self.__ARCHIVE_LOCATION.joinpath(self.id, startDate.strftime("%Y/%m/%d"))):
+                start = time()
+                rmtree(self.__ARCHIVE_LOCATION.joinpath(self.id, startDate.strftime("%Y/%m/%d")))
+                logger.info(
+                    f"Webcam {self.name}: Removed folder {self.__ARCHIVE_LOCATION.joinpath(self.id, startDate.strftime('%Y/%m/%d'))} in {time()-start:.3f} seconds"
+                )
+                startDate = startDate - timedelta(days=1)
+
+            startDate = startDate - timedelta(days=1)
 
     # TODO: What to stop....?
     def stop(self):
