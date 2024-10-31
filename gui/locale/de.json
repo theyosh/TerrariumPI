@@ -450,7 +450,7 @@
           "message": "Bist du sicher, dass du die Audio -Datei ''{name}'' ({filename}) löschen willst?"
         },
         "error": {
-          "message": "Die Audiodatei ''{name}''“ konnte nicht gelöscht werden!\nFehler: {Fehler}"
+          "message": "Die Audiodatei ''{name}''“ konnte nicht gelöscht werden!\nFehler: {error}"
         },
         "ok": {
           "message": "Die Audio -Datei ''{name}'' wird gelöscht."
@@ -495,7 +495,7 @@
           "message": "Bist du sicher, dass du die Playlist ''{name}'' mit {length} Nummern löschen willst?"
         },
         "error": {
-          "message": "Die Wiedergabeliste ''{name}''“ konnte nicht gelöscht werden!\nFehler: {Fehler}"
+          "message": "Die Wiedergabeliste ''{name}''“ konnte nicht gelöscht werden!\nFehler: {error}"
         },
         "ok": {
           "message": "Die Wiedergabeliste ''{name}'' wird gelöscht."
@@ -563,7 +563,7 @@
         "message": "Bist du sicher, dass du die Schaltfläche ''{name}'' ignorieren möchtest?"
       },
       "error": {
-        "message": "Der Button ''{name}'' konnte nicht ignoriert werden!\nFehler: {Fehler}"
+        "message": "Der Button ''{name}'' konnte nicht ignoriert werden!\nFehler: {error}"
       },
       "ok": {
         "message": "Die Schaltfläche ''{name}'' wird ignoriert."
@@ -642,7 +642,7 @@
           "message": "Bist du sicher, dass du das Ereignis ''{name}'' löschen möchtest?"
         },
         "error": {
-          "message": "Der Termin ''{name}''“ konnte nicht gelöscht werden!\nFehler: {Fehler}"
+          "message": "Der Termin ''{name}''“ konnte nicht gelöscht werden!\nFehler: {error}"
         },
         "ok": {
           "message": "Das Ereignis ''{name}'' wird gelöscht."
@@ -693,7 +693,7 @@
         "title": "Ereignis",
         "update": {
           "error": {
-            "message": "Das Ereignis ''{name}''“ konnte nicht aktualisiert werden!\nFehler: {Fehler}"
+            "message": "Das Ereignis ''{name}''“ konnte nicht aktualisiert werden!\nFehler: {error}"
           },
           "ok": {
             "message": "Das Ereignis ''{name}'' wird aktualisiert."
@@ -1321,7 +1321,7 @@
     },
     "calibration": {
       "light_on_off_threshold": {
-        "light_bulb": "Einschalten des Schwellenwerts: {Schwellenwert}"
+        "light_bulb": "Einschalten des Schwellenwerts: {threshold}"
       }
     },
     "co2": {
