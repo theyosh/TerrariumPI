@@ -580,7 +580,6 @@ class terrariumWebcam(object):
         self.__last_archive_image.parent.mkdir(parents=True, exist_ok=True)
         self.__raw_image.save(self.__last_archive_image, "jpeg", quality=self.__JPEG_QUALITY, exif=self.__exit_data)
         logger.debug(f"Webcam {self.name}: Archiving image to disk took: {time()-start:.3f} seconds")
-        print(f"Webcam {self.name}: Archiving image to disk took: {time()-start:.3f} seconds")
 
         return True
 
