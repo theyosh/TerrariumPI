@@ -2096,6 +2096,12 @@
           "label": "Flash",
           "placeholder": "Select optional relay for flash"
         },
+        "history": {
+          "help": "Enter the amount of days to keep for history.",
+          "invalid": "Please enter a minimum value of {value}.",
+          "label": "Archive history in days",
+          "placeholder": "Enter number"
+        },
         "light": {
           "help": "Light status for taking an archive image.",
           "invalid": "Please make a choice.",
