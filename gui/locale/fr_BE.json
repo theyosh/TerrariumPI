@@ -532,7 +532,7 @@
         },
         "title": "Paramètres de la webcam",
         "volume": {
-          "formatter": "Niveau de volume audio: {value}",
+          "formatter": "Niveau de volume audio : {value}",
           "help": "Contient le volume pour cette liste de lecture.",
           "label": "Fichiers audio"
         }
