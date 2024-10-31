@@ -2,12 +2,13 @@
 # Copyright (C) 2016-2023 TheYOSH
 # Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2023.
 # Daniel Santos <dgms@sapo.pt>, 2024.
+# TheYOSH <github.com@theyosh.nl>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.6.3\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2024-08-03 10:24+0000\n"
-"Last-Translator: Daniel Santos <dgms@sapo.pt>\n"
+"PO-Revision-Date: 2024-10-31 21:05+0000\n"
+"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Portuguese <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/pt/>\n"
 "Language: pt\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.8.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -55,7 +56,6 @@ msgid "Fertility"
 msgstr "Fertilidade"
 
 #: terrariumArea.py:86
-#, fuzzy
 msgid "Moisture"
 msgstr "Hidratação"
 
