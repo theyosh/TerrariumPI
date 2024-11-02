@@ -659,7 +659,11 @@ class terrariumWebcam(object):
         return motion_detected
 
     def clear_archive(self, period=365):
-        startDate = datetime.now() - timedelta(days=period)
+        if period <= 0:
+            return
+
+        # Add an extra day here, else you will mis 1 day of archive
+        startDate = datetime.now() - timedelta(days=period + 1)
         logger.debug(f"Webcam {self.name}: Start clearing archive older than {startDate}")
         for _ in range(10):
             while Path.exists(self.__ARCHIVE_LOCATION.joinpath(self.id, startDate.strftime("%Y/%m/%d"))):
