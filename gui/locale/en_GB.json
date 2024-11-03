@@ -73,8 +73,45 @@
       },
       "setup": {
         "area_variation": {
+          "action": {
+            "add": {
+              "help": "Add a new row"
+            },
+            "label": "Action",
+            "remove": {
+              "help": "Remove row"
+            }
+          },
           "difference": {
-            "help": "Enter a negative or positive value for a relative action. A number is treated as an absolute value."
+            "help": "Enter a negative or positive value for a relative action. A number is treated as an absolute value.",
+            "label": "Difference"
+          },
+          "duration": {
+            "help": "Enter a duration in minutes or the actual time of the day."
+          },
+          "external_source": {
+            "help": "Enter a full url to the external source according to the Remote data feature.",
+            "label": "External source url"
+          },
+          "help": "Here you can enter periods where the sensors will change their values according to the list below. Make sure the periods are in chronological order!",
+          "offset": {
+            "label": "Offset"
+          },
+          "period": {
+            "help": "After x minutes change to value or at exactly a time stamp.",
+            "label": "Period/duration"
+          },
+          "remote": {
+            "help": "Remote data."
+          },
+          "source": {
+            "label": "Source"
+          },
+          "value": {
+            "help": "Enter a negative or positive offset value."
+          },
+          "weather": {
+            "help": "Climate mirroring."
           }
         },
         "day_night_difference": {
