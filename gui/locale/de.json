@@ -72,6 +72,48 @@
         }
       },
       "setup": {
+        "area_variation": {
+          "action": {
+            "add": {
+              "help": ""
+            },
+            "label": "",
+            "remove": {
+              "help": ""
+            }
+          },
+          "difference": {
+            "help": "",
+            "label": ""
+          },
+          "duration": {
+            "help": ""
+          },
+          "external_source": {
+            "help": "",
+            "label": ""
+          },
+          "help": "",
+          "offset": {
+            "label": ""
+          },
+          "period": {
+            "help": "",
+            "label": ""
+          },
+          "remote": {
+            "help": ""
+          },
+          "source": {
+            "label": ""
+          },
+          "value": {
+            "help": ""
+          },
+          "weather": {
+            "help": ""
+          }
+        },
         "day_night_difference": {
           "help": "Differenz zwischen Tag und Nacht.",
           "invalid": "Gib eine gültige Nummer ein.",

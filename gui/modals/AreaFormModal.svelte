@@ -1629,8 +1629,10 @@
               <div class="col">
                 <span class="text-muted">
                   <small
-                    >Here you can enter periods where the sensors will change their values according to the list below.
-                    Make sure the periods are in chronological order!</small
+                    >{$_('areas.settings.setup.area_variation.help', {
+                      default:
+                        'Here you can enter periods where the sensors will change their values according to the list below. Make sure the periods are in chronological order!',
+                    })}</small
                   >
                 </span>
               </div>
@@ -1638,38 +1640,62 @@
             <div class="row">
               <div class="col-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="form-group no-margin">
-                  <label for="variation_when">Source</label>
+                  <label for="variation_source"
+                    >{$_('areas.settings.setup.area_variation.source.label', {
+                      default: 'Source',
+                    })}</label
+                  >
                 </div>
               </div>
               {#if $formData.setup && ['external', 'script', 'weather'].indexOf($formData.setup.variation[$formData.setup.variation.length - 1].when ?? null) === -1}
                 <div class="col-4 col-sm-4 col-md-4 col-lg-4">
                   <div class="form-group no-margin">
-                    <label for="alarm_low_end">Period/duration</label>
+                    <label for="variation_period"
+                      >{$_('areas.settings.setup.area_variation.period.label', {
+                        default: 'Period/duration',
+                      })}</label
+                    >
                   </div>
                 </div>
               {/if}
               {#if $formData.setup && ['external', 'script'].indexOf($formData.setup.variation[$formData.setup.variation.length - 1].when ?? null) !== -1}
                 <div class="col-7 col-sm-7 col-md-7 col-lg-7">
                   <div class="form-group no-margin">
-                    <label for="alarm_low_end">External source url</label>
+                    <label for="variation_source"
+                      >{$_('areas.settings.setup.area_variation.external_source.label', {
+                        default: 'External source url',
+                      })}</label
+                    >
                   </div>
                 </div>
               {:else if $formData.setup && ['weather'].indexOf($formData.setup.variation[$formData.setup.variation.length - 1].when ?? null) !== -1}
                 <div class="col-7 col-sm-7 col-md-7 col-lg-7">
                   <div class="form-group no-margin">
-                    <label for="alarm_low_end">Offset</label>
+                    <label for="variation_offset"
+                      >{$_('areas.settings.setup.area_variation.offset.label', {
+                        default: 'Offset',
+                      })}</label
+                    >
                   </div>
                 </div>
               {:else}
                 <div class="col-3 col-sm-3 col-md-3 col-lg-3">
                   <div class="form-group no-margin">
-                    <label for="variant_value">Difference</label>
+                    <label for="variation_value"
+                      >{$_('areas.settings.setup.area_variation.difference.label', {
+                        default: 'Difference',
+                      })}</label
+                    >
                   </div>
                 </div>
               {/if}
               <div class="col-1 col-sm-1 col-md-1 col-lg-1">
                 <div class="form-group no-margin">
-                  <label for="action">Action</label>
+                  <label for="action"
+                    >{$_('areas.settings.setup.area_variation.action.label', {
+                      default: 'Action',
+                    })}</label
+                  >
                 </div>
               </div>
               <div class="col-1 col-sm-1 col-md-1 col-lg-1">
@@ -1809,7 +1835,11 @@
                 )}"
               >
                 <div class="form-group">
-                  <small class="text-muted d-none"> After x minutes change to value or at exactly a time stamp. </small>
+                  <small class="text-muted d-none">
+                    {$_('areas.settings.setup.area_variation.period.help', {
+                      default: 'After x minutes change to value or at exactly a time stamp.',
+                    })}
+                  </small>
                 </div>
               </div>
               <div
@@ -1820,7 +1850,11 @@
                   ) !== -1}"
               >
                 <div class="form-group">
-                  <small class="text-muted d-none"> Enter a duration in minutes or the actual time of the day. </small>
+                  <small class="text-muted d-none">
+                    {$_('areas.settings.setup.area_variation.duration.help', {
+                      default: 'Enter a duration in minutes or the actual time of the day.',
+                    })}
+                  </small>
                 </div>
               </div>
               <div
@@ -1832,7 +1866,10 @@
               >
                 <div class="form-group">
                   <small class="text-muted d-none">
-                    Enter a negative or positive value for a relative action. A number is treated as an absolute value.
+                    {$_('areas.settings.setup.area_variation.difference.help', {
+                      default:
+                        'Enter a negative or positive value for a relative action. A number is treated as an absolute value.',
+                    })}
                   </small>
                 </div>
               </div>
@@ -1846,7 +1883,11 @@
                 )}"
               >
                 <div class="form-group">
-                  <small class="text-muted d-none"> Remote data. </small>
+                  <small class="text-muted d-none">
+                    {$_('areas.settings.setup.area_variation.remote.help', {
+                      default: 'Remote data.',
+                    })}
+                  </small>
                 </div>
               </div>
               <div
@@ -1860,7 +1901,9 @@
               >
                 <div class="form-group">
                   <small class="text-muted d-none">
-                    Enter a full url to the external source according to the Remote data feature.
+                    {$_('areas.settings.setup.area_variation.external_source.help', {
+                      default: 'Enter a full url to the external source according to the Remote data feature.',
+                    })}
                   </small>
                 </div>
               </div>
@@ -1873,7 +1916,11 @@
                 )}"
               >
                 <div class="form-group">
-                  <small class="text-muted d-none"> Climate mirroring. </small>
+                  <small class="text-muted d-none">
+                    {$_('areas.settings.setup.area_variation.weather.help', {
+                      default: 'Climate mirroring.',
+                    })}
+                  </small>
                 </div>
               </div>
               <div
@@ -1885,17 +1932,29 @@
                 )}"
               >
                 <div class="form-group">
-                  <small class="text-muted d-none"> Enter a negative or positive offset value. </small>
+                  <small class="text-muted d-none">
+                    {$_('areas.settings.setup.area_variation.value.help', {
+                      default: 'Enter a negative or positive offset value.',
+                    })}
+                  </small>
                 </div>
               </div>
               <div class="col-1 col-sm-1 col-md-1 col-lg-1">
                 <div class="form-group">
-                  <small class="text-muted d-none"> Add a new row </small>
+                  <small class="text-muted d-none">
+                    {$_('areas.settings.setup.area_variation.action.add.help', {
+                      default: 'Add a new row',
+                    })}
+                  </small>
                 </div>
               </div>
               <div class="col-1 col-sm-1 col-md-1 col-lg-1">
                 <div class="form-group">
-                  <small class="text-muted d-none"> Remove row </small>
+                  <small class="text-muted d-none">
+                    {$_('areas.settings.setup.area_variation.action.remove.help', {
+                      default: 'Remove row',
+                    })}
+                  </small>
                 </div>
               </div>
             </div>

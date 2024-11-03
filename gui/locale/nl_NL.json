@@ -72,6 +72,48 @@
         }
       },
       "setup": {
+        "area_variation": {
+          "action": {
+            "add": {
+              "help": "Voeg een nieuwe rij toe"
+            },
+            "label": "Actie",
+            "remove": {
+              "help": "Rij verwijderen"
+            }
+          },
+          "difference": {
+            "help": "Voer een negatieve of positieve waarde in voor een relatieve actie. \nEen getal wordt behandeld als een absolute waarde.",
+            "label": "Verschil"
+          },
+          "duration": {
+            "help": "Voer een duur in minuten of de werkelijke tijd van de dag in."
+          },
+          "external_source": {
+            "help": "Voer een volledige URL naar de externe bron in volgens de Externe data manier.",
+            "label": "Externe bron-URL"
+          },
+          "help": "Hier kunt u perioden invoeren waarin de sensoren hun waarden zullen wijzigen volgens de onderstaande lijst. \nZorg ervoor dat de perioden in chronologische volgorde staan!",
+          "offset": {
+            "label": "Offset"
+          },
+          "period": {
+            "help": "Na x minuten wijzigen naar waarde of precies op een tijdstip.",
+            "label": "Periode/duur"
+          },
+          "remote": {
+            "help": "Externe data."
+          },
+          "source": {
+            "label": "Bron"
+          },
+          "value": {
+            "help": "Voer een negatieve of positieve offsetwaarde in."
+          },
+          "weather": {
+            "help": "Klimaatspiegeling."
+          }
+        },
         "day_night_difference": {
           "help": "Waarde om te wisselen tussen dag en nacht.",
           "invalid": "Geef een geldig getal op.",

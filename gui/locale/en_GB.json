@@ -72,6 +72,11 @@
         }
       },
       "setup": {
+        "area_variation": {
+          "difference": {
+            "help": "Enter a negative or positive value for a relative action. A number is treated as an absolute value."
+          }
+        },
         "day_night_difference": {
           "help": "Amount to change between day and night.",
           "invalid": "Enter a valid number.",
