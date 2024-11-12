@@ -1170,7 +1170,11 @@ class terrariumEngine(object):
             # Check archiving/motion settings
             if webcam.archive["state"] not in ["disabled", ""]:
                 # Check light status
-                if webcam.archive["light"] not in ["ignore", ""] and light_state is not None and light_state != webcam.archive["light"]:
+                if (
+                    webcam.archive["light"] not in ["ignore", ""]
+                    and light_state is not None
+                    and light_state != webcam.archive["light"]
+                ):
                     webcamLogger.debug(
                         f'Webcam {webcam} will not archive based on light state: {light_state} vs {webcam.archive["light"]}'
                     )
@@ -1178,7 +1182,11 @@ class terrariumEngine(object):
                     return
 
                 # Check door status
-                if webcam.archive["door"] not in ["ignore", ""] and door_state is not None and webcam.archive["door"] != door_state:
+                if (
+                    webcam.archive["door"] not in ["ignore", ""]
+                    and door_state is not None
+                    and webcam.archive["door"] != door_state
+                ):
                     webcamLogger.debug(
                         f'Webcam {webcam} will not archive based on door state: {door_state} vs {webcam.archive["door"]}'
                     )
@@ -1224,7 +1232,9 @@ class terrariumEngine(object):
                         # Get the current light state first, as processing new image could take 10 sec. In that period the lights could have been turned on,
                         # where the picture is taken when the lights are off.
                         light_state = (
-                            "on" if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on else "off"
+                            "on"
+                            if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on
+                            else "off"
                         )
 
                         # Default state is that the doors are closed....

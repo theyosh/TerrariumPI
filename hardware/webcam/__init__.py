@@ -599,7 +599,7 @@ class terrariumWebcam(object):
             y = 20
             w = int(self.width / 2)
             h = 46
-            current_image = cv2.rectangle(current_image, (x, y), (x + w, y + h), (0, 0, 0), -1 )
+            current_image = cv2.rectangle(current_image, (x, y), (x + w, y + h), (0, 0, 0), -1)
 
         current_image = cv2.cvtColor(current_image, cv2.COLOR_BGR2GRAY)
         current_image = cv2.GaussianBlur(current_image, (21, 21), 0)
