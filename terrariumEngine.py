@@ -1160,7 +1160,7 @@ class terrariumEngine(object):
                 webcamLogger.info(f"Loaded {self.webcams[webcam.id]} in {time.time()-start:.2f} seconds.")
 
     def _update_webcams(self):
-        def __process_webcam(self, webcam, current_state, relays):
+        def __process_webcam(self, webcam, light_state, door_state, relays):
             start = time.time()
             if self.webcams[webcam.id].update(relays) == False:
                 return
@@ -1170,28 +1170,20 @@ class terrariumEngine(object):
             # Check archiving/motion settings
             if webcam.archive["state"] not in ["disabled", ""]:
                 # Check light status
-                if webcam.archive["light"] not in ["ignore", ""] and current_state != webcam.archive["light"]:
+                if webcam.archive["light"] not in ["ignore", ""] and light_state is not None and light_state != webcam.archive["light"]:
                     webcamLogger.debug(
-                        f'Webcam {webcam} will not archive based on light state: {current_state} vs {webcam.archive["light"]}'
+                        f'Webcam {webcam} will not archive based on light state: {light_state} vs {webcam.archive["light"]}'
                     )
                     webcamLogger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
                     return
 
                 # Check door status
-                if webcam.archive["door"] not in ["ignore", ""]:
-                    # Default state is that the doors are closed....
-                    current_state = (
-                        "close"
-                        if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].door_closed
-                        else "open"
+                if webcam.archive["door"] not in ["ignore", ""] and door_state is not None and webcam.archive["door"] != door_state:
+                    webcamLogger.debug(
+                        f'Webcam {webcam} will not archive based on door state: {door_state} vs {webcam.archive["door"]}'
                     )
-
-                    if webcam.archive["door"] != current_state:
-                        webcamLogger.debug(
-                            f'Webcam {webcam} will not archive based on door state: {current_state} vs {webcam.archive["door"]}'
-                        )
-                        webcamLogger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
-                        return
+                    webcamLogger.info(f"Updated webcam {webcam} in {time.time()-start:.2f} seconds.")
+                    return
 
                 if "motion" == webcam.archive["state"]:
                     newImage = self.webcams[webcam.id].motion_capture(
@@ -1226,11 +1218,22 @@ class terrariumEngine(object):
                     ],
                     key=lambda item: item.address,
                 ):
-                    # Get the current light state first, as processing new image could take 10 sec. In that period the lights could have been turned on,
-                    # where the picture is taken when the lights are off.
-                    current_state = (
-                        "on" if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on else "off"
-                    )
+                    light_state = door_state = None
+
+                    if webcam.enclosure is not None:
+                        # Get the current light state first, as processing new image could take 10 sec. In that period the lights could have been turned on,
+                        # where the picture is taken when the lights are off.
+                        light_state = (
+                            "on" if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].lights_on else "off"
+                        )
+
+                        # Default state is that the doors are closed....
+                        door_state = (
+                            "close"
+                            if webcam.enclosure is None or self.enclosures[webcam.enclosure.id].door_closed
+                            else "open"
+                        )
+
                     # Set the flash relays if selected
                     relays = (
                         []
@@ -1238,7 +1241,7 @@ class terrariumEngine(object):
                         else [self.relays[relay.id] for relay in webcam.flash if not relay.manual_mode]
                     )
                     # Start update in parallel
-                    pool.submit(__process_webcam, self, webcam, current_state, relays)
+                    pool.submit(__process_webcam, self, webcam, light_state, door_state, relays)
 
     def __load_existing_enclosures(self):
         self.enclosures = {}
