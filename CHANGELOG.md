@@ -2,6 +2,112 @@ Changelog
 =========
 
 
+4.12.1 (2024-11-14)
+-------------------
+
+**New**
+------
+
+- Add missing translatable strings. So they can now be translated. [#967](https://github.com/theyosh/TerrariumPI/issues/967).
+  [TheYOSH]
+- Add webcam archive cleanup. [#963](https://github.com/theyosh/TerrariumPI/issues/963). [TheYOSH]
+- Add webcam archive cleanup and fixed webcam notifications. [#963](https://github.com/theyosh/TerrariumPI/issues/963).
+  [TheYOSH]
+
+**Fixes**
+------
+
+- Fix documentation. [TheYOSH]
+- Fix python libraries. [TheYOSH]
+- Fix webcam motion detection with live streams. [#961](https://github.com/theyosh/TerrariumPI/issues/961). [TheYOSH]
+- Fix code issue. [TheYOSH]
+- Fix installer due to yanked cryptography library. [TheYOSH]
+- HTML fix. [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update requirements.txt. [TheYOSH]
+
+  Revert back python module
+- Update documentation libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Security update cryptography module. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update NodeJS library. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+
+**Other**
+------
+
+- New release post. [TheYOSH]
+- Ignore some more files to format. [TheYOSH]
+- Revert some wrong line wrapping. [TheYOSH]
+- Reformat setup text. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1117 of 1117 strings)
+- New Svelte GUI build. [TheYOSH]
+- Final webcam archive cleanup. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [TheYOSH]
+
+  Currently translated at 100.0% (1101 of 1101 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1101 of 1101 strings)
+- Translated using Weblate (German) [TheYOSH]
+
+  Currently translated at 100.0% (1101 of 1101 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 99.9% (1100 of 1101 strings)
+- Remove debug code. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [TheYOSH]
+
+  Currently translated at 100.0% (1097 of 1097 strings)
+- Translated using Weblate (Catalan) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (French (Belgium)) [TheYOSH]
+
+  Currently translated at 95.8% (1052 of 1097 strings)
+- Translated using Weblate (Portuguese) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (German) [TheYOSH]
+
+  Currently translated at 100.0% (1097 of 1097 strings)
+- Merge pull request [#964](https://github.com/theyosh/TerrariumPI/issues/964) from theyosh/dependabot/bundler/rexml-3.3.9.
+  [TheYOSH]
+
+  Bump rexml from 3.3.8 to 3.3.9
+- Bump rexml from 3.3.8 to 3.3.9. [dependabot[bot]]
+
+  Bumps [rexml](https://github.com/ruby/rexml) from 3.3.8 to 3.3.9.
+  - [Release notes](https://github.com/ruby/rexml/releases)
+  - [Changelog](https://github.com/ruby/rexml/blob/master/NEWS.md)
+  - [Commits](https://github.com/ruby/rexml/compare/v3.3.8...v3.3.9)
+
+  ---
+  updated-dependencies:
+  - dependency-name: rexml
+    dependency-type: indirect
+  ...
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+
+
 4.12.0 (2024-10-07)
 -------------------
 
@@ -22,6 +128,7 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update libraries. [TheYOSH]
 - More librarie updates. [TheYOSH]
