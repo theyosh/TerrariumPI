@@ -66,10 +66,10 @@ sensirion-i2c-sht==0.4.0
 bme680==2.0.0
 Adafruit-Blinka==8.47.0
 adafruit-circuitpython-sht31d==2.3.24
-SM8relind==1.0.2
-git+https://github.com/almottier/TapoP100.git
-git+https://github.com/SequentMicrosystems/4relind-rpi.git#subdirectory=python/4relind
+SM8relind==1.0.3
+SM4relind==1.0.3
 git+https://github.com/SequentMicrosystems/4relay-rpi.git#subdirectory=python/4relay
+git+https://github.com/almottier/TapoP100.git
 git+https://github.com/PiSupply/Bright-Pi
 
 # Calendar and utils
