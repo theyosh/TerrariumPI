@@ -14,8 +14,7 @@ image: false
 
 device_address: Physical GPIO pin number 1 - 40
 dimmer_frequency: 1500
-#device_url
-: https://shop.meross.com/collections/smart-power-strip
+#device_url: https://shop.meross.com/collections/smart-power-strip
 ---
 
 ## Information
