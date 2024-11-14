@@ -15,12 +15,14 @@ following settings:
 
 ### Mandatory
 
-Hardware : {{ page.device_hardware | default: page.title }}
+Hardware
+: {{ page.device_hardware | default: page.title }}
 
 Types {% assign types = page.device_types | sort_natural | join: ", " %} :
 {{types}}
 
-Address : {{ page.device_address }} {%if page.device_power_management %}This
+Address
+: {{ page.device_address }} {%if page.device_power_management %}This
 sensor does support ([**power
 management**]({% link _tabs/hardware.md %}#power-saving)) {% endif %}
 

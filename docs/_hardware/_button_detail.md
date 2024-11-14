@@ -8,9 +8,11 @@ following settings:
 
 ### Mandatory
 
-Hardware : {{ page.device_hardware | default: page.title }}
+Hardware
+: {{ page.device_hardware | default: page.title }}
 
-Address : {{ page.device_address }}
+Address
+: {{ page.device_address }}
 
 {% if page.calibration %}
 
@@ -18,6 +20,7 @@ Address : {{ page.device_address }}
 
 This is only available for light sensors.
 
-Capacitor value in µF : Enter the value of the capacitor {% endif %} Other
+Capacitor value in µF
+: Enter the value of the capacitor {% endif %} Other
 settings can be found at the [button
 setup]({% link _tabs/setup.md %}#doors--buttons) information

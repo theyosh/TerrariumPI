@@ -132,13 +132,20 @@ With the command `/help` you get some more options you can do with the Telegram
 service. Those are for now:
 
 ```console
-/start : This will start listening for notifications.
-/webcam [webcam_id] : will show the latest image of the webcam ID.
-/sensor [sensor_id] : will show the current sensor state. Sensor id is optional.
-/relay [relay_id] : will show the current relay state. Relay id is optional.
-/button [button_id] : will show the current button state. button id is optional.
-/enclosure [enclosure_id] : will show the current area state of the enclosure ID
-/status : will show the current system status.
+/start
+: This will start listening for notifications.
+/webcam [webcam_id]
+: will show the latest image of the webcam ID.
+/sensor [sensor_id]
+: will show the current sensor state. Sensor id is optional.
+/relay [relay_id]
+: will show the current relay state. Relay id is optional.
+/button [button_id]
+: will show the current button state. button id is optional.
+/enclosure [enclosure_id]
+: will show the current area state of the enclosure ID
+/status
+: will show the current system status.
 ```
 
 ### Traffic light

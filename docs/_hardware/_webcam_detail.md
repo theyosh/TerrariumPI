@@ -10,9 +10,11 @@ following settings:
 
 ### Mandatory
 
-Hardware : {{ page.device_hardware | default: page.title }}
+Hardware
+: {{ page.device_hardware | default: page.title }}
 
-Address : {{ page.device_address }}
+Address
+: {{ page.device_address }}
 
 Other settings can be found at the [webcam
 setup]({% link _tabs/setup.md %}#webcams) information

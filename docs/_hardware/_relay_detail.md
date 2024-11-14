@@ -15,9 +15,11 @@ following settings:
 
 ### Mandatory
 
-Hardware : {{ page.device_hardware | default: page.title }}
+Hardware
+: {{ page.device_hardware | default: page.title }}
 
-Address : {{ page.device_address }}
+Address
+: {{ page.device_address }}
 
 {% if page.dimmer_frequency %}
 
@@ -25,7 +27,8 @@ Address : {{ page.device_address }}
 
 This is only available for dimmers.
 
-Dimmer frequency in Hz : Default frequency: {{ page.dimmer_frequency }} Hz
+Dimmer frequency in Hz
+: Default frequency: {{ page.dimmer_frequency }} Hz
 
 {% endif %}
 
