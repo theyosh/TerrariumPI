@@ -14,3 +14,6 @@ page.
 
 Not all translations are done. Add missing translations
 [here](https://weblate.theyosh.nl/engage/terrariumpi/)! All help is appreciated.
+
+Current translation status:\
+[![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/svg-badge.svg)](https://weblate.theyosh.nl/engage/terrariumpi/)
