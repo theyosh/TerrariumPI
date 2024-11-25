@@ -47,7 +47,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
             self._device["last_update"] is None
             or (datetime.now() - self._device["last_update"]).total_seconds() > self.__UPDATE_TIMEOUT
         ):
-            logger.debug(f"Loading online weather data from source: {self.address}")
+            logger.info(f"Loading online weather data from source: {self.address}")
 
             if self._load_data():
                 # Convert values to the right unit values
@@ -71,6 +71,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
                     )
 
                 self._device["last_update"] = datetime.now()
+
             else:
                 logger.error(f"Error loading online weather data! Please check your source address: {self.address}.")
 
@@ -109,7 +110,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
             reload = self.address != str(value).strip(", ")
             self._device["address"] = str(value).strip(", ")
             if reload:
-                logger.debug(f"Reloading weather data due to changing weather source to: {self.address}")
+                logger.info(f"Reloading weather data due to changing weather source to: {self.address}")
                 self._device["last_update"] = None
                 self.update()
 

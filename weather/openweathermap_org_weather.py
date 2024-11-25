@@ -23,9 +23,8 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
         super().__init__(address, unit_values, language)
 
     def __load_general_data(self):
-        address = self.address + "&units=metric&lang=" + self._device["language"][0:2]
-        logger.debug("Loading weather source {}".format(address))
         start = time()
+        address = self.address + "&units=metric&lang=" + self._device["language"][0:2]
         data = terrariumUtils.get_remote_data(address)
         if data:
             self._data["city"] = data["name"]
@@ -37,7 +36,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
             address = terrariumUtils.parse_url(self.address.lower())
             self.__appid = address["query_params"]["appid"]
-            logger.info(f"Loaded basic weather data from source {address} in {time()-start:.2f} seconds.")
+            logger.info(f"Loaded basic weather data from source {self.address.lower()} in {time()-start:.2f} seconds.")
 
             return True
 

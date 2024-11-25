@@ -382,13 +382,11 @@ class terrariumEngine(object):
         if "weather_source" in self.settings:
             if "" != self.settings["weather_source"]:
                 try:
-                    start = time.time()
                     self.weather = terrariumWeather(self.settings["weather_source"], self.units, self.active_language)
                 except Exception as ex:
                     weatherLogger.error(f"Failed loading weather data: {ex}")
 
             elif self.weather is not None:
-                start = time.time()
                 self.weather.address = self.settings["weather_source"]
                 # Force an update, due to maybe changing speed units or temperature.... lazy fix... :(
                 self.weather.update()
