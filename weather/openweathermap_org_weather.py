@@ -25,6 +25,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
     def __load_general_data(self):
         address = self.address + "&units=metric&lang=" + self._device["language"][0:2]
         logger.debug("Loading weather source {}".format(address))
+        start = time()
         data = terrariumUtils.get_remote_data(address)
         if data:
             self._data["city"] = data["name"]
@@ -36,19 +37,21 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
             address = terrariumUtils.parse_url(self.address.lower())
             self.__appid = address["query_params"]["appid"]
+            logger.info(f"Loaded basic weather data from source {address} in {time()-start:.2f} seconds.")
 
             return True
 
         return False
 
     def __load_minimal_forecast_data(self):
-        data = terrariumUtils.get_remote_data(
-            "https://api.openweathermap.org/data/2.5/forecast?lat={}&lon={}&appid={}&units=metric&lang={}".format(
-                self._data["geo"]["lat"], self._data["geo"]["long"], self.__appid, self._device["language"][0:2]
-            )
+        start = time()
+        url = "https://api.openweathermap.org/data/2.5/forecast?lat={}&lon={}&appid={}&units=metric&lang={}".format(
+            self._data["geo"]["lat"], self._data["geo"]["long"], self.__appid, self._device["language"][0:2]
         )
+        data = terrariumUtils.get_remote_data(url)
 
         if not data:
+            logger.error("Failed loading minimal weather forecast data. Make sure your source address is correct!")
             return False
 
         # Reset data
@@ -87,12 +90,13 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
                     }
                 )
 
-        logger.info("Using Openweathermap Free API")
+        logger.info(f"Loaded minimal forecast data from source {url} in {time()-start:.2f} seconds.")
         self.__one_call_version = "free"
         return True
 
     def __load_forecast_data_one_call(self):
         data = None
+        start = time()
         if self.__one_call_version is None or self.__one_call_version == "3.0":
             data = terrariumUtils.get_remote_data(
                 "https://api.openweathermap.org/data/3.0/onecall?lat={}&lon={}&units=metric&exclude=minutely&appid={}&lang={}".format(
@@ -108,13 +112,12 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
             )
             if data:
                 self.__one_call_version = "2.5"
-                logger.info(f"Using Openweathermap One Call API {self.__one_call_version}")
 
         elif self.__one_call_version is None:
             self.__one_call_version = "3.0"
-            logger.info(f"Using Openweathermap One Call API {self.__one_call_version}")
 
         if not data:
+            logger.error("Failed loaded forecast data!")
             return False
 
         # Reset data
@@ -175,6 +178,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
                         }
                     )
 
+        logger.info(f"Loaded weather forecast with API {self.__one_call_version} in {time()-start} seconds")
         return True
 
     def __load_forecast_data(self):
