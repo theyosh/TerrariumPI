@@ -36,7 +36,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
 
             address = terrariumUtils.parse_url(self.address.lower())
             self.__appid = address["query_params"]["appid"]
-            logger.info(f"Loaded basic weather data from source {self.address.lower()} in {time()-start:.2f} seconds.")
+            logger.info(f"Loaded basic weather data in {time()-start:.2f} seconds.")
 
             return True
 
@@ -89,7 +89,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
                     }
                 )
 
-        logger.info(f"Loaded minimal forecast data from source {url} in {time()-start:.2f} seconds.")
+        logger.info(f"Loaded minimal forecast data in {time()-start:.2f} seconds.")
         self.__one_call_version = "free"
         return True
 

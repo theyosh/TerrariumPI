@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
 
-logger = terrariumLogging.logging.getLogger(__name__)
+logger = terrariumLogging.logging.getLogger("terrariumWeather")
 
 from abc import ABCMeta, abstractmethod
 import copy
@@ -47,7 +47,7 @@ class terrariumWeatherAbstract(metaclass=ABCMeta):
             self._device["last_update"] is None
             or (datetime.now() - self._device["last_update"]).total_seconds() > self.__UPDATE_TIMEOUT
         ):
-            logger.info(f"Loading online weather data from source: {self.address}")
+            logger.debug(f"Loading online weather data from source: {self.address}")
 
             if self._load_data():
                 # Convert values to the right unit values
