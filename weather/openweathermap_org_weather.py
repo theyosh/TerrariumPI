@@ -177,7 +177,7 @@ class terrariumOpenweathermap(terrariumWeatherAbstract):
                         }
                     )
 
-        logger.info(f"Loaded weather forecast with API {self.__one_call_version} in {time()-start} seconds")
+        logger.info(f"Loaded weather forecast with API {self.__one_call_version} in {time()-start:.2f} seconds")
         return True
 
     def __load_forecast_data(self):
