@@ -124,7 +124,8 @@ can't use bluetooth sensors.
 
 then you can run `docker compose up -d` to start the docker image. It could be
 that it needs a reboot. After that, you should be able to access TerrariumPI on
-the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
+the url `http://[raspberrypi]:8090`. [Continue with the
+setup]({% link _tabs/setup.md %})
 
 [All docker images](https://hub.docker.com/r/theyosh/terrariumpi/) can be found
 at Docker Hub.
@@ -178,7 +179,8 @@ sudo ./install.sh
 </video>
 
 After the installation is done, reboot once and you should be able to access
-TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the setup]({% link _tabs/setup.md %})
+TerrariumPI on the url `http://[raspberrypi]:8090`. [Continue with the
+setup]({% link _tabs/setup.md %})
 
 ## Upgrading
 

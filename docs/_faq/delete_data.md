@@ -14,7 +14,9 @@ In order to not have the problem of the 2 minutes watchdog timeout, you have to
 run TerrariumPI in debug mode. You can [stop
 TerrariumPI]({% link _faq/systemd.md %}#stop) as follows.
 
-When running in [debug mode]({% link _faq/debug.md %}), you can just go the sensor/relay/button
-and delete it. Now it does not matter how much time it takes. Just wait until done.
+When running in [debug mode]({% link _faq/debug.md %}), you can just go the
+sensor/relay/button and delete it. Now it does not matter how much time it
+takes. Just wait until done.
 
-If the deleting is done, stop the debug version of TerrariumPI and [start normally]({% link _faq/systemd.md %}#start).
+If the deleting is done, stop the debug version of TerrariumPI and [start
+normally]({% link _faq/systemd.md %}#start).

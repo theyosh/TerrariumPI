@@ -56,9 +56,9 @@ And a cool feature of the 1-wire system is that it does not require any setup.
 You can just scan the 1-wire bus, and use all sensors that are available.
 
 The next actions was to toggle relays. So I started with [basic
-relays]({% link _hardware/ftdi_relay.md %}). And hooked up some lights to it. Later
-on, a small heat mat. And those relays where connected through USB. Because that
-was easier then using GPIO pins.
+relays]({% link _hardware/ftdi_relay.md %}). And hooked up some lights to it.
+Later on, a small heat mat. And those relays where connected through USB.
+Because that was easier then using GPIO pins.
 
 And all was made in [Python](https://www.python.org/) in order to learn a new
 language. Using INI like config files for configuration.
@@ -125,8 +125,8 @@ but never knowing that the issue counter will reach **900+**
 ![Hack a Day publication](/assets/img/publications/Pubication_Hackaday-TerrariumPI-21-11-2017.webp){:
 .right width="150" }In the end of 2017
 [some magazines made a publication](/TerrariumPI/tags/publication/) about
-TerrariumPI. Again, I did not expect this, nor I was aware of it. Only [Hack
-a Day]({% link _posts/2017-11-21-hack_a_day.md %}) send me a nice email warning
+TerrariumPI. Again, I did not expect this, nor I was aware of it. Only [Hack a
+Day]({% link _posts/2017-11-21-hack_a_day.md %}) send me a nice email warning
 that the GUI could be a bit busier as they where about the publish a story about
 TerrariumPI. It was very nice of them to give a heads up. :thumbsup:
 

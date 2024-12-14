@@ -45,8 +45,8 @@ height="200" }
 play the songs that are shown in the list. Make sure you copy and past the song
 name and put it in the subject of the message.
 
-Connect the buzzer to a GPIO pin and enter the **[physical
-pin number]({% link _tabs/hardware.md %}#gpio)** as address.
+Connect the buzzer to a GPIO pin and enter the **[physical pin
+number]({% link _tabs/hardware.md %}#gpio)** as address.
 
 ### Display
 

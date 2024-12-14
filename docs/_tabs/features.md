@@ -24,7 +24,8 @@ and a full sun area based on the same climate. Look at the variation tab to set
 this up.
 
 But you can even enter an external JSON source for climate mirroring. Look [How
-to use remote data FAQ]({% link _faq/remote_data.md %}) how to add the correct url.
+to use remote data FAQ]({% link _faq/remote_data.md %}) how to add the correct
+url.
 
 ## Multilingual
 
@@ -63,8 +64,8 @@ There is a difference in how the data is encrypted.
 
 The admin password is encrypted one way in a hash, and that hash is checked with
 the entered login credentials. This password cannot be reverted back to plain
-text if you loose it. [But you can
-reset it]({% link _faq/reset_authentication.md %})
+text if you loose it. [But you can reset
+it]({% link _faq/reset_authentication.md %})
 
 For encryption we use [bcrypt](https://en.wikipedia.org/wiki/Bcrypt).
 
@@ -82,4 +83,5 @@ salt is unique and locked to your Raspberry PI.
 ## Docker
 
 You can also install a Docker image to make the installation easier. More
-information can be found at [installation page]({% link _tabs/install.md %}#docker)
+information can be found at [installation
+page]({% link _tabs/install.md %}#docker)

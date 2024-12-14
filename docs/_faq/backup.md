@@ -20,7 +20,7 @@ software. So here is a list of files that should be saved at a regular basis:
 Due to the nature of TerrariumPI, the database can get corrupted during creating
 a backup. This is due the fact that at least every 30 seconds the database is
 updated. And that could case that the latest data is not backup-ed correctly.
-This can be fixed by using the [database
-fix script]({% link _faq/malformed_database.md %}). After fixing you will
-probably miss about the last 30 seconds till 30 minutes of data. Which is mostly
-sensor data.
+This can be fixed by using the [database fix
+script]({% link _faq/malformed_database.md %}). After fixing you will probably
+miss about the last 30 seconds till 30 minutes of data. Which is mostly sensor
+data.

@@ -24,6 +24,5 @@ A backup of the broken database is left at `data/terrariumpi.db.broken`. You can
 delete this database when TerrariumPI is running again.
 `rm data/terrariumpi.db.broken`
 
-If this happens a lot, you could look at the FAQ item: [Tune
-database settings]({% link _faq/tune_database.md %}) to improve the database
-storage.
+If this happens a lot, you could look at the FAQ item: [Tune database
+settings]({% link _faq/tune_database.md %}) to improve the database storage.

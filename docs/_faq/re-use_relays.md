@@ -52,7 +52,8 @@ symlink.
 ### Adding the new relays to TerrariumPI
 
 Now add the new scripts as new [script
-relay]({% link _hardware/script_relay.md %}) to TerrariumPI. Use as address `/home/pi/TerrariumPI/scripts/duplicate_switch.py`.
+relay]({% link _hardware/script_relay.md %}) to TerrariumPI. Use as address
+`/home/pi/TerrariumPI/scripts/duplicate_switch.py`.
 
 But here, do not enter the power and water flow values. Else the amount of used
 power and water will be counted **double**. Which is not correct.
