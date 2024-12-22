@@ -360,7 +360,10 @@
               })}"
             />
           </div>
-          <div class="col-6 col-sm-6 col-md-6 col-lg-2" class:d-none="{!(hardware_type === 'chirp' && sensor_type === 'moisture')}">
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-2"
+            class:d-none="{!(hardware_type === 'chirp' && sensor_type === 'moisture')}"
+          >
             <Field
               type="number"
               name="calibration.chirp_min_moist"
@@ -377,7 +380,10 @@
               })}"
             />
           </div>
-          <div class="col-6 col-sm-6 col-md-6 col-lg-2" class:d-none="{!(hardware_type === 'chirp' && sensor_type === 'moisture')}">
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-2"
+            class:d-none="{!(hardware_type === 'chirp' && sensor_type === 'moisture')}"
+          >
             <Field
               type="number"
               name="calibration.chirp_max_moist"
