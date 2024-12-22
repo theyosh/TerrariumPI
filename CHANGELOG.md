@@ -2,6 +2,59 @@ Changelog
 =========
 
 
+4.12.2 (2024-12-22)
+-------------------
+
+**New**
+------
+
+- Add release 4.12.2 post. [TheYOSH]
+- Add some weather logging. [TheYOSH]
+
+**Fixes**
+------
+
+- Format fix. [TheYOSH]
+
+**Updates**
+------
+
+- Update version number to 4.12.2. [TheYOSH]
+- Update documentation libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update weather logging. [TheYOSH]
+- Update libraries. [TheYOSH]
+
+**Other**
+------
+
+- New Svelte GUI build. [TheYOSH]
+- Show extra calibration options for Chirp sensor [#975](https://github.com/theyosh/TerrariumPI/issues/975). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Finalize weather logging. [TheYOSH]
+- Merge pull request [#969](https://github.com/theyosh/TerrariumPI/issues/969) from
+  theyosh/dependabot/npm_and_yarn/sveltejs/kit-2.8.3. [TheYOSH]
+
+  Bump [@sveltejs/kit](https://github.com/sveltejs/kit) from 2.8.2 to 2.8.3
+- Bump [@sveltejs/kit](https://github.com/sveltejs/kit) from 2.8.2 to 2.8.3. [dependabot[bot]]
+
+  Bumps [[@sveltejs/kit](https://github.com/sveltejs/kit/tree/HEAD/packages/kit)](https://github.com/sveltejs/kit](https://github.com/sveltejs/kit/tree/HEAD/packages/kit)) from 2.8.2 to 2.8.3.
+  - [Release notes](https://github.com/sveltejs/kit/releases)
+  - [Changelog](https://github.com/sveltejs/kit/blob/main/packages/kit/CHANGELOG.md)
+  - [Commits](https://github.com/sveltejs/kit/commits/[@sveltejs/kit@2.8.3/packages/kit)](https://github.com/sveltejs/kit@2.8.3/packages/kit))
+
+  ---
+  updated-dependencies:
+  - dependency-name: "[@sveltejs/kit"](https://github.com/sveltejs/kit")
+    dependency-type: indirect
+  ...
+- New Svelte GUI build. [TheYOSH]
+
+
 4.12.1 (2024-11-14)
 -------------------
 
@@ -27,6 +80,7 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update NodeJS libraries. [TheYOSH]
 - Update requirements.txt. [TheYOSH]
