@@ -16,6 +16,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
     URL = "^\d{1,3}\.\d{1,3}\.\d{1,3}(,\d{1,3})?$"
 
     def _load_hardware(self):
+        self._device["device"] = None
         # Input format should be either:
         # - [IP],[POWER_SWITCH_NR]
 
@@ -24,12 +25,15 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
         self.__asyncio = terrariumAsync()
 
         address = self._address
-        if len(address) == 1:
-            self._device["device"] = SmartPlug(address[0])
-            self._device["switch"] = 0
-        else:
-            self._device["device"] = SmartStrip(address[0])
-            self._device["switch"] = int(address[1]) - 1
+        try:
+            if len(address) == 1:
+                self._device["device"] = SmartPlug(address[0])
+                self._device["switch"] = 0
+            else:
+                self._device["device"] = SmartStrip(address[0])
+                self._device["switch"] = int(address[1]) - 1
+        except Exception as ex:
+            logger.error(f"Error loading {self} at address {address[0]}: {ex}")
 
         return self._device["device"]
 
