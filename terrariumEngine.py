@@ -28,6 +28,7 @@ from pathlib import Path
 from time import sleep
 from packaging.version import Version
 from pyfancy.pyfancy import pyfancy
+from func_timeout import func_timeout, FunctionTimedOut
 
 from pony import orm
 from terrariumDatabase import init as init_db, db, Setting, Sensor, Relay, Button, Webcam, Enclosure
@@ -147,7 +148,11 @@ class terrariumEngine(object):
         self.__load_existing_sensors()
 
         logger.info("Scanning for new sensors ...")
-        self.scan_new_sensors()
+        try:
+            func_timeout(30, self.scan_new_sensors)
+        except FunctionTimedOut:
+            logger.warning(f"Scanning for new sensors timed out after 30 seconds.")
+
         logger.info(f"Loaded {len(self.sensors)} sensors in {time.time()-start:.2f} seconds.")
 
         # Loading relays
@@ -156,7 +161,11 @@ class terrariumEngine(object):
         self.__load_existing_relays()
 
         logger.info("Scanning for new relays ...")
-        self.scan_new_relays()
+        try:
+            func_timeout(30, self.scan_new_relays)
+        except FunctionTimedOut:
+            logger.warning(f"Scanning for new relays timed out after 30 seconds.")
+
         logger.info(f"Loaded {len(self.relays)} relays in {time.time()-start:.2f} seconds.")
 
         # Loading buttons....
@@ -583,7 +592,6 @@ class terrariumEngine(object):
                         f"Loaded sensor {self.sensors[sensor.id]} with value {value:.2f}{self.units[sensor.type]} in {time.time()-start:.2f} seconds."
                     )
 
-    # -=NEW=-
     def scan_new_sensors(self):
         for sensor in terrariumSensor.scan_sensors():
             if sensor.id not in self.settings["exclude_ids"] and sensor.id not in self.sensors:
