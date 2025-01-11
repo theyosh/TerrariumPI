@@ -151,7 +151,7 @@ class terrariumEngine(object):
         try:
             func_timeout(30, self.scan_new_sensors)
         except FunctionTimedOut:
-            logger.warning(f"Scanning for new sensors timed out after 30 seconds.")
+            logger.warning("Scanning for new sensors timed out after 30 seconds.")
 
         logger.info(f"Loaded {len(self.sensors)} sensors in {time.time()-start:.2f} seconds.")
 
@@ -164,7 +164,7 @@ class terrariumEngine(object):
         try:
             func_timeout(30, self.scan_new_relays)
         except FunctionTimedOut:
-            logger.warning(f"Scanning for new relays timed out after 30 seconds.")
+            logger.warning("Scanning for new relays timed out after 30 seconds.")
 
         logger.info(f"Loaded {len(self.relays)} relays in {time.time()-start:.2f} seconds.")
 
