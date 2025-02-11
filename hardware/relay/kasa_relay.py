@@ -94,7 +94,13 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
             devices = await Discover.discover()
             for ip_address in devices:
                 device = devices[ip_address]
-                await device.update()
+
+                try:
+                    await device.update()
+                except Exception as ex:
+                    logger.warning(ex)
+                    continue
+
                 if device.is_strip:
                     for counter in range(1, len(device.children) + 1):
                         found_devices.append(
