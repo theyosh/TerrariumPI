@@ -59,6 +59,7 @@ RUN  sed -i 's/pip==.*/pip==24.0/g' requirements.txt \
   && sed -i 's/icalevents==.*/icalevents==0.1.25/g' requirements.txt \
   && sed -i 's/packaging==.*/packaging==24.0/g' requirements.txt \
   && sed -i 's/pyfiglet==.*/pyfiglet==0.8.post1/g' requirements.txt \
+  && sed -i 's/luma.oled==.*/luma.oled==3.13.0/g' requirements.txt \
   && sed -i 's/python-telegram-bot\[socks,http2\]==.*/python-telegram-bot\[socks,http2\]==20.3/g' requirements.txt \
   && sed -i 's/adafruit-circuitpython-typing==.*/adafruit-circuitpython-typing==1.10.1/g' requirements.txt \
   && sed -i 's/pydantic==.*/pydantic==1.10.9/g' requirements.txt \

@@ -1,6 +1,6 @@
-pip==24.2
-setuptools==74.1.2
-wheel==0.44.0
+pip==25.0.1
+setuptools==75.8.0
+wheel==0.45.1
 
 # Database
 pony==0.7.19
@@ -12,7 +12,7 @@ git+https://github.com/gbstack/ffprobe-python
 pyalsaaudio==0.11.0
 
 # Webserver packages
-gevent==24.2.1
+gevent==24.11.1
 bottle==0.13.2
 bottle_websocket==0.2.9
 jinja2==3.1.5
@@ -23,7 +23,7 @@ bcrypt==4.2.1
 cryptography==44.0.1
 
 # Webcam packages
-Pillow==10.4.0
+Pillow==11.1.0
 # !! Check first: https://piwheels.org/project/numpy/ !!
 # Version 2 needs to be supported for all sub projects. Do not upgrade !!
 numpy==1.26.4
@@ -64,8 +64,8 @@ sparkfun-qwiic-relay==0.0.2
 sensirion-i2c-driver==1.0.0
 sensirion-i2c-sht==0.4.0
 bme680==2.0.0
-Adafruit-Blinka==8.47.0
-adafruit-circuitpython-sht31d==2.3.25
+Adafruit-Blinka==8.53.0
+adafruit-circuitpython-sht31d==2.3.26
 SM8relind==1.0.3
 SM4relind==1.0.3
 git+https://github.com/SequentMicrosystems/4relay-rpi.git#subdirectory=python/4relay
@@ -73,9 +73,9 @@ git+https://github.com/almottier/TapoP100.git
 git+https://github.com/PiSupply/Bright-Pi
 
 # Calendar and utils
-icalevents==0.1.27
+icalevents==0.2.0
 psutil==6.1.1
-packaging==24.1
+packaging==24.2
 func_timeout==4.3.5
 sdnotify==0.3.2
 
@@ -86,14 +86,14 @@ ansi2html==1.9.2
 
 # Notification packages
 emails==0.6
-luma.oled==3.13.0
+luma.oled==3.14.0
 i2c_lcd==0.1.0
-python-telegram-bot[socks,http2]==21.5
+python-telegram-bot[socks,http2]==21.10
 
 # Overrule versions
 # Force to latest version
 # Version 2 will brake meross-iot package
 paho-mqtt==1.6.1
-icalendar==5.0.13
-adafruit-circuitpython-typing==1.11.0
-pydantic==2.8.2
+icalendar==6.1.1
+adafruit-circuitpython-typing==1.11.2
+pydantic==2.10.6
