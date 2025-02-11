@@ -56,9 +56,11 @@ if [ "${OS}" == "buster" ]; then
 
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==22.10.2}"
   PIP_MODULES="${PIP_MODULES//bcrypt==+([^ ])/bcrypt==4.1.3}"
+  PIP_MODULES="${PIP_MODULES//cryptography==+([^ ])/cryptography==44.0.1}"
 
   PIP_MODULES="${PIP_MODULES//Pillow==+([^ ])/Pillow==9.5.0}"
   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
+  PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.6.0.66}"
 
   PIP_MODULES="${PIP_MODULES//gpiozero==+([^ ])/gpiozero==1.6.2}"
   PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.31.0}"
@@ -75,8 +77,8 @@ if [ "${OS}" == "buster" ]; then
 
   PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==20.3}"
 
-  PIP_MODULES="${PIP_MODULES//pydantic==+([^ ])/pydantic==1.10.9}"
   PIP_MODULES="${PIP_MODULES//adafruit-circuitpython-typing==+([^ ])/adafruit-circuitpython-typing==1.10.1}"
+  PIP_MODULES="${PIP_MODULES//pydantic==+([^ ])/pydantic==1.10.9}"
 
   OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
 
