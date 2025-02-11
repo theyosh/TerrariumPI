@@ -22,6 +22,7 @@ import copy
 import statistics
 import sdnotify
 import gettext
+import socket
 
 from concurrent import futures
 from pathlib import Path
@@ -190,7 +191,7 @@ class terrariumEngine(object):
 
         self.motd()
 
-        startup_message = f'TerrariumPI {self.version} is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-self.starttime:.2f} seconds.'
+        startup_message = f'TerrariumPI {self.version} is up and running at address: http://{socket.getfqdn()}:{self.settings["port"]} in {time.time()-self.starttime:.2f} seconds.'
         logger.info(startup_message)
         self.notification.broadcast(startup_message, startup_message, self.settings["profile_image"])
 
