@@ -5,7 +5,7 @@
 FROM gcc:10-bullseye as sispmctl_builder
 ARG SISPMCTL_VERSION="4.12"
 WORKDIR /sispmctl
-RUN apt-get update \
+RUN  apt-get update \
   && apt-get install -y --no-install-recommends libusb-dev \
   && wget https://sourceforge.net/projects/sispmctl/files/sispmctl/sispmctl-${SISPMCTL_VERSION}/sispmctl-${SISPMCTL_VERSION}.tar.gz/download -O sispmctl-${SISPMCTL_VERSION}.tar.gz \
   && tar zxvf sispmctl-${SISPMCTL_VERSION}.tar.gz --strip 1 \
@@ -27,7 +27,7 @@ ENV PIP_DEFAULT_TIMEOUT=100 \
 ENV PATH="/opt/venv/bin:$PATH"
 
 # Some strange DNS issues with installing PGP keys. keyserver.ubuntu.com => 185.125.188.26
-RUN apt-get update \
+RUN  apt-get update \
   && apt-get install -y --no-install-recommends gnupg \
   && echo "deb http://raspbian.raspberrypi.org/raspbian/ bullseye main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list \
   && echo "deb http://archive.raspberrypi.org/debian/ bullseye main" >> /etc/apt/sources.list.d/raspberrypi.list \
@@ -52,7 +52,7 @@ RUN  sed -i 's/paho-mqtt==.*//g' requirements.txt \
 
 WORKDIR /TerrariumPI
 # Just clone the libraries, ignore docker cache...
-RUN git clone https://github.com/ageir/chirp-rpi.git --depth 1 "3rdparty/chirp-rpi" \
+RUN  git clone https://github.com/ageir/chirp-rpi.git --depth 1 "3rdparty/chirp-rpi" \
   && git clone https://github.com/perryflynn/energenie-connect0r.git --depth 1 "3rdparty/energenie-connect0r" \
   && git clone https://github.com/SequentMicrosystems/relay8-rpi.git --depth 1 "3rdparty/relay8-rpi" \
   && git clone https://github.com/AtlasScientific/Raspberry-Pi-sample-code.git --depth 1 "3rdparty/AtlasScientific" \
@@ -95,13 +95,13 @@ COPY --from=python_builder /opt/venv /opt/venv
 COPY --from=python_builder /TerrariumPI/3rdparty /TerrariumPI/3rdparty
 COPY --from=sourcecode /TerrariumPI /TerrariumPI
 
-RUN rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
+RUN  rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
   && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so \
   && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so.0 \
   && echo "/opt/vc/lib" > /etc/ld.so.conf.d/00-vmcs.conf \
   && ldconfig
 
-RUN apt-get update \
+RUN  apt-get update \
   && apt-get full-upgrade -y --no-install-recommends \
   && apt-get install -y --no-install-recommends sudo netcat-openbsd procps bluez pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libopenblas0 libgfortran5 libraspberrypi-bin ${JAVA} \
   && apt-get --purge autoremove -y \
