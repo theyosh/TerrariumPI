@@ -58,9 +58,10 @@ And all this is controlled with a nice web interface with
    2. [New hardware](#new-hardware)
 6. [Remote data](#remote-data)
 7. [Contributors](#contributors)
-8. [Screenshots](#screenshots)
-9. [Testing](#testing)
-10. [About](#about)
+8. [Star history](#star-history)
+9. [Screenshots](#screenshots)
+10. [Testing](#testing)
+11. [About](#about)
 
 ## Features
 
@@ -286,6 +287,10 @@ more information is here:
 ## Contributors
 
 ![GitHub Contributors Image](https://contrib.rocks/image?repo=theyosh/TerrariumPI)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=theyosh/TerrariumPI&type=Date)](https://star-history.com/#theyosh/TerrariumPI&Date)
 
 ## Screenshots
 
