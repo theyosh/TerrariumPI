@@ -28,6 +28,7 @@ url: 'https://theyosh.github.io'
 
 feed:
   disable_in_development: true
+  posts_limit: 999
 
 author: theyosh
 
