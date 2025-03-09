@@ -24,4 +24,6 @@ So this message can be ignored.
   from cryptography.hazmat.backends import default_backend
 ```
 
-This is a warning that in the next update of Cryptography, python 3.7 is not supported anymore. This impacts only old buster OS. For now, we can still use it.
+This is a warning that in the next update of Cryptography, python 3.7 is not
+supported anymore. This impacts only old buster OS. For now, we can still use
+it.
