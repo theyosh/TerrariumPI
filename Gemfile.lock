@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (8.0.1)
+    activesupport (8.0.2)
       base64
       benchmark (>= 0.3)
       bigdecimal
@@ -127,7 +127,7 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.6.6)
     mercenary (0.4.0)
-    minitest (5.25.4)
+    minitest (5.25.5)
     nokogiri (1.18.3-x86_64-linux-gnu)
       racc (~> 1.4)
     parallel (1.26.3)
