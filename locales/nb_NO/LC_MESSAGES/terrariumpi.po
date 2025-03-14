@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2025-03-14 23:27+0000\n"
+"PO-Revision-Date: 2025-03-15 01:27+0000\n"
 "Last-Translator: Mkorneli <mk@nessu.no>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
 "terrariumpi/backend/nb_NO/>\n"
@@ -19,16 +19,12 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
-#, fuzzy
-#| msgid "Light"
 msgid "Lighting"
 msgstr "Lys"
 
 #: terrariumArea.py:38
-#, fuzzy
-#| msgid "Settings"
 msgid "Heating"
-msgstr "Innstillinger"
+msgstr "Varme"
 
 #: terrariumArea.py:44
 msgid "Cooling"
@@ -39,8 +35,6 @@ msgid "Humidity"
 msgstr "Luftfuktighet"
 
 #: terrariumArea.py:56
-#, fuzzy
-#| msgid "Water tank"
 msgid "Water tank"
 msgstr "Vanntank"
 
@@ -57,8 +51,6 @@ msgid "Conductivity"
 msgstr "Ledningsevne"
 
 #: terrariumArea.py:80
-#, fuzzy
-#| msgid "Fertility"
 msgid "Fertility"
 msgstr "Fruktbarhet"
 
@@ -71,124 +63,96 @@ msgid "pH"
 msgstr "pH"
 
 #: terrariumEngine.py:54
-#, fuzzy
-#| msgid "Temperature"
 msgid "temperature"
-msgstr "Temperatur"
+msgstr "temperatur"
 
 #: terrariumEngine.py:55
-#, fuzzy
-#| msgid "Distance"
 msgid "distance"
-msgstr "Avstand"
+msgstr "avstand"
 
 #: terrariumEngine.py:56
 msgid "altitude"
-msgstr ""
+msgstr "høyde"
 
 #: terrariumEngine.py:57
 msgid "pressure"
-msgstr ""
+msgstr "trykk"
 
 #: terrariumEngine.py:58
-#, fuzzy
-#| msgid "Humidity"
 msgid "humidity"
-msgstr "Luftfuktighet"
+msgstr "luftfuktighet"
 
 #: terrariumEngine.py:59
-#, fuzzy
-#| msgid "Moisture"
 msgid "moisture"
-msgstr "Fuktighet"
+msgstr "fuktighet"
 
 #: terrariumEngine.py:60
-#, fuzzy
-#| msgid "Conductivity"
 msgid "conductivity"
-msgstr "Ledningsevne"
+msgstr "ledningsevne"
 
 #: terrariumEngine.py:61
 msgid "ph"
-msgstr ""
+msgstr "ph"
 
 #: terrariumEngine.py:62
-#, fuzzy
-#| msgid "Night"
 msgid "light"
-msgstr "Natt"
+msgstr "lys"
 
 #: terrariumEngine.py:63
 msgid "uva"
-msgstr ""
+msgstr "uva"
 
 #: terrariumEngine.py:64
 msgid "uvb"
-msgstr ""
+msgstr "uvb"
 
 #: terrariumEngine.py:65
 msgid "uvi"
-msgstr ""
+msgstr "uvi"
 
 #: terrariumEngine.py:66
-#, fuzzy
-#| msgid "Fertility"
 msgid "fertility"
-msgstr "Fruktbarhet"
+msgstr "fruktbarhet"
 
 #: terrariumEngine.py:67
 msgid "co2"
-msgstr ""
+msgstr "co2"
 
 #: terrariumEngine.py:68
-#, fuzzy
-#| msgid "Volume"
 msgid "volume"
-msgstr "Volum"
+msgstr "volum"
 
 #: terrariumEngine.py:71
-#, fuzzy
-#| msgid "Volume"
 msgid "water_volume"
-msgstr "Volum"
+msgstr "Vannmengde"
 
 #: terrariumEngine.py:73
-#, fuzzy
-#| msgid "Water tank"
 msgid "watertank"
-msgstr "Vanntank"
+msgstr "vanntank"
 
 #: terrariumEngine.py:74
-#, fuzzy
-#| msgid "Wind speed"
 msgid "windspeed"
-msgstr "Vindhastighet"
+msgstr "vindhastighet"
 
 #: terrariumEngine.py:75
 msgid "water_flow"
-msgstr ""
+msgstr "vann_flyt"
 
 #: terrariumEngine.py:76
 msgid "wattage"
-msgstr ""
+msgstr "wattforbruk"
 
 #: terrariumEngine.py:77
-#, fuzzy
-#| msgid "Pi power usage in W"
 msgid "powerusage"
-msgstr "Pi strømforbruk i W"
+msgstr "Pi strømforbruk"
 
 #: terrariumEngine.py:1187
-#, fuzzy
-#| msgid "Uptime"
 msgid "Up time"
 msgstr "Oppetid"
 
 #: terrariumEngine.py:1193
-#, fuzzy
-#| msgid "System log"
 msgid "System load"
-msgstr "Systemlogg"
+msgstr "Systemlast"
 
 #: terrariumEngine.py:1199
 msgid "CPU Temperature"
@@ -223,40 +187,28 @@ msgid "Watt"
 msgstr "Watt"
 
 #: terrariumEngine.py:1409
-#, fuzzy
-#| msgid "Last update"
 msgid "last update"
-msgstr "Siste oppdatering"
+msgstr "siste oppdatering"
 
 #: terrariumNotification.py:41
-#, fuzzy
-#| msgid "Local source"
 msgid "Local date"
-msgstr "Lokal kilde"
+msgstr "Lokal dato"
 
 #: terrariumNotification.py:42
-#, fuzzy
-#| msgid "Date and time"
 msgid "Local date, day and month"
-msgstr "Dato og tid"
+msgstr "Lokal dato, dag og måned"
 
 #: terrariumNotification.py:43
-#, fuzzy
-#| msgid "Local source"
 msgid "Local time"
-msgstr "Lokal kilde"
+msgstr "Lokal tid"
 
 #: terrariumNotification.py:44
-#, fuzzy
-#| msgid "Date and time"
 msgid "Local time, hours and minutes"
-msgstr "Dato og tid"
+msgstr "Lokal tid, time og minutter"
 
 #: terrariumNotification.py:45
-#, fuzzy
-#| msgid "Date and time"
 msgid "Local date and time"
-msgstr "Dato og tid"
+msgstr "Lokal dato og tid"
 
 #: terrariumNotification.py:53
 msgid "Authentication login error"
@@ -264,70 +216,52 @@ msgstr "Autentiseringsfeil"
 
 #: terrariumNotification.py:55
 msgid "IP of the wrong login attempt"
-msgstr ""
+msgstr "IP'en til feil innloggingsforsøk"
 
 #: terrariumNotification.py:56
-#, fuzzy
-#| msgid "Username"
 msgid "Used username"
-msgstr "Brukernavn"
+msgstr "Brukt brukernavn"
 
 #: terrariumNotification.py:57
-#, fuzzy
-#| msgid "New admin password"
 msgid "Used password"
-msgstr "Nytt admin passord"
+msgstr "Brukt passord"
 
 #: terrariumNotification.py:63
-#, fuzzy
-#| msgid "System log"
 msgid "System warning"
-msgstr "Systemlogg"
+msgstr "Systemadvarsel"
 
 #: terrariumNotification.py:65
-#, fuzzy
-#| msgid "No warning messages"
 msgid "Warning message"
-msgstr "Ingen advarsler"
+msgstr "advarselsmelding"
 
 #: terrariumNotification.py:71
-#, fuzzy
-#| msgid "System log"
 msgid "System error"
-msgstr "Systemlogg"
+msgstr "Systemfeil"
 
 #: terrariumNotification.py:73 terrariumNotification.py:103
-#, fuzzy
-#| msgid "No error messages"
 msgid "Error message"
-msgstr "Ingen feilmeldinger"
+msgstr "Feilmelding"
 
 #: terrariumNotification.py:79
-#, fuzzy
-#| msgid "System status"
 msgid "System summary"
-msgstr "Systemstatus"
+msgstr "Systemoppsummering"
 
 #: terrariumNotification.py:81
 msgid "System uptime in human readable format"
-msgstr ""
+msgstr "Systemoppetid i menneskeleselig format"
 
 #: terrariumNotification.py:82
-#, fuzzy
-#| msgid "System log"
 msgid "System load last minute"
-msgstr "Systemlogg"
+msgstr "Systemlast siste minutt"
 
 #: terrariumNotification.py:83 terrariumNotification.py:85
 #: terrariumNotification.py:90 terrariumNotification.py:133
 msgid "True if there is an alarm"
-msgstr ""
+msgstr "Sann hvis det er en alarm"
 
 #: terrariumNotification.py:84
-#, fuzzy
-#| msgid "CPU Temperature"
 msgid "System CPU temperature"
-msgstr "CPU Temperatur"
+msgstr "System CPU Temperatur"
 
 #: terrariumNotification.py:86
 msgid "Storage usage"
@@ -339,61 +273,47 @@ msgstr "Minnebruk"
 
 #: terrariumNotification.py:88
 msgid "Average of [sensor type] (ex. temperature)"
-msgstr ""
+msgstr "Gjennomsnitt av [sensor type] (f.eks temeratur)"
 
 #: terrariumNotification.py:89 terrariumNotification.py:136
-#, fuzzy
-#| msgid "Sensor temperature"
 msgid "Sensor type unit value"
-msgstr "Sensor temperatur"
+msgstr "Sensortype verdienhet"
 
 #: terrariumNotification.py:91
-#, fuzzy
-#| msgid "Pi power usage in W"
 msgid "Current power usage"
-msgstr "Pi strømforbruk i W"
+msgstr "Nåværende strømforbruk"
 
 #: terrariumNotification.py:92
-#, fuzzy
-#| msgid "Pi power usage in W"
 msgid "Max power usage"
-msgstr "Pi strømforbruk i W"
+msgstr "Maks strømforbruk"
 
 #: terrariumNotification.py:93
-#, fuzzy
-#| msgid "Current value"
 msgid "Current water flow"
-msgstr "Nåværende verdi"
+msgstr "Nåværende vannføring"
 
 #: terrariumNotification.py:94 terrariumNotification.py:163
-#, fuzzy
-#| msgid "Water flow in L/m"
 msgid "Max water flow"
-msgstr "Vannføring i L/m"
+msgstr "Maks vannføring"
 
 #: terrariumNotification.py:95
 msgid "Number of relays active"
-msgstr ""
+msgstr "Antall aktive reléer"
 
 #: terrariumNotification.py:101
 msgid "System to slow with updates (warning)"
-msgstr ""
+msgstr "Systemet er for treg med oppdateringer (advarsel)"
 
 #: terrariumNotification.py:104
-#, fuzzy
-#| msgid "Changes only"
 msgid "Duration in seconds that are short"
-msgstr "Kun endring"
+msgstr "Varighet i sekunder er for kort"
 
 #: terrariumNotification.py:105
-#, fuzzy
-#| msgid "Duration in seconds"
 msgid "The update duration in seconds"
-msgstr "Varighet i sekunder"
+msgstr "Oppdateringsvarighet i sekunder"
 
 #: terrariumNotification.py:106
 msgid "The max update duration"
-msgstr ""
+msgstr "Maks oppdateringsvarighet"
 
 #: terrariumNotification.py:107
 msgid "Amount of times to late with updates"
@@ -414,16 +334,12 @@ msgstr "ID"
 
 #: terrariumNotification.py:123 terrariumNotification.py:159
 #: terrariumNotification.py:190
-#, fuzzy
-#| msgid "Hardware"
 msgid "Hardware type"
-msgstr "Maskinvare"
+msgstr "Maskinvaretype"
 
 #: terrariumNotification.py:124
-#, fuzzy
-#| msgid "Sensor ph"
 msgid "Sensor type"
-msgstr "Sensor pH"
+msgstr "Sensortype"
 
 #: terrariumNotification.py:125 terrariumNotification.py:160
 #: terrariumNotification.py:191
@@ -452,10 +368,8 @@ msgid "Alarm max"
 msgstr "Alarm Max"
 
 #: terrariumNotification.py:131
-#, fuzzy
-#| msgid "Max diff"
 msgid "Max difference"
-msgstr "Maks diff"
+msgstr "Maks forskjell"
 
 #: terrariumNotification.py:132
 msgid "Exclude from average"
@@ -475,10 +389,8 @@ msgid "Sensor change (only when value is changed)"
 msgstr ""
 
 #: terrariumNotification.py:149
-#, fuzzy
-#| msgid "Sensor ph"
 msgid "Sensor alarm"
-msgstr "Sensor pH"
+msgstr "Sensoralarm"
 
 #: terrariumNotification.py:156
 msgid "Relay update (every 30 seconds)"
@@ -489,30 +401,24 @@ msgid "Max wattage"
 msgstr ""
 
 #: terrariumNotification.py:164
-#, fuzzy
-#| msgid "in manual mode"
 msgid "True if in manual mode"
-msgstr "i manuell modus"
+msgstr "Sann hvis i manuell modus"
 
 #: terrariumNotification.py:165
 msgid "True if it is a dimmer"
 msgstr ""
 
 #: terrariumNotification.py:166 terrariumNotification.py:193
-#, fuzzy
-#| msgid "Current value"
 msgid "Current state"
-msgstr "Nåværende verdi"
+msgstr "Nåværende status"
 
 #: terrariumNotification.py:173
 msgid "Relay change (only when value is changed)"
 msgstr ""
 
 #: terrariumNotification.py:180
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Relay toggle"
-msgstr "Innstillinger for webkamera"
+msgstr "Reléaktivering"
 
 #: terrariumNotification.py:187
 msgid "Button update (every 30 seconds)"
@@ -523,26 +429,20 @@ msgid "Button change (only when value is changed)"
 msgstr ""
 
 #: terrariumNotification.py:207
-#, fuzzy
-#| msgid "Door settings"
 msgid "Button action"
-msgstr "Dør innstillinger"
+msgstr "Knapphendelse"
 
 #: terrariumNotification.py:215
-#, fuzzy
-#| msgid "Language"
 msgid "Webcam archive"
-msgstr "Språk"
+msgstr "Webkameraarkiv"
 
 #: terrariumNotification.py:222
 msgid "Lights area wrong state"
 msgstr ""
 
 #: terrariumNotification.py:224
-#, fuzzy
-#| msgid "Pi power usage in W"
 msgid "Current power state"
-msgstr "Pi strømforbruk i W"
+msgstr "Nåværende strømstatus"
 
 #: terrariumNotification.py:225
 msgid "Sensor measure state"
@@ -565,14 +465,10 @@ msgid "Email"
 msgstr "E-post"
 
 #: terrariumNotification.py:455
-#, fuzzy
-#| msgid "Minimum light hours"
 msgid "Traffic light"
-msgstr "Minimum lys timer"
+msgstr "Traffikklys"
 
 #: terrariumNotification.py:459
-#, fuzzy
-#| msgid "Webhook"
 msgid "Web-hook"
 msgstr "Webhook"
 
@@ -601,10 +497,8 @@ msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
 #: terrariumWebserver.py:393
-#, fuzzy
-#| msgid "Sensor ph"
 msgid "Software Update"
-msgstr "Sensor pH"
+msgstr "Softwareoppdatering"
 
 #: terrariumNotification.py:450
 msgid "Telegram"
