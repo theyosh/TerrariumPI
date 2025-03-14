@@ -1,7 +1,7 @@
 {
   "about": {
     "online": {
-      "help": "Mer hjelp på nettet."
+      "help": "Mer hjelp på nett."
     },
     "title": "Om"
   },
@@ -19,30 +19,30 @@
     },
     "settings": {
       "depends_on": {
-        "help": "Viser lydkortet som brukes til å spille av lyd.",
+        "help": "Velg områdene som dette området er avhengig av.",
         "invalid": "Vennligst ta et valg.",
-        "label": "Kommer an på",
+        "label": "Avhengig av",
         "placeholder": "Velg avhengige områder"
       },
       "enclosure": {
-        "help": "Velg innhegningen der dette området tilhører.",
+        "help": "Velg kabinettet som dette området tilhører.",
         "invalid": "Vennligst ta et valg.",
-        "label": "Når lukket",
+        "label": "Kabinett",
         "placeholder": "Velg kabinett"
       },
       "light_sensors": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Velg lyssensoren for å detektere om lyset er på.",
+        "invalid": "Vennligst velg.",
+        "label": "Sensor for lys",
+        "placeholder": "Velg lyssensorer"
       },
       "mode": {
         "help": "Velg modusen for dette området. Dette vil endre tidspunktet og varigheten til reléene.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Modus",
         "options": {
           "disabled": "Deaktivert",
-          "main_lights": "Minimum lys timer",
+          "main_lights": "Hovedlys",
           "sensors": "Sensorer",
           "timer": "Timer",
           "weather": "Været dag/natt",
@@ -52,9 +52,9 @@
       },
       "name": {
         "help": "Skriv inn et navn som er lett å huske.",
-        "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
+        "invalid": "Det angitte navnet er ikke gyldig. Det kan ikke være tomt.",
         "label": "Navn",
-        "placeholder": "Brukernavn"
+        "placeholder": "Skriv et navn"
       },
       "relay": {
         "slider": {
@@ -65,7 +65,7 @@
       "save": {
         "error": {
           "duplicate_relays": "Du har valgt de samme reléene i både lav og høy alarm. Dette er ikke gyldig.",
-          "required_fields": "Obligatoriske felt er merket med ‘%s’."
+          "required_fields": "Ikke alle feltene er fylt ut korrekt."
         },
         "ok": {
           "message": "Området ''{name}'' er oppdatert."
@@ -75,80 +75,80 @@
         "area_variation": {
           "action": {
             "add": {
-              "help": ""
+              "help": "Legg til en linje"
             },
-            "label": "",
+            "label": "Hendelse",
             "remove": {
-              "help": ""
+              "help": "Fjern linje"
             }
           },
           "difference": {
-            "help": "",
-            "label": ""
+            "help": "Skriv inn en negativ eller en positiv verdi for en relativ hendelse. Et nummer behandles som en absolutt verdi.",
+            "label": "Forskjell"
           },
           "duration": {
-            "help": ""
+            "help": "Skriv inn hvor lenge i minutter eller et gitt tidspunkt på dagen."
           },
           "external_source": {
-            "help": "",
-            "label": ""
+            "help": "Skriv hele adressen til den eksterne kilden i følge den Eksterne data funksjonen.",
+            "label": "Ekstern kildeadresse"
           },
-          "help": "",
+          "help": "Her kan du skrive inn perioder hvor sensorene vil endre verdier i følge listen nedenfor. Sørg for å ha periodene i kronologisk rekkefølge!",
           "offset": {
-            "label": ""
+            "label": "Forskyvning"
           },
           "period": {
-            "help": "",
-            "label": ""
+            "help": "Etter x minutter endre til verdien eller på nøyaktig tidspunkt.",
+            "label": "Periode/varighet"
           },
           "remote": {
-            "help": ""
+            "help": "Ekstern data."
           },
           "source": {
-            "label": ""
+            "label": "Kilde"
           },
           "value": {
-            "help": ""
+            "help": "Skriv en negativ eller positiv forskyvningsverdi."
           },
           "weather": {
-            "help": ""
+            "help": "Klimaspeiling."
           }
         },
         "day_night_difference": {
           "help": "Mengde å endre mellom dag og natt.",
-          "invalid": "Dato og tid.",
+          "invalid": "Skriv et gyldig nummer.",
           "label": "Dag/natt forskjell",
           "placeholder": "Brukernavn"
         },
         "day_night_source": {
           "help": "Velg kilde når det er 'dag'.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Dag/natt kilde",
           "options": {
             "lights": "Lys",
             "weather": "Vær"
           },
-          "placeholder": "Dag/natt kilde"
+          "placeholder": "Velg en Dag/natt kilde"
         },
         "depend_on_relays_mode": {
           "all": {
-            "label": ""
+            "label": "Alle på"
           },
           "none": {
-            "label": ""
+            "label": "Ingen på"
           },
           "one": {
-            "label": ""
+            "label": "Minst en på"
           }
         },
         "deviation_high_alarm": {
-          "help": "",
+          "help": "Øk eller minsk høyalarmverdi.",
           "invalid": "Skriv inn et gyldig nummer.",
           "label": "Høyt alarmavvik",
           "placeholder": "Høyt alarmavvik"
         },
         "deviation_low_alarm": {
-          "help": "Økning av senking lav alarmverdi.",
+          "help": "Øk eller senk lavalarmverdi.",
           "invalid": "Skriv inn et gyldig nummer.",
           "label": "Lavt alarmavvik",
           "placeholder": "Lavt alarmavvik"
@@ -161,16 +161,16 @@
             "placeholder": "Dato og tid"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Velg reléene noen av disse reléene er avhengig av.",
+            "invalid": "Vennligst velg.",
+            "label": "Avhengig av reléer",
+            "placeholder": "Velg reléer"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Velg avhengighetsmodus",
+            "invalid": "Vennligst velg.",
+            "label": "Avhengighet",
+            "placeholder": "Velg en modus"
           },
           "door_status": {
             "help": "Arkiver dør status.",
@@ -279,10 +279,10 @@
             "placeholder": "Dato og tid"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Velg reléene noen av disse reléene er avhengig av.",
+            "invalid": "Vennligst velg.",
+            "label": "Avhengig av reléer",
+            "placeholder": "Velg reléer"
           },
           "depend_on_relays_mode": {
             "help": "",
@@ -395,13 +395,13 @@
         },
         "max_day_hours": {
           "help": "Det maksimale antallet timer som lysene er slått på. Dette er kun gyldig i værmodus. Når dagen er lengre enn denne maksimumsverdien, vil dagen bli forkortet til denne maksimumsverdien.",
-          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Maksimalt antall timer",
           "placeholder": "Brukernavn"
         },
         "min_day_hours": {
           "help": "Minimum antall timer som lysene er slått på. Dette er kun gyldig i værmodus. Når dagen er kortere enn denne minimumsverdien, utvides dagen til denne minimumsverdien.",
-          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Minste antall timer",
           "placeholder": "Brukernavn"
         },
@@ -421,7 +421,7 @@
         },
         "shift_day_hours": {
           "help": "Hvor lang tid det tar å skifte i timer basert på solens stigetid. Negative verdier vil gjøre at dagen starter tidligere.",
-          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Timer skifte",
           "placeholder": "Brukernavn"
         },
@@ -437,7 +437,7 @@
           },
           "period": {
             "invalid": "Skriv inn et gyldig nummer.",
-            "offset": "Offset",
+            "offset": "Forskyvning",
             "placeholder": "Terskel",
             "source": "Skriv inn en fullstendig url, lokal JSON-fil eller skriptfil"
           },
@@ -459,24 +459,24 @@
         },
         "watertank_height": {
           "help": "Angi høyden på vanntanken.",
-          "invalid": "Viser epost serverens hostname eller IP.",
+          "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Høyde",
           "placeholder": "Brukernavn"
         },
         "watertank_offset": {
           "help": "Angi offset mellom sensor og vannhøyde.",
-          "invalid": "Viser epost serverens hostname eller IP.",
+          "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Forskyvning",
           "placeholder": "Brukernavn"
         },
         "watertank_volume": {
           "help": "Strømforbruket og/eller vannstrømmen per minutt når den slås på.",
-          "invalid": "Viser epost serverens hostname eller IP.",
+          "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Volum",
           "placeholder": "Brukernavn"
         }
       },
-      "title": "Innstillinger for webkamera",
+      "title": "Områdeinnstillinger",
       "type": {
         "help": "Velg type område. Hver type har sine egne ekstra alternativer og logikk.",
         "invalid": "Vennligst ta et valg.",
@@ -524,7 +524,7 @@
         "title": "Filer"
       },
       "new_playlist": {
-        "title": "Lyd spilleliste"
+        "title": "Ny spilleliste"
       },
       "playlists": {
         "title": "Spilleliste"
@@ -554,7 +554,7 @@
           "help": "Skriv inn et navn som er lett å huske.",
           "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
           "label": "Navn",
-          "placeholder": "Brukernavn"
+          "placeholder": "Skriv et navn"
         },
         "repeat": {
           "help": "Viser navnet på musikk spillelisten.",
@@ -585,7 +585,7 @@
   "buttons": {
     "actions": {
       "delete": "Slett-knapp",
-      "export": "Eksportere data",
+      "export": "Eksportknapp",
       "ignore": "Legg til ny sensor",
       "settings": "Rediger-knapp"
     },
@@ -629,12 +629,12 @@
       },
       "calibration": {
         "inverse": {
-          "help": "",
-          "label": ""
+          "help": "Aktiver for å snu den eksterne verdien.",
+          "label": "Omvendt verdi"
         },
         "ldr_capacitor": {
           "help": "Skriv inn kondensatorverdien i µF da dette vil påvirke lysberegningen.",
-          "invalid": "Den angitte kondensatorverdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "invalid": "Den angitte kondensatorverdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Kondensatorverdi i µF",
           "placeholder": "Angi kondensatorverdien i µF"
         },
@@ -676,7 +676,7 @@
   },
   "calendar": {
     "actions": {
-      "download": "Last ned"
+      "download": "Last ned lcal"
     },
     "event": {
       "delete": {
@@ -761,7 +761,7 @@
         "title": "Strømforbruk i watt"
       },
       "current_water_flow": {
-        "title": "Vannføring i L/m"
+        "title": "Vannføring i {water_flow_indicator}"
       },
       "total_power_usage": {
         "duration": "om {duration}",
@@ -787,7 +787,7 @@
     },
     "area": {
       "current": "Nåværende",
-      "current_status": "Nåværende verdi",
+      "current_status": "Nåværende status",
       "delete": {
         "title": "Slett fil"
       },
@@ -901,7 +901,7 @@
   },
   "general": {
     "download": {
-      "title": "nedlasting"
+      "title": "Last ned"
     },
     "exclude": {
       "average": "excl. avg."
@@ -928,7 +928,7 @@
   },
   "graph": {
     "alarm": {
-      "max": "Alarm Max",
+      "max": "Alarm maks",
       "min": "Alarm min"
     },
     "current": "Nåværende",
@@ -940,14 +940,14 @@
     "period": {
       "day": "Dag",
       "month": "Måneder",
-      "replaced": "Skift ut",
+      "replaced": "Skiftet",
       "week": "Uke",
       "year": "År"
     },
     "settings": {
       "export": "Eksportere data"
     },
-    "wattage": "Watt"
+    "wattage": "Wattforbruk"
   },
   "home": {
     "menu": {
@@ -988,7 +988,7 @@
         "placeholder": "Brukernavn"
       },
       "placeholders": {
-        "format": "Tallverdier kan avrundes ved å bruke {link_start}`.:2f`-formatet{link_end}",
+        "format": "Bruk {placeholder} formatet for å bruke en plassholder i meldingen din.{new_line}Tallverdier kan rundes av ved å bruke {link_start}`.:2f`-formatet{link_end}",
         "help": "Liste over tilgjengelige plassholdere.",
         "label": "Plassholdere"
       },
@@ -1016,7 +1016,7 @@
       "type": {
         "help": "Varsler.",
         "invalid": "Vennligst ta et valg.",
-        "label": "Melding",
+        "label": "Meldingstype",
         "placeholder": "Temperatur sensorer"
       }
     },
@@ -1076,7 +1076,7 @@
         "submit": "Logg Inn",
         "username": {
           "help": "Skriv inn brukernavnet.",
-          "invalid": "Brukernavnet kan ikke være tomt.",
+          "invalid": "Brukernavn kan ikke være tomt.",
           "label": "Brukernavn"
         }
       },
@@ -1257,43 +1257,43 @@
         "help": "For mer informasjon se online.",
         "invalid": "Den angitte adressen er ikke gyldig. Den kan ikke være tom.",
         "label": "Adresse",
-        "placeholder": "I2C-adresse"
+        "placeholder": "Skriv en adresse"
       },
       "calibration": {
         "dimmer_frequency": {
           "help": "Frekvensen som dimmeren fungerer på.",
-          "invalid": "Viser epost serverens hostname eller IP.",
+          "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Dimmerfrekvens i Hz"
         },
         "dimmer_max_dim": {
           "help": "Maksimal dimmerverdi (Legacy).",
-          "invalid": "Viser epost serverens hostname eller IP.",
+          "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Maksimal dimmerverdi"
         },
         "dimmer_max_power": {
           "help": "Maksimal effekt for denne dimmeren.",
-          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
-          "label": "Vannføring i L/m"
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
+          "label": "Maksstyrke i %"
         },
         "dimmer_offset": {
-          "help": "Dimmer av varighet.",
-          "invalid": "Viser epost serverens hostname eller IP.",
-          "label": "Dimmer av varighet"
+          "help": "Dimmerforskyvning.",
+          "invalid": "Skriv inn en minimumsverdi av {value}.",
+          "label": "Dimmerforskyvning i %"
         }
       },
       "current": {
-        "help": "Kun endring.",
+        "help": "Nåværende status av reléet.",
         "label": "Nåværende",
         "placeholder": "Nåværende verdi"
       },
       "flow": {
         "help": "Angi (maks) vannmengde når den er slått på.",
-        "invalid": "Viser epost serverens hostname eller IP.",
-        "label": "Vannføring i L/m"
+        "invalid": "Skriv inn en minimumsverdi av {value}.",
+        "label": "Vannføring"
       },
       "hardware": {
-        "help": "Viser lydkortet som brukes til å spille av lyd.",
-        "invalid": "Merk et valg.",
+        "help": "Velg hardvaretype for dette reléet.",
+        "invalid": "Vennligst velg en hardvaretype.",
         "label": "Maskinvare",
         "placeholder": "Skift maskinvare"
       },
@@ -1314,7 +1314,7 @@
       "title": "Innstillinger for webkamera",
       "wattage": {
         "help": "Angi (maks) wattstyrke når den er slått på.",
-        "invalid": "Viser epost serverens hostname eller IP.",
+        "invalid": "Skriv inn en minimumsverdi av {value}.",
         "label": "Watt"
       }
     },
@@ -1356,14 +1356,14 @@
       "light": "Gjennomsnittlig lys",
       "moisture": "Gjennomsnittlig fuktighet",
       "pressure": "Gjennomsnittlig trykk",
-      "temperature": "Gjennomsnittstemperatur",
+      "temperature": "Gjennomsnittlig temperatur",
       "uva": "Gjennomsnittlig UVA",
       "uvb": "Gjennomsnittlig UVB",
       "uvi": "Gjennomsnittlig UV-indeks"
     },
     "calibration": {
       "light_on_off_threshold": {
-        "light_bulb": ""
+        "light_bulb": "Lys på av grenseverdi: {threshold}"
       }
     },
     "co2": {
@@ -1412,7 +1412,7 @@
       "menu": {
         "title": "Luftfuktighet"
       },
-      "title": "Luftfuktighet sensorer"
+      "title": "Luftfuktighetsensorer"
     },
     "light": {
       "menu": {
@@ -1449,7 +1449,7 @@
     },
     "settings": {
       "address": {
-        "help": "I2C-adresse.",
+        "help": "Skriv en adresse.",
         "invalid": "Den angitte adressen er ikke gyldig. Den kan ikke være tom.",
         "label": "Adresse",
         "placeholder": "I2C-adresse"
@@ -1484,11 +1484,11 @@
         },
         "light_threshold": {
           "help": "",
-          "invalid": "",
-          "label": ""
+          "invalid": "Tallet du har oppgitt er ikke gyldig. Det må være høyere enn {min}.",
+          "label": "Lys på grense"
         },
         "offset": {
-          "help": "Viser lydkortet som brukes til å spille av lyd.",
+          "help": "Skriv inn forskyvning for denne sensoren.",
           "invalid": "Den angitte verdien er ikke gyldig. Det må være nummer.",
           "label": "Forskyvning"
         }
@@ -1620,7 +1620,7 @@
         "address": {
           "help": "I2C-adresse.",
           "invalid": "Den angitte adressen er ikke gyldig. Den kan ikke være tom.",
-          "label": "Adresse",
+          "label": "Serveradresse",
           "placeholder": "I2C-adresse"
         },
         "api_token": {
@@ -1634,7 +1634,7 @@
         },
         "green": {
           "help": "Skriv inn GPIO pin for grønt lys.",
-          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Grønn",
           "placeholder": "Skriv inn grønn GPIO-pin"
         },
@@ -1670,7 +1670,7 @@
         },
         "red": {
           "help": "Viser volumet for denne spillelisten.",
-          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Ons",
           "placeholder": "Dato og tid"
         },
@@ -1710,7 +1710,7 @@
         },
         "yellow": {
           "help": "Skriv inn GPIO-pinne for gult lys.",
-          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {maks}.",
+          "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Rav",
           "placeholder": "Dato og tid"
         }
@@ -1839,7 +1839,7 @@
       },
       "graph_smooth_value": {
         "help": "Angi mengden datapunkter for gjennomsnittet. 0 vil deaktivere denne funksjonen.",
-        "invalid": "Viser epost serverens hostname eller IP.",
+        "invalid": "Skriv inn en minimumsverdi av {value}.",
         "label": "Grafe utjevning verdi"
       },
       "header": {
@@ -1868,7 +1868,7 @@
       },
       "meross_cloud_username": {
         "help": "Skriv inn brukernavnet for å logge på Meross cloud.",
-        "label": "Meross Cloud brukernavn"
+        "label": "Meross brukernavn"
       },
       "page": {
         "title": "Systeminnsillinger"
@@ -1885,17 +1885,17 @@
       },
       "pi-wattage": {
         "help": "Angi det totale strømforbruket til Pi med alle USB-enhetene tilkoblet.",
-        "invalid": "Viser epost serverens hostname eller IP.",
+        "invalid": "Skriv inn en minimumsverdi av {value}.",
         "label": "Pi strømforbruk i W"
       },
       "port": {
         "help": "Viser portnummeret som programvaren lytter etter tilkoblinger på.",
-        "invalid": "Viser epost serverens hostname eller IP.",
-        "label": "Port nummer"
+        "invalid": "Skriv inn en minimumsverdi av {value}.",
+        "label": "Portnummer"
       },
       "power_price": {
         "help": "I2C-adresse.",
-        "invalid": "Viser epost serverens hostname eller IP.",
+        "invalid": "Skriv inn en minimumsverdi av {value}.",
         "label": "Strømpris"
       },
       "profile_image": {
@@ -1916,10 +1916,10 @@
       "temperature_indicator": {
         "help": "Vis temperatur offset verdi.",
         "invalid": "Vennligst ta et valg.",
-        "label": "Temperatur"
+        "label": "Temperaturtype"
       },
       "title": {
-        "help": "Brukernavn.",
+        "help": "Skriv et tittel.",
         "invalid": "Tittelen kan ikke være tom.",
         "label": "Tittel"
       },
@@ -1938,7 +1938,7 @@
       },
       "water_price": {
         "help": "Skriv inn prisen per L/Gallon.",
-        "invalid": "Viser epost serverens hostname eller IP.",
+        "invalid": "Skriv inn en minimumsverdi av {value}.",
         "label": "Vannpris"
       },
       "water_volume_indicator": {
@@ -1966,9 +1966,9 @@
         "title": "Minnebruk"
       },
       "summary": {
-        "title": "Systemstatus"
+        "title": "Systemoppsummering"
       },
-      "title": "System status",
+      "title": "Systemstatus",
       "uptime": {
         "title": "Systemoppetid"
       }
@@ -1994,7 +1994,7 @@
     }
   },
   "topbar": {
-    "current_status": "Nåværende verdi",
+    "current_status": "Nåværende status",
     "door_status": "Dør status",
     "upcoming_events": "{number, plural, =0 {ingen hendelser} =1 {ett arrangement} other {# arrangementer}}"
   },
@@ -2029,7 +2029,7 @@
       "weather_source": {
         "help": "Skriv inn hele OpenWeatherMap api-url som: {api_url_example}.",
         "invalid": "Den angitte URL-adressen er ikke gyldig.",
-        "label": "Kilde"
+        "label": "Kildeadresse"
       }
     },
     "title": "Vær"
@@ -2202,13 +2202,13 @@
       },
       "height": {
         "help": "Angi oppløsningshøyden i piksler.",
-        "invalid": "Viser epost serverens hostname eller IP.",
+        "invalid": "Skriv inn en minimumsverdi av {value}.",
         "label": "Høyde"
       },
       "motion": {
         "area": {
           "help": "I2C-adresse.",
-          "invalid": "Viser epost serverens hostname eller IP.",
+          "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Bevegelse minimum område",
           "placeholder": "Brukernavn"
         },
@@ -2236,7 +2236,7 @@
         },
         "threshold": {
           "help": "Bevegelses delta grense.",
-          "invalid": "Viser epost serverens hostname eller IP.",
+          "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Bevegelses delta grense",
           "placeholder": "Brukernavn"
         }
@@ -2276,7 +2276,7 @@
       "title": "Innstillinger for webkamera",
       "width": {
         "help": "Angi oppløsningsbredden i piksler.",
-        "invalid": "Viser epost serverens hostname eller IP.",
+        "invalid": "Skriv inn en minimumsverdi av {value}.",
         "label": "Bredde"
       }
     },
