@@ -20,13 +20,13 @@
     "settings": {
       "depends_on": {
         "help": "Velg områdene som dette området er avhengig av.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Avhengig av",
         "placeholder": "Velg avhengige områder"
       },
       "enclosure": {
         "help": "Velg kabinettet som dette området tilhører.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Kabinett",
         "placeholder": "Velg kabinett"
       },
@@ -169,12 +169,12 @@
           "depend_on_relays_mode": {
             "help": "Velg avhengighetsmodus",
             "invalid": "Vennligst velg.",
-            "label": "Avhengighet",
+            "label": "Avhengighetsmodus",
             "placeholder": "Velg en modus"
           },
           "door_status": {
-            "help": "Arkiver dør status.",
-            "invalid": "Vennligst ta et valg.",
+            "help": "Velg dør status.",
+            "invalid": "Vennligst velg.",
             "label": "Dør status",
             "options": {
               "closed": "Lukket",
@@ -285,14 +285,14 @@
             "placeholder": "Velg reléer"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Velg avhengighetsmodus",
+            "invalid": "Vennligst velg.",
+            "label": "Avhengighetsmodus",
+            "placeholder": "Velg en modus"
           },
           "door_status": {
-            "help": "Arkiver dør status.",
-            "invalid": "Vennligst ta et valg.",
+            "help": "Velg dør status.",
+            "invalid": "Vennligst velg.",
             "label": "Dør status",
             "options": {
               "closed": "Lukket",
@@ -336,7 +336,7 @@
           },
           "playlists": {
             "help": "Temperatur sensorer.",
-            "invalid": "Vennligst ta et valg.",
+            "invalid": "Vennligst velg.",
             "label": "Spilleliste",
             "placeholder": "Temperatur sensorer"
           },
@@ -415,7 +415,7 @@
         },
         "sensors": {
           "help": "Velg sensorer som skal brukes for sensorbasert modus.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Sensorer",
           "placeholder": "Temperatur sensorer"
         },
@@ -446,7 +446,7 @@
             "placeholder": "Forskjell"
           },
           "when": {
-            "invalid": "Vennligst ta et valg.",
+            "invalid": "Vennligst velg.",
             "options": {
               "after": "Etter x minutter",
               "at": "På tidspunktet",
@@ -479,7 +479,7 @@
       "title": "Områdeinnstillinger",
       "type": {
         "help": "Velg type område. Hver type har sine egne ekstra alternativer og logikk.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Type",
         "placeholder": "Temperatur sensorer"
       }
@@ -513,7 +513,7 @@
         },
         "upload": {
           "error": {
-            "nologin": ""
+            "nologin": "Vennligst logg inn for å laste opp filer."
           }
         }
       },
@@ -639,10 +639,10 @@
           "placeholder": "Angi kondensatorverdien i µF"
         },
         "timeout": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Skriv inn ventetid i sekunder mellom eksterne sjekker.",
+          "invalid": "Den angitte ventetiden er ikke gyldig. Skriv inn et gyldig nummer mellom {min} og {max}.",
+          "label": "Ventetid i sekunder",
+          "placeholder": "Skriv inn ventetid i sekunder"
         }
       },
       "current": {
@@ -786,7 +786,7 @@
       "settings": "Rediger vedlegg"
     },
     "area": {
-      "current": "Nåværende",
+      "current": "nåværende",
       "current_status": "Nåværende status",
       "delete": {
         "title": "Slett fil"
@@ -1015,7 +1015,7 @@
       "title": "Innstillinger for webkamera",
       "type": {
         "help": "Varsler.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Meldingstype",
         "placeholder": "Temperatur sensorer"
       }
@@ -1115,8 +1115,8 @@
     },
     "door": {
       "status": {
-        "closed": "",
-        "open": "",
+        "closed": "Døren \"{name}\" er lukket",
+        "open": "Døren \"{name}\" er åpen",
         "title": "Dørstatusoppdatering"
       }
     },
@@ -1131,7 +1131,7 @@
     "form": {
       "save": {
         "error": {
-          "title": "Feil"
+          "title": "Lagringsfeil"
         },
         "ok": {
           "title": "Lagre OK"
@@ -1139,7 +1139,7 @@
       },
       "upload": {
         "error": {
-          "title": "Dato opplastet"
+          "title": "Opplasningsfeil"
         }
       }
     },
@@ -1160,20 +1160,20 @@
     },
     "offline": {
       "message": "Forbindelsen er brutt",
-      "title": "Avlogget"
+      "title": "Avkoblet"
     },
     "online": {
       "message": "Vi er tilkoblet",
-      "title": "Online"
+      "title": "Tilkoblet"
     },
     "reboot": {
       "ok": {
-        "title": "System omstart ok"
+        "title": "Systemomstart ok"
       }
     },
     "restart": {
       "ok": {
-        "title": "System omstart ok"
+        "title": "Systemrestart ok"
       }
     },
     "scanning": {
@@ -1197,10 +1197,10 @@
   },
   "relays": {
     "actions": {
-      "delete": "Slett fil",
-      "export": "Eksportere data",
-      "ignore": "Legg til nytt webkamera",
-      "manual_mode": "Manuell modus",
+      "delete": "Slett relé",
+      "export": "Eksporter relé",
+      "ignore": "Ignorer relé",
+      "manual_mode": "Manuell relémodus",
       "replace_hardware": "Skift maskinvare",
       "settings": "Rediger relé"
     },
@@ -1292,8 +1292,8 @@
         "label": "Vannføring"
       },
       "hardware": {
-        "help": "Velg hardvaretype for dette reléet.",
-        "invalid": "Vennligst velg en hardvaretype.",
+        "help": "Velg maskinvaretype for dette reléet.",
+        "invalid": "Vennligst velg en maskinvaretype.",
         "label": "Maskinvare",
         "placeholder": "Skift maskinvare"
       },
@@ -1315,7 +1315,7 @@
       "wattage": {
         "help": "Angi (maks) wattstyrke når den er slått på.",
         "invalid": "Skriv inn en minimumsverdi av {value}.",
-        "label": "Watt"
+        "label": "Strømforbruk"
       }
     },
     "title": "Reléer",
@@ -1644,7 +1644,7 @@
         },
         "hardware": {
           "help": "Viser lydkortet som brukes til å spille av lyd.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Maskinvare",
           "placeholder": "Skift maskinvare"
         },
@@ -1675,9 +1675,9 @@
           "placeholder": "Dato og tid"
         },
         "sender": {
-          "help": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Skriv inn avsenders email.",
+          "label": "Fra adresse",
+          "placeholder": "Skriv en fra adresse"
         },
         "show_title": {
           "help": "Vis navn og versjon som tittel på skjermen.",
@@ -1718,7 +1718,7 @@
       "title": "Varsler",
       "type": {
         "help": "Varsler.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Type",
         "placeholder": "Temperatur sensorer"
       }
@@ -1727,24 +1727,24 @@
   },
   "settings": {
     "units": {
-      "beaufort": "",
-      "celsius": "",
-      "cm": "",
-      "fahrenheit": "",
-      "inch": "",
-      "kelvin": "",
-      "km_h": "",
-      "l": "",
-      "m_h": "",
-      "m_s": "",
-      "ukgall": "",
-      "usgall": ""
+      "beaufort": "Beaufort",
+      "celsius": "Celsius",
+      "cm": "Centimeter",
+      "fahrenheit": "Fahrenheit",
+      "inch": "Tommer",
+      "kelvin": "Kelvin",
+      "km_h": "Kilometer i timen",
+      "l": "Liter",
+      "m_h": "Miles i timen",
+      "m_s": "Meter i sekundet",
+      "ukgall": "UK Gallons",
+      "usgall": "US Gallons"
     }
   },
   "system": {
     "log": {
       "download": {
-        "title": "Last ned"
+        "title": "Last ned logg"
       },
       "filters": {
         "errors": "feil",
@@ -1790,7 +1790,7 @@
       },
       "authenticate": {
         "help": "Autentiser alltid eller bare når endringer gjøres.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Autentisering",
         "options": {
           "changes": "Kun for endringer",
@@ -1799,24 +1799,24 @@
         }
       },
       "auto_dark_mode": {
-        "help": "",
-        "invalid": "",
+        "help": "Sett mørkt modus.",
+        "invalid": "Vennligst velg.",
         "label": "Automatisk mørk modus",
         "options": {
-          "always": "",
-          "desktop": "",
-          "off": "",
-          "on": ""
+          "always": "Alltid mørkt modus",
+          "desktop": "Basert på desktopen",
+          "off": "Ingen mørk modus",
+          "on": "Basert på dag/natt"
         }
       },
       "currency": {
         "help": "Velg grensesnittvalutaen.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Valuta"
       },
       "dashboard_mode": {
         "help": "Velg hvordan dashbordet ser ut.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Dashboard-modus",
         "options": {
           "normal": "Grafer og vedlegg",
@@ -1834,8 +1834,8 @@
         "label": "Ekskluderte IDer"
       },
       "graph_limit_min_max": {
-        "help": "",
-        "label": ""
+        "help": "Begrens grafen til 20% av alarmverdien.",
+        "label": "Begrens grafverdiene"
       },
       "graph_smooth_value": {
         "help": "Angi mengden datapunkter for gjennomsnittet. 0 vil deaktivere denne funksjonen.",
@@ -1859,7 +1859,7 @@
       },
       "language": {
         "help": "Velg grensesnittspråket. Dette vil også endre tall- og valutaformatering.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Språk"
       },
       "meross_cloud_password": {
@@ -1881,7 +1881,7 @@
       "password2": {
         "help": "SMTP-serverporten.",
         "invalid": "Det nye passordet stemmer ikke.",
-        "label": "Nåværende admin passord"
+        "label": "Bekreft nytt passord"
       },
       "pi-wattage": {
         "help": "Angi det totale strømforbruket til Pi med alle USB-enhetene tilkoblet.",
@@ -1915,7 +1915,7 @@
       },
       "temperature_indicator": {
         "help": "Vis temperatur offset verdi.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Temperaturtype"
       },
       "title": {
@@ -1925,7 +1925,7 @@
       },
       "unsplash_access_key": {
         "help": "",
-        "label": ""
+        "label": "Unsplash Aksess Nøkkel"
       },
       "unsplash_query": {
         "help": "",
@@ -1943,7 +1943,7 @@
       },
       "water_volume_indicator": {
         "help": "Velg vannvolumindikatoren. Påvirker kun gjeldende verdier.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Type væskevolum"
       },
       "wind_speed_indicator": {
@@ -2123,7 +2123,7 @@
       "archive": {
         "door": {
           "help": "Dørstatus for å ta et arkivbilde.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Arkiver dør status",
           "options": {
             "close": "Lukk",
@@ -2134,7 +2134,7 @@
         },
         "flash": {
           "help": "Velg et relé som fungerer som et blinklys.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Blits",
           "placeholder": "Velg valgfritt relé for blits"
         },
@@ -2146,7 +2146,7 @@
         },
         "light": {
           "help": "Lysstatus for å ta et arkivbilde.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Arkiver lys status",
           "options": {
             "ignore": "Ignorer",
@@ -2170,7 +2170,7 @@
         },
         "state": {
           "help": "Velg varigheten mellom arkiverte bilder.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Arkiv",
           "placeholder": "Språk"
         }
@@ -2226,7 +2226,7 @@
         },
         "frame": {
           "help": "Hvilken ramme skal brukes til bevegelsesdeteksjon.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Bevegelse sammenlignings bilde",
           "options": {
             "archived": "Siste arkiverte bilde",
