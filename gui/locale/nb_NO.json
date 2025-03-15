@@ -31,13 +31,13 @@
         "placeholder": "Velg kabinett"
       },
       "light_sensors": {
-        "help": "Velg lyssensoren for å detektere om lyset er på.",
+        "help": "Velg lyssensoren som detekterer om lyset er på.",
         "invalid": "Vennligst velg.",
-        "label": "Sensor for lys",
+        "label": "Lysdetektorsensorer",
         "placeholder": "Velg lyssensorer"
       },
       "mode": {
-        "help": "Velg modusen for dette området. Dette vil endre tidspunktet og varigheten til reléene.",
+        "help": "Velg modus for dette området. Dette vil endre tidspunktet og varigheten til reléene.",
         "invalid": "Vennligst velg.",
         "label": "Modus",
         "options": {
@@ -87,7 +87,7 @@
             "label": "Forskjell"
           },
           "duration": {
-            "help": "Skriv inn hvor lenge i minutter eller et gitt tidspunkt på dagen."
+            "help": "Skriv inn hvor varighet i minutter eller et gitt tidspunkt på dagen."
           },
           "external_source": {
             "help": "Skriv hele adressen til den eksterne kilden i følge den Eksterne data funksjonen.",
@@ -95,7 +95,7 @@
           },
           "help": "Her kan du skrive inn perioder hvor sensorene vil endre verdier i følge listen nedenfor. Sørg for å ha periodene i kronologisk rekkefølge!",
           "offset": {
-            "label": "Forskyvning"
+            "label": "Offset"
           },
           "period": {
             "help": "Etter x minutter endre til verdien eller på nøyaktig tidspunkt.",
@@ -108,7 +108,7 @@
             "label": "Kilde"
           },
           "value": {
-            "help": "Skriv en negativ eller positiv forskyvningsverdi."
+            "help": "Skriv en negativ eller positiv offsetverdi."
           },
           "weather": {
             "help": "Klimaspeiling."
@@ -116,19 +116,19 @@
         },
         "day_night_difference": {
           "help": "Mengde å endre mellom dag og natt.",
-          "invalid": "Skriv et gyldig nummer.",
-          "label": "Dag/natt forskjell",
-          "placeholder": "Brukernavn"
+          "invalid": "Skriv et gyldig tall.",
+          "label": "Forskjell dag/natt",
+          "placeholder": "Skriv et tall"
         },
         "day_night_source": {
           "help": "Velg kilde når det er 'dag'.",
           "invalid": "Vennligst velg.",
-          "label": "Dag/natt kilde",
+          "label": "Dag/nattkilde",
           "options": {
             "lights": "Lys",
             "weather": "Vær"
           },
-          "placeholder": "Velg en Dag/natt kilde"
+          "placeholder": "Velg en Dag/nattkilde"
         },
         "depend_on_relays_mode": {
           "all": {
@@ -142,13 +142,13 @@
           }
         },
         "deviation_high_alarm": {
-          "help": "Øk eller minsk høyalarmverdi.",
-          "invalid": "Skriv inn et gyldig nummer.",
+          "help": "Øk eller reduser høyalarmverdi.",
+          "invalid": "Skriv inn et gyldig tall.",
           "label": "Høyt alarmavvik",
           "placeholder": "Høyt alarmavvik"
         },
         "deviation_low_alarm": {
-          "help": "Øk eller senk lavalarmverdi.",
+          "help": "Øk eller reduser lavalarmverdi.",
           "invalid": "Skriv inn et gyldig nummer.",
           "label": "Lavt alarmavvik",
           "placeholder": "Lavt alarmavvik"
@@ -156,12 +156,12 @@
         "high": {
           "begin": {
             "help": "Tiden på døgnet da reléene slås på hver natt.",
-            "invalid": "Dato og tid.",
-            "label": "Dato og tid",
-            "placeholder": "Dato og tid"
+            "invalid": "Skriv et gyldig tidspunkt.",
+            "label": "Starttid",
+            "placeholder": "Skriv inn starttid"
           },
           "depend_on_relays": {
-            "help": "Velg reléene noen av disse reléene er avhengig av.",
+            "help": "Velg reléene disse reléene er avhengig av.",
             "invalid": "Vennligst velg.",
             "label": "Avhengig av reléer",
             "placeholder": "Velg reléer"
@@ -175,62 +175,62 @@
           "door_status": {
             "help": "Velg dør status.",
             "invalid": "Vennligst velg.",
-            "label": "Dør status",
+            "label": "Dørstatus",
             "options": {
               "closed": "Lukket",
-              "ignore": "Ignorer",
+              "ignore": "Ignorert",
               "open": "Åpen"
             },
-            "placeholder": "Merk et valg"
+            "placeholder": "Velg en status"
           },
           "end": {
             "help": "Tiden på døgnet da reléene slås av hver natt.",
-            "invalid": "Dato og tid.",
-            "label": "Dato og tid",
-            "placeholder": "Dato og tid"
+            "invalid": "Skriv et gyldig tidspunkt.",
+            "label": "Sluttid",
+            "placeholder": "Skriv inn sluttid"
           },
           "ignore_high": {
-            "help": "Viser sensorens lavest alarm verdi av sensoren. Når den er under denne verdien, kan alarmer utløses..",
-            "label": "Legg til nytt webkamera"
+            "help": "Skru på for å ignorere høyalarmverdien til sensorene, og bruk kun lavalarmverdien.",
+            "label": "Ignorer høyalarm"
           },
           "light_status": {
-            "help": "Arkiver lys status.",
-            "invalid": "Vennligst ta et valg.",
-            "label": "Lys tilstand",
+            "help": "Velg lysstatus.",
+            "invalid": "Vennligst velg.",
+            "label": "Lysstatus",
             "options": {
-              "ignore": "Ignorer",
+              "ignore": "Ignorert",
               "off": "Av",
               "on": "På"
             },
-            "placeholder": "Merk et valg"
+            "placeholder": "Velg en status"
           },
           "off_duration": {
             "help": "Varigheten når reléene skal være avslått når de er slått av. Skriv inn '0' for å deaktivere.",
-            "invalid": "Tidtaker periode på varighet i minutter.",
-            "label": "Tidtaker av varighet",
-            "placeholder": "Tidtaker av varighet"
+            "invalid": "Skriv inn en gyldig varighet i minutter.",
+            "label": "Av varighet",
+            "placeholder": "Av varighet"
           },
           "on_duration": {
             "help": "Varigheten når reléene skal være på. Hvis dette er kortere enn hele dagen, vil du få en timerfunksjonalitet. Skriv inn '0' for å ha en hel natt.",
-            "invalid": "Tidtaker periode på varighet i minutter.",
-            "label": "Varighet",
-            "placeholder": "Varighet"
+            "invalid": "Skriv en gyldig varighet i minutter.",
+            "label": "På varighet",
+            "placeholder": "På varighet"
           },
           "playlists": {
-            "help": "Temperatur sensorer.",
-            "invalid": "Vennligst ta et valg.",
-            "label": "Spilleliste",
-            "placeholder": "Temperatur sensorer"
+            "help": "Velg spilleliste(ne) som skal spilles.",
+            "invalid": "Vennligst velg.",
+            "label": "Spillelister",
+            "placeholder": "Velg spillelister"
           },
           "power_on_time": {
-            "help": "Kun endring.",
-            "invalid": "Dato og tid.",
-            "label": "Slå på",
-            "placeholder": "Slå på"
+            "help": "Varigheten i sekunder som skrur på reléet.",
+            "invalid": "Skriv et gyldig tall.",
+            "label": "Tidspunkt for å slå på",
+            "placeholder": "Tidspunkt for å slå på"
           },
           "relays": {
             "help": "Temperatur sensorer.",
-            "invalid": "Vennligst ta et valg.",
+            "invalid": "Vennligst velg.",
             "label": "Reléer",
             "placeholder": "Temperatur sensorer"
           },
@@ -291,12 +291,12 @@
             "placeholder": "Velg en modus"
           },
           "door_status": {
-            "help": "Velg dør status.",
+            "help": "Velg dørstatus.",
             "invalid": "Vennligst velg.",
-            "label": "Dør status",
+            "label": "Dørstatus",
             "options": {
               "closed": "Lukket",
-              "ignore": "Ignorer",
+              "ignore": "Ignorert",
               "open": "Åpen"
             },
             "placeholder": "Merk et valg"
@@ -316,7 +316,7 @@
             "invalid": "Vennligst ta et valg.",
             "label": "Lys tilstand",
             "options": {
-              "ignore": "Ignorer",
+              "ignore": "Ignorert",
               "off": "Av",
               "on": "På"
             },
@@ -433,16 +433,16 @@
         },
         "variation": {
           "offset": {
-            "invalid": "Skriv inn et gyldig nummer."
+            "invalid": "Skriv inn et gyldig tall."
           },
           "period": {
-            "invalid": "Skriv inn et gyldig nummer.",
+            "invalid": "Skriv inn et gyldig tall.",
             "offset": "Forskyvning",
             "placeholder": "Terskel",
             "source": "Skriv inn en fullstendig url, lokal JSON-fil eller skriptfil"
           },
           "value": {
-            "invalid": "Skriv inn et gyldig nummer.",
+            "invalid": "Skriv inn et gyldig tall.",
             "placeholder": "Forskjell"
           },
           "when": {
@@ -1483,7 +1483,7 @@
           "label": "Maksimal fukt verdi"
         },
         "light_threshold": {
-          "help": "",
+          "help": "Angi verdien når det vurderes at lysene er på.",
           "invalid": "Tallet du har oppgitt er ikke gyldig. Det må være høyere enn {min}.",
           "label": "Lys på grense"
         },
@@ -1639,8 +1639,8 @@
           "placeholder": "Skriv inn grønn GPIO-pin"
         },
         "h_scroll": {
-          "help": "",
-          "label": ""
+          "help": "Slå på for å aktivere horisontal rulling.",
+          "label": "Rull horisontalt"
         },
         "hardware": {
           "help": "Viser lydkortet som brukes til å spille av lyd.",
@@ -1924,12 +1924,12 @@
         "label": "Tittel"
       },
       "unsplash_access_key": {
-        "help": "",
+        "help": "Skriv inn tilgangsnøkkelen til den opprettede Unsplash-appen.",
         "label": "Unsplash Aksess Nøkkel"
       },
       "unsplash_query": {
-        "help": "",
-        "label": ""
+        "help": "Skriv inn nøkkelordene for valg av bakgrunnsbilder.",
+        "label": "Unsplash nøkkelord"
       },
       "username": {
         "help": "Skriv inn brukernavnet for autentisering.",
