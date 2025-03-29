@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2025-03-15 01:27+0000\n"
+"PO-Revision-Date: 2025-03-29 08:15+0000\n"
 "Last-Translator: Mkorneli <mk@nessu.no>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
 "terrariumpi/backend/nb_NO/>\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.3\n"
+"X-Generator: Weblate 5.10.4\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
 msgid "Lighting"
-msgstr "Lys"
+msgstr "Belysning"
 
 #: terrariumArea.py:38
 msgid "Heating"
@@ -100,15 +100,15 @@ msgstr "lys"
 
 #: terrariumEngine.py:63
 msgid "uva"
-msgstr "uva"
+msgstr "uv-a"
 
 #: terrariumEngine.py:64
 msgid "uvb"
-msgstr "uvb"
+msgstr "uv-b"
 
 #: terrariumEngine.py:65
 msgid "uvi"
-msgstr "uvi"
+msgstr "uv-i"
 
 #: terrariumEngine.py:66
 msgid "fertility"
@@ -317,7 +317,7 @@ msgstr "Maks oppdateringsvarighet"
 
 #: terrariumNotification.py:107
 msgid "Amount of times to late with updates"
-msgstr ""
+msgstr "Antall ganger for sent med oppdateringer"
 
 #: terrariumNotification.py:113
 msgid "System to slow with updates more then 30 times"
@@ -325,7 +325,7 @@ msgstr "Systemet var for sen med oppdateringer mer enn 30 ganger"
 
 #: terrariumNotification.py:120
 msgid "Sensor update (every 30 seconds)"
-msgstr ""
+msgstr "Sensoroppdatering (hver 30. sekund)"
 
 #: terrariumNotification.py:122 terrariumNotification.py:158
 #: terrariumNotification.py:189
@@ -373,7 +373,7 @@ msgstr "Maks forskjell"
 
 #: terrariumNotification.py:132
 msgid "Exclude from average"
-msgstr ""
+msgstr "Ekskluder fra gjennomsnittet"
 
 #: terrariumNotification.py:134
 msgid "Current value"
@@ -382,11 +382,11 @@ msgstr "Nåværende verdi"
 #: terrariumNotification.py:135 terrariumNotification.py:167
 #: terrariumNotification.py:194
 msgid "True if there is an error"
-msgstr ""
+msgstr "Sant hvis det er en feil"
 
 #: terrariumNotification.py:142
 msgid "Sensor change (only when value is changed)"
-msgstr ""
+msgstr "Sensorbytte (bare når verdien endres)"
 
 #: terrariumNotification.py:149
 msgid "Sensor alarm"
@@ -394,11 +394,11 @@ msgstr "Sensoralarm"
 
 #: terrariumNotification.py:156
 msgid "Relay update (every 30 seconds)"
-msgstr ""
+msgstr "Reléoppdatering (hvert 30. sekund)"
 
 #: terrariumNotification.py:162
 msgid "Max wattage"
-msgstr ""
+msgstr "Maks effekt"
 
 #: terrariumNotification.py:164
 msgid "True if in manual mode"
@@ -406,7 +406,7 @@ msgstr "Sann hvis i manuell modus"
 
 #: terrariumNotification.py:165
 msgid "True if it is a dimmer"
-msgstr ""
+msgstr "Sant hvis det er en dimmer"
 
 #: terrariumNotification.py:166 terrariumNotification.py:193
 msgid "Current state"
@@ -414,7 +414,7 @@ msgstr "Nåværende status"
 
 #: terrariumNotification.py:173
 msgid "Relay change (only when value is changed)"
-msgstr ""
+msgstr "Reléendring (bare når verdien endres)"
 
 #: terrariumNotification.py:180
 msgid "Relay toggle"
@@ -422,11 +422,11 @@ msgstr "Reléaktivering"
 
 #: terrariumNotification.py:187
 msgid "Button update (every 30 seconds)"
-msgstr ""
+msgstr "Knappoppdatering (hvert 30. sekund)"
 
 #: terrariumNotification.py:200
 msgid "Button change (only when value is changed)"
-msgstr ""
+msgstr "Knappendring (bare når verdien endres)"
 
 #: terrariumNotification.py:207
 msgid "Button action"
@@ -438,7 +438,7 @@ msgstr "Webkameraarkiv"
 
 #: terrariumNotification.py:222
 msgid "Lights area wrong state"
-msgstr ""
+msgstr "Lysområdet feil tilstand"
 
 #: terrariumNotification.py:224
 msgid "Current power state"
@@ -446,15 +446,15 @@ msgstr "Nåværende strømstatus"
 
 #: terrariumNotification.py:225
 msgid "Sensor measure state"
-msgstr ""
+msgstr "Sensormålingstilstand"
 
 #: terrariumNotification.py:226
 msgid "Enclosure name"
-msgstr ""
+msgstr "Kabinettnavn"
 
 #: terrariumNotification.py:227
 msgid "Enclosure running mode"
-msgstr ""
+msgstr "Kjøremodus for kabinett"
 
 #: terrariumNotification.py:441
 msgid "Display"
@@ -474,7 +474,7 @@ msgstr "Webhook"
 
 #: terrariumNotification.py:463
 msgid "MQTT"
-msgstr ""
+msgstr "MQTT"
 
 #: terrariumNotification.py:467
 msgid "Pushover"
@@ -482,7 +482,7 @@ msgstr "Pushover"
 
 #: terrariumNotification.py:471
 msgid "Buzzer"
-msgstr ""
+msgstr "Buzzer"
 
 #: terrariumWebserver.py:165 terrariumWebserver.py:253
 msgid "Authenticate to make any changes"
