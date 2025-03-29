@@ -229,21 +229,21 @@
             "placeholder": "Tidspunkt for å slå på"
           },
           "relays": {
-            "help": "Temperatur sensorer.",
+            "help": "Velg relé(ene) du vil aktivere.",
             "invalid": "Vennligst velg.",
             "label": "Reléer",
-            "placeholder": "Temperatur sensorer"
+            "placeholder": "Velg Relé(er)"
           },
           "settle_time": {
             "help": "Varigheten i sekunder mellom to handlinger.",
-            "invalid": "Dato og tid.",
-            "label": "Tidsavbrudd for utligning",
-            "placeholder": "Tidsavbrudd for utligning"
+            "invalid": "Skriv inn et gyldig tall.",
+            "label": "Utlingningstid",
+            "placeholder": "Utlingningstid"
           },
           "trigger_threshold": {
             "help": "Angi antall alarmer før handling finner sted.",
-            "invalid": "Dato og tid.",
-            "label": "Grense",
+            "invalid": "Skriv et gyldig tall.",
+            "label": "Alarmgrense",
             "placeholder": "Grense"
           },
           "tweaks": {
@@ -252,7 +252,7 @@
             },
             "off": {
               "dimmer": {
-                "label": "Dimmer av varighet"
+                "label": "Varighet dimmer av"
               },
               "relay": {
                 "label": "Reléforsinkelse av"
@@ -260,7 +260,7 @@
             },
             "on": {
               "dimmer": {
-                "label": "Dimmer på varighet"
+                "label": "Varighet dimmer på"
               },
               "relay": {
                 "label": "Reléforsinkelse på"
@@ -274,9 +274,9 @@
         "low": {
           "begin": {
             "help": "Tiden på døgnet da reléene slås på hver natt.",
-            "invalid": "Dato og tid.",
-            "label": "Dato og tid",
-            "placeholder": "Dato og tid"
+            "invalid": "Skriv inn et gyldig tidspunkt.",
+            "label": "Starttid",
+            "placeholder": "Skriv inn starttid"
           },
           "depend_on_relays": {
             "help": "Velg reléene noen av disse reléene er avhengig av.",
@@ -299,69 +299,69 @@
               "ignore": "Ignorert",
               "open": "Åpen"
             },
-            "placeholder": "Merk et valg"
+            "placeholder": "Merk en modus"
           },
           "end": {
             "help": "Tiden på døgnet da reléene slås av hver natt.",
-            "invalid": "Dato og tid.",
-            "label": "Dato og tid",
-            "placeholder": "Dato og tid"
+            "invalid": "Skriv inn et gyldig tidspunkt.",
+            "label": "Sluttid",
+            "placeholder": "Skriv inn sluttid"
           },
           "ignore_low": {
-            "help": "Viser sensorens lavest alarm verdi av sensoren. Når den er under denne verdien, kan alarmer utløses.",
-            "label": "Legg til nytt webkamera"
+            "help": "Aktiver for å ignorere den lave alarmverdien til sensorene, og bruk kun høy alarmverdi.",
+            "label": "Ignorer lavalarm"
           },
           "light_status": {
-            "help": "Arkiver lys status.",
+            "help": "Velg lysstatus.",
             "invalid": "Vennligst ta et valg.",
-            "label": "Lys tilstand",
+            "label": "Lysstatus",
             "options": {
               "ignore": "Ignorert",
               "off": "Av",
               "on": "På"
             },
-            "placeholder": "Merk et valg"
+            "placeholder": "Velg en tilstand"
           },
           "off_duration": {
             "help": "Varigheten når reléene skal være avslått når de er slått av. Skriv inn '0' for å deaktivere.",
-            "invalid": "Tidtaker periode på varighet i minutter.",
-            "label": "Tidtaker av varighet",
-            "placeholder": "Tidtaker av varighet"
+            "invalid": "Skriv inn varighet i minutter.",
+            "label": "Av varighet",
+            "placeholder": "Av varighet"
           },
           "on_duration": {
             "help": "Varigheten når reléene skal være på. Hvis dette er kortere enn hele dagen, vil du få en timerfunksjonalitet. Skriv inn '0' for å ha en hel natt.",
-            "invalid": "Tidtaker periode på varighet i minutter.",
-            "label": "Varighet",
-            "placeholder": "Varighet"
+            "invalid": "Skriv inn varighet i minutter.",
+            "label": "Påvarighet",
+            "placeholder": "Påvarighet"
           },
           "playlists": {
-            "help": "Temperatur sensorer.",
+            "help": "Velg spillelisten(e) som skal spilles.",
             "invalid": "Vennligst velg.",
             "label": "Spilleliste",
-            "placeholder": "Temperatur sensorer"
+            "placeholder": "Velg spilleliste"
           },
           "power_on_time": {
-            "help": "Kun endring.",
-            "invalid": "Dato og tid.",
-            "label": "Slå på",
-            "placeholder": "Slå på"
+            "help": "Varigheten i sekund for å skru på relé.",
+            "invalid": "Skriv inn et gyldig tall.",
+            "label": "På tid",
+            "placeholder": "På tid"
           },
           "relays": {
-            "help": "Temperatur sensorer.",
-            "invalid": "Vennligst ta et valg.",
+            "help": "Velg Relé(ene) som skal toggles.",
+            "invalid": "Vennligst velg.",
             "label": "Reléer",
-            "placeholder": "Temperatur sensorer"
+            "placeholder": "Velg Relé(er)"
           },
           "settle_time": {
             "help": "Varigheten i sekunder mellom to handlinger.",
-            "invalid": "Dato og tid.",
-            "label": "Tidsavbrudd for utligning",
-            "placeholder": "Tidsavbrudd for utligning"
+            "invalid": "Skriv inn et gyldig tall.",
+            "label": "Utligningstid",
+            "placeholder": "Utligningstid"
           },
           "trigger_threshold": {
             "help": "Angi antall alarmer før handling finner sted.",
-            "invalid": "Dato og tid.",
-            "label": "Grense",
+            "invalid": "Skriv inn et gyldig tall.",
+            "label": "Alarmgrense",
             "placeholder": "Grense"
           },
           "tweaks": {
@@ -391,45 +391,45 @@
         },
         "main_lights": {
           "help": "Slå på dette hvis dette er hovedlysene for dette kabinettet. Denne brukes til lyssjekkene i andre områder.",
-          "label": "Minimum lys timer"
+          "label": "Hovedlys"
         },
         "max_day_hours": {
           "help": "Det maksimale antallet timer som lysene er slått på. Dette er kun gyldig i værmodus. Når dagen er lengre enn denne maksimumsverdien, vil dagen bli forkortet til denne maksimumsverdien.",
           "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Maksimalt antall timer",
-          "placeholder": "Brukernavn"
+          "placeholder": "Skriv et tall"
         },
         "min_day_hours": {
           "help": "Minimum antall timer som lysene er slått på. Dette er kun gyldig i værmodus. Når dagen er kortere enn denne minimumsverdien, utvides dagen til denne minimumsverdien.",
           "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Minste antall timer",
-          "placeholder": "Brukernavn"
+          "placeholder": "Striv et tall"
         },
         "periods": {
-          "day": "Dør innstillinger",
+          "day": "Dag innstillinger",
           "high": "Høy alarm",
           "info": "Nedenfor kan du velge releer og timerinnstillinger per periode dagtid og natt.",
           "low": "Lav alarm",
-          "night": "Bryter innstillinger",
-          "varation": "Varighet"
+          "night": "Nattinstillinger",
+          "varation": "Variasjon"
         },
         "sensors": {
           "help": "Velg sensorer som skal brukes for sensorbasert modus.",
           "invalid": "Vennligst velg.",
           "label": "Sensorer",
-          "placeholder": "Temperatur sensorer"
+          "placeholder": "Velg sensorer"
         },
         "shift_day_hours": {
-          "help": "Hvor lang tid det tar å skifte i timer basert på solens stigetid. Negative verdier vil gjøre at dagen starter tidligere.",
+          "help": "Antall timer å forskyve tiden basert på soloppgangstid. Negative verdier vil gjøre at dagen starter tidligere.",
           "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
-          "label": "Timer skifte",
-          "placeholder": "Brukernavn"
+          "label": "Timeforskyvning",
+          "placeholder": "Skriv et tall"
         },
         "soundcard": {
           "help": "Velg lydkortet som brukes for dette området.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Lydkort",
-          "placeholder": "Merk et valg"
+          "placeholder": "Velg lydkort"
         },
         "variation": {
           "offset": {
@@ -437,7 +437,7 @@
           },
           "period": {
             "invalid": "Skriv inn et gyldig tall.",
-            "offset": "Forskyvning",
+            "offset": "Offset",
             "placeholder": "Terskel",
             "source": "Skriv inn en fullstendig url, lokal JSON-fil eller skriptfil"
           },
@@ -461,19 +461,19 @@
           "help": "Angi høyden på vanntanken.",
           "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Høyde",
-          "placeholder": "Brukernavn"
+          "placeholder": "Skriv et tall"
         },
         "watertank_offset": {
           "help": "Angi offset mellom sensor og vannhøyde.",
           "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Forskyvning",
-          "placeholder": "Brukernavn"
+          "placeholder": "Skriv et tall"
         },
         "watertank_volume": {
           "help": "Strømforbruket og/eller vannstrømmen per minutt når den slås på.",
           "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Volum",
-          "placeholder": "Brukernavn"
+          "placeholder": "Skriv et tall"
         }
       },
       "title": "Områdeinnstillinger",
@@ -481,7 +481,7 @@
         "help": "Velg type område. Hver type har sine egne ekstra alternativer og logikk.",
         "invalid": "Vennligst velg.",
         "label": "Type",
-        "placeholder": "Temperatur sensorer"
+        "placeholder": "Velg type"
       }
     }
   },
@@ -648,7 +648,7 @@
       "current": {
         "help": "Nåværende status for knappen.",
         "label": "Nåværende",
-        "placeholder": "Nåværende verdi"
+        "placeholder": "Gjeldende verdi"
       },
       "hardware": {
         "help": "Viser lydkortet som brukes til å spille av lyd.",
@@ -660,7 +660,7 @@
         "help": "Skriv inn et navn som er lett å huske.",
         "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
         "label": "Navn",
-        "placeholder": "Brukernavn"
+        "placeholder": "Skriv inn brukernavn"
       },
       "save": {
         "error": {
@@ -670,7 +670,7 @@
           "message": "Knappen ''{name}'' er oppdatert."
         }
       },
-      "title": "Dør innstillinger"
+      "title": "Knapp innstillinger"
     },
     "title": "Knapper"
   },
@@ -717,7 +717,7 @@
           "label": "Gjenta"
         },
         "repeat_amount": {
-          "label": "Merk et valg"
+          "label": "Velg hvor mange"
         },
         "save": {
           "error": {
@@ -730,7 +730,7 @@
         "summary": {
           "help": "Brukernavn.",
           "invalid": "Navnet kan ikke være tomt.",
-          "label": "Brukernavn"
+          "label": "Skriv inn brukernavn"
         },
         "title": "Begivenhet",
         "update": {
@@ -787,7 +787,7 @@
     },
     "area": {
       "current": "nåværende",
-      "current_status": "Nåværende status",
+      "current_status": "Gjeldende status",
       "delete": {
         "title": "Slett fil"
       },
@@ -812,7 +812,7 @@
       "type": {
         "audio": "Lyd",
         "cooling": "Kjøling",
-        "heating": "Innstillinger",
+        "heating": "Oppvarming",
         "humidity": "Luftfuktighet",
         "lights": "Lys",
         "main_lights": "Minimum lys timer",
@@ -841,7 +841,7 @@
         "title": "Liste"
       },
       "new_area": {
-        "title": "Legg til nytt webkamera"
+        "title": "Nytt område"
       },
       "new_enclosure": {
         "title": "Legg til ny sensor"
@@ -868,7 +868,7 @@
         "help": "Skriv inn et navn som er lett å huske.",
         "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
         "label": "Navn",
-        "placeholder": "Brukernavn"
+        "placeholder": "Skriv inn brukernavn"
       },
       "save": {
         "error": {
@@ -985,7 +985,7 @@
       "message": {
         "help": "Skriv inn en melding. Du kan bruke plassholderverdier her.",
         "label": "Melding",
-        "placeholder": "Brukernavn"
+        "placeholder": "Skriv en melding"
       },
       "placeholders": {
         "format": "Bruk {placeholder} formatet for å bruke en plassholder i meldingen din.{new_line}Tallverdier kan rundes av ved å bruke {link_start}`.:2f`-formatet{link_end}",
@@ -1010,14 +1010,14 @@
         "help": "Skriv inn et kort emne. Du kan bruke plassholderverdier her.",
         "invalid": "Emnet kan ikke være tomt.",
         "label": "Emne",
-        "placeholder": "Brukernavn"
+        "placeholder": "Skriv et emne"
       },
       "title": "Innstillinger for webkamera",
       "type": {
         "help": "Varsler.",
         "invalid": "Vennligst velg.",
         "label": "Meldingstype",
-        "placeholder": "Temperatur sensorer"
+        "placeholder": "Velg type"
       }
     },
     "table": {
@@ -1242,10 +1242,10 @@
     },
     "menu": {
       "new": {
-        "title": "Legg til nytt webkamera"
+        "title": "Nytt relé"
       },
       "scan": {
-        "title": "Temperatur sensorer"
+        "title": "Skann reléer"
       },
       "status": {
         "title": "Status"
@@ -1284,7 +1284,7 @@
       "current": {
         "help": "Nåværende status av reléet.",
         "label": "Nåværende",
-        "placeholder": "Nåværende verdi"
+        "placeholder": "Gjeldene verdi"
       },
       "flow": {
         "help": "Angi (maks) vannmengde når den er slått på.",
@@ -1301,7 +1301,7 @@
         "help": "Skriv inn et navn som er lett å huske.",
         "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
         "label": "Navn",
-        "placeholder": "Brukernavn"
+        "placeholder": "Skriv et navn"
       },
       "save": {
         "error": {
@@ -1330,16 +1330,16 @@
   },
   "sensors": {
     "actions": {
-      "delete": "Temperatur sensorer",
+      "delete": "Slett sensor",
       "export": "pH sensor",
       "ignore": "Luftfuktighet sensor",
       "settings": "Lyssensor"
     },
     "all": {
       "menu": {
-        "title": "Temperatur sensorer"
+        "title": "Alle sensorer"
       },
-      "title": "Temperatur sensorer"
+      "title": "Alle sensorer"
     },
     "altitude": {
       "menu": {
@@ -1425,7 +1425,7 @@
         "title": "pH sensor"
       },
       "scan": {
-        "title": "Temperatur sensorer"
+        "title": "Skann sensorer"
       },
       "title": "Sensorer"
     },
@@ -1470,7 +1470,7 @@
         "ccs811_compensation_sensors": {
           "help": "Velg miljø dør status når arkivering er aktivert.",
           "label": "Temperatursensor",
-          "placeholder": "Temperatur sensorer"
+          "placeholder": "Velg kompensasjonssensorer"
         },
         "chirp_max_moist": {
           "help": "Angi maksimal fuktighetsverdi.",
@@ -1496,7 +1496,7 @@
       "current": {
         "help": "Sensorens nåværende tilstand.",
         "label": "Nåværende",
-        "placeholder": "Nåværende verdi"
+        "placeholder": "Gjeldende verdi"
       },
       "exclude_avg": {
         "help": "Ekskludert fra gjennomsnitts kalkuleringen.",
@@ -1531,7 +1531,7 @@
         "help": "Skriv inn et navn som er lett å huske.",
         "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
         "label": "Navn",
-        "placeholder": "Brukernavn"
+        "placeholder": "Skriv et navn"
       },
       "save": {
         "ok": {
@@ -1543,7 +1543,7 @@
         "help": "Viser lydkortet som brukes til å spille av lyd.",
         "invalid": "Merk et valg.",
         "label": "Type",
-        "placeholder": "Temperatur sensorer"
+        "placeholder": "Velg type"
       }
     },
     "temperature": {
@@ -1561,13 +1561,13 @@
     },
     "uvb": {
       "menu": {
-        "title": "uvb"
+        "title": "uv-b"
       },
       "title": "UVB-sensorer"
     },
     "uvi": {
       "menu": {
-        "title": "uvi"
+        "title": "uv-i"
       },
       "title": "UVI-sensorer"
     }
@@ -1600,7 +1600,7 @@
         "help": "Skriv inn et navn som er lett å huske.",
         "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
         "label": "Navn",
-        "placeholder": "Brukernavn"
+        "placeholder": "Skriv et navn"
       },
       "rate_limit": {
         "help": "Maksimalt antall meldinger per minutt for denne tjenesten. Bruk 0 for ubegrenset.",
@@ -1651,13 +1651,13 @@
         "password": {
           "help": "Skriv inn serverpassordet.",
           "label": "Server passord",
-          "placeholder": "Brukernavn"
+          "placeholder": "Skriv et brukernavn"
         },
         "port": {
           "help": "Skriv inn serverportnummeret.",
-          "invalid": "Det angitte portnummeret er ikke gyldig. Den kan ikke være tom.",
+          "invalid": "Det angitte portnummeret er ikke gyldig. Det kan ikke være tomt.",
           "label": "Serverport",
-          "placeholder": "Brukernavn"
+          "placeholder": "Skriv et portnummer"
         },
         "pushover": {
           "label": "Lag dine tokens ved å registrere TerrariumPI som en app {link}."
@@ -1672,7 +1672,7 @@
           "help": "Viser volumet for denne spillelisten.",
           "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Ons",
-          "placeholder": "Dato og tid"
+          "placeholder": "Skriv inn rød GPIO-pin"
         },
         "sender": {
           "help": "Skriv inn avsenders email.",
@@ -1706,13 +1706,13 @@
         "username": {
           "help": "Skriv inn serverbrukernavnet.",
           "label": "Server brukernavn",
-          "placeholder": "Brukernavn"
+          "placeholder": "Skriv inn et brukernavn"
         },
         "yellow": {
           "help": "Skriv inn GPIO-pinne for gult lys.",
           "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Rav",
-          "placeholder": "Dato og tid"
+          "placeholder": "Angi gul GPIO-pin"
         }
       },
       "title": "Varsler",
@@ -1994,7 +1994,7 @@
     }
   },
   "topbar": {
-    "current_status": "Nåværende status",
+    "current_status": "Gjeldene status",
     "door_status": "Dør status",
     "upcoming_events": "{number, plural, =0 {ingen hendelser} =1 {ett arrangement} other {# arrangementer}}"
   },
@@ -2037,8 +2037,8 @@
   "webcams": {
     "actions": {
       "delete": "Slett fil",
-      "ignore": "Legg til nytt webkamera",
-      "settings": "Legg til nytt webkamera"
+      "ignore": "Ignorer webkamera",
+      "settings": "Endre webkamera"
     },
     "archive": {
       "modal": {
@@ -2210,7 +2210,7 @@
           "help": "I2C-adresse.",
           "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Bevegelse minimum område",
-          "placeholder": "Brukernavn"
+          "placeholder": "Skriv inn nummer"
         },
         "boxes": {
           "help": "Aktiver eller deaktivere bevegelsesbokser for bevegelsesdeteksjon arkivering.",
@@ -2238,14 +2238,14 @@
           "help": "Bevegelses delta grense.",
           "invalid": "Skriv inn en minimumsverdi av {value}.",
           "label": "Bevegelses delta grense",
-          "placeholder": "Brukernavn"
+          "placeholder": "Skriv inn nummer"
         }
       },
       "name": {
         "help": "Skriv inn et navn som er lett å huske.",
         "invalid": "Det angitte navnet er ikke gyldig. Den kan ikke være tom.",
         "label": "Navn",
-        "placeholder": "Brukernavn"
+        "placeholder": "Skriv et navn"
       },
       "preview": {
         "label": "Forhåndsvisning"
