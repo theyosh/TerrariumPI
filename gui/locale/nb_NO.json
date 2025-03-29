@@ -87,7 +87,7 @@
             "label": "Forskjell"
           },
           "duration": {
-            "help": "Skriv inn hvor varighet i minutter eller et gitt tidspunkt på dagen."
+            "help": "Skriv inn varighet i minutter eller et gitt tidspunkt på dagen."
           },
           "external_source": {
             "help": "Skriv hele adressen til den eksterne kilden i følge den Eksterne data funksjonen.",
@@ -190,7 +190,7 @@
             "placeholder": "Skriv inn sluttid"
           },
           "ignore_high": {
-            "help": "Skru på for å ignorere høyalarmverdien til sensorene, og bruk kun lavalarmverdien.",
+            "help": "Slå på for å ignorere høyalarmverdien til sensorene, og bruk kun lavalarmverdien.",
             "label": "Ignorer høyalarm"
           },
           "light_status": {
@@ -205,13 +205,13 @@
             "placeholder": "Velg en status"
           },
           "off_duration": {
-            "help": "Varigheten når reléene skal være avslått når de er slått av. Skriv inn '0' for å deaktivere.",
+            "help": "Varigheten på hvor lenge reléene skal være avslått når de er slått av. Skriv inn '0' for å deaktivere.",
             "invalid": "Skriv inn en gyldig varighet i minutter.",
             "label": "Av varighet",
             "placeholder": "Av varighet"
           },
           "on_duration": {
-            "help": "Varigheten når reléene skal være på. Hvis dette er kortere enn hele dagen, vil du få en timerfunksjonalitet. Skriv inn '0' for å ha en hel natt.",
+            "help": "Varigheten på hvor lenge reléene skal være slått på. Hvis dette er kortere enn hele dagen, vil du få en timerfunksjonalitet. Skriv inn '0' for å ha en hel natt.",
             "invalid": "Skriv en gyldig varighet i minutter.",
             "label": "På varighet",
             "placeholder": "På varighet"
@@ -223,13 +223,13 @@
             "placeholder": "Velg spillelister"
           },
           "power_on_time": {
-            "help": "Varigheten i sekunder som skrur på reléet.",
+            "help": "Varigheten i sekunder som slår på reléet.",
             "invalid": "Skriv et gyldig tall.",
             "label": "Tidspunkt for å slå på",
             "placeholder": "Tidspunkt for å slå på"
           },
           "relays": {
-            "help": "Velg relé(ene) du vil aktivere.",
+            "help": "Velg relé(ene) du vil veklse.",
             "invalid": "Vennligst velg.",
             "label": "Reléer",
             "placeholder": "Velg Relé(er)"
@@ -248,7 +248,7 @@
           },
           "tweaks": {
             "dimmer": {
-              "info": "Velg forsinkelse og varighet for dimmeren å gå til på eller av i minutter. Maks varighet er 180 minutter."
+              "info": "Velg forsinkelse og varighet for dimmeren å gå på eller av i minutter. Maks varighet er 180 minutter."
             },
             "off": {
               "dimmer": {
@@ -308,7 +308,7 @@
             "placeholder": "Skriv inn sluttid"
           },
           "ignore_low": {
-            "help": "Aktiver for å ignorere den lave alarmverdien til sensorene, og bruk kun høy alarmverdi.",
+            "help": "Slå på for å ignorere den lave alarmverdien til sensorene, og bruk kun høy alarmverdi.",
             "label": "Ignorer lavalarm"
           },
           "light_status": {
@@ -323,16 +323,16 @@
             "placeholder": "Velg en tilstand"
           },
           "off_duration": {
-            "help": "Varigheten når reléene skal være avslått når de er slått av. Skriv inn '0' for å deaktivere.",
+            "help": "Varigheten på når reléene skal være avslått når de er slått av. Skriv inn '0' for å deaktivere.",
             "invalid": "Skriv inn varighet i minutter.",
             "label": "Av varighet",
             "placeholder": "Av varighet"
           },
           "on_duration": {
-            "help": "Varigheten når reléene skal være på. Hvis dette er kortere enn hele dagen, vil du få en timerfunksjonalitet. Skriv inn '0' for å ha en hel natt.",
+            "help": "Varigheten på når reléene skal være på. Hvis dette er kortere enn hele dagen, vil du få en timerfunksjonalitet. Skriv inn '0' for å ha en hel natt.",
             "invalid": "Skriv inn varighet i minutter.",
-            "label": "Påvarighet",
-            "placeholder": "Påvarighet"
+            "label": "På varighet",
+            "placeholder": "På varighet"
           },
           "playlists": {
             "help": "Velg spillelisten(e) som skal spilles.",
@@ -341,13 +341,13 @@
             "placeholder": "Velg spilleliste"
           },
           "power_on_time": {
-            "help": "Varigheten i sekund for å skru på relé.",
+            "help": "Varigheten i sekund for å slå på relé.",
             "invalid": "Skriv inn et gyldig tall.",
             "label": "På tid",
             "placeholder": "På tid"
           },
           "relays": {
-            "help": "Velg Relé(ene) som skal toggles.",
+            "help": "Velg Relé(ene) som skal veksles.",
             "invalid": "Vennligst velg.",
             "label": "Reléer",
             "placeholder": "Velg Relé(er)"
@@ -366,7 +366,7 @@
           },
           "tweaks": {
             "dimmer": {
-              "info": "Velg forsinkelse og varighet for dimmeren å gå til på eller av i minutter. Maks varighet er 180 minutter."
+              "info": "Velg forsinkelse og varighet for dimmeren å gå på eller av i minutter. Maks varighet er 180 minutter."
             },
             "off": {
               "dimmer": {
@@ -629,7 +629,7 @@
       },
       "calibration": {
         "inverse": {
-          "help": "Aktiver for å snu den eksterne verdien.",
+          "help": "Slå på for å snu den eksterne verdien.",
           "label": "Omvendt verdi"
         },
         "ldr_capacitor": {
@@ -764,11 +764,11 @@
         "title": "Vannføring i {water_flow_indicator}"
       },
       "total_power_usage": {
-        "duration": "om {duration}",
+        "duration": "i {duration}",
         "title": "Total strøm i kWh"
       },
       "total_water_usage": {
-        "duration": "om {duration}",
+        "duration": "i {duration}",
         "title": "Totalt vann i L"
       },
       "uptime": {
@@ -1055,7 +1055,7 @@
     },
     "form": {
       "toggle": {
-        "info": "Generell informasjon"
+        "info": "Vis/skjul hjelpeinformasjon"
       }
     },
     "general": {
@@ -1209,7 +1209,7 @@
         "message": "Er du sikker på at du vil ignorere reléet ''{name}''?"
       },
       "manual_mode": {
-        "message": "Vil du veksle mellom manuell modus for relé ''{name}''?"
+        "message": "Slå på for manuell modus for relé ''{name}''?"
       }
     },
     "delete": {
@@ -1826,7 +1826,7 @@
       },
       "distance_indicator": {
         "help": "Velg avstandsindikatoren. Påvirker kun gjeldende verdier.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Avstand"
       },
       "exclude-ids": {
@@ -1948,7 +1948,7 @@
       },
       "wind_speed_indicator": {
         "help": "Velg vindhastighetsindikatoren. Påvirker kun gjeldende verdier.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Vindhastighet"
       }
     },
@@ -2059,7 +2059,7 @@
       "new_marker": "Legg til markør",
       "save_raw_image": "Lagre RAW-bilde",
       "show_markers": "Vis markører",
-      "toggle_volume": "Slå på volum"
+      "toggle_volume": "Slå på/av volum"
     },
     "delete": {
       "confirm": {
@@ -2098,7 +2098,7 @@
         "delete": "Slett fil",
         "doors": {
           "help": "Velg sensorene du vil vise.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Sensorer"
         },
         "title": "Sensorer"
@@ -2177,7 +2177,7 @@
       },
       "awb": {
         "help": "Skift maskinvare.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "hvit balanse",
         "options": {
           "auto": "Auto",
@@ -2214,7 +2214,7 @@
         },
         "boxes": {
           "help": "Aktiver eller deaktivere bevegelsesbokser for bevegelsesdeteksjon arkivering.",
-          "invalid": "Vennligst ta et valg.",
+          "invalid": "Vennligst velg.",
           "label": "Vis bevegelses bokser",
           "options": {
             "blue": "Blå",
@@ -2252,7 +2252,7 @@
       },
       "rotation": {
         "help": "Bilderotasjon.",
-        "invalid": "Vennligst ta et valg.",
+        "invalid": "Vennligst velg.",
         "label": "Sted",
         "options": {
           "degrees_0": "grader",
