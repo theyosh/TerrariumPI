@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2025-03-29 08:15+0000\n"
+"PO-Revision-Date: 2025-03-29 09:27+0000\n"
 "Last-Translator: Mkorneli <mk@nessu.no>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
 "terrariumpi/backend/nb_NO/>\n"
@@ -180,7 +180,7 @@ msgstr "En ny versjon ({version}) er tilgjengelig!"
 
 #: terrariumEngine.py:1370 terrariumEngine.py:1400
 msgid "Current active relays"
-msgstr "Spenning aktive reléer"
+msgstr "Nåværende aktive reléer"
 
 #: terrariumEngine.py:1371
 msgid "Watt"
@@ -257,7 +257,7 @@ msgstr "Systemlast siste minutt"
 #: terrariumNotification.py:83 terrariumNotification.py:85
 #: terrariumNotification.py:90 terrariumNotification.py:133
 msgid "True if there is an alarm"
-msgstr "Sann hvis det er en alarm"
+msgstr "Sant hvis det er en alarm"
 
 #: terrariumNotification.py:84
 msgid "System CPU temperature"
@@ -402,7 +402,7 @@ msgstr "Maks effekt"
 
 #: terrariumNotification.py:164
 msgid "True if in manual mode"
-msgstr "Sann hvis i manuell modus"
+msgstr "Sant hvis i manuell modus"
 
 #: terrariumNotification.py:165
 msgid "True if it is a dimmer"
@@ -418,7 +418,7 @@ msgstr "Reléendring (bare når verdien endres)"
 
 #: terrariumNotification.py:180
 msgid "Relay toggle"
-msgstr "Reléaktivering"
+msgstr "Reléveksling"
 
 #: terrariumNotification.py:187
 msgid "Button update (every 30 seconds)"
@@ -458,7 +458,7 @@ msgstr "Kjøremodus for kabinett"
 
 #: terrariumNotification.py:441
 msgid "Display"
-msgstr "Vis alternativer"
+msgstr "Skjerm"
 
 #: terrariumNotification.py:445
 msgid "Email"
