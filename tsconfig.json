@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "verbatimModuleSyntax": true,
+  },
+  "exclude": [
+    ".github/workflows",
+    ".idea",
+    ".vscode",
+    "node_modules",
+    ".env",
+    ".gitignore",
+    ".prettierignore",
+    ".prettierrc",
+    "bable.config.js",
+    "jest.config.js",
+    "package-lock.json",
+    "package.json",
+    "rollup.config.js",
+    "svelte.config.js"
+  ]
+}
