@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
- Run this script in the contrib folder with the same python version as TerrariumPI
+Run this script in the contrib folder with the same python version as TerrariumPI
 
- 1. First enable python environment: source ../venv/bin/activate
- 2. Run this script with the -h for more information: ./fix_db.py -h
+1. First enable python environment: source ../venv/bin/activate
+2. Run this script with the -h for more information: ./fix_db.py -h
 """
 
 from pathlib import Path

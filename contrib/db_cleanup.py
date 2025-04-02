@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
- Run this script in the contrib folder with the same python version as TerrariumPI
+Run this script in the contrib folder with the same python version as TerrariumPI
 
- ./db_cleanup.py
+./db_cleanup.py
 """
 
 import sqlite3

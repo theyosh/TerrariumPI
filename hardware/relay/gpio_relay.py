@@ -9,6 +9,7 @@ from hardware.io_expander import terrariumIOExpander
 # For traditional GPIO the inverse is fixed by setting active_high to HIGH
 # For IO Expander we do it by hand
 
+
 class terrariumRelayGPIO(terrariumRelay):
     HARDWARE = "gpio"
     NAME = "GPIO devices"
@@ -30,7 +31,9 @@ class terrariumRelayGPIO(terrariumRelay):
             return device
 
         else:
-            return OutputDevice(terrariumUtils.to_BCM_port_number(self._address[0]), active_high=not self.INVERSE, initial_value=None)
+            return OutputDevice(
+                terrariumUtils.to_BCM_port_number(self._address[0]), active_high=not self.INVERSE, initial_value=None
+            )
 
     def _set_hardware_value(self, state):
         if isinstance(self.device, terrariumIOExpander):

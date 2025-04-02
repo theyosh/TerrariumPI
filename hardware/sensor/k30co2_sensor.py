@@ -21,7 +21,7 @@ class terrariumK30CO2Sensor(terrariumSensor):
     def _get_data(self):
         data = None
         with self.device as sensor:
-            sensor.write(b"\xFE\x44\x00\x08\x02\x9F\x25")
+            sensor.write(b"\xfe\x44\x00\x08\x02\x9f\x25")
             # Give the sensor some time to warm up
             sleep(0.5)
             response = sensor.read(7)
