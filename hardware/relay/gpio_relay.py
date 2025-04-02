@@ -2,10 +2,12 @@ from . import terrariumRelay
 from terrariumUtils import terrariumUtils
 
 # pip install gpiozero
-from gpiozero import LED
+from gpiozero import OutputDevice
 
 from hardware.io_expander import terrariumIOExpander
 
+# For traditional GPIO the inverse is fixed by setting active_high to HIGH
+# For IO Expander we do it by hand
 
 class terrariumRelayGPIO(terrariumRelay):
     HARDWARE = "gpio"
@@ -28,13 +30,13 @@ class terrariumRelayGPIO(terrariumRelay):
             return device
 
         else:
-            return LED(terrariumUtils.to_BCM_port_number(self._address[0]), initial_value=None)
+            return OutputDevice(terrariumUtils.to_BCM_port_number(self._address[0]), active_high=not self.INVERSE, initial_value=None)
 
     def _set_hardware_value(self, state):
-        if self.INVERSE:
-            state = self.ON if state == self.OFF else self.OFF
-
         if isinstance(self.device, terrariumIOExpander):
+            if self.INVERSE:
+                state = self.ON if state == self.OFF else self.OFF
+
             self.device.state = state == self.ON
 
         else:
@@ -50,18 +52,16 @@ class terrariumRelayGPIO(terrariumRelay):
 
         if isinstance(self.device, terrariumIOExpander):
             state = self.device.state
+            if self.INVERSE:
+                state = self.ON if state == False else self.OFF
 
         else:
-            state = self.device.is_lit
+            state = self.device.value
 
         if state is None:
             return None
 
-        state = terrariumUtils.is_true(state)
-        if self.INVERSE:
-            state = self.ON if state == False else self.OFF
-        else:
-            state = self.OFF if state == False else self.ON
+        state = self.OFF if terrariumUtils.is_true(state) == False else self.ON
 
         return state
 
