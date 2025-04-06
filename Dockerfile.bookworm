@@ -32,7 +32,7 @@ COPY contrib/python3-voltcraft-sem6000.patch.diff .
 
 # Some strange DNS issues with installing PGP keys. keyserver.ubuntu.com => 185.125.188.26
 RUN  apt-get update \
-  && apt-get install -y --no-install-recommends gnupg \
+  && apt-get install -y --no-install-recommends gnupg libxslt1-dev libxml2-dev \
   && echo "deb http://raspbian.raspberrypi.org/raspbian/ bookworm main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list \
   && echo "deb http://archive.raspberrypi.org/debian/ bookworm main" >> /etc/apt/sources.list.d/raspberrypi.list \
   && apt-key adv --keyserver 185.125.188.26 --recv-keys 9165938D90FDDD2E 82B129927FA3303E \
