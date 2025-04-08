@@ -83,7 +83,7 @@
             }
           },
           "difference": {
-            "help": "Voer een negatieve of positieve waarde in voor een relatieve actie. \nEen getal wordt behandeld als een absolute waarde.",
+            "help": "Voer een negatieve of positieve waarde in voor een relatieve actie. Een getal wordt behandeld als een absolute waarde.",
             "label": "Verschil"
           },
           "duration": {
@@ -93,7 +93,7 @@
             "help": "Voer een volledige URL naar de externe bron in volgens de Externe data manier.",
             "label": "Externe bron-URL"
           },
-          "help": "Hier kunt u perioden invoeren waarin de sensoren hun waarden zullen wijzigen volgens de onderstaande lijst. \nZorg ervoor dat de perioden in chronologische volgorde staan!",
+          "help": "Hier kunt u perioden invoeren waarin de sensoren hun waarden zullen wijzigen volgens de onderstaande lijst. Zorg ervoor dat de perioden in chronologische volgorde staan!",
           "offset": {
             "label": "Offset"
           },
@@ -1217,7 +1217,7 @@
         "message": "Weet u zeker dat u het schakelaar ''{name}'' wilt verwijderen?"
       },
       "error": {
-        "message": "Het schakelaar ''{name}'' kon niet worden verwijderd!\nFout: {fout}"
+        "message": "Het schakelaar ''{name}'' kon niet worden verwijderd!\nFout: {error}"
       },
       "ok": {
         "message": "Het schakelaar ''{name}'' wordt verwijderd."
@@ -1382,7 +1382,7 @@
         "message": "Weet u zeker dat u de sensor ''{name}'' wilt verwijderen?"
       },
       "error": {
-        "message": "De sensor ''{name}'' kon niet worden verwijderd!\nFout: {fout}"
+        "message": "De sensor ''{name}'' kon niet worden verwijderd!\nFout: {error}"
       },
       "ok": {
         "message": "De sensor ''{name}'' wordt verwijderd."
