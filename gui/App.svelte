@@ -665,7 +665,7 @@
       target="_blank"
       rel="noopener noreferrer">2014</a
     >
-    - 2024 <a target="_blank" rel="noopener noreferrer" href="https://theyosh.nl">TheYOSH</a>
+    - 2025 <a target="_blank" rel="noopener noreferrer" href="https://theyosh.nl">TheYOSH</a>
     <!-- Credits to the original builders. The least I can do -->
     <small>
       using <a target="_blank" rel="noopener noreferrer" href="https://adminlte.io">AdminLTE</a>,

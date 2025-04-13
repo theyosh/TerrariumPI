@@ -35,7 +35,7 @@
           alt="TerariumPI Logo version {settings.version}"
         />
         <p>
-          TerrariumPI is started back in 2015 in order to keep my <a
+          TerrariumPI is started back in 2014 in order to keep my <a
             href="https://en.wikipedia.org/wiki/Madagascar_day_gecko"
             target="_blank"
             rel="noopener noreferrer">Madagaskar day gecko</a
@@ -93,7 +93,7 @@
             target="_blank"
             rel="noopener noreferrer">2014</a
           >
-          - 2024<br /><a href="https://theyosh.nl" target="_blank" rel="noopener noreferrer">TheYOSH</a>
+          - 2025<br /><a href="https://theyosh.nl" target="_blank" rel="noopener noreferrer">TheYOSH</a>
         </p>
       </Card>
     </div>
