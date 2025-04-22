@@ -345,7 +345,7 @@ Install required software
 Installing python module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${MODULE_NAME} (attempt ${ATTEMPT}) ...
 XXX
 EOF
-    pip install --upgrade "${PIP_MODULE}" 2> /dev/null
+    pip install --upgrade "${PIP_MODULE}" --extra-index-url https://www.piwheels.org/simple 2> /dev/null
 
     if [ $? -eq 0 ]; then
       # PIP install succeeded normally
