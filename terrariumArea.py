@@ -1002,8 +1002,8 @@ class terrariumAreaLights(terrariumArea):
         except Exception as ex:
             logger.debug(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}, error: {ex}')
 
-        if (relay.ON if action else relay.OFF) != relay.state and self.state[part]["powered"] == action:
-            delay = 0
+        #if (relay.ON if action else relay.OFF) != relay.state and self.state[part]["powered"] == action:
+        #    delay = 0
 
         if relay.is_dimmer:
             step_size = duration / (relay.ON - relay.OFF)
