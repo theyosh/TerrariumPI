@@ -75,19 +75,19 @@
         "area_variation": {
           "action": {
             "add": {
-              "help": ""
+              "help": "Eine neue Zeile hinzufügen"
             },
-            "label": "",
+            "label": "Aktion",
             "remove": {
-              "help": ""
+              "help": "Zeile entfernen"
             }
           },
           "difference": {
-            "help": "",
-            "label": ""
+            "help": "Gib einen negativen oder positiven Wert für eine relative Aktion ein. Eine Zahl wird als absoluter Wert behandelt.",
+            "label": "Unterschied"
           },
           "duration": {
-            "help": ""
+            "help": "Gib eine Dauer in Minuten oder eine Tageszeit ein."
           },
           "external_source": {
             "help": "",
@@ -95,7 +95,7 @@
           },
           "help": "",
           "offset": {
-            "label": ""
+            "label": "Verschiebung"
           },
           "period": {
             "help": "",
@@ -108,7 +108,7 @@
             "label": ""
           },
           "value": {
-            "help": ""
+            "help": "Gib einen negativen oder positiven Wert für die Verschiebung ein."
           },
           "weather": {
             "help": ""
