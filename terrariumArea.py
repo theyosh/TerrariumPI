@@ -374,12 +374,12 @@ class terrariumArea(object):
             period_str = str(period_str).strip()
 
             # 12-Stunden Format: "2:30 PM"
-            if period_str.upper().endswith((' AM', ' PM')):
+            if period_str.upper().endswith((" AM", " PM")):
                 time_obj = datetime.datetime.strptime(period_str.upper(), "%I:%M %p")
                 return time_obj.strftime("%H:%M")
 
             # 24-Stunden Format: "14:30"
-            elif ':' in period_str:
+            elif ":" in period_str:
                 time_obj = datetime.datetime.strptime(period_str, "%H:%M")
                 return time_obj.strftime("%H:%M")  # Normalisiert auch die Formatierung
 
