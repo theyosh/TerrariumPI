@@ -2,7 +2,7 @@
 # docker buildx build --platform linux/arm/v7 --progress=plain -t theyosh/terrariumpi:4.0.0 -f Dockerfile --push .
 
 # build sispmctl 4.12
-FROM gcc:12-bookworm as sispmctl_builder
+FROM gcc:12-bookworm AS sispmctl_builder
 ARG SISPMCTL_VERSION="4.12"
 WORKDIR /sispmctl
 RUN  apt-get update \
@@ -14,7 +14,7 @@ RUN  apt-get update \
   && make install
 
 # python builder, help keep image small
-FROM python:3.11-bookworm as python_builder
+FROM python:3.11-bookworm AS python_builder
 ENV PIP_DEFAULT_TIMEOUT=100 \
     # Allow statements and log messages to immediately appear
     PYTHONUNBUFFERED=1 \
@@ -69,7 +69,7 @@ RUN  git clone https://github.com/ageir/chirp-rpi.git --depth 1 "3rdparty/chirp-
   && find . -type d -name ".git" -exec rm -r {} +
 
 # Sourcecode cleanup and pre-prep
-FROM python:3.11-bookworm as sourcecode
+FROM python:3.11-bookworm AS sourcecode
 WORKDIR /TerrariumPI
 COPY . .
 # remove git and 3rdparty dir from code copy to help keep image smaller
@@ -77,7 +77,7 @@ COPY . .
 RUN rm -Rf .git 3rdparty gui package*.json postcss.config.js rollup.config.js .env.* html-template.js requirements.txt yarn.lock
 
 # actual image
-FROM python:3.11-slim-bookworm as finalimage
+FROM python:3.11-slim-bookworm AS finalimage
 ARG GITHUB_SHA="development"
 ARG JAVA=""
 ENV PIP_DEFAULT_TIMEOUT=100 \
