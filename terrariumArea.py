@@ -365,6 +365,32 @@ class terrariumArea(object):
         self.state["powered"] = self._powered
 
     def _setup_variation_data(self):
+        # Thanks to HTPProXy https://github.com/theyosh/TerrariumPI/issues/1009#issuecomment-2896732294
+        def parse_period_to_time(period_str):
+            """Parst verschiedene Zeit-Eingabeformate zu HH:MM"""
+            if not period_str:
+                return "00:00"
+
+            period_str = str(period_str).strip()
+
+            # 12-Stunden Format: "2:30 PM"
+            if period_str.upper().endswith((' AM', ' PM')):
+                time_obj = datetime.datetime.strptime(period_str.upper(), "%I:%M %p")
+                return time_obj.strftime("%H:%M")
+
+            # 24-Stunden Format: "14:30"
+            elif ':' in period_str:
+                time_obj = datetime.datetime.strptime(period_str, "%H:%M")
+                return time_obj.strftime("%H:%M")  # Normalisiert auch die Formatierung
+
+            # Sekunden als String: "3600"
+            else:
+                seconds = int(period_str)
+                seconds = seconds % 86400
+                hours = seconds // 3600
+                minutes = (seconds % 3600) // 60
+                return f"{hours:02d}:{minutes:02d}"
+
         self.state["variation"] = {
             "active": len(self.setup["sensors"]) > 0,
             "dynamic": False,
@@ -403,10 +429,8 @@ class terrariumArea(object):
             periods = len(self.state["variation"]["periods"])
 
             if "at" == variation.get("when"):
-                # Format datetime object to a time object
-
-                # TODO: Need to check if this will interfere with utc timestamps from history...
-                period_timestamp = datetime.datetime.fromtimestamp(int(variation.get("period"))).strftime("%H:%M")
+                # Format datetime object to a time string
+                period_timestamp = parse_period_to_time(variation.get("period"))
 
             elif "after" == variation.get("when"):
                 # !! UNTESTED !!
@@ -1001,9 +1025,6 @@ class terrariumAreaLights(terrariumArea):
             delay = tweaks["delay"]
         except Exception as ex:
             logger.debug(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}, error: {ex}')
-
-        #if (relay.ON if action else relay.OFF) != relay.state and self.state[part]["powered"] == action:
-        #    delay = 0
 
         if relay.is_dimmer:
             step_size = duration / (relay.ON - relay.OFF)
