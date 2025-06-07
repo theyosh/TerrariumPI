@@ -2,6 +2,259 @@ Changelog
 =========
 
 
+4.12.3 (2025-06-07)
+-------------------
+
+**Fixes**
+------
+
+- Fix docker builds. [#1009](https://github.com/theyosh/TerrariumPI/issues/1009). [TheYOSH]
+- Fix docker build DNS. [TheYOSH]
+- Fix WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match
+  (line 5) during docker build. [TheYOSH]
+- Fix NodeJs libraries. [TheYOSH]
+- Fix GPIO relays once more... [#990](https://github.com/theyosh/TerrariumPI/issues/990). [TheYOSH]
+- Fix bookworm install. [#982](https://github.com/theyosh/TerrariumPI/issues/982). [TheYOSH]
+
+**Updates**
+------
+
+- Update version. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update development template. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update area variation date time parsing. Thanks to HTPProXy https://gi
+  thub.com/theyosh/TerrariumPI/issues/1009#issuecomment-2896732294.
+  [TheYOSH]
+- Update Documentation libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update documentation libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update installer. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update documentation libraries. [TheYOSH]
+- Update python libraries. [TheYOSH]
+- Update documentation libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update RSS feed limit. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update install.sh. [TheYOSH]
+- Update documentation libraries. [TheYOSH]
+- Update Python libraries part 2. [TheYOSH]
+- Update Python Libraries part 1. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update favicon. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update terrariumEngine.py. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+
+**Other**
+------
+
+- New release blog post. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge pull request [#1012](https://github.com/theyosh/TerrariumPI/issues/1012) from
+  theyosh/dependabot/pip/setuptools-78.1.1. [TheYOSH]
+
+  Bump setuptools from 78.1.0 to 78.1.1
+- Bump setuptools from 78.1.0 to 78.1.1. [dependabot[bot]]
+
+  Bumps [setuptools](https://github.com/pypa/setuptools) from 78.1.0 to 78.1.1.
+  - [Release notes](https://github.com/pypa/setuptools/releases)
+  - [Changelog](https://github.com/pypa/setuptools/blob/main/NEWS.rst)
+  - [Commits](https://github.com/pypa/setuptools/compare/v78.1.0...v78.1.1)
+
+  ---
+  updated-dependencies:
+  - dependency-name: setuptools
+    dependency-version: 78.1.1
+    dependency-type: direct:production
+  ...
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (German) [Pro Xy]
+
+  Currently translated at 99.1% (1108 of 1117 strings)
+- Disable forced zero delay [#1007](https://github.com/theyosh/TerrariumPI/issues/1007). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge pull request [#1000](https://github.com/theyosh/TerrariumPI/issues/1000) from
+  theyosh/dependabot/bundler/nokogiri-1.18.8. [TheYOSH]
+
+  Bump nokogiri from 1.18.7 to 1.18.8
+- Bump nokogiri from 1.18.7 to 1.18.8. [dependabot[bot]]
+
+  Bumps [nokogiri](https://github.com/sparklemotion/nokogiri) from 1.18.7 to 1.18.8.
+  - [Release notes](https://github.com/sparklemotion/nokogiri/releases)
+  - [Changelog](https://github.com/sparklemotion/nokogiri/blob/main/CHANGELOG.md)
+  - [Commits](https://github.com/sparklemotion/nokogiri/compare/v1.18.7...v1.18.8)
+
+  ---
+  updated-dependencies:
+  - dependency-name: nokogiri
+    dependency-version: 1.18.8
+    dependency-type: indirect
+  ...
+- Explicit use piwheels [#999](https://github.com/theyosh/TerrariumPI/issues/999). [TheYOSH]
+- Merge pull request [#998](https://github.com/theyosh/TerrariumPI/issues/998) from
+  theyosh/dependabot/npm_and_yarn/sveltejs/kit-2.20.6. [TheYOSH]
+
+  Bump [@sveltejs/kit](https://github.com/sveltejs/kit) from 2.20.5 to 2.20.6
+- Bump [@sveltejs/kit](https://github.com/sveltejs/kit) from 2.20.5 to 2.20.6. [dependabot[bot]]
+
+  Bumps [[@sveltejs/kit](https://github.com/sveltejs/kit/tree/HEAD/packages/kit)](https://github.com/sveltejs/kit](https://github.com/sveltejs/kit/tree/HEAD/packages/kit)) from 2.20.5 to 2.20.6.
+  - [Release notes](https://github.com/sveltejs/kit/releases)
+  - [Changelog](https://github.com/sveltejs/kit/blob/main/packages/kit/CHANGELOG.md)
+  - [Commits](https://github.com/sveltejs/kit/commits/[@sveltejs/kit@2.20.6/packages/kit)](https://github.com/sveltejs/kit@2.20.6/packages/kit))
+
+  ---
+  updated-dependencies:
+  - dependency-name: "[@sveltejs/kit"](https://github.com/sveltejs/kit")
+    dependency-version: 2.20.6
+    dependency-type: indirect
+  ...
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Last copy right. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Copyright 2025. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Copyright 2025. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1117 of 1117 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1117 of 1117 strings)
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 100.0% (1117 of 1117 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 100.0% (1117 of 1117 strings)
+- Translated using Weblate (English (United States)) [Mkorneli]
+
+  Currently translated at 100.0% (1117 of 1117 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 94.7% (1058 of 1117 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 85.8% (103 of 120 strings)
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 99.4% (1111 of 1117 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 28.3% (34 of 120 strings)
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 96.3% (1076 of 1117 strings)
+- New Svelte GUI build. [TheYOSH]
+- Merge pull request [#987](https://github.com/theyosh/TerrariumPI/issues/987) from
+  theyosh/dependabot/npm_and_yarn/prismjs-1.30.0. [TheYOSH]
+
+  Bump prismjs from 1.29.0 to 1.30.0
+- Bump prismjs from 1.29.0 to 1.30.0. [dependabot[bot]]
+
+  Bumps [prismjs](https://github.com/PrismJS/prism) from 1.29.0 to 1.30.0.
+  - [Release notes](https://github.com/PrismJS/prism/releases)
+  - [Changelog](https://github.com/PrismJS/prism/blob/master/CHANGELOG.md)
+  - [Commits](https://github.com/PrismJS/prism/compare/v1.29.0...v1.30.0)
+
+  ---
+  updated-dependencies:
+  - dependency-name: prismjs
+    dependency-type: indirect
+  ...
+- Merge pull request [#988](https://github.com/theyosh/TerrariumPI/issues/988) from theyosh/dependabot/bundler/json-2.10.2.
+  [TheYOSH]
+
+  Bump json from 2.10.1 to 2.10.2
+- Bump json from 2.10.1 to 2.10.2. [dependabot[bot]]
+
+  Bumps [json](https://github.com/ruby/json) from 2.10.1 to 2.10.2.
+  - [Release notes](https://github.com/ruby/json/releases)
+  - [Changelog](https://github.com/ruby/json/blob/master/CHANGES.md)
+  - [Commits](https://github.com/ruby/json/compare/v2.10.1...v2.10.2)
+
+  ---
+  updated-dependencies:
+  - dependency-name: json
+    dependency-type: indirect
+  ...
+- Merge pull request [#986](https://github.com/theyosh/TerrariumPI/issues/986) from theyosh/dependabot/pip/jinja2-3.1.6.
+  [TheYOSH]
+
+  Bump jinja2 from 3.1.5 to 3.1.6
+- Bump jinja2 from 3.1.5 to 3.1.6. [dependabot[bot]]
+
+  Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.5 to 3.1.6.
+  - [Release notes](https://github.com/pallets/jinja/releases)
+  - [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst)
+  - [Commits](https://github.com/pallets/jinja/compare/3.1.5...3.1.6)
+
+  ---
+  updated-dependencies:
+  - dependency-name: jinja2
+    dependency-type: direct:production
+  ...
+- New Svelte GUI build. [TheYOSH]
+- Merge pull request [#983](https://github.com/theyosh/TerrariumPI/issues/983) from
+  theyosh/dependabot/bundler/nokogiri-1.18.3. [TheYOSH]
+
+  Bump nokogiri from 1.18.2 to 1.18.3
+- Bump nokogiri from 1.18.2 to 1.18.3. [dependabot[bot]]
+
+  Bumps [nokogiri](https://github.com/sparklemotion/nokogiri) from 1.18.2 to 1.18.3.
+  - [Release notes](https://github.com/sparklemotion/nokogiri/releases)
+  - [Changelog](https://github.com/sparklemotion/nokogiri/blob/v1.18.3/CHANGELOG.md)
+  - [Commits](https://github.com/sparklemotion/nokogiri/compare/v1.18.2...v1.18.3)
+
+  ---
+  updated-dependencies:
+  - dependency-name: nokogiri
+    dependency-type: indirect
+  ...
+- Replace IP with hostname. [TheYOSH]
+- Spacing. [TheYOSH]
+- Continue startup when there are kasa errors. [#980](https://github.com/theyosh/TerrariumPI/issues/980). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Allow max 30 seconds scanning for new hardware. [#977](https://github.com/theyosh/TerrariumPI/issues/977). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Continue loading when Kasa relay fails. [#977](https://github.com/theyosh/TerrariumPI/issues/977). [TheYOSH]
+
+
 4.12.2 (2024-12-22)
 -------------------
 
@@ -14,11 +267,13 @@ Changelog
 **Fixes**
 ------
 
+- Fix typo. [TheYOSH]
 - Format fix. [TheYOSH]
 
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Update version number to 4.12.2. [TheYOSH]
 - Update documentation libraries. [TheYOSH]
 - Update libraries. [TheYOSH]
