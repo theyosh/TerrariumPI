@@ -2,12 +2,12 @@
 # Copyright (C) 2016 TheYOSH
 # Joshua (TheYOSH) Rubingh, <theyosh@theyosh.nl>, 2016.
 # theyosh <github.com@theyosh.nl>, 2022.
-# TheYOSH <github.com@theyosh.nl>, 2024.
+# TheYOSH <github.com@theyosh.nl>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2024-06-26 10:02+0000\n"
+"PO-Revision-Date: 2025-06-08 17:25+0000\n"
 "Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/it/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.1\n"
+"X-Generator: Weblate 5.11.4\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -177,7 +177,7 @@ msgstr "Versione"
 
 #: terrariumEngine.py:1326 terrariumWebserver.py:393
 msgid "A new version ({version}) is available!"
-msgstr "Una nuova versione ([versione]) è disponibile!"
+msgstr "Una nuova versione ([version]) è disponibile!"
 
 #: terrariumEngine.py:1370 terrariumEngine.py:1400
 msgid "Current active relays"
