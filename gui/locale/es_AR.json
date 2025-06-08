@@ -537,7 +537,7 @@
         },
         "ldr_capacitor": {
           "help": "Ingrese el valor del condensador en µF, ya que esto influirá en el cálculo de la luz.",
-          "invalid": "El valor del capacitor ingresado no es válido. \nIntroduzca un número válido entre {min} y {max}.",
+          "invalid": "El valor del capacitor ingresado no es válido. Introduzca un número válido entre {min} y {max}.",
           "label": "Valor del condensador en µF",
           "placeholder": "Ingrese el valor del condensador en µF"
         },
