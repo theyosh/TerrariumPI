@@ -39,7 +39,7 @@ smbus2==0.5.0
 smbus==1.1.post2
 # Github version has some serious patches which we need. Pyipi version is outdated
 git+https://github.com/IanHarvey/bluepy
-requests==2.32.3
+requests==2.32.4
 melopero_amg8833==0.2.1
 RPi.bme280==0.2.4
 RPi.GPIO==0.7.1
