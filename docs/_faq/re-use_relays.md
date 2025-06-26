@@ -26,7 +26,6 @@ values. **But never use this original relay in any area**.
 2. Copy `duplicate_switch.py` to the `scripts` folder:
    `cp contrib/duplicate_switch.py scripts/`
 3. Edit the new script to set some settings: `nano scripts/duplicate_switch.py`
-
    - Edit the variables `RELAY_ID`, `USERNAME`, `PASSWORD`. The RELAY_ID can be
      found on the page: http://[TerrariumPI_IP]:8090/api/relays/
 
