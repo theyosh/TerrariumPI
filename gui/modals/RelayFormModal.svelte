@@ -286,14 +286,16 @@
 
           <div
             class="col-6 col-sm-6 col-md-6 col-lg-3"
-            class:d-none="{['brightpi-dimmer', 'remote-dimmer', 'script-dimmer', 'sonoff_d1-dimmer'].indexOf(
+            class:d-none="{['nextevo-dimmer', 'dc-dimmer', 'irf520-dimmer', 'led-warrior18-dimmer'].indexOf(
               hardware_type,
-            ) !== -1 || hardware_type === 'gpio'}"
+            ) === -1}"
           >
             <Field
               type="number"
               name="calibration.dimmer_frequency"
-              disabled="{hardware_type === 'gpio'}"
+              disabled="{['nextevo-dimmer', 'dc-dimmer', 'irf520-dimmer', 'led-warrior18-dimmer'].indexOf(
+                hardware_type,
+              ) === -1}"
               step="1"
               min="1"
               label="{$_('relays.settings.calibration.dimmer_frequency.label', {
@@ -344,18 +346,16 @@
           </div>
           <div
             class="col-6 col-sm-6 col-md-6 col-lg-3"
-            class:d-none="{[
-              'brightpi-dimmer',
-              'PCA9685-dimmer',
-              'remote-dimmer',
-              'script-dimmer',
-              'sonoff_d1-dimmer',
-            ].indexOf(hardware_type) === -1 || hardware_type === 'gpio'}"
+            class:d-none="{['nextevo-dimmer', 'dc-dimmer', 'irf520-dimmer', 'led-warrior18-dimmer'].indexOf(
+              hardware_type,
+            ) === -1}"
           >
             <Field
               type="number"
               name="calibration.dimmer_max_dim"
-              disabled="{hardware_type === 'gpio'}"
+              disabled="{['nextevo-dimmer', 'dc-dimmer', 'irf520-dimmer', 'led-warrior18-dimmer'].indexOf(
+                hardware_type,
+              ) === -1}"
               step="1"
               min="0"
               label="{$_('relays.settings.calibration.dimmer_max_dim.label', { default: 'Maximum dimmer value' })}"
