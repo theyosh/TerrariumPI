@@ -90,8 +90,12 @@
         fractionDigits: 0,
       };
 
-      if (settings.show_gauge_values) {
-        gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, limit_min, alarm_min, alarm_max, limit_max];
+      if (settings.show_gauge_values === 1) {
+        gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, alarm_min, alarm_max];
+      }
+
+      if (settings.show_gauge_values === 2) {
+        gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, limit_min, limit_max];
       }
 
       if (settings.show_min_max_gauge && minmax && $sensors[id].measure_min && $sensors[id].measure_max) {

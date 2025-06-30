@@ -1909,6 +1909,16 @@
           "title": "OKを更新します"
         }
       },
+      "show_gauge_values": {
+        "help": "ゲージグラフに表示する値を選択します。",
+        "invalid": "選択してください。",
+        "label": "ゲージグラフに値を表示します",
+        "options": {
+          "alarm_and_limit": "アラーム値と制限値",
+          "alarm_only": "アラーム値のみ",
+          "none": "なし"
+        }
+      },
       "show_min_max_gauge": {
         "help": "ゲージの最小値と最大値を表示します。.",
         "label": "ゲージグラフで最小値と最大値を表示します"

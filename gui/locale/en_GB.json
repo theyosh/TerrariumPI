@@ -1909,6 +1909,16 @@
           "title": "Update OK"
         }
       },
+      "show_gauge_values": {
+        "help": "Select which values to show in gauge graphs.",
+        "invalid": "Please make a choice.",
+        "label": "Show values in gauge graphs",
+        "options": {
+          "alarm_and_limit": "Alarm and limit values",
+          "alarm_only": "Alarm values only",
+          "none": "None"
+        }
+      },
       "show_min_max_gauge": {
         "help": "Show the minimum and maximum value on the gauges.",
         "label": "Show min and max values in gauge graphs"

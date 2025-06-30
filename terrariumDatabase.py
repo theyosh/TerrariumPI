@@ -79,7 +79,7 @@ def create_defaults(version):
         {"id": "graph_limit_min_max", "value": "false"},
         {"id": "unsplash_access_key", "value": ""},
         {"id": "unsplash_query", "value": ""},
-        {"id": "show_gauge_values", "value": "false"},
+        {"id": "show_gauge_values", "value": "0"},
     ]
 
     for setting in setting_defaults:

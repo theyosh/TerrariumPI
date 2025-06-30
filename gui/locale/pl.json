@@ -1909,6 +1909,16 @@
           "title": "Aktualizacja OK"
         }
       },
+      "show_gauge_values": {
+        "help": "Wybierz, które wartości wyświetlają na wykresach mierników.",
+        "invalid": "Proszę dokonać wyboru.",
+        "label": "Pokaż wartości na wykresach mierników",
+        "options": {
+          "alarm_and_limit": "Alarm i ogranicz wartości",
+          "alarm_only": "Tylko wartości alarmu",
+          "none": "Nic"
+        }
+      },
       "show_min_max_gauge": {
         "help": "Pokaż minimalną i maksymalną wartość wskaźników.",
         "label": "Pokaż wartości min i maksymalne na wykresach mierników"

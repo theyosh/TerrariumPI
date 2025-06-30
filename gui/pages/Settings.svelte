@@ -502,16 +502,26 @@
             invalid="{$_('system.settings.auto_dark_mode.invalid', { default: 'Please make a choice.' })}"
           />
 
-          <Switch
+          <Select
             name="show_gauge_values"
             value="{$formData.show_gauge_values}"
+            required="{false}"
+            options="{[
+              { value: 0, text: $_('system.settings.show_gauge_values.options.none', { default: 'None' }) },
+              { value: 1, text: $_('system.settings.show_gauge_values.options.alarm_only', { default: 'Alarm values only' }) },
+              {
+                value: 2,
+                text: $_('system.settings.show_gauge_values.options.alarm_and_limit', { default: 'Alarm and limit values' }),
+              },
+            ]}"
             horizontal="{true}"
             label="{$_('system.settings.show_gauge_values.label', {
-              default: 'Show alarm values in gauge graphs',
+              default: 'Show values in gauge graphs',
             })}"
             help="{$_('system.settings.show_gauge_values.help', {
-              default: 'Show alarm values on the gauges.',
+              default: 'Select which values to show in gauge graphs.',
             })}"
+            invalid="{$_('system.settings.show_gauge_values.invalid', { default: 'Please make a choice.' })}"
           />
 
           <Switch
