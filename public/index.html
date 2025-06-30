@@ -45,8 +45,9 @@
       	{% if authenticated %}username: '{{ username }}', {% endif %}
       	docker: {{ docker }},
       	gitversion: '{% if authenticated %}{{gitversion}}{% endif %}',
-      	graph_show_min_max_gauge : {{ graph_show_min_max_gauge }},
-      	graph_smooth_value : {{ graph_smooth_value }},
+      	show_min_max_gauge : {{ show_min_max_gauge }},
+      	show_gauge_values : {{ show_gauge_values }},
+        graph_smooth_value : {{ graph_smooth_value }},
         graph_limit_min_max : {{ graph_limit_min_max }},
       	show_gauge_overview: {{ show_gauge_overview }},
       	auto_dark_mode : '{{ auto_dark_mode }}',
