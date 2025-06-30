@@ -508,10 +508,15 @@
             required="{false}"
             options="{[
               { value: 0, text: $_('system.settings.show_gauge_values.options.none', { default: 'None' }) },
-              { value: 1, text: $_('system.settings.show_gauge_values.options.alarm_only', { default: 'Alarm values only' }) },
+              {
+                value: 1,
+                text: $_('system.settings.show_gauge_values.options.alarm_only', { default: 'Alarm values only' }),
+              },
               {
                 value: 2,
-                text: $_('system.settings.show_gauge_values.options.alarm_and_limit', { default: 'Alarm and limit values' }),
+                text: $_('system.settings.show_gauge_values.options.alarm_and_limit', {
+                  default: 'Alarm and limit values',
+                }),
               },
             ]}"
             horizontal="{true}"
