@@ -5,8 +5,8 @@
 FROM gcc:12-bookworm AS sispmctl_builder
 ARG SISPMCTL_VERSION="4.12"
 WORKDIR /sispmctl
-RUN  apt-get update \
-  && apt-get install -y --no-install-recommends libusb-dev \
+RUN  apt-get -o Acquire::ForceIPv4=true update \
+  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends libusb-dev \
   && wget https://sourceforge.net/projects/sispmctl/files/sispmctl/sispmctl-${SISPMCTL_VERSION}/sispmctl-${SISPMCTL_VERSION}.tar.gz/download -O sispmctl-${SISPMCTL_VERSION}.tar.gz \
   && tar zxvf sispmctl-${SISPMCTL_VERSION}.tar.gz --strip 1 \
   && ./configure \
@@ -31,14 +31,14 @@ COPY requirements.txt .
 COPY contrib/python3-voltcraft-sem6000.patch.diff .
 
 # Some strange DNS issues with installing PGP keys. keyserver.ubuntu.com => 185.125.188.26
-RUN  apt-get update \
-  && apt-get install -y --no-install-recommends gnupg libxslt1-dev libxml2-dev \
+RUN  apt-get -o Acquire::ForceIPv4=true update \
+  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends gnupg libxslt1-dev libxml2-dev \
   && echo "deb http://raspbian.raspberrypi.org/raspbian/ bookworm main contrib non-free rpi" > /etc/apt/sources.list.d/raspberrypi.list \
   && echo "deb http://archive.raspberrypi.org/debian/ bookworm main" >> /etc/apt/sources.list.d/raspberrypi.list \
   && apt-key adv --keyserver 185.125.188.26 --recv-keys 9165938D90FDDD2E 82B129927FA3303E \
-  && apt-get update \
-  && apt-get full-upgrade -y --no-install-recommends \
-  && apt-get install -y --no-install-recommends libasound2-dev libglib2.0-dev libbluetooth-dev make
+  && apt-get -o Acquire::ForceIPv4=true update \
+  && apt-get -o Acquire::ForceIPv4=true full-upgrade -y --no-install-recommends \
+  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends libasound2-dev libglib2.0-dev libbluetooth-dev make
 
 # requirements are slightly different for docker
 # overruling does not work here, pip will exit with non 0 which will stop the build
@@ -105,9 +105,9 @@ RUN  rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
   && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so.0 \
   && ldconfig
 
-RUN  apt-get update \
-  && apt-get full-upgrade -y --no-install-recommends \
-  && apt-get install -y --no-install-recommends sudo netcat-openbsd procps bluez pigpio ffmpeg libssl1.1 libxslt1.1 libftdi1 libatlas3-base libopenblas0 libgfortran5 libwebpdemux2 libraspberrypi-bin rpicam-apps ${JAVA} python3-opencv \
+RUN  apt-get -o Acquire::ForceIPv4=true update \
+  && apt-get -o Acquire::ForceIPv4=true full-upgrade -y --no-install-recommends \
+  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends sudo netcat-openbsd procps bluez pigpio ffmpeg libssl1.1 libxslt1.1 libftdi1 libatlas3-base libopenblas0 libgfortran5 libwebpdemux2 libraspberrypi-bin rpicam-apps ${JAVA} python3-opencv \
   && apt-get --purge autoremove -y \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
