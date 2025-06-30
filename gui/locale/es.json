@@ -1859,10 +1859,6 @@
           "title": "Actualización OK"
         }
       },
-      "show_gauge_values": {
-        "help": "Mostrar valores de alarma en gráficos de calibre",
-        "label": "Mostrar valores de alarma en gráficos de calibre"
-      },
       "show_min_max_gauge": {
         "help": "Muestre el valor mínimo y máximo en los medidores.",
         "label": "Mostrar valores min y máximo en gráficos de calibre"
