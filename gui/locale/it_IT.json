@@ -1909,16 +1909,6 @@
           "title": "Data upload"
         }
       },
-      "show_gauge_values": {
-        "help": "Seleziona quali valori da mostrare nei grafici di calibro.",
-        "invalid": "Per favore, fai una scelta.",
-        "label": "Mostra i valori nei grafici di calibro",
-        "options": {
-          "alarm_and_limit": "Valori di allarme e limite",
-          "alarm_only": "Solo valori di allarme",
-          "none": "Nessuno"
-        }
-      },
       "show_min_max_gauge": {
         "help": "Mostra il minimo e il massimo valore di misura graficamente.",
         "label": "Mostra il minimo e il massimo valore di misura graficamente"

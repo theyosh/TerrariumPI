@@ -1909,16 +1909,6 @@
           "title": "Update ok"
         }
       },
-      "show_gauge_values": {
-        "help": "Wählen Sie aus, welche Werte in Messgrafiken angezeigt werden sollen.",
-        "invalid": "Bitte treffen Sie eine Wahl.",
-        "label": "Werte in Messgrafiken anzeigen",
-        "options": {
-          "alarm_and_limit": "Alarm- und Begrenzungswerte",
-          "alarm_only": "Nur Alarmwerte",
-          "none": "Keiner"
-        }
-      },
       "show_min_max_gauge": {
         "help": "Zeige den minimalen und maximalen Wert auf den Graphen an.",
         "label": "Zeige Min- und Max-Werte in Grafiken an"

@@ -1909,16 +1909,6 @@
           "title": "Update ok"
         }
       },
-      "show_gauge_values": {
-        "help": "Selecteer welke waarden moeten worden weergegeven in grafieken.",
-        "invalid": "Maak een keuze.",
-        "label": "Toon waarden in grafieken",
-        "options": {
-          "alarm_and_limit": "Alarm- en limitwaarden",
-          "alarm_only": "Alleen alarmwaarden",
-          "none": "Geen"
-        }
-      },
       "show_min_max_gauge": {
         "help": "Toon de minimale en maximale waarde op de meters.",
         "label": "Toon min en max waarden in meter grafieken"

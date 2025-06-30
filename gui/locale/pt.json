@@ -1909,16 +1909,6 @@
           "title": "Actualização OK"
         }
       },
-      "show_gauge_values": {
-        "help": "Selecione quais valores a serem mostrados nos gráficos de medidores.",
-        "invalid": "Por favor, faça uma escolha.",
-        "label": "Mostra valores em gráficos de medidores",
-        "options": {
-          "alarm_and_limit": "Alarme e valores limitados",
-          "alarm_only": "Apenas valores de alarme",
-          "none": "Nenhum"
-        }
-      },
       "show_min_max_gauge": {
         "help": "Apresentar os valores mín e máx nos mostradores.",
         "label": "Apresentar o mín e máx nos gráficos dos mostradores"

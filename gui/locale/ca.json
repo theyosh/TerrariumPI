@@ -1909,16 +1909,6 @@
           "title": "Actualitzeu D'acord"
         }
       },
-      "show_gauge_values": {
-        "help": "Seleccioneu quins valors cal mostrar en gràfics de calibre.",
-        "invalid": "Feu una tria.",
-        "label": "Mostra valors en gràfics de calibre",
-        "options": {
-          "alarm_and_limit": "Valors d'alarma i limitació",
-          "alarm_only": "Només valors d’alarma",
-          "none": "Res"
-        }
-      },
       "show_min_max_gauge": {
         "help": "Mostra el valor mínim i màxim dels calibres.",
         "label": "Mostra valors min i màxims en gràfics de calibre"
