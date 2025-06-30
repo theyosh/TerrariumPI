@@ -1909,6 +1909,10 @@
           "title": "Dato opplastet"
         }
       },
+      "show_gauge_values": {
+        "help": "Vis alarmverdier i måler grafer",
+        "label": "Vis alarmverdier i måler grafer"
+      },
       "show_min_max_gauge": {
         "help": "Vis min og maks verdier i måler grafene.",
         "label": "Vis min og maks verdier i måler grafene"

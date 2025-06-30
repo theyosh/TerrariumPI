@@ -69,15 +69,6 @@
     ],
   };
 
-  if (settings.graph_show_min_max_gauge && minmax && $sensors[id]['measure_min'] && $sensors[id]['measure_max']) {
-    opts.staticLabels = {
-      labels: [$sensors[id]['measure_min'], $sensors[id]['measure_max']],
-      font: '10px Helvetica Neue,sans-serif',
-      color: $isDarkInterface ? '#adb5bd' : '#6c757d',
-      fractionDigits: 2,
-    };
-  }
-
   let gauge;
   let gauge_value =
     type === 'filesize' || type === 'memory' ? formatBytes(0) : roundToPrecision(0) + ' ' + settings.units[type].value;
@@ -86,19 +77,32 @@
     gauge = new Gauge.Gauge(document.getElementById(`gauge_${id}`)).setOptions(opts); // create sexy gauge!
     gauge.maxValue = $sensors[id]['limit_max']; // set max gauge value
     gauge.setMinValue($sensors[id]['limit_min']); // set min value
+    $sensors[id].changed = true; // Trigger draw update
   });
 
   // TODO: Not sure if we need to update min and max values in reactive mode... needs rethinking. As when you change this, you will reload the page.... and re-setup
   $: {
     if (gauge && $sensors[id].changed) {
-      if (settings.graph_show_min_max_gauge && minmax && $sensors[id].measure_min && $sensors[id].measure_max) {
-        gauge.options.staticLabels = {
-          labels: [$sensors[id].measure_min, $sensors[id].measure_max],
-          font: '10px Helvetica Neue,sans-serif',
-          color: $isDarkInterface ? '#adb5bd' : '#6c757d',
-          fractionDigits: 2,
-        };
+      const gaugeStaticLabels = {
+        labels: [],
+        font: '12px Helvetica Neue,sans-serif',
+        color: $isDarkInterface ? '#adb5bd' : '#6c757d',
+        fractionDigits: 0,
+      };
+
+      if (settings.show_gauge_values) {
+        gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, limit_min, alarm_min, alarm_max, limit_max];
       }
+
+      if (settings.show_min_max_gauge && minmax && $sensors[id].measure_min && $sensors[id].measure_max) {
+        gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, $sensors[id].measure_min, $sensors[id].measure_max];
+        gaugeStaticLabels.fractionDigits = 2;
+      }
+
+      if (gaugeStaticLabels.labels.length > 0) {
+        gauge.options.staticLabels = gaugeStaticLabels;
+      }
+
       gauge.set($sensors[id].value); // set actual value
       gauge_value =
         type === 'filesize' || type === 'memory'

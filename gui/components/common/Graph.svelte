@@ -136,7 +136,7 @@
           new_data[last].alarm_max + Math.abs(new_data[last].alarm_max === 0 ? 20 : new_data[last].alarm_max * 0.2);
         graphOpts.scales.y.ticks.includeBounds = false;
       }
-      if (settings.graph_show_min_max_gauge) {
+      if (settings.show_min_max_gauge) {
         let values = new_data.map((point) => {
           return point.value;
         });

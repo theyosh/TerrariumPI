@@ -503,6 +503,18 @@
           />
 
           <Switch
+            name="show_gauge_values"
+            value="{$formData.show_gauge_values}"
+            horizontal="{true}"
+            label="{$_('system.settings.show_gauge_values.label', {
+              default: 'Show alarm values in gauge graphs',
+            })}"
+            help="{$_('system.settings.show_gauge_values.help', {
+              default: 'Show alarm values on the gauges.',
+            })}"
+          />
+
+          <Switch
             name="show_min_max_gauge"
             value="{$formData.show_min_max_gauge}"
             horizontal="{true}"

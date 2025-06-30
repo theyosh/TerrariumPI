@@ -1909,6 +1909,10 @@
           "title": "Date de dépôt"
         }
       },
+      "show_gauge_values": {
+        "help": "Afficher les valeurs d'alarme dans les graphiques de jauge",
+        "label": "Afficher les valeurs d'alarme dans les graphiques de jauge"
+      },
       "show_min_max_gauge": {
         "help": "Afficher la valeur minimale et maximale sur les jauges.",
         "label": "Afficher les valeurs Min et Max dans les graphiques de jauge"
