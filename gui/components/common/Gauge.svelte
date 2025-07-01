@@ -30,6 +30,7 @@
   export let error = false;
   export let excluded = false;
   export let minmax = true;
+  export let showGaugeValues = true;
 
   // Set the initial gauge value
   updateSensor({
@@ -90,11 +91,11 @@
         fractionDigits: 0,
       };
 
-      if (settings.show_gauge_values === 1) {
+      if (settings.show_gauge_values === 1 && showGaugeValues) {
         gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, alarm_min, alarm_max];
       }
 
-      if (settings.show_gauge_values === 2) {
+      if (settings.show_gauge_values === 2 && showGaugeValues) {
         gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, limit_min, limit_max];
       }
 

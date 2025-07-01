@@ -33,6 +33,7 @@
   export let enableGraph = true;
   export let enableSettings = true;
   export let removeParent = false;
+  export let showGaugeValues = true;
   export let sensor;
 
   const { editSensor } = getContext('modals');
@@ -139,6 +140,7 @@
           error="{sensor.error}"
           excluded="{sensor.exclude_avg}"
           minmax="{enableGraph}"
+          showGaugeValues="{showGaugeValues}"
         />
         {#if $sensors[sensor.id]?.calibration?.light_on_off_threshold > 0}
           <i
