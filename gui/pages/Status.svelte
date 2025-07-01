@@ -113,10 +113,20 @@
         <SensorCard sensor="{systemStats.load}" enableGraph="{false}" removeParent="{true}" showGaugeValues="{false}" />
       </div>
       <div class="col">
-        <SensorCard sensor="{systemStats.cpu_temp}" enableGraph="{false}" removeParent="{true}" showGaugeValues="{false}" />
+        <SensorCard
+          sensor="{systemStats.cpu_temp}"
+          enableGraph="{false}"
+          removeParent="{true}"
+          showGaugeValues="{false}"
+        />
       </div>
       <div class="col">
-        <SensorCard sensor="{systemStats.memory}" enableGraph="{false}" removeParent="{true}" showGaugeValues="{false}" />
+        <SensorCard
+          sensor="{systemStats.memory}"
+          enableGraph="{false}"
+          removeParent="{true}"
+          showGaugeValues="{false}"
+        />
       </div>
       <div class="col">
         <SensorCard sensor="{systemStats.disk}" enableGraph="{false}" removeParent="{true}" showGaugeValues="{false}" />

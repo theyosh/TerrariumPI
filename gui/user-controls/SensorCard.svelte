@@ -140,7 +140,7 @@
           error="{sensor.error}"
           excluded="{sensor.exclude_avg}"
           minmax="{enableGraph}"
-          showGaugeValues="{showGaugeValues}"
+          {showGaugeValues}
         />
         {#if $sensors[sensor.id]?.calibration?.light_on_off_threshold > 0}
           <i
