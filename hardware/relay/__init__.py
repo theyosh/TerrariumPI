@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
 
-logger = terrariumLogging.logging.getLogger(__name__)
+logger = terrariumLogging.logging.getLogger('terrariumRelay')
 
 import threading
+import time
 
 from hashlib import md5
 from func_timeout import func_timeout, FunctionTimedOut
@@ -198,11 +199,11 @@ class terrariumRelay(object):
 
         changed = False
         if self.state != new_state or terrariumUtils.is_true(force):
+            start = time.time()
             old_state = self.state
 
             try:
                 self.__set_hardware_value(new_state)
-                # logger.info(f'Changed relay {self} from state \'{old_state}\' to state \'{new_state}\'')
 
             except Exception as ex:
                 logger.error(f"Error changing state for relay {self} to {new_state} :{ex}")
@@ -212,8 +213,11 @@ class terrariumRelay(object):
                 # Fix is to add power and water usage in constructor
                 changed = old_state != self.state
 
-        if changed and not no_callback and self.callback is not None:
-            self.callback(self.id, new_state)
+        if changed:
+            logger.info(f'Toggled relay {self} from state \'{old_state}\' to state \'{new_state}\' in {time.time()-start:.2f} seconds.')
+
+            if not no_callback and self.callback is not None:
+                self.callback(self.id, new_state)
 
         return changed
 
