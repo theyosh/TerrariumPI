@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
 
-logger = terrariumLogging.logging.getLogger('terrariumSensor')
+logger = terrariumLogging.logging.getLogger("terrariumSensor")
 
 import statistics
 from hashlib import md5

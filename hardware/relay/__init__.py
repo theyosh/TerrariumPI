@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
 
-logger = terrariumLogging.logging.getLogger('terrariumRelay')
+logger = terrariumLogging.logging.getLogger("terrariumRelay")
 
 import threading
 import time
@@ -214,7 +214,9 @@ class terrariumRelay(object):
                 changed = old_state != self.state
 
         if changed:
-            logger.info(f'Toggled relay {self} from state \'{old_state}\' to state \'{new_state}\' in {time.time()-start:.2f} seconds.')
+            logger.info(
+                f"Toggled relay {self} from state '{old_state}' to state '{new_state}' in {time.time()-start:.2f} seconds."
+            )
 
             if not no_callback and self.callback is not None:
                 self.callback(self.id, new_state)
