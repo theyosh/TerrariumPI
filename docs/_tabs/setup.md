@@ -181,31 +181,43 @@ days, based on day of the year.
 
 Other weather data is just for show. Does not have a function.
 
+### API Change
+
+As from October 2022 they changed the conditions to a free account. Which means
+that we have fewer data to work with. This also means no history data for
+climate mirroring out of the box. \
+If you have created an account before that date, you should still be able to
+use the One call API 2.5 which does hold all the needed information. With One
+call API 3.0, you need an extra (free) subscription which needs credit card
+data.
+
+For everybody that is registered with OpenWeatherMap after October, will have
+less data or you have to subscribe for the
+[One call API 3.0](https://openweathermap.org/price)
+
+**TerrariumPI will self test which API version you have. It will first test for
+version 3.0 and if that fails, it will fallback to the (old free) 2.5 version.
+So the API url for TerrariumPI is always as described below including the 2.5
+in the url!**
+
 ### Setup
 
 In order to use the weather system, you need to create a free account at
 [OpenWeatherMap](https://home.openweathermap.org/users/sign_up).
 
-As from October 2022 they changed the conditions to a free account. Which means
-that we have fewer data to work with. This also means no history data for
-climate mirroring out of the box. If you have created an account before that
-date, you should still be able to use the One call API 2.5 which does hold all
-the needed information. With One call API 3.0, you need an extra (free)
-subscription which needs credit card data.
+Than use one of the two supported API urls: \
+`https://api.openweathermap.org/data/2.5/weather?q=[City],[Country]&appid=[API_KEY]` \
+or \
+`https://api.openweathermap.org/data/2.5/weather?id=[CityID]&appid=[API_KEY]`
 
-For everybody that is registed with OpenWeatherMap after October, will have less
-data or you have to subscribe for the
-[One call API 3.0](https://openweathermap.org/price)
-
-The url format needs to be
-`https://api.openweathermap.org/data/2.5/weather?q=[City],[Country]&appid=[API_KEY]`.
-Do **not** add the `&metric=` part in the url.
+Do **not** add the `&metric=` part in the url. And keep the value of **2.5** in
+the url!
 
 TerrariumPI does about 6-10 calls on the One call API per day, what would result
 in 300 calls max per month. And it can detect which API is available with your
 OpenWeatherMap account.
 
-**important** This openweathermap url will be encrypted in the database. So the
+**important** This OpenWeatherMap url will be encrypted in the database. So the
 API_KEY value cannot be read out of the database directly.
 
 ## Relays
