@@ -1024,7 +1024,7 @@ class terrariumEngine(object):
                             new_button.calibrate(button.calibration)
 
                     except terrariumButtonLoadingException as ex:
-                        buttonLogger.error(f"Error loading {button} with error: {ex.message}.")
+                        buttonLogger.error(f"Error loading {button} with error: {ex}.")
                         continue
 
                 else:
@@ -1142,7 +1142,7 @@ class terrariumEngine(object):
                         )
 
                     except terrariumWebcamLoadingException as ex:
-                        webcamLogger.error(f"Error loading {webcam} with error: {ex.message}.")
+                        webcamLogger.error(f"Error loading {webcam} with error: {ex}.")
                         continue
 
                 else:
