@@ -4,12 +4,13 @@
 # theyosh <github.com@theyosh.nl>, 2022.
 # TheYOSH <github.com@theyosh.nl>, 2023.
 # Chris Hudlin <christopher.hudlin@atos.net>, 2023.
+# Pro Xy <ProXy.SOC@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2023-06-27 21:15+0000\n"
-"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2025-08-07 06:54+0000\n"
+"Last-Translator: Pro Xy <ProXy.SOC@gmail.com>\n"
 "Language-Team: English (United States) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/backend/en_US/>\n"
 "Language: en_US\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.12.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -130,7 +131,7 @@ msgstr "Water volume"
 
 #: terrariumEngine.py:73
 msgid "watertank"
-msgstr "watertank"
+msgstr "water tank"
 
 #: terrariumEngine.py:74
 msgid "windspeed"
