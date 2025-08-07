@@ -2,12 +2,13 @@
 # Copyright (C) 2016 TheYOSH
 # Joshua (TheYOSH) Rubingh, <theyosh@theyosh.nl>, 2016.
 # theyosh <github.com@theyosh.nl>, 2022.
+# Pro Xy <ProXy.SOC@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2022-09-11 11:04+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2025-08-07 06:54+0000\n"
+"Last-Translator: Pro Xy <ProXy.SOC@gmail.com>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/backend/de_AT/>\n"
 "Language: de_AT\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 5.12.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -131,6 +132,7 @@ msgid "water_volume"
 msgstr "Lautstärke"
 
 #: terrariumEngine.py:73
+#, fuzzy
 msgid "watertank"
 msgstr "Wassertank"
 
