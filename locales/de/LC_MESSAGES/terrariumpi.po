@@ -4,12 +4,13 @@
 # theyosh <github.com@theyosh.nl>, 2022.
 # Tobias Nitsch <info@sni-reptiles.com>, 2022.
 # Chris Hudlin <christopher.hudlin@atos.net>, 2023.
+# Pro Xy <ProXy.SOC@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2023-07-18 09:47+0000\n"
-"Last-Translator: Chris Hudlin <christopher.hudlin@atos.net>\n"
+"PO-Revision-Date: 2025-08-07 06:54+0000\n"
+"Last-Translator: Pro Xy <ProXy.SOC@gmail.com>\n"
 "Language-Team: German <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/de/>\n"
 "Language: de\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.2\n"
+"X-Generator: Weblate 5.12.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
