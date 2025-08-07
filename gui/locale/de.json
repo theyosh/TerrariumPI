@@ -20,7 +20,7 @@
     "settings": {
       "depends_on": {
         "help": "Wähle das Terrarium aus, zu dem dieser Bereich gehört.",
-        "invalid": "Bitte tiff eine Wahl.",
+        "invalid": "Bitte triff eine Wahl.",
         "label": "Abhängig von",
         "placeholder": "Wähle abhängige Bereiche"
       },
@@ -37,7 +37,7 @@
         "placeholder": "Lichtsensoren auswählen"
       },
       "mode": {
-        "help": "Wähle den Modus dieses Bereichs. Das ändert Schaltzeit- und dauer der Relais.",
+        "help": "Wähle den Modus dieses Bereichs. Das ändert Schaltzeit und Schaltdauer der Relais.",
         "invalid": "Bitte triff eine Wahl.",
         "label": "Modus",
         "options": {
@@ -64,7 +64,7 @@
       },
       "save": {
         "error": {
-          "duplicate_relays": "Du hast für den niedrigen und den oberen Alarm dieselben Relais ausgewählt. Dies ist nicht gültig.",
+          "duplicate_relays": "Du hast für den unteren und oberen Alarm dasselbe/dieselben Relai(s) ausgewählt. Dies ist nicht gültig.",
           "required_fields": "Nicht alle Pflichtfelder sind korrekt eingegeben."
         },
         "ok": {
@@ -90,28 +90,28 @@
             "help": "Gib eine Dauer in Minuten oder eine Tageszeit ein."
           },
           "external_source": {
-            "help": "",
-            "label": ""
+            "help": "Geben Sie eine vollständige URL zur externen Quelle gemäß der Methode „Externe Daten“ ein.",
+            "label": "URL der externen Quelle"
           },
-          "help": "",
+          "help": "Hier kannst du Zeitpunkte eingeben, zu welcher die Sensoren Ihre Werte entsprechend der untenstehenden Liste ändern. Stell sicher, dass die Zeitpunkte in chronologischer Reihenfolge sind!",
           "offset": {
             "label": "Verschiebung"
           },
           "period": {
             "help": "",
-            "label": ""
+            "label": "Zeitpunkte/Dauer"
           },
           "remote": {
-            "help": ""
+            "help": "Externe Daten."
           },
           "source": {
-            "label": ""
+            "label": "Quelle"
           },
           "value": {
             "help": "Gib einen negativen oder positiven Wert für die Verschiebung ein."
           },
           "weather": {
-            "help": ""
+            "help": "Klimaspiegelung."
           }
         },
         "day_night_difference": {
