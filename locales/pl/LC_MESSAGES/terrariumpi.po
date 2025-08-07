@@ -5,12 +5,13 @@
 # kwiatekp <kwiatekp@gmail.com>, 2022.
 # Rafal Zagawa <tasdefleja@gmail.com>, 2023.
 # TheYOSH <github.com@theyosh.nl>, 2024.
+# Pro Xy <ProXy.SOC@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2024-06-26 10:02+0000\n"
-"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2025-08-07 06:54+0000\n"
+"Last-Translator: Pro Xy <ProXy.SOC@gmail.com>\n"
 "Language-Team: Polish <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/pl/>\n"
 "Language: pl\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.6.1\n"
+"X-Generator: Weblate 5.12.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -131,6 +132,7 @@ msgid "water_volume"
 msgstr "objętość wody"
 
 #: terrariumEngine.py:73
+#, fuzzy
 msgid "watertank"
 msgstr "zbiornik wody"
 
