@@ -2,12 +2,160 @@ Changelog
 =========
 
 
+4.12.4 (2025-08-07)
+-------------------
+
+**New**
+------
+
+- Add release post. [TheYOSH]
+- Add new option to show alarm values on the gauge graphs. [#1016](https://github.com/theyosh/TerrariumPI/issues/1016).
+  [TheYOSH]
+
+**Fixes**
+------
+
+- Fix dates. [TheYOSH]
+- Fix docker build for buster. [TheYOSH]
+- Fix regex. [TheYOSH]
+- Fix error messages. [TheYOSH]
+- Fix security update. [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update documentation. [#1018](https://github.com/theyosh/TerrariumPI/issues/1018). [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- NodeJS libraries updates. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Logging updates. [#1015](https://github.com/theyosh/TerrariumPI/issues/1015). [TheYOSH]
+- Update doc libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Cleanup translation files" hook in Weblate.
+- Update translation files. [Weblate]
+
+  Updated by "Cleanup translation files" hook in Weblate.
+- Update translation files. [Weblate]
+
+  Updated by "Cleanup translation files" hook in Weblate.
+- Update dimmer edit screen. [#1014](https://github.com/theyosh/TerrariumPI/issues/1014). [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+
+**Other**
+------
+
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Spanish) [Pro Xy]
+
+  Currently translated at 45.8% (55 of 120 strings)
+- Translated using Weblate (Portuguese) [Pro Xy]
+
+  Currently translated at 99.1% (119 of 120 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Pro Xy]
+
+  Currently translated at 99.1% (119 of 120 strings)
+- Translated using Weblate (Polish) [Pro Xy]
+
+  Currently translated at 99.1% (119 of 120 strings)
+- Translated using Weblate (Dutch) [Pro Xy]
+
+  Currently translated at 99.1% (119 of 120 strings)
+- Translated using Weblate (Norwegian Bokmål) [Pro Xy]
+
+  Currently translated at 99.1% (119 of 120 strings)
+- Translated using Weblate (Japanese) [Pro Xy]
+
+  Currently translated at 32.5% (39 of 120 strings)
+- Translated using Weblate (Italian) [Pro Xy]
+
+  Currently translated at 99.1% (119 of 120 strings)
+- Translated using Weblate (French (Belgium)) [Pro Xy]
+
+  Currently translated at 99.1% (119 of 120 strings)
+- Translated using Weblate (Spanish (Argentina)) [Pro Xy]
+
+  Currently translated at 45.8% (55 of 120 strings)
+- Translated using Weblate (English (United Kingdom)) [Pro Xy]
+
+  Currently translated at 99.1% (119 of 120 strings)
+- Translated using Weblate (German (Austria)) [Pro Xy]
+
+  Currently translated at 49.1% (59 of 120 strings)
+- Translated using Weblate (German) [Pro Xy]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Catalan) [Pro Xy]
+
+  Currently translated at 99.1% (119 of 120 strings)
+- Translated using Weblate (German) [Pro Xy]
+
+  Currently translated at 99.9% (1116 of 1117 strings)
+- Translated using Weblate (English (United States)) [Pro Xy]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Allow usage of a locations ID [#1018](https://github.com/theyosh/TerrariumPI/issues/1018). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Bookworm changed rpicam-vid parameters. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Hide gauge values on status page. [#1016](https://github.com/theyosh/TerrariumPI/issues/1016). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Split up gauge values options. [#1016](https://github.com/theyosh/TerrariumPI/issues/1016). [TheYOSH]
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [theyosh]
+- Disable IPv6 in docker builds. [TheYOSH]
+- Merge branch 'main' of github.com:theyosh/TerrariumPI into main.
+  [theyosh]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge pull request [#1013](https://github.com/theyosh/TerrariumPI/issues/1013) from theyosh/dependabot/pip/requests-2.32.4.
+  [TheYOSH]
+
+  Bump requests from 2.32.3 to 2.32.4
+- Bump requests from 2.32.3 to 2.32.4. [dependabot[bot]]
+
+  Bumps [requests](https://github.com/psf/requests) from 2.32.3 to 2.32.4.
+  - [Release notes](https://github.com/psf/requests/releases)
+  - [Changelog](https://github.com/psf/requests/blob/main/HISTORY.md)
+  - [Commits](https://github.com/psf/requests/compare/v2.32.3...v2.32.4)
+
+  ---
+  updated-dependencies:
+  - dependency-name: requests
+    dependency-version: 2.32.4
+    dependency-type: direct:production
+  ...
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Italian) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Spanish (Argentina)) [TheYOSH]
+
+  Currently translated at 82.0% (917 of 1117 strings)
+
+
 4.12.3 (2025-06-07)
 -------------------
 
 **Fixes**
 ------
 
+- Typo fixed. [TheYOSH]
 - Fix docker builds. [#1009](https://github.com/theyosh/TerrariumPI/issues/1009). [TheYOSH]
 - Fix docker build DNS. [TheYOSH]
 - Fix WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match
@@ -19,6 +167,7 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Update version. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Update development template. [TheYOSH]
@@ -60,6 +209,7 @@ Changelog
 **Other**
 ------
 
+- New Svelte GUI build. [TheYOSH]
 - New release blog post. [TheYOSH]
 - New Svelte GUI build. [TheYOSH]
 - Python code is blacked. [TheYOSH]
