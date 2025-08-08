@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2025-08-07 06:54+0000\n"
-"Last-Translator: Pro Xy <ProXy.SOC@gmail.com>\n"
+"PO-Revision-Date: 2025-08-08 21:54+0000\n"
+"Last-Translator: Mkorneli <mk@nessu.no>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
 "terrariumpi/backend/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -128,7 +128,6 @@ msgid "water_volume"
 msgstr "Vannmengde"
 
 #: terrariumEngine.py:73
-#, fuzzy
 msgid "watertank"
 msgstr "vanntank"
 
