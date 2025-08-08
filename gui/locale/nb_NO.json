@@ -545,7 +545,7 @@
       },
       "settings": {
         "files": {
-          "help": "Viser volumet for denne spillelisten.",
+          "help": "Velg alle lydfilene for denne spillelisten.",
           "invalid": "Slett fil.",
           "label": "Lydfiler",
           "placeholder": "Slett fil"
@@ -586,7 +586,7 @@
     "actions": {
       "delete": "Slett-knapp",
       "export": "Eksportknapp",
-      "ignore": "Legg til ny sensor",
+      "ignore": "Ignorer knapp",
       "settings": "Rediger-knapp"
     },
     "delete": {
@@ -613,7 +613,7 @@
     },
     "menu": {
       "new": {
-        "title": "Legg til ny sensor"
+        "title": "Ny knapp"
       },
       "status": {
         "title": "Status"
@@ -844,7 +844,7 @@
         "title": "Nytt område"
       },
       "new_enclosure": {
-        "title": "Legg til ny sensor"
+        "title": "Nytt kabinett"
       },
       "title": "Vedlegg"
     },
@@ -1669,7 +1669,7 @@
           "placeholder": "I2C-adresse"
         },
         "red": {
-          "help": "Viser volumet for denne spillelisten.",
+          "help": "Skriv inn GPIO pinnen for rødt lys.",
           "invalid": "Den angitte verdien er ikke gyldig. Skriv inn et gyldig tall mellom {min} og {max}.",
           "label": "Ons",
           "placeholder": "Skriv inn rød GPIO-pin"
@@ -2055,7 +2055,7 @@
       }
     },
     "controls": {
-      "archive": "Arkiv",
+      "archive": "Arkiver",
       "new_marker": "Legg til markør",
       "save_raw_image": "Lagre RAW-bilde",
       "show_markers": "Vis markører",
@@ -2171,7 +2171,7 @@
         "state": {
           "help": "Velg varigheten mellom arkiverte bilder.",
           "invalid": "Vennligst velg.",
-          "label": "Arkiv",
+          "label": "Arkiverer",
           "placeholder": "Språk"
         }
       },
