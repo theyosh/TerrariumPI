@@ -91,7 +91,7 @@
         fractionDigits: 0,
       };
 
-      if (settings.show_gauge_values === 1 && showGaugeValues) {
+      if (settings.show_gauge_values <= 2 && showGaugeValues) {
         gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, alarm_min, alarm_max];
       }
 
