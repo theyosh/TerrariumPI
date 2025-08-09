@@ -503,7 +503,8 @@
           />
 
           <div class="form-group row">
-            <label for="none"
+            <label
+              for="none"
               title="{$_('system.settings.show_gauge_values.label', {
                 default: 'Show values in gauge graphs',
               })}"
