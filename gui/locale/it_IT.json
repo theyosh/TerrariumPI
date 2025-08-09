@@ -1923,9 +1923,6 @@
           "title": "Data upload"
         }
       },
-      "show_gauge_values": {
-        "help": ""
-      },
       "show_min_max_gauge": {
         "help": "Mostra il minimo e il massimo valore di misura graficamente.",
         "label": "Mostra il minimo e il massimo valore di misura graficamente"

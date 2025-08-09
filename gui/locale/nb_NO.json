@@ -1923,9 +1923,6 @@
           "title": "Dato opplastet"
         }
       },
-      "show_gauge_values": {
-        "help": ""
-      },
       "show_min_max_gauge": {
         "help": "Vis min og maks verdier i måler grafene.",
         "label": "Vis min og maks verdier i måler grafene"

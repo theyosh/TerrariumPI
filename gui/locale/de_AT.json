@@ -1795,9 +1795,6 @@
           "title": "Update OK"
         }
       },
-      "show_gauge_values": {
-        "help": ""
-      },
       "show_min_max_gauge": {
         "help": "Min- und Max-Werte in Messkurven anzeigen.",
         "label": "Min- und Max-Werte in Messkurven anzeigen"

@@ -1923,9 +1923,6 @@
           "title": "Aktualizacja OK"
         }
       },
-      "show_gauge_values": {
-        "help": ""
-      },
       "show_min_max_gauge": {
         "help": "Pokaż minimalną i maksymalną wartość wskaźników.",
         "label": "Pokaż wartości min i maksymalne na wykresach mierników"

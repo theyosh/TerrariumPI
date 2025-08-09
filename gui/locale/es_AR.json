@@ -1753,9 +1753,6 @@
           "title": "Fecha de compilación"
         }
       },
-      "show_gauge_values": {
-        "help": ""
-      },
       "show_min_max_gauge": {
         "help": "Mostrar valores mínimos y máximos en gráficos de medidor.",
         "label": "Mostrar valores mínimos y máximos en gráficos de medidor"

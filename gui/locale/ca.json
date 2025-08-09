@@ -1923,9 +1923,6 @@
           "title": "Actualitzeu D'acord"
         }
       },
-      "show_gauge_values": {
-        "help": ""
-      },
       "show_min_max_gauge": {
         "help": "Mostra el valor mínim i màxim dels calibres.",
         "label": "Mostra valors min i màxims en gràfics de calibre"

@@ -1923,9 +1923,6 @@
           "title": "Update OK"
         }
       },
-      "show_gauge_values": {
-        "help": "Toggle to show alarm values."
-      },
       "show_min_max_gauge": {
         "help": "Show the minimum and maximum value on the gauges.",
         "label": "Show min and max values in gauge graphs"

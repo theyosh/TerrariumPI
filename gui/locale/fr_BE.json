@@ -1923,9 +1923,6 @@
           "title": "Date de dépôt"
         }
       },
-      "show_gauge_values": {
-        "help": ""
-      },
       "show_min_max_gauge": {
         "help": "Afficher la valeur minimale et maximale sur les jauges.",
         "label": "Afficher les valeurs Min et Max dans les graphiques de jauge"

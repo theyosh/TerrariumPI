@@ -1923,9 +1923,6 @@
           "title": "OKを更新します"
         }
       },
-      "show_gauge_values": {
-        "help": ""
-      },
       "show_min_max_gauge": {
         "help": "ゲージの最小値と最大値を表示します。.",
         "label": "ゲージグラフで最小値と最大値を表示します"

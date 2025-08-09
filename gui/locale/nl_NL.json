@@ -1923,9 +1923,6 @@
           "title": "Update ok"
         }
       },
-      "show_gauge_values": {
-        "help": ""
-      },
       "show_min_max_gauge": {
         "help": "Toon de minimale en maximale waarde op de meters.",
         "label": "Toon min en max waarden in meter grafieken"
