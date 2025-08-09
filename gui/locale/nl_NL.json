@@ -1293,16 +1293,16 @@
       },
       "gauge_values": {
         "alarm": {
-          "help": "",
-          "label": ""
+          "help": "Toon alarm waardes.",
+          "label": "Alarm waarden"
         },
         "limit": {
-          "help": "",
-          "label": ""
+          "help": "Toon limiet waardes.",
+          "label": "Limit waarden"
         },
         "measurements": {
-          "help": "",
-          "label": ""
+          "help": "Toon min en max waardes.",
+          "label": "Meetingen"
         }
       },
       "hardware": {
