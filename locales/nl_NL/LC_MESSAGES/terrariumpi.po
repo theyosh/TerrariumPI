@@ -2,14 +2,14 @@
 # Copyright (C) 2016 TheYOSH
 # Joshua (TheYOSH) Rubingh, <theyosh@theyosh.nl>, 2016.
 # theyosh <github.com@theyosh.nl>, 2022.
-# TheYOSH <github.com@theyosh.nl>, 2023.
+# TheYOSH <github.com@theyosh.nl>, 2023, 2025.
 # Pro Xy <ProXy.SOC@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2025-08-07 06:54+0000\n"
-"Last-Translator: Pro Xy <ProXy.SOC@gmail.com>\n"
+"PO-Revision-Date: 2025-08-09 20:53+0000\n"
+"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/nl/>\n"
 "Language: nl_NL\n"
@@ -130,7 +130,6 @@ msgid "water_volume"
 msgstr "Watervolume"
 
 #: terrariumEngine.py:73
-#, fuzzy
 msgid "watertank"
 msgstr "watertank"
 
