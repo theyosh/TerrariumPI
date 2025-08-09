@@ -1291,6 +1291,20 @@
         "invalid": "Introduïu un valor mínim de {value}.",
         "label": "Flux d'aigua"
       },
+      "gauge_values": {
+        "alarm": {
+          "help": "",
+          "label": ""
+        },
+        "limit": {
+          "help": "",
+          "label": ""
+        },
+        "measurements": {
+          "help": "",
+          "label": ""
+        }
+      },
       "hardware": {
         "help": "Seleccioneu el tipus de maquinari per a aquest relé.",
         "invalid": "Seleccioneu un tipus de maquinari.",
@@ -1908,6 +1922,9 @@
           "message": "La configuració s'actualitza.",
           "title": "Actualitzeu D'acord"
         }
+      },
+      "show_gauge_values": {
+        "help": ""
       },
       "show_min_max_gauge": {
         "help": "Mostra el valor mínim i màxim dels calibres.",

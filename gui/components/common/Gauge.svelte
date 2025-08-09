@@ -91,17 +91,22 @@
         fractionDigits: 0,
       };
 
-      if (settings.show_gauge_values <= 2 && showGaugeValues) {
-        gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, alarm_min, alarm_max];
-      }
+      if (showGaugeValues) {
+        if (settings.gauge_values_alarm || settings.gauge_values_limit || settings.gauge_values_measurements) {
+          gaugeStaticLabels.fractionDigits = 2;
+        }
 
-      if (settings.show_gauge_values === 2 && showGaugeValues) {
-        gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, limit_min, limit_max];
-      }
+        if (settings.gauge_values_alarm) {
+          gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, alarm_min, alarm_max];
+        }
 
-      if (settings.show_min_max_gauge && minmax && $sensors[id].measure_min && $sensors[id].measure_max) {
-        gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, $sensors[id].measure_min, $sensors[id].measure_max];
-        gaugeStaticLabels.fractionDigits = 2;
+        if (settings.gauge_values_limit) {
+          gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, limit_min, limit_max];
+        }
+
+        if (settings.gauge_values_measurements && minmax && $sensors[id].measure_min && $sensors[id].measure_max) {
+          gaugeStaticLabels.labels = [...gaugeStaticLabels.labels, $sensors[id].measure_min, $sensors[id].measure_max];
+        }
       }
 
       if (gaugeStaticLabels.labels.length > 0) {

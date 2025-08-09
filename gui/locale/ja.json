@@ -1291,6 +1291,20 @@
         "invalid": "％sの最小値を入力してください。.",
         "label": "水流量"
       },
+      "gauge_values": {
+        "alarm": {
+          "help": "",
+          "label": ""
+        },
+        "limit": {
+          "help": "",
+          "label": ""
+        },
+        "measurements": {
+          "help": "",
+          "label": ""
+        }
+      },
       "hardware": {
         "help": "このリレーの種類を選択してください。.",
         "invalid": "種類を選択してください。.",
@@ -1908,6 +1922,9 @@
           "message": "設定が更新されます。",
           "title": "OKを更新します"
         }
+      },
+      "show_gauge_values": {
+        "help": ""
       },
       "show_min_max_gauge": {
         "help": "ゲージの最小値と最大値を表示します。.",

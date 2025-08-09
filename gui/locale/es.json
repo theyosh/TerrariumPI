@@ -1251,6 +1251,18 @@
         "invalid": "Ingrese un valor mínimo de {value}.",
         "label": "Flujo de agua"
       },
+      "gauge_values": {
+        "alarm": {
+          "help": "",
+          "label": ""
+        },
+        "limit": {
+          "label": ""
+        },
+        "measurements": {
+          "help": ""
+        }
+      },
       "hardware": {
         "help": "Seleccione el tipo de hardware para este relé.",
         "invalid": "Seleccione un tipo de hardware.",

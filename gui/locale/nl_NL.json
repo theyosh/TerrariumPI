@@ -1291,6 +1291,20 @@
         "invalid": "Voer een minimale waarde in van {value}.",
         "label": "Waterstroom"
       },
+      "gauge_values": {
+        "alarm": {
+          "help": "",
+          "label": ""
+        },
+        "limit": {
+          "help": "",
+          "label": ""
+        },
+        "measurements": {
+          "help": "",
+          "label": ""
+        }
+      },
       "hardware": {
         "help": "Selecteer het hardwaretype voor deze schakelaar.",
         "invalid": "Selecteer een hardwaretype.",
@@ -1908,6 +1922,9 @@
           "message": "De instellingen zijn bijgewerkt.",
           "title": "Update ok"
         }
+      },
+      "show_gauge_values": {
+        "help": ""
       },
       "show_min_max_gauge": {
         "help": "Toon de minimale en maximale waarde op de meters.",

@@ -502,42 +502,61 @@
             invalid="{$_('system.settings.auto_dark_mode.invalid', { default: 'Please make a choice.' })}"
           />
 
-          <Select
-            name="show_gauge_values"
-            value="{$formData.show_gauge_values}"
-            required="{false}"
-            options="{[
-              { value: 0, text: $_('system.settings.show_gauge_values.options.none', { default: 'None' }) },
-              {
-                value: 1,
-                text: $_('system.settings.show_gauge_values.options.alarm_only', { default: 'Alarm values only' }),
-              },
-              {
-                value: 2,
-                text: $_('system.settings.show_gauge_values.options.alarm_and_limit', {
-                  default: 'Alarm and limit values',
-                }),
-              },
-            ]}"
-            horizontal="{true}"
-            label="{$_('system.settings.show_gauge_values.label', {
-              default: 'Show values in gauge graphs',
-            })}"
-            help="{$_('system.settings.show_gauge_values.help', {
-              default: 'Select which values to show in gauge graphs.',
-            })}"
-            invalid="{$_('system.settings.show_gauge_values.invalid', { default: 'Please make a choice.' })}"
-          />
+          <div class="form-group row">
+            <label for="none"
+              title="{$_('system.settings.show_gauge_values.label', {
+                default: 'Show values in gauge graphs',
+              })}"
+              class="col col-form-label text-truncate"
+              >{$_('system.settings.show_gauge_values.label', {
+                default: 'Show values in gauge graphs',
+              })}</label
+            >
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <Switch
+                    name="gauge_values_alarm"
+                    value="{$formData.gauge_values_alarm}"
+                    label="{$_('relays.settings.gauge_values.alarm.label', { default: 'Alarm values' })}"
+                    help="{$_('relays.settings.gauge_values.alarm.help', {
+                      default: 'Toggle to show alarm values.',
+                    })}"
+                  />
+                </div>
+
+                <div class="col">
+                  <Switch
+                    name="gauge_values_limit"
+                    value="{$formData.gauge_values_limit}"
+                    label="{$_('relays.settings.gauge_values.limit.label', { default: 'Limit values' })}"
+                    help="{$_('relays.settings.gauge_values.limit.help', {
+                      default: 'Toggle to show limit values.',
+                    })}"
+                  />
+                </div>
+
+                <div class="col">
+                  <Switch
+                    name="gauge_values_measurements"
+                    value="{$formData.gauge_values_measurements}"
+                    label="{$_('relays.settings.gauge_values.measurements.label', { default: 'Measurements' })}"
+                    help="{$_('relays.settings.gauge_values.measurements.help', {
+                      default: 'Toggle to show min and max measurements.',
+                    })}"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
 
           <Switch
-            name="show_min_max_gauge"
-            value="{$formData.show_min_max_gauge}"
+            name="all_gauges_on_single_page"
+            value="{$formData.all_gauges_on_single_page}"
             horizontal="{true}"
-            label="{$_('system.settings.show_min_max_gauge.label', {
-              default: 'Show min and max values in gauge graphs',
-            })}"
-            help="{$_('system.settings.show_min_max_gauge.help', {
-              default: 'Show the minimum and maximum value on the gauges.',
+            label="{$_('system.settings.all_gauges_on_single_page.label', { default: 'All gauges on a single page' })}"
+            help="{$_('system.settings.all_gauges_on_single_page.help', {
+              default: 'Add extra menu item for all sensors on a single page.',
             })}"
           />
 
@@ -550,16 +569,6 @@
             })}"
             help="{$_('system.settings.graph_limit_min_max.help', {
               default: 'Limit graph values to 20% of the alarm values.',
-            })}"
-          />
-
-          <Switch
-            name="all_gauges_on_single_page"
-            value="{$formData.all_gauges_on_single_page}"
-            horizontal="{true}"
-            label="{$_('system.settings.all_gauges_on_single_page.label', { default: 'All gauges on a single page' })}"
-            help="{$_('system.settings.all_gauges_on_single_page.help', {
-              default: 'Add extra menu item for all sensors on a single page.',
             })}"
           />
         </Card>

@@ -1177,6 +1177,14 @@
         "invalid": "Contiene el nombre de host o IP del servidor de correo.",
         "label": "Flujo de agua en L/m"
       },
+      "gauge_values": {
+        "limit": {
+          "help": ""
+        },
+        "measurements": {
+          "label": ""
+        }
+      },
       "hardware": {
         "help": "Contiene la tarjeta de sonido que se utiliza para reproducir audio.",
         "invalid": "Seleccione un tipo de hardware.",
@@ -1744,6 +1752,9 @@
           "message": "",
           "title": "Fecha de compilación"
         }
+      },
+      "show_gauge_values": {
+        "help": ""
       },
       "show_min_max_gauge": {
         "help": "Mostrar valores mínimos y máximos en gráficos de medidor.",

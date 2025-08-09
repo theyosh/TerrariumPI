@@ -1291,6 +1291,20 @@
         "invalid": "Please enter a minimum value of {value}.",
         "label": "Water flow"
       },
+      "gauge_values": {
+        "alarm": {
+          "help": "Toggle to show alarm values.",
+          "label": "Alarm values"
+        },
+        "limit": {
+          "help": "Toggle to show limit values.",
+          "label": "Limit values"
+        },
+        "measurements": {
+          "help": "Toggle to show min and max measurements.",
+          "label": "Measurements"
+        }
+      },
       "hardware": {
         "help": "Select the hardware type for this relay.",
         "invalid": "Please select a hardware type.",
@@ -1908,6 +1922,9 @@
           "message": "Settings are updated.",
           "title": "Update OK"
         }
+      },
+      "show_gauge_values": {
+        "help": "Toggle to show alarm values."
       },
       "show_min_max_gauge": {
         "help": "Show the minimum and maximum value on the gauges.",

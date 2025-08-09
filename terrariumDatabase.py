@@ -71,7 +71,6 @@ def create_defaults(version):
         {"id": "temperature_indicator", "value": "celsius"},
         {"id": "distance_indicator", "value": "cm"},
         {"id": "water_volume_indicator", "value": "l"},
-        {"id": "show_min_max_gauge", "value": "false"},
         {"id": "dashboard_mode", "value": "0"},
         {"id": "all_gauges_on_single_page", "value": "false"},
         {"id": "graph_smooth_value", "value": "0"},
@@ -79,7 +78,9 @@ def create_defaults(version):
         {"id": "graph_limit_min_max", "value": "false"},
         {"id": "unsplash_access_key", "value": ""},
         {"id": "unsplash_query", "value": ""},
-        {"id": "show_gauge_values", "value": "0"},
+        {"id": "gauge_values_alarm", "value": "false"},
+        {"id": "gauge_values_limit", "value": "false"},
+        {"id": "gauge_values_measurements", "value": "false"},
     ]
 
     for setting in setting_defaults:

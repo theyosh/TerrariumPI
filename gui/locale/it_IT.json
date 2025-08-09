@@ -1291,6 +1291,20 @@
         "invalid": "Contiene il nome del sensore.",
         "label": "Flusso d'acqua in L/m"
       },
+      "gauge_values": {
+        "alarm": {
+          "help": "",
+          "label": ""
+        },
+        "limit": {
+          "help": "",
+          "label": ""
+        },
+        "measurements": {
+          "help": "",
+          "label": ""
+        }
+      },
       "hardware": {
         "help": "Contiene la scheda audio utilizzata per la riproduzione audio.",
         "invalid": "Per favore seleziona un tipo di hardware.",
@@ -1908,6 +1922,9 @@
           "message": "Le impostazioni vengono aggiornate.",
           "title": "Data upload"
         }
+      },
+      "show_gauge_values": {
+        "help": ""
       },
       "show_min_max_gauge": {
         "help": "Mostra il minimo e il massimo valore di misura graficamente.",

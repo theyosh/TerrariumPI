@@ -1291,6 +1291,20 @@
         "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",
         "label": "Przepływ wody"
       },
+      "gauge_values": {
+        "alarm": {
+          "help": "",
+          "label": ""
+        },
+        "limit": {
+          "help": "",
+          "label": ""
+        },
+        "measurements": {
+          "help": "",
+          "label": ""
+        }
+      },
       "hardware": {
         "help": "Wybierz typ sprzętu dla tego przekaźnika.",
         "invalid": "Wybierz rodzaj urządzenia.",
@@ -1908,6 +1922,9 @@
           "message": "Ustawienia są aktualizowane.",
           "title": "Aktualizacja OK"
         }
+      },
+      "show_gauge_values": {
+        "help": ""
       },
       "show_min_max_gauge": {
         "help": "Pokaż minimalną i maksymalną wartość wskaźników.",

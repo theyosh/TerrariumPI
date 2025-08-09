@@ -1218,6 +1218,11 @@
         "invalid": "Bitte gebe einen Betrag von mindestens {value} ein.",
         "label": "Wasserfluss"
       },
+      "gauge_values": {
+        "measurements": {
+          "label": ""
+        }
+      },
       "hardware": {
         "help": "Wähle den Hardwaretyp für dieses Relais aus.",
         "invalid": "Bitte einen Hardwaretyp auswählen.",
@@ -1789,6 +1794,9 @@
           "message": "Einstellungen sind aktualisiert.",
           "title": "Update OK"
         }
+      },
+      "show_gauge_values": {
+        "help": ""
       },
       "show_min_max_gauge": {
         "help": "Min- und Max-Werte in Messkurven anzeigen.",

@@ -1291,6 +1291,20 @@
         "invalid": "Contient le nom du capteur.",
         "label": "Débit en L/m"
       },
+      "gauge_values": {
+        "alarm": {
+          "help": "",
+          "label": ""
+        },
+        "limit": {
+          "help": "",
+          "label": ""
+        },
+        "measurements": {
+          "help": "",
+          "label": ""
+        }
+      },
       "hardware": {
         "help": "Contient la carte son utilisée pour la lecture audio.",
         "invalid": "Choisir une option.",
@@ -1908,6 +1922,9 @@
           "message": "Les paramètres sont mis à jour.",
           "title": "Date de dépôt"
         }
+      },
+      "show_gauge_values": {
+        "help": ""
       },
       "show_min_max_gauge": {
         "help": "Afficher la valeur minimale et maximale sur les jauges.",

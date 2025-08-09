@@ -1249,6 +1249,14 @@
         "invalid": "Insira um número mínimo de {value}.",
         "label": "Fluxo d'água"
       },
+      "gauge_values": {
+        "limit": {
+          "help": ""
+        },
+        "measurements": {
+          "label": ""
+        }
+      },
       "hardware": {
         "help": "Selecione o hardware usado para este botão.",
         "invalid": "Selecione um tipo de hardware.",
@@ -1866,6 +1874,9 @@
           "message": "Configurações atualizadas.",
           "title": "Atualização OK"
         }
+      },
+      "show_gauge_values": {
+        "help": ""
       },
       "show_min_max_gauge": {
         "help": "Mostrar valores mínimo e máximo nos medidores de gráficos.",

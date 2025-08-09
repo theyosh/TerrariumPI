@@ -1291,6 +1291,20 @@
         "invalid": "Skriv inn en minimumsverdi av {value}.",
         "label": "Vannføring"
       },
+      "gauge_values": {
+        "alarm": {
+          "help": "",
+          "label": ""
+        },
+        "limit": {
+          "help": "",
+          "label": ""
+        },
+        "measurements": {
+          "help": "",
+          "label": ""
+        }
+      },
       "hardware": {
         "help": "Velg maskinvaretype for dette reléet.",
         "invalid": "Vennligst velg en maskinvaretype.",
@@ -1908,6 +1922,9 @@
           "message": "Innstillingene er oppdatert.",
           "title": "Dato opplastet"
         }
+      },
+      "show_gauge_values": {
+        "help": ""
       },
       "show_min_max_gauge": {
         "help": "Vis min og maks verdier i måler grafene.",

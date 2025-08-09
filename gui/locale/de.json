@@ -1291,6 +1291,19 @@
         "invalid": "Bitte gib einen Mindestwert von {value} ein.",
         "label": "Wasserfluss"
       },
+      "gauge_values": {
+        "alarm": {
+          "help": "",
+          "label": ""
+        },
+        "limit": {
+          "help": "",
+          "label": ""
+        },
+        "measurements": {
+          "help": ""
+        }
+      },
       "hardware": {
         "help": "Wähle den Hardwaretyp für diesen Taster aus.",
         "invalid": "Bitte wähle einen Hardwaretyp aus.",
