@@ -178,8 +178,7 @@ class terrariumWebserver(object):
             "graph_smooth_value": self.engine.settings["graph_smooth_value"],
             "gauge_values_alarm": str(self.engine.settings["gauge_values_alarm"]).lower(),
             "gauge_values_limit": str(self.engine.settings["gauge_values_limit"]).lower(),
-            "gauge_values_measurements":
-                str(self.engine.settings["gauge_values_measurements"]).lower(),
+            "gauge_values_measurements": str(self.engine.settings["gauge_values_measurements"]).lower(),
             "auto_dark_mode": str(self.engine.settings["auto_dark_mode"]).lower(),
             "is_night": str(not (self.engine.weather is None or self.engine.weather.is_day)).lower(),
             "graph_limit_min_max": str(self.engine.settings["graph_limit_min_max"]).lower(),
