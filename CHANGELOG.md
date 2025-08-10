@@ -2,6 +2,54 @@ Changelog
 =========
 
 
+4.12.5 (2025-08-10)
+-------------------
+
+**Fixes**
+------
+
+- Fix variables. [TheYOSH]
+- Fix casing. [TheYOSH]
+- Fix new gauge feature ;( [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update translation files. [Weblate]
+
+  Updated by "Cleanup translation files" hook in Weblate.
+
+**Other**
+------
+
+- New release post. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1123 of 1123 strings)
+- New Svelte GUI build. [TheYOSH]
+- New gauge settings. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 100.0% (1117 of 1117 strings)
+- New Svelte GUI build. [TheYOSH]
+
+
 4.12.4 (2025-08-07)
 -------------------
 
@@ -24,6 +72,7 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Update libraries. [TheYOSH]
