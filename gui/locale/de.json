@@ -1293,15 +1293,16 @@
       },
       "gauge_values": {
         "alarm": {
-          "help": "",
-          "label": ""
+          "help": "Alarmwerte anzeigen.",
+          "label": "Alarmwerte"
         },
         "limit": {
-          "help": "",
-          "label": ""
+          "help": "Grenzwerte anzeigen.",
+          "label": "Grenzwerte"
         },
         "measurements": {
-          "help": ""
+          "help": "Min- und Max-Messwerte anzeigen.",
+          "label": "Messungen"
         }
       },
       "hardware": {
