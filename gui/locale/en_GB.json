@@ -98,7 +98,7 @@
             "label": "Offset"
           },
           "period": {
-            "help": "After x minutes change to value or at exactly a time stamp.",
+            "help": "Change to value after x minutes or at a specific time.",
             "label": "Period/duration"
           },
           "remote": {
