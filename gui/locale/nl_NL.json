@@ -98,7 +98,7 @@
             "label": "Offset"
           },
           "period": {
-            "help": "Na x minuten wijzigen naar waarde of precies op een tijdstip.",
+            "help": "Wijzigen naar waarde na x minuten of op een specifiek tijdstip.",
             "label": "Periode/duur"
           },
           "remote": {
