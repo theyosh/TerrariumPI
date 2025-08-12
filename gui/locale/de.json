@@ -98,7 +98,7 @@
             "label": "Verschiebung"
           },
           "period": {
-            "help": "",
+            "help": "Ändere den Wert nach x Minuten oder zu einem bestimmten Zeitpunkt.",
             "label": "Zeitpunkte/Dauer"
           },
           "remote": {
@@ -1173,7 +1173,7 @@
     },
     "restart": {
       "ok": {
-        "title": "System Neustart OK"
+        "title": "Dienst-Neustart OK"
       }
     },
     "scanning": {
