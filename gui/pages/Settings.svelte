@@ -460,6 +460,34 @@
           />
 
           <Select
+            name="graph_period"
+            value="{$formData.graph_period}"
+            required="{true}"
+            options="{[
+              {
+                value: 'day',
+                text: $_('graph.period.day', { default: 'Day' }),
+              },
+              {
+                value: 'week',
+                text: $_('graph.period.week', { default: 'Week' }),
+              },
+              {
+                value: 'month',
+                text: $_('graph.period.month', { default: 'Month' }),
+              },
+              {
+                value: 'year',
+                text: $_('graph.period.year', { default: 'Year' }),
+              },
+            ]}"
+            horizontal="{true}"
+            label="{$_('system.settings.graph_period.label', { default: 'Default graph period' })}"
+            help="{$_('system.settings.graph_period.help', { default: 'Select the default graph period.' })}"
+            invalid="{$_('system.settings.graph_period.invalid', { default: 'Please make a choice.' })}"
+          />
+
+          <Select
             name="dashboard_mode"
             value="{$formData.dashboard_mode}"
             required="{false}"

@@ -1851,6 +1851,11 @@
         "help": "",
         "label": ""
       },
+      "graph_period": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
       "graph_smooth_value": {
         "help": "Introduïu la quantitat de punts de dades a la mitjana. 0 Desactivarà aquesta funció.",
         "invalid": "Introduïu un valor mínim de {value}.",

@@ -1851,6 +1851,11 @@
         "help": "Begrens grafen til 20% av alarmverdien.",
         "label": "Begrens grafverdiene"
       },
+      "graph_period": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
       "graph_smooth_value": {
         "help": "Angi mengden datapunkter for gjennomsnittet. 0 vil deaktivere denne funksjonen.",
         "invalid": "Skriv inn en minimumsverdi av {value}.",

@@ -1851,6 +1851,11 @@
         "help": "Limit graph values to 20% of the alarm values.",
         "label": "Limit graph values"
       },
+      "graph_period": {
+        "help": "Select the default graph period.",
+        "invalid": "Please make a choice.",
+        "label": "Default graph period"
+      },
       "graph_smooth_value": {
         "help": "Enter the amount of data points to average. 0 will disable this feature.",
         "invalid": "Please enter a minimum value of {value}.",

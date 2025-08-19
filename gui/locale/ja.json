@@ -1851,6 +1851,11 @@
         "help": "",
         "label": ""
       },
+      "graph_period": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
       "graph_smooth_value": {
         "help": "データポイントの量を平均して入力します。0はこの機能を無効にします。.",
         "invalid": "％sの最小値を入力してください。.",

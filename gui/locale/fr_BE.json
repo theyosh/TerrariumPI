@@ -1851,6 +1851,11 @@
         "help": "",
         "label": ""
       },
+      "graph_period": {
+        "help": "",
+        "invalid": "",
+        "label": ""
+      },
       "graph_smooth_value": {
         "help": "Entrez la quantité de points de données en moyenne. 0 désactivera cette fonctionnalité.",
         "invalid": "Contient le nom du capteur.",

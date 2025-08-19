@@ -8,7 +8,7 @@
       content="Software for automating your reptile enclosure or any other area. Using sensors and relays to keep your environment at a controlled state. All with a nice web interface."
     />
     <meta charset="utf-8" />
-    <title>TerrariumPI - 4.12.2</title>
+    <title>TerrariumPI - 4.12.4</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,21 +37,22 @@
         language: 'en-US',
         currency: 'eur',
         name: 'TerrariumPI',
-        version: '4.12.2',
+        version: '4.12.4',
         device: 'Raspberry Pi 3 Model B Rev 1.2',
         profile: 'img/terrariumpi.jpg',
         favicon: 'favicon.ico',
         logged_in: false,
-
         docker: false,
         gitversion: '',
-        show_min_max_gauge: false,
-        show_gauge_values: false,
+        gauge_values_alarm: false,
+        gauge_values_limit: false,
+        gauge_values_measurements: false,
         graph_smooth_value: 3.0,
         graph_limit_min_max: false,
         show_gauge_overview: false,
         auto_dark_mode: 'on',
-        is_night: false,
+        graph_period: 'day',
+        is_night: true,
         dashboard_mode: 0.0,
         units: {
           temperature: { name: 'temperature', value: 'C' },
@@ -70,7 +71,7 @@
           co2: { name: 'co2', value: 'ppm' },
           volume: { name: 'volume', value: 'L' },
           water_volume: { name: 'Water volume', value: 'L' },
-          watertank: { name: 'watertank', value: 'L' },
+          watertank: { name: 'water tank', value: 'L' },
           windspeed: { name: 'windspeed', value: 'km/h' },
           water_flow: { name: 'water_flow', value: 'L/m' },
           wattage: { name: 'wattage', value: 'W' },

@@ -165,7 +165,7 @@
 
   // Init graph through store
   $graphs[id] = {
-    period: 'day',
+    period: settings.graph_period,
     changed: true, // This will trigger the initial loading when the page loads :)
   };
 
