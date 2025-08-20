@@ -1851,6 +1851,11 @@
         "help": "Begrenzt die Diagrammwerte auf 20 % der Alarmwerte.",
         "label": "Begrenze die Diagrammwerte"
       },
+      "graph_period": {
+        "help": "Standard-Grafikzeitraum auswählen.",
+        "invalid": "Bitte eine Auswahl treffen.",
+        "label": "Standard-Grafikzeitraum"
+      },
       "graph_smooth_value": {
         "help": "Gib die Anzahl der Datenpunkte zum Durchschnitt ein. '0' zum deaktivieren.",
         "invalid": "Bitte gib einen Mindestwert von {value} ein.",
