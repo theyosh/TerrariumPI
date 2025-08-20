@@ -98,7 +98,7 @@
             "label": "Offset"
           },
           "period": {
-            "help": "Etter x minutter endre til verdien eller på nøyaktig tidspunkt.",
+            "help": "Endre til verdi etter x minutter eller på spesifikt tidspunkt.",
             "label": "Periode/varighet"
           },
           "remote": {
@@ -1293,16 +1293,16 @@
       },
       "gauge_values": {
         "alarm": {
-          "help": "",
-          "label": ""
+          "help": "Skru på for å vise alarmverdier.",
+          "label": "Alarmverdier"
         },
         "limit": {
-          "help": "",
-          "label": ""
+          "help": "Skru på for å vise grenseverdier.",
+          "label": "Grenseverdier"
         },
         "measurements": {
-          "help": "",
-          "label": ""
+          "help": "Skru på for å vise min- og maxmål.",
+          "label": "Målinger"
         }
       },
       "hardware": {
@@ -1852,9 +1852,9 @@
         "label": "Begrens grafverdiene"
       },
       "graph_period": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Velg standard grafperiode.",
+        "invalid": "Vennligst velg.",
+        "label": "Standard grafperiode"
       },
       "graph_smooth_value": {
         "help": "Angi mengden datapunkter for gjennomsnittet. 0 vil deaktivere denne funksjonen.",
