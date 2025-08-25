@@ -1859,22 +1859,22 @@
       "graph_smooth_value": {
         "help": "Angi mengden datapunkter for gjennomsnittet. 0 vil deaktivere denne funksjonen.",
         "invalid": "Skriv inn en minimumsverdi av {value}.",
-        "label": "Grafe utjevning verdi"
+        "label": "Grafutjevning"
       },
       "header": {
         "cloud": "Sky",
         "gui": "GUI",
-        "locale": "Lokal kilde",
+        "locale": "Sted",
         "system": "System"
       },
       "hide_environment_dashboard": {
-        "help": "Skjul miljø oppsummeringen på dashbordet.",
-        "label": "Skjul miljø oppsummeringen på dashbordet"
+        "help": "Skjul kabinettdata på dashbordet.",
+        "label": "Skjul kabinett på dashbordet"
       },
       "host": {
         "help": "Skriv inn IP for å lytte etter tilkoblinger. Standard 0.0.0.0.",
-        "invalid": "Viser epost serverens hostname eller IP.",
-        "label": "Port nummer"
+        "invalid": "Skriv inn en gyldig IP-adresse.",
+        "label": "IP-nummer"
       },
       "language": {
         "help": "Velg grensesnittspråket. Dette vil også endre tall- og valutaformatering.",
@@ -1995,7 +1995,7 @@
   },
   "table": {
     "field": {
-      "range": "Område"
+      "range": "område"
     },
     "header": {
       "actions": "Handling",
@@ -2272,7 +2272,7 @@
       "rotation": {
         "help": "Bilderotasjon.",
         "invalid": "Vennligst velg.",
-        "label": "Sted",
+        "label": "Rotasjon",
         "options": {
           "degrees_0": "grader",
           "degrees_180": "grader",
