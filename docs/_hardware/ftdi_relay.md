@@ -31,8 +31,8 @@ Python.
 ## Autodiscovery
 
 The autodiscovery will only find 4 relays when this hardware is used. Even when
-the board contains 8 or more relays. This is due to the fact it is impossible
-to detect how many relays a board has. The minimum is 4, so that is why only 4
+the board contains 8 or more relays. This is due to the fact it is impossible to
+detect how many relays a board has. The minimum is 4, so that is why only 4
 relays will be auto discovered during startup. If your board has more relays,
 you have to add them manually.
 
