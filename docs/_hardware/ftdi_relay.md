@@ -28,4 +28,12 @@ time for alarms. We developed also command line tool utility for controlling the
 relays. We provide software examples in Labview, .NET, Java, Borland C++,
 Python.
 
+## Autodiscovery
+
+The autodiscovery will only find 4 relays when this hardware is used. Even when
+the board contains 8 or more relays. This is due to the fact it is impossible
+to detect how many relays a board has. The minimum is 4, so that is why only 4
+relays will be auto discovered during startup. If your board has more relays,
+you have to add them manually.
+
 {% include_relative _relay_detail.md %}
