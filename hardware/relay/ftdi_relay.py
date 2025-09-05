@@ -119,9 +119,8 @@ class terrariumRelayFTDI(terrariumRelay):
         device_nr = 0
         for _, _, serial in Driver().list_devices():
             device_nr += 1
-            # We have by default 4 switches..... not sure...
-            amount_sockets = 4
-            for x in range(amount_sockets):
+            # It is impossible to detect amount of relays per board. So we can only auto discover 4 at maximum.
+            for x in range(4):
                 # Explicit None value for ID. This will force to generate a new ID based on the address
                 yield terrariumRelay(
                     None,
