@@ -265,9 +265,7 @@ sass:
   style: compressed
 
 # https://github.com/digitalsparky/jekyll-minifier
-jekyll-minifier:
-  uglifier_args:
-    harmony: true
+# jekyll-minifier:
 
 compress_html:
   clippings: all

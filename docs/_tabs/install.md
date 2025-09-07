@@ -15,13 +15,16 @@ Here we will install Raspberry PI and TerrariumPI software step by step.
 
 ![Raspberry PI Logo](/assets/img/RaspberryPI_Logo.webp){: .right width="100" }
 In order to run TerrariumPI you first need a working Raspberry PI with the
-'[Raspberry Pi OS Lite (Legacy)](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy)'
-image. Make sure you are using the **Legacy** version! This is Debian Buster.
-This is very important, as the Desktop and/or the new OS version will not work
-well with the GPIO pins and Raspberry PI cameras.
+**32bit**
+'[Raspberry Pi OS **Lite**](https://www.raspberrypi.com/software/operating-systems/)'
+image. Make sure you are using the **Lite** version! This is very important as
+the Desktop version will not work well with the GPIO pins and Raspberry PI
+cameras.
 
-Also **64bit is not supported** due to missing mmal code which is needed for the
-webcams.
+TerrariumPI is tested on Raspbian OS Bookworm, Bullseye and Buster.
+
+> **64bit is not supported** due to missing mmal code which is needed for the
+> webcams. {: .prompt-danger }
 
 ### Creating SD Card
 
@@ -29,8 +32,8 @@ webcams.
 Download and instal the
 [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to prepare your SD
 card. Make sure you have a SD card of at least 4GB of size. Bigger is better
-:smile: Make sure you select **Raspberry Pi OS Lite (legacy)** from the other
-Raspberry Pi OS images.
+:smile: Make sure you select **Raspberry Pi OS Lite** from the other Raspberry
+Pi OS images.
 
 ![Raspberry PI Imager settings icon](/assets/img/RPI_Imager_settings.webp){:
 .left width="50"}In order to enable SSH, Wifi and other settings, click on the
