@@ -23,8 +23,11 @@ cameras.
 
 TerrariumPI is tested on Raspbian OS Bookworm, Bullseye and Buster.
 
+<!-- prettier-ignore-start -->
 > **64bit is not supported** due to missing mmal code which is needed for the
-> webcams. {: .prompt-danger }
+webcams.
+{: .prompt-danger }
+<!-- prettier-ignore-end -->
 
 ### Creating SD Card
 
