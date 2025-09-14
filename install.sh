@@ -71,6 +71,7 @@ if [ "${OS}" == "buster" ]; then
   PIP_MODULES="${PIP_MODULES//Adafruit-Blinka==+([^ ])/Adafruit-Blinka==8.43.0}"
 
   PIP_MODULES="${PIP_MODULES//icalevents==+([^ ])/icalevents==0.1.25}"
+  PIP_MODULES="${PIP_MODULES//psutil==+([^ ])/psutil==6.0.0}"
   PIP_MODULES="${PIP_MODULES//packaging==+([^ ])/packaging==24.0}"
 
   PIP_MODULES="${PIP_MODULES//pyfiglet==+([^ ])/pyfiglet==0.8.post1}"

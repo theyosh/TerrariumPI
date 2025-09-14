@@ -60,6 +60,7 @@ RUN  sed -i 's/pip==.*/pip==24.0/g' requirements.txt \
   && sed -i 's/pywemo==.*/pywemo==0.9.2/g' requirements.txt \
   && sed -i 's/Adafruit-Blinka==.*/Adafruit-Blinka==8.43.0/g' requirements.txt \
   && sed -i 's/icalevents==.*/icalevents==0.1.25/g' requirements.txt \
+  && sed -i 's/psutil==.*/psutil==6.0.0/g' requirements.txt \
   && sed -i 's/packaging==.*/packaging==24.0/g' requirements.txt \
   && sed -i 's/pyfiglet==.*/pyfiglet==0.8.post1/g' requirements.txt \
   && sed -i 's/luma.oled==.*/luma.oled==3.13.0/g' requirements.txt \
