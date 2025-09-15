@@ -234,7 +234,7 @@ This software requires a Raspberry Pi and some extra hardware in order to run
 and work. The bare minimum and tested hardware is
 
 - Raspberry PI with at least **4GB SD card** running
-  [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/).
+  [Raspberry Pi OS **Lite** 32bit](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-32-bit).
   - Zero (Should work/At own risk/limited support)
   - [Zero 2W](https://github.com/theyosh/TerrariumPI/issues/823#issuecomment-1693236850)
     (Should work/At own risk/limited support)
