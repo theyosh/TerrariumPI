@@ -239,8 +239,8 @@ and work. The bare minimum and tested hardware is
   - Pi 3 (Works/full support)
   - Pi 4 (Works/full support)
   - Pi 5 **does partly work** (At own risk/limited support. Due to changes in
-  the hardware on the Pi PWM dimming is not working. And RPI cam is not
-  supported)
+    the hardware on the Pi PWM dimming is not working. And RPI cam is not
+    supported)
 - Power relay board
   - USB versions (Serial and Bitbang)
   - GPIO versions
