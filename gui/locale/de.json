@@ -1824,9 +1824,12 @@
         }
       },
       "auto_discovery": {
-        "label": "",
+        "help": "Aktivieren Sie die automatische Erkennung für Sensoren und Relais während des Starts.",
+        "invalid": "Bitte treffen Sie eine Wahl",
+        "label": "Autoerkennung verwenden",
         "options": {
-          "no": ""
+          "no": "Nein",
+          "yes": "Ja"
         }
       },
       "currency": {
