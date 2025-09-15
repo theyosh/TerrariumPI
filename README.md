@@ -160,8 +160,8 @@ Your language not in the list or not up to date?
 
 The installation expects a Pi with working network and ssh. It is tested with
 [Raspberry Pi OS **Lite** 32bit](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-32-bit).
-Desktop images will **not** work. Installation seems to work, but it will not work
-stable. So make sure you download the correct image for the Pi. \
+Desktop images will **not** work. Installation seems to work, but it will not
+work stable. So make sure you download the correct image for the Pi. \
 It is possible to use USB or SSD drives to speed things up:
 <https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb>
 
@@ -191,8 +191,8 @@ You can skip the manual installation part.
 
 ### Login
 
-After either [docker](#docker) or [manual](#manual) installation, you should have a web interface at
-<http://[raspberry_ip]>:8090 (login: **admin/password**)
+After either [docker](#docker) or [manual](#manual) installation, you should
+have a web interface at <http://[raspberry_ip]>:8090 (login: **admin/password**)
 
 All needed options and modules are setup by the installer script. This means
 that I2C and 1Wire overlay are enabled by default.
