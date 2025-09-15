@@ -26,7 +26,7 @@ boards or door sensors. The usage can be endless. All power switches have
 support for timers to trigger based on a time pattern.
 
 Running now stable for more than
-[10 years](https://theyosh.github.io/TerrariumPI/posts/2024/08/01/10-year-anniversary/)!!!
+[**10 years**](https://theyosh.github.io/TerrariumPI/posts/2024/08/01/10-year-anniversary/)!!!
 
 If you are using this software for your animals or plants,
 **[please post some pictures](https://github.com/theyosh/TerrariumPI/issues/210)**
@@ -60,8 +60,7 @@ And all this is controlled with a nice web interface with
 7. [Contributors](#contributors)
 8. [Star history](#star-history)
 9. [Screenshots](#screenshots)
-10. [Testing](#testing)
-11. [About](#about)
+10. [About](#about)
 
 ## Features
 
@@ -160,7 +159,7 @@ Your language not in the list or not up to date?
 ### Base
 
 The installation expects a Pi with working network and ssh. It is tested with
-[Raspberry Pi OS Lite **Legacy**](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy).
+[Raspberry Pi OS Lite 32bit](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-32-bit).
 Desktop images will not work. Installation seems to work, but it will not work
 stable. So make sure you download the correct image for the Pi. It is possible
 to use USB or SSD drives to speed things up:
@@ -239,7 +238,9 @@ and work. The bare minimum and tested hardware is
   - Pi 2 (Should work/At own risk/limited support)
   - Pi 3 (Works/full support)
   - Pi 4 (Works/full support)
-  - Pi 5 **does NOT work** (Due to changes in the hardware on the Pi)
+  - Pi 5 **does partly work** (At own risk/limited support. Due to changes in
+  the hardware on the Pi PWM dimming is not working. And RPI cam is not
+  supported)
 - Power relay board
   - USB versions (Serial and Bitbang)
   - GPIO versions
@@ -332,13 +333,6 @@ more information is here:
 More screenshots can be found
 [here](https://github.com/theyosh/TerrariumPI/tree/main/screenshots)
 
-## Testing
-
-[Free tested with BrowserStack for open source](https://browserstack.com)
-[![BrowserStack](screenshots/BrowserStack.webp)](https://browserstack.com)
-
 ## About
 
-A live version is running at: <https://terrarium.theyosh.nl/index.html>. Go to
-'About' menu for more information about used hardware, software and how to
-setup.
+A live version is running at: <https://terrarium.theyosh.nl/index.html>.
