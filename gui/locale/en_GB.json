@@ -1823,6 +1823,15 @@
           "on": "Based on day/night"
         }
       },
+      "auto_discovery": {
+        "help": "Enable auto discovery for sensors and relays during startup.",
+        "invalid": "Please make a choice",
+        "label": "Auto discovery",
+        "options": {
+          "no": "No",
+          "yes": "Yes"
+        }
+      },
       "currency": {
         "help": "Select the interface currency.",
         "invalid": "Please make a choice.",
