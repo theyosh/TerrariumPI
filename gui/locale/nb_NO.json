@@ -1824,12 +1824,12 @@
         }
       },
       "auto_discovery": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Aktiver automatisk oppdagelse for sensorer og reléer under oppstart.",
+        "invalid": "Vennligst velg.",
+        "label": "Automatisk oppdagelse",
         "options": {
           "no": "Ingen",
-          "yes": ""
+          "yes": "Ja"
         }
       },
       "currency": {
