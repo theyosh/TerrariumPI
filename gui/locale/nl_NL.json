@@ -1824,12 +1824,12 @@
         }
       },
       "auto_discovery": {
-        "help": "",
-        "invalid": "",
-        "label": "Auto discovery",
+        "help": "Schakel automatische detectie in voor sensoren en schakelaars tijdens het opstarten.",
+        "invalid": "Maak een keuze.",
+        "label": "Automatische detectie",
         "options": {
           "no": "Nee",
-          "yes": ""
+          "yes": "Ja"
         }
       },
       "currency": {
