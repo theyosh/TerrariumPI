@@ -1823,6 +1823,15 @@
           "on": ""
         }
       },
+      "auto_discovery": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "options": {
+          "no": "いいえ",
+          "yes": ""
+        }
+      },
       "currency": {
         "help": "インターフェイス通貨を選択します。.",
         "invalid": "選択してください。.",

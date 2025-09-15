@@ -148,11 +148,12 @@ class terrariumEngine(object):
         logger.info("Loading existing sensors from database.")
         self.__load_existing_sensors()
 
-        logger.info("Scanning for new sensors ...")
-        try:
-            func_timeout(30, self.scan_new_sensors)
-        except FunctionTimedOut:
-            logger.warning("Scanning for new sensors timed out after 30 seconds.")
+        if self.settings.get('auto_discovery', 0):
+            logger.info("Scanning for new sensors ...")
+            try:
+                func_timeout(30, self.scan_new_sensors)
+            except FunctionTimedOut:
+                logger.warning("Scanning for new sensors timed out after 30 seconds.")
 
         logger.info(f"Loaded {len(self.sensors)} sensors in {time.time()-start:.2f} seconds.")
 
@@ -161,11 +162,12 @@ class terrariumEngine(object):
         logger.info("Loading existing relays from database.")
         self.__load_existing_relays()
 
-        logger.info("Scanning for new relays ...")
-        try:
-            func_timeout(30, self.scan_new_relays)
-        except FunctionTimedOut:
-            logger.warning("Scanning for new relays timed out after 30 seconds.")
+        if self.settings.get('auto_discovery', 0):
+            logger.info("Scanning for new relays ...")
+            try:
+                func_timeout(30, self.scan_new_relays)
+            except FunctionTimedOut:
+                logger.warning("Scanning for new relays timed out after 30 seconds.")
 
         logger.info(f"Loaded {len(self.relays)} relays in {time.time()-start:.2f} seconds.")
 

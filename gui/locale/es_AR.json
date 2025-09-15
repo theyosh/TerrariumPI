@@ -1681,6 +1681,9 @@
         "help": "IDS que están excluidos.",
         "label": ""
       },
+      "graph_period": {
+        "label": ""
+      },
       "graph_smooth_value": {
         "help": "",
         "invalid": "Contiene el nombre de host o IP del servidor de correo.",

@@ -1699,6 +1699,11 @@
         "help": "",
         "label": "Wassertank-Modus"
       },
+      "auto_discovery": {
+        "options": {
+          "no": "NEIN"
+        }
+      },
       "currency": {
         "help": "Wählen Sie die Schnittstellenwährung.",
         "invalid": "Bitte treffen Sie eine Wahl.",

@@ -1823,6 +1823,12 @@
           "on": "Tag/Nacht abhängig"
         }
       },
+      "auto_discovery": {
+        "label": "",
+        "options": {
+          "no": ""
+        }
+      },
       "currency": {
         "help": "Wähle die Währung.",
         "invalid": "Bitte triff eine Wahl.",

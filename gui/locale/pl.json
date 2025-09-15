@@ -1823,6 +1823,15 @@
           "on": ""
         }
       },
+      "auto_discovery": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "options": {
+          "no": "NIE",
+          "yes": ""
+        }
+      },
       "currency": {
         "help": "Wybierz walutę interfejsu.",
         "invalid": "Dokonaj wyboru.",

@@ -1823,6 +1823,15 @@
           "on": "Basert på dag/natt"
         }
       },
+      "auto_discovery": {
+        "help": "",
+        "invalid": "",
+        "label": "",
+        "options": {
+          "no": "Ingen",
+          "yes": ""
+        }
+      },
       "currency": {
         "help": "Velg grensesnittvalutaen.",
         "invalid": "Vennligst velg.",

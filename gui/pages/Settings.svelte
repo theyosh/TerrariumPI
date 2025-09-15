@@ -238,6 +238,22 @@
           />
 
           <Select
+            name="auto_discovery"
+            value="{$formData.auto_discovery}"
+            required="{true}"
+            horizontal="{true}"
+            options="{[
+              { value: 1, text: $_('system.settings.auto_discovery.options.yes', { default: 'Yes' }) },
+              { value: 0, text: $_('system.settings.auto_discovery.options.no', { default: 'No' }) },
+            ]}"
+            label="{$_('system.settings.auto_discovery.label', { default: 'Auto discovery' })}"
+            help="{$_('system.settings.auto_discovery.help', {
+              default: 'Enable auto discovery for sensors and relays during startup.',
+            })}"
+            invalid="{$_('system.settings.auto_discovery.invalid', { default: 'Please make a choice' })}"
+          />
+
+          <Select
             name="always_authenticate"
             value="{$formData.always_authenticate}"
             required="{true}"

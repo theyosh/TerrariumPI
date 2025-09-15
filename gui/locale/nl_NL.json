@@ -1823,6 +1823,15 @@
           "on": "Gebaseerd op dag/nacht"
         }
       },
+      "auto_discovery": {
+        "help": "",
+        "invalid": "",
+        "label": "Auto discovery",
+        "options": {
+          "no": "Nee",
+          "yes": ""
+        }
+      },
       "currency": {
         "help": "Selecteer de interfacevaluta.",
         "invalid": "Maak een keuze.",

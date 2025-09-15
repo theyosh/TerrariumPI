@@ -1821,6 +1821,12 @@
           "on": "Com base no dia/noite"
         }
       },
+      "auto_discovery": {
+        "label": "",
+        "options": {
+          "no": ""
+        }
+      },
       "currency": {
         "help": "Seleccione o moeda.",
         "invalid": "Por favor seleccione uma opção.",
@@ -1848,6 +1854,9 @@
       "graph_limit_min_max": {
         "help": "Limitar valores dos gráficos a 20% dos limites de alarme.",
         "label": "Valor limite dos gráficos"
+      },
+      "graph_period": {
+        "label": ""
       },
       "graph_smooth_value": {
         "help": "Insira o número de pontos de dados para a média. 0 desabilita esta funcionalidade.",

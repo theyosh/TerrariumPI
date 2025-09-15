@@ -82,6 +82,7 @@ def create_defaults(version):
         {"id": "gauge_values_limit", "value": "false"},
         {"id": "gauge_values_measurements", "value": "false"},
         {"id": "graph_period", "value": "day"},
+        {"id": "auto_discovery", "value": "1"},
     ]
 
     for setting in setting_defaults:

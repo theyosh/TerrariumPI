@@ -1775,6 +1775,11 @@
           "on": ""
         }
       },
+      "auto_discovery": {
+        "options": {
+          "no": "Não"
+        }
+      },
       "currency": {
         "help": "Selecione a moeda da interface.",
         "invalid": "Por favor, faça uma escolha.",
@@ -1802,6 +1807,10 @@
       "graph_limit_min_max": {
         "help": "",
         "label": ""
+      },
+      "graph_period": {
+        "help": "",
+        "invalid": ""
       },
       "graph_smooth_value": {
         "help": "Insira a quantidade de pontos de dados utilizados para o cálculo da média. Insira 0 para desabilitar esta função.",

@@ -1781,6 +1781,12 @@
           "on": ""
         }
       },
+      "auto_discovery": {
+        "label": "",
+        "options": {
+          "no": "No"
+        }
+      },
       "currency": {
         "help": "Seleccione la moneda de interfaz.",
         "invalid": "Por favor tome una decisión.",
@@ -1798,6 +1804,10 @@
       "graph_limit_min_max": {
         "help": "",
         "label": ""
+      },
+      "graph_period": {
+        "help": "",
+        "invalid": ""
       },
       "graph_smooth_value": {
         "help": "Ingrese la cantidad de puntos de datos al promedio. 0 deshabilitará esta característica.",
