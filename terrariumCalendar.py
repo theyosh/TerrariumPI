@@ -4,7 +4,7 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 from datetime import datetime, timedelta, timezone
-from time import mktime
+from time import mktime, sleep
 from icalendar import Calendar, Event
 from icalevents.icalevents import events
 from pathlib import Path
@@ -27,6 +27,8 @@ class terrariumCalendar(object):
                 "https://github.com/theyosh/TerrariumPI/commit/526d39a9ceac57768c6fffe6ffe19afd71782952",
                 datetime(2016, 1, 14, 0, 0, 0, 0, timezone.utc),
             )
+            # give OS some time to write the file
+            sleep(1)
 
         self.__ical = Calendar.from_ical(self.__ICS_FILE.read_bytes())
 
