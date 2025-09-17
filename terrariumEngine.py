@@ -107,8 +107,12 @@ class terrariumEngine(object):
         self.latest_version = None
         self.update_available = False
         self.weather = None
-        # Dirty hack... :(
+        # Dirty hack for device info ... :(
         self.device = Path("/proc/device-tree/model").read_text().rstrip("\x00")
+        os_version = re.search(r"VERSION_CODENAME=(?P<os_version>.*)", Path("/etc/os-release").read_text())
+        if os_version:
+            self.os_version = os_version.groupdict()['os_version'].title()
+
         init_db(self.version)
 
         # Send message that startup is ready..... else the startup will wait until done.... can take more then 1 minute
@@ -118,7 +122,7 @@ class terrariumEngine(object):
         # Make the first round of logging visible to the console, as this is the startup
         old_log_level = terrariumLogging.logging.getLogger().handlers[0].level
         terrariumLogging.logging.getLogger().handlers[0].setLevel(terrariumLogging.logging.INFO)
-        startup_message = f"Starting up TerrariumPI {self.version} on a {self.device} ..."
+        startup_message = f"Starting up TerrariumPI {self.version} on a {self.device} running OS {self.os_version}..."
         logger.info(startup_message)
 
         # Load settings. This will also load the weather data if available
