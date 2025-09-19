@@ -32,7 +32,7 @@ from pyfancy.pyfancy import pyfancy
 from func_timeout import func_timeout, FunctionTimedOut
 
 from pony import orm
-from terrariumDatabase import init as init_db, db, Setting, Sensor, Relay, Button, Webcam, Enclosure
+from terrariumDatabase import init as init_db, db, Area, Setting, Sensor, Relay, Button, Webcam, Enclosure
 from terrariumWebserver import terrariumWebserver
 from terrariumCalendar import terrariumCalendar
 from terrariumUtils import terrariumUtils, terrariumAsync, terrariumCache
@@ -1004,9 +1004,13 @@ class terrariumEngine(object):
 
         # Update enclosure states to reflect the new relay states
         if self.__engine["thread"] is not None and self.__engine["thread"].is_alive() and hasattr(self, "enclosures"):
-            self._update_enclosures(True)
+            with orm.db_session():
+                enclosures = [area.enclosure for area in Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + relay_data['id'] + '%"'))]
+                logger.info(f'Updating enclosure(s) {",".join([enclosure.name for enclosure in enclosures])}')
 
-        orm.commit()
+                if len(enclosures) > 0:
+                    self._update_enclosures(True, [enclosure.id for enclosure in enclosures])
+                    orm.commit()
 
         # Notification message
         self.notification.message("relay_toggle", relay_data)
@@ -1287,10 +1291,12 @@ class terrariumEngine(object):
                 new_enclosure.update()
                 enclosureLogger.info(f"Loaded {enclosure} in {time.time()-start:.2f} seconds.")
 
-    def _update_enclosures(self, read_only=False):
+    def _update_enclosures(self, read_only=False, ids = None):
         with orm.db_session():
             for enclosure in Enclosure.select():
-                if str(enclosure.id) not in self.enclosures or str(enclosure.id) in self.settings["exclude_ids"]:
+                if str(enclosure.id) not in self.enclosures \
+                    or str(enclosure.id) in self.settings["exclude_ids"] \
+                    or (ids is not None and str(enclosure.id) not in ids):
                     continue
 
                 start = time.time()
