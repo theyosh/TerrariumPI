@@ -6,7 +6,7 @@ from . import terrariumRelay
 from terrariumUtils import terrariumUtils, terrariumAsync, terrariumCache
 
 # pip install python-kasa
-from kasa import Discover, SmartStrip, SmartPlug
+from kasa import Discover
 
 
 class terrariumRelayTPLinkKasa(terrariumRelay):
@@ -16,6 +16,12 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
     URL = "^\d{1,3}\.\d{1,3}\.\d{1,3}(,\d{1,3})?$"
 
     def _load_hardware(self):
+        async def __load_hardware(ip):
+            device = await Discover.discover_single(ip)
+            await device.update()
+
+            return device
+
         self._device["device"] = None
         # Input format should be either:
         # - [IP],[POWER_SWITCH_NR]
@@ -26,12 +32,8 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
 
         address = self._address
         try:
-            if len(address) == 1:
-                self._device["device"] = SmartPlug(address[0])
-                self._device["switch"] = 0
-            else:
-                self._device["device"] = SmartStrip(address[0])
-                self._device["switch"] = int(address[1]) - 1
+            self._device["device"] = self.__asyncio.run(__load_hardware(address[0]))
+            self._device["switch"] = 0 if len(address) == 1 else int(address[1]) - 1
         except Exception as ex:
             logger.error(f"Error loading {self} at address {address[0]}: {ex}")
 
@@ -40,7 +42,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
     def _set_hardware_value(self, state):
         async def __set_hardware_state(state):
             await self.device.update()
-            plug = self.device if len(self._address) == 1 else self.device.children[self._device["switch"]]
+            plug = self.device if not self.device.is_strip else self.device.children[self._device["switch"]]
 
             if state != 0.0:
                 await plug.turn_on()
@@ -61,7 +63,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
             data = []
             await self.device.update()
 
-            plugs = [self.device] if len(self._address) == 1 else self.device.children
+            plugs = [self.device] if not self.device.is_strip else self.device.children
             for plug in plugs:
                 data.append(plug.is_on)
 
@@ -107,7 +109,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
                             terrariumRelay(
                                 None,
                                 terrariumRelayTPLinkKasa.HARDWARE,
-                                "{},{}".format(device.host, counter),
+                                f"{device.host},{counter}",
                                 f"Channel {device.children[counter-1].alias}",
                                 {},
                                 callback=callback,
