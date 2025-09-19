@@ -111,7 +111,7 @@ class terrariumEngine(object):
         self.device = Path("/proc/device-tree/model").read_text().rstrip("\x00")
         os_version = re.search(r"VERSION_CODENAME=(?P<os_version>.*)", Path("/etc/os-release").read_text())
         if os_version:
-            self.os_version = os_version.groupdict()['os_version'].title()
+            self.os_version = os_version.groupdict()["os_version"].title()
 
         init_db(self.version)
 
@@ -152,7 +152,7 @@ class terrariumEngine(object):
         logger.info("Loading existing sensors from database.")
         self.__load_existing_sensors()
 
-        if self.settings.get('auto_discovery', 0):
+        if self.settings.get("auto_discovery", 0):
             logger.info("Scanning for new sensors ...")
             try:
                 func_timeout(30, self.scan_new_sensors)
@@ -166,7 +166,7 @@ class terrariumEngine(object):
         logger.info("Loading existing relays from database.")
         self.__load_existing_relays()
 
-        if self.settings.get('auto_discovery', 0):
+        if self.settings.get("auto_discovery", 0):
             logger.info("Scanning for new relays ...")
             try:
                 func_timeout(30, self.scan_new_relays)
@@ -1005,7 +1005,10 @@ class terrariumEngine(object):
         # Update enclosure states to reflect the new relay states
         if self.__engine["thread"] is not None and self.__engine["thread"].is_alive() and hasattr(self, "enclosures"):
             with orm.db_session():
-                enclosures = [area.enclosure for area in Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + relay_data['id'] + '%"'))]
+                enclosures = [
+                    area.enclosure
+                    for area in Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + relay_data["id"] + '%"'))
+                ]
                 logger.info(f'Updating enclosure(s) {",".join([enclosure.name for enclosure in enclosures])}')
 
                 if len(enclosures) > 0:
@@ -1291,12 +1294,14 @@ class terrariumEngine(object):
                 new_enclosure.update()
                 enclosureLogger.info(f"Loaded {enclosure} in {time.time()-start:.2f} seconds.")
 
-    def _update_enclosures(self, read_only=False, ids = None):
+    def _update_enclosures(self, read_only=False, ids=None):
         with orm.db_session():
             for enclosure in Enclosure.select():
-                if str(enclosure.id) not in self.enclosures \
-                    or str(enclosure.id) in self.settings["exclude_ids"] \
-                    or (ids is not None and str(enclosure.id) not in ids):
+                if (
+                    str(enclosure.id) not in self.enclosures
+                    or str(enclosure.id) in self.settings["exclude_ids"]
+                    or (ids is not None and str(enclosure.id) not in ids)
+                ):
                     continue
 
                 start = time.time()
