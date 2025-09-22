@@ -18,7 +18,6 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
     def _load_hardware(self):
         async def __load_hardware(ip):
             device = await Discover.discover_single(ip)
-            await device.update()
 
             return device
 
