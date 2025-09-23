@@ -1842,19 +1842,19 @@
         "invalid": "Vennligst velg.",
         "label": "Dashboard-modus",
         "options": {
-          "normal": "Grafer og vedlegg",
-          "only_enclosures": "Kun vedlegg",
+          "normal": "Grafer og kabinetter",
+          "only_enclosures": "Kun kabinetter",
           "only_graphs": "Kun grafer"
         }
       },
       "distance_indicator": {
         "help": "Velg avstandsindikatoren. Påvirker kun gjeldende verdier.",
         "invalid": "Vennligst velg.",
-        "label": "Avstand"
+        "label": "Avstandstype"
       },
       "exclude-ids": {
         "help": "ID-er som er ekskludert.",
-        "label": "Ekskluderte IDer"
+        "label": "Ekskluderte ID-er"
       },
       "graph_limit_min_max": {
         "help": "Begrens grafen til 20% av alarmverdien.",
