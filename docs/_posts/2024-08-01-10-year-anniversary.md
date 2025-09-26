@@ -306,9 +306,9 @@ terrarium. And they do not show any problems. I am so crossing my fingers
 (:crossed_fingers:) that is stays that way. Because I cannot change them
 :smile:. They are all placed in hidden spots, so you cannot see the sensors
 unless you know where they are. But also hard to replace when needed. \
-Until now, only one sensor has been broken. Lucky we can
-[ignore sensors]({% link _tabs/setup.md %}#system), and TerrariumPI will just
-keep running.
+Until now, only one sensor has been broken. Lucky we can [ignore
+sensors]({% link _tabs/setup.md %}#system), and TerrariumPI will just keep
+running.
 
 But also the relays I use, are now 10+ years old. I still use the first relay
 board I bought when I started TerrariumPI. And it still working like a charm.
