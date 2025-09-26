@@ -1701,6 +1701,12 @@ class terrariumAPI(object):
                         # Change the alarm values
                         print('Change alarm values')
                         print(day_night_difference)
+                        data['alarm_min'] +=  (-1.0 * day_night_difference)
+                        data['alarm_max'] +=  (-1.0 * day_night_difference)
+
+                        print('Database data')
+                        print(data)
+
                         # data['setup']['alarm_min'] +=  (-1.0 * day_night_difference)
                         # data['setup']['alarm_max'] +=  (-1.0 * day_night_difference)
 
