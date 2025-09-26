@@ -1685,19 +1685,20 @@ class terrariumAPI(object):
             data = request.json
 
             print(data)
-            print(sensor.area)
+            print(sensor.areas)
 
             # If the sensor is used in an area, check if day/night modus is active
-            if sensor.area:
-                if (self.webserver.engine.enclosures[sensor.area[0].enclosure.id]
-                   and self.webserver.engine.enclosures[sensor.area.enclosure.id].areas[sensor.area[0].id]):
+            if sensor.areas:
+                if (self.webserver.engine.enclosures[sensor.areas[0].enclosure.id]
+                   and self.webserver.engine.enclosures[sensor.area.enclosure.id].areas[sensor.areas[0].id]):
 
                     # Area python object!
-                    area = self.webserver.engine.enclosures[sensor.area.enclosure.id].areas[sensor.area[0].id]
+                    area = self.webserver.engine.enclosures[sensor.area.enclosure.id].areas[sensor.areas[0].id]
                     day_night_difference = float(area.get_setup('day_night_difference'))
                     if day_night_difference != 0.0 and not area.is_day:
                         # Change the alarm values
                         print('Change alarm values')
+                        print(day_night_difference)
                         # data['setup']['alarm_min'] +=  (-1.0 * day_night_difference)
                         # data['setup']['alarm_max'] +=  (-1.0 * day_night_difference)
 

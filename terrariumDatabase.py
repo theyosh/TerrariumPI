@@ -419,7 +419,7 @@ class Relay(db.Entity):
         return "dimmer" if self.is_dimmer else "relay"
 
     @property
-    def area(self):
+    def areas(self):
         return Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + self.id + '%"'))[:]
 
     def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
@@ -517,7 +517,7 @@ class Sensor(db.Entity):
         return True if self.value is None else False
 
     @property
-    def area(self):
+    def areas(self):
         return Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + self.id + '%"'))[:]
 
     def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):

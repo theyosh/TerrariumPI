@@ -1005,7 +1005,7 @@ class terrariumEngine(object):
         # Update enclosure states to reflect the new relay states
         if self.__engine["thread"] is not None and self.__engine["thread"].is_alive() and hasattr(self, "enclosures"):
             with orm.db_session():
-                enclosures = [area.enclosure for area in relay.area]
+                enclosures = [area.enclosure for area in relay.areas]
 
                 if len(enclosures) > 0:
                     logger.info(f'Updating enclosure(s): {",".join([enclosure.name for enclosure in enclosures])}')
