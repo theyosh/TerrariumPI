@@ -425,8 +425,7 @@ class terrariumUtils:
                 data = None
 
         except Exception as ex:
-            print(ex)
-            # logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
+            logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
 
         return data
 
