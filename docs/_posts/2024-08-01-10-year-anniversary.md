@@ -173,12 +173,12 @@ hardware. Which I think is pretty neat.
 ### Lesson learned
 
 A lot of hardware support has been added. And during those years I learned that
-you always have to by more hardware than needed. Because hardware will always
+you always have to buy more hardware than needed. Because hardware will always
 break down in a weekend. Or the hardware is not available anymore as it was to
 old. Therefore my advise is always:
 
 <!-- prettier-ignore-start -->
-> Buy at least 1 backup device when you order new hardware
+> **Buy at least 1 backup device when you order new hardware**
 {: .prompt-tip }
 <!-- prettier-ignore-end -->
 
@@ -187,6 +187,7 @@ old. Therefore my advise is always:
 ![Raspberry PI 1 Model B+](/assets/img/raspberry_pi_1b.webp){: .right
 width="150" }During those 10 years, we have had 5 Raspberry PI versions and 2 Pi
 Zero versions. Which we try to support all. And this is succeeded for about 80%.
+Again a figure to be proud off.
 
 The first Raspberry PI is probably not supported anymore. But as long as you can
 install Raspbian Lite OS, you should be able to run TerrariumPI. The new
@@ -305,8 +306,9 @@ terrarium. And they do not show any problems. I am so crossing my fingers
 (:crossed_fingers:) that is stays that way. Because I cannot change them
 :smile:. They are all placed in hidden spots, so you cannot see the sensors
 unless you know where they are. But also hard to replace when needed. \
-Until now, only one sensor has been broken. Lucky we can (ignore sensors)[], and
-TerrariumPI will just keep running.
+Until now, only one sensor has been broken. Lucky we can
+[ignore sensors]({% link _tabs/setup.md %}#system), and TerrariumPI will just
+keep running.
 
 But also the relays I use, are now 10+ years old. I still use the first relay
 board I bought when I started TerrariumPI. And it still working like a charm.
