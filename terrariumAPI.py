@@ -1702,7 +1702,7 @@ class terrariumAPI(object):
                         # data['setup']['alarm_max'] +=  (-1.0 * day_night_difference)
 
             # Store setup to database (with changed alarm values with needed )
-            sensor.set(**data)
+            #sensor.set(**data)
             orm.commit()
 
             self.webserver.engine.update(terrariumSensor, **request.json)
