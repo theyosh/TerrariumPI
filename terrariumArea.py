@@ -678,6 +678,9 @@ class terrariumArea(object):
         # Default day period is from 07:00 till 19:00
         return 700 < int(time.strftime("%H%M")) < 1900
 
+    def get_setup_setting(self, setting):
+        return self.setup.get(setting, None)
+
     def update(self, read_only=False):
         if self.mode == "disabled":
             # Make it readonly, so sensors and relay changes are still shown
