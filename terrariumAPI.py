@@ -1684,9 +1684,6 @@ class terrariumAPI(object):
             sensor = Sensor[sensor]
             data = request.json
 
-            print(data)
-            print(sensor.areas)
-
             # If the sensor is used in an area, check if day/night modus is active
             if sensor.areas:
                 # Area is a database object!
@@ -1699,19 +1696,11 @@ class terrariumAPI(object):
                     day_night_difference = float(area.get_setup_setting('day_night_difference'))
                     if day_night_difference != 0.0 and not area.is_day:
                         # Change the alarm values
-                        print('Change alarm values')
-                        print(day_night_difference)
                         data['alarm_min'] +=  (-1.0 * day_night_difference)
                         data['alarm_max'] +=  (-1.0 * day_night_difference)
 
-                        print('Database data')
-                        print(data)
-
-                        # data['setup']['alarm_min'] +=  (-1.0 * day_night_difference)
-                        # data['setup']['alarm_max'] +=  (-1.0 * day_night_difference)
-
             # Store setup to database (with changed alarm values with needed )
-            #sensor.set(**data)
+            sensor.set(**data)
             orm.commit()
 
             self.webserver.engine.update(terrariumSensor, **request.json)
