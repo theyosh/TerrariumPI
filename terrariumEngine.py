@@ -1005,13 +1005,20 @@ class terrariumEngine(object):
         # Update enclosure states to reflect the new relay states
         if self.__engine["thread"] is not None and self.__engine["thread"].is_alive() and hasattr(self, "enclosures"):
             with orm.db_session():
+                # enclosures = [
+                #     area.enclosure
+                #     for area in Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + relay_data["id"] + '%"'))
+                # ]
+
+                print('Attached area to relay')
+                print(relay.area)
                 enclosures = [
                     area.enclosure
-                    for area in Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + relay_data["id"] + '%"'))
+                    for area in relay.area
                 ]
-                logger.info(f'Updating enclosure(s) {",".join([enclosure.name for enclosure in enclosures])}')
 
                 if len(enclosures) > 0:
+                    logger.info(f'Updating enclosure(s) {",".join([enclosure.name for enclosure in enclosures])}')
                     self._update_enclosures(True, [enclosure.id for enclosure in enclosures])
                     orm.commit()
 

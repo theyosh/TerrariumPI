@@ -418,6 +418,10 @@ class Relay(db.Entity):
     def type(self):
         return "dimmer" if self.is_dimmer else "relay"
 
+    @property
+    def area(self):
+        return Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + self.id + '%"'))[:]
+
     def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
 
@@ -511,6 +515,10 @@ class Sensor(db.Entity):
     @property
     def error(self):
         return True if self.value is None else False
+
+    @property
+    def area(self):
+        return Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + self.id + '%"'))[:]
 
     def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
