@@ -1696,7 +1696,7 @@ class terrariumAPI(object):
 
                     # Area python object!
                     area = self.webserver.engine.enclosures[area.enclosure.id].areas[area.id]
-                    day_night_difference = float(area.get_setup('day_night_difference'))
+                    day_night_difference = float(area.get_setup_setting('day_night_difference'))
                     if day_night_difference != 0.0 and not area.is_day:
                         # Change the alarm values
                         print('Change alarm values')

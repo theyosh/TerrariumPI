@@ -678,7 +678,7 @@ class terrariumArea(object):
         # Default day period is from 07:00 till 19:00
         return 700 < int(time.strftime("%H%M")) < 1900
 
-    def get_setup(self, setting):
+    def get_setup_setting(self, setting):
         return self.setup.get(setting, None)
 
     def update(self, read_only=False):
