@@ -169,9 +169,9 @@ fi
 
 # Install required packages to get the terrarium software running
 debconf-apt-progress -- apt-get -y autoremove
-debconf-apt-progress -- apt-get -y update
-debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install ${APT_PACKAGES}
+debconf-apt-progress -- apt-get -y -o Acquire::ForceIPv4=true update
+debconf-apt-progress -- apt-get -y -o Acquire::ForceIPv4=true full-upgrade
+debconf-apt-progress -- apt-get -y -o Acquire::ForceIPv4=true install ${APT_PACKAGES}
 
 # Basic config:
 # Enable 1Wire en I2C during boot
