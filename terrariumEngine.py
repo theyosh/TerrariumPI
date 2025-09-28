@@ -502,12 +502,11 @@ class terrariumEngine(object):
             self.webcams[data["id"]].rotation = data["rotation"]
             self.webcams[data["id"]].awb = data["awb"]
 
-            if isinstance(self.webcams[data["id"]], terrariumRPILiveWebcam):
-                logger.info(f'Stopping webcam {self.webcams[data["id"]].name}')
-                self.webcams[data["id"]].stop()
-                sleep(0.2)
-                self.webcams[data["id"]].load_hardware()
-                logger.info(f'Started webcam {self.webcams[data["id"]].name} with new configuration.')
+            logger.info(f'Stopping webcam {self.webcams[data["id"]].name}')
+            self.webcams[data["id"]].stop()
+            sleep(0.2)
+            self.webcams[data["id"]].load_hardware()
+            logger.info(f'Started webcam {self.webcams[data["id"]].name} with new configuration.')
 
             update_ok = True
 
