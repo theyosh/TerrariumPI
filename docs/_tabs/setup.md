@@ -608,11 +608,6 @@ Enter a negative value for lowering the sensors. When it become day again, the
 sensor values will go the opposite direction and return to normal. Leave it
 **0** if you are planning to use the [variation tab](#variation)
 
-<!-- prettier-ignore-start -->
-> When you **enable** the day/night difference option, you **cannot** edit the used sensors during night time. This will give strange effects.
-{: .prompt-danger }
-<!-- prettier-ignore-end -->
-
 Day/night source
 : Select the day and night source. This can either be the main
 lights or weather. This is used for light settings later on the day or night
