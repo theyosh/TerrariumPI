@@ -481,6 +481,10 @@
             required="{true}"
             options="{[
               {
+                value: 'hour',
+                text: $_('graph.period.hour', { default: 'Hour' }),
+              },
+              {
                 value: 'day',
                 text: $_('graph.period.day', { default: 'Day' }),
               },

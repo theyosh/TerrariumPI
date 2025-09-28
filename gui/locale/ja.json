@@ -939,6 +939,7 @@
     "no-data": "データなし ...",
     "period": {
       "day": "日",
+      "hour": "時間",
       "month": "月",
       "replaced": "交換",
       "week": "週",

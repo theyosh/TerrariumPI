@@ -1776,8 +1776,10 @@
         }
       },
       "auto_discovery": {
+        "help": "",
         "options": {
-          "no": "Não"
+          "no": "Não",
+          "yes": ""
         }
       },
       "currency": {

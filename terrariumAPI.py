@@ -109,7 +109,7 @@ class terrariumAPI(object):
 
         # Buttons API
         bottle_app.route(
-            "/api/buttons/<button:path>/history/<period:re:(day|week|month|year)>/",
+            "/api/buttons/<button:path>/history/<period:re:(hour|day|week|month|year)>/",
             "GET",
             self.button_history,
             apply=self.authentication(False),
@@ -363,7 +363,7 @@ class terrariumAPI(object):
 
         # Relays API
         bottle_app.route(
-            "/api/relays/<relay:path>/<action:re:(history)>/<period:re:(day|week|month|year|replaced)>/",
+            "/api/relays/<relay:path>/<action:re:(history)>/<period:re:(hour|day|week|month|year|replaced)>/",
             "GET",
             self.relay_history,
             apply=self.authentication(False),
@@ -378,7 +378,7 @@ class terrariumAPI(object):
         )
 
         bottle_app.route(
-            "/api/relays/<relay:path>/<action:re:(export)>/<period:re:(day|week|month|year|replaced)>/",
+            "/api/relays/<relay:path>/<action:re:(export)>/<period:re:(hour|day|week|month|year|replaced)>/",
             "GET",
             self.relay_history,
             apply=self.authentication(),
@@ -447,14 +447,14 @@ class terrariumAPI(object):
         # Sensors API
         all_sensor_types = "|".join(terrariumSensor.sensor_types)
         bottle_app.route(
-            f"/api/sensors/<filter:re:({all_sensor_types})>/<action:re:(history)>/<period:re:(day|week|month|year)>/",
+            f"/api/sensors/<filter:re:({all_sensor_types})>/<action:re:(history)>/<period:re:(hour|day|week|month|year)>/",
             "GET",
             self.sensor_history,
             apply=self.authentication(False),
             name="api:sensor_type_history_period",
         )
         bottle_app.route(
-            f"/api/sensors/<filter:re:({all_sensor_types})>/<action:re:(export)>/<period:re:(day|week|month|year)>/",
+            f"/api/sensors/<filter:re:({all_sensor_types})>/<action:re:(export)>/<period:re:(hour|day|week|month|year)>/",
             "GET",
             self.sensor_history,
             apply=self.authentication(),
@@ -482,14 +482,14 @@ class terrariumAPI(object):
             name="api:sensor_list_filtered",
         )
         bottle_app.route(
-            "/api/sensors/<filter:path>/<action:re:(history)>/<period:re:(day|week|month|year)>/",
+            "/api/sensors/<filter:path>/<action:re:(history)>/<period:re:(hour|day|week|month|year)>/",
             "GET",
             self.sensor_history,
             apply=self.authentication(False),
             name="api:sensor_history_period",
         )
         bottle_app.route(
-            "/api/sensors/<filter:path>/<action:re:(export)>/<period:re:(day|week|month|year)>/",
+            "/api/sensors/<filter:path>/<action:re:(export)>/<period:re:(hour|day|week|month|year)>/",
             "GET",
             self.sensor_history,
             apply=self.authentication(),
@@ -842,8 +842,9 @@ class terrariumAPI(object):
     def button_history(self, button, action="history", period="day"):
         try:
             button = Button[button]
-
-            if "day" == period:
+            if "hour" == period:
+                period = 1/24
+            elif "day" == period:
                 period = 1
             elif "week" == period:
                 period = 7
@@ -1411,8 +1412,9 @@ class terrariumAPI(object):
     def relay_history(self, relay, action="history", period="day"):
         try:
             relay = Relay[relay]
-
-            if "day" == period:
+            if "hour" == period:
+                period = 1/24
+            elif "day" == period:
                 period = 1
             elif "week" == period:
                 period = 7
@@ -1537,7 +1539,9 @@ class terrariumAPI(object):
     # Sensors
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def sensor_history(self, filter=None, action="history", period="day"):
-        if "day" == period:
+        if "hour" == period:
+            period = 1/24
+        elif "day" == period:
             period = 1
         elif "week" == period:
             period = 7

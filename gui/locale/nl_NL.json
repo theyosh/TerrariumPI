@@ -939,6 +939,7 @@
     "no-data": "Geen gegevens ...",
     "period": {
       "day": "Dag",
+      "hour": "Uur",
       "month": "Maand",
       "replaced": "Vervangen",
       "week": "Week",

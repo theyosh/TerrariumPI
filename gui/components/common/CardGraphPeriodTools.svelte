@@ -15,6 +15,11 @@
   <div class="dropdown-menu dropdown-menu-right" role="menu" style="min-width: auto !important;">
     <button
       class="dropdown-item"
+      class:active="{$graphs[id].period === 'hour'}"
+      on:click="{() => toggleGraphPeriod(id, 'hour')}">{$_('graph.period.hour', { default: 'Hour' })}</button
+    >
+    <button
+      class="dropdown-item"
       class:active="{$graphs[id].period === 'day'}"
       on:click="{() => toggleGraphPeriod(id, 'day')}">{$_('graph.period.day', { default: 'Day' })}</button
     >

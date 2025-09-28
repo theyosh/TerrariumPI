@@ -939,6 +939,7 @@
     "no-data": "Keine Daten ...",
     "period": {
       "day": "Tag",
+      "hour": "Stunde",
       "month": "Monat",
       "replaced": "Ersetzt",
       "week": "Woche",

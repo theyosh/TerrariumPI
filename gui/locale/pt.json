@@ -939,6 +939,7 @@
     "no-data": "Sem dados ...",
     "period": {
       "day": "Dia",
+      "hour": "Hora",
       "month": "Mês",
       "replaced": "Substituído",
       "week": "Semana",
@@ -1822,6 +1823,7 @@
         }
       },
       "auto_discovery": {
+        "invalid": "",
         "label": "",
         "options": {
           "no": ""

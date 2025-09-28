@@ -939,6 +939,7 @@
     "no-data": "No hi ha dades ...",
     "period": {
       "day": "Dia",
+      "hour": "Hora",
       "month": "Mes",
       "replaced": "Reemplaçat",
       "week": "Setmana",

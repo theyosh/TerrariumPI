@@ -903,6 +903,7 @@
     "no-data": "Sin datos ...",
     "period": {
       "day": "Día",
+      "hour": "Hora",
       "month": "Mes",
       "replaced": "Sustituido",
       "week": "Semana",
@@ -1784,7 +1785,8 @@
       "auto_discovery": {
         "label": "",
         "options": {
-          "no": "No"
+          "no": "No",
+          "yes": ""
         }
       },
       "currency": {

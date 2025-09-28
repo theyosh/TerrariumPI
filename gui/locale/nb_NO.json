@@ -939,6 +939,7 @@
     "no-data": "Ingen data ...",
     "period": {
       "day": "Dag",
+      "hour": "Time",
       "month": "Måneder",
       "replaced": "Skiftet",
       "week": "Uke",

@@ -1657,6 +1657,10 @@
         "help": "",
         "label": ""
       },
+      "auto_discovery": {
+        "help": "",
+        "invalid": ""
+      },
       "currency": {
         "help": "Seleccione la moneda de interfaz.",
         "invalid": "Por favor tome una decisión.",
