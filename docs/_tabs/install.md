@@ -65,6 +65,21 @@ run TerrariumPI. When you run it in Docker, you can skip the rest of the page.
 Only the migration could be followed if you want to restore your current relay
 history.
 
+#### Versions
+
+There are multiple docker images available. Make sure you are matching the
+docker image with your Raspberry PI host OS. \
+So if you have installed **Bookworm** on your Raspberry PI as OS, make sure you
+use the `:-bookworm` container tag.
+
+It is unadvisable to use the `:latest` tag. That is from the early days when
+there was just one container. This will be the old Buster image.
+
+Than there are also images with `:-java` in the tag name. Those images contains
+Java for [Java related hardware]({% link _hardware/denkovi_relay.md %}).
+
+#### Setup
+
 Install docker according to:
 [https://docs.docker.com/engine/install/debian/](https://docs.docker.com/engine/install/debian/)
 Just follow the installation steps. And to run the docker commands as a normal
