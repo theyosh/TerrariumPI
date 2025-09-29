@@ -92,7 +92,7 @@ def create_defaults(version):
         except orm.core.TransactionIntegrityError:
             # Setting is already in the database. Ignore except version. Update that.
             if "version" == setting["id"]:
-                Setting[setting["id"]].value = setting["value"]
+                Setting["version"].value = f"{version}"
 
     # Clear old obsolete settings
     settings = [setting["id"] for setting in setting_defaults]
