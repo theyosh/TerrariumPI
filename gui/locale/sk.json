@@ -1370,241 +1370,241 @@
       "humidity": "Priemerná vlhkosť",
       "light": "Priemerné svetlo",
       "moisture": "Priemerná vlhkosť",
-      "pressure": "",
-      "temperature": "",
-      "uva": "",
-      "uvb": "",
-      "uvi": ""
+      "pressure": "Priemerný tlak",
+      "temperature": "Priemerná teplota",
+      "uva": "Priemerné UVA",
+      "uvb": "Priemerné UVB",
+      "uvi": "Priemerný UV index"
     },
     "calibration": {
       "light_on_off_threshold": {
-        "light_bulb": ""
+        "light_bulb": "Kontrolka prahovej hodnoty: {threshold}"
       }
     },
     "co2": {
       "menu": {
-        "title": ""
+        "title": "CO2"
       },
-      "title": ""
+      "title": "CO2 senzory"
     },
     "confirm": {
       "ignore": {
-        "message": ""
+        "message": "Naozaj chcete ignorovať senzor ''{name}''?"
       }
     },
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Naozaj chcete odstrániť senzor ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Senzor ''{name}'' sa nepodarilo odstrániť!\nChyba: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "Senzor ''{name}'' je odstránený."
       }
     },
     "distance": {
       "menu": {
-        "title": ""
+        "title": "Vzdialenosť"
       },
-      "title": ""
+      "title": "Senzory vzdialenosti"
     },
     "exclude": {
       "error": {
-        "message": ""
+        "message": "Senzor ''{name}'' sa nepodarilo ignorovať!\nChyba: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "Senzor ''{name}'' je ignorovaný."
       }
     },
     "fertility": {
       "menu": {
-        "title": ""
+        "title": "Plodnosť"
       },
-      "title": ""
+      "title": "Senzory plodnosti"
     },
     "humidity": {
       "menu": {
-        "title": ""
+        "title": "Vlhkosť"
       },
-      "title": ""
+      "title": "Senzory vlhkosti"
     },
     "light": {
       "menu": {
-        "title": ""
+        "title": "svetlo"
       },
-      "title": ""
+      "title": "Svetelné senzory"
     },
     "menu": {
       "new": {
-        "title": ""
+        "title": "Nový senzor"
       },
       "scan": {
-        "title": ""
+        "title": "Skenuj senzory"
       },
-      "title": ""
+      "title": "Senzory"
     },
     "moisture": {
       "menu": {
-        "title": ""
+        "title": "Vlhkosť"
       },
-      "title": ""
+      "title": "Senzory vlhkosti"
     },
     "ph": {
       "menu": {
-        "title": ""
+        "title": "pH"
       },
-      "title": ""
+      "title": "Ph senzory"
     },
     "pressure": {
       "menu": {
-        "title": ""
+        "title": "tlak"
       },
-      "title": ""
+      "title": "Tlakové senzory"
     },
     "settings": {
       "address": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte adresu.",
+        "invalid": "Zadaná adresa nie je platná. Nemôže byť prázdna.",
+        "label": "Adresa",
+        "placeholder": "Zadajte adresu"
       },
       "alarm_max": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte maximálnu hodnotu pre alarm.",
+        "invalid": "Zadaná hodnota nie je platná. Musí to byť číslo.",
+        "label": "Maximálna hodnota alarmu",
+        "placeholder": "Maximálna hodnota alarmu"
       },
       "alarm_min": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte minimálnu hodnotu pre alarm.",
+        "invalid": "Zadaná hodnota nie je platná. Musí to byť číslo.",
+        "label": "Minimálna hodnota alarmu",
+        "placeholder": "Minimálna hodnota alarmu"
       },
       "calibration": {
         "ccs811_compensation_sensors": {
-          "help": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Vyberte senzory pre výpočet kompenzácie.",
+          "label": "Kompenzačné senzory",
+          "placeholder": "Vyberte kompenzačné senzory"
         },
         "chirp_max_moist": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Zadajte maximálnu hodnotu vlhkosti.",
+          "invalid": "Zadaná hodnota nie je platná. Musí byť číslo väčšie ako {min}.",
+          "label": "Maximálna hodnota vlhkosti"
         },
         "chirp_min_moist": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Zadajte minimálnu hodnotu vlhkosti.",
+          "invalid": "Zadaná hodnota nie je platná. Musí byť číslo väčšie ako {min}.",
+          "label": "Minimálna hodnota vlhkosti"
         },
         "light_threshold": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Zadajte hodnotu, ak sú svetlá zapnuté.",
+          "invalid": "Zadaná hodnota nie je platná. Musí byť číslo väčšie ako {min}.",
+          "label": "Svetlá na prahu"
         },
         "offset": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Zadajte ofset pre tento senzor.",
+          "invalid": "Zadaná hodnota nie je platná. Musí to byť číslo.",
+          "label": "Odsadenie"
         }
       },
       "current": {
-        "help": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Aktuálny stav senzora.",
+        "label": "Súčasný",
+        "placeholder": "Aktuálna hodnota"
       },
       "exclude_avg": {
-        "help": "",
-        "label": ""
+        "help": "Vylúčte tieto senzory z výpočtov priemerov.",
+        "label": "Excl. avg"
       },
       "fields": {
-        "error": ""
+        "error": "Nie všetky povinné polia sú vyplnené správne."
       },
       "hardware": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Vyberte typ hardvéru pre toto tlačidlo.",
+        "invalid": "Vyberte typ hardvéru.",
+        "label": "Hardvér",
+        "placeholder": "Vyberte hardvér"
       },
       "limit_max": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte maximálnu platnú hodnotu.",
+        "invalid": "Zadaná hodnota nie je platná. Musí to byť číslo.",
+        "label": "Maximálny limit"
       },
       "limit_min": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte minimálnu platnú hodnotu.",
+        "invalid": "Zadaná hodnota nie je platná. Musí to byť číslo.",
+        "label": "Minimálny limit"
       },
       "max_diff": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte maximálny platný rozdiel medzi dvoma meraniami. Zadajte „0“ pre deaktiváciu.",
+        "invalid": "Zadaná hodnota nie je platná. Musí byť číslo väčšie ako {min}.",
+        "label": "Maximálny rozdiel",
+        "placeholder": "Maximálny rozdiel"
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte ľahko zapamätateľné meno.",
+        "invalid": "Zadané meno nie je platné. Nemôže byť prázdne.",
+        "label": "Meno",
+        "placeholder": "Zadajte meno"
       },
       "save": {
         "ok": {
-          "message": ""
+          "message": "Senzor ''{name}'' je aktualizovaný."
         }
       },
-      "title": "",
+      "title": "Nastavenia senzora",
       "type": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Vyberte typ merania pre tento senzor.",
+        "invalid": "Vyberte typ merania.",
+        "label": "Typ",
+        "placeholder": "Vyberte typ"
       }
     },
     "temperature": {
       "menu": {
-        "title": ""
+        "title": "teplota"
       },
-      "title": ""
+      "title": "Teplotné senzory"
     },
-    "title": "",
+    "title": "Senzory",
     "uva": {
       "menu": {
-        "title": ""
+        "title": "uva"
       },
-      "title": ""
+      "title": "UVA senzory"
     },
     "uvb": {
       "menu": {
-        "title": ""
+        "title": "uvb"
       },
-      "title": ""
+      "title": "UVB senzory"
     },
     "uvi": {
       "menu": {
-        "title": ""
+        "title": "uvi"
       },
-      "title": ""
+      "title": "UVI senzory"
     }
   },
   "services": {
     "actions": {
-      "delete": "",
-      "edit": ""
+      "delete": "Odstrániť službu",
+      "edit": "Upraviť službu"
     },
-    "add": "",
+    "add": "Pridať službu",
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Naozaj chcete odstrániť službu ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Službu ''{name}'' sa nepodarilo odstrániť!\nChyba: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "Služba ''{name}'' je odstránená."
       }
     },
-    "enabled": "",
+    "enabled": "Povolené",
     "ratelimit": "",
     "settings": {
       "enabled": {
@@ -1714,99 +1714,99 @@
         },
         "user_key": {
           "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "invalid": "Zadaný používateľský kľúč nie je platný. Nemôže byť prázdny.",
+          "label": "Používateľský kľúč",
+          "placeholder": "Zadajte používateľský kľúč"
         },
         "username": {
-          "help": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte používateľské meno servera.",
+          "label": "Používateľské meno servera",
+          "placeholder": "Zadajte používateľské meno"
         },
         "yellow": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte GPIO pin pre oranžové svetlo.",
+          "invalid": "Zadaná hodnota nie je platná. Zadajte platné číslo medzi {min} a {max}.",
+          "label": "Jantárová",
+          "placeholder": "Zadajte jantárový GPIO PIN"
         }
       },
-      "title": "",
+      "title": "Nastavenia služby upozornení",
       "type": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Vyberte typ notifikačnej služby.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Typ",
+        "placeholder": "Vyberte typ"
       }
     },
-    "title": ""
+    "title": "Notifikačné služby"
   },
   "settings": {
     "units": {
-      "beaufort": "",
-      "celsius": "",
-      "cm": "",
-      "fahrenheit": "",
-      "inch": "",
-      "kelvin": "",
-      "km_h": "",
-      "l": "",
-      "m_h": "",
-      "m_s": "",
-      "ukgall": "",
-      "usgall": ""
+      "beaufort": "Beaufort",
+      "celsius": "Celzia",
+      "cm": "Centimeter",
+      "fahrenheit": "Fahrenheita",
+      "inch": "Palec",
+      "kelvin": "Kelvin",
+      "km_h": "Kilometer za hodinu",
+      "l": "Liter",
+      "m_h": "Míle za hodinu",
+      "m_s": "Meter za sekundu",
+      "ukgall": "Britské galóny",
+      "usgall": "US galóny"
     }
   },
   "system": {
     "log": {
       "download": {
-        "title": ""
+        "title": "Stiahnuť súbor denníka"
       },
       "filters": {
-        "errors": "",
-        "search": "",
-        "title": "",
-        "warnings": ""
+        "errors": "chyby",
+        "search": "Zadajte vyhľadávacie výrazy",
+        "title": "Filtre",
+        "warnings": "varovania"
       },
-      "lines": "",
-      "loading": "",
-      "title": ""
+      "lines": "{lines} riadkov",
+      "loading": "Načítavajú sa údaje",
+      "title": "Systémové protokolovanie"
     },
     "menu": {
       "log": {
-        "title": ""
+        "title": "Záznam"
       },
       "notifications": {
-        "title": ""
+        "title": "Upozornenia"
       },
       "reboot": {
-        "title": ""
+        "title": "Reštart"
       },
       "restart": {
-        "title": ""
+        "title": "Reštartovať"
       },
       "settings": {
-        "title": ""
+        "title": "Nastavenia"
       },
       "shutdown": {
-        "title": ""
+        "title": "Vypnutie"
       },
       "status": {
-        "title": ""
+        "title": "Stav"
       },
-      "title": ""
+      "title": "Systém"
     },
     "notifications": {
-      "title": ""
+      "title": "Upozornenia"
     },
     "settings": {
       "all_gauges_on_single_page": {
-        "help": "",
-        "label": ""
+        "help": "Pridajte ďalšiu položku ponuky pre všetky senzory na jednej stránke.",
+        "label": "Všetky meradlá na jednej stránke"
       },
       "authenticate": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Vždy overovať alebo iba pri vykonávaní zmien.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Režim overovania",
         "options": {
           "changes": "",
           "full": "",
