@@ -18,6 +18,8 @@ import nl_NL from './nl_NL.json';
 import pl from './pl.json';
 import pt_BR from './pt_BR.json';
 import pt from './pt.json';
+import sk from './sk.json';
+
 
 let settings = getCustomConfig();
 
@@ -113,6 +115,11 @@ const langs = [
   {
     code: 'pt',
     title: 'Português',
+    currency: ['eur'],
+  },
+  {
+    code: 'sk',
+    title: 'Slovensko',
     currency: ['eur'],
   },
 ];
