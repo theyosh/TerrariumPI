@@ -1605,115 +1605,115 @@
       }
     },
     "enabled": "Povolené",
-    "ratelimit": "",
+    "ratelimit": "{number, plural, =0 {Unlimited messages} other {Max # per minute}}",
     "settings": {
       "enabled": {
-        "help": "",
-        "label": ""
+        "help": "Povoliť/zakázať túto notifikačnú službu.",
+        "label": "Povolené"
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte ľahko zapamätateľné meno.",
+        "invalid": "Zadané meno nie je platné. Nemôže byť prázdne.",
+        "label": "Meno",
+        "placeholder": "Zadajte meno"
       },
       "rate_limit": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Maximálny počet správ za minútu pre túto službu. Pre neobmedzený počet použite hodnotu 0.",
+        "invalid": "Zadaná hodnota nie je platná. Zadajte platné číslo vyššie ako {min}.",
+        "label": "Limit rýchlosti",
+        "placeholder": "Správ za minútu"
       },
       "save": {
         "error": {
-          "required_fields": ""
+          "required_fields": "Nie všetky povinné polia sú vyplnené správne."
         },
         "ok": {
-          "message": ""
+          "message": "Služba ''{name}'' je aktualizovaná."
         }
       },
       "setup": {
         "address": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte adresu.",
+          "invalid": "Zadaná adresa nie je platná. Nemôže byť prázdna.",
+          "label": "Adresa servera",
+          "placeholder": "Zadajte adresu"
         },
         "api_token": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte token rozhrania Pushover API.",
+          "invalid": "Zadaný token API nie je platný. Nemôže byť prázdny.",
+          "label": "Token API",
+          "placeholder": "Zadajte token API"
         },
         "buzzer": {
-          "help": ""
+          "help": "Zoznam dostupných skladieb, ktoré môžete použiť v predmete správy."
         },
         "green": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte GPIO pin pre zelenú kontrolku.",
+          "invalid": "Zadaná hodnota nie je platná. Zadajte platné číslo medzi {min} a {max}.",
+          "label": "Zelená",
+          "placeholder": "Zadajte zelený GPIO pin"
         },
         "h_scroll": {
-          "help": "",
-          "label": ""
+          "help": "Zapnite, ak chcete povoliť horizontálne rolovanie.",
+          "label": "Horizontálne posúvanie"
         },
         "hardware": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Vyberte typ hardvéru pre tento displej.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Hardvér",
+          "placeholder": "Vyberte hardvér"
         },
         "password": {
-          "help": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte heslo servera.",
+          "label": "Heslo servera",
+          "placeholder": "Zadajte používateľské meno"
         },
         "port": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte číslo portu servera.",
+          "invalid": "Zadané číslo portu nie je platné. Nemôže byť prázdne.",
+          "label": "Port servera",
+          "placeholder": "Zadajte číslo portu"
         },
         "pushover": {
-          "label": ""
+          "label": "Vytvorte si tokeny registráciou TerrariumPI ako aplikácie {link}."
         },
         "receiver": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte e-mailovú adresu.",
+          "invalid": "Adresa nemôže byť prázdna.",
+          "label": "E-mail príjemcu",
+          "placeholder": "Zadajte e-mailovú adresu"
         },
         "red": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte GPIO pin pre červené svetlo.",
+          "invalid": "Zadaná hodnota nie je platná. Zadajte platné číslo medzi {min} a {max}.",
+          "label": "Červená",
+          "placeholder": "Zadajte červený GPIO pin"
         },
         "sender": {
-          "help": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte e-mail odosielateľa.",
+          "label": "Odosielateľská adresa",
+          "placeholder": "Zadajte adresu odosielateľa"
         },
         "show_title": {
-          "help": "",
-          "label": ""
+          "help": "Zobraziť názov a verziu ako titulok na displeji.",
+          "label": "Názov výstavy"
         },
         "ssl": {
           "email": {
-            "label": ""
+            "label": "Služba e-mailových upozornení automaticky rozpozná pripojenia SSL/TLS."
           },
           "mqtt": {
-            "label": ""
+            "label": "Notifikačná služba MQTT automaticky rozpozná pripojenia SSL/TLS."
           }
         },
         "url": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte celú URL adresu príspevku.",
+          "invalid": "Zadaná URL adresa nie je platná. Nemôže byť prázdna.",
+          "label": "Celá URL adresa príspevku",
+          "placeholder": "Zadajte celú URL adresu príspevku"
         },
         "user_key": {
-          "help": "",
+          "help": "Zadajte používateľský kľúč Pushover.",
           "invalid": "Zadaný používateľský kľúč nie je platný. Nemôže byť prázdny.",
           "label": "Používateľský kľúč",
           "placeholder": "Zadajte používateľský kľúč"
@@ -1808,99 +1808,99 @@
         "invalid": "Prosím, urobte si voľbu.",
         "label": "Režim overovania",
         "options": {
-          "changes": "",
-          "full": "",
-          "no_authentication": ""
+          "changes": "Len pre zmeny",
+          "full": "Úplné overenie",
+          "no_authentication": "Žiadne overenie"
         }
       },
       "auto_dark_mode": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Nastaviť tmavý režim.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Automatický tmavý režim",
         "options": {
-          "always": "",
-          "desktop": "",
-          "off": "",
-          "on": ""
+          "always": "Vždy tmavý režim",
+          "desktop": "Na základe počítača",
+          "off": "Žiadny tmavý režim",
+          "on": "Na základe dňa/noci"
         }
       },
       "auto_discovery": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Povoliť automatické vyhľadávanie senzorov a relé počas spustenia.",
+        "invalid": "Prosím, urobte si voľbu",
+        "label": "Automatické objavovanie",
         "options": {
-          "no": "",
-          "yes": ""
+          "no": "Nie",
+          "yes": "Áno"
         }
       },
       "currency": {
-        "help": "",
-        "invalid": "",
+        "help": "Vyberte menu rozhrania.",
+        "invalid": "Prosím, urobte si voľbu.",
         "label": ""
       },
       "dashboard_mode": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Vyberte, ako bude vyzerať dashboard.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Režim palubnej dosky",
         "options": {
-          "normal": "",
-          "only_enclosures": "",
-          "only_graphs": ""
+          "normal": "Grafy a teráriá",
+          "only_enclosures": "Iba teráriá",
+          "only_graphs": "Iba grafy"
         }
       },
       "distance_indicator": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Vyberte indikátor vzdialenosti. Ovplyvňuje iba aktuálne hodnoty.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Typ vzdialenosti"
       },
       "exclude-ids": {
-        "help": "",
-        "label": ""
+        "help": "Vylúčené identifikátory.",
+        "label": "Vylúčené identifikátory"
       },
       "graph_limit_min_max": {
-        "help": "",
-        "label": ""
+        "help": "Obmedzte hodnoty grafu na 20 % hodnôt alarmu.",
+        "label": "Hodnoty limitného grafu"
       },
       "graph_period": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Vyberte predvolené obdobie grafu.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Predvolené obdobie grafu"
       },
       "graph_smooth_value": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte počet dátových bodov, ktoré sa majú spriemerovať. Hodnota 0 túto funkciu vypne.",
+        "invalid": "Zadajte minimálnu hodnotu {value}.",
+        "label": "Vyhladzovanie grafu"
       },
       "header": {
-        "cloud": "",
-        "gui": "",
-        "locale": "",
-        "system": ""
+        "cloud": "Cloud",
+        "gui": "GUI",
+        "locale": "Lokalita",
+        "system": "Systém"
       },
       "hide_environment_dashboard": {
-        "help": "",
-        "label": ""
+        "help": "Skryť údaje o teráriu na ovládacom paneli.",
+        "label": "Skryť terárium na palubnej doske"
       },
       "host": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte IP adresu na počúvanie pripojení. Predvolená hodnota je 0.0.0.0.",
+        "invalid": "Zadajte platnú IP adresu.",
+        "label": "IP adresa"
       },
       "language": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Vyberte jazyk rozhrania. Týmto sa zmení aj formátovanie čísel a mien.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Jazyk"
       },
       "meross_cloud_password": {
-        "help": "",
-        "label": ""
+        "help": "Zadajte heslo pre prihlásenie do cloudu Meross.",
+        "label": "Heslo pre Meross"
       },
       "meross_cloud_username": {
-        "help": "",
-        "label": ""
+        "help": "Zadajte používateľské meno pre prihlásenie do cloudu Meross.",
+        "label": "Používateľské meno Meross"
       },
       "page": {
-        "title": ""
+        "title": "Systémové nastavenia"
       },
       "password": {
         "help": "",
