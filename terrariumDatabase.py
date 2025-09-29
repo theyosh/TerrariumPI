@@ -93,6 +93,7 @@ def create_defaults(version):
             # Setting is already in the database. Ignore except version. Update that.
             if "version" == setting["id"]:
                 Setting["version"].value = f"{version}"
+                orm.commit()
 
     # Clear old obsolete settings
     settings = [setting["id"] for setting in setting_defaults]
