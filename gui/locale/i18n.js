@@ -38,6 +38,7 @@ const locales = {
   pl: pl,
   'pt-BR': pt_BR,
   pt: pt,
+  sk: sk,
 };
 
 const langs = [
