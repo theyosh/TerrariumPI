@@ -288,200 +288,200 @@
             "help": "Vyberte si režim v závislosti",
             "invalid": "Prosím, urobte si voľbu.",
             "label": "Závislý režim",
-            "placeholder": ""
+            "placeholder": "Vyberte režim"
           },
           "door_status": {
-            "help": "",
-            "invalid": "",
-            "label": "",
+            "help": "Vyberte stav dverí.",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Stav dverí",
             "options": {
-              "closed": "",
-              "ignore": "",
-              "open": ""
+              "closed": "Zatvorené",
+              "ignore": "Ignorované",
+              "open": "Otvorené"
             },
-            "placeholder": ""
+            "placeholder": "Vyberte stav"
           },
           "end": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Čas dňa, kedy sa relé každú noc vypínajú.",
+            "invalid": "Zadajte platný čas.",
+            "label": "Čas ukončenia",
+            "placeholder": "Zadajte čas ukončenia"
           },
           "ignore_low": {
-            "help": "",
-            "label": ""
+            "help": "Prepnite, ak chcete ignorovať dolnú hodnotu alarmu senzorov a použiť iba hornú hodnotu alarmu.",
+            "label": "Ignorovať alarm nízkej hodnoty"
           },
           "light_status": {
-            "help": "",
-            "invalid": "",
-            "label": "",
+            "help": "Select the lights status.",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Stav svetla",
             "options": {
-              "ignore": "",
-              "off": "",
-              "on": ""
+              "ignore": "Ignorované",
+              "off": "Vypnuté",
+              "on": "Zapnuté"
             },
-            "placeholder": ""
+            "placeholder": "Vyberte stav"
           },
           "off_duration": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Trvanie, počas ktorého majú byť relé vypnuté, keď sú vypnuté. Zadajte „0“ pre deaktiváciu.",
+            "invalid": "Zadajte platnú dobu trvania v minútach.",
+            "label": "Trvanie vypnutia",
+            "placeholder": "Trvanie vypnutia"
           },
           "on_duration": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Trvanie, počas ktorého majú byť relé zapnuté. Ak je kratšie ako celý deň, aktivuje sa funkcia časovača. Zadajte „0“ pre celú noc.",
+            "invalid": "Zadajte platnú dobu trvania v minútach.",
+            "label": "Trvanie zapnutia",
+            "placeholder": "Trvanie zapnutia"
           },
           "playlists": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Vyberte zoznam(y) skladieb, ktoré sa majú prehrať.",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Zoznamy skladieb",
+            "placeholder": "Vyberte zoznamy skladieb"
           },
           "power_on_time": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Trvanie v sekundách na prepnutie relé.",
+            "invalid": "Zadajte platné číslo.",
+            "label": "Čas zapnutia",
+            "placeholder": "Čas zapnutia"
           },
           "relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Vyberte relé, ktoré chcete prepínať.",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Relé",
+            "placeholder": "Vyberte relé"
           },
           "settle_time": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Trvanie v sekundách medzi dvoma akciami.",
+            "invalid": "Zadajte platné číslo.",
+            "label": "Čas ustálenia",
+            "placeholder": "Čas ustálenia"
           },
           "trigger_threshold": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Zadajte počet alarmov pred vykonaním akcie.",
+            "invalid": "Zadajte platné číslo.",
+            "label": "Prah alarmu",
+            "placeholder": "Prahová hodnota"
           },
           "tweaks": {
             "dimmer": {
-              "info": ""
+              "info": "Vyberte oneskorenie a trvanie zapnutia alebo vypnutia stmievača v minútach. Maximálne trvanie je 180 minút."
             },
             "off": {
               "dimmer": {
-                "label": ""
+                "label": "Trvanie vypnutia stmievača"
               },
               "relay": {
-                "label": ""
+                "label": "Oneskorenie relé vypnuté"
               }
             },
             "on": {
               "dimmer": {
-                "label": ""
+                "label": "Trvanie stmievania"
               },
               "relay": {
-                "label": ""
+                "label": "Oneskorenie relé"
               }
             },
             "relay": {
-              "info": ""
+              "info": "Vyberte oneskorenie v minútach, ktoré relé čaká pred zapnutím. Maximálne oneskorenie je 180 minút."
             }
           }
         },
         "main_lights": {
-          "help": "",
-          "label": ""
+          "help": "Prepnite toto, ak ide o hlavné svetlá pre tento kryt. Toto sa používa na kontrolu osvetlenia v iných oblastiach.",
+          "label": "Hlavné svetlá"
         },
         "max_day_hours": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Maximálny počet hodín, počas ktorých sú svetlá zapnuté. Platí iba v režime počasia. Ak je deň dlhší ako táto maximálna hodnota, skráti sa na túto maximálnu hodnotu.",
+          "invalid": "Zadaná hodnota nie je platná. Zadajte platné číslo medzi {min} a {max}.",
+          "label": "Maximálny počet hodín",
+          "placeholder": "Zadajte číslo"
         },
         "min_day_hours": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Minimálny počet hodín, počas ktorých sú svetlá zapnuté. Platí iba v režime počasia. Ak je deň kratší ako táto minimálna hodnota, predĺži sa na túto minimálnu hodnotu.",
+          "invalid": "Zadaná hodnota nie je platná. Zadajte platné číslo medzi {min} a {max}.",
+          "label": "Minimálny počet hodín",
+          "placeholder": "Zadajte číslo"
         },
         "periods": {
-          "day": "",
-          "high": "",
-          "info": "",
-          "low": "",
-          "night": "",
-          "varation": ""
+          "day": "Nastavenia dňa",
+          "high": "Vysoký alarm",
+          "info": "Nižšie si môžete vybrať nastavenia relé a časovačov pre jednotlivé obdobia, deň a noc.",
+          "low": "Nízky alarm",
+          "night": "Nočné nastavenia",
+          "varation": "Odchýlka"
         },
         "sensors": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Vyberte senzory, ktoré sa majú použiť pre režim založený na senzoroch.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Senzory",
+          "placeholder": "Vyberte senzory"
         },
         "shift_day_hours": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Časový posun v hodinách na základe času východu slnka. Záporné hodnoty spôsobia, že deň začne skôr.",
+          "invalid": "Zadaná hodnota nie je platná. Zadajte platné číslo medzi {min} a {max}.",
+          "label": "Hodinová zmena",
+          "placeholder": "Zadajte číslo"
         },
         "soundcard": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Vyberte zvukovú kartu, ktorá sa používa pre túto oblasť.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Zvuková karta",
+          "placeholder": "Vyberte zvukovú kartu"
         },
         "variation": {
           "offset": {
-            "invalid": ""
+            "invalid": "Zadajte platné číslo."
           },
           "period": {
-            "invalid": "",
-            "offset": "",
-            "placeholder": "",
-            "source": ""
+            "invalid": "Zadajte platné číslo.",
+            "offset": "Kompenzácia",
+            "placeholder": "Prahová hodnota",
+            "source": "Zadajte úplnú URL adresu, lokálny súbor JSON alebo súbor skriptu"
           },
           "value": {
-            "invalid": "",
-            "placeholder": ""
+            "invalid": "Zadajte platné číslo.",
+            "placeholder": "Rozdiel"
           },
           "when": {
-            "invalid": "",
+            "invalid": "Prosím, urobte si voľbu.",
             "options": {
-              "after": "",
-              "at": "",
-              "external": "",
-              "script": "",
-              "weather": ""
+              "after": "Po x minútach",
+              "at": "V čase",
+              "external": "Použiť zdroj JSON",
+              "script": "Použiť skript",
+              "weather": "Používanie aktuálneho počasia"
             },
-            "placeholder": ""
+            "placeholder": "Vybrať akciu"
           }
         },
         "watertank_height": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte výšku nádrže na vodu.",
+          "invalid": "Zadajte minimálnu hodnotu {value}.",
+          "label": "Výška",
+          "placeholder": "Zadajte číslo"
         },
         "watertank_offset": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte odsadenie medzi senzorom a výškou vody.",
+          "invalid": "Zadajte minimálnu hodnotu {value}.",
+          "label": "Odsadenie",
+          "placeholder": "Zadajte číslo"
         },
         "watertank_volume": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte objem nádrže na vodu.",
+          "invalid": "Zadajte minimálnu hodnotu {value}.",
+          "label": "Objem vody",
+          "placeholder": "Zadajte číslo"
         }
       },
-      "title": "",
+      "title": "Nastavenia oblasti",
       "type": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Vyberte typ oblasti. Každý typ má svoje vlastné ďalšie možnosti a logiku.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Typ",
+        "placeholder": "Vyberte typ"
       }
     }
   },
@@ -489,399 +489,399 @@
     "files": {
       "delete": {
         "confirm": {
-          "message": ""
+          "message": "Naozaj chcete odstrániť zvukový súbor ''{name}'' ({filename})?"
         },
         "error": {
-          "message": ""
+          "message": "Zvukový súbor ''{name}'' sa nepodarilo odstrániť!\nChyba: {error}"
         },
         "ok": {
-          "message": ""
+          "message": "Zvukový súbor ''{name}'' bol odstránený."
         }
       },
       "settings": {
         "audiofiles": {
-          "label": "",
-          "placeholder": ""
+          "label": "Nahrať nový zvukový súbor",
+          "placeholder": "Nahrať nový zvukový súbor"
         },
         "save": {
           "error": {
-            "invalid_file": ""
+            "invalid_file": "Neplatné zvukové súbory"
           },
           "ok": {
-            "message": ""
+            "message": "Nahrané {amount, plural, =1 {# audio file} iné {# audio files}}"
           }
         },
         "upload": {
           "error": {
-            "nologin": ""
+            "nologin": "Pre nahranie súborov sa, prosím, prihláste."
           }
         }
       },
-      "title": ""
+      "title": "Zvukové súbory"
     },
     "menu": {
       "files": {
-        "title": ""
+        "title": "Súbory"
       },
       "new_playlist": {
-        "title": ""
+        "title": "Nový playlist"
       },
       "playlists": {
-        "title": ""
+        "title": "Zoznamy skladieb"
       },
-      "title": ""
+      "title": "Zvuk"
     },
     "playlists": {
       "delete": {
         "confirm": {
-          "message": ""
+          "message": "Naozaj chcete odstrániť zoznam skladieb „{name}“ s číslami {length}?"
         },
         "error": {
-          "message": ""
+          "message": "Zoznam skladieb „{name}“ sa nepodarilo odstrániť!\nChyba: {error}"
         },
         "ok": {
-          "message": ""
+          "message": "Zoznam skladieb „{name}“ bol odstránený."
         }
       },
       "settings": {
         "files": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Vybrať všetky zvukové súbory pre tento zoznam skladieb.",
+          "invalid": "Vyberte aspoň 1 zvukový súbor.",
+          "label": "Zvukové súbory",
+          "placeholder": "Vyberte zvukové súbory"
         },
         "name": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte ľahko zapamätateľné meno.",
+          "invalid": "Zadané meno nie je platné. Nemôže byť prázdne.",
+          "label": "Meno",
+          "placeholder": "Zadajte meno"
         },
         "repeat": {
-          "help": "",
-          "label": ""
+          "help": "Prehrávajte tento zoznam skladieb v režime opakovania.",
+          "label": "Opakovať"
         },
         "save": {
           "error": {
-            "required_fields": ""
+            "required_fields": "Nie všetky povinné polia sú vyplnené správne."
           },
           "ok": {
-            "message": ""
+            "message": "Zoznam skladieb „{name}“ bol aktualizovaný."
           }
         },
         "shuffle": {
-          "help": "",
-          "label": ""
+          "help": "Prehrávať tento playlist náhodne pri každom prehratí.",
+          "label": "Náhodné prehrávanie"
         },
-        "title": "",
+        "title": "Nastavenia zoznamu skladieb",
         "volume": {
-          "formatter": "",
-          "help": "",
-          "label": ""
+          "formatter": "Úroveň hlasitosti zvuku: {value}",
+          "help": "Vyberte hlasitosť pre tento zoznam skladieb.",
+          "label": "Hlasitosť zvuku"
         }
       },
-      "title": ""
+      "title": "Zoznamy skladieb"
     }
   },
   "buttons": {
     "actions": {
-      "delete": "",
-      "export": "",
-      "ignore": "",
-      "settings": ""
+      "delete": "Tlačidlo Zmazať",
+      "export": "Tlačidlo Exportovať",
+      "ignore": "Tlačidlo Ignorovať",
+      "settings": "Tlačidlo Upraviť"
     },
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Naozaj chcete odstrániť tlačidlo ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Tlačidlo ''{name}'' sa nepodarilo odstrániť!\nError: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "Tlačidlo ''{name}'' je odstránené."
       }
     },
     "ignore": {
       "confirm": {
-        "message": ""
+        "message": "Naozaj chcete ignorovať tlačidlo ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Tlačidlo ''{name}'' sa nepodarilo ignorovať!\nError: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "Tlačidlo ''{name}'' je ignorované."
       }
     },
     "menu": {
       "new": {
-        "title": ""
+        "title": "Nové tlačidlo"
       },
       "status": {
-        "title": ""
+        "title": "Stav"
       },
-      "title": ""
+      "title": "Tlačidlá"
     },
     "settings": {
       "address": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte fyzické číslo GPIO pinu.",
+        "invalid": "Zadaná adresa nie je platná. Zadajte platné číslo medzi {min} a {max}.",
+        "label": "Adresa",
+        "placeholder": "Zadajte adresu"
       },
       "calibration": {
         "inverse": {
-          "help": "",
-          "label": ""
+          "help": "Prepnite na inverziu vzdialenej hodnoty.",
+          "label": "Inverzná hodnota"
         },
         "ldr_capacitor": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte hodnotu kondenzátora v µF, pretože to ovplyvní výpočet svetla.",
+          "invalid": "Zadaná hodnota kondenzátora nie je platná. Zadajte platné číslo medzi {min} a {max}.",
+          "label": "Hodnota kondenzátora v µF",
+          "placeholder": "Zadajte hodnotu kondenzátora v µF"
         },
         "timeout": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte časový limit v sekundách medzi vzdialenými kontrolami.",
+          "invalid": "Zadaná hodnota časového limitu nie je platná. Zadajte platné číslo medzi {min} a {max}.",
+          "label": "Časový limit v sekundách",
+          "placeholder": "Zadajte časový limit v sekundách"
         }
       },
       "current": {
-        "help": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Aktuálny stav tlačidla.",
+        "label": "Súčasný",
+        "placeholder": "Aktuálna hodnota"
       },
       "hardware": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Vyberte typ hardvéru pre toto tlačidlo.",
+        "invalid": "Vyberte typ hardvéru.",
+        "label": "Hardvér",
+        "placeholder": "Vyberte hardvér"
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte ľahko zapamätateľné meno.",
+        "invalid": "Zadané meno nie je platné. Nemôže byť prázdne.",
+        "label": "Meno",
+        "placeholder": "Zadajte meno"
       },
       "save": {
         "error": {
-          "required_fields": ""
+          "required_fields": "Nie všetky povinné polia sú vyplnené správne."
         },
         "ok": {
-          "message": ""
+          "message": "Tlačidlo ''{name}'' bolo aktualizované."
         }
       },
-      "title": ""
+      "title": "Nastavenia tlačidiel"
     },
-    "title": ""
+    "title": "Tlačidlá"
   },
   "calendar": {
     "actions": {
-      "download": ""
+      "download": "Stiahnite si Ical"
     },
     "event": {
       "delete": {
         "confirm": {
-          "message": ""
+          "message": "Naozaj chcete odstrániť udalosť ''{name}''?"
         },
         "error": {
-          "message": ""
+          "message": "Udalosť ''{name}'' sa nepodarilo odstrániť!\nChyba: {error}"
         },
         "ok": {
-          "message": ""
+          "message": "Udalosť ''{name}'' bola odstránená."
         }
       },
-      "duration": "",
+      "duration": "Trvanie",
       "periods": {
-        "days": "",
-        "months": "",
-        "no_reminder": "",
-        "no_repeat": "",
-        "weeks": "",
-        "years": ""
+        "days": "Dni",
+        "months": "Mesiace",
+        "no_reminder": "Žiadna pripomienka",
+        "no_repeat": "Žiadne opakovanie",
+        "weeks": "Týždne",
+        "years": "Roky"
       },
       "settings": {
         "date": {
-          "help": "",
-          "label": ""
+          "help": "Dátum alebo obdobie tejto udalosti.",
+          "label": "Dátum"
         },
         "description": {
-          "help": "",
-          "label": ""
+          "help": "Zadajte nejaké informácie o tejto udalosti.",
+          "label": "Zadajte popis"
         },
         "remind": {
-          "label": ""
+          "label": "Pripomenúť"
         },
         "repeat": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Vyberte obdobie opakovania a sumu.",
+          "invalid": "Zadajte platnú sumu pre obdobie opakovania.",
+          "label": "Opakujte každých"
         },
         "repeat_amount": {
-          "label": ""
+          "label": "Vyberte množstvo"
         },
         "save": {
           "error": {
-            "required_fields": ""
+            "required_fields": "Nie všetky povinné polia sú vyplnené správne."
           },
           "ok": {
-            "message": ""
+            "message": "Udalosť ''{name}'' bola aktualizovaná."
           }
         },
         "summary": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Zadajte meno.",
+          "invalid": "Názov nemôže byť prázdny.",
+          "label": "Zadajte meno"
         },
-        "title": "",
+        "title": "Udalosť",
         "update": {
           "error": {
-            "message": ""
+            "message": "Udalosť ''{name}'' sa nepodarilo aktualizovať!\nChyba: {error}"
           },
           "ok": {
-            "message": ""
+            "message": "Udalosť ''{name}'' bola aktualizovaná."
           }
         }
       }
     },
     "menu": {
-      "title": ""
+      "title": "Kalendár"
     },
-    "title": ""
+    "title": "Kalendár"
   },
   "dashboard": {
     "enclosures": {
       "menu": {
-        "title": ""
+        "title": "Teráriá"
       },
-      "mode": "",
-      "title": ""
+      "mode": "Režim",
+      "title": "Teráriá"
     },
     "infobox": {
       "current_power_usage": {
-        "title": ""
+        "title": "Spotreba energie vo wattoch"
       },
       "current_water_flow": {
-        "title": ""
+        "title": "Prietok vody v {water_flow_indicator}"
       },
       "total_power_usage": {
-        "duration": "",
-        "title": ""
+        "duration": "o {trvanie}",
+        "title": "Celková spotreba energie"
       },
       "total_water_usage": {
-        "duration": "",
-        "title": ""
+        "duration": "o {trvanie}",
+        "title": "Celková spotreba vody"
       },
       "uptime": {
-        "title": ""
+        "title": "Doba prevádzky"
       }
     },
     "menu": {
-      "title": ""
+      "title": "Ovládací panel"
     },
-    "title": ""
+    "title": "Ovládací panel"
   },
   "enclosures": {
     "actions": {
-      "delete": "",
-      "settings": ""
+      "delete": "Zmazať terárium",
+      "settings": "Upraviť terárium"
     },
     "area": {
-      "current": "",
-      "current_status": "",
+      "current": "aktuálny",
+      "current_status": "Aktuálny stav",
       "delete": {
-        "title": ""
+        "title": "Odstrániť oblasť"
       },
       "edit": {
-        "title": ""
+        "title": "Upraviť oblasť"
       },
       "mode": {
-        "disabled": "",
-        "sensors": "",
-        "timer": "",
-        "title": "",
-        "weather": ""
+        "disabled": "Zakázané",
+        "sensors": "Senzory",
+        "timer": "Časovač",
+        "title": "Režim",
+        "weather": "Počasie"
       },
-      "now": "",
+      "now": "teraz",
       "period": {
-        "day": "",
-        "high": "",
-        "low": "",
-        "night": ""
+        "day": "Deň",
+        "high": "Vysoká",
+        "low": "Nízka",
+        "night": "Noc"
       },
-      "range": "",
+      "range": "Rozsah",
       "type": {
-        "audio": "",
-        "cooling": "",
-        "heating": "",
-        "humidity": "",
-        "lights": "",
-        "main_lights": "",
-        "watertank": ""
+        "audio": "Zvuk",
+        "cooling": "Chladenie",
+        "heating": "Ohrev",
+        "humidity": "Vlhkosť",
+        "lights": "Svetlá",
+        "main_lights": "Hlavné svetlá",
+        "watertank": "Vodná nádrž"
       }
     },
     "areas": {
-      "title": ""
+      "title": "Oblasti"
     },
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Naozaj chcete odstrániť prílohu ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Terárium ''{name}'' sa nepodarilo odstrániť!\nChyba: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "Terárium ''{name}'' je odstránená."
       }
     },
     "doors": {
-      "title": ""
+      "title": "Dvere"
     },
     "menu": {
       "list": {
-        "title": ""
+        "title": "Zoznam"
       },
       "new_area": {
-        "title": ""
+        "title": "Nová oblasť"
       },
       "new_enclosure": {
-        "title": ""
+        "title": "Nové terárium"
       },
-      "title": ""
+      "title": "Teráriá"
     },
     "settings": {
       "description": {
-        "help": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte popisný text k tomuto teráriu.",
+        "label": "Popis",
+        "placeholder": "Zadajte popis"
       },
       "doors": {
-        "help": "",
-        "label": ""
+        "help": "Vyberte dvere pre toto terárium",
+        "label": "Dvere"
       },
       "image": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Nahrajte súbor JPG alebo PNG.",
+        "invalid": "Vybraný súbor nie je platný. Nie je to obrázkový súbor.",
+        "label": "Obrázok",
+        "placeholder": "Vyberte súbor s obrázkom"
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte ľahko zapamätateľné meno.",
+        "invalid": "Zadané meno nie je platné. Nemôže byť prázdne.",
+        "label": "Meno",
+        "placeholder": "Zadajte meno"
       },
       "save": {
         "error": {
-          "required_fields": ""
+          "required_fields": "Nie všetky povinné polia sú vyplnené správne."
         },
         "ok": {
-          "message": ""
+          "message": "Terárium ''{name}'' bolo aktualizované."
         }
       },
-      "title": "",
+      "title": "Nastavenia terária",
       "webcams": {
-        "help": "",
-        "label": ""
+        "help": "Vyberte webkameru (webkamery) pre toto terárium.",
+        "label": "Webkamery"
       }
     },
     "title": "",
