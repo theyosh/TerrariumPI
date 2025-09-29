@@ -20,7 +20,6 @@ import pt_BR from './pt_BR.json';
 import pt from './pt.json';
 import sk from './sk.json';
 
-
 let settings = getCustomConfig();
 
 const locales = {
