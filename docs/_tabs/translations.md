@@ -1,6 +1,6 @@
 ---
 title: Translations
-icon: fas fa-globe
+icon: fas fa-language
 order: 8
 
 image:
