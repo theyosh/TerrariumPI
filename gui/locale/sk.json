@@ -1,293 +1,293 @@
 {
   "about": {
     "online": {
-      "help": ""
+      "help": "Viac pomoci online."
     },
-    "title": ""
+    "title": "O nás"
   },
   "areas": {
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Naozaj chcete odstrániť oblasť ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Oblasť ''{name}'' sa nepodarilo odstrániť!\nChyba: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "Oblasť ''{name}'' je odstránená."
       }
     },
     "settings": {
       "depends_on": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Vyberte oblasti, od ktorých táto oblasť závisí.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Závisí od",
+        "placeholder": "Vyberte si oblasti v závislosti od"
       },
       "enclosure": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Vyberte terarium, do ktorej táto oblasť patrí.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Terarium",
+        "placeholder": "Vyberte terarium"
       },
       "light_sensors": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Vyberte svetelné senzory, ktoré zistia, či sú svetlá zapnuté.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Senzory detekcie svetla",
+        "placeholder": "Vyberte svetelné senzory"
       },
       "mode": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Vyberte režim tejto oblasti. Týmto sa zmení načasovanie a trvanie relé.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Režim",
         "options": {
-          "disabled": "",
-          "main_lights": "",
-          "sensors": "",
-          "timer": "",
-          "weather": "",
-          "weather_inverse": ""
+          "disabled": "Zakázané",
+          "main_lights": "Hlavné svetlá",
+          "sensors": "Senzory",
+          "timer": "Časovač",
+          "weather": "Počasie deň/noc",
+          "weather_inverse": "Počasie noc/deň"
         },
-        "placeholder": ""
+        "placeholder": "Vyberte režim"
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte ľahko zapamätateľné meno.",
+        "invalid": "Zadané meno nie je platné. Nemôže byť prázdne.",
+        "label": "Meno",
+        "placeholder": "Zadajte meno"
       },
       "relay": {
         "slider": {
-          "delay": "",
-          "duration": ""
+          "delay": "Meškanie: {delay} minút.",
+          "duration": "Meškanie: {delay} minút. Trvanie: {duration} minút"
         }
       },
       "save": {
         "error": {
-          "duplicate_relays": "",
-          "required_fields": ""
+          "duplicate_relays": "Vybrali ste rovnaké relé v alarme nízkej aj vysokej hodnoty. Toto nie je platné.",
+          "required_fields": "Nie všetky povinné polia sú vyplnené správne."
         },
         "ok": {
-          "message": ""
+          "message": "Oblasť ''{name}'' bola aktualizovaná."
         }
       },
       "setup": {
         "area_variation": {
           "action": {
             "add": {
-              "help": ""
+              "help": "Pridať nový riadok"
             },
-            "label": "",
+            "label": "Akcia",
             "remove": {
-              "help": ""
+              "help": "Odstrániť riadok"
             }
           },
           "difference": {
-            "help": "",
-            "label": ""
+            "help": "Zadajte zápornú alebo kladnú hodnotu pre relatívnu akciu. Číslo sa považuje za absolútnu hodnotu.",
+            "label": "Rozdiel"
           },
           "duration": {
-            "help": ""
+            "help": "Zadajte trvanie v minútach alebo skutočný čas dňa."
           },
           "external_source": {
-            "help": "",
-            "label": ""
+            "help": "Zadajte úplnú URL adresu externého zdroja podľa funkcie Vzdialené dáta.",
+            "label": "URL externého zdroja"
           },
-          "help": "",
+          "help": "Tu môžete zadať obdobia, v ktorých budú senzory meniť svoje hodnoty podľa nižšie uvedeného zoznamu. Uistite sa, že obdobia sú zoradené chronologicky!",
           "offset": {
-            "label": ""
+            "label": "Odsadenie"
           },
           "period": {
-            "help": "",
-            "label": ""
+            "help": "Zmeniť na hodnotu po x minútach alebo v určitom čase.",
+            "label": "Obdobie/trvanie"
           },
           "remote": {
-            "help": ""
+            "help": "Vzdialené údaje."
           },
           "source": {
-            "label": ""
+            "label": "Zdroj"
           },
           "value": {
-            "help": ""
+            "help": "Zadajte zápornú alebo kladnú hodnotu odsadenia."
           },
           "weather": {
-            "help": ""
+            "help": "Zrkadlenie klímy."
           }
         },
         "day_night_difference": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Množstvo, ktoré sa má zmeniť medzi dňom a nocou.",
+          "invalid": "Zadajte platné číslo.",
+          "label": "Rozdiel deň/noc",
+          "placeholder": "Zadajte číslo"
         },
         "day_night_source": {
-          "help": "",
-          "invalid": "",
-          "label": "",
+          "help": "Vyberte zdroj, keď je „deň“.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Zdroj deň/noc",
           "options": {
-            "lights": "",
-            "weather": ""
+            "lights": "Svetlá",
+            "weather": "Počasie"
           },
-          "placeholder": ""
+          "placeholder": "Vyberte zdroj pre deň/noc"
         },
         "depend_on_relays_mode": {
           "all": {
-            "label": ""
+            "label": "Všetko zapnuté"
           },
           "none": {
-            "label": ""
+            "label": "Žiadne zapnuté"
           },
           "one": {
-            "label": ""
+            "label": "Aspoň jedno zapnuté"
           }
         },
         "deviation_high_alarm": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zvýšte alebo znížte hornú hodnotu alarmu.",
+          "invalid": "Zadajte platné číslo.",
+          "label": "Vysoká odchýlka alarmu",
+          "placeholder": "Vysoká odchýlka alarmu"
         },
         "deviation_low_alarm": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zvýšte alebo znížte nízku hodnotu alarmu.",
+          "invalid": "Zadajte platné číslo.",
+          "label": "Nízka odchýlka alarmu",
+          "placeholder": "Nízka odchýlka alarmu"
         },
         "high": {
           "begin": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Čas dňa, kedy sa relé každú noc zapínajú.",
+            "invalid": "Zadajte platný čas.",
+            "label": "Čas začiatku",
+            "placeholder": "Zadajte čas začiatku"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Vyberte relé, od ktorých sú tieto relé závislé.",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Závislé na relé",
+            "placeholder": "Vyberte relé"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Vyberte si režim v závislosti",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Závislý režim",
+            "placeholder": "Vyberte režim"
           },
           "door_status": {
-            "help": "",
-            "invalid": "",
-            "label": "",
+            "help": "Vyberte stav dverí.",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Stav dverí",
             "options": {
-              "closed": "",
-              "ignore": "",
-              "open": ""
+              "closed": "Zatvorené",
+              "ignore": "Ignorované",
+              "open": "Otvorené"
             },
-            "placeholder": ""
+            "placeholder": "Vyberte stav"
           },
           "end": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Čas dňa, kedy sa relé každú noc vypínajú.",
+            "invalid": "Zadajte platný čas.",
+            "label": "Čas ukončenia",
+            "placeholder": "Zadajte čas ukončenia"
           },
           "ignore_high": {
-            "help": "",
-            "label": ""
+            "help": "Prepnite, ak chcete ignorovať vysokú hodnotu alarmu senzorov a použiť iba nízku hodnotu alarmu.",
+            "label": "Ignorovať vysoký alarm"
           },
           "light_status": {
-            "help": "",
-            "invalid": "",
-            "label": "",
+            "help": "Vyberte stav svetiel.",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Stav svetla",
             "options": {
-              "ignore": "",
-              "off": "",
-              "on": ""
+              "ignore": "Ignorované",
+              "off": "Vypnuté",
+              "on": "Zapnuté"
             },
-            "placeholder": ""
+            "placeholder": "Vyberte stav"
           },
           "off_duration": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Trvanie, počas ktorého majú byť relé vypnuté, keď sú vypnuté. Zadajte „0“ pre deaktiváciu.",
+            "invalid": "Zadajte platnú dobu trvania v minútach.",
+            "label": "Trvanie vypnutia",
+            "placeholder": "Trvanie vypnutia"
           },
           "on_duration": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Trvanie, počas ktorého majú byť relé zapnuté. Ak je kratšie ako celý deň, aktivuje sa funkcia časovača. Zadajte „0“ pre celú noc.",
+            "invalid": "Zadajte platnú dobu trvania v minútach.",
+            "label": "Trvanie",
+            "placeholder": "Trvanie"
           },
           "playlists": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Vyberte zoznam(y) skladieb, ktoré sa majú prehrať.",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Zoznamy skladieb",
+            "placeholder": "Vyberte zoznamy skladieb"
           },
           "power_on_time": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Trvanie v sekundách na prepnutie relé.",
+            "invalid": "Zadajte platné číslo.",
+            "label": "Čas zapnutia",
+            "placeholder": "Čas zapnutia"
           },
           "relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Vyberte relé, ktoré chcete prepínať.",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Relé",
+            "placeholder": "Vyberte relé"
           },
           "settle_time": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Trvanie v sekundách medzi dvoma akciami.",
+            "invalid": "Zadajte platné číslo.",
+            "label": "Čas ustálenia",
+            "placeholder": "Čas ustálenia"
           },
           "trigger_threshold": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Zadajte počet alarmov pred vykonaním akcie.",
+            "invalid": "Zadajte platné číslo.",
+            "label": "Prah alarmu",
+            "placeholder": "Prahová hodnota"
           },
           "tweaks": {
             "dimmer": {
-              "info": ""
+              "info": "Vyberte oneskorenie a trvanie zapnutia alebo vypnutia stmievača v minútach. Maximálne trvanie je 180 minút."
             },
             "off": {
               "dimmer": {
-                "label": ""
+                "label": "Trvanie vypnutia stmievača"
               },
               "relay": {
-                "label": ""
+                "label": "Oneskorenie relé vypnuté"
               }
             },
             "on": {
               "dimmer": {
-                "label": ""
+                "label": "Trvanie stmievania"
               },
               "relay": {
-                "label": ""
+                "label": "Oneskorenie relé zapnuté"
               }
             },
             "relay": {
-              "info": ""
+              "info": "Vyberte oneskorenie v minútach, ktoré relé čaká pred zapnutím. Maximálne oneskorenie je 180 minút."
             }
           }
         },
         "low": {
           "begin": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Čas dňa, kedy sa relé každú noc zapínajú.",
+            "invalid": "Zadajte platný čas.",
+            "label": "Čas začiatku",
+            "placeholder": "Zadajte čas začiatku"
           },
           "depend_on_relays": {
-            "help": "",
-            "invalid": "",
-            "label": "",
-            "placeholder": ""
+            "help": "Vyberte relé, od ktorých sú tieto relé závislé.",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Závislé na relé",
+            "placeholder": "Vyberte relé"
           },
           "depend_on_relays_mode": {
-            "help": "",
-            "invalid": "",
-            "label": "",
+            "help": "Vyberte si režim v závislosti",
+            "invalid": "Prosím, urobte si voľbu.",
+            "label": "Závislý režim",
             "placeholder": ""
           },
           "door_status": {
