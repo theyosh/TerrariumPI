@@ -1836,7 +1836,7 @@
       "currency": {
         "help": "Vyberte menu rozhrania.",
         "invalid": "Prosím, urobte si voľbu.",
-        "label": ""
+        "label": "Mena"
       },
       "dashboard_mode": {
         "help": "Vyberte, ako bude vyzerať dashboard.",
@@ -1903,412 +1903,412 @@
         "title": "Systémové nastavenia"
       },
       "password": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte heslo na overenie.",
+        "invalid": "Heslo nemôže byť prázdne.",
+        "label": "Nové heslo"
       },
       "password2": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Znova zadajte nové heslo.",
+        "invalid": "Nové heslo sa nezhoduje.",
+        "label": "Potvrdiť nové heslo"
       },
       "pi-wattage": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte celkovú spotrebu energie Raspberry Pi so všetkými pripojenými USB zariadeniami.",
+        "invalid": "Zadajte minimálnu hodnotu {value}.",
+        "label": "Pi spotreba energie"
       },
       "port": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte číslo portu na počúvanie pripojení. Predvolená hodnota je 8090.",
+        "invalid": "Zadajte minimálnu hodnotu {value}.",
+        "label": "Číslo portu"
       },
       "power_price": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte cenu za kWh.",
+        "invalid": "Zadajte minimálnu hodnotu {value}.",
+        "label": "Cena energie"
       },
       "profile_image": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Aktualizujte vlastný obrázok použitý v ponuke.",
+        "invalid": "Neplatný formát profilového obrázka.",
+        "label": "Profilový obrázok"
       },
       "save": {
         "ok": {
-          "message": "",
-          "title": ""
+          "message": "Nastavenia sú aktualizované.",
+          "title": "Aktualizácia v poriadku"
         }
       },
       "show_min_max_gauge": {
-        "help": "",
-        "label": ""
+        "help": "Na ukazovateľoch ukážte minimálnu a maximálnu hodnotu.",
+        "label": "Zobraziť minimálne a maximálne hodnoty v grafoch meradla"
       },
       "temperature_indicator": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Vyberte indikátor teploty. Ovplyvňuje iba aktuálne hodnoty.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Typ teploty"
       },
       "title": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte vlastný názov.",
+        "invalid": "Názov nemôže byť prázdny.",
+        "label": "Názov"
       },
       "unsplash_access_key": {
-        "help": "",
-        "label": ""
+        "help": "Zadajte prístupový kľúč vytvorenej aplikácie Unsplash.",
+        "label": "Prístupový kľúč Unsplash"
       },
       "unsplash_query": {
-        "help": "",
-        "label": ""
+        "help": "Zadajte kľúčové slová pre výber obrázkov na pozadí.",
+        "label": "Kľúčové slová Unsplash"
       },
       "username": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte používateľské meno pre overenie.",
+        "invalid": "Používateľské meno nemôže byť prázdne.",
+        "label": "Používateľské meno"
       },
       "water_price": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte cenu za liter/galón.",
+        "invalid": "Zadajte minimálnu hodnotu {value}.",
+        "label": "Cena vody"
       },
       "water_volume_indicator": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Vyberte indikátor objemu vody. Ovplyvňuje iba aktuálne hodnoty.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Typ objemu kvapaliny"
       },
       "wind_speed_indicator": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Vyberte indikátor rýchlosti vetra. Ovplyvňuje iba aktuálne hodnoty.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Typ rýchlosti vetra"
       }
     },
     "status": {
       "cpu_temp": {
-        "title": ""
+        "title": "Teplota CPU"
       },
       "disk": {
-        "title": ""
+        "title": "Využitie disku"
       },
       "load": {
-        "title": ""
+        "title": "Zaťaženie systému"
       },
       "memory": {
-        "title": ""
+        "title": "Využitie pamäte"
       },
       "summary": {
-        "title": ""
+        "title": "Súhrn systému"
       },
-      "title": "",
+      "title": "Stav systému",
       "uptime": {
-        "title": ""
+        "title": "Doba prevádzky systému"
       }
     }
   },
   "table": {
     "field": {
-      "range": ""
+      "range": "rozsah"
     },
     "header": {
-      "actions": "",
-      "duration": "",
-      "filename": "",
-      "filesize": "",
-      "mode": "",
-      "name": "",
-      "number_files": "",
-      "repeat": "",
-      "shuffle": "",
-      "status": "",
-      "type": "",
-      "volume": ""
+      "actions": "Akcie",
+      "duration": "Trvanie",
+      "filename": "Názov súboru",
+      "filesize": "Veľkosť súboru",
+      "mode": "Režim",
+      "name": "Meno",
+      "number_files": "# Súbory",
+      "repeat": "Opakovať",
+      "shuffle": "Náhodne",
+      "status": "Stav",
+      "type": "Typ",
+      "volume": "Hlasitosť zvuku"
     }
   },
   "topbar": {
-    "current_status": "",
-    "door_status": "",
-    "upcoming_events": ""
+    "current_status": "Aktuálny stav",
+    "door_status": "Stav dverí",
+    "upcoming_events": "{number, plural, =0 {no events} =1 {one event} other {# events}}"
   },
   "userpanel": {
     "login": {
-      "text1": "",
-      "text2": ""
+      "text1": "Režim iba na čítanie",
+      "text2": "Prihlásenie"
     },
     "logout": {
-      "text1": "",
-      "text2": ""
+      "text1": "Ahoj {meno}",
+      "text2": "Odhlásiť sa"
     }
   },
   "weather": {
-    "current": "",
-    "forecast": "",
+    "current": "Súčasný",
+    "forecast": "Predpoveď",
     "menu": {
-      "title": ""
+      "title": "Počasie"
     },
-    "no_data": "",
+    "no_data": "Nie sú k dispozícii žiadne údaje o počasí",
     "settings": {
       "fields": {
-        "error": ""
+        "error": "Nie všetky povinné polia sú vyplnené správne."
       },
-      "information": "",
+      "information": "Ak chcete používať systém počasia, musíte si vytvoriť bezplatný účet na {source_link}.",
       "save": {
         "ok": {
-          "message": ""
+          "message": "Nastavenie počasia sa uloží."
         }
       },
-      "title": "",
+      "title": "Nastavenia počasia",
       "weather_source": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte úplnú URL adresu rozhrania API OpenWeatherMap, napríklad: {api_url_example}.",
+        "invalid": "Zadaná URL adresa nie je platná.",
+        "label": "Zdrojové URL"
       }
     },
-    "title": ""
+    "title": "Počasie"
   },
   "webcams": {
     "actions": {
-      "delete": "",
-      "ignore": "",
-      "settings": ""
+      "delete": "Odstrániť webkameru",
+      "ignore": "Ignorovať webkameru",
+      "settings": "Upraviť webkameru"
     },
     "archive": {
       "modal": {
         "loading": {
-          "status": "",
-          "title": ""
+          "status": "Aktuálne načítané obrázky: {total} ... ({percentage}%)",
+          "title": "Začína sa načítavať archívne obrázky z webkamery ..."
         }
       },
-      "no_images": ""
+      "no_images": "Nie sú k dispozícii žiadne archívne obrázky"
     },
     "confirm": {
       "ignore": {
-        "message": ""
+        "message": "Naozaj chcete ignorovať webkameru ''{name}''?"
       }
     },
     "controls": {
-      "archive": "",
-      "new_marker": "",
-      "save_raw_image": "",
-      "show_markers": "",
-      "toggle_volume": ""
+      "archive": "Archív",
+      "new_marker": "Pridať značku",
+      "save_raw_image": "Uložiť obrázok RAW",
+      "show_markers": "Zobraziť značky",
+      "toggle_volume": "Prepnúť hlasitosť"
     },
     "delete": {
       "confirm": {
-        "message": ""
+        "message": "Naozaj chcete odstrániť webkameru ''{name}''?"
       },
       "error": {
-        "message": ""
+        "message": "Webkameru ''{name}'' sa nepodarilo odstrániť!\nChyba: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "Webová kamera ''{name}'' bola odstránená."
       }
     },
     "exclude": {
       "error": {
-        "message": ""
+        "message": "Webkameru ''{name}'' nebolo možné ignorovať!\nChyba: {error}"
       },
       "ok": {
-        "message": ""
+        "message": "Webová kamera ''{name}'' je ignorovaná."
       }
     },
     "marker": {
       "delete": {
         "confirm": {
-          "message": ""
+          "message": "Naozaj chcete odstrániť značku?"
         },
         "error": {
-          "message": ""
+          "message": "Značku sa nepodarilo odstrániť"
         },
         "invalid": {
-          "message": ""
+          "message": "Neplatná značka"
         }
       }
     },
     "markers": {
       "settings": {
-        "delete": "",
+        "delete": "Odstrániť",
         "doors": {
-          "help": "",
-          "invalid": "",
-          "label": ""
+          "help": "Vyberte senzory, ktoré chcete zobraziť.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Senzory"
         },
-        "title": ""
+        "title": "Senzory"
       }
     },
     "menu": {
       "new": {
-        "title": ""
+        "title": "Nová webkamera"
       },
       "status": {
-        "title": ""
+        "title": "Stav"
       },
-      "title": ""
+      "title": "Webkamery"
     },
     "settings": {
       "address": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Viac informácií nájdete online.",
+        "invalid": "Zadaná adresa nie je platná. Nemôže byť prázdna.",
+        "label": "Adresa",
+        "placeholder": "Zadajte adresu"
       },
       "archive": {
         "door": {
-          "help": "",
-          "invalid": "",
-          "label": "",
+          "help": "Stav dverí pre nasnímanie archívneho obrazu.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Stav dverí archivácie",
           "options": {
-            "close": "",
-            "ignore": "",
-            "open": ""
+            "close": "Zatvoriť",
+            "ignore": "Ignorovať",
+            "open": "OTVORENÉ"
           },
-          "placeholder": ""
+          "placeholder": "Vyberte stav dverí archívu"
         },
         "flash": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Vyberte relé, ktoré bude fungovať ako blikač.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Blesk",
+          "placeholder": "Vyberte voliteľné relé pre blesk"
         },
         "history": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte počet dní, počas ktorých sa má história uchovávať.",
+          "invalid": "Zadajte minimálnu hodnotu {value}.",
+          "label": "História archivácie v dňoch",
+          "placeholder": "Zadajte číslo"
         },
         "light": {
-          "help": "",
-          "invalid": "",
-          "label": "",
+          "help": "Stav svetla pre nasnímanie archívneho obrázka.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Stav svetla archivácie",
           "options": {
-            "ignore": "",
-            "off": "",
-            "on": ""
+            "ignore": "Ignorovať",
+            "off": "Keď je vypnuté",
+            "on": "Keď je zapnuté"
           },
-          "placeholder": ""
+          "placeholder": "Vyberte stav osvetlenia archivácie"
         },
         "options": {
-          "day_1": "",
-          "disabled": "",
-          "hour_1": "",
-          "hour_12": "",
-          "hour_3": "",
-          "hour_6": "",
-          "minute_1": "",
-          "minute_15": "",
-          "minute_30": "",
-          "minute_5": "",
-          "motion": ""
+          "day_1": "1 deň",
+          "disabled": "Zakázané",
+          "hour_1": "1 hodina",
+          "hour_12": "12 hodín",
+          "hour_3": "3 hodiny",
+          "hour_6": "6 hodín",
+          "minute_1": "1 minúta",
+          "minute_15": "15 minút",
+          "minute_30": "30 minút",
+          "minute_5": "5 minút",
+          "motion": "Pohyb"
         },
         "state": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Vyberte trvanie medzi archivovanými obrázkami.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Archivácia",
+          "placeholder": "Vyberte archiváciu"
         }
       },
       "awb": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Vyberte vyváženie bielej.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Vyváženie bielej",
         "options": {
-          "auto": "",
-          "cloudy": "",
-          "flash": "",
-          "fluorescent": "",
-          "greyworld": "",
-          "horizon": "",
-          "incandescent": "",
-          "off": "",
-          "shade": "",
-          "sunlight": "",
-          "tungsten": ""
+          "auto": "Automaticky",
+          "cloudy": "Zamračené",
+          "flash": "Blesk",
+          "fluorescent": "Fluorescenčné",
+          "greyworld": "Sivý svet",
+          "horizon": "Horizont",
+          "incandescent": "Žiarovka",
+          "off": "Vypnuté",
+          "shade": "Tieň",
+          "sunlight": "Slnečné svetlo",
+          "tungsten": "Volfrám"
         },
-        "placeholder": ""
+        "placeholder": "Vyberte vyváženie bielej"
       },
       "hardware": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Vyberte typ hardvéru pre toto tlačidlo.",
+        "invalid": "Vyberte typ hardvéru.",
+        "label": "Hardvér",
+        "placeholder": "Vyberte hardvér"
       },
       "height": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte výšku rozlíšenia v pixeloch.",
+        "invalid": "Zadajte minimálnu hodnotu {value}.",
+        "label": "Výška"
       },
       "motion": {
         "area": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte veľkosť oblasti.",
+          "invalid": "Zadajte minimálnu hodnotu {value}.",
+          "label": "Minimálna plocha pohybu",
+          "placeholder": "Zadajte číslo"
         },
         "boxes": {
-          "help": "",
-          "invalid": "",
-          "label": "",
+          "help": "Zobraziť pohyblivé rámčeky na archivovaných obrázkoch.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Zobraziť pohyblivé rámčeky",
           "options": {
-            "blue": "",
-            "green": "",
-            "none": "",
-            "red": ""
+            "blue": "Modrá",
+            "green": "Zelená",
+            "none": "Žiadne",
+            "red": "Červená"
           },
-          "placeholder": ""
+          "placeholder": "Zobraziť rámčeky pohybu"
         },
         "frame": {
-          "help": "",
-          "invalid": "",
-          "label": "",
+          "help": "Ktorý rámec použiť na detekciu pohybu.",
+          "invalid": "Prosím, urobte si voľbu.",
+          "label": "Rámec na porovnávanie pohybu",
           "options": {
-            "archived": "",
-            "last": ""
+            "archived": "Posledný archivovaný snímok",
+            "last": "Posledný snímok"
           },
-          "placeholder": ""
+          "placeholder": "Vyberte, ktorý rámček chcete porovnať"
         },
         "threshold": {
-          "help": "",
-          "invalid": "",
-          "label": "",
-          "placeholder": ""
+          "help": "Zadajte prahovú hodnotu pohybu.",
+          "invalid": "Zadajte minimálnu hodnotu {value}.",
+          "label": "Prahová hodnota delta pohybu",
+          "placeholder": "Zadajte číslo"
         }
       },
       "name": {
-        "help": "",
-        "invalid": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Zadajte ľahko zapamätateľné meno.",
+        "invalid": "Zadané meno nie je platné. Nemôže byť prázdne.",
+        "label": "Meno",
+        "placeholder": "Zadajte meno"
       },
       "preview": {
-        "label": ""
+        "label": "Náhľad"
       },
       "rotation": {
-        "help": "",
-        "invalid": "",
-        "label": "",
+        "help": "Vyberte rotáciu.",
+        "invalid": "Prosím, urobte si voľbu.",
+        "label": "Rotácia",
         "options": {
-          "degrees_0": "",
-          "degrees_180": "",
-          "degrees_270": "",
-          "degrees_90": "",
-          "flip_h": "",
-          "flip_v": "",
-          "zero_degrees": ""
+          "degrees_0": "0 stupňov",
+          "degrees_180": "180 stupňov",
+          "degrees_270": "270 stupňov",
+          "degrees_90": "90 stupňov",
+          "flip_h": "Otočiť vodorovne",
+          "flip_v": "Otočiť vertikálne",
+          "zero_degrees": "0 stupňov"
         },
-        "placeholder": ""
+        "placeholder": "Vyberte rotáciu"
       },
       "save": {
         "error": {
-          "required_fields": ""
+          "required_fields": "Nie všetky povinné polia sú vyplnené správne."
         },
         "ok": {
-          "message": ""
+          "message": "Webová kamera ''{name}'' je aktualizovaná."
         }
       },
-      "title": "",
+      "title": "Nastavenia webovej kamery",
       "width": {
-        "help": "",
-        "invalid": "",
-        "label": ""
+        "help": "Zadajte šírku rozlíšenia v pixeloch.",
+        "invalid": "Zadajte minimálnu hodnotu {value}.",
+        "label": "Šírka"
       }
     },
-    "title": ""
+    "title": "Webkamery"
   }
 }
