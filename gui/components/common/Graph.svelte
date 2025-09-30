@@ -73,8 +73,19 @@
       new_data = extendGraphData(new_data, period);
     }
 
-    if (mode === 'sensors' && settings.graph_smooth_value > 0) {
-      new_data = smoothing(new_data, settings.graph_smooth_value);
+    if (mode === 'sensors') {
+      // Process last average value
+      // Sometimes not all sensors are measured, so the average value is going sky high or very low
+      // Here we fix that by using the second to last value as last value
+      if (new_data.length >= 2) {
+        new_data[new_data.length - 1].alarm_min = new_data[new_data.length - 2].alarm_min;
+        new_data[new_data.length - 1].alarm_max = new_data[new_data.length - 2].alarm_max;
+        new_data[new_data.length - 1].value = new_data[new_data.length - 2].value;
+      }
+
+      if (settings.graph_smooth_value > 0) {
+        new_data = smoothing(new_data, settings.graph_smooth_value);
+      }
     }
 
     if (init) {
