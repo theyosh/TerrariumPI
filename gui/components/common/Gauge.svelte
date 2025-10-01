@@ -113,11 +113,11 @@
         gauge.options.staticLabels = gaugeStaticLabels;
       }
 
-      if (gauge.maxValue !==  $sensors[id].limit_max) {
+      if (gauge.maxValue !== $sensors[id].limit_max) {
         gauge.maxValue = $sensors[id].limit_max;
       }
 
-      if (gauge.minValue !==  $sensors[id].limit_min) {
+      if (gauge.minValue !== $sensors[id].limit_min) {
         gauge.setMinValue($sensors[id].limit_min);
       }
 
