@@ -76,8 +76,8 @@
 
   onMount(() => {
     gauge = new Gauge.Gauge(document.getElementById(`gauge_${id}`)).setOptions(opts); // create sexy gauge!
-    gauge.maxValue = $sensors[id]['limit_max']; // set max gauge value
-    gauge.setMinValue($sensors[id]['limit_min']); // set min value
+    gauge.maxValue = $sensors[id].limit_max; // set max gauge value
+    gauge.setMinValue($sensors[id].limit_min); // set min value
     $sensors[id].changed = true; // Trigger draw update
   });
 
@@ -111,6 +111,14 @@
 
       if (gaugeStaticLabels.labels.length > 0) {
         gauge.options.staticLabels = gaugeStaticLabels;
+      }
+
+      if (gauge.maxValue !==  $sensors[id].limit_max) {
+        gauge.maxValue = $sensors[id].limit_max;
+      }
+
+      if (gauge.minValue !==  $sensors[id].limit_min) {
+        gauge.setMinValue($sensors[id].limit_min);
       }
 
       gauge.set($sensors[id].value); // set actual value
