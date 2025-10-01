@@ -113,14 +113,20 @@
         gauge.options.staticLabels = gaugeStaticLabels;
       }
 
+      let forceUpdate = false;
       if (gauge.maxValue !== $sensors[id].limit_max) {
         gauge.maxValue = $sensors[id].limit_max;
+        forceUpdate = true;
       }
 
       if (gauge.minValue !== $sensors[id].limit_min) {
         gauge.setMinValue($sensors[id].limit_min);
+        forceUpdate = true;
       }
 
+      if (forceUpdate) {
+        gauge.set($sensors[id].value * 1.05); // Just bump a bit to force update the gauge rendering
+      }
       gauge.set($sensors[id].value); // set actual value
       gauge_value =
         type === 'filesize' || type === 'memory'
