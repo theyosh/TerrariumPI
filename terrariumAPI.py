@@ -843,7 +843,7 @@ class terrariumAPI(object):
         try:
             button = Button[button]
             if "hour" == period:
-                period = 1/24
+                period = 1 / 24
             elif "day" == period:
                 period = 1
             elif "week" == period:
@@ -1413,7 +1413,7 @@ class terrariumAPI(object):
         try:
             relay = Relay[relay]
             if "hour" == period:
-                period = 1/24
+                period = 1 / 24
             elif "day" == period:
                 period = 1
             elif "week" == period:
@@ -1540,7 +1540,7 @@ class terrariumAPI(object):
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
     def sensor_history(self, filter=None, action="history", period="day"):
         if "hour" == period:
-            period = 1/24
+            period = 1 / 24
         elif "day" == period:
             period = 1
         elif "week" == period:
@@ -1691,23 +1691,23 @@ class terrariumAPI(object):
             sensor_data = sensor.to_dict()
             # Send websocket message
             self.webserver.websocket_message(
-                    "sensor",
-                    {
-                        field: sensor_data[field]
-                        for field in [
-                            "id",
-                            "value",
-                            "error",
-                            "alarm_min",
-                            "alarm_max",
-                            "limit_min",
-                            "limit_max",
-                            "alarm",
-                            "type",
-                            "name",
-                        ]
-                    },
-                )
+                "sensor",
+                {
+                    field: sensor_data[field]
+                    for field in [
+                        "id",
+                        "value",
+                        "error",
+                        "alarm_min",
+                        "alarm_max",
+                        "limit_min",
+                        "limit_max",
+                        "alarm",
+                        "type",
+                        "name",
+                    ]
+                },
+            )
 
             self.webserver.engine.update(terrariumSensor, **request.json)
             if "chirp" == sensor.hardware.lower():

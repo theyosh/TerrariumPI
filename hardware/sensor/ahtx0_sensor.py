@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
+
 logger = terrariumLogging.logging.getLogger("terrariumSensor")
 
 from . import terrariumI2CSensor
 
 # pip install py-AHTx0
 import py_AHTx0
+
 
 class terrariumATHx0Sensor(terrariumI2CSensor):
     HARDWARE = "athx0"
@@ -20,9 +22,6 @@ class terrariumATHx0Sensor(terrariumI2CSensor):
         return device
 
     def _get_data(self):
-        data = {
-            "temperature": self.device.temperature,
-            "humidity" : self.device.relative_humidity
-        }
+        data = {"temperature": self.device.temperature, "humidity": self.device.relative_humidity}
 
         return data
