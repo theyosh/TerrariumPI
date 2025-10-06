@@ -1703,6 +1703,7 @@ class terrariumAPI(object):
                             "limit_min",
                             "limit_max",
                             "alarm",
+                            "type",
                             "name",
                         ]
                     },

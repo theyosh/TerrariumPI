@@ -125,7 +125,9 @@
       }
 
       if (forceUpdate) {
-        gauge.set($sensors[id].value * 1.05); // Just bump a bit to force update the gauge rendering
+        gauge.animationSpeed = 0;
+        gauge.set($sensors[id].value + 1); // Just bump a bit to force update the gauge rendering
+        gauge.animationSpeed = 32; // set animation speed (32 is default value)
       }
       gauge.set($sensors[id].value); // set actual value
       gauge_value =
