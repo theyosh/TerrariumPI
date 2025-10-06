@@ -107,4 +107,28 @@
       }
     });
   });
+
+  jQuery(function () {
+    const tagCloud = jQuery('div#tags');
+
+    if (tagCloud.length === 1) {
+        const maxWidth = 100;
+        const offset = 2;
+        const tags = tagCloud.find('span.text-muted');
+        const values = []
+
+        for (let tag of tags) {
+            values.push(tag.textContent * 1);
+        }
+
+        const maxValue = Math.max.apply(null, values);
+
+        for (let tag of tags) {
+            let link = jQuery(tag).parent();
+            let surrounding_padding = link.css('padding-right').replace('px','') * 1;
+            surrounding_padding = Math.round(surrounding_padding + (maxWidth * (((tag.textContent * 1) + offset) / maxValue)));
+            link.css({ 'padding-right': surrounding_padding + 'px', 'padding-left': surrounding_padding + 'px'})
+        }
+    }
+  });
 </script>
