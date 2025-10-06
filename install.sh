@@ -469,9 +469,11 @@ EOF
 # Setup logging symlinks
 if [ ! -h log/terrariumpi.log ]; then
   su -c 'ln -s /dev/shm/terrariumpi.log log/terrariumpi.log' -s /bin/bash "${SCRIPT_USER}" 2>/dev/null
+  chown ${SCRIPT_USER}: /dev/shm/terrariumpi.log
 fi
 if [ ! -h log/terrariumpi.access.log ]; then
   su -c 'ln -s /dev/shm/terrariumpi.access.log log/terrariumpi.access.log' -s /bin/bash "${SCRIPT_USER}" 2>/dev/null
+  chown ${SCRIPT_USER}: /dev/shm/terrariumpi.access.log
 fi
 
 PROGRESS=100
