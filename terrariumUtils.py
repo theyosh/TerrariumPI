@@ -19,6 +19,7 @@ import collections
 from importlib import import_module
 from pathlib import Path
 import inspect
+from urllib.parse import urlparse, urlunparse
 
 from cryptography.fernet import Fernet
 
@@ -425,9 +426,32 @@ class terrariumUtils:
                 data = None
 
         except Exception as ex:
-            logger.exception("Error parsing remote data at url %s. Exception %s" % (url, ex))
+            logger.exception("Error parsing remote data at url %s. Exception %s" % (terrariumUtils.sanitize_url(url), ex))
 
         return data
+
+
+    @staticmethod
+    def sanitize_url(url):
+        parsed = urlparse(url)
+        netloc = parsed.hostname if parsed.hostname else ''
+        if parsed.port:
+            netloc += f':{parsed.port}'
+        # Preserve user presence, replace password with asterisks if it exists
+        if parsed.username:
+            if parsed.password:
+                netloc = f'{parsed.username}:****@{netloc}'
+            else:
+                netloc = f'{parsed.username}@{netloc}'
+        sanitized = urlunparse((
+            parsed.scheme,
+            netloc,
+            parsed.path,
+            parsed.params,
+            parsed.query,
+            parsed.fragment
+        ))
+        return sanitized
 
     @staticmethod
     def get_script_data(script):
