@@ -115,7 +115,7 @@
       const maxWidth = 100;
       const offset = 2;
       const tags = tagCloud.find('span.text-muted');
-      const values = [];
+      const values = new Array();
 
       for (let tag of tags) {
         values.push(tag.textContent * 1);
