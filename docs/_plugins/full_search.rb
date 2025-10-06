@@ -8,16 +8,13 @@ Jekyll::Hooks.register :site, :post_write do |site|
 
     posts.docs.each do |post|
       json_content += '{'
-
-      json_content += '"title": "' + escape(post.data['title'].gsub(/\s+/, ' ')) + '",'
-      json_content += '"url": "' + site.baseurl +  post.url + '",'
-      json_content += '"categories": "' + join(post.data['categories'],", ") + '",'
-      json_content += '"tags": "' + join(post.data['tags'],", ") + '",'
-      json_content += '"date": "' + post.date.to_s + '",'
-      json_content += '"snippet" : "' + replace(escape(strip_newlines(strip_html(post.content)).gsub(/\s+/, ' ')), '\\' , '\\\\') + '"'
-
+      json_content += '"title":"' + escape(post.data['title'].gsub(/\s+/, ' ')) + '",'
+      json_content += '"url":"' + site.baseurl +  post.url + '",'
+      json_content += '"categories":"' + join(post.data['categories'],", ") + '",'
+      json_content += '"tags":"' + join(post.data['tags'],", ") + '",'
+      json_content += '"date":"' + post.date.to_s + '",'
+      json_content += '"content":"' + strip_html(post.content).gsub(/\n+/, ' ').gsub(/"/,'\"') + '"'
       json_content += '}'
-
       json_content += ','
     end
 
@@ -26,6 +23,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
   json_content = json_content[0...-1]
   json_content += ']'
 
+  # Overwrite template version
   path = site.config['destination'] + '/assets/js/data/search.json'
   FileUtils.mkdir_p(File.dirname(path))
   File.open(path, 'w') do |f|
