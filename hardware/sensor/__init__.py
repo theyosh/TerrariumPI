@@ -508,7 +508,14 @@ class terrariumBluetoothSensor(terrariumSensor):
     def _scan_bt_sensors(sensor_class, ids=[], unit_value_callback=None, trigger_callback=None):
         def __get_bluetooth_devices():
             devices_regex = r"hci(?P<device_id>[0-9]+)"
-            return list(map(int, re.findall(devices_regex, terrariumUtils.get_script_data('hcitool dev | grep hci').decode().strip())))
+            return list(
+                map(
+                    int,
+                    re.findall(
+                        devices_regex, terrariumUtils.get_script_data("hcitool dev | grep hci").decode().strip()
+                    ),
+                )
+            )
 
         hardware_devices = __get_bluetooth_devices()
         if len(hardware_devices) == 0:

@@ -6,7 +6,7 @@ from gevent import monkey
 monkey.patch_all()
 
 # Disabled new bluepy3 as it does not seems to work anymore...:(
-#import sys
+# import sys
 # try:
 #     sys.modules["bluepy"] = __import__("bluepy3")
 # except Exception:
