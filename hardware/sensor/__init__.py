@@ -4,6 +4,7 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger("terrariumSensor")
 
 import statistics
+import re
 from hashlib import md5
 from time import time, sleep
 from func_timeout import func_timeout, FunctionTimedOut
@@ -505,9 +506,19 @@ class terrariumBluetoothSensor(terrariumSensor):
 
     @staticmethod
     def _scan_bt_sensors(sensor_class, ids=[], unit_value_callback=None, trigger_callback=None):
+        def __get_bluetooth_devices():
+            devices_regex = r"hci(?P<device_id>[0-9]+)"
+            return list(map(int, re.findall(devices_regex, terrariumUtils.get_script_data('hcitool dev | grep hci').decode().strip())))
+
+        hardware_devices = __get_bluetooth_devices()
+        if len(hardware_devices) == 0:
+            logger.warning(
+                "Bluetooth scanning is not enabled for normal users or there are zero Bluetooth LE devices available.... bluetooth is disabled!"
+            )
+            return []
+
         # Due to multiple bluetooth dongles, we are looping 10 times to see which devices can scan. Exit after first success
-        ok = True
-        for counter in range(10):
+        for counter in hardware_devices:
             try:
                 devices = Scanner(counter).scan(terrariumBluetoothSensor.__SCAN_TIME)
                 for device in devices:
@@ -532,11 +543,5 @@ class terrariumBluetoothSensor(terrariumSensor):
 
             except Exception as ex:
                 logger.warning(f"Error during scanning {sensor_class.NAME}: {ex}")
-                ok = False
-
-        if not ok:
-            logger.warning(
-                "Bluetooth scanning is not enabled for normal users or there are zero Bluetooth LE devices available.... bluetooth is disabled!"
-            )
 
         return []
