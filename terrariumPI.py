@@ -5,13 +5,13 @@ from gevent import monkey
 
 monkey.patch_all()
 
-import sys
-
-try:
-    sys.modules["bluepy"] = __import__("bluepy3")
-except Exception:
-    # Import should only be working on a Bookworm OS
-    pass
+# Disabled new bluepy3 as it does not seems to work anymore...:(
+#import sys
+# try:
+#     sys.modules["bluepy"] = __import__("bluepy3")
+# except Exception:
+#     # Import should only be working on a Bookworm OS
+#     pass
 
 import gettext
 

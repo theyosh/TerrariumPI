@@ -40,16 +40,28 @@ RUN  apt-get -o Acquire::ForceIPv4=true update \
   && apt-get -o Acquire::ForceIPv4=true full-upgrade -y --no-install-recommends \
   && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends libasound2-dev libglib2.0-dev libbluetooth-dev make
 
+# # requirements are slightly different for docker
+# # overruling does not work here, pip will exit with non 0 which will stop the build
+# RUN  sed -i 's/paho-mqtt==.*//g' requirements.txt \
+#   && sed -i 's/icalendar==.*//g' requirements.txt \
+#   && sed -i 's/opencv-python-headless==.*//g' requirements.txt \
+#   && sed -i 's/git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3/g' requirements.txt \
+#   && pip install smbus==1.1.post2 --extra-index-url https://www.piwheels.org/simple \
+#   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
+#   && sed -i 's/BLUEZ_VERSION: str = get_btctl_version.*/BLUEZ_VERSION: str = "5.66"/' /opt/venv/lib/python3.11/site-packages/bluepy3/helpermaker.py \
+#   && python -c "import bluepy3.btle" \
+#   && find /opt/venv -type d -name "test*" | xargs rm -rf  \
+#   && find /opt/venv -type d -name "__pycache__" | xargs rm -rf \
+#   && find /opt/venv -type d -name ".git" | xargs rm -rf \
+#   && find /opt/venv -type f -name "*.pyc" -delete
+
 # requirements are slightly different for docker
 # overruling does not work here, pip will exit with non 0 which will stop the build
 RUN  sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/icalendar==.*//g' requirements.txt \
   && sed -i 's/opencv-python-headless==.*//g' requirements.txt \
-  && sed -i 's/git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3/g' requirements.txt \
   && pip install smbus==1.1.post2 --extra-index-url https://www.piwheels.org/simple \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
-  && sed -i 's/BLUEZ_VERSION: str = get_btctl_version.*/BLUEZ_VERSION: str = "5.66"/' /opt/venv/lib/python3.11/site-packages/bluepy3/helpermaker.py \
-  && python -c "import bluepy3.btle" \
   && find /opt/venv -type d -name "test*" | xargs rm -rf  \
   && find /opt/venv -type d -name "__pycache__" | xargs rm -rf \
   && find /opt/venv -type d -name ".git" | xargs rm -rf \

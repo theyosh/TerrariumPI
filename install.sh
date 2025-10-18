@@ -98,8 +98,8 @@ elif [ "${OS}" == "bookworm" ]; then
   # Python package version difference per OS
   # On bookworm we use the OS package versions
   PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/}"
-  # Need a upgraded bluepy library
-  PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
+  # Need a upgraded bluepy library => disabled!
+  # PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
 
 fi
 
