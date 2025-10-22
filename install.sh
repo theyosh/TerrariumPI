@@ -90,6 +90,8 @@ elif [ "${OS}" == "bullseye" ]; then
   # Python 3.9
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
 
+  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.5.1}"
+
 elif [ "${OS}" == "bookworm" ]; then
   # Python 3.11
   # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
@@ -441,7 +443,7 @@ EOF
 # https://github.com/marcelrv/miflora,
 # https://github.com/IanHarvey/bluepy/issues/218,
 # https://github.com/Mausy5043/bluepy3?tab=readme-ov-file#installation
-find . -name "bluepy*-helper" -exec setcap 'cap_net_raw,cap_net_admin+eip' {} \;
+find venv/ -name "bluepy*-helper" -exec setcap 'cap_net_raw,cap_net_admin+eip' {} \;
 
 PROGRESS=$((PROGRESS + 1))
 cat <<EOF
