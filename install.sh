@@ -88,20 +88,20 @@ if [ "${OS}" == "buster" ]; then
 
 elif [ "${OS}" == "bullseye" ]; then
   # Python 3.9
-  OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
-
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.5.1}"
+  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/Pillow==11.2.1}"
+
+  OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
 
 elif [ "${OS}" == "bookworm" ]; then
   # Python 3.11
-  # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
-  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev"
-
-  # Python package version difference per OS
-  # On bookworm we use the OS package versions
   PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/}"
   # Need a upgraded bluepy library => disabled!
   # PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
+
+  # On bookworm we use the OS package versions
+  # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
+  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev"
 
 fi
 

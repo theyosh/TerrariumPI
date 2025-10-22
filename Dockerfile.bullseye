@@ -44,6 +44,7 @@ COPY contrib/python3-voltcraft-sem6000.patch.diff .
 RUN  sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/icalendar==.*//g' requirements.txt \
   && sed -i 's/gevent==.*/gevent==25.5.1/g' requirements.txt \
+  && sed -i 's/gevent==.*/Pillow==11.2.1/g' requirements.txt \
   && pip install smbus==1.1.post2 --extra-index-url https://www.piwheels.org/simple \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
   && find /opt/venv -type d -name "test*" | xargs rm -rf  \
