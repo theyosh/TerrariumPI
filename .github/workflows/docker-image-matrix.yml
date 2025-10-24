@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  docker:
+  build:
     strategy:
         matrix:
           os: [buster, bullseye, bookworm]

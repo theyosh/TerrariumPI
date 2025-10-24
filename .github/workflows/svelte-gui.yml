@@ -17,7 +17,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  continuous-delivery:
+  build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -44,6 +44,9 @@ jobs:
       - name: Build Project
         run: npm run build
 
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
       - name: Commit GUI build
         run: |
           git config --global user.name 'GitHub Actions'
