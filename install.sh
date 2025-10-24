@@ -56,6 +56,7 @@ if [ "${OS}" == "buster" ]; then
 
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==22.10.2}"
   PIP_MODULES="${PIP_MODULES//bcrypt==+([^ ])/bcrypt==4.1.3}"
+  PIP_MODULES="${PIP_MODULES//cryptography==+([^ ])/cryptography==45.0.7}"
 
   PIP_MODULES="${PIP_MODULES//Pillow==+([^ ])/Pillow==9.5.0}"
   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
