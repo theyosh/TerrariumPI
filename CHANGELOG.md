@@ -2,12 +2,229 @@ Changelog
 =========
 
 
+4.13.0 (2025-10-24)
+-------------------
+
+**New**
+------
+
+- Add new release post. [TheYOSH]
+- Add Slovak translation to documentation. [TheYOSH]
+- Add missing documentation image. [TheYOSH]
+- Add new sensor AHTX0. [TheYOSH]
+- Add missing documentation images. [TheYOSH]
+- Added translation using Weblate (Slovak) [Michal Teplan]
+- Added translation using Weblate (Slovak) [Michal Teplan]
+- Add hourly graph period [#1031](https://github.com/theyosh/TerrariumPI/issues/1031). [TheYOSH]
+- Add OS version to logging. [TheYOSH]
+- Add auto discovery setting [#1026](https://github.com/theyosh/TerrariumPI/issues/1026). [TheYOSH]
+- Add new  default graph period setting. [TheYOSH]
+
+**Fixes**
+------
+
+- Fix Bullseye python package Pillow. [TheYOSH]
+- Fix for template bug https://github.com/cotes2020/jekyll-theme-
+  chirpy/issues/2562. [TheYOSH]
+- Fix javascript bug. [TheYOSH]
+- Fix documentation search. [TheYOSH]
+- Fix rights log file after first install. [TheYOSH]
+- Fix Gauge reactive ness. [TheYOSH]
+- Fix average dashboard graph. [TheYOSH]
+- Final fix database version update. [TheYOSH]
+- Fix version update in database. [TheYOSH]
+- Fix enabling Slovensko language. [TheYOSH]
+- Always reload webcams fixing not supported AWB on bookworm [#1027](https://github.com/theyosh/TerrariumPI/issues/1027).
+  [TheYOSH]
+- Fix typos and add required fields indicator. [TheYOSH]
+- Fix. [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update release footer part. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update python libraries. [TheYOSH]
+- Update Libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- WIP: Update NPM major version. [TheYOSH]
+- Update TAG cloud. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update docker install documentation. [TheYOSH]
+- Update NodeJs libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Remove update during loading. [#1026](https://github.com/theyosh/TerrariumPI/issues/1026). [TheYOSH]
+- Update libraries. [TheYOSH]
+- Optimize enclosure updates after relay toggle. [TheYOSH]
+- Update README. [TheYOSH]
+- Update README. [TheYOSH]
+- Update README. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update README. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update documentation [#1024](https://github.com/theyosh/TerrariumPI/issues/1024). [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update comment. [TheYOSH]
+- Update documentation. Limit of 4 relays auto discovery. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+
+**Other**
+------
+
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Falling back to original bluepy for Bookworm. [TheYOSH]
+- Better bluetooth scanning. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Package lock file cleanup. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Code format. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Make gauge graphs more responsive. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Make gauge graph more reactive. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Slovak) [Michal Teplan]
+
+  Currently translated at 100.0% (1132 of 1132 strings)
+- Change menu icon. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Slovak) [Michal Teplan]
+
+  Currently translated at 80.5% (912 of 1132 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Slovak) [Michal Teplan]
+
+  Currently translated at 70.5% (799 of 1132 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Slovak) [Michal Teplan]
+
+  Currently translated at 56.9% (645 of 1132 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Slovak) [Michal Teplan]
+
+  Currently translated at 38.3% (434 of 1132 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Slovak) [Michal Teplan]
+
+  Currently translated at 13.2% (150 of 1132 strings)
+- Translated using Weblate (Slovak) [Michal Teplan]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Enable Slovensko language. [TheYOSH]
+- Translated using Weblate (Slovak) [Michal Teplan]
+
+  Currently translated at 0.8% (1 of 120 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1132 of 1132 strings)
+- Remove warning. [TheYOSH]
+- Force apt-get to use IPv4. [TheYOSH]
+- Change to minimal camera apps. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Disable day/night change. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Support for chaing sensor settings during night time when day/night
+  difference is active ([#1030](https://github.com/theyosh/TerrariumPI/issues/1030)) [TheYOSH]
+
+  This should a long standing issue/wish.
+
+  [#1028](https://github.com/theyosh/TerrariumPI/issues/1028)
+- Enable exception logging. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 100.0% (1131 of 1131 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 100.0% (1131 of 1131 strings)
+- Refactor Kasa device loading. Supporting more Kasa devices. [#1026](https://github.com/theyosh/TerrariumPI/issues/1026).
+  [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Small delay for writing initial calendar file. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [TheYOSH]
+
+  Currently translated at 100.0% (1131 of 1131 strings)
+- Translated using Weblate (German) [TheYOSH]
+
+  Currently translated at 100.0% (1131 of 1131 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1131 of 1131 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1131 of 1131 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Pin due to https://github.com/piwheels/packages/issues/580. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 100.0% (1126 of 1126 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [Mkorneli]
+
+  Currently translated at 100.0% (1126 of 1126 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (German) [Pro Xy]
+
+  Currently translated at 100.0% (1126 of 1126 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1126 of 1126 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (German) [Pro Xy]
+
+  Currently translated at 100.0% (1123 of 1123 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1123 of 1123 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1123 of 1123 strings)
+- Translated using Weblate (English (United States)) [TheYOSH]
+
+  Currently translated at 100.0% (1123 of 1123 strings)
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (German) [Pro Xy]
+
+  Currently translated at 99.9% (1122 of 1123 strings)
+
+
 4.12.5 (2025-08-10)
 -------------------
 
 **Fixes**
 ------
 
+- Fix Matrix link. [TheYOSH]
 - Fix variables. [TheYOSH]
 - Fix casing. [TheYOSH]
 - Fix new gauge feature ;( [TheYOSH]
@@ -15,6 +232,7 @@ Changelog
 **Updates**
 ------
 
+- Update change log. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Update translation files. [Weblate]
