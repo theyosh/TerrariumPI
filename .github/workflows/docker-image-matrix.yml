@@ -23,7 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up QEMU
         id: qemu
@@ -63,7 +65,7 @@ jobs:
 
       - name: Build and push
         if: ${{ ! matrix.java }}
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile.${{ matrix.os }}
@@ -78,7 +80,7 @@ jobs:
 
       - name: Build and push - Java
         if: ${{ matrix.java }}
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile.${{ matrix.os }}
