@@ -44,7 +44,7 @@ jobs:
       - name: Build Project
         run: npm run build
 
-  deploy:
+  push:
     runs-on: ubuntu-latest
     needs: build
     steps:
