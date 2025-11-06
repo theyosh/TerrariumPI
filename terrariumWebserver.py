@@ -427,34 +427,34 @@ class terrariumWebsocket(object):
         return authenticated
 
     def connect(self, socket):
-        def listen_for_messages(messages, socket):
+        def listen_for_messages(connection):
             try:
-                self.clients.remove(messages)
+                self.clients.remove(connection)
             except Exception as ex:
-                logger.debug(f"Client {messages} was not on the client list when started: {ex}")
+                logger.debug(f"Client {connection} was not on the client list when started: {ex}")
 
-            self.clients.append(messages)
-            logger.debug(f"Got a new websocket connection from {socket}")
+            self.clients.append(connection)
+            logger.debug(f"Got a new websocket connection from {connection['socket']}")
 
             while self.webserver.engine.running:
                 try:
-                    message = messages.get(timeout=5)
-                    socket.send(json.dumps(message))
-                    messages.task_done()
+                    message = connection["messages"].get(timeout=5)
+                    connection["socket"].send(json.dumps(message))
+                    connection["messages"].task_done()
                 except Empty:
                     continue
 
                 except Exception as ex:
                     # Socket connection is lost/closed, stop looping....
-                    logger.debug(f"Disconnected {socket}. Stop listening and remove queue... {ex}")
+                    logger.debug(f"Disconnected {connection['socket']}. Stop listening and remove queue... {ex}")
                     try:
-                        self.clients.remove(messages)
+                        self.clients.remove(connection)
                     except Exception as ex:
-                        logger.debug(f"Disconnected {socket} is not in the clients queue... {ex}")
+                        logger.debug(f"Disconnected {connection['socket']} is not in the clients queue... {ex}")
 
                     break
 
-        messages = Queue()
+        connection = {"messages": Queue(), "authenticated": False, "socket": socket}
         authenticated = False
         cookie_authenticated = False
 
@@ -468,12 +468,12 @@ class terrariumWebsocket(object):
 
         while self.webserver.engine.running:
             try:
-                message = socket.receive()
+                message = connection["socket"].receive()
             except Exception as ex:
                 # Closed websocket connection.
                 logger.debug(f"Websocket error receiving messages: {ex}")
                 try:
-                    self.clients.remove(messages)
+                    self.clients.remove(connection)
                 except Exception as ex:
                     logger.debug(f"Clashed client was not in the list of clients {ex}")
 
@@ -488,15 +488,15 @@ class terrariumWebsocket(object):
                         # Reset Cookie login, as it is only valid for first onConnect
                         cookie_authenticated = False
 
-                    if not messages in self.clients:
-                        messages.authenticated = authenticated
-                        logger.debug(f"Starting authenticated socket? {messages.authenticated}")
+                    if not connection in self.clients:
+                        connection["authenticated"] = authenticated
+                        logger.debug(f"Starting authenticated socket? {connection['authenticated']}")
 
-                        threading.Thread(target=listen_for_messages, args=(messages, socket)).start()
+                        threading.Thread(target=listen_for_messages, args=(connection,)).start()
                         for door in self.webserver.engine.load_doors():
-                            self.send_message({"type": "button", "data": door}, messages)
+                            self.send_message({"type": "button", "data": door}, connection)
                     else:
-                        self.clients[self.clients.index(messages)].authenticated = authenticated
+                        self.clients[self.clients.index(connection)]["authenticated"] = authenticated
 
                     if self.webserver.engine.update_available:
                         self.send_message(
@@ -511,35 +511,35 @@ class terrariumWebsocket(object):
                                     + "</a>",
                                 },
                             },
-                            messages,
+                            connection,
                         )
 
                 elif "load_dashboard" == message["type"]:
-                    self.send_message({"type": "systemstats", "data": self.webserver.engine.system_stats()}, messages)
+                    self.send_message({"type": "systemstats", "data": self.webserver.engine.system_stats()}, connection)
                     self.send_message(
                         {"type": "power_usage_water_flow", "data": self.webserver.engine.get_power_usage_water_flow()},
-                        messages,
+                        connection,
                     )
 
                     for sensor_type, avg_data in self.webserver.engine.sensor_averages.items():
                         avg_data["id"] = sensor_type
-                        self.send_message({"type": "sensor", "data": avg_data}, messages)
+                        self.send_message({"type": "sensor", "data": avg_data}, connection)
 
-    def send_message(self, message, queue=None):
+    def send_message(self, message, connection=None):
         # Get all the connected websockets (get a copy of the list, as we could delete entries and change the list length during the loop)
         clients = self.clients
         # Loop over all the clients
         for client in clients:
-            if queue is None or queue == client:
-                if "logline" == message["type"] and not client.authenticated:
+            if connection is None or connection == client:
+                if "logline" == message["type"] and not client["authenticated"]:
                     # Clean the logline message. Keep date and type for web indicators
                     message["data"] = message["data"][0:36].strip()
 
-                client.put(message)
+                client["messages"].put(message)
             # If more then 50 messages in queue, looks like connection is gone and remove the queue from the list
-            if client.qsize() > 50:
+            if client["messages"].qsize() > 50:
                 logger.debug(
-                    f"Lost connection.... should not happen anymore. {len(self.clients)} - {client.qsize()} - {client}"
+                    f"Lost connection.... should not happen anymore. {len(self.clients)} - {client['messages'].qsize()} - {client}"
                 )
                 try:
                     self.clients.remove(client)
