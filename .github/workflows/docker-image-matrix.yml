@@ -54,7 +54,7 @@ jobs:
         with:
           images: theyosh/terrariumpi
           flavor: |
-            latest=${{ matrix.os == 'buster' }}
+            latest=false
             suffix=-${{ matrix.os }}-java,onlatest=false
 
       - name: Login to DockerHub
