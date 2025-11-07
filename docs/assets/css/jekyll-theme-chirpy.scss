@@ -117,3 +117,15 @@ table.timertable input {
   width: 120px;
   margin: 0px auto;
 }
+
+/* Sticky header / progress bar */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  z-index: 99;
+  background: linear-gradient(to right, rgba(138, 180, 248, 1) 90%, rgba(138, 180, 248, 0.1));
+  transition: width 1s;
+}

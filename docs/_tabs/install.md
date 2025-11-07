@@ -67,13 +67,19 @@ history.
 
 #### Versions
 
-There are multiple docker images available. Make sure you are matching the
-docker image with your Raspberry PI host OS. \
-So if you have installed **Bookworm** on your Raspberry PI as OS, make sure you
-use the `:-bookworm` container tag.
+There are multiple docker images available. Make sure you are **matching** the
+**docker image** with your Raspberry PI **host OS**. \
+So if you have installed **Bookworm** OS on your Raspberry PI, make sure you use
+the `:-bookworm` container tag.
 
-It is unadvisable to use the `:latest` tag. That is from the early days when
-there was just one container. This will be the old Buster image.
+<!-- prettier-ignore-start -->
+> As of version 4.13.0 there is **no** `:latest` tag anymore!
+{: .prompt-warning }
+<!-- prettier-ignore-end -->
+
+It was unadvisable to use the `:latest` tag. That was from the early days when
+there was just one container. And this was the very old Buster OS which is
+unsupported now.
 
 Than there are also images with `:-java` in the tag name. Those images contains
 Java for [Java related hardware]({% link _hardware/denkovi_relay.md %}).
@@ -93,21 +99,21 @@ starting point:
 ```yaml
 services:
   terrariumpi:
-    image: theyosh/terrariumpi:latest # Or use a specific version
+    image: theyosh/terrariumpi:[X]-[OS]-[?Java]
     volumes:
       - /opt/terrariumpi/logs:/TerrariumPI/log
       - /opt/terrariumpi/data:/TerrariumPI/data
       - /opt/terrariumpi/media:/TerrariumPI/media
       - /opt/terrariumpi/scripts:/TerrariumPI/scripts
       - /opt/terrariumpi/webcam-archive:/TerrariumPI/webcam/archive
-      - /opt/terrariumpi/DenkoviRelayCommandLineTool:/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool
+      - /opt/terrariumpi/DenkoviRelayCommandLineTool:/TerrariumPI/3rdparty/DenkoviRelayCommandLineTool # Only needed when using Java container
 
-      - /boot/config.txt:/boot/config.txt # For Buster and Bullseye
-      - /boot/cmdline.txt:/boot/cmdline.txt # For Buster and Bullseye
+      - /boot/config.txt:/boot/config.txt # For OS Buster and Bullseye
+      - /boot/cmdline.txt:/boot/cmdline.txt # For OS Buster and Bullseye
 
-      - /boot/firmware/config.txt:/boot/firmware/config.txt # For Bookworm
-      - /boot/firmware/cmdline.txt:/boot/firmware/cmdline.txt # For Bookworm
-      - /run/udev:/run/udev # For Bookworm
+      - /boot/firmware/config.txt:/boot/firmware/config.txt # For OS Bookworm
+      - /boot/firmware/cmdline.txt:/boot/firmware/cmdline.txt # For OS Bookworm
+      - /run/udev:/run/udev # For OS Bookworm
 
       - /etc/modules:/etc/modules
       - /dev:/dev
@@ -143,7 +149,7 @@ hardware that is connected to the Raspberry PI.
 The network mode needs to be at `host`. Else bluetooth with not work, and you
 can't use bluetooth sensors.
 
-then you can run `docker compose up -d` to start the docker image. It could be
+Then you can run `docker compose up -d` to start the docker image. It could be
 that it needs a reboot. After that, you should be able to access TerrariumPI on
 the url `http://[raspberrypi]:8090`. [Continue with the
 setup]({% link _tabs/setup.md %})

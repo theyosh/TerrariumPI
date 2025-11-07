@@ -1,59 +1,10 @@
-<!-- The Top Bar -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-<div id="topbar-wrapper">
-  <div id="topbar" class="container d-flex align-items-center justify-content-between h-100">
-    <span id="breadcrumb">
-      {% assign paths = page.url | split: '/' %} {% if paths.size == 0 or page.layout == 'home' %}
-      <!-- index page -->
-      <span>{{ site.data.locales[include.lang].tabs.home | capitalize }}</span>
-
-      {% else %} {% for item in paths %} {% if forloop.first %}
-      <span>
-        <a href="{{ '/' | relative_url }}"> {{ site.data.locales[include.lang].tabs.home | capitalize }} </a>
-      </span>
-
-      {% elsif forloop.last %} {% if page.collection == 'tabs' %}
-      <span>{{ site.data.locales[include.lang].tabs[item] | default: page.title }}</span>
-      {% else %}
-      <span>{{ page.title }}</span>
-      {% endif %} {% elsif page.layout == 'category' or page.layout == 'tag' %}
-      <span>
-        <a href="{{ item | relative_url }}"> {{ site.data.locales[include.lang].tabs[item] | default: page.title }} </a>
-      </span>
-      {% endif %} {% endfor %} {% endif %}
-    </span>
-    <!-- endof #breadcrumb -->
-
-    <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
-
-    <div id="topbar-title">
-      {% if page.layout == 'home' %} {{- site.data.locales[include.lang].title | default: site.title -}} {% elsif
-      page.collection == 'tabs' or page.layout == 'page' %} {%- capture tab_key -%}{{ page.url | split: '/' }}{%-
-      endcapture -%} {{- site.data.locales[include.lang].tabs[tab_key] | default: page.title -}} {% else %} {{-
-      site.data.locales[include.lang].layout[page.layout] | default: page.layout | capitalize -}} {% endif %}
-    </div>
-
-    <i id="search-trigger" class="fas fa-search fa-fw"></i>
-    <span id="search-wrapper" class="align-items-center">
-      <i class="fas fa-search fa-fw"></i>
-      <input
-        class="form-control"
-        id="search-input"
-        type="search"
-        aria-label="search"
-        autocomplete="off"
-        placeholder="{{ site.data.locales[include.lang].search.hint | capitalize }}..."
-      />
-    </span>
-    <span id="search-cancel">{{ site.data.locales[include.lang].search.cancel }}</span>
-
-    <span class="align-items-center" style="margin-left: 0.2rem">
-      <select name="language">
-        <option value="">Select language</option>
-      </select>
-    </span>
-  </div>
-</div>
+<section>
+  <h2 class="panel-heading">Language</h2>
+  <select name="language">
+    <option value="">Select language</option>
+  </select>
+</section>
 
 <script>
   function getFlagEmoji(countryCode) {
@@ -63,6 +14,21 @@
       .map((char) => 127397 + char.charCodeAt());
     return String.fromCodePoint(...codePoints);
   }
+
+  const setProgressBar = () => {
+    let scrollDist = document.documentElement.scrollTop || document.body.scrollTop;
+    let progressWidth = (scrollDist / (document.body.scrollHeight - document.documentElement.clientHeight)) * 100;
+    progressBar.style.width = progressWidth + '%';
+  };
+
+  let progressBar = null;
+  jQuery(function () {
+    jQuery('body').prepend('<div id="progress-bar"></div>');
+    progressBar = document.getElementById('progress-bar');
+    if (progressBar) {
+      window.addEventListener('scroll', setProgressBar);
+    }
+  });
 
   jQuery(function () {
     let languages = [
@@ -133,3 +99,24 @@
     }
   });
 </script>
+
+<!-- Get 5 last posted/updated posts -->
+
+{% assign MAX_SIZE = 5 %} {% assign all_list = '' | split: '' %} {% for post in site.posts %} {% assign datetime =
+post.last_modified_at | default: post.date %} {% capture elem %} {{- datetime | date: "%Y%m%d%H%M%S" -}}::{{-
+forloop.index0 -}} {% endcapture %} {% assign all_list = all_list | push: elem %} {% endfor %} {% assign all_list =
+all_list | sort | reverse %} {% assign update_list = '' | split: '' %} {% for entry in all_list limit: MAX_SIZE %} {%
+assign update_list = update_list | push: entry %} {% endfor %} {% if update_list.size > 0 %}
+<section id="access-lastmod">
+  <h2 class="panel-heading">{{- site.data.locales[include.lang].panel.lastmod -}}</h2>
+  <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+    {% for item in update_list %} {% assign index = item | split: '::' | last | plus: 0 %} {% assign post =
+    site.posts[index] %} {% assign url = post.url | relative_url %}
+    <li class="text-truncate lh-lg">
+      <a href="{{ url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+<!-- #access-lastmod -->
+{% endif %}
