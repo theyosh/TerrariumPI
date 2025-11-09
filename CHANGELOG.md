@@ -2,6 +2,53 @@ Changelog
 =========
 
 
+4.13.1 (2025-11-09)
+-------------------
+
+**Fixes**
+------
+
+- Fix documentation template. [TheYOSH]
+- Fix docker build. [TheYOSH]
+- Fix workflow. [TheYOSH]
+- Fix cryptography version. [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update Libraries. [TheYOSH]
+- Update documentation packages. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Workflow update 2. [TheYOSH]
+- More workflow updates. [TheYOSH]
+- Update Github workflows. [TheYOSH]
+
+**Other**
+------
+
+- New release post. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Disable :latest image tag. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Bump pip from 25.2 to 25.3 ([#1037](https://github.com/theyosh/TerrariumPI/issues/1037)) [dependabot[bot], dependabot[bot]]
+
+  Bumps [pip](https://github.com/pypa/pip) from 25.2 to 25.3.
+  - [Changelog](https://github.com/pypa/pip/blob/main/NEWS.rst)
+  - [Commits](https://github.com/pypa/pip/compare/25.2...25.3)
+
+  ---
+  updated-dependencies:
+  - dependency-name: pip
+    dependency-version: '25.3'
+    dependency-type: direct:production
+  ...
+- Refactor websocket connections. [#1040](https://github.com/theyosh/TerrariumPI/issues/1040). [TheYOSH]
+- Fir workflow. [TheYOSH]
+- Merge branch '4.x.y.z' [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+
+
 4.13.0 (2025-10-24)
 -------------------
 
@@ -42,6 +89,7 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update release footer part. [TheYOSH]
 - Update NodeJS libraries. [TheYOSH]
