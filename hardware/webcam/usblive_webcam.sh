@@ -58,7 +58,7 @@ elif [[ "${ROTATION}" == "0" ]]; then
 elif [[ "${ROTATION}" == "90" ]]; then
   ROTATION_ACTION="transpose=1,"
 elif [[ "${ROTATION}" == "180" ]]; then
-  ROTATION_ACTION="vflip,hflip"
+  ROTATION_ACTION="vflip,hflip,"
 elif [[ "${ROTATION}" == "270" ]]; then
   ROTATION_ACTION="transpose=2,"
 fi
