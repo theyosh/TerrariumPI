@@ -16,7 +16,7 @@ FFMPEG=$(type -p ffmpeg)
 
 # Defaults
 if [[ "${DEVICE}" == "" ]]; then
-  DEVICE="rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
+  DEVICE="rtsp://192.168.5.132/axis-media/media.amp?videocodec=mpeg4"
 fi
 
 if [[ "${NAME}" == "" ]]; then
@@ -63,11 +63,13 @@ elif [[ "${ROTATION}" == "270" ]]; then
   ROTATION_ACTION="transpose=2,"
 fi
 
+CODEC="h264"
+if [ "${OS}" == "buster" ]; then
+    CODEC="h264_omx"
+fi
 
 S_TIMEOUT="-stimeout"
-CODEC="h264_omx"
 if [ "${OS}" == "bookworm" ]; then
-    CODEC="h264"
     S_TIMEOUT="-timeout"
 fi
 

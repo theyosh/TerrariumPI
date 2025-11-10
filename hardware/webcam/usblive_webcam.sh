@@ -63,9 +63,9 @@ elif [[ "${ROTATION}" == "270" ]]; then
   ROTATION_ACTION="transpose=2,"
 fi
 
-CODEC="h264_omx"
-if [ "${OS}" == "bookworm" ]; then
-    CODEC="h264"
+CODEC="h264"
+if [ "${OS}" == "buster" ]; then
+    CODEC="h264_omx"
 fi
 
 # Start streaming
