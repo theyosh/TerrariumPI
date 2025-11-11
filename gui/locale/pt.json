@@ -20,7 +20,7 @@
     "settings": {
       "depends_on": {
         "help": "Seleccione as áreas de que esta área depende.",
-        "invalid": "Por favor seleccione uma opção.",
+        "invalid": "Por favor faça uma escolha.",
         "label": "Depende de",
         "placeholder": "Seleccione as áreas dependentes"
       },
@@ -75,43 +75,43 @@
         "area_variation": {
           "action": {
             "add": {
-              "help": ""
+              "help": "Adiccionar uma nova linha"
             },
-            "label": "",
+            "label": "Acção",
             "remove": {
-              "help": ""
+              "help": "Eliminar linha"
             }
           },
           "difference": {
-            "help": "",
-            "label": ""
+            "help": "Insira um valor negativo ou positivo para uma acção relaccionada. Um número é tratado como um valor absoluto.",
+            "label": "Diferença"
           },
           "duration": {
-            "help": ""
+            "help": "Insira uma duração em minutos ou a hora actual do dia."
           },
           "external_source": {
-            "help": "",
-            "label": ""
+            "help": "Insira o url completo para a fonte externa de acordo com a funcionaldade de informação remota.",
+            "label": "Url da fonte externa"
           },
-          "help": "",
+          "help": "Aqui pode inserir períodos onde os valores dos sensores mudaram de acordo com a lista abaixo. Certifique-se que os períodos estão em ordem cronológica!",
           "offset": {
-            "label": ""
+            "label": "Offset"
           },
           "period": {
-            "help": "",
-            "label": ""
+            "help": "Mudar para valor depois de x minutos ou a uma hora específica.",
+            "label": "Período/Duração"
           },
           "remote": {
-            "help": ""
+            "help": "Informação remota."
           },
           "source": {
-            "label": ""
+            "label": "Fonte"
           },
           "value": {
-            "help": ""
+            "help": "Insira um valor de compensação (offset) negativo ou positivo."
           },
           "weather": {
-            "help": ""
+            "help": "Espelhagem de clima."
           }
         },
         "day_night_difference": {
@@ -1294,14 +1294,16 @@
       },
       "gauge_values": {
         "alarm": {
-          "help": "",
-          "label": ""
+          "help": "Alterne para mostrar valores de alarme.",
+          "label": "Valores de alarme"
         },
         "limit": {
-          "label": ""
+          "help": "Alterne para mostrar valores limites.",
+          "label": "Valores limite"
         },
         "measurements": {
-          "help": ""
+          "help": "Alterne para mostrar mín e max medidos.",
+          "label": "Medições"
         }
       },
       "hardware": {
@@ -1823,10 +1825,12 @@
         }
       },
       "auto_discovery": {
-        "invalid": "",
-        "label": "",
+        "help": "Active a descoberta automática para sensores e relés durante arranque.",
+        "invalid": "Por favor seleccione uma opção",
+        "label": "Descoberta automática",
         "options": {
-          "no": ""
+          "no": "Não",
+          "yes": "Sim"
         }
       },
       "currency": {
@@ -1858,7 +1862,9 @@
         "label": "Valor limite dos gráficos"
       },
       "graph_period": {
-        "label": ""
+        "help": "Seleccione o período do gráfico por defeito.",
+        "invalid": "Por favor faça uma escolha.",
+        "label": "Período do gráfico por defeito"
       },
       "graph_smooth_value": {
         "help": "Insira o número de pontos de dados para a média. 0 desabilita esta funcionalidade.",
