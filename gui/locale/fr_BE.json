@@ -2049,12 +2049,20 @@
         "error": "Les champs obligatoires sont marqués avec '%s'."
       },
       "information": "Afin d'utiliser le système météorologique, vous devez créer un compte gratuit à {source_link}.",
+      "open_meteo": {
+        "information": ""
+      },
       "save": {
         "ok": {
           "message": "Le réglage de la météo est enregistré."
         }
       },
       "title": "Paramètres de la webcam",
+      "weather_provider": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
       "weather_source": {
         "help": "Entrez l'URL complète de l'API OpenWeatherMap comme : {api_url_example}.",
         "invalid": "L’URL saisie n’est pas valide.",

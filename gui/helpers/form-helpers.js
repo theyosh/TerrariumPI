@@ -1,14 +1,14 @@
 import { isNumber } from './number-helpers';
 
 // https://stackoverflow.com/a/2553032 (Slightly adjusted to support multiple select field names and values, and number/float values)
-export const formToJSON = (form) => {
+export const formToJSON = (form, ignore = []) => {
   let rv, obj, elements, element, index, names, nameIndex, value;
 
   rv = {};
   elements = form.elements;
   for (index = 0; index < elements.length; ++index) {
     element = elements[index];
-    if (element.disabled) {
+    if (element.disabled || ignore.indexOf(element.name) !== -1) {
       continue;
     }
     let name = element.name.replace(/\[\]/gm, '');

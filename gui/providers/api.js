@@ -126,6 +126,10 @@ export const uploadFile = async (file) => {
 // End Upload helpers
 
 // Weather API
+export const getWeatherOptions = async (cb) => {
+  await _getData(`${apiHost}/weather/hardware/`, cb);
+};
+
 export const fetchWeatherData = async (cb) => {
   await _getData(`${apiHost}/weather/`, cb);
 };

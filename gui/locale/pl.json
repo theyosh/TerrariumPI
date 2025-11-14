@@ -2049,12 +2049,20 @@
         "error": "Nie wszystkie wymagane pola są wprowadzane poprawnie."
       },
       "information": "Aby użyć systemu pogodowego, musisz utworzyć bezpłatne konto w {source_link}.",
+      "open_meteo": {
+        "information": ""
+      },
       "save": {
         "ok": {
           "message": "Ustawienie pogody zostanie zapisane."
         }
       },
       "title": "Ustawienia pogody",
+      "weather_provider": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
       "weather_source": {
         "help": "Wprowadź pełny adres URL API OpenWeatherMap Like: {api_url_example}.",
         "invalid": "Wprowadzony adres URL jest nieprawidłowy.",

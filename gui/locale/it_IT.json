@@ -2049,12 +2049,20 @@
         "error": "I campi richiesti sono segnati con '%s'."
       },
       "information": "Per utilizzare il sistema meteorologico, devi creare un account gratuito su {source_link}.",
+      "open_meteo": {
+        "information": ""
+      },
       "save": {
         "ok": {
           "message": "L'impostazione meteo viene salvata."
         }
       },
       "title": "Impostazioni meteo",
+      "weather_provider": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
       "weather_source": {
         "help": "Inserisci l'URL completo dell'API di OpenWeatherMap come: {api_url_example}.",
         "invalid": "La url inserita non è valida.",

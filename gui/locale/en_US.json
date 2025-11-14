@@ -2049,12 +2049,20 @@
         "error": "Not all required fields are entered correctly."
       },
       "information": "In order to use the weather system, you need to create a free account at {source_link}.",
+      "open_meteo": {
+        "information": "Get your API url at {source_link} for free without an account."
+      },
       "save": {
         "ok": {
           "message": "The weather setting is saved."
         }
       },
       "title": "Weather settings",
+      "weather_provider": {
+        "help": "Select provider to get more information.",
+        "label": "Provider",
+        "placeholder": "Select a provider"
+      },
       "weather_source": {
         "help": "Enter the full OpenWeatherMap api url like: {api_url_example}.",
         "invalid": "The entered url is not valid.",

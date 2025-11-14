@@ -2049,12 +2049,20 @@
         "error": "必要なすべてのフィールドが正しく入力されるわけではありません。"
       },
       "information": "天気システムを使用するには、％sで無料のアカウントを作成してください。",
+      "open_meteo": {
+        "information": ""
+      },
       "save": {
         "ok": {
           "message": ""
         }
       },
       "title": "天気設定",
+      "weather_provider": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
       "weather_source": {
         "help": "OpenWeatherMapのAPI用のURLを次のようなフォーマットで入力してください：％s.",
         "invalid": "",

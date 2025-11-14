@@ -2049,12 +2049,20 @@
         "error": "Obligatoriske felt er merket med ‘%s’."
       },
       "information": "For å bruke værsystemet må du opprette en gratis konto på {source_link}.",
+      "open_meteo": {
+        "information": ""
+      },
       "save": {
         "ok": {
           "message": "Værinnstillingen lagres."
         }
       },
       "title": "Innstillinger for webkamera",
+      "weather_provider": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
       "weather_source": {
         "help": "Skriv inn hele OpenWeatherMap api-url som: {api_url_example}.",
         "invalid": "Den angitte URL-adressen er ikke gyldig.",

@@ -2049,12 +2049,20 @@
         "error": "Niet alle verplichte velden zijn correct ingevuld."
       },
       "information": "Om het weer systeem te gebruiken, moet u een gratis account aanmaken op {source_link}.",
+      "open_meteo": {
+        "information": ""
+      },
       "save": {
         "ok": {
           "message": "De weerinstelling is opgeslagen."
         }
       },
       "title": "Weer instellingen",
+      "weather_provider": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
       "weather_source": {
         "help": "Voer de volledige OpenWeatherMap api URL in, zoals: {api_url_example}.",
         "invalid": "De ingevoerde url is niet geldig.",

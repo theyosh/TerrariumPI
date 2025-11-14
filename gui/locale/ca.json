@@ -2049,12 +2049,20 @@
         "error": "No tots els camps obligatoris s’introdueixen correctament."
       },
       "information": "Per utilitzar el sistema meteorològic, heu de crear un compte gratuït a {source_link}.",
+      "open_meteo": {
+        "information": ""
+      },
       "save": {
         "ok": {
           "message": "La configuració del temps es desada."
         }
       },
       "title": "Configuració meteorològica",
+      "weather_provider": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
       "weather_source": {
         "help": "Introduïu l'URL de l'API d'OpenWeathermap complet com: {api_url_example}.",
         "invalid": "L'URL introduït no és vàlid.",

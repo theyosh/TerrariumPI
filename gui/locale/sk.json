@@ -2049,12 +2049,20 @@
         "error": "Nie všetky povinné polia sú vyplnené správne."
       },
       "information": "Ak chcete používať systém počasia, musíte si vytvoriť bezplatný účet na {source_link}.",
+      "open_meteo": {
+        "information": ""
+      },
       "save": {
         "ok": {
           "message": "Nastavenie počasia sa uloží."
         }
       },
       "title": "Nastavenia počasia",
+      "weather_provider": {
+        "help": "",
+        "label": "",
+        "placeholder": ""
+      },
       "weather_source": {
         "help": "Zadajte úplnú URL adresu rozhrania API OpenWeatherMap, napríklad: {api_url_example}.",
         "invalid": "Zadaná URL adresa nie je platná.",
