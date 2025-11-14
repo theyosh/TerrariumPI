@@ -37,6 +37,7 @@ from hardware.display import terrariumDisplay
 from hardware.relay import terrariumRelay
 from hardware.sensor import terrariumSensor
 from hardware.webcam import terrariumWebcam
+from weather import terrariumWeather
 
 from terrariumUtils import terrariumUtils
 
@@ -598,7 +599,9 @@ class terrariumAPI(object):
             apply=self.authentication(False),
             name="api:weather_forecast",
         )
-
+        bottle_app.route(
+            "/api/weather/hardware/", "GET", self.weather_hardware, apply=self.authentication(False), name="api:weather_hardware"
+        )
         # Webcam API
         bottle_app.route(
             "/api/webcams/<webcam:path>/archive/<period:path>",
@@ -1857,6 +1860,9 @@ class terrariumAPI(object):
         return data
 
     # Weather
+    def weather_hardware(self):
+        return {"data": terrariumWeather.get_available_types()}
+
     def weather_detail(self):
         weather = {}
 

@@ -208,7 +208,7 @@ class terrariumWeather(object):
 
         raise terrariumWeatherException("Weather url '{}' is not valid! Please check your source".format(address))
 
-    # Return a list with type and names of supported switches
+    # Return a list with type and names of supported weather partners
     @staticmethod
     def get_available_types():
         data = []
