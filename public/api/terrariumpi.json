@@ -2376,6 +2376,27 @@
         }
       }
     },
+    "/weather/hardware/": {
+      "get": {
+        "tags": ["Weather"],
+        "summary": "Get weather source providers",
+        "description": "Get weather source providers that can be used",
+        "operationId": "weatherProviders",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Weather providers data",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WeatherProviders"
+              }
+            }
+          }
+        }
+      }
+    },
     "/webcams/hardware/": {
       "get": {
         "tags": ["Webcam"],
