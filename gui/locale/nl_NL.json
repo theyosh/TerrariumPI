@@ -2050,7 +2050,7 @@
       },
       "information": "Om het weer systeem te gebruiken, moet u een gratis account aanmaken op {source_link}.",
       "open_meteo": {
-        "information": ""
+        "information": "Ontvang je API-url gratis op {source_link} zonder een account."
       },
       "save": {
         "ok": {
@@ -2059,9 +2059,9 @@
       },
       "title": "Weer instellingen",
       "weather_provider": {
-        "help": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Selecteer provider voor meer informatie.",
+        "label": "Provider",
+        "placeholder": "Selecteer een provider"
       },
       "weather_source": {
         "help": "Voer de volledige OpenWeatherMap api URL in, zoals: {api_url_example}.",
