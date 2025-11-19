@@ -3,9 +3,12 @@ import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
 
+import json
+import types
+from functools import partial
 from datetime import datetime, timezone, timedelta
 from pony import orm
-from bottle import request, response, static_file, HTTPError
+from bottle import request, response, static_file, HTTPError, JSONPlugin
 from json import dumps
 from pathlib import Path
 from ffprobe import FFProbe
@@ -44,6 +47,16 @@ from terrariumUtils import terrariumUtils
 # Set to false in production, else every API call that uses DB will produce a logline
 DEBUG = False
 
+def json_serial(obj):
+    """JSON serializer for objects not serializable by default json code"""
+
+    if isinstance(obj, (types.GeneratorType,)):
+        return list(obj)
+
+    if isinstance(obj, (datetime,)):
+        return obj.timestamp()
+
+    raise TypeError (f"Type {type(obj)} not serializable")
 
 class terrariumAPI(object):
     def __init__(self, webserver):
@@ -54,6 +67,8 @@ class terrariumAPI(object):
         return self.webserver.authenticate(force)
 
     def routes(self, bottle_app):
+        bottle_app.install(JSONPlugin(json_dumps=partial(json.dumps, default=json_serial)))
+
         # Area API
         bottle_app.route(
             "/api/areas/types/", "GET", self.area_types, apply=self.authentication(False), name="api:area_types"
@@ -1868,18 +1883,19 @@ class terrariumAPI(object):
 
         if self.webserver.engine.weather:
             weather = {
-                "location": self.webserver.engine.weather.location,
+                "current": self.webserver.engine.weather.current,
                 "sun": {
-                    "rise": self.webserver.engine.weather.sunrise.timestamp(),
-                    "set": self.webserver.engine.weather.sunset.timestamp(),
+                    "rise": self.webserver.engine.weather.sunrise,
+                    "set": self.webserver.engine.weather.sunset,
                 },
                 "is_day": self.webserver.engine.weather.is_day,
                 "indicators": {
                     "wind": self.webserver.engine.units["windspeed"],
                     "temperature": self.webserver.engine.units["temperature"],
                 },
+                "location": self.webserver.engine.weather.location,
+                "days": self.webserver.engine.weather.short_forecast,
                 "credits": self.webserver.engine.weather.credits,
-                "forecast": self.webserver.engine.weather.short_forecast,
             }
 
         return weather

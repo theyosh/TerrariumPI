@@ -204,50 +204,50 @@
           </div>
         {:else if !loading_current && weatherData.location}
           <div class="row">
-            <div class="col-9">
-              <strong>{$date(new Date(weatherData.forecast[0].timestamp * 1000), { format: 'full' })}</strong>
+            <div class="col-10">
+              <strong>{$date(new Date(weatherData.current.timestamp * 1000), { format: 'full' })}</strong>
             </div>
-            <div class="col-3 text-right">
-              <i
-                class="fas fa-location-arrow"
-                style="transform: rotate({weatherData.forecast[0].wind.direction + 135}deg)"
-              ></i>
-              <span class="text-nowrap"
-                >{roundToPrecision(weatherData.forecast[0].wind.speed)} {weatherData.indicators.wind}</span
-              >
+            <div class="pr-0 col-2 text-nowrap text-right">
+              {$time(new Date(weatherData.sun.rise * 1000), { format: 'short' })} <i class="fas fa-sun"></i>
             </div>
           </div>
           <div class="row">
-            <div
-              class="col-3 weather-icon"
-              style="background: url({get_weather_icon(
-                weatherData.forecast[0].weather.icon,
-                weatherData.is_day,
-              )}) no-repeat center"
-              title="{weatherData.forecast[0].weather.description}"
-            ></div>
+            <img
+              class="weather-icon col-3"
+              src="{get_weather_icon(weatherData.current.weather.icon, weatherData.is_day)}"
+              alt="{weatherData.current.weather.description}"
+              title="{weatherData.current.weather.description}"
+            />
             <div class="col-7">
-              <h3>{weatherData.location.city}</h3>
-              <h4>{weatherData.forecast[0].weather.description}</h4>
+              <br />
+              <h3>{weatherData.location.city ?? '...'}</h3>
+              <h4>{weatherData.current.weather.description}</h4>
             </div>
-            <div class="pl-0 col-2 text-right text-nowrap">
-              <i class="fas fa-sun"></i>
-              {$time(new Date(weatherData.sun.rise * 1000), { format: 'short' })}<br />
-              <i class="fas fa-moon"></i>
-              {$time(new Date(weatherData.sun.set * 1000), { format: 'short' })}
-              <h5 class="mt-4">
-                {roundToPrecision(weatherData.forecast[0].temp)}
-                {weatherData.indicators.temperature}
-              </h5>
+            <div class="pr-0 col-2 text-nowrap text-right">
+              {$time(new Date(weatherData.sun.set * 1000), { format: 'short' })} <i class="fas fa-moon"></i>
+              <br /><br />
+              <span class="text-nowrap"
+                >{roundToPrecision(weatherData.current.wind.speed)} {weatherData.indicators.wind}</span
+              >
+              <i class="fas fa-location-arrow" style="transform: rotate({weatherData.current.wind.direction + 135}deg)"
+              ></i><br />
+              <p class="mb-0" style="font-size: 18px">
+                {roundToPrecision(weatherData.current.temperature)}
+                {weatherData.indicators.temperature} / {roundToPrecision(weatherData.current.humidity)} %
+              </p>
             </div>
           </div>
           <div class="row">
-            {#each weatherData.forecast.slice(1, 7) as day, counter}
-              <div class="col pr-0" class:d-none="{counter === 5}" class:d-sm-inline="{counter === 5}">
+            {#each weatherData.days
+              .filter((day) => new Date(day.timestamp * 1000).getDay() !== new Date(weatherData.current.timestamp * 1000).getDay())
+              .slice(0, 6) as day}
+              <div class="col pr-0" style="max-width: 20%">
                 <div class="description-block">
                   <h5 class="description-header">{$date(new Date(day.timestamp * 1000), { weekday: 'short' })}</h5>
-                  <span class="description-text">{roundToPrecision(day.temp)} {weatherData.indicators.temperature}</span
-                  >
+                  <span class="description-text">
+                    {roundToPrecision(day.temperature)}
+                    {weatherData.indicators.temperature} / {roundToPrecision(day.humidity)} %
+                  </span>
                   <img
                     class="weather-icon"
                     src="{get_weather_icon(day.weather.icon, weatherData.is_day)}"
