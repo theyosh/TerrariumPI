@@ -2050,7 +2050,7 @@
       },
       "information": "Ak chcete používať systém počasia, musíte si vytvoriť bezplatný účet na {source_link}.",
       "open_meteo": {
-        "information": ""
+        "information": "Ziskaj tvoje API url na {source_link} zadarmo bez registrácie."
       },
       "save": {
         "ok": {
@@ -2059,9 +2059,9 @@
       },
       "title": "Nastavenia počasia",
       "weather_provider": {
-        "help": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Vyber si poskytovatela pre viac informácii.",
+        "label": "Poskytovatel",
+        "placeholder": "Vyber si poskytovatela"
       },
       "weather_source": {
         "help": "Zadajte úplnú URL adresu rozhrania API OpenWeatherMap, napríklad: {api_url_example}.",
