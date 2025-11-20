@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from hardware.webcam.rpilive_webcam import terrariumRPILiveWebcam
 import terrariumLogging
 
 logger = terrariumLogging.logging.getLogger(__name__)
@@ -32,7 +31,7 @@ from pyfancy.pyfancy import pyfancy
 from func_timeout import func_timeout, FunctionTimedOut
 
 from pony import orm
-from terrariumDatabase import init as init_db, db, Area, Setting, Sensor, Relay, Button, Webcam, Enclosure
+from terrariumDatabase import init as init_db, db, Setting, Sensor, Relay, Button, Webcam, Enclosure
 from terrariumWebserver import terrariumWebserver
 from terrariumCalendar import terrariumCalendar
 from terrariumUtils import terrariumUtils, terrariumAsync, terrariumCache
