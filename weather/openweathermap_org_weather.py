@@ -150,6 +150,9 @@ class terrariumOpenweathermap(terrariumWeather):
             for period in day_periods:
                 time = day_stamp + timedelta(seconds=day_periods[period])
 
+                if time.isoformat() in return_data:
+                    continue
+
                 return_data[time.isoformat()] = {
                     "timestamp": time,
                     "temperature": float(daily["temp"][period]),
