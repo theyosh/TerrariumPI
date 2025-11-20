@@ -47,6 +47,7 @@ from terrariumUtils import terrariumUtils
 # Set to false in production, else every API call that uses DB will produce a logline
 DEBUG = False
 
+
 def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
 
@@ -56,7 +57,8 @@ def json_serial(obj):
     if isinstance(obj, (datetime,)):
         return obj.timestamp()
 
-    raise TypeError (f"Type {type(obj)} not serializable")
+    raise TypeError(f"Type {type(obj)} not serializable")
+
 
 class terrariumAPI(object):
     def __init__(self, webserver):
@@ -615,7 +617,11 @@ class terrariumAPI(object):
             name="api:weather_forecast",
         )
         bottle_app.route(
-            "/api/weather/hardware/", "GET", self.weather_hardware, apply=self.authentication(False), name="api:weather_hardware"
+            "/api/weather/hardware/",
+            "GET",
+            self.weather_hardware,
+            apply=self.authentication(False),
+            name="api:weather_hardware",
         )
         # Webcam API
         bottle_app.route(
