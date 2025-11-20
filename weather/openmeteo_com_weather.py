@@ -112,9 +112,10 @@ class terrariumOpenmeteo(terrariumWeather):
             f"{self.address}&daily=sunrise,sunset,weather_code,wind_direction_10m_dominant,relative_humidity_2m_mean,temperature_2m_mean,wind_speed_10m_mean&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,weather_code&timezone=auto&forecast_days=14&wind_speed_unit=ms&language={self._device['language']}"
         )
 
+        # Hourly overrules daily. The data will be sorted later on
         return_data["forecast"] = {
-            **self.__process_hourly_data(json_data.get("hourly", [])),
             **self.__process_daily_data(json_data.get("daily", [])),
+            **self.__process_hourly_data(json_data.get("hourly", [])),
         }
 
         # Get history data
