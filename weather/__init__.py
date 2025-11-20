@@ -146,7 +146,7 @@ class terrariumWeather(object):
             today_index = today.isoformat()
             today += timedelta(hours=1)
             if today_index in self._device["forecast"] and "sun" in self._device["forecast"][today_index]:
-                shift_days = int((self._device["forecast"][today_index]["sun"]["rise"] - datetime.now()).days)
+                shift_days = int((datetime.now() - self._device["forecast"][today_index]["sun"]["rise"]).days)
                 if not next:
                     return {
                         "sunrise": self._device["forecast"][today_index]["sun"]["rise"] - timedelta(days=shift_days),
