@@ -112,11 +112,14 @@ class terrariumOpenmeteo(terrariumWeather):
             f"{self.address}&daily=sunrise,sunset,weather_code,wind_direction_10m_dominant,relative_humidity_2m_mean,temperature_2m_mean,wind_speed_10m_mean&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,weather_code&timezone=auto&forecast_days=14&wind_speed_unit=ms&language={self._device['language']}"
         )
 
-        # Hourly overrules daily. The data will be sorted later on
-        return_data["forecast"] = {
-            **self.__process_hourly_data(json_data.get("hourly", [])),
-            **self.__process_daily_data(json_data.get("daily", [])),
-        }
+        # Hourly overrules daily.
+        return_data["forecast"] = self.__process_daily_data(
+            json_data.get("daily", []),
+            self.__process_hourly_data(
+                json_data.get("hourly", [])
+            )
+        )
+
 
         # Get history data
         now = datetime.now()
@@ -151,10 +154,17 @@ class terrariumOpenmeteo(terrariumWeather):
 
         return hourly_data
 
-    def __process_daily_data(self, data):
-        daily_data = {}
+    def __process_daily_data(self, data, hourly):
+        daily_data = hourly
         for counter, time in enumerate(data["time"]):
             time = datetime.fromisoformat(time).replace(microsecond=0)
+
+            if time.isoformat() in daily_data:
+                daily_data[time.isoformat()]['sun'] = {
+                    "rise": datetime.fromisoformat(data["sunrise"][counter]),
+                    "set": datetime.fromisoformat(data["sunset"][counter]),
+                }
+                continue
 
             daily_data[time.isoformat()] = {
                 "timestamp": time,
