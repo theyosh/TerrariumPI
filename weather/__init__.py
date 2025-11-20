@@ -86,7 +86,6 @@ class terrariumWeather(object):
                 "lat": None,
                 "long": None,
             },
-            "hours": {},
             "forecast": {},
             "history": {},
         }
@@ -104,41 +103,59 @@ class terrariumWeather(object):
         return f"{self.NAME} using url '{self.address}'"
 
     def _get_data(self):
-        pass
+        return {
+            "forecast": {},
+            "history": {},
+        }
 
-    def __convert_data(self):
-        # Sort the data on timestamp keys
-        self._device["hours"] = dict(sorted(self._device["hours"].items()))
-        self._device["forecast"] = dict(sorted(self._device["forecast"].items()))
-        self._device["history"] = dict(sorted(self._device["history"].items()))
+    def __process_data(self, new_data):
+        now = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        # Multiple actions are done here...
+        # - Merge new forecast data with existing data
+        # - Sort on date time
+        # - Filter out past days
+        # - Convert temperature and wind speed values
 
-        # Convert values to the right unit values
-        # We expect values in C and m/s
-        for day in self._device["hours"].keys():
-            self._device["hours"][day]["temperature"] = terrariumUtils.convert_to_value(
-                self._device["hours"][day]["temperature"], self._device["unit_values"]["temperature"]
-            )
-            self._device["hours"][day]["wind"]["speed"] = terrariumUtils.convert_to_value(
-                self._device["hours"][day]["wind"]["speed"], self._device["unit_values"]["windspeed"]
-            )
+        self._device["forecast"] = {**self._device["forecast"], **new_data["forecast"]}
 
-        for day in self._device["forecast"].keys():
-            self._device["forecast"][day]["temperature"] = terrariumUtils.convert_to_value(
-                self._device["forecast"][day]["temperature"], self._device["unit_values"]["temperature"]
-            )
+        self._device["forecast"] = {
+            key: {
+                **self._device["forecast"][key],
+                **{
+                    "temperature": terrariumUtils.convert_to_value(
+                        self._device["forecast"][key]["temperature"], self._device["unit_values"]["temperature"]
+                    ),
+                    "wind": {
+                        "speed": terrariumUtils.convert_to_value(
+                            self._device["forecast"][key]["wind"]["speed"], self._device["unit_values"]["windspeed"]
+                        )
+                    },
+                },
+            }
+            for key in sorted(list(self._device["forecast"].keys()))
+            if self._device["forecast"][key]["timestamp"] >= now
+        }
 
-        for day in self._device["history"].keys():
-            self._device["history"][day]["temperature"] = terrariumUtils.convert_to_value(
-                self._device["history"][day]["temperature"], self._device["unit_values"]["temperature"]
-            )
+        self._device["history"] = {
+            key: {
+                **self._device["history"][key],
+                **{
+                    "temperature": terrariumUtils.convert_to_value(
+                        self._device["history"][key]["temperature"], self._device["unit_values"]["temperature"]
+                    )
+                },
+            }
+            for key in sorted(list(self._device["history"].keys()))
+            if self._device["history"][key]["timestamp"] >= now
+        }
 
     def __get_current(self):
         today = datetime.now().replace(minute=0, second=0, microsecond=0)
         for _ in range(24):
             today_index = today.isoformat()
             today += timedelta(hours=1)
-            if today_index in self._device["hours"]:
-                return self._device["hours"][today_index]
+            if today_index in self._device["forecast"]:
+                return self._device["forecast"][today_index]
 
     def __get_current_sunrise_sunset(self, next=False):
         today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
@@ -194,19 +211,24 @@ class terrariumWeather(object):
     @retry(tries=3, delay=0.5, max_delay=2, logger=logger)
     def update(self):
         if (
-            self._device["last_update"] is None
-            or (datetime.now() - self._device["last_update"]).total_seconds() > self.__UPDATE_TIMEOUT
+            self._device["last_update"] is not None
+            and (datetime.now() - self._device["last_update"]).total_seconds() < self.__UPDATE_TIMEOUT
         ):
-            start = time.time()
-            logger.debug(f"Loading online weather data from source: {self.address}")
+            return
 
-            if self._get_data():
-                self.__convert_data()
-                self._device["last_update"] = datetime.now()
-                logger.info(f"Loaded {self} in: {time.time() - start:.2f} seconds")
+        start = time.time()
+        logger.debug(f"Loading online weather data from source: {self.address}")
 
-            else:
-                logger.error(f"Error loading online weather data! Please check your source address: {self.address}.")
+        data = self._get_data()
+        if len(data["forecast"].keys()) == 0:
+            logger.error(
+                f"Error loading {self}! Please check your source address: {self.address}. Took: {time.time() - start:.2f} seconds"
+            )
+            return
+
+        self.__process_data(data)
+        self._device["last_update"] = datetime.now()
+        logger.info(f"Loaded {self} in {time.time() - start:.2f} seconds")
 
     @property
     def sunrise(self):
@@ -251,7 +273,7 @@ class terrariumWeather(object):
     @property
     def short_forecast(self, days=6):
         days = max(min(days, 14), 1)
-        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        today = datetime.now().replace(hour=12, minute=0, second=0, microsecond=0)
         for _ in range(days):
             today += timedelta(days=1)
             today_index = today.isoformat()
@@ -260,7 +282,12 @@ class terrariumWeather(object):
 
     @property
     def forecast(self):
-        return list(self._device["forecast"].values())
+        now = datetime.now().replace(minute=0, second=0, microsecond=0)
+        return [
+            self._device["forecast"][key]
+            for key in list(self._device["forecast"].keys())
+            if self._device["forecast"][key]["timestamp"] >= now
+        ]
 
     @property
     def history(self):

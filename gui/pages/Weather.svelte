@@ -205,7 +205,7 @@
         {:else if !loading_current && weatherData.location}
           <div class="row">
             <div class="col-10">
-              <strong>{$date(new Date(weatherData.current.timestamp * 1000), { format: 'full' })}</strong>
+              <strong>{$date(new Date(weatherData.current.timestamp * 1000), { format: 'full' })} {$time(new Date(weatherData.current.timestamp * 1000), { format: 'short' })}</strong>
             </div>
             <div class="pr-0 col-2 text-nowrap text-right">
               {$time(new Date(weatherData.sun.rise * 1000), { format: 'short' })} <i class="fas fa-sun"></i>

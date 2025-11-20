@@ -16,20 +16,25 @@ class terrariumOpenweathermap(terrariumWeather):
     INFO_SOURCE = "https://api.openweathermap.org/data/2.5/weather?q=[CITY],[COUNTRY_2CHAR]&appid=[YOUR_API_KEY]"
 
     def _get_data(self):
-        if not hasattr(self, '__history_day'):
+        self.__appid = None
+        if not hasattr(self, "__history_day"):
             self.__history_day = None
 
-        if not hasattr(self, '__one_call_version'):
+        if not hasattr(self, "__one_call_version"):
             self.__one_call_version = None
 
-        self.__appid = None
+        self.__load_general_data()
+        return_data = {"forecast": {}, "history": {}}
 
-        loaded = True
-        loaded = loaded and self.__load_general_data()
-        loaded = loaded and self.__load_forecast_data()
-        loaded = loaded and self.__load_history_data()
+        data = self.__load_forecast_data()
+        if data != False:
+            return_data["forecast"] = data
 
-        return loaded
+        data = self.__load_history_data()
+        if data != True:
+            return_data["history"] = data
+
+        return return_data
 
     def __load_general_data(self):
         address = self.address + "&units=metric&lang=" + self._device["language"][0:2]
@@ -45,10 +50,6 @@ class terrariumOpenweathermap(terrariumWeather):
             self.__timezone_difference = int(data["timezone"]) - datetime.now().astimezone().utcoffset().seconds
             appid = re.search(terrariumOpenweathermap.VALID_SOURCE, self.address)
             self.__appid = appid.group("appid")
-
-            return True
-
-        return False
 
     def __load_minimal_forecast_data(self):
         url = "https://api.openweathermap.org/data/2.5/forecast?lat={}&lon={}&appid={}&units=metric&lang={}".format(
@@ -85,9 +86,7 @@ class terrariumOpenweathermap(terrariumWeather):
                 },
             }
 
-        self._device["hours"] = hourly_data
-
-        return True
+        return hourly_data
 
     def __load_forecast_data_one_call(self):
         data = None
@@ -117,11 +116,11 @@ class terrariumOpenweathermap(terrariumWeather):
         sunrise = datetime.fromtimestamp(int(data["current"]["sunrise"] + self.__timezone_difference))
         sunset = datetime.fromtimestamp(int(data["current"]["sunset"] + self.__timezone_difference))
 
-        hourly_data = {}
+        return_data = {}
         for forecast in data["hourly"]:
             time = datetime.fromtimestamp(forecast["dt"] + self.__timezone_difference).replace(minute=0, microsecond=0)
 
-            hourly_data[time.isoformat()] = {
+            return_data[time.isoformat()] = {
                 "timestamp": time,
                 "temperature": float(forecast["temp"]),
                 "humidity": float(forecast["humidity"]),
@@ -139,10 +138,7 @@ class terrariumOpenweathermap(terrariumWeather):
                 },
             }
 
-        self._device["hours"] = hourly_data
-
         day_periods = {"night": 0 * 60 * 60, "morn": 6 * 60 * 60, "day": 12 * 60 * 60, "eve": 18 * 60 * 60}
-        daily_data = {}
         for daily in data["daily"]:
             day_stamp = datetime.fromtimestamp(daily["dt"] + self.__timezone_difference).replace(
                 hour=0, minute=0, second=0, microsecond=0
@@ -154,7 +150,7 @@ class terrariumOpenweathermap(terrariumWeather):
             for period in day_periods:
                 time = day_stamp + timedelta(seconds=day_periods[period])
 
-                daily_data[time.isoformat()] = {
+                return_data[time.isoformat()] = {
                     "timestamp": time,
                     "temperature": float(daily["temp"][period]),
                     "humidity": float(daily["humidity"]),
@@ -172,20 +168,22 @@ class terrariumOpenweathermap(terrariumWeather):
                     },
                 }
 
-        self._device["forecast"] = {**self._device["hours"], **daily_data}
-
-        return True
+        return return_data
 
     def __load_forecast_data(self):
-        # Onecall API's are more expensive (max 1000 a day - 1 call per 2 minutes) so we update this at a lower frequency
-        if not self.__load_forecast_data_one_call():
-            if not self.__load_minimal_forecast_data():
+        # Onecall API's are more expensive (max 1000 a day - 1 call per 2 minutes)
+        return_data = self.__load_forecast_data_one_call()
+
+        if return_data == False:
+            return_data = self.__load_minimal_forecast_data()
+
+            if return_data == False:
                 return False
 
-        return True
+        return return_data
 
     def __load_history_data(self):
-        # Onecall API's are more expensive (max 1000 a day - 1 call per 2 minutes) so we update this at a lower frequency
+        # Onecall API's are more expensive (max 1000 a day - 1 call per 2 minutes)
         # Here we can do 1 hit a day. As the history is per hole full day at a time, and will not change anymore
 
         if self.__one_call_version not in ["2.5", "3.0"]:
@@ -231,6 +229,4 @@ class terrariumOpenweathermap(terrariumWeather):
                     "humidity": float(data["humidity"]["afternoon"]),
                 }
 
-            self._device["history"] = history_data
-
-        return True
+        return history_data

@@ -102,15 +102,20 @@ class terrariumOpenmeteo(terrariumWeather):
         self._device["url"] = "https://open-meteo.com/"
         self._device["credits"] = "Open-Meteo.com weather data"
 
+        return_data = {"forecast": {}, "history": {}}
+
         # The dates and times are in the timezone of the GEO location. And that is what we need!
         # Temperatures are in C, wind speed is in km/h
 
         # Get all hourly and daily data
         json_data = terrariumUtils.get_remote_data(
-            f"{self.address}&daily=sunrise,sunset,weather_code,wind_direction_10m_dominant,relative_humidity_2m_mean,temperature_2m_mean,wind_speed_10m_mean&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,weather_code&timezone=auto&forecast_days=14&wind_speed_unit=ms&forecast_hours=24&language={self._device['language']}"
+            f"{self.address}&daily=sunrise,sunset,weather_code,wind_direction_10m_dominant,relative_humidity_2m_mean,temperature_2m_mean,wind_speed_10m_mean&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,weather_code&timezone=auto&forecast_days=14&wind_speed_unit=ms&language={self._device['language']}"
         )
-        self.__process_hourly_data(json_data.get("hourly", []))
-        self.__process_daily_data(json_data.get("daily", []))
+
+        return_data["forecast"] = {
+            **self.__process_hourly_data(json_data.get("hourly", [])),
+            **self.__process_daily_data(json_data.get("daily", [])),
+        }
 
         # Get history data
         now = datetime.now()
@@ -119,9 +124,10 @@ class terrariumOpenmeteo(terrariumWeather):
         json_data = terrariumUtils.get_remote_data(
             f"{self.address.replace('api.','archive-api.').replace('forecast','archive')}&start_date={start_date}&end_date={end_date}&hourly=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&timezone=auto&wind_speed_unit=ms&language={self._device['language']}"
         )
-        self.__process_history_data(json_data.get("hourly", []))
 
-        return True
+        return_data["history"] = self.__process_history_data(json_data.get("hourly", []))
+
+        return return_data
 
     def __process_hourly_data(self, data):
         hourly_data = {}
@@ -142,7 +148,7 @@ class terrariumOpenmeteo(terrariumWeather):
                 },
             }
 
-        self._device["hours"] = hourly_data
+        return hourly_data
 
     def __process_daily_data(self, data):
         daily_data = {}
@@ -167,7 +173,7 @@ class terrariumOpenmeteo(terrariumWeather):
                 },
             }
 
-        self._device["forecast"] = {**self._device["hours"], **daily_data}
+        return daily_data
 
     def __process_history_data(self, data):
         history_data = {}
@@ -188,4 +194,4 @@ class terrariumOpenmeteo(terrariumWeather):
                 },
             }
 
-        self._device["history"] = history_data
+        return history_data
