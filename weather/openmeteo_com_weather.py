@@ -114,12 +114,8 @@ class terrariumOpenmeteo(terrariumWeather):
 
         # Hourly overrules daily.
         return_data["forecast"] = self.__process_daily_data(
-            json_data.get("daily", []),
-            self.__process_hourly_data(
-                json_data.get("hourly", [])
-            )
+            json_data.get("daily", []), self.__process_hourly_data(json_data.get("hourly", []))
         )
-
 
         # Get history data
         now = datetime.now()
@@ -160,7 +156,7 @@ class terrariumOpenmeteo(terrariumWeather):
             time = datetime.fromisoformat(time).replace(microsecond=0)
 
             if time.isoformat() in daily_data:
-                daily_data[time.isoformat()]['sun'] = {
+                daily_data[time.isoformat()]["sun"] = {
                     "rise": datetime.fromisoformat(data["sunrise"][counter]),
                     "set": datetime.fromisoformat(data["sunset"][counter]),
                 }
