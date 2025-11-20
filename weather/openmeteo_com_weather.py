@@ -114,8 +114,8 @@ class terrariumOpenmeteo(terrariumWeather):
 
         # Hourly overrules daily. The data will be sorted later on
         return_data["forecast"] = {
-            **self.__process_daily_data(json_data.get("daily", [])),
             **self.__process_hourly_data(json_data.get("hourly", [])),
+            **self.__process_daily_data(json_data.get("daily", [])),
         }
 
         # Get history data
