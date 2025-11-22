@@ -85,7 +85,7 @@
               <td>
                 {#if area.state.sensors.alarm}
                   <i
-                    class="fas fa-exclamation-triangle text-secondary mt-1"
+                    class="fas fa-exclamation-triangle text-secondary pr-1"
                     class:text-danger="{(area.state.sensors?.alarm_low && area.setup.low.relays.length > 0) ||
                       (area.state.sensors?.alarm_high && area.setup.high.relays.length > 0)}"
                   >
