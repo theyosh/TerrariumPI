@@ -43,7 +43,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Install OS dependencies
       run: sudo apt-get install -y python3-dev libasound2-dev
