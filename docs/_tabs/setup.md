@@ -174,14 +174,44 @@ adding/updating the weather source_
 
 With the weather data you can schedule your light system based on the **sun
 rise** and **sun set**. This can either be at your home location, or any other
-location. The sun rise and set times will be shifted to your home location
-times. So when it is day at 08:00 at the given location, TerrariumPI will thread
-that as 08:00 local time. This way, you can have seasons with shorter and longer
+location. And the historical weather data is used for [climate mirroring]({% link _tabs/features.md %}#local-weather-and-climate-mirroring).
+
+### Timezones
+
+The weather data is loaded in such a way that timezones are 'ignored'. So when
+it is day at 08:00 at the given location, TerrariumPI will thread
+that as 08:00 local time. Even when the location is at the other side of the world. \
+This way, you can have seasons with shorter and longer
 days, based on day of the year.
 
-Other weather data is just for show. Does not have a function.
+### Sources
 
-### API Change
+TerrariumPI can handle two weather sources at the moment. Those are:
+
+- [OpenWeatherMap.org](#openweathermaporg)
+- [Open-Meteo.com](#open-meteoorg)
+
+#### OpenWeatherMap.org
+
+![Logo OpenweatherMap](/assets/img/logo_openweather_map.png){: .right width="200" }In
+order to use the weather system with Openweathermap.org, you need to create a
+free account at [OpenWeatherMap](https://home.openweathermap.org/users/sign_up).
+
+Than use one of the two supported API urls: \
+`https://api.openweathermap.org/data/2.5/weather?q=[City],[Country]&appid=[API_KEY]` \
+or \
+`https://api.openweathermap.org/data/2.5/weather?id=[CityID]&appid=[API_KEY]`
+
+Do **not** add the `&metric=` part in the url. And keep the value of **2.5** in
+the url!
+
+TerrariumPI will auto detect with API version you have an account for. TerrariumPI
+should stay within the free 1000 API calls per day.
+
+**important** This OpenWeatherMap url will be encrypted in the database. So the
+API_KEY value cannot be read out of the database directly.
+
+##### API Change
 
 As from October 2022 they changed the conditions to a free account. Which means
 that we have fewer data to work with. This also means no history data for
@@ -200,25 +230,16 @@ version 3.0 and if that fails, it will fallback to the (old free) 2.5 version.
 So the API url for TerrariumPI is always as described below including the 2.5
 in the url!**
 
-### Setup
+#### Open-Meteo.org
 
-In order to use the weather system, you need to create a free account at
-[OpenWeatherMap](https://home.openweathermap.org/users/sign_up).
+![Logo OpenMeteo](/assets/img/OpenMeteo.com.svg){: .right.invert width="100" }This
+is a [free service](https://open-meteo.com) which does not need an account. You
+need to know the latitude and longitude of your location. And than construct the
+following url below:
 
-Than use one of the two supported API urls: \
-`https://api.openweathermap.org/data/2.5/weather?q=[City],[Country]&appid=[API_KEY]` \
-or \
-`https://api.openweathermap.org/data/2.5/weather?id=[CityID]&appid=[API_KEY]`
+`https://api.open-meteo.com/v1/forecast?latitude=[LAT]&longitude=[LONG]`
 
-Do **not** add the `&metric=` part in the url. And keep the value of **2.5** in
-the url!
-
-TerrariumPI does about 6-10 calls on the One call API per day, what would result
-in 300 calls max per month. And it can detect which API is available with your
-OpenWeatherMap account.
-
-**important** This OpenWeatherMap url will be encrypted in the database. So the
-API_KEY value cannot be read out of the database directly.
+That is all, and you have all the weather data that is required.
 
 ## Relays
 
