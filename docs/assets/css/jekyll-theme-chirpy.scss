@@ -9,7 +9,7 @@
 ';
 
 /* append your custom style below */
-@use 'swagger';
+@use "swagger";
 
 /* Hide duplicate title ?? */
 h1.dynamic-title {
@@ -19,9 +19,9 @@ h1.dynamic-title {
 div.license-wrapper a.external::after,
 div.content a.external::after,
 footer a.external::after {
-  content: '\f35d';
+  content: "\f35d";
   padding-left: 0.2rem;
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 0.75rem;
 }
@@ -45,7 +45,7 @@ div.content .share-icons a.external::after {
 
 @media (prefers-color-scheme: dark) {
   html:not([data-mode]),
-  html[data-mode='dark'] {
+  html[data-mode="dark"] {
     img.is_dimmer,
     a.invert img,
     img.invert {
@@ -91,7 +91,7 @@ ul.jekyllcodex_accordion li input:checked + label + div {
   display: block;
 }
 ul.jekyllcodex_accordion li label::before {
-  content: '+';
+  content: "+";
   font-weight: normal;
   font-size: 130%;
   line-height: 1.1rem;
@@ -127,6 +127,10 @@ table.timertable input {
   width: 0;
   height: 3px;
   z-index: 99;
-  background: linear-gradient(to right, rgba(138, 180, 248, 1) 90%, rgba(138, 180, 248, 0.1));
+  background: linear-gradient(
+    to right,
+    rgba(138, 180, 248, 1) 90%,
+    rgba(138, 180, 248, 0.1)
+  );
   transition: width 1s;
 }

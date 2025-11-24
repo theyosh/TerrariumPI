@@ -6,10 +6,10 @@ tags: [webcam, live, local, streaming]
 image:
   path: /assets/img/RPI_webcam.webp
   src: /assets/img/RPI_webcam.webp
-  alt: 'Live Raspberry PI camera'
+  alt: "Live Raspberry PI camera"
 
 device_type: Live streaming
-device_address: 'Fixed to `rpicam`'
+device_address: "Fixed to `rpicam`"
 device_url: https://projects.raspberrypi.org/en/projects/getting-started-with-picamera
 ---
 

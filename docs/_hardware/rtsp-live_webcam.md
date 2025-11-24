@@ -6,10 +6,10 @@ tags: [webcam, live, streaming, rtsp]
 image:
   path: /assets/img/rtspcam.webp
   src: /assets/img/rtspcam.webp
-  alt: 'RTSP Live camera'
+  alt: "RTSP Live camera"
 
 device_type: Live streaming
-device_address: 'Enter the device rtsp url<br />Ex: `rtsp://server.lan/stream`'
+device_address: "Enter the device rtsp url<br />Ex: `rtsp://server.lan/stream`"
 ---
 
 ## Information

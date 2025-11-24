@@ -1,16 +1,16 @@
 ---
-title: 'Energenie USB'
+title: "Energenie USB"
 categories: [Hardware, Relay]
 tags: [relay, energenie]
 
 image:
   path: /assets/img/Energenie_USB.webp
   src: /assets/img/Energenie_USB.webp
-  alt: 'Energenie USB header image'
+  alt: "Energenie USB header image"
 
 device_address:
-  'Enter the relay number from 1 - 4. Optional you can enter the Serial address
-  of the board if you have multiple relay boards like: `1,0035685`'
+  "Enter the relay number from 1 - 4. Optional you can enter the Serial address
+  of the board if you have multiple relay boards like: `1,0035685`"
 device_auto_detect: true
 ---
 

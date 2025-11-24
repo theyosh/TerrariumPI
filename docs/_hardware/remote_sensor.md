@@ -18,13 +18,13 @@ tags:
     distance,
     uvi,
     pressure,
-    light,
+    light
   ]
 
 image:
   path: /assets/img/remote_sensor.webp
   src: /assets/img/remote_sensor.webp
-  alt: 'Remote sensor header image'
+  alt: "Remote sensor header image"
 
 device_types:
   [
@@ -40,11 +40,11 @@ device_types:
     distance,
     uvi,
     pressure,
-    light,
+    light
   ]
 device_address:
-  'Enter the full url and json path traversal. More information at [remote
-  hardware](/TerrariumPI/faq/how-to-use-remote-data/).'
+  "Enter the full url and json path traversal. More information at [remote
+  hardware](/TerrariumPI/faq/how-to-use-remote-data/)."
 device_url: /TerrariumPI/faq/how-to-use-remote-data/
 ---
 

@@ -6,12 +6,12 @@ tags: [button, ldr, light]
 image:
   path: /assets/img/ldr.webp
   src: /assets/img/ldr.webp
-  alt: 'Light sensor header image'
+  alt: "Light sensor header image"
 
 calibration: true
 device_address:
-  'Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the
-  device is connected<br />Ex: `27`'
+  "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the
+  device is connected<br />Ex: `27`"
 device_url: https://www.ryansouthgate.com/2015/08/10/raspberry-pi-door-sensor/
 ---
 

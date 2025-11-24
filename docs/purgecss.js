@@ -1,17 +1,17 @@
-import { promises as fs } from 'fs';
-import { PurgeCSS } from 'purgecss';
+import { promises as fs } from "fs";
+import { PurgeCSS } from "purgecss";
 
-const DIST_PATH = '_sass/vendors';
+const DIST_PATH = "_sass/vendors";
 const output = `${DIST_PATH}/_bootstrap.scss`;
 
 const config = {
-  content: ['_includes/**/*.html', '_layouts/**/*.html', '_javascript/**/*.js'],
-  css: ['node_modules/bootstrap/dist/css/bootstrap.min.css'],
+  content: ["_includes/**/*.html", "_layouts/**/*.html", "_javascript/**/*.js"],
+  css: ["node_modules/bootstrap/dist/css/bootstrap.min.css"],
   keyframes: true,
   variables: true,
   // The `safelist` should be changed appropriately for future development
   safelist: {
-    standard: [/^collaps/, /^w-/, 'shadow', 'border', 'kbd'],
+    standard: [/^collaps/, /^w-/, "shadow", "border", "kbd"],
     greedy: [/^col-/, /tooltip/]
   }
 };
@@ -24,7 +24,7 @@ function main() {
       return fs.writeFile(output, result[0].css);
     })
     .catch((err) => {
-      console.error('Error during PurgeCSS process:', err);
+      console.error("Error during PurgeCSS process:", err);
     });
 }
 

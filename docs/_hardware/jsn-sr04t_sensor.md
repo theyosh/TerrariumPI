@@ -6,12 +6,12 @@ tags: [sensor, distance]
 image:
   path: /assets/img/JSN-SR04T.webp
   src: /assets/img/JSN-SR04T.webp
-  alt: 'JSN-SR04T ultrasonic ranging sensor header image'
+  alt: "JSN-SR04T ultrasonic ranging sensor header image"
 
 device_types: [distance]
 device_address:
-  'Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the
-  `trigger` and `echo` pins are connected in that order<br />Ex: `27,23`'
+  "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number where the
+  `trigger` and `echo` pins are connected in that order<br />Ex: `27,23`"
 device_url: https://raspberrypi.stackexchange.com/a/81793
 ---
 

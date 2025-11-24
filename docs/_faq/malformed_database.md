@@ -1,5 +1,5 @@
 ---
-title: 'sqlite3.DatabaseError: database disk image is malformed'
+title: "sqlite3.DatabaseError: database disk image is malformed"
 categories: [Website, FAQ]
 tags: [database, malformed]
 ---

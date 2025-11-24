@@ -10,78 +10,87 @@
   function getFlagEmoji(countryCode) {
     const codePoints = countryCode
       .toUpperCase()
-      .split('')
+      .split("")
       .map((char) => 127397 + char.charCodeAt());
     return String.fromCodePoint(...codePoints);
   }
 
   const setProgressBar = () => {
-    let scrollDist = document.documentElement.scrollTop || document.body.scrollTop;
-    let progressWidth = (scrollDist / (document.body.scrollHeight - document.documentElement.clientHeight)) * 100;
-    progressBar.style.width = progressWidth + '%';
+    let scrollDist =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    let progressWidth =
+      (scrollDist /
+        (document.body.scrollHeight - document.documentElement.clientHeight)) *
+      100;
+    progressBar.style.width = progressWidth + "%";
   };
 
   let progressBar = null;
   jQuery(function () {
-    jQuery('body').prepend('<div id="progress-bar"></div>');
-    progressBar = document.getElementById('progress-bar');
+    jQuery("body").prepend('<div id="progress-bar"></div>');
+    progressBar = document.getElementById("progress-bar");
     if (progressBar) {
-      window.addEventListener('scroll', setProgressBar);
+      window.addEventListener("scroll", setProgressBar);
     }
   });
 
   jQuery(function () {
     let languages = [
-      { name: 'Dutch', key: 'NL' },
-      { name: 'German', key: 'DE' },
-      { name: 'English', key: 'GB' },
-      { name: 'French', key: 'FR' },
-      { name: 'Italian', key: 'IT' },
-      { name: 'Japanese', key: 'JA', flag: 'JP' },
-      { name: 'Norwegian', key: 'NO' },
-      { name: 'Polish', key: 'PL' },
-      { name: 'Portuguese', key: 'PT' },
-      { name: 'Slovak', key: 'SK' },
-      { name: 'Spanish', key: 'ES' },
+      { name: "Dutch", key: "NL" },
+      { name: "German", key: "DE" },
+      { name: "English", key: "GB" },
+      { name: "French", key: "FR" },
+      { name: "Italian", key: "IT" },
+      { name: "Japanese", key: "JA", flag: "JP" },
+      { name: "Norwegian", key: "NO" },
+      { name: "Polish", key: "PL" },
+      { name: "Portuguese", key: "PT" },
+      { name: "Slovak", key: "SK" },
+      { name: "Spanish", key: "ES" }
     ];
 
     let pulldown = jQuery('select[name="language"]');
 
     jQuery.each(languages, function (counter, language) {
       pulldown.append(
-        jQuery('<option>')
-          .val(language['key'].toLowerCase())
-          .text(getFlagEmoji(language['flag'] || language['key']) + ' ' + language['name']),
+        jQuery("<option>")
+          .val(language["key"].toLowerCase())
+          .text(
+            getFlagEmoji(language["flag"] || language["key"]) +
+              " " +
+              language["name"]
+          )
       );
     });
 
     const params = new URLSearchParams(window.location.search);
-    if (params.has('_x_tr_tl')) {
-      pulldown.val(params.get('_x_tr_tl'));
+    if (params.has("_x_tr_tl")) {
+      pulldown.val(params.get("_x_tr_tl"));
     }
 
-    pulldown.on('change', function (event) {
-      if (this.value != '') {
-        if (this.value == 'gb') {
-          location.href = 'https://theyosh.github.io/TerrariumPI' + location.pathname;
+    pulldown.on("change", function (event) {
+      if (this.value != "") {
+        if (this.value == "gb") {
+          location.href =
+            "https://theyosh.github.io/TerrariumPI" + location.pathname;
         } else {
           location.href =
-            'https://translate.google.com/translate?hl=en&sl=en&tl=' +
+            "https://translate.google.com/translate?hl=en&sl=en&tl=" +
             this.value +
-            '&u=https%3A%2F%2Ftheyosh.github.io' +
-            location.pathname.replace(/\//g, '%2F');
+            "&u=https%3A%2F%2Ftheyosh.github.io" +
+            location.pathname.replace(/\//g, "%2F");
         }
       }
     });
   });
 
   jQuery(function () {
-    const tagCloud = jQuery('div#tags');
+    const tagCloud = jQuery("div#tags");
 
     if (tagCloud.length === 1) {
       const maxWidth = 100;
       const offset = 2;
-      const tags = tagCloud.find('span.text-muted');
+      const tags = tagCloud.find("span.text-muted");
       const values = new Array();
 
       for (let tag of tags) {
@@ -92,9 +101,16 @@
 
       for (let tag of tags) {
         let link = jQuery(tag).parent();
-        let surrounding_padding = link.css('padding-right').replace('px', '') * 1;
-        surrounding_padding = Math.round(surrounding_padding + maxWidth * ((tag.textContent * 1 + offset) / maxValue));
-        link.css({ 'padding-right': surrounding_padding + 'px', 'padding-left': surrounding_padding + 'px' });
+        let surrounding_padding =
+          link.css("padding-right").replace("px", "") * 1;
+        surrounding_padding = Math.round(
+          surrounding_padding +
+            maxWidth * ((tag.textContent * 1 + offset) / maxValue)
+        );
+        link.css({
+          "padding-right": surrounding_padding + "px",
+          "padding-left": surrounding_padding + "px"
+        });
       }
     }
   });
@@ -102,16 +118,21 @@
 
 <!-- Get 5 last posted/updated posts -->
 
-{% assign MAX_SIZE = 5 %} {% assign all_list = '' | split: '' %} {% for post in site.posts %} {% assign datetime =
-post.last_modified_at | default: post.date %} {% capture elem %} {{- datetime | date: "%Y%m%d%H%M%S" -}}::{{-
-forloop.index0 -}} {% endcapture %} {% assign all_list = all_list | push: elem %} {% endfor %} {% assign all_list =
-all_list | sort | reverse %} {% assign update_list = '' | split: '' %} {% for entry in all_list limit: MAX_SIZE %} {%
-assign update_list = update_list | push: entry %} {% endfor %} {% if update_list.size > 0 %}
+{% assign MAX_SIZE = 5 %} {% assign all_list = '' | split: '' %} {% for post in
+site.posts %} {% assign datetime = post.last_modified_at | default: post.date %}
+{% capture elem %} {{- datetime | date: "%Y%m%d%H%M%S" -}}::{{- forloop.index0
+-}} {% endcapture %} {% assign all_list = all_list | push: elem %} {% endfor %}
+{% assign all_list = all_list | sort | reverse %} {% assign update_list = '' |
+split: '' %} {% for entry in all_list limit: MAX_SIZE %} {% assign update_list =
+update_list | push: entry %} {% endfor %} {% if update_list.size > 0 %}
 <section id="access-lastmod">
-  <h2 class="panel-heading">{{- site.data.locales[include.lang].panel.lastmod -}}</h2>
+  <h2 class="panel-heading">
+    {{- site.data.locales[include.lang].panel.lastmod -}}
+  </h2>
   <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
-    {% for item in update_list %} {% assign index = item | split: '::' | last | plus: 0 %} {% assign post =
-    site.posts[index] %} {% assign url = post.url | relative_url %}
+    {% for item in update_list %} {% assign index = item | split: '::' | last |
+    plus: 0 %} {% assign post = site.posts[index] %} {% assign url = post.url |
+    relative_url %}
     <li class="text-truncate lh-lg">
       <a href="{{ url }}">{{ post.title }}</a>
     </li>

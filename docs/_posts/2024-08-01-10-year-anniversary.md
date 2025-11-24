@@ -499,5 +499,4 @@ but we made it.
 
 {% include image-gallery.html folder="/assets/img/photos" %}
 
-[^footnote_total_records]:
-    This is all theoretical. There could be sensor data missing due to errors.
+[^footnote_total_records]: This is all theoretical. There could be sensor data missing due to errors.

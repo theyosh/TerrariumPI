@@ -6,12 +6,12 @@ tags: [relay, HD30A]
 image:
   path: /assets/img/HD30A_4_Channel_Electromagnetic_I2C_Relay_12V_30A.webp
   src: /assets/img/HD30A_4_Channel_Electromagnetic_I2C_Relay_12V_30A.webp
-  alt: 'HD30A 4 Channel Electromagnetic I2C Relay 12V 30A header image'
+  alt: "HD30A 4 Channel Electromagnetic I2C Relay 12V 30A header image"
 
 device_hardware: GPIO
 device_address:
-  'Enter the IO Expender type, the relay number (starting at 1), and then the
-  I2C address with optional I2C bus number: `pcf8574-1,0x4c,3`'
+  "Enter the IO Expender type, the relay number (starting at 1), and then the
+  I2C address with optional I2C bus number: `pcf8574-1,0x4c,3`"
 ---
 
 ## Information

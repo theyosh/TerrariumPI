@@ -6,12 +6,11 @@ tags: [sensor, temperature, humidity, pressure, altitude]
 image:
   path: /assets/img/bme680.webp
   src: /assets/img/bme680.webp
-  alt: 'BME680 sensor header image'
+  alt: "BME680 sensor header image"
 
 device_types: [temperature, humidity, pressure, altitude]
-device_address:
-  '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
-  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f,3`'
+device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C
+  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f,3`"
 device_url: https://shop.pimoroni.com/products/bme680-breakout?variant=12491552129107
 ---
 

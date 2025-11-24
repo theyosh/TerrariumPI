@@ -6,9 +6,9 @@ tags: [relay, dimmer, wifi, sonoff, tasmota, diy]
 image:
   path: /assets/img/Sonoff-D1-Dimmer.webp
   src: /assets/img/Sonoff-D1-Dimmer.webp
-  alt: 'Sonoff D1 Dimmer (Tasmota) header image'
+  alt: "Sonoff D1 Dimmer (Tasmota) header image"
 
-device_address: 'Enter the hostname or IP address including port number.'
+device_address: "Enter the hostname or IP address including port number."
 device_url: https://sonoff.tech/product/smart-lighting/d1/
 ---
 

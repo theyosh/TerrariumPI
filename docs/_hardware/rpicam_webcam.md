@@ -6,10 +6,10 @@ tags: [webcam, live, picture]
 image:
   path: /assets/img/RPI_webcam.webp
   src: /assets/img/RPI_webcam.webp
-  alt: 'Raspberry PI camera'
+  alt: "Raspberry PI camera"
 
 device_type: Still picture
-device_address: 'Fixed to `rpicam`'
+device_address: "Fixed to `rpicam`"
 device_url: https://projects.raspberrypi.org/en/projects/getting-started-with-picamera
 ---
 

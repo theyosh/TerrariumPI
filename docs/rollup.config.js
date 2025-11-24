@@ -1,18 +1,18 @@
-import babel from '@rollup/plugin-babel';
-import terser from '@rollup/plugin-terser';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import fs from 'fs';
-import pkg from './package.json';
+import babel from "@rollup/plugin-babel";
+import terser from "@rollup/plugin-terser";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import fs from "fs";
+import pkg from "./package.json";
 
-const SRC_DEFAULT = '_javascript';
+const SRC_DEFAULT = "_javascript";
 const SRC_PWA = `${SRC_DEFAULT}/pwa`;
-const DIST = 'assets/js/dist';
+const DIST = "assets/js/dist";
 
 const banner = `/*!
  * ${pkg.name} v${pkg.version} | © ${pkg.since} ${pkg.author} | ${pkg.license} Licensed | ${pkg.homepage}
  */`;
-const frontmatter = '---\npermalink: /:basename\n---\n';
-const isProd = process.env.BUILD === 'production';
+const frontmatter = "---\npermalink: /:basename\n---\n";
+const isProd = process.env.BUILD === "production";
 
 let hasWatched = false;
 
@@ -23,10 +23,10 @@ function cleanup() {
 
 function insertFrontmatter() {
   return {
-    name: 'insert-frontmatter',
+    name: "insert-frontmatter",
     generateBundle(_, bundle) {
       for (const chunkOrAsset of Object.values(bundle)) {
-        if (chunkOrAsset.type === 'chunk') {
+        if (chunkOrAsset.type === "chunk") {
           chunkOrAsset.code = frontmatter + chunkOrAsset.code;
         }
       }
@@ -49,7 +49,7 @@ function build(
     input,
     output: {
       file: `${DIST}/${filename}.min.js`,
-      format: 'iife',
+      format: "iife",
       ...(outputName !== null && { name: outputName }),
       banner,
       sourcemap: !isProd && !jekyll
@@ -57,11 +57,11 @@ function build(
     ...(shouldWatch && { watch: { include: `${SRC_DEFAULT}/**/*.js` } }),
     plugins: [
       babel({
-        babelHelpers: 'bundled',
-        presets: ['@babel/env'],
+        babelHelpers: "bundled",
+        presets: ["@babel/env"],
         plugins: [
-          '@babel/plugin-transform-class-properties',
-          '@babel/plugin-transform-private-methods'
+          "@babel/plugin-transform-class-properties",
+          "@babel/plugin-transform-private-methods"
         ]
       }),
       nodeResolve(),
@@ -74,13 +74,13 @@ function build(
 cleanup();
 
 export default [
-  build('commons'),
-  build('home'),
-  build('categories'),
-  build('page'),
-  build('post'),
-  build('misc'),
-  build('theme', { outputName: 'Theme' }),
-  build('app', { src: SRC_PWA, jekyll: true }),
-  build('sw', { src: SRC_PWA, jekyll: true })
+  build("commons"),
+  build("home"),
+  build("categories"),
+  build("page"),
+  build("post"),
+  build("misc"),
+  build("theme", { outputName: "Theme" }),
+  build("app", { src: SRC_PWA, jekyll: true }),
+  build("sw", { src: SRC_PWA, jekyll: true })
 ];

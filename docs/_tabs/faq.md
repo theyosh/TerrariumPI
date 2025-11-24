@@ -6,7 +6,7 @@ order: 11
 image:
   path: /assets/img/FAQ.webp
   src: /assets/img/FAQ.webp
-  alt: 'FAQ header image'
+  alt: "FAQ header image"
 ---
 
 Here you can find the most frequently asked question.

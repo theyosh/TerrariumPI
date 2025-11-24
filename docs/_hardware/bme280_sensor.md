@@ -6,12 +6,11 @@ tags: [sensor, temperature, humidity, pressure, altitude]
 image:
   path: /assets/img/bme280.webp
   src: /assets/img/bme280.webp
-  alt: 'BME280 sensor header image'
+  alt: "BME280 sensor header image"
 
 device_types: [temperature, humidity, pressure, altitude]
-device_address:
-  '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
-  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`'
+device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C
+  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`"
 device_url: https://www.adafruit.com/product/2652
 ---
 

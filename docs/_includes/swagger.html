@@ -1,8 +1,10 @@
-{% if page.data %} {% assign swagger = site.data[page.data] %} {% else %} {% assign swagger = page %} {% endif %} {% for
-route in swagger.paths %}
+{% if page.data %} {% assign swagger = site.data[page.data] %} {% else %} {%
+assign swagger = page %} {% endif %} {% for route in swagger.paths %}
 <div class="swagger-paths">
   <h2 class="swagger-path">
-    <a href="#{{ swagger.basePath }}{{ route[0] }}" name="{{ swagger.basePath }}{{ route[0] }}"
+    <a
+      href="#{{ swagger.basePath }}{{ route[0] }}"
+      name="{{ swagger.basePath }}{{ route[0] }}"
       >{{ swagger.basePath }}{{ route[0] }}</a
     >
   </h2>
@@ -36,26 +38,34 @@ route in swagger.paths %}
               </tr>
             </thead>
             <tbody>
-              {% for parameter in method[1].parameters %} {% if parameter.schema['$ref'] %} {% assign schema_path =
-              parameter.schema['$ref'] | remove: "#/" | split: "/" %} {% assign schema = swagger %} {% for path in
-              schema_path %} {% assign schema = schema[path] %} {% endfor %} {% for item in schema.properties %} {%
-              unless item[1].readOnly %}
+              {% for parameter in method[1].parameters %} {% if
+              parameter.schema['$ref'] %} {% assign schema_path =
+              parameter.schema['$ref'] | remove: "#/" | split: "/" %} {% assign
+              schema = swagger %} {% for path in schema_path %} {% assign schema
+              = schema[path] %} {% endfor %} {% for item in schema.properties %}
+              {% unless item[1].readOnly %}
               <tr>
                 <td>
                   {% if schema.required contains item[0] %}
                   <span class="swagger-parameter-required">
-                    {% endif %} {{ item[0] }} {% if schema.required contains item[0] %}
+                    {% endif %} {{ item[0] }} {% if schema.required contains
+                    item[0] %}
                   </span>
                   {% endif %}
                 </td>
                 <td>{{ parameter.in }}</td>
                 <td>{{ item[1].description }}</td>
                 <td>
-                  {% if item[1].type %} {{ item[1].type | capitalize }} {% if item[1].items %} of {{ item[1].items.type
-                  | capitalize }} {% if item[1].items.enum %} allowed ({% for val in item[1].items.enum %}{{val}} {%
-                  endfor %}) {% endif %} {% endif %} {% elsif item[1].schema %} {% if item[1].schema.example %} {%
-                  highlight json %}{{ item[1].schema.example }}{% endhighlight %} {% else %} {% highlight json %}{{
-                  item[1].schema }}{% endhighlight %} {% endif %} {% else %} String {% endif %} {% if item[1].default %}
+                  {% if item[1].type %} {{ item[1].type | capitalize }} {% if
+                  item[1].items %} of {{ item[1].items.type | capitalize }} {%
+                  if item[1].items.enum %} allowed ({% for val in
+                  item[1].items.enum %}{{val}} {% endfor %}) {% endif %} {%
+                  endif %} {% elsif item[1].schema %} {% if
+                  item[1].schema.example %} {% highlight json %}{{
+                  item[1].schema.example }}{% endhighlight %} {% else %} {%
+                  highlight json %}{{ item[1].schema }}{% endhighlight %} {%
+                  endif %} {% else %} String {% endif %} {% if item[1].default
+                  %}
                   <br />Default: {{item[1].default}} {% endif %}
                 </td>
               </tr>
@@ -71,12 +81,15 @@ route in swagger.paths %}
                 <td>{{ parameter.in }}</td>
                 <td>{{ parameter.description }}</td>
                 <td>
-                  {% if parameter.type %} {{ parameter.type | capitalize }} {% if parameter.items %} of {{
-                  parameter.items.type | capitalize }} {% if parameter.items.enum %} allowed ({% for val in
-                  parameter.items.enum %}{{val}} {% endfor %}) {% endif %} {% endif %} {% elsif parameter.schema %} {%
-                  if parameter.schema.example %} {% highlight json %}{{ parameter.schema.example }}{% endhighlight %} {%
-                  else %} {% highlight json %}{{ parameter.schema }}{% endhighlight %} {% endif %} {% else %} String {%
-                  endif %}
+                  {% if parameter.type %} {{ parameter.type | capitalize }} {%
+                  if parameter.items %} of {{ parameter.items.type | capitalize
+                  }} {% if parameter.items.enum %} allowed ({% for val in
+                  parameter.items.enum %}{{val}} {% endfor %}) {% endif %} {%
+                  endif %} {% elsif parameter.schema %} {% if
+                  parameter.schema.example %} {% highlight json %}{{
+                  parameter.schema.example }}{% endhighlight %} {% else %} {%
+                  highlight json %}{{ parameter.schema }}{% endhighlight %} {%
+                  endif %} {% else %} String {% endif %}
                 </td>
               </tr>
               {% endif %} {% endfor %}
@@ -106,28 +119,37 @@ route in swagger.paths %}
               </tr>
             </thead>
             <tbody>
-              {% if response[1].schema['$ref'] or response[1].schema['items']['$ref'] %} {% if
-              response[1].schema['$ref'] %} {% assign schema_path = response[1].schema['$ref'] | remove: "#/" | split:
-              "/" %} {% else %} {% assign schema_path = response[1].schema['items']['$ref'] | remove: "#/" | split: "/"
-              %} {% endif %} {% assign schema = swagger %} {% for path in schema_path %} {% assign schema = schema[path]
-              %} {% endfor %} {% for item in schema.properties %}
+              {% if response[1].schema['$ref'] or
+              response[1].schema['items']['$ref'] %} {% if
+              response[1].schema['$ref'] %} {% assign schema_path =
+              response[1].schema['$ref'] | remove: "#/" | split: "/" %} {% else
+              %} {% assign schema_path = response[1].schema['items']['$ref'] |
+              remove: "#/" | split: "/" %} {% endif %} {% assign schema =
+              swagger %} {% for path in schema_path %} {% assign schema =
+              schema[path] %} {% endfor %} {% for item in schema.properties %}
 
               <tr>
                 <td>
                   {% if schema.required contains item[0] %}
                   <span class="swagger-parameter-required">
-                    {% endif %} {{ item[0] }} {% if schema.required contains item[0] %}
+                    {% endif %} {{ item[0] }} {% if schema.required contains
+                    item[0] %}
                   </span>
                   {% endif %}
                 </td>
                 <td>body</td>
                 <td>{{ item[1].description }}</td>
                 <td>
-                  {% if item[1].type %} {{ item[1].type | capitalize }} {% if item[1].items %} of {{ item[1].items.type
-                  | capitalize }} {% if item[1].items.enum %} allowed ({% for val in item[1].items.enum %}{{val}} {%
-                  endfor %}) {% endif %} {% endif %} {% elsif item[1].schema %} {% if item[1].schema.example %} {%
-                  highlight json %}{{ item[1].schema.example }}{% endhighlight %} {% else %} {% highlight json %}{{
-                  item[1].schema }}{% endhighlight %} {% endif %} {% else %} String {% endif %} {% if item[1].default %}
+                  {% if item[1].type %} {{ item[1].type | capitalize }} {% if
+                  item[1].items %} of {{ item[1].items.type | capitalize }} {%
+                  if item[1].items.enum %} allowed ({% for val in
+                  item[1].items.enum %}{{val}} {% endfor %}) {% endif %} {%
+                  endif %} {% elsif item[1].schema %} {% if
+                  item[1].schema.example %} {% highlight json %}{{
+                  item[1].schema.example }}{% endhighlight %} {% else %} {%
+                  highlight json %}{{ item[1].schema }}{% endhighlight %} {%
+                  endif %} {% else %} String {% endif %} {% if item[1].default
+                  %}
                   <br />Default: {{item[1].default}} {% endif %}
                 </td>
               </tr>
@@ -143,12 +165,15 @@ route in swagger.paths %}
                 <td>{{ parameter.in }}</td>
                 <td>{{ parameter.description }}</td>
                 <td>
-                  {% if parameter.type %} {{ parameter.type | capitalize }} {% if parameter.items %} of {{
-                  parameter.items.type | capitalize }} {% if parameter.items.enum %} allowed ({% for val in
-                  parameter.items.enum %}{{val}} {% endfor %}) {% endif %} {% endif %} {% elsif parameter.schema %} {%
-                  if parameter.schema.example %} {% highlight json %}{{ parameter.schema.example }}{% endhighlight %} {%
-                  else %} {% highlight json %}{{ parameter.schema }}{% endhighlight %} {% endif %} {% else %} String {%
-                  endif %}
+                  {% if parameter.type %} {{ parameter.type | capitalize }} {%
+                  if parameter.items %} of {{ parameter.items.type | capitalize
+                  }} {% if parameter.items.enum %} allowed ({% for val in
+                  parameter.items.enum %}{{val}} {% endfor %}) {% endif %} {%
+                  endif %} {% elsif parameter.schema %} {% if
+                  parameter.schema.example %} {% highlight json %}{{
+                  parameter.schema.example }}{% endhighlight %} {% else %} {%
+                  highlight json %}{{ parameter.schema }}{% endhighlight %} {%
+                  endif %} {% else %} String {% endif %}
                 </td>
               </tr>
               {% endif %}
@@ -156,11 +181,13 @@ route in swagger.paths %}
           </table>
         </div>
 
-        {% endif %} {% for content_type in swagger.produces %} {% if response[1].examples[content_type] %} {% assign
-        example = response[1].examples[content_type] %} {% if content_type contains 'json' %} {% highlight json %}{{
-        example }}{% endhighlight %} {% elsif content_type contains 'xml' %} {% highlight xml %}{{ example }}{%
-        endhighlight %} {% else %} {% highlight http %}{{ example }}{% endhighlight %} {% endif %} {% endif %} {% endfor
-        %} {% endfor %}
+        {% endif %} {% for content_type in swagger.produces %} {% if
+        response[1].examples[content_type] %} {% assign example =
+        response[1].examples[content_type] %} {% if content_type contains 'json'
+        %} {% highlight json %}{{ example }}{% endhighlight %} {% elsif
+        content_type contains 'xml' %} {% highlight xml %}{{ example }}{%
+        endhighlight %} {% else %} {% highlight http %}{{ example }}{%
+        endhighlight %} {% endif %} {% endif %} {% endfor %} {% endfor %}
       </div>
       {% endif %}
     </div>
@@ -171,8 +198,8 @@ route in swagger.paths %}
 <script type="text/javascript">
   /* Add open/close toggles for REST methods */
   jQuery(document).ready(function () {
-    jQuery('.swagger-method-title').on('click', function (event) {
-      jQuery(this).siblings('.swagger-method-details').toggleClass('open');
+    jQuery(".swagger-method-title").on("click", function (event) {
+      jQuery(this).siblings(".swagger-method-details").toggleClass("open");
       event.preventDefault();
     });
   });

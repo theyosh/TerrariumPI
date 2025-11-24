@@ -7,7 +7,7 @@ permalink: /hardware/i2c-multiplexer/
 image:
   path: /assets/img/pca9548.webp
   src: /assets/img/pca9548.webp
-  alt: 'pca9548 I2C Multiplexer'
+  alt: "pca9548 I2C Multiplexer"
 ---
 
 With this I2C multiplexer you can add multiple I2C buses that can hold multiple

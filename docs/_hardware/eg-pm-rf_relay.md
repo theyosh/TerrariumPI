@@ -6,9 +6,9 @@ tags: [relay, energenie]
 image:
   path: /assets/img/ENER010-PI.webp
   src: /assets/img/ENER010-PI.webp
-  alt: 'Energenie RF header image'
+  alt: "Energenie RF header image"
 
-device_address: 'Enter the relay number from 1 - 4.'
+device_address: "Enter the relay number from 1 - 4."
 device_url: https://energenie4u.co.uk/catalogue/product/ENER010-PI
 ---
 

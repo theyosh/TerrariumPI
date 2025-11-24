@@ -6,12 +6,12 @@ tags: [webcam, live, picture]
 image:
   path: /assets/img/Filmstrip.webp
   src: /assets/img/Filmstrip.webp
-  alt: 'Local file webcam'
+  alt: "Local file webcam"
 
 device_type: Still picture
 device_address:
-  'A webcam that reads a local image file. Prefix with `local://`<br />Ex:
-  `local:///opt/webcam/picture.jpg`'
+  "A webcam that reads a local image file. Prefix with `local://`<br />Ex:
+  `local:///opt/webcam/picture.jpg`"
 ---
 
 ## Information

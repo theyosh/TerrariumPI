@@ -11,11 +11,17 @@
   }
 </style>
 <ul class="image-gallery">
-  {% for file in site.static_files %} {% if file.path contains include.folder %} {% if file.extname == '.jpg' or
-  file.extname == '.jpeg' or file.extname == '.JPG' or file.extname == '.JPEG' %} {% assign filenameparts = file.path |
-  split: "/" %} {% assign filename = filenameparts | last | replace: file.extname,"" %}
+  {% for file in site.static_files %} {% if file.path contains include.folder %}
+  {% if file.extname == '.jpg' or file.extname == '.jpeg' or file.extname ==
+  '.JPG' or file.extname == '.JPEG' %} {% assign filenameparts = file.path |
+  split: "/" %} {% assign filename = filenameparts | last | replace:
+  file.extname,"" %}
   <li>
-    <img src="{{ file.path | relative_url | replace: site.baseurl,'' }}" alt="{{ filename }}" title="{{ filename }}" />
+    <img
+      src="{{ file.path | relative_url | replace: site.baseurl,'' }}"
+      alt="{{ filename }}"
+      title="{{ filename }}"
+    />
   </li>
   {% endif %} {% endif %} {% endfor %}
 </ul>
@@ -36,5 +42,5 @@
 
     return this;
   };
-  $('ul.image-gallery').randomize();
+  $("ul.image-gallery").randomize();
 </script>

@@ -6,12 +6,11 @@ tags: [webcam, live, streaming]
 image:
   path: /assets/img/HLS_Livestream.webp
   src: /assets/img/HLS_Livestream.webp
-  alt: 'Live HLS Stream'
+  alt: "Live HLS Stream"
 
 device_type: Live streaming
-device_address:
-  'A HLS live stream master playlist<br />Ex:
-  `https://stream.server.com/camera/live.m3u8`'
+device_address: "A HLS live stream master playlist<br />Ex:
+  `https://stream.server.com/camera/live.m3u8`"
 device_url: https://en.wikipedia.org/wiki/HTTP_Live_Streaming
 ---
 
