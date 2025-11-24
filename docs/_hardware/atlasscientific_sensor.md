@@ -6,11 +6,12 @@ tags: [sensor, temperature, humidity, conductivity, ph, co2, pressure, i2c]
 image:
   path: /assets/img/atlasscientific.webp
   src: /assets/img/atlasscientific.webp
-  alt: "AtlasScientific header images"
+  alt: 'AtlasScientific header images'
 
 device_types: [temperature, humidity, conductivity, ph, co2, pressure]
-device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C
-  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`"
+device_address:
+  '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
+  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`'
 device_url: https://atlas-scientific.com/
 ---
 

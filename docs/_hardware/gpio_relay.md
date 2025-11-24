@@ -6,13 +6,13 @@ tags: [relay, gpio]
 image:
   path: /assets/img/GPIO_Relay.webp
   src: /assets/img/GPIO_Relay.webp
-  alt: "GPIO Relays header image"
+  alt: 'GPIO Relays header image'
 
 device_hardware: GPIO devices
 device_address:
-  "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the
+  'Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the
   device is connected<br />Ex: `27`<br />Or when used with an [IO
-  expander](/TerrariumPI/hardware/io-expander/):<br />Ex:`pcf8574-9,0x4c,3`"
+  expander](/TerrariumPI/hardware/io-expander/):<br />Ex:`pcf8574-9,0x4c,3`'
 ---
 
 ## Information

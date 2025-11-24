@@ -6,12 +6,12 @@ tags: [sensor, 1-wire, waterproof, temperature, humidity]
 image:
   path: /assets/img/1-Wire.webp
   src: /assets/img/1-Wire.webp
-  alt: "1-Wire header image"
+  alt: '1-Wire header image'
 
 device_types: [temperature, humidity]
 device_address:
-  "Enter the symlink folder name that are available at `/sys/bus/w1/devices/`<br
-  />Ex: `28-0115b231f3ff`"
+  'Enter the symlink folder name that are available at `/sys/bus/w1/devices/`<br
+  />Ex: `28-0115b231f3ff`'
 device_auto_detect: true
 device_url: https://pinout.xyz/pinout/1_wire
 ---

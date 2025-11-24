@@ -6,12 +6,12 @@ tags: [sensor, ph, analog]
 image:
   path: /assets/img/sen0161.webp
   src: /assets/img/sen0161.webp
-  alt: "SEN0161 PH Probe sensor (analog) header image"
+  alt: 'SEN0161 PH Probe sensor (analog) header image'
 
 device_types: [ph]
 device_address:
-  "[Analog](/TerrariumPI/hardware/#analog-sensors) and enter port number <br
-  />Ex: `1`"
+  '[Analog](/TerrariumPI/hardware/#analog-sensors) and enter port number <br
+  />Ex: `1`'
 device_url: https://wiki.dfrobot.com/PH_meter_SKU__SEN0161_
 ---
 

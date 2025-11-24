@@ -6,12 +6,12 @@ tags: [relay, ftdi]
 image:
   path: /assets/img/FTDI.webp
   src: /assets/img/FTDI.webp
-  alt: "FTDI header image"
+  alt: 'FTDI header image'
 
 device_hardware: FTDI devices
 device_address:
-  "Enter the relay number from 1 - 4. Optional add the serial of the board
-  separated by a comma.<br />Ex: `1,A702JH8H`"
+  'Enter the relay number from 1 - 4. Optional add the serial of the board
+  separated by a comma.<br />Ex: `1,A702JH8H`'
 device_auto_detect: true
 device_url: http://denkovi.com/usb-relay-board-four-channels-for-home-automation
 ---

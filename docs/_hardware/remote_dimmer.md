@@ -6,7 +6,7 @@ tags: [relay, dimmer, remote]
 image:
   path: /assets/img/REST_API.webp
   src: /assets/img/REST_API.webp
-  alt: "Remote dimmer (API)"
+  alt: 'Remote dimmer (API)'
 
 device_hardware: Remote dimmer (API)
 device_address: http(s)://some.domain.com/path/location/script.php

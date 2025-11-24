@@ -6,10 +6,10 @@ tags: [sensor, temperature, fertility, light, moisture]
 image:
   path: /assets/img/miflora.webp
   src: /assets/img/miflora.webp
-  alt: "MiFlora bluetooth sensor header image"
+  alt: 'MiFlora bluetooth sensor header image'
 
 device_types: [temperature, fertility, light, moisture]
-device_address: "Bluetooth MAC address. Ex: `c2:7c:9e:66:e3:52`"
+device_address: 'Bluetooth MAC address. Ex: `c2:7c:9e:66:e3:52`'
 device_auto_detect: true
 device_url: https://gadget-freakz.com/product/xiaomi-mi-flora-plant-sensor/
 ---

@@ -6,7 +6,7 @@ tags: [relay, energenie]
 image:
   path: /assets/img/Energenie_Lan.webp
   src: /assets/img/Energenie_Lan.webp
-  alt: "Energenie LAN header image"
+  alt: 'Energenie LAN header image'
 
 device_address:
   "Enter the full http url and adding '#' and number to speicfy the relay.<br

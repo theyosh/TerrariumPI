@@ -17,13 +17,13 @@ tags:
     distance,
     uvi,
     pressure,
-    light
+    light,
   ]
 
 image:
   path: /assets/img/script_sensor.webp
   src: /assets/img/script_sensor.webp
-  alt: "Script sensor header image"
+  alt: 'Script sensor header image'
 
 device_types:
   [
@@ -39,9 +39,9 @@ device_types:
     distance,
     uvi,
     pressure,
-    light
+    light,
   ]
-device_address: "Enter the full path to the script."
+device_address: 'Enter the full path to the script.'
 device_url: https://github.com/theyosh/TerrariumPI/blob/4.x.y.z/contrib/script_sensor.py
 ---
 

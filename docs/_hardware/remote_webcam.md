@@ -6,11 +6,12 @@ tags: [webcam, live, picture, remote]
 image:
   path: /assets/img/Filmstrip.webp
   src: /assets/img/Filmstrip.webp
-  alt: "Remote file webcam"
+  alt: 'Remote file webcam'
 
 device_type: Still picture
-device_address: "Enter the full url to the webcam image<br />Ex:
-  `http://axis.local.lan/jpg/1/image.jpg`"
+device_address:
+  'Enter the full url to the webcam image<br />Ex:
+  `http://axis.local.lan/jpg/1/image.jpg`'
 ---
 
 ## Information

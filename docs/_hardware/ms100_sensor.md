@@ -6,10 +6,10 @@ tags: [sensor, temperature, humidity]
 image:
   path: /assets/img/ms100.webp
   src: /assets/img/ms100.webp
-  alt: "Meross MS100 sensor header image"
+  alt: 'Meross MS100 sensor header image'
 
 device_types: [temperature, humidity]
-device_address: "Need Meross Cloud account credentials"
+device_address: 'Need Meross Cloud account credentials'
 device_auto_detect: true
 device_url: https://www.meross.com/mTerminal/product?type=0&category_id=29
 ---

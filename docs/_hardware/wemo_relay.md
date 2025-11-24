@@ -6,9 +6,9 @@ tags: [relay, wifi, wemo]
 image:
   path: /assets/img/Wemo.webp
   src: /assets/img/Wemo.webp
-  alt: "WEMO Smart plug header image"
+  alt: 'WEMO Smart plug header image'
 
-device_address: "Enter the hostname or IP address"
+device_address: 'Enter the hostname or IP address'
 device_url: https://www.wemo.com/
 device_auto_detect: true
 ---

@@ -6,10 +6,11 @@ tags: [relay, wifi, tapo]
 image:
   path: /assets/img/Tapo-P100.webp
   src: /assets/img/Tapo-P100.webp
-  alt: "Tapo P100 Mini Smart Wi-Fi Socket"
+  alt: 'Tapo P100 Mini Smart Wi-Fi Socket'
 
-device_address: "Enter the IP address,email address,password Ex:
-  `123.123.123.123,me@example.com,password`"
+device_address:
+  'Enter the IP address,email address,password Ex:
+  `123.123.123.123,me@example.com,password`'
 device_url: https://www.tapo.com/en/product/smart-plug/tapo-p100/
 ---
 

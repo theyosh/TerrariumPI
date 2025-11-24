@@ -6,10 +6,11 @@ tags: [sensor, co2]
 image:
   path: /assets/img/k30co2.webp
   src: /assets/img/k30co2.webp
-  alt: "K30 CO2 sensor header image"
+  alt: 'K30 CO2 sensor header image'
 
 device_types: [co2]
-device_address: "Serial address and connect to GPIO pin 8 (TX) and 10 (RX). Ex: `/dev/ttyS0`"
+device_address:
+  'Serial address and connect to GPIO pin 8 (TX) and 10 (RX). Ex: `/dev/ttyS0`'
 device_url: https://www.co2meter.com/products/k-30-3-co2-sensor
 ---
 

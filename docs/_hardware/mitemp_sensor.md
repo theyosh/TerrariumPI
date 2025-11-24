@@ -6,10 +6,10 @@ tags: [sensor, temperature, humidity]
 image:
   path: /assets/img/mitemp.webp
   src: /assets/img/mitemp.webp
-  alt: "MiTemperature bluetooth sensor header image"
+  alt: 'MiTemperature bluetooth sensor header image'
 
 device_types: [temperature, humidity]
-device_address: "Bluetooth MAC address. Ex: `c2:7c:9e:66:e3:52`"
+device_address: 'Bluetooth MAC address. Ex: `c2:7c:9e:66:e3:52`'
 device_auto_detect: true
 device_url: https://www.plantcaretools.com/en/product/bluetooth-temperature-humidity-sensor/?v=f003c44deab6
 ---

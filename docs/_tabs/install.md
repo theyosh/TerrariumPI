@@ -126,13 +126,13 @@ services:
     stop_signal: SIGINT
     init: true
     environment:
-      TZ: "Europe/Amsterdam" # timezone list can be found here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-      ENABLE_I2C: "true"
-      ENABLE_1_WIRE: "true"
-      ENABLE_CAMERA: "true"
-      ENABLE_SERIAL: "true"
-      ENABLE_CO2_SENSORS: "true"
-      AUTO_REBOOT: "true"
+      TZ: 'Europe/Amsterdam' # timezone list can be found here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      ENABLE_I2C: 'true'
+      ENABLE_1_WIRE: 'true'
+      ENABLE_CAMERA: 'true'
+      ENABLE_SERIAL: 'true'
+      ENABLE_CO2_SENSORS: 'true'
+      AUTO_REBOOT: 'true'
 ```
 
 **Remark:** Remove the lines which are not for your host OS.

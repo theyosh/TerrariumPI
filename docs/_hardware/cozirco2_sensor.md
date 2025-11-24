@@ -6,11 +6,12 @@ tags: [sensor, co2, temperature, humidity]
 image:
   path: /assets/img/COZIR_CO2.webp
   src: /assets/img/COZIR_CO2.webp
-  alt: "COZIR CO2 sensor header image"
+  alt: 'COZIR CO2 sensor header image'
 
 device_types: [co2, temperature, humidity]
-device_address: "&lt;I2C Address&gt;,[I2C Bus] where the [I2C
-  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`"
+device_address:
+  '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
+  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`'
 device_url: https://www.gassensing.co.uk/products
 ---
 

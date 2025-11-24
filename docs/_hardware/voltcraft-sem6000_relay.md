@@ -1,14 +1,14 @@
 ---
-title: "Voltcraft SEM6000"
+title: 'Voltcraft SEM6000'
 categories: [Hardware, Relay]
 tags: [relay, voltcraft]
 
 image:
   path: /assets/img/voltcraft_sem6000.webp
   src: /assets/img/voltcraft_sem6000.webp
-  alt: "Voltcraft SEM6000 header image"
+  alt: 'Voltcraft SEM6000 header image'
 
-device_address: "Bluetooth MAC address. Ex: `c2:7c:9e:66:e3:52`"
+device_address: 'Bluetooth MAC address. Ex: `c2:7c:9e:66:e3:52`'
 device_url: https://www.conrad.com/en/p/voltcraft-sem6000-energy-consumption-meter-bluetooth-interface-data-export-mode-data-logger-trms-selectable-energy-t-1558906.html
 device_auto_detect: true
 ---

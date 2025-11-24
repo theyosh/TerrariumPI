@@ -6,12 +6,12 @@ tags: [sensor, gpio]
 image:
   path: /assets/img/am2302.webp
   src: /assets/img/am2302.webp
-  alt: "AM2302 header image"
+  alt: 'AM2302 header image'
 
 device_types: [temperature, humidity]
 device_address:
-  "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the
-  device is connected<br />Ex: `27`"
+  'Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the
+  device is connected<br />Ex: `27`'
 device_power_management: true
 ---
 

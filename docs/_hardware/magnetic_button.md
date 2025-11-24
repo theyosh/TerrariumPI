@@ -6,14 +6,14 @@ tags: [button, magnetic, door]
 image:
   path: /assets/img/Magnetic.webp
   src: /assets/img/Magnetic.webp
-  alt: "Magnetic (door) button header image"
+  alt: 'Magnetic (door) button header image'
 
 device_address:
-  "Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the
+  'Enter the [physical pin](/TerrariumPI/hardware/#gpio) number on which the
   device is connected<br />Ex: `27`<br />Or when used with an [IO
   expander](/TerrariumPI/hardware/io-expander/) use format:
   pcf857[4/5]-[IO-expander-port],[I2C_address],[I2C_buss] where I2C_buss is
-  optional<br />Ex:`pcf8575-9,0x4c,3`"
+  optional<br />Ex:`pcf8575-9,0x4c,3`'
 device_url: https://www.ryansouthgate.com/2015/08/10/raspberry-pi-door-sensor/
 ---
 

@@ -7,7 +7,7 @@ permalink: /hardware/io-expander/
 image:
   path: /assets/img/pcf8574_IO_expander.webp
   src: /assets/img/pcf8574_IO_expander.webp
-  alt: "PCF8574 IO Expander"
+  alt: 'PCF8574 IO Expander'
 ---
 
 With the IO expander pcf8574 you can add more GPIO

@@ -6,7 +6,7 @@ tags: [relay, script]
 image:
   path: /assets/img/Code.webp
   src: /assets/img/Code.webp
-  alt: "Script relay (API)"
+  alt: 'Script relay (API)'
 
 device_address: /home/user/location/executable/script
 ---
