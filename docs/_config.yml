@@ -164,7 +164,7 @@ plugins:
   - jekyll-feed
   - jekyll-target-blank
   - jemoji
-  - jekyll-minifier
+#  - jekyll-minifier
   - jekyll-liquify
   - jekyll-redirect-from
 
@@ -267,14 +267,14 @@ sass:
 # https://github.com/digitalsparky/jekyll-minifier
 # jekyll-minifier:
 
-compress_html:
-  clippings: all
-  comments: all
-  endings: all
-  profile: false
-  blanklines: false
-  ignore:
-    envs: [development]
+# compress_html:
+#   clippings: all
+#   comments: all
+#   endings: all
+#   profile: false
+#   blanklines: false
+#   ignore:
+#     envs: [development]
 
 exclude:
   - '*.gem'
