@@ -2,14 +2,14 @@
 ---
 
 /* prettier-ignore */
-@import 'main
+@use 'main
 {%- if jekyll.environment == 'production' -%}
   .bundle
 {%- endif -%}
 ';
 
 /* append your custom style below */
-@import 'swagger';
+@use 'swagger';
 
 /* Hide duplicate title ?? */
 h1.dynamic-title {
