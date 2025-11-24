@@ -43,6 +43,7 @@ social:
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: TheYOSH
   email: terrariumpi@theyosh.nl # change to your email address
+  fediverse_handle: "@theyosh@mastodon.theyosh.nl" # change to your fediverse handle or leave empty
   links:
     # The first element serves as the copyright owner's link
     # - https://twitter.com/username # change to your twitter homepage
@@ -164,7 +165,7 @@ plugins:
   - jekyll-feed
   - jekyll-target-blank
   - jemoji
-#  - jekyll-minifier
+  - jekyll-minifier
   - jekyll-liquify
   - jekyll-redirect-from
 
@@ -267,14 +268,14 @@ sass:
 # https://github.com/digitalsparky/jekyll-minifier
 # jekyll-minifier:
 
-# compress_html:
-#   clippings: all
-#   comments: all
-#   endings: all
-#   profile: false
-#   blanklines: false
-#   ignore:
-#     envs: [development]
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
 
 exclude:
   - '*.gem'
