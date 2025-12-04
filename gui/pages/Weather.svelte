@@ -217,7 +217,7 @@
           <div class="row">
             <img
               class="weather-icon col-3"
-              src="{get_weather_icon(weatherData.current.weather.icon, weatherData.is_day)}"
+              src="{get_weather_icon(weatherData.current.weather.icon, $isDay)}"
               alt="{weatherData.current.weather.description}"
               title="{weatherData.current.weather.description}"
             />
@@ -253,7 +253,7 @@
                   </span>
                   <img
                     class="weather-icon"
-                    src="{get_weather_icon(day.weather.icon, weatherData.is_day)}"
+                    src="{get_weather_icon(day.weather.icon, $isDay)}"
                     alt="{day.weather.description}"
                     title="{day.weather.description}"
                   />
