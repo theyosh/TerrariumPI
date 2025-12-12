@@ -238,7 +238,7 @@ defaults:
       path: ''
       type: faq
     values:
-      layout: faq
+      layout: post
       dynamic_title: true
       permalink: /faq/:title/
   - scope:

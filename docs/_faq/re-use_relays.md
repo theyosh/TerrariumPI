@@ -41,7 +41,7 @@ Now by running the following command we will create a symlink to the original
 file. Now you will have 2 files with the same contents and will the same
 original relay.
 
-```sh
+```terminal
 ln -s duplicate_switch.py duplicate_switch_2.py
 ```
 
