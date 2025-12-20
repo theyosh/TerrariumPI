@@ -104,6 +104,12 @@ elif [ "${OS}" == "bookworm" ]; then
   # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
   OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev"
 
+else
+
+  whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --msgbox "TerrariumPI is not Raspbian ${OS} OS compatible." 0 60
+
+  exit 0
+
 fi
 
 # if [ "${PI_ZERO}" -eq 1 ]; then
