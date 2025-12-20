@@ -2,6 +2,97 @@ Changelog
 =========
 
 
+4.14.0 (2025-12-20)
+-------------------
+
+**New**
+------
+
+- Add new release post. [TheYOSH]
+- Add new API endpoint in Python. [TheYOSH]
+- Add new weather data source Open-meteo.com. [#1043](https://github.com/theyosh/TerrariumPI/issues/1043). [TheYOSH]
+
+**Fixes**
+------
+
+- Documentation fixes. [TheYOSH]
+- Fix day / night weather icons. [TheYOSH]
+- Fix day shift. [TheYOSH]
+- Fix documentation builder. [TheYOSH]
+- Fix CSS deprecations. [TheYOSH]
+- Test documentation fix. [TheYOSH]
+- Fix warning icon. [TheYOSH]
+- Fix isDay. [TheYOSH]
+- Fixes for bullseye os :( [#1027](https://github.com/theyosh/TerrariumPI/issues/1027). [TheYOSH]
+- Fix live streaming RTSP/USB [#1027](https://github.com/theyosh/TerrariumPI/issues/1027). [TheYOSH]
+
+**Updates**
+------
+
+- Update version. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update Kasa documentation. [TheYOSH]
+- Update pages-deploy.yml. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update Weather documentation. [TheYOSH]
+- Update workflows. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update weather settings modal to support multiple weather providers.
+  [TheYOSH]
+
+**Other**
+------
+
+- New Svelte GUI build. [TheYOSH]
+- Stop installer on Trixie OS. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Revert back configs. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Open Meteo weather tweaks. [TheYOSH]
+- Revert. [TheYOSH]
+- More weather tweaks. [TheYOSH]
+- Tweak weather forecast. [TheYOSH]
+- Code cleanup. [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Refactor weather data some more. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Slovak) [Michal Teplan]
+
+  Currently translated at 100.0% (1136 of 1136 strings)
+- New Svelte GUI build. [TheYOSH]
+- Refactor weather data processing. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 100.0% (1136 of 1136 strings)
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1136 of 1136 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 100.0% (1132 of 1132 strings)
+
+
 4.13.1 (2025-11-09)
 -------------------
 
@@ -16,6 +107,7 @@ Changelog
 **Updates**
 ------
 
+- Update CHANGELOG. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update Libraries. [TheYOSH]
 - Update documentation packages. [TheYOSH]
