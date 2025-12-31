@@ -2049,12 +2049,20 @@
         "error": "Nem todos os campos obrigatórios estão preenchidos correctamente."
       },
       "information": "Para utilizar a meteorologia, necessita criar uma conta gratuita em {source_link}.",
+      "open_meteo": {
+        "information": "Obtenha o url da API em {source_link} gratuitamente e sem conta."
+      },
       "save": {
         "ok": {
           "message": "As configurações de meteorologia estão actualizadas."
         }
       },
       "title": "Configurações de meteorologia",
+      "weather_provider": {
+        "help": "Seleccione o fornecedor para obter mais informação.",
+        "label": "Fornecedor",
+        "placeholder": "Seleccione um fornecedor"
+      },
       "weather_source": {
         "help": "Insira o api url completo do OpenWeatherMap como por exemplo: {api_url_example}.",
         "invalid": "O url inserido não é válido.",
