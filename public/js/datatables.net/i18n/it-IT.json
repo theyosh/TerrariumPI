@@ -1,5 +1,8 @@
 {
     "aria": {
+        "orderable": "Ordinamento",
+        "orderableRemove": "Rimuovi ordinamento",
+        "orderableReverse": "Ordinamento inverso",
         "paginate": {
             "first": "Inizio",
             "last": "Fine",
@@ -30,7 +33,8 @@
         "excel": "Excel",
         "pageLength": {
             "_": "Mostra %d righe",
-            "-1": "Mostra tutte le righe"
+            "-1": "Mostra tutte le righe",
+            "1": "Mostra 1 riga"
         },
         "pdf": "PDF",
         "print": "Stampa",
@@ -40,6 +44,61 @@
         "savedStates": "Salva stato",
         "stateRestore": "Ripristina stato",
         "updateState": "Aggiorna"
+    },
+    "columnControl": {
+        "buttons": {
+            "searchClear": "Cancella ricerca"
+        },
+        "colVis": "Visibilità colonne",
+        "colVisDropdown": "Visibilità colonne",
+        "dropdown": "Altro...",
+        "list": {
+            "all": "Seleziona tutto",
+            "empty": "Vuoto",
+            "none": "Deseleziona tutto",
+            "search": "Cerca..."
+        },
+        "orderAddAsc": "Aggiungi ordinamento crescente",
+        "orderAddDesc": "Aggiungi ordinamento decrescente",
+        "orderAsc": "Ordina in modo crescente",
+        "orderClear": "Cancella ordinamento",
+        "orderDesc": "Ordina in modo decrescente",
+        "orderRemove": "Rimuovi dall'ordinamento",
+        "reorder": "Riordina colonne",
+        "reorderLeft": "Sposta la colonna a sinistra",
+        "reorderRight": "Sposta la colonna a destra",
+        "search": {
+            "datetime": {
+                "empty": "Vuoto",
+                "equal": "Uguale a",
+                "greater": "Dopo il",
+                "less": "Prima del",
+                "notEmpty": "Non vuoto",
+                "notEqual": "Diverso da"
+            },
+            "number": {
+                "empty": "Vuoto",
+                "equal": "Uguale a",
+                "greater": "Maggiore di",
+                "greaterOrEqual": "Maggiore o uguale a",
+                "less": "Minore di",
+                "lessOrEqual": "Minore o uguale a",
+                "notEmpty": "Non vuoto",
+                "notEqual": "Diverso da"
+            },
+            "text": {
+                "contains": "Contiene",
+                "empty": "Vuoto",
+                "ends": "Termina con",
+                "equal": "Uguale a",
+                "notContains": "Non contiene",
+                "notEmpty": "Non vuoto",
+                "notEqual": "Diverso da",
+                "starts": "Inizia con"
+            }
+        },
+        "searchClear": "Cancella ricerca",
+        "searchDropdown": "Cerca"
     },
     "datetime": {
         "amPm": {
@@ -176,11 +235,13 @@
         "logicAnd": "E",
         "logicOr": "O",
         "rightTitle": "Criterio di Aumento Rientro",
+        "search": "Cerca",
         "title": {
             "_": "Generatori di Ricerca (%d)",
             "0": "Generatore di Ricerca"
         },
-        "value": "Valore"
+        "value": "Valore",
+        "valueJoiner": "e"
     },
     "searchPanes": {
         "clearMessage": "Pulisci Tutto",
@@ -191,6 +252,7 @@
         "collapseMessage": "Espandi tutto",
         "count": "{total}",
         "countFiltered": "{shown} ({total})",
+        "emptyMessage": "Vuoto",
         "emptyPanes": "Nessun Pannello di Ricerca",
         "loadMessage": "Caricamento Pannello di Ricerca",
         "showMessage": "Mostra tutto",
