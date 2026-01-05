@@ -2049,12 +2049,20 @@
         "error": "Nicht alle Pflichtfelder sind korrekt eingegeben."
       },
       "information": "Um das Wettersystem nutzen zu können, musst du ein kostenloses Konto bei {source_link} erstellen.",
+      "open_meteo": {
+        "information": "Holen Sie sich Ihre API-URL bei {source_link} kostenlos ohne Konto."
+      },
       "save": {
         "ok": {
           "message": "Die Wettereinstellung wurde gespeichert."
         }
       },
       "title": "Wettereinstellungen",
+      "weather_provider": {
+        "help": "Wählen Sie den Anbieter aus, um weitere Informationen zu erhalten.",
+        "label": "Anbieter",
+        "placeholder": "Anbieter auswählen"
+      },
       "weather_source": {
         "help": "Gib die vollständige OpenWeatherMap-API-URL ein wie: {api_url_example}.",
         "invalid": "Die eingegebene URL ist ungültig.",
