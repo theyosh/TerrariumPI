@@ -1,6 +1,6 @@
 pip==25.3
 setuptools==80.9.0
-wheel==0.45.1
+wheel==0.46.2
 
 # Database
 pony==0.7.19
