@@ -242,6 +242,16 @@ export default {
         dest: "./public/js/datatables.net/i18n/",
         rename: 'pt-BR.json'
       },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/pt-PT.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'pt.json'
+      },
+      {
+        src: "node_modules/datatables.net-plugins/i18n/sk.json",
+        dest: "./public/js/datatables.net/i18n/",
+        rename: 'sk.json'
+      },
       ]
     }),
     production && gzipPlugin({
