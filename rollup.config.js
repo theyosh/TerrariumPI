@@ -285,6 +285,8 @@ export default {
         'public/js/datatables.net/i18n/nl-NL.json',
         'public/js/datatables.net/i18n/pl.json',
         'public/js/datatables.net/i18n/pt-BR.json',
+        'public/js/datatables.net/i18n/pt.json',
+        'public/js/datatables.net/i18n/sk.json',
 
         'public/css/swagger-ui.css',
 
