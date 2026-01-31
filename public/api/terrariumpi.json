@@ -2379,14 +2379,14 @@
     "/weather/hardware/": {
       "get": {
         "tags": ["Weather"],
-        "summary": "Get weather source providers",
+        "summary": "Get weather source providers that can be used",
         "description": "Get weather source providers that can be used",
-        "operationId": "weatherProviders",
+        "operationId": "getWeatherHardware",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "Weather providers data",
+            "description": "List of weather source providers",
             "schema": {
               "type": "array",
               "items": {
@@ -3479,6 +3479,33 @@
           "type": "number",
           "readOnly": true,
           "description": "Weather forecast unix timestamp"
+        }
+      }
+    },
+    "WeatherProviders": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Weather data providers",
+      "properties": {
+        "hardware": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Weather data provider type"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Weather data provider name"
+        },
+        "url": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Weather data provider data url"
+        },
+        "validator": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Weather data provider data url validation regex"
         }
       }
     },
