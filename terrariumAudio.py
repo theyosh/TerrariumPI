@@ -22,7 +22,7 @@ class terrariumAudio(object):
         soundcards = []
         for i in alsaaudio.card_indexes():
             try:
-                (_, longname) = alsaaudio.card_name(i)
+                _, longname = alsaaudio.card_name(i)
                 soundcards.append({"index": int(i), "name": longname})
 
             except Exception as ex:

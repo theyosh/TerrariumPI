@@ -45,12 +45,12 @@ class terrariumRelay8Stack(terrariumRelay):
         return (int(address[1]), int(address[0]))
 
     def _set_hardware_value(self, state):
-        (device, nr) = self.device
+        device, nr = self.device
         self._device_set(device, nr, 1 if state == self.ON else 0)
         return True
 
     def _get_hardware_value(self):
-        (device, nr) = self.device
+        device, nr = self.device
         data = self._device_get(device, nr)
         if data is None:
             return None

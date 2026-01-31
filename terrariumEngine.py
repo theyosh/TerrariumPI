@@ -2011,8 +2011,7 @@ class terrariumEngine(object):
         else:
             # We are using total() vs sum() as total() will always return a number. https://sqlite.org/lang_aggfunc.html#sumunc
             with orm.db_session():
-                data = db.select(
-                    """SELECT
+                data = db.select("""SELECT
                         TOTAL(total_wattage) AS wattage,
                         TOTAL(total_flow)    AS flow,
                         IFNULL((JulianDay(MAX(off)) - JulianDay(MIN(`on`))) * 24 * 60 * 60,0) AS duration
@@ -2029,8 +2028,7 @@ class terrariumEngine(object):
                                 ON RH2.relay = RH1.relay
                                 AND RH2.timestamp = (SELECT MIN(timestamp) FROM RelayHistory WHERE timestamp > RH1.timestamp AND relay = RH1.relay)
                             WHERE RH1.value > 0
-                        )"""
-                )
+                        )""")
 
                 totals = {"total_watt": data[0][0], "total_flow": data[0][1], "duration": data[0][2]}
                 thread_return[0] = totals

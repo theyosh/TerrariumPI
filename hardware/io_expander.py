@@ -6,6 +6,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 # pip install i2crelay (git)
 from i2crelay import I2CRelayBoard
+
 # pip install pcf8575
 from pcf8575 import PCF8575
 
@@ -98,11 +99,11 @@ class terrariumPCF8575IOExpander(terrariumIOExpander):
     # Keep own internal state
     # Relays starting at number 1 (human counting)
     def __set_relay(self, port, action):
-        self.__internal_state[port-1] = action
+        self.__internal_state[port - 1] = action
         self.__device.port = self.__internal_state
 
     def __get_relay(self, port):
-        return self.__internal_state[port-1]
+        return self.__internal_state[port - 1]
 
     def _load_device(self, address):
         device = PCF8575(address[1], address[0])

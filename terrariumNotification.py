@@ -2675,8 +2675,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
     async def help(self, update, context):
         if await self._authenticate(update.message):
-            await update.message.reply_text(
-                """The following commands are supported:
+            await update.message.reply_text("""The following commands are supported:
 
 /start : This will start listening for notifications.
 /webcam [webcam_id] : will show the latest image of the webcam ID.
@@ -2684,8 +2683,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 /relay [relay_id] : will show the current relay state. Relay id is optional.
 /button [button_id] : will show the current button state. button id is optional.
 /enclosure [enclosure_id] : will show the current area state of the enclosure ID
-/status : will show the current system status."""
-            )
+/status : will show the current system status.""")
 
     # function to handle normal text
     async def text(self, update, context):

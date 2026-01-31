@@ -57,7 +57,7 @@ class terrariumRelayFTDI(terrariumRelay):
             return (serial, device_type)
 
     def _set_hardware_value(self, state):
-        (serial, device_type) = self.device
+        serial, device_type = self.device
 
         if device_type == terrariumRelayFTDI.SERIAL:
             with SerialDevice(serial) as device:
@@ -99,7 +99,7 @@ class terrariumRelayFTDI(terrariumRelay):
                 return testBit(data, 8)
 
         data = None
-        (serial, device_type) = self.device
+        serial, device_type = self.device
         if device_type == terrariumRelayFTDI.SERIAL:
             # As we cannot read out this device, we borrow the current state as the new state....
             data = 1 if self.state == self.ON else 0

@@ -621,10 +621,10 @@ class terrariumWebcam(object):
 
         # Different OpenCV versions (docker vs native)
         try:
-            (cnts, _) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            cnts, _ = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         except Exception as ex:
             logger.debug(f"Wrong CV2 version. Retry: {ex}")
-            (_, cnts, _) = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            _, cnts, _ = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         # don't draw if motion boxes is disabled
         # Color Red and Blue are swapped... very strange...
@@ -648,7 +648,7 @@ class terrariumWebcam(object):
             motion_detected = True
             # compute the bounding box for the contour, draw it on the frame with the selected color,
             if box_color is not None:
-                (x, y, w, h) = cv2.boundingRect(c)
+                x, y, w, h = cv2.boundingRect(c)
                 cv2.rectangle(raw_image, (x, y), (x + w, y + h), box_color, 2)
 
         if motion_detected:
