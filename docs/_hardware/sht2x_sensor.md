@@ -11,7 +11,7 @@ image:
 device_types: [temperature, humidity]
 device_address:
   '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
-  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f`'
+  bus](/TerrariumPI/hardware/#i2c-bus) is optional<br />Ex: `0x3f`'
 device_url: https://arduinolearning.com/amp/code/sht21-humidity-and-temperature-sensor-example.php
 ---
 

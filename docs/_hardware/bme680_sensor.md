@@ -11,7 +11,7 @@ image:
 device_types: [temperature, humidity, pressure, altitude]
 device_address:
   '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
-  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x3f,3`'
+  bus](/TerrariumPI/hardware/#i2c-bus) is optional<br />Ex: `0x3f,3`'
 device_url: https://shop.pimoroni.com/products/bme680-breakout?variant=12491552129107
 ---
 

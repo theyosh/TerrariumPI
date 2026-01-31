@@ -11,7 +11,7 @@ image:
 device_types: [temperature, humidity]
 device_address:
   '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
-  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `0x5c`'
+  bus](/TerrariumPI/hardware/#i2c-bus) is optional<br />Ex: `0x5c`'
 device_url: https://www.pibits.net/code/am2320-temperature-and-humidity-sensor-and-raspberry-pi-example.php
 ---
 
