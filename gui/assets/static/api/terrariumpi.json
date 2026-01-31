@@ -66,12 +66,18 @@
   "paths": {
     "/areas/types/": {
       "get": {
-        "tags": ["Area"],
+        "tags": [
+          "Area"
+        ],
         "summary": "Get available area types",
         "description": "Get all the available area types with supported sensor types.",
         "operationId": "getAreaTypes",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Zero or more area types with supported sensor types.",
@@ -87,12 +93,18 @@
     },
     "/areas/": {
       "get": {
-        "tags": ["Area"],
+        "tags": [
+          "Area"
+        ],
         "summary": "Get existing areas",
         "description": "Get all the existing areas in a list.",
         "operationId": "getAreas",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Zero or more areas",
@@ -106,12 +118,18 @@
         }
       },
       "post": {
-        "tags": ["Area"],
+        "tags": [
+          "Area"
+        ],
         "summary": "Add a new area to an enclosure",
         "description": "Add a new area to an enclosure. The enclosure needs to be existing",
         "operationId": "addArea",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -143,12 +161,18 @@
     },
     "/areas/{id}/": {
       "get": {
-        "tags": ["Area"],
+        "tags": [
+          "Area"
+        ],
         "summary": "Get a specific area",
         "description": "Get a specific area selected by id",
         "operationId": "getArea",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -175,12 +199,18 @@
         }
       },
       "put": {
-        "tags": ["Area"],
+        "tags": [
+          "Area"
+        ],
         "summary": "Update an existing area with new data",
         "description": "Update an existing area with new data. The enclosure needs to be existing",
         "operationId": "updateArea",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -221,12 +251,18 @@
         ]
       },
       "delete": {
-        "tags": ["Area"],
+        "tags": [
+          "Area"
+        ],
         "summary": "Delete an existing area",
         "description": "Delete an existing area",
         "operationId": "deleteArea",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -257,12 +293,18 @@
     },
     "/audio/hardware/": {
       "get": {
-        "tags": ["Audio"],
+        "tags": [
+          "Audio"
+        ],
         "summary": "Get a list of supported soundcards",
         "description": "Get all the supported soundcards",
         "operationId": "getAudioHardware",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "List of supported soundcards",
@@ -278,12 +320,18 @@
     },
     "/audio/files/": {
       "get": {
-        "tags": ["Audio"],
+        "tags": [
+          "Audio"
+        ],
         "summary": "Get a list of existing audio files",
         "description": "Get all the existing audio files",
         "operationId": "getAudioFiles",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Zero or more audio files",
@@ -297,12 +345,18 @@
         }
       },
       "post": {
-        "tags": ["Audio"],
+        "tags": [
+          "Audio"
+        ],
         "summary": "Upload a new audio file",
         "description": "Upload a new audio file",
         "operationId": "postAudioFile",
-        "consumes": ["application/x-www-form-urlencoded"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -340,12 +394,18 @@
     },
     "/audio/files/{file}": {
       "get": {
-        "tags": ["Audio"],
+        "tags": [
+          "Audio"
+        ],
         "summary": "Get an existing audio file",
         "description": "Get an existing audio file based on ID",
         "operationId": "getAudioFile",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "file",
@@ -371,12 +431,18 @@
         }
       },
       "delete": {
-        "tags": ["Audio"],
+        "tags": [
+          "Audio"
+        ],
         "summary": "Delete an existing audio file",
         "description": "Delete an existing audio file",
         "operationId": "delAudioFile",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "file",
@@ -406,12 +472,18 @@
     },
     "/buttons/hardware/": {
       "get": {
-        "tags": ["Button"],
+        "tags": [
+          "Button"
+        ],
         "summary": "Get a list of supported buttons",
         "description": "Get all the supported buttons",
         "operationId": "getButtonsHardware",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "List of supported hardware",
@@ -427,12 +499,18 @@
     },
     "/buttons/": {
       "get": {
-        "tags": ["Button"],
+        "tags": [
+          "Button"
+        ],
         "summary": "Get a list of existing buttons",
         "description": "Get all the existing buttons",
         "operationId": "getButtons",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Zero or more buttons",
@@ -446,12 +524,18 @@
         }
       },
       "post": {
-        "tags": ["Button"],
+        "tags": [
+          "Button"
+        ],
         "summary": "Add a new button",
         "description": "Add a new button",
         "operationId": "addButton",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -483,12 +567,18 @@
     },
     "/buttons/{id}/": {
       "get": {
-        "tags": ["Button"],
+        "tags": [
+          "Button"
+        ],
         "summary": "Get a specific button",
         "description": "Get a specific button selected by id",
         "operationId": "getButton",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -515,12 +605,18 @@
         }
       },
       "put": {
-        "tags": ["Button"],
+        "tags": [
+          "Button"
+        ],
         "summary": "Update an existing button with new data",
         "description": "Update an existing button with new data.",
         "operationId": "updateButton",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -561,12 +657,18 @@
         ]
       },
       "delete": {
-        "tags": ["Button"],
+        "tags": [
+          "Button"
+        ],
         "summary": "Delete an existing button",
         "description": "Delete an existing button",
         "operationId": "deleteButton",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -597,12 +699,18 @@
     },
     "/buttons/{id}/history/": {
       "get": {
-        "tags": ["Button"],
+        "tags": [
+          "Button"
+        ],
         "summary": "Get the history for a specific button for a period of 1 day",
         "description": "Get the history for a specific button for a period of 1 day",
         "operationId": "getButtonHistory",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -634,12 +742,18 @@
     },
     "/buttons/{id}/history/{period}/": {
       "get": {
-        "tags": ["Button"],
+        "tags": [
+          "Button"
+        ],
         "summary": "Get the history for a specific button for a period",
         "description": "Get the history for a specific button for a period",
         "operationId": "getButtonHistoryPeriod",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -655,7 +769,12 @@
             "description": "Period",
             "required": true,
             "type": "string",
-            "enum": ["day", "week", "month", "year"]
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ]
           }
         ],
         "responses": {
@@ -679,12 +798,18 @@
     },
     "/calendar/": {
       "get": {
-        "tags": ["Calendar"],
+        "tags": [
+          "Calendar"
+        ],
         "summary": "Get existing calendars",
         "description": "Get all the existing calendars in a list.",
         "operationId": "getCalendars",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "query",
@@ -716,12 +841,18 @@
         }
       },
       "post": {
-        "tags": ["Calendar"],
+        "tags": [
+          "Calendar"
+        ],
         "summary": "Add a new calendar event",
         "description": "Add a new calendar event",
         "operationId": "addCalendar",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -753,12 +884,18 @@
     },
     "/calendar/{id}/": {
       "get": {
-        "tags": ["Calendar"],
+        "tags": [
+          "Calendar"
+        ],
         "summary": "Get a specific calendar",
         "description": "Get a specific calendar selected by id",
         "operationId": "getCalendar",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -785,12 +922,18 @@
         }
       },
       "put": {
-        "tags": ["Calendar"],
+        "tags": [
+          "Calendar"
+        ],
         "summary": "Update an existing calendar with new data",
         "description": "Update an existing calendar with new data. The enclosure needs to be existing",
         "operationId": "updateCalendar",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -831,12 +974,18 @@
         ]
       },
       "delete": {
-        "tags": ["Calendar"],
+        "tags": [
+          "Calendar"
+        ],
         "summary": "Delete an existing calendar",
         "description": "Delete an existing calendar",
         "operationId": "deleteCalendar",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -867,12 +1016,18 @@
     },
     "/calendar/download/": {
       "get": {
-        "tags": ["Calendar"],
+        "tags": [
+          "Calendar"
+        ],
         "summary": "Download iCal",
         "description": "Download iCal",
         "operationId": "downloadCalendar",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "The calendar in iCal format"
@@ -888,12 +1043,18 @@
     },
     "/enclosures/": {
       "get": {
-        "tags": ["Enclosure"],
+        "tags": [
+          "Enclosure"
+        ],
         "summary": "Get a list of existing enclosures",
         "description": "Get all the existing enclosures",
         "operationId": "getEnclosures",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Zero or more enclosures",
@@ -907,12 +1068,18 @@
         }
       },
       "post": {
-        "tags": ["Enclosure"],
+        "tags": [
+          "Enclosure"
+        ],
         "summary": "Add a new enclosure",
         "description": "Add a new enclosure",
         "operationId": "addEnclosure",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -944,12 +1111,18 @@
     },
     "/enclosures/{id}/": {
       "get": {
-        "tags": ["Enclosure"],
+        "tags": [
+          "Enclosure"
+        ],
         "summary": "Get a specific enclosure",
         "description": "Get a specific enclosure selected by id",
         "operationId": "getEnclosure",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -976,12 +1149,18 @@
         }
       },
       "put": {
-        "tags": ["Enclosure"],
+        "tags": [
+          "Enclosure"
+        ],
         "summary": "Update an existing enclosure with new data",
         "description": "Update an existing enclosure with new data.",
         "operationId": "updateEnclosure",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1022,12 +1201,18 @@
         ]
       },
       "delete": {
-        "tags": ["Enclosure"],
+        "tags": [
+          "Enclosure"
+        ],
         "summary": "Delete an existing enclosure",
         "description": "Delete an existing enclosure",
         "operationId": "deleteEnclosure",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1058,12 +1243,18 @@
     },
     "/{action}/": {
       "post": {
-        "tags": ["System"],
+        "tags": [
+          "System"
+        ],
         "summary": "Restart/reboot/shutdown TerrariumPI",
         "description": "Restart/reboot/shutdown TerrariumPI",
         "operationId": "actionPi",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "action",
@@ -1071,7 +1262,11 @@
             "description": "Action to perform",
             "required": true,
             "type": "string",
-            "enum": ["restart", "reboot", "shutdown"]
+            "enum": [
+              "restart",
+              "reboot",
+              "shutdown"
+            ]
           }
         ],
         "responses": {
@@ -1091,12 +1286,18 @@
     },
     "/logfile/download/": {
       "get": {
-        "tags": ["System"],
+        "tags": [
+          "System"
+        ],
         "summary": "Download the logfile",
         "description": "Download the logfile",
         "operationId": "downloadLogfile",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Get the logfile in plain text"
@@ -1111,12 +1312,18 @@
     },
     "/playlists/": {
       "get": {
-        "tags": ["Playlist"],
+        "tags": [
+          "Playlist"
+        ],
         "summary": "Get a list of existing playlists",
         "description": "Get all the existing playlists",
         "operationId": "getPlaylists",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Zero or more playlists",
@@ -1130,12 +1337,18 @@
         }
       },
       "post": {
-        "tags": ["Playlist"],
+        "tags": [
+          "Playlist"
+        ],
         "summary": "Add a new playlist",
         "description": "Add a new playlist",
         "operationId": "addPlaylist",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -1167,12 +1380,18 @@
     },
     "/playlists/{id}/": {
       "get": {
-        "tags": ["Playlist"],
+        "tags": [
+          "Playlist"
+        ],
         "summary": "Get a specific playlist",
         "description": "Get a specific playlist selected by id",
         "operationId": "getPlaylist",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1199,12 +1418,18 @@
         }
       },
       "put": {
-        "tags": ["Playlist"],
+        "tags": [
+          "Playlist"
+        ],
         "summary": "Update an existing playlist with new data",
         "description": "Update an existing playlist with new data.",
         "operationId": "updatePlaylist",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1245,12 +1470,18 @@
         ]
       },
       "delete": {
-        "tags": ["Playlist"],
+        "tags": [
+          "Playlist"
+        ],
         "summary": "Delete an existing playlist",
         "description": "Delete an existing playlist",
         "operationId": "deletePlaylist",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1281,12 +1512,18 @@
     },
     "/relays/hardware/": {
       "get": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Get a list of supported relays",
         "description": "Get all the supported relays",
         "operationId": "getRelaysHardware",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "List of supported hardware",
@@ -1302,12 +1539,18 @@
     },
     "/relays/scan/": {
       "post": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Scan for new relays",
         "description": "Scan for new relays",
         "operationId": "scanRelays",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Found zero or more new relays",
@@ -1325,12 +1568,18 @@
     },
     "/relays/": {
       "get": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Get a list of existing relays",
         "description": "Get all the existing relays",
         "operationId": "getRelays",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Zero or more relays",
@@ -1344,12 +1593,18 @@
         }
       },
       "post": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Add a new relay",
         "description": "Add a new relay",
         "operationId": "addRelay",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -1381,12 +1636,18 @@
     },
     "/relays/{id}/": {
       "get": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Get a specific relay",
         "description": "Get a specific relay selected by id",
         "operationId": "getRelay",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1413,12 +1674,18 @@
         }
       },
       "put": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Update an existing relay with new data",
         "description": "Update an existing relay with new data.",
         "operationId": "updateRelay",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1459,12 +1726,18 @@
         ]
       },
       "delete": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Delete an existing relay",
         "description": "Delete an existing relay",
         "operationId": "deleteRelay",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1495,12 +1768,18 @@
     },
     "/relays/{id}/history/": {
       "get": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Get the history for a specific relay for a period of 1 day",
         "description": "Get the history for a specific relay for a period of 1 day",
         "operationId": "getRelayHistory",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1532,12 +1811,18 @@
     },
     "/relays/{id}/history/{period}/": {
       "get": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Get the history for a specific relay for a period",
         "description": "Get the history for a specific relay for a period",
         "operationId": "getRelayHistoryPeriod",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1553,7 +1838,13 @@
             "description": "Period",
             "required": true,
             "type": "string",
-            "enum": ["day", "week", "month", "year", "replaced"]
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year",
+              "replaced"
+            ]
           }
         ],
         "responses": {
@@ -1577,12 +1868,18 @@
     },
     "/relays/{id}/export/": {
       "get": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Get the export for a specific relay for a period of 1 day",
         "description": "Get the export for a specific relay for a period of 1 day",
         "operationId": "getRelayExport",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1613,12 +1910,18 @@
     },
     "/relays/{id}/export/{period}/": {
       "get": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Get the export for a specific relay for a period",
         "description": "Get the export for a specific relay for a period",
         "operationId": "getRelayExportPeriod",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1634,7 +1937,13 @@
             "description": "Period",
             "required": true,
             "type": "string",
-            "enum": ["day", "week", "month", "year", "replaced"]
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year",
+              "replaced"
+            ]
           }
         ],
         "responses": {
@@ -1657,12 +1966,18 @@
     },
     "/relays/{id}/{action}/": {
       "post": {
-        "tags": ["Relay"],
+        "tags": [
+          "Relay"
+        ],
         "summary": "Change relay",
         "description": "Change the state of the relay. Action 0-100 means you can use a value between 0 and 100 if it is a dimmer. Manual is used for setting the relay in manual mode. Replaced is used to mark the date in the calendar for reminding for next time.",
         "operationId": "actionRelay",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1677,7 +1992,14 @@
             "description": "Relay action",
             "required": true,
             "type": "string",
-            "enum": ["manual", "replaced", "toggle", "on", "off", "0-100"]
+            "enum": [
+              "manual",
+              "replaced",
+              "toggle",
+              "on",
+              "off",
+              "0-100"
+            ]
           }
         ],
         "responses": {
@@ -1703,12 +2025,18 @@
     },
     "/sensors/hardware/": {
       "get": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Get a list of supported sensors",
         "description": "Get all the supported sensors",
         "operationId": "getSensorsHardware",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "List of supported hardware",
@@ -1724,12 +2052,18 @@
     },
     "/sensors/scan/": {
       "post": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Scan for new sensors",
         "description": "Scan for new sensors. Not all sensors have auto discovery.",
         "operationId": "getSensorsScan",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Found zero or more new sensors",
@@ -1742,12 +2076,18 @@
     },
     "/sensors/": {
       "get": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Get a list of existing sensors",
         "description": "Get all the existing sensors",
         "operationId": "getSensors",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Zero or more sensors",
@@ -1761,12 +2101,18 @@
         }
       },
       "post": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Add a new sensor",
         "description": "Add a new sensor",
         "operationId": "addSensor",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -1798,12 +2144,18 @@
     },
     "/sensors/{id}/": {
       "get": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Get a specific sensor",
         "description": "Get a specific sensor selected by id",
         "operationId": "getSensor",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1829,12 +2181,18 @@
         }
       },
       "put": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Update an existing sensor with new data",
         "description": "Update an existing sensor with new data.",
         "operationId": "updateSensor",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1874,12 +2232,18 @@
         ]
       },
       "delete": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Delete an existing sensor",
         "description": "Delete an existing sensor",
         "operationId": "deleteSensor",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1909,12 +2273,18 @@
     },
     "/sensors/{type}/": {
       "get": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Get all sensor of {type}",
         "description": "Get all sensor of a specified type",
         "operationId": "getSensorType",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "type",
@@ -1960,12 +2330,18 @@
     },
     "/sensors/{filter}/history/": {
       "get": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Get the history for a specific sensor or sensor type.",
         "description": "Get the history for a specific sensor or sensor type for a period of 1 day. When using a sensor type, the values will be averages of all sensor of the selected type.",
         "operationId": "getSensorHistory",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "filter",
@@ -1996,12 +2372,18 @@
     },
     "/sensors/{filter}/history/{period}/": {
       "get": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Get the history for a specific sensor or sensor type.",
         "description": "Get the history for a specific sensor or sensor type for a period of {period}. When using a sensor type, the values will be averages of all sensor of the selected type.",
         "operationId": "getSensorHistoryPeriod",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "filter",
@@ -2016,7 +2398,12 @@
             "description": "Period",
             "required": true,
             "type": "string",
-            "enum": ["day", "week", "month", "year"]
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ]
           }
         ],
         "responses": {
@@ -2040,12 +2427,18 @@
     },
     "/sensors/{filter}/export/": {
       "get": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Get the export for a specific sensor or sensor type.",
         "description": "Get the export for a specific sensor or sensor type for a period of 1 day. When using a sensor type, the values will be averages of all sensor of the selected type.",
         "operationId": "getSensorExport",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "filter",
@@ -2075,12 +2468,18 @@
     },
     "/sensors/{filter}/export/{period}/": {
       "get": {
-        "tags": ["Sensor"],
+        "tags": [
+          "Sensor"
+        ],
         "summary": "Get the export for a specific sensor or sensor type.",
         "description": "Get the export for a specific sensor or sensor type for a period of {period}. When using a sensor type, the values will be averages of all sensor of the selected type.",
         "operationId": "getSensorExportPeriod",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "filter",
@@ -2095,7 +2494,12 @@
             "description": "Period",
             "required": true,
             "type": "string",
-            "enum": ["day", "week", "month", "year"]
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ]
           }
         ],
         "responses": {
@@ -2118,12 +2522,18 @@
     },
     "/system_status/": {
       "get": {
-        "tags": ["System"],
+        "tags": [
+          "System"
+        ],
         "summary": "Get the current state",
         "description": "Get the current state of the system.",
         "operationId": "systemStatus",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "System status",
@@ -2136,12 +2546,18 @@
     },
     "/settings/": {
       "get": {
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "summary": "Get all settings",
         "description": "Get all settings in an list. Password setting will be skipped.",
         "operationId": "settingList",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "All settings",
@@ -2160,12 +2576,18 @@
         ]
       },
       "put": {
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "summary": "Update multiple settings",
         "description": "Update multiple settings in one action. Non existing setting ids will be ignored.",
         "operationId": "settingsUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -2198,12 +2620,18 @@
         ]
       },
       "post": {
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "summary": "Add a new setting",
         "description": "Add a new setting",
         "operationId": "settingAdd",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -2232,12 +2660,18 @@
     },
     "/settings/{id}/": {
       "get": {
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "summary": "Get a setting",
         "description": "Get a single setting based on ID",
         "operationId": "settingGet",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2262,12 +2696,18 @@
         ]
       },
       "put": {
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "summary": "Update a setting",
         "description": "Update a single setting based on ID",
         "operationId": "settingUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2304,12 +2744,18 @@
         ]
       },
       "delete": {
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "summary": "Delete a setting",
         "description": "Delete a setting",
         "operationId": "settingDelete",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2339,12 +2785,18 @@
     },
     "/weather/": {
       "get": {
-        "tags": ["Weather"],
+        "tags": [
+          "Weather"
+        ],
         "summary": "Get weather data",
         "description": "Get weather data",
         "operationId": "weatherDetail",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Weather data",
@@ -2357,12 +2809,18 @@
     },
     "/weather/forecast/": {
       "get": {
-        "tags": ["Weather"],
+        "tags": [
+          "Weather"
+        ],
         "summary": "Get weather temperature forecast",
         "description": "Get weather temperature forecast",
         "operationId": "weatherForecast",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Weather forecast data",
@@ -2378,15 +2836,21 @@
     },
     "/weather/hardware/": {
       "get": {
-        "tags": ["Weather"],
-        "summary": "Get weather source providers",
+        "tags": [
+          "Weather"
+        ],
+        "summary": "Get weather source providers that can be used",
         "description": "Get weather source providers that can be used",
-        "operationId": "weatherProviders",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "operationId": "getWeatherHardware",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "Weather providers data",
+            "description": "List of weather source providers",
             "schema": {
               "type": "array",
               "items": {
@@ -2399,12 +2863,18 @@
     },
     "/webcams/hardware/": {
       "get": {
-        "tags": ["Webcam"],
+        "tags": [
+          "Webcam"
+        ],
         "summary": "Get a list of supported webcams",
         "description": "Get all the supported webcams",
         "operationId": "getWebcamsHardware",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "List of supported hardware",
@@ -2420,12 +2890,18 @@
     },
     "/webcams/": {
       "get": {
-        "tags": ["Webcam"],
+        "tags": [
+          "Webcam"
+        ],
         "summary": "Get a list of existing webcams",
         "description": "Get all the existing webcams",
         "operationId": "getWebcams",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Zero or more webcams",
@@ -2439,12 +2915,18 @@
         }
       },
       "post": {
-        "tags": ["Webcam"],
+        "tags": [
+          "Webcam"
+        ],
         "summary": "Add a new webcam",
         "description": "Add a new webcam",
         "operationId": "addWebcam",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -2476,12 +2958,18 @@
     },
     "/webcams/{id}/": {
       "get": {
-        "tags": ["Webcam"],
+        "tags": [
+          "Webcam"
+        ],
         "summary": "Get a specific webcam",
         "description": "Get a specific webcam selected by id",
         "operationId": "getWebcam",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2508,12 +2996,18 @@
         }
       },
       "put": {
-        "tags": ["Webcam"],
+        "tags": [
+          "Webcam"
+        ],
         "summary": "Update an existing webcam with new data",
         "description": "Update an existing webcam with new data.",
         "operationId": "updateWebcam",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2554,12 +3048,18 @@
         ]
       },
       "delete": {
-        "tags": ["Webcam"],
+        "tags": [
+          "Webcam"
+        ],
         "summary": "Delete an existing webcam",
         "description": "Delete an existing webcam",
         "operationId": "deleteWebcam",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2590,12 +3090,18 @@
     },
     "/webcams/{id}/archive/{period}/": {
       "get": {
-        "tags": ["Webcam"],
+        "tags": [
+          "Webcam"
+        ],
         "summary": "Get a list of archived images for the selected period",
         "description": "Get a list of archived images for the selected period",
         "operationId": "getWebcamArchive",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2675,7 +3181,13 @@
     },
     "Area": {
       "type": "object",
-      "required": ["enclosure", "name", "type", "mode", "setup"],
+      "required": [
+        "enclosure",
+        "name",
+        "type",
+        "mode",
+        "setup"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -2699,7 +3211,14 @@
         "mode": {
           "type": "string",
           "description": "Operating mode",
-          "enum": ["disabled", "main_lights", "timer", "sensors", "weather", "weather_inverse"]
+          "enum": [
+            "disabled",
+            "main_lights",
+            "timer",
+            "sensors",
+            "weather",
+            "weather_inverse"
+          ]
         },
         "setup": {
           "type": "string",
@@ -2759,7 +3278,11 @@
     },
     "Button": {
       "type": "object",
-      "required": ["name", "hardware", "address"],
+      "required": [
+        "name",
+        "hardware",
+        "address"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -2822,7 +3345,10 @@
     },
     "Calendar": {
       "type": "object",
-      "required": ["summary", "dtstart"],
+      "required": [
+        "summary",
+        "dtstart"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -2859,7 +3385,12 @@
         "freq": {
           "type": "string",
           "description": "Event repeat period",
-          "enum": ["daily", "weekly", "monthly", "yearly"]
+          "enum": [
+            "daily",
+            "weekly",
+            "monthly",
+            "yearly"
+          ]
         },
         "interval": {
           "type": "integer",
@@ -2874,7 +3405,9 @@
     },
     "Enclosure": {
       "type": "object",
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -2925,7 +3458,9 @@
     },
     "Playlist": {
       "type": "object",
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -2964,7 +3499,11 @@
     },
     "Relay": {
       "type": "object",
-      "required": ["name", "hardware", "address"],
+      "required": [
+        "name",
+        "hardware",
+        "address"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -3054,7 +3593,13 @@
     },
     "Sensor": {
       "type": "object",
-      "required": ["name", "hardware", "type", "address", "exclude_avg"],
+      "required": [
+        "name",
+        "hardware",
+        "type",
+        "address",
+        "exclude_avg"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -3196,7 +3741,9 @@
     },
     "Setting": {
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -3482,6 +4029,33 @@
         }
       }
     },
+    "WeatherProviders": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Weather data providers",
+      "properties": {
+        "hardware": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Weather data provider type"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Weather data provider name"
+        },
+        "url": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Weather data provider data url"
+        },
+        "validator": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Weather data provider data url validation regex"
+        }
+      }
+    },
     "WebcamHardware": {
       "type": "object",
       "description": "Webcam hardware object",
@@ -3501,7 +4075,15 @@
     "Webcam": {
       "type": "object",
       "description": "Webcam object",
-      "required": ["hardware", "name", "address", "width", "height", "rotation", "awb"],
+      "required": [
+        "hardware",
+        "name",
+        "address",
+        "width",
+        "height",
+        "rotation",
+        "awb"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -3532,7 +4114,14 @@
         "rotation": {
           "type": "string",
           "description": "The webcam rotation",
-          "enum": ["0", "90", "180", "270", "H", "V"]
+          "enum": [
+            "0",
+            "90",
+            "180",
+            "270",
+            "H",
+            "V"
+          ]
         },
         "awb": {
           "type": "string",
@@ -3576,17 +4165,37 @@
             "door": {
               "type": "string",
               "description": "Door status for saving image to archive",
-              "enum": ["ignore", "close", "open"]
+              "enum": [
+                "ignore",
+                "close",
+                "open"
+              ]
             },
             "light": {
               "type": "string",
               "description": "Light status for saving image to archive",
-              "enum": ["ignore", "on", "off"]
+              "enum": [
+                "ignore",
+                "on",
+                "off"
+              ]
             },
             "state": {
               "type": "string",
               "description": "Webcam archiving modus. Either every x seconds or by motion",
-              "enum": ["disabled", "motion", "60", "300", "900", "1800", "3600", "10800", "21600", "43200", "86400"]
+              "enum": [
+                "disabled",
+                "motion",
+                "60",
+                "300",
+                "900",
+                "1800",
+                "3600",
+                "10800",
+                "21600",
+                "43200",
+                "86400"
+              ]
             }
           }
         },
@@ -3602,12 +4211,20 @@
             "boxes": {
               "type": "string",
               "description": "Show motion boxes and in what color",
-              "enum": ["-1", "red", "green", "blue"]
+              "enum": [
+                "-1",
+                "red",
+                "green",
+                "blue"
+              ]
             },
             "frame": {
               "type": "string",
               "description": "Which frame to use to comparison",
-              "enum": ["last", "archived"]
+              "enum": [
+                "last",
+                "archived"
+              ]
             },
             "threashold": {
               "type": "number",

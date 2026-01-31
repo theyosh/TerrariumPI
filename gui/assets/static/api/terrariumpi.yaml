@@ -1886,6 +1886,24 @@ paths:
             type: array
             items:
               $ref: '#/definitions/WeatherForecast'
+  /weather/hardware/:
+    get:
+      tags:
+        - Weather
+      summary: Get weather source providers that can be used
+      description: Get weather source providers that can be used
+      operationId: getWeatherHardware
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: List of weather source providers
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WeatherProviders'
   /webcams/hardware/:
     get:
       tags:
@@ -2745,6 +2763,27 @@ definitions:
         type: number
         readOnly: true
         description: Weather forecast unix timestamp
+  WeatherProviders:
+    type: object
+    readOnly: true
+    description: Weather data providers
+    properties:
+      hardware:
+        type: string
+        readOnly: true
+        description: Weather data provider type
+      name:
+        type: string
+        readOnly: true
+        description: Weather data provider name
+      url:
+        type: string
+        readOnly: true
+        description: Weather data provider data url
+      validator:
+        type: string
+        readOnly: true
+        description: Weather data provider data url validation regex
   WebcamHardware:
     type: object
     description: Webcam hardware object
