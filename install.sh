@@ -311,6 +311,7 @@ XXX
 EOF
 git submodule update 2> /dev/null && rm -rf 3rdparty/4relay-rpi && rm -rf 3rdparty/4relind-rpi && rm -rf 3rdparty/8relind-rpi && rm -rf 3rdparty/Bright-Pi
 patch -N -s -r /dev/null 3rdparty/python3-voltcraft-sem6000/sem6000/repeat_on_failure_decorator.py < contrib/python3-voltcraft-sem6000.patch.diff >/dev/null
+patch -N -u -l -s -r /dev/null 3rdparty/iorodeo-as7331/iorodeo_as7331/iorodeo_as7331.py < contrib/python3-as7331.patch.diff >/dev/null
 
 PROGRESS=$((PROGRESS + 1))
 cat <<EOF

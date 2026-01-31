@@ -1,0 +1,248 @@
+diff --git a/iorodeo_as7331/iorodeo_as7331.py b/iorodeo_as7331/iorodeo_as7331.py
+index 3a9b44b..d561ee9 100644
+--- a/iorodeo_as7331/iorodeo_as7331.py
++++ b/iorodeo_as7331/iorodeo_as7331.py
+@@ -1,66 +1,66 @@
+ import time
+ from adafruit_bus_device.i2c_device import I2CDevice
+ 
+-DEFAULT_I2C_ADDR = const(0x74)
++DEFAULT_I2C_ADDR = 0x74
+ 
+ # Control/Configuration register bank
+-_REG_ADDR_OSR    = const(0x00) # Operational State Register
+-_REG_ADDR_AGEN   = const(0x02) # API Generation Register
+-_REG_ADDR_CREG1  = const(0x06) # Configuration Register 1
+-_REG_ADDR_CREG2  = const(0x07) # Configuration Register 2
+-_REG_ADDR_CREG3  = const(0x08) # Configuration Register 3
+-_REG_ADDR_BREAK  = const(0x09) # Break Register
+-_REG_ADDR_EDGES  = const(0x0A) # Edges Register (for SYND mode)
+-_REG_ADDR_OPTREG = const(0x0B) # Option Register
++_REG_ADDR_OSR    = 0x00 # Operational State Register
++_REG_ADDR_AGEN   = 0x02 # API Generation Register
++_REG_ADDR_CREG1  = 0x06 # Configuration Register 1
++_REG_ADDR_CREG2  = 0x07 # Configuration Register 2
++_REG_ADDR_CREG3  = 0x08 # Configuration Register 3
++_REG_ADDR_BREAK  = 0x09 # Break Register
++_REG_ADDR_EDGES  = 0x0A # Edges Register (for SYND mode)
++_REG_ADDR_OPTREG = 0x0B # Option Register
+ 
+ # Output register bank (Measurement State)
+-_REG_ADDR_STATUS   = const(0x00) # Status register 
+-_REG_ADDR_TEMP     = const(0x01) # Temperature measurement result
+-_REG_ADDR_MRES1    = const(0x02) # Channel A measurement result
+-_REG_ADDR_MRES2    = const(0x03) # Channel B measurement result
+-_REG_ADDR_MRES3    = const(0x04) # Channel C measurement result
+-_REG_ADDR_OUTCONVL = const(0x05) # Result of time conversion (lsb) 
+-_REG_ADDR_OUTCONVH = const(0x06) # Result of time conversion (msb)
++_REG_ADDR_STATUS   = 0x00 # Status register
++_REG_ADDR_TEMP     = 0x01 # Temperature measurement result
++_REG_ADDR_MRES1    = 0x02 # Channel A measurement result
++_REG_ADDR_MRES2    = 0x03 # Channel B measurement result
++_REG_ADDR_MRES3    = 0x04 # Channel C measurement result
++_REG_ADDR_OUTCONVL = 0x05 # Result of time conversion (lsb)
++_REG_ADDR_OUTCONVH = 0x06 # Result of time conversion (msb)
+ 
+ # OSR REG Masks (RW)
+-_OSR_MASK_DOS      = const(0x07) # Device Operating State 
+-_OSR_MASK_SW_RES   = const(0x08) # Software Reset 
+-_OSR_MASK_PD       = const(0x40) # Power Down State Switch 
+-_OSR_MASK_SS       = const(0x80) # Start/Stop measurement  
++_OSR_MASK_DOS      = 0x07 # Device Operating State
++_OSR_MASK_SW_RES   = 0x08 # Software Reset
++_OSR_MASK_PD       = 0x40 # Power Down State Switch
++_OSR_MASK_SS       = 0x80 # Start/Stop measurement
+ 
+ # CREG1 Masks (RW)
+-_CREG1_MASK_INTEGRATION_TIME = const(0x0f) # Integration time
+-_CREG1_MASK_GAIN             = const(0xf0) # Irradiance reponsivity
++_CREG1_MASK_INTEGRATION_TIME = 0x0f # Integration time
++_CREG1_MASK_GAIN             = 0xf0 # Irradiance reponsivity
+ 
+ # CREG2 Masks (RW)
+-_CREG2_MASK_EN_TM  = const(0x40) # Disable/enable measurement of integration time
+-_CREG2_MASK_EN_DIV = const(0x08) # Disable/enable divider of measurement results
+-_CREG2_MASK_DIV    = const(0x07) # Digital divider of measurement results
++_CREG2_MASK_EN_TM  = 0x40 # Disable/enable measurement of integration time
++_CREG2_MASK_EN_DIV = 0x08 # Disable/enable divider of measurement results
++_CREG2_MASK_DIV    = 0x07 # Digital divider of measurement results
+ 
+ # CREG2 Masks (RW)
+-_CREG3_MASK_MMODE = const(0xc0) # Measurement mode
+-_CREG3_MASK_SB    = const(0x10) # Standby disable/enable
+-_CREG3_MASK_RDYOD = const(0x08) # Pin Ready push-pull or open-drain
+-_CREG3_MASK_CCLK  = const(0x03) # Internal clock frequency
++_CREG3_MASK_MMODE = 0xc0 # Measurement mode
++_CREG3_MASK_SB    = 0x10 # Standby disable/enable
++_CREG3_MASK_RDYOD = 0x08 # Pin Ready push-pull or open-drain
++_CREG3_MASK_CCLK  = 0x03 # Internal clock frequency
+ 
+ # Status REG Masks (RO)
+-_STATUS_MASK_POWERSTATE   = const(0x01) # Power state  
+-_STATUS_MASK_STANDBYSTATE = const(0x02) # Standby state 
+-_STATUS_MASK_NOTREADY     = const(0x04) # Not ready state
+-_STATUS_MASK_NDATA        = const(0x08) # New measurements transferred
+-_STATUS_MASK_LDATA        = const(0x10) # Measurements overwritten
+-_STATUS_MASK_ADCOF        = const(0x20) # Overflow of internal conversion channel
+-_STATUS_MASK_MRESOF       = const(0x40) # Overflow of measurement result
+-_STATUS_MASK_OUTCONVOF    = const(0x80) # Overflow of time reference
++_STATUS_MASK_POWERSTATE   = 0x01 # Power state
++_STATUS_MASK_STANDBYSTATE = 0x02 # Standby state
++_STATUS_MASK_NOTREADY     = 0x04 # Not ready state
++_STATUS_MASK_NDATA        = 0x08 # New measurements transferred
++_STATUS_MASK_LDATA        = 0x10 # Measurements overwritten
++_STATUS_MASK_ADCOF        = 0x20 # Overflow of internal conversion channel
++_STATUS_MASK_MRESOF       = 0x40 # Overflow of measurement result
++_STATUS_MASK_OUTCONVOF    = 0x80 # Overflow of time reference
+ 
+ # AGEN Register Masks
+-_AGEN_MASK_DEVID  = const(0xf0) # Device Id number
+-_AGEN_MASK_MUT    = const(0x0f) # Mutation number of control bank
+-_AGEN_SHIFT_DEVID = const(0x4)  # Shift value for dev id
++_AGEN_MASK_DEVID  = 0xf0 # Device Id number
++_AGEN_MASK_MUT    = 0x0f # Mutation number of control bank
++_AGEN_SHIFT_DEVID = 0x4  # Shift value for dev id
+ 
+ # Device modes
+-DEVICE_STATE_CONFIGURATION = const(0x2)
+-DEVICE_STATE_MEASUREMENT   = const(0x3)
++DEVICE_STATE_CONFIGURATION = 0x2
++DEVICE_STATE_MEASUREMENT   = 0x3
+ ALLOWED_DEVICE_STATES = (
+         DEVICE_STATE_CONFIGURATION,
+         DEVICE_STATE_MEASUREMENT,
+@@ -74,48 +74,48 @@ DEVICE_STATE_TO_STRING = {
+ DEVICE_STATE_FROM_STRING = {v:k for k,v in DEVICE_STATE_TO_STRING.items()}
+ 
+ # Integration times (bits 3:0 of CREG1)
+-INTEGRATION_TIME_1MS     = const(0x00)
+-INTEGRATION_TIME_2MS     = const(0x01)
+-INTEGRATION_TIME_4MS     = const(0x02)
+-INTEGRATION_TIME_8MS     = const(0x03)
+-INTEGRATION_TIME_16MS    = const(0x04)
+-INTEGRATION_TIME_32MS    = const(0x05)
+-INTEGRATION_TIME_64MS    = const(0x06)
+-INTEGRATION_TIME_128MS   = const(0x07)
+-INTEGRATION_TIME_256MS   = const(0x08)
+-INTEGRATION_TIME_512MS   = const(0x09)
+-INTEGRATION_TIME_1024MS  = const(0x0a)
+-INTEGRATION_TIME_2048MS  = const(0x0b)
+-INTEGRATION_TIME_4096MS  = const(0x0c)
+-INTEGRATION_TIME_8192MS  = const(0x0d)
+-INTEGRATION_TIME_16384MS = const(0x0e)
++INTEGRATION_TIME_1MS     = 0x00
++INTEGRATION_TIME_2MS     = 0x01
++INTEGRATION_TIME_4MS     = 0x02
++INTEGRATION_TIME_8MS     = 0x03
++INTEGRATION_TIME_16MS    = 0x04
++INTEGRATION_TIME_32MS    = 0x05
++INTEGRATION_TIME_64MS    = 0x06
++INTEGRATION_TIME_128MS   = 0x07
++INTEGRATION_TIME_256MS   = 0x08
++INTEGRATION_TIME_512MS   = 0x09
++INTEGRATION_TIME_1024MS  = 0x0a
++INTEGRATION_TIME_2048MS  = 0x0b
++INTEGRATION_TIME_4096MS  = 0x0c
++INTEGRATION_TIME_8192MS  = 0x0d
++INTEGRATION_TIME_16384MS = 0x0e
+ 
+ _INTEGRATION_TIME_MIN_VAL = INTEGRATION_TIME_1MS
+ _INTEGRATION_TIME_MAX_VAL = INTEGRATION_TIME_16384MS
+ 
+ # Gain settings (bits 7:4 CREG1)
+-GAIN_2048X = const(0x00)
+-GAIN_1024X = const(0x01)
+-GAIN_512X  = const(0x02)
+-GAIN_256X  = const(0x03)
+-GAIN_128X  = const(0x04)
+-GAIN_64X   = const(0x05)
+-GAIN_32X   = const(0x06)
+-GAIN_16X   = const(0x07)
+-GAIN_8X    = const(0x08)
+-GAIN_4X    = const(0x09)
+-GAIN_2X    = const(0x0a)
+-GAIN_1X    = const(0x0b)
+-
+-_GAIN_MIN_VAL = const(0x00)
+-_GAIN_MAX_VAL = const(0x0b)
+-_GAIN_BIT_SHIFT = const(4)
++GAIN_2048X = 0x00
++GAIN_1024X = 0x01
++GAIN_512X  = 0x02
++GAIN_256X  = 0x03
++GAIN_128X  = 0x04
++GAIN_64X   = 0x05
++GAIN_32X   = 0x06
++GAIN_16X   = 0x07
++GAIN_8X    = 0x08
++GAIN_4X    = 0x09
++GAIN_2X    = 0x0a
++GAIN_1X    = 0x0b
++
++_GAIN_MIN_VAL = 0x00
++_GAIN_MAX_VAL = 0x0b
++_GAIN_BIT_SHIFT = 4
+ 
+ # Measurement mode settings (bits 7:6 of CREG3)
+-MEASUREMENT_MODE_CONTINUOUS         = const(0x00)
+-MEASUREMENT_MODE_COMMAND            = const(0x40)
+-MEASUREMENT_MODE_SYNC_START         = const(0x80) 
+-MEASUREMENT_MODE_SYNC_START_AND_END = const(0xc0)
++MEASUREMENT_MODE_CONTINUOUS         = 0x00
++MEASUREMENT_MODE_COMMAND            = 0x40
++MEASUREMENT_MODE_SYNC_START         = 0x80
++MEASUREMENT_MODE_SYNC_START_AND_END = 0xc0
+ 
+ ALLOWED_MEASUREMENT_MODES = (
+         MEASUREMENT_MODE_CONTINUOUS,
+@@ -134,22 +134,22 @@ MEASUREMENT_MODE_TO_STRING = {
+ STRING_TO_MEASUREMENT_MODE = {v:k for k,v in MEASUREMENT_MODE_TO_STRING.items()}
+ 
+ # Internal clock frequencys
+-CCLK_FREQ_1024KHZ = const(0x00)
+-CCLK_FREQ_2048KHZ = const(0x01)
+-CCLK_FREQ_4096KHZ = const(0x02)
+-CCLK_FREQ_8192KHZ = const(0x03)
++CCLK_FREQ_1024KHZ = 0x00
++CCLK_FREQ_2048KHZ = 0x01
++CCLK_FREQ_4096KHZ = 0x02
++CCLK_FREQ_8192KHZ = 0x03
+ 
+ _CCLK_MIN_VAL = CCLK_FREQ_1024KHZ
+-_CCKL_MAX_VAL = CCLK_FREQ_8192KHZ
++_CCLK_MAX_VAL = CCLK_FREQ_8192KHZ
+ 
+ # Measurement divider min/max value
+-_DIV_MIN_VAL = const(0x00)
+-_DIV_MAX_VAL = const(0x07)
++_DIV_MIN_VAL = 0x00
++_DIV_MAX_VAL = 0x07
+ 
+ # Fullscale range values for UV A,B and C channels
+-_FSRA = const(348160)
+-_FSRB = const(387072)
+-_FSRC = const(169984)
++_FSRA = 348160
++_FSRB = 387072
++_FSRC = 169984
+ 
+ class AS7331:
+ 
+@@ -547,7 +547,7 @@ class AS7331:
+         Reads CREG2 and returns the time measurement enabled setting (True/False)
+         """
+         with ConfigurationStateManager(self):
+-            val = bool(self.creg2 & _CREG2_MASK_TM_EN)
++            val = bool(self.creg2 & _CREG2_MASK_EN_TM)
+         return val
+ 
+     @time_measurement_enabled.setter
+@@ -557,7 +557,7 @@ class AS7331:
+             if val:
+                 self.creg2 = self.creg2 | _CREG2_MASK_TM_ENV
+             else:
+-                self.creg2 = self.creg2 & ~_CREG2_MASK_TM_EN
++                self.creg2 = self.creg2 & ~_CREG2_MASK_EN_TM
+ 
+     @property
+     def divider_enabled(self):

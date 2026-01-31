@@ -13,3 +13,6 @@
 [submodule "3rdparty/python3-voltcraft-sem6000"]
 	path = 3rdparty/python3-voltcraft-sem6000
 	url = https://github.com/moormaster/python3-voltcraft-sem6000.git
+[submodule "3rdparty/iorodeo-as7331"]
+	path = 3rdparty/iorodeo-as7331
+	url = https://github.com/iorodeo/iorodeo-as7331

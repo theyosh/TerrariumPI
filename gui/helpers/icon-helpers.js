@@ -23,6 +23,7 @@ export const template_sensor_type_color = (type) => {
     case 'uvi':
     case 'uva':
     case 'uvb':
+    case 'uvc':
     case 'ldr':
       return 'text-warning';
 
@@ -85,6 +86,7 @@ export const template_sensor_type_icon = (type) => {
       return 'fas fa-flask';
 
     case 'uvi':
+    case 'uvc':
       return 'fas fa-sun';
 
     case 'uva':
