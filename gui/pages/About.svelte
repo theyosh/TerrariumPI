@@ -93,7 +93,7 @@
             target="_blank"
             rel="noopener noreferrer">2014</a
           >
-          - 2025<br /><a href="https://theyosh.nl" target="_blank" rel="noopener noreferrer">TheYOSH</a>
+          - 2026<br /><a href="https://theyosh.nl" target="_blank" rel="noopener noreferrer">TheYOSH</a>
         </p>
       </Card>
     </div>
