@@ -24,6 +24,8 @@ class terrariumRelayGPIO(terrariumRelay):
             device = None
             if address[0].lower().startswith("pcf8574-"):
                 device = terrariumIOExpander("PCF8574", ",".join(address[1:]))
+            elif address[0].lower().startswith("pcf8575-"):
+                device = terrariumIOExpander("PCF8575", ",".join(address[1:]))
 
             if device is not None:
                 device.set_port(int(address[0].split("-")[1]))

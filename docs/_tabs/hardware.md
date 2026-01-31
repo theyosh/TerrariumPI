@@ -85,7 +85,7 @@ bus. A correct working I2C bus should produce the following outcome:
 
 ### I2C Multiplexer
 
-With an [I2C multiplexer](/TerrariumPI/hardware/i2c-multiplexer/) you can add
+With an [I2C multiplexer]({% link _hardware/i2c-multiplexer.md %}) you can add
 more I2C busses to TerrariumPI. Support for I2C multiplexers depends on the
 support in the OS. For now there is support for pca9542 (2 channel), pca9545 (4
 channel), and pca9548 (8 channel) muxes.
@@ -96,11 +96,11 @@ There is support for two I2C IO Expanders so you can have extra GPIO relays or
 GPIO buttons if needed. This will update the GPIO address to:\
 `pcf857<4/5>-<IO expander port>,<I2C Address>,[I2C Bus number]`
 
-Either use [pcf857**4**](/TerrariumPI/hardware/io-expander/) or
-[pcf857**5**](/TerrariumPI/hardware/io-expander/) to select the used IO
+Either use [pcf857**4**]({% link _hardware/io-expander.md %}) or
+[pcf857**5**]({% link _hardware/io-expander.md %}) to select the used IO
 expander.
 
-`<IO expander port>` is mandatory and is a number from 0 till max ports - 1.
+`<IO expander port>` is mandatory and is a number from **1** till max ports.
 
 `<I2C Address>` is mandatory and specified [here](#i2c-bus).
 

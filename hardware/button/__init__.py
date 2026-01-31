@@ -66,9 +66,7 @@ class terrariumButton(object):
         "Create a new button based on type"
 
         self._device = {"device": None, "id": None, "address": None, "name": None, "state": None}
-
         self._checker = {"running": False, "thread": None}
-
         self._inverse = False
 
         self.id = button_id

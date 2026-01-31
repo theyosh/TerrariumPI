@@ -11,7 +11,7 @@ image:
 device_types: [temperature]
 device_address:
   '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
-  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `1,0x3f`'
+  bus](/TerrariumPI/hardware/#i2c-bus) is optional<br />Ex: `1,0x3f`'
 device_url: https://makersportal.com/shop/amg8833-thermal-camera-infrared-array
 ---
 

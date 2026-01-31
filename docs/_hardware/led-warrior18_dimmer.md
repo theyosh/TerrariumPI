@@ -10,7 +10,7 @@ image:
 
 device_address:
   '&lt;relay_number&gt;,&lt;I2C Address&gt;,[I2C Bus] where the [I2C
-  bus](/TerrariumPI/hardware#i2c-bus) is optional<br />Ex: `1,0x70`'
+  bus](/TerrariumPI/hardware/#i2c-bus) is optional<br />Ex: `1,0x70`'
 dimmer_frequency: 65535
 device_url: https://shop.codemercs.com/en/led-warrior18-module.html
 ---

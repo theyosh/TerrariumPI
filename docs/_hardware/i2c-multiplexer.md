@@ -23,8 +23,8 @@ line: `dtparam=i2c_arm=on`:
 if using that address).
 
 After rebooting, you should have up to 8 new I2C devices at the location:
-`/dev/i2c-*`.
-[You can then use the I2C address as normal but you need to add the I2C bus](/TerrariumPI/hardware/#i2c-bus).
+`/dev/i2c-*`. [You can then use the I2C address as normal but you need to add
+the I2C bus]({% link _tabs/hardware.md %}#i2c-bus).
 
 This should work for **pca9542** (2 channel), **pca9545** (4 channel), and
 **pca9548** (8 channel) devices.

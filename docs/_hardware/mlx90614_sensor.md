@@ -11,7 +11,7 @@ image:
 device_types: [temperature]
 device_address:
   '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
-  bus](/TerrariumPI/hardware#i2c-bus) is optional, followed by either `,o` for
+  bus](/TerrariumPI/hardware/#i2c-bus) is optional, followed by either `,o` for
   object or `,a` for ambient temperature<br />Ex: `0x3f,1,o`'
 device_url: https://www.sparkfun.com/products/9570
 ---
