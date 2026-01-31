@@ -1,7 +1,7 @@
 ---
-title: HD30A 4 Channel Electromagnetic I2C Relay 12V 30A
+title: HD30A 4/8 Channel Electromagnetic I2C Relay 12V 30A
 categories: [Hardware, Relay]
-tags: [relay, HD30A]
+tags: [relay, HD30A, 4channel, 8channel]
 
 image:
   path: /assets/img/HD30A_4_Channel_Electromagnetic_I2C_Relay_12V_30A.webp
@@ -42,5 +42,8 @@ are used quality screw terminals KF-128-3P. Each relay is indicated with led
 (color red)
 
 [HD30A 4CH/8CH Channel Electromagnetic relay](https://www.tindie.com/products/bugrovs2012/hd30a-4-channel-electromagnetic-i2c-relay-12v-30a/)
+
+Other relay boards with a **PCF8574** chip should work.
+[8 Channel I2C Electromagnetic Relay Module](https://www.tindie.com/products/bugrovs2012/8-channel-i2c-electromagnetic-relay-module/)
 
 {% include_relative _relay_detail.md %}

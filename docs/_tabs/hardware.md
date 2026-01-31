@@ -100,7 +100,7 @@ Either use [pcf857**4**](/TerrariumPI/hardware/io-expander/) or
 [pcf857**5**](/TerrariumPI/hardware/io-expander/) to select the used IO
 expander.
 
-`<IO expander port>` is mandatory and is a number from 0 till max ports - 1.
+`<IO expander port>` is mandatory and is a number from **1** till max ports.
 
 `<I2C Address>` is mandatory and specified [here](#i2c-bus).
 
