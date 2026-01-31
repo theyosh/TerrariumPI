@@ -8,7 +8,7 @@ image:
   src: /assets/img/AS7331.webp
   alt: 'AS7331 UVA, UVB, UVC light and temperature sensor header image'
 
-device_types: [uva, uvb, uvc, uvi]
+device_types: [uva, uvb, uvc, uvi, temperature]
 device_address:
   '&lt;I2C Address&gt;,[I2C Bus] where the [I2C
   bus](/TerrariumPI/hardware/#i2c-bus) is optional<br />Ex: `0x74`'
