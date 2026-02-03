@@ -18,7 +18,7 @@ class terrariumAS7331Sensor(terrariumI2CSensor):
 
     def _load_hardware(self):
         i2c = board.I2C()
-        device = as7331.AS7331(i2c, self._address[1])
+        device = as7331.AS7331(i2c, self._address[0])
 
         device.gain = as7331.GAIN_512X
         device.integration_time = as7331.INTEGRATION_TIME_128MS
