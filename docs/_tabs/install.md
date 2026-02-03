@@ -49,11 +49,15 @@ the Raspberry PI and withing a minute you should have a running Raspberry PI.
 When the Raspberry PI is up and running, you should be able to SSH to it. On
 Linux and Mac you can use the terminal. For Windows, you can use Putty.
 
+Use the username you have setup with the PI Imager tool. Mostly it will be `pi`
+, but if you have chosen a different username, than use that for the SSH
+connection. For TerrariumPI is does not matter what username you pick.
+
 ```console
-ssh pi@[raspberrypi]
+ssh [username]@[raspberrypi]
 ```
 
-**Disclaimer:** If you have TerrariumPI running on this Raspberry PI, then you
+**Disclaimer:** If you have TerrariumPI running on the Raspberry PI, then you
 can [read here](#backup) how to stop and make a backup.
 
 ### Docker
