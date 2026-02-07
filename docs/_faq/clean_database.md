@@ -20,7 +20,6 @@ and run this on a desktop/laptop.
 The cleanup can take up to **1 hour**!. So make sure your environment is stable
 and can survive for that period.
 
-
 1. Enter the TerrariumPI folder: `cd /home/pi/TerrariumPI/`
 2. Enable Python3 virtual environment: `source venv/bin/activate`
 3. Go to the folder 'contrib': `cd contrib`
