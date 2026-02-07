@@ -38,7 +38,7 @@ class HistoryCleanup:
             f"This script will cleanup your terrariumpi.db file. We will keep {period.days} days of data from now. If you want to make a backup first, please enter no and make your backup."
         )
 
-        self.cleanup_tables = ["Button","Sensor"]
+        self.cleanup_tables = ["Button", "Sensor"]
         self.progress_amount = 100000
         self.total_to_keep = 0
         self.counter = 0
@@ -105,7 +105,7 @@ class HistoryCleanup:
     def __sql_progress(self):
         self.counter += 1
         # f-string format not working here
-        print("{}".format(['|','/','-','\\'][self.counter % 4]), end="\r")
+        print("{}".format(["|", "/", "-", "\\"][self.counter % 4]), end="\r")
         return 0  # Return 0 to continue, non-zero to abort
 
     def __vacuum(self):
@@ -138,7 +138,9 @@ class HistoryCleanup:
             totals = self.get_total_records(table)
             print("  Getting records to delete ...", end="\r")
             cleanup = self.get_records_to_delete(table)
-            print(f"Table {table} contains {totals[0]} records, of which being deleted {cleanup[0]} records {cleanup[0]/totals[0]*100:.2f}%.")
+            print(
+                f"Table {table} contains {totals[0]} records, of which being deleted {cleanup[0]} records {cleanup[0]/totals[0]*100:.2f}%."
+            )
 
             sql = f"DELETE FROM `{table}` WHERE timestamp < ?"
             parameters = (self.time_limit,)
