@@ -24,7 +24,7 @@ bcrypt==4.3.0
 cryptography==46.0.2
 
 # Webcam packages
-Pillow==12.0.0
+Pillow==12.1.1
 # !! Check first: https://piwheels.org/project/numpy/ !!
 # Version 2 needs to be supported for all sub projects. Do not upgrade !!
 numpy==1.26.4
