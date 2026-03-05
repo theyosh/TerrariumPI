@@ -18,7 +18,7 @@
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-replace": "^6.0.1",
-    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-terser": "^1.0.0",
     "@web/rollup-plugin-html": "^2.0.0",
     "autoprefixer": "^10.4.17",
     "cross-env-file": "^1.0.0",
