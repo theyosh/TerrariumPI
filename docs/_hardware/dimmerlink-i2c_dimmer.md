@@ -38,9 +38,9 @@ controller.
 
 ## Works with
 
-![Desktop View](https://www.rbdimmer.com/web/image/product.product/133/image_1024/AC%20Dimmer%20Module%204A%2C%201%20channel%2C%203.3V-5V%20logic%2C%20AC%20400V-4A%20%28Standard%20%28phase%20control%29%29?unique=9faff9b
-){: width="200" .right}
-This module is tested with a single channel [AC dimmer of RobotDyn](https://www.rbdimmer.com/shop/ac-dimmer-module-4a-1-channel-3-3v-5v-logic-ac-400v-4a-6)
+![Desktop View](https://www.rbdimmer.com/web/image/product.product/133/image_1024/AC%20Dimmer%20Module%204A%2C%201%20channel%2C%203.3V-5V%20logic%2C%20AC%20400V-4A%20%28Standard%20%28phase%20control%29%29?unique=9faff9b){:
+width="200" .right} This module is tested with a single channel
+[AC dimmer of RobotDyn](https://www.rbdimmer.com/shop/ac-dimmer-module-4a-1-channel-3-3v-5v-logic-ac-400v-4a-6)
 
 ## How it works
 

@@ -379,7 +379,9 @@
                 { value: 2, text: 'Logarithmic' },
               ]}"
               label="{$_('relays.settings.calibration.dimmer_curve.label', { default: 'Dimmer curve' })}"
-              placeholder="{$_('relays.settings.calibration.dimmer_curve.placeholder', { default: 'Select dimmer curve' })}"
+              placeholder="{$_('relays.settings.calibration.dimmer_curve.placeholder', {
+                default: 'Select dimmer curve',
+              })}"
               help="{$_('relays.settings.calibration.dimmer_curve.help', {
                 default: 'Select the dimmer curve to be used.',
               })}"
