@@ -29,7 +29,7 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
 
     def _set_hardware_value(self, state):
         with smbus2.SMBus(self.device[1]) as bus:
-            bus.write_byte_data(self.device[0], 0x10, state)
+            bus.write_byte_data(self.device[0], 0x10, int(state))
 
         return True
 
