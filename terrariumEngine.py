@@ -54,7 +54,7 @@ def N_(message):
 
 
 class terrariumEngine(object):
-    __ENGINE_LOOP_TIMEOUT = float(os.environ.get('TPI_ENGINE_TIMEOUT', 30))  # in seconds
+    __ENGINE_LOOP_TIMEOUT = float(os.environ.get("TPI_ENGINE_TIMEOUT", 30))  # in seconds
     __VERSION_UPDATE_CHECK_TIMEOUT = 1  # in days
 
     def __init__(self, version):

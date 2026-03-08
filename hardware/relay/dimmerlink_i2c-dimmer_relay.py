@@ -21,7 +21,7 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
             address[0] = "0x" + address[0]
 
         if len(address) == 1:
-            address.append(1) # Default I2C bus
+            address.append(1)  # Default I2C bus
 
         address[0] = int(address[0], 16)
 
@@ -41,6 +41,6 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
     def calibrate(self, data):
         super().calibrate(data)
 
-        curve = int(data.get("dimmer_curve", 0)) # curve_type: CURVE_LINEAR (0), CURVE_RMS (1), CURVE_LOG (2)
+        curve = int(data.get("dimmer_curve", 0))  # curve_type: CURVE_LINEAR (0), CURVE_RMS (1), CURVE_LOG (2)
         with smbus2.SMBus(self.device[1]) as bus:
             bus.write_byte_data(self.device[0], 0x11, curve)
