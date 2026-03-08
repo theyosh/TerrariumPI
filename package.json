@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@fancyapps/ui": "^5.0.17",
-    "@fortawesome/fontawesome-free": "^7.1.0",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@keenmate/svelte-adminlte": "^4.1.7",
     "admin-lte": "^3.2.0",
     "bootstrap": "^4.6.1",
