@@ -1218,6 +1218,10 @@
         "placeholder": "Insira o endereço"
       },
       "calibration": {
+        "dimmer_curve": {
+          "help": "Selecione a curva dimmer a ser usada.",
+          "placeholder": "Selecione a curva dimmer"
+        },
         "dimmer_frequency": {
           "help": "Frequência de operação do dimmer.",
           "invalid": "Insira um número mínimo de {value}.",

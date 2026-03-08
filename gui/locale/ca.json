@@ -1261,6 +1261,11 @@
         "placeholder": "Introduïu una adreça"
       },
       "calibration": {
+        "dimmer_curve": {
+          "help": "Seleccioneu la corba dimmer que voleu utilitzar.",
+          "label": "Dimmer curve",
+          "placeholder": "Seleccioneu la corba dimmer"
+        },
         "dimmer_frequency": {
           "help": "La freqüència sobre la qual funciona el dimmer.",
           "invalid": "Introduïu un valor mínim de {value}.",

@@ -1221,6 +1221,11 @@
         "placeholder": "Introduce una direccion"
       },
       "calibration": {
+        "dimmer_curve": {
+          "help": "Seleccione la curva de atenuación que se utilizará.",
+          "label": "Curva de atenuación",
+          "placeholder": "Seleccionar curva de atenuación"
+        },
         "dimmer_frequency": {
           "help": "La frecuencia en la que funciona el atenuador.",
           "invalid": "Ingrese un valor mínimo de {value}.",
@@ -1999,6 +2004,10 @@
         }
       },
       "title": "Configuración meteorológica",
+      "weather_provider": {
+        "label": "",
+        "placeholder": ""
+      },
       "weather_source": {
         "help": "Ingrese la URL de API OpenWeathermap completa como: {api_url_example}.",
         "invalid": "La url introducida no es válida.",

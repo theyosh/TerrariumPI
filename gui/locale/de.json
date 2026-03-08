@@ -1261,6 +1261,11 @@
         "placeholder": "Gib eine Adresse ein"
       },
       "calibration": {
+        "dimmer_curve": {
+          "help": "Wählen Sie die zu verwendende Dimmerkurve aus.",
+          "label": "Dimmerkurve",
+          "placeholder": "Dimmerkurve auswählen"
+        },
         "dimmer_frequency": {
           "help": "Arbeitsfrequenz des Dimmers.",
           "invalid": "Bitte gib einen Mindestwert von {value} ein.",

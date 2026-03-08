@@ -376,10 +376,10 @@
               options="{[
                 { value: 0, text: 'Linear' },
                 { value: 1, text: 'RMS' },
-                { value: 2, text: 'LOG' },
+                { value: 2, text: 'Logarithmic' },
               ]}"
-              label="{$_('relays.settings.calibration.dimmer_curve.label', { default: 'Calibration curve' })}"
-              placeholder="{$_('relays.settings.calibration.dimmer_curve.placeholder', { default: 'Select curve' })}"
+              label="{$_('relays.settings.calibration.dimmer_curve.label', { default: 'Dimmer curve' })}"
+              placeholder="{$_('relays.settings.calibration.dimmer_curve.placeholder', { default: 'Select dimmer curve' })}"
               help="{$_('relays.settings.calibration.dimmer_curve.help', {
                 default: 'Select the dimmer curve to be used.',
               })}"

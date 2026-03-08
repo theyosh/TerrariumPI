@@ -1261,6 +1261,11 @@
         "placeholder": "Zadajte adresu"
       },
       "calibration": {
+        "dimmer_curve": {
+          "help": "Vyberte krivku stmievača, ktorú chcete použiť.",
+          "label": "Krivka stmievača",
+          "placeholder": "Vyberte krivku stmievača"
+        },
         "dimmer_frequency": {
           "help": "Frekvencia, na ktorej stmievač pracuje.",
           "invalid": "Zadajte minimálnu hodnotu {value}.",

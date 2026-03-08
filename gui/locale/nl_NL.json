@@ -1261,6 +1261,11 @@
         "placeholder": "Vul een adres in"
       },
       "calibration": {
+        "dimmer_curve": {
+          "help": "Selecteer de te gebruiken dimmercurve.",
+          "label": "Dimmer-curve",
+          "placeholder": "Selecteer dimmercurve"
+        },
         "dimmer_frequency": {
           "help": "De frequentie waarop de dimmer werkt.",
           "invalid": "Voer een minimale waarde in van {value}.",

@@ -1261,6 +1261,11 @@
         "placeholder": "Adresse"
       },
       "calibration": {
+        "dimmer_curve": {
+          "help": "Sélectionnez la courbe de gradation à utiliser.",
+          "label": "Courbe de gradation",
+          "placeholder": "Sélectionner la courbe du variateur"
+        },
         "dimmer_frequency": {
           "help": "La fréquence sur laquelle le gradateur fonctionne.",
           "invalid": "Contient le nom du capteur.",

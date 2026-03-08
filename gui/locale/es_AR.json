@@ -1865,7 +1865,13 @@
         "error": "Los campos obligatorios están marcados con '%s'."
       },
       "information": "Para usar el sistema meteorológico, debe crear una cuenta gratuita en {source_link}.",
+      "open_meteo": {
+        "information": ""
+      },
       "title": "Configuraciones de la webcam",
+      "weather_provider": {
+        "help": ""
+      },
       "weather_source": {
         "help": "",
         "label": "Fuente"

@@ -1261,6 +1261,11 @@
         "placeholder": "アドレスを入力します"
       },
       "calibration": {
+        "dimmer_curve": {
+          "help": "使用するディマーカーブを選択します。",
+          "label": "ディマーカーブ",
+          "placeholder": "ディマーカーブを選択してください"
+        },
         "dimmer_frequency": {
           "help": "調光器の周波数。.",
           "invalid": "％sの最小値を入力してください。.",

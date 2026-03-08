@@ -1261,6 +1261,11 @@
         "placeholder": "Indirizzo"
       },
       "calibration": {
+        "dimmer_curve": {
+          "help": "Selezionare la curva dimmer da utilizzare.",
+          "label": "Curva dimmer",
+          "placeholder": "Seleziona la curva del dimmer"
+        },
         "dimmer_frequency": {
           "help": "La frequenza su cui opera il dimmer.",
           "invalid": "Contiene il nome del sensore.",

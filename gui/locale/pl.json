@@ -1261,6 +1261,11 @@
         "placeholder": "Podaj adres"
       },
       "calibration": {
+        "dimmer_curve": {
+          "help": "Wybierz krzywą ściemniacza, która ma zostać użyta.",
+          "label": "Krzywa ściemniacza",
+          "placeholder": "Wybierz krzywą ściemniacza"
+        },
         "dimmer_frequency": {
           "help": "Częstotliwość, na której działa ściemniacz.",
           "invalid": "Podaj wartość w zakresie pomiędzy {value} i %s.",

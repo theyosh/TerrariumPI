@@ -1261,6 +1261,9 @@
         "placeholder": "Insira um endereço"
       },
       "calibration": {
+        "dimmer_curve": {
+          "label": "Curva mais escura"
+        },
         "dimmer_frequency": {
           "help": "A frequência na qual o dimmer opera.",
           "invalid": "Por favor insira um valor mínimo de {value}.",
