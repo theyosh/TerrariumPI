@@ -1,5 +1,5 @@
 ---
-title: I2C DimmerLink
+title: DimmerLink (I2C mode)
 categories: [Hardware, Relay]
 tags: [relay, dimmer, i2c, ac mains]
 
@@ -14,6 +14,16 @@ device_address:
 device_url: https://www.rbdimmer.com/shop/dimmerlink-controller-uart-i2c-interface-for-ac-dimmers-48
 ---
 
+<!-- prettier-ignore-start -->
+> By default the DimmerLink comes in UART mode. You need to [switch to I2C](https://www.rbdimmer.com/blog/faq-9/dimmerlink-not-detected-on-i2c-uart-mode-default-issue-32) first!! Read carefully about how to connect, especially voltage!!
+{: .prompt-warning }
+<!-- prettier-ignore-end -->
+
+<!-- prettier-ignore-start -->
+> Only **1-channel** devices are supported!
+{: .prompt-warning }
+<!-- prettier-ignore-end -->
+
 ## Information
 
 Stop fighting with dimmer libraries. DimmerLink is a tiny plug-and-play
@@ -25,6 +35,12 @@ project, and suddenly your lights flicker, your timing breaks, and you spend
 hours debugging interrupt conflicts. The DimmerLink eliminates this entirely by
 offloading all timing-critical operations to a dedicated Cortex-M+ micro
 controller.
+
+## Works with
+
+![Desktop View](https://www.rbdimmer.com/web/image/product.product/133/image_1024/AC%20Dimmer%20Module%204A%2C%201%20channel%2C%203.3V-5V%20logic%2C%20AC%20400V-4A%20%28Standard%20%28phase%20control%29%29?unique=9faff9b
+){: width="200" .right}
+This module is tested with a single channel [AC dimmer of RobotDyn](https://www.rbdimmer.com/shop/ac-dimmer-module-4a-1-channel-3-3v-5v-logic-ac-400v-4a-6)
 
 ## How it works
 
