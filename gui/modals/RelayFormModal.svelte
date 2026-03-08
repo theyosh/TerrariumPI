@@ -368,6 +368,17 @@
               })}"
             />
           </div>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-3" class:d-none="{hardware_type !== 'dimmerlink-i2c-dimmer'}">
+          <Select
+            name="calibration.curve"
+            value="{$formData.calibration.curve}"
+            required="{false}"
+            options="{[{ value: 0, text: "Linear" },{ value: 1, text: "RMS" },{ value: 2, text: "LOG" }]}"
+            label="{$_('relays.settings.calibration.dimmer_curve.label', { default: 'Calibration curve' })}"
+            placeholder="{$_('relays.settings.calibration.dimmer_curve.placeholder', { default: 'Select curve' })}"
+            help="{$_('relays.settings.calibration.dimmer_curve.help', { default: 'Select the dimmer curve to be used.' })}"
+            />
+          </div>
         </div>
       </div>
     </div>
