@@ -10,6 +10,12 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
     NAME = "DimmerLink(I2C)"
 
     _DEFAULT_ADDRESS = "0x50"
+    # Bugs in driver...
+    # 1. Setting to value X, will return previous state before X at first read out
+    # 2. After second read out, the value is X-1
+    # Fix: keep an internal state and return that value at read out
+
+    __INTERNAL_STATE = None
 
     def _load_hardware(self):
         # address is expected as `[i2c_address],[I2C bus (optional)]`
@@ -28,15 +34,20 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
         return address
 
     def _set_hardware_value(self, state):
+        self.__INTERNAL_STATE = int(state)
         with smbus2.SMBus(self.device[1]) as bus:
-            bus.write_byte_data(self.device[0], 0x10, int(state))
+            bus.write_byte_data(self.device[0], 0x10, self.__INTERNAL_STATE)
 
         return True
 
     def _get_hardware_value(self):
-        with smbus2.SMBus(self.device[1]) as bus:
-            state = bus.read_byte_data(self.device[0], 0x10)
-            return state
+        return self.__INTERNAL_STATE
+
+        # state = None
+        # with smbus2.SMBus(self.device[1]) as bus:
+        #     state = bus.read_byte_data(self.device[0], 0x10)
+
+        # return state
 
     def calibrate(self, data):
         super().calibrate(data)
