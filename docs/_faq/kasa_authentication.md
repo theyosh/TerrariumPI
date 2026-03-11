@@ -10,7 +10,7 @@ When you see the following error in the TerrariumPI logging you need to enable
 ## Kasa error
 
 ```python
-2025-12-11 03:47:55,212 - ERROR   - hardware.relay.kasa_relay - Server response doesn't match our challenge on ip 192.168.1.XXX
+2025-12-11 03:47:55,212 - ERROR   - hardware.relay.kasa_relay - Server response does not match our challenge on ip 192.168.1.XXX
 Traceback (most recent call last):
   File "/TerrariumPI/hardware/relay/kasa_relay.py", line 75, in _get_hardware_value
     data = self.__asyncio.run(__get_hardware_state())
@@ -46,7 +46,7 @@ Traceback (most recent call last):
                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/opt/venv/lib/python3.11/site-packages/kasa/klaptransport.py", line 233, in perform_handshake1
     raise AuthenticationException(msg)
-kasa.exceptions.AuthenticationException: Server response doesn't match our challenge on ip 192.168.1.XXX
+kasa.exceptions.AuthenticationException: Server response does not match our challenge on ip 192.168.1.XXX
 ```
 
 More information can be found at the [Kasa relay
