@@ -30,6 +30,13 @@ device_url: https://www.tapo.com/en/product/smart-plug/tapo-p100/
 
 ### Authentication
 
+In order to make the Tapo hardware able to communicate with TerrariumPI, you
+need to enable **Third-Party Compatibility** feature. Else you will get
+authentication errors when trying to use the relays.
+
+The setting in the Tapo app is under Me -> Third-Party Services -> Third-Party
+Compatibility.
+
 This device needs your used email and password at TP Link in order to
 communicate. This password will **not** be encrypted in the database. So make
 sure this password is not used for other logins.

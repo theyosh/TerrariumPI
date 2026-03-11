@@ -1,13 +1,15 @@
 ---
-title: Kasa authentication error
+title: Kasa/Tapo authentication error
 categories: [Website, FAQ]
-tags: [logging]
+tags: [authentication, error, kasa, tapo]
 ---
 
 When you see the following error in the TerrariumPI logging you need to enable
 `Third-Party Compatibility feature` in the app.
 
-```
+## Kasa error
+
+```python
 2025-12-11 03:47:55,212 - ERROR   - hardware.relay.kasa_relay - Server response doesn't match our challenge on ip 192.168.1.XXX
 Traceback (most recent call last):
   File "/TerrariumPI/hardware/relay/kasa_relay.py", line 75, in _get_hardware_value
@@ -49,3 +51,32 @@ kasa.exceptions.AuthenticationException: Server response doesn't match our chall
 
 More information can be found at the [Kasa relay
 page]({% link _hardware/tplinkkasa_relay.md %})
+
+## Tapo
+
+```python
+2026-03-11 11:54:02,902 - WARNING - terrariumRelay        - Could not load hardware for relay TAPO P100/5 relay named 'Heat mat' at address '...': Failed to initialize protocol, retrying in 0.5 seconds...
+Exception: Error code: 1003
+    raise Exception(f"Error code: {data['error_code']}")
+  File "/home/pi/TerrariumPI/venv/lib/python3.9/site-packages/PyP100/auth_protocol.py", line 173, in _request_raw
+    result = self._request_raw("handshake", {"key": public_key})
+  File "/home/pi/TerrariumPI/venv/lib/python3.9/site-packages/PyP100/auth_protocol.py", line 244, in Initialize
+    protocol.Initialize()
+  File "/home/pi/TerrariumPI/venv/lib/python3.9/site-packages/PyP100/PyP100.py", line 35, in _initialize
+Traceback (most recent call last):
+2026-03-11 11:54:02,890 - ERROR   - PyP100.PyP100         - Failed to initialize protocol OldProtocol
+2026-03-11 11:54:02,882 - ERROR   - root                  - Wrong message formatting invalid syntax (<string>, line 1)
+2026-03-11 11:54:02,877 - ERROR   - PyP100.auth_protocol  - Error: {'error_code': 1003}
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: http://the.ip/app/handshake1
+    raise HTTPError(http_error_msg, response=self)
+  File "/home/pi/TerrariumPI/venv/lib/python3.9/site-packages/requests/models.py", line 1026, in raise_for_status
+    resp.raise_for_status()
+  File "/home/pi/TerrariumPI/venv/lib/python3.9/site-packages/PyP100/auth_protocol.py", line 45, in _request_raw
+    response = self._request_raw("handshake1", local_seed)
+  File "/home/pi/TerrariumPI/venv/lib/python3.9/site-packages/PyP100/auth_protocol.py", line 95, in Initialize
+    protocol.Initialize()
+  File "/home/pi/TerrariumPI/venv/lib/python3.9/site-packages/PyP100/PyP100.py", line 35, in _initialize
+```
+
+More information can be found at the [Tapo P100 relay
+page]({% link _hardware/tapo_p100_relay.md %})
