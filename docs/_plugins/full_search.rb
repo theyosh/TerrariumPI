@@ -13,7 +13,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
       json_content += '"categories":"' + join(post.data['categories'],", ") + '",'
       json_content += '"tags":"' + join(post.data['tags'],", ") + '",'
       json_content += '"date":"' + post.date.to_s + '",'
-      json_content += '"content":"' + strip_html(post.content).gsub(/\n+/, ' ').gsub(/"/,'\"') + '"'
+      json_content += '"content":"' + strip_html(post.content).gsub(/\n+/, ' ').gsub(/\s+/, ' ').gsub(' \ ', '').gsub(/"/,'\"') + '"'
       json_content += '}'
       json_content += ','
     end
