@@ -69,6 +69,8 @@ if [ "${OS}" == "buster" ]; then
   PIP_MODULES="${PIP_MODULES//meross-iot==+([^ ])/meross-iot==0.4.7.5}"
   PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==0.9.2}"
 
+  PIP_MODULES="${PIP_MODULES//sensirion-i2c-driver==+([^ ])/sensirion-i2c-driver==1.0.0}"
+
   PIP_MODULES="${PIP_MODULES//Adafruit-Blinka==+([^ ])/Adafruit-Blinka==8.43.0}"
 
   PIP_MODULES="${PIP_MODULES//icalevents==+([^ ])/icalevents==0.1.25}"
@@ -89,8 +91,11 @@ if [ "${OS}" == "buster" ]; then
 
 elif [ "${OS}" == "bullseye" ]; then
   # Python 3.9
-  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.5.1}"
-  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/Pillow==11.2.1}"
+  PIP_MODULES="${PIP_MODULES//python-dotenv==+([^ ])/python-dotenv==1.2.1}"
+  PIP_MODULES="${PIP_MODULES//Pillow==+([^ ])/Pillow==11.2.1}"
+  PIP_MODULES="${PIP_MODULES//Adafruit-Blinka==+([^ ])/Adafruit-Blinka==8.64.0}"
+  PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==1.4.0}"
+  PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==22.5}"
 
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
 

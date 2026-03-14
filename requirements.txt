@@ -1,11 +1,11 @@
 pip==26.0.1
-setuptools==80.9.0
-wheel==0.46.2
+setuptools==82.0.1
+wheel==0.46.3
 
 # Database
 pony==0.7.19
 yoyo-migrations==9.0.0
-python-dotenv==1.1.1
+python-dotenv==1.2.2
 
 # Audio
 git+https://github.com/gbstack/ffprobe-python
@@ -19,7 +19,7 @@ bottle_websocket==0.2.9
 jinja2==3.1.6
 retry==0.9.2
 # !! Check first: https://piwheels.org/project/bcrypt/ !!
-bcrypt==4.3.0
+bcrypt==5.0.0
 # !! Check first: https://piwheels.org/project/cryptography/ !!
 cryptography==46.0.4
 
@@ -38,7 +38,7 @@ gpiozero==2.0.1
 # Github versions are more updated
 git+https://github.com/oweidner/i2crelay
 git+https://github.com/rp3tya/PCF8575
-smbus2==0.5.0
+smbus2==0.6.0
 smbus==1.1.post2
 # Github version has some serious patches which we need. Pyipi version is outdated
 git+https://github.com/IanHarvey/bluepy
@@ -58,17 +58,17 @@ lib8relay==1.0.3
 pylibftdi==0.23.0
 # Kasa update 0.7.X needs new code
 python-kasa==0.6.2.1
-meross-iot==0.4.10.3
+meross-iot==0.4.10.4
 PCA9685-driver==1.2.0
-pywemo==1.4.0
+pywemo==2.1.2
 simple-pid==2.0.1
 sparkfun-qwiic-relay==0.0.2
-sensirion-i2c-driver==1.0.0
+sensirion-i2c-driver==1.0.2
 sensirion-i2c-sht==0.4.0
 bme680==2.0.0
-Adafruit-Blinka==8.64.0
+Adafruit-Blinka==9.0.2
 adafruit-circuitpython-sht31d==2.3.29
-adafruit-circuitpython-busdevice==5.2.14
+adafruit-circuitpython-busdevice==5.2.15
 SM8relind==1.0.4
 SM4relind==1.0.5
 py-AHTx0==0.1.2
@@ -78,8 +78,8 @@ git+https://github.com/PiSupply/Bright-Pi
 
 # Calendar and utils
 icalevents==0.3.1
-psutil==7.0.0
-packaging==25.0
+psutil==7.2.2
+packaging==26.0
 func_timeout==4.3.5
 sdnotify==0.3.2
 
@@ -90,9 +90,9 @@ ansi2html==1.9.2
 
 # Notification packages
 emails==0.6
-luma.oled==3.14.0
+luma.oled==3.15.0
 i2c_lcd==0.1.0
-python-telegram-bot[socks,http2]==22.5
+python-telegram-bot[socks,http2]==22.6
 
 # Overrule versions
 # Force to latest version
