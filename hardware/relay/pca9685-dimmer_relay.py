@@ -46,3 +46,10 @@ class terrariumRelayDimmerPCA9685(terrariumRelayDimmer):
         return round(
             max(0.0, min(100.0, (float(pwm_value / self._DIMMER_MAXDIM) * 100.0) - float(self._dimmer_offset)))
         )
+
+    def calibrate(self, data):
+        super().calibrate(data)
+        frequency = data.get("dimmer_frequency", self._DIMMER_FREQ)
+        if frequency is not None and "" != frequency and frequency > 0:
+            self._device["device"].set_pwm_frequency(frequency)
+
