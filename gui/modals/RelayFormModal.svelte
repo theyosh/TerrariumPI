@@ -286,16 +286,24 @@
 
           <div
             class="col-6 col-sm-6 col-md-6 col-lg-3"
-            class:d-none="{['nextevo-dimmer', 'dc-dimmer', 'irf520-dimmer', 'led-warrior18-dimmer', 'pca9685-dimmer'].indexOf(
-              hardware_type,
-            ) === -1}"
+            class:d-none="{[
+              'nextevo-dimmer',
+              'dc-dimmer',
+              'irf520-dimmer',
+              'led-warrior18-dimmer',
+              'pca9685-dimmer',
+            ].indexOf(hardware_type) === -1}"
           >
             <Field
               type="number"
               name="calibration.dimmer_frequency"
-              disabled="{['nextevo-dimmer', 'dc-dimmer', 'irf520-dimmer', 'led-warrior18-dimmer', 'pca9685-dimmer'].indexOf(
-                hardware_type,
-              ) === -1}"
+              disabled="{[
+                'nextevo-dimmer',
+                'dc-dimmer',
+                'irf520-dimmer',
+                'led-warrior18-dimmer',
+                'pca9685-dimmer',
+              ].indexOf(hardware_type) === -1}"
               step="1"
               min="1"
               label="{$_('relays.settings.calibration.dimmer_frequency.label', {
