@@ -2,6 +2,225 @@ Changelog
 =========
 
 
+4.15.0 (2026-03-29)
+-------------------
+
+**New**
+------
+
+- Add PCA9685 dimmer calibration [#1079](https://github.com/theyosh/TerrariumPI/issues/1079). [TheYOSH]
+- Add more info about Third-Party Compatibility Tapo devices [#994](https://github.com/theyosh/TerrariumPI/issues/994).
+  [TheYOSH]
+- Add DimmerLink support [#1057](https://github.com/theyosh/TerrariumPI/issues/1057). [TheYOSH]
+- Add advanced setting for changing engine timeout [#1072](https://github.com/theyosh/TerrariumPI/issues/1072). [TheYOSH]
+- Add support for 16 Channel I2C Electromagnetic Relay Module IoT.
+  [TheYOSH]
+
+  Using PCF8575 chip
+- Add AS7331 UVA, UVB, UVC light and temperature sensor. [TheYOSH]
+- Add missing language to tables. [TheYOSH]
+
+**Fixes**
+------
+
+- Fix python module for bullseye. [TheYOSH]
+- Fix documentation search. [TheYOSH]
+- Fix Python package names. [TheYOSH]
+- Fix float value. [TheYOSH]
+- Fix dimmer curve setting. [TheYOSH]
+- Fix docker builds. [TheYOSH]
+- Fix ReDoc and Swapper API documentation. [TheYOSH]
+- Documentation fix. [TheYOSH]
+- Fix missing relay number for PCA9685 dimmer. [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update documentation DimmerLink. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update Libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Small update. [TheYOSH]
+- Update documentation libraries. [TheYOSH]
+- Update translations. [TheYOSH]
+- Update DimmerLink documentation. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Reformat and NodeJS updates. [TheYOSH]
+- Update db cleanup documentation. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Upgrade python libraries. [TheYOSH]
+- Update documentation: Specify username for PI. [TheYOSH]
+- Update copyright date. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update internal links. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update Libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+
+**Other**
+------
+
+- Merge pull request [#1083](https://github.com/theyosh/TerrariumPI/issues/1083) from
+  theyosh/dependabot/pip/cryptography-46.0.6. [TheYOSH]
+
+  Bump cryptography from 46.0.4 to 46.0.6
+- Bump cryptography from 46.0.4 to 46.0.6. [dependabot[bot]]
+
+  Bumps [cryptography](https://github.com/pyca/cryptography) from 46.0.4 to 46.0.6.
+  - [Changelog](https://github.com/pyca/cryptography/blob/main/CHANGELOG.rst)
+  - [Commits](https://github.com/pyca/cryptography/compare/46.0.4...46.0.6)
+
+  ---
+  updated-dependencies:
+  - dependency-name: cryptography
+    dependency-version: 46.0.6
+    dependency-type: direct:production
+  ...
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge pull request [#1082](https://github.com/theyosh/TerrariumPI/issues/1082) from theyosh/dependabot/pip/requests-2.33.0.
+  [TheYOSH]
+
+  Bump requests from 2.32.5 to 2.33.0
+- Bump requests from 2.32.5 to 2.33.0. [dependabot[bot]]
+
+  Bumps [requests](https://github.com/psf/requests) from 2.32.5 to 2.33.0.
+  - [Release notes](https://github.com/psf/requests/releases)
+  - [Changelog](https://github.com/psf/requests/blob/main/HISTORY.md)
+  - [Commits](https://github.com/psf/requests/compare/v2.32.5...v2.33.0)
+
+  ---
+  updated-dependencies:
+  - dependency-name: requests
+    dependency-version: 2.33.0
+    dependency-type: direct:production
+  ...
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1139 of 1139 strings)
+- New Svelte GUI build. [TheYOSH]
+- Correct dimmer frequency in documentation. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Ignore formatting. [TheYOSH]
+- Work around hardware bug Dimmerlink. [TheYOSH]
+- Bump serialize-javascript and [@rollup/plugin-terser](https://github.com/rollup/plugin-terser) ([#1071](https://github.com/theyosh/TerrariumPI/issues/1071))
+  [dependabot[bot], dependabot[bot]]
+
+  Bumps [serialize-javascript](https://github.com/yahoo/serialize-javascript) to 7.0.4 and updates ancestor dependency [[@rollup/plugin-terser](https://github.com/rollup/plugins/tree/HEAD/packages/terser).](https://github.com/rollup/plugin-terser](https://github.com/rollup/plugins/tree/HEAD/packages/terser).) These dependencies need to be updated together.
+
+
+  Updates `serialize-javascript` from 6.0.2 to 7.0.4
+  - [Release notes](https://github.com/yahoo/serialize-javascript/releases)
+  - [Commits](https://github.com/yahoo/serialize-javascript/compare/v6.0.2...v7.0.4)
+
+  Updates `[@rollup/plugin-terser`](https://github.com/rollup/plugin-terser`) from 0.4.4 to 1.0.0
+  - [Changelog](https://github.com/rollup/plugins/blob/master/packages/terser/CHANGELOG.md)
+  - [Commits](https://github.com/rollup/plugins/commits/beep-v1.0.0/packages/terser)
+
+  ---
+  updated-dependencies:
+  - dependency-name: serialize-javascript
+    dependency-version: 7.0.4
+    dependency-type: indirect
+  - dependency-name: "[@rollup/plugin-terser"](https://github.com/rollup/plugin-terser")
+    dependency-version: 1.0.0
+    dependency-type: direct:development
+  ...
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Downgrade fontawesome. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Downgrade cryptography to a working build version. [TheYOSH]
+- Bump cryptography from 46.0.2 to 46.0.5 ([#1064](https://github.com/theyosh/TerrariumPI/issues/1064)) [dependabot[bot],
+  dependabot[bot]]
+
+  Bumps [cryptography](https://github.com/pyca/cryptography) from 46.0.2 to 46.0.5.
+  - [Changelog](https://github.com/pyca/cryptography/blob/main/CHANGELOG.rst)
+  - [Commits](https://github.com/pyca/cryptography/compare/46.0.2...46.0.5)
+
+  ---
+  updated-dependencies:
+  - dependency-name: cryptography
+    dependency-version: 46.0.5
+    dependency-type: direct:production
+  ...
+- Bump pillow from 12.0.0 to 12.1.1 ([#1065](https://github.com/theyosh/TerrariumPI/issues/1065)) [dependabot[bot],
+  dependabot[bot]]
+
+  Bumps [pillow](https://github.com/python-pillow/Pillow) from 12.0.0 to 12.1.1.
+  - [Release notes](https://github.com/python-pillow/Pillow/releases)
+  - [Changelog](https://github.com/python-pillow/Pillow/blob/main/CHANGES.rst)
+  - [Commits](https://github.com/python-pillow/Pillow/compare/12.0.0...12.1.1)
+
+  ---
+  updated-dependencies:
+  - dependency-name: pillow
+    dependency-version: 12.1.1
+    dependency-type: direct:production
+  ...
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Refactor db_cleanup. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Typo in connection. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Merge branch 'main' into develop. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Bump wheel from 0.45.1 to 0.46.2 ([#1060](https://github.com/theyosh/TerrariumPI/issues/1060)) [dependabot[bot],
+  dependabot[bot]]
+
+  Bumps [wheel](https://github.com/pypa/wheel) from 0.45.1 to 0.46.2.
+  - [Release notes](https://github.com/pypa/wheel/releases)
+  - [Changelog](https://github.com/pypa/wheel/blob/main/docs/news.rst)
+  - [Commits](https://github.com/pypa/wheel/compare/0.45.1...0.46.2)
+
+  ---
+  updated-dependencies:
+  - dependency-name: wheel
+    dependency-version: 0.46.2
+    dependency-type: direct:production
+  ...
+- New Svelte GUI build. [TheYOSH]
+- Compress language files. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (German) [TheYOSH]
+
+  Currently translated at 100.0% (1136 of 1136 strings)
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Portuguese) [Daniel Santos]
+
+  Currently translated at 100.0% (1136 of 1136 strings)
+
+
 4.14.0 (2025-12-20)
 -------------------
 
@@ -15,6 +234,7 @@ Changelog
 **Fixes**
 ------
 
+- Fix buster docker build. [TheYOSH]
 - Documentation fixes. [TheYOSH]
 - Fix day / night weather icons. [TheYOSH]
 - Fix day shift. [TheYOSH]
@@ -29,6 +249,7 @@ Changelog
 **Updates**
 ------
 
+- Update changelog. [TheYOSH]
 - Update version. [TheYOSH]
 - Update libraries. [TheYOSH]
 - Update libraries. [TheYOSH]
