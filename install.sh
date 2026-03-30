@@ -97,6 +97,7 @@ elif [ "${OS}" == "bullseye" ]; then
   PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==1.4.0}"
   PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==22.5}"
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.5.1}"
+  PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.32.5}"
 
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
 
