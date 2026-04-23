@@ -52,4 +52,3 @@ class terrariumRelayDimmerPCA9685(terrariumRelayDimmer):
         frequency = data.get("dimmer_frequency", self._DIMMER_FREQ)
         if frequency is not None and "" != frequency and frequency > 0:
             self._device["device"].set_pwm_frequency(frequency)
-
