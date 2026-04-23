@@ -75,6 +75,7 @@ py-AHTx0==0.1.2
 git+https://github.com/SequentMicrosystems/4relay-rpi.git#subdirectory=python/4relay
 git+https://github.com/almottier/TapoP100
 git+https://github.com/PiSupply/Bright-Pi
+adafruit-circuitpython-seesaw==1.18.1
 
 # Calendar and utils
 icalevents==0.3.1
