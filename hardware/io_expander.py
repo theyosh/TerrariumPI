@@ -100,8 +100,7 @@ class terrariumPCF8575IOExpander(terrariumIOExpander):
         # Convert True (On) to '0' as bit value
         # True is off
         # False is On
-        return int(''.join([str('0' if bit else '1') for bit in reversed(bits)]), 2)
-
+        return int("".join([str("0" if bit else "1") for bit in reversed(bits)]), 2)
 
     # Work around bug: https://github.com/rp3tya/PCF8575/issues/5
     # Keep own internal state
@@ -109,7 +108,9 @@ class terrariumPCF8575IOExpander(terrariumIOExpander):
     def __set_relay(self, port, action):
         self.__internal_state[port - 1] = action
 
-        self.__device.write_word_data(self._address[0], self.toByte(self.__internal_state[:8]), self.toByte(self.__internal_state[8:]))
+        self.__device.write_word_data(
+            self._address[0], self.toByte(self.__internal_state[:8]), self.toByte(self.__internal_state[8:])
+        )
 
     def __get_relay(self, port):
         return self.__internal_state[port - 1]
@@ -118,7 +119,9 @@ class terrariumPCF8575IOExpander(terrariumIOExpander):
         # Force all relays to off position
         self.__internal_state = 16 * [False]
         device = SMBus(address[1])
-        device.write_word_data(address[0], self.toByte(self.__internal_state[:8]), self.toByte(self.__internal_state[8:]))
+        device.write_word_data(
+            address[0], self.toByte(self.__internal_state[:8]), self.toByte(self.__internal_state[8:])
+        )
 
         return device
 
