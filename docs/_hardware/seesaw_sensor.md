@@ -9,8 +9,7 @@ image:
   alt: 'Seesaw soil sensor'
 
 device_types: [moisture, temperature]
-device_address:
-  '&lt;I2C Address&gt;<br />Ex: `0x49`'
+device_address: '&lt;I2C Address&gt;<br />Ex: `0x49`'
 device_url: https://learn.adafruit.com/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor/overview
 device_power_management: false
 ---
