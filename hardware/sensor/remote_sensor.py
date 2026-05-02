@@ -43,5 +43,8 @@ class terrariumRemoteSensor(terrariumSensor):
 
             value = value[item]
 
+        if not terrariumUtils.is_float(value):
+            return None
+
         data = {self.sensor_type: value}
         return data
