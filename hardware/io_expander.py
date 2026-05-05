@@ -8,9 +8,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 # pip install i2crelay (git)
 from i2crelay import I2CRelayBoard
 
-# pip install pcf8575
-from pcf8575 import PCF8575
-
 
 class terrariumIOExpanderException(TypeError):
     """There is a problem with loading a hardware IO expander."""
@@ -47,6 +44,9 @@ class terrariumIOExpander(object):
     @property
     def _address(self):
         return terrariumUtils.getI2CAddress(self.address)
+
+    def _load_device(self, address):
+        return None
 
     def load_hardware(self):
         hardware_key = f"IO_{self.HARDWARE}_{self.address}"
@@ -108,7 +108,7 @@ class terrariumPCF8575IOExpander(terrariumIOExpander):
     def __set_relay(self, port, action):
         self.__internal_state[port - 1] = action
 
-        self.__device.write_word_data(
+        self.__internal_bus.write_word_data(
             self._address[0], self.toByte(self.__internal_state[:8]), self.toByte(self.__internal_state[8:])
         )
 
@@ -118,12 +118,12 @@ class terrariumPCF8575IOExpander(terrariumIOExpander):
     def _load_device(self, address):
         # Force all relays to off position
         self.__internal_state = 16 * [False]
-        device = SMBus(address[1])
-        device.write_word_data(
+        self.__internal_bus = SMBus(address[1])
+        self.__internal_bus.write_word_data(
             address[0], self.toByte(self.__internal_state[:8]), self.toByte(self.__internal_state[8:])
         )
 
-        return device
+        return self
 
     def switch_on(self, port):
         self.__set_relay(port, True)
