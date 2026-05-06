@@ -95,22 +95,18 @@ class terrariumPCF8575IOExpander(terrariumIOExpander):
     HARDWARE = "PCF8575"
     NAME = "PCF8575 Expander (16 ports)"
 
-    # Based on alternative in comments https://www.tindie.com/products/bugrovs2012/16-channel-i2c-electromagnetic-relay-module-iot/
-    def toByte(self, bits):
-        # Convert True (On) to '0' as bit value
-        # True is off
-        # False is On
-        return int("".join([str("0" if bit else "1") for bit in reversed(bits)]), 2)
-
     # Work around bug: https://github.com/rp3tya/PCF8575/issues/5
     # Keep own internal state
     # Relays starting at number 1 (human counting)
     def __set_relay(self, port, action):
         self.__internal_state[port - 1] = action
 
-        self.__internal_bus.write_word_data(
-            self._address[0], self.toByte(self.__internal_state[:8]), self.toByte(self.__internal_state[8:])
-        )
+        new_state = 0
+        for i, val in enumerate(self.__internal_state):
+            if val:
+                new_state |= 1 << 15-i
+
+        self.__internal_bus.write_byte_data(self._address[0], new_state & 0xff, (new_state >> 8) & 0xff)
 
     def __get_relay(self, port):
         return self.__internal_state[port - 1]
@@ -119,9 +115,8 @@ class terrariumPCF8575IOExpander(terrariumIOExpander):
         # Force all relays to off position
         self.__internal_state = 16 * [False]
         self.__internal_bus = SMBus(address[1])
-        self.__internal_bus.write_word_data(
-            address[0], self.toByte(self.__internal_state[:8]), self.toByte(self.__internal_state[8:])
-        )
+
+        self.__set_relay(1, False)
 
         return self
 
