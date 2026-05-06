@@ -104,9 +104,9 @@ class terrariumPCF8575IOExpander(terrariumIOExpander):
         new_state = 0
         for i, val in enumerate(self.__internal_state):
             if val:
-                new_state |= 1 << 15-i
+                new_state |= 1 << 15 - i
 
-        self.__internal_bus.write_byte_data(self._address[0], new_state & 0xff, (new_state >> 8) & 0xff)
+        self.__internal_bus.write_byte_data(self._address[0], new_state & 0xFF, (new_state >> 8) & 0xFF)
 
     def __get_relay(self, port):
         return self.__internal_state[port - 1]
