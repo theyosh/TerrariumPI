@@ -87,7 +87,7 @@ if [ "${OS}" == "buster" ]; then
   PIP_MODULES="${PIP_MODULES//adafruit-circuitpython-typing==+([^ ])/adafruit-circuitpython-typing==1.10.1}"
   PIP_MODULES="${PIP_MODULES//pydantic==+([^ ])/pydantic==1.10.9}"
 
-  OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
+  OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base libssl1.1 ntp"
 
 elif [ "${OS}" == "bullseye" ]; then
   # Python 3.9
@@ -99,7 +99,7 @@ elif [ "${OS}" == "bullseye" ]; then
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.5.1}"
   PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.32.5}"
 
-  OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base"
+  OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base libssl1.1 ntp"
 
 elif [ "${OS}" == "bookworm" ]; then
   # Python 3.11
@@ -110,11 +110,11 @@ elif [ "${OS}" == "bookworm" ]; then
   # On bookworm we use the OS package versions
   # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
 #  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev"
-  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base"
+  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.1 ntp"
 
 elif [ "${OS}" == "trixie" ]; then
   # Python 3.13
-  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base"
+  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 chrony"
 
 else
 
@@ -139,7 +139,7 @@ fi
 #   fi
 # fi
 
-APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg libasound2-dev sispmctl ntp libssl1.1 libxslt1.1 libxslt1-dev libxml2-dev libglib2.0-dev libopenblas-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
+APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg libasound2-dev sispmctl libxslt1.1 libxslt1-dev libxml2-dev libglib2.0-dev libopenblas-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
 
 # Install dialog for further installation
 if ! hash whiptail 2>/dev/null; then
