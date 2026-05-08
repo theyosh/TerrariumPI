@@ -96,7 +96,7 @@ elif [ "${OS}" == "bullseye" ]; then
   PIP_MODULES="${PIP_MODULES//Adafruit-Blinka==+([^ ])/Adafruit-Blinka==8.64.0}"
   PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==1.4.0}"
   PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==22.5}"
-  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.5.1}"
+#  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.5.1}"
   PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.32.5}"
 
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base libssl1.1 ntp"
@@ -104,6 +104,7 @@ elif [ "${OS}" == "bullseye" ]; then
 elif [ "${OS}" == "bookworm" ]; then
   # Python 3.11
 #  PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/}"
+  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.9.1}"
   # Need a upgraded bluepy library => disabled!
   # PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
 
@@ -123,21 +124,6 @@ else
   exit 0
 
 fi
-
-# if [ "${PI_ZERO}" -eq 1 ]; then
-#   # Pi Zero needs some fixed python modules
-#   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==21.8.0}"
-#   PIP_MODULES="${PIP_MODULES//bcrypt==+([^ ])/bcrypt==3.2.2}"
-#   PIP_MODULES="${PIP_MODULES//numpy==+([^ ])/numpy==1.21.4}"
-#   PIP_MODULES="${PIP_MODULES} lxml==4.6.4"
-
-#   if [ "${OS}" == "buster" ]; then
-#     PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.4.60}"
-#     PIP_MODULES="${PIP_MODULES//cryptography==+([^ ])/cryptography==37.0.4}"
-#   elif [ "${OS}" == "bullseye" ]; then
-#     PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/opencv-python-headless==4.5.3.56}"
-#   fi
-# fi
 
 APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg libasound2-dev sispmctl libxslt1.1 libxslt1-dev libxml2-dev libglib2.0-dev libopenblas-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
 
