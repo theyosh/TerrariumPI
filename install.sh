@@ -103,13 +103,18 @@ elif [ "${OS}" == "bullseye" ]; then
 
 elif [ "${OS}" == "bookworm" ]; then
   # Python 3.11
-  PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/}"
+#  PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/}"
   # Need a upgraded bluepy library => disabled!
   # PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
 
   # On bookworm we use the OS package versions
   # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
-  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev"
+#  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev"
+  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base"
+
+elif [ "${OS}" == "trixie" ]; then
+  # Python 3.13
+  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base"
 
 else
 
@@ -142,19 +147,6 @@ if ! hash whiptail 2>/dev/null; then
 fi
 
 clear
-
-# OS version check
-# if [ "${OS}" == "bookworm" ]; then
-#   whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is not Raspbian Bookworm OS compatible. Use at own risk.\n\nDo you want to continue?" 0 60
-
-#   case $? in
-#     1|255) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
-#       echo "TerrariumPI ${VERSION} is supported on Buster/Bullseye OS (Legacy OS)"
-#       echo "Download from: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-legacy"
-#       exit 0
-#     ;;
-#   esac
-# fi
 
 whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'. If this is not the right user stop the installation now!\n\nDo you want to continue?" 0 60
 
@@ -198,7 +190,7 @@ if [ -f /etc/modules ]; then
 fi
 
 BOOTCONFIG="/boot/config.txt"
-if [ "${OS}" == "bookworm" ]; then
+if [ "${OS}" == "bookworm" ] || [ "${OS}" == "trixie" ]; then
   BOOTCONFIG="/boot/firmware/config.txt"
 fi
 
@@ -219,7 +211,7 @@ if [ -f "${BOOTCONFIG}" ]; then
     echo "enable_uart=1" >> "${BOOTCONFIG}"
   fi
 
-  if [ "${OS}" != "bookworm" ]; then
+  if [ "${OS}" != "bookworm" ] || [ "${OS}" != "trixie" ]; then
 
     # Enable camera
     if [ $(grep -ic "^gpu_mem=" "${BOOTCONFIG}") -eq 0 ]; then
@@ -243,7 +235,7 @@ fi
 
 # Disable serial debug to enable CO2 sensors
 CMDLINE="/boot/cmdline.txt"
-if [ "${OS}" == "bookworm" ]; then
+if [ "${OS}" == "bookworm" ] || [ "${OS}" == "trixie" ]; then
   CMDLINE="/boot/firmware/cmdline.txt"
 fi
 
@@ -385,9 +377,9 @@ EOF
 
 done
 
-if [ "${OS}" == "bookworm" ]; then
-  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
-fi
+#if [ "${OS}" == "bookworm" ]; then
+#  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
+#fi
 
 PROGRESS=$((MODULE_MAX + 3))
 cat <<EOF

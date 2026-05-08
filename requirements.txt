@@ -30,7 +30,7 @@ Pillow==12.2.0
 numpy==1.26.4
 # !! Check first: https://piwheels.org/project/opencv-python-headless/ !!
 # Do not upgrade!! Will install numpy 2.X which breaks other sub projects
-opencv-python-headless==4.11.0.86
+opencv-python-headless==4.12.0.88
 piexif==1.1.3
 
 # Hardware / sensors packages
