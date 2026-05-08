@@ -113,9 +113,9 @@ elif [ "${OS}" == "bookworm" ]; then
 #  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev"
   OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.1 ntp"
 
-elif [ "${OS}" == "trixie" ]; then
-  # Python 3.13
-  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 chrony"
+#elif [ "${OS}" == "trixie" ]; then
+#  # Python 3.13
+#  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 chrony python3-standard-pipes libwebpdemux2"
 
 else
 
@@ -363,9 +363,9 @@ EOF
 
 done
 
-#if [ "${OS}" == "bookworm" ]; then
-#  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
-#fi
+if [ "${OS}" == "trixie" ]; then
+  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
+fi
 
 PROGRESS=$((MODULE_MAX + 3))
 cat <<EOF
