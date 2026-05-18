@@ -274,15 +274,15 @@ compress_html:
     envs: [development]
 
 exclude:
-  - "*.gem"
-  - "*.gemspec"
+  - '*.gem'
+  - '*.gemspec'
   - docs
   - tools
   - README.md
   - LICENSE
   - purgecss.js
-  - "*.config.js"
-  - "package*.json"
+  - '*.config.js'
+  - 'package*.json'
 
 jekyll-archives:
   enabled: [categories, tags]
