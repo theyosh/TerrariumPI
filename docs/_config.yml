@@ -165,7 +165,6 @@ plugins:
   - jekyll-feed
   - jekyll-target-blank
   - jemoji
-  - jekyll-minifier
   - jekyll-liquify
   - jekyll-redirect-from
 
@@ -265,9 +264,6 @@ defaults:
 sass:
   style: compressed
 
-# https://github.com/digitalsparky/jekyll-minifier
-# jekyll-minifier:
-
 compress_html:
   clippings: all
   comments: all
@@ -278,14 +274,15 @@ compress_html:
     envs: [development]
 
 exclude:
-  - '*.gem'
-  - '*.gemspec'
+  - "*.gem"
+  - "*.gemspec"
   - docs
   - tools
   - README.md
   - LICENSE
-  - '*.config.js'
-  - package*.json
+  - purgecss.js
+  - "*.config.js"
+  - "package*.json"
 
 jekyll-archives:
   enabled: [categories, tags]
