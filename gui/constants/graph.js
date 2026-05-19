@@ -162,13 +162,13 @@ export const graphDefaultOpts = {
       },
     },
     zoom: {
-        zoom: {
-          drag: {
-            enabled: true
-          },
-          mode: 'x',
+      zoom: {
+        drag: {
+          enabled: true,
         },
+        mode: 'x',
       },
+    },
   },
 };
 /* jslint unparam: false */

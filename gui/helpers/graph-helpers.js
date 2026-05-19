@@ -46,9 +46,9 @@ export const toggleGraphPeriod = (graph, period) => {
 };
 
 export const resetGraphZoom = (graph) => {
-    const store = get(graphs);
-    store[graph].resetZoom()
-}
+  const store = get(graphs);
+  store[graph].resetZoom();
+};
 
 export const convertTimestamps = (data) => {
   return data.map((point) => {

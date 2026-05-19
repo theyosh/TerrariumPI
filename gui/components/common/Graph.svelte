@@ -180,7 +180,9 @@
   $graphs[id] = {
     period: settings.graph_period,
     changed: true, // This will trigger the initial loading when the page loads :)
-    resetZoom: () => {chart.resetZoom()}
+    resetZoom: () => {
+      chart.resetZoom();
+    },
   };
 
   // Make a clone of the general graph settings ??? Not really working :(

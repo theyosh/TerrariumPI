@@ -38,9 +38,8 @@
       class:active="{$graphs[id].period === 'year'}"
       on:click="{() => toggleGraphPeriod(id, 'year')}">{$_('graph.period.year', { default: 'Year' })}</button
     >
-    <button
-      class="dropdown-item"
-      on:click="{() => resetGraphZoom(id)}">{$_('graph.period.reset', { default: 'Reset' })}</button
+    <button class="dropdown-item" on:click="{() => resetGraphZoom(id)}"
+      >{$_('graph.period.reset', { default: 'Reset' })}</button
     >
     {#if replaced}
       <button
