@@ -2,7 +2,7 @@
   import { _ } from 'svelte-i18n';
 
   import { graphs } from '../../stores/terrariumpi';
-  import { toggleGraphPeriod } from '../../helpers/graph-helpers';
+  import { toggleGraphPeriod, resetGraphZoom } from '../../helpers/graph-helpers';
 
   export let id;
   export let replaced = false;
@@ -37,6 +37,10 @@
       class="dropdown-item"
       class:active="{$graphs[id].period === 'year'}"
       on:click="{() => toggleGraphPeriod(id, 'year')}">{$_('graph.period.year', { default: 'Year' })}</button
+    >
+    <button
+      class="dropdown-item"
+      on:click="{() => resetGraphZoom(id)}">{$_('graph.period.reset', { default: 'Reset' })}</button
     >
     {#if replaced}
       <button

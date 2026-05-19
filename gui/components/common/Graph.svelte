@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { Line } from 'svelte-chartjs';
+  import zoomPlugin from 'chartjs-plugin-zoom';
   import {
     Chart as ChartJS,
     Title,
@@ -12,7 +13,7 @@
     LineElement,
     Filler,
   } from 'chart.js';
-  ChartJS.register(Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement, Filler);
+  ChartJS.register(Title, Tooltip, Legend, TimeScale, LinearScale, PointElement, LineElement, Filler, zoomPlugin);
   import 'chartjs-adapter-dayjs-4';
   import { _ } from 'svelte-i18n';
 
@@ -25,6 +26,7 @@
   export let id;
   export let type;
   export let mode;
+  let chart;
 
   let settings = getCustomConfig();
 
@@ -178,6 +180,7 @@
   $graphs[id] = {
     period: settings.graph_period,
     changed: true, // This will trigger the initial loading when the page loads :)
+    resetZoom: () => {chart.resetZoom()}
   };
 
   // Make a clone of the general graph settings ??? Not really working :(
@@ -236,6 +239,6 @@
   {:else if nodata}
     <h1 class="mt-5">{$_('graph.no-data')}</h1>
   {:else}
-    <Line data="{graphData}" options="{graphOpts}" />
+    <Line bind:chart data="{graphData}" options="{graphOpts}" />
   {/if}
 </div>
