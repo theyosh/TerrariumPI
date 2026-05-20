@@ -10,7 +10,9 @@
     left: 0px;
     width: 100%;
     height: 100%;
+    background-color: transparent;
   }
+
   input.dial.disabled {
     cursor: not-allowed;
   }
@@ -83,7 +85,7 @@
 </script>
 
 {#if relay.dimmer}
-  <div class="dimmer btn btn-default m-2">
+  <div class="dimmer btn btn-default m-2" class:disabled="{!$isAuthenticated}">
     {#if !$isAuthenticated}
       <div class="dimmer-disabled disabled"></div>
     {/if}
@@ -91,7 +93,6 @@
       type="text"
       id="{relay.id}"
       class="dial"
-      class:disabled="{!$isAuthenticated}"
       value="{relay.value}"
       disabled="{!$isAuthenticated}"
       data-width="150"

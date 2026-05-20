@@ -220,6 +220,7 @@
       (async () => {
         $graphs[id].changed = false;
         loading = true;
+        chart?.resetZoom();
         let new_data;
         await fetchGraphData(mode, id, $graphs[id].period, (data) => (new_data = convertTimestamps(data)));
         nodata = new_data.length === 0;

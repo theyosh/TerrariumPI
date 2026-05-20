@@ -58,7 +58,7 @@
     },
     limitMax: false,
     limitMin: true,
-    strokeColor: '#F0F3F3',
+    strokeColor: $isDarkInterface ? '#c6c6c6' : '#e0e0e0',
     generateGradient: true,
     highDpiSupport: true,
     percentColors: [
@@ -84,12 +84,16 @@
   // TODO: Not sure if we need to update min and max values in reactive mode... needs rethinking. As when you change this, you will reload the page.... and re-setup
   $: {
     if (gauge && $sensors[id].changed) {
+      $sensors[id].changed = false;
+
       const gaugeStaticLabels = {
         labels: [],
         font: '12px Helvetica Neue,sans-serif',
         color: $isDarkInterface ? '#adb5bd' : '#6c757d',
         fractionDigits: 0,
       };
+
+      gauge.options.strokeColor = $isDarkInterface ? '#c6c6c6' : '#e0e0e0';
 
       if (showGaugeValues) {
         if (settings.gauge_values_alarm || settings.gauge_values_limit || settings.gauge_values_measurements) {
@@ -134,7 +138,7 @@
         type === 'filesize' || type === 'memory'
           ? formatBytes($sensors[id].value)
           : roundToPrecision($sensors[id].value) + ' ' + settings.units[type].value;
-      $sensors[id].changed = false;
+
     }
   }
 </script>

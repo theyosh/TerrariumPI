@@ -94,6 +94,14 @@
   cursor: not-allowed;
 }
 
+.btn-default.disabled, .btn-default:disabled {
+  background-color: transparent;
+}
+
+.btn-default.disabled:hover, .btn-default:disabled:hover {
+  background-color: transparent;
+}
+
 .disabled a,
 a.disabled {
   pointer-events: none;
@@ -396,9 +404,11 @@ a.brand-link {
 
 .unsplash-background div.card,
 .unsplash-background div.info-box {
-  opacity: 0.9;
+  background-color: rgba(255,255,255,0.85);
 }
 
-.unsplash-background div.card div.card {
-  opacity: 1;
+
+.dark-mode .unsplash-background div.card,
+.dark-mode .unsplash-background div.info-box {
+  background-color: rgba(52,58,64,0.85);
 }
