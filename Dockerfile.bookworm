@@ -45,6 +45,7 @@ RUN  apt-get -o Acquire::ForceIPv4=true update \
 RUN  sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/icalendar==.*//g' requirements.txt \
   && sed -i 's/opencv-python-headless==.*//g' requirements.txt \
+  && sed -i 's/gevent==.*/gevent==25.9.1/g' requirements.txt \
   && pip install smbus==1.1.post2 --extra-index-url https://www.piwheels.org/simple \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
   && find /opt/venv -type d -name "test*" | xargs rm -rf  \

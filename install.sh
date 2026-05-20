@@ -104,14 +104,12 @@ elif [ "${OS}" == "bullseye" ]; then
 
 elif [ "${OS}" == "bookworm" ]; then
   # Python 3.11
-#  PIP_MODULES="${PIP_MODULES//opencv-python-headless==+([^ ])/}"
   PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.9.1}"
   # Need a upgraded bluepy library => disabled!
   # PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
 
   # On bookworm we use the OS package versions
   # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
-#  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base python3-opencv libglib2.0-dev libbluetooth-dev"
   OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.1 ntp"
 
 #elif [ "${OS}" == "trixie" ]; then
