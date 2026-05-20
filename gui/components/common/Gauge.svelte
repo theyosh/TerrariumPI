@@ -138,7 +138,6 @@
         type === 'filesize' || type === 'memory'
           ? formatBytes($sensors[id].value)
           : roundToPrecision($sensors[id].value) + ' ' + settings.units[type].value;
-
     }
   }
 </script>
