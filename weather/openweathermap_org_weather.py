@@ -48,7 +48,7 @@ class terrariumOpenweathermap(terrariumWeather):
 
             # The data from OpenWeatherMap is in GMT. But we want the data in the timezone of the requested location
             self.__timezone_difference = int(data["timezone"]) - datetime.now().astimezone().utcoffset().seconds
-            appid = re.search(terrariumOpenweathermap.VALID_SOURCE, self.address)
+            appid = re.search(terrariumOpenweathermap.VALID_SOURCE, self.address, re.IGNORECASE)
             self.__appid = appid.group("appid")
 
     def __load_minimal_forecast_data(self):
