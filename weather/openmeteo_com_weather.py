@@ -97,7 +97,7 @@ class terrariumOpenmeteo(terrariumWeather):
         return ""
 
     def _get_data(self):
-        coordinates = re.search(terrariumOpenmeteo.VALID_SOURCE, self.address)
+        coordinates = re.search(terrariumOpenmeteo.VALID_SOURCE, self.address, re.IGNORECASE)
         self._device["geo"] = {"lat": float(coordinates.group("lat")), "long": float(coordinates.group("long"))}
         self._device["url"] = "https://open-meteo.com/"
         self._device["credits"] = "Open-Meteo.com weather data"

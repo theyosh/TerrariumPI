@@ -345,7 +345,7 @@ class terrariumUtils:
             return False
 
         regex = r"^((?P<scheme>https?|ftp):\/)?\/?((?P<username>.*?)(:(?P<password>.*?)|)@)?(?P<hostname>[^:\/\s]+)(:(?P<port>(\d*))?)?(?P<path>(\/\w+)*\/)(?P<filename>[-\w.]+[^#?\s]*)?(?P<query>\?([^#]*))?(#(?P<fragment>(.*))?)?$"
-        matches = re.search(regex, url.strip())
+        matches = re.search(regex, url.strip(), re.IGNORECASE)
         if matches:
             data = matches.groupdict()
             if data["query"]:

@@ -108,7 +108,7 @@ class terrariumEngine(object):
         self.weather = None
         # Dirty hack for device info ... :(
         self.device = Path("/proc/device-tree/model").read_text().rstrip("\x00")
-        os_version = re.search(r"VERSION_CODENAME=(?P<os_version>.*)", Path("/etc/os-release").read_text())
+        os_version = re.search(r"VERSION_CODENAME=(?P<os_version>.*)", Path("/etc/os-release").read_text(), re.IGNORECASE)
         if os_version:
             self.os_version = os_version.groupdict()["os_version"].title()
 

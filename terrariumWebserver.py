@@ -135,7 +135,7 @@ class terrariumWebserver(object):
                     response.expires = datetime.datetime.utcnow().timestamp() + caching["timeout"]
                     response.set_header("Cache-Control", f'public, max-age={caching["timeout"]}')
 
-                elif "/" == request.fullpath or re.search(r"\.html$", request.fullpath, re.I):
+                elif "/" == request.fullpath or re.search(r"\.html$", request.fullpath, re.IGNORECASE):
                     response.set_header("Cache-Control", "no-cache")
                     response.set_header("Etag", md5(response.body.encode()).hexdigest())
 
