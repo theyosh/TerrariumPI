@@ -20,15 +20,15 @@
   export let enclosure = { areas: [] };
 
   function formatDuration(data) {
-    const parts = ['seconds','minutes','hours','days'];
+    const parts = ['seconds', 'minutes', 'hours', 'days'];
     let useZero = false;
     let returnParts = [];
 
     parts.forEach((part) => {
-        if (data.$d[part] !== 0 || (useZero && part !== 'days')) {
-            useZero = true;
-            returnParts.push(data.$d[part] + part.substring(0,1))
-        }
+      if (data.$d[part] !== 0 || (useZero && part !== 'days')) {
+        useZero = true;
+        returnParts.push(data.$d[part] + part.substring(0, 1));
+      }
     });
 
     return returnParts.reverse().join(':');
@@ -75,7 +75,7 @@
                 <td>
                   {$time(new Date(area.state[period].begin * 1000), { format: 'short' })} -
                   {$time(new Date(area.state[period].end * 1000), { format: 'short' })}
-                  <span title={formatDuration(dayjs.duration(area.state[period].duration * 1000))}>
+                  <span title="{formatDuration(dayjs.duration(area.state[period].duration * 1000))}">
                     ({dayjs.duration(area.state[period].duration * 1000).humanize()})
                   </span>
                 </td>
