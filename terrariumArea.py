@@ -884,7 +884,10 @@ class terrariumArea(object):
                     time_elapsed = abs(
                         int(datetime.datetime.now().timestamp()) - self.state[other_period]["last_powered_on"]
                     )
-                    if self.setup[period]["settle_time"] > 0.0 and time_elapsed <= self.setup[other_period]["settle_time"]:
+                    if (
+                        self.setup[period]["settle_time"] > 0.0
+                        and time_elapsed <= self.setup[other_period]["settle_time"]
+                    ):
                         logger.info(
                             f'Relays for {self} period {period} are not switched on because of the other period {other_period} settle time. We have to wait for {self.setup[other_period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[other_period]["settle_time"]} seconds.'
                         )
@@ -971,7 +974,9 @@ class terrariumArea(object):
             state is True and old_state is True and new_state is False
         ):
             # Somewhere the power is turned off. Store the time for settle calculation
-            logger.debug(f"Some relays for area {self} part {part} where not in right state. This should be corrected now...")
+            logger.debug(
+                f"Some relays for area {self} part {part} where not in right state. This should be corrected now..."
+            )
             self.state[part]["last_powered_on"] = int(datetime.datetime.now().timestamp())
 
         return new_state
