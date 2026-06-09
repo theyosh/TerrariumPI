@@ -18,6 +18,21 @@
 
   let settings = getCustomConfig();
   export let enclosure = { areas: [] };
+
+  function formatDuration(data) {
+    const parts = ['seconds','minutes','hours','days'];
+    let useZero = false;
+    let returnParts = [];
+
+    parts.forEach((part) => {
+        if (data.$d[part] !== 0 || (useZero && part !== 'days')) {
+            useZero = true;
+            returnParts.push(data.$d[part] + part.substring(0,1))
+        }
+    });
+
+    return returnParts.reverse().join(':');
+  }
 </script>
 
 <div style="background : url({ApiUrl}/{enclosure.image}); background-size : cover">
@@ -58,9 +73,11 @@
               <tr>
                 <td>{$_(`enclosures.area.period.${period}`, { default: period })}:</td>
                 <td>
-                  {$time(new Date(area.state[period].begin * 1000), { format: 'medium' })} -
-                  {$time(new Date(area.state[period].end * 1000), { format: 'medium' })}
-                  ({dayjs.duration(area.state[period].duration * 1000).humanize()})
+                  {$time(new Date(area.state[period].begin * 1000), { format: 'short' })} -
+                  {$time(new Date(area.state[period].end * 1000), { format: 'short' })}
+                  <span title={formatDuration(dayjs.duration(area.state[period].duration * 1000))}>
+                    ({dayjs.duration(area.state[period].duration * 1000).humanize()})
+                  </span>
                 </td>
                 <td>
                   <small
