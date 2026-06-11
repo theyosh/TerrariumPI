@@ -37,9 +37,9 @@ class _Singleton(type):
 
     def __call__(cls, *args, **kwargs):
         index = str(cls)
-        if 'io_expander.terrariumPCF857' in index:
+        if "io_expander.terrariumPCF857" in index:
             # 'Hack' for supporting multiple IO expander boards
-            index += "_".join(map(str,terrariumUtils.getI2CAddress(args[0])))
+            index += "_".join(map(str, terrariumUtils.getI2CAddress(args[0])))
 
         if index not in cls._instances:
             cls._instances[index] = super(_Singleton, cls).__call__(*args, **kwargs)
