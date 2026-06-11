@@ -35,8 +35,6 @@ piexif==1.1.3
 
 # Hardware / sensors packages
 gpiozero==2.0.1
-# Github versions are more updated
-git+https://github.com/oweidner/i2crelay
 smbus2==0.6.0
 smbus==1.1.post2
 # Github version has some serious patches which we need. Pyipi version is outdated
@@ -75,6 +73,7 @@ git+https://github.com/SequentMicrosystems/4relay-rpi.git#subdirectory=python/4r
 git+https://github.com/almottier/TapoP100
 git+https://github.com/PiSupply/Bright-Pi
 adafruit-circuitpython-seesaw==1.18.1
+pcf8575==0.3
 
 # Calendar and utils
 icalevents==0.3.1

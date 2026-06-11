@@ -4,7 +4,7 @@ from terrariumUtils import terrariumUtils
 # pip install gpiozero
 from gpiozero import OutputDevice
 
-from hardware.io_expander import terrariumIOExpander
+from hardware.io_expander import terrariumIOExpander, terrariumPCF8574IOExpander, terrariumPCF8575IOExpander
 
 # For traditional GPIO the inverse is fixed by setting active_high to HIGH
 # For IO Expander we do it by hand
@@ -23,12 +23,9 @@ class terrariumRelayGPIO(terrariumRelay):
             # IO Expander in use...
             device = None
             if address[0].lower().startswith("pcf8574-"):
-                device = terrariumIOExpander("PCF8574", ",".join(address[1:]))
+                device = terrariumPCF8574IOExpander(",".join(address[1:]))
             elif address[0].lower().startswith("pcf8575-"):
-                device = terrariumIOExpander("PCF8575", ",".join(address[1:]))
-
-            if device is not None:
-                device.set_port(int(address[0].split("-")[1]))
+                device = terrariumPCF8575IOExpander(",".join(address[1:]))
 
             return device
 
@@ -42,7 +39,11 @@ class terrariumRelayGPIO(terrariumRelay):
             if self.INVERSE:
                 state = self.ON if state == self.OFF else self.OFF
 
-            self.device.state = state == self.ON
+            port = int(self._address[0].split("-")[1])
+            if state == self.ON:
+                self.device.switch_on(port)
+            else:
+                self.device.switch_off(port)
 
         else:
             if state == self.ON:
@@ -56,7 +57,7 @@ class terrariumRelayGPIO(terrariumRelay):
         state = None
 
         if isinstance(self.device, terrariumIOExpander):
-            state = self.device.state
+            state = self.device.is_on(int(self._address[0].split("-")[1]))
             if self.INVERSE:
                 state = self.ON if state == False else self.OFF
 
