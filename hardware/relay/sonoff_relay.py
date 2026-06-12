@@ -156,7 +156,7 @@ class terrariumRelayDimmerSonoffD1(terrariumRelayDimmer):
 
         return None
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         state = int(max(0.0, min(100.0, float(state + self._dimmer_offset))))
 
         if self.MODE == "tasmota":

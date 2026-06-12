@@ -33,7 +33,7 @@ class terrariumAtlasScientificSensor(terrariumI2CSensor):
 
         return None
 
-    def stop(self):
+    def stop(self) -> None:
         if self.device is not None:
             self.device.close()
 

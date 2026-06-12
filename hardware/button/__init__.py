@@ -55,14 +55,14 @@ class terrariumButton(object):
         ]
 
     # Return polymorph relay....
-    def __new__(cls, _, hardware_type, address, name="", callback=None):
+    def __new__(cls, _, hardware_type, address, name: str="", callback=None):
         try:
             known_buttons = terrariumButton.available_hardware
             return super(terrariumButton, cls).__new__(known_buttons[hardware_type])
         except:
             raise terrariumButtonException(f"Button of hardware type {hardware_type} is unknown.")
 
-    def __init__(self, button_id, _, address, name="", callback=None):
+    def __init__(self, button_id, _, address, name: str="", callback=None) -> None:
         "Create a new button based on type"
 
         self._device = {"device": None, "id": None, "address": None, "name": None, "state": None}
@@ -76,7 +76,7 @@ class terrariumButton(object):
         # By setting the address, we will load the hardware.
         self.address = address
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns readable button name
 
@@ -85,7 +85,7 @@ class terrariumButton(object):
         """
         return f"{self.NAME} named '{self.name}' at address '{self.address}'"
 
-    def _run(self):
+    def _run(self) -> None:
         self._checker["running"] = 1
         while self._checker["running"]:
             new_state = self._get_state()
@@ -109,7 +109,7 @@ class terrariumButton(object):
         else:
             return self.PRESSED if not self._device["device"].is_pressed else self.RELEASED
 
-    def load_hardware(self):
+    def load_hardware(self) -> None:
         address = self._address
 
         if terrariumUtils.is_valid_url(self.address):
@@ -140,7 +140,7 @@ class terrariumButton(object):
         return self._device["id"]
 
     @id.setter
-    def id(self, value):
+    def id(self, value) -> None:
         value = terrariumUtils.clean_address(value)
         if value is not None and "" != value:
             self._device["id"] = value
@@ -154,7 +154,7 @@ class terrariumButton(object):
         return [part.strip() for part in self.address.split(",")]
 
     @address.setter
-    def address(self, value):
+    def address(self, value) -> None:
         value = terrariumUtils.clean_address(value)
         if value not in [None, "", self.address]:
             if self.address is not None:
@@ -168,7 +168,7 @@ class terrariumButton(object):
         return self._device["name"]
 
     @name.setter
-    def name(self, value):
+    def name(self, value) -> None:
         value = terrariumUtils.clean_address(value)
         if value not in [None, "", self.name]:
             self._device["name"] = value
@@ -181,12 +181,12 @@ class terrariumButton(object):
     def pressed(self):
         return self.state == self.PRESSED
 
-    def calibrate(self, calibration_data):
+    def calibrate(self, calibration_data) -> None:
         self._inverse = calibration_data.get("inverse", "off") == "on"
 
     def update(self):
         return self.state
 
-    def stop(self):
+    def stop(self) -> None:
         self._checker["running"] = 0
         self._checker["thread"].join()

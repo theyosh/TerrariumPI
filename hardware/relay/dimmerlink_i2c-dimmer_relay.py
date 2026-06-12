@@ -33,7 +33,7 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
 
         return address
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         self.__INTERNAL_STATE = int(state)
         with smbus2.SMBus(self.device[1]) as bus:
             bus.write_byte_data(self.device[0], 0x10, self.__INTERNAL_STATE)
@@ -49,7 +49,7 @@ class terrariumDimmerI2C4CH(terrariumRelayDimmer):
 
         # return state
 
-    def calibrate(self, data):
+    def calibrate(self, data) -> None:
         super().calibrate(data)
 
         curve = int(data.get("dimmer_curve", 0))  # curve_type: CURVE_LINEAR (0), CURVE_RMS (1), CURVE_LOG (2)

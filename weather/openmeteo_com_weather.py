@@ -56,7 +56,7 @@ class terrariumOpenmeteo(terrariumWeather):
         return mapping.get(code, "Unknown")
 
     @staticmethod
-    def _weathercode_to_icon(code):
+    def _weathercode_to_icon(code) -> str:
         """
         Map Open-Meteo weather codes to OWM-style icons used by TerrariumPI.
         We always return the *day* variant (..d), TerrariumPI is fine with that.

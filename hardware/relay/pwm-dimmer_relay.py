@@ -22,7 +22,7 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
     _DIMMER_MAXDIM = 100
     _DIMMER_DUTY_CYCLE = 1000
 
-    def calibrate(self, data):
+    def calibrate(self, data) -> None:
         super().calibrate(data)
 
         legacy = False
@@ -79,7 +79,7 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
 
         return device
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         if not self._legacy:
             self.device.value = max(0.0, min(1.0, float(state + self._dimmer_offset) / 100.0))
         else:
@@ -96,7 +96,7 @@ class terrariumRelayDimmerPWM(terrariumRelayDimmer):
     def _get_hardware_value(self):
         return self._dimmer_state
 
-    def stop(self):
+    def stop(self) -> None:
         if not self._legacy:
             self.device.close()
         else:
@@ -123,7 +123,7 @@ class terrariumRelayDimmerNextEVO(terrariumRelayDimmerPWM):
 
         return super()._load_hardware()
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         if not self._legacy:
             super()._set_hardware_value(state)
         else:

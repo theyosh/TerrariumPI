@@ -17,27 +17,27 @@ class terrariumIOExpander(object):
     NAME = None
     PORTS = 0
 
-    def __init__(self, address):
+    def __init__(self, address) -> None:
         self.address = address
 
         self._internal_state = []
         self._hardware_cache = terrariumCache()
         self._device = self.load_hardware()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"IO Expander at address '{self.address}'"
 
     @property
     def _address(self):
         return terrariumUtils.getI2CAddress(self.address)
 
-    def _load_device(self, address):
+    def _load_device(self, address) -> None:
         pass
 
-    def _set_hardware(self):
+    def _set_hardware(self) -> None:
         pass
 
-    def _valid_port(self, port):
+    def _valid_port(self, port: int):
         if port < 1 or port > self.PORTS:
             raise terrariumIOExpanderException(f"Invalid port number {port} for {self}")
 
@@ -52,24 +52,24 @@ class terrariumIOExpander(object):
 
         return loaded_hardware
 
-    def close(self):
+    def close(self) -> None:
         pass
 
-    def switch_on(self, port):
+    def switch_on(self, port: int) -> None:
         self._valid_port(port)
         self._internal_state[port - 1] = True
         self._set_hardware()
 
-    def switch_off(self, port):
+    def switch_off(self, port: int) -> None:
         self._valid_port(port)
         self._internal_state[port - 1] = False
         self._set_hardware()
 
-    def is_on(self, port):
+    def is_on(self, port: int):
         self._valid_port(port)
         return self._internal_state[port - 1] == True
 
-    def is_off(self, port):
+    def is_off(self, port: int) -> bool:
         return not self.is_on(port)
 
 
@@ -83,7 +83,7 @@ class terrariumPCF8574IOExpander(terrariumIOExpander, terrariumSingleton):
 
         return SMBus(address[1])
 
-    def _set_hardware(self):
+    def _set_hardware(self) -> None:
         # https://drive.google.com/file/d/1ZMIpPZ9RwgDZvfxSMYa3MM99ZONDWeVe/view
         self._device.write_byte(
             self._address[0], int("0b" + "".join(["0" if state else "1" for state in self._internal_state]), 2)
@@ -100,5 +100,5 @@ class terrariumPCF8575IOExpander(terrariumIOExpander, terrariumSingleton):
 
         return PCF8575(address[1], address[0])
 
-    def _set_hardware(self):
+    def _set_hardware(self) -> None:
         self._device.port = list(reversed([not state for state in self._internal_state]))

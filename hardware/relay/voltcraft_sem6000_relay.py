@@ -19,7 +19,7 @@ class terrariumRelayVoltcraftSEM6000(terrariumRelay):
         )
         return self.address
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         if state == self.ON:
             terrariumUtils.get_script_data(
                 f"{terrariumRelayVoltcraftSEM6000.CMD} {self.address} 0000 power_on 2>/dev/null"

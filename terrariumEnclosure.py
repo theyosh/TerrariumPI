@@ -10,7 +10,7 @@ import copy
 
 
 class terrariumEnclosure(object):
-    def __init__(self, id, name, engine, doors=[], areas=[]):
+    def __init__(self, id, name: str, engine, doors=[], areas=[]) -> None:
         if id is None:
             id = terrariumUtils.generate_uuid()
 
@@ -39,10 +39,10 @@ class terrariumEnclosure(object):
     def buttons(self):
         return self.engine.buttons
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Enclosure {self.name} with {len(self.areas)} areas"
 
-    def __door_status(self):
+    def __door_status(self) -> bool:
         # By default, when zero doors are configured, we have to assume the doors are CLOSED
         for door in self.doors:
             if self.engine.buttons[door].is_open:
@@ -56,7 +56,7 @@ class terrariumEnclosure(object):
 
         return self.main_lights.state["day"]["powered"]
 
-    def load_areas(self, data):
+    def load_areas(self, data) -> None:
         # First we want to load all the lights areas and then the other areas in any order (not sure if this is still needed -> see def update)
         for area in [area for area in data if area.type == "lights"] + [area for area in data if area.type != "lights"]:
             area_setup = copy.deepcopy(area.setup)
@@ -80,13 +80,13 @@ class terrariumEnclosure(object):
 
         return area
 
-    def delete(self, area_id):
+    def delete(self, area_id) -> bool:
         if area_id in self.areas:
             del self.areas[area_id]
 
         return True
 
-    def update(self, read_only=False):
+    def update(self, read_only: bool=False):
         area_states = {}
 
         # Construct a list in the order of:
@@ -110,7 +110,7 @@ class terrariumEnclosure(object):
 
         return area_states
 
-    def stop(self):
+    def stop(self) -> None:
         for area_id in self.areas:
             self.areas[area_id].stop()
 

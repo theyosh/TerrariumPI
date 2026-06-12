@@ -20,7 +20,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
     def __get_relay_count(self):
         return int(self.HARDWARE.split("_")[-1])
 
-    def __get_board_type(self):
+    def __get_board_type(self) -> str:
         return "{}{}".format(self.__get_relay_count(), self._device["type"])
 
     def __relay_cache_key(self):
@@ -90,7 +90,7 @@ class terrariumRelayDenkoviV2(terrariumRelay):
         data = list(data)
         return self.ON if terrariumUtils.is_true(data[self._device["switch"] - 1]) else self.OFF
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         cache_key = self.__relay_cache_key()
         cmd = self.__CMD + [
             self._device["device"],

@@ -74,7 +74,7 @@ class terrariumWeather(object):
 
         raise terrariumWeatherException(f"Weather url '{address}' is not valid! Please check your source")
 
-    def __init__(self, address, unit_values, language):
+    def __init__(self, address, unit_values, language) -> None:
         self._device = {
             "address": None,
             "unit_values": unit_values,
@@ -93,7 +93,7 @@ class terrariumWeather(object):
         # Trigger loading
         self.address = address
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns readable weather name
 
@@ -108,7 +108,7 @@ class terrariumWeather(object):
             "history": {},
         }
 
-    def __process_data(self, new_data):
+    def __process_data(self, new_data) -> None:
         now = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
         # Multiple actions are done here...
         # - Merge new forecast data with existing data
@@ -157,7 +157,7 @@ class terrariumWeather(object):
             if today_index in self._device["forecast"]:
                 return self._device["forecast"][today_index]
 
-    def __get_current_sunrise_sunset(self, next=False):
+    def __get_current_sunrise_sunset(self, next: bool=False):
         today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
         for _ in range(48):
             today_index = today.isoformat()
@@ -186,7 +186,7 @@ class terrariumWeather(object):
         return self._device["address"]
 
     @address.setter
-    def address(self, value):
+    def address(self, value) -> None:
         value = terrariumUtils.clean_address(value)
         if value not in [None, "", self.address]:
             logger.info(
@@ -209,7 +209,7 @@ class terrariumWeather(object):
         return {"text": self._device["credits"], "url": self._device["url"]}
 
     @retry(tries=3, delay=0.5, max_delay=2, logger=logger)
-    def update(self):
+    def update(self) -> None:
         if (
             self._device["last_update"] is not None
             and (datetime.now() - self._device["last_update"]).total_seconds() < self.__UPDATE_TIMEOUT
@@ -271,7 +271,7 @@ class terrariumWeather(object):
         return self.__get_current()
 
     @property
-    def short_forecast(self, days=6):
+    def short_forecast(self, days: int=6):
         days = max(min(days, 14), 1)
         today = datetime.now().replace(hour=12, minute=0, second=0, microsecond=0)
         for _ in range(days):

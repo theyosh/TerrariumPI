@@ -57,8 +57,8 @@ class classproperty(property):
 
 
 class terrariumAsync(terrariumSingleton):
-    def __init__(self):
-        def __run():
+    def __init__(self) -> None:
+        def __run() -> None:
             self.async_loop.run_until_complete(self._keep_running())
             self.async_loop.close()
 
@@ -70,10 +70,10 @@ class terrariumAsync(terrariumSingleton):
         data = asyncio.run_coroutine_threadsafe(cmd, self.async_loop)
         return data.result()
 
-    def stop(self):
+    def stop(self) -> None:
         self.__running = False
 
-    async def _keep_running(self):
+    async def _keep_running(self) -> None:
         self.__running = True
         while self.__running:
             await asyncio.sleep(1)
@@ -82,12 +82,12 @@ class terrariumAsync(terrariumSingleton):
 class terrariumCache(terrariumSingleton):
     logger = terrariumLogging.logging.getLogger("terrariumCache")
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.__cache = {}
         self.__running = {}
         logger.debug("Initialized cache")
 
-    def __cleanup(self):
+    def __cleanup(self) -> None:
         now = int(time.time())
         for key in list(self.__cache.keys()):
             if self.__cache[key]["expire"] < now:
@@ -98,7 +98,7 @@ class terrariumCache(terrariumSingleton):
                 )
                 del self.__cache[key]
 
-    def set_data(self, hash_key, data, cache_timeout=30):
+    def set_data(self, hash_key, data, cache_timeout: int=30) -> None:
         # When cache value is negative, cache it for one year.... should be long enough.. ;)
         cache_timeout = cache_timeout if cache_timeout > 0 else int(datetime.timedelta(days=365).total_seconds())
         self.__cache[hash_key] = {
@@ -118,11 +118,11 @@ class terrariumCache(terrariumSingleton):
 
         return default
 
-    def clear_data(self, hash_key):
+    def clear_data(self, hash_key) -> None:
         if hash_key in self.__cache:
             del self.__cache[hash_key]
 
-    def set_running(self, hash_key):
+    def set_running(self, hash_key) -> bool:
         hash_key = f"running-{hash_key}"
         if not self.is_running(hash_key):
             self.set_data(f"running-{hash_key}", True)
@@ -130,11 +130,11 @@ class terrariumCache(terrariumSingleton):
 
         return False
 
-    def is_running(self, hash_key):
+    def is_running(self, hash_key) -> bool:
         hash_key = f"running-{hash_key}"
         return self.get_data(hash_key) is not None
 
-    def clear_running(self, hash_key):
+    def clear_running(self, hash_key) -> None:
         hash_key = f"running-{hash_key}"
         if hash_key in self.__cache:
             del self.__cache[hash_key]
@@ -146,11 +146,11 @@ class terrariumUtils:
         return str(uuid.uuid4())
 
     @staticmethod
-    def generate_password(password):
+    def generate_password(password: str):
         return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode("utf8")
 
     @staticmethod
-    def check_password(password, passwordhash):
+    def check_password(password: str, passwordhash):
         if password is None or passwordhash is None:
             return False
 
@@ -164,7 +164,7 @@ class terrariumUtils:
         return Fernet(salt)
 
     @staticmethod
-    def encrypt(string):
+    def encrypt(string: str):
         try:
             encryption = terrariumUtils.__encryption_key()
             return encryption.encrypt(string.encode()).decode()
@@ -172,7 +172,7 @@ class terrariumUtils:
             return string
 
     @staticmethod
-    def decrypt(string):
+    def decrypt(string: str):
         try:
             encryption = terrariumUtils.__encryption_key()
             return encryption.decrypt(string.encode()).decode()
@@ -253,7 +253,7 @@ class terrariumUtils:
         return float(current)
 
     @staticmethod
-    def is_float(value):
+    def is_float(value) -> bool:
         if value is None or "" == value:
             return False
 
@@ -264,7 +264,7 @@ class terrariumUtils:
             return False
 
     @staticmethod
-    def is_true(value):
+    def is_true(value) -> bool:
         return str(value).lower() in ["true", "1", "on", "yes"]
 
     @staticmethod
@@ -364,7 +364,7 @@ class terrariumUtils:
         return False
 
     @staticmethod
-    def is_valid_url(url):
+    def is_valid_url(url) -> bool:
         return terrariumUtils.parse_url(url) is not False
 
     @staticmethod
@@ -380,7 +380,7 @@ class terrariumUtils:
         return time
 
     @staticmethod
-    def get_remote_data(url, timeout=3, proxy=None, json=False, post=None):
+    def get_remote_data(url, timeout: int=3, proxy=None, json: bool=False, post=None):
         data = None
         try:
             url_data = terrariumUtils.parse_url(url)
@@ -454,7 +454,7 @@ class terrariumUtils:
 
     @staticmethod
     # https://stackoverflow.com/a/62186053
-    def flatten_dict(dictionary, parent_key=False, separator="_"):
+    def flatten_dict(dictionary, parent_key: bool=False, separator: str="_"):
         items = []
         for key, value in dictionary.items():
             new_key = str(parent_key) + separator + key if parent_key else key
@@ -473,7 +473,7 @@ class terrariumUtils:
         return str(datetime.timedelta(seconds=int(value)))
 
     @staticmethod
-    def format_filesize(n, power=0, b=1024, u="B", pre=[""] + [p + "i" for p in "KMGTPEZY"]):
+    def format_filesize(n, power: int=0, b: int=1024, u: str="B", pre=[""] + [p + "i" for p in "KMGTPEZY"]) -> str:
         power, n = min(int(log(max(n * b**power, 1), b)), len(pre) - 1), n * b**power
         return "%%.%if %%s%%s" % abs(power % (-power - 1)) % (n / b ** float(power), pre[power], u)
 
@@ -501,7 +501,7 @@ class terrariumUtils:
         return re.sub(strip_regex, "", str(address), 0, re.MULTILINE)
 
     @staticmethod
-    def get_translator(lang="en-US"):
+    def get_translator(lang: str="en-US"):
         # Load language
         try:
             trans = gettext.translation("terrariumpi", "locales/", languages=(lang.replace("-", "_"),))
@@ -511,7 +511,7 @@ class terrariumUtils:
         return trans.gettext
 
     @staticmethod
-    def is_docker():
+    def is_docker() -> bool:
         path = "/proc/self/cgroup"
         if os.path.exists("/.dockerenv"):
             return True
@@ -534,7 +534,7 @@ class terrariumUtils:
         return len(data.decode().strip().split("\n")) > 1
 
     @staticmethod
-    def kill_bluetooth_helper_processes():
+    def kill_bluetooth_helper_processes() -> None:
         cmd = "pgrep bluepy"
         data = terrariumUtils.get_script_data(cmd)
         if data is None:
@@ -549,7 +549,7 @@ class terrariumUtils:
                 logger.error(f"Error killing hanging bluetooth helper process: {ex}")
 
     @staticmethod
-    def loadHardwareDrivers(classType, className, path, pattern):
+    def loadHardwareDrivers(classType, className, path, pattern: str):
         cache = terrariumCache()
 
         data = cache.get_data(path)
@@ -599,5 +599,5 @@ class terrariumUtils:
         return address
 
     @staticmethod
-    def isRaspberryPI5():
+    def isRaspberryPI5() -> bool:
         return "Raspberry Pi 5" in Path("/proc/device-tree/model").read_text()

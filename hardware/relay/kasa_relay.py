@@ -57,7 +57,7 @@ class terrariumRelayTPLinkKasa(terrariumRelay):
 
         return data == state
 
-    def _get_hardware_value(self, force=False):
+    def _get_hardware_value(self, force: bool=False):
         async def __get_hardware_state():
             data = []
             await self.device.update()

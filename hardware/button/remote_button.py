@@ -15,7 +15,7 @@ class terrariumRemoteButton(terrariumButton):
 
     __TIMEOUT = 10
 
-    def __run(self):
+    def __run(self) -> None:
         self._checker["running"] = 1
         while self._checker["running"]:
             try:
@@ -29,7 +29,7 @@ class terrariumRemoteButton(terrariumButton):
     def _get_state(self):
         return self._device["internal_state"]
 
-    def _load_hardware(self):
+    def _load_hardware(self) -> None:
         self._device["internal_state"] = self.RELEASED
 
         self.__thread = threading.Thread(target=self.__run)
@@ -38,11 +38,11 @@ class terrariumRemoteButton(terrariumButton):
         # For the first reading, wait a bit....
         sleep(0.25)
 
-    def calibrate(self, calibration_data):
+    def calibrate(self, calibration_data) -> None:
         super().calibrate(calibration_data)
         self.__TIMEOUT = int(calibration_data.get("timeout", self.__TIMEOUT))
 
-    def stop(self):
+    def stop(self) -> None:
         self._checker["running"] = 0
         try:
             self.__thread.join()
@@ -56,7 +56,7 @@ class terrariumRemoteButton(terrariumButton):
         return self.pressed
 
     @property
-    def is_closed(self):
+    def is_closed(self) -> bool:
         return not self.is_open
 
     @property
@@ -64,7 +64,7 @@ class terrariumRemoteButton(terrariumButton):
         return self.pressed
 
     @property
-    def is_dark(self):
+    def is_dark(self) -> bool:
         return not self.is_light
 
     @property
@@ -72,5 +72,5 @@ class terrariumRemoteButton(terrariumButton):
         return self.pressed
 
     @property
-    def no_motion(self):
+    def no_motion(self) -> bool:
         return not self.motion

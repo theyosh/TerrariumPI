@@ -13,7 +13,7 @@ from pathlib import Path
 class terrariumCalendar(object):
     __ICS_FILE = Path(__file__).parent.joinpath("data/calendar.ics").resolve()
 
-    def __init__(self):
+    def __init__(self) -> None:
         if not self.__ICS_FILE.exists():
             self.__ical = Calendar()
             self.__ical.add("prodid", "-//TerrariumPI calendar//terrarium.theyosh.nl//")
@@ -92,7 +92,7 @@ class terrariumCalendar(object):
         self,
         uid,
         summary,
-        description,
+        description: str,
         location=None,
         dtstart=None,
         dtend=None,
@@ -158,7 +158,7 @@ class terrariumCalendar(object):
 
         return False
 
-    def delete_event(self, uid):
+    def delete_event(self, uid) -> bool:
         counter = 0
         for subcomponent in self.__ical.subcomponents:
             if subcomponent.get("uid") == uid:

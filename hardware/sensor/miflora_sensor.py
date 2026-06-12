@@ -25,13 +25,13 @@ class terrariumMiFloraSensor(terrariumBluetoothSensor):
     __POWER_STATE = 100
 
     # Overrule the update function to update the current battery state
-    def update(self, force=False):
+    def update(self, force: bool=False):
         value = super().update(force)
         data = self._sensor_cache.get_data(self._sensor_cache_key)
         self.__POWER_STATE = data["battery"]
         return value
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{super().__repr__()} battery {self.__POWER_STATE}%"
 
     def _load_hardware(self):

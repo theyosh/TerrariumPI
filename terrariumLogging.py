@@ -21,7 +21,7 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
     Extended version of TimedRotatingFileHandler that compress logs on rollover.
     """
 
-    def emit(self, record):
+    def emit(self, record) -> None:
         if len(record.args):
             record.msg = terrariumUtils.clean_log_line(record.msg % record.args)
             record.args = ()
@@ -30,7 +30,7 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
 
         super().emit(record)
 
-    def doRollover(self):
+    def doRollover(self) -> None:
         """
         do a rollover; in this case, a date/time stamp is appended to the filename
         when the rollover happens.  However, you want the file to be named for the
@@ -39,7 +39,7 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
         the one with the oldest suffix.
         """
 
-        def zipAction():
+        def zipAction() -> None:
             # get the time that this sequence started at and make it a TimeTuple
             t = self.rolloverAt - self.interval
             timeTuple = time.localtime(t)
@@ -80,13 +80,13 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
 
 
 class NotificationLogger(logging.StreamHandler):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
         # The notification will later on get a reference to the terrariumEngine for version and profile information
         self.notification = terrariumNotification()
 
-    def emit(self, record):
+    def emit(self, record) -> None:
         # Do not send messages from terrariumNotification logging, as that will trigger a recursing error.
         if "terrariumNotification" != record.name and str(record.levelname.lower()) in ["warning", "error"]:
             self.notification.message(f"system_{record.levelname.lower()}", {"message": record.getMessage()})

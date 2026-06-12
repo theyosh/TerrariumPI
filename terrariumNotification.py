@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import terrariumLogging
+from typing import Optional
 
 logger = terrariumLogging.logging.getLogger(None)
 
@@ -211,7 +212,7 @@ class terrariumNotification(terrariumSingleton):
 
         return sorted(data, key=itemgetter("name"))
 
-    def __init__(self, engine=None):
+    def __init__(self, engine=None) -> None:
         "Initialize empty notification system with system defaults"
 
         self.__rate_limiter_counter = {
@@ -224,7 +225,7 @@ class terrariumNotification(terrariumSingleton):
         self.services = {}
         self.engine = engine
 
-    def __rate_limit(self, title, rate=None):
+    def __rate_limit(self, title, rate: Optional[float]=None) -> bool:
         # https://en.wikipedia.org/wiki/Token_bucket / https://stackoverflow.com/a/668327
         # First the overall max rate limit
 
@@ -252,7 +253,7 @@ class terrariumNotification(terrariumSingleton):
             self.__rate_limiter_counter[title]["allowance"] -= 1.0
             return False
 
-    def load_services(self):
+    def load_services(self) -> None:
         with orm.db_session():
             for service in NotificationService.select(lambda ns: ns.enabled is True):
                 service = service.to_dict()
@@ -275,7 +276,7 @@ class terrariumNotification(terrariumSingleton):
                         self.services[service["id"]] = None
                         logger.error(f'Error loading display {service["name"]}: {ex}')
 
-    def reload_service(self, service_id, new_setup):
+    def reload_service(self, service_id, new_setup) -> None:
         if service_id not in self.services:
             return
 
@@ -286,7 +287,7 @@ class terrariumNotification(terrariumSingleton):
 
         self.services[service_id].reload_setup(setup)
 
-    def delete_service(self, service_id):
+    def delete_service(self, service_id) -> None:
         if service_id not in self.services:
             return
 
@@ -297,7 +298,7 @@ class terrariumNotification(terrariumSingleton):
 
         del self.services[service_id]
 
-    def broadcast(self, subject, message, image):
+    def broadcast(self, subject: str, message, image) -> None:
         for service in self.services.values():
             if service is not None and service.enabled:
                 try:
@@ -322,7 +323,7 @@ class terrariumNotification(terrariumSingleton):
 
         return image
 
-    def message(self, message_type, data=None, files=[]):
+    def message(self, message_type, data=None, files=[]) -> None:
         if message_type not in self.__MESSAGES:
             return
 
@@ -411,7 +412,7 @@ class terrariumNotification(terrariumSingleton):
                     except Exception as ex:
                         logger.exception(f"Error sending notification message '{title}': {ex}")
 
-    def stop(self):
+    def stop(self) -> None:
         for service in self.services.values():
             if service is not None:
                 service.stop()
@@ -420,7 +421,7 @@ class terrariumNotification(terrariumSingleton):
 class terrariumNotificationServiceException(TypeError):
     """There is a problem with loading a hardware switch. Invalid power switch action."""
 
-    def __init__(self, message, *args):
+    def __init__(self, message, *args) -> None:
         self.message = message
         super().__init__(message, *args)
 
@@ -446,7 +447,7 @@ class terrariumNotificationService(object):
         return sorted(data, key=itemgetter("name"))
 
     # Return polymorph service....
-    def __new__(cls, _, service_type, name="", enabled=True, setup=None):
+    def __new__(cls, _, service_type, name: str="", enabled: bool=True, setup=None):
         if service_type not in [service["type"] for service in terrariumNotificationService.available_services]:
             raise terrariumNotificationServiceException(f"Service of type {service_type} is unknown.")
 
@@ -454,7 +455,7 @@ class terrariumNotificationService(object):
             terrariumNotificationService.__TYPES[service_type]["class"]()
         )
 
-    def __init__(self, service_id, service_type, name, enabled, setup):
+    def __init__(self, service_id, service_type, name: str, enabled: bool, setup) -> None:
         # Hacky to fix the logging in these classes...
         global logger
         logger = terrariumLogging.logging.getLogger(__name__)
@@ -471,15 +472,15 @@ class terrariumNotificationService(object):
         self.setup = {}
         self.load_setup(setup)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'{terrariumNotificationService.__TYPES[self.type]["name"]} service {self.name}'
 
-    def load_setup(self, setup_data):
+    def load_setup(self, setup_data) -> None:
         self.setup["terrariumpi_name"] = setup_data.get("terrariumpi_name")
         self.setup["version"] = setup_data.get("version")
         self.setup["profile_image"] = setup_data.get("profile_image")
 
-    def reload_setup(self, setup_data):
+    def reload_setup(self, setup_data) -> None:
         # Stop first
         self.stop()
 
@@ -491,12 +492,12 @@ class terrariumNotificationService(object):
         setup_data.update(setup_data["setup"])
         self.load_setup(setup_data)
 
-    def stop(self):
+    def stop(self) -> None:
         pass
 
 
 class terrariumNotificationServiceDisplay(terrariumNotificationService):
-    def load_setup(self, setup_data):
+    def load_setup(self, setup_data) -> None:
         super().load_setup(setup_data)
 
         # Now load the actual display device
@@ -514,16 +515,16 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
 
     #        self.show_picture(setup_data["profile_image"])
 
-    def send_message(self, msg_type, subject, message, data=None, attachments=[]):
+    def send_message(self, msg_type, subject: str, message, data=None, attachments=[]) -> None:
         self.setup["device"].message(message)
 
-    def show_picture(self, picture):
+    def show_picture(self, picture) -> None:
         try:
             self.setup["device"].write_image(picture)
         except Exception:
             pass
 
-    def stop(self):
+    def stop(self) -> None:
         try:
             self.setup["device"].stop()
             self.setup["device"] = None
@@ -532,7 +533,7 @@ class terrariumNotificationServiceDisplay(terrariumNotificationService):
 
 
 class terrariumNotificationServiceEmail(terrariumNotificationService):
-    def load_setup(self, setup_data):
+    def load_setup(self, setup_data) -> None:
         self.setup = {
             "address": setup_data.get("address"),
             "port": int(setup_data.get("port", 25)),
@@ -549,7 +550,7 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
 
         super().load_setup(setup_data)
 
-    def send_message(self, msg_type, subject, message, data=None, attachments=[]):
+    def send_message(self, msg_type, subject: str, message, data=None, attachments=[]) -> None:
         if self.setup is None or len(self.setup.get("receiver", [])) == 0:
             # Configuration is not loaded, or no receivers, ignore sending emails
             return
@@ -610,13 +611,13 @@ class terrariumNotificationServiceEmail(terrariumNotificationService):
 
 
 class terrariumNotificationServiceWebhook(terrariumNotificationService):
-    def load_setup(self, setup_data):
+    def load_setup(self, setup_data) -> None:
         self.setup = {
             "address": setup_data.get("url"),
         }
         super().load_setup(setup_data)
 
-    def send_message(self, msg_type, subject, message, data=None, attachments=[]):
+    def send_message(self, msg_type, subject: str, message, data=None, attachments=[]) -> None:
         if data is None:
             data = {}
 
@@ -650,7 +651,7 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
     __YELLOW_TIMEOUT = 5 * 60
     __RED_TIMEOUT = 15 * 60
 
-    def load_setup(self, setup_data):
+    def load_setup(self, setup_data) -> None:
         self.setup = {
             "red": (
                 None if setup_data.get("red") is None else LED(terrariumUtils.to_BCM_port_number(setup_data.get("red")))
@@ -679,7 +680,7 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
 
         super().load_setup(setup_data)
 
-    def send_message(self, msg_type, subject, message, data=None, attachments=[]):
+    def send_message(self, msg_type, subject: str, message, data=None, attachments=[]) -> None:
         led = None
         if "system_warning" == msg_type:
             led = "yellow"
@@ -703,7 +704,7 @@ class terrariumNotificationServiceTrafficLight(terrariumNotificationService):
 
             self.setup[f"{led}_timer"] = Timer(timeout, lambda: self.setup[f"{led}"].off())
 
-    def stop(self):
+    def stop(self) -> None:
         for led in ["red", "yellow", "green"]:
             if self.setup[led] is not None:
                 self.setup[led].off()
@@ -2253,8 +2254,8 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
         },
     }
 
-    def __play(self, song):
-        def buzz(frequency, length):  # create the function "buzz" and feed it the pitch and duration)
+    def __play(self, song) -> bool:
+        def buzz(frequency, length: int) -> None:  # create the function "buzz" and feed it the pitch and duration)
             if frequency == 0:
                 sleep(length)
                 return
@@ -2285,7 +2286,7 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
 
         self._playing = False
 
-    def load_setup(self, setup_data):
+    def load_setup(self, setup_data) -> None:
         self._playing = False
         self._player = None
         self.setup = {
@@ -2300,7 +2301,7 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
         # Startup song :P
         # self.send_message(None, 'Popcorn', None)
 
-    def send_message(self, type, subject, message, data=None, attachments=[]):
+    def send_message(self, type, subject: str, message, data=None, attachments=[]) -> None:
         if self._playing or self.setup["buzzer"] is None:
             return
 
@@ -2310,7 +2311,7 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
                 self._player.start()
                 break
 
-    def stop(self):
+    def stop(self) -> None:
         self._playing = False
         if self._player is not None:
             self._player.join()
@@ -2321,7 +2322,7 @@ class terrariumNotificationServiceBuzzer(terrariumNotificationService):
 
 class terrariumNotificationServiceMQTT(terrariumNotificationService):
     # The callback for when the client receives a CONNACK response from the server.
-    def on_connect(self, client, userdata, flags, rc):
+    def on_connect(self, client, userdata, flags, rc) -> None:
         if rc == 0:
             logger.info(f'Logged in to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}.')
 
@@ -2331,7 +2332,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
             )
             self.stop()
 
-    def load_setup(self, setup_data):
+    def load_setup(self, setup_data) -> None:
         self.setup = {
             "address": setup_data.get("address"),
             "port": int(setup_data.get("port")),
@@ -2368,7 +2369,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
                     f'Failed connecting to MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}: {ex}'
                 )
 
-    def stop(self):
+    def stop(self) -> None:
         # TODO: Flush the queue
 
         if self.connection is not None:
@@ -2382,7 +2383,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
 
         logger.info(f'Disconnected from the MQTT Broker at address: {self.setup["address"]}:{self.setup["port"]}')
 
-    def send_message(self, type, subject, message, data=None, attachments=[]):
+    def send_message(self, type, subject: str, message, data=None, attachments=[]) -> None:
         topic = type.replace("_", "/")
         topic = f"terrariumpi/{topic}"
 
@@ -2412,7 +2413,7 @@ class terrariumNotificationServiceMQTT(terrariumNotificationService):
 
 
 class terrariumNotificationServicePushover(terrariumNotificationService):
-    def load_setup(self, setup_data):
+    def load_setup(self, setup_data) -> None:
         self.setup = {
             "api_token": setup_data.get("api_token"),
             "user_key": setup_data.get("user_key"),
@@ -2421,7 +2422,7 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
 
         super().load_setup(setup_data)
 
-    def send_message(self, type, subject, message, data=None, attachments=[]):
+    def send_message(self, type, subject: str, message, data=None, attachments=[]) -> None:
         data = {"token": self.setup["api_token"], "user": self.setup["user_key"], "title": subject, "message": message}
 
         if "system_error" == type:
@@ -2444,7 +2445,7 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
 
 class terrariumNotificationServiceTelegram(terrariumNotificationService):
     # function to handle the /start command
-    async def start(self, update, context):
+    async def start(self, update, context) -> None:
         if await self._authenticate(update.message):
             if update.message.chat_id not in self.setup["chat_ids"]:
                 self.setup["chat_ids"].append(update.message.chat_id)
@@ -2515,7 +2516,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
         return ConversationHandler.END
 
-    async def sensor(self, update, context):
+    async def sensor(self, update, context) -> None:
         if await self._authenticate(update.message):
             query_message = await update.message.reply_text("Loading sensor(s)...")
             sensor_ids = None
@@ -2537,7 +2538,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
             await query_message.edit_text("\n".join(message))
 
-    async def relay(self, update, context):
+    async def relay(self, update, context) -> None:
         if await self._authenticate(update.message):
             query_message = await update.message.reply_text("Loading relay(s)...")
             relay_ids = None
@@ -2558,7 +2559,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
             await query_message.edit_text("\n".join(message))
 
-    async def button(self, update, context):
+    async def button(self, update, context) -> None:
         if await self._authenticate(update.message):
             query_message = await update.message.reply_text("Loading button(s)...")
             button_ids = None
@@ -2579,7 +2580,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
             await query_message.edit_text("\n".join(message))
 
-    async def status(self, update, context):
+    async def status(self, update, context) -> None:
         if await self._authenticate(update.message):
             query_message = await update.message.reply_text("Loading...")
             system_stats = self.engine.system_stats()
@@ -2673,7 +2674,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
         return ConversationHandler.END
 
-    async def help(self, update, context):
+    async def help(self, update, context) -> None:
         if await self._authenticate(update.message):
             await update.message.reply_text("""The following commands are supported:
 
@@ -2686,7 +2687,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 /status : will show the current system status.""")
 
     # function to handle normal text
-    async def text(self, update, context):
+    async def text(self, update, context) -> None:
         if await self._authenticate(update.message):
             await update.message.reply_text("Sorry, no conversations...")
 
@@ -2697,14 +2698,14 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
         return ConversationHandler.END
 
-    async def _authenticate(self, message):
+    async def _authenticate(self, message) -> bool:
         if str(message.from_user.username) in self.setup["allowed_users"]:
             return True
 
         await message.reply_text(f"User is not allowed: {message.from_user.username}")
         logger.error(f"User is not allowed: {message.from_user.username}")
 
-    async def _connect(self):
+    async def _connect(self) -> None:
         try:
             await self.telegram_bot.initialize()
             await self.telegram_bot.start()
@@ -2713,7 +2714,7 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
         except InvalidToken as ex:
             logger.error(f"Error starting Telegram bot: {ex}")
 
-    async def _main_process(self):
+    async def _main_process(self) -> None:
         try:
             await self._connect()
         except TimedOut as ex:
@@ -2723,8 +2724,8 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             except Exception as ex:
                 logger.error(f"Error connecting to Telegram: {ex}")
 
-    def load_setup(self, setup_data):
-        def _run():
+    def load_setup(self, setup_data) -> None:
+        def _run() -> None:
             try:
                 self._async = terrariumAsync()
                 self._async.run(self._main_process())
@@ -2788,8 +2789,8 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
             if len(old_chat_ids) > 0:
                 self.send_message(None, "Reconnected", "TerrariumPI just restarted...")
 
-    def stop(self):
-        async def _stop():
+    def stop(self) -> None:
+        async def _stop() -> None:
             if self.telegram_bot is not None:
                 try:
                     await self.telegram_bot.updater.stop()
@@ -2808,8 +2809,8 @@ class terrariumNotificationServiceTelegram(terrariumNotificationService):
 
         logger.info("Disconnected from Telegram")
 
-    def send_message(self, _, subject, message, data=None, attachments=[]):
-        async def _send_message(subject, message, data=None, attachments=[]):
+    def send_message(self, _, subject: str, message, data=None, attachments=[]) -> None:
+        async def _send_message(subject: str, message, data=None, attachments=[]) -> None:
             message = f"<b><u>{subject}</u></b>\n{message}"
 
             text_mode = len(attachments) == 0

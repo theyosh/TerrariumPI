@@ -85,14 +85,14 @@ class terrariumWebcam(object):
         ]
 
     # Return polymorph webcam....
-    def __new__(cls, _, hardware_type, address, name="", rotation="0", width=640, height=480, wb="auto"):
+    def __new__(cls, _, hardware_type, address, name: str="", rotation: str="0", width: int=640, height: int=480, wb: str="auto"):
         try:
             known_webcams = terrariumWebcam.available_hardware
             return super(terrariumWebcam, cls).__new__(known_webcams[hardware_type])
         except:
             raise terrariumWebcamException(f"Webcam of hardware type {hardware_type} is unknown.")
 
-    def __init__(self, device_id, _, address, name="", width=640, height=480, rotation="0", awb="auto"):
+    def __init__(self, device_id, _, address, name: str="", width: int=640, height: int=480, rotation: str="0", awb: str="auto") -> None:
         """Create a new Webcam instance based on type"""
 
         self._device = {
@@ -131,7 +131,7 @@ class terrariumWebcam(object):
         if not self.live:
             store_location.joinpath(self._TILE_LOCATION).mkdir(parents=True, exist_ok=True)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Return a readable name back for the Webcam
 
@@ -166,7 +166,7 @@ class terrariumWebcam(object):
 
         return files[-1]
 
-    def __rotate(self):
+    def __rotate(self) -> None:
         # Rotate image if needed
         if self.__raw_image is None:
             return
@@ -184,7 +184,7 @@ class terrariumWebcam(object):
 
         logger.debug("Rotated raw image %s to %s" % (self.name, self.rotation))
 
-    def __set_timestamp(self, image):
+    def __set_timestamp(self, image) -> None:
         # Get the image dimensions
         source_width, source_height = image.size
         # Select font
@@ -201,7 +201,7 @@ class terrariumWebcam(object):
             font=font,
         )
 
-    def __tile_image(self):
+    def __tile_image(self) -> None:
         starttime = time()
         # Original width
         source_width, source_height = self.__raw_image.size
@@ -306,7 +306,7 @@ class terrariumWebcam(object):
         logger.debug("Done tiling webcam image '%s' in %.5f seconds" % (self.name, time() - starttime))
 
     def __set_offline_image(self):
-        def draw_text_center(im, draw, text, font, **kwargs):
+        def draw_text_center(im, draw, text: str, font, **kwargs) -> None:
             text_height = text_top = None
             linecounter = 0
             for line in text:
@@ -379,7 +379,7 @@ class terrariumWebcam(object):
         return self._device["address"]
 
     @address.setter
-    def address(self, value):
+    def address(self, value) -> None:
         value = terrariumUtils.clean_address(value)
         if value is not None and "" != value and self.address != value:
             self._device["address"] = value
@@ -390,7 +390,7 @@ class terrariumWebcam(object):
         return self._device["awb"]
 
     @awb.setter
-    def awb(self, value):
+    def awb(self, value) -> None:
         if value is not None and "" != str(value).strip():
             self._device["awb"] = str(value).strip()
 
@@ -406,7 +406,7 @@ class terrariumWebcam(object):
         return self._device["id"]
 
     @id.setter
-    def id(self, value):
+    def id(self, value) -> None:
         if value is not None and "" != str(value).strip():
             self._device["id"] = str(value).strip()
 
@@ -419,7 +419,7 @@ class terrariumWebcam(object):
         return self._device["name"]
 
     @name.setter
-    def name(self, value):
+    def name(self, value) -> None:
         if value is not None and "" != str(value).strip():
             self._device["name"] = str(value).strip()
 
@@ -428,7 +428,7 @@ class terrariumWebcam(object):
         return self._device["resolution"]
 
     @resolution.setter
-    def resolution(self, value):
+    def resolution(self, value) -> None:
         if len(value) == 2:
             self._device["resolution"] = value
 
@@ -437,7 +437,7 @@ class terrariumWebcam(object):
         return self._device["rotation"]
 
     @rotation.setter
-    def rotation(self, value):
+    def rotation(self, value) -> None:
         value = value.lower()
         if value is not None and str(value).strip() in self.__VALID_ROTATIONS:
             self._device["rotation"] = str(value).strip()
@@ -564,7 +564,7 @@ class terrariumWebcam(object):
 
         return self.value
 
-    def archive(self, timeout):
+    def archive(self, timeout) -> bool:
         if not self.state:
             return False
 
@@ -583,7 +583,7 @@ class terrariumWebcam(object):
 
         return True
 
-    def motion_capture(self, motion_frame="last", motion_threshold=25, motion_area=500, motion_boxes="green"):
+    def motion_capture(self, motion_frame: str="last", motion_threshold: int=25, motion_area: int=500, motion_boxes: str="green"):
         if not self.state:
             return False
 
@@ -667,7 +667,7 @@ class terrariumWebcam(object):
 
         return motion_detected
 
-    def clear_archive(self, period=365):
+    def clear_archive(self, period: int=365) -> None:
         if period <= 0:
             return
 
@@ -686,7 +686,7 @@ class terrariumWebcam(object):
             startDate = startDate - timedelta(days=1)
 
     # TODO: What to stop....?
-    def stop(self):
+    def stop(self) -> None:
         pass
 
 
@@ -694,7 +694,7 @@ class terrariumWebcamLive(terrariumWebcam):
     _HELPER_SCRIPT = None
     _FFMPEG = "/usr/bin/ffmpeg"
 
-    def _load_hardware(self):
+    def _load_hardware(self) -> bool:
         if not Path(self._FFMPEG).exists():
             raise terrariumWebcamLoadingException("Please install ffmpeg.")
 
@@ -740,7 +740,7 @@ class terrariumWebcamLive(terrariumWebcam):
 
         return False
 
-    def stop(self):
+    def stop(self) -> None:
         try:
             os.killpg(os.getpgid(self.__process.pid), signal.SIGTERM)
         except Exception as ex:

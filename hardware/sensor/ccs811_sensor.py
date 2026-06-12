@@ -47,7 +47,7 @@ CCS811_fr = 0
 
 
 class CCS811_RPi:
-    def __init__(self, twi=1, addr=CCS811_ADDRESS):
+    def __init__(self, twi: int=1, addr=CCS811_ADDRESS) -> None:
         global CCS811_fr, CCS811_fw
 
         CCS811_fr = io.open("/dev/i2c-" + str(twi), "rb", buffering=0)
@@ -97,7 +97,7 @@ class CCS811_RPi:
         buf = array.array("B", data)
         return ERROR[int(buf[0])]
 
-    def configureSensor(self, configuration):
+    def configureSensor(self, configuration) -> None:
         # Switch sensor to application mode
         s = [CSS811_APP_START]
         s2 = bytearray(s)
@@ -174,14 +174,14 @@ class CCS811_RPi:
         buf = array.array("B", data)
         return buf[0] * 256 + buf[1]
 
-    def checkDataReady(self, status_byte):
+    def checkDataReady(self, status_byte) -> bool:
         ready_bit = ((status_byte) >> 3) & 1
         if ready_bit:
             return True
         else:
             return False
 
-    def setCompensation(self, temperature, humidity):
+    def setCompensation(self, temperature: float, humidity) -> None:
         temperature = round(temperature, 2)
         humidity = round(humidity, 2)
         hum1 = int(humidity // 0.5)
@@ -197,7 +197,7 @@ class CCS811_RPi:
 
         return
 
-    def setBaseline(self, baseline):
+    def setBaseline(self, baseline) -> None:
         buf = [0, 0]
         s = struct.pack(">H", baseline)
         buf[0], buf[1] = struct.unpack(">BB", s)
@@ -259,7 +259,7 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
         except Exception as ex:
             raise terrariumSensorUpdateException(ex)
 
-    def calibrate(self, temperature=20, humidity=50):
+    def calibrate(self, temperature: int=20, humidity: int=50) -> None:
         self.__calibration = {
             "temperature": temperature,
             "humidity": humidity,

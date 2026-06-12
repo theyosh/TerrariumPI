@@ -10,7 +10,7 @@ class terrariumMotionSensor(terrariumButton):
     HARDWARE = "motion"
     NAME = "Motion sensor"
 
-    def _load_hardware(self):
+    def _load_hardware(self) -> None:
         pass
 
     @property
@@ -18,5 +18,5 @@ class terrariumMotionSensor(terrariumButton):
         return self.pressed
 
     @property
-    def no_motion(self):
+    def no_motion(self) -> bool:
         return not self.motion

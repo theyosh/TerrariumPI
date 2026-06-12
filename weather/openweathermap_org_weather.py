@@ -36,7 +36,7 @@ class terrariumOpenweathermap(terrariumWeather):
 
         return return_data
 
-    def __load_general_data(self):
+    def __load_general_data(self) -> None:
         address = self.address + "&units=metric&lang=" + self._device["language"][0:2]
         data = terrariumUtils.get_remote_data(address)
         if data:

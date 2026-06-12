@@ -63,7 +63,7 @@ class terrariumDisplay(object):
         ]
 
     # Return polymorph relay....
-    def __new__(cls, device_id, hardware_type, address, title=None, horizontal_scroll=False):
+    def __new__(cls, device_id, hardware_type, address, title=None, horizontal_scroll: bool=False):
         known_displays = terrariumDisplay.available_hardware
         try:
             return super(terrariumDisplay, cls).__new__(known_displays[hardware_type])
@@ -72,7 +72,7 @@ class terrariumDisplay(object):
                 f"Error loading display device {hardware_type} at address {address}: {ex}"
             )
 
-    def __init__(self, device_id, _, address, title=None, horizontal_scroll=False):
+    def __init__(self, device_id, _, address, title=None, horizontal_scroll: bool=False) -> None:
         self._device = {
             "device": None,
             "address": None,
@@ -108,10 +108,10 @@ class terrariumDisplay(object):
         self.clear()
         self.write_title()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.NAME} at address '{self.address}' ({self.width}x{self.height})"
 
-    def __run(self):
+    def __run(self) -> None:
         if self._device["device"] is None:
             return
 
@@ -137,7 +137,7 @@ class terrariumDisplay(object):
         return self._device["id"]
 
     @id.setter
-    def id(self, value):
+    def id(self, value) -> None:
         if value is not None and "" == value.strip():
             self._device["id"] = value.strip()
 
@@ -150,7 +150,7 @@ class terrariumDisplay(object):
         return terrariumUtils.getI2CAddress(self.address)
 
     @address.setter
-    def address(self, value):
+    def address(self, value) -> None:
         value = terrariumUtils.clean_address(value)
         if value not in [None, "", self.address]:
             if self.address is not None:
@@ -164,7 +164,7 @@ class terrariumDisplay(object):
         return self._device["title"]
 
     @title.setter
-    def title(self, value):
+    def title(self, value) -> None:
         self._device["title"] = None if value is None else value.strip()
 
     @property
@@ -180,24 +180,24 @@ class terrariumDisplay(object):
         return self._device["mode"]
 
     @mode.setter
-    def mode(self, value):
+    def mode(self, value) -> None:
         if value in [self.__MODE_TEXT_WRAP, self.__MODE_TEXT_H_SCROLL, self.__MODE_TEXT_H_SCROLL_ONCE]:
             self._device["mode"] = value
 
-    def message(self, text):
+    def message(self, text: str) -> None:
         if self._device["running"]:
             self._device["message_queue"].put(text)
 
-    def clear(self):
+    def clear(self) -> None:
         title_offset = 0 if self.title is None else 1
         for line_nr in range(title_offset, int(self.HEIGHT / self.FONT_SIZE)):
             self.write_line("", line_nr)
 
-    def write_title(self):
+    def write_title(self) -> None:
         if self.title is not None:
             self.write_line(self.title)
 
-    def write_lines(self, lines):
+    def write_lines(self, lines) -> None:
         title_offset = 0 if self.title is None else 1
         max_lines = int((self.HEIGHT / self.FONT_SIZE) - title_offset)
         for line_nr, line in enumerate(lines):
@@ -211,7 +211,7 @@ class terrariumDisplay(object):
                 line, line_nr + title_offset, self.mode != self.__MODE_TEXT_WRAP and line_nr == len(lines) - 1
             )
 
-    def write_line(self, line, line_nr=0, scroll=False):
+    def write_line(self, line, line_nr: int=0, scroll: bool=False) -> None:
         line_nr += 1
         max_chars = int(float(self.WIDTH) / float(self.FONT_WIDTH))
 
@@ -238,7 +238,7 @@ class terrariumDisplay(object):
 
         sleep(0.25)
 
-    def write_text(self, text):
+    def write_text(self, text: str) -> None:
         if self._device["device"] is None or "" == text:
             return
 
@@ -259,7 +259,7 @@ class terrariumDisplay(object):
             self.clear()
             self.write_lines(text)
 
-    def stop(self):
+    def stop(self) -> None:
         self._device["running"] = False
         self._device["thread"].join()
         self.unload_hardware()
@@ -271,7 +271,7 @@ class terrariumDisplay(object):
         except Exception as ex:
             raise terrariumDisplayLoadingException(f"Unable to load display {self}: {ex}")
 
-    def unload_hardware(self):
+    def unload_hardware(self) -> None:
         if self._device["device"] is not None:
             # Clear title
             self.title = None

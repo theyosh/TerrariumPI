@@ -11,7 +11,7 @@ class terrariumRelayWeMo(terrariumRelay):
     NAME = "WEMO Smart plug"
 
     # This will update the device based in mac address
-    def load_hardware(self):
+    def load_hardware(self) -> None:
         super().load_hardware()
         # Always overrule the ID generating, as we want to use the MAC as that is unique if the IP address is changing
         self.id = md5(f"{self.HARDWARE}{self.device.mac.lower()}".encode()).hexdigest()
@@ -24,7 +24,7 @@ class terrariumRelayWeMo(terrariumRelay):
         device = pywemo.device_from_description(f"http://{self.address}:{port}/setup.xml")
         return device
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         if state == self.ON:
             self.device.on()
         else:

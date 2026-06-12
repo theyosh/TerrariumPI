@@ -44,7 +44,7 @@ class terrariumRelay8Stack(terrariumRelay):
         # Return tuple with (stack, relay)
         return (int(address[1]), int(address[0]))
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         device, nr = self.device
         self._device_set(device, nr, 1 if state == self.ON else 0)
         return True

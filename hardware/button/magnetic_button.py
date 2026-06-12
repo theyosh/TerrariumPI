@@ -10,7 +10,7 @@ class terrariumMagneticButton(terrariumButton):
     HARDWARE = "magnetic"
     NAME = "Magnetic (door) button"
 
-    def _load_hardware(self):
+    def _load_hardware(self) -> None:
         # Here we invert the values. Because when PRESSED, triggers will happen. But for a door, this is the normal case.
         self.RELEASED = 1
         self.PRESSED = 0
@@ -20,5 +20,5 @@ class terrariumMagneticButton(terrariumButton):
         return self.pressed
 
     @property
-    def is_closed(self):
+    def is_closed(self) -> bool:
         return not self.is_open

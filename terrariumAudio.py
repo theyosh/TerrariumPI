@@ -68,7 +68,7 @@ class terrariumAudio(object):
 class terrariumAudioPlayer(object):
     CMD = "/usr/bin/ffmpeg"
 
-    def __init__(self, hw, playlists=[], shuffle=False, repeat=False):
+    def __init__(self, hw, playlists=[], shuffle: bool=False, repeat: bool=False) -> None:
         self.__hw = hw
         self.__stop = 0
         self.__player = {"ffmpeg": None, "thread": None, "exit_status": None}
@@ -77,7 +77,7 @@ class terrariumAudioPlayer(object):
         self.shuffle = shuffle
         self.repeat = repeat
 
-    def __run(self):
+    def __run(self) -> None:
         self.__stop = 0
         for playlist in self.playlists:
             if self.__stop:
@@ -112,7 +112,7 @@ class terrariumAudioPlayer(object):
 
         self.__player["ffmpeg"] = None
 
-    def play(self):
+    def play(self) -> None:
         if self.running:
             self.stop()
 
@@ -120,7 +120,7 @@ class terrariumAudioPlayer(object):
             self.__player["thread"] = threading.Thread(target=self.__run)
             self.__player["thread"].start()
 
-    def stop(self):
+    def stop(self) -> None:
         self.__stop = 1
         if self.running:
             self.__player["ffmpeg"].terminate()
@@ -131,12 +131,12 @@ class terrariumAudioPlayer(object):
         return self.__playlists
 
     @playlists.setter
-    def playlists(self, playlists):
+    def playlists(self, playlists) -> None:
         self.__playlists = copy.copy(playlists)
 
     @property
-    def running(self):
+    def running(self) -> bool:
         return self.__player["ffmpeg"] is not None and self.__player["ffmpeg"].poll() is None
 
-    def volume(self, value):
+    def volume(self, value) -> None:
         terrariumAudio.volume(int(self.__hw), int(value))

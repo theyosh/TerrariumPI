@@ -33,7 +33,7 @@ class TerrariumMerossCloud(terrariumSingleton):
 
         return EMAIL != "" and PASSWORD != ""
 
-    def __init__(self, username, password):
+    def __init__(self, username: str, password: str) -> None:
         self.__asyncio = terrariumAsync()
 
         self.__engine = {
@@ -51,8 +51,8 @@ class TerrariumMerossCloud(terrariumSingleton):
 
         self.start()
 
-    def start(self, reconnecting=False):
-        def _run():
+    def start(self, reconnecting: bool=False) -> None:
+        def _run() -> None:
             try:
                 self.__asyncio.run(self._main_process())
             except Exception as ex:
@@ -83,7 +83,7 @@ class TerrariumMerossCloud(terrariumSingleton):
                 f'Meross cloud is {"re-" if reconnecting else ""}connected! Found {len(self._data)} devices in {time()-start_time:.2f} seconds.'
             )
 
-    def _store_data(self):
+    def _store_data(self) -> None:
         for key in self._data:
             self.__engine["cache"].set_data(key, self._data[key], 90)
 
@@ -137,13 +137,13 @@ class TerrariumMerossCloud(terrariumSingleton):
 
         return result
 
-    def stop(self):
+    def stop(self) -> None:
         logger.info("Stopping Meross cloud ... ")
         self.__engine["running"] = False
         self.__engine["event"].set()
         self.__engine["thread"].join()
 
-    def reconnect(self):
+    def reconnect(self) -> None:
         if self.__engine["reconnecting"]:
             return
 
@@ -152,7 +152,7 @@ class TerrariumMerossCloud(terrariumSingleton):
         self.stop()
         self.start(True)
 
-    async def _main_process(self):
+    async def _main_process(self) -> None:
         # https://stackoverflow.com/a/49632779
         async def event_wait(evt, timeout):
             # suppress TimeoutError because we'll return False in case of timeout
@@ -160,7 +160,7 @@ class TerrariumMerossCloud(terrariumSingleton):
                 await asyncio.wait_for(evt.wait(), timeout)
             return evt.is_set()
 
-        async def _notification(namespace: Namespace, data: dict, device_internal_id: str, *args, **kwargs):
+        async def _notification(namespace: Namespace, data: dict, device_internal_id: str, *args, **kwargs) -> None:
             for device in data:
                 if hasattr(device, "is_on"):
                     self._data[f"{device.uuid}"] = []

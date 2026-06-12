@@ -55,14 +55,14 @@ class terrariumRelay(object):
         ]
 
     # Return polymorph relay....
-    def __new__(cls, _, hardware_type, address, name="", calibration={}, prev_state=None, callback=None):
+    def __new__(cls, _, hardware_type, address, name: str="", calibration={}, prev_state=None, callback=None):
         known_relays = terrariumRelay.available_hardware
         try:
             return super(terrariumRelay, cls).__new__(known_relays[hardware_type])
         except:
             raise terrariumRelayException(f"Relay of hardware type {hardware_type} is unknown.")
 
-    def __init__(self, device_id, _, address, name="", calibration={}, prev_state=None, callback=None):
+    def __init__(self, device_id, _, address, name: str="", calibration={}, prev_state=None, callback=None) -> None:
         self._device = {
             "device": None,
             "address": None,
@@ -88,10 +88,10 @@ class terrariumRelay(object):
 
         self.load_hardware()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.NAME} {self.type} named '{self.name}' at address '{self.address}'"
 
-    def calibrate(self, data):
+    def calibrate(self, data) -> None:
         pass
 
     @retry(terrariumRelayLoadingException, tries=3, delay=0.5, max_delay=2, logger=logger)
@@ -157,7 +157,7 @@ class terrariumRelay(object):
         return self._device["id"]
 
     @id.setter
-    def id(self, value):
+    def id(self, value) -> None:
         if value is not None and "" != str(value).strip():
             self._device["id"] = str(value).strip()
 
@@ -170,7 +170,7 @@ class terrariumRelay(object):
         return [part.strip() for part in self.address.split(",")]
 
     @address.setter
-    def address(self, value):
+    def address(self, value) -> None:
         value = terrariumUtils.clean_address(value)
         if value is not None and "" != value:
             self._device["address"] = value
@@ -184,7 +184,7 @@ class terrariumRelay(object):
         return self._device["name"]
 
     @name.setter
-    def name(self, value):
+    def name(self, value) -> None:
         if value is not None and "" != str(value).strip():
             self._device["name"] = str(value).strip()
 
@@ -192,7 +192,7 @@ class terrariumRelay(object):
     def state(self):
         return self._device["value"]
 
-    def set_state(self, new_state, force=False, no_callback=False):
+    def set_state(self, new_state, force: bool=False, no_callback: bool=False):
         if new_state is None or not (self.OFF <= new_state <= self.ON):
             logger.error(f"Illegal value for relay {self}: {new_state}")
             return False
@@ -223,7 +223,7 @@ class terrariumRelay(object):
 
         return changed
 
-    def update(self, force=False):
+    def update(self, force: bool=False):
         new_data = None
         try:
             new_data = self.__get_hardware_value()
@@ -233,7 +233,7 @@ class terrariumRelay(object):
         self._device["value"] = new_data
         return self._device["value"]
 
-    def on(self, value=100, delay=0.0):
+    def on(self, value: int=100, delay: float=0.0):
         if self._timer is not None and self._timer.is_alive():
             return False
 
@@ -249,7 +249,7 @@ class terrariumRelay(object):
         # Not great, but the set_state has a callback for updates
         return changed
 
-    def off(self, value=0, delay=0.0):
+    def off(self, value: int=0, delay: float=0.0):
         return self.on(value, delay)
 
     def is_on(self):
@@ -276,7 +276,7 @@ class terrariumRelay(object):
     def type(self):
         return "dimmer" if self.is_dimmer else "relay"
 
-    def stop(self):
+    def stop(self) -> None:
         if self._timer is not None:
             self._timer.cancel()
             self._timer.join()
@@ -298,7 +298,7 @@ class terrariumRelayDimmer(terrariumRelay):
     TYPE = None
     _DIMMER_MAXDIM = None
 
-    def __init__(self, relay_id, _, address, name="", calibration={}, prev_state=None, callback=None):
+    def __init__(self, relay_id, _, address, name: str="", calibration={}, prev_state=None, callback=None) -> None:
         self._dimmer_offset = 0
         self._dimmer_state = 0
         self._legacy = False
@@ -309,7 +309,7 @@ class terrariumRelayDimmer(terrariumRelay):
         super().__init__(relay_id, _, address, name, calibration, prev_state, callback)
         self.calibrate(calibration)
 
-    def __run(self, to, duration):
+    def __run(self, to, duration) -> None:
         self.running = True
         self.__running.clear()
 
@@ -339,7 +339,7 @@ class terrariumRelayDimmer(terrariumRelay):
         self.running = False
         self.__thread = None
 
-    def calibrate(self, data):
+    def calibrate(self, data) -> None:
         dimmer_offset = data.get("dimmer_offset", self._dimmer_offset)
         if "" == dimmer_offset:
             dimmer_offset = 0
@@ -357,7 +357,7 @@ class terrariumRelayDimmer(terrariumRelay):
                 # Current power is higher then the new limit. So lower down the power now!
                 self.on(self.ON, 0)
 
-    def on(self, value=100, duration=0.0, delay=0.0):
+    def on(self, value: int=100, duration: float=0.0, delay: float=0.0):
         if self._timer is not None and self._timer.is_alive():
             return False
 
@@ -386,7 +386,7 @@ class terrariumRelayDimmer(terrariumRelay):
 
         return changed
 
-    def off(self, value=0, duration=0.0, delay=0.0):
+    def off(self, value: int=0, duration: float=0.0, delay: float=0.0):
         return self.on(value, duration, delay)
 
     def is_on(self):
@@ -405,7 +405,7 @@ class terrariumRelayDimmer(terrariumRelay):
 
         return off
 
-    def stop(self):
+    def stop(self) -> None:
         self.running = False
         self.__running.set()
 

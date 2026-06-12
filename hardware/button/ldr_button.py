@@ -16,7 +16,7 @@ class terrariumLDRSensor(terrariumButton):
 
     __CAPACITOR = 1  # in uF
 
-    def __run(self):
+    def __run(self) -> None:
         self._checker["running"] = 1
         while self._checker["running"]:
             count = 0
@@ -50,7 +50,7 @@ class terrariumLDRSensor(terrariumButton):
     def _get_state(self):
         return self._device["internal_state"]
 
-    def _load_hardware(self):
+    def _load_hardware(self) -> None:
         GPIO.setmode(GPIO.BCM)
         self._device["internal_state"] = self.RELEASED
 
@@ -60,11 +60,11 @@ class terrariumLDRSensor(terrariumButton):
         # For the first reading, wait a bit....
         sleep(0.25)
 
-    def calibrate(self, calibration_data):
+    def calibrate(self, calibration_data) -> None:
         super().calibrate(calibration_data)
         self.__CAPACITOR = int(calibration_data.get("ldr_capacitor", self.__CAPACITOR))
 
-    def stop(self):
+    def stop(self) -> None:
         self._checker["running"] = 0
         try:
             self.__thread.join()
@@ -78,5 +78,5 @@ class terrariumLDRSensor(terrariumButton):
         return self.pressed
 
     @property
-    def is_dark(self):
+    def is_dark(self) -> bool:
         return not self.is_light

@@ -56,7 +56,7 @@ class terrariumRelayFTDI(terrariumRelay):
 
             return (serial, device_type)
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         serial, device_type = self.device
 
         if device_type == terrariumRelayFTDI.SERIAL:
@@ -77,7 +77,7 @@ class terrariumRelayFTDI(terrariumRelay):
 
     def _get_hardware_value(self):
         def get_relay_state(data, relay):
-            def testBit(int_type, offset):
+            def testBit(int_type, offset: int):
                 mask = 1 << offset
                 return int_type & mask
 

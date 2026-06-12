@@ -10,7 +10,7 @@ import serial
 
 
 class terrariumDisplayLCDI2CMixin:
-    def _load_hardware(self):
+    def _load_hardware(self) -> None:
         address = self._address
         self._device["device"] = i2c_lcd.lcd(address[0])
 
@@ -18,24 +18,24 @@ class terrariumDisplayLCDI2CMixin:
         self._device["device"].lcd_device.bus.close()
         self._device["device"].lcd_device.bus = smbus2.SMBus(1 if len(address) == 1 else int(address[1]))
 
-    def _unload_hardware(self):
+    def _unload_hardware(self) -> None:
         self._device["device"].lcd_device.bus.close()
 
-    def _write_line(self, text, line_nr):
+    def _write_line(self, text: str, line_nr) -> None:
         self._device["device"].lcd_display_string(text[: self.width].ljust(self.width), line_nr)
 
 
 class terrariumDisplayLCDSerialMixin:
-    def _load_hardware(self):
+    def _load_hardware(self) -> None:
         address = self._address
         self._device["device"] = serial.Serial(address[0], baudrate=9600, timeout=1)
         with self._device["device"] as device:
             device.flushInput()
 
-    def _unload_hardware(self):
+    def _unload_hardware(self) -> None:
         pass
 
-    def _write_line(self, text, line_nr):
+    def _write_line(self, text: str, line_nr) -> None:
         with self._device["device"] as device:
             device.write(f"0{line_nr-1}{text[: self.width].ljust(self.width)}")
 

@@ -19,7 +19,7 @@ db = orm.Database()
 
 
 @db.on_connect(provider="sqlite")
-def sqlite_speedups(db, connection):
+def sqlite_speedups(db, connection) -> None:
     settings = {
         "auto_vacuum": "NONE",
         "cache_size": -10000,
@@ -34,7 +34,7 @@ def sqlite_speedups(db, connection):
         cursor.execute(f"PRAGMA {key}  = {value}")
 
 
-def init(version):
+def init(version) -> None:
     backend = get_backend(f"sqlite:///{DATABASE}")
     migrations = read_migrations("migrations")
 
@@ -48,7 +48,7 @@ def init(version):
 
 
 @orm.db_session
-def create_defaults(version):
+def create_defaults(version) -> None:
     setting_defaults = [
         {"id": "version", "value": f"{version}"},
         {"id": "host", "value": "0.0.0.0"},
@@ -107,11 +107,11 @@ def load_advanced_settings():
     return {}
 
 
-def recover():
+def recover() -> bool:
     starttime = time.time()
 
     # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
-    def progress(status, remaining, total):
+    def progress(status, remaining, total: int) -> None:
         status = ((total - remaining) / total) * 100
 
         print(f"Copied {total-remaining}({status:.2f}%) of {total} pages...")
@@ -148,10 +148,10 @@ class Area(db.Entity):
 
     state = orm.Optional(orm.Json)
 
-    def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
         return copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Area {self.type} {self.name} in {self.mode} mode, part of {self.enclosure}"
 
 
@@ -164,12 +164,12 @@ class Audiofile(db.Entity):
 
     playlists = orm.Set(lambda: Playlist)
 
-    def before_delete(self):
+    def before_delete(self) -> None:
         filename = Path(self.filename)
         if filename.exists():
             filename.unlink()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Audio file {self.name}"
 
 
@@ -205,7 +205,7 @@ class Button(db.Entity):
     def error(self):
         return True if self.value is None else False
 
-    def update(self, new_value, force=False):
+    def update(self, new_value, force: bool=False):
         if new_value is None:
             return
 
@@ -214,7 +214,7 @@ class Button(db.Entity):
 
             return button_data
 
-    def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         # Add extra fields
         data["value"] = self.value
@@ -222,7 +222,7 @@ class Button(db.Entity):
 
         return data
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.hardware} button '{self.name}' at address '{self.address}'"
 
 
@@ -245,7 +245,7 @@ class Enclosure(db.Entity):
     doors = orm.Set(lambda: Button)
     webcams = orm.Set(lambda: Webcam)
 
-    def __rename_image(self):
+    def __rename_image(self) -> None:
         regex = re.compile(f"{self.id}\.(jpg|jpeg|gif|png)$", re.IGNORECASE)
         if "" != self.image and not regex.search(self.image):
             image = Path(self.image)
@@ -253,22 +253,22 @@ class Enclosure(db.Entity):
             image.rename(image_name)
             self.image = str(image_name)
 
-    def delete_image(self):
+    def delete_image(self) -> None:
         image = Path(self.image)
         if image.exists() and image.is_file():
             image.unlink()
 
     # Pony DB Hooks
-    def before_insert(self):
+    def before_insert(self) -> None:
         self.__rename_image()
 
-    def before_update(self):
+    def before_update(self) -> None:
         self.__rename_image()
 
-    def before_delete(self):
+    def before_delete(self) -> None:
         self.delete_image()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Enclosure {self.name} with {len(self.areas)} areas"
 
 
@@ -294,7 +294,7 @@ class NotificationService(db.Entity):
 
     ENCRYPTED_FIELDS = ["username", "password", "user_key", "api_token", "access_secret", "token", "allowed_users"]
 
-    def _encrypt_sensitive_fields(self):
+    def _encrypt_sensitive_fields(self) -> None:
         # Encrypt sensitive fields
         for field in self.ENCRYPTED_FIELDS:
             # Only update when the data was decrypted.
@@ -306,25 +306,25 @@ class NotificationService(db.Entity):
             ):
                 self.setup[field] = terrariumUtils.encrypt(self.setup[field])
 
-    def _decrypt_sensitive_fields(self, data):
+    def _decrypt_sensitive_fields(self, data) -> None:
         # Decrypt sensitive fields
         for field in self.ENCRYPTED_FIELDS:
             if field in data["setup"]:
                 data["setup"][field] = terrariumUtils.decrypt(data["setup"][field])
 
-    def before_insert(self):
+    def before_insert(self) -> None:
         self._encrypt_sensitive_fields()
 
-    def before_update(self):
+    def before_update(self) -> None:
         self._encrypt_sensitive_fields()
 
-    def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         self._decrypt_sensitive_fields(data)
 
         return data
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Notification service {self.type} {self.name}"
 
 
@@ -347,7 +347,7 @@ class Playlist(db.Entity):
     def duration(self):
         return orm.sum(audiofile.duration for audiofile in self.files)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Playlist {self.name} with {len(self.files)} files"
 
 
@@ -398,7 +398,7 @@ class Relay(db.Entity):
         return self.value is not None and self.value > 0
 
     @property
-    def is_off(self):
+    def is_off(self) -> bool:
         return not self.is_on
 
     @property
@@ -423,7 +423,7 @@ class Relay(db.Entity):
     def areas(self):
         return Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + self.id + '%"'))[:]
 
-    def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
 
         # Add extra fields
@@ -434,7 +434,7 @@ class Relay(db.Entity):
 
         return data
 
-    def update(self, new_value, force=False):
+    def update(self, new_value, force: bool=False):
         if new_value is None:
             return None
 
@@ -449,7 +449,7 @@ class Relay(db.Entity):
 
             return relay_data
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.hardware} {self.type} named '{self.name}' at address '{self.address}'"
 
 
@@ -495,7 +495,7 @@ class Sensor(db.Entity):
             return 0.0
 
     @property
-    def alarm(self):
+    def alarm(self) -> bool:
         if self.error:
             return False
 
@@ -521,7 +521,7 @@ class Sensor(db.Entity):
     def areas(self):
         return Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + self.id + '%"'))[:]
 
-    def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         # Add extra fields
         data["value"] = self.value
@@ -577,7 +577,7 @@ class Sensor(db.Entity):
 
         return sensor_data
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.hardware} {self.type} named '{self.name}' at address '{self.address}'"
 
 
@@ -596,7 +596,7 @@ class SensorHistory(db.Entity):
     orm.PrimaryKey(sensor, timestamp)
 
     @property
-    def alarm(self):
+    def alarm(self) -> bool:
         if self.value is None:
             return False
 
@@ -609,23 +609,23 @@ class Setting(db.Entity):
 
     ENCRYPTED_FIELDS = ["weather_source", "meross_cloud_username", "meross_cloud_password", "unsplash_access_key"]
 
-    def _encrypt_sensitive_fields(self):
+    def _encrypt_sensitive_fields(self) -> None:
         # Encrypt sensitive fields
         if "" != self.value and self.id in self.ENCRYPTED_FIELDS and self.value == terrariumUtils.decrypt(self.value):
             self.value = terrariumUtils.encrypt(self.value)
 
-    def _decrypt_sensitive_fields(self, data):
+    def _decrypt_sensitive_fields(self, data) -> None:
         # Decrypt sensitive fields
         if "" != data["value"] and data["id"] in self.ENCRYPTED_FIELDS:
             data["value"] = terrariumUtils.decrypt(data["value"])
 
-    def before_insert(self):
+    def before_insert(self) -> None:
         self._encrypt_sensitive_fields()
 
-    def before_update(self):
+    def before_update(self) -> None:
         self._encrypt_sensitive_fields()
 
-    def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         self._decrypt_sensitive_fields(data)
 
@@ -660,16 +660,16 @@ class Webcam(db.Entity):
         return self.hardware.endswith("-live")
 
     @property
-    def archive_path(self):
+    def archive_path(self) -> str:
         # TODO: Property/setting ??
         return f"webcam/archive/{self.id}"
 
     @property
-    def raw_image(self):
+    def raw_image(self) -> str:
         # TODO: Property/setting ??
         return f"webcam/{self.id}/{self.id}_raw.jpg"
 
-    def to_dict(self, only=None, exclude=None, with_collections=False, with_lazy=False, related_objects=False):
+    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         # Add extra fields
         data["archive_path"] = self.archive_path
@@ -678,5 +678,5 @@ class Webcam(db.Entity):
 
         return data
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.hardware} webcam '{self.name}' at address '{self.address}'"

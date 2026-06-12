@@ -41,7 +41,7 @@ class terrariumHCSR04Sensor(terrariumSensor):
 
         return pi
 
-    def _cbf(self, gpio, level, tick):
+    def _cbf(self, gpio, level, tick) -> None:
         if gpio == self._trig:
             if level == 0:  # trigger sent
                 self._triggered = True
@@ -76,7 +76,7 @@ class terrariumHCSR04Sensor(terrariumSensor):
         else:
             return None
 
-    def stop(self):
+    def stop(self) -> None:
         """
         Cancels the ranger and returns the gpios to their
         original mode.

@@ -16,7 +16,7 @@ class terrariumRelayDimmerBrightPi(terrariumRelayDimmer):
 
         return device
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         leds = brightpi.LED_IR if "ir" == self._address[-1].lower() else brightpi.LED_WHITE
 
         led_status = self.device.get_led_on_off(leds)
@@ -42,7 +42,7 @@ class terrariumRelayDimmerBrightPi(terrariumRelayDimmer):
         avg = statistics.mean([led_status[led - 1] for led in leds]) / self.device._max_dim * 100
         return round(avg)
 
-    def calibrate(self, data):
+    def calibrate(self, data) -> None:
         max_power = int(data.get("dimmer_max_power", -1))
         if 0 <= max_power <= 100:
             self.ON = max_power

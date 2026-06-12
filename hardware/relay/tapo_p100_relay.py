@@ -11,7 +11,7 @@ class terrariumRelayTAPOP100(terrariumRelay):
     NAME = "TAPO P100/5"
 
     # This will update the device based in mac address
-    def load_hardware(self):
+    def load_hardware(self) -> None:
         super().load_hardware()
         # Always overrule the ID generating, as we want to use the MAC as that is unique if the IP address is changing
         data = self.device.getDeviceInfo()
@@ -27,7 +27,7 @@ class terrariumRelayTAPOP100(terrariumRelay):
 
         return device
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         if state == self.ON:
             self.device.turnOn()
         else:

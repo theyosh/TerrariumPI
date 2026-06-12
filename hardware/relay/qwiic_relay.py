@@ -17,7 +17,7 @@ class terrariumRelayQwiic(terrariumRelay):
         device = qwiic_relay.QwiicRelay(address=i2c_address)
         return device
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         relay_number = int(self.address.split(",")[0])
 
         if state == self.ON:

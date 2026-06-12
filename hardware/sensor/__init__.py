@@ -94,7 +94,7 @@ class terrariumSensor(object):
         return list(set(sum([sensor["types"] for sensor in __cls__.available_sensors], [])))
 
     # Return polymorph sensor....
-    def __new__(cls, _, hardware_type, sensor_type, address, name="", unit_value_callback=None, trigger_callback=None):
+    def __new__(cls, _, hardware_type, sensor_type, address, name: str="", unit_value_callback=None, trigger_callback=None):
         known_sensors = terrariumSensor.available_hardware
         try:
             return super(terrariumSensor, cls).__new__(known_sensors[hardware_type])
@@ -108,7 +108,7 @@ class terrariumSensor(object):
                     f"Hardware does not have a {sensor_type} sensor at address {address} with name {name}"
                 )
 
-    def __init__(self, sensor_id, _, sensor_type, address, name="", unit_value_callback=None, trigger_callback=None):
+    def __init__(self, sensor_id, _, sensor_type, address, name: str="", unit_value_callback=None, trigger_callback=None) -> None:
         self._device = {
             "id": None,
             "name": None,
@@ -133,7 +133,7 @@ class terrariumSensor(object):
         self.load_hardware()
         # REMINDER: We do not take a measurement at this point. That is up to the developer to explicit request an update.
 
-    def __power_management(self, on):
+    def __power_management(self, on) -> None:
         # Some kind of 'power management' with the last gpio pin number :) https://raspberrypi.stackexchange.com/questions/68123/preventing-corrosion-on-yl-69
         if self._device["power_mngt"] is not None:
             logger.debug(f"Sensor {self} has power management enabled")
@@ -160,7 +160,7 @@ class terrariumSensor(object):
         return self._device["id"]
 
     @id.setter
-    def id(self, value):
+    def id(self, value) -> None:
         if value is not None:
             self._device["id"] = value.strip()
 
@@ -173,7 +173,7 @@ class terrariumSensor(object):
         return self._device["name"]
 
     @name.setter
-    def name(self, value):
+    def name(self, value) -> None:
         if "" != value.strip():
             self._device["name"] = value.strip()
 
@@ -187,7 +187,7 @@ class terrariumSensor(object):
         return address
 
     @address.setter
-    def address(self, value):
+    def address(self, value) -> None:
         value = terrariumUtils.clean_address(value)
         if value is not None and "" != value:
             self._device["address"] = value
@@ -220,14 +220,14 @@ class terrariumSensor(object):
         return self._device["erratic_errors"]
 
     @erratic.setter
-    def erratic(self, value):
+    def erratic(self, value) -> None:
         self._device["erratic_errors"] = value
 
-    def get_hardware_state(self):
+    def get_hardware_state(self) -> None:
         pass
 
     @retry(terrariumSensorLoadingException, tries=3, delay=0.5, max_delay=2, logger=logger)
-    def load_hardware(self, reload=False):
+    def load_hardware(self, reload: bool=False):
         # Get hardware cache key based on the combination of hardware and address
         hardware_cache_key = md5(f"HW-{self.HARDWARE}-{self.address}".encode()).hexdigest()
         # Load hardware device from cache
@@ -279,7 +279,7 @@ class terrariumSensor(object):
 
         return data
 
-    def update(self, force=False):
+    def update(self, force: bool=False):
         if self._device["device"] is None:
             raise terrariumSensorLoadingException(f"Sensor {self} is not loaded! Can not update!")
 
@@ -306,10 +306,10 @@ class terrariumSensor(object):
             self._device["value"] = current
             return current
 
-    def stop(self):
+    def stop(self) -> None:
         pass
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.NAME} {self.type} named '{self.name}' at address '{self.address}'"
 
     # Auto discovery of known and connected sensors
@@ -378,7 +378,7 @@ class terrariumI2CSensorMixin:
     HUMIDITY_TRIGGER_NO_HOLD = 0xF5
     HUMIDITY_WAIT_TIME = 0.1
 
-    def __soft_reset(self, i2c_bus):
+    def __soft_reset(self, i2c_bus) -> None:
         i2c_bus.write_byte(self.device[0], self.SOFTRESET)
         sleep(self.SOFTRESET_TIMEOUT)
 
@@ -420,7 +420,7 @@ class terrariumI2CSensorMixin:
 
 
 class TCA9548A(object):
-    def __init__(self, address, bus=1):
+    def __init__(self, address, bus: int=1) -> None:
         """Init smbus channel and tca driver on specified address."""
         try:
             self.PORTS_COUNT = 8  # number of switches
@@ -455,7 +455,7 @@ class TCA9548A(object):
         value = (register >> ch_num) & 1
         return value
 
-    def set_control_register(self, value):
+    def set_control_register(self, value) -> bool:
         """Write value (length: 1 byte) to control register."""
         try:
             if value < 0 or value > 255:
@@ -481,7 +481,7 @@ class TCA9548A(object):
         return_value = self.set_control_register(new_value)
         return return_value
 
-    def __del__(self):
+    def __del__(self) -> None:
         """Driver destructor."""
         self.i2c_bus = None
 

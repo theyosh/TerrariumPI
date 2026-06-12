@@ -23,5 +23,5 @@ class terrariumYTXXSensorDigital(terrariumSensor):
         data["moisture"] = 0 if not self.device.is_pressed else 100
         return data
 
-    def stop(self):
+    def stop(self) -> None:
         super().stop()

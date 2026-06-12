@@ -41,7 +41,7 @@ from terrariumAPI import terrariumAPI
 
 
 class terrariumWebserver(object):
-    def __init__(self, terrariumEngine):
+    def __init__(self, terrariumEngine) -> None:
         # Define caching timeouts per url/path
         self.__caching_timeouts = [
             {"path": re.compile(r"^/webcam/.*\.m3u8$", re.I), "timeout": 2},  #  2 Seconds
@@ -70,7 +70,7 @@ class terrariumWebserver(object):
         self.__routes()
 
     # Custom HTTP authentication routine. This way there is an option to optional secure the hole web interface
-    def __auth_basic(self, check, required, realm="private", text="Access denied"):
+    def __auth_basic(self, check, required: bool, realm: str="private", text: str="Access denied"):
         """Callback decorator to require HTTP auth (basic).
         TODO: Add route(check_auth=...) parameter."""
 
@@ -124,10 +124,10 @@ class terrariumWebserver(object):
 
         return decorator
 
-    def __clear_authentication(self, user, password):
+    def __clear_authentication(self, user, password: str) -> bool:
         return True
 
-    def __add_caching_headers(self, response, fullpath):
+    def __add_caching_headers(self, response, fullpath) -> None:
         if 200 == response.status_code:
             # Add the caching headers
             for caching in self.__caching_timeouts:
@@ -191,7 +191,7 @@ class terrariumWebserver(object):
 
         return variables
 
-    def authenticate(self, required=False):
+    def authenticate(self, required: bool=False):
         return self.__auth_basic(
             self.engine.authenticate,
             required,
@@ -199,7 +199,7 @@ class terrariumWebserver(object):
             _("Authenticate to make any changes"),
         )
 
-    def render_page(self, page="index"):
+    def render_page(self, page: str="index"):
         page_name = None
         if page.endswith("_sensors"):
             page_name = page
@@ -244,10 +244,10 @@ class terrariumWebserver(object):
 
         return {}
 
-    def _static_file_gui(self, filename, root=""):
+    def _static_file_gui(self, filename, root: str=""):
         return self._static_file(filename, f"public/{root}")
 
-    def _static_file(self, filename, root=""):
+    def _static_file(self, filename, root: str=""):
         # Backwards compatibility for '/static/' folder
         if root == "static":
             filename = filename.split("/")
@@ -272,7 +272,7 @@ class terrariumWebserver(object):
 
         return staticfile
 
-    def __file_upload(self, root="media"):
+    def __file_upload(self, root: str="media"):
         try:
             upload_file = request.files.get("file", None)
             if upload_file is not None:
@@ -288,7 +288,7 @@ class terrariumWebserver(object):
         except Exception as ex:
             raise HTTPError(status=500, body=f"Error uploading file. {ex}")
 
-    def __routes(self):
+    def __routes(self) -> None:
         # Add a 404 page...
         @self.bottle.error(400)
         @self.bottle.error(404)
@@ -354,7 +354,7 @@ class terrariumWebserver(object):
             name="file_upload",
         )
 
-    def url_for(self, name, **kwargs):
+    def url_for(self, name: str, **kwargs):
         # First check the webserver for named routes
         try:
             url = self.bottle.get_url(name, **kwargs)
@@ -379,10 +379,10 @@ class terrariumWebserver(object):
 
         redirect(self.url_for("home"))
 
-    def websocket_message(self, message_type, message_data):
+    def websocket_message(self, message_type, message_data) -> None:
         self.websocket.send_message({"type": message_type, "data": message_data})
 
-    def start(self):
+    def start(self) -> None:
         # Start the webserver
         logger.info(f'Running webserver at {self.engine.settings["host"]}:{self.engine.settings["port"]}')
         print(
@@ -402,7 +402,7 @@ class terrariumWebserver(object):
 
 
 class terrariumWebsocket(object):
-    def __init__(self, terrariumWebserver):
+    def __init__(self, terrariumWebserver) -> None:
         self.webserver = terrariumWebserver
         self.clients = []
 
@@ -426,8 +426,8 @@ class terrariumWebsocket(object):
 
         return authenticated
 
-    def connect(self, socket):
-        def listen_for_messages(connection):
+    def connect(self, socket) -> None:
+        def listen_for_messages(connection) -> None:
             try:
                 self.clients.remove(connection)
             except Exception as ex:
@@ -525,7 +525,7 @@ class terrariumWebsocket(object):
                         avg_data["id"] = sensor_type
                         self.send_message({"type": "sensor", "data": avg_data}, connection)
 
-    def send_message(self, message, connection=None):
+    def send_message(self, message, connection=None) -> None:
         # Get all the connected websockets (get a copy of the list, as we could delete entries and change the list length during the loop)
         clients = self.clients
         # Loop over all the clients
@@ -548,5 +548,5 @@ class terrariumWebsocket(object):
 
         logger.debug(f"Websocket message {message} is send to {len(self.clients)} clients")
 
-    def stop(self):
+    def stop(self) -> None:
         self.send_message({"type": "shutdown", "data": True})

@@ -30,7 +30,7 @@ class terrariumRelayDimmerPCA9685(terrariumRelayDimmer):
 
         return self._device["device"]
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         dim_value = max(
             0,
             min(
@@ -47,7 +47,7 @@ class terrariumRelayDimmerPCA9685(terrariumRelayDimmer):
             max(0.0, min(100.0, (float(pwm_value / self._DIMMER_MAXDIM) * 100.0) - float(self._dimmer_offset)))
         )
 
-    def calibrate(self, data):
+    def calibrate(self, data) -> None:
         super().calibrate(data)
         frequency = data.get("dimmer_frequency", self._DIMMER_FREQ)
         if frequency is not None and "" != frequency and frequency > 0:

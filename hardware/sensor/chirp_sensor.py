@@ -35,7 +35,7 @@ class terrariumChirpSensor(terrariumI2CSensor):
         except Exception:
             return self.__MAX_MOIST
 
-    def calibrate(self, calibration_data):
+    def calibrate(self, calibration_data) -> None:
         self.__calibration = {
             "min_moist": calibration_data["chirp_min_moist"],
             "max_moist": calibration_data["chirp_max_moist"],

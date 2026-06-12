@@ -24,7 +24,7 @@ class terrariumSHT2XSensor(terrariumI2CSensor):
     # 黑 = Black  = GND
     # 棕 = Brown  = VCC
 
-    def _load_hardware(self):
+    def _load_hardware(self) -> str:
         address = self._address
 
         return f"/dev/i2c-{address[1]}"

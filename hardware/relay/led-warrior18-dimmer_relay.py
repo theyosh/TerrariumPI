@@ -31,7 +31,7 @@ class terrariumRelayDimmerLEDWarrior18(terrariumRelayDimmer):
         return pwm
 
     # Write 16Bit values to LW18
-    def WritePwm16(self, v1, v2):
+    def WritePwm16(self, v1, v2) -> int:
         v1 = v1 & 0xFFFF  # 0...65535 allowed
         v2 = v2 & 0xFFFF  # 0...65535 allowed
 
@@ -47,7 +47,7 @@ class terrariumRelayDimmerLEDWarrior18(terrariumRelayDimmer):
 
         return 0
 
-    def WriteFrequency(self, v1, v2):
+    def WriteFrequency(self, v1, v2) -> int:
         v1 = v1 & 0xFFFF  # 0...65535 allowed
         v2 = v2 & 0xFFFF  # 0...65535 allowed
 
@@ -67,7 +67,7 @@ class terrariumRelayDimmerLEDWarrior18(terrariumRelayDimmer):
     def __relay_nr(self):
         return self.device[0] - 1
 
-    def calibrate(self, data):
+    def calibrate(self, data) -> None:
         super().calibrate(data)
 
         frequencies = self.device[3].get_data(self.device[4], [self._DIMMER_FREQ, self._DIMMER_FREQ])
@@ -106,7 +106,7 @@ class terrariumRelayDimmerLEDWarrior18(terrariumRelayDimmer):
 
         return address
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         pwm = self.ReadPwm16()
         pwm[self.__relay_nr] = int((float(state) / 100.0) * float(self._DIMMER_DIM))
 

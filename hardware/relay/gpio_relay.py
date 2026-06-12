@@ -34,7 +34,7 @@ class terrariumRelayGPIO(terrariumRelay):
                 terrariumUtils.to_BCM_port_number(self._address[0]), active_high=not self.INVERSE, initial_value=None
             )
 
-    def _set_hardware_value(self, state):
+    def _set_hardware_value(self, state) -> bool:
         if isinstance(self.device, terrariumIOExpander):
             if self.INVERSE:
                 state = self.ON if state == self.OFF else self.OFF
@@ -71,11 +71,11 @@ class terrariumRelayGPIO(terrariumRelay):
 
         return state
 
-    def calibrate(self, data):
+    def calibrate(self, data) -> None:
         self.calibration = data
         self.INVERSE = terrariumUtils.is_true(self.calibration.get("inverse", False))
 
-    def stop(self):
+    def stop(self) -> None:
         # TODO: This will toggle down the relay while restarting TP. Not sure if we want to change that and keep relay on while restarting
         self.device.close()
         super().stop()
