@@ -70,7 +70,7 @@ class terrariumWebserver(object):
         self.__routes()
 
     # Custom HTTP authentication routine. This way there is an option to optional secure the hole web interface
-    def __auth_basic(self, check, required: bool, realm: str="private", text: str="Access denied"):
+    def __auth_basic(self, check, required: bool, realm: str = "private", text: str = "Access denied"):
         """Callback decorator to require HTTP auth (basic).
         TODO: Add route(check_auth=...) parameter."""
 
@@ -191,7 +191,7 @@ class terrariumWebserver(object):
 
         return variables
 
-    def authenticate(self, required: bool=False):
+    def authenticate(self, required: bool = False):
         return self.__auth_basic(
             self.engine.authenticate,
             required,
@@ -199,7 +199,7 @@ class terrariumWebserver(object):
             _("Authenticate to make any changes"),
         )
 
-    def render_page(self, page: str="index"):
+    def render_page(self, page: str = "index"):
         page_name = None
         if page.endswith("_sensors"):
             page_name = page
@@ -244,10 +244,10 @@ class terrariumWebserver(object):
 
         return {}
 
-    def _static_file_gui(self, filename, root: str=""):
+    def _static_file_gui(self, filename, root: str = ""):
         return self._static_file(filename, f"public/{root}")
 
-    def _static_file(self, filename, root: str=""):
+    def _static_file(self, filename, root: str = ""):
         # Backwards compatibility for '/static/' folder
         if root == "static":
             filename = filename.split("/")
@@ -272,7 +272,7 @@ class terrariumWebserver(object):
 
         return staticfile
 
-    def __file_upload(self, root: str="media"):
+    def __file_upload(self, root: str = "media"):
         try:
             upload_file = request.files.get("file", None)
             if upload_file is not None:

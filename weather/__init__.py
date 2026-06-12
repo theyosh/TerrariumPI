@@ -157,7 +157,7 @@ class terrariumWeather(object):
             if today_index in self._device["forecast"]:
                 return self._device["forecast"][today_index]
 
-    def __get_current_sunrise_sunset(self, next: bool=False):
+    def __get_current_sunrise_sunset(self, next: bool = False):
         today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
         for _ in range(48):
             today_index = today.isoformat()
@@ -271,7 +271,7 @@ class terrariumWeather(object):
         return self.__get_current()
 
     @property
-    def short_forecast(self, days: int=6):
+    def short_forecast(self, days: int = 6):
         days = max(min(days, 14), 1)
         today = datetime.now().replace(hour=12, minute=0, second=0, microsecond=0)
         for _ in range(days):

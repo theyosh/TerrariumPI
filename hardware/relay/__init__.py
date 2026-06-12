@@ -55,14 +55,14 @@ class terrariumRelay(object):
         ]
 
     # Return polymorph relay....
-    def __new__(cls, _, hardware_type, address, name: str="", calibration={}, prev_state=None, callback=None):
+    def __new__(cls, _, hardware_type, address, name: str = "", calibration={}, prev_state=None, callback=None):
         known_relays = terrariumRelay.available_hardware
         try:
             return super(terrariumRelay, cls).__new__(known_relays[hardware_type])
         except:
             raise terrariumRelayException(f"Relay of hardware type {hardware_type} is unknown.")
 
-    def __init__(self, device_id, _, address, name: str="", calibration={}, prev_state=None, callback=None) -> None:
+    def __init__(self, device_id, _, address, name: str = "", calibration={}, prev_state=None, callback=None) -> None:
         self._device = {
             "device": None,
             "address": None,
@@ -192,7 +192,7 @@ class terrariumRelay(object):
     def state(self):
         return self._device["value"]
 
-    def set_state(self, new_state, force: bool=False, no_callback: bool=False):
+    def set_state(self, new_state, force: bool = False, no_callback: bool = False):
         if new_state is None or not (self.OFF <= new_state <= self.ON):
             logger.error(f"Illegal value for relay {self}: {new_state}")
             return False
@@ -223,7 +223,7 @@ class terrariumRelay(object):
 
         return changed
 
-    def update(self, force: bool=False):
+    def update(self, force: bool = False):
         new_data = None
         try:
             new_data = self.__get_hardware_value()
@@ -233,7 +233,7 @@ class terrariumRelay(object):
         self._device["value"] = new_data
         return self._device["value"]
 
-    def on(self, value: int=100, delay: float=0.0):
+    def on(self, value: int = 100, delay: float = 0.0):
         if self._timer is not None and self._timer.is_alive():
             return False
 
@@ -249,7 +249,7 @@ class terrariumRelay(object):
         # Not great, but the set_state has a callback for updates
         return changed
 
-    def off(self, value: int=0, delay: float=0.0):
+    def off(self, value: int = 0, delay: float = 0.0):
         return self.on(value, delay)
 
     def is_on(self):
@@ -298,7 +298,7 @@ class terrariumRelayDimmer(terrariumRelay):
     TYPE = None
     _DIMMER_MAXDIM = None
 
-    def __init__(self, relay_id, _, address, name: str="", calibration={}, prev_state=None, callback=None) -> None:
+    def __init__(self, relay_id, _, address, name: str = "", calibration={}, prev_state=None, callback=None) -> None:
         self._dimmer_offset = 0
         self._dimmer_state = 0
         self._legacy = False
@@ -357,7 +357,7 @@ class terrariumRelayDimmer(terrariumRelay):
                 # Current power is higher then the new limit. So lower down the power now!
                 self.on(self.ON, 0)
 
-    def on(self, value: int=100, duration: float=0.0, delay: float=0.0):
+    def on(self, value: int = 100, duration: float = 0.0, delay: float = 0.0):
         if self._timer is not None and self._timer.is_alive():
             return False
 
@@ -386,7 +386,7 @@ class terrariumRelayDimmer(terrariumRelay):
 
         return changed
 
-    def off(self, value: int=0, duration: float=0.0, delay: float=0.0):
+    def off(self, value: int = 0, duration: float = 0.0, delay: float = 0.0):
         return self.on(value, duration, delay)
 
     def is_on(self):

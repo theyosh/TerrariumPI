@@ -85,14 +85,34 @@ class terrariumWebcam(object):
         ]
 
     # Return polymorph webcam....
-    def __new__(cls, _, hardware_type, address, name: str="", rotation: str="0", width: int=640, height: int=480, wb: str="auto"):
+    def __new__(
+        cls,
+        _,
+        hardware_type,
+        address,
+        name: str = "",
+        rotation: str = "0",
+        width: int = 640,
+        height: int = 480,
+        wb: str = "auto",
+    ):
         try:
             known_webcams = terrariumWebcam.available_hardware
             return super(terrariumWebcam, cls).__new__(known_webcams[hardware_type])
         except:
             raise terrariumWebcamException(f"Webcam of hardware type {hardware_type} is unknown.")
 
-    def __init__(self, device_id, _, address, name: str="", width: int=640, height: int=480, rotation: str="0", awb: str="auto") -> None:
+    def __init__(
+        self,
+        device_id,
+        _,
+        address,
+        name: str = "",
+        width: int = 640,
+        height: int = 480,
+        rotation: str = "0",
+        awb: str = "auto",
+    ) -> None:
         """Create a new Webcam instance based on type"""
 
         self._device = {
@@ -583,7 +603,13 @@ class terrariumWebcam(object):
 
         return True
 
-    def motion_capture(self, motion_frame: str="last", motion_threshold: int=25, motion_area: int=500, motion_boxes: str="green"):
+    def motion_capture(
+        self,
+        motion_frame: str = "last",
+        motion_threshold: int = 25,
+        motion_area: int = 500,
+        motion_boxes: str = "green",
+    ):
         if not self.state:
             return False
 
@@ -667,7 +693,7 @@ class terrariumWebcam(object):
 
         return motion_detected
 
-    def clear_archive(self, period: int=365) -> None:
+    def clear_archive(self, period: int = 365) -> None:
         if period <= 0:
             return
 

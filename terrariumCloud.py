@@ -51,7 +51,7 @@ class TerrariumMerossCloud(terrariumSingleton):
 
         self.start()
 
-    def start(self, reconnecting: bool=False) -> None:
+    def start(self, reconnecting: bool = False) -> None:
         def _run() -> None:
             try:
                 self.__asyncio.run(self._main_process())

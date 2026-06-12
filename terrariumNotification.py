@@ -225,7 +225,7 @@ class terrariumNotification(terrariumSingleton):
         self.services = {}
         self.engine = engine
 
-    def __rate_limit(self, title, rate: Optional[float]=None) -> bool:
+    def __rate_limit(self, title, rate: Optional[float] = None) -> bool:
         # https://en.wikipedia.org/wiki/Token_bucket / https://stackoverflow.com/a/668327
         # First the overall max rate limit
 
@@ -447,7 +447,7 @@ class terrariumNotificationService(object):
         return sorted(data, key=itemgetter("name"))
 
     # Return polymorph service....
-    def __new__(cls, _, service_type, name: str="", enabled: bool=True, setup=None):
+    def __new__(cls, _, service_type, name: str = "", enabled: bool = True, setup=None):
         if service_type not in [service["type"] for service in terrariumNotificationService.available_services]:
             raise terrariumNotificationServiceException(f"Service of type {service_type} is unknown.")
 

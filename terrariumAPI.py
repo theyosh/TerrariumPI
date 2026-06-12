@@ -65,7 +65,7 @@ class terrariumAPI(object):
         self.webserver = webserver
 
     # Always (force = True) enable authentication on the API
-    def authentication(self, force: bool=True):
+    def authentication(self, force: bool = True):
         return self.webserver.authenticate(force)
 
     def routes(self, bottle_app) -> None:
@@ -863,7 +863,7 @@ class terrariumAPI(object):
         return {"data": terrariumButton.available_buttons}
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
-    def button_history(self, button, action: str="history", period: str="day"):
+    def button_history(self, button, action: str = "history", period: str = "day"):
         try:
             button = Button[button]
             if "hour" == period:
@@ -1393,7 +1393,7 @@ class terrariumAPI(object):
 
     # Relays
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
-    def relay_action(self, relay, action: str="toggle"):
+    def relay_action(self, relay, action: str = "toggle"):
         try:
             relay = Relay[relay]
             self.webserver.engine.toggle_relay(relay, action)
@@ -1433,7 +1433,7 @@ class terrariumAPI(object):
             raise HTTPError(status=500, body=f"Error updating manual mode on relay {relay} detail. {ex}")
 
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
-    def relay_history(self, relay, action: str="history", period: str="day"):
+    def relay_history(self, relay, action: str = "history", period: str = "day"):
         try:
             relay = Relay[relay]
             if "hour" == period:
@@ -1562,7 +1562,7 @@ class terrariumAPI(object):
 
     # Sensors
     @orm.db_session(sql_debug=DEBUG, show_values=DEBUG)
-    def sensor_history(self, filter=None, action: str="history", period: str="day"):
+    def sensor_history(self, filter=None, action: str = "history", period: str = "day"):
         if "hour" == period:
             period = 1 / 24
         elif "day" == period:
