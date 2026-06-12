@@ -86,7 +86,7 @@ class terrariumEnclosure(object):
 
         return True
 
-    def update(self, read_only: bool=False):
+    def update(self, read_only: bool = False):
         area_states = {}
 
         # Construct a list in the order of:

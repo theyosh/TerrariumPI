@@ -16,7 +16,7 @@ class AM2320:
     I2C_ADDR = 0x5C
     I2C_SLAVE = 0x0703
 
-    def __init__(self, i2cbus: int=1, address=I2C_ADDR) -> None:
+    def __init__(self, i2cbus: int = 1, address=I2C_ADDR) -> None:
         self._i2cbus = i2cbus
         self._address = address
 

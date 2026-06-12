@@ -148,7 +148,14 @@ class Area(db.Entity):
 
     state = orm.Optional(orm.Json)
 
-    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
+    def to_dict(
+        self,
+        only=None,
+        exclude=None,
+        with_collections: bool = False,
+        with_lazy: bool = False,
+        related_objects: bool = False,
+    ):
         return copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
 
     def __repr__(self) -> str:
@@ -205,7 +212,7 @@ class Button(db.Entity):
     def error(self):
         return True if self.value is None else False
 
-    def update(self, new_value, force: bool=False):
+    def update(self, new_value, force: bool = False):
         if new_value is None:
             return
 
@@ -214,7 +221,14 @@ class Button(db.Entity):
 
             return button_data
 
-    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
+    def to_dict(
+        self,
+        only=None,
+        exclude=None,
+        with_collections: bool = False,
+        with_lazy: bool = False,
+        related_objects: bool = False,
+    ):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         # Add extra fields
         data["value"] = self.value
@@ -318,7 +332,14 @@ class NotificationService(db.Entity):
     def before_update(self) -> None:
         self._encrypt_sensitive_fields()
 
-    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
+    def to_dict(
+        self,
+        only=None,
+        exclude=None,
+        with_collections: bool = False,
+        with_lazy: bool = False,
+        related_objects: bool = False,
+    ):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         self._decrypt_sensitive_fields(data)
 
@@ -423,7 +444,14 @@ class Relay(db.Entity):
     def areas(self):
         return Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + self.id + '%"'))[:]
 
-    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
+    def to_dict(
+        self,
+        only=None,
+        exclude=None,
+        with_collections: bool = False,
+        with_lazy: bool = False,
+        related_objects: bool = False,
+    ):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
 
         # Add extra fields
@@ -434,7 +462,7 @@ class Relay(db.Entity):
 
         return data
 
-    def update(self, new_value, force: bool=False):
+    def update(self, new_value, force: bool = False):
         if new_value is None:
             return None
 
@@ -521,7 +549,14 @@ class Sensor(db.Entity):
     def areas(self):
         return Area.select(lambda a: orm.raw_sql('"a"."setup" LIKE "%' + self.id + '%"'))[:]
 
-    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
+    def to_dict(
+        self,
+        only=None,
+        exclude=None,
+        with_collections: bool = False,
+        with_lazy: bool = False,
+        related_objects: bool = False,
+    ):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         # Add extra fields
         data["value"] = self.value
@@ -625,7 +660,14 @@ class Setting(db.Entity):
     def before_update(self) -> None:
         self._encrypt_sensitive_fields()
 
-    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
+    def to_dict(
+        self,
+        only=None,
+        exclude=None,
+        with_collections: bool = False,
+        with_lazy: bool = False,
+        related_objects: bool = False,
+    ):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         self._decrypt_sensitive_fields(data)
 
@@ -669,7 +711,14 @@ class Webcam(db.Entity):
         # TODO: Property/setting ??
         return f"webcam/{self.id}/{self.id}_raw.jpg"
 
-    def to_dict(self, only=None, exclude=None, with_collections: bool=False, with_lazy: bool=False, related_objects: bool=False):
+    def to_dict(
+        self,
+        only=None,
+        exclude=None,
+        with_collections: bool = False,
+        with_lazy: bool = False,
+        related_objects: bool = False,
+    ):
         data = copy.deepcopy(super().to_dict(only, exclude, with_collections, with_lazy, related_objects))
         # Add extra fields
         data["archive_path"] = self.archive_path

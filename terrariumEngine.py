@@ -973,7 +973,7 @@ class terrariumEngine(object):
 
         self.send_websocket_totals(force_totals)
 
-    def toggle_relay(self, relay, action: str="toggle", duration: int=0):
+    def toggle_relay(self, relay, action: str = "toggle", duration: int = 0):
         ok = False
 
         # Convert the action to an int value
@@ -1291,7 +1291,7 @@ class terrariumEngine(object):
                 new_enclosure.update()
                 enclosureLogger.info(f"Loaded {enclosure} in {time.time()-start:.2f} seconds.")
 
-    def _update_enclosures(self, read_only: bool=False, ids=None) -> None:
+    def _update_enclosures(self, read_only: bool = False, ids=None) -> None:
         with orm.db_session():
             for enclosure in Enclosure.select():
                 if (
@@ -1854,7 +1854,7 @@ class terrariumEngine(object):
 
     # End Calendar part
 
-    def get_audio_playing(self, socket: bool=False):
+    def get_audio_playing(self, socket: bool = False):
         data = self.__audio_player.get_current_state()
 
         if socket:
@@ -1865,7 +1865,7 @@ class terrariumEngine(object):
     # End audio part
 
     # Environment part
-    def get_environment(self, parameters=[], socket: bool=False):
+    def get_environment(self, parameters=[], socket: bool = False):
         filter = None
         if len(parameters) > 0 and parameters[0] is not None:
             filter = parameters[0]
@@ -1913,7 +1913,7 @@ class terrariumEngine(object):
             password, self.settings.get("password", None)
         )
 
-    def send_websocket_totals(self, force: bool=False, background: bool=False) -> None:
+    def send_websocket_totals(self, force: bool = False, background: bool = False) -> None:
         if not background:
             threading.Thread(target=self.send_websocket_totals, args=(force, True)).start()
         else:
@@ -1947,7 +1947,7 @@ class terrariumEngine(object):
         logger.debug("Loaded system stats {} seconds.".format(time.time() - start))
         return data
 
-    def get_power_usage_water_flow(self, force: bool=False, totals: bool=True):
+    def get_power_usage_water_flow(self, force: bool = False, totals: bool = True):
         data = {
             "power": {
                 "current": float(self.settings["pi_wattage"]),
@@ -1985,7 +1985,7 @@ class terrariumEngine(object):
 
         return data
 
-    def total_power_and_water_usage(self, force: bool=False, background: bool=False, thread_return=None):
+    def total_power_and_water_usage(self, force: bool = False, background: bool = False, thread_return=None):
         cacheKey = "total_power_water"
         totals = self.__engine["cache"].get_data(cacheKey, max_age=60 if force else None)
 

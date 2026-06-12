@@ -62,7 +62,7 @@ class terrariumArea(object):
         ]
 
     # Return polymorph area....
-    def __new__(cls, area_id, enclosure, area_type, name: str="", mode=None, setup=None):
+    def __new__(cls, area_id, enclosure, area_type, name: str = "", mode=None, setup=None):
         try:
             return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[area_type]["class"]())
         except:
@@ -106,7 +106,7 @@ class terrariumArea(object):
         return powered
 
     def _time_table(self) -> bool:
-        def make_time_table(begin, end, on_period: int=0, off_period: int=0):
+        def make_time_table(begin, end, on_period: int = 0, off_period: int = 0):
             logger.debug(
                 f"Make new time table for {self}. Begin: {begin}, End: {end}, On: {on_period}, Off: {off_period}"
             )
@@ -681,7 +681,7 @@ class terrariumArea(object):
     def get_setup_setting(self, setting):
         return self.setup.get(setting, None)
 
-    def update(self, read_only: bool=False):
+    def update(self, read_only: bool = False):
         if self.mode == "disabled":
             # Make it readonly, so sensors and relay changes are still shown
             read_only = True
@@ -956,7 +956,7 @@ class terrariumArea(object):
 
         return sensor_values
 
-    def relays_state(self, part, state: bool=True):
+    def relays_state(self, part, state: bool = True):
         old_state = self.state[part].get("powered", None)
 
         relay_states = []
@@ -1159,7 +1159,7 @@ class terrariumAreaLights(terrariumArea):
 
         self.state["powered"] = self._powered
 
-    def update(self, read_only: bool=False):
+    def update(self, read_only: bool = False):
         super().update(read_only)
 
         if read_only or self.mode == "disabled":
@@ -1317,7 +1317,7 @@ class terrariumAreaHeater(terrariumArea):
 
         self.state["powered"] = self._powered
 
-    def update(self, read_only: bool=False):
+    def update(self, read_only: bool = False):
         super().update(read_only)
 
         if not read_only and self.mode != "disabled" and len(self.__dimmers) > 0:
@@ -1492,7 +1492,7 @@ class terrariumAreaAudio(terrariumArea):
 
             self.setup[period]["player"] = terrariumAudioPlayer(self.setup["soundcard"], playlists)
 
-    def relays_state(self, period, state: bool=True):
+    def relays_state(self, period, state: bool = True):
         # We do not check if the player is actual running. This will cause an unwanted repeat functionality
         return period in self.state and self.state[period].get("powered", False)
 

@@ -47,7 +47,7 @@ CCS811_fr = 0
 
 
 class CCS811_RPi:
-    def __init__(self, twi: int=1, addr=CCS811_ADDRESS) -> None:
+    def __init__(self, twi: int = 1, addr=CCS811_ADDRESS) -> None:
         global CCS811_fr, CCS811_fw
 
         CCS811_fr = io.open("/dev/i2c-" + str(twi), "rb", buffering=0)
@@ -259,7 +259,7 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
         except Exception as ex:
             raise terrariumSensorUpdateException(ex)
 
-    def calibrate(self, temperature: int=20, humidity: int=50) -> None:
+    def calibrate(self, temperature: int = 20, humidity: int = 50) -> None:
         self.__calibration = {
             "temperature": temperature,
             "humidity": humidity,

@@ -55,14 +55,14 @@ class terrariumButton(object):
         ]
 
     # Return polymorph relay....
-    def __new__(cls, _, hardware_type, address, name: str="", callback=None):
+    def __new__(cls, _, hardware_type, address, name: str = "", callback=None):
         try:
             known_buttons = terrariumButton.available_hardware
             return super(terrariumButton, cls).__new__(known_buttons[hardware_type])
         except:
             raise terrariumButtonException(f"Button of hardware type {hardware_type} is unknown.")
 
-    def __init__(self, button_id, _, address, name: str="", callback=None) -> None:
+    def __init__(self, button_id, _, address, name: str = "", callback=None) -> None:
         "Create a new button based on type"
 
         self._device = {"device": None, "id": None, "address": None, "name": None, "state": None}

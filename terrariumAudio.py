@@ -68,7 +68,7 @@ class terrariumAudio(object):
 class terrariumAudioPlayer(object):
     CMD = "/usr/bin/ffmpeg"
 
-    def __init__(self, hw, playlists=[], shuffle: bool=False, repeat: bool=False) -> None:
+    def __init__(self, hw, playlists=[], shuffle: bool = False, repeat: bool = False) -> None:
         self.__hw = hw
         self.__stop = 0
         self.__player = {"ffmpeg": None, "thread": None, "exit_status": None}

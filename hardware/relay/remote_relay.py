@@ -13,7 +13,7 @@ class terrariumRelayRemote(terrariumRelay):
         raise terrariumRelayLoadingException(f"Invalid url for relay {self}")
 
     # Overrule the main set_hardware_state function, as this is not yet possible (maybe a post action)
-    def set_hardware_state(self, state, force: bool=False) -> None:
+    def set_hardware_state(self, state, force: bool = False) -> None:
         pass
 
     def _get_hardware_value(self):
@@ -36,7 +36,7 @@ class terrariumRelayDimmerRemote(terrariumRelayDimmer):
         raise terrariumRelayLoadingException(f"Invalid url for relay {self}")
 
     # Overrule the main set_hardware_state function, as this is not yet possible (maybe a post action)
-    def set_hardware_state(self, state, force: bool=False) -> None:
+    def set_hardware_state(self, state, force: bool = False) -> None:
         pass
 
     def _get_hardware_value(self):

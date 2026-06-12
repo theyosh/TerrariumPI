@@ -63,7 +63,7 @@ class terrariumDisplay(object):
         ]
 
     # Return polymorph relay....
-    def __new__(cls, device_id, hardware_type, address, title=None, horizontal_scroll: bool=False):
+    def __new__(cls, device_id, hardware_type, address, title=None, horizontal_scroll: bool = False):
         known_displays = terrariumDisplay.available_hardware
         try:
             return super(terrariumDisplay, cls).__new__(known_displays[hardware_type])
@@ -72,7 +72,7 @@ class terrariumDisplay(object):
                 f"Error loading display device {hardware_type} at address {address}: {ex}"
             )
 
-    def __init__(self, device_id, _, address, title=None, horizontal_scroll: bool=False) -> None:
+    def __init__(self, device_id, _, address, title=None, horizontal_scroll: bool = False) -> None:
         self._device = {
             "device": None,
             "address": None,
@@ -211,7 +211,7 @@ class terrariumDisplay(object):
                 line, line_nr + title_offset, self.mode != self.__MODE_TEXT_WRAP and line_nr == len(lines) - 1
             )
 
-    def write_line(self, line, line_nr: int=0, scroll: bool=False) -> None:
+    def write_line(self, line, line_nr: int = 0, scroll: bool = False) -> None:
         line_nr += 1
         max_chars = int(float(self.WIDTH) / float(self.FONT_WIDTH))
 

@@ -94,7 +94,9 @@ class terrariumSensor(object):
         return list(set(sum([sensor["types"] for sensor in __cls__.available_sensors], [])))
 
     # Return polymorph sensor....
-    def __new__(cls, _, hardware_type, sensor_type, address, name: str="", unit_value_callback=None, trigger_callback=None):
+    def __new__(
+        cls, _, hardware_type, sensor_type, address, name: str = "", unit_value_callback=None, trigger_callback=None
+    ):
         known_sensors = terrariumSensor.available_hardware
         try:
             return super(terrariumSensor, cls).__new__(known_sensors[hardware_type])
@@ -108,7 +110,9 @@ class terrariumSensor(object):
                     f"Hardware does not have a {sensor_type} sensor at address {address} with name {name}"
                 )
 
-    def __init__(self, sensor_id, _, sensor_type, address, name: str="", unit_value_callback=None, trigger_callback=None) -> None:
+    def __init__(
+        self, sensor_id, _, sensor_type, address, name: str = "", unit_value_callback=None, trigger_callback=None
+    ) -> None:
         self._device = {
             "id": None,
             "name": None,
@@ -227,7 +231,7 @@ class terrariumSensor(object):
         pass
 
     @retry(terrariumSensorLoadingException, tries=3, delay=0.5, max_delay=2, logger=logger)
-    def load_hardware(self, reload: bool=False):
+    def load_hardware(self, reload: bool = False):
         # Get hardware cache key based on the combination of hardware and address
         hardware_cache_key = md5(f"HW-{self.HARDWARE}-{self.address}".encode()).hexdigest()
         # Load hardware device from cache
@@ -279,7 +283,7 @@ class terrariumSensor(object):
 
         return data
 
-    def update(self, force: bool=False):
+    def update(self, force: bool = False):
         if self._device["device"] is None:
             raise terrariumSensorLoadingException(f"Sensor {self} is not loaded! Can not update!")
 
@@ -420,7 +424,7 @@ class terrariumI2CSensorMixin:
 
 
 class TCA9548A(object):
-    def __init__(self, address, bus: int=1) -> None:
+    def __init__(self, address, bus: int = 1) -> None:
         """Init smbus channel and tca driver on specified address."""
         try:
             self.PORTS_COUNT = 8  # number of switches

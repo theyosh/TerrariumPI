@@ -98,7 +98,7 @@ class terrariumCache(terrariumSingleton):
                 )
                 del self.__cache[key]
 
-    def set_data(self, hash_key, data, cache_timeout: int=30) -> None:
+    def set_data(self, hash_key, data, cache_timeout: int = 30) -> None:
         # When cache value is negative, cache it for one year.... should be long enough.. ;)
         cache_timeout = cache_timeout if cache_timeout > 0 else int(datetime.timedelta(days=365).total_seconds())
         self.__cache[hash_key] = {
@@ -380,7 +380,7 @@ class terrariumUtils:
         return time
 
     @staticmethod
-    def get_remote_data(url, timeout: int=3, proxy=None, json: bool=False, post=None):
+    def get_remote_data(url, timeout: int = 3, proxy=None, json: bool = False, post=None):
         data = None
         try:
             url_data = terrariumUtils.parse_url(url)
@@ -454,7 +454,7 @@ class terrariumUtils:
 
     @staticmethod
     # https://stackoverflow.com/a/62186053
-    def flatten_dict(dictionary, parent_key: bool=False, separator: str="_"):
+    def flatten_dict(dictionary, parent_key: bool = False, separator: str = "_"):
         items = []
         for key, value in dictionary.items():
             new_key = str(parent_key) + separator + key if parent_key else key
@@ -473,7 +473,9 @@ class terrariumUtils:
         return str(datetime.timedelta(seconds=int(value)))
 
     @staticmethod
-    def format_filesize(n, power: int=0, b: int=1024, u: str="B", pre=[""] + [p + "i" for p in "KMGTPEZY"]) -> str:
+    def format_filesize(
+        n, power: int = 0, b: int = 1024, u: str = "B", pre=[""] + [p + "i" for p in "KMGTPEZY"]
+    ) -> str:
         power, n = min(int(log(max(n * b**power, 1), b)), len(pre) - 1), n * b**power
         return "%%.%if %%s%%s" % abs(power % (-power - 1)) % (n / b ** float(power), pre[power], u)
 
@@ -501,7 +503,7 @@ class terrariumUtils:
         return re.sub(strip_regex, "", str(address), 0, re.MULTILINE)
 
     @staticmethod
-    def get_translator(lang: str="en-US"):
+    def get_translator(lang: str = "en-US"):
         # Load language
         try:
             trans = gettext.translation("terrariumpi", "locales/", languages=(lang.replace("-", "_"),))
