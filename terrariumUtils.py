@@ -436,7 +436,7 @@ class terrariumUtils:
         return data
 
     @staticmethod
-    def get_script_data(script):
+    def get_script_data(script, log_error: bool = True):
         logger = terrariumLogging.logging.getLogger("terrariumUtils")
         data = None
         try:
@@ -449,7 +449,8 @@ class terrariumUtils:
             )
             logger.debug("Output was: %s." % (data))
         except Exception as ex:
-            logger.exception("Error parsing script data for script %s. Exception %s" % (script, ex))
+            if log_error:
+                logger.exception("Error parsing script data for script %s. Exception %s" % (script, ex))
 
         return data
 
@@ -531,7 +532,7 @@ class terrariumUtils:
     @staticmethod
     def bluetooth_available():
         cmd = "/usr/bin/hcitool dev"
-        data = terrariumUtils.get_script_data(cmd)
+        data = terrariumUtils.get_script_data(cmd, False)
         if data is None:
             return False
 
@@ -540,7 +541,7 @@ class terrariumUtils:
     @staticmethod
     def kill_bluetooth_helper_processes() -> None:
         cmd = "pgrep bluepy"
-        data = terrariumUtils.get_script_data(cmd)
+        data = terrariumUtils.get_script_data(cmd, False)
         if data is None:
             return
 

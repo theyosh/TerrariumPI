@@ -385,7 +385,7 @@ class terrariumEngine(object):
             gitversion = None if gitversion == "" else gitversion
 
         if gitversion is None and Path(".git").exists():
-            gitversion = str(terrariumUtils.get_script_data("git rev-parse HEAD").decode("utf-8")).strip()
+            gitversion = str(terrariumUtils.get_script_data("git rev-parse HEAD", False).decode("utf-8")).strip()
 
         self.settings["gitversion"] = gitversion
 
