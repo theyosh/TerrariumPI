@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
 
-logger = terrariumLogging.logging.getLogger("terrariumUtils")
-
 import gettext
 import re
 import datetime
@@ -80,18 +78,18 @@ class terrariumAsync(terrariumSingleton):
 
 
 class terrariumCache(terrariumSingleton):
-    logger = terrariumLogging.logging.getLogger("terrariumCache")
 
     def __init__(self) -> None:
         self.__cache = {}
         self.__running = {}
-        logger.debug("Initialized cache")
+        self.logger = terrariumLogging.logging.getLogger("terrariumCache")
+        self.logger.debug("Initialized cache")
 
     def __cleanup(self) -> None:
         now = int(time.time())
         for key in list(self.__cache.keys()):
             if self.__cache[key]["expire"] < now:
-                logger.debug(
+                self.logger.debug(
                     "Delete cache key {} with expire date {}".format(
                         key, datetime.datetime.fromtimestamp(self.__cache[key]["expire"])
                     )
@@ -106,7 +104,7 @@ class terrariumCache(terrariumSingleton):
             "expire": int(time.time()) + cache_timeout,
             "timestamp": int(time.time()),
         }
-        logger.debug("Added new cache data with hash: {}. Total in cache: {}".format(hash_key, len(self.__cache)))
+        self.logger.debug("Added new cache data with hash: {}. Total in cache: {}".format(hash_key, len(self.__cache)))
         self.__cleanup()
 
     def get_data(self, hash_key, default=None, max_age=None):
@@ -375,6 +373,7 @@ class terrariumUtils:
                 value = value.split(":")
                 time = "{:0>2}:{:0>2}".format(int(value[0]) % 24, int(value[1]) % 60)
             except Exception as ex:
+                logger = terrariumLogging.logging.getLogger("terrariumUtils")
                 logger.exception("Error parsing time value %s. Exception %s" % (value, ex))
 
         return time
@@ -431,12 +430,14 @@ class terrariumUtils:
                 data = None
 
         except Exception as ex:
+            logger = terrariumLogging.logging.getLogger("terrariumUtils")
             logger.exception("Error parsing remote data at url %s. Exception %s" % (url, ex))
 
         return data
 
     @staticmethod
     def get_script_data(script):
+        logger = terrariumLogging.logging.getLogger("terrariumUtils")
         data = None
         try:
             logger.debug("Running script: %s." % (script))
@@ -490,6 +491,7 @@ class terrariumUtils:
             try:
                 logline = re.sub(search[index], replace[index], logline)
             except Exception as ex:
+                logger = terrariumLogging.logging.getLogger("terrariumUtils")
                 logger.debug(f"Could not clear with regex: {ex}")
 
         return logline
@@ -542,6 +544,7 @@ class terrariumUtils:
         if data is None:
             return
 
+        logger = terrariumLogging.logging.getLogger("terrariumUtils")
         data = data.decode().strip().split("\n")
         for process in data:
             logger.warning("Killing hanging bluetooth helper process")
@@ -574,6 +577,7 @@ class terrariumUtils:
                             setattr(sys.modules[__name__], file.stem, attribute)
                             data[attribute.HARDWARE] = attribute
                 except Exception as ex:
+                    logger = terrariumLogging.logging.getLogger("terrariumUtils")
                     logger.error(f"Error loading hardware driver file {file}: {ex}")
 
             cache.set_data(path, data, -1)
