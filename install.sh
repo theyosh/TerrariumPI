@@ -111,8 +111,6 @@ elif [ "${OS}" == "bookworm" ]; then
   # Need a upgraded bluepy library => disabled!
   # PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
 
-  # On bookworm we use the OS package versions
-  # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
   OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.1 libwebpdemux2 ntp"
 
 #elif [ "${OS}" == "trixie" ]; then
@@ -164,7 +162,7 @@ if [ "${CLEANUP}" -eq 1 ]; then
 fi
 
 # Install required packages to get the terrarium software running
-debconf-apt-progress -- apt-get -y autoremove
+debconf-apt-progress -- apt-get -y --purge autoremove
 debconf-apt-progress -- apt-get -y -o Acquire::ForceIPv4=true update
 debconf-apt-progress -- apt-get -y -o Acquire::ForceIPv4=true full-upgrade
 debconf-apt-progress -- apt-get -y -o Acquire::ForceIPv4=true install ${APT_PACKAGES}
@@ -401,8 +399,9 @@ if [ -f terrariumpi.db ]; then
   mv terrariumpi.db* data
 fi
 
-# Clear python pip cache
+# Clear python pip cache and apt cache
 pip cache purge
+apt-get -y autoclean
 
 # Set file owner rights
 chown "${SCRIPT_USER}": .
