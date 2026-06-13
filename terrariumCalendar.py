@@ -49,6 +49,18 @@ class terrariumCalendar(object):
                 datetime(2024, 8, 30, 0, 0, 0, 0, timezone.utc),
             )
 
+        if self.get_event("terrariumpi-birthday") == False:
+            self.create_event(
+                "terrariumpi-birthday",
+                "🥳 TerrariumPI birthday 🎉",
+                "<p>TerrariumPI is yet a year older! Born in 2014.</p>",
+                "https://theyosh.github.io/TerrariumPI/",
+                datetime(2014, 8, 1, 0, 0, 0, 0, timezone.utc),
+                datetime(2014, 8, 2, 0, 0, 0, 0, timezone.utc),
+                "YEARLY",
+                1
+            )
+
     def __event_schema(self, item):
         event = {
             "uid": str(item.get("uid")),
