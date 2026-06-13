@@ -65,6 +65,7 @@ if [ "${OS}" == "buster" ]; then
   PIP_MODULES="${PIP_MODULES//gpiozero==+([^ ])/gpiozero==1.6.2}"
   PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.31.0}"
 
+  PIP_MODULES="${PIP_MODULES//pylibftdi==+([^ ])/pylibftdi==0.23.0}"
   PIP_MODULES="${PIP_MODULES//python-kasa==+([^ ])/python-kasa==0.5.1}"
   PIP_MODULES="${PIP_MODULES//meross-iot==+([^ ])/meross-iot==0.4.7.5}"
   PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==0.9.2}"
@@ -79,11 +80,12 @@ if [ "${OS}" == "buster" ]; then
 
   PIP_MODULES="${PIP_MODULES//pyfiglet==+([^ ])/pyfiglet==0.8.post1}"
 
+  PIP_MODULES="${PIP_MODULES//emails==+([^ ])/emails==0.6}"
   PIP_MODULES="${PIP_MODULES//luma.oled==+([^ ])/luma.oled==3.13.0}"
 
   PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==20.3}"
 
-  PIP_MODULES="${PIP_MODULES//icalendar==+([^ ])/icalendar==5.0.13}"
+  PIP_MODULES="${PIP_MODULES//icalendar==+([^ ])/icalendar==5.0.14}"
   PIP_MODULES="${PIP_MODULES//adafruit-circuitpython-typing==+([^ ])/adafruit-circuitpython-typing==1.10.1}"
   PIP_MODULES="${PIP_MODULES//pydantic==+([^ ])/pydantic==1.10.9}"
 
@@ -94,23 +96,24 @@ elif [ "${OS}" == "bullseye" ]; then
   PIP_MODULES="${PIP_MODULES//pip==+([^ ])/pip==26.0.1}"
   PIP_MODULES="${PIP_MODULES//python-dotenv==+([^ ])/python-dotenv==1.2.1}"
   PIP_MODULES="${PIP_MODULES//Pillow==+([^ ])/Pillow==11.2.1}"
+  PIP_MODULES="${PIP_MODULES//pylibftdi==+([^ ])/pylibftdi==0.23.0}"
   PIP_MODULES="${PIP_MODULES//Adafruit-Blinka==+([^ ])/Adafruit-Blinka==8.64.0}"
   PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==1.4.0}"
+  PIP_MODULES="${PIP_MODULES//emails==+([^ ])/emails==0.6}"
   PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==22.5}"
-#  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.5.1}"
   PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.32.5}"
+  PIP_MODULES="${PIP_MODULES//icalendar==+([^ ])/icalendar==6.3.2}"
 
   OPENCV_PACKAGES="libopenexr25 libilmbase25 liblapack3 libatlas3-base libssl1.1 ntp"
 
 elif [ "${OS}" == "bookworm" ]; then
   # Python 3.11
-  PIP_MODULES="${PIP_MODULES//gevent==+([^ ])/gevent==25.9.1}"
   # Need a upgraded bluepy library => disabled!
   # PIP_MODULES="${PIP_MODULES//git+https:\/\/github.com\/IanHarvey\/bluepy/git+https:\/\/github.com\/Mausy5043\/bluepy3}"
 
   # On bookworm we use the OS package versions
   # We use the python3-opencv from the OS, as piwheels does not provide a compiled package
-  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.1 ntp"
+  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.1 libwebpdemux2 ntp"
 
 #elif [ "${OS}" == "trixie" ]; then
 #  # Python 3.13
@@ -397,6 +400,9 @@ fi
 if [ -f terrariumpi.db ]; then
   mv terrariumpi.db* data
 fi
+
+# Clear python pip cache
+pip cache purge
 
 # Set file owner rights
 chown "${SCRIPT_USER}": .
