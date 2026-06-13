@@ -58,7 +58,7 @@ class terrariumCalendar(object):
                 datetime(2014, 8, 1, 0, 0, 0, 0, timezone.utc),
                 datetime(2014, 8, 2, 0, 0, 0, 0, timezone.utc),
                 "YEARLY",
-                1
+                1,
             )
 
     def __event_schema(self, item):
