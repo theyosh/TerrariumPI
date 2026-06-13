@@ -25,7 +25,7 @@ ENV PIP_DEFAULT_TIMEOUT=100 \
     # do not create __pycache__/ files
     PYTHONDONTWRITEBYTECODE=1
 ENV PATH="/opt/venv/bin:$PATH"
-RUN python -m venv --system-site-packages /opt/venv
+RUN python -m venv /opt/venv
 RUN pip install --upgrade pip==24.1.2 && pip install --upgrade wheel==0.43.0
 
 COPY requirements.txt contrib/python3-voltcraft-sem6000.patch.diff contrib/python3-as7331.patch.diff /
@@ -44,8 +44,6 @@ RUN  apt-get -o Acquire::ForceIPv4=true update \
 # overruling does not work here, pip will exit with non 0 which will stop the build
 RUN  sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/icalendar==.*//g' requirements.txt \
-  && sed -i 's/opencv-python-headless==.*//g' requirements.txt \
-  && sed -i 's/gevent==.*/gevent==25.9.1/g' requirements.txt \
   && pip install smbus==1.1.post2 --extra-index-url https://www.piwheels.org/simple \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
   && find /opt/venv -type d -name "test*" | xargs rm -rf  \
@@ -107,7 +105,7 @@ RUN  rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
 
 RUN  apt-get -o Acquire::ForceIPv4=true update \
   && apt-get -o Acquire::ForceIPv4=true full-upgrade -y --no-install-recommends \
-  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends netcat-openbsd procps bluez pigpio ffmpeg libssl1.1 libxslt1.1 libftdi1 libatlas3-base libopenblas0 libgfortran5 libwebpdemux2 libraspberrypi-bin rpicam-apps-core python3-opencv \
+  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends netcat-openbsd procps bluez pigpio ffmpeg libssl1.1 libxslt1.1 libftdi1 libatlas3-base libopenblas0 libgfortran5 libwebpdemux2 libraspberrypi-bin rpicam-apps-core \
   && apt-get --purge autoremove -y \
   && apt-get autoclean \
   && ln -s /usr/lib/python3/dist-packages/cv2.cpython-311-arm-linux-gnueabihf.so /opt/venv/lib/python3.11/site-packages/cv2.cpython-311-arm-linux-gnueabihf.so
