@@ -86,7 +86,7 @@ class terrariumRelayEnergenieUSB(terrariumRelay):
 
         data = []
         try:
-            data = terrariumUtils.get_script_data(cmd).decode("utf-8").strip().split("\n")
+            data = terrariumUtils.get_script_data(cmd, False).decode("utf-8").strip().split("\n")
         except subprocess.CalledProcessError:
             logger.info("No Energenie USB relays connected.")
             return False
