@@ -78,8 +78,8 @@ width="150" } In order to use this board stable, you need to use a
 powerful enough the power the board.
 
 1. Connect the I2C bus from the Pi to the lower voltage side of the level
-   shifter by using 2 channels. And use the 3.3 volt from the Raspberry PI as
-   LV of the lower voltage side and use any ground pin.
+   shifter by using 2 channels. And use the 3.3 volt from the Raspberry PI as LV
+   of the lower voltage side and use any ground pin.
 2. Than connect the relay board to the logic level shifter. Use the opposite
    connectors of the low side part. So that two channels are used on both sides.
    And connect the power and ground in the high voltage side.
