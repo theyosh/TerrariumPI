@@ -89,4 +89,9 @@ powerful enough the power the board.
    an external power source. Without this, the board will fail after toggling 3
    relays on.
 
+<!-- prettier-ignore-start -->
+> The above setup does work, but it is advised to use an external 5 volt power device at step 3. The board can draw more than 50% of the Pi power!
+{: .prompt-warning }
+<!-- prettier-ignore-end -->
+
 {% include_relative _relay_detail.md %}
