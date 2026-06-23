@@ -2,6 +2,169 @@ Changelog
 =========
 
 
+4.16.0 (2026-06-23)
+-------------------
+
+**New**
+------
+
+- Add release post. [TheYOSH]
+- Add extra warning about external power usage. [TheYOSH]
+- Add some missing images. [TheYOSH]
+- Add TerrariumPI birthday to calendar. [TheYOSH]
+- Add graph zoom plugin. [TheYOSH]
+- Add support for Seesaw soil sensor [#1093](https://github.com/theyosh/TerrariumPI/issues/1093). [TheYOSH]
+
+**Fixes**
+------
+
+- More logging fixes. [TheYOSH]
+- Fix logging. [TheYOSH]
+- Fix PCF8574 and PCF8575 controllers. [TheYOSH]
+- Fix weather regex match, ignore case. [TheYOSH]
+- Css fixes. [TheYOSH]
+- Fix Bookworm installer and docker. [TheYOSH]
+- Fix documentation titles. [TheYOSH]
+- Fix PCF8575 IO Expander. [TheYOSH]
+
+**Updates**
+------
+
+- Update version number. [TheYOSH]
+- Update NodeJS packages. [TheYOSH]
+- Update DimmerLink documentation. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update 16 Channel I2C Electromagnetic Relay Module IoT documentation.
+  [TheYOSH]
+- Update docker builds. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update Python logging. [TheYOSH]
+- Update Python libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update DimmerLink documentation. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update workflows. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- More documentation updates. [TheYOSH]
+- Update NodeJS libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+- Update libraries. [TheYOSH]
+
+**Other**
+------
+
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (Norwegian Bokmål) [TheYOSH]
+
+  Currently translated at 100.0% (1140 of 1140 strings)
+- Translated using Weblate (Portuguese (Brazil)) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Polish) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Portuguese) [TheYOSH]
+
+  Currently translated at 100.0% (1140 of 1140 strings)
+- Translated using Weblate (Italian) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (French (Belgium)) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- Translated using Weblate (Catalan) [TheYOSH]
+
+  Currently translated at 100.0% (120 of 120 strings)
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Cleanup installer. [TheYOSH]
+- Merge branch 'main' into 4.x.y.z. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Auto typing code with https://github.com/JelleZijlstra/autotyping.
+  [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- Speedup manual docker builds. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Remove seconds from duration on dashboard. [#1104](https://github.com/theyosh/TerrariumPI/issues/1104). [TheYOSH]
+- Make some regex ignoring case. [TheYOSH]
+- Only apply settle time when greater than zero. [#1100](https://github.com/theyosh/TerrariumPI/issues/1100). [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- CSS style tweaks. [TheYOSH]
+- Downgrade pip on Buster OS. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Translated using Weblate (English (United Kingdom)) [TheYOSH]
+
+  Currently translated at 100.0% (1140 of 1140 strings)
+- Translated using Weblate (German) [TheYOSH]
+
+  Currently translated at 100.0% (1140 of 1140 strings)
+- New Svelte GUI build. [TheYOSH]
+- Reformat. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Revert opencv version. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Remove not used library. [TheYOSH]
+- Trixie support halted due to https://github.com/ponyorm/pony/pull/753.
+  [TheYOSH]
+- Trixie support (3) [TheYOSH]
+- Trixie support (2) [TheYOSH]
+- Trixie support (1) [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- 3rd attempt for PCF8575. [TheYOSH]
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Extra value check. [TheYOSH]
+- Alternative solution terrariumPCF8575IOExpander. [TheYOSH]
+- Merge pull request [#1090](https://github.com/theyosh/TerrariumPI/issues/1090) from theyosh/dependabot/pip/pillow-12.2.0.
+  [TheYOSH]
+
+  Bump pillow from 12.1.1 to 12.2.0
+- Bump pillow from 12.1.1 to 12.2.0. [dependabot[bot]]
+
+  Bumps [pillow](https://github.com/python-pillow/Pillow) from 12.1.1 to 12.2.0.
+  - [Release notes](https://github.com/python-pillow/Pillow/releases)
+  - [Changelog](https://github.com/python-pillow/Pillow/blob/main/CHANGES.rst)
+  - [Commits](https://github.com/python-pillow/Pillow/compare/12.1.1...12.2.0)
+
+  ---
+  updated-dependencies:
+  - dependency-name: pillow
+    dependency-version: 12.2.0
+    dependency-type: direct:production
+  ...
+- Merge pull request [#1087](https://github.com/theyosh/TerrariumPI/issues/1087) from
+  theyosh/dependabot/pip/cryptography-46.0.7. [TheYOSH]
+
+  Bump cryptography from 46.0.6 to 46.0.7
+- Bump cryptography from 46.0.6 to 46.0.7. [dependabot[bot]]
+
+  Bumps [cryptography](https://github.com/pyca/cryptography) from 46.0.6 to 46.0.7.
+  - [Changelog](https://github.com/pyca/cryptography/blob/main/CHANGELOG.rst)
+  - [Commits](https://github.com/pyca/cryptography/compare/46.0.6...46.0.7)
+
+  ---
+  updated-dependencies:
+  - dependency-name: cryptography
+    dependency-version: 46.0.7
+    dependency-type: direct:production
+  ...
+- Python code is blacked. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- New Svelte GUI build. [TheYOSH]
+- Fir installer and docker builds. [TheYOSH]
+
+
 4.15.0 (2026-03-29)
 -------------------
 
@@ -36,6 +199,7 @@ Changelog
 **Updates**
 ------
 
+- Update CHANGELOG. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update NodeJS libraries. [TheYOSH]
 - Update documentation DimmerLink. [TheYOSH]
@@ -69,6 +233,7 @@ Changelog
 **Other**
 ------
 
+- Release post. [TheYOSH]
 - Merge pull request [#1083](https://github.com/theyosh/TerrariumPI/issues/1083) from
   theyosh/dependabot/pip/cryptography-46.0.6. [TheYOSH]
 
