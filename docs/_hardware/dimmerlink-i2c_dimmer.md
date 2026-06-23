@@ -120,8 +120,11 @@ Mode: UART
 Calibrating...
 ```
 
+<!-- prettier-ignore-start -->
 And it looks like it is waiting. Now plugin the AC main power, and it should
-continue.
+continue. \\
+Now unplug the AC main power, so we can continue safely.
+<!-- prettier-ignore-end -->
 
 ```console
 === TRIAC Dimmer ===
@@ -133,11 +136,8 @@ Temperature protection: DISABLED
 UART mode ready
 ```
 
-<!-- prettier-ignore-start -->
-Now unplug the AC main power, so we can continue safely. \\
-It is very important that the message `UART mode ready` is shown. Else we
-cannot give the command to switch to I2C.
-<!-- prettier-ignore-end -->
+It is very important that the message `UART mode ready` is shown. Else we cannot
+give the command to switch to I2C.
 
 At this point, we stop the screen session with the command `Ctrl+A`, and than
 press `k` which is asking to kill the session. Answer with `y`.
