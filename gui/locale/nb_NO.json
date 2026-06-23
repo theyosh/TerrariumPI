@@ -2056,7 +2056,7 @@
       },
       "information": "For å bruke værsystemet må du opprette en gratis konto på {source_link}.",
       "open_meteo": {
-        "information": ""
+        "information": "Få din API url hos {source_link} gratis uten en konto."
       },
       "save": {
         "ok": {
@@ -2065,9 +2065,9 @@
       },
       "title": "Innstillinger for webkamera",
       "weather_provider": {
-        "help": "",
-        "label": "",
-        "placeholder": ""
+        "help": "Velg leverandør for mer informasjon.",
+        "label": "Leverandør",
+        "placeholder": "Velg en leverandør"
       },
       "weather_source": {
         "help": "Skriv inn hele OpenWeatherMap api-url som: {api_url_example}.",
