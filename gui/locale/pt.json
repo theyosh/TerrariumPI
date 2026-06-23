@@ -942,6 +942,7 @@
       "hour": "Hora",
       "month": "Mês",
       "replaced": "Substituído",
+      "reset": "Reset",
       "week": "Semana",
       "year": "Ano"
     },
@@ -1262,7 +1263,9 @@
       },
       "calibration": {
         "dimmer_curve": {
-          "label": "Curva mais escura"
+          "help": "Selecione a curva de dimmer a ser usada.",
+          "label": "Curva mais escura",
+          "placeholder": "Selecionar curva de dimmer"
         },
         "dimmer_frequency": {
           "help": "A frequência na qual o dimmer opera.",
