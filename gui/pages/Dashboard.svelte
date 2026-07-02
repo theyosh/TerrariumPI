@@ -382,7 +382,7 @@
     {#if [0, 1].indexOf(settings.dashboard_mode) !== -1 && sensor_types && Object.keys(sensor_types).length > 0}
       <div class="col">
         <!-- Sort based on translated names -->
-        {#each Object.keys(sensor_types).sort( (a, b) => $_(`sensors.average.${a}`).localeCompare($_(`sensors.average.${b}`)), ) as sensor_type}
+        {#each Object.keys(sensor_types).sort( (a, b) => $_(`sensors.average.${a}`).localeCompare($_(`sensors.average.${b}`)) ) as sensor_type}
           <SensorCard sensor="{sensor_types[sensor_type]}" enableSettings="{false}" />
         {/each}
       </div>
