@@ -8,6 +8,8 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Matrix](https://img.shields.io/badge/matrix.org-%23terrariumpi-blue)](https://matrix.to/#/#terrariumpi:theyosh.nl)
+[![Mastodon](https://img.shields.io/badge/Mastodon-%40TerariumPI-5638cc)](https://mastodon.theyosh.nl/@TerrariumPI)
+
 
 Software for cheap home automation of your reptile terrarium or any other
 enclosed environment. With this software you are able to control for example a
