@@ -8,12 +8,12 @@ Jekyll::Hooks.register :site, :post_write do |site|
 
     posts.docs.each do |post|
       json_content += '{'
-      json_content += '"title":"' + escape(post.data['title'].gsub(/\s+/, ' ')) + '",'
-      json_content += '"url":"' + site.baseurl +  post.url + '",'
-      json_content += '"categories":"' + join(post.data['categories'],", ") + '",'
-      json_content += '"tags":"' + join(post.data['tags'],", ") + '",'
-      json_content += '"date":"' + post.date.to_s + '",'
-      json_content += '"content":"' + strip_html(post.content).gsub(/\n+/, ' ').gsub(/\s+/, ' ').gsub(' \ ', '').gsub(/"/,'\"') + '"'
+      json_content += '"title":"' + strip(escape(post.data['title'].gsub(/\s+/, ' '))) + '",'
+      json_content += '"url":"' + strip(site.baseurl +  post.url) + '",'
+      json_content += '"categories":"' + strip(join(post.data['categories'],", ")) + '",'
+      json_content += '"tags":"' + strip(join(post.data['tags'],", ")) + '",'
+      json_content += '"date":"' + strip(post.date.to_s) + '",'
+      json_content += '"content":"' + strip(strip_html(post.content).gsub(/\n+/, ' ').gsub(/\s+/, ' ').gsub(' \ ', '').gsub(/\\/,'\\\\\\').gsub(/"/,'\"')) + '"'
       json_content += '}'
       json_content += ','
     end
