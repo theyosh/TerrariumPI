@@ -3,12 +3,12 @@
 FILES="*.py"
 
 cd ..
-pygettext -k N_ -v -a -n -o locales/terrariumpi.pot ${FILES}
+pygettext3 -k N_ -v -a -n -o locales/terrariumpi.pot ${FILES}
 
-for translation in $(grep -r -h -o -e "N\?_(\('\|\"\)[^)]\+\('\|\"\))" ${FILES} | sort | uniq | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" ); do
+for translation in $(grep -r -h -o -e " N\?_(\('\|\"\)[^)]\+\('\|\"\))" ${FILES} | grep -o '[^[:space:]].*[^[:space:]]' | sort | uniq | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" ); do
   translation="${translation:3:-2}"
   translation="${translation//\%20/ }"
-  if [ "${translation:0:1}" = "'" ]; then
+  if [ "${translation:0:1}" = "'" ] || [ "${translation:0:1}" = '"' ]; then
     translation=${translation:1}
   fi
   translation="${translation//\\\'/\'}"
