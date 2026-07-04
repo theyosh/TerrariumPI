@@ -1641,7 +1641,8 @@
         "access_token": {
           "help": "Geben Sie das Mastodon-Zugriffstoken ein.",
           "invalid": "Das eingegebene Zugriffstoken ist ungültig. \nEs darf nicht leer sein.",
-          "label": "Zugriffstoken"
+          "label": "Zugriffstoken",
+          "placeholder": "Geben Sie das Access-Token ein"
         },
         "address": {
           "help": "Gib eine Adresse ein.",
@@ -1665,13 +1666,14 @@
           "help": "Liste der verfügbaren Lieder im Nachrichten Objekt."
         },
         "client_id": {
+          "help": "Geben Sie die Mastodon Client ID ein.",
           "invalid": "Die eingegebene Client-ID ist ungültig. \nEs darf nicht leer sein.",
           "label": "Kunden-ID",
           "placeholder": "Geben Sie die Client-ID ein"
         },
         "client_secret": {
-          "help": "",
-          "invalid": "",
+          "help": "Geben Sie das Mastodon Client Secret ein.",
+          "invalid": "Das eingegebene Kundengeheimnis ist nicht gültig. Es kann nicht leer sein.",
           "label": "Kundengeheimnis",
           "placeholder": "Geben Sie das Client-Geheimnis ein"
         },
