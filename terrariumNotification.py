@@ -25,6 +25,9 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import InvalidToken, TimedOut
 from telegram.ext import Application, CommandHandler, MessageHandler, ConversationHandler, CallbackQueryHandler, filters
 
+# Mastodon
+from mastodon import Mastodon
+
 # Database
 from pony import orm
 
@@ -436,6 +439,7 @@ class terrariumNotificationService(object):
         "mqtt": {"name": _("MQTT"), "class": lambda: terrariumNotificationServiceMQTT},
         "pushover": {"name": _("Pushover"), "class": lambda: terrariumNotificationServicePushover},
         "buzzer": {"name": _("Buzzer"), "class": lambda: terrariumNotificationServiceBuzzer},
+        "mastodon": {"name": _("Mastodon"), "class": lambda: terrariumNotificationServiceMastodon},
     }
 
     @classproperty
@@ -2441,6 +2445,45 @@ class terrariumNotificationServicePushover(terrariumNotificationService):
 
         if r.status_code != 200:
             logger.error(f"Error sending Pushover message '{subject}' with status code: {r.status_code}")
+
+
+class terrariumNotificationServiceMastodon(terrariumNotificationService):
+    def load_setup(self, setup_data) -> None:
+        self.setup = {
+            "client_id": setup_data.get("client_id"),
+            "client_secret": setup_data.get("client_secret"),
+            "access_token": setup_data.get("access_token"),
+            "api_base_url": setup_data.get("api_base_url"),
+            "mentioned_users": re.sub(r"[,; ]", " ", setup_data.get("mentioned_users")).strip(),
+        }
+
+        super().load_setup(setup_data)
+
+        self.connection = Mastodon(
+            client_id=self.setup.get("client_id"),
+            client_secret=self.setup.get("client_secret"),
+            access_token=self.setup.get("access_token"),
+            api_base_url=self.setup.get("api_base_url"),
+            user_agent=self.setup.get("terrariumpi_name", "") + " " + self.setup.get("version", ""),
+        )
+
+    def send_message(self, _, subject: str, message, data=None, attachments=[]) -> None:
+
+        message = f"{subject}\n\n{message}"
+
+        visibility = "public"
+        if self.setup.get("mentioned_users"):
+            visibility = "direct"
+            message = f"{message}\n{self.setup.get('mentioned_users')}"
+
+        self.connection.status_post(
+            status=message,
+            media_ids=[
+                self.connection.media_post(("public/" if image.startswith("img/") else "") + image)
+                for image in attachments
+            ],
+            visibility=visibility,
+        )
 
 
 class terrariumNotificationServiceTelegram(terrariumNotificationService):

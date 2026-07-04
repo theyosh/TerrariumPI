@@ -126,6 +126,9 @@ export const template_sensor_type_icon = (type) => {
     case 'email':
       return 'fas fa-at';
 
+    case 'mastodon':
+      return 'fab fa-mastodon';
+
     case 'mqtt':
       return 'fas fa-bullhorn';
 

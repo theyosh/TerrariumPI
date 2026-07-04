@@ -1638,11 +1638,23 @@
         }
       },
       "setup": {
+        "access_token": {
+          "help": "Voer het Mastodon-toegangstoken in.",
+          "invalid": "Het ingevoerde toegangstoken is niet geldig. \nHet kan niet leeg zijn.",
+          "label": "Toegangstoken",
+          "placeholder": "Voer het toegangstoken in"
+        },
         "address": {
           "help": "Vul een adres in.",
           "invalid": "Het ingevoerde adres is niet geldig. Het kan niet leeg zijn.",
           "label": "Server Adres",
           "placeholder": "Vul een adres in"
+        },
+        "api_base_url": {
+          "help": "Voer de Mastodon API-basis-URL in.",
+          "invalid": "De ingevoerde API-basis-URL is niet geldig. \nHet kan niet leeg zijn.",
+          "label": "API-basis-URL",
+          "placeholder": "Voer de API-basis-URL in"
         },
         "api_token": {
           "help": "Voer de Pushover API token in.",
@@ -1652,6 +1664,18 @@
         },
         "buzzer": {
           "help": "Lijst met beschikbare nummers om te gebruiken in het berichtonderwerp."
+        },
+        "client_id": {
+          "help": "Voer de Mastodon-klant-ID in.",
+          "invalid": "De ingevoerde klant-ID is niet geldig. \nHet kan niet leeg zijn.",
+          "label": "Client ID",
+          "placeholder": "Voer de klant-ID in"
+        },
+        "client_secret": {
+          "help": "Voer het Mastodon Client secret in.",
+          "invalid": "Het ingevoerde Client secret is niet geldig. \nHet kan niet leeg zijn.",
+          "label": "Client-secret",
+          "placeholder": "Voer het Client secret in"
         },
         "green": {
           "help": "Voer GPIO pin nummer in voor groen licht.",
@@ -1668,6 +1692,11 @@
           "invalid": "Maak een keuze.",
           "label": "Hardware",
           "placeholder": "Selecteer hardware"
+        },
+        "mentioned_users": {
+          "help": "Voer de Mastodon-gebruikersnamen in die de meldingen moeten ontvangen. \nDeze zullen privé zijn!",
+          "label": "Privémeldingen",
+          "placeholder": "Vul Mastodon gebruikersnaam(en) in"
         },
         "password": {
           "help": "Voer het serverwachtwoord in.",

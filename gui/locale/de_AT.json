@@ -1541,6 +1541,9 @@
         }
       },
       "setup": {
+        "access_token": {
+          "placeholder": "Geben Sie das Zugriffstoken ein"
+        },
         "address": {
           "help": "Adresse eingeben.",
           "invalid": "Die eingegebene Adresse ist nicht gültig. Es kann nicht leer sein.",
@@ -1555,6 +1558,13 @@
         },
         "buzzer": {
           "help": "Liste der verfügbaren Songs, die Sie im Betreff der Nachricht verwenden können."
+        },
+        "client_id": {
+          "help": "Geben Sie die Mastodon-Client-ID ein."
+        },
+        "client_secret": {
+          "help": "Geben Sie das Mastodon-Client-Geheimnis ein.",
+          "invalid": "Das eingegebene Client-Geheimnis ist ungültig. \nEs darf nicht leer sein."
         },
         "green": {
           "help": "Trage einen Namen für dieses Ereignis ein.",

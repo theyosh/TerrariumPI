@@ -392,6 +392,85 @@
       </div>
     {/if}
 
+    {#if $formData.type === 'mastodon'}
+      <div class="row">
+        <div class="col">
+          <Field
+            type="text"
+            name="setup.client_id"
+            required="{true}"
+            label="{$_('services.settings.setup.client_id.label', { default: 'Client ID' })}"
+            placeholder="{$_('services.settings.setup.client_id.placeholder', { default: 'Enter the Client ID' })}"
+            help="{$_('services.settings.setup.client_id.help', { default: 'Enter the Mastodon Client ID.' })}"
+            invalid="{$_('services.settings.setup.client_id.invalid', {
+              default: 'The entered Client ID is not valid. It cannot be empty.',
+            })}"
+          />
+        </div>
+        <div class="col">
+          <Field
+            type="text"
+            name="setup.client_secret"
+            required="{true}"
+            label="{$_('services.settings.setup.client_secret.label', { default: 'Client secret' })}"
+            placeholder="{$_('services.settings.setup.client_secret.placeholder', {
+              default: 'Enter the Client secret',
+            })}"
+            help="{$_('services.settings.setup.client_secret.help', { default: 'Enter the Mastodon Client secret.' })}"
+            invalid="{$_('services.settings.setup.client_secret.invalid', {
+              default: 'The entered Client secret is not valid. It cannot be empty.',
+            })}"
+          />
+        </div>
+        <div class="col">
+          <Field
+            type="text"
+            name="setup.access_token"
+            required="{true}"
+            label="{$_('services.settings.setup.access_token.label', { default: 'Access token' })}"
+            placeholder="{$_('services.settings.setup.access_token.placeholder', {
+              default: 'Enter the Access token',
+            })}"
+            help="{$_('services.settings.setup.access_token.help', { default: 'Enter the Mastodon Access token.' })}"
+            invalid="{$_('services.settings.setup.access_token.invalid', {
+              default: 'The entered Access token is not valid. It cannot be empty.',
+            })}"
+          />
+        </div>
+        <div class="col">
+          <Field
+            type="text"
+            name="setup.api_base_url"
+            required="{true}"
+            label="{$_('services.settings.setup.api_base_url.label', { default: 'API base url' })}"
+            placeholder="{$_('services.settings.setup.api_base_url.placeholder', {
+              default: 'Enter the API base url',
+            })}"
+            help="{$_('services.settings.setup.api_base_url.help', { default: 'Enter the Mastodon API base url.' })}"
+            invalid="{$_('services.settings.setup.api_base_url.invalid', {
+              default: 'The entered API base url is not valid. It cannot be empty.',
+            })}"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <Field
+            type="text"
+            name="setup.mentioned_users"
+            required="{false}"
+            label="{$_('services.settings.setup.mentioned_users.label', { default: 'Private notifications' })}"
+            placeholder="{$_('services.settings.setup.mentioned_users.placeholder', {
+              default: 'Enter Mastodon username(s)',
+            })}"
+            help="{$_('services.settings.setup.mentioned_users.help', {
+              default: 'Enter the Mastodon usernames which should receive the notifications. These will be private!',
+            })}"
+          />
+        </div>
+      </div>
+    {/if}
+
     {#if $formData.type === 'traffic'}
       <div class="row">
         <div class="col">
@@ -617,35 +696,6 @@
         </div>
       </div>
     {/if}
-
-    <!--
-    <div class="row twitter">
-      <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-        <div class="form-group">
-          <label for="bot_token">{{ _('Customer key') }}</label>
-          <input type="text" class="form-control" id="bot_token" name="bot_token" required="required" >
-        </div>
-      </div>
-      <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-        <div class="form-group">
-          <label for="username">{{ _('Customer secret') }}</label>
-          <input type="text" class="form-control" id="username" name="username" required="required">
-        </div>
-      </div>
-      <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-        <div class="form-group">
-          <label for="access_token">{{ _('Access token') }}</label>
-          <input type="text" class="form-control" id="access_token" name="access_token" required="required" >
-        </div>
-      </div>
-      <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-        <div class="form-group">
-          <label for="access_secret">{{ _('Access token secret') }}</label>
-          <input type="text" class="form-control" id="access_secret" name="access_secret" required="required">
-        </div>
-      </div>
-    </div>
-    -->
 
     <!-- We need this nasty hack to make submit with enter key to work -->
     <button type="submit" style="display:none"> </button>

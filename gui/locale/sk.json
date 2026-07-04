@@ -1638,11 +1638,23 @@
         }
       },
       "setup": {
+        "access_token": {
+          "help": "Zadajte prístupový token Mastodon.",
+          "invalid": "Zadaný prístupový token nie je platný. \nNemôže byť prázdny.",
+          "label": "Prístupový token",
+          "placeholder": "Zadajte prístupový token"
+        },
         "address": {
           "help": "Zadajte adresu.",
           "invalid": "Zadaná adresa nie je platná. Nemôže byť prázdna.",
           "label": "Adresa servera",
           "placeholder": "Zadajte adresu"
+        },
+        "api_base_url": {
+          "help": "Zadajte základnú webovú adresu rozhrania Mastodon API.",
+          "invalid": "Zadaná základná adresa URL rozhrania API je neplatná. \nNemôže byť prázdny.",
+          "label": "Základná adresa URL rozhrania API",
+          "placeholder": "Zadajte základnú adresu URL rozhrania API"
         },
         "api_token": {
           "help": "Zadajte token rozhrania Pushover API.",
@@ -1652,6 +1664,18 @@
         },
         "buzzer": {
           "help": "Zoznam dostupných skladieb, ktoré môžete použiť v predmete správy."
+        },
+        "client_id": {
+          "help": "Zadajte ID klienta Mastodon.",
+          "invalid": "Zadané ID klienta nie je platné. \nNemôže byť prázdny.",
+          "label": "ID klienta",
+          "placeholder": "Zadajte ID klienta"
+        },
+        "client_secret": {
+          "help": "Zadajte tajomstvo klienta Mastodon.",
+          "invalid": "Zadané tajomstvo klienta nie je platné. \nNemôže byť prázdny.",
+          "label": "Tajomstvo klienta",
+          "placeholder": "Zadajte tajný kľúč klienta"
         },
         "green": {
           "help": "Zadajte GPIO pin pre zelenú kontrolku.",
@@ -1668,6 +1692,11 @@
           "invalid": "Prosím, urobte si voľbu.",
           "label": "Hardvér",
           "placeholder": "Vyberte hardvér"
+        },
+        "mentioned_users": {
+          "help": "Zadajte používateľské mená Mastodon, ktoré by mali dostávať upozornenia. \nTieto budú súkromné!",
+          "label": "Súkromné ​​upozornenia",
+          "placeholder": "Zadajte používateľské meno(a) Mastodon"
         },
         "password": {
           "help": "Zadajte heslo servera.",

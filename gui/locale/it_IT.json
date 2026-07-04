@@ -1638,11 +1638,23 @@
         }
       },
       "setup": {
+        "access_token": {
+          "help": "Inserisci il token di accesso Mastodon.",
+          "invalid": "Il token di accesso inserito non è valido. \nNon può essere vuoto.",
+          "label": "Token di accesso",
+          "placeholder": "Inserisci il token di accesso"
+        },
         "address": {
           "help": "Inserisci un indirizzo.",
           "invalid": "L'indirizzo inserito non è valido. Non può essere vuoto.",
           "label": "Indirizzo",
           "placeholder": "Indirizzo"
+        },
+        "api_base_url": {
+          "help": "Inserisci l'URL di base dell'API Mastodon.",
+          "invalid": "L'URL di base API inserito non è valido. \nNon può essere vuoto.",
+          "label": "URL di base dell'API",
+          "placeholder": "Inserisci l'URL di base dell'API"
         },
         "api_token": {
           "help": "Indirizzo.",
@@ -1652,6 +1664,18 @@
         },
         "buzzer": {
           "help": "Elenco dei brani disponibili da utilizzare nell'argomento del messaggio."
+        },
+        "client_id": {
+          "help": "Inserisci l'ID cliente Mastodon.",
+          "invalid": "L'ID cliente inserito non è valido. \nNon può essere vuoto.",
+          "label": "ID cliente",
+          "placeholder": "Inserisci l'ID cliente"
+        },
+        "client_secret": {
+          "help": "Inserisci il segreto del client Mastodon.",
+          "invalid": "Il segreto client immesso non è valido. \nNon può essere vuoto.",
+          "label": "Segreto del cliente",
+          "placeholder": "Immettere il segreto del client"
         },
         "green": {
           "help": "Immettere il perno GPIO per la luce verde.",
@@ -1668,6 +1692,11 @@
           "invalid": "Si prega di fare una scelta.",
           "label": "Hardware",
           "placeholder": "Hardware"
+        },
+        "mentioned_users": {
+          "help": "Inserisci i nomi utente Mastodon che dovrebbero ricevere le notifiche. \nQuesti saranno privati!",
+          "label": "Notifiche private",
+          "placeholder": "Inserisci il/i nome utente/i di Mastodon"
         },
         "password": {
           "help": "Immettere la password del server.",

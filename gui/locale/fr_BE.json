@@ -1638,11 +1638,23 @@
         }
       },
       "setup": {
+        "access_token": {
+          "help": "Entrez le jeton d'accès Mastodon.",
+          "invalid": "Le jeton d'accès saisi n'est pas valide. \nIl ne peut pas être vide.",
+          "label": "Jeton d'accès",
+          "placeholder": "Entrez le jeton d'accès"
+        },
         "address": {
           "help": "Adresse.",
           "invalid": "L'adresse entrée n'est pas valide. Il ne peut pas être vide.",
           "label": "Adresse",
           "placeholder": "Adresse"
+        },
+        "api_base_url": {
+          "help": "Entrez l'URL de base de l'API Mastodon.",
+          "invalid": "L'URL de base de l'API saisie n'est pas valide. \nIl ne peut pas être vide.",
+          "label": "URL de base de l'API",
+          "placeholder": "Saisissez l'URL de base de l'API"
         },
         "api_token": {
           "help": "Adresse.",
@@ -1652,6 +1664,18 @@
         },
         "buzzer": {
           "help": "Liste des chansons disponibles à utiliser dans le sujet du message."
+        },
+        "client_id": {
+          "help": "Entrez l'ID client Mastodon.",
+          "invalid": "L'ID client saisi n'est pas valide. \nIl ne peut pas être vide.",
+          "label": "Identifiant client",
+          "placeholder": "Entrez l'ID client"
+        },
+        "client_secret": {
+          "help": "Entrez le secret du client Mastodon.",
+          "invalid": "Le secret client saisi n'est pas valide. \nIl ne peut pas être vide.",
+          "label": "Secret client",
+          "placeholder": "Entrez le secret client"
         },
         "green": {
           "help": "Entrez la broche GPIO pour le feu vert.",
@@ -1668,6 +1692,11 @@
           "invalid": "Veuillez faire un choix.",
           "label": "Matériel",
           "placeholder": "Matériel"
+        },
+        "mentioned_users": {
+          "help": "Saisissez les noms d'utilisateurs Mastodon qui doivent recevoir les notifications. \nCelles-ci seront privées !",
+          "label": "Notifications privées",
+          "placeholder": "Entrez le(s) nom(s) d'utilisateur Mastodon"
         },
         "password": {
           "help": "Entrez le mot de passe du serveur.",

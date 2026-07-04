@@ -1638,11 +1638,21 @@
         }
       },
       "setup": {
+        "access_token": {
+          "invalid": "O token de acesso inserido não é válido. \nNão pode estar vazio.",
+          "placeholder": "Insira o token de acesso"
+        },
         "address": {
           "help": "Insira um endereço.",
           "invalid": "O endereço inserido não é válido. Não pode estar vazio.",
           "label": "Endereço do servidor",
           "placeholder": "Insira um endereço"
+        },
+        "api_base_url": {
+          "help": "Insira o URL base da API Mastodon.",
+          "invalid": "O URL base da API inserido não é válido. \nNão pode estar vazio.",
+          "label": "URL base da API",
+          "placeholder": ""
         },
         "api_token": {
           "help": "Insira o Pushover API token.",
@@ -1652,6 +1662,15 @@
         },
         "buzzer": {
           "help": "Lista de músicas disponíveis para utilizar no assunto da mensagem."
+        },
+        "client_id": {
+          "help": "Insira o ID do cliente Mastodon."
+        },
+        "client_secret": {
+          "help": "Insira o segredo do cliente Mastodon.",
+          "invalid": "O segredo do cliente inserido não é válido. \nNão pode estar vazio.",
+          "label": "Segredo do cliente",
+          "placeholder": "Insira o segredo do cliente"
         },
         "green": {
           "help": "Insira o pin GPIO para a luz verde.",
@@ -1668,6 +1687,10 @@
           "invalid": "Por favor seleccione uma opção.",
           "label": "Hardware",
           "placeholder": "Seleccione o hardware"
+        },
+        "mentioned_users": {
+          "label": "Notificações privadas",
+          "placeholder": "Digite o(s) nome(s) de usuário do Mastodon"
         },
         "password": {
           "help": "Insira a password do servidor.",

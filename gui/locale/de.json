@@ -1638,11 +1638,22 @@
         }
       },
       "setup": {
+        "access_token": {
+          "help": "Geben Sie das Mastodon-Zugriffstoken ein.",
+          "invalid": "Das eingegebene Zugriffstoken ist ungültig. \nEs darf nicht leer sein.",
+          "label": "Zugriffstoken"
+        },
         "address": {
           "help": "Gib eine Adresse ein.",
           "invalid": "Die eingegebene Adresse ist nicht gültig. Sie kann nicht leer sein.",
           "label": "Server address",
           "placeholder": "Gib eine Adresse ein"
+        },
+        "api_base_url": {
+          "help": "Geben Sie die Basis-URL der Mastodon-API ein.",
+          "invalid": "Die eingegebene API-Basis-URL ist ungültig. \nEs darf nicht leer sein.",
+          "label": "API-Basis-URL",
+          "placeholder": "Geben Sie die API-Basis-URL ein"
         },
         "api_token": {
           "help": "Gib das Pushover-API-Token ein.",
@@ -1652,6 +1663,17 @@
         },
         "buzzer": {
           "help": "Liste der verfügbaren Lieder im Nachrichten Objekt."
+        },
+        "client_id": {
+          "invalid": "Die eingegebene Client-ID ist ungültig. \nEs darf nicht leer sein.",
+          "label": "Kunden-ID",
+          "placeholder": "Geben Sie die Client-ID ein"
+        },
+        "client_secret": {
+          "help": "",
+          "invalid": "",
+          "label": "Kundengeheimnis",
+          "placeholder": "Geben Sie das Client-Geheimnis ein"
         },
         "green": {
           "help": "Gib den GPIO für grünes Licht an.",
@@ -1668,6 +1690,11 @@
           "invalid": "Bitte triff eine Wahl.",
           "label": "Hardware",
           "placeholder": "Hardware auswählen"
+        },
+        "mentioned_users": {
+          "help": "Geben Sie die Mastodon-Benutzernamen ein, die die Benachrichtigungen erhalten sollen. \nDiese werden privat sein!",
+          "label": "Private Benachrichtigungen",
+          "placeholder": "Geben Sie den/die Mastodon-Benutzernamen ein."
         },
         "password": {
           "help": "Gib das Serverkennwort ein.",

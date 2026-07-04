@@ -1588,11 +1588,18 @@
         }
       },
       "setup": {
+        "access_token": {
+          "help": "Insira o token de acesso do Mastodon.",
+          "label": "Token de acesso"
+        },
         "address": {
           "help": "Insira o endereço.",
           "invalid": "O endereço inserido não é válido. Não pode estar vazio.",
           "label": "Endereço",
           "placeholder": "Insira o endereço"
+        },
+        "api_base_url": {
+          "placeholder": "Insira o URL base da API"
         },
         "api_token": {
           "help": "Insira o token de API do Pushover.",
@@ -1602,6 +1609,14 @@
         },
         "buzzer": {
           "help": "Lista de músicas disponíveis para usar no assunto da mensagem."
+        },
+        "client_id": {
+          "invalid": "O ID do cliente inserido não é válido. \nNão pode estar vazio.",
+          "label": "ID do cliente",
+          "placeholder": "Insira o ID do cliente"
+        },
+        "client_secret": {
+          "placeholder": "Insira o segredo do cliente"
         },
         "green": {
           "help": "Insira o pino GPIO para a luz verde.",
@@ -1618,6 +1633,10 @@
           "invalid": "Por favor, faça uma escolha.",
           "label": "Hardware",
           "placeholder": "Selecionar hardware"
+        },
+        "mentioned_users": {
+          "help": "Insira os nomes de usuário do Mastodon que devem receber as notificações. \nSerão privados!",
+          "label": "Notificações privadas"
         },
         "password": {
           "help": "Digite a senha do servidor.",

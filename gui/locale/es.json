@@ -1595,11 +1595,21 @@
         }
       },
       "setup": {
+        "access_token": {
+          "help": "Ingrese el token de acceso a Mastodon.",
+          "invalid": "El token de acceso ingresado no es válido. \nNo puede estar vacío.",
+          "label": "token de acceso",
+          "placeholder": "Ingrese el token de acceso"
+        },
         "address": {
           "help": "Introduce una direccion.",
           "invalid": "La dirección ingresada no es válida. No puede estar vacío.",
           "label": "Dirección",
           "placeholder": "Introduce una direccion"
+        },
+        "api_base_url": {
+          "invalid": "La URL base de API ingresada no es válida. \nNo puede estar vacío.",
+          "placeholder": "Ingrese la URL base de la API"
         },
         "api_token": {
           "help": ".",
@@ -1609,6 +1619,16 @@
         },
         "buzzer": {
           "help": "Lista de canciones disponibles para usar en el asunto del mensaje."
+        },
+        "client_id": {
+          "help": "Introduzca el ID del cliente de Mastodon.",
+          "invalid": "El ID de cliente ingresado no es válido. \nNo puede estar vacío."
+        },
+        "client_secret": {
+          "help": "Introduzca el secreto del cliente Mastodon.",
+          "invalid": "El secreto de cliente ingresado no es válido. \nNo puede estar vacío.",
+          "label": "secreto del cliente",
+          "placeholder": "Ingrese el secreto del cliente"
         },
         "green": {
           "help": "Ingrese el pasador GPIO para luz verde.",
@@ -1625,6 +1645,11 @@
           "invalid": "Por favor tome una decisión.",
           "label": "Hardware",
           "placeholder": "Seleccionar hardware"
+        },
+        "mentioned_users": {
+          "help": "Ingrese los nombres de usuario de Mastodon que deberían recibir las notificaciones. \n¡Estos serán privados!",
+          "label": "Notificaciones privadas",
+          "placeholder": "Ingrese los nombres de usuario de Mastodon"
         },
         "password": {
           "help": "Ingrese la contraseña del servidor.",

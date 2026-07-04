@@ -1638,11 +1638,23 @@
         }
       },
       "setup": {
+        "access_token": {
+          "help": "Introduïu el testimoni d'accés Mastodon.",
+          "invalid": "El testimoni d'accés introduït no és vàlid. \nNo pot estar buit.",
+          "label": "Fitxa d'accés",
+          "placeholder": "Introduïu el testimoni d'accés"
+        },
         "address": {
           "help": "Introduïu una adreça.",
           "invalid": "L’adreça introduïda no és vàlida. No pot estar buit.",
           "label": "adreça",
           "placeholder": "Introduïu una adreça"
+        },
+        "api_base_url": {
+          "help": "Introduïu l'URL base de l'API de Mastodon.",
+          "invalid": "L'URL base de l'API introduït no és vàlid. \nNo pot estar buit.",
+          "label": "URL base de l'API",
+          "placeholder": "Introduïu l'URL base de l'API"
         },
         "api_token": {
           "help": ".",
@@ -1652,6 +1664,18 @@
         },
         "buzzer": {
           "help": "Llista de cançons disponibles per utilitzar -les en el tema del missatge."
+        },
+        "client_id": {
+          "help": "Introduïu l'identificador de client de Mastodon.",
+          "invalid": "L'identificador de client introduït no és vàlid. \nNo pot estar buit.",
+          "label": "ID de client",
+          "placeholder": "Introduïu l'identificador del client"
+        },
+        "client_secret": {
+          "help": "Introduïu el secret del client Mastodon.",
+          "invalid": "El secret del client introduït no és vàlid. \nNo pot estar buit.",
+          "label": "Secret del client",
+          "placeholder": "Introduïu el secret del client"
         },
         "green": {
           "help": "Introduïu el passador GPIO per a la llum verda.",
@@ -1668,6 +1692,11 @@
           "invalid": "Feu una tria.",
           "label": "Maquinari",
           "placeholder": "Seleccioneu el maquinari"
+        },
+        "mentioned_users": {
+          "help": "Introduïu els noms d'usuari de Mastodon que haurien de rebre les notificacions. \nAquestes seran privades!",
+          "label": "Notificacions privades",
+          "placeholder": "Introduïu els noms d'usuari de Mastodon"
         },
         "password": {
           "help": "Introduïu la contrasenya del servidor.",

@@ -10,7 +10,6 @@
 [![Matrix](https://img.shields.io/badge/matrix.org-%23terrariumpi-blue)](https://matrix.to/#/#terrariumpi:theyosh.nl)
 [![Mastodon](https://img.shields.io/badge/Mastodon-%40TerariumPI-5638cc)](https://mastodon.theyosh.nl/@TerrariumPI)
 
-
 Software for cheap home automation of your reptile terrarium or any other
 enclosed environment. With this software you are able to control for example a
 terrarium so that the temperature and humidity is of a constant value.

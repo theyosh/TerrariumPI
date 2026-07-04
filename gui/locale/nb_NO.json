@@ -1638,11 +1638,23 @@
         }
       },
       "setup": {
+        "access_token": {
+          "help": "Skriv inn Mastodon Access token.",
+          "invalid": "Det angitte tilgangstokenet er ikke gyldig. \nDen kan ikke være tom.",
+          "label": "Tilgangstoken",
+          "placeholder": "Skriv inn tilgangstoken"
+        },
         "address": {
           "help": "I2C-adresse.",
           "invalid": "Den angitte adressen er ikke gyldig. Den kan ikke være tom.",
           "label": "Serveradresse",
           "placeholder": "I2C-adresse"
+        },
+        "api_base_url": {
+          "help": "Skriv inn Mastodon API-base-url.",
+          "invalid": "Den angitte API-base-url-en er ikke gyldig. \nDen kan ikke være tom.",
+          "label": "API-base-url",
+          "placeholder": "Skriv inn API-base-url"
         },
         "api_token": {
           "help": "SMTP brukernavn.",
@@ -1652,6 +1664,18 @@
         },
         "buzzer": {
           "help": "Liste over tilgjengelige sanger som skal brukes i meldingsemnet."
+        },
+        "client_id": {
+          "help": "Skriv inn Mastodon Client ID.",
+          "invalid": "Den angitte klient-ID-en er ikke gyldig. \nDen kan ikke være tom.",
+          "label": "Klient-ID",
+          "placeholder": "Skriv inn klient-ID"
+        },
+        "client_secret": {
+          "help": "Skriv inn Mastodon Client-hemmeligheten.",
+          "invalid": "Den angitte klienthemmeligheten er ikke gyldig. \nDen kan ikke være tom.",
+          "label": "Klienthemmelighet",
+          "placeholder": "Skriv inn klienthemmeligheten"
         },
         "green": {
           "help": "Skriv inn GPIO pin for grønt lys.",
@@ -1668,6 +1692,11 @@
           "invalid": "Vennligst velg.",
           "label": "Maskinvare",
           "placeholder": "Skift maskinvare"
+        },
+        "mentioned_users": {
+          "help": "Skriv inn Mastodon-brukernavnene som skal motta varslene. \nDisse vil være private!",
+          "label": "Private varsler",
+          "placeholder": "Skriv inn Mastodon brukernavn(e)"
         },
         "password": {
           "help": "Skriv inn serverpassordet.",
