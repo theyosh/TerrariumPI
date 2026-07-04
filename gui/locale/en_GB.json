@@ -1638,11 +1638,23 @@
         }
       },
       "setup": {
+        "access_token": {
+          "help": "Enter the Mastodon Access token.",
+          "invalid": "The entered Access token is not valid. It cannot be empty.",
+          "label": "Access token",
+          "placeholder": "Enter the Access token"
+        },
         "address": {
           "help": "Enter an address.",
           "invalid": "The entered address is not valid. It cannot be empty.",
           "label": "Server address",
           "placeholder": "Enter an address"
+        },
+        "api_base_url": {
+          "help": "Enter the Mastodon API base url.",
+          "invalid": "The entered API base url is not valid. It cannot be empty.",
+          "label": "API base url",
+          "placeholder": "Enter the API base url"
         },
         "api_token": {
           "help": "Enter the Pushover API token.",
@@ -1652,6 +1664,18 @@
         },
         "buzzer": {
           "help": "List of available songs to use in the message subject."
+        },
+        "client_id": {
+          "help": "Enter the Mastodon Client ID.",
+          "invalid": "The entered Client ID is not valid. It cannot be empty.",
+          "label": "Client ID",
+          "placeholder": "Enter the Client ID"
+        },
+        "client_secret": {
+          "help": "Enter the Mastodon Client secret.",
+          "invalid": "The entered Client secret is not valid. It cannot be empty.",
+          "label": "Client secret",
+          "placeholder": "Enter the Client secret"
         },
         "green": {
           "help": "Enter GPIO pin for green light.",
@@ -1668,6 +1692,11 @@
           "invalid": "Please make a choice.",
           "label": "Hardware",
           "placeholder": "Select hardware"
+        },
+        "mentioned_users": {
+          "help": "Enter the Mastodon usernames which should receive the notifications. These will be private!",
+          "label": "Private notifications",
+          "placeholder": "Enter Mastodon username(s)"
         },
         "password": {
           "help": "Enter the server password.",
