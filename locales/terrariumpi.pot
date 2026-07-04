@@ -501,3 +501,327 @@ msgstr ""
 msgid "Telegram"
 msgstr ""
 
+#: 
+msgid "bluepy3"
+msgstr ""
+
+#: 
+msgid "Mastodon"
+msgstr ""
+
+#: 
+msgid ""Address"
+msgstr ""
+
+#: 
+msgid ""Alarm max"
+msgstr ""
+
+#: 
+msgid ""Alarm min"
+msgstr ""
+
+#: 
+msgid ""altitude"
+msgstr ""
+
+#: 
+msgid ""Amount of times to late with updates"
+msgstr ""
+
+#: 
+msgid ""Authentication login error"
+msgstr ""
+
+#: 
+msgid ""Button action"
+msgstr ""
+
+#: 
+msgid ""co2"
+msgstr ""
+
+#: 
+msgid ""conductivity"
+msgstr ""
+
+#: 
+msgid ""Current power state"
+msgstr ""
+
+#: 
+msgid ""Current power usage"
+msgstr ""
+
+#: 
+msgid ""Current state"
+msgstr ""
+
+#: 
+msgid ""Current value"
+msgstr ""
+
+#: 
+msgid ""Current water flow"
+msgstr ""
+
+#: 
+msgid ""distance"
+msgstr ""
+
+#: 
+msgid ""Duration in seconds that are short"
+msgstr ""
+
+#: 
+msgid ""Enclosure name"
+msgstr ""
+
+#: 
+msgid ""Enclosure running mode"
+msgstr ""
+
+#: 
+msgid ""Error message"
+msgstr ""
+
+#: 
+msgid ""Exclude from average"
+msgstr ""
+
+#: 
+msgid ""fertility"
+msgstr ""
+
+#: 
+msgid ""Hardware type"
+msgstr ""
+
+#: 
+msgid ""humidity"
+msgstr ""
+
+#: 
+msgid ""ID"
+msgstr ""
+
+#: 
+msgid ""IP of the wrong login attempt"
+msgstr ""
+
+#: 
+msgid ""light"
+msgstr ""
+
+#: 
+msgid ""Lights area wrong state"
+msgstr ""
+
+#: 
+msgid ""Limit max"
+msgstr ""
+
+#: 
+msgid ""Limit min"
+msgstr ""
+
+#: 
+msgid ""Local date"
+msgstr ""
+
+#: 
+msgid ""Local date and time"
+msgstr ""
+
+#: 
+msgid ""Local date, day and month"
+msgstr ""
+
+#: 
+msgid ""Local time"
+msgstr ""
+
+#: 
+msgid ""Local time, hours and minutes"
+msgstr ""
+
+#: 
+msgid ""Max difference"
+msgstr ""
+
+#: 
+msgid ""Max power usage"
+msgstr ""
+
+#: 
+msgid ""Max water flow"
+msgstr ""
+
+#: 
+msgid ""Max wattage"
+msgstr ""
+
+#: 
+msgid ""Memory usage"
+msgstr ""
+
+#: 
+msgid ""moisture"
+msgstr ""
+
+#: 
+msgid ""Name"
+msgstr ""
+
+#: 
+msgid ""Number of relays active"
+msgstr ""
+
+#: 
+msgid ""ph"
+msgstr ""
+
+#: 
+msgid ""powerusage"
+msgstr ""
+
+#: 
+msgid ""pressure"
+msgstr ""
+
+#: 
+msgid ""Relay toggle"
+msgstr ""
+
+#: 
+msgid ""Sensor alarm"
+msgstr ""
+
+#: 
+msgid ""Sensor measure state"
+msgstr ""
+
+#: 
+msgid ""Sensor type"
+msgstr ""
+
+#: 
+msgid ""Sensor type unit value"
+msgstr ""
+
+#: 
+msgid ""Storage usage"
+msgstr ""
+
+#: 
+msgid ""System CPU temperature"
+msgstr ""
+
+#: 
+msgid ""System error"
+msgstr ""
+
+#: 
+msgid ""System load last minute"
+msgstr ""
+
+#: 
+msgid ""System summary"
+msgstr ""
+
+#: 
+msgid ""System to slow with updates more then 30 times"
+msgstr ""
+
+#: 
+msgid ""System uptime in human readable format"
+msgstr ""
+
+#: 
+msgid ""System warning"
+msgstr ""
+
+#: 
+msgid ""temperature"
+msgstr ""
+
+#: 
+msgid ""The max update duration"
+msgstr ""
+
+#: 
+msgid ""The update duration in seconds"
+msgstr ""
+
+#: 
+msgid ""True if in manual mode"
+msgstr ""
+
+#: 
+msgid ""True if it is a dimmer"
+msgstr ""
+
+#: 
+msgid ""True if there is an alarm"
+msgstr ""
+
+#: 
+msgid ""True if there is an error"
+msgstr ""
+
+#: 
+msgid ""Used password"
+msgstr ""
+
+#: 
+msgid ""Used username"
+msgstr ""
+
+#: 
+msgid ""uva"
+msgstr ""
+
+#: 
+msgid ""uvb"
+msgstr ""
+
+#: 
+msgid ""uvi"
+msgstr ""
+
+#: 
+msgid ""volume"
+msgstr ""
+
+#: 
+msgid ""Warning message"
+msgstr ""
+
+#: 
+msgid ""water_flow"
+msgstr ""
+
+#: 
+msgid ""watertank"
+msgstr ""
+
+#: 
+msgid ""water_volume"
+msgstr ""
+
+#: 
+msgid ""wattage"
+msgstr ""
+
+#: 
+msgid ""Webcam archive"
+msgstr ""
+
+#: 
+msgid ""Webcam motion"
+msgstr ""
+
+#: 
+msgid ""windspeed"
+msgstr ""
+
