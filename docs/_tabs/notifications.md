@@ -69,7 +69,7 @@ sending emails.
 
 ### Mastodon
 
-![Mastodon icon](/assets/img/mastodon.svg){: .right .invert width="150" }It is
+![Mastodon icon](/assets/img/mastodon.svg){: .right width="150" }It is
 possible to send messages through Mastodon. In order to connect to Mastodon you
 need to create an `application` in the `development` section at **your** or **special bot account**.
 There you create an app with the following rights:
