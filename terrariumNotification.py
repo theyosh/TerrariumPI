@@ -2469,7 +2469,8 @@ class terrariumNotificationServiceMastodon(terrariumNotificationService):
 
     def send_message(self, _, subject: str, message, data=None, attachments=[]) -> None:
 
-        message = f"{subject}\n\n{message}"
+        if subject != message:
+            message = f"{subject}\n\n{message}"
 
         visibility = "public"
         if self.setup.get("mentioned_users"):
