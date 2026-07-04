@@ -69,10 +69,10 @@ sending emails.
 
 ### Mastodon
 
-![Mastodon icon](/assets/img/mastodon.svg){: .right .invert width="200" }It is
+![Mastodon icon](/assets/img/mastodon.svg){: .right .invert width="150" }It is
 possible to send messages through Mastodon. In order to connect to Mastodon you
-need to create an `application` in the `development` section. There you create
-an app with the following rights:
+need to create an `application` in the `development` section at **your** or **special bot account**.
+There you create an app with the following rights:
 
 - read:statuses
 - write:media
@@ -80,6 +80,10 @@ an app with the following rights:
 
 After saving you will get all the needed keys and secrets to make the
 connection.
+
+#### Private notifications
+
+It is possible to send out private notifications. To enable this specify a list of Mastodon accounts that should receive the notification. When left empty, the notification messages will be public!
 
 ### MQTT
 
