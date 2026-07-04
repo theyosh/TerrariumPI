@@ -306,7 +306,18 @@ class NotificationService(db.Entity):
     messages = orm.Set(lambda: NotificationMessage)
     state = orm.Optional(orm.Json)
 
-    ENCRYPTED_FIELDS = ["username", "password", "user_key", "api_token", "access_secret", "token", "allowed_users", "access_token", "client_id", "client_secret"]
+    ENCRYPTED_FIELDS = [
+        "username",
+        "password",
+        "user_key",
+        "api_token",
+        "access_secret",
+        "token",
+        "allowed_users",
+        "access_token",
+        "client_id",
+        "client_secret",
+    ]
 
     def _encrypt_sensitive_fields(self) -> None:
         # Encrypt sensitive fields
