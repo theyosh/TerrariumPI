@@ -55,4 +55,5 @@ export const arrIdentical = (a1, a2) => {
 //   return String(floatNumber) === String(number);
 // };
 
-export const isNumber = (num) => (typeof(num) === 'number' || typeof(num) === "string" && num.trim() !== '') && !Number.isNaN(num);
+export const isNumber = (num) =>
+  (typeof num === 'number' || (typeof num === 'string' && num.trim() !== '')) && !Number.isNaN(num);
