@@ -89,6 +89,8 @@ ansi2html==1.9.2
 
 # Notification packages
 emails==1.1.2
+# Fix cbor2 version to 6.1.2 due to build issues
+cbor2==6.1.2
 luma.oled==3.15.0
 i2c_lcd==0.1.0
 python-telegram-bot[socks,http2]==22.8
