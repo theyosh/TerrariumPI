@@ -63,6 +63,7 @@ sparkfun-qwiic-relay==0.0.2
 sensirion-i2c-driver==1.0.2
 sensirion-i2c-sht==0.4.0
 bme680==2.0.0
+Adafruit-PlatformDetect==3.89.1
 Adafruit-Blinka==9.1.0
 adafruit-circuitpython-sht31d==2.3.31
 adafruit-circuitpython-busdevice==5.2.17
