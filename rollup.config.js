@@ -7,12 +7,19 @@ import postcss from "rollup-plugin-postcss";
 import copy from "rollup-plugin-copy";
 import livereload from "rollup-plugin-livereload";
 import sveltePreprocess from "svelte-preprocess";
+
+import { brotliCompress } from 'zlib'
+import { promisify } from 'util'
+import { rollup } from 'rollup'
 import gzipPlugin from 'rollup-plugin-gzip';
+
 import json from "@rollup/plugin-json";
 import esbuild from "rollup-plugin-esbuild";
 import del from "rollup-plugin-delete";
 import template from "./html-template.js";
 import { spawn } from "child_process";
+
+const brotliPromise = promisify(brotliCompress)
 
 const production = process.env.NODE_ENV === "prod";
 
@@ -296,10 +303,61 @@ export default {
         'public/api/terrariumpi.yaml'
       ]
     }),
+    production && gzipPlugin({
+      customCompression: content => brotliPromise(Buffer.from(content)),
+      fileName: '.br',
+      additionalFiles: [
+        'public/js/jquery.min.js',
+        'public/js/jquery.knob.min.js',
+        'public/js/fullcalendar.min.js',
+        'public/js/fullcalendar-locales.min.js',
+        'public/js/jquery.dataTables.min.js',
+        'public/js/dataTables.bootstrap4.min.js',
+        'public/js/dataTables.responsive.min.js',
+        'public/js/responsive.bootstrap4.min.js',
+        'public/js/select2.min.js',
+
+        'public/js/fireworks.js',
+        'public/js/swagger-ui-bundle.js',
+        'public/js/swagger-ui-standalone-preset.js',
+        'public/js/redoc.standalone.js',
+
+        'public/js/datatables.net/i18n/ca.json',
+        'public/js/datatables.net/i18n/de-AT.json',
+        'public/js/datatables.net/i18n/de.json',
+        'public/js/datatables.net/i18n/en-GB.json',
+        'public/js/datatables.net/i18n/en-US.json',
+        'public/js/datatables.net/i18n/es-AR.json',
+        'public/js/datatables.net/i18n/es.json',
+        'public/js/datatables.net/i18n/fr-BE.json',
+        'public/js/datatables.net/i18n/it-IT.json',
+        'public/js/datatables.net/i18n/ja.json',
+        'public/js/datatables.net/i18n/nb-NO.json',
+        'public/js/datatables.net/i18n/nl-NL.json',
+        'public/js/datatables.net/i18n/pl.json',
+        'public/js/datatables.net/i18n/pt-BR.json',
+        'public/js/datatables.net/i18n/pt.json',
+        'public/js/datatables.net/i18n/sk.json',
+
+        'public/css/swagger-ui.css',
+
+        'public/api/redoc.html',
+        'public/api/swagger.html',
+        'public/api/terrariumpi.json',
+        'public/api/terrariumpi.yaml'
+      ]
+    }),
 
     production && del({
       // We do not want an index.html.gz file as that will not work with Python variables to fill by the webserver
       targets: 'public/index.html.gz',
+      verbose: true,
+      hook: 'closeBundle'
+    }),
+
+    production && del({
+      // We do not want an index.html.br file as that will not work with Python variables to fill by the webserver
+      targets: 'public/index.html.br',
       verbose: true,
       hook: 'closeBundle'
     }),

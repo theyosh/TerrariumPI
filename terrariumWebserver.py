@@ -255,6 +255,15 @@ class terrariumWebserver(object):
             filename = "/".join(filename[1:])
 
         # Load the static file
+        if "br" in request.headers.get("Accept-Encoding", ""):
+            mimetype, _ = mimetypes.guess_type(filename)
+            staticfile = static_file(filename + ".br", root=root, mimetype=mimetype)
+            if not isinstance(staticfile, HTTPError):
+                staticfile.set_header("content-encoding", "br")
+                self.__add_caching_headers(staticfile, f"{root}/{filename}")
+                return staticfile
+
+        # Load the static file
         if request.headers.get("Accept-Encoding") and "gzip" in request.headers.get("Accept-Encoding"):
             mimetype, _ = mimetypes.guess_type(filename)
             staticfile = static_file(filename + ".gz", root=root, mimetype=mimetype)
