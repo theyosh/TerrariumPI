@@ -170,7 +170,6 @@ class terrariumWebserver(object):
             "favicon": self.engine.settings["favicon"].lstrip("/"),
             "gitversion": self.engine.settings["gitversion"],
             "docker": str(terrariumUtils.is_docker()).lower(),
-            # 'languages'     : self.engine.settings['languages'],	# Should be removed
             "units": unit_variables(),
             "available_sensor_types": list(map(lambda sensor: sensor["id"], self.engine.sensor_types_loaded)),
             "show_gauge_overview": str(self.engine.settings["all_gauges_on_single_page"]).lower(),
@@ -254,30 +253,31 @@ class terrariumWebserver(object):
             root = f"public/{filename[0]}"
             filename = "/".join(filename[1:])
 
-        # Load the static file
-        if "br" in request.headers.get("Accept-Encoding", ""):
-            mimetype, _ = mimetypes.guess_type(filename)
-            staticfile = static_file(filename + ".br", root=root, mimetype=mimetype)
-            if not isinstance(staticfile, HTTPError):
-                staticfile.set_header("content-encoding", "br")
-                self.__add_caching_headers(staticfile, f"{root}/{filename}")
-                return staticfile
-
-        # Load the static file
-        if request.headers.get("Accept-Encoding") and "gzip" in request.headers.get("Accept-Encoding"):
-            mimetype, _ = mimetypes.guess_type(filename)
-            staticfile = static_file(filename + ".gz", root=root, mimetype=mimetype)
-            if not isinstance(staticfile, HTTPError):
-                staticfile.set_header("content-encoding", "gzip")
-                self.__add_caching_headers(staticfile, f"{root}/{filename}")
-                return staticfile
-
         staticfile = static_file(filename, root=root)
         if isinstance(staticfile, HTTPError):
             # File does not exists, so just return the error
             return staticfile
 
         self.__add_caching_headers(staticfile, f"{root}/{filename}")
+
+        encoding = None
+        encoding_extension = ""
+        if "br" in request.headers.get("Accept-Encoding", ""):
+            encoding = encoding_extension = "br"
+        elif "gzip" in request.headers.get("Accept-Encoding", ""):
+            encoding = "gzip"
+            encoding_extension = "gz"
+
+        if encoding is not None:
+            encoded_staticfile = static_file(
+                filename + "." + encoding_extension,
+                root=root,
+                mimetype=staticfile.get_header('Content-Type'),
+            )
+            if not isinstance(encoded_staticfile, HTTPError):
+                encoded_staticfile.set_header("content-encoding", encoding)
+                self.__add_caching_headers(encoded_staticfile, f"{root}/{filename}")
+                staticfile = encoded_staticfile
 
         return staticfile
 
