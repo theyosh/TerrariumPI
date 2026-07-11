@@ -272,7 +272,7 @@ class terrariumWebserver(object):
             encoded_staticfile = static_file(
                 filename + "." + encoding_extension,
                 root=root,
-                mimetype=staticfile.get_header('Content-Type'),
+                mimetype=staticfile.get_header("Content-Type"),
             )
             if not isinstance(encoded_staticfile, HTTPError):
                 encoded_staticfile.set_header("content-encoding", encoding)
