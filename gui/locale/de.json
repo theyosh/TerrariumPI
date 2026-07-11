@@ -1380,6 +1380,7 @@
       "temperature": "Durchschnittstemperatur",
       "uva": "Durchschnittliche UVA",
       "uvb": "Durchschnittliches UVB",
+      "uvc": "Durchschnittliches UVC",
       "uvi": "Durchschnittlicher UV -Index"
     },
     "calibration": {
@@ -1585,6 +1586,12 @@
         "title": "UV-B"
       },
       "title": "UVB -Sensoren"
+    },
+    "uvc": {
+      "menu": {
+        "title": "UV-C"
+      },
+      "title": "UVC -Sensoren"
     },
     "uvi": {
       "menu": {
