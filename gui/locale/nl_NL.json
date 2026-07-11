@@ -1380,6 +1380,7 @@
       "temperature": "Gemiddelde temperatuur",
       "uva": "Gemiddelde UVA",
       "uvb": "Gemiddelde UVB",
+      "uvc": "Gemiddelde UVC",
       "uvi": "Gemiddelde UV index"
     },
     "calibration": {
@@ -1585,6 +1586,12 @@
         "title": "UVB"
       },
       "title": "UVB sensoren"
+    },
+    "uvc": {
+      "menu": {
+        "title": "uvc"
+      },
+      "title": "UVC sensoren"
     },
     "uvi": {
       "menu": {
