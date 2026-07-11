@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI "4.16.0"\n"
-"POT-Creation-Date: 2026-07-04 21:26+0200\n"
+"POT-Creation-Date: 2026-07-11 12:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,86 +104,90 @@ msgid "uvb"
 msgstr ""
 
 #: terrariumEngine.py:75
-msgid "uvi"
+msgid "uvc"
 msgstr ""
 
 #: terrariumEngine.py:76
-msgid "fertility"
+msgid "uvi"
 msgstr ""
 
 #: terrariumEngine.py:77
-msgid "co2"
+msgid "fertility"
 msgstr ""
 
 #: terrariumEngine.py:78
+msgid "co2"
+msgstr ""
+
+#: terrariumEngine.py:79
 msgid "volume"
 msgstr ""
 
-#: terrariumEngine.py:80
+#: terrariumEngine.py:81
 msgid "water_volume"
 msgstr ""
 
-#: terrariumEngine.py:81
+#: terrariumEngine.py:82
 msgid "watertank"
 msgstr ""
 
-#: terrariumEngine.py:82
+#: terrariumEngine.py:83
 msgid "windspeed"
 msgstr ""
 
-#: terrariumEngine.py:83
+#: terrariumEngine.py:84
 msgid "water_flow"
 msgstr ""
 
-#: terrariumEngine.py:84
+#: terrariumEngine.py:85
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:85
+#: terrariumEngine.py:86
 msgid "powerusage"
 msgstr ""
 
-#: terrariumEngine.py:1417
+#: terrariumEngine.py:1418
 msgid "Up time"
 msgstr ""
 
-#: terrariumEngine.py:1421
+#: terrariumEngine.py:1422
 msgid "System load"
 msgstr ""
 
-#: terrariumEngine.py:1429
+#: terrariumEngine.py:1430
 msgid "CPU Temperature"
 msgstr ""
 
-#: terrariumEngine.py:1435
+#: terrariumEngine.py:1436
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1437
+#: terrariumEngine.py:1438
 msgid "Memory"
 msgstr ""
 
-#: terrariumEngine.py:1458
+#: terrariumEngine.py:1459
 msgid "average {sensor_type}"
 msgstr ""
 
-#: terrariumEngine.py:1585
+#: terrariumEngine.py:1586
 msgid "Version"
 msgstr ""
 
-#: terrariumEngine.py:1600 terrariumWebserver.py:508
+#: terrariumEngine.py:1601 terrariumWebserver.py:517
 msgid "A new version ({version}) is available!"
 msgstr ""
 
-#: terrariumEngine.py:1630 terrariumEngine.py:1655 terrariumEngine.py:1708
+#: terrariumEngine.py:1631 terrariumEngine.py:1656 terrariumEngine.py:1709
 msgid "Watt"
 msgstr ""
 
-#: terrariumEngine.py:1652 terrariumEngine.py:1705
+#: terrariumEngine.py:1653 terrariumEngine.py:1706
 msgid "Current active relays"
 msgstr ""
 
-#: terrariumEngine.py:1723
+#: terrariumEngine.py:1724
 msgid "last update"
 msgstr ""
 
@@ -493,19 +497,19 @@ msgstr ""
 msgid "Mastodon"
 msgstr ""
 
-#: terrariumWebserver.py:198 terrariumWebserver.py:322
+#: terrariumWebserver.py:198 terrariumWebserver.py:331
 msgid "Authentication"
 msgstr ""
 
-#: terrariumWebserver.py:198 terrariumWebserver.py:322
+#: terrariumWebserver.py:198 terrariumWebserver.py:331
 msgid "TerrariumPI"
 msgstr ""
 
-#: terrariumWebserver.py:199 terrariumWebserver.py:323
+#: terrariumWebserver.py:199 terrariumWebserver.py:332
 msgid "Authenticate to make any changes"
 msgstr ""
 
-#: terrariumWebserver.py:506
+#: terrariumWebserver.py:515
 msgid "Software Update"
 msgstr ""
 

@@ -72,6 +72,7 @@ class terrariumEngine(object):
             N_("light"): "lux",
             N_("uva"): "µW/cm²",
             N_("uvb"): "µW/cm²",
+            N_("uvc"): "µW/cm²",
             N_("uvi"): "",
             N_("fertility"): "µS/cm",
             N_("co2"): "ppm",
