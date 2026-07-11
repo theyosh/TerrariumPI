@@ -1380,6 +1380,7 @@
       "temperature": "Priemerná teplota",
       "uva": "Priemerné UVA",
       "uvb": "Priemerné UVB",
+      "uvc": "Priemerné UVC",
       "uvi": "Priemerný UV index"
     },
     "calibration": {
@@ -1585,6 +1586,12 @@
         "title": "uvb"
       },
       "title": "UVB senzory"
+    },
+    "uvc": {
+      "menu": {
+        "title": "uvc"
+      },
+      "title": "UVC senzory"
     },
     "uvi": {
       "menu": {
