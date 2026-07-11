@@ -1380,6 +1380,7 @@
       "temperature": "Average temperature",
       "uva": "Average UVA",
       "uvb": "Average UVB",
+      "uvc": "Average UVC",
       "uvi": "Average UV Index"
     },
     "calibration": {
@@ -1585,6 +1586,12 @@
         "title": "uvb"
       },
       "title": "UVB sensors"
+    },
+    "uvc": {
+      "menu": {
+        "title": "uvc"
+      },
+      "title": "UVC sensors"
     },
     "uvi": {
       "menu": {
