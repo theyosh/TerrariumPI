@@ -1214,14 +1214,14 @@ class terrariumEngine(object):
                     )
                     if newImage:
                         self.notification.message(
-                            "webcam_motion", webcam.to_dict(), [self.webcams[webcam.id].last_archived_image]
+                            "webcam_motion", webcam.to_dict(), [str(self.webcams[webcam.id].last_archived_image.resolve())]
                         )
 
                 else:
                     newImage = self.webcams[webcam.id].archive(int(webcam.archive["state"]))
                     if newImage:
                         self.notification.message(
-                            "webcam_archive", webcam.to_dict(), [self.webcams[webcam.id].last_archived_image]
+                            "webcam_archive", webcam.to_dict(), [str(self.webcams[webcam.id].last_archived_image.resolve())]
                         )
 
                 if newImage and int(webcam.archive["history"] or 0) > 0:

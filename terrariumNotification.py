@@ -411,7 +411,7 @@ class terrariumNotification(terrariumSingleton):
 
                     try:
                         message_data = data.copy()
-                        self.services[service.id].send_message(message_type, title, text, message_data)
+                        self.services[service.id].send_message(message_type, title, text, message_data, files)
                     except Exception as ex:
                         logger.exception(f"Error sending notification message '{title}': {ex}")
 
