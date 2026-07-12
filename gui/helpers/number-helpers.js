@@ -49,11 +49,8 @@ export const arrIdentical = (a1, a2) => {
   return true;
 };
 
-// export const isNumber = (number) => {
-//   let floatNumber = parseFloat(number);
+export const isNumber = (number) => {
+  let floatNumber = parseFloat(number);
 
-//   return String(floatNumber) === String(number);
-// };
-
-export const isNumber = (num) =>
-  (typeof num === 'number' || (typeof num === 'string' && num.trim() !== '')) && !Number.isNaN(num);
+  return String(floatNumber) === String(number).replace(/\.0+$/gm,'');
+};
