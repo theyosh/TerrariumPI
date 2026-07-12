@@ -52,5 +52,5 @@ export const arrIdentical = (a1, a2) => {
 export const isNumber = (number) => {
   let floatNumber = parseFloat(number);
 
-  return String(floatNumber) === String(number).replace(/\.0+$/gm,'');
+  return String(floatNumber) === String(number).replace(/\.0+$/gm, '');
 };
