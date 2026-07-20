@@ -51,6 +51,7 @@ class terrariumWebserver(object):
             {"path": re.compile(r"^/background", re.I), "timeout": 60 * 60},  #  1 Hour
             {"path": re.compile(r"^/(media|css|img|js|webfonts)/", re.I), "timeout": 1 * 24 * 60 * 60},  # 1 Day
             {"path": re.compile(r"^/(main\..*)", re.I), "timeout": 1 * 24 * 60 * 60},  # 1 Day
+            {"path": re.compile(r"^/favicon\.ico", re.I), "timeout": 1 * 24 * 60 * 60},  # 1 Day
         ]
 
         # This secret will change every reboot. So cookies will not work anymore after a reboot.
