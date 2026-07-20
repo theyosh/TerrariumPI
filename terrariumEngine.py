@@ -1734,7 +1734,7 @@ class terrariumEngine(object):
         with motd_file.open("w") as motdfile:
             motdfile.write("#!/bin/bash\n")
             motdfile.write('echo "')
-            motdfile.write(motd_title.replace("`", "\`") + "\n")
+            motdfile.write(motd_title.replace("`", r"\`") + "\n")
             motdfile.write(motd_version + "\n")
             motdfile.write(motd_averages + "\n")
             motdfile.write(motd_relays + "\n")
