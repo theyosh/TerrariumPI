@@ -460,7 +460,7 @@ class terrariumUtils:
         items = []
         for key, value in dictionary.items():
             new_key = str(parent_key) + separator + key if parent_key else key
-            if isinstance(value, collections.MutableMapping):
+            if isinstance(value, collections.abs.MutableMapping):
                 items.extend(terrariumUtils.flatten_dict(value, new_key, separator).items())
             elif isinstance(value, list):
                 for k, v in enumerate(value):
