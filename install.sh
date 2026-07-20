@@ -113,9 +113,11 @@ elif [ "${OS}" == "bookworm" ]; then
 
   OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.1 libwebpdemux2 ntp"
 
-#elif [ "${OS}" == "trixie" ]; then
-#  # Python 3.13
-#  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 chrony python3-standard-pipes libwebpdemux2"
+elif [ "${OS}" == "trixie" ]; then
+  # Python 3.13
+  PIP_MODULES="${PIP_MODULES//pony==+([^ ])/git+https:\/\/github.com\/ponyorm\/pony}"
+
+  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 chrony python3-standard-pipes libwebpdemux2"
 
 else
 

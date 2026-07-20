@@ -411,7 +411,7 @@ class terrariumAPI(object):
         )
 
         bottle_app.route(
-            "/api/relays/<relay:path>/<action:re:(toggle|on|off|\d+)>/",
+            r"/api/relays/<relay:path>/<action:re:(toggle|on|off|\d+)>/",
             "POST",
             self.relay_action,
             apply=self.authentication(),
@@ -1877,7 +1877,7 @@ class terrariumAPI(object):
         conv = Ansi2HTMLConverter()
         motd_text = Path("motd.sh").read_text().split("\n")
         motd_text = motd_text[1:-1]
-        data["summary"] = conv.convert("\n".join(motd_text).replace('echo "', "").replace("\`", "`"), full=True)
+        data["summary"] = conv.convert("\n".join(motd_text).replace('echo "', "").replace(r"\`", "`"), full=True)
         return data
 
     # Weather

@@ -503,7 +503,7 @@ class terrariumUtils:
             return None
 
         strip_regex = r"[ ,]+$"
-        return re.sub(strip_regex, "", str(address), 0, re.MULTILINE)
+        return re.sub(strip_regex, "", str(address), flags=re.MULTILINE)
 
     @staticmethod
     def get_translator(lang: str = "en-US"):
