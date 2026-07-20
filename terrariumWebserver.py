@@ -46,7 +46,7 @@ class terrariumWebserver(object):
         self.__caching_timeouts = [
             {"path": re.compile(r"^/webcam/.*\.m3u8$", re.I), "timeout": 2},  #  2 Seconds
             {"path": re.compile(r"^/webcam/.*\.ts$", re.I), "timeout": 10},  # 10 Seconds
-            {"path": re.compile(r"^/webcam/.*\.jpg$", re.I), "timeout": 30},  # 30 Seconds
+            {"path": re.compile(r"^/webcam/.*\.jpg(\?.*)?$", re.I), "timeout": 30},  # 30 Seconds
             {"path": re.compile(r"^/api/", re.I), "timeout": 60},  #  1 Minute
             {"path": re.compile(r"^/background", re.I), "timeout": 60 * 60},  #  1 Hour
             {"path": re.compile(r"^/(media|css|img|js|webfonts)/", re.I), "timeout": 1 * 24 * 60 * 60},  # 1 Day
@@ -132,7 +132,7 @@ class terrariumWebserver(object):
             # Add the caching headers
             for caching in self.__caching_timeouts:
                 if caching["path"].search(request.fullpath):
-                    response.expires = datetime.datetime.utcnow().timestamp() + caching["timeout"]
+                    response.expires = datetime.datetime.now().timestamp() + caching["timeout"]
                     response.set_header("Cache-Control", f'public, max-age={caching["timeout"]}')
 
                 elif "/" == request.fullpath or re.search(r"\.html$", request.fullpath, re.IGNORECASE):
