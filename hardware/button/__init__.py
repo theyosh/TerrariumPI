@@ -1,5 +1,4 @@
-"""
-Button package which produces different buttons to use in TerrariumPI
+"""Button package which produces different buttons to use in TerrariumPI
 
 Raises:
     terrariumButtonException: There is a general problem with a hardware button

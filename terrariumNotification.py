@@ -83,7 +83,7 @@ class terrariumNotification(terrariumSingleton):
             "placeholders": {
                 "uptime": N_("System uptime in human readable format"),
                 "system_load": N_("System load last minute"),
-                "system_load_alarm": _("True if there is an alarm"),
+                "system_load_alarm": N_("True if there is an alarm"),
                 "cpu_temperature": N_("System CPU temperature"),
                 "cpu_temperature_alarm": N_("True if there is an alarm"),
                 "storage": N_("Storage usage"),
@@ -216,7 +216,7 @@ class terrariumNotification(terrariumSingleton):
         return sorted(data, key=itemgetter("name"))
 
     def __init__(self, engine=None) -> None:
-        "Initialize empty notification system with system defaults"
+        """Initialize empty notification system with system defaults"""
 
         self.__rate_limiter_counter = {
             "total": {

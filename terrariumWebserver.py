@@ -11,7 +11,7 @@ import functools
 import re
 import base64
 import requests
-import mimetypes
+
 from PIL import Image
 from uuid import uuid4
 from pathlib import Path
@@ -141,6 +141,8 @@ class terrariumWebserver(object):
                     response.set_header("Etag", md5(response.body.encode()).hexdigest())
 
     def __template_variables(self, template):
+        _ = terrariumUtils.get_translator(self.engine.active_language)
+
         def unit_variables():
             units = {}
             for unit in self.engine.units:
@@ -192,6 +194,8 @@ class terrariumWebserver(object):
         return variables
 
     def authenticate(self, required: bool = False):
+        _ = terrariumUtils.get_translator(self.engine.active_language)
+
         return self.__auth_basic(
             self.engine.authenticate,
             required,
@@ -299,6 +303,8 @@ class terrariumWebserver(object):
             raise HTTPError(status=500, body=f"Error uploading file. {ex}")
 
     def __routes(self) -> None:
+        _ = terrariumUtils.get_translator(self.engine.active_language)
+
         # Add a 404 page...
         @self.bottle.error(400)
         @self.bottle.error(404)
@@ -439,6 +445,8 @@ class terrariumWebsocket(object):
         return authenticated
 
     def connect(self, socket) -> None:
+        _ = terrariumUtils.get_translator(self.webserver.engine.active_language)
+
         def listen_for_messages(connection) -> None:
             try:
                 self.clients.remove(connection)
