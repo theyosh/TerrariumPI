@@ -260,7 +260,7 @@ class Enclosure(db.Entity):
     webcams = orm.Set(lambda: Webcam)
 
     def __rename_image(self) -> None:
-        regex = re.compile(fr"{self.id}\.(jpg|jpeg|gif|png)$", re.IGNORECASE)
+        regex = re.compile(rf"{self.id}\.(jpg|jpeg|gif|png)$", re.IGNORECASE)
         if "" != self.image and not regex.search(self.image):
             image = Path(self.image)
             image_name = f"{image.parent}/{self.id}{image.suffix}"

@@ -342,7 +342,9 @@ class terrariumWebserver(object):
 
         # Special case: Svelte main.js|css and robots.txt and favicon.ico
         self.bottle.route(
-            r"/<filename:re:(robots\.txt|favicon\.ico|main\.css|main\.js)>", method="GET", callback=self._static_file_gui
+            r"/<filename:re:(robots\.txt|favicon\.ico|main\.css|main\.js)>",
+            method="GET",
+            callback=self._static_file_gui,
         )
         # Static files Svelte app
         self.bottle.route(
