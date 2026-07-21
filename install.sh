@@ -94,6 +94,7 @@ if [ "${OS}" == "buster" ]; then
 elif [ "${OS}" == "bullseye" ]; then
   # Python 3.9
   PIP_MODULES="${PIP_MODULES//pip==+([^ ])/pip==26.0.1}"
+  PIP_MODULES="${PIP_MODULES//setuptools==+([^ ])/setuptools==82.0.1}"
   PIP_MODULES="${PIP_MODULES//python-dotenv==+([^ ])/python-dotenv==1.2.1}"
   PIP_MODULES="${PIP_MODULES//Pillow==+([^ ])/Pillow==11.2.1}"
   PIP_MODULES="${PIP_MODULES//pylibftdi==+([^ ])/pylibftdi==0.23.0}"

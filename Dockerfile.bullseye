@@ -43,6 +43,7 @@ COPY requirements.txt contrib/python3-voltcraft-sem6000.patch.diff contrib/pytho
 RUN  sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/icalendar==.*//g' requirements.txt \
   && sed -i 's/pip==.*/pip==26.0.1/g' requirements.txt \
+  && sed -i 's/setuptools==.*/setuptools==82.0.1/g' requirements.txt \
   && sed -i 's/python-dotenv==.*/python-dotenv==1.2.1/g' requirements.txt \
   && sed -i 's/Pillow==.*/Pillow==11.2.1/g' requirements.txt \
   && sed -i 's/pylibftdi==.*/pylibftdi==0.23.0/g' requirements.txt \
