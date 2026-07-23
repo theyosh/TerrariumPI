@@ -22,7 +22,7 @@ if [[ $ENABLE_I2C == "true" ]] && [ -f /etc/modules ]; then
 fi
 
 BOOTCONFIG="/boot/config.txt"
-if [ "${OS}" == "bookworm" ]; then
+if [[ "${OS}" == "bookworm" ]] || [[ "${OS}" == "trixie" ]]; then
   BOOTCONFIG="/boot/firmware/config.txt"
 fi
 
@@ -43,7 +43,7 @@ if [ -f "${BOOTCONFIG}" ]; then
   fi
 
   # Enable camera
-  if [ "${OS}" != "bookworm" ]; then
+  if [[ "${OS}" != "bookworm" ]] && [[ "${OS}" != "trixie" ]]; then
     if [[ $ENABLE_CAMERA == "true" ]] && [ $(grep -ic "^gpu_mem=" "${BOOTCONFIG}") -eq 0 ]; then
         echo "gpu_mem=128" >> "${BOOTCONFIG}"
         echo "Enabled Camera in boot config (1)"
@@ -99,7 +99,7 @@ fi
 
 # Disable serial debug to enable CO2 sensors
 CMDLINE="/boot/cmdline.txt"
-if [ "${OS}" == "bookworm" ]; then
+if [[ "${OS}" == "bookworm" ]] || [[ "${OS}" == "trixie" ]]; then
   CMDLINE="/boot/firmware/cmdline.txt"
 fi
 

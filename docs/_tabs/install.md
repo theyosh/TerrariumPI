@@ -115,9 +115,9 @@ services:
       - /boot/config.txt:/boot/config.txt # For OS Buster and Bullseye
       - /boot/cmdline.txt:/boot/cmdline.txt # For OS Buster and Bullseye
 
-      - /boot/firmware/config.txt:/boot/firmware/config.txt # For OS Bookworm
-      - /boot/firmware/cmdline.txt:/boot/firmware/cmdline.txt # For OS Bookworm
-      - /run/udev:/run/udev # For OS Bookworm
+      - /boot/firmware/config.txt:/boot/firmware/config.txt # For OS Bookworm and Trixie
+      - /boot/firmware/cmdline.txt:/boot/firmware/cmdline.txt # For OS Bookworm and Trixie
+      - /run/udev:/run/udev # For OS Bookworm and Trixie
 
       - /etc/modules:/etc/modules
       - /dev:/dev
