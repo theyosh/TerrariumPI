@@ -89,6 +89,7 @@ pyfiglet==1.0.4
 ansi2html==1.9.2
 
 # Notification packages
+cbor2==6.1.3
 emails==1.1.2
 # Fix cbor2 version to 6.1.2 due to build issues
 cbor2==6.1.2

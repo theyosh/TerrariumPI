@@ -81,6 +81,7 @@ if [ "${OS}" == "buster" ]; then
   PIP_MODULES="${PIP_MODULES//pyfiglet==+([^ ])/pyfiglet==0.8.post1}"
 
   PIP_MODULES="${PIP_MODULES//emails==+([^ ])/emails==0.6}"
+  PIP_MODULES="${PIP_MODULES//cbor2==+([^ ])/cbor2==5.4.6}"
   PIP_MODULES="${PIP_MODULES//luma.oled==+([^ ])/luma.oled==3.13.0}"
 
   PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==20.3}"
