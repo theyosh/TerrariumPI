@@ -117,7 +117,7 @@ elif [ "${OS}" == "trixie" ]; then
   # Python 3.13
   PIP_MODULES="${PIP_MODULES//pony==+([^ ])/git+https:\/\/github.com\/ponyorm\/pony}"
 
-  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 chrony python3-standard-pipes libwebpdemux2"
+  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 libwebpdemux2 chrony"
 
 else
 
@@ -365,9 +365,9 @@ EOF
 
 done
 
-if [ "${OS}" == "trixie" ]; then
-  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
-fi
+#if [ "${OS}" == "trixie" ]; then
+#  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
+#fi
 
 PROGRESS=$((MODULE_MAX + 3))
 cat <<EOF
