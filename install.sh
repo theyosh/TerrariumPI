@@ -367,9 +367,9 @@ EOF
 
 done
 
-#if [ "${OS}" == "trixie" ]; then
-#  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
-#fi
+if [ "${OS}" == "trixie" ]; then
+  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
+fi
 
 PROGRESS=$((MODULE_MAX + 3))
 cat <<EOF

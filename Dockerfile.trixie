@@ -55,6 +55,7 @@ RUN  sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/git+https:\/\/github.com\/PiSupply\/Bright-Pi//g' requirements.txt \
   && sed -i 's/pony==.*/git+https:\/\/github.com\/ponyorm\/pony/g' requirements.txt \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
+  && sed -i "/opt/venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@" \
   && find /opt/venv -type d -name "test*" | xargs rm -rf  \
   && find /opt/venv -type d -name "__pycache__" | xargs rm -rf \
   && find /opt/venv -type d -name ".git" | xargs rm -rf \
@@ -116,7 +117,7 @@ RUN  rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
 
 RUN  apt-get -o Acquire::ForceIPv4=true update \
   && apt-get -o Acquire::ForceIPv4=true full-upgrade -y --no-install-recommends \
-  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends netcat-openbsd procps bluez pigpio ffmpeg libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 libwebpdemux2 libftdi1-2 libxslt1.1 chrony libopenblas0 libgfortran5 libraspberrypi-bin rpicam-apps-core \
+  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends netcat-openbsd procps bluez pigpio ffmpeg libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 libwebpdemux2 libftdi1-2 libxslt1.1 chrony libopenblas0 libgfortran5 raspi-utils rpicam-apps-core \
   && apt-get --purge autoremove -y \
   && apt-get autoclean
 
