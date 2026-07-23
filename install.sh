@@ -101,6 +101,7 @@ elif [ "${OS}" == "bullseye" ]; then
   PIP_MODULES="${PIP_MODULES//Adafruit-Blinka==+([^ ])/Adafruit-Blinka==8.64.0}"
   PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==1.4.0}"
   PIP_MODULES="${PIP_MODULES//emails==+([^ ])/emails==0.6}"
+  PIP_MODULES="${PIP_MODULES//cbor2==+([^ ])/cbor2==5.9.0}"
   PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==22.5}"
   PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.32.5}"
   PIP_MODULES="${PIP_MODULES//icalendar==+([^ ])/icalendar==6.3.2}"
