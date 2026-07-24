@@ -26,6 +26,7 @@ ENV PIP_DEFAULT_TIMEOUT=100 \
     PYTHONDONTWRITEBYTECODE=1
 ENV PATH="/opt/venv/bin:$PATH"
 RUN python -m venv /opt/venv
+COPY contrib/pipes/* /opt/venv/lib/python3.13/site-packages/pipes/
 RUN pip install --upgrade pip==24.1.2 && pip install --upgrade wheel==0.43.0
 
 COPY requirements.txt contrib/python3-voltcraft-sem6000.patch.diff contrib/python3-as7331.patch.diff /
@@ -55,7 +56,6 @@ RUN  sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/git+https:\/\/github.com\/PiSupply\/Bright-Pi//g' requirements.txt \
   && sed -i 's/pony==.*/git+https:\/\/github.com\/ponyorm\/pony/g' requirements.txt \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
-  && sed -i "/opt/venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@" \
   && find /opt/venv -type d -name "test*" | xargs rm -rf  \
   && find /opt/venv -type d -name "__pycache__" | xargs rm -rf \
   && find /opt/venv -type d -name ".git" | xargs rm -rf \

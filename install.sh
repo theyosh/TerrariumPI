@@ -316,6 +316,8 @@ if [ -f venv/pyvenv.cfg ]; then
     sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = false@"
 fi
 python3 -m venv venv
+mkdir -p venv/lib/python3.13/site-packages/pipes/
+cp contrib/pipes/* venv/lib/python3.13/site-packages/pipes/
 source venv/bin/activate
 
 # Install python modules inside the virtual env of Python
@@ -367,9 +369,9 @@ EOF
 
 done
 
-if [ "${OS}" == "trixie" ]; then
-  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
-fi
+#if [ "${OS}" == "trixie" ]; then
+#  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
+#fi
 
 PROGRESS=$((MODULE_MAX + 3))
 cat <<EOF
