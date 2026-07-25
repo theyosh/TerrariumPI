@@ -54,13 +54,13 @@ for the built-in function open() or for os.popen().
 
 To create a new template object initialized to a given one:
    t2 = t.clone()
-"""                                     # '
-
+"""  # '
 
 import re
 import os
 import tempfile
 import warnings
+
 # we import the quote function rather than the module for backward compat
 # (quote used to be an undocumented but used function in pipes)
 from shlex import quote
@@ -70,22 +70,22 @@ warnings.warn(
     f"{__name__} was removed in Python 3.13. "
     f"Please be aware that you are currently NOT using standard '{__name__}', "
     f"but instead a separately installed 'standard-{__name__}'.",
-    DeprecationWarning, stacklevel=2
+    DeprecationWarning,
+    stacklevel=2,
 )
 
 __all__ = ["Template"]
 
 # Conversion step kinds
 
-FILEIN_FILEOUT = 'ff'                   # Must read & write real files
-STDIN_FILEOUT  = '-f'                   # Must write a real file
-FILEIN_STDOUT  = 'f-'                   # Must read a real file
-STDIN_STDOUT   = '--'                   # Normal pipeline element
-SOURCE         = '.-'                   # Must be first, writes stdout
-SINK           = '-.'                   # Must be last, reads stdin
+FILEIN_FILEOUT = "ff"  # Must read & write real files
+STDIN_FILEOUT = "-f"  # Must write a real file
+FILEIN_STDOUT = "f-"  # Must read a real file
+STDIN_STDOUT = "--"  # Normal pipeline element
+SOURCE = ".-"  # Must be first, writes stdout
+SINK = "-."  # Must be last, reads stdin
 
-stepkinds = [FILEIN_FILEOUT, STDIN_FILEOUT, FILEIN_STDOUT, STDIN_STDOUT, \
-             SOURCE, SINK]
+stepkinds = [FILEIN_FILEOUT, STDIN_FILEOUT, FILEIN_STDOUT, STDIN_STDOUT, SOURCE, SINK]
 
 
 class Template:
@@ -98,7 +98,7 @@ class Template:
 
     def __repr__(self):
         """t.__repr__() implements repr(t)."""
-        return '<Template instance, steps=%r>' % (self.steps,)
+        return "<Template instance, steps=%r>" % (self.steps,)
 
     def reset(self):
         """t.reset() restores a pipeline template to its initial state."""
@@ -119,62 +119,61 @@ class Template:
     def append(self, cmd, kind):
         """t.append(cmd, kind) adds a new step at the end."""
         if not isinstance(cmd, str):
-            raise TypeError('Template.append: cmd must be a string')
+            raise TypeError("Template.append: cmd must be a string")
         if kind not in stepkinds:
-            raise ValueError('Template.append: bad kind %r' % (kind,))
+            raise ValueError("Template.append: bad kind %r" % (kind,))
         if kind == SOURCE:
-            raise ValueError('Template.append: SOURCE can only be prepended')
+            raise ValueError("Template.append: SOURCE can only be prepended")
         if self.steps and self.steps[-1][1] == SINK:
-            raise ValueError('Template.append: already ends with SINK')
-        if kind[0] == 'f' and not re.search(r'\$IN\b', cmd):
-            raise ValueError('Template.append: missing $IN in cmd')
-        if kind[1] == 'f' and not re.search(r'\$OUT\b', cmd):
-            raise ValueError('Template.append: missing $OUT in cmd')
+            raise ValueError("Template.append: already ends with SINK")
+        if kind[0] == "f" and not re.search(r"\$IN\b", cmd):
+            raise ValueError("Template.append: missing $IN in cmd")
+        if kind[1] == "f" and not re.search(r"\$OUT\b", cmd):
+            raise ValueError("Template.append: missing $OUT in cmd")
         self.steps.append((cmd, kind))
 
     def prepend(self, cmd, kind):
         """t.prepend(cmd, kind) adds a new step at the front."""
         if not isinstance(cmd, str):
-            raise TypeError('Template.prepend: cmd must be a string')
+            raise TypeError("Template.prepend: cmd must be a string")
         if kind not in stepkinds:
-            raise ValueError('Template.prepend: bad kind %r' % (kind,))
+            raise ValueError("Template.prepend: bad kind %r" % (kind,))
         if kind == SINK:
-            raise ValueError('Template.prepend: SINK can only be appended')
+            raise ValueError("Template.prepend: SINK can only be appended")
         if self.steps and self.steps[0][1] == SOURCE:
-            raise ValueError('Template.prepend: already begins with SOURCE')
-        if kind[0] == 'f' and not re.search(r'\$IN\b', cmd):
-            raise ValueError('Template.prepend: missing $IN in cmd')
-        if kind[1] == 'f' and not re.search(r'\$OUT\b', cmd):
-            raise ValueError('Template.prepend: missing $OUT in cmd')
+            raise ValueError("Template.prepend: already begins with SOURCE")
+        if kind[0] == "f" and not re.search(r"\$IN\b", cmd):
+            raise ValueError("Template.prepend: missing $IN in cmd")
+        if kind[1] == "f" and not re.search(r"\$OUT\b", cmd):
+            raise ValueError("Template.prepend: missing $OUT in cmd")
         self.steps.insert(0, (cmd, kind))
 
     def open(self, file, rw):
         """t.open(file, rw) returns a pipe or file object open for
         reading or writing; the file is the other end of the pipeline."""
-        if rw == 'r':
+        if rw == "r":
             return self.open_r(file)
-        if rw == 'w':
+        if rw == "w":
             return self.open_w(file)
-        raise ValueError('Template.open: rw must be \'r\' or \'w\', not %r'
-                         % (rw,))
+        raise ValueError("Template.open: rw must be 'r' or 'w', not %r" % (rw,))
 
     def open_r(self, file):
         """t.open_r(file) and t.open_w(file) implement
         t.open(file, 'r') and t.open(file, 'w') respectively."""
         if not self.steps:
-            return open(file, 'r')
+            return open(file, "r")
         if self.steps[-1][1] == SINK:
-            raise ValueError('Template.open_r: pipeline ends width SINK')
-        cmd = self.makepipeline(file, '')
-        return os.popen(cmd, 'r')
+            raise ValueError("Template.open_r: pipeline ends width SINK")
+        cmd = self.makepipeline(file, "")
+        return os.popen(cmd, "r")
 
     def open_w(self, file):
         if not self.steps:
-            return open(file, 'w')
+            return open(file, "w")
         if self.steps[0][1] == SOURCE:
-            raise ValueError('Template.open_w: pipeline begins with SOURCE')
-        cmd = self.makepipeline('', file)
-        return os.popen(cmd, 'w')
+            raise ValueError("Template.open_w: pipeline begins with SOURCE")
+        cmd = self.makepipeline("", file)
+        return os.popen(cmd, "w")
 
     def copy(self, infile, outfile):
         return os.system(self.makepipeline(infile, outfile))
@@ -183,7 +182,7 @@ class Template:
         cmd = makepipeline(infile, self.steps, outfile)
         if self.debugging:
             print(cmd)
-            cmd = 'set -x; ' + cmd
+            cmd = "set -x; " + cmd
         return cmd
 
 
@@ -193,64 +192,64 @@ def makepipeline(infile, steps, outfile):
 
     list = []
     for cmd, kind in steps:
-        list.append(['', cmd, kind, ''])
+        list.append(["", cmd, kind, ""])
     #
     # Make sure there is at least one step
     #
     if not list:
-        list.append(['', 'cat', '--', ''])
+        list.append(["", "cat", "--", ""])
     #
     # Take care of the input and output ends
     #
     [cmd, kind] = list[0][1:3]
-    if kind[0] == 'f' and not infile:
-        list.insert(0, ['', 'cat', '--', ''])
+    if kind[0] == "f" and not infile:
+        list.insert(0, ["", "cat", "--", ""])
     list[0][0] = infile
     #
     [cmd, kind] = list[-1][1:3]
-    if kind[1] == 'f' and not outfile:
-        list.append(['', 'cat', '--', ''])
+    if kind[1] == "f" and not outfile:
+        list.append(["", "cat", "--", ""])
     list[-1][-1] = outfile
     #
     # Invent temporary files to connect stages that need files
     #
     garbage = []
     for i in range(1, len(list)):
-        lkind = list[i-1][2]
+        lkind = list[i - 1][2]
         rkind = list[i][2]
-        if lkind[1] == 'f' or rkind[0] == 'f':
-            (fd, temp) = tempfile.mkstemp()
+        if lkind[1] == "f" or rkind[0] == "f":
+            fd, temp = tempfile.mkstemp()
             os.close(fd)
             garbage.append(temp)
-            list[i-1][-1] = list[i][0] = temp
+            list[i - 1][-1] = list[i][0] = temp
     #
     for item in list:
         [inf, cmd, kind, outf] = item
-        if kind[1] == 'f':
-            cmd = 'OUT=' + quote(outf) + '; ' + cmd
-        if kind[0] == 'f':
-            cmd = 'IN=' + quote(inf) + '; ' + cmd
-        if kind[0] == '-' and inf:
-            cmd = cmd + ' <' + quote(inf)
-        if kind[1] == '-' and outf:
-            cmd = cmd + ' >' + quote(outf)
+        if kind[1] == "f":
+            cmd = "OUT=" + quote(outf) + "; " + cmd
+        if kind[0] == "f":
+            cmd = "IN=" + quote(inf) + "; " + cmd
+        if kind[0] == "-" and inf:
+            cmd = cmd + " <" + quote(inf)
+        if kind[1] == "-" and outf:
+            cmd = cmd + " >" + quote(outf)
         item[1] = cmd
     #
     cmdlist = list[0][1]
     for item in list[1:]:
         [cmd, kind] = item[1:3]
-        if item[0] == '':
-            if 'f' in kind:
-                cmd = '{ ' + cmd + '; }'
-            cmdlist = cmdlist + ' |\n' + cmd
+        if item[0] == "":
+            if "f" in kind:
+                cmd = "{ " + cmd + "; }"
+            cmdlist = cmdlist + " |\n" + cmd
         else:
-            cmdlist = cmdlist + '\n' + cmd
+            cmdlist = cmdlist + "\n" + cmd
     #
     if garbage:
-        rmcmd = 'rm -f'
+        rmcmd = "rm -f"
         for file in garbage:
-            rmcmd = rmcmd + ' ' + quote(file)
-        trapcmd = 'trap ' + quote(rmcmd + '; exit') + ' 1 2 3 13 14 15'
-        cmdlist = trapcmd + '\n' + cmdlist + '\n' + rmcmd
+            rmcmd = rmcmd + " " + quote(file)
+        trapcmd = "trap " + quote(rmcmd + "; exit") + " 1 2 3 13 14 15"
+        cmdlist = trapcmd + "\n" + cmdlist + "\n" + rmcmd
     #
     return cmdlist
