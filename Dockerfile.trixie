@@ -1,14 +1,11 @@
 # Build for raspberry pi
 # docker buildx build --platform linux/arm/v7 --progress=plain -t theyosh/terrariumpi:4.0.0 -f Dockerfile --push .
 
-# build sispmctl 4.12
-FROM gcc:10-buster AS sispmctl_builder
+# build sispmctl 4.14
+FROM gcc:14-trixie AS sispmctl_builder
 ARG SISPMCTL_VERSION="4.12"
 WORKDIR /sispmctl
-RUN  echo "deb http://archive.debian.org/debian/ buster main contrib non-free" > /etc/apt/sources.list \
-  && echo "deb http://archive.debian.org/debian/ buster-proposed-updates main contrib non-free" >> /etc/apt/sources.list \
-  && echo "deb http://archive.debian.org/debian-security buster/updates main contrib non-free" >>  /etc/apt/sources.list \
-  && apt-get -o Acquire::ForceIPv4=true update \
+RUN  apt-get -o Acquire::ForceIPv4=true update \
   && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends libusb-dev \
   && wget https://sourceforge.net/projects/sispmctl/files/sispmctl/sispmctl-${SISPMCTL_VERSION}/sispmctl-${SISPMCTL_VERSION}.tar.gz/download -O sispmctl-${SISPMCTL_VERSION}.tar.gz \
   && tar zxvf sispmctl-${SISPMCTL_VERSION}.tar.gz --strip 1 \
@@ -17,7 +14,7 @@ RUN  echo "deb http://archive.debian.org/debian/ buster main contrib non-free" >
   && make install
 
 # python builder, help keep image small
-FROM python:3.7-buster AS python_builder
+FROM python:3.13-trixie AS python_builder
 ENV PIP_DEFAULT_TIMEOUT=100 \
     # Allow statements and log messages to immediately appear
     PYTHONUNBUFFERED=1 \
@@ -28,51 +25,36 @@ ENV PIP_DEFAULT_TIMEOUT=100 \
     # do not create __pycache__/ files
     PYTHONDONTWRITEBYTECODE=1
 ENV PATH="/opt/venv/bin:$PATH"
-
-# Some strange DNS issues with installing PGP keys. keyserver.ubuntu.com => 185.125.188.26
-RUN  apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends gnupg libxslt1-dev libxml2-dev \
-  && echo "deb http://archive.raspberrypi.org/debian/ buster main" >> /etc/apt/sources.list.d/raspberrypi.list \
-  && apt-key adv --keyserver 185.125.188.26 --recv-keys 9165938D90FDDD2E 82B129927FA3303E
-
 RUN python -m venv /opt/venv
-RUN pip install --upgrade pip==24.0 && pip install --upgrade wheel==0.42.0
+COPY contrib/pipes/* /opt/venv/lib/python3.13/site-packages/pipes/
+RUN pip install --upgrade pip==24.1.2 && pip install --upgrade wheel==0.43.0
 
 COPY requirements.txt contrib/python3-voltcraft-sem6000.patch.diff contrib/python3-as7331.patch.diff /
 
+RUN  apt-get -o Acquire::ForceIPv4=true update \
+  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends gnupg libxslt1-dev libxml2-dev \
+  && mkdir -p /root/.gnupg/ \
+  && chmod 700 /root/.gnupg/ \
+  && mkdir -p /etc/crypto-policies/back-ends \
+  && echo "[hash_algorithms]\nsha1 = \"always\"" > /etc/crypto-policies/back-ends/sequoia.config \
+  && curl -fsSL http://raspbian.raspberrypi.org/raspbian.public.key \
+     | gpg --dearmor -o /usr/share/keyrings/raspbian-keyring.gpg \
+  && echo "deb [signed-by=/usr/share/keyrings/raspbian-keyring.gpg] http://raspbian.raspberrypi.org/raspbian/ trixie main contrib non-free rpi" \
+     > /etc/apt/sources.list.d/raspberrypi.list \
+  && curl -fsSL https://archive.raspberrypi.org/debian/raspberrypi.gpg.key \
+     | gpg --dearmor -o /usr/share/keyrings/raspbian-archive-keyring.gpg \
+  && echo "deb [signed-by=/usr/share/keyrings/raspbian-archive-keyring.gpg] http://archive.raspberrypi.org/debian/ trixie main" \
+     > /etc/apt/sources.list.d/raspberrypi-archive.list \
+  && apt-get -o Acquire::ForceIPv4=true update \
+  && apt-get -o Acquire::ForceIPv4=true full-upgrade -y --no-install-recommends \
+  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends libasound2-dev libglib2.0-dev libbluetooth-dev make
+
 # requirements are slightly different for docker
 # overruling does not work here, pip will exit with non 0 which will stop the build
-RUN  sed -i 's/pip==.*/pip==24.0/g' requirements.txt \
-  && sed -i 's/setuptools==.*/setuptools==68.0.0/g' requirements.txt \
-  && sed -i 's/wheel==.*/wheel==0.42.0/g' requirements.txt \
-  && sed -i 's/yoyo-migrations==.*/yoyo-migrations==8.2.0/g' requirements.txt \
-  && sed -i 's/python-dotenv==.*/python-dotenv==0.21.1/g' requirements.txt \
-  && sed -i 's/gevent==.*/gevent==22.10.2/g' requirements.txt \
-  && sed -i 's/bcrypt==.*/bcrypt==4.1.3/g' requirements.txt \
-  && sed -i 's/cryptography==.*/cryptography==45.0.7/g' requirements.txt \
-  && sed -i 's/Pillow==.*/Pillow==9.5.0/g' requirements.txt \
-  && sed -i 's/numpy==.*/numpy==1.21.4/g' requirements.txt \
-  && sed -i 's/opencv-python-headless==.*/opencv-python-headless==4.6.0.66/g' requirements.txt \
-  && sed -i 's/gpiozero==.*/gpiozero==1.6.2/g' requirements.txt \
-  && sed -i 's/requests==.*/requests==2.31.0/g' requirements.txt \
-  && sed -i 's/pylibftdi==.*/pylibftdi==0.23.0/g' requirements.txt \
-  && sed -i 's/python-kasa==.*/python-kasa==0.5.1/g' requirements.txt \
-  && sed -i 's/meross-iot==.*/meross-iot==0.4.7.5/g' requirements.txt \
-  && sed -i 's/pywemo==.*/pywemo==0.9.2/g' requirements.txt \
-  && sed -i 's/sensirion-i2c-driver==.*/sensirion-i2c-driver==1.0.0/g' requirements.txt \
-  && sed -i 's/Adafruit-Blinka==.*/Adafruit-Blinka==8.43.0/g' requirements.txt \
-  && sed -i 's/icalevents==.*/icalevents==0.1.25/g' requirements.txt \
-  && sed -i 's/psutil==.*/psutil==6.0.0/g' requirements.txt \
-  && sed -i 's/packaging==.*/packaging==24.0/g' requirements.txt \
-  && sed -i 's/pyfiglet==.*/pyfiglet==0.8.post1/g' requirements.txt \
-  && sed -i 's/emails==.*/emails==0.6/g' requirements.txt \
-  && sed -i 's/cbor2==.*/cbor2==5.4.6/g' requirements.txt \
-  && sed -i 's/luma.oled==.*/luma.oled==3.13.0/g' requirements.txt \
-  && sed -i 's/python-telegram-bot\[socks,http2\]==.*/python-telegram-bot\[socks,http2\]==20.3/g' requirements.txt \
-  && sed -i 's/adafruit-circuitpython-typing==.*/adafruit-circuitpython-typing==1.10.1/g' requirements.txt \
-  && sed -i 's/pydantic==.*/pydantic==1.10.9/g' requirements.txt \
-  && sed -i 's/paho-mqtt==.*//g' requirements.txt \
+RUN  sed -i 's/paho-mqtt==.*//g' requirements.txt \
   && sed -i 's/icalendar==.*//g' requirements.txt \
-  && pip install smbus==1.1.post2 --extra-index-url https://www.piwheels.org/simple \
+  && sed -i 's/git+https:\/\/github.com\/PiSupply\/Bright-Pi//g' requirements.txt \
+  && sed -i 's/pony==.*/git+https:\/\/github.com\/ponyorm\/pony/g' requirements.txt \
   && pip install -r requirements.txt --extra-index-url https://www.piwheels.org/simple \
   && find /opt/venv -type d -name "test*" | xargs rm -rf  \
   && find /opt/venv -type d -name "__pycache__" | xargs rm -rf \
@@ -95,7 +77,7 @@ RUN  git clone https://github.com/ageir/chirp-rpi.git --depth 1 "3rdparty/chirp-
   && find . -type d -name ".git" -exec rm -r {} +
 
 # Sourcecode cleanup and pre-prep
-FROM python:3.7-buster AS sourcecode
+FROM python:3.13-trixie AS sourcecode
 WORKDIR /TerrariumPI
 COPY . .
 # remove git and 3rdparty dir from code copy to help keep image smaller
@@ -103,7 +85,7 @@ COPY . .
 RUN rm -Rf .git 3rdparty gui package*.json postcss.config.js rollup.config.js .env.* html-template.js requirements.txt yarn.lock
 
 # actual image
-FROM python:3.7-slim-buster AS finalimage
+FROM python:3.13-slim-trixie AS finalimage
 ARG GITHUB_SHA="development"
 ARG JAVA=""
 ENV PIP_DEFAULT_TIMEOUT=100 \
@@ -121,24 +103,21 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY --from=sispmctl_builder /usr/local/lib/libsispmctl* /usr/local/lib/.
 COPY --from=sispmctl_builder /usr/local/bin/sispmctl /usr/local/bin/sispmctl
 
+COPY --from=python_builder /usr/share/keyrings /usr/share/keyrings
+COPY --from=python_builder /etc/crypto-policies/back-ends /etc/crypto-policies/back-ends
 COPY --from=python_builder /etc/apt /etc/apt
 COPY --from=python_builder /opt/venv /opt/venv
 COPY --from=python_builder /TerrariumPI/3rdparty /TerrariumPI/3rdparty
 COPY --from=sourcecode /TerrariumPI /TerrariumPI
 
 RUN  rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
-  && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so \
-  && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so.0 \
-  && echo "/opt/vc/lib" > /etc/ld.so.conf.d/00-vmcs.conf \
+  && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so \
+  && ln -s /usr/local/lib/libsispmctl.so.0.2.2 /usr/local/lib/libsispmctl.so.0 \
   && ldconfig
 
-RUN  echo "deb http://archive.debian.org/debian/ buster main contrib non-free" > /etc/apt/sources.list \
-  && echo "deb http://archive.debian.org/debian/ buster-proposed-updates main contrib non-free" >> /etc/apt/sources.list \
-  && echo "deb http://archive.debian.org/debian-security buster/updates main contrib non-free" >>  /etc/apt/sources.list \
-  && sed -i 's/.*deb.debian.org.*//g' /etc/apt/sources.list \
-  && apt-get -o Acquire::ForceIPv4=true update \
+RUN  apt-get -o Acquire::ForceIPv4=true update \
   && apt-get -o Acquire::ForceIPv4=true full-upgrade -y --no-install-recommends \
-  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends netcat-openbsd procps bluez pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libgfortran5 libraspberrypi-bin \
+  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends netcat-openbsd procps bluez pigpio ffmpeg libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 libwebpdemux2 libftdi1-2 libxslt1.1 chrony libopenblas0 libgfortran5 raspi-utils rpicam-apps-core \
   && apt-get --purge autoremove -y \
   && apt-get autoclean
 

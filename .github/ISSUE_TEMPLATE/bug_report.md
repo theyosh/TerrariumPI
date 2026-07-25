@@ -15,7 +15,7 @@ Or search in the [closed tickets](https://github.com/theyosh/TerrariumPI/issues?
  - TerrariumPI version: 4.[x].[y]
  - Install: [Manual] / [Docker]
  - Raspberry PI: [e.g. 3B or 4]
- - OS: [Buster, Bullseye, Bookworm]
+ - OS: [Buster, Bullseye, Bookworm, Trixie]
 
 **Describe the bug**
 A clear and concise description of what the bug is.

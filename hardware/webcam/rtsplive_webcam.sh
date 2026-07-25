@@ -69,7 +69,7 @@ if [ "${OS}" == "buster" ]; then
 fi
 
 S_TIMEOUT="-stimeout"
-if [ "${OS}" == "bookworm" ]; then
+if [ "${OS}" == "bookworm" ] || [ "${OS}" == "trixie" ]; then
     S_TIMEOUT="-timeout"
 fi
 

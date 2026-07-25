@@ -81,6 +81,7 @@ if [ "${OS}" == "buster" ]; then
   PIP_MODULES="${PIP_MODULES//pyfiglet==+([^ ])/pyfiglet==0.8.post1}"
 
   PIP_MODULES="${PIP_MODULES//emails==+([^ ])/emails==0.6}"
+  PIP_MODULES="${PIP_MODULES//cbor2==+([^ ])/cbor2==5.4.6}"
   PIP_MODULES="${PIP_MODULES//luma.oled==+([^ ])/luma.oled==3.13.0}"
 
   PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==20.3}"
@@ -101,6 +102,7 @@ elif [ "${OS}" == "bullseye" ]; then
   PIP_MODULES="${PIP_MODULES//Adafruit-Blinka==+([^ ])/Adafruit-Blinka==8.64.0}"
   PIP_MODULES="${PIP_MODULES//pywemo==+([^ ])/pywemo==1.4.0}"
   PIP_MODULES="${PIP_MODULES//emails==+([^ ])/emails==0.6}"
+  PIP_MODULES="${PIP_MODULES//cbor2==+([^ ])/cbor2==5.9.0}"
   PIP_MODULES="${PIP_MODULES//python-telegram-bot\[socks,http2\]==+([^ ])/python-telegram-bot\[socks,http2\]==22.5}"
   PIP_MODULES="${PIP_MODULES//requests==+([^ ])/requests==2.32.5}"
   PIP_MODULES="${PIP_MODULES//icalendar==+([^ ])/icalendar==6.3.2}"
@@ -118,7 +120,7 @@ elif [ "${OS}" == "trixie" ]; then
   # Python 3.13
   PIP_MODULES="${PIP_MODULES//pony==+([^ ])/git+https:\/\/github.com\/ponyorm\/pony}"
 
-  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 chrony python3-standard-pipes libwebpdemux2"
+  OPENCV_PACKAGES="libopenexr-3-1-30 liblapack3 libatlas3-base libssl1.0.2 libwebpdemux2 chrony"
 
 else
 
@@ -315,6 +317,8 @@ if [ -f venv/pyvenv.cfg ]; then
     sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = false@"
 fi
 python3 -m venv venv
+mkdir -p venv/lib/python3.13/site-packages/pipes/
+cp contrib/pipes/* venv/lib/python3.13/site-packages/pipes/
 source venv/bin/activate
 
 # Install python modules inside the virtual env of Python
@@ -366,9 +370,9 @@ EOF
 
 done
 
-if [ "${OS}" == "trixie" ]; then
-  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
-fi
+#if [ "${OS}" == "trixie" ]; then
+#  sed -i "venv/pyvenv.cfg" -e "s@^include-system-site-packages.*@include-system-site-packages = true@"
+#fi
 
 PROGRESS=$((MODULE_MAX + 3))
 cat <<EOF
