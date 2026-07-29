@@ -76,6 +76,7 @@ class terrariumAudioPlayer(object):
         self.playlists = playlists
         self.shuffle = shuffle
         self.repeat = repeat
+        self.audio_volume = 0
 
     def __run(self) -> None:
         self.__stop = 0
@@ -84,15 +85,18 @@ class terrariumAudioPlayer(object):
                 break
 
             files = copy.copy(playlist["files"])
+            self.shuffle = playlist.get("shuffle", False)
+            self.repeat = playlist.get("repeat", False)
+            self.audio_volume = playlist.get("volume", 80)
 
-            if playlist.get("shuffle"):
+            if self.shuffle:
                 random.shuffle(files)
 
-            self.volume(playlist.get("volume", 80))
-
-            repeat = playlist.get("repeat", False)
+            self.volume(self.audio_volume)
             first_start = 1
-            while not self.__stop and (repeat or first_start):
+
+            logger.info(f"Start playing {'shuffled ' if self.shuffle else ' '}{len(files)} audio files in {'repeat' if self.repeat else 'normal'} mode at volume {self.audio_volume}")
+            while not self.__stop and (self.repeat or first_start):
                 first_start = 0
 
                 playlist = [f"file '{audiofile}'" for audiofile in files]
@@ -117,12 +121,14 @@ class terrariumAudioPlayer(object):
             self.stop()
 
         if len(self.playlists) > 0:
+            logger.info(f"Starting audio player with {len(self.__playlists)} playlist(s)")
             self.__player["thread"] = threading.Thread(target=self.__run)
             self.__player["thread"].start()
 
     def stop(self) -> None:
         self.__stop = 1
         if self.running:
+            logger.info(f"Stopping audio player")
             self.__player["ffmpeg"].terminate()
             self.__player["thread"].join()
 

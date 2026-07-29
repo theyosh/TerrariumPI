@@ -956,7 +956,7 @@ class terrariumArea(object):
 
         return sensor_values
 
-    def relays_state(self, part, state: bool = True):
+    def relays_state(self, part, state: bool = True) -> bool:
         old_state = self.state[part].get("powered", None)
 
         relay_states = []
@@ -1296,6 +1296,7 @@ class terrariumAreaHeater(terrariumArea):
 
             powered = powered or (not self.relays_state(period, False))
 
+        logger.debug(f"Area {self} is powered: {powered}")
         return powered
 
     def load_setup(self, data) -> None:
@@ -1492,21 +1493,29 @@ class terrariumAreaAudio(terrariumArea):
 
             self.setup[period]["player"] = terrariumAudioPlayer(self.setup["soundcard"], playlists)
 
-    def relays_state(self, period, state: bool = True):
-        # We do not check if the player is actual running. This will cause an unwanted repeat functionality
-        return period in self.state and self.state[period].get("powered", False)
-
-    def relays_toggle(self, period, on) -> bool:
-        if period not in self.setup:
+    def relays_state(self, part, state: bool = True) -> bool:
+        if not part in self.setup:
             return False
 
-        if self.state[period]["powered"] != on:
-            logger.info(f'Toggle the player for area {self} period {period} to state {("on" if on else "off")}.')
+        if 'player' not in self.setup[part]:
+            return False
+
+        self.state[part]["powered"] = self.setup[part]["player"].running
+
+        return self.state[part]["powered"] == state
+
+    def relays_toggle(self, part, on) -> None:
+        if part not in self.setup:
+            logger.debug(f"Part {part} is not enabled for {self}")
+            return
+
+        if self.state[part]["powered"] != on:
+            logger.info(f'Toggle the player for area {self} period {part} to state {("on" if on else "off")}.')
 
         if on:
             # As we can only have one player running, we have to make sure that there is not a player still running from the other period
             other_period = copy.copy(self.PERIODS)
-            other_period.remove(period)
+            other_period.remove(part)
             other_period = other_period[0]
 
             if other_period in self.setup and self.state[other_period]["powered"]:
@@ -1514,15 +1523,17 @@ class terrariumAreaAudio(terrariumArea):
                 self.setup[other_period]["player"].stop()
                 self.state[other_period]["powered"] = False
 
-            self.setup[period]["player"].play()
+            self.setup[part]["player"].play()
 
         else:
-            self.setup[period]["player"].stop()
+            logger.info(f"Stopping (toggle off) audio player {self}")
+            self.setup[part]["player"].stop()
 
-        self.state[period]["powered"] = on
+        self.state[part]["powered"] = on
         self.state["powered"] = self._powered
 
     def stop(self) -> None:
+        logger.info(f"Stopping player {self}")
         for period in self.PERIODS:
             if period not in self.setup:
                 continue
