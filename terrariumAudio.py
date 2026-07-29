@@ -95,7 +95,9 @@ class terrariumAudioPlayer(object):
             self.volume(self.audio_volume)
             first_start = 1
 
-            logger.info(f"Start playing {'shuffled ' if self.shuffle else ' '}{len(files)} audio files in {'repeat' if self.repeat else 'normal'} mode at volume {self.audio_volume}")
+            logger.info(
+                f"Start playing {'shuffled ' if self.shuffle else ' '}{len(files)} audio files in {'repeat' if self.repeat else 'normal'} mode at volume {self.audio_volume}"
+            )
             while not self.__stop and (self.repeat or first_start):
                 first_start = 0
 

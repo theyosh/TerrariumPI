@@ -1497,7 +1497,7 @@ class terrariumAreaAudio(terrariumArea):
         if not part in self.setup:
             return False
 
-        if 'player' not in self.setup[part]:
+        if "player" not in self.setup[part]:
             return False
 
         self.state[part]["powered"] = self.setup[part]["player"].running
