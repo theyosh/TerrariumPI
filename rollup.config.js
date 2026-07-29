@@ -122,7 +122,7 @@ export default {
         rename: "fullcalendar-locales.min.js"
       },
       {
-        src: "node_modules/admin-lte/plugins/select2/js/select2.min.js",
+        src: "node_modules/select2/dist/js/select2.min.js",
         dest: "./public/js",
         rename: 'select2.min.js'
       },

@@ -64,6 +64,7 @@
     "leaflet-fullscreen": "^1.0.2",
     "phoenix": "^1.8.8",
     "redoc": "^2.5.3",
+    "select2": "4.0.13",
     "svelte": "^4.2.20",
     "svelte-chartjs": "^3.1.5",
     "svelte-i18n": "^4.0.1",
