@@ -148,8 +148,9 @@ class terrariumAudioPlayer(object):
 
         if self.running:
             logger.info(f"Stopping audio player")
-            self.__player["ffmpeg"].terminate()
-            self.__player["thread"].join()
+            if self.__player["ffmpeg"] is not None:
+                self.__player["ffmpeg"].terminate()
+                self.__player["thread"].join()
 
         self.__running = False
 
