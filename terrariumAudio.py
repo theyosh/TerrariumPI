@@ -134,7 +134,7 @@ class terrariumAudioPlayer(object):
             self.stop()
 
         if len(self.playlists) == 0:
-            logger.warning(f'No playlist(s) selected. Cannot start player.')
+            logger.warning(f"No playlist(s) selected. Cannot start player.")
             return
 
         logger.info(f"Starting audio player with {len(self.__playlists)} playlist(s)")
