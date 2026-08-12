@@ -295,7 +295,7 @@ more information is here:
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.dera.page/svg?repos=theyosh/TerrariumPI&type=Date)](https://star-history.dera.page/#theyosh/TerrariumPI&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=theyosh/TerrariumPI)](https://star-history.dera.page/#theyosh/TerrariumPI)
 
 ## Screenshots
 
