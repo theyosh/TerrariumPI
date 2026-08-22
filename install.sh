@@ -9,6 +9,7 @@ VERSION=$(grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3)
 VERSION="${VERSION//\"/}"
 OS=$(grep -ioP '^VERSION_CODENAME=(\K.*)' /etc/os-release)
 PYTHON=$(python3 -V)
+ARCH=$(dpkg-architecture --query DEB_HOST_ARCH)
 PI_HARDWARE=$(grep -ioP '^Model\s*: (\K.*)' /proc/cpuinfo)
 PI_ZERO=0
 if [[ $PI_HARDWARE == *"Pi Zero"* ]]; then
@@ -35,6 +36,19 @@ else
 fi
 
 SCRIPT_GROUP="$(id -gn ${SCRIPT_USER})"
+
+# Install dialog for further installation
+if ! hash whiptail 2>/dev/null; then
+  aptitude -y install whiptail
+fi
+
+clear
+
+if [ "${ARCH}" == "arm64" ]; then
+  whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --msgbox "TerrariumPI is not 64 bit compatible." 0 60
+
+  exit 0
+fi
 
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
@@ -131,13 +145,6 @@ else
 fi
 
 APT_PACKAGES="bc screen git watchdog i2c-tools pigpio sqlite3 ffmpeg libasound2-dev sispmctl libxslt1.1 libxslt1-dev libxml2-dev libglib2.0-dev libopenblas-dev ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
-
-# Install dialog for further installation
-if ! hash whiptail 2>/dev/null; then
-  aptitude -y install whiptail
-fi
-
-clear
 
 whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'. If this is not the right user stop the installation now!\n\nDo you want to continue?" 0 60
 
