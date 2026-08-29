@@ -134,7 +134,7 @@ class terrariumAudioPlayer(object):
             self.stop()
 
         if len(self.playlists) == 0:
-            logger.warning(f"No playlist(s) selected. Cannot start player.")
+            logger.warning("No playlist(s) selected. Cannot start player.")
             return
 
         logger.info(f"Starting audio player with {len(self.__playlists)} playlist(s)")
@@ -147,7 +147,7 @@ class terrariumAudioPlayer(object):
         self.__stopping = True
 
         if self.running:
-            logger.info(f"Stopping audio player")
+            logger.info("Stopping audio player")
             if self.__player["ffmpeg"] is not None:
                 self.__player["ffmpeg"].terminate()
                 self.__player["thread"].join()

@@ -10,7 +10,6 @@ import sveltePreprocess from "svelte-preprocess";
 
 import { brotliCompress } from 'zlib'
 import { promisify } from 'util'
-import { rollup } from 'rollup'
 import gzipPlugin from 'rollup-plugin-gzip';
 
 import json from "@rollup/plugin-json";
