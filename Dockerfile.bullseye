@@ -1,18 +1,6 @@
 # Build for raspberry pi
 # docker buildx build --platform linux/arm/v7 --progress=plain -t theyosh/terrariumpi:4.0.0 -f Dockerfile --push .
 
-# build sispmctl 4.12
-FROM gcc:10-bullseye AS sispmctl_builder
-ARG SISPMCTL_VERSION="4.12"
-WORKDIR /sispmctl
-RUN  apt-get -o Acquire::ForceIPv4=true update \
-  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends libusb-dev \
-  && wget https://sourceforge.net/projects/sispmctl/files/sispmctl/sispmctl-${SISPMCTL_VERSION}/sispmctl-${SISPMCTL_VERSION}.tar.gz/download -O sispmctl-${SISPMCTL_VERSION}.tar.gz \
-  && tar zxvf sispmctl-${SISPMCTL_VERSION}.tar.gz --strip 1 \
-  && ./configure \
-  && make \
-  && make install
-
 # python builder, help keep image small
 FROM python:3.9-bullseye AS python_builder
 ENV PIP_DEFAULT_TIMEOUT=100 \
@@ -77,9 +65,8 @@ COPY . .
 RUN rm -Rf .git 3rdparty gui package*.json postcss.config.js rollup.config.js .env.* html-template.js requirements.txt yarn.lock
 
 # actual image
-FROM python:3.9-slim-bullseye AS finalimage
+FROM theyosh/terrariumpi:4.15.0-bullseye AS finalimage
 ARG GITHUB_SHA="development"
-ARG JAVA=""
 ENV PIP_DEFAULT_TIMEOUT=100 \
     # Allow statements and log messages to immediately appear
     PYTHONUNBUFFERED=1 \
@@ -92,30 +79,9 @@ ENV PIP_DEFAULT_TIMEOUT=100 \
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY --from=sispmctl_builder /usr/local/lib/libsispmctl* /usr/local/lib/.
-COPY --from=sispmctl_builder /usr/local/bin/sispmctl /usr/local/bin/sispmctl
-
-COPY --from=python_builder /etc/apt /etc/apt
 COPY --from=python_builder /opt/venv /opt/venv
 COPY --from=python_builder /TerrariumPI/3rdparty /TerrariumPI/3rdparty
 COPY --from=sourcecode /TerrariumPI /TerrariumPI
-
-RUN  rm /usr/local/lib/libsispmctl.so /usr/local/lib/libsispmctl.so.0 \
-  && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so \
-  && ln -s /usr/local/lib/libsispmctl.so.0.2.1 /usr/local/lib/libsispmctl.so.0 \
-  && echo "/opt/vc/lib" > /etc/ld.so.conf.d/00-vmcs.conf \
-  && ldconfig
-
-RUN  apt-get -o Acquire::ForceIPv4=true update \
-  && apt-get -o Acquire::ForceIPv4=true full-upgrade -y --no-install-recommends \
-  && apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends netcat-openbsd procps bluez pigpio ffmpeg libxslt1.1 libftdi1 libatlas3-base libopenblas0 libgfortran5 libwebpdemux2 libraspberrypi-bin \
-  && apt-get --purge autoremove -y \
-  && apt-get autoclean
-
-RUN apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends sudo ${JAVA} \
-  && rm -rf /var/lib/apt/lists/* \
-  && find /var/log/ -type f -delete \
-  && find /var/cache/ -type f -delete
 
 WORKDIR /TerrariumPI
 # Set git version in a temp file

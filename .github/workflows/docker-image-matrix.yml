@@ -79,7 +79,7 @@ jobs:
             GITHUB_SHA=${{ github.sha }}
 
       - name: Build and push - Java
-        if: ${{ matrix.java }}
+        if: ${{ matrix.java && (matrix.os != 'buster' && matrix.os != 'bullseye') }}
         uses: docker/build-push-action@v7
         with:
           context: .
@@ -93,3 +93,18 @@ jobs:
           build-args: |
             GITHUB_SHA=${{ github.sha }}
             JAVA=default-jre-headless
+
+      - name: Build and push - Java (legacy)
+        if: ${{ matrix.java && (matrix.os == 'buster' || matrix.os == 'bullseye') }}
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: ./Dockerfile.${{ matrix.os }}.java
+          push: true
+          tags: ${{ steps.metajava.outputs.tags }}
+          labels: ${{ steps.metajava.outputs.labels }}
+          platforms: linux/arm/v7
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            GITHUB_SHA=${{ github.sha }}

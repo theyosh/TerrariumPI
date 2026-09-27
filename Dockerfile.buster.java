@@ -83,7 +83,7 @@ COPY . .
 RUN rm -Rf .git 3rdparty gui package*.json postcss.config.js rollup.config.js .env.* html-template.js requirements.txt yarn.lock
 
 # actual image
-FROM theyosh/terrariumpi:4.15.0-buster AS finalimage
+FROM theyosh/terrariumpi:4.15.0-buster-java AS finalimage
 ARG GITHUB_SHA="development"
 ENV PIP_DEFAULT_TIMEOUT=100 \
     # Allow statements and log messages to immediately appear
