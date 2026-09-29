@@ -78,7 +78,7 @@ GEM
       jekyll (>= 3.6, < 5.0)
     jekyll-feed (0.17.0)
       jekyll (>= 3.7, < 5.0)
-    jekyll-include-cache (0.2.2)
+    jekyll-include-cache (0.3.0)
       jekyll (>= 3.7, < 5.0)
     jekyll-liquify (0.0.2)
       liquid (>= 2.5, < 5.0)
