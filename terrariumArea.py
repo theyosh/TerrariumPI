@@ -21,6 +21,9 @@ from terrariumDatabase import Sensor, Playlist, Relay, Button, Area
 from terrariumUtils import terrariumCache, terrariumUtils, classproperty
 
 
+WEATHER_MODES = ("weather", "weather_inverse")
+
+
 class terrariumAreaException(TypeError):
     """There is a problem with loading a hardware sensor."""
 
@@ -970,8 +973,10 @@ class terrariumArea(object):
                 relay_states.append(self.enclosure.relays[relay].is_off())
 
         new_state = all(relay_states)
-        if (state is False and old_state is True and new_state is True) or (
-            state is True and old_state is True and new_state is False
+        # Only shutdowns the engine made keep the 15 minute wait in update(); a hand Off must not (weather modes)
+        if self.mode not in WEATHER_MODES and (
+            (state is False and old_state is True and new_state is True)
+            or (state is True and old_state is True and new_state is False)
         ):
             # Somewhere the power is turned off. Store the time for settle calculation
             logger.debug(
@@ -1021,6 +1026,15 @@ class terrariumArea(object):
 class terrariumAreaLights(terrariumArea):
     PERIODS = ["day", "night"]
 
+    def _remaining_delay(self, part, delay: float) -> float:
+        # Count the on delay from the start of the current timetable entry, not from the moment of the command
+        now = int(datetime.datetime.now().timestamp())
+        starts = [entry[0] for entry in self.setup[part].get("timetable", []) if entry[0] <= now]
+        if len(starts) == 0:
+            return delay
+
+        return min(delay, max(0.0, starts[-1] + delay - now))
+
     def _relay_action(self, part, relay, action) -> None:
         if relay.id not in self.enclosure.relays:
             return
@@ -1034,6 +1048,9 @@ class terrariumAreaLights(terrariumArea):
             delay = tweaks["delay"]
         except Exception as ex:
             logger.debug(f'Could not find the tweaks: {relay.id}, state {"on" if action else "off"}, error: {ex}')
+
+        if action:
+            delay = self._remaining_delay(part, delay)
 
         if relay.is_dimmer:
             step_size = duration / (relay.ON - relay.OFF)
