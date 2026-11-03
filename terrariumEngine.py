@@ -559,6 +559,22 @@ class terrariumEngine(object):
 
     # Private/internal functions
     # -=NEW=-
+    def _calibrated_value(self, sensor, raw: float) -> float:
+        # Convert some values like temperature and distance ...
+        value = raw
+        if "temperature" == sensor.type.lower():
+            if "fahrenheit" == self.settings["temperature_indicator"]:
+                value = terrariumUtils.to_fahrenheit(value)
+            elif "kelvin" == self.settings["temperature_indicator"]:
+                value = terrariumUtils.to_kelvin(value)
+
+        elif "distance" == sensor.type.lower():
+            if "inch" == self.settings["distance_indicator"]:
+                value = terrariumUtils.to_inches(value)
+
+        # Now increase/decrease with the offset
+        return value + sensor.offset
+
     def __load_existing_sensors(self) -> None:
         self.sensors = {}
         with orm.db_session():
@@ -587,8 +603,12 @@ class terrariumEngine(object):
                     logger.warning(
                         f"{self.sensors[sensor.id]} had problems reading a new value during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
                     )
+                    continue
 
-                elif not sensor.limit_min <= value <= sensor.limit_max:
+                # Same conversion and offset as in the regular update round
+                value = self._calibrated_value(sensor, value)
+
+                if not sensor.limit_min <= value <= sensor.limit_max:
                     sensorLogger.warning(
                         f"Measurement for sensor {self.sensors[sensor.id]} of {value:.2f}{self.units[sensor.type]} is outside valid range {sensor.limit_min:.2f}{self.units[sensor.type]} to {sensor.limit_max:.2f}{self.units[sensor.type]} during startup in {time.time()-start:.2f} seconds. Will be updated in the next round."
                     )
@@ -625,6 +645,8 @@ class terrariumEngine(object):
                         )
 
                     # Create a new sensor data entry, so we have at least one sensor value
+                    if value is not None:
+                        value = self._calibrated_value(new_sensor, value)
                     new_sensor.update(value)
 
                 # Store the hardware sensor in memory, so we can benefit from the shared cached data for sensors with multiple sensor types
@@ -677,19 +699,8 @@ class terrariumEngine(object):
                 )
                 continue
 
-            # Convert some values like temperature and distance ...
-            if "temperature" == sensor.type.lower():
-                if "fahrenheit" == self.settings["temperature_indicator"]:
-                    new_value = terrariumUtils.to_fahrenheit(new_value)
-                elif "kelvin" == self.settings["temperature_indicator"]:
-                    new_value = terrariumUtils.to_kelvin(new_value)
-
-            elif "distance" == sensor.type.lower():
-                if "inch" == self.settings["distance_indicator"]:
-                    new_value = terrariumUtils.to_inches(new_value)
-
-            # We have a valid reading from the hardware sensor. Now increase/decrease with the offset
-            new_value += sensor.offset
+            # We have a valid reading from the hardware sensor. Convert it and apply the offset
+            new_value = self._calibrated_value(sensor, new_value)
 
             if not sensor.limit_min <= new_value <= sensor.limit_max:
                 sensorLogger.warning(
