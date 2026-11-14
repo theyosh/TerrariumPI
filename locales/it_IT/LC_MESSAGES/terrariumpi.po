@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-06-02 22:35+CEST\n"
-"PO-Revision-Date: 2026-06-23 19:24+0000\n"
+"PO-Revision-Date: 2026-11-14 21:54+0000\n"
 "Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
 "backend/it/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.11.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumArea.py:32
@@ -162,7 +162,7 @@ msgstr "Temperatura CPU"
 
 #: terrariumEngine.py:1205
 msgid "Storage"
-msgstr "Memoria"
+msgstr "Stoccaggio"
 
 #: terrariumEngine.py:1211
 msgid "Memory"
